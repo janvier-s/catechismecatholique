@@ -58,7 +58,7 @@
 		</a>
 	</div>
 	{#if item.children && expanded}
-		<ul class="ml-3 border-l border-border">
+		<ul class="ml-3">
 			{#each item.children as child (child.href)}
 				<Self item={child} depth={depth + 1} />
 			{/each}

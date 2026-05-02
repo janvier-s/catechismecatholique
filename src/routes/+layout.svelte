@@ -8,7 +8,6 @@
 
 	let { children } = $props();
 
-	// Sidebar is a reader-only chrome — show on /ccc/* and /bible/* only.
 	const showSidebar = $derived(
 		page.url.pathname.startsWith('/ccc') || page.url.pathname.startsWith('/bible')
 	);
@@ -26,5 +25,5 @@
 	<div class="flex-1 min-w-0">
 		{@render children()}
 	</div>
+	<StudyPanel />
 </div>
-<StudyPanel />
