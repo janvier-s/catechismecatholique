@@ -19,3 +19,9 @@ test('/bible/matthieu/28 lists verses', async ({ page }) => {
 	await expect(page.getByRole('heading', { name: /Matthieu 28/ })).toBeVisible();
 	await expect(page.locator('ol > li').first()).toBeVisible();
 });
+
+test('/bible/matthieu/28/19 shows CCC paragraphs', async ({ page }) => {
+	await page.goto('/bible/matthieu/28/19');
+	await expect(page.getByRole('heading', { name: /Matthieu 28, 19/ })).toBeVisible();
+	await expect(page.getByText(/Paragraphes du Catéchisme/)).toBeVisible();
+});
