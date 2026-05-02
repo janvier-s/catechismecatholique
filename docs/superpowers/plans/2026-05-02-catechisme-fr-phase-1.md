@@ -7,6 +7,7 @@
 **Architecture:** SvelteKit 2 + Svelte 5 (Svelte 4 compat mode), TypeScript, Tailwind CSS 3, Cloudflare Pages. Static-prebuilt JSON in `static/data/`. No backend database. Multi-corpus-ready data shape from day 1 (every record has a `corpus: 'ccc'` field).
 
 **Tech Stack:**
+
 - SvelteKit 2 + Svelte 5 (compat mode — `export let`, `$:`, writable stores; no runes)
 - TypeScript (strict)
 - Tailwind CSS 3
@@ -25,23 +26,31 @@ The following MCP servers and agents are available. **Use them rather than relyi
 
 ### MCP servers
 
-| Server | When to use |
-|---|---|
-| **`svelte`** | Any time you write or modify a `.svelte` file, a SvelteKit `+page.ts` / `+layout.ts` / `+server.ts`, or `svelte.config.js`. Confirm syntax, check API references, validate component code. **This project runs in Svelte 4 compatibility mode** — no runes (`$state`, `$derived`, `$effect`); use `export let`, `$:`, writable stores. |
-| **`context7`** | Library docs that aren't Svelte: `parse5`, `xml2js`, `sharp`, `tsx`, `vitest`, `playwright`, `@sveltejs/adapter-cloudflare`, Tailwind 3, MiniSearch (Phase 3). Resolve library ID first, then query docs. |
-| **`playwright`** (browser MCP) | When validating e2e tests interactively or capturing screenshots for visual checks. Not strictly required for headless Playwright runs; useful when debugging a flaky test. |
+| Server                         | When to use                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`svelte`**                   | Any time you write or modify a `.svelte` file, a SvelteKit `+page.ts` / `+layout.ts` / `+server.ts`, or `svelte.config.js`. Confirm syntax, check API references, validate component code. **This project runs in Svelte 4 compatibility mode** — no runes (`$state`, `$derived`, `$effect`); use `export let`, `$:`, writable stores. |
+| **`context7`**                 | Library docs that aren't Svelte: `parse5`, `xml2js`, `sharp`, `tsx`, `vitest`, `playwright`, `@sveltejs/adapter-cloudflare`, Tailwind 3, MiniSearch (Phase 3). Resolve library ID first, then query docs.                                                                                                                              |
+| **`playwright`** (browser MCP) | When validating e2e tests interactively or capturing screenshots for visual checks. Not strictly required for headless Playwright runs; useful when debugging a flaky test.                                                                                                                                                            |
 
 ### Agents (dispatch via the `Agent` tool)
 
-| Agent | When to use |
-|---|---|
-| **`superpowers:code-reviewer`** | The code-quality review stage after spec compliance passes. The dispatcher uses this — implementers don't. |
-| **`code-refactoring:code-reviewer`** | Alternate reviewer if `superpowers:code-reviewer` flags inconclusive results; gives a second perspective. |
-| **`Explore`** | When a subagent needs to find related code in the existing DR site (`../douayrheimsbible/`) for pattern-matching — DON'T re-implement what already exists in DR; reference and adapt. |
+| Agent                                | When to use                                                                                                                                                                           |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`superpowers:code-reviewer`**      | The code-quality review stage after spec compliance passes. The dispatcher uses this — implementers don't.                                                                            |
+| **`code-refactoring:code-reviewer`** | Alternate reviewer if `superpowers:code-reviewer` flags inconclusive results; gives a second perspective.                                                                             |
+| **`Explore`**                        | When a subagent needs to find related code in the existing DR site (`../douayrheimsbible/`) for pattern-matching — DON'T re-implement what already exists in DR; reference and adapt. |
 
 ### Project conventions (load-bearing)
 
-- **Svelte 4 syntax only.** This is documented in `CLAUDE.md` and is intentional. Reject any temptation to use runes.
+- **Svelte 5 + runes only.** This is a fresh project, not a migration. All components use runes (`$state`, `$derived`, `$effect`, `$props`); legacy v4 syntax (`export let`, `$:`, default `let` for reactive state) is not allowed. The `svelte.config.js` enforces `compilerOptions.runes: true` so any v4 syntax fails compilation.
+  - Components copied from the DR site (`../douayrheimsbible/`) MUST be converted to runes at copy time. Don't leave them in v4 syntax. Common conversions:
+    - `export let foo: T;` → `let { foo }: { foo: T } = $props();`
+    - `export let foo: T = default;` → `let { foo = default }: { foo?: T } = $props();`
+    - `let count = 0;` (mutable, used in template) → `let count = $state(0);`
+    - `$: derived = expr;` → `let derived = $derived(expr);`
+    - `$: { sideEffect(); }` → `$effect(() => { sideEffect(); });`
+    - Stores (`writable`, `readable`, `derived` from `svelte/store`) remain stores — the `$store` auto-subscription syntax still works in runes mode.
+  - For the SvelteKit page object, use `import { page } from '$app/state'` (runes-friendly) — NOT the legacy `$app/stores` `$page` form.
 - **Tailwind 3** — not 4. Class names and arbitrary-value syntax follow v3 conventions.
 - **TypeScript strict mode** — `noUncheckedIndexedAccess` is on; expect to handle `undefined` from array index access.
 - **Frequent, small commits** — every step that produces working code commits before moving on.
@@ -187,6 +196,7 @@ lecatechisme/
 ### Task A1: Initialize git repo and SvelteKit skeleton
 
 **Files:**
+
 - Create: entire project skeleton via `npm create`
 - Create: `lecatechisme/.gitignore`
 
@@ -207,6 +217,7 @@ npm create svelte@latest .
 ```
 
 When prompted:
+
 - Project template: **Skeleton project**
 - TypeScript: **Yes, using TypeScript syntax**
 - Add ESLint: **Yes**
@@ -284,6 +295,7 @@ git commit -m "feat: initialize SvelteKit skeleton with TypeScript, ESLint, Pret
 ### Task A2: Add Tailwind CSS 3
 
 **Files:**
+
 - Create: `tailwind.config.cjs`, `postcss.config.cjs`
 - Modify: `src/app.css`, `src/routes/+layout.svelte`
 - Modify: `package.json` (deps)
@@ -394,6 +406,7 @@ git commit -m "feat: add Tailwind CSS 3 with theme tokens and reader max-width"
 ### Task A3: Configure TypeScript strictly + Cloudflare adapter
 
 **Files:**
+
 - Modify: `tsconfig.json`
 - Modify: `svelte.config.js`
 - Modify: `package.json` (deps)
@@ -417,6 +430,9 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: vitePreprocess(),
+	compilerOptions: {
+		runes: true
+	},
 	kit: {
 		adapter: adapter({
 			routes: {
@@ -434,6 +450,8 @@ const config = {
 
 export default config;
 ```
+
+The `compilerOptions.runes: true` line is **load-bearing** — it forces every `.svelte` file to use runes. Without this, files default to auto-detect mode, which permits v4 syntax. We want strict v5 to avoid a mixed codebase.
 
 - [ ] **Step 3: Tighten `tsconfig.json`**
 
@@ -473,6 +491,7 @@ git commit -m "feat: switch to Cloudflare adapter, enable strict TypeScript"
 ### Task A4: Add `.npmrc`, README, CLAUDE.md, ESLint/Prettier alignment
 
 **Files:**
+
 - Create: `.npmrc`, `README.md`, `CLAUDE.md`
 - Modify: `.eslintrc.cjs`, `.prettierrc`
 
@@ -497,15 +516,18 @@ A French-language website for the Catéchisme de l'Église catholique.
 - Cloudflare Pages
 
 ## Develop
-
 ```
+
 npm run dev
+
 ```
 
 ## Build
 
 ```
+
 npm run build
+
 ```
 
 ## Reference
@@ -522,25 +544,35 @@ A SvelteKit web app serving the Catéchisme de l'Église catholique in French. D
 
 ## Stack
 
-- SvelteKit 2 + Svelte 5 running in Svelte 4 compatibility mode (`export let`, `$:`, writable stores; no runes)
+- SvelteKit 2 + Svelte 5 with **runes only** (strict — `compilerOptions.runes: true`)
 - Tailwind CSS 3, TypeScript (strict)
 - Cloudflare Pages
 
-## Svelte syntax — important
+## Svelte syntax — strict runes only
 
-All components use Svelte 4 syntax. Do NOT migrate to Svelte 5 runes (`$state`, `$derived`, `$effect`) unless explicitly asked.
+This project enforces runes mode at the compiler level. **No v4 syntax anywhere.**
+
+- Use `let { foo } = $props()` (NOT `export let foo`)
+- Use `let count = $state(0)` for mutable reactive state (NOT bare `let`)
+- Use `let derived = $derived(expr)` (NOT `$:`)
+- Use `$effect(() => {...})` for side effects (NOT `$:`)
+- Use `import { page } from '$app/state'` (NOT `$app/stores` + `$page`)
+- Stores (`writable`, etc.) remain stores; `$store` auto-subscription still works.
+
+Components copied from `../douayrheimsbible/` must be **converted to runes at copy time** — never paste v4 syntax in.
 
 ## Commands
-
 ```
-npm run dev          # local dev server
-npm run build        # prebuild (prepare-data.ts) + vite build
-npm run check        # svelte-check + tsc
-npm run test         # vitest
-npm run test:e2e     # playwright
-npm run lint         # prettier + eslint
-npm run format       # prettier --write
+
+npm run dev # local dev server
+npm run build # prebuild (prepare-data.ts) + vite build
+npm run check # svelte-check + tsc
+npm run test # vitest
+npm run test:e2e # playwright
+npm run lint # prettier + eslint
+npm run format # prettier --write
 npm run optimize-logos # one-time logo asset generation
+
 ```
 
 ## Architecture
@@ -581,6 +613,7 @@ git commit -m "feat: add npmrc, README, gitignore CLAUDE.md, lint/format config"
 ### Task A5: Cloudflare Pages configuration + first deploy
 
 **Files:**
+
 - Create: `wrangler.toml`
 - Create: `static/_redirects` (empty for now)
 - Create: `static/_headers`
@@ -646,6 +679,7 @@ git push -u origin main
 ```
 
 Then in Cloudflare Pages dashboard:
+
 - Connect the repo
 - Build command: `npm run build`
 - Build output directory: `.svelte-kit/cloudflare`
@@ -660,6 +694,7 @@ Expected: first deploy lands on a `*.pages.dev` URL showing the SvelteKit skelet
 ### Task B1: Install pipeline deps and set up data sources
 
 **Files:**
+
 - Modify: `package.json`
 - Create: `scripts/data-sources/` symlinks
 
@@ -716,7 +751,9 @@ Add a `scripts/data-sources/README.md` explaining how to re-create the symlinks 
 This directory holds symlinks to source JSON/XHTML/USFX files used by `prepare-data.ts`. The symlinks themselves are gitignored — re-create them via:
 
 \`\`\`bash
+
 # from repo root
+
 bash scripts/setup-data-sources.sh
 \`\`\`
 
@@ -758,6 +795,7 @@ git commit -m "feat: install data-prep deps and set up source symlinks"
 ### Task B2: Define data types
 
 **Files:**
+
 - Create: `src/lib/data/types.ts`
 - Test: `tests/unit/types.test.ts`
 
@@ -872,7 +910,13 @@ export interface ChapterHeading {
 	paragraph_start: number;
 }
 
-export type StructureNodeType = 'part' | 'section' | 'chapter' | 'article' | 'heading' | 'sub_heading';
+export type StructureNodeType =
+	| 'part'
+	| 'section'
+	| 'chapter'
+	| 'article'
+	| 'heading'
+	| 'sub_heading';
 
 export interface StructureNode {
 	type: StructureNodeType | 'paragraph';
@@ -928,6 +972,7 @@ git commit -m "feat: define data record types for CCC corpus"
 ### Task B3: Slug utility
 
 **Files:**
+
 - Create: `src/lib/utils/slug.ts`
 - Create: `scripts/prepare/slug.ts`
 - Test: `tests/unit/slug.test.ts`
@@ -985,10 +1030,10 @@ Expected: FAIL — `Cannot find module '$lib/utils/slug'`.
 
 ```ts
 const LIGATURE_MAP: Record<string, string> = {
-	'œ': 'oe',
-	'Œ': 'oe',
-	'æ': 'ae',
-	'Æ': 'ae'
+	œ: 'oe',
+	Œ: 'oe',
+	æ: 'ae',
+	Æ: 'ae'
 };
 
 export function slugify(input: string): string {
@@ -1016,10 +1061,10 @@ Expected: PASS, all assertions.
 
 ```ts
 const LIGATURE_MAP: Record<string, string> = {
-	'œ': 'oe',
-	'Œ': 'oe',
-	'æ': 'ae',
-	'Æ': 'ae'
+	œ: 'oe',
+	Œ: 'oe',
+	æ: 'ae',
+	Æ: 'ae'
 };
 
 export function slugify(input: string): string {
@@ -1057,6 +1102,7 @@ git commit -m "feat: slug utility with French accent and ligature handling"
 ### Task B4: Build pipeline scaffolding
 
 **Files:**
+
 - Create: `scripts/prepare-data.ts`
 - Create: `scripts/prepare/validators.ts`
 - Modify: `package.json` (scripts)
@@ -1182,6 +1228,7 @@ git commit -m "feat: prepare-data scaffolding with source validation"
 ### Task B5: Generate `structure.json` from CCC source
 
 **Files:**
+
 - Create: `scripts/prepare/structure.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/structure.test.ts`
@@ -1220,13 +1267,20 @@ describe('buildStructure', () => {
 					children: [
 						{
 							type: 'chapter',
-							title: 'CHAPITRE PREMIER : L\'HOMME EST « CAPABLE » DE DIEU',
+							title: "CHAPITRE PREMIER : L'HOMME EST « CAPABLE » DE DIEU",
 							children: [
 								{
 									type: 'heading',
 									title: 'I. Le désir de Dieu',
 									children: [
-										{ type: 'paragraph', number: 27, text_html: '', cross_refs: [], bible_refs: [], citations: [] }
+										{
+											type: 'paragraph',
+											number: 27,
+											text_html: '',
+											cross_refs: [],
+											bible_refs: [],
+											citations: []
+										}
 									]
 								}
 							]
@@ -1328,9 +1382,11 @@ export interface BuiltHeading {
 	paragraph_start: number;
 }
 
-const CHAPITRE_PREFIX = /^CHAPITRE\s+(PREMIER|DEUXIÈME|TROISIÈME|QUATRIÈME|CINQUIÈME|SIXIÈME|SEPTIÈME|HUITIÈME|NEUVIÈME|DIXIÈME)?\s*[:.\s-]*/iu;
+const CHAPITRE_PREFIX =
+	/^CHAPITRE\s+(PREMIER|DEUXIÈME|TROISIÈME|QUATRIÈME|CINQUIÈME|SIXIÈME|SEPTIÈME|HUITIÈME|NEUVIÈME|DIXIÈME)?\s*[:.\s-]*/iu;
 const PART_PREFIX = /^(PREMIÈRE|DEUXIÈME|TROISIÈME|QUATRIÈME)\s+PARTIE\s*[:.\s-]*/iu;
-const SECTION_PREFIX = /^(PREMIÈRE|DEUXIÈME|TROISIÈME|QUATRIÈME|CINQUIÈME|SIXIÈME|SEPTIÈME)\s+SECTION\s*[:.\s-]*/iu;
+const SECTION_PREFIX =
+	/^(PREMIÈRE|DEUXIÈME|TROISIÈME|QUATRIÈME|CINQUIÈME|SIXIÈME|SEPTIÈME)\s+SECTION\s*[:.\s-]*/iu;
 const ARTICLE_PREFIX = /^Article\s+\d+\s*[:.\s-]*/iu;
 
 function stripPrefix(title: string, regex: RegExp): string {
@@ -1417,7 +1473,12 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			builtSections.push({ slug: sectionSlug, title: sectionTitle, chapters: builtChapters });
 		}
 
-		builtParts.push({ slug: partSlug, title: partTitle, sections: builtSections, prologue: isPrologue });
+		builtParts.push({
+			slug: partSlug,
+			title: partTitle,
+			sections: builtSections,
+			prologue: isPrologue
+		});
 	}
 
 	return { corpus: 'ccc', parts: builtParts };
@@ -1485,6 +1546,7 @@ git commit -m "feat: generate ccc/structure.json with hierarchical slugs"
 ### Task B6: Validate structure against `toc.ncx`
 
 **Files:**
+
 - Create: `scripts/prepare/toc-validator.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/toc-validator.test.ts`
@@ -1553,8 +1615,16 @@ export async function extractTocStructure(xml: string): Promise<TocPoint[]> {
 export function validateAgainstToc(structure: BuiltStructure, points: TocPoint[]): void {
 	const tocLabels = new Set(points.map((p) => p.label.toUpperCase()));
 
-	const requiredLabels = ['PROLOGUE', 'PREMIÈRE PARTIE', 'DEUXIÈME PARTIE', 'TROISIÈME PARTIE', 'QUATRIÈME PARTIE'];
-	const missing = requiredLabels.filter((label) => !Array.from(tocLabels).some((l) => l.startsWith(label)));
+	const requiredLabels = [
+		'PROLOGUE',
+		'PREMIÈRE PARTIE',
+		'DEUXIÈME PARTIE',
+		'TROISIÈME PARTIE',
+		'QUATRIÈME PARTIE'
+	];
+	const missing = requiredLabels.filter(
+		(label) => !Array.from(tocLabels).some((l) => l.startsWith(label))
+	);
 	if (missing.length > 0) {
 		throw new Error(`toc-validator: missing labels in toc.ncx: ${missing.join(', ')}`);
 	}
@@ -1604,6 +1674,7 @@ git commit -m "feat: validate generated structure against toc.ncx"
 ### Task B7: Generate per-paragraph JSON files
 
 **Files:**
+
 - Create: `scripts/prepare/paragraphs.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/paragraphs.test.ts`
@@ -1761,6 +1832,7 @@ git commit -m "feat: generate per-paragraph JSON files (2865 paragraphs)"
 ### Task B8: Generate per-chapter JSON files with prev/next + headings
 
 **Files:**
+
 - Create: `scripts/prepare/chapters.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/chapters.test.ts`
@@ -1788,15 +1860,48 @@ describe('buildChapterFiles', () => {
 							type: 'chapter',
 							title: 'Chapitre A',
 							children: [
-								{ type: 'heading', title: 'I. Un', children: [{ type: 'paragraph', number: 1, text_html: '', cross_refs: [], bible_refs: [], citations: [] }] },
-								{ type: 'heading', title: 'II. Deux', children: [{ type: 'paragraph', number: 2, text_html: '', cross_refs: [], bible_refs: [], citations: [] }] }
+								{
+									type: 'heading',
+									title: 'I. Un',
+									children: [
+										{
+											type: 'paragraph',
+											number: 1,
+											text_html: '',
+											cross_refs: [],
+											bible_refs: [],
+											citations: []
+										}
+									]
+								},
+								{
+									type: 'heading',
+									title: 'II. Deux',
+									children: [
+										{
+											type: 'paragraph',
+											number: 2,
+											text_html: '',
+											cross_refs: [],
+											bible_refs: [],
+											citations: []
+										}
+									]
+								}
 							]
 						},
 						{
 							type: 'chapter',
 							title: 'Chapitre B',
 							children: [
-								{ type: 'paragraph', number: 3, text_html: '', cross_refs: [], bible_refs: [], citations: [] }
+								{
+									type: 'paragraph',
+									number: 3,
+									text_html: '',
+									cross_refs: [],
+									bible_refs: [],
+									citations: []
+								}
 							]
 						}
 					]
@@ -1919,6 +2024,7 @@ git commit -m "feat: generate per-chapter JSON with headings and prev/next"
 ### Task B9: Extract En Bref blocks
 
 **Files:**
+
 - Create: `scripts/prepare/enbref.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/enbref.test.ts`
@@ -2052,6 +2158,7 @@ git commit -m "feat: extract En Bref summary blocks per chapter"
 ### Task B10: Parse `sigles.xhtml` → `abbreviations.json`
 
 **Files:**
+
 - Create: `scripts/prepare/abbreviations.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/abbreviations.test.ts`
@@ -2125,7 +2232,9 @@ export function parseSigles(xml: string): AbbreviationMap {
 	const out: AbbreviationMap = {};
 	for (const n of iterate(doc)) {
 		if (n.tagName === 'tr') {
-			const tds = (n.childNodes ?? []).filter((c) => (c as ParseNode).tagName === 'td') as ParseNode[];
+			const tds = (n.childNodes ?? []).filter(
+				(c) => (c as ParseNode).tagName === 'td'
+			) as ParseNode[];
 			if (tds.length >= 2) {
 				const abbr = textOf(tds[0]);
 				const expansion = textOf(tds[1]);
@@ -2171,6 +2280,7 @@ git commit -m "feat: parse sigles.xhtml into abbreviations.json"
 ### Task B11: Generate `bible-index.json` (passthrough + light validation)
 
 **Files:**
+
 - Create: `scripts/prepare/bible-index.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/bible-index.test.ts`
@@ -2222,7 +2332,9 @@ export function processBibleIndex(
 		out[ref] = valid;
 	}
 	if (dropped.length > 0) {
-		process.stderr.write(`  warn: bible-index dropped ${dropped.length} refs with no valid paragraphs\n`);
+		process.stderr.write(
+			`  warn: bible-index dropped ${dropped.length} refs with no valid paragraphs\n`
+		);
 	}
 	return out;
 }
@@ -2255,6 +2367,7 @@ git commit -m "feat: process bible-index.json with paragraph validity check"
 ### Task B12: Parse NCL USFX → `bible/ncl.json`
 
 **Files:**
+
 - Create: `scripts/prepare/ncl.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/ncl.test.ts`
@@ -2270,7 +2383,7 @@ import { describe, it, expect } from 'vitest';
 import { parseUSFX } from '../../../scripts/prepare/ncl';
 
 describe('parseUSFX', () => {
-	it('extracts verse text by book/chapter/verse, stripping Strong\'s tags', () => {
+	it("extracts verse text by book/chapter/verse, stripping Strong's tags", () => {
 		const xml = `<usfx>
 			<book id="GEN">
 				<c id="1"/>
@@ -2331,10 +2444,7 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 
 	function commitVerse() {
 		if (currentVerse !== null && currentBook && currentChap) {
-			const text = buf
-				.join(' ')
-				.replace(/\s+/g, ' ')
-				.trim();
+			const text = buf.join(' ').replace(/\s+/g, ' ').trim();
 			if (text) {
 				if (!result[currentBook]) result[currentBook] = {};
 				if (!result[currentBook][currentChap]) result[currentBook][currentChap] = {};
@@ -2412,6 +2522,7 @@ git commit -m "feat: parse Neo-Crampon Libre USFX into bible/ncl.json"
 ### Task C1: cccref param matcher
 
 **Files:**
+
 - Create: `src/params/cccref.ts`
 - Test: `tests/unit/cccref.test.ts`
 
@@ -2477,6 +2588,7 @@ git commit -m "feat: cccref param matcher for paragraph and range URLs"
 ### Task C2: Data loaders
 
 **Files:**
+
 - Create: `src/lib/data/loaders.ts`
 - Test: `tests/unit/loaders.test.ts`
 
@@ -2570,6 +2682,7 @@ git commit -m "feat: data loaders for paragraphs, chapters, structure, abbreviat
 ### Task C3: Single-paragraph route `/ccc/[ref=cccref]`
 
 **Files:**
+
 - Create: `src/routes/ccc/[ref=cccref]/+page.ts`
 - Create: `src/routes/ccc/[ref=cccref]/+page.svelte`
 - Create: `src/lib/components/ccc/ParagraphView.svelte`
@@ -2613,7 +2726,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
 ```svelte
 <script lang="ts">
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
-	export let data;
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head>
@@ -2644,7 +2758,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	import type { Paragraph } from '$lib/data/types';
 	import ParagraphRenderer from './ParagraphRenderer.svelte';
 	import CitationBlock from './CitationBlock.svelte';
-	export let paragraph: Paragraph;
+	let { paragraph }: { paragraph: Paragraph } = $props();
 </script>
 
 <article class="mb-8">
@@ -2672,7 +2786,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
 ```svelte
 <script lang="ts">
-	export let html: string;
+	let { html }: { html: string } = $props();
 </script>
 
 <div class="prose-paragraph leading-relaxed text-lg">
@@ -2692,13 +2806,13 @@ export const load: PageLoad = async ({ params, fetch }) => {
 </style>
 ```
 
-- [ ] **Step 5: Write a stub `CitationBlock.svelte`** (full styling in Task C8)
+- [ ] **Step 5: Write a stub `CitationBlock.svelte`** (full styling in Phase 2/D2)
 
 `src/lib/components/ccc/CitationBlock.svelte`:
 
 ```svelte
 <script lang="ts">
-	export let html: string;
+	let { html }: { html: string } = $props();
 </script>
 
 <div class="citation-block mt-2 mb-4 ml-4 pl-4 border-l border-muted text-sm text-muted">
@@ -2759,6 +2873,7 @@ git commit -m "feat: render single paragraph and range views at /ccc/[ref]"
 ### Task C4: Chapter route + ChapterOutline
 
 **Files:**
+
 - Create: `src/routes/ccc/[part]/[section]/[chapter]/+page.ts`
 - Create: `src/routes/ccc/[part]/[section]/[chapter]/+page.svelte`
 - Create: `src/lib/components/ccc/CCCReader.svelte`
@@ -2775,6 +2890,7 @@ git commit -m "feat: render single paragraph and range views at /ccc/[ref]"
 ```ts
 import { writable } from 'svelte/store';
 
+// Stores remain stores even in runes mode — `$store` auto-subscription works.
 export const activeHeadingId = writable<string | null>(null);
 ```
 
@@ -2813,7 +2929,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
 ```svelte
 <script lang="ts">
 	import CCCReader from '$lib/components/ccc/CCCReader.svelte';
-	export let data;
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head>
@@ -2831,15 +2948,17 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	import ChapterOutline from './ChapterOutline.svelte';
 	import ParagraphView from './ParagraphView.svelte';
 	import EnBrefBlock from './EnBrefBlock.svelte';
-	export let chapter: Chapter;
-	export let paragraphs: Paragraph[];
-	export let enBref: EBT | null = null;
+	let {
+		chapter,
+		paragraphs,
+		enBref = null
+	}: { chapter: Chapter; paragraphs: Paragraph[]; enBref?: EBT | null } = $props();
 </script>
 
 <div class="mx-auto max-w-7xl px-6 py-10 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-10">
 	<aside class="hidden lg:block">
 		<div class="sticky top-24">
-			<ChapterOutline chapter={chapter} />
+			<ChapterOutline {chapter} />
 		</div>
 	</aside>
 
@@ -2849,26 +2968,30 @@ export const load: PageLoad = async ({ params, fetch }) => {
 			<h1 class="font-ui text-3xl font-bold mt-1">{chapter.title}</h1>
 		</header>
 
-		{#each paragraphs as p, i (p.number)}
-			{#if chapter.headings.find((h) => h.paragraph_start === p.number)}
-				{@const h = chapter.headings.find((hh) => hh.paragraph_start === p.number)}
-				{#if h}
-					<h2 id={h.id} class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24">{h.title}</h2>
-				{/if}
+		{#each paragraphs as p (p.number)}
+			{@const h = chapter.headings.find((hh) => hh.paragraph_start === p.number)}
+			{#if h}
+				<h2 id={h.id} class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24">{h.title}</h2>
 			{/if}
 			<ParagraphView paragraph={p} />
 		{/each}
 
 		{#if enBref}
-			<EnBrefBlock enBref={enBref} />
+			<EnBrefBlock {enBref} />
 		{/if}
 
 		<nav class="mt-12 flex justify-between font-ui text-sm">
 			{#if chapter.prev}
-				<a href="/ccc/{chapter.part_slug}/{chapter.section_slug}/{chapter.prev.slug}" class="text-accent hover:underline">← {chapter.prev.title}</a>
+				<a
+					href="/ccc/{chapter.part_slug}/{chapter.section_slug}/{chapter.prev.slug}"
+					class="text-accent hover:underline">← {chapter.prev.title}</a
+				>
 			{:else}<span></span>{/if}
 			{#if chapter.next}
-				<a href="/ccc/{chapter.part_slug}/{chapter.section_slug}/{chapter.next.slug}" class="text-accent hover:underline">{chapter.next.title} →</a>
+				<a
+					href="/ccc/{chapter.part_slug}/{chapter.section_slug}/{chapter.next.slug}"
+					class="text-accent hover:underline">{chapter.next.title} →</a
+				>
 			{:else}<span></span>{/if}
 		</nav>
 	</main>
@@ -2881,12 +3004,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
 <script lang="ts">
 	import type { Chapter } from '$lib/data/types';
 	import { activeHeadingId } from '$lib/stores/outline';
-	import { onMount } from 'svelte';
-	export let chapter: Chapter;
-	let observer: IntersectionObserver;
+	let { chapter }: { chapter: Chapter } = $props();
 
-	onMount(() => {
-		observer = new IntersectionObserver(
+	$effect(() => {
+		const observer = new IntersectionObserver(
 			(entries) => {
 				const visible = entries.filter((e) => e.isIntersecting);
 				if (visible.length > 0) {
@@ -2924,12 +3045,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
 </nav>
 ```
 
-- [ ] **Step 6: Stub `EnBrefBlock.svelte`** (will be styled fully in Task D2)
+- [ ] **Step 6: Stub `EnBrefBlock.svelte`** (will be styled fully in Phase 2)
 
 ```svelte
 <script lang="ts">
 	import type { EnBrefBlock } from '$lib/data/types';
-	export let enBref: EnBrefBlock;
+	let { enBref }: { enBref: EnBrefBlock } = $props();
 </script>
 
 <aside class="mt-16 p-6 bg-accent/10 border-l-4 border-accent">
@@ -2958,6 +3079,7 @@ git commit -m "feat: chapter reader with sticky outline and prev/next nav"
 ### Task C5: Part/section overview routes
 
 **Files:**
+
 - Create: `src/routes/ccc/[part]/+page.ts`, `+page.svelte`
 - Create: `src/routes/ccc/[part]/[section]/+page.ts`, `+page.svelte`
 
@@ -2969,7 +3091,9 @@ import { loadStructure } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, fetch }) => {
-	const struct = (await loadStructure(fetch)) as { parts: Array<{ slug: string; title: string; sections: any[] }> };
+	const struct = (await loadStructure(fetch)) as {
+		parts: Array<{ slug: string; title: string; sections: any[] }>;
+	};
 	const part = struct.parts.find((p) => p.slug === params.part);
 	if (!part) throw error(404, 'Partie introuvable');
 	return { part };
@@ -2980,7 +3104,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
 ```svelte
 <script lang="ts">
-	export let data;
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head><title>{data.part.title} — Catéchisme</title></svelte:head>
@@ -3019,7 +3144,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
 ```svelte
 <script lang="ts">
-	export let data;
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head><title>{data.section.title} — Catéchisme</title></svelte:head>
@@ -3062,6 +3188,7 @@ git commit -m "feat: part and section overview routes"
 ### Task C6: Sommaire route + CCC home + redirects
 
 **Files:**
+
 - Create: `src/routes/ccc/+page.ts`, `+page.svelte`
 - Create: `src/routes/ccc/sommaire/+page.ts`, `+page.svelte`
 - Create: `src/routes/ccc/partie/[n]/+page.ts` (redirects)
@@ -3082,7 +3209,8 @@ export const load: PageLoad = async ({ fetch }) => {
 ```svelte
 <!-- +page.svelte -->
 <script lang="ts">
-	export let data;
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 	const struct = data.structure as { parts: any[] };
 </script>
 
@@ -3110,7 +3238,10 @@ export const load: PageLoad = async ({ fetch }) => {
 								<ul class="ml-4 mt-1 text-muted">
 									{#each chap.articles as article}
 										<li>
-											<a href="/ccc/{part.slug}/{section.slug}/{chap.slug}/{article.slug}" class="hover:text-accent">
+											<a
+												href="/ccc/{part.slug}/{section.slug}/{chap.slug}/{article.slug}"
+												class="hover:text-accent"
+											>
 												{article.title}
 											</a>
 										</li>
@@ -3128,31 +3259,43 @@ export const load: PageLoad = async ({ fetch }) => {
 
 - [ ] **Step 2: `/ccc` — corpus home**
 
+For this page, prefer loading via `+page.ts` rather than fetching client-side. Create both files:
+
+`src/routes/ccc/+page.ts`:
+
+```ts
+import { loadStructure } from '$lib/data/loaders';
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = async ({ fetch }) => {
+	const structure = (await loadStructure(fetch)) as { parts: { slug: string; title: string }[] };
+	return { parts: structure.parts };
+};
+```
+
+`src/routes/ccc/+page.svelte`:
+
 ```svelte
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { loadStructure } from '$lib/data/loaders';
-	let parts: any[] = [];
-	onMount(async () => {
-		parts = ((await loadStructure()) as any).parts;
-	});
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head><title>Catéchisme de l'Église catholique</title></svelte:head>
 
 <main class="mx-auto max-w-4xl px-6 py-16">
 	<h1 class="font-ui text-5xl font-bold mb-4">Catéchisme de l'Église catholique</h1>
-	<p class="text-lg text-muted mb-12">Édition française complète, recherche par paragraphe, référence biblique et thème.</p>
+	<p class="text-lg text-muted mb-12">
+		Édition française complète, recherche par paragraphe, référence biblique et thème.
+	</p>
 
-	{#if parts.length}
-		<div class="grid sm:grid-cols-2 gap-6">
-			{#each parts as p}
-				<a href="/ccc/{p.slug}" class="block p-6 border border-border rounded-lg hover:border-accent">
-					<h2 class="font-ui text-xl font-semibold">{p.title}</h2>
-				</a>
-			{/each}
-		</div>
-	{/if}
+	<div class="grid sm:grid-cols-2 gap-6">
+		{#each data.parts as p}
+			<a href="/ccc/{p.slug}" class="block p-6 border border-border rounded-lg hover:border-accent">
+				<h2 class="font-ui text-xl font-semibold">{p.title}</h2>
+			</a>
+		{/each}
+	</div>
 
 	<p class="mt-12">
 		<a href="/ccc/sommaire" class="text-accent hover:underline font-ui">Sommaire complet →</a>
@@ -3169,7 +3312,10 @@ import { loadStructure } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 const PART_INDEX_TO_SLUG_HINT = {
-	'1': 1, '2': 2, '3': 3, '4': 4
+	'1': 1,
+	'2': 2,
+	'3': 3,
+	'4': 4
 } as const;
 
 export const load: PageLoad = async ({ params, fetch }) => {
@@ -3197,7 +3343,9 @@ export const load: PageLoad = async ({ fetch }) => {
 	const prologue = struct.parts.find((p) => p.prologue);
 	if (!prologue) throw error(404);
 	// Prologue paragraphs live as direct children, not nested in sections — read structure.json directly
-	const paragraphs = await Promise.all([1, 2, 3, 4, 5, 6, 7, 8].map((n) => loadParagraph(n, fetch)));
+	const paragraphs = await Promise.all(
+		[1, 2, 3, 4, 5, 6, 7, 8].map((n) => loadParagraph(n, fetch))
+	);
 	return { paragraphs };
 };
 ```
@@ -3205,7 +3353,8 @@ export const load: PageLoad = async ({ fetch }) => {
 ```svelte
 <script lang="ts">
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
-	export let data;
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head><title>Prologue — Catéchisme</title></svelte:head>
@@ -3240,6 +3389,7 @@ git commit -m "feat: ccc home, sommaire (full TOC), prologue, partie redirects"
 ### Task D1: Optimize logos (one-time script)
 
 **Files:**
+
 - Create: `bin/optimize-logos.ts`
 - Modify: `package.json`
 - Adds (committed): `static/img/logo/*.{webp,png}`
@@ -3258,7 +3408,10 @@ const SIZES = [32, 48, 64, 96, 128, 192];
 const SRC = 'scripts/data-sources/logos';
 const OUT = 'static/img/logo';
 
-interface Variant { src: string; baseName: string; }
+interface Variant {
+	src: string;
+	baseName: string;
+}
 
 const variants: Variant[] = [
 	{ src: 'catechisme-logo.png', baseName: 'logo' },
@@ -3283,7 +3436,10 @@ async function run() {
 	console.log(`Optimized logos written to ${OUT}/ (${variants.length * SIZES.length * 2} files).`);
 }
 
-run().catch((e) => { console.error(e); process.exit(1); });
+run().catch((e) => {
+	console.error(e);
+	process.exit(1);
+});
 ```
 
 - [ ] **Step 2: Add npm script**
@@ -3324,6 +3480,7 @@ git commit -m "feat: one-time logo optimization script with webp + png at 6 size
 ### Task D2: Wordmark + LogoMark + TopBar
 
 **Files:**
+
 - Create: `src/lib/components/ui/Wordmark.svelte`
 - Create: `src/lib/components/ui/LogoMark.svelte`
 - Create: `src/lib/components/ui/TopBar.svelte`
@@ -3345,9 +3502,19 @@ git commit -m "feat: one-time logo optimization script with webp + png at 6 size
 
 ```svelte
 <picture>
-	<source media="(prefers-color-scheme: dark)" srcset="/img/logo/logo-dark-64.webp 1x, /img/logo/logo-dark-128.webp 2x" type="image/webp" />
+	<source
+		media="(prefers-color-scheme: dark)"
+		srcset="/img/logo/logo-dark-64.webp 1x, /img/logo/logo-dark-128.webp 2x"
+		type="image/webp"
+	/>
 	<source srcset="/img/logo/logo-64.webp 1x, /img/logo/logo-128.webp 2x" type="image/webp" />
-	<img src="/img/logo/logo-64.png" alt="Catéchisme de l'Église catholique" width="56" height="56" class="block" />
+	<img
+		src="/img/logo/logo-64.png"
+		alt="Catéchisme de l'Église catholique"
+		width="56"
+		height="56"
+		class="block"
+	/>
 </picture>
 ```
 
@@ -3428,6 +3595,7 @@ git commit -m "feat: TopBar with logo, 3-line wordmark, centered (disabled) sear
 ### Task D3: Web fonts + theme tokens
 
 **Files:**
+
 - Modify: `src/app.html`, `src/app.css`
 
 - [ ] **Step 1: Reference Libre Baskerville from Google Fonts**
@@ -3443,7 +3611,10 @@ git commit -m "feat: TopBar with logo, 3-line wordmark, centered (disabled) sear
 		<link rel="icon" type="image/webp" href="/img/logo/logo-32.webp" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+		/>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
@@ -3482,6 +3653,7 @@ git commit -m "feat: load Libre Baskerville and Inter from Google Fonts"
 ### Task D4: Theme store + dark mode toggle
 
 **Files:**
+
 - Create: `src/lib/stores/prefs.ts`
 - Create: `src/lib/components/ui/ModeToggle.svelte`
 - Modify: `src/lib/components/ui/TopBar.svelte` (replace ⚙ stub with ModeToggle)
@@ -3579,6 +3751,7 @@ git commit -m "feat: theme store + dark mode toggle with no-FOUC bootstrap"
 ### Task D5: Final Phase 1 polish — error page, A propos stub, sitemap
 
 **Files:**
+
 - Create: `src/routes/+error.svelte`
 - Create: `src/routes/a-propos/+page.svelte`
 - Create: `src/routes/sitemap.xml/+server.ts`
@@ -3587,13 +3760,14 @@ git commit -m "feat: theme store + dark mode toggle with no-FOUC bootstrap"
 
 ```svelte
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 </script>
 
 <main class="mx-auto max-w-2xl px-6 py-24 text-center">
-	<h1 class="font-ui text-6xl font-bold text-accent">{$page.status}</h1>
-	<p class="mt-4 text-xl text-muted">{$page.error?.message ?? 'Une erreur est survenue.'}</p>
-	<a href="/" class="mt-10 inline-block text-accent hover:underline font-ui">← Retour à l'accueil</a>
+	<h1 class="font-ui text-6xl font-bold text-accent">{page.status}</h1>
+	<p class="mt-4 text-xl text-muted">{page.error?.message ?? 'Une erreur est survenue.'}</p>
+	<a href="/" class="mt-10 inline-block text-accent hover:underline font-ui">← Retour à l'accueil</a
+	>
 </main>
 ```
 
@@ -3662,6 +3836,7 @@ git commit -m "feat: error page, about stub, basic sitemap generator"
 ### Task D6: First production deploy
 
 **Files:**
+
 - Verify: `wrangler.toml`, `static/_headers`, `static/_redirects`
 - Modify: `package.json` (set `engines.node`)
 
@@ -3731,6 +3906,7 @@ git push origin main
 ## Subsequent Phases — Outline
 
 ### Phase 2: Study Panel + Cross-Refs + `/bible/`
+
 - Generalized `StudyPanel` with `tabs: TabDef[]` prop
 - `RefTooltip` (hover) + `linkifyRefs` action (click → panel)
 - Tabs: Bible, Renvois, Cités par, Sources, En Bref
@@ -3741,6 +3917,7 @@ git push origin main
 - Build subagents from spec sections §6 (Reading View), §5 (Components), §4 (Routes — `/bible/`)
 
 ### Phase 3: Search
+
 - MiniSearch index build (5 doc types: paragraph, chapter, article, theme, source)
 - French stemmer + stop words + accent insensitivity
 - Header search input wired with intent detection (paragraph #, range, Bible ref, magisterial ref, fulltext)
@@ -3750,6 +3927,7 @@ git push origin main
 - Build from spec §8
 
 ### Phase 4: Polish & Launch
+
 - All v1 reading prefs (font picker, dyslexia, all toggles)
 - PWA + offline (service worker + manifest)
 - Schema.org per-paragraph markup
@@ -3767,7 +3945,7 @@ git push origin main
 Reviewed Phase 1 plan against the spec. Findings:
 
 - Spec §3 data outputs covered: ✓ (B5–B12 generate structure, paragraphs, chapters, en-bref, abbreviations, bible-index, NCL).
-- Spec §3 outputs deferred to later phases (acknowledged, NOT in Phase 1): citations.json (D2's CitationBlock will start using it once it's generated — needs to land in Phase 1 actually). 
+- Spec §3 outputs deferred to later phases (acknowledged, NOT in Phase 1): citations.json (D2's CitationBlock will start using it once it's generated — needs to land in Phase 1 actually).
 - **Gap caught**: `citations.json` and `refs.json` are referenced by `ParagraphView`'s `CitationBlock` rendering in C3 but no task generates them in Phase 1. Adding a brief note: the `Citation` data is already inline within each paragraph's `text_html` and `citations` array (per §2 `Paragraph` type). The standalone `citations.json` aggregate file is not strictly required for inline rendering. Aggregate files are needed for Phase 2 panel tabs and search. **No fix needed for Phase 1**.
 - Spec §3 thematic-index, sources-index, NCL parsing tasks: only NCL (B12) is in Phase 1 because it's needed for Phase 2's RefTooltip preview cache. Thematic + Sources parsing deferred to Phase 3 (search), which is when their output is first consumed.
 - Spec §4 routes covered: ✓ (paragraph, range, part, section, chapter, sommaire, prologue, partie redirect, ccc home, homepage placeholder).
