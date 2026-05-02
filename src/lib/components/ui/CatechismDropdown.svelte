@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { loadStructure } from '$lib/data/loaders';
+	import { goto } from '$app/navigation';
 
 	type Chapter = { slug: string; title: string; number?: number };
 	type Section = { slug: string; title: string; number?: number; chapters: Chapter[] };
@@ -90,7 +91,7 @@
 							}}
 							onclick={() => {
 								// Navigating to a part takes user to /ccc/<part>
-								window.location.href = `/ccc/${part.slug}`;
+								goto(`/ccc/${part.slug}`);
 								close();
 							}}
 						>
@@ -115,7 +116,7 @@
 								onmouseenter={() => (activeSection = section)}
 								onfocus={() => (activeSection = section)}
 								onclick={() => {
-									window.location.href = `/ccc/${activePart!.slug}/${section.slug}`;
+									goto(`/ccc/${activePart!.slug}/${section.slug}`);
 									close();
 								}}
 							>
