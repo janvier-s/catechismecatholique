@@ -28,8 +28,8 @@
 			<ol class="space-y-1">
 				<li>
 					<a href="/ccc/{c.part.slug}" class="text-muted hover:text-accent">
-						<span class="text-accent font-semibold">
-							{c.part.number ? `Partie ${c.part.number}` : 'Prologue'}:
+						<span class="font-semibold">
+							{c.part.number ? `Partie ${c.part.number}` : 'Prologue'}{' '}:
 						</span>
 						{c.part.title}
 						{#if c.part.range}
@@ -40,8 +40,8 @@
 				{#if c.section}
 					<li class="pl-5">
 						<a href="/ccc/{c.part.slug}/{c.section.slug}" class="text-muted hover:text-accent">
-							<span class="text-accent font-semibold">
-								{c.section.number ? `Section ${c.section.number}` : 'Section'}:
+							<span class="font-semibold">
+								{c.section.number ? `Section ${c.section.number}` : 'Section'}{' '}:
 							</span>
 							{c.section.title}
 							{#if c.section.range}
@@ -53,8 +53,8 @@
 				{#if c.chapter}
 					<li class="pl-10">
 						<a href={chapterUrl(c)} class="text-muted hover:text-accent">
-							<span class="text-accent font-semibold">
-								{c.chapter.number ? `Chapitre ${c.chapter.number}` : 'Chapitre'}:
+							<span class="font-semibold">
+								{c.chapter.number ? `Chapitre ${c.chapter.number}` : 'Chapitre'}{' '}:
 							</span>
 							{c.chapter.title}
 							{#if c.chapter.range}
@@ -66,8 +66,8 @@
 				{#if c.article}
 					<li class="pl-[3.75rem]">
 						<a href="{chapterUrl(c)}#{c.article.slug}" class="text-muted hover:text-accent">
-							<span class="text-accent font-semibold">
-								{c.article.number ? `Article ${c.article.number}` : 'Article'}:
+							<span class="font-semibold">
+								{c.article.number ? `Article ${c.article.number}` : 'Article'}{' '}:
 							</span>
 							{c.article.title}
 							{#if c.article.range}

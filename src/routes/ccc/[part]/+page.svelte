@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
+	let { data } : { data: PageData } = $props();
 </script>
 
 <svelte:head><title>{data.part.title} — Catéchisme</title></svelte:head>
@@ -16,7 +16,7 @@
 			<li>
 				<a href="/ccc/{data.part.slug}/{section.slug}" class="block group">
 					<h2 class="font-ui text-2xl font-semibold group-hover:text-accent">
-						<span class="text-accent">Section {section.number}:</span>
+						<span class="font-semibold">Section {section.number} :</span>
 						{section.title}
 					</h2>
 					<p class="text-muted text-sm mt-1">

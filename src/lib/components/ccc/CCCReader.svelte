@@ -58,19 +58,19 @@
 				<ol class="space-y-1">
 					<li>
 						<a href="/ccc/{chapter.part_slug}" class="text-muted hover:text-accent">
-							<span class="text-accent font-semibold">
-								{chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue'}:
+							<span class="font-semibold">
+								{chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue'}{' :'}
 							</span>
 							{chapter.part_title}
 						</a>
 					</li>
-					<li class="pl-4">
+					<li class="pl-5">
 						<a
 							href="/ccc/{chapter.part_slug}/{chapter.section_slug}"
 							class="text-muted hover:text-accent"
 						>
-							<span class="text-accent font-semibold">
-								{chapter.section_number ? `Section ${chapter.section_number}` : 'Section'}:
+							<span class="font-semibold">
+								{chapter.section_number ? `Section ${chapter.section_number}` : 'Section'}{' :'}
 							</span>
 							{chapter.section_title}
 						</a>

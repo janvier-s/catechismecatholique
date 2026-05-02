@@ -5,11 +5,19 @@
 
 	type OutlineItem =
 		| { kind: 'article'; id: string; title: string; number?: number; paragraph_start: number }
-		| { kind: 'heading'; id: string; title: string; level: number; paragraph_start: number; under_article: boolean };
+		| {
+				kind: 'heading';
+				id: string;
+				title: string;
+				level: number;
+				paragraph_start: number;
+				under_article: boolean;
+		  }
+		| { kind: 'enbref'; id: string; paragraph_start: number; under_article: boolean };
 
 	const items: OutlineItem[] = (() => {
 		const out: OutlineItem[] = [];
-		// Chapter-level headings (no article wrapping them)
+		// Chapter-level headings
 		for (const h of chapter.headings) {
 			out.push({
 				kind: 'heading',
@@ -20,7 +28,7 @@
 				under_article: false
 			});
 		}
-		// Articles + their headings (indented under the article)
+		// Articles + their headings
 		for (const a of chapter.articles) {
 			if (a.paragraphs.length === 0) continue;
 			out.push({
@@ -40,6 +48,24 @@
 					under_article: true
 				});
 			}
+		}
+		// En Bref blocks. Each appears at the position of its first paragraph.
+		// Determine "under_article" by checking if it sits inside any article's paragraph range.
+		for (const block of chapter.en_brefs) {
+			if (block.paragraphs.length === 0) continue;
+			const firstP = block.paragraphs[0]!;
+			const under = chapter.articles.some(
+				(a) =>
+					a.paragraphs.length > 0 &&
+					firstP > a.paragraphs[0]! &&
+					firstP < a.paragraphs[a.paragraphs.length - 1]! + 5
+			);
+			out.push({
+				kind: 'enbref',
+				id: 'en-bref-' + firstP,
+				paragraph_start: firstP,
+				under_article: under
+			});
 		}
 		return out.sort((a, b) => a.paragraph_start - b.paragraph_start);
 	})();
@@ -76,12 +102,16 @@
 					class:text-muted={$activeHeadingId !== item.id}
 				>
 					{#if item.kind === 'article'}
-						<span
-							class="block uppercase tracking-wider font-bold"
-							class:text-foreground={$activeHeadingId !== item.id}
-						>
+						<span class="block uppercase tracking-wider font-bold">
 							{item.number ? `Art. ${item.number} ·` : ''}
 							{item.title}
+						</span>
+					{:else if item.kind === 'enbref'}
+						<span
+							class="block uppercase tracking-[0.15em] text-[10px] italic"
+							class:pl-3={item.under_article}
+						>
+							En Bref
 						</span>
 					{:else if item.under_article}
 						<span class="block pl-3" class:pl-6={item.level === 3}>{item.title}</span>

@@ -5,11 +5,12 @@
 </script>
 
 <aside
-	class="my-12 rounded-lg bg-foreground/[0.04] p-6"
-	aria-labelledby="en-bref-{paragraphs[0]?.number ?? 'block'}"
+	id="en-bref-{paragraphs[0]?.number ?? 'block'}"
+	class="en-bref my-12 rounded-lg p-6 scroll-mt-24"
+	aria-labelledby="en-bref-label-{paragraphs[0]?.number ?? 'block'}"
 >
 	<p
-		id="en-bref-{paragraphs[0]?.number ?? 'block'}"
+		id="en-bref-label-{paragraphs[0]?.number ?? 'block'}"
 		class="font-ui text-xs uppercase tracking-[0.2em] text-muted font-bold mb-4"
 	>
 		En Bref
@@ -29,3 +30,10 @@
 		</div>
 	{/each}
 </aside>
+
+<style>
+	.en-bref {
+		background: color-mix(in srgb, var(--color-fg) 7%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
+	}
+</style>

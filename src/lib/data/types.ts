@@ -19,10 +19,10 @@ export interface Citation {
 }
 
 export interface MagisterialRefRecord {
-	type: 'magisterial' | 'patristic' | 'liturgical';
+	type: 'magisterial' | 'patristic' | 'liturgical' | 'bible' | 'bible_continuation';
 	abbr?: string;
 	raw: string;
-	idx?: string;
+	idx?: string | number;
 	doc_raw?: string;
 }
 

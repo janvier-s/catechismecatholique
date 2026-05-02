@@ -15,7 +15,7 @@
 			{paragraph.number}
 		</a>
 		<div class="flex-1">
-			<ParagraphRenderer html={paragraph.text_html} />
+			<ParagraphRenderer html={paragraph.text_html} bibleRefs={paragraph.magisterial_refs} />
 			{#each paragraph.citations as cite, i (i)}
 				<CitationBlock html={cite.text_html} />
 			{/each}

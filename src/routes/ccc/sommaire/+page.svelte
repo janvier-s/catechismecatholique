@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
+	let { data } : { data: PageData } = $props();
 	type Range = { from: number; to: number };
 	type Article = {
 		slug: string;
@@ -49,8 +49,8 @@
 		<section class="mb-10">
 			<h2 class="font-ui text-2xl font-bold mb-4">
 				<a href="/ccc/{part.slug}" class="hover:text-accent">
-					<span class="text-accent">
-						{part.prologue ? 'Prologue' : `Partie ${part.number}`}:
+					<span class="font-bold">
+						{part.prologue ? 'Prologue' : `Partie ${part.number}`} :
 					</span>
 					{part.prologue ? '' : part.title}
 					{#if part.range}
@@ -63,8 +63,8 @@
 				<div class="ml-4 mt-5 pl-4">
 					<h3 class="font-ui text-lg font-semibold mb-2">
 						<a href="/ccc/{part.slug}/{section.slug}" class="hover:text-accent">
-							<span class="text-accent">
-								{section.number ? `Section ${section.number}` : 'Section'}:
+							<span class="font-semibold">
+								{section.number ? `Section ${section.number}` : 'Section'} :
 							</span>
 							{section.title}
 							{#if section.range}
@@ -80,7 +80,7 @@
 									href="/ccc/{part.slug}/{section.slug}/{chap.slug}"
 									class="text-muted hover:text-accent"
 								>
-									<span class="text-accent">Chapitre {chap.number}:</span>
+									<span class="font-semibold">Chapitre {chap.number} :</span>
 									{chap.title}
 									{#if chap.range}
 										<span class="text-subtle text-xs">({fmtRange(chap.range)})</span>
@@ -95,7 +95,7 @@
 												href="/ccc/{part.slug}/{section.slug}/{chap.slug}/{article.slug}"
 												class="text-muted hover:text-accent"
 											>
-												<span class="text-accent">Article {article.number}:</span>
+												<span class="font-semibold">Article {article.number} :</span>
 												{article.title}
 												{#if article.range}
 													<span class="text-subtle text-xs">({fmtRange(article.range)})</span>
@@ -116,7 +116,7 @@
 										href="/ccc/{part.slug}/{section.slug}/{article.slug}"
 										class="text-muted hover:text-accent"
 									>
-										<span class="text-accent">Article {article.number}:</span>
+										<span class="font-semibold">Article {article.number} :</span>
 										{article.title}
 										{#if article.range}
 											<span class="text-subtle text-xs">({fmtRange(article.range)})</span>
