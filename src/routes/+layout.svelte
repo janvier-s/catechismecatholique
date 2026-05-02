@@ -3,6 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import TopBar from '$lib/components/ui/TopBar.svelte';
 	import Sidebar from '$lib/components/ui/Sidebar.svelte';
+	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
 
 	let { children } = $props();
 </script>
@@ -18,3 +19,4 @@
 		{@render children()}
 	</div>
 </div>
+<StudyPanel />
