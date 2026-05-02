@@ -8,6 +8,8 @@ import { extractTocStructure, validateAgainstToc } from './prepare/toc-validator
 import { extractParagraphs } from './prepare/paragraphs.ts';
 import { buildChapterFiles } from './prepare/chapters.ts';
 import { extractEnBref } from './prepare/enbref.ts';
+import { parseSigles } from './prepare/abbreviations.ts';
+import { processBibleIndex } from './prepare/bible-index.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -75,6 +77,21 @@ async function main() {
 		writeFileSync(join(OUT, `ccc/en-bref/${block.chapter_slug}.json`), JSON.stringify(block));
 	}
 	endStep(`${enbref.length} blocks`);
+
+	logStep('parsing abbreviations');
+	const sigles = readFileSync(join(SOURCES, 'sigles.xhtml'), 'utf8');
+	const abbrs = parseSigles(sigles);
+	writeFileSync(join(OUT, 'ccc/abbreviations.json'), JSON.stringify(abbrs, null, 2));
+	endStep(`${Object.keys(abbrs).length} entries`);
+
+	logStep('processing bible index');
+	const knownParas = new Set(paragraphs.keys());
+	const rawBibleIdx = JSON.parse(
+		readFileSync(join(SOURCES, 'ccc_bible_index_clean.json'), 'utf8')
+	) as Record<string, number[]>;
+	const bibleIdx = processBibleIndex(rawBibleIdx, knownParas);
+	writeFileSync(join(OUT, 'ccc/bible-index.json'), JSON.stringify(bibleIdx));
+	endStep(`${Object.keys(bibleIdx).length} bible refs`);
 
 	const elapsed = ((performance.now() - start) / 1000).toFixed(2);
 	process.stdout.write(`\nprepare-data complete in ${elapsed}s\n`);
