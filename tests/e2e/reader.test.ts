@@ -27,3 +27,25 @@ test('chapter page renders with outline', async ({ page }) => {
 	await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 	await expect(page.getByLabel('Plan du chapitre')).toBeVisible();
 });
+
+test('ccc home renders parts', async ({ page }) => {
+	await page.goto('/ccc');
+	await expect(page.getByRole('heading', { name: /Catéchisme de l'Église catholique/ })).toBeVisible();
+});
+
+test('sommaire renders full TOC', async ({ page }) => {
+	await page.goto('/ccc/sommaire');
+	await expect(page.getByRole('heading', { name: /Sommaire complet/ })).toBeVisible();
+});
+
+test('prologue renders paragraphs', async ({ page }) => {
+	await page.goto('/ccc/prologue');
+	await expect(page.getByRole('heading', { name: 'Prologue' })).toBeVisible();
+});
+
+test('partie/1 redirects to part slug', async ({ page }) => {
+	const res = await page.goto('/ccc/partie/1');
+	expect(res?.status()).toBe(200);
+	expect(page.url()).toMatch(/\/ccc\/[a-z-]+$/);
+	expect(page.url()).not.toContain('/partie/');
+});
