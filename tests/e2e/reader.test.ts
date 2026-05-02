@@ -16,7 +16,7 @@ test('invalid paragraph returns 404', async ({ page }) => {
 	expect(res?.status()).toBe(404);
 });
 
-test('chapter page renders with outline', async ({ page }) => {
+test('chapter page renders with sidebar', async ({ page }) => {
 	// Use the first non-prologue part / section / chapter
 	const fs = await import('node:fs');
 	const struct = JSON.parse(fs.readFileSync('static/data/ccc/structure.json', 'utf8'));
@@ -25,7 +25,7 @@ test('chapter page renders with outline', async ({ page }) => {
 	const chapter = section.chapters[0];
 	await page.goto(`/ccc/${part.slug}/${section.slug}/${chapter.slug}`);
 	await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-	await expect(page.getByLabel('Plan du chapitre')).toBeVisible();
+	await expect(page.getByLabel('Plan du Catéchisme')).toBeVisible();
 });
 
 test('ccc home renders parts', async ({ page }) => {
