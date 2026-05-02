@@ -34,3 +34,6 @@ vite.config.ts.timestamp-*
 
 # Lighthouse output
 lighthouse-*.json
+
+# Claude Code context (local only)
+CLAUDE.md

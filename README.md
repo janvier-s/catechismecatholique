@@ -1,42 +1,25 @@
-# sv
+# Le Catéchisme
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A French-language website for the Catéchisme de l'Église catholique.
 
-## Creating a project
+## Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
+- SvelteKit 2 + Svelte 5 (runes-only)
+- TypeScript, Tailwind CSS 3
+- Cloudflare Pages
 
-```sh
-# create a new project
-npx sv create my-app
+## Develop
+
 ```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.15.2 create --template minimal --types ts --add prettier eslint vitest="usages:unit" playwright --no-install .
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Build
 
-To create a production version of your app:
-
-```sh
+```
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Reference
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Design spec: `../douayrheimsbible/docs/superpowers/specs/2026-05-02-catechisme-fr-design.md`
