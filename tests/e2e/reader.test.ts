@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('paragraph 27 page renders', async ({ page }) => {
 	await page.goto('/ccc/27');
 	await expect(page).toHaveTitle(/§ 27/);
-	await expect(page.getByText('désir de Dieu', { exact: false })).toBeVisible();
+	await expect(page.getByText('désir de Dieu', { exact: false }).first()).toBeVisible();
 });
 
 test('paragraph range 27-30 renders', async ({ page }) => {
@@ -58,15 +58,14 @@ test('TopBar renders on every page', async ({ page }) => {
 	await expect(page.getByLabel('Recherche (à venir)')).toBeDisabled();
 });
 
-test('theme toggle switches data-theme attribute and persists', async ({ page }) => {
+test('theme picker switches data-theme attribute and persists', async ({ page }) => {
 	await page.goto('/ccc/27');
 	const html = page.locator('html');
-	const initial = await html.getAttribute('data-theme');
-	await page.getByLabel('Basculer le thème').click();
-	const after = await html.getAttribute('data-theme');
-	expect(after).not.toBe(initial);
-	// reload — should persist
+	// Open the picker, then choose Sombre
+	await page.getByLabel(/Choisir le thème/).click();
+	await page.getByRole('menuitemradio', { name: 'Sombre' }).click();
+	await expect(html).toHaveAttribute('data-theme', 'dark');
+	// Reload — should persist
 	await page.reload();
-	const reloaded = await page.locator('html').getAttribute('data-theme');
-	expect(reloaded).toBe(after);
+	await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
