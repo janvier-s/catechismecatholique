@@ -8,6 +8,7 @@
 	},
 	"scripts": {
 		"dev": "vite dev",
+		"predev": "tsx scripts/prepare-data.ts",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare-data": "tsx scripts/prepare-data.ts",

@@ -1,11 +1,17 @@
 import { test, expect } from '@playwright/test';
 
-test('sidebar lists 5 parts (incl. Prologue)', async ({ page }) => {
-	await page.goto('/');
+test('sidebar lists 5 parts (incl. Prologue) on /ccc routes', async ({ page }) => {
+	await page.goto('/ccc');
 	const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
 	await expect(sidebar).toBeVisible();
 	// 5 part-level links visible at the top level (Prologue + 4 parties)
 	await expect(sidebar.getByRole('link').first()).toBeVisible();
+});
+
+test('sidebar is hidden on the homepage', async ({ page }) => {
+	await page.goto('/');
+	const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
+	await expect(sidebar).not.toBeVisible();
 });
 
 test('sidebar auto-expands active chapter branch', async ({ page }) => {
