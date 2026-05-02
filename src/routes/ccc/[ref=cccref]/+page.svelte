@@ -100,7 +100,16 @@
 			{/if}
 		</div>
 
-		{#if c.chapter}
+		{#if c.article && c.chapter}
+			<p class="mt-12 font-ui text-sm">
+				<a
+					href="{chapterUrl(c)}/{c.article.slug}"
+					class="text-accent hover:underline"
+				>
+					Lire l'article complet&nbsp;: {c.article.title} →
+				</a>
+			</p>
+		{:else if c.chapter}
 			<p class="mt-12 font-ui text-sm">
 				<a href={chapterUrl(c)} class="text-accent hover:underline">
 					Lire le chapitre complet&nbsp;: {c.chapter.title} →

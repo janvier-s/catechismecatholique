@@ -7,14 +7,12 @@
 	type Block = { paragraphs: Paragraph[]; firstNumber: number };
 
 	let context: ParagraphContext | null = $state(null);
-	let chapter: Chapter | null = $state(null);
 	let blocks: Block[] = $state([]);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
 		if (!ctx) {
 			context = null;
-			chapter = null;
 			blocks = [];
 			return;
 		}
@@ -22,13 +20,30 @@
 			const ctxs = await loadParagraphContexts();
 			context = ctxs[ctx.paragraph] ?? null;
 			if (!context?.chapter) {
-				chapter = null;
 				blocks = [];
 				return;
 			}
-			chapter = await loadChapter(context.chapter.slug);
+			const chapter: Chapter = await loadChapter(context.chapter.slug);
+
+			// Filter to only the en_bref(s) belonging to the same article as the current paragraph,
+			// when an article context is known. Match by paragraph-range overlap with the article.
+			const article = chapter.articles.find((a) => a.slug === context!.article?.slug);
+			const candidates = chapter.en_brefs ?? [];
+
+			const inArticle = (block: { paragraphs: number[] }) => {
+				if (!article) return true; // no article context — show all chapter en_brefs
+				if (block.paragraphs.length === 0) return false;
+				const first = block.paragraphs[0]!;
+				const articleParas = article.paragraphs;
+				if (articleParas.length === 0) return false;
+				const articleMin = articleParas[0]!;
+				const articleMax = articleParas[articleParas.length - 1]!;
+				return first >= articleMin && first <= articleMax;
+			};
+
+			const filtered = candidates.filter(inArticle);
 			const result: Block[] = [];
-			for (const block of chapter.en_brefs ?? []) {
+			for (const block of filtered) {
 				if (block.paragraphs.length === 0) continue;
 				const records = await Promise.all(block.paragraphs.map((n) => loadParagraph(n)));
 				result.push({ paragraphs: records, firstNumber: block.paragraphs[0]! });
@@ -42,17 +57,6 @@
 	{#if blocks.length === 0}
 		<p class="text-muted italic">Pas d'En Bref disponible.</p>
 	{:else}
-		{#if context?.chapter}
-			<p class="text-xs text-muted mb-3">
-				Chapitre :
-				<a
-					href={`/ccc/${context.part.slug}/${context.section!.slug}/${context.chapter.slug}`}
-					class="text-accent hover:underline"
-				>
-					{context.chapter.title}
-				</a>
-			</p>
-		{/if}
 		<div class="space-y-6">
 			{#each blocks as block (block.firstNumber)}
 				<div class="rounded-lg p-3 en-bref-block">

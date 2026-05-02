@@ -31,7 +31,7 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 
 	function commitVerse() {
 		if (currentVerse !== null && currentBook && currentChap) {
-			const text = buf.join(' ').replace(/\s+/g, ' ').trim();
+			const text = normalizeVerseText(buf.join(' '));
 			if (text) {
 				if (!result[currentBook]) result[currentBook] = {};
 				if (!result[currentBook]![currentChap]) result[currentBook]![currentChap] = {};
@@ -39,6 +39,22 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 			}
 		}
 		buf = [];
+	}
+
+	function normalizeVerseText(s: string): string {
+		// Collapse all whitespace to single spaces.
+		let out = s.replace(/\s+/g, ' ').trim();
+		// Strip spaces around apostrophes (both ASCII ' and typographic ’).
+		out = out.replace(/\s*['’]\s*/g, "’");
+		// Strip space before , . (no NBSP for these in French).
+		out = out.replace(/\s+([,.])/g, '$1');
+		// French rule: NBSP before : ! ? » (and remove existing spaces first).
+		out = out.replace(/\s*([:;!?»])/g, ' $1');
+		// French rule: NBSP after « (opening guillemet).
+		out = out.replace(/(«)\s*/g, '« ');
+		// Tighten parens: no space after ( or before ).
+		out = out.replace(/\(\s+/g, '(').replace(/\s+\)/g, ')');
+		return out;
 	}
 
 	// Match: opening/self-closing tag, closing tag, or a run of text.

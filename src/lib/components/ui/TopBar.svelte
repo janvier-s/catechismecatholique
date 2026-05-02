@@ -2,7 +2,6 @@
 	import LogoMark from './LogoMark.svelte';
 	import Wordmark from './Wordmark.svelte';
 	import ModeToggle from './ModeToggle.svelte';
-	import SidebarToggle from './SidebarToggle.svelte';
 	import CatechismDropdown from './CatechismDropdown.svelte';
 </script>
 
@@ -31,7 +30,6 @@
 			<a href="/ccc/sommaire" class="hover:text-accent">Sommaire</a>
 			<a href="/a-propos" class="hover:text-accent">À propos</a>
 		</nav>
-		<SidebarToggle />
 		<ModeToggle />
 	</div>
 </header>

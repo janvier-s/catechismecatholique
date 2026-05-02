@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import TopBar from '$lib/components/ui/TopBar.svelte';
 	import Sidebar from '$lib/components/ui/Sidebar.svelte';
+	import SidebarToggle from '$lib/components/ui/SidebarToggle.svelte';
 	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
 
 	let { children } = $props();
@@ -21,6 +22,7 @@
 <div class="flex">
 	{#if showSidebar}
 		<Sidebar />
+		<SidebarToggle />
 	{/if}
 	<div class="flex-1 min-w-0">
 		{@render children()}

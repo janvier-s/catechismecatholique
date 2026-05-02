@@ -177,6 +177,7 @@
 		<nav
 			class="flex-1 overflow-y-auto p-3 font-ui styled-scroll"
 			aria-label="Plan du Catéchisme"
+			style="scrollbar-gutter: stable;"
 		>
 			<ul class="space-y-0.5">
 				{#each tree as item (item.href)}

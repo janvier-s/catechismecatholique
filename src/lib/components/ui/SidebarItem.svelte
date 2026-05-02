@@ -22,29 +22,29 @@
 		item.children ? item.children.some((c) => isAncestorOrSelf(c, page.url.pathname)) : false
 	);
 
-	// Manual override: null means "follow isAncestor", true/false means user toggled
 	let manualExpanded: boolean | null = $state(null);
 	const expanded = $derived(manualExpanded ?? isAncestor);
+	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
 </script>
 
 <li>
-	<div class="flex items-center gap-1">
-		{#if item.children && item.children.length > 0}
+	<div class="flex items-start gap-1 group">
+		{#if hasChildren}
 			<button
 				type="button"
 				onclick={() => (manualExpanded = !expanded)}
-				class="w-5 h-5 flex items-center justify-center text-muted hover:text-accent text-xs flex-none"
+				class="w-4 h-5 flex items-center justify-center text-muted hover:text-accent text-[10px] flex-none mt-0.5"
 				aria-label={expanded ? 'Réduire' : 'Développer'}
 				aria-expanded={expanded}
 			>
-				{expanded ? '▾' : '▸'}
+				{expanded ? '▼' : '▶'}
 			</button>
 		{:else}
-			<span class="w-5 flex-none" aria-hidden="true"></span>
+			<span class="w-4 flex-none" aria-hidden="true"></span>
 		{/if}
 		<a
 			href={item.href}
-			class="flex-1 py-1 px-2 rounded text-sm leading-snug hover:bg-accent/10 hover:text-accent"
+			class="flex-1 py-1 px-1.5 rounded text-[13px] leading-snug hover:bg-accent/10 hover:text-accent"
 			class:bg-accent={isActive}
 			class:!text-white={isActive}
 		>
