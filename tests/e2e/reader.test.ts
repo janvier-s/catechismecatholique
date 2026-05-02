@@ -49,3 +49,11 @@ test('partie/1 redirects to part slug', async ({ page }) => {
 	expect(page.url()).toMatch(/\/ccc\/[a-z-]+$/);
 	expect(page.url()).not.toContain('/partie/');
 });
+
+test('TopBar renders on every page', async ({ page }) => {
+	await page.goto('/ccc/27');
+	await expect(page.getByRole('link', { name: 'Accueil' })).toBeVisible();
+	await expect(page.getByRole('link', { name: 'Catéchisme', exact: true })).toBeVisible();
+	await expect(page.getByRole('link', { name: 'Sommaire' })).toBeVisible();
+	await expect(page.getByLabel('Recherche (à venir)')).toBeDisabled();
+});
