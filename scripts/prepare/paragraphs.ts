@@ -1,4 +1,5 @@
 import type { Paragraph } from '../../src/lib/data/types';
+import { capitalizeFirstWord, mergeBibleRefContinuations } from './source-data-fixes';
 
 interface RawNode {
 	type: string;
@@ -18,9 +19,11 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 			out.set(node.number, {
 				corpus: 'ccc',
 				number: node.number,
-				text_html: node.text_html ?? '',
+				text_html: capitalizeFirstWord(node.text_html ?? ''),
 				cross_refs: node.cross_refs ?? [],
-				bible_refs: (node.bible_refs ?? []).map((b) => ({ text: b.text })),
+				bible_refs: mergeBibleRefContinuations(
+					(node.bible_refs ?? []).map((b) => ({ text: b.text }))
+				),
 				citations: (node.citations ?? []).map((c) => ({ text_html: c.text_html })),
 				magisterial_refs: (node.refs ?? []).map((r) => ({
 					type: r.type as Paragraph['magisterial_refs'][number]['type'],

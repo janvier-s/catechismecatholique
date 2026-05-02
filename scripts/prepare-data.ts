@@ -12,6 +12,7 @@ import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX } from './prepare/ncl.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
+import { buildCitedBy } from './prepare/cited-by.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -64,6 +65,11 @@ async function main() {
 		writeFileSync(join(OUT, `ccc/paragraphs/${n}.json`), JSON.stringify(p));
 	}
 	endStep(`${paragraphs.size} paragraphs`);
+
+	logStep('building cited-by');
+	const citedBy = buildCitedBy(paragraphs);
+	writeFileSync(join(OUT, 'ccc/cited-by.json'), JSON.stringify(citedBy));
+	endStep(`${Object.keys(citedBy).length} paragraphs cited`);
 
 	logStep('extracting en bref');
 	const enbref = extractEnBref(rawParts);
