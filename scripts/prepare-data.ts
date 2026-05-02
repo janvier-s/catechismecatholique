@@ -11,6 +11,7 @@ import { extractEnBref } from './prepare/enbref.ts';
 import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX } from './prepare/ncl.ts';
+import { buildParagraphContext } from './prepare/paragraph-context.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -71,6 +72,11 @@ async function main() {
 		writeFileSync(join(OUT, `ccc/chapters/${ch.slug}.json`), JSON.stringify(ch));
 	}
 	endStep(`${chapters.length} chapters`);
+
+	logStep('building paragraph context');
+	const paragraphContext = buildParagraphContext(structure);
+	writeFileSync(join(OUT, 'ccc/paragraph-context.json'), JSON.stringify(paragraphContext));
+	endStep(`${Object.keys(paragraphContext).length} paragraphs mapped`);
 
 	logStep('extracting en bref');
 	const enbref = extractEnBref(rawParts);

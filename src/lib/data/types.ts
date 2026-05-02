@@ -104,3 +104,11 @@ export interface SourceCitation {
 }
 
 export type AbbreviationMap = Record<string, string>;
+
+export interface ParagraphContext {
+	part: { slug: string; title: string };
+	section?: { slug: string; title: string };
+	chapter?: { slug: string; title: string };
+	article?: { slug: string; title: string };
+	heading?: { id: string; title: string };
+}

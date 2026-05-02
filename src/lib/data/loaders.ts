@@ -1,4 +1,4 @@
-import type { Paragraph, Chapter, AbbreviationMap } from './types';
+import type { Paragraph, Chapter, AbbreviationMap, ParagraphContext } from './types';
 
 type Fetch = typeof fetch;
 
@@ -22,4 +22,10 @@ export function loadStructure(fetcher: Fetch = fetch): Promise<unknown> {
 
 export function loadAbbreviations(fetcher: Fetch = fetch): Promise<AbbreviationMap> {
 	return fetchJson<AbbreviationMap>('/data/ccc/abbreviations.json', fetcher);
+}
+
+export function loadParagraphContexts(
+	fetcher: Fetch = fetch
+): Promise<Record<number, ParagraphContext>> {
+	return fetchJson<Record<number, ParagraphContext>>('/data/ccc/paragraph-context.json', fetcher);
 }
