@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { studyPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
 	import { fly } from 'svelte/transition';
+	import TabBibleRefs from './TabBibleRefs.svelte';
+	import TabCrossRefs from './TabCrossRefs.svelte';
+	import TabCitedBy from './TabCitedBy.svelte';
+	import TabEnBref from './TabEnBref.svelte';
 
 	const TABS: { id: PanelTab; label: string }[] = [
 		{ id: 'bible', label: 'Bible' },
@@ -63,7 +67,19 @@
 			{/each}
 		</div>
 		<div class="flex-1 overflow-y-auto p-4">
-			<p class="text-sm text-muted italic">Contenu de l'onglet à venir.</p>
+			{#if $studyPanel.activeTab === 'bible'}
+				<TabBibleRefs />
+			{:else if $studyPanel.activeTab === 'cross-refs'}
+				<TabCrossRefs />
+			{:else if $studyPanel.activeTab === 'cited-by'}
+				<TabCitedBy />
+			{:else if $studyPanel.activeTab === 'en-bref'}
+				<TabEnBref />
+			{:else if $studyPanel.activeTab === 'sources'}
+				<p class="text-muted italic text-sm">Sources — à venir dans G4</p>
+			{:else}
+				<p class="text-muted italic text-sm">Sélectionnez un onglet.</p>
+			{/if}
 		</div>
 	</aside>
 {/if}

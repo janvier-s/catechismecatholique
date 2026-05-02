@@ -29,3 +29,7 @@ export function loadParagraphContexts(
 ): Promise<Record<number, ParagraphContext>> {
 	return fetchJson<Record<number, ParagraphContext>>('/data/ccc/paragraph-context.json', fetcher);
 }
+
+export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, number[]>> {
+	return fetchJson<Record<number, number[]>>('/data/ccc/cited-by.json', fetcher);
+}
