@@ -1,8 +1,10 @@
 #!/usr/bin/env tsx
-import { mkdirSync, rmSync, existsSync } from 'node:fs';
+import { mkdirSync, rmSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { logHeader, logStep, endStep, assert } from './prepare/validators.ts';
+import { buildStructure } from './prepare/structure.ts';
+import { extractTocStructure, validateAgainstToc } from './prepare/toc-validator.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -38,7 +40,17 @@ async function main() {
 	}
 	endStep(`${expected.length} sources OK`);
 
-	// Subsequent tasks plug in their step here.
+	logStep('building structure');
+	const rawParts = JSON.parse(readFileSync(join(SOURCES, 'ccc_paras_processed.json'), 'utf8'));
+	const structure = buildStructure(rawParts);
+	writeFileSync(join(OUT, 'ccc/structure.json'), JSON.stringify(structure, null, 2));
+	endStep(`${structure.parts.length} parts`);
+
+	logStep('validating against toc.ncx');
+	const tocXml = readFileSync(join(SOURCES, 'toc.ncx'), 'utf8');
+	const tocPoints = await extractTocStructure(tocXml);
+	validateAgainstToc(structure, tocPoints);
+	endStep(`${tocPoints.length} navPoints`);
 
 	const elapsed = ((performance.now() - start) / 1000).toFixed(2);
 	process.stdout.write(`\nprepare-data complete in ${elapsed}s\n`);
