@@ -25,7 +25,7 @@
 				{p.number}
 			</a>
 			<div class="flex-1 text-[0.95em]">
-				<ParagraphRenderer html={p.text_html} />
+				<ParagraphRenderer html={p.text_html} paragraphNumber={p.number} />
 			</div>
 		</div>
 	{/each}
