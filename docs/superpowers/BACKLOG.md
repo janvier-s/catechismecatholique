@@ -16,13 +16,12 @@ round between phases.
 
 ## Source-data fixes
 
-- [ ] **First-word capitalization at start of paragraph body**: source data
-      has lowercase first letters in some paragraphs (e.g. "saint Paul affirme
-      au sujet des païens" should be "Saint Paul…"). Fix at prep time:
-      walk paragraph `text_html`, capitalize the first letter of the first
-      visible text node. Mid-sentence "saint" stays lowercase (correct).
-- [ ] **§2153 (and likely others) bible_refs split bug**: source has
-      `[{text: "Mt 5:33-34"}, {text: "5:37"}]` — second entry missing book.
+- [x] ~~**First-word capitalization at start of paragraph body**~~: shipped in
+      Phase 2 E2 (`scripts/prepare/source-data-fixes.ts`). Acts as a guard —
+      no current source data has the bug, but the fix is in place.
+- [x] ~~**§2153 (and likely others) bible_refs split bug**~~: shipped in
+      Phase 2 E3. 307 paragraphs had this issue; all fixed via continuation
+      merge.
       The source file has them as one citation `Mt 5, 33-34. 37`. Pre-process
       `bible_refs`: when an entry lacks a book prefix, inherit the previous
       entry's book.
@@ -55,6 +54,34 @@ round between phases.
 - [ ] `aria-current="location"` on active breadcrumb item
 - [ ] Skip-to-content link
 - [ ] Screen-reader pass on en_bref labels
+
+## Phase 2 leftovers (carried forward)
+
+- [ ] **Sources-index parser refinement**: the current parser puts the
+      source location string in `doc_name` and leaves `location` empty.
+      Real `index_citations/*.xhtml` files have document-author headings
+      (`<h1>/<h2>/<h3>`) above table rows; the parser should use those for
+      `doc_name` and treat the first `<td>` as `location`. Affects the
+      "Sources" panel tab display quality.
+- [ ] **`/bible/[book]/[ch]` verse count uses only primary abbreviation**:
+      `[N CEC]` markers count citations stored under `book.abbrs[0]` only.
+      If the bible-index ever uses both `Gn` and `Gen` for Genesis (some
+      sources do), the count is undercounted. The single-verse page
+      (`/bible/[book]/[ch]/[v]`) already handles all abbrs correctly via
+      `book.abbrs.some(...)`; the chapter-page lookup should match.
+- [ ] **`/bible/[book]/[ch]/[v]` doesn't match chapter-range keys**:
+      bible-index entries like `1 Cor 1-6` (chapter range with no verse)
+      are silently skipped by the current regex. A verse like 1 Cor 3:5
+      could be cited under such a key but won't surface. Either expand
+      the regex to match chapter-range keys, or surface them under each
+      verse of the chapter.
+- [ ] **Sidebar `articles_direct` URL inconsistency**: sidebar uses paragraph
+      ranges (`/ccc/{first}-{last}`) for articles directly under a section
+      (Notre Père), while sommaire uses `/ccc/{part}/{section}/{article-slug}`
+      which has no route handler. Pick one convention and unify.
+- [ ] **Mega-menu keyboard a11y**: cascading dropdown supports `onfocus` for
+      Tab navigation but no arrow-key navigation between columns. Phase 4
+      a11y polish should add this.
 
 ## Inspirations from catholiccrossreference.online
 
