@@ -1,4 +1,10 @@
-import type { Paragraph, Chapter, AbbreviationMap, ParagraphContext } from './types';
+import type {
+	Paragraph,
+	Chapter,
+	AbbreviationMap,
+	ParagraphContext,
+	SourceEntry
+} from './types';
 
 type Fetch = typeof fetch;
 
@@ -32,4 +38,8 @@ export function loadParagraphContexts(
 
 export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, number[]>> {
 	return fetchJson<Record<number, number[]>>('/data/ccc/cited-by.json', fetcher);
+}
+
+export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]> {
+	return fetchJson<SourceEntry[]>('/data/ccc/sources-index.json', fetcher);
 }

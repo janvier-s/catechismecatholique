@@ -5,6 +5,7 @@
 	import TabCrossRefs from './TabCrossRefs.svelte';
 	import TabCitedBy from './TabCitedBy.svelte';
 	import TabEnBref from './TabEnBref.svelte';
+	import TabSources from './TabSources.svelte';
 
 	const TABS: { id: PanelTab; label: string }[] = [
 		{ id: 'bible', label: 'Bible' },
@@ -76,7 +77,7 @@
 			{:else if $studyPanel.activeTab === 'en-bref'}
 				<TabEnBref />
 			{:else if $studyPanel.activeTab === 'sources'}
-				<p class="text-muted italic text-sm">Sources — à venir dans G4</p>
+				<TabSources />
 			{:else}
 				<p class="text-muted italic text-sm">Sélectionnez un onglet.</p>
 			{/if}

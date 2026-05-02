@@ -101,11 +101,6 @@ export interface ThematicSubEntry {
 export interface SourceEntry {
 	category: string;
 	doc_name: string;
-	doc_abbr?: string;
-	citations: SourceCitation[];
-}
-
-export interface SourceCitation {
 	location: string;
 	paragraphs: number[];
 }

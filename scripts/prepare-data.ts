@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { mkdirSync, rmSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, existsSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { logHeader, logStep, endStep, assert } from './prepare/validators.ts';
@@ -13,6 +13,7 @@ import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX } from './prepare/ncl.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
+import { parseSourceTable } from './prepare/sources-index.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -92,6 +93,15 @@ async function main() {
 	const abbrs = parseSigles(sigles);
 	writeFileSync(join(OUT, 'ccc/abbreviations.json'), JSON.stringify(abbrs, null, 2));
 	endStep(`${Object.keys(abbrs).length} entries`);
+
+	logStep('parsing sources index');
+	const sourcesDir = join(SOURCES, 'thematic_cross-refs/index_citations');
+	const sourceFiles = readdirSync(sourcesDir).filter((f) => f.endsWith('.xhtml'));
+	const sourceEntries = sourceFiles.flatMap((f) =>
+		parseSourceTable(readFileSync(join(sourcesDir, f), 'utf8'))
+	);
+	writeFileSync(join(OUT, 'ccc/sources-index.json'), JSON.stringify(sourceEntries, null, 2));
+	endStep(`${sourceEntries.length} entries`);
 
 	logStep('processing bible index');
 	const knownParas = new Set(paragraphs.keys());
