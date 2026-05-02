@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { studyPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
+	import { page } from '$app/state';
+	import { studyPanel, openPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
 	import { loadParagraph, loadCitedBy, loadParagraphContexts, loadChapter } from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import TabBibleRefs from './TabBibleRefs.svelte';
@@ -7,6 +8,19 @@
 	import TabCitedBy from './TabCitedBy.svelte';
 	import TabEnBref from './TabEnBref.svelte';
 	import TabSources from './TabSources.svelte';
+
+	// When the panel is open and the user navigates to a paragraph route
+	// (/ccc/{n} or /ccc/{n}-{m}), update the panel's context to follow.
+	// Clicking a renvois entry, a "cited by" link, etc. now refreshes the panel.
+	$effect(() => {
+		if (!$studyPanel.open) return;
+		const m = page.url.pathname.match(/^\/ccc\/(\d+)(?:-\d+)?$/);
+		if (!m) return;
+		const n = parseInt(m[1]!, 10);
+		if (!Number.isFinite(n)) return;
+		if ($studyPanel.context?.paragraph === n) return;
+		openPanel({ paragraph: n }, $studyPanel.activeTab ?? 'cross-refs');
+	});
 
 	type TabDef = { id: PanelTab; label: string };
 	const ALL_TABS: TabDef[] = [

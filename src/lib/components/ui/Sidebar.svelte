@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { sidebarOpen } from '$lib/stores/sidebar';
-	import { loadStructure, loadChapter } from '$lib/data/loaders';
-	import type { Chapter } from '$lib/data/types';
+	import { loadStructure, loadChapter, loadParagraphContexts } from '$lib/data/loaders';
+	import type { Chapter, ParagraphContext } from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
 	type Heading = { id: string; title: string; paragraph_start: number };
@@ -46,6 +46,7 @@
 
 	let structure: { parts: Part[] } | null = $state(null);
 	let activeChapter: Chapter | null = $state(null);
+	let paragraphContexts: Record<number, ParagraphContext> | null = $state(null);
 
 	$effect(() => {
 		(async () => {
@@ -53,15 +54,60 @@
 		})();
 	});
 
-	// Load detailed chapter data when on a chapter URL — gives us headings/en_brefs
-	// to expand inside the active chapter (replacing the old ChapterOutline).
+	$effect(() => {
+		(async () => {
+			paragraphContexts = await loadParagraphContexts();
+		})();
+	});
+
+	// Detect a paragraph URL like /ccc/{n} or /ccc/{n}-{m} → derive the deepest
+	// container the paragraph belongs to (article > chapter > section > part)
+	// so the sidebar can highlight it AND auto-load the chapter detail.
+	const activeParagraph = $derived.by(() => {
+		const m = page.url.pathname.match(/^\/ccc\/(\d+)(?:-\d+)?$/);
+		return m ? parseInt(m[1]!, 10) : null;
+	});
+
+	const activeContext: ParagraphContext | null = $derived(
+		activeParagraph !== null && paragraphContexts
+			? paragraphContexts[activeParagraph] ?? null
+			: null
+	);
+
+	// The href of the deepest item the current page corresponds to.
+	// Used for sidebar item highlighting (passed via context to SidebarItem).
+	function deepestHref(c: ParagraphContext): string {
+		if (c.article && c.section && c.chapter) {
+			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}`;
+		}
+		if (c.chapter && c.section) {
+			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`;
+		}
+		if (c.section) {
+			return `/ccc/${c.part.slug}/${c.section.slug}`;
+		}
+		return `/ccc/${c.part.slug}`;
+	}
+
+	const activeHref: string = $derived.by(() => {
+		if (activeParagraph === null) return page.url.pathname;
+		const c = activeContext;
+		if (!c) return page.url.pathname;
+		return deepestHref(c);
+	});
+
+	// Load detailed chapter data when on a chapter URL OR when on a paragraph URL
+	// whose context places it in a chapter — so we can expand headings/en_brefs.
 	$effect(() => {
 		const m = page.url.pathname.match(/^\/ccc\/[^/]+\/[^/]+\/([^/]+)/);
-		if (!m) {
+		const directSlug = m ? m[1]! : null;
+		const c = activeContext as ParagraphContext | null;
+		const ctxSlug: string | null = c && c.chapter ? c.chapter.slug : null;
+		const slug = directSlug ?? ctxSlug;
+		if (!slug) {
 			activeChapter = null;
 			return;
 		}
-		const slug = m[1]!;
 		(async () => {
 			try {
 				activeChapter = await loadChapter(slug);
@@ -83,6 +129,21 @@
 					title: h.title,
 					href: `${articleHref}#${h.id}`
 				}));
+				// En Bref blocks whose first paragraph falls within this article go INSIDE it
+				const articleParas = a.paragraphs;
+				const articleMin = articleParas.length > 0 ? articleParas[0]! : 0;
+				const articleMax =
+					articleParas.length > 0 ? articleParas[articleParas.length - 1]! : 0;
+				for (const block of detail.en_brefs ?? []) {
+					if (block.paragraphs.length === 0) continue;
+					const firstP = block.paragraphs[0]!;
+					if (firstP >= articleMin && firstP <= articleMax) {
+						articleChildren.push({
+							title: 'En Bref',
+							href: `${baseHref}#en-bref-${firstP}`
+						});
+					}
+				}
 				out.push({
 					title: a.title,
 					number: a.number,
@@ -95,11 +156,31 @@
 				for (const h of detail.headings) {
 					out.push({ title: h.title, href: `${baseHref}#${h.id}` });
 				}
-			}
-			for (const block of detail.en_brefs ?? []) {
-				if (block.paragraphs.length === 0) continue;
-				const firstP = block.paragraphs[0];
-				out.push({ title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` });
+				// Chapter-level en_brefs (when no articles exist)
+				for (const block of detail.en_brefs ?? []) {
+					if (block.paragraphs.length === 0) continue;
+					const firstP = block.paragraphs[0];
+					out.push({ title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` });
+				}
+			} else {
+				// Any en_brefs not assigned to an article (shouldn't happen with new logic, but
+				// fall back to chapter-level if their first paragraph isn't in any article)
+				const inAnyArticle = (firstP: number) =>
+					detail.articles.some((a) => {
+						const ps = a.paragraphs;
+						return (
+							ps.length > 0 &&
+							firstP >= ps[0]! &&
+							firstP <= ps[ps.length - 1]!
+						);
+					});
+				for (const block of detail.en_brefs ?? []) {
+					if (block.paragraphs.length === 0) continue;
+					const firstP = block.paragraphs[0]!;
+					if (!inAnyArticle(firstP)) {
+						out.push({ title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` });
+					}
+				}
 			}
 		} else {
 			for (const a of ch.articles) {
@@ -181,7 +262,7 @@
 		>
 			<ul class="space-y-0.5">
 				{#each tree as item (item.href)}
-					<SidebarItem {item} />
+					<SidebarItem {item} {activeHref} />
 				{/each}
 			</ul>
 		</nav>

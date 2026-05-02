@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import Self from './SidebarItem.svelte';
 
 	type Item = {
@@ -9,17 +8,21 @@
 		typeLabel?: string;
 		children?: Item[];
 	};
-	let { item, depth = 0 }: { item: Item; depth?: number } = $props();
+	let {
+		item,
+		activeHref,
+		depth = 0
+	}: { item: Item; activeHref: string; depth?: number } = $props();
 
-	function isAncestorOrSelf(it: Item, path: string): boolean {
-		if (it.href === path) return true;
+	function isAncestorOrSelf(it: Item, target: string): boolean {
+		if (it.href === target) return true;
 		if (!it.children) return false;
-		return it.children.some((c) => isAncestorOrSelf(c, path));
+		return it.children.some((c) => isAncestorOrSelf(c, target));
 	}
 
-	const isActive = $derived(page.url.pathname === item.href);
+	const isActive = $derived(item.href === activeHref);
 	const isAncestor = $derived(
-		item.children ? item.children.some((c) => isAncestorOrSelf(c, page.url.pathname)) : false
+		item.children ? item.children.some((c) => isAncestorOrSelf(c, activeHref)) : false
 	);
 
 	let manualExpanded: boolean | null = $state(null);
@@ -60,7 +63,7 @@
 	{#if item.children && expanded}
 		<ul class="ml-3">
 			{#each item.children as child (child.href)}
-				<Self item={child} depth={depth + 1} />
+				<Self item={child} {activeHref} depth={depth + 1} />
 			{/each}
 		</ul>
 	{/if}
