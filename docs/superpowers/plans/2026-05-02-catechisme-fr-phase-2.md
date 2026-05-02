@@ -355,14 +355,14 @@ git commit -m "feat: capitalize first letter of paragraph text_html"
 
 ---
 
-### Task E3: Bible-ref continuation merge (§2153 fix)
+### Task E3: Bible-ref continuation merge (recurring source bug, §2153 is one example)
 
 **Files:**
 - Modify: `scripts/prepare/source-data-fixes.ts` (add a new function)
 - Modify: `scripts/prepare/paragraphs.ts` (apply fix)
 - Test: `tests/unit/prepare/source-data-fixes.test.ts` (extend)
 
-When `bible_refs[i]` lacks a book prefix, inherit from `bible_refs[i-1]`. This fixes the `[{text: "Mt 5:33-34"}, {text: "5:37"}]` split where the second entry was missing "Mt".
+When `bible_refs[i]` lacks a book prefix, inherit from `bible_refs[i-1]`. **This is a recurring data quality issue across the corpus** — §2153 is one example user reported, but the fix applies to every paragraph whose source data has continuation refs split this way. Verify the fix runs over all 2864 paragraphs by spot-checking several after running prepare-data.
 
 - [ ] **Step 1: Failing test (append)**
 
@@ -1149,6 +1149,10 @@ git commit -m "feat: cascading 3-column Catéchisme dropdown in TopBar"
 
 ## Section G — Study Panel + Linkify Pipeline
 
+**Important execution order:** Section G's linkify pipeline (G2) makes inline bible refs into clickable links to `/bible/...`. That requires the `bibleBookSlug.ts` utility from Task H1. **Run Task H1 before G2** (or reorder to: E → H1 → F → G → H2-H4 → I). The plan keeps H1 in section H for narrative grouping, but H1 has no other dependencies and can ship at any time.
+
+
+
 ### Task G1: studyPanel store + StudyPanel component (slide-in shell)
 
 **Files:**
@@ -1306,34 +1310,29 @@ git commit -m "feat: study panel slide-in shell with 5 tabs"
 
 ---
 
-### Task G2: Linkify pipeline — click & hover on inline refs
+### Task G2: Linkify pipeline — clickable refs (inline + sup) → panel + bible hub
 
 **Files:**
-- Modify: `src/lib/components/ccc/ParagraphRenderer.svelte` (add click + hover handlers)
-- Create: `src/lib/utils/linkifyRefs.ts` (Svelte action for delegated handling)
+- Modify: `src/lib/components/ccc/ParagraphRenderer.svelte` (add click handlers + make inline bible refs into `<a>`)
+- Modify: `src/lib/components/ccc/ParagraphView.svelte` (pass paragraph number)
 
-The post-processed `<sup>` markers (cccRef, bibleRef, with possibly `.lead` class) are interactive. **Click** = open the panel with the right tab and context. **Hover** = show RefTooltip (tooltip implementation in G3).
+**Prerequisite**: Task H1 (`bibleBookSlug.ts`) must ship first.
+
+Three things this task wires up:
+
+1. **Click on a `<sup>` ref** (cccRef, bibleRef, docRef) → opens the study panel with the right tab and the current paragraph as context.
+2. **Inline non-"voir" bible refs** (currently rendered as plain text `(Jn 1, 14)`) become clickable `<a href="/bible/jean/1/14">(Jn 1, 14)</a>` links to the Bible hub. Continuation refs follow the linked anchor.
+3. **`bible_continuation` segments** appended inside an inlined ref also use the same book; they become `<a>` elements pointing to their own `/bible/[book]/[ch]/[v]`.
 
 - [ ] **Step 1: Modify `ParagraphRenderer.svelte`**
 
-After the existing post-process logic in `$effect`, add click handlers:
-
-```ts
-import { openPanel, type PanelTab } from '$lib/stores/studyPanel';
-
-// Inside $effect, after pass 2:
-const paragraphNumber = (() => {
-	// Walk up to find the article > paragraph number — pass it in as a prop instead
-	return undefined;
-})();
-```
-
-Actually a cleaner approach: pass `paragraphNumber` as a prop to `ParagraphRenderer`. Update the component:
+The existing component already inlines non-"voir" bible refs as text via `sup.replaceWith(document.createTextNode(' (Jn 1, 14)'))`. Replace that with an `<a>` element pointing to `/bible/[book]/[ch]/[v]`. Also attach a delegated click handler so any remaining `<sup class="srcRef">` opens the panel.
 
 ```svelte
 <script lang="ts">
 	import type { MagisterialRefRecord } from '$lib/data/types';
 	import { openPanel } from '$lib/stores/studyPanel';
+	import { bookByAbbr } from '$lib/utils/bibleBookSlug';
 	let {
 		html,
 		bibleRefs = [],
@@ -1341,18 +1340,100 @@ Actually a cleaner approach: pass `paragraphNumber` as a prop to `ParagraphRende
 	}: { html: string; bibleRefs?: MagisterialRefRecord[]; paragraphNumber: number } = $props();
 	let containerEl: HTMLDivElement | undefined = $state();
 
+	// "Mt 28:19-20" → "Mt 28, 19-20"
 	function formatBibleRef(raw: string): string {
 		const cleaned = raw.replace(/^voir\s+/i, '').trim();
 		return cleaned.replace(':', ', ');
+	}
+
+	// Returns "/bible/matthieu/28/19" for "Mt 28:19" or "Mt 28:19-20" (range → first verse).
+	// Returns null if the book abbreviation isn't recognized.
+	function bibleHrefForRaw(raw: string): string | null {
+		const cleaned = raw.replace(/^voir\s+/i, '').trim();
+		const m = cleaned.match(/^([1-3]?\s*[A-Za-zÉéèê]+)\s+(\d+):(\d+)/);
+		if (!m) return null;
+		const book = bookByAbbr(m[1]!.trim());
+		if (!book) return null;
+		return `/bible/${book.slug}/${m[2]}/${m[3]}`;
+	}
+
+	function makeInlineLink(raw: string): HTMLAnchorElement {
+		const a = document.createElement('a');
+		a.textContent = ' (' + formatBibleRef(raw) + ')';
+		const href = bibleHrefForRaw(raw);
+		if (href) {
+			a.href = href;
+			a.className = 'bible-inline';
+		} else {
+			// Fallback: render as span-like text node wrapper, no href
+			a.removeAttribute('href');
+		}
+		return a;
 	}
 
 	$effect(() => {
 		if (!containerEl) return;
 		void html;
 		void bibleRefs;
-		// ...existing pass 1 + pass 2 logic unchanged...
+		const refsByIdx = new Map<string, MagisterialRefRecord>();
+		for (const r of bibleRefs) {
+			if (r.idx !== undefined && r.idx !== null) refsByIdx.set(String(r.idx), r);
+		}
 
-		// New: attach a delegated click handler
+		// Pass 1: inline non-"voir" bibleRefs (now as clickable <a> elements)
+		const allBibleSups = Array.from(
+			containerEl.querySelectorAll<HTMLElement>('sup.srcRef.bibleRef')
+		);
+		for (const sup of allBibleSups) {
+			const idx = sup.getAttribute('data-idx') ?? sup.textContent ?? '';
+			const ref = refsByIdx.get(idx);
+			if (!ref || !ref.raw) continue;
+			if (ref.type === 'bible_continuation') {
+				// Continuation: append " ; ch, vv" inside the previous element's text content
+				// or append a new <a> after the previous element.
+				const prev = sup.previousSibling;
+				if (prev instanceof HTMLAnchorElement && prev.classList.contains('bible-inline')) {
+					// Strip closing `)` from prev, append `; ch,vv)` link as text in prev
+					prev.textContent = (prev.textContent ?? '').replace(/\)\s*$/, '');
+					prev.textContent += ' ; ' + formatBibleRef(ref.raw) + ')';
+					sup.remove();
+				} else if (prev instanceof Text) {
+					const txt = prev.nodeValue ?? '';
+					const closeParen = txt.lastIndexOf(')');
+					if (closeParen >= 0) {
+						prev.nodeValue =
+							txt.slice(0, closeParen) +
+							' ; ' +
+							formatBibleRef(ref.raw) +
+							txt.slice(closeParen);
+						sup.remove();
+					}
+				}
+				continue;
+			}
+			if (!/^voir\s/i.test(ref.raw)) {
+				sup.replaceWith(makeInlineLink(ref.raw));
+			}
+		}
+
+		// Pass 2: any remaining sups (cccRef + footnote-only bibleRef) — strip leading §,
+		// add .lead class on the first sup of a run, comma-separate consecutive sups
+		// regardless of subtype.
+		const remaining = Array.from(containerEl.querySelectorAll<HTMLElement>('sup.srcRef'));
+		for (const sup of remaining) {
+			if (sup.classList.contains('cccRef')) {
+				sup.textContent = (sup.textContent ?? '').replace(/^§/, '');
+			}
+			const prev = sup.previousSibling;
+			const isContinuation = prev instanceof Element && prev.matches('sup.srcRef');
+			if (isContinuation) {
+				sup.before(document.createTextNode(', '));
+			} else if (sup.classList.contains('cccRef')) {
+				sup.classList.add('lead');
+			}
+		}
+
+		// Delegated click handler: any remaining sup opens the panel with the right tab
 		const onClick = (e: MouseEvent) => {
 			if (!(e.target instanceof Element)) return;
 			const sup = e.target.closest('sup.srcRef') as HTMLElement | null;
@@ -1368,14 +1449,32 @@ Actually a cleaner approach: pass `paragraphNumber` as a prop to `ParagraphRende
 		return () => containerEl?.removeEventListener('click', onClick);
 	});
 </script>
-```
 
-Add cursor styling so the user knows refs are clickable:
+<div bind:this={containerEl} class="prose-paragraph leading-relaxed text-lg">
+	{@html html}
+</div>
 
-```css
-.prose-paragraph :global(sup.srcRef) {
-	cursor: pointer;
-}
+<style>
+	.prose-paragraph :global(sup.srcRef) {
+		color: var(--color-accent);
+		font-size: 0.7em;
+		margin-left: 0.1em;
+		cursor: pointer;
+	}
+	.prose-paragraph :global(sup.srcRef.cccRef.lead::before) {
+		content: '§';
+		font-size: 0.7em;
+		margin-right: 0.05em;
+		vertical-align: 0.1em;
+	}
+	.prose-paragraph :global(a.bible-inline) {
+		color: var(--color-accent);
+		text-decoration: none;
+	}
+	.prose-paragraph :global(a.bible-inline:hover) {
+		text-decoration: underline;
+	}
+</style>
 ```
 
 - [ ] **Step 2: Update `ParagraphView.svelte`** to pass paragraph number
