@@ -10,6 +10,7 @@ import { buildChapterFiles } from './prepare/chapters.ts';
 import { extractEnBref } from './prepare/enbref.ts';
 import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
+import { parseUSFX } from './prepare/ncl.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -92,6 +93,12 @@ async function main() {
 	const bibleIdx = processBibleIndex(rawBibleIdx, knownParas);
 	writeFileSync(join(OUT, 'ccc/bible-index.json'), JSON.stringify(bibleIdx));
 	endStep(`${Object.keys(bibleIdx).length} bible refs`);
+
+	logStep('parsing NCL bible');
+	const nclXml = readFileSync(join(SOURCES, 'ncl/francl_usfx.xml'), 'utf8');
+	const ncl = await parseUSFX(nclXml);
+	writeFileSync(join(OUT, 'bible/ncl.json'), JSON.stringify(ncl));
+	endStep(`${Object.keys(ncl).length} books`);
 
 	const elapsed = ((performance.now() - start) / 1000).toFixed(2);
 	process.stdout.write(`\nprepare-data complete in ${elapsed}s\n`);
