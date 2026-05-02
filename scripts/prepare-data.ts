@@ -27,7 +27,6 @@ async function main() {
 	mkdirSync(join(OUT, 'ccc'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/paragraphs'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/chapters'), { recursive: true });
-	mkdirSync(join(OUT, 'ccc/en-bref'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/guide-de-lecture'), { recursive: true });
 	mkdirSync(join(OUT, 'bible'), { recursive: true });
 
@@ -66,8 +65,12 @@ async function main() {
 	}
 	endStep(`${paragraphs.size} paragraphs`);
 
+	logStep('extracting en bref');
+	const enbref = extractEnBref(rawParts);
+	endStep(`${enbref.length} blocks`);
+
 	logStep('building chapters');
-	const chapters = buildChapterFiles(structure);
+	const chapters = buildChapterFiles(structure, enbref);
 	for (const ch of chapters) {
 		writeFileSync(join(OUT, `ccc/chapters/${ch.slug}.json`), JSON.stringify(ch));
 	}
@@ -77,13 +80,6 @@ async function main() {
 	const paragraphContext = buildParagraphContext(structure);
 	writeFileSync(join(OUT, 'ccc/paragraph-context.json'), JSON.stringify(paragraphContext));
 	endStep(`${Object.keys(paragraphContext).length} paragraphs mapped`);
-
-	logStep('extracting en bref');
-	const enbref = extractEnBref(rawParts);
-	for (const block of enbref) {
-		writeFileSync(join(OUT, `ccc/en-bref/${block.chapter_slug}.json`), JSON.stringify(block));
-	}
-	endStep(`${enbref.length} blocks`);
 
 	logStep('parsing abbreviations');
 	const sigles = readFileSync(join(SOURCES, 'sigles.xhtml'), 'utf8');

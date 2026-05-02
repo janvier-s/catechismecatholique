@@ -1,38 +1,31 @@
 <script lang="ts">
-	import type { EnBrefBlock, Paragraph } from '$lib/data/types';
+	import type { Paragraph } from '$lib/data/types';
 	import ParagraphRenderer from './ParagraphRenderer.svelte';
-	let {
-		enBref,
-		paragraphs = []
-	}: { enBref: EnBrefBlock; paragraphs?: Paragraph[] } = $props();
+	let { paragraphs }: { paragraphs: Paragraph[] } = $props();
 </script>
 
 <aside
-	class="mt-16 rounded-lg border-l-4 border-accent bg-panel/60 p-6"
-	aria-labelledby="en-bref-title"
+	class="my-12 rounded-lg bg-foreground/[0.04] p-6"
+	aria-labelledby="en-bref-{paragraphs[0]?.number ?? 'block'}"
 >
 	<p
-		id="en-bref-title"
-		class="font-ui text-xs uppercase tracking-[0.2em] text-accent font-bold mb-4"
+		id="en-bref-{paragraphs[0]?.number ?? 'block'}"
+		class="font-ui text-xs uppercase tracking-[0.2em] text-muted font-bold mb-4"
 	>
 		En Bref
 	</p>
-	{#if paragraphs.length > 0}
-		{#each paragraphs as p (p.number)}
-			<div class="flex gap-4 mb-4 last:mb-0">
-				<a
-					href="/ccc/{p.number}"
-					class="flex-none w-12 text-right pt-1 font-ui font-semibold text-accent tabular-nums hover:underline"
-					aria-label="Lien vers le paragraphe {p.number}"
-				>
-					{p.number}
-				</a>
-				<div class="flex-1 text-sm">
-					<ParagraphRenderer html={p.text_html} />
-				</div>
+	{#each paragraphs as p (p.number)}
+		<div class="flex gap-4 mb-3 last:mb-0">
+			<a
+				href="/ccc/{p.number}"
+				class="flex-none w-12 text-right pt-1 font-ui font-semibold text-accent tabular-nums hover:underline text-sm"
+				aria-label="Lien vers le paragraphe {p.number}"
+			>
+				{p.number}
+			</a>
+			<div class="flex-1 text-[0.95em]">
+				<ParagraphRenderer html={p.text_html} />
 			</div>
-		{/each}
-	{:else}
-		<p class="text-sm text-muted">Paragraphes : {enBref.paragraphs.join(', ')}</p>
-	{/if}
+		</div>
+	{/each}
 </aside>

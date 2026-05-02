@@ -1,7 +1,11 @@
 import type { Chapter, ChapterArticle, ChapterHeading } from '../../src/lib/data/types';
 import type { BuiltStructure } from './structure';
+import type { ExtractedEnBref } from './enbref';
 
-export function buildChapterFiles(structure: BuiltStructure): Chapter[] {
+export function buildChapterFiles(
+	structure: BuiltStructure,
+	enBrefs: ExtractedEnBref[]
+): Chapter[] {
 	const chapters: Chapter[] = [];
 	for (const part of structure.parts) {
 		for (const section of part.sections) {
@@ -9,6 +13,9 @@ export function buildChapterFiles(structure: BuiltStructure): Chapter[] {
 				const c = section.chapters[i]!;
 				const prev = i > 0 ? section.chapters[i - 1] : undefined;
 				const next = i < section.chapters.length - 1 ? section.chapters[i + 1] : undefined;
+				const chapterEnBrefs = enBrefs
+					.filter((b) => b.parent_kind === 'chapter' && b.parent_slug === c.slug)
+					.map((b) => ({ paragraphs: b.paragraphs }));
 				const chapter: Chapter = {
 					corpus: 'ccc',
 					slug: c.slug,
@@ -21,6 +28,7 @@ export function buildChapterFiles(structure: BuiltStructure): Chapter[] {
 					section_title: section.title,
 					section_number: section.number,
 					paragraphs: c.paragraphs,
+					en_brefs: chapterEnBrefs,
 					headings: c.headings.map<ChapterHeading>((h) => ({
 						id: h.id,
 						level: h.level,

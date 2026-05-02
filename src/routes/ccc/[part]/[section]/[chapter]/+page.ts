@@ -13,22 +13,27 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	if (chapter.part_slug !== params.part || chapter.section_slug !== params.section) {
 		throw error(404, 'Chapitre introuvable');
 	}
+
+	// Load all paragraphs in the chapter (including those that belong to en_bref blocks).
 	const paragraphs = await Promise.all(chapter.paragraphs.map((n) => loadParagraph(n, fetch)));
 
-	let enBref: {
-		chapter_slug: string;
-		paragraphs: number[];
-		paragraph_records?: Paragraph[];
-	} | null = null;
-	try {
-		const r = await fetch(`/data/ccc/en-bref/${chapter.slug}.json`);
-		if (r.ok) {
-			const meta = (await r.json()) as { chapter_slug: string; paragraphs: number[] };
-			const records = await Promise.all(meta.paragraphs.map((n) => loadParagraph(n, fetch)));
-			enBref = { ...meta, paragraph_records: records };
-		}
-	} catch {
-		// optional, swallow
+	// Resolve en_bref paragraph records (so the renderer doesn't need a second round trip per block).
+	const enBrefParagraphMap = new Map<number, Paragraph>();
+	const enBrefNumbers = new Set<number>();
+	for (const block of chapter.en_brefs) for (const n of block.paragraphs) enBrefNumbers.add(n);
+	for (const p of paragraphs) {
+		if (enBrefNumbers.has(p.number)) enBrefParagraphMap.set(p.number, p);
 	}
-	return { chapter, paragraphs, enBref };
+	// Some en_bref paragraphs might not be in chapter.paragraphs (data quirks). Fetch any missing.
+	for (const n of enBrefNumbers) {
+		if (!enBrefParagraphMap.has(n)) {
+			try {
+				enBrefParagraphMap.set(n, await loadParagraph(n, fetch));
+			} catch {
+				// skip
+			}
+		}
+	}
+
+	return { chapter, paragraphs, enBrefParagraphMap: Object.fromEntries(enBrefParagraphMap) };
 };

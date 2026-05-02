@@ -8,4 +8,8 @@
 	<title>{data.chapter.title} — Catéchisme</title>
 </svelte:head>
 
-<CCCReader chapter={data.chapter} paragraphs={data.paragraphs} enBref={data.enBref} />
+<CCCReader
+	chapter={data.chapter}
+	paragraphs={data.paragraphs}
+	enBrefParagraphMap={data.enBrefParagraphMap}
+/>

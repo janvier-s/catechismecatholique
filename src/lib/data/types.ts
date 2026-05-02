@@ -38,7 +38,8 @@ export interface Paragraph {
 }
 
 export interface EnBrefBlock {
-	chapter_slug: string;
+	parent_kind: 'chapter' | 'section';
+	parent_slug: string;
 	paragraphs: number[];
 }
 
@@ -56,7 +57,7 @@ export interface Chapter {
 	paragraphs: number[];
 	headings: ChapterHeading[];
 	articles: ChapterArticle[];
-	en_bref?: EnBrefBlock;
+	en_brefs: { paragraphs: number[] }[];
 	prev?: { slug: string; title: string };
 	next?: { slug: string; title: string };
 }

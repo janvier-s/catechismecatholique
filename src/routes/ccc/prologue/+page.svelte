@@ -11,4 +11,10 @@
 	{#each data.paragraphs as p (p.number)}
 		<ParagraphView paragraph={p} />
 	{/each}
+
+	<nav class="mt-16 flex justify-end font-ui text-sm border-t border-border pt-6">
+		<a href="/ccc/la-profession-de-la-foi" class="text-accent hover:underline">
+			Partie 1 : La profession de la foi →
+		</a>
+	</nav>
 </main>

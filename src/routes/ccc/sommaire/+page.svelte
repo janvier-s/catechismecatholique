@@ -60,7 +60,7 @@
 			</h2>
 
 			{#each part.sections as section (section.slug)}
-				<div class="ml-4 mt-5 pl-4 border-l border-border">
+				<div class="ml-4 mt-5 pl-4">
 					<h3 class="font-ui text-lg font-semibold mb-2">
 						<a href="/ccc/{part.slug}/{section.slug}" class="hover:text-accent">
 							<span class="text-accent">
@@ -74,7 +74,7 @@
 					</h3>
 
 					{#each section.chapters as chap (chap.slug)}
-						<div class="ml-4 mt-3 pl-4 border-l border-border">
+						<div class="ml-4 mt-3 pl-4">
 							<p class="font-ui font-medium">
 								<a
 									href="/ccc/{part.slug}/{section.slug}/{chap.slug}"
@@ -109,7 +109,7 @@
 					{/each}
 
 					{#if section.articles_direct?.length}
-						<div class="ml-4 mt-2 pl-4 border-l border-border">
+						<div class="ml-4 mt-2 pl-4">
 							{#each section.articles_direct as article (article.slug)}
 								<p class="text-sm">
 									<a

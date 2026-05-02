@@ -1,5 +1,4 @@
 import { slugify } from './slug';
-import type { EnBrefBlock } from '../../src/lib/data/types';
 
 interface RawNode {
 	type: string;
@@ -10,34 +9,45 @@ interface RawNode {
 
 const CHAPITRE_PREFIX =
 	/^CHAPITRE\s+(PREMIER|DEUXIÈME|TROISIÈME|QUATRIÈME|CINQUIÈME|SIXIÈME|SEPTIÈME|HUITIÈME|NEUVIÈME|DIXIÈME)?\s*[:.\s-]*/iu;
+const SECTION_PREFIX =
+	/^(PREMIÈRE|DEUXIÈME|TROISIÈME|QUATRIÈME|CINQUIÈME|SIXIÈME|SEPTIÈME)\s+SECTION\s*[:.\s-]*/iu;
 
-export function extractEnBref(parts: RawNode[]): EnBrefBlock[] {
-	const bySlug = new Map<string, number[]>();
-	const order: string[] = [];
+export interface ExtractedEnBref {
+	parent_kind: 'chapter' | 'section';
+	parent_slug: string;
+	paragraphs: number[];
+}
+
+export function extractEnBref(parts: RawNode[]): ExtractedEnBref[] {
+	const out: ExtractedEnBref[] = [];
 
 	function collectParagraphs(n: RawNode, into: number[]) {
 		if (n.type === 'paragraph' && typeof n.number === 'number') into.push(n.number);
 		for (const c of n.children ?? []) collectParagraphs(c, into);
 	}
 
-	function walk(node: RawNode, currentChapterSlug: string | undefined) {
-		let chapterSlug = currentChapterSlug;
+	function walk(node: RawNode, chapterSlug: string | undefined, sectionSlug: string | undefined) {
 		if (node.type === 'chapter' && node.title) {
 			chapterSlug = slugify(node.title.replace(CHAPITRE_PREFIX, '').trim());
 		}
-		if (node.type === 'en_bref' && chapterSlug) {
+		if (node.type === 'section' && node.title) {
+			sectionSlug = slugify(node.title.replace(SECTION_PREFIX, '').trim());
+		}
+		if (node.type === 'en_bref') {
 			const paragraphs: number[] = [];
 			collectParagraphs(node, paragraphs);
-			if (!bySlug.has(chapterSlug)) {
-				bySlug.set(chapterSlug, []);
-				order.push(chapterSlug);
+			if (paragraphs.length > 0) {
+				if (chapterSlug) {
+					out.push({ parent_kind: 'chapter', parent_slug: chapterSlug, paragraphs });
+				} else if (sectionSlug) {
+					out.push({ parent_kind: 'section', parent_slug: sectionSlug, paragraphs });
+				}
 			}
-			bySlug.get(chapterSlug)!.push(...paragraphs);
-			return; // don't descend further into en_bref (paragraphs already collected)
+			return;
 		}
-		for (const c of node.children ?? []) walk(c, chapterSlug);
+		for (const c of node.children ?? []) walk(c, chapterSlug, sectionSlug);
 	}
 
-	for (const p of parts) walk(p, undefined);
-	return order.map((slug) => ({ chapter_slug: slug, paragraphs: bySlug.get(slug)! }));
+	for (const p of parts) walk(p, undefined, undefined);
+	return out;
 }

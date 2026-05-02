@@ -35,7 +35,7 @@ describe('buildChapterFiles', () => {
 
 	it('generates one record per chapter with prev/next links', () => {
 		const structure = buildStructure(minimal as any);
-		const chapters = buildChapterFiles(structure);
+		const chapters = buildChapterFiles(structure, []);
 		const names = chapters.map((c) => c.slug);
 		expect(names).toEqual(['chapitre-a', 'chapitre-b']);
 		expect(chapters[0]!.next?.slug).toBe('chapitre-b');
@@ -45,7 +45,7 @@ describe('buildChapterFiles', () => {
 
 	it('records headings with paragraph_start', () => {
 		const structure = buildStructure(minimal as any);
-		const chapters = buildChapterFiles(structure);
+		const chapters = buildChapterFiles(structure, []);
 		expect(chapters[0]!.headings).toHaveLength(2);
 		expect(chapters[0]!.headings[0]!.paragraph_start).toBe(1);
 	});
