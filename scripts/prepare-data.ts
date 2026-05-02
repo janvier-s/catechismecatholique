@@ -6,6 +6,8 @@ import { logHeader, logStep, endStep, assert } from './prepare/validators.ts';
 import { buildStructure } from './prepare/structure.ts';
 import { extractTocStructure, validateAgainstToc } from './prepare/toc-validator.ts';
 import { extractParagraphs } from './prepare/paragraphs.ts';
+import { buildChapterFiles } from './prepare/chapters.ts';
+import { extractEnBref } from './prepare/enbref.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -59,6 +61,20 @@ async function main() {
 		writeFileSync(join(OUT, `ccc/paragraphs/${n}.json`), JSON.stringify(p));
 	}
 	endStep(`${paragraphs.size} paragraphs`);
+
+	logStep('building chapters');
+	const chapters = buildChapterFiles(structure);
+	for (const ch of chapters) {
+		writeFileSync(join(OUT, `ccc/chapters/${ch.slug}.json`), JSON.stringify(ch));
+	}
+	endStep(`${chapters.length} chapters`);
+
+	logStep('extracting en bref');
+	const enbref = extractEnBref(rawParts);
+	for (const block of enbref) {
+		writeFileSync(join(OUT, `ccc/en-bref/${block.chapter_slug}.json`), JSON.stringify(block));
+	}
+	endStep(`${enbref.length} blocks`);
 
 	const elapsed = ((performance.now() - start) / 1000).toFixed(2);
 	process.stdout.write(`\nprepare-data complete in ${elapsed}s\n`);
