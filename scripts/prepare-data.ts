@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { logHeader, logStep, endStep, assert } from './prepare/validators.ts';
 import { buildStructure } from './prepare/structure.ts';
 import { extractTocStructure, validateAgainstToc } from './prepare/toc-validator.ts';
+import { extractParagraphs } from './prepare/paragraphs.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -51,6 +52,13 @@ async function main() {
 	const tocPoints = await extractTocStructure(tocXml);
 	validateAgainstToc(structure, tocPoints);
 	endStep(`${tocPoints.length} navPoints`);
+
+	logStep('extracting paragraphs');
+	const paragraphs = extractParagraphs(rawParts);
+	for (const [n, p] of paragraphs) {
+		writeFileSync(join(OUT, `ccc/paragraphs/${n}.json`), JSON.stringify(p));
+	}
+	endStep(`${paragraphs.size} paragraphs`);
 
 	const elapsed = ((performance.now() - start) / 1000).toFixed(2);
 	process.stdout.write(`\nprepare-data complete in ${elapsed}s\n`);
