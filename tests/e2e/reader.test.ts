@@ -57,3 +57,16 @@ test('TopBar renders on every page', async ({ page }) => {
 	await expect(page.getByRole('link', { name: 'Sommaire' })).toBeVisible();
 	await expect(page.getByLabel('Recherche (à venir)')).toBeDisabled();
 });
+
+test('theme toggle switches data-theme attribute and persists', async ({ page }) => {
+	await page.goto('/ccc/27');
+	const html = page.locator('html');
+	const initial = await html.getAttribute('data-theme');
+	await page.getByLabel('Basculer le thème').click();
+	const after = await html.getAttribute('data-theme');
+	expect(after).not.toBe(initial);
+	// reload — should persist
+	await page.reload();
+	const reloaded = await page.locator('html').getAttribute('data-theme');
+	expect(reloaded).toBe(after);
+});

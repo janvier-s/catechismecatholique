@@ -1,6 +1,7 @@
 <script lang="ts">
 	import LogoMark from './LogoMark.svelte';
 	import Wordmark from './Wordmark.svelte';
+	import ModeToggle from './ModeToggle.svelte';
 </script>
 
 <header class="border-b border-border bg-background sticky top-0 z-30">
@@ -28,13 +29,6 @@
 			<a href="/ccc/sommaire" class="hover:text-accent">Sommaire</a>
 			<a href="/a-propos" class="hover:text-accent">À propos</a>
 		</nav>
-		<button
-			type="button"
-			class="ml-2 w-9 h-9 rounded-md bg-accent/10 text-foreground flex items-center justify-center hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-60"
-			aria-label="Préférences"
-			disabled
-		>
-			⚙
-		</button>
+		<ModeToggle />
 	</div>
 </header>
