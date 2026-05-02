@@ -37,3 +37,7 @@ lighthouse-*.json
 
 # Claude Code context (local only)
 CLAUDE.md
+
+# Data source symlinks (re-create per-developer)
+scripts/data-sources/*
+!scripts/data-sources/README.md
