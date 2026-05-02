@@ -52,10 +52,11 @@ test('partie/1 redirects to part slug', async ({ page }) => {
 
 test('TopBar renders on every page', async ({ page }) => {
 	await page.goto('/ccc/27');
-	await expect(page.getByRole('link', { name: 'Accueil' })).toBeVisible();
-	await expect(page.getByRole('link', { name: 'Catéchisme', exact: true })).toBeVisible();
-	await expect(page.getByRole('link', { name: 'Sommaire' })).toBeVisible();
-	await expect(page.getByLabel('Recherche (à venir)')).toBeDisabled();
+	const banner = page.getByRole('banner');
+	await expect(banner.getByRole('link', { name: 'Accueil' })).toBeVisible();
+	await expect(banner.getByRole('link', { name: 'Catéchisme', exact: true })).toBeVisible();
+	await expect(banner.getByRole('link', { name: 'Sommaire' })).toBeVisible();
+	await expect(banner.getByLabel('Recherche (à venir)')).toBeDisabled();
 });
 
 test('theme picker switches data-theme attribute and persists', async ({ page }) => {

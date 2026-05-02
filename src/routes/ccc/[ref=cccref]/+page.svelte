@@ -27,6 +27,9 @@
 		<nav class="mb-8 font-ui text-sm" aria-label="Fil d'Ariane">
 			<ol class="space-y-1">
 				<li>
+					<a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a>
+				</li>
+				<li class="pl-5">
 					<a href="/ccc/{c.part.slug}" class="text-muted hover:text-accent">
 						<span class="font-semibold">
 							{c.part.number ? `Partie ${c.part.number}` : 'Prologue'}{' '}:

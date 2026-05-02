@@ -89,6 +89,14 @@
 </script>
 
 <nav aria-label="Plan du chapitre" class="font-ui text-sm">
+	<div class="mb-3 pl-3 border-l-2 border-transparent">
+		<p class="text-[10px] uppercase tracking-[0.15em] text-subtle font-semibold">
+			{chapter.number ? `Chapitre ${chapter.number}` : 'Chapitre'}
+		</p>
+		<a href="#top" class="block mt-1 font-bold text-foreground leading-snug hover:text-accent">
+			{chapter.title}
+		</a>
+	</div>
 	<ul class="space-y-0.5">
 		{#each items as item (item.id)}
 			<li>

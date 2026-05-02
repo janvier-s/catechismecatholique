@@ -57,6 +57,9 @@
 			<nav class="font-ui text-sm mb-4" aria-label="Fil d'Ariane">
 				<ol class="space-y-1">
 					<li>
+						<a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a>
+					</li>
+					<li class="pl-5">
 						<a href="/ccc/{chapter.part_slug}" class="text-muted hover:text-accent">
 							<span class="font-semibold">
 								{chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue'}{' :'}
@@ -64,7 +67,7 @@
 							{chapter.part_title}
 						</a>
 					</li>
-					<li class="pl-5">
+					<li class="pl-10">
 						<a
 							href="/ccc/{chapter.part_slug}/{chapter.section_slug}"
 							class="text-muted hover:text-accent"
