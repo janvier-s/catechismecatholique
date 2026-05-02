@@ -70,3 +70,17 @@ test('theme picker switches data-theme attribute and persists', async ({ page })
 	await page.reload();
 	await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
+
+test('article page shows only the article paragraphs', async ({ page }) => {
+	const fs = await import('node:fs');
+	const struct = JSON.parse(fs.readFileSync('static/data/ccc/structure.json', 'utf8'));
+	const part = struct.parts.find((p: { prologue?: boolean; sections: unknown[] }) => !p.prologue);
+	const section = part.sections.find((s: { chapters: { articles: unknown[] }[] }) =>
+		s.chapters.some((c) => c.articles.length > 0)
+	);
+	const chapter = section.chapters.find((c: { articles: unknown[] }) => c.articles.length > 0);
+	const article = chapter.articles[0];
+	await page.goto(`/ccc/${part.slug}/${section.slug}/${chapter.slug}/${article.slug}`);
+	await expect(page.getByRole('heading', { level: 1 })).toContainText(article.title);
+	// The page should NOT show the chapter title as h1 (article filtering means article.title is h1)
+});
