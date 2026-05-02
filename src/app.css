@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--color-bg: #faf6ec;
+		--color-fg: #1f1c17;
+		--color-accent: #a07a1f;
+		--color-muted: #5a5448;
+		--color-border: #d8d4cc;
+		--font-body: 'Libre Baskerville', Georgia, serif;
+		--font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	}
+
+	[data-theme='dark'] {
+		--color-bg: #1a1815;
+		--color-fg: #e6e1d6;
+		--color-accent: #d4a644;
+		--color-muted: #a8a294;
+		--color-border: #3a362e;
+	}
+
+	html {
+		background: var(--color-bg);
+		color: var(--color-fg);
+		font-family: var(--font-body);
+	}
+}
