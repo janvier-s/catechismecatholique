@@ -1,14 +1,23 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-export type Theme = 'light' | 'dark';
+export type Theme = 'auto' | 'light' | 'sepia' | 'dark' | 'oled';
+export const THEMES: Theme[] = ['auto', 'light', 'sepia', 'dark', 'oled'];
+export const THEME_LABELS: Record<Theme, string> = {
+	auto: 'Auto',
+	light: 'Clair',
+	sepia: 'Sépia',
+	dark: 'Sombre',
+	oled: 'OLED'
+};
+
 const KEY = 'lecatechisme.theme';
 
 function readInitial(): Theme {
-	if (!browser) return 'light';
+	if (!browser) return 'auto';
 	const stored = localStorage.getItem(KEY) as Theme | null;
-	if (stored === 'light' || stored === 'dark') return stored;
-	return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	if (stored && THEMES.includes(stored)) return stored;
+	return 'auto';
 }
 
 export const theme = writable<Theme>(readInitial());

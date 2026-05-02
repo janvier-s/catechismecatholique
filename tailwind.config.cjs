@@ -6,9 +6,13 @@ module.exports = {
 			colors: {
 				background: 'var(--color-bg)',
 				foreground: 'var(--color-fg)',
+				panel: 'var(--color-panel)',
 				accent: 'var(--color-accent)',
+				'accent-text': 'var(--color-accent-text)',
 				muted: 'var(--color-muted)',
-				border: 'var(--color-border)'
+				subtle: 'var(--color-subtle)',
+				border: 'var(--color-border)',
+				heading: 'var(--color-heading)'
 			},
 			fontFamily: {
 				body: 'var(--font-body)',

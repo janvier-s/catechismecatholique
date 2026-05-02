@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr" data-theme="auto">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -11,7 +11,8 @@
 			(function () {
 				try {
 					var stored = localStorage.getItem('lecatechisme.theme');
-					var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+					var allowed = ['auto', 'light', 'sepia', 'dark', 'oled'];
+					var theme = stored && allowed.indexOf(stored) >= 0 ? stored : 'auto';
 					document.documentElement.setAttribute('data-theme', theme);
 				} catch (e) {}
 			})();
