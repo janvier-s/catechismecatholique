@@ -4,19 +4,41 @@
 	let { chapter }: { chapter: Chapter } = $props();
 
 	type OutlineItem =
-		| { kind: 'article'; id: string; title: string; paragraph_start: number }
-		| { kind: 'heading'; id: string; title: string; level: number; paragraph_start: number };
+		| { kind: 'article'; id: string; title: string; number?: number; paragraph_start: number }
+		| { kind: 'heading'; id: string; title: string; level: number; paragraph_start: number; under_article: boolean };
 
 	const items: OutlineItem[] = (() => {
 		const out: OutlineItem[] = [];
+		// Chapter-level headings (no article wrapping them)
 		for (const h of chapter.headings) {
-			out.push({ kind: 'heading', id: h.id, title: h.title, level: h.level, paragraph_start: h.paragraph_start });
+			out.push({
+				kind: 'heading',
+				id: h.id,
+				title: h.title,
+				level: h.level,
+				paragraph_start: h.paragraph_start,
+				under_article: false
+			});
 		}
+		// Articles + their headings (indented under the article)
 		for (const a of chapter.articles) {
 			if (a.paragraphs.length === 0) continue;
-			out.push({ kind: 'article', id: a.slug, title: a.title, paragraph_start: a.paragraphs[0]! });
+			out.push({
+				kind: 'article',
+				id: a.slug,
+				title: a.title,
+				number: a.number,
+				paragraph_start: a.paragraphs[0]!
+			});
 			for (const h of a.headings) {
-				out.push({ kind: 'heading', id: h.id, title: h.title, level: h.level, paragraph_start: h.paragraph_start });
+				out.push({
+					kind: 'heading',
+					id: h.id,
+					title: h.title,
+					level: h.level,
+					paragraph_start: h.paragraph_start,
+					under_article: true
+				});
 			}
 		}
 		return out.sort((a, b) => a.paragraph_start - b.paragraph_start);
@@ -41,24 +63,31 @@
 </script>
 
 <nav aria-label="Plan du chapitre" class="font-ui text-sm">
-	<ul class="space-y-1">
+	<ul class="space-y-0.5">
 		{#each items as item (item.id)}
 			<li>
 				<a
 					href="#{item.id}"
-					class="block py-1 pl-3 border-l-2 transition-colors"
+					class="block py-1 transition-colors text-xs leading-snug border-l-2 pl-3"
 					class:border-accent={$activeHeadingId === item.id}
 					class:font-semibold={$activeHeadingId === item.id}
 					class:text-accent={$activeHeadingId === item.id}
 					class:border-transparent={$activeHeadingId !== item.id}
 					class:text-muted={$activeHeadingId !== item.id}
-					class:font-bold={item.kind === 'article'}
-					class:uppercase={item.kind === 'article'}
-					class:tracking-wider={item.kind === 'article'}
-					class:text-xs={item.kind === 'article'}
-					class:pl-6={item.kind === 'heading' && item.level === 3}
 				>
-					{item.title}
+					{#if item.kind === 'article'}
+						<span
+							class="block uppercase tracking-wider font-bold"
+							class:text-foreground={$activeHeadingId !== item.id}
+						>
+							{item.number ? `Art. ${item.number} ·` : ''}
+							{item.title}
+						</span>
+					{:else if item.under_article}
+						<span class="block pl-3" class:pl-6={item.level === 3}>{item.title}</span>
+					{:else}
+						<span class:pl-3={item.level === 3}>{item.title}</span>
+					{/if}
 				</a>
 			</li>
 		{/each}

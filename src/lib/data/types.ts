@@ -46,8 +46,13 @@ export interface Chapter {
 	corpus: Corpus;
 	slug: string;
 	title: string;
+	number?: number;
 	part_slug: string;
+	part_title: string;
+	part_number?: number;
 	section_slug: string;
+	section_title: string;
+	section_number?: number;
 	paragraphs: number[];
 	headings: ChapterHeading[];
 	articles: ChapterArticle[];
@@ -59,6 +64,7 @@ export interface Chapter {
 export interface ChapterArticle {
 	slug: string;
 	title: string;
+	number?: number;
 	paragraphs: number[];
 	headings: ChapterHeading[];
 }
@@ -105,10 +111,22 @@ export interface SourceCitation {
 
 export type AbbreviationMap = Record<string, string>;
 
+export interface ParagraphRange {
+	from: number;
+	to: number;
+}
+
+export interface BreadcrumbLevel {
+	slug: string;
+	title: string;
+	number?: number;
+	range?: ParagraphRange;
+}
+
 export interface ParagraphContext {
-	part: { slug: string; title: string };
-	section?: { slug: string; title: string };
-	chapter?: { slug: string; title: string };
-	article?: { slug: string; title: string };
+	part: BreadcrumbLevel;
+	section?: BreadcrumbLevel;
+	chapter?: BreadcrumbLevel;
+	article?: BreadcrumbLevel;
 	heading?: { id: string; title: string };
 }

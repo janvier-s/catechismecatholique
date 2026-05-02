@@ -7,6 +7,10 @@
 		if (!c.section || !c.chapter) return '';
 		return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`;
 	}
+	function fmtRange(r: { from: number; to: number } | undefined): string {
+		if (!r) return '';
+		return r.from === r.to ? `${r.from}` : `${r.from}–${r.to}`;
+	}
 </script>
 
 <svelte:head>
@@ -20,30 +24,70 @@
 <main class="mx-auto max-w-reader px-6 py-10">
 	{#if data.context}
 		{@const c = data.context}
-		<nav class="font-ui text-xs uppercase tracking-wider text-muted mb-6 leading-relaxed" aria-label="Fil d'Ariane">
-			<a href="/ccc/{c.part.slug}" class="hover:text-accent">{c.part.title}</a>
-			{#if c.section}
-				<span class="mx-2 text-subtle">›</span>
-				<a href="/ccc/{c.part.slug}/{c.section.slug}" class="hover:text-accent">{c.section.title}</a>
-			{/if}
-			{#if c.chapter}
-				<span class="mx-2 text-subtle">›</span>
-				<a href={chapterUrl(c)} class="hover:text-accent">{c.chapter.title}</a>
-			{/if}
+		<nav class="mb-8 font-ui text-sm" aria-label="Fil d'Ariane">
+			<ol class="space-y-1">
+				<li class="pl-0">
+					<a href="/ccc/{c.part.slug}" class="text-muted hover:text-accent">
+						<span class="text-accent font-semibold">
+							{c.part.number ? `Partie ${c.part.number}` : 'Prologue'}:
+						</span>
+						{c.part.title}
+						{#if c.part.range}
+							<span class="text-subtle">({fmtRange(c.part.range)})</span>
+						{/if}
+					</a>
+				</li>
+				{#if c.section}
+					<li class="pl-4 border-l border-border">
+						<span class="pl-3 block">
+							<a href="/ccc/{c.part.slug}/{c.section.slug}" class="text-muted hover:text-accent">
+								<span class="text-accent font-semibold">
+									{c.section.number ? `Section ${c.section.number}` : 'Section'}:
+								</span>
+								{c.section.title}
+								{#if c.section.range}
+									<span class="text-subtle">({fmtRange(c.section.range)})</span>
+								{/if}
+							</a>
+						</span>
+					</li>
+				{/if}
+				{#if c.chapter}
+					<li class="pl-8 border-l border-border">
+						<span class="pl-3 block">
+							<a href={chapterUrl(c)} class="text-muted hover:text-accent">
+								<span class="text-accent font-semibold">
+									{c.chapter.number ? `Chapitre ${c.chapter.number}` : 'Chapitre'}:
+								</span>
+								{c.chapter.title}
+								{#if c.chapter.range}
+									<span class="text-subtle">({fmtRange(c.chapter.range)})</span>
+								{/if}
+							</a>
+						</span>
+					</li>
+				{/if}
+				{#if c.article}
+					<li class="pl-12 border-l border-border">
+						<span class="pl-3 block">
+							<a href="{chapterUrl(c)}#{c.article.slug}" class="text-muted hover:text-accent">
+								<span class="text-accent font-semibold">
+									{c.article.number ? `Article ${c.article.number}` : 'Article'}:
+								</span>
+								{c.article.title}
+								{#if c.article.range}
+									<span class="text-subtle">({fmtRange(c.article.range)})</span>
+								{/if}
+							</a>
+						</span>
+					</li>
+				{/if}
+			</ol>
 		</nav>
 
-		{#if c.article}
-			<p class="font-ui text-sm uppercase tracking-wider text-muted mt-6">Article</p>
-			<h1 class="font-ui text-2xl font-bold text-heading mt-1 mb-4">
-				<a href="{chapterUrl(c)}#{c.article.slug}" class="hover:text-accent">
-					{c.article.title}
-				</a>
-			</h1>
-		{/if}
-
 		{#if c.heading}
-			<h2 class="font-ui text-lg font-semibold text-heading mt-6 mb-4">
-				<a href="{chapterUrl(c)}#{c.heading.id}" class="hover:text-accent">
+			<h2 class="font-ui text-lg font-semibold text-accent mt-2 mb-4">
+				<a href="{chapterUrl(c)}#{c.heading.id}" class="hover:underline">
 					{c.heading.title}
 				</a>
 			</h2>
@@ -62,12 +106,11 @@
 		{#if c.chapter}
 			<p class="mt-12 font-ui text-sm">
 				<a href={chapterUrl(c)} class="text-accent hover:underline">
-					Lire le chapitre complet : {c.chapter.title} →
+					Lire le chapitre complet&nbsp;: {c.chapter.title} →
 				</a>
 			</p>
 		{/if}
 	{:else}
-		<!-- Prologue paragraphs and any without a context entry -->
 		{#if data.kind === 'paragraph'}
 			<ParagraphView paragraph={data.paragraph} />
 		{:else}

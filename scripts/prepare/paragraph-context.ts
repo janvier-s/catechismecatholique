@@ -1,34 +1,56 @@
 import type { BuiltStructure } from './structure';
 import type { ParagraphContext } from '../../src/lib/data/types';
 
-// For every paragraph number, record where it lives in the hierarchy:
-// part / section (optional) / chapter (optional) / article (optional) / nearest heading (optional).
 export function buildParagraphContext(structure: BuiltStructure): Record<number, ParagraphContext> {
 	const out: Record<number, ParagraphContext> = {};
 
 	for (const part of structure.parts) {
-		// Paragraphs that belong directly to a part (Prologue's children).
-		// These can't be reached via section/chapter; we still want a context entry.
-		// We don't have a direct paragraph list at the part level in BuiltStructure,
-		// so we rely on sections/chapters below. Prologue paragraphs are handled by
-		// the prologue having no sections; we look them up by walking the original data
-		// — but that data isn't passed in here. Phase 1 punts: prologue paragraphs get
-		// only the part-level entry (no section/chapter), and the prologue route
-		// already handles them as a flat list.
+		const partInfo = { slug: part.slug, title: part.title, number: part.number, range: part.range };
 
 		for (const section of part.sections) {
+			const sectionInfo = {
+				slug: section.slug,
+				title: section.title,
+				number: section.number,
+				range: section.range
+			};
+
+			for (const a of section.articles_direct ?? []) {
+				const articleInfo = { slug: a.slug, title: a.title, number: a.number, range: a.range };
+				const findHeading = (n: number) => {
+					let result: { id: string; title: string } | undefined;
+					for (const h of a.headings) {
+						if (h.paragraph_start <= n) result = { id: h.id, title: h.title };
+						else break;
+					}
+					return result;
+				};
+				for (const n of a.paragraphs) {
+					out[n] = {
+						part: partInfo,
+						section: sectionInfo,
+						article: articleInfo,
+						heading: findHeading(n)
+					};
+				}
+			}
+
 			for (const chapter of section.chapters) {
-				// Build a sorted heading list for the chapter (chapter-level headings + each
-				// article's headings) so we can find the "nearest heading at or before n".
+				const chapterInfo = {
+					slug: chapter.slug,
+					title: chapter.title,
+					number: chapter.number,
+					range: chapter.range
+				};
+
 				type H = { id: string; title: string; paragraph_start: number };
 				const allHeadings: H[] = [
 					...chapter.headings.map((h) => ({ id: h.id, title: h.title, paragraph_start: h.paragraph_start }))
 				];
-				const articleHeadings: { article: { slug: string; title: string }; headings: H[] }[] = [];
 				for (const article of chapter.articles) {
-					const hs = article.headings.map((h) => ({ id: h.id, title: h.title, paragraph_start: h.paragraph_start }));
-					articleHeadings.push({ article: { slug: article.slug, title: article.title }, headings: hs });
-					allHeadings.push(...hs);
+					allHeadings.push(
+						...article.headings.map((h) => ({ id: h.id, title: h.title, paragraph_start: h.paragraph_start }))
+					);
 				}
 				allHeadings.sort((a, b) => a.paragraph_start - b.paragraph_start);
 
@@ -36,10 +58,10 @@ export function buildParagraphContext(structure: BuiltStructure): Record<number,
 					for (const a of chapter.articles) if (a.paragraphs.includes(n)) return a;
 					return undefined;
 				};
-				const findNearestHeading = (n: number): H | undefined => {
-					let result: H | undefined;
+				const findNearestHeading = (n: number) => {
+					let result: { id: string; title: string } | undefined;
 					for (const h of allHeadings) {
-						if (h.paragraph_start <= n) result = h;
+						if (h.paragraph_start <= n) result = { id: h.id, title: h.title };
 						else break;
 					}
 					return result;
@@ -47,13 +69,14 @@ export function buildParagraphContext(structure: BuiltStructure): Record<number,
 
 				for (const n of chapter.paragraphs) {
 					const article = findArticleFor(n);
-					const heading = findNearestHeading(n);
 					out[n] = {
-						part: { slug: part.slug, title: part.title },
-						section: { slug: section.slug, title: section.title },
-						chapter: { slug: chapter.slug, title: chapter.title },
-						article: article ? { slug: article.slug, title: article.title } : undefined,
-						heading: heading ? { id: heading.id, title: heading.title } : undefined
+						part: partInfo,
+						section: sectionInfo,
+						chapter: chapterInfo,
+						article: article
+							? { slug: article.slug, title: article.title, number: article.number, range: article.range }
+							: undefined,
+						heading: findNearestHeading(n)
 					};
 				}
 			}

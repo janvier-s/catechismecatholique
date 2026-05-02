@@ -13,8 +13,13 @@ export function buildChapterFiles(structure: BuiltStructure): Chapter[] {
 					corpus: 'ccc',
 					slug: c.slug,
 					title: c.title,
+					number: c.number,
 					part_slug: part.slug,
+					part_title: part.title,
+					part_number: part.number,
 					section_slug: section.slug,
+					section_title: section.title,
+					section_number: section.number,
 					paragraphs: c.paragraphs,
 					headings: c.headings.map<ChapterHeading>((h) => ({
 						id: h.id,
@@ -25,6 +30,7 @@ export function buildChapterFiles(structure: BuiltStructure): Chapter[] {
 					articles: c.articles.map<ChapterArticle>((a) => ({
 						slug: a.slug,
 						title: a.title,
+						number: a.number,
 						paragraphs: a.paragraphs,
 						headings: a.headings.map<ChapterHeading>((h) => ({
 							id: h.id,

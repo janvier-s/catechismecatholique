@@ -13,13 +13,12 @@
 		chapter,
 		paragraphs,
 		enBref = null
-	}: { chapter: Chapter; paragraphs: Paragraph[]; enBref?: EBT | null } = $props();
+	}: {
+		chapter: Chapter;
+		paragraphs: Paragraph[];
+		enBref?: (EBT & { paragraph_records?: Paragraph[] }) | null;
+	} = $props();
 
-	// Build a per-paragraph-number lookup of "things to render before this paragraph":
-	//   - article title (when paragraph_start is the first paragraph of an article)
-	//   - chapter heading (level 2)
-	//   - article heading (level 2 inside an article)
-	//   - sub_heading (level 3)
 	type Insertion =
 		| { kind: 'article'; article: ChapterArticle }
 		| { kind: 'heading'; heading: ChapterHeading };
@@ -31,27 +30,36 @@
 			arr.push(ins);
 			map.set(n, arr);
 		};
-		// Chapter-level headings (only used for chapters that don't have articles)
 		for (const h of chapter.headings) push(h.paragraph_start, { kind: 'heading', heading: h });
-		// Article titles + their headings
 		for (const a of chapter.articles) {
 			if (a.paragraphs.length > 0) push(a.paragraphs[0]!, { kind: 'article', article: a });
 			for (const h of a.headings) push(h.paragraph_start, { kind: 'heading', heading: h });
 		}
 		return map;
 	})();
+
+	const chapterLabel = $derived(chapter.number ? `Chapitre ${chapter.number}` : 'Chapitre');
 </script>
 
-<div class="mx-auto max-w-7xl px-6 py-10 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-10">
+<div class="mx-auto max-w-7xl px-6 py-10 grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-10">
 	<aside class="hidden lg:block">
-		<div class="sticky top-24">
+		<div class="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-2 styled-scroll">
 			<ChapterOutline {chapter} />
 		</div>
 	</aside>
 
 	<main>
 		<header class="mb-8">
-			<p class="font-ui text-sm uppercase tracking-wider text-muted">Chapitre</p>
+			<nav class="font-ui text-xs uppercase tracking-[0.15em] text-muted mb-3" aria-label="Fil d'Ariane">
+				<a href="/ccc/{chapter.part_slug}" class="hover:text-accent">
+					{chapter.part_number ? `${chapter.part_number}. ` : ''}{chapter.part_title}
+				</a>
+				<span class="mx-2 text-subtle">›</span>
+				<a href="/ccc/{chapter.part_slug}/{chapter.section_slug}" class="hover:text-accent">
+					{chapter.section_number ? `${chapter.section_number}. ` : ''}{chapter.section_title}
+				</a>
+			</nav>
+			<p class="font-ui text-sm uppercase tracking-wider text-muted">{chapterLabel}</p>
 			<h1 class="font-ui text-3xl font-bold mt-1 text-heading">{chapter.title}</h1>
 		</header>
 
@@ -62,12 +70,12 @@
 						id={ins.article.slug}
 						class="font-ui text-2xl font-bold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
 					>
-						{ins.article.title}
+						{ins.article.number ? `Article ${ins.article.number} — ` : ''}{ins.article.title}
 					</h2>
 				{:else if ins.heading.level === 2}
 					<h3
 						id={ins.heading.id}
-						class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-heading"
+						class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
 					>
 						{ins.heading.title}
 					</h3>
@@ -84,7 +92,7 @@
 		{/each}
 
 		{#if enBref}
-			<EnBrefBlock {enBref} />
+			<EnBrefBlock {enBref} paragraphs={enBref.paragraph_records ?? []} />
 		{/if}
 
 		<nav class="mt-12 flex justify-between font-ui text-sm">
@@ -103,3 +111,19 @@
 		</nav>
 	</main>
 </div>
+
+<style>
+	.styled-scroll {
+		scrollbar-width: thin;
+		scrollbar-color: color-mix(in srgb, var(--color-accent) 50%, transparent)
+			color-mix(in srgb, var(--color-border) 40%, transparent);
+	}
+	.styled-scroll::-webkit-scrollbar {
+		width: 6px;
+		-webkit-appearance: none;
+	}
+	.styled-scroll::-webkit-scrollbar-thumb {
+		background: color-mix(in srgb, var(--color-accent) 50%, transparent);
+		border-radius: 3px;
+	}
+</style>
