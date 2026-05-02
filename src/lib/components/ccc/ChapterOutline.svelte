@@ -3,6 +3,25 @@
 	import { activeHeadingId } from '$lib/stores/outline';
 	let { chapter }: { chapter: Chapter } = $props();
 
+	type OutlineItem =
+		| { kind: 'article'; id: string; title: string; paragraph_start: number }
+		| { kind: 'heading'; id: string; title: string; level: number; paragraph_start: number };
+
+	const items: OutlineItem[] = (() => {
+		const out: OutlineItem[] = [];
+		for (const h of chapter.headings) {
+			out.push({ kind: 'heading', id: h.id, title: h.title, level: h.level, paragraph_start: h.paragraph_start });
+		}
+		for (const a of chapter.articles) {
+			if (a.paragraphs.length === 0) continue;
+			out.push({ kind: 'article', id: a.slug, title: a.title, paragraph_start: a.paragraphs[0]! });
+			for (const h of a.headings) {
+				out.push({ kind: 'heading', id: h.id, title: h.title, level: h.level, paragraph_start: h.paragraph_start });
+			}
+		}
+		return out.sort((a, b) => a.paragraph_start - b.paragraph_start);
+	})();
+
 	$effect(() => {
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -13,8 +32,8 @@
 			},
 			{ rootMargin: '-20% 0px -75% 0px', threshold: 0 }
 		);
-		for (const h of chapter.headings) {
-			const el = document.getElementById(h.id);
+		for (const item of items) {
+			const el = document.getElementById(item.id);
 			if (el) observer.observe(el);
 		}
 		return () => observer.disconnect();
@@ -23,18 +42,23 @@
 
 <nav aria-label="Plan du chapitre" class="font-ui text-sm">
 	<ul class="space-y-1">
-		{#each chapter.headings as h (h.id)}
+		{#each items as item (item.id)}
 			<li>
 				<a
-					href="#{h.id}"
+					href="#{item.id}"
 					class="block py-1 pl-3 border-l-2 transition-colors"
-					class:border-accent={$activeHeadingId === h.id}
-					class:font-semibold={$activeHeadingId === h.id}
-					class:text-accent={$activeHeadingId === h.id}
-					class:border-transparent={$activeHeadingId !== h.id}
-					class:text-muted={$activeHeadingId !== h.id}
+					class:border-accent={$activeHeadingId === item.id}
+					class:font-semibold={$activeHeadingId === item.id}
+					class:text-accent={$activeHeadingId === item.id}
+					class:border-transparent={$activeHeadingId !== item.id}
+					class:text-muted={$activeHeadingId !== item.id}
+					class:font-bold={item.kind === 'article'}
+					class:uppercase={item.kind === 'article'}
+					class:tracking-wider={item.kind === 'article'}
+					class:text-xs={item.kind === 'article'}
+					class:pl-6={item.kind === 'heading' && item.level === 3}
 				>
-					{h.title}
+					{item.title}
 				</a>
 			</li>
 		{/each}

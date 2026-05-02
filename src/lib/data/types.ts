@@ -50,9 +50,17 @@ export interface Chapter {
 	section_slug: string;
 	paragraphs: number[];
 	headings: ChapterHeading[];
+	articles: ChapterArticle[];
 	en_bref?: EnBrefBlock;
 	prev?: { slug: string; title: string };
 	next?: { slug: string; title: string };
+}
+
+export interface ChapterArticle {
+	slug: string;
+	title: string;
+	paragraphs: number[];
+	headings: ChapterHeading[];
 }
 
 export interface ChapterHeading {

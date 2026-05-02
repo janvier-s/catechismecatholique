@@ -1,4 +1,4 @@
-import type { Chapter, ChapterHeading } from '../../src/lib/data/types';
+import type { Chapter, ChapterArticle, ChapterHeading } from '../../src/lib/data/types';
 import type { BuiltStructure } from './structure';
 
 export function buildChapterFiles(structure: BuiltStructure): Chapter[] {
@@ -21,6 +21,17 @@ export function buildChapterFiles(structure: BuiltStructure): Chapter[] {
 						level: h.level,
 						title: h.title,
 						paragraph_start: h.paragraph_start
+					})),
+					articles: c.articles.map<ChapterArticle>((a) => ({
+						slug: a.slug,
+						title: a.title,
+						paragraphs: a.paragraphs,
+						headings: a.headings.map<ChapterHeading>((h) => ({
+							id: h.id,
+							level: h.level,
+							title: h.title,
+							paragraph_start: h.paragraph_start
+						}))
 					})),
 					prev: prev ? { slug: prev.slug, title: prev.title } : undefined,
 					next: next ? { slug: next.slug, title: next.title } : undefined
