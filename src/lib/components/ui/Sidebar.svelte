@@ -70,7 +70,7 @@
 
 	const activeContext: ParagraphContext | null = $derived(
 		activeParagraph !== null && paragraphContexts
-			? paragraphContexts[activeParagraph] ?? null
+			? (paragraphContexts[activeParagraph] ?? null)
 			: null
 	);
 
@@ -132,8 +132,7 @@
 				// En Bref blocks whose first paragraph falls within this article go INSIDE it
 				const articleParas = a.paragraphs;
 				const articleMin = articleParas.length > 0 ? articleParas[0]! : 0;
-				const articleMax =
-					articleParas.length > 0 ? articleParas[articleParas.length - 1]! : 0;
+				const articleMax = articleParas.length > 0 ? articleParas[articleParas.length - 1]! : 0;
 				for (const block of detail.en_brefs ?? []) {
 					if (block.paragraphs.length === 0) continue;
 					const firstP = block.paragraphs[0]!;
@@ -168,11 +167,7 @@
 				const inAnyArticle = (firstP: number) =>
 					detail.articles.some((a) => {
 						const ps = a.paragraphs;
-						return (
-							ps.length > 0 &&
-							firstP >= ps[0]! &&
-							firstP <= ps[ps.length - 1]!
-						);
+						return ps.length > 0 && firstP >= ps[0]! && firstP <= ps[ps.length - 1]!;
 					});
 				for (const block of detail.en_brefs ?? []) {
 					if (block.paragraphs.length === 0) continue;
@@ -272,12 +267,25 @@
 <style>
 	.styled-scroll {
 		scrollbar-width: thin;
+		scrollbar-color: color-mix(in srgb, var(--color-accent) 50%, transparent)
+			color-mix(in srgb, var(--color-border) 40%, transparent);
 	}
 	.styled-scroll::-webkit-scrollbar {
-		width: 6px;
+		width: 7px;
+		-webkit-appearance: none;
+	}
+	.styled-scroll::-webkit-scrollbar-track {
+		background: color-mix(in srgb, var(--color-border) 40%, transparent);
 	}
 	.styled-scroll::-webkit-scrollbar-thumb {
 		background: color-mix(in srgb, var(--color-accent) 50%, transparent);
-		border-radius: 3px;
+		border-radius: 4px;
+		border: 1px solid transparent;
+		background-clip: padding-box;
+		min-height: 40px;
+	}
+	.styled-scroll::-webkit-scrollbar-thumb:hover {
+		background: color-mix(in srgb, var(--color-accent) 70%, transparent);
+		background-clip: padding-box;
 	}
 </style>

@@ -1,8 +1,14 @@
 <script lang="ts">
-	import { studyPanel } from '$lib/stores/studyPanel';
+	import { get } from 'svelte/store';
+	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 	import { loadParagraphContexts, loadChapter, loadParagraph } from '$lib/data/loaders';
 	import type { ParagraphContext, Paragraph, Chapter } from '$lib/data/types';
 	import ParagraphRenderer from '../ccc/ParagraphRenderer.svelte';
+
+	function onNumberClick(n: number) {
+		const s = get(studyPanel);
+		openPanel({ paragraph: n }, s.activeTab ?? 'cross-refs');
+	}
 
 	type Block = { paragraphs: Paragraph[]; firstNumber: number };
 
@@ -62,14 +68,15 @@
 				<div class="rounded-lg p-3 en-bref-block">
 					<p class="text-[10px] uppercase tracking-[0.2em] text-muted font-bold mb-2">En Bref</p>
 					{#each block.paragraphs as p (p.number)}
-						<div class="flex gap-3 mb-2 last:mb-0">
+						<div class="mb-3 last:mb-0">
 							<a
 								href="/ccc/{p.number}"
-								class="flex-none w-10 text-right pt-0.5 text-xs font-semibold text-accent tabular-nums hover:underline"
+								onclick={() => onNumberClick(p.number)}
+								class="block mb-1 text-sm font-semibold text-accent tabular-nums hover:underline font-ui"
 							>
-								{p.number}
+								CEC {p.number}
 							</a>
-							<div class="flex-1 text-[13px] leading-relaxed">
+							<div class="font-body text-[15px] leading-relaxed">
 								<ParagraphRenderer html={p.text_html} paragraphNumber={p.number} />
 							</div>
 						</div>

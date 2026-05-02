@@ -16,7 +16,8 @@ module.exports = {
 			},
 			fontFamily: {
 				body: 'var(--font-body)',
-				ui: 'var(--font-ui)'
+				ui: 'var(--font-ui)',
+				heading: 'var(--font-heading)'
 			},
 			maxWidth: {
 				reader: '750px'

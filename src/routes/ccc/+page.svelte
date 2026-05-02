@@ -6,8 +6,12 @@
 <svelte:head><title>Catéchisme de l'Église catholique</title></svelte:head>
 
 <main class="mx-auto max-w-4xl px-6 py-16">
-	<h1 class="font-ui text-5xl font-bold mb-4">Catéchisme de l'Église catholique</h1>
-	<p class="text-lg text-muted mb-12">Édition française complète, recherche par paragraphe, référence biblique et thème.</p>
+	<h1 class="font-heading text-6xl font-semibold mb-4 leading-[1.05]">
+		Catéchisme de l'Église catholique
+	</h1>
+	<p class="text-lg text-muted mb-12">
+		Édition française complète, recherche par paragraphe, référence biblique et thème.
+	</p>
 
 	<div class="grid sm:grid-cols-2 gap-6">
 		{#each data.parts as p (p.slug)}

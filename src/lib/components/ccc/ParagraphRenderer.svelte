@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { MagisterialRefRecord } from '$lib/data/types';
 	import { openPanel } from '$lib/stores/studyPanel';
-	import { bookByAbbr } from '$lib/utils/bibleBookSlug';
 	let {
 		html,
 		bibleRefs = [],
@@ -15,25 +14,12 @@
 		return cleaned.replace(':', ', ');
 	}
 
-	// "Mt 28:19" or "Mt 28:19-20" → "/bible/matthieu/28/19" (range → first verse)
-	function bibleHrefForRaw(raw: string): string | null {
-		const cleaned = raw.replace(/^voir\s+/i, '').trim();
-		const m = cleaned.match(/^([1-3]?\s*[A-Za-zÉéèê]+)\s+(\d+):(\d+)/);
-		if (!m) return null;
-		const book = bookByAbbr(m[1]!.trim());
-		if (!book) return null;
-		return `/bible/${book.slug}/${m[2]}/${m[3]}`;
-	}
-
-	function makeInlineLink(raw: string): HTMLAnchorElement {
-		const a = document.createElement('a');
-		a.textContent = ' (' + formatBibleRef(raw) + ')';
-		const href = bibleHrefForRaw(raw);
-		if (href) {
-			a.href = href;
-			a.className = 'bible-inline';
-		}
-		return a;
+	function makeInlineRef(raw: string): HTMLButtonElement {
+		const btn = document.createElement('button');
+		btn.type = 'button';
+		btn.textContent = ' (' + formatBibleRef(raw) + ')';
+		btn.className = 'bible-inline';
+		return btn;
 	}
 
 	$effect(() => {
@@ -45,7 +31,7 @@
 			if (r.idx !== undefined && r.idx !== null) refsByIdx.set(String(r.idx), r);
 		}
 
-		// Pass 1: inline non-"voir" bibleRefs as clickable <a> elements
+		// Pass 1: inline non-"voir" bibleRefs as clickable buttons that open the panel.
 		const allBibleSups = Array.from(
 			containerEl.querySelectorAll<HTMLElement>('sup.srcRef.bibleRef')
 		);
@@ -55,7 +41,7 @@
 			if (!ref || !ref.raw) continue;
 			if (ref.type === 'bible_continuation') {
 				const prev = sup.previousSibling;
-				if (prev instanceof HTMLAnchorElement && prev.classList.contains('bible-inline')) {
+				if (prev instanceof HTMLButtonElement && prev.classList.contains('bible-inline')) {
 					prev.textContent = (prev.textContent ?? '').replace(/\)\s*$/, '');
 					prev.textContent += ' ; ' + formatBibleRef(ref.raw) + ')';
 					sup.remove();
@@ -64,17 +50,14 @@
 					const closeParen = txt.lastIndexOf(')');
 					if (closeParen >= 0) {
 						prev.nodeValue =
-							txt.slice(0, closeParen) +
-							' ; ' +
-							formatBibleRef(ref.raw) +
-							txt.slice(closeParen);
+							txt.slice(0, closeParen) + ' ; ' + formatBibleRef(ref.raw) + txt.slice(closeParen);
 						sup.remove();
 					}
 				}
 				continue;
 			}
 			if (!/^voir\s/i.test(ref.raw)) {
-				sup.replaceWith(makeInlineLink(ref.raw));
+				sup.replaceWith(makeInlineRef(ref.raw));
 			}
 		}
 
@@ -95,16 +78,36 @@
 			}
 		}
 
-		// Click handler: any remaining sup opens the panel with the right tab.
+		// Click handler:
+		// - inline bible ref button → open panel on Bible tab for the current paragraph
+		// - cccRef sup → open the panel showing the TARGET paragraph (no navigation)
+		// - bibleRef / docRef sup → open panel on the matching tab for the current paragraph
 		const onClick = (e: MouseEvent) => {
 			if (!(e.target instanceof Element)) return;
+
+			const inline = e.target.closest('button.bible-inline');
+			if (inline) {
+				e.preventDefault();
+				openPanel({ paragraph: paragraphNumber }, 'bible');
+				return;
+			}
+
 			const sup = e.target.closest('sup.srcRef') as HTMLElement | null;
 			if (!sup) return;
 			e.preventDefault();
-			const isCcc = sup.classList.contains('cccRef');
+
+			if (sup.classList.contains('cccRef')) {
+				const m = (sup.textContent ?? '').match(/(\d+)/);
+				const target = m ? parseInt(m[1]!, 10) : NaN;
+				if (Number.isFinite(target)) {
+					openPanel({ paragraph: target }, 'cross-refs');
+					return;
+				}
+			}
+
 			const isBible = sup.classList.contains('bibleRef');
 			const isDoc = sup.classList.contains('docRef');
-			const tab = isCcc ? 'cross-refs' : isBible ? 'bible' : isDoc ? 'sources' : 'cross-refs';
+			const tab = isBible ? 'bible' : isDoc ? 'sources' : 'cross-refs';
 			openPanel({ paragraph: paragraphNumber }, tab);
 		};
 		containerEl.addEventListener('click', onClick);
@@ -112,7 +115,7 @@
 	});
 </script>
 
-<div bind:this={containerEl} class="prose-paragraph leading-relaxed text-lg">
+<div bind:this={containerEl} class="prose-paragraph leading-relaxed">
 	{@html html}
 </div>
 
@@ -129,11 +132,16 @@
 		margin-right: 0.05em;
 		vertical-align: 0.1em;
 	}
-	.prose-paragraph :global(a.bible-inline) {
+	.prose-paragraph :global(button.bible-inline) {
 		color: var(--color-accent);
+		background: transparent;
+		border: 0;
+		padding: 0;
+		font: inherit;
+		cursor: pointer;
 		text-decoration: none;
 	}
-	.prose-paragraph :global(a.bible-inline:hover) {
+	.prose-paragraph :global(button.bible-inline:hover) {
 		text-decoration: underline;
 	}
 </style>

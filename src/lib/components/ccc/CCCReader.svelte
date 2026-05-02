@@ -73,7 +73,7 @@
 			</ol>
 		</nav>
 		<p class="font-ui text-sm uppercase tracking-wider text-muted">{chapterLabel}</p>
-		<h1 class="font-ui text-3xl font-bold mt-1 text-heading">{chapter.title}</h1>
+		<h1 class="font-heading text-4xl font-semibold mt-1 text-heading">{chapter.title}</h1>
 	</header>
 
 	{#each paragraphs as p (p.number)}
@@ -88,7 +88,7 @@
 				{#if ins.kind === 'article'}
 					<h2
 						id={ins.article.slug}
-						class="font-ui text-2xl font-bold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
+						class="font-heading text-3xl font-semibold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
 					>
 						{ins.article.number ? `Article ${ins.article.number} — ` : ''}{ins.article.title}
 					</h2>

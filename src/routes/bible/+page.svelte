@@ -7,7 +7,7 @@
 <svelte:head><title>Bible — Catéchisme</title></svelte:head>
 
 <main class="mx-auto max-w-4xl px-6 py-12">
-	<h1 class="font-ui text-4xl font-bold mb-4">Recherche biblique</h1>
+	<h1 class="font-heading text-5xl font-semibold mb-4">Recherche biblique</h1>
 	<p class="text-muted mb-10">
 		Choisissez un livre pour voir les paragraphes du Catéchisme qui le citent.
 	</p>

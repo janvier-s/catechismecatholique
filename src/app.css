@@ -2,6 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Light.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+	font-display: fallback;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: fallback;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+	font-display: fallback;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Bold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+	font-display: fallback;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Light-Italic.woff2') format('woff2');
+	font-weight: 300;
+	font-style: italic;
+	font-display: fallback;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Italic.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: fallback;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Medium-Italic.woff2') format('woff2');
+	font-weight: 500;
+	font-style: italic;
+	font-display: fallback;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Bold-Italic.woff2') format('woff2');
+	font-weight: 600;
+	font-style: italic;
+	font-display: fallback;
+}
+
 @layer base {
 	:root {
 		--color-bg: #f8f5ef;
@@ -16,7 +73,8 @@
 		--color-heading: var(--color-fg);
 
 		--font-body: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
-		--font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		--font-ui: 'Gotham', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+		--font-heading: 'Cormorant Garamond', 'Libre Baskerville', Georgia, serif;
 	}
 
 	[data-theme='sepia'] {

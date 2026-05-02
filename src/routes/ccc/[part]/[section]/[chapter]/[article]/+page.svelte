@@ -41,18 +41,14 @@
 					class="text-muted hover:text-accent"
 				>
 					<span class="font-semibold"
-						>{data.chapter.number
-							? `Chapitre ${data.chapter.number} :`
-							: 'Chapitre :'}</span
+						>{data.chapter.number ? `Chapitre ${data.chapter.number} :` : 'Chapitre :'}</span
 					>
 					{data.chapter.title}
 				</a>
 			</li>
 			<li class="pl-20">
 				<span class="font-semibold"
-					>{data.article.number
-						? `Article ${data.article.number} :`
-						: 'Article :'}</span
+					>{data.article.number ? `Article ${data.article.number} :` : 'Article :'}</span
 				>
 				{data.article.title}
 			</li>
@@ -62,15 +58,12 @@
 	<p class="font-ui text-sm uppercase tracking-wider text-muted mt-4">
 		{data.article.number ? `Article ${data.article.number}` : 'Article'}
 	</p>
-	<h1 class="font-ui text-3xl font-bold mt-1 mb-8 text-heading">{data.article.title}</h1>
+	<h1 class="font-heading text-4xl font-semibold mt-1 mb-8 text-heading">{data.article.title}</h1>
 
 	{#each data.paragraphs as p (p.number)}
 		{@const heading = data.article.headings.find((h) => h.paragraph_start === p.number)}
 		{#if heading}
-			<h2
-				id={heading.id}
-				class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
-			>
+			<h2 id={heading.id} class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent">
 				{heading.title}
 			</h2>
 		{/if}

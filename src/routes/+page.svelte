@@ -8,14 +8,17 @@
 
 <main class="mx-auto max-w-4xl px-6 py-16 lg:py-24">
 	<header class="text-center mb-16">
-		<p class="font-ui text-sm uppercase tracking-[0.2em] text-muted mb-4">Édition française définitive</p>
-		<h1 class="font-ui text-5xl lg:text-6xl font-bold leading-tight">
+		<p class="font-ui text-sm uppercase tracking-[0.2em] text-muted mb-4">
+			Édition française définitive
+		</p>
+		<h1 class="font-heading text-6xl lg:text-7xl font-semibold leading-[1.05]">
 			Catéchisme<br />
 			de l'Église<br />
 			Catholique
 		</h1>
 		<p class="mt-8 text-lg text-muted max-w-2xl mx-auto">
-			Lecture, navigation et recherche dans les 2&nbsp;865 paragraphes du Catéchisme. Édition libre, hors ligne, sans publicité.
+			Lecture, navigation et recherche dans les 2&nbsp;865 paragraphes du Catéchisme. Édition libre,
+			hors ligne, sans publicité.
 		</p>
 	</header>
 
@@ -54,7 +57,7 @@
 	</div>
 
 	<section class="border-t border-border pt-10">
-		<h2 class="font-ui text-2xl font-bold mb-6">Quatre parties</h2>
+		<h2 class="font-heading text-3xl font-semibold mb-6">Quatre parties</h2>
 		<ol class="space-y-3 font-ui">
 			<li>
 				<a href="/ccc/la-profession-de-la-foi" class="block hover:text-accent">

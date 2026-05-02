@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	let { data } : { data: PageData } = $props();
+	let { data }: { data: PageData } = $props();
 	type Range = { from: number; to: number };
 	type Article = {
 		slug: string;
@@ -43,11 +43,11 @@
 <svelte:head><title>Sommaire — Catéchisme</title></svelte:head>
 
 <main class="mx-auto max-w-4xl px-6 py-12">
-	<h1 class="font-ui text-4xl font-bold mb-10">Sommaire complet</h1>
+	<h1 class="font-heading text-5xl font-semibold mb-10">Sommaire complet</h1>
 
 	{#each struct.parts as part (part.slug)}
 		<section class="mb-10">
-			<h2 class="font-ui text-2xl font-bold mb-4">
+			<h2 class="font-heading text-3xl font-semibold mb-4">
 				<a href="/ccc/{part.slug}" class="hover:text-accent">
 					<span class="font-bold">
 						{part.prologue ? 'Prologue' : `Partie ${part.number}`} :

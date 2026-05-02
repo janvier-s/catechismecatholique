@@ -12,6 +12,6 @@
 		<span class="mx-2 text-subtle">›</span>
 		<span class="font-semibold">{data.book.frenchName}</span>
 	</nav>
-	<h1 class="font-ui text-3xl font-bold mb-8">{data.book.frenchName}</h1>
+	<h1 class="font-heading text-5xl font-semibold mb-8">{data.book.frenchName}</h1>
 	<ChapterGrid bookSlug={data.book.slug} chapters={data.chapters} />
 </main>

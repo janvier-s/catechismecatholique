@@ -10,11 +10,12 @@
 	<nav class="mb-6 font-ui text-sm">
 		<a href="/bible" class="text-muted hover:text-accent">Bible</a>
 		<span class="mx-2 text-subtle">›</span>
-		<a href="/bible/{data.book.slug}" class="text-muted hover:text-accent">{data.book.frenchName}</a>
+		<a href="/bible/{data.book.slug}" class="text-muted hover:text-accent">{data.book.frenchName}</a
+		>
 		<span class="mx-2 text-subtle">›</span>
 		<span class="font-semibold">Chapitre {data.chapter}</span>
 	</nav>
-	<h1 class="font-ui text-3xl font-bold mb-8">
+	<h1 class="font-heading text-5xl font-semibold mb-8">
 		{data.book.frenchName}
 		{data.chapter}
 	</h1>

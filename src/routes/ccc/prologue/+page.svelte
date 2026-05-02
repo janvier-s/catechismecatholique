@@ -7,7 +7,7 @@
 <svelte:head><title>Prologue — Catéchisme</title></svelte:head>
 
 <main class="mx-auto max-w-reader px-6 py-12">
-	<h1 class="font-ui text-4xl font-bold mb-10">Prologue</h1>
+	<h1 class="font-heading text-5xl font-semibold mb-10">Prologue</h1>
 	{#each data.paragraphs as p (p.number)}
 		<ParagraphView paragraph={p} />
 	{/each}
