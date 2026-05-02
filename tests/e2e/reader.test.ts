@@ -54,7 +54,7 @@ test('TopBar renders on every page', async ({ page }) => {
 	await page.goto('/ccc/27');
 	const banner = page.getByRole('banner');
 	await expect(banner.getByRole('link', { name: 'Accueil' })).toBeVisible();
-	await expect(banner.getByRole('link', { name: 'Catéchisme', exact: true })).toBeVisible();
+	await expect(banner.getByRole('button', { name: /Catéchisme/i })).toBeVisible();
 	await expect(banner.getByRole('link', { name: 'Sommaire' })).toBeVisible();
 	await expect(banner.getByLabel('Recherche (à venir)')).toBeDisabled();
 });

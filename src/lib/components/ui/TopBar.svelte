@@ -3,6 +3,7 @@
 	import Wordmark from './Wordmark.svelte';
 	import ModeToggle from './ModeToggle.svelte';
 	import SidebarToggle from './SidebarToggle.svelte';
+	import CatechismDropdown from './CatechismDropdown.svelte';
 </script>
 
 <header class="border-b border-border bg-background sticky top-0 z-30">
@@ -25,7 +26,7 @@
 		<div class="flex-1"></div>
 
 		<nav class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none">
-			<a href="/ccc" class="hover:text-accent">Catéchisme</a>
+			<CatechismDropdown />
 			<a href="/bible" class="hover:text-accent">Bible</a>
 			<a href="/ccc/sommaire" class="hover:text-accent">Sommaire</a>
 			<a href="/a-propos" class="hover:text-accent">À propos</a>

@@ -21,3 +21,21 @@ test('sidebar auto-expands active chapter branch', async ({ page }) => {
 		sidebar.getByRole('link', { name: new RegExp(chapter.title.slice(0, 30)) })
 	).toBeVisible();
 });
+
+test('Catéchisme dropdown opens with parts', async ({ page }) => {
+	await page.goto('/');
+	await page.getByRole('button', { name: /Catéchisme/i }).first().click();
+	await expect(page.getByRole('menu')).toBeVisible();
+	await expect(page.getByText(/Partie 1 :/)).toBeVisible();
+});
+
+test('Catéchisme dropdown cascades to chapters on hover', async ({ page }) => {
+	await page.goto('/');
+	await page.getByRole('button', { name: /Catéchisme/i }).first().click();
+	// Hover Partie 1 (button containing "Partie 1 :")
+	await page.locator('[role="menu"] button').filter({ hasText: 'Partie 1 :' }).first().hover();
+	// Hover the first section button (any button after "Partie 1 :")
+	await page.locator('[role="menu"] button').filter({ hasText: 'Section 1 :' }).first().hover();
+	// At least one chapter link should appear
+	await expect(page.locator('[role="menu"] a').filter({ hasText: /Chapitre 1/ })).toBeVisible();
+});
