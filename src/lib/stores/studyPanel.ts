@@ -12,6 +12,10 @@ export interface PanelContext {
 	// data-idx of the bible_refs entry the user clicked, so the Bible tab can
 	// scroll to and highlight that specific reference among the paragraph's refs.
 	bibleRefIdx?: number;
+	// Which citation graph the verse marker came from. Defaults to 'ccc'.
+	// 'ccc' uses the per-paragraph CCC bible_refs index; 'concordance' uses
+	// the global concordance verse index.
+	verseSource?: 'ccc' | 'concordance';
 }
 
 export interface PanelState {

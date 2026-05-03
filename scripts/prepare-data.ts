@@ -4,6 +4,7 @@ import {
 	rmSync,
 	existsSync,
 	lstatSync,
+	statSync,
 	readFileSync,
 	writeFileSync,
 	readdirSync
@@ -158,6 +159,53 @@ async function main() {
 		0
 	);
 	endStep(`${verseCount} verses indexed`);
+
+	logStep('building concordance verse index');
+	{
+		const { buildConcordance } = await import('./prepare/concordance.ts');
+		const sourceDir =
+			process.env.DIDACHE_SOURCE_DIR ?? join(ROOT, '..', 'DOCTRINA', 'sources', 'didache');
+
+		const htmlFiles: string[] = [];
+		try {
+			// Use statSync (follows symlinks) so DIDACHE_SOURCE_DIR can
+			// be a symlink to the real source directory.
+			const stat = statSync(sourceDir);
+			if (!stat.isDirectory()) throw new Error(`not a directory: ${sourceDir}`);
+			const entries = readdirSync(sourceDir, { withFileTypes: true, recursive: true });
+			for (const ent of entries) {
+				if (ent.isFile() && ent.name.toLowerCase().endsWith('.html')) {
+					htmlFiles.push(readFileSync(join(ent.parentPath, ent.name), 'utf8'));
+				}
+			}
+		} catch (e) {
+			const err = e as NodeJS.ErrnoException;
+			if (err.code === 'ENOENT' || err.message?.startsWith('not a directory:')) {
+				// Source dir missing or not a directory — emit empty index, log, continue.
+				console.warn(`  (no DIDACHE_SOURCE_DIR at ${sourceDir} — emitting empty concordance)`);
+			} else {
+				throw e; // permission errors / partial-read / unexpected — fail loudly
+			}
+		}
+
+		const { index, stats } = buildConcordance(htmlFiles, ncl, knownParas, BOOKS);
+		writeFileSync(join(OUT, 'ccc/concordance-verse-index.json'), JSON.stringify(index));
+		if (stats.unknownBooks.length > 0) {
+			console.warn('  unknown books:', stats.unknownBooks.join(', '));
+		}
+		if (stats.unknownParagraphs.length > 0) {
+			console.warn(`  ${stats.unknownParagraphs.length} unknown CCC paragraphs (dropped)`);
+		}
+		if (stats.unparseableRanges.length > 0) {
+			console.warn(`  ${stats.unparseableRanges.length} unparseable ranges`);
+		}
+		if (stats.booksWithZeroEntries.length > 0) {
+			console.warn(
+				`  ${stats.booksWithZeroEntries.length} books with zero entries: ${stats.booksWithZeroEntries.join(', ')}`
+			);
+		}
+		endStep(`${htmlFiles.length} files, ${stats.entriesProcessed} entries`);
+	}
 
 	logStep('building search index');
 	mkdirSync(join(OUT, 'search'), { recursive: true });
