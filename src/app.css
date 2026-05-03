@@ -81,6 +81,84 @@
 	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Sentinel';
+	src: url('/fonts/Sentinel-Book.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Sentinel';
+	src: url('/fonts/Sentinel-Book-Italic.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Source Serif 4';
+	src: url('/fonts/SourceSerif4-Regular-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Source Serif 4';
+	src: url('/fonts/SourceSerif4-Italic-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Libre Franklin';
+	src: url('/fonts/LibreFranklin-Regular-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Libre Franklin';
+	src: url('/fonts/LibreFranklin-Italic-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Montserrat';
+	src: url('/fonts/Montserrat-Regular-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Montserrat';
+	src: url('/fonts/Montserrat-Italic-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Noto Sans';
+	src: url('/fonts/NotoSans-Regular-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Noto Sans';
+	src: url('/fonts/NotoSans-Italic-latin.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Grace Dyslexic MD';
+	src: url('/fonts/dyslexia.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
 @layer base {
 	:root {
 		--color-bg: #f8f5ef;
@@ -115,7 +193,7 @@
 		--color-bg: #111113;
 		--color-panel: #1c1c1f;
 		--color-fg: #e8ddd0;
-		--color-muted: #8a8690;
+		--color-muted: #a5a4a6;
 		--color-subtle: #a09ca8;
 		--color-accent: #d45050;
 		--color-accent-text: #e06868;
@@ -142,7 +220,7 @@
 			--color-bg: #111113;
 			--color-panel: #1c1c1f;
 			--color-fg: #e8ddd0;
-			--color-muted: #8a8690;
+			--color-muted: #a5a4a6;
 			--color-subtle: #a09ca8;
 			--color-accent: #d45050;
 			--color-accent-text: #e06868;
@@ -185,6 +263,57 @@
 	:focus:not(:focus-visible) {
 		outline: none;
 	}
+}
+
+/* Reading prefs — toggles driven by data attributes on <html>, set by
+   prefs.subscribe. CSS is the source of truth so toggling is instant and
+   doesn't require re-rendering the paragraph. */
+.prose-paragraph[data-paragraph] {
+	font-size: var(--reader-font-size, 17px);
+	line-height: var(--reader-line-height, 1.7);
+}
+html[data-justified='true'] .prose-paragraph {
+	text-align: justify;
+	hyphens: auto;
+}
+/* Column widths bumped up: étroit ≈ DR's standard, standard ≈ DR's wide,
+   large is wider still. */
+html[data-column-width='narrow'] .max-w-reader {
+	max-width: 750px;
+}
+html[data-column-width='default'] .max-w-reader {
+	max-width: 900px;
+}
+html[data-column-width='wide'] .max-w-reader {
+	max-width: 1080px;
+}
+/* En-marge mode: widen the container so the refs box sits in the right
+   margin, outside the prose column. The article uses padding-right + an
+   absolutely positioned aside (see ParagraphView.svelte). */
+html[data-cross-refs-layout='side'] .max-w-reader {
+	max-width: min(1180px, 100% - 48px);
+}
+/* Markers are wrapped in <span class="ref-wrap ref-{type}"> by the renderer
+   so hiding the wrapper also drops its leading whitespace (no orphan comma
+   or space before the next period). */
+html[data-hide-cross-refs='true'] .prose-paragraph .ref-cccRef,
+html[data-hide-cross-refs='true'] .ccc-side-refs {
+	display: none;
+}
+html[data-hide-bible-markers='true'] .prose-paragraph .ref-bibleRef {
+	display: none;
+}
+html[data-hide-bible-inline='true'] .prose-paragraph .ref-bible-inline {
+	display: none;
+}
+html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
+	display: none;
+}
+/* Tiny breathing room between adjacent markers (replaces the old ", "
+   injection which couldn't be hidden cleanly with display:none on its
+   neighbour). */
+.prose-paragraph .ref-wrap + .ref-wrap {
+	margin-left: 0.15em;
 }
 
 /* Logo theme swap — only show the right variant for the current theme. */
