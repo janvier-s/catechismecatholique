@@ -195,3 +195,55 @@ export function parseCccLinks(html: string): number[] {
 	}
 	return Array.from(set).sort((a, b) => a - b);
 }
+
+export interface CommentaryEntry {
+	range: string; // raw range token, dashes already normalized
+	ccc: number[]; // sorted ascending, deduplicated
+}
+
+export interface CommentaryFile {
+	bookName: string; // e.g. "Genesis", "1 Corinthians", "the Gospel of John"
+	entries: CommentaryEntry[];
+}
+
+const COMMENTARY_HEADING_RE =
+	/<p\s+class="calibre_3"[^>]*>\s*(?:<[^>]+>\s*)*Commentary on ([^<]+?)\s*(?:<[^>]+>\s*)*<\/p>/i;
+
+const BIBLE_BACKLINK_RE = /^index_split_\d+\.html#filepos\d+$/i;
+
+/**
+ * Match a single commentary paragraph: a <p class="calibre_6"> or
+ * <p class="calibre_16"> whose first <a> is a back-link to the Bible
+ * text (index_split_NNN.html#filepos...). Returns the paragraph's
+ * inner HTML and the leading range token, or null if not a commentary
+ * entry.
+ */
+const ENTRY_BLOCK_RE = /<p\s+class="calibre_(?:6|16)"[^>]*>([\s\S]*?)<\/p>/gi;
+
+function extractRangeAndBody(inner: string): { range: string; body: string } | null {
+	const m = inner.match(/^\s*(?:<[^>]+>\s*)*<a\s+[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i);
+	if (!m) return null;
+	if (!BIBLE_BACKLINK_RE.test(m[1]!)) return null;
+	const range = stripTags(m[2]!);
+	return { range: normalizeDashes(range), body: inner };
+}
+
+export function parseCommentaryFile(html: string): CommentaryFile | null {
+	const head = html.match(COMMENTARY_HEADING_RE);
+	if (!head) return null;
+	const bookName = head[1]!.replace(/\s+/g, ' ').trim();
+
+	const entries: CommentaryEntry[] = [];
+	let m: RegExpExecArray | null;
+	ENTRY_BLOCK_RE.lastIndex = 0;
+	while ((m = ENTRY_BLOCK_RE.exec(html))) {
+		const inner = m[1]!;
+		const entry = extractRangeAndBody(inner);
+		if (!entry) continue;
+		const ccc = parseCccLinks(entry.body);
+		if (ccc.length === 0) continue;
+		entries.push({ range: entry.range, ccc });
+	}
+
+	return { bookName, entries };
+}

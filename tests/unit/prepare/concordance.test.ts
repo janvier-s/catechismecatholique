@@ -1,5 +1,14 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, it, expect } from 'vitest';
-import { parseRange, expandRange, parseCccLinks } from '../../../scripts/prepare/concordance';
+import {
+	parseRange,
+	expandRange,
+	parseCccLinks,
+	parseCommentaryFile
+} from '../../../scripts/prepare/concordance';
+
+const FIX = join(__dirname, 'concordance-fixtures');
 
 describe('parseRange', () => {
 	it('parses a single verse', () => {
@@ -128,5 +137,33 @@ describe('parseCccLinks', () => {
 
 	it('returns [] when there are no catechism links', () => {
 		expect(parseCccLinks('<p>plain text</p>')).toEqual([]);
+	});
+});
+
+describe('parseCommentaryFile', () => {
+	it('returns null for non-commentary files', () => {
+		const html = readFileSync(join(FIX, 'genesis-text.html'), 'utf8');
+		expect(parseCommentaryFile(html)).toBeNull();
+	});
+
+	it('extracts book name and entries from a commentary file', () => {
+		const html = readFileSync(join(FIX, 'genesis-commentary.html'), 'utf8');
+		const result = parseCommentaryFile(html);
+		expect(result).not.toBeNull();
+		expect(result!.bookName).toBe('Genesis');
+		expect(result!.entries).toEqual([
+			{ range: '1-3', ccc: [121, 122, 123, 199] },
+			{ range: '1:1', ccc: [268] },
+			{ range: '1:26-29', ccc: [295, 296] }
+		]);
+	});
+
+	it('skips entries with empty ccc lists', () => {
+		const html = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#x">1:1</a> No CCC here.</p>
+    </body></html>`;
+		const result = parseCommentaryFile(html);
+		expect(result!.entries).toEqual([]);
 	});
 });
