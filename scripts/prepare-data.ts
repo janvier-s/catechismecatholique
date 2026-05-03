@@ -118,6 +118,17 @@ async function main() {
 	writeFileSync(join(OUT, 'bible/ncl.json'), JSON.stringify(ncl));
 	endStep(`${Object.keys(ncl).length} books`);
 
+	logStep('building bible verse index');
+	const { buildBibleVerseIndex } = await import('./prepare/bible-verse-index.ts');
+	const { BOOKS } = await import('../src/lib/utils/bibleBookSlug.ts');
+	const verseIdx = buildBibleVerseIndex(ncl, bibleIdx, BOOKS);
+	writeFileSync(join(OUT, 'ccc/bible-verse-index.json'), JSON.stringify(verseIdx));
+	const verseCount = Object.values(verseIdx).reduce(
+		(t, byCh) => t + Object.values(byCh).reduce((c, byV) => c + Object.keys(byV).length, 0),
+		0
+	);
+	endStep(`${verseCount} verses indexed`);
+
 	const elapsed = ((performance.now() - start) / 1000).toFixed(2);
 	process.stdout.write(`\nprepare-data complete in ${elapsed}s\n`);
 }

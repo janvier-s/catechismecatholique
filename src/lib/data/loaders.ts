@@ -3,7 +3,8 @@ import type {
 	Chapter,
 	AbbreviationMap,
 	ParagraphContext,
-	SourceEntry
+	SourceEntry,
+	BibleVerseIndex
 } from './types';
 
 type Fetch = typeof fetch;
@@ -42,4 +43,8 @@ export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, numb
 
 export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]> {
 	return fetchJson<SourceEntry[]>('/data/ccc/sources-index.json', fetcher);
+}
+
+export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseIndex> {
+	return fetchJson<BibleVerseIndex>('/data/ccc/bible-verse-index.json', fetcher);
 }
