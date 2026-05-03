@@ -16,10 +16,9 @@
 
 	function onClick(e: MouseEvent) {
 		e.preventDefault();
-		// J4 extends PanelContext + PanelTab; cast until then.
 		openPanel(
-			{ paragraph: 0, verseUsfx: bookUsfx, verseChapter: chapter, verseVerse: verse } as never,
-			'bible-verse' as never
+			{ paragraph: 0, verseUsfx: bookUsfx, verseChapter: chapter, verseVerse: verse },
+			'bible-verse'
 		);
 	}
 </script>

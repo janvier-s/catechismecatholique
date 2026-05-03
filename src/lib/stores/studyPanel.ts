@@ -1,9 +1,14 @@
 import { writable } from 'svelte/store';
 
-export type PanelTab = 'bible' | 'cross-refs' | 'cited-by' | 'sources' | 'en-bref';
+export type PanelTab = 'bible' | 'cross-refs' | 'cited-by' | 'sources' | 'en-bref' | 'bible-verse';
 
 export interface PanelContext {
 	paragraph: number;
+	// Set when the panel was opened from a Bible verse marker. When present,
+	// the only meaningful tab is 'bible-verse'.
+	verseUsfx?: string;
+	verseChapter?: number;
+	verseVerse?: number;
 }
 
 export interface PanelState {

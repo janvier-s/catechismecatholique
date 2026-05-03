@@ -16,6 +16,8 @@
 	import TabCitedBy from './TabCitedBy.svelte';
 	import TabEnBref from './TabEnBref.svelte';
 	import TabSources from './TabSources.svelte';
+	import TabBibleVerse from './TabBibleVerse.svelte';
+	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
 	let panelEl: HTMLElement | undefined = $state();
 	let dragging = $state(false);
@@ -98,6 +100,11 @@
 	// Visible tabs depend on what data is available for the current paragraph.
 	const visibleTabs: TabDef[] = $derived.by(() => {
 		const out: TabDef[] = [];
+		// Bible-verse mode: only one tab is meaningful.
+		const ctx = $studyPanel.context;
+		if (ctx?.verseUsfx) {
+			return [{ id: 'bible-verse', label: 'CEC' }];
+		}
 		if (!paragraph) return ALL_TABS;
 		const hasBible = paragraph.bible_refs.length > 0;
 		const hasCrossRefs = paragraph.cross_refs.length > 0;
@@ -171,7 +178,13 @@
 		>
 			<header class="flex items-center justify-between px-3 py-2 border-b border-border font-ui">
 				<div>
-					{#if $studyPanel.context}
+					{#if $studyPanel.context?.verseUsfx}
+						<span class="text-accent font-semibold tabular-nums">
+							{BOOKS.find((b) => b.usfx === $studyPanel.context!.verseUsfx)?.frenchName ?? ''}
+							{$studyPanel.context.verseChapter},
+							{$studyPanel.context.verseVerse}
+						</span>
+					{:else if $studyPanel.context}
 						<a
 							href="/ccc/{$studyPanel.context.paragraph}"
 							class="text-accent font-semibold hover:underline tabular-nums"
@@ -218,6 +231,8 @@
 						<TabEnBref />
 					{:else if $studyPanel.activeTab === 'sources'}
 						<TabSources />
+					{:else if $studyPanel.activeTab === 'bible-verse'}
+						<TabBibleVerse />
 					{/if}
 				</div>
 			{/if}
