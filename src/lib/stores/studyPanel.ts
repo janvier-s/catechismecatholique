@@ -9,6 +9,9 @@ export interface PanelContext {
 	verseUsfx?: string;
 	verseChapter?: number;
 	verseVerse?: number;
+	// data-idx of the bible_refs entry the user clicked, so the Bible tab can
+	// scroll to and highlight that specific reference among the paragraph's refs.
+	bibleRefIdx?: number;
 }
 
 export interface PanelState {

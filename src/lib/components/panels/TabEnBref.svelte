@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { get } from 'svelte/store';
+	import { page } from '$app/state';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 	import { loadParagraphContexts, loadChapter, loadParagraph } from '$lib/data/loaders';
 	import type { ParagraphContext, Paragraph, Chapter } from '$lib/data/types';
@@ -32,23 +33,50 @@
 			}
 			const chapter: Chapter = await loadChapter(context.chapter.slug);
 
-			// Filter to only the en_bref(s) belonging to the same article as the current paragraph,
-			// when an article context is known. Match by paragraph-range overlap with the article.
+			// Scope candidates to the heading section(s) the user is reading. Each
+			// en_bref summarises the heading section immediately preceding it, so
+			// showing every en_bref in the article (which can span hundreds of
+			// paragraphs) buries the relevant one. A heading's range runs from
+			// its paragraph_start to one before the next heading's start (or to
+			// the end of the article if it's the last heading).
+			//
+			// For range URLs (/ccc/N-M) every heading overlapping [N, M] is in
+			// scope, so a reader on /ccc/218-223 — which spans both heading III
+			// (214–221) and heading IV (222–231) — sees IV's en_bref (228–231)
+			// regardless of which paragraph opened the panel.
 			const article = chapter.articles.find((a) => a.slug === context!.article?.slug);
 			const candidates = chapter.en_brefs ?? [];
 
-			const inArticle = (block: { paragraphs: number[] }) => {
-				if (!article) return true; // no article context — show all chapter en_brefs
+			const rangeMatch = page.url.pathname.match(/^\/ccc\/(\d+)(?:-(\d+))?$/);
+			const viewFrom = rangeMatch ? parseInt(rangeMatch[1]!, 10) : ctx.paragraph;
+			const viewTo = rangeMatch?.[2] ? parseInt(rangeMatch[2], 10) : viewFrom;
+
+			const headings = (article?.headings ?? chapter.headings ?? [])
+				.slice()
+				.sort((a, b) => a.paragraph_start - b.paragraph_start);
+			const articleMax = article?.paragraphs.at(-1) ?? chapter.paragraphs.at(-1) ?? Infinity;
+
+			const headingRanges: { from: number; to: number }[] = [];
+			for (let i = 0; i < headings.length; i++) {
+				const start = headings[i]!.paragraph_start;
+				const end = headings[i + 1] ? headings[i + 1]!.paragraph_start - 1 : articleMax;
+				if (start <= viewTo && end >= viewFrom) headingRanges.push({ from: start, to: end });
+			}
+
+			const inScope = (block: { paragraphs: number[] }) => {
 				if (block.paragraphs.length === 0) return false;
 				const first = block.paragraphs[0]!;
-				const articleParas = article.paragraphs;
-				if (articleParas.length === 0) return false;
-				const articleMin = articleParas[0]!;
-				const articleMax = articleParas[articleParas.length - 1]!;
+				if (headingRanges.length > 0) {
+					return headingRanges.some((r) => first >= r.from && first <= r.to);
+				}
+				// No heading context — fall back to article range so we still
+				// avoid leaking en_brefs from other articles.
+				if (!article) return true;
+				const articleMin = article.paragraphs[0] ?? 0;
 				return first >= articleMin && first <= articleMax;
 			};
 
-			const filtered = candidates.filter(inArticle);
+			const filtered = candidates.filter(inScope);
 			const result: Block[] = [];
 			for (const block of filtered) {
 				if (block.paragraphs.length === 0) continue;
