@@ -223,7 +223,7 @@
 									title: article.title,
 									number: article.number,
 									typeLabel: 'Article',
-									href: `/ccc/${article.paragraphs[0]}-${article.paragraphs[article.paragraphs.length - 1]}`
+									href: `/ccc/${part.slug}/${section.slug}/${article.slug}`
 								})
 							)
 						]
