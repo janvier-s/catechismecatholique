@@ -59,6 +59,14 @@
 	font-display: fallback;
 }
 
+@font-face {
+	font-family: 'Libre Baskerville';
+	src: url('/fonts/LibreBaskerville-Italic.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
 @layer base {
 	:root {
 		--color-bg: #f8f5ef;
