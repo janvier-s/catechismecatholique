@@ -73,6 +73,13 @@
 			hasEnBref = false;
 			return;
 		}
+		// Bible-verse mode has no paragraph context; TabBibleVerse loads its own data.
+		if (ctx.verseUsfx) {
+			paragraph = null;
+			citedByList = [];
+			hasEnBref = false;
+			return;
+		}
 		(async () => {
 			const [p, citedBy, ctxs] = await Promise.all([
 				loadParagraph(ctx.paragraph),
