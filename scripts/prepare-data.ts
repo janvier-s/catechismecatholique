@@ -1,5 +1,13 @@
 #!/usr/bin/env tsx
-import { mkdirSync, rmSync, existsSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import {
+	mkdirSync,
+	rmSync,
+	existsSync,
+	lstatSync,
+	readFileSync,
+	writeFileSync,
+	readdirSync
+} from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { logHeader, logStep, endStep, assert } from './prepare/validators.ts';
@@ -24,8 +32,17 @@ async function main() {
 	const start = performance.now();
 	logHeader('prepare-data');
 
-	// Wipe + recreate output dir
-	if (existsSync(OUT)) rmSync(OUT, { recursive: true });
+	// Wipe + recreate output dir. If OUT is a symlink (e.g. when
+	// bin/use-local-data-cache.sh has been used to escape iCloud
+	// eviction), preserve the link and clear its target's contents
+	// instead of deleting the link itself.
+	if (existsSync(OUT)) {
+		if (lstatSync(OUT).isSymbolicLink()) {
+			for (const f of readdirSync(OUT)) rmSync(join(OUT, f), { recursive: true });
+		} else {
+			rmSync(OUT, { recursive: true });
+		}
+	}
 	mkdirSync(join(OUT, 'ccc'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/paragraphs'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/chapters'), { recursive: true });
