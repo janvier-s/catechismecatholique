@@ -22,8 +22,11 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# Generated data (rebuilt by prepare-data)
-/static/data/
+# Generated data (rebuilt by prepare-data) — covers both the directory
+# and the symlink form (and any iCloud-collision duplicate like
+# "static/data 2") used by bin/use-local-data-cache.sh
+/static/data
+/static/data?*
 
 # Brainstorming local artifacts
 .superpowers/
