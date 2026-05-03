@@ -77,7 +77,13 @@ export interface ChapterHeading {
 	paragraph_start: number;
 }
 
-export type StructureNodeType = 'part' | 'section' | 'chapter' | 'article' | 'heading' | 'sub_heading';
+export type StructureNodeType =
+	| 'part'
+	| 'section'
+	| 'chapter'
+	| 'article'
+	| 'heading'
+	| 'sub_heading';
 
 export interface StructureNode {
 	type: StructureNodeType | 'paragraph';

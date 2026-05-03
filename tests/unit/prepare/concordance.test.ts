@@ -182,15 +182,11 @@ describe('parseCommentaryFile', () => {
 describe('buildConcordance', () => {
 	const ncl = {
 		GEN: {
-			'1': Object.fromEntries(
-				Array.from({ length: 31 }, (_, i) => [String(i + 1), `v${i + 1}`])
-			)
+			'1': Object.fromEntries(Array.from({ length: 31 }, (_, i) => [String(i + 1), `v${i + 1}`]))
 		}
 	};
 
-	const books: BookInfo[] = [
-		{ usfx: 'GEN', slug: 'genese', frenchName: 'Genèse', abbrs: ['Gn'] }
-	];
+	const books: BookInfo[] = [{ usfx: 'GEN', slug: 'genese', frenchName: 'Genèse', abbrs: ['Gn'] }];
 
 	const knownParas = new Set([121, 122, 123, 199, 268, 295, 296]);
 
