@@ -139,6 +139,8 @@ export function expandRange(
 }
 
 const CCC_HREF_RE = /vatican\.va\/archive\/ccc_css\/archive\/catechism\//i;
+// Didache HTML uses double-quoted href attributes exclusively; we don't
+// match single-quoted forms.
 const ANCHOR_RE = /<a\s+[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
 
 /**
@@ -166,7 +168,11 @@ function parseParagraphList(text: string): number[] {
 		if (!m) continue;
 		const lo = +m[1]!;
 		const hi = m[2] ? +m[2]! : lo;
-		if (hi < lo || hi - lo > 200) continue; // sanity guard
+		if (hi < lo) continue;
+		if (hi - lo > 500) {
+			console.warn(`[concordance] dropping suspiciously large paragraph range: ${lo}-${hi}`);
+			continue;
+		}
 		for (let n = lo; n <= hi; n++) out.push(n);
 	}
 	return out;
