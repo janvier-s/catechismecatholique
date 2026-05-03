@@ -4,6 +4,7 @@ import {
 	rmSync,
 	existsSync,
 	lstatSync,
+	statSync,
 	readFileSync,
 	writeFileSync,
 	readdirSync
@@ -167,7 +168,9 @@ async function main() {
 
 		const htmlFiles: string[] = [];
 		try {
-			const stat = lstatSync(sourceDir);
+			// Use statSync (follows symlinks) so DIDACHE_SOURCE_DIR can
+			// be a symlink to the real source directory.
+			const stat = statSync(sourceDir);
 			if (!stat.isDirectory()) throw new Error(`not a directory: ${sourceDir}`);
 			const entries = readdirSync(sourceDir, { withFileTypes: true, recursive: true });
 			for (const ent of entries) {
