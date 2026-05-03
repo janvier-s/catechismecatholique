@@ -3,6 +3,8 @@
 	import Wordmark from './Wordmark.svelte';
 	import ModeToggle from './ModeToggle.svelte';
 	import CatechismDropdown from './CatechismDropdown.svelte';
+	import { goto } from '$app/navigation';
+	import { detectIntent } from '$lib/utils/searchIntent';
 </script>
 
 <header class="border-b border-border bg-background sticky top-0 z-30">
@@ -13,15 +15,30 @@
 		</a>
 
 		<div class="flex-1"></div>
-		<div class="hidden lg:block w-full max-w-[460px]">
+		<form
+			class="hidden lg:block w-full max-w-[460px]"
+			onsubmit={(e) => {
+				e.preventDefault();
+				const q = (
+					(new FormData(e.currentTarget as HTMLFormElement).get('q') as string) ?? ''
+				).trim();
+				if (!q) return;
+				const intent = detectIntent(q);
+				if (intent.kind === 'paragraph' || intent.kind === 'bible') {
+					void goto(intent.href);
+				} else {
+					void goto(`/recherche?q=${encodeURIComponent(intent.q)}`);
+				}
+			}}
+		>
 			<input
 				type="search"
-				placeholder="Chercher § 27, Mt 28:19, péché originel…"
-				class="w-full h-10 px-4 rounded-md border border-border bg-background text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
-				disabled
-				aria-label="Recherche (à venir)"
+				name="q"
+				placeholder="Chercher § 27, Mt 1, 14, péché originel…"
+				class="w-full h-10 px-4 rounded-md border border-border bg-background text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+				aria-label="Recherche"
 			/>
-		</div>
+		</form>
 		<div class="flex-1"></div>
 
 		<nav class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none">
