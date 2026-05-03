@@ -1,6 +1,5 @@
-// referenced in later tasks (M3-M5)
-// import type { ConcordanceVerseIndex } from '../../src/lib/data/types';
-// import type { BookInfo } from '../../src/lib/utils/bibleBookSlug';
+import type { ConcordanceVerseIndex } from '../../src/lib/data/types';
+import type { BookInfo } from '../../src/lib/utils/bibleBookSlug';
 
 export interface ParsedRange {
 	fromCh: number;
@@ -246,4 +245,171 @@ export function parseCommentaryFile(html: string): CommentaryFile | null {
 	}
 
 	return { bookName, entries };
+}
+
+export interface BuildStats {
+	filesScanned: number;
+	commentaryFiles: number;
+	entriesProcessed: number;
+	unknownBooks: string[];
+	unknownParagraphs: number[];
+	unparseableRanges: string[];
+}
+
+export interface BuildResult {
+	index: ConcordanceVerseIndex;
+	stats: BuildStats;
+}
+
+export const DIDACHE_BOOK_TO_USFX: Record<string, string> = {
+	Genesis: 'GEN',
+	Exodus: 'EXO',
+	Leviticus: 'LEV',
+	Numbers: 'NUM',
+	Deuteronomy: 'DEU',
+	Joshua: 'JOS',
+	Judges: 'JDG',
+	Ruth: 'RUT',
+	'1 Samuel': '1SA',
+	'2 Samuel': '2SA',
+	'1 Kings': '1KI',
+	'2 Kings': '2KI',
+	'1 Chronicles': '1CH',
+	'2 Chronicles': '2CH',
+	Ezra: 'EZR',
+	Nehemiah: 'NEH',
+	Tobit: 'TOB',
+	Judith: 'JDT',
+	Esther: 'EST',
+	'1 Maccabees': '1MA',
+	'2 Maccabees': '2MA',
+	Job: 'JOB',
+	'the Psalms': 'PSA',
+	Proverbs: 'PRO',
+	Ecclesiastes: 'ECC',
+	'the Song of Solomon': 'SNG',
+	'the Wisdom of Solomon': 'WIS',
+	Sirach: 'SIR',
+	Isaiah: 'ISA',
+	Jeremiah: 'JER',
+	Lamentations: 'LAM',
+	Baruch: 'BAR',
+	Ezekiel: 'EZK',
+	Daniel: 'DAN',
+	Hosea: 'HOS',
+	Joel: 'JOL',
+	Amos: 'AMO',
+	Obadiah: 'OBA',
+	Jonah: 'JON',
+	Micah: 'MIC',
+	Nahum: 'NAM',
+	Habakkuk: 'HAB',
+	Zephaniah: 'ZEP',
+	Haggai: 'HAG',
+	Zechariah: 'ZEC',
+	Malachi: 'MAL',
+	Matthew: 'MAT',
+	Mark: 'MRK',
+	Luke: 'LUK',
+	'the Gospel of John': 'JHN',
+	'the Acts of the Apostles': 'ACT',
+	Romans: 'ROM',
+	'1 Corinthians': '1CO',
+	'2 Corinthians': '2CO',
+	Galatians: 'GAL',
+	Ephesians: 'EPH',
+	Philippians: 'PHP',
+	Colossians: 'COL',
+	'1 Thessalonians': '1TH',
+	'2 Thessalonians': '2TH',
+	'1 Timothy': '1TI',
+	'2 Timothy': '2TI',
+	Titus: 'TIT',
+	Philemon: 'PHM',
+	Hebrews: 'HEB',
+	James: 'JAS',
+	'1 Peter': '1PE',
+	'2 Peter': '2PE',
+	'1 John': '1JN',
+	'2 John': '2JN',
+	'3 John': '3JN',
+	Jude: 'JUD',
+	Revelation: 'REV'
+};
+
+export function buildConcordance(
+	htmlFiles: string[],
+	ncl: Ncl,
+	knownParas: Set<number>,
+	books: BookInfo[]
+): BuildResult {
+	const validUsfx = new Set(books.map((b) => b.usfx));
+	const stats: BuildStats = {
+		filesScanned: htmlFiles.length,
+		commentaryFiles: 0,
+		entriesProcessed: 0,
+		unknownBooks: [],
+		unknownParagraphs: [],
+		unparseableRanges: []
+	};
+	const unknownBookSet = new Set<string>();
+	const unknownParaSet = new Set<number>();
+	const unparseableSet = new Set<string>();
+
+	const index: ConcordanceVerseIndex = {};
+
+	const add = (usfx: string, ch: number, v: number, paras: number[]) => {
+		const byCh = (index[usfx] ??= {});
+		const byV = (byCh[String(ch)] ??= {});
+		const arr = (byV[String(v)] ??= []);
+		for (const p of paras) if (!arr.includes(p)) arr.push(p);
+	};
+
+	for (const html of htmlFiles) {
+		const file = parseCommentaryFile(html);
+		if (!file) continue;
+		stats.commentaryFiles++;
+
+		const usfx = DIDACHE_BOOK_TO_USFX[file.bookName];
+		if (!usfx || !validUsfx.has(usfx)) {
+			unknownBookSet.add(file.bookName);
+			continue;
+		}
+
+		for (const entry of file.entries) {
+			const range = parseRange(entry.range);
+			if (!range) {
+				unparseableSet.add(entry.range);
+				continue;
+			}
+
+			const filteredParas: number[] = [];
+			for (const p of entry.ccc) {
+				if (knownParas.has(p)) filteredParas.push(p);
+				else unknownParaSet.add(p);
+			}
+			if (filteredParas.length === 0) continue;
+
+			const targets = expandRange(usfx, range, ncl);
+			for (const { ch, v } of targets) {
+				add(usfx, ch, v, filteredParas);
+			}
+			stats.entriesProcessed++;
+		}
+	}
+
+	// Sort each verse's array
+	for (const usfx of Object.keys(index)) {
+		const byCh = index[usfx]!;
+		for (const ch of Object.keys(byCh)) {
+			const byV = byCh[ch]!;
+			for (const v of Object.keys(byV)) byV[v]!.sort((a, b) => a - b);
+		}
+	}
+
+	stats.unknownBooks = Array.from(unknownBookSet).sort();
+	stats.unknownParagraphs = Array.from(unknownParaSet).sort((a, b) => a - b);
+	stats.unparseableRanges = Array.from(unparseableSet).sort();
+
+	return { index, stats };
 }

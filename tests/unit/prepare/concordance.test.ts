@@ -5,8 +5,10 @@ import {
 	parseRange,
 	expandRange,
 	parseCccLinks,
-	parseCommentaryFile
+	parseCommentaryFile,
+	buildConcordance
 } from '../../../scripts/prepare/concordance';
+import type { BookInfo } from '../../../src/lib/utils/bibleBookSlug';
 
 const FIX = join(__dirname, 'concordance-fixtures');
 
@@ -165,5 +167,78 @@ describe('parseCommentaryFile', () => {
     </body></html>`;
 		const result = parseCommentaryFile(html);
 		expect(result!.entries).toEqual([]);
+	});
+});
+
+describe('buildConcordance', () => {
+	const ncl = {
+		GEN: {
+			'1': Object.fromEntries(
+				Array.from({ length: 31 }, (_, i) => [String(i + 1), `v${i + 1}`])
+			)
+		}
+	};
+
+	const books: BookInfo[] = [
+		{ usfx: 'GEN', slug: 'genese', frenchName: 'Genèse', abbrs: ['Gn'] }
+	];
+
+	const knownParas = new Set([121, 122, 123, 199, 268, 295, 296]);
+
+	it('builds a per-verse index from a single commentary file', () => {
+		const html = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6" id="x"><a href="index_split_018.html#filepos1">1:1</a> Foo
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">268</a>)</p>
+      <p class="calibre_6" id="y"><a href="index_split_018.html#filepos2">1:26-29</a> Bar
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">295-296</a>)</p>
+    </body></html>`;
+		const result = buildConcordance([html], ncl, knownParas, books);
+		expect(result.index.GEN!['1']!['1']).toEqual([268]);
+		expect(result.index.GEN!['1']!['26']).toEqual([295, 296]);
+		expect(result.index.GEN!['1']!['27']).toEqual([295, 296]);
+		expect(result.index.GEN!['1']!['28']).toEqual([295, 296]);
+		expect(result.index.GEN!['1']!['29']).toEqual([295, 296]);
+		expect(result.index.GEN!['1']!['2']).toBeUndefined();
+		expect(result.stats.entriesProcessed).toBe(2);
+		expect(result.stats.unknownBooks).toEqual([]);
+		expect(result.stats.unknownParagraphs).toEqual([]);
+	});
+
+	it('records unknown CCC paragraph numbers and drops them', () => {
+		const html = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">1:1</a>
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">268, 99999</a>)</p>
+    </body></html>`;
+		const result = buildConcordance([html], ncl, knownParas, books);
+		expect(result.index.GEN!['1']!['1']).toEqual([268]);
+		expect(result.stats.unknownParagraphs).toEqual([99999]);
+	});
+
+	it('records unknown book names and drops their entries', () => {
+		const html = `<html><body>
+      <p class="calibre_3">Commentary on Frobotz</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">1:1</a>
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">268</a>)</p>
+    </body></html>`;
+		const result = buildConcordance([html], ncl, knownParas, books);
+		expect(result.index).toEqual({});
+		expect(result.stats.unknownBooks).toEqual(['Frobotz']);
+	});
+
+	it('merges multiple commentary files for the same book', () => {
+		const a = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">1:1</a>
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">268</a>)</p>
+    </body></html>`;
+		const b = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos2">1:1</a>
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">295</a>)</p>
+    </body></html>`;
+		const result = buildConcordance([a, b], ncl, knownParas, books);
+		expect(result.index.GEN!['1']!['1']).toEqual([268, 295]);
 	});
 });
