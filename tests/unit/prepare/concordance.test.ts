@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseRange, expandRange } from '../../../scripts/prepare/concordance';
+import { parseRange, expandRange, parseCccLinks } from '../../../scripts/prepare/concordance';
 
 describe('parseRange', () => {
 	it('parses a single verse', () => {
@@ -87,5 +87,46 @@ describe('expandRange', () => {
 			{ ch: 2, v: 2 },
 			{ ch: 3, v: 1 }
 		]);
+	});
+});
+
+describe('parseCccLinks', () => {
+	it('extracts a single paragraph number', () => {
+		const html = `(CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">199</a>)`;
+		expect(parseCccLinks(html)).toEqual([199]);
+	});
+
+	it('extracts a comma-separated list', () => {
+		const html = `<a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">280, 289</a>`;
+		expect(parseCccLinks(html)).toEqual([280, 289]);
+	});
+
+	it('expands a paragraph range', () => {
+		const html = `<a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">337-340</a>`;
+		expect(parseCccLinks(html)).toEqual([337, 338, 339, 340]);
+	});
+
+	it('handles multiple anchors with mixed content', () => {
+		const html = `(CCC
+      <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">295-299, 309-310</a>,
+      <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p2.htm">2402</a>;
+      <a href="http://www.vatican.va/roman_curia/foo.html">CSDC 108</a>)`;
+		expect(parseCccLinks(html)).toEqual([295, 296, 297, 298, 299, 309, 310, 2402]);
+	});
+
+	it('ignores non-catechism vatican links', () => {
+		const html = `<a href="http://www.vatican.va/roman_curia/foo">100</a>`;
+		expect(parseCccLinks(html)).toEqual([]);
+	});
+
+	it('deduplicates and sorts ascending', () => {
+		const html = `
+      <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/x.htm">5, 3</a>
+      <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/y.htm">3, 7</a>`;
+		expect(parseCccLinks(html)).toEqual([3, 5, 7]);
+	});
+
+	it('returns [] when there are no catechism links', () => {
+		expect(parseCccLinks('<p>plain text</p>')).toEqual([]);
 	});
 });

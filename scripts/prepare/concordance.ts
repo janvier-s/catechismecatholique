@@ -137,3 +137,55 @@ export function expandRange(
 	}
 	return out;
 }
+
+const CCC_HREF_RE = /vatican\.va\/archive\/ccc_css\/archive\/catechism\//i;
+const ANCHOR_RE = /<a\s+[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
+
+/**
+ * Strip nested HTML tags from anchor inner text and return the visible content.
+ * Preserves digits, commas, hyphens, en-dash, em-dash, whitespace.
+ */
+function stripTags(html: string): string {
+	return html.replace(/<[^>]+>/g, '').trim();
+}
+
+/**
+ * Parse a single anchor's text payload into a list of paragraph numbers.
+ * Examples:
+ *   "199"          → [199]
+ *   "280, 289"     → [280, 289]
+ *   "337-340"      → [337, 338, 339, 340]
+ *   "295-299, 309-310" → [295,296,297,298,299,309,310]
+ */
+function parseParagraphList(text: string): number[] {
+	const cleaned = normalizeDashes(text).replace(/\s+/g, '');
+	if (!cleaned) return [];
+	const out: number[] = [];
+	for (const part of cleaned.split(',')) {
+		const m = part.match(/^(\d+)(?:-(\d+))?$/);
+		if (!m) continue;
+		const lo = +m[1]!;
+		const hi = m[2] ? +m[2]! : lo;
+		if (hi < lo || hi - lo > 200) continue; // sanity guard
+		for (let n = lo; n <= hi; n++) out.push(n);
+	}
+	return out;
+}
+
+/**
+ * Walk every <a> in the given HTML fragment; for those whose href points to
+ * the CCC, parse the inner text as a paragraph list and accumulate. Result
+ * is sorted ascending and deduplicated.
+ */
+export function parseCccLinks(html: string): number[] {
+	const set = new Set<number>();
+	let m: RegExpExecArray | null;
+	ANCHOR_RE.lastIndex = 0;
+	while ((m = ANCHOR_RE.exec(html))) {
+		const href = m[1]!;
+		if (!CCC_HREF_RE.test(href)) continue;
+		const inner = stripTags(m[2]!);
+		for (const n of parseParagraphList(inner)) set.add(n);
+	}
+	return Array.from(set).sort((a, b) => a - b);
+}
