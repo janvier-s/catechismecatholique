@@ -20,8 +20,12 @@ function normalizeDashes(s: string): string {
  * Returns null if no recognized form matches.
  */
 export function parseRange(input: string): ParsedRange | null {
-	const s = normalizeDashes(input).trim();
+	let s = normalizeDashes(input).trim();
 	if (!s) return null;
+
+	// Strip sub-verse letter suffixes ("19:25a", "19:25b") — the NCL bible
+	// JSON doesn't distinguish sub-verses, so collapse to the parent verse.
+	s = s.replace(/^(\d+:\d+)[a-z]$/i, '$1').replace(/^(\d+:\d+)-(\d+)[a-z]$/i, '$1-$2');
 
 	// Cross-chapter verse range: "1:1-11:26"
 	let m = s.match(/^(\d+):(\d+)-(\d+):(\d+)$/);
@@ -254,6 +258,7 @@ export interface BuildStats {
 	unknownBooks: string[];
 	unknownParagraphs: number[];
 	unparseableRanges: string[];
+	booksWithZeroEntries: string[]; // Books whose commentary file matched but produced no entries (narrative-only or all CCC links missing)
 }
 
 export interface BuildResult {
@@ -350,11 +355,13 @@ export function buildConcordance(
 		entriesProcessed: 0,
 		unknownBooks: [],
 		unknownParagraphs: [],
-		unparseableRanges: []
+		unparseableRanges: [],
+		booksWithZeroEntries: []
 	};
 	const unknownBookSet = new Set<string>();
 	const unknownParaSet = new Set<number>();
 	const unparseableSet = new Set<string>();
+	const booksWithZeroEntriesSet = new Set<string>();
 
 	const index: ConcordanceVerseIndex = {};
 
@@ -376,6 +383,7 @@ export function buildConcordance(
 			continue;
 		}
 
+		let producedAny = false;
 		for (const entry of file.entries) {
 			const range = parseRange(entry.range);
 			if (!range) {
@@ -393,9 +401,11 @@ export function buildConcordance(
 			const targets = expandRange(usfx, range, ncl);
 			for (const { ch, v } of targets) {
 				add(usfx, ch, v, filteredParas);
+				producedAny = true;
 			}
 			stats.entriesProcessed++;
 		}
+		if (!producedAny) booksWithZeroEntriesSet.add(file.bookName);
 	}
 
 	// Sort each verse's array
@@ -410,6 +420,7 @@ export function buildConcordance(
 	stats.unknownBooks = Array.from(unknownBookSet).sort();
 	stats.unknownParagraphs = Array.from(unknownParaSet).sort((a, b) => a - b);
 	stats.unparseableRanges = Array.from(unparseableSet).sort();
+	stats.booksWithZeroEntries = Array.from(booksWithZeroEntriesSet).sort();
 
 	return { index, stats };
 }

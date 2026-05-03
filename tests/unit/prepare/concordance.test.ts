@@ -41,6 +41,15 @@ describe('parseRange', () => {
 		expect(parseRange('foo')).toBeNull();
 		expect(parseRange('')).toBeNull();
 	});
+
+	it('strips sub-verse letter suffixes from single verse', () => {
+		expect(parseRange('19:25a')).toEqual({ fromCh: 19, toCh: 19, fromV: 25, toV: 25 });
+		expect(parseRange('19:25b')).toEqual({ fromCh: 19, toCh: 19, fromV: 25, toV: 25 });
+	});
+
+	it('strips sub-verse letter suffix from end of verse range', () => {
+		expect(parseRange('19:25-26a')).toEqual({ fromCh: 19, toCh: 19, fromV: 25, toV: 26 });
+	});
 });
 
 describe('expandRange', () => {
@@ -225,6 +234,17 @@ describe('buildConcordance', () => {
 		const result = buildConcordance([html], ncl, knownParas, books);
 		expect(result.index).toEqual({});
 		expect(result.stats.unknownBooks).toEqual(['Frobotz']);
+		expect(result.stats.booksWithZeroEntries).toEqual([]);
+	});
+
+	it('records books whose commentary file produced zero entries', () => {
+		const html = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">1:1</a> No CCC here.</p>
+    </body></html>`;
+		const result = buildConcordance([html], ncl, knownParas, books);
+		expect(result.index).toEqual({});
+		expect(result.stats.booksWithZeroEntries).toEqual(['Genesis']);
 	});
 
 	it('merges multiple commentary files for the same book', () => {
