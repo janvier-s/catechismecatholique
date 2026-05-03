@@ -5,6 +5,7 @@ import type {
 	ParagraphContext,
 	SourceEntry,
 	BibleVerseIndex,
+	ConcordanceVerseIndex,
 	GlossaryBundle
 } from './types';
 
@@ -48,6 +49,14 @@ export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]>
 
 export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseIndex> {
 	return fetchJson<BibleVerseIndex>('/data/ccc/bible-verse-index.json', fetcher);
+}
+
+export async function loadConcordanceVerseIndex(
+	fetcher: Fetch = fetch
+): Promise<ConcordanceVerseIndex> {
+	const r = await fetcher('/data/ccc/concordance-verse-index.json');
+	if (!r.ok) return {};
+	return (await r.json()) as ConcordanceVerseIndex;
 }
 
 export function loadGlossary(fetcher: Fetch = fetch): Promise<GlossaryBundle> {
