@@ -4,6 +4,7 @@
 	import type { Paragraph } from '$lib/data/types';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 	import ParagraphRenderer from '../ccc/ParagraphRenderer.svelte';
+	import CitationBlock from '../ccc/CitationBlock.svelte';
 
 	let {
 		numbers,
@@ -38,7 +39,15 @@
 					CEC {p.number}
 				</a>
 				<div class="font-body text-[15px] leading-relaxed">
-					<ParagraphRenderer html={p.text_html} paragraphNumber={p.number} inPanel />
+					<ParagraphRenderer
+						html={p.text_html}
+						bibleRefs={p.magisterial_refs}
+						paragraphNumber={p.number}
+						inPanel
+					/>
+					{#each p.citations as cite, i (i)}
+						<CitationBlock html={cite.text_html} />
+					{/each}
 				</div>
 			</div>
 		{/each}
