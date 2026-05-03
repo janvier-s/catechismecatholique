@@ -41,8 +41,10 @@ async function loadIndex(
 	return ms;
 }
 
+const MAX_QUERY_LEN = 200;
+
 export const GET: RequestHandler = async ({ url, fetch, platform }) => {
-	const q = url.searchParams.get('q')?.trim() ?? '';
+	const q = (url.searchParams.get('q')?.trim() ?? '').slice(0, MAX_QUERY_LEN);
 	if (q.length < 2) return json({ q, hits: [] });
 	const ms = await loadIndex(platform, fetch);
 	const raw = ms.search(q, { prefix: true, fuzzy: 0.15, boost: { title: 2 } }).slice(0, 30);

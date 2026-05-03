@@ -2,7 +2,7 @@
 	let {
 		dimNonCited = $bindable(false),
 		citedCount
-	}: { dimNonCited?: boolean; citedCount: number; totalCount?: number } = $props();
+	}: { dimNonCited?: boolean; citedCount: number } = $props();
 </script>
 
 <div class="mb-4 flex items-center gap-3 font-ui text-xs text-muted">

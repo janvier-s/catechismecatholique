@@ -52,7 +52,7 @@
 		</span>
 	</header>
 
-	<ChapterFilterBar bind:dimNonCited {citedCount} totalCount={verses.length} />
+	<ChapterFilterBar bind:dimNonCited {citedCount} />
 
 	<ChapterView
 		bookSlug={book.slug}

@@ -14,7 +14,12 @@
 
 	function hitHref(h: PageData['hits'][number]): string {
 		if (h.kind === 'paragraph') return `/ccc/${h.number}`;
-		return `/ccc/${h.paragraph_start ?? ''}#${h.id.split('#')[1] ?? ''}`;
+		// Heading hits always have paragraph_start populated by buildSearchIndex,
+		// but the type marks it optional — fall back to the chapter root if absent.
+		const anchor = h.id.split('#')[1] ?? '';
+		if (h.paragraph_start) return `/ccc/${h.paragraph_start}${anchor ? '#' + anchor : ''}`;
+		if (h.chapter_slug) return `/ccc/${h.chapter_slug}${anchor ? '#' + anchor : ''}`;
+		return '/ccc';
 	}
 
 	function hitMatchTerms(h: PageData['hits'][number]): string[] {
@@ -23,7 +28,7 @@
 </script>
 
 <svelte:head>
-	<title>Recherche{data.q ? ` : ${data.q}` : ''} — Catéchisme</title>
+	<title>Recherche{data.q ? ` : ${data.q.slice(0, 80)}` : ''} — Catéchisme</title>
 </svelte:head>
 
 <main class="mx-auto max-w-reader px-6 py-10">
