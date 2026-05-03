@@ -21,4 +21,16 @@ describe('parseSigles', () => {
 		const map = parseSigles(xml);
 		expect(Object.keys(map)).toEqual(['AA']);
 	});
+
+	it('strips a trailing apostrophe-letter artifact', () => {
+		const xml = `<table><tr><td>AA</td><td>Apostolicam actuositatemd'</td></tr></table>`;
+		const map = parseSigles(xml);
+		expect(map['AA']).toBe('Apostolicam actuositatem');
+	});
+
+	it('strips with curly apostrophe', () => {
+		const xml = `<table><tr><td>AA</td><td>Apostolicam actuositatemd'</td></tr></table>`;
+		const map = parseSigles(xml);
+		expect(map['AA']).toBe('Apostolicam actuositatem');
+	});
 });

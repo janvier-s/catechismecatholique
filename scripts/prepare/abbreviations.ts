@@ -40,7 +40,14 @@ export function parseSigles(xml: string): AbbreviationMap {
 			if (tds.length >= 2) {
 				const abbr = textOf(tds[0]!);
 				const expansion = textOf(tds[1]!);
-				if (abbr && expansion) out[abbr] = expansion;
+				if (abbr && expansion) {
+					// Some entries have a trailing letter+apostrophe artifact bleeding in
+					// from the next row (e.g. "Apostolicam actuositatemd'"). Strip a
+					// trailing single letter immediately followed by a straight or curly
+					// apostrophe.
+					const cleaned = expansion.replace(/[A-Za-z]['’]$/u, '').trim();
+					out[abbr] = cleaned;
+				}
 			}
 		}
 	}
