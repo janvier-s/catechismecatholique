@@ -30,7 +30,7 @@
 	title="{count} paragraphe(s) du Catéchisme citent ce verset"
 	onclick={onClick}
 >
-	CEC
+	CEC <span class="tabular-nums">{count}§</span>
 </button>
 
 <style>
