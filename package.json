@@ -12,6 +12,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare-data": "tsx scripts/prepare-data.ts",
+		"upload-index": "tsx scripts/upload-index.ts",
 		"prebuild": "tsx scripts/prepare-data.ts",
 		"optimize-logos": "tsx bin/optimize-logos.ts",
 		"prepare": "svelte-kit sync || echo ''",
