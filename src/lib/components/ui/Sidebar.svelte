@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { fly } from 'svelte/transition';
 	import { sidebarOpen } from '$lib/stores/sidebar';
 	import { loadStructure, loadChapter, loadParagraphContexts } from '$lib/data/loaders';
 	import type { Chapter, ParagraphContext } from '$lib/data/types';
@@ -237,6 +238,7 @@
 {#if $sidebarOpen}
 	<aside
 		class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] w-[280px] bg-panel border-r border-border z-20 flex-none flex-col"
+		transition:fly={{ x: -20, duration: 180 }}
 	>
 		<div class="flex items-center justify-between p-2 border-b border-border">
 			<span class="font-ui text-xs uppercase tracking-wider text-muted ml-2">Sommaire</span>

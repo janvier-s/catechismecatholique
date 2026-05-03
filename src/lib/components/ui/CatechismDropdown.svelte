@@ -1,13 +1,21 @@
 <script lang="ts">
 	import { loadStructure } from '$lib/data/loaders';
 	import { goto } from '$app/navigation';
+	import { fly, fade } from 'svelte/transition';
 
-	type Article = { slug: string; title: string; number?: number };
+	type Heading = { id: string; title: string; level?: number; paragraph_start?: number };
+	type Article = {
+		slug: string;
+		title: string;
+		number?: number;
+		headings?: Heading[];
+	};
 	type Chapter = {
 		slug: string;
 		title: string;
 		number?: number;
 		articles?: Article[];
+		headings?: Heading[];
 	};
 	type Section = {
 		slug: string;
@@ -40,19 +48,11 @@
 
 	$effect(() => {
 		if (!open) return;
-		const onDocClick = (e: MouseEvent) => {
-			if (!(e.target instanceof Element)) return;
-			if (!containerEl?.contains(e.target)) close();
-		};
 		const onEsc = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') close();
 		};
-		document.addEventListener('click', onDocClick);
 		document.addEventListener('keydown', onEsc);
-		return () => {
-			document.removeEventListener('click', onDocClick);
-			document.removeEventListener('keydown', onEsc);
-		};
+		return () => document.removeEventListener('keydown', onEsc);
 	});
 
 	function close() {
@@ -60,6 +60,22 @@
 		activePart = null;
 		activeSection = null;
 		activeChapter = null;
+	}
+
+	// Hover-to-open with a small grace period so the user can move from
+	// the trigger to the menu (or between menu columns) without the menu
+	// closing on them.
+	let closeTimer: ReturnType<typeof setTimeout> | null = null;
+	function openOnHover() {
+		if (closeTimer) {
+			clearTimeout(closeTimer);
+			closeTimer = null;
+		}
+		open = true;
+	}
+	function scheduleClose() {
+		if (closeTimer) clearTimeout(closeTimer);
+		closeTimer = setTimeout(() => close(), 180);
 	}
 
 	// When the section's only structural children are articles_direct (no chapters),
@@ -76,11 +92,18 @@
 	}
 </script>
 
-<div class="relative" bind:this={containerEl}>
+<div
+	class="relative"
+	bind:this={containerEl}
+	onmouseenter={openOnHover}
+	onmouseleave={scheduleClose}
+	role="presentation"
+>
 	<button
 		type="button"
 		class="font-ui text-sm font-semibold hover:text-accent flex items-center gap-1"
-		onclick={() => (open = !open)}
+		onclick={() => (open ? close() : openOnHover())}
+		onfocus={openOnHover}
 		aria-haspopup="menu"
 		aria-expanded={open}
 	>
@@ -92,7 +115,11 @@
 		<div
 			class="fixed top-[80px] left-1/2 -translate-x-1/2 bg-panel border border-border border-t-0 rounded-b-md shadow-xl z-40"
 			role="menu"
+			tabindex="-1"
 			style="width: min(96vw, 1200px);"
+			onmouseenter={openOnHover}
+			onmouseleave={scheduleClose}
+			transition:fly={{ y: -8, duration: 160 }}
 		>
 			<div class="flex">
 				<!-- Column 1: parts -->
@@ -138,32 +165,36 @@
 				<!-- Column 2: sections -->
 				<div class="w-1/4 border-r border-border max-h-[60vh] overflow-y-auto styled-scroll">
 					{#if activePart}
-						{#each activePart.sections as section (section.slug)}
-							<button
-								type="button"
-								class="w-full text-left px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent flex justify-between gap-2"
-								class:bg-accent={activeSection === section}
-								class:!text-white={activeSection === section}
-								onmouseenter={() => {
-									activeSection = section;
-									activeChapter = null;
-								}}
-								onfocus={() => {
-									activeSection = section;
-									activeChapter = null;
-								}}
-								onclick={() => {
-									goto(`/ccc/${activePart!.slug}/${section.slug}`);
-									close();
-								}}
-							>
-								<span class="min-w-0">
-									<span class="font-semibold">Section {section.number} :</span>
-									{section.title}
-								</span>
-								<span class="text-muted flex-none">›</span>
-							</button>
-						{/each}
+						{#key activePart.slug}
+							<div in:fade={{ duration: 120 }}>
+								{#each activePart.sections as section (section.slug)}
+									<button
+										type="button"
+										class="w-full text-left px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent flex justify-between gap-2"
+										class:bg-accent={activeSection === section}
+										class:!text-white={activeSection === section}
+										onmouseenter={() => {
+											activeSection = section;
+											activeChapter = null;
+										}}
+										onfocus={() => {
+											activeSection = section;
+											activeChapter = null;
+										}}
+										onclick={() => {
+											goto(`/ccc/${activePart!.slug}/${section.slug}`);
+											close();
+										}}
+									>
+										<span class="min-w-0">
+											<span class="font-semibold">Section {section.number} :</span>
+											{section.title}
+										</span>
+										<span class="text-muted flex-none">›</span>
+									</button>
+								{/each}
+							</div>
+						{/key}
 					{:else}
 						<p class="px-4 py-2 text-xs text-muted italic">Survolez une partie</p>
 					{/if}
@@ -173,65 +204,86 @@
 				<div class="w-1/4 border-r border-border max-h-[60vh] overflow-y-auto styled-scroll">
 					{#if activeSection}
 						{@const items = sectionItems(activeSection)}
-						{#if items.kind === 'chapters'}
-							{#each items.chapters as chap (chap.slug)}
-								<button
-									type="button"
-									class="w-full text-left px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent flex justify-between gap-2"
-									class:bg-accent={activeChapter === chap}
-									class:!text-white={activeChapter === chap}
-									onmouseenter={() => (activeChapter = chap)}
-									onfocus={() => (activeChapter = chap)}
-									onclick={() => {
-										goto(`/ccc/${activePart!.slug}/${activeSection!.slug}/${chap.slug}`);
-										close();
-									}}
-								>
-									<span class="min-w-0">
-										<span class="font-semibold">Chapitre {chap.number} :</span>
-										{chap.title}
-									</span>
-									{#if (chap.articles?.length ?? 0) > 0}
-										<span class="text-muted flex-none">›</span>
-									{/if}
-								</button>
-							{/each}
-						{:else if items.kind === 'articles'}
-							{#each items.articles as art (art.slug)}
-								<a
-									href={`/ccc/${activePart!.slug}/${activeSection!.slug}/${art.slug}`}
-									onclick={close}
-									class="block px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent"
-									role="menuitem"
-								>
-									<span class="font-semibold">Article {art.number} :</span>
-									{art.title}
-								</a>
-							{/each}
-						{/if}
+						{#key activeSection.slug}
+							<div in:fade={{ duration: 120 }}>
+								{#if items.kind === 'chapters'}
+									{#each items.chapters as chap (chap.slug)}
+										<button
+											type="button"
+											class="w-full text-left px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent flex justify-between gap-2"
+											class:bg-accent={activeChapter === chap}
+											class:!text-white={activeChapter === chap}
+											onmouseenter={() => (activeChapter = chap)}
+											onfocus={() => (activeChapter = chap)}
+											onclick={() => {
+												goto(`/ccc/${activePart!.slug}/${activeSection!.slug}/${chap.slug}`);
+												close();
+											}}
+										>
+											<span class="min-w-0">
+												<span class="font-semibold">Chapitre {chap.number} :</span>
+												{chap.title}
+											</span>
+											{#if (chap.articles?.length ?? 0) > 0 || (chap.headings?.length ?? 0) > 0}
+												<span class="text-muted flex-none">›</span>
+											{/if}
+										</button>
+									{/each}
+								{:else if items.kind === 'articles'}
+									{#each items.articles as art (art.slug)}
+										<a
+											href={`/ccc/${activePart!.slug}/${activeSection!.slug}/${art.slug}`}
+											onclick={close}
+											class="block px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent"
+											role="menuitem"
+										>
+											<span class="font-semibold">Article {art.number} :</span>
+											{art.title}
+										</a>
+									{/each}
+								{/if}
+							</div>
+						{/key}
 					{:else}
 						<p class="px-4 py-2 text-xs text-muted italic">Survolez une section</p>
 					{/if}
 				</div>
 
-				<!-- Column 4: articles inside a chapter -->
+				<!-- Column 4: articles inside a chapter, or chapter-level headings if no articles -->
 				<div class="w-1/4 max-h-[60vh] overflow-y-auto styled-scroll">
 					{#if activeChapter}
-						{#if (activeChapter.articles?.length ?? 0) === 0}
-							<p class="px-4 py-2 text-xs text-muted italic">Pas d'article</p>
-						{:else}
-							{#each activeChapter.articles ?? [] as art (art.slug)}
-								<a
-									href={`/ccc/${activePart!.slug}/${activeSection!.slug}/${activeChapter!.slug}/${art.slug}`}
-									onclick={close}
-									class="block px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent"
-									role="menuitem"
-								>
-									<span class="font-semibold">Article {art.number} :</span>
-									{art.title}
-								</a>
-							{/each}
-						{/if}
+						{@const arts = activeChapter.articles ?? []}
+						{@const heads = activeChapter.headings ?? []}
+						{#key activeChapter.slug}
+							<div in:fade={{ duration: 120 }}>
+								{#if arts.length > 0}
+									{#each arts as art (art.slug)}
+										<a
+											href={`/ccc/${activePart!.slug}/${activeSection!.slug}/${activeChapter!.slug}/${art.slug}`}
+											onclick={close}
+											class="block px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent"
+											role="menuitem"
+										>
+											<span class="font-semibold">Article {art.number} :</span>
+											{art.title}
+										</a>
+									{/each}
+								{:else if heads.length > 0}
+									{#each heads as h (h.id)}
+										<a
+											href={`/ccc/${activePart!.slug}/${activeSection!.slug}/${activeChapter!.slug}#${h.id}`}
+											onclick={close}
+											class="block px-4 py-2 text-sm hover:bg-accent/10 hover:text-accent"
+											role="menuitem"
+										>
+											{h.title}
+										</a>
+									{/each}
+								{:else}
+									<p class="px-4 py-2 text-xs text-muted italic">Rien à afficher</p>
+								{/if}
+							</div>
+						{/key}
 					{:else}
 						<p class="px-4 py-2 text-xs text-muted italic">Survolez un chapitre</p>
 					{/if}

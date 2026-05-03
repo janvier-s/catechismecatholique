@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { get } from 'svelte/store';
+	import { fly } from 'svelte/transition';
 	import { studyPanel, openPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
 	import { panelWidth } from '$lib/stores/prefs';
 	import { createPanelResize } from '$lib/utils/panelResize';
@@ -156,7 +157,11 @@
 <svelte:window onmousemove={resize.onMousemove} onmouseup={resize.onMouseup} />
 
 {#if $studyPanel.open}
-	<div class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] flex-none z-20" class:dragging>
+	<div
+		class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] flex-none z-20"
+		class:dragging
+		transition:fly={{ x: 20, duration: 180 }}
+	>
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<div

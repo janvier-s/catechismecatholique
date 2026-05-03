@@ -88,10 +88,16 @@
 			}
 		}
 
-		// Click handler:
-		// - inline bible ref button → open panel on Bible tab for the current paragraph
-		// - cccRef sup → open the panel showing the TARGET paragraph (no navigation)
-		// - bibleRef / docRef sup → open panel on the matching tab for the current paragraph
+		// Click handler — DR study-mode pattern: clicking ANY marker on a
+		// paragraph opens the panel for that paragraph (not for the marker's
+		// target). The marker class picks the tab.
+		// - inline bible ref button → Bible tab
+		// - cccRef sup → cross-refs tab
+		// - bibleRef sup → Bible tab
+		// - docRef sup → Sources tab
+		// When inPanel=true (panel renvois entries), clicking a cccRef sup
+		// follows the reference: navigate to the target paragraph in the
+		// main view; the URL effect updates the panel context.
 		const onClick = (e: MouseEvent) => {
 			if (!(e.target instanceof Element)) return;
 
@@ -106,12 +112,11 @@
 			if (!sup) return;
 			e.preventDefault();
 
-			if (sup.classList.contains('cccRef')) {
+			if (inPanel && sup.classList.contains('cccRef')) {
 				const m = (sup.textContent ?? '').match(/(\d+)/);
 				const target = m ? parseInt(m[1]!, 10) : NaN;
 				if (Number.isFinite(target)) {
-					openPanel({ paragraph: target }, 'cross-refs');
-					if (inPanel) void goto(`/ccc/${target}`);
+					void goto(`/ccc/${target}`);
 					return;
 				}
 			}
