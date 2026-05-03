@@ -9,13 +9,19 @@
 	let label = $state('');
 	let source = $state<'ccc' | 'concordance'>('ccc');
 
+	// Per-run token: increments on each effect entry. Async closures
+	// check this before assigning so a stale load can't clobber a newer one.
+	let runId = 0;
+
 	$effect(() => {
 		const ctx = $studyPanel.context;
 		if (!ctx?.verseUsfx) return;
 		source = ctx.verseSource ?? 'ccc';
+		const myRun = ++runId;
 		(async () => {
 			const idx =
 				source === 'concordance' ? await loadConcordanceVerseIndex() : await loadBibleVerseIndex();
+			if (myRun !== runId) return; // a newer effect run started; abort stale write
 			paragraphs = idx[ctx.verseUsfx!]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
 			const book = BOOKS.find((b) => b.usfx === ctx.verseUsfx);
 			bookFrenchName = book?.frenchName ?? ctx.verseUsfx!;
