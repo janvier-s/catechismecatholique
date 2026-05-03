@@ -44,7 +44,7 @@
 		<nav class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none">
 			<CatechismDropdown />
 			<a href="/bible" class="hover:text-accent">Bible</a>
-			<a href="/ccc/sommaire" class="hover:text-accent">Sommaire</a>
+			<a href="/glossaire" class="hover:text-accent">Glossaire</a>
 			<a href="/a-propos" class="hover:text-accent">À propos</a>
 		</nav>
 		<ModeToggle />

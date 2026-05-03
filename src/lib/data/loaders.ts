@@ -4,7 +4,8 @@ import type {
 	AbbreviationMap,
 	ParagraphContext,
 	SourceEntry,
-	BibleVerseIndex
+	BibleVerseIndex,
+	GlossaryBundle
 } from './types';
 
 type Fetch = typeof fetch;
@@ -47,4 +48,8 @@ export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]>
 
 export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseIndex> {
 	return fetchJson<BibleVerseIndex>('/data/ccc/bible-verse-index.json', fetcher);
+}
+
+export function loadGlossary(fetcher: Fetch = fetch): Promise<GlossaryBundle> {
+	return fetchJson<GlossaryBundle>('/data/ccc/glossary.json', fetcher);
 }

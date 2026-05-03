@@ -111,6 +111,19 @@ async function main() {
 	writeFileSync(join(OUT, 'ccc/abbreviations.json'), JSON.stringify(abbrs, null, 2));
 	endStep(`${Object.keys(abbrs).length} entries`);
 
+	logStep('building glossary');
+	const { buildGlossary } = await import('./prepare/glossary.ts');
+	const enGlossXml = readFileSync(join(SOURCES, 'ccc_glossary_en.xhtml'), 'utf8');
+	const frGlossDir = join(SOURCES, 'thematic_cross-refs/index_thematique');
+	const frGlossFiles = readdirSync(frGlossDir).filter((f) => f.endsWith('.xhtml'));
+	const frGlossXml = new Map<string, string>();
+	for (const f of frGlossFiles) frGlossXml.set(f, readFileSync(join(frGlossDir, f), 'utf8'));
+	const glossary = buildGlossary(enGlossXml, frGlossXml);
+	writeFileSync(join(OUT, 'ccc/glossary.json'), JSON.stringify(glossary));
+	endStep(
+		`${glossary.entries.length} entries, ${glossary.clusters.length} clusters, ${glossary.featured.length} featured`
+	);
+
 	logStep('parsing sources index');
 	const sourcesDir = join(SOURCES, 'thematic_cross-refs/index_citations');
 	const sourceFiles = readdirSync(sourcesDir).filter((f) => f.endsWith('.xhtml'));

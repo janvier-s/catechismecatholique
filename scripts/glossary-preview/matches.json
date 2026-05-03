@@ -1,0 +1,1987 @@
+[
+  {
+    "en": "Abortion",
+    "fr": "Avortement",
+    "kind": "hinted"
+  },
+  {
+    "en": "Abraham",
+    "fr": "Abraham",
+    "kind": "exact"
+  },
+  {
+    "en": "Absolution",
+    "fr": "Absolution",
+    "kind": "exact"
+  },
+  {
+    "en": "Acedia",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Acolyte",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Adam",
+    "fr": "Adam",
+    "kind": "exact"
+  },
+  {
+    "en": "Adoration",
+    "fr": "Adoration",
+    "kind": "exact"
+  },
+  {
+    "en": "Adultery",
+    "fr": "Adultère",
+    "kind": "hinted"
+  },
+  {
+    "en": "Advent",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Almsgiving",
+    "fr": "Aumône",
+    "kind": "hinted"
+  },
+  {
+    "en": "Altar",
+    "fr": "Autel",
+    "kind": "hinted"
+  },
+  {
+    "en": "Amen",
+    "fr": "Amen",
+    "kind": "exact"
+  },
+  {
+    "en": "Analogy Of Faith",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Anamnesis",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Anaphora",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Angel",
+    "fr": "Ange",
+    "kind": "hinted"
+  },
+  {
+    "en": "Anger",
+    "fr": "Colère",
+    "kind": "hinted"
+  },
+  {
+    "en": "Annunciation",
+    "fr": "Annonciation",
+    "kind": "hinted"
+  },
+  {
+    "en": "Anointing",
+    "fr": "Onction",
+    "kind": "hinted"
+  },
+  {
+    "en": "Anointing Of The Sick",
+    "fr": "Onction des malades",
+    "kind": "hinted"
+  },
+  {
+    "en": "Antichrist",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Apostasy",
+    "fr": "Apostasie",
+    "kind": "hinted"
+  },
+  {
+    "en": "Apostle",
+    "fr": "Apôtre",
+    "kind": "hinted"
+  },
+  {
+    "en": "Apostles' Creed",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Apostolate",
+    "fr": "Apostolat",
+    "kind": "hinted"
+  },
+  {
+    "en": "Apostolic Succession",
+    "fr": "Succession apostolique",
+    "kind": "hinted"
+  },
+  {
+    "en": "Apparition",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Ascension",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Ascesis",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Assumption",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Baptism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Beatific Vision",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Beatitude",
+    "fr": "Béatitude",
+    "kind": "exact"
+  },
+  {
+    "en": "Beatitudes",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Bible",
+    "fr": "Bible",
+    "kind": "exact"
+  },
+  {
+    "en": "Biblical Inspiration",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Bishop",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Blasphemy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Blessed Sacrament",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Blessing",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Body Of Christ",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Calumny",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Canon Law",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Canon Of The Mass",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Canon Of Scripture",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Canonization",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Capital Sins",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Cardinal Virtues",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Catechesis",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Catechism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Catechumen",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Cathedral",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Catholic",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Catholic Church",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Celibacy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Character, Sacramental",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Charism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Charity",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Chastity",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Choir",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Chrism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Chrismation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Christ",
+    "fr": "Christ",
+    "kind": "exact"
+  },
+  {
+    "en": "Christian",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Christmas",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Church",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Circumcision",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Collegiality",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Commandment",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Commandments Of The Church",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Communion",
+    "fr": "Communion",
+    "kind": "exact"
+  },
+  {
+    "en": "Communion Of Saints",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Concupiscence",
+    "fr": "Concupiscence",
+    "kind": "exact"
+  },
+  {
+    "en": "Confession",
+    "fr": "Confession",
+    "kind": "exact"
+  },
+  {
+    "en": "Confirmation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Conscience",
+    "fr": "Conscience",
+    "kind": "exact"
+  },
+  {
+    "en": "Consecrated Life",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Consecrated Virgins",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Consecration",
+    "fr": "Consécration",
+    "kind": "exact"
+  },
+  {
+    "en": "Contemplation",
+    "fr": "Contemplation",
+    "kind": "exact"
+  },
+  {
+    "en": "Contraception, Artificial",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Contrition",
+    "fr": "Contrition",
+    "kind": "exact"
+  },
+  {
+    "en": "Conversion",
+    "fr": "Conversion",
+    "kind": "exact"
+  },
+  {
+    "en": "Council, Ecumenical",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Counsel",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Covenant",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Covetousness",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Creation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Creed",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Cross",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Deacon, Diaconate",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Decalogue",
+    "fr": "Décalogue",
+    "kind": "exact"
+  },
+  {
+    "en": "Definition, Dogmatic",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Demon",
+    "fr": "Démon",
+    "kind": "exact"
+  },
+  {
+    "en": "Deposit Of Faith",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Descent Into Hell",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Despair",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Detraction",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Development, Doctrinal",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Devil/demon",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Diaconate",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Diocese",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Disciple",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Divine Office",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Divorce",
+    "fr": "Divorce",
+    "kind": "exact"
+  },
+  {
+    "en": "Doctrine/dogma",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Doxology",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Easter",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eastern Churches",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Ecclesiastic/ecclesiastical",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Economy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Economy Of Salvation (divine Economy)",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Ecumenical Council",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Ecumenism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Encyclical",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Envy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eparchy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Epiclesis",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Epiphany",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Episcopal/episcopate",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eremitical Life",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eschatology",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eternal Life",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eucharist",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eucharistic Prayer",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Euthanasia",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Evangelical Counsels",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Evangelist",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Evangelization",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Eve",
+    "fr": "Ève",
+    "kind": "exact"
+  },
+  {
+    "en": "Evil",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Examination Of Conscience",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Excommunication",
+    "fr": "Excommunication",
+    "kind": "exact"
+  },
+  {
+    "en": "Exodus",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Exorcism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Expiation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Extreme Unction",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Faith",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Faithful, The Christian",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Fall",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Fasting",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Father, God The",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Fathers Of The Church",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Fear Of The Lord",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Feast Days",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Filioque",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Fornication",
+    "fr": "Fornication",
+    "kind": "exact"
+  },
+  {
+    "en": "Fortitude",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Fruits Of The Holy Spirit",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "General Confession And Absolution",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Genesis",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Genuflection",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Gifts Of The Holy Spirit",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Gluttony",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "God",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Godparent",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Gospel",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Gospel, Law Of The",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Grace",
+    "fr": "Grâce",
+    "kind": "exact"
+  },
+  {
+    "en": "Guardian Angels",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hail Mary",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Happiness",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Heaven",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hell",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Heresy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hermit",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hierarchy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hierarchy Of Truths",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Holy Days Of Obligation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Holy Orders",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Holy See",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Holy Spirit",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Holy Water",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Holy Week",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Homily",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Homosexuality",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hope",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Humility",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hymn",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Hypostatic Union",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Icon",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Iconoclasm",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Idolatry",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Immaculate Conception",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Immortality",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Impediment",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Incarnation",
+    "fr": "Incarnation",
+    "kind": "exact"
+  },
+  {
+    "en": "Incredulity",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Indulgence",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Inerrancy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Infallibility",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Initiation, Christian",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Inspiration",
+    "fr": "Inspiration",
+    "kind": "exact"
+  },
+  {
+    "en": "Institute, Religious",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Institute, Secular",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Intercession",
+    "fr": "Intercession",
+    "kind": "exact"
+  },
+  {
+    "en": "Intercommunion",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Irreligion",
+    "fr": "Irréligion",
+    "kind": "exact"
+  },
+  {
+    "en": "Israel",
+    "fr": "Israël",
+    "kind": "exact"
+  },
+  {
+    "en": "Jesus Christ",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "John The Baptist",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Judgment",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Judgment, Rash",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Justice",
+    "fr": "Justice",
+    "kind": "exact"
+  },
+  {
+    "en": "Justification",
+    "fr": "Justification",
+    "kind": "exact"
+  },
+  {
+    "en": "Kingdom Of God (of Heaven)",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Laity",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Last Judgment",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Last Supper",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Latin Rite",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Law, Moral",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Lectionary/lector",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Lent",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Life",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Liturgical Year",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Liturgy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Lord",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Lord'S Prayer",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Love",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Magi",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Magisterium",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Marks (notes) Of The Church",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Marriage",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Martyr",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Mary",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Mass",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Matrimony",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Mediator/mediatrix",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Meditation",
+    "fr": "Méditation",
+    "kind": "exact"
+  },
+  {
+    "en": "Mercy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Merit",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Messiah",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Ministry",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Miracle",
+    "fr": "Miracle",
+    "kind": "exact"
+  },
+  {
+    "en": "Mission",
+    "fr": "Mission",
+    "kind": "exact"
+  },
+  {
+    "en": "Monastic Life",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Morality",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Mortal Sin",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Moses",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Mystagogy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Nature",
+    "fr": "Nature",
+    "kind": "exact"
+  },
+  {
+    "en": "New Covenant",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "New Testament",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Nicene Creed",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Nuptial Blessing",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Obedience",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Oikonomia",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Old Covenant",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Old Testament",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Orders, Holy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Orders, Religious",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Ordination",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Original Sin",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Orthodox Churches",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Our Father",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Our Lady",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Papacy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Parables",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Paraclete",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Paradise",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Parish",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Parousia",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Particular Church",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Pasch/paschal Lamb",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Paschal Mystery/sacrifice",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Passion",
+    "fr": "Passion",
+    "kind": "exact"
+  },
+  {
+    "en": "Passions, Moral",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Passover",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Pastor/pastoral Office",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Patriarch",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Patristic",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Peace",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Penance",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Penance, Sacrament Of",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Penitent/penitential",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Pentateuch",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Pentecost",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "People Of God",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Perjury",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Person, Divine",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Person, Human",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Peter, Saint",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Piety",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Polygamy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Pope",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Poverty",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Praise",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Prayer",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Precepts Of The Church",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Presbyter",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Presentation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Presumption",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Pride",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Priesthood",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Priesthood Of Christ",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Primacy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Private Revelations",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Profession Of Faith",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Prophet",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Protestant",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Proto-Evangelium",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Providence",
+    "fr": "Providence",
+    "kind": "exact"
+  },
+  {
+    "en": "Prudence",
+    "fr": "Prudence",
+    "kind": "exact"
+  },
+  {
+    "en": "Psalm",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Psalter",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Punishment, Eternal",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Punishment, Temporal",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Purgatory",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Racism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Real Presence",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Reconciliation, Sacrament Of",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Redeemer/redemption",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Religion",
+    "fr": "Religion",
+    "kind": "exact"
+  },
+  {
+    "en": "Religious Life",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Remission Of Sins",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Reparation",
+    "fr": "Réparation",
+    "kind": "exact"
+  },
+  {
+    "en": "Repentance",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Restitution",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Resurrection Of Christ",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Resurrection Of The Dead",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Revelation",
+    "fr": "Révélation",
+    "kind": "exact"
+  },
+  {
+    "en": "Rites",
+    "fr": "Rites",
+    "kind": "exact"
+  },
+  {
+    "en": "Rosary",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sabbath",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sacrament",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sacramentals",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sacred Heart",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sacrifice",
+    "fr": "Sacrifice",
+    "kind": "exact"
+  },
+  {
+    "en": "Sacrilege",
+    "fr": "Sacrilège",
+    "kind": "exact"
+  },
+  {
+    "en": "Saint",
+    "fr": "Saint",
+    "kind": "exact"
+  },
+  {
+    "en": "Salvation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sanctifying Grace",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sanctuary",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Satan",
+    "fr": "Satan",
+    "kind": "exact"
+  },
+  {
+    "en": "Satisfaction (for Sin)",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Savior",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Scandal",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Schism",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Scripture, Sacred",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Seal Of Confession",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Second Coming Of Christ",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Secular Institute",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sensus Fidei",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Septuagint",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sign Of The Cross",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Simony",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sin",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Slander",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Sloth",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Social Justice",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Social Sin",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Social Teaching",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Son Of God",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Son Of Man",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Soul",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Spirit",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Stealing/theft",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Suicide",
+    "fr": "Suicide",
+    "kind": "exact"
+  },
+  {
+    "en": "Sunday",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Supernatural",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Superstition",
+    "fr": "Superstition",
+    "kind": "exact"
+  },
+  {
+    "en": "Synod",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Tabernacle",
+    "fr": "Tabernacle",
+    "kind": "exact"
+  },
+  {
+    "en": "Teaching Office",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Temperance",
+    "fr": "Tempérance",
+    "kind": "exact"
+  },
+  {
+    "en": "Temple",
+    "fr": "Temple",
+    "kind": "exact"
+  },
+  {
+    "en": "Temptation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Testament",
+    "fr": "Testament",
+    "kind": "exact"
+  },
+  {
+    "en": "Theology",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Theophany",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Time",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Tradition",
+    "fr": "Tradition",
+    "kind": "exact"
+  },
+  {
+    "en": "Transfiguration",
+    "fr": "Transfiguration",
+    "kind": "exact"
+  },
+  {
+    "en": "Transubstantiation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Triduum",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Trinity",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Typology",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Unity, Christian",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Veneration (of Saints)",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Venial Sin",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Viaticum",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Vicar Of Christ",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Vice",
+    "fr": "Vice",
+    "kind": "exact"
+  },
+  {
+    "en": "Virgin Birth",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Virgin Mary",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Virtue",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Virtues, Theological",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Vision, Beatific",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Vocation",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Vow",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Way Of The Cross",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Wisdom",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Word Of God",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Works Of Mercy",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "World",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Worship",
+    "fr": null,
+    "kind": "unmatched"
+  },
+  {
+    "en": "Yahweh (yhwh)",
+    "fr": null,
+    "kind": "unmatched"
+  }
+]
