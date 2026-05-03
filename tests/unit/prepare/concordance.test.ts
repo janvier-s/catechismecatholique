@@ -72,4 +72,20 @@ describe('expandRange', () => {
 	it('returns [] when the book is missing', () => {
 		expect(expandRange('XYZ', { fromCh: 1, toCh: 1, fromV: 1, toV: 1 }, ncl)).toEqual([]);
 	});
+
+	it('expands a cross-chapter range that fully spans a middle chapter', () => {
+		const ncl3 = {
+			GEN: {
+				'1': { '1': 'a', '2': 'b' },
+				'2': { '1': 'c', '2': 'd' },
+				'3': { '1': 'e', '2': 'f' }
+			}
+		};
+		expect(expandRange('GEN', { fromCh: 1, toCh: 3, fromV: 2, toV: 1 }, ncl3)).toEqual([
+			{ ch: 1, v: 2 },
+			{ ch: 2, v: 1 },
+			{ ch: 2, v: 2 },
+			{ ch: 3, v: 1 }
+		]);
+	});
 });
