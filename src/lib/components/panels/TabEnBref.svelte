@@ -77,7 +77,7 @@
 								CEC {p.number}
 							</a>
 							<div class="font-body text-[15px] leading-relaxed">
-								<ParagraphRenderer html={p.text_html} paragraphNumber={p.number} />
+								<ParagraphRenderer html={p.text_html} paragraphNumber={p.number} inPanel />
 							</div>
 						</div>
 					{/each}

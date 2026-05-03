@@ -1,11 +1,21 @@
 <script lang="ts">
 	import type { MagisterialRefRecord } from '$lib/data/types';
 	import { openPanel } from '$lib/stores/studyPanel';
+	import { goto } from '$app/navigation';
 	let {
 		html,
 		bibleRefs = [],
-		paragraphNumber
-	}: { html: string; bibleRefs?: MagisterialRefRecord[]; paragraphNumber: number } = $props();
+		paragraphNumber,
+		inPanel = false
+	}: {
+		html: string;
+		bibleRefs?: MagisterialRefRecord[];
+		paragraphNumber: number;
+		// When rendered inside the study panel, cccRef sup clicks also navigate
+		// the main view to the target paragraph (so the reader follows along).
+		// In the main view, sup clicks just update the panel context.
+		inPanel?: boolean;
+	} = $props();
 	let containerEl: HTMLDivElement | undefined = $state();
 
 	// "Mt 28:19-20" → "Mt 28, 19-20"
@@ -101,6 +111,7 @@
 				const target = m ? parseInt(m[1]!, 10) : NaN;
 				if (Number.isFinite(target)) {
 					openPanel({ paragraph: target }, 'cross-refs');
+					if (inPanel) void goto(`/ccc/${target}`);
 					return;
 				}
 			}
