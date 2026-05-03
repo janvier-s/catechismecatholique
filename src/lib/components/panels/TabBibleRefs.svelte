@@ -77,7 +77,7 @@
 						<div class="mt-2 font-body text-[15px] leading-relaxed">
 							{#each r.verses as v (v.v)}
 								<span class="block">
-									<sup class="text-xs text-accent tabular-nums mr-1">{v.v}</sup>
+									<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-1">{v.v}</sup>
 									{v.text}
 								</span>
 							{/each}
