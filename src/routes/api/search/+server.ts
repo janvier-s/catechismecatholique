@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import MiniSearch from 'minisearch';
-import { searchTokenizer, processTerm } from '$lib/utils/searchTokenizer';
+import { searchTokenizer, processTerm, stripDiacritics } from '$lib/utils/searchTokenizer';
 import type { RequestHandler } from './$types';
 
 interface SearchResultDoc {
@@ -43,12 +43,42 @@ async function loadIndex(
 
 const MAX_QUERY_LEN = 200;
 
+// Promote results containing the literal contiguous phrase. BM25 sums per-token
+// contributions, so a long paragraph with many common-word hits can outrank a
+// short paragraph that has the exact phrase the user typed. This re-sort makes
+// phrase matches win when present, while preserving relative score order
+// within each group.
+function applyPhraseBoost<T extends Record<string, unknown>>(results: T[], tokens: string[]): T[] {
+	if (tokens.length < 2) return results;
+	const phrase = tokens.join(' ');
+	const phraseHits: T[] = [];
+	const rest: T[] = [];
+	for (const r of results) {
+		const folded = stripDiacritics(String(r.text ?? ''))
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, ' ')
+			.trim();
+		if (folded.includes(phrase)) phraseHits.push(r);
+		else rest.push(r);
+	}
+	return [...phraseHits, ...rest];
+}
+
 export const GET: RequestHandler = async ({ url, fetch, platform }) => {
 	const q = (url.searchParams.get('q')?.trim() ?? '').slice(0, MAX_QUERY_LEN);
 	if (q.length < 2) return json({ q, hits: [] });
 	const ms = await loadIndex(platform, fetch);
-	const raw = ms.search(q, { prefix: true, fuzzy: 0.15, boost: { title: 2 } }).slice(0, 30);
-	const hits: SearchResultDoc[] = raw.map((r) => ({
+	// Restrict prefix expansion to tokens of length ≥ 4 so common short French
+	// words (`le`, `est`) don't pull in `les`, `lesquelles`, `estime`, etc.
+	// Fuzzy is disabled: with the catechism's curated French vocabulary, even
+	// 1-edit fuzzy matches are too aggressive (e.g. `maitre`→`naitre`).
+	const raw = ms.search(q, {
+		prefix: (term) => term.length >= 4,
+		boost: { title: 2 }
+	});
+	const tokens = searchTokenizer(q);
+	const ranked = applyPhraseBoost(raw, tokens).slice(0, 30);
+	const hits: SearchResultDoc[] = ranked.map((r) => ({
 		id: r.id as string,
 		kind: r.kind as 'paragraph' | 'heading',
 		number: r.number as number | undefined,

@@ -78,11 +78,12 @@
 	// The href of the deepest item the current page corresponds to.
 	// Used for sidebar item highlighting (passed via context to SidebarItem).
 	function deepestHref(c: ParagraphContext): string {
+		const hash = c.heading ? `#${c.heading.id}` : '';
 		if (c.article && c.section && c.chapter) {
-			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}`;
+			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}${hash}`;
 		}
 		if (c.chapter && c.section) {
-			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`;
+			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${hash}`;
 		}
 		if (c.section) {
 			return `/ccc/${c.part.slug}/${c.section.slug}`;
@@ -245,11 +246,11 @@
 			<button
 				type="button"
 				onclick={() => sidebarOpen.set(false)}
-				class="w-7 h-7 flex items-center justify-center rounded hover:bg-accent/10 text-muted hover:text-accent"
-				aria-label="Fermer la barre latérale"
+				class="w-7 h-7 flex items-center justify-center rounded hover:bg-accent/10 text-muted hover:text-accent text-base leading-none"
+				aria-label="Fermer le sommaire"
 				title="Fermer"
 			>
-				◧
+				✕
 			</button>
 		</div>
 		<nav
