@@ -9,9 +9,15 @@
 
 	let { children } = $props();
 
-	const showSidebar = $derived(
-		page.url.pathname.startsWith('/ccc') || page.url.pathname.startsWith('/bible')
-	);
+	const showSidebar = $derived.by(() => {
+		const p = page.url.pathname;
+		// Sidebar is the catechism's structural TOC. Show only inside the
+		// CCC reading surfaces; hide on the index, sommaire, bible, search,
+		// about, and the bare home page.
+		if (!p.startsWith('/ccc')) return false;
+		if (p === '/ccc' || p === '/ccc/' || p.startsWith('/ccc/sommaire')) return false;
+		return true;
+	});
 </script>
 
 <svelte:head>

@@ -27,10 +27,10 @@
 	type="button"
 	class="cec-pill"
 	aria-label="{count} paragraphe(s) du Catéchisme citent {bookSlug} {chapter}, {verse}"
-	title="{count} CEC"
+	title="{count} paragraphe(s) du Catéchisme citent ce verset"
 	onclick={onClick}
 >
-	CEC<span class="ml-0.5 tabular-nums">{count}</span>
+	CEC
 </button>
 
 <style>

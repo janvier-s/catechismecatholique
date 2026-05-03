@@ -60,7 +60,7 @@
 
 	{#if open}
 		<div
-			class="absolute top-full left-0 mt-2 bg-panel border border-border rounded-md shadow-xl z-40"
+			class="absolute top-full right-0 mt-2 bg-panel border border-border rounded-md shadow-xl z-40"
 			role="menu"
 			style="width: min(92vw, 920px);"
 		>
@@ -138,9 +138,7 @@
 				<div class="w-1/3 max-h-[60vh] overflow-y-auto">
 					{#if activeSection}
 						{#if activeSection.chapters.length === 0}
-							<p class="px-4 py-2 text-xs text-muted italic">
-								Cette section n'a pas de chapitres
-							</p>
+							<p class="px-4 py-2 text-xs text-muted italic">Cette section n'a pas de chapitres</p>
 						{:else}
 							{#each activeSection.chapters as chap (chap.slug)}
 								<a
@@ -161,11 +159,7 @@
 			</div>
 
 			<div class="border-t border-border px-4 py-2">
-				<a
-					href="/ccc/sommaire"
-					onclick={close}
-					class="text-accent hover:underline text-sm"
-				>
+				<a href="/ccc/sommaire" onclick={close} class="text-accent hover:underline text-sm">
 					Sommaire complet →
 				</a>
 			</div>

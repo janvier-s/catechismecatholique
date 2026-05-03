@@ -151,6 +151,12 @@
 		text-rendering: optimizeLegibility;
 	}
 
+	/* Default Gotham UI text to Medium (500). Tailwind weight utilities
+	   like font-semibold / font-bold still override per-element. */
+	.font-ui {
+		font-weight: 500;
+	}
+
 	::selection {
 		background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
 		color: var(--color-fg);
