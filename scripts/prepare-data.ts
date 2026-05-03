@@ -129,6 +129,24 @@ async function main() {
 	);
 	endStep(`${verseCount} verses indexed`);
 
+	logStep('building search index');
+	mkdirSync(join(OUT, 'search'), { recursive: true });
+	const allParagraphs: import('../src/lib/data/types').Paragraph[] = [];
+	for (const f of readdirSync(join(OUT, 'ccc/paragraphs'))) {
+		if (!f.endsWith('.json')) continue;
+		allParagraphs.push(JSON.parse(readFileSync(join(OUT, 'ccc/paragraphs', f), 'utf8')));
+	}
+	const allChapters: import('../src/lib/data/types').Chapter[] = [];
+	for (const f of readdirSync(join(OUT, 'ccc/chapters'))) {
+		if (!f.endsWith('.json')) continue;
+		allChapters.push(JSON.parse(readFileSync(join(OUT, 'ccc/chapters', f), 'utf8')));
+	}
+	const ctxs = JSON.parse(readFileSync(join(OUT, 'ccc/paragraph-context.json'), 'utf8'));
+	const { buildSearchIndex } = await import('./prepare/search-index.ts');
+	const search = buildSearchIndex(allParagraphs, allChapters, ctxs);
+	writeFileSync(join(OUT, 'search/search-index.json'), search.serialized);
+	endStep(`${search.documents.length} docs (${(search.serialized.length / 1024).toFixed(1)} KB)`);
+
 	const elapsed = ((performance.now() - start) / 1000).toFixed(2);
 	process.stdout.write(`\nprepare-data complete in ${elapsed}s\n`);
 }
