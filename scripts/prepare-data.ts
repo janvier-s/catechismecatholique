@@ -159,6 +159,53 @@ async function main() {
 	);
 	endStep(`${verseCount} verses indexed`);
 
+	logStep('building concordance verse index');
+	{
+		const { buildConcordance } = await import('./prepare/concordance.ts');
+		const sourceDir =
+			process.env.DIDACHE_SOURCE_DIR ?? join(ROOT, '..', 'DOCTRINA', 'sources', 'didache');
+
+		const htmlFiles: string[] = [];
+		let foundFiles = 0;
+		try {
+			if (!lstatSync(sourceDir).isDirectory()) {
+				throw new Error(`not a directory: ${sourceDir}`);
+			}
+			const collect = (dir: string) => {
+				for (const ent of readdirSync(dir, { withFileTypes: true })) {
+					const p = join(dir, ent.name);
+					if (ent.isDirectory()) collect(p);
+					else if (ent.isFile() && ent.name.endsWith('.html')) {
+						htmlFiles.push(readFileSync(p, 'utf8'));
+						foundFiles++;
+					}
+				}
+			};
+			collect(sourceDir);
+		} catch {
+			// Source dir missing or not a directory — emit empty index, log, continue.
+			console.warn(`  (no DIDACHE_SOURCE_DIR at ${sourceDir} — emitting empty concordance)`);
+		}
+
+		const { index, stats } = buildConcordance(htmlFiles, ncl, knownParas, BOOKS);
+		writeFileSync(join(OUT, 'ccc/concordance-verse-index.json'), JSON.stringify(index));
+		if (stats.unknownBooks.length > 0) {
+			console.warn('  unknown books:', stats.unknownBooks.join(', '));
+		}
+		if (stats.unknownParagraphs.length > 0) {
+			console.warn(`  ${stats.unknownParagraphs.length} unknown CCC paragraphs (dropped)`);
+		}
+		if (stats.unparseableRanges.length > 0) {
+			console.warn(`  ${stats.unparseableRanges.length} unparseable ranges`);
+		}
+		if (stats.booksWithZeroEntries.length > 0) {
+			console.warn(
+				`  ${stats.booksWithZeroEntries.length} books with zero entries: ${stats.booksWithZeroEntries.join(', ')}`
+			);
+		}
+		endStep(`${foundFiles} files, ${stats.entriesProcessed} entries`);
+	}
+
 	logStep('building search index');
 	mkdirSync(join(OUT, 'search'), { recursive: true });
 	const allParagraphs: import('../src/lib/data/types').Paragraph[] = [];
