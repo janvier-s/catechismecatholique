@@ -1,5 +1,6 @@
 import { slugify, uniqueSlug } from './slug';
 import { sentenceCase } from './sentence-case';
+import { normalizeGuillemets } from './source-data-fixes';
 
 interface RawNode {
 	type: string;
@@ -101,7 +102,7 @@ function collectHeadings(nodes: RawNode[]): BuiltHeading[] {
 				}
 			}
 			if (firstParagraph >= 0)
-				out.push({ id, level, title: sentenceCase(title), paragraph_start: firstParagraph });
+				out.push({ id, level, title: normalizeGuillemets(sentenceCase(title)), paragraph_start: firstParagraph });
 		}
 	}
 	return out;
@@ -119,7 +120,7 @@ function rangeOf(nums: number[]): ParagraphRange | undefined {
 }
 
 function buildArticle(aRaw: RawNode, articleSlugs: Set<string>): BuiltArticle {
-	const aTitle = sentenceCase(stripPrefix(aRaw.title ?? '', ARTICLE_PREFIX));
+	const aTitle = normalizeGuillemets(sentenceCase(stripPrefix(aRaw.title ?? '', ARTICLE_PREFIX)));
 	const aSlug = uniqueSlug(aTitle, articleSlugs);
 	const aParas: number[] = [];
 	collectParagraphs(aRaw, aParas);
@@ -142,7 +143,7 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 		const isPrologue = (partRaw.title ?? '').trim().toUpperCase() === 'PROLOGUE';
 		const partTitle = isPrologue
 			? 'Prologue'
-			: sentenceCase(stripPrefix(partRaw.title ?? '', PART_PREFIX));
+			: normalizeGuillemets(sentenceCase(stripPrefix(partRaw.title ?? '', PART_PREFIX)));
 		const partSlug = isPrologue ? 'prologue' : uniqueSlug(partTitle, partSlugs);
 		if (isPrologue) {
 			if (partSlugs.has(partSlug)) {
@@ -160,7 +161,7 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 		for (const childRaw of partRaw.children ?? []) {
 			if (childRaw.type !== 'section') continue;
 			sectionNumber++;
-			const sectionTitle = sentenceCase(stripPrefix(childRaw.title ?? '', SECTION_PREFIX));
+			const sectionTitle = normalizeGuillemets(sentenceCase(stripPrefix(childRaw.title ?? '', SECTION_PREFIX)));
 			const sectionSlug = uniqueSlug(sectionTitle, sectionSlugs);
 
 			const chapterSlugs = new Set<string>();
@@ -169,7 +170,7 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			for (const chapRaw of childRaw.children ?? []) {
 				if (chapRaw.type !== 'chapter') continue;
 				chapterNumber++;
-				const chapTitle = sentenceCase(stripPrefix(chapRaw.title ?? '', CHAPITRE_PREFIX));
+				const chapTitle = normalizeGuillemets(sentenceCase(stripPrefix(chapRaw.title ?? '', CHAPITRE_PREFIX)));
 				const chapSlug = uniqueSlug(chapTitle, chapterSlugs);
 
 				const chapParagraphs: number[] = [];
