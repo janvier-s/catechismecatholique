@@ -2,7 +2,6 @@
 	import { studyPanel } from '$lib/stores/studyPanel';
 	import { loadConcordanceByParagraph } from '$lib/data/loaders';
 	import type { ConcordanceByParagraphEntry } from '$lib/data/types';
-	import CccRangeChip from '$lib/components/CccRangeChip.svelte';
 
 	let entries = $state<ConcordanceByParagraphEntry[]>([]);
 	let nclData = $state<Record<string, Record<string, Record<string, string>>>>({});
@@ -58,11 +57,12 @@
 			<li class="concordance-entry rounded-md px-5 pt-4 pb-5">
 				<!-- Header: verseRef left, count right -->
 				<div class="flex items-center justify-between gap-3">
-					<span
-						class="font-ui text-[11px] font-semibold uppercase tracking-[0.14em] text-accent"
+					<a
+						href="/bible/{entry.slug}/{entry.startCh}/concordance"
+						class="font-ui text-[11px] font-semibold uppercase tracking-[0.14em] text-accent hover:underline"
 					>
 						{entry.verseRef}
-					</span>
+					</a>
 					{#if cccCount > 0}
 						<span
 							class="font-ui text-[10px] uppercase tracking-[0.08em] text-subtle whitespace-nowrap"
@@ -118,9 +118,14 @@
 				{/if}
 
 				{#if entry.cccRanges.length > 0}
-					<div class="mt-3 flex flex-wrap gap-1.5 justify-center">
+					<div class="mt-3 flex flex-wrap justify-center gap-x-2 gap-y-1">
 						{#each entry.cccRanges as r (`${r.from}-${r.to}`)}
-							<CccRangeChip range={r} />
+							<a
+								href={r.from === r.to ? `/ccc/${r.from}` : `/ccc/${r.from}-${r.to}`}
+								class="font-ui text-[12px] text-accent hover:underline whitespace-nowrap tabular-nums"
+							>
+								{r.from === r.to ? r.from : `${r.from}-${r.to}`}
+							</a>
 						{/each}
 					</div>
 				{/if}
