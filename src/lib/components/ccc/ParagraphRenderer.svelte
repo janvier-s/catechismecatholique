@@ -212,6 +212,7 @@
 	.prose-paragraph :global(sup.srcRef) {
 		font-family: var(--font-ui);
 		font-weight: 500;
+		font-style: normal;
 		font-size: 0.7em;
 		margin-left: 0.04em;
 		cursor: pointer;
