@@ -91,3 +91,31 @@ export function bookByAbbr(abbr: string): BookInfo | undefined {
 	const norm = abbr.trim();
 	return BOOKS.find((b) => b.abbrs.some((a) => a === norm));
 }
+
+export type Testament = 'OT' | 'NT';
+
+/**
+ * Testament boundary: the first NT book is Matthieu (MAT). All books
+ * before it in BOOKS are OT, all from MAT onward are NT.
+ */
+const NT_START_INDEX = BOOKS.findIndex((b) => b.usfx === 'MAT');
+
+export function bookTestament(slug: string): Testament {
+	const idx = BOOKS.findIndex((b) => b.slug === slug);
+	return idx >= NT_START_INDEX ? 'NT' : 'OT';
+}
+
+export const OT_BOOKS: BookInfo[] = BOOKS.slice(0, NT_START_INDEX);
+export const NT_BOOKS: BookInfo[] = BOOKS.slice(NT_START_INDEX);
+
+/** Previous book in canonical order, or undefined at Genesis. */
+export function getPrevBook(slug: string): BookInfo | undefined {
+	const idx = BOOKS.findIndex((b) => b.slug === slug);
+	return idx > 0 ? BOOKS[idx - 1] : undefined;
+}
+
+/** Next book in canonical order, or undefined at Apocalypse. */
+export function getNextBook(slug: string): BookInfo | undefined {
+	const idx = BOOKS.findIndex((b) => b.slug === slug);
+	return idx >= 0 && idx < BOOKS.length - 1 ? BOOKS[idx + 1] : undefined;
+}
