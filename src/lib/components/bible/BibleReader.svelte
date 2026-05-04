@@ -105,7 +105,7 @@
 							{section.title}
 						</h2>
 						{#if section.crossRefs}
-							<p class="mt-1 font-body text-[13px] italic text-subtle leading-snug">
+							<p class="mt-1 font-body text-[13px] text-subtle leading-snug">
 								{section.crossRefs}
 							</p>
 						{/if}

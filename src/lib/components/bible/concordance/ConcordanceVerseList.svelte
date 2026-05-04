@@ -92,7 +92,7 @@
 							</h3>
 							{#if p.pericopeCrossRefs}
 								<p
-									class="font-body italic text-[12px] text-subtle text-center mt-1.5 leading-snug"
+									class="font-body text-[12px] text-subtle text-center mt-1.5 leading-snug"
 								>
 									{p.pericopeCrossRefs}
 								</p>

@@ -34,7 +34,7 @@
 		</h3>
 	{/if}
 	{#if pericope.pericopeCrossRefs}
-		<p class="font-body italic text-[12px] text-subtle text-center mt-1.5 leading-snug">
+		<p class="font-body text-[12px] text-subtle text-center mt-1.5 leading-snug">
 			{pericope.pericopeCrossRefs}
 		</p>
 	{/if}

@@ -81,7 +81,7 @@
 				{/if}
 				{#if entry.pericopeCrossRefs}
 					<p
-						class="font-body italic text-[11.5px] text-subtle text-center mt-1.5 leading-snug"
+						class="font-body text-[11.5px] text-subtle text-center mt-1.5 leading-snug"
 					>
 						{entry.pericopeCrossRefs}
 					</p>

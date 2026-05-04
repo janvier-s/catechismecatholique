@@ -14,7 +14,7 @@
 	<div class="px-lg py-3 flex items-center justify-between gap-3">
 		<a
 			href="/bible/{book.slug}/{chapter}"
-			class="text-[12px] uppercase tracking-[0.15em] text-subtle hover:text-accent transition-colors"
+			class="ml-4 text-[12px] uppercase tracking-[0.15em] text-subtle hover:text-accent transition-colors"
 		>
 			← Lecture
 		</a>
