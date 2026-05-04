@@ -276,35 +276,32 @@
 
 	.part-head {
 		display: grid;
-		grid-template-columns: 4.5rem 1fr;
-		column-gap: clamp(1rem, 2.5vw, 1.75rem);
-		align-items: start;
+		grid-template-columns: 2.5rem 1fr;
+		column-gap: clamp(0.75rem, 1.8vw, 1.25rem);
+		align-items: baseline;
 		margin-bottom: calc(var(--rh) * 1.5);
 		padding-bottom: calc(var(--rh) * 0.75);
 		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
 	}
 	.part-numeral {
-		justify-self: end;
-		text-align: right;
+		text-align: center;
 		font-family: var(--font-heading);
 		color: var(--color-accent);
-		line-height: 0.9;
+		line-height: 1;
 		user-select: none;
 	}
 	.numeral-roman {
 		display: block;
-		font-size: clamp(2.4rem, 4.5vw, 3.5rem);
-		font-weight: 400;
-		font-variant: small-caps;
+		font-size: clamp(1.5rem, 2.4vw, 2rem);
+		font-weight: 500;
 		letter-spacing: 0.02em;
 	}
 	.numeral-mark {
 		display: block;
-		font-size: clamp(2.6rem, 5vw, 3.6rem);
+		font-size: clamp(1.5rem, 2.4vw, 2rem);
 		font-style: italic;
 		font-weight: 400;
 		letter-spacing: -0.02em;
-		padding-top: 0.25rem;
 	}
 
 	.part-title-wrap {
@@ -478,6 +475,7 @@
 		list-style: none;
 		padding: 0;
 		margin: 0;
+		padding-left: 1.4rem;
 		display: flex;
 		flex-direction: column;
 		gap: calc(var(--rh) * 0.85);
@@ -523,7 +521,7 @@
 		padding-bottom: 0.18rem;
 	}
 	.row-article .label-title {
-		font-style: italic;
+		font-style: normal;
 	}
 
 	/* ---- Footer fleuron ------------------------------------------------- */
@@ -552,11 +550,11 @@
 		.parts { gap: calc(var(--rh) * 2.5); }
 
 		.part-head {
-			grid-template-columns: 3rem 1fr;
-			column-gap: 0.85rem;
+			grid-template-columns: 2rem 1fr;
+			column-gap: 0.6rem;
 		}
-		.numeral-roman { font-size: 2.2rem; }
-		.numeral-mark { font-size: 2.2rem; }
+		.numeral-roman { font-size: 1.4rem; }
+		.numeral-mark { font-size: 1.4rem; }
 
 		.row { gap: 0.4rem; }
 		/* On narrow screens dot leaders get cramped — collapse, push range
