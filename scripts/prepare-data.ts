@@ -103,7 +103,7 @@ async function main() {
 	endStep(`${chapters.length} chapters`);
 
 	logStep('building paragraph context');
-	const paragraphContext = buildParagraphContext(structure);
+	const paragraphContext = buildParagraphContext(rawParts, structure);
 	writeFileSync(join(OUT, 'ccc/paragraph-context.json'), JSON.stringify(paragraphContext));
 	endStep(`${Object.keys(paragraphContext).length} paragraphs mapped`);
 
