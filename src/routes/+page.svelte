@@ -162,7 +162,7 @@
 		letter-spacing: 0.32em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		margin: 1.25rem 0 0;
+		margin: 3rem 0 0;
 		padding-left: 0.32em; /* visually compensate trailing tracking */
 	}
 	.title {
@@ -192,7 +192,7 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 0.35rem;
-		margin-top: 0.1rem;
+		margin-top: 1rem;
 		margin-bottom: -0.5rem;
 	}
 	.fleuron {

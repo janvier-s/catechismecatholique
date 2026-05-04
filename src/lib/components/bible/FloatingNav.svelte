@@ -208,19 +208,19 @@
 <style>
 	.nav-scroll {
 		scrollbar-width: thin;
-		scrollbar-color: var(--color-border) transparent;
+		scrollbar-color: color-mix(in srgb, currentColor 25%, transparent) transparent;
 	}
 	.nav-scroll::-webkit-scrollbar {
-		width: 4px;
+		width: 6px;
 	}
 	.nav-scroll::-webkit-scrollbar-track {
 		background: transparent;
 	}
 	.nav-scroll::-webkit-scrollbar-thumb {
-		background: var(--color-border);
-		border-radius: 2px;
+		background: color-mix(in srgb, currentColor 25%, transparent);
+		border-radius: 3px;
 	}
 	.nav-scroll::-webkit-scrollbar-thumb:hover {
-		background: var(--color-subtle);
+		background: color-mix(in srgb, currentColor 40%, transparent);
 	}
 </style>

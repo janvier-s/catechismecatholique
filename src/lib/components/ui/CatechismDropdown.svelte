@@ -648,7 +648,7 @@
 		border-radius: 6px;
 		padding: 1.1rem 1.4rem 0;
 		box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--color-fg) 22%, transparent);
-		z-index: 40;
+		z-index: 60;
 		transform-origin: top center;
 		outline: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
 		outline-offset: -1px;
