@@ -18,6 +18,7 @@
 	import TabEnBref from './TabEnBref.svelte';
 	import TabSources from './TabSources.svelte';
 	import TabBibleVerse from './TabBibleVerse.svelte';
+	import TabConcordance from './TabConcordance.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
 	let panelEl: HTMLElement | undefined = $state();
@@ -59,7 +60,8 @@
 		{ id: 'cross-refs', label: 'Renvois' },
 		{ id: 'cited-by', label: 'Cités par' },
 		{ id: 'sources', label: 'Sources' },
-		{ id: 'en-bref', label: 'En Bref' }
+		{ id: 'en-bref', label: 'En Bref' },
+		{ id: 'concordance', label: 'Concordance' }
 	];
 
 	let paragraph: Paragraph | null = $state(null);
@@ -131,6 +133,8 @@
 		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités par' });
 		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
 		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
+		// Always show Concordance for paragraph contexts; the tab body handles empty state.
+		out.push({ id: 'concordance', label: 'Concordance' });
 		return out;
 	});
 
@@ -243,6 +247,8 @@
 						<TabEnBref />
 					{:else if $studyPanel.activeTab === 'sources'}
 						<TabSources />
+					{:else if $studyPanel.activeTab === 'concordance'}
+						<TabConcordance />
 					{:else if $studyPanel.activeTab === 'bible-verse'}
 						<TabBibleVerse />
 					{/if}

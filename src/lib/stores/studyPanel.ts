@@ -1,6 +1,13 @@
 import { writable } from 'svelte/store';
 
-export type PanelTab = 'bible' | 'cross-refs' | 'cited-by' | 'sources' | 'en-bref' | 'bible-verse';
+export type PanelTab =
+	| 'bible'
+	| 'cross-refs'
+	| 'cited-by'
+	| 'sources'
+	| 'en-bref'
+	| 'concordance'
+	| 'bible-verse';
 
 export interface PanelContext {
 	paragraph: number;
