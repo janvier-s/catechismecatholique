@@ -5,14 +5,12 @@
 	let {
 		verses,
 		chapterData,
-		chapter,
 		book,
 		selectedPericopeRef,
 		onSelectPericope
 	}: {
 		verses: { v: number; text: string }[];
 		chapterData: ConcordanceChapter;
-		chapter: number;
 		book: BookInfo;
 		selectedPericopeRef: string | null;
 		onSelectPericope: (verseRef: string) => void;
@@ -50,11 +48,6 @@
 </script>
 
 <div class="h-full flex flex-col">
-	<div class="shrink-0 border-b border-border px-4 py-2 bg-panel font-ui">
-		<span class="text-[11px] text-subtle font-medium">
-			Chapitre {chapter}
-		</span>
-	</div>
 	<div class="flex-1 overflow-y-auto px-4 py-5 styled-scroll">
 		{#if cardsWithTitleVisibility.length === 0}
 			<div class="p-6 text-center text-subtle text-[14px]">

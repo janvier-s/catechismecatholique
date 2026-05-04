@@ -24,7 +24,7 @@
 			{/if}
 			<span class="text-foreground font-semibold text-[14px] text-center">
 				{book.frenchName}
-				{chapter} — Concordance
+				{chapter}
 			</span>
 			{#if nextHref}
 				<a href={nextHref} class="text-subtle hover:text-accent text-[12px]">Ch. {chapter + 1} ›</a>

@@ -7,12 +7,10 @@
 
 	let {
 		book,
-		chapter,
 		verses,
 		chapterData
 	}: {
 		book: BookInfo;
-		chapter: number;
 		verses: { v: number; text: string }[];
 		chapterData: ConcordanceChapter;
 	} = $props();
@@ -46,7 +44,6 @@
 		<ConcordanceVerseList
 			{verses}
 			{chapterData}
-			{chapter}
 			{book}
 			{selectedPericopeRef}
 			onSelectPericope={handleSelectPericope}
@@ -85,7 +82,6 @@
 		<ConcordanceVerseList
 			{verses}
 			{chapterData}
-			{chapter}
 			{book}
 			{selectedPericopeRef}
 			onSelectPericope={handleSelectPericope}

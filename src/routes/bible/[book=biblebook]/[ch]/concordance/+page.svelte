@@ -13,7 +13,6 @@
 	<ConcordanceBar book={data.book} chapter={data.chapter} totalChapters={data.totalChapters} />
 	<ConcordanceReader
 		book={data.book}
-		chapter={data.chapter}
 		verses={data.verses}
 		chapterData={data.chapterData}
 	/>
