@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ConcordancePericope } from '$lib/data/types';
+	import CccRangeChip from '$lib/components/CccRangeChip.svelte';
 
 	let { pericope, highlighted = false }: { pericope: ConcordancePericope; highlighted?: boolean } =
 		$props();
@@ -21,21 +22,8 @@
 		<div class="w-[24px] h-[2px] bg-accent/50 mt-[5px] rounded-full"></div>
 	</div>
 	<div class="px-sm pb-sm pt-[6px] flex flex-wrap gap-[4px]">
-		<!--
-			TODO B4/B5: render each CccRange as a single chip — `${from}` for a
-			single paragraph, `${from}-${to}` for a multi-paragraph range,
-			linking to /ccc/${from}-${to}. For now we expand the ranges so the
-			temporary chip-per-paragraph rendering still works after the data
-			refactor in B1.2.
-		-->
 		{#each pericope.cccRanges as r (`${r.from}-${r.to}`)}
-			{#each Array.from({ length: r.to - r.from + 1 }, (_, i) => r.from + i) as p (p)}
-				<a
-					href="/ccc/{p}"
-					class="font-ui text-[11px] text-accent border border-accent/30 rounded-[3px] px-[6px] py-[1px] hover:bg-accent/10 transition-colors"
-					>§{p}</a
-				>
-			{/each}
+			<CccRangeChip range={r} />
 		{/each}
 	</div>
 </article>
