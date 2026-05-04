@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { studyPanel } from '$lib/stores/studyPanel';
-	import { loadConcordanceByParagraph } from '$lib/data/loaders';
-	import type { ConcordanceByParagraphEntry } from '$lib/data/types';
+	import { loadConcordanceByParagraph, loadNclBible } from '$lib/data/loaders';
+	import type { ConcordanceByParagraphEntry, NclBible } from '$lib/data/types';
 	import { pluralFr } from '$lib/utils/i18n';
 
 	let entries = $state<ConcordanceByParagraphEntry[]>([]);
-	let nclData = $state<Record<string, Record<string, Record<string, string>>>>({});
+	let nclData = $state<NclBible>({});
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
@@ -15,12 +15,9 @@
 			return;
 		}
 		(async () => {
-			const [idx, nclRes] = await Promise.all([
-				loadConcordanceByParagraph(),
-				fetch('/data/bible/ncl.json')
-			]);
+			const [idx, ncl] = await Promise.all([loadConcordanceByParagraph(), loadNclBible()]);
 			entries = idx[String(num)] ?? [];
-			if (nclRes.ok) nclData = await nclRes.json();
+			nclData = ncl;
 		})();
 	});
 

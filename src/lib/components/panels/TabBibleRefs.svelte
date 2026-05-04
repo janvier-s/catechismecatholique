@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { studyPanel } from '$lib/stores/studyPanel';
-	import { loadParagraph } from '$lib/data/loaders';
+	import { loadParagraph, loadNclBible } from '$lib/data/loaders';
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
-	import type { BibleRef, MagisterialRefRecord } from '$lib/data/types';
+	import type { BibleRef, MagisterialRefRecord, NclBible } from '$lib/data/types';
 
 	type RefStyle = 'inline' | 'sup';
 	type ParsedRef = {
@@ -19,7 +19,7 @@
 
 	let refs: BibleRef[] = $state([]);
 	let magisterial: MagisterialRefRecord[] = $state([]);
-	let bible: Record<string, Record<string, Record<string, string>>> | null = $state(null);
+	let bible: NclBible | null = $state(null);
 	let resolved: RefWithVerses[] = $state([]);
 	let listEl: HTMLUListElement | undefined = $state();
 
@@ -27,10 +27,7 @@
 		const ctx = $studyPanel.context;
 		if (!ctx) return;
 		(async () => {
-			const [p, bibleResp] = await Promise.all([
-				loadParagraph(ctx.paragraph),
-				fetch('/data/bible/ncl.json').then((r) => r.json())
-			]);
+			const [p, bibleResp] = await Promise.all([loadParagraph(ctx.paragraph), loadNclBible()]);
 			refs = p.bible_refs;
 			magisterial = p.magisterial_refs;
 			bible = bibleResp;

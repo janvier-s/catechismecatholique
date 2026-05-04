@@ -8,7 +8,8 @@ import type {
 	GlossaryBundle,
 	ConcordanceChapter,
 	ConcordanceByParagraph,
-	NclSectionMap
+	NclSectionMap,
+	NclBible
 } from './types';
 
 type Fetch = typeof fetch;
@@ -31,6 +32,7 @@ const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | nul
 
 let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
+let nclBiblePromise: Promise<NclBible> | null = null;
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
@@ -138,4 +140,11 @@ export function loadChapterCounts(fetcher: Fetch = fetch): Promise<Record<string
 		})();
 	}
 	return chapterCountsPromise;
+}
+
+export function loadNclBible(fetcher: Fetch = fetch): Promise<NclBible> {
+	if (!nclBiblePromise) {
+		nclBiblePromise = fetchJson<NclBible>('/data/bible/ncl.json', fetcher);
+	}
+	return nclBiblePromise;
 }
