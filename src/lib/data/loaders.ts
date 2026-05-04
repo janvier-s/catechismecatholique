@@ -30,6 +30,7 @@ let concordanceByParagraphPromise: Promise<ConcordanceByParagraph> | null = null
 const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | null>>();
 
 let nclSectionsPromise: Promise<NclSectionMap> | null = null;
+let chapterCountsPromise: Promise<Record<string, number>> | null = null;
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
@@ -126,4 +127,15 @@ export function loadNclSections(fetcher: Fetch = fetch): Promise<NclSectionMap> 
 		})();
 	}
 	return nclSectionsPromise;
+}
+
+export function loadChapterCounts(fetcher: Fetch = fetch): Promise<Record<string, number>> {
+	if (!chapterCountsPromise) {
+		chapterCountsPromise = (async () => {
+			const r = await fetcher('/data/bible/chapter-counts.json');
+			if (!r.ok) return {};
+			return (await r.json()) as Record<string, number>;
+		})();
+	}
+	return chapterCountsPromise;
 }

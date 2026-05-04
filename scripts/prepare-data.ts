@@ -150,6 +150,19 @@ async function main() {
 	writeFileSync(join(OUT, 'bible/ncl.json'), JSON.stringify(ncl));
 	endStep(`${Object.keys(ncl).length} books`);
 
+	logStep('building chapter counts');
+	{
+		const counts: Record<string, number> = {};
+		for (const [usfx, chapters] of Object.entries(ncl)) {
+			const max = Object.keys(chapters)
+				.map(Number)
+				.reduce((m, n) => Math.max(m, n), 0);
+			counts[usfx] = max;
+		}
+		writeFileSync(join(OUT, 'bible/chapter-counts.json'), JSON.stringify(counts));
+		endStep(`${Object.keys(counts).length} books`);
+	}
+
 	logStep('extracting NCL section titles');
 	{
 		const { parseNclSections } = await import('./prepare/ncl-sections.ts');
