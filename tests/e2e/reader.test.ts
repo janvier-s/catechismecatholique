@@ -55,16 +55,19 @@ test('TopBar renders on every page', async ({ page }) => {
 	const banner = page.getByRole('banner');
 	await expect(banner.getByRole('link', { name: 'Accueil' })).toBeVisible();
 	await expect(banner.getByRole('button', { name: /Catéchisme/i })).toBeVisible();
-	await expect(banner.getByRole('link', { name: 'Sommaire' })).toBeVisible();
-	await expect(banner.getByLabel('Recherche (à venir)')).toBeDisabled();
+	await expect(banner.getByRole('link', { name: 'Bible' })).toBeVisible();
+	const search = banner.getByLabel('Recherche', { exact: true });
+	await expect(search).toBeVisible();
+	await expect(search).toBeEnabled();
+	await expect(search).toHaveAttribute('placeholder', 'Rechercher : Eucharistie ou 1324-1327');
 });
 
 test('theme picker switches data-theme attribute and persists', async ({ page }) => {
 	await page.goto('/ccc/27');
 	const html = page.locator('html');
-	// Open the picker, then choose Sombre
-	await page.getByLabel(/Choisir le thème/).click();
-	await page.getByRole('menuitemradio', { name: 'Sombre' }).click();
+	// Open the reading-options dialog, then choose Sombre
+	await page.getByLabel('Options de lecture').click();
+	await page.getByRole('dialog', { name: 'Options de lecture' }).getByLabel('Sombre').click();
 	await expect(html).toHaveAttribute('data-theme', 'dark');
 	// Reload — should persist
 	await page.reload();

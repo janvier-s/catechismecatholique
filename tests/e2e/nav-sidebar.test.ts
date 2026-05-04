@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test('sidebar lists 5 parts (incl. Prologue) on /ccc routes', async ({ page }) => {
-	await page.goto('/ccc');
+test('sidebar lists parts inside reader pages', async ({ page }) => {
+	// Sidebar is hidden on /ccc index and /ccc/sommaire; it appears once you
+	// enter a reading surface (paragraph, chapter, etc.).
+	await page.goto('/ccc/27');
 	const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
 	await expect(sidebar).toBeVisible();
-	// 5 part-level links visible at the top level (Prologue + 4 parties)
 	await expect(sidebar.getByRole('link').first()).toBeVisible();
 });
 
@@ -23,25 +24,45 @@ test('sidebar auto-expands active chapter branch', async ({ page }) => {
 	const url = `/ccc/${part.slug}/${section.slug}/${chapter.slug}`;
 	await page.goto(url);
 	const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
-	await expect(
-		sidebar.getByRole('link', { name: new RegExp(chapter.title.slice(0, 30)) })
-	).toBeVisible();
+	// Match the chapter link by href — the visible label includes
+	// "Chapitre N :" prefix and may contain typographic punctuation that
+	// makes title-based matching brittle.
+	await expect(sidebar.locator(`a[href="${url}"]`)).toBeVisible();
 });
 
 test('Catéchisme dropdown opens with parts', async ({ page }) => {
 	await page.goto('/');
-	await page.getByRole('button', { name: /Catéchisme/i }).first().click();
+	// The dropdown also opens on mouseenter; hover deterministically opens
+	// the panel without the click-toggle quirk.
+	await page.getByRole('button', { name: /Catéchisme/i }).first().hover();
 	await expect(page.getByRole('menu')).toBeVisible();
-	await expect(page.getByText(/Partie 1 :/)).toBeVisible();
+	// The cell-tag span renders "Partie 1" (with a non-breaking space)
+	await expect(
+		page.locator('[role="menu"] .cell-tag').filter({ hasText: /Partie\s*1/ }).first()
+	).toBeVisible();
 });
 
 test('Catéchisme dropdown cascades to chapters on hover', async ({ page }) => {
 	await page.goto('/');
-	await page.getByRole('button', { name: /Catéchisme/i }).first().click();
-	// Hover Partie 1 (button containing "Partie 1 :")
-	await page.locator('[role="menu"] button').filter({ hasText: 'Partie 1 :' }).first().hover();
-	// Hover the first section button (any button after "Partie 1 :")
-	await page.locator('[role="menu"] button').filter({ hasText: 'Section 1 :' }).first().hover();
+	await page.getByRole('button', { name: /Catéchisme/i }).first().hover();
+	await expect(page.getByRole('menu')).toBeVisible();
+	// Cells are <a role="menuitem">, not buttons. Hover the Partie 1 cell.
+	await page
+		.locator('[role="menu"] a[role="menuitem"]')
+		.filter({ hasText: /Partie\s*1/ })
+		.first()
+		.hover();
+	// Hover the first Section 1 cell
+	await page
+		.locator('[role="menu"] a[role="menuitem"]')
+		.filter({ hasText: /Section\s*1/ })
+		.first()
+		.hover();
 	// At least one chapter link should appear
-	await expect(page.locator('[role="menu"] a').filter({ hasText: /Chapitre 1/ })).toBeVisible();
+	await expect(
+		page
+			.locator('[role="menu"] a[role="menuitem"]')
+			.filter({ hasText: /Chapitre\s*1/ })
+			.first()
+	).toBeVisible();
 });
