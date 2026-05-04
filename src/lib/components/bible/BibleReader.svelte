@@ -71,9 +71,6 @@
 
 	<article>
 		<header class="mb-10 text-center">
-			<p class="font-ui text-[11px] uppercase tracking-[0.3em] text-subtle mb-3">
-				{book.frenchName}
-			</p>
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">
 				Chapitre {chapter}
 			</h1>
