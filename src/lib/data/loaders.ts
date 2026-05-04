@@ -33,6 +33,7 @@ const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | nul
 let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
 let nclBiblePromise: Promise<NclBible> | null = null;
+let paragraphContextsPromise: Promise<Record<number, ParagraphContext>> | null = null;
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
@@ -53,7 +54,13 @@ export function loadAbbreviations(fetcher: Fetch = fetch): Promise<AbbreviationM
 export function loadParagraphContexts(
 	fetcher: Fetch = fetch
 ): Promise<Record<number, ParagraphContext>> {
-	return fetchJson<Record<number, ParagraphContext>>('/data/ccc/paragraph-context.json', fetcher);
+	if (!paragraphContextsPromise) {
+		paragraphContextsPromise = fetchJson<Record<number, ParagraphContext>>(
+			'/data/ccc/paragraph-context.json',
+			fetcher
+		);
+	}
+	return paragraphContextsPromise;
 }
 
 export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, number[]>> {
