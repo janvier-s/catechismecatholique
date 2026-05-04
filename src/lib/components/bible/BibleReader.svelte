@@ -3,6 +3,7 @@
 	import VerseMarker from './VerseMarker.svelte';
 	import type { BibleVerseIndex, NclSection } from '$lib/data/types';
 	import type { BookInfo } from '$lib/utils/bibleBookSlug';
+	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 
 	let {
 		book,
@@ -39,6 +40,32 @@
 	}
 
 	const totalCited = $derived(verses.reduce((t, v) => t + (citedCount(v.v) > 0 ? 1 : 0), 0));
+
+	function isVerseActive(v: number): boolean {
+		const ctx = $studyPanel.context;
+		if (!ctx?.verseUsfx) return false;
+		return (
+			$studyPanel.open &&
+			ctx.verseUsfx === book.usfx &&
+			ctx.verseChapter === chapter &&
+			ctx.verseVerse === v
+		);
+	}
+
+	function openVerse(v: number) {
+		openPanel(
+			{ paragraph: 0, verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v },
+			'bible-verse'
+		);
+	}
+
+	function onVerseKeydown(e: KeyboardEvent, v: number) {
+		// Preserve native text selection — only Enter/Space activate.
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			openVerse(v);
+		}
+	}
 </script>
 
 <main class="mx-auto max-w-reader px-6 pt-8 pb-16">
@@ -99,9 +126,7 @@
 
 				{#if section}
 					<li class="list-none mt-8 mb-3 first:mt-0">
-						<h2
-							class="font-heading text-[18px] font-semibold text-foreground/80 leading-snug"
-						>
+						<h2 class="font-heading text-[18px] font-semibold text-foreground/80 leading-snug">
 							{section.title}
 						</h2>
 						{#if section.crossRefs}
@@ -112,25 +137,33 @@
 					</li>
 				{/if}
 
-				<li
-					id="v{v.v}"
-					class="flex gap-3 max-md:gap-2 transition-opacity"
-					class:dim={dimNonCited && c === 0}
-				>
-					<span
-						class="font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-5 shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle"
+				{@const active = isVerseActive(v.v)}
+				<li id="v{v.v}" class="transition-opacity" class:dim={dimNonCited && c === 0}>
+					<div
+						class="verse-row flex gap-3 max-md:gap-2 rounded-md px-2 -mx-2 py-1 cursor-pointer"
+						class:is-active={active}
+						role="button"
+						tabindex="0"
+						aria-pressed={active}
+						aria-label="Ouvrir le panneau d'étude pour le verset {v.v}"
+						onclick={() => openVerse(v.v)}
+						onkeydown={(e) => onVerseKeydown(e, v.v)}
 					>
-						{v.v}
-					</span>
-					<p class="font-body text-[18px] leading-[1.7] flex-1">
-						{v.text}{#if c > 0}<VerseMarker
-								bookSlug={book.slug}
-								bookUsfx={book.usfx}
-								{chapter}
-								verse={v.v}
-								count={c}
-							/>{/if}
-					</p>
+						<span
+							class="font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-5 shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+						>
+							{v.v}
+						</span>
+						<p class="font-body text-[18px] leading-[1.7] flex-1">
+							{v.text}{#if c > 0}<VerseMarker
+									bookSlug={book.slug}
+									bookUsfx={book.usfx}
+									{chapter}
+									verse={v.v}
+									count={c}
+								/>{/if}
+						</p>
+					</div>
 				</li>
 			{/each}
 		</ol>
@@ -149,5 +182,22 @@
 <style>
 	.dim {
 		opacity: 0.35;
+	}
+	.verse-row {
+		transition-duration: 150ms;
+	}
+	.verse-row:hover {
+		background-color: color-mix(in srgb, var(--color-accent) 5%, transparent);
+	}
+	.verse-row.is-active {
+		background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+	}
+	/* When the parent <li> is dimmed, hover should still feel responsive. */
+	:global(.dim) .verse-row:hover {
+		background-color: color-mix(in srgb, var(--color-accent) 4%, transparent);
+	}
+	.verse-row:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
 	}
 </style>
