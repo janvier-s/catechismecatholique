@@ -195,12 +195,12 @@
 				{@const section = sectionByVerse.get(v.v)}
 
 				{#if section}
-					<li class="list-none mt-8 mb-3 first:mt-0">
-						<h2 class="font-heading text-[18px] font-semibold text-foreground/80 leading-snug">
+					<li class="list-none mt-10 mb-4 first:mt-0">
+						<h2 class="font-heading text-[26px] font-semibold text-foreground leading-tight">
 							{section.title}
 						</h2>
 						{#if section.crossRefs}
-							<p class="mt-1 font-body text-[13px] text-subtle leading-snug">
+							<p class="mt-2 font-body text-[13px] text-subtle leading-snug">
 								{section.crossRefs}
 							</p>
 						{/if}
