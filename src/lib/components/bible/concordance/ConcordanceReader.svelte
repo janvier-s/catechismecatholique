@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { ConcordanceChapter } from '$lib/data/types';
+	import type { ConcordanceChapter, ConcordancePericope } from '$lib/data/types';
 	import type { BookInfo } from '$lib/utils/bibleBookSlug';
 	import ConcordanceVerseList from './ConcordanceVerseList.svelte';
-	import ConcordancePericopePanel from './ConcordancePericopePanel.svelte';
+	import ConcordancePericopeCard from './ConcordancePericopeCard.svelte';
+	import PanelShell from '$lib/components/panels/PanelShell.svelte';
 
 	let {
 		book,
@@ -29,11 +30,19 @@
 	function handleSelectPericope(verseRef: string) {
 		selectedPericopeRef = verseRef;
 	}
+
+	const selectedPericope = $derived<ConcordancePericope | null>(
+		selectedPericopeRef === null
+			? null
+			: (chapterData.pericopes.find((p) => p.verseRef === selectedPericopeRef) ?? null)
+	);
 </script>
 
-<!-- Desktop: horizontal split-pane -->
+<!-- Desktop: horizontal split-pane. The left list flexes to fill remaining
+     space; the right pane is a resizable PanelShell whose width is shared
+     with the catechism StudyPanel via the `panelWidth` store. -->
 <div class="hidden md:flex flex-1 items-stretch min-h-0">
-	<div class="border-r border-border flex flex-col" style="width: 50%;">
+	<div class="flex-1 min-w-0 flex flex-col">
 		<ConcordanceVerseList
 			{verses}
 			{chapterData}
@@ -43,12 +52,34 @@
 			onSelectPericope={handleSelectPericope}
 		/>
 	</div>
-	<div class="flex-1 min-w-0 overflow-hidden">
-		<ConcordancePericopePanel {chapterData} {selectedPericopeRef} />
-	</div>
+	<PanelShell ariaLabel="Détail de la péricope">
+		{#snippet title()}
+			{#if selectedPericope}
+				<span class="text-accent font-semibold tabular-nums text-[13px]">
+					{selectedPericope.verseRef}
+				</span>
+			{/if}
+		{/snippet}
+		{#snippet children()}
+			<div class="flex-1 overflow-y-auto p-md panel-scroll">
+				{#if chapterData.pericopes.length === 0}
+					<div class="p-lg text-center text-subtle text-[14px]">
+						<p>Aucune référence de concordance pour ce chapitre.</p>
+					</div>
+				{:else if selectedPericope === null}
+					<div class="p-lg text-center text-subtle text-[14px]">
+						<p>Sélectionnez une péricope.</p>
+					</div>
+				{:else}
+					<ConcordancePericopeCard pericope={selectedPericope} highlighted={true} />
+				{/if}
+			</div>
+		{/snippet}
+	</PanelShell>
 </div>
 
-<!-- Mobile: vertical split (pericope cards on top, detail panel below) -->
+<!-- Mobile: vertical split — pericope cards on top, the selected pericope's
+     detail card directly below (no resizable shell on small viewports). -->
 <div class="md:hidden flex flex-col flex-1 min-h-0">
 	<div class="flex-1 overflow-y-auto border-b border-border styled-scroll">
 		<ConcordanceVerseList
@@ -60,7 +91,17 @@
 			onSelectPericope={handleSelectPericope}
 		/>
 	</div>
-	<div class="flex-1 overflow-y-auto styled-scroll">
-		<ConcordancePericopePanel {chapterData} {selectedPericopeRef} />
+	<div class="flex-1 overflow-y-auto p-md styled-scroll bg-panel">
+		{#if chapterData.pericopes.length === 0}
+			<div class="p-lg text-center text-subtle text-[14px]">
+				<p>Aucune référence de concordance pour ce chapitre.</p>
+			</div>
+		{:else if selectedPericope === null}
+			<div class="p-lg text-center text-subtle text-[14px]">
+				<p>Sélectionnez une péricope.</p>
+			</div>
+		{:else}
+			<ConcordancePericopeCard pericope={selectedPericope} highlighted={true} />
+		{/if}
 	</div>
 </div>
