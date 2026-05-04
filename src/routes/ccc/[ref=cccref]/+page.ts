@@ -13,10 +13,9 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		const from = parts[0]!;
 		const to = parts[1]!;
 		if (from < 1 || to < from || to > 2865) throw error(404, 'Plage invalide');
-		const paragraphs = [];
-		for (let n = from; n <= to; n++) {
-			paragraphs.push(await loadParagraph(n, fetch));
-		}
+		const numbers: number[] = [];
+		for (let n = from; n <= to; n++) numbers.push(n);
+		const paragraphs = await Promise.all(numbers.map((n) => loadParagraph(n, fetch)));
 		const context: ParagraphContext | undefined = contexts[from];
 		return { kind: 'range' as const, from, to, paragraphs, context };
 	}
