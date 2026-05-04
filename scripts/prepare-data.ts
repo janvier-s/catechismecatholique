@@ -149,6 +149,15 @@ async function main() {
 	writeFileSync(join(OUT, 'bible/ncl.json'), JSON.stringify(ncl));
 	endStep(`${Object.keys(ncl).length} books`);
 
+	logStep('extracting NCL section titles');
+	{
+		const { parseNclSections } = await import('./prepare/ncl-sections.ts');
+		const sections = parseNclSections(nclXml);
+		writeFileSync(join(OUT, 'bible/ncl-sections.json'), JSON.stringify(sections));
+		const total = Object.values(sections).reduce((t, arr) => t + arr.length, 0);
+		endStep(`${Object.keys(sections).length} books, ${total} sections`);
+	}
+
 	logStep('building bible verse index');
 	const { buildBibleVerseIndex } = await import('./prepare/bible-verse-index.ts');
 	const { BOOKS } = await import('../src/lib/utils/bibleBookSlug.ts');

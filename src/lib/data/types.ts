@@ -137,6 +137,16 @@ export interface ParagraphContext {
 // Shape: usfx → chapter → verse → paragraph numbers (sorted asc, deduped).
 export type BibleVerseIndex = Record<string, Record<string, Record<string, number[]>>>;
 
+/** A French section title from the NCL Bible (e.g. "La faute et le châtiment"). */
+export interface NclSection {
+	ch: number; // chapter where the section header appears
+	startV: number; // first verse of the section
+	title: string; // already-French native title
+}
+
+/** Per-book sections, sorted by (ch asc, startV asc). */
+export type NclSectionMap = Record<string, NclSection[]>; // keyed by USFX
+
 // Glossary (thematic index + Levada definitions). Built by
 // scripts/prepare/glossary.ts.
 export type GlossaryClusterId =
