@@ -114,6 +114,12 @@
 		// reading prefs also hides the separator. Without this, toggling
 		// "hide cross-refs" leaves dangling commas and spaces (notably the
 		// space before the next "." that follows a removed marker).
+		// For inline bible-ref buttons we also pull any IMMEDIATELY-following
+		// punctuation (period, comma, etc.) into the wrap. Otherwise the
+		// browser may break between the inline-block button and the trailing
+		// "." — leaving a period orphaned at the start of the next line.
+		// (Buttons are always atomic inline-block per UA stylesheet, so a CSS
+		// `display: inline` override is ineffective in practice.)
 		const markers = containerEl.querySelectorAll<HTMLElement>(
 			'sup.srcRef, button.bible-inline'
 		);
@@ -121,6 +127,7 @@
 			if (marker.parentElement?.classList.contains('ref-wrap')) continue;
 			const wrap = document.createElement('span');
 			wrap.className = 'ref-wrap';
+			const isInlineBible = marker.tagName !== 'SUP';
 			if (marker.tagName === 'SUP') {
 				if (marker.classList.contains('cccRef')) wrap.classList.add('ref-cccRef');
 				else if (marker.classList.contains('bibleRef')) wrap.classList.add('ref-bibleRef');
@@ -128,17 +135,42 @@
 			} else {
 				wrap.classList.add('ref-bible-inline');
 			}
-			const prevNode = marker.previousSibling;
-			if (prevNode instanceof Text) {
-				const txt = prevNode.nodeValue ?? '';
-				const sep = txt.match(/[\s,]+$/);
-				if (sep) {
-					prevNode.nodeValue = txt.slice(0, -sep[0].length);
-					wrap.appendChild(document.createTextNode(sep[0]));
+			// For sup markers, pull the leading whitespace/comma into the wrap
+			// so toggling visibility cleanly removes the separator. For inline
+			// bible buttons we leave the leading whitespace OUTSIDE: the wrap
+			// gets white-space: nowrap (see app.css) to glue trailing
+			// punctuation to the button, and a leading space inside a nowrap
+			// span would lose its wrap-opportunity, causing overflow.
+			if (!isInlineBible) {
+				const prevNode = marker.previousSibling;
+				if (prevNode instanceof Text) {
+					const txt = prevNode.nodeValue ?? '';
+					const sep = txt.match(/[\s,]+$/);
+					if (sep) {
+						prevNode.nodeValue = txt.slice(0, -sep[0].length);
+						wrap.appendChild(document.createTextNode(sep[0]));
+					}
 				}
 			}
 			marker.parentNode!.insertBefore(wrap, marker);
 			wrap.appendChild(marker);
+			// Glue trailing punctuation to inline bible refs. The next sibling
+			// is a text node like ". La plus grave..." — peel the leading
+			// punctuation run into the wrap so the period can't break to its
+			// own line. Buttons render as atomic inline-block per UA stylesheet
+			// (CSS display: inline doesn't actually take effect on <button>),
+			// which creates a wrap opportunity right after the closing paren.
+			if (isInlineBible) {
+				const nextNode = wrap.nextSibling;
+				if (nextNode instanceof Text) {
+					const txt = nextNode.nodeValue ?? '';
+					const m = txt.match(/^[.,;:!?»)\]]+/);
+					if (m) {
+						nextNode.nodeValue = txt.slice(m[0].length);
+						wrap.appendChild(document.createTextNode(m[0]));
+					}
+				}
+			}
 		}
 
 		// Click handler — DR study-mode pattern: clicking ANY marker on a
@@ -212,6 +244,7 @@
 	.prose-paragraph :global(sup.srcRef) {
 		font-family: var(--font-ui);
 		font-weight: 500;
+		font-style: normal;
 		font-size: 0.7em;
 		margin-left: 0.04em;
 		cursor: pointer;

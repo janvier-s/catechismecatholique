@@ -315,6 +315,30 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 .prose-paragraph .ref-wrap + .ref-wrap {
 	margin-left: 0.15em;
 }
+/* Inline Bible refs render their citation as a <button> (atomic inline-block
+   per UA stylesheet), which creates a wrap opportunity between the button
+   and any trailing punctuation. The renderer pulls the trailing punctuation
+   inside this wrap; nowrap then keeps "(1 Jn 3, 8)." on a single line. The
+   leading whitespace stays OUTSIDE the wrap so a normal break opportunity
+   exists before the citation. */
+.prose-paragraph .ref-bible-inline {
+	white-space: nowrap;
+}
+
+/* Translucent panel background for sticky overlays. The variable carries
+   alpha so the blur can show subtle content underneath in browsers that
+   support backdrop-filter. Firefox does NOT apply backdrop-filter on most
+   stable channels, so without a fallback the content beneath bleeds through
+   the sticky bar. The @supports rule swaps to a fully opaque panel colour
+   when backdrop-filter is unsupported. */
+.bg-glass {
+	background-color: var(--color-bg-glass);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.bg-glass {
+		background-color: var(--color-panel);
+	}
+}
 
 /* Logo theme swap — only show the right variant for the current theme. */
 .logo-light {
@@ -338,4 +362,29 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 	[data-theme='auto'] .logo-dark {
 		display: block;
 	}
+}
+
+/* Stylized scrollbars for internal scroll containers. Apply via the
+   `styled-scroll` utility — never on <html>/<body>. Firefox uses the
+   `scrollbar-*` properties; Webkit/Chromium uses ::-webkit-scrollbar.
+   Thumb uses a neutral grey derived from currentColor so it stays neutral
+   across all themes (avoids the warm-toned --color-border which can read
+   as pink against a white panel). */
+.styled-scroll {
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in srgb, currentColor 25%, transparent) transparent;
+}
+.styled-scroll::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+.styled-scroll::-webkit-scrollbar-track {
+	background: transparent;
+}
+.styled-scroll::-webkit-scrollbar-thumb {
+	background-color: color-mix(in srgb, currentColor 25%, transparent);
+	border-radius: 4px;
+}
+.styled-scroll::-webkit-scrollbar-thumb:hover {
+	background-color: color-mix(in srgb, currentColor 40%, transparent);
 }

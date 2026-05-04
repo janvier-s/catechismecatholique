@@ -7,7 +7,8 @@ import {
 	statSync,
 	readFileSync,
 	writeFileSync,
-	readdirSync
+	readdirSync,
+	unlinkSync
 } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -149,6 +150,28 @@ async function main() {
 	writeFileSync(join(OUT, 'bible/ncl.json'), JSON.stringify(ncl));
 	endStep(`${Object.keys(ncl).length} books`);
 
+	logStep('building chapter counts');
+	{
+		const counts: Record<string, number> = {};
+		for (const [usfx, chapters] of Object.entries(ncl)) {
+			const max = Object.keys(chapters)
+				.map(Number)
+				.reduce((m, n) => Math.max(m, n), 0);
+			counts[usfx] = max;
+		}
+		writeFileSync(join(OUT, 'bible/chapter-counts.json'), JSON.stringify(counts));
+		endStep(`${Object.keys(counts).length} books`);
+	}
+
+	logStep('extracting NCL section titles');
+	{
+		const { parseNclSections } = await import('./prepare/ncl-sections.ts');
+		const sections = parseNclSections(nclXml);
+		writeFileSync(join(OUT, 'bible/ncl-sections.json'), JSON.stringify(sections));
+		const total = Object.values(sections).reduce((t, arr) => t + arr.length, 0);
+		endStep(`${Object.keys(sections).length} books, ${total} sections`);
+	}
+
 	logStep('building bible verse index');
 	const { buildBibleVerseIndex } = await import('./prepare/bible-verse-index.ts');
 	const { BOOKS } = await import('../src/lib/utils/bibleBookSlug.ts');
@@ -160,16 +183,14 @@ async function main() {
 	);
 	endStep(`${verseCount} verses indexed`);
 
-	logStep('building concordance verse index');
+	logStep('building concordance pericopes');
 	{
-		const { buildConcordance } = await import('./prepare/concordance.ts');
+		const { buildConcordancePericopes } = await import('./prepare/concordance.ts');
 		const sourceDir =
 			process.env.DIDACHE_SOURCE_DIR ?? join(ROOT, '..', 'DOCTRINA', 'sources', 'didache');
 
 		const htmlFiles: string[] = [];
 		try {
-			// Use statSync (follows symlinks) so DIDACHE_SOURCE_DIR can
-			// be a symlink to the real source directory.
 			const stat = statSync(sourceDir);
 			if (!stat.isDirectory()) throw new Error(`not a directory: ${sourceDir}`);
 			const entries = readdirSync(sourceDir, { withFileTypes: true, recursive: true });
@@ -181,30 +202,52 @@ async function main() {
 		} catch (e) {
 			const err = e as NodeJS.ErrnoException;
 			if (err.code === 'ENOENT' || err.message?.startsWith('not a directory:')) {
-				// Source dir missing or not a directory — emit empty index, log, continue.
 				console.warn(`  (no DIDACHE_SOURCE_DIR at ${sourceDir} — emitting empty concordance)`);
 			} else {
-				throw e; // permission errors / partial-read / unexpected — fail loudly
+				throw e;
 			}
 		}
 
-		const { index, stats } = buildConcordance(htmlFiles, ncl, knownParas, BOOKS);
-		writeFileSync(join(OUT, 'ccc/concordance-verse-index.json'), JSON.stringify(index));
-		if (stats.unknownBooks.length > 0) {
+		const nclSections = JSON.parse(readFileSync(join(OUT, 'bible/ncl-sections.json'), 'utf8'));
+		const { byBook, byParagraph, manifest, stats } = buildConcordancePericopes(
+			htmlFiles,
+			ncl,
+			knownParas,
+			BOOKS,
+			nclSections
+		);
+
+		const concordanceDir = join(OUT, 'concordance');
+		mkdirSync(concordanceDir, { recursive: true });
+		for (const [usfx, byCh] of Object.entries(byBook)) {
+			const slug = BOOKS.find((b) => b.usfx === usfx)!.slug;
+			const bookDir = join(concordanceDir, slug);
+			mkdirSync(bookDir, { recursive: true });
+			for (const [ch, chapter] of Object.entries(byCh)) {
+				writeFileSync(join(bookDir, `${ch}.json`), JSON.stringify(chapter));
+			}
+		}
+		writeFileSync(join(concordanceDir, 'manifest.json'), JSON.stringify(manifest));
+		writeFileSync(join(concordanceDir, 'by-paragraph.json'), JSON.stringify(byParagraph));
+
+		// Drop the old verse-index file if it still exists
+		try {
+			unlinkSync(join(OUT, 'ccc/concordance-verse-index.json'));
+		} catch {}
+
+		if (stats.unknownBooks.length > 0)
 			console.warn('  unknown books:', stats.unknownBooks.join(', '));
-		}
-		if (stats.unknownParagraphs.length > 0) {
+		if (stats.unknownParagraphs.length > 0)
 			console.warn(`  ${stats.unknownParagraphs.length} unknown CCC paragraphs (dropped)`);
-		}
-		if (stats.unparseableRanges.length > 0) {
+		if (stats.unparseableRanges.length > 0)
 			console.warn(`  ${stats.unparseableRanges.length} unparseable ranges`);
-		}
-		if (stats.booksWithZeroEntries.length > 0) {
+		if (stats.booksWithZeroEntries.length > 0)
 			console.warn(
 				`  ${stats.booksWithZeroEntries.length} books with zero entries: ${stats.booksWithZeroEntries.join(', ')}`
 			);
-		}
-		endStep(`${htmlFiles.length} files, ${stats.entriesProcessed} entries`);
+		if (stats.pericopesWithoutTitle > 0)
+			console.warn(`  ${stats.pericopesWithoutTitle} pericopes without NCL title (kept titleless)`);
+		endStep(`${stats.commentaryFiles} files, ${stats.pericopesEmitted} pericopes`);
 	}
 
 	logStep('building search index');

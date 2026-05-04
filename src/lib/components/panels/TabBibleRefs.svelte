@@ -100,8 +100,6 @@
 					<div class="flex items-baseline gap-1.5">
 						{#if r.style === 'sup'}
 							<sup class="ref-marker">{r.idx}</sup>
-						{:else}
-							<span class="ref-marker" aria-hidden="true">(</span>
 						{/if}
 						<a
 							href="/bible/{r.book.slug}/{r.chapter}{r.fromV !== undefined ? `/${r.fromV}` : ''}"
@@ -112,9 +110,6 @@
 								{#if r.toV !== r.fromV}{r.fromV}–{r.toV}{:else}{r.fromV}{/if}
 							{/if}
 						</a>
-						{#if r.style === 'inline'}
-							<span class="ref-marker" aria-hidden="true">)</span>
-						{/if}
 					</div>
 					{#if r.fromV === undefined}
 						<a

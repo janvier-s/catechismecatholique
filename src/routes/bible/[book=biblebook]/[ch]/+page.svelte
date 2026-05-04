@@ -11,6 +11,8 @@
 	chapter={data.chapter}
 	verses={data.verses}
 	verseIdx={data.verseIdx}
-	concordanceIdx={data.concordanceIdx}
+	hasConcordance={data.hasConcordance}
 	totalChapters={data.totalChapters}
+	sections={data.sections}
+	chapterCounts={data.chapterCounts}
 />

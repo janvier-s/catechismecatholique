@@ -5,8 +5,10 @@ import type {
 	ParagraphContext,
 	SourceEntry,
 	BibleVerseIndex,
-	ConcordanceVerseIndex,
-	GlossaryBundle
+	GlossaryBundle,
+	ConcordanceChapter,
+	ConcordanceByParagraph,
+	NclSectionMap
 } from './types';
 
 type Fetch = typeof fetch;
@@ -17,12 +19,18 @@ async function fetchJson<T>(url: string, fetcher: Fetch): Promise<T> {
 	return res.json() as Promise<T>;
 }
 
-// Module-level promise caches for the verse indices: the page load fills the
+// Module-level promise cache for the verse index: the page load fills the
 // cache, and TabBibleVerse hits the same promise instead of re-fetching.
 // Safe at module scope — the file is static for the server's lifetime, and
 // SvelteKit's Cloudflare adapter discards modules between requests anyway.
 let bibleVerseIndexPromise: Promise<BibleVerseIndex> | null = null;
-let concordanceVerseIndexPromise: Promise<ConcordanceVerseIndex> | null = null;
+
+let concordanceManifestPromise: Promise<Record<string, number[]>> | null = null;
+let concordanceByParagraphPromise: Promise<ConcordanceByParagraph> | null = null;
+const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | null>>();
+
+let nclSectionsPromise: Promise<NclSectionMap> | null = null;
+let chapterCountsPromise: Promise<Record<string, number>> | null = null;
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
@@ -64,17 +72,70 @@ export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseI
 	return bibleVerseIndexPromise;
 }
 
-export function loadConcordanceVerseIndex(fetcher: Fetch = fetch): Promise<ConcordanceVerseIndex> {
-	if (!concordanceVerseIndexPromise) {
-		concordanceVerseIndexPromise = (async () => {
-			const r = await fetcher('/data/ccc/concordance-verse-index.json');
-			if (!r.ok) return {} as ConcordanceVerseIndex;
-			return (await r.json()) as ConcordanceVerseIndex;
-		})();
-	}
-	return concordanceVerseIndexPromise;
-}
-
 export function loadGlossary(fetcher: Fetch = fetch): Promise<GlossaryBundle> {
 	return fetchJson<GlossaryBundle>('/data/ccc/glossary.json', fetcher);
+}
+
+export function loadConcordanceManifest(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
+	if (!concordanceManifestPromise) {
+		concordanceManifestPromise = (async () => {
+			const r = await fetcher('/data/concordance/manifest.json');
+			if (!r.ok) return {};
+			return (await r.json()) as Record<string, number[]>;
+		})();
+	}
+	return concordanceManifestPromise;
+}
+
+export function loadConcordanceByParagraph(
+	fetcher: Fetch = fetch
+): Promise<ConcordanceByParagraph> {
+	if (!concordanceByParagraphPromise) {
+		concordanceByParagraphPromise = (async () => {
+			const r = await fetcher('/data/concordance/by-paragraph.json');
+			if (!r.ok) return {} as ConcordanceByParagraph;
+			return (await r.json()) as ConcordanceByParagraph;
+		})();
+	}
+	return concordanceByParagraphPromise;
+}
+
+export function loadConcordanceChapter(
+	slug: string,
+	chapter: number,
+	fetcher: Fetch = fetch
+): Promise<ConcordanceChapter | null> {
+	const key = `${slug}/${chapter}`;
+	let p = concordanceChapterCache.get(key);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/concordance/${slug}/${chapter}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as ConcordanceChapter;
+		})();
+		concordanceChapterCache.set(key, p);
+	}
+	return p;
+}
+
+export function loadNclSections(fetcher: Fetch = fetch): Promise<NclSectionMap> {
+	if (!nclSectionsPromise) {
+		nclSectionsPromise = (async () => {
+			const r = await fetcher('/data/bible/ncl-sections.json');
+			if (!r.ok) return {};
+			return (await r.json()) as NclSectionMap;
+		})();
+	}
+	return nclSectionsPromise;
+}
+
+export function loadChapterCounts(fetcher: Fetch = fetch): Promise<Record<string, number>> {
+	if (!chapterCountsPromise) {
+		chapterCountsPromise = (async () => {
+			const r = await fetcher('/data/bible/chapter-counts.json');
+			if (!r.ok) return {};
+			return (await r.json()) as Record<string, number>;
+		})();
+	}
+	return chapterCountsPromise;
 }

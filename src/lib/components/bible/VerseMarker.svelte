@@ -1,54 +1,38 @@
 <script lang="ts">
 	import { openPanel } from '$lib/stores/studyPanel';
+	import { pluralFr } from '$lib/utils/i18n';
 	let {
 		bookSlug,
 		bookUsfx,
 		chapter,
 		verse,
-		count,
-		variant = 'ccc'
+		count
 	}: {
 		bookSlug: string;
 		bookUsfx: string;
 		chapter: number;
 		verse: number;
 		count: number;
-		variant?: 'ccc' | 'concordance';
 	} = $props();
-
-	const label = $derived(
-		variant === 'concordance'
-			? `${count} renvoi(s) de la concordance pour ${bookSlug} ${chapter}, ${verse}`
-			: `${count} paragraphe(s) du Catéchisme citent ${bookSlug} ${chapter}, ${verse}`
-	);
-
-	const title = $derived(
-		variant === 'concordance'
-			? `${count} renvoi(s) de la concordance`
-			: `${count} paragraphe(s) du Catéchisme citent ce verset`
-	);
 
 	function onClick(e: MouseEvent) {
 		e.preventDefault();
+		e.stopPropagation();
 		openPanel(
-			{
-				paragraph: 0,
-				verseUsfx: bookUsfx,
-				verseChapter: chapter,
-				verseVerse: verse,
-				verseSource: variant
-			},
+			{ paragraph: 0, verseUsfx: bookUsfx, verseChapter: chapter, verseVerse: verse },
 			'bible-verse'
 		);
 	}
+
+	const verb = $derived(count === 1 ? 'cite' : 'citent');
+	const noun = $derived(pluralFr(count, 'paragraphe'));
 </script>
 
 <button
 	type="button"
 	class="cec-pill"
-	class:cec-pill--concordance={variant === 'concordance'}
-	aria-label={label}
-	{title}
+	aria-label="{count} {noun} du Catéchisme {verb} {bookSlug} {chapter}, {verse}"
+	title="{count} {noun} du Catéchisme {verb} ce verset"
 	onclick={onClick}
 >
 	<span class="tabular-nums">{count}§</span>
@@ -74,16 +58,5 @@
 	}
 	.cec-pill:hover {
 		background: color-mix(in srgb, var(--color-accent) 22%, transparent);
-	}
-	.cec-pill--concordance {
-		color: var(--color-muted);
-		background: transparent;
-		border: 1px dotted color-mix(in srgb, var(--color-muted) 60%, transparent);
-		padding: 0 3px;
-		font-weight: 500;
-	}
-	.cec-pill--concordance:hover {
-		background: color-mix(in srgb, var(--color-muted) 8%, transparent);
-		border-color: var(--color-muted);
 	}
 </style>

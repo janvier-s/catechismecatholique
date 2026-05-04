@@ -35,7 +35,7 @@
 				type="search"
 				name="q"
 				placeholder="Chercher § 27, Mt 1, 14, péché originel…"
-				class="w-full h-10 px-4 rounded-md border border-border bg-background text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+				class="w-full h-10 px-4 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-accent"
 				aria-label="Recherche"
 			/>
 		</form>
