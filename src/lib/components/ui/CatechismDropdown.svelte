@@ -271,6 +271,7 @@
 	}
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="catdrop"
 	bind:this={containerEl}
@@ -935,14 +936,6 @@
 		font-weight: 400;
 		font-style: normal;
 	}
-	.foot-hint {
-		font-family: var(--font-ui);
-		font-size: 0.6rem;
-		font-style: italic;
-		letter-spacing: 0.04em;
-		color: var(--color-subtle);
-	}
-
 	/* Mobile fallback ------------------------------------------------- */
 	.catdrop-panel.is-mobile {
 		width: min(94vw, 380px);
