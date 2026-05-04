@@ -80,6 +80,9 @@
 								<span class="text-[12px] text-foreground/80">— {p.pericopeTitle}</span>
 							{/if}
 						</div>
+						{#if p.showTitle && p.pericopeCrossRefs}
+							<p class="text-[12px] italic text-subtle mt-1">{p.pericopeCrossRefs}</p>
+						{/if}
 
 						{#if isMultiChapter}
 							<div class="mt-[6px]">

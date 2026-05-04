@@ -415,7 +415,7 @@ function findEnclosingNclSection(
 	sections: NclSection[] | undefined,
 	ch: number,
 	startV: number
-): string | null {
+): { title: string; crossRefs: string | null } | null {
 	if (!sections) return null;
 	let best: NclSection | null = null;
 	for (const s of sections) {
@@ -423,7 +423,7 @@ function findEnclosingNclSection(
 		if (s.startV > startV) continue;
 		if (!best || s.startV > best.startV) best = s;
 	}
-	return best?.title ?? null;
+	return best ? { title: best.title, crossRefs: best.crossRefs } : null;
 }
 
 function formatVerseRef(
@@ -549,7 +549,9 @@ export function buildConcordancePericopes(
 				}
 				if (perEndV < perStartV) continue;
 
-				const title = findEnclosingNclSection(nclSections[usfx], ch, perStartV);
+				const matched = findEnclosingNclSection(nclSections[usfx], ch, perStartV);
+				const title = matched?.title ?? null;
+				const crossRefs = matched?.crossRefs ?? null;
 				if (title === null) stats.pericopesWithoutTitle++;
 
 				const pericope: ConcordancePericope = {
@@ -559,6 +561,7 @@ export function buildConcordancePericopes(
 					startVerse: perStartV,
 					endVerse: perEndV,
 					pericopeTitle: title,
+					pericopeCrossRefs: crossRefs,
 					cccRanges: filteredRanges.map((r) => ({ ...r }))
 				};
 
@@ -584,6 +587,7 @@ export function buildConcordancePericopes(
 			// it cites, so a CCC reader on paragraph 296 sees a pericope whose
 			// source said `295-299`. filteredParas is already the expanded
 			// per-paragraph list.
+			const byParaMatched = findEnclosingNclSection(nclSections[usfx], startCh, fromV ?? 1);
 			for (const p of filteredParas) {
 				const arr = byParagraph.get(p) ?? [];
 				arr.push({
@@ -592,7 +596,8 @@ export function buildConcordancePericopes(
 					bookFrenchName: frenchName,
 					chapter: startCh,
 					verseRef,
-					pericopeTitle: findEnclosingNclSection(nclSections[usfx], startCh, fromV ?? 1),
+					pericopeTitle: byParaMatched?.title ?? null,
+					pericopeCrossRefs: byParaMatched?.crossRefs ?? null,
 					startCh,
 					endCh,
 					startVerse: fromV ?? 1,

@@ -23,8 +23,8 @@
 	} = $props();
 
 	const sectionByVerse = $derived.by(() => {
-		const m = new Map<number, string>();
-		for (const s of sections) m.set(s.startV, s.title);
+		const m = new Map<number, NclSection>();
+		for (const s of sections) m.set(s.startV, s);
 		return m;
 	});
 
@@ -95,15 +95,20 @@
 		<ol class="list-none space-y-3">
 			{#each verses as v (v.v)}
 				{@const c = citedCount(v.v)}
-				{@const sectionTitle = sectionByVerse.get(v.v)}
+				{@const section = sectionByVerse.get(v.v)}
 
-				{#if sectionTitle}
+				{#if section}
 					<li class="list-none mt-8 mb-3 first:mt-0">
 						<h2
 							class="font-heading text-[18px] font-semibold text-foreground/80 leading-snug"
 						>
-							{sectionTitle}
+							{section.title}
 						</h2>
+						{#if section.crossRefs}
+							<p class="mt-1 font-body text-[13px] italic text-subtle leading-snug">
+								{section.crossRefs}
+							</p>
+						{/if}
 					</li>
 				{/if}
 

@@ -61,6 +61,9 @@
 						<span class="font-ui text-[11px] text-foreground/70">— {entry.pericopeTitle}</span>
 					{/if}
 				</div>
+				{#if entry.pericopeCrossRefs}
+					<p class="font-ui text-[11px] italic text-subtle mb-2">{entry.pericopeCrossRefs}</p>
+				{/if}
 
 				{#if isMultiChapter(entry)}
 					<a

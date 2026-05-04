@@ -212,9 +212,9 @@ describe('buildConcordancePericopes', () => {
 
 	const sections: NclSectionMap = {
 		GEN: [
-			{ ch: 1, startV: 1, title: 'Création du monde' },
-			{ ch: 2, startV: 4, title: "Création de l'homme" },
-			{ ch: 3, startV: 1, title: 'La faute et le châtiment' }
+			{ ch: 1, startV: 1, title: 'Création du monde', crossRefs: '(Job 38-39 ; Psa 8)' },
+			{ ch: 2, startV: 4, title: "Création de l'homme", crossRefs: null },
+			{ ch: 3, startV: 1, title: 'La faute et le châtiment', crossRefs: null }
 		]
 	};
 
@@ -234,6 +234,7 @@ describe('buildConcordancePericopes', () => {
 			startVerse: 1,
 			endVerse: 24,
 			pericopeTitle: 'La faute et le châtiment',
+			pericopeCrossRefs: null,
 			cccRanges: [
 				{ from: 390, to: 390 },
 				{ from: 394, to: 395 }
@@ -289,6 +290,7 @@ describe('buildConcordancePericopes', () => {
 				chapter: 3,
 				verseRef: 'Genèse 3:1-24',
 				pericopeTitle: 'La faute et le châtiment',
+				pericopeCrossRefs: null,
 				startCh: 3,
 				endCh: 3,
 				startVerse: 1,

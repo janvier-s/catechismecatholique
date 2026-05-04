@@ -19,6 +19,9 @@
 				<span class="text-[12px] text-foreground/80">— {pericope.pericopeTitle}</span>
 			{/if}
 		</div>
+		{#if pericope.pericopeCrossRefs}
+			<p class="text-[12px] italic text-subtle mt-1">{pericope.pericopeCrossRefs}</p>
+		{/if}
 		<div class="w-[24px] h-[2px] bg-accent/50 mt-[5px] rounded-full"></div>
 	</div>
 	<div class="px-sm pb-sm pt-[6px] flex flex-wrap gap-[4px]">
