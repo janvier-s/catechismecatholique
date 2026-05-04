@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ConcordanceChapter } from '$lib/data/types';
 	import type { BookInfo } from '$lib/utils/bibleBookSlug';
+	import { pluralFr } from '$lib/utils/i18n';
 
 	let {
 		verses,
@@ -69,7 +70,7 @@
 						onkeydown={(e) => handleKeydown(e, p.verseRef)}
 					>
 						<!-- Header row: verseRef left, CCC count right -->
-						<div class="flex items-center justify-between gap-3">
+						<div class="flex items-baseline justify-between gap-3">
 							<span
 								class="font-ui text-[10.5px] font-semibold uppercase tracking-[0.14em] text-accent"
 							>
@@ -77,9 +78,13 @@
 							</span>
 							{#if cccCount > 0}
 								<span
-									class="font-ui text-[10px] uppercase tracking-[0.08em] text-subtle whitespace-nowrap"
+									class="font-heading text-[22px] font-semibold leading-none text-accent tabular-nums whitespace-nowrap"
+									aria-label="{cccCount} {pluralFr(cccCount, 'paragraphe')} du Catéchisme"
 								>
-									{cccCount} §
+									{cccCount}<span
+										class="ml-0.5 text-[13px] font-normal text-accent/70 align-baseline"
+										aria-hidden="true">§</span
+									>
 								</span>
 							{/if}
 						</div>
