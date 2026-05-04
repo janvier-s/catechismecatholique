@@ -5,7 +5,9 @@ import type {
 	ParagraphContext,
 	SourceEntry,
 	BibleVerseIndex,
-	GlossaryBundle
+	GlossaryBundle,
+	ConcordanceChapter,
+	ConcordanceByParagraph
 } from './types';
 
 type Fetch = typeof fetch;
@@ -21,6 +23,10 @@ async function fetchJson<T>(url: string, fetcher: Fetch): Promise<T> {
 // Safe at module scope — the file is static for the server's lifetime, and
 // SvelteKit's Cloudflare adapter discards modules between requests anyway.
 let bibleVerseIndexPromise: Promise<BibleVerseIndex> | null = null;
+
+let concordanceManifestPromise: Promise<Record<string, number[]>> | null = null;
+let concordanceByParagraphPromise: Promise<ConcordanceByParagraph> | null = null;
+const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | null>>();
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
@@ -64,4 +70,48 @@ export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseI
 
 export function loadGlossary(fetcher: Fetch = fetch): Promise<GlossaryBundle> {
 	return fetchJson<GlossaryBundle>('/data/ccc/glossary.json', fetcher);
+}
+
+export function loadConcordanceManifest(
+	fetcher: Fetch = fetch
+): Promise<Record<string, number[]>> {
+	if (!concordanceManifestPromise) {
+		concordanceManifestPromise = (async () => {
+			const r = await fetcher('/data/concordance/manifest.json');
+			if (!r.ok) return {};
+			return (await r.json()) as Record<string, number[]>;
+		})();
+	}
+	return concordanceManifestPromise;
+}
+
+export function loadConcordanceByParagraph(
+	fetcher: Fetch = fetch
+): Promise<ConcordanceByParagraph> {
+	if (!concordanceByParagraphPromise) {
+		concordanceByParagraphPromise = (async () => {
+			const r = await fetcher('/data/concordance/by-paragraph.json');
+			if (!r.ok) return {} as ConcordanceByParagraph;
+			return (await r.json()) as ConcordanceByParagraph;
+		})();
+	}
+	return concordanceByParagraphPromise;
+}
+
+export function loadConcordanceChapter(
+	slug: string,
+	chapter: number,
+	fetcher: Fetch = fetch
+): Promise<ConcordanceChapter | null> {
+	const key = `${slug}/${chapter}`;
+	let p = concordanceChapterCache.get(key);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/concordance/${slug}/${chapter}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as ConcordanceChapter;
+		})();
+		concordanceChapterCache.set(key, p);
+	}
+	return p;
 }
