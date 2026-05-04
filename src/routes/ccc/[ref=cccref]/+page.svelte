@@ -17,6 +17,14 @@
 		title: string;
 		href: string;
 	} | null {
+		if (c.heading && c.section && c.chapter) {
+			const articlePart = c.article ? `/${c.article.slug}` : '';
+			return {
+				label: 'Lire la rubrique complète',
+				title: c.heading.title,
+				href: `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${articlePart}#${c.heading.id}`
+			};
+		}
 		if (c.article && c.chapter && c.section) {
 			return {
 				label: "Lire l'article complet",
