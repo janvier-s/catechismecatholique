@@ -112,27 +112,34 @@ describe('expandRange', () => {
 });
 
 describe('parseCccLinks', () => {
-	it('extracts a single paragraph number', () => {
+	it('extracts a single paragraph number as a 1-wide range', () => {
 		const html = `(CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">199</a>)`;
-		expect(parseCccLinks(html)).toEqual([199]);
+		expect(parseCccLinks(html)).toEqual([{ from: 199, to: 199 }]);
 	});
 
-	it('extracts a comma-separated list', () => {
+	it('extracts a comma-separated list as separate single-element ranges', () => {
 		const html = `<a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">280, 289</a>`;
-		expect(parseCccLinks(html)).toEqual([280, 289]);
+		expect(parseCccLinks(html)).toEqual([
+			{ from: 280, to: 280 },
+			{ from: 289, to: 289 }
+		]);
 	});
 
-	it('expands a paragraph range', () => {
+	it('preserves a paragraph range as a single CccRange', () => {
 		const html = `<a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">337-340</a>`;
-		expect(parseCccLinks(html)).toEqual([337, 338, 339, 340]);
+		expect(parseCccLinks(html)).toEqual([{ from: 337, to: 340 }]);
 	});
 
-	it('handles multiple anchors with mixed content', () => {
+	it('handles multiple anchors with mixed content (singles and ranges, sorted)', () => {
 		const html = `(CCC
       <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p1.htm">295-299, 309-310</a>,
       <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p2.htm">2402</a>;
       <a href="http://www.vatican.va/roman_curia/foo.html">CSDC 108</a>)`;
-		expect(parseCccLinks(html)).toEqual([295, 296, 297, 298, 299, 309, 310, 2402]);
+		expect(parseCccLinks(html)).toEqual([
+			{ from: 295, to: 299 },
+			{ from: 309, to: 310 },
+			{ from: 2402, to: 2402 }
+		]);
 	});
 
 	it('ignores non-catechism vatican links', () => {
@@ -140,11 +147,15 @@ describe('parseCccLinks', () => {
 		expect(parseCccLinks(html)).toEqual([]);
 	});
 
-	it('deduplicates and sorts ascending', () => {
+	it('dedupes identical ranges and sorts by `from` ascending', () => {
 		const html = `
       <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/x.htm">5, 3</a>
       <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/y.htm">3, 7</a>`;
-		expect(parseCccLinks(html)).toEqual([3, 5, 7]);
+		expect(parseCccLinks(html)).toEqual([
+			{ from: 3, to: 3 },
+			{ from: 5, to: 5 },
+			{ from: 7, to: 7 }
+		]);
 	});
 
 	it('returns [] when there are no catechism links', () => {
@@ -164,9 +175,15 @@ describe('parseCommentaryFile', () => {
 		expect(result).not.toBeNull();
 		expect(result!.bookName).toBe('Genesis');
 		expect(result!.entries).toEqual([
-			{ range: '1-3', ccc: [121, 122, 123, 199] },
-			{ range: '1:1', ccc: [268] },
-			{ range: '1:26-29', ccc: [295, 296] }
+			{
+				range: '1-3',
+				ccc: [
+					{ from: 121, to: 123 },
+					{ from: 199, to: 199 }
+				]
+			},
+			{ range: '1:1', ccc: [{ from: 268, to: 268 }] },
+			{ range: '1:26-29', ccc: [{ from: 295, to: 296 }] }
 		]);
 	});
 
@@ -217,7 +234,10 @@ describe('buildConcordancePericopes', () => {
 			startVerse: 1,
 			endVerse: 24,
 			pericopeTitle: 'La faute et le châtiment',
-			ccc: [390, 394, 395]
+			cccRanges: [
+				{ from: 390, to: 390 },
+				{ from: 394, to: 395 }
+			]
 		});
 		expect(ch3.totalEntries).toBe(1);
 		expect(ch3.verseEntryCounts['1']).toBe(1);

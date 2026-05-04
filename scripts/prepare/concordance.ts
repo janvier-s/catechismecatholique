@@ -1,5 +1,6 @@
 import type { BookInfo } from '../../src/lib/utils/bibleBookSlug';
 import type {
+	CccRange,
 	ConcordanceChapter,
 	ConcordancePericope,
 	ConcordanceByParagraph,
@@ -7,6 +8,8 @@ import type {
 	NclSection,
 	NclSectionMap
 } from '../../src/lib/data/types';
+
+export type { CccRange } from '../../src/lib/data/types';
 
 export interface ParsedRange {
 	fromCh: number;
@@ -162,17 +165,20 @@ function stripTags(html: string): string {
 }
 
 /**
- * Parse a single anchor's text payload into a list of paragraph numbers.
+ * Parse a single anchor's text payload into a list of paragraph ranges.
+ * Each comma-separated token becomes one range; a bare number is a
+ * one-paragraph range `{from: n, to: n}`.
+ *
  * Examples:
- *   "199"          → [199]
- *   "280, 289"     → [280, 289]
- *   "337-340"      → [337, 338, 339, 340]
- *   "295-299, 309-310" → [295,296,297,298,299,309,310]
+ *   "199"              → [{from:199,to:199}]
+ *   "280, 289"         → [{from:280,to:280}, {from:289,to:289}]
+ *   "337-340"          → [{from:337,to:340}]
+ *   "295-299, 309-310" → [{from:295,to:299}, {from:309,to:310}]
  */
-function parseParagraphList(text: string): number[] {
+function parseParagraphList(text: string): CccRange[] {
 	const cleaned = normalizeDashes(text).replace(/\s+/g, '');
 	if (!cleaned) return [];
-	const out: number[] = [];
+	const out: CccRange[] = [];
 	for (const part of cleaned.split(',')) {
 		const m = part.match(/^(\d+)(?:-(\d+))?$/);
 		if (!m) continue;
@@ -183,32 +189,78 @@ function parseParagraphList(text: string): number[] {
 			console.warn(`[concordance] dropping suspiciously large paragraph range: ${lo}-${hi}`);
 			continue;
 		}
-		for (let n = lo; n <= hi; n++) out.push(n);
+		out.push({ from: lo, to: hi });
 	}
 	return out;
 }
 
 /**
  * Walk every <a> in the given HTML fragment; for those whose href points to
- * the CCC, parse the inner text as a paragraph list and accumulate. Result
- * is sorted ascending and deduplicated.
+ * the CCC, parse the inner text as a list of ranges and accumulate.
+ * Output is sorted by `from` ascending, with identical ranges deduplicated
+ * (preserving the source's range structure — `337-340` stays one range,
+ * `337,338,339,340` stays four entries).
  */
-export function parseCccLinks(html: string): number[] {
-	const set = new Set<number>();
+export function parseCccLinks(html: string): CccRange[] {
+	const seen = new Set<string>();
+	const out: CccRange[] = [];
 	let m: RegExpExecArray | null;
 	ANCHOR_RE.lastIndex = 0;
 	while ((m = ANCHOR_RE.exec(html))) {
 		const href = m[1]!;
 		if (!CCC_HREF_RE.test(href)) continue;
 		const inner = stripTags(m[2]!);
-		for (const n of parseParagraphList(inner)) set.add(n);
+		for (const r of parseParagraphList(inner)) {
+			const key = `${r.from}-${r.to}`;
+			if (seen.has(key)) continue;
+			seen.add(key);
+			out.push(r);
+		}
+	}
+	out.sort((a, b) => a.from - b.from || a.to - b.to);
+	return out;
+}
+
+/**
+ * Flatten a list of CCC ranges to the individual paragraph numbers they
+ * cover. Used by the by-paragraph inverse index where each paragraph needs
+ * its own entry, and by the knownParas filter inside buildConcordancePericopes.
+ */
+export function expandCccRanges(ranges: CccRange[]): number[] {
+	const set = new Set<number>();
+	for (const r of ranges) {
+		for (let n = r.from; n <= r.to; n++) set.add(n);
 	}
 	return Array.from(set).sort((a, b) => a - b);
 }
 
+/**
+ * Re-collapse a sorted unique list of paragraph numbers into contiguous
+ * ranges. Used after filtering through knownParas: a source range like
+ * `295-299` whose paragraph 297 is unknown becomes `[{295,296}, {298,299}]`.
+ * Source intent of "list of singles vs explicit range" is lost here —
+ * fine for display since contiguous numbers render the same either way.
+ */
+function collapseToRanges(numbers: number[]): CccRange[] {
+	if (numbers.length === 0) return [];
+	const sorted = [...new Set(numbers)].sort((a, b) => a - b);
+	const out: CccRange[] = [];
+	let cur: CccRange = { from: sorted[0]!, to: sorted[0]! };
+	for (let i = 1; i < sorted.length; i++) {
+		if (sorted[i]! === cur.to + 1) {
+			cur.to = sorted[i]!;
+		} else {
+			out.push(cur);
+			cur = { from: sorted[i]!, to: sorted[i]! };
+		}
+	}
+	out.push(cur);
+	return out;
+}
+
 export interface CommentaryEntry {
 	range: string; // raw range token, dashes already normalized
-	ccc: number[]; // sorted ascending, deduplicated
+	ccc: CccRange[]; // sorted by `from` ascending, identical ranges deduped
 }
 
 export interface CommentaryFile {
@@ -456,12 +508,17 @@ export function buildConcordancePericopes(
 				unparseableSet.add(entry.range);
 				continue;
 			}
+			// Expand source ranges to individual paragraphs, filter through
+			// knownParas, then re-collapse contiguous survivors back into
+			// ranges for the pericope's display chips.
+			const expanded = expandCccRanges(entry.ccc);
 			const filteredParas: number[] = [];
-			for (const p of entry.ccc) {
+			for (const p of expanded) {
 				if (knownParas.has(p)) filteredParas.push(p);
 				else unknownParaSet.add(p);
 			}
 			if (filteredParas.length === 0) continue;
+			const filteredRanges = collapseToRanges(filteredParas);
 
 			const startCh = range.fromCh;
 			const endCh = range.toCh;
@@ -502,7 +559,7 @@ export function buildConcordancePericopes(
 					startVerse: perStartV,
 					endVerse: perEndV,
 					pericopeTitle: title,
-					ccc: filteredParas.slice()
+					cccRanges: filteredRanges.map((r) => ({ ...r }))
 				};
 
 				let book = byBook.get(usfx);
@@ -523,6 +580,10 @@ export function buildConcordancePericopes(
 				stats.pericopesEmitted++;
 			}
 
+			// The by-paragraph inverse lists the pericope under EVERY paragraph
+			// it cites, so a CCC reader on paragraph 296 sees a pericope whose
+			// source said `295-299`. filteredParas is already the expanded
+			// per-paragraph list.
 			for (const p of filteredParas) {
 				const arr = byParagraph.get(p) ?? [];
 				arr.push({
@@ -548,8 +609,9 @@ export function buildConcordancePericopes(
 		byBookOut[usfx] = {};
 		for (const [ch, draft] of chapters) {
 			for (const p of draft.pericopes) {
-				const set = new Set(p.ccc);
-				p.ccc = Array.from(set).sort((a, b) => a - b);
+				// Re-collapse to be safe against any duplicate-range insertion
+				// (defensive — the pipeline already produces clean ranges).
+				p.cccRanges = collapseToRanges(expandCccRanges(p.cccRanges));
 			}
 			draft.pericopes.sort(
 				(a, b) =>

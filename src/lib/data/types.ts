@@ -148,6 +148,16 @@ export interface NclSection {
 export type NclSectionMap = Record<string, NclSection[]>; // keyed by USFX
 
 /**
+ * A contiguous CCC paragraph range. A bare paragraph number is `{from: n, to: n}`.
+ * Source ranges like `337-354` are preserved as a single entry so the UI can
+ * render them as one "337-354" chip linking to `/ccc/337-354`.
+ */
+export interface CccRange {
+	from: number;
+	to: number;
+}
+
+/**
  * A single Didache pericope: a verse range and its CCC paragraph references.
  * Title is the matching NCL section title (already French) or null.
  */
@@ -158,7 +168,7 @@ export interface ConcordancePericope {
 	startVerse: number; // first verse in THIS chapter (for multi-chapter ranges, capped to chapter start)
 	endVerse: number; // last verse in THIS chapter (capped to chapter end)
 	pericopeTitle: string | null;
-	ccc: number[]; // CCC paragraph numbers, sorted ascending, deduped
+	cccRanges: CccRange[]; // contiguous CCC ranges, sorted by `from` asc
 }
 
 /** Per-chapter file shape, mirroring DR's FathersChapterFile. */

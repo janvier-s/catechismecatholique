@@ -60,7 +60,7 @@
 							{/if}
 						</div>
 						<span class="shrink-0 text-[10px] text-subtle">
-							{header.ccc.length} §
+							{header.cccRanges.reduce((t, r) => t + (r.to - r.from + 1), 0)} §
 						</span>
 					</button>
 				{/each}
