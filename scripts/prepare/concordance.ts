@@ -1,10 +1,12 @@
 import type { BookInfo } from '../../src/lib/utils/bibleBookSlug';
-
-// Local type — the per-verse concordance UI was reverted (see Task R1 of
-// 2026-05-04-concordance-pericope.md), so the shared ConcordanceVerseIndex
-// alias was dropped from src/lib/data/types.ts. Section D will rewrite this
-// builder for the pericope-grouped output, so keeping the type local for now.
-type ConcordanceVerseIndex = Record<string, Record<string, Record<string, number[]>>>;
+import type {
+	ConcordanceChapter,
+	ConcordancePericope,
+	ConcordanceByParagraph,
+	ConcordanceByParagraphEntry,
+	NclSection,
+	NclSectionMap
+} from '../../src/lib/data/types';
 
 export interface ParsedRange {
 	fromCh: number;
@@ -256,21 +258,6 @@ export function parseCommentaryFile(html: string): CommentaryFile | null {
 	return { bookName, entries };
 }
 
-export interface BuildStats {
-	filesScanned: number;
-	commentaryFiles: number;
-	entriesProcessed: number;
-	unknownBooks: string[];
-	unknownParagraphs: number[];
-	unparseableRanges: string[];
-	booksWithZeroEntries: string[]; // Books whose commentary file matched but produced no entries (narrative-only or all CCC links missing)
-}
-
-export interface BuildResult {
-	index: ConcordanceVerseIndex;
-	stats: BuildStats;
-}
-
 export const DIDACHE_BOOK_TO_USFX: Record<string, string> = {
 	Genesis: 'GEN',
 	Exodus: 'EXO',
@@ -347,34 +334,106 @@ export const DIDACHE_BOOK_TO_USFX: Record<string, string> = {
 	Revelation: 'REV'
 };
 
-export function buildConcordance(
+export interface BuildOutput {
+	/** Map: usfx → chapter → ConcordanceChapter */
+	byBook: Record<string, Record<number, ConcordanceChapter>>;
+	/** Inverse index keyed by paragraph number string */
+	byParagraph: ConcordanceByParagraph;
+	/** Manifest: slug → sorted list of chapters with concordance data */
+	manifest: Record<string, number[]>;
+	stats: BuildStats;
+}
+
+export interface BuildStats {
+	filesScanned: number;
+	commentaryFiles: number;
+	pericopesEmitted: number;
+	unknownBooks: string[];
+	unknownParagraphs: number[];
+	unparseableRanges: string[];
+	booksWithZeroEntries: string[];
+	pericopesWithoutTitle: number;
+}
+
+/**
+ * For a given (chapter, startV), find the NCL section whose startV is the largest
+ * value ≤ startV in the same chapter. That section "encloses" the pericope.
+ */
+function findEnclosingNclSection(
+	sections: NclSection[] | undefined,
+	ch: number,
+	startV: number
+): string | null {
+	if (!sections) return null;
+	let best: NclSection | null = null;
+	for (const s of sections) {
+		if (s.ch !== ch) continue;
+		if (s.startV > startV) continue;
+		if (!best || s.startV > best.startV) best = s;
+	}
+	return best?.title ?? null;
+}
+
+function formatVerseRef(
+	bookName: string,
+	startCh: number,
+	endCh: number,
+	fromV: number | null,
+	toV: number | null
+): string {
+	if (fromV === null) {
+		if (startCh === endCh) return `${bookName} ${startCh}`;
+		return `${bookName} ${startCh}—${endCh}`;
+	}
+	if (startCh === endCh) {
+		if (fromV === toV) return `${bookName} ${startCh}:${fromV}`;
+		return `${bookName} ${startCh}:${fromV}-${toV}`;
+	}
+	return `${bookName} ${startCh}:${fromV}—${endCh}:${toV}`;
+}
+
+/**
+ * Build the per-chapter concordance + by-paragraph index from parsed Didache HTML files.
+ * Multi-chapter ranges are emitted into EVERY chapter they span (with verseRef preserving
+ * the full range), so a reader on any included chapter sees the broader-context pericope.
+ */
+export function buildConcordancePericopes(
 	htmlFiles: string[],
 	ncl: Ncl,
 	knownParas: Set<number>,
-	books: BookInfo[]
-): BuildResult {
+	books: BookInfo[],
+	nclSections: NclSectionMap
+): BuildOutput {
 	const validUsfx = new Set(books.map((b) => b.usfx));
+	const slugByUsfx = new Map(books.map((b) => [b.usfx, b.slug]));
+	const frenchByUsfx = new Map(books.map((b) => [b.usfx, b.frenchName]));
+
 	const stats: BuildStats = {
 		filesScanned: htmlFiles.length,
 		commentaryFiles: 0,
-		entriesProcessed: 0,
+		pericopesEmitted: 0,
 		unknownBooks: [],
 		unknownParagraphs: [],
 		unparseableRanges: [],
-		booksWithZeroEntries: []
+		booksWithZeroEntries: [],
+		pericopesWithoutTitle: 0
 	};
 	const unknownBookSet = new Set<string>();
 	const unknownParaSet = new Set<number>();
 	const unparseableSet = new Set<string>();
-	const booksWithZeroEntriesSet = new Set<string>();
+	const zeroEntrySet = new Set<string>();
 
-	const index: ConcordanceVerseIndex = {};
+	type ChapterDraft = {
+		pericopes: ConcordancePericope[];
+		verseSet: Map<number, number>;
+	};
+	const byBook = new Map<string, Map<number, ChapterDraft>>();
+	const byParagraph = new Map<number, ConcordanceByParagraphEntry[]>();
 
-	const add = (usfx: string, ch: number, v: number, paras: number[]) => {
-		const byCh = (index[usfx] ??= {});
-		const byV = (byCh[String(ch)] ??= {});
-		const arr = (byV[String(v)] ??= []);
-		for (const p of paras) if (!arr.includes(p)) arr.push(p);
+	const chapterMaxVerse = (usfx: string, ch: number): number => {
+		const data = ncl[usfx]?.[String(ch)];
+		if (!data) return 0;
+		return Object.keys(data).reduce((m, k) => Math.max(m, parseInt(k, 10)), 0);
 	};
 
 	for (const html of htmlFiles) {
@@ -387,15 +446,16 @@ export function buildConcordance(
 			unknownBookSet.add(file.bookName);
 			continue;
 		}
-
+		const slug = slugByUsfx.get(usfx)!;
+		const frenchName = frenchByUsfx.get(usfx)!;
 		let producedAny = false;
+
 		for (const entry of file.entries) {
 			const range = parseRange(entry.range);
 			if (!range) {
 				unparseableSet.add(entry.range);
 				continue;
 			}
-
 			const filteredParas: number[] = [];
 			for (const p of entry.ccc) {
 				if (knownParas.has(p)) filteredParas.push(p);
@@ -403,29 +463,127 @@ export function buildConcordance(
 			}
 			if (filteredParas.length === 0) continue;
 
-			const targets = expandRange(usfx, range, ncl);
-			for (const { ch, v } of targets) {
-				add(usfx, ch, v, filteredParas);
+			const startCh = range.fromCh;
+			const endCh = range.toCh;
+			const fromV = range.fromV;
+			const toV = range.toV;
+
+			const verseRef = formatVerseRef(frenchName, startCh, endCh, fromV, toV);
+
+			for (let ch = startCh; ch <= endCh; ch++) {
+				if (!ncl[usfx]?.[String(ch)]) continue;
+				let perStartV: number;
+				let perEndV: number;
+				if (fromV === null) {
+					perStartV = 1;
+					perEndV = chapterMaxVerse(usfx, ch);
+				} else if (startCh === endCh) {
+					perStartV = fromV;
+					perEndV = toV!;
+				} else if (ch === startCh) {
+					perStartV = fromV;
+					perEndV = chapterMaxVerse(usfx, ch);
+				} else if (ch === endCh) {
+					perStartV = 1;
+					perEndV = toV!;
+				} else {
+					perStartV = 1;
+					perEndV = chapterMaxVerse(usfx, ch);
+				}
+				if (perEndV < perStartV) continue;
+
+				const title = findEnclosingNclSection(nclSections[usfx], ch, perStartV);
+				if (title === null) stats.pericopesWithoutTitle++;
+
+				const pericope: ConcordancePericope = {
+					verseRef,
+					startCh,
+					endCh,
+					startVerse: perStartV,
+					endVerse: perEndV,
+					pericopeTitle: title,
+					ccc: filteredParas.slice()
+				};
+
+				let book = byBook.get(usfx);
+				if (!book) {
+					book = new Map();
+					byBook.set(usfx, book);
+				}
+				let draft = book.get(ch);
+				if (!draft) {
+					draft = { pericopes: [], verseSet: new Map() };
+					book.set(ch, draft);
+				}
+				draft.pericopes.push(pericope);
+				for (let v = perStartV; v <= perEndV; v++) {
+					draft.verseSet.set(v, (draft.verseSet.get(v) ?? 0) + 1);
+				}
 				producedAny = true;
+				stats.pericopesEmitted++;
 			}
-			stats.entriesProcessed++;
+
+			for (const p of filteredParas) {
+				const arr = byParagraph.get(p) ?? [];
+				arr.push({
+					slug,
+					usfx,
+					bookFrenchName: frenchName,
+					chapter: startCh,
+					verseRef,
+					pericopeTitle: findEnclosingNclSection(nclSections[usfx], startCh, fromV ?? 1)
+				});
+				byParagraph.set(p, arr);
+			}
 		}
-		if (!producedAny) booksWithZeroEntriesSet.add(file.bookName);
+
+		if (!producedAny) zeroEntrySet.add(file.bookName);
 	}
 
-	// Sort each verse's array
-	for (const usfx of Object.keys(index)) {
-		const byCh = index[usfx]!;
-		for (const ch of Object.keys(byCh)) {
-			const byV = byCh[ch]!;
-			for (const v of Object.keys(byV)) byV[v]!.sort((a, b) => a - b);
+	const byBookOut: Record<string, Record<number, ConcordanceChapter>> = {};
+	const manifest: Record<string, number[]> = {};
+	for (const [usfx, chapters] of byBook) {
+		const slug = slugByUsfx.get(usfx)!;
+		const chapterNums: number[] = [];
+		byBookOut[usfx] = {};
+		for (const [ch, draft] of chapters) {
+			for (const p of draft.pericopes) {
+				const set = new Set(p.ccc);
+				p.ccc = Array.from(set).sort((a, b) => a - b);
+			}
+			draft.pericopes.sort(
+				(a, b) =>
+					a.startVerse - b.startVerse ||
+					b.endVerse - b.startVerse - (a.endVerse - a.startVerse)
+			);
+			const verseEntryCounts: Record<number, number> = {};
+			for (const [v, n] of draft.verseSet) verseEntryCounts[v] = n;
+			byBookOut[usfx][ch] = {
+				pericopes: draft.pericopes,
+				verseEntryCounts,
+				totalEntries: draft.pericopes.length
+			};
+			chapterNums.push(ch);
 		}
+		chapterNums.sort((a, b) => a - b);
+		manifest[slug] = chapterNums;
+	}
+
+	const byParagraphOut: ConcordanceByParagraph = {};
+	for (const [pNum, entries] of byParagraph) {
+		entries.sort(
+			(a, b) =>
+				a.slug.localeCompare(b.slug) ||
+				a.chapter - b.chapter ||
+				a.verseRef.localeCompare(b.verseRef)
+		);
+		byParagraphOut[String(pNum)] = entries;
 	}
 
 	stats.unknownBooks = Array.from(unknownBookSet).sort();
 	stats.unknownParagraphs = Array.from(unknownParaSet).sort((a, b) => a - b);
 	stats.unparseableRanges = Array.from(unparseableSet).sort();
-	stats.booksWithZeroEntries = Array.from(booksWithZeroEntriesSet).sort();
+	stats.booksWithZeroEntries = Array.from(zeroEntrySet).sort();
 
-	return { index, stats };
+	return { byBook: byBookOut, byParagraph: byParagraphOut, manifest, stats };
 }
