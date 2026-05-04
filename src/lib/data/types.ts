@@ -147,6 +147,39 @@ export interface NclSection {
 /** Per-book sections, sorted by (ch asc, startV asc). */
 export type NclSectionMap = Record<string, NclSection[]>; // keyed by USFX
 
+/**
+ * A single Didache pericope: a verse range and its CCC paragraph references.
+ * Title is the matching NCL section title (already French) or null.
+ */
+export interface ConcordancePericope {
+	verseRef: string; // "Genèse 3:1-24"
+	startCh: number;
+	endCh: number;
+	startVerse: number; // first verse in THIS chapter (for multi-chapter ranges, capped to chapter start)
+	endVerse: number; // last verse in THIS chapter (capped to chapter end)
+	pericopeTitle: string | null;
+	ccc: number[]; // CCC paragraph numbers, sorted ascending, deduped
+}
+
+/** Per-chapter file shape, mirroring DR's FathersChapterFile. */
+export interface ConcordanceChapter {
+	pericopes: ConcordancePericope[];
+	verseEntryCounts: Record<number, number>; // verse → number of pericopes that cover it
+	totalEntries: number;
+}
+
+/** by-paragraph inverse: which Bible passages reference each CCC paragraph. */
+export interface ConcordanceByParagraphEntry {
+	slug: string; // bible book slug, e.g. "genese"
+	usfx: string; // "GEN"
+	bookFrenchName: string; // "Genèse"
+	chapter: number;
+	verseRef: string; // "Genèse 3:1-24"
+	pericopeTitle: string | null;
+}
+export type ConcordanceByParagraph = Record<string, ConcordanceByParagraphEntry[]>;
+// Keys are stringified paragraph numbers ("1850").
+
 // Glossary (thematic index + Levada definitions). Built by
 // scripts/prepare/glossary.ts.
 export type GlossaryClusterId =
