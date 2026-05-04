@@ -1,6 +1,10 @@
 import { error } from '@sveltejs/kit';
 import { bookBySlug } from '$lib/utils/bibleBookSlug';
-import { loadBibleVerseIndex, loadConcordanceManifest } from '$lib/data/loaders';
+import {
+	loadBibleVerseIndex,
+	loadConcordanceManifest,
+	loadNclSections
+} from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, fetch }) => {
@@ -9,10 +13,11 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const ch = parseInt(params.ch!, 10);
 	if (!Number.isFinite(ch)) throw error(404);
 
-	const [r1, verseIdx, manifest] = await Promise.all([
+	const [r1, verseIdx, manifest, sections] = await Promise.all([
 		fetch('/data/bible/ncl.json'),
 		loadBibleVerseIndex(fetch),
-		loadConcordanceManifest(fetch)
+		loadConcordanceManifest(fetch),
+		loadNclSections(fetch)
 	]);
 	const ncl = (await r1.json()) as Record<string, Record<string, Record<string, string>>>;
 
@@ -31,5 +36,16 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
 	const hasConcordance = (manifest[book.slug] ?? []).includes(ch);
 
-	return { book, chapter: ch, verses, verseIdx, totalChapters, hasConcordance };
+	const bookSections = sections[book.usfx] ?? [];
+	const chapterSections = bookSections.filter((s) => s.ch === ch);
+
+	return {
+		book,
+		chapter: ch,
+		verses,
+		verseIdx,
+		totalChapters,
+		hasConcordance,
+		sections: chapterSections
+	};
 };

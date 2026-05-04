@@ -13,4 +13,5 @@
 	verseIdx={data.verseIdx}
 	hasConcordance={data.hasConcordance}
 	totalChapters={data.totalChapters}
+	sections={data.sections}
 />

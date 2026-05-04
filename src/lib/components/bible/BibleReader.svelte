@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ChapterFilterBar from './ChapterFilterBar.svelte';
 	import VerseMarker from './VerseMarker.svelte';
-	import type { BibleVerseIndex } from '$lib/data/types';
+	import type { BibleVerseIndex, NclSection } from '$lib/data/types';
 	import type { BookInfo } from '$lib/utils/bibleBookSlug';
 
 	let {
@@ -10,7 +10,8 @@
 		verses,
 		verseIdx,
 		totalChapters,
-		hasConcordance = false
+		hasConcordance = false,
+		sections = []
 	}: {
 		book: BookInfo;
 		chapter: number;
@@ -18,7 +19,14 @@
 		verseIdx: BibleVerseIndex;
 		totalChapters: number;
 		hasConcordance?: boolean;
+		sections?: NclSection[];
 	} = $props();
+
+	const sectionByVerse = $derived.by(() => {
+		const m = new Map<number, string>();
+		for (const s of sections) m.set(s.startV, s.title);
+		return m;
+	});
 
 	let dimNonCited = $state(false);
 
@@ -90,6 +98,18 @@
 		<ol class="list-none space-y-3">
 			{#each verses as v (v.v)}
 				{@const c = citedCount(v.v)}
+				{@const sectionTitle = sectionByVerse.get(v.v)}
+
+				{#if sectionTitle}
+					<li class="list-none mt-8 mb-3 first:mt-0">
+						<h2
+							class="font-heading text-[18px] font-semibold text-foreground/80 leading-snug"
+						>
+							{sectionTitle}
+						</h2>
+					</li>
+				{/if}
+
 				<li
 					id="v{v.v}"
 					class="flex gap-3 max-md:gap-2 transition-opacity"

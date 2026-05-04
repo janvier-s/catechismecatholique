@@ -7,7 +7,8 @@ import type {
 	BibleVerseIndex,
 	GlossaryBundle,
 	ConcordanceChapter,
-	ConcordanceByParagraph
+	ConcordanceByParagraph,
+	NclSectionMap
 } from './types';
 
 type Fetch = typeof fetch;
@@ -27,6 +28,8 @@ let bibleVerseIndexPromise: Promise<BibleVerseIndex> | null = null;
 let concordanceManifestPromise: Promise<Record<string, number[]>> | null = null;
 let concordanceByParagraphPromise: Promise<ConcordanceByParagraph> | null = null;
 const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | null>>();
+
+let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
@@ -112,4 +115,15 @@ export function loadConcordanceChapter(
 		concordanceChapterCache.set(key, p);
 	}
 	return p;
+}
+
+export function loadNclSections(fetcher: Fetch = fetch): Promise<NclSectionMap> {
+	if (!nclSectionsPromise) {
+		nclSectionsPromise = (async () => {
+			const r = await fetcher('/data/bible/ncl-sections.json');
+			if (!r.ok) return {};
+			return (await r.json()) as NclSectionMap;
+		})();
+	}
+	return nclSectionsPromise;
 }
