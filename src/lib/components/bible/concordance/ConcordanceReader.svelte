@@ -61,7 +61,7 @@
 			{/if}
 		{/snippet}
 		{#snippet children()}
-			<div class="flex-1 overflow-y-auto p-md panel-scroll">
+			<div class="flex-1 overflow-y-auto p-md styled-scroll bg-panel">
 				{#if chapterData.pericopes.length === 0}
 					<div class="p-lg text-center text-subtle text-[14px]">
 						<p>Aucune référence de concordance pour ce chapitre.</p>

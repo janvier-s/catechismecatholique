@@ -183,7 +183,7 @@
 							</button>
 						{/each}
 					</div>
-					<div class="flex-1 overflow-y-auto p-4 panel-scroll">
+					<div class="flex-1 overflow-y-auto p-4 styled-scroll">
 						{#if $studyPanel.activeTab === 'bible'}
 							<TabBibleRefs />
 						{:else if $studyPanel.activeTab === 'cross-refs'}

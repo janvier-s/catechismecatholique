@@ -342,10 +342,13 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 
 /* Stylized scrollbars for internal scroll containers. Apply via the
    `styled-scroll` utility — never on <html>/<body>. Firefox uses the
-   `scrollbar-*` properties; Webkit/Chromium uses ::-webkit-scrollbar. */
+   `scrollbar-*` properties; Webkit/Chromium uses ::-webkit-scrollbar.
+   Thumb uses a neutral grey derived from currentColor so it stays neutral
+   across all themes (avoids the warm-toned --color-border which can read
+   as pink against a white panel). */
 .styled-scroll {
 	scrollbar-width: thin;
-	scrollbar-color: color-mix(in srgb, var(--color-border) 80%, transparent) transparent;
+	scrollbar-color: color-mix(in srgb, currentColor 25%, transparent) transparent;
 }
 .styled-scroll::-webkit-scrollbar {
 	width: 8px;
@@ -355,36 +358,9 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 	background: transparent;
 }
 .styled-scroll::-webkit-scrollbar-thumb {
-	background-color: color-mix(in srgb, var(--color-border) 80%, transparent);
+	background-color: color-mix(in srgb, currentColor 25%, transparent);
 	border-radius: 4px;
 }
 .styled-scroll::-webkit-scrollbar-thumb:hover {
-	background-color: var(--color-border);
-}
-
-/* Slimmer accent-tinted variant used inside panel bodies (StudyPanel,
-   ConcordanceReader's right pane). Same shape as `styled-scroll` but
-   narrower and tinted with the accent color. */
-.panel-scroll {
-	scrollbar-width: thin;
-	scrollbar-color: color-mix(in srgb, var(--color-accent) 50%, transparent)
-		color-mix(in srgb, var(--color-border) 40%, transparent);
-}
-.panel-scroll::-webkit-scrollbar {
-	width: 7px;
-	-webkit-appearance: none;
-}
-.panel-scroll::-webkit-scrollbar-track {
-	background: color-mix(in srgb, var(--color-border) 40%, transparent);
-}
-.panel-scroll::-webkit-scrollbar-thumb {
-	background: color-mix(in srgb, var(--color-accent) 50%, transparent);
-	border-radius: 4px;
-	border: 1px solid transparent;
-	background-clip: padding-box;
-	min-height: 40px;
-}
-.panel-scroll::-webkit-scrollbar-thumb:hover {
-	background: color-mix(in srgb, var(--color-accent) 70%, transparent);
-	background-clip: padding-box;
+	background-color: color-mix(in srgb, currentColor 40%, transparent);
 }
