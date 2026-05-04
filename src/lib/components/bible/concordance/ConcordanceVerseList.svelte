@@ -37,6 +37,10 @@
 		});
 	});
 
+	function paragraphCount(ranges: { from: number; to: number }[]): number {
+		return ranges.reduce((t, r) => t + (r.to - r.from + 1), 0);
+	}
+
 	function handleKeydown(e: KeyboardEvent, verseRef: string) {
 		if (e.key === 'Enter' || e.key === ' ') {
 			e.preventDefault();
@@ -46,56 +50,77 @@
 </script>
 
 <div class="h-full flex flex-col">
-	<div class="shrink-0 border-b border-border px-sm py-[8px] bg-panel font-ui">
+	<div class="shrink-0 border-b border-border px-4 py-2 bg-panel font-ui">
 		<span class="text-[11px] text-subtle font-medium">
 			Chapitre {chapter}
 		</span>
 	</div>
-	<div class="flex-1 overflow-y-auto px-sm py-md styled-scroll">
+	<div class="flex-1 overflow-y-auto px-4 py-5 styled-scroll">
 		{#if cardsWithTitleVisibility.length === 0}
-			<div class="p-lg text-center text-subtle text-[14px]">
+			<div class="p-6 text-center text-subtle text-[14px]">
 				<p>Aucune péricope pour ce chapitre.</p>
 			</div>
 		{:else}
-			<div class="space-y-[10px]">
+			<div class="space-y-3">
 				{#each cardsWithTitleVisibility as p (p.verseRef)}
 					{@const isSelected = selectedPericopeRef === p.verseRef}
 					{@const isMultiChapter = p.startCh !== p.endCh}
+					{@const cccCount = paragraphCount(p.cccRanges)}
 					<div
 						role="button"
 						tabindex="0"
 						aria-pressed={isSelected}
-						class="rounded-sm border px-[10px] py-[8px] cursor-pointer transition-colors
-							{isSelected
-								? 'border-accent/60 bg-accent/5'
-								: 'border-border bg-panel hover:border-accent/30 hover:bg-accent/5'}"
+						class="pericope-card group relative rounded-md cursor-pointer transition-[background-color,box-shadow] duration-200 px-5 pt-4 pb-5
+							{isSelected ? 'is-selected' : ''}"
 						onclick={() => onSelectPericope(p.verseRef)}
 						onkeydown={(e) => handleKeydown(e, p.verseRef)}
 					>
-						<div class="flex items-baseline gap-2 flex-wrap">
-							<span class="text-[11px] font-semibold uppercase tracking-[0.1em] text-accent">
+						<!-- Header row: verseRef left, CCC count right -->
+						<div class="flex items-center justify-between gap-3">
+							<span
+								class="font-ui text-[10.5px] font-semibold uppercase tracking-[0.14em] text-accent"
+							>
 								{p.verseRef}
 							</span>
-							{#if p.showTitle && p.pericopeTitle}
-								<span class="text-[12px] text-foreground/80">— {p.pericopeTitle}</span>
+							{#if cccCount > 0}
+								<span
+									class="font-ui text-[10px] uppercase tracking-[0.08em] text-subtle whitespace-nowrap"
+								>
+									{cccCount} §
+								</span>
 							{/if}
 						</div>
-						{#if p.showTitle && p.pericopeCrossRefs}
-							<p class="text-[12px] italic text-subtle mt-1">{p.pericopeCrossRefs}</p>
+
+						{#if p.showTitle && p.pericopeTitle}
+							<h3
+								class="font-heading text-[17px] leading-snug text-foreground text-center mt-2 px-2"
+							>
+								{p.pericopeTitle}
+							</h3>
+							{#if p.pericopeCrossRefs}
+								<p
+									class="font-body italic text-[12px] text-subtle text-center mt-1.5 leading-snug"
+								>
+									{p.pericopeCrossRefs}
+								</p>
+							{/if}
+							<div class="flex justify-center mt-3 mb-1">
+								<span class="block w-12 h-px bg-accent/30"></span>
+							</div>
 						{/if}
 
 						{#if isMultiChapter}
-							<div class="mt-[6px]">
+							<div class="mt-3 text-center">
 								<a
 									href="/bible/{book.slug}/{p.startCh}"
-									class="inline-block text-[12px] text-accent hover:underline"
+									class="inline-block font-ui text-[12px] text-accent hover:underline"
 									onclick={(e) => e.stopPropagation()}
 								>
 									→ Lire dans la Bible
 								</a>
 							</div>
 						{:else}
-							<div class="mt-[6px] space-y-[4px]">
+							<div class="mt-3 space-y-1.5">
 								{#each Array.from({ length: p.endVerse - p.startVerse + 1 }, (_, i) => p.startVerse + i) as vNum (vNum)}
 									{@const text = verseByNum.get(vNum)}
 									{#if text}
@@ -109,9 +134,50 @@
 								{/each}
 							</div>
 						{/if}
+
+						<!-- Chevron affordance, bottom-right -->
+						{#if cccCount > 0}
+							<span
+								class="chevron pointer-events-none absolute right-3 bottom-3 font-ui text-[14px] text-subtle/60 transition-[color,transform] duration-200"
+								aria-hidden="true">›</span
+							>
+						{/if}
 					</div>
 				{/each}
 			</div>
 		{/if}
 	</div>
 </div>
+
+<style>
+	.pericope-card {
+		background-color: var(--color-panel);
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 60%, transparent);
+		outline: none;
+	}
+
+	.pericope-card:hover {
+		background-color: color-mix(in srgb, var(--color-accent) 4%, var(--color-panel));
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 25%, transparent);
+	}
+
+	.pericope-card:focus-visible {
+		box-shadow:
+			inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent),
+			0 0 0 3px color-mix(in srgb, var(--color-accent) 18%, transparent);
+	}
+
+	.pericope-card.is-selected {
+		background-color: color-mix(in srgb, var(--color-accent) 7%, var(--color-panel));
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent);
+	}
+
+	.pericope-card:hover .chevron {
+		color: var(--color-accent);
+		transform: translateX(2px);
+	}
+
+	.pericope-card.is-selected .chevron {
+		color: var(--color-accent);
+	}
+</style>

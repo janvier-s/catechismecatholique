@@ -28,6 +28,10 @@
 		return e.startCh !== e.endCh;
 	}
 
+	function paragraphCount(ranges: { from: number; to: number }[]): number {
+		return ranges.reduce((t, r) => t + (r.to - r.from + 1), 0);
+	}
+
 	function getVerses(e: ConcordanceByParagraphEntry): { v: number; text: string }[] {
 		if (isMultiChapter(e)) return [];
 		const chData = nclData[e.usfx]?.[String(e.startCh)];
@@ -50,33 +54,58 @@
 {:else}
 	<ul class="space-y-3 list-none">
 		{#each entries as entry, i (i)}
-			<li class="rounded border border-border bg-panel p-3">
-				<div class="flex items-baseline gap-2 flex-wrap mb-2">
+			{@const cccCount = paragraphCount(entry.cccRanges)}
+			<li class="concordance-entry rounded-md px-5 pt-4 pb-5">
+				<!-- Header: verseRef left, count right -->
+				<div class="flex items-center justify-between gap-3">
 					<span
-						class="font-ui text-[12px] font-semibold uppercase tracking-[0.1em] text-accent"
+						class="font-ui text-[11px] font-semibold uppercase tracking-[0.14em] text-accent"
 					>
 						{entry.verseRef}
 					</span>
-					{#if entry.pericopeTitle}
-						<span class="font-ui text-[11px] text-foreground/70">— {entry.pericopeTitle}</span>
+					{#if cccCount > 0}
+						<span
+							class="font-ui text-[10px] uppercase tracking-[0.08em] text-subtle whitespace-nowrap"
+						>
+							{cccCount} §
+						</span>
 					{/if}
 				</div>
+
+				{#if entry.pericopeTitle}
+					<h4
+						class="font-heading text-[16px] leading-snug text-foreground text-center mt-2 px-2"
+					>
+						{entry.pericopeTitle}
+					</h4>
+				{/if}
 				{#if entry.pericopeCrossRefs}
-					<p class="font-ui text-[11px] italic text-subtle mb-2">{entry.pericopeCrossRefs}</p>
+					<p
+						class="font-body italic text-[11.5px] text-subtle text-center mt-1.5 leading-snug"
+					>
+						{entry.pericopeCrossRefs}
+					</p>
+				{/if}
+				{#if entry.pericopeTitle || entry.pericopeCrossRefs}
+					<div class="flex justify-center mt-3 mb-1">
+						<span class="block w-12 h-px bg-accent/30"></span>
+					</div>
 				{/if}
 
 				{#if isMultiChapter(entry)}
-					<a
-						href="/bible/{entry.slug}/{entry.startCh}"
-						class="font-ui text-[12px] text-accent hover:underline"
-					>
-						→ Lire dans la Bible
-					</a>
+					<div class="mt-3 text-center">
+						<a
+							href="/bible/{entry.slug}/{entry.startCh}"
+							class="font-ui text-[12px] text-accent hover:underline"
+						>
+							→ Lire dans la Bible
+						</a>
+					</div>
 				{:else}
 					{@const verses = getVerses(entry)}
 					{#if verses.length > 0}
 						<div
-							class="font-body text-[14px] leading-relaxed text-foreground space-y-1 mb-3"
+							class="font-body text-[14px] leading-relaxed text-foreground space-y-1 mt-3 mb-3"
 						>
 							{#each verses as { v, text } (v)}
 								<p>
@@ -89,7 +118,7 @@
 				{/if}
 
 				{#if entry.cccRanges.length > 0}
-					<div class="flex flex-wrap gap-[4px] mt-2">
+					<div class="mt-3 flex flex-wrap gap-1.5 justify-center">
 						{#each entry.cccRanges as r (`${r.from}-${r.to}`)}
 							<CccRangeChip range={r} />
 						{/each}
@@ -99,3 +128,10 @@
 		{/each}
 	</ul>
 {/if}
+
+<style>
+	.concordance-entry {
+		background-color: var(--color-panel);
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 60%, transparent);
+	}
+</style>
