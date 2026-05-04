@@ -195,9 +195,7 @@ async function main() {
 			}
 		}
 
-		const nclSections = JSON.parse(
-			readFileSync(join(OUT, 'bible/ncl-sections.json'), 'utf8')
-		);
+		const nclSections = JSON.parse(readFileSync(join(OUT, 'bible/ncl-sections.json'), 'utf8'));
 		const { byBook, byParagraph, manifest, stats } = buildConcordancePericopes(
 			htmlFiles,
 			ncl,
@@ -235,9 +233,7 @@ async function main() {
 				`  ${stats.booksWithZeroEntries.length} books with zero entries: ${stats.booksWithZeroEntries.join(', ')}`
 			);
 		if (stats.pericopesWithoutTitle > 0)
-			console.warn(
-				`  ${stats.pericopesWithoutTitle} pericopes without NCL title (kept titleless)`
-			);
+			console.warn(`  ${stats.pericopesWithoutTitle} pericopes without NCL title (kept titleless)`);
 		endStep(`${stats.commentaryFiles} files, ${stats.pericopesEmitted} pericopes`);
 	}
 

@@ -553,8 +553,7 @@ export function buildConcordancePericopes(
 			}
 			draft.pericopes.sort(
 				(a, b) =>
-					a.startVerse - b.startVerse ||
-					b.endVerse - b.startVerse - (a.endVerse - a.startVerse)
+					a.startVerse - b.startVerse || b.endVerse - b.startVerse - (a.endVerse - a.startVerse)
 			);
 			const verseEntryCounts: Record<number, number> = {};
 			for (const [v, n] of draft.verseSet) verseEntryCounts[v] = n;

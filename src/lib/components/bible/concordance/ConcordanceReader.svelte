@@ -44,11 +44,7 @@
 		/>
 	</div>
 	<div class="flex-1 min-w-0 overflow-hidden">
-		<ConcordancePericopePanel
-			{chapterData}
-			{selectedVerse}
-			{selectedPericope}
-		/>
+		<ConcordancePericopePanel {chapterData} {selectedVerse} {selectedPericope} />
 	</div>
 </div>
 
@@ -65,10 +61,6 @@
 		/>
 	</div>
 	<div class="flex-1 overflow-y-auto">
-		<ConcordancePericopePanel
-			{chapterData}
-			{selectedVerse}
-			{selectedPericope}
-		/>
+		<ConcordancePericopePanel {chapterData} {selectedVerse} {selectedPericope} />
 	</div>
 </div>

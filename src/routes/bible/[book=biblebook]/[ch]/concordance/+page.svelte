@@ -10,11 +10,7 @@
 </svelte:head>
 
 <div class="flex flex-col h-screen">
-	<ConcordanceBar
-		book={data.book}
-		chapter={data.chapter}
-		totalChapters={data.totalChapters}
-	/>
+	<ConcordanceBar book={data.book} chapter={data.chapter} totalChapters={data.totalChapters} />
 	<ConcordanceReader
 		book={data.book}
 		chapter={data.chapter}

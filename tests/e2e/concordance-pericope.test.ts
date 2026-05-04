@@ -14,7 +14,9 @@ test('concordance page renders pericopes with French titles and CCC chips', asyn
 	await expect(cccChip).toBeVisible();
 });
 
-test('clicking a pericope header on the left highlights the matching pericope on the right', async ({ page }) => {
+test('clicking a pericope header on the left highlights the matching pericope on the right', async ({
+	page
+}) => {
 	await page.goto('/bible/genese/3/concordance');
 	// Pick a specific pericope header on the left (button with the verseRef text).
 	const leftHeader = page.locator('button', { hasText: 'Genèse 3:1-24' }).first();

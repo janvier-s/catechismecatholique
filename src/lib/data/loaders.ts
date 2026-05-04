@@ -72,9 +72,7 @@ export function loadGlossary(fetcher: Fetch = fetch): Promise<GlossaryBundle> {
 	return fetchJson<GlossaryBundle>('/data/ccc/glossary.json', fetcher);
 }
 
-export function loadConcordanceManifest(
-	fetcher: Fetch = fetch
-): Promise<Record<string, number[]>> {
+export function loadConcordanceManifest(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
 	if (!concordanceManifestPromise) {
 		concordanceManifestPromise = (async () => {
 			const r = await fetcher('/data/concordance/manifest.json');

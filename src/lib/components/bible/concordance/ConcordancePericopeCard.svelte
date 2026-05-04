@@ -1,10 +1,8 @@
 <script lang="ts">
 	import type { ConcordancePericope } from '$lib/data/types';
 
-	let {
-		pericope,
-		highlighted = false
-	}: { pericope: ConcordancePericope; highlighted?: boolean } = $props();
+	let { pericope, highlighted = false }: { pericope: ConcordancePericope; highlighted?: boolean } =
+		$props();
 </script>
 
 <article

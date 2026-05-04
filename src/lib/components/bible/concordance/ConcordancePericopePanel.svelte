@@ -38,9 +38,7 @@
 			(p) => verse >= p.startVerse && verse <= p.endVerse
 		);
 		if (idx < 0) return;
-		const el = scrollContainer.querySelector(
-			`[data-pericope-idx="${idx}"]`
-		) as HTMLElement | null;
+		const el = scrollContainer.querySelector(`[data-pericope-idx="${idx}"]`) as HTMLElement | null;
 		scrollToEl(el);
 	}
 
@@ -75,10 +73,7 @@
 					data-pericope-ref={pericope.verseRef}
 					data-pericope-idx={i}
 				>
-					<ConcordancePericopeCard
-						{pericope}
-						highlighted={pericopeHighlighted(pericope)}
-					/>
+					<ConcordancePericopeCard {pericope} highlighted={pericopeHighlighted(pericope)} />
 				</div>
 			{/each}
 		{/if}
