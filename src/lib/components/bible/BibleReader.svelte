@@ -20,9 +20,6 @@
 		hasConcordance?: boolean;
 	} = $props();
 
-	// hasConcordance is reserved for the upcoming pericope-view link (Task U7);
-	// no rendering yet. Property is destructured above so consumers may pass it.
-
 	let dimNonCited = $state(false);
 
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
@@ -74,6 +71,17 @@
 			</h1>
 			<div class="w-10 h-px bg-accent opacity-70 mx-auto"></div>
 		</header>
+
+		{#if hasConcordance}
+			<div class="mb-6 text-center">
+				<a
+					href="/bible/{book.slug}/{chapter}/concordance"
+					class="font-ui text-[12px] uppercase tracking-[0.15em] text-accent hover:underline"
+				>
+					Voir la concordance →
+				</a>
+			</div>
+		{/if}
 
 		{#if totalCited > 0}
 			<ChapterFilterBar bind:dimNonCited citedCount={totalCited} />
