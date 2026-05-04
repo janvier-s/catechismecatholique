@@ -1,8 +1,15 @@
 <script lang="ts">
 	import ChapterFilterBar from './ChapterFilterBar.svelte';
 	import VerseMarker from './VerseMarker.svelte';
+	import BookNavLink from './BookNavLink.svelte';
+	import ChapterNavLink from './ChapterNavLink.svelte';
+	import FloatingNav from './FloatingNav.svelte';
 	import type { BibleVerseIndex, NclSection } from '$lib/data/types';
-	import type { BookInfo } from '$lib/utils/bibleBookSlug';
+	import {
+		type BookInfo,
+		getPrevBook,
+		getNextBook
+	} from '$lib/utils/bibleBookSlug';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 
 	let {
@@ -12,7 +19,8 @@
 		verseIdx,
 		totalChapters,
 		hasConcordance = false,
-		sections = []
+		sections = [],
+		chapterCounts = {}
 	}: {
 		book: BookInfo;
 		chapter: number;
@@ -21,6 +29,7 @@
 		totalChapters: number;
 		hasConcordance?: boolean;
 		sections?: NclSection[];
+		chapterCounts?: Record<string, number>;
 	} = $props();
 
 	const sectionByVerse = $derived.by(() => {
@@ -33,6 +42,15 @@
 
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
 	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
+
+	const prevBook = $derived(getPrevBook(book.slug) ?? null);
+	const nextBook = $derived(getNextBook(book.slug) ?? null);
+
+	let navOpen = $state(false);
+
+	function buildHref(slug: string, ch: number): string {
+		return `/bible/${slug}/${ch}`;
+	}
 
 	function citedCount(v: number): number {
 		const arr = verseIdx[book.usfx]?.[String(chapter)]?.[String(v)];
@@ -68,34 +86,86 @@
 	}
 </script>
 
-<main class="mx-auto max-w-reader px-6 pt-8 pb-16">
-	<nav class="mb-8 flex justify-between items-center font-ui">
-		{#if prevHref}
-			<a
-				href={prevHref}
-				class="flex items-center gap-1 text-subtle hover:text-accent transition-colors text-[12px] uppercase tracking-[0.15em]"
-			>
-				<span class="text-[16px] leading-none">‹</span>
-				<span>Ch. {chapter - 1}</span>
-			</a>
-		{:else}<span></span>{/if}
-		<a
-			href="/bible/{book.slug}"
-			class="text-subtle hover:text-accent text-[12px] uppercase tracking-[0.15em]"
+<!-- Chapter navigation bar — sticky below the global TopBar (80px). -->
+<div
+	class="sticky top-[80px] z-40 bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-2 flex items-center gap-[10px] font-ui"
+	style="height: 50px;"
+>
+	<!-- Center: chapter button with chevrons -->
+	<div
+		class="md:absolute md:left-1/2 md:-translate-x-1/2 flex-1 md:flex-none flex justify-center relative items-center"
+	>
+		<!-- Left chevrons -->
+		<div
+			class="hidden md:flex absolute right-full top-1/2 -translate-y-1/2 items-center gap-[8px] pr-[8px]"
 		>
-			{book.frenchName}
-		</a>
-		{#if nextHref}
-			<a
-				href={nextHref}
-				class="flex items-center gap-1 text-subtle hover:text-accent transition-colors text-[12px] uppercase tracking-[0.15em]"
-			>
-				<span>Ch. {chapter + 1}</span>
-				<span class="text-[16px] leading-none">›</span>
-			</a>
-		{:else}<span></span>{/if}
-	</nav>
+			{#if prevBook}
+				<BookNavLink
+					href="/bible/{prevBook.slug}/1"
+					direction="prev"
+					label={prevBook.frenchName}
+				/>
+			{:else}
+				<div class="w-[15px]" aria-hidden="true"></div>
+			{/if}
+			{#if prevHref}
+				<ChapterNavLink href={prevHref} direction="prev" chapter={chapter - 1} />
+			{:else}
+				<div class="w-[15px]" aria-hidden="true"></div>
+			{/if}
+		</div>
 
+		<button
+			type="button"
+			class="flex items-center gap-[5px] px-[12px] md:px-[17px] py-[8px] md:py-[10px] rounded-[3px] transition-colors
+				{navOpen ? 'bg-accent text-white' : 'text-accent hover:bg-accent hover:text-white'}"
+			aria-expanded={navOpen}
+			aria-haspopup="dialog"
+			onclick={() => (navOpen = !navOpen)}
+		>
+			<span class="text-[14px] md:text-[16px] font-medium">{book.frenchName} {chapter}</span>
+			<span class="text-[10px] md:text-[11px] opacity-80 leading-none" aria-hidden="true"
+				>{navOpen ? '▲' : '▼'}</span
+			>
+		</button>
+
+		<!-- Right chevrons -->
+		<div
+			class="hidden md:flex absolute left-full top-1/2 -translate-y-1/2 items-center gap-[8px] pl-[8px]"
+		>
+			{#if nextHref}
+				<ChapterNavLink href={nextHref} direction="next" chapter={chapter + 1} />
+			{:else}
+				<div class="w-[15px]" aria-hidden="true"></div>
+			{/if}
+			{#if nextBook}
+				<BookNavLink
+					href="/bible/{nextBook.slug}/1"
+					direction="next"
+					label={nextBook.frenchName}
+				/>
+			{:else}
+				<div class="w-[15px]" aria-hidden="true"></div>
+			{/if}
+		</div>
+	</div>
+</div>
+
+{#if navOpen}
+	<FloatingNav
+		bookSlug={book.slug}
+		chapterNum={chapter}
+		{chapterCounts}
+		{buildHref}
+		onClose={() => (navOpen = false)}
+		topOffset="130px"
+	/>
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<div class="fixed inset-0 z-[57]" role="presentation" onclick={() => (navOpen = false)}></div>
+{/if}
+
+<main class="mx-auto max-w-reader px-6 pt-8 pb-16">
 	<article>
 		<header class="mb-10 text-center">
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">

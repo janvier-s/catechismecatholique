@@ -14,4 +14,5 @@
 	hasConcordance={data.hasConcordance}
 	totalChapters={data.totalChapters}
 	sections={data.sections}
+	chapterCounts={data.chapterCounts}
 />

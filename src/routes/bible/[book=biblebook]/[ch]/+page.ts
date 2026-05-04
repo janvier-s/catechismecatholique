@@ -3,7 +3,8 @@ import { bookBySlug } from '$lib/utils/bibleBookSlug';
 import {
 	loadBibleVerseIndex,
 	loadConcordanceManifest,
-	loadNclSections
+	loadNclSections,
+	loadChapterCounts
 } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
@@ -13,11 +14,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const ch = parseInt(params.ch!, 10);
 	if (!Number.isFinite(ch)) throw error(404);
 
-	const [r1, verseIdx, manifest, sections] = await Promise.all([
+	const [r1, verseIdx, manifest, sections, chapterCounts] = await Promise.all([
 		fetch('/data/bible/ncl.json'),
 		loadBibleVerseIndex(fetch),
 		loadConcordanceManifest(fetch),
-		loadNclSections(fetch)
+		loadNclSections(fetch),
+		loadChapterCounts(fetch)
 	]);
 	const ncl = (await r1.json()) as Record<string, Record<string, Record<string, string>>>;
 
@@ -46,6 +48,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		verseIdx,
 		totalChapters,
 		hasConcordance,
-		sections: chapterSections
+		sections: chapterSections,
+		chapterCounts
 	};
 };
