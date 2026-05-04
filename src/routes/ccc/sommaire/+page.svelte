@@ -343,7 +343,7 @@
 	.sections {
 		display: flex;
 		flex-direction: column;
-		gap: calc(var(--rh) * 1.75);
+		gap: calc(var(--rh) * 2.5);
 	}
 	.section {
 		position: relative;
