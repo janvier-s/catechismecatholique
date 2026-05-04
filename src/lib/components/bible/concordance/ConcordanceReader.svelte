@@ -68,7 +68,7 @@
 						<p>Sélectionnez une péricope.</p>
 					</div>
 				{:else}
-					<ConcordancePericopeCard pericope={selectedPericope} highlighted={true} />
+					<ConcordancePericopeCard pericope={selectedPericope} />
 				{/if}
 			</div>
 		{/snippet}
@@ -97,7 +97,7 @@
 				<p>Sélectionnez une péricope.</p>
 			</div>
 		{:else}
-			<ConcordancePericopeCard pericope={selectedPericope} highlighted={true} />
+			<ConcordancePericopeCard pericope={selectedPericope} />
 		{/if}
 	</div>
 </div>

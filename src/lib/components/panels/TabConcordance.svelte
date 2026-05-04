@@ -2,6 +2,7 @@
 	import { studyPanel } from '$lib/stores/studyPanel';
 	import { loadConcordanceByParagraph } from '$lib/data/loaders';
 	import type { ConcordanceByParagraphEntry } from '$lib/data/types';
+	import { pluralFr } from '$lib/utils/i18n';
 
 	let entries = $state<ConcordanceByParagraphEntry[]>([]);
 	let nclData = $state<Record<string, Record<string, Record<string, string>>>>({});
@@ -45,7 +46,8 @@
 </script>
 
 <div class="font-ui text-xs text-muted mb-3">
-	{entries.length} renvoi(s) de la concordance
+	{entries.length}
+	{pluralFr(entries.length, 'renvoi')} de la concordance
 </div>
 
 {#if entries.length === 0}
@@ -73,16 +75,12 @@
 				</div>
 
 				{#if entry.pericopeTitle}
-					<h4
-						class="font-heading text-[16px] leading-snug text-foreground text-center mt-2 px-2"
-					>
+					<h4 class="font-heading text-[16px] leading-snug text-foreground text-center mt-2 px-2">
 						{entry.pericopeTitle}
 					</h4>
 				{/if}
 				{#if entry.pericopeCrossRefs}
-					<p
-						class="font-body text-[11.5px] text-subtle text-center mt-1.5 leading-snug"
-					>
+					<p class="font-body text-[11.5px] text-subtle text-center mt-1.5 leading-snug">
 						{entry.pericopeCrossRefs}
 					</p>
 				{/if}
@@ -104,13 +102,10 @@
 				{:else}
 					{@const verses = getVerses(entry)}
 					{#if verses.length > 0}
-						<div
-							class="font-body text-[14px] leading-relaxed text-foreground space-y-1 mt-3 mb-3"
-						>
+						<div class="font-body text-[14px] leading-relaxed text-foreground space-y-1 mt-3 mb-3">
 							{#each verses as { v, text } (v)}
 								<p>
-									<sup class="font-ui text-[10px] text-subtle align-baseline mr-1">{v}</sup
-									>{text}
+									<sup class="font-ui text-[10px] text-subtle align-baseline mr-1">{v}</sup>{text}
 								</p>
 							{/each}
 						</div>

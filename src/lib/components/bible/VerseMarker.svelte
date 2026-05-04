@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { openPanel } from '$lib/stores/studyPanel';
+	import { pluralFr } from '$lib/utils/i18n';
 	let {
 		bookSlug,
 		bookUsfx,
@@ -16,18 +17,22 @@
 
 	function onClick(e: MouseEvent) {
 		e.preventDefault();
+		e.stopPropagation();
 		openPanel(
 			{ paragraph: 0, verseUsfx: bookUsfx, verseChapter: chapter, verseVerse: verse },
 			'bible-verse'
 		);
 	}
+
+	const verb = $derived(count === 1 ? 'cite' : 'citent');
+	const noun = $derived(pluralFr(count, 'paragraphe'));
 </script>
 
 <button
 	type="button"
 	class="cec-pill"
-	aria-label="{count} paragraphe(s) du Catéchisme citent {bookSlug} {chapter}, {verse}"
-	title="{count} paragraphe(s) du Catéchisme citent ce verset"
+	aria-label="{count} {noun} du Catéchisme {verb} {bookSlug} {chapter}, {verse}"
+	title="{count} {noun} du Catéchisme {verb} ce verset"
 	onclick={onClick}
 >
 	<span class="tabular-nums">{count}§</span>

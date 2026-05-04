@@ -2,6 +2,7 @@
 	import { studyPanel } from '$lib/stores/studyPanel';
 	import { loadBibleVerseIndex } from '$lib/data/loaders';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
+	import { pluralFr } from '$lib/utils/i18n';
 	import ParagraphList from './ParagraphList.svelte';
 
 	let paragraphs: number[] = $state([]);
@@ -22,7 +23,10 @@
 </script>
 
 <div class="font-ui text-xs text-muted mb-3">
-	{paragraphs.length} paragraphe(s) du Catéchisme citent
+	{paragraphs.length}
+	{pluralFr(paragraphs.length, 'paragraphe')} du Catéchisme {paragraphs.length === 1
+		? 'cite'
+		: 'citent'}
 	<span class="font-semibold text-accent">{label}</span>
 </div>
 <ParagraphList numbers={paragraphs} emptyMessage="Aucune citation pour ce verset." />

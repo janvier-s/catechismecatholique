@@ -1,64 +1,64 @@
 <script lang="ts">
 	import type { ConcordancePericope } from '$lib/data/types';
-	import CccRangeChip from '$lib/components/CccRangeChip.svelte';
+	import { pluralFr } from '$lib/utils/i18n';
 
-	let { pericope, highlighted = false }: { pericope: ConcordancePericope; highlighted?: boolean } =
-		$props();
+	let { pericope }: { pericope: ConcordancePericope } = $props();
 
-	const cccCount = $derived(
-		pericope.cccRanges.reduce((t, r) => t + (r.to - r.from + 1), 0)
-	);
+	const cccCount = $derived(pericope.cccRanges.reduce((t, r) => t + (r.to - r.from + 1), 0));
+
+	function rangeLabel(from: number, to: number): string {
+		return from === to ? String(from) : `${from}-${to}`;
+	}
+	function rangeHref(from: number, to: number): string {
+		return from === to ? `/ccc/${from}` : `/ccc/${from}-${to}`;
+	}
 </script>
 
-<article
-	class="pericope-detail rounded-md transition-[background-color,box-shadow] duration-200 px-5 pt-4 pb-5
-		{highlighted ? 'is-highlighted' : ''}"
->
-	<!-- Header row: verseRef left, CCC count right -->
-	<div class="flex items-center justify-between gap-3">
-		<span class="font-ui text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+<div class="pericope-detail">
+	<!-- Header: pericope range + optional title -->
+	<header class="mb-4">
+		<div class="font-ui text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
 			{pericope.verseRef}
-		</span>
-		{#if cccCount > 0}
-			<span
-				class="font-ui text-[10px] uppercase tracking-[0.08em] text-subtle whitespace-nowrap"
-			>
-				{cccCount} §
-			</span>
+		</div>
+		{#if pericope.pericopeTitle}
+			<h3 class="font-heading text-[18px] leading-snug text-foreground mt-1.5">
+				{pericope.pericopeTitle}
+			</h3>
 		{/if}
-	</div>
+		{#if pericope.pericopeCrossRefs}
+			<p class="font-body text-[12px] text-subtle mt-1 leading-snug">
+				{pericope.pericopeCrossRefs}
+			</p>
+		{/if}
+	</header>
 
-	{#if pericope.pericopeTitle}
-		<h3 class="font-heading text-[18px] leading-snug text-foreground text-center mt-2 px-2">
-			{pericope.pericopeTitle}
-		</h3>
-	{/if}
-	{#if pericope.pericopeCrossRefs}
-		<p class="font-body text-[12px] text-subtle text-center mt-1.5 leading-snug">
-			{pericope.pericopeCrossRefs}
+	<!-- Caption line: N paragraphes du Catéchisme cités par cette péricope -->
+	{#if cccCount > 0}
+		<div class="font-ui text-xs text-muted mb-3">
+			{cccCount}
+			{pluralFr(cccCount, 'paragraphe')} du Catéchisme cités par cette péricope
+		</div>
+
+		<!-- Plain inline list of paragraph numbers (no chips, no border) -->
+		<div class="font-ui text-[15px] leading-relaxed flex flex-wrap gap-x-3 gap-y-1">
+			{#each pericope.cccRanges as r (`${r.from}-${r.to}`)}
+				<a
+					href={rangeHref(r.from, r.to)}
+					class="text-accent tabular-nums hover:underline whitespace-nowrap"
+				>
+					{rangeLabel(r.from, r.to)}
+				</a>
+			{/each}
+		</div>
+	{:else}
+		<p class="font-ui text-xs italic text-subtle">
+			Aucun paragraphe du Catéchisme pour cette péricope.
 		</p>
 	{/if}
-	{#if pericope.pericopeTitle || pericope.pericopeCrossRefs}
-		<div class="flex justify-center mt-3 mb-1">
-			<span class="block w-12 h-px bg-accent/30"></span>
-		</div>
-	{/if}
-
-	<div class="mt-3 flex flex-wrap gap-1.5 justify-center">
-		{#each pericope.cccRanges as r (`${r.from}-${r.to}`)}
-			<CccRangeChip range={r} />
-		{/each}
-	</div>
-</article>
+</div>
 
 <style>
 	.pericope-detail {
-		background-color: var(--color-panel);
-		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 60%, transparent);
-	}
-
-	.pericope-detail.is-highlighted {
-		background-color: color-mix(in srgb, var(--color-accent) 6%, var(--color-panel));
-		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 30%, transparent);
+		padding: 0.25rem 0.25rem 0.5rem;
 	}
 </style>
