@@ -1,32 +1,48 @@
 <script lang="ts">
-	import type { ConcordancePericope, ConcordanceChapter } from '$lib/data/types';
+	import type { ConcordanceChapter } from '$lib/data/types';
+	import type { BookInfo } from '$lib/utils/bibleBookSlug';
 
 	let {
 		verses,
 		chapterData,
 		chapter,
-		selectedVerse,
-		onSelectVerse,
+		book,
+		selectedPericopeRef,
 		onSelectPericope
 	}: {
 		verses: { v: number; text: string }[];
 		chapterData: ConcordanceChapter;
 		chapter: number;
-		selectedVerse: number | null;
-		onSelectVerse: (v: number) => void;
+		book: BookInfo;
+		selectedPericopeRef: string | null;
 		onSelectPericope: (verseRef: string) => void;
 	} = $props();
 
-	// Map: startVerse → list of pericopes starting at that verse (broader first per chapterData ordering)
-	const pericopesByStart = $derived.by(() => {
-		const m = new Map<number, ConcordancePericope[]>();
-		for (const p of chapterData.pericopes) {
-			const arr = m.get(p.startVerse) ?? [];
-			arr.push(p);
-			m.set(p.startVerse, arr);
-		}
+	// Build a quick lookup: verse number → verse text (for inline rendering).
+	const verseByNum = $derived.by(() => {
+		const m = new Map<number, string>();
+		for (const v of verses) m.set(v.v, v.text);
 		return m;
 	});
+
+	// Title deduplication: walk pericopes in order; show title only on the first
+	// card of each NCL-section run. A null title doesn't reset the tracker because
+	// the next pericope might still genuinely share a previous title.
+	const cardsWithTitleVisibility = $derived.by(() => {
+		let lastTitle: string | null = '___none___';
+		return chapterData.pericopes.map((p) => {
+			const showTitle = p.pericopeTitle !== null && p.pericopeTitle !== lastTitle;
+			if (p.pericopeTitle !== null) lastTitle = p.pericopeTitle;
+			return { ...p, showTitle };
+		});
+	});
+
+	function handleKeydown(e: KeyboardEvent, verseRef: string) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			onSelectPericope(verseRef);
+		}
+	}
 </script>
 
 <div class="h-full flex flex-col">
@@ -36,72 +52,63 @@
 		</span>
 	</div>
 	<div class="flex-1 overflow-y-auto px-sm py-md">
-		<div class="space-y-[2px]">
-			{#each verses as verse (verse.v)}
-				{@const headers = pericopesByStart.get(verse.v) ?? []}
-				{@const totalCount = chapterData.verseEntryCounts[verse.v] ?? 0}
-				{@const isSelected = selectedVerse === verse.v}
-				{@const hasBadge = totalCount > 0}
-
-				{#each headers as header (header.verseRef)}
-					<button
-						type="button"
-						class="w-full text-left flex items-center gap-2 px-[6px] py-[6px] mt-[8px] mb-[2px] rounded-sm border-l-2 border-accent/40 hover:bg-accent/10 hover:border-accent transition-colors"
-						onclick={() => onSelectPericope(header.verseRef)}
+		{#if cardsWithTitleVisibility.length === 0}
+			<div class="p-lg text-center text-subtle text-[14px]">
+				<p>Aucune péricope pour ce chapitre.</p>
+			</div>
+		{:else}
+			<div class="space-y-[10px]">
+				{#each cardsWithTitleVisibility as p (p.verseRef)}
+					{@const isSelected = selectedPericopeRef === p.verseRef}
+					{@const isMultiChapter = p.startCh !== p.endCh}
+					<div
+						role="button"
+						tabindex="0"
+						aria-pressed={isSelected}
+						class="rounded-sm border px-[10px] py-[8px] cursor-pointer transition-colors
+							{isSelected
+								? 'border-accent/60 bg-accent/5'
+								: 'border-border bg-panel hover:border-accent/30 hover:bg-accent/5'}"
+						onclick={() => onSelectPericope(p.verseRef)}
+						onkeydown={(e) => handleKeydown(e, p.verseRef)}
 					>
-						<div class="flex-1 min-w-0">
+						<div class="flex items-baseline gap-2 flex-wrap">
 							<span class="text-[11px] font-semibold uppercase tracking-[0.1em] text-accent">
-								{header.verseRef}
+								{p.verseRef}
 							</span>
-							{#if header.pericopeTitle}
-								<p class="text-[11px] text-foreground/70 leading-snug truncate">
-									{header.pericopeTitle}
-								</p>
+							{#if p.showTitle && p.pericopeTitle}
+								<span class="text-[12px] text-foreground/80">— {p.pericopeTitle}</span>
 							{/if}
 						</div>
-						<span class="shrink-0 text-[10px] text-subtle">
-							{header.cccRanges.reduce((t, r) => t + (r.to - r.from + 1), 0)} §
-						</span>
-					</button>
-				{/each}
 
-				<button
-					type="button"
-					class="w-full text-left flex items-start gap-2 rounded-sm px-[6px] py-[4px] transition-colors group
-						{isSelected ? 'bg-accent/10' : ''}
-						{hasBadge ? 'cursor-pointer hover:bg-border/20' : 'cursor-default'}"
-					onclick={() => hasBadge && onSelectVerse(verse.v)}
-					disabled={!hasBadge}
-				>
-					<span class="shrink-0 text-[11px] text-subtle font-medium w-[20px] text-right pt-[2px]">
-						{verse.v}
-					</span>
-					<span
-						class="flex-1 font-body text-[15px] leading-relaxed text-foreground"
-						class:verse-annotated={hasBadge}
-						class:verse-active={isSelected}>{verse.text}</span
-					>
-					{#if hasBadge}
-						<span class="shrink-0 mt-[3px] text-[10px] font-medium text-subtle">
-							{totalCount}
-						</span>
-					{/if}
-				</button>
-			{/each}
-		</div>
+						{#if isMultiChapter}
+							<div class="mt-[6px]">
+								<a
+									href="/bible/{book.slug}/{p.startCh}"
+									class="inline-block text-[12px] text-accent hover:underline"
+									onclick={(e) => e.stopPropagation()}
+								>
+									→ Lire dans la Bible
+								</a>
+							</div>
+						{:else}
+							<div class="mt-[6px] space-y-[4px]">
+								{#each Array.from({ length: p.endVerse - p.startVerse + 1 }, (_, i) => p.startVerse + i) as vNum (vNum)}
+									{@const text = verseByNum.get(vNum)}
+									{#if text}
+										<p class="font-body text-[15px] leading-relaxed text-foreground">
+											<sup
+												class="text-[10px] font-semibold text-subtle align-super mr-[3px]"
+												>{vNum}</sup
+											>{text}
+										</p>
+									{/if}
+								{/each}
+							</div>
+						{/if}
+					</div>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </div>
-
-<style>
-	.verse-annotated {
-		text-decoration: underline;
-		text-decoration-style: dotted;
-		text-underline-offset: 3px;
-		text-decoration-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
-	}
-	.verse-annotated:hover,
-	.verse-active {
-		text-decoration-style: solid;
-		text-decoration-color: var(--color-accent);
-	}
-</style>

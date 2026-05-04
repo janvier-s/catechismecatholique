@@ -4,7 +4,6 @@
 	import ConcordanceVerseList from './ConcordanceVerseList.svelte';
 	import ConcordancePericopePanel from './ConcordancePericopePanel.svelte';
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- `book` reserved for future use (breadcrumbs, schema refs)
 	let {
 		book,
 		chapter,
@@ -17,17 +16,18 @@
 		chapterData: ConcordanceChapter;
 	} = $props();
 
-	let selectedVerse = $state<number | null>(null);
-	let selectedPericope = $state<string | null>(null);
+	let selectedPericopeRef = $state<string | null>(null);
 
-	function handleSelectVerse(v: number) {
-		selectedVerse = selectedVerse === v ? null : v;
-		selectedPericope = null;
-	}
+	$effect(() => {
+		// Initialize selection to the first pericope of the chapter on mount.
+		if (selectedPericopeRef === null) {
+			const first = chapterData.pericopes[0];
+			if (first) selectedPericopeRef = first.verseRef;
+		}
+	});
 
 	function handleSelectPericope(verseRef: string) {
-		selectedPericope = verseRef;
-		selectedVerse = null;
+		selectedPericopeRef = verseRef;
 	}
 </script>
 
@@ -38,29 +38,29 @@
 			{verses}
 			{chapterData}
 			{chapter}
-			{selectedVerse}
-			onSelectVerse={handleSelectVerse}
+			{book}
+			{selectedPericopeRef}
 			onSelectPericope={handleSelectPericope}
 		/>
 	</div>
 	<div class="flex-1 min-w-0 overflow-hidden">
-		<ConcordancePericopePanel {chapterData} {selectedVerse} {selectedPericope} />
+		<ConcordancePericopePanel {chapterData} {selectedPericopeRef} />
 	</div>
 </div>
 
-<!-- Mobile: vertical split (verse list on top, pericope panel below) -->
+<!-- Mobile: vertical split (pericope cards on top, detail panel below) -->
 <div class="md:hidden flex flex-col flex-1 min-h-0">
 	<div class="flex-1 overflow-y-auto border-b border-border">
 		<ConcordanceVerseList
 			{verses}
 			{chapterData}
 			{chapter}
-			{selectedVerse}
-			onSelectVerse={handleSelectVerse}
+			{book}
+			{selectedPericopeRef}
 			onSelectPericope={handleSelectPericope}
 		/>
 	</div>
 	<div class="flex-1 overflow-y-auto">
-		<ConcordancePericopePanel {chapterData} {selectedVerse} {selectedPericope} />
+		<ConcordancePericopePanel {chapterData} {selectedPericopeRef} />
 	</div>
 </div>
