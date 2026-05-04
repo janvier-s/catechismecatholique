@@ -31,13 +31,29 @@
 				}
 			}}
 		>
-			<input
-				type="search"
-				name="q"
-				placeholder="Chercher § 27, Mt 1, 14, péché originel…"
-				class="w-full h-10 px-4 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-				aria-label="Recherche"
-			/>
+			<div class="relative">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] h-[16px] text-muted pointer-events-none"
+					aria-hidden="true"
+				>
+					<circle cx="11" cy="11" r="7" />
+					<path d="m21 21-4.3-4.3" />
+				</svg>
+				<input
+					type="search"
+					name="q"
+					placeholder="Rechercher : Eucharistie ou 1324-1327"
+					class="search-input w-full h-10 pl-10 pr-3 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-border focus:border-transparent"
+					aria-label="Recherche"
+				/>
+			</div>
 		</form>
 		<div class="flex-1"></div>
 
@@ -50,3 +66,10 @@
 		<ModeToggle />
 	</div>
 </header>
+
+<style>
+	/* Hide the placeholder while the search input is focused. */
+	.search-input:focus::placeholder {
+		color: transparent;
+	}
+</style>
