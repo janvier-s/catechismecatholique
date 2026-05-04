@@ -13,7 +13,7 @@
 			class="accent-accent"
 			disabled={citedCount === 0}
 		/>
-		Atténuer les versets sans référence du Catéchisme
+		Atténuer les versets sans référence au Catéchisme
 	</label>
 	{#if citedCount === 0}
 		<span class="italic">Aucun verset de ce chapitre n'est cité par le Catéchisme.</span>
