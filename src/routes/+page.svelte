@@ -84,7 +84,7 @@
 		<!-- Daily paragraph -->
 		{#if data.paragraph}
 			<section class="daily reveal r-daily" aria-labelledby="daily-heading">
-				<h2 id="daily-heading" class="sr-only">Paragraphe du jour</h2>
+				<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 				<div class="daily-row">
 					<a
 						href="/ccc/{data.dailyNumber}"
@@ -218,6 +218,17 @@
 	.daily {
 		width: 100%;
 		max-width: 720px;
+	}
+	.daily-eyebrow {
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		font-weight: 500;
+		letter-spacing: 0.28em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0 0 1rem;
+		padding-left: 0.28em; /* compensate trailing tracking */
+		text-align: center;
 	}
 	.daily-row {
 		display: grid;
