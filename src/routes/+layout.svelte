@@ -2,10 +2,13 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/state';
+	import { afterNavigate } from '$app/navigation';
+	import { get } from 'svelte/store';
 	import TopBar from '$lib/components/ui/TopBar.svelte';
 	import Sidebar from '$lib/components/ui/Sidebar.svelte';
 	import SidebarToggle from '$lib/components/ui/SidebarToggle.svelte';
 	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
+	import { closePanel, studyPanel } from '$lib/stores/studyPanel';
 
 	let { children } = $props();
 
@@ -17,6 +20,16 @@
 		if (!p.startsWith('/ccc')) return false;
 		if (p === '/ccc' || p === '/ccc/' || p.startsWith('/ccc/sommaire')) return false;
 		return true;
+	});
+
+	// Close the StudyPanel when leaving the /ccc reading surface — it shouldn't
+	// linger over /bible or other routes where its context is irrelevant.
+	afterNavigate(({ from, to }) => {
+		const fromOnCcc = from?.url.pathname.startsWith('/ccc') ?? false;
+		const toOnCcc = to?.url.pathname.startsWith('/ccc') ?? false;
+		if (fromOnCcc && !toOnCcc && get(studyPanel).open) {
+			closePanel();
+		}
 	});
 </script>
 
