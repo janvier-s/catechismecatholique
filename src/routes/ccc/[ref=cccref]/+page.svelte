@@ -11,6 +11,40 @@
 		if (!r) return '';
 		return r.from === r.to ? `${r.from}` : `${r.from}–${r.to}`;
 	}
+	/** Pick the deepest available level for the "read complete X" link. */
+	function deepestLevel(c: NonNullable<typeof data.context>): {
+		label: string;
+		title: string;
+		href: string;
+	} | null {
+		if (c.article && c.chapter && c.section) {
+			return {
+				label: "Lire l'article complet",
+				title: c.article.title,
+				href: `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}`
+			};
+		}
+		if (c.chapter && c.section) {
+			return {
+				label: 'Lire le chapitre complet',
+				title: c.chapter.title,
+				href: `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`
+			};
+		}
+		if (c.section) {
+			return {
+				label: 'Lire la section complète',
+				title: c.section.title,
+				href: `/ccc/${c.part.slug}/${c.section.slug}`
+			};
+		}
+		const partLabel = c.part.number ? 'Lire la partie complète' : 'Lire le prologue complet';
+		return {
+			label: partLabel,
+			title: c.part.title,
+			href: `/ccc/${c.part.slug}`
+		};
+	}
 </script>
 
 <svelte:head>
@@ -100,19 +134,11 @@
 			{/if}
 		</div>
 
-		{#if c.article && c.chapter}
+		{@const level = deepestLevel(c)}
+		{#if level}
 			<p class="mt-12 font-ui text-sm">
-				<a
-					href="{chapterUrl(c)}/{c.article.slug}"
-					class="text-accent hover:underline"
-				>
-					Lire l'article complet&nbsp;: {c.article.title} →
-				</a>
-			</p>
-		{:else if c.chapter}
-			<p class="mt-12 font-ui text-sm">
-				<a href={chapterUrl(c)} class="text-accent hover:underline">
-					Lire le chapitre complet&nbsp;: {c.chapter.title} →
+				<a href={level.href} class="text-accent hover:underline">
+					{level.label}&nbsp;: {level.title} →
 				</a>
 			</p>
 		{/if}
