@@ -1,5 +1,24 @@
 <script lang="ts">
 	import { loadStructure } from '$lib/data/loaders';
+	import { fade } from 'svelte/transition';
+
+	// Hover-intent timer: cancel close when the mouse moves through the gap
+	// between the trigger and the panel (which is fixed-positioned on the
+	// viewport, separated visually from the trigger). Without this, the
+	// panel closes while the cursor is between trigger and panel.
+	let hoverCloseTimer: ReturnType<typeof setTimeout> | null = null;
+	function cancelClose() {
+		if (hoverCloseTimer) {
+			clearTimeout(hoverCloseTimer);
+			hoverCloseTimer = null;
+		}
+	}
+	function scheduleClose() {
+		cancelClose();
+		hoverCloseTimer = setTimeout(() => {
+			open = false;
+		}, 180);
+	}
 
 	type Range = { from: number; to: number };
 	type Article = {
@@ -275,8 +294,11 @@
 <div
 	class="catdrop"
 	bind:this={containerEl}
-	onmouseenter={() => (open = true)}
-	onmouseleave={() => (open = false)}
+	onmouseenter={() => {
+		cancelClose();
+		open = true;
+	}}
+	onmouseleave={scheduleClose}
 >
 	<button
 		type="button"
@@ -315,6 +337,9 @@
 			tabindex="-1"
 			bind:this={panelEl}
 			aria-label="Catéchisme — table des matières"
+			onmouseenter={cancelClose}
+			onmouseleave={scheduleClose}
+			transition:fade={{ duration: 140 }}
 		>
 			<div class="ornament-top" aria-hidden="true">
 				<span class="rule rule-l"></span>
@@ -610,13 +635,9 @@
 		color: var(--color-fg);
 		border-radius: 6px;
 		padding: 1.1rem 1.4rem 0;
-		box-shadow:
-			0 1px 0 color-mix(in srgb, var(--color-fg) 6%, transparent),
-			0 24px 60px -22px color-mix(in srgb, var(--color-fg) 35%, transparent),
-			0 8px 20px -10px color-mix(in srgb, var(--color-fg) 22%, transparent);
+		box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--color-fg) 22%, transparent);
 		z-index: 40;
 		transform-origin: top center;
-		animation: panel-in 150ms cubic-bezier(0.22, 1, 0.36, 1);
 		outline: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
 		outline-offset: -1px;
 	}
@@ -638,11 +659,11 @@
 	@keyframes panel-in {
 		from {
 			opacity: 0;
-			transform: translateY(-4px) scale(0.97);
+			transform: translate(-50%, -4px);
 		}
 		to {
 			opacity: 1;
-			transform: translateY(0) scale(1);
+			transform: translate(-50%, 0);
 		}
 	}
 

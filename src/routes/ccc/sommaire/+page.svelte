@@ -63,7 +63,8 @@
 			<span class="rule rule-r"></span>
 		</div>
 		<p class="lede">
-			Un prologue, quatre parties. La foi professée, célébrée, vécue, priée.
+			Un prologue, quatre parties.<br />
+			La foi professée, célébrée, vécue, et priée.
 		</p>
 	</header>
 
@@ -323,17 +324,18 @@
 	}
 
 	/* Prologue: smaller, simpler — no eyebrow, smaller title, sits as a quiet
-	   opener above the four parts. */
+	   opener above the four parts. Negative margin compensates for the flex
+	   gap on .parts so the prologue tucks closer to Partie I. */
 	.part.is-prologue {
-		margin-bottom: calc(var(--rh) * 0.5);
+		margin-bottom: calc(var(--rh) * -2.5);
 	}
 	.part.is-prologue .part-head {
-		margin-bottom: calc(var(--rh) * 0.5);
+		margin-bottom: calc(var(--rh) * 0.25);
 		padding-bottom: 0;
 		border-bottom: none;
 	}
 	.part.is-prologue .part-title {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 		font-weight: 600;
 	}
 
