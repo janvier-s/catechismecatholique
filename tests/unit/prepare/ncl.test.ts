@@ -64,6 +64,35 @@ describe('parseUSFX', () => {
 		expect(result['JOB']!['38']!['2']).toMatch(/celui-ci/);
 	});
 
+	it('skips <p style="ms1"> major section titles between verses', async () => {
+		const xml = `<usfx>
+			<book id="TIT">
+				<c id="1"/>
+				<p style="p"><v id="4" bcv="TIT.1.4"/><w>contenu de v4</w><ve/></p>
+				<p style="ms1">I. INSTRUCTIONS CONCERNANT...</p>
+				<p style="p"><v id="5" bcv="TIT.1.5"/><w>contenu de v5</w><ve/></p>
+			</book>
+		</usfx>`;
+		const result = await parseUSFX(xml);
+		expect(result['TIT']!['1']!['4']).toMatch(/contenu de v4/);
+		expect(result['TIT']!['1']!['4']).not.toMatch(/INSTRUCTIONS/);
+		expect(result['TIT']!['1']!['5']).toMatch(/contenu de v5/);
+	});
+
+	it('skips <p style="d"> descriptive subscriptions (e.g. Psalm headers)', async () => {
+		const xml = `<usfx>
+			<book id="PSA">
+				<c id="51"/>
+				<p style="d">Psaume de David, lorsque le prophète Nathan vint le trouver</p>
+				<p style="p"><v id="1" bcv="PSA.51.1"/><w>Aie pitié de moi</w><ve/></p>
+			</book>
+		</usfx>`;
+		const result = await parseUSFX(xml);
+		expect(result['PSA']!['51']!['1']).toMatch(/Aie pitié de moi/);
+		expect(result['PSA']!['51']!['1']).not.toMatch(/Psaume de David/);
+		expect(result['PSA']!['51']!['1']).not.toMatch(/Nathan/);
+	});
+
 	it('keeps non-"r" <p> styles transparent', async () => {
 		const xml = `<usfx>
 			<book id="GEN">

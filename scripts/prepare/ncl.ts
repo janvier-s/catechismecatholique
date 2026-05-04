@@ -13,9 +13,14 @@ type Bible = Record<string, Record<string, Record<string, string>>>;
  *   <x>...</x>   — cross-references (same)
  *   <s>...</s>   — section titles (e.g. "La faute et le châtiment") are
  *                  metadata, not verse text
- *   <p style="r">...</p>
- *                — cross-reference paragraphs (e.g. "(Job 38)") are also
- *                  metadata; only this specific style is skipped
+ *   <d>...</d>   — descriptive psalm subscriptions (e.g. "Au maître de
+ *                  chant. Psaume de David."). Some psalms encode these
+ *                  with a <v> marker inside the <d>; that "verse" is
+ *                  dropped (its text is empty after skipping).
+ *   <p style="…">...</p>
+ *                — paragraphs whose style is metadata (cross-references,
+ *                  major section titles, descriptive subscriptions, etc.).
+ *                  See the open-tag handler for the exact set.
  *
  * Markers consumed for state:
  *   <book id="…">  starts a book, resets chapter/verse
@@ -31,13 +36,13 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 	let currentChap = '';
 	let currentVerse: string | null = null;
 	let buf: string[] = [];
-	// Depth of nested skip-containers (<f> / <x> / <s> / <p style="r">). Text
+	// Depth of nested skip-containers (<f> / <x> / <s> / metadata <p>). Text
 	// is buffered only when 0.
 	let skipDepth = 0;
-	// Tracks open <p style="r"> containers specifically — needed because we
-	// only skip <p> when its style attribute is "r", and the close-tag handler
-	// has no access to the original opening attributes.
-	let pCrossRefDepth = 0;
+	// Tracks open metadata <p> containers specifically — needed because we
+	// only skip <p> when its style attribute matches the metadata set, and
+	// the close-tag handler has no access to the original opening attributes.
+	let pMetadataDepth = 0;
 
 	function commitVerse() {
 		if (currentVerse !== null && currentBook && currentChap) {
@@ -83,7 +88,7 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 				currentChap = '';
 				currentVerse = null;
 				skipDepth = 0;
-				pCrossRefDepth = 0;
+				pMetadataDepth = 0;
 			} else if (openTag === 'id') {
 				// `<id id="GEN" />` is informational; ignore (book is already set).
 			} else if (openTag === 'c') {
@@ -97,26 +102,40 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 				currentVerse = idMatch ? idMatch[1]! : null;
 			} else if (openTag === 've') {
 				// Verse-end marker — no-op; commit happens at next verse boundary.
-			} else if (openTag === 'f' || openTag === 'x' || openTag === 's') {
-				// Enter footnote / cross-ref / section-title skip block
-				// (only if not self-closing).
+			} else if (openTag === 'f' || openTag === 'x' || openTag === 's' || openTag === 'd') {
+				// Enter footnote / cross-ref / section-title / description skip
+				// block (only if not self-closing).
 				if (selfClose !== '/') skipDepth++;
 			} else if (openTag === 'p') {
-				// Cross-reference paragraphs <p style="r">...</p> are metadata,
-				// not verse text. Other <p> styles remain transparent.
+				// Skip non-content <p> styles. USFX uses these for metadata headings,
+				// not verse content:
+				//   r        - cross-reference parenthetical
+				//   ms, ms1, ms2, ms3, ms4 - major section title
+				//   mr       - major section reference
+				//   d        - descriptive paragraph (e.g. Psalm subscriptions)
+				//   sr       - section reference range
+				// Content styles (kept transparent): p, m, mi, pi, pi1-pi3, q, q1-q4,
+				//   b, li, li1-li4, sp, etc.
 				const styleMatch = (attrs ?? '').match(/style="([^"]+)"/);
-				if (styleMatch && styleMatch[1] === 'r' && selfClose !== '/') {
+				const style = styleMatch?.[1] ?? '';
+				const isMetadata =
+					style === 'r' ||
+					style === 'mr' ||
+					style === 'd' ||
+					style === 'sr' ||
+					/^ms\d*$/.test(style);
+				if (isMetadata && selfClose !== '/') {
 					skipDepth++;
-					pCrossRefDepth++;
+					pMetadataDepth++;
 				}
 			}
 			// All other open tags (<w>, <h>, <toc>, <wj>, …) are transparent:
 			// their text content is captured by the text branch.
 		} else if (closeTag) {
-			if (closeTag === 'f' || closeTag === 'x' || closeTag === 's') {
+			if (closeTag === 'f' || closeTag === 'x' || closeTag === 's' || closeTag === 'd') {
 				if (skipDepth > 0) skipDepth--;
-			} else if (closeTag === 'p' && pCrossRefDepth > 0) {
-				pCrossRefDepth--;
+			} else if (closeTag === 'p' && pMetadataDepth > 0) {
+				pMetadataDepth--;
 				skipDepth--;
 			}
 		} else if (text !== undefined) {
