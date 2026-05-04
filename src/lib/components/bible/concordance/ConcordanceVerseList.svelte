@@ -78,11 +78,11 @@
 							</span>
 							{#if cccCount > 0}
 								<span
-									class="font-heading text-[22px] font-semibold leading-none text-accent tabular-nums whitespace-nowrap"
+									class="font-ui text-[18px] font-semibold leading-none text-accent tabular-nums whitespace-nowrap"
 									aria-label="{cccCount} {pluralFr(cccCount, 'paragraphe')} du Catéchisme"
 								>
 									{cccCount}<span
-										class="ml-0.5 text-[13px] font-normal text-accent/70 align-baseline"
+										class="ml-0.5 text-[12px] font-normal text-accent/70 align-baseline"
 										aria-hidden="true">§</span
 									>
 								</span>
@@ -136,7 +136,7 @@
 						<!-- Chevron affordance, bottom-right -->
 						{#if cccCount > 0}
 							<span
-								class="chevron pointer-events-none absolute right-3 bottom-3 font-ui text-[14px] text-subtle/60 transition-[color,transform] duration-200"
+								class="chevron pointer-events-none absolute right-3 bottom-2 font-ui text-[20px] leading-none text-subtle/70 transition-[color,transform] duration-200"
 								aria-hidden="true">›</span
 							>
 						{/if}

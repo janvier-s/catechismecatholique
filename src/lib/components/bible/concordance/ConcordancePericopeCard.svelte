@@ -47,8 +47,8 @@
 		</div>
 
 		<!-- Plain inline list of paragraph numbers (no chips, no border).
-		     Larger serif type echoes the scriptural reading aesthetic. -->
-		<div class="font-heading text-[19px] leading-relaxed flex flex-wrap gap-x-5 gap-y-2">
+		     UI font keeps it visually grouped with surrounding metadata. -->
+		<div class="font-ui text-[15px] font-medium leading-relaxed flex flex-wrap gap-x-4 gap-y-1.5">
 			{#each pericope.cccRanges as r (`${r.from}-${r.to}`)}
 				<a
 					href={rangeHref(r.from, r.to)}
