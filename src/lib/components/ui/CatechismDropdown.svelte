@@ -17,7 +17,7 @@
 		cancelClose();
 		hoverCloseTimer = setTimeout(() => {
 			open = false;
-		}, 180);
+		}, 500);
 	}
 
 	type Range = { from: number; to: number };
@@ -594,6 +594,19 @@
 <style>
 	.catdrop {
 		position: relative;
+	}
+	/* Invisible hover bridge: extends the trigger's hover area downward
+	   past the topbar so a cursor moving slowly toward the centered panel
+	   stays within .catdrop's mouseenter region. Wider than the button to
+	   give some lateral wiggle. */
+	.catdrop::after {
+		content: '';
+		position: absolute;
+		top: 100%;
+		left: -40px;
+		right: -40px;
+		height: 60px;
+		/* No fill — purely a hover surface. */
 	}
 
 	/* Trigger ----------------------------------------------------------- */
