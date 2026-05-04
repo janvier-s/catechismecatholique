@@ -51,7 +51,7 @@
 			Chapitre {chapter}
 		</span>
 	</div>
-	<div class="flex-1 overflow-y-auto px-sm py-md">
+	<div class="flex-1 overflow-y-auto px-sm py-md styled-scroll">
 		{#if cardsWithTitleVisibility.length === 0}
 			<div class="p-lg text-center text-subtle text-[14px]">
 				<p>Aucune péricope pour ce chapitre.</p>

@@ -18,7 +18,7 @@
 </script>
 
 <div class="flex flex-col h-full overflow-hidden">
-	<div class="flex-1 overflow-y-auto p-md">
+	<div class="flex-1 overflow-y-auto p-md styled-scroll">
 		{#if chapterData.pericopes.length === 0}
 			<div class="p-lg text-center text-subtle text-[14px]">
 				<p>Aucune référence de concordance pour ce chapitre.</p>

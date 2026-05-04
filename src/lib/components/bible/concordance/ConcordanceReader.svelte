@@ -50,7 +50,7 @@
 
 <!-- Mobile: vertical split (pericope cards on top, detail panel below) -->
 <div class="md:hidden flex flex-col flex-1 min-h-0">
-	<div class="flex-1 overflow-y-auto border-b border-border">
+	<div class="flex-1 overflow-y-auto border-b border-border styled-scroll">
 		<ConcordanceVerseList
 			{verses}
 			{chapterData}
@@ -60,7 +60,7 @@
 			onSelectPericope={handleSelectPericope}
 		/>
 	</div>
-	<div class="flex-1 overflow-y-auto">
+	<div class="flex-1 overflow-y-auto styled-scroll">
 		<ConcordancePericopePanel {chapterData} {selectedPericopeRef} />
 	</div>
 </div>
