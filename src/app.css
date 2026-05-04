@@ -315,6 +315,15 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 .prose-paragraph .ref-wrap + .ref-wrap {
 	margin-left: 0.15em;
 }
+/* Inline Bible refs render their citation as a <button> (atomic inline-block
+   per UA stylesheet), which creates a wrap opportunity between the button
+   and any trailing punctuation. The renderer pulls the trailing punctuation
+   inside this wrap; nowrap then keeps "(1 Jn 3, 8)." on a single line. The
+   leading whitespace stays OUTSIDE the wrap so a normal break opportunity
+   exists before the citation. */
+.prose-paragraph .ref-bible-inline {
+	white-space: nowrap;
+}
 
 /* Translucent panel background for sticky overlays. The variable carries
    alpha so the blur can show subtle content underneath in browsers that
