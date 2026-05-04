@@ -58,13 +58,13 @@
 			{/if}
 		{/snippet}
 		{#snippet children()}
-			<div class="flex-1 overflow-y-auto p-md styled-scroll bg-panel">
+			<div class="flex-1 overflow-y-auto px-6 py-6 styled-scroll bg-panel">
 				{#if chapterData.pericopes.length === 0}
-					<div class="p-lg text-center text-subtle text-[14px]">
+					<div class="p-6 text-center text-subtle text-[14px]">
 						<p>Aucune référence de concordance pour ce chapitre.</p>
 					</div>
 				{:else if selectedPericope === null}
-					<div class="p-lg text-center text-subtle text-[14px]">
+					<div class="p-6 text-center text-subtle text-[14px]">
 						<p>Sélectionnez une péricope.</p>
 					</div>
 				{:else}
@@ -87,13 +87,13 @@
 			onSelectPericope={handleSelectPericope}
 		/>
 	</div>
-	<div class="flex-1 overflow-y-auto p-md styled-scroll bg-panel">
+	<div class="flex-1 overflow-y-auto px-5 py-5 styled-scroll bg-panel">
 		{#if chapterData.pericopes.length === 0}
-			<div class="p-lg text-center text-subtle text-[14px]">
+			<div class="p-6 text-center text-subtle text-[14px]">
 				<p>Aucune référence de concordance pour ce chapitre.</p>
 			</div>
 		{:else if selectedPericope === null}
-			<div class="p-lg text-center text-subtle text-[14px]">
+			<div class="p-6 text-center text-subtle text-[14px]">
 				<p>Sélectionnez une péricope.</p>
 			</div>
 		{:else}

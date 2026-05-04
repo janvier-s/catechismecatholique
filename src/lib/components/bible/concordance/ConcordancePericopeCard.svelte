@@ -15,32 +15,40 @@
 </script>
 
 <div class="pericope-detail">
-	<!-- Header: pericope range + optional title -->
-	<header class="mb-4">
-		<div class="font-ui text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
-			{pericope.verseRef}
-		</div>
-		{#if pericope.pericopeTitle}
-			<h3 class="font-heading text-[18px] leading-snug text-foreground mt-1.5">
-				{pericope.pericopeTitle}
-			</h3>
-		{/if}
+	<!-- Optional pericope title + cross-refs.
+	     The verseRef is already shown in the sticky PanelShell header,
+	     so we don't repeat it here. -->
+	{#if pericope.pericopeTitle}
+		<h3 class="font-heading text-[20px] font-semibold leading-snug text-foreground">
+			{pericope.pericopeTitle}
+		</h3>
 		{#if pericope.pericopeCrossRefs}
-			<p class="font-body text-[12px] text-subtle mt-1 leading-snug">
+			<p class="font-body text-[13px] text-subtle leading-snug mt-1.5">
 				{pericope.pericopeCrossRefs}
 			</p>
 		{/if}
-	</header>
+	{:else if pericope.pericopeCrossRefs}
+		<p class="font-body text-[13px] text-subtle leading-snug">
+			{pericope.pericopeCrossRefs}
+		</p>
+	{/if}
 
-	<!-- Caption line: N paragraphes du Catéchisme cités par cette péricope -->
+	<!-- Caption line: N paragraphes du Catéchisme se rapport(e|ent) à ce passage -->
 	{#if cccCount > 0}
-		<div class="font-ui text-xs text-muted mb-3">
-			{cccCount}
-			{pluralFr(cccCount, 'paragraphe')} du Catéchisme cités par cette péricope
+		<div
+			class="font-ui text-xs text-muted {pericope.pericopeTitle || pericope.pericopeCrossRefs
+				? 'mt-5'
+				: ''} mb-4"
+		>
+			<span class="font-semibold text-accent tabular-nums">{cccCount}</span>
+			{pluralFr(cccCount, 'paragraphe')} du Catéchisme {cccCount === 1
+				? 'se rapporte'
+				: 'se rapportent'} à ce passage
 		</div>
 
-		<!-- Plain inline list of paragraph numbers (no chips, no border) -->
-		<div class="font-ui text-[15px] leading-relaxed flex flex-wrap gap-x-3 gap-y-1">
+		<!-- Plain inline list of paragraph numbers (no chips, no border).
+		     Larger serif type echoes the scriptural reading aesthetic. -->
+		<div class="font-heading text-[19px] leading-relaxed flex flex-wrap gap-x-5 gap-y-2">
 			{#each pericope.cccRanges as r (`${r.from}-${r.to}`)}
 				<a
 					href={rangeHref(r.from, r.to)}
@@ -51,14 +59,8 @@
 			{/each}
 		</div>
 	{:else}
-		<p class="font-ui text-xs italic text-subtle">
-			Aucun paragraphe du Catéchisme pour cette péricope.
+		<p class="font-ui text-sm italic text-subtle">
+			Aucun paragraphe du Catéchisme pour ce passage.
 		</p>
 	{/if}
 </div>
-
-<style>
-	.pericope-detail {
-		padding: 0.25rem 0.25rem 0.5rem;
-	}
-</style>
