@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest';
 import {
 	capitalizeFirstWord,
 	fixCccParaSourceTypos,
-	mergeBibleRefContinuations
+	mergeBibleRefContinuations,
+	normalizeGuillemets
 } from '../../../scripts/prepare/source-data-fixes';
 
 describe('capitalizeFirstWord', () => {
@@ -57,6 +58,37 @@ describe('mergeBibleRefContinuations', () => {
 	it('passes through a leading entry that itself has no book', () => {
 		const refs = [{ text: '5:37' }];
 		expect(mergeBibleRefContinuations(refs)).toEqual([{ text: '5:37' }]);
+	});
+});
+
+describe('normalizeGuillemets', () => {
+	it('adds NBSP after opening guillemet missing space', () => {
+		expect(normalizeGuillemets('«être tenté»')).toBe('« être tenté »');
+	});
+
+	it('replaces regular space after « with NBSP', () => {
+		expect(normalizeGuillemets('« être tenté »')).toBe('« être tenté »');
+	});
+
+	it('is idempotent on already-correct text', () => {
+		const input = '« être tenté »';
+		expect(normalizeGuillemets(input)).toBe(input);
+	});
+
+	it('handles HTML tags adjacent to guillemets', () => {
+		expect(normalizeGuillemets('«<i>être tenté</i>»')).toBe('« <i>être tenté</i> »');
+	});
+
+	it('handles only the opening guillemet missing space', () => {
+		expect(normalizeGuillemets('«être tenté »')).toBe('« être tenté »');
+	});
+
+	it('handles only the closing guillemet missing space', () => {
+		expect(normalizeGuillemets('« être tenté»')).toBe('« être tenté »');
+	});
+
+	it('handles multiple guillemet pairs in same string', () => {
+		expect(normalizeGuillemets('« A» et «B »')).toBe('« A » et « B »');
 	});
 });
 

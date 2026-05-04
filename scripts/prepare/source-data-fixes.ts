@@ -1,3 +1,19 @@
+// Normalize spacing around French guillemets « ». Source CCC HTML is
+// inconsistent: some paragraphs have «X (no space) or X», others use a
+// regular U+0020 space instead of the typographic NBSP (U+00A0). Unify
+// both sides to a non-breaking space, including the tag-adjacent case
+// like «<i>X</i>» which has no whitespace at all.
+export function normalizeGuillemets(html: string): string {
+	return html
+		// Collapse any whitespace right after « into a single NBSP.
+		.replace(/«[ \t ]*/g, '« ')
+		// Collapse any whitespace right before » into a single NBSP.
+		.replace(/[ \t ]*»/g, ' »')
+		// Tag-adjacent: «<tag> and </tag>» have no whitespace to match above.
+		.replace(/«(<[^>]+>)/g, '« $1')
+		.replace(/(<\/[^>]+>)»/g, '$1 »');
+}
+
 // Walk past leading HTML tags + opening punctuation (« quotes, etc.) to find
 // the first letter, then uppercase it. Returns the modified string.
 export function capitalizeFirstWord(html: string): string {
