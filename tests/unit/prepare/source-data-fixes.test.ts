@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
 	capitalizeFirstWord,
+	fixCccParaSourceTypos,
 	mergeBibleRefContinuations
 } from '../../../scripts/prepare/source-data-fixes';
 
@@ -56,5 +57,54 @@ describe('mergeBibleRefContinuations', () => {
 	it('passes through a leading entry that itself has no book', () => {
 		const refs = [{ text: '5:37' }];
 		expect(mergeBibleRefContinuations(refs)).toEqual([{ text: '5:37' }]);
+	});
+});
+
+describe('fixCccParaSourceTypos', () => {
+	it('renumbers the duplicate §2275 to §2775 when alongside §2774', () => {
+		const tree = [
+			{
+				type: 'part',
+				children: [
+					{
+						type: 'en_bref',
+						children: [
+							{ type: 'paragraph', number: 2773, text_html: '<span>x</span>' },
+							{ type: 'paragraph', number: 2774, text_html: '<span>y</span>' },
+							{
+								type: 'paragraph',
+								number: 2275,
+								text_html: '<span>Maître et modèle de notre prière.</span>'
+							},
+							{ type: 'paragraph', number: 2776, text_html: '<span>z</span>' }
+						]
+					}
+				]
+			}
+		];
+		fixCccParaSourceTypos(tree as any);
+		const kids = (tree[0] as any).children[0].children;
+		expect(kids.map((k: any) => k.number)).toEqual([2773, 2774, 2775, 2776]);
+		expect(kids[2].text_html).toContain('Maître et Modèle');
+	});
+
+	it('leaves the real §2275 untouched (no §2774/§2776 sibling)', () => {
+		const tree = [
+			{
+				type: 'part',
+				children: [
+					{
+						type: 'article',
+						children: [
+							{ type: 'paragraph', number: 2274, text_html: '<span>a</span>' },
+							{ type: 'paragraph', number: 2275, text_html: '<span>b</span>' }
+						]
+					}
+				]
+			}
+		];
+		fixCccParaSourceTypos(tree as any);
+		const kids = (tree[0] as any).children[0].children;
+		expect(kids.map((k: any) => k.number)).toEqual([2274, 2275]);
 	});
 });

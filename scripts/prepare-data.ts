@@ -16,6 +16,7 @@ import { logHeader, logStep, endStep, assert } from './prepare/validators.ts';
 import { buildStructure } from './prepare/structure.ts';
 import { extractTocStructure, validateAgainstToc } from './prepare/toc-validator.ts';
 import { extractParagraphs } from './prepare/paragraphs.ts';
+import { fixCccParaSourceTypos } from './prepare/source-data-fixes.ts';
 import { buildChapterFiles } from './prepare/chapters.ts';
 import { extractEnBref } from './prepare/enbref.ts';
 import { parseSigles } from './prepare/abbreviations.ts';
@@ -69,6 +70,7 @@ async function main() {
 
 	logStep('building structure');
 	const rawParts = JSON.parse(readFileSync(join(SOURCES, 'ccc_paras_processed.json'), 'utf8'));
+	fixCccParaSourceTypos(rawParts);
 	const structure = buildStructure(rawParts);
 	writeFileSync(join(OUT, 'ccc/structure.json'), JSON.stringify(structure, null, 2));
 	endStep(`${structure.parts.length} parts`);

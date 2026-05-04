@@ -47,3 +47,43 @@ export function mergeBibleRefContinuations(
 	}
 	return out;
 }
+
+// `ccc_paras_processed.json` mistypes §2775 as a duplicate §2275: an
+// "Oraison dominicale" intro line is dropped into the en_bref block that
+// holds §§ 2773-2774-2776. The duplicate would otherwise overwrite the
+// real §2275 and leave §2775 absent.
+//
+// Detect by sibling neighbourhood (a `2275` paragraph alongside `2774` or
+// `2776`) and rewrite in-place to `2775`. Also restores the capital
+// "Modèle" used in the Vatican French edition.
+interface RawTreeNode {
+	type: string;
+	number?: number;
+	text_html?: string;
+	children?: RawTreeNode[];
+}
+
+export function fixCccParaSourceTypos(parts: RawTreeNode[]): void {
+	function walk(node: RawTreeNode) {
+		const kids = node.children;
+		if (kids && kids.length > 0) {
+			const numbers = new Set<number | undefined>();
+			for (const c of kids) if (c.type === 'paragraph') numbers.add(c.number);
+			if (numbers.has(2275) && (numbers.has(2774) || numbers.has(2776))) {
+				for (const c of kids) {
+					if (c.type === 'paragraph' && c.number === 2275) {
+						c.number = 2775;
+						if (c.text_html) {
+							c.text_html = c.text_html.replace(
+								'Maître et modèle',
+								'Maître et Modèle'
+							);
+						}
+					}
+				}
+			}
+			for (const c of kids) walk(c);
+		}
+	}
+	for (const p of parts) walk(p);
+}
