@@ -98,7 +98,7 @@
 									{#if text}
 										<p class="font-body text-[15px] leading-relaxed text-foreground">
 											<sup
-												class="text-[10px] font-semibold text-subtle align-super mr-[3px]"
+												class="top-0 align-baseline text-[10px] font-semibold text-subtle mr-[3px]"
 												>{vNum}</sup
 											>{text}
 										</p>
