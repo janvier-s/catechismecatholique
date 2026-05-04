@@ -408,8 +408,9 @@ export interface BuildStats {
 }
 
 /**
- * For a given (chapter, startV), find the NCL section whose startV is the largest
- * value ≤ startV in the same chapter. That section "encloses" the pericope.
+ * Strict match: a pericope inherits an NCL section's title only when the
+ * pericope's startV matches that section's startV exactly. Sub-pericopes
+ * starting mid-section get no title (and no crossRefs).
  */
 function findEnclosingNclSection(
 	sections: NclSection[] | undefined,
@@ -417,13 +418,12 @@ function findEnclosingNclSection(
 	startV: number
 ): { title: string; crossRefs: string | null } | null {
 	if (!sections) return null;
-	let best: NclSection | null = null;
 	for (const s of sections) {
-		if (s.ch !== ch) continue;
-		if (s.startV > startV) continue;
-		if (!best || s.startV > best.startV) best = s;
+		if (s.ch === ch && s.startV === startV) {
+			return { title: s.title, crossRefs: s.crossRefs };
+		}
 	}
-	return best ? { title: best.title, crossRefs: best.crossRefs } : null;
+	return null;
 }
 
 function formatVerseRef(

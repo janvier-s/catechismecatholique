@@ -275,6 +275,26 @@ describe('buildConcordancePericopes', () => {
 		expect(ps.map((p) => p.verseRef)).toEqual(['Genèse 3:1-24', 'Genèse 3:1-7', 'Genèse 3:15']);
 	});
 
+	it('attaches NCL title only when pericope startV matches a section startV exactly', () => {
+		// Sections exist at GEN 3:1 and GEN 2:4 — anything starting mid-section
+		// gets no title.
+		const html = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">3:1-24</a> matches v1
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">390</a>)</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos2">3:5</a> mid-section
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">394</a>)</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos3">3:6-9</a> mid-section range
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">395</a>)</p>
+    </body></html>`;
+		const r = buildConcordancePericopes([html], ncl, knownParas, books, sections);
+		const ps = r.byBook.GEN![3]!.pericopes;
+		const byRef = Object.fromEntries(ps.map((p) => [p.verseRef, p.pericopeTitle]));
+		expect(byRef['Genèse 3:1-24']).toBe('La faute et le châtiment');
+		expect(byRef['Genèse 3:5']).toBeNull();
+		expect(byRef['Genèse 3:6-9']).toBeNull();
+	});
+
 	it('builds by-paragraph inverse', () => {
 		const html = `<html><body>
       <p class="calibre_3">Commentary on Genesis</p>
