@@ -171,7 +171,7 @@
 
 	function fmtRange(r: Range | undefined): string {
 		if (!r) return '';
-		return r.from === r.to ? `§${r.from}` : `§§ ${r.from}–${r.to}`;
+		return r.from === r.to ? `${r.from}` : `${r.from}–${r.to}`;
 	}
 
 	// Column lengths for keyboard navigation bounds
@@ -271,13 +271,19 @@
 	}
 </script>
 
-<div class="catdrop" bind:this={containerEl}>
+<div
+	class="catdrop"
+	bind:this={containerEl}
+	onmouseenter={() => (open = true)}
+	onmouseleave={() => (open = false)}
+>
 	<button
 		type="button"
 		bind:this={triggerEl}
 		class="catdrop-trigger font-ui text-sm font-semibold"
 		class:is-open={open}
 		onclick={toggle}
+		onfocus={() => (open = true)}
 		aria-haspopup="menu"
 		aria-expanded={open}
 		aria-controls="catechism-menu"
@@ -553,9 +559,6 @@
 						<span>Sommaire complet</span>
 						<span class="sommaire-fleuron" aria-hidden="true">✠</span>
 					</a>
-					<span class="foot-hint" aria-hidden="true">
-						Astuce&nbsp;: tapez un&nbsp;§ dans la recherche
-					</span>
 				</div>
 			{/if}
 		</div>
@@ -597,10 +600,11 @@
 
 	/* Panel ------------------------------------------------------------- */
 	.catdrop-panel {
-		position: absolute;
-		top: calc(100% + 14px);
-		right: 0;
-		width: min(96vw, 960px);
+		position: fixed;
+		top: var(--topbar-bottom, 80px);
+		left: 50%;
+		transform: translateX(-50%);
+		width: min(98vw, 1200px);
 		background: var(--color-panel);
 		color: var(--color-fg);
 		border-radius: 6px;
@@ -610,18 +614,19 @@
 			0 24px 60px -22px color-mix(in srgb, var(--color-fg) 35%, transparent),
 			0 8px 20px -10px color-mix(in srgb, var(--color-fg) 22%, transparent);
 		z-index: 40;
-		transform-origin: top right;
+		transform-origin: top center;
 		animation: panel-in 150ms cubic-bezier(0.22, 1, 0.36, 1);
 		outline: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
 		outline-offset: -1px;
 	}
 
-	/* Tiny caret pointer above the panel — anchored to trigger on the right. */
+	/* Tiny caret pointer above the panel — anchored to trigger center. */
 	.catdrop-panel::before {
 		content: '';
 		position: absolute;
 		top: -6px;
-		right: 22px;
+		left: 50%;
+		margin-left: -6px;
 		width: 12px;
 		height: 12px;
 		background: var(--color-panel);

@@ -72,28 +72,22 @@
 			{@const roman = part.prologue ? '' : (ROMAN[part.number ?? i] ?? '')}
 			<article class="part" class:is-prologue={part.prologue}>
 				<header class="part-head">
-					<div class="part-numeral" aria-hidden="true">
-						{#if part.prologue}
-							<span class="numeral-mark">§</span>
-						{:else}
-							<span class="numeral-roman">{roman}</span>
-						{/if}
-					</div>
-					<div class="part-title-wrap">
-						<p class="part-eyebrow">
-							{part.prologue ? 'Ouverture' : `Partie ${roman}`}
-						</p>
-						<h2 class="part-title">
-							<a href="/ccc/{part.slug}">
-								{part.prologue ? 'Prologue' : part.title}
-							</a>
-						</h2>
-						{#if part.range}
-							<p class="part-range">
-								<span aria-hidden="true">§§ </span>{fmtRange(part.range)}
-							</p>
-						{/if}
-					</div>
+					{#if !part.prologue}
+						<p class="part-eyebrow">Partie {roman}</p>
+					{/if}
+					<h2 class="part-title">
+						<a href="/ccc/{part.slug}">
+							{#if !part.prologue}
+								<span class="numeral-inline" aria-hidden="true">{roman}.</span>
+								<span>{part.title}</span>
+							{:else}
+								<span>Prologue</span>
+							{/if}
+						</a>
+					</h2>
+					{#if part.range}
+						<p class="part-range">{fmtRange(part.range)}</p>
+					{/if}
 				</header>
 
 				{#if part.sections.length}
@@ -275,40 +269,16 @@
 	}
 
 	.part-head {
-		display: grid;
-		grid-template-columns: 2.5rem 1fr;
-		column-gap: clamp(0.75rem, 1.8vw, 1.25rem);
-		align-items: baseline;
-		margin-bottom: calc(var(--rh) * 1.5);
-		padding-bottom: calc(var(--rh) * 0.75);
+		margin-bottom: calc(var(--rh) * 1.25);
+		padding-bottom: calc(var(--rh) * 0.5);
 		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
 	}
-	.part-numeral {
-		text-align: center;
+	.numeral-inline {
 		font-family: var(--font-heading);
-		color: var(--color-accent);
-		line-height: 1;
-		user-select: none;
-	}
-	.numeral-roman {
-		display: block;
-		font-size: clamp(1.5rem, 2.4vw, 2rem);
 		font-weight: 500;
+		color: var(--color-accent);
+		margin-right: 0.4em;
 		letter-spacing: 0.02em;
-	}
-	.numeral-mark {
-		display: block;
-		font-size: clamp(1.5rem, 2.4vw, 2rem);
-		font-style: italic;
-		font-weight: 400;
-		letter-spacing: -0.02em;
-	}
-
-	.part-title-wrap {
-		min-width: 0;
-		display: flex;
-		flex-direction: column;
-		gap: calc(var(--rh) * 0.25);
 	}
 	.part-eyebrow {
 		font-family: var(--font-ui);
@@ -317,8 +287,17 @@
 		letter-spacing: 0.28em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		margin: 0;
-		padding-top: 0.4rem;
+		margin: 0 0 calc(var(--rh) * 0.35);
+	}
+	.part-range {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-subtle);
+		font-variant-numeric: tabular-nums oldstyle-nums;
+		margin: calc(var(--rh) * 0.3) 0 0;
 	}
 	.part-title {
 		font-family: var(--font-heading);
@@ -342,19 +321,21 @@
 		color: var(--color-accent);
 		background-size: 100% 1px;
 	}
-	.part-range {
-		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
-		color: var(--color-subtle);
-		font-variant-numeric: tabular-nums oldstyle-nums;
-		margin: 0;
-	}
 
-	/* Prologue: drop the small caps style on the eyebrow — there is no number */
-	.part.is-prologue .part-eyebrow { letter-spacing: 0.32em; }
+	/* Prologue: smaller, simpler — no eyebrow, smaller title, sits as a quiet
+	   opener above the four parts. */
+	.part.is-prologue {
+		margin-bottom: calc(var(--rh) * 0.5);
+	}
+	.part.is-prologue .part-head {
+		margin-bottom: calc(var(--rh) * 0.5);
+		padding-bottom: 0;
+		border-bottom: none;
+	}
+	.part.is-prologue .part-title {
+		font-size: 1.3rem;
+		font-weight: 600;
+	}
 
 	/* ---- Sections (ribbon container) ------------------------------------ */
 	.sections {
@@ -475,7 +456,7 @@
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		padding-left: 1.4rem;
+		padding-left: 2.5rem;
 		display: flex;
 		flex-direction: column;
 		gap: calc(var(--rh) * 0.85);
