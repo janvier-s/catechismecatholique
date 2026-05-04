@@ -530,13 +530,6 @@
 		.toc-head { margin-bottom: calc(var(--rh) * 2.5); }
 		.parts { gap: calc(var(--rh) * 2.5); }
 
-		.part-head {
-			grid-template-columns: 2rem 1fr;
-			column-gap: 0.6rem;
-		}
-		.numeral-roman { font-size: 1.4rem; }
-		.numeral-mark { font-size: 1.4rem; }
-
 		.row { gap: 0.4rem; }
 		/* On narrow screens dot leaders get cramped — collapse, push range
 		   onto the next line instead. */
