@@ -34,7 +34,7 @@
 
 			<h1 class="title" aria-label="Catéchisme de l'Église Catholique">
 				<svg
-					viewBox="0 0 1000 540"
+					viewBox="0 0 1000 620"
 					xmlns="http://www.w3.org/2000/svg"
 					preserveAspectRatio="xMidYMid meet"
 					class="title-svg"
@@ -55,18 +55,17 @@
 					<text
 						class="line line-2 reveal r-line-2"
 						x="500"
-						y="335"
+						y="350"
 						text-anchor="middle"
 						textLength="940"
 						lengthAdjust="spacingAndGlyphs"
 						font-size="170"
 						font-weight="400"
-						font-style="italic"
 					>de l'Église</text>
 					<text
 						class="line line-3 reveal r-line-3"
 						x="500"
-						y="510"
+						y="540"
 						text-anchor="middle"
 						textLength="940"
 						lengthAdjust="spacingAndGlyphs"
@@ -77,7 +76,7 @@
 			</h1>
 
 			<div class="ornament reveal r-ornament" aria-hidden="true">
-				<span class="fleuron">❦</span>
+				<span class="fleuron">✠</span>
 				<span class="rule"></span>
 			</div>
 		</header>
@@ -163,11 +162,11 @@
 		letter-spacing: 0.32em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		margin: 0;
+		margin: 1.25rem 0 0;
 		padding-left: 0.32em; /* visually compensate trailing tracking */
 	}
 	.title {
-		width: clamp(380px, 52%, 680px);
+		width: clamp(300px, 38%, 520px);
 		margin: 0;
 		line-height: 1;
 		color: var(--color-heading, var(--color-fg));
@@ -192,8 +191,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 0.55rem;
-		margin-top: 0.25rem;
+		gap: 0.35rem;
+		margin-top: 0.1rem;
+		margin-bottom: -0.5rem;
 	}
 	.fleuron {
 		font-family: 'Libre Baskerville', Georgia, serif;
@@ -228,7 +228,7 @@
 	.daily-mark {
 		display: flex;
 		align-items: baseline;
-		gap: 0.05em;
+		gap: 0.35em;
 		font-family: var(--font-heading);
 		color: var(--color-accent);
 		text-decoration: none;
@@ -240,13 +240,13 @@
 		color: var(--color-accent-text);
 	}
 	.section-mark {
-		font-size: 2.6rem;
+		font-size: 1.5rem;
 		font-weight: 400;
 		font-style: italic;
 		letter-spacing: -0.02em;
 	}
 	.section-num {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 		font-weight: 600;
 		letter-spacing: 0.01em;
 		font-variant-numeric: oldstyle-nums;
@@ -279,12 +279,12 @@
 		font-weight: 500;
 		letter-spacing: 0.22em;
 		text-transform: uppercase;
-		color: var(--color-muted);
+		color: var(--color-accent);
 		text-decoration: none;
-		transition: color 120ms ease;
+		transition: opacity 120ms ease;
 	}
 	.daily-link:hover {
-		color: var(--color-accent);
+		opacity: 0.75;
 	}
 
 	/* Nav row ----------------------------------------------------------- */
@@ -348,22 +348,22 @@
 	/* Reveal animation -------------------------------------------------- */
 	.reveal {
 		opacity: 0;
-		transform: translateY(6px);
-		animation: reveal-in 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		transform: translateY(4px);
+		animation: reveal-in 360ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 	}
-	.r-tagline { animation-delay: 40ms; }
-	.r-line-1   { animation-delay: 140ms; }
-	.r-line-2   { animation-delay: 240ms; }
-	.r-line-3   { animation-delay: 340ms; }
-	.r-ornament { animation-delay: 460ms; }
-	.r-daily    { animation-delay: 580ms; }
-	.r-nav      { animation-delay: 720ms; }
-	.r-imprint  { animation-delay: 800ms; }
+	.r-tagline  { animation-delay: 0ms; }
+	.r-line-1   { animation-delay: 60ms; }
+	.r-line-2   { animation-delay: 120ms; }
+	.r-line-3   { animation-delay: 180ms; }
+	.r-ornament { animation-delay: 240ms; }
+	.r-daily    { animation-delay: 300ms; }
+	.r-nav      { animation-delay: 360ms; }
+	.r-imprint  { animation-delay: 420ms; }
 
 	@keyframes reveal-in {
 		from {
 			opacity: 0;
-			transform: translateY(6px);
+			transform: translateY(4px);
 		}
 		to {
 			opacity: 1;
@@ -398,11 +398,11 @@
 
 	/* Short viewports — keep it on one screen at 1280×800. */
 	@media (max-height: 820px) {
-		.title { width: clamp(360px, 48%, 620px); }
+		.title { width: clamp(280px, 34%, 460px); }
 		.prose-teaser { font-size: 0.95rem; line-height: 1.65; }
 	}
 	@media (max-height: 720px) {
-		.title { width: clamp(320px, 42%, 560px); }
+		.title { width: clamp(260px, 30%, 420px); }
 		.prose-teaser { font-size: 0.9rem; line-height: 1.6; }
 	}
 </style>
