@@ -186,6 +186,11 @@ export interface ConcordanceByParagraphEntry {
 	chapter: number;
 	verseRef: string; // "Genèse 3:1-24"
 	pericopeTitle: string | null;
+	startCh: number;
+	endCh: number;
+	startVerse: number; // first verse of the pericope's first chapter
+	endVerse: number; // last verse of the pericope's last chapter
+	cccRanges: CccRange[]; // the pericope's full CCC ranges (post-filter, post-collapse)
 }
 export type ConcordanceByParagraph = Record<string, ConcordanceByParagraphEntry[]>;
 // Keys are stringified paragraph numbers ("1850").

@@ -116,7 +116,7 @@
 					class:dim={dimNonCited && c === 0}
 				>
 					<span
-						class="font-ui text-[13px] max-md:text-[11px] font-thin select-none w-6 max-md:w-5 shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle"
+						class="font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-5 shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle"
 					>
 						{v.v}
 					</span>

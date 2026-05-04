@@ -592,7 +592,12 @@ export function buildConcordancePericopes(
 					bookFrenchName: frenchName,
 					chapter: startCh,
 					verseRef,
-					pericopeTitle: findEnclosingNclSection(nclSections[usfx], startCh, fromV ?? 1)
+					pericopeTitle: findEnclosingNclSection(nclSections[usfx], startCh, fromV ?? 1),
+					startCh,
+					endCh,
+					startVerse: fromV ?? 1,
+					endVerse: toV ?? chapterMaxVerse(usfx, endCh),
+					cccRanges: filteredRanges.map((r) => ({ ...r }))
 				});
 				byParagraph.set(p, arr);
 			}

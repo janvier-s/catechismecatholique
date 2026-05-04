@@ -288,7 +288,15 @@ describe('buildConcordancePericopes', () => {
 				bookFrenchName: 'Genèse',
 				chapter: 3,
 				verseRef: 'Genèse 3:1-24',
-				pericopeTitle: 'La faute et le châtiment'
+				pericopeTitle: 'La faute et le châtiment',
+				startCh: 3,
+				endCh: 3,
+				startVerse: 1,
+				endVerse: 24,
+				cccRanges: [
+					{ from: 390, to: 390 },
+					{ from: 395, to: 395 }
+				]
 			}
 		]);
 		expect(r.byParagraph['395']).toHaveLength(1);
