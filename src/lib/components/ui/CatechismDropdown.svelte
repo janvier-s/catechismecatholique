@@ -378,7 +378,6 @@
 					{/each}
 				</ol>
 				<a class="m-sommaire" href="/ccc/sommaire" role="menuitem" onclick={close}>
-					<span class="sommaire-fleuron" aria-hidden="true">✠</span>
 					<span>Sommaire complet</span>
 					<span class="sommaire-arrow" aria-hidden="true">→</span>
 				</a>
@@ -583,7 +582,7 @@
 				<div class="panel-foot">
 					<a class="foot-link foot-link-primary" href="/ccc/sommaire" role="menuitem" onclick={close}>
 						<span>Sommaire complet</span>
-						<span class="sommaire-fleuron" aria-hidden="true">✠</span>
+						<span class="sommaire-arrow" aria-hidden="true">→</span>
 					</a>
 				</div>
 			{/if}
@@ -873,12 +872,6 @@
 		line-height: 1.3;
 		color: var(--color-fg);
 		font-feature-settings: 'liga' on, 'kern' on;
-		/* Allow wrapping but cap to 2 lines so cells stay compact. */
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
 	}
 	.cell-title-sm {
 		font-size: 0.85rem;
@@ -961,14 +954,6 @@
 	}
 	.foot-link-primary {
 		color: var(--color-fg);
-	}
-	.sommaire-fleuron {
-		font-family: var(--font-heading);
-		font-size: 0.85rem;
-		letter-spacing: 0;
-		color: var(--color-accent);
-		font-weight: 400;
-		font-style: normal;
 	}
 	/* Mobile fallback ------------------------------------------------- */
 	.catdrop-panel.is-mobile {

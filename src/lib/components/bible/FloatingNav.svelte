@@ -112,7 +112,7 @@
 					: 'text-subtle hover:text-foreground'}"
 				onclick={() => (activeTestament = t)}
 			>
-				{t === 'OT' ? 'Ancien Testament' : 'Nouveau Testament'}
+				{#if t === 'OT'}Ancien<br />Testament{:else}Nouveau<br />Testament{/if}
 			</button>
 		{/each}
 	</div>
