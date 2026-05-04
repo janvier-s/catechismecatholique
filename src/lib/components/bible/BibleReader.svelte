@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ChapterFilterBar from './ChapterFilterBar.svelte';
 	import VerseMarker from './VerseMarker.svelte';
-	import type { BibleVerseIndex, ConcordanceVerseIndex } from '$lib/data/types';
+	import type { BibleVerseIndex } from '$lib/data/types';
 	import type { BookInfo } from '$lib/utils/bibleBookSlug';
 
 	let {
@@ -9,19 +9,21 @@
 		chapter,
 		verses,
 		verseIdx,
-		concordanceIdx,
-		totalChapters
+		totalChapters,
+		hasConcordance = false
 	}: {
 		book: BookInfo;
 		chapter: number;
 		verses: { v: number; text: string }[];
 		verseIdx: BibleVerseIndex;
-		concordanceIdx: ConcordanceVerseIndex;
 		totalChapters: number;
+		hasConcordance?: boolean;
 	} = $props();
 
+	// hasConcordance is reserved for the upcoming pericope-view link (Task U7);
+	// no rendering yet. Property is destructured above so consumers may pass it.
+
 	let dimNonCited = $state(false);
-	let showConcordance = $state(true);
 
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
 	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
@@ -31,15 +33,7 @@
 		return arr ? arr.length : 0;
 	}
 
-	function concordanceCountFor(v: number): number {
-		const arr = concordanceIdx[book.usfx]?.[String(chapter)]?.[String(v)];
-		return arr ? arr.length : 0;
-	}
-
 	const totalCited = $derived(verses.reduce((t, v) => t + (citedCount(v.v) > 0 ? 1 : 0), 0));
-	const totalConcordance = $derived(
-		verses.reduce((t, v) => t + (concordanceCountFor(v.v) > 0 ? 1 : 0), 0)
-	);
 </script>
 
 <main class="mx-auto max-w-reader px-6 pt-8 pb-16">
@@ -81,23 +75,17 @@
 			<div class="w-10 h-px bg-accent opacity-70 mx-auto"></div>
 		</header>
 
-		{#if totalCited > 0 || totalConcordance > 0}
-			<ChapterFilterBar
-				bind:dimNonCited
-				bind:showConcordance
-				citedCount={totalCited}
-				concordanceCount={totalConcordance}
-			/>
+		{#if totalCited > 0}
+			<ChapterFilterBar bind:dimNonCited citedCount={totalCited} />
 		{/if}
 
 		<ol class="list-none space-y-3">
 			{#each verses as v (v.v)}
 				{@const c = citedCount(v.v)}
-				{@const cc = showConcordance ? concordanceCountFor(v.v) : 0}
 				<li
 					id="v{v.v}"
 					class="flex gap-3 max-md:gap-2 transition-opacity"
-					class:dim={dimNonCited && c === 0 && cc === 0}
+					class:dim={dimNonCited && c === 0}
 				>
 					<span
 						class="font-ui text-[13px] max-md:text-[11px] font-thin select-none w-6 max-md:w-5 shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle"
@@ -111,14 +99,6 @@
 								{chapter}
 								verse={v.v}
 								count={c}
-								variant="ccc"
-							/>{/if}{#if cc > 0}<VerseMarker
-								bookSlug={book.slug}
-								bookUsfx={book.usfx}
-								{chapter}
-								verse={v.v}
-								count={cc}
-								variant="concordance"
 							/>{/if}
 					</p>
 				</li>

@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { bookBySlug } from '$lib/utils/bibleBookSlug';
-import { loadBibleVerseIndex, loadConcordanceVerseIndex } from '$lib/data/loaders';
+import { loadBibleVerseIndex } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, fetch }) => {
@@ -9,10 +9,9 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const ch = parseInt(params.ch!, 10);
 	if (!Number.isFinite(ch)) throw error(404);
 
-	const [r1, verseIdx, concordanceIdx] = await Promise.all([
+	const [r1, verseIdx] = await Promise.all([
 		fetch('/data/bible/ncl.json'),
-		loadBibleVerseIndex(fetch),
-		loadConcordanceVerseIndex(fetch)
+		loadBibleVerseIndex(fetch)
 	]);
 	const ncl = (await r1.json()) as Record<string, Record<string, Record<string, string>>>;
 
@@ -29,5 +28,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		.map((k) => parseInt(k, 10))
 		.reduce((m, n) => Math.max(m, n), 0);
 
-	return { book, chapter: ch, verses, verseIdx, concordanceIdx, totalChapters };
+	// hasConcordance is a placeholder; the real check lands in Task U7 once the
+	// pericope-grouped concordance build replaces the per-verse index.
+	return { book, chapter: ch, verses, verseIdx, totalChapters, hasConcordance: false };
 };

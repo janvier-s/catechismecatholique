@@ -1,5 +1,10 @@
-import type { ConcordanceVerseIndex } from '../../src/lib/data/types';
 import type { BookInfo } from '../../src/lib/utils/bibleBookSlug';
+
+// Local type — the per-verse concordance UI was reverted (see Task R1 of
+// 2026-05-04-concordance-pericope.md), so the shared ConcordanceVerseIndex
+// alias was dropped from src/lib/data/types.ts. Section D will rewrite this
+// builder for the pericope-grouped output, so keeping the type local for now.
+type ConcordanceVerseIndex = Record<string, Record<string, Record<string, number[]>>>;
 
 export interface ParsedRange {
 	fromCh: number;

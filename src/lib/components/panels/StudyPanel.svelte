@@ -111,9 +111,7 @@
 		// Bible-verse mode: only one tab is meaningful.
 		const ctx = $studyPanel.context;
 		if (ctx?.verseUsfx) {
-			return [
-				{ id: 'bible-verse', label: ctx.verseSource === 'concordance' ? 'Concordance' : 'CEC' }
-			];
+			return [{ id: 'bible-verse', label: 'CEC' }];
 		}
 		if (!paragraph) return ALL_TABS;
 		const hasBible = paragraph.bible_refs.length > 0;
