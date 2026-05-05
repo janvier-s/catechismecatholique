@@ -2,10 +2,14 @@
 	import { loadStructure } from '$lib/data/loaders';
 	import { fade } from 'svelte/transition';
 
-	// Hover-intent timer: cancel close when the mouse moves through the gap
-	// between the trigger and the panel (which is fixed-positioned on the
-	// viewport, separated visually from the trigger). Without this, the
-	// panel closes while the cursor is between trigger and panel.
+	// Hover-intent timer: the trigger sits in the topbar (right side), the
+	// panel is fixed-positioned at page center — the cursor has to traverse
+	// a wide diagonal gap to get from one to the other. Local mouseenter on
+	// the trigger and panel isn't enough: when the panel pops open near the
+	// cursor, no entry event fires, and mouseleave on the trigger then
+	// closes it before the cursor can land on the panel. We track the
+	// cursor globally while open and cancel the close whenever it's inside
+	// either box.
 	let hoverCloseTimer: ReturnType<typeof setTimeout> | null = null;
 	function cancelClose() {
 		if (hoverCloseTimer) {
@@ -17,7 +21,7 @@
 		cancelClose();
 		hoverCloseTimer = setTimeout(() => {
 			open = false;
-		}, 500);
+		}, 800);
 	}
 
 	type Range = { from: number; to: number };
@@ -67,6 +71,29 @@
 	let triggerEl: HTMLButtonElement | undefined = $state();
 	let containerEl: HTMLDivElement | undefined = $state();
 	let isMobile = $state(false);
+
+	// While the panel is open, watch the cursor against the trigger and panel
+	// bounding rects. If it sits inside either, cancel any pending close. If
+	// it's outside both, start the close timer. This catches the case where
+	// the panel opens near the cursor with no boundary crossing — local
+	// mouseenter wouldn't fire there.
+	$effect(() => {
+		if (!open) return;
+		const onMove = (e: MouseEvent) => {
+			const t = containerEl?.getBoundingClientRect();
+			const p = panelEl?.getBoundingClientRect();
+			const cx = e.clientX;
+			const cy = e.clientY;
+			const inTrigger =
+				t && cx >= t.left && cx <= t.right && cy >= t.top && cy <= t.bottom;
+			const inPanel =
+				p && cx >= p.left && cx <= p.right && cy >= p.top && cy <= p.bottom;
+			if (inTrigger || inPanel) cancelClose();
+			else scheduleClose();
+		};
+		document.addEventListener('mousemove', onMove);
+		return () => document.removeEventListener('mousemove', onMove);
+	});
 
 	// Cascade state — slug-based so we don't mismatch indices across data shapes
 	let activePartSlug = $state<string | null>(null);

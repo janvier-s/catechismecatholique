@@ -13,16 +13,28 @@
 </script>
 
 <header class="border-b border-border bg-background sticky top-0 z-[var(--z-modal)]">
-	<div class="px-6 py-3 flex items-center gap-6 min-h-[80px]">
+	<div class="relative px-6 py-3 flex items-center gap-6 min-h-[80px]">
 		<a href="/" class="flex items-center gap-3 flex-none" aria-label="Accueil">
 			<LogoMark />
 			<Wordmark />
 		</a>
 
 		<div class="flex-1"></div>
+
+		<nav class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none">
+			<CatechismDropdown />
+			<a href="/bible" class="hover:text-accent">Bible</a>
+			<a href="/glossaire" class="hover:text-accent">Glossaire</a>
+			<a href="/a-propos" class="hover:text-accent">À propos</a>
+		</nav>
+		<ModeToggle />
+
 		{#if !onRecherche}
+			<!-- Search is absolutely positioned so it stays centered on the
+			     page (left: 50%) regardless of how wide the logo or nav side
+			     groups grow. Only renders at lg+ where there's room. -->
 			<form
-				class="hidden lg:block w-full max-w-[460px]"
+				class="hidden lg:block absolute left-1/2 -translate-x-1/2 w-full max-w-[460px]"
 				onsubmit={(e) => {
 					e.preventDefault();
 					const q = (
@@ -65,15 +77,6 @@
 				</div>
 			</form>
 		{/if}
-		<div class="flex-1"></div>
-
-		<nav class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none">
-			<CatechismDropdown />
-			<a href="/bible" class="hover:text-accent">Bible</a>
-			<a href="/glossaire" class="hover:text-accent">Glossaire</a>
-			<a href="/a-propos" class="hover:text-accent">À propos</a>
-		</nav>
-		<ModeToggle />
 	</div>
 </header>
 

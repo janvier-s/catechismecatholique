@@ -398,7 +398,7 @@
 									{#if h.paragraph_start}<span class="ref">CEC {h.paragraph_start}</span>{/if}
 								</div>
 								<div class="result-headline">
-									{@html highlight(h.title ?? h.text, hitMatchTerms(h))}
+									{@html highlight(h.text, hitMatchTerms(h))}
 								</div>
 							{:else}
 								<div class="result-eyebrow tabular-nums">
