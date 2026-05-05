@@ -48,7 +48,7 @@
 		<div
 			role="dialog"
 			aria-label="Options de lecture"
-			class="absolute right-0 mt-2 w-80 rounded-md border border-border bg-panel shadow-lg z-[var(--z-dropdown)] px-4 pt-1 pb-5 max-h-[calc(100vh-100px)] overflow-y-auto styled-scroll"
+			class="absolute right-0 mt-2 w-80 rounded-sm border border-border bg-panel shadow-md z-[var(--z-dropdown)] px-4 pt-1 pb-5 max-h-[calc(100vh-100px)] overflow-y-auto styled-scroll"
 			transition:fly={{ y: -6, duration: 160, easing: cubicOut }}
 		>
 			<ReadingPrefs />

@@ -143,7 +143,7 @@
 							type="button"
 							class="flex-1 py-1.5 border rounded text-xs transition-colors
 								{$prefs.lineHeight === opt.value
-								? 'bg-accent text-white border-accent'
+								? 'bg-accent/15 text-accent border-accent'
 								: 'border-border text-foreground hover:text-accent'}"
 							onclick={() => updatePref('lineHeight', opt.value)}
 						>
@@ -177,7 +177,7 @@
 							type="button"
 							title={t.label}
 							onclick={() => updatePref('theme', t.id)}
-							class="theme-card flex-1 rounded border-2 overflow-hidden transition-colors
+							class="theme-card flex-1 rounded border overflow-hidden transition-colors
 								{$prefs.theme === t.id ? 'border-accent' : 'border-transparent'}"
 							style="background: {t.bg};"
 							aria-label={t.label}
@@ -216,7 +216,7 @@
 							type="button"
 							class="flex-1 py-1.5 border rounded text-xs
 								{$prefs.columnWidth === opt.value
-								? 'bg-accent text-white border-accent'
+								? 'bg-accent/15 text-accent border-accent'
 								: 'border-border text-foreground hover:text-accent'}"
 							onclick={() => updatePref('columnWidth', opt.value)}
 						>
@@ -233,7 +233,7 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{!$prefs.justifiedText
-							? 'bg-accent text-white border-accent'
+							? 'bg-accent/15 text-accent border-accent'
 							: 'border-border text-foreground hover:text-accent'}"
 						onclick={() => updatePref('justifiedText', false)}
 					>
@@ -243,7 +243,7 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.justifiedText
-							? 'bg-accent text-white border-accent'
+							? 'bg-accent/15 text-accent border-accent'
 							: 'border-border text-foreground hover:text-accent'}"
 						onclick={() => updatePref('justifiedText', true)}
 					>
@@ -259,7 +259,7 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.crossRefsLayout === 'inline'
-							? 'bg-accent text-white border-accent'
+							? 'bg-accent/15 text-accent border-accent'
 							: 'border-border text-foreground hover:text-accent'}"
 						onclick={() => updatePref('crossRefsLayout', 'inline')}
 					>
@@ -269,7 +269,7 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.crossRefsLayout === 'side'
-							? 'bg-accent text-white border-accent'
+							? 'bg-accent/15 text-accent border-accent'
 							: 'border-border text-foreground hover:text-accent'}"
 						onclick={() => updatePref('crossRefsLayout', 'side')}
 					>
@@ -285,7 +285,7 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{!$prefs.inlineAsMarkers
-							? 'bg-accent text-white border-accent'
+							? 'bg-accent/15 text-accent border-accent'
 							: 'border-border text-foreground hover:text-accent'}"
 						onclick={() => updatePref('inlineAsMarkers', false)}
 					>
@@ -295,7 +295,7 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.inlineAsMarkers
-							? 'bg-accent text-white border-accent'
+							? 'bg-accent/15 text-accent border-accent'
 							: 'border-border text-foreground hover:text-accent'}"
 						onclick={() => updatePref('inlineAsMarkers', true)}
 					>
@@ -375,7 +375,7 @@
 			{/if}
 			<button
 				type="button"
-				class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent hover:text-white
+				class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent/10 hover:text-accent
 					{$prefs.fontFamily === f.id ? 'text-accent' : 'text-foreground'}"
 				style="font-family: {f.stack};"
 				onclick={() => {
@@ -388,7 +388,7 @@
 		{/each}
 		<button
 			type="button"
-			class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent hover:text-white border-t border-border
+			class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent/10 hover:text-accent border-t border-border
 				{$prefs.fontFamily === DYSLEXIA_FONT.id ? 'text-accent' : 'text-foreground'}"
 			style="font-family: {DYSLEXIA_FONT.stack};"
 			onclick={() => {
