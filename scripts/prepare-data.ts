@@ -16,6 +16,7 @@ import { logHeader, logStep, endStep, assert } from './prepare/validators.ts';
 import { buildStructure } from './prepare/structure.ts';
 import { extractTocStructure, validateAgainstToc } from './prepare/toc-validator.ts';
 import { extractParagraphs } from './prepare/paragraphs.ts';
+import { extractParagraphes } from './prepare/paragraphes.ts';
 import { fixCccParaSourceTypos } from './prepare/source-data-fixes.ts';
 import { buildChapterFiles } from './prepare/chapters.ts';
 import { extractEnBref } from './prepare/enbref.ts';
@@ -97,8 +98,12 @@ async function main() {
 	const enbref = extractEnBref(rawParts);
 	endStep(`${enbref.length} blocks`);
 
+	logStep('extracting Paragraphes (mid-level wrappers)');
+	const paragraphes = extractParagraphes(join(SOURCES, 'ccc_paras'));
+	endStep(`${paragraphes.length} Paragraphes`);
+
 	logStep('building chapters');
-	const chapters = buildChapterFiles(structure, enbref);
+	const chapters = buildChapterFiles(structure, enbref, paragraphes);
 	for (const ch of chapters) {
 		writeFileSync(join(OUT, `ccc/chapters/${ch.slug}.json`), JSON.stringify(ch));
 	}

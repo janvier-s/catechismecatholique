@@ -1,10 +1,17 @@
-import type { Chapter, ChapterArticle, ChapterHeading } from '../../src/lib/data/types';
+import type {
+	Chapter,
+	ChapterArticle,
+	ChapterHeading,
+	ChapterParagraphe
+} from '../../src/lib/data/types';
 import type { BuiltStructure } from './structure';
 import type { ExtractedEnBref } from './enbref';
+import type { Paragraphe } from './paragraphes';
 
 export function buildChapterFiles(
 	structure: BuiltStructure,
-	enBrefs: ExtractedEnBref[]
+	enBrefs: ExtractedEnBref[],
+	paragraphes: Paragraphe[] = []
 ): Chapter[] {
 	const chapters: Chapter[] = [];
 	for (const part of structure.parts) {
@@ -35,18 +42,29 @@ export function buildChapterFiles(
 						title: h.title,
 						paragraph_start: h.paragraph_start
 					})),
-					articles: c.articles.map<ChapterArticle>((a) => ({
-						slug: a.slug,
-						title: a.title,
-						number: a.number,
-						paragraphs: a.paragraphs,
-						headings: a.headings.map<ChapterHeading>((h) => ({
-							id: h.id,
-							level: h.level,
-							title: h.title,
-							paragraph_start: h.paragraph_start
-						}))
-					})),
+					articles: c.articles.map<ChapterArticle>((a) => {
+						const articleParas = new Set(a.paragraphs);
+						const articleParagraphes = paragraphes
+							.filter((pg) => articleParas.has(pg.paragraph_start))
+							.map<ChapterParagraphe>((pg) => ({
+								number: pg.number,
+								title: pg.title,
+								paragraph_start: pg.paragraph_start
+							}));
+						return {
+							slug: a.slug,
+							title: a.title,
+							number: a.number,
+							paragraphs: a.paragraphs,
+							headings: a.headings.map<ChapterHeading>((h) => ({
+								id: h.id,
+								level: h.level,
+								title: h.title,
+								paragraph_start: h.paragraph_start
+							})),
+							paragraphes: articleParagraphes.length > 0 ? articleParagraphes : undefined
+						};
+					}),
 					prev: prev ? { slug: prev.slug, title: prev.title } : undefined,
 					next: next ? { slug: next.slug, title: next.title } : undefined
 				};

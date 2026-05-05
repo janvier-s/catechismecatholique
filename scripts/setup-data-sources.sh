@@ -9,6 +9,8 @@ ln -sf ../../../DOCTRINA/JSON/CCC/ccc_bible_index_clean.json ccc_bible_index_cle
 ln -sf ../../../DOCTRINA/JSON/CCC/ccc_cross_refs_bidirectional.json ccc_cross_refs_bidirectional.json
 ln -sf ../../../DOCTRINA/sources/CCC/CCC_1998_FULL/sigles.xhtml sigles.xhtml
 ln -sf ../../../DOCTRINA/sources/CCC/CCC_1998_FULL/toc.ncx toc.ncx
+rm -rf ccc_paras
+ln -sf ../../../DOCTRINA/sources/CCC/CCC_PARAS ccc_paras
 ln -sf ../../../DOCTRINA/sources/CCC/thematic_cross-refs thematic_cross-refs
 ln -sf ../../../DOCTRINA/sources/ccc_ascension/bm_glossary.xhtml ccc_glossary_en.xhtml
 ln -sf ../../../../SCRIPTURA/sources/NCL/francl_usfx/francl_usfx.xml ncl/francl_usfx.xml

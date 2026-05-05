@@ -68,11 +68,24 @@ export interface ChapterArticle {
 	number?: number;
 	paragraphs: number[];
 	headings: ChapterHeading[];
+	/**
+	 * "Paragraphe N. TITLE" wrappers nested between an article and its
+	 * Roman-numeral headings (when the upstream tree drops them but the raw
+	 * source preserves them). Optional — only the long doctrinal articles
+	 * carry these subdivisions.
+	 */
+	paragraphes?: ChapterParagraphe[];
 }
 
 export interface ChapterHeading {
 	id: string;
 	level: number;
+	title: string;
+	paragraph_start: number;
+}
+
+export interface ChapterParagraphe {
+	number: number;
 	title: string;
 	paragraph_start: number;
 }

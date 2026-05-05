@@ -86,14 +86,28 @@
 				.filter((x): x is Paragraph => Boolean(x))}
 			<EnBrefBlock paragraphs={records} />
 		{:else if !enBrefAllNumbers.has(p.number)}
+			{@const paragraphe = (data.article.paragraphes ?? []).find(
+				(pg) => pg.paragraph_start === p.number
+			)}
+			{#if paragraphe}
+				<h2
+					id="paragraphe-{paragraphe.number}"
+					class="font-heading text-2xl font-semibold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
+				>
+					<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1">
+						Paragraphe {paragraphe.number}
+					</span>
+					{paragraphe.title}
+				</h2>
+			{/if}
 			{@const heading = data.article.headings.find((h) => h.paragraph_start === p.number)}
 			{#if heading}
-				<h2
+				<h3
 					id={heading.id}
 					class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
 				>
 					{heading.title}
-				</h2>
+				</h3>
 			{/if}
 			<ParagraphView paragraph={p} />
 		{/if}

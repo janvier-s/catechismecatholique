@@ -15,6 +15,7 @@
 
 	type Insertion =
 		| { kind: 'article'; article: ChapterArticle }
+		| { kind: 'paragraphe'; paragraphe: { number: number; title: string } }
 		| { kind: 'heading'; heading: ChapterHeading };
 
 	const insertionsByParagraph = (() => {
@@ -27,6 +28,11 @@
 		for (const h of chapter.headings) push(h.paragraph_start, { kind: 'heading', heading: h });
 		for (const a of chapter.articles) {
 			if (a.paragraphs.length > 0) push(a.paragraphs[0]!, { kind: 'article', article: a });
+			for (const pg of a.paragraphes ?? [])
+				push(pg.paragraph_start, {
+					kind: 'paragraphe',
+					paragraphe: { number: pg.number, title: pg.title }
+				});
 			for (const h of a.headings) push(h.paragraph_start, { kind: 'heading', heading: h });
 		}
 		return map;
@@ -93,6 +99,16 @@
 					>
 						{ins.article.number ? `Article ${ins.article.number} — ` : ''}{ins.article.title}
 					</h2>
+				{:else if ins.kind === 'paragraphe'}
+					<h3
+						id="paragraphe-{ins.paragraphe.number}"
+						class="font-heading text-2xl font-semibold mt-14 mb-5 pb-2 border-b border-border scroll-mt-24 text-heading"
+					>
+						<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1">
+							Paragraphe {ins.paragraphe.number}
+						</span>
+						{ins.paragraphe.title}
+					</h3>
 				{:else if ins.heading.level === 2}
 					<h3
 						id={ins.heading.id}

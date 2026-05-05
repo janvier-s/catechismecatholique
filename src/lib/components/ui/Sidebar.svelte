@@ -8,12 +8,14 @@
 	import SidebarItem from './SidebarItem.svelte';
 
 	type Heading = { id: string; title: string; paragraph_start: number };
+	type Paragraphe = { number: number; title: string; paragraph_start: number };
 	type Article = {
 		slug: string;
 		title: string;
 		number?: number;
 		paragraphs: number[];
 		headings: Heading[];
+		paragraphes?: Paragraphe[];
 	};
 	type Chap = {
 		slug: string;
@@ -150,19 +152,17 @@
 		const detail = activeChapter && activeChapter.slug === ch.slug ? activeChapter : null;
 
 		if (detail) {
-			for (const a of detail.articles) {
+			for (const a of detail.articles as Article[]) {
 				const articleHref = `${baseHref}/${a.slug}`;
 				const articleParas = a.paragraphs;
 				const articleMin = articleParas.length > 0 ? articleParas[0]! : 0;
 				const articleMax = articleParas.length > 0 ? articleParas[articleParas.length - 1]! : 0;
 
-				// Build a flat list of (heading | en_bref) ordered by paragraph
-				// position. Without this, all en_brefs got pushed to the end of
-				// the article — articles spanning many sections (each with its
-				// own end-of-section "En Bref") had every en_bref stacked
-				// underneath the last Roman heading.
-				type ChildEntry = { sortKey: number; item: Item };
-				const entries: ChildEntry[] = [];
+				// All headings + en_brefs that belong to this article, sorted
+				// by paragraph position. Without this they were pushed in
+				// declaration order and en_brefs stacked at the foot.
+				type Entry = { sortKey: number; item: Item };
+				const entries: Entry[] = [];
 				for (const h of a.headings) {
 					entries.push({
 						sortKey: h.paragraph_start,
@@ -179,7 +179,56 @@
 					});
 				}
 				entries.sort((x, y) => x.sortKey - y.sortKey);
-				const articleChildren = entries.map((e) => e.item);
+
+				// If the article carries Paragraphe wrappers, nest entries
+				// under them: each Paragraphe owns the entries whose first
+				// paragraph falls in [paragraphe.paragraph_start, next
+				// Paragraphe.paragraph_start). Entries that precede the first
+				// Paragraphe become direct article children (article intro).
+				const paragraphes = (a.paragraphes ?? []).slice().sort(
+					(x, y) => x.paragraph_start - y.paragraph_start
+				);
+				let articleChildren: Item[];
+				if (paragraphes.length > 0) {
+					const buckets: Item[] = [];
+					const intro: Item[] = [];
+					for (const e of entries) {
+						let bucketIdx = -1;
+						for (let i = 0; i < paragraphes.length; i++) {
+							const start = paragraphes[i]!.paragraph_start;
+							const end =
+								i + 1 < paragraphes.length
+									? paragraphes[i + 1]!.paragraph_start - 1
+									: articleMax;
+							if (e.sortKey >= start && e.sortKey <= end) {
+								bucketIdx = i;
+								break;
+							}
+						}
+						if (bucketIdx === -1) intro.push(e.item);
+					}
+					for (let i = 0; i < paragraphes.length; i++) {
+						const pg = paragraphes[i]!;
+						const start = pg.paragraph_start;
+						const end =
+							i + 1 < paragraphes.length
+								? paragraphes[i + 1]!.paragraph_start - 1
+								: articleMax;
+						const children = entries
+							.filter((e) => e.sortKey >= start && e.sortKey <= end)
+							.map((e) => e.item);
+						buckets.push({
+							title: pg.title,
+							number: pg.number,
+							typeLabel: 'Paragraphe',
+							href: `${articleHref}#paragraphe-${pg.number}`,
+							children: children.length > 0 ? children : undefined
+						});
+					}
+					articleChildren = [...intro, ...buckets];
+				} else {
+					articleChildren = entries.map((e) => e.item);
+				}
 
 				out.push({
 					title: a.title,
