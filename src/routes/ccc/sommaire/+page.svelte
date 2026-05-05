@@ -194,8 +194,8 @@
 																		<span class="row-range">{fmtRange(article.range)}</span>
 																	{/if}
 																</a>
-																{@const tree = nestHeadings(article.headings)}
-																{#if tree.length > 0}
+																{#if (article.headings ?? []).length > 0}
+																	{@const tree = nestHeadings(article.headings)}
 																	<ul class="headings" role="list">
 																		{#each tree as node (node.heading.id)}
 																			<li>
@@ -251,8 +251,8 @@
 														<span class="row-range">{fmtRange(article.range)}</span>
 													{/if}
 												</a>
-												{@const tree = nestHeadings(article.headings)}
-												{#if tree.length > 0}
+												{#if (article.headings ?? []).length > 0}
+													{@const tree = nestHeadings(article.headings)}
 													<ul class="headings" role="list">
 														{#each tree as node (node.heading.id)}
 															<li>
