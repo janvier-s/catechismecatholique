@@ -76,7 +76,7 @@
 			</p>
 			<p class="font-ui text-[20px] leading-snug">
 				{#each refSegments(data.entry.directRefs) as seg, i (seg.first)}
-					{#if i > 0}<span class="text-muted">,</span> {/if}
+					{#if i > 0}<span class="text-muted mr-2">,</span>{/if}
 					<a href="/ccc/{seg.first}" class="text-accent hover:underline tabular-nums"
 						>{seg.label}</a
 					>
@@ -97,7 +97,7 @@
 						<p class="font-body text-[16px] font-semibold mb-1">{sub.label}</p>
 						<p class="font-ui text-[16px] tabular-nums text-muted leading-snug">
 							{#each refSegments(sub.refs) as seg, j (seg.first)}
-								{#if j > 0}<span>,</span> {/if}
+								{#if j > 0}<span class="mr-2">,</span>{/if}
 								<a href="/ccc/{seg.first}" class="text-accent hover:underline">{seg.label}</a>
 							{/each}
 						</p>
