@@ -28,6 +28,10 @@
 		// Keep input in sync with the URL when the user navigates via links/back.
 		q = data.q ?? '';
 		visiblePages = 1;
+		// Capture EVERY query that lands on this page into recents — covers
+		// header-bar submissions and clicked example links the same way as
+		// the local form's submit handler.
+		if (data.q && data.q.trim().length >= 2) pushRecent(data.q.trim());
 	});
 
 	const RECENT_KEY = 'lecatechisme:recent-searches';
@@ -46,7 +50,10 @@
 	}
 	function pushRecent(query: string) {
 		if (typeof localStorage === 'undefined') return;
-		const next = [query, ...recents.filter((r) => r !== query)].slice(0, MAX_RECENTS);
+		// Re-read from storage so we don't clobber entries added by a previous
+		// component lifecycle that hasn't been mirrored into local `recents`.
+		const current = readRecents();
+		const next = [query, ...current.filter((r) => r !== query)].slice(0, MAX_RECENTS);
 		recents = next;
 		try {
 			localStorage.setItem(RECENT_KEY, JSON.stringify(next));
@@ -702,7 +709,7 @@
 		display: flex;
 		align-items: baseline;
 		gap: 0.6rem;
-		padding: 2px 0;
+		padding: 3px 0;
 	}
 	/* Editorial em-dash bullet — matches the hairline list register elsewhere. */
 	.recent-list li::before {

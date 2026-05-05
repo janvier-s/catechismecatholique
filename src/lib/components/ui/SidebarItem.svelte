@@ -30,9 +30,12 @@
 
 	let manualExpanded: boolean | null = $state(null);
 	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
-	const expanded = $derived(
-		manualExpanded ?? (isAncestor || isActiveBase || (isActive && hasChildren))
-	);
+	// Auto-expand wins when the item or one of its descendants is the active
+	// route. Manual toggles only apply outside of that. Without this, a
+	// previously-collapsed-then-revisited entry stayed collapsed even when
+	// the URL navigated INTO it (e.g. clicking "Suivant" between articles).
+	const onActivePath = $derived(isActive || isAncestor || isActiveBase);
+	const expanded = $derived(onActivePath ? true : (manualExpanded ?? false));
 </script>
 
 <li>
