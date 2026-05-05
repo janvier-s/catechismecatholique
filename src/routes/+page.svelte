@@ -141,8 +141,6 @@
 	}
 	.line {
 		display: block;
-		opacity: 0;
-		transform: translateY(8px);
 	}
 	.line-1,
 	.line-3 {
@@ -329,38 +327,22 @@
 	}
 
 
-	/* Reveal animation -------------------------------------------------- */
+	/* Reveal — simple fade, all elements together. */
 	.reveal {
 		opacity: 0;
-		transform: translateY(4px);
-		animation: reveal-in 360ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		animation: reveal-in 280ms ease-out forwards;
 	}
-	.r-tagline  { animation-delay: 0ms; }
-	.r-line-1   { animation-delay: 60ms; }
-	.r-line-2   { animation-delay: 120ms; }
-	.r-line-3   { animation-delay: 180ms; }
-	.r-ornament { animation-delay: 240ms; }
-	.r-daily    { animation-delay: 300ms; }
-	.r-nav      { animation-delay: 360ms; }
-	.r-imprint  { animation-delay: 420ms; }
 
 	@keyframes reveal-in {
-		from {
-			opacity: 0;
-			transform: translateY(4px);
-		}
 		to {
 			opacity: 1;
-			transform: translateY(0);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.reveal,
-		.line {
+		.reveal {
 			animation: none;
 			opacity: 1;
-			transform: none;
 		}
 	}
 
