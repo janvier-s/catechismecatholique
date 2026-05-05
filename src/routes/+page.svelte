@@ -16,6 +16,15 @@
 	const teaserHtml = $derived(
 		data.paragraph ? cleanTeaserHtml(data.paragraph.text_html) : ''
 	);
+
+	// The homepage is laid out to fit one screen at typical viewport heights.
+	// Hide the body scrollbar while it's mounted so a one-pixel overflow
+	// doesn't trigger a phantom track. The CSS below restores scroll for
+	// short viewports where the content genuinely won't fit.
+	$effect(() => {
+		document.body.classList.add('home-route');
+		return () => document.body.classList.remove('home-route');
+	});
 </script>
 
 <svelte:head>
@@ -102,6 +111,19 @@
 		align-items: center;
 		justify-content: flex-start;
 		overflow: hidden;
+	}
+
+	/* Suppress the body scrollbar while the homepage is mounted. The layout
+	   is sized to fit one screen; if a one-pixel rounding pushes content past
+	   the viewport, no scrollbar appears. Short viewports below 600px tall
+	   restore scrolling so nothing gets clipped. */
+	:global(body.home-route) {
+		overflow-y: hidden;
+	}
+	@media (max-height: 600px) {
+		:global(body.home-route) {
+			overflow-y: auto;
+		}
 	}
 	.home-inner {
 		width: 100%;

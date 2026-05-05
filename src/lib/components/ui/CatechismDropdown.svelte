@@ -917,10 +917,10 @@
 		font-variant-numeric: oldstyle-nums;
 	}
 
-	/* Prologue cell — italic, no numeral, sits apart */
+	/* Prologue cell — italic on the title only (the "Ouverture" tag stays
+	   in the same UI register as Partie/Section/Chapitre tags). */
 	.cell-prologue {
 		font-family: var(--font-heading);
-		font-style: italic;
 	}
 	.cell-prologue .cell-title {
 		font-style: italic;
