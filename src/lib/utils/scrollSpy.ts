@@ -20,7 +20,7 @@ import { activeHeading } from '$lib/stores/scrollSpy';
 const ACTIVE_OFFSET = 100; // px from viewport top
 
 export const scrollSpy: Action<HTMLElement> = (node) => {
-	const headings = Array.from(node.querySelectorAll<HTMLElement>('h2[id], h3[id]'));
+	const headings = Array.from(node.querySelectorAll<HTMLElement>('h2[id], h3[id], h4[id]'));
 	if (headings.length === 0) return;
 
 	let raf = 0;

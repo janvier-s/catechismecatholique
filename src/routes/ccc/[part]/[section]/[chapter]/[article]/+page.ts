@@ -13,8 +13,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	if (chapter.part_slug !== params.part || chapter.section_slug !== params.section) {
 		throw error(404, 'Chapitre introuvable');
 	}
-	const article = chapter.articles.find((a) => a.slug === params.article);
-	if (!article) throw error(404, 'Article introuvable');
+	const articleIdx = chapter.articles.findIndex((a) => a.slug === params.article);
+	if (articleIdx < 0) throw error(404, 'Article introuvable');
+	const article = chapter.articles[articleIdx]!;
+	const prevArticle = articleIdx > 0 ? chapter.articles[articleIdx - 1]! : null;
+	const nextArticle =
+		articleIdx + 1 < chapter.articles.length ? chapter.articles[articleIdx + 1]! : null;
 
 	// Identify the En Bref blocks belonging to this article (their first
 	// paragraph falls within the article's range) and pre-load their
@@ -36,5 +40,13 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const enBrefParagraphMap: Record<number, Paragraph> = {};
 	for (const p of enBrefParagraphsArr) enBrefParagraphMap[p.number] = p;
 
-	return { chapter, article, paragraphs, enBrefBlocks, enBrefParagraphMap };
+	return {
+		chapter,
+		article,
+		prevArticle,
+		nextArticle,
+		paragraphs,
+		enBrefBlocks,
+		enBrefParagraphMap
+	};
 };

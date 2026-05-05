@@ -7,7 +7,7 @@
 	import type { Chapter, ParagraphContext } from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
-	type Heading = { id: string; title: string; paragraph_start: number };
+	type Heading = { id: string; title: string; paragraph_start: number; level?: number };
 	type Paragraphe = { number: number; title: string; paragraph_start: number };
 	type Article = {
 		slug: string;
@@ -158,14 +158,20 @@
 				const articleMin = articleParas.length > 0 ? articleParas[0]! : 0;
 				const articleMax = articleParas.length > 0 ? articleParas[articleParas.length - 1]! : 0;
 
-				// All headings + en_brefs that belong to this article, sorted
-				// by paragraph position. Without this they were pushed in
-				// declaration order and en_brefs stacked at the foot.
-				type Entry = { sortKey: number; item: Item };
+				// All headings + en_brefs belonging to this article, ordered
+				// by paragraph position. Tag each entry with a "level" so the
+				// nesting pass below can group level-3 sub_headings as
+				// children of the preceding level-2 heading.
+				type Entry = {
+					sortKey: number;
+					level: number; // 2 = Roman heading, 3 = sub-heading, 2 = en_bref (treated as section sibling)
+					item: Item;
+				};
 				const entries: Entry[] = [];
 				for (const h of a.headings) {
 					entries.push({
 						sortKey: h.paragraph_start,
+						level: h.level ?? 2,
 						item: { title: h.title, href: `${articleHref}#${h.id}` }
 					});
 				}
@@ -175,10 +181,35 @@
 					if (firstP < articleMin || firstP > articleMax) continue;
 					entries.push({
 						sortKey: firstP,
+						level: 2,
 						item: { title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` }
 					});
 				}
 				entries.sort((x, y) => x.sortKey - y.sortKey);
+
+				// Nest level-3 sub_headings under their parent level-2 heading
+				// (the most recent level-2 in document order). Returns a flat
+				// list of level-2 items, each potentially carrying nested
+				// children. Pass-through for entries without nesting context.
+				function nestLevels(es: Entry[]): Item[] {
+					const result: Item[] = [];
+					let current: Item | null = null;
+					let currentChildren: Item[] | null = null;
+					for (const e of es) {
+						if (e.level >= 3 && current) {
+							if (!currentChildren) {
+								currentChildren = [];
+								current.children = currentChildren;
+							}
+							currentChildren.push(e.item);
+						} else {
+							current = { ...e.item };
+							currentChildren = null;
+							result.push(current);
+						}
+					}
+					return result;
+				}
 
 				// If the article carries Paragraphe wrappers, nest entries
 				// under them: each Paragraphe owns the entries whose first
@@ -192,6 +223,7 @@
 				if (paragraphes.length > 0) {
 					const buckets: Item[] = [];
 					const intro: Item[] = [];
+					const introEntries: Entry[] = [];
 					for (const e of entries) {
 						let bucketIdx = -1;
 						for (let i = 0; i < paragraphes.length; i++) {
@@ -205,8 +237,9 @@
 								break;
 							}
 						}
-						if (bucketIdx === -1) intro.push(e.item);
+						if (bucketIdx === -1) introEntries.push(e);
 					}
+					intro.push(...nestLevels(introEntries));
 					for (let i = 0; i < paragraphes.length; i++) {
 						const pg = paragraphes[i]!;
 						const start = pg.paragraph_start;
@@ -214,9 +247,8 @@
 							i + 1 < paragraphes.length
 								? paragraphes[i + 1]!.paragraph_start - 1
 								: articleMax;
-						const children = entries
-							.filter((e) => e.sortKey >= start && e.sortKey <= end)
-							.map((e) => e.item);
+						const slice = entries.filter((e) => e.sortKey >= start && e.sortKey <= end);
+						const children = nestLevels(slice);
 						buckets.push({
 							title: pg.title,
 							number: pg.number,
@@ -227,7 +259,7 @@
 					}
 					articleChildren = [...intro, ...buckets];
 				} else {
-					articleChildren = entries.map((e) => e.item);
+					articleChildren = nestLevels(entries);
 				}
 
 				out.push({
@@ -323,7 +355,7 @@
 
 {#if $sidebarOpen}
 	<aside
-		class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] w-[280px] bg-panel border-r border-border z-20 flex-none flex-col"
+		class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] w-[320px] bg-panel border-r border-border z-20 flex-none flex-col"
 		transition:fly={{ x: -20, duration: 180 }}
 	>
 		<div class="flex items-center justify-between p-2 border-b border-border">

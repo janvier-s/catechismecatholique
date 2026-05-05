@@ -123,4 +123,82 @@
 			<ParagraphView paragraph={p} />
 		{/if}
 	{/each}
+
+	<nav
+		class="mt-16 pt-6 border-t border-border flex items-stretch justify-between gap-6 font-ui"
+		aria-label="Article suivant ou précédent"
+	>
+		{#if data.prevArticle}
+			{@const href =
+				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.prevArticle.slug}`}
+			<a class="article-nav-link prev" href={href}>
+				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
+					>← Précédent</span
+				>
+				<span class="font-heading text-[15px] text-foreground">
+					{data.prevArticle.number ? `Article ${data.prevArticle.number}. ` : ''}{data.prevArticle.title}
+				</span>
+			</a>
+		{:else}
+			<a
+				class="article-nav-link prev"
+				href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
+			>
+				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
+					>← Retour au chapitre</span
+				>
+				<span class="font-heading text-[15px] text-foreground">
+					{data.chapter.title}
+				</span>
+			</a>
+		{/if}
+
+		{#if data.nextArticle}
+			{@const href =
+				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.nextArticle.slug}`}
+			<a class="article-nav-link next" href={href}>
+				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
+					>Suivant →</span
+				>
+				<span class="font-heading text-[15px] text-foreground">
+					{data.nextArticle.number ? `Article ${data.nextArticle.number}. ` : ''}{data.nextArticle.title}
+				</span>
+			</a>
+		{:else if data.chapter.next}
+			{@const href =
+				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.next.slug}`}
+			<a class="article-nav-link next" href={href}>
+				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
+					>Chapitre suivant →</span
+				>
+				<span class="font-heading text-[15px] text-foreground">
+					{data.chapter.next.title}
+				</span>
+			</a>
+		{/if}
+	</nav>
 </main>
+
+<style>
+	.article-nav-link {
+		flex: 1;
+		min-width: 0;
+		padding: 0.85rem 1rem;
+		border: 1px solid color-mix(in srgb, var(--color-fg) 18%, transparent);
+		border-radius: 4px;
+		text-decoration: none;
+		transition:
+			border-color 120ms ease,
+			background 120ms ease;
+	}
+	.article-nav-link:hover {
+		border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+		background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+	}
+	.article-nav-link.prev {
+		text-align: left;
+	}
+	.article-nav-link.next {
+		text-align: right;
+	}
+</style>

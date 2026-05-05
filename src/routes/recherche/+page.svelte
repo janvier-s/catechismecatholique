@@ -289,7 +289,7 @@
 							effacer
 						</button>
 					</div>
-					<ul class="space-y-1">
+					<ul class="recent-list">
 						{#each recents as r (r)}
 							<li>
 								<a
@@ -691,6 +691,24 @@
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
 		color: var(--color-muted);
+	}
+
+	.recent-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.recent-list li {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		padding: 2px 0;
+	}
+	/* Editorial em-dash bullet — matches the hairline list register elsewhere. */
+	.recent-list li::before {
+		content: '—';
+		color: var(--color-muted);
+		flex: none;
 	}
 
 	.show-more {
