@@ -135,6 +135,23 @@ function extractRefs(node: ParseNode): number[] {
 // «(s/e)». These are NOT Latin glosses and must stay attached to the term.
 const INFLECTION_RE = /^(s|e|se|s\/e|s\/se|le)$/i;
 
+// Restore Latin ligatures: `ae`/`oe` → `æ`/`œ` (preserving case).
+function ligateLatin(s: string): string {
+	return s
+		.replace(/AE/g, 'Æ')
+		.replace(/Ae/g, 'Æ')
+		.replace(/ae/g, 'æ')
+		.replace(/OE/g, 'Œ')
+		.replace(/Oe/g, 'Œ')
+		.replace(/oe/g, 'œ');
+}
+
+// Apply Latin ligatures only to text inside `(…)` so French outside the parens
+// (e.g. "coexistant") stays untouched.
+function ligateInsideParens(s: string): string {
+	return s.replace(/\(([^)]+)\)/g, (_, inner) => '(' + ligateLatin(inner) + ')');
+}
+
 // Tighten extra whitespace inside parentheses (`( foedus vetus )` →
 // `(foedus vetus)`) and drop a trailing period that sometimes follows the
 // closing paren on title-only entries.
@@ -151,7 +168,7 @@ function cleanParens(s: string): string {
 function splitTermAndLatin(raw: string): { term: string; latin?: string } {
 	const cleaned = cleanParens(raw.replace(/\s+/g, ' ').trim());
 	const m = cleaned.match(/^(.*?)\s*\(\s*([^)]+?)\s*\)\s*$/);
-	if (!m) return { term: titleCaseFrench(cleaned) };
+	if (!m) return { term: ligateInsideParens(titleCaseFrench(cleaned)) };
 	if (INFLECTION_RE.test(m[2]!.trim())) {
 		return { term: titleCaseFrench(cleaned) };
 	}
@@ -216,7 +233,8 @@ function titleCaseFrench(s: string): string {
 }
 function titleCaseLatin(s: string): string {
 	const lower = s.toLowerCase().replace(/\s+/g, ' ').trim();
-	return lower.charAt(0).toUpperCase() + lower.slice(1);
+	const cap = lower.charAt(0).toUpperCase() + lower.slice(1);
+	return ligateLatin(cap);
 }
 
 // "Abandon à la providence : 305, 322, 2115."
@@ -231,7 +249,7 @@ function parseSubEntry(node: ParseNode): GlossaryFrSubEntry | null {
 	const beforeRefs = fullText.replace(/\s*[,:]\s*\d[\s\d,;.\-–]*\.?$/, '').trim();
 	const stripped = beforeRefs.replace(/[.,;:]\s*$/, '').trim();
 	if (!stripped) return null;
-	return { label: capitalizeProperNouns(cleanParens(stripped)), refs };
+	return { label: ligateInsideParens(capitalizeProperNouns(cleanParens(stripped))), refs };
 }
 
 // "Voir : Consécration, Sacrement(s), Transsubstantiation" — a cross-ref
