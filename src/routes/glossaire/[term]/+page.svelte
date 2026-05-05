@@ -74,7 +74,7 @@
 			<p class="font-ui text-[12px] uppercase tracking-[0.15em] text-muted mb-2">
 				{pluralFr(refSegments(data.entry.directRefs).length, 'Renvoi', 'Renvois')}
 			</p>
-			<p class="font-body text-[20px] leading-snug">
+			<p class="font-ui text-[20px] leading-snug">
 				{#each refSegments(data.entry.directRefs) as seg, i (seg.first)}
 					{#if i > 0}<span class="text-muted">,</span> {/if}
 					<a href="/ccc/{seg.first}" class="text-accent hover:underline tabular-nums"
@@ -95,7 +95,7 @@
 				{#each data.entry.subEntries as sub, i (sub.label + i)}
 					<li>
 						<p class="font-body text-[16px] font-semibold mb-1">{sub.label}</p>
-						<p class="font-body text-[16px] tabular-nums text-muted leading-snug">
+						<p class="font-ui text-[16px] tabular-nums text-muted leading-snug">
 							{#each refSegments(sub.refs) as seg, j (seg.first)}
 								{#if j > 0}<span>,</span> {/if}
 								<a href="/ccc/{seg.first}" class="text-accent hover:underline">{seg.label}</a>
