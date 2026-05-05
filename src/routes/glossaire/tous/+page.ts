@@ -1,4 +1,5 @@
 import { loadGlossary } from '$lib/data/loaders';
+import { firstLetter } from '$lib/utils/firstLetter';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
@@ -9,15 +10,11 @@ export const load: PageLoad = async ({ fetch }) => {
 	);
 
 	// Group by first letter for the in-page jump bar. Diacritics fold to base
-	// letter (É → E, À → A) so the alphabet bar reads cleanly.
+	// letter (É → E, À → A), ligatures map to their dominant base (Œ → O),
+	// and leading guillemets/quotes are skipped so `« aujourd'hui »` lands in A.
 	const byLetter = new Map<string, typeof entries>();
 	for (const e of entries) {
-		const ch = e.term
-			.normalize('NFD')
-			.replace(/[̀-ͯ]/g, '')
-			.charAt(0)
-			.toUpperCase();
-		const letter = /[A-Z]/.test(ch) ? ch : '#';
+		const letter = firstLetter(e.term);
 		if (!byLetter.has(letter)) byLetter.set(letter, []);
 		byLetter.get(letter)!.push(e);
 	}
