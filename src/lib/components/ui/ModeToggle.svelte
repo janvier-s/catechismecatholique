@@ -19,7 +19,8 @@
 <div class="relative" data-prefs-menu>
 	<button
 		type="button"
-		class="ml-2 w-9 h-9 rounded-md bg-accent/10 hover:bg-accent/20 flex items-center justify-center text-foreground hover:text-accent"
+		class="ml-2 w-9 h-9 rounded-md flex items-center justify-center transition-colors
+			{open ? 'bg-accent/10 text-accent' : 'bg-transparent text-foreground hover:text-accent'}"
 		onclick={() => (open = !open)}
 		aria-label="Options de lecture"
 		aria-haspopup="dialog"

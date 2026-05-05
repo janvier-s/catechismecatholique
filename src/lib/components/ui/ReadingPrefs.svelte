@@ -313,8 +313,11 @@
 					type="checkbox"
 					checked={$prefs.hideAllNotes}
 					onchange={(e) => setHideAll(e.currentTarget.checked)}
-					class="accent-accent"
+					class="prefs-check-input"
 				/>
+				<span class="prefs-check" aria-hidden="true">
+					{#if $prefs.hideAllNotes}<span class="prefs-check-mark">✓</span>{/if}
+				</span>
 				<span class="font-semibold">Masquer toutes les notes</span>
 			</label>
 			<div class="pl-6 space-y-3 text-[14px] border-l border-border ml-1.5">
@@ -323,8 +326,11 @@
 						type="checkbox"
 						checked={$prefs.hideCrossRefs}
 						onchange={(e) => updatePref('hideCrossRefs', e.currentTarget.checked)}
-						class="accent-accent"
+						class="prefs-check-input"
 					/>
+					<span class="prefs-check" aria-hidden="true">
+						{#if $prefs.hideCrossRefs}<span class="prefs-check-mark">✓</span>{/if}
+					</span>
 					<span>Renvois (§)</span>
 				</label>
 				<label class="flex items-center gap-2.5 cursor-pointer">
@@ -332,8 +338,11 @@
 						type="checkbox"
 						checked={$prefs.hideBibleInline}
 						onchange={(e) => updatePref('hideBibleInline', e.currentTarget.checked)}
-						class="accent-accent"
+						class="prefs-check-input"
 					/>
+					<span class="prefs-check" aria-hidden="true">
+						{#if $prefs.hideBibleInline}<span class="prefs-check-mark">✓</span>{/if}
+					</span>
 					<span>Réfs. bibliques en ligne</span>
 				</label>
 				<label class="flex items-center gap-2.5 cursor-pointer">
@@ -341,8 +350,11 @@
 						type="checkbox"
 						checked={$prefs.hideBibleMarkers}
 						onchange={(e) => updatePref('hideBibleMarkers', e.currentTarget.checked)}
-						class="accent-accent"
+						class="prefs-check-input"
 					/>
+					<span class="prefs-check" aria-hidden="true">
+						{#if $prefs.hideBibleMarkers}<span class="prefs-check-mark">✓</span>{/if}
+					</span>
 					<span>Réfs. bibliques en exposant</span>
 				</label>
 				<label class="flex items-center gap-2.5 cursor-pointer">
@@ -350,8 +362,11 @@
 						type="checkbox"
 						checked={$prefs.hideSourceFootnotes}
 						onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
-						class="accent-accent"
+						class="prefs-check-input"
 					/>
+					<span class="prefs-check" aria-hidden="true">
+						{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
+					</span>
 					<span>Sources</span>
 				</label>
 			</div>
@@ -411,5 +426,47 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+
+	/* Hairline checkbox — native input is visually hidden but kept in flow
+	   for keyboard + a11y. The adjacent .prefs-check span is the visual
+	   surface and reflects checked state via the serif checkmark glyph. */
+	.prefs-check-input {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+	.prefs-check {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 16px;
+		height: 16px;
+		flex: none;
+		border: 1px solid var(--color-border);
+		border-radius: 2px;
+		background: transparent;
+		transition: border-color 120ms ease;
+	}
+	.prefs-check-input:checked + .prefs-check {
+		border-color: var(--color-accent);
+	}
+	.prefs-check-input:focus-visible + .prefs-check {
+		outline: 2px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+		outline-offset: 2px;
+	}
+	.prefs-check-mark {
+		font-family: var(--font-body);
+		font-size: 12px;
+		line-height: 1;
+		color: var(--color-accent);
+		/* Optical alignment — Libre Baskerville's check sits a hair high. */
+		transform: translateY(-0.5px);
 	}
 </style>
