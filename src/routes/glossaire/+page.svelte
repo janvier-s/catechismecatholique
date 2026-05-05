@@ -54,7 +54,7 @@
 	{#if data.featured.length > 0}
 		<section class="mb-12">
 			<h2 class="font-ui text-[11px] uppercase tracking-[0.2em] font-semibold text-accent mb-4">
-				À découvrir
+				Les plus citées
 			</h2>
 			<ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 auto-rows-fr">
 				{#each data.featured.slice(0, 16) as e (e.slug)}
