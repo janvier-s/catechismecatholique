@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { studyPanel } from '$lib/stores/studyPanel';
-	import { loadParagraph, loadNclBible } from '$lib/data/loaders';
+	import { loadParagraph, loadNclBook } from '$lib/data/loaders';
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
 	import type { BibleRef, MagisterialRefRecord, NclBible } from '$lib/data/types';
 
@@ -27,10 +27,25 @@
 		const ctx = $studyPanel.context;
 		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
-			const [p, bibleResp] = await Promise.all([loadParagraph(ctx.paragraph), loadNclBible()]);
+			const p = await loadParagraph(ctx.paragraph);
 			refs = p.bible_refs;
 			magisterial = p.magisterial_refs;
-			bible = bibleResp;
+			// Lazily load only the NCL books actually referenced by this paragraph.
+			const usfxes = new Set<string>();
+			for (const r of p.bible_refs) {
+				const m = r.text.match(/^([1-3]?\s*[A-Za-zÉéèê]+)/);
+				if (!m) continue;
+				const b = bookByAbbr(m[1]!.trim());
+				if (b) usfxes.add(b.usfx);
+			}
+			const list = Array.from(usfxes);
+			const books = await Promise.all(list.map((u) => loadNclBook(u)));
+			const next: NclBible = {};
+			for (let i = 0; i < list.length; i++) {
+				const data = books[i];
+				if (data) next[list[i]!] = data;
+			}
+			bible = next;
 		})();
 	});
 

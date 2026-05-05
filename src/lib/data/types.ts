@@ -137,8 +137,11 @@ export interface ParagraphContext {
 // Shape: usfx → chapter → verse → paragraph numbers (sorted asc, deduped).
 export type BibleVerseIndex = Record<string, Record<string, Record<string, number[]>>>;
 
+// One NCL Bible book's verse text. Shape: chapter → verse → text.
+export type NclBook = Record<string, Record<string, string>>;
+
 // Full NCL Bible verse text. Shape: usfx → chapter → verse → text.
-export type NclBible = Record<string, Record<string, Record<string, string>>>;
+export type NclBible = Record<string, NclBook>;
 
 /** A French section title from the NCL Bible (e.g. "La faute et le châtiment"). */
 export interface NclSection {

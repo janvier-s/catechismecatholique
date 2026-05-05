@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { bookBySlug } from '$lib/utils/bibleBookSlug';
-import { loadConcordanceChapter, loadChapterCounts, loadNclBible } from '$lib/data/loaders';
+import { loadConcordanceChapter, loadChapterCounts, loadNclBook } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, fetch }) => {
@@ -9,14 +9,13 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const ch = parseInt(params.ch!, 10);
 	if (!Number.isFinite(ch)) throw error(404);
 
-	const [ncl, chapterData, chapterCounts] = await Promise.all([
-		loadNclBible(fetch),
+	const [bookData, chapterData, chapterCounts] = await Promise.all([
+		loadNclBook(book.usfx, fetch),
 		loadConcordanceChapter(book.slug, ch, fetch),
 		loadChapterCounts(fetch)
 	]);
 	if (!chapterData) throw error(404, 'No concordance data for this chapter');
 
-	const bookData = ncl[book.usfx];
 	if (!bookData) throw error(404);
 	const chData = bookData[String(ch)];
 	if (!chData) throw error(404);

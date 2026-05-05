@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { studyPanel } from '$lib/stores/studyPanel';
-	import { loadConcordanceForParagraph, loadNclBible } from '$lib/data/loaders';
+	import { loadConcordanceForParagraph, loadNclBook } from '$lib/data/loaders';
 	import type { ConcordanceByParagraphEntry, NclBible } from '$lib/data/types';
 	import { pluralFr } from '$lib/utils/i18n';
 
@@ -15,9 +15,17 @@
 		}
 		const num = ctx.paragraph;
 		(async () => {
-			const [shard, ncl] = await Promise.all([loadConcordanceForParagraph(num), loadNclBible()]);
+			const shard = await loadConcordanceForParagraph(num);
 			entries = shard ?? [];
-			nclData = ncl;
+			// Lazily load only the books referenced by this paragraph's entries.
+			const usfxes = Array.from(new Set((shard ?? []).map((e) => e.usfx)));
+			const books = await Promise.all(usfxes.map((u) => loadNclBook(u)));
+			const next: NclBible = {};
+			for (let i = 0; i < usfxes.length; i++) {
+				const b = books[i];
+				if (b) next[usfxes[i]!] = b;
+			}
+			nclData = next;
 		})();
 	});
 

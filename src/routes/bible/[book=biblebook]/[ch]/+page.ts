@@ -5,7 +5,7 @@ import {
 	loadConcordanceManifest,
 	loadNclSections,
 	loadChapterCounts,
-	loadNclBible
+	loadNclBook
 } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
@@ -15,15 +15,14 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const ch = parseInt(params.ch!, 10);
 	if (!Number.isFinite(ch)) throw error(404);
 
-	const [ncl, verseIdx, manifest, sections, chapterCounts] = await Promise.all([
-		loadNclBible(fetch),
+	const [bookData, verseIdx, manifest, sections, chapterCounts] = await Promise.all([
+		loadNclBook(book.usfx, fetch),
 		loadBibleVerseIndex(fetch),
 		loadConcordanceManifest(fetch),
 		loadNclSections(fetch),
 		loadChapterCounts(fetch)
 	]);
 
-	const bookData = ncl[book.usfx];
 	if (!bookData) throw error(404);
 	const chData = bookData[String(ch)];
 	if (!chData) throw error(404);

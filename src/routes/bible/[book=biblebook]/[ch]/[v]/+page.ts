@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { bookBySlug } from '$lib/utils/bibleBookSlug';
-import { loadParagraph, loadNclBible, loadBibleVerseIndex } from '$lib/data/loaders';
+import { loadParagraph, loadNclBook, loadBibleVerseIndex } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, fetch }) => {
@@ -8,9 +8,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	if (!book) throw error(404);
 	const ch = parseInt(params.ch!, 10);
 	const v = parseInt(params.v!, 10);
-	const [ncl, verseIdx] = await Promise.all([loadNclBible(fetch), loadBibleVerseIndex(fetch)]);
+	const [bookData, verseIdx] = await Promise.all([
+		loadNclBook(book.usfx, fetch),
+		loadBibleVerseIndex(fetch)
+	]);
 
-	const text = ncl[book.usfx]?.[String(ch)]?.[String(v)];
+	const text = bookData?.[String(ch)]?.[String(v)];
 	if (!text) throw error(404);
 
 	const cited = verseIdx[book.usfx]?.[String(ch)]?.[String(v)] ?? [];

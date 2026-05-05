@@ -150,7 +150,21 @@ async function main() {
 	const nclXml = readFileSync(join(SOURCES, 'ncl/francl_usfx.xml'), 'utf8');
 	const ncl = await parseUSFX(nclXml);
 	writeFileSync(join(OUT, 'bible/ncl.json'), JSON.stringify(ncl));
-	endStep(`${Object.keys(ncl).length} books`);
+
+	// Per-book shards: each book gets its own /data/bible/ncl/{usfx}.json so
+	// the Bible reader only fetches the book the user is on. The companion
+	// manifest lists which USFX codes exist so callers can skip 404s. The
+	// legacy bundle above is still emitted for the deprecated loadNclBible.
+	const nclDir = join(OUT, 'bible/ncl');
+	mkdirSync(nclDir, { recursive: true });
+	const nclUsfxCodes: string[] = [];
+	for (const [usfx, bookData] of Object.entries(ncl)) {
+		writeFileSync(join(nclDir, `${usfx}.json`), JSON.stringify(bookData));
+		nclUsfxCodes.push(usfx);
+	}
+	nclUsfxCodes.sort();
+	writeFileSync(join(nclDir, 'manifest.json'), JSON.stringify(nclUsfxCodes));
+	endStep(`${Object.keys(ncl).length} books, ${nclUsfxCodes.length} shards`);
 
 	logStep('building chapter counts');
 	{

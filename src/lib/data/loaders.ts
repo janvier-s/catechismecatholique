@@ -10,7 +10,8 @@ import type {
 	ConcordanceByParagraph,
 	ConcordanceByParagraphEntry,
 	NclSectionMap,
-	NclBible
+	NclBible,
+	NclBook
 } from './types';
 
 type Fetch = typeof fetch;
@@ -39,6 +40,8 @@ const concordanceByParagraphShardCache = new Map<
 let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
 let nclBiblePromise: Promise<NclBible> | null = null;
+let nclManifestPromise: Promise<Set<string>> | null = null;
+const nclBookCache = new Map<string, Promise<NclBook | null>>();
 let paragraphContextsPromise: Promise<Record<number, ParagraphContext>> | null = null;
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
@@ -203,9 +206,51 @@ export function loadChapterCounts(fetcher: Fetch = fetch): Promise<Record<string
 	return chapterCountsPromise;
 }
 
+/**
+ * @deprecated Loads the entire NCL Bible bundle. Prefer
+ * {@link loadNclBook} which fetches only the book needed.
+ * Kept for any remaining consumers; the bundle is still emitted by the
+ * data pipeline today and will be removed in a future cleanup.
+ */
 export function loadNclBible(fetcher: Fetch = fetch): Promise<NclBible> {
 	if (!nclBiblePromise) {
 		nclBiblePromise = fetchJson<NclBible>('/data/bible/ncl.json', fetcher);
 	}
 	return nclBiblePromise;
+}
+
+/**
+ * Load the manifest of USFX codes that have an NCL shard available.
+ * Used by callers to avoid speculative 404s on book fetches.
+ */
+export function loadNclManifest(fetcher: Fetch = fetch): Promise<Set<string>> {
+	if (!nclManifestPromise) {
+		nclManifestPromise = (async () => {
+			const r = await fetcher('/data/bible/ncl/manifest.json');
+			if (!r.ok) return new Set<string>();
+			const arr = (await r.json()) as string[];
+			return new Set(arr);
+		})();
+	}
+	return nclManifestPromise;
+}
+
+/**
+ * Lazily fetch the NCL verse text for a single Bible book by USFX code.
+ * Returns `null` when the book is not in the manifest or the shard 404s.
+ * Cached at module scope so repeat opens of the same book are free.
+ */
+export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBook | null> {
+	let p = nclBookCache.get(usfx);
+	if (!p) {
+		p = (async () => {
+			const manifest = await loadNclManifest(fetcher);
+			if (!manifest.has(usfx)) return null;
+			const r = await fetcher(`/data/bible/ncl/${usfx}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as NclBook;
+		})();
+		nclBookCache.set(usfx, p);
+	}
+	return p;
 }
