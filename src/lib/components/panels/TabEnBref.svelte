@@ -34,50 +34,40 @@
 			}
 			const chapter: Chapter = await loadChapter(context.chapter.slug);
 
-			// Scope candidates to the heading section(s) the user is reading. Each
-			// en_bref summarises the heading section immediately preceding it, so
-			// showing every en_bref in the article (which can span hundreds of
-			// paragraphs) buries the relevant one. A heading's range runs from
-			// its paragraph_start to one before the next heading's start (or to
-			// the end of the article if it's the last heading).
+			// Show every en_bref in the article (or chapter, when there's no
+			// active article — chapters like "L'homme est capable de Dieu"
+			// have headings + en_brefs without article wrappers). Sorted by
+			// proximity to the paragraph that opened the panel so the most
+			// relevant block lands at the top.
 			//
-			// For range URLs (/ccc/N-M) every heading overlapping [N, M] is in
-			// scope, so a reader on /ccc/218-223 — which spans both heading III
-			// (214–221) and heading IV (222–231) — sees IV's en_bref (228–231)
-			// regardless of which paragraph opened the panel.
+			// An earlier version scoped to the active heading section, but
+			// the catechism's article-level en_brefs (e.g. the 7 blocks in
+			// «Je crois en Dieu le Père» Article 1) are organised by
+			// `Paragraphe` subdivision, not by Roman heading. The scope
+			// often missed the relevant block entirely and showed "Pas d'En
+			// Bref disponible" on sections that have plenty.
 			const article = chapter.articles.find((a) => a.slug === context!.article?.slug);
 			const candidates = chapter.en_brefs ?? [];
 
 			const rangeMatch = page.url.pathname.match(/^\/ccc\/(\d+)(?:-(\d+))?$/);
 			const viewFrom = rangeMatch ? parseInt(rangeMatch[1]!, 10) : paragraphNum;
 			const viewTo = rangeMatch?.[2] ? parseInt(rangeMatch[2], 10) : viewFrom;
+			const focal = (viewFrom + viewTo) / 2;
 
-			const headings = (article?.headings ?? chapter.headings ?? [])
-				.slice()
-				.sort((a, b) => a.paragraph_start - b.paragraph_start);
-			const articleMax = article?.paragraphs.at(-1) ?? chapter.paragraphs.at(-1) ?? Infinity;
-
-			const headingRanges: { from: number; to: number }[] = [];
-			for (let i = 0; i < headings.length; i++) {
-				const start = headings[i]!.paragraph_start;
-				const end = headings[i + 1] ? headings[i + 1]!.paragraph_start - 1 : articleMax;
-				if (start <= viewTo && end >= viewFrom) headingRanges.push({ from: start, to: end });
-			}
-
+			const articleMin = article?.paragraphs[0];
+			const articleMax = article?.paragraphs.at(-1);
 			const inScope = (block: { paragraphs: number[] }) => {
 				if (block.paragraphs.length === 0) return false;
+				if (articleMin === undefined || articleMax === undefined) return true;
 				const first = block.paragraphs[0]!;
-				if (headingRanges.length > 0) {
-					return headingRanges.some((r) => first >= r.from && first <= r.to);
-				}
-				// No heading context — fall back to article range so we still
-				// avoid leaking en_brefs from other articles.
-				if (!article) return true;
-				const articleMin = article.paragraphs[0] ?? 0;
 				return first >= articleMin && first <= articleMax;
 			};
 
-			const filtered = candidates.filter(inScope);
+			const filtered = candidates.filter(inScope).sort((a, b) => {
+				const da = Math.abs(a.paragraphs[0]! - focal);
+				const db = Math.abs(b.paragraphs[0]! - focal);
+				return da - db;
+			});
 			const result: Block[] = [];
 			for (const block of filtered) {
 				if (block.paragraphs.length === 0) continue;
