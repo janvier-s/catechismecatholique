@@ -721,6 +721,7 @@ export const CLUSTER_OVERRIDES: Record<string, ClusterId[]> = {
 
 function norm(s: string): string {
 	return s
+		.replace(/\s*\((?:s|e|se|s\/e|s\/se|le)\)\s*/gi, '')
 		.normalize('NFD')
 		.replace(/[̀-ͯ]/g, '')
 		.replace(/œ/g, 'oe')

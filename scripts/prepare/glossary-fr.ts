@@ -131,11 +131,30 @@ function extractRefs(node: ParseNode): number[] {
 	return [...refs].sort((a, b) => a - b);
 }
 
+// French inflection markers used after a head-word: «(s)», «(e)», «(se)»,
+// «(s/e)». These are NOT Latin glosses and must stay attached to the term.
+const INFLECTION_RE = /^(s|e|se|s\/e|s\/se|le)$/i;
+
+// Tighten extra whitespace inside parentheses (`( foedus vetus )` →
+// `(foedus vetus)`) and drop a trailing period that sometimes follows the
+// closing paren on title-only entries.
+function cleanParens(s: string): string {
+	return s
+		.replace(/\(\s+([^)]*?)\s+\)/g, '($1)')
+		.replace(/\(\s+([^)]+?)\)/g, '($1)')
+		.replace(/\(([^)]+?)\s+\)/g, '($1)')
+		.replace(/\)\s*\.\s*$/, ')');
+}
+
 // "ABAISSEMENT DE JÉSUS ( HUMILIATIO )" → { term: "Abaissement de Jésus", latin: "Humiliatio" }
+// "ANGE(S)" → { term: "Ange(s)" } — inflection marker stays on the term.
 function splitTermAndLatin(raw: string): { term: string; latin?: string } {
-	const cleaned = raw.replace(/\s+/g, ' ').trim();
+	const cleaned = cleanParens(raw.replace(/\s+/g, ' ').trim());
 	const m = cleaned.match(/^(.*?)\s*\(\s*([^)]+?)\s*\)\s*$/);
 	if (!m) return { term: titleCaseFrench(cleaned) };
+	if (INFLECTION_RE.test(m[2]!.trim())) {
+		return { term: titleCaseFrench(cleaned) };
+	}
 	return { term: titleCaseFrench(m[1]!.trim()), latin: titleCaseLatin(m[2]!.trim()) };
 }
 
@@ -150,6 +169,7 @@ const PROPER_NOUNS: ReadonlyArray<[RegExp, string]> = [
 	[/\bancien\s+testament\b/giu, 'Ancien Testament'],
 	[/\besprit\s+saint\b/giu, 'Esprit Saint'],
 	// Persons / divine names
+	[/\byhwh\b/giu, 'YHWH'],
 	[/\bjésus\b/giu, 'Jésus'],
 	[/\bjesus\b/giu, 'Jésus'],
 	[/\bdieu\b/giu, 'Dieu'],
@@ -211,7 +231,7 @@ function parseSubEntry(node: ParseNode): GlossaryFrSubEntry | null {
 	const beforeRefs = fullText.replace(/\s*[,:]\s*\d[\s\d,;.\-–]*\.?$/, '').trim();
 	const stripped = beforeRefs.replace(/[.,;:]\s*$/, '').trim();
 	if (!stripped) return null;
-	return { label: capitalizeProperNouns(stripped), refs };
+	return { label: capitalizeProperNouns(cleanParens(stripped)), refs };
 }
 
 // "Voir : Consécration, Sacrement(s), Transsubstantiation" — a cross-ref

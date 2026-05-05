@@ -51,8 +51,14 @@ export interface GlossaryBundle {
 	featured: string[]; // slugs of the top ~24 by totalRefs
 }
 
+// Strip French inflection markers like `(s)`, `(e)`, `(se)` from a term so
+// they don't pollute slugs or cross-comparison keys. The marker stays on the
+// rendered `term` field — only normalization paths drop it.
+const INFLECTION_SUFFIX = /\s*\((?:s|e|se|s\/e|s\/se|le)\)\s*/gi;
+const stripInflection = (s: string): string => s.replace(INFLECTION_SUFFIX, '').trim();
+
 const SLUG_FALLBACK = (s: string): string =>
-	s
+	stripInflection(s)
 		.normalize('NFD')
 		.replace(/[̀-ͯ]/g, '')
 		.toLowerCase()
@@ -61,7 +67,7 @@ const SLUG_FALLBACK = (s: string): string =>
 		.replace(/^-+|-+$/g, '');
 
 function normCompare(s: string): string {
-	return s
+	return stripInflection(s)
 		.normalize('NFD')
 		.replace(/[̀-ͯ]/g, '')
 		.toLowerCase()
