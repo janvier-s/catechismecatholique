@@ -19,7 +19,7 @@ import { extractParagraphs } from './prepare/paragraphs.ts';
 import { extractParagraphes } from './prepare/paragraphes.ts';
 import { fixCccParaSourceTypos } from './prepare/source-data-fixes.ts';
 import { buildChapterFiles } from './prepare/chapters.ts';
-import { extractEnBref } from './prepare/enbref.ts';
+import { extractEnBref, trimEnBrefsAtParagrapheBoundaries } from './prepare/enbref.ts';
 import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX } from './prepare/ncl.ts';
@@ -95,12 +95,17 @@ async function main() {
 	endStep(`${Object.keys(citedBy).length} paragraphs cited`);
 
 	logStep('extracting en bref');
-	const enbref = extractEnBref(rawParts);
-	endStep(`${enbref.length} blocks`);
+	const rawEnbref = extractEnBref(rawParts);
+	endStep(`${rawEnbref.length} blocks`);
 
 	logStep('extracting Paragraphes (mid-level wrappers)');
 	const paragraphes = extractParagraphes(join(SOURCES, 'ccc_paras'));
 	endStep(`${paragraphes.length} Paragraphes`);
+
+	logStep('trimming en_bref blocks at Paragraphe boundaries');
+	const enbref = trimEnBrefsAtParagrapheBoundaries(rawEnbref, paragraphes);
+	const trimmedCount = enbref.filter((b, i) => b.paragraphs.length !== rawEnbref[i]!.paragraphs.length).length;
+	endStep(`${trimmedCount} blocks trimmed`);
 
 	logStep('building chapters');
 	const chapters = buildChapterFiles(structure, enbref, paragraphes);

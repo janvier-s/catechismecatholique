@@ -1,4 +1,5 @@
 import { slugify } from './slug';
+import type { Paragraphe } from './paragraphes';
 
 interface RawNode {
 	type: string;
@@ -50,4 +51,29 @@ export function extractEnBref(parts: RawNode[]): ExtractedEnBref[] {
 
 	for (const p of parts) walk(p, undefined, undefined);
 	return out;
+}
+
+/**
+ * The upstream JSON tree merges en_bref blocks across `Paragraphe` boundaries
+ * — the en_bref of `Paragraphe 2. Le Père` (§§261-267) gets concatenated with
+ * the regular content of `Paragraphe 3. Le Tout-Puissant` (§§268-274) into a
+ * single 261-274 block. Trim each block to end before the next Paragraphe so
+ * the regular content goes back to rendering as paragraphs and only the
+ * actual summary lines stay inside the En Bref box.
+ */
+export function trimEnBrefsAtParagrapheBoundaries(
+	enbrefs: ExtractedEnBref[],
+	paragraphes: Paragraphe[]
+): ExtractedEnBref[] {
+	const sorted = paragraphes.slice().sort((a, b) => a.paragraph_start - b.paragraph_start);
+	return enbrefs.map((b) => {
+		if (b.paragraphs.length === 0) return b;
+		const first = b.paragraphs[0]!;
+		const nextPg = sorted.find((pg) => pg.paragraph_start > first);
+		if (!nextPg) return b;
+		const cutoff = nextPg.paragraph_start;
+		const trimmed = b.paragraphs.filter((p) => p < cutoff);
+		if (trimmed.length === b.paragraphs.length) return b;
+		return { ...b, paragraphs: trimmed };
+	});
 }

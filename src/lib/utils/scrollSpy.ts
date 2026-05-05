@@ -2,44 +2,57 @@ import type { Action } from 'svelte/action';
 import { activeHeading } from '$lib/stores/scrollSpy';
 
 /**
- * Track the heading currently sitting just below the sticky topbar inside the
- * given container, and publish its id to the `activeHeading` store. The
- * Sidebar reads that store to keep the matching nested entry highlighted as
- * the reader scrolls.
+ * Track the heading the reader is currently inside, and publish its id to
+ * `activeHeading` so the Sidebar can keep its matching entry highlighted.
  *
- * Usage on any container that wraps anchor-able headings:
+ * Usage on any container wrapping anchor-able headings:
  *   <main use:scrollSpy>...</main>
  *
- * The action observes every `h2[id]` and `h3[id]` descendant. The active
- * heading is the topmost one that's currently within a strip just below the
- * sticky topbar (rootMargin top -90px, bottom -70%).
+ * The earlier IntersectionObserver approach only marked a heading active
+ * while it was physically intersecting a thin strip below the topbar — once
+ * the heading scrolled past, the active highlight blanked out even though
+ * the reader was still inside that section. This implementation instead
+ * tracks the most-recently-passed heading: the LAST `h2[id]` / `h3[id]`
+ * whose top edge is at or above a small offset from the top of the
+ * viewport. While reading any paragraph between two headings, the previous
+ * heading stays highlighted.
  */
+const ACTIVE_OFFSET = 100; // px from viewport top
+
 export const scrollSpy: Action<HTMLElement> = (node) => {
 	const headings = Array.from(node.querySelectorAll<HTMLElement>('h2[id], h3[id]'));
 	if (headings.length === 0) return;
 
-	const visible = new Set<string>();
-	const order = headings.map((h) => h.id);
+	let raf = 0;
 
-	const observer = new IntersectionObserver(
-		(entries) => {
-			for (const entry of entries) {
-				const id = (entry.target as HTMLElement).id;
-				if (entry.isIntersecting) visible.add(id);
-				else visible.delete(id);
-			}
-			const top = order.find((id) => visible.has(id));
-			activeHeading.set(top ?? null);
-		},
-		{ rootMargin: '-90px 0px -70% 0px' }
-	);
+	function update() {
+		raf = 0;
+		let active: string | null = null;
+		for (const h of headings) {
+			const top = h.getBoundingClientRect().top;
+			if (top <= ACTIVE_OFFSET) active = h.id;
+			else break;
+		}
+		// Fall back to the first heading when the page is at the very top
+		// (no heading has crossed the threshold yet).
+		if (!active && headings[0]) active = headings[0].id;
+		activeHeading.set(active);
+	}
 
-	for (const h of headings) observer.observe(h);
-	if (order[0]) activeHeading.set(order[0]);
+	function schedule() {
+		if (raf) return;
+		raf = requestAnimationFrame(update);
+	}
+
+	update();
+	window.addEventListener('scroll', schedule, { passive: true });
+	window.addEventListener('resize', schedule);
 
 	return {
 		destroy() {
-			observer.disconnect();
+			if (raf) cancelAnimationFrame(raf);
+			window.removeEventListener('scroll', schedule);
+			window.removeEventListener('resize', schedule);
 			activeHeading.set(null);
 		}
 	};
