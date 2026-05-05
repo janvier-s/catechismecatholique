@@ -92,8 +92,7 @@ export const GET: RequestHandler = async ({ url, fetch, platform }) => {
 	// 1-edit fuzzy matches are too aggressive (e.g. `maitre`→`naitre`).
 	const raw = ms.search(q, {
 		combineWith: 'AND',
-		prefix: (term) => term.length >= 4,
-		boost: { title: 2 }
+		prefix: (term) => term.length >= 4
 	});
 	const ranked = applyPhraseBoost(raw, tokens).slice(0, 30);
 	const hits: SearchResultDoc[] = ranked.map((r) => ({

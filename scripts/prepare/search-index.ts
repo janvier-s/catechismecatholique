@@ -35,19 +35,18 @@ export function buildSearchIndex(
 	const docs: SearchDoc[] = [];
 
 	for (const p of paragraphs) {
-		const ctx = contexts[p.number];
-		const titleParts = [
-			ctx?.part?.title,
-			ctx?.section?.title,
-			ctx?.chapter?.title,
-			ctx?.article?.title
-		].filter(Boolean);
+		// Don't index the breadcrumb (Part › Section › Chapter › Article) in
+		// the searchable `title` field. The breadcrumb is navigation context,
+		// not content; indexing it lets a query like "image de Dieu" pick up
+		// every paragraph inside an article titled "Je crois en Dieu le Père"
+		// just because the breadcrumb contains "Dieu". Body text alone is
+		// the right unit.
 		docs.push({
 			id: `p:${p.number}`,
 			kind: 'paragraph',
 			number: p.number,
 			text: stripHtml(p.text_html),
-			title: titleParts.join(' › ')
+			title: ''
 		});
 	}
 
