@@ -139,24 +139,59 @@ function splitTermAndLatin(raw: string): { term: string; latin?: string } {
 	return { term: titleCaseFrench(m[1]!.trim()), latin: titleCaseLatin(m[2]!.trim()) };
 }
 
+// Proper nouns whose canonical capitalization we restore wherever they appear.
+// Patterns are matched case-insensitively so this works on both lowercased
+// head-words and source-cased subentry labels. Order from longest to shortest
+// so multi-word phrases ("Esprit Saint") don't get partially overwritten by
+// later single-word rules.
+const PROPER_NOUNS: ReadonlyArray<[RegExp, string]> = [
+	[/\btrès\s+sainte\s+trinité\b/giu, 'Très Sainte Trinité'],
+	[/\bnouveau\s+testament\b/giu, 'Nouveau Testament'],
+	[/\bancien\s+testament\b/giu, 'Ancien Testament'],
+	[/\besprit\s+saint\b/giu, 'Esprit Saint'],
+	// Persons / divine names
+	[/\bjésus\b/giu, 'Jésus'],
+	[/\bjesus\b/giu, 'Jésus'],
+	[/\bdieu\b/giu, 'Dieu'],
+	[/\bchrist\b/giu, 'Christ'],
+	[/\bmarie\b/giu, 'Marie'],
+	// Institutions / scriptures
+	[/\béglise\b/giu, 'Église'],
+	[/\beglise\b/giu, 'Église'],
+	[/\bbible\b/giu, 'Bible'],
+	// Place names
+	[/\bjérusalem\b/giu, 'Jérusalem'],
+	[/\bbethléem\b/giu, 'Bethléem'],
+	[/\bnazareth\b/giu, 'Nazareth'],
+	[/\bgalilée\b/giu, 'Galilée'],
+	[/\bsinaï\b/giu, 'Sinaï'],
+	[/\bégypte\b/giu, 'Égypte'],
+	[/\bbabylone\b/giu, 'Babylone'],
+	[/\bcapharnaüm\b/giu, 'Capharnaüm'],
+	[/\brome\b/giu, 'Rome'],
+	[/\bisraël\b/giu, 'Israël'],
+	[/\bisrael\b/giu, 'Israël'],
+	// Liturgical / feasts
+	[/\bannonciation\b/giu, 'Annonciation'],
+	[/\bmagnificat\b/giu, 'Magnificat'],
+	[/\bvisitation\b/giu, 'Visitation'],
+	[/\bavent\b/giu, 'Avent'],
+	[/\bpentecôte\b/giu, 'Pentecôte'],
+	[/\bcarême\b/giu, 'Carême'],
+	[/\bpâques\b/giu, 'Pâques'],
+	[/\bpâque\b/giu, 'Pâque']
+];
+
+function capitalizeProperNouns(s: string): string {
+	let out = s;
+	for (const [re, replacement] of PROPER_NOUNS) out = out.replace(re, replacement);
+	return out;
+}
+
 // Source uses ALL CAPS for the headword. Render as initial-cap with the rest
 // lowercase, but preserve interior casing of proper nouns we know about.
 function titleCaseFrench(s: string): string {
-	const lower = s
-		.toLowerCase()
-		// Restore casing on common French proper nouns embedded in head-words.
-		.replace(/\bjesus\b/g, 'Jésus')
-		.replace(/\bdieu\b/g, 'Dieu')
-		.replace(/\bchrist\b/g, 'Christ')
-		.replace(/\besprit saint\b/g, 'Esprit Saint')
-		.replace(/\beglise\b/g, 'Église')
-		.replace(/\bisraël\b/g, 'Israël')
-		.replace(/\bisrael\b/g, 'Israël')
-		.replace(/\bmarie\b/g, 'Marie')
-		.replace(/\bnouveau testament\b/g, 'Nouveau Testament')
-		.replace(/\bancien testament\b/g, 'Ancien Testament')
-		.replace(/\bbible\b/g, 'Bible')
-		.replace(/\btrès sainte trinité\b/g, 'Très Sainte Trinité');
+	const lower = capitalizeProperNouns(s.toLowerCase());
 	return lower.charAt(0).toUpperCase() + lower.slice(1);
 }
 function titleCaseLatin(s: string): string {
@@ -174,9 +209,9 @@ function parseSubEntry(node: ParseNode): GlossaryFrSubEntry | null {
 	// when the prose itself closes on a quoted phrase or proper noun
 	// (e.g. Abba's `« Abba Père », 683, 742, 1303, ...`). Strip either form.
 	const beforeRefs = fullText.replace(/\s*[,:]\s*\d[\s\d,;.\-–]*\.?$/, '').trim();
-	const label = beforeRefs.replace(/[.,;:]\s*$/, '').trim();
-	if (!label) return null;
-	return { label, refs };
+	const stripped = beforeRefs.replace(/[.,;:]\s*$/, '').trim();
+	if (!stripped) return null;
+	return { label: capitalizeProperNouns(stripped), refs };
 }
 
 // "Voir : Consécration, Sacrement(s), Transsubstantiation" — a cross-ref
