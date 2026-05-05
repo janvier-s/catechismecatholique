@@ -150,9 +150,19 @@
 		const baseHref = `/ccc/${partSlug}/${sectionSlug}/${ch.slug}`;
 		const out: Item[] = [];
 		const detail = activeChapter && activeChapter.slug === ch.slug ? activeChapter : null;
+		// Always build the rich tree from whatever article data is available.
+		// Structure-level articles already carry `headings` (recursive), so we
+		// can render the full article→Roman→sub_heading nesting before the
+		// chapter detail finishes loading. en_brefs and paragraphes only exist
+		// on the detail and layer in once it arrives. Without this, navigating
+		// between chapters briefly flashed a flat article-only tree before the
+		// detail re-expanded the new active chapter.
+		const articlesSource = (detail?.articles as Article[] | undefined) ?? ch.articles;
+		const enBrefs = detail?.en_brefs ?? [];
+		const chapterHeadings = detail?.headings ?? ch.headings;
 
-		if (detail) {
-			for (const a of detail.articles as Article[]) {
+		{
+			for (const a of articlesSource) {
 				const articleHref = `${baseHref}/${a.slug}`;
 				const articleParas = a.paragraphs;
 				const articleMin = articleParas.length > 0 ? articleParas[0]! : 0;
@@ -175,7 +185,7 @@
 						item: { title: h.title, href: `${articleHref}#${h.id}` }
 					});
 				}
-				for (const block of detail.en_brefs ?? []) {
+				for (const block of enBrefs) {
 					if (block.paragraphs.length === 0) continue;
 					const firstP = block.paragraphs[0]!;
 					if (firstP < articleMin || firstP > articleMax) continue;
@@ -270,40 +280,31 @@
 					children: articleChildren.length > 0 ? articleChildren : undefined
 				});
 			}
-			if (detail.articles.length === 0) {
-				for (const h of detail.headings) {
+			if (articlesSource.length === 0) {
+				// Chapter has no articles — fall back to chapter-level headings
+				// + en_brefs.
+				for (const h of chapterHeadings) {
 					out.push({ title: h.title, href: `${baseHref}#${h.id}` });
 				}
-				// Chapter-level en_brefs (when no articles exist)
-				for (const block of detail.en_brefs ?? []) {
+				for (const block of enBrefs) {
 					if (block.paragraphs.length === 0) continue;
 					const firstP = block.paragraphs[0];
 					out.push({ title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` });
 				}
 			} else {
-				// Any en_brefs not assigned to an article (shouldn't happen with new logic, but
-				// fall back to chapter-level if their first paragraph isn't in any article)
+				// Any en_brefs not associated with an article go at chapter level.
 				const inAnyArticle = (firstP: number) =>
-					detail.articles.some((a) => {
+					articlesSource.some((a) => {
 						const ps = a.paragraphs;
 						return ps.length > 0 && firstP >= ps[0]! && firstP <= ps[ps.length - 1]!;
 					});
-				for (const block of detail.en_brefs ?? []) {
+				for (const block of enBrefs) {
 					if (block.paragraphs.length === 0) continue;
 					const firstP = block.paragraphs[0]!;
 					if (!inAnyArticle(firstP)) {
 						out.push({ title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` });
 					}
 				}
-			}
-		} else {
-			for (const a of ch.articles) {
-				out.push({
-					title: a.title,
-					number: a.number,
-					typeLabel: 'Article',
-					href: `${baseHref}/${a.slug}`
-				});
 			}
 		}
 		return out;

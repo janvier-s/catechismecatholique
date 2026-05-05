@@ -132,10 +132,8 @@
 			{@const href =
 				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.prevArticle.slug}`}
 			<a class="article-nav-link prev" href={href}>
-				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
-					>← Précédent</span
-				>
-				<span class="font-heading text-[15px] text-foreground">
+				<span class="article-nav-eyebrow">← Précédent</span>
+				<span class="article-nav-title">
 					{data.prevArticle.number ? `Article ${data.prevArticle.number}. ` : ''}{data.prevArticle.title}
 				</span>
 			</a>
@@ -144,10 +142,8 @@
 				class="article-nav-link prev"
 				href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
 			>
-				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
-					>← Retour au chapitre</span
-				>
-				<span class="font-heading text-[15px] text-foreground">
+				<span class="article-nav-eyebrow">← Retour au chapitre</span>
+				<span class="article-nav-title">
 					{data.chapter.title}
 				</span>
 			</a>
@@ -157,10 +153,8 @@
 			{@const href =
 				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.nextArticle.slug}`}
 			<a class="article-nav-link next" href={href}>
-				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
-					>Suivant →</span
-				>
-				<span class="font-heading text-[15px] text-foreground">
+				<span class="article-nav-eyebrow">Suivant →</span>
+				<span class="article-nav-title">
 					{data.nextArticle.number ? `Article ${data.nextArticle.number}. ` : ''}{data.nextArticle.title}
 				</span>
 			</a>
@@ -168,10 +162,8 @@
 			{@const href =
 				`/ccc/${data.chapter.next.part_slug}/${data.chapter.next.section_slug}/${data.chapter.next.slug}`}
 			<a class="article-nav-link next" href={href}>
-				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
-					>Chapitre suivant →</span
-				>
-				<span class="font-heading text-[15px] text-foreground">
+				<span class="article-nav-eyebrow">Chapitre suivant →</span>
+				<span class="article-nav-title">
 					{data.chapter.next.title}
 				</span>
 			</a>
@@ -185,7 +177,7 @@
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.15rem;
+		gap: 0.2rem;
 		padding: 0.85rem 1rem;
 		background: var(--color-panel);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
@@ -207,5 +199,22 @@
 	}
 	.article-nav-link.next {
 		text-align: right;
+	}
+	.article-nav-eyebrow {
+		font-family: var(--font-ui);
+		font-size: 11px;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		color: var(--color-muted);
+	}
+	.article-nav-title {
+		font-family: var(--font-heading);
+		font-size: 15px;
+		line-height: 1.3;
+		color: var(--color-fg);
+	}
+	.article-nav-link:hover .article-nav-title {
+		color: var(--color-accent-text);
 	}
 </style>
