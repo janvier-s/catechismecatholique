@@ -386,9 +386,6 @@
 						onclick={close}
 					>
 						<span class="m-row-label">Prologue</span>
-						{#if prologue.range}
-							<span class="m-row-range">{fmtRange(prologue.range)}</span>
-						{/if}
 					</a>
 				{/if}
 				<ol class="m-list" role="none">
@@ -438,9 +435,6 @@
 										>
 											<span class="cell-tag">Ouverture</span>
 											<span class="cell-title">Prologue</span>
-											{#if it.item.range}
-												<span class="cell-range">{fmtRange(it.item.range)}</span>
-											{/if}
 										</a>
 									</li>
 								{:else}
@@ -896,16 +890,6 @@
 		line-height: 1.35;
 		color: var(--color-muted);
 	}
-	.cell-range {
-		font-family: var(--font-ui);
-		font-size: 0.6rem;
-		font-weight: 500;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		color: var(--color-subtle);
-		font-variant-numeric: oldstyle-nums;
-	}
-
 	.cell-chevron {
 		flex: 0 0 auto;
 		font-family: var(--font-heading);
@@ -1016,15 +1000,6 @@
 		font-style: italic;
 		font-size: 0.95rem;
 		margin-bottom: 0.3rem;
-	}
-	.m-row-range {
-		font-family: var(--font-ui);
-		font-size: 0.62rem;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		color: var(--color-subtle);
-		font-style: normal;
-		font-variant-numeric: oldstyle-nums;
 	}
 	.m-numeral {
 		text-align: center;
