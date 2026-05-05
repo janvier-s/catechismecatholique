@@ -10,7 +10,7 @@
 	// number that belongs to any En Bref block. The body loop renders the
 	// summary box at the FIRST paragraph and skips the rest so they don't
 	// double-render as regular ParagraphViews.
-	const enBrefStartMap = $derived(() => {
+	const enBrefStartMap = $derived.by(() => {
 		const map = new Map<number, { paragraphs: number[] }>();
 		for (const block of data.enBrefBlocks ?? []) {
 			if (block.paragraphs.length > 0) map.set(block.paragraphs[0]!, block);
@@ -79,8 +79,8 @@
 	<h1 class="font-heading text-4xl font-semibold mt-1 mb-8 text-heading">{data.article.title}</h1>
 
 	{#each data.paragraphs as p (p.number)}
-		{#if enBrefStartMap().has(p.number)}
-			{@const block = enBrefStartMap().get(p.number)!}
+		{#if enBrefStartMap.has(p.number)}
+			{@const block = enBrefStartMap.get(p.number)!}
 			{@const records = block.paragraphs
 				.map((n) => data.enBrefParagraphMap?.[n])
 				.filter((x): x is Paragraph => Boolean(x))}
@@ -161,16 +161,19 @@
 			</a>
 		{:else if data.chapter.next}
 			{@const next = data.chapter.next}
-			{@const routeViaSection = next.crosses_section && next.section_has_intro}
-			{@const href = routeViaSection
-				? `/ccc/${next.part_slug}/${next.section_slug}`
-				: `/ccc/${next.part_slug}/${next.section_slug}/${next.slug}`}
+			{@const viaPart = next.crosses_part && next.part_has_intro}
+			{@const viaSection = !viaPart && next.crosses_section && next.section_has_intro}
+			{@const href = viaPart
+				? `/ccc/${next.part_slug}`
+				: viaSection
+					? `/ccc/${next.part_slug}/${next.section_slug}`
+					: `/ccc/${next.part_slug}/${next.section_slug}/${next.slug}`}
 			<a class="article-nav-link next" href={href}>
 				<span class="article-nav-eyebrow">
-					{routeViaSection ? 'Section suivante →' : 'Chapitre suivant →'}
+					{viaPart ? 'Partie suivante →' : viaSection ? 'Section suivante →' : 'Chapitre suivant →'}
 				</span>
 				<span class="article-nav-title">
-					{routeViaSection ? next.section_title : next.title}
+					{viaPart ? next.part_title : viaSection ? next.section_title : next.title}
 				</span>
 			</a>
 		{/if}

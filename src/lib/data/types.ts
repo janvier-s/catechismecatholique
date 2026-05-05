@@ -76,6 +76,15 @@ export interface ChapterAdjacent {
 	/** True when the neighbor's section has intro paragraphs that the linear
 	 *  reader would otherwise skip. */
 	section_has_intro?: boolean;
+	/** True when this neighbor lives in a different PART than the current
+	 *  chapter, AND the target part has intro paragraphs. The footer routes
+	 *  through the part page in that case so the part-level preamble (e.g.
+	 *  Part 2's "Pourquoi la Liturgie?") is read in order. */
+	crosses_part?: boolean;
+	/** Title of the neighbor's part (for footer labeling). */
+	part_title?: string;
+	/** True when the neighbor's part has intro paragraphs. */
+	part_has_intro?: boolean;
 }
 
 export interface ChapterArticle {

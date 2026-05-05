@@ -23,6 +23,7 @@ export function buildChapterFiles(
 		partSlug: string;
 		partTitle: string;
 		partNumber?: number;
+		partHasIntro: boolean;
 		sectionSlug: string;
 		sectionTitle: string;
 		sectionNumber?: number;
@@ -30,6 +31,7 @@ export function buildChapterFiles(
 	};
 	const flat: Flat[] = [];
 	for (const part of structure.parts) {
+		const partHasIntro = (part.intro_paragraphs ?? []).length > 0;
 		for (const section of part.sections) {
 			const sectionHasIntro = (section.intro_paragraphs ?? []).length > 0;
 			for (const c of section.chapters) {
@@ -38,6 +40,7 @@ export function buildChapterFiles(
 					partSlug: part.slug,
 					partTitle: part.title,
 					partNumber: part.number,
+					partHasIntro,
 					sectionSlug: section.slug,
 					sectionTitle: section.title,
 					sectionNumber: section.number,
@@ -49,15 +52,19 @@ export function buildChapterFiles(
 
 	function adjacent(neighbor: Flat | undefined, current: Flat): ChapterAdjacent | undefined {
 		if (!neighbor) return undefined;
-		const crosses = neighbor.sectionSlug !== current.sectionSlug;
+		const crossesSection = neighbor.sectionSlug !== current.sectionSlug;
+		const crossesPart = neighbor.partSlug !== current.partSlug;
 		return {
 			slug: neighbor.chapter.slug,
 			title: neighbor.chapter.title,
 			part_slug: neighbor.partSlug,
 			section_slug: neighbor.sectionSlug,
-			crosses_section: crosses || undefined,
-			section_title: crosses ? neighbor.sectionTitle : undefined,
-			section_has_intro: crosses && neighbor.sectionHasIntro ? true : undefined
+			crosses_section: crossesSection || undefined,
+			section_title: crossesSection ? neighbor.sectionTitle : undefined,
+			section_has_intro: crossesSection && neighbor.sectionHasIntro ? true : undefined,
+			crosses_part: crossesPart || undefined,
+			part_title: crossesPart ? neighbor.partTitle : undefined,
+			part_has_intro: crossesPart && neighbor.partHasIntro ? true : undefined
 		};
 	}
 

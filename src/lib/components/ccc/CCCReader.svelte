@@ -18,7 +18,11 @@
 		| { kind: 'paragraphe'; paragraphe: { number: number; title: string } }
 		| { kind: 'heading'; heading: ChapterHeading };
 
-	const insertionsByParagraph = (() => {
+	// $derived so the maps recompute when the user navigates to a different
+	// chapter (the component instance is reused with new `chapter` props).
+	// IIFEs only ran once at mount and left these stale — manifested as the
+	// chapter's headings + article anchors disappearing on every nav.
+	const insertionsByParagraph = $derived.by(() => {
 		const map = new Map<number, Insertion[]>();
 		const push = (n: number, ins: Insertion) => {
 			const arr = map.get(n) ?? [];
@@ -36,16 +40,16 @@
 			for (const h of a.headings) push(h.paragraph_start, { kind: 'heading', heading: h });
 		}
 		return map;
-	})();
+	});
 
 	// First-paragraph-of-en_bref → block; all en_bref paragraph numbers (so we can skip them in the body)
-	const enBrefStartMap = (() => {
+	const enBrefStartMap = $derived.by(() => {
 		const map = new Map<number, { paragraphs: number[] }>();
 		for (const block of chapter.en_brefs) {
 			if (block.paragraphs.length > 0) map.set(block.paragraphs[0]!, block);
 		}
 		return map;
-	})();
+	});
 	const enBrefAllNumbers = $derived(new Set<number>(chapter.en_brefs.flatMap((b) => b.paragraphs)));
 
 	const chapterLabel = $derived(chapter.number ? `Chapitre ${chapter.number}` : 'Chapitre');
@@ -134,36 +138,44 @@
 		aria-label="Chapitre précédent ou suivant"
 	>
 		{#if chapter.prev}
-			{@const prevViaSection = chapter.prev.crosses_section && chapter.prev.section_has_intro}
+			{@const prev = chapter.prev}
+			{@const viaPart = prev.crosses_part && prev.part_has_intro}
+			{@const viaSection = !viaPart && prev.crosses_section && prev.section_has_intro}
 			<a
 				class="chapter-nav-link prev"
-				href={prevViaSection
-					? `/ccc/${chapter.prev.part_slug}/${chapter.prev.section_slug}`
-					: `/ccc/${chapter.prev.part_slug}/${chapter.prev.section_slug}/${chapter.prev.slug}`}
+				href={viaPart
+					? `/ccc/${prev.part_slug}`
+					: viaSection
+						? `/ccc/${prev.part_slug}/${prev.section_slug}`
+						: `/ccc/${prev.part_slug}/${prev.section_slug}/${prev.slug}`}
 			>
 				<span class="chapter-nav-eyebrow">
-					← {prevViaSection ? 'Section précédente' : 'Chapitre précédent'}
+					← {viaPart ? 'Partie précédente' : viaSection ? 'Section précédente' : 'Chapitre précédent'}
 				</span>
 				<span class="chapter-nav-title">
-					{prevViaSection ? chapter.prev.section_title : chapter.prev.title}
+					{viaPart ? prev.part_title : viaSection ? prev.section_title : prev.title}
 				</span>
 			</a>
 		{:else}
 			<span class="chapter-nav-spacer"></span>
 		{/if}
 		{#if chapter.next}
-			{@const routeViaSection = chapter.next.crosses_section && chapter.next.section_has_intro}
+			{@const next = chapter.next}
+			{@const viaPart = next.crosses_part && next.part_has_intro}
+			{@const viaSection = !viaPart && next.crosses_section && next.section_has_intro}
 			<a
 				class="chapter-nav-link next"
-				href={routeViaSection
-					? `/ccc/${chapter.next.part_slug}/${chapter.next.section_slug}`
-					: `/ccc/${chapter.next.part_slug}/${chapter.next.section_slug}/${chapter.next.slug}`}
+				href={viaPart
+					? `/ccc/${next.part_slug}`
+					: viaSection
+						? `/ccc/${next.part_slug}/${next.section_slug}`
+						: `/ccc/${next.part_slug}/${next.section_slug}/${next.slug}`}
 			>
 				<span class="chapter-nav-eyebrow">
-					{routeViaSection ? 'Section suivante →' : 'Chapitre suivant →'}
+					{viaPart ? 'Partie suivante →' : viaSection ? 'Section suivante →' : 'Chapitre suivant →'}
 				</span>
 				<span class="chapter-nav-title">
-					{routeViaSection ? chapter.next.section_title : chapter.next.title}
+					{viaPart ? next.part_title : viaSection ? next.section_title : next.title}
 				</span>
 			</a>
 		{:else}
