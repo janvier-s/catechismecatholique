@@ -68,7 +68,7 @@
 									{#if e.totalRefs > 0}
 										{e.totalRefs} {e.totalRefs > 1 ? 'renvois' : 'renvoi'}
 										{#if e.seeAlso?.length}
-											<span aria-hidden="true" class="mr-1.5">•</span>{e.seeAlso.length}
+											<span aria-hidden="true"> • </span>{e.seeAlso.length}
 											{e.seeAlso.length > 1 ? 'liens' : 'lien'}
 										{/if}
 									{:else if e.seeAlso?.length}
