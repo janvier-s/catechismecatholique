@@ -238,6 +238,7 @@
 	bind:this={containerEl}
 	class="prose-paragraph leading-relaxed"
 	data-paragraph
+	data-in-panel={inPanel ? 'true' : undefined}
 >
 	{@html html}
 </div>

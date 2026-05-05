@@ -289,6 +289,13 @@
 	font-size: var(--reader-font-size, 17px);
 	line-height: var(--reader-line-height, 1.7);
 }
+/* StudyPanel content shrinks one pixel below the reader's chosen size
+   and tightens its leading — the panel column is much narrower than the
+   main reader, so the reader's line-height reads loose at that width. */
+.prose-paragraph[data-paragraph][data-in-panel='true'] {
+	font-size: calc(var(--reader-font-size, 17px) - 1px);
+	line-height: 1.55;
+}
 html[data-justified='true'] .prose-paragraph {
 	text-align: justify;
 	hyphens: auto;
