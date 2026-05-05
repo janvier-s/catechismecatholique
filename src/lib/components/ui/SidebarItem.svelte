@@ -23,10 +23,12 @@
 		if (itemHref === target || itemHref === base) return true;
 		// (b) target lives inside item's scope (item is an ancestor)
 		if (itemHref + '#' === target.slice(0, itemHref.length + 1)) return true;
-		// (c) hash match across paths: heading entries use article-prefixed
-		//     hrefs (chapter/article-1#h) but on the chapter page scroll-spy
-		//     produces chapter#h. Match when the hashes agree and the item's
-		//     path is a deeper version of the target's path.
+		// (c) hash match across paths: heading and en_bref entries are
+		//     prefixed at one structural level (e.g. chapter for en_bref,
+		//     article for headings) while activeHref may be produced by
+		//     scroll-spy at another level. Match when the hashes agree and
+		//     the two paths are along the same chapter prefix — i.e. one
+		//     is an ancestor of the other.
 		const iIdx = itemHref.indexOf('#');
 		const aIdx = target.indexOf('#');
 		if (iIdx >= 0 && aIdx >= 0) {
@@ -35,7 +37,8 @@
 			if (iHash === aHash) {
 				const iPath = itemHref.slice(0, iIdx);
 				const aPath = target.slice(0, aIdx);
-				if (iPath !== aPath && iPath.startsWith(aPath)) return true;
+				if (iPath === aPath) return true;
+				if (iPath.startsWith(aPath) || aPath.startsWith(iPath)) return true;
 			}
 		}
 		return false;
@@ -68,7 +71,8 @@
 		if (iHash !== aHash) return false;
 		const iPath = item.href.slice(0, iIdx);
 		const aPath = activeHref.slice(0, aIdx);
-		return iPath !== aPath && iPath.startsWith(aPath);
+		if (iPath === aPath) return false; // already covered by exact match
+		return iPath.startsWith(aPath) || aPath.startsWith(iPath);
 	});
 	// Highlight the deepest entry whose href is a prefix of activeHref. An
 	// exact match wins; otherwise this entry only highlights when none of
