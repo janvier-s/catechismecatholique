@@ -24,6 +24,40 @@
 		if (fontDropdownOpen) positionFontMenu();
 	}
 
+	// Close the font dropdown when the user switches tabs — otherwise it
+	// floats orphaned over the new tab's content.
+	$effect(() => {
+		// Read activeTab so this effect retracks on change.
+		activeTab;
+		fontDropdownOpen = false;
+	});
+
+	// Outside-click + Escape for the font dropdown. ModeToggle's handler
+	// closes the whole popover when clicking outside `[data-prefs-menu]`,
+	// so we only need to handle clicks INSIDE the popover that fall outside
+	// the font menu's own surface.
+	function onFontDocClick(e: MouseEvent) {
+		if (!fontDropdownOpen) return;
+		if (!(e.target instanceof Element)) return;
+		if (e.target.closest('[data-font-menu]')) return;
+		fontDropdownOpen = false;
+	}
+	function onFontKeydown(e: KeyboardEvent) {
+		if (e.key === 'Escape' && fontDropdownOpen) {
+			fontDropdownOpen = false;
+			fontTriggerEl?.focus();
+		}
+	}
+	$effect(() => {
+		if (!fontDropdownOpen) return;
+		document.addEventListener('click', onFontDocClick, true);
+		document.addEventListener('keydown', onFontKeydown);
+		return () => {
+			document.removeEventListener('click', onFontDocClick, true);
+			document.removeEventListener('keydown', onFontKeydown);
+		};
+	});
+
 	// Auto is intentionally omitted — users want an explicit choice here.
 	const THEME_SWATCHES = [
 		{ id: 'light' as const, label: 'Clair', bg: '#f8f5ef', fg: '#1c1710', lines: '#c8bfb0' },
@@ -119,13 +153,14 @@
 				</div>
 			</div>
 
-			<div bind:this={fontSectionEl}>
+			<div bind:this={fontSectionEl} data-font-menu>
 				<span class="block mb-2 text-muted text-[13px]">Police</span>
 				<button
 					type="button"
 					bind:this={fontTriggerEl}
 					class="w-full border border-border rounded px-3 py-2 bg-background text-foreground text-left flex items-center justify-between text-[14px] font-medium"
 					style="font-family: {activeFont.stack};"
+					aria-haspopup="listbox"
 					aria-expanded={fontDropdownOpen}
 					onclick={() => (fontDropdownOpen ? closeFontMenu() : openFontMenu())}
 				>
@@ -327,6 +362,8 @@
 {#if fontDropdownOpen}
 	<div
 		data-prefs-menu
+		data-font-menu
+		role="listbox"
 		class="fixed bg-panel border border-border rounded shadow-lg z-[var(--z-floating)] overflow-hidden"
 		style:top="{fontMenuPos.top}px"
 		style:left="{fontMenuPos.left}px"
