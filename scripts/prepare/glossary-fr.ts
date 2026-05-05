@@ -170,7 +170,10 @@ function parseSubEntry(node: ParseNode): GlossaryFrSubEntry | null {
 	const fullText = textOf(node).replace(/\s+/g, ' ').trim();
 	if (!fullText) return null;
 	const refs = extractRefs(node);
-	const beforeRefs = fullText.replace(/\s*:\s*[\d\s,;.\-–]+$/, '').trim();
+	// Source labels usually end with ": <refs>" but some end with ", <refs>"
+	// when the prose itself closes on a quoted phrase or proper noun
+	// (e.g. Abba's `« Abba Père », 683, 742, 1303, ...`). Strip either form.
+	const beforeRefs = fullText.replace(/\s*[,:]\s*\d[\s\d,;.\-–]*\.?$/, '').trim();
 	const label = beforeRefs.replace(/[.,;:]\s*$/, '').trim();
 	if (!label) return null;
 	return { label, refs };
