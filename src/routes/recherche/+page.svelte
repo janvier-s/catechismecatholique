@@ -230,9 +230,6 @@
 
 <main class="mx-auto max-w-[60rem] px-6 py-10">
 	<header class="mb-8 text-center">
-		<p class="font-ui text-[11px] uppercase tracking-[0.2em] text-muted mb-3">
-			La recherche du Catéchisme
-		</p>
 		<form class="search-form mx-auto max-w-[640px]" onsubmit={handleSubmit}>
 			<div class="search-line">
 				<input
@@ -340,10 +337,6 @@
 			<p class="font-body italic text-muted text-[16px]">
 				Aucun résultat pour «&nbsp;{data.q}&nbsp;».
 			</p>
-			<p class="mt-4 font-ui text-[12px] text-muted leading-relaxed">
-				Les accents et les œ/oe sont ignorés ; les recherches de moins de 2 caractères ne sont pas
-				effectuées.
-			</p>
 			<p class="mt-6 font-ui text-[13px]">
 				<a class="browse-link" href="/glossaire?q={encodeURIComponent(data.q)}"
 					>Parcourir le Glossaire pour ce terme →</a
@@ -441,14 +434,22 @@
 	}
 	.search-line {
 		position: relative;
-		border-bottom: 1px solid var(--color-border);
-		transition: border-color 120ms ease, border-bottom-width 120ms ease;
 		display: flex;
 		align-items: baseline;
+		background: var(--color-panel);
+		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
+		border-radius: 6px;
+		padding: 0 0.85rem;
+		transition:
+			border-color 120ms ease,
+			box-shadow 120ms ease;
+	}
+	.search-line:hover {
+		border-color: color-mix(in srgb, var(--color-fg) 35%, transparent);
 	}
 	.search-line:focus-within {
-		border-bottom-color: var(--color-accent);
-		box-shadow: 0 1.5px 0 0 var(--color-accent);
+		border-color: var(--color-accent);
+		box-shadow: 0 0 0 1px var(--color-accent);
 	}
 	.search-input {
 		flex: 1;
@@ -456,9 +457,9 @@
 		background: transparent;
 		border: 0;
 		outline: none;
-		padding: 0.75rem 0.25rem;
+		padding: 0.7rem 0;
 		font-family: var(--font-body);
-		font-size: 1.125rem;
+		font-size: 1.05rem;
 		color: var(--color-fg);
 	}
 	.search-input::placeholder {
@@ -471,18 +472,17 @@
 	}
 	.search-placeholder {
 		position: absolute;
-		left: 0.25rem;
+		left: 0.85rem;
 		top: 50%;
 		transform: translateY(-50%);
 		pointer-events: none;
 		color: var(--color-muted);
 		font-family: var(--font-body);
-		font-style: italic;
-		font-size: 1.125rem;
+		font-size: 1.05rem;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		max-width: calc(100% - 0.5rem);
+		max-width: calc(100% - 1.7rem);
 	}
 	.search-placeholder.hidden {
 		display: none;
