@@ -4,7 +4,12 @@
 	import ModeToggle from './ModeToggle.svelte';
 	import CatechismDropdown from './CatechismDropdown.svelte';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import { detectIntent } from '$lib/utils/searchIntent';
+
+	// Hide the global search on /recherche — the page owns its own input there
+	// and we don't want two affordances competing for the same query.
+	const onRecherche = $derived(page.url.pathname === '/recherche');
 </script>
 
 <header class="border-b border-border bg-background sticky top-0 z-[var(--z-modal)]">
@@ -15,6 +20,7 @@
 		</a>
 
 		<div class="flex-1"></div>
+		{#if !onRecherche}
 		<form
 			class="hidden lg:block w-full max-w-[460px]"
 			onsubmit={(e) => {
@@ -58,6 +64,7 @@
 				</span>
 			</div>
 		</form>
+		{/if}
 		<div class="flex-1"></div>
 
 		<nav class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none">
