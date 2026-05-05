@@ -121,7 +121,7 @@
 	<div class="flex-1 flex flex-col min-h-0">
 		<div
 			bind:this={otContainer}
-			class="overflow-y-auto flex-1 py-[6px] nav-scroll"
+			class="overflow-y-auto flex-1 py-[6px] styled-scroll"
 			class:hidden={activeTestament !== 'OT'}
 		>
 			{#each OT_BOOKS as book (book.slug)}
@@ -163,7 +163,7 @@
 
 		<div
 			bind:this={ntContainer}
-			class="overflow-y-auto flex-1 py-[6px] nav-scroll"
+			class="overflow-y-auto flex-1 py-[6px] styled-scroll"
 			class:hidden={activeTestament !== 'NT'}
 		>
 			{#each NT_BOOKS as book (book.slug)}
@@ -205,22 +205,3 @@
 	</div>
 </div>
 
-<style>
-	.nav-scroll {
-		scrollbar-width: thin;
-		scrollbar-color: color-mix(in srgb, currentColor 25%, transparent) transparent;
-	}
-	.nav-scroll::-webkit-scrollbar {
-		width: 6px;
-	}
-	.nav-scroll::-webkit-scrollbar-track {
-		background: transparent;
-	}
-	.nav-scroll::-webkit-scrollbar-thumb {
-		background: color-mix(in srgb, currentColor 25%, transparent);
-		border-radius: 3px;
-	}
-	.nav-scroll::-webkit-scrollbar-thumb:hover {
-		background: color-mix(in srgb, currentColor 40%, transparent);
-	}
-</style>

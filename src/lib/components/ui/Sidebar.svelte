@@ -254,7 +254,7 @@
 			</button>
 		</div>
 		<nav
-			class="flex-1 overflow-y-auto p-3 font-ui styled-scroll"
+			class="flex-1 overflow-y-auto p-3 font-ui styled-scroll styled-scroll-accent"
 			aria-label="Plan du Catéchisme"
 			style="scrollbar-gutter: stable;"
 		>
@@ -267,28 +267,3 @@
 	</aside>
 {/if}
 
-<style>
-	.styled-scroll {
-		scrollbar-width: thin;
-		scrollbar-color: color-mix(in srgb, var(--color-accent) 50%, transparent)
-			color-mix(in srgb, var(--color-border) 40%, transparent);
-	}
-	.styled-scroll::-webkit-scrollbar {
-		width: 7px;
-		-webkit-appearance: none;
-	}
-	.styled-scroll::-webkit-scrollbar-track {
-		background: color-mix(in srgb, var(--color-border) 40%, transparent);
-	}
-	.styled-scroll::-webkit-scrollbar-thumb {
-		background: color-mix(in srgb, var(--color-accent) 50%, transparent);
-		border-radius: 4px;
-		border: 1px solid transparent;
-		background-clip: padding-box;
-		min-height: 40px;
-	}
-	.styled-scroll::-webkit-scrollbar-thumb:hover {
-		background: color-mix(in srgb, var(--color-accent) 70%, transparent);
-		background-clip: padding-box;
-	}
-</style>

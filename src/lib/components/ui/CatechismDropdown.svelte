@@ -387,7 +387,7 @@
 					<!-- COL 1: PARTIES -->
 					<div class="col col-parts">
 						<p class="col-head">Parties</p>
-						<ul class="col-list" role="none">
+						<ul class="col-list styled-scroll" role="none">
 							{#each col1Items as it, i (it.kind === 'prologue' ? 'prologue' : it.item.slug)}
 								{#if it.kind === 'prologue'}
 									<li>
@@ -460,7 +460,7 @@
 						{#if col2Items.length === 0}
 							<p class="col-empty">—</p>
 						{:else}
-							<ul class="col-list" role="none">
+							<ul class="col-list styled-scroll" role="none">
 								{#each col2Items as section, i (section.slug)}
 									{@const isActive = activeSectionSlug === section.slug}
 									<li>
@@ -504,7 +504,7 @@
 								{sectionDirectArticles.length > 0 ? '—' : '—'}
 							</p>
 						{:else}
-							<ul class="col-list" role="none">
+							<ul class="col-list styled-scroll" role="none">
 								{#each col3Items as chap, i (chap.slug)}
 									{@const isActive = activeChapterSlug === chap.slug}
 									<li>
@@ -546,7 +546,7 @@
 						{#if col4Items.length === 0}
 							<p class="col-empty">—</p>
 						{:else}
-							<ul class="col-list" role="none">
+							<ul class="col-list styled-scroll" role="none">
 								{#each col4Items as art, i (art.slug)}
 									<li>
 										<a
@@ -787,22 +787,6 @@
 		padding: 0.5rem 0.6rem;
 		margin: 0;
 		opacity: 0.6;
-	}
-
-	/* Styled scroll inside columns */
-	.col-list::-webkit-scrollbar {
-		width: 6px;
-	}
-	.col-list::-webkit-scrollbar-thumb {
-		background: color-mix(in srgb, var(--color-fg) 14%, transparent);
-		border-radius: 3px;
-	}
-	.col-list::-webkit-scrollbar-track {
-		background: transparent;
-	}
-	.col-list {
-		scrollbar-width: thin;
-		scrollbar-color: color-mix(in srgb, var(--color-fg) 14%, transparent) transparent;
 	}
 
 	/* Cells (shared) --------------------------------------------------- */
