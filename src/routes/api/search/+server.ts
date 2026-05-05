@@ -73,23 +73,24 @@ export const GET: RequestHandler = async ({ url, fetch, platform }) => {
 	const q = (url.searchParams.get('q')?.trim() ?? '').slice(0, MAX_QUERY_LEN);
 	if (q.length < 2) return json({ q, hits: [] });
 
-	// Tokenize the query and drop stop words. If nothing meaningful remains
-	// (a query of only "le est" or similar), refuse to search — those queries
-	// would otherwise match nearly every paragraph in the catechism.
+	// Reject queries that consist of nothing but stop words ("le", "le est",
+	// etc.) — they'd match nearly every paragraph and aren't meaningful.
+	// Stop words inside a multi-word query are kept (e.g. "image de Dieu"
+	// stays as written).
 	const tokens = searchTokenizer(q);
-	const contentTokens = tokens.filter((t) => !FR_STOP_WORDS.has(t));
-	if (contentTokens.length === 0) return json({ q, hits: [] });
+	if (tokens.length === 0 || tokens.every((t) => FR_STOP_WORDS.has(t))) {
+		return json({ q, hits: [] });
+	}
 
 	const ms = await loadIndex(platform, fetch);
-	// AND combination: every content-bearing token must match. With OR
-	// (MiniSearch's default), a query like "image de Dieu" matches any
-	// paragraph containing just "Dieu" — irrelevant for a corpus where the
-	// short word appears almost everywhere.
+	// AND combination: every token must match. With OR (MiniSearch's default),
+	// a query like "image de Dieu" matched any paragraph containing just
+	// "Dieu" — irrelevant for a corpus where that word appears everywhere.
 	// Restrict prefix expansion to tokens of length ≥ 4 so common short French
 	// words don't pull in unintended matches.
 	// Fuzzy is disabled: with the catechism's curated French vocabulary, even
 	// 1-edit fuzzy matches are too aggressive (e.g. `maitre`→`naitre`).
-	const raw = ms.search(contentTokens.join(' '), {
+	const raw = ms.search(q, {
 		combineWith: 'AND',
 		prefix: (term) => term.length >= 4,
 		boost: { title: 2 }
