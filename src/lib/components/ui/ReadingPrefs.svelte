@@ -111,7 +111,7 @@
 				type="button"
 				class="flex-1 py-2.5 text-[11px] uppercase tracking-[0.12em] font-semibold border-b-2 -mb-px transition-colors
 					{activeTab === tab.id
-					? 'border-accent text-accent'
+					? 'border-accent text-accent-text'
 					: 'border-transparent text-subtle hover:text-foreground'}"
 				onclick={() => (activeTab = tab.id)}
 			>
@@ -143,8 +143,8 @@
 							type="button"
 							class="flex-1 py-1.5 border rounded text-xs transition-colors
 								{$prefs.lineHeight === opt.value
-								? 'bg-accent/15 text-accent border-accent'
-								: 'border-border text-foreground hover:text-accent'}"
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
 							onclick={() => updatePref('lineHeight', opt.value)}
 						>
 							{opt.label}
@@ -216,8 +216,8 @@
 							type="button"
 							class="flex-1 py-1.5 border rounded text-xs
 								{$prefs.columnWidth === opt.value
-								? 'bg-accent/15 text-accent border-accent'
-								: 'border-border text-foreground hover:text-accent'}"
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
 							onclick={() => updatePref('columnWidth', opt.value)}
 						>
 							{opt.label}
@@ -233,8 +233,8 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{!$prefs.justifiedText
-							? 'bg-accent/15 text-accent border-accent'
-							: 'border-border text-foreground hover:text-accent'}"
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
 						onclick={() => updatePref('justifiedText', false)}
 					>
 						À gauche
@@ -243,8 +243,8 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.justifiedText
-							? 'bg-accent/15 text-accent border-accent'
-							: 'border-border text-foreground hover:text-accent'}"
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
 						onclick={() => updatePref('justifiedText', true)}
 					>
 						Justifié
@@ -259,8 +259,8 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.crossRefsLayout === 'inline'
-							? 'bg-accent/15 text-accent border-accent'
-							: 'border-border text-foreground hover:text-accent'}"
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
 						onclick={() => updatePref('crossRefsLayout', 'inline')}
 					>
 						En ligne
@@ -269,8 +269,8 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.crossRefsLayout === 'side'
-							? 'bg-accent/15 text-accent border-accent'
-							: 'border-border text-foreground hover:text-accent'}"
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
 						onclick={() => updatePref('crossRefsLayout', 'side')}
 					>
 						En marge
@@ -285,8 +285,8 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{!$prefs.inlineAsMarkers
-							? 'bg-accent/15 text-accent border-accent'
-							: 'border-border text-foreground hover:text-accent'}"
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
 						onclick={() => updatePref('inlineAsMarkers', false)}
 					>
 						En ligne
@@ -295,8 +295,8 @@
 						type="button"
 						class="flex-1 py-1.5 border rounded text-xs
 							{$prefs.inlineAsMarkers
-							? 'bg-accent/15 text-accent border-accent'
-							: 'border-border text-foreground hover:text-accent'}"
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
 						onclick={() => updatePref('inlineAsMarkers', true)}
 					>
 						En exposant
@@ -390,8 +390,8 @@
 			{/if}
 			<button
 				type="button"
-				class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent/10 hover:text-accent
-					{$prefs.fontFamily === f.id ? 'text-accent' : 'text-foreground'}"
+				class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent/10 hover:text-accent-text
+					{$prefs.fontFamily === f.id ? 'text-accent-text' : 'text-foreground'}"
 				style="font-family: {f.stack};"
 				onclick={() => {
 					updatePref('fontFamily', f.id);
@@ -403,8 +403,8 @@
 		{/each}
 		<button
 			type="button"
-			class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent/10 hover:text-accent border-t border-border
-				{$prefs.fontFamily === DYSLEXIA_FONT.id ? 'text-accent' : 'text-foreground'}"
+			class="w-full text-left px-3 py-2 text-[14px] hover:bg-accent/10 hover:text-accent-text border-t border-border
+				{$prefs.fontFamily === DYSLEXIA_FONT.id ? 'text-accent-text' : 'text-foreground'}"
 			style="font-family: {DYSLEXIA_FONT.stack};"
 			onclick={() => {
 				updatePref('fontFamily', DYSLEXIA_FONT.id);
@@ -428,6 +428,16 @@
 		justify-content: center;
 	}
 
+	/* Inactive segmented-pill border — `--color-border` reads too quiet on
+	   the warm panel; this pulls a stronger hairline derived from the
+	   foreground colour so the controls are visibly bounded at rest. */
+	.pill-border {
+		border-color: color-mix(in srgb, var(--color-fg) 22%, transparent);
+	}
+	.pill-border:hover {
+		border-color: color-mix(in srgb, var(--color-fg) 35%, transparent);
+	}
+
 	/* Hairline checkbox — native input is visually hidden but kept in flow
 	   for keyboard + a11y. The adjacent .prefs-check span is the visual
 	   surface and reflects checked state via the serif checkmark glyph. */
@@ -449,7 +459,7 @@
 		width: 16px;
 		height: 16px;
 		flex: none;
-		border: 1px solid var(--color-border);
+		border: 1px solid color-mix(in srgb, var(--color-fg) 30%, transparent);
 		border-radius: 2px;
 		background: transparent;
 		transition: border-color 120ms ease;
@@ -465,7 +475,7 @@
 		font-family: var(--font-body);
 		font-size: 12px;
 		line-height: 1;
-		color: var(--color-accent);
+		color: var(--color-accent-text);
 		/* Optical alignment — Libre Baskerville's check sits a hair high. */
 		transform: translateY(-0.5px);
 	}
