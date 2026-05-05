@@ -232,6 +232,23 @@ async function main() {
 		writeFileSync(join(concordanceDir, 'manifest.json'), JSON.stringify(manifest));
 		writeFileSync(join(concordanceDir, 'by-paragraph.json'), JSON.stringify(byParagraph));
 
+		// Per-paragraph shards: each paragraph with concordance data gets its
+		// own /data/concordance/by-paragraph/{n}.json so the panel only fetches
+		// the entries it needs. The companion manifest lists which paragraph
+		// numbers exist so callers can skip 404s.
+		const byParagraphDir = join(concordanceDir, 'by-paragraph');
+		mkdirSync(byParagraphDir, { recursive: true });
+		const byParagraphNumbers: number[] = [];
+		for (const [pNumStr, entries] of Object.entries(byParagraph)) {
+			writeFileSync(join(byParagraphDir, `${pNumStr}.json`), JSON.stringify(entries));
+			byParagraphNumbers.push(parseInt(pNumStr, 10));
+		}
+		byParagraphNumbers.sort((a, b) => a - b);
+		writeFileSync(
+			join(concordanceDir, 'by-paragraph-manifest.json'),
+			JSON.stringify(byParagraphNumbers)
+		);
+
 		// Drop the old verse-index file if it still exists
 		try {
 			unlinkSync(join(OUT, 'ccc/concordance-verse-index.json'));

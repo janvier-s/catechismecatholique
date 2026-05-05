@@ -8,6 +8,7 @@ import type {
 	GlossaryBundle,
 	ConcordanceChapter,
 	ConcordanceByParagraph,
+	ConcordanceByParagraphEntry,
 	NclSectionMap,
 	NclBible
 } from './types';
@@ -29,6 +30,11 @@ let bibleVerseIndexPromise: Promise<BibleVerseIndex> | null = null;
 let concordanceManifestPromise: Promise<Record<string, number[]>> | null = null;
 let concordanceByParagraphPromise: Promise<ConcordanceByParagraph> | null = null;
 const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | null>>();
+let concordanceParagraphManifestPromise: Promise<Set<number>> | null = null;
+const concordanceByParagraphShardCache = new Map<
+	number,
+	Promise<ConcordanceByParagraphEntry[] | null>
+>();
 
 let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
@@ -96,6 +102,12 @@ export function loadConcordanceManifest(fetcher: Fetch = fetch): Promise<Record<
 	return concordanceManifestPromise;
 }
 
+/**
+ * @deprecated Loads the entire by-paragraph bundle. Prefer
+ * {@link loadConcordanceForParagraph} which fetches only the shard needed.
+ * Kept for any remaining consumers; the bundle is still emitted by the
+ * data pipeline today and will be removed in a future cleanup.
+ */
 export function loadConcordanceByParagraph(
 	fetcher: Fetch = fetch
 ): Promise<ConcordanceByParagraph> {
@@ -107,6 +119,48 @@ export function loadConcordanceByParagraph(
 		})();
 	}
 	return concordanceByParagraphPromise;
+}
+
+/**
+ * Load the manifest of paragraph numbers that have at least one concordance
+ * entry. Used by callers to avoid speculative 404s on shard fetches.
+ */
+export function loadConcordanceParagraphManifest(
+	fetcher: Fetch = fetch
+): Promise<Set<number>> {
+	if (!concordanceParagraphManifestPromise) {
+		concordanceParagraphManifestPromise = (async () => {
+			const r = await fetcher('/data/concordance/by-paragraph-manifest.json');
+			if (!r.ok) return new Set<number>();
+			const arr = (await r.json()) as number[];
+			return new Set(arr);
+		})();
+	}
+	return concordanceParagraphManifestPromise;
+}
+
+/**
+ * Lazily fetch the by-paragraph entries for a single CCC paragraph.
+ * Returns `null` when the paragraph has no concordance data (per the manifest)
+ * or the shard 404s. Cached at module scope so repeat opens of the same
+ * paragraph are free.
+ */
+export function loadConcordanceForParagraph(
+	n: number,
+	fetcher: Fetch = fetch
+): Promise<ConcordanceByParagraphEntry[] | null> {
+	let p = concordanceByParagraphShardCache.get(n);
+	if (!p) {
+		p = (async () => {
+			const manifest = await loadConcordanceParagraphManifest(fetcher);
+			if (!manifest.has(n)) return null;
+			const r = await fetcher(`/data/concordance/by-paragraph/${n}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as ConcordanceByParagraphEntry[];
+		})();
+		concordanceByParagraphShardCache.set(n, p);
+	}
+	return p;
 }
 
 export function loadConcordanceChapter(
