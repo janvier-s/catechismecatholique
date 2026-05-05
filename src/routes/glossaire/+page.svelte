@@ -15,7 +15,7 @@
 	<header class="mb-10">
 		<h1 class="font-heading text-4xl font-semibold mb-2">Glossaire</h1>
 		<p class="text-muted text-[15px] leading-relaxed">
-			{data.totalEntries} termes du Catéchisme, avec définitions et renvois aux paragraphes.
+			{data.totalEntries} termes du Catéchisme, avec définitions et renvois aux paragraphes.<br />
 			Parcourez par thème ou commencez par les notions les plus citées.
 		</p>
 		<p class="mt-3 font-ui text-[13px]">
