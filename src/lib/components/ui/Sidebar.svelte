@@ -111,12 +111,12 @@
 	// As the reader scrolls and activeHref shifts, keep the highlighted entry
 	// in view inside the (often-tall) sidebar. `block: 'nearest'` only scrolls
 	// when the entry is actually clipped, so manual sidebar scrolling isn't
-	// fought.
+	// fought. Also re-runs when activeChapter resolves so the deeper entries
+	// rendered after the chapter detail arrives can be scrolled into view.
 	$effect(() => {
 		if (!navEl) return;
 		const target = activeHref;
-		// Prefer an exact match; fall back to the bare URL when activeHref
-		// carries a hash that hasn't been rendered as a child entry.
+		void activeChapter;
 		const link =
 			navEl.querySelector<HTMLElement>(`a[href="${CSS.escape(target)}"]`) ??
 			navEl.querySelector<HTMLElement>(
@@ -127,6 +127,7 @@
 
 	// Load detailed chapter data when on a chapter URL OR when on a paragraph URL
 	// whose context places it in a chapter — so we can expand headings/en_brefs.
+	let chapterLoadGen = 0;
 	$effect(() => {
 		const m = page.url.pathname.match(/^\/ccc\/[^/]+\/[^/]+\/([^/]+)/);
 		const directSlug = m ? m[1]! : null;
@@ -137,11 +138,17 @@
 			activeChapter = null;
 			return;
 		}
+		// Skip the network round-trip when the slug already matches what's
+		// loaded — keeps the rich tree rendering uninterrupted while the
+		// reader navigates between articles within the same chapter.
+		if (activeChapter?.slug === slug) return;
+		const myGen = ++chapterLoadGen;
 		(async () => {
 			try {
-				activeChapter = await loadChapter(slug);
+				const ch = await loadChapter(slug);
+				if (myGen === chapterLoadGen) activeChapter = ch;
 			} catch {
-				activeChapter = null;
+				if (myGen === chapterLoadGen) activeChapter = null;
 			}
 		})();
 	});

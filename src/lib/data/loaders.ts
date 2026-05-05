@@ -48,8 +48,17 @@ export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragr
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
 }
 
+// Module-level cache: chapter JSON is static once built. The Sidebar reloads
+// the chapter on every navigation; without caching every click triggers a
+// network round-trip and the tree briefly flashes structure-only data.
+const chapterPromises = new Map<string, Promise<Chapter>>();
 export function loadChapter(slug: string, fetcher: Fetch = fetch): Promise<Chapter> {
-	return fetchJson<Chapter>(`/data/ccc/chapters/${slug}.json`, fetcher);
+	let p = chapterPromises.get(slug);
+	if (!p) {
+		p = fetchJson<Chapter>(`/data/ccc/chapters/${slug}.json`, fetcher);
+		chapterPromises.set(slug, p);
+	}
+	return p;
 }
 
 export function loadStructure(fetcher: Fetch = fetch): Promise<unknown> {
