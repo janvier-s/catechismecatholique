@@ -14,15 +14,29 @@
 		depth = 0
 	}: { item: Item; activeHref: string; depth?: number } = $props();
 
-	function isAncestorOrSelf(it: Item, target: string): boolean {
+	function itemMatches(itemHref: string, target: string): boolean {
 		// activeHref often carries a scroll-spy heading hash like
 		// "/ccc/x/y/chapter#some-heading" while the matching tree entries
-		// are stored without the hash. Match either the exact href or the
-		// bare URL so the chapter's ancestors (Section, Partie) still see
-		// themselves as ancestors of the hashed active path.
+		// are stored without the hash. Several match shapes have to work:
 		const base = target.replace(/#.*$/, '');
-		if (it.href === target || it.href === base) return true;
-		if (it.href + '#' === target.slice(0, it.href.length + 1)) return true;
+		// (a) exact match, or item is the bare URL parent of a hashed target
+		if (itemHref === target || itemHref === base) return true;
+		// (b) target lives inside item's scope (item is an ancestor)
+		if (itemHref + '#' === target.slice(0, itemHref.length + 1)) return true;
+		// (c) hash match across paths: heading entries use article-prefixed
+		//     hrefs (chapter/article-1#h) but on the chapter page scroll-spy
+		//     produces chapter#h. Match when the hashes agree and the item's
+		//     path is a deeper version of the target's path.
+		const [iPath, iHash] = itemHref.split('#');
+		const [aPath, aHash] = target.split('#');
+		if (iHash && aHash && iHash === aHash && iPath !== aPath && iPath.startsWith(aPath)) {
+			return true;
+		}
+		return false;
+	}
+
+	function isAncestorOrSelf(it: Item, target: string): boolean {
+		if (itemMatches(it.href, target)) return true;
 		if (!it.children) return false;
 		return it.children.some((c) => isAncestorOrSelf(c, target));
 	}
@@ -33,6 +47,18 @@
 	// Activehref may carry a heading hash; the bare-URL parent (e.g. an
 	// article entry) won't equal it but is still the visible context.
 	const isActiveBase = $derived(activeHref.startsWith(item.href + '#'));
+	// Heading entries in the sidebar use article-prefixed hrefs (e.g.
+	// /ccc/x/y/chapter/article-1#h-id) but on a chapter page the scroll-spy
+	// produces activeHref = /ccc/x/y/chapter#h-id (no article slug). When
+	// the hash matches and the item's path is a deeper version of the
+	// active path, treat it as the active entry. This is what lets the
+	// Roman headings sync as the reader scrolls a chapter page.
+	const isHashMatch = $derived.by(() => {
+		const [iPath, iHash] = item.href.split('#');
+		const [aPath, aHash] = activeHref.split('#');
+		if (!iHash || !aHash || iHash !== aHash) return false;
+		return iPath !== aPath && iPath.startsWith(aPath);
+	});
 	// Highlight the deepest entry whose href is a prefix of activeHref. An
 	// exact match wins; otherwise this entry only highlights when none of
 	// its descendants match (i.e. the active path lives inside this entry's
@@ -42,7 +68,7 @@
 			activeHref.startsWith(item.href + '#') ||
 			activeHref.startsWith(item.href + '/')
 	);
-	const isActive = $derived(isPrefixMatch && !isAncestor);
+	const isActive = $derived((isPrefixMatch || isHashMatch) && !isAncestor);
 
 	let manualExpanded: boolean | null = $state(null);
 	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
