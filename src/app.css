@@ -248,6 +248,11 @@
 		font-family: var(--font-body);
 		scroll-behavior: smooth;
 	}
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
 
 	body {
 		-webkit-font-smoothing: antialiased;

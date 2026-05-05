@@ -49,6 +49,7 @@
 	let structure: { parts: Part[] } | null = $state(null);
 	let activeChapter: Chapter | null = $state(null);
 	let paragraphContexts: Record<number, ParagraphContext> | null = $state(null);
+	let navEl: HTMLElement | undefined = $state();
 
 	$effect(() => {
 		(async () => {
@@ -103,6 +104,23 @@
 		const c = activeContext;
 		if (!c) return page.url.pathname;
 		return deepestHref(c);
+	});
+
+	// As the reader scrolls and activeHref shifts, keep the highlighted entry
+	// in view inside the (often-tall) sidebar. `block: 'nearest'` only scrolls
+	// when the entry is actually clipped, so manual sidebar scrolling isn't
+	// fought.
+	$effect(() => {
+		if (!navEl) return;
+		const target = activeHref;
+		// Prefer an exact match; fall back to the bare URL when activeHref
+		// carries a hash that hasn't been rendered as a child entry.
+		const link =
+			navEl.querySelector<HTMLElement>(`a[href="${CSS.escape(target)}"]`) ??
+			navEl.querySelector<HTMLElement>(
+				`a[href="${CSS.escape(target.replace(/#.*$/, ''))}"]`
+			);
+		link?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 	});
 
 	// Load detailed chapter data when on a chapter URL OR when on a paragraph URL
@@ -261,6 +279,7 @@
 			</button>
 		</div>
 		<nav
+			bind:this={navEl}
 			class="flex-1 overflow-y-auto p-3 font-ui styled-scroll styled-scroll-accent"
 			aria-label="Plan du Catéchisme"
 			style="scrollbar-gutter: stable;"
