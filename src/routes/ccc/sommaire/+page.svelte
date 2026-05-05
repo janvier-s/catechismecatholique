@@ -4,18 +4,44 @@
 	let { data }: { data: PageData } = $props();
 
 	type Range = { from: number; to: number };
+	type Heading = {
+		id: string;
+		level: number;
+		title: string;
+		paragraph_start: number;
+	};
 	type Article = {
 		slug: string;
 		title: string;
 		number?: number;
 		range?: Range;
+		headings?: Heading[];
 	};
+
+	type HeadingNode = { heading: Heading; children: Heading[] };
+
+	function nestHeadings(headings: Heading[] | undefined): HeadingNode[] {
+		if (!headings) return [];
+		const out: HeadingNode[] = [];
+		const sorted = headings.slice().sort((a, b) => a.paragraph_start - b.paragraph_start);
+		let current: HeadingNode | null = null;
+		for (const h of sorted) {
+			if (h.level >= 3 && current) {
+				current.children.push(h);
+			} else {
+				current = { heading: h, children: [] };
+				out.push(current);
+			}
+		}
+		return out;
+	}
 	type Chapter = {
 		slug: string;
 		title: string;
 		number?: number;
 		range?: Range;
 		articles: Article[];
+		headings?: Heading[];
 	};
 	type Section = {
 		slug: string;
@@ -125,14 +151,40 @@
 														<span class="row-range">{fmtRange(chap.range)}</span>
 													{/if}
 												</a>
+												{@const chapHref = `/ccc/${part.slug}/${section.slug}/${chap.slug}`}
+												{#if chap.articles.length === 0 && chap.headings?.length}
+													{@const tree = nestHeadings(chap.headings)}
+													<ul class="headings headings-chapter" role="list">
+														{#each tree as node (node.heading.id)}
+															<li>
+																<a class="row row-heading" href="{chapHref}#{node.heading.id}">
+																	<span class="label-title">{node.heading.title}</span>
+																	<span class="dotleader" aria-hidden="true"></span>
+																	<span class="row-range">{node.heading.paragraph_start}</span>
+																</a>
+																{#if node.children.length > 0}
+																	<ul class="sub-headings" role="list">
+																		{#each node.children as sh (sh.id)}
+																			<li>
+																				<a class="row row-subheading" href="{chapHref}#{sh.id}">
+																					<span class="label-title">{sh.title}</span>
+																					<span class="dotleader" aria-hidden="true"></span>
+																					<span class="row-range">{sh.paragraph_start}</span>
+																				</a>
+																			</li>
+																		{/each}
+																	</ul>
+																{/if}
+															</li>
+														{/each}
+													</ul>
+												{/if}
 												{#if chap.articles.length}
 													<ul class="articles" role="list">
 														{#each chap.articles as article (article.slug)}
+															{@const articleHref = `/ccc/${part.slug}/${section.slug}/${chap.slug}/${article.slug}`}
 															<li>
-																<a
-																	class="row row-article"
-																	href="/ccc/{part.slug}/{section.slug}/{chap.slug}/{article.slug}"
-																>
+																<a class="row row-article" href={articleHref}>
 																	<span class="row-label">
 																		<span class="label-tag-sm">Article {article.number}</span>
 																		<span class="label-title">{article.title}</span>
@@ -142,6 +194,39 @@
 																		<span class="row-range">{fmtRange(article.range)}</span>
 																	{/if}
 																</a>
+																{@const tree = nestHeadings(article.headings)}
+																{#if tree.length > 0}
+																	<ul class="headings" role="list">
+																		{#each tree as node (node.heading.id)}
+																			<li>
+																				<a
+																					class="row row-heading"
+																					href="{articleHref}#{node.heading.id}"
+																				>
+																					<span class="label-title">{node.heading.title}</span>
+																					<span class="dotleader" aria-hidden="true"></span>
+																					<span class="row-range">{node.heading.paragraph_start}</span>
+																				</a>
+																				{#if node.children.length > 0}
+																					<ul class="sub-headings" role="list">
+																						{#each node.children as sh (sh.id)}
+																							<li>
+																								<a
+																									class="row row-subheading"
+																									href="{articleHref}#{sh.id}"
+																								>
+																									<span class="label-title">{sh.title}</span>
+																									<span class="dotleader" aria-hidden="true"></span>
+																									<span class="row-range">{sh.paragraph_start}</span>
+																								</a>
+																							</li>
+																						{/each}
+																					</ul>
+																				{/if}
+																			</li>
+																		{/each}
+																	</ul>
+																{/if}
 															</li>
 														{/each}
 													</ul>
@@ -154,11 +239,9 @@
 								{#if section.articles_direct?.length}
 									<ul class="articles articles-direct" role="list">
 										{#each section.articles_direct as article (article.slug)}
+											{@const articleHref = `/ccc/${part.slug}/${section.slug}/${article.slug}`}
 											<li>
-												<a
-													class="row row-article"
-													href="/ccc/{part.slug}/{section.slug}/{article.slug}"
-												>
+												<a class="row row-article" href={articleHref}>
 													<span class="row-label">
 														<span class="label-tag-sm">Article {article.number}</span>
 														<span class="label-title">{article.title}</span>
@@ -168,6 +251,33 @@
 														<span class="row-range">{fmtRange(article.range)}</span>
 													{/if}
 												</a>
+												{@const tree = nestHeadings(article.headings)}
+												{#if tree.length > 0}
+													<ul class="headings" role="list">
+														{#each tree as node (node.heading.id)}
+															<li>
+																<a class="row row-heading" href="{articleHref}#{node.heading.id}">
+																	<span class="label-title">{node.heading.title}</span>
+																	<span class="dotleader" aria-hidden="true"></span>
+																	<span class="row-range">{node.heading.paragraph_start}</span>
+																</a>
+																{#if node.children.length > 0}
+																	<ul class="sub-headings" role="list">
+																		{#each node.children as sh (sh.id)}
+																			<li>
+																				<a class="row row-subheading" href="{articleHref}#{sh.id}">
+																					<span class="label-title">{sh.title}</span>
+																					<span class="dotleader" aria-hidden="true"></span>
+																					<span class="row-range">{sh.paragraph_start}</span>
+																				</a>
+																			</li>
+																		{/each}
+																	</ul>
+																{/if}
+															</li>
+														{/each}
+													</ul>
+												{/if}
 											</li>
 										{/each}
 									</ul>
@@ -505,6 +615,50 @@
 	}
 	.row-article .label-title {
 		font-style: normal;
+	}
+
+	/* ---- Heading rows (Roman + sub-heading) ----------------------------- */
+	.headings {
+		list-style: none;
+		padding: 0;
+		margin: 0.15rem 0 0.4rem 1.4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+	.headings-chapter {
+		margin-left: 2.5rem;
+	}
+	.sub-headings {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 0 1.4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+	.row-heading {
+		font-family: var(--font-ui);
+		font-size: 0.82rem;
+		font-weight: 500;
+		color: var(--color-fg);
+		line-height: 1.45;
+		padding-top: 0.1rem;
+		padding-bottom: 0.1rem;
+	}
+	.row-subheading {
+		font-family: var(--font-body);
+		font-size: 0.82rem;
+		font-weight: 400;
+		font-style: italic;
+		color: var(--color-subtle);
+		line-height: 1.45;
+		padding-top: 0.05rem;
+		padding-bottom: 0.05rem;
+	}
+	.row-heading .row-range,
+	.row-subheading .row-range {
+		font-size: 0.7rem;
 	}
 
 	/* ---- Footer fleuron ------------------------------------------------- */
