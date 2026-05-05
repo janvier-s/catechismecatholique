@@ -148,10 +148,13 @@ export interface NclSection {
 	ch: number; // chapter where the section header appears
 	startV: number; // first verse of the section
 	title: string; // already-French native title
-	/** Parallel-passage cross-reference parenthetical text from <p style="r">
-	 *  immediately following the section's <s>. Already includes outer parens.
-	 *  null if the section has no associated cross-ref paragraph. */
-	crossRefs: string | null;
+	/**
+	 * Heading level:
+	 * - 'major'      → <p style="ms1"> (e.g. "LES ORIGINES")
+	 * - 'section'    → <s style="s1">  (e.g. "Création du monde")
+	 * - 'subsection' → <s style="s2">  (detailed outline lines)
+	 */
+	level: 'major' | 'section' | 'subsection';
 }
 
 /** Per-book sections, sorted by (ch asc, startV asc). */
@@ -178,7 +181,6 @@ export interface ConcordancePericope {
 	startVerse: number; // first verse in THIS chapter (for multi-chapter ranges, capped to chapter start)
 	endVerse: number; // last verse in THIS chapter (capped to chapter end)
 	pericopeTitle: string | null;
-	pericopeCrossRefs: string | null; // parallel-passage parenthetical from the matched NCL section
 	cccRanges: CccRange[]; // contiguous CCC ranges, sorted by `from` asc
 }
 
@@ -197,7 +199,6 @@ export interface ConcordanceByParagraphEntry {
 	chapter: number;
 	verseRef: string; // "Genèse 3:1-24"
 	pericopeTitle: string | null;
-	pericopeCrossRefs: string | null; // parallel-passage parenthetical from the matched NCL section
 	startCh: number;
 	endCh: number;
 	startVerse: number; // first verse of the pericope's first chapter

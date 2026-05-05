@@ -2,9 +2,39 @@ import type { NclSection, NclSectionMap } from '../../src/lib/data/types';
 
 const BOOK_RE = /<book\s+[^>]*id="([A-Z0-9]+)"[^>]*>([\s\S]*?)<\/book>/gi;
 const CHAPTER_RE = /<c\s+[^>]*id="(\d+)"[^>]*\/?>/gi;
-const SECTION_RE = /<s\s+style="s1"[^>]*>([\s\S]*?)<\/s>/gi;
+// Major-section header: <p sfm="ms" style="ms1">...</p>
+const MAJOR_RE = /<p\b[^>]*style="ms1"[^>]*>([\s\S]*?)<\/p>/gi;
+// Section heading: <s style="s1">...</s>
+const SECTION_RE = /<s\b[^>]*style="s1"[^>]*>([\s\S]*?)<\/s>/gi;
+// Sub-section heading: <s ... style="s2">...</s> (often with level="2", may contain <sc>)
+const SUBSECTION_RE = /<s\b[^>]*style="s2"[^>]*>([\s\S]*?)<\/s>/gi;
 const VERSE_RE = /<v\s+[^>]*id="(\d+)"[^>]*\/?>/gi;
-const CROSSREF_RE = /<p\b[^>]*style="r"[^>]*>([\s\S]*?)<\/p>/gi;
+
+const HTML_ENTITIES: Record<string, string> = {
+	amp: '&',
+	lt: '<',
+	gt: '>',
+	quot: '"',
+	apos: "'",
+	nbsp: ' '
+};
+
+/** Strip HTML/XML tags, decode common entities, collapse whitespace. */
+function plainText(html: string): string {
+	const stripped = html.replace(/<[^>]+>/g, '');
+	const decoded = stripped.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z]+);/g, (full, body: string) => {
+		if (body.startsWith('#x') || body.startsWith('#X')) {
+			const cp = parseInt(body.slice(2), 16);
+			return Number.isFinite(cp) ? String.fromCodePoint(cp) : full;
+		}
+		if (body.startsWith('#')) {
+			const cp = parseInt(body.slice(1), 10);
+			return Number.isFinite(cp) ? String.fromCodePoint(cp) : full;
+		}
+		return HTML_ENTITIES[body] ?? full;
+	});
+	return decoded.replace(/\s+/g, ' ').trim();
+}
 
 export function parseNclSections(xml: string): NclSectionMap {
 	const out: NclSectionMap = {};
@@ -16,17 +46,26 @@ export function parseNclSections(xml: string): NclSectionMap {
 		const inner = bookMatch[2]!;
 		const sections: NclSection[] = [];
 
-		type Tok = { kind: 'c' | 's' | 'v' | 'r'; pos: number; value: string };
+		type Tok = {
+			kind: 'c' | 'major' | 'section' | 'subsection' | 'v';
+			pos: number;
+			value: string;
+		};
 		const toks: Tok[] = [];
-		for (const re of [CHAPTER_RE, SECTION_RE, VERSE_RE, CROSSREF_RE]) {
+
+		const collect = (re: RegExp, kind: Tok['kind']) => {
 			re.lastIndex = 0;
 			let m: RegExpExecArray | null;
 			while ((m = re.exec(inner))) {
-				const kind =
-					re === CHAPTER_RE ? 'c' : re === SECTION_RE ? 's' : re === VERSE_RE ? 'v' : 'r';
 				toks.push({ kind, pos: m.index, value: m[1]! });
 			}
-		}
+		};
+		collect(CHAPTER_RE, 'c');
+		collect(MAJOR_RE, 'major');
+		collect(SECTION_RE, 'section');
+		collect(SUBSECTION_RE, 'subsection');
+		collect(VERSE_RE, 'v');
+
 		toks.sort((a, b) => a.pos - b.pos);
 
 		let curCh = 0;
@@ -34,30 +73,33 @@ export function parseNclSections(xml: string): NclSectionMap {
 			const t = toks[i]!;
 			if (t.kind === 'c') {
 				curCh = parseInt(t.value, 10);
-			} else if (t.kind === 's') {
-				let nextV: number | null = null;
-				let crossRefs: string | null = null;
-				for (let j = i + 1; j < toks.length; j++) {
-					const next = toks[j]!;
-					// Stop scanning at the next section or chapter marker — these
-					// belong to a later section.
-					if (next.kind === 's' || next.kind === 'c') break;
-					if (next.kind === 'v' && nextV === null) {
-						nextV = parseInt(next.value, 10);
-					} else if (next.kind === 'r' && crossRefs === null) {
-						crossRefs = next.value.replace(/\s+/g, ' ').trim();
-						if (!crossRefs) crossRefs = null;
-					}
-					if (nextV !== null && crossRefs !== null) break;
+				continue;
+			}
+			if (t.kind !== 'major' && t.kind !== 'section' && t.kind !== 'subsection') continue;
+
+			// Find first verse that follows this heading. Stop at the next
+			// chapter marker (a `<c>` belongs to a different chapter). Other
+			// headings (major/section/subsection) may sit between this heading
+			// and its first verse — e.g. an ms1 immediately followed by an s1
+			// before any <v>. We just want the first verse ID we encounter.
+			let nextV: number | null = null;
+			for (let j = i + 1; j < toks.length; j++) {
+				const next = toks[j]!;
+				if (next.kind === 'c') break;
+				if (next.kind === 'v') {
+					nextV = parseInt(next.value, 10);
+					break;
 				}
-				if (curCh > 0 && nextV !== null) {
-					const title = t.value.replace(/\s+/g, ' ').trim();
-					if (title) {
-						sections.push({ ch: curCh, startV: nextV, title, crossRefs });
-					}
+			}
+
+			if (curCh > 0 && nextV !== null) {
+				const title = plainText(t.value);
+				if (title) {
+					sections.push({ ch: curCh, startV: nextV, title, level: t.kind });
 				}
 			}
 		}
+
 		sections.sort((a, b) => a.ch - b.ch || a.startV - b.startV);
 		if (sections.length > 0) out[bookId] = sections;
 	}

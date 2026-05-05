@@ -95,13 +95,6 @@
 							>
 								{p.pericopeTitle}
 							</h3>
-							{#if p.pericopeCrossRefs}
-								<p
-									class="font-body text-[12px] text-subtle text-center mt-1.5 leading-snug"
-								>
-									{p.pericopeCrossRefs}
-								</p>
-							{/if}
 							<div class="flex justify-center mt-3 mb-1">
 								<span class="block w-12 h-px bg-accent/30"></span>
 							</div>

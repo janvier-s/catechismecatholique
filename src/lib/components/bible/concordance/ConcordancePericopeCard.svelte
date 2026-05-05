@@ -15,31 +15,18 @@
 </script>
 
 <div class="pericope-detail">
-	<!-- Optional pericope title + cross-refs.
+	<!-- Optional pericope title.
 	     The verseRef is already shown in the sticky PanelShell header,
 	     so we don't repeat it here. -->
 	{#if pericope.pericopeTitle}
 		<h3 class="font-heading text-[20px] font-semibold leading-snug text-foreground">
 			{pericope.pericopeTitle}
 		</h3>
-		{#if pericope.pericopeCrossRefs}
-			<p class="font-body text-[13px] text-subtle leading-snug mt-1.5">
-				{pericope.pericopeCrossRefs}
-			</p>
-		{/if}
-	{:else if pericope.pericopeCrossRefs}
-		<p class="font-body text-[13px] text-subtle leading-snug">
-			{pericope.pericopeCrossRefs}
-		</p>
 	{/if}
 
 	<!-- Caption line: N paragraphes du Catéchisme se rapport(e|ent) à ce passage -->
 	{#if cccCount > 0}
-		<div
-			class="font-ui text-xs text-muted {pericope.pericopeTitle || pericope.pericopeCrossRefs
-				? 'mt-5'
-				: ''} mb-4"
-		>
+		<div class="font-ui text-xs text-muted {pericope.pericopeTitle ? 'mt-5' : ''} mb-4">
 			<span class="font-semibold text-accent tabular-nums">{cccCount}</span>
 			{pluralFr(cccCount, 'paragraphe')} du Catéchisme {cccCount === 1
 				? 'se rapporte'

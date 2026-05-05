@@ -26,9 +26,15 @@
 		chapterCounts?: Record<string, number>;
 	} = $props();
 
-	const sectionByVerse = $derived.by(() => {
-		const m = new Map<number, NclSection>();
-		for (const s of sections) m.set(s.startV, s);
+	// Multiple headings (e.g. a major-section + a section) can share the same
+	// startV. Group them so all of them render before that verse.
+	const sectionsByVerse = $derived.by(() => {
+		const m = new Map<number, NclSection[]>();
+		for (const s of sections) {
+			const arr = m.get(s.startV);
+			if (arr) arr.push(s);
+			else m.set(s.startV, [s]);
+		}
 		return m;
 	});
 
@@ -101,20 +107,32 @@
 		<ol class="list-none space-y-3">
 			{#each verses as v (v.v)}
 				{@const c = citedCount(v.v)}
-				{@const section = sectionByVerse.get(v.v)}
+				{@const headingsHere = sectionsByVerse.get(v.v) ?? []}
 
-				{#if section}
-					<li class="list-none mt-10 mb-4 first:mt-0">
-						<h2 class="font-heading text-[26px] font-semibold text-foreground leading-tight">
-							{section.title}
-						</h2>
-						{#if section.crossRefs}
-							<p class="mt-2 font-body text-[13px] text-subtle leading-snug">
-								{section.crossRefs}
+				{#each headingsHere as section, i (section.level + ':' + i)}
+					{#if section.level === 'major'}
+						<li class="list-none mt-16 mb-8 first:mt-2">
+							<div class="w-16 h-px bg-accent/70 mx-auto mb-4"></div>
+							<h2
+								class="font-heading text-[34px] font-bold leading-tight tracking-[0.04em] text-foreground text-center"
+							>
+								{section.title}
+							</h2>
+						</li>
+					{:else if section.level === 'section'}
+						<li class="list-none mt-10 mb-4 first:mt-0">
+							<h2 class="font-heading text-[26px] font-semibold text-foreground leading-tight">
+								{section.title}
+							</h2>
+						</li>
+					{:else}
+						<li class="list-none mt-6 mb-2">
+							<p class="font-body text-[15px] italic text-subtle leading-snug">
+								{section.title}
 							</p>
-						{/if}
-					</li>
-				{/if}
+						</li>
+					{/if}
+				{/each}
 
 				{@const active = isVerseActive(v.v)}
 				<li id="v{v.v}" class="transition-opacity" class:dim={dimNonCited && c === 0}>

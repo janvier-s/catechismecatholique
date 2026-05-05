@@ -83,13 +83,6 @@
 					<h4 class="font-heading text-[16px] leading-snug text-foreground text-center mt-2 px-2">
 						{entry.pericopeTitle}
 					</h4>
-				{/if}
-				{#if entry.pericopeCrossRefs}
-					<p class="font-body text-[11.5px] text-subtle text-center mt-1.5 leading-snug">
-						{entry.pericopeCrossRefs}
-					</p>
-				{/if}
-				{#if entry.pericopeTitle || entry.pericopeCrossRefs}
 					<div class="flex justify-center mt-3 mb-1">
 						<span class="block w-12 h-px bg-accent/30"></span>
 					</div>

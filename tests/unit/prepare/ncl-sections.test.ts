@@ -10,7 +10,7 @@ describe('parseNclSections', () => {
         <p style="p"><v id="1" bcv="GEN.3.1" />Le serpent…</p>
       </book>`;
 		expect(parseNclSections(xml)).toEqual({
-			GEN: [{ ch: 3, startV: 1, title: 'La faute et le châtiment', crossRefs: null }]
+			GEN: [{ ch: 3, startV: 1, title: 'La faute et le châtiment', level: 'section' }]
 		});
 	});
 
@@ -22,7 +22,14 @@ describe('parseNclSections', () => {
         <p><v id="4" bcv="GEN.2.4" />…</p>
       </book>`;
 		expect(parseNclSections(xml)).toEqual({
-			GEN: [{ ch: 2, startV: 4, title: "Création de l'homme et de la femme", crossRefs: null }]
+			GEN: [
+				{
+					ch: 2,
+					startV: 4,
+					title: "Création de l'homme et de la femme",
+					level: 'section'
+				}
+			]
 		});
 	});
 
@@ -48,8 +55,8 @@ describe('parseNclSections', () => {
       </book>`;
 		const result = parseNclSections(xml);
 		expect(result.GEN).toEqual([
-			{ ch: 4, startV: 1, title: 'Caïn et Abel', crossRefs: null },
-			{ ch: 4, startV: 25, title: 'Seth et ses descendants', crossRefs: null }
+			{ ch: 4, startV: 1, title: 'Caïn et Abel', level: 'section' },
+			{ ch: 4, startV: 25, title: 'Seth et ses descendants', level: 'section' }
 		]);
 	});
 
@@ -66,11 +73,11 @@ describe('parseNclSections', () => {
 		const result = parseNclSections(xml);
 		expect(result.GEN).toHaveLength(1);
 		expect(result.EXO).toEqual([
-			{ ch: 1, startV: 1, title: 'Les Hébreux en Égypte', crossRefs: null }
+			{ ch: 1, startV: 1, title: 'Les Hébreux en Égypte', level: 'section' }
 		]);
 	});
 
-	it('skips sections that are not s1 style (cross-references etc.)', () => {
+	it('skips sections that are not s1/s2 style (cross-references etc.)', () => {
 		const xml = `
       <book id="GEN">
         <c id="1" />
@@ -79,52 +86,72 @@ describe('parseNclSections', () => {
         <p><v id="1" bcv="GEN.1.1" /></p>
       </book>`;
 		expect(parseNclSections(xml).GEN).toEqual([
-			{ ch: 1, startV: 1, title: 'Création', crossRefs: null }
+			{ ch: 1, startV: 1, title: 'Création', level: 'section' }
 		]);
 	});
 
-	it('captures the cross-ref <p style="r"> after a section title', () => {
+	it('extracts ms1 major-section headers as level "major"', () => {
+		const xml = `
+      <book id="GEN">
+        <c id="1" />
+        <p sfm="ms" style="ms1">LES ORIGINES</p>
+        <s style="s1">Création du monde</s>
+        <p sfm="r" style="r">(2,4b-25 ; Job 38-39)</p>
+        <p style="p"><v id="1" bcv="GEN.1.1" />Au commencement...</p>
+      </book>`;
+		const result = parseNclSections(xml);
+		// Both major + section start at verse 1 of chapter 1; both are emitted.
+		expect(result.GEN).toEqual([
+			{ ch: 1, startV: 1, title: 'LES ORIGINES', level: 'major' },
+			{ ch: 1, startV: 1, title: 'Création du monde', level: 'section' }
+		]);
+	});
+
+	it('strips nested <w> tags from ms1 titles', () => {
+		const xml = `
+      <book id="EXO">
+        <c id="19" />
+        <p sfm="ms" style="ms1"><w s="H8147">DEUXIÈME</w>
+<w s="H4481">PARTIE</w>
+<w s="H3117">DU</w> SINAÏ A CADÈS.</p>
+        <p style="p"><v id="1" bcv="EXO.19.1" />text</p>
+      </book>`;
+		const result = parseNclSections(xml);
+		expect(result.EXO![0]).toEqual({
+			ch: 19,
+			startV: 1,
+			title: 'DEUXIÈME PARTIE DU SINAÏ A CADÈS.',
+			level: 'major'
+		});
+	});
+
+	it('extracts s2 sub-section headers, stripping <sc> tags', () => {
+		const xml = `
+      <book id="LEV">
+        <c id="27" />
+        <s level="2" style="s2"><sc>3. Chap. xxvii, 30-34 : Les dîmes.</sc> — Fruits (xxvii, 30, 31).</s>
+        <p style="p"><v id="30" bcv="LEV.27.30" />text</p>
+      </book>`;
+		const result = parseNclSections(xml);
+		expect(result.LEV![0]).toEqual({
+			ch: 27,
+			startV: 30,
+			title: '3. Chap. xxvii, 30-34 : Les dîmes. — Fruits (xxvii, 30, 31).',
+			level: 'subsection'
+		});
+	});
+
+	it('does not extract <p style="r"> cross-refs', () => {
 		const xml = `
       <book id="GEN">
         <c id="1" />
         <s style="s1">Création du monde</s>
-        <p sfm="r" style="r">(2,4b-25 ; Job 38-39 ; Psa 8 ; 104 ; Jn 1,1-3)</p>
+        <p sfm="r" style="r">(2,4b-25 ; Job 38-39)</p>
         <p style="p"><v id="1" bcv="GEN.1.1" />Au commencement...</p>
       </book>`;
 		const result = parseNclSections(xml);
-		expect(result.GEN![0]).toEqual({
-			ch: 1,
-			startV: 1,
-			title: 'Création du monde',
-			crossRefs: '(2,4b-25 ; Job 38-39 ; Psa 8 ; 104 ; Jn 1,1-3)'
-		});
-	});
-
-	it('sets crossRefs to null when no <p style="r"> follows the section', () => {
-		const xml = `
-      <book id="GEN">
-        <c id="3" />
-        <s style="s1">La faute et le châtiment</s>
-        <p style="p"><v id="1" bcv="GEN.3.1" />Le serpent...</p>
-      </book>`;
-		const result = parseNclSections(xml);
-		expect(result.GEN![0]!.crossRefs).toBeNull();
-	});
-
-	it('does not capture a cross-ref that belongs to the next section', () => {
-		// Section A has no <r>; section B does. The <r> after B should attach to B, not A.
-		const xml = `
-      <book id="GEN">
-        <c id="3" />
-        <s style="s1">La faute et le châtiment</s>
-        <p style="p"><v id="1" bcv="GEN.3.1" />text</p>
-        <c id="4" />
-        <s style="s1">Caïn et Abel</s>
-        <p sfm="r" style="r">(parallel)</p>
-        <p style="p"><v id="1" bcv="GEN.4.1" />text</p>
-      </book>`;
-		const result = parseNclSections(xml);
-		expect(result.GEN![0]!.crossRefs).toBeNull();
-		expect(result.GEN![1]!.crossRefs).toBe('(parallel)');
+		expect(result.GEN).toHaveLength(1);
+		expect(result.GEN![0]).not.toHaveProperty('crossRefs');
+		expect(result.GEN![0]!.title).toBe('Création du monde');
 	});
 });

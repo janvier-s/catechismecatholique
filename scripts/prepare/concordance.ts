@@ -408,19 +408,21 @@ export interface BuildStats {
 }
 
 /**
- * Strict match: a pericope inherits an NCL section's title only when the
- * pericope's startV matches that section's startV exactly. Sub-pericopes
- * starting mid-section get no title (and no crossRefs).
+ * Strict match: a pericope inherits an NCL section title only when the
+ * pericope's startV matches that section's startV exactly AND the section
+ * is at `'section'` level (s1). Major-section ms1 banners and detailed s2
+ * outline lines are Bible-reader concerns; the concordance just wants the
+ * pericope's section title.
  */
 function findEnclosingNclSection(
 	sections: NclSection[] | undefined,
 	ch: number,
 	startV: number
-): { title: string; crossRefs: string | null } | null {
+): { title: string } | null {
 	if (!sections) return null;
 	for (const s of sections) {
-		if (s.ch === ch && s.startV === startV) {
-			return { title: s.title, crossRefs: s.crossRefs };
+		if (s.level === 'section' && s.ch === ch && s.startV === startV) {
+			return { title: s.title };
 		}
 	}
 	return null;
@@ -551,7 +553,6 @@ export function buildConcordancePericopes(
 
 				const matched = findEnclosingNclSection(nclSections[usfx], ch, perStartV);
 				const title = matched?.title ?? null;
-				const crossRefs = matched?.crossRefs ?? null;
 				if (title === null) stats.pericopesWithoutTitle++;
 
 				const pericope: ConcordancePericope = {
@@ -561,7 +562,6 @@ export function buildConcordancePericopes(
 					startVerse: perStartV,
 					endVerse: perEndV,
 					pericopeTitle: title,
-					pericopeCrossRefs: crossRefs,
 					cccRanges: filteredRanges.map((r) => ({ ...r }))
 				};
 
@@ -597,7 +597,6 @@ export function buildConcordancePericopes(
 					chapter: startCh,
 					verseRef,
 					pericopeTitle: byParaMatched?.title ?? null,
-					pericopeCrossRefs: byParaMatched?.crossRefs ?? null,
 					startCh,
 					endCh,
 					startVerse: fromV ?? 1,
