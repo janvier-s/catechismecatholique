@@ -178,13 +178,15 @@
 
 		/* Stacking-context tokens. Keep these in lockstep with the layered UI:
 		   topbar < sticky chapter nav < panels (study/sidebar) < click-away
-		   overlay < dropdown menus < FloatingNav (Bible book picker). */
+		   overlay < dropdown menus < FloatingNav (Bible book picker) <
+		   modal (header menus that must overlay page-level popups). */
 		--z-topbar: 30;
 		--z-sticky: 40;
 		--z-panel: 50;
 		--z-overlay: 57;
 		--z-dropdown: 60;
 		--z-floating: 65;
+		--z-modal: 70;
 	}
 
 	[data-theme='sepia'] {
