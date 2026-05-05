@@ -24,10 +24,15 @@
 	const isAncestor = $derived(
 		item.children ? item.children.some((c) => isAncestorOrSelf(c, activeHref)) : false
 	);
+	// Activehref may carry a heading hash; the bare-URL parent (e.g. an
+	// article entry) won't equal it but is still the visible context.
+	const isActiveBase = $derived(activeHref.startsWith(item.href + '#'));
 
 	let manualExpanded: boolean | null = $state(null);
-	const expanded = $derived(manualExpanded ?? isAncestor);
 	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
+	const expanded = $derived(
+		manualExpanded ?? (isAncestor || isActiveBase || (isActive && hasChildren))
+	);
 </script>
 
 <li>

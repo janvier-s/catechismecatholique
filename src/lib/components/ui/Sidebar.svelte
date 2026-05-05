@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { fly } from 'svelte/transition';
 	import { sidebarOpen } from '$lib/stores/sidebar';
+	import { activeHeading } from '$lib/stores/scrollSpy';
 	import { loadStructure, loadChapter, loadParagraphContexts } from '$lib/data/loaders';
 	import type { Chapter, ParagraphContext } from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
@@ -92,7 +93,13 @@
 	}
 
 	const activeHref: string = $derived.by(() => {
-		if (activeParagraph === null) return page.url.pathname;
+		if (activeParagraph === null) {
+			// On non-paragraph URLs (article / chapter / section / part), append
+			// the scroll-spy heading hash so the Sidebar highlights the section
+			// the reader is currently in.
+			const hash = $activeHeading ? `#${$activeHeading}` : '';
+			return page.url.pathname + hash;
+		}
 		const c = activeContext;
 		if (!c) return page.url.pathname;
 		return deepestHref(c);

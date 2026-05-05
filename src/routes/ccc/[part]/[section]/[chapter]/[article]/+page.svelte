@@ -1,7 +1,46 @@
 <script lang="ts">
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
+	import { activeHeading } from '$lib/stores/scrollSpy';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
+
+	// Scroll-spy: keep the Sidebar's heading highlight in sync with whatever
+	// section the reader is currently looking at. The "active zone" is the
+	// strip just under the sticky topbar; when a heading sits inside it, that
+	// heading is current. The bottom rootMargin keeps a single heading active
+	// even when several are simultaneously on screen.
+	$effect(() => {
+		const headings = Array.from(document.querySelectorAll<HTMLElement>('main h2[id]'));
+		if (headings.length === 0) return;
+
+		const visible = new Set<string>();
+		const order = headings.map((h) => h.id);
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					const id = (entry.target as HTMLElement).id;
+					if (entry.isIntersecting) visible.add(id);
+					else visible.delete(id);
+				}
+				const top = order.find((id) => visible.has(id));
+				activeHeading.set(top ?? null);
+			},
+			{ rootMargin: '-90px 0px -70% 0px' }
+		);
+
+		for (const h of headings) observer.observe(h);
+
+		// Default to the first heading once the page settles, so the article
+		// entry expands with a section highlighted even before the user
+		// scrolls.
+		if (order[0]) activeHeading.set(order[0]);
+
+		return () => {
+			observer.disconnect();
+			activeHeading.set(null);
+		};
+	});
 </script>
 
 <svelte:head>
