@@ -2,10 +2,13 @@
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
-	function refLabel(refs: number[]): string {
-		// "1373, 1374, 1375" → "1373-1375" for compact display when contiguous.
-		if (refs.length === 0) return '';
-		const out: string[] = [];
+	type RefSegment = { label: string; first: number };
+
+	function refSegments(refs: number[]): RefSegment[] {
+		// "1373, 1374, 1375" → [{ label: "1373-1375", first: 1373 }] for
+		// compact display when contiguous.
+		if (refs.length === 0) return [];
+		const out: RefSegment[] = [];
 		let runStart = refs[0]!;
 		let prev = refs[0]!;
 		for (let i = 1; i <= refs.length; i++) {
@@ -14,13 +17,20 @@
 				prev = cur;
 				continue;
 			}
-			out.push(runStart === prev ? String(runStart) : `${runStart}-${prev}`);
+			out.push({
+				label: runStart === prev ? String(runStart) : `${runStart}-${prev}`,
+				first: runStart
+			});
 			if (cur !== undefined) {
 				runStart = cur;
 				prev = cur;
 			}
 		}
-		return out.join(', ');
+		return out;
+	}
+
+	function pluralFr(n: number, singular: string, plural: string): string {
+		return n === 1 ? singular : plural;
 	}
 </script>
 
@@ -31,15 +41,19 @@
 	{/if}
 </svelte:head>
 
+{#snippet backLink()}
+	<a
+		href={data.cluster ? `/glossaire/c/${data.cluster.id}` : '/glossaire'}
+		class="inline-flex items-center gap-1 font-ui text-sm text-muted hover:text-accent"
+	>
+		<span aria-hidden="true">←</span>
+		<span>Retour à {data.cluster?.label ?? 'glossaire'}</span>
+	</a>
+{/snippet}
+
 <main class="mx-auto max-w-reader px-6 py-10">
-	<nav class="mb-6 font-ui text-sm flex items-center gap-2">
-		<a
-			href={data.cluster ? `/glossaire/c/${data.cluster.id}` : '/glossaire'}
-			class="inline-flex items-center gap-1 text-muted hover:text-accent"
-		>
-			<span aria-hidden="true">←</span>
-			<span>Retour à {data.cluster?.label ?? 'glossaire'}</span>
-		</a>
+	<nav class="mb-6">
+		{@render backLink()}
 	</nav>
 
 	<header class="mb-6">
@@ -50,19 +64,22 @@
 	</header>
 
 	{#if data.entry.definition}
-		<section class="mb-8 p-4 rounded-md bg-accent/5 border-l-4 border-accent">
-			<p class="font-body text-[16px] leading-relaxed">{data.entry.definition}</p>
+		<section class="mb-10">
+			<p class="font-body text-[17px] leading-relaxed">{data.entry.definition}</p>
 		</section>
 	{/if}
 
 	{#if data.entry.directRefs.length > 0 && data.entry.subEntries.length === 0}
 		<section class="mb-8">
-			<p class="font-ui text-[12px] uppercase tracking-[0.15em] text-muted mb-2">Renvois</p>
+			<p class="font-ui text-[12px] uppercase tracking-[0.15em] text-muted mb-2">
+				{pluralFr(refSegments(data.entry.directRefs).length, 'Renvoi', 'Renvois')}
+			</p>
 			<p class="font-body text-[15px]">
-				{#each data.entry.directRefs as ref, i (ref)}
-					{#if i > 0},
-					{/if}
-					<a href="/ccc/{ref}" class="text-accent hover:underline tabular-nums">§{ref}</a>
+				{#each refSegments(data.entry.directRefs) as seg, i (seg.first)}
+					{#if i > 0}<span class="text-muted">,</span> {/if}
+					<a href="/ccc/{seg.first}" class="text-accent hover:underline tabular-nums"
+						>§{seg.label}</a
+					>
 				{/each}
 			</p>
 		</section>
@@ -71,16 +88,17 @@
 	{#if data.entry.subEntries.length > 0}
 		<section class="mb-8">
 			<h2 class="font-ui text-[12px] uppercase tracking-[0.15em] text-muted mb-3">
-				{data.entry.subEntries.length} aspects
+				{data.entry.subEntries.length}
+				{pluralFr(data.entry.subEntries.length, 'aspect', 'aspects')}
 			</h2>
 			<ul class="space-y-3">
 				{#each data.entry.subEntries as sub, i (sub.label + i)}
-					<li class="border-l-2 border-border pl-3">
-						<p class="font-body text-[15px] mb-1">{sub.label}</p>
-						<p class="font-ui text-[13px] tabular-nums">
-							{#each sub.refs as ref, j (ref)}
-								{#if j > 0}<span class="text-muted">,</span> {/if}
-								<a href="/ccc/{ref}" class="text-accent hover:underline">§{ref}</a>
+					<li>
+						<p class="font-body text-[16px] font-semibold mb-1">{sub.label}</p>
+						<p class="font-ui text-[12px] tabular-nums text-muted">
+							{#each refSegments(sub.refs) as seg, j (seg.first)}
+								{#if j > 0}<span>,</span> {/if}
+								<a href="/ccc/{seg.first}" class="text-accent hover:underline">§{seg.label}</a>
 							{/each}
 						</p>
 					</li>
@@ -109,13 +127,25 @@
 
 	{#if data.clusters.length > 0}
 		<aside class="mt-12 pt-6 border-t border-border">
-			<p class="font-ui text-[12px] text-muted">
-				Thème{data.clusters.length > 1 ? 's' : ''} :
-				{#each data.clusters as c, i (c.id)}
-					{#if i > 0}<span class="text-muted">,</span> {/if}
-					<a href="/glossaire/c/{c.id}" class="text-accent hover:underline">{c.label}</a>
-				{/each}
+			<p class="font-ui text-[11px] uppercase tracking-[0.15em] text-muted mb-2">
+				Thème{data.clusters.length > 1 ? 's' : ''}
 			</p>
+			<ul class="flex flex-wrap gap-2">
+				{#each data.clusters as c (c.id)}
+					<li>
+						<a
+							href="/glossaire/c/{c.id}"
+							class="inline-block px-2.5 py-0.5 rounded-full text-[11px] border border-border text-muted hover:border-accent hover:text-accent font-ui"
+						>
+							{c.label}
+						</a>
+					</li>
+				{/each}
+			</ul>
 		</aside>
 	{/if}
+
+	<nav class="mt-10">
+		{@render backLink()}
+	</nav>
 </main>
