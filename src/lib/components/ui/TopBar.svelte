@@ -53,6 +53,9 @@
 					class="search-input w-full h-10 pl-10 pr-3 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-border focus:border-transparent"
 					aria-label="Recherche"
 				/>
+				<span class="search-placeholder" aria-hidden="true">
+					Rechercher : <i>Eucharistie</i> ou 1324-1327
+				</span>
 			</div>
 		</form>
 		<div class="flex-1"></div>
@@ -68,8 +71,32 @@
 </header>
 
 <style>
-	/* Hide the placeholder while the search input is focused. */
-	.search-input:focus::placeholder {
+	/* Native placeholder is always hidden — the styled overlay below shows in
+	   its place so we can italicize the keyword example. */
+	.search-input::placeholder {
 		color: transparent;
+	}
+	.search-placeholder {
+		position: absolute;
+		left: 2.5rem; /* matches input pl-10 */
+		right: 0.75rem; /* matches input pr-3 */
+		top: 50%;
+		transform: translateY(-50%);
+		pointer-events: none;
+		color: var(--color-muted);
+		font-family: var(--font-ui);
+		font-size: 0.875rem; /* text-sm */
+		font-weight: 500;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		transition: opacity 80ms ease;
+	}
+	.search-placeholder i {
+		font-style: italic;
+	}
+	.search-input:focus ~ .search-placeholder,
+	.search-input:not(:placeholder-shown) ~ .search-placeholder {
+		opacity: 0;
 	}
 </style>

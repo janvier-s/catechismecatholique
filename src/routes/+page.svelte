@@ -33,46 +33,13 @@
 			<p class="tagline reveal r-tagline">Édition française définitive</p>
 
 			<h1 class="title" aria-label="Catéchisme de l'Église Catholique">
-				<svg
-					viewBox="0 0 1000 620"
-					xmlns="http://www.w3.org/2000/svg"
-					preserveAspectRatio="xMidYMid meet"
-					class="title-svg"
-					role="img"
-					aria-hidden="true"
-					focusable="false"
-				>
-					<text
-						class="line line-1 reveal r-line-1"
-						x="500"
-						y="160"
-						text-anchor="middle"
-						textLength="940"
-						lengthAdjust="spacingAndGlyphs"
-						font-size="170"
-						font-weight="700"
-					>Catéchisme</text>
-					<text
-						class="line line-2 reveal r-line-2"
-						x="500"
-						y="350"
-						text-anchor="middle"
-						textLength="940"
-						lengthAdjust="spacingAndGlyphs"
-						font-size="170"
-						font-weight="400"
-					>de l'Église</text>
-					<text
-						class="line line-3 reveal r-line-3"
-						x="500"
-						y="540"
-						text-anchor="middle"
-						textLength="940"
-						lengthAdjust="spacingAndGlyphs"
-						font-size="170"
-						font-weight="700"
-					>Catholique</text>
-				</svg>
+				<span class="line line-1 reveal r-line-1">Catéchisme</span>
+				<span class="line line-2 reveal r-line-2">
+					<span class="flank" aria-hidden="true"></span>
+					<i>de</i>
+					<span class="flank" aria-hidden="true"></span>
+				</span>
+				<span class="line line-3 reveal r-line-3">l'Église Catholique</span>
 			</h1>
 
 			<div class="ornament reveal r-ornament" aria-hidden="true">
@@ -166,25 +133,43 @@
 		padding-left: 0.32em; /* visually compensate trailing tracking */
 	}
 	.title {
-		width: clamp(300px, 38%, 520px);
-		margin: 0;
-		line-height: 1;
-		color: var(--color-heading, var(--color-fg));
-	}
-	.title-svg {
-		display: block;
-		width: 100%;
-		height: auto;
+		margin: 1.2rem 0 0;
 		font-family: 'Libre Baskerville', Georgia, serif;
-		fill: currentColor;
+		color: var(--color-heading, var(--color-fg));
+		text-align: center;
+		line-height: 1.05;
 	}
-	.title-svg text {
-		font-family: inherit;
-	}
-	/* Per-line reveal: each <text> animates its own opacity + translate. */
 	.line {
+		display: block;
 		opacity: 0;
 		transform: translateY(8px);
+	}
+	.line-1,
+	.line-3 {
+		font-weight: 700;
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+	}
+	.line-2 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75em;
+		font-weight: 400;
+		font-size: clamp(1rem, 2.1vw, 1.4rem);
+		color: var(--color-muted);
+		margin: 0.35em 0;
+	}
+	.line-2 i {
+		font-style: italic;
+	}
+	.flank {
+		display: inline-block;
+		width: clamp(2.25rem, 5vw, 4rem);
+		height: 1px;
+		background: currentColor;
+		opacity: 0.55;
 	}
 
 	.ornament {
@@ -192,7 +177,7 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 0.35rem;
-		margin-top: 1rem;
+		margin-top: 2rem;
 		margin-bottom: -0.5rem;
 	}
 	.fleuron {
@@ -381,7 +366,6 @@
 
 	/* Small viewports --------------------------------------------------- */
 	@media (max-width: 640px) {
-		.title { width: 88%; }
 		.daily-row {
 			grid-template-columns: 1fr;
 			gap: 0.5rem;
@@ -397,11 +381,15 @@
 
 	/* Short viewports — keep it on one screen at 1280×800. */
 	@media (max-height: 820px) {
-		.title { width: clamp(280px, 34%, 460px); }
+		.line-1,
+		.line-3 { font-size: clamp(2rem, 5vw, 3.5rem); }
+		.line-2 { font-size: clamp(1rem, 2.1vw, 1.4rem); }
 		.prose-teaser { font-size: 0.95rem; line-height: 1.65; }
 	}
 	@media (max-height: 720px) {
-		.title { width: clamp(260px, 30%, 420px); }
+		.line-1,
+		.line-3 { font-size: clamp(1.75rem, 4.5vw, 3rem); }
+		.line-2 { font-size: clamp(0.95rem, 1.9vw, 1.25rem); }
 		.prose-teaser { font-size: 0.9rem; line-height: 1.6; }
 	}
 </style>

@@ -1,43 +1,54 @@
-<!--
-  Static wordmark. Font-sizes per line were measured once in Libre Baskerville
-  to make each line render at exactly 200 viewBox units wide. Line 2 is set to
-  the same font-size as line 1; letter-spacing widens it from its narrower
-  regular-weight natural width up to the target width.
-
-  If the lines, font, or weights change, re-measure with:
-    document.querySelectorAll('.wordmark text').forEach(t => console.log(
-      t.textContent, t.getComputedTextLength()
-    ));
--->
-<svg
-	viewBox="0 0 200 116"
-	xmlns="http://www.w3.org/2000/svg"
-	preserveAspectRatio="xMidYMid meet"
-	class="wordmark fill-current"
-	role="img"
-	aria-label="Catéchisme de l'Église Catholique"
->
-	<text x="100" y="32" text-anchor="middle" font-size="32.5" font-weight="700">Catéchisme</text>
-	<text
-		x="100"
-		y="68"
-		text-anchor="middle"
-		font-size="32.5"
-		font-weight="400"
-		letter-spacing="3.45"
-	>de l'Église</text>
-	<text x="100" y="104" text-anchor="middle" font-size="34.3" font-weight="700">Catholique</text>
-</svg>
+<div class="wordmark" aria-label="Catéchisme de l'Église Catholique">
+	<span class="wm-line wm-line-1">Catéchisme</span>
+	<span class="wm-line wm-line-2">
+		<span class="wm-flank" aria-hidden="true"></span>
+		<i>de</i>
+		<span class="wm-flank" aria-hidden="true"></span>
+	</span>
+	<span class="wm-line wm-line-3">l'Église Catholique</span>
+</div>
 
 <style>
 	.wordmark {
-		display: block;
-		width: 90px;
-		height: auto;
-		margin-top: 4px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		font-family: 'Libre Baskerville', Georgia, serif;
+		line-height: 1.05;
+		text-align: center;
+		color: var(--color-fg);
 	}
-	.wordmark text {
-		font-family: inherit;
+	.wm-line {
+		display: block;
+	}
+	.wm-line-1,
+	.wm-line-3 {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+	.wm-line-1,
+	.wm-line-3 {
+		font-size: 11px;
+	}
+	.wm-line-2 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+		font-weight: 400;
+		font-size: 8px;
+		color: var(--color-muted);
+		margin: 3px 0;
+	}
+	.wm-line-2 i {
+		font-style: italic;
+	}
+	.wm-flank {
+		display: inline-block;
+		width: 14px;
+		height: 1px;
+		background: currentColor;
+		opacity: 0.55;
 	}
 </style>
