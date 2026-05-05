@@ -18,3 +18,12 @@ export function firstLetter(term: string): string {
 	if (first === 'Æ') first = 'A';
 	return /[A-Z]/.test(first) ? first : '#';
 }
+
+/**
+ * Sort key for alphabetic ordering within a letter bucket. Drops leading
+ * non-letter characters so `« aujourd'hui »` collates next to other `au-`
+ * entries instead of at the head of the section.
+ */
+export function sortKey(term: string): string {
+	return term.replace(/^[^\p{L}]+/u, '');
+}

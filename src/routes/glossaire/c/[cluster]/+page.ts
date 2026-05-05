@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { loadGlossary } from '$lib/data/loaders';
-import { firstLetter } from '$lib/utils/firstLetter';
+import { firstLetter, sortKey } from '$lib/utils/firstLetter';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, params }) => {
@@ -11,7 +11,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 	const entries = glossary.entries
 		.filter((e) => e.clusters.includes(cluster.id))
 		.sort((a, b) =>
-			a.term.localeCompare(b.term, 'fr', { sensitivity: 'base' })
+			sortKey(a.term).localeCompare(sortKey(b.term), 'fr', { sensitivity: 'base' })
 		);
 
 	// Group by first letter for the in-page jump bar.
