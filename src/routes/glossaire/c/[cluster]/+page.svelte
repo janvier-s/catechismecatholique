@@ -59,11 +59,11 @@
 										>{/if}
 								</span>
 								<span class="flex-1 border-b border-dotted border-border self-end mb-1"></span>
-								<span class="font-ui text-[12px] text-muted flex-none">
+								<span class="font-ui text-[12px] text-muted tabular-nums flex-none">
 									{#if e.totalRefs > 0}
-										<span class="tabular-nums">{e.totalRefs} {e.totalRefs > 1 ? 'renvois' : 'renvoi'}</span>
+										{e.totalRefs} {e.totalRefs > 1 ? 'renvois' : 'renvoi'}
 									{:else if e.seeAlso?.length}
-										<span class="italic">redirige</span>
+										{e.seeAlso.length} {e.seeAlso.length > 1 ? 'redirections' : 'redirection'}
 									{:else}
 										<span aria-hidden="true">—</span>
 									{/if}
