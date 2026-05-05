@@ -27,10 +27,16 @@
 		//     hrefs (chapter/article-1#h) but on the chapter page scroll-spy
 		//     produces chapter#h. Match when the hashes agree and the item's
 		//     path is a deeper version of the target's path.
-		const [iPath, iHash] = itemHref.split('#');
-		const [aPath, aHash] = target.split('#');
-		if (iHash && aHash && iHash === aHash && iPath !== aPath && iPath.startsWith(aPath)) {
-			return true;
+		const iIdx = itemHref.indexOf('#');
+		const aIdx = target.indexOf('#');
+		if (iIdx >= 0 && aIdx >= 0) {
+			const iHash = itemHref.slice(iIdx + 1);
+			const aHash = target.slice(aIdx + 1);
+			if (iHash === aHash) {
+				const iPath = itemHref.slice(0, iIdx);
+				const aPath = target.slice(0, aIdx);
+				if (iPath !== aPath && iPath.startsWith(aPath)) return true;
+			}
 		}
 		return false;
 	}
@@ -54,9 +60,14 @@
 	// active path, treat it as the active entry. This is what lets the
 	// Roman headings sync as the reader scrolls a chapter page.
 	const isHashMatch = $derived.by(() => {
-		const [iPath, iHash] = item.href.split('#');
-		const [aPath, aHash] = activeHref.split('#');
-		if (!iHash || !aHash || iHash !== aHash) return false;
+		const iIdx = item.href.indexOf('#');
+		const aIdx = activeHref.indexOf('#');
+		if (iIdx < 0 || aIdx < 0) return false;
+		const iHash = item.href.slice(iIdx + 1);
+		const aHash = activeHref.slice(aIdx + 1);
+		if (iHash !== aHash) return false;
+		const iPath = item.href.slice(0, iIdx);
+		const aPath = activeHref.slice(0, aIdx);
 		return iPath !== aPath && iPath.startsWith(aPath);
 	});
 	// Highlight the deepest entry whose href is a prefix of activeHref. An
