@@ -27,13 +27,22 @@
 		return it.children.some((c) => isAncestorOrSelf(c, target));
 	}
 
-	const isActive = $derived(item.href === activeHref);
 	const isAncestor = $derived(
 		item.children ? item.children.some((c) => isAncestorOrSelf(c, activeHref)) : false
 	);
 	// Activehref may carry a heading hash; the bare-URL parent (e.g. an
 	// article entry) won't equal it but is still the visible context.
 	const isActiveBase = $derived(activeHref.startsWith(item.href + '#'));
+	// Highlight the deepest entry whose href is a prefix of activeHref. An
+	// exact match wins; otherwise this entry only highlights when none of
+	// its descendants match (i.e. the active path lives inside this entry's
+	// scope but no deeper item claims it).
+	const isPrefixMatch = $derived(
+		activeHref === item.href ||
+			activeHref.startsWith(item.href + '#') ||
+			activeHref.startsWith(item.href + '/')
+	);
+	const isActive = $derived(isPrefixMatch && !isAncestor);
 
 	let manualExpanded: boolean | null = $state(null);
 	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
