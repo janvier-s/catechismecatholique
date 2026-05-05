@@ -134,23 +134,37 @@
 		aria-label="Chapitre précédent ou suivant"
 	>
 		{#if chapter.prev}
+			{@const prevViaSection = chapter.prev.crosses_section && chapter.prev.section_has_intro}
 			<a
 				class="chapter-nav-link prev"
-				href="/ccc/{chapter.prev.part_slug}/{chapter.prev.section_slug}/{chapter.prev.slug}"
+				href={prevViaSection
+					? `/ccc/${chapter.prev.part_slug}/${chapter.prev.section_slug}`
+					: `/ccc/${chapter.prev.part_slug}/${chapter.prev.section_slug}/${chapter.prev.slug}`}
 			>
-				<span class="chapter-nav-eyebrow">← Chapitre précédent</span>
-				<span class="chapter-nav-title">{chapter.prev.title}</span>
+				<span class="chapter-nav-eyebrow">
+					← {prevViaSection ? 'Section précédente' : 'Chapitre précédent'}
+				</span>
+				<span class="chapter-nav-title">
+					{prevViaSection ? chapter.prev.section_title : chapter.prev.title}
+				</span>
 			</a>
 		{:else}
 			<span class="chapter-nav-spacer"></span>
 		{/if}
 		{#if chapter.next}
+			{@const routeViaSection = chapter.next.crosses_section && chapter.next.section_has_intro}
 			<a
 				class="chapter-nav-link next"
-				href="/ccc/{chapter.next.part_slug}/{chapter.next.section_slug}/{chapter.next.slug}"
+				href={routeViaSection
+					? `/ccc/${chapter.next.part_slug}/${chapter.next.section_slug}`
+					: `/ccc/${chapter.next.part_slug}/${chapter.next.section_slug}/${chapter.next.slug}`}
 			>
-				<span class="chapter-nav-eyebrow">Chapitre suivant →</span>
-				<span class="chapter-nav-title">{chapter.next.title}</span>
+				<span class="chapter-nav-eyebrow">
+					{routeViaSection ? 'Section suivante →' : 'Chapitre suivant →'}
+				</span>
+				<span class="chapter-nav-title">
+					{routeViaSection ? chapter.next.section_title : chapter.next.title}
+				</span>
 			</a>
 		{:else}
 			<span class="chapter-nav-spacer"></span>

@@ -27,6 +27,10 @@ export interface BuiltPart {
 	sections: BuiltSection[];
 	prologue?: boolean;
 	range?: ParagraphRange;
+	/** Paragraphs nested directly under the part (before its first section) —
+	 *  e.g. Part 3's preamble §§1691-1698. Empty for most parts. */
+	intro_paragraphs?: number[];
+	intro_headings?: BuiltHeading[];
 }
 
 export interface BuiltSection {
@@ -36,6 +40,12 @@ export interface BuiltSection {
 	chapters: BuiltChapter[];
 	articles_direct?: BuiltArticle[];
 	range?: ParagraphRange;
+	/** Paragraphs nested directly under the section, NOT inside any chapter
+	 *  or articles_direct — e.g. Section 2 of Part 1 has §§185-197 as a
+	 *  Symboles-de-la-foi preamble between the previous section's last
+	 *  chapter and this section's first chapter. */
+	intro_paragraphs?: number[];
+	intro_headings?: BuiltHeading[];
 }
 
 export interface BuiltChapter {
@@ -137,6 +147,26 @@ function rangeOf(nums: number[]): ParagraphRange | undefined {
 	return { from: lo, to: hi };
 }
 
+/** Walk a container's children, returning the paragraphs and headings that
+ *  belong to it directly — i.e. anything nested inside the container that
+ *  ISN'T itself a chapter / section / article (those have their own
+ *  builders). Used to capture section and part intros that the upstream
+ *  tree leaves outside the chapter/article hierarchy. */
+function collectIntro(
+	containerRaw: RawNode,
+	skipTypes: ReadonlySet<string>
+): { paragraphs: number[]; headings: BuiltHeading[] } {
+	const paragraphs: number[] = [];
+	const introNodes: RawNode[] = [];
+	for (const c of containerRaw.children ?? []) {
+		if (skipTypes.has(c.type)) continue;
+		introNodes.push(c);
+	}
+	for (const n of introNodes) collectParagraphs(n, paragraphs);
+	const headings = collectHeadings(introNodes);
+	return { paragraphs, headings };
+}
+
 function buildArticle(aRaw: RawNode, articleSlugs: Set<string>): BuiltArticle {
 	const aTitle = normalizeGuillemets(sentenceCase(stripPrefix(aRaw.title ?? '', ARTICLE_PREFIX)));
 	const aSlug = uniqueSlug(aTitle, articleSlugs);
@@ -220,7 +250,21 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 				directArticles.push(buildArticle(aRaw, directArticleSlugs));
 			}
 
+			// Section-direct intro: paragraphs/headings that sit under the
+			// section but outside any chapter or direct-article. Captures
+			// e.g. §§185-197 (Section 2 of Part 1's Apostles' Creed preamble).
+			const sectionIntro = collectIntro(
+				childRaw,
+				new Set(['chapter', 'article', 'en_bref'])
+			);
+			const sectionEnBrefs: number[] = [];
+			for (const c of childRaw.children ?? []) {
+				if (c.type === 'en_bref') collectParagraphs(c, sectionEnBrefs);
+			}
+
 			const sectionParagraphs = [
+				...sectionIntro.paragraphs,
+				...sectionEnBrefs,
 				...builtChapters.flatMap((c) => c.paragraphs),
 				...directArticles.flatMap((a) => a.paragraphs)
 			];
@@ -231,15 +275,27 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 				number: sectionNumber,
 				chapters: builtChapters,
 				articles_direct: directArticles.length > 0 ? directArticles : undefined,
-				range: rangeOf(sectionParagraphs)
+				range: rangeOf(sectionParagraphs),
+				intro_paragraphs: sectionIntro.paragraphs.length > 0 ? sectionIntro.paragraphs : undefined,
+				intro_headings: sectionIntro.headings.length > 0 ? sectionIntro.headings : undefined
 			});
 		}
 
+		// Part-direct intro: paragraphs/headings that sit under the part but
+		// outside any section. Captures e.g. Part 3's §§1691-1698 preamble
+		// before its first section, plus Part 2's "Pourquoi la Liturgie?"
+		// preamble (which lives at part-level under sub_headings).
+		const partIntro = isPrologue
+			? { paragraphs: [], headings: [] }
+			: collectIntro(partRaw, new Set(['section']));
+
 		const partParagraphs: number[] = [];
 		for (const sec of builtSections) {
+			partParagraphs.push(...(sec.intro_paragraphs ?? []));
 			for (const ch of sec.chapters) partParagraphs.push(...ch.paragraphs);
 			for (const a of sec.articles_direct ?? []) partParagraphs.push(...a.paragraphs);
 		}
+		partParagraphs.push(...partIntro.paragraphs);
 		// Prologue paragraphs aren't tracked under sections — collect them from the raw tree.
 		if (isPrologue) {
 			collectParagraphs(partRaw, partParagraphs);
@@ -251,7 +307,11 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			number: isPrologue ? undefined : partNumber,
 			sections: builtSections,
 			prologue: isPrologue,
-			range: rangeOf(partParagraphs)
+			range: rangeOf(partParagraphs),
+			intro_paragraphs:
+				!isPrologue && partIntro.paragraphs.length > 0 ? partIntro.paragraphs : undefined,
+			intro_headings:
+				!isPrologue && partIntro.headings.length > 0 ? partIntro.headings : undefined
 		});
 	}
 

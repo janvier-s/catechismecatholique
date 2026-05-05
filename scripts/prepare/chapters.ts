@@ -1,5 +1,6 @@
 import type {
 	Chapter,
+	ChapterAdjacent,
 	ChapterArticle,
 	ChapterHeading,
 	ChapterParagraphe
@@ -16,8 +17,7 @@ export function buildChapterFiles(
 	// Flat list of every chapter in document order. prev/next now cross
 	// section and part boundaries — without this, the last chapter of a
 	// section had `next: undefined`, leaving article-level "Suivant →"
-	// nav blank when the reader hit the last article of the last chapter
-	// (e.g. §175 / "Nous croyons" in chapter "La réponse de l'homme à Dieu").
+	// nav blank when the reader hit the last article of the last chapter.
 	type Flat = {
 		chapter: BuiltStructure['parts'][number]['sections'][number]['chapters'][number];
 		partSlug: string;
@@ -26,10 +26,12 @@ export function buildChapterFiles(
 		sectionSlug: string;
 		sectionTitle: string;
 		sectionNumber?: number;
+		sectionHasIntro: boolean;
 	};
 	const flat: Flat[] = [];
 	for (const part of structure.parts) {
 		for (const section of part.sections) {
+			const sectionHasIntro = (section.intro_paragraphs ?? []).length > 0;
 			for (const c of section.chapters) {
 				flat.push({
 					chapter: c,
@@ -38,10 +40,25 @@ export function buildChapterFiles(
 					partNumber: part.number,
 					sectionSlug: section.slug,
 					sectionTitle: section.title,
-					sectionNumber: section.number
+					sectionNumber: section.number,
+					sectionHasIntro
 				});
 			}
 		}
+	}
+
+	function adjacent(neighbor: Flat | undefined, current: Flat): ChapterAdjacent | undefined {
+		if (!neighbor) return undefined;
+		const crosses = neighbor.sectionSlug !== current.sectionSlug;
+		return {
+			slug: neighbor.chapter.slug,
+			title: neighbor.chapter.title,
+			part_slug: neighbor.partSlug,
+			section_slug: neighbor.sectionSlug,
+			crosses_section: crosses || undefined,
+			section_title: crosses ? neighbor.sectionTitle : undefined,
+			section_has_intro: crosses && neighbor.sectionHasIntro ? true : undefined
+		};
 	}
 
 	const chapters: Chapter[] = [];
@@ -97,22 +114,8 @@ export function buildChapterFiles(
 					paragraphes: articleParagraphes.length > 0 ? articleParagraphes : undefined
 				};
 			}),
-			prev: prevFlat
-				? {
-						slug: prevFlat.chapter.slug,
-						title: prevFlat.chapter.title,
-						part_slug: prevFlat.partSlug,
-						section_slug: prevFlat.sectionSlug
-					}
-				: undefined,
-			next: nextFlat
-				? {
-						slug: nextFlat.chapter.slug,
-						title: nextFlat.chapter.title,
-						part_slug: nextFlat.partSlug,
-						section_slug: nextFlat.sectionSlug
-					}
-				: undefined
+			prev: adjacent(prevFlat, cur),
+			next: adjacent(nextFlat, cur)
 		};
 		chapters.push(chapter);
 	}

@@ -149,6 +149,7 @@
 			</a>
 		{/if}
 
+
 		{#if data.nextArticle}
 			{@const href =
 				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.nextArticle.slug}`}
@@ -159,12 +160,17 @@
 				</span>
 			</a>
 		{:else if data.chapter.next}
-			{@const href =
-				`/ccc/${data.chapter.next.part_slug}/${data.chapter.next.section_slug}/${data.chapter.next.slug}`}
+			{@const next = data.chapter.next}
+			{@const routeViaSection = next.crosses_section && next.section_has_intro}
+			{@const href = routeViaSection
+				? `/ccc/${next.part_slug}/${next.section_slug}`
+				: `/ccc/${next.part_slug}/${next.section_slug}/${next.slug}`}
 			<a class="article-nav-link next" href={href}>
-				<span class="article-nav-eyebrow">Chapitre suivant →</span>
+				<span class="article-nav-eyebrow">
+					{routeViaSection ? 'Section suivante →' : 'Chapitre suivant →'}
+				</span>
 				<span class="article-nav-title">
-					{data.chapter.next.title}
+					{routeViaSection ? next.section_title : next.title}
 				</span>
 			</a>
 		{/if}

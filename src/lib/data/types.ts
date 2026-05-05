@@ -58,8 +58,24 @@ export interface Chapter {
 	headings: ChapterHeading[];
 	articles: ChapterArticle[];
 	en_brefs: { paragraphs: number[] }[];
-	prev?: { slug: string; title: string; part_slug: string; section_slug: string };
-	next?: { slug: string; title: string; part_slug: string; section_slug: string };
+	prev?: ChapterAdjacent;
+	next?: ChapterAdjacent;
+}
+
+export interface ChapterAdjacent {
+	slug: string;
+	title: string;
+	part_slug: string;
+	section_slug: string;
+	/** True when this neighbor lives in a DIFFERENT section than the current
+	 *  chapter — useful for routing through the section page (with its intro
+	 *  paragraphs) instead of jumping straight to the next chapter. */
+	crosses_section?: boolean;
+	/** Title of the neighbor's section (for footer labeling). */
+	section_title?: string;
+	/** True when the neighbor's section has intro paragraphs that the linear
+	 *  reader would otherwise skip. */
+	section_has_intro?: boolean;
 }
 
 export interface ChapterArticle {
