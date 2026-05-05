@@ -151,9 +151,9 @@
 														<span class="row-range">{fmtRange(chap.range)}</span>
 													{/if}
 												</a>
-												{@const chapHref = `/ccc/${part.slug}/${section.slug}/${chap.slug}`}
 												{#if chap.articles.length === 0 && chap.headings?.length}
 													{@const tree = nestHeadings(chap.headings)}
+													{@const chapHref = `/ccc/${part.slug}/${section.slug}/${chap.slug}`}
 													<ul class="headings headings-chapter" role="list">
 														{#each tree as node (node.heading.id)}
 															<li>
