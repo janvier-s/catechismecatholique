@@ -15,7 +15,14 @@
 	}: { item: Item; activeHref: string; depth?: number } = $props();
 
 	function isAncestorOrSelf(it: Item, target: string): boolean {
-		if (it.href === target) return true;
+		// activeHref often carries a scroll-spy heading hash like
+		// "/ccc/x/y/chapter#some-heading" while the matching tree entries
+		// are stored without the hash. Match either the exact href or the
+		// bare URL so the chapter's ancestors (Section, Partie) still see
+		// themselves as ancestors of the hashed active path.
+		const base = target.replace(/#.*$/, '');
+		if (it.href === target || it.href === base) return true;
+		if (it.href + '#' === target.slice(0, it.href.length + 1)) return true;
 		if (!it.children) return false;
 		return it.children.some((c) => isAncestorOrSelf(c, target));
 	}
