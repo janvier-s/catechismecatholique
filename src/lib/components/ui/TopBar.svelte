@@ -7,7 +7,7 @@
 	import { detectIntent } from '$lib/utils/searchIntent';
 </script>
 
-<header class="border-b border-border bg-background sticky top-0 z-30">
+<header class="border-b border-border bg-background sticky top-0 z-[var(--z-topbar)]">
 	<div class="mx-auto max-w-7xl px-6 py-3 flex items-center gap-6 min-h-[80px]">
 		<a href="/" class="flex items-center gap-3 flex-none" aria-label="Accueil">
 			<LogoMark />

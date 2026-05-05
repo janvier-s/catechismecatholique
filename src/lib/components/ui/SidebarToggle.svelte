@@ -6,7 +6,7 @@
 	<button
 		type="button"
 		onclick={() => sidebarOpen.set(true)}
-		class="hidden lg:flex fixed top-[92px] left-3 z-30 h-9 px-3 rounded-md border border-border bg-panel hover:bg-accent/10 hover:border-accent items-center gap-2 text-muted hover:text-accent shadow-sm font-ui text-xs font-semibold tracking-wide uppercase"
+		class="hidden lg:flex fixed top-[92px] left-3 z-[var(--z-topbar)] h-9 px-3 rounded-md border border-border bg-panel hover:bg-accent/10 hover:border-accent items-center gap-2 text-muted hover:text-accent shadow-sm font-ui text-xs font-semibold tracking-wide uppercase"
 		aria-label="Ouvrir le sommaire"
 		title="Sommaire"
 	>

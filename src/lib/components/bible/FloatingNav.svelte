@@ -91,7 +91,7 @@
 <svelte:window onkeydown={handleKeydown} />
 
 <div
-	class="fixed left-1/2 -translate-x-1/2 z-[65] bg-panel border border-border rounded-sm shadow-xl w-80 max-h-[72vh] flex flex-col font-ui"
+	class="fixed left-1/2 -translate-x-1/2 z-[var(--z-floating)] bg-panel border border-border rounded-sm shadow-xl w-80 max-h-[72vh] flex flex-col font-ui"
 	style="top: {topOffset};"
 	role="dialog"
 	aria-label="Navigation biblique"

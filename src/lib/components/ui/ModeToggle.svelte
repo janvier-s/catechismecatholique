@@ -46,7 +46,7 @@
 		<div
 			role="dialog"
 			aria-label="Options de lecture"
-			class="absolute right-0 mt-2 w-80 rounded-md border border-border bg-panel shadow-lg z-40 px-4 pt-1 pb-5 max-h-[calc(100vh-100px)] overflow-y-auto styled-scroll"
+			class="absolute right-0 mt-2 w-80 rounded-md border border-border bg-panel shadow-lg z-[var(--z-dropdown)] px-4 pt-1 pb-5 max-h-[calc(100vh-100px)] overflow-y-auto styled-scroll"
 		>
 			<ReadingPrefs />
 		</div>

@@ -327,7 +327,7 @@
 {#if fontDropdownOpen}
 	<div
 		data-prefs-menu
-		class="fixed bg-panel border border-border rounded shadow-lg z-50 overflow-hidden"
+		class="fixed bg-panel border border-border rounded shadow-lg z-[var(--z-floating)] overflow-hidden"
 		style:top="{fontMenuPos.top}px"
 		style:left="{fontMenuPos.left}px"
 		style:width="{fontMenuPos.width}px"
