@@ -87,6 +87,16 @@ function collectParagraphs(node: RawNode, into: number[]): void {
 	for (const c of node.children ?? []) collectParagraphs(c, into);
 }
 
+/** Find the first paragraph number anywhere in the subtree of `nodes`. */
+function findFirstParagraph(nodes: RawNode[]): number {
+	for (const n of nodes) {
+		if (n.type === 'paragraph' && typeof n.number === 'number') return n.number;
+		const c = findFirstParagraph(n.children ?? []);
+		if (c >= 0) return c;
+	}
+	return -1;
+}
+
 function collectHeadings(nodes: RawNode[]): BuiltHeading[] {
 	const out: BuiltHeading[] = [];
 	for (const n of nodes) {
@@ -94,15 +104,23 @@ function collectHeadings(nodes: RawNode[]): BuiltHeading[] {
 			const level = n.type === 'heading' ? 2 : 3;
 			const title = (n.title ?? '').trim();
 			const id = slugify(title) || `h-${out.length}`;
-			let firstParagraph = -1;
-			for (const c of n.children ?? []) {
-				if (c.type === 'paragraph' && typeof c.number === 'number') {
-					firstParagraph = c.number;
-					break;
-				}
+			// Recursively find the first paragraph anywhere under this heading.
+			// Some headings (e.g. "II. L'œuvre du Christ dans la liturgie")
+			// have no direct paragraph children — their paragraphs sit two
+			// levels deep, inside nested sub_headings. The previous direct-
+			// child check dropped these silently.
+			const firstParagraph = findFirstParagraph(n.children ?? []);
+			if (firstParagraph >= 0) {
+				out.push({
+					id,
+					level,
+					title: normalizeGuillemets(sentenceCase(title)),
+					paragraph_start: firstParagraph
+				});
 			}
-			if (firstParagraph >= 0)
-				out.push({ id, level, title: normalizeGuillemets(sentenceCase(title)), paragraph_start: firstParagraph });
+			// Recurse so sub_headings nested under this heading also surface
+			// in the article's flat heading list.
+			out.push(...collectHeadings(n.children ?? []));
 		}
 	}
 	return out;

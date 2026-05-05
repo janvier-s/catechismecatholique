@@ -100,15 +100,26 @@
 					{paragraphe.title}
 				</h2>
 			{/if}
-			{@const heading = data.article.headings.find((h) => h.paragraph_start === p.number)}
-			{#if heading}
-				<h3
-					id={heading.id}
-					class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
-				>
-					{heading.title}
-				</h3>
-			{/if}
+			{@const headingsHere = data.article.headings.filter(
+				(h) => h.paragraph_start === p.number
+			)}
+			{#each headingsHere as heading (heading.id)}
+				{#if heading.level <= 2}
+					<h3
+						id={heading.id}
+						class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
+					>
+						{heading.title}
+					</h3>
+				{:else}
+					<h4
+						id={heading.id}
+						class="font-ui text-lg font-semibold mt-8 mb-3 scroll-mt-24 text-heading"
+					>
+						{heading.title}
+					</h4>
+				{/if}
+			{/each}
 			<ParagraphView paragraph={p} />
 		{/if}
 	{/each}
