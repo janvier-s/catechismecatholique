@@ -48,8 +48,8 @@ export function buildChapterFiles(
 	for (let g = 0; g < flat.length; g++) {
 		const cur = flat[g]!;
 		const c = cur.chapter;
-		const prev = g > 0 ? flat[g - 1]!.chapter : undefined;
-		const next = g + 1 < flat.length ? flat[g + 1]!.chapter : undefined;
+		const prevFlat = g > 0 ? flat[g - 1]! : undefined;
+		const nextFlat = g + 1 < flat.length ? flat[g + 1]! : undefined;
 
 		const chapterEnBrefs = enBrefs
 			.filter((b) => b.parent_kind === 'chapter' && b.parent_slug === c.slug)
@@ -97,8 +97,22 @@ export function buildChapterFiles(
 					paragraphes: articleParagraphes.length > 0 ? articleParagraphes : undefined
 				};
 			}),
-			prev: prev ? { slug: prev.slug, title: prev.title } : undefined,
-			next: next ? { slug: next.slug, title: next.title } : undefined
+			prev: prevFlat
+				? {
+						slug: prevFlat.chapter.slug,
+						title: prevFlat.chapter.title,
+						part_slug: prevFlat.partSlug,
+						section_slug: prevFlat.sectionSlug
+					}
+				: undefined,
+			next: nextFlat
+				? {
+						slug: nextFlat.chapter.slug,
+						title: nextFlat.chapter.title,
+						part_slug: nextFlat.partSlug,
+						section_slug: nextFlat.sectionSlug
+					}
+				: undefined
 		};
 		chapters.push(chapter);
 	}

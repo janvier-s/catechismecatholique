@@ -166,7 +166,7 @@
 			</a>
 		{:else if data.chapter.next}
 			{@const href =
-				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.next.slug}`}
+				`/ccc/${data.chapter.next.part_slug}/${data.chapter.next.section_slug}/${data.chapter.next.slug}`}
 			<a class="article-nav-link next" href={href}>
 				<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1"
 					>Chapitre suivant →</span
@@ -183,17 +183,24 @@
 	.article-nav-link {
 		flex: 1;
 		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
 		padding: 0.85rem 1rem;
-		border: 1px solid color-mix(in srgb, var(--color-fg) 18%, transparent);
+		background: var(--color-panel);
+		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
 		border-radius: 4px;
+		color: var(--color-fg);
 		text-decoration: none;
 		transition:
-			border-color 120ms ease,
-			background 120ms ease;
+			border-color 140ms ease,
+			background 140ms ease,
+			color 140ms ease;
 	}
 	.article-nav-link:hover {
-		border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+		color: var(--color-accent-text);
 	}
 	.article-nav-link.prev {
 		text-align: left;

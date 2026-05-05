@@ -58,8 +58,8 @@ export interface Chapter {
 	headings: ChapterHeading[];
 	articles: ChapterArticle[];
 	en_brefs: { paragraphs: number[] }[];
-	prev?: { slug: string; title: string };
-	next?: { slug: string; title: string };
+	prev?: { slug: string; title: string; part_slug: string; section_slug: string };
+	next?: { slug: string; title: string; part_slug: string; section_slug: string };
 }
 
 export interface ChapterArticle {
