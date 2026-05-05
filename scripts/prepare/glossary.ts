@@ -25,6 +25,7 @@ import {
 	type Cluster,
 	type ClusterId
 } from './glossary-clusters.ts';
+import { GLOSSARY_EXTRAS } from './glossary-extras.ts';
 
 export interface GlossaryEntry {
 	slug: string;
@@ -160,6 +161,33 @@ export function buildGlossary(
 			clusters,
 			totalRefs: refs.length,
 			refsCovered: refs,
+			standalone: true
+		});
+	}
+
+	// Third pass: hand-curated extras that fill gaps in both indexes. Each
+	// extra was checked against the FR thematic index to confirm no head-term
+	// or sub-entry concept overlap. See scripts/prepare/glossary-extras.ts.
+	const existingByNorm = new Set(out.map((e) => normCompare(e.term)));
+	for (const x of GLOSSARY_EXTRAS) {
+		if (existingByNorm.has(normCompare(x.term))) continue;
+		const slug = uniqueSlug(SLUG_FALLBACK(x.slug || x.term), slugUsed);
+		const allRefs = dedupSort([
+			...x.directRefs,
+			...x.subEntries.flatMap((s) => s.refs)
+		]);
+		const totalRefs = x.directRefs.length + x.subEntries.reduce((a, s) => a + s.refs.length, 0);
+		out.push({
+			slug,
+			term: x.term,
+			latin: x.latin,
+			definition: x.definition,
+			directRefs: x.directRefs,
+			subEntries: x.subEntries,
+			seeAlso: x.seeAlso,
+			clusters: x.clusters,
+			totalRefs,
+			refsCovered: allRefs,
 			standalone: true
 		});
 	}
