@@ -14,6 +14,11 @@
 	let inputEl: HTMLInputElement | null = $state(null);
 	let recents: string[] = $state([]);
 
+	// Pagination — show in batches of PAGE_SIZE; "Voir plus" reveals the next
+	// batch. Reset whenever the query changes.
+	const PAGE_SIZE = 30;
+	let visiblePages = $state(1);
+
 	// Active filter tab — Tout / Sections / Paragraphes. URL state is canonical.
 	const activeType = $derived<'all' | 'headings' | 'paragraphs'>(
 		(page.url.searchParams.get('type') as 'all' | 'headings' | 'paragraphs' | null) ?? 'all'
@@ -22,6 +27,7 @@
 	$effect(() => {
 		// Keep input in sync with the URL when the user navigates via links/back.
 		q = data.q ?? '';
+		visiblePages = 1;
 	});
 
 	const RECENT_KEY = 'lecatechisme:recent-searches';
@@ -86,6 +92,9 @@
 		q = '';
 		await tick();
 		inputEl?.focus();
+		// If we're on a results URL, navigate back to the empty state so the
+		// query gets cleared from the URL too.
+		if (data.q) void goto('/recherche');
 	}
 
 	// --- highlight + snippet helpers (unchanged from original) ---
@@ -196,11 +205,13 @@
 	const paragraphCount = $derived(data.hits.filter((h) => h.kind === 'paragraph').length);
 	const totalCount = $derived(data.hits.length);
 
-	const visibleHits = $derived.by<Hit[]>(() => {
+	const filteredHits = $derived.by<Hit[]>(() => {
 		if (activeType === 'headings') return data.hits.filter((h) => h.kind === 'heading');
 		if (activeType === 'paragraphs') return data.hits.filter((h) => h.kind === 'paragraph');
 		return data.hits;
 	});
+	const visibleHits = $derived(filteredHits.slice(0, visiblePages * PAGE_SIZE));
+	const hasMore = $derived(visibleHits.length < filteredHits.length);
 
 	function tabHref(type: 'all' | 'headings' | 'paragraphs'): string {
 		const params = new URLSearchParams();
@@ -262,8 +273,40 @@
 	</header>
 
 	{#if !data.q}
-		<!-- Empty state — examples + recents + browse -->
+		<!-- Empty state — recents (if any), then suggestion examples, then browse -->
 		<section class="mt-12 max-w-[640px] mx-auto" aria-label="Suggestions">
+			{#if recents.length > 0}
+				<div class="mb-10">
+					<div class="flex items-baseline justify-between mb-3">
+						<h2 class="font-ui text-[11px] uppercase tracking-[0.2em] text-muted">
+							Récemment consulté
+						</h2>
+						<button
+							type="button"
+							class="font-ui text-[12px] text-muted hover:text-accent"
+							onclick={clearRecents}
+						>
+							effacer
+						</button>
+					</div>
+					<ul class="space-y-1">
+						{#each recents as r (r)}
+							<li>
+								<a
+									href="/recherche?q={encodeURIComponent(r)}"
+									class="font-body italic text-[16px] text-foreground hover:text-accent"
+								>
+									{r}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</div>
+			{/if}
+
+			<h2 class="font-ui text-[11px] uppercase tracking-[0.2em] text-muted mb-3">
+				Quelques exemples
+			</h2>
 			<ul class="space-y-2">
 				<li class="leader-row">
 					<span class="leader-label">Par mot</span>
@@ -295,31 +338,6 @@
 					</span>
 				</li>
 			</ul>
-
-			{#if recents.length > 0}
-				<div class="mt-10">
-					<p class="font-ui text-[11px] uppercase tracking-[0.2em] text-muted mb-2">
-						Récemment consulté
-					</p>
-					<div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-						{#each recents as r (r)}
-							<a
-								href="/recherche?q={encodeURIComponent(r)}"
-								class="font-body italic text-[15px] text-foreground hover:text-accent"
-							>
-								{r}
-							</a>
-						{/each}
-						<button
-							type="button"
-							class="font-ui text-[12px] text-muted hover:text-accent ml-auto"
-							onclick={clearRecents}
-						>
-							effacer
-						</button>
-					</div>
-				</div>
-			{/if}
 
 			<p
 				class="mt-12 pt-6 border-t border-border/60 font-ui text-[12px] text-muted text-center"
@@ -416,11 +434,24 @@
 				{/each}
 			</ul>
 
-			{#if data.hits.length === 30 && activeType === 'all'}
+			{#if hasMore}
+				<div class="mt-8 flex items-baseline justify-between gap-4">
+					<p class="font-ui text-[12px] text-muted tabular-nums">
+						{visibleHits.length} sur {filteredHits.length}
+					</p>
+					<button
+						type="button"
+						class="show-more"
+						onclick={() => (visiblePages += 1)}
+					>
+						Voir {Math.min(PAGE_SIZE, filteredHits.length - visibleHits.length)} de plus
+					</button>
+				</div>
+			{:else if filteredHits.length > PAGE_SIZE}
 				<p
-					class="mt-8 font-body italic text-[13px] text-muted text-center tracking-wide"
+					class="mt-8 font-ui text-[12px] text-muted tabular-nums text-center"
 				>
-					Affichage des 30 meilleurs résultats — affinez votre recherche pour en voir plus.
+					{filteredHits.length} résultats affichés
 				</p>
 			{/if}
 		</section>
@@ -448,8 +479,8 @@
 		border-color: color-mix(in srgb, var(--color-fg) 35%, transparent);
 	}
 	.search-line:focus-within {
-		border-color: var(--color-accent);
-		box-shadow: 0 0 0 1px var(--color-accent);
+		border-color: color-mix(in srgb, var(--color-fg) 45%, transparent);
+		box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-fg) 15%, transparent);
 	}
 	.search-input {
 		flex: 1;
@@ -660,6 +691,25 @@
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
 		color: var(--color-muted);
+	}
+
+	.show-more {
+		font-family: var(--font-ui);
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--color-fg);
+		background: transparent;
+		border: 0;
+		padding: 0.25rem 0;
+		cursor: pointer;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 35%, transparent);
+		transition:
+			color 120ms ease,
+			border-color 120ms ease;
+	}
+	.show-more:hover {
+		color: var(--color-accent-text);
+		border-bottom-color: var(--color-accent-text);
 	}
 
 	/* Highlights — keep the 20% accent tint, drop the bold weight that made

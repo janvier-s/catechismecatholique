@@ -94,7 +94,9 @@ export const GET: RequestHandler = async ({ url, fetch, platform }) => {
 		combineWith: 'AND',
 		prefix: (term) => term.length >= 4
 	});
-	const ranked = applyPhraseBoost(raw, tokens).slice(0, 30);
+	// Cap server-side at 200 — enough to support a few "Voir plus" pages
+	// without overwhelming the client. The page paginates the visible slice.
+	const ranked = applyPhraseBoost(raw, tokens).slice(0, 200);
 	const hits: SearchResultDoc[] = ranked.map((r) => ({
 		id: r.id as string,
 		kind: r.kind as 'paragraph' | 'heading',
