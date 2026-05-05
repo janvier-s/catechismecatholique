@@ -61,7 +61,7 @@
 
 	function isVerseActive(v: number): boolean {
 		const ctx = $studyPanel.context;
-		if (!ctx?.verseUsfx) return false;
+		if (ctx?.kind !== 'verse') return false;
 		return (
 			$studyPanel.open &&
 			ctx.verseUsfx === book.usfx &&
@@ -72,7 +72,7 @@
 
 	function openVerse(v: number) {
 		openPanel(
-			{ paragraph: 0, verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v },
+			{ kind: 'verse', verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v },
 			'bible-verse'
 		);
 	}

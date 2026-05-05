@@ -19,7 +19,7 @@
 		e.preventDefault();
 		e.stopPropagation();
 		openPanel(
-			{ paragraph: 0, verseUsfx: bookUsfx, verseChapter: chapter, verseVerse: verse },
+			{ kind: 'verse', verseUsfx: bookUsfx, verseChapter: chapter, verseVerse: verse },
 			'bible-verse'
 		);
 	}

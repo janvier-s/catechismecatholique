@@ -8,7 +8,7 @@
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (!ctx) return;
+		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
 			const all = await loadCitedBy();
 			citers = all[ctx.paragraph] ?? [];

@@ -9,7 +9,7 @@
 
 	function onNumberClick(n: number) {
 		const s = get(studyPanel);
-		openPanel({ paragraph: n }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab ?? 'cross-refs');
 	}
 
 	type Block = { paragraphs: Paragraph[]; firstNumber: number };
@@ -19,14 +19,15 @@
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (!ctx) {
+		if (ctx?.kind !== 'paragraph') {
 			context = null;
 			blocks = [];
 			return;
 		}
+		const paragraphNum = ctx.paragraph;
 		(async () => {
 			const ctxs = await loadParagraphContexts();
-			context = ctxs[ctx.paragraph] ?? null;
+			context = ctxs[paragraphNum] ?? null;
 			if (!context?.chapter) {
 				blocks = [];
 				return;
@@ -48,7 +49,7 @@
 			const candidates = chapter.en_brefs ?? [];
 
 			const rangeMatch = page.url.pathname.match(/^\/ccc\/(\d+)(?:-(\d+))?$/);
-			const viewFrom = rangeMatch ? parseInt(rangeMatch[1]!, 10) : ctx.paragraph;
+			const viewFrom = rangeMatch ? parseInt(rangeMatch[1]!, 10) : paragraphNum;
 			const viewTo = rangeMatch?.[2] ? parseInt(rangeMatch[2], 10) : viewFrom;
 
 			const headings = (article?.headings ?? chapter.headings ?? [])

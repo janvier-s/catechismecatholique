@@ -193,6 +193,7 @@
 				const idx = parseInt(idxAttr, 10);
 				openPanel(
 					{
+						kind: 'paragraph',
 						paragraph: paragraphNumber,
 						...(Number.isFinite(idx) ? { bibleRefIdx: idx } : {})
 					},
@@ -221,6 +222,7 @@
 			const idx = parseInt(idxAttr, 10);
 			openPanel(
 				{
+					kind: 'paragraph',
 					paragraph: paragraphNumber,
 					...(isBible && Number.isFinite(idx) ? { bibleRefIdx: idx } : {})
 				},

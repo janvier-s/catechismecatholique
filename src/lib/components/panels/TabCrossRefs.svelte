@@ -7,7 +7,7 @@
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (!ctx) return;
+		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
 			const p = await loadParagraph(ctx.paragraph);
 			crossRefs = p.cross_refs.map((s) => parseInt(s, 10)).filter((n) => Number.isFinite(n));

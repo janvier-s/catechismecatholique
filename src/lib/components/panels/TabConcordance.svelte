@@ -9,11 +9,11 @@
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		const num = ctx?.paragraph;
-		if (!num) {
+		if (ctx?.kind !== 'paragraph') {
 			entries = [];
 			return;
 		}
+		const num = ctx.paragraph;
 		(async () => {
 			const [idx, ncl] = await Promise.all([loadConcordanceByParagraph(), loadNclBible()]);
 			entries = idx[String(num)] ?? [];

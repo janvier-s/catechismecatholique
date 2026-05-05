@@ -9,17 +9,13 @@ export type PanelTab =
 	| 'concordance'
 	| 'bible-verse';
 
-export interface PanelContext {
-	paragraph: number;
-	// Set when the panel was opened from a Bible verse marker. When present,
-	// the only meaningful tab is 'bible-verse'.
-	verseUsfx?: string;
-	verseChapter?: number;
-	verseVerse?: number;
-	// data-idx of the bible_refs entry the user clicked, so the Bible tab can
-	// scroll to and highlight that specific reference among the paragraph's refs.
-	bibleRefIdx?: number;
-}
+// PanelContext is a discriminated union: 'paragraph' contexts come from CCC
+// paragraph clicks (and carry the paragraph number plus an optional bible_refs
+// idx for the Bible tab to scroll to). 'verse' contexts come from clicking a
+// Bible verse marker — only the bible-verse tab is meaningful in that mode.
+export type PanelContext =
+	| { kind: 'paragraph'; paragraph: number; bibleRefIdx?: number }
+	| { kind: 'verse'; verseUsfx: string; verseChapter: number; verseVerse: number };
 
 export interface PanelState {
 	open: boolean;

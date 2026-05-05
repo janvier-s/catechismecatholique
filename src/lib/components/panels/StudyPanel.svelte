@@ -33,8 +33,8 @@
 		if (!m) return;
 		const n = parseInt(m[1]!, 10);
 		if (!Number.isFinite(n)) return;
-		if (s.context?.paragraph === n) return;
-		openPanel({ paragraph: n }, s.activeTab ?? 'cross-refs');
+		if (s.context?.kind === 'paragraph' && s.context.paragraph === n) return;
+		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab ?? 'cross-refs');
 	});
 
 	type TabDef = { id: PanelTab; label: string };
@@ -60,23 +60,24 @@
 			return;
 		}
 		// Bible-verse mode has no paragraph context; TabBibleVerse loads its own data.
-		if (ctx.verseUsfx) {
+		if (ctx.kind === 'verse') {
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
 			return;
 		}
+		const paragraphNum = ctx.paragraph;
 		(async () => {
 			const [p, citedBy, ctxs] = await Promise.all([
-				loadParagraph(ctx.paragraph),
+				loadParagraph(paragraphNum),
 				loadCitedBy(),
 				loadParagraphContexts()
 			]);
 			paragraph = p;
-			citedByList = citedBy[ctx.paragraph] ?? [];
+			citedByList = citedBy[paragraphNum] ?? [];
 
 			// hasEnBref: the paragraph's chapter has at least one en_bref block
-			const pc = ctxs[ctx.paragraph];
+			const pc = ctxs[paragraphNum];
 			if (pc?.chapter) {
 				try {
 					const chapter = await loadChapter(pc.chapter.slug);
@@ -95,7 +96,7 @@
 		const out: TabDef[] = [];
 		// Bible-verse mode: only one tab is meaningful.
 		const ctx = $studyPanel.context;
-		if (ctx?.verseUsfx) {
+		if (ctx?.kind === 'verse') {
 			return [{ id: 'bible-verse', label: 'CEC' }];
 		}
 		if (!paragraph) return ALL_TABS;
@@ -148,18 +149,19 @@
 	>
 		<PanelShell onClose={closePanel}>
 			{#snippet title()}
-				{#if $studyPanel.context?.verseUsfx}
+				{@const ctx = $studyPanel.context}
+				{#if ctx?.kind === 'verse'}
 					<span class="text-accent font-semibold tabular-nums">
-						{BOOKS.find((b) => b.usfx === $studyPanel.context!.verseUsfx)?.frenchName ?? ''}
-						{$studyPanel.context.verseChapter},
-						{$studyPanel.context.verseVerse}
+						{BOOKS.find((b) => b.usfx === ctx.verseUsfx)?.frenchName ?? ''}
+						{ctx.verseChapter},
+						{ctx.verseVerse}
 					</span>
-				{:else if $studyPanel.context}
+				{:else if ctx?.kind === 'paragraph'}
 					<a
-						href="/ccc/{$studyPanel.context.paragraph}"
+						href="/ccc/{ctx.paragraph}"
 						class="text-accent font-semibold hover:underline tabular-nums"
 					>
-						CEC {$studyPanel.context.paragraph}
+						CEC {ctx.paragraph}
 					</a>
 				{/if}
 			{/snippet}

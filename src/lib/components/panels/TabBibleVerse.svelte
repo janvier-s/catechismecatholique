@@ -11,12 +11,12 @@
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (!ctx?.verseUsfx) return;
+		if (ctx?.kind !== 'verse') return;
 		(async () => {
 			const idx = await loadBibleVerseIndex();
-			paragraphs = idx[ctx.verseUsfx!]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
+			paragraphs = idx[ctx.verseUsfx]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
 			const book = BOOKS.find((b) => b.usfx === ctx.verseUsfx);
-			bookFrenchName = book?.frenchName ?? ctx.verseUsfx!;
+			bookFrenchName = book?.frenchName ?? ctx.verseUsfx;
 			label = `${bookFrenchName} ${ctx.verseChapter}, ${ctx.verseVerse}`;
 		})();
 	});

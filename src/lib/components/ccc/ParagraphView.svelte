@@ -9,7 +9,7 @@
 
 	function onNumberClick() {
 		const s = get(studyPanel);
-		openPanel({ paragraph: paragraph.number }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: paragraph.number }, s.activeTab ?? 'cross-refs');
 	}
 
 	const showSideRefs = $derived(

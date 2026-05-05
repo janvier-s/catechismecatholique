@@ -8,7 +8,7 @@
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (!ctx) return;
+		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
 			const [p, a] = await Promise.all([loadParagraph(ctx.paragraph), loadAbbreviations()]);
 			refs = p.magisterial_refs.filter(

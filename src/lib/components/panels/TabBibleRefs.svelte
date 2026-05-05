@@ -25,7 +25,7 @@
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (!ctx) return;
+		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
 			const [p, bibleResp] = await Promise.all([loadParagraph(ctx.paragraph), loadNclBible()]);
 			refs = p.bible_refs;
@@ -74,7 +74,8 @@
 	});
 
 	$effect(() => {
-		const target = $studyPanel.context?.bibleRefIdx;
+		const ctx = $studyPanel.context;
+		const target = ctx?.kind === 'paragraph' ? ctx.bibleRefIdx : undefined;
 		if (target === undefined || resolved.length === 0 || !listEl) return;
 		(async () => {
 			await tick();
