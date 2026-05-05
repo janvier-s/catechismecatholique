@@ -33,6 +33,13 @@
 		number?: number;
 		range?: Range;
 		articles?: Article[];
+		headings?: Heading[];
+	};
+	type Heading = {
+		id: string;
+		level: number;
+		title: string;
+		paragraph_start: number;
 	};
 	type Section = {
 		slug: string;
@@ -116,8 +123,25 @@
 		col3Items.find((c) => c.slug === activeChapterSlug) ?? null
 	);
 
-	const col4Items = $derived<Article[]>(
-		sectionDirectArticles.length > 0 ? sectionDirectArticles : (activeChapter?.articles ?? [])
+	type Col4Item =
+		| { kind: 'article'; data: Article }
+		| { kind: 'heading'; data: Heading };
+
+	// Column 4 prefers articles. When the active chapter has none (e.g. P1S1C1
+	// goes straight to Roman-numeral subdivisions), fall back to its headings
+	// so the column never reads as empty.
+	const col4Items = $derived<Col4Item[]>(
+		sectionDirectArticles.length > 0
+			? sectionDirectArticles.map((a) => ({ kind: 'article' as const, data: a }))
+			: (activeChapter?.articles ?? []).length > 0
+				? (activeChapter!.articles ?? []).map((a) => ({ kind: 'article' as const, data: a }))
+				: (activeChapter?.headings ?? []).map((h) => ({ kind: 'heading' as const, data: h }))
+	);
+
+	const col4Heading = $derived(
+		sectionDirectArticles.length > 0 || (activeChapter?.articles ?? []).length > 0
+			? 'Articles'
+			: 'Sections'
 	);
 
 	// Pre-populate cascade with first Partie / first Section / first Chapter
@@ -182,6 +206,10 @@
 
 	function chapterHref(c: Chapter): string {
 		return `/ccc/${activePartSlug}/${activeSectionSlug}/${c.slug}`;
+	}
+
+	function headingHref(h: Heading): string {
+		return `/ccc/${activePartSlug}/${activeSectionSlug}/${activeChapterSlug}#${h.id}`;
 	}
 
 	function sectionHref(s: Section): string {
@@ -540,18 +568,20 @@
 						{/if}
 					</div>
 
-					<!-- COL 4: ARTICLES -->
+					<!-- COL 4: ARTICLES (or headings when the chapter has no articles) -->
 					<div class="col col-articles">
-						<p class="col-head">Articles</p>
+						<p class="col-head">{col4Heading}</p>
 						{#if col4Items.length === 0}
 							<p class="col-empty">—</p>
 						{:else}
 							<ul class="col-list styled-scroll" role="none">
-								{#each col4Items as art, i (art.slug)}
+								{#each col4Items as item, i (item.kind + ':' + (item.kind === 'article' ? item.data.slug : item.data.id))}
 									<li>
 										<a
 											class="cell cell-article"
-											href={articleHref(art)}
+											href={item.kind === 'article'
+												? articleHref(item.data)
+												: headingHref(item.data)}
 											role="menuitem"
 											data-kb-col="3"
 											data-kb-index={i}
@@ -567,8 +597,12 @@
 											onclick={close}
 										>
 											<span class="cell-body">
-												<span class="cell-tag cell-tag-sm">Article&nbsp;{art.number}</span>
-												<span class="cell-title cell-title-sm">{art.title}</span>
+												{#if item.kind === 'article'}
+													<span class="cell-tag cell-tag-sm">Article&nbsp;{item.data.number}</span>
+													<span class="cell-title cell-title-sm">{item.data.title}</span>
+												{:else}
+													<span class="cell-title cell-title-sm">{item.data.title}</span>
+												{/if}
 											</span>
 										</a>
 									</li>
