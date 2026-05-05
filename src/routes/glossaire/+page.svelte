@@ -18,6 +18,11 @@
 			{data.totalEntries} termes du Catéchisme, avec définitions et renvois aux paragraphes.
 			Parcourez par thème ou commencez par les notions les plus citées.
 		</p>
+		<p class="mt-3 font-ui text-[13px]">
+			<a href="/glossaire/tous" class="text-muted hover:text-accent">
+				Voir tous les {data.totalEntries} termes <span aria-hidden="true">→</span>
+			</a>
+		</p>
 	</header>
 
 	<section class="mb-12">
