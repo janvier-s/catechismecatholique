@@ -152,24 +152,35 @@
 		if (detail) {
 			for (const a of detail.articles) {
 				const articleHref = `${baseHref}/${a.slug}`;
-				const articleChildren: Item[] = a.headings.map((h) => ({
-					title: h.title,
-					href: `${articleHref}#${h.id}`
-				}));
-				// En Bref blocks whose first paragraph falls within this article go INSIDE it
 				const articleParas = a.paragraphs;
 				const articleMin = articleParas.length > 0 ? articleParas[0]! : 0;
 				const articleMax = articleParas.length > 0 ? articleParas[articleParas.length - 1]! : 0;
+
+				// Build a flat list of (heading | en_bref) ordered by paragraph
+				// position. Without this, all en_brefs got pushed to the end of
+				// the article — articles spanning many sections (each with its
+				// own end-of-section "En Bref") had every en_bref stacked
+				// underneath the last Roman heading.
+				type ChildEntry = { sortKey: number; item: Item };
+				const entries: ChildEntry[] = [];
+				for (const h of a.headings) {
+					entries.push({
+						sortKey: h.paragraph_start,
+						item: { title: h.title, href: `${articleHref}#${h.id}` }
+					});
+				}
 				for (const block of detail.en_brefs ?? []) {
 					if (block.paragraphs.length === 0) continue;
 					const firstP = block.paragraphs[0]!;
-					if (firstP >= articleMin && firstP <= articleMax) {
-						articleChildren.push({
-							title: 'En Bref',
-							href: `${baseHref}#en-bref-${firstP}`
-						});
-					}
+					if (firstP < articleMin || firstP > articleMax) continue;
+					entries.push({
+						sortKey: firstP,
+						item: { title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` }
+					});
 				}
+				entries.sort((x, y) => x.sortKey - y.sortKey);
+				const articleChildren = entries.map((e) => e.item);
+
 				out.push({
 					title: a.title,
 					number: a.number,

@@ -1,8 +1,25 @@
 <script lang="ts">
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
+	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
+	import type { Paragraph } from '$lib/data/types';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
+
+	// Map first-paragraph-of-block → block, plus a set of every paragraph
+	// number that belongs to any En Bref block. The body loop renders the
+	// summary box at the FIRST paragraph and skips the rest so they don't
+	// double-render as regular ParagraphViews.
+	const enBrefStartMap = $derived(() => {
+		const map = new Map<number, { paragraphs: number[] }>();
+		for (const block of data.enBrefBlocks ?? []) {
+			if (block.paragraphs.length > 0) map.set(block.paragraphs[0]!, block);
+		}
+		return map;
+	});
+	const enBrefAllNumbers = $derived(
+		new Set<number>((data.enBrefBlocks ?? []).flatMap((b) => b.paragraphs))
+	);
 </script>
 
 <svelte:head>
@@ -62,12 +79,23 @@
 	<h1 class="font-heading text-4xl font-semibold mt-1 mb-8 text-heading">{data.article.title}</h1>
 
 	{#each data.paragraphs as p (p.number)}
-		{@const heading = data.article.headings.find((h) => h.paragraph_start === p.number)}
-		{#if heading}
-			<h2 id={heading.id} class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent">
-				{heading.title}
-			</h2>
+		{#if enBrefStartMap().has(p.number)}
+			{@const block = enBrefStartMap().get(p.number)!}
+			{@const records = block.paragraphs
+				.map((n) => data.enBrefParagraphMap?.[n])
+				.filter((x): x is Paragraph => Boolean(x))}
+			<EnBrefBlock paragraphs={records} />
+		{:else if !enBrefAllNumbers.has(p.number)}
+			{@const heading = data.article.headings.find((h) => h.paragraph_start === p.number)}
+			{#if heading}
+				<h2
+					id={heading.id}
+					class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
+				>
+					{heading.title}
+				</h2>
+			{/if}
+			<ParagraphView paragraph={p} />
 		{/if}
-		<ParagraphView paragraph={p} />
 	{/each}
 </main>
