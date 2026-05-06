@@ -176,14 +176,11 @@
 				</a>
 			</p>
 		{/if}
+	{:else if data.kind === 'paragraph'}
+		<ParagraphView paragraph={data.paragraph} />
 	{:else}
-		{#if data.kind === 'paragraph'}
-			<ParagraphView paragraph={data.paragraph} />
-		{:else}
-			{#each data.paragraphs as p (p.number)}
-				<ParagraphView paragraph={p} />
-			{/each}
-		{/if}
+		{#each data.paragraphs as p (p.number)}
+			<ParagraphView paragraph={p} />
+		{/each}
 	{/if}
 </main>
-

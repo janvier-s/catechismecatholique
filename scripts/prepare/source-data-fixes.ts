@@ -30,7 +30,9 @@ export function stripBibRefColonMarkers(s: string): string {
 // We preserve the original as `superseded_text_html` and replace `text_html`
 // with the current Vatican wording so the reader sees the authoritative text
 // while historians can still access the prior formulation.
-export function patchParagraph2267(paragraphs: Map<number, { text_html: string; superseded_text_html?: string }>): void {
+export function patchParagraph2267(
+	paragraphs: Map<number, { text_html: string; superseded_text_html?: string }>
+): void {
 	const p = paragraphs.get(2267);
 	if (!p) return;
 	p.superseded_text_html = p.text_html;

@@ -70,9 +70,7 @@
 				return;
 			}
 
-			related = b.suggestions[slug]
-				.map((s) => ({ term: b.terms[s] ?? s }))
-				.filter((r) => r.term);
+			related = b.suggestions[slug].map((s) => ({ term: b.terms[s] ?? s })).filter((r) => r.term);
 		});
 	});
 </script>
