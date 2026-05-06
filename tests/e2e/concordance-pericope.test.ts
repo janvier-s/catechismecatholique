@@ -18,8 +18,8 @@ test('clicking a pericope header on the left highlights the matching pericope on
 	page
 }) => {
 	await page.goto('/bible/genese/3/concordance');
-	// Pick a specific pericope header on the left (button with the verseRef text).
-	const leftHeader = page.locator('button', { hasText: 'Genèse 3:1-24' }).first();
+	// Pick a specific pericope header on the left (div[role="button"] with the verseRef text).
+	const leftHeader = page.getByRole('button', { name: 'Genèse 3:1-24' }).first();
 	await leftHeader.click();
 	// The right pane should highlight the matching pericope card via data-pericope-ref
 	const rightCard = page.locator('[data-pericope-ref="Genèse 3:1-24"]').first();

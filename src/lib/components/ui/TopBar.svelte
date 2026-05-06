@@ -47,7 +47,9 @@
 
 		<div class="flex-1"></div>
 
-		<nav class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none">
+		<nav
+			class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none relative z-[1]"
+		>
 			<CatechismDropdown />
 			<a href="/bible" class="hover:text-accent">Bible</a>
 			<a href="/glossaire" class="hover:text-accent">Glossaire</a>
