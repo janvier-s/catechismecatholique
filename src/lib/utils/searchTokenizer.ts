@@ -3,7 +3,10 @@
 // (/api/search). MUST be a pure function with no SvelteKit imports so the
 // build script can `import { ... }` it directly.
 
-// Strip diacritics: 'présupposé' → 'presuppose', 'œcuménisme' → 'oecumenisme'
+// Strip diacritics: 'présupposé' → 'presuppose', 'œcuménisme' → 'oecumenisme'.
+// Known limitation: œ expands to 'oe', so a user who types 'ecumenisme'
+// (modern French spelling without ligature) won't match 'oecumenisme'.
+// Fixing this requires changing processTerm AND rebuilding the search index.
 export function stripDiacritics(s: string): string {
 	return s
 		.normalize('NFD')

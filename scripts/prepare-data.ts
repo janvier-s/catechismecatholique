@@ -140,6 +140,12 @@ async function main() {
 	}
 	endStep(`${chapters.length} chapters`);
 
+	logStep('building headings index (autocomplete)');
+	const { buildHeadingsIndex } = await import('./prepare/headings-index.ts');
+	const headings = buildHeadingsIndex(structure, chapters);
+	writeFileSync(join(OUT, 'ccc/headings.json'), JSON.stringify(headings));
+	endStep(`${headings.length} entries`);
+
 	logStep('building paragraph context');
 	const paragraphContext = buildParagraphContext(rawParts, structure);
 	writeFileSync(join(OUT, 'ccc/paragraph-context.json'), JSON.stringify(paragraphContext));

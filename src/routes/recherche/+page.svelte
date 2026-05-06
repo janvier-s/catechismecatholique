@@ -5,6 +5,7 @@
 	import { page } from '$app/state';
 	import { stripDiacritics } from '$lib/utils/searchTokenizer';
 	import { detectIntent } from '$lib/utils/searchIntent';
+	import SearchSuggest from '$lib/components/ui/SearchSuggest.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -13,6 +14,8 @@
 	let q = $state('');
 	let inputEl: HTMLInputElement | null = $state(null);
 	let recents: string[] = $state([]);
+	let suggestEl: SearchSuggest | undefined = $state();
+	let suggestOpen = $state(false);
 
 	// Pagination — show in batches of PAGE_SIZE; "Voir plus" reveals the next
 	// batch. Reset whenever the query changes.
@@ -78,8 +81,13 @@
 		if (!data.q && inputEl) inputEl.focus();
 	});
 
+	function handleInputKeydown(e: KeyboardEvent) {
+		if (suggestEl?.handleKeydown(e)) return;
+	}
+
 	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
+		suggestOpen = false;
 		const trimmed = q.trim();
 		if (!trimmed) return;
 		// Honor intent detection on the client too — the page load will redirect
@@ -93,6 +101,11 @@
 		}
 		pushRecent(intent.q);
 		void goto(`/recherche?q=${encodeURIComponent(intent.q)}`);
+	}
+
+	function handleSuggestSelect(href: string) {
+		suggestOpen = false;
+		void goto(href);
 	}
 
 	async function clearInput() {
@@ -255,30 +268,42 @@
 	<header class="mb-8 text-center">
 		<h1 class="font-ui text-sm uppercase tracking-[0.22em] text-muted mb-6">Recherche</h1>
 		<form class="search-form mx-auto max-w-[640px]" onsubmit={handleSubmit}>
-			<div class="search-line">
-				<input
-					bind:this={inputEl}
-					bind:value={q}
-					type="search"
-					name="q"
-					autocomplete="off"
-					aria-label="Recherche"
-					class="search-input"
-				/>
-				<span class="search-placeholder" class:hidden={q.length > 0} aria-hidden="true">
-					Rechercher : <i>Eucharistie</i> ou 1324-1327
-				</span>
-				{#if q.length > 0}
-					<div class="search-affordances">
-						<button
-							type="button"
-							class="search-clear"
-							onclick={clearInput}
-							aria-label="Effacer la recherche"
-						>
-							Effacer
-						</button>
-						<span class="search-submit-hint" aria-hidden="true">↵</span>
+			<div class="search-wrap">
+				<div class="search-line">
+					<input
+						bind:this={inputEl}
+						bind:value={q}
+						type="search"
+						name="q"
+						autocomplete="off"
+						aria-label="Recherche"
+						aria-autocomplete="list"
+						aria-expanded={suggestOpen}
+						class="search-input"
+						onfocus={() => (suggestOpen = true)}
+						onblur={() => setTimeout(() => (suggestOpen = false), 150)}
+						onkeydown={handleInputKeydown}
+					/>
+					<span class="search-placeholder" class:hidden={q.length > 0} aria-hidden="true">
+						Rechercher : <i>Eucharistie</i> ou 1324-1327
+					</span>
+					{#if q.length > 0}
+						<div class="search-affordances">
+							<button
+								type="button"
+								class="search-clear"
+								onclick={clearInput}
+								aria-label="Effacer la recherche"
+							>
+								Effacer
+							</button>
+							<span class="search-submit-hint" aria-hidden="true">↵</span>
+						</div>
+					{/if}
+				</div>
+				{#if suggestOpen}
+					<div class="suggest-positioner">
+						<SearchSuggest bind:this={suggestEl} query={q} onSelect={handleSuggestSelect} />
 					</div>
 				{/if}
 			</div>
@@ -467,6 +492,16 @@
 	/* --- search input --- */
 	.search-form {
 		width: 100%;
+	}
+	.search-wrap {
+		position: relative;
+	}
+	.suggest-positioner {
+		position: absolute;
+		top: calc(100% + 4px);
+		left: 0;
+		right: 0;
+		z-index: 50;
 	}
 	.search-line {
 		position: relative;

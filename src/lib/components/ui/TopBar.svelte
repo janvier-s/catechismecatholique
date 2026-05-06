@@ -4,6 +4,7 @@
 	import ModeToggle from './ModeToggle.svelte';
 	import CatechismDropdown from './CatechismDropdown.svelte';
 	import MobileMenu from './MobileMenu.svelte';
+	import SearchSuggest from './SearchSuggest.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { detectIntent } from '$lib/utils/searchIntent';
@@ -11,6 +12,10 @@
 	// Hide the global search on /recherche — the page owns its own input there
 	// and we don't want two affordances competing for the same query.
 	const onRecherche = $derived(page.url.pathname === '/recherche');
+
+	let topbarQ = $state('');
+	let topbarSuggestOpen = $state(false);
+	let topbarSuggestEl: SearchSuggest | undefined = $state();
 
 	// Shrink-on-scroll (mobile only — desktop topbar stays as-is). The
 	// .is-condensed class trims the bar height from 58 → 44 px once the user
@@ -59,9 +64,8 @@
 				class="hidden lg:block absolute left-1/2 -translate-x-1/2 w-full max-w-[460px]"
 				onsubmit={(e) => {
 					e.preventDefault();
-					const q = (
-						(new FormData(e.currentTarget as HTMLFormElement).get('q') as string) ?? ''
-					).trim();
+					topbarSuggestOpen = false;
+					const q = topbarQ.trim();
 					if (!q) return;
 					const intent = detectIntent(q);
 					if (intent.kind === 'paragraph' || intent.kind === 'bible') {
@@ -69,6 +73,7 @@
 					} else {
 						void goto(`/recherche?q=${encodeURIComponent(intent.q)}`);
 					}
+					topbarQ = '';
 				}}
 			>
 				<div class="relative">
@@ -87,15 +92,35 @@
 						<path d="m21 21-4.3-4.3" />
 					</svg>
 					<input
+						bind:value={topbarQ}
 						type="search"
 						name="q"
 						placeholder="Rechercher : Eucharistie ou 1324-1327"
 						class="search-input w-full h-10 pl-10 pr-3 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-border focus:border-transparent"
 						aria-label="Recherche"
+						aria-autocomplete="list"
+						aria-expanded={topbarSuggestOpen}
+						autocomplete="off"
+						onfocus={() => (topbarSuggestOpen = true)}
+						onblur={() => setTimeout(() => (topbarSuggestOpen = false), 150)}
+						onkeydown={(e) => topbarSuggestEl?.handleKeydown(e)}
 					/>
 					<span class="search-placeholder" aria-hidden="true">
 						Rechercher : <i>Eucharistie</i> ou 1324-1327
 					</span>
+					{#if topbarSuggestOpen}
+						<div class="topbar-suggest">
+							<SearchSuggest
+								bind:this={topbarSuggestEl}
+								query={topbarQ}
+								onSelect={(href) => {
+									topbarSuggestOpen = false;
+									topbarQ = '';
+									void goto(href);
+								}}
+							/>
+						</div>
+					{/if}
 				</div>
 			</form>
 		{/if}
@@ -139,6 +164,13 @@
 		.topbar :global(.logo-mark) {
 			transition: none;
 		}
+	}
+	.topbar-suggest {
+		position: absolute;
+		top: calc(100% + 4px);
+		left: 0;
+		right: 0;
+		z-index: calc(var(--z-modal) + 1);
 	}
 	/* Native placeholder is always hidden — the styled overlay below shows in
 	   its place so we can italicize the keyword example. */
