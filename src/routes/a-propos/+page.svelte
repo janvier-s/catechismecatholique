@@ -6,22 +6,22 @@
 	<title>À propos · Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
-		content="Comment et pourquoi ce site a été construit : la première édition française du Catéchisme librement lisible et consultable sur le web."
+		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
 	<link rel="canonical" href="https://catechismecatholique.fr/a-propos" />
 	<meta property="og:title" content="À propos · Catéchisme de l'Église Catholique" />
 	<meta
 		property="og:description"
-		content="La première édition numérique française du Catéchisme de l'Église Catholique, librement lisible, consultable et croisable avec la Bible."
+		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
 </svelte:head>
 
 <ProseLayout
 	title="À propos de ce site"
-	subtitle="La première édition numérique française du Catéchisme de l'Église Catholique, librement lisible et consultable sur le web."
-	description="Comment et pourquoi ce site a été construit : la première édition française du Catéchisme librement lisible et consultable sur le web."
+	subtitle="Le Catéchisme de l'Église Catholique en français, conçu pour le web : navigation structurée, recherche plein texte et concordance biblique."
+	description="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 >
-	<h2>Le Catéchisme et la lacune numérique</h2>
+	<h2>Le Catéchisme et la lacune en ligne</h2>
 
 	<p>
 		Le Catéchisme de l'Église catholique, promulgué le 11 octobre 1992 par saint Jean-Paul&nbsp;II
@@ -39,8 +39,8 @@
 			rel="noopener noreferrer">vatican.va</a
 		>
 		propose le texte intégral, mais dans une interface vieillissante, difficile à naviguer et peu lisible
-		sur les appareils modernes. Des PDF et des ePubs circulent librement, mais ils restent cloisonnés
-		: on peut les lire, pas vraiment les chercher ni les croiser avec d'autres sources. En anglais,
+		sur les appareils modernes. Des versions numériques existent, mais elles restent cloisonnées : on
+		peut les lire, pas vraiment les chercher ni les croiser avec d'autres sources. En anglais,
 		<a
 			href="https://www.catholiccrossreference.online/catechism/"
 			target="_blank"
@@ -115,41 +115,44 @@
 
 	<ul>
 		<li>
-			<strong>Navigation structurée</strong> : l'intégralité des 2&nbsp;865 paragraphes organisés en quatre
-			parties, sections, chapitres et articles, avec un sommaire hiérarchique. Chaque paragraphe affiche
-			sa numérotation, ses titres en gras et ses références.
+			<strong>Navigation structurée</strong> : les 2&nbsp;865 paragraphes organisés en parties, sections,
+			chapitres et articles, avec un sommaire hiérarchique. Chaque paragraphe affiche ses références bibliques
+			et doctrinales.
 		</li>
 		<li>
-			<strong>Trois modes de recherche</strong> : par mot ou expression, par numéro de paragraphe (§&nbsp;27
-			ouvre directement le paragraphe&nbsp;27), ou par référence biblique (Jn&nbsp;1,&nbsp;14 renvoie
-			à tous les paragraphes qui citent ce verset).
+			<strong>Recherche</strong> : par mot ou expression, par numéro de paragraphe (taper &laquo;&nbsp;27&nbsp;&raquo;
+			ouvre directement le paragraphe&nbsp;27), ou par référence scripturaire (taper &laquo;&nbsp;Jn&nbsp;1,&nbsp;14&nbsp;&raquo;
+			renvoie à tous les paragraphes qui citent ce verset).
 		</li>
 		<li>
-			<strong>Concordance biblique complète</strong> : pour chaque livre et chaque chapitre de la Bible,
-			la liste des paragraphes du Catéchisme qui citent les versets correspondants. Permet de partir de
-			l'Écriture et de trouver ce que l'Église en dit.
+			<strong>Concordance biblique</strong> : à partir de n'importe quel verset de la Bible, retrouver
+			les paragraphes du Catéchisme qui le citent. Une façon de lire l'Écriture à la lumière de l'enseignement
+			de l'Église.
 		</li>
 		<li>
-			<strong>Références intégrées</strong> : dans chaque paragraphe, les citations scripturaires et les
-			renvois doctrinaux sont accessibles directement, sans quitter la page.
+			<strong>Références en contexte</strong> : dans chaque paragraphe, les citations scripturaires et
+			les renvois doctrinaux s'ouvrent sans quitter la lecture.
 		</li>
 		<li>
-			<strong>Glossaire théologique</strong> : les principaux termes de la foi catholique, définis et
-			regroupés par thème.
+			<strong>Glossaire</strong> : les principaux termes de la théologie catholique, définis et classés
+			par thème.
+		</li>
+		<li>
+			<strong>Lecture sur mobile</strong> : aucune application à installer. Le site fonctionne sur téléphone,
+			tablette et ordinateur.
 		</li>
 		<li>
 			<strong>Cinq thèmes d'affichage</strong> : clair, sépia, sombre, OLED et automatique (suit le réglage
-			du système). Adapté à la lecture prolongée sur tous les appareils.
+			du système).
 		</li>
 	</ul>
 
 	<h2>Libre et sans traçage</h2>
 
 	<p>
-		Ce site ne contient aucune publicité. Il ne dépose aucun cookie de traçage ou de mesure
-		d'audience. Aucune donnée personnelle n'est collectée. Aucun compte n'est requis pour accéder à
-		l'intégralité du contenu : le texte du Catéchisme, la concordance biblique et le glossaire sont
-		entièrement libres de lecture.
+		Ce site ne contient aucune publicité et ne dépose aucun cookie de traçage. La fréquentation est
+		mesurée par Cloudflare Web Analytics, un outil sans cookie et sans collecte de données
+		personnelles. Aucun compte n'est requis pour accéder à l'intégralité du contenu.
 	</p>
 
 	<p>
@@ -164,9 +167,10 @@
 	<h2>Une idée simple</h2>
 
 	<p>
-		Ce projet est né d'un constat : il n'existait pas de bonne édition numérique française du
-		Catéchisme. Une page de lecture, d'abord. Puis la recherche s'est imposée, puis la concordance
-		biblique, puis le glossaire. Chaque chose appelait la suivante.
+		Ce projet est né d'un constat : il n'existait pas de bonne édition du Catéchisme accessible en
+		ligne en français. Il a commencé par une page de lecture, sobre et lisible. Puis la recherche
+		s'est imposée, puis la concordance biblique, puis le glossaire. Chaque chose appelait la
+		suivante.
 	</p>
 
 	<p>
