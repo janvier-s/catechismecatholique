@@ -32,6 +32,14 @@ const ROOT = join(HERE, '..');
 const SOURCES = join(ROOT, 'scripts/data-sources');
 const OUT = join(ROOT, 'static/data');
 
+// CI sets SKIP_PREPARE_DATA=true because static/data is committed and
+// there are no source symlinks to rebuild from. Bail immediately so we
+// don't pay even the source-check overhead on every build.
+if (process.env.SKIP_PREPARE_DATA === 'true') {
+	console.log('prepare-data: SKIP_PREPARE_DATA set — using committed static data.');
+	process.exit(0);
+}
+
 async function main() {
 	const start = performance.now();
 	logHeader('prepare-data');

@@ -43,6 +43,8 @@ jobs:
 
       - name: Build (Cloudflare adapter)
         run: npm run build
+        env:
+          SKIP_PREPARE_DATA: 'true'
 
       # Surface bundle stats in the run summary — handy when reviewing PRs
       # that touch large dependencies or component graphs.

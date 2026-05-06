@@ -43,6 +43,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          SKIP_PREPARE_DATA: 'true'
 
       - name: Publish to Cloudflare Pages
         id: publish
