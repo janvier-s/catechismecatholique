@@ -69,6 +69,17 @@
 		flex: 1;
 		min-width: 0;
 	}
+	/* Most CCC paragraphs render as a single <span>; a few (e.g. §2267 patched
+	   to the 2018 Vatican revision) contain multiple <p> blocks. Tailwind's
+	   preflight zeroes <p> margins, so restore vertical spacing here. Scoped
+	   to .prose-paragraph (ParagraphRenderer's container) so superseded-block
+	   labels and other in-content <p>s aren't affected. */
+	.content-col :global(.prose-paragraph p) {
+		margin-bottom: 0.85em;
+	}
+	.content-col :global(.prose-paragraph p:last-child) {
+		margin-bottom: 0;
+	}
 	/* En-marge: keep the prose column at its natural width and reserve the
 	   right gutter for refs. The padding applies to *every* paragraph in
 	   side-mode (not just those with refs) so the text column width is
@@ -131,14 +142,16 @@
 	}
 	.superseded-text {
 		font-size: 0.875rem;
-		color: color-mix(in srgb, var(--color-fg) 55%, transparent);
+		color: var(--color-muted);
 		line-height: 1.7;
 	}
-	.superseded-text :global(span) {
+	.superseded-text :global(span),
+	.superseded-text :global(p) {
 		display: block;
 		margin-bottom: 0.5rem;
 	}
-	.superseded-text :global(span:last-child) {
+	.superseded-text :global(span:last-child),
+	.superseded-text :global(p:last-child) {
 		margin-bottom: 0;
 	}
 

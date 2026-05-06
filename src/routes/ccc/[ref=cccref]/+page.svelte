@@ -3,6 +3,14 @@
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
+	// Prev/next paragraph navigation. For ranges, prev steps back from the
+	// first paragraph and next steps forward from the last — so navigation
+	// keeps moving linearly through the catechism.
+	const prevNum = $derived(data.kind === 'paragraph' ? data.paragraph.number - 1 : data.from - 1);
+	const nextNum = $derived(data.kind === 'paragraph' ? data.paragraph.number + 1 : data.to + 1);
+	const hasPrev = $derived(prevNum >= 1);
+	const hasNext = $derived(nextNum <= 2865);
+
 	function chapterUrl(c: NonNullable<typeof data.context>): string {
 		if (!c.section || !c.chapter) return '';
 		return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`;
@@ -183,4 +191,74 @@
 			<ParagraphView paragraph={p} />
 		{/each}
 	{/if}
+
+	<nav
+		class="paragraph-nav mt-10 pt-6 border-t border-border flex items-stretch justify-between gap-4"
+		aria-label="Paragraphe précédent ou suivant"
+	>
+		{#if hasPrev}
+			<a class="paragraph-nav-card prev" href="/ccc/{prevNum}">
+				<span class="paragraph-nav-eyebrow">← Précédent</span>
+				<span class="paragraph-nav-title">§&nbsp;{prevNum}</span>
+			</a>
+		{:else}
+			<span class="paragraph-nav-spacer"></span>
+		{/if}
+		{#if hasNext}
+			<a class="paragraph-nav-card next" href="/ccc/{nextNum}">
+				<span class="paragraph-nav-eyebrow">Suivant →</span>
+				<span class="paragraph-nav-title">§&nbsp;{nextNum}</span>
+			</a>
+		{:else}
+			<span class="paragraph-nav-spacer"></span>
+		{/if}
+	</nav>
 </main>
+
+<style>
+	.paragraph-nav-card {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		padding: 0.7rem 1rem;
+		background: var(--color-panel);
+		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
+		border-radius: 4px;
+		color: var(--color-fg);
+		text-decoration: none;
+		transition:
+			border-color 140ms ease,
+			background 140ms ease,
+			color 140ms ease;
+	}
+	.paragraph-nav-card:hover {
+		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+		color: var(--color-accent-text);
+	}
+	.paragraph-nav-card.prev {
+		text-align: left;
+	}
+	.paragraph-nav-card.next {
+		text-align: right;
+	}
+	.paragraph-nav-eyebrow {
+		font-family: var(--font-ui);
+		font-size: 11px;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		color: var(--color-muted);
+	}
+	.paragraph-nav-title {
+		font-family: var(--font-heading);
+		font-size: 17px;
+		line-height: 1.2;
+		font-variant-numeric: oldstyle-nums;
+	}
+	.paragraph-nav-spacer {
+		flex: 1;
+	}
+</style>
