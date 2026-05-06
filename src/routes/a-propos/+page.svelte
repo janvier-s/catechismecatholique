@@ -115,38 +115,69 @@
 
 	<ul>
 		<li>
-			Lire les 2&nbsp;865 paragraphes en navigation structurée (parties, sections, chapitres,
-			articles)
+			<strong>Navigation structurée</strong> : l'intégralité des 2&nbsp;865 paragraphes organisés en quatre
+			parties, sections, chapitres et articles, avec un sommaire hiérarchique. Chaque paragraphe affiche
+			sa numérotation, ses titres en gras et ses références.
 		</li>
 		<li>
-			Rechercher par mot, par numéro de paragraphe (§&nbsp;27) ou par référence biblique
-			(Jn&nbsp;1,&nbsp;14)
+			<strong>Trois modes de recherche</strong> : par mot ou expression, par numéro de paragraphe (§&nbsp;27
+			ouvre directement le paragraphe&nbsp;27), ou par référence biblique (Jn&nbsp;1,&nbsp;14 renvoie
+			à tous les paragraphes qui citent ce verset).
 		</li>
-		<li>Croiser chaque verset de la Bible avec les paragraphes du Catéchisme qui le citent</li>
-		<li>Explorer le glossaire des termes théologiques, classés par thème</li>
-		<li>Choisir parmi cinq modes d'affichage : clair, sépia, sombre, OLED, automatique</li>
+		<li>
+			<strong>Concordance biblique complète</strong> : pour chaque livre et chaque chapitre de la Bible,
+			la liste des paragraphes du Catéchisme qui citent les versets correspondants. Permet de partir de
+			l'Écriture et de trouver ce que l'Église en dit.
+		</li>
+		<li>
+			<strong>Références intégrées</strong> : dans chaque paragraphe, les citations scripturaires et les
+			renvois doctrinaux sont accessibles directement, sans quitter la page.
+		</li>
+		<li>
+			<strong>Glossaire théologique</strong> : les principaux termes de la foi catholique, définis et
+			regroupés par thème.
+		</li>
+		<li>
+			<strong>Cinq thèmes d'affichage</strong> : clair, sépia, sombre, OLED et automatique (suit le réglage
+			du système). Adapté à la lecture prolongée sur tous les appareils.
+		</li>
 	</ul>
 
-	<p>Les textes sont libres de lecture. Aucun compte n'est requis.</p>
+	<h2>Libre et sans traçage</h2>
+
+	<p>
+		Ce site ne contient aucune publicité. Il ne dépose aucun cookie de traçage ou de mesure
+		d'audience. Aucune donnée personnelle n'est collectée. Aucun compte n'est requis pour accéder à
+		l'intégralité du contenu : le texte du Catéchisme, la concordance biblique et le glossaire sont
+		entièrement libres de lecture.
+	</p>
+
+	<p>
+		Le code source est publié sur
+		<a
+			href="https://github.com/janvier-s/catechismecatholique"
+			target="_blank"
+			rel="noopener noreferrer">GitHub</a
+		>.
+	</p>
 
 	<h2>Une idée simple</h2>
 
 	<p>
-		Ce projet a commencé comme une page de lecture : un simple affichage du texte du Catéchisme,
-		propre et lisible sur un écran. Il a grandi, comme ces choses-là grandissent. La lecture
-		appelait la recherche, la recherche appelait la concordance biblique, la concordance appelait le
-		glossaire. Chaque ajout découlait naturellement du précédent.
+		Ce projet est né d'un constat : il n'existait pas de bonne édition numérique française du
+		Catéchisme. Une page de lecture, d'abord. Puis la recherche s'est imposée, puis la concordance
+		biblique, puis le glossaire. Chaque chose appelait la suivante.
 	</p>
 
 	<p>
-		Le résultat est ce site. Il est offert librement, à toute personne qui souhaite lire, étudier ou
-		approfondir sa foi à travers ce que l'Église enseigne. Il n'est pas fait pour un seul lecteur,
-		ni pour sa gloire. Il est fait pour Dieu et pour Son Église, afin que Son enseignement demeure
-		accessible à tous ceux qui le cherchent.
+		Ce site est le résultat. Offert librement, sans compte ni publicité, à quiconque veut lire,
+		chercher ou approfondir sa foi à travers l'enseignement de l'Église. Pour la plus grande gloire
+		de Dieu.
 	</p>
 
 	<p class="intercession">
 		Saint Thomas d'Aquin, priez pour nous.<br />
+		Saint Jean-Paul&nbsp;II, priez pour nous.<br />
 		Saint Pie&nbsp;X, priez pour nous.
 	</p>
 
