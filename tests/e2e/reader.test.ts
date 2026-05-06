@@ -31,7 +31,7 @@ test('chapter page renders with sidebar', async ({ page }) => {
 test('ccc home renders parts', async ({ page }) => {
 	await page.goto('/ccc');
 	await expect(
-		page.getByRole('heading', { name: /Catéchisme de l'Église catholique/ })
+		page.getByRole('heading', { name: /Catéchisme de l'Église catholique/i })
 	).toBeVisible();
 });
 

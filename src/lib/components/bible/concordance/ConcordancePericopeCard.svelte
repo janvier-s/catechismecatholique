@@ -14,7 +14,7 @@
 	}
 </script>
 
-<div class="pericope-detail">
+<div class="pericope-detail" data-pericope-ref={pericope.verseRef}>
 	<!-- Optional pericope title.
 	     The verseRef is already shown in the sticky PanelShell header,
 	     so we don't repeat it here. -->

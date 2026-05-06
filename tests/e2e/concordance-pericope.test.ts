@@ -30,7 +30,7 @@ test('CCC chip on the concordance page navigates to /ccc/<n>', async ({ page }) 
 	await page.goto('/bible/genese/3/concordance');
 	const cccChip = page.locator('a[href^="/ccc/"]').first();
 	const href = await cccChip.getAttribute('href');
-	expect(href).toMatch(/^\/ccc\/\d+$/);
+	expect(href).toMatch(/^\/ccc\/\d+(-\d+)?$/);
 	await cccChip.click();
 	await expect(page).toHaveURL(href!);
 });

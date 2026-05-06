@@ -475,7 +475,6 @@
 	.section {
 		position: relative;
 		padding-left: clamp(0.85rem, 2.4vw, 1.5rem);
-		border-left: 1px solid var(--rail);
 	}
 
 	/* ---- Rows (shared) --------------------------------------------------- */
