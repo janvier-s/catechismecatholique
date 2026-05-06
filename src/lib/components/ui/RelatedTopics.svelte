@@ -36,7 +36,6 @@
 	}
 
 	interface Related {
-		slug: string;
 		term: string;
 	}
 
@@ -72,7 +71,7 @@
 			}
 
 			related = b.suggestions[slug]
-				.map((s) => ({ slug: s, term: b.terms[s] ?? s }))
+				.map((s) => ({ term: b.terms[s] ?? s }))
 				.filter((r) => r.term);
 		});
 	});
@@ -80,62 +79,47 @@
 
 {#if related.length > 0}
 	<div class="related-topics">
-		<span class="related-label">Sujets connexes :</span>
-		<ul class="related-list">
-			{#each related as r (r.slug)}
-				<li>
-					<a href="/glossaire/{r.slug}" class="related-chip">{r.term}</a>
-				</li>
+		<p class="related-label">Sujets connexes :</p>
+		<div class="related-pills">
+			{#each related as r (r.term)}
+				<a href="/recherche?q={encodeURIComponent(r.term)}" class="related-pill">{r.term}</a>
 			{/each}
-		</ul>
+		</div>
 	</div>
 {/if}
 
 <style>
 	.related-topics {
-		display: flex;
-		align-items: baseline;
-		flex-wrap: wrap;
-		gap: 0.4rem 0.6rem;
-		padding: 0.6rem 0;
+		text-align: center;
+		margin-bottom: 1rem;
 	}
 	.related-label {
 		font-family: var(--font-ui);
-		font-size: 11px;
-		font-weight: 600;
-		letter-spacing: 0.07em;
-		text-transform: uppercase;
+		font-size: 12px;
 		color: var(--color-muted);
-		white-space: nowrap;
-		flex: none;
+		margin-bottom: 0.5rem;
 	}
-	.related-list {
+	.related-pills {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.35rem;
-		list-style: none;
-		padding: 0;
-		margin: 0;
+		justify-content: center;
+		gap: 0.5rem;
 	}
-	.related-chip {
+	.related-pill {
 		display: inline-block;
 		font-family: var(--font-ui);
-		font-size: 12px;
-		font-weight: 500;
-		color: var(--color-fg);
-		background: color-mix(in srgb, var(--color-fg) 6%, transparent);
-		border: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
-		border-radius: 999px;
-		padding: 0.2rem 0.65rem;
+		font-size: 13px;
+		color: var(--color-muted);
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
+		padding: 0.35rem 0.75rem;
 		text-decoration: none;
 		transition:
-			background 120ms ease,
-			border-color 120ms ease,
-			color 120ms ease;
+			color 120ms ease,
+			border-color 120ms ease;
 	}
-	.related-chip:hover {
-		background: color-mix(in srgb, var(--color-accent) 12%, transparent);
-		border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-		color: var(--color-accent-text, var(--color-accent));
+	.related-pill:hover {
+		color: var(--color-fg);
+		border-color: color-mix(in srgb, var(--color-fg) 35%, transparent);
 	}
 </style>

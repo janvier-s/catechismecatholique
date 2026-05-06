@@ -150,18 +150,6 @@
 			</ol>
 		</nav>
 
-		<h1 class="paragraph-mark">
-			<span class="sr-only">{data.kind === 'paragraph' ? 'Paragraphe' : 'Paragraphes'}&nbsp;</span>
-			<span class="pm-glyph" aria-hidden="true">{data.kind === 'paragraph' ? '§' : '§§'}</span>
-			<span class="pm-num">
-				{#if data.kind === 'paragraph'}
-					{data.paragraph.number}
-				{:else}
-					{data.from}–{data.to}
-				{/if}
-			</span>
-		</h1>
-
 		{#if c.heading}
 			<h2 class="font-ui text-lg font-semibold text-accent mt-2 mb-4">
 				<a href="{chapterUrl(c)}#{c.heading.id}" class="hover:underline">
@@ -189,17 +177,6 @@
 			</p>
 		{/if}
 	{:else}
-		<h1 class="paragraph-mark">
-			<span class="sr-only">{data.kind === 'paragraph' ? 'Paragraphe' : 'Paragraphes'}&nbsp;</span>
-			<span class="pm-glyph" aria-hidden="true">{data.kind === 'paragraph' ? '§' : '§§'}</span>
-			<span class="pm-num">
-				{#if data.kind === 'paragraph'}
-					{data.paragraph.number}
-				{:else}
-					{data.from}–{data.to}
-				{/if}
-			</span>
-		</h1>
 		{#if data.kind === 'paragraph'}
 			<ParagraphView paragraph={data.paragraph} />
 		{:else}
@@ -210,35 +187,3 @@
 	{/if}
 </main>
 
-<style>
-	/* Paragraph-ref page H1 — site's distinctive § + oldstyle-num treatment.
-	   Italic § in accent, semibold oldstyle figures in heading font. The full
-	   "Paragraphe N" wording stays in the H1 via .sr-only so screen readers
-	   and search engines still get it. */
-	.paragraph-mark {
-		display: flex;
-		align-items: baseline;
-		gap: 0.45rem;
-		margin: 0.25rem 0 1.5rem;
-		font-family: var(--font-heading);
-		line-height: 1.05;
-	}
-	.pm-glyph {
-		font-family: var(--font-heading);
-		font-size: clamp(2.2rem, 6vw, 2.75rem);
-		font-style: italic;
-		font-weight: 400;
-		color: var(--color-accent);
-		letter-spacing: -0.02em;
-		line-height: 1;
-		flex: 0 0 auto;
-	}
-	.pm-num {
-		font-family: var(--font-heading);
-		font-size: clamp(2rem, 5.5vw, 2.5rem);
-		font-weight: 600;
-		color: var(--color-fg);
-		font-variant-numeric: oldstyle-nums;
-		letter-spacing: 0.005em;
-	}
-</style>

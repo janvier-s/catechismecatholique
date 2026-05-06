@@ -54,7 +54,9 @@
 		const nq = normalize(q);
 		// Trigger load then filter
 		loadEntries().then((entries) => {
-			const matched = entries.filter((e) => normalize(e.t).includes(nq));
+			const matched = entries
+				.filter((e) => e.k !== 'article' && e.k !== 'heading')
+				.filter((e) => normalize(e.t).includes(nq));
 			// Sort: starts-with first, then contains
 			matched.sort((a, b) => {
 				const na = normalize(a.t);
@@ -70,14 +72,6 @@
 			activeIdx = -1;
 		});
 	});
-
-	const KIND_LABEL: Record<HeadingEntry['k'], string> = {
-		part: 'Partie',
-		section: 'Section',
-		chapter: 'Chapitre',
-		article: 'Article',
-		heading: 'Titre'
-	};
 
 	export function handleKeydown(e: KeyboardEvent): boolean {
 		if (suggestions.length === 0) return false;
@@ -124,7 +118,6 @@
 				onclick={() => pick(s)}
 				onmouseenter={() => (activeIdx = i)}
 			>
-				<span class="suggest-kind">{KIND_LABEL[s.k]}</span>
 				<span class="suggest-title">{s.t}</span>
 				{#if s.s}
 					<span class="suggest-sub">{s.s}</span>
@@ -148,12 +141,10 @@
 		overflow: hidden;
 	}
 	.suggest-item {
-		display: grid;
-		grid-template-columns: 4.5rem 1fr;
-		grid-template-rows: auto auto;
-		column-gap: 0.5rem;
-		align-items: baseline;
-		padding: 0.5rem 0.75rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		padding: 0.45rem 0.75rem;
 		cursor: pointer;
 		transition: background 80ms ease;
 	}
@@ -161,22 +152,8 @@
 	.suggest-item.active {
 		background: color-mix(in srgb, var(--color-accent) 8%, transparent);
 	}
-	.suggest-kind {
-		grid-row: 1;
-		grid-column: 1;
-		font-family: var(--font-ui);
-		font-size: 9px;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		white-space: nowrap;
-		align-self: center;
-	}
 	.suggest-title {
-		grid-row: 1;
-		grid-column: 2;
-		font-family: var(--font-body);
+		font-family: var(--font-ui);
 		font-size: 14px;
 		color: var(--color-fg);
 		white-space: nowrap;
@@ -184,8 +161,6 @@
 		text-overflow: ellipsis;
 	}
 	.suggest-sub {
-		grid-row: 2;
-		grid-column: 2;
 		font-family: var(--font-ui);
 		font-size: 10px;
 		color: var(--color-muted);

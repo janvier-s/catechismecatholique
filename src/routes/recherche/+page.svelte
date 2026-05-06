@@ -533,7 +533,7 @@
 		border: 0;
 		outline: none;
 		padding: 0.7rem 0;
-		font-family: var(--font-body);
+		font-family: var(--font-ui);
 		font-size: 1.05rem;
 		color: var(--color-fg);
 	}
@@ -552,7 +552,7 @@
 		transform: translateY(-50%);
 		pointer-events: none;
 		color: var(--color-muted);
-		font-family: var(--font-body);
+		font-family: var(--font-ui);
 		font-size: 1.05rem;
 		white-space: nowrap;
 		overflow: hidden;
