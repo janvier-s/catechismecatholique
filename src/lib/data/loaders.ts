@@ -80,6 +80,13 @@ export function loadStructure(fetcher: Fetch = fetch): Promise<unknown> {
 	return fetchJson<unknown>('/data/ccc/structure.json', fetcher);
 }
 
+// Slim TOC: full tree minus the `paragraphs: number[]` arrays at every level.
+// Used by /ccc/sommaire which renders titles + headings only. About 70%
+// smaller than the full structure.
+export function loadStructureToc(fetcher: Fetch = fetch): Promise<unknown> {
+	return fetchJson<unknown>('/data/ccc/structure-toc.json', fetcher);
+}
+
 export function loadAbbreviations(fetcher: Fetch = fetch): Promise<AbbreviationMap> {
 	return fetchJson<AbbreviationMap>('/data/ccc/abbreviations.json', fetcher);
 }
@@ -136,6 +143,18 @@ export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseI
 
 export function loadGlossary(fetcher: Fetch = fetch): Promise<GlossaryBundle> {
 	return fetchJson<GlossaryBundle>('/data/ccc/glossary.json', fetcher);
+}
+
+// Slim index for /glossaire: clusters + featured (slug/term/totalRefs) +
+// total count. Detail page (/glossaire/[term]) still loads the full
+// glossary.json. ~3.5 KB vs ~700 KB for the full bundle.
+export interface GlossaryIndex {
+	totalEntries: number;
+	clusters: GlossaryBundle['clusters'];
+	featured: { slug: string; term: string; totalRefs: number }[];
+}
+export function loadGlossaryIndex(fetcher: Fetch = fetch): Promise<GlossaryIndex> {
+	return fetchJson<GlossaryIndex>('/data/ccc/glossary-index.json', fetcher);
 }
 
 export function loadConcordanceManifest(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {

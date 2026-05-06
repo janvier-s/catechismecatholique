@@ -1,13 +1,11 @@
-import { loadGlossary } from '$lib/data/loaders';
+import { loadGlossaryIndex } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
-	const glossary = await loadGlossary(fetch);
-	const entryBySlug = new Map(glossary.entries.map((e) => [e.slug, e]));
-	const featured = glossary.featured.map((s) => entryBySlug.get(s)).filter((e) => e !== undefined);
+	const idx = await loadGlossaryIndex(fetch);
 	return {
-		clusters: glossary.clusters,
-		featured,
-		totalEntries: glossary.entries.length
+		clusters: idx.clusters,
+		featured: idx.featured,
+		totalEntries: idx.totalEntries
 	};
 };

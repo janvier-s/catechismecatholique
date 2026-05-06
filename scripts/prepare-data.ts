@@ -98,6 +98,27 @@ async function main() {
 	fixCccParaSourceTypos(rawParts);
 	const structure = buildStructure(rawParts);
 	writeFileSync(join(OUT, 'ccc/structure.json'), JSON.stringify(structure, null, 2));
+	// Slim variant for /ccc/sommaire: full structure tree minus the
+	// `paragraphs: number[]` arrays at chapter/article/etc levels (the sommaire
+	// renders titles + headings, not paragraph numbers). Cuts the SSR HTML
+	// payload of /ccc/sommaire roughly in half.
+	const stripParagraphArrays = (obj: unknown): unknown => {
+		if (Array.isArray(obj)) return obj.map(stripParagraphArrays);
+		if (obj && typeof obj === 'object') {
+			const out: Record<string, unknown> = {};
+			for (const [k, v] of Object.entries(obj)) {
+				if (k === 'paragraphs' && Array.isArray(v) && v.every((x) => typeof x === 'number'))
+					continue;
+				out[k] = stripParagraphArrays(v);
+			}
+			return out;
+		}
+		return obj;
+	};
+	writeFileSync(
+		join(OUT, 'ccc/structure-toc.json'),
+		JSON.stringify(stripParagraphArrays(structure))
+	);
 	endStep(`${structure.parts.length} parts`);
 
 	logStep('validating against toc.ncx');
@@ -203,6 +224,20 @@ async function main() {
 	for (const f of frGlossFiles) frGlossXml.set(f, readFileSync(join(frGlossDir, f), 'utf8'));
 	const glossary = buildGlossary(enGlossXml, frGlossXml);
 	writeFileSync(join(OUT, 'ccc/glossary.json'), JSON.stringify(glossary));
+	// Slim variant for /glossaire index: just clusters + featured entries
+	// (slug/term/totalRefs) + total count. The detail page (/glossaire/[term])
+	// still loads the full glossary.json. Cuts the SSR HTML payload of
+	// /glossaire from ~775 KB inline glossary down to a few KB.
+	const featuredBySlug = new Map(glossary.entries.map((e) => [e.slug, e]));
+	const slimGlossary = {
+		totalEntries: glossary.entries.length,
+		clusters: glossary.clusters,
+		featured: glossary.featured
+			.map((s) => featuredBySlug.get(s))
+			.filter((e): e is NonNullable<typeof e> => Boolean(e))
+			.map((e) => ({ slug: e.slug, term: e.term, totalRefs: e.totalRefs }))
+	};
+	writeFileSync(join(OUT, 'ccc/glossary-index.json'), JSON.stringify(slimGlossary));
 	endStep(
 		`${glossary.entries.length} entries, ${glossary.clusters.length} clusters, ${glossary.featured.length} featured`
 	);
