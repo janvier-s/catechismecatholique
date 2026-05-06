@@ -6,6 +6,7 @@
 	import { stripDiacritics } from '$lib/utils/searchTokenizer';
 	import { detectIntent } from '$lib/utils/searchIntent';
 	import SearchSuggest from '$lib/components/ui/SearchSuggest.svelte';
+	import RelatedTopics from '$lib/components/ui/RelatedTopics.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -391,6 +392,7 @@
 			<p class="font-body italic text-muted text-[16px]">
 				Aucun résultat pour «&nbsp;{data.q}&nbsp;».
 			</p>
+			<RelatedTopics query={data.q} />
 			<p class="mt-6 font-ui text-[13px]">
 				<a class="browse-link" href="/glossaire?q={encodeURIComponent(data.q)}"
 					>Parcourir le Glossaire pour ce terme →</a
@@ -408,6 +410,8 @@
 					Résultats pour <span class="text-foreground">«&nbsp;{data.q}&nbsp;»</span>
 				</p>
 			</div>
+
+			<RelatedTopics query={data.q} />
 
 			<nav class="filter-tabs mb-4 flex items-baseline gap-5" aria-label="Filtrer les résultats">
 				<a

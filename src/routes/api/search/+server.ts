@@ -20,6 +20,16 @@ interface SearchResultDoc {
 	match: Record<string, string[]>;
 }
 
+// œ expands to 'oe' at index time, but a user who types the modern French
+// spelling (e.g. 'ecumenique') gets 'ecumenique' from processTerm — no match.
+// Map the e-only form → canonical oe-form before handing off to MiniSearch.
+const OE_ALIASES: Record<string, string> = {
+	ecumenique: 'oecumenique',
+	ecumeniques: 'oecumeniques',
+	ecumenisme: 'oecumenisme',
+	ecumenismes: 'oecumenismes'
+};
+
 let cached: { ms: MiniSearch; raw: string } | null = null;
 
 async function loadIndex(
@@ -83,6 +93,10 @@ export const GET: RequestHandler = async ({ url, fetch, platform }) => {
 	}
 
 	const ms = await loadIndex(platform, fetch);
+	// Apply œ→oe alias substitution before the MiniSearch call. The index was
+	// built with processTerm normalising œ→oe, so 'ecumenique' (typed) needs
+	// to become 'oecumenique' (indexed form) to get a hit.
+	const searchQ = tokens.map((t) => OE_ALIASES[t] ?? t).join(' ');
 	// AND combination: every token must match. With OR (MiniSearch's default),
 	// a query like "image de Dieu" matched any paragraph containing just
 	// "Dieu" — irrelevant for a corpus where that word appears everywhere.
@@ -90,7 +104,7 @@ export const GET: RequestHandler = async ({ url, fetch, platform }) => {
 	// words don't pull in unintended matches.
 	// Fuzzy is disabled: with the catechism's curated French vocabulary, even
 	// 1-edit fuzzy matches are too aggressive (e.g. `maitre`→`naitre`).
-	const raw = ms.search(q, {
+	const raw = ms.search(searchQ, {
 		combineWith: 'AND',
 		prefix: (term) => term.length >= 4
 	});

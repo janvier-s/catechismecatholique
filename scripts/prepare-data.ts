@@ -170,6 +170,14 @@ async function main() {
 		`${glossary.entries.length} entries, ${glossary.clusters.length} clusters, ${glossary.featured.length} featured`
 	);
 
+	logStep('building search suggestions (related topics)');
+	const { buildSearchSuggestions } = await import('./prepare/search-suggestions.ts');
+	const searchSuggestions = buildSearchSuggestions(glossary);
+	writeFileSync(join(OUT, 'ccc/search-suggestions.json'), JSON.stringify(searchSuggestions));
+	endStep(
+		`${Object.keys(searchSuggestions.lookup).length} lookup keys, ${Object.keys(searchSuggestions.suggestions).length} entries`
+	);
+
 	logStep('parsing sources index');
 	const sourcesDir = join(SOURCES, 'thematic_cross-refs/index_citations');
 	const sourceFiles = readdirSync(sourcesDir).filter((f) => f.endsWith('.xhtml'));
