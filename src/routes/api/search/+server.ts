@@ -30,29 +30,20 @@ const OE_ALIASES: Record<string, string> = {
 	ecumenismes: 'oecumenismes'
 };
 
-let cached: { ms: MiniSearch; raw: string } | null = null;
+let cached: MiniSearch | null = null;
 
-async function loadIndex(
-	platform: App.Platform | undefined,
-	fetcher: typeof fetch
-): Promise<MiniSearch> {
-	let raw: string | null = null;
-	if (platform?.env?.SEARCH_INDEX) {
-		raw = await platform.env.SEARCH_INDEX.get('search-index');
-	}
-	if (!raw) {
-		const r = await fetcher('/data/search/search-index.json');
-		if (!r.ok) throw new Error(`search index missing: ${r.status}`);
-		raw = await r.text();
-	}
-	if (cached && cached.raw === raw) return cached.ms;
+async function loadIndex(fetcher: typeof fetch): Promise<MiniSearch> {
+	if (cached) return cached;
+	const r = await fetcher('/data/search/search-index.json');
+	if (!r.ok) throw new Error(`search index missing: ${r.status}`);
+	const raw = await r.text();
 	const ms = MiniSearch.loadJSON(raw, {
 		fields: ['text', 'title'],
 		storeFields: ['kind', 'number', 'text', 'title', 'paragraph_start', 'chapter_slug'],
 		tokenize: searchTokenizer,
 		processTerm
 	});
-	cached = { ms, raw };
+	cached = ms;
 	return ms;
 }
 
@@ -79,7 +70,7 @@ function applyPhraseBoost<T extends Record<string, unknown>>(results: T[], token
 	return [...phraseHits, ...rest];
 }
 
-export const GET: RequestHandler = async ({ url, fetch, platform }) => {
+export const GET: RequestHandler = async ({ url, fetch }) => {
 	const q = (url.searchParams.get('q')?.trim() ?? '').slice(0, MAX_QUERY_LEN);
 	if (q.length < 2) return json({ q, hits: [] });
 
@@ -92,7 +83,7 @@ export const GET: RequestHandler = async ({ url, fetch, platform }) => {
 		return json({ q, hits: [] });
 	}
 
-	const ms = await loadIndex(platform, fetch);
+	const ms = await loadIndex(fetch);
 	// Apply œ→oe alias substitution before the MiniSearch call. The index was
 	// built with processTerm normalising œ→oe, so 'ecumenique' (typed) needs
 	// to become 'oecumenique' (indexed form) to get a hit.
