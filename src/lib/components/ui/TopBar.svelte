@@ -97,6 +97,7 @@
 						name="q"
 						placeholder="Rechercher : Eucharistie ou 1324-1327"
 						class="search-input w-full h-10 pl-10 pr-3 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-border focus:border-transparent"
+						role="combobox"
 						aria-label="Recherche"
 						aria-autocomplete="list"
 						aria-expanded={topbarSuggestOpen}

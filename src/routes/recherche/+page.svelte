@@ -277,6 +277,7 @@
 						type="search"
 						name="q"
 						autocomplete="off"
+						role="combobox"
 						aria-label="Recherche"
 						aria-autocomplete="list"
 						aria-expanded={suggestOpen}
