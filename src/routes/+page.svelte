@@ -402,15 +402,49 @@
 
 	/* Small viewports --------------------------------------------------- */
 	@media (max-width: 640px) {
+		.home {
+			padding-top: 0.5rem;
+			padding-bottom: 1.75rem;
+		}
+		.tagline {
+			margin-top: 1rem;
+			font-size: 0.68rem;
+			letter-spacing: 0.28em;
+		}
+		.title {
+			margin-top: 0.5rem;
+		}
+		.line-1,
+		.line-3 {
+			font-size: clamp(1.75rem, 9vw, 2.5rem);
+		}
+		.line-2 {
+			font-size: clamp(0.9rem, 3vw, 1.1rem);
+			margin: 0.25em 0;
+		}
+		.ornament {
+			margin-top: 0.85rem;
+			margin-bottom: 0;
+		}
+		.daily {
+			margin-top: 0.5rem;
+		}
+		.daily-eyebrow {
+			margin-bottom: 0.6rem;
+		}
 		.daily-row {
 			grid-template-columns: 1fr;
-			gap: 0.5rem;
+			gap: 0.4rem;
 		}
-		.section-mark { font-size: 2.1rem; }
-		.section-num { font-size: 1.1rem; }
+		.section-mark { font-size: 1.9rem; }
+		.section-num { font-size: 1rem; }
+		.prose-teaser {
+			font-size: 0.95rem;
+			line-height: 1.62;
+		}
 		.imprint {
 			position: static;
-			margin-top: 1.5rem;
+			margin-top: 1.25rem;
 			text-align: center;
 		}
 	}

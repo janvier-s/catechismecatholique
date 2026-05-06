@@ -18,6 +18,14 @@
 		text-align: center;
 		color: var(--color-fg);
 	}
+	/* Hide on mobile — the icon alone carries the brand at small sizes,
+	   and the homepage hero already shows the full title. The full wordmark
+	   returns at md+ where there's room. */
+	@media (max-width: 767px) {
+		.wordmark {
+			display: none;
+		}
+	}
 	.wm-line {
 		display: block;
 	}
