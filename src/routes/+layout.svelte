@@ -42,6 +42,12 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link rel="canonical" href="{page.url.origin}{page.url.pathname}" />
+	<meta property="og:site_name" content="Catéchisme de l'Église Catholique" />
+	<meta property="og:locale" content="fr_FR" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{page.url.origin}{page.url.pathname}" />
+	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
 <TopBar />

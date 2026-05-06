@@ -4,7 +4,7 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head><title>{data.book.frenchName} — Bible</title></svelte:head>
+<svelte:head><title>{data.book.frenchName} | Bible | Catéchisme de l'Église Catholique</title></svelte:head>
 
 <main class="mx-auto max-w-4xl px-6 py-10">
 	<nav class="mb-6 font-ui text-sm">

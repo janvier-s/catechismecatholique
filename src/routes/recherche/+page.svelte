@@ -243,11 +243,14 @@
 </script>
 
 <svelte:head>
-	<title>Recherche{data.q ? ` : ${data.q.slice(0, 80)}` : ''} — Catéchisme</title>
+	<title>Recherche{data.q ? ` : ${data.q.slice(0, 80)}` : ''} | Catéchisme de l'Église Catholique</title>
+	<meta name="description" content="Recherchez dans les 2865 paragraphes du Catéchisme de l'Église Catholique par mot-clé, numéro de paragraphe ou référence biblique." />
+	<meta name="robots" content="noindex, follow" />
 </svelte:head>
 
 <main class="mx-auto max-w-[60rem] px-6 py-10">
 	<header class="mb-8 text-center">
+		<h1 class="font-ui text-sm uppercase tracking-[0.22em] text-muted mb-6">Recherche</h1>
 		<form class="search-form mx-auto max-w-[640px]" onsubmit={handleSubmit}>
 			<div class="search-line">
 				<input

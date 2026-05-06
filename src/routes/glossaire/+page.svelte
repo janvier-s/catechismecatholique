@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Glossaire · Catéchisme</title>
+	<title>Glossaire | Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
 		content="Glossaire thématique du Catéchisme : {data.totalEntries} termes regroupés en {data.clusters.length} thèmes, du Christ aux fins dernières."

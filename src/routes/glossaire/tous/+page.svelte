@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Glossaire — A-Z · Catéchisme</title>
+	<title>Glossaire A-Z | Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
 		content="Liste alphabétique des {data.total} termes du glossaire du Catéchisme."

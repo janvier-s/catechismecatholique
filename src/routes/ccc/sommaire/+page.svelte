@@ -72,10 +72,10 @@
 </script>
 
 <svelte:head>
-	<title>Sommaire — Catéchisme</title>
+	<title>Sommaire | Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
-		content="Table des matières complète du Catéchisme de l'Église catholique : prologue, quatre parties, sections, chapitres et articles."
+		content="Table des matières complète du Catéchisme de l'Église Catholique : prologue, quatre parties, sections, chapitres et articles."
 	/>
 </svelte:head>
 
@@ -407,7 +407,7 @@
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
 		color: var(--color-subtle);
-		font-variant-numeric: tabular-nums oldstyle-nums;
+		font-variant-numeric: tabular-nums lining-nums;
 		margin: calc(var(--rh) * 0.3) 0 0;
 	}
 	.part-title {
@@ -529,7 +529,7 @@
 		font-family: var(--font-ui);
 		font-size: 0.78rem;
 		font-weight: 500;
-		font-variant-numeric: tabular-nums oldstyle-nums;
+		font-variant-numeric: tabular-nums lining-nums;
 		letter-spacing: 0.04em;
 		color: var(--color-subtle);
 		white-space: nowrap;
@@ -639,26 +639,28 @@
 	}
 	.row-heading {
 		font-family: var(--font-ui);
-		font-size: 0.82rem;
+		font-size: 15px;
 		font-weight: 500;
 		color: var(--color-fg);
-		line-height: 1.45;
+		line-height: 1.5;
 		padding-top: 0.1rem;
 		padding-bottom: 0.1rem;
 	}
 	.row-subheading {
 		font-family: var(--font-body);
-		font-size: 0.82rem;
+		font-size: 15px;
 		font-weight: 400;
 		font-style: italic;
 		color: var(--color-subtle);
-		line-height: 1.45;
+		line-height: 1.5;
 		padding-top: 0.05rem;
 		padding-bottom: 0.05rem;
 	}
 	.row-heading .row-range,
 	.row-subheading .row-range {
-		font-size: 0.7rem;
+		font-size: 13px;
+		/* Sub-heading rows are italic; the paragraph number must stay upright. */
+		font-style: normal;
 	}
 
 	/* ---- Footer fleuron ------------------------------------------------- */

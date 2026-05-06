@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { Chapter, ChapterArticle, ChapterHeading, Paragraph } from '$lib/data/types';
+	import { ADJACENT_LABEL } from '$lib/data/types';
 	import ParagraphView from './ParagraphView.svelte';
 	import EnBrefBlock from './EnBrefBlock.svelte';
+	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	let {
 		chapter,
@@ -57,17 +59,17 @@
 
 <main class="mx-auto max-w-4xl px-6 py-10" use:scrollSpy>
 	<header class="mb-8">
-		<nav class="font-ui text-sm mb-4" aria-label="Fil d'Ariane">
+		<nav class="breadcrumb-rail font-ui text-sm mb-4" aria-label="Fil d'Ariane">
 			<ol class="space-y-1">
 				<li>
 					<a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a>
 				</li>
 				<li class="pl-5">
 					<a href="/ccc/{chapter.part_slug}" class="text-muted hover:text-accent">
-						<span class="font-semibold">
-							{chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue'}{' :'}
+						<span class="font-semibold bc-kicker">
+							{chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue'}
 						</span>
-						{chapter.part_title}
+						<span class="bc-title">&nbsp;: {chapter.part_title}</span>
 					</a>
 				</li>
 				<li class="pl-10">
@@ -75,10 +77,10 @@
 						href="/ccc/{chapter.part_slug}/{chapter.section_slug}"
 						class="text-muted hover:text-accent"
 					>
-						<span class="font-semibold">
-							{chapter.section_number ? `Section ${chapter.section_number}` : 'Section'}{' :'}
+						<span class="font-semibold bc-kicker">
+							{chapter.section_number ? `Section ${chapter.section_number}` : 'Section'}
 						</span>
-						{chapter.section_title}
+						<span class="bc-title">&nbsp;: {chapter.section_title}</span>
 					</a>
 				</li>
 			</ol>
@@ -138,46 +140,22 @@
 		aria-label="Chapitre précédent ou suivant"
 	>
 		{#if chapter.prev}
-			{@const prev = chapter.prev}
-			{@const viaPart = prev.crosses_part && prev.part_has_intro}
-			{@const viaSection = !viaPart && prev.crosses_section && prev.section_has_intro}
-			<a
-				class="chapter-nav-link prev"
-				href={viaPart
-					? `/ccc/${prev.part_slug}`
-					: viaSection
-						? `/ccc/${prev.part_slug}/${prev.section_slug}`
-						: `/ccc/${prev.part_slug}/${prev.section_slug}/${prev.slug}`}
-			>
-				<span class="chapter-nav-eyebrow">
-					← {viaPart ? 'Partie précédente' : viaSection ? 'Section précédente' : 'Chapitre précédent'}
-				</span>
-				<span class="chapter-nav-title">
-					{viaPart ? prev.part_title : viaSection ? prev.section_title : prev.title}
-				</span>
-			</a>
+			<NavCard
+				direction="prev"
+				href={chapter.prev.href}
+				eyebrow={ADJACENT_LABEL.prev[chapter.prev.kind]}
+				title={chapter.prev.title}
+			/>
 		{:else}
 			<span class="chapter-nav-spacer"></span>
 		{/if}
 		{#if chapter.next}
-			{@const next = chapter.next}
-			{@const viaPart = next.crosses_part && next.part_has_intro}
-			{@const viaSection = !viaPart && next.crosses_section && next.section_has_intro}
-			<a
-				class="chapter-nav-link next"
-				href={viaPart
-					? `/ccc/${next.part_slug}`
-					: viaSection
-						? `/ccc/${next.part_slug}/${next.section_slug}`
-						: `/ccc/${next.part_slug}/${next.section_slug}/${next.slug}`}
-			>
-				<span class="chapter-nav-eyebrow">
-					{viaPart ? 'Partie suivante →' : viaSection ? 'Section suivante →' : 'Chapitre suivant →'}
-				</span>
-				<span class="chapter-nav-title">
-					{viaPart ? next.part_title : viaSection ? next.section_title : next.title}
-				</span>
-			</a>
+			<NavCard
+				direction="next"
+				href={chapter.next.href}
+				eyebrow={ADJACENT_LABEL.next[chapter.next.kind]}
+				title={chapter.next.title}
+			/>
 		{:else}
 			<span class="chapter-nav-spacer"></span>
 		{/if}
@@ -185,51 +163,6 @@
 </main>
 
 <style>
-	.chapter-nav-link {
-		flex: 1;
-		min-width: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		padding: 0.85rem 1rem;
-		background: var(--color-panel);
-		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
-		border-radius: 4px;
-		color: var(--color-fg);
-		text-decoration: none;
-		transition:
-			border-color 140ms ease,
-			background 140ms ease,
-			color 140ms ease;
-	}
-	.chapter-nav-link:hover {
-		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
-		color: var(--color-accent-text);
-	}
-	.chapter-nav-link.prev {
-		text-align: left;
-	}
-	.chapter-nav-link.next {
-		text-align: right;
-	}
-	.chapter-nav-eyebrow {
-		font-family: var(--font-ui);
-		font-size: 11px;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		color: var(--color-muted);
-	}
-	.chapter-nav-title {
-		font-family: var(--font-heading);
-		font-size: 15px;
-		line-height: 1.3;
-		color: var(--color-fg);
-	}
-	.chapter-nav-link:hover .chapter-nav-title {
-		color: var(--color-accent-text);
-	}
 	.chapter-nav-spacer {
 		flex: 1;
 	}

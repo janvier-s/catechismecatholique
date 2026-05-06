@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.book.frenchName} {data.chapter} — Concordance</title>
+	<title>{data.book.frenchName} {data.chapter} | Concordance | Catéchisme de l'Église Catholique</title>
 </svelte:head>
 
 <div class="flex flex-col h-screen">

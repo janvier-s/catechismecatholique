@@ -1,10 +1,25 @@
 <script lang="ts">
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
 	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
+	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
+	import { page } from '$app/state';
 	import type { Paragraph } from '$lib/data/types';
+	import { ADJACENT_LABEL } from '$lib/data/types';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
+
+	const breadcrumbJsonLd = $derived(JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Catéchisme', item: `${page.url.origin}/ccc` },
+			{ '@type': 'ListItem', position: 2, name: data.chapter.part_title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}` },
+			{ '@type': 'ListItem', position: 3, name: data.chapter.section_title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}` },
+			{ '@type': 'ListItem', position: 4, name: data.chapter.title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}` },
+			{ '@type': 'ListItem', position: 5, name: data.article.title }
+		]
+	}));
 
 	// Map first-paragraph-of-block → block, plus a set of every paragraph
 	// number that belongs to any En Bref block. The body loop renders the
@@ -23,21 +38,26 @@
 </script>
 
 <svelte:head>
-	<title>{data.article.title} — Catéchisme</title>
+	<title>{data.article.title} | Catéchisme de l'Église Catholique</title>
+	<meta
+		name="description"
+		content={`${data.article.number ? `Article ${data.article.number} : ` : ''}${data.article.title} | ${data.chapter.title}. Catéchisme de l'Église Catholique.`}
+	/>
+	{@html `<script type="application/ld+json">${breadcrumbJsonLd}</script>`}
 </svelte:head>
 
 <main class="mx-auto max-w-reader px-6 py-10" use:scrollSpy>
-	<nav class="mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
+	<nav class="breadcrumb-rail mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
 		<ol class="space-y-1">
 			<li><a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a></li>
 			<li class="pl-5">
 				<a href="/ccc/{data.chapter.part_slug}" class="text-muted hover:text-accent">
-					<span class="font-semibold"
+					<span class="font-semibold bc-kicker"
 						>{data.chapter.part_number
-							? `Partie ${data.chapter.part_number} :`
-							: 'Prologue :'}</span
+							? `Partie ${data.chapter.part_number}`
+							: 'Prologue'}</span
 					>
-					{data.chapter.part_title}
+					<span class="bc-title"> : {data.chapter.part_title}</span>
 				</a>
 			</li>
 			<li class="pl-10">
@@ -45,12 +65,12 @@
 					href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}"
 					class="text-muted hover:text-accent"
 				>
-					<span class="font-semibold"
+					<span class="font-semibold bc-kicker"
 						>{data.chapter.section_number
-							? `Section ${data.chapter.section_number} :`
-							: 'Section :'}</span
+							? `Section ${data.chapter.section_number}`
+							: 'Section'}</span
 					>
-					{data.chapter.section_title}
+					<span class="bc-title"> : {data.chapter.section_title}</span>
 				</a>
 			</li>
 			<li class="pl-[3.75rem]">
@@ -58,17 +78,17 @@
 					href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
 					class="text-muted hover:text-accent"
 				>
-					<span class="font-semibold"
-						>{data.chapter.number ? `Chapitre ${data.chapter.number} :` : 'Chapitre :'}</span
+					<span class="font-semibold bc-kicker"
+						>{data.chapter.number ? `Chapitre ${data.chapter.number}` : 'Chapitre'}</span
 					>
-					{data.chapter.title}
+					<span class="bc-title"> : {data.chapter.title}</span>
 				</a>
 			</li>
 			<li class="pl-20">
-				<span class="font-semibold"
-					>{data.article.number ? `Article ${data.article.number} :` : 'Article :'}</span
+				<span class="font-semibold bc-kicker"
+					>{data.article.number ? `Article ${data.article.number}` : 'Article'}</span
 				>
-				{data.article.title}
+				<span class="bc-title"> : {data.article.title}</span>
 			</li>
 		</ol>
 	</nav>
@@ -129,101 +149,39 @@
 		aria-label="Article suivant ou précédent"
 	>
 		{#if data.prevArticle}
-			{@const href =
-				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.prevArticle.slug}`}
-			<a class="article-nav-link prev" href={href}>
-				<span class="article-nav-eyebrow">← Précédent</span>
-				<span class="article-nav-title">
-					{data.prevArticle.number ? `Article ${data.prevArticle.number}. ` : ''}{data.prevArticle.title}
-				</span>
-			</a>
+			<NavCard
+				direction="prev"
+				href={`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.prevArticle.slug}`}
+				eyebrow="← Précédent"
+				title={(data.prevArticle.number ? `Article ${data.prevArticle.number}. ` : '') +
+					data.prevArticle.title}
+			/>
 		{:else}
-			<a
-				class="article-nav-link prev"
+			<NavCard
+				direction="prev"
 				href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
-			>
-				<span class="article-nav-eyebrow">← Retour au chapitre</span>
-				<span class="article-nav-title">
-					{data.chapter.title}
-				</span>
-			</a>
+				eyebrow="← Retour au chapitre"
+				title={data.chapter.title}
+			/>
 		{/if}
 
 
 		{#if data.nextArticle}
-			{@const href =
-				`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.nextArticle.slug}`}
-			<a class="article-nav-link next" href={href}>
-				<span class="article-nav-eyebrow">Suivant →</span>
-				<span class="article-nav-title">
-					{data.nextArticle.number ? `Article ${data.nextArticle.number}. ` : ''}{data.nextArticle.title}
-				</span>
-			</a>
+			<NavCard
+				direction="next"
+				href={`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.nextArticle.slug}`}
+				eyebrow="Suivant →"
+				title={(data.nextArticle.number ? `Article ${data.nextArticle.number}. ` : '') +
+					data.nextArticle.title}
+			/>
 		{:else if data.chapter.next}
-			{@const next = data.chapter.next}
-			{@const viaPart = next.crosses_part && next.part_has_intro}
-			{@const viaSection = !viaPart && next.crosses_section && next.section_has_intro}
-			{@const href = viaPart
-				? `/ccc/${next.part_slug}`
-				: viaSection
-					? `/ccc/${next.part_slug}/${next.section_slug}`
-					: `/ccc/${next.part_slug}/${next.section_slug}/${next.slug}`}
-			<a class="article-nav-link next" href={href}>
-				<span class="article-nav-eyebrow">
-					{viaPart ? 'Partie suivante →' : viaSection ? 'Section suivante →' : 'Chapitre suivant →'}
-				</span>
-				<span class="article-nav-title">
-					{viaPart ? next.part_title : viaSection ? next.section_title : next.title}
-				</span>
-			</a>
+			<NavCard
+				direction="next"
+				href={data.chapter.next.href}
+				eyebrow={ADJACENT_LABEL.next[data.chapter.next.kind]}
+				title={data.chapter.next.title}
+			/>
 		{/if}
 	</nav>
 </main>
 
-<style>
-	.article-nav-link {
-		flex: 1;
-		min-width: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		padding: 0.85rem 1rem;
-		background: var(--color-panel);
-		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
-		border-radius: 4px;
-		color: var(--color-fg);
-		text-decoration: none;
-		transition:
-			border-color 140ms ease,
-			background 140ms ease,
-			color 140ms ease;
-	}
-	.article-nav-link:hover {
-		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
-		color: var(--color-accent-text);
-	}
-	.article-nav-link.prev {
-		text-align: left;
-	}
-	.article-nav-link.next {
-		text-align: right;
-	}
-	.article-nav-eyebrow {
-		font-family: var(--font-ui);
-		font-size: 11px;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		color: var(--color-muted);
-	}
-	.article-nav-title {
-		font-family: var(--font-heading);
-		font-size: 15px;
-		line-height: 1.3;
-		color: var(--color-fg);
-	}
-	.article-nav-link:hover .article-nav-title {
-		color: var(--color-accent-text);
-	}
-</style>

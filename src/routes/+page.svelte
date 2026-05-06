@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -28,30 +29,61 @@
 </script>
 
 <svelte:head>
-	<title>Le Catéchisme — Catéchisme de l'Église catholique en français</title>
+	<title>Catéchisme de l'Église Catholique | Édition française définitive</title>
 	<meta
 		name="description"
-		content="Édition française définitive du Catéchisme de l'Église catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème."
+		content="Édition française définitive du Catéchisme de l'Église Catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème."
 	/>
+	<meta property="og:title" content="Catéchisme de l'Église Catholique | Édition française définitive" />
+	<meta property="og:description" content="Édition française définitive du Catéchisme de l'Église Catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème." />
+	<meta property="og:image" content="{page.url.origin}/img/og-image.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Catéchisme de l'Église Catholique — Édition française définitive" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: "Catéchisme de l'Église Catholique",
+		description: "Édition française définitive du Catéchisme de l'Église Catholique",
+		url: page.url.origin,
+		inLanguage: 'fr',
+		publisher: {
+			'@type': 'Organization',
+			name: "Catéchisme de l'Église Catholique",
+			url: page.url.origin,
+			logo: {
+				'@type': 'ImageObject',
+				url: page.url.origin + '/img/logo/logo-128.png'
+			}
+		},
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: {
+				'@type': 'EntryPoint',
+				urlTemplate: page.url.origin + '/recherche?q={search_term_string}'
+			},
+			'query-input': 'required name=search_term_string'
+		}
+	})}</script>`}
 </svelte:head>
 
 <main class="home">
 	<div class="home-inner">
 		<!-- Set-piece title block -->
 		<header class="title-block">
-			<p class="tagline reveal r-tagline">Édition française définitive</p>
+			<p class="tagline reveal">Édition française définitive</p>
 
 			<h1 class="title" aria-label="Catéchisme de l'Église Catholique">
-				<span class="line line-1 reveal r-line-1">Catéchisme</span>
-				<span class="line line-2 reveal r-line-2">
+				<span class="line line-1 reveal">Catéchisme</span>
+				<span class="line line-2 reveal">
 					<span class="flank" aria-hidden="true"></span>
 					<i>de</i>
 					<span class="flank" aria-hidden="true"></span>
 				</span>
-				<span class="line line-3 reveal r-line-3">l'Église Catholique</span>
+				<span class="line line-3 reveal">l'Église Catholique</span>
 			</h1>
 
-			<div class="ornament reveal r-ornament" aria-hidden="true">
+			<div class="ornament reveal" aria-hidden="true">
 				<span class="fleuron">✠</span>
 				<span class="rule"></span>
 			</div>

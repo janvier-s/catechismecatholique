@@ -1,5 +1,7 @@
 <script lang="ts">
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
+	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
+	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
@@ -13,25 +15,31 @@
 	});
 </script>
 
-<svelte:head><title>{data.section.title} — Catéchisme</title></svelte:head>
+<svelte:head>
+	<title>{data.section.title} | Catéchisme de l'Église Catholique</title>
+	<meta
+		name="description"
+		content={`${data.section.number ? `Section ${data.section.number} : ` : ''}${data.section.title} | ${data.part.title}. ${data.section.chapters.length} chapitre${data.section.chapters.length > 1 ? 's' : ''} | Catéchisme de l'Église Catholique.`}
+	/>
+</svelte:head>
 
 <main class="mx-auto max-w-reader px-6 py-10" use:scrollSpy>
-	<nav class="mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
+	<nav class="breadcrumb-rail mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
 		<ol class="space-y-1">
 			<li><a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a></li>
 			<li class="pl-5">
 				<a href="/ccc/{data.part.slug}" class="text-muted hover:text-accent">
-					<span class="font-semibold">
-						{data.part.number ? `Partie ${data.part.number} :` : 'Prologue :'}
+					<span class="font-semibold bc-kicker">
+						{data.part.number ? `Partie ${data.part.number}` : 'Prologue'}
 					</span>
-					{data.part.title}
+					<span class="bc-title">&nbsp;: {data.part.title}</span>
 				</a>
 			</li>
 			<li class="pl-10">
-				<span class="font-semibold">
-					{data.section.number ? `Section ${data.section.number} :` : 'Section :'}
+				<span class="font-semibold bc-kicker">
+					{data.section.number ? `Section ${data.section.number}` : 'Section'}
 				</span>
-				{data.section.title}
+				<span class="bc-title">&nbsp;: {data.section.title}</span>
 			</li>
 		</ol>
 	</nav>
@@ -48,22 +56,28 @@
 			{@const heading = headingByPara.get(p.number)}
 			{#if heading}
 				{#if heading.level <= 2}
-					<h3
+					<h2
 						id={heading.id}
 						class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
 					>
 						{heading.title}
-					</h3>
+					</h2>
 				{:else}
-					<h4
+					<h3
 						id={heading.id}
 						class="font-ui text-lg font-semibold mt-8 mb-3 scroll-mt-24 text-heading"
 					>
 						{heading.title}
-					</h4>
+					</h3>
 				{/if}
 			{/if}
 			<ParagraphView paragraph={p} />
+		{/each}
+	{/if}
+
+	{#if data.enBrefs && data.enBrefs.length > 0}
+		{#each data.enBrefs as paragraphs, i (paragraphs[0]?.number ?? i)}
+			<EnBrefBlock {paragraphs} />
 		{/each}
 	{/if}
 
@@ -117,76 +131,29 @@
 		aria-label="Section précédente ou suivante"
 	>
 		{#if data.prevChapter}
-			<a
-				class="section-nav-link prev"
+			<NavCard
+				direction="prev"
 				href="/ccc/{data.part.slug}/{data.prevChapter.section_slug}/{data.prevChapter.slug}"
-			>
-				<span class="section-nav-eyebrow">← Chapitre précédent</span>
-				<span class="section-nav-title">{data.prevChapter.title}</span>
-			</a>
+				eyebrow="← Chapitre précédent"
+				title={data.prevChapter.title}
+			/>
 		{:else}
-			<a class="section-nav-link prev" href="/ccc/{data.part.slug}">
-				<span class="section-nav-eyebrow">← Retour à la partie</span>
-				<span class="section-nav-title">{data.part.title}</span>
-			</a>
+			<NavCard
+				direction="prev"
+				href="/ccc/{data.part.slug}"
+				eyebrow="← Retour à la partie"
+				title={data.part.title}
+			/>
 		{/if}
 
 		{#if data.nextChapter}
-			<a
-				class="section-nav-link next"
+			<NavCard
+				direction="next"
 				href="/ccc/{data.part.slug}/{data.section.slug}/{data.nextChapter.slug}"
-			>
-				<span class="section-nav-eyebrow">Premier chapitre →</span>
-				<span class="section-nav-title">{data.nextChapter.title}</span>
-			</a>
+				eyebrow="Premier chapitre →"
+				title={data.nextChapter.title}
+			/>
 		{/if}
 	</nav>
 </main>
 
-<style>
-	.section-nav-link {
-		flex: 1;
-		min-width: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		padding: 0.85rem 1rem;
-		background: var(--color-panel);
-		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
-		border-radius: 4px;
-		color: var(--color-fg);
-		text-decoration: none;
-		transition:
-			border-color 140ms ease,
-			background 140ms ease,
-			color 140ms ease;
-	}
-	.section-nav-link:hover {
-		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
-		color: var(--color-accent-text);
-	}
-	.section-nav-link.prev {
-		text-align: left;
-	}
-	.section-nav-link.next {
-		text-align: right;
-	}
-	.section-nav-eyebrow {
-		font-family: var(--font-ui);
-		font-size: 11px;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		color: var(--color-muted);
-	}
-	.section-nav-title {
-		font-family: var(--font-heading);
-		font-size: 15px;
-		line-height: 1.3;
-		color: var(--color-fg);
-	}
-	.section-nav-link:hover .section-nav-title {
-		color: var(--color-accent-text);
-	}
-</style>
