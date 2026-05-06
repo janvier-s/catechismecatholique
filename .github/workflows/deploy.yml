@@ -1,0 +1,77 @@
+# Deploy — production deploys on push to `main`, PR previews on pull_request.
+#
+# Requires three repository secrets:
+#   CLOUDFLARE_API_TOKEN  — token with "Pages: Edit" + "Account.Workers KV: Edit"
+#   CLOUDFLARE_ACCOUNT_ID — the Cloudflare account ID
+#   CF_PAGES_PROJECT      — the Pages project name (e.g. "lecatechisme")
+#
+# PR deploys post their preview URL as a comment. Main deploys publish to the
+# production alias.
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: Build & deploy to Cloudflare Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to Cloudflare Pages
+        id: publish
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Branch=main publishes to the production alias; any other branch
+          # name (e.g. PR ref) creates a preview deployment.
+          command: >-
+            pages deploy .svelte-kit/cloudflare
+            --project-name=${{ secrets.CF_PAGES_PROJECT }}
+            --branch=${{ github.head_ref || github.ref_name }}
+
+      - name: Comment preview URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = `${{ steps.publish.outputs.deployment-url }}`;
+            if (!url) return;
+            const body = `🚀 **Preview deployed:** ${url}`;
+            const { owner, repo } = context.repo;
+            const number = context.issue.number;
+            // Find an existing bot comment to update (avoid spamming on every push).
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number: number });
+            const existing = comments.find(c => c.user.type === 'Bot' && c.body && c.body.startsWith('🚀 **Preview deployed:**'));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: number, body });
+            }
