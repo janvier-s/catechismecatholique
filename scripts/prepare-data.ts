@@ -89,6 +89,7 @@ async function main() {
 	mkdirSync(join(OUT, 'ccc'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/paragraphs'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/chapters'), { recursive: true });
+	mkdirSync(join(OUT, 'ccc/chapters-full'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/guide-de-lecture'), { recursive: true });
 	mkdirSync(join(OUT, 'bible'), { recursive: true });
 
@@ -139,6 +140,35 @@ async function main() {
 		writeFileSync(join(OUT, `ccc/chapters/${ch.slug}.json`), JSON.stringify(ch));
 	}
 	endStep(`${chapters.length} chapters`);
+
+	// Per-chapter bundle: chapter + ordered full paragraphs + en_bref map.
+	// Lets the chapter route do ONE fetch instead of N+1 (was hitting the
+	// Cloudflare Worker subrequest limit on chapters with 200+ paragraphs).
+	logStep('building chapters-full bundles');
+	let chaptersFullBytes = 0;
+	for (const ch of chapters) {
+		const enBrefNumbers = new Set<number>();
+		for (const block of ch.en_brefs) for (const n of block.paragraphs) enBrefNumbers.add(n);
+		const orderedParagraphs = ch.paragraphs
+			.map((n) => paragraphs.get(n))
+			.filter((p): p is NonNullable<typeof p> => Boolean(p));
+		const enBrefParagraphMap: Record<number, (typeof orderedParagraphs)[number]> = {};
+		for (const p of orderedParagraphs) {
+			if (enBrefNumbers.has(p.number)) enBrefParagraphMap[p.number] = p;
+		}
+		// Some en_bref paragraphs may sit outside ch.paragraphs (data quirks).
+		for (const n of enBrefNumbers) {
+			if (!enBrefParagraphMap[n]) {
+				const p = paragraphs.get(n);
+				if (p) enBrefParagraphMap[n] = p;
+			}
+		}
+		const bundle = { chapter: ch, paragraphs: orderedParagraphs, enBrefParagraphMap };
+		const json = JSON.stringify(bundle);
+		chaptersFullBytes += json.length;
+		writeFileSync(join(OUT, `ccc/chapters-full/${ch.slug}.json`), json);
+	}
+	endStep(`${chapters.length} bundles, ${(chaptersFullBytes / 1024 / 1024).toFixed(1)} MB total`);
 
 	logStep('building headings index (autocomplete)');
 	const { buildHeadingsIndex } = await import('./prepare/headings-index.ts');

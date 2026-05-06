@@ -61,6 +61,21 @@ export function loadChapter(slug: string, fetcher: Fetch = fetch): Promise<Chapt
 	return p;
 }
 
+export interface ChapterFullBundle {
+	chapter: Chapter;
+	paragraphs: Paragraph[];
+	enBrefParagraphMap: Record<number, Paragraph>;
+}
+const chapterFullPromises = new Map<string, Promise<ChapterFullBundle>>();
+export function loadChapterFull(slug: string, fetcher: Fetch = fetch): Promise<ChapterFullBundle> {
+	let p = chapterFullPromises.get(slug);
+	if (!p) {
+		p = fetchJson<ChapterFullBundle>(`/data/ccc/chapters-full/${slug}.json`, fetcher);
+		chapterFullPromises.set(slug, p);
+	}
+	return p;
+}
+
 export function loadStructure(fetcher: Fetch = fetch): Promise<unknown> {
 	return fetchJson<unknown>('/data/ccc/structure.json', fetcher);
 }
