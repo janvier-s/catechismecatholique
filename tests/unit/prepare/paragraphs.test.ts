@@ -34,7 +34,7 @@ describe('extractParagraphs', () => {
 				]
 			}
 		];
-		const result = extractParagraphs(fixture as any);
+		const result = extractParagraphs(fixture as Parameters<typeof extractParagraphs>[0]);
 		expect(result.size).toBe(2);
 		expect(result.get(1)?.cross_refs).toEqual(['2']);
 		expect(result.get(2)?.magisterial_refs[0]?.raw).toBe('GS 19');

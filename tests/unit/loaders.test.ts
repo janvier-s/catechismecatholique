@@ -17,13 +17,15 @@ describe('loaders', () => {
 						magisterial_refs: []
 					})
 			})
-		) as any;
+		) as unknown as typeof fetch;
 		const p = await loadParagraph(27, fakeFetch);
 		expect(p.number).toBe(27);
 	});
 
 	it('loadParagraph throws on 404', async () => {
-		const fakeFetch = vi.fn(() => Promise.resolve({ ok: false, status: 404 })) as any;
+		const fakeFetch = vi.fn(() =>
+			Promise.resolve({ ok: false, status: 404 })
+		) as unknown as typeof fetch;
 		await expect(loadParagraph(99999, fakeFetch)).rejects.toThrow();
 	});
 });

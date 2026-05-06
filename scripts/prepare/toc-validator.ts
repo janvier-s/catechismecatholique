@@ -9,7 +9,12 @@ export interface TocPoint {
 export async function extractTocStructure(xml: string): Promise<TocPoint[]> {
 	const parsed = await parseStringPromise(xml);
 	const points: TocPoint[] = [];
-	function walk(navPoints: any): void {
+	type NavPoint = {
+		navLabel?: { text?: string[] }[];
+		content?: { $?: { src?: string } }[];
+		navPoint?: NavPoint[];
+	};
+	function walk(navPoints: NavPoint[] | undefined): void {
 		for (const np of navPoints ?? []) {
 			const label = np.navLabel?.[0]?.text?.[0] ?? '';
 			const src = np.content?.[0]?.$?.src ?? '';

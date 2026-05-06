@@ -32,7 +32,7 @@ describe('extractEnBref', () => {
 				]
 			}
 		];
-		const result = extractEnBref(fixture as any);
+		const result = extractEnBref(fixture as Parameters<typeof extractEnBref>[0]);
 		expect(result).toHaveLength(1);
 		expect(result[0]!.parent_kind).toBe('chapter');
 		expect(result[0]!.parent_slug).toBe('z');
@@ -64,7 +64,7 @@ describe('extractEnBref', () => {
 				]
 			}
 		];
-		const result = extractEnBref(fixture as any);
+		const result = extractEnBref(fixture as Parameters<typeof extractEnBref>[0]);
 		expect(result).toHaveLength(1);
 		expect(result[0]!.parent_kind).toBe('section');
 		expect(result[0]!.parent_slug).toBe('les-dix-commandements');
@@ -109,7 +109,7 @@ describe('extractEnBref', () => {
 				]
 			}
 		];
-		const result = extractEnBref(fixture as any);
+		const result = extractEnBref(fixture as Parameters<typeof extractEnBref>[0]);
 		expect(result).toHaveLength(1);
 		expect(result[0]!.parent_kind).toBe('chapter');
 		expect(result[0]!.paragraphs).toEqual([99]);

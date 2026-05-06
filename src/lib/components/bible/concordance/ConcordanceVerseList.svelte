@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SvelteMap } from 'svelte/reactivity';
 	import type { ConcordanceChapter } from '$lib/data/types';
 	import type { BookInfo } from '$lib/utils/bibleBookSlug';
 	import { pluralFr } from '$lib/utils/i18n';
@@ -19,7 +20,7 @@
 
 	// Build a quick lookup: verse number → verse text (for inline rendering).
 	const verseByNum = $derived.by(() => {
-		const m = new Map<number, string>();
+		const m = new SvelteMap<number, string>();
 		for (const v of verses) m.set(v.v, v.text);
 		return m;
 	});

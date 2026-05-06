@@ -67,7 +67,7 @@ describe('buildChapterFiles', () => {
 	];
 
 	it('generates one record per chapter with prev/next links', () => {
-		const structure = buildStructure(minimal as any);
+		const structure = buildStructure(minimal as Parameters<typeof buildStructure>[0]);
 		const chapters = buildChapterFiles(structure, []);
 		const names = chapters.map((c) => c.slug);
 		expect(names).toEqual(['chapitre-a', 'chapitre-b']);
@@ -80,7 +80,7 @@ describe('buildChapterFiles', () => {
 	});
 
 	it('records headings with paragraph_start', () => {
-		const structure = buildStructure(minimal as any);
+		const structure = buildStructure(minimal as Parameters<typeof buildStructure>[0]);
 		const chapters = buildChapterFiles(structure, []);
 		expect(chapters[0]!.headings).toHaveLength(2);
 		expect(chapters[0]!.headings[0]!.paragraph_start).toBe(1);
@@ -149,7 +149,7 @@ describe('buildChapterFiles', () => {
 		];
 
 		it("routes through the section page when the next chapter's section has intro paragraphs", () => {
-			const structure = buildStructure(fixture as any);
+			const structure = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 			const chapters = buildChapterFiles(structure, []);
 			const chapA = chapters.find((c) => c.slug === 'chap-a')!;
 			expect(chapA.next?.kind).toBe('section');
@@ -158,7 +158,7 @@ describe('buildChapterFiles', () => {
 		});
 
 		it('routes the prev link through the section page in the reverse direction', () => {
-			const structure = buildStructure(fixture as any);
+			const structure = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 			const chapters = buildChapterFiles(structure, []);
 			const chapB = chapters.find((c) => c.slug === 'chap-b')!;
 			// chap-b's section IS the one with intro paragraphs, but the PREV
@@ -232,7 +232,7 @@ describe('buildChapterFiles', () => {
 					]
 				}
 			];
-			const structure = buildStructure(partIntroFixture as any);
+			const structure = buildStructure(partIntroFixture as Parameters<typeof buildStructure>[0]);
 			const chapters = buildChapterFiles(structure, []);
 			const chapA = chapters.find((c) => c.slug === 'chap-a')!;
 			expect(chapA.next?.kind).toBe('part');

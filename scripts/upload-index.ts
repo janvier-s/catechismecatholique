@@ -1,4 +1,4 @@
-// @ts-nocheck — build script run with tsx
+// Build script run with tsx
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';

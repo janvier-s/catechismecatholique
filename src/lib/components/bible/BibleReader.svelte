@@ -2,6 +2,7 @@
 	import ChapterFilterBar from './ChapterFilterBar.svelte';
 	import VerseMarker from './VerseMarker.svelte';
 	import ChapterNavBar from './ChapterNavBar.svelte';
+	import { SvelteMap } from 'svelte/reactivity';
 	import type { BibleVerseIndex, NclSection } from '$lib/data/types';
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
@@ -29,7 +30,7 @@
 	// Multiple headings (e.g. a major-section + a section) can share the same
 	// startV. Group them so all of them render before that verse.
 	const sectionsByVerse = $derived.by(() => {
-		const m = new Map<number, NclSection[]>();
+		const m = new SvelteMap<number, NclSection[]>();
 		for (const s of sections) {
 			const arr = m.get(s.startV);
 			if (arr) arr.push(s);

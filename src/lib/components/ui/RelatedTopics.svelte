@@ -28,7 +28,7 @@
 			.replace(/æ/g, 'ae')
 			.normalize('NFD')
 			.replace(/[̀-ͯ]/g, '')
-			.replace(/[''–—\-]/g, ' ')
+			.replace(/[''–—-]/g, ' ')
 			.replace(/[^a-z0-9 ]+/gi, '')
 			.toLowerCase()
 			.replace(/\s+/g, ' ')

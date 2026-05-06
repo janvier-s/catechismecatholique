@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
+	import { SvelteSet } from 'svelte/reactivity';
 	import { studyPanel } from '$lib/stores/studyPanel';
 	import { loadParagraph, loadNclBook } from '$lib/data/loaders';
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
@@ -31,7 +32,7 @@
 			refs = p.bible_refs;
 			magisterial = p.magisterial_refs;
 			// Lazily load only the NCL books actually referenced by this paragraph.
-			const usfxes = new Set<string>();
+			const usfxes = new SvelteSet<string>();
 			for (const r of p.bible_refs) {
 				const m = r.text.match(/^([1-3]?\s*[A-Za-zÉéèê]+)/);
 				if (!m) continue;

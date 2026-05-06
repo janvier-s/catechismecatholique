@@ -247,10 +247,13 @@
 	const hasMore = $derived(visibleHits.length < filteredHits.length);
 
 	function tabHref(type: 'all' | 'headings' | 'paragraphs'): string {
-		const params = new URLSearchParams();
-		if (data.q) params.set('q', data.q);
-		if (type !== 'all') params.set('type', type);
-		const qs = params.toString();
+		// Plain string assembly — URLSearchParams would trigger
+		// svelte/prefer-svelte-reactivity, but this is a one-shot pure
+		// builder with no reactivity needed.
+		const parts: string[] = [];
+		if (data.q) parts.push(`q=${encodeURIComponent(data.q)}`);
+		if (type !== 'all') parts.push(`type=${type}`);
+		const qs = parts.join('&');
 		return qs ? `/recherche?${qs}` : '/recherche';
 	}
 

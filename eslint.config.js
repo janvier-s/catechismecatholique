@@ -39,6 +39,13 @@ export default defineConfig(
 	{
 		// Override or add rule settings here, such as:
 		// 'svelte/button-has-type': 'error'
-		rules: {}
+		rules: {
+			// Project pattern: static <a href="..."> links and goto() calls use plain
+			// route strings, not the resolve() helper. Keep this off project-wide.
+			'svelte/no-navigation-without-resolve': 'off',
+			// Catechism content (paragraphs, citations, search highlights, JSON-LD blocks)
+			// is rendered via {@html} on trusted/sanitised data — keep the rule off.
+			'svelte/no-at-html-tags': 'off'
+		}
 	}
 );

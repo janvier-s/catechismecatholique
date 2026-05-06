@@ -20,7 +20,7 @@ function pickDailyParagraph(now: Date = new Date()): number {
 
 export const load: PageLoad = async ({ fetch }) => {
 	const dailyNumber = pickDailyParagraph();
-	let paragraph: Paragraph | null = null;
+	let paragraph: Paragraph | null;
 	try {
 		paragraph = await loadParagraph(dailyNumber, fetch);
 	} catch {

@@ -7,9 +7,9 @@ export function normalizeGuillemets(html: string): string {
 	return (
 		html
 			// Collapse any whitespace right after « into a single NBSP.
-			.replace(/«[ \t ]*/g, '« ')
+			.replace(/«[ \t\u00A0]*/g, '«\u00A0')
 			// Collapse any whitespace right before » into a single NBSP.
-			.replace(/[ \t ]*»/g, ' »')
+			.replace(/[ \t\u00A0]*»/g, '\u00A0»')
 			// Tag-adjacent: «<tag> and </tag>» have no whitespace to match above.
 			.replace(/«(<[^>]+>)/g, '« $1')
 			.replace(/(<\/[^>]+>)»/g, '$1 »')

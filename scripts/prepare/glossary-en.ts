@@ -99,7 +99,7 @@ function titleCase(lemma: string): string {
 	return lemma
 		.toLowerCase()
 		.replace(/’/g, "'")
-		.replace(/(^|[\s'’\-])(\p{L})/gu, (_, sep: string, ch: string) => sep + ch.toUpperCase());
+		.replace(/(^|[\s'’-])(\p{L})/gu, (_, sep: string, ch: string) => sep + ch.toUpperCase());
 }
 
 export function parseGlossaryEn(xml: string): GlossaryEnEntry[] {

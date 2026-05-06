@@ -3,13 +3,14 @@
 	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
+	import { SvelteMap } from 'svelte/reactivity';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
 	// Map paragraph_start → heading so the body loop can insert them inline.
 	type IntroHeading = NonNullable<typeof data.section.intro_headings>[number];
 	const headingByPara = $derived.by(() => {
-		const m = new Map<number, IntroHeading>();
+		const m = new SvelteMap<number, IntroHeading>();
 		for (const h of data.section.intro_headings ?? []) m.set(h.paragraph_start, h);
 		return m;
 	});

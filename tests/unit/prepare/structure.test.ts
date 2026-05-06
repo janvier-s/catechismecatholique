@@ -52,21 +52,21 @@ describe('buildStructure', () => {
 	];
 
 	it('produces parts with slugs', () => {
-		const result = buildStructure(fixture as any);
+		const result = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 		expect(result.parts).toHaveLength(2);
 		expect(result.parts[0]!.slug).toBe('prologue');
 		expect(result.parts[1]!.slug).toMatch(/profession/);
 	});
 
 	it('builds chapter slugs that strip "CHAPITRE PREMIER" prefix', () => {
-		const result = buildStructure(fixture as any);
+		const result = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 		const part = result.parts[1]!;
 		const chapter = part.sections[0]!.chapters[0]!;
 		expect(chapter.slug).toBe('lhomme-est-capable-de-dieu');
 	});
 
 	it('records paragraph numbers per chapter', () => {
-		const result = buildStructure(fixture as any);
+		const result = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 		const chapter = result.parts[1]!.sections[0]!.chapters[0]!;
 		expect(chapter.paragraphs).toContain(27);
 	});
@@ -76,7 +76,9 @@ describe('buildStructure', () => {
 			{ type: 'part', title: 'A', children: [] },
 			{ type: 'part', title: 'A', children: [] }
 		];
-		expect(() => buildStructure(colliding as any)).toThrow(/Slug collision/);
+		expect(() => buildStructure(colliding as Parameters<typeof buildStructure>[0])).toThrow(
+			/Slug collision/
+		);
 	});
 
 	describe('intro_paragraphs capture', () => {
@@ -127,13 +129,13 @@ describe('buildStructure', () => {
 		];
 
 		it('captures section-level intro paragraphs that sit outside any chapter', () => {
-			const result = buildStructure(sectionIntroFixture as any);
+			const result = buildStructure(sectionIntroFixture as Parameters<typeof buildStructure>[0]);
 			const section = result.parts[0]!.sections[0]!;
 			expect(section.intro_paragraphs).toEqual([185]);
 		});
 
 		it('captures section-level intro headings with paragraph_start', () => {
-			const result = buildStructure(sectionIntroFixture as any);
+			const result = buildStructure(sectionIntroFixture as Parameters<typeof buildStructure>[0]);
 			const section = result.parts[0]!.sections[0]!;
 			expect(section.intro_headings).toBeDefined();
 			expect(section.intro_headings![0]!.title).toBe('I. La transmission de la foi');
@@ -177,7 +179,7 @@ describe('buildStructure', () => {
 					]
 				}
 			];
-			const result = buildStructure(prologueFixture as any);
+			const result = buildStructure(prologueFixture as Parameters<typeof buildStructure>[0]);
 			const prologue = result.parts[0]!;
 			expect(prologue.intro_paragraphs).toEqual([1, 4]);
 			expect(prologue.intro_headings).toHaveLength(2);
@@ -251,7 +253,7 @@ describe('buildStructure', () => {
 		];
 
 		it('groups section-level en_bref blocks separately from intro_paragraphs', () => {
-			const result = buildStructure(decalogueFixture as any);
+			const result = buildStructure(decalogueFixture as Parameters<typeof buildStructure>[0]);
 			const section = result.parts[0]!.sections[0]!;
 			expect(section.en_brefs).toBeDefined();
 			expect(section.en_brefs).toHaveLength(1);
@@ -259,7 +261,7 @@ describe('buildStructure', () => {
 		});
 
 		it('does not include en_bref paragraphs in section.intro_paragraphs', () => {
-			const result = buildStructure(decalogueFixture as any);
+			const result = buildStructure(decalogueFixture as Parameters<typeof buildStructure>[0]);
 			const section = result.parts[0]!.sections[0]!;
 			expect(section.intro_paragraphs).toEqual([2052]);
 		});
@@ -293,7 +295,7 @@ describe('buildStructure', () => {
 					]
 				}
 			];
-			const result = buildStructure(noEnBref as any);
+			const result = buildStructure(noEnBref as Parameters<typeof buildStructure>[0]);
 			expect(result.parts[0]!.sections[0]!.en_brefs).toBeUndefined();
 		});
 	});

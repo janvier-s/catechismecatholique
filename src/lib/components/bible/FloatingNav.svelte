@@ -2,6 +2,7 @@
 	import { onMount, tick } from 'svelte';
 	import { fly, slide } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
+	import { SvelteSet } from 'svelte/reactivity';
 	import { OT_BOOKS, NT_BOOKS, bookTestament, type Testament } from '$lib/utils/bibleBookSlug';
 
 	let {
@@ -26,13 +27,11 @@
 	// svelte-ignore state_referenced_locally
 	let activeTestament = $state<Testament>(bookTestament(bookSlug));
 	// svelte-ignore state_referenced_locally
-	let expandedBooks = $state<Set<string>>(new Set([bookSlug]));
+	const expandedBooks = new SvelteSet([bookSlug]);
 
 	function toggleBook(slug: string) {
-		const next = new Set(expandedBooks);
-		if (next.has(slug)) next.delete(slug);
-		else next.add(slug);
-		expandedBooks = next;
+		if (expandedBooks.has(slug)) expandedBooks.delete(slug);
+		else expandedBooks.add(slug);
 	}
 
 	let otContainer: HTMLElement | undefined = $state();
@@ -96,7 +95,7 @@
 >
 	<!-- AT / NT tabs -->
 	<div class="flex border-b border-border shrink-0" role="tablist" aria-label="Testament">
-		{#each ['OT', 'NT'] as Testament[] as t}
+		{#each ['OT', 'NT'] as Testament[] as t (t)}
 			<button
 				role="tab"
 				aria-selected={activeTestament === t}

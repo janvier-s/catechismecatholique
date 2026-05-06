@@ -1,17 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type {
-	Paragraph,
-	Chapter,
-	StructureNode,
-	BibleRef,
-	CrossRef,
-	Citation,
-	MagisterialRefRecord,
-	EnBrefBlock,
-	ThematicEntry,
-	SourceEntry,
-	AbbreviationMap
-} from '$lib/data/types';
+import type { Paragraph } from '$lib/data/types';
 
 describe('data types', () => {
 	it('Paragraph type compiles', () => {

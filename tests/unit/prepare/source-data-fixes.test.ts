@@ -108,10 +108,11 @@ describe('fixCccParaSourceTypos', () => {
 				]
 			}
 		];
-		fixCccParaSourceTypos(tree as any);
-		const kids = (tree[0] as any).children[0].children;
-		expect(kids.map((k: any) => k.number)).toEqual([2773, 2774, 2775, 2776]);
-		expect(kids[2].text_html).toContain('Maître et Modèle');
+		fixCccParaSourceTypos(tree as Parameters<typeof fixCccParaSourceTypos>[0]);
+		const kids = (tree[0] as { children: { children: { number: number; text_html: string }[] }[] })
+			.children[0]!.children;
+		expect(kids.map((k) => k.number)).toEqual([2773, 2774, 2775, 2776]);
+		expect(kids[2]!.text_html).toContain('Maître et Modèle');
 	});
 
 	it('leaves the real §2275 untouched (no §2774/§2776 sibling)', () => {
@@ -129,8 +130,9 @@ describe('fixCccParaSourceTypos', () => {
 				]
 			}
 		];
-		fixCccParaSourceTypos(tree as any);
-		const kids = (tree[0] as any).children[0].children;
-		expect(kids.map((k: any) => k.number)).toEqual([2274, 2275]);
+		fixCccParaSourceTypos(tree as Parameters<typeof fixCccParaSourceTypos>[0]);
+		const kids = (tree[0] as { children: { children: { number: number }[] }[] }).children[0]!
+			.children;
+		expect(kids.map((k) => k.number)).toEqual([2274, 2275]);
 	});
 });

@@ -26,6 +26,9 @@
 			]
 		})
 	);
+	const breadcrumbJsonLdScript = $derived(
+		`<${'script'} type="application/ld+json">${breadcrumbJsonLd}</${'script'}>`
+	);
 </script>
 
 <svelte:head>
@@ -34,7 +37,7 @@
 		name="description"
 		content={`${data.chapter.number ? `Chapitre ${data.chapter.number} : ` : ''}${data.chapter.title} | ${data.chapter.section_title}. Catéchisme de l'Église Catholique.`}
 	/>
-	{@html `<script type="application/ld+json">${breadcrumbJsonLd}</script>`}
+	{@html breadcrumbJsonLdScript}
 </svelte:head>
 
 <CCCReader

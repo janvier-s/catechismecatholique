@@ -353,7 +353,9 @@ async function main() {
 		// Drop the old verse-index file if it still exists
 		try {
 			unlinkSync(join(OUT, 'ccc/concordance-verse-index.json'));
-		} catch {}
+		} catch {
+			// File already gone — ignore.
+		}
 
 		if (stats.unknownBooks.length > 0)
 			console.warn('  unknown books:', stats.unknownBooks.join(', '));

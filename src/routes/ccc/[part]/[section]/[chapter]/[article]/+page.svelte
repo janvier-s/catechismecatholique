@@ -3,6 +3,7 @@
 	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
+	import { SvelteMap } from 'svelte/reactivity';
 	import { page } from '$app/state';
 	import type { Paragraph } from '$lib/data/types';
 	import { ADJACENT_LABEL } from '$lib/data/types';
@@ -37,13 +38,16 @@
 			]
 		})
 	);
+	const breadcrumbJsonLdScript = $derived(
+		`<${'script'} type="application/ld+json">${breadcrumbJsonLd}</${'script'}>`
+	);
 
 	// Map first-paragraph-of-block → block, plus a set of every paragraph
 	// number that belongs to any En Bref block. The body loop renders the
 	// summary box at the FIRST paragraph and skips the rest so they don't
 	// double-render as regular ParagraphViews.
 	const enBrefStartMap = $derived.by(() => {
-		const map = new Map<number, { paragraphs: number[] }>();
+		const map = new SvelteMap<number, { paragraphs: number[] }>();
 		for (const block of data.enBrefBlocks ?? []) {
 			if (block.paragraphs.length > 0) map.set(block.paragraphs[0]!, block);
 		}
@@ -60,7 +64,7 @@
 		name="description"
 		content={`${data.article.number ? `Article ${data.article.number} : ` : ''}${data.article.title} | ${data.chapter.title}. Catéchisme de l'Église Catholique.`}
 	/>
-	{@html `<script type="application/ld+json">${breadcrumbJsonLd}</script>`}
+	{@html breadcrumbJsonLdScript}
 </svelte:head>
 
 <main class="mx-auto max-w-reader px-6 py-10" use:scrollSpy>

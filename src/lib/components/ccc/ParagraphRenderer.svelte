@@ -46,9 +46,12 @@
 		// — toggling a pref re-applies the right rules from scratch instead of
 		// compounding on already-mutated DOM (which would corrupt the markup
 		// the second time the effect runs).
+		// eslint-disable-next-line svelte/no-dom-manipulating
 		containerEl.innerHTML = html;
 		void bibleRefs;
 
+		// Plain Map is fine here — refsByIdx is local to this $effect, never reactive.
+		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const refsByIdx = new Map<string, MagisterialRefRecord>();
 		for (const r of bibleRefs) {
 			if (r.idx !== undefined && r.idx !== null) refsByIdx.set(String(r.idx), r);

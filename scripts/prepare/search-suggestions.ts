@@ -18,7 +18,7 @@ function normalize(s: string): string {
 		.replace(/Æ/g, 'AE')
 		.normalize('NFD')
 		.replace(/[̀-ͯ]/g, '')
-		.replace(/[''–—\-]/g, ' ')
+		.replace(/[''–—-]/g, ' ')
 		.replace(/[^a-z0-9 ]+/gi, '')
 		.toLowerCase()
 		.replace(/\s+/g, ' ')

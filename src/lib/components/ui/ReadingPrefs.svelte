@@ -32,7 +32,7 @@
 	// floats orphaned over the new tab's content.
 	$effect(() => {
 		// Read activeTab so this effect retracks on change.
-		activeTab;
+		void activeTab;
 		fontDropdownOpen = false;
 	});
 

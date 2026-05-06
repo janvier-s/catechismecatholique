@@ -5,6 +5,7 @@
 	import EnBrefBlock from './EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
+	import { SvelteMap } from 'svelte/reactivity';
 	let {
 		chapter,
 		paragraphs,
@@ -25,7 +26,7 @@
 	// IIFEs only ran once at mount and left these stale — manifested as the
 	// chapter's headings + article anchors disappearing on every nav.
 	const insertionsByParagraph = $derived.by(() => {
-		const map = new Map<number, Insertion[]>();
+		const map = new SvelteMap<number, Insertion[]>();
 		const push = (n: number, ins: Insertion) => {
 			const arr = map.get(n) ?? [];
 			arr.push(ins);
@@ -46,7 +47,7 @@
 
 	// First-paragraph-of-en_bref → block; all en_bref paragraph numbers (so we can skip them in the body)
 	const enBrefStartMap = $derived.by(() => {
-		const map = new Map<number, { paragraphs: number[] }>();
+		const map = new SvelteMap<number, { paragraphs: number[] }>();
 		for (const block of chapter.en_brefs) {
 			if (block.paragraphs.length > 0) map.set(block.paragraphs[0]!, block);
 		}

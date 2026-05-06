@@ -166,44 +166,42 @@
 				{/if}
 			{/snippet}
 
-			{#snippet children()}
-				{#if visibleTabs.length === 0}
-					<div class="flex-1 flex items-center justify-center p-6 text-sm text-muted italic">
-						Aucune note d'étude pour ce paragraphe.
-					</div>
-				{:else}
-					<div class="flex border-b border-border font-ui text-xs">
-						{#each visibleTabs as tab (tab.id)}
-							<button
-								type="button"
-								class="flex-1 py-2 hover:bg-accent/10"
-								class:bg-accent={$studyPanel.activeTab === tab.id}
-								class:!text-white={$studyPanel.activeTab === tab.id}
-								onclick={() => studyPanel.update((s) => ({ ...s, activeTab: tab.id }))}
-							>
-								{tab.label}
-							</button>
-						{/each}
-					</div>
-					<div class="flex-1 overflow-y-auto p-4 styled-scroll">
-						{#if $studyPanel.activeTab === 'bible'}
-							<TabBibleRefs />
-						{:else if $studyPanel.activeTab === 'cross-refs'}
-							<TabCrossRefs />
-						{:else if $studyPanel.activeTab === 'cited-by'}
-							<TabCitedBy />
-						{:else if $studyPanel.activeTab === 'en-bref'}
-							<TabEnBref />
-						{:else if $studyPanel.activeTab === 'sources'}
-							<TabSources />
-						{:else if $studyPanel.activeTab === 'concordance'}
-							<TabConcordance />
-						{:else if $studyPanel.activeTab === 'bible-verse'}
-							<TabBibleVerse />
-						{/if}
-					</div>
-				{/if}
-			{/snippet}
+			{#if visibleTabs.length === 0}
+				<div class="flex-1 flex items-center justify-center p-6 text-sm text-muted italic">
+					Aucune note d'étude pour ce paragraphe.
+				</div>
+			{:else}
+				<div class="flex border-b border-border font-ui text-xs">
+					{#each visibleTabs as tab (tab.id)}
+						<button
+							type="button"
+							class="flex-1 py-2 hover:bg-accent/10"
+							class:bg-accent={$studyPanel.activeTab === tab.id}
+							class:!text-white={$studyPanel.activeTab === tab.id}
+							onclick={() => studyPanel.update((s) => ({ ...s, activeTab: tab.id }))}
+						>
+							{tab.label}
+						</button>
+					{/each}
+				</div>
+				<div class="flex-1 overflow-y-auto p-4 styled-scroll">
+					{#if $studyPanel.activeTab === 'bible'}
+						<TabBibleRefs />
+					{:else if $studyPanel.activeTab === 'cross-refs'}
+						<TabCrossRefs />
+					{:else if $studyPanel.activeTab === 'cited-by'}
+						<TabCitedBy />
+					{:else if $studyPanel.activeTab === 'en-bref'}
+						<TabEnBref />
+					{:else if $studyPanel.activeTab === 'sources'}
+						<TabSources />
+					{:else if $studyPanel.activeTab === 'concordance'}
+						<TabConcordance />
+					{:else if $studyPanel.activeTab === 'bible-verse'}
+						<TabBibleVerse />
+					{/if}
+				</div>
+			{/if}
 		</PanelShell>
 	</div>
 {/if}

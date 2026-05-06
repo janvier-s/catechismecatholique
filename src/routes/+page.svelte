@@ -16,6 +16,34 @@
 
 	const teaserHtml = $derived(data.paragraph ? cleanTeaserHtml(data.paragraph.text_html) : '');
 
+	const jsonLdScript = $derived(
+		`<${'script'} type="application/ld+json">${JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'WebSite',
+			name: "Catéchisme de l'Église Catholique",
+			description: "Édition française définitive du Catéchisme de l'Église Catholique",
+			url: page.url.origin,
+			inLanguage: 'fr',
+			publisher: {
+				'@type': 'Organization',
+				name: "Catéchisme de l'Église Catholique",
+				url: page.url.origin,
+				logo: {
+					'@type': 'ImageObject',
+					url: page.url.origin + '/img/logo/logo-128.png'
+				}
+			},
+			potentialAction: {
+				'@type': 'SearchAction',
+				target: {
+					'@type': 'EntryPoint',
+					urlTemplate: page.url.origin + '/recherche?q={search_term_string}'
+				},
+				'query-input': 'required name=search_term_string'
+			}
+		})}</${'script'}>`
+	);
+
 	// The homepage is laid out to fit one screen at typical viewport heights.
 	// Hide the body scrollbar while it's mounted so a one-pixel overflow
 	// doesn't trigger a phantom track. The CSS below restores scroll for
@@ -47,31 +75,7 @@
 		property="og:image:alt"
 		content="Catéchisme de l'Église Catholique — Édition française définitive"
 	/>
-	{@html `<script type="application/ld+json">${JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'WebSite',
-		name: "Catéchisme de l'Église Catholique",
-		description: "Édition française définitive du Catéchisme de l'Église Catholique",
-		url: page.url.origin,
-		inLanguage: 'fr',
-		publisher: {
-			'@type': 'Organization',
-			name: "Catéchisme de l'Église Catholique",
-			url: page.url.origin,
-			logo: {
-				'@type': 'ImageObject',
-				url: page.url.origin + '/img/logo/logo-128.png'
-			}
-		},
-		potentialAction: {
-			'@type': 'SearchAction',
-			target: {
-				'@type': 'EntryPoint',
-				urlTemplate: page.url.origin + '/recherche?q={search_term_string}'
-			},
-			'query-input': 'required name=search_term_string'
-		}
-	})}</script>`}
+	{@html jsonLdScript}
 </svelte:head>
 
 <main class="home">
