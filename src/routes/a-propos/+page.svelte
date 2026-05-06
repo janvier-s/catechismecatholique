@@ -25,9 +25,9 @@
 
 	<p>
 		Le Catéchisme de l'Église catholique, promulgué le 11 octobre 1992 par saint Jean-Paul&nbsp;II
-		et révisé en 1997, est le texte doctrinal de référence de l'Église universelle. En
-		2&nbsp;865 paragraphes, il expose avec clarté et rigueur l'ensemble de la foi catholique : ce
-		qu'elle croit, ce qu'elle célèbre, comment elle vit et comment elle prie.
+		et révisé en 1997, est le texte doctrinal de référence de l'Église universelle. En 2&nbsp;865
+		paragraphes, il expose avec clarté et rigueur l'ensemble de la foi catholique : ce qu'elle
+		croit, ce qu'elle célèbre, comment elle vit et comment elle prie.
 	</p>
 
 	<p>
@@ -38,10 +38,9 @@
 			target="_blank"
 			rel="noopener noreferrer">vatican.va</a
 		>
-		propose le texte intégral, mais dans une interface vieillissante, difficile à naviguer et peu
-		lisible sur les appareils modernes. Des PDF et des ePubs circulent librement, mais ils restent
-		cloisonnés : on peut les lire, pas vraiment les chercher ni les croiser avec d'autres sources. En
-		anglais,
+		propose le texte intégral, mais dans une interface vieillissante, difficile à naviguer et peu lisible
+		sur les appareils modernes. Des PDF et des ePubs circulent librement, mais ils restent cloisonnés
+		: on peut les lire, pas vraiment les chercher ni les croiser avec d'autres sources. En anglais,
 		<a
 			href="https://www.catholiccrossreference.online/catechism/"
 			target="_blank"
@@ -62,8 +61,10 @@
 
 	<p>
 		La traduction de la Bible utilisée pour les références scripturaires est le
-		<a href="https://pacificbibles.org/details.php?id=francl" target="_blank" rel="noopener noreferrer"
-			><em>Néo-Crampon Libre</em></a
+		<a
+			href="https://pacificbibles.org/details.php?id=francl"
+			target="_blank"
+			rel="noopener noreferrer"><em>Néo-Crampon Libre</em></a
 		>, une modernisation soigneuse de la traduction catholique française d'Augustin Crampon, mise à
 		disposition par la Fraternité de Tibériade sous licence libre.
 	</p>

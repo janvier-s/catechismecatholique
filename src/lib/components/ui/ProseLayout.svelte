@@ -120,7 +120,7 @@
 	<aside class="prose-toc" aria-label="Sommaire">
 		<p class="toc-label">Sommaire</p>
 		<ul class="toc-list">
-			{#each tocItems as item}
+			{#each tocItems as item (item.id)}
 				<li class:toc-active={activeId === item.id}>
 					<a href="#{item.id}">{item.text}</a>
 				</li>

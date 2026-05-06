@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/state';
 	import { afterNavigate } from '$app/navigation';
 	import { get } from 'svelte/store';
@@ -8,6 +7,7 @@
 	import Sidebar from '$lib/components/ui/Sidebar.svelte';
 	import SidebarToggle from '$lib/components/ui/SidebarToggle.svelte';
 	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
+	import Footer from '$lib/components/ui/Footer.svelte';
 	import { closePanel, studyPanel } from '$lib/stores/studyPanel';
 
 	let { children } = $props();
@@ -41,7 +41,9 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="canonical" href="{page.url.origin}{page.url.pathname}" />
 	<meta property="og:site_name" content="Catéchisme de l'Église Catholique" />
 	<meta property="og:locale" content="fr_FR" />
@@ -61,3 +63,4 @@
 	</div>
 	<StudyPanel />
 </div>
+<Footer />
