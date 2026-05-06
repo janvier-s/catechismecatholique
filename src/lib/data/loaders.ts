@@ -96,6 +96,26 @@ export function loadParagraphContexts(
 	return paragraphContextsPromise;
 }
 
+// Per-paragraph context shard — used by paragraph and search routes so the
+// SSR payload doesn't inline the entire 1.8 MB bundle. Returns null on 404
+// (out-of-range numbers) instead of throwing so callers can degrade gracefully.
+const paragraphContextCache = new Map<number, Promise<ParagraphContext | null>>();
+export function loadParagraphContext(
+	n: number,
+	fetcher: Fetch = fetch
+): Promise<ParagraphContext | null> {
+	let p = paragraphContextCache.get(n);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/ccc/paragraph-context/${n}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as ParagraphContext;
+		})();
+		paragraphContextCache.set(n, p);
+	}
+	return p;
+}
+
 export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, number[]>> {
 	return fetchJson<Record<number, number[]>>('/data/ccc/cited-by.json', fetcher);
 }

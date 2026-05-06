@@ -65,12 +65,13 @@
 				}
 			}
 
-			if (!slug || !b.suggestions[slug]) {
+			const suggestions = slug ? b.suggestions[slug] : undefined;
+			if (!suggestions) {
 				related = [];
 				return;
 			}
 
-			related = b.suggestions[slug].map((s) => ({ term: b.terms[s] ?? s })).filter((r) => r.term);
+			related = suggestions.map((s) => ({ term: b.terms[s] ?? s })).filter((r) => r.term);
 		});
 	});
 </script>

@@ -1,7 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 import { detectIntent } from '$lib/utils/searchIntent';
-import { loadParagraphContexts } from '$lib/data/loaders';
-import type { ParagraphContext } from '$lib/data/types';
 import type { PageLoad } from './$types';
 
 export interface SearchHit {
@@ -18,8 +16,7 @@ export interface SearchHit {
 
 export const load: PageLoad = async ({ url, fetch }) => {
 	const raw = url.searchParams.get('q')?.trim() ?? '';
-	if (!raw)
-		return { q: '', hits: [] as SearchHit[], contexts: {} as Record<number, ParagraphContext> };
+	if (!raw) return { q: '', hits: [] as SearchHit[] };
 
 	// Run intent detection BEFORE search so bookmarked URLs with a numeric or
 	// biblical query land on the right page (mirrors the TopBar form behavior).
@@ -29,22 +26,16 @@ export const load: PageLoad = async ({ url, fetch }) => {
 	}
 
 	const q = intent.q;
-	if (q.length < 2)
-		return { q, hits: [] as SearchHit[], contexts: {} as Record<number, ParagraphContext> };
+	if (q.length < 2) return { q, hits: [] as SearchHit[] };
 
 	const r = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
-	if (!r.ok)
-		return { q, hits: [] as SearchHit[], contexts: {} as Record<number, ParagraphContext> };
+	if (!r.ok) return { q, hits: [] as SearchHit[] };
 	const data = (await r.json()) as { hits: SearchHit[] };
 
-	// Paragraph contexts give each result row a Partie · Section · Chapitre
-	// breadcrumb. The file is ~280 KB and module-cached after first fetch.
-	let contexts: Record<number, ParagraphContext> = {};
-	try {
-		contexts = await loadParagraphContexts(fetch);
-	} catch {
-		contexts = {};
-	}
-
-	return { q, hits: data.hits, contexts };
+	// Paragraph contexts (Partie · Section · Chapitre breadcrumbs) used to
+	// load here, but inlining the 1.8 MB bundle into every search HTML
+	// response was the largest payload on the site. The page now fetches
+	// the bundle client-side after first paint and decorates rows
+	// progressively — see +page.svelte.
+	return { q, hits: data.hits };
 };

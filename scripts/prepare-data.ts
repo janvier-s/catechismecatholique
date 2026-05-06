@@ -178,8 +178,15 @@ async function main() {
 
 	logStep('building paragraph context');
 	const paragraphContext = buildParagraphContext(rawParts, structure);
+	// Keep the bundle for any consumer that needs the full map (none on the
+	// hot path anymore — paragraph + search routes load the per-paragraph
+	// shard instead, see paragraph-context/{n}.json below).
 	writeFileSync(join(OUT, 'ccc/paragraph-context.json'), JSON.stringify(paragraphContext));
-	endStep(`${Object.keys(paragraphContext).length} paragraphs mapped`);
+	mkdirSync(join(OUT, 'ccc/paragraph-context'), { recursive: true });
+	for (const [n, ctx] of Object.entries(paragraphContext)) {
+		writeFileSync(join(OUT, `ccc/paragraph-context/${n}.json`), JSON.stringify(ctx));
+	}
+	endStep(`${Object.keys(paragraphContext).length} paragraphs mapped (sharded)`);
 
 	logStep('parsing abbreviations');
 	const sigles = readFileSync(join(SOURCES, 'sigles.xhtml'), 'utf8');

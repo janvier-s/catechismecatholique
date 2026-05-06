@@ -107,7 +107,12 @@
 </script>
 
 {#if suggestions.length > 0}
-	<ul class="suggest-list" role="listbox" aria-label="Suggestions de navigation">
+	<ul
+		id="search-suggest-list"
+		class="suggest-list"
+		role="listbox"
+		aria-label="Suggestions de navigation"
+	>
 		{#each suggestions as s, i (s.h)}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<li

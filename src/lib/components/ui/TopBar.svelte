@@ -100,6 +100,7 @@
 						role="combobox"
 						aria-label="Recherche"
 						aria-autocomplete="list"
+						aria-controls="search-suggest-list"
 						aria-expanded={topbarSuggestOpen}
 						autocomplete="off"
 						onfocus={() => (topbarSuggestOpen = true)}

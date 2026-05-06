@@ -5,10 +5,24 @@
 	import { page } from '$app/state';
 	import { stripDiacritics } from '$lib/utils/searchTokenizer';
 	import { detectIntent } from '$lib/utils/searchIntent';
+	import { loadParagraphContexts } from '$lib/data/loaders';
+	import type { ParagraphContext } from '$lib/data/types';
 	import SearchSuggest from '$lib/components/ui/SearchSuggest.svelte';
 	import RelatedTopics from '$lib/components/ui/RelatedTopics.svelte';
 
 	let { data }: { data: PageData } = $props();
+
+	// Paragraph contexts hydrate client-side after first paint. Inlining the
+	// 1.8 MB bundle into the SSR HTML was the largest payload on the site.
+	// Result rows render immediately; breadcrumbs pop in once the bundle
+	// arrives (typically <100 ms on warm cache).
+	let contexts: Record<number, ParagraphContext> = $state({});
+	$effect(() => {
+		if (data.hits.length === 0) return;
+		void loadParagraphContexts().then((c) => {
+			contexts = c;
+		});
+	});
 
 	// Local query state mirrors ?q for the form input. Re-seeded by an effect
 	// below so subsequent navigations (back/forward, internal links) update it.
@@ -204,7 +218,7 @@
 	function hitContextLine(h: Hit): string | null {
 		const num = h.kind === 'paragraph' ? h.number : h.paragraph_start;
 		if (!num) return null;
-		const ctx = data.contexts?.[num];
+		const ctx = contexts[num];
 		if (!ctx) return null;
 		// Some paragraphs (e.g. prologue) only carry part + heading — no
 		// section/chapter. Fall back to whatever titles exist so every row gets
@@ -280,6 +294,7 @@
 						role="combobox"
 						aria-label="Recherche"
 						aria-autocomplete="list"
+						aria-controls="search-suggest-list"
 						aria-expanded={suggestOpen}
 						class="search-input"
 						onfocus={() => (suggestOpen = true)}
