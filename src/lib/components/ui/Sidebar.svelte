@@ -99,8 +99,12 @@
 		if (activeParagraph === null) {
 			// On non-paragraph URLs (article / chapter / section / part), append
 			// the scroll-spy heading hash so the Sidebar highlights the section
-			// the reader is currently in.
-			const hash = $activeHeading ? `#${$activeHeading}` : '';
+			// the reader is currently in. The hash is only applied when it was
+			// emitted by scroll-spy on THIS pathname — otherwise a hash from a
+			// previous page would briefly bleed into the next page's activeHref
+			// and double-highlight an unrelated entry alongside the new article.
+			const ah = $activeHeading;
+			const hash = ah && ah.pathname === page.url.pathname ? `#${ah.id}` : '';
 			return page.url.pathname + hash;
 		}
 		const c = activeContext;

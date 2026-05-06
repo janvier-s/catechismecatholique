@@ -50,21 +50,28 @@ export function buildChapterFiles(
 		}
 	}
 
+	// Route through the part or section page when the neighbor lives in a
+	// different scope AND that scope has intro paragraphs the linear reader
+	// would otherwise skip (e.g. Part 2's "Pourquoi la Liturgie?" §§1066-1075,
+	// Section 2 of Part 1's §§185-197). Otherwise link straight to the chapter.
 	function adjacent(neighbor: Flat | undefined, current: Flat): ChapterAdjacent | undefined {
 		if (!neighbor) return undefined;
-		const crossesSection = neighbor.sectionSlug !== current.sectionSlug;
 		const crossesPart = neighbor.partSlug !== current.partSlug;
+		const crossesSection = neighbor.sectionSlug !== current.sectionSlug;
+		if (crossesPart && neighbor.partHasIntro) {
+			return { kind: 'part', href: `/ccc/${neighbor.partSlug}`, title: neighbor.partTitle };
+		}
+		if (crossesSection && neighbor.sectionHasIntro) {
+			return {
+				kind: 'section',
+				href: `/ccc/${neighbor.partSlug}/${neighbor.sectionSlug}`,
+				title: neighbor.sectionTitle
+			};
+		}
 		return {
-			slug: neighbor.chapter.slug,
-			title: neighbor.chapter.title,
-			part_slug: neighbor.partSlug,
-			section_slug: neighbor.sectionSlug,
-			crosses_section: crossesSection || undefined,
-			section_title: crossesSection ? neighbor.sectionTitle : undefined,
-			section_has_intro: crossesSection && neighbor.sectionHasIntro ? true : undefined,
-			crosses_part: crossesPart || undefined,
-			part_title: crossesPart ? neighbor.partTitle : undefined,
-			part_has_intro: crossesPart && neighbor.partHasIntro ? true : undefined
+			kind: 'chapter',
+			href: `/ccc/${neighbor.partSlug}/${neighbor.sectionSlug}/${neighbor.chapter.slug}`,
+			title: neighbor.chapter.title
 		};
 	}
 

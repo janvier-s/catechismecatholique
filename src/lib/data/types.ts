@@ -62,30 +62,42 @@ export interface Chapter {
 	next?: ChapterAdjacent;
 }
 
+/**
+ * Pre-resolved navigation target for the chapter footer. The builder in
+ * scripts/prepare/chapters.ts already routes through the section/part page
+ * when crossing those boundaries AND the target page has its own intro
+ * paragraphs (so the linear reader doesn't skip them). The consumer just
+ * reads `href` / `title` and uses `kind` to pick the eyebrow label.
+ */
 export interface ChapterAdjacent {
-	slug: string;
+	/** Already-routed link target. */
+	href: string;
+	/** Display title for the navigation card. */
 	title: string;
-	part_slug: string;
-	section_slug: string;
-	/** True when this neighbor lives in a DIFFERENT section than the current
-	 *  chapter — useful for routing through the section page (with its intro
-	 *  paragraphs) instead of jumping straight to the next chapter. */
-	crosses_section?: boolean;
-	/** Title of the neighbor's section (for footer labeling). */
-	section_title?: string;
-	/** True when the neighbor's section has intro paragraphs that the linear
-	 *  reader would otherwise skip. */
-	section_has_intro?: boolean;
-	/** True when this neighbor lives in a different PART than the current
-	 *  chapter, AND the target part has intro paragraphs. The footer routes
-	 *  through the part page in that case so the part-level preamble (e.g.
-	 *  Part 2's "Pourquoi la Liturgie?") is read in order. */
-	crosses_part?: boolean;
-	/** Title of the neighbor's part (for footer labeling). */
-	part_title?: string;
-	/** True when the neighbor's part has intro paragraphs. */
-	part_has_intro?: boolean;
+	/** Selects the eyebrow label: "Chapitre suivant" / "Section suivante" /
+	 *  "Partie suivante" (and the matching feminine prev forms). */
+	kind: 'chapter' | 'section' | 'part';
 }
+
+/**
+ * Eyebrow labels for chapter-footer navigation. Section/Partie are feminine
+ * in French ("Section précédente"); Chapitre is masculine ("Chapitre précédent").
+ */
+export const ADJACENT_LABEL: Record<
+	'prev' | 'next',
+	Record<ChapterAdjacent['kind'], string>
+> = {
+	prev: {
+		chapter: '← Chapitre précédent',
+		section: '← Section précédente',
+		part: '← Partie précédente'
+	},
+	next: {
+		chapter: 'Chapitre suivant →',
+		section: 'Section suivante →',
+		part: 'Partie suivante →'
+	}
+};
 
 export interface ChapterArticle {
 	slug: string;
@@ -129,6 +141,55 @@ export interface StructureNode {
 	slug?: string;
 	number?: number;
 	children?: StructureNode[];
+}
+
+/**
+ * Shapes produced by `scripts/prepare/structure.ts` and consumed by the
+ * `+page.ts` route loaders. Sections and parts may carry intro paragraphs /
+ * headings — paragraphs that live directly under them rather than inside any
+ * chapter (e.g. §§185-197 for Section 2 of Part 1, Part 2's "Pourquoi la
+ * Liturgie?" §§1066-1075). Articles_direct covers sections that expose
+ * articles without an enclosing chapter (e.g. "Notre Père").
+ */
+export interface StructureArticle {
+	slug: string;
+	title: string;
+	number?: number;
+	paragraphs: number[];
+}
+
+export interface StructureChapter {
+	slug: string;
+	title: string;
+	number?: number;
+	paragraphs: number[];
+}
+
+export interface StructureSection {
+	slug: string;
+	title: string;
+	number?: number;
+	chapters: StructureChapter[];
+	articles_direct?: StructureArticle[];
+	intro_paragraphs?: number[];
+	intro_headings?: ChapterHeading[];
+	/** En Bref blocks nested directly under the section (outside any chapter).
+	 *  Only some sections have these — the Décalogue's §§2075-2082 block is
+	 *  the canonical example. */
+	en_brefs?: { paragraphs: number[] }[];
+}
+
+export interface StructurePart {
+	slug: string;
+	title: string;
+	number?: number;
+	sections: StructureSection[];
+	intro_paragraphs?: number[];
+	intro_headings?: ChapterHeading[];
+}
+
+export interface Structure {
+	parts: StructurePart[];
 }
 
 export interface ThematicEntry {

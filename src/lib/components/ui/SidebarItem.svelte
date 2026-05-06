@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Self from './SidebarItem.svelte';
+	import { itemMatches } from './sidebarMatch';
 
 	type Item = {
 		title: string;
@@ -13,36 +14,6 @@
 		activeHref,
 		depth = 0
 	}: { item: Item; activeHref: string; depth?: number } = $props();
-
-	function itemMatches(itemHref: string, target: string): boolean {
-		// activeHref often carries a scroll-spy heading hash like
-		// "/ccc/x/y/chapter#some-heading" while the matching tree entries
-		// are stored without the hash. Several match shapes have to work:
-		const base = target.replace(/#.*$/, '');
-		// (a) exact match, or item is the bare URL parent of a hashed target
-		if (itemHref === target || itemHref === base) return true;
-		// (b) target lives inside item's scope (item is an ancestor)
-		if (itemHref + '#' === target.slice(0, itemHref.length + 1)) return true;
-		// (c) hash match across paths: heading and en_bref entries are
-		//     prefixed at one structural level (e.g. chapter for en_bref,
-		//     article for headings) while activeHref may be produced by
-		//     scroll-spy at another level. Match when the hashes agree and
-		//     the two paths are along the same chapter prefix — i.e. one
-		//     is an ancestor of the other.
-		const iIdx = itemHref.indexOf('#');
-		const aIdx = target.indexOf('#');
-		if (iIdx >= 0 && aIdx >= 0) {
-			const iHash = itemHref.slice(iIdx + 1);
-			const aHash = target.slice(aIdx + 1);
-			if (iHash === aHash) {
-				const iPath = itemHref.slice(0, iIdx);
-				const aPath = target.slice(0, aIdx);
-				if (iPath === aPath) return true;
-				if (iPath.startsWith(aPath) || aPath.startsWith(iPath)) return true;
-			}
-		}
-		return false;
-	}
 
 	function isAncestorOrSelf(it: Item, target: string): boolean {
 		if (itemMatches(it.href, target)) return true;

@@ -14,6 +14,15 @@ export function normalizeGuillemets(html: string): string {
 		.replace(/(<\/[^>]+>)»/g, '$1 »');
 }
 
+// Strip the leading/trailing colon markers that the upstream JSON wraps
+// around Bible refs (and a few Latin terms) inside parentheses. The source
+// XHTML has e.g. `(<a class="bibRef">2 Tm 1, 12</a>)` and the processed
+// JSON renders this as `( : 2 Tm 1, 12 : )` — readable, but the colons are
+// noise. Restore the natural `(2 Tm 1, 12)` form for headings/titles.
+export function stripBibRefColonMarkers(s: string): string {
+	return s.replace(/\(\s*:\s*(.+?)\s*:\s*\)/g, '($1)');
+}
+
 // Walk past leading HTML tags + opening punctuation (« quotes, etc.) to find
 // the first letter, then uppercase it. Returns the modified string.
 export function capitalizeFirstWord(html: string): string {

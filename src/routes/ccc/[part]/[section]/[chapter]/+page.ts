@@ -1,17 +1,7 @@
 import { error, redirect } from '@sveltejs/kit';
 import { loadChapter, loadParagraph, loadStructure } from '$lib/data/loaders';
-import type { Paragraph } from '$lib/data/types';
+import type { Paragraph, Structure } from '$lib/data/types';
 import type { PageLoad } from './$types';
-
-type StructureLite = {
-	parts: {
-		slug: string;
-		sections?: {
-			slug: string;
-			articles_direct?: { slug: string; paragraphs: number[] }[];
-		}[];
-	}[];
-};
 
 // When `chapter` doesn't resolve, the third path segment may be an
 // articles_direct slug (sections like "Notre Père" expose articles directly,
@@ -23,7 +13,7 @@ async function maybeRedirectArticlesDirect(
 	slug: string,
 	fetcher: typeof fetch
 ): Promise<never | null> {
-	const struct = (await loadStructure(fetcher)) as StructureLite;
+	const struct = (await loadStructure(fetcher)) as Structure;
 	const sec = struct.parts.find((p) => p.slug === part)?.sections?.find((s) => s.slug === section);
 	const article = sec?.articles_direct?.find((a) => a.slug === slug);
 	if (article && article.paragraphs.length > 0) {

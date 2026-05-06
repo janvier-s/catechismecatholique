@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { loadStructure } from '$lib/data/loaders';
+	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 
 	// Hover-intent timer: the trigger sits in the topbar (right side), the
@@ -100,6 +101,21 @@
 	let activeSectionSlug = $state<string | null>(null);
 	let activeChapterSlug = $state<string | null>(null);
 
+	// Current page slugs derived from the URL — used to pre-populate the
+	// cascade on open and to mark the matching article cell in column 4.
+	const currentSlugs = $derived.by(() => {
+		const m = page.url.pathname.match(
+			/^\/ccc\/([^/]+)(?:\/([^/]+))?(?:\/([^/]+))?(?:\/([^/]+))?/
+		);
+		if (!m) return null;
+		return {
+			part: m[1] ?? null,
+			section: m[2] ?? null,
+			chapter: m[3] ?? null,
+			article: m[4] ?? null
+		};
+	});
+
 	// Keyboard cursor: column index 0..3 + item index inside that column
 	let kbCol = $state<0 | 1 | 2 | 3>(0);
 	let kbIndex = $state(0);
@@ -171,17 +187,37 @@
 			: 'Sections'
 	);
 
-	// Pre-populate cascade with first Partie / first Section / first Chapter
+	// Pre-populate cascade. When the user is on a deep CCC URL, follow it so
+	// the dropdown opens revealing the current location instead of always
+	// the first part. Falls back to the first part when the URL doesn't
+	// resolve into the structure (e.g. /ccc, /ccc/sommaire).
 	$effect(() => {
 		if (!open) return;
 		if (parts.length === 0) return;
-		if (!activePartSlug) {
-			const first = parts[0];
-			if (!first) return;
-			activePartSlug = first.slug;
-			activeSectionSlug = first.sections?.[0]?.slug ?? null;
-			activeChapterSlug = first.sections?.[0]?.chapters?.[0]?.slug ?? null;
+		if (activePartSlug) return; // don't override mid-hover
+
+		const cur = currentSlugs;
+		const matchedPart = cur ? parts.find((p) => p.slug === cur.part) : null;
+		if (matchedPart) {
+			activePartSlug = matchedPart.slug;
+			const matchedSection =
+				matchedPart.sections?.find((s) => s.slug === cur!.section) ??
+				matchedPart.sections?.[0] ??
+				null;
+			activeSectionSlug = matchedSection?.slug ?? null;
+			const matchedChapter =
+				matchedSection?.chapters?.find((c) => c.slug === cur!.chapter) ??
+				matchedSection?.chapters?.[0] ??
+				null;
+			activeChapterSlug = matchedChapter?.slug ?? null;
+			return;
 		}
+
+		const first = parts[0];
+		if (!first) return;
+		activePartSlug = first.slug;
+		activeSectionSlug = first.sections?.[0]?.slug ?? null;
+		activeChapterSlug = first.sections?.[0]?.chapters?.[0]?.slug ?? null;
 	});
 
 	function setActivePart(p: Part) {
@@ -597,9 +633,14 @@
 						{:else}
 							<ul class="col-list styled-scroll" role="none">
 								{#each col4Items as item, i (item.kind + ':' + (item.kind === 'article' ? item.data.slug : item.data.id))}
+									{@const isActive =
+										item.kind === 'article' &&
+										currentSlugs?.article === item.data.slug &&
+										currentSlugs?.chapter === activeChapterSlug}
 									<li>
 										<a
 											class="cell cell-article"
+											class:is-active={isActive}
 											href={item.kind === 'article'
 												? articleHref(item.data)
 												: headingHref(item.data)}
@@ -633,13 +674,11 @@
 					</div>
 				</div>
 
-				<!-- Footer bar -->
-				<div class="panel-foot">
-					<a class="foot-link foot-link-primary" href="/ccc/sommaire" role="menuitem" onclick={close}>
-						<span>Sommaire complet</span>
-						<span class="sommaire-arrow" aria-hidden="true">→</span>
-					</a>
-				</div>
+				<!-- Footer bar — entire row is the sommaire link, centered. -->
+				<a class="panel-foot foot-link foot-link-primary" href="/ccc/sommaire" role="menuitem" onclick={close}>
+					<span>Sommaire complet</span>
+					<span class="sommaire-arrow" aria-hidden="true">→</span>
+				</a>
 			{/if}
 		</div>
 	{/if}
@@ -954,19 +993,17 @@
 	}
 
 	/* Footer ----------------------------------------------------------- */
+	/* The footer IS the sommaire link — full-row click target, centered. */
 	.panel-foot {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
+		justify-content: center;
+		gap: 0.55rem;
 		margin-top: 0.85rem;
 		padding: 0.7rem 0.6rem 0.85rem;
 		border-top: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
 	}
 	.foot-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.55rem;
 		font-family: var(--font-ui);
 		font-size: 0.62rem;
 		font-weight: 600;
@@ -983,6 +1020,10 @@
 	}
 	.foot-link-primary {
 		color: var(--color-fg);
+	}
+	.panel-foot:hover .sommaire-arrow,
+	.panel-foot:focus-visible .sommaire-arrow {
+		transform: translateX(3px);
 	}
 	/* Mobile fallback ------------------------------------------------- */
 	.catdrop-panel.is-mobile {

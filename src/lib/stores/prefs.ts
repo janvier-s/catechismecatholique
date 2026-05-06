@@ -19,7 +19,7 @@ export interface ReadingPrefs {
 	theme: Theme;
 	fontFamily: string; // FONTS id, or DYSLEXIA_FONT.id
 	fontSize: number; // px
-	lineHeight: number; // 1.5 / 1.8 / 2.0
+	lineHeight: number; // 1.5 / 1.6 / 2.0
 	columnWidth: ColumnWidth;
 	justifiedText: boolean;
 	// Notes / refs visibility (catechism-specific)
@@ -36,7 +36,7 @@ const DEFAULTS: ReadingPrefs = {
 	theme: 'auto',
 	fontFamily: DEFAULT_FONT_ID,
 	fontSize: 17,
-	lineHeight: 1.8,
+	lineHeight: 1.6,
 	columnWidth: 'default',
 	justifiedText: false,
 	hideAllNotes: false,

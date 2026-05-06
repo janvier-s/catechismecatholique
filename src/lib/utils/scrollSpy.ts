@@ -38,7 +38,7 @@ export const scrollSpy: Action<HTMLElement> = (node) => {
 		// Fall back to the first heading when the page is at the very top
 		// (no heading has crossed the threshold yet).
 		if (!active && headings[0]) active = headings[0].id;
-		activeHeading.set(active);
+		activeHeading.set(active ? { pathname: location.pathname, id: active } : null);
 	}
 
 	function schedule() {

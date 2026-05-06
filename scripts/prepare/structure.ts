@@ -1,6 +1,6 @@
 import { slugify, uniqueSlug } from './slug';
 import { sentenceCase } from './sentence-case';
-import { normalizeGuillemets } from './source-data-fixes';
+import { normalizeGuillemets, stripBibRefColonMarkers } from './source-data-fixes';
 
 interface RawNode {
 	type: string;
@@ -46,6 +46,9 @@ export interface BuiltSection {
 	 *  chapter and this section's first chapter. */
 	intro_paragraphs?: number[];
 	intro_headings?: BuiltHeading[];
+	/** En Bref blocks nested directly under the section (outside any chapter)
+	 *  — e.g. the Décalogue's §§2075-2082 sit at section level. */
+	en_brefs?: { paragraphs: number[] }[];
 }
 
 export interface BuiltChapter {
@@ -124,7 +127,7 @@ function collectHeadings(nodes: RawNode[]): BuiltHeading[] {
 				out.push({
 					id,
 					level,
-					title: normalizeGuillemets(sentenceCase(title)),
+					title: stripBibRefColonMarkers(normalizeGuillemets(sentenceCase(title))),
 					paragraph_start: firstParagraph
 				});
 			}
@@ -168,7 +171,9 @@ function collectIntro(
 }
 
 function buildArticle(aRaw: RawNode, articleSlugs: Set<string>): BuiltArticle {
-	const aTitle = normalizeGuillemets(sentenceCase(stripPrefix(aRaw.title ?? '', ARTICLE_PREFIX)));
+	const aTitle = stripBibRefColonMarkers(
+		normalizeGuillemets(sentenceCase(stripPrefix(aRaw.title ?? '', ARTICLE_PREFIX)))
+	);
 	const aSlug = uniqueSlug(aTitle, articleSlugs);
 	const aParas: number[] = [];
 	collectParagraphs(aRaw, aParas);
@@ -191,7 +196,9 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 		const isPrologue = (partRaw.title ?? '').trim().toUpperCase() === 'PROLOGUE';
 		const partTitle = isPrologue
 			? 'Prologue'
-			: normalizeGuillemets(sentenceCase(stripPrefix(partRaw.title ?? '', PART_PREFIX)));
+			: stripBibRefColonMarkers(
+					normalizeGuillemets(sentenceCase(stripPrefix(partRaw.title ?? '', PART_PREFIX)))
+				);
 		const partSlug = isPrologue ? 'prologue' : uniqueSlug(partTitle, partSlugs);
 		if (isPrologue) {
 			if (partSlugs.has(partSlug)) {
@@ -209,7 +216,9 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 		for (const childRaw of partRaw.children ?? []) {
 			if (childRaw.type !== 'section') continue;
 			sectionNumber++;
-			const sectionTitle = normalizeGuillemets(sentenceCase(stripPrefix(childRaw.title ?? '', SECTION_PREFIX)));
+			const sectionTitle = stripBibRefColonMarkers(
+				normalizeGuillemets(sentenceCase(stripPrefix(childRaw.title ?? '', SECTION_PREFIX)))
+			);
 			const sectionSlug = uniqueSlug(sectionTitle, sectionSlugs);
 
 			const chapterSlugs = new Set<string>();
@@ -218,7 +227,9 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			for (const chapRaw of childRaw.children ?? []) {
 				if (chapRaw.type !== 'chapter') continue;
 				chapterNumber++;
-				const chapTitle = normalizeGuillemets(sentenceCase(stripPrefix(chapRaw.title ?? '', CHAPITRE_PREFIX)));
+				const chapTitle = stripBibRefColonMarkers(
+					normalizeGuillemets(sentenceCase(stripPrefix(chapRaw.title ?? '', CHAPITRE_PREFIX)))
+				);
 				const chapSlug = uniqueSlug(chapTitle, chapterSlugs);
 
 				const chapParagraphs: number[] = [];
@@ -257,14 +268,22 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 				childRaw,
 				new Set(['chapter', 'article', 'en_bref'])
 			);
-			const sectionEnBrefs: number[] = [];
+			// Section-level en_bref blocks — sit DIRECTLY under the section,
+			// outside any chapter. The Décalogue section's §§2075-2082 is the
+			// canonical example. Captured here so the section page can render
+			// them as a styled En Bref block (otherwise they're invisible).
+			const sectionEnBrefBlocks: { paragraphs: number[] }[] = [];
 			for (const c of childRaw.children ?? []) {
-				if (c.type === 'en_bref') collectParagraphs(c, sectionEnBrefs);
+				if (c.type !== 'en_bref') continue;
+				const ps: number[] = [];
+				collectParagraphs(c, ps);
+				if (ps.length > 0) sectionEnBrefBlocks.push({ paragraphs: ps });
 			}
+			const sectionEnBrefParas = sectionEnBrefBlocks.flatMap((b) => b.paragraphs);
 
 			const sectionParagraphs = [
 				...sectionIntro.paragraphs,
-				...sectionEnBrefs,
+				...sectionEnBrefParas,
 				...builtChapters.flatMap((c) => c.paragraphs),
 				...directArticles.flatMap((a) => a.paragraphs)
 			];
@@ -277,17 +296,18 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 				articles_direct: directArticles.length > 0 ? directArticles : undefined,
 				range: rangeOf(sectionParagraphs),
 				intro_paragraphs: sectionIntro.paragraphs.length > 0 ? sectionIntro.paragraphs : undefined,
-				intro_headings: sectionIntro.headings.length > 0 ? sectionIntro.headings : undefined
+				intro_headings: sectionIntro.headings.length > 0 ? sectionIntro.headings : undefined,
+				en_brefs: sectionEnBrefBlocks.length > 0 ? sectionEnBrefBlocks : undefined
 			});
 		}
 
 		// Part-direct intro: paragraphs/headings that sit under the part but
 		// outside any section. Captures e.g. Part 3's §§1691-1698 preamble
 		// before its first section, plus Part 2's "Pourquoi la Liturgie?"
-		// preamble (which lives at part-level under sub_headings).
-		const partIntro = isPrologue
-			? { paragraphs: [], headings: [] }
-			: collectIntro(partRaw, new Set(['section']));
+		// preamble (which lives at part-level under sub_headings). The
+		// prologue (which has no sections by design) is also captured here
+		// so its Roman-numeral heading divisions render on the part page.
+		const partIntro = collectIntro(partRaw, new Set(['section']));
 
 		const partParagraphs: number[] = [];
 		for (const sec of builtSections) {
@@ -296,10 +316,6 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			for (const a of sec.articles_direct ?? []) partParagraphs.push(...a.paragraphs);
 		}
 		partParagraphs.push(...partIntro.paragraphs);
-		// Prologue paragraphs aren't tracked under sections — collect them from the raw tree.
-		if (isPrologue) {
-			collectParagraphs(partRaw, partParagraphs);
-		}
 
 		builtParts.push({
 			slug: partSlug,
@@ -308,10 +324,8 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			sections: builtSections,
 			prologue: isPrologue,
 			range: rangeOf(partParagraphs),
-			intro_paragraphs:
-				!isPrologue && partIntro.paragraphs.length > 0 ? partIntro.paragraphs : undefined,
-			intro_headings:
-				!isPrologue && partIntro.headings.length > 0 ? partIntro.headings : undefined
+			intro_paragraphs: partIntro.paragraphs.length > 0 ? partIntro.paragraphs : undefined,
+			intro_headings: partIntro.headings.length > 0 ? partIntro.headings : undefined
 		});
 	}
 

@@ -117,10 +117,18 @@ function extractRefs(node: ParseNode): number[] {
 		// Look ahead: next non-empty token. If it's a "-" / "–" text, the
 		// anchor after it is the end of a range.
 		let j = i + 1;
-		while (j < tokens.length && tokens[j]!.kind === 'text' && /^\s*$/.test(tokens[j]!.v)) j++;
-		if (j < tokens.length && tokens[j]!.kind === 'text' && /^\s*[-–]\s*$/.test(tokens[j]!.v)) {
+		const isEmptyText = (idx: number) => {
+			const tok = tokens[idx];
+			return tok?.kind === 'text' && /^\s*$/.test(tok.v);
+		};
+		const isDashText = (idx: number) => {
+			const tok = tokens[idx];
+			return tok?.kind === 'text' && /^\s*[-–]\s*$/.test(tok.v);
+		};
+		while (j < tokens.length && isEmptyText(j)) j++;
+		if (j < tokens.length && isDashText(j)) {
 			let k = j + 1;
-			while (k < tokens.length && tokens[k]!.kind === 'text' && /^\s*$/.test(tokens[k]!.v)) k++;
+			while (k < tokens.length && isEmptyText(k)) k++;
 			const end = tokens[k];
 			if (end && end.kind === 'anchor' && end.n > t.n) {
 				for (let p = t.n + 1; p <= end.n; p++) refs.add(p);
@@ -136,7 +144,7 @@ function extractRefs(node: ParseNode): number[] {
 const INFLECTION_RE = /^(s|e|se|s\/e|s\/se|le)$/i;
 
 // Restore Latin ligatures: `ae`/`oe` → `æ`/`œ` (preserving case).
-function ligateLatin(s: string): string {
+export function ligateLatin(s: string): string {
 	return s
 		.replace(/AE/g, 'Æ')
 		.replace(/Ae/g, 'Æ')
@@ -148,14 +156,14 @@ function ligateLatin(s: string): string {
 
 // Apply Latin ligatures only to text inside `(…)` so French outside the parens
 // (e.g. "coexistant") stays untouched.
-function ligateInsideParens(s: string): string {
+export function ligateInsideParens(s: string): string {
 	return s.replace(/\(([^)]+)\)/g, (_, inner) => '(' + ligateLatin(inner) + ')');
 }
 
 // Tighten extra whitespace inside parentheses (`( foedus vetus )` →
 // `(foedus vetus)`) and drop a trailing period that sometimes follows the
 // closing paren on title-only entries.
-function cleanParens(s: string): string {
+export function cleanParens(s: string): string {
 	return s
 		.replace(/\(\s+([^)]*?)\s+\)/g, '($1)')
 		.replace(/\(\s+([^)]+?)\)/g, '($1)')
@@ -219,7 +227,7 @@ const PROPER_NOUNS: ReadonlyArray<[RegExp, string]> = [
 	[/\bpâque\b/giu, 'Pâque']
 ];
 
-function capitalizeProperNouns(s: string): string {
+export function capitalizeProperNouns(s: string): string {
 	let out = s;
 	for (const [re, replacement] of PROPER_NOUNS) out = out.replace(re, replacement);
 	return out;

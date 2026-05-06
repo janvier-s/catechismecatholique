@@ -1,34 +1,10 @@
 import { error } from '@sveltejs/kit';
 import { loadStructure, loadParagraph } from '$lib/data/loaders';
+import type { Structure } from '$lib/data/types';
 import type { PageLoad } from './$types';
 
-interface Heading {
-	id: string;
-	level: number;
-	title: string;
-	paragraph_start: number;
-}
-interface Section {
-	slug: string;
-	title: string;
-	number?: number;
-	chapters: { slug: string }[];
-	articles_direct?: { slug: string }[];
-}
-interface Part {
-	slug: string;
-	title: string;
-	number?: number;
-	sections: Section[];
-	intro_paragraphs?: number[];
-	intro_headings?: Heading[];
-}
-interface Struct {
-	parts: Part[];
-}
-
 export const load: PageLoad = async ({ params, fetch }) => {
-	const struct = (await loadStructure(fetch)) as Struct;
+	const struct = (await loadStructure(fetch)) as Structure;
 	const part = struct.parts.find((p) => p.slug === params.part);
 	if (!part) throw error(404, 'Partie introuvable');
 
@@ -60,13 +36,25 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		}
 	}
 	const firstSec = part.sections[0] ?? null;
-	const next = firstSec
+	let next: { href: string; label: string; title: string } | null = firstSec
 		? {
 				href: `/ccc/${part.slug}/${firstSec.slug}`,
 				label: 'Première section →',
 				title: firstSec.title
 			}
 		: null;
+	// Sections-less parts (the prologue) jump directly to the next part so
+	// the linear reader keeps moving forward.
+	if (!next) {
+		const nextPart = struct.parts[partIdx + 1];
+		if (nextPart) {
+			next = {
+				href: `/ccc/${nextPart.slug}`,
+				label: 'Partie suivante →',
+				title: nextPart.title
+			};
+		}
+	}
 
 	return { part, introParagraphs, prev, next };
 };

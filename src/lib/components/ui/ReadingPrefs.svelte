@@ -138,7 +138,7 @@
 			<div>
 				<span class="block mb-2 text-muted text-[13px]">Interligne</span>
 				<div class="flex gap-1.5">
-					{#each [{ label: 'Serré', value: 1.5 }, { label: 'Standard', value: 1.8 }, { label: 'Aéré', value: 2.0 }] as opt (opt.value)}
+					{#each [{ label: 'Serré', value: 1.5 }, { label: 'Standard', value: 1.6 }, { label: 'Aéré', value: 2.0 }] as opt (opt.value)}
 						<button
 							type="button"
 							class="flex-1 py-1.5 border rounded text-xs transition-colors
