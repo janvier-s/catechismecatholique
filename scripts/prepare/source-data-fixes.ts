@@ -25,6 +25,21 @@ export function stripBibRefColonMarkers(s: string): string {
 	return s.replace(/\(\s*:\s*(.+?)\s*:\s*\)/g, '($1)');
 }
 
+// §2267 was officially revised in 2018 (Pope Francis, CDF declaration) to declare
+// the death penalty inadmissible. The source data reflects the 1992 text.
+// We preserve the original as `superseded_text_html` and replace `text_html`
+// with the current Vatican wording so the reader sees the authoritative text
+// while historians can still access the prior formulation.
+export function patchParagraph2267(paragraphs: Map<number, { text_html: string; superseded_text_html?: string }>): void {
+	const p = paragraphs.get(2267);
+	if (!p) return;
+	p.superseded_text_html = p.text_html;
+	p.text_html =
+		'<span>Pendant longtemps, le recours à la peine de mort de la part de l’autorité légitime, après un procès régulier, fut considéré comme une réponse adaptée à la gravité de certains délits, et un moyen acceptable, bien qu’extrême, pour la sauvegarde du bien commun.</span><br/>' +
+		'<span>Aujourd’hui on est de plus en plus conscient que la personne ne perd pas sa dignité, même après avoir commis des crimes très graves. En outre, s’est répandue une nouvelle compréhension du sens de sanctions pénales de la part de l’État. On a également mis au point des systèmes de détention plus efficaces pour garantir la sécurité à laquelle les citoyens ont droit, et qui n’enlèvent pas définitivement au coupable la possibilité de se repentir.</span><br/>' +
+		'<span>C’est pourquoi l’Église enseigne, à la lumière de l’Évangile, que « la peine de mort est inadmissible car elle attente à l’inviolabilité et à la dignité de la personne » (<i class="typo_italic">François, Discours aux Participants à la Rencontre organisée par le Conseil Pontifical pour la Promotion de la Nouvelle Évangélisation, 11 octobre 2017</i>) et elle s’engage de façon déterminée, en vue de son abolition partout dans le monde.</span>';
+}
+
 // Walk past leading HTML tags + opening punctuation (« quotes, etc.) to find
 // the first letter, then uppercase it. Returns the modified string.
 export function capitalizeFirstWord(html: string): string {

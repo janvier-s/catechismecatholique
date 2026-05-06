@@ -36,6 +36,14 @@
 			{#each paragraph.citations as cite, i (i)}
 				<CitationBlock html={cite.text_html} />
 			{/each}
+			{#if paragraph.superseded_text_html}
+				<div class="superseded-block">
+					<p class="superseded-label">Rédaction antérieure (édition 1992)</p>
+					<div class="superseded-text">
+						{@html paragraph.superseded_text_html}
+					</div>
+				</div>
+			{/if}
 		</div>
 		{#if showSideRefs}
 			<aside class="ccc-side-refs">
@@ -103,6 +111,35 @@
 	}
 	.ccc-side-refs .cross-ref-link:hover {
 		text-decoration: underline;
+	}
+
+	.superseded-block {
+		margin-top: 1.5rem;
+		padding: 0.875rem 1rem;
+		border-left: 3px solid color-mix(in srgb, var(--color-fg) 15%, transparent);
+		background: color-mix(in srgb, var(--color-fg) 3%, transparent);
+		border-radius: 0 0.25rem 0.25rem 0;
+	}
+	.superseded-label {
+		font-family: var(--font-ui);
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin-bottom: 0.5rem;
+	}
+	.superseded-text {
+		font-size: 0.875rem;
+		color: color-mix(in srgb, var(--color-fg) 55%, transparent);
+		line-height: 1.7;
+	}
+	.superseded-text :global(span) {
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+	.superseded-text :global(span:last-child) {
+		margin-bottom: 0;
 	}
 
 	/* On small screens, stack the refs box below the paragraph. Phase 4 will

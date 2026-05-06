@@ -17,7 +17,7 @@ import { buildStructure } from './prepare/structure.ts';
 import { extractTocStructure, validateAgainstToc } from './prepare/toc-validator.ts';
 import { extractParagraphs } from './prepare/paragraphs.ts';
 import { extractParagraphes } from './prepare/paragraphes.ts';
-import { fixCccParaSourceTypos } from './prepare/source-data-fixes.ts';
+import { fixCccParaSourceTypos, patchParagraph2267 } from './prepare/source-data-fixes.ts';
 import { buildChapterFiles } from './prepare/chapters.ts';
 import { extractEnBref, trimEnBrefsAtParagrapheBoundaries } from './prepare/enbref.ts';
 import { parseSigles } from './prepare/abbreviations.ts';
@@ -99,6 +99,7 @@ async function main() {
 
 	logStep('extracting paragraphs');
 	const paragraphs = extractParagraphs(rawParts);
+	patchParagraph2267(paragraphs);
 	for (const [n, p] of paragraphs) {
 		writeFileSync(join(OUT, `ccc/paragraphs/${n}.json`), JSON.stringify(p));
 	}

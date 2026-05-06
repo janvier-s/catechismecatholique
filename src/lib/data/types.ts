@@ -30,6 +30,10 @@ export interface Paragraph {
 	corpus: Corpus;
 	number: number;
 	text_html: string;
+	/** Former text for paragraphs whose wording was officially revised after the
+	 *  1992 edition (e.g. §2267 on the death penalty, updated 2018). Rendered
+	 *  below the current text with a clear "Rédaction antérieure" label. */
+	superseded_text_html?: string;
 	cross_refs: string[];
 	bible_refs: BibleRef[];
 	citations: Citation[];
