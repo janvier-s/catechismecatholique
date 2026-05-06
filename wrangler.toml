@@ -4,5 +4,5 @@ pages_build_output_dir = ".svelte-kit/cloudflare"
 
 [[kv_namespaces]]
 binding = "SEARCH_INDEX"
-id = "REPLACE_WITH_KV_ID_AFTER_CREATING"
-preview_id = "REPLACE_WITH_KV_PREVIEW_ID"
+id = "f6806983770a464b9b657f0f9503a2b3"
+preview_id = "29450af80b784bdba6493b3eda25707f"

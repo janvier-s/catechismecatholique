@@ -12,9 +12,12 @@ const KEY = 'search-index';
 function main() {
 	const size = statSync(FILE).size;
 	console.log(`Uploading ${KEY} (${(size / 1024).toFixed(1)} KB)…`);
-	execSync(`npx wrangler kv key put --remote --binding=SEARCH_INDEX "${KEY}" --path="${FILE}"`, {
-		stdio: 'inherit'
-	});
+	// `--preview=false` forces the write into the production namespace —
+	// wrangler refuses to pick when both id and preview_id are configured.
+	execSync(
+		`npx wrangler kv key put --remote --preview=false --binding=SEARCH_INDEX "${KEY}" --path="${FILE}"`,
+		{ stdio: 'inherit' }
+	);
 	console.log(`✓ ${KEY} uploaded`);
 }
 
