@@ -15,15 +15,13 @@ function abbrTable(books: BookInfo[]): Map<string, BookInfo> {
 //   "Jn 1:14"           → { abbr: 'Jn', ch: 1, fromV: 14, toV: 14, fromCh: 1, toCh: 1 }
 //   "1 Cor 10:1-6"      → fromV/toV range, single chapter
 //   "1 Cor 1-6"         → chapter range, no verse (fromV/toV undefined)
-function parseRefKey(key: string):
-	| {
-			abbr: string;
-			fromCh: number;
-			toCh: number;
-			fromV?: number;
-			toV?: number;
-	  }
-	| null {
+function parseRefKey(key: string): {
+	abbr: string;
+	fromCh: number;
+	toCh: number;
+	fromV?: number;
+	toV?: number;
+} | null {
 	// Single verse / verse range / chapter range
 	const verseRe = /^([1-3]?\s*[A-Za-zÉéèêÊ]+)\s+(\d+):(\d+)(?:-(\d+))?$/;
 	const chapterRe = /^([1-3]?\s*[A-Za-zÉéèêÊ]+)\s+(\d+)-(\d+)$/;

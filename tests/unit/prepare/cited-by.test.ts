@@ -15,9 +15,7 @@ describe('buildCitedBy', () => {
 	});
 
 	it('skips refs to nonexistent paragraphs', () => {
-		const paragraphs = new Map<number, { cross_refs: string[] }>([
-			[1, { cross_refs: ['99999'] }]
-		]);
+		const paragraphs = new Map<number, { cross_refs: string[] }>([[1, { cross_refs: ['99999'] }]]);
 		const result = buildCitedBy(paragraphs);
 		expect(result[99999]).toBeUndefined();
 	});

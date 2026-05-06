@@ -120,9 +120,7 @@
 		// "." — leaving a period orphaned at the start of the next line.
 		// (Buttons are always atomic inline-block per UA stylesheet, so a CSS
 		// `display: inline` override is ineffective in practice.)
-		const markers = containerEl.querySelectorAll<HTMLElement>(
-			'sup.srcRef, button.bible-inline'
-		);
+		const markers = containerEl.querySelectorAll<HTMLElement>('sup.srcRef, button.bible-inline');
 		for (const marker of markers) {
 			if (marker.parentElement?.classList.contains('ref-wrap')) continue;
 			const wrap = document.createElement('span');

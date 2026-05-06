@@ -18,7 +18,8 @@ export interface SearchHit {
 
 export const load: PageLoad = async ({ url, fetch }) => {
 	const raw = url.searchParams.get('q')?.trim() ?? '';
-	if (!raw) return { q: '', hits: [] as SearchHit[], contexts: {} as Record<number, ParagraphContext> };
+	if (!raw)
+		return { q: '', hits: [] as SearchHit[], contexts: {} as Record<number, ParagraphContext> };
 
 	// Run intent detection BEFORE search so bookmarked URLs with a numeric or
 	// biblical query land on the right page (mirrors the TopBar form behavior).

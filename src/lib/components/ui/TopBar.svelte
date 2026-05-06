@@ -32,7 +32,9 @@
 	class="topbar border-b border-border bg-background sticky top-0 z-[var(--z-modal)]"
 	class:is-condensed={condensed}
 >
-	<div class="relative px-4 md:px-6 py-2 md:py-3 flex items-center gap-3 md:gap-6 min-h-[58px] md:min-h-[80px]">
+	<div
+		class="relative px-4 md:px-6 py-2 md:py-3 flex items-center gap-3 md:gap-6 min-h-[58px] md:min-h-[80px]"
+	>
 		<a href="/" class="flex items-center gap-3 flex-none" aria-label="Accueil">
 			<LogoMark />
 			<Wordmark />
@@ -109,11 +111,13 @@
 			--topbar-height: 58px;
 		}
 		.topbar > div {
-			transition: min-height 200ms cubic-bezier(0.22, 1, 0.36, 1),
+			transition:
+				min-height 200ms cubic-bezier(0.22, 1, 0.36, 1),
 				padding 200ms cubic-bezier(0.22, 1, 0.36, 1);
 		}
 		.topbar :global(.logo-mark) {
-			transition: width 200ms cubic-bezier(0.22, 1, 0.36, 1),
+			transition:
+				width 200ms cubic-bezier(0.22, 1, 0.36, 1),
 				height 200ms cubic-bezier(0.22, 1, 0.36, 1);
 		}
 		/* Condensed state — shrinks the bar but keeps the logo a clear tap target. */

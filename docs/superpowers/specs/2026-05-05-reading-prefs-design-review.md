@@ -10,7 +10,7 @@ Mounted in: `src/lib/components/ui/TopBar.svelte` (right end of the header)
 
 ## TL;DR
 
-1. **Critical layering bug.** On every page that has a second sticky bar under the topbar (Bible chapter nav, study panel header), the popover's tab strip is hidden behind that bar. The ModeToggle trigger lives inside the topbar `<header>`, which is itself a stacking context at `z-30`; the popover is `z-60` *inside* that context, while sibling sticky bars are `z-40` outside it. Result: the top ~40 px of the popover (the entire `Texte / Lecture / Notes` tab row) is unreachable and unreadable on Bible/CCC reading pages — the very pages where reading prefs matter most. Playwright literally refused to click the `Lecture` tab, citing the chapter sticky bar as the pointer-event interceptor.
+1. **Critical layering bug.** On every page that has a second sticky bar under the topbar (Bible chapter nav, study panel header), the popover's tab strip is hidden behind that bar. The ModeToggle trigger lives inside the topbar `<header>`, which is itself a stacking context at `z-30`; the popover is `z-60` _inside_ that context, while sibling sticky bars are `z-40` outside it. Result: the top ~40 px of the popover (the entire `Texte / Lecture / Notes` tab row) is unreachable and unreadable on Bible/CCC reading pages — the very pages where reading prefs matter most. Playwright literally refused to click the `Lecture` tab, citing the chapter sticky bar as the pointer-event interceptor.
 2. **The font dropdown does not close on tab change.** Open `Police`, switch to `Lecture`, and the floating font menu remains anchored over the new tab's controls. It also escapes the popover bounds (`position: fixed` + manual top/left), so on a short viewport it overflows the screen. Same goes for clicking outside the dialog: the document-click handler closes the dialog but the floating menu is mounted as a sibling of `<div class="relative">`, so it lingers.
 3. **Notes tab uses raw native checkboxes.** Five `<input type="checkbox">` with only `accent-accent` styling — no editorial register, no custom mark, no hairline frame. Looks generic next to the swatch grid and the segmented pills. Easiest single visual upgrade in the panel.
 
@@ -21,18 +21,21 @@ Mounted in: `src/lib/components/ui/TopBar.svelte` (right end of the header)
 The popover is organised into three tabs:
 
 **Texte (default)**
+
 - Font size — range slider, `13–22 px`, with live readout `Taille du texte : 17px`.
 - Line height — three-button segmented: `Serré 1.5 / Standard 1.8 / Aéré 2.0`.
 - Font family — single trigger button that opens a floating list with two horizontal-rule sections (serifs / sans / dyslexic). 6 fonts + Grace Dyslexic MD.
 - Theme — four cards: `Clair / Sépia / Sombre / OLED`, rendered as little 3:4 paper mockups with an `A` glyph and three short rules.
 
 **Lecture**
+
 - Column width — three buttons `Étroite / Standard / Large` (desktop only, hidden on mobile).
 - Alignment — two buttons `À gauche / Justifié`.
 - Renvois (§) — `En ligne / En marge`.
 - Réfs. bibliques — `En ligne / En exposant`.
 
 **Notes**
+
 - Master checkbox `Masquer toutes les notes`.
 - Indented under a left rule, four sub-checkboxes: `Renvois (§)`, `Réfs. bibliques en ligne`, `Réfs. bibliques en exposant`, `Sources`.
 
@@ -49,6 +52,7 @@ The trigger is a `36 × 36 px` rounded square with a tinted-accent background (`
 **What works.** The icon is reasonably evocative, the tinted square gives it weight without yelling, and the placement at the far right of the nav is conventional. Accessibility metadata is correct.
 
 **Issues.**
+
 - **Tinted accent square breaks the topbar rhythm.** Every other interactive element in the header is text — `Catéchisme ▾`, `Bible`, `Glossaire`, `À propos` — sitting on the cream background with no chip or badge. The reading prefs button is the only filled rectangle in the row, so it reads as the loudest control in a header where it should be the quietest. An editorial header invites a hairline-bordered icon-only button (or a plain icon with a faint underline on hover), not a SaaS-y filled chip.
 - **No textual affordance on hover.** The icon is recognisable to a power user, but a first-time visitor has no language to attach to it. A small tooltip "Options de lecture" or a hover label slid in below would help; the `aria-label` only reaches screen readers.
 - **No active state when the panel is open.** The icon stays the same shade. Conventionally the trigger gets a subtle "pressed" state (background → solid accent, or a ring) to signal "this is what's open."
@@ -64,14 +68,15 @@ The trigger is a `36 × 36 px` rounded square with a tinted-accent background (`
 
 **Critical layering bug.** As shown above, on Bible pages the chapter sticky bar (`z-[var(--z-sticky)]` = 40) wins over the popover (z-60) because the popover lives inside the topbar's own stacking context (z-30). The visible result: the `Texte / Lecture / Notes` strip is rendered, but it sits at y=71–113, inside a region the chapter bar covers from y=80 onward. The `bg-glass backdrop-blur-sm` of the chapter bar paints right over the tab labels.
 
-  - Compare the same popover on the homepage, where the only sticky element is the topbar itself: the tabs render perfectly.
-    ![Popover on homepage — tabs visible](assets/2026-05-05-reading-prefs/11-prefs-on-home-no-sticky-conflict.png)
+- Compare the same popover on the homepage, where the only sticky element is the topbar itself: the tabs render perfectly.
+  ![Popover on homepage — tabs visible](assets/2026-05-05-reading-prefs/11-prefs-on-home-no-sticky-conflict.png)
 
 **Fix shape (no code, just direction).** Hoist the popover out of the topbar's stacking context — render it via Svelte portal/teleport on `<body>`, position it absolutely relative to the trigger's bounding box, and give it a z-index higher than every other sticky surface (e.g. its own `--z-floating` = 65 or `--z-modal`). The font submenu already does the right thing with `position: fixed` and `z-floating`; the parent dialog has to do the same.
 
 **Other container notes.**
+
 - `pt-1` (4 px) is too tight above the sticky tab strip. It pushes the tabs flush to the rounded top corner, giving the strip nowhere to breathe inside the rounded `border-radius: 6px` and contributing to the cramped look near the top edge. `pt-0` + an explicit tab-strip top padding inside the strip itself would read cleaner.
-- `rounded-md` (6 px) and `shadow-lg` together feel SaaS-y in this context. Editorial-classical style would use a tighter `rounded-sm` (2–3 px) plus a single hairline border and a barely-there shadow, or even *no* shadow and rely on the border. The current `shadow-lg` casts a soft modal-dialog cloud that doesn't match the rest of the site's flat-paper register.
+- `rounded-md` (6 px) and `shadow-lg` together feel SaaS-y in this context. Editorial-classical style would use a tighter `rounded-sm` (2–3 px) plus a single hairline border and a barely-there shadow, or even _no_ shadow and rely on the border. The current `shadow-lg` casts a soft modal-dialog cloud that doesn't match the rest of the site's flat-paper register.
 - `bg-panel` differs from the page `bg-background` only slightly. On `Sépia` and `Clair` themes the popover panel reads almost identical to the page surface, which is fine, but on `Sombre` the contrast versus the page has not been verified in this review.
 - Width is fixed at `w-80` (320 px). Reasonable for desktop. See Mobile section below for the small-screen consequence.
 
@@ -86,6 +91,7 @@ The trigger is a `36 × 36 px` rounded square with a tinted-accent background (`
 **Segmented buttons (line height, alignment, renvois, refs, column width).** Filled-pill toggles with the active state in solid `bg-accent` (deep red `#a62c2c`) + white text, inactive in transparent + bordered. They function as segmented controls but they are styled as individual buttons (each with its own border radius and a `gap-1.5` between them), so they read as three independent buttons rather than one segmented control. A single shared border with internal hairline dividers and a single rounded outer corner would be both more honest semantically and more editorial visually. The deep-red filled pill for the active state is also high-contrast in a way that overpowers the rest of the popover — switching to a thin underline mark or an inverted-color pill with a hairline border would be a softer, NYT-Magazine-style active state.
 
 **Font dropdown.** A combobox-shaped trigger that opens a floating menu via `position: fixed` with manual positioning. Three problems:
+
 1. Does not auto-close when the user switches to another tab, so the menu floats orphaned over `Lecture` or `Notes` controls.
    ![Font dropdown leaking onto Lecture tab](assets/2026-05-05-reading-prefs/05-prefs-tab-lecture.png)
 2. The click-outside handler in `ModeToggle` only closes the popover; it does not close the floating font menu, so the menu can outlive its owner dialog visually.
@@ -95,7 +101,7 @@ The trigger is a `36 × 36 px` rounded square with a tinted-accent background (`
 
 **Notes tab — native checkboxes.** Five raw `<input type="checkbox">` styled only with `accent-accent`. The overall layout (left rule + indented children, master toggle on top) is editorial-correct. The checkboxes themselves are not. Browser-default rendering varies wildly (square on Linux/Chrome, rounded on macOS/Safari) and looks particularly out of place against the tracked-cap tab labels and the paper theme cards. Two paths: (a) custom-rendered checkboxes with a hairline square + a serif-friendly tick mark, or (b) re-imagine the section as left/right pill toggles to match the Lecture tab's vocabulary (`Afficher / Masquer`).
 
-  ![Notes tab — native checkboxes](assets/2026-05-05-reading-prefs/07-prefs-notes.png)
+![Notes tab — native checkboxes](assets/2026-05-05-reading-prefs/07-prefs-notes.png)
 
 ---
 
@@ -120,6 +126,7 @@ Inside the popover everything is `font-ui` (Libre Franklin) at `text-sm` base.
 Three tabs, controls grouped by section under a small label. The grouping itself is sound.
 
 What is unclear:
+
 - **Why is `Police` in `Texte` while `Largeur de colonne` is in `Lecture`?** Both touch the rendering of the body text. The split of `Texte` vs `Lecture` is not obviously meaningful to a reader — `Texte` ends up holding theme + size + font + line height, while `Lecture` holds layout choices (column, alignment, refs). One could read this as "what the words look like" vs "how they are arranged on the page," and that is defensible, but the labels do not communicate it. Renaming to `Apparence / Mise en page / Notes` (or `Police / Mise en page / Notes`) would make the split self-evident.
 - **Tabs feel premature for so few controls.** The popover at `w-80` has plenty of room to stack everything in a single column with hairline rule separators between sections — that is, after all, the editorial-classical move. Tabs work, but they are a SaaS pattern; an old missal would just give you the table of contents with rules between sections.
 
@@ -172,4 +179,4 @@ The four swatch labels (`Clair / Sépia / Sombre / OLED`) are good. `OLED` is te
 - **Live preview of selected font in the trigger.** Setting the trigger label in the chosen font's stack is a small, considered detail.
 - **Persistence layer.** `prefs` store + `localStorage` + `data-*` attributes on `<html>` is exactly the right architecture; CSS variables drive the reader, no React-style re-render fatigue. Not a visual issue, but worth saying it is sound.
 - **Section grouping in Notes.** The master toggle on top, with four indented children behind a left hairline rule, is the most editorial layout in the panel and the right model for the rest of it.
-- **`bg-panel` token + `border-border` hairline.** The token system is healthy and the hairline-bordered surface is appropriate. The visual problems above are about *what* is on the surface, not the surface itself.
+- **`bg-panel` token + `border-border` hairline.** The token system is healthy and the hairline-bordered surface is appropriate. The visual problems above are about _what_ is on the surface, not the surface itself.

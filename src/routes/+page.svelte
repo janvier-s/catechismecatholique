@@ -14,9 +14,7 @@
 			.replace(/\s{2,}/g, ' ');
 	}
 
-	const teaserHtml = $derived(
-		data.paragraph ? cleanTeaserHtml(data.paragraph.text_html) : ''
-	);
+	const teaserHtml = $derived(data.paragraph ? cleanTeaserHtml(data.paragraph.text_html) : '');
 
 	// The homepage is laid out to fit one screen at typical viewport heights.
 	// Hide the body scrollbar while it's mounted so a one-pixel overflow
@@ -34,12 +32,21 @@
 		name="description"
 		content="Édition française définitive du Catéchisme de l'Église Catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème."
 	/>
-	<meta property="og:title" content="Catéchisme de l'Église Catholique | Édition française définitive" />
-	<meta property="og:description" content="Édition française définitive du Catéchisme de l'Église Catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème." />
+	<meta
+		property="og:title"
+		content="Catéchisme de l'Église Catholique | Édition française définitive"
+	/>
+	<meta
+		property="og:description"
+		content="Édition française définitive du Catéchisme de l'Église Catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème."
+	/>
 	<meta property="og:image" content="{page.url.origin}/img/og-image.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
-	<meta property="og:image:alt" content="Catéchisme de l'Église Catholique — Édition française définitive" />
+	<meta
+		property="og:image:alt"
+		content="Catéchisme de l'Église Catholique — Édition française définitive"
+	/>
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'WebSite',
@@ -125,9 +132,7 @@
 	</div>
 
 	<!-- Printer's mark -->
-	<aside class="imprint reveal r-imprint" aria-hidden="true">
-		MMXXVI · Édition française
-	</aside>
+	<aside class="imprint reveal r-imprint" aria-hidden="true">MMXXVI · Édition française</aside>
 </main>
 
 <style>
@@ -354,7 +359,9 @@
 		text-decoration: none;
 		padding: 0.15rem 0;
 		border-bottom: 1px solid transparent;
-		transition: color 120ms ease, border-color 120ms ease;
+		transition:
+			color 120ms ease,
+			border-color 120ms ease;
 	}
 	.nav-row a:hover {
 		color: var(--color-accent);
@@ -379,7 +386,6 @@
 		pointer-events: none;
 		user-select: none;
 	}
-
 
 	/* Reveal — simple fade, all elements together. */
 	.reveal {
@@ -436,8 +442,12 @@
 			grid-template-columns: 1fr;
 			gap: 0.4rem;
 		}
-		.section-mark { font-size: 1.9rem; }
-		.section-num { font-size: 1rem; }
+		.section-mark {
+			font-size: 1.9rem;
+		}
+		.section-num {
+			font-size: 1rem;
+		}
 		.prose-teaser {
 			font-size: 0.95rem;
 			line-height: 1.62;
@@ -452,14 +462,28 @@
 	/* Short viewports — keep it on one screen at 1280×800. */
 	@media (max-height: 820px) {
 		.line-1,
-		.line-3 { font-size: clamp(2rem, 5vw, 3.5rem); }
-		.line-2 { font-size: clamp(1rem, 2.1vw, 1.4rem); }
-		.prose-teaser { font-size: 0.95rem; line-height: 1.65; }
+		.line-3 {
+			font-size: clamp(2rem, 5vw, 3.5rem);
+		}
+		.line-2 {
+			font-size: clamp(1rem, 2.1vw, 1.4rem);
+		}
+		.prose-teaser {
+			font-size: 0.95rem;
+			line-height: 1.65;
+		}
 	}
 	@media (max-height: 720px) {
 		.line-1,
-		.line-3 { font-size: clamp(1.75rem, 4.5vw, 3rem); }
-		.line-2 { font-size: clamp(0.95rem, 1.9vw, 1.25rem); }
-		.prose-teaser { font-size: 0.9rem; line-height: 1.6; }
+		.line-3 {
+			font-size: clamp(1.75rem, 4.5vw, 3rem);
+		}
+		.line-2 {
+			font-size: clamp(0.95rem, 1.9vw, 1.25rem);
+		}
+		.prose-teaser {
+			font-size: 0.9rem;
+			line-height: 1.6;
+		}
 	}
 </style>

@@ -1,8 +1,8 @@
 const LIGATURE_MAP: Record<string, string> = {
-	'œ': 'oe',
-	'Œ': 'oe',
-	'æ': 'ae',
-	'Æ': 'ae'
+	œ: 'oe',
+	Œ: 'oe',
+	æ: 'ae',
+	Æ: 'ae'
 };
 
 export function slugify(input: string): string {

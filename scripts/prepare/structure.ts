@@ -264,10 +264,7 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			// Section-direct intro: paragraphs/headings that sit under the
 			// section but outside any chapter or direct-article. Captures
 			// e.g. §§185-197 (Section 2 of Part 1's Apostles' Creed preamble).
-			const sectionIntro = collectIntro(
-				childRaw,
-				new Set(['chapter', 'article', 'en_bref'])
-			);
+			const sectionIntro = collectIntro(childRaw, new Set(['chapter', 'article', 'en_bref']));
 			// Section-level en_bref blocks — sit DIRECTLY under the section,
 			// outside any chapter. The Décalogue section's §§2075-2082 is the
 			// canonical example. Captured here so the section page can render

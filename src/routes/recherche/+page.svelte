@@ -157,9 +157,7 @@
 		for (const w of foldedWords(text)) {
 			if (!termSet.has(w.folded)) continue;
 			parts.push(escapeHtml(text.slice(last, w.start)));
-			parts.push(
-				`<mark class="search-highlight">${escapeHtml(text.slice(w.start, w.end))}</mark>`
-			);
+			parts.push(`<mark class="search-highlight">${escapeHtml(text.slice(w.start, w.end))}</mark>`);
 			last = w.end;
 		}
 		parts.push(escapeHtml(text.slice(last)));
@@ -243,8 +241,13 @@
 </script>
 
 <svelte:head>
-	<title>Recherche{data.q ? ` : ${data.q.slice(0, 80)}` : ''} | Catéchisme de l'Église Catholique</title>
-	<meta name="description" content="Recherchez dans les 2865 paragraphes du Catéchisme de l'Église Catholique par mot-clé, numéro de paragraphe ou référence biblique." />
+	<title
+		>Recherche{data.q ? ` : ${data.q.slice(0, 80)}` : ''} | Catéchisme de l'Église Catholique</title
+	>
+	<meta
+		name="description"
+		content="Recherchez dans les 2865 paragraphes du Catéchisme de l'Église Catholique par mot-clé, numéro de paragraphe ou référence biblique."
+	/>
 	<meta name="robots" content="noindex, follow" />
 </svelte:head>
 
@@ -349,9 +352,7 @@
 				</li>
 			</ul>
 
-			<p
-				class="mt-12 pt-6 border-t border-border/60 font-ui text-[12px] text-muted text-center"
-			>
+			<p class="mt-12 pt-6 border-t border-border/60 font-ui text-[12px] text-muted text-center">
 				Parcourir le Catéchisme&nbsp;: <a class="browse-link" href="/ccc/sommaire">Sommaire</a>
 				<span aria-hidden="true">·</span>
 				<a class="browse-link" href="/ccc/prologue">Prologue</a>
@@ -449,18 +450,12 @@
 					<p class="font-ui text-[12px] text-muted tabular-nums">
 						{visibleHits.length} sur {filteredHits.length}
 					</p>
-					<button
-						type="button"
-						class="show-more"
-						onclick={() => (visiblePages += 1)}
-					>
+					<button type="button" class="show-more" onclick={() => (visiblePages += 1)}>
 						Voir {Math.min(PAGE_SIZE, filteredHits.length - visibleHits.length)} de plus
 					</button>
 				</div>
 			{:else if filteredHits.length > PAGE_SIZE}
-				<p
-					class="mt-8 font-ui text-[12px] text-muted tabular-nums text-center"
-				>
+				<p class="mt-8 font-ui text-[12px] text-muted tabular-nums text-center">
 					{filteredHits.length} résultats affichés
 				</p>
 			{/if}
@@ -623,7 +618,9 @@
 		color: var(--color-muted);
 		padding: 0.25rem 0;
 		border-bottom: 1.5px solid transparent;
-		transition: color 120ms ease, border-color 120ms ease;
+		transition:
+			color 120ms ease,
+			border-color 120ms ease;
 	}
 	.tab:hover {
 		color: var(--color-fg);

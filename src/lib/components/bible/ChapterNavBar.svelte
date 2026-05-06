@@ -32,7 +32,9 @@
 </script>
 
 {#if variant === 'concordance'}
-	<header class="sticky top-0 z-[var(--z-topbar)] bg-glass backdrop-blur-sm border-b border-border font-ui">
+	<header
+		class="sticky top-0 z-[var(--z-topbar)] bg-glass backdrop-blur-sm border-b border-border font-ui"
+	>
 		<div class="px-6 max-md:px-2 flex items-center gap-3" style="height: 50px;">
 			<a
 				href="/bible/{book.slug}/{chapter}"
@@ -174,5 +176,9 @@
 	/>
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
-	<div class="fixed inset-0 z-[var(--z-overlay)]" role="presentation" onclick={() => (navOpen = false)}></div>
+	<div
+		class="fixed inset-0 z-[var(--z-overlay)]"
+		role="presentation"
+		onclick={() => (navOpen = false)}
+	></div>
 {/if}

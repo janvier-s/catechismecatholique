@@ -31,34 +31,34 @@ Search backend: MiniSearch index in Cloudflare KV, scope = CCC paragraphs and ch
 
 **Issues:**
 
-1. *No on-page input.* If you navigate here from a mobile bookmark or a shared link, the page is unusable — there is no way to enter a query without going back to the homepage.
-2. *Wasted opportunity.* The page is the canonical entry point for all search; it should surface the catechism's structure: 4 parts, 2865 paragraphs, chapter and section headings.
-3. *Misleading scope hint.* The copy mentions "référence biblique (Jn 1, 14)" but typing `Jn 1,14` here doesn't open the Bible reader — it does a *text* search in the CCC. Intent-routing only fires from the `TopBar` form. So the hint promises behaviour the page doesn't deliver.
+1. _No on-page input._ If you navigate here from a mobile bookmark or a shared link, the page is unusable — there is no way to enter a query without going back to the homepage.
+2. _Wasted opportunity._ The page is the canonical entry point for all search; it should surface the catechism's structure: 4 parts, 2865 paragraphs, chapter and section headings.
+3. _Misleading scope hint._ The copy mentions "référence biblique (Jn 1, 14)" but typing `Jn 1,14` here doesn't open the Bible reader — it does a _text_ search in the CCC. Intent-routing only fires from the `TopBar` form. So the hint promises behaviour the page doesn't deliver.
 
 **Proposed direction (editorial register):**
 
 - **Hairline-bordered search field** as the page's centerpiece — same hairline language as the chapter filter and Bible-reader switch you already use elsewhere. Place it directly under the H1 with generous vertical room. Auto-focus on mount. Submit goes through the same `detectIntent` pipeline as the global bar so a user typing `27` here ends up on `/ccc/27`, exactly as expected.
 - **Three "examples" rows** under the field, presented as leader-dot rows (matching the glossary A-Z aesthetic):
-  - *Par mot* …………… *trinité* · *eucharistie* · *grâce*
-  - *Par paragraphe* … *§ 27* · *§ 1324–1327*
-  - *Par référence biblique* … *Jn 1, 14* · *Gn 1, 1*
-  Each example is a real link that performs the search — instructional and clickable in one move.
+  - _Par mot_ …………… _trinité_ · _eucharistie_ · _grâce_
+  - _Par paragraphe_ … _§ 27_ · _§ 1324–1327_
+  - _Par référence biblique_ … _Jn 1, 14_ · _Gn 1, 1_
+    Each example is a real link that performs the search — instructional and clickable in one move.
 - **"Récemment consulté"** row pulled from `localStorage` (last 5 queries, dismissable). Skip if the list is empty — never show an empty section.
-- **A small "Parcourir le Catéchisme" footer** with three discreet links: *Sommaire* · *Prologue* · *Glossaire*. Gives users an escape hatch when they don't have a query in mind.
+- **A small "Parcourir le Catéchisme" footer** with three discreet links: _Sommaire_ · _Prologue_ · _Glossaire_. Gives users an escape hatch when they don't have a query in mind.
 
 Tone register: keep the voice of the rest of the site — small caps headings, italic example terms, hairline rules. No card chrome, no rounded "popular searches" pills. Think Oxford reference index, not SaaS dashboard.
 
 ## Search input
 
-**Currently:** the only search input is in `TopBar`, capped at `max-w-[460px]`, hidden below `lg`. Inside the input, a custom overlay placeholder reads "Rechercher : *Eucharistie* ou 1324-1327" with the keyword in italics. Focus ring is a thin border-coloured ring; no clear-input affordance; no visible keyboard shortcut hint.
+**Currently:** the only search input is in `TopBar`, capped at `max-w-[460px]`, hidden below `lg`. Inside the input, a custom overlay placeholder reads "Rechercher : _Eucharistie_ ou 1324-1327" with the keyword in italics. Focus ring is a thin border-coloured ring; no clear-input affordance; no visible keyboard shortcut hint.
 
 **Issues:**
 
-1. *Mobile invisibility.* `hidden lg:block` is the show-stopper. The site has no mobile search UI at all on this page (no hamburger search either, based on the markup).
-2. *Single point of failure.* If the global bar fails to render or is hidden, the site has zero search affordance. The `/recherche` page should always own a fallback input regardless of viewport.
-3. *No clear button.* Once typed, users can only erase character-by-character or use the native browser `×` (which appears inside the input but is browser-styled and not consistent across UAs).
-4. *No keyboard hint.* For a research tool, a `⌘K` / `Ctrl K` overlay would be expected and reinforces that this is a serious reference site.
-5. *The page H1 "Recherche" is redundant once the input is on-page.* If you put the input directly on `/recherche`, the H1 is decorative — keep it but consider compressing the spacing, or replace with a smaller eyebrow ("La recherche du Catéchisme") and let the input itself be the headline.
+1. _Mobile invisibility._ `hidden lg:block` is the show-stopper. The site has no mobile search UI at all on this page (no hamburger search either, based on the markup).
+2. _Single point of failure._ If the global bar fails to render or is hidden, the site has zero search affordance. The `/recherche` page should always own a fallback input regardless of viewport.
+3. _No clear button._ Once typed, users can only erase character-by-character or use the native browser `×` (which appears inside the input but is browser-styled and not consistent across UAs).
+4. _No keyboard hint._ For a research tool, a `⌘K` / `Ctrl K` overlay would be expected and reinforces that this is a serious reference site.
+5. _The page H1 "Recherche" is redundant once the input is on-page._ If you put the input directly on `/recherche`, the H1 is decorative — keep it but consider compressing the spacing, or replace with a smaller eyebrow ("La recherche du Catéchisme") and let the input itself be the headline.
 
 **Proposed direction:**
 
@@ -79,13 +79,13 @@ The wrapper is `<a class="block hover:bg-accent/5 p-3 -mx-3 rounded">`, which gi
 
 **Issues:**
 
-1. *No part/chapter context.* "CEC 1327" is meaningless without telling the reader where 1327 lives ("Partie II · Section II · L'Eucharistie"). Searches are exploratory; users need orientation, not just a number.
-2. *Heading-vs-paragraph ambiguity.* The eyebrow tries to disambiguate ("Titre · CEC 1324"), but it reads as a typographic afterthought — the visual weight of a heading hit is identical to a paragraph hit. Consider rendering heading hits as a slightly different row treatment (e.g., a small uppercase eyebrow "TITRE DE SECTION" plus the heading text *as the main line* with no snippet, since the heading text is itself the match).
-3. *Snippet-window can hide the matched term.* The "best snippet" picks the densest 220-char window, which for paragraphs with one match near the end can result in a snippet whose only occurrence of the term is at the very edge — pushed in or out by ellipsis. Verify visually with `q=trinité`: in some cards the term is barely visible.
-4. *Highlight color reads as a yellowed sticky-note.* On the cream background, 20%-accent-on-cream has a tea-stained quality that fits the editorial mood, but the *bolding* of highlighted text alongside the tint is a bit much for an editorial register. Consider underline-on-accent or just background-tint, not both. The bold makes pages full of matches feel jittery.
-5. *No "view in context" affordance.* The hit links straight to `/ccc/{n}`, which is correct but offers no preview of *what part of the catechism* it lands the user in. A small tertiary line under the snippet — something like *Partie II · La célébration du mystère chrétien · L'Eucharistie* — would convert clicks-to-context into a single visual scan.
-6. *No score / no sense of relevance.* For 30 results the rank order matters and is invisible. A single hairline divider after the top-3 (or "top results" label) would help users feel the relevance falloff.
-7. *Hover plate.* The `accent/5` background-tint plus `-mx-3` overhang draws a card around the row that feels web-app-y. The rest of the site favors hairline rules, not tinted plates. Consider replacing with a left-edge accent-bar on hover (1px) and underline on the eyebrow.
+1. _No part/chapter context._ "CEC 1327" is meaningless without telling the reader where 1327 lives ("Partie II · Section II · L'Eucharistie"). Searches are exploratory; users need orientation, not just a number.
+2. _Heading-vs-paragraph ambiguity._ The eyebrow tries to disambiguate ("Titre · CEC 1324"), but it reads as a typographic afterthought — the visual weight of a heading hit is identical to a paragraph hit. Consider rendering heading hits as a slightly different row treatment (e.g., a small uppercase eyebrow "TITRE DE SECTION" plus the heading text _as the main line_ with no snippet, since the heading text is itself the match).
+3. _Snippet-window can hide the matched term._ The "best snippet" picks the densest 220-char window, which for paragraphs with one match near the end can result in a snippet whose only occurrence of the term is at the very edge — pushed in or out by ellipsis. Verify visually with `q=trinité`: in some cards the term is barely visible.
+4. _Highlight color reads as a yellowed sticky-note._ On the cream background, 20%-accent-on-cream has a tea-stained quality that fits the editorial mood, but the _bolding_ of highlighted text alongside the tint is a bit much for an editorial register. Consider underline-on-accent or just background-tint, not both. The bold makes pages full of matches feel jittery.
+5. _No "view in context" affordance._ The hit links straight to `/ccc/{n}`, which is correct but offers no preview of _what part of the catechism_ it lands the user in. A small tertiary line under the snippet — something like _Partie II · La célébration du mystère chrétien · L'Eucharistie_ — would convert clicks-to-context into a single visual scan.
+6. _No score / no sense of relevance._ For 30 results the rank order matters and is invisible. A single hairline divider after the top-3 (or "top results" label) would help users feel the relevance falloff.
+7. _Hover plate._ The `accent/5` background-tint plus `-mx-3` overhang draws a card around the row that feels web-app-y. The rest of the site favors hairline rules, not tinted plates. Consider replacing with a left-edge accent-bar on hover (1px) and underline on the eyebrow.
 
 ![Eucharistie results, desktop](assets/2026-05-05-search-page-review/recherche-eucharistie-desktop.png)
 
@@ -106,15 +106,15 @@ Density: 16-20px vertical breathing room between rows, plus a hairline separator
 
 **Issues:**
 
-1. *Heading hits get drowned.* A heading match is conceptually higher-information ("the user matched a section title"), but BM25 scoring on a short heading often loses to a long paragraph that has the term twice. Even with `boost: { title: 2 }`, the visual treatment doesn't communicate that a heading hit is a "this section is about your topic" signal.
-2. *No type filter.* Users searching `eucharistie` get 30 paragraph hits when sometimes what they want is "show me the section devoted to the Eucharist." A simple two-tab segmented control above the results — *Tout · Sections · Paragraphes* — would be discreet and useful.
-3. *No part filter.* The CCC has 4 parts; sometimes users only want results in Part III (life in Christ). A dropdown is overkill, but a row of 4 small text-links would mirror the catechism mega-menu's structure and give users a fast filter.
-4. *No Bible / Glossaire scope.* This is a strategic question for the user, not just visual. The empty-state copy promises Bible-ref handling, but only via intent-routing. Should there be cross-source results — top CCC hits *and* a small "Voir dans le Glossaire" / "Voir dans la Bible" affordance? At minimum, when a query matches a glossary term exactly, surface a single banner-row "Glossaire : *Eucharistie* →" above the CCC hits. Cheap to implement (the glossary index is already on the client) and editorially appropriate.
+1. _Heading hits get drowned._ A heading match is conceptually higher-information ("the user matched a section title"), but BM25 scoring on a short heading often loses to a long paragraph that has the term twice. Even with `boost: { title: 2 }`, the visual treatment doesn't communicate that a heading hit is a "this section is about your topic" signal.
+2. _No type filter._ Users searching `eucharistie` get 30 paragraph hits when sometimes what they want is "show me the section devoted to the Eucharist." A simple two-tab segmented control above the results — _Tout · Sections · Paragraphes_ — would be discreet and useful.
+3. _No part filter._ The CCC has 4 parts; sometimes users only want results in Part III (life in Christ). A dropdown is overkill, but a row of 4 small text-links would mirror the catechism mega-menu's structure and give users a fast filter.
+4. _No Bible / Glossaire scope._ This is a strategic question for the user, not just visual. The empty-state copy promises Bible-ref handling, but only via intent-routing. Should there be cross-source results — top CCC hits _and_ a small "Voir dans le Glossaire" / "Voir dans la Bible" affordance? At minimum, when a query matches a glossary term exactly, surface a single banner-row "Glossaire : _Eucharistie_ →" above the CCC hits. Cheap to implement (the glossary index is already on the client) and editorially appropriate.
 
 **Proposed direction:**
 
-- **Section banner (when applicable):** if the query matches a heading exactly or a glossary term exactly, render one promoted row at the very top with a different eyebrow ("Section du Catéchisme" or "Glossaire"). Treat this as the "definition card" — short, bold, signed-off with a small `→`. Below, a hairline rule and *Autres résultats* eyebrow.
-- **Two-tab segmented filter:** *Tout (30) · Sections (4) · Paragraphes (26)*. Use plain underlined text-buttons with tabular numerals, not pill buttons.
+- **Section banner (when applicable):** if the query matches a heading exactly or a glossary term exactly, render one promoted row at the very top with a different eyebrow ("Section du Catéchisme" or "Glossaire"). Treat this as the "definition card" — short, bold, signed-off with a small `→`. Below, a hairline rule and _Autres résultats_ eyebrow.
+- **Two-tab segmented filter:** _Tout (30) · Sections (4) · Paragraphes (26)_. Use plain underlined text-buttons with tabular numerals, not pill buttons.
 - **No part facets at launch** — defer until usage data shows it's needed. Keep the page calm.
 
 ## Density & rhythm
@@ -123,10 +123,10 @@ Density: 16-20px vertical breathing room between rows, plus a hairline separator
 
 **Issues:**
 
-1. *Sparseness without rhythm.* 30 cards stacked with identical spacing become a wall. Without dividers or any kind of meta-marker (top-3, by-section grouping), the eye glazes.
-2. *No "end of results" affordance.* The 30-cap is silent. A small italic "Affichage des 30 meilleurs résultats — affinez votre recherche pour en voir plus" closer would set expectations and fits the register.
-3. *Top of page is sparse.* The H1 sits alone with the count beneath it. Once the on-page input lands here, this real estate fills naturally, but right now `pt-10` is a lot of dead air.
-4. *Reading width.* `max-w-reader` is the same constraint as long-form reading; for a results list, that may be slightly wide. Consider `max-w-[60rem]` for the results region so eyebrows and breadcrumbs don't span as far.
+1. _Sparseness without rhythm._ 30 cards stacked with identical spacing become a wall. Without dividers or any kind of meta-marker (top-3, by-section grouping), the eye glazes.
+2. _No "end of results" affordance._ The 30-cap is silent. A small italic "Affichage des 30 meilleurs résultats — affinez votre recherche pour en voir plus" closer would set expectations and fits the register.
+3. _Top of page is sparse._ The H1 sits alone with the count beneath it. Once the on-page input lands here, this real estate fills naturally, but right now `pt-10` is a lot of dead air.
+4. _Reading width._ `max-w-reader` is the same constraint as long-form reading; for a results list, that may be slightly wide. Consider `max-w-[60rem]` for the results region so eyebrows and breadcrumbs don't span as far.
 
 **Proposed direction:**
 
@@ -143,16 +143,16 @@ Density: 16-20px vertical breathing room between rows, plus a hairline separator
 
 **Issues:**
 
-1. *Zero-help.* No suggestions, no fallback, no "did you mean," no offer to browse instead.
-2. *No diacritic guidance.* The tokenizer strips diacritics so `eglise` matches `Église`, but a user who knows their query is unusual may not know that. A small note "Les accents sont ignorés" would help.
-3. *Still no input on this state.* Same dead-end issue as empty state — there's no way to fix the typo in place.
+1. _Zero-help._ No suggestions, no fallback, no "did you mean," no offer to browse instead.
+2. _No diacritic guidance._ The tokenizer strips diacritics so `eglise` matches `Église`, but a user who knows their query is unusual may not know that. A small note "Les accents sont ignorés" would help.
+3. _Still no input on this state._ Same dead-end issue as empty state — there's no way to fix the typo in place.
 
 **Proposed direction:**
 
 - Keep the line "Aucun résultat pour « zzzzz »." but follow it with:
-  - **Suggestions** based on Levenshtein-1 / first-3-chars stemming against the index vocabulary. *"Vouliez-vous dire …"* with up to 3 candidate terms as text-links. (Cheap to compute client-side from the loaded index dictionary.)
-  - **Fallback offer**: *"Parcourir le Glossaire pour ce terme"* and *"Voir le Sommaire du Catéchisme"* as two hairline text-links.
-  - **Diacritic / spelling note** in small muted text: *"Les accents et les œ/oe sont ignorés ; les recherches de moins de 2 caractères ne sont pas effectuées."*
+  - **Suggestions** based on Levenshtein-1 / first-3-chars stemming against the index vocabulary. _"Vouliez-vous dire …"_ with up to 3 candidate terms as text-links. (Cheap to compute client-side from the loaded index dictionary.)
+  - **Fallback offer**: _"Parcourir le Glossaire pour ce terme"_ and _"Voir le Sommaire du Catéchisme"_ as two hairline text-links.
+  - **Diacritic / spelling note** in small muted text: _"Les accents et les œ/oe sont ignorés ; les recherches de moins de 2 caractères ne sont pas effectuées."_
 
 ## Mobile
 
@@ -163,9 +163,9 @@ Density: 16-20px vertical breathing room between rows, plus a hairline separator
 
 **Issues:**
 
-1. *No search affordance at all on mobile* — not on the recherche page, not in the global header (`hidden lg:block`). Even the `lg`-hidden state doesn't substitute a sheet/modal trigger.
-2. *Result rows are legible* — the type stack scales well, snippet wraps cleanly. Mobile content layout itself isn't the problem.
-3. *Snippet truncation on mobile* — the `…ellipsis` prefix can land mid-word visually; verify against narrower break points.
+1. _No search affordance at all on mobile_ — not on the recherche page, not in the global header (`hidden lg:block`). Even the `lg`-hidden state doesn't substitute a sheet/modal trigger.
+2. _Result rows are legible_ — the type stack scales well, snippet wraps cleanly. Mobile content layout itself isn't the problem.
+3. _Snippet truncation on mobile_ — the `…ellipsis` prefix can land mid-word visually; verify against narrower break points.
 
 **Proposed direction:**
 
@@ -179,9 +179,9 @@ Density: 16-20px vertical breathing room between rows, plus a hairline separator
 
 **Issues:**
 
-1. *No loading shimmer.* On a slow connection, the results count and list render together at the end. The H1 is already there but there's no progress indicator. This is fine for fast networks, suboptimal for cellular.
-2. *No instant-search.* Users type, hit return, the page navigates, the load runs, results appear. There's no in-place type-ahead. For a reference site this is defensible (the URL is shareable, the round-trip is short), but a *type-ahead overlay in the global header* would be a separate, complementary feature — out of scope for this page review but worth flagging as the natural next step.
-3. *Phrase-boost rerun on every request.* Server-side rerank runs phrase-boost for every query; for caching purposes consider whether the SvelteKit `load` could memoize identical queries during a session.
+1. _No loading shimmer._ On a slow connection, the results count and list render together at the end. The H1 is already there but there's no progress indicator. This is fine for fast networks, suboptimal for cellular.
+2. _No instant-search._ Users type, hit return, the page navigates, the load runs, results appear. There's no in-place type-ahead. For a reference site this is defensible (the URL is shareable, the round-trip is short), but a _type-ahead overlay in the global header_ would be a separate, complementary feature — out of scope for this page review but worth flagging as the natural next step.
+3. _Phrase-boost rerun on every request._ Server-side rerank runs phrase-boost for every query; for caching purposes consider whether the SvelteKit `load` could memoize identical queries during a session.
 
 **Proposed direction (page-scoped):**
 
@@ -210,4 +210,4 @@ A separate observation worth promoting from the body: typing `27` directly into 
 
 ---
 
-*Out of scope for this review:* the global `TopBar` search input redesign (touched lightly under "Search input" but its own work item), the addition of a mobile search affordance to the global header, expansion of the search index to include Bible verses or glossary entries, type-ahead overlay UX. These are referenced where they intersect with the page critique but each warrants its own brief.
+_Out of scope for this review:_ the global `TopBar` search input redesign (touched lightly under "Search input" but its own work item), the addition of a mobile search affordance to the global header, expansion of the search index to include Bible verses or glossary entries, type-ahead overlay UX. These are referenced where they intersect with the page critique but each warrants its own brief.

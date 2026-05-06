@@ -181,7 +181,8 @@
 		background: currentColor;
 		border-radius: 1px;
 		transform-origin: center;
-		transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+		transition:
+			transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
 			opacity 160ms ease;
 	}
 	.bars.is-open .b1 {
@@ -347,7 +348,9 @@
 		font-family: var(--font-heading);
 		font-size: 1.2rem;
 		color: color-mix(in srgb, var(--color-fg) 30%, transparent);
-		transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), color 140ms ease;
+		transition:
+			transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+			color 140ms ease;
 	}
 	.link:hover .link-arrow {
 		color: var(--color-accent);

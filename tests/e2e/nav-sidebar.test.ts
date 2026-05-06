@@ -34,17 +34,26 @@ test('Catéchisme dropdown opens with parts', async ({ page }) => {
 	await page.goto('/');
 	// The dropdown also opens on mouseenter; hover deterministically opens
 	// the panel without the click-toggle quirk.
-	await page.getByRole('button', { name: /Catéchisme/i }).first().hover();
+	await page
+		.getByRole('button', { name: /Catéchisme/i })
+		.first()
+		.hover();
 	await expect(page.getByRole('menu')).toBeVisible();
 	// The cell-tag span renders "Partie 1" (with a non-breaking space)
 	await expect(
-		page.locator('[role="menu"] .cell-tag').filter({ hasText: /Partie\s*1/ }).first()
+		page
+			.locator('[role="menu"] .cell-tag')
+			.filter({ hasText: /Partie\s*1/ })
+			.first()
 	).toBeVisible();
 });
 
 test('Catéchisme dropdown cascades to chapters on hover', async ({ page }) => {
 	await page.goto('/');
-	await page.getByRole('button', { name: /Catéchisme/i }).first().hover();
+	await page
+		.getByRole('button', { name: /Catéchisme/i })
+		.first()
+		.hover();
 	await expect(page.getByRole('menu')).toBeVisible();
 	// Cells are <a role="menuitem">, not buttons. Hover the Partie 1 cell.
 	await page

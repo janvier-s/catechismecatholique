@@ -77,8 +77,7 @@
 			<p class="font-ui text-[20px] leading-snug">
 				{#each refSegments(data.entry.directRefs) as seg, i (seg.first)}
 					{#if i > 0}<span class="text-muted mr-[0.23rem]">,</span>{/if}
-					<a href="/ccc/{seg.first}" class="text-accent hover:underline tabular-nums"
-						>{seg.label}</a
+					<a href="/ccc/{seg.first}" class="text-accent hover:underline tabular-nums">{seg.label}</a
 					>
 				{/each}
 			</p>

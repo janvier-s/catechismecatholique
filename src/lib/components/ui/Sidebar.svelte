@@ -123,9 +123,7 @@
 		void activeChapter;
 		const link =
 			navEl.querySelector<HTMLElement>(`a[href="${CSS.escape(target)}"]`) ??
-			navEl.querySelector<HTMLElement>(
-				`a[href="${CSS.escape(target.replace(/#.*$/, ''))}"]`
-			);
+			navEl.querySelector<HTMLElement>(`a[href="${CSS.escape(target.replace(/#.*$/, ''))}"]`);
 		link?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 	});
 
@@ -237,9 +235,9 @@
 				// paragraph falls in [paragraphe.paragraph_start, next
 				// Paragraphe.paragraph_start). Entries that precede the first
 				// Paragraphe become direct article children (article intro).
-				const paragraphes = (a.paragraphes ?? []).slice().sort(
-					(x, y) => x.paragraph_start - y.paragraph_start
-				);
+				const paragraphes = (a.paragraphes ?? [])
+					.slice()
+					.sort((x, y) => x.paragraph_start - y.paragraph_start);
 				let articleChildren: Item[];
 				if (paragraphes.length > 0) {
 					const buckets: Item[] = [];
@@ -250,9 +248,7 @@
 						for (let i = 0; i < paragraphes.length; i++) {
 							const start = paragraphes[i]!.paragraph_start;
 							const end =
-								i + 1 < paragraphes.length
-									? paragraphes[i + 1]!.paragraph_start - 1
-									: articleMax;
+								i + 1 < paragraphes.length ? paragraphes[i + 1]!.paragraph_start - 1 : articleMax;
 							if (e.sortKey >= start && e.sortKey <= end) {
 								bucketIdx = i;
 								break;
@@ -265,9 +261,7 @@
 						const pg = paragraphes[i]!;
 						const start = pg.paragraph_start;
 						const end =
-							i + 1 < paragraphes.length
-								? paragraphes[i + 1]!.paragraph_start - 1
-								: articleMax;
+							i + 1 < paragraphes.length ? paragraphes[i + 1]!.paragraph_start - 1 : articleMax;
 						const slice = entries.filter((e) => e.sortKey >= start && e.sortKey <= end);
 						const children = nestLevels(slice);
 						buckets.push({
@@ -396,4 +390,3 @@
 		</nav>
 	</aside>
 {/if}
-

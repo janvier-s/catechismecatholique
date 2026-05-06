@@ -102,7 +102,9 @@
 		text-decoration: none;
 		padding: 0.15rem 0;
 		border-bottom: 1px solid transparent;
-		transition: border-color 120ms ease, opacity 120ms ease;
+		transition:
+			border-color 120ms ease,
+			opacity 120ms ease;
 	}
 	.home-link:hover {
 		border-bottom-color: color-mix(in srgb, var(--color-accent) 60%, transparent);

@@ -50,9 +50,7 @@ export const GLOSSARY_EXTRAS: GlossaryExtra[] = [
 		definition:
 			"Recours à des moyens censés dévoiler l'avenir ou les secrets cachés en dehors de Dieu. Toutes les formes de divination sont à rejeter ; elles contredisent l'honneur et le respect dus à Dieu seul.",
 		directRefs: [],
-		subEntries: [
-			{ label: 'Pratique contraire à Dieu', refs: [2115, 2138] }
-		],
+		subEntries: [{ label: 'Pratique contraire à Dieu', refs: [2115, 2138] }],
 		seeAlso: ['Magie', 'Idolâtrie'],
 		clusters: ['morale']
 	},
@@ -73,9 +71,12 @@ export const GLOSSARY_EXTRAS: GlossaryExtra[] = [
 			"Réparation offerte pour le péché. Dans l'Ancien Testament, des rites d'expiation étaient prescrits ; tous trouvent leur accomplissement dans la Passion du Christ, qui s'est offert lui-même comme victime d'expiation pour les péchés du monde.",
 		directRefs: [],
 		subEntries: [
-			{ label: "Jésus, victime d'expiation pour les péchés des hommes", refs: [457, 604, 615, 1476, 1992] },
-			{ label: "Expiation des péchés en Israël", refs: [433, 578] },
-			{ label: "Valeur expiatrice de la peine", refs: [2266] }
+			{
+				label: "Jésus, victime d'expiation pour les péchés des hommes",
+				refs: [457, 604, 615, 1476, 1992]
+			},
+			{ label: 'Expiation des péchés en Israël', refs: [433, 578] },
+			{ label: 'Valeur expiatrice de la peine', refs: [2266] }
 		],
 		seeAlso: ['Réparation', 'Propitiation', 'Sacrifice'],
 		clusters: ['christ', 'morale']
@@ -140,7 +141,7 @@ export const GLOSSARY_EXTRAS: GlossaryExtra[] = [
 		subEntries: [
 			{ label: "Serment selon la tradition de l'Église", refs: [2154] },
 			{ label: 'Faux serment', refs: [2150] },
-			{ label: "Parole de Jésus : « Ne jurez pas du tout »", refs: [2153] },
+			{ label: 'Parole de Jésus : « Ne jurez pas du tout »', refs: [2153] },
 			{ label: 'Parjure', refs: [2152, 2476] },
 			{ label: 'Refus du serment pour des motifs frivoles', refs: [2155] }
 		],

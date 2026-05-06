@@ -12,14 +12,16 @@
 		return r.from === r.to ? `${r.from}` : `${r.from}–${r.to}`;
 	}
 	function paraExcerpt(html: string, max = 155): string {
-		return html
-			.replace(/<[^>]+>/g, ' ')
-			.replace(/\s+/g, ' ')
-			.trim()
-			.slice(0, max)
-			.replace(/\s\S+$/, '') // don't cut mid-word
-			.trimEnd()
-			.replace(/[.,;:]$/, '') + '…';
+		return (
+			html
+				.replace(/<[^>]+>/g, ' ')
+				.replace(/\s+/g, ' ')
+				.trim()
+				.slice(0, max)
+				.replace(/\s\S+$/, '') // don't cut mid-word
+				.trimEnd()
+				.replace(/[.,;:]$/, '') + '…'
+		);
 	}
 
 	/** Pick the deepest available level for the "read complete X" link. */
@@ -72,7 +74,10 @@
 		<meta name="description" content={paraExcerpt(data.paragraph.text_html)} />
 	{:else}
 		<title>§ {data.from}–{data.to} | Catéchisme de l'Église Catholique</title>
-		<meta name="description" content="Paragraphes {data.from}–{data.to} du Catéchisme de l'Église Catholique." />
+		<meta
+			name="description"
+			content="Paragraphes {data.from}–{data.to} du Catéchisme de l'Église Catholique."
+		/>
 	{/if}
 </svelte:head>
 

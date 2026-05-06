@@ -32,7 +32,10 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		// 1) exact
 		if (bySlug.has(k)) return bySlug.get(k)!;
 		// 2) singular/plural
-		const stripParenS = k.replace(/\s*s\s*$/, '').replace(/\(\s*s\s*\)/g, '').trim();
+		const stripParenS = k
+			.replace(/\s*s\s*$/, '')
+			.replace(/\(\s*s\s*\)/g, '')
+			.trim();
 		if (stripParenS && bySlug.has(stripParenS)) return bySlug.get(stripParenS)!;
 		const plural = k + 's';
 		if (bySlug.has(plural)) return bySlug.get(plural)!;

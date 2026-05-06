@@ -1,161 +1,161 @@
 {
-  "englishEntries": 397,
-  "frenchHeadWords": 821,
-  "frenchSubEntries": 6197,
-  "frenchTotalRefs": 17746,
-  "matchedExact": 54,
-  "matchedHinted": 13,
-  "unmatchedEnglishCount": 330,
-  "topFrenchByRefCount": [
-    {
-      "term": "Commandement",
-      "refs": 1059,
-      "subEntries": 62
-    },
-    {
-      "term": "Dieu",
-      "refs": 748,
-      "subEntries": 177
-    },
-    {
-      "term": "Christ",
-      "refs": 451,
-      "subEntries": 111
-    },
-    {
-      "term": "Église",
-      "refs": 405,
-      "subEntries": 144
-    },
-    {
-      "term": "Personne",
-      "refs": 363,
-      "subEntries": 41
-    },
-    {
-      "term": "Baptême",
-      "refs": 306,
-      "subEntries": 62
-    },
-    {
-      "term": "Esprit Saint",
-      "refs": 300,
-      "subEntries": 115
-    },
-    {
-      "term": "Dignité",
-      "refs": 273,
-      "subEntries": 18
-    },
-    {
-      "term": "Eucharistie",
-      "refs": 265,
-      "subEntries": 74
-    },
-    {
-      "term": "Vie",
-      "refs": 245,
-      "subEntries": 115
-    },
-    {
-      "term": "Prière",
-      "refs": 242,
-      "subEntries": 95
-    },
-    {
-      "term": "Foi",
-      "refs": 238,
-      "subEntries": 94
-    },
-    {
-      "term": "Initiation chrétienne",
-      "refs": 225,
-      "subEntries": 8
-    },
-    {
-      "term": "Homme",
-      "refs": 191,
-      "subEntries": 105
-    },
-    {
-      "term": "Liturgie",
-      "refs": 191,
-      "subEntries": 45
-    },
-    {
-      "term": "Péché",
-      "refs": 157,
-      "subEntries": 90
-    },
-    {
-      "term": "Économie du salut",
-      "refs": 151,
-      "subEntries": 10
-    },
-    {
-      "term": "Confirmation ou chrismation",
-      "refs": 148,
-      "subEntries": 26
-    },
-    {
-      "term": "Charité",
-      "refs": 131,
-      "subEntries": 57
-    },
-    {
-      "term": "Grâce",
-      "refs": 131,
-      "subEntries": 43
-    },
-    {
-      "term": "Respect",
-      "refs": 121,
-      "subEntries": 28
-    },
-    {
-      "term": "Révélation",
-      "refs": 121,
-      "subEntries": 49
-    },
-    {
-      "term": "Mariage",
-      "refs": 120,
-      "subEntries": 61
-    },
-    {
-      "term": "Marie",
-      "refs": 114,
-      "subEntries": 43
-    },
-    {
-      "term": "Autorité",
-      "refs": 108,
-      "subEntries": 27
-    },
-    {
-      "term": "Cœur",
-      "refs": 105,
-      "subEntries": 31
-    },
-    {
-      "term": "Père",
-      "refs": 104,
-      "subEntries": 24
-    },
-    {
-      "term": "Mort",
-      "refs": 103,
-      "subEntries": 45
-    },
-    {
-      "term": "Conscience",
-      "refs": 100,
-      "subEntries": 24
-    },
-    {
-      "term": "Société",
-      "refs": 100,
-      "subEntries": 54
-    }
-  ]
+	"englishEntries": 397,
+	"frenchHeadWords": 821,
+	"frenchSubEntries": 6197,
+	"frenchTotalRefs": 17746,
+	"matchedExact": 54,
+	"matchedHinted": 13,
+	"unmatchedEnglishCount": 330,
+	"topFrenchByRefCount": [
+		{
+			"term": "Commandement",
+			"refs": 1059,
+			"subEntries": 62
+		},
+		{
+			"term": "Dieu",
+			"refs": 748,
+			"subEntries": 177
+		},
+		{
+			"term": "Christ",
+			"refs": 451,
+			"subEntries": 111
+		},
+		{
+			"term": "Église",
+			"refs": 405,
+			"subEntries": 144
+		},
+		{
+			"term": "Personne",
+			"refs": 363,
+			"subEntries": 41
+		},
+		{
+			"term": "Baptême",
+			"refs": 306,
+			"subEntries": 62
+		},
+		{
+			"term": "Esprit Saint",
+			"refs": 300,
+			"subEntries": 115
+		},
+		{
+			"term": "Dignité",
+			"refs": 273,
+			"subEntries": 18
+		},
+		{
+			"term": "Eucharistie",
+			"refs": 265,
+			"subEntries": 74
+		},
+		{
+			"term": "Vie",
+			"refs": 245,
+			"subEntries": 115
+		},
+		{
+			"term": "Prière",
+			"refs": 242,
+			"subEntries": 95
+		},
+		{
+			"term": "Foi",
+			"refs": 238,
+			"subEntries": 94
+		},
+		{
+			"term": "Initiation chrétienne",
+			"refs": 225,
+			"subEntries": 8
+		},
+		{
+			"term": "Homme",
+			"refs": 191,
+			"subEntries": 105
+		},
+		{
+			"term": "Liturgie",
+			"refs": 191,
+			"subEntries": 45
+		},
+		{
+			"term": "Péché",
+			"refs": 157,
+			"subEntries": 90
+		},
+		{
+			"term": "Économie du salut",
+			"refs": 151,
+			"subEntries": 10
+		},
+		{
+			"term": "Confirmation ou chrismation",
+			"refs": 148,
+			"subEntries": 26
+		},
+		{
+			"term": "Charité",
+			"refs": 131,
+			"subEntries": 57
+		},
+		{
+			"term": "Grâce",
+			"refs": 131,
+			"subEntries": 43
+		},
+		{
+			"term": "Respect",
+			"refs": 121,
+			"subEntries": 28
+		},
+		{
+			"term": "Révélation",
+			"refs": 121,
+			"subEntries": 49
+		},
+		{
+			"term": "Mariage",
+			"refs": 120,
+			"subEntries": 61
+		},
+		{
+			"term": "Marie",
+			"refs": 114,
+			"subEntries": 43
+		},
+		{
+			"term": "Autorité",
+			"refs": 108,
+			"subEntries": 27
+		},
+		{
+			"term": "Cœur",
+			"refs": 105,
+			"subEntries": 31
+		},
+		{
+			"term": "Père",
+			"refs": 104,
+			"subEntries": 24
+		},
+		{
+			"term": "Mort",
+			"refs": 103,
+			"subEntries": 45
+		},
+		{
+			"term": "Conscience",
+			"refs": 100,
+			"subEntries": 24
+		},
+		{
+			"term": "Société",
+			"refs": 100,
+			"subEntries": 54
+		}
+	]
 }

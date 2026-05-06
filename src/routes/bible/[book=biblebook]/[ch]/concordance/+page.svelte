@@ -6,7 +6,9 @@
 </script>
 
 <svelte:head>
-	<title>{data.book.frenchName} {data.chapter} | Concordance | Catéchisme de l'Église Catholique</title>
+	<title
+		>{data.book.frenchName} {data.chapter} | Concordance | Catéchisme de l'Église Catholique</title
+	>
 </svelte:head>
 
 <div class="flex flex-col h-screen">
@@ -16,9 +18,5 @@
 		totalChapters={data.totalChapters}
 		chapterCounts={data.chapterCounts}
 	/>
-	<ConcordanceReader
-		book={data.book}
-		verses={data.verses}
-		chapterData={data.chapterData}
-	/>
+	<ConcordanceReader book={data.book} verses={data.verses} chapterData={data.chapterData} />
 </div>

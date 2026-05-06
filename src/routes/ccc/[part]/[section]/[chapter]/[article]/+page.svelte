@@ -9,17 +9,34 @@
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
-	const breadcrumbJsonLd = $derived(JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'BreadcrumbList',
-		itemListElement: [
-			{ '@type': 'ListItem', position: 1, name: 'Catéchisme', item: `${page.url.origin}/ccc` },
-			{ '@type': 'ListItem', position: 2, name: data.chapter.part_title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}` },
-			{ '@type': 'ListItem', position: 3, name: data.chapter.section_title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}` },
-			{ '@type': 'ListItem', position: 4, name: data.chapter.title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}` },
-			{ '@type': 'ListItem', position: 5, name: data.article.title }
-		]
-	}));
+	const breadcrumbJsonLd = $derived(
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Catéchisme', item: `${page.url.origin}/ccc` },
+				{
+					'@type': 'ListItem',
+					position: 2,
+					name: data.chapter.part_title,
+					item: `${page.url.origin}/ccc/${data.chapter.part_slug}`
+				},
+				{
+					'@type': 'ListItem',
+					position: 3,
+					name: data.chapter.section_title,
+					item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}`
+				},
+				{
+					'@type': 'ListItem',
+					position: 4,
+					name: data.chapter.title,
+					item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}`
+				},
+				{ '@type': 'ListItem', position: 5, name: data.article.title }
+			]
+		})
+	);
 
 	// Map first-paragraph-of-block → block, plus a set of every paragraph
 	// number that belongs to any En Bref block. The body loop renders the
@@ -53,11 +70,9 @@
 			<li class="pl-5">
 				<a href="/ccc/{data.chapter.part_slug}" class="text-muted hover:text-accent">
 					<span class="font-semibold bc-kicker"
-						>{data.chapter.part_number
-							? `Partie ${data.chapter.part_number}`
-							: 'Prologue'}</span
+						>{data.chapter.part_number ? `Partie ${data.chapter.part_number}` : 'Prologue'}</span
 					>
-					<span class="bc-title"> : {data.chapter.part_title}</span>
+					<span class="bc-title"> : {data.chapter.part_title}</span>
 				</a>
 			</li>
 			<li class="pl-10">
@@ -70,7 +85,7 @@
 							? `Section ${data.chapter.section_number}`
 							: 'Section'}</span
 					>
-					<span class="bc-title"> : {data.chapter.section_title}</span>
+					<span class="bc-title"> : {data.chapter.section_title}</span>
 				</a>
 			</li>
 			<li class="pl-[3.75rem]">
@@ -81,14 +96,14 @@
 					<span class="font-semibold bc-kicker"
 						>{data.chapter.number ? `Chapitre ${data.chapter.number}` : 'Chapitre'}</span
 					>
-					<span class="bc-title"> : {data.chapter.title}</span>
+					<span class="bc-title"> : {data.chapter.title}</span>
 				</a>
 			</li>
 			<li class="pl-20">
 				<span class="font-semibold bc-kicker"
 					>{data.article.number ? `Article ${data.article.number}` : 'Article'}</span
 				>
-				<span class="bc-title"> : {data.article.title}</span>
+				<span class="bc-title"> : {data.article.title}</span>
 			</li>
 		</ol>
 	</nav>
@@ -120,9 +135,7 @@
 					{paragraphe.title}
 				</h2>
 			{/if}
-			{@const headingsHere = data.article.headings.filter(
-				(h) => h.paragraph_start === p.number
-			)}
+			{@const headingsHere = data.article.headings.filter((h) => h.paragraph_start === p.number)}
 			{#each headingsHere as heading (heading.id)}
 				{#if heading.level <= 2}
 					<h3
@@ -165,7 +178,6 @@
 			/>
 		{/if}
 
-
 		{#if data.nextArticle}
 			<NavCard
 				direction="next"
@@ -184,4 +196,3 @@
 		{/if}
 	</nav>
 </main>
-

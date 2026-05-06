@@ -4,16 +4,28 @@
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
-	const breadcrumbJsonLd = $derived(JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'BreadcrumbList',
-		itemListElement: [
-			{ '@type': 'ListItem', position: 1, name: 'Catéchisme', item: `${page.url.origin}/ccc` },
-			{ '@type': 'ListItem', position: 2, name: data.chapter.part_title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}` },
-			{ '@type': 'ListItem', position: 3, name: data.chapter.section_title, item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}` },
-			{ '@type': 'ListItem', position: 4, name: data.chapter.title }
-		]
-	}));
+	const breadcrumbJsonLd = $derived(
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Catéchisme', item: `${page.url.origin}/ccc` },
+				{
+					'@type': 'ListItem',
+					position: 2,
+					name: data.chapter.part_title,
+					item: `${page.url.origin}/ccc/${data.chapter.part_slug}`
+				},
+				{
+					'@type': 'ListItem',
+					position: 3,
+					name: data.chapter.section_title,
+					item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}`
+				},
+				{ '@type': 'ListItem', position: 4, name: data.chapter.title }
+			]
+		})
+	);
 </script>
 
 <svelte:head>

@@ -9,11 +9,7 @@
 export function firstLetter(term: string): string {
 	const stripped = term.replace(/^[^\p{L}]+/u, '');
 	if (!stripped) return '#';
-	let first = stripped
-		.normalize('NFD')
-		.replace(/[̀-ͯ]/g, '')
-		.charAt(0)
-		.toUpperCase();
+	let first = stripped.normalize('NFD').replace(/[̀-ͯ]/g, '').charAt(0).toUpperCase();
 	if (first === 'Œ') first = 'O';
 	if (first === 'Æ') first = 'A';
 	return /[A-Z]/.test(first) ? first : '#';

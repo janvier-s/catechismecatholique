@@ -85,10 +85,8 @@
 			const p = panelEl?.getBoundingClientRect();
 			const cx = e.clientX;
 			const cy = e.clientY;
-			const inTrigger =
-				t && cx >= t.left && cx <= t.right && cy >= t.top && cy <= t.bottom;
-			const inPanel =
-				p && cx >= p.left && cx <= p.right && cy >= p.top && cy <= p.bottom;
+			const inTrigger = t && cx >= t.left && cx <= t.right && cy >= t.top && cy <= t.bottom;
+			const inPanel = p && cx >= p.left && cx <= p.right && cy >= p.top && cy <= p.bottom;
 			if (inTrigger || inPanel) cancelClose();
 			else scheduleClose();
 		};
@@ -104,9 +102,7 @@
 	// Current page slugs derived from the URL — used to pre-populate the
 	// cascade on open and to mark the matching article cell in column 4.
 	const currentSlugs = $derived.by(() => {
-		const m = page.url.pathname.match(
-			/^\/ccc\/([^/]+)(?:\/([^/]+))?(?:\/([^/]+))?(?:\/([^/]+))?/
-		);
+		const m = page.url.pathname.match(/^\/ccc\/([^/]+)(?:\/([^/]+))?(?:\/([^/]+))?(?:\/([^/]+))?/);
 		if (!m) return null;
 		return {
 			part: m[1] ?? null,
@@ -139,17 +135,13 @@
 	});
 
 	// Items as displayed in column 1 (prologue first, then parts)
-	type Col1Item =
-		| { kind: 'prologue'; item: Part }
-		| { kind: 'part'; item: Part };
+	type Col1Item = { kind: 'prologue'; item: Part } | { kind: 'part'; item: Part };
 	const col1Items = $derived<Col1Item[]>([
 		...(prologue ? [{ kind: 'prologue' as const, item: prologue }] : []),
 		...parts.map((p) => ({ kind: 'part' as const, item: p }))
 	]);
 
-	const activePart = $derived<Part | null>(
-		parts.find((p) => p.slug === activePartSlug) ?? null
-	);
+	const activePart = $derived<Part | null>(parts.find((p) => p.slug === activePartSlug) ?? null);
 
 	const col2Items = $derived<Section[]>(activePart?.sections ?? []);
 
@@ -166,9 +158,7 @@
 		col3Items.find((c) => c.slug === activeChapterSlug) ?? null
 	);
 
-	type Col4Item =
-		| { kind: 'article'; data: Article }
-		| { kind: 'heading'; data: Heading };
+	type Col4Item = { kind: 'article'; data: Article } | { kind: 'heading'; data: Heading };
 
 	// Column 4 prefers articles. When the active chapter has none (e.g. P1S1C1
 	// goes straight to Roman-numeral subdivisions), fall back to its headings
@@ -524,9 +514,7 @@
 											}}
 											onclick={close}
 										>
-											<span class="cell-numeral" aria-hidden="true"
-												>{ROMAN[part.number ?? 0]}</span
-											>
+											<span class="cell-numeral" aria-hidden="true">{ROMAN[part.number ?? 0]}</span>
 											<span class="cell-body">
 												<span class="cell-tag">Partie&nbsp;{part.number}</span>
 												<span class="cell-title">{part.title}</span>
@@ -675,7 +663,12 @@
 				</div>
 
 				<!-- Footer bar — entire row is the sommaire link, centered. -->
-				<a class="panel-foot foot-link foot-link-primary" href="/ccc/sommaire" role="menuitem" onclick={close}>
+				<a
+					class="panel-foot foot-link foot-link-primary"
+					href="/ccc/sommaire"
+					role="menuitem"
+					onclick={close}
+				>
 					<span>Sommaire complet</span>
 					<span class="sommaire-arrow" aria-hidden="true">→</span>
 				</a>
@@ -949,7 +942,9 @@
 		font-size: 0.92rem;
 		line-height: 1.3;
 		color: var(--color-fg);
-		font-feature-settings: 'liga' on, 'kern' on;
+		font-feature-settings:
+			'liga' on,
+			'kern' on;
 	}
 	.cell-title-sm {
 		font-size: 0.85rem;

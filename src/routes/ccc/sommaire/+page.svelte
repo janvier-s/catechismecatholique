@@ -205,7 +205,9 @@
 																				>
 																					<span class="label-title">{node.heading.title}</span>
 																					<span class="dotleader" aria-hidden="true"></span>
-																					<span class="row-range">{node.heading.paragraph_start}</span>
+																					<span class="row-range"
+																						>{node.heading.paragraph_start}</span
+																					>
 																				</a>
 																				{#if node.children.length > 0}
 																					<ul class="sub-headings" role="list">
@@ -217,7 +219,8 @@
 																								>
 																									<span class="label-title">{sh.title}</span>
 																									<span class="dotleader" aria-hidden="true"></span>
-																									<span class="row-range">{sh.paragraph_start}</span>
+																									<span class="row-range">{sh.paragraph_start}</span
+																									>
 																								</a>
 																							</li>
 																						{/each}
@@ -359,8 +362,20 @@
 			transparent
 		);
 	}
-	.rule-l { background: linear-gradient(to right, transparent, color-mix(in srgb, var(--color-fg) 30%, transparent)); }
-	.rule-r { background: linear-gradient(to left, transparent, color-mix(in srgb, var(--color-fg) 30%, transparent)); }
+	.rule-l {
+		background: linear-gradient(
+			to right,
+			transparent,
+			color-mix(in srgb, var(--color-fg) 30%, transparent)
+		);
+	}
+	.rule-r {
+		background: linear-gradient(
+			to left,
+			transparent,
+			color-mix(in srgb, var(--color-fg) 30%, transparent)
+		);
+	}
 
 	.lede {
 		max-width: 36ch;
@@ -426,7 +441,9 @@
 		background-repeat: no-repeat;
 		background-size: 0 1px;
 		background-position: 0 100%;
-		transition: background-size 220ms ease, color 160ms ease;
+		transition:
+			background-size 220ms ease,
+			color 160ms ease;
 	}
 	.part-title a:hover {
 		color: var(--color-accent);
@@ -473,7 +490,9 @@
 		padding-left: 0.5rem;
 		border-radius: 2px;
 		line-height: 1.55;
-		transition: background-color 140ms ease, color 140ms ease;
+		transition:
+			background-color 140ms ease,
+			color 140ms ease;
 	}
 	.row:hover {
 		background-color: var(--hover-tint);
@@ -685,13 +704,21 @@
 			padding-top: calc(var(--rh) * 1.5);
 			padding-bottom: calc(var(--rh) * 2);
 		}
-		.toc-head { margin-bottom: calc(var(--rh) * 2.5); }
-		.parts { gap: calc(var(--rh) * 2.5); }
+		.toc-head {
+			margin-bottom: calc(var(--rh) * 2.5);
+		}
+		.parts {
+			gap: calc(var(--rh) * 2.5);
+		}
 
-		.row { gap: 0.4rem; }
+		.row {
+			gap: 0.4rem;
+		}
 		/* On narrow screens dot leaders get cramped — collapse, push range
 		   onto the next line instead. */
-		.dotleader { display: none; }
+		.dotleader {
+			display: none;
+		}
 		.row {
 			flex-wrap: wrap;
 		}
@@ -700,9 +727,16 @@
 			padding-left: 0;
 			font-size: 0.72rem;
 		}
-		.row-section { font-size: 1.05rem; }
-		.row-section .label-tag { display: block; margin-bottom: 0.2rem; }
-		.row-section .label-title { display: block; }
+		.row-section {
+			font-size: 1.05rem;
+		}
+		.row-section .label-tag {
+			display: block;
+			margin-bottom: 0.2rem;
+		}
+		.row-section .label-title {
+			display: block;
+		}
 	}
 
 	/* ---- Reduced motion ------------------------------------------------- */

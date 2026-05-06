@@ -62,7 +62,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	ADVENT: {
 		fr: 'Avent',
-		def: "Temps liturgique de quatre semaines consacré à la préparation de la venue du Christ à Noël.",
+		def: 'Temps liturgique de quatre semaines consacré à la préparation de la venue du Christ à Noël.',
 		cluster: 'liturgie'
 	},
 	ALMSGIVING: {
@@ -125,7 +125,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	APOSTASY: {
 		fr: 'Apostasie',
-		def: "Reniement total de la foi chrétienne.",
+		def: 'Reniement total de la foi chrétienne.',
 		cluster: 'morale'
 	},
 	APOSTLE: {
@@ -154,12 +154,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	ASCENSION: {
 		fr: 'Ascension du Christ',
-		def: "Élévation glorieuse du Christ ressuscité, dans son humanité, à la droite du Père, où il vit pour intercéder pour nous, quarante jours après sa Résurrection. Voir Avènement second.",
+		def: 'Élévation glorieuse du Christ ressuscité, dans son humanité, à la droite du Père, où il vit pour intercéder pour nous, quarante jours après sa Résurrection. Voir Avènement second.',
 		cluster: 'christ'
 	},
 	ASCESIS: {
 		fr: 'Ascèse',
-		def: "Effort soutenu, exigé pour parvenir à la perfection chrétienne. La discipline ascétique, qui comprend le combat contre les inclinations désordonnées du cœur humain, est nécessaire pour grandir dans la vertu et dans la sainteté.",
+		def: 'Effort soutenu, exigé pour parvenir à la perfection chrétienne. La discipline ascétique, qui comprend le combat contre les inclinations désordonnées du cœur humain, est nécessaire pour grandir dans la vertu et dans la sainteté.',
 		cluster: 'morale'
 	},
 	ASSUMPTION: {
@@ -174,17 +174,17 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	BEATIFIC_VISION: {
 		fr: 'Vision béatifique',
-		def: "La connaissance et la jouissance directes de Dieu dont jouissent ceux qui sont au ciel, leur procurant la béatitude éternelle.",
+		def: 'La connaissance et la jouissance directes de Dieu dont jouissent ceux qui sont au ciel, leur procurant la béatitude éternelle.',
 		cluster: 'fins-dernieres'
 	},
 	BEATITUDE: {
 		fr: 'Béatitude',
-		def: "Le bonheur ultime auquel Dieu nous appelle ; la vision et la jouissance éternelles de la Sainte Trinité dans la gloire du ciel. La béatitude éternelle est promise à ceux qui aiment Dieu et qui font sa volonté.",
+		def: 'Le bonheur ultime auquel Dieu nous appelle ; la vision et la jouissance éternelles de la Sainte Trinité dans la gloire du ciel. La béatitude éternelle est promise à ceux qui aiment Dieu et qui font sa volonté.',
 		cluster: 'fins-dernieres'
 	},
 	BEATITUDES: {
 		fr: 'Béatitudes',
-		def: "Promesses de bonheur faites par Jésus à ceux qui suivent fidèlement ses préceptes. Les Béatitudes énoncées par Jésus dans le Sermon sur la Montagne décrivent les attitudes et les actions caractéristiques de la vie chrétienne et constituent les paradoxales promesses de la grâce dans le Royaume.",
+		def: 'Promesses de bonheur faites par Jésus à ceux qui suivent fidèlement ses préceptes. Les Béatitudes énoncées par Jésus dans le Sermon sur la Montagne décrivent les attitudes et les actions caractéristiques de la vie chrétienne et constituent les paradoxales promesses de la grâce dans le Royaume.',
 		cluster: 'morale'
 	},
 	BIBLE: {
@@ -214,7 +214,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	BLESSING: {
 		fr: 'Bénédiction',
-		def: "Action liturgique qui invoque la faveur de Dieu sur des personnes, des objets, des lieux ou des moments. Signe de la providence par laquelle Dieu veille sur sa création.",
+		def: 'Action liturgique qui invoque la faveur de Dieu sur des personnes, des objets, des lieux ou des moments. Signe de la providence par laquelle Dieu veille sur sa création.',
 		cluster: 'liturgie'
 	},
 	BODY_OF_CHRIST: {
@@ -234,7 +234,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	CANON_OF_THE_MASS: {
 		fr: 'Canon de la Messe',
-		def: "Désignation traditionnelle, dans le rite romain, de la première Prière eucharistique de la Messe, dite aussi « Canon romain ».",
+		def: 'Désignation traditionnelle, dans le rite romain, de la première Prière eucharistique de la Messe, dite aussi « Canon romain ».',
 		cluster: 'liturgie'
 	},
 	CANON_OF_SCRIPTURE: {
@@ -288,7 +288,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	CELIBACY: {
 		fr: 'Célibat',
-		def: "État de ceux qui choisissent de demeurer non mariés en vue du Royaume des cieux pour se consacrer entièrement à Dieu et au service des autres.",
+		def: 'État de ceux qui choisissent de demeurer non mariés en vue du Royaume des cieux pour se consacrer entièrement à Dieu et au service des autres.',
 		cluster: 'morale'
 	},
 	CHARACTER__SACRAMENTAL: {
@@ -323,7 +323,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	CHRISMATION: {
 		fr: 'Chrismation',
-		def: "Nom donné dans les Églises orientales au sacrement de la Confirmation. Voir Confirmation.",
+		def: 'Nom donné dans les Églises orientales au sacrement de la Confirmation. Voir Confirmation.',
 		cluster: 'sacrements'
 	},
 	CHRIST: {
@@ -333,12 +333,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	CHRISTIAN: {
 		fr: 'Chrétien',
-		def: "Disciple du Christ ; nom donné aux disciples à Antioche (Ac 11, 26). Le chrétien, par le Baptême, est incorporé au Christ et à son Église.",
+		def: 'Disciple du Christ ; nom donné aux disciples à Antioche (Ac 11, 26). Le chrétien, par le Baptême, est incorporé au Christ et à son Église.',
 		cluster: 'eglise'
 	},
 	CHRISTMAS: {
 		fr: 'Noël',
-		def: "Fête de la Nativité de Jésus Christ, célébrée le 25 décembre, qui inaugure le temps liturgique de Noël.",
+		def: 'Fête de la Nativité de Jésus Christ, célébrée le 25 décembre, qui inaugure le temps liturgique de Noël.',
 		cluster: 'liturgie'
 	},
 	CHURCH: {
@@ -428,12 +428,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	CONVERSION: {
 		fr: 'Conversion',
-		def: "Retour vers Dieu, changement radical du cœur, en réponse à son amour miséricordieux. La conversion suppose le repentir du péché et la décision de vivre désormais dans le Christ.",
+		def: 'Retour vers Dieu, changement radical du cœur, en réponse à son amour miséricordieux. La conversion suppose le repentir du péché et la décision de vivre désormais dans le Christ.',
 		cluster: 'morale'
 	},
 	COUNCIL__ECUMENICAL: {
 		fr: 'Concile œcuménique',
-		def: "Assemblée des évêques du monde entier, convoquée et présidée par le Pape ou avec son approbation, ayant autorité pour définir des questions de doctrine et de discipline.",
+		def: 'Assemblée des évêques du monde entier, convoquée et présidée par le Pape ou avec son approbation, ayant autorité pour définir des questions de doctrine et de discipline.',
 		cluster: 'eglise'
 	},
 	COUNSEL: {
@@ -458,7 +458,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	CREED: {
 		fr: 'Credo',
-		def: "Profession de foi du chrétien, exprimant ce qui est cru. Voir Symbole de la foi.",
+		def: 'Profession de foi du chrétien, exprimant ce qui est cru. Voir Symbole de la foi.',
 		cluster: 'priere'
 	},
 	CROSS: {
@@ -513,7 +513,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	DEVIL_DEMON: {
 		fr: 'Diable',
-		def: "Le « diable » et les autres « démons » sont des anges qui se sont librement et définitivement détournés de Dieu. Voir Démon, Satan.",
+		def: 'Le « diable » et les autres « démons » sont des anges qui se sont librement et définitivement détournés de Dieu. Voir Démon, Satan.',
 		cluster: 'creation-homme'
 	},
 
@@ -524,7 +524,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	DISCIPLE: {
 		fr: 'Disciple',
-		def: "Celui qui suit le Christ et apprend de lui. Tous les baptisés sont appelés à être disciples du Christ et à porter du fruit pour la vie éternelle.",
+		def: 'Celui qui suit le Christ et apprend de lui. Tous les baptisés sont appelés à être disciples du Christ et à porter du fruit pour la vie éternelle.',
 		cluster: 'eglise'
 	},
 	DISPENSATION: {
@@ -534,7 +534,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	DIVINE_LITURGY: {
 		fr: 'Divine Liturgie',
-		def: "Nom donné dans les Églises orientales à la célébration eucharistique. Voir Eucharistie, Messe.",
+		def: 'Nom donné dans les Églises orientales à la célébration eucharistique. Voir Eucharistie, Messe.',
 		cluster: 'liturgie'
 	},
 	DIVORCE: {
@@ -589,7 +589,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	EMMANUEL: {
 		fr: 'Emmanuel',
-		def: "Mot hébreu signifiant « Dieu avec nous », nom prophétique donné par Isaïe au Messie attendu et appliqué dans le Nouveau Testament à Jésus.",
+		def: 'Mot hébreu signifiant « Dieu avec nous », nom prophétique donné par Isaïe au Messie attendu et appliqué dans le Nouveau Testament à Jésus.',
 		cluster: 'christ'
 	},
 	EPICLESIS: {
@@ -599,7 +599,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	EPISCOPACY: {
 		fr: 'Épiscopat',
-		def: "Le ministère et la charge des évêques. La charge épiscopale, par institution divine, succède à celle des Apôtres.",
+		def: 'Le ministère et la charge des évêques. La charge épiscopale, par institution divine, succède à celle des Apôtres.',
 		cluster: 'eglise'
 	},
 	ESCHATOLOGY: {
@@ -634,7 +634,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	EVE: {
 		fr: 'Ève',
-		def: "Selon la Genèse, la première femme, mère de tous les vivants, créée par Dieu pour Adam. Tombée avec lui par le péché originel.",
+		def: 'Selon la Genèse, la première femme, mère de tous les vivants, créée par Dieu pour Adam. Tombée avec lui par le péché originel.',
 		cluster: 'creation-homme'
 	},
 	EVIL: {
@@ -653,8 +653,8 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 		cluster: 'ecriture'
 	},
 	EXISTENCE_OF_GOD: {
-		fr: "Existence de Dieu",
-		def: "Vérité que la raison humaine peut connaître par les œuvres de la création et que la Révélation divine atteste pleinement.",
+		fr: 'Existence de Dieu',
+		def: 'Vérité que la raison humaine peut connaître par les œuvres de la création et que la Révélation divine atteste pleinement.',
 		cluster: 'trinite'
 	},
 	EXORCISM: {
@@ -669,12 +669,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	FAITHFUL: {
 		fr: 'Fidèles',
-		def: "Tous les chrétiens qui, étant baptisés, sont incorporés au Christ, constitués peuple de Dieu, faits participants à leur manière à la fonction sacerdotale, prophétique et royale du Christ.",
+		def: 'Tous les chrétiens qui, étant baptisés, sont incorporés au Christ, constitués peuple de Dieu, faits participants à leur manière à la fonction sacerdotale, prophétique et royale du Christ.',
 		cluster: 'eglise'
 	},
 	FALL__THE: {
 		fr: 'Chute',
-		def: "Le péché des premiers parents qui, en désobéissant à Dieu, ont perdu la sainteté et la justice originelles pour eux-mêmes et pour leur descendance. Voir Péché originel.",
+		def: 'Le péché des premiers parents qui, en désobéissant à Dieu, ont perdu la sainteté et la justice originelles pour eux-mêmes et pour leur descendance. Voir Péché originel.',
 		cluster: 'creation-homme'
 	},
 	FAMILY: {
@@ -693,7 +693,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 		cluster: 'trinite'
 	},
 	FATHERS_OF_THE_CHURCH: {
-		fr: 'Pères de l\'Église',
+		fr: "Pères de l'Église",
 		def: "Témoins éminents de la Tradition apostolique, dont l'œuvre théologique des premiers siècles a contribué à former la doctrine de l'Église.",
 		cluster: 'eglise'
 	},
@@ -754,7 +754,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	GLORY: {
 		fr: 'Gloire',
-		def: "Manifestation de la sainteté et de la majesté de Dieu. La gloire éternelle est la participation des bienheureux à la gloire de Dieu.",
+		def: 'Manifestation de la sainteté et de la majesté de Dieu. La gloire éternelle est la participation des bienheureux à la gloire de Dieu.',
 		cluster: 'trinite'
 	},
 	GLUTTONY: {
@@ -779,7 +779,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	GRACE: {
 		fr: 'Grâce',
-		def: "Faveur, secours gratuit que Dieu donne pour répondre à son appel : devenir enfants adoptifs de Dieu, participants de sa nature divine et héritiers de la vie éternelle. La grâce est participation à la vie même de Dieu.",
+		def: 'Faveur, secours gratuit que Dieu donne pour répondre à son appel : devenir enfants adoptifs de Dieu, participants de sa nature divine et héritiers de la vie éternelle. La grâce est participation à la vie même de Dieu.',
 		cluster: 'morale'
 	},
 	GUARDIAN_ANGELS: {
@@ -794,7 +794,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	HEART: {
 		fr: 'Cœur',
-		def: "Selon la Bible, le centre de la personne, le lieu où elle décide pour ou contre Dieu. Siège de la prière et de la conversion.",
+		def: 'Selon la Bible, le centre de la personne, le lieu où elle décide pour ou contre Dieu. Siège de la prière et de la conversion.',
 		cluster: 'creation-homme'
 	},
 	HEAVEN: {
@@ -829,7 +829,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	HOLY_FATHER: {
 		fr: 'Saint-Père',
-		def: "Titre donné au Pape, évêque de Rome et successeur de saint Pierre.",
+		def: 'Titre donné au Pape, évêque de Rome et successeur de saint Pierre.',
 		cluster: 'eglise'
 	},
 	HOLY_OILS: {
@@ -838,7 +838,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 		cluster: 'liturgie'
 	},
 	HOLY_ORDERS: {
-		fr: 'Sacrement de l\'Ordre',
+		fr: "Sacrement de l'Ordre",
 		def: "Sacrement par lequel la mission confiée par le Christ à ses Apôtres continue à être exercée dans l'Église jusqu'à la fin des temps. Il comporte trois degrés : épiscopat, presbytérat et diaconat.",
 		cluster: 'sacrements'
 	},
@@ -859,7 +859,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	HOLY_WATER: {
 		fr: 'Eau bénite',
-		def: "Eau bénite par un prêtre ou un diacre, utilisée comme sacramental pour rappeler le Baptême, demander la protection de Dieu et écarter le mal.",
+		def: 'Eau bénite par un prêtre ou un diacre, utilisée comme sacramental pour rappeler le Baptême, demander la protection de Dieu et écarter le mal.',
 		cluster: 'liturgie'
 	},
 	HOLY_WEEK: {
@@ -869,7 +869,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	HOMOSEXUALITY: {
 		fr: 'Homosexualité',
-		def: "Attirance sexuelle prédominante ou exclusive envers des personnes du même sexe. Les actes homosexuels sont gravement contraires à la loi naturelle ; les personnes homosexuelles doivent être accueillies avec respect, compassion et délicatesse.",
+		def: 'Attirance sexuelle prédominante ou exclusive envers des personnes du même sexe. Les actes homosexuels sont gravement contraires à la loi naturelle ; les personnes homosexuelles doivent être accueillies avec respect, compassion et délicatesse.',
 		cluster: 'morale'
 	},
 	HOPE: {
@@ -884,12 +884,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	HYPOSTATIC_UNION: {
 		fr: 'Union hypostatique',
-		def: "Union, dans la personne unique du Verbe incarné, des deux natures divine et humaine. Le concile de Chalcédoine (451) a confessé cette union « sans confusion, sans changement, sans division, sans séparation ».",
+		def: 'Union, dans la personne unique du Verbe incarné, des deux natures divine et humaine. Le concile de Chalcédoine (451) a confessé cette union « sans confusion, sans changement, sans division, sans séparation ».',
 		cluster: 'christ'
 	},
 	ICONS: {
 		fr: 'Icônes',
-		def: "Images sacrées du Christ, de la Vierge Marie ou des saints, vénérées en particulier dans la tradition orientale comme « livres pour les illettrés » et fenêtres sur le mystère.",
+		def: 'Images sacrées du Christ, de la Vierge Marie ou des saints, vénérées en particulier dans la tradition orientale comme « livres pour les illettrés » et fenêtres sur le mystère.',
 		cluster: 'liturgie'
 	},
 	IDOLATRY: {
@@ -898,13 +898,13 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 		cluster: 'morale'
 	},
 	IMAGE_OF_GOD: {
-		fr: "Image de Dieu",
+		fr: 'Image de Dieu',
 		def: "Réalité par laquelle l'homme, créé homme et femme, manifeste la dignité unique de la personne humaine, ouverte à la connaissance et à l'amour de Dieu.",
 		cluster: 'creation-homme'
 	},
 	IMMACULATE_CONCEPTION: {
 		fr: 'Immaculée Conception',
-		def: "Dogme proclamé en 1854 par le Pape Pie IX selon lequel, dès le premier instant de sa conception, Marie a été préservée de toute tache du péché originel par une grâce et un privilège uniques de Dieu, en vue des mérites de Jésus Christ.",
+		def: 'Dogme proclamé en 1854 par le Pape Pie IX selon lequel, dès le premier instant de sa conception, Marie a été préservée de toute tache du péché originel par une grâce et un privilège uniques de Dieu, en vue des mérites de Jésus Christ.',
 		cluster: 'marie-saints'
 	},
 	IMMORTALITY: {
@@ -929,7 +929,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	INERRANCY: {
 		fr: 'Inerrance',
-		def: "Don accordé par Dieu aux Écritures par lequel celles-ci enseignent fermement, fidèlement et sans erreur la vérité de salut.",
+		def: 'Don accordé par Dieu aux Écritures par lequel celles-ci enseignent fermement, fidèlement et sans erreur la vérité de salut.',
 		cluster: 'ecriture'
 	},
 	INFALLIBILITY: {
@@ -959,12 +959,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	INTERCESSION: {
 		fr: 'Intercession',
-		def: "Forme de prière de demande par laquelle, à la suite de Jésus, nous prions pour le salut des autres. Le Christ, prêtre éternel, intercède sans cesse en notre faveur ; la Vierge Marie et les saints intercèdent eux aussi pour nous.",
+		def: 'Forme de prière de demande par laquelle, à la suite de Jésus, nous prions pour le salut des autres. Le Christ, prêtre éternel, intercède sans cesse en notre faveur ; la Vierge Marie et les saints intercèdent eux aussi pour nous.',
 		cluster: 'priere'
 	},
 	ISLAM: {
 		fr: 'Islam',
-		def: "Religion monothéiste fondée par Muhammad au VIIe siècle. Les musulmans confessent un Dieu unique, miséricordieux, et reconnaissent Abraham comme leur père dans la foi.",
+		def: 'Religion monothéiste fondée par Muhammad au VIIe siècle. Les musulmans confessent un Dieu unique, miséricordieux, et reconnaissent Abraham comme leur père dans la foi.',
 		cluster: 'eglise'
 	},
 	ISRAEL: {
@@ -984,7 +984,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	JOSEPH__ST_: {
 		fr: 'Saint Joseph',
-		def: "Époux de la Vierge Marie et père légal de Jésus, choisi par Dieu pour assumer dans la sainte Famille la mission de père et de protecteur du Sauveur.",
+		def: 'Époux de la Vierge Marie et père légal de Jésus, choisi par Dieu pour assumer dans la sainte Famille la mission de père et de protecteur du Sauveur.',
 		cluster: 'marie-saints'
 	},
 	JUDAISM: {
@@ -1019,7 +1019,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	KERYGMA: {
 		fr: 'Kérygme',
-		def: "Annonce centrale du salut accompli par le Christ, telle que la prêchaient les premiers Apôtres : la mort et la Résurrection de Jésus pour la rémission des péchés.",
+		def: 'Annonce centrale du salut accompli par le Christ, telle que la prêchaient les premiers Apôtres : la mort et la Résurrection de Jésus pour la rémission des péchés.',
 		cluster: 'ecriture'
 	},
 	KEYS__POWER_OF_THE: {
@@ -1033,7 +1033,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 		cluster: 'christ'
 	},
 	KNOW_AND_LOVE_GOD: {
-		fr: "Connaître et aimer Dieu",
+		fr: 'Connaître et aimer Dieu',
 		def: "Fin pour laquelle Dieu a créé l'homme : le connaître, l'aimer et le servir en cette vie pour vivre éternellement avec lui.",
 		cluster: 'trinite'
 	},
@@ -1064,7 +1064,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	LAW__OLD: {
 		fr: 'Loi ancienne',
-		def: "Loi donnée par Dieu à Moïse au Sinaï, dont le cœur est le Décalogue. Elle prépare et figure la Loi nouvelle, accomplie dans le Christ.",
+		def: 'Loi donnée par Dieu à Moïse au Sinaï, dont le cœur est le Décalogue. Elle prépare et figure la Loi nouvelle, accomplie dans le Christ.',
 		cluster: 'ecriture'
 	},
 	LAYING_ON_OF_HANDS: {
@@ -1074,7 +1074,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	LECTIONARY: {
 		fr: 'Lectionnaire',
-		def: "Livre liturgique qui contient les lectures de la sainte Écriture proclamées dans la Messe et les autres célébrations, organisées selon le calendrier liturgique.",
+		def: 'Livre liturgique qui contient les lectures de la sainte Écriture proclamées dans la Messe et les autres célébrations, organisées selon le calendrier liturgique.',
 		cluster: 'liturgie'
 	},
 	LITURGICAL_YEAR: {
@@ -1094,11 +1094,11 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	LITURGY_OF_THE_WORD: {
 		fr: 'Liturgie de la Parole',
-		def: "Première grande partie de la Messe, dans laquelle la Parole de Dieu est proclamée et expliquée, suivie par la profession de foi et la prière universelle.",
+		def: 'Première grande partie de la Messe, dans laquelle la Parole de Dieu est proclamée et expliquée, suivie par la profession de foi et la prière universelle.',
 		cluster: 'liturgie'
 	},
 	LITURGY_OF_THE_EUCHARIST: {
-		fr: "Liturgie eucharistique",
+		fr: 'Liturgie eucharistique',
 		def: "Seconde grande partie de la Messe : présentation des dons, prière eucharistique avec la consécration, communion. Le Christ s'y rend présent dans son sacrifice et se donne en nourriture.",
 		cluster: 'liturgie'
 	},
@@ -1109,7 +1109,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	LORDS_DAY: {
 		fr: 'Jour du Seigneur',
-		def: "Le dimanche, jour de la Résurrection du Christ, premier jour de la semaine et premier jour de la nouvelle création. Voir Dimanche.",
+		def: 'Le dimanche, jour de la Résurrection du Christ, premier jour de la semaine et premier jour de la nouvelle création. Voir Dimanche.',
 		cluster: 'liturgie'
 	},
 	LORDS_PRAYER: {
@@ -1119,7 +1119,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	LOVE: {
 		fr: 'Amour',
-		def: "Mouvement de la volonté tendu vers le bien. Sa perfection est la charité, vertu théologale par laquelle nous aimons Dieu et notre prochain en lui. « Dieu est Amour » (1 Jn 4, 8).",
+		def: 'Mouvement de la volonté tendu vers le bien. Sa perfection est la charité, vertu théologale par laquelle nous aimons Dieu et notre prochain en lui. « Dieu est Amour » (1 Jn 4, 8).',
 		cluster: 'morale'
 	},
 	LUST: {
@@ -1159,12 +1159,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	MASS: {
 		fr: 'Messe',
-		def: "Célébration centrale du mystère eucharistique. Elle se compose de la Liturgie de la Parole et de la Liturgie eucharistique, qui forment un seul et même acte de culte.",
+		def: 'Célébration centrale du mystère eucharistique. Elle se compose de la Liturgie de la Parole et de la Liturgie eucharistique, qui forment un seul et même acte de culte.',
 		cluster: 'liturgie'
 	},
 	MATRIMONY: {
 		fr: 'Matrimonium',
-		def: "Sacrement du mariage chrétien. Voir Mariage.",
+		def: 'Sacrement du mariage chrétien. Voir Mariage.',
 		cluster: 'sacrements'
 	},
 	MEDIATOR: {
@@ -1179,7 +1179,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	MERCY: {
 		fr: 'Miséricorde',
-		def: "Compassion attentive du cœur de Dieu envers la misère humaine, en particulier celle du péché. La miséricorde divine est le fondement et la mesure de la miséricorde envers le prochain.",
+		def: 'Compassion attentive du cœur de Dieu envers la misère humaine, en particulier celle du péché. La miséricorde divine est le fondement et la mesure de la miséricorde envers le prochain.',
 		cluster: 'morale'
 	},
 	MERIT: {
@@ -1189,7 +1189,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	MESSIAH: {
 		fr: 'Messie',
-		def: "Mot hébreu signifiant « oint », correspondant au grec « Christ ». Le Messie attendu est le sauveur envoyé par Dieu pour établir son Royaume. Jésus est le Messie. Voir Christ.",
+		def: 'Mot hébreu signifiant « oint », correspondant au grec « Christ ». Le Messie attendu est le sauveur envoyé par Dieu pour établir son Royaume. Jésus est le Messie. Voir Christ.',
 		cluster: 'christ'
 	},
 	MILLENARIANISM: {
@@ -1214,7 +1214,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	MODESTY: {
 		fr: 'Modestie',
-		def: "Vertu qui règle la manière de se présenter, dans le vêtement, le langage et le comportement, en accord avec la dignité de la personne et le respect des autres.",
+		def: 'Vertu qui règle la manière de se présenter, dans le vêtement, le langage et le comportement, en accord avec la dignité de la personne et le respect des autres.',
 		cluster: 'morale'
 	},
 	MONOTHEISM: {
@@ -1229,7 +1229,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	MORAL_LIFE: {
 		fr: 'Vie morale',
-		def: "Vie selon la grâce et les vertus, conduite selon la loi de Dieu inscrite dans le cœur, illuminée par la Révélation et conformée au Christ.",
+		def: 'Vie selon la grâce et les vertus, conduite selon la loi de Dieu inscrite dans le cœur, illuminée par la Révélation et conformée au Christ.',
 		cluster: 'morale'
 	},
 	MORAL_THEOLOGY: {
@@ -1269,7 +1269,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	NAME_OF_GOD: {
 		fr: 'Nom de Dieu',
-		def: "Le Nom révélé par Dieu à Moïse au buisson ardent, « JE SUIS » (YHWH), et le Nom de Jésus, par lequel nous est donné le salut. Le respect du Nom de Dieu est exigé par le deuxième commandement.",
+		def: 'Le Nom révélé par Dieu à Moïse au buisson ardent, « JE SUIS » (YHWH), et le Nom de Jésus, par lequel nous est donné le salut. Le respect du Nom de Dieu est exigé par le deuxième commandement.',
 		cluster: 'trinite'
 	},
 	NATURAL_FAMILY_PLANNING: {
@@ -1284,7 +1284,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	NEW_COVENANT: {
 		fr: 'Alliance nouvelle',
-		def: "Alliance définitive scellée par Jésus dans son sang, accomplissement de toutes les alliances précédentes. Voir Alliance.",
+		def: 'Alliance définitive scellée par Jésus dans son sang, accomplissement de toutes les alliances précédentes. Voir Alliance.',
 		cluster: 'ecriture'
 	},
 	NEW_TESTAMENT: {
@@ -1294,12 +1294,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	NICENE_CREED: {
 		fr: 'Symbole de Nicée-Constantinople',
-		def: "Profession de foi élaborée aux conciles de Nicée (325) et de Constantinople (381) ; elle est récitée dans la liturgie eucharistique.",
+		def: 'Profession de foi élaborée aux conciles de Nicée (325) et de Constantinople (381) ; elle est récitée dans la liturgie eucharistique.',
 		cluster: 'priere'
 	},
 	NUNS: {
 		fr: 'Religieuses',
-		def: "Femmes qui se consacrent à Dieu par les vœux publics dans une vie communautaire, vouées à la prière, à la liturgie et à diverses œuvres apostoliques.",
+		def: 'Femmes qui se consacrent à Dieu par les vœux publics dans une vie communautaire, vouées à la prière, à la liturgie et à diverses œuvres apostoliques.',
 		cluster: 'eglise'
 	},
 	OATH: {
@@ -1319,12 +1319,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	ORDINARY_MAGISTERIUM: {
 		fr: 'Magistère ordinaire',
-		def: "Enseignement habituel et permanent du Pape et des évêques en communion avec lui, distinct du magistère extraordinaire des conciles et des définitions ex cathedra.",
+		def: 'Enseignement habituel et permanent du Pape et des évêques en communion avec lui, distinct du magistère extraordinaire des conciles et des définitions ex cathedra.',
 		cluster: 'eglise'
 	},
 	ORIGINAL_HOLINESS_AND_JUSTICE: {
 		fr: 'Sainteté et justice originelles',
-		def: "État de grâce dans lequel les premiers parents furent créés, marqué par leur amitié avec Dieu et leur ordre intérieur. Cet état fut perdu par le péché originel.",
+		def: 'État de grâce dans lequel les premiers parents furent créés, marqué par leur amitié avec Dieu et leur ordre intérieur. Cet état fut perdu par le péché originel.',
 		cluster: 'creation-homme'
 	},
 	ORIGINAL_SIN: {
@@ -1339,7 +1339,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PALL: {
 		fr: 'Pale',
-		def: "Petit linge carré et raidi qui sert à recouvrir le calice contenant le précieux Sang du Christ pendant la Messe.",
+		def: 'Petit linge carré et raidi qui sert à recouvrir le calice contenant le précieux Sang du Christ pendant la Messe.',
 		cluster: 'liturgie'
 	},
 	PAPACY: {
@@ -1349,7 +1349,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PARABLE: {
 		fr: 'Parabole',
-		def: "Récit imagé de Jésus visant à exposer un aspect du Royaume des cieux par comparaison avec une réalité familière de la vie quotidienne.",
+		def: 'Récit imagé de Jésus visant à exposer un aspect du Royaume des cieux par comparaison avec une réalité familière de la vie quotidienne.',
 		cluster: 'ecriture'
 	},
 	PARADISE: {
@@ -1364,7 +1364,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PAROUSIA: {
 		fr: 'Parousie',
-		def: "Mot grec signifiant « venue » ou « présence » ; désigne le retour glorieux du Christ à la fin des temps. Voir Avènement second.",
+		def: 'Mot grec signifiant « venue » ou « présence » ; désigne le retour glorieux du Christ à la fin des temps. Voir Avènement second.',
 		cluster: 'fins-dernieres'
 	},
 	PASCHAL_LAMB: {
@@ -1414,7 +1414,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PENANCE__VIRTUE: {
 		fr: 'Pénitence (vertu)',
-		def: "Vertu morale et don de Dieu par laquelle le pécheur reconnaît son péché et se tourne vers Dieu, en se proposant de réparer ses fautes.",
+		def: 'Vertu morale et don de Dieu par laquelle le pécheur reconnaît son péché et se tourne vers Dieu, en se proposant de réparer ses fautes.',
 		cluster: 'morale'
 	},
 	PENTATEUCH: {
@@ -1439,7 +1439,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PERJURY: {
 		fr: 'Parjure',
-		def: "Faire un faux serment, ou ne pas tenir un serment fait. Le parjure est une grave irrévérence envers Dieu et offense au deuxième commandement.",
+		def: 'Faire un faux serment, ou ne pas tenir un serment fait. Le parjure est une grave irrévérence envers Dieu et offense au deuxième commandement.',
 		cluster: 'morale'
 	},
 	PETER__ST_: {
@@ -1449,7 +1449,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PETITION: {
 		fr: 'Demande',
-		def: "Forme de prière par laquelle on demande à Dieu pour soi-même. La demande la plus noble est celle de la grâce et du Royaume.",
+		def: 'Forme de prière par laquelle on demande à Dieu pour soi-même. La demande la plus noble est celle de la grâce et du Royaume.',
 		cluster: 'priere'
 	},
 	PIETY: {
@@ -1459,7 +1459,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	POLE: {
 		fr: 'Pôle',
-		def: "Désignation occasionnelle des deux principales orientations sacramentelles : sacrifice du Christ et communion ; figure et action.",
+		def: 'Désignation occasionnelle des deux principales orientations sacramentelles : sacrifice du Christ et communion ; figure et action.',
 		cluster: 'sacrements'
 	},
 	POLYGAMY: {
@@ -1479,7 +1479,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	POVERTY__EVANGELICAL: {
 		fr: 'Pauvreté évangélique',
-		def: "Conseil évangélique professé par les religieux ; détachement intérieur des biens matériels en vue de mieux suivre le Christ et de servir le prochain.",
+		def: 'Conseil évangélique professé par les religieux ; détachement intérieur des biens matériels en vue de mieux suivre le Christ et de servir le prochain.',
 		cluster: 'eglise'
 	},
 	PRAYER: {
@@ -1509,7 +1509,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PRIESTHOOD__COMMON: {
 		fr: 'Sacerdoce commun',
-		def: "Sacerdoce de tous les fidèles, conféré par le Baptême et la Confirmation, par lequel les baptisés sont consacrés pour offrir des sacrifices spirituels et témoigner de la foi.",
+		def: 'Sacerdoce de tous les fidèles, conféré par le Baptême et la Confirmation, par lequel les baptisés sont consacrés pour offrir des sacrifices spirituels et témoigner de la foi.',
 		cluster: 'sacrements'
 	},
 	PRIESTHOOD__MINISTERIAL: {
@@ -1529,7 +1529,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PROPHET: {
 		fr: 'Prophète',
-		def: "Homme appelé et envoyé par Dieu pour parler en son nom. Les prophètes ont préparé la venue du Christ. Tous les baptisés participent à la fonction prophétique du Christ.",
+		def: 'Homme appelé et envoyé par Dieu pour parler en son nom. Les prophètes ont préparé la venue du Christ. Tous les baptisés participent à la fonction prophétique du Christ.',
 		cluster: 'ecriture'
 	},
 	PROTESTANT: {
@@ -1539,7 +1539,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	'PROTO-EVANGELIUM': {
 		fr: 'Protoévangile',
-		def: "Premier annoncement du Sauveur dans la Genèse (Gn 3, 15), où Dieu promet la victoire de la descendance de la femme sur le serpent.",
+		def: 'Premier annoncement du Sauveur dans la Genèse (Gn 3, 15), où Dieu promet la victoire de la descendance de la femme sur le serpent.',
 		cluster: 'ecriture'
 	},
 	PROVIDENCE: {
@@ -1559,7 +1559,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PSALTER: {
 		fr: 'Psautier',
-		def: "Le livre des Psaumes, recueil de cent cinquante prières inspirées qui forment le cœur de la prière liturgique.",
+		def: 'Le livre des Psaumes, recueil de cent cinquante prières inspirées qui forment le cœur de la prière liturgique.',
 		cluster: 'ecriture'
 	},
 	PUNISHMENT__ETERNAL: {
@@ -1569,7 +1569,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	PUNISHMENT__TEMPORAL: {
 		fr: 'Peine temporelle',
-		def: "Peine due au péché qui subsiste après que la culpabilité a été pardonnée, et qui demande purification soit en cette vie, soit après la mort dans le purgatoire.",
+		def: 'Peine due au péché qui subsiste après que la culpabilité a été pardonnée, et qui demande purification soit en cette vie, soit après la mort dans le purgatoire.',
 		cluster: 'fins-dernieres'
 	},
 	PURGATORY: {
@@ -1584,7 +1584,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	REAL_PRESENCE: {
 		fr: 'Présence réelle',
-		def: "Présence vraie, réelle et substantielle du Corps et du Sang du Christ, avec son âme et sa divinité, sous les apparences du pain et du vin consacrés. Voir Eucharistie, Transsubstantiation.",
+		def: 'Présence vraie, réelle et substantielle du Corps et du Sang du Christ, avec son âme et sa divinité, sous les apparences du pain et du vin consacrés. Voir Eucharistie, Transsubstantiation.',
 		cluster: 'sacrements'
 	},
 	RECONCILIATION__SACRAMENT_OF: {
@@ -1594,12 +1594,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	REDEEMER_REDEMPTION: {
 		fr: 'Rédempteur / Rédemption',
-		def: "Le Christ est notre Rédempteur ; sa mort sur la croix nous a rachetés du péché et de la mort, nous offrant en lui la vie éternelle.",
+		def: 'Le Christ est notre Rédempteur ; sa mort sur la croix nous a rachetés du péché et de la mort, nous offrant en lui la vie éternelle.',
 		cluster: 'christ'
 	},
 	RELIGION: {
 		fr: 'Religion',
-		def: "Vertu morale qui dispose à rendre à Dieu le culte qui lui est dû, première vertu liée au premier commandement.",
+		def: 'Vertu morale qui dispose à rendre à Dieu le culte qui lui est dû, première vertu liée au premier commandement.',
 		cluster: 'morale'
 	},
 	RELIGIOUS_LIFE: {
@@ -1609,7 +1609,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	REMISSION_OF_SINS: {
 		fr: 'Rémission des péchés',
-		def: "Pardon des péchés, obtenu principalement par le Baptême et le sacrement de Pénitence, en vertu de la grâce acquise par le Christ.",
+		def: 'Pardon des péchés, obtenu principalement par le Baptême et le sacrement de Pénitence, en vertu de la grâce acquise par le Christ.',
 		cluster: 'sacrements'
 	},
 	REPARATION: {
@@ -1619,12 +1619,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	REPENTANCE: {
 		fr: 'Repentir',
-		def: "Acte volontaire par lequel le pécheur se détourne du péché et retourne à Dieu. Le repentir est nécessaire au pardon et au salut.",
+		def: 'Acte volontaire par lequel le pécheur se détourne du péché et retourne à Dieu. Le repentir est nécessaire au pardon et au salut.',
 		cluster: 'morale'
 	},
 	RESTITUTION: {
 		fr: 'Restitution',
-		def: "Acte par lequel celui qui a injustement causé un dommage à autrui rétablit ce dernier dans ses biens, comme exigence de justice.",
+		def: 'Acte par lequel celui qui a injustement causé un dommage à autrui rétablit ce dernier dans ses biens, comme exigence de justice.',
 		cluster: 'morale'
 	},
 	RESURRECTION_OF_CHRIST: {
@@ -1649,7 +1649,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	ROSARY: {
 		fr: 'Rosaire',
-		def: "Prière à la fois vocale et méditative, centrée sur la contemplation des mystères de la vie du Christ avec la Vierge Marie. Compose des « Notre Père » et des « Je vous salue Marie » groupés en dizaines.",
+		def: 'Prière à la fois vocale et méditative, centrée sur la contemplation des mystères de la vie du Christ avec la Vierge Marie. Compose des « Notre Père » et des « Je vous salue Marie » groupés en dizaines.',
 		cluster: 'priere'
 	},
 	SABBATH: {
@@ -1684,7 +1684,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	SAINT: {
 		fr: 'Saint',
-		def: "Personne qui, par la grâce de Dieu, vit et meurt en amitié avec Dieu et qui jouit de la béatitude éternelle au ciel. Tous les baptisés sont appelés à la sainteté. Voir Saints.",
+		def: 'Personne qui, par la grâce de Dieu, vit et meurt en amitié avec Dieu et qui jouit de la béatitude éternelle au ciel. Tous les baptisés sont appelés à la sainteté. Voir Saints.',
 		cluster: 'marie-saints'
 	},
 	SALVATION: {
@@ -1694,7 +1694,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	SANCTIFYING_GRACE: {
 		fr: 'Grâce sanctifiante',
-		def: "Don habituel et permanent par lequel la justice de Dieu nous est attribuée, et par lequel nous sommes faits participants de la nature divine.",
+		def: 'Don habituel et permanent par lequel la justice de Dieu nous est attribuée, et par lequel nous sommes faits participants de la nature divine.',
 		cluster: 'morale'
 	},
 	SANCTUARY: {
@@ -1714,12 +1714,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	SAVIOR: {
 		fr: 'Sauveur',
-		def: "Le Christ Jésus est le Sauveur, celui par qui Dieu nous délivre du péché et nous donne la vie. Le nom même de Jésus signifie « Dieu sauve ».",
+		def: 'Le Christ Jésus est le Sauveur, celui par qui Dieu nous délivre du péché et nous donne la vie. Le nom même de Jésus signifie « Dieu sauve ».',
 		cluster: 'christ'
 	},
 	SCANDAL: {
 		fr: 'Scandale',
-		def: "Attitude ou comportement qui porte autrui à mal faire. Le scandale est péché grave si, par action ou par omission, il entraîne délibérément autrui à pécher.",
+		def: 'Attitude ou comportement qui porte autrui à mal faire. Le scandale est péché grave si, par action ou par omission, il entraîne délibérément autrui à pécher.',
 		cluster: 'morale'
 	},
 	SCHISM: {
@@ -1734,12 +1734,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	SEAL_OF_CONFESSION: {
 		fr: 'Secret de confession',
-		def: "Obligation absolue, pour le confesseur, de ne jamais trahir, par parole ou de toute autre manière et pour quelque raison que ce soit, ce que le pénitent lui a confié dans le sacrement.",
+		def: 'Obligation absolue, pour le confesseur, de ne jamais trahir, par parole ou de toute autre manière et pour quelque raison que ce soit, ce que le pénitent lui a confié dans le sacrement.',
 		cluster: 'sacrements'
 	},
 	SECOND_COMING_OF_CHRIST: {
 		fr: 'Avènement second',
-		def: "Retour glorieux du Christ à la fin des temps pour juger les vivants et les morts et achever son Royaume. Voir Parousie.",
+		def: 'Retour glorieux du Christ à la fin des temps pour juger les vivants et les morts et achever son Royaume. Voir Parousie.',
 		cluster: 'fins-dernieres'
 	},
 	SECULAR_INSTITUTE: {
@@ -1764,12 +1764,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	SIMONY: {
 		fr: 'Simonie',
-		def: "Achat ou vente de réalités spirituelles. La simonie tient son nom de Simon le Magicien (Ac 8, 9-24) et est un péché grave contre la vertu de religion.",
+		def: 'Achat ou vente de réalités spirituelles. La simonie tient son nom de Simon le Magicien (Ac 8, 9-24) et est un péché grave contre la vertu de religion.',
 		cluster: 'morale'
 	},
 	SIN: {
 		fr: 'Péché',
-		def: "Parole, acte ou désir contraire à la loi éternelle de Dieu. Le péché est offense à Dieu et désordre intérieur de la créature. Voir Péché mortel, Péché véniel.",
+		def: 'Parole, acte ou désir contraire à la loi éternelle de Dieu. Le péché est offense à Dieu et désordre intérieur de la créature. Voir Péché mortel, Péché véniel.',
 		cluster: 'morale'
 	},
 	SLANDER: {
@@ -1799,7 +1799,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	SON_OF_GOD: {
 		fr: 'Fils de Dieu',
-		def: "Titre propre de Jésus exprimant sa filiation divine éternelle et unique avec le Père. Confessé solennellement dans le Symbole de la foi.",
+		def: 'Titre propre de Jésus exprimant sa filiation divine éternelle et unique avec le Père. Confessé solennellement dans le Symbole de la foi.',
 		cluster: 'christ'
 	},
 	SON_OF_MAN: {
@@ -1829,7 +1829,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	SUPERNATURAL: {
 		fr: 'Surnaturel',
-		def: "Ce qui dépasse la nature et procède de la libre intervention de Dieu, élevant les créatures à une fin et à des moyens qui ne sont pas dus à leur nature.",
+		def: 'Ce qui dépasse la nature et procède de la libre intervention de Dieu, élevant les créatures à une fin et à des moyens qui ne sont pas dus à leur nature.',
 		cluster: 'trinite'
 	},
 	SUPERSTITION: {
@@ -1874,7 +1874,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	THEOLOGY: {
 		fr: 'Théologie',
-		def: "Étude scientifique de la foi, qui cherche à comprendre la Révélation de manière rigoureuse, à la lumière de la raison éclairée par la foi.",
+		def: 'Étude scientifique de la foi, qui cherche à comprendre la Révélation de manière rigoureuse, à la lumière de la raison éclairée par la foi.',
 		cluster: 'eglise'
 	},
 	THEOPHANY: {
@@ -1894,7 +1894,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	TRANSFIGURATION: {
 		fr: 'Transfiguration',
-		def: "Manifestation de la gloire divine de Jésus à trois de ses Apôtres (Pierre, Jacques et Jean) sur le mont Thabor, anticipant sa Résurrection et révélant son identité.",
+		def: 'Manifestation de la gloire divine de Jésus à trois de ses Apôtres (Pierre, Jacques et Jean) sur le mont Thabor, anticipant sa Résurrection et révélant son identité.',
 		cluster: 'christ'
 	},
 	TRANSUBSTANTIATION: {
@@ -1904,12 +1904,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	TRIDUUM: {
 		fr: 'Triduum pascal',
-		def: "Trois jours saints qui célèbrent le mystère pascal du Christ : Cène du Seigneur (Jeudi saint), Passion (Vendredi saint), Veillée pascale et Pâques.",
+		def: 'Trois jours saints qui célèbrent le mystère pascal du Christ : Cène du Seigneur (Jeudi saint), Passion (Vendredi saint), Veillée pascale et Pâques.',
 		cluster: 'liturgie'
 	},
 	TRINITY: {
 		fr: 'Trinité',
-		def: "Mystère central de la foi chrétienne : un seul Dieu en trois Personnes, Père, Fils et Esprit Saint, distinctes mais consubstantielles. La Trinité est une.",
+		def: 'Mystère central de la foi chrétienne : un seul Dieu en trois Personnes, Père, Fils et Esprit Saint, distinctes mais consubstantielles. La Trinité est une.',
 		cluster: 'trinite'
 	},
 	TYPOLOGY: {
@@ -1934,7 +1934,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	VIATICUM: {
 		fr: 'Viatique',
-		def: "Eucharistie reçue par le mourant comme provision pour le passage de cette vie au Père.",
+		def: 'Eucharistie reçue par le mourant comme provision pour le passage de cette vie au Père.',
 		cluster: 'sacrements'
 	},
 	VICAR_OF_CHRIST: {
@@ -1944,7 +1944,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	VICE: {
 		fr: 'Vice',
-		def: "Disposition habituelle au mal, contraire à la vertu, formée par des actes mauvais répétés. Voir Péché capital.",
+		def: 'Disposition habituelle au mal, contraire à la vertu, formée par des actes mauvais répétés. Voir Péché capital.',
 		cluster: 'morale'
 	},
 	VIRGIN_BIRTH: {
@@ -1969,7 +1969,7 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	VISION__BEATIFIC: {
 		fr: 'Vision béatifique',
-		def: "Connaissance et jouissance directes de Dieu dont jouissent les bienheureux au ciel. Voir Béatitude.",
+		def: 'Connaissance et jouissance directes de Dieu dont jouissent les bienheureux au ciel. Voir Béatitude.',
 		cluster: 'fins-dernieres'
 	},
 	VOCATION: {
@@ -1999,12 +1999,12 @@ export const EN_OVERLAY: Record<string, EnOverlay> = {
 	},
 	WORKS_OF_MERCY: {
 		fr: 'Œuvres de miséricorde',
-		def: "Actions de charité par lesquelles nous secourons notre prochain dans ses besoins corporels (donner à manger, vêtir, etc.) et spirituels (instruire, conseiller, consoler, etc.).",
+		def: 'Actions de charité par lesquelles nous secourons notre prochain dans ses besoins corporels (donner à manger, vêtir, etc.) et spirituels (instruire, conseiller, consoler, etc.).',
 		cluster: 'morale'
 	},
 	WORLD: {
 		fr: 'Monde',
-		def: "Ensemble de la création visible et invisible. La Bible donne au mot deux acceptions : tantôt le monde déchu et opposé à Dieu, tantôt le monde aimé de Dieu et appelé au salut par le Christ.",
+		def: 'Ensemble de la création visible et invisible. La Bible donne au mot deux acceptions : tantôt le monde déchu et opposé à Dieu, tantôt le monde aimé de Dieu et appelé au salut par le Christ.',
 		cluster: 'creation-homme'
 	},
 	WORSHIP: {

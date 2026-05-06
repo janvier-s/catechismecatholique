@@ -104,7 +104,9 @@ async function main() {
 
 	logStep('trimming en_bref blocks at Paragraphe boundaries');
 	const enbref = trimEnBrefsAtParagrapheBoundaries(rawEnbref, paragraphes);
-	const trimmedCount = enbref.filter((b, i) => b.paragraphs.length !== rawEnbref[i]!.paragraphs.length).length;
+	const trimmedCount = enbref.filter(
+		(b, i) => b.paragraphs.length !== rawEnbref[i]!.paragraphs.length
+	).length;
 	endStep(`${trimmedCount} blocks trimmed`);
 
 	logStep('building chapters');

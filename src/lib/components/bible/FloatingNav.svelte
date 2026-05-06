@@ -2,12 +2,7 @@
 	import { onMount, tick } from 'svelte';
 	import { fly, slide } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import {
-		OT_BOOKS,
-		NT_BOOKS,
-		bookTestament,
-		type Testament
-	} from '$lib/utils/bibleBookSlug';
+	import { OT_BOOKS, NT_BOOKS, bookTestament, type Testament } from '$lib/utils/bibleBookSlug';
 
 	let {
 		bookSlug,
@@ -204,4 +199,3 @@
 		</div>
 	</div>
 </div>
-

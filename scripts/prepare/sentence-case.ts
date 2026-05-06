@@ -72,8 +72,14 @@ export function sentenceCase(text: string): string {
 	// Note: we do NOT capitalize after a mid-sentence `«` — words inside guillemets keep
 	// their natural case ("L'homme est « capable » de Dieu", not "« Capable »").
 	// We DO capitalize after dashes that follow a period (sentence boundary).
-	result = result.replace(/([.!?:]\s+)(\p{Ll})/gu, (_, sep: string, c: string) => sep + c.toUpperCase());
-	result = result.replace(/([.!?]\s+[–—]\s+)(\p{Ll})/gu, (_, sep: string, c: string) => sep + c.toUpperCase());
+	result = result.replace(
+		/([.!?:]\s+)(\p{Ll})/gu,
+		(_, sep: string, c: string) => sep + c.toUpperCase()
+	);
+	result = result.replace(
+		/([.!?]\s+[–—]\s+)(\p{Ll})/gu,
+		(_, sep: string, c: string) => sep + c.toUpperCase()
+	);
 
 	// Step 4a: multi-word phrases first
 	for (const [re, replacement] of PHRASES) {
@@ -87,10 +93,13 @@ export function sentenceCase(text: string): string {
 	}
 
 	// Step 5: uppercase Roman numerals followed by a period (e.g. "i. " → "I. ")
-	result = result.replace(/\b(i|ii|iii|iv|v|vi|vii|viii|ix|x)(\.)/giu, (m, num: string, dot: string) => {
-		if (ROMAN_RE.test(num)) return num.toUpperCase() + dot;
-		return m;
-	});
+	result = result.replace(
+		/\b(i|ii|iii|iv|v|vi|vii|viii|ix|x)(\.)/giu,
+		(m, num: string, dot: string) => {
+			if (ROMAN_RE.test(num)) return num.toUpperCase() + dot;
+			return m;
+		}
+	);
 
 	return result;
 }

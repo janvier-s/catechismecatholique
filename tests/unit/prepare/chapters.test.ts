@@ -16,15 +16,48 @@ describe('buildChapterFiles', () => {
 							type: 'chapter',
 							title: 'Chapitre-A',
 							children: [
-								{ type: 'heading', title: 'I. Un', children: [{ type: 'paragraph', number: 1, text_html: '', cross_refs: [], bible_refs: [], citations: [] }] },
-								{ type: 'heading', title: 'II. Deux', children: [{ type: 'paragraph', number: 2, text_html: '', cross_refs: [], bible_refs: [], citations: [] }] }
+								{
+									type: 'heading',
+									title: 'I. Un',
+									children: [
+										{
+											type: 'paragraph',
+											number: 1,
+											text_html: '',
+											cross_refs: [],
+											bible_refs: [],
+											citations: []
+										}
+									]
+								},
+								{
+									type: 'heading',
+									title: 'II. Deux',
+									children: [
+										{
+											type: 'paragraph',
+											number: 2,
+											text_html: '',
+											cross_refs: [],
+											bible_refs: [],
+											citations: []
+										}
+									]
+								}
 							]
 						},
 						{
 							type: 'chapter',
 							title: 'Chapitre-B',
 							children: [
-								{ type: 'paragraph', number: 3, text_html: '', cross_refs: [], bible_refs: [], citations: [] }
+								{
+									type: 'paragraph',
+									number: 3,
+									text_html: '',
+									cross_refs: [],
+									bible_refs: [],
+									citations: []
+								}
 							]
 						}
 					]

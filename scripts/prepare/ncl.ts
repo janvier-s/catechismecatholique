@@ -60,7 +60,7 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 		// Collapse all whitespace to single spaces.
 		let out = s.replace(/\s+/g, ' ').trim();
 		// Strip spaces around apostrophes (both ASCII ' and typographic ’).
-		out = out.replace(/\s*['’]\s*/g, "’");
+		out = out.replace(/\s*['’]\s*/g, '’');
 		// Strip space before , . (no NBSP for these in French).
 		out = out.replace(/\s+([,.])/g, '$1');
 		// French rule: NBSP before : ! ? » (and remove existing spaces first).

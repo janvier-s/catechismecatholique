@@ -39,8 +39,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		prevChapter: prevChapter
 			? { slug: prevChapter.slug, title: prevChapter.title, section_slug: prevSection!.slug }
 			: null,
-		nextChapter: nextChapter
-			? { slug: nextChapter.slug, title: nextChapter.title }
-			: null
+		nextChapter: nextChapter ? { slug: nextChapter.slug, title: nextChapter.title } : null
 	};
 };

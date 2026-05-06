@@ -100,13 +100,22 @@
 		aria-label="Navigation"
 	>
 		{#if data.prev}
-			<NavCard direction="prev" href={data.prev.href} eyebrow={data.prev.label} title={data.prev.title} />
+			<NavCard
+				direction="prev"
+				href={data.prev.href}
+				eyebrow={data.prev.label}
+				title={data.prev.title}
+			/>
 		{:else}
 			<NavCard direction="prev" href="/ccc" eyebrow="← Catéchisme" title="Sommaire complet" />
 		{/if}
 		{#if data.next}
-			<NavCard direction="next" href={data.next.href} eyebrow={data.next.label} title={data.next.title} />
+			<NavCard
+				direction="next"
+				href={data.next.href}
+				eyebrow={data.next.label}
+				title={data.next.title}
+			/>
 		{/if}
 	</nav>
 </main>
-

@@ -12,14 +12,15 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dir, '..');
 
 // ─── Palette (from app.css :root) ────────────────────────────────────────────
-const BG      = '#f8f5ef';
-const FG      = '#1c1710';
-const MUTED   = '#6b6560';
-const ACCENT  = '#a62c2c';
-const BORDER  = '#e0d8cc';
+const BG = '#f8f5ef';
+const FG = '#1c1710';
+const MUTED = '#6b6560';
+const ACCENT = '#a62c2c';
+const BORDER = '#e0d8cc';
 
 // ─── Dimensions ──────────────────────────────────────────────────────────────
-const W = 1200, H = 630;
+const W = 1200,
+	H = 630;
 
 // Left logo zone ends here; text lives in the right zone.
 const DIVIDER_X = 432;
@@ -29,13 +30,13 @@ const TEXT_CX = Math.round((DIVIDER_X + W - 20) / 2); // ≈ 806
 // ─── Embed logo as base64 ────────────────────────────────────────────────────
 // Upscale the 192px logo to 290px for crisp rendering.
 const logoResized = await sharp(resolve(root, 'static/img/logo/logo-192.png'))
-  .resize(290, 290)
-  .png()
-  .toBuffer();
+	.resize(290, 290)
+	.png()
+	.toBuffer();
 
 const logoB64 = logoResized.toString('base64');
-const logoX   = Math.round((DIVIDER_X - 290) / 2);   // ≈ 71
-const logoY   = Math.round((H - 290) / 2);            // ≈ 170
+const logoX = Math.round((DIVIDER_X - 290) / 2); // ≈ 71
+const logoY = Math.round((H - 290) / 2); // ≈ 170
 
 // ─── SVG ─────────────────────────────────────────────────────────────────────
 const svg = `<svg
@@ -120,16 +121,12 @@ const svg = `<svg
 // ─── Render ───────────────────────────────────────────────────────────────────
 const outPath = resolve(root, 'static/img/og-image.png');
 
-await sharp(Buffer.from(svg))
-  .png({ compressionLevel: 9 })
-  .toFile(outPath);
+await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(outPath);
 
 console.log(`✓ og-image.png written → ${outPath}`);
 
 // Also output a WebP variant (smaller, supported everywhere og:image is used)
 const webpPath = resolve(root, 'static/img/og-image.webp');
-await sharp(Buffer.from(svg))
-  .webp({ quality: 90 })
-  .toFile(webpPath);
+await sharp(Buffer.from(svg)).webp({ quality: 90 }).toFile(webpPath);
 
 console.log(`✓ og-image.webp written → ${webpPath}`);

@@ -137,9 +137,7 @@ export function loadConcordanceByParagraph(
  * Load the manifest of paragraph numbers that have at least one concordance
  * entry. Used by callers to avoid speculative 404s on shard fetches.
  */
-export function loadConcordanceParagraphManifest(
-	fetcher: Fetch = fetch
-): Promise<Set<number>> {
+export function loadConcordanceParagraphManifest(fetcher: Fetch = fetch): Promise<Set<number>> {
 	if (!concordanceParagraphManifestPromise) {
 		concordanceParagraphManifestPromise = (async () => {
 			const r = await fetcher('/data/concordance/by-paragraph-manifest.json');

@@ -10,7 +10,16 @@
 		aria-label="Ouvrir le sommaire"
 		title="Sommaire"
 	>
-		<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+		<svg
+			width="14"
+			height="14"
+			viewBox="0 0 16 16"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linecap="round"
+			aria-hidden="true"
+		>
 			<line x1="2.5" y1="4" x2="13.5" y2="4" />
 			<line x1="5" y1="8" x2="13.5" y2="8" />
 			<line x1="7.5" y1="12" x2="13.5" y2="12" />

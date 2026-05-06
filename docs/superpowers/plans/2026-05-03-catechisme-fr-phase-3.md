@@ -104,6 +104,7 @@ Each section ships independently. J does not depend on K. L can be picked up at 
 ### Task J1: Build `bible-verse-index.json`
 
 **Files:**
+
 - Create: `scripts/prepare/bible-verse-index.ts`
 - Create: `tests/unit/prepare/bible-verse-index.test.ts`
 - Modify: `scripts/prepare-data.ts`
@@ -173,17 +174,9 @@ describe('buildBibleVerseIndex', () => {
 	});
 
 	it('dedupes and sorts paragraphs', () => {
-		const idx = buildBibleVerseIndex(
-			NCL,
-			{ 'Jn 1:14': [461, 423], '1 Cor 10:1-6': [1094] },
-			BOOKS
-		);
+		const idx = buildBibleVerseIndex(NCL, { 'Jn 1:14': [461, 423], '1 Cor 10:1-6': [1094] }, BOOKS);
 		// Add overlapping ref:
-		const merged = buildBibleVerseIndex(
-			NCL,
-			{ 'Jn 1:14': [461, 423, 461] },
-			BOOKS
-		);
+		const merged = buildBibleVerseIndex(NCL, { 'Jn 1:14': [461, 423, 461] }, BOOKS);
 		expect(merged['JHN']!['1']!['14']).toEqual([423, 461]);
 	});
 });
@@ -219,15 +212,13 @@ function abbrTable(books: BookInfo[]): Map<string, BookInfo> {
 //   "Jn 1:14"           → { abbr: 'Jn', ch: 1, fromV: 14, toV: 14, fromCh: 1, toCh: 1 }
 //   "1 Cor 10:1-6"      → fromV/toV range, single chapter
 //   "1 Cor 1-6"         → chapter range, no verse (fromV/toV undefined)
-function parseRefKey(key: string):
-	| {
-			abbr: string;
-			fromCh: number;
-			toCh: number;
-			fromV?: number;
-			toV?: number;
-	  }
-	| null {
+function parseRefKey(key: string): {
+	abbr: string;
+	fromCh: number;
+	toCh: number;
+	fromV?: number;
+	toV?: number;
+} | null {
 	// Single verse / verse range / chapter range
 	const verseRe = /^([1-3]?\s*[A-Za-zÉéèêÊ]+)\s+(\d+):(\d+)(?:-(\d+))?$/;
 	const chapterRe = /^([1-3]?\s*[A-Za-zÉéèêÊ]+)\s+(\d+)-(\d+)$/;
@@ -320,19 +311,18 @@ Expected: 5 passing.
 Open `scripts/prepare-data.ts`. After the `processing bible index` step, add this block (paste the **entire** new block):
 
 ```typescript
-	logStep('building bible verse index');
-	const nclRaw = JSON.parse(readFileSync(join(OUT, 'bible/ncl.json'), 'utf8'));
-	const bibleIdxRaw = JSON.parse(readFileSync(join(OUT, 'ccc/bible-index.json'), 'utf8'));
-	const { buildBibleVerseIndex } = await import('./prepare/bible-verse-index.ts');
-	const { BOOKS } = await import('../src/lib/utils/bibleBookSlug.ts');
-	const verseIdx = buildBibleVerseIndex(nclRaw, bibleIdxRaw, BOOKS);
-	writeFileSync(join(OUT, 'ccc/bible-verse-index.json'), JSON.stringify(verseIdx));
-	const verseCount = Object.values(verseIdx).reduce(
-		(t, byCh) =>
-			t + Object.values(byCh).reduce((c, byV) => c + Object.keys(byV).length, 0),
-		0
-	);
-	endStep(`${verseCount} verses indexed`);
+logStep('building bible verse index');
+const nclRaw = JSON.parse(readFileSync(join(OUT, 'bible/ncl.json'), 'utf8'));
+const bibleIdxRaw = JSON.parse(readFileSync(join(OUT, 'ccc/bible-index.json'), 'utf8'));
+const { buildBibleVerseIndex } = await import('./prepare/bible-verse-index.ts');
+const { BOOKS } = await import('../src/lib/utils/bibleBookSlug.ts');
+const verseIdx = buildBibleVerseIndex(nclRaw, bibleIdxRaw, BOOKS);
+writeFileSync(join(OUT, 'ccc/bible-verse-index.json'), JSON.stringify(verseIdx));
+const verseCount = Object.values(verseIdx).reduce(
+	(t, byCh) => t + Object.values(byCh).reduce((c, byV) => c + Object.keys(byV).length, 0),
+	0
+);
+endStep(`${verseCount} verses indexed`);
 ```
 
 (Order matters: this must run **after** the NCL bible parse and the bible-index step, since both write the input files.)
@@ -376,6 +366,7 @@ git commit -m "feat: build per-verse CCC citation index"
 ### Task J2: `BibleReader` + `ChapterView` components
 
 **Files:**
+
 - Create: `src/lib/components/bible/BibleReader.svelte`
 - Create: `src/lib/components/bible/ChapterView.svelte`
 - Create: `src/lib/components/bible/VerseMarker.svelte`
@@ -484,7 +475,7 @@ Create `src/lib/components/bible/ChapterView.svelte`:
 			class="verse-run"
 			class:dim={dimNonCited && c === 0}
 			id="v{v.v}"
-		><sup
+			><sup
 				class="verse-num font-ui text-[0.65em] font-semibold text-accent tabular-nums mr-1 align-baseline"
 				>{v.v}</sup
 			>{v.text}{#if c > 0}<VerseMarker
@@ -540,15 +531,11 @@ Create `src/lib/components/bible/BibleReader.svelte`:
 	let dimNonCited = $state(false);
 
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
-	const nextHref = $derived(
-		chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null
-	);
+	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
 
 	const citedCount = $derived(
 		verses.reduce(
-			(t, v) =>
-				t +
-				(verseIdx[book.usfx]?.[String(chapter)]?.[String(v.v)]?.length ? 1 : 0),
+			(t, v) => t + (verseIdx[book.usfx]?.[String(chapter)]?.[String(v.v)]?.length ? 1 : 0),
 			0
 		)
 	);
@@ -563,7 +550,9 @@ Create `src/lib/components/bible/BibleReader.svelte`:
 		<span class="font-semibold">Chapitre {chapter}</span>
 	</nav>
 
-	<header class="mb-6 sticky top-[80px] bg-background/95 backdrop-blur z-10 py-2 border-b border-border flex items-baseline gap-4">
+	<header
+		class="mb-6 sticky top-[80px] bg-background/95 backdrop-blur z-10 py-2 border-b border-border flex items-baseline gap-4"
+	>
 		<h1 class="font-heading text-4xl font-semibold">
 			{book.frenchName}
 			<span class="text-muted font-normal">{chapter}</span>
@@ -604,6 +593,7 @@ The compiler will currently fail because `ChapterFilterBar` is missing. Skip to 
 ### Task J3: `ChapterFilterBar` toggle
 
 **Files:**
+
 - Create: `src/lib/components/bible/ChapterFilterBar.svelte`
 
 - [ ] **Step 1: Implement the bar**
@@ -658,6 +648,7 @@ git commit -m "feat(bible): continuous-flow reader with CCC verse markers"
 ### Task J4: Extend `studyPanel` for verse context + new `TabBibleVerse` tab
 
 **Files:**
+
 - Modify: `src/lib/stores/studyPanel.ts`
 - Create: `src/lib/components/panels/TabBibleVerse.svelte`
 - Modify: `src/lib/components/panels/StudyPanel.svelte`
@@ -720,8 +711,7 @@ Create `src/lib/components/panels/TabBibleVerse.svelte`:
 		if (!ctx?.verseUsfx) return;
 		(async () => {
 			const idx = await loadBibleVerseIndex();
-			paragraphs =
-				idx[ctx.verseUsfx!]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
+			paragraphs = idx[ctx.verseUsfx!]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
 			const book = BOOKS.find((b) => b.usfx === ctx.verseUsfx);
 			bookFrenchName = book?.frenchName ?? ctx.verseUsfx!;
 			label = `${bookFrenchName} ${ctx.verseChapter}, ${ctx.verseVerse}`;
@@ -747,11 +737,11 @@ import TabBibleVerse from './TabBibleVerse.svelte';
 In the `visibleTabs` derived block (currently around lines 95–120), add a special-case at the top of the function body, **before** the `if (!paragraph) return ALL_TABS;` line:
 
 ```typescript
-		// Bible-verse mode: only one tab is meaningful.
-		const ctx = $studyPanel.context;
-		if (ctx?.verseUsfx) {
-			return [{ id: 'bible-verse', label: 'CEC' }];
-		}
+// Bible-verse mode: only one tab is meaningful.
+const ctx = $studyPanel.context;
+if (ctx?.verseUsfx) {
+	return [{ id: 'bible-verse', label: 'CEC' }];
+}
 ```
 
 In the tab-body switch (currently the block with `{#if $studyPanel.activeTab === 'bible'}` … `{:else if $studyPanel.activeTab === 'sources'}`), add one more branch after `'sources'`:
@@ -764,16 +754,16 @@ In the tab-body switch (currently the block with `{#if $studyPanel.activeTab ===
 In the panel header (currently displays `CEC {paragraph}` linked to `/ccc/{paragraph}`), wrap it in a conditional. Replace this block:
 
 ```svelte
-				<div>
-					{#if $studyPanel.context}
-						<a
-							href="/ccc/{$studyPanel.context.paragraph}"
-							class="text-accent font-semibold hover:underline tabular-nums"
-						>
-							CEC {$studyPanel.context.paragraph}
-						</a>
-					{/if}
-				</div>
+<div>
+	{#if $studyPanel.context}
+		<a
+			href="/ccc/{$studyPanel.context.paragraph}"
+			class="text-accent font-semibold hover:underline tabular-nums"
+		>
+			CEC {$studyPanel.context.paragraph}
+		</a>
+	{/if}
+</div>
 ```
 
 with:
@@ -825,6 +815,7 @@ git commit -m "feat(panel): bible-verse context shows CCC paragraphs citing a ve
 ### Task J5: Wire chapter route to `BibleReader`
 
 **Files:**
+
 - Modify: `src/routes/bible/[book=biblebook]/[ch]/+page.ts`
 - Modify: `src/routes/bible/[book=biblebook]/[ch]/+page.svelte`
 - Delete: `src/lib/components/bible/VerseList.svelte`
@@ -851,10 +842,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		fetch('/data/bible/ncl.json'),
 		fetch('/data/ccc/bible-verse-index.json')
 	]);
-	const ncl = (await r1.json()) as Record<
-		string,
-		Record<string, Record<string, string>>
-	>;
+	const ncl = (await r1.json()) as Record<string, Record<string, Record<string, string>>>;
 	const verseIdx = (await r2.json()) as BibleVerseIndex;
 
 	const bookData = ncl[book.usfx];
@@ -909,6 +897,7 @@ npm run dev
 ```
 
 Open `http://localhost:5174/bible/jean/1`. Confirm:
+
 - Chapter renders as a single justified paragraph
 - Verse numbers are inline sups
 - A `CEC N` pill appears next to verses with citations (e.g. v.14)
@@ -940,6 +929,7 @@ git commit -m "refactor(bible): chapter page uses BibleReader continuous flow"
 ### Task J6: Fix `[v]` route — match all abbrs + chapter-range keys
 
 **Files:**
+
 - Modify: `src/routes/bible/[book=biblebook]/[ch]/[v]/+page.ts`
 
 The current `[v]` loader iterates the `bible-index.json` and matches book abbrs but skips chapter-range keys (`1 Cor 1-6`). Use the new `bible-verse-index.json` instead — it already includes both expansions.
@@ -998,6 +988,7 @@ git commit -m "fix(bible): verse page surfaces chapter-range citations"
 ### Task K1: MiniSearch dep + tokenizer
 
 **Files:**
+
 - Modify: `package.json`
 - Create: `src/lib/utils/searchTokenizer.ts`
 
@@ -1098,6 +1089,7 @@ git commit -m "feat(search): minisearch dep + french-aware tokenizer"
 ### Task K2: Build script for search index
 
 **Files:**
+
 - Create: `scripts/prepare/search-index.ts`
 - Create: `tests/unit/prepare/search-index.test.ts`
 - Modify: `scripts/prepare-data.ts`
@@ -1193,7 +1185,11 @@ const OPTIONS = {
 };
 
 function stripHtml(s: string): string {
-	return s.replace(/<sup[^>]*>[^<]*<\/sup>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+	return s
+		.replace(/<sup[^>]*>[^<]*<\/sup>/g, '')
+		.replace(/<[^>]+>/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
 }
 
 export function buildSearchIndex(
@@ -1253,23 +1249,23 @@ Expected: 1 passing.
 After the `building bible verse index` block in `scripts/prepare-data.ts`, add:
 
 ```typescript
-	logStep('building search index');
-	mkdirSync(join(OUT, 'search'), { recursive: true });
-	const allParagraphs: import('../src/lib/data/types').Paragraph[] = [];
-	for (const f of readdirSync(join(OUT, 'ccc/paragraphs'))) {
-		if (!f.endsWith('.json')) continue;
-		allParagraphs.push(JSON.parse(readFileSync(join(OUT, 'ccc/paragraphs', f), 'utf8')));
-	}
-	const allChapters: import('../src/lib/data/types').Chapter[] = [];
-	for (const f of readdirSync(join(OUT, 'ccc/chapters'))) {
-		if (!f.endsWith('.json')) continue;
-		allChapters.push(JSON.parse(readFileSync(join(OUT, 'ccc/chapters', f), 'utf8')));
-	}
-	const ctxs = JSON.parse(readFileSync(join(OUT, 'ccc/paragraph-context.json'), 'utf8'));
-	const { buildSearchIndex } = await import('./prepare/search-index.ts');
-	const search = buildSearchIndex(allParagraphs, allChapters, ctxs);
-	writeFileSync(join(OUT, 'search/search-index.json'), search.serialized);
-	endStep(`${search.documents.length} docs (${(search.serialized.length / 1024).toFixed(1)} KB)`);
+logStep('building search index');
+mkdirSync(join(OUT, 'search'), { recursive: true });
+const allParagraphs: import('../src/lib/data/types').Paragraph[] = [];
+for (const f of readdirSync(join(OUT, 'ccc/paragraphs'))) {
+	if (!f.endsWith('.json')) continue;
+	allParagraphs.push(JSON.parse(readFileSync(join(OUT, 'ccc/paragraphs', f), 'utf8')));
+}
+const allChapters: import('../src/lib/data/types').Chapter[] = [];
+for (const f of readdirSync(join(OUT, 'ccc/chapters'))) {
+	if (!f.endsWith('.json')) continue;
+	allChapters.push(JSON.parse(readFileSync(join(OUT, 'ccc/chapters', f), 'utf8')));
+}
+const ctxs = JSON.parse(readFileSync(join(OUT, 'ccc/paragraph-context.json'), 'utf8'));
+const { buildSearchIndex } = await import('./prepare/search-index.ts');
+const search = buildSearchIndex(allParagraphs, allChapters, ctxs);
+writeFileSync(join(OUT, 'search/search-index.json'), search.serialized);
+endStep(`${search.documents.length} docs (${(search.serialized.length / 1024).toFixed(1)} KB)`);
 ```
 
 - [ ] **Step 6: Run prepare-data**
@@ -1295,6 +1291,7 @@ git commit -m "feat(search): build minisearch index over paragraphs and headings
 ### Task K3: KV upload script
 
 **Files:**
+
 - Create: `scripts/upload-index.ts`
 - Modify: `package.json`
 - Update: `wrangler.toml` (with real KV IDs after creating the namespace)
@@ -1351,10 +1348,9 @@ const KEY = 'search-index';
 function main() {
 	const size = statSync(FILE).size;
 	console.log(`Uploading ${KEY} (${(size / 1024).toFixed(1)} KB)…`);
-	execSync(
-		`npx wrangler kv key put --remote --binding=SEARCH_INDEX "${KEY}" --path="${FILE}"`,
-		{ stdio: 'inherit' }
-	);
+	execSync(`npx wrangler kv key put --remote --binding=SEARCH_INDEX "${KEY}" --path="${FILE}"`, {
+		stdio: 'inherit'
+	});
 	console.log(`✓ ${KEY} uploaded`);
 }
 
@@ -1393,9 +1389,11 @@ git commit -m "feat(search): wrangler kv binding + upload script"
 ### Task K4: `/api/search` endpoint
 
 **Files:**
+
 - Create: `src/routes/api/search/+server.ts`
 
 The endpoint has two paths:
+
 - **dev**: read `static/data/search/search-index.json` directly via `fetch` (the file ships as a static asset)
 - **prod (Cloudflare)**: read from KV binding `SEARCH_INDEX`, key `search-index`
 
@@ -1425,7 +1423,10 @@ interface SearchResultDoc {
 
 let cached: { ms: MiniSearch; raw: string } | null = null;
 
-async function loadIndex(platform: App.Platform | undefined, fetcher: typeof fetch): Promise<MiniSearch> {
+async function loadIndex(
+	platform: App.Platform | undefined,
+	fetcher: typeof fetch
+): Promise<MiniSearch> {
 	let raw: string | null = null;
 	if (platform?.env?.SEARCH_INDEX) {
 		raw = await platform.env.SEARCH_INDEX.get('search-index');
@@ -1517,6 +1518,7 @@ git commit -m "feat(search): /api/search endpoint with KV + dev fallback"
 ### Task K5: Intent detection lib
 
 **Files:**
+
 - Create: `src/lib/utils/searchIntent.ts`
 - Create: `tests/unit/searchIntent.test.ts`
 
@@ -1642,6 +1644,7 @@ git commit -m "feat(search): intent detection for paragraph / bible / free-text"
 ### Task K6: Search results page `/recherche`
 
 **Files:**
+
 - Create: `src/routes/recherche/+page.ts`
 - Create: `src/routes/recherche/+page.svelte`
 
@@ -1723,7 +1726,9 @@ Create `src/routes/recherche/+page.svelte`:
 	</form>
 
 	{#if !data.q}
-		<p class="text-muted">Tapez un mot, un numéro de paragraphe (§ 27) ou une référence biblique (Jn 1, 14).</p>
+		<p class="text-muted">
+			Tapez un mot, un numéro de paragraphe (§ 27) ou une référence biblique (Jn 1, 14).
+		</p>
 	{:else if data.hits.length === 0}
 		<p class="text-muted italic">Aucun résultat pour « {data.q} ».</p>
 	{:else}
@@ -1773,6 +1778,7 @@ git commit -m "feat(search): /recherche results page"
 ### Task K7: Wire header search input
 
 **Files:**
+
 - Modify: `src/lib/components/ui/TopBar.svelte`
 
 The current input is `disabled`. We enable it, listen to keypress / submit, run `detectIntent`, and either `goto` the deep link or push `/recherche?q=…`.
@@ -1881,6 +1887,7 @@ git commit -m "feat(search): wire header input with intent detection"
 ### Task L1: Sidebar `articles_direct` URL consistency
 
 **Files:**
+
 - Modify: `src/lib/components/ui/Sidebar.svelte`
 
 Currently in Sidebar.svelte's `tree` derived block, articles directly under a section produce hrefs like `/ccc/{firstParagraph}-{lastParagraph}` (paragraph range). The sommaire and other places use `/ccc/{part-slug}/{section-slug}/{article-slug}`. Use the canonical slug-based form.
@@ -1941,6 +1948,7 @@ git commit -m "fix(sidebar): articles_direct uses canonical slug URL"
 ### Task L2: Strip trailing apostrophe-letter artifact in abbreviations
 
 **Files:**
+
 - Modify: `scripts/prepare/abbreviations.ts`
 - Modify: `tests/unit/prepare/abbreviations.test.ts`
 
@@ -1951,17 +1959,17 @@ The source `sigles.xhtml` has `Apostolicam actuositatemd'` (the trailing `d'` is
 Append to `tests/unit/prepare/abbreviations.test.ts`:
 
 ```typescript
-	it("strips a trailing apostrophe-letter artifact", () => {
-		const xml = `<table><tr><td>AA</td><td>Apostolicam actuositatemd'</td></tr></table>`;
-		const map = parseSigles(xml);
-		expect(map['AA']).toBe('Apostolicam actuositatem');
-	});
+it('strips a trailing apostrophe-letter artifact', () => {
+	const xml = `<table><tr><td>AA</td><td>Apostolicam actuositatemd'</td></tr></table>`;
+	const map = parseSigles(xml);
+	expect(map['AA']).toBe('Apostolicam actuositatem');
+});
 
-	it("strips with curly apostrophe", () => {
-		const xml = `<table><tr><td>AA</td><td>Apostolicam actuositatemd’</td></tr></table>`;
-		const map = parseSigles(xml);
-		expect(map['AA']).toBe('Apostolicam actuositatem');
-	});
+it('strips with curly apostrophe', () => {
+	const xml = `<table><tr><td>AA</td><td>Apostolicam actuositatemd’</td></tr></table>`;
+	const map = parseSigles(xml);
+	expect(map['AA']).toBe('Apostolicam actuositatem');
+});
 ```
 
 - [ ] **Step 2: Run, fail**
@@ -1977,14 +1985,14 @@ Expected: the two new tests fail (current behaviour returns the dirty string).
 In `scripts/prepare/abbreviations.ts`, replace the `if (abbr && expansion) out[abbr] = expansion;` line with:
 
 ```typescript
-				if (abbr && expansion) {
-					// Some entries have a trailing letter+apostrophe artifact bleeding in
-					// from the next row (e.g. "Apostolicam actuositatemd'"). Strip a
-					// trailing single letter immediately followed by a straight or curly
-					// apostrophe.
-					const cleaned = expansion.replace(/[A-Za-z][’']$/u, '').trim();
-					out[abbr] = cleaned;
-				}
+if (abbr && expansion) {
+	// Some entries have a trailing letter+apostrophe artifact bleeding in
+	// from the next row (e.g. "Apostolicam actuositatemd'"). Strip a
+	// trailing single letter immediately followed by a straight or curly
+	// apostrophe.
+	const cleaned = expansion.replace(/[A-Za-z][’']$/u, '').trim();
+	out[abbr] = cleaned;
+}
 ```
 
 - [ ] **Step 4: Pass**
@@ -2018,6 +2026,7 @@ git commit -m "fix(data): strip trailing apostrophe-letter artifact in abbreviat
 ### Task L3: Real Libre Baskerville italic via self-hosted font
 
 **Files:**
+
 - Add: `static/fonts/LibreBaskerville-Italic.woff2`
 - Modify: `src/app.html`
 - Modify: `src/app.css`

@@ -4,14 +4,16 @@
 // both sides to a non-breaking space, including the tag-adjacent case
 // like «<i>X</i>» which has no whitespace at all.
 export function normalizeGuillemets(html: string): string {
-	return html
-		// Collapse any whitespace right after « into a single NBSP.
-		.replace(/«[ \t ]*/g, '« ')
-		// Collapse any whitespace right before » into a single NBSP.
-		.replace(/[ \t ]*»/g, ' »')
-		// Tag-adjacent: «<tag> and </tag>» have no whitespace to match above.
-		.replace(/«(<[^>]+>)/g, '« $1')
-		.replace(/(<\/[^>]+>)»/g, '$1 »');
+	return (
+		html
+			// Collapse any whitespace right after « into a single NBSP.
+			.replace(/«[ \t ]*/g, '« ')
+			// Collapse any whitespace right before » into a single NBSP.
+			.replace(/[ \t ]*»/g, ' »')
+			// Tag-adjacent: «<tag> and </tag>» have no whitespace to match above.
+			.replace(/«(<[^>]+>)/g, '« $1')
+			.replace(/(<\/[^>]+>)»/g, '$1 »')
+	);
 }
 
 // Strip the leading/trailing colon markers that the upstream JSON wraps
@@ -53,9 +55,7 @@ export function capitalizeFirstWord(html: string): string {
 // rewritten to "Mt 5:37" if the previous ref started with "Mt ...".
 const BOOK_PREFIX_RE = /^([1-3]\s*)?[A-ZÉÈÊÂÄÔÎÏÜÇ][a-zéèêâäôîïüç]+/;
 
-export function mergeBibleRefContinuations(
-	refs: { text: string }[]
-): { text: string }[] {
+export function mergeBibleRefContinuations(refs: { text: string }[]): { text: string }[] {
 	const out: { text: string }[] = [];
 	let lastBook: string | null = null;
 	for (const r of refs) {
@@ -99,10 +99,7 @@ export function fixCccParaSourceTypos(parts: RawTreeNode[]): void {
 					if (c.type === 'paragraph' && c.number === 2275) {
 						c.number = 2775;
 						if (c.text_html) {
-							c.text_html = c.text_html.replace(
-								'Maître et modèle',
-								'Maître et Modèle'
-							);
+							c.text_html = c.text_html.replace('Maître et modèle', 'Maître et Modèle');
 						}
 					}
 				}

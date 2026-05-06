@@ -59,14 +59,17 @@
 							>
 								<span class="font-body text-[16px] text-foreground group-hover:text-accent">
 									{e.term}
-									{#if e.latin}<span class="text-muted italic text-[13px] ml-1"
-											>({e.latin})</span
+									{#if e.latin}<span class="text-muted italic text-[13px] ml-1">({e.latin})</span
 										>{/if}
 								</span>
 								<span class="flex-1 border-b border-dotted border-border self-end mb-1"></span>
 								<span class="font-ui text-[12px] text-muted tabular-nums flex-none">
 									{#if e.totalRefs > 0}
-										{e.totalRefs} {e.totalRefs > 1 ? 'renvois' : 'renvoi'}{#if e.seeAlso?.length}<span aria-hidden="true">{' • '}</span>{e.seeAlso.length} {e.seeAlso.length > 1 ? 'liens' : 'lien'}{/if}
+										{e.totalRefs}
+										{e.totalRefs > 1 ? 'renvois' : 'renvoi'}{#if e.seeAlso?.length}<span
+												aria-hidden="true">{' • '}</span
+											>{e.seeAlso.length}
+											{e.seeAlso.length > 1 ? 'liens' : 'lien'}{/if}
 									{:else if e.seeAlso?.length}
 										{e.seeAlso.length} {e.seeAlso.length > 1 ? 'liens' : 'lien'}
 									{:else}

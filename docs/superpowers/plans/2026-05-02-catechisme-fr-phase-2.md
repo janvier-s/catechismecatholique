@@ -7,6 +7,7 @@
 **Architecture:** Two new top-level navigation surfaces — a cascading 3-column "Catéchisme" mega-menu in the TopBar (quick jumps) and a persistent expandable sidebar (deep browsing). The sidebar takes over chapter-outline duties on chapter pages, so we have one nav surface, not two competing. Study panel is **slide-in only** — triggered by clicking inline refs, slides from the right, ESC/click-outside to close. Linkify is a Svelte action attached to the reader root; the existing `ParagraphRenderer` post-processing extends to add click handlers and tooltip data attributes.
 
 **Tech Stack:**
+
 - Same as Phase 1: SvelteKit 2 + Svelte 5 (runes-only), TypeScript strict, Tailwind CSS 3, Cloudflare Pages.
 - New: `parse5` for XHTML parsing of source XHTML files (already installed in Phase 1).
 - No new runtime deps.
@@ -125,6 +126,7 @@ Sections E–I cover the work, organized for shippable milestones:
 ### Task E1: Build cited-by index
 
 **Files:**
+
 - Create: `scripts/prepare/cited-by.ts`
 - Modify: `scripts/prepare-data.ts` (wire it in)
 - Test: `tests/unit/prepare/cited-by.test.ts`
@@ -155,9 +157,7 @@ describe('buildCitedBy', () => {
 	});
 
 	it('skips refs to nonexistent paragraphs (and warns)', () => {
-		const paragraphs = new Map<number, { cross_refs: string[] }>([
-			[1, { cross_refs: ['99999'] }]
-		]);
+		const paragraphs = new Map<number, { cross_refs: string[] }>([[1, { cross_refs: ['99999'] }]]);
 		const result = buildCitedBy(paragraphs);
 		expect(result[99999]).toBeUndefined();
 		// 99999 is not a known paragraph → entry is dropped
@@ -206,10 +206,10 @@ npm run test:unit -- cited-by.test.ts
 ```ts
 import { buildCitedBy } from './prepare/cited-by.ts';
 
-	logStep('building cited-by');
-	const citedBy = buildCitedBy(paragraphs);
-	writeFileSync(join(OUT, 'ccc/cited-by.json'), JSON.stringify(citedBy));
-	endStep(`${Object.keys(citedBy).length} paragraphs cited`);
+logStep('building cited-by');
+const citedBy = buildCitedBy(paragraphs);
+writeFileSync(join(OUT, 'ccc/cited-by.json'), JSON.stringify(citedBy));
+endStep(`${Object.keys(citedBy).length} paragraphs cited`);
 ```
 
 - [ ] **Step 6: Run prepare-data; verify**
@@ -233,6 +233,7 @@ git commit -m "feat: invert cross_refs into ccc/cited-by.json"
 ### Task E2: First-word capitalization fix in paragraph text
 
 **Files:**
+
 - Create: `scripts/prepare/source-data-fixes.ts`
 - Modify: `scripts/prepare/paragraphs.ts` (apply fix)
 - Test: `tests/unit/prepare/source-data-fixes.test.ts`
@@ -255,15 +256,15 @@ describe('capitalizeFirstWord', () => {
 	});
 
 	it('skips into the first text inside a leading <span> wrapper', () => {
-		expect(
-			capitalizeFirstWord('<span>saint Paul affirme</span>')
-		).toBe('<span>Saint Paul affirme</span>');
+		expect(capitalizeFirstWord('<span>saint Paul affirme</span>')).toBe(
+			'<span>Saint Paul affirme</span>'
+		);
 	});
 
 	it('skips through multiple opening tags', () => {
-		expect(
-			capitalizeFirstWord('<span><i>« saint Paul »</i></span>')
-		).toBe('<span><i>« Saint Paul »</i></span>');
+		expect(capitalizeFirstWord('<span><i>« saint Paul »</i></span>')).toBe(
+			'<span><i>« Saint Paul »</i></span>'
+		);
 	});
 
 	it('leaves already-capitalized text alone', () => {
@@ -332,7 +333,7 @@ import { capitalizeFirstWord } from './source-data-fixes';
 out.set(node.number, {
 	corpus: 'ccc',
 	number: node.number,
-	text_html: capitalizeFirstWord(node.text_html ?? ''),  // CHANGED
+	text_html: capitalizeFirstWord(node.text_html ?? '') // CHANGED
 	// ...rest unchanged
 });
 ```
@@ -358,6 +359,7 @@ git commit -m "feat: capitalize first letter of paragraph text_html"
 ### Task E3: Bible-ref continuation merge (recurring source bug, §2153 is one example)
 
 **Files:**
+
 - Modify: `scripts/prepare/source-data-fixes.ts` (add a new function)
 - Modify: `scripts/prepare/paragraphs.ts` (apply fix)
 - Test: `tests/unit/prepare/source-data-fixes.test.ts` (extend)
@@ -372,18 +374,12 @@ import { mergeBibleRefContinuations } from '../../../scripts/prepare/source-data
 describe('mergeBibleRefContinuations', () => {
 	it('inherits book from previous when missing', () => {
 		const refs = [{ text: 'Mt 5:33-34' }, { text: '5:37' }];
-		expect(mergeBibleRefContinuations(refs)).toEqual([
-			{ text: 'Mt 5:33-34' },
-			{ text: 'Mt 5:37' }
-		]);
+		expect(mergeBibleRefContinuations(refs)).toEqual([{ text: 'Mt 5:33-34' }, { text: 'Mt 5:37' }]);
 	});
 
 	it('handles full books with no continuation', () => {
 		const refs = [{ text: 'Mt 5:33' }, { text: 'Lc 6:4' }];
-		expect(mergeBibleRefContinuations(refs)).toEqual([
-			{ text: 'Mt 5:33' },
-			{ text: 'Lc 6:4' }
-		]);
+		expect(mergeBibleRefContinuations(refs)).toEqual([{ text: 'Mt 5:33' }, { text: 'Lc 6:4' }]);
 	});
 
 	it('preserves a leading entry that itself has no book (rare; passes through)', () => {
@@ -454,6 +450,7 @@ git commit -m "feat: inherit book name in continuation bible_refs (§2153 fix)"
 ### Task E4: Sidebar store + minimal Sidebar component
 
 **Files:**
+
 - Create: `src/lib/stores/sidebar.ts`
 - Create: `src/lib/components/ui/Sidebar.svelte`
 - Create: `src/lib/components/ui/SidebarItem.svelte`
@@ -556,7 +553,9 @@ if (browser) {
 		scrollbar-color: color-mix(in srgb, var(--color-accent) 50%, transparent)
 			color-mix(in srgb, var(--color-border) 40%, transparent);
 	}
-	.styled-scroll::-webkit-scrollbar { width: 6px; }
+	.styled-scroll::-webkit-scrollbar {
+		width: 6px;
+	}
 	.styled-scroll::-webkit-scrollbar-thumb {
 		background: color-mix(in srgb, var(--color-accent) 50%, transparent);
 		border-radius: 3px;
@@ -627,6 +626,7 @@ git commit -m "feat: persistent sidebar scaffold with toggle in TopBar"
 ### Task E5: Sidebar — full hierarchy + auto-expand active branch
 
 **Files:**
+
 - Modify: `src/lib/components/ui/Sidebar.svelte`
 - Create: `src/lib/components/ui/SidebarItem.svelte`
 
@@ -764,32 +764,40 @@ The sidebar shows the full hierarchy. On chapter pages, the active chapter is au
 					number: part.number,
 					typeLabel: 'Partie',
 					href: `/ccc/${part.slug}`,
-					children: part.sections.map((section): Item => ({
-						title: section.title,
-						number: section.number,
-						typeLabel: 'Section',
-						href: `/ccc/${part.slug}/${section.slug}`,
-						children: [
-							...section.chapters.map((chapter): Item => ({
-								title: chapter.title,
-								number: chapter.number,
-								typeLabel: 'Chapitre',
-								href: `/ccc/${part.slug}/${section.slug}/${chapter.slug}`,
-								children: chapter.articles.map((article): Item => ({
-									title: article.title,
-									number: article.number,
-									typeLabel: 'Article',
-									href: `/ccc/${part.slug}/${section.slug}/${chapter.slug}/${article.slug}`
-								}))
-							})),
-							...(section.articles_direct ?? []).map((article): Item => ({
-								title: article.title,
-								number: article.number,
-								typeLabel: 'Article',
-								href: `/ccc/${article.paragraphs[0]}-${article.paragraphs[article.paragraphs.length - 1]}`
-							}))
-						]
-					}))
+					children: part.sections.map(
+						(section): Item => ({
+							title: section.title,
+							number: section.number,
+							typeLabel: 'Section',
+							href: `/ccc/${part.slug}/${section.slug}`,
+							children: [
+								...section.chapters.map(
+									(chapter): Item => ({
+										title: chapter.title,
+										number: chapter.number,
+										typeLabel: 'Chapitre',
+										href: `/ccc/${part.slug}/${section.slug}/${chapter.slug}`,
+										children: chapter.articles.map(
+											(article): Item => ({
+												title: article.title,
+												number: article.number,
+												typeLabel: 'Article',
+												href: `/ccc/${part.slug}/${section.slug}/${chapter.slug}/${article.slug}`
+											})
+										)
+									})
+								),
+								...(section.articles_direct ?? []).map(
+									(article): Item => ({
+										title: article.title,
+										number: article.number,
+										typeLabel: 'Article',
+										href: `/ccc/${article.paragraphs[0]}-${article.paragraphs[article.paragraphs.length - 1]}`
+									})
+								)
+							]
+						})
+					)
 				};
 			});
 		})();
@@ -812,8 +820,12 @@ The sidebar shows the full hierarchy. On chapter pages, the active chapter is au
 {/if}
 
 <style>
-	.styled-scroll { scrollbar-width: thin; }
-	.styled-scroll::-webkit-scrollbar { width: 6px; }
+	.styled-scroll {
+		scrollbar-width: thin;
+	}
+	.styled-scroll::-webkit-scrollbar {
+		width: 6px;
+	}
 	.styled-scroll::-webkit-scrollbar-thumb {
 		background: color-mix(in srgb, var(--color-accent) 50%, transparent);
 		border-radius: 3px;
@@ -866,6 +878,7 @@ git commit -m "feat: full hierarchical sidebar with auto-expand on active branch
 ### Task E6: Drop ChapterOutline on chapter pages (sidebar takes over)
 
 **Files:**
+
 - Modify: `src/lib/components/ccc/CCCReader.svelte`
 - Modify (or delete): `src/lib/components/ccc/ChapterOutline.svelte`
 
@@ -942,6 +955,7 @@ git commit -m "refactor: sidebar replaces ChapterOutline; one nav surface"
 ### Task F1: CatechismDropdown component
 
 **Files:**
+
 - Create: `src/lib/components/ui/CatechismDropdown.svelte`
 - Modify: `src/lib/components/ui/TopBar.svelte`
 
@@ -958,7 +972,13 @@ A 3-column mega-menu opened from the "Catéchisme" link in the TopBar. Column 1:
 
 	type Chapter = { slug: string; title: string; number?: number };
 	type Section = { slug: string; title: string; number?: number; chapters: Chapter[] };
-	type Part = { slug: string; title: string; number?: number; prologue?: boolean; sections: Section[] };
+	type Part = {
+		slug: string;
+		title: string;
+		number?: number;
+		prologue?: boolean;
+		sections: Section[];
+	};
 
 	let parts: Part[] = $state([]);
 	let activePart: Part | null = $state(null);
@@ -1151,11 +1171,10 @@ git commit -m "feat: cascading 3-column Catéchisme dropdown in TopBar"
 
 **Important execution order:** Section G's linkify pipeline (G2) makes inline bible refs into clickable links to `/bible/...`. That requires the `bibleBookSlug.ts` utility from Task H1. **Run Task H1 before G2** (or reorder to: E → H1 → F → G → H2-H4 → I). The plan keeps H1 in section H for narrative grouping, but H1 has no other dependencies and can ship at any time.
 
-
-
 ### Task G1: studyPanel store + StudyPanel component (slide-in shell)
 
 **Files:**
+
 - Create: `src/lib/stores/studyPanel.ts`
 - Create: `src/lib/components/panels/StudyPanel.svelte`
 - Modify: `src/routes/+layout.svelte`
@@ -1221,11 +1240,7 @@ export function closePanel(): void {
 </script>
 
 {#if $studyPanel.open}
-	<div
-		class="fixed inset-0 z-40 bg-black/30"
-		onclick={closePanel}
-		role="presentation"
-	></div>
+	<div class="fixed inset-0 z-40 bg-black/30" onclick={closePanel} role="presentation"></div>
 	<aside
 		class="fixed top-0 right-0 h-full w-[420px] max-w-[92vw] bg-panel border-l border-border shadow-xl z-50 flex flex-col"
 		role="dialog"
@@ -1313,6 +1328,7 @@ git commit -m "feat: study panel slide-in shell with 5 tabs"
 ### Task G2: Linkify pipeline — clickable refs (inline + sup) → panel + bible hub
 
 **Files:**
+
 - Modify: `src/lib/components/ccc/ParagraphRenderer.svelte` (add click handlers + make inline bible refs into `<a>`)
 - Modify: `src/lib/components/ccc/ParagraphView.svelte` (pass paragraph number)
 
@@ -1402,10 +1418,7 @@ The existing component already inlines non-"voir" bible refs as text via `sup.re
 					const closeParen = txt.lastIndexOf(')');
 					if (closeParen >= 0) {
 						prev.nodeValue =
-							txt.slice(0, closeParen) +
-							' ; ' +
-							formatBibleRef(ref.raw) +
-							txt.slice(closeParen);
+							txt.slice(0, closeParen) + ' ; ' + formatBibleRef(ref.raw) + txt.slice(closeParen);
 						sup.remove();
 					}
 				}
@@ -1501,7 +1514,7 @@ import { test, expect } from '@playwright/test';
 test('clicking a §NNN ref opens the panel on the cross-refs tab', async ({ page }) => {
 	await page.goto('/ccc/27');
 	await page.locator('sup.srcRef.cccRef').first().click();
-	await expect(page.getByRole('dialog', { name: 'Panneau d\'étude' })).toBeVisible();
+	await expect(page.getByRole('dialog', { name: "Panneau d'étude" })).toBeVisible();
 	// 'Renvois' button should be active
 });
 
@@ -1509,7 +1522,7 @@ test('panel closes on Escape', async ({ page }) => {
 	await page.goto('/ccc/27');
 	await page.locator('sup.srcRef.cccRef').first().click();
 	await page.keyboard.press('Escape');
-	await expect(page.getByRole('dialog', { name: 'Panneau d\'étude' })).not.toBeVisible();
+	await expect(page.getByRole('dialog', { name: "Panneau d'étude" })).not.toBeVisible();
 });
 ```
 
@@ -1526,6 +1539,7 @@ git commit -m "feat: clicking inline §/bible refs opens the study panel"
 ### Task G3: Tab content components — Bible, Renvois, Cités par, En Bref
 
 **Files:**
+
 - Create: `src/lib/components/panels/TabBibleRefs.svelte`
 - Create: `src/lib/components/panels/TabCrossRefs.svelte`
 - Create: `src/lib/components/panels/TabCitedBy.svelte`
@@ -1683,9 +1697,7 @@ export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, numb
 	{#if !context?.chapter}
 		<p class="text-muted italic">Pas d'En Bref disponible.</p>
 	{:else}
-		<p class="text-muted">
-			Voir l'En Bref dans le chapitre :
-		</p>
+		<p class="text-muted">Voir l'En Bref dans le chapitre :</p>
 		<p class="mt-2">
 			<a
 				href={`/ccc/${context.part.slug}/${context.section!.slug}/${context.chapter.slug}#en-bref`}
@@ -1744,6 +1756,7 @@ git commit -m "feat: study panel tabs — Bible, Renvois, Cités par, En Bref"
 ### Task G4: Sources index + Sources tab
 
 **Files:**
+
 - Create: `scripts/prepare/sources-index.ts`
 - Modify: `scripts/prepare-data.ts`
 - Test: `tests/unit/prepare/sources-index.test.ts`
@@ -1857,14 +1870,14 @@ In `prepare-data.ts`:
 import { parseSourceTable } from './prepare/sources-index.ts';
 import { readdirSync } from 'node:fs';
 
-	logStep('parsing sources index');
-	const sourcesDir = join(SOURCES, 'thematic_cross-refs/index_citations');
-	const sourceFiles = readdirSync(sourcesDir).filter((f) => f.endsWith('.xhtml'));
-	const sourceEntries = sourceFiles.flatMap((f) =>
-		parseSourceTable(readFileSync(join(sourcesDir, f), 'utf8'))
-	);
-	writeFileSync(join(OUT, 'ccc/sources-index.json'), JSON.stringify(sourceEntries, null, 2));
-	endStep(`${sourceEntries.length} entries`);
+logStep('parsing sources index');
+const sourcesDir = join(SOURCES, 'thematic_cross-refs/index_citations');
+const sourceFiles = readdirSync(sourcesDir).filter((f) => f.endsWith('.xhtml'));
+const sourceEntries = sourceFiles.flatMap((f) =>
+	parseSourceTable(readFileSync(join(sourcesDir, f), 'utf8'))
+);
+writeFileSync(join(OUT, 'ccc/sources-index.json'), JSON.stringify(sourceEntries, null, 2));
+endStep(`${sourceEntries.length} entries`);
 ```
 
 - [ ] **Step 5: Write `loadSourcesIndex` loader**
@@ -1906,7 +1919,9 @@ export interface SourceEntry {
 		if (!ctx) return;
 		(async () => {
 			const p = await loadParagraph(ctx.paragraph);
-			refs = p.magisterial_refs.filter((r) => r.type === 'magisterial' || r.type === 'patristic' || r.type === 'liturgical');
+			refs = p.magisterial_refs.filter(
+				(r) => r.type === 'magisterial' || r.type === 'patristic' || r.type === 'liturgical'
+			);
 		})();
 	});
 </script>
@@ -1954,11 +1969,13 @@ git commit -m "feat: sources index parser + Sources panel tab"
 ### Task H1: Bible book name registry
 
 **Files:**
+
 - Create: `scripts/prepare/bible-book-names.ts`
 - Create: `src/lib/utils/bibleBookSlug.ts`
 - Test: `tests/unit/utils/bibleBookSlug.test.ts`
 
 USFX uses 3-letter book IDs (GEN, EXO, MAT). We need:
+
 - French display name (Genèse, Exode, Matthieu)
 - URL slug (genese, exode, matthieu)
 - The CCC's notation often uses French abbreviations (Mt, Lc, Gn) — we need to recognize those too.
@@ -2104,6 +2121,7 @@ git commit -m "feat: bible book name + slug registry"
 ### Task H2: `/bible/` book grid
 
 **Files:**
+
 - Create: `src/routes/bible/+page.ts`, `+page.svelte`
 - Create: `src/lib/components/bible/BookGrid.svelte`
 
@@ -2114,7 +2132,10 @@ import { BOOKS } from '$lib/utils/bibleBookSlug';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
-	const ot = BOOKS.slice(0, BOOKS.findIndex((b) => b.usfx === 'MAT'));
+	const ot = BOOKS.slice(
+		0,
+		BOOKS.findIndex((b) => b.usfx === 'MAT')
+	);
 	const nt = BOOKS.slice(BOOKS.findIndex((b) => b.usfx === 'MAT'));
 	return { ot, nt };
 };
@@ -2193,6 +2214,7 @@ git commit -m "feat: /bible/ book grid (OT + NT)"
 ### Task H3: `/bible/[book]` chapter grid + `/bible/[book]/[ch]` verse list
 
 **Files:**
+
 - Create: `src/params/biblebook.ts`
 - Create: `src/routes/bible/[book=biblebook]/+page.ts`, `+page.svelte`
 - Create: `src/routes/bible/[book=biblebook]/[ch]/+page.ts`, `+page.svelte`
@@ -2318,12 +2340,14 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	<nav class="mb-6 font-ui text-sm">
 		<a href="/bible" class="text-muted hover:text-accent">Bible</a>
 		<span class="mx-2 text-subtle">›</span>
-		<a href="/bible/{data.book.slug}" class="text-muted hover:text-accent">{data.book.frenchName}</a>
+		<a href="/bible/{data.book.slug}" class="text-muted hover:text-accent">{data.book.frenchName}</a
+		>
 		<span class="mx-2 text-subtle">›</span>
 		<span class="font-semibold">Chapitre {data.chapter}</span>
 	</nav>
 	<h1 class="font-ui text-3xl font-bold mb-8">
-		{data.book.frenchName} {data.chapter}
+		{data.book.frenchName}
+		{data.chapter}
 	</h1>
 	<VerseList bookSlug={data.book.slug} chapter={data.chapter} verses={data.verses} />
 </main>
@@ -2334,7 +2358,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
 ```svelte
 <script lang="ts">
 	type Verse = { v: number; text: string; cccCitations: number[] };
-	let { bookSlug, chapter, verses }: { bookSlug: string; chapter: number; verses: Verse[] } = $props();
+	let { bookSlug, chapter, verses }: { bookSlug: string; chapter: number; verses: Verse[] } =
+		$props();
 </script>
 
 <ol class="space-y-2 font-body text-base leading-relaxed">
@@ -2388,6 +2413,7 @@ git commit -m "feat: /bible/[book] chapter grid and /bible/[book]/[ch] verse lis
 ### Task H4: `/bible/[book]/[ch]/[v]` — single verse → CCC citations
 
 **Files:**
+
 - Create: `src/routes/bible/[book=biblebook]/[ch]/[v]/+page.ts`, `+page.svelte`
 - Create: `src/lib/components/bible/VerseToCccList.svelte`
 
@@ -2444,13 +2470,15 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head><title>{data.book.frenchName} {data.chapter}, {data.verse} — Bible</title></svelte:head>
+<svelte:head><title>{data.book.frenchName} {data.chapter}, {data.verse} — Bible</title></svelte:head
+>
 
 <main class="mx-auto max-w-reader px-6 py-10">
 	<nav class="mb-6 font-ui text-sm">
 		<a href="/bible" class="text-muted hover:text-accent">Bible</a>
 		<span class="mx-2 text-subtle">›</span>
-		<a href="/bible/{data.book.slug}" class="text-muted hover:text-accent">{data.book.frenchName}</a>
+		<a href="/bible/{data.book.slug}" class="text-muted hover:text-accent">{data.book.frenchName}</a
+		>
 		<span class="mx-2 text-subtle">›</span>
 		<a href="/bible/{data.book.slug}/{data.chapter}" class="text-muted hover:text-accent"
 			>Chapitre {data.chapter}</a
@@ -2459,7 +2487,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		<span class="font-semibold">Verset {data.verse}</span>
 	</nav>
 	<h1 class="font-ui text-2xl font-bold mb-2">
-		{data.book.frenchName} {data.chapter}, {data.verse}
+		{data.book.frenchName}
+		{data.chapter}, {data.verse}
 	</h1>
 	<blockquote class="border-l-4 border-accent pl-4 my-6 italic text-lg">
 		{data.text}
@@ -2502,6 +2531,7 @@ git commit -m "feat: /bible/[book]/[ch]/[v] verse → citing CCC paragraphs"
 ### Task I1: `/ccc/[part]/[section]/[chapter]/[article]` filtered article view
 
 **Files:**
+
 - Create: `src/routes/ccc/[part]/[section]/[chapter]/[article]/+page.ts`, `+page.svelte`
 
 The article view is the chapter view filtered to only that article's paragraphs (with the article title as the page header). Reuses `ParagraphView` for rendering.

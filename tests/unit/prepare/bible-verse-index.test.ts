@@ -37,11 +37,7 @@ describe('buildBibleVerseIndex', () => {
 	});
 
 	it('dedupes and sorts paragraphs', () => {
-		const merged = buildBibleVerseIndex(
-			NCL,
-			{ 'Jn 1:14': [461, 423, 461] },
-			BOOKS
-		);
+		const merged = buildBibleVerseIndex(NCL, { 'Jn 1:14': [461, 423, 461] }, BOOKS);
 		expect(merged['JHN']!['1']!['14']).toEqual([423, 461]);
 	});
 });

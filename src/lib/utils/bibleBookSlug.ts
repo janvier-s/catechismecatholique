@@ -64,8 +64,18 @@ export const BOOKS: BookInfo[] = [
 	{ usfx: 'EPH', slug: 'ephesiens', frenchName: 'Éphésiens', abbrs: ['Ep', 'Eph'] },
 	{ usfx: 'PHP', slug: 'philippiens', frenchName: 'Philippiens', abbrs: ['Ph', 'Phil'] },
 	{ usfx: 'COL', slug: 'colossiens', frenchName: 'Colossiens', abbrs: ['Col'] },
-	{ usfx: '1TH', slug: '1-thessaloniciens', frenchName: '1 Thessaloniciens', abbrs: ['1 Th', '1 Thess'] },
-	{ usfx: '2TH', slug: '2-thessaloniciens', frenchName: '2 Thessaloniciens', abbrs: ['2 Th', '2 Thess'] },
+	{
+		usfx: '1TH',
+		slug: '1-thessaloniciens',
+		frenchName: '1 Thessaloniciens',
+		abbrs: ['1 Th', '1 Thess']
+	},
+	{
+		usfx: '2TH',
+		slug: '2-thessaloniciens',
+		frenchName: '2 Thessaloniciens',
+		abbrs: ['2 Th', '2 Thess']
+	},
 	{ usfx: '1TI', slug: '1-timothee', frenchName: '1 Timothée', abbrs: ['1 Tm', '1 Tim'] },
 	{ usfx: '2TI', slug: '2-timothee', frenchName: '2 Timothée', abbrs: ['2 Tm', '2 Tim'] },
 	{ usfx: 'TIT', slug: 'tite', frenchName: 'Tite', abbrs: ['Tt', 'Titus'] },

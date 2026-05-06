@@ -6,7 +6,11 @@
 	let fontDropdownOpen = $state(false);
 	let fontSectionEl: HTMLElement | undefined = $state();
 	let fontTriggerEl: HTMLButtonElement | undefined = $state();
-	let fontMenuPos: { top: number; left: number; width: number } = $state({ top: 0, left: 0, width: 0 });
+	let fontMenuPos: { top: number; left: number; width: number } = $state({
+		top: 0,
+		left: 0,
+		width: 0
+	});
 
 	function positionFontMenu() {
 		if (!fontTriggerEl) return;
@@ -103,9 +107,7 @@
 </script>
 
 <div class="font-ui text-sm">
-	<div
-		class="flex border-b border-border mb-5 -mx-4 px-4 sticky top-0 z-10 bg-panel"
-	>
+	<div class="flex border-b border-border mb-5 -mx-4 px-4 sticky top-0 z-10 bg-panel">
 		{#each [{ id: 'text' as const, label: 'Texte' }, { id: 'reading' as const, label: 'Lecture' }, { id: 'notes' as const, label: 'Notes' }] as tab (tab.id)}
 			<button
 				type="button"
@@ -123,7 +125,9 @@
 	{#if activeTab === 'text'}
 		<div class="space-y-5">
 			<label class="block">
-				<span class="block mb-2 text-muted text-[13px]">Taille du texte&nbsp;: {$prefs.fontSize}px</span>
+				<span class="block mb-2 text-muted text-[13px]"
+					>Taille du texte&nbsp;: {$prefs.fontSize}px</span
+				>
 				<input
 					type="range"
 					min="13"
@@ -184,9 +188,8 @@
 						>
 							<div class="theme-card-inner">
 								<div class="flex items-baseline gap-[3px] mb-[5px]">
-									<span
-										class="font-body text-[15px] leading-none font-bold"
-										style="color: {t.fg};">A</span
+									<span class="font-body text-[15px] leading-none font-bold" style="color: {t.fg};"
+										>A</span
 									>
 									<span
 										class="block h-[1.5px] flex-1 rounded-full"
@@ -196,7 +199,8 @@
 								<div class="space-y-[3px]">
 									<span class="block h-[1.5px] rounded-full" style="background: {t.lines};"></span>
 									<span class="block h-[1.5px] rounded-full" style="background: {t.lines};"></span>
-									<span class="block h-[1.5px] w-[70%] rounded-full" style="background: {t.lines};"></span>
+									<span class="block h-[1.5px] w-[70%] rounded-full" style="background: {t.lines};"
+									></span>
 								</div>
 							</div>
 						</button>

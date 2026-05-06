@@ -83,10 +83,7 @@ export interface ChapterAdjacent {
  * Eyebrow labels for chapter-footer navigation. Section/Partie are feminine
  * in French ("Section précédente"); Chapitre is masculine ("Chapitre précédent").
  */
-export const ADJACENT_LABEL: Record<
-	'prev' | 'next',
-	Record<ChapterAdjacent['kind'], string>
-> = {
+export const ADJACENT_LABEL: Record<'prev' | 'next', Record<ChapterAdjacent['kind'], string>> = {
 	prev: {
 		chapter: '← Chapitre précédent',
 		section: '← Section précédente',

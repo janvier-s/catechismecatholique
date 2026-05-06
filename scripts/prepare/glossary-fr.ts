@@ -273,10 +273,7 @@ function parseSeeAlso(text: string): string[] | null {
 }
 
 function letterFor(term: string): string {
-	const stripped = term
-		.normalize('NFD')
-		.replace(/[̀-ͯ]/g, '')
-		.toUpperCase();
+	const stripped = term.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase();
 	const m = stripped.match(/[A-Z]/);
 	return m ? m[0] : '?';
 }
@@ -297,9 +294,7 @@ export function parseGlossaryFr(xmlByFile: Map<string, string>): GlossaryFrEntry
 			if (n.tagName !== 'p' || !hasClass(n, 'level2_para')) continue;
 
 			// Headword text is the FIRST typo_smallcaps span in the paragraph.
-			const head = [...iter(n)].find(
-				(x) => x.tagName === 'span' && hasClass(x, 'typo_smallcaps')
-			);
+			const head = [...iter(n)].find((x) => x.tagName === 'span' && hasClass(x, 'typo_smallcaps'));
 			if (!head) continue;
 			const rawTerm = textOf(head).replace(/\s+/g, ' ').trim();
 			if (!rawTerm) continue;

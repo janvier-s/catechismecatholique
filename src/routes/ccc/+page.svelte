@@ -12,7 +12,9 @@
 </svelte:head>
 
 <main class="mx-auto max-w-4xl px-6 py-10 md:py-16">
-	<h1 class="font-heading text-[2.25rem] sm:text-5xl md:text-6xl font-semibold mb-3 md:mb-4 leading-[1.08]">
+	<h1
+		class="font-heading text-[2.25rem] sm:text-5xl md:text-6xl font-semibold mb-3 md:mb-4 leading-[1.08]"
+	>
 		Catéchisme de l'Église Catholique
 	</h1>
 	<p class="text-base md:text-lg text-muted mb-8 md:mb-12">

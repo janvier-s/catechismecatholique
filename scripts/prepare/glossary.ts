@@ -19,12 +19,7 @@
 import { parseGlossaryEn, type GlossaryEnEntry } from './glossary-en.ts';
 import { parseGlossaryFr, type GlossaryFrEntry } from './glossary-fr.ts';
 import { EN_OVERLAY, type EnOverlay } from './glossary-en-overlay.ts';
-import {
-	CLUSTERS,
-	clusterFor,
-	type Cluster,
-	type ClusterId
-} from './glossary-clusters.ts';
+import { CLUSTERS, clusterFor, type Cluster, type ClusterId } from './glossary-clusters.ts';
 import { GLOSSARY_EXTRAS } from './glossary-extras.ts';
 
 export interface GlossaryEntry {
@@ -81,10 +76,7 @@ function dedupSort(ns: number[]): number[] {
 	return [...new Set(ns)].sort((a, b) => a - b);
 }
 
-export function buildGlossary(
-	enXml: string,
-	frXmlByFile: Map<string, string>
-): GlossaryBundle {
+export function buildGlossary(enXml: string, frXmlByFile: Map<string, string>): GlossaryBundle {
 	const enRaw = parseGlossaryEn(enXml);
 	const fr = parseGlossaryFr(frXmlByFile);
 
@@ -125,10 +117,7 @@ export function buildGlossary(
 			}
 		}
 		const subLabels = f.subEntries.map((s) => s.label);
-		const allRefs = dedupSort([
-			...f.directRefs,
-			...f.subEntries.flatMap((s) => s.refs)
-		]);
+		const allRefs = dedupSort([...f.directRefs, ...f.subEntries.flatMap((s) => s.refs)]);
 		const totalRefs = f.directRefs.length + f.subEntries.reduce((a, s) => a + s.refs.length, 0);
 		const clusters = resolveClusters(f.term, subLabels, clusterOverride);
 		out.push({
@@ -178,10 +167,7 @@ export function buildGlossary(
 	for (const x of GLOSSARY_EXTRAS) {
 		if (existingByNorm.has(normCompare(x.term))) continue;
 		const slug = uniqueSlug(SLUG_FALLBACK(x.slug || x.term), slugUsed);
-		const allRefs = dedupSort([
-			...x.directRefs,
-			...x.subEntries.flatMap((s) => s.refs)
-		]);
+		const allRefs = dedupSort([...x.directRefs, ...x.subEntries.flatMap((s) => s.refs)]);
 		const totalRefs = x.directRefs.length + x.subEntries.reduce((a, s) => a + s.refs.length, 0);
 		out.push({
 			slug,

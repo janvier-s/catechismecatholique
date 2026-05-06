@@ -41,18 +41,12 @@ describe('capitalizeFirstWord', () => {
 describe('mergeBibleRefContinuations', () => {
 	it('inherits book from previous when missing', () => {
 		const refs = [{ text: 'Mt 5:33-34' }, { text: '5:37' }];
-		expect(mergeBibleRefContinuations(refs)).toEqual([
-			{ text: 'Mt 5:33-34' },
-			{ text: 'Mt 5:37' }
-		]);
+		expect(mergeBibleRefContinuations(refs)).toEqual([{ text: 'Mt 5:33-34' }, { text: 'Mt 5:37' }]);
 	});
 
 	it('handles full books with no continuation', () => {
 		const refs = [{ text: 'Mt 5:33' }, { text: 'Lc 6:4' }];
-		expect(mergeBibleRefContinuations(refs)).toEqual([
-			{ text: 'Mt 5:33' },
-			{ text: 'Lc 6:4' }
-		]);
+		expect(mergeBibleRefContinuations(refs)).toEqual([{ text: 'Mt 5:33' }, { text: 'Lc 6:4' }]);
 	});
 
 	it('passes through a leading entry that itself has no book', () => {

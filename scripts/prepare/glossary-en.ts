@@ -116,9 +116,7 @@ export function parseGlossaryEn(xml: string): GlossaryEnEntry[] {
 
 		if (id) {
 			// New entry. Lemma = bold span text, ending in ":"
-			const boldNode = [...iter(node)].find(
-				(n) => n.tagName === 'span' && hasClass(n, 'NEW_BOLD')
-			);
+			const boldNode = [...iter(node)].find((n) => n.tagName === 'span' && hasClass(n, 'NEW_BOLD'));
 			if (!boldNode) continue;
 			const rawLemma = textOf(boldNode).replace(/:\s*$/, '').trim();
 			if (!rawLemma) continue;
