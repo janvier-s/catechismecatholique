@@ -22,10 +22,10 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# Generated data (rebuilt by prepare-data) — covers both the directory
-# and the symlink form (and any iCloud-collision duplicate like
-# "static/data 2") used by bin/use-local-data-cache.sh
-/static/data
+# Generated data — committed so CI / Cloudflare Pages builds work without
+# the per-developer source symlinks. `npm run prepare-data` rebuilds it
+# locally; the result is tracked. Only the iCloud-collision sibling
+# (e.g. "static/data 2") used by bin/use-local-data-cache.sh stays ignored.
 /static/data?*
 
 # Brainstorming local artifacts

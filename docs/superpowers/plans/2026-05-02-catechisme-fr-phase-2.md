@@ -37,7 +37,7 @@ The same MCP servers as Phase 1 — `svelte`, `context7`, `playwright`. **Use th
 Phase 2 adds:
 
 ```
-lecatechisme/
+catechismecatholique/
 ├── scripts/prepare/
 │   ├── cited-by.ts              # invert cross_refs → paragraph → [citers]
 │   ├── sources-index.ts         # parse index_citations XHTML → sources index
@@ -468,7 +468,7 @@ This task scaffolds the sidebar **without the full hierarchy** — just a placeh
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-const KEY = 'lecatechisme.sidebar.open';
+const KEY = 'catechismecatholique.sidebar.open';
 const initial = browser
 	? localStorage.getItem(KEY) === '0'
 		? false

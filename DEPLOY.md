@@ -41,16 +41,16 @@ Either via CLI (recommended — wrangler is already in `devDependencies`):
 
 ```bash
 npx wrangler login                         # one-time browser OAuth
-npx wrangler pages project create lecatechisme --production-branch=main
+npx wrangler pages project create catechismecatholique --production-branch=main
 ```
 
 …or via the dashboard: **Workers & Pages → Create application → Pages →
-Direct Upload**, name it `lecatechisme`.
+Direct Upload**, name it `catechismecatholique`.
 
 > Don't use the dashboard's **Connect to Git** option — the deploy workflow in
 > this repo handles the GitHub side itself, and the two paths would conflict.
 
-The project name (`lecatechisme`) is what goes into the `CF_PAGES_PROJECT`
+The project name (`catechismecatholique`) is what goes into the `CF_PAGES_PROJECT`
 secret. Pick a different name if you want — just keep it consistent with the
 secret.
 
@@ -96,7 +96,7 @@ Save the resulting token string — Cloudflare only shows it once.
 ```bash
 gh secret set CLOUDFLARE_API_TOKEN          # paste the token from step 5
 gh secret set CLOUDFLARE_ACCOUNT_ID         # paste the ID from step 2
-gh secret set CF_PAGES_PROJECT --body lecatechisme
+gh secret set CF_PAGES_PROJECT --body catechismecatholique
 ```
 
 Or via the UI: <https://github.com/janvier-s/catechismecatholique/settings/secrets/actions>.
@@ -109,12 +109,12 @@ Push any commit, or run the workflow manually:
 gh workflow run Deploy
 ```
 
-Once green, the site is live at `https://lecatechisme.pages.dev` (or whatever
+Once green, the site is live at `https://catechismecatholique.pages.dev` (or whatever
 project name you chose).
 
 ### 8. Custom domain
 
-In the dashboard: **Pages → lecatechisme → Custom domains → Set up custom
+In the dashboard: **Pages → catechismecatholique → Custom domains → Set up custom
 domain → `catechismecatholique.fr`**. Cloudflare auto-creates the DNS record
 and provisions the cert. A few minutes later the apex serves the site.
 

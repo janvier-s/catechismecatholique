@@ -28,7 +28,7 @@
 		<script>
 			(function () {
 				try {
-					var stored = localStorage.getItem('lecatechisme.theme');
+					var stored = localStorage.getItem('catechismecatholique.theme');
 					var allowed = ['auto', 'light', 'sepia', 'dark', 'oled'];
 					var theme = stored && allowed.indexOf(stored) >= 0 ? stored : 'auto';
 					document.documentElement.setAttribute('data-theme', theme);

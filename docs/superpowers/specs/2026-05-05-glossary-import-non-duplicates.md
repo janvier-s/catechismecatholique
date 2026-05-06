@@ -4,7 +4,7 @@ Date: 2026-05-05
 
 Source: `/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/DOCTRINA/sources/ccc_ascension/bm_index.xhtml`
 
-French glossary: `/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/lecatechisme/.svelte-kit/cloudflare/data/ccc/glossary.json`
+French glossary: `/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/catechismecatholique/.svelte-kit/cloudflare/data/ccc/glossary.json`
 
 ## Summary
 

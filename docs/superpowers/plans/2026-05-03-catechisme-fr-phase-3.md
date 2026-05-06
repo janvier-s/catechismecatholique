@@ -1307,7 +1307,7 @@ npx wrangler kv namespace create SEARCH_INDEX
 Output looks like:
 
 ```
-🌀 Creating namespace with title "lecatechisme-SEARCH_INDEX"
+🌀 Creating namespace with title "catechismecatholique-SEARCH_INDEX"
 ✨ Add the following to your configuration file:
 [[kv_namespaces]]
 binding = "SEARCH_INDEX"
@@ -1786,7 +1786,7 @@ The current input is `disabled`. We enable it, listen to keypress / submit, run 
 - [ ] **Step 1: Read the current input block**
 
 ```bash
-grep -n 'type="search"' "/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/lecatechisme/src/lib/components/ui/TopBar.svelte"
+grep -n 'type="search"' "/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/catechismecatholique/src/lib/components/ui/TopBar.svelte"
 ```
 
 Confirm the input is in a `<div class="hidden lg:block w-full max-w-[460px]">` wrapper.
@@ -1895,7 +1895,7 @@ Currently in Sidebar.svelte's `tree` derived block, articles directly under a se
 - [ ] **Step 1: Locate the block**
 
 ```bash
-grep -n 'articles_direct' "/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/lecatechisme/src/lib/components/ui/Sidebar.svelte"
+grep -n 'articles_direct' "/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/catechismecatholique/src/lib/components/ui/Sidebar.svelte"
 ```
 
 Expected: hits in the `tree` derived block, around the `.map((article): Item => ({ … href: \`/ccc/${article.paragraphs[0]}-…\` }))` segment.

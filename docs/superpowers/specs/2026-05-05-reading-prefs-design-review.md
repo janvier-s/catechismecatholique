@@ -39,7 +39,7 @@ The popover is organised into three tabs:
 - Master checkbox `Masquer toutes les notes`.
 - Indented under a left rule, four sub-checkboxes: `Renvois (§)`, `Réfs. bibliques en ligne`, `Réfs. bibliques en exposant`, `Sources`.
 
-Persistence: `prefs` writable store, mirrored into `localStorage['lecatechisme.prefs']`, also written to the `<html>` element as `data-*` attributes and CSS custom properties (`--reader-font-size`, `--reader-line-height`, `--font-body`). No keyboard shortcut to open/close the panel.
+Persistence: `prefs` writable store, mirrored into `localStorage['catechismecatholique.prefs']`, also written to the `<html>` element as `data-*` attributes and CSS custom properties (`--reader-font-size`, `--reader-line-height`, `--font-body`). No keyboard shortcut to open/close the panel.
 
 ---
 

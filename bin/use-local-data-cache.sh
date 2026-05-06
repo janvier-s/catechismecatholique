@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Symlink static/data → ~/Library/Caches/lecatechisme/data so generated
+# Symlink static/data → ~/Library/Caches/catechismecatholique/data so generated
 # JSON survives iCloud Drive's "Optimize Mac Storage" eviction.
 #
 # Background: this project lives under ~/Library/Mobile Documents/com~apple~CloudDocs/...
@@ -15,7 +15,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-TARGET="$HOME/Library/Caches/lecatechisme/data"
+TARGET="$HOME/Library/Caches/catechismecatholique/data"
 LINK="$ROOT/static/data"
 
 mkdir -p "$TARGET"

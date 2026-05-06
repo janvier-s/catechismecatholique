@@ -36,6 +36,37 @@ async function main() {
 	const start = performance.now();
 	logHeader('prepare-data');
 
+	// Validate sources BEFORE wiping the output directory. CI environments
+	// (and fresh clones without per-developer source symlinks) won't have
+	// these files; in that case, if generated data is already on disk we use
+	// it as-is and skip the rebuild. Only error if neither sources nor
+	// generated data exist.
+	logStep('checking sources');
+	const expected = [
+		'ccc_paras_processed.json',
+		'ccc_bible_index_clean.json',
+		'ccc_cross_refs_bidirectional.json',
+		'sigles.xhtml',
+		'toc.ncx',
+		'thematic_cross-refs',
+		'ncl/francl_usfx.xml'
+	];
+	const missing = expected.filter((f) => !existsSync(join(SOURCES, f)));
+	if (missing.length > 0) {
+		const hasGeneratedData =
+			existsSync(join(OUT, 'ccc/structure.json')) &&
+			existsSync(join(OUT, 'ccc/paragraphs')) &&
+			readdirSync(join(OUT, 'ccc/paragraphs')).length > 0;
+		if (hasGeneratedData) {
+			console.log(
+				`prepare-data: source files missing (${missing.join(', ')}), but generated data exists at ${OUT} — skipping rebuild.`
+			);
+			return;
+		}
+		assert(false, `missing source: ${missing[0]}`);
+	}
+	endStep(`${expected.length} sources OK`);
+
 	// Wipe + recreate output dir. If OUT is a symlink (e.g. when
 	// bin/use-local-data-cache.sh has been used to escape iCloud
 	// eviction), preserve the link and clear its target's contents
@@ -52,22 +83,6 @@ async function main() {
 	mkdirSync(join(OUT, 'ccc/chapters'), { recursive: true });
 	mkdirSync(join(OUT, 'ccc/guide-de-lecture'), { recursive: true });
 	mkdirSync(join(OUT, 'bible'), { recursive: true });
-
-	// Validate sources exist
-	logStep('checking sources');
-	const expected = [
-		'ccc_paras_processed.json',
-		'ccc_bible_index_clean.json',
-		'ccc_cross_refs_bidirectional.json',
-		'sigles.xhtml',
-		'toc.ncx',
-		'thematic_cross-refs',
-		'ncl/francl_usfx.xml'
-	];
-	for (const f of expected) {
-		assert(existsSync(join(SOURCES, f)), `missing source: ${f}`);
-	}
-	endStep(`${expected.length} sources OK`);
 
 	logStep('building structure');
 	const rawParts = JSON.parse(readFileSync(join(SOURCES, 'ccc_paras_processed.json'), 'utf8'));

@@ -91,9 +91,9 @@ round between phases.
 
 ## Deployment (Phase 1 D6 — owner action)
 
-- [ ] Create GitHub repo `lecatechisme`, push current branch
+- [ ] Create GitHub repo `catechismecatholique`, push current branch
 - [ ] Cloudflare Pages → connect to repo, set build command `npm run build`,
       output dir `.svelte-kit/cloudflare`, env `NODE_VERSION=20`
 - [ ] Verify preview URL serves the site end-to-end
-- [ ] When `lecatechisme.fr` registration succeeds: nameservers → Cloudflare,
+- [ ] When `catechismecatholique.fr` registration succeeds: nameservers → Cloudflare,
       add custom domain in Pages, TLS auto-provisions

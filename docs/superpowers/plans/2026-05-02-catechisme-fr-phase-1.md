@@ -59,10 +59,10 @@ The following MCP servers and agents are available. **Use them rather than relyi
 
 ## File Structure
 
-Phase 1 establishes this layout in the `lecatechisme/` directory:
+Phase 1 establishes this layout in the `catechismecatholique/` directory:
 
 ```
-lecatechisme/
+catechismecatholique/
 ├── package.json
 ├── pnpm-lock.yaml (or package-lock.json)
 ├── svelte.config.js
@@ -198,12 +198,12 @@ lecatechisme/
 **Files:**
 
 - Create: entire project skeleton via `npm create`
-- Create: `lecatechisme/.gitignore`
+- Create: `catechismecatholique/.gitignore`
 
-- [ ] **Step 1: cd into the lecatechisme directory and initialize git**
+- [ ] **Step 1: cd into the catechismecatholique directory and initialize git**
 
 ```bash
-cd "/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/lecatechisme"
+cd "/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/catechismecatholique"
 git init
 git checkout -b main
 ```
@@ -622,7 +622,7 @@ git commit -m "feat: add npmrc, README, gitignore CLAUDE.md, lint/format config"
 - [ ] **Step 1: Create `wrangler.toml`**
 
 ```toml
-name = "lecatechisme"
+name = "catechismecatholique"
 compatibility_date = "2026-05-01"
 pages_build_output_dir = ".svelte-kit/cloudflare"
 
@@ -673,8 +673,8 @@ git commit -m "feat: add Cloudflare Pages configuration"
 - [ ] **Step 6: Manual step — push to GitHub and connect Cloudflare Pages**
 
 ```bash
-# After creating an empty repo at github.com/<user>/lecatechisme:
-git remote add origin git@github.com:<user>/lecatechisme.git
+# After creating an empty repo at github.com/<user>/catechismecatholique:
+git remote add origin git@github.com:<user>/catechismecatholique.git
 git push -u origin main
 ```
 
@@ -3667,7 +3667,7 @@ In `<head>`, before `%sveltekit.head%`:
 <script>
 	(function () {
 		try {
-			var stored = localStorage.getItem('lecatechisme.theme');
+			var stored = localStorage.getItem('catechismecatholique.theme');
 			var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 			document.documentElement.setAttribute('data-theme', theme);
 		} catch (e) {}
@@ -3682,7 +3682,7 @@ import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
 export type Theme = 'light' | 'dark';
-const KEY = 'lecatechisme.theme';
+const KEY = 'catechismecatholique.theme';
 
 function readInitial(): Theme {
 	if (!browser) return 'light';
@@ -3809,7 +3809,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `	<url><loc>https://lecatechisme.fr${u}</loc></url>`).join('\n')}
+${urls.map((u) => `	<url><loc>https://catechismecatholique.fr${u}</loc></url>`).join('\n')}
 </urlset>`;
 
 	return new Response(xml, { headers: { 'content-type': 'application/xml' } });
@@ -3935,7 +3935,7 @@ git push origin main
 - Print stylesheet
 - Lighthouse ≥95 across the four scores
 - WCAG AA pass
-- Final domain wiring (`lecatechisme.fr` once registered)
+- Final domain wiring (`catechismecatholique.fr` once registered)
 - Build from spec §10–§13
 
 ---

@@ -48,8 +48,8 @@ const DEFAULTS: ReadingPrefs = {
 	crossRefsLayout: 'inline'
 };
 
-const KEY = 'lecatechisme.prefs';
-const PANEL_KEY = 'lecatechisme.panelWidth';
+const KEY = 'catechismecatholique.prefs';
+const PANEL_KEY = 'catechismecatholique.panelWidth';
 const DEFAULT_PANEL_WIDTH = '420px';
 
 function readInitial(): ReadingPrefs {
@@ -58,7 +58,7 @@ function readInitial(): ReadingPrefs {
 		const raw = localStorage.getItem(KEY);
 		if (!raw) {
 			// Migrate legacy theme key, if present.
-			const legacyTheme = localStorage.getItem('lecatechisme.theme') as Theme | null;
+			const legacyTheme = localStorage.getItem('catechismecatholique.theme') as Theme | null;
 			return {
 				...DEFAULTS,
 				theme: legacyTheme && THEMES.includes(legacyTheme) ? legacyTheme : DEFAULTS.theme

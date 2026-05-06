@@ -3,7 +3,7 @@
 # Requires three repository secrets:
 #   CLOUDFLARE_API_TOKEN  — token with "Pages: Edit" + "Account.Workers KV: Edit"
 #   CLOUDFLARE_ACCOUNT_ID — the Cloudflare account ID
-#   CF_PAGES_PROJECT      — the Pages project name (e.g. "lecatechisme")
+#   CF_PAGES_PROJECT      — the Pages project name (e.g. "catechismecatholique")
 #
 # PR deploys post their preview URL as a comment. Main deploys publish to the
 # production alias.

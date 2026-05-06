@@ -1072,7 +1072,7 @@ git commit -m "feat: add concordance chapter, manifest, and by-paragraph loaders
 
 ## Section U — UI Components
 
-For each component in this section, **before writing any code**, READ the corresponding DR Fathers file to understand the exact pattern. The lecatechisme version simplifies (no author filter, no prose body, single-source data) but mirrors the structure.
+For each component in this section, **before writing any code**, READ the corresponding DR Fathers file to understand the exact pattern. The catechismecatholique version simplifies (no author filter, no prose body, single-source data) but mirrors the structure.
 
 ### Task U1: ConcordancePericopeCard
 
@@ -1128,7 +1128,7 @@ git commit -m "feat: ConcordancePericopeCard for pericope chip display"
 
 **Files:** Create `src/lib/components/bible/concordance/ConcordancePericopePanel.svelte`.
 
-READ `FathersCommentaryPanel.svelte` first for the sticky-header + lazy-render + scroll-to-on-select pattern. The lecatechisme version drops: filter bar, IntersectionObserver lazy rendering (likely overkill at our scale — chapters have <30 pericopes), VerseTooltip, expand-all. Keeps: pericope sections with sticky headers, scroll-to-on-select.
+READ `FathersCommentaryPanel.svelte` first for the sticky-header + lazy-render + scroll-to-on-select pattern. The catechismecatholique version drops: filter bar, IntersectionObserver lazy rendering (likely overkill at our scale — chapters have <30 pericopes), VerseTooltip, expand-all. Keeps: pericope sections with sticky headers, scroll-to-on-select.
 
 - [ ] **Step 1: Write the component:**
 
@@ -1229,7 +1229,7 @@ git commit -m "feat: ConcordancePericopePanel right-pane with scroll-to-on-selec
 
 **Files:** Create `src/lib/components/bible/concordance/ConcordanceVerseList.svelte`.
 
-READ `FathersVerseList.svelte` for the pattern: pericope headers injected before the first verse of each pericope, badges per verse showing entry counts, click handlers for verse and pericope selection. The lecatechisme version drops: translation selector, `cleanVerseText`, smallcaps. Keeps: pericope header injection, badges, click selection.
+READ `FathersVerseList.svelte` for the pattern: pericope headers injected before the first verse of each pericope, badges per verse showing entry counts, click handlers for verse and pericope selection. The catechismecatholique version drops: translation selector, `cleanVerseText`, smallcaps. Keeps: pericope header injection, badges, click selection.
 
 - [ ] **Step 1: Write the component:**
 

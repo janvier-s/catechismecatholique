@@ -34,7 +34,7 @@
 		if (data.q && data.q.trim().length >= 2) pushRecent(data.q.trim());
 	});
 
-	const RECENT_KEY = 'lecatechisme:recent-searches';
+	const RECENT_KEY = 'catechismecatholique:recent-searches';
 	const MAX_RECENTS = 5;
 
 	function readRecents(): string[] {
