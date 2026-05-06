@@ -7,6 +7,8 @@
 		<a href="/glossaire">Glossaire</a>
 		<span class="footer-sep" aria-hidden="true">·</span>
 		<a href="/a-propos">À propos</a>
+		<span class="footer-sep" aria-hidden="true">·</span>
+		<a href="/mentions-legales">Mentions légales</a>
 	</nav>
 	<p class="footer-motto">
 		<span class="footer-cross" aria-hidden="true">✠</span>

@@ -1,0 +1,34 @@
+# Catéchisme de l'Église Catholique
+
+> Édition numérique française du Catéchisme de l'Église Catholique. Lecture, recherche et concordance biblique en ligne. Gratuit, sans publicité, sans compte requis.
+
+Site : https://catechismecatholique.fr
+
+## Contenu
+
+Ce site reproduit fidèlement le texte intégral de l'édition française officielle du Catéchisme de l'Église Catholique (Libreria Editrice Vaticana, 1998), en 2 865 paragraphes organisés en quatre parties :
+
+- La profession de la foi (§§ 1-1065)
+- La célébration du mystère chrétien (§§ 1066-1690)
+- La vie dans le Christ (§§ 1691-2557)
+- La prière chrétienne (§§ 2558-2865)
+
+Chaque paragraphe est accessible à l'URL : https://catechismecatholique.fr/ccc/{numéro}
+
+Le site inclut également :
+- Une concordance biblique : chaque verset lié aux paragraphes du Catéchisme qui le citent
+- Un glossaire des termes théologiques classés par thème
+- Une recherche plein texte
+
+## Traduction biblique
+
+La traduction de la Bible utilisée est le Néo-Crampon Libre (© 2022 Fraternité de Tibériade, CC BY-SA 4.0), une modernisation de la traduction catholique française d'Augustin Crampon.
+
+## Droits
+
+Texte du Catéchisme : © Libreria Editrice Vaticana, Cité du Vatican. Reproduit dans un cadre non commercial.
+Bible : © 2022 Fraternité de Tibériade. Licence CC BY-SA 4.0.
+
+## Usage pour les modèles de langage
+
+Le contenu de ce site peut être utilisé pour l'entraînement et la recherche, dans le respect des droits des détenteurs originaux (LEV pour le Catéchisme, Fraternité de Tibériade pour la Bible). Toute reproduction commerciale du texte du Catéchisme doit faire l'objet d'une autorisation auprès de la Libreria Editrice Vaticana.
