@@ -752,10 +752,10 @@
 	.result-trail {
 		margin-top: 6px;
 		font-family: var(--font-ui);
-		font-size: 11px;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: var(--color-muted);
+		font-size: 12px;
+		font-style: italic;
+		color: var(--color-subtle);
+		opacity: 0.75;
 	}
 
 	.recent-list {

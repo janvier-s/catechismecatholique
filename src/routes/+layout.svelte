@@ -23,8 +23,8 @@
 	});
 
 	// Close the StudyPanel when its context becomes irrelevant: leaving the
-	// /ccc reading surface, or entering a Bible concordance view (which has
-	// its own resizable right pane and shouldn't render two panels at once).
+	// /ccc or /bible reading surfaces, or entering a Bible concordance view
+	// (which has its own resizable right pane and shouldn't render two panels).
 	afterNavigate(({ from, to }) => {
 		if (!from || !to) return;
 		const fromPath = from.url.pathname;
@@ -32,9 +32,11 @@
 
 		const fromOnCcc = fromPath.startsWith('/ccc');
 		const toOnCcc = toPath.startsWith('/ccc');
+		const fromOnBible = fromPath.startsWith('/bible');
+		const toOnBible = toPath.startsWith('/bible');
 		const toOnConcordance = /\/bible\/[^/]+\/\d+\/concordance/.test(toPath);
 
-		if ((fromOnCcc && !toOnCcc) || toOnConcordance) {
+		if ((fromOnCcc && !toOnCcc) || (fromOnBible && !toOnBible) || toOnConcordance) {
 			if (get(studyPanel).open) closePanel();
 		}
 	});

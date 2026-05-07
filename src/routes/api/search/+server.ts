@@ -70,6 +70,39 @@ function applyPhraseBoost<T extends Record<string, unknown>>(results: T[], token
 	return [...phraseHits, ...rest];
 }
 
+// Position-aware re-rank: a paragraph that opens with the query term is almost
+// always about it; one where the term appears 800 chars in usually isn't. We
+// scan each result for the first whole-word match of any query token and bump
+// the score by up to +50% when the match sits near the start, decaying
+// linearly over the first 200 characters. Headings are too short for this to
+// matter; the effect is concentrated on paragraph ordering, which is what BM25
+// alone tends to get wrong on a topical word like "eucharistie".
+function applyPositionBoost<T extends { text?: unknown; score: number }>(
+	results: T[],
+	tokens: string[]
+): T[] {
+	if (tokens.length === 0) return results;
+	const tokenSet = new Set(tokens.map((t) => stripDiacritics(t).toLowerCase()));
+	return results
+		.map((r) => {
+			const text = stripDiacritics(String(r.text ?? '')).toLowerCase();
+			if (!text) return r;
+			const re = /[\p{L}\p{N}]+/gu;
+			let earliest = -1;
+			let m: RegExpExecArray | null;
+			while ((m = re.exec(text)) !== null) {
+				if (tokenSet.has(m[0])) {
+					earliest = m.index;
+					break;
+				}
+			}
+			if (earliest < 0) return r;
+			const decay = Math.max(0, 1 - earliest / 200);
+			return { ...r, score: r.score * (1 + decay * 0.5) };
+		})
+		.sort((a, b) => b.score - a.score);
+}
+
 export const GET: RequestHandler = async ({ url, fetch }) => {
 	const q = (url.searchParams.get('q')?.trim() ?? '').slice(0, MAX_QUERY_LEN);
 	if (q.length < 2) return json({ q, hits: [] });
@@ -95,13 +128,25 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 	// words don't pull in unintended matches.
 	// Fuzzy is disabled: with the catechism's curated French vocabulary, even
 	// 1-edit fuzzy matches are too aggressive (e.g. `maitre`→`naitre`).
+	// Field weights: `text` carries the actual content (paragraph body, or
+	// heading line). `title` only carries the chapter title — that's ambient
+	// context, not what the document is about. Without this skew, every
+	// heading inside a chapter whose title contains the query gets a free
+	// boost, which is how off-topic section titles surfaced ahead of the
+	// canonical paragraphs (e.g. searching "eucharistie" pulled an unrelated
+	// heading 2177 above heading 1337).
 	const raw = ms.search(searchQ, {
 		combineWith: 'AND',
-		prefix: (term) => term.length >= 4
+		prefix: (term) => term.length >= 4,
+		boost: { text: 2, title: 0.3 }
 	});
 	// Cap server-side at 200 — enough to support a few "Voir plus" pages
 	// without overwhelming the client. The page paginates the visible slice.
-	const ranked = applyPhraseBoost(raw, tokens).slice(0, 200);
+	// Pipeline: BM25 → position boost → phrase boost. Position runs before
+	// phrase so within each phrase-or-not group, results are still ordered by
+	// position-adjusted score.
+	const positioned = applyPositionBoost(raw, tokens);
+	const ranked = applyPhraseBoost(positioned, tokens).slice(0, 200);
 	const hits: SearchResultDoc[] = ranked.map((r) => ({
 		id: r.id as string,
 		kind: r.kind as 'paragraph' | 'heading',

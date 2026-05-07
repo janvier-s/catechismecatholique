@@ -1,5 +1,19 @@
 import { test, expect } from '@playwright/test';
 
+// These tests click the §NNN cross-ref sups, which only render in the body
+// when crossRefsLayout = 'inline'. With the default switched to 'side', the
+// renderer moves them into the side margin and strips them from the prose.
+// Force inline layout so the inline-click code path is exercised regardless
+// of what the default happens to be.
+test.beforeEach(async ({ page }) => {
+	await page.addInitScript(() => {
+		localStorage.setItem(
+			'catechismecatholique.prefs',
+			JSON.stringify({ crossRefsLayout: 'inline' })
+		);
+	});
+});
+
 test('clicking a §NNN ref opens the study panel', async ({ page }) => {
 	await page.goto('/ccc/27');
 	// Wait for the post-process to finish (sup elements get cursor pointer + .lead class)
