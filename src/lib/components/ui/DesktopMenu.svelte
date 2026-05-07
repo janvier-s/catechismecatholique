@@ -92,11 +92,23 @@
 		aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
 		onclick={() => (open = !open)}
 	>
-		<span class="bars" class:is-open={open} aria-hidden="true">
-			<span class="bar"></span>
-			<span class="bar"></span>
-			<span class="bar"></span>
-		</span>
+		<svg
+			width="18"
+			height="18"
+			viewBox="0 0 18 18"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.4"
+			stroke-linecap="round"
+			aria-hidden="true"
+		>
+			<circle cx="2" cy="4" r="0.9" fill="currentColor" stroke="none" />
+			<circle cx="2" cy="9" r="0.9" fill="currentColor" stroke="none" />
+			<circle cx="2" cy="14" r="0.9" fill="currentColor" stroke="none" />
+			<line x1="6" y1="4" x2="16" y2="4" />
+			<line x1="6" y1="9" x2="16" y2="9" />
+			<line x1="6" y1="14" x2="16" y2="14" />
+		</svg>
 	</button>
 
 	{#if open}
@@ -146,52 +158,25 @@
 		background: color-mix(in srgb, var(--color-accent) 12%, transparent);
 		color: var(--color-accent);
 	}
-	.bars {
-		display: inline-flex;
-		flex-direction: column;
-		justify-content: center;
-		gap: 4px;
-		width: 18px;
-		height: 16px;
-	}
-	.bar {
-		display: block;
-		width: 100%;
-		height: 1.5px;
-		background: currentColor;
-		border-radius: 1px;
-		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	.bars.is-open .bar:nth-child(1) {
-		transform: translateY(5.5px) rotate(45deg);
-	}
-	.bars.is-open .bar:nth-child(2) {
-		opacity: 0;
-	}
-	.bars.is-open .bar:nth-child(3) {
-		transform: translateY(-5.5px) rotate(-45deg);
-	}
-
 	.desktop-menu-panel {
 		position: absolute;
 		right: 0;
-		top: calc(100% + 8px);
-		width: 320px;
+		top: calc(100% + 6px);
+		width: 280px;
 		background: var(--color-panel);
 		border: 1px solid var(--color-border);
-		border-radius: 6px;
-		box-shadow: 0 12px 32px -12px color-mix(in srgb, var(--color-fg) 28%, transparent);
-		padding: 0.85rem 0.5rem 0.6rem;
+		border-radius: 4px;
+		padding: 0.75rem 0;
 		z-index: var(--z-dropdown);
 	}
 	.menu-eyebrow {
 		font-family: var(--font-ui);
-		font-size: 0.62rem;
+		font-size: 0.6rem;
 		font-weight: 600;
-		letter-spacing: 0.22em;
+		letter-spacing: 0.24em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		margin: 0 0 0.4rem 0.65rem;
+		margin: 0 0 0.45rem 1.1rem;
 	}
 	.menu-list {
 		list-style: none;
@@ -201,31 +186,32 @@
 		flex-direction: column;
 	}
 	.menu-row {
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		padding: 0.55rem 0.75rem;
+		display: block;
+		padding: 0.5rem 1.1rem;
 		text-decoration: none;
 		color: var(--color-fg);
-		border-radius: 4px;
-		transition: background-color 120ms ease;
+		border-left: 2px solid transparent;
+		transition:
+			border-color 120ms ease,
+			color 120ms ease;
 	}
 	.menu-row:hover {
-		background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+		border-left-color: var(--color-accent);
+		color: var(--color-accent-text);
 	}
 	.menu-row-label {
+		display: block;
 		font-family: var(--font-heading);
 		font-size: 0.95rem;
 		font-weight: 600;
-		color: var(--color-fg);
-	}
-	.menu-row:hover .menu-row-label {
-		color: var(--color-accent-text);
+		color: inherit;
 	}
 	.menu-row-desc {
+		display: block;
 		font-family: var(--font-body);
-		font-size: 0.78rem;
+		font-size: 0.76rem;
 		line-height: 1.4;
 		color: var(--color-subtle);
+		margin-top: 0.1rem;
 	}
 </style>

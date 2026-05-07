@@ -54,6 +54,26 @@
 
 	<p>Le monde francophone méritait mieux.</p>
 
+	<h2>Pourquoi étudier le Catéchisme ?</h2>
+
+	<figure class="why-study">
+		<img
+			src="/img/why-study-catechism-600.webp"
+			srcset="/img/why-study-catechism-600.webp 1x, /img/why-study-catechism-1200.webp 2x"
+			alt="Diagramme en croix des quatre parties du Catéchisme : Le Symbole des Apôtres (première partie), La célébration de la foi (deuxième partie, les sacrements), La vie dans le Christ (troisième partie, les commandements), La prière chrétienne (quatrième partie, le Notre Père) ; au centre, la Sainte Trinité, le Mystère pascal, le Christ et la personne humaine."
+			width="500"
+			height="450"
+			loading="lazy"
+		/>
+		<figcaption>Les quatre parties du Catéchisme, articulées autour du Christ.</figcaption>
+	</figure>
+
+	<ul class="why-study-list">
+		<li>Il enseigne la foi avec clarté, sans ambiguïté et dans son intégralité.</li>
+		<li>Il conduit au Christ et à la vie en Lui.</li>
+		<li>C'est un exposé sérieux, destiné à des adultes, d'une foi vivante pour notre temps.</li>
+	</ul>
+
 	<h2>De pape en pape</h2>
 
 	<p>
@@ -385,26 +405,6 @@
 		personnelles. Aucun compte n'est requis pour accéder à l'intégralité du contenu.
 	</p>
 
-	<h2>Pourquoi étudier le Catéchisme ?</h2>
-
-	<figure class="why-study">
-		<img
-			src="/img/why-study-catechism-600.webp"
-			srcset="/img/why-study-catechism-600.webp 1x, /img/why-study-catechism-1200.webp 2x"
-			alt="Diagramme en croix des quatre parties du Catéchisme : Le Symbole des Apôtres (première partie), La célébration de la foi (deuxième partie, les sacrements), La vie dans le Christ (troisième partie, les commandements), La prière chrétienne (quatrième partie, le Notre Père) ; au centre, la Sainte Trinité, le Mystère pascal, le Christ et la personne humaine."
-			width="500"
-			height="450"
-			loading="lazy"
-		/>
-		<figcaption>Les quatre parties du Catéchisme, articulées autour du Christ.</figcaption>
-	</figure>
-
-	<ul class="why-study-list">
-		<li>Il enseigne la foi avec clarté, sans ambiguïté et dans son intégralité.</li>
-		<li>Il conduit au Christ et à la vie en Lui.</li>
-		<li>C'est un exposé sérieux, destiné à des adultes, d'une foi vivante pour notre temps.</li>
-	</ul>
-
 	<h2>Une idée simple</h2>
 
 	<p>
@@ -585,6 +585,7 @@
 		max-width: 500px;
 		display: block;
 		margin: 0 auto;
+		border-radius: 12px;
 	}
 	.why-study figcaption {
 		font-family: var(--font-ui);
