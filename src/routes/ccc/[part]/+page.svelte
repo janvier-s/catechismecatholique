@@ -60,8 +60,24 @@
 				aria-haspopup="dialog"
 				onclick={() => (panoramaOpen = true)}
 			>
-				Voir le panorama
-				<span class="panorama-trigger-arrow" aria-hidden="true">→</span>
+				<svg
+					class="panorama-trigger-icon"
+					width="14"
+					height="14"
+					viewBox="0 0 16 16"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.4"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<rect x="1.5" y="1.5" width="6" height="6" rx="0.5" />
+					<rect x="8.5" y="1.5" width="6" height="6" rx="0.5" />
+					<rect x="1.5" y="8.5" width="6" height="6" rx="0.5" />
+					<rect x="8.5" y="8.5" width="6" height="6" rx="0.5" />
+				</svg>
+				<span>Panorama de cette partie</span>
 			</button>
 		</div>
 	{/if}
@@ -155,29 +171,28 @@
 		appearance: none;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.6rem;
-		padding: 0.7rem 1.4rem;
-		border: 1px solid var(--color-accent);
-		border-radius: 3px;
-		background: var(--color-accent);
-		color: #fff;
+		gap: 0.55rem;
+		padding: 0.55rem 0.95rem;
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
+		background: transparent;
+		color: var(--color-fg);
 		font-family: var(--font-ui);
-		font-size: 0.78rem;
+		font-size: 0.72rem;
 		font-weight: 600;
-		letter-spacing: 0.14em;
+		letter-spacing: 0.18em;
 		text-transform: uppercase;
 		cursor: pointer;
-		transition: background 150ms ease;
+		transition:
+			border-color 150ms ease,
+			color 150ms ease;
 	}
 	.panorama-trigger-btn:hover {
-		background: color-mix(in srgb, var(--color-accent) 85%, black);
+		color: var(--color-accent);
+		border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
 	}
-	.panorama-trigger-btn:hover .panorama-trigger-arrow {
-		transform: translateX(3px);
-	}
-	.panorama-trigger-arrow {
-		display: inline-block;
-		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	.panorama-trigger-icon {
+		flex: 0 0 auto;
 	}
 	@media (max-width: 640px) {
 		.panorama-trigger-row {
