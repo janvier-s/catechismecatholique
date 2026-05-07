@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { fly } from 'svelte/transition';
 	import { sidebarOpen } from '$lib/stores/sidebar';
 	import { activeHeading } from '$lib/stores/scrollSpy';
 	import { loadStructure, loadChapter, loadParagraphContext } from '$lib/data/loaders';
@@ -370,33 +369,53 @@
 	});
 </script>
 
-{#if $sidebarOpen}
-	<aside
-		class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] w-[320px] bg-panel border-r border-border z-20 flex-none flex-col"
-		transition:fly={{ x: -20, duration: 180 }}
-	>
-		<div class="flex items-center justify-between p-2 border-b border-border">
-			<span class="font-ui text-xs uppercase tracking-wider text-muted ml-2">Sommaire</span>
-			<button
-				type="button"
-				onclick={() => sidebarOpen.set(false)}
-				class="w-7 h-7 flex items-center justify-center rounded hover:bg-accent/10 text-muted hover:text-accent text-base leading-none"
-				aria-label="Fermer le sommaire"
-			>
-				✕
-			</button>
-		</div>
-		<nav
-			bind:this={navEl}
-			class="flex-1 overflow-y-auto p-3 font-ui styled-scroll styled-scroll-accent"
-			aria-label="Plan du Catéchisme"
-			style="scrollbar-gutter: stable;"
+<!--
+	Always rendered; visibility driven by html[data-sidebar='closed'] (set by
+	theme-init.js before paint and synced from the store on toggle). Avoids
+	the SSR/hydration mismatch that previously caused CLS 0.16.
+-->
+<aside
+	class="sidebar-rail hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] bg-panel border-r border-border z-20 flex-none flex-col"
+	aria-hidden={!$sidebarOpen}
+>
+	<div class="flex items-center justify-between p-2 border-b border-border">
+		<span class="font-ui text-xs uppercase tracking-wider text-muted ml-2">Sommaire</span>
+		<button
+			type="button"
+			onclick={() => sidebarOpen.set(false)}
+			class="w-7 h-7 flex items-center justify-center rounded hover:bg-accent/10 text-muted hover:text-accent text-base leading-none"
+			aria-label="Fermer le sommaire"
 		>
-			<ul class="space-y-0.5">
-				{#each tree as item (item.href)}
-					<SidebarItem {item} {activeHref} />
-				{/each}
-			</ul>
-		</nav>
-	</aside>
-{/if}
+			✕
+		</button>
+	</div>
+	<nav
+		bind:this={navEl}
+		class="flex-1 overflow-y-auto p-3 font-ui styled-scroll styled-scroll-accent"
+		aria-label="Plan du Catéchisme"
+		style="scrollbar-gutter: stable;"
+	>
+		<ul class="space-y-0.5">
+			{#each tree as item (item.href)}
+				<SidebarItem {item} {activeHref} />
+			{/each}
+		</ul>
+	</nav>
+</aside>
+
+<style>
+	/* Rail width is the source of truth for layout shift. SSR ships
+	   width: 320px; theme-init.js sets data-sidebar='closed' on <html>
+	   before first paint when the user has it closed, collapsing the rail
+	   to width: 0 from the very first frame. Toggle clicks animate via
+	   the CSS transition. */
+	.sidebar-rail {
+		width: 320px;
+		overflow: hidden;
+		transition: width 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	:global(html[data-sidebar='closed']) .sidebar-rail {
+		width: 0;
+		border-right-width: 0;
+	}
+</style>

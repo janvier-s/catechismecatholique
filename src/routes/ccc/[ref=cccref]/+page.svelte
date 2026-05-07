@@ -78,10 +78,10 @@
 
 <svelte:head>
 	{#if data.kind === 'paragraph'}
-		<title>§ {data.paragraph.number} | Catéchisme de l'Église Catholique</title>
+		<title>Paragraphe {data.paragraph.number} du Catéchisme de l'Église Catholique</title>
 		<meta name="description" content={paraExcerpt(data.paragraph.text_html)} />
 	{:else}
-		<title>§ {data.from}–{data.to} | Catéchisme de l'Église Catholique</title>
+		<title>Paragraphes {data.from}–{data.to} du Catéchisme de l'Église Catholique</title>
 		<meta
 			name="description"
 			content="Paragraphes {data.from}–{data.to} du Catéchisme de l'Église Catholique."
