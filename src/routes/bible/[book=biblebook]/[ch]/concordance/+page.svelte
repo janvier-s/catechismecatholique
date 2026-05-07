@@ -7,7 +7,7 @@
 
 <svelte:head>
 	<title
-		>{data.book.frenchName} {data.chapter} | Concordance | Catéchisme de l'Église Catholique</title
+		>{data.book.frenchName} {data.chapter}, concordance du Catéchisme de l'Église Catholique</title
 	>
 </svelte:head>
 

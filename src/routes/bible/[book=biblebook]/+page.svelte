@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head
-	><title>{data.book.frenchName} | Bible | Catéchisme de l'Église Catholique</title></svelte:head
+	><title>{data.book.frenchName} · Bible · Catéchisme de l'Église Catholique</title></svelte:head
 >
 
 <main class="mx-auto max-w-4xl px-6 py-10">

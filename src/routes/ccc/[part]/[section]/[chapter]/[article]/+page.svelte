@@ -59,7 +59,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.article.title} | Catéchisme de l'Église Catholique</title>
+	<title>{data.article.title} · Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
 		content={`${data.article.number ? `Article ${data.article.number} : ` : ''}${data.article.title} | ${data.chapter.title}. Catéchisme de l'Église Catholique.`}

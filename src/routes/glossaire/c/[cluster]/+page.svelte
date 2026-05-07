@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.cluster.label} | Glossaire | Catéchisme de l'Église Catholique</title>
+	<title>{data.cluster.label}, glossaire du Catéchisme de l'Église Catholique</title>
 	<meta name="description" content={data.cluster.description} />
 </svelte:head>
 

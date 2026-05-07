@@ -97,7 +97,7 @@
 </script>
 
 <svelte:head>
-	<title>Catéchisme de l'Église Catholique | Lire l'édition française complète</title>
+	<title>Catéchisme de l'Église Catholique · Lire l'édition française complète</title>
 	<meta
 		name="description"
 		content="Lisez le Catéchisme de l'Église Catholique en français : prologue, quatre parties, 2865 paragraphes. Recherche par mot-clé, référence biblique et thème."

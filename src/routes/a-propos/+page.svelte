@@ -3,12 +3,12 @@
 </script>
 
 <svelte:head>
-	<title>À propos · Catéchisme de l'Église Catholique</title>
+	<title>À propos du Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
 		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
-	<meta property="og:title" content="À propos · Catéchisme de l'Église Catholique" />
+	<meta property="og:title" content="À propos du Catéchisme de l'Église Catholique" />
 	<meta
 		property="og:description"
 		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."

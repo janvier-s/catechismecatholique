@@ -46,14 +46,14 @@
 </script>
 
 <svelte:head>
-	<title>Catéchisme de l'Église Catholique | Édition française définitive</title>
+	<title>Catéchisme de l'Église Catholique · Édition française définitive</title>
 	<meta
 		name="description"
 		content="Édition française définitive du Catéchisme de l'Église Catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème."
 	/>
 	<meta
 		property="og:title"
-		content="Catéchisme de l'Église Catholique | Édition française définitive"
+		content="Catéchisme de l'Église Catholique · Édition française définitive"
 	/>
 	<meta
 		property="og:description"
@@ -122,21 +122,17 @@
 		<!-- Daily paragraph -->
 		{#if data.paragraph}
 			<section class="daily reveal r-daily" aria-labelledby="daily-heading">
+				<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 				<div class="daily-row">
 					<a
 						href="/ccc/{data.dailyNumber}"
 						class="daily-mark"
 						aria-label="Lire le paragraphe {data.dailyNumber} dans son contexte"
 					>
-						<span class="section-mark">§</span>
 						<span class="section-num">{data.dailyNumber}</span>
 					</a>
 					<div class="daily-text">
-						<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 						<div class="prose-teaser">{@html teaserHtml}</div>
-						<a class="daily-link" href="/ccc/{data.dailyNumber}">
-							Lire le contexte <span aria-hidden="true">→</span>
-						</a>
 					</div>
 				</div>
 			</section>
@@ -285,29 +281,25 @@
 	}
 	.daily-mark {
 		display: flex;
-		align-items: baseline;
+		align-self: start;
 		gap: 0.35em;
 		font-family: var(--font-heading);
 		color: var(--color-accent);
 		text-decoration: none;
 		line-height: 1;
-		padding-top: 0.05em;
 		transition: color 120ms ease;
 	}
 	.daily-mark:hover {
 		color: var(--color-accent-text);
-	}
-	.section-mark {
-		font-size: 1.5rem;
-		font-weight: 400;
-		font-style: italic;
-		letter-spacing: -0.02em;
 	}
 	.section-num {
 		font-size: 1.2rem;
 		font-weight: 600;
 		letter-spacing: 0.01em;
 		font-variant-numeric: oldstyle-nums;
+		/* Align cap-height with the first line of prose-teaser
+		   (1rem * 1.7 line-height ≈ 1.7rem; nudge to visual cap top). */
+		margin-top: 0.32rem;
 	}
 
 	.daily-text {
@@ -328,21 +320,6 @@
 	   it can lay out as a paragraph and respect line-height. */
 	.prose-teaser :global(span) {
 		display: inline;
-	}
-	.daily-link {
-		display: inline-block;
-		margin-top: 0.85rem;
-		font-family: var(--font-ui);
-		font-size: 0.7rem;
-		font-weight: 500;
-		letter-spacing: 0.22em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		text-decoration: none;
-		transition: opacity 120ms ease;
-	}
-	.daily-link:hover {
-		opacity: 0.75;
 	}
 
 	/* Founding quotation — quiet epigraph with a small inked signature.
@@ -512,15 +489,14 @@
 		}
 		.daily-mark {
 			justify-content: center;
+			margin-top: 0;
 		}
 		.daily-text {
 			text-align: left;
 		}
-		.section-mark {
-			font-size: 1.9rem;
-		}
 		.section-num {
 			font-size: 1rem;
+			margin-top: 0;
 		}
 		.prose-teaser {
 			font-size: 0.95rem;

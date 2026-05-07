@@ -15,12 +15,12 @@
 </script>
 
 <svelte:head>
-	<title>{data.part.title} | Catéchisme de l'Église Catholique</title>
+	<title>{data.part.title} · Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
 		content={data.part.number
 			? `Partie ${data.part.number} : ${data.part.title}. ${data.part.sections.length} section${data.part.sections.length > 1 ? 's' : ''} | Catéchisme de l'Église Catholique.`
-			: `${data.part.title} | Catéchisme de l'Église Catholique.`}
+			: `${data.part.title} · Catéchisme de l'Église Catholique.`}
 	/>
 </svelte:head>
 

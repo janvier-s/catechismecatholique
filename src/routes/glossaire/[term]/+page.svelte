@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.entry.term} | Glossaire | Catéchisme de l'Église Catholique</title>
+	<title>{data.entry.term}, glossaire du Catéchisme de l'Église Catholique</title>
 	{#if data.entry.definition}
 		<meta name="description" content={data.entry.definition.slice(0, 160)} />
 	{/if}

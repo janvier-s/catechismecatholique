@@ -7,7 +7,7 @@
 <svelte:head
 	><title
 		>{data.book.frenchName}
-		{data.chapter}, {data.verse} | Bible | Catéchisme de l'Église Catholique</title
+		{data.chapter}, {data.verse} · Bible · Catéchisme de l'Église Catholique</title
 	></svelte:head
 >
 

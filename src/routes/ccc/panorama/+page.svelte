@@ -43,7 +43,7 @@
 </script>
 
 <svelte:head>
-	<title>Panorama | Catéchisme de l'Église Catholique</title>
+	<title>Panorama du Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
 		content="Panorama du Catéchisme de l'Église Catholique : prologue, quatre parties, sections, chapitres et articles vus d'un seul coup d'œil."

@@ -75,7 +75,7 @@
 </script>
 
 <svelte:head>
-	<title>Sommaire | Catéchisme de l'Église Catholique</title>
+	<title>Sommaire du Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
 		content="Table des matières complète du Catéchisme de l'Église Catholique : prologue, quatre parties, sections, chapitres et articles."
