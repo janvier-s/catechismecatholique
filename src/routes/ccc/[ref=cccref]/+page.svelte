@@ -89,7 +89,7 @@
 	{/if}
 </svelte:head>
 
-<main class="mx-auto max-w-reader px-6 py-10">
+<main class="mx-auto max-w-reader px-6 max-md:px-0 py-10">
 	{#if data.context}
 		{@const c = data.context}
 		<nav class="breadcrumb-rail mb-8 font-ui text-sm" aria-label="Fil d'Ariane">
