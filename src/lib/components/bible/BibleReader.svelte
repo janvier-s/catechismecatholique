@@ -123,15 +123,15 @@
 				{@const active = isVerseActive(v.v)}
 				<li id="v{v.v}" class="transition-opacity" class:dim={dimNonCited && c === 0}>
 					<div
-						class="verse-row flex gap-3 max-md:gap-2 rounded-md px-2 -mx-2 py-1 max-md:px-0 max-md:mx-0"
+						class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1 max-md:block max-md:gap-0 max-md:px-0 max-md:mx-0"
 						class:is-active={active}
 					>
 						<span
-							class="font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+							class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
 						>
 							{v.v}
 						</span>
-						<p class="font-body text-[18px] max-md:text-[15px] leading-[1.7] flex-1">
+						<p class="verse-text font-body text-[18px] max-md:text-[15px] leading-[1.7] flex-1">
 							{v.text}{#if c > 0}<VerseMarker
 									bookSlug={book.slug}
 									bookUsfx={book.usfx}
@@ -179,5 +179,19 @@
 	.verse-row:focus-visible {
 		outline: 2px solid var(--color-accent);
 		outline-offset: 2px;
+	}
+	/* Mobile: float the verse number so the verse text starts at the content
+	   edge (aligned with section headings). Continuation lines wrap below the
+	   short float and return to the left edge naturally. */
+	@media (max-width: 768px) {
+		.verse-row .verse-num {
+			float: left;
+			margin-right: 0.4em;
+			padding-top: 0;
+			line-height: 1.7;
+		}
+		.verse-row .verse-text {
+			margin: 0;
+		}
 	}
 </style>
