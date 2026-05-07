@@ -77,7 +77,8 @@
 	<h2>De pape en pape</h2>
 
 	<p>
-		Depuis sa promulgation en 1992, le Catéchisme a été recommandé par chaque successeur de Pierre.
+		Depuis sa promulgation en 1992, le Catéchisme a été recommandé par chaque successeur de Saint
+		Pierre.
 	</p>
 
 	<blockquote class="papal-quote">
