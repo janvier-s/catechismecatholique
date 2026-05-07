@@ -28,6 +28,10 @@ vite.config.ts.timestamp-*
 # (e.g. "static/data 2") used by bin/use-local-data-cache.sh stays ignored.
 /static/data?*
 
+# Negate any global ignore (e.g. `parts/`) for tracked compendium bundles.
+!/static/data/compendium/parts/
+!/static/data/compendium/parts/*.json
+
 # Brainstorming local artifacts
 .superpowers/
 
