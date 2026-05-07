@@ -151,10 +151,7 @@
 		background: var(--color-bg);
 		border: 1px solid var(--color-border);
 		border-radius: 8px;
-		box-shadow:
-			0 1px 0 color-mix(in srgb, var(--color-fg) 4%, transparent),
-			0 24px 70px -18px color-mix(in srgb, var(--color-fg) 38%, transparent),
-			0 8px 24px -12px color-mix(in srgb, var(--color-fg) 22%, transparent);
+		box-shadow: 0 6px 18px -10px rgba(0, 0, 0, 0.35);
 		display: flex;
 		flex-direction: column;
 		min-height: 0;
