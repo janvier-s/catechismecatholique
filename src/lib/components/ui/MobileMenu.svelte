@@ -79,6 +79,7 @@
 				{ href: '/ccc', label: 'Lire le Catéchisme' },
 				{ href: '/ccc/sommaire', label: 'Sommaire' },
 				{ href: '/ccc/panorama', label: 'Panorama' },
+				{ href: '/compendium', label: 'Compendium' },
 				{ href: '/glossaire', label: 'Glossaire' },
 				{ href: '/recherche', label: 'Recherche' }
 			]
