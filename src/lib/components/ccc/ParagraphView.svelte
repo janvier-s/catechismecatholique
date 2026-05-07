@@ -116,7 +116,10 @@
 		gap: 0.25rem 0.5rem;
 	}
 	.ccc-side-refs .cross-ref-link {
-		color: var(--color-accent);
+		/* Use the lighter accent variant — accent-text is tuned per theme to
+		   reach AA against the page background, while plain accent is tuned
+		   to be a bg colour with white text. */
+		color: var(--color-accent-text);
 		font-weight: 500;
 		white-space: nowrap;
 	}

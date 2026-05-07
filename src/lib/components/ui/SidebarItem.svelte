@@ -84,8 +84,7 @@
 		<a
 			href={item.href}
 			class="flex-1 py-1 px-1.5 rounded text-[13px] leading-snug hover:bg-accent/10 hover:text-accent"
-			class:bg-accent={isActive}
-			class:!text-white={isActive}
+			class:is-active={isActive}
 		>
 			{#if item.typeLabel}
 				<span class="font-semibold">
@@ -104,3 +103,16 @@
 		</ul>
 	{/if}
 </li>
+
+<style>
+	/* Slightly darker than the bare accent so white text clears WCAG AA
+	   (4.5:1) — the raw accent in dark/oled themes is too light for white
+	   foreground (Lighthouse measured 4.14:1). */
+	.is-active {
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
+		color: #fff !important;
+	}
+	.is-active:hover {
+		color: #fff !important;
+	}
+</style>
