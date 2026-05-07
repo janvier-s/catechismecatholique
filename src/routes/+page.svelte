@@ -43,15 +43,6 @@
 			}
 		})}</${'script'}>`
 	);
-
-	// The homepage is laid out to fit one screen at typical viewport heights.
-	// Hide the body scrollbar while it's mounted so a one-pixel overflow
-	// doesn't trigger a phantom track. The CSS below restores scroll for
-	// short viewports where the content genuinely won't fit.
-	$effect(() => {
-		document.body.classList.add('home-route');
-		return () => document.body.classList.remove('home-route');
-	});
 </script>
 
 <svelte:head>
@@ -100,29 +91,6 @@
 			</div>
 		</header>
 
-		<!-- Daily paragraph -->
-		{#if data.paragraph}
-			<section class="daily reveal r-daily" aria-labelledby="daily-heading">
-				<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
-				<div class="daily-row">
-					<a
-						href="/ccc/{data.dailyNumber}"
-						class="daily-mark"
-						aria-label="Lire le paragraphe {data.dailyNumber} dans son contexte"
-					>
-						<span class="section-mark">§</span>
-						<span class="section-num">{data.dailyNumber}</span>
-					</a>
-					<div class="daily-text">
-						<div class="prose-teaser">{@html teaserHtml}</div>
-						<a class="daily-link" href="/ccc/{data.dailyNumber}">
-							Lire le contexte <span aria-hidden="true">→</span>
-						</a>
-					</div>
-				</div>
-			</section>
-		{/if}
-
 		<!-- Founding quotation -->
 		<figure class="founding-quote reveal r-quote">
 			<blockquote>
@@ -149,6 +117,29 @@
 			</figcaption>
 		</figure>
 
+		<!-- Daily paragraph -->
+		{#if data.paragraph}
+			<section class="daily reveal r-daily" aria-labelledby="daily-heading">
+				<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
+				<div class="daily-row">
+					<a
+						href="/ccc/{data.dailyNumber}"
+						class="daily-mark"
+						aria-label="Lire le paragraphe {data.dailyNumber} dans son contexte"
+					>
+						<span class="section-mark">§</span>
+						<span class="section-num">{data.dailyNumber}</span>
+					</a>
+					<div class="daily-text">
+						<div class="prose-teaser">{@html teaserHtml}</div>
+						<a class="daily-link" href="/ccc/{data.dailyNumber}">
+							Lire le contexte <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</div>
+			</section>
+		{/if}
+
 		<!-- Secondary nav row -->
 		<nav class="nav-row reveal r-nav" aria-label="Navigation principale">
 			<a href="/ccc/sommaire">Sommaire</a>
@@ -170,37 +161,24 @@
 		position: relative;
 		min-height: calc(100vh - 80px);
 		min-height: calc(100dvh - 80px);
-		padding: clamp(0.75rem, 2vh, 2rem) 1.5rem clamp(2.25rem, 5vh, 3rem);
+		padding: clamp(2rem, 5vh, 3.5rem) 1.5rem clamp(3rem, 6vh, 4.5rem);
 		background: var(--color-bg);
 		color: var(--color-fg);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-start;
-		overflow: hidden;
 	}
 
-	/* Suppress the body scrollbar while the homepage is mounted. The layout
-	   is sized to fit one screen; if a one-pixel rounding pushes content past
-	   the viewport, no scrollbar appears. Short viewports below 600px tall
-	   restore scrolling so nothing gets clipped. */
-	:global(body.home-route) {
-		overflow-y: hidden;
-	}
-	@media (max-height: 600px) {
-		:global(body.home-route) {
-			overflow-y: auto;
-		}
-	}
 	.home-inner {
 		width: 100%;
 		max-width: 1100px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: clamp(0.85rem, 2vh, 1.75rem);
+		gap: clamp(2rem, 4vh, 3rem);
 		flex: 1;
-		justify-content: space-between;
+		justify-content: flex-start;
 	}
 
 	/* Title block ------------------------------------------------------- */

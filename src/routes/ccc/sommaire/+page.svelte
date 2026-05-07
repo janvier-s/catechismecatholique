@@ -711,20 +711,24 @@
 		}
 
 		.row {
-			gap: 0.4rem;
+			gap: 0.5rem;
+			flex-wrap: nowrap;
 		}
-		/* On narrow screens dot leaders get cramped — collapse, push range
-		   onto the next line instead. */
+		/* Dot leaders look cramped on narrow screens — drop them, but keep
+		   the range on the same line as the title (just on the right). */
 		.dotleader {
 			display: none;
 		}
-		.row {
-			flex-wrap: wrap;
+		.row-label {
+			flex: 1 1 auto;
+			min-width: 0;
 		}
 		.row-range {
-			width: 100%;
+			flex: 0 0 auto;
+			width: auto;
 			padding-left: 0;
 			font-size: 0.72rem;
+			white-space: nowrap;
 		}
 		.row-section {
 			font-size: 1.05rem;
