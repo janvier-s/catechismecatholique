@@ -66,7 +66,7 @@
 <!-- Chapter navigation bar — sticky below the global TopBar (80px). -->
 <ChapterNavBar {book} {chapter} {totalChapters} {chapterCounts} variant="reader" />
 
-<main class="mx-auto max-w-reader px-6 max-md:pl-6 max-md:pr-2 pt-8 max-md:pt-5 pb-16">
+<main class="mx-auto max-w-reader px-6 max-md:px-2 pt-8 max-md:pt-5 pb-16">
 	<article>
 		<header class="mb-10 text-center">
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">
@@ -151,10 +151,10 @@
 		aria-label="Chapitre précédent ou suivant"
 	>
 		{#if prevHref}
-			<a href={prevHref} class="text-accent hover:underline">← Chapitre {chapter - 1}</a>
+			<a href={prevHref} class="text-accent hover:underline whitespace-nowrap">← Chapitre {chapter - 1}</a>
 		{:else}<span></span>{/if}
 		{#if nextHref}
-			<a href={nextHref} class="text-accent hover:underline">Chapitre {chapter + 1} →</a>
+			<a href={nextHref} class="text-accent hover:underline whitespace-nowrap">Chapitre {chapter + 1} →</a>
 		{:else}<span></span>{/if}
 	</nav>
 </main>
@@ -180,25 +180,19 @@
 		outline: 2px solid var(--color-accent);
 		outline-offset: 2px;
 	}
-	/* Mobile: hang the verse number in the 1.5rem left gutter (main pl-6)
-	   so verse text starts at the content edge, aligned with section headings. */
+	/* Mobile: number inline so verse text wraps back to the left edge,
+	   aligning with section headings. No gutter needed. */
 	@media (max-width: 768px) {
-		.verse-row {
-			position: relative;
-		}
 		.verse-row .verse-num {
-			position: absolute;
-			left: -1.5rem;
-			width: 1.5rem;
-			text-align: right;
+			display: inline;
+			position: static;
 			float: none;
-			margin-right: 0;
+			width: auto;
+			margin-right: 0.4em;
 			padding-top: 0;
-			line-height: 1.7;
 		}
 		.verse-row .verse-text {
-			display: block;
-			margin: 0;
+			display: inline;
 		}
 	}
 </style>
