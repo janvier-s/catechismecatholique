@@ -198,7 +198,8 @@
 	>
 		{#if hasPrev}
 			<a class="paragraph-nav-card prev" href="/ccc/{prevNum}">
-				<span class="paragraph-nav-eyebrow">← Précédent</span>
+				<span class="paragraph-nav-arrow">←</span>
+				<span class="paragraph-nav-eyebrow">Précédent</span>
 				<span class="paragraph-nav-title">§&nbsp;{prevNum}</span>
 			</a>
 		{:else}
@@ -206,7 +207,8 @@
 		{/if}
 		{#if hasNext}
 			<a class="paragraph-nav-card next" href="/ccc/{nextNum}">
-				<span class="paragraph-nav-eyebrow">Suivant →</span>
+				<span class="paragraph-nav-arrow">→</span>
+				<span class="paragraph-nav-eyebrow">Suivant</span>
 				<span class="paragraph-nav-title">§&nbsp;{nextNum}</span>
 			</a>
 		{:else}
@@ -243,6 +245,12 @@
 	}
 	.paragraph-nav-card.next {
 		text-align: right;
+	}
+	.paragraph-nav-arrow {
+		font-family: var(--font-ui);
+		font-size: 14px;
+		color: var(--color-muted);
+		display: block;
 	}
 	.paragraph-nav-eyebrow {
 		font-family: var(--font-ui);
