@@ -72,7 +72,7 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 
 	// Walk the HTML files in document order and assign each question to (part, section).
 	type FlowItem =
-		| { kind: 'heading'; level: 1 | 2 | 3; id: string; title: string; partSlug: string }
+		| { kind: 'heading'; level: 2 | 3; id: string; title: string; partSlug: string }
 		| { kind: 'epigraph'; text: string; attribution?: string; partSlug: string }
 		| { kind: 'question'; number: number; partSlug: string; sectionTitle: string };
 
@@ -135,14 +135,6 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 					currentPart = { slug, number, title };
 					partOrder.push(currentPart);
 					sectionsByPart.set(slug, []);
-					// Push a level-1 heading into the part flow
-					flowItems.push({
-						kind: 'heading',
-						level: 1,
-						id: `p-${slug}`,
-						title,
-						partSlug: slug
-					});
 				} else if (tocEntry.depth >= 3 && currentPart) {
 					pushSectionIfClosed();
 					pushPartDirectIfAny();
@@ -196,7 +188,7 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 		if (item.kind === 'heading') {
 			partBundle.flow.push({
 				kind: 'heading',
-				level: item.level as 2 | 3,
+				level: item.level,
 				id: item.id,
 				title: item.title
 			});

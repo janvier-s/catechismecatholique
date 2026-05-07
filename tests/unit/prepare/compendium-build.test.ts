@@ -47,7 +47,7 @@ describe('buildCompendium', () => {
 		const out = buildCompendium({ sourceJson: SOURCE_QS, toc: TOC, files: FILES });
 		expect(Object.keys(out.parts).sort()).toEqual(['part-1', 'part-2']);
 		const flow = out.parts['part-1']!.flow;
-		expect(flow.map((n) => n.kind)).toEqual(['heading', 'heading', 'question', 'question']);
+		expect(flow.map((n) => n.kind)).toEqual(['heading', 'question', 'question']);
 	});
 
 	it('builds reverse index ccc -> compendium qs', () => {
