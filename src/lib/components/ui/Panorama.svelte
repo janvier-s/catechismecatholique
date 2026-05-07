@@ -90,7 +90,7 @@
 								range: a.range,
 								items: [] as Article[]
 							}))}
-				<section class="pano-section" style="--cols: {Math.min(cards.length, 3)}">
+				<section class="pano-section" style="--cols: {Math.min(cards.length, 4)}">
 					<header class="pano-section-head">
 						{#if section.number}
 							<p class="pano-section-eyebrow">Section {section.number}</p>
@@ -171,12 +171,12 @@
 	}
 	.pano-part-title {
 		font-family: var(--font-heading);
-		font-size: clamp(1.3rem, 2.2vw, 1.6rem);
-		font-weight: 600;
-		line-height: 1.2;
+		font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+		font-weight: 700;
+		line-height: 1.15;
 		color: var(--color-fg);
 		text-align: center;
-		margin: -0.25rem 0 0;
+		margin: -0.1rem 0 0;
 	}
 	.pano-part-title a {
 		color: inherit;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import Panorama from '$lib/components/ui/Panorama.svelte';
+	import PanoramaOld from '$lib/components/ui/PanoramaOld.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -43,16 +43,14 @@
 </script>
 
 <svelte:head>
-	<title>Panorama du Catéchisme de l'Église Catholique</title>
-	<meta
-		name="description"
-		content="Panorama du Catéchisme de l'Église Catholique : prologue, quatre parties, sections, chapitres et articles vus d'un seul coup d'œil."
-	/>
+	<title>Panorama (ancien) du Catéchisme de l'Église Catholique</title>
+	<meta name="description" content="Panorama — version précédente, conservée pour comparaison." />
+	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <main class="panorama-page">
 	<header class="panorama-page-head">
-		<p class="eyebrow">Vue d'ensemble</p>
+		<p class="eyebrow">Vue d'ensemble · ancienne version</p>
 		<h1 class="title">Panorama</h1>
 		<div class="ornament" aria-hidden="true">
 			<span class="rule rule-l"></span>
@@ -60,17 +58,14 @@
 			<span class="rule rule-r"></span>
 		</div>
 		<p class="lede">
-			Les 2&nbsp;865 paragraphes du Catéchisme, organisés d'un seul coup d'œil. Cliquez sur
-			n'importe quel titre pour entrer dans la lecture.
+			Version précédente du panorama, conservée temporairement pour comparaison avec la nouvelle.
 		</p>
 		<p class="back">
-			<a href="/ccc/sommaire">← Sommaire détaillé</a>
-			<span class="back-sep" aria-hidden="true">·</span>
-			<a href="/ccc/panorama-old">Ancienne version</a>
+			<a href="/ccc/panorama">→ Panorama actuel</a>
 		</p>
 	</header>
 
-	<Panorama parts={struct.parts} headingLevel={2} />
+	<PanoramaOld parts={struct.parts} headingLevel={2} />
 </main>
 
 <style>
@@ -160,10 +155,5 @@
 	.back a:hover {
 		color: var(--color-accent);
 		border-bottom-color: var(--color-accent);
-	}
-	.back-sep {
-		display: inline-block;
-		margin: 0 0.55rem;
-		color: var(--color-subtle);
 	}
 </style>
