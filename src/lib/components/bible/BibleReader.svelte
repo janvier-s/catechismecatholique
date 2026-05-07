@@ -66,7 +66,7 @@
 <!-- Chapter navigation bar — sticky below the global TopBar (80px). -->
 <ChapterNavBar {book} {chapter} {totalChapters} {chapterCounts} variant="reader" />
 
-<main class="mx-auto max-w-reader px-6 max-md:px-3 pt-8 max-md:pt-5 pb-16">
+<main class="mx-auto max-w-reader px-6 max-md:px-2 pt-8 max-md:pt-5 pb-16">
 	<article>
 		<header class="mb-10 text-center">
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">
@@ -123,7 +123,7 @@
 				{@const active = isVerseActive(v.v)}
 				<li id="v{v.v}" class="transition-opacity" class:dim={dimNonCited && c === 0}>
 					<div
-						class="verse-row flex gap-3 max-md:gap-2 rounded-md px-2 -mx-2 py-1"
+						class="verse-row flex gap-3 max-md:gap-2 rounded-md px-2 -mx-2 py-1 max-md:px-0 max-md:mx-0"
 						class:is-active={active}
 					>
 						<span

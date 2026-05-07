@@ -14,7 +14,7 @@
 			slug: 'la-profession-de-la-foi',
 			kicker: 'Première partie',
 			title: 'La profession de la foi',
-			range: '§§ 26–1065',
+			range: '26–1065',
 			lede:
 				"Ce que l'Église croit. La première partie expose, sous la conduite du Symbole des " +
 				'Apôtres, le contenu de la foi catholique : la révélation, le mystère trinitaire, le ' +
@@ -38,7 +38,7 @@
 			slug: 'la-celebration-du-mystere-chretien',
 			kicker: 'Deuxième partie',
 			title: 'La célébration du mystère chrétien',
-			range: '§§ 1066–1690',
+			range: '1066–1690',
 			lede:
 				"Ce que l'Église célèbre. La deuxième partie est consacrée à la liturgie et aux sept " +
 				'sacrements, par lesquels le mystère pascal du Christ se rend présent dans la vie des ' +
@@ -58,7 +58,7 @@
 			slug: 'la-vie-dans-le-christ',
 			kicker: 'Troisième partie',
 			title: 'La vie dans le Christ',
-			range: '§§ 1691–2557',
+			range: '1691–2557',
 			lede:
 				"Ce que l'Église vit. La troisième partie présente la vie morale du chrétien, sa vocation " +
 				"à la béatitude et l'observance du Décalogue à la lumière de l'Évangile.",
@@ -77,7 +77,7 @@
 			slug: 'la-priere-chretienne',
 			kicker: 'Quatrième partie',
 			title: 'La prière chrétienne',
-			range: '§§ 2558–2865',
+			range: '2558–2865',
 			lede:
 				"Ce que l'Église prie. La quatrième partie est consacrée à la prière chrétienne et " +
 				"culmine dans l'explication du Notre Père, la prière que le Seigneur lui-même a " +
@@ -117,7 +117,7 @@
 
 	<section class="prologue" aria-labelledby="prologue-title">
 		<a href="/ccc/prologue" class="prologue-link">
-			<span class="prologue-kicker">Prologue · §§ 1–25</span>
+			<span class="prologue-kicker">Prologue · 1–25</span>
 			<span id="prologue-title" class="prologue-lede">
 				Plan d'ensemble du Catéchisme et transmission de la foi.
 			</span>
@@ -151,6 +151,8 @@
 
 	<nav class="quick-links" aria-label="Navigation complémentaire">
 		<a href="/ccc/sommaire" class="quick-link">Sommaire complet</a>
+		<span class="quick-sep" aria-hidden="true">·</span>
+		<a href="/ccc/panorama" class="quick-link">Panorama</a>
 		<span class="quick-sep" aria-hidden="true">·</span>
 		<a href="/glossaire" class="quick-link">Glossaire</a>
 		<span class="quick-sep" aria-hidden="true">·</span>

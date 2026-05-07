@@ -808,7 +808,7 @@
 		.row-range {
 			order: -1;
 			flex: 0 0 auto;
-			width: 4.5rem;
+			width: 3rem;
 			padding-left: 0;
 			text-align: left;
 			font-size: 0.72rem;

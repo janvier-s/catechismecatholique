@@ -70,16 +70,33 @@
 		return () => document.removeEventListener('keydown', onKey);
 	});
 
-	const primaryLinks: { href: string; label: string }[] = [
-		{ href: '/ccc', label: 'Catéchisme' },
-		{ href: '/bible', label: 'Bible' },
-		{ href: '/a-propos', label: 'À propos' }
-	];
-	const tools: { href: string; label: string }[] = [
-		{ href: '/ccc/sommaire', label: 'Sommaire' },
-		{ href: '/ccc/panorama', label: 'Panorama' },
-		{ href: '/glossaire', label: 'Glossaire' },
-		{ href: '/recherche', label: 'Recherche' }
+	type Link = { href: string; label: string };
+	type Group = { title: string; links: Link[] };
+	const groups: Group[] = [
+		{
+			title: 'Catéchisme',
+			links: [
+				{ href: '/ccc', label: 'Lire le Catéchisme' },
+				{ href: '/ccc/sommaire', label: 'Sommaire' },
+				{ href: '/ccc/panorama', label: 'Panorama' },
+				{ href: '/glossaire', label: 'Glossaire' },
+				{ href: '/recherche', label: 'Recherche' }
+			]
+		},
+		{
+			title: 'Bible',
+			links: [
+				{ href: '/bible', label: 'Lire la Bible' },
+				{ href: '/bible', label: 'Concordance' }
+			]
+		},
+		{
+			title: 'Le site',
+			links: [
+				{ href: '/a-propos', label: 'À propos' },
+				{ href: '/mentions-legales', label: 'Mentions légales' }
+			]
+		}
 	];
 
 	function isActive(href: string): boolean {
@@ -128,28 +145,23 @@
 			<span class="rule rule-r"></span>
 		</div>
 
-		<ul class="links">
-			{#each primaryLinks as link (link.href)}
-				<li>
-					<a class="link" class:is-active={isActive(link.href)} href={link.href}>
-						<span class="link-label">{link.label}</span>
-						<span class="link-arrow" aria-hidden="true">›</span>
-					</a>
-				</li>
-			{/each}
-		</ul>
-
-		<p class="tools-eyebrow">Outils</p>
-		<ul class="links links-tools">
-			{#each tools as link (link.href)}
-				<li>
-					<a class="link" class:is-active={isActive(link.href)} href={link.href}>
-						<span class="link-label">{link.label}</span>
-						<span class="link-arrow" aria-hidden="true">›</span>
-					</a>
-				</li>
-			{/each}
-		</ul>
+		{#each groups as group, gi (group.title)}
+			{#if gi > 0}
+				<p class="group-eyebrow">{group.title}</p>
+			{:else}
+				<p class="group-eyebrow group-eyebrow-first">{group.title}</p>
+			{/if}
+			<ul class="links">
+				{#each group.links as link (link.label)}
+					<li>
+						<a class="link" class:is-active={isActive(link.href)} href={link.href}>
+							<span class="link-label">{link.label}</span>
+							<span class="link-arrow" aria-hidden="true">›</span>
+						</a>
+					</li>
+				{/each}
+			</ul>
+		{/each}
 	</nav>
 {/if}
 
@@ -323,21 +335,19 @@
 		transform: translateX(3px);
 	}
 
-	/* Outils header — small eyebrow above the second link group. */
-	.tools-eyebrow {
+	/* Group eyebrow — small accent caps separating the three corpus
+	   groups (Catéchisme, Bible, Le site). Mirrors the footer columns. */
+	.group-eyebrow {
 		font-family: var(--font-ui);
-		font-size: 0.62rem;
+		font-size: 0.65rem;
 		font-weight: 600;
-		letter-spacing: 0.26em;
+		letter-spacing: 0.24em;
 		text-transform: uppercase;
-		color: var(--color-muted);
-		margin: 1.4rem 0 0.2rem 0.25rem;
+		color: var(--color-accent);
+		margin: 1.25rem 0 0.1rem 0.25rem;
 	}
-	.links-tools .link {
-		padding: 0.7rem 0.25rem;
-	}
-	.links-tools .link-label {
-		font-size: 1rem;
+	.group-eyebrow-first {
+		margin-top: 0.2rem;
 	}
 
 	@media (prefers-reduced-motion: reduce) {

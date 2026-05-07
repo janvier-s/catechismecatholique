@@ -25,7 +25,8 @@
 		// CCC reading surfaces; hide on the index, sommaire, bible, search,
 		// about, and the bare home page.
 		if (!p.startsWith('/ccc')) return false;
-		if (p === '/ccc' || p === '/ccc/' || p.startsWith('/ccc/sommaire')) return false;
+		if (p === '/ccc' || p === '/ccc/') return false;
+		if (p.startsWith('/ccc/sommaire') || p.startsWith('/ccc/panorama')) return false;
 		return true;
 	});
 

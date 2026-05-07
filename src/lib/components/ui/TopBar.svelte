@@ -32,6 +32,16 @@
 		window.addEventListener('scroll', onScroll, { passive: true });
 		return () => window.removeEventListener('scroll', onScroll);
 	});
+
+	// Sync the global --topbar-height variable so sticky elements outside
+	// the topbar (e.g. the Bible chapter floatnav) stay flush with our
+	// bottom edge, including the condensed-on-scroll mobile state.
+	$effect(() => {
+		if (typeof document === 'undefined') return;
+		const html = document.documentElement;
+		if (condensed) html.style.setProperty('--topbar-height', '46px');
+		else html.style.removeProperty('--topbar-height');
+	});
 </script>
 
 <header
