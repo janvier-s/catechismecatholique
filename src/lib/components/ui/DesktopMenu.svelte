@@ -59,25 +59,13 @@
 		return () => document.removeEventListener('keydown', onKeydown);
 	});
 
-	type Link = { href: string; label: string; description: string };
+	type Link = { href: string; label: string; gloss?: string };
 	const links: Link[] = [
-		{ href: '/ccc/sommaire', label: 'Sommaire', description: 'La table des matières complète.' },
-		{ href: '/ccc/panorama', label: 'Panorama', description: 'Vue d’ensemble en un coup d’œil.' },
-		{
-			href: '/glossaire',
-			label: 'Glossaire',
-			description: 'Les termes théologiques classés par thème.'
-		},
-		{
-			href: '/bible',
-			label: 'Concordance biblique',
-			description: 'Chaque verset croisé avec le Catéchisme.'
-		},
-		{
-			href: '/recherche',
-			label: 'Recherche',
-			description: 'Mot, paragraphe ou référence biblique.'
-		}
+		{ href: '/ccc/sommaire', label: 'Sommaire', gloss: 'table des matières' },
+		{ href: '/ccc/panorama', label: 'Panorama', gloss: 'vue d’ensemble' },
+		{ href: '/glossaire', label: 'Glossaire', gloss: 'termes théologiques' },
+		{ href: '/bible', label: 'Concordance biblique', gloss: 'verset par verset' },
+		{ href: '/recherche', label: 'Recherche' }
 	];
 </script>
 
@@ -86,19 +74,12 @@
 		bind:this={triggerEl}
 		type="button"
 		class="desktop-menu-trigger {open ? 'is-open' : ''}"
-		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls="desktop-menu-panel"
 		aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
 		onclick={() => (open = !open)}
 	>
-		<svg
-			width="18"
-			height="18"
-			viewBox="0 0 18 18"
-			fill="currentColor"
-			aria-hidden="true"
-		>
+		<svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
 			<circle cx="4" cy="4" r="1.3" />
 			<circle cx="9" cy="4" r="1.3" />
 			<circle cx="14" cy="4" r="1.3" />
@@ -112,26 +93,26 @@
 	</button>
 
 	{#if open}
-		<div
+		<nav
 			bind:this={panelEl}
 			id="desktop-menu-panel"
 			class="desktop-menu-panel"
-			role="dialog"
-			aria-label="Outils et navigation"
-			transition:fly={{ y: -6, duration: 160, easing: cubicOut }}
+			aria-label="Outils"
+			transition:fly={{ y: -4, duration: 140, easing: cubicOut }}
 		>
 			<p class="menu-eyebrow">Outils</p>
 			<ul class="menu-list">
 				{#each links as link (link.href)}
 					<li>
 						<a class="menu-row" href={link.href} onclick={close}>
-							<span class="menu-row-label">{link.label}</span>
-							<span class="menu-row-desc">{link.description}</span>
+							<span class="menu-row-label">{link.label}</span>{#if link.gloss}<span
+									class="menu-row-gloss">, {link.gloss}</span
+								>{/if}
 						</a>
 					</li>
 				{/each}
 			</ul>
-		</div>
+		</nav>
 	{/if}
 </div>
 
@@ -158,15 +139,19 @@
 		background: color-mix(in srgb, var(--color-accent) 12%, transparent);
 		color: var(--color-accent);
 	}
+	/* Anchor flush to the bottom of the topbar — reads as a drawer of the
+	   bar, not a tooltip parked beside it. No top border so the seam is
+	   continuous with the topbar's own bottom border. */
 	.desktop-menu-panel {
 		position: absolute;
 		right: 0;
-		top: calc(100% + 6px);
-		width: 280px;
+		top: 100%;
+		width: 300px;
 		background: var(--color-panel);
 		border: 1px solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.75rem 0;
+		border-top: 0;
+		border-radius: 0 0 4px 4px;
+		padding: 0.7rem 0 0.55rem;
 		z-index: var(--z-dropdown);
 	}
 	.menu-eyebrow {
@@ -176,7 +161,7 @@
 		letter-spacing: 0.24em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		margin: 0 0 0.45rem 1.1rem;
+		margin: 0 0 0.5rem 1.25rem;
 	}
 	.menu-list {
 		list-style: none;
@@ -185,33 +170,37 @@
 		display: flex;
 		flex-direction: column;
 	}
+	/* Type-driven hover: no left rail, no tinted box. Hover underlines the
+	   label as a reader's affordance; keyboard focus uses a faint tint so
+	   the active row stays obvious without a mouse. */
 	.menu-row {
 		display: block;
-		padding: 0.5rem 1.1rem;
+		padding: 0.45rem 1.25rem;
 		text-decoration: none;
 		color: var(--color-fg);
-		border-left: 2px solid transparent;
-		transition:
-			border-color 120ms ease,
-			color 120ms ease;
+		transition: color 120ms ease;
 	}
-	.menu-row:hover {
-		border-left-color: var(--color-accent);
+	.menu-row:hover .menu-row-label {
 		color: var(--color-accent-text);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+	}
+	.menu-row:focus-visible {
+		outline: none;
+		background: color-mix(in srgb, var(--color-fg) 4%, transparent);
 	}
 	.menu-row-label {
-		display: block;
 		font-family: var(--font-heading);
 		font-size: 0.95rem;
 		font-weight: 600;
 		color: inherit;
+		transition: color 120ms ease;
 	}
-	.menu-row-desc {
-		display: block;
+	.menu-row-gloss {
 		font-family: var(--font-body);
-		font-size: 0.76rem;
-		line-height: 1.4;
+		font-style: italic;
+		font-size: 0.85rem;
 		color: var(--color-subtle);
-		margin-top: 0.1rem;
 	}
 </style>
