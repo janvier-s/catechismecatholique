@@ -58,7 +58,7 @@
 		<a
 			href="/recherche"
 			class="md:hidden inline-flex items-center justify-center w-10 h-10 text-foreground hover:text-accent"
-			aria-label="Recherche"
+			aria-label="Ouvrir la recherche"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
