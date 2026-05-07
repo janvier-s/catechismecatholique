@@ -7,6 +7,7 @@
 				<li><a href="/ccc/sommaire">Sommaire</a></li>
 				<li><a href="/ccc/panorama">Panorama</a></li>
 				<li><a href="/glossaire">Glossaire</a></li>
+				<li><a href="/recherche">Recherche</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">
@@ -19,7 +20,6 @@
 		<div class="footer-col">
 			<p class="footer-col-head">Le site</p>
 			<ul>
-				<li><a href="/recherche">Recherche</a></li>
 				<li><a href="/a-propos">À propos</a></li>
 				<li><a href="/mentions-legales">Mentions légales</a></li>
 			</ul>
