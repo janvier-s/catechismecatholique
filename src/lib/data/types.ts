@@ -1,4 +1,4 @@
-export type Corpus = 'ccc';
+export type Corpus = 'ccc' | 'compendium';
 
 export interface BibleRef {
 	text: string;
@@ -358,3 +358,84 @@ export interface GlossaryBundle {
 	clusters: GlossaryClusterMeta[];
 	featured: string[]; // slugs of the top-cited entries
 }
+
+// ─── Compendium ───────────────────────────────────────────────────────────
+
+export interface CompendiumQuestion {
+	corpus: 'compendium';
+	number: number;
+	question: string;
+	answer_html: string;
+	ccc_refs: number[];
+	bible_refs: BibleRef[];
+}
+
+export interface CompendiumHeadingNode {
+	kind: 'heading';
+	level: 2 | 3;
+	id: string;
+	title: string;
+}
+
+export interface CompendiumEpigraphNode {
+	kind: 'epigraph';
+	text: string;
+	attribution?: string;
+}
+
+export interface CompendiumQuestionNode {
+	kind: 'question';
+	data: CompendiumQuestion;
+}
+
+/** Static prose block (used by the appendix: prayers, doctrinal formulas). */
+export interface CompendiumProseNode {
+	kind: 'prose';
+	html: string;
+}
+
+export type CompendiumFlowNode =
+	| CompendiumHeadingNode
+	| CompendiumEpigraphNode
+	| CompendiumQuestionNode
+	| CompendiumProseNode;
+
+export interface CompendiumPart {
+	slug: string;
+	number: 1 | 2 | 3 | 4;
+	title: string;
+	flow: CompendiumFlowNode[];
+}
+
+export interface CompendiumStructureSection {
+	title: string;
+	subsections?: { title: string; q_range: [number, number] }[];
+	q_range: [number, number];
+}
+
+export interface CompendiumStructurePart {
+	slug: string;
+	number: 1 | 2 | 3 | 4;
+	title: string;
+	sections: CompendiumStructureSection[];
+}
+
+export interface CompendiumAppendix {
+	slug: 'annexe';
+	title: string;
+	flow: CompendiumFlowNode[];
+}
+
+export interface CompendiumStructure {
+	parts: CompendiumStructurePart[];
+	appendix?: { slug: 'annexe'; title: string };
+}
+
+export interface CompendiumQRange {
+	part: string;
+	from: number;
+	to: number;
+}
+
+/** Reverse index: ccc paragraph number → compendium question numbers citing it. */
+export type CompendiumCitedBy = Record<number, number[]>;
