@@ -6,6 +6,7 @@
 	import { stripDiacritics } from '$lib/utils/searchTokenizer';
 	import { detectIntent } from '$lib/utils/searchIntent';
 	import { loadParagraphContext } from '$lib/data/loaders';
+	import { SvelteSet } from 'svelte/reactivity';
 	import type { ParagraphContext } from '$lib/data/types';
 	import SearchSuggest from '$lib/components/ui/SearchSuggest.svelte';
 	import RelatedTopics from '$lib/components/ui/RelatedTopics.svelte';
@@ -17,7 +18,7 @@
 	// immediately; breadcrumbs pop in as the shards arrive. Each context is
 	// requested at most once thanks to the loader's module-level cache.
 	const contexts = $state<Record<number, ParagraphContext>>({});
-	const requested = new Set<number>();
+	const requested = new SvelteSet<number>();
 	$effect(() => {
 		for (const h of data.hits) {
 			const num = h.kind === 'paragraph' ? h.number : h.paragraph_start;
