@@ -122,7 +122,7 @@
 	.panorama-backdrop {
 		position: fixed;
 		inset: 0;
-		z-index: calc(var(--z-modal) - 1);
+		z-index: calc(var(--z-modal) + 4);
 		background: rgba(0, 0, 0, 0.65);
 		backdrop-filter: blur(2px);
 		cursor: pointer;
@@ -132,7 +132,7 @@
 		inset: 2.5vh 1rem 2.5vh 1rem;
 		max-width: 1100px;
 		margin: 0 auto;
-		z-index: var(--z-modal);
+		z-index: calc(var(--z-modal) + 5);
 		background: var(--color-bg);
 		border: 1px solid var(--color-border);
 		border-radius: 8px;
