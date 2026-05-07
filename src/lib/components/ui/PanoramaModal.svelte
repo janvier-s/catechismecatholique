@@ -91,7 +91,7 @@
 				✕
 			</button>
 		</header>
-		<div class="panorama-dialog-body">
+		<div class="panorama-dialog-body styled-scroll">
 			{@render children()}
 		</div>
 	</div>
@@ -102,7 +102,7 @@
 		position: fixed;
 		inset: 0;
 		z-index: calc(var(--z-modal) - 1);
-		background: color-mix(in srgb, var(--color-fg) 36%, transparent);
+		background: rgba(0, 0, 0, 0.65);
 		backdrop-filter: blur(2px);
 		cursor: pointer;
 	}

@@ -50,7 +50,21 @@
 			Partie {data.part.number}
 		</p>
 	{/if}
-	<h1 class="font-heading text-4xl font-semibold mt-1 mb-8 text-heading">{data.part.title}</h1>
+	<h1 class="font-heading text-4xl font-semibold mt-1 mb-6 text-heading">{data.part.title}</h1>
+
+	{#if data.part.sections.length > 0}
+		<div class="panorama-trigger-row">
+			<button
+				type="button"
+				class="panorama-trigger-btn"
+				aria-haspopup="dialog"
+				onclick={() => (panoramaOpen = true)}
+			>
+				Voir le panorama
+				<span class="panorama-trigger-arrow" aria-hidden="true">→</span>
+			</button>
+		</div>
+	{/if}
 
 	{#if data.introParagraphs.length > 0}
 		{#each data.introParagraphs as p (p.number)}
@@ -77,17 +91,9 @@
 	{/if}
 
 	{#if data.part.sections.length > 0}
-		<div class="flex items-center justify-between gap-4 mt-12 mb-3 max-md:px-4">
-			<h2 class="font-ui text-sm uppercase tracking-wider text-muted">Sections</h2>
-			<button
-				type="button"
-				class="panorama-trigger"
-				aria-haspopup="dialog"
-				onclick={() => (panoramaOpen = true)}
-			>
-				Voir le panorama <span class="panorama-trigger-arrow" aria-hidden="true">→</span>
-			</button>
-		</div>
+		<h2 class="font-ui text-sm uppercase tracking-wider text-muted mt-12 mb-3 max-md:px-4">
+			Sections
+		</h2>
 		<ol class="space-y-6">
 			{#each data.part.sections as section (section.slug)}
 				<li>
@@ -142,27 +148,40 @@
 {/if}
 
 <style>
-	.panorama-trigger {
+	.panorama-trigger-row {
+		margin: 0 0 2.5rem;
+	}
+	.panorama-trigger-btn {
 		appearance: none;
-		background: transparent;
-		border: none;
-		padding: 0;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.7rem 1.4rem;
+		border: 1px solid var(--color-accent);
+		border-radius: 3px;
+		background: var(--color-accent);
+		color: #fff;
 		font-family: var(--font-ui);
 		font-size: 0.78rem;
 		font-weight: 600;
-		letter-spacing: 0.18em;
+		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--color-accent);
 		cursor: pointer;
+		transition: background 150ms ease;
 	}
-	.panorama-trigger:hover {
-		color: var(--color-accent-text);
+	.panorama-trigger-btn:hover {
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
 	}
-	.panorama-trigger:hover .panorama-trigger-arrow {
+	.panorama-trigger-btn:hover .panorama-trigger-arrow {
 		transform: translateX(3px);
 	}
 	.panorama-trigger-arrow {
 		display: inline-block;
 		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	@media (max-width: 640px) {
+		.panorama-trigger-row {
+			padding: 0 1rem;
+		}
 	}
 </style>
