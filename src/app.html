@@ -30,16 +30,7 @@
 			href="/fonts/LibreBaskerville-Regular.woff2"
 			crossorigin="anonymous"
 		/>
-		<script>
-			(function () {
-				try {
-					var stored = localStorage.getItem('catechismecatholique.theme');
-					var allowed = ['auto', 'light', 'sepia', 'dark', 'oled'];
-					var theme = stored && allowed.indexOf(stored) >= 0 ? stored : 'auto';
-					document.documentElement.setAttribute('data-theme', theme);
-				} catch (e) {}
-			})();
-		</script>
+		<script src="/theme-init.js"></script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="tap">

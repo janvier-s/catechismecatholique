@@ -70,6 +70,31 @@ function applyPhraseBoost<T extends Record<string, unknown>>(results: T[], token
 	return [...phraseHits, ...rest];
 }
 
+// Trim each hit's text to a window centered on the first matching token. The
+// client renders a 220-char snippet via bestSnippet — anything beyond that is
+// wasted bytes and inflates the response (worst case ~150 KB from a 2-char
+// query). Window: up to MAX chars, biased to start at first match minus PRE.
+// Falls back to leading text when no match is found within scan budget.
+const SNIPPET_MAX = 400;
+const SNIPPET_PRE = 80;
+function trimText(text: string, tokens: string[]): string {
+	if (text.length <= SNIPPET_MAX) return text;
+	if (tokens.length === 0) return text.slice(0, SNIPPET_MAX);
+	const folded = stripDiacritics(text).toLowerCase();
+	const tokenSet = new Set(tokens.map((t) => stripDiacritics(t).toLowerCase()));
+	const re = /[\p{L}\p{N}]+/gu;
+	let match = -1;
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(folded)) !== null) {
+		if (tokenSet.has(m[0])) {
+			match = m.index;
+			break;
+		}
+	}
+	const start = match < 0 ? 0 : Math.max(0, match - SNIPPET_PRE);
+	return text.slice(start, start + SNIPPET_MAX);
+}
+
 // Position-aware re-rank: a paragraph that opens with the query term is almost
 // always about it; one where the term appears 800 chars in usually isn't. We
 // scan each result for the first whole-word match of any query token and bump
@@ -151,12 +176,23 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 		id: r.id as string,
 		kind: r.kind as 'paragraph' | 'heading',
 		number: r.number as number | undefined,
-		text: r.text as string,
+		text: trimText(r.text as string, tokens),
 		title: r.title as string | undefined,
 		paragraph_start: r.paragraph_start as number | undefined,
 		chapter_slug: r.chapter_slug as string | undefined,
 		score: r.score,
 		match: r.match
 	}));
-	return json({ q, hits });
+	return json(
+		{ q, hits },
+		{
+			headers: {
+				// Identical queries can be served from the edge cache for an hour;
+				// browser revalidates after 5 minutes. Cuts Worker CPU on common
+				// queries (eucharistie, trinité, etc.) and limits amplification
+				// surface from random short queries.
+				'Cache-Control': 'public, max-age=300, s-maxage=3600'
+			}
+		}
+	);
 };
