@@ -122,8 +122,8 @@
 		<!-- Daily paragraph -->
 		{#if data.paragraph}
 			<section class="daily reveal r-daily" aria-labelledby="daily-heading">
-				<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 				<div class="daily-row">
+					<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 					<a
 						href="/ccc/{data.dailyNumber}"
 						class="daily-mark"
@@ -263,6 +263,7 @@
 		max-width: 720px;
 	}
 	.daily-eyebrow {
+		grid-area: eyebrow;
 		font-family: var(--font-ui);
 		font-size: 0.7rem;
 		font-weight: 500;
@@ -276,10 +277,14 @@
 	.daily-row {
 		display: grid;
 		grid-template-columns: auto 1fr;
-		gap: 1.25rem;
+		grid-template-areas:
+			'. eyebrow'
+			'mark prose';
+		column-gap: 1.25rem;
 		align-items: start;
 	}
 	.daily-mark {
+		grid-area: mark;
 		display: flex;
 		align-self: start;
 		gap: 0.35em;
@@ -303,6 +308,7 @@
 	}
 
 	.daily-text {
+		grid-area: prose;
 		min-width: 0;
 		font-family: var(--font-body);
 		font-size: 1rem;
@@ -351,10 +357,10 @@
 		max-width: 180px;
 		opacity: 0.7;
 	}
-	:global([data-theme='dark']) .founding-signature,
-	:global([data-theme='oled']) .founding-signature {
-		filter: invert(1);
-		opacity: 0.65;
+	:global([data-theme='dark'] .founding-signature),
+	:global([data-theme='oled'] .founding-signature) {
+		filter: invert(1) brightness(1.4);
+		opacity: 0.92;
 	}
 	.founding-attr {
 		font-family: var(--font-ui);
@@ -483,6 +489,10 @@
 		}
 		.daily-row {
 			grid-template-columns: 1fr;
+			grid-template-areas:
+				'eyebrow'
+				'mark'
+				'prose';
 			gap: 0.4rem;
 			justify-items: center;
 			text-align: center;
