@@ -247,6 +247,10 @@
 		color: var(--color-fg);
 		font-family: var(--font-body);
 		scroll-behavior: smooth;
+		/* Reserve the vertical scrollbar gutter so locking <html> overflow
+		   (e.g. when the panorama modal opens) doesn't shift layout when
+		   the scrollbar disappears. */
+		scrollbar-gutter: stable;
 	}
 	@media (prefers-reduced-motion: reduce) {
 		html {
