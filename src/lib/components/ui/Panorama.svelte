@@ -34,6 +34,7 @@
 	};
 
 	type ActivePath = {
+		part?: string | null;
 		section?: string | null;
 		chapter?: string | null;
 		article?: string | null;
@@ -99,7 +100,8 @@
 
 <div class="panorama">
 	{#each parts as part (part.slug)}
-		<article class="pano-part" class:is-prologue={part.prologue}>
+		{@const partActive = active.part === part.slug}
+		<article class="pano-part" class:is-prologue={part.prologue} class:is-active={partActive}>
 			<header class="pano-banner">
 				{#if !part.prologue}
 					<p class="pano-banner-eyebrow">Partie {ROMAN[part.number ?? 0] ?? part.number ?? ''}</p>
@@ -119,7 +121,7 @@
 			</header>
 
 			{#each part.sections as section (section.slug)}
-				{@const sectionActive = active.section === section.slug}
+				{@const sectionActive = partActive && active.section === section.slug}
 				<section class="pano-section" class:is-active={sectionActive}>
 					<a class="pano-section-head" href="/ccc/{part.slug}/{section.slug}">
 						{#if section.number}
@@ -355,17 +357,50 @@
 	.pano-cell:hover {
 		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
-	/* Active highlights — show readers where they currently are. */
+	/* Active highlights — show readers where they currently are.
+	   Each active node gets a "›" chevron to the left of its title so
+	   the cue is glance-able even without the colour shift. */
+	.pano-part.is-active .pano-banner-title {
+		color: var(--color-accent);
+	}
+	.pano-part.is-active .pano-banner-title::before {
+		content: '›';
+		display: inline-block;
+		margin-right: 0.4em;
+		color: var(--color-accent);
+		font-weight: 700;
+	}
 	.pano-section.is-active > .pano-section-head .pano-section-title {
 		color: var(--color-accent);
+	}
+	.pano-section.is-active > .pano-section-head .pano-section-title::before {
+		content: '›';
+		display: inline-block;
+		margin-right: 0.45em;
+		color: var(--color-accent);
+		font-weight: 700;
 	}
 	.pano-cell.is-active {
 		border-color: var(--color-accent);
 		background: color-mix(in srgb, var(--color-accent) 8%, transparent);
 		box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent);
 	}
+	.pano-cell.is-active .pano-cell-title::before {
+		content: '›';
+		display: inline-block;
+		margin-right: 0.4em;
+		color: var(--color-accent);
+		font-weight: 700;
+	}
 	.pano-cell-list li.is-active .pano-cell-art {
 		color: var(--color-accent);
+	}
+	.pano-cell-list li.is-active .pano-cell-art::before {
+		content: '›';
+		display: inline-block;
+		margin-right: 0.4em;
+		color: var(--color-accent);
+		font-weight: 700;
 	}
 	.pano-cell-list li.is-active .pano-cell-art-num {
 		color: var(--color-accent);

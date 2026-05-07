@@ -20,6 +20,7 @@
 	// where the reader currently is. Path segments under /ccc/<part>/...
 	const segments = $derived(page.url.pathname.split('/').filter(Boolean));
 	const active = $derived({
+		part: (segments[1] ?? null) as string | null,
 		section: (segments[2] ?? null) as string | null,
 		chapter: (segments[3] ?? null) as string | null,
 		article: (segments[4] ?? null) as string | null
