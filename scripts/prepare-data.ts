@@ -26,6 +26,7 @@ import { parseUSFX } from './prepare/ncl.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
 import { parseSourceTable } from './prepare/sources-index.ts';
+import { prepareCompendium } from './prepare/compendium/index.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -57,7 +58,9 @@ async function main() {
 		'sigles.xhtml',
 		'toc.ncx',
 		'thematic_cross-refs',
-		'ncl/francl_usfx.xml'
+		'ncl/francl_usfx.xml',
+		'compendium/Compendium.epub',
+		'compendium/compendium_ccc.json'
 	];
 	const missing = expected.filter((f) => !existsSync(join(SOURCES, f)));
 	if (missing.length > 0) {
@@ -400,6 +403,16 @@ async function main() {
 			console.warn(`  ${stats.pericopesWithoutTitle} pericopes without NCL title (kept titleless)`);
 		endStep(`${stats.commentaryFiles} files, ${stats.pericopesEmitted} pericopes`);
 	}
+
+	logStep('building compendium');
+	const COMPENDIUM_OUT = join(OUT, 'compendium');
+	mkdirSync(COMPENDIUM_OUT, { recursive: true });
+	const compendium = prepareCompendium({
+		epubPath: join(SOURCES, 'compendium/Compendium.epub'),
+		sourceJsonPath: join(SOURCES, 'compendium/compendium_ccc.json'),
+		outDir: COMPENDIUM_OUT
+	});
+	endStep(`${compendium.questionDocs.length} compendium docs ready`);
 
 	logStep('building search index');
 	mkdirSync(join(OUT, 'search'), { recursive: true });
