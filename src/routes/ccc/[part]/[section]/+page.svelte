@@ -2,6 +2,7 @@
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
 	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
+	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { SvelteMap } from 'svelte/reactivity';
 	import type { PageData } from './$types';
@@ -25,25 +26,28 @@
 </svelte:head>
 
 <main class="mx-auto max-w-reader px-6 max-md:px-0 py-10" use:scrollSpy>
-	<nav class="breadcrumb-rail mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
-		<ol class="space-y-1">
-			<li><a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a></li>
-			<li class="pl-5">
-				<a href="/ccc/{data.part.slug}" class="text-muted hover:text-accent">
+	<div class="breadcrumb-row mb-6">
+		<nav class="breadcrumb-rail font-ui text-sm" aria-label="Fil d'Ariane">
+			<ol class="space-y-1">
+				<li><a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a></li>
+				<li class="pl-5">
+					<a href="/ccc/{data.part.slug}" class="text-muted hover:text-accent">
+						<span class="font-semibold bc-kicker">
+							{data.part.number ? `Partie ${data.part.number}` : 'Prologue'}
+						</span>
+						<span class="bc-title">&nbsp;: {data.part.title}</span>
+					</a>
+				</li>
+				<li class="pl-10">
 					<span class="font-semibold bc-kicker">
-						{data.part.number ? `Partie ${data.part.number}` : 'Prologue'}
+						{data.section.number ? `Section ${data.section.number}` : 'Section'}
 					</span>
-					<span class="bc-title">&nbsp;: {data.part.title}</span>
-				</a>
-			</li>
-			<li class="pl-10">
-				<span class="font-semibold bc-kicker">
-					{data.section.number ? `Section ${data.section.number}` : 'Section'}
-				</span>
-				<span class="bc-title">&nbsp;: {data.section.title}</span>
-			</li>
-		</ol>
-	</nav>
+					<span class="bc-title">&nbsp;: {data.section.title}</span>
+				</li>
+			</ol>
+		</nav>
+		<PartPanoramaTrigger />
+	</div>
 
 	<p class="font-ui text-sm uppercase tracking-wider text-muted mt-4">
 		{data.section.number ? `Section ${data.section.number}` : 'Section'}
@@ -157,3 +161,21 @@
 		{/if}
 	</nav>
 </main>
+
+<style>
+	.breadcrumb-row {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.breadcrumb-row .breadcrumb-rail {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+	@media (max-width: 640px) {
+		.breadcrumb-row {
+			padding: 0 1rem;
+		}
+	}
+</style>

@@ -33,7 +33,16 @@
 		sections: Section[];
 	};
 
-	let { parts, headingLevel = 2 }: { parts: Part[]; headingLevel?: 2 | 3 } = $props();
+	type ActivePath = {
+		section?: string | null;
+		chapter?: string | null;
+		article?: string | null;
+	};
+	let {
+		parts,
+		headingLevel = 2,
+		active = {}
+	}: { parts: Part[]; headingLevel?: 2 | 3; active?: ActivePath } = $props();
 
 	const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
@@ -110,7 +119,8 @@
 			</header>
 
 			{#each part.sections as section (section.slug)}
-				<section class="pano-section">
+				{@const sectionActive = active.section === section.slug}
+				<section class="pano-section" class:is-active={sectionActive}>
 					<a class="pano-section-head" href="/ccc/{part.slug}/{section.slug}">
 						{#if section.number}
 							<span class="pano-section-num">Section {section.number}</span>
@@ -127,7 +137,8 @@
 						<div class="pano-grid" data-cols={Math.min(section.chapters.length, 3)}>
 							{#each section.chapters as chapter (chapter.slug)}
 								{@const href = `/ccc/${part.slug}/${section.slug}/${chapter.slug}`}
-								<div class="pano-cell">
+								{@const chapterActive = sectionActive && active.chapter === chapter.slug}
+								<div class="pano-cell" class:is-active={chapterActive}>
 									<a class="pano-cell-head" {href}>
 										{#if chapter.number !== undefined}
 											<span class="pano-cell-tag">Chapitre {chapter.number}</span>
@@ -139,7 +150,8 @@
 									{#if chapter.articles && chapter.articles.length > 0}
 										<ul class="pano-cell-list">
 											{#each chapter.articles as article (article.slug)}
-												<li>
+												{@const articleActive = chapterActive && active.article === article.slug}
+												<li class:is-active={articleActive}>
 													<a href="{href}/{article.slug}">
 														<span class="pano-cell-art">
 															{@html titleHtml(article.slug, article.title)}
@@ -169,7 +181,8 @@
 									ARTICLE_TAG_OVERRIDE[article.slug] ??
 									(article.number !== undefined ? `Article ${article.number}` : '')}
 								{@const subtitle = ARTICLE_SUBTITLE[article.slug] ?? ''}
-								<div class="pano-cell">
+								{@const articleActive = sectionActive && active.article === article.slug}
+								<div class="pano-cell" class:is-active={articleActive}>
 									<a class="pano-cell-head" {href}>
 										{#if tag}
 											<span class="pano-cell-tag">{tag}</span>
@@ -341,6 +354,21 @@
 	}
 	.pano-cell:hover {
 		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+	}
+	/* Active highlights — show readers where they currently are. */
+	.pano-section.is-active > .pano-section-head .pano-section-title {
+		color: var(--color-accent);
+	}
+	.pano-cell.is-active {
+		border-color: var(--color-accent);
+		background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+		box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent);
+	}
+	.pano-cell-list li.is-active .pano-cell-art {
+		color: var(--color-accent);
+	}
+	.pano-cell-list li.is-active .pano-cell-art-num {
+		color: var(--color-accent);
 	}
 	.pano-cell-head {
 		text-decoration: none;
