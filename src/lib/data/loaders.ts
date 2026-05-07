@@ -9,7 +9,11 @@ import type {
 	ConcordanceChapter,
 	ConcordanceByParagraphEntry,
 	NclSectionMap,
-	NclBook
+	NclBook,
+	CompendiumStructure,
+	CompendiumPart,
+	CompendiumCitedBy,
+	CompendiumQRange
 } from './types';
 
 type Fetch = typeof fetch;
@@ -269,4 +273,41 @@ export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBo
 		nclBookCache.set(usfx, p);
 	}
 	return p;
+}
+
+// ─── Compendium Loaders ────────────────────────────────────────────────────
+
+let compendiumStructurePromise: Promise<CompendiumStructure> | null = null;
+const compendiumPartCache = new Map<string, Promise<CompendiumPart>>();
+let compendiumCitedByPromise: Promise<CompendiumCitedBy> | null = null;
+let compendiumQRangesPromise: Promise<CompendiumQRange[]> | null = null;
+
+export function loadCompendiumStructure(fetcher: Fetch = fetch): Promise<CompendiumStructure> {
+	if (!compendiumStructurePromise) {
+		compendiumStructurePromise = fetchJson<CompendiumStructure>('/data/compendium/structure.json', fetcher);
+	}
+	return compendiumStructurePromise;
+}
+
+export function loadCompendiumPart(slug: string, fetcher: Fetch = fetch): Promise<CompendiumPart> {
+	let p = compendiumPartCache.get(slug);
+	if (!p) {
+		p = fetchJson<CompendiumPart>(`/data/compendium/parts/${slug}.json`, fetcher);
+		compendiumPartCache.set(slug, p);
+	}
+	return p;
+}
+
+export function loadCompendiumCitedBy(fetcher: Fetch = fetch): Promise<CompendiumCitedBy> {
+	if (!compendiumCitedByPromise) {
+		compendiumCitedByPromise = fetchJson<CompendiumCitedBy>('/data/compendium/cited-by.json', fetcher);
+	}
+	return compendiumCitedByPromise;
+}
+
+export function loadCompendiumQRanges(fetcher: Fetch = fetch): Promise<CompendiumQRange[]> {
+	if (!compendiumQRangesPromise) {
+		compendiumQRangesPromise = fetchJson<CompendiumQRange[]>('/data/compendium/q-ranges.json', fetcher);
+	}
+	return compendiumQRangesPromise;
 }
