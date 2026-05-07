@@ -216,12 +216,12 @@
 
 	<p>
 		Ce site reproduit fidèlement le texte de l'édition française officielle du Catéchisme de
-		l'Église catholique (1998). Aucune modification éditoriale n'a été apportée : ni ajout, ni
-		omission, ni reformulation. Ce que le Catéchisme dit, ce site le dit.
+		l'Église Catholique. Aucune modification éditoriale n'a été apportée : ni ajout, ni omission, ni
+		reformulation. Ce que le Catéchisme dit, ce site le dit.
 	</p>
 
 	<p>
-		La traduction de la Bible utilisée pour les références scripturaires est la
+		La traduction de la Bible utilisée pour les références scripturaires est celle de la
 		<a
 			href="https://pacificbibles.org/details.php?id=francl"
 			target="_blank"

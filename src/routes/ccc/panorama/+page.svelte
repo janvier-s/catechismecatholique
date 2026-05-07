@@ -65,8 +65,6 @@
 		</p>
 		<p class="back">
 			<a href="/ccc/sommaire">← Sommaire détaillé</a>
-			<span class="back-sep" aria-hidden="true">·</span>
-			<a href="/ccc/panorama-old">Ancienne version</a>
 		</p>
 	</header>
 
@@ -160,10 +158,5 @@
 	.back a:hover {
 		color: var(--color-accent);
 		border-bottom-color: var(--color-accent);
-	}
-	.back-sep {
-		display: inline-block;
-		margin: 0 0.55rem;
-		color: var(--color-subtle);
 	}
 </style>
