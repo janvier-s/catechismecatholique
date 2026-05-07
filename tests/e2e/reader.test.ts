@@ -55,7 +55,7 @@ test('partie/1 redirects to part slug', async ({ page }) => {
 test('TopBar renders on every page', async ({ page }) => {
 	await page.goto('/ccc/27');
 	const banner = page.getByRole('banner');
-	await expect(banner.getByRole('link', { name: 'Accueil' })).toBeVisible();
+	await expect(banner.getByRole('link', { name: /Catéchisme de l'Église Catholique/ })).toBeVisible();
 	await expect(banner.getByRole('button', { name: /Catéchisme/i })).toBeVisible();
 	await expect(banner.getByRole('link', { name: 'Bible' })).toBeVisible();
 	const search = banner.getByLabel('Recherche', { exact: true });
