@@ -13,7 +13,7 @@
 		title: string;
 		number?: number;
 		range?: Range;
-		articles: Article[];
+		articles?: Article[];
 		headings?: Heading[];
 	};
 	type Section = {
@@ -136,12 +136,14 @@
 											{@html titleHtml(chapter.slug, chapter.title)}
 										</h4>
 									</a>
-									{#if chapter.articles.length > 0}
+									{#if chapter.articles && chapter.articles.length > 0}
 										<ul class="pano-cell-list">
 											{#each chapter.articles as article (article.slug)}
 												<li>
 													<a href="{href}/{article.slug}">
-														<span class="pano-cell-art">{article.title}</span>
+														<span class="pano-cell-art">
+															{@html titleHtml(article.slug, article.title)}
+														</span>
 														{#if article.number !== undefined}
 															<span class="pano-cell-art-num">Article {article.number}</span>
 														{/if}
@@ -206,7 +208,7 @@
 	.pano-banner {
 		text-align: center;
 		padding: 1.5rem 1rem 1.4rem;
-		border-bottom: 2px solid var(--color-border);
+		border-bottom: 1px solid var(--color-muted);
 		margin-bottom: 2.25rem;
 	}
 	.pano-banner-eyebrow {

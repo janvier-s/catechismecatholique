@@ -1,6 +1,8 @@
 <script lang="ts">
 	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
+	import Panorama from '$lib/components/ui/Panorama.svelte';
+	import PanoramaModal from '$lib/components/ui/PanoramaModal.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { SvelteMap } from 'svelte/reactivity';
 	import type { PageData } from './$types';
@@ -12,6 +14,8 @@
 		for (const h of data.part.intro_headings ?? []) m.set(h.paragraph_start, h);
 		return m;
 	});
+
+	let panoramaOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -73,7 +77,17 @@
 	{/if}
 
 	{#if data.part.sections.length > 0}
-		<h2 class="font-ui text-sm uppercase tracking-wider text-muted mt-12 mb-3">Sections</h2>
+		<div class="flex items-center justify-between gap-4 mt-12 mb-3 max-md:px-4">
+			<h2 class="font-ui text-sm uppercase tracking-wider text-muted">Sections</h2>
+			<button
+				type="button"
+				class="panorama-trigger"
+				aria-haspopup="dialog"
+				onclick={() => (panoramaOpen = true)}
+			>
+				Voir le panorama <span class="panorama-trigger-arrow" aria-hidden="true">→</span>
+			</button>
+		</div>
 		<ol class="space-y-6">
 			{#each data.part.sections as section (section.slug)}
 				<li>
@@ -120,3 +134,35 @@
 		{/if}
 	</nav>
 </main>
+
+{#if data.part.sections.length > 0}
+	<PanoramaModal bind:open={panoramaOpen} title={data.part.title}>
+		<Panorama parts={[data.part]} headingLevel={3} />
+	</PanoramaModal>
+{/if}
+
+<style>
+	.panorama-trigger {
+		appearance: none;
+		background: transparent;
+		border: none;
+		padding: 0;
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		cursor: pointer;
+	}
+	.panorama-trigger:hover {
+		color: var(--color-accent-text);
+	}
+	.panorama-trigger:hover .panorama-trigger-arrow {
+		transform: translateX(3px);
+	}
+	.panorama-trigger-arrow {
+		display: inline-block;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+</style>

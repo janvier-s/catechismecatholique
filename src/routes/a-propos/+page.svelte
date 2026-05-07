@@ -61,8 +61,8 @@
 			src="/img/why-study-catechism-600.webp"
 			srcset="/img/why-study-catechism-600.webp 1x, /img/why-study-catechism-1200.webp 2x"
 			alt="Diagramme en croix des quatre parties du Catéchisme : Le Symbole des Apôtres (première partie), La célébration de la foi (deuxième partie, les sacrements), La vie dans le Christ (troisième partie, les commandements), La prière chrétienne (quatrième partie, le Notre Père) ; au centre, la Sainte Trinité, le Mystère pascal, le Christ et la personne humaine."
-			width="500"
-			height="450"
+			width="600"
+			height="547"
 			loading="lazy"
 		/>
 		<figcaption>Les quatre parties du Catéchisme, articulées autour du Christ.</figcaption>
