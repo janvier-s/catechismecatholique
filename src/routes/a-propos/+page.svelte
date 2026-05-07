@@ -237,6 +237,132 @@
 		personnelles. Aucun compte n'est requis pour accéder à l'intégralité du contenu.
 	</p>
 
+	<h2>Pourquoi étudier le Catéchisme ?</h2>
+
+	<figure class="why-study">
+		<img
+			src="/img/why-study-catechism-600.webp"
+			srcset="/img/why-study-catechism-600.webp 1x, /img/why-study-catechism-1200.webp 2x"
+			alt="Diagramme en croix des quatre parties du Catéchisme : Le Symbole des Apôtres (première partie), La célébration de la foi (deuxième partie, les sacrements), La vie dans le Christ (troisième partie, les commandements), La prière chrétienne (quatrième partie, le Notre Père) ; au centre, la Sainte Trinité, le Mystère pascal, le Christ et la personne humaine."
+			width="500"
+			height="450"
+			loading="lazy"
+		/>
+		<figcaption>Les quatre parties du Catéchisme, articulées autour du Christ.</figcaption>
+	</figure>
+
+	<ul class="why-study-list">
+		<li>Il enseigne la foi avec clarté, sans ambiguïté et dans son intégralité.</li>
+		<li>Il conduit au Christ et à la vie en Lui.</li>
+		<li>C'est un exposé sérieux, destiné à des adultes, d'une foi vivante pour notre temps.</li>
+	</ul>
+
+	<h2>De pape en pape</h2>
+
+	<p>
+		Depuis sa promulgation en 1992, le Catéchisme a été recommandé par chaque successeur de Pierre.
+	</p>
+
+	<blockquote class="papal-quote">
+		<img
+			src="/img/popes/john-paul-ii-200.webp"
+			srcset="/img/popes/john-paul-ii-200.webp 1x, /img/popes/john-paul-ii-400.webp 2x"
+			alt="Portrait du pape Jean-Paul&nbsp;II."
+			width="100"
+			height="100"
+			class="papal-portrait"
+			loading="lazy"
+		/>
+		<p>
+			«&nbsp;Je le reconnais comme un instrument valable et autorisé au service de la communion
+			ecclésiale et comme une norme sûre pour l'enseignement de la foi.&nbsp;»
+		</p>
+		<footer>
+			<strong>Saint Jean-Paul&nbsp;II</strong>, constitution apostolique
+			<em>Fidei depositum</em>,
+			<a
+				href="https://www.vatican.va/content/john-paul-ii/fr/apost_constitutions/documents/hf_jp-ii_apc_19921011_fidei-depositum.html"
+				target="_blank"
+				rel="noopener noreferrer">11 octobre 1992</a
+			>.
+		</footer>
+	</blockquote>
+
+	<blockquote class="papal-quote">
+		<img
+			src="/img/popes/benedict-xvi-200.webp"
+			srcset="/img/popes/benedict-xvi-200.webp 1x, /img/popes/benedict-xvi-400.webp 2x"
+			alt="Portrait du pape Benoît&nbsp;XVI."
+			width="100"
+			height="100"
+			class="papal-portrait"
+			loading="lazy"
+		/>
+		<p>
+			«&nbsp;Lisez le Catéchisme de l'Église catholique et redécouvrez ainsi la beauté d'être
+			chrétiens, d'être Église, de vivre le grand “nous” que Jésus a formé autour de lui, pour
+			évangéliser le monde.&nbsp;»
+		</p>
+		<footer>
+			<strong>Benoît&nbsp;XVI</strong>, homélie à Frascati,
+			<a
+				href="https://www.vatican.va/content/benedict-xvi/fr/homilies/2012/documents/hf_ben-xvi_hom_20120715_frascati.html"
+				target="_blank"
+				rel="noopener noreferrer">15 juillet 2012</a
+			>.
+		</footer>
+	</blockquote>
+
+	<blockquote class="papal-quote">
+		<img
+			src="/img/popes/francis-200.webp"
+			srcset="/img/popes/francis-200.webp 1x, /img/popes/francis-400.webp 2x"
+			alt="Portrait du pape François."
+			width="100"
+			height="100"
+			class="papal-portrait"
+			loading="lazy"
+		/>
+		<p>
+			«&nbsp;Ce Catéchisme entend s'adresser à nos contemporains, avec leurs questions à la fois
+			diverses et nouvelles. C'est ainsi que l'Église s'engage à exposer la foi en tant que réponse
+			significative pour l'existence humaine, dans le moment particulier de l'histoire que nous
+			vivons.&nbsp;»
+		</p>
+		<footer>
+			<strong>François</strong>, discours pour le 25<sup>e</sup> anniversaire du Catéchisme,
+			<a
+				href="https://www.vatican.va/content/francesco/fr/speeches/2017/october/documents/papa-francesco_20171011_convegno-nuova-evangelizzazione.html"
+				target="_blank"
+				rel="noopener noreferrer">11 octobre 2017</a
+			>.
+		</footer>
+	</blockquote>
+
+	<blockquote class="papal-quote">
+		<img
+			src="/img/popes/leo-xiv-200.webp"
+			srcset="/img/popes/leo-xiv-200.webp 1x, /img/popes/leo-xiv-400.webp 2x"
+			alt="Portrait du pape Léon&nbsp;XIV."
+			width="100"
+			height="100"
+			class="papal-portrait"
+			loading="lazy"
+		/>
+		<p>
+			«&nbsp;Le Catéchisme est le “guide de voyage” qui nous préserve de l'individualisme et des
+			discordes, parce qu'il atteste la foi de toute l'Église catholique.&nbsp;»
+		</p>
+		<footer>
+			<strong>Léon&nbsp;XIV</strong>, homélie pour le Jubilé des catéchistes,
+			<a
+				href="https://www.vatican.va/content/leo-xiv/fr/homilies/2025/documents/20250928-omelia-giubileo-catechisti.html"
+				target="_blank"
+				rel="noopener noreferrer">28 septembre 2025</a
+			>.
+		</footer>
+	</blockquote>
+
 	<h2>Une idée simple</h2>
 
 	<p>
@@ -396,6 +522,145 @@
 		.logo-block-img {
 			width: 80px;
 			height: 80px;
+		}
+	}
+
+	/* Why-study figure — centred diagram of the four parts with a caption,
+	   followed by a list of three reasons rendered as bigger, well-spaced
+	   bullets that read as a manifesto rather than a checklist. */
+	.why-study {
+		margin: 1.5rem auto 1.75rem;
+		max-width: 520px;
+		text-align: center;
+	}
+	.why-study img {
+		width: 100%;
+		height: auto;
+		max-width: 500px;
+		display: block;
+		margin: 0 auto;
+	}
+	.why-study figcaption {
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-style: italic;
+		line-height: 1.5;
+		color: var(--color-subtle);
+		margin-top: 0.85rem;
+	}
+	.why-study-list {
+		list-style: none;
+		margin: 1rem 0 2.25rem;
+		padding: 0;
+		max-width: 560px;
+	}
+	.why-study-list li {
+		position: relative;
+		padding: 0.65rem 0 0.65rem 2rem;
+		font-family: var(--font-body);
+		font-size: 1.02rem;
+		line-height: 1.6;
+		color: var(--color-fg);
+		border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+	}
+	.why-study-list li:last-child {
+		border-bottom: none;
+	}
+	.why-study-list li::before {
+		content: '✠';
+		position: absolute;
+		left: 0.4rem;
+		top: 0.65rem;
+		color: var(--color-accent);
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+
+	/* Papal quote — round portrait at the left, italic quote at the right
+	   with a hairline accent rule on the leading edge. The portrait sits
+	   inside the blockquote so the whole card is one semantic citation
+	   unit; CSS lays it out as a row. Stacks on phones. */
+	.papal-quote {
+		display: flex;
+		gap: 1.25rem;
+		align-items: flex-start;
+		margin: 1.5rem 0;
+		padding: 0.1rem 0 0.1rem 1.1rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+	}
+	.papal-portrait {
+		flex: 0 0 auto;
+		width: 88px;
+		height: 88px;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center top;
+		filter: grayscale(0.15);
+	}
+	.papal-quote > p {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 1rem;
+		line-height: 1.65;
+		color: var(--color-fg);
+		margin: 0 0 0.6rem;
+	}
+	.papal-quote footer {
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--color-subtle);
+	}
+	.papal-quote footer strong {
+		color: var(--color-accent-text);
+		font-weight: 600;
+	}
+	.papal-quote footer a {
+		color: inherit;
+		text-decoration-color: var(--color-border);
+		text-underline-offset: 2px;
+	}
+	.papal-quote footer a:hover {
+		color: var(--color-accent);
+	}
+	/* Wrap the right-column flow (quote + footer) so flex puts portrait + a
+	   single text block side-by-side. We do this by selecting all blockquote
+	   children except the img and grouping via display: contents on a div?
+	   Simpler: don't wrap; just let flex distribute the three children, and
+	   restrict the portrait's flex so the rest expands. */
+	.papal-quote > p,
+	.papal-quote > footer {
+		flex: 1 1 100%;
+	}
+	.papal-quote {
+		flex-wrap: wrap;
+	}
+	.papal-quote > p {
+		flex: 1 1 calc(100% - 88px - 1.25rem);
+	}
+	.papal-quote > footer {
+		margin-left: calc(88px + 1.25rem);
+		flex: 1 1 calc(100% - 88px - 1.25rem);
+	}
+	@media (max-width: 640px) {
+		.papal-quote {
+			flex-direction: column;
+			align-items: center;
+			gap: 0.85rem;
+			padding-left: 0;
+			border-left: none;
+			border-top: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+			padding-top: 0.85rem;
+			text-align: left;
+		}
+		.papal-quote > p,
+		.papal-quote > footer {
+			flex: 1 1 auto;
+			margin-left: 0;
+		}
+		.papal-portrait {
+			width: 96px;
+			height: 96px;
 		}
 	}
 </style>
