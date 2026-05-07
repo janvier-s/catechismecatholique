@@ -23,7 +23,7 @@
 	subtitle="Le Catéchisme de l'Église Catholique en français, conçu pour le web : navigation structurée, recherche plein texte et concordance biblique."
 	description="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 >
-	<h2>Le Catéchisme et la lacune en ligne</h2>
+	<h2>Le Catéchisme et la lacune numérique</h2>
 
 	<p>
 		Le Catéchisme de l'Église catholique, promulgué le 11 octobre 1992 par saint Jean-Paul&nbsp;II
@@ -332,7 +332,7 @@
 		<li>
 			<strong>Panneau d'étude</strong> : chaque paragraphe est accompagné d'un panneau latéral à six
 			onglets, accessible sans quitter la lecture.
-			<ul>
+			<ul class="study-panel-list">
 				<li><strong>Bible</strong> : le texte intégral des versets cités dans le paragraphe.</li>
 				<li>
 					<strong>Renvois</strong> : les renvois internes inscrits dans le texte du Catéchisme. Le Catéchisme
@@ -527,29 +527,30 @@
 		color: #fff;
 	}
 
-	/* Logo block — image on the left, prose on the right; stacks on small
-	   viewports so the description never gets squeezed. */
+	/* Logo block — logo above, prose below so the image can run larger
+	   than a thumbnail. */
 	.logo-block {
 		display: flex;
+		flex-direction: column;
+		align-items: center;
 		gap: 1.5rem;
-		align-items: flex-start;
 		margin: 1.5rem 0 2rem;
-		padding: 1.25rem 1.4rem;
+		padding: 1.75rem 1.4rem 1.5rem;
 		border: 1px solid var(--color-border);
 		border-radius: 4px;
 		background: color-mix(in srgb, var(--color-border) 18%, transparent);
 	}
 	.logo-block-img {
 		flex: 0 0 auto;
-		width: 96px;
-		height: 96px;
+		width: 168px;
+		height: 168px;
 	}
 	.logo-block-img :global(img) {
 		width: 100%;
 		height: 100%;
 	}
 	.logo-block-text {
-		flex: 1 1 auto;
+		max-width: 60ch;
 	}
 	.logo-block-text p {
 		margin: 0 0 0.8em;
@@ -559,17 +560,21 @@
 	.logo-block-text p:last-child {
 		margin-bottom: 0;
 	}
+
+	/* Restore default disc bullets on the StudyPanel sub-list (Tailwind's
+	   preflight strips list-style globally). */
+	.study-panel-list {
+		list-style: disc;
+		padding-left: 1.4rem;
+	}
 	@media (max-width: 640px) {
 		.logo-block {
-			flex-direction: column;
-			align-items: center;
-			text-align: left;
-			gap: 1rem;
-			padding: 1rem 1.1rem;
+			gap: 1.15rem;
+			padding: 1.2rem 1rem;
 		}
 		.logo-block-img {
-			width: 80px;
-			height: 80px;
+			width: 132px;
+			height: 132px;
 		}
 	}
 

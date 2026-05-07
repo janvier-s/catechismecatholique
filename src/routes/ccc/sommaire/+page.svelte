@@ -1,10 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import Panorama from '$lib/components/ui/Panorama.svelte';
-	import PanoramaModal from '$lib/components/ui/PanoramaModal.svelte';
 
 	let { data }: { data: PageData } = $props();
-	let panoramaOpen = $state(false);
 
 	type Range = { from: number; to: number };
 	type Heading = {
@@ -96,37 +93,11 @@
 			La foi professée, célébrée, vécue, et priée.
 		</p>
 		<div class="toc-actions">
-			<button
-				type="button"
-				class="panorama-btn"
-				aria-haspopup="dialog"
-				onclick={() => (panoramaOpen = true)}
-			>
-				<svg
-					width="14"
-					height="14"
-					viewBox="0 0 16 16"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.4"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					aria-hidden="true"
-				>
-					<rect x="1.5" y="1.5" width="6" height="6" rx="0.5" />
-					<rect x="8.5" y="1.5" width="6" height="6" rx="0.5" />
-					<rect x="1.5" y="8.5" width="6" height="6" rx="0.5" />
-					<rect x="8.5" y="8.5" width="6" height="6" rx="0.5" />
-				</svg>
-				<span>Panorama</span>
-			</button>
-			<a class="panorama-link" href="/ccc/panorama">Voir le panorama complet →</a>
+			<a class="panorama-link" href="/ccc/panorama">
+				Voir le panorama <span class="panorama-arrow" aria-hidden="true">→</span>
+			</a>
 		</div>
 	</header>
-
-	<PanoramaModal bind:open={panoramaOpen} title="Panorama du Catéchisme">
-		<Panorama parts={struct.parts} headingLevel={3} />
-	</PanoramaModal>
 
 	<div class="parts">
 		{#each struct.parts as part, i (part.slug)}
@@ -430,44 +401,24 @@
 		gap: 1rem 1.5rem;
 		margin-top: calc(var(--rh) * 1.25);
 	}
-	.panorama-btn {
-		appearance: none;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.55rem;
-		padding: 0.5rem 0.9rem;
-		border: 1px solid var(--color-border);
-		border-radius: 4px;
-		background: transparent;
-		color: var(--color-fg);
+	.panorama-link {
 		font-family: var(--font-ui);
-		font-size: 0.7rem;
+		font-size: 0.78rem;
 		font-weight: 600;
 		letter-spacing: 0.18em;
 		text-transform: uppercase;
-		cursor: pointer;
-		transition:
-			border-color 150ms ease,
-			color 150ms ease;
-	}
-	.panorama-btn:hover {
 		color: var(--color-accent);
-		border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
-	}
-	.panorama-link {
-		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--color-muted);
 		text-decoration: none;
-		border-bottom: 1px solid var(--color-border);
-		padding-bottom: 1px;
 	}
 	.panorama-link:hover {
-		color: var(--color-accent);
-		border-bottom-color: var(--color-accent);
+		color: var(--color-accent-text);
+	}
+	.panorama-link:hover .panorama-arrow {
+		transform: translateX(3px);
+	}
+	.panorama-arrow {
+		display: inline-block;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	/* ---- Parts ----------------------------------------------------------- */

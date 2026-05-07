@@ -64,7 +64,9 @@
 			n'importe quel titre pour entrer dans la lecture.
 		</p>
 		<p class="back">
-			<a href="/ccc/sommaire">← Sommaire détaillé</a>
+			<a class="back-link" href="/ccc/sommaire">
+				<span class="back-arrow" aria-hidden="true">←</span> Sommaire détaillé
+			</a>
 		</p>
 	</header>
 
@@ -144,19 +146,24 @@
 	}
 	.back {
 		margin: 1.4rem 0 0;
+	}
+	.back-link {
 		font-family: var(--font-ui);
-		font-size: 0.72rem;
+		font-size: 0.78rem;
+		font-weight: 600;
 		letter-spacing: 0.18em;
 		text-transform: uppercase;
-	}
-	.back a {
-		color: var(--color-muted);
-		text-decoration: none;
-		border-bottom: 1px solid var(--color-border);
-		padding-bottom: 1px;
-	}
-	.back a:hover {
 		color: var(--color-accent);
-		border-bottom-color: var(--color-accent);
+		text-decoration: none;
+	}
+	.back-link:hover {
+		color: var(--color-accent-text);
+	}
+	.back-link:hover .back-arrow {
+		transform: translateX(-3px);
+	}
+	.back-arrow {
+		display: inline-block;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 </style>

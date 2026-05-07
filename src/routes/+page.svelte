@@ -297,6 +297,11 @@
 	.daily-mark:hover {
 		color: var(--color-accent-text);
 	}
+	.daily-mark:hover .section-num {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+		text-decoration-thickness: 1px;
+	}
 	.section-num {
 		font-size: 1.2rem;
 		font-weight: 600;
@@ -407,8 +412,7 @@
 		transform: translateX(4px);
 	}
 	.cta-arrow {
-		font-family: var(--font-heading);
-		font-size: 1.05rem;
+		display: inline-block;
 		line-height: 1;
 		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}

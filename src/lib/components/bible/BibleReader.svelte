@@ -90,7 +90,7 @@
 			<ChapterFilterBar bind:dimNonCited citedCount={totalCited} />
 		{/if}
 
-		<ol class="list-none space-y-3">
+		<ol class="list-none space-y-3 max-md:space-y-0">
 			{#each verses as v (v.v)}
 				{@const c = citedCount(v.v)}
 				{@const headingsHere = sectionsByVerse.get(v.v) ?? []}
@@ -127,7 +127,7 @@
 						class:is-active={active}
 					>
 						<span
-							class="font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-5 shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+							class="font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
 						>
 							{v.v}
 						</span>

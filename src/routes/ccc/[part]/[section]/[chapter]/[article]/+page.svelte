@@ -67,7 +67,7 @@
 	{@html breadcrumbJsonLdScript}
 </svelte:head>
 
-<main class="mx-auto max-w-reader px-6 py-10" use:scrollSpy>
+<main class="mx-auto max-w-reader px-6 max-md:px-0 py-10" use:scrollSpy>
 	<nav class="breadcrumb-rail mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
 		<ol class="space-y-1">
 			<li><a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a></li>

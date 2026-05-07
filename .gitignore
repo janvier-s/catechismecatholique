@@ -51,3 +51,6 @@ CLAUDE.md
 # Data source symlinks (re-create per-developer)
 scripts/data-sources/*
 !scripts/data-sources/README.md
+
+# Lighthouse HTML reports
+catechismecatholique.fr_*.report.html

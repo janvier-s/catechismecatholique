@@ -55,6 +55,37 @@
 	const ARTICLE_TAG_OVERRIDE: Record<string, string> = {
 		'la-doxologie-finale': 'Fin'
 	};
+	// Display-only line breaks for long titles in the panorama view.
+	// Keyed by slug so renames in the prose don't silently break here.
+	// Values are HTML-safe (only the source title plus literal <br />).
+	const TITLE_HTML: Record<string, string> = {
+		'je-crois-en-jesus-christ-le-fils-unique-de-dieu':
+			'Je crois en Jésus-Christ,<br />le Fils unique de Dieu',
+		'et-en-jesus-christ-son-fils-unique-notre-seigneur':
+			'« Et en Jésus-Christ, son Fils unique,<br />notre Seigneur »',
+		'jesus-christ-a-souffert-sous-ponce-pilate-il-a-ete-crucifie-il-est-mort-il-a-ete-enseveli':
+			'« Jésus-Christ a souffert sous ponce pilate,<br />il a été crucifié, il est mort, il a été enseveli »',
+		'jesus-christ-est-descendu-aux-enfers-est-ressuscite-des-morts-le-troisieme-jour':
+			'« Jésus-Christ est descendu aux enfers,<br />est ressuscité des morts le troisième jour »',
+		'dou-il-viendra-juger-les-vivants-et-les-morts':
+			'« D’où il viendra juger les vivants et<br />les morts »',
+		'tu-aimeras-le-seigneur-ton-dieu-de-tout-ton-coeur-de-toute-ton-ame-et-de-tout-ton-esprit':
+			'« Tu aimeras le Seigneur ton Dieu de tout ton cœur,<br />de toute ton âme et de tout ton esprit »',
+		'la-revelation-de-la-priere-lappel-universel-a-la-priere':
+			'La révélation de la prière<br />– l’appel universel à la prière',
+		'le-resume-de-tout-levangile': '« Le résumé de<br />tout l’Évangile »',
+		'notre-pere-qui-es-aux-cieux': '« Notre Père<br />qui es aux cieux »'
+	};
+	function escapeHtml(s: string): string {
+		return s
+			.replaceAll('&', '&amp;')
+			.replaceAll('<', '&lt;')
+			.replaceAll('>', '&gt;')
+			.replaceAll('"', '&quot;');
+	}
+	function titleHtml(slug: string, title: string): string {
+		return TITLE_HTML[slug] ?? escapeHtml(title);
+	}
 </script>
 
 <div class="panorama">
@@ -84,7 +115,9 @@
 						{#if section.number}
 							<span class="pano-section-num">Section {section.number}</span>
 						{/if}
-						<h3 class="pano-section-title">{section.title}</h3>
+						<h3 class="pano-section-title">
+							{@html titleHtml(section.slug, section.title)}
+						</h3>
 						{#if section.range}
 							<span class="pano-section-range">{fmtRange(section.range)}</span>
 						{/if}
@@ -99,7 +132,9 @@
 										{#if chapter.number !== undefined}
 											<span class="pano-cell-tag">Chapitre {chapter.number}</span>
 										{/if}
-										<h4 class="pano-cell-title">{chapter.title}</h4>
+										<h4 class="pano-cell-title">
+											{@html titleHtml(chapter.slug, chapter.title)}
+										</h4>
 									</a>
 									{#if chapter.articles.length > 0}
 										<ul class="pano-cell-list">
@@ -116,6 +151,7 @@
 										</ul>
 									{/if}
 									{#if chapter.range}
+										<div class="pano-cell-spacer" aria-hidden="true"></div>
 										<p class="pano-cell-range">{fmtRange(chapter.range)}</p>
 									{/if}
 								</div>
@@ -136,12 +172,15 @@
 										{#if tag}
 											<span class="pano-cell-tag">{tag}</span>
 										{/if}
-										<h4 class="pano-cell-title">{article.title}</h4>
+										<h4 class="pano-cell-title">
+											{@html titleHtml(article.slug, article.title)}
+										</h4>
 										{#if subtitle}
 											<p class="pano-cell-subtitle">{subtitle}</p>
 										{/if}
 									</a>
 									{#if article.range}
+										<div class="pano-cell-spacer" aria-hidden="true"></div>
 										<p class="pano-cell-range">{fmtRange(article.range)}</p>
 									{/if}
 								</div>
@@ -163,11 +202,11 @@
 		color: var(--color-fg);
 	}
 
-	/* Part banner — bottom accent rule only; prologue gets no rule at all */
+	/* Part banner — quiet bottom rule only; prologue gets no rule at all */
 	.pano-banner {
 		text-align: center;
 		padding: 1.5rem 1rem 1.4rem;
-		border-bottom: 2px solid var(--color-accent);
+		border-bottom: 2px solid var(--color-border);
 		margin-bottom: 2.25rem;
 	}
 	.pano-banner-eyebrow {
@@ -217,7 +256,7 @@
 	/* Tighter gap below the prologue (which is just an intro), normal
 	   gap between full parts. */
 	.pano-part.is-prologue {
-		margin-bottom: -1.75rem;
+		margin-bottom: -4.5rem;
 	}
 
 	/* Section ---------------------------------------------------------- */
@@ -307,8 +346,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
-		padding-bottom: 0.7rem;
-		min-height: 4.5rem;
 	}
 	.pano-cell-head:hover .pano-cell-title {
 		color: var(--color-accent);
@@ -375,6 +412,14 @@
 		color: var(--color-subtle);
 		margin-top: 0.15rem;
 	}
+	/* Flex spacer that pushes the range to the bottom of the cell while
+	   guaranteeing a minimum gap above it — replaces `margin-top: auto`
+	   on the range, which left single-line cards with the range butted
+	   right under the title. */
+	.pano-cell-spacer {
+		flex: 1 1 auto;
+		min-height: 1.25rem;
+	}
 	.pano-cell-range {
 		font-family: var(--font-ui);
 		font-size: 0.7rem;
@@ -382,12 +427,9 @@
 		font-variant-numeric: tabular-nums lining-nums;
 		letter-spacing: 0.14em;
 		color: var(--color-subtle);
-		margin: 0.85rem 0 0;
+		margin: 0;
 		padding-top: 0.55rem;
 		border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
-		/* Pin the range to the bottom of the cell so siblings in the same
-		   row line their ranges up regardless of title length. */
-		margin-top: auto;
 	}
 
 	@media (max-width: 640px) {
