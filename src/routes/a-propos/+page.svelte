@@ -248,14 +248,25 @@
 	<h2>Le logo</h2>
 
 	<div class="logo-block">
-		<img
-			src="/img/logo/logo-128.png"
-			srcset="/img/logo/logo-128.png 1x, /img/logo/logo-192.png 2x"
-			alt="Logo du Catéchisme : un Bon Pasteur entouré d'une brebis et d'un agneau, jouant de la flûte sous un arbre stylisé."
-			width="96"
-			height="96"
-			class="logo-block-img"
-		/>
+		<picture class="logo-block-img">
+			<img
+				src="/img/logo/logo-128.png"
+				srcset="/img/logo/logo-128.png 1x, /img/logo/logo-192.png 2x"
+				alt="Logo du Catéchisme : un Bon Pasteur entouré d'une brebis et d'un agneau, jouant de la flûte sous un arbre stylisé."
+				width="96"
+				height="96"
+				class="logo-light"
+			/>
+			<img
+				src="/img/logo/logo-dark-128.png"
+				srcset="/img/logo/logo-dark-128.png 1x, /img/logo/logo-dark-192.png 2x"
+				alt=""
+				aria-hidden="true"
+				width="96"
+				height="96"
+				class="logo-dark"
+			/>
+		</picture>
 		<div class="logo-block-text">
 			<p>
 				Le logo est dessiné d'après une pierre tombale chrétienne des catacombes de Domitilla, à
@@ -523,6 +534,10 @@
 		flex: 0 0 auto;
 		width: 96px;
 		height: 96px;
+	}
+	.logo-block-img :global(img) {
+		width: 100%;
+		height: 100%;
 	}
 	.logo-block-text {
 		flex: 1 1 auto;

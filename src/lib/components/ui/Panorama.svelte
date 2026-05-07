@@ -39,7 +39,7 @@
 
 	function fmtRange(r: Range | undefined): string {
 		if (!r) return '';
-		return r.from === r.to ? `§${r.from}` : `§§ ${r.from}–${r.to}`;
+		return r.from === r.to ? `§${r.from}` : `§§ ${r.from}–${r.to}`;
 	}
 </script>
 
