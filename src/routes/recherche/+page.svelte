@@ -5,23 +5,28 @@
 	import { page } from '$app/state';
 	import { stripDiacritics } from '$lib/utils/searchTokenizer';
 	import { detectIntent } from '$lib/utils/searchIntent';
-	import { loadParagraphContexts } from '$lib/data/loaders';
+	import { loadParagraphContext } from '$lib/data/loaders';
 	import type { ParagraphContext } from '$lib/data/types';
 	import SearchSuggest from '$lib/components/ui/SearchSuggest.svelte';
 	import RelatedTopics from '$lib/components/ui/RelatedTopics.svelte';
 
 	let { data }: { data: PageData } = $props();
 
-	// Paragraph contexts hydrate client-side after first paint. Inlining the
-	// 1.8 MB bundle into the SSR HTML was the largest payload on the site.
-	// Result rows render immediately; breadcrumbs pop in once the bundle
-	// arrives (typically <100 ms on warm cache).
-	let contexts: Record<number, ParagraphContext> = $state({});
+	// Paragraph contexts populate per-hit via tiny shard fetches (~30 bytes
+	// each) instead of the legacy 1.8 MB bundle. Result rows render
+	// immediately; breadcrumbs pop in as the shards arrive. Each context is
+	// requested at most once thanks to the loader's module-level cache.
+	const contexts = $state<Record<number, ParagraphContext>>({});
+	const requested = new Set<number>();
 	$effect(() => {
-		if (data.hits.length === 0) return;
-		void loadParagraphContexts().then((c) => {
-			contexts = c;
-		});
+		for (const h of data.hits) {
+			const num = h.kind === 'paragraph' ? h.number : h.paragraph_start;
+			if (!num || requested.has(num)) continue;
+			requested.add(num);
+			void loadParagraphContext(num).then((c) => {
+				if (c) contexts[num] = c;
+			});
+		}
 	});
 
 	// Local query state mirrors ?q for the form input. Re-seeded by an effect

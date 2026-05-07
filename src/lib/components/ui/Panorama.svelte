@@ -387,9 +387,12 @@
 	.pano-part.is-active .pano-banner-title::before {
 		content: '›';
 		display: inline-block;
-		margin-right: 0.4em;
+		margin-right: 0.3em;
 		color: var(--color-accent);
 		font-weight: 700;
+		font-size: 1.4em;
+		line-height: 0.8;
+		vertical-align: -0.08em;
 	}
 	.pano-section.is-active > .pano-section-head .pano-section-title {
 		color: var(--color-accent);
@@ -412,9 +415,12 @@
 	.pano-cell.is-active .pano-cell-title::before {
 		content: '›';
 		display: inline-block;
-		margin-right: 0.4em;
+		margin-right: 0.35em;
 		color: var(--color-accent);
 		font-weight: 700;
+		font-size: 1.5em;
+		line-height: 0.8;
+		vertical-align: -0.1em;
 	}
 	.pano-cell-list li.is-active .pano-cell-art {
 		color: var(--color-accent);
@@ -422,9 +428,12 @@
 	.pano-cell-list li.is-active .pano-cell-art::before {
 		content: '›';
 		display: inline-block;
-		margin-right: 0.4em;
+		margin-right: 0.35em;
 		color: var(--color-accent);
 		font-weight: 700;
+		font-size: 1.5em;
+		line-height: 0.8;
+		vertical-align: -0.1em;
 	}
 	.pano-cell-list li.is-active .pano-cell-art-num {
 		color: var(--color-accent);

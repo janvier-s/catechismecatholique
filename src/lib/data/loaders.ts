@@ -38,7 +38,6 @@ let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
 let nclManifestPromise: Promise<Set<string>> | null = null;
 const nclBookCache = new Map<string, Promise<NclBook | null>>();
-let paragraphContextsPromise: Promise<Record<number, ParagraphContext>> | null = null;
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
@@ -85,18 +84,6 @@ export function loadStructureToc(fetcher: Fetch = fetch): Promise<unknown> {
 
 export function loadAbbreviations(fetcher: Fetch = fetch): Promise<AbbreviationMap> {
 	return fetchJson<AbbreviationMap>('/data/ccc/abbreviations.json', fetcher);
-}
-
-export function loadParagraphContexts(
-	fetcher: Fetch = fetch
-): Promise<Record<number, ParagraphContext>> {
-	if (!paragraphContextsPromise) {
-		paragraphContextsPromise = fetchJson<Record<number, ParagraphContext>>(
-			'/data/ccc/paragraph-context.json',
-			fetcher
-		);
-	}
-	return paragraphContextsPromise;
 }
 
 // Per-paragraph context shard — used by paragraph and search routes so the
