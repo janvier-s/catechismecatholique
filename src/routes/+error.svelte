@@ -50,11 +50,11 @@
 	}
 	.status {
 		font-family: var(--font-ui);
-		font-size: clamp(4rem, 12vw, 6.5rem);
+		font-size: clamp(2.25rem, 6vw, 3.25rem);
 		font-weight: 500;
 		line-height: 1;
-		letter-spacing: -0.02em;
-		color: var(--color-accent);
+		letter-spacing: -0.01em;
+		color: var(--color-fg);
 		margin: 0;
 		font-variant-numeric: lining-nums tabular-nums;
 	}

@@ -305,8 +305,12 @@ export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBo
 	let p = nclBookCache.get(usfx);
 	if (!p) {
 		p = (async () => {
+			// Manifest is the fast path — when it's reachable, gates speculative
+			// 404s on missing books. When the deploy or dev server hasn't served
+			// it yet, fall through and try the shard directly: a missing manifest
+			// shouldn't make every Bible chapter 404.
 			const manifest = await loadNclManifest(fetcher);
-			if (!manifest.has(usfx)) return null;
+			if (manifest.size > 0 && !manifest.has(usfx)) return null;
 			const r = await fetcher(`/data/bible/ncl/${usfx}.json`);
 			if (!r.ok) return null;
 			return (await r.json()) as NclBook;
