@@ -169,6 +169,20 @@
 		const baseHref = `/ccc/${partSlug}/${sectionSlug}/${ch.slug}`;
 		const out: Item[] = [];
 		const detail = activeChapter && activeChapter.slug === ch.slug ? activeChapter : null;
+
+		// Préambule — paragraphs that sit in the chapter before the first
+		// article (e.g. Chapter 2's §§422-429 "La Bonne Nouvelle"). Surface
+		// them as a top-level entry so readers can jump in without guessing
+		// they live "above" Article 2.
+		const chapFirstP = ch.paragraphs?.[0];
+		const firstArtP = ch.articles?.[0]?.paragraphs?.[0];
+		if (chapFirstP && firstArtP && chapFirstP < firstArtP) {
+			out.push({
+				title: 'Préambule',
+				href: baseHref,
+				typeLabel: 'Préambule'
+			});
+		}
 		// Always build the rich tree from whatever article data is available.
 		// Structure-level articles already carry `headings` (recursive), so we
 		// can render the full article→Roman→sub_heading nesting before the

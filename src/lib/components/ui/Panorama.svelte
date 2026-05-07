@@ -169,7 +169,25 @@
 										</h4>
 									</a>
 									{#if chapter.articles && chapter.articles.length > 0}
+										{@const chapStart = chapter.range?.from}
+										{@const firstArtStart = chapter.articles[0]?.range?.from}
+										{@const preambuleEnd =
+											chapStart && firstArtStart && chapStart < firstArtStart
+												? firstArtStart - 1
+												: null}
 										<ul class="pano-cell-list">
+											{#if chapStart && preambuleEnd !== null}
+												<li>
+													<a {href}>
+														<span class="pano-cell-art">Préambule</span>
+														<span class="pano-cell-art-num">
+															{chapStart === preambuleEnd
+																? `§${chapStart}`
+																: `§${chapStart}–${preambuleEnd}`}
+														</span>
+													</a>
+												</li>
+											{/if}
 											{#each chapter.articles as article (article.slug)}
 												{@const articleActive =
 													chapterOnPath && deepest === 'article' && active.article === article.slug}
@@ -381,8 +399,11 @@
 	/* Active highlights — show readers where they currently are.
 	   Each active node gets a "›" chevron to the left of its title so
 	   the cue is glance-able even without the colour shift. */
-	.pano-part.is-active .pano-banner-title {
+	.pano-part.is-active .pano-banner-title,
+	.pano-part.is-active .pano-banner-title a {
 		color: var(--color-accent);
+		text-decoration: underline dotted;
+		text-underline-offset: 4px;
 	}
 	.pano-part.is-active .pano-banner-title::before {
 		content: '›';
@@ -396,6 +417,8 @@
 	}
 	.pano-section.is-active > .pano-section-head .pano-section-title {
 		color: var(--color-accent);
+		text-decoration: underline dotted;
+		text-underline-offset: 4px;
 	}
 	.pano-section.is-active > .pano-section-head .pano-section-title::before {
 		content: '›';
@@ -411,6 +434,8 @@
 	}
 	.pano-cell.is-active .pano-cell-title {
 		color: var(--color-accent);
+		text-decoration: underline dotted;
+		text-underline-offset: 4px;
 	}
 	.pano-cell.is-active .pano-cell-title::before {
 		content: '›';
@@ -424,6 +449,8 @@
 	}
 	.pano-cell-list li.is-active .pano-cell-art {
 		color: var(--color-accent);
+		text-decoration: underline dotted;
+		text-underline-offset: 4px;
 	}
 	.pano-cell-list li.is-active .pano-cell-art::before {
 		content: '›';

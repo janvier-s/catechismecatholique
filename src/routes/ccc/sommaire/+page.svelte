@@ -185,7 +185,29 @@
 													</ul>
 												{/if}
 												{#if chap.articles.length}
+													{@const chapStart = chap.range?.from}
+													{@const firstArtStart = chap.articles[0]?.range?.from}
+													{@const preambuleEnd =
+														chapStart && firstArtStart && chapStart < firstArtStart
+															? firstArtStart - 1
+															: null}
+													{@const chapHrefBase = `/ccc/${part.slug}/${section.slug}/${chap.slug}`}
 													<ul class="articles" role="list">
+														{#if chapStart && preambuleEnd !== null}
+															<li>
+																<a class="row row-article" href={chapHrefBase}>
+																	<span class="row-label">
+																		<span class="label-tag-sm">Préambule</span>
+																	</span>
+																	<span class="dotleader" aria-hidden="true"></span>
+																	<span class="row-range">
+																		{chapStart === preambuleEnd
+																			? `${chapStart}`
+																			: `${chapStart}–${preambuleEnd}`}
+																	</span>
+																</a>
+															</li>
+														{/if}
 														{#each chap.articles as article (article.slug)}
 															{@const articleHref = `/ccc/${part.slug}/${section.slug}/${chap.slug}/${article.slug}`}
 															<li>
