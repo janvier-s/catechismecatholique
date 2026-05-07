@@ -4,8 +4,6 @@
 		<span class="footer-sep" aria-hidden="true">·</span>
 		<a href="/bible">Bible</a>
 		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/glossaire">Glossaire</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
 		<a href="/a-propos">À propos</a>
 		<span class="footer-sep" aria-hidden="true">·</span>
 		<a href="/mentions-legales">Mentions légales</a>

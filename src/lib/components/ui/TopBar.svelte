@@ -54,7 +54,6 @@
 		>
 			<CatechismDropdown />
 			<a href="/bible" class="hover:text-accent">Bible</a>
-			<a href="/glossaire" class="hover:text-accent">Glossaire</a>
 			<a href="/a-propos" class="hover:text-accent">À propos</a>
 		</nav>
 		<a
