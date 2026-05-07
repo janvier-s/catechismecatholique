@@ -17,7 +17,12 @@
 	// see before clicking.
 	setContext('part-panorama', {
 		open: () => (panoramaOpen = true),
-		partTitle: data.partTree.title
+		// Getter so descendants always read the live partie title — without
+		// it the value would be captured at first render and go stale when
+		// the user navigates between parties.
+		get partTitle() {
+			return data.partTree.title;
+		}
 	});
 
 	// Resolve the active node from the URL so the panorama can highlight
