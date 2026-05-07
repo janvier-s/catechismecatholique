@@ -14,7 +14,7 @@ Le Compendium est un nouveau corpus, **frère du CEC**, qui partage la même reg
 - 4 **Parties** : *La profession de la foi · La célébration du mystère chrétien · La vie dans le Christ · La prière chrétienne*
 - 2 à 10 **Sections** par partie (et **sous-sections** dans certains cas) avec une plage contiguë de questions
 - 598 **Questions** numérotées (Q&R + `ccc_refs` + `verses`)
-- Une **Annexe** facultative (Prières communes, Formules de la doctrine catholique, Abréviations bibliques) — à confirmer avant l'implémentation.
+- Une **Annexe** : Prières communes + Formules de la doctrine catholique. (Les Abréviations bibliques sont déjà gérées par le module `abbreviations` du CEC ; non incluses ici.)
 
 **Routes :**
 
@@ -158,7 +158,7 @@ Le lecteur se cale sur la mise en page native de la source EPUB (`<div class="iz
 
 - **`prepare-data.ts`** — appelle un nouveau `scripts/prepare/compendium.ts` qui réutilise les utilitaires existants : `slug.ts`, `sentence-case.ts`, le parseur de versets de `bible-index.ts`, et **alimente** le constructeur d'index de recherche `search-index.ts` au lieu d'en bâtir un parallèle.
 
-- **Param matcher** — renommer `params/cccref.ts` → `params/numref.ts` (la regex est agnostique du corpus) et le réutiliser pour `/compendium/q/[n]`. Pragmatique.
+- **Param matcher** — `params/cccref.ts` reste tel quel (accepte les plages comme `123-127`). Un nouveau `params/qref.ts` minimal accepte un seul numéro (`^\d+$`) pour `/compendium/q/[n]`. Sémantiques distinctes, deux matchers purposes-named d'une ligne chacun.
 
 - **Renvois inter-corpus** — les chips `ccc_refs` réutilisent les classes `cross-ref-link` de l'aside `ParagraphView` existante. Les renvois bibliques réutilisent le même `openPanel({ kind: 'verse', ... })` que les bible refs inline du CEC.
 
@@ -227,13 +227,12 @@ Le lecteur se cale sur la mise en page native de la source EPUB (`<div class="iz
 **Hors périmètre :**
 
 - `/compendium/sommaire`, `/compendium/panorama` (réévaluer après la phase 1).
-- Annexe (Prières communes, etc.) — décision d'inclusion à confirmer avant la phase 1.
 - Index inversé Compendium↔Bible (pas demandé pour l'instant).
 
 ---
 
-## 7. Décisions à confirmer avant l'implémentation
+## 7. Décisions arrêtées
 
-1. **Annexe EPUB** : inclure ou exclure les sections Prières communes / Formules de la doctrine catholique / Abréviations bibliques ? (Recommandation : inclure — c'est du contenu existant et utile.)
-2. **Renommage `ParagraphView` → `ReadableUnit`** : OK ou garder le nom existant et seulement changer la prop ? (Recommandation : renommer — clarifie.)
-3. **Renommage `params/cccref.ts` → `params/numref.ts`** : OK ou laisser deux matchers identiques ? (Recommandation : renommer.)
+1. **Annexe EPUB** : inclure les Prières communes et les Formules de la doctrine catholique. Les Abréviations bibliques sont déjà couvertes par le module CEC existant.
+2. **`ParagraphView` → `ReadableUnit`** : oui, renommer.
+3. **Param matcher** : ne pas renommer `cccref.ts`. Ajouter un `params/qref.ts` séparé (`^\d+$`) pour les routes Compendium — sémantiques distinctes (le CEC accepte les plages, le Compendium non).
