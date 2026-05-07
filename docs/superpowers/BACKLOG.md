@@ -11,8 +11,7 @@ round between phases.
       passages (citations, "Article 1 :" titles, etc.) use a true italic cut.
 - [ ] **Self-hosted Gotham UI font** (if licensing permits) instead of Inter
       from Google Fonts — match the DR site's UI typography exactly.
-- [ ] **Print stylesheet** (already in Phase 4 plan, but easy to pull forward
-      if needed for early sharing).
+- [x] ~~**Print stylesheet**~~: shipped 2026-05-07 in `app.css` `@media print`.
 
 ## Source-data fixes
 
@@ -34,25 +33,27 @@ round between phases.
 
 ## Navigation (full overhaul — Phase 2 territory)
 
-- [ ] **Cascading TopBar "Catéchisme" dropdown**: parts → sections → chapters
-      as a 3-column mega-menu on hover; quick jump to any level in 2 clicks.
-- [ ] **Persistent expandable sidebar TOC**: drawer toggleable from the
-      TopBar; current location auto-expanded; collapse/expand other branches.
-- [ ] **Search-first homepage**: pull part of Phase 3 forward — at minimum,
-      the intent-detection input that handles paragraph numbers and Bible
-      refs without needing the full MiniSearch index.
+- [x] ~~**Cascading TopBar "Catéchisme" dropdown**~~: shipped as
+      `CatechismDropdown.svelte` — 3-column mega-menu with hover-intent.
+- [x] ~~**Persistent expandable sidebar TOC**~~: shipped as `Sidebar.svelte`,
+      auto-expanding to active branch, toggleable via `SidebarToggle`.
+- [x] ~~**Search-first homepage**~~: shipped via TopBar search with
+      `detectIntent` for paragraph + bible refs.
 
 ## Mobile / responsive
 
-- [ ] Sticky outline doesn't appear on narrow widths (`<lg`). Phase 4 will
-      address; until then mobile users have no outline.
-- [ ] TopBar collapses awkwardly below 1024px. Needs proper hamburger / drawer.
+- [x] ~~Sticky outline at narrow widths~~: out-of-scope on phones — the
+      sidebar is desktop-only. Mobile users navigate via the hamburger menu
+      and the dedicated `/ccc/sommaire` route.
+- [x] ~~TopBar collapses awkwardly below 1024px~~: shipped 2026-05-07 with a
+      mobile pass — proper hamburger, mobile-only search icon, and a
+      bottom-sheet StudyPanel.
 
 ## Accessibility (Phase 4)
 
-- [ ] Focus trap on mode toggle dropdown when open
+- [x] ~~Focus trap on mode toggle dropdown when open~~: shipped 2026-05-07.
 - [ ] `aria-current="location"` on active breadcrumb item
-- [ ] Skip-to-content link
+- [x] ~~Skip-to-content link~~: shipped 2026-05-07.
 - [ ] Screen-reader pass on en_bref labels
 
 ## Phase 2 leftovers (carried forward)
@@ -75,10 +76,10 @@ round between phases.
       could be cited under such a key but won't surface. Either expand
       the regex to match chapter-range keys, or surface them under each
       verse of the chapter.
-- [ ] **Sidebar `articles_direct` URL inconsistency**: sidebar uses paragraph
-      ranges (`/ccc/{first}-{last}`) for articles directly under a section
-      (Notre Père), while sommaire uses `/ccc/{part}/{section}/{article-slug}`
-      which has no route handler. Pick one convention and unify.
+- [x] ~~**Sidebar `articles_direct` URL inconsistency**~~: shipped 2026-05-07.
+      Sidebar's `deepestHref` now handles articles_direct via the structural
+      slug, and the chapter route redirects unknown chapter slugs that resolve
+      to articles_direct to the canonical paragraph-range URL.
 - [ ] **Mega-menu keyboard a11y**: cascading dropdown supports `onfocus` for
       Tab navigation but no arrow-key navigation between columns. Phase 4
       a11y polish should add this.
@@ -91,9 +92,14 @@ round between phases.
 
 ## Deployment (Phase 1 D6 — owner action)
 
-- [ ] Create GitHub repo `catechismecatholique`, push current branch
-- [ ] Cloudflare Pages → connect to repo, set build command `npm run build`,
-      output dir `.svelte-kit/cloudflare`, env `NODE_VERSION=20`
-- [ ] Verify preview URL serves the site end-to-end
-- [ ] When `catechismecatholique.fr` registration succeeds: nameservers → Cloudflare,
-      add custom domain in Pages, TLS auto-provisions
+- [x] ~~Create GitHub repo, push, connect Cloudflare Pages, custom domain~~:
+      live at https://catechismecatholique.fr.
+
+## Validation
+
+- [ ] **Run Lighthouse against production** to validate audit fixes with real
+      metrics. Command: `npx lighthouse https://catechismecatholique.fr --view`
+      or use Chrome DevTools (right-click → Inspect → Lighthouse tab).
+      Targets: - Performance ≥ 90 (LCP < 2.5s, CLS < 0.1, INP < 200ms) - Accessibility ≥ 95 (audits cleared this in code; live run validates contrast at all themes) - Best Practices ≥ 95 (CSP now in place) - SEO ≥ 95 (sitemap, robots, OG, JSON-LD all present)
+      Run for both desktop (1920×1080) and mobile (Moto G4) presets. Repeat
+      after Cloudflare cache settles (24h after deploy) for steady-state numbers.

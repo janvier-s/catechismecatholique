@@ -1,21 +1,26 @@
 {
-  "name": "Catéchisme",
-  "short_name": "Catéchisme",
-  "icons": [
-    {
-      "src": "/web-app-manifest-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ],
-  "theme_color": "#f3e8d8",
-  "background_color": "#f3e8d8",
-  "display": "standalone"
+	"name": "Catéchisme de l'Église Catholique",
+	"short_name": "Catéchisme",
+	"description": "Édition française du Catéchisme de l'Église Catholique : lecture, recherche et concordance biblique en ligne.",
+	"lang": "fr",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"orientation": "portrait-primary",
+	"theme_color": "#f3e8d8",
+	"background_color": "#f3e8d8",
+	"icons": [
+		{
+			"src": "/web-app-manifest-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/web-app-manifest-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	]
 }

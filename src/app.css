@@ -497,6 +497,102 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 	}
 }
 
+/* Print stylesheet — collapse all chrome, render prose at full reading width
+   in black ink on white. Optimised for studying paragraphs at a desk. */
+@media print {
+	:root {
+		--color-bg: #ffffff;
+		--color-panel: #ffffff;
+		--color-fg: #000000;
+		--color-muted: #333333;
+		--color-subtle: #555555;
+		--color-accent: #000000;
+		--color-accent-text: #000000;
+		--color-border: #cccccc;
+	}
+	body {
+		background: #ffffff;
+		color: #000000;
+	}
+	/* Hide app chrome that doesn't belong on paper. */
+	.topbar,
+	.site-footer,
+	.skip-link,
+	[data-prefs-menu],
+	[aria-label='Plan du Catéchisme'],
+	[aria-label='Ouvrir le sommaire'],
+	[aria-label='Fermer le sommaire'],
+	[aria-label="Panneau d'étude"],
+	[aria-label='Menu mobile'],
+	#mobile-menu,
+	.hamburger,
+	.cec-pill,
+	button.bible-inline,
+	.page-fade {
+		display: none !important;
+	}
+	/* Reset the page-fade keyframe so prose paints immediately. */
+	.page-fade {
+		opacity: 1 !important;
+		animation: none !important;
+	}
+	/* Full-width prose column. */
+	main {
+		max-width: none !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	/* Keep paragraph numbers visible but understated. */
+	.ccc-paragraph .number-col {
+		color: #555555 !important;
+	}
+	/* Drop the side-margin cross-refs aside on paper — too noisy. */
+	.ccc-side-refs {
+		display: none !important;
+	}
+	/* Hide cccRef sup decorations; bibleRef inline citations stay because
+	   they belong to the original text. */
+	sup.srcRef.cccRef,
+	sup.srcRef.docRef {
+		display: none !important;
+	}
+	/* Avoid breaking paragraphs across pages where possible. */
+	.ccc-paragraph,
+	.prose-paragraph,
+	li {
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+	h1,
+	h2,
+	h3 {
+		break-after: avoid;
+		page-break-after: avoid;
+	}
+	/* Pure black serif for the body — reverts theme-driven font choices. */
+	body,
+	.prose-paragraph,
+	.content-col {
+		font-family: 'Libre Baskerville', Georgia, serif !important;
+		color: #000000 !important;
+	}
+	a {
+		color: #000000 !important;
+		text-decoration: underline !important;
+	}
+	/* Hide href tooltips for in-page anchors only; keep external URLs after
+	   the link text so a printed page records its sources. */
+	a[href^='/']:after,
+	a[href^='#']:after {
+		content: '' !important;
+	}
+	a[href^='http']:after {
+		content: ' (' attr(href) ')';
+		font-size: 0.85em;
+		color: #555555;
+	}
+}
+
 /* Global page fade — same 280ms ease-out reveal the homepage uses, applied
    to the layout's content wrapper so every route gets the same subtle
    in-transition. The {#key page.url.pathname} block in +layout.svelte
