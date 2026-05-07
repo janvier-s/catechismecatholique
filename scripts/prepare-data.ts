@@ -413,9 +413,8 @@ async function main() {
 		if (!f.endsWith('.json')) continue;
 		allChapters.push(JSON.parse(readFileSync(join(OUT, 'ccc/chapters', f), 'utf8')));
 	}
-	const ctxs = JSON.parse(readFileSync(join(OUT, 'ccc/paragraph-context.json'), 'utf8'));
 	const { buildSearchIndex } = await import('./prepare/search-index.ts');
-	const search = buildSearchIndex(allParagraphs, allChapters, ctxs);
+	const search = buildSearchIndex(allParagraphs, allChapters, paragraphContext);
 	writeFileSync(join(OUT, 'search/search-index.json'), search.serialized);
 	endStep(`${search.documents.length} docs (${(search.serialized.length / 1024).toFixed(1)} KB)`);
 
