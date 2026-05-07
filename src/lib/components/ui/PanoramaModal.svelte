@@ -71,10 +71,24 @@
 	});
 
 	const ariaLabel = $derived(title ? `${eyebrow} : ${title}` : eyebrow);
+
+	// Portal the dialog + backdrop out of the page-fade wrapper (which
+	// creates a stacking context via its opacity animation, trapping any
+	// child z-index below the sticky topbar). Re-parents to document.body
+	// on mount; cleaned up automatically when the action's node unmounts.
+	function portal(node: HTMLElement) {
+		document.body.appendChild(node);
+		return {
+			destroy() {
+				node.parentNode?.removeChild(node);
+			}
+		};
+	}
 </script>
 
 {#if open}
 	<div
+		use:portal
 		class="panorama-backdrop"
 		onclick={close}
 		role="presentation"
@@ -82,6 +96,7 @@
 	></div>
 
 	<div
+		use:portal
 		bind:this={dialogEl}
 		class="panorama-dialog"
 		role="dialog"
@@ -122,7 +137,7 @@
 	.panorama-backdrop {
 		position: fixed;
 		inset: 0;
-		z-index: calc(var(--z-modal) + 4);
+		z-index: calc(var(--z-modal) - 1);
 		background: rgba(0, 0, 0, 0.65);
 		backdrop-filter: blur(2px);
 		cursor: pointer;
@@ -132,7 +147,7 @@
 		inset: 2.5vh 1rem 2.5vh 1rem;
 		max-width: 1100px;
 		margin: 0 auto;
-		z-index: calc(var(--z-modal) + 5);
+		z-index: var(--z-modal);
 		background: var(--color-bg);
 		border: 1px solid var(--color-border);
 		border-radius: 8px;
