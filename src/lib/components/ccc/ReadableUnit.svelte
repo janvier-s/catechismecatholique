@@ -1,57 +1,92 @@
 <script lang="ts">
 	import { get } from 'svelte/store';
-	import type { Paragraph } from '$lib/data/types';
+	import type { Paragraph, CompendiumQuestion } from '$lib/data/types';
 	import ParagraphRenderer from './ParagraphRenderer.svelte';
 	import CitationBlock from './CitationBlock.svelte';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 	import { prefs } from '$lib/stores/prefs';
-	let { paragraph }: { paragraph: Paragraph } = $props();
+
+	type Unit =
+		| { kind: 'ccc-paragraph'; data: Paragraph }
+		| { kind: 'compendium-question'; data: CompendiumQuestion };
+
+	let { unit }: { unit: Unit } = $props();
 
 	function onNumberClick() {
+		// Compendium tab opens in Phase 2; for now, only CCC paragraphs open the study panel.
+		if (unit.kind !== 'ccc-paragraph') return;
 		const s = get(studyPanel);
-		openPanel({ kind: 'paragraph', paragraph: paragraph.number }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab ?? 'cross-refs');
 	}
 
-	const showSideRefs = $derived(
-		$prefs.crossRefsLayout === 'side' && paragraph.cross_refs.length > 0
+	const sideRefs = $derived.by(() => {
+		if ($prefs.crossRefsLayout !== 'side') return null;
+		if (unit.kind === 'ccc-paragraph') {
+			return unit.data.cross_refs.length > 0
+				? { label: 'Renvois', refs: [...new Set(unit.data.cross_refs)], hrefPrefix: '/ccc/' }
+				: null;
+		}
+		return unit.data.ccc_refs.length > 0
+			? {
+					label: 'Renvois CEC',
+					refs: [...new Set(unit.data.ccc_refs.map(String))],
+					hrefPrefix: '/ccc/'
+				}
+			: null;
+	});
+
+	const numberHref = $derived(
+		unit.kind === 'ccc-paragraph' ? `/ccc/${unit.data.number}` : `#q-${unit.data.number}`
+	);
+	const anchorId = $derived(
+		unit.kind === 'compendium-question' ? `q-${unit.data.number}` : undefined
 	);
 </script>
 
-<article class="mb-8 ccc-paragraph" class:has-side-refs={showSideRefs}>
+<article
+	class="mb-8 ccc-paragraph"
+	class:has-side-refs={sideRefs !== null}
+	id={anchorId}
+>
 	<div class="paragraph-grid">
 		<a
-			href="/ccc/{paragraph.number}"
+			href={numberHref}
 			onclick={onNumberClick}
 			class="number-col flex-none w-12 text-right pt-1 font-ui font-semibold text-accent tabular-nums hover:underline"
-			aria-label="Lien vers le paragraphe {paragraph.number}"
+			aria-label={unit.kind === 'ccc-paragraph'
+				? `Lien vers le paragraphe ${unit.data.number}`
+				: `Question ${unit.data.number}`}
 		>
-			{paragraph.number}
+			{unit.data.number}
 		</a>
 		<div class="content-col text-lg">
-			<ParagraphRenderer
-				html={paragraph.text_html}
-				bibleRefs={paragraph.magisterial_refs}
-				paragraphNumber={paragraph.number}
-			/>
-			{#each paragraph.citations as cite, i (i)}
-				<CitationBlock html={cite.text_html} />
-			{/each}
-			{#if paragraph.superseded_text_html}
-				<div class="superseded-block">
-					<p class="superseded-label">Rédaction antérieure (édition 1992)</p>
-					<div class="superseded-text">
-						{@html paragraph.superseded_text_html}
+			{#if unit.kind === 'ccc-paragraph'}
+				<ParagraphRenderer
+					html={unit.data.text_html}
+					bibleRefs={unit.data.magisterial_refs}
+					paragraphNumber={unit.data.number}
+				/>
+				{#each unit.data.citations as cite, i (i)}
+					<CitationBlock html={cite.text_html} />
+				{/each}
+				{#if unit.data.superseded_text_html}
+					<div class="superseded-block">
+						<p class="superseded-label">Rédaction antérieure (édition 1992)</p>
+						<div class="superseded-text">{@html unit.data.superseded_text_html}</div>
 					</div>
-				</div>
+				{/if}
+			{:else}
+				<p class="compendium-question">{unit.data.question}</p>
+				<div class="compendium-answer">{@html unit.data.answer_html}</div>
 			{/if}
 		</div>
-		{#if showSideRefs}
+		{#if sideRefs}
 			<aside class="ccc-side-refs">
-				<p class="label">Renvois</p>
+				<p class="label">{sideRefs.label}</p>
 				<ul>
-					{#each [...new Set(paragraph.cross_refs)] as n (n)}
+					{#each sideRefs.refs as n (n)}
 						<li>
-							<a href="/ccc/{n}" class="cross-ref-link">{n}</a>
+							<a href={`${sideRefs.hrefPrefix}${n}`} class="cross-ref-link">{n}</a>
 						</li>
 					{/each}
 				</ul>
@@ -193,5 +228,20 @@
 		:global(html[data-cross-refs-layout='side']) .ccc-paragraph {
 			padding-right: 0;
 		}
+	}
+
+	.compendium-question {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-weight: 600;
+		font-size: 1.05em;
+		margin-bottom: 0.6rem;
+		color: var(--color-heading);
+	}
+	.compendium-answer :global(p) {
+		margin-bottom: 0.85em;
+	}
+	.compendium-answer :global(p:last-child) {
+		margin-bottom: 0;
 	}
 </style>

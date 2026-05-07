@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
+	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 </script>
@@ -39,7 +39,7 @@
 		<p class="text-muted italic">Aucun paragraphe.</p>
 	{:else}
 		{#each data.paragraphs as p (p.number)}
-			<ParagraphView paragraph={p} />
+			<ReadableUnit unit={{ kind: 'ccc-paragraph', data: p }} />
 		{/each}
 	{/if}
 </main>

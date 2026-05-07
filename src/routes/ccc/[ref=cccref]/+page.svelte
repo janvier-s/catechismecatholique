@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
+	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
@@ -89,7 +89,7 @@
 	{/if}
 </svelte:head>
 
-<main class="mx-auto max-w-reader px-6 py-10">
+<main class="mx-auto max-w-reader px-6 max-md:px-0 py-10">
 	{#if data.context}
 		{@const c = data.context}
 		<nav class="breadcrumb-rail mb-8 font-ui text-sm" aria-label="Fil d'Ariane">
@@ -168,10 +168,10 @@
 
 		<div class="border-t border-border pt-6 mt-2">
 			{#if data.kind === 'paragraph'}
-				<ParagraphView paragraph={data.paragraph} />
+				<ReadableUnit unit={{ kind: 'ccc-paragraph', data: data.paragraph }} />
 			{:else}
 				{#each data.paragraphs as p (p.number)}
-					<ParagraphView paragraph={p} />
+					<ReadableUnit unit={{ kind: 'ccc-paragraph', data: p }} />
 				{/each}
 			{/if}
 		</div>
@@ -185,10 +185,10 @@
 			</p>
 		{/if}
 	{:else if data.kind === 'paragraph'}
-		<ParagraphView paragraph={data.paragraph} />
+		<ReadableUnit unit={{ kind: 'ccc-paragraph', data: data.paragraph }} />
 	{:else}
 		{#each data.paragraphs as p (p.number)}
-			<ParagraphView paragraph={p} />
+			<ReadableUnit unit={{ kind: 'ccc-paragraph', data: p }} />
 		{/each}
 	{/if}
 

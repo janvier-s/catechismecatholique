@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ParagraphView from '$lib/components/ccc/ParagraphView.svelte';
+	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
 	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
@@ -161,7 +161,7 @@
 					</h4>
 				{/if}
 			{/each}
-			<ParagraphView paragraph={p} />
+			<ReadableUnit unit={{ kind: 'ccc-paragraph', data: p }} />
 		{/if}
 	{/each}
 

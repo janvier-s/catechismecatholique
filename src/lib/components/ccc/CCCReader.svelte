@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Chapter, ChapterArticle, ChapterHeading, Paragraph } from '$lib/data/types';
 	import { ADJACENT_LABEL } from '$lib/data/types';
-	import ParagraphView from './ParagraphView.svelte';
+	import ReadableUnit from './ReadableUnit.svelte';
 	import EnBrefBlock from './EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
@@ -125,7 +125,7 @@
 					</h4>
 				{/if}
 			{/each}
-			<ParagraphView paragraph={p} />
+			<ReadableUnit unit={{ kind: 'ccc-paragraph', data: p }} />
 		{/if}
 	{/each}
 
