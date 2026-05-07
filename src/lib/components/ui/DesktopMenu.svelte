@@ -96,18 +96,18 @@
 			width="18"
 			height="18"
 			viewBox="0 0 18 18"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="1.4"
-			stroke-linecap="round"
+			fill="currentColor"
 			aria-hidden="true"
 		>
-			<circle cx="2" cy="4" r="0.9" fill="currentColor" stroke="none" />
-			<circle cx="2" cy="9" r="0.9" fill="currentColor" stroke="none" />
-			<circle cx="2" cy="14" r="0.9" fill="currentColor" stroke="none" />
-			<line x1="6" y1="4" x2="16" y2="4" />
-			<line x1="6" y1="9" x2="16" y2="9" />
-			<line x1="6" y1="14" x2="16" y2="14" />
+			<circle cx="4" cy="4" r="1.3" />
+			<circle cx="9" cy="4" r="1.3" />
+			<circle cx="14" cy="4" r="1.3" />
+			<circle cx="4" cy="9" r="1.3" />
+			<circle cx="9" cy="9" r="1.3" />
+			<circle cx="14" cy="9" r="1.3" />
+			<circle cx="4" cy="14" r="1.3" />
+			<circle cx="9" cy="14" r="1.3" />
+			<circle cx="14" cy="14" r="1.3" />
 		</svg>
 	</button>
 
