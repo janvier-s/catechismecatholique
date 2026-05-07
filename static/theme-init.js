@@ -7,5 +7,8 @@
 		var allowed = ['auto', 'light', 'sepia', 'dark', 'oled'];
 		var theme = stored && allowed.indexOf(stored) >= 0 ? stored : 'auto';
 		document.documentElement.setAttribute('data-theme', theme);
-	} catch (e) {}
+	} catch {
+		// localStorage unavailable (private mode, sandboxed iframe, etc.) — fall
+		// back to whatever data-theme is statically set on the html element.
+	}
 })();

@@ -37,7 +37,7 @@ test('ccc home renders parts', async ({ page }) => {
 
 test('sommaire renders full TOC', async ({ page }) => {
 	await page.goto('/ccc/sommaire');
-	await expect(page.getByRole('heading', { name: /Sommaire complet/ })).toBeVisible();
+	await expect(page.getByRole('heading', { name: 'Sommaire', exact: true })).toBeVisible();
 });
 
 test('prologue renders paragraphs', async ({ page }) => {

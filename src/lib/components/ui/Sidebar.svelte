@@ -61,10 +61,14 @@
 
 	// Detect a paragraph URL like /ccc/{n} or /ccc/{n}-{m} → derive the deepest
 	// container the paragraph belongs to (article > chapter > section > part)
-	// so the sidebar can highlight it AND auto-load the chapter detail.
+	// so the sidebar can highlight it AND auto-load the chapter detail. Out-of-
+	// range numbers (e.g. /ccc/99999) yield null so we don't speculatively 404
+	// the per-paragraph context shard.
 	const activeParagraph = $derived.by(() => {
 		const m = page.url.pathname.match(/^\/ccc\/(\d+)(?:-\d+)?$/);
-		return m ? parseInt(m[1]!, 10) : null;
+		if (!m) return null;
+		const n = parseInt(m[1]!, 10);
+		return n >= 1 && n <= 2865 ? n : null;
 	});
 
 	// Per-paragraph context lookup (~30 byte shard) — replaces a 1.83 MB bundle

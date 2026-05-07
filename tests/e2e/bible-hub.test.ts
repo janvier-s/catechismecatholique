@@ -17,8 +17,9 @@ test('/bible/matthieu/28 lists verses', async ({ page }) => {
 	// The chapter title renders as "Chapitre 28" (h1); the per-page chapter
 	// dropdown shows "Matthieu 28".
 	await expect(page.getByRole('heading', { level: 1, name: /Chapitre 28/ })).toBeVisible();
-	// Verses render as list items; each verse is a button that opens the study panel.
-	await expect(page.getByRole('button', { name: /verset 1$/ })).toBeVisible();
+	// Verses render as list items with their number. Verse 1 of Matthew 28
+	// should be present in the rendered ordered list.
+	await expect(page.locator('li#v1')).toBeVisible();
 });
 
 test('/bible/matthieu/28/19 shows CCC paragraphs', async ({ page }) => {

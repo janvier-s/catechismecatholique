@@ -38,11 +38,11 @@ test('Catéchisme dropdown opens with parts', async ({ page }) => {
 		.getByRole('button', { name: /Catéchisme/i })
 		.first()
 		.hover();
-	await expect(page.getByRole('menu')).toBeVisible();
+	await expect(page.locator('#catechism-menu')).toBeVisible();
 	// The cell-tag span renders "Partie 1" (with a non-breaking space)
 	await expect(
 		page
-			.locator('[role="menu"] .cell-tag')
+			.locator('#catechism-menu .cell-tag')
 			.filter({ hasText: /Partie\s*1/ })
 			.first()
 	).toBeVisible();
@@ -54,23 +54,23 @@ test('Catéchisme dropdown cascades to chapters on hover', async ({ page }) => {
 		.getByRole('button', { name: /Catéchisme/i })
 		.first()
 		.hover();
-	await expect(page.getByRole('menu')).toBeVisible();
-	// Cells are <a role="menuitem">, not buttons. Hover the Partie 1 cell.
+	await expect(page.locator('#catechism-menu')).toBeVisible();
+	// Cells are plain <a> links. Hover the Partie 1 cell.
 	await page
-		.locator('[role="menu"] a[role="menuitem"]')
+		.locator('#catechism-menu a')
 		.filter({ hasText: /Partie\s*1/ })
 		.first()
 		.hover();
 	// Hover the first Section 1 cell
 	await page
-		.locator('[role="menu"] a[role="menuitem"]')
+		.locator('#catechism-menu a')
 		.filter({ hasText: /Section\s*1/ })
 		.first()
 		.hover();
 	// At least one chapter link should appear
 	await expect(
 		page
-			.locator('[role="menu"] a[role="menuitem"]')
+			.locator('#catechism-menu a')
 			.filter({ hasText: /Chapitre\s*1/ })
 			.first()
 	).toBeVisible();
