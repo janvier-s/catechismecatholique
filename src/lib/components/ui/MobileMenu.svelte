@@ -80,6 +80,7 @@
 				{ href: '/ccc/sommaire', label: 'Sommaire' },
 				{ href: '/ccc/panorama', label: 'Panorama' },
 				{ href: '/compendium', label: 'Compendium' },
+				{ href: '/compendium/annexe', label: 'Prières & Formules' },
 				{ href: '/glossaire', label: 'Glossaire' },
 				{ href: '/recherche', label: 'Recherche' }
 			]
