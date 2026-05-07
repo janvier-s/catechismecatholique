@@ -158,7 +158,7 @@
 </main>
 
 {#if data.part.sections.length > 0}
-	<PanoramaModal bind:open={panoramaOpen} title={data.part.title}>
+	<PanoramaModal bind:open={panoramaOpen} eyebrow="Panorama" title={data.part.title}>
 		<Panorama parts={[data.part]} headingLevel={3} />
 	</PanoramaModal>
 {/if}

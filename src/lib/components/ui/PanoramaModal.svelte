@@ -4,10 +4,12 @@
 
 	let {
 		open = $bindable(false),
-		title = 'Panorama',
+		eyebrow = 'Panorama',
+		title = '',
 		children
 	}: {
 		open?: boolean;
+		eyebrow?: string;
 		title?: string;
 		children: Snippet;
 	} = $props();
@@ -67,6 +69,8 @@
 			lastTrigger = null;
 		};
 	});
+
+	const ariaLabel = $derived(title ? `${eyebrow} : ${title}` : eyebrow);
 </script>
 
 {#if open}
@@ -82,13 +86,30 @@
 		class="panorama-dialog"
 		role="dialog"
 		aria-modal="true"
-		aria-label={title}
+		aria-label={ariaLabel}
 		transition:fly={{ y: 12, duration: 200 }}
 	>
+		<span class="panorama-dialog-accent" aria-hidden="true"></span>
 		<header class="panorama-dialog-head">
-			<h2 class="panorama-dialog-title">{title}</h2>
+			<div class="panorama-dialog-titles">
+				<p class="panorama-dialog-eyebrow">{eyebrow}</p>
+				{#if title}
+					<h2 class="panorama-dialog-title">{title}</h2>
+				{/if}
+			</div>
 			<button type="button" class="panorama-dialog-close" aria-label="Fermer" onclick={close}>
-				✕
+				<svg
+					width="14"
+					height="14"
+					viewBox="0 0 16 16"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.6"
+					stroke-linecap="round"
+					aria-hidden="true"
+				>
+					<path d="M3.5 3.5 L12.5 12.5 M12.5 3.5 L3.5 12.5" />
+				</svg>
 			</button>
 		</header>
 		<div class="panorama-dialog-body styled-scroll">
@@ -114,45 +135,82 @@
 		z-index: var(--z-modal);
 		background: var(--color-bg);
 		border: 1px solid var(--color-border);
-		border-radius: 6px;
-		box-shadow: 0 20px 60px -20px color-mix(in srgb, var(--color-fg) 30%, transparent);
+		border-radius: 8px;
+		box-shadow:
+			0 1px 0 color-mix(in srgb, var(--color-fg) 4%, transparent),
+			0 24px 70px -18px color-mix(in srgb, var(--color-fg) 38%, transparent),
+			0 8px 24px -12px color-mix(in srgb, var(--color-fg) 22%, transparent);
 		display: flex;
 		flex-direction: column;
 		min-height: 0;
 		overflow: hidden;
 	}
+	/* Thin accent strip across the top edge — quiet wayfinding cue that ties
+	   the dialog to the site's accent color without shouting. */
+	.panorama-dialog-accent {
+		display: block;
+		height: 3px;
+		background: var(--color-accent);
+		flex: 0 0 auto;
+	}
 	.panorama-dialog-head {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 		gap: 1rem;
-		padding: 0.85rem 1.25rem;
+		padding: 1rem 1.25rem 0.95rem;
 		border-bottom: 1px solid var(--color-border);
-		background: color-mix(in srgb, var(--color-border) 10%, transparent);
+		background: color-mix(in srgb, var(--color-border) 14%, transparent);
 	}
-	.panorama-dialog-title {
+	.panorama-dialog-titles {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		min-width: 0;
+	}
+	.panorama-dialog-eyebrow {
 		font-family: var(--font-ui);
-		font-size: 0.72rem;
+		font-size: 0.68rem;
 		font-weight: 600;
 		letter-spacing: 0.22em;
 		text-transform: uppercase;
-		color: var(--color-muted);
+		color: var(--color-accent);
 		margin: 0;
+		line-height: 1;
+	}
+	.panorama-dialog-title {
+		font-family: var(--font-heading);
+		font-size: 1.15rem;
+		font-weight: 600;
+		color: var(--color-heading);
+		margin: 0;
+		line-height: 1.25;
 	}
 	.panorama-dialog-close {
 		appearance: none;
-		border: 0;
-		background: transparent;
-		width: 32px;
-		height: 32px;
-		border-radius: 4px;
-		font-size: 1rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		width: 34px;
+		height: 34px;
+		border-radius: 999px;
+		border: 1px solid var(--color-border);
+		background: var(--color-bg);
 		color: var(--color-muted);
 		cursor: pointer;
+		transition:
+			border-color 150ms ease,
+			color 150ms ease,
+			background 150ms ease;
 	}
 	.panorama-dialog-close:hover {
-		background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
 		color: var(--color-accent);
+		background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+	}
+	.panorama-dialog-close svg {
+		display: block;
 	}
 	.panorama-dialog-body {
 		flex: 1 1 auto;
