@@ -50,14 +50,13 @@
 	}
 	.status {
 		font-family: var(--font-ui);
-		font-size: 0.7rem;
+		font-size: clamp(4rem, 12vw, 6.5rem);
 		font-weight: 500;
-		letter-spacing: 0.32em;
-		text-transform: uppercase;
-		color: var(--color-muted);
+		line-height: 1;
+		letter-spacing: -0.02em;
+		color: var(--color-accent);
 		margin: 0;
-		padding-left: 0.32em;
-		font-variant-numeric: oldstyle-nums;
+		font-variant-numeric: lining-nums tabular-nums;
 	}
 	.message {
 		font-family: var(--font-heading);

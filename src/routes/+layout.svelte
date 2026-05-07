@@ -60,9 +60,11 @@
 		<Sidebar />
 		<SidebarToggle />
 	{/if}
-	<div class="flex-1 min-w-0">
-		{@render children()}
-	</div>
+	{#key page.url.pathname}
+		<div class="flex-1 min-w-0 page-fade">
+			{@render children()}
+		</div>
+	{/key}
 	<StudyPanel />
 </div>
 <Footer />

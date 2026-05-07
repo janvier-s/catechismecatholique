@@ -484,3 +484,23 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 		color: var(--color-accent);
 	}
 }
+
+/* Global page fade — same 280ms ease-out reveal the homepage uses, applied
+   to the layout's content wrapper so every route gets the same subtle
+   in-transition. The {#key page.url.pathname} block in +layout.svelte
+   remounts the wrapper on navigation so the animation re-triggers. */
+.page-fade {
+	opacity: 0;
+	animation: page-fade-in 280ms ease-out forwards;
+}
+@keyframes page-fade-in {
+	to {
+		opacity: 1;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.page-fade {
+		animation: none;
+		opacity: 1;
+	}
+}
