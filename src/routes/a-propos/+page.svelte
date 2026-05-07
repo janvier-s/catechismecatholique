@@ -115,6 +115,33 @@
 		</a>
 	</div>
 
+	<h2>Le logo</h2>
+
+	<div class="logo-block">
+		<img
+			src="/img/logo/logo-128.png"
+			srcset="/img/logo/logo-128.png 1x, /img/logo/logo-192.png 2x"
+			alt="Logo du Catéchisme : un Bon Pasteur entouré d'une brebis et d'un agneau, jouant de la flûte sous un arbre stylisé."
+			width="96"
+			height="96"
+			class="logo-block-img"
+		/>
+		<div class="logo-block-text">
+			<p>
+				Le logo est dessiné d'après une pierre tombale chrétienne des catacombes de Domitilla, à
+				Rome, datée de la fin du troisième siècle. Cette image bucolique, d'origine païenne, fut
+				adoptée par les chrétiens pour symboliser le repos et le bonheur que l'âme du défunt trouve
+				dans la vie éternelle.
+			</p>
+			<p>
+				Elle suggère aussi plusieurs traits qui caractérisent ce Catéchisme : le Christ Bon Pasteur
+				qui guide et protège ses fidèles (la brebis) par son autorité (le bâton), les attire par la
+				symphonie mélodieuse de la vérité (la flûte) et les fait reposer à l'ombre de «&nbsp;l'arbre
+				de la vie&nbsp;», sa Croix rédemptrice qui ouvre le paradis.
+			</p>
+		</div>
+	</div>
+
 	<h2>Ce que le site permet</h2>
 
 	<ul>
@@ -328,5 +355,47 @@
 	.cta-btn:hover {
 		background: var(--color-accent);
 		color: var(--color-panel);
+	}
+
+	/* Logo block — image on the left, prose on the right; stacks on small
+	   viewports so the description never gets squeezed. */
+	.logo-block {
+		display: flex;
+		gap: 1.5rem;
+		align-items: flex-start;
+		margin: 1.5rem 0 2rem;
+		padding: 1.25rem 1.4rem;
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
+		background: color-mix(in srgb, var(--color-border) 18%, transparent);
+	}
+	.logo-block-img {
+		flex: 0 0 auto;
+		width: 96px;
+		height: 96px;
+	}
+	.logo-block-text {
+		flex: 1 1 auto;
+	}
+	.logo-block-text p {
+		margin: 0 0 0.8em;
+		font-size: 0.92rem;
+		line-height: 1.65;
+	}
+	.logo-block-text p:last-child {
+		margin-bottom: 0;
+	}
+	@media (max-width: 640px) {
+		.logo-block {
+			flex-direction: column;
+			align-items: center;
+			text-align: left;
+			gap: 1rem;
+			padding: 1rem 1.1rem;
+		}
+		.logo-block-img {
+			width: 80px;
+			height: 80px;
+		}
 	}
 </style>
