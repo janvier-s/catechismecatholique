@@ -49,7 +49,7 @@
 			<aside class="ccc-side-refs">
 				<p class="label">Renvois</p>
 				<ul>
-					{#each paragraph.cross_refs as n (n)}
+					{#each [...new Set(paragraph.cross_refs)] as n (n)}
 						<li>
 							<a href="/ccc/{n}" class="cross-ref-link">{n}</a>
 						</li>

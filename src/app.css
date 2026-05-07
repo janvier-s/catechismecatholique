@@ -321,6 +321,13 @@ html[data-column-width='wide'] .max-w-reader {
 html[data-cross-refs-layout='side'] .max-w-reader {
 	max-width: min(1180px, 100% - 48px);
 }
+/* En-marge mode: the side aside lists every cross-ref already, so the
+   inline cccRef sup markers in the prose would be a redundant second
+   copy. Hide them when the layout is "side" — they remain visible in
+   the default inline layout. */
+html[data-cross-refs-layout='side'] .prose-paragraph .ref-cccRef {
+	display: none;
+}
 /* Markers are wrapped in <span class="ref-wrap ref-{type}"> by the renderer
    so hiding the wrapper also drops its leading whitespace (no orphan comma
    or space before the next period). */

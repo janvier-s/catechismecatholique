@@ -184,6 +184,7 @@ export interface StructurePart {
 	slug: string;
 	title: string;
 	number?: number;
+	prologue?: boolean;
 	sections: StructureSection[];
 	intro_paragraphs?: number[];
 	intro_headings?: ChapterHeading[];
