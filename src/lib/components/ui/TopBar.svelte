@@ -3,6 +3,7 @@
 	import Wordmark from './Wordmark.svelte';
 	import ModeToggle from './ModeToggle.svelte';
 	import CatechismDropdown from './CatechismDropdown.svelte';
+	import DesktopMenu from './DesktopMenu.svelte';
 	import MobileMenu from './MobileMenu.svelte';
 	import SearchSuggest from './SearchSuggest.svelte';
 	import { goto } from '$app/navigation';
@@ -77,6 +78,7 @@
 			</svg>
 		</a>
 		<ModeToggle />
+		<DesktopMenu />
 		<MobileMenu />
 
 		{#if !onRecherche}
