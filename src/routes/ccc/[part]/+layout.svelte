@@ -10,10 +10,14 @@
 
 	let panoramaOpen = $state(false);
 
-	// Expose an `open()` to descendants so any breadcrumb can wire up its
-	// trigger button without re-mounting the modal or re-fetching the part.
+	// Expose an `open()` + the part title to descendants so any breadcrumb
+	// can wire up its trigger button without re-mounting the modal or
+	// re-fetching the part. The title flows through to the trigger's
+	// hover tooltip so users know exactly which partie's panorama they'll
+	// see before clicking.
 	setContext('part-panorama', {
-		open: () => (panoramaOpen = true)
+		open: () => (panoramaOpen = true),
+		partTitle: data.partTree.title
 	});
 
 	// Resolve the active node from the URL so the panorama can highlight

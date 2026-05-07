@@ -36,6 +36,15 @@
 			closeBtn?.focus();
 		});
 
+		// If the panorama has an active node below the fold, scroll the
+		// modal body so the reader's current location is visible on open.
+		// Wait a tick after the fly transition starts so the body has its
+		// final height before measuring.
+		const scrollTimer = window.setTimeout(() => {
+			const activeEl = dialogEl?.querySelector<HTMLElement>('.is-active');
+			activeEl?.scrollIntoView({ block: 'center', behavior: 'instant' });
+		}, 220);
+
 		const onKeydown = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') {
 				e.preventDefault();
@@ -65,6 +74,7 @@
 		return () => {
 			html.style.overflow = prevOverflow;
 			document.removeEventListener('keydown', onKeydown);
+			window.clearTimeout(scrollTimer);
 			lastTrigger?.focus?.();
 			lastTrigger = null;
 		};

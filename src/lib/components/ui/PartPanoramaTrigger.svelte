@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	const ctx = getContext<{ open: () => void } | undefined>('part-panorama');
+	const ctx = getContext<{ open: () => void; partTitle?: string } | undefined>('part-panorama');
+	const tooltip = $derived(
+		ctx?.partTitle ? `Panorama de la partie « ${ctx.partTitle} »` : 'Panorama de cette partie'
+	);
 </script>
 
 {#if ctx}
@@ -8,7 +11,8 @@
 		type="button"
 		class="trigger"
 		aria-haspopup="dialog"
-		aria-label="Voir le panorama de cette partie"
+		aria-label={tooltip}
+		title={tooltip}
 		onclick={() => ctx.open()}
 	>
 		<svg
