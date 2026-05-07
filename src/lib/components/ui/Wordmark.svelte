@@ -1,4 +1,4 @@
-<div class="wordmark">
+<div class="wordmark" aria-hidden="true">
 	<span class="wm-line wm-line-1">Catéchisme</span>
 	<span class="wm-line wm-line-2">
 		<span class="wm-flank" aria-hidden="true"></span>

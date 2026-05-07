@@ -2,7 +2,7 @@
 	<img
 		src="/img/logo/logo-64.png"
 		srcset="/img/logo/logo-64.png 1x, /img/logo/logo-128.png 2x"
-		alt="Catéchisme de l'Église catholique"
+		alt="Catéchisme de l'Église Catholique"
 		width="56"
 		height="56"
 		class="logo-light block"

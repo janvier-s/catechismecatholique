@@ -386,7 +386,7 @@
 		font-weight: 500;
 		letter-spacing: 0.28em;
 		text-transform: uppercase;
-		color: color-mix(in srgb, var(--color-fg) 38%, transparent);
+		color: color-mix(in srgb, var(--color-fg) 60%, transparent);
 		pointer-events: none;
 		user-select: none;
 	}

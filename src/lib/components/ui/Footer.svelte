@@ -84,8 +84,7 @@
 	.footer-copy {
 		font-family: var(--font-ui);
 		font-size: 0.62rem;
-		color: var(--color-subtle);
-		opacity: 0.7;
+		color: var(--color-muted);
 		margin: 0;
 		text-align: center;
 		line-height: 1.6;
