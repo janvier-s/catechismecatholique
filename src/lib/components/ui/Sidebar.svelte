@@ -3,7 +3,7 @@
 	import { fly } from 'svelte/transition';
 	import { sidebarOpen } from '$lib/stores/sidebar';
 	import { activeHeading } from '$lib/stores/scrollSpy';
-	import { loadStructure, loadChapter, loadParagraphContexts } from '$lib/data/loaders';
+	import { loadStructure, loadChapter, loadParagraphContext } from '$lib/data/loaders';
 	import type { Chapter, ParagraphContext } from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
@@ -50,18 +50,12 @@
 
 	let structure: { parts: Part[] } | null = $state(null);
 	let activeChapter: Chapter | null = $state(null);
-	let paragraphContexts: Record<number, ParagraphContext> | null = $state(null);
+	let activeContext: ParagraphContext | null = $state(null);
 	let navEl: HTMLElement | undefined = $state();
 
 	$effect(() => {
 		(async () => {
 			structure = (await loadStructure()) as { parts: Part[] };
-		})();
-	});
-
-	$effect(() => {
-		(async () => {
-			paragraphContexts = await loadParagraphContexts();
 		})();
 	});
 
@@ -73,11 +67,20 @@
 		return m ? parseInt(m[1]!, 10) : null;
 	});
 
-	const activeContext: ParagraphContext | null = $derived(
-		activeParagraph !== null && paragraphContexts
-			? (paragraphContexts[activeParagraph] ?? null)
-			: null
-	);
+	// Per-paragraph context lookup (~30 byte shard) — replaces a 1.83 MB bundle
+	// fetch that the audit flagged as the largest avoidable payload on /ccc.
+	let ctxLoadGen = 0;
+	$effect(() => {
+		if (activeParagraph === null) {
+			activeContext = null;
+			return;
+		}
+		const myGen = ++ctxLoadGen;
+		(async () => {
+			const ctx = await loadParagraphContext(activeParagraph);
+			if (myGen === ctxLoadGen) activeContext = ctx;
+		})();
+	});
 
 	// The href of the deepest item the current page corresponds to.
 	// Used for sidebar item highlighting (passed via context to SidebarItem).
@@ -375,7 +378,6 @@
 				onclick={() => sidebarOpen.set(false)}
 				class="w-7 h-7 flex items-center justify-center rounded hover:bg-accent/10 text-muted hover:text-accent text-base leading-none"
 				aria-label="Fermer le sommaire"
-				title="Fermer"
 			>
 				✕
 			</button>

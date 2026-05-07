@@ -52,7 +52,7 @@
 {/snippet}
 
 <main class="mx-auto max-w-reader px-6 py-10">
-	<nav class="mb-6">
+	<nav class="mb-6" aria-label="Fil d'Ariane">
 		{@render backLink()}
 	</nav>
 
@@ -144,7 +144,7 @@
 		</aside>
 	{/if}
 
-	<nav class="mt-10">
+	<nav class="mt-10" aria-label="Retour au glossaire">
 		{@render backLink()}
 	</nav>
 </main>

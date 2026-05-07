@@ -49,6 +49,7 @@
 
 		<nav
 			class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none relative z-[1]"
+			aria-label="Navigation principale"
 		>
 			<CatechismDropdown />
 			<a href="/bible" class="hover:text-accent">Bible</a>

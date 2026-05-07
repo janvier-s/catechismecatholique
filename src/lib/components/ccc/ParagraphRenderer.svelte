@@ -97,10 +97,9 @@
 		}
 
 		// Pass 2: remaining sups (cccRef + footnote-only bibleRef). Strip leading §
-		// from cccRef text and drop cross-refs entirely when the side-margin
-		// layout is on. Consecutive sups get visual spacing via CSS margin
-		// (rather than a "," text node) so that hiding one doesn't leave a
-		// dangling comma behind.
+		// from cccRef text, drop cross-refs entirely when the side-margin
+		// layout is on, and make every clickable sup keyboard-reachable so
+		// the panel can be opened without a pointer (WCAG 2.1.1).
 		const remaining = Array.from(containerEl.querySelectorAll<HTMLElement>('sup.srcRef'));
 		for (const sup of remaining) {
 			if (sup.classList.contains('cccRef')) {
@@ -109,6 +108,19 @@
 					continue;
 				}
 				sup.textContent = (sup.textContent ?? '').replace(/^§/, '');
+			}
+			// All sup.srcRef variants (cccRef / bibleRef / docRef) are clickable.
+			// Tag them as buttons for AT and accept Enter/Space — actual click
+			// dispatch is handled by the container delegate further below.
+			sup.setAttribute('tabindex', '0');
+			sup.setAttribute('role', 'button');
+			if (!sup.getAttribute('aria-label')) {
+				const label = sup.classList.contains('cccRef')
+					? `Voir le paragraphe ${sup.textContent?.trim() ?? ''}`
+					: sup.classList.contains('bibleRef')
+						? `Voir la référence biblique`
+						: `Voir la source`;
+				sup.setAttribute('aria-label', label);
 			}
 		}
 
@@ -230,8 +242,20 @@
 				tab
 			);
 		};
+		const onKeydown = (e: KeyboardEvent) => {
+			if (e.key !== 'Enter' && e.key !== ' ') return;
+			if (!(e.target instanceof Element)) return;
+			if (e.target.closest('sup.srcRef, button.bible-inline')) {
+				e.preventDefault();
+				(e.target as HTMLElement).click();
+			}
+		};
 		containerEl.addEventListener('click', onClick);
-		return () => containerEl?.removeEventListener('click', onClick);
+		containerEl.addEventListener('keydown', onKeydown);
+		return () => {
+			containerEl?.removeEventListener('click', onClick);
+			containerEl?.removeEventListener('keydown', onKeydown);
+		};
 	});
 </script>
 

@@ -7,10 +7,8 @@ import type {
 	BibleVerseIndex,
 	GlossaryBundle,
 	ConcordanceChapter,
-	ConcordanceByParagraph,
 	ConcordanceByParagraphEntry,
 	NclSectionMap,
-	NclBible,
 	NclBook
 } from './types';
 
@@ -29,7 +27,6 @@ async function fetchJson<T>(url: string, fetcher: Fetch): Promise<T> {
 let bibleVerseIndexPromise: Promise<BibleVerseIndex> | null = null;
 
 let concordanceManifestPromise: Promise<Record<string, number[]>> | null = null;
-let concordanceByParagraphPromise: Promise<ConcordanceByParagraph> | null = null;
 const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | null>>();
 let concordanceParagraphManifestPromise: Promise<Set<number>> | null = null;
 const concordanceByParagraphShardCache = new Map<
@@ -39,7 +36,6 @@ const concordanceByParagraphShardCache = new Map<
 
 let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
-let nclBiblePromise: Promise<NclBible> | null = null;
 let nclManifestPromise: Promise<Set<string>> | null = null;
 const nclBookCache = new Map<string, Promise<NclBook | null>>();
 let paragraphContextsPromise: Promise<Record<number, ParagraphContext>> | null = null;
@@ -169,25 +165,6 @@ export function loadConcordanceManifest(fetcher: Fetch = fetch): Promise<Record<
 }
 
 /**
- * @deprecated Loads the entire by-paragraph bundle. Prefer
- * {@link loadConcordanceForParagraph} which fetches only the shard needed.
- * Kept for any remaining consumers; the bundle is still emitted by the
- * data pipeline today and will be removed in a future cleanup.
- */
-export function loadConcordanceByParagraph(
-	fetcher: Fetch = fetch
-): Promise<ConcordanceByParagraph> {
-	if (!concordanceByParagraphPromise) {
-		concordanceByParagraphPromise = (async () => {
-			const r = await fetcher('/data/concordance/by-paragraph.json');
-			if (!r.ok) return {} as ConcordanceByParagraph;
-			return (await r.json()) as ConcordanceByParagraph;
-		})();
-	}
-	return concordanceByParagraphPromise;
-}
-
-/**
  * Load the manifest of paragraph numbers that have at least one concordance
  * entry. Used by callers to avoid speculative 404s on shard fetches.
  */
@@ -265,19 +242,6 @@ export function loadChapterCounts(fetcher: Fetch = fetch): Promise<Record<string
 		})();
 	}
 	return chapterCountsPromise;
-}
-
-/**
- * @deprecated Loads the entire NCL Bible bundle. Prefer
- * {@link loadNclBook} which fetches only the book needed.
- * Kept for any remaining consumers; the bundle is still emitted by the
- * data pipeline today and will be removed in a future cleanup.
- */
-export function loadNclBible(fetcher: Fetch = fetch): Promise<NclBible> {
-	if (!nclBiblePromise) {
-		nclBiblePromise = fetchJson<NclBible>('/data/bible/ncl.json', fetcher);
-	}
-	return nclBiblePromise;
 }
 
 /**

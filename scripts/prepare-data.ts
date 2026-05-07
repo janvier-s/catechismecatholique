@@ -199,10 +199,6 @@ async function main() {
 
 	logStep('building paragraph context');
 	const paragraphContext = buildParagraphContext(rawParts, structure);
-	// Keep the bundle for any consumer that needs the full map (none on the
-	// hot path anymore — paragraph + search routes load the per-paragraph
-	// shard instead, see paragraph-context/{n}.json below).
-	writeFileSync(join(OUT, 'ccc/paragraph-context.json'), JSON.stringify(paragraphContext));
 	mkdirSync(join(OUT, 'ccc/paragraph-context'), { recursive: true });
 	for (const [n, ctx] of Object.entries(paragraphContext)) {
 		writeFileSync(join(OUT, `ccc/paragraph-context/${n}.json`), JSON.stringify(ctx));
@@ -271,12 +267,10 @@ async function main() {
 	logStep('parsing NCL bible');
 	const nclXml = readFileSync(join(SOURCES, 'ncl/francl_usfx.xml'), 'utf8');
 	const ncl = await parseUSFX(nclXml);
-	writeFileSync(join(OUT, 'bible/ncl.json'), JSON.stringify(ncl));
 
 	// Per-book shards: each book gets its own /data/bible/ncl/{usfx}.json so
 	// the Bible reader only fetches the book the user is on. The companion
-	// manifest lists which USFX codes exist so callers can skip 404s. The
-	// legacy bundle above is still emitted for the deprecated loadNclBible.
+	// manifest lists which USFX codes exist so callers can skip 404s.
 	const nclDir = join(OUT, 'bible/ncl');
 	mkdirSync(nclDir, { recursive: true });
 	const nclUsfxCodes: string[] = [];

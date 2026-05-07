@@ -2,7 +2,7 @@
 	import { get } from 'svelte/store';
 	import { page } from '$app/state';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
-	import { loadParagraphContexts, loadChapter, loadParagraph } from '$lib/data/loaders';
+	import { loadParagraphContext, loadChapter, loadParagraph } from '$lib/data/loaders';
 	import type { ParagraphContext, Paragraph, Chapter } from '$lib/data/types';
 	import ParagraphRenderer from '../ccc/ParagraphRenderer.svelte';
 	import CitationBlock from '../ccc/CitationBlock.svelte';
@@ -26,8 +26,7 @@
 		}
 		const paragraphNum = ctx.paragraph;
 		(async () => {
-			const ctxs = await loadParagraphContexts();
-			context = ctxs[paragraphNum] ?? null;
+			context = await loadParagraphContext(paragraphNum);
 			if (!context?.chapter) {
 				blocks = [];
 				return;

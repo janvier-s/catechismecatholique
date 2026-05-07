@@ -4,12 +4,41 @@
 	import { fade, fly } from 'svelte/transition';
 
 	let open = $state(false);
+	let triggerEl: HTMLButtonElement | undefined = $state();
+	let sheetEl: HTMLElement | undefined = $state();
 
 	function close() {
 		open = false;
+		queueMicrotask(() => triggerEl?.focus());
 	}
 	function toggle() {
 		open = !open;
+		if (open) {
+			// Defer until the sheet has mounted so we can focus its first link.
+			queueMicrotask(() => {
+				const first = sheetEl?.querySelector<HTMLElement>('a, button');
+				first?.focus();
+			});
+		}
+	}
+
+	// Focus trap — keep Tab cycling inside the sheet while it's open.
+	function onSheetKeydown(e: KeyboardEvent) {
+		if (e.key !== 'Tab' || !sheetEl) return;
+		const focusables = Array.from(
+			sheetEl.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+		);
+		if (focusables.length === 0) return;
+		const first = focusables[0]!;
+		const last = focusables[focusables.length - 1]!;
+		const active = document.activeElement;
+		if (e.shiftKey && active === first) {
+			e.preventDefault();
+			last.focus();
+		} else if (!e.shiftKey && active === last) {
+			e.preventDefault();
+			first.focus();
+		}
 	}
 
 	afterNavigate(() => {
@@ -57,6 +86,7 @@
 </script>
 
 <button
+	bind:this={triggerEl}
 	type="button"
 	class="hamburger md:hidden"
 	aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
@@ -79,10 +109,13 @@
 		transition:fade={{ duration: 180 }}
 	></div>
 
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<nav
+		bind:this={sheetEl}
 		id="mobile-menu"
 		class="sheet md:hidden"
 		aria-label="Menu mobile"
+		onkeydown={onSheetKeydown}
 		transition:fly={{ y: -6, duration: 220, opacity: 0 }}
 	>
 		<div class="ornament" aria-hidden="true">

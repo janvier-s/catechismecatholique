@@ -5,7 +5,7 @@
 	import { SvelteMap } from 'svelte/reactivity';
 	import type { BibleVerseIndex, NclSection } from '$lib/data/types';
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
-	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
+	import { studyPanel } from '$lib/stores/studyPanel';
 
 	let {
 		book,
@@ -60,21 +60,6 @@
 			ctx.verseChapter === chapter &&
 			ctx.verseVerse === v
 		);
-	}
-
-	function openVerse(v: number) {
-		openPanel(
-			{ kind: 'verse', verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v },
-			'bible-verse'
-		);
-	}
-
-	function onVerseKeydown(e: KeyboardEvent, v: number) {
-		// Preserve native text selection — only Enter/Space activate.
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
-			openVerse(v);
-		}
 	}
 </script>
 
@@ -138,14 +123,8 @@
 				{@const active = isVerseActive(v.v)}
 				<li id="v{v.v}" class="transition-opacity" class:dim={dimNonCited && c === 0}>
 					<div
-						class="verse-row flex gap-3 max-md:gap-2 rounded-md px-2 -mx-2 py-1 cursor-pointer"
+						class="verse-row flex gap-3 max-md:gap-2 rounded-md px-2 -mx-2 py-1"
 						class:is-active={active}
-						role="button"
-						tabindex="0"
-						aria-pressed={active}
-						aria-label="Ouvrir le panneau d'étude pour le verset {v.v}"
-						onclick={() => openVerse(v.v)}
-						onkeydown={(e) => onVerseKeydown(e, v.v)}
 					>
 						<span
 							class="font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-5 shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
@@ -167,7 +146,10 @@
 		</ol>
 	</article>
 
-	<nav class="mt-16 pt-8 border-t border-border flex justify-between font-ui text-sm">
+	<nav
+		class="mt-16 pt-8 border-t border-border flex justify-between font-ui text-sm"
+		aria-label="Chapitre précédent ou suivant"
+	>
 		{#if prevHref}
 			<a href={prevHref} class="text-accent hover:underline">← Chapitre {chapter - 1}</a>
 		{:else}<span></span>{/if}

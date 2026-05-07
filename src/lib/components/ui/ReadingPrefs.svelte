@@ -179,12 +179,12 @@
 					{#each THEME_SWATCHES as t (t.id)}
 						<button
 							type="button"
-							title={t.label}
 							onclick={() => updatePref('theme', t.id)}
 							class="theme-card flex-1 rounded border overflow-hidden transition-colors
 								{$prefs.theme === t.id ? 'border-accent' : 'border-transparent'}"
 							style="background: {t.bg};"
 							aria-label={t.label}
+							aria-pressed={$prefs.theme === t.id}
 						>
 							<div class="theme-card-inner">
 								<div class="flex items-baseline gap-[3px] mb-[5px]">

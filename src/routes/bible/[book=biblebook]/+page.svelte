@@ -9,7 +9,7 @@
 >
 
 <main class="mx-auto max-w-4xl px-6 py-10">
-	<nav class="mb-6 font-ui text-sm">
+	<nav class="mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
 		<a href="/bible" class="text-muted hover:text-accent">Bible</a>
 		<span class="mx-2 text-subtle">›</span>
 		<span class="font-semibold">{data.book.frenchName}</span>

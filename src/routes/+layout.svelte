@@ -12,6 +12,13 @@
 
 	let { children } = $props();
 
+	// Restart the page-fade animation on every client navigation by toggling
+	// the class off and on, instead of remounting the wrapper subtree via
+	// {#key}. This avoids destroying long paragraph lists and the StudyPanel
+	// state on every link click.
+	let fadeKey = $state(0);
+	let contentEl: HTMLElement | undefined = $state();
+
 	const showSidebar = $derived.by(() => {
 		const p = page.url.pathname;
 		// Sidebar is the catechism's structural TOC. Show only inside the
@@ -39,6 +46,15 @@
 		if ((fromOnCcc && !toOnCcc) || (fromOnBible && !toOnBible) || toOnConcordance) {
 			if (get(studyPanel).open) closePanel();
 		}
+
+		// Re-trigger the page-fade by re-applying the class. Bump the key so
+		// Svelte updates the attribute, then reflow before the keyframe runs.
+		fadeKey++;
+		if (contentEl) {
+			contentEl.classList.remove('page-fade');
+			void contentEl.offsetWidth;
+			contentEl.classList.add('page-fade');
+		}
 	});
 </script>
 
@@ -54,17 +70,48 @@
 	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+
 <TopBar />
 <div class="flex">
 	{#if showSidebar}
 		<Sidebar />
 		<SidebarToggle />
 	{/if}
-	{#key page.url.pathname}
-		<div class="flex-1 min-w-0 page-fade">
-			{@render children()}
-		</div>
-	{/key}
+	<div
+		bind:this={contentEl}
+		id="main-content"
+		class="flex-1 min-w-0 page-fade"
+		data-fade-key={fadeKey}
+	>
+		{@render children()}
+	</div>
 	<StudyPanel />
 </div>
 <Footer />
+
+<style>
+	/* Visible only when focused — first-Tab affordance for keyboard / AT users
+	   to bypass the topbar on every page (WCAG 2.4.1 Bypass Blocks). */
+	.skip-link {
+		position: absolute;
+		left: 0.5rem;
+		top: -3rem;
+		z-index: calc(var(--z-modal) + 10);
+		padding: 0.55rem 0.95rem;
+		background: var(--color-panel);
+		color: var(--color-fg);
+		border: 1px solid var(--color-accent);
+		border-radius: 4px;
+		font-family: var(--font-ui);
+		font-size: 0.85rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: top 150ms ease;
+	}
+	.skip-link:focus {
+		top: 0.5rem;
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+</style>

@@ -12,7 +12,7 @@
 </svelte:head>
 
 <main class="mx-auto max-w-reader px-6 py-10">
-	<nav class="mb-6 font-ui text-sm">
+	<nav class="mb-6 font-ui text-sm" aria-label="Fil d'Ariane">
 		<a href="/glossaire" class="inline-flex items-center gap-1 text-muted hover:text-accent">
 			<span aria-hidden="true">←</span>
 			<span>Retour au glossaire</span>
@@ -28,7 +28,10 @@
 	</header>
 
 	{#if data.grouped.length > 1}
-		<nav class="alpha-bar mb-8 -mx-6 px-6 py-2 border-b border-border">
+		<nav
+			class="alpha-bar mb-8 -mx-6 px-6 py-2 border-b border-border"
+			aria-label="Lettres de l'alphabet"
+		>
 			<ul class="flex flex-wrap gap-x-2 gap-y-1 font-ui text-[13px]">
 				{#each data.grouped as g (g.letter)}
 					<li>

@@ -425,7 +425,6 @@
 			id="catechism-menu"
 			class="catdrop-panel"
 			class:is-mobile={isMobile}
-			role="menu"
 			tabindex="-1"
 			bind:this={panelEl}
 			aria-label="Catéchisme — table des matières"
@@ -443,19 +442,14 @@
 				<!-- Mobile fallback: simple single-column list (parts + prologue) -->
 				<p class="eyebrow" aria-hidden="true">Catéchisme</p>
 				{#if prologue}
-					<a
-						class="m-row m-row-prologue"
-						href="/ccc/{prologue.slug}"
-						role="menuitem"
-						onclick={close}
-					>
+					<a class="m-row m-row-prologue" href="/ccc/{prologue.slug}" onclick={close}>
 						<span class="m-row-label">Prologue</span>
 					</a>
 				{/if}
-				<ol class="m-list" role="none">
+				<ol class="m-list">
 					{#each parts as part (part.slug)}
 						<li>
-							<a class="m-row" href="/ccc/{part.slug}" role="menuitem" onclick={close}>
+							<a class="m-row" href="/ccc/{part.slug}" onclick={close}>
 								<span class="m-numeral" aria-hidden="true">{ROMAN[part.number ?? 0]}</span>
 								<span class="m-body">
 									<span class="m-kicker">Partie&nbsp;{part.number}</span>
@@ -466,24 +460,23 @@
 						</li>
 					{/each}
 				</ol>
-				<a class="m-sommaire" href="/ccc/sommaire" role="menuitem" onclick={close}>
+				<a class="m-sommaire" href="/ccc/sommaire" onclick={close}>
 					<span>Sommaire complet</span>
 					<span class="sommaire-arrow" aria-hidden="true">→</span>
 				</a>
 			{:else}
 				<!-- Cascade mega-menu -->
-				<div class="cascade" role="presentation">
+				<div class="cascade">
 					<!-- COL 1: PARTIES -->
 					<div class="col col-parts">
 						<p class="col-head">Parties</p>
-						<ul class="col-list styled-scroll" role="none">
+						<ul class="col-list styled-scroll">
 							{#each col1Items as it, i (it.kind === 'prologue' ? 'prologue' : it.item.slug)}
 								{#if it.kind === 'prologue'}
 									<li>
 										<a
 											class="cell cell-prologue"
 											href="/ccc/{it.item.slug}"
-											role="menuitem"
 											data-kb-col="0"
 											data-kb-index={i}
 											tabindex={kbCol === 0 && kbIndex === i ? 0 : -1}
@@ -509,7 +502,6 @@
 											class="cell cell-part"
 											class:is-active={isActive}
 											href="/ccc/{part.slug}"
-											role="menuitem"
 											data-kb-col="0"
 											data-kb-index={i}
 											tabindex={kbCol === 0 && kbIndex === i ? 0 : -1}
@@ -544,7 +536,7 @@
 						{#if col2Items.length === 0}
 							<p class="col-empty">—</p>
 						{:else}
-							<ul class="col-list styled-scroll" role="none">
+							<ul class="col-list styled-scroll">
 								{#each col2Items as section, i (section.slug)}
 									{@const isActive = activeSectionSlug === section.slug}
 									<li>
@@ -552,7 +544,6 @@
 											class="cell cell-section"
 											class:is-active={isActive}
 											href={sectionHref(section)}
-											role="menuitem"
 											data-kb-col="1"
 											data-kb-index={i}
 											tabindex={kbCol === 1 && kbIndex === i ? 0 : -1}
@@ -588,7 +579,7 @@
 								{sectionDirectArticles.length > 0 ? '—' : '—'}
 							</p>
 						{:else}
-							<ul class="col-list styled-scroll" role="none">
+							<ul class="col-list styled-scroll">
 								{#each col3Items as chap, i (chap.slug)}
 									{@const isActive = activeChapterSlug === chap.slug}
 									<li>
@@ -596,7 +587,6 @@
 											class="cell cell-chapter"
 											class:is-active={isActive}
 											href={chapterHref(chap)}
-											role="menuitem"
 											data-kb-col="2"
 											data-kb-index={i}
 											tabindex={kbCol === 2 && kbIndex === i ? 0 : -1}
@@ -630,7 +620,7 @@
 						{#if col4Items.length === 0}
 							<p class="col-empty">—</p>
 						{:else}
-							<ul class="col-list styled-scroll" role="none">
+							<ul class="col-list styled-scroll">
 								{#each col4Items as item, i (item.kind + ':' + (item.kind === 'article' ? item.data.slug : item.data.id))}
 									{@const isActive =
 										item.kind === 'article' &&
@@ -643,7 +633,6 @@
 											href={item.kind === 'article'
 												? articleHref(item.data)
 												: headingHref(item.data)}
-											role="menuitem"
 											data-kb-col="3"
 											data-kb-index={i}
 											tabindex={kbCol === 3 && kbIndex === i ? 0 : -1}
@@ -674,12 +663,7 @@
 				</div>
 
 				<!-- Footer bar — entire row is the sommaire link, centered. -->
-				<a
-					class="panel-foot foot-link foot-link-primary"
-					href="/ccc/sommaire"
-					role="menuitem"
-					onclick={close}
-				>
+				<a class="panel-foot foot-link foot-link-primary" href="/ccc/sommaire" onclick={close}>
 					<span>Sommaire complet</span>
 					<span class="sommaire-arrow" aria-hidden="true">→</span>
 				</a>

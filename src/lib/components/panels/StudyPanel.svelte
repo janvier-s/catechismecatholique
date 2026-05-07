@@ -3,12 +3,7 @@
 	import { get } from 'svelte/store';
 	import { fly } from 'svelte/transition';
 	import { studyPanel, openPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
-	import {
-		loadParagraph,
-		loadCitedBy,
-		loadParagraphContexts,
-		loadChapter
-	} from '$lib/data/loaders';
+	import { loadParagraph, loadCitedBy, loadParagraphContext, loadChapter } from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
 	import TabBibleRefs from './TabBibleRefs.svelte';
@@ -68,16 +63,15 @@
 		}
 		const paragraphNum = ctx.paragraph;
 		(async () => {
-			const [p, citedBy, ctxs] = await Promise.all([
+			const [p, citedBy, pc] = await Promise.all([
 				loadParagraph(paragraphNum),
 				loadCitedBy(),
-				loadParagraphContexts()
+				loadParagraphContext(paragraphNum)
 			]);
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
 
 			// hasEnBref: the paragraph's chapter has at least one en_bref block
-			const pc = ctxs[paragraphNum];
 			if (pc?.chapter) {
 				try {
 					const chapter = await loadChapter(pc.chapter.slug);
@@ -140,15 +134,68 @@
 		document.addEventListener('keydown', onKeydown);
 		return () => document.removeEventListener('keydown', onKeydown);
 	});
+
+	// Mobile sheet only: lock body scroll, focus the close button on open,
+	// trap Tab inside the sheet, and restore focus to whatever element opened
+	// it. Desktop sticky-rail keeps its current "in flow" focus behaviour.
+	let sheetEl: HTMLElement | undefined = $state();
+	let lastTrigger: HTMLElement | null = null;
+	$effect(() => {
+		if (!$studyPanel.open) return;
+		if (typeof document === 'undefined') return;
+
+		const isMobile = window.matchMedia('(max-width: 1023.98px)').matches;
+		if (!isMobile) return;
+
+		lastTrigger = document.activeElement as HTMLElement | null;
+		const html = document.documentElement;
+		const prevOverflow = html.style.overflow;
+		html.style.overflow = 'hidden';
+
+		queueMicrotask(() => {
+			const closeBtn = sheetEl?.querySelector<HTMLElement>('button[aria-label="Fermer"]');
+			closeBtn?.focus();
+		});
+
+		const onTabTrap = (e: KeyboardEvent) => {
+			if (e.key !== 'Tab' || !sheetEl) return;
+			const focusables = Array.from(
+				sheetEl.querySelectorAll<HTMLElement>(
+					'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+				)
+			);
+			if (focusables.length === 0) return;
+			const first = focusables[0]!;
+			const last = focusables[focusables.length - 1]!;
+			const active = document.activeElement;
+			if (e.shiftKey && active === first) {
+				e.preventDefault();
+				last.focus();
+			} else if (!e.shiftKey && active === last) {
+				e.preventDefault();
+				first.focus();
+			}
+		};
+		document.addEventListener('keydown', onTabTrap);
+
+		return () => {
+			html.style.overflow = prevOverflow;
+			document.removeEventListener('keydown', onTabTrap);
+			lastTrigger?.focus?.();
+			lastTrigger = null;
+		};
+	});
 </script>
 
 {#if $studyPanel.open}
 	<!-- Mobile: bottom-sheet overlay covering most of the screen. Hidden on
 	     lg+ where the resizable rail below takes over. -->
 	<div
+		bind:this={sheetEl}
 		class="lg:hidden fixed inset-x-0 bottom-0 z-[var(--z-modal)] bg-panel border-t border-border flex flex-col"
 		style="top: var(--topbar-height, 58px); max-height: calc(100dvh - var(--topbar-height, 58px));"
 		role="dialog"
+		aria-modal="true"
 		aria-label="Panneau d'étude"
 		transition:fly={{ y: 30, duration: 200 }}
 	>

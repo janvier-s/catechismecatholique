@@ -98,7 +98,7 @@
 
 	<nav
 		class="mt-16 pt-6 border-t border-border flex items-stretch justify-between gap-6 font-ui"
-		aria-label="Navigation"
+		aria-label="Partie précédente ou suivante"
 	>
 		{#if data.prev}
 			<NavCard

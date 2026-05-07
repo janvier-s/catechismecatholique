@@ -14,7 +14,7 @@ const config = {
 				exclude: ['<all>']
 			}
 		}),
-		inlineStyleThreshold: 51200,
+		inlineStyleThreshold: 2048,
 		alias: {
 			$lib: 'src/lib',
 			$data: 'static/data'

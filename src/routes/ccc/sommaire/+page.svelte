@@ -82,7 +82,7 @@
 <main class="toc">
 	<header class="toc-head">
 		<p class="eyebrow">Table des matières</p>
-		<h1 class="title" aria-label="Sommaire complet">Sommaire</h1>
+		<h1 class="title">Sommaire</h1>
 		<div class="ornament" aria-hidden="true">
 			<span class="rule rule-l"></span>
 			<span class="fleuron">✠</span>
