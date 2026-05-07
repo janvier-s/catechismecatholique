@@ -19,8 +19,12 @@
 	<h2>Éditeur</h2>
 
 	<p>
-		Ce site est édité par <strong>TLB</strong>.<br />
-		Contact : <a href="mailto:contact@catechismecatholique.fr">contact@catechismecatholique.fr</a>
+		Ce site est édité par <strong>TLB</strong>. Pour tout contact, utiliser le dépôt
+		<a
+			href="https://github.com/janvier-s/catechismecatholique"
+			target="_blank"
+			rel="noopener noreferrer">GitHub</a
+		>.
 	</p>
 
 	<h2>Hébergement</h2>
@@ -35,9 +39,10 @@
 	<h2>Données personnelles</h2>
 
 	<p>
-		Ce site ne collecte aucune donnée personnelle. Aucun compte n'est requis. Aucun cookie de
-		traçage ou de mesure d'audience n'est déposé. L'hébergeur Cloudflare peut traiter les adresses
-		IP dans le cadre de la fourniture de son service d'infrastructure réseau.
+		Ce site ne collecte aucune donnée personnelle et ne dépose aucun cookie de traçage. La
+		fréquentation est mesurée par Cloudflare Web Analytics, un outil sans cookie et sans collecte de
+		données personnelles identifiables. L'hébergeur Cloudflare peut traiter les adresses IP dans le
+		cadre de la fourniture de son service d'infrastructure réseau.
 	</p>
 
 	<h2>Droits sur les contenus</h2>

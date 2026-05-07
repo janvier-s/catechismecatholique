@@ -1,64 +1,64 @@
 import type { RequestHandler } from './$types';
-import type { Structure, GlossaryBundle } from '$lib/data/types';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { BOOKS } from '$lib/utils/bibleBookSlug';
 
-function url(origin: string, path: string): string {
-	return `<url><loc>${origin}${path}</loc></url>`;
-}
+export const prerender = true;
 
-export const GET: RequestHandler = async ({ fetch, url: reqUrl }) => {
-	const origin = reqUrl.origin;
+const SITE = 'https://catechismecatholique.fr';
 
-	const [struct, glossary]: [Structure, GlossaryBundle] = await Promise.all([
-		fetch('/data/ccc/structure.json').then((r) => r.json()),
-		fetch('/data/ccc/glossary.json').then((r) => r.json())
-	]);
+export const GET: RequestHandler = () => {
+	const chapterCounts: Record<string, number> = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/bible/chapter-counts.json'), 'utf-8')
+	);
+	const glossary: { entries: { slug: string }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/ccc/glossary.json'), 'utf-8')
+	);
+	const glossaryIndex: { clusters: { id: string }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/ccc/glossary-index.json'), 'utf-8')
+	);
 
-	const urls: string[] = [];
+	const staticPages = [
+		'/',
+		'/ccc',
+		'/ccc/sommaire',
+		'/bible',
+		'/glossaire',
+		'/glossaire/tous',
+		'/recherche',
+		'/a-propos',
+		'/mentions-legales'
+	];
 
-	// Static pages
-	urls.push(url(origin, '/'));
-	urls.push(url(origin, '/ccc'));
-	urls.push(url(origin, '/ccc/sommaire'));
-	urls.push(url(origin, '/glossaire'));
-	urls.push(url(origin, '/glossaire/tous'));
+	const paragraphUrls = Array.from({ length: 2865 }, (_, i) => `/ccc/${i + 1}`);
 
-	// CCC structural hierarchy
-	for (const part of struct.parts) {
-		urls.push(url(origin, `/ccc/${part.slug}`));
-		for (const section of part.sections ?? []) {
-			urls.push(url(origin, `/ccc/${part.slug}/${section.slug}`));
-			for (const chapter of section.chapters ?? []) {
-				urls.push(url(origin, `/ccc/${part.slug}/${section.slug}/${chapter.slug}`));
-			}
-			for (const article of section.articles_direct ?? []) {
-				urls.push(url(origin, `/ccc/${part.slug}/${section.slug}/${article.slug}`));
-			}
+	const bibleUrls: string[] = [];
+	for (const book of BOOKS) {
+		bibleUrls.push(`/bible/${book.slug}`);
+		const chapCount = chapterCounts[book.usfx] ?? 0;
+		for (let ch = 1; ch <= chapCount; ch++) {
+			bibleUrls.push(`/bible/${book.slug}/${ch}`);
 		}
 	}
 
-	// Chapter articles — loaded lazily via the chapter JSON files
-	// (skipped here to avoid fetching every chapter file at sitemap build time;
-	//  they're reachable through the chapter pages above)
+	const glossaryUrls = [
+		...glossaryIndex.clusters.map((c) => `/glossaire/c/${c.id}`),
+		...glossary.entries.map((e) => `/glossaire/${e.slug}`)
+	];
 
-	// Glossary clusters
-	for (const cluster of glossary.clusters ?? []) {
-		urls.push(url(origin, `/glossaire/c/${cluster.id}`));
-	}
+	const allUrls = [...staticPages, ...paragraphUrls, ...bibleUrls, ...glossaryUrls];
 
-	// Glossary terms
-	for (const entry of glossary.entries ?? []) {
-		urls.push(url(origin, `/glossaire/${entry.slug}`));
-	}
-
-	const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.join('\n')}
-</urlset>`;
+	const xml = [
+		'<?xml version="1.0" encoding="UTF-8"?>',
+		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+		...allUrls.map((url) => `  <url><loc>${SITE}${url}</loc></url>`),
+		'</urlset>'
+	].join('\n');
 
 	return new Response(xml, {
 		headers: {
-			'Content-Type': 'application/xml; charset=utf-8',
-			'Cache-Control': 'public, max-age=3600'
+			'Content-Type': 'application/xml',
+			'Cache-Control': 'max-age=3600'
 		}
 	});
 };

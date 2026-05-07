@@ -14,6 +14,9 @@
 		property="og:description"
 		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
+	<meta property="og:image" content="https://catechismecatholique.fr/img/og-image.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 </svelte:head>
 
 <ProseLayout
@@ -142,6 +145,10 @@
 			tablette et ordinateur.
 		</li>
 		<li>
+			<strong>Paragraphe du jour</strong> : chaque jour, un paragraphe du Catéchisme mis en avant sur
+			la page d'accueil, pour une lecture quotidienne progressive.
+		</li>
+		<li>
 			<strong>Cinq thèmes d'affichage</strong> : clair, sépia, sombre, OLED et automatique (suit le réglage
 			du système).
 		</li>
@@ -168,9 +175,8 @@
 
 	<p>
 		Ce projet est né d'un constat : il n'existait pas de bonne édition du Catéchisme accessible en
-		ligne en français. Il a commencé par une page de lecture, sobre et lisible. Puis la recherche
-		s'est imposée, puis la concordance biblique, puis le glossaire. Chaque chose appelait la
-		suivante.
+		ligne en français. Une page de lecture d'abord, sobre et lisible. Puis la recherche s'est
+		imposée, puis la concordance biblique, puis le glossaire. Chaque chose appelait la suivante.
 	</p>
 
 	<p>
