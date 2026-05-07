@@ -171,7 +171,7 @@
 	}
 	.pano-part-title {
 		font-family: var(--font-heading);
-		font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+		font-size: clamp(1.3rem, 2.2vw, 1.6rem);
 		font-weight: 600;
 		line-height: 1.2;
 		color: var(--color-fg);
@@ -215,11 +215,9 @@
 	}
 	.pano-section-title {
 		font-family: var(--font-heading);
-		font-size: clamp(2rem, 5vw, 3rem);
-		font-weight: 700;
-		line-height: 1.05;
-		letter-spacing: 0.02em;
-		text-transform: uppercase;
+		font-size: clamp(1.15rem, 2vw, 1.4rem);
+		font-weight: 600;
+		line-height: 1.2;
 		color: var(--color-heading, var(--color-fg));
 		margin: 0;
 	}
@@ -245,29 +243,32 @@
 		text-align: center;
 		text-decoration: none;
 		color: inherit;
-		background: color-mix(in srgb, var(--color-accent) 10%, transparent);
-		padding: 1.1rem 0.85rem 1rem;
+		background: color-mix(in srgb, var(--color-accent) 7%, transparent);
+		border-top: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+		padding: 1rem 0.85rem 0.95rem;
 	}
 	.pano-cell-banner-title {
 		font-family: var(--font-heading);
-		font-weight: 700;
-		font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-		line-height: 1.25;
-		color: var(--color-accent);
+		font-weight: 600;
+		font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+		line-height: 1.3;
+		color: var(--color-fg);
 		margin: 0;
 		transition: color 150ms ease;
 	}
 	.pano-cell-banner:hover .pano-cell-banner-title {
-		color: var(--color-accent-text);
+		color: var(--color-accent);
 	}
 	.pano-cell-banner-sub {
-		font-family: var(--font-heading);
-		font-style: italic;
-		font-weight: 400;
-		font-size: 0.92rem;
+		font-family: var(--font-ui);
+		font-style: normal;
+		font-weight: 500;
+		font-size: 0.7rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
 		line-height: 1.4;
-		color: var(--color-fg);
-		margin: 0.4rem 0 0;
+		color: var(--color-muted);
+		margin: 0.45rem 0 0;
 	}
 
 	.pano-cell-well {
@@ -310,21 +311,22 @@
 		margin-top: 0.15rem;
 	}
 
-	/* Range band — full-width footer bar that mirrors the cards grid */
+	/* Range band — quiet tinted footer that mirrors the cards grid */
 	.pano-section-ranges {
-		background: var(--color-accent);
-		color: #fff;
-		margin-top: 0.75rem;
+		background: color-mix(in srgb, var(--color-accent) 7%, transparent);
+		border-top: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+		color: var(--color-accent);
+		margin-top: 0;
 	}
 	.pano-range-cell {
-		padding: 0.85rem 0.5rem;
+		padding: 0.6rem 0.5rem;
 		text-align: center;
 		font-family: var(--font-ui);
-		font-size: 0.85rem;
+		font-size: 0.78rem;
 		font-weight: 500;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.08em;
 		font-variant-numeric: tabular-nums lining-nums;
-		box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.32);
+		box-shadow: inset 1px 0 0 color-mix(in srgb, var(--color-accent) 18%, transparent);
 	}
 	.pano-range-cell:first-child {
 		box-shadow: none;
@@ -336,7 +338,7 @@
 			grid-template-columns: 1fr;
 		}
 		.pano-range-cell {
-			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
+			box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-accent) 18%, transparent);
 		}
 		.pano-range-cell:first-child {
 			box-shadow: none;
