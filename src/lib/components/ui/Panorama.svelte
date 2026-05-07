@@ -45,6 +45,22 @@
 		active = {}
 	}: { parts: Part[]; headingLevel?: 2 | 3; active?: ActivePath } = $props();
 
+	// Only highlight the deepest level the reader is currently at — so on
+	// /ccc/[part] only the part banner lights up, on /ccc/[part]/[section]
+	// only the section heading, etc. Avoids the visually-noisy "every
+	// ancestor is highlighted" treatment.
+	const deepest = $derived<'article' | 'chapter' | 'section' | 'part' | null>(
+		active.article
+			? 'article'
+			: active.chapter
+				? 'chapter'
+				: active.section
+					? 'section'
+					: active.part
+						? 'part'
+						: null
+	);
+
 	const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 	// Render a paragraph range without the § symbol — just the bare numbers,
@@ -100,7 +116,8 @@
 
 <div class="panorama">
 	{#each parts as part (part.slug)}
-		{@const partActive = active.part === part.slug}
+		{@const partOnPath = active.part === part.slug}
+		{@const partActive = partOnPath && deepest === 'part'}
 		<article class="pano-part" class:is-prologue={part.prologue} class:is-active={partActive}>
 			<header class="pano-banner">
 				{#if !part.prologue}
@@ -121,7 +138,8 @@
 			</header>
 
 			{#each part.sections as section (section.slug)}
-				{@const sectionActive = partActive && active.section === section.slug}
+				{@const sectionOnPath = partOnPath && active.section === section.slug}
+				{@const sectionActive = sectionOnPath && deepest === 'section'}
 				<section class="pano-section" class:is-active={sectionActive}>
 					<a class="pano-section-head" href="/ccc/{part.slug}/{section.slug}">
 						{#if section.number}
@@ -139,7 +157,8 @@
 						<div class="pano-grid" data-cols={Math.min(section.chapters.length, 3)}>
 							{#each section.chapters as chapter (chapter.slug)}
 								{@const href = `/ccc/${part.slug}/${section.slug}/${chapter.slug}`}
-								{@const chapterActive = sectionActive && active.chapter === chapter.slug}
+								{@const chapterOnPath = sectionOnPath && active.chapter === chapter.slug}
+								{@const chapterActive = chapterOnPath && deepest === 'chapter'}
 								<div class="pano-cell" class:is-active={chapterActive}>
 									<a class="pano-cell-head" {href}>
 										{#if chapter.number !== undefined}
@@ -152,7 +171,8 @@
 									{#if chapter.articles && chapter.articles.length > 0}
 										<ul class="pano-cell-list">
 											{#each chapter.articles as article (article.slug)}
-												{@const articleActive = chapterActive && active.article === article.slug}
+												{@const articleActive =
+													chapterOnPath && deepest === 'article' && active.article === article.slug}
 												<li class:is-active={articleActive}>
 													<a href="{href}/{article.slug}">
 														<span class="pano-cell-art">
@@ -183,7 +203,8 @@
 									ARTICLE_TAG_OVERRIDE[article.slug] ??
 									(article.number !== undefined ? `Article ${article.number}` : '')}
 								{@const subtitle = ARTICLE_SUBTITLE[article.slug] ?? ''}
-								{@const articleActive = sectionActive && active.article === article.slug}
+								{@const articleActive =
+									sectionOnPath && deepest === 'article' && active.article === article.slug}
 								<div class="pano-cell" class:is-active={articleActive}>
 									<a class="pano-cell-head" {href}>
 										{#if tag}
@@ -384,6 +405,9 @@
 		border-color: var(--color-accent);
 		background: color-mix(in srgb, var(--color-accent) 8%, transparent);
 		box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent);
+	}
+	.pano-cell.is-active .pano-cell-title {
+		color: var(--color-accent);
 	}
 	.pano-cell.is-active .pano-cell-title::before {
 		content: '›';
