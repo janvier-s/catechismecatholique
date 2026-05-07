@@ -504,7 +504,9 @@
 		margin-top: 2.5rem;
 	}
 
-	.cta-btn {
+	.cta-row a.cta-btn,
+	.cta-row a.cta-btn:link,
+	.cta-row a.cta-btn:visited {
 		display: inline-block;
 		padding: 11px 28px;
 		border: 1px solid var(--color-accent);
@@ -520,8 +522,9 @@
 		transition: background 150ms ease;
 	}
 
-	.cta-btn:hover {
+	.cta-row a.cta-btn:hover {
 		background: color-mix(in srgb, var(--color-accent) 85%, black);
+		color: #fff;
 	}
 
 	/* Logo block — image on the left, prose on the right; stacks on small

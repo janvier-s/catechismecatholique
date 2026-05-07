@@ -73,7 +73,7 @@
 						<a href="/ccc/{part.slug}">{part.title}</a>
 					</h3>
 				{/if}
-				{#if part.range && !part.prologue}
+				{#if part.range}
 					<p class="pano-banner-range">{fmtRange(part.range)}</p>
 				{/if}
 			</header>
