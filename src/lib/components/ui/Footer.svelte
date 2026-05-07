@@ -20,7 +20,7 @@
 	</p>
 	<p class="footer-copy">
 		Texte du Catéchisme © Libreria Editrice Vaticana &nbsp;·&nbsp; Bible © 2022 Fraternité de
-		Tibériade (CC BY-SA 4.0)
+		Tibériade
 	</p>
 </footer>
 
@@ -89,5 +89,9 @@
 		margin: 0;
 		text-align: center;
 		line-height: 1.6;
+	}
+
+	.footer-motto abbr {
+		text-decoration: none;
 	}
 </style>

@@ -12,6 +12,8 @@
 	// cursor globally while open and cancel the close whenever it's inside
 	// either box.
 	let hoverCloseTimer: ReturnType<typeof setTimeout> | null = null;
+	let hoverOpenTimer: ReturnType<typeof setTimeout> | null = null;
+
 	function cancelClose() {
 		if (hoverCloseTimer) {
 			clearTimeout(hoverCloseTimer);
@@ -19,10 +21,24 @@
 		}
 	}
 	function scheduleClose() {
+		cancelOpen();
 		cancelClose();
 		hoverCloseTimer = setTimeout(() => {
 			open = false;
 		}, 800);
+	}
+	function cancelOpen() {
+		if (hoverOpenTimer) {
+			clearTimeout(hoverOpenTimer);
+			hoverOpenTimer = null;
+		}
+	}
+	function scheduleOpen() {
+		cancelClose();
+		cancelOpen();
+		hoverOpenTimer = setTimeout(() => {
+			open = true;
+		}, 250);
 	}
 
 	type Range = { from: number; to: number };
@@ -372,7 +388,7 @@
 	bind:this={containerEl}
 	onmouseenter={() => {
 		cancelClose();
-		open = true;
+		if (!open) scheduleOpen();
 	}}
 	onmouseleave={scheduleClose}
 >
