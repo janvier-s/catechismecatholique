@@ -26,7 +26,8 @@ function decode(s: string): string {
 export function parseToc(xml: string): TocEntry[] {
 	const out: TocEntry[] = [];
 	const stack: number[] = []; // depth tracker — push on <navPoint>, pop on </navPoint>
-	const re = /<navPoint\b[^>]*>|<\/navPoint>|<navLabel>\s*<text>([\s\S]*?)<\/text>\s*<\/navLabel>|<content\s+src="([^"]+)"/g;
+	const re =
+		/<navPoint\b[^>]*>|<\/navPoint>|<navLabel>\s*<text>([\s\S]*?)<\/text>\s*<\/navLabel>|<content\s+src="([^"]+)"/g;
 
 	let pendingLabel: string | undefined;
 	let pendingSrc: string | undefined;

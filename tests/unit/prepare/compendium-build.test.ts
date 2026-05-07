@@ -4,9 +4,27 @@ import type { TocEntry } from '../../../scripts/prepare/compendium/toc';
 import type { HtmlEvent } from '../../../scripts/prepare/compendium/html';
 
 const SOURCE_QS = [
-	{ paragraph_number: '1', paragraph_question: 'Q1?', ccc_refs: ['27'], paragraph: 'A1.', verses: [] },
-	{ paragraph_number: '2', paragraph_question: 'Q2?', ccc_refs: ['28', '29'], paragraph: 'A2.', verses: ['Mt 1:1'] },
-	{ paragraph_number: '3', paragraph_question: 'Q3?', ccc_refs: ['100'], paragraph: 'A3.', verses: [] }
+	{
+		paragraph_number: '1',
+		paragraph_question: 'Q1?',
+		ccc_refs: ['27'],
+		paragraph: 'A1.',
+		verses: []
+	},
+	{
+		paragraph_number: '2',
+		paragraph_question: 'Q2?',
+		ccc_refs: ['28', '29'],
+		paragraph: 'A2.',
+		verses: ['Mt 1:1']
+	},
+	{
+		paragraph_number: '3',
+		paragraph_question: 'Q3?',
+		ccc_refs: ['100'],
+		paragraph: 'A3.',
+		verses: []
+	}
 ];
 
 const TOC: TocEntry[] = [
@@ -67,9 +85,7 @@ describe('buildCompendium', () => {
 
 	it('parses bible refs from source verses field', () => {
 		const out = buildCompendium({ sourceJson: SOURCE_QS, toc: TOC, files: FILES });
-		const q2 = out.parts['part-1']!.flow.find(
-			(n) => n.kind === 'question' && n.data.number === 2
-		);
+		const q2 = out.parts['part-1']!.flow.find((n) => n.kind === 'question' && n.data.number === 2);
 		expect(q2 && q2.kind === 'question' && q2.data.bible_refs[0]?.text).toBe('Mt 1:1');
 	});
 

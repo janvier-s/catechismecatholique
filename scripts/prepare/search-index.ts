@@ -48,7 +48,7 @@ function stripHtml(s: string): string {
 export function buildSearchIndex(
 	paragraphs: Paragraph[],
 	chapters: Chapter[],
-	contexts: Record<number, ParagraphContext>, // eslint-disable-line @typescript-eslint/no-unused-vars
+	contexts: Record<number, ParagraphContext>,
 	compendium: CompendiumSearchDoc[] = []
 ): { documents: SearchDoc[]; serialized: string } {
 	const docs: SearchDoc[] = [];

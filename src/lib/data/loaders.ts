@@ -284,7 +284,10 @@ let compendiumQRangesPromise: Promise<CompendiumQRange[]> | null = null;
 
 export function loadCompendiumStructure(fetcher: Fetch = fetch): Promise<CompendiumStructure> {
 	if (!compendiumStructurePromise) {
-		compendiumStructurePromise = fetchJson<CompendiumStructure>('/data/compendium/structure.json', fetcher);
+		compendiumStructurePromise = fetchJson<CompendiumStructure>(
+			'/data/compendium/structure.json',
+			fetcher
+		);
 	}
 	return compendiumStructurePromise;
 }
@@ -300,14 +303,20 @@ export function loadCompendiumPart(slug: string, fetcher: Fetch = fetch): Promis
 
 export function loadCompendiumCitedBy(fetcher: Fetch = fetch): Promise<CompendiumCitedBy> {
 	if (!compendiumCitedByPromise) {
-		compendiumCitedByPromise = fetchJson<CompendiumCitedBy>('/data/compendium/cited-by.json', fetcher);
+		compendiumCitedByPromise = fetchJson<CompendiumCitedBy>(
+			'/data/compendium/cited-by.json',
+			fetcher
+		);
 	}
 	return compendiumCitedByPromise;
 }
 
 export function loadCompendiumQRanges(fetcher: Fetch = fetch): Promise<CompendiumQRange[]> {
 	if (!compendiumQRangesPromise) {
-		compendiumQRangesPromise = fetchJson<CompendiumQRange[]>('/data/compendium/q-ranges.json', fetcher);
+		compendiumQRangesPromise = fetchJson<CompendiumQRange[]>(
+			'/data/compendium/q-ranges.json',
+			fetcher
+		);
 	}
 	return compendiumQRangesPromise;
 }

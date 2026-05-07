@@ -46,8 +46,12 @@
 
 	// Active filter tab — Tout / Sections / Paragraphes / Compendium. URL state is canonical.
 	const activeType = $derived<'all' | 'headings' | 'paragraphs' | 'compendium'>(
-		(page.url.searchParams.get('type') as 'all' | 'headings' | 'paragraphs' | 'compendium' | null) ??
-			'all'
+		(page.url.searchParams.get('type') as
+			| 'all'
+			| 'headings'
+			| 'paragraphs'
+			| 'compendium'
+			| null) ?? 'all'
 	);
 
 	$effect(() => {
@@ -246,13 +250,16 @@
 
 	const headingCount = $derived(data.hits.filter((h) => h.kind === 'heading').length);
 	const paragraphCount = $derived(data.hits.filter((h) => h.kind === 'paragraph').length);
-	const compendiumCount = $derived(data.hits.filter((h) => h.kind === 'compendium-question').length);
+	const compendiumCount = $derived(
+		data.hits.filter((h) => h.kind === 'compendium-question').length
+	);
 	const totalCount = $derived(data.hits.length);
 
 	const filteredHits = $derived.by<Hit[]>(() => {
 		if (activeType === 'headings') return data.hits.filter((h) => h.kind === 'heading');
 		if (activeType === 'paragraphs') return data.hits.filter((h) => h.kind === 'paragraph');
-		if (activeType === 'compendium') return data.hits.filter((h) => h.kind === 'compendium-question');
+		if (activeType === 'compendium')
+			return data.hits.filter((h) => h.kind === 'compendium-question');
 		return data.hits;
 	});
 	const visibleHits = $derived(filteredHits.slice(0, visiblePages * PAGE_SIZE));

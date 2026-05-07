@@ -1,5 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
-import { loadParagraph, loadCompendiumStructure, loadCompendiumPart, loadCompendiumCitedBy, loadCompendiumQRanges } from '$lib/data/loaders';
+import {
+	loadParagraph,
+	loadCompendiumStructure,
+	loadCompendiumPart,
+	loadCompendiumCitedBy,
+	loadCompendiumQRanges
+} from '$lib/data/loaders';
 
 describe('loaders', () => {
 	it('loadParagraph resolves to typed paragraph', async () => {

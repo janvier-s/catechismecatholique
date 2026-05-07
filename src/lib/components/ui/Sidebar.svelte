@@ -9,7 +9,13 @@
 		loadCompendiumStructure,
 		loadCompendiumPart
 	} from '$lib/data/loaders';
-	import type { Chapter, ParagraphContext, Corpus, CompendiumStructure, CompendiumPart } from '$lib/data/types';
+	import type {
+		Chapter,
+		ParagraphContext,
+		Corpus,
+		CompendiumStructure,
+		CompendiumPart
+	} from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
 	type Heading = { id: string; title: string; paragraph_start: number; level?: number };
@@ -418,10 +424,12 @@
 					}
 				} else {
 					// Non-active parts: show just section headings as a peek.
-					children = part.sections.map((sec): Item => ({
-						title: sec.title,
-						href: `${partHref}#s-${sec.title.toLowerCase().replace(/\s+/g, '-')}`
-					}));
+					children = part.sections.map(
+						(sec): Item => ({
+							title: sec.title,
+							href: `${partHref}#s-${sec.title.toLowerCase().replace(/\s+/g, '-')}`
+						})
+					);
 				}
 				return {
 					title: part.title,

@@ -15,8 +15,8 @@
 			Compendium du Catéchisme de l'Église catholique
 		</h1>
 		<p class="mt-4 text-lg leading-relaxed">
-			Une présentation synthétique du Catéchisme en 598 questions et réponses, publiée
-			par le Saint-Siège en 2005 sous le motu proprio de Benoît XVI.
+			Une présentation synthétique du Catéchisme en 598 questions et réponses, publiée par le
+			Saint-Siège en 2005 sous le motu proprio de Benoît XVI.
 		</p>
 	</header>
 

@@ -43,11 +43,7 @@
 	);
 </script>
 
-<article
-	class="mb-8 ccc-paragraph"
-	class:has-side-refs={sideRefs !== null}
-	id={anchorId}
->
+<article class="mb-8 ccc-paragraph" class:has-side-refs={sideRefs !== null} id={anchorId}>
 	<div class="paragraph-grid">
 		<a
 			href={numberHref}
