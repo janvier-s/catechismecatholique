@@ -40,4 +40,22 @@ describe('buildSearchIndex', () => {
 		expect(typeof result.serialized).toBe('string');
 		expect(result.serialized.length).toBeGreaterThan(50);
 	});
+
+	it('indexes compendium questions when provided', () => {
+		const out = buildSearchIndex([], [], {}, [
+			{
+				number: 1,
+				question: 'Quel est le dessein de Dieu',
+				answer: 'Dieu a créé',
+				partSlug: 'la-profession-de-la-foi'
+			}
+		]);
+		const cdoc = out.documents.find((d) => d.id === 'c:1');
+		expect(cdoc).toMatchObject({
+			kind: 'compendium-question',
+			number: 1,
+			corpus: 'compendium',
+			compendium_part: 'la-profession-de-la-foi'
+		});
+	});
 });
