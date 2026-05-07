@@ -123,6 +123,32 @@
 			</section>
 		{/if}
 
+		<!-- Founding quotation -->
+		<figure class="founding-quote reveal r-quote">
+			<blockquote>
+				«&nbsp;Garder le dépôt de la foi, telle est la mission que le Seigneur a confiée à son
+				Église et qu'elle accomplit en tout temps.&nbsp;»
+			</blockquote>
+			<figcaption>
+				<img
+					src="/img/popes/john-paul-ii-signature.svg"
+					alt="Signature de Jean-Paul II."
+					class="founding-signature"
+					loading="lazy"
+				/>
+				<span class="founding-attr">
+					<strong>Saint Jean-Paul&nbsp;II</strong>,
+					<a
+						href="https://www.vatican.va/content/john-paul-ii/fr/apost_constitutions/documents/hf_jp-ii_apc_19921011_fidei-depositum.html"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<em>Fidei depositum</em>
+					</a>
+				</span>
+			</figcaption>
+		</figure>
+
 		<!-- Secondary nav row -->
 		<nav class="nav-row reveal r-nav" aria-label="Navigation principale">
 			<a href="/ccc/sommaire">Sommaire</a>
@@ -344,6 +370,60 @@
 		opacity: 0.75;
 	}
 
+	/* Founding quotation — quiet epigraph with a small inked signature.
+	   Sits between the daily paragraph and the nav row. */
+	.founding-quote {
+		max-width: 38rem;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.founding-quote blockquote {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+		line-height: 1.6;
+		color: var(--color-fg);
+		margin: 0 0 0.75rem;
+		padding: 0 0.5rem;
+	}
+	.founding-quote figcaption {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.25rem;
+	}
+	.founding-signature {
+		display: block;
+		height: 32px;
+		width: auto;
+		max-width: 180px;
+		opacity: 0.7;
+	}
+	:global([data-theme='dark']) .founding-signature,
+	:global([data-theme='oled']) .founding-signature {
+		filter: invert(1);
+		opacity: 0.65;
+	}
+	.founding-attr {
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-subtle);
+	}
+	.founding-attr strong {
+		font-weight: 600;
+		color: var(--color-fg);
+	}
+	.founding-attr a {
+		color: inherit;
+		text-decoration-color: var(--color-border);
+		text-underline-offset: 2px;
+	}
+	.founding-attr a:hover {
+		color: var(--color-accent);
+	}
+
 	/* Nav row ----------------------------------------------------------- */
 	.nav-row {
 		display: flex;
@@ -469,6 +549,17 @@
 			margin-top: 1.25rem;
 			text-align: center;
 		}
+		.founding-quote blockquote {
+			font-size: 0.92rem;
+			padding: 0 0.25rem;
+		}
+		.founding-signature {
+			height: 28px;
+		}
+		.founding-attr {
+			font-size: 0.62rem;
+			letter-spacing: 0.16em;
+		}
 	}
 
 	/* Short viewports — keep it on one screen at 1280×800. */
@@ -483,6 +574,12 @@
 		.prose-teaser {
 			font-size: 0.95rem;
 			line-height: 1.65;
+		}
+		.founding-quote blockquote {
+			font-size: 0.95rem;
+		}
+		.founding-signature {
+			height: 28px;
 		}
 	}
 	@media (max-height: 720px) {
