@@ -22,6 +22,7 @@ export const GET: RequestHandler = () => {
 		'/',
 		'/ccc',
 		'/ccc/sommaire',
+		'/ccc/panorama',
 		'/bible',
 		'/glossaire',
 		'/glossaire/tous',
