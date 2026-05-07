@@ -151,10 +151,14 @@
 		aria-label="Chapitre précédent ou suivant"
 	>
 		{#if prevHref}
-			<a href={prevHref} class="text-accent hover:underline whitespace-nowrap">← Chapitre {chapter - 1}</a>
+			<a href={prevHref} class="text-accent hover:underline whitespace-nowrap"
+				>← Chapitre {chapter - 1}</a
+			>
 		{:else}<span></span>{/if}
 		{#if nextHref}
-			<a href={nextHref} class="text-accent hover:underline whitespace-nowrap">Chapitre {chapter + 1} →</a>
+			<a href={nextHref} class="text-accent hover:underline whitespace-nowrap"
+				>Chapitre {chapter + 1} →</a
+			>
 		{:else}<span></span>{/if}
 	</nav>
 </main>
