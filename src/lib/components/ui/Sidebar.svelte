@@ -89,6 +89,10 @@
 		if (c.chapter && c.section) {
 			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${hash}`;
 		}
+		// articles_direct: article belongs to section with no enclosing chapter
+		if (c.article && c.section) {
+			return `/ccc/${c.part.slug}/${c.section.slug}/${c.article.slug}${hash}`;
+		}
 		if (c.section) {
 			return `/ccc/${c.part.slug}/${c.section.slug}`;
 		}

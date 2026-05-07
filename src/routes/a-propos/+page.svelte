@@ -43,13 +43,14 @@
 		>
 		propose le texte intégral, mais dans une interface vieillissante, difficile à naviguer et peu lisible
 		sur les appareils modernes. Des versions numériques existent, mais elles restent cloisonnées : on
-		peut les lire, pas vraiment les chercher ni les croiser avec d'autres sources. En anglais,
+		peut les lire, mais pas vraiment les chercher ni les croiser avec d'autres sources. Il existe un site
+		très utile,
 		<a
 			href="https://www.catholiccrossreference.online/catechism/"
 			target="_blank"
 			rel="noopener noreferrer">catholiccrossreference.online</a
-		>
-		offre une lecture fluide avec concordance biblique, mais en anglais seulement.
+		>, qui offre une lecture fluide et claire, avec un moteur de recherche simple, mais en anglais
+		seulement.
 	</p>
 
 	<p>Le monde francophone méritait mieux.</p>
@@ -63,13 +64,13 @@
 	</p>
 
 	<p>
-		La traduction de la Bible utilisée pour les références scripturaires est le
+		La traduction de la Bible utilisée pour les références scripturaires est la
 		<a
 			href="https://pacificbibles.org/details.php?id=francl"
 			target="_blank"
 			rel="noopener noreferrer"><em>Néo-Crampon Libre</em></a
-		>, une modernisation soigneuse de la traduction catholique française d'Augustin Crampon, mise à
-		disposition par la Fraternité de Tibériade sous licence libre.
+		>, une modernisation soigneuse de la traduction catholique française du chanoine Augustin
+		Crampon, mise à disposition par la Fraternité de Tibériade sous licence libre.
 	</p>
 
 	<div class="rights-block">
@@ -119,8 +120,8 @@
 	<ul>
 		<li>
 			<strong>Navigation structurée</strong> : les 2&nbsp;865 paragraphes organisés en parties, sections,
-			chapitres et articles, avec un sommaire hiérarchique. Chaque paragraphe affiche ses références bibliques
-			et doctrinales.
+			chapitres et articles. Un sommaire hiérarchique s'affiche dans la marge gauche : il se déplie automatiquement
+			au niveau du chapitre en cours et suit la lecture au fil du défilement.
 		</li>
 		<li>
 			<strong>Recherche</strong> : par mot ou expression, par numéro de paragraphe (taper &laquo;&nbsp;27&nbsp;&raquo;
@@ -128,13 +129,38 @@
 			renvoie à tous les paragraphes qui citent ce verset).
 		</li>
 		<li>
-			<strong>Concordance biblique</strong> : à partir de n'importe quel verset de la Bible, retrouver
-			les paragraphes du Catéchisme qui le citent. Une façon de lire l'Écriture à la lumière de l'enseignement
-			de l'Église.
+			<strong>Concordance biblique</strong> : la concordance recense les passages de l'Écriture sainte
+			cités dans le Catéchisme et indique, pour chacun, les paragraphes qui les développent. Une façon
+			de lire la Bible à la lumière de l'enseignement de l'Église.
 		</li>
 		<li>
-			<strong>Références en contexte</strong> : dans chaque paragraphe, les citations scripturaires et
-			les renvois doctrinaux s'ouvrent sans quitter la lecture.
+			<strong>Panneau d'étude</strong> : chaque paragraphe est accompagné d'un panneau latéral à six
+			onglets, accessible sans quitter la lecture.
+			<ul>
+				<li><strong>Bible</strong> : le texte intégral des versets cités dans le paragraphe.</li>
+				<li>
+					<strong>Renvois</strong> : les renvois internes inscrits dans le texte du Catéchisme. Le Catéchisme
+					n'est pas une somme de paragraphes isolés : presque chacun en cite d'autres en référence, car
+					il est conçu pour être lu comme un tout. Cet onglet regroupe ces liens et facilite la navigation
+					telle que le texte la prescrit.
+				</li>
+				<li>
+					<strong>Cités par</strong> : les paragraphes qui mentionnent ce paragraphe en renvoi.
+				</li>
+				<li>
+					<strong>Sources</strong> : les documents cités en référence : conciles, textes des Pères de
+					l'Église, documents liturgiques.
+				</li>
+				<li>
+					<strong>En Bref</strong> : l'En Bref de l'article auquel appartient le paragraphe lu. Chaque
+					article du Catéchisme se clôt par une série de formules brèves qui en résument la doctrine.
+				</li>
+				<li>
+					<strong>Concordance</strong> : les références scripturaires du paragraphe, avec le texte des
+					versets et les autres passages du Catéchisme qui développent les mêmes versets. Permet de voir
+					comment chaque texte de l'Écriture est reçu et expliqué dans l'ensemble du Catéchisme.
+				</li>
+			</ul>
 		</li>
 		<li>
 			<strong>Glossaire</strong> : les principaux termes de la théologie catholique, définis et classés
@@ -148,11 +174,33 @@
 			<strong>Paragraphe du jour</strong> : chaque jour, un paragraphe du Catéchisme mis en avant sur
 			la page d'accueil, pour une lecture quotidienne progressive.
 		</li>
-		<li>
-			<strong>Cinq thèmes d'affichage</strong> : clair, sépia, sombre, OLED et automatique (suit le réglage
-			du système).
-		</li>
 	</ul>
+
+	<h2>Options de lecture</h2>
+
+	<p>
+		Le panneau d'options, accessible depuis l'icône en haut de chaque page, propose trois onglets.
+	</p>
+
+	<p>
+		<strong>Texte</strong> : taille du corps, interligne et police de caractères. Quatre thèmes
+		d'affichage sont disponibles : <strong>Clair</strong> (fond blanc, contraste classique),
+		<strong>Sépia</strong> (tons chauds proches du papier, pour une lecture prolongée),
+		<strong>Sombre</strong> (fond sombre, pour les environnements peu éclairés) et
+		<strong>OLED</strong> (fond noir pur, pour les écrans AMOLED, économe en énergie).
+	</p>
+
+	<p>
+		<strong>Lecture</strong> : largeur de colonne (étroite, standard ou large), alignement du texte (à
+		gauche ou justifié), disposition des renvois entre paragraphes (en ligne ou en marge) et affichage
+		des références bibliques (en ligne ou en exposant).
+	</p>
+
+	<p>
+		<strong>Notes</strong> : permet de masquer individuellement les annotations dans le texte : renvois
+		(§), références bibliques en ligne, références en exposant, sources. Un interrupteur général masque
+		tout d'un coup pour une lecture sans annotations.
+	</p>
 
 	<h2>Libre et sans traçage</h2>
 
@@ -162,21 +210,13 @@
 		personnelles. Aucun compte n'est requis pour accéder à l'intégralité du contenu.
 	</p>
 
-	<p>
-		Le code source est publié sur
-		<a
-			href="https://github.com/janvier-s/catechismecatholique"
-			target="_blank"
-			rel="noopener noreferrer">GitHub</a
-		>.
-	</p>
-
 	<h2>Une idée simple</h2>
 
 	<p>
 		Ce projet est né d'un constat : il n'existait pas de bonne édition du Catéchisme accessible en
-		ligne en français. Une page de lecture d'abord, sobre et lisible. Puis la recherche s'est
-		imposée, puis la concordance biblique, puis le glossaire. Chaque chose appelait la suivante.
+		ligne en français. Tout a commencé par une page de lecture, sobre et lisible. Puis la recherche
+		s'est imposée, puis la concordance biblique, puis le glossaire. Chaque chose appelait la
+		suivante.
 	</p>
 
 	<p>

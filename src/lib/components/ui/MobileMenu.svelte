@@ -162,6 +162,11 @@
 		cursor: pointer;
 		flex: 0 0 auto;
 	}
+	@media (min-width: 768px) {
+		.hamburger {
+			display: none;
+		}
+	}
 	.hamburger:hover {
 		color: var(--color-accent);
 	}

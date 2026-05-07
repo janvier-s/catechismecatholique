@@ -25,7 +25,7 @@
 		cancelClose();
 		hoverCloseTimer = setTimeout(() => {
 			open = false;
-		}, 800);
+		}, 200);
 	}
 	function cancelOpen() {
 		if (hoverOpenTimer) {

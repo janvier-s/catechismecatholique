@@ -45,7 +45,7 @@ const DEFAULTS: ReadingPrefs = {
 	hideBibleInline: false,
 	hideSourceFootnotes: false,
 	inlineAsMarkers: false,
-	crossRefsLayout: 'inline'
+	crossRefsLayout: 'side'
 };
 
 const KEY = 'catechismecatholique.prefs';
