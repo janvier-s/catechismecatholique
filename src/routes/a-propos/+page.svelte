@@ -681,11 +681,12 @@
 		opacity: 0.7;
 	}
 	/* Signatures are rendered black-on-transparent — invert for dark themes
-	   so the ink stays legible on the dark background. */
-	:global([data-theme='dark']) .papal-signature,
-	:global([data-theme='oled']) .papal-signature {
-		filter: invert(1);
-		opacity: 0.65;
+	   so the ink stays legible on the dark background. Wrap the entire
+	   selector in :global() so Svelte's CSS scoping can't drop it. */
+	:global([data-theme='dark'] .papal-signature),
+	:global([data-theme='oled'] .papal-signature) {
+		filter: invert(1) brightness(1.4);
+		opacity: 0.92;
 	}
 	@media (max-width: 640px) {
 		.papal-quote {
