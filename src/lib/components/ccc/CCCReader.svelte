@@ -5,6 +5,7 @@
 	import EnBrefBlock from './EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
+	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { SvelteMap } from 'svelte/reactivity';
 	let {
@@ -61,35 +62,23 @@
 
 <main class="mx-auto max-w-reader px-6 max-md:px-0 py-10" use:scrollSpy>
 	<header class="mb-8">
-		<div class="breadcrumb-row mb-4">
-			<nav class="breadcrumb-rail font-ui text-sm" aria-label="Fil d'Ariane">
-				<ol class="space-y-1">
-					<li>
-						<a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a>
-					</li>
-					<li class="pl-5">
-						<a href="/ccc/{chapter.part_slug}" class="text-muted hover:text-accent">
-							<span class="font-semibold bc-kicker">
-								{chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue'}
-							</span>
-							<span class="bc-title">&nbsp;: {chapter.part_title}</span>
-						</a>
-					</li>
-					<li class="pl-10">
-						<a
-							href="/ccc/{chapter.part_slug}/{chapter.section_slug}"
-							class="text-muted hover:text-accent"
-						>
-							<span class="font-semibold bc-kicker">
-								{chapter.section_number ? `Section ${chapter.section_number}` : 'Section'}
-							</span>
-							<span class="bc-title">&nbsp;: {chapter.section_title}</span>
-						</a>
-					</li>
-				</ol>
-			</nav>
-			<PartPanoramaTrigger />
-		</div>
+		<BreadcrumbRail
+			crumbs={[
+				{ href: '/ccc', title: 'Catéchisme' },
+				{
+					href: `/ccc/${chapter.part_slug}`,
+					kicker: chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue',
+					title: chapter.part_title
+				},
+				{
+					href: `/ccc/${chapter.part_slug}/${chapter.section_slug}`,
+					kicker: chapter.section_number ? `Section ${chapter.section_number}` : 'Section',
+					title: chapter.section_title
+				}
+			]}
+		>
+			{#snippet trailing()}<PartPanoramaTrigger />{/snippet}
+		</BreadcrumbRail>
 		<p class="font-ui text-sm uppercase tracking-wider text-muted">{chapterLabel}</p>
 		<h1 class="font-heading text-4xl font-semibold mt-1 text-heading">{chapter.title}</h1>
 	</header>
@@ -170,20 +159,5 @@
 <style>
 	.chapter-nav-spacer {
 		flex: 1;
-	}
-	.breadcrumb-row {
-		display: flex;
-		align-items: flex-start;
-		justify-content: space-between;
-		gap: 1rem;
-	}
-	.breadcrumb-row .breadcrumb-rail {
-		flex: 1 1 auto;
-		min-width: 0;
-	}
-	@media (max-width: 640px) {
-		.breadcrumb-row {
-			padding: 0 1rem;
-		}
 	}
 </style>
