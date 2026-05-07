@@ -179,8 +179,7 @@
 		if (chapFirstP && firstArtP && chapFirstP < firstArtP) {
 			out.push({
 				title: 'Préambule',
-				href: baseHref,
-				typeLabel: 'Préambule'
+				href: baseHref
 			});
 		}
 		// Always build the rich tree from whatever article data is available.

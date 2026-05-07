@@ -180,11 +180,6 @@
 												<li>
 													<a {href}>
 														<span class="pano-cell-art">Préambule</span>
-														<span class="pano-cell-art-num">
-															{chapStart === preambuleEnd
-																? `§${chapStart}`
-																: `§${chapStart}–${preambuleEnd}`}
-														</span>
 													</a>
 												</li>
 											{/if}
