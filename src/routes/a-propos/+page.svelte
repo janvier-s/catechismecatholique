@@ -629,7 +629,8 @@
 	.papal-quote {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1.25rem;
+		column-gap: 1.25rem;
+		row-gap: 0.5rem;
 		align-items: flex-start;
 		margin: 1.75rem 0;
 		padding: 0;
@@ -650,7 +651,7 @@
 		font-size: 1rem;
 		line-height: 1.65;
 		color: var(--color-fg);
-		margin: 0 0 0.65rem;
+		margin: 0;
 	}
 	.papal-quote > footer {
 		flex: 1 1 calc(100% - 88px - 1.25rem);
