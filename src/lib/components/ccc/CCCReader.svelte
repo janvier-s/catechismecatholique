@@ -59,7 +59,7 @@
 	const chapterLabel = $derived(chapter.number ? `Chapitre ${chapter.number}` : 'Chapitre');
 </script>
 
-<main class="mx-auto max-w-4xl px-6 max-md:px-0 py-10" use:scrollSpy>
+<main class="mx-auto max-w-reader px-6 max-md:px-0 py-10" use:scrollSpy>
 	<header class="mb-8">
 		<div class="breadcrumb-row mb-4">
 			<nav class="breadcrumb-rail font-ui text-sm" aria-label="Fil d'Ariane">
