@@ -506,24 +506,22 @@
 
 	.cta-btn {
 		display: inline-block;
-		padding: 10px 26px;
+		padding: 11px 28px;
 		border: 1px solid var(--color-accent);
 		border-radius: 3px;
+		background: var(--color-accent);
 		font-family: var(--font-ui);
 		font-size: 12px;
-		font-weight: 500;
-		letter-spacing: 0.08em;
+		font-weight: 600;
+		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		color: var(--color-accent-text);
+		color: #fff;
 		text-decoration: none;
-		transition:
-			background 150ms ease,
-			color 150ms ease;
+		transition: background 150ms ease;
 	}
 
 	.cta-btn:hover {
-		background: var(--color-accent);
-		color: var(--color-panel);
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
 	}
 
 	/* Logo block — image on the left, prose on the right; stacks on small
