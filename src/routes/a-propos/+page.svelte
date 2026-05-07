@@ -285,6 +285,12 @@
 				target="_blank"
 				rel="noopener noreferrer">11 octobre 1992</a
 			>.
+			<img
+				src="/img/popes/john-paul-ii-signature.svg"
+				alt="Signature de Jean-Paul II."
+				class="papal-signature"
+				loading="lazy"
+			/>
 		</footer>
 	</blockquote>
 
@@ -310,6 +316,12 @@
 				target="_blank"
 				rel="noopener noreferrer">15 juillet 2012</a
 			>.
+			<img
+				src="/img/popes/benedict-xvi-signature.svg"
+				alt="Signature de Benoît XVI."
+				class="papal-signature"
+				loading="lazy"
+			/>
 		</footer>
 	</blockquote>
 
@@ -336,6 +348,12 @@
 				target="_blank"
 				rel="noopener noreferrer">11 octobre 2017</a
 			>.
+			<img
+				src="/img/popes/francis-signature.svg"
+				alt="Signature de François."
+				class="papal-signature"
+				loading="lazy"
+			/>
 		</footer>
 	</blockquote>
 
@@ -360,6 +378,12 @@
 				target="_blank"
 				rel="noopener noreferrer">28 septembre 2025</a
 			>.
+			<img
+				src="/img/popes/leo-xiv-signature.svg"
+				alt="Signature de Léon XIV."
+				class="papal-signature"
+				loading="lazy"
+			/>
 		</footer>
 	</blockquote>
 
@@ -622,6 +646,21 @@
 	}
 	.papal-quote footer a:hover {
 		color: var(--color-accent);
+	}
+	.papal-signature {
+		display: block;
+		height: 38px;
+		width: auto;
+		max-width: 200px;
+		margin-top: 0.55rem;
+		opacity: 0.7;
+	}
+	/* Signatures are rendered black-on-transparent — invert for dark themes
+	   so the ink stays legible on the dark background. */
+	:global([data-theme='dark']) .papal-signature,
+	:global([data-theme='oled']) .papal-signature {
+		filter: invert(1);
+		opacity: 0.65;
 	}
 	/* Wrap the right-column flow (quote + footer) so flex puts portrait + a
 	   single text block side-by-side. We do this by selecting all blockquote
