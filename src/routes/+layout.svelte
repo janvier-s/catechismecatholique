@@ -24,10 +24,17 @@
 		// Sidebar is the catechism's structural TOC. Show only inside the
 		// CCC reading surfaces; hide on the index, sommaire, bible, search,
 		// about, and the bare home page.
-		if (!p.startsWith('/ccc')) return false;
-		if (p === '/ccc' || p === '/ccc/') return false;
-		if (p.startsWith('/ccc/sommaire') || p.startsWith('/ccc/panorama')) return false;
-		return true;
+		if (p.startsWith('/ccc')) {
+			if (p === '/ccc' || p === '/ccc/') return false;
+			if (p.startsWith('/ccc/sommaire') || p.startsWith('/ccc/panorama')) return false;
+			return true;
+		}
+		// Compendium part reader (not the landing or q-redirect)
+		if (p.startsWith('/compendium/')) {
+			if (p.startsWith('/compendium/q/')) return false;
+			return true;
+		}
+		return false;
 	});
 
 	// Close the StudyPanel when its context becomes irrelevant: leaving the
@@ -76,7 +83,7 @@
 <TopBar />
 <div class="flex">
 	{#if showSidebar}
-		<Sidebar />
+		<Sidebar corpus={page.url.pathname.startsWith('/compendium') ? 'compendium' : 'ccc'} />
 		<SidebarToggle />
 	{/if}
 	<div

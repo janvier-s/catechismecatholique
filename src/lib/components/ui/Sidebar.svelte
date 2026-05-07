@@ -2,8 +2,14 @@
 	import { page } from '$app/state';
 	import { sidebarOpen } from '$lib/stores/sidebar';
 	import { activeHeading } from '$lib/stores/scrollSpy';
-	import { loadStructure, loadChapter, loadParagraphContext } from '$lib/data/loaders';
-	import type { Chapter, ParagraphContext } from '$lib/data/types';
+	import {
+		loadStructure,
+		loadChapter,
+		loadParagraphContext,
+		loadCompendiumStructure,
+		loadCompendiumPart
+	} from '$lib/data/loaders';
+	import type { Chapter, ParagraphContext, Corpus, CompendiumStructure, CompendiumPart } from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
 	type Heading = { id: string; title: string; paragraph_start: number; level?: number };
@@ -47,14 +53,46 @@
 		children?: Item[];
 	};
 
+	let { corpus = 'ccc' as Corpus }: { corpus?: Corpus } = $props();
+
 	let structure: { parts: Part[] } | null = $state(null);
 	let activeChapter: Chapter | null = $state(null);
 	let activeContext: ParagraphContext | null = $state(null);
 	let navEl: HTMLElement | undefined = $state();
 
 	$effect(() => {
+		if (corpus !== 'ccc') return;
 		(async () => {
 			structure = (await loadStructure()) as { parts: Part[] };
+		})();
+	});
+
+	// ─── Compendium state ─────────────────────────────────────────────────────
+	let compendiumStructure: CompendiumStructure | null = $state(null);
+	let activeCompendiumPart: CompendiumPart | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'compendium') return;
+		(async () => {
+			compendiumStructure = await loadCompendiumStructure();
+		})();
+	});
+
+	$effect(() => {
+		if (corpus !== 'compendium') return;
+		const m = page.url.pathname.match(/^\/compendium\/([^/]+)/);
+		const slug = m ? m[1] : null;
+		if (!slug) {
+			activeCompendiumPart = null;
+			return;
+		}
+		if (activeCompendiumPart?.slug === slug) return;
+		(async () => {
+			try {
+				activeCompendiumPart = await loadCompendiumPart(slug);
+			} catch {
+				activeCompendiumPart = null;
+			}
 		})();
 	});
 
@@ -74,6 +112,7 @@
 	// fetch that the audit flagged as the largest avoidable payload on /ccc.
 	let ctxLoadGen = 0;
 	$effect(() => {
+		if (corpus !== 'ccc') return;
 		if (activeParagraph === null) {
 			activeContext = null;
 			return;
@@ -106,6 +145,11 @@
 	}
 
 	const activeHref: string = $derived.by(() => {
+		if (corpus === 'compendium') {
+			const ah = $activeHeading;
+			const hash = ah && ah.pathname === page.url.pathname ? `#${ah.id}` : '';
+			return page.url.pathname + hash;
+		}
 		if (activeParagraph === null) {
 			// On non-paragraph URLs (article / chapter / section / part), append
 			// the scroll-spy heading hash so the Sidebar highlights the section
@@ -141,6 +185,7 @@
 	// whose context places it in a chapter — so we can expand headings/en_brefs.
 	let chapterLoadGen = 0;
 	$effect(() => {
+		if (corpus !== 'ccc') return;
 		const m = page.url.pathname.match(/^\/ccc\/[^/]+\/[^/]+\/([^/]+)/);
 		const directSlug = m ? m[1]! : null;
 		const c = activeContext as ParagraphContext | null;
@@ -339,6 +384,55 @@
 	}
 
 	const tree: Item[] = $derived.by(() => {
+		if (corpus === 'compendium') {
+			if (!compendiumStructure) return [];
+			return compendiumStructure.parts.map((part): Item => {
+				const partHref = `/compendium/${part.slug}`;
+				const isActive = activeCompendiumPart?.slug === part.slug;
+				let children: Item[] | undefined;
+				if (isActive && activeCompendiumPart) {
+					// For the active part, expand: section headings + their questions.
+					children = [];
+					let currentSection: Item | null = null;
+					for (const node of activeCompendiumPart.flow) {
+						if (node.kind === 'heading' && node.level === 2) {
+							currentSection = {
+								title: node.title,
+								href: `${partHref}#${node.id}`,
+								children: []
+							};
+							children.push(currentSection);
+						} else if (node.kind === 'question') {
+							const qItem: Item = {
+								title: node.data.question,
+								number: node.data.number,
+								typeLabel: 'Q',
+								href: `${partHref}#q-${node.data.number}`
+							};
+							if (currentSection) {
+								(currentSection.children = currentSection.children ?? []).push(qItem);
+							} else {
+								children.push(qItem);
+							}
+						}
+					}
+				} else {
+					// Non-active parts: show just section headings as a peek.
+					children = part.sections.map((sec): Item => ({
+						title: sec.title,
+						href: `${partHref}#s-${sec.title.toLowerCase().replace(/\s+/g, '-')}`
+					}));
+				}
+				return {
+					title: part.title,
+					number: part.number,
+					typeLabel: 'Partie',
+					href: partHref,
+					children: children && children.length > 0 ? children : undefined
+				};
+			});
+		}
+		// ─── CCC tree ─────────────────────────────────────────────────────────
 		if (!structure) return [];
 		return structure.parts.map((part): Item => {
 			if (part.prologue) {
@@ -405,7 +499,7 @@
 	<nav
 		bind:this={navEl}
 		class="flex-1 overflow-y-auto p-3 font-ui styled-scroll styled-scroll-accent"
-		aria-label="Plan du Catéchisme"
+		aria-label={corpus === 'compendium' ? 'Plan du Compendium' : 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">
