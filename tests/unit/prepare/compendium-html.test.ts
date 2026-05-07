@@ -36,4 +36,11 @@ describe('scanHtml', () => {
 			attribution: 'saint Augustin'
 		});
 	});
+
+	it('matches preg paragraphs with extra attributes (e.g. style="...")', () => {
+		const html = `<p class="preg" style="orphans: 2; widows: 2;">20. Qu'est-ce que le canon?</p><p>An answer.</p>`;
+		const events = scanHtml(html);
+		expect(events).toHaveLength(1);
+		expect(events[0]).toMatchObject({ kind: 'question', number: 20, question: 'Qu\'est-ce que le canon?', answer: 'An answer.' });
+	});
 });

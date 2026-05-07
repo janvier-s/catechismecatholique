@@ -9,8 +9,8 @@ const TOKEN = new RegExp(
 		`<[a-z0-9]+\\b[^>]*\\bid="(p[0-9]+)"`,
 		// Epigraph: <blockquote>…</blockquote>
 		`<blockquote\\b[^>]*>([\\s\\S]*?)<\\/blockquote>`,
-		// Question marker: <p class="preg">N. text</p>
-		`<p\\s+class="preg">\\s*([0-9]+)\\.\\s*([\\s\\S]*?)<\\/p>`
+		// Question marker: <p class="preg">N. text</p> (allows other attributes like style)
+		`<p\\b[^>]*\\bclass="preg"[^>]*>\\s*([0-9]+)\\.\\s*([\\s\\S]*?)<\\/p>`
 	].join('|'),
 	'gi'
 );
