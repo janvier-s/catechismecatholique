@@ -485,6 +485,18 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 	}
 }
 
+/* Topbar height — hoisted to :root so sticky elements that aren't inside
+   .topbar (e.g. the Bible chapter nav) can position themselves relative to
+   the actual topbar instead of hardcoding 80px and overlapping at mobile. */
+:root {
+	--topbar-height: 80px;
+}
+@media (max-width: 767px) {
+	:root {
+		--topbar-height: 58px;
+	}
+}
+
 /* Global page fade — same 280ms ease-out reveal the homepage uses, applied
    to the layout's content wrapper so every route gets the same subtle
    in-transition. The {#key page.url.pathname} block in +layout.svelte

@@ -81,7 +81,7 @@
 <!-- Chapter navigation bar — sticky below the global TopBar (80px). -->
 <ChapterNavBar {book} {chapter} {totalChapters} {chapterCounts} variant="reader" />
 
-<main class="mx-auto max-w-reader px-6 pt-8 pb-16">
+<main class="mx-auto max-w-reader px-6 max-md:px-3 pt-8 max-md:pt-5 pb-16">
 	<article>
 		<header class="mb-10 text-center">
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">
@@ -152,7 +152,7 @@
 						>
 							{v.v}
 						</span>
-						<p class="font-body text-[18px] leading-[1.7] flex-1">
+						<p class="font-body text-[18px] max-md:text-[15px] leading-[1.7] flex-1">
 							{v.text}{#if c > 0}<VerseMarker
 									bookSlug={book.slug}
 									bookUsfx={book.usfx}

@@ -55,6 +55,26 @@
 			<a href="/glossaire" class="hover:text-accent">Glossaire</a>
 			<a href="/a-propos" class="hover:text-accent">À propos</a>
 		</nav>
+		<a
+			href="/recherche"
+			class="md:hidden inline-flex items-center justify-center w-10 h-10 text-foreground hover:text-accent"
+			aria-label="Recherche"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.75"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="w-[18px] h-[18px]"
+				aria-hidden="true"
+			>
+				<circle cx="11" cy="11" r="7" />
+				<path d="m21 21-4.3-4.3" />
+			</svg>
+		</a>
 		<ModeToggle />
 		<MobileMenu />
 

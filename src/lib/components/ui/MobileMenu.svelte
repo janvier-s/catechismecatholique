@@ -1,21 +1,15 @@
 <script lang="ts">
-	import { afterNavigate, goto } from '$app/navigation';
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { fade, fly } from 'svelte/transition';
-	import { detectIntent } from '$lib/utils/searchIntent';
 
 	let open = $state(false);
-	let inputEl: HTMLInputElement | undefined = $state();
 
 	function close() {
 		open = false;
 	}
 	function toggle() {
 		open = !open;
-		if (open) {
-			// Defer focus until the sheet has mounted
-			queueMicrotask(() => inputEl?.focus());
-		}
 	}
 
 	afterNavigate(() => {
@@ -46,20 +40,6 @@
 		document.addEventListener('keydown', onKey);
 		return () => document.removeEventListener('keydown', onKey);
 	});
-
-	function handleSearch(e: SubmitEvent) {
-		e.preventDefault();
-		const form = e.currentTarget as HTMLFormElement;
-		const q = (new FormData(form).get('q') as string | null)?.trim() ?? '';
-		if (!q) return;
-		const intent = detectIntent(q);
-		close();
-		if (intent.kind === 'paragraph' || intent.kind === 'bible') {
-			void goto(intent.href);
-		} else {
-			void goto(`/recherche?q=${encodeURIComponent(intent.q)}`);
-		}
-	}
 
 	const links: { href: string; label: string }[] = [
 		{ href: '/ccc', label: 'Catéchisme' },
@@ -110,24 +90,6 @@
 			<span class="fleuron">✠</span>
 			<span class="rule rule-r"></span>
 		</div>
-
-		<form onsubmit={handleSearch} class="search-form" role="search">
-			<input
-				bind:this={inputEl}
-				type="search"
-				name="q"
-				class="search-input"
-				placeholder="Rechercher : Eucharistie ou 1324"
-				aria-label="Recherche dans le Catéchisme"
-				autocomplete="off"
-				autocapitalize="none"
-				autocorrect="off"
-				spellcheck="false"
-			/>
-			<button type="submit" class="search-submit" aria-label="Lancer la recherche">
-				<span aria-hidden="true">↵</span>
-			</button>
-		</form>
 
 		<ul class="links">
 			{#each links as link (link.href)}
@@ -261,51 +223,6 @@
 			transparent,
 			color-mix(in srgb, var(--color-fg) 22%, transparent)
 		);
-	}
-
-	/* Search — hairline bottom-rule input, italic placeholder. */
-	.search-form {
-		position: relative;
-		display: flex;
-		align-items: center;
-		border-bottom: 1px solid var(--color-border);
-		padding-bottom: 0.4rem;
-	}
-	.search-input {
-		flex: 1 1 auto;
-		min-width: 0;
-		appearance: none;
-		border: 0;
-		background: transparent;
-		font-family: var(--font-heading);
-		font-size: 1rem;
-		color: var(--color-fg);
-		padding: 0.65rem 0.25rem;
-	}
-	.search-input::placeholder {
-		font-style: italic;
-		color: color-mix(in srgb, var(--color-fg) 42%, transparent);
-		font-family: var(--font-heading);
-	}
-	.search-input:focus {
-		outline: none;
-	}
-	.search-form:focus-within {
-		border-bottom-color: var(--color-accent);
-	}
-	.search-submit {
-		flex: 0 0 auto;
-		appearance: none;
-		border: 0;
-		background: transparent;
-		color: color-mix(in srgb, var(--color-fg) 42%, transparent);
-		font-family: var(--font-heading);
-		font-size: 1.1rem;
-		padding: 0.4rem 0.6rem;
-		cursor: pointer;
-	}
-	.search-form:focus-within .search-submit {
-		color: var(--color-accent);
 	}
 
 	/* Links — hairline-ruled rows, large 56 px touch targets. */

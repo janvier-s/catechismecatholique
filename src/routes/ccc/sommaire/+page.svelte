@@ -736,6 +736,25 @@
 		.row-section .label-title {
 			display: block;
 		}
+		.section {
+			padding-left: 0.4rem;
+		}
+		.chapters {
+			padding-left: 0.85rem;
+			gap: calc(var(--rh) * 0.6);
+		}
+		.articles {
+			padding-left: 0.6rem;
+		}
+		.headings {
+			margin-left: 0.6rem;
+		}
+		.headings-chapter {
+			margin-left: 0.85rem;
+		}
+		.sub-headings {
+			margin-left: 0.6rem;
+		}
 	}
 
 	/* ---- Reduced motion ------------------------------------------------- */

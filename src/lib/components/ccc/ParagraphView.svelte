@@ -155,8 +155,7 @@
 		margin-bottom: 0;
 	}
 
-	/* On small screens, stack the refs box below the paragraph. Phase 4 will
-	   revisit mobile layout. */
+	/* On medium-small screens, stack the refs box below the paragraph. */
 	@media (max-width: 900px) {
 		:global(html[data-cross-refs-layout='side']) .ccc-paragraph {
 			padding-right: 0;
@@ -166,6 +165,30 @@
 			width: auto;
 			margin-top: 0.5rem;
 			margin-left: 4rem;
+		}
+	}
+
+	/* Phone: number rides above the text instead of beside it; cross-refs
+	   sit flush left under the body so nothing is left margin-orphaned. */
+	@media (max-width: 640px) {
+		.paragraph-grid {
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+		.paragraph-grid :global(.number-col) {
+			width: auto;
+			text-align: left;
+			padding-top: 0;
+		}
+		.content-col {
+			font-size: 1rem;
+			line-height: 1.6;
+		}
+		.ccc-side-refs {
+			margin-left: 0;
+		}
+		:global(html[data-cross-refs-layout='side']) .ccc-paragraph {
+			padding-right: 0;
 		}
 	}
 </style>

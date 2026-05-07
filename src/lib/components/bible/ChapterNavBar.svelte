@@ -104,7 +104,7 @@
 	</header>
 {:else}
 	<div
-		class="sticky top-[80px] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-2 flex items-center gap-[10px] font-ui"
+		class="sticky top-[var(--topbar-height,80px)] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-2 flex items-center gap-[10px] font-ui"
 		style="height: 50px;"
 	>
 		<div

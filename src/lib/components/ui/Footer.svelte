@@ -94,4 +94,21 @@
 	.footer-motto abbr {
 		text-decoration: none;
 	}
+
+	@media (max-width: 640px) {
+		.site-footer {
+			gap: 1.25rem;
+			padding: 2rem 1rem 1.75rem;
+		}
+		.footer-nav {
+			gap: 0.5rem 0.85rem;
+			row-gap: 0.5rem;
+		}
+		.footer-motto {
+			gap: 0.45rem;
+		}
+		.footer-copy {
+			line-height: 1.8;
+		}
+	}
 </style>

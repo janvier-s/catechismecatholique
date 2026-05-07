@@ -364,6 +364,22 @@
 	.quick-link:hover {
 		color: var(--color-accent);
 	}
+	@media (max-width: 640px) {
+		.hero-title {
+			white-space: normal;
+			text-wrap: balance;
+		}
+		.prologue-link {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.25rem;
+			padding: 0.85rem 0.25rem;
+		}
+		.prologue-arrow {
+			align-self: flex-end;
+		}
+	}
+
 	.quick-sep {
 		font-family: var(--font-ui);
 		font-size: 0.65rem;

@@ -143,6 +143,82 @@
 </script>
 
 {#if $studyPanel.open}
+	<!-- Mobile: bottom-sheet overlay covering most of the screen. Hidden on
+	     lg+ where the resizable rail below takes over. -->
+	<div
+		class="lg:hidden fixed inset-x-0 bottom-0 z-[var(--z-modal)] bg-panel border-t border-border flex flex-col"
+		style="top: var(--topbar-height, 58px); max-height: calc(100dvh - var(--topbar-height, 58px));"
+		role="dialog"
+		aria-label="Panneau d'étude"
+		transition:fly={{ y: 30, duration: 200 }}
+	>
+		<header class="flex items-center justify-between px-3 py-2 border-b border-border font-ui">
+			<div class="min-w-0">
+				{#if $studyPanel.context?.kind === 'verse'}
+					{@const ctxM = $studyPanel.context}
+					<span class="text-accent font-semibold tabular-nums">
+						{BOOKS.find((b) => b.usfx === ctxM.verseUsfx)?.frenchName ?? ''}
+						{ctxM.verseChapter},
+						{ctxM.verseVerse}
+					</span>
+				{:else if $studyPanel.context?.kind === 'paragraph'}
+					{@const ctxM = $studyPanel.context}
+					<a
+						href="/ccc/{ctxM.paragraph}"
+						class="text-accent font-semibold hover:underline tabular-nums"
+					>
+						CEC {ctxM.paragraph}
+					</a>
+				{/if}
+			</div>
+			<button
+				type="button"
+				class="w-8 h-8 rounded hover:bg-accent/10 text-muted hover:text-accent"
+				aria-label="Fermer"
+				onclick={closePanel}
+			>
+				✕
+			</button>
+		</header>
+		{#if visibleTabs.length === 0}
+			<div class="flex-1 flex items-center justify-center p-6 text-sm text-muted italic">
+				Aucune note d'étude pour ce paragraphe.
+			</div>
+		{:else}
+			<div class="flex border-b border-border font-ui text-xs overflow-x-auto">
+				{#each visibleTabs as tab (tab.id)}
+					<button
+						type="button"
+						class="flex-1 py-2 px-3 hover:bg-accent/10 whitespace-nowrap"
+						class:bg-accent={$studyPanel.activeTab === tab.id}
+						class:!text-white={$studyPanel.activeTab === tab.id}
+						onclick={() => studyPanel.update((s) => ({ ...s, activeTab: tab.id }))}
+					>
+						{tab.label}
+					</button>
+				{/each}
+			</div>
+			<div class="flex-1 overflow-y-auto p-4 styled-scroll">
+				{#if $studyPanel.activeTab === 'bible'}
+					<TabBibleRefs />
+				{:else if $studyPanel.activeTab === 'cross-refs'}
+					<TabCrossRefs />
+				{:else if $studyPanel.activeTab === 'cited-by'}
+					<TabCitedBy />
+				{:else if $studyPanel.activeTab === 'en-bref'}
+					<TabEnBref />
+				{:else if $studyPanel.activeTab === 'sources'}
+					<TabSources />
+				{:else if $studyPanel.activeTab === 'concordance'}
+					<TabConcordance />
+				{:else if $studyPanel.activeTab === 'bible-verse'}
+					<TabBibleVerse />
+				{/if}
+			</div>
+		{/if}
+	</div>
+
+	<!-- Desktop: sticky right rail with resize handle. -->
 	<div
 		class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] flex-none z-20"
 		transition:fly={{ x: 20, duration: 180 }}

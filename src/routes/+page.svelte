@@ -420,6 +420,11 @@
 			margin-top: 1rem;
 			font-size: 0.68rem;
 			letter-spacing: 0.28em;
+			text-align: center;
+			width: 100%;
+		}
+		.nav-row {
+			margin-top: 1.75rem;
 		}
 		.title {
 			margin-top: 0.5rem;
