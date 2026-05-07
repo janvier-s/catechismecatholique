@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { scanHtml } from '../../../scripts/prepare/compendium/html';
+import { scanAppendixHtml } from '../../../scripts/prepare/compendium/html';
 
 describe('scanHtml', () => {
 	it('emits section anchors and question markers in document order', () => {
@@ -12,13 +13,21 @@ describe('scanHtml', () => {
 			<p>Answer two.</p>
 		`;
 		const events = scanHtml(html);
-		expect(events.map((e) => e.kind)).toEqual([
-			'section', 'question', 'section', 'question'
-		]);
+		expect(events.map((e) => e.kind)).toEqual(['section', 'question', 'section', 'question']);
 		expect(events[0]).toEqual({ kind: 'section', anchor: 'p1' });
-		expect(events[1]).toMatchObject({ kind: 'question', number: 1, question: 'Q one?', answer: 'Answer one.' });
+		expect(events[1]).toMatchObject({
+			kind: 'question',
+			number: 1,
+			question: 'Q one?',
+			answer: 'Answer one.'
+		});
 		expect(events[2]).toEqual({ kind: 'section', anchor: 'p2' });
-		expect(events[3]).toMatchObject({ kind: 'question', number: 2, question: 'Q two?', answer: 'Answer two.' });
+		expect(events[3]).toMatchObject({
+			kind: 'question',
+			number: 2,
+			question: 'Q two?',
+			answer: 'Answer two.'
+		});
 	});
 
 	it('captures an epigraph blockquote following a section anchor', () => {
@@ -41,6 +50,57 @@ describe('scanHtml', () => {
 		const html = `<p class="preg" style="orphans: 2; widows: 2;">20. Qu'est-ce que le canon?</p><p>An answer.</p>`;
 		const events = scanHtml(html);
 		expect(events).toHaveLength(1);
-		expect(events[0]).toMatchObject({ kind: 'question', number: 20, question: 'Qu\'est-ce que le canon?', answer: 'An answer.' });
+		expect(events[0]).toMatchObject({
+			kind: 'question',
+			number: 20,
+			question: "Qu'est-ce que le canon?",
+			answer: 'An answer.'
+		});
+	});
+});
+
+describe('scanAppendixHtml', () => {
+	it('emits heading nodes for h4 section titles and prose nodes from table cells and doct paragraphs', () => {
+		const html = `
+			<h4 id="p114">PRIÈRES COMMUNES</h4>
+			<table><tbody>
+				<tr>
+					<td><p class="noind"><span style="font-weight: bold;">Notre Père</span><br/></p>
+					<p class="noind">Notre Père, qui es aux cieux…</p></td>
+					<td><p class="noind"><b>Pater Noster</b></p></td>
+				</tr>
+				<tr>
+					<td><p class="noind"><b>Ave Maria</b></p>
+					<p class="noind">Je vous salue, Marie…</p></td>
+					<td><p class="noind"><b>Ave, Maríæ</b></p></td>
+				</tr>
+			</tbody></table>
+			<h4 id="p14">FORMULES DE LA DOCTRINE CATHOLIQUE</h4>
+			<p class="doct"><span style="font-weight: bold;">Les Béatitudes</span></p>
+			<p class="doct">Heureux les pauvres de cœur…</p>
+			<p class="doct"><span style="font-weight: bold;">Les vertus cardinales</span></p>
+			<p class="doct">1. Prudence<br/>2. Justice</p>
+			<h3 id="p15">ABRÉVIATIONS BIBLIQUES</h3>
+		`;
+		const events = scanAppendixHtml(html);
+		// Must not include anything after p15
+		expect(events.find((e) => e.kind === 'heading' && e.text.includes('ABRÉV'))).toBeUndefined();
+		// Two h4 section headings at level 2
+		const headings = events.filter((e) => e.kind === 'heading');
+		expect(headings.map((e) => e.text)).toEqual([
+			'PRIÈRES COMMUNES',
+			'FORMULES DE LA DOCTRINE CATHOLIQUE'
+		]);
+		expect(headings[0]).toMatchObject({ kind: 'heading', level: 2 });
+		expect(headings[1]).toMatchObject({ kind: 'heading', level: 2 });
+		// Prose from first-column table cells + doct paragraphs
+		const proses = events.filter((e) => e.kind === 'prose');
+		expect(proses.length).toBeGreaterThanOrEqual(4);
+		// First prose is from the first table cell (French column)
+		expect(proses[0]?.html).toContain('Notre Père');
+	});
+
+	it('returns empty array when appendix start anchor is absent', () => {
+		expect(scanAppendixHtml('<h4 id="p15">ABRÉVIATIONS</h4>')).toEqual([]);
 	});
 });

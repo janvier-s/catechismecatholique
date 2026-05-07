@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseToc } from './toc';
-import { scanHtml } from './html';
+import { scanHtml, scanAppendixHtml } from './html';
 import { buildCompendium, type SourceQuestion } from './build';
 import { logStep, endStep, assert } from '../validators';
 
@@ -36,6 +36,11 @@ export function prepareCompendium(args: PrepareCompendiumArgs): {
 	}));
 	endStep(`${files.reduce((s, f) => s + f.events.length, 0)} events`);
 
+	logStep('compendium: scanning appendix HTML');
+	const text004 = readFileSync(join(tmp, 'OEBPS/Text/004.htm'), 'utf8');
+	const appendix = scanAppendixHtml(text004);
+	endStep(`${appendix.length} appendix events`);
+
 	logStep('compendium: loading source JSON');
 	const sourceJson = JSON.parse(readFileSync(args.sourceJsonPath, 'utf8')) as SourceQuestion[];
 	assert(sourceJson.length === 598, `compendium: expected 598 questions, got ${sourceJson.length}`);
@@ -43,13 +48,19 @@ export function prepareCompendium(args: PrepareCompendiumArgs): {
 
 	logStep('compendium: building outputs');
 	// TOC entries from parseToc already use file: 'Text/000.htm' (with prefix); files above also use 'Text/' prefix. Pass through unchanged.
-	const out = buildCompendium({ sourceJson, toc, files });
-	assert(out.structure.parts.length === 4, `compendium: expected 4 parts, got ${out.structure.parts.length}`);
+	const out = buildCompendium({ sourceJson, toc, files, appendix });
+	assert(
+		out.structure.parts.length === 4,
+		`compendium: expected 4 parts, got ${out.structure.parts.length}`
+	);
 
 	mkdirSync(join(args.outDir, 'parts'), { recursive: true });
 	writeFileSync(join(args.outDir, 'structure.json'), JSON.stringify(out.structure));
 	for (const [slug, bundle] of Object.entries(out.parts)) {
 		writeFileSync(join(args.outDir, 'parts', `${slug}.json`), JSON.stringify(bundle));
+	}
+	if (out.appendix) {
+		writeFileSync(join(args.outDir, 'parts/annexe.json'), JSON.stringify(out.appendix));
 	}
 	writeFileSync(join(args.outDir, 'cited-by.json'), JSON.stringify(out.citedBy));
 	writeFileSync(join(args.outDir, 'q-ranges.json'), JSON.stringify(out.qRanges));

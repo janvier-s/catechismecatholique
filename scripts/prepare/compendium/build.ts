@@ -1,8 +1,9 @@
-import type { HtmlEvent } from './html';
+import type { HtmlEvent, AppendixEvent } from './html';
 import type { TocEntry } from './toc';
 import { slugify } from '../slug';
 import type {
 	CompendiumPart,
+	CompendiumFlowNode,
 	CompendiumStructure,
 	CompendiumStructureSection,
 	CompendiumQRange,
@@ -22,16 +23,30 @@ export interface BuildInput {
 	sourceJson: SourceQuestion[];
 	toc: TocEntry[];
 	files: { file: string; events: HtmlEvent[] }[];
+	appendix?: AppendixEvent[];
 }
 
 export interface BuildOutput {
 	structure: CompendiumStructure;
 	parts: Record<string, CompendiumPart>;
+	appendix?: CompendiumPart;
 	citedBy: CompendiumCitedBy;
 	qRanges: CompendiumQRange[];
 }
 
-const TITLE_CASE_EXCEPTIONS = new Set(['de', 'la', 'le', 'du', 'des', 'à', 'au', 'aux', 'en', 'et', 'a']);
+const TITLE_CASE_EXCEPTIONS = new Set([
+	'de',
+	'la',
+	'le',
+	'du',
+	'des',
+	'à',
+	'au',
+	'aux',
+	'en',
+	'et',
+	'a'
+]);
 
 function titleCase(label: string): string {
 	const lower = label.toLowerCase();
@@ -200,7 +215,8 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 			});
 		} else if (item.kind === 'question') {
 			const src = sourceByNumber.get(item.number);
-			if (!src) throw new Error(`buildCompendium: Q${item.number} appears in HTML but not in source JSON`);
+			if (!src)
+				throw new Error(`buildCompendium: Q${item.number} appears in HTML but not in source JSON`);
 			partBundle.flow.push({
 				kind: 'question',
 				data: {
@@ -261,5 +277,24 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 	}
 	for (const k of Object.keys(citedBy)) citedBy[Number(k)]!.sort((a, b) => a - b);
 
-	return { structure, parts, citedBy, qRanges };
+	let appendix: CompendiumPart | undefined;
+	if (input.appendix && input.appendix.length > 0) {
+		const flow: CompendiumFlowNode[] = [];
+		for (const ev of input.appendix) {
+			if (ev.kind === 'heading') {
+				flow.push({
+					kind: 'heading',
+					level: ev.level,
+					id: `s-${slugify(ev.text)}`,
+					title: titleCase(ev.text)
+				});
+			} else {
+				flow.push({ kind: 'prose', html: ev.html });
+			}
+		}
+		appendix = { slug: 'annexe', title: 'Annexe', flow };
+		structure.appendix = { slug: 'annexe', title: 'Annexe' };
+	}
+
+	return { structure, parts, appendix, citedBy, qRanges };
 }

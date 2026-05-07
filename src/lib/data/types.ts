@@ -402,7 +402,7 @@ export type CompendiumFlowNode =
 
 export interface CompendiumPart {
 	slug: string;
-	number: 1 | 2 | 3 | 4;
+	number?: 1 | 2 | 3 | 4;
 	title: string;
 	flow: CompendiumFlowNode[];
 }
