@@ -388,6 +388,26 @@ html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
 	}
 }
 
+/* Inked papal signatures (homepage + /a-propos): the SVGs render
+   black-on-transparent. Invert + brighten so they read as white on
+   dark backgrounds. Defined globally so explicit-dark, oled, and
+   auto+OS-dark cases all match without depending on Svelte's per-
+   component CSS scoping. */
+[data-theme='dark'] .founding-signature,
+[data-theme='oled'] .founding-signature,
+[data-theme='dark'] .papal-signature,
+[data-theme='oled'] .papal-signature {
+	filter: invert(1) brightness(1.4);
+	opacity: 0.92;
+}
+@media (prefers-color-scheme: dark) {
+	[data-theme='auto'] .founding-signature,
+	[data-theme='auto'] .papal-signature {
+		filter: invert(1) brightness(1.4);
+		opacity: 0.92;
+	}
+}
+
 /* Stylized scrollbars for internal scroll containers. Apply via the
    `styled-scroll` utility — never on <html>/<body>. Firefox uses the
    `scrollbar-*` properties; Webkit/Chromium uses ::-webkit-scrollbar.

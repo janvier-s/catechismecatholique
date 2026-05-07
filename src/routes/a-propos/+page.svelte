@@ -680,14 +680,8 @@
 		margin: 0 0 0.45rem;
 		opacity: 0.7;
 	}
-	/* Signatures are rendered black-on-transparent — invert for dark themes
-	   so the ink stays legible on the dark background. Wrap the entire
-	   selector in :global() so Svelte's CSS scoping can't drop it. */
-	:global([data-theme='dark'] .papal-signature),
-	:global([data-theme='oled'] .papal-signature) {
-		filter: invert(1) brightness(1.4);
-		opacity: 0.92;
-	}
+	/* Dark-mode signature inversion is in app.css so it covers
+	   data-theme=dark, oled, and auto+OS-dark uniformly. */
 	@media (max-width: 640px) {
 		.papal-quote {
 			flex-direction: column;

@@ -357,11 +357,8 @@
 		max-width: 180px;
 		opacity: 0.7;
 	}
-	:global([data-theme='dark'] .founding-signature),
-	:global([data-theme='oled'] .founding-signature) {
-		filter: invert(1) brightness(1.4);
-		opacity: 0.92;
-	}
+	/* Dark-mode signature inversion is in app.css so it covers
+	   data-theme=dark, oled, and auto+OS-dark uniformly. */
 	.founding-attr {
 		font-family: var(--font-ui);
 		font-size: 0.7rem;
