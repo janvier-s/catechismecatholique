@@ -391,22 +391,25 @@
 		user-select: none;
 	}
 
-	/* Reveal — simple fade, all elements together. */
+	/* Reveal — gentle slide-up, all elements together. Avoids opacity fade so
+	   the hero title is eligible as the page's LCP candidate (an opacity:0
+	   element is skipped by browser LCP detection, which made Lighthouse pick
+	   the topbar search placeholder instead). */
 	.reveal {
-		opacity: 0;
+		transform: translateY(6px);
 		animation: reveal-in 280ms ease-out forwards;
 	}
 
 	@keyframes reveal-in {
 		to {
-			opacity: 1;
+			transform: translateY(0);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.reveal {
 			animation: none;
-			opacity: 1;
+			transform: none;
 		}
 	}
 
