@@ -1,27 +1,23 @@
 <span class="logo-mark">
-	<picture class="logo-light block">
-		<source type="image/webp" srcset="/img/logo/logo-64.webp 1x, /img/logo/logo-128.webp 2x" />
-		<img
-			src="/img/logo/logo-64.png"
-			srcset="/img/logo/logo-64.png 1x, /img/logo/logo-128.png 2x"
-			alt="Catéchisme de l'Église Catholique"
-			width="56"
-			height="56"
-		/>
-	</picture>
-	<picture class="logo-dark block">
-		<source
-			type="image/webp"
-			srcset="/img/logo/logo-dark-64.webp 1x, /img/logo/logo-dark-128.webp 2x"
-		/>
-		<img
-			src="/img/logo/logo-dark-64.png"
-			srcset="/img/logo/logo-dark-64.png 1x, /img/logo/logo-dark-128.png 2x"
-			alt="Catéchisme de l'Église Catholique"
-			width="56"
-			height="56"
-		/>
-	</picture>
+	<!-- Direct <img> with webp; PNG fallback dropped because the preload
+	     scanner was prefetching the PNG before evaluating the picture's
+	     <source>, leading to wasted bytes. webp is universally supported. -->
+	<img
+		src="/img/logo/logo-64.webp"
+		srcset="/img/logo/logo-64.webp 1x, /img/logo/logo-128.webp 2x"
+		alt="Catéchisme de l'Église Catholique"
+		width="56"
+		height="56"
+		class="logo-light block"
+	/>
+	<img
+		src="/img/logo/logo-dark-64.webp"
+		srcset="/img/logo/logo-dark-64.webp 1x, /img/logo/logo-dark-128.webp 2x"
+		alt="Catéchisme de l'Église Catholique"
+		width="56"
+		height="56"
+		class="logo-dark block"
+	/>
 </span>
 
 <style>

@@ -17,3 +17,35 @@
 
 /img/og-image.png
   Cache-Control: public, max-age=86400
+
+# Static support files — referenced from <head> on every HTML response. Long
+# cache shrinks the critical request chain to just the HTML doc on revisits.
+/site.webmanifest
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/theme-init.js
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/favicon.svg
+  Cache-Control: public, max-age=2592000
+
+/favicon.ico
+  Cache-Control: public, max-age=2592000
+
+/favicon-96x96.png
+  Cache-Control: public, max-age=2592000
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=2592000
+
+/web-app-manifest-192x192.png
+  Cache-Control: public, max-age=2592000
+
+/web-app-manifest-512x512.png
+  Cache-Control: public, max-age=2592000
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/llms.txt
+  Cache-Control: public, max-age=86400
