@@ -36,7 +36,7 @@ describe('Compendium types', () => {
 		expect(q.number).toBe(1);
 	});
 
-	it('CompendiumPart flow accepts heading, epigraph and question nodes', () => {
+	it('CompendiumPart flow accepts heading, epigraph, prose and question nodes', () => {
 		const part: CompendiumPart = {
 			slug: 'profession-foi',
 			number: 1,
@@ -44,6 +44,7 @@ describe('Compendium types', () => {
 			flow: [
 				{ kind: 'heading', level: 2, id: 'h1', title: 'H' },
 				{ kind: 'epigraph', text: 'quote', attribution: 'St Augustin' },
+				{ kind: 'prose', html: '<p>Pater noster…</p>' },
 				{
 					kind: 'question',
 					data: {
@@ -57,6 +58,6 @@ describe('Compendium types', () => {
 				}
 			]
 		};
-		expect(part.flow).toHaveLength(3);
+		expect(part.flow).toHaveLength(4);
 	});
 });

@@ -420,12 +420,6 @@ export interface CompendiumStructurePart {
 	sections: CompendiumStructureSection[];
 }
 
-export interface CompendiumAppendix {
-	slug: 'annexe';
-	title: string;
-	flow: CompendiumFlowNode[];
-}
-
 export interface CompendiumStructure {
 	parts: CompendiumStructurePart[];
 	appendix?: { slug: 'annexe'; title: string };
