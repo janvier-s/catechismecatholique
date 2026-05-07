@@ -1,9 +1,20 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	const ctx = getContext<{ open: () => void; partTitle?: string } | undefined>('part-panorama');
-	const tooltip = $derived(
-		ctx?.partTitle ? `Panorama de la partie « ${ctx.partTitle} »` : 'Panorama de cette partie'
-	);
+	const ctx = getContext<
+		| {
+				open: () => void;
+				partTitle?: string;
+				partNumber?: number;
+				isPrologue?: boolean;
+		  }
+		| undefined
+	>('part-panorama');
+	const tooltip = $derived.by(() => {
+		if (!ctx?.partTitle) return 'Panorama de cette partie';
+		if (ctx.isPrologue) return `Panorama du Prologue : « ${ctx.partTitle} »`;
+		const label = ctx.partNumber ? `la Partie ${ctx.partNumber}` : 'cette partie';
+		return `Panorama de ${label} : « ${ctx.partTitle} »`;
+	});
 </script>
 
 {#if ctx}

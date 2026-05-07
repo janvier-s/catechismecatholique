@@ -17,11 +17,17 @@
 	// see before clicking.
 	setContext('part-panorama', {
 		open: () => (panoramaOpen = true),
-		// Getter so descendants always read the live partie title — without
-		// it the value would be captured at first render and go stale when
-		// the user navigates between parties.
+		// Getters so descendants always read the live partie data — without
+		// them the value would be captured at first render and go stale
+		// when the user navigates between parties.
 		get partTitle() {
 			return data.partTree.title;
+		},
+		get partNumber() {
+			return data.partTree.number;
+		},
+		get isPrologue() {
+			return Boolean(data.partTree.prologue);
 		}
 	});
 

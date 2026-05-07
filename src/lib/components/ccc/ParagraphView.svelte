@@ -51,7 +51,7 @@
 				<ul>
 					{#each paragraph.cross_refs as n (n)}
 						<li>
-							<a href="/ccc/{n}" class="cross-ref-link">§&nbsp;{n}</a>
+							<a href="/ccc/{n}" class="cross-ref-link">{n}</a>
 						</li>
 					{/each}
 				</ul>
