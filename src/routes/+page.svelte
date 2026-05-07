@@ -122,7 +122,6 @@
 		<!-- Daily paragraph -->
 		{#if data.paragraph}
 			<section class="daily reveal r-daily" aria-labelledby="daily-heading">
-				<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 				<div class="daily-row">
 					<a
 						href="/ccc/{data.dailyNumber}"
@@ -133,6 +132,7 @@
 						<span class="section-num">{data.dailyNumber}</span>
 					</a>
 					<div class="daily-text">
+						<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 						<div class="prose-teaser">{@html teaserHtml}</div>
 						<a class="daily-link" href="/ccc/{data.dailyNumber}">
 							Lire le contexte <span aria-hidden="true">→</span>
@@ -142,16 +142,11 @@
 			</section>
 		{/if}
 
-		<!-- Secondary nav row -->
-		<nav class="nav-row reveal r-nav" aria-label="Navigation principale">
-			<a href="/ccc/sommaire">Sommaire</a>
-			<span class="bullet" aria-hidden="true">·</span>
-			<a href="/recherche">Recherche</a>
-			<span class="bullet" aria-hidden="true">·</span>
-			<a href="/bible">Bible</a>
-			<span class="bullet" aria-hidden="true">·</span>
-			<a href="/glossaire">Glossaire</a>
-		</nav>
+		<!-- Primary CTA -->
+		<a class="cta-primary reveal r-cta" href="/ccc">
+			Lire le Catéchisme
+			<span class="cta-arrow" aria-hidden="true">→</span>
+		</a>
 	</div>
 
 	<!-- Printer's mark -->
@@ -278,9 +273,9 @@
 		letter-spacing: 0.28em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		margin: 0 0 1rem;
+		margin: 0 0 0.75rem;
 		padding-left: 0.28em; /* compensate trailing tracking */
-		text-align: center;
+		text-align: left;
 	}
 	.daily-row {
 		display: grid;
@@ -354,7 +349,7 @@
 	   Sits between the daily paragraph and the nav row. */
 	.founding-quote {
 		max-width: 38rem;
-		margin: 0 auto;
+		margin: 0 auto 1.5rem;
 		text-align: center;
 	}
 	.founding-quote blockquote {
@@ -404,36 +399,38 @@
 		color: var(--color-accent);
 	}
 
-	/* Nav row ----------------------------------------------------------- */
-	.nav-row {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
+	/* Primary CTA — accent-coloured pill that takes the visual focus
+	   previously held by the secondary nav row. */
+	.cta-primary {
+		align-self: center;
+		display: inline-flex;
 		align-items: center;
-		gap: 0.65rem 0.85rem;
+		gap: 0.7rem;
+		padding: 0.95rem 2rem;
+		background: var(--color-accent);
+		color: #fff;
 		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.22em;
+		font-size: 0.85rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
 		text-transform: uppercase;
-		color: var(--color-muted);
-	}
-	.nav-row a {
-		color: inherit;
 		text-decoration: none;
-		padding: 0.15rem 0;
-		border-bottom: 1px solid transparent;
+		border-radius: 4px;
 		transition:
-			color 120ms ease,
-			border-color 120ms ease;
+			background 150ms ease,
+			transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
-	.nav-row a:hover {
-		color: var(--color-accent);
-		border-bottom-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+	.cta-primary:hover {
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
 	}
-	.bullet {
-		color: color-mix(in srgb, var(--color-fg) 35%, transparent);
-		user-select: none;
+	.cta-primary:hover .cta-arrow {
+		transform: translateX(4px);
+	}
+	.cta-arrow {
+		font-family: var(--font-heading);
+		font-size: 1.05rem;
+		line-height: 1;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	/* Imprint ----------------------------------------------------------- */
@@ -485,9 +482,6 @@
 			letter-spacing: 0.28em;
 			text-align: center;
 			width: 100%;
-		}
-		.nav-row {
-			margin-top: 1.75rem;
 		}
 		.title {
 			margin-top: 0.5rem;

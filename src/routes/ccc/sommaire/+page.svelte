@@ -794,24 +794,29 @@
 		}
 
 		.row {
-			gap: 0.5rem;
+			gap: 0.6rem;
 			flex-wrap: nowrap;
+			align-items: baseline;
 		}
-		/* Dot leaders look cramped on narrow screens — drop them, but keep
-		   the range on the same line as the title (just on the right). */
+		/* Dot leaders look cramped on narrow screens — drop them. The range
+		   moves to the LEFT of the row in a fixed-width column so all entries
+		   line up vertically (e.g. 26-49 / 50-141 / 142-184), then the title
+		   flows next to it. */
 		.dotleader {
 			display: none;
+		}
+		.row-range {
+			order: -1;
+			flex: 0 0 auto;
+			width: 4.5rem;
+			padding-left: 0;
+			text-align: left;
+			font-size: 0.72rem;
+			white-space: nowrap;
 		}
 		.row-label {
 			flex: 1 1 auto;
 			min-width: 0;
-		}
-		.row-range {
-			flex: 0 0 auto;
-			width: auto;
-			padding-left: 0;
-			font-size: 0.72rem;
-			white-space: nowrap;
 		}
 		.row-section {
 			font-size: 1.05rem;

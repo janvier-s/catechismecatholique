@@ -70,12 +70,16 @@
 		return () => document.removeEventListener('keydown', onKey);
 	});
 
-	const links: { href: string; label: string }[] = [
+	const primaryLinks: { href: string; label: string }[] = [
 		{ href: '/ccc', label: 'Catéchisme' },
 		{ href: '/bible', label: 'Bible' },
-		{ href: '/glossaire', label: 'Glossaire' },
-		{ href: '/recherche', label: 'Recherche' },
 		{ href: '/a-propos', label: 'À propos' }
+	];
+	const tools: { href: string; label: string }[] = [
+		{ href: '/ccc/sommaire', label: 'Sommaire' },
+		{ href: '/ccc/panorama', label: 'Panorama' },
+		{ href: '/glossaire', label: 'Glossaire' },
+		{ href: '/recherche', label: 'Recherche' }
 	];
 
 	function isActive(href: string): boolean {
@@ -125,7 +129,7 @@
 		</div>
 
 		<ul class="links">
-			{#each links as link (link.href)}
+			{#each primaryLinks as link (link.href)}
 				<li>
 					<a class="link" class:is-active={isActive(link.href)} href={link.href}>
 						<span class="link-label">{link.label}</span>
@@ -135,10 +139,17 @@
 			{/each}
 		</ul>
 
-		<a class="sommaire" href="/ccc/sommaire">
-			<span>Sommaire complet</span>
-			<span class="sommaire-arrow" aria-hidden="true">→</span>
-		</a>
+		<p class="tools-eyebrow">Outils</p>
+		<ul class="links links-tools">
+			{#each tools as link (link.href)}
+				<li>
+					<a class="link" class:is-active={isActive(link.href)} href={link.href}>
+						<span class="link-label">{link.label}</span>
+						<span class="link-arrow" aria-hidden="true">›</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
 	</nav>
 {/if}
 
@@ -312,38 +323,26 @@
 		transform: translateX(3px);
 	}
 
-	/* Sommaire — eyebrow-styled link at the bottom, separated by border above. */
-	.sommaire {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.6rem;
-		margin-top: 0.4rem;
-		padding: 0.85rem 0.6rem 0.2rem;
+	/* Outils header — small eyebrow above the second link group. */
+	.tools-eyebrow {
 		font-family: var(--font-ui);
-		font-size: 0.7rem;
+		font-size: 0.62rem;
 		font-weight: 600;
 		letter-spacing: 0.26em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		text-decoration: none;
+		margin: 1.4rem 0 0.2rem 0.25rem;
 	}
-	.sommaire:hover {
-		color: var(--color-accent);
+	.links-tools .link {
+		padding: 0.7rem 0.25rem;
 	}
-	.sommaire-arrow {
-		font-family: var(--font-heading);
-		font-size: 0.95rem;
-		transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	.sommaire:hover .sommaire-arrow {
-		transform: translateX(3px);
+	.links-tools .link-label {
+		font-size: 1rem;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.bar,
-		.link-arrow,
-		.sommaire-arrow {
+		.link-arrow {
 			transition: none;
 		}
 	}

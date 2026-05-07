@@ -1,31 +1,36 @@
 <footer class="site-footer">
-	<nav class="footer-nav" aria-label="Navigation du pied de page">
-		<a href="/ccc">Catéchisme</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/bible">Bible</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/a-propos">À propos</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/mentions-legales">Mentions légales</a>
+	<nav class="footer-cols" aria-label="Navigation du pied de page">
+		<div class="footer-col">
+			<p class="footer-col-head">Catéchisme</p>
+			<ul>
+				<li><a href="/ccc">Lire le Catéchisme</a></li>
+				<li><a href="/ccc/sommaire">Sommaire</a></li>
+				<li><a href="/ccc/panorama">Panorama</a></li>
+				<li><a href="/glossaire">Glossaire</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<p class="footer-col-head">Bible</p>
+			<ul>
+				<li><a href="/bible">Lire la Bible</a></li>
+				<li><a href="/bible">Concordance</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<p class="footer-col-head">Le site</p>
+			<ul>
+				<li><a href="/recherche">Recherche</a></li>
+				<li><a href="/a-propos">À propos</a></li>
+				<li><a href="/mentions-legales">Mentions légales</a></li>
+			</ul>
+		</div>
 	</nav>
-	<div class="footer-divider" aria-hidden="true"></div>
-	<nav class="footer-nav footer-nav-tools" aria-label="Outils du Catéchisme">
-		<a href="/ccc/sommaire">Sommaire</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/ccc/panorama">Panorama</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/glossaire">Glossaire</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/bible">Concordance</a>
-		<span class="footer-sep" aria-hidden="true">·</span>
-		<a href="/recherche">Recherche</a>
-	</nav>
+
 	<p class="footer-motto">
 		<span class="footer-cross" aria-hidden="true">✠</span>
 		<span
-			>MMXXVI · Pour la plus grande gloire de Dieu · <abbr title="Ad Majorem Dei Gloriam"
-				>A.M.D.G.</abbr
-			></span
+			>MMXXVI · Pour la plus grande gloire de Dieu ·
+			<abbr title="Ad Majorem Dei Gloriam">A.M.D.G.</abbr></span
 		>
 	</p>
 	<p class="footer-copy">
@@ -37,63 +42,49 @@
 <style>
 	.site-footer {
 		border-top: 1px solid var(--color-border);
-		padding: 2.5rem 1.5rem 2rem;
+		padding: 3rem 1.5rem 2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 0.75rem;
+		gap: 1.75rem;
 		background: var(--color-bg);
 	}
 
-	.footer-nav {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		flex-wrap: wrap;
-		justify-content: center;
+	.footer-cols {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, auto));
+		gap: 2rem clamp(2rem, 6vw, 4rem);
+		text-align: left;
 	}
 
-	.footer-nav a {
+	.footer-col-head {
 		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.12em;
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.22em;
 		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 0.65rem;
+	}
+
+	.footer-col ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+	}
+
+	.footer-col a {
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-weight: 500;
 		color: var(--color-muted);
 		text-decoration: none;
 		transition: color 150ms ease;
 	}
-
-	.footer-nav a:hover {
-		color: var(--color-accent-text);
-	}
-
-	.footer-sep {
-		font-family: var(--font-ui);
-		font-size: 0.65rem;
-		color: var(--color-border);
-	}
-
-	/* Hairline rule between primary nav and the tools row. Width matches
-	   typical decorative dividers used elsewhere on the site. */
-	.footer-divider {
-		width: 56px;
-		height: 1px;
-		background: linear-gradient(
-			to right,
-			transparent,
-			color-mix(in srgb, var(--color-fg) 25%, transparent),
-			transparent
-		);
-		margin: 0.15rem 0 0.05rem;
-	}
-
-	.footer-nav-tools a {
-		color: var(--color-subtle);
-		font-size: 0.68rem;
-		letter-spacing: 0.1em;
-	}
-	.footer-nav-tools a:hover {
+	.footer-col a:hover {
 		color: var(--color-accent-text);
 	}
 
@@ -129,12 +120,14 @@
 
 	@media (max-width: 640px) {
 		.site-footer {
-			gap: 1.25rem;
-			padding: 2rem 1rem 1.75rem;
+			gap: 1.5rem;
+			padding: 2.25rem 1rem 1.75rem;
 		}
-		.footer-nav {
-			gap: 0.5rem 0.85rem;
-			row-gap: 0.5rem;
+		.footer-cols {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 1.5rem 1.5rem;
+			width: 100%;
+			max-width: 24rem;
 		}
 		.footer-motto {
 			gap: 0.45rem;
