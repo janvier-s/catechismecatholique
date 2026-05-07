@@ -8,7 +8,6 @@
 		name="description"
 		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
-	<link rel="canonical" href="https://catechismecatholique.fr/a-propos" />
 	<meta property="og:title" content="À propos · Catéchisme de l'Église Catholique" />
 	<meta
 		property="og:description"
@@ -81,6 +80,8 @@
 				alt="Signature de Jean-Paul II."
 				class="papal-signature"
 				loading="lazy"
+				width="1864"
+				height="410"
 			/>
 			<strong>Saint Jean-Paul&nbsp;II</strong>, constitution apostolique
 			<em>Fidei depositum</em>,
@@ -113,6 +114,8 @@
 				alt="Signature de Benoît XVI."
 				class="papal-signature"
 				loading="lazy"
+				width="324"
+				height="99"
 			/>
 			<strong>Benoît&nbsp;XVI</strong>, homélie à Frascati,
 			<a
@@ -145,6 +148,8 @@
 				alt="Signature de François."
 				class="papal-signature"
 				loading="lazy"
+				width="740"
+				height="180"
 			/>
 			<strong>François</strong>, discours pour le 25<sup>e</sup> anniversaire du Catéchisme,
 			<a
@@ -175,6 +180,8 @@
 				alt="Signature de Léon XIV."
 				class="papal-signature"
 				loading="lazy"
+				width="850"
+				height="208"
 			/>
 			<strong>Léon&nbsp;XIV</strong>, homélie pour le Jubilé des catéchistes,
 			<a

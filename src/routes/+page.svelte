@@ -103,6 +103,8 @@
 					alt="Signature de Jean-Paul II."
 					class="founding-signature"
 					loading="lazy"
+					width="1864"
+					height="410"
 				/>
 				<span class="founding-attr">
 					<strong>Saint Jean-Paul&nbsp;II</strong>,
@@ -511,6 +513,14 @@
 		.daily-row {
 			grid-template-columns: 1fr;
 			gap: 0.4rem;
+			justify-items: center;
+			text-align: center;
+		}
+		.daily-mark {
+			justify-content: center;
+		}
+		.daily-text {
+			text-align: left;
 		}
 		.section-mark {
 			font-size: 1.9rem;

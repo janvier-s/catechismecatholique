@@ -8,7 +8,6 @@
 		name="description"
 		content="Mentions légales du site catechismecatholique.fr : éditeur, hébergeur et droits."
 	/>
-	<link rel="canonical" href="https://catechismecatholique.fr/mentions-legales" />
 	<meta name="robots" content="noindex" />
 </svelte:head>
 

@@ -15,6 +15,12 @@ const config = {
 			}
 		}),
 		inlineStyleThreshold: 2048,
+		// Prerender resolves page.url.origin against this URL, so canonical
+		// and og:url tags emitted from the layout point at the live host
+		// instead of the "https://sveltekit-prerender/" placeholder.
+		prerender: {
+			origin: 'https://catechismecatholique.fr'
+		},
 		// Emit a per-page <meta http-equiv="Content-Security-Policy"> with
 		// auto-generated hashes for SvelteKit's inline hydration scripts.
 		// Layered on top of the HTTP CSP in _headers, this lets the meta

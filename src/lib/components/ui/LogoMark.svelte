@@ -1,20 +1,27 @@
 <span class="logo-mark">
-	<img
-		src="/img/logo/logo-64.png"
-		srcset="/img/logo/logo-64.png 1x, /img/logo/logo-128.png 2x"
-		alt="Catéchisme de l'Église Catholique"
-		width="56"
-		height="56"
-		class="logo-light block"
-	/>
-	<img
-		src="/img/logo/logo-dark-64.png"
-		srcset="/img/logo/logo-dark-64.png 1x, /img/logo/logo-dark-128.png 2x"
-		alt="Catéchisme de l'Église Catholique"
-		width="56"
-		height="56"
-		class="logo-dark block"
-	/>
+	<picture class="logo-light block">
+		<source type="image/webp" srcset="/img/logo/logo-64.webp 1x, /img/logo/logo-128.webp 2x" />
+		<img
+			src="/img/logo/logo-64.png"
+			srcset="/img/logo/logo-64.png 1x, /img/logo/logo-128.png 2x"
+			alt="Catéchisme de l'Église Catholique"
+			width="56"
+			height="56"
+		/>
+	</picture>
+	<picture class="logo-dark block">
+		<source
+			type="image/webp"
+			srcset="/img/logo/logo-dark-64.webp 1x, /img/logo/logo-dark-128.webp 2x"
+		/>
+		<img
+			src="/img/logo/logo-dark-64.png"
+			srcset="/img/logo/logo-dark-64.png 1x, /img/logo/logo-dark-128.png 2x"
+			alt="Catéchisme de l'Église Catholique"
+			width="56"
+			height="56"
+		/>
+	</picture>
 </span>
 
 <style>

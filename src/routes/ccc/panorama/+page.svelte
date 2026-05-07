@@ -48,7 +48,6 @@
 		name="description"
 		content="Panorama du Catéchisme de l'Église Catholique : prologue, quatre parties, sections, chapitres et articles vus d'un seul coup d'œil."
 	/>
-	<link rel="canonical" href="https://catechismecatholique.fr/ccc/panorama" />
 </svelte:head>
 
 <main class="panorama-page">
