@@ -34,30 +34,79 @@ export interface BuildOutput {
 	qRanges: CompendiumQRange[];
 }
 
-const TITLE_CASE_EXCEPTIONS = new Set([
-	'de',
-	'la',
-	'le',
-	'du',
-	'des',
-	'à',
-	'au',
-	'aux',
-	'en',
-	'et',
-	'a'
-]);
+// Religious proper nouns whose capitalization must be preserved even in
+// otherwise lowercased prose ("Dieu", "Christ", etc.).
+const PROPER_NOUNS = [
+	'Dieu',
+	'Christ',
+	'Jésus',
+	'Jésus-Christ',
+	'Père',
+	'Fils',
+	'Esprit',
+	'Saint-Esprit',
+	'Esprit-Saint',
+	'Marie',
+	'Église',
+	'Israël',
+	'Sauveur',
+	'Rédempteur',
+	'Verbe',
+	'Trinité',
+	'Seigneur',
+	'Évangile',
+	'Évangiles',
+	'Écriture',
+	'Écritures',
+	'Bible',
+	'Ancien',
+	'Nouveau',
+	'Testament',
+	'Royaume',
+	'Apôtres',
+	'Apôtre',
+	'Pâque',
+	'Pâques',
+	'Pentecôte',
+	'Avent',
+	'Noël',
+	'Décalogue',
+	'Béatitudes',
+	'Magnificat',
+	'Pater',
+	'Credo',
+	'Confiteor'
+];
 
+/**
+ * French sentence-case for an EPUB heading (typically all-caps).
+ * Lowercase everything, then capitalize:
+ *   - the first alphabetic character of the string
+ *   - the first alphabetic character after sentence punctuation (. ! ?)
+ *   - the first alphabetic character after a "phrase-opening" guillemet
+ *     (« at start, or « following sentence punctuation / dash separator)
+ *   - the first alphabetic character after a dash separator surrounded by spaces
+ * Then restore the religious proper-noun lexicon above.
+ */
 function titleCase(label: string): string {
-	const lower = label.toLowerCase();
-	return lower
-		.split(/(\s+|[—–-])/)
-		.map((tok, i) => {
-			if (/^\s+$/.test(tok) || /^[—–-]$/.test(tok)) return tok;
-			if (i > 0 && TITLE_CASE_EXCEPTIONS.has(tok)) return tok;
-			return tok.charAt(0).toUpperCase() + tok.slice(1);
-		})
-		.join('');
+	let s = label.toLowerCase();
+	// 1) First alphabetic char of the string (handles leading «, l', etc.)
+	s = s.replace(/^([^a-zà-ÿ]*)([a-zà-ÿ])/u, (_, prefix, ch) => prefix + ch.toUpperCase());
+	// 2) After phrase-opening guillemet (start, sentence punct, or dash separator)
+	s = s.replace(
+		/((?:^|[.!?]|\s[-—–])\s*«\s*)([a-zà-ÿ])/gu,
+		(_, before, ch) => before + ch.toUpperCase()
+	);
+	// 3) After sentence-ending punctuation
+	s = s.replace(/([.!?]\s+)([a-zà-ÿ])/gu, (_, before, ch) => before + ch.toUpperCase());
+	// 4) After dash separator surrounded by spaces
+	s = s.replace(/(\s[-—–]\s+)([a-zà-ÿ])/gu, (_, before, ch) => before + ch.toUpperCase());
+	// 5) Restore proper nouns (whole-word, accent-aware boundaries)
+	for (const noun of PROPER_NOUNS) {
+		const re = new RegExp(`(?<![a-zà-ÿ])${noun.toLowerCase()}(?![a-zà-ÿ])`, 'giu');
+		s = s.replace(re, noun);
+	}
+	return s;
 }
 
 function parseBibleRef(raw: string): BibleRef {
