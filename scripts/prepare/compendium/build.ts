@@ -433,7 +433,16 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 					title: titleCase(ev.text)
 				});
 			} else if (ev.kind === 'prayer') {
-				flow.push({ kind: 'prayer', fr: ev.fr, la: ev.la });
+				// Normalise French prayer titles ("DOXOLOGIE" → "Doxologie",
+				// "JE VOUS SALUE, MARIE" → "Je vous salue, Marie") so the TOC
+				// and body render uniformly. Latin titles are already in proper
+				// Title Case in the source ("Pater Noster", "Gloria Patri") —
+				// don't touch them, our French titleCase would lowercase them.
+				flow.push({
+					kind: 'prayer',
+					fr: { ...ev.fr, title: ev.fr.title ? titleCase(ev.fr.title) : undefined },
+					la: ev.la
+				});
 			} else {
 				flow.push({ kind: 'prose', html: ev.html });
 			}

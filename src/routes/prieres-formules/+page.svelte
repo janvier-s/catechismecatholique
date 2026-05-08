@@ -540,16 +540,12 @@
 	.toc-list li a {
 		display: block;
 		font-family: var(--font-ui);
-		/* Normalise the mixed-case source data ("DOXOLOGIE" vs "Notre Père"
-		   vs "Angelus") to a uniform uppercase rhythm in the TOC. */
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		font-size: 11px;
-		line-height: 1.45;
+		font-size: 12px;
+		line-height: 1.5;
 		padding: 3px 0;
 		color: var(--color-subtle);
 		text-decoration: none;
-		opacity: 0.8;
+		opacity: 0.85;
 		transition:
 			color 200ms ease,
 			opacity 200ms ease;
@@ -570,10 +566,11 @@
 		margin-top: 0;
 	}
 	.toc-list li.toc-section a {
-		font-size: 11px;
+		font-size: 10px;
 		font-weight: 700;
 		letter-spacing: 0.22em;
-		color: var(--color-accent-text);
+		text-transform: uppercase;
+		color: var(--color-fg);
 		padding: 4px 0 4px;
 		opacity: 1;
 	}
