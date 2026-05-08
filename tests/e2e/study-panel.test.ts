@@ -91,28 +91,51 @@ test('§1021 collapses 4 consecutive bibleRef sups and renumbers markers sequent
 	const bibleTab = page.getByRole('button', { name: 'Bible', exact: true }).first();
 	await bibleTab.click();
 
-	// Side panel: 8 ref rows total. Markers (visible sup.ref-marker) appear on
-	// rows with data-idx ∈ {1,2,3,4,8}, reading "1","2","3","4","5". Rows with
-	// data-idx ∈ {5,6,7} have NO marker AND have the .cluster-member class.
+	// Side panel: 8 verse rows total (one per ref). Cluster verse rows (data-idx
+	// 4..7) have NO inline marker — the cluster's "4" lives in a separate
+	// li.cluster-header row above them.
 	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
 	const rows = panel.locator('li[data-idx]');
 	await expect(rows).toHaveCount(8);
 
-	const rowSummary = await rows.evaluateAll((els) =>
-		els.map((el) => ({
-			idx: el.getAttribute('data-idx'),
-			marker: el.querySelector('sup.ref-marker')?.textContent?.trim() ?? null,
-			isClusterMember: el.classList.contains('cluster-member')
-		}))
+	// The cluster's marker now sits in its own header row, not on a verse row.
+	const visibleHeaders = panel
+		.locator('li.cluster-header sup.ref-marker')
+		.filter({ visible: true });
+	const headerMarkers = await visibleHeaders.evaluateAll((els) =>
+		els.map((el) => el.textContent?.trim() ?? '')
 	);
-	expect(rowSummary).toEqual([
-		{ idx: '1', marker: '1', isClusterMember: false },
-		{ idx: '2', marker: '2', isClusterMember: false },
-		{ idx: '3', marker: '3', isClusterMember: false },
-		{ idx: '4', marker: '4', isClusterMember: false },
-		{ idx: '5', marker: null, isClusterMember: true },
-		{ idx: '6', marker: null, isClusterMember: true },
-		{ idx: '7', marker: null, isClusterMember: true },
-		{ idx: '8', marker: '5', isClusterMember: false }
-	]);
+	expect(headerMarkers).toContain('4');
+
+	// Verse rows for the cluster (data-idx 4, 5, 6, 7) carry .cluster-verse
+	// AND have NO marker inside.
+	for (const idx of [4, 5, 6, 7]) {
+		const row = panel
+			.locator(`li.cluster-verse[data-idx="${idx}"]`)
+			.filter({ visible: true });
+		await expect(row).toHaveCount(1);
+		await expect(row.locator('sup.ref-marker')).toHaveCount(0);
+	}
+
+	// Solo refs still show inline markers.
+	for (const [idx, expectedMarker] of [
+		[1, '1'],
+		[2, '2'],
+		[3, '3'],
+		[8, '5']
+	] as const) {
+		const row = panel
+			.locator(`li[data-idx="${idx}"]:not(.cluster-verse)`)
+			.filter({ visible: true });
+		const marker = await row.locator('sup.ref-marker').first().textContent();
+		expect(marker?.trim()).toBe(expectedMarker);
+	}
+
+	// Sanity: the prose's visible bibleRef sup numbers stay sequential 1..5.
+	const proseNumbers = await page.evaluate(() =>
+		Array.from(document.querySelectorAll('article sup.srcRef.bibleRef'))
+			.filter((s) => (s as HTMLElement).offsetParent !== null)
+			.map((s) => s.textContent?.trim() ?? '')
+	);
+	expect(proseNumbers).toEqual(['1', '2', '3', '4', '5']);
 });

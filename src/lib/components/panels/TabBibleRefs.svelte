@@ -6,7 +6,7 @@
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
 	import type { BibleRef, MagisterialRefRecord, NclBible } from '$lib/data/types';
 
-	type RefStyle = 'inline' | 'sup' | 'cluster-member';
+	type RefStyle = 'inline' | 'sup' | 'cluster-leader' | 'cluster-member';
 	type ParsedRef = {
 		raw: string;
 		idx: number;
@@ -71,9 +71,11 @@
 		if (m.marker_idx !== undefined && m.marker_idx !== idx) {
 			return { marker: display, style: 'cluster-member' };
 		}
-		// Cluster leader — at least one other ref points at me. Always sup.
+		// Cluster leader — at least one other ref points at me. Marker labels
+		// the WHOLE group via a header row, so the leader's verse row carries
+		// no inline marker.
 		const isLeader = magisterial.some((r) => r.marker_idx === idx);
-		if (isLeader) return { marker: display, style: 'sup' };
+		if (isLeader) return { marker: display, style: 'cluster-leader' };
 		// Solo ref — existing voir heuristic.
 		return { marker: display, style: /^voir\s/i.test(m.raw) ? 'sup' : 'inline' };
 	}
@@ -114,13 +116,50 @@
 	});
 </script>
 
+{#snippet verseBody(r: RefWithVerses)}
+	{#if r.fromV === undefined}
+		<a
+			href="/bible/{r.book.slug}/{r.chapter}"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-1 inline-block text-[13px] text-accent hover:underline"
+		>
+			Lire le chapitre entier&nbsp;→
+		</a>
+	{:else if r.verses.length > 0}
+		<div class="mt-2 font-body text-[15px] leading-relaxed">
+			{#each r.verses as v (v.v)}
+				<span class="block">
+					{#if r.verses.length > 1}
+						<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-1"
+							>{v.v}</sup
+						>
+					{/if}
+					{v.text}
+				</span>
+			{/each}
+		</div>
+	{:else}
+		<p class="mt-1 text-xs text-muted italic">Verset non disponible.</p>
+	{/if}
+{/snippet}
+
 <div class="font-ui text-sm">
 	{#if refs.length === 0}
 		<p class="text-muted italic">Aucune référence biblique.</p>
 	{:else}
 		<ul bind:this={listEl} class="space-y-5">
 			{#each resolved as r (r.raw + ':' + r.idx)}
-				<li data-idx={r.idx} class="rounded" class:cluster-member={r.style === 'cluster-member'}>
+				{#if r.style === 'cluster-leader'}
+					<li class="cluster-header" aria-hidden="true">
+						<sup class="ref-marker">{r.marker}</sup>
+					</li>
+				{/if}
+				<li
+					data-idx={r.idx}
+					class="rounded"
+					class:cluster-verse={r.style === 'cluster-leader' || r.style === 'cluster-member'}
+				>
 					<div class="flex items-baseline gap-1.5">
 						{#if r.style === 'sup'}
 							<sup class="ref-marker">{r.marker}</sup>
@@ -135,28 +174,7 @@
 							{/if}
 						</a>
 					</div>
-					{#if r.fromV === undefined}
-						<a
-							href="/bible/{r.book.slug}/{r.chapter}"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="mt-1 inline-block text-[13px] text-accent hover:underline"
-						>
-							Lire le chapitre entier&nbsp;→
-						</a>
-					{:else if r.verses.length > 0}
-						<div class="mt-2 font-body text-[15px] leading-relaxed">
-							{#each r.verses as v (v.v)}
-								<span class="block">
-									<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-1">{v.v}</sup
-									>
-									{v.text}
-								</span>
-							{/each}
-						</div>
-					{:else}
-						<p class="mt-1 text-xs text-muted italic">Verset non disponible.</p>
-					{/if}
+					{@render verseBody(r)}
 				</li>
 			{/each}
 		</ul>
@@ -180,15 +198,29 @@
 	sup.ref-marker {
 		font-size: 0.75em;
 	}
-	li.cluster-member {
-		/* Override the negative-margin compensation so the indent reads.
-		   Members sit in a visually-grouped block under their leader. */
-		margin-left: 0.75rem;
-		margin-right: -0.5rem;
-		padding-left: 0.75rem;
-		border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+	/* Cluster header — the marker that labels a footnote group. Sits on its
+	   own row above the cluster verses so it visually attaches to the whole
+	   group, not just the first verse. */
+	li.cluster-header {
+		padding: 0;
+		margin: 0;
 	}
-	li.cluster-member + li.cluster-member {
-		margin-top: -0.25rem;
+	li.cluster-header sup.ref-marker {
+		font-size: 0.85em;
+	}
+	/* Cluster verses — leader's verse + all its members, indented under the
+	   header with a subtle accent rule. */
+	li.cluster-verse {
+		margin-left: 0.75rem;
+		padding-left: 0.75rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+	}
+	/* Tighten the vertical rhythm WITHIN a cluster: the parent ul's space-y-5
+	   utility is too generous for header→first-verse and verse→verse adjacency.
+	   Specificity beats Tailwind's .space-y-5 > * + * because we go via two
+	   classes + svelte's scoping hash (auto-added by the compiler). */
+	li.cluster-header + li.cluster-verse,
+	li.cluster-verse + li.cluster-verse {
+		margin-top: 0.5rem;
 	}
 </style>
