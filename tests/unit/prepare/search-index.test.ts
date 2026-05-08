@@ -47,7 +47,7 @@ describe('buildSearchIndex', () => {
 				number: 1,
 				question: 'Quel est le dessein de Dieu',
 				answer: 'Dieu a créé',
-				partSlug: 'la-profession-de-la-foi'
+				partSlug: '1-profession-de-la-foi'
 			}
 		]);
 		const cdoc = out.documents.find((d) => d.id === 'c:1');
@@ -55,7 +55,7 @@ describe('buildSearchIndex', () => {
 			kind: 'compendium-question',
 			number: 1,
 			corpus: 'compendium',
-			compendium_part: 'la-profession-de-la-foi'
+			compendium_part: '1-profession-de-la-foi'
 		});
 	});
 });

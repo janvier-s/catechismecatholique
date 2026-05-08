@@ -11,7 +11,7 @@
 
 	const PARTS: PartCard[] = [
 		{
-			slug: 'la-profession-de-la-foi',
+			slug: '1-profession-de-la-foi',
 			kicker: 'Première partie',
 			title: 'La profession de la foi',
 			range: '26–1065',
@@ -22,20 +22,20 @@
 			anchors: [
 				{
 					label: 'Le Symbole des Apôtres',
-					href: '/cec/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi'
+					href: '/cec/1-profession-de-la-foi/2-profession-de-la-foi'
 				},
 				{
 					label: 'Je crois en Dieu le Père',
-					href: '/cec/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi/je-crois-en-dieu-le-pere'
+					href: '/cec/1-profession-de-la-foi/2-profession-de-la-foi/1-je-crois-en-dieu-le-pere'
 				},
 				{
 					label: 'Je crois en Jésus-Christ',
-					href: '/cec/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi/je-crois-en-jesus-christ-le-fils-unique-de-dieu'
+					href: '/cec/1-profession-de-la-foi/2-profession-de-la-foi/2-je-crois-en-jesus-christ-le'
 				}
 			]
 		},
 		{
-			slug: 'la-celebration-du-mystere-chretien',
+			slug: '2-celebration-du-mystere',
 			kicker: 'Deuxième partie',
 			title: 'La célébration du mystère chrétien',
 			range: '1066–1690',
@@ -46,16 +46,16 @@
 			anchors: [
 				{
 					label: 'Les sept sacrements',
-					href: '/cec/la-celebration-du-mystere-chretien/les-sept-sacrements-de-leglise'
+					href: '/cec/2-celebration-du-mystere/2-sept-sacrements-de-leglise'
 				},
 				{
 					label: "Les sacrements de l'initiation chrétienne",
-					href: '/cec/la-celebration-du-mystere-chretien/les-sept-sacrements-de-leglise/les-sacrements-de-linitiation-chretienne'
+					href: '/cec/2-celebration-du-mystere/2-sept-sacrements-de-leglise/1-sacrements-de-linitiation'
 				}
 			]
 		},
 		{
-			slug: 'la-vie-dans-le-christ',
+			slug: '3-vie-dans-le-christ',
 			kicker: 'Troisième partie',
 			title: 'La vie dans le Christ',
 			range: '1691–2557',
@@ -65,16 +65,16 @@
 			anchors: [
 				{
 					label: 'Les Dix commandements',
-					href: '/cec/la-vie-dans-le-christ/les-dix-commandements'
+					href: '/cec/3-vie-dans-le-christ/2-dix-commandements'
 				},
 				{
 					label: 'La dignité de la personne humaine',
-					href: '/cec/la-vie-dans-le-christ/la-vocation-de-lhomme-la-vie-dans-lesprit/la-dignite-de-la-personne-humaine'
+					href: '/cec/3-vie-dans-le-christ/1-vocation-de-lhomme-la-vie-dans/1-dignite-de-la-personne-humaine'
 				}
 			]
 		},
 		{
-			slug: 'la-priere-chretienne',
+			slug: '4-priere-chretienne',
 			kicker: 'Quatrième partie',
 			title: 'La prière chrétienne',
 			range: '2558–2865',
@@ -85,11 +85,11 @@
 			anchors: [
 				{
 					label: 'Le Notre Père',
-					href: '/cec/la-priere-chretienne/la-priere-du-seigneur-notre-pere'
+					href: '/cec/4-priere-chretienne/2-priere-du-seigneur-notre-pere'
 				},
 				{
 					label: 'La prière dans la vie chrétienne',
-					href: '/cec/la-priere-chretienne/la-priere-dans-la-vie-chretienne'
+					href: '/cec/4-priere-chretienne/1-priere-dans-la-vie-chretienne'
 				}
 			]
 		}

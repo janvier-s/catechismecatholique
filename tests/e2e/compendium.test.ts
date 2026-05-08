@@ -78,12 +78,12 @@ test.describe('Compendium', () => {
 		// and desktop panels render the body in DOM; .filter({ visible }) skips
 		// the hidden one.
 		const qLink = page
-			.locator('a[href^="/compendium/la-profession-de-la-foi#q-2"]')
+			.locator('a[href^="/compendium/1-profession-de-la-foi#q-2"]')
 			.filter({ visible: true })
 			.first();
 		await expect(qLink).toBeVisible();
 		await qLink.click();
-		await expect(page).toHaveURL(/\/compendium\/la-profession-de-la-foi#q-2$/);
+		await expect(page).toHaveURL(/\/compendium\/1-profession-de-la-foi#q-2$/);
 	});
 
 	// TODO: The committed search-index.json was built without CCC source files present,
