@@ -169,12 +169,7 @@
 	{:else if r.verses.length > 0}
 		<div class="mt-2 font-body text-[15px] leading-relaxed">
 			{#each r.verses as v (v.v)}
-				<span class="block">
-					{#if r.verses.length > 1}
-						<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-2">{v.v}</sup>
-					{/if}
-					{v.text}
-				</span>
+				<span class="block">{v.text}</span>
 			{/each}
 		</div>
 	{:else}

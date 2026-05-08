@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
+	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
@@ -193,98 +194,18 @@
 	{/if}
 
 	<nav
-		class="paragraph-nav mt-10 pt-6 border-t border-border flex items-stretch justify-between gap-4"
+		class="mt-10 pt-6 border-t border-border flex items-stretch justify-between gap-4"
 		aria-label="Paragraphe précédent ou suivant"
 	>
 		{#if hasPrev}
-			<a class="paragraph-nav-card prev" href="/cec/{prevNum}">
-				<span class="paragraph-nav-arrow" aria-hidden="true">←</span>
-				<span class="paragraph-nav-body">
-					<span class="paragraph-nav-eyebrow">Précédent</span>
-					<span class="paragraph-nav-title">{prevNum}</span>
-				</span>
-			</a>
+			<NavCard direction="prev" href="/cec/{prevNum}" eyebrow="Précédent" title={String(prevNum)} />
 		{:else}
-			<span class="paragraph-nav-spacer"></span>
+			<span style="flex:1"></span>
 		{/if}
 		{#if hasNext}
-			<a class="paragraph-nav-card next" href="/cec/{nextNum}">
-				<span class="paragraph-nav-body">
-					<span class="paragraph-nav-eyebrow">Suivant</span>
-					<span class="paragraph-nav-title">{nextNum}</span>
-				</span>
-				<span class="paragraph-nav-arrow" aria-hidden="true">→</span>
-			</a>
+			<NavCard direction="next" href="/cec/{nextNum}" eyebrow="Suivant" title={String(nextNum)} />
 		{:else}
-			<span class="paragraph-nav-spacer"></span>
+			<span style="flex:1"></span>
 		{/if}
 	</nav>
 </main>
-
-<style>
-	.paragraph-nav-card {
-		flex: 1;
-		min-width: 0;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 0.7rem 1rem;
-		background: var(--color-panel);
-		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
-		border-radius: 4px;
-		color: var(--color-fg);
-		text-decoration: none;
-		transition:
-			border-color 140ms ease,
-			background 140ms ease,
-			color 140ms ease;
-	}
-	.paragraph-nav-card:hover {
-		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
-		color: var(--color-accent-text);
-	}
-	.paragraph-nav-card.next {
-		text-align: right;
-	}
-	.paragraph-nav-arrow {
-		flex-shrink: 0;
-		font-size: 1.1rem;
-		color: var(--color-muted);
-		transition: color 140ms ease;
-	}
-	.paragraph-nav-card:hover .paragraph-nav-arrow {
-		color: var(--color-accent-text);
-	}
-	.paragraph-nav-body {
-		display: flex;
-		flex-direction: column;
-		gap: 0.1rem;
-		flex: 1;
-		min-width: 0;
-	}
-	.paragraph-nav-card.next .paragraph-nav-body {
-		text-align: right;
-	}
-	.paragraph-nav-eyebrow {
-		font-family: var(--font-ui);
-		font-size: 11px;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		color: var(--color-muted);
-	}
-	.paragraph-nav-card:hover .paragraph-nav-eyebrow {
-		color: var(--color-accent-text);
-	}
-	.paragraph-nav-title {
-		font-family: var(--font-heading);
-		font-size: 17px;
-		line-height: 1.2;
-		font-variant-numeric: oldstyle-nums;
-	}
-	.paragraph-nav-spacer {
-		flex: 1;
-	}
-</style>

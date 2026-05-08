@@ -3,6 +3,7 @@
 	import { openPanel } from '$lib/stores/studyPanel';
 	import { prefs } from '$lib/stores/prefs';
 	import { goto } from '$app/navigation';
+	import { bibleRefUrl } from '$lib/utils/linkifyRefs';
 	let {
 		html,
 		bibleRefs = [],
@@ -33,6 +34,15 @@
 		btn.textContent = '(' + formatBibleRef(raw) + ')';
 		btn.className = 'bible-inline';
 		btn.dataset.idx = idx;
+		const url = bibleRefUrl(raw);
+		if (url) {
+			const m = url.match(/^\/bible\/([^/]+)\/(\d+)(?:\/(\d+))?/);
+			if (m) {
+				btn.dataset.slug = m[1]!;
+				btn.dataset.chapter = m[2]!;
+				if (m[3]) btn.dataset.verse = m[3];
+			}
+		}
 		frag.appendChild(btn);
 		return frag;
 	}
@@ -55,6 +65,30 @@
 		const refsByIdx = new Map<string, MagisterialRefRecord>();
 		for (const r of bibleRefs) {
 			if (r.idx !== undefined && r.idx !== null) refsByIdx.set(String(r.idx), r);
+		}
+
+		// Pass 0: bibRef anchors — these appear in some paragraphs as
+		// <a class="bibRef">Sg 13:5</a> directly in the prose, with no href or
+		// data attributes set by the data pipeline. Resolve the URL here so
+		// they navigate correctly and pick up the hover tooltip.
+		for (const a of containerEl.querySelectorAll<HTMLAnchorElement>('a.bibRef')) {
+			const raw = a.textContent?.trim() ?? '';
+			const url = bibleRefUrl(raw);
+			if (!url) continue;
+			a.href = url;
+			const m = url.match(/^\/bible\/([^/]+)\/(\d+)(?:\/(\d+))?/);
+			if (m) {
+				a.dataset.slug = m[1]!;
+				a.dataset.chapter = m[2]!;
+				if (m[3]) a.dataset.verse = m[3];
+			}
+			// Match to magisterial_refs by raw content to get idx for panel scroll
+			for (const [idxStr, ref] of refsByIdx) {
+				if (ref.raw === raw) {
+					a.dataset.idx = idxStr;
+					break;
+				}
+			}
 		}
 
 		// Pass 1: inline non-"voir" bibleRefs as clickable buttons. When the
@@ -107,7 +141,28 @@
 					sup.remove();
 					continue;
 				}
+				const numMatch = (sup.textContent ?? '').match(/(\d+)/);
+				if (numMatch) {
+					sup.dataset.href = `/cec/${numMatch[1]}`;
+					sup.dataset.cec = numMatch[1];
+				}
 				sup.textContent = (sup.textContent ?? '').replace(/^§/, '');
+			}
+			if (sup.classList.contains('bibleRef')) {
+				const idx = sup.getAttribute('data-idx') ?? '';
+				const ref = refsByIdx.get(idx);
+				if (ref?.raw) {
+					const url = bibleRefUrl(ref.raw);
+					if (url) {
+						sup.dataset.href = url;
+						const m = url.match(/^\/bible\/([^/]+)\/(\d+)(?:\/(\d+))?/);
+						if (m) {
+							sup.dataset.slug = m[1]!;
+							sup.dataset.chapter = m[2]!;
+							if (m[3]) sup.dataset.verse = m[3];
+						}
+					}
+				}
 			}
 			// All sup.srcRef variants (cccRef / bibleRef / docRef) are clickable.
 			// Tag them as buttons for AT and accept Enter/Space — actual click
@@ -199,6 +254,23 @@
 		const onClick = (e: MouseEvent) => {
 			if (!(e.target instanceof Element)) return;
 
+			const bibRef = e.target.closest<HTMLAnchorElement>('a.bibRef');
+			if (bibRef) {
+				if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+				e.preventDefault();
+				const idxAttr = bibRef.dataset.idx ?? '';
+				const idx = parseInt(idxAttr, 10);
+				openPanel(
+					{
+						kind: 'paragraph',
+						paragraph: paragraphNumber,
+						...(Number.isFinite(idx) ? { bibleRefIdx: idx } : {})
+					},
+					'bible'
+				);
+				return;
+			}
+
 			const inline = e.target.closest<HTMLButtonElement>('button.bible-inline');
 			if (inline) {
 				e.preventDefault();
@@ -218,6 +290,12 @@
 			const sup = e.target.closest('sup.srcRef') as HTMLElement | null;
 			if (!sup) return;
 			e.preventDefault();
+
+			// Ctrl/Cmd/middle-click: follow the direct navigation href if available.
+			if ((e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) && sup.dataset.href) {
+				window.open(sup.dataset.href, '_blank');
+				return;
+			}
 
 			if (inPanel && sup.classList.contains('cccRef')) {
 				const m = (sup.textContent ?? '').match(/(\d+)/);
@@ -283,6 +361,18 @@
 	.prose-paragraph :global(sup.srcRef.bibleRef),
 	.prose-paragraph :global(sup.srcRef.docRef) {
 		color: var(--color-muted);
+	}
+	.prose-paragraph :global(a.bibRef) {
+		color: inherit;
+		text-decoration: underline dotted var(--color-muted);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.15em;
+		transition: color 120ms ease;
+	}
+	.prose-paragraph :global(a.bibRef:hover) {
+		color: var(--color-accent);
+		text-decoration: underline solid var(--color-accent);
+		text-decoration-thickness: 1px;
 	}
 	.prose-paragraph :global(button.bible-inline) {
 		color: inherit;

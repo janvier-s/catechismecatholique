@@ -127,8 +127,8 @@
 		if (hasCrossRefs) out.push({ id: 'cross-refs', label: 'Renvois' });
 		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités dans' });
 		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
-		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
 		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
+		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
 		// Always show Concordance for paragraph contexts; the tab body handles empty state.
 		out.push({ id: 'concordance', label: 'Concordance' });
 		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });

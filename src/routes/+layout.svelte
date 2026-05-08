@@ -8,6 +8,7 @@
 	import SidebarToggle from '$lib/components/ui/SidebarToggle.svelte';
 	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
 	import Footer from '$lib/components/ui/Footer.svelte';
+	import BibleRefTooltip from '$lib/components/ui/BibleRefTooltip.svelte';
 	import { closePanel, studyPanel } from '$lib/stores/studyPanel';
 
 	let { children } = $props();
@@ -108,6 +109,7 @@
 	<StudyPanel />
 </div>
 <Footer />
+<BibleRefTooltip />
 
 <style>
 	/* Visible only when focused — first-Tab affordance for keyboard / AT users

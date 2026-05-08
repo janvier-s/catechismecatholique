@@ -31,6 +31,14 @@
 	<blockquote class="border-l-4 border-accent pl-4 my-6 italic text-lg">
 		{data.text}
 	</blockquote>
+	<a
+		href="/bible/{data.book.slug}/{data.chapter}"
+		class="inline-flex items-center gap-1.5 font-ui text-sm text-muted hover:text-accent transition-colors"
+	>
+		Lire {data.book.frenchName}
+		{data.chapter} en entier
+		<span aria-hidden="true">→</span>
+	</a>
 
 	<h2 class="font-ui text-sm uppercase tracking-wider text-muted mt-10 mb-4">
 		Paragraphes du Catéchisme citant ce verset ({data.paragraphs.length})

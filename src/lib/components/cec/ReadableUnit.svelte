@@ -5,6 +5,7 @@
 	import CitationBlock from './CitationBlock.svelte';
 	import { studyPanel, openPanel, closePanel } from '$lib/stores/studyPanel';
 	import { prefs } from '$lib/stores/prefs';
+	import { linkifyCompendiumBibleRefs } from '$lib/utils/linkifyRefs';
 
 	type Unit =
 		| { kind: 'ccc-paragraph'; data: Paragraph }
@@ -117,7 +118,13 @@
 					paragraphNumber={unit.data.number}
 				/>
 				{#each unit.data.citations as cite, i (i)}
-					<CitationBlock html={cite.text_html} />
+					<CitationBlock>
+						<ParagraphRenderer
+							html={cite.text_html}
+							bibleRefs={unit.data.magisterial_refs}
+							paragraphNumber={unit.data.number}
+						/>
+					</CitationBlock>
 				{/each}
 				{#if unit.data.superseded_text_html}
 					<div class="superseded-block">
@@ -127,7 +134,9 @@
 				{/if}
 			{:else}
 				<p class="compendium-question">{unit.data.question}</p>
-				<div class="compendium-answer">{@html unit.data.answer_html}</div>
+				<div class="compendium-answer">
+					{@html linkifyCompendiumBibleRefs(unit.data.answer_html)}
+				</div>
 			{/if}
 		</div>
 		{#if sideRefs}
@@ -136,7 +145,11 @@
 				<ul>
 					{#each sideRefs.refs as n (n)}
 						<li>
-							<a href={`${sideRefs.hrefPrefix}${n}`} class="cross-ref-link">{n}</a>
+							<a
+								href={`${sideRefs.hrefPrefix}${n}`}
+								class="cross-ref-link"
+								data-cec={n.includes('-') ? undefined : n}>{n}</a
+							>
 						</li>
 					{/each}
 				</ul>
@@ -304,6 +317,18 @@
 	}
 	.compendium-answer :global(p:last-child) {
 		margin-bottom: 0;
+	}
+	.compendium-answer :global(a.compendium-bible-ref) {
+		color: inherit;
+		text-decoration: underline dotted var(--color-muted);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.15em;
+		transition: color 120ms ease;
+	}
+	.compendium-answer :global(a.compendium-bible-ref:hover) {
+		color: var(--color-accent);
+		text-decoration: underline solid var(--color-accent);
+		text-decoration-thickness: 1px;
 	}
 
 	/* Link icon: hidden by default, revealed when the number column is hovered.
