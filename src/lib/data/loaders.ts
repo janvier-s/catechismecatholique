@@ -13,7 +13,11 @@ import type {
 	CompendiumStructure,
 	CompendiumPart,
 	CompendiumCitedBy,
-	CompendiumQRange
+	CompendiumQRange,
+	TrentStructure,
+	TrentChapterFile,
+	TrentSectionFile,
+	TrentParagraphContext
 } from './types';
 
 type Fetch = typeof fetch;
@@ -352,4 +356,64 @@ export function loadCompendiumQRanges(fetcher: Fetch = fetch): Promise<Compendiu
 		);
 	}
 	return compendiumQRangesPromise;
+}
+
+// ─── Trent Loaders ────────────────────────────────────────────────────────────
+
+let trentStructurePromise: Promise<TrentStructure> | null = null;
+const trentChapterCache = new Map<string, Promise<TrentChapterFile>>();
+const trentSectionCache = new Map<string, Promise<TrentSectionFile | null>>();
+const trentParagraphContextCache = new Map<number, Promise<TrentParagraphContext | null>>();
+
+export function loadTrentStructure(fetcher: Fetch = fetch): Promise<TrentStructure> {
+	if (!trentStructurePromise) {
+		trentStructurePromise = fetchJson<TrentStructure>('/data/trent/structure.json', fetcher);
+	}
+	return trentStructurePromise;
+}
+
+export function loadTrentChapter(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<TrentChapterFile> {
+	let p = trentChapterCache.get(slug);
+	if (!p) {
+		p = fetchJson<TrentChapterFile>(`/data/trent/chapters/${slug}.json`, fetcher);
+		trentChapterCache.set(slug, p);
+	}
+	return p;
+}
+
+export function loadTrentSection(
+	chapterSlug: string,
+	sectionSlug: string,
+	fetcher: Fetch = fetch
+): Promise<TrentSectionFile | null> {
+	const key = `${chapterSlug}/${sectionSlug}`;
+	let p = trentSectionCache.get(key);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/trent/sections/${chapterSlug}/${sectionSlug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as TrentSectionFile;
+		})();
+		trentSectionCache.set(key, p);
+	}
+	return p;
+}
+
+export function loadTrentParagraphContext(
+	n: number,
+	fetcher: Fetch = fetch
+): Promise<TrentParagraphContext | null> {
+	let p = trentParagraphContextCache.get(n);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/trent/paragraph-context/${n}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as TrentParagraphContext;
+		})();
+		trentParagraphContextCache.set(n, p);
+	}
+	return p;
 }
