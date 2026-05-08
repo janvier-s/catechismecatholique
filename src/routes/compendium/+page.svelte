@@ -43,7 +43,7 @@
 			range: 'Q. 534–598',
 			lede:
 				"Ce que l'Église prie. La quatrième partie est consacrée à la prière chrétienne et " +
-				"culmine dans la méditation du Notre Père, la prière que le Seigneur lui-même a " +
+				'culmine dans la méditation du Notre Père, la prière que le Seigneur lui-même a ' +
 				'enseignée à ses disciples.'
 		}
 	];
@@ -62,8 +62,8 @@
 		<p class="hero-kicker">Édition française</p>
 		<h1 class="hero-title">Compendium du Catéchisme</h1>
 		<p class="hero-lede">
-			Promulgué par Benoît&nbsp;XVI en 2005, le Compendium présente l'essentiel de la foi
-			catholique en 598 questions et réponses,<br />
+			Promulgué par Benoît&nbsp;XVI en 2005, le Compendium présente l'essentiel de la foi catholique
+			en 598 questions et réponses,<br />
 			fidèles à la structure du Catéchisme : ce que l'Église croit, célèbre, vit et prie.
 		</p>
 	</header>
