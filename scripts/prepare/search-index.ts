@@ -4,17 +4,35 @@ import type { Paragraph, Chapter, ParagraphContext } from '../../src/lib/data/ty
 
 export interface SearchDoc {
 	id: string;
-	kind: 'paragraph' | 'heading';
+	kind: 'paragraph' | 'heading' | 'compendium-question';
 	number?: number;
 	text: string;
 	title?: string; // breadcrumb / chapter title
 	paragraph_start?: number; // for heading hits — link target
 	chapter_slug?: string;
+	corpus?: 'ccc' | 'compendium';
+	compendium_part?: string;
+}
+
+export interface CompendiumSearchDoc {
+	number: number;
+	question: string;
+	answer: string;
+	partSlug: string;
 }
 
 const OPTIONS = {
 	fields: ['text', 'title'],
-	storeFields: ['kind', 'number', 'text', 'title', 'paragraph_start', 'chapter_slug'],
+	storeFields: [
+		'kind',
+		'number',
+		'text',
+		'title',
+		'paragraph_start',
+		'chapter_slug',
+		'corpus',
+		'compendium_part'
+	],
 	tokenize: searchTokenizer,
 	processTerm
 };
@@ -30,7 +48,8 @@ function stripHtml(s: string): string {
 export function buildSearchIndex(
 	paragraphs: Paragraph[],
 	chapters: Chapter[],
-	contexts: Record<number, ParagraphContext> // eslint-disable-line @typescript-eslint/no-unused-vars
+	contexts: Record<number, ParagraphContext>,
+	compendium: CompendiumSearchDoc[] = []
 ): { documents: SearchDoc[]; serialized: string } {
 	const docs: SearchDoc[] = [];
 
@@ -62,6 +81,18 @@ export function buildSearchIndex(
 			});
 		for (const h of ch.headings) collect(h);
 		for (const a of ch.articles) for (const h of a.headings) collect(h);
+	}
+
+	for (const q of compendium) {
+		docs.push({
+			id: `c:${q.number}`,
+			kind: 'compendium-question',
+			number: q.number,
+			text: `${q.question} ${q.answer}`,
+			title: '',
+			corpus: 'compendium',
+			compendium_part: q.partSlug
+		});
 	}
 
 	const ms = new MiniSearch(OPTIONS);

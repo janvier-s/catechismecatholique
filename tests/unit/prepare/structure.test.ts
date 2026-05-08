@@ -62,7 +62,7 @@ describe('buildStructure', () => {
 		const result = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 		const part = result.parts[1]!;
 		const chapter = part.sections[0]!.chapters[0]!;
-		expect(chapter.slug).toBe('lhomme-est-capable-de-dieu');
+		expect(chapter.slug).toBe('1-homme-est-capable-de-dieu');
 	});
 
 	it('records paragraph numbers per chapter', () => {
@@ -71,14 +71,15 @@ describe('buildStructure', () => {
 		expect(chapter.paragraphs).toContain(27);
 	});
 
-	it('throws on slug collision within parent', () => {
+	it('disambiguates slug collision within parent using numbered prefix', () => {
 		const colliding = [
 			{ type: 'part', title: 'A', children: [] },
 			{ type: 'part', title: 'A', children: [] }
 		];
-		expect(() => buildStructure(colliding as Parameters<typeof buildStructure>[0])).toThrow(
-			/Slug collision/
-		);
+		const result = buildStructure(colliding as Parameters<typeof buildStructure>[0]);
+		// Parts get different numbered prefixes: 1-a, 2-a — no collision.
+		expect(result.parts[0]!.slug).toBe('1-a');
+		expect(result.parts[1]!.slug).toBe('2-a');
 	});
 
 	describe('intro_paragraphs capture', () => {

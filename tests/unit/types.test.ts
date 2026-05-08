@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { Paragraph } from '$lib/data/types';
+import type { Paragraph, Corpus, CompendiumQuestion, CompendiumPart } from '$lib/data/types';
 
 describe('data types', () => {
 	it('Paragraph type compiles', () => {
@@ -13,5 +13,51 @@ describe('data types', () => {
 			magisterial_refs: []
 		};
 		expect(p.corpus).toBe('ccc');
+	});
+});
+
+describe('Compendium types', () => {
+	it('Corpus accepts both ccc and compendium', () => {
+		const ccc: Corpus = 'ccc';
+		const comp: Corpus = 'compendium';
+		expect(ccc).toBe('ccc');
+		expect(comp).toBe('compendium');
+	});
+
+	it('CompendiumQuestion shape compiles', () => {
+		const q: CompendiumQuestion = {
+			corpus: 'compendium',
+			number: 1,
+			question: 'Q?',
+			answer_html: '<p>A</p>',
+			ccc_refs: [27, 28],
+			bible_refs: []
+		};
+		expect(q.number).toBe(1);
+	});
+
+	it('CompendiumPart flow accepts heading, epigraph, prose and question nodes', () => {
+		const part: CompendiumPart = {
+			slug: 'profession-foi',
+			number: 1,
+			title: 'La profession de la foi',
+			flow: [
+				{ kind: 'heading', level: 2, id: 'h1', title: 'H' },
+				{ kind: 'epigraph', text: 'quote', attribution: 'St Augustin' },
+				{ kind: 'prose', html: '<p>Pater noster…</p>' },
+				{
+					kind: 'question',
+					data: {
+						corpus: 'compendium',
+						number: 1,
+						question: '?',
+						answer_html: '<p>.</p>',
+						ccc_refs: [],
+						bible_refs: []
+					}
+				}
+			]
+		};
+		expect(part.flow).toHaveLength(4);
 	});
 });

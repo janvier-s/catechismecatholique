@@ -4,7 +4,7 @@ test('paragraph-number search redirects', async ({ page }) => {
 	await page.goto('/');
 	await page.getByLabel('Recherche', { exact: true }).fill('27');
 	await page.getByLabel('Recherche', { exact: true }).press('Enter');
-	await expect(page).toHaveURL(/\/ccc\/27$/);
+	await expect(page).toHaveURL(/\/cec\/27$/);
 });
 
 test('bible-ref search redirects', async ({ page }) => {

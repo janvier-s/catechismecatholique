@@ -21,6 +21,7 @@
 	const requested = new SvelteSet<number>();
 	$effect(() => {
 		for (const h of data.hits) {
+			if (h.kind === 'compendium-question') continue;
 			const num = h.kind === 'paragraph' ? h.number : h.paragraph_start;
 			if (!num || requested.has(num)) continue;
 			requested.add(num);
@@ -43,9 +44,14 @@
 	const PAGE_SIZE = 30;
 	let visiblePages = $state(1);
 
-	// Active filter tab — Tout / Sections / Paragraphes. URL state is canonical.
-	const activeType = $derived<'all' | 'headings' | 'paragraphs'>(
-		(page.url.searchParams.get('type') as 'all' | 'headings' | 'paragraphs' | null) ?? 'all'
+	// Active filter tab — Tout / Sections / Paragraphes / Compendium. URL state is canonical.
+	const activeType = $derived<'all' | 'headings' | 'paragraphs' | 'compendium'>(
+		(page.url.searchParams.get('type') as
+			| 'all'
+			| 'headings'
+			| 'paragraphs'
+			| 'compendium'
+			| null) ?? 'all'
 	);
 
 	$effect(() => {
@@ -201,11 +207,12 @@
 	type Hit = PageData['hits'][number];
 
 	function hitHref(h: Hit): string {
-		if (h.kind === 'paragraph') return `/ccc/${h.number}`;
+		if (h.kind === 'compendium-question') return `/compendium/q/${h.number}`;
+		if (h.kind === 'paragraph') return `/cec/${h.number}`;
 		const anchor = h.id.split('#')[1] ?? '';
-		if (h.paragraph_start) return `/ccc/${h.paragraph_start}${anchor ? '#' + anchor : ''}`;
-		if (h.chapter_slug) return `/ccc/${h.chapter_slug}${anchor ? '#' + anchor : ''}`;
-		return '/ccc';
+		if (h.paragraph_start) return `/cec/${h.paragraph_start}${anchor ? '#' + anchor : ''}`;
+		if (h.chapter_slug) return `/cec/${h.chapter_slug}${anchor ? '#' + anchor : ''}`;
+		return '/cec';
 	}
 
 	function hitMatchTerms(h: Hit): string[] {
@@ -222,6 +229,7 @@
 	}
 
 	function hitContextLine(h: Hit): string | null {
+		if (h.kind === 'compendium-question') return h.compendium_part ?? null;
 		const num = h.kind === 'paragraph' ? h.number : h.paragraph_start;
 		if (!num) return null;
 		const ctx = contexts[num];
@@ -242,17 +250,22 @@
 
 	const headingCount = $derived(data.hits.filter((h) => h.kind === 'heading').length);
 	const paragraphCount = $derived(data.hits.filter((h) => h.kind === 'paragraph').length);
+	const compendiumCount = $derived(
+		data.hits.filter((h) => h.kind === 'compendium-question').length
+	);
 	const totalCount = $derived(data.hits.length);
 
 	const filteredHits = $derived.by<Hit[]>(() => {
 		if (activeType === 'headings') return data.hits.filter((h) => h.kind === 'heading');
 		if (activeType === 'paragraphs') return data.hits.filter((h) => h.kind === 'paragraph');
+		if (activeType === 'compendium')
+			return data.hits.filter((h) => h.kind === 'compendium-question');
 		return data.hits;
 	});
 	const visibleHits = $derived(filteredHits.slice(0, visiblePages * PAGE_SIZE));
 	const hasMore = $derived(visibleHits.length < filteredHits.length);
 
-	function tabHref(type: 'all' | 'headings' | 'paragraphs'): string {
+	function tabHref(type: 'all' | 'headings' | 'paragraphs' | 'compendium'): string {
 		// Plain string assembly — URLSearchParams would trigger
 		// svelte/prefer-svelte-reactivity, but this is a one-shot pure
 		// builder with no reactivity needed.
@@ -404,9 +417,9 @@
 			</ul>
 
 			<p class="mt-12 pt-6 border-t border-border/60 font-ui text-[12px] text-muted text-center">
-				Parcourir le Catéchisme&nbsp;: <a class="browse-link" href="/ccc/sommaire">Sommaire</a>
+				Parcourir le Catéchisme&nbsp;: <a class="browse-link" href="/cec/sommaire">Sommaire</a>
 				<span aria-hidden="true">·</span>
-				<a class="browse-link" href="/ccc/prologue">Prologue</a>
+				<a class="browse-link" href="/cec/prologue">Prologue</a>
 				<span aria-hidden="true">·</span>
 				<a class="browse-link" href="/glossaire">Glossaire</a>
 			</p>
@@ -424,7 +437,7 @@
 				>
 			</p>
 			<p class="mt-2 font-ui text-[13px]">
-				<a class="browse-link" href="/ccc/sommaire">Voir le Sommaire du Catéchisme →</a>
+				<a class="browse-link" href="/cec/sommaire">Voir le Sommaire du Catéchisme →</a>
 			</p>
 		</section>
 	{:else}
@@ -463,6 +476,16 @@
 				>
 					Paragraphes <span class="tabular-nums text-muted">({paragraphCount})</span>
 				</a>
+				{#if compendiumCount > 0}
+					<a
+						href={tabHref('compendium')}
+						class="tab"
+						class:active={activeType === 'compendium'}
+						aria-current={activeType === 'compendium' ? 'true' : undefined}
+					>
+						Compendium <span class="tabular-nums text-muted">({compendiumCount})</span>
+					</a>
+				{/if}
 			</nav>
 
 			{#if visibleHits.length > 5}
@@ -482,6 +505,14 @@
 								</div>
 								<div class="result-headline">
 									{@html highlight(h.text, hitMatchTerms(h))}
+								</div>
+							{:else if h.kind === 'compendium-question'}
+								<div class="result-eyebrow tabular-nums">
+									<span class="tag">COMPENDIUM</span>
+									<span class="ref">Q. {h.number}</span>
+								</div>
+								<div class="result-snippet">
+									{@html snippetHtml(h)}
 								</div>
 							{:else}
 								<div class="result-eyebrow tabular-nums">

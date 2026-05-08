@@ -3,8 +3,8 @@
 	import { loadParagraph } from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
-	import ParagraphRenderer from '../ccc/ParagraphRenderer.svelte';
-	import CitationBlock from '../ccc/CitationBlock.svelte';
+	import ParagraphRenderer from '../cec/ParagraphRenderer.svelte';
+	import CitationBlock from '../cec/CitationBlock.svelte';
 
 	let {
 		numbers,
@@ -32,7 +32,7 @@
 		{#each paragraphs as p (p.number)}
 			<div>
 				<a
-					href="/ccc/{p.number}"
+					href="/cec/{p.number}"
 					onclick={() => onEntryNumberClick(p.number)}
 					class="block mb-1 text-sm font-semibold text-accent tabular-nums hover:underline font-ui"
 				>

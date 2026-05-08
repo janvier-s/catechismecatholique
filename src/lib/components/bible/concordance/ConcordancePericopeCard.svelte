@@ -10,7 +10,7 @@
 		return from === to ? String(from) : `${from}-${to}`;
 	}
 	function rangeHref(from: number, to: number): string {
-		return from === to ? `/ccc/${from}` : `/ccc/${from}-${to}`;
+		return from === to ? `/cec/${from}` : `/cec/${from}-${to}`;
 	}
 </script>
 

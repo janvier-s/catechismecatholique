@@ -181,24 +181,35 @@
 		outline-offset: 2px;
 	}
 	/* Mobile: hang the verse number in the 1.5rem left gutter (main pl-6)
-	   so verse text starts at the content edge, aligned with section headings. */
+	   so verse text starts at the content edge, aligned with section
+	   headings. A 2-column grid (number gutter | text) shifted left by
+	   the gutter width gives clean, predictable alignment without the
+	   "wrap around" that absolute/float approaches can produce. */
 	@media (max-width: 768px) {
 		.verse-row {
-			position: relative;
+			/* Override the Tailwind max-md:block from the markup. */
+			display: grid !important;
+			grid-template-columns: 1.5rem minmax(0, 1fr);
+			column-gap: 0;
+			align-items: baseline;
+			margin-left: -1.5rem;
+			padding-left: 0;
+			padding-right: 0;
 		}
 		.verse-row .verse-num {
-			position: absolute;
-			left: -1.5rem;
-			width: 1.5rem;
+			width: auto;
+			/* Number digit sits at the right of the 1.5rem gutter column, with
+			   a hair of right padding for breathing space. The text column
+			   then starts exactly at the section-heading content edge. */
+			padding: 0 0.35rem 0 0;
 			text-align: right;
-			float: none;
-			margin-right: 0;
-			padding-top: 0;
 			line-height: 1.7;
+			font-size: 11px;
 		}
 		.verse-row .verse-text {
-			display: block;
 			margin: 0;
+			padding: 0;
+			min-width: 0;
 		}
 	}
 </style>

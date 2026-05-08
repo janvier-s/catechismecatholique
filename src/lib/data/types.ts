@@ -1,4 +1,4 @@
-export type Corpus = 'ccc';
+export type Corpus = 'ccc' | 'compendium';
 
 export interface BibleRef {
 	text: string;
@@ -24,6 +24,16 @@ export interface MagisterialRefRecord {
 	raw: string;
 	idx?: string | number;
 	doc_raw?: string;
+	/** Displayed marker number in text + side panel. For cluster members this
+	 *  points to the cluster leader's idx so the side panel groups all verses
+	 *  under one footnote number. Solo refs leave it undefined (display marker
+	 *  equals their own idx). */
+	marker_idx?: number;
+	/** Sequential 1-based number to display in the marker (in prose AND in the
+	 *  side panel). Differs from `idx` because clustering removes some sups, so
+	 *  surviving sups are renumbered consecutively. Cluster members share their
+	 *  leader's `display_idx`. */
+	display_idx?: number;
 }
 
 export interface Paragraph {
@@ -264,7 +274,7 @@ export type NclSectionMap = Record<string, NclSection[]>; // keyed by USFX
 /**
  * A contiguous CCC paragraph range. A bare paragraph number is `{from: n, to: n}`.
  * Source ranges like `337-354` are preserved as a single entry so the UI can
- * render them as one "337-354" chip linking to `/ccc/337-354`.
+ * render them as one "337-354" chip linking to `/cec/337-354`.
  */
 export interface CccRange {
 	from: number;
@@ -358,3 +368,101 @@ export interface GlossaryBundle {
 	clusters: GlossaryClusterMeta[];
 	featured: string[]; // slugs of the top-cited entries
 }
+
+// ─── Compendium ───────────────────────────────────────────────────────────
+
+export interface CompendiumQuestion {
+	corpus: 'compendium';
+	number: number;
+	question: string;
+	answer_html: string;
+	ccc_refs: number[];
+	bible_refs: BibleRef[];
+}
+
+export interface CompendiumHeadingNode {
+	kind: 'heading';
+	/**
+	 * 2 = section (under a Part — large serif h2 with rule)
+	 * 3 = subsection / "chapter" (medium ui h3 in accent)
+	 * 4 = sub-subsection (smaller h4, muted)
+	 */
+	level: 2 | 3 | 4;
+	id: string;
+	title: string;
+	/**
+	 * Optional eyebrow rendered above/before the title. Used by the build
+	 * pipeline to label Compendium chapters as "Chapitre I", "Chapitre II"
+	 * etc. (level-3 entries get this; level-2 and level-4 don't).
+	 */
+	kicker?: string;
+	/** First and last question numbers under this heading (range). */
+	q_range?: [number, number];
+}
+
+export interface CompendiumEpigraphNode {
+	kind: 'epigraph';
+	text: string;
+	attribution?: string;
+}
+
+export interface CompendiumQuestionNode {
+	kind: 'question';
+	data: CompendiumQuestion;
+}
+
+/** Static prose block (used by the appendix: doctrinal formulas, etc). */
+export interface CompendiumProseNode {
+	kind: 'prose';
+	html: string;
+}
+
+/** Bilingual prayer block — French and Latin laid out side by side.
+ *  `body` strings are plain text with `\n` between lines and `\n\n`
+ *  between paragraphs; the renderer is responsible for line-break styling. */
+export interface CompendiumPrayerNode {
+	kind: 'prayer';
+	fr: { title?: string; body: string };
+	la: { title?: string; body: string };
+}
+
+export type CompendiumFlowNode =
+	| CompendiumHeadingNode
+	| CompendiumEpigraphNode
+	| CompendiumQuestionNode
+	| CompendiumProseNode
+	| CompendiumPrayerNode;
+
+export interface CompendiumPart {
+	slug: string;
+	number?: 1 | 2 | 3 | 4;
+	title: string;
+	flow: CompendiumFlowNode[];
+}
+
+export interface CompendiumStructureSection {
+	title: string;
+	subsections?: { title: string; q_range: [number, number] }[];
+	q_range: [number, number];
+}
+
+export interface CompendiumStructurePart {
+	slug: string;
+	number: 1 | 2 | 3 | 4;
+	title: string;
+	sections: CompendiumStructureSection[];
+}
+
+export interface CompendiumStructure {
+	parts: CompendiumStructurePart[];
+	appendix?: { slug: 'annexe'; title: string };
+}
+
+export interface CompendiumQRange {
+	part: string;
+	from: number;
+	to: number;
+}
+
+/** Reverse index: ccc paragraph number → compendium question numbers citing it. */
+export type CompendiumCitedBy = Record<number, number[]>;

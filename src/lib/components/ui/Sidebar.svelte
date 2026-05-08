@@ -2,8 +2,20 @@
 	import { page } from '$app/state';
 	import { sidebarOpen } from '$lib/stores/sidebar';
 	import { activeHeading } from '$lib/stores/scrollSpy';
-	import { loadStructure, loadChapter, loadParagraphContext } from '$lib/data/loaders';
-	import type { Chapter, ParagraphContext } from '$lib/data/types';
+	import {
+		loadStructure,
+		loadChapter,
+		loadParagraphContext,
+		loadCompendiumStructure,
+		loadCompendiumPart
+	} from '$lib/data/loaders';
+	import type {
+		Chapter,
+		ParagraphContext,
+		Corpus,
+		CompendiumStructure,
+		CompendiumPart
+	} from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
 	type Heading = { id: string; title: string; paragraph_start: number; level?: number };
@@ -44,8 +56,14 @@
 		href: string;
 		number?: number;
 		typeLabel?: string;
+		/** Heading level for compendium entries (2, 3, 4). Drives sidebar styling. */
+		level?: 2 | 3 | 4;
+		/** Eyebrow above the title (e.g. "Chapitre II") for compendium h3 entries. */
+		kicker?: string;
 		children?: Item[];
 	};
+
+	let { corpus = 'ccc' as Corpus }: { corpus?: Corpus } = $props();
 
 	let structure: { parts: Part[] } | null = $state(null);
 	let activeChapter: Chapter | null = $state(null);
@@ -53,27 +71,58 @@
 	let navEl: HTMLElement | undefined = $state();
 
 	$effect(() => {
+		if (corpus !== 'ccc') return;
 		(async () => {
 			structure = (await loadStructure()) as { parts: Part[] };
 		})();
 	});
 
-	// Detect a paragraph URL like /ccc/{n} or /ccc/{n}-{m} → derive the deepest
+	// ─── Compendium state ─────────────────────────────────────────────────────
+	let compendiumStructure: CompendiumStructure | null = $state(null);
+	let activeCompendiumPart: CompendiumPart | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'compendium') return;
+		(async () => {
+			compendiumStructure = await loadCompendiumStructure();
+		})();
+	});
+
+	$effect(() => {
+		if (corpus !== 'compendium') return;
+		const m = page.url.pathname.match(/^\/compendium\/([^/]+)/);
+		const slug = m ? m[1] : null;
+		if (!slug) {
+			activeCompendiumPart = null;
+			return;
+		}
+		if (activeCompendiumPart?.slug === slug) return;
+		(async () => {
+			try {
+				activeCompendiumPart = await loadCompendiumPart(slug);
+			} catch {
+				activeCompendiumPart = null;
+			}
+		})();
+	});
+
+	// Detect a paragraph URL like /cec/{n} or /cec/{n}-{m} → derive the deepest
 	// container the paragraph belongs to (article > chapter > section > part)
 	// so the sidebar can highlight it AND auto-load the chapter detail. Out-of-
-	// range numbers (e.g. /ccc/99999) yield null so we don't speculatively 404
+	// range numbers (e.g. /cec/99999) yield null so we don't speculatively 404
 	// the per-paragraph context shard.
 	const activeParagraph = $derived.by(() => {
-		const m = page.url.pathname.match(/^\/ccc\/(\d+)(?:-\d+)?$/);
+		const m = page.url.pathname.match(/^\/cec\/(\d+)(?:-\d+)?$/);
 		if (!m) return null;
 		const n = parseInt(m[1]!, 10);
 		return n >= 1 && n <= 2865 ? n : null;
 	});
 
 	// Per-paragraph context lookup (~30 byte shard) — replaces a 1.83 MB bundle
-	// fetch that the audit flagged as the largest avoidable payload on /ccc.
+	// fetch that the audit flagged as the largest avoidable payload on /cec.
 	let ctxLoadGen = 0;
 	$effect(() => {
+		if (corpus !== 'ccc') return;
 		if (activeParagraph === null) {
 			activeContext = null;
 			return;
@@ -90,22 +139,27 @@
 	function deepestHref(c: ParagraphContext): string {
 		const hash = c.heading ? `#${c.heading.id}` : '';
 		if (c.article && c.section && c.chapter) {
-			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}${hash}`;
+			return `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}${hash}`;
 		}
 		if (c.chapter && c.section) {
-			return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${hash}`;
+			return `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${hash}`;
 		}
 		// articles_direct: article belongs to section with no enclosing chapter
 		if (c.article && c.section) {
-			return `/ccc/${c.part.slug}/${c.section.slug}/${c.article.slug}${hash}`;
+			return `/cec/${c.part.slug}/${c.section.slug}/${c.article.slug}${hash}`;
 		}
 		if (c.section) {
-			return `/ccc/${c.part.slug}/${c.section.slug}`;
+			return `/cec/${c.part.slug}/${c.section.slug}`;
 		}
-		return `/ccc/${c.part.slug}`;
+		return `/cec/${c.part.slug}`;
 	}
 
 	const activeHref: string = $derived.by(() => {
+		if (corpus === 'compendium') {
+			const ah = $activeHeading;
+			const hash = ah && ah.pathname === page.url.pathname ? `#${ah.id}` : '';
+			return page.url.pathname + hash;
+		}
 		if (activeParagraph === null) {
 			// On non-paragraph URLs (article / chapter / section / part), append
 			// the scroll-spy heading hash so the Sidebar highlights the section
@@ -141,7 +195,8 @@
 	// whose context places it in a chapter — so we can expand headings/en_brefs.
 	let chapterLoadGen = 0;
 	$effect(() => {
-		const m = page.url.pathname.match(/^\/ccc\/[^/]+\/[^/]+\/([^/]+)/);
+		if (corpus !== 'ccc') return;
+		const m = page.url.pathname.match(/^\/cec\/[^/]+\/[^/]+\/([^/]+)/);
 		const directSlug = m ? m[1]! : null;
 		const c = activeContext as ParagraphContext | null;
 		const ctxSlug: string | null = c && c.chapter ? c.chapter.slug : null;
@@ -166,7 +221,7 @@
 	});
 
 	function chapterChildren(ch: Chap, partSlug: string, sectionSlug: string): Item[] {
-		const baseHref = `/ccc/${partSlug}/${sectionSlug}/${ch.slug}`;
+		const baseHref = `/cec/${partSlug}/${sectionSlug}/${ch.slug}`;
 		const out: Item[] = [];
 		const detail = activeChapter && activeChapter.slug === ch.slug ? activeChapter : null;
 
@@ -339,22 +394,78 @@
 	}
 
 	const tree: Item[] = $derived.by(() => {
+		if (corpus === 'compendium') {
+			if (!compendiumStructure) return [];
+			return compendiumStructure.parts.map((part): Item => {
+				const partHref = `/compendium/${part.slug}`;
+				const isActive = activeCompendiumPart?.slug === part.slug;
+				let children: Item[] | undefined;
+				if (isActive && activeCompendiumPart) {
+					// Build a 3-deep heading tree (h2 → h3 → h4). Individual
+					// questions are NOT included — the sidebar is a structural
+					// outline of the part, not a Q-by-Q index.
+					children = [];
+					let currentH2: Item | null = null;
+					let currentH3: Item | null = null;
+					for (const node of activeCompendiumPart.flow) {
+						if (node.kind !== 'heading') continue;
+						const item: Item = {
+							title: node.title,
+							href: `${partHref}#${node.id}`,
+							level: node.level,
+							...(node.kicker ? { kicker: node.kicker } : {})
+						};
+						if (node.level === 2) {
+							children.push(item);
+							currentH2 = item;
+							currentH3 = null;
+						} else if (node.level === 3) {
+							const parent = currentH2 ?? null;
+							if (parent) (parent.children = parent.children ?? []).push(item);
+							else children.push(item);
+							currentH3 = item;
+						} else {
+							// level 4
+							const parent = currentH3 ?? currentH2 ?? null;
+							if (parent) (parent.children = parent.children ?? []).push(item);
+							else children.push(item);
+						}
+					}
+				} else {
+					// Non-active parts: show just the depth-2 sections as a peek.
+					children = part.sections.map(
+						(sec): Item => ({
+							title: sec.title,
+							href: `${partHref}#s-${sec.title.toLowerCase().replace(/\s+/g, '-')}`
+						})
+					);
+				}
+				return {
+					title: part.title,
+					number: part.number,
+					typeLabel: 'Partie',
+					href: partHref,
+					children: children && children.length > 0 ? children : undefined
+				};
+			});
+		}
+		// ─── CCC tree ─────────────────────────────────────────────────────────
 		if (!structure) return [];
 		return structure.parts.map((part): Item => {
 			if (part.prologue) {
-				return { title: part.title, href: `/ccc/prologue` };
+				return { title: part.title, href: `/cec/prologue` };
 			}
 			return {
 				title: part.title,
 				number: part.number,
 				typeLabel: 'Partie',
-				href: `/ccc/${part.slug}`,
+				href: `/cec/${part.slug}`,
 				children: part.sections.map(
 					(section): Item => ({
 						title: section.title,
 						number: section.number,
 						typeLabel: 'Section',
-						href: `/ccc/${part.slug}/${section.slug}`,
+						href: `/cec/${part.slug}/${section.slug}`,
 						children: [
 							...section.chapters.map((chapter): Item => {
 								const children = chapterChildren(chapter, part.slug, section.slug);
@@ -362,7 +473,7 @@
 									title: chapter.title,
 									number: chapter.number,
 									typeLabel: 'Chapitre',
-									href: `/ccc/${part.slug}/${section.slug}/${chapter.slug}`,
+									href: `/cec/${part.slug}/${section.slug}/${chapter.slug}`,
 									children: children.length > 0 ? children : undefined
 								};
 							}),
@@ -371,7 +482,7 @@
 									title: article.title,
 									number: article.number,
 									typeLabel: 'Article',
-									href: `/ccc/${part.slug}/${section.slug}/${article.slug}`
+									href: `/cec/${part.slug}/${section.slug}/${article.slug}`
 								})
 							)
 						]
@@ -405,7 +516,7 @@
 	<nav
 		bind:this={navEl}
 		class="flex-1 overflow-y-auto p-3 font-ui styled-scroll styled-scroll-accent"
-		aria-label="Plan du Catéchisme"
+		aria-label={corpus === 'compendium' ? 'Plan du Compendium' : 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">

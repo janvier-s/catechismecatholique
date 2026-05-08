@@ -1,4 +1,4 @@
-import { slugify, uniqueSlug } from './slug';
+import { slugify, numberedSlug } from './slug';
 import { sentenceCase } from './sentence-case';
 import { normalizeGuillemets, stripBibRefColonMarkers } from './source-data-fixes';
 
@@ -174,13 +174,14 @@ function buildArticle(aRaw: RawNode, articleSlugs: Set<string>): BuiltArticle {
 	const aTitle = stripBibRefColonMarkers(
 		normalizeGuillemets(sentenceCase(stripPrefix(aRaw.title ?? '', ARTICLE_PREFIX)))
 	);
-	const aSlug = uniqueSlug(aTitle, articleSlugs);
+	const aNumber = readArticleNumber(aRaw.title ?? '') ?? 0;
+	const aSlug = numberedSlug(aNumber, aTitle, 30, articleSlugs);
 	const aParas: number[] = [];
 	collectParagraphs(aRaw, aParas);
 	return {
 		slug: aSlug,
 		title: aTitle,
-		number: readArticleNumber(aRaw.title ?? ''),
+		number: aNumber || undefined,
 		headings: collectHeadings(aRaw.children ?? []),
 		paragraphs: aParas,
 		range: rangeOf(aParas)
@@ -199,14 +200,16 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			: stripBibRefColonMarkers(
 					normalizeGuillemets(sentenceCase(stripPrefix(partRaw.title ?? '', PART_PREFIX)))
 				);
-		const partSlug = isPrologue ? 'prologue' : uniqueSlug(partTitle, partSlugs);
+		let partSlug: string;
 		if (isPrologue) {
+			partSlug = 'prologue';
 			if (partSlugs.has(partSlug)) {
 				throw new Error(`Slug collision: "${partSlug}" (from title "${partRaw.title}")`);
 			}
 			partSlugs.add(partSlug);
 		} else {
 			partNumber++;
+			partSlug = numberedSlug(partNumber, partTitle, 30, partSlugs);
 		}
 
 		const sectionSlugs = new Set<string>();
@@ -219,7 +222,7 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 			const sectionTitle = stripBibRefColonMarkers(
 				normalizeGuillemets(sentenceCase(stripPrefix(childRaw.title ?? '', SECTION_PREFIX)))
 			);
-			const sectionSlug = uniqueSlug(sectionTitle, sectionSlugs);
+			const sectionSlug = numberedSlug(sectionNumber, sectionTitle, 30, sectionSlugs);
 
 			const chapterSlugs = new Set<string>();
 			const builtChapters: BuiltChapter[] = [];
@@ -230,7 +233,7 @@ export function buildStructure(parts: RawNode[]): BuiltStructure {
 				const chapTitle = stripBibRefColonMarkers(
 					normalizeGuillemets(sentenceCase(stripPrefix(chapRaw.title ?? '', CHAPITRE_PREFIX)))
 				);
-				const chapSlug = uniqueSlug(chapTitle, chapterSlugs);
+				const chapSlug = numberedSlug(chapterNumber, chapTitle, 30, chapterSlugs);
 
 				const chapParagraphs: number[] = [];
 				collectParagraphs(chapRaw, chapParagraphs);

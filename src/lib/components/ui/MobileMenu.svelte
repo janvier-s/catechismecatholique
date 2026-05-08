@@ -76,9 +76,11 @@
 		{
 			title: 'Catéchisme',
 			links: [
-				{ href: '/ccc', label: 'Lire le Catéchisme' },
-				{ href: '/ccc/sommaire', label: 'Sommaire' },
-				{ href: '/ccc/panorama', label: 'Panorama' },
+				{ href: '/cec', label: 'Lire le Catéchisme' },
+				{ href: '/cec/sommaire', label: 'Sommaire' },
+				{ href: '/cec/panorama', label: 'Panorama' },
+				{ href: '/compendium', label: 'Compendium' },
+				{ href: '/prieres-formules', label: 'Prières & Formules' },
 				{ href: '/glossaire', label: 'Glossaire' },
 				{ href: '/recherche', label: 'Recherche' }
 			]

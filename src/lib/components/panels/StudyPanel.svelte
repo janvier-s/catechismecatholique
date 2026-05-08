@@ -3,7 +3,13 @@
 	import { get } from 'svelte/store';
 	import { fly } from 'svelte/transition';
 	import { studyPanel, openPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
-	import { loadParagraph, loadCitedBy, loadParagraphContext, loadChapter } from '$lib/data/loaders';
+	import {
+		loadParagraph,
+		loadCitedBy,
+		loadParagraphContext,
+		loadChapter,
+		loadCompendiumCitedBy
+	} from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
 	import TabBibleRefs from './TabBibleRefs.svelte';
@@ -13,10 +19,12 @@
 	import TabSources from './TabSources.svelte';
 	import TabBibleVerse from './TabBibleVerse.svelte';
 	import TabConcordance from './TabConcordance.svelte';
+	import TabCompendium from './TabCompendium.svelte';
+	import TabStrip from './TabStrip.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
 	// When the panel is open and the user navigates to a paragraph route
-	// (/ccc/{n} or /ccc/{n}-{m}), update the panel's context to follow.
+	// (/cec/{n} or /cec/{n}-{m}), update the panel's context to follow.
 	// Read the URL reactively, but pull store state with `get` so this effect
 	// only re-runs on URL changes — otherwise updating the store inside this
 	// effect would loop and clobber explicit context changes from elsewhere.
@@ -24,7 +32,7 @@
 		const path = page.url.pathname;
 		const s = get(studyPanel);
 		if (!s.open) return;
-		const m = path.match(/^\/ccc\/(\d+)(?:-\d+)?$/);
+		const m = path.match(/^\/cec\/(\d+)(?:-\d+)?$/);
 		if (!m) return;
 		const n = parseInt(m[1]!, 10);
 		if (!Number.isFinite(n)) return;
@@ -34,17 +42,19 @@
 
 	type TabDef = { id: PanelTab; label: string };
 	const ALL_TABS: TabDef[] = [
-		{ id: 'bible', label: 'Bible' },
 		{ id: 'cross-refs', label: 'Renvois' },
-		{ id: 'cited-by', label: 'Cités par' },
+		{ id: 'cited-by', label: 'Cités dans' },
 		{ id: 'sources', label: 'Sources' },
-		{ id: 'en-bref', label: 'En Bref' },
-		{ id: 'concordance', label: 'Concordance' }
+		{ id: 'compendium', label: 'Compendium' },
+		{ id: 'bible', label: 'Bible' },
+		{ id: 'concordance', label: 'Concordance' },
+		{ id: 'en-bref', label: 'En Bref' }
 	];
 
 	let paragraph: Paragraph | null = $state(null);
 	let citedByList: number[] = $state([]);
 	let hasEnBref: boolean = $state(false);
+	let compendiumCiters: number[] = $state([]);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
@@ -52,6 +62,7 @@
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
+			compendiumCiters = [];
 			return;
 		}
 		// Bible-verse mode has no paragraph context; TabBibleVerse loads its own data.
@@ -59,17 +70,20 @@
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
+			compendiumCiters = [];
 			return;
 		}
 		const paragraphNum = ctx.paragraph;
 		(async () => {
-			const [p, citedBy, pc] = await Promise.all([
+			const [p, citedBy, pc, compendiumCB] = await Promise.all([
 				loadParagraph(paragraphNum),
 				loadCitedBy(),
-				loadParagraphContext(paragraphNum)
+				loadParagraphContext(paragraphNum),
+				loadCompendiumCitedBy()
 			]);
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
+			compendiumCiters = compendiumCB[paragraphNum] ?? [];
 
 			// hasEnBref: the paragraph's chapter has at least one en_bref block
 			if (pc?.chapter) {
@@ -99,20 +113,25 @@
 		const sourcesCount = paragraph.magisterial_refs.filter(
 			(r) => r.type === 'magisterial' || r.type === 'patristic' || r.type === 'liturgical'
 		).length;
-		// Cités par hidden if the citers are exactly the same set as cross_refs
+		// Cités dans hidden if the citers are exactly the same set as cross_refs
 		const citerSet = new Set(citedByList.map(String));
 		const crossSet = new Set(paragraph.cross_refs);
 		const sameAsRenvois =
 			citerSet.size === crossSet.size && [...citerSet].every((x) => crossSet.has(x));
 		const hasCitedBy = citedByList.length > 0 && !sameAsRenvois;
 
-		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
+		// Order: CCC graph (Renvois then Cités dans) → external corpora citing
+		// this paragraph (Sources then Compendium) → Bible cluster (this
+		// paragraph's verses, then commentary on related verses) → chapter-
+		// level summary (En Bref).
 		if (hasCrossRefs) out.push({ id: 'cross-refs', label: 'Renvois' });
-		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités par' });
+		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités dans' });
 		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
-		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
+		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
+		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
 		// Always show Concordance for paragraph contexts; the tab body handles empty state.
 		out.push({ id: 'concordance', label: 'Concordance' });
+		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
 		return out;
 	});
 
@@ -211,7 +230,7 @@
 				{:else if $studyPanel.context?.kind === 'paragraph'}
 					{@const ctxM = $studyPanel.context}
 					<a
-						href="/ccc/{ctxM.paragraph}"
+						href="/cec/{ctxM.paragraph}"
 						class="text-accent font-semibold hover:underline tabular-nums"
 					>
 						CEC {ctxM.paragraph}
@@ -232,19 +251,11 @@
 				Aucune note d'étude pour ce paragraphe.
 			</div>
 		{:else}
-			<div class="flex border-b border-border font-ui text-xs overflow-x-auto">
-				{#each visibleTabs as tab (tab.id)}
-					<button
-						type="button"
-						class="flex-1 py-2 px-3 hover:bg-accent/10 whitespace-nowrap"
-						class:bg-accent={$studyPanel.activeTab === tab.id}
-						class:!text-white={$studyPanel.activeTab === tab.id}
-						onclick={() => studyPanel.update((s) => ({ ...s, activeTab: tab.id }))}
-					>
-						{tab.label}
-					</button>
-				{/each}
-			</div>
+			<TabStrip
+				tabs={visibleTabs}
+				active={$studyPanel.activeTab}
+				onSelect={(id) => studyPanel.update((s) => ({ ...s, activeTab: id }))}
+			/>
 			<div class="flex-1 overflow-y-auto p-4 styled-scroll">
 				{#if $studyPanel.activeTab === 'bible'}
 					<TabBibleRefs />
@@ -260,6 +271,8 @@
 					<TabConcordance />
 				{:else if $studyPanel.activeTab === 'bible-verse'}
 					<TabBibleVerse />
+				{:else if $studyPanel.activeTab === 'compendium'}
+					<TabCompendium />
 				{/if}
 			</div>
 		{/if}
@@ -281,7 +294,7 @@
 					</span>
 				{:else if ctx?.kind === 'paragraph'}
 					<a
-						href="/ccc/{ctx.paragraph}"
+						href="/cec/{ctx.paragraph}"
 						class="text-accent font-semibold hover:underline tabular-nums"
 					>
 						CEC {ctx.paragraph}
@@ -294,19 +307,11 @@
 					Aucune note d'étude pour ce paragraphe.
 				</div>
 			{:else}
-				<div class="flex border-b border-border font-ui text-xs">
-					{#each visibleTabs as tab (tab.id)}
-						<button
-							type="button"
-							class="flex-1 py-2 hover:bg-accent/10"
-							class:bg-accent={$studyPanel.activeTab === tab.id}
-							class:!text-white={$studyPanel.activeTab === tab.id}
-							onclick={() => studyPanel.update((s) => ({ ...s, activeTab: tab.id }))}
-						>
-							{tab.label}
-						</button>
-					{/each}
-				</div>
+				<TabStrip
+					tabs={visibleTabs}
+					active={$studyPanel.activeTab}
+					onSelect={(id) => studyPanel.update((s) => ({ ...s, activeTab: id }))}
+				/>
 				<div class="flex-1 overflow-y-auto p-4 styled-scroll">
 					{#if $studyPanel.activeTab === 'bible'}
 						<TabBibleRefs />
@@ -322,6 +327,8 @@
 						<TabConcordance />
 					{:else if $studyPanel.activeTab === 'bible-verse'}
 						<TabBibleVerse />
+					{:else if $studyPanel.activeTab === 'compendium'}
+						<TabCompendium />
 					{/if}
 				</div>
 			{/if}

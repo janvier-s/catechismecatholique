@@ -3,9 +3,9 @@
 		<div class="footer-col">
 			<p class="footer-col-head">Catéchisme</p>
 			<ul>
-				<li><a href="/ccc">Lire le Catéchisme</a></li>
-				<li><a href="/ccc/sommaire">Sommaire</a></li>
-				<li><a href="/ccc/panorama">Panorama</a></li>
+				<li><a href="/cec">Lire le Catéchisme</a></li>
+				<li><a href="/cec/sommaire">Sommaire</a></li>
+				<li><a href="/cec/panorama">Panorama</a></li>
 				<li><a href="/glossaire">Glossaire</a></li>
 				<li><a href="/recherche">Recherche</a></li>
 			</ul>

@@ -10,12 +10,14 @@ import type { RequestHandler } from './$types';
 
 interface SearchResultDoc {
 	id: string;
-	kind: 'paragraph' | 'heading';
+	kind: 'paragraph' | 'heading' | 'compendium-question';
 	number?: number;
 	text: string;
 	title?: string;
 	paragraph_start?: number;
 	chapter_slug?: string;
+	corpus?: 'ccc' | 'compendium';
+	compendium_part?: string;
 	score: number;
 	match: Record<string, string[]>;
 }
@@ -39,7 +41,16 @@ async function loadIndex(fetcher: typeof fetch): Promise<MiniSearch> {
 	const raw = await r.text();
 	const ms = MiniSearch.loadJSON(raw, {
 		fields: ['text', 'title'],
-		storeFields: ['kind', 'number', 'text', 'title', 'paragraph_start', 'chapter_slug'],
+		storeFields: [
+			'kind',
+			'number',
+			'text',
+			'title',
+			'paragraph_start',
+			'chapter_slug',
+			'corpus',
+			'compendium_part'
+		],
 		tokenize: searchTokenizer,
 		processTerm
 	});
@@ -174,12 +185,14 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 	const ranked = applyPhraseBoost(positioned, tokens).slice(0, 200);
 	const hits: SearchResultDoc[] = ranked.map((r) => ({
 		id: r.id as string,
-		kind: r.kind as 'paragraph' | 'heading',
+		kind: r.kind as 'paragraph' | 'heading' | 'compendium-question',
 		number: r.number as number | undefined,
 		text: trimText(r.text as string, tokens),
 		title: r.title as string | undefined,
 		paragraph_start: r.paragraph_start as number | undefined,
 		chapter_slug: r.chapter_slug as string | undefined,
+		corpus: r.corpus as 'ccc' | 'compendium' | undefined,
+		compendium_part: r.compendium_part as string | undefined,
 		score: r.score,
 		match: r.match
 	}));

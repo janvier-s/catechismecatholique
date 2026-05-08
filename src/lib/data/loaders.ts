@@ -9,7 +9,11 @@ import type {
 	ConcordanceChapter,
 	ConcordanceByParagraphEntry,
 	NclSectionMap,
-	NclBook
+	NclBook,
+	CompendiumStructure,
+	CompendiumPart,
+	CompendiumCitedBy,
+	CompendiumQRange
 } from './types';
 
 type Fetch = typeof fetch;
@@ -40,7 +44,7 @@ let nclManifestPromise: Promise<Set<string>> | null = null;
 const nclBookCache = new Map<string, Promise<NclBook | null>>();
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
-	return fetchJson<Paragraph>(`/data/ccc/paragraphs/${n}.json`, fetcher);
+	return fetchJson<Paragraph>(`/data/cec/paragraphs/${n}.json`, fetcher);
 }
 
 // Module-level cache: chapter JSON is static once built. The Sidebar reloads
@@ -50,7 +54,7 @@ const chapterPromises = new Map<string, Promise<Chapter>>();
 export function loadChapter(slug: string, fetcher: Fetch = fetch): Promise<Chapter> {
 	let p = chapterPromises.get(slug);
 	if (!p) {
-		p = fetchJson<Chapter>(`/data/ccc/chapters/${slug}.json`, fetcher);
+		p = fetchJson<Chapter>(`/data/cec/chapters/${slug}.json`, fetcher);
 		chapterPromises.set(slug, p);
 	}
 	return p;
@@ -65,25 +69,25 @@ const chapterFullPromises = new Map<string, Promise<ChapterFullBundle>>();
 export function loadChapterFull(slug: string, fetcher: Fetch = fetch): Promise<ChapterFullBundle> {
 	let p = chapterFullPromises.get(slug);
 	if (!p) {
-		p = fetchJson<ChapterFullBundle>(`/data/ccc/chapters-full/${slug}.json`, fetcher);
+		p = fetchJson<ChapterFullBundle>(`/data/cec/chapters-full/${slug}.json`, fetcher);
 		chapterFullPromises.set(slug, p);
 	}
 	return p;
 }
 
 export function loadStructure(fetcher: Fetch = fetch): Promise<unknown> {
-	return fetchJson<unknown>('/data/ccc/structure.json', fetcher);
+	return fetchJson<unknown>('/data/cec/structure.json', fetcher);
 }
 
 // Slim TOC: full tree minus the `paragraphs: number[]` arrays at every level.
-// Used by /ccc/sommaire which renders titles + headings only. About 70%
+// Used by /cec/sommaire which renders titles + headings only. About 70%
 // smaller than the full structure.
 export function loadStructureToc(fetcher: Fetch = fetch): Promise<unknown> {
-	return fetchJson<unknown>('/data/ccc/structure-toc.json', fetcher);
+	return fetchJson<unknown>('/data/cec/structure-toc.json', fetcher);
 }
 
 export function loadAbbreviations(fetcher: Fetch = fetch): Promise<AbbreviationMap> {
-	return fetchJson<AbbreviationMap>('/data/ccc/abbreviations.json', fetcher);
+	return fetchJson<AbbreviationMap>('/data/cec/abbreviations.json', fetcher);
 }
 
 // Per-paragraph context shard — used by paragraph and search routes so the
@@ -97,7 +101,7 @@ export function loadParagraphContext(
 	let p = paragraphContextCache.get(n);
 	if (!p) {
 		p = (async () => {
-			const r = await fetcher(`/data/ccc/paragraph-context/${n}.json`);
+			const r = await fetcher(`/data/cec/paragraph-context/${n}.json`);
 			if (!r.ok) return null;
 			return (await r.json()) as ParagraphContext;
 		})();
@@ -107,17 +111,17 @@ export function loadParagraphContext(
 }
 
 export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, number[]>> {
-	return fetchJson<Record<number, number[]>>('/data/ccc/cited-by.json', fetcher);
+	return fetchJson<Record<number, number[]>>('/data/cec/cited-by.json', fetcher);
 }
 
 export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]> {
-	return fetchJson<SourceEntry[]>('/data/ccc/sources-index.json', fetcher);
+	return fetchJson<SourceEntry[]>('/data/cec/sources-index.json', fetcher);
 }
 
 export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseIndex> {
 	if (!bibleVerseIndexPromise) {
 		bibleVerseIndexPromise = fetchJson<BibleVerseIndex>(
-			'/data/ccc/bible-verse-index.json',
+			'/data/cec/bible-verse-index.json',
 			fetcher
 		);
 	}
@@ -125,7 +129,7 @@ export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseI
 }
 
 export function loadGlossary(fetcher: Fetch = fetch): Promise<GlossaryBundle> {
-	return fetchJson<GlossaryBundle>('/data/ccc/glossary.json', fetcher);
+	return fetchJson<GlossaryBundle>('/data/cec/glossary.json', fetcher);
 }
 
 // Slim index for /glossaire: clusters + featured (slug/term/totalRefs) +
@@ -137,7 +141,7 @@ export interface GlossaryIndex {
 	featured: { slug: string; term: string; totalRefs: number }[];
 }
 export function loadGlossaryIndex(fetcher: Fetch = fetch): Promise<GlossaryIndex> {
-	return fetchJson<GlossaryIndex>('/data/ccc/glossary-index.json', fetcher);
+	return fetchJson<GlossaryIndex>('/data/cec/glossary-index.json', fetcher);
 }
 
 export function loadConcordanceManifest(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
@@ -269,4 +273,50 @@ export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBo
 		nclBookCache.set(usfx, p);
 	}
 	return p;
+}
+
+// ─── Compendium Loaders ────────────────────────────────────────────────────
+
+let compendiumStructurePromise: Promise<CompendiumStructure> | null = null;
+const compendiumPartCache = new Map<string, Promise<CompendiumPart>>();
+let compendiumCitedByPromise: Promise<CompendiumCitedBy> | null = null;
+let compendiumQRangesPromise: Promise<CompendiumQRange[]> | null = null;
+
+export function loadCompendiumStructure(fetcher: Fetch = fetch): Promise<CompendiumStructure> {
+	if (!compendiumStructurePromise) {
+		compendiumStructurePromise = fetchJson<CompendiumStructure>(
+			'/data/compendium/structure.json',
+			fetcher
+		);
+	}
+	return compendiumStructurePromise;
+}
+
+export function loadCompendiumPart(slug: string, fetcher: Fetch = fetch): Promise<CompendiumPart> {
+	let p = compendiumPartCache.get(slug);
+	if (!p) {
+		p = fetchJson<CompendiumPart>(`/data/compendium/parts/${slug}.json`, fetcher);
+		compendiumPartCache.set(slug, p);
+	}
+	return p;
+}
+
+export function loadCompendiumCitedBy(fetcher: Fetch = fetch): Promise<CompendiumCitedBy> {
+	if (!compendiumCitedByPromise) {
+		compendiumCitedByPromise = fetchJson<CompendiumCitedBy>(
+			'/data/compendium/cited-by.json',
+			fetcher
+		);
+	}
+	return compendiumCitedByPromise;
+}
+
+export function loadCompendiumQRanges(fetcher: Fetch = fetch): Promise<CompendiumQRange[]> {
+	if (!compendiumQRangesPromise) {
+		compendiumQRangesPromise = fetchJson<CompendiumQRange[]>(
+			'/data/compendium/q-ranges.json',
+			fetcher
+		);
+	}
+	return compendiumQRangesPromise;
 }

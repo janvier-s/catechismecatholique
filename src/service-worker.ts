@@ -8,7 +8,7 @@
 // Strategies:
 // - app shell + prerendered HTML + build assets: cached on install, served
 //   cache-first (versioned URLs, so safe to evict by version)
-// - /data/ccc/* and /data/bible/* and /fonts/*: cache-first, lazy. These
+// - /data/cec/* and /data/bible/* and /fonts/*: cache-first, lazy. These
 //   shards are immutable across deploys; serving the cached copy is correct
 //   even when a new version exists, until the SW reactivates and clears.
 // - dynamic HTML routes: network-first, fall back to cache, fall back to
@@ -20,7 +20,10 @@ import { build, files, version, prerendered } from '$service-worker';
 declare const self: ServiceWorkerGlobalScope;
 
 const CACHE_VERSION = `app-${version}`;
-const DATA_CACHE = 'data-v1';
+// Bumped to v2: the Compendium data + /cec rename invalidated the previous
+// data shape. Tie to the build version so future schema changes bust the
+// cache automatically without requiring a manual bump here.
+const DATA_CACHE = `data-${version}`;
 const FONT_CACHE = 'fonts-v1';
 
 // Build-versioned assets + static files + prerendered HTML — known up front.

@@ -6,11 +6,12 @@
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
 	import type { BibleRef, MagisterialRefRecord, NclBible } from '$lib/data/types';
 
-	type RefStyle = 'inline' | 'sup';
+	type RefStyle = 'inline' | 'sup' | 'cluster-leader' | 'cluster-member';
 	type ParsedRef = {
 		raw: string;
-		idx: number; // 1-based, matches data-idx on the in-text marker
-		style: RefStyle; // 'sup' = "voir N" footnote in text; 'inline' = parens in text
+		idx: number;
+		marker: number; // 1-based number to display; differs from idx for cluster members
+		style: RefStyle;
 		book: BookInfo;
 		chapter: number;
 		fromV?: number;
@@ -51,7 +52,7 @@
 	});
 
 	// Verse part is optional so chapter-only refs (e.g. "Os 11", "Ez 16") parse.
-	function parseRef(raw: string, idx: number, style: RefStyle): ParsedRef | null {
+	function parseRef(raw: string, idx: number, marker: number, style: RefStyle): ParsedRef | null {
 		const m = raw.match(/^([1-3]?\s*[A-Za-zÉéèê]+)\s+(\d+)(?::(\d+)(?:-(\d+))?)?/);
 		if (!m) return null;
 		const book = bookByAbbr(m[1]!.trim());
@@ -59,14 +60,24 @@
 		const chapter = parseInt(m[2]!, 10);
 		const fromV = m[3] ? parseInt(m[3], 10) : undefined;
 		const toV = m[4] ? parseInt(m[4], 10) : fromV;
-		return { raw, idx, style, book, chapter, fromV, toV };
+		return { raw, idx, marker, style, book, chapter, fromV, toV };
 	}
 
-	// Marker style mirrors the text: refs whose magisterial raw starts with "voir"
-	// render as sup footnotes in text, the rest as inline (Book Ch, V) parens.
-	function styleForIdx(idx: number): RefStyle {
+	function markerAndStyleForIdx(idx: number): { marker: number; style: RefStyle } {
 		const m = magisterial.find((r) => Number(r.idx) === idx);
-		return m && /^voir\s/i.test(m.raw) ? 'sup' : 'inline';
+		if (!m) return { marker: idx, style: 'inline' };
+		const display = m.display_idx ?? idx;
+		// Cluster member — no marker, indented with left rule.
+		if (m.marker_idx !== undefined && m.marker_idx !== idx) {
+			return { marker: display, style: 'cluster-member' };
+		}
+		// Cluster leader — at least one other ref points at me. Marker labels
+		// the WHOLE group via a header row, so the leader's verse row carries
+		// no inline marker.
+		const isLeader = magisterial.some((r) => r.marker_idx === idx);
+		if (isLeader) return { marker: display, style: 'cluster-leader' };
+		// Solo ref — existing voir heuristic.
+		return { marker: display, style: /^voir\s/i.test(m.raw) ? 'sup' : 'inline' };
 	}
 
 	$effect(() => {
@@ -74,7 +85,8 @@
 		const out: RefWithVerses[] = [];
 		for (let i = 0; i < refs.length; i++) {
 			const idx = i + 1;
-			const parsed = parseRef(refs[i]!.text, idx, styleForIdx(idx));
+			const { marker, style } = markerAndStyleForIdx(idx);
+			const parsed = parseRef(refs[i]!.text, idx, marker, style);
 			if (!parsed) continue;
 			const verses: { v: number; text: string }[] = [];
 			if (parsed.fromV !== undefined && parsed.toV !== undefined) {
@@ -93,27 +105,102 @@
 		const ctx = $studyPanel.context;
 		const target = ctx?.kind === 'paragraph' ? ctx.bibleRefIdx : undefined;
 		if (target === undefined || resolved.length === 0 || !listEl) return;
+
+		// Build the set of idxs to flash. If `target` is a cluster member or
+		// leader, expand to the full cluster; otherwise it's just the one row.
+		const targetMag = magisterial.find((r) => Number(r.idx) === target);
+		let flashIdxs: number[];
+		if (targetMag?.marker_idx !== undefined && targetMag.marker_idx !== target) {
+			const leaderIdx = targetMag.marker_idx;
+			flashIdxs = [
+				leaderIdx,
+				...magisterial.filter((r) => r.marker_idx === leaderIdx).map((r) => Number(r.idx))
+			];
+		} else if (magisterial.some((r) => r.marker_idx === target)) {
+			flashIdxs = [
+				target,
+				...magisterial.filter((r) => r.marker_idx === target).map((r) => Number(r.idx))
+			];
+		} else {
+			flashIdxs = [target];
+		}
+
 		(async () => {
 			await tick();
-			const el = listEl?.querySelector<HTMLElement>(`[data-idx="${target}"]`);
-			if (!el) return;
-			el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			el.classList.add('ref-flash');
-			setTimeout(() => el.classList.remove('ref-flash'), 1400);
+			const rows = flashIdxs
+				.map((idx) => listEl?.querySelector<HTMLElement>(`[data-idx="${idx}"]`))
+				.filter((el): el is HTMLElement => el != null);
+			if (rows.length === 0) return;
+
+			// Scroll only the panel's inner overflow container so the outer
+			// document doesn't jump. If the closest .styled-scroll ancestor is
+			// missing for any reason, skip scrolling — the flash still pulls
+			// the eye.
+			const scrollEl = rows[0]!.closest<HTMLElement>('.styled-scroll');
+			if (scrollEl) {
+				const containerRect = scrollEl.getBoundingClientRect();
+				const targetRect = rows[0]!.getBoundingClientRect();
+				const offset = targetRect.top - containerRect.top + scrollEl.scrollTop - 8;
+				// Only scroll if the row isn't fully visible — avoids the
+				// "page jiggles every time" feel for short paragraphs.
+				if (targetRect.top < containerRect.top || targetRect.bottom > containerRect.bottom) {
+					scrollEl.scrollTo({ top: offset, behavior: 'smooth' });
+				}
+			}
+
+			for (const el of rows) el.classList.add('ref-flash');
+			setTimeout(() => {
+				for (const el of rows) el.classList.remove('ref-flash');
+			}, 1400);
 		})();
 	});
 </script>
+
+{#snippet verseBody(r: RefWithVerses)}
+	{#if r.fromV === undefined}
+		<a
+			href="/bible/{r.book.slug}/{r.chapter}"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-1 inline-block text-[13px] text-accent hover:underline"
+		>
+			Lire le chapitre entier&nbsp;→
+		</a>
+	{:else if r.verses.length > 0}
+		<div class="mt-2 font-body text-[15px] leading-relaxed">
+			{#each r.verses as v (v.v)}
+				<span class="block">
+					{#if r.verses.length > 1}
+						<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-2">{v.v}</sup>
+					{/if}
+					{v.text}
+				</span>
+			{/each}
+		</div>
+	{:else}
+		<p class="mt-1 text-xs text-muted italic">Verset non disponible.</p>
+	{/if}
+{/snippet}
 
 <div class="font-ui text-sm">
 	{#if refs.length === 0}
 		<p class="text-muted italic">Aucune référence biblique.</p>
 	{:else}
-		<ul bind:this={listEl} class="space-y-5">
+		<ul bind:this={listEl} class="space-y-3 sm:space-y-5">
 			{#each resolved as r (r.raw + ':' + r.idx)}
-				<li data-idx={r.idx} class="rounded">
+				{#if r.style === 'cluster-leader'}
+					<li class="cluster-header" aria-hidden="true">
+						<sup class="ref-marker">{r.marker}</sup>
+					</li>
+				{/if}
+				<li
+					data-idx={r.idx}
+					class="rounded"
+					class:cluster-verse={r.style === 'cluster-leader' || r.style === 'cluster-member'}
+				>
 					<div class="flex items-baseline gap-1.5">
 						{#if r.style === 'sup'}
-							<sup class="ref-marker">{r.idx}</sup>
+							<sup class="ref-marker">{r.marker}</sup>
 						{/if}
 						<a
 							href="/bible/{r.book.slug}/{r.chapter}{r.fromV !== undefined ? `/${r.fromV}` : ''}"
@@ -125,28 +212,7 @@
 							{/if}
 						</a>
 					</div>
-					{#if r.fromV === undefined}
-						<a
-							href="/bible/{r.book.slug}/{r.chapter}"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="mt-1 inline-block text-[13px] text-accent hover:underline"
-						>
-							Lire le chapitre entier&nbsp;→
-						</a>
-					{:else if r.verses.length > 0}
-						<div class="mt-2 font-body text-[15px] leading-relaxed">
-							{#each r.verses as v (v.v)}
-								<span class="block">
-									<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-1">{v.v}</sup
-									>
-									{v.text}
-								</span>
-							{/each}
-						</div>
-					{:else}
-						<p class="mt-1 text-xs text-muted italic">Verset non disponible.</p>
-					{/if}
+					{@render verseBody(r)}
 				</li>
 			{/each}
 		</ul>
@@ -169,5 +235,35 @@
 	}
 	sup.ref-marker {
 		font-size: 0.75em;
+	}
+	/* Cluster header — the marker that labels a footnote group. Sits on its
+	   own row above the cluster verses so it visually attaches to the whole
+	   group, not just the first verse. */
+	li.cluster-header {
+		padding: 0;
+		margin: 0;
+	}
+	li.cluster-header sup.ref-marker {
+		font-size: 0.85em;
+	}
+	/* Cluster verses — leader's verse + all its members, indented under the
+	   header with a subtle accent rule. No border-radius so the left border
+	   draws as one unbroken line across all members. */
+	li.cluster-verse {
+		margin-left: 0.75rem;
+		padding-left: 0.75rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+		border-radius: 0;
+	}
+	/* Consecutive cluster verses: no gap so the left border is continuous.
+	   Inner padding-top provides the breathing room instead. */
+	li.cluster-verse + li.cluster-verse {
+		margin-top: 0;
+		padding-top: 0.5rem;
+	}
+	/* Header sits immediately above the first cluster verse — tight gap so the
+	   marker reads as attached to the group, not floating above it. */
+	li.cluster-header + li.cluster-verse {
+		margin-top: 0;
 	}
 </style>

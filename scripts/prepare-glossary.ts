@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 // Standalone glossary build — runs just the glossary step from prepare-data
-// and writes static/data/ccc/glossary.json. Useful for iterating on the
+// and writes static/data/cec/glossary.json. Useful for iterating on the
 // glossary without re-running the entire data pipeline.
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -10,7 +10,7 @@ import { buildGlossary } from './prepare/glossary.ts';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
 const SOURCES = join(ROOT, 'scripts/data-sources');
-const OUT = join(ROOT, 'static/data/ccc');
+const OUT = join(ROOT, 'static/data/cec');
 
 function main() {
 	const start = performance.now();

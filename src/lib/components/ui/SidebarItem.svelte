@@ -7,6 +7,10 @@
 		href: string;
 		number?: number;
 		typeLabel?: string;
+		/** Heading level for compendium entries (2, 3, 4). Drives per-row styling. */
+		level?: 2 | 3 | 4;
+		/** Eyebrow above the title (e.g. "Chapitre II"). */
+		kicker?: string;
 		children?: Item[];
 	};
 	let {
@@ -21,6 +25,7 @@
 		return it.children.some((c) => isAncestorOrSelf(c, target));
 	}
 
+	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
 	const isAncestor = $derived(
 		item.children ? item.children.some((c) => isAncestorOrSelf(c, activeHref)) : false
 	);
@@ -28,8 +33,8 @@
 	// article entry) won't equal it but is still the visible context.
 	const isActiveBase = $derived(activeHref.startsWith(item.href + '#'));
 	// Heading entries in the sidebar use article-prefixed hrefs (e.g.
-	// /ccc/x/y/chapter/article-1#h-id) but on a chapter page the scroll-spy
-	// produces activeHref = /ccc/x/y/chapter#h-id (no article slug). When
+	// /cec/x/y/chapter/article-1#h-id) but on a chapter page the scroll-spy
+	// produces activeHref = /cec/x/y/chapter#h-id (no article slug). When
 	// the hash matches and the item's path is a deeper version of the
 	// active path, treat it as the active entry. This is what lets the
 	// Roman headings sync as the reader scrolls a chapter page.
@@ -49,15 +54,21 @@
 	// exact match wins; otherwise this entry only highlights when none of
 	// its descendants match (i.e. the active path lives inside this entry's
 	// scope but no deeper item claims it).
+	//
+	// The `+ '/'` sub-path match is gated on hasChildren: items with
+	// children rely on isAncestor to suppress them when a child matches,
+	// but childless items (e.g. a chapter's "Préambule" entry whose href
+	// is the bare chapter URL) would otherwise wrongly highlight whenever
+	// the user reads any article in that chapter (since the article URL
+	// starts with the chapter URL + '/').
 	const isPrefixMatch = $derived(
 		activeHref === item.href ||
 			activeHref.startsWith(item.href + '#') ||
-			activeHref.startsWith(item.href + '/')
+			(hasChildren && activeHref.startsWith(item.href + '/'))
 	);
 	const isActive = $derived((isPrefixMatch || isHashMatch) && !isAncestor);
 
 	let manualExpanded: boolean | null = $state(null);
-	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
 	// Auto-expand wins when the item or one of its descendants is the active
 	// route. Manual toggles only apply outside of that. Without this, a
 	// previously-collapsed-then-revisited entry stayed collapsed even when
@@ -83,9 +94,16 @@
 		{/if}
 		<a
 			href={item.href}
-			class="flex-1 py-1 px-1.5 rounded text-[13px] leading-snug hover:bg-accent/10 hover:text-accent"
+			class="flex-1 py-1 px-1.5 rounded leading-snug hover:bg-accent/10 hover:text-accent"
 			class:is-active={isActive}
+			class:lvl-2={item.level === 2}
+			class:lvl-3={item.level === 3}
+			class:lvl-4={item.level === 4}
+			class:lvl-default={item.level === undefined}
 		>
+			{#if item.kicker}
+				<span class="kicker">{item.kicker}</span>
+			{/if}
 			{#if item.typeLabel}
 				<span class="font-semibold">
 					{item.typeLabel}
@@ -96,7 +114,7 @@
 		</a>
 	</div>
 	{#if item.children && expanded}
-		<ul class="ml-3">
+		<ul class="children" class:children-deep={depth >= 1}>
 			{#each item.children as child (child.href)}
 				<Self item={child} {activeHref} depth={depth + 1} />
 			{/each}
@@ -105,6 +123,56 @@
 </li>
 
 <style>
+	/* Children list — nested entries get a modest left indent + a hairline
+	   gutter rule so the hierarchy is unmistakable but compact. */
+	.children {
+		margin-left: 0.5rem;
+	}
+	.children-deep {
+		margin-left: 0.5rem;
+		padding-left: 0.5rem;
+		border-left: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
+	}
+	/* Default size for entries that don't carry a Compendium heading level
+	   (CCC sidebar items, parts/sections by typeLabel). */
+	.lvl-default {
+		font-size: 13px;
+	}
+	/* Compendium heading levels — match the CCC sidebar register: plain
+	   foreground colour with weight + size variation only. The active row
+	   is the only one that gets the accent background, same as the CCC. */
+	.lvl-2 {
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--color-fg);
+	}
+	.lvl-3 {
+		font-size: 13.5px;
+		font-weight: 500;
+		color: var(--color-fg);
+	}
+	.lvl-4 {
+		font-size: 12.5px;
+		font-weight: 400;
+		color: var(--color-subtle);
+	}
+	/* Kicker is the only spot that uses accent — and only as a muted eyebrow
+	   above the chapter title, matching how CCC shows "Article 1 :" tags. */
+	.kicker {
+		display: block;
+		font-family: var(--font-ui);
+		font-size: 10px;
+		font-weight: 600;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin-bottom: 0.1rem;
+	}
+	/* When the row is active (is-active sets the red bg + white text), the
+	   kicker should also flip to white so it stays readable. */
+	.is-active .kicker {
+		color: rgba(255, 255, 255, 0.85);
+	}
 	/* Slightly darker than the bare accent so white text clears WCAG AA
 	   (4.5:1) — the raw accent in dark/oled themes is too light for white
 	   foreground (Lighthouse measured 4.14:1). */

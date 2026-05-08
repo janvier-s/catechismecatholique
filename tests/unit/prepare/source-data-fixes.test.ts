@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
 	capitalizeFirstWord,
 	fixCccParaSourceTypos,
+	groupConsecutiveBibleSups,
 	mergeBibleRefContinuations,
 	normalizeGuillemets
 } from '../../../scripts/prepare/source-data-fixes';
@@ -134,5 +135,127 @@ describe('fixCccParaSourceTypos', () => {
 		const kids = (tree[0] as { children: { children: { number: number }[] }[] }).children[0]!
 			.children;
 		expect(kids.map((k) => k.number)).toEqual([2274, 2275]);
+	});
+});
+
+describe('groupConsecutiveBibleSups', () => {
+	const sup = (idx: number) => `<sup class="srcRef bibleRef" data-idx="${idx}">${idx}</sup>`;
+	const cccSup = (n: number) => `<sup class="srcRef cccRef">§${n}</sup>`;
+
+	it('leaves a paragraph with one bibleRef sup unchanged', () => {
+		const html = `<span>texte ${sup(1)}.</span>`;
+		const refs = [{ type: 'bible' as const, raw: 'voir Mt 5:1', idx: 1 }];
+		const result = groupConsecutiveBibleSups({ html, refs });
+		expect(result.html).toBe(html);
+		expect(result.refs[0]!.display_idx).toBe(1);
+		expect(result.refs[0]!.marker_idx).toBeUndefined();
+	});
+
+	it('collapses two consecutive sups, marking the second member', () => {
+		const html = `<span>texte ${sup(1)}${sup(2)}.</span>`;
+		const refs = [
+			{ type: 'bible' as const, raw: 'voir 2 Co 5:8', idx: 1 },
+			{ type: 'bible' as const, raw: 'Ph 1:23', idx: 2 }
+		];
+		const result = groupConsecutiveBibleSups({ html, refs });
+		expect(result.html).toBe(`<span>texte ${sup(1)}.</span>`);
+		expect(result.refs[0]!.marker_idx).toBeUndefined();
+		expect(result.refs[0]!.display_idx).toBe(1);
+		expect(result.refs[1]!.marker_idx).toBe(1);
+		expect(result.refs[1]!.display_idx).toBe(1);
+	});
+
+	it('collapses a 4-sup cluster (§1021 case)', () => {
+		const html = `<span>${sup(4)}${sup(5)}${sup(6)}${sup(7)} parlent.</span>`;
+		const refs = [
+			{ type: 'bible' as const, raw: 'voir 2 Co 5:8', idx: 4 },
+			{ type: 'bible' as const, raw: 'Ph 1:23', idx: 5 },
+			{ type: 'bible' as const, raw: 'He 9:27', idx: 6 },
+			{ type: 'bible_continuation' as const, raw: '12:23', idx: 7 }
+		];
+		const result = groupConsecutiveBibleSups({ html, refs });
+		// Surviving leader's inner text is renumbered to 1 (only bibleRef sup left).
+		expect(result.html).toBe(
+			`<span><sup class="srcRef bibleRef" data-idx="4">1</sup> parlent.</span>`
+		);
+		expect(result.refs[0]!.marker_idx).toBeUndefined();
+		expect(result.refs[0]!.display_idx).toBe(1);
+		expect(result.refs[1]!.marker_idx).toBe(4);
+		expect(result.refs[1]!.display_idx).toBe(1);
+		expect(result.refs[2]!.marker_idx).toBe(4);
+		expect(result.refs[2]!.display_idx).toBe(1);
+		expect(result.refs[3]!.marker_idx).toBe(4);
+		expect(result.refs[3]!.display_idx).toBe(1);
+	});
+
+	it('handles two non-adjacent clusters in the same paragraph', () => {
+		const html = `<span>A ${sup(1)}${sup(2)}. B ${sup(3)}. C ${sup(4)}${sup(5)}${sup(6)}.</span>`;
+		const refs = [
+			{ type: 'bible' as const, raw: 'voir Mc 1:1', idx: 1 },
+			{ type: 'bible' as const, raw: 'Mc 1:2', idx: 2 },
+			{ type: 'bible' as const, raw: 'voir Lc 1:1', idx: 3 },
+			{ type: 'bible' as const, raw: 'voir Jn 1:1', idx: 4 },
+			{ type: 'bible' as const, raw: 'Jn 1:2', idx: 5 },
+			{ type: 'bible' as const, raw: 'Jn 1:3', idx: 6 }
+		];
+		const result = groupConsecutiveBibleSups({ html, refs });
+		// Surviving sups in order: idx=1, idx=3, idx=4 → renumbered 1, 2, 3.
+		expect(result.html).toBe(
+			`<span>A <sup class="srcRef bibleRef" data-idx="1">1</sup>. B <sup class="srcRef bibleRef" data-idx="3">2</sup>. C <sup class="srcRef bibleRef" data-idx="4">3</sup>.</span>`
+		);
+		expect(result.refs.map((r) => r.marker_idx)).toEqual([
+			undefined,
+			1,
+			undefined,
+			undefined,
+			4,
+			4
+		]);
+		// Leader 1 → 1; member 2 inherits 1. Solo 3 → 2. Leader 4 → 3; members 5,6 inherit 3.
+		expect(result.refs.map((r) => r.display_idx)).toEqual([1, 1, 2, 3, 3, 3]);
+	});
+
+	it('does NOT cluster across a non-bibleRef sup (cccRef breaks the run)', () => {
+		const html = `<span>${sup(1)}${cccSup(42)}${sup(2)}.</span>`;
+		const refs = [
+			{ type: 'bible' as const, raw: 'Mt 1:1', idx: 1 },
+			{ type: 'bible' as const, raw: 'Mt 1:2', idx: 2 }
+		];
+		const result = groupConsecutiveBibleSups({ html, refs });
+		expect(result.html).toBe(html);
+		expect(result.refs.every((r) => r.marker_idx === undefined)).toBe(true);
+		// Both bibleRef sups are renumbered 1, 2 (matching their original idx, no
+		// visible change), and display_idx is set on both refs.
+		expect(result.refs.map((r) => r.display_idx)).toEqual([1, 2]);
+	});
+
+	it('does NOT cluster sups separated by literal text', () => {
+		const html = `<span>${sup(1)} et ${sup(2)}.</span>`;
+		const refs = [
+			{ type: 'bible' as const, raw: 'Mt 1:1', idx: 1 },
+			{ type: 'bible' as const, raw: 'Mt 1:2', idx: 2 }
+		];
+		const result = groupConsecutiveBibleSups({ html, refs });
+		expect(result.html).toBe(html);
+		expect(result.refs.every((r) => r.marker_idx === undefined)).toBe(true);
+		expect(result.refs.map((r) => r.display_idx)).toEqual([1, 2]);
+	});
+
+	it('treats whitespace + NBSP between sups as consecutive', () => {
+		const html = `<span>${sup(1)}  ${sup(2)}.</span>`;
+		const refs = [
+			{ type: 'bible' as const, raw: 'voir Mt 1:1', idx: 1 },
+			{ type: 'bible' as const, raw: 'Mt 1:2', idx: 2 }
+		];
+		const result = groupConsecutiveBibleSups({ html, refs });
+		expect(result.html).toBe(`<span>${sup(1)}.</span>`);
+		// Strip-range invariant: no whitespace gap survives between the leader sup
+		// and the trailing punctuation. A buggy strip range that only consumed the
+		// trailing <sup> elements would leave "<sup1>  ." here.
+		expect(result.html).not.toMatch(/<\/sup>\s+\./);
+		expect(result.refs[1]!.marker_idx).toBe(1);
+		// Surviving leader is renumbered to 1; member inherits 1.
+		expect(result.refs[0]!.display_idx).toBe(1);
+		expect(result.refs[1]!.display_idx).toBe(1);
 	});
 });

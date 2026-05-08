@@ -59,18 +59,18 @@ export function buildChapterFiles(
 		const crossesPart = neighbor.partSlug !== current.partSlug;
 		const crossesSection = neighbor.sectionSlug !== current.sectionSlug;
 		if (crossesPart && neighbor.partHasIntro) {
-			return { kind: 'part', href: `/ccc/${neighbor.partSlug}`, title: neighbor.partTitle };
+			return { kind: 'part', href: `/cec/${neighbor.partSlug}`, title: neighbor.partTitle };
 		}
 		if (crossesSection && neighbor.sectionHasIntro) {
 			return {
 				kind: 'section',
-				href: `/ccc/${neighbor.partSlug}/${neighbor.sectionSlug}`,
+				href: `/cec/${neighbor.partSlug}/${neighbor.sectionSlug}`,
 				title: neighbor.sectionTitle
 			};
 		}
 		return {
 			kind: 'chapter',
-			href: `/ccc/${neighbor.partSlug}/${neighbor.sectionSlug}/${neighbor.chapter.slug}`,
+			href: `/cec/${neighbor.partSlug}/${neighbor.sectionSlug}/${neighbor.chapter.slug}`,
 			title: neighbor.chapter.title
 		};
 	}
