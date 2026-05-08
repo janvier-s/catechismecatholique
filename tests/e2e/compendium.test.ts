@@ -70,7 +70,7 @@ test.describe('Compendium', () => {
 		// CCC §27 is cited by Compendium Q.2 (per static/data/compendium/cited-by.json).
 		await page.goto('/cec/27');
 		// Click the §27 number to open the study panel (any tab — we'll switch).
-		await page.locator('a.number-col[href="/cec/27"]').first().click();
+		await page.locator('button.number-col').first().click();
 		const compendiumTab = page.getByRole('button', { name: 'Compendium', exact: true }).first();
 		await expect(compendiumTab).toBeVisible();
 		await compendiumTab.click();

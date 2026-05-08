@@ -23,6 +23,13 @@ export const GET: RequestHandler = () => {
 		'/cec',
 		'/cec/sommaire',
 		'/cec/panorama',
+		'/compendium',
+		'/compendium/sommaire',
+		'/compendium/1-profession-de-la-foi',
+		'/compendium/2-celebration-du-mystere',
+		'/compendium/3-vie-dans-le-christ',
+		'/compendium/4-priere-chretienne',
+		'/prieres-formules',
 		'/bible',
 		'/glossaire',
 		'/glossaire/tous',
@@ -32,6 +39,8 @@ export const GET: RequestHandler = () => {
 	];
 
 	const paragraphUrls = Array.from({ length: 2865 }, (_, i) => `/cec/${i + 1}`);
+
+	const compendiumUrls = Array.from({ length: 598 }, (_, i) => `/compendium/q/${i + 1}`);
 
 	const bibleUrls: string[] = [];
 	for (const book of BOOKS) {
@@ -47,7 +56,13 @@ export const GET: RequestHandler = () => {
 		...glossary.entries.map((e) => `/glossaire/${e.slug}`)
 	];
 
-	const allUrls = [...staticPages, ...paragraphUrls, ...bibleUrls, ...glossaryUrls];
+	const allUrls = [
+		...staticPages,
+		...paragraphUrls,
+		...compendiumUrls,
+		...bibleUrls,
+		...glossaryUrls
+	];
 
 	const xml = [
 		'<?xml version="1.0" encoding="UTF-8"?>',

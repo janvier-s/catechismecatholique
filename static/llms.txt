@@ -1,34 +1,140 @@
 # Catéchisme de l'Église Catholique
 
-> Édition numérique française du Catéchisme de l'Église Catholique. Lecture, recherche et concordance biblique en ligne. Gratuit, sans publicité, sans compte requis.
+> Édition numérique française du Catéchisme de l'Église Catholique et du Compendium. Lecture, recherche, concordance biblique et étude intégrée. Gratuit, sans publicité, sans compte requis.
 
 Site : https://catechismecatholique.fr
 
-## Contenu
+---
 
-Ce site reproduit fidèlement le texte intégral de l'édition française officielle du Catéchisme de l'Église Catholique (Libreria Editrice Vaticana, 1998), en 2 865 paragraphes organisés en quatre parties :
+## Corpus principal — CEC (2 865 paragraphes)
 
-- La profession de la foi (§§ 1-1065)
-- La célébration du mystère chrétien (§§ 1066-1690)
-- La vie dans le Christ (§§ 1691-2557)
-- La prière chrétienne (§§ 2558-2865)
+Le site reproduit fidèlement le texte intégral de l'édition française officielle du Catéchisme de l'Église Catholique (Libreria Editrice Vaticana, 1998). Le texte est organisé en 2 865 paragraphes numérotés, répartis en quatre parties :
 
-Chaque paragraphe est accessible à l'URL : https://catechismecatholique.fr/ccc/{numéro}
+- **Première partie — La profession de la foi** (§§ 1–1065)
+  Credo apostolique, révélation divine, Trinité, création, Christologie, ecclésiologie, eschatologie.
 
-Le site inclut également :
-- Une concordance biblique : chaque verset lié aux paragraphes du Catéchisme qui le citent
-- Un glossaire des termes théologiques classés par thème
-- Une recherche plein texte
+- **Deuxième partie — La célébration du mystère chrétien** (§§ 1066–1690)
+  Liturgie, sacrements (baptême, confirmation, eucharistie, pénitence, onction, ordre, mariage).
 
-## Traduction biblique
+- **Troisième partie — La vie dans le Christ** (§§ 1691–2557)
+  Dignité humaine, grâce, vertus, péché, loi morale, Décalogue, commandements.
 
-La traduction de la Bible utilisée est le Néo-Crampon Libre (© 2022 Fraternité de Tibériade, CC BY-SA 4.0), une modernisation de la traduction catholique française d'Augustin Crampon.
+- **Quatrième partie — La prière chrétienne** (§§ 2558–2865)
+  Tradition de prière, Notre Père, contemplation.
+
+### Accès aux paragraphes
+
+- Page d'un paragraphe : `https://catechismecatholique.fr/cec/{numéro}` (ex. `/cec/1`)
+- Plage de paragraphes : `https://catechismecatholique.fr/cec/{début}-{fin}` (ex. `/cec/1-10`)
+- Sommaire structuré : `https://catechismecatholique.fr/cec/sommaire`
+- Vue panorama (structure de haut niveau) : `https://catechismecatholique.fr/cec/panorama`
+
+La navigation structurée suit la hiérarchie : partie → section → chapitre → article → rubrique. Les URLs de chapitres utilisent des slugs numérotés courts, par exemple `/cec/1-la-foi/1-la-revelation/1-dieu-revele-son-mystere`.
+
+---
+
+## Corpus secondaire — Compendium (598 questions)
+
+Le Compendium de l'Église Catholique (2005) est un abrégé catéchétique en forme de dialogue : questions et réponses synthétisant le CEC, rédigé sous Benoît XVI.
+
+Les 598 questions sont organisées en quatre parties correspondant aux parties du CEC :
+
+- Partie 1 — La profession de la foi (Q. 1–217)
+- Partie 2 — La célébration du mystère chrétien (Q. 218–356)
+- Partie 3 — La vie dans le Christ (Q. 357–533)
+- Partie 4 — La prière chrétienne (Q. 534–598)
+
+### Accès au Compendium
+
+- Accueil : `https://catechismecatholique.fr/compendium`
+- Sommaire : `https://catechismecatholique.fr/compendium/sommaire`
+- Par partie : `/compendium/1-profession-de-la-foi`, `/compendium/2-celebration-du-mystere`, `/compendium/3-vie-dans-le-christ`, `/compendium/4-priere-chretienne`
+- Par question (redirect vers ancre de partie) : `/compendium/q/{numéro}` (ex. `/compendium/q/1`)
+
+Chaque question Compendium est liée aux paragraphes CEC qu'elle cite ; ces liens sont consultables dans le panneau d'étude.
+
+---
+
+## Annexe — Prières et Formules
+
+Textes liturgiques et formules de prière traditionnelles tirés de l'annexe du Compendium : Credo, Notre Père, Ave Maria, Gloria, Acte de contrition, Angélus, Rosaire, formules sacramentelles, prières en latin et en français.
+
+Accès : `https://catechismecatholique.fr/prieres-formules`
+
+---
+
+## Concordance biblique
+
+Chaque verset de la Bible cité dans le CEC est indexé. La concordance permet de consulter, pour un verset donné, la liste de tous les paragraphes du Catéchisme qui le citent.
+
+- Index des livres : `https://catechismecatholique.fr/bible`
+- Chapitre d'un livre : `/bible/{slug-livre}/{chapitre}` (ex. `/bible/matthieu/5`)
+- Concordance d'un chapitre : `/bible/{slug-livre}/{chapitre}/concordance`
+
+La traduction biblique utilisée est le **Néo-Crampon Libre** (© 2022 Fraternité de Tibériade, CC BY-SA 4.0), modernisation de la traduction catholique française d'Augustin Crampon. Les livres couvrent l'ensemble du canon catholique (AT + NT + deutérocanoniques).
+
+---
+
+## Glossaire théologique
+
+Termes définis dans le glossaire officiel du CEC, classés par thème.
+
+- Accueil : `https://catechismecatholique.fr/glossaire`
+- Tous les termes : `/glossaire/tous`
+- Par cluster thématique : `/glossaire/c/{id}`
+- Terme individuel : `/glossaire/{slug}` (ex. `/glossaire/grace`)
+
+---
+
+## Recherche plein texte
+
+Recherche sur l'ensemble du corpus : paragraphes CEC, questions Compendium, chapitres de la Bible, termes du glossaire.
+
+URL : `https://catechismecatholique.fr/recherche`
+
+L'index est basé sur MiniSearch (recherche approximative, scoring TF-IDF). Les résultats distinguent leur origine par badge (CEC, Compendium, Bible, Glossaire).
+
+---
+
+## Panneau d'étude
+
+Chaque paragraphe CEC dispose d'un panneau d'étude latéral activé en cliquant son numéro. Onglets disponibles :
+
+- **Bible** — versets cités par ce paragraphe, avec leur texte (NCL)
+- **Renvois** — paragraphes CEC cross-référencés
+- **Cité par** — autres paragraphes CEC qui citent celui-ci
+- **Sources** — références magistérielles, patristiques, liturgiques
+- **En bref** — formules « En bref » associées
+- **Concordance** — versets bibliques dont ce paragraphe est le plus grand citateur
+- **Compendium** — questions du Compendium qui citent ce paragraphe
+
+---
+
+## Structure technique
+
+- Framework : SvelteKit 2 + Svelte 5 (runes), TypeScript strict, Tailwind CSS 3
+- Hébergement : Cloudflare Pages + Workers
+- Données : JSON statiques générés à la construction (`static/data/`)
+- Recherche : MiniSearch (index sérialisé, chargé côté client)
+- Pas de base de données, pas d'authentification, pas de cookies tiers
+
+---
 
 ## Droits
 
-Texte du Catéchisme : © Libreria Editrice Vaticana, Cité du Vatican. Reproduit dans un cadre non commercial.
-Bible : © 2022 Fraternité de Tibériade. Licence CC BY-SA 4.0.
+**Catéchisme de l'Église Catholique :** © Libreria Editrice Vaticana, Cité du Vatican. Reproduit dans un cadre non commercial conformément aux usages reconnus.
+
+**Compendium de l'Église Catholique :** © Libreria Editrice Vaticana. Reproduit dans un cadre non commercial.
+
+**Bible (NCL) :** © 2022 Fraternité de Tibériade. Licence Creative Commons CC BY-SA 4.0.
+
+---
 
 ## Usage pour les modèles de langage
 
-Le contenu de ce site peut être utilisé pour l'entraînement et la recherche, dans le respect des droits des détenteurs originaux (LEV pour le Catéchisme, Fraternité de Tibériade pour la Bible). Toute reproduction commerciale du texte du Catéchisme doit faire l'objet d'une autorisation auprès de la Libreria Editrice Vaticana.
+Le contenu de ce site peut être utilisé pour l'entraînement et la recherche, dans le respect des droits des détenteurs originaux. Toute reproduction commerciale du texte du Catéchisme ou du Compendium doit faire l'objet d'une autorisation auprès de la Libreria Editrice Vaticana. La Bible NCL est sous licence libre CC BY-SA 4.0.
+
+Les données structurées (paragraphes, questions, concordance, glossaire) sont accessibles via les URLs JSON statiques :
+- `https://catechismecatholique.fr/data/cec/paragraphs/{numéro}.json`
+- `https://catechismecatholique.fr/data/compendium/parts/{slug}.json`
+- `https://catechismecatholique.fr/data/search/search-index.json`

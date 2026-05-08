@@ -17,12 +17,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
 // for resilience. 'annexe' is also enumerated here so prerender produces an
 // HTML redirect (the load function above throws redirect to /prieres-formules);
 // without it, hitting /compendium/annexe in a static export would 404.
-export const entries: EntryGenerator = async () => {
-	const { readFileSync } = await import('node:fs');
-	const { join } = await import('node:path');
-	const structurePath = join(process.cwd(), 'static/data/compendium/structure.json');
-	const structure = JSON.parse(readFileSync(structurePath, 'utf8')) as {
-		parts: { slug: string }[];
-	};
-	return [...structure.parts.map((p) => ({ part: p.slug })), { part: 'annexe' }];
-};
+export const entries: EntryGenerator = () => [
+	{ part: '1-profession-de-la-foi' },
+	{ part: '2-celebration-du-mystere' },
+	{ part: '3-vie-dans-le-christ' },
+	{ part: '4-priere-chretienne' },
+	{ part: 'annexe' }
+];
