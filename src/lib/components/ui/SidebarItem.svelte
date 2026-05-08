@@ -7,6 +7,8 @@
 		href: string;
 		number?: number;
 		typeLabel?: string;
+		/** Heading level for compendium entries (2, 3, 4). Drives per-row styling. */
+		level?: 2 | 3 | 4;
 		children?: Item[];
 	};
 	let {
@@ -83,8 +85,12 @@
 		{/if}
 		<a
 			href={item.href}
-			class="flex-1 py-1 px-1.5 rounded text-[13px] leading-snug hover:bg-accent/10 hover:text-accent"
+			class="flex-1 py-1 px-1.5 rounded leading-snug hover:bg-accent/10 hover:text-accent"
 			class:is-active={isActive}
+			class:lvl-2={item.level === 2}
+			class:lvl-3={item.level === 3}
+			class:lvl-4={item.level === 4}
+			class:lvl-default={item.level === undefined}
 		>
 			{#if item.typeLabel}
 				<span class="font-semibold">
@@ -105,6 +111,28 @@
 </li>
 
 <style>
+	/* Default size for entries that don't carry a Compendium heading level
+	   (CCC sidebar items, parts/sections by typeLabel). */
+	.lvl-default {
+		font-size: 13px;
+	}
+	/* Compendium heading levels — each step down the hierarchy reads as
+	   smaller / lighter so the eye can scan a deep tree at a glance. */
+	.lvl-2 {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--color-fg);
+	}
+	.lvl-3 {
+		font-size: 12.5px;
+		font-weight: 500;
+		color: var(--color-fg);
+	}
+	.lvl-4 {
+		font-size: 12px;
+		font-weight: 400;
+		color: var(--color-subtle);
+	}
 	/* Slightly darker than the bare accent so white text clears WCAG AA
 	   (4.5:1) — the raw accent in dark/oled themes is too light for white
 	   foreground (Lighthouse measured 4.14:1). */

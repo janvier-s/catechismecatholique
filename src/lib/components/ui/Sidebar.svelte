@@ -56,6 +56,8 @@
 		href: string;
 		number?: number;
 		typeLabel?: string;
+		/** Heading level for compendium entries (2, 3, 4). Drives sidebar styling. */
+		level?: 2 | 3 | 4;
 		children?: Item[];
 	};
 
@@ -407,7 +409,8 @@
 						if (node.kind !== 'heading') continue;
 						const item: Item = {
 							title: node.title,
-							href: `${partHref}#${node.id}`
+							href: `${partHref}#${node.id}`,
+							level: node.level
 						};
 						if (node.level === 2) {
 							children.push(item);
