@@ -136,7 +136,7 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 
 	// Walk the HTML files in document order and assign each question to (part, section).
 	type FlowItem =
-		| { kind: 'heading'; level: 2 | 3; id: string; title: string; partSlug: string }
+		| { kind: 'heading'; level: 2 | 3 | 4; id: string; title: string; partSlug: string }
 		| { kind: 'epigraph'; text: string; attribution?: string; partSlug: string }
 		| { kind: 'question'; number: number; partSlug: string; sectionTitle: string };
 
@@ -203,7 +203,10 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 					pushSectionIfClosed();
 					pushPartDirectIfAny();
 					currentSection = { title: titleCase(tocEntry.label), from: 0, to: 0 };
-					const headingLevel: 2 | 3 = tocEntry.depth === 3 ? 2 : 3;
+					// EPUB depth 3 → section (h2), depth 4 → subsection (h3),
+					// depth 5+ → sub-subsection (h4). Cap at 4 so deeper trees
+					// degrade gracefully rather than producing unstyled levels.
+					const headingLevel: 2 | 3 | 4 = tocEntry.depth === 3 ? 2 : tocEntry.depth === 4 ? 3 : 4;
 					flowItems.push({
 						kind: 'heading',
 						level: headingLevel,

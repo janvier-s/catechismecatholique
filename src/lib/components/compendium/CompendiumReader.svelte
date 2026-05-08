@@ -35,15 +35,24 @@
 				>
 					{node.title}
 				</h2>
-			{:else}
+			{:else if node.level === 3}
 				<h3 id={node.id} class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent">
 					{node.title}
 				</h3>
+			{:else}
+				<h4
+					id={node.id}
+					class="font-ui text-base font-semibold mt-8 mb-3 scroll-mt-24 uppercase tracking-wider text-muted"
+				>
+					{node.title}
+				</h4>
 			{/if}
 		{:else if node.kind === 'epigraph'}
-			<CitationBlock
-				html={`<em>${node.text}</em>${node.attribution ? ` — <span class='attrib'>${node.attribution}</span>` : ''}`}
-			/>
+			<div class="epigraph-wrap">
+				<CitationBlock
+					html={`<em>${node.text}</em>${node.attribution ? ` — <span class='attrib'>${node.attribution}</span>` : ''}`}
+				/>
+			</div>
 		{:else if node.kind === 'prose'}
 			<div class="compendium-prose mb-6">{@html node.html}</div>
 		{:else}
@@ -51,3 +60,17 @@
 		{/if}
 	{/each}
 </main>
+
+<style>
+	/* Align epigraph quote with the question/answer text column rather than
+	   the number gutter. The number col is w-12 (3rem) + a 1rem gap = 4rem
+	   left offset; on mobile the layout stacks so the offset collapses. */
+	.epigraph-wrap {
+		padding-left: 4rem;
+	}
+	@media (max-width: 640px) {
+		.epigraph-wrap {
+			padding-left: 0;
+		}
+	}
+</style>

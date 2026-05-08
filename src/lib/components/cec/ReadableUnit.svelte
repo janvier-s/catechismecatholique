@@ -19,6 +19,21 @@
 		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab ?? 'cross-refs');
 	}
 
+	// Group consecutive integers into compact range strings: [1,2,3,5,7,8] →
+	// ["1-3", "5", "7-8"]. The /cec/[ref=cecref] route accepts both forms.
+	function compactRanges(numbers: number[]): string[] {
+		const sorted = [...new Set(numbers)].filter((n) => Number.isFinite(n)).sort((a, b) => a - b);
+		const out: string[] = [];
+		let i = 0;
+		while (i < sorted.length) {
+			let j = i;
+			while (j + 1 < sorted.length && sorted[j + 1] === sorted[j]! + 1) j++;
+			out.push(i === j ? `${sorted[i]}` : `${sorted[i]}-${sorted[j]}`);
+			i = j + 1;
+		}
+		return out;
+	}
+
 	// CCC paragraphs surface cross-refs inline (sup markers in the text) when in
 	// 'inline' mode, so the aside is gated on the 'side' layout preference. The
 	// Compendium answer is plain prose with no inline marker mechanism, so its
@@ -27,17 +42,18 @@
 	const sideRefs = $derived.by(() => {
 		if (unit.kind === 'ccc-paragraph') {
 			if ($prefs.crossRefsLayout !== 'side') return null;
-			return unit.data.cross_refs.length > 0
-				? { label: 'Renvois', refs: [...new Set(unit.data.cross_refs)], hrefPrefix: '/cec/' }
-				: null;
+			if (unit.data.cross_refs.length === 0) return null;
+			const nums = unit.data.cross_refs
+				.map((r) => parseInt(r, 10))
+				.filter((n) => Number.isFinite(n));
+			return { label: 'Renvois', refs: compactRanges(nums), hrefPrefix: '/cec/' };
 		}
-		return unit.data.ccc_refs.length > 0
-			? {
-					label: 'Renvois CEC',
-					refs: [...new Set(unit.data.ccc_refs.map(String))],
-					hrefPrefix: '/cec/'
-				}
-			: null;
+		if (unit.data.ccc_refs.length === 0) return null;
+		return {
+			label: 'Renvois CEC',
+			refs: compactRanges(unit.data.ccc_refs),
+			hrefPrefix: '/cec/'
+		};
 	});
 
 	const numberHref = $derived(

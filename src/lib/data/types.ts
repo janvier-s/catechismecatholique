@@ -372,7 +372,12 @@ export interface CompendiumQuestion {
 
 export interface CompendiumHeadingNode {
 	kind: 'heading';
-	level: 2 | 3;
+	/**
+	 * 2 = section (under a Part — large serif h2 with rule)
+	 * 3 = subsection (medium ui h3 in accent)
+	 * 4 = sub-subsection (smaller h4, muted)
+	 */
+	level: 2 | 3 | 4;
 	id: string;
 	title: string;
 }
