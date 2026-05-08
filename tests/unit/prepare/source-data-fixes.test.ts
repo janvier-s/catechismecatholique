@@ -230,6 +230,10 @@ describe('groupConsecutiveBibleSups', () => {
 		];
 		const result = groupConsecutiveBibleSups({ html, refs });
 		expect(result.html).toBe(`<span>${sup(1)}.</span>`);
+		// Strip-range invariant: no whitespace gap survives between the leader sup
+		// and the trailing punctuation. A buggy strip range that only consumed the
+		// trailing <sup> elements would leave "<sup1>  ." here.
+		expect(result.html).not.toMatch(/<\/sup>\s+\./);
 		expect(result.refs[1]!.marker_idx).toBe(1);
 	});
 });

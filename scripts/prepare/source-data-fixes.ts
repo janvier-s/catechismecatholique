@@ -200,10 +200,10 @@ export function groupConsecutiveBibleSups<T extends RefLike>(input: {
 	// edits invalidate offsets).
 	const refsByIdx = new Map<number, number>();
 	refs.forEach((r, i) => {
-		if (r.idx !== undefined && r.idx !== null) {
-			const n = typeof r.idx === 'number' ? r.idx : parseInt(String(r.idx), 10);
-			if (Number.isFinite(n)) refsByIdx.set(n, i);
-		}
+		if (r.type !== 'bible' && r.type !== 'bible_continuation') return;
+		if (r.idx === undefined || r.idx === null) return;
+		const n = typeof r.idx === 'number' ? r.idx : parseInt(String(r.idx), 10);
+		if (Number.isFinite(n)) refsByIdx.set(n, i);
 	});
 
 	const nextRefs = refs.map((r) => ({ ...r }));
