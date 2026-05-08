@@ -1,4 +1,4 @@
-export type Corpus = 'ccc' | 'compendium';
+export type Corpus = 'ccc' | 'compendium' | 'trent';
 
 export interface BibleRef {
 	text: string;
@@ -521,12 +521,19 @@ export interface TrentChapterFile {
 	next?: TrentNav;
 }
 
+export interface TrentStructureSection {
+	slug: string;
+	title: string;
+	ordinal: number;
+	paragraph_range: [number, number];
+}
+
 export interface TrentStructureChapter {
 	number: number;
 	slug: string;
 	title: string;
 	paragraph_range: [number, number];
-	section_count: number;
+	sections: TrentStructureSection[];
 }
 
 export interface TrentStructurePart {

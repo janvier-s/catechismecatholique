@@ -1,7 +1,7 @@
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse, serialize } from 'parse5';
-import { numberedSlug } from './slug.ts';
+import { numberedSlug, slugify } from './slug.ts';
 
 // ─── parse5 node helpers ──────────────────────────────────────────────────────
 
@@ -32,10 +32,7 @@ function textOf(node: ParseNode): string {
 function innerHtml(node: ParseNode): string {
 	return serialize(node as Parameters<typeof serialize>[0]);
 }
-function findOne(
-	node: ParseNode,
-	pred: (n: ParseNode) => boolean
-): ParseNode | undefined {
+function findOne(node: ParseNode, pred: (n: ParseNode) => boolean): ParseNode | undefined {
 	for (const n of iter(node)) if (pred(n)) return n;
 }
 function findAll(node: ParseNode, pred: (n: ParseNode) => boolean): ParseNode[] {
@@ -155,13 +152,42 @@ function toSentenceCase(s: string): string {
 	return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 }
 
-// Strip Roman numeral prefix like "I. — " or "II.— " from section headings.
-const ROMAN_PREFIX_RE = /^[IVXLCDM]+\.\s*[—–-]+\s*/;
+// Strip Roman numeral prefix like "I — ", "I. — ", "II.— ", "II — " etc.
+const ROMAN_PREFIX_RE = /^([IVXLCDM]+)\.?\s*[—–\-]+\s*/;
+
+// Proper-noun substitutions to fix lowercased theological terms.
+const TITLE_SUBS: Array<[RegExp, string]> = [
+	[/eglise|église/gi, 'Église'],
+	[/jesus-christ|jésus-christ/gi, 'Jésus-Christ'],
+	[/\bchrist\b/gi, 'Christ'],
+	[/saint-esprit/gi, 'Saint-Esprit'],
+	[/eucharistie/gi, 'Eucharistie'],
+	[/\bseigneur\b/gi, 'Seigneur'],
+	[/\btrinité\b|trinite\b/gi, 'Trinité'],
+	[/vierge marie/gi, 'Vierge Marie'],
+	[/\bmarie\b/gi, 'Marie'],
+	[/\bdieu\b/gi, 'Dieu'],
+	[/décalogue|decalogue/gi, 'Décalogue'],
+	[/apôtres|apotres/gi, 'Apôtres']
+];
+
+function applyTitleSubs(s: string): string {
+	let out = s;
+	for (const [re, r] of TITLE_SUBS) out = out.replace(re, r);
+	return out;
+}
 
 function cleanSectionTitle(raw: string): string {
-	const stripped = normalizeWs(raw).replace(/\[.*?\]/g, '').trim();
-	const noRoman = stripped.replace(ROMAN_PREFIX_RE, '');
-	return toSentenceCase(noRoman);
+	const stripped = normalizeWs(raw)
+		.replace(/\[.*?\]/g, '')
+		.trim();
+	const m = stripped.match(ROMAN_PREFIX_RE);
+	if (m) {
+		const roman = m[1]!.toUpperCase();
+		const body = stripped.slice(m[0].length);
+		return `${roman} — ${applyTitleSubs(toSentenceCase(body))}`;
+	}
+	return applyTitleSubs(toSentenceCase(stripped));
 }
 
 // ─── Footnote extraction ──────────────────────────────────────────────────────
@@ -236,16 +262,21 @@ function splitIntoSections(contentDiv: ParseNode): RawSection[] {
 
 	for (const child of contentDiv.childNodes ?? []) {
 		if (child.tagName === 'div' && hasClass(child, 'mw-heading')) {
-			const headingText = normalizeWs(textOf(child)).replace(/\[.*?\]/g, '').trim();
+			const headingText = normalizeWs(textOf(child))
+				.replace(/\[.*?\]/g, '')
+				.trim();
 			if (current) sections.push(current);
 			current = { title: cleanSectionTitle(headingText), paragraphHtmls: [] };
 		} else if (child.tagName === 'h2' && !hasClass(child, 'tmp')) {
 			// Some chapters may still use bare h2 (not wrapped in mw-heading div)
-			const headingText = normalizeWs(textOf(child)).replace(/\[.*?\]/g, '').trim();
+			const headingText = normalizeWs(textOf(child))
+				.replace(/\[.*?\]/g, '')
+				.trim();
 			if (current) sections.push(current);
 			current = { title: cleanSectionTitle(headingText), paragraphHtmls: [] };
 		} else if (child.tagName === 'p') {
 			const text = normalizeWs(textOf(child));
+			if (text.startsWith('==')) continue; // wiki-markup heading leaked into a <p>
 			if (text.length > 15) {
 				if (!current) current = { title: 'Introduction', paragraphHtmls: [] };
 				current.paragraphHtmls.push(innerHtml(child));
@@ -297,7 +328,7 @@ function parseChapter(html: string, chapNum: number): ParsedChapter {
 	if (tableItem) {
 		const selflink = findOne(tableItem, (n) => n.tagName === 'a' && hasClass(n, 'mw-selflink'));
 		if (selflink) {
-			chapterTitle = normalizeWs(textOf(selflink));
+			chapterTitle = applyTitleSubs(normalizeWs(textOf(selflink)));
 		}
 	}
 
@@ -310,6 +341,41 @@ function parseChapter(html: string, chapNum: number): ParsedChapter {
 		sections: splitIntoSections(contentDiv),
 		footnoteMap
 	};
+}
+
+// ─── Slug helpers ─────────────────────────────────────────────────────────────
+
+// Articles / prepositions stripped from interior slug segments (conjunctions like "et" stay).
+const INTERIOR_SLUG_STOPS = new Set([
+	'au',
+	'aux',
+	'd',
+	'de',
+	'des',
+	'du',
+	'en',
+	'l',
+	'la',
+	'le',
+	'les',
+	'un',
+	'une'
+]);
+
+// Chapter slug: strip ALL article/preposition segments (not conjunctions) for cleaner URLs.
+function chapterSlugBody(title: string, max: number): string {
+	const raw = slugify(title);
+	const segments = raw.split('-').filter((p) => p && !INTERIOR_SLUG_STOPS.has(p));
+	const body = segments.join('-') || raw;
+	if (body.length <= max) return body;
+	const cut = body.lastIndexOf('-', max);
+	return cut > 0 ? body.slice(0, cut) : body.slice(0, max);
+}
+
+// Section slug: strip the Roman-numeral prefix ("II — ") so the body drives the slug.
+// shortSlug will then naturally drop any leading article ("du", "la", etc.).
+function sectionTitleBody(cleanTitle: string): string {
+	return cleanTitle.replace(ROMAN_PREFIX_RE, '') || cleanTitle;
 }
 
 // ─── Main export ──────────────────────────────────────────────────────────────
@@ -361,7 +427,7 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 	const chapterSlugs = new Set<string>();
 	const chapterSlugMap = new Map<number, string>(); // chapNum → slug
 	for (const ch of parsed) {
-		const slug = numberedSlug(ch.number, ch.title, 35, chapterSlugs);
+		const slug = numberedSlug(ch.number, chapterSlugBody(ch.title, 15), 15, chapterSlugs);
 		chapterSlugMap.set(ch.number, slug);
 	}
 
@@ -390,7 +456,7 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 		for (let si = 0; si < ch.sections.length; si++) {
 			const sec = ch.sections[si]!;
 			const ordinal = si + 1;
-			const sectionSlug = numberedSlug(ordinal, sec.title, 35, sectionSlugs);
+			const sectionSlug = numberedSlug(ordinal, sectionTitleBody(sec.title), 15, sectionSlugs);
 
 			const refsUsed = new Set<number>();
 			const paragraphs: TrentParagraphData[] = [];
@@ -436,7 +502,7 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 		sectionOrdinal: number;
 	}
 	const navTargets: NavTarget[] = allSections.map((s) => ({
-		href: `/trent/${s.chapterSlug}/${s.sectionSlug}`,
+		href: `/trente/${s.chapterSlug}/${s.sectionSlug}`,
 		title: s.sectionTitle,
 		chapterNum: s.chapterNum,
 		chapterTitle: s.chapterTitle,
@@ -458,11 +524,7 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 					href: prev.href,
 					title: prev.title,
 					kind:
-						prev.chapterNum !== s.chapterNum
-							? 'chapter'
-							: isFirstInChapter
-								? 'chapter'
-								: 'section'
+						prev.chapterNum !== s.chapterNum ? 'chapter' : isFirstInChapter ? 'chapter' : 'section'
 				}
 			: undefined;
 		void isFirstInChapter;
@@ -471,7 +533,8 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 			? {
 					href: next.href,
 					title: next.title,
-					kind: next.chapterNum !== s.chapterNum ? 'chapter' : isLastInChapter ? 'chapter' : 'section'
+					kind:
+						next.chapterNum !== s.chapterNum ? 'chapter' : isLastInChapter ? 'chapter' : 'section'
 				}
 			: undefined;
 		void isLastInChapter;
@@ -536,14 +599,14 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 			})),
 			...(prevLastSection && {
 				prev: {
-					href: `/trent/${prevLastSection.chapterSlug}/${prevLastSection.sectionSlug}`,
+					href: `/trente/${prevLastSection.chapterSlug}/${prevLastSection.sectionSlug}`,
 					title: prevChapter!.title,
 					kind: 'chapter'
 				}
 			}),
 			...(nextFirstSection && {
 				next: {
-					href: `/trent/${nextFirstSection.chapterSlug}/${nextFirstSection.sectionSlug}`,
+					href: `/trente/${nextFirstSection.chapterSlug}/${nextFirstSection.sectionSlug}`,
 					title: nextChapter!.title,
 					kind: 'chapter'
 				}
@@ -582,11 +645,16 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 					number: ch.number,
 					slug: chapterSlugMap.get(ch.number)!,
 					title: ch.title,
-					paragraph_range: [
-						firstSec?.paragraphRange[0] ?? 0,
-						lastSec?.paragraphRange[1] ?? 0
-					] as [number, number],
-					section_count: sections.length
+					paragraph_range: [firstSec?.paragraphRange[0] ?? 0, lastSec?.paragraphRange[1] ?? 0] as [
+						number,
+						number
+					],
+					sections: sections.map((s) => ({
+						slug: s.sectionSlug,
+						title: s.sectionTitle,
+						ordinal: s.ordinal,
+						paragraph_range: s.paragraphRange
+					}))
 				};
 			})
 	}));

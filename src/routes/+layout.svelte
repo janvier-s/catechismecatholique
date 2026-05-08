@@ -35,6 +35,11 @@
 			if (p.startsWith('/compendium/q/')) return false;
 			return true;
 		}
+		// Trent section reader (hide on landing and sommaire)
+		if (p.startsWith('/trente/')) {
+			if (p.startsWith('/trente/sommaire')) return false;
+			return true;
+		}
 		return false;
 	});
 
@@ -50,9 +55,16 @@
 		const toOnCcc = toPath.startsWith('/cec');
 		const fromOnBible = fromPath.startsWith('/bible');
 		const toOnBible = toPath.startsWith('/bible');
+		const fromOnTrent = fromPath.startsWith('/trente');
+		const toOnTrent = toPath.startsWith('/trente');
 		const toOnConcordance = /\/bible\/[^/]+\/\d+\/concordance/.test(toPath);
 
-		if ((fromOnCcc && !toOnCcc) || (fromOnBible && !toOnBible) || toOnConcordance) {
+		if (
+			(fromOnCcc && !toOnCcc) ||
+			(fromOnBible && !toOnBible) ||
+			(fromOnTrent && !toOnTrent) ||
+			toOnConcordance
+		) {
 			if (get(studyPanel).open) closePanel();
 		}
 
@@ -95,7 +107,13 @@
 <TopBar />
 <div class="flex">
 	{#if showSidebar}
-		<Sidebar corpus={page.url.pathname.startsWith('/compendium') ? 'compendium' : 'ccc'} />
+		<Sidebar
+			corpus={page.url.pathname.startsWith('/compendium')
+				? 'compendium'
+				: page.url.pathname.startsWith('/trente')
+					? 'trent'
+					: 'ccc'}
+		/>
 		<SidebarToggle />
 	{/if}
 	<div

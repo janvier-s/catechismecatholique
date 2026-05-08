@@ -293,7 +293,9 @@
 /* Reading prefs — toggles driven by data attributes on <html>, set by
    prefs.subscribe. CSS is the source of truth so toggling is instant and
    doesn't require re-rendering the paragraph. */
-.prose-paragraph[data-paragraph] {
+.prose-paragraph[data-paragraph],
+.compendium-question,
+.compendium-answer {
 	font-size: var(--reader-font-size, 17px);
 	line-height: var(--reader-line-height, 1.6);
 }
@@ -321,8 +323,10 @@ html[data-column-width='wide'] .max-w-reader {
 }
 /* En-marge mode: widen the container so the refs box sits in the right
    margin, outside the prose column. The article uses padding-right + an
-   absolutely positioned aside (see ParagraphView.svelte). */
-html[data-cross-refs-layout='side'] .max-w-reader {
+   absolutely positioned aside (see ParagraphView.svelte). Scoped to CCC
+   readers — Trent and Compendium have no side refs, so their column-width
+   pref must not be hijacked by this override. */
+html[data-cross-refs-layout='side'] main[data-corpus='ccc'].max-w-reader {
 	max-width: min(1180px, 100% - 48px);
 }
 /* En-marge mode: the side aside lists every cross-ref already, so the
@@ -345,7 +349,9 @@ html[data-hide-bible-markers='true'] .prose-paragraph .ref-bibleRef {
 html[data-hide-bible-inline='true'] .prose-paragraph .ref-bible-inline {
 	display: none;
 }
-html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef {
+html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef,
+html[data-hide-source-footnotes='true'] .prose-paragraph sup.trent-fn-marker,
+html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	display: none;
 }
 /* Tiny breathing room between adjacent markers (replaces the old ", "

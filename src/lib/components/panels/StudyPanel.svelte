@@ -21,6 +21,7 @@
 	import TabConcordance from './TabConcordance.svelte';
 	import TabCompendium from './TabCompendium.svelte';
 	import TabIA from './TabIA.svelte';
+	import TabTrentNotes from './TabTrentNotes.svelte';
 	import TabStrip from './TabStrip.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
@@ -66,8 +67,8 @@
 			compendiumCiters = [];
 			return;
 		}
-		// Bible-verse mode has no paragraph context; TabBibleVerse loads its own data.
-		if (ctx.kind === 'verse') {
+		// Bible-verse mode and trent-paragraph mode have no CCC paragraph context.
+		if (ctx.kind === 'verse' || ctx.kind === 'trent-paragraph') {
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
@@ -107,6 +108,13 @@
 		const ctx = $studyPanel.context;
 		if (ctx?.kind === 'verse') {
 			return [{ id: 'bible-verse', label: 'CEC' }];
+		}
+		// Trent paragraph mode: only footnotes tab.
+		if (ctx?.kind === 'trent-paragraph') {
+			if (ctx.footnotes.length > 0) {
+				return [{ id: 'trent-notes', label: 'Notes' }];
+			}
+			return [];
 		}
 		if (!paragraph) return ALL_TABS;
 		const hasBible = paragraph.bible_refs.length > 0;
@@ -237,6 +245,11 @@
 					>
 						CEC {ctxM.paragraph}
 					</a>
+				{:else if $studyPanel.context?.kind === 'trent-paragraph'}
+					{@const ctxM = $studyPanel.context}
+					<span class="text-accent font-semibold tabular-nums">
+						§ {ctxM.paragraph}
+					</span>
 				{/if}
 			</div>
 			<button
@@ -277,6 +290,8 @@
 					<TabCompendium />
 				{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
 					<TabIA paragraphNumber={$studyPanel.context.paragraph} />
+				{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
+					<TabTrentNotes />
 				{/if}
 			</div>
 		{/if}
@@ -303,6 +318,10 @@
 					>
 						CEC {ctx.paragraph}
 					</a>
+				{:else if ctx?.kind === 'trent-paragraph'}
+					<span class="text-accent font-semibold tabular-nums">
+						§ {ctx.paragraph}
+					</span>
 				{/if}
 			{/snippet}
 
@@ -335,6 +354,8 @@
 						<TabCompendium />
 					{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
 						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
+					{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
+						<TabTrentNotes />
 					{/if}
 				</div>
 			{/if}

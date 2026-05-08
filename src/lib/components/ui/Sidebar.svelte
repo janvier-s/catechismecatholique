@@ -7,14 +7,16 @@
 		loadChapter,
 		loadParagraphContext,
 		loadCompendiumStructure,
-		loadCompendiumPart
+		loadCompendiumPart,
+		loadTrentStructure
 	} from '$lib/data/loaders';
 	import type {
 		Chapter,
 		ParagraphContext,
 		Corpus,
 		CompendiumStructure,
-		CompendiumPart
+		CompendiumPart,
+		TrentStructure
 	} from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
@@ -74,6 +76,16 @@
 		if (corpus !== 'ccc') return;
 		(async () => {
 			structure = (await loadStructure()) as { parts: Part[] };
+		})();
+	});
+
+	// ─── Trent state ──────────────────────────────────────────────────────────
+	let trentStructure: TrentStructure | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'trent') return;
+		(async () => {
+			trentStructure = await loadTrentStructure();
 		})();
 	});
 
@@ -394,6 +406,43 @@
 	}
 
 	const tree: Item[] = $derived.by(() => {
+		if (corpus === 'trent') {
+			if (!trentStructure) return [];
+			return trentStructure.parts.map((part, partIdx): Item => {
+				const isPrologue = part.slug === 'prologue';
+				// Trent has no part- or chapter-level pages; deepest entry is the
+				// section. Use the first chapter's first section as the part link
+				// and the chapter's first section as the chapter link, mirroring
+				// the table-of-contents behaviour on /trente/sommaire.
+				const firstCh = part.chapters[0];
+				const firstSec = firstCh?.sections[0];
+				const partHref =
+					firstCh && firstSec ? `/trente/${firstCh.slug}/${firstSec.slug}` : '/trente';
+				const partTypeLabel = isPrologue ? undefined : 'Partie';
+				const partNumber = isPrologue ? undefined : partIdx; // 1, 2, 3, 4
+				return {
+					title: part.title,
+					...(partTypeLabel ? { typeLabel: partTypeLabel } : {}),
+					...(partNumber !== undefined ? { number: partNumber } : {}),
+					href: partHref,
+					children: part.chapters.map((ch): Item => {
+						const chFirstSec = ch.sections[0];
+						const chHref = chFirstSec ? `/trente/${ch.slug}/${chFirstSec.slug}` : '/trente';
+						return {
+							title: ch.title,
+							...(ch.number > 0 ? { number: ch.number, typeLabel: 'Chapitre' } : {}),
+							href: chHref,
+							children: ch.sections.map(
+								(sec): Item => ({
+									title: sec.title,
+									href: `/trente/${ch.slug}/${sec.slug}`
+								})
+							)
+						};
+					})
+				};
+			});
+		}
 		if (corpus === 'compendium') {
 			if (!compendiumStructure) return [];
 			return compendiumStructure.parts.map((part): Item => {
@@ -516,7 +565,11 @@
 	<nav
 		bind:this={navEl}
 		class="flex-1 overflow-y-auto p-3 font-ui styled-scroll styled-scroll-accent"
-		aria-label={corpus === 'compendium' ? 'Plan du Compendium' : 'Plan du Catéchisme'}
+		aria-label={corpus === 'compendium'
+			? 'Plan du Compendium'
+			: corpus === 'trent'
+				? 'Plan du Catéchisme de Trente'
+				: 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">

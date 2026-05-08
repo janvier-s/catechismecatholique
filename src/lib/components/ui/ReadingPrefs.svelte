@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { prefs, updatePref } from '$lib/stores/prefs';
 	import { FONTS, DYSLEXIA_FONT, getFontById } from '$lib/data/fonts';
+	import { page } from '$app/state';
+
+	const isTrent = $derived(page.url.pathname.startsWith('/trente'));
+	const isCompendium = $derived(page.url.pathname.startsWith('/compendium'));
+	const isCecOnly = $derived(!isTrent && !isCompendium);
 
 	let activeTab: 'text' | 'reading' | 'notes' = $state('text');
 	let fontDropdownOpen = $state(false);
@@ -73,17 +78,29 @@
 	const activeFont = $derived(getFontById($prefs.fontFamily) ?? FONTS[0]!);
 
 	function setHideAll(on: boolean) {
-		prefs.update((p) => ({
-			...p,
-			hideAllNotes: on,
-			hideCrossRefs: on,
-			hideBibleMarkers: on,
-			hideBibleInline: on,
-			hideSourceFootnotes: on
-		}));
+		if (isTrent) {
+			// On Trent pages only the source-footnotes control is relevant.
+			prefs.update((p) => ({ ...p, hideAllNotes: on, hideSourceFootnotes: on }));
+		} else {
+			prefs.update((p) => ({
+				...p,
+				hideAllNotes: on,
+				hideCrossRefs: on,
+				hideBibleMarkers: on,
+				hideBibleInline: on,
+				hideSourceFootnotes: on
+			}));
+		}
 	}
 
 	$effect(() => {
+		if (isTrent) {
+			const all = $prefs.hideSourceFootnotes;
+			if ($prefs.hideAllNotes !== all) {
+				prefs.update((p) => ({ ...p, hideAllNotes: all }));
+			}
+			return;
+		}
 		const all =
 			$prefs.hideCrossRefs &&
 			$prefs.hideBibleMarkers &&
@@ -256,57 +273,59 @@
 				</div>
 			</div>
 
-			<div>
-				<span class="block mb-2 text-muted text-[13px]">Renvois (§)</span>
-				<div class="flex gap-1.5">
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{$prefs.crossRefsLayout === 'inline'
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('crossRefsLayout', 'inline')}
-					>
-						En ligne
-					</button>
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{$prefs.crossRefsLayout === 'side'
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('crossRefsLayout', 'side')}
-					>
-						En marge
-					</button>
+			{#if isCecOnly}
+				<div>
+					<span class="block mb-2 text-muted text-[13px]">Renvois (§)</span>
+					<div class="flex gap-1.5">
+						<button
+							type="button"
+							class="flex-1 py-1.5 border rounded text-xs
+								{$prefs.crossRefsLayout === 'inline'
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
+							onclick={() => updatePref('crossRefsLayout', 'inline')}
+						>
+							En ligne
+						</button>
+						<button
+							type="button"
+							class="flex-1 py-1.5 border rounded text-xs
+								{$prefs.crossRefsLayout === 'side'
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
+							onclick={() => updatePref('crossRefsLayout', 'side')}
+						>
+							En marge
+						</button>
+					</div>
 				</div>
-			</div>
 
-			<div>
-				<span class="block mb-2 text-muted text-[13px]">Réfs. bibliques</span>
-				<div class="flex gap-1.5">
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{!$prefs.inlineAsMarkers
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('inlineAsMarkers', false)}
-					>
-						En ligne
-					</button>
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{$prefs.inlineAsMarkers
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('inlineAsMarkers', true)}
-					>
-						En exposant
-					</button>
+				<div>
+					<span class="block mb-2 text-muted text-[13px]">Réfs. bibliques</span>
+					<div class="flex gap-1.5">
+						<button
+							type="button"
+							class="flex-1 py-1.5 border rounded text-xs
+								{!$prefs.inlineAsMarkers
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
+							onclick={() => updatePref('inlineAsMarkers', false)}
+						>
+							En ligne
+						</button>
+						<button
+							type="button"
+							class="flex-1 py-1.5 border rounded text-xs
+								{$prefs.inlineAsMarkers
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
+							onclick={() => updatePref('inlineAsMarkers', true)}
+						>
+							En exposant
+						</button>
+					</div>
 				</div>
-			</div>
+			{/if}
 		</div>
 	{/if}
 
@@ -324,56 +343,60 @@
 				</span>
 				<span class="font-semibold">Masquer toutes les notes</span>
 			</label>
-			<div class="pl-6 space-y-3 text-[14px] border-l border-border ml-1.5">
-				<label class="flex items-center gap-2.5 cursor-pointer">
-					<input
-						type="checkbox"
-						checked={$prefs.hideCrossRefs}
-						onchange={(e) => updatePref('hideCrossRefs', e.currentTarget.checked)}
-						class="prefs-check-input"
-					/>
-					<span class="prefs-check" aria-hidden="true">
-						{#if $prefs.hideCrossRefs}<span class="prefs-check-mark">✓</span>{/if}
-					</span>
-					<span>Renvois (§)</span>
-				</label>
-				<label class="flex items-center gap-2.5 cursor-pointer">
-					<input
-						type="checkbox"
-						checked={$prefs.hideBibleInline}
-						onchange={(e) => updatePref('hideBibleInline', e.currentTarget.checked)}
-						class="prefs-check-input"
-					/>
-					<span class="prefs-check" aria-hidden="true">
-						{#if $prefs.hideBibleInline}<span class="prefs-check-mark">✓</span>{/if}
-					</span>
-					<span>Réfs. bibliques en ligne</span>
-				</label>
-				<label class="flex items-center gap-2.5 cursor-pointer">
-					<input
-						type="checkbox"
-						checked={$prefs.hideBibleMarkers}
-						onchange={(e) => updatePref('hideBibleMarkers', e.currentTarget.checked)}
-						class="prefs-check-input"
-					/>
-					<span class="prefs-check" aria-hidden="true">
-						{#if $prefs.hideBibleMarkers}<span class="prefs-check-mark">✓</span>{/if}
-					</span>
-					<span>Réfs. bibliques en exposant</span>
-				</label>
-				<label class="flex items-center gap-2.5 cursor-pointer">
-					<input
-						type="checkbox"
-						checked={$prefs.hideSourceFootnotes}
-						onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
-						class="prefs-check-input"
-					/>
-					<span class="prefs-check" aria-hidden="true">
-						{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
-					</span>
-					<span>Sources</span>
-				</label>
-			</div>
+			{#if !isTrent}
+				<div class="pl-6 space-y-3 text-[14px] border-l border-border ml-1.5">
+					{#if isCecOnly}
+						<label class="flex items-center gap-2.5 cursor-pointer">
+							<input
+								type="checkbox"
+								checked={$prefs.hideCrossRefs}
+								onchange={(e) => updatePref('hideCrossRefs', e.currentTarget.checked)}
+								class="prefs-check-input"
+							/>
+							<span class="prefs-check" aria-hidden="true">
+								{#if $prefs.hideCrossRefs}<span class="prefs-check-mark">✓</span>{/if}
+							</span>
+							<span>Renvois (§)</span>
+						</label>
+						<label class="flex items-center gap-2.5 cursor-pointer">
+							<input
+								type="checkbox"
+								checked={$prefs.hideBibleInline}
+								onchange={(e) => updatePref('hideBibleInline', e.currentTarget.checked)}
+								class="prefs-check-input"
+							/>
+							<span class="prefs-check" aria-hidden="true">
+								{#if $prefs.hideBibleInline}<span class="prefs-check-mark">✓</span>{/if}
+							</span>
+							<span>Réfs. bibliques en ligne</span>
+						</label>
+						<label class="flex items-center gap-2.5 cursor-pointer">
+							<input
+								type="checkbox"
+								checked={$prefs.hideBibleMarkers}
+								onchange={(e) => updatePref('hideBibleMarkers', e.currentTarget.checked)}
+								class="prefs-check-input"
+							/>
+							<span class="prefs-check" aria-hidden="true">
+								{#if $prefs.hideBibleMarkers}<span class="prefs-check-mark">✓</span>{/if}
+							</span>
+							<span>Réfs. bibliques en exposant</span>
+						</label>
+					{/if}
+					<label class="flex items-center gap-2.5 cursor-pointer">
+						<input
+							type="checkbox"
+							checked={$prefs.hideSourceFootnotes}
+							onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
+							class="prefs-check-input"
+						/>
+						<span class="prefs-check" aria-hidden="true">
+							{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
+						</span>
+						<span>Sources</span>
+					</label>
+				</div>
+			{/if}
 		</div>
 	{/if}
 </div>

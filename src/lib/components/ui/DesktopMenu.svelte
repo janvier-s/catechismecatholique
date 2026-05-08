@@ -69,6 +69,11 @@
 			description: 'Le Catéchisme en 598 questions et réponses.'
 		},
 		{
+			href: '/trente',
+			label: 'Catéchisme de Trente',
+			description: 'Le catéchisme du Concile de Trente (1566).'
+		},
+		{
 			href: '/prieres-formules',
 			label: 'Prières & Formules',
 			description: 'Prières communes et formules de la doctrine catholique.'

@@ -372,10 +372,7 @@ export function loadTrentStructure(fetcher: Fetch = fetch): Promise<TrentStructu
 	return trentStructurePromise;
 }
 
-export function loadTrentChapter(
-	slug: string,
-	fetcher: Fetch = fetch
-): Promise<TrentChapterFile> {
+export function loadTrentChapter(slug: string, fetcher: Fetch = fetch): Promise<TrentChapterFile> {
 	let p = trentChapterCache.get(slug);
 	if (!p) {
 		p = fetchJson<TrentChapterFile>(`/data/trent/chapters/${slug}.json`, fetcher);
