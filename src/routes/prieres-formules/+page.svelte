@@ -9,12 +9,8 @@
 	 *   - literal HTML spans/tags (e.g. <span style="font-style:italic">…</span>)
 	 *   - plain text lines separated by \n (line break within stanza)
 	 *   - \n\n between stanzas (paragraph break)
-	 *
-	 * We split on \n\n first to get stanzas, then within each stanza we split
-	 * on \n and join with <br />.
 	 */
 	function renderBody(raw: string): string {
-		// Normalise \r\n → \n
 		const text = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 		const stanzas = text.split(/\n\n+/);
 		return stanzas
@@ -25,6 +21,54 @@
 			})
 			.join('');
 	}
+
+	// Build the right-sticky TOC: each prayer + each section heading gets an
+	// entry. Section headings stand alone; prayers nest under the most recent
+	// heading. We render flat with section dividers.
+	type TocEntry = { id: string; label: string; kind: 'section' | 'prayer' };
+	// Map from flow index → element id. Headings already carry node.id; we
+	// synthesise prayer-N-N ids for prayer cards.
+	const idByFlowIdx: Record<number, string> = {};
+	const tocItems: TocEntry[] = (() => {
+		const out: TocEntry[] = [];
+		let prayerIdx = 0;
+		let lastHeadingPos = 0;
+		for (let i = 0; i < data.part.flow.length; i++) {
+			const node = data.part.flow[i]!;
+			if (node.kind === 'heading') {
+				idByFlowIdx[i] = node.id;
+				lastHeadingPos = out.length;
+				out.push({ id: node.id, label: node.title, kind: 'section' });
+				prayerIdx = 0;
+			} else if (node.kind === 'prayer' && node.fr.title) {
+				prayerIdx++;
+				const id = `prayer-${lastHeadingPos}-${prayerIdx}`;
+				idByFlowIdx[i] = id;
+				out.push({ id, label: node.fr.title, kind: 'prayer' });
+			}
+		}
+		return out;
+	})();
+
+	// Track which TOC entry is in view (scroll-spy).
+	let activeId = $state(tocItems[0]?.id ?? '');
+
+	$effect(() => {
+		if (typeof window === 'undefined') return;
+		const onScroll = () => {
+			const threshold = window.innerHeight * 0.25;
+			let current = tocItems[0]?.id ?? '';
+			for (const it of tocItems) {
+				const el = document.getElementById(it.id);
+				if (!el) continue;
+				if (el.getBoundingClientRect().top <= threshold) current = it.id;
+			}
+			if (current !== activeId) activeId = current;
+		};
+		onScroll();
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
+	});
 </script>
 
 <svelte:head>
@@ -68,6 +112,7 @@
 				<!-- Bilingual prayer card -->
 				<article
 					class="prayer-pair"
+					id={idByFlowIdx[i] || undefined}
 					class:prayer-pair--separator={i > 0 && data.part.flow[i - 1]?.kind === 'prayer'}
 				>
 					<!-- French column -->
@@ -108,6 +153,19 @@
 		<span class="missal-fleuron">✠</span>
 	</footer>
 </main>
+
+{#if tocItems.length > 1}
+	<aside class="missal-toc" aria-label="Sommaire des prières">
+		<p class="toc-label">Sommaire</p>
+		<ul class="toc-list">
+			{#each tocItems as item (item.id)}
+				<li class:toc-active={activeId === item.id} class:toc-section={item.kind === 'section'}>
+					<a href="#{item.id}">{item.label}</a>
+				</li>
+			{/each}
+		</ul>
+	</aside>
+{/if}
 
 <style>
 	/* ─────────────────────────────────────────────────────────────────
@@ -303,12 +361,11 @@
 	}
 
 	.prayer-title--la {
-		color: var(--latin-color);
-		font-style: italic;
-		font-weight: 400;
-		letter-spacing: 0.08em;
-		text-transform: none;
-		font-size: 0.8rem;
+		color: var(--color-fg);
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		font-size: 0.75rem;
 	}
 
 	/* Keep French and Latin titles vertically aligned when Latin title is absent */
@@ -327,10 +384,9 @@
 	}
 
 	.prayer-body--la {
-		font-style: italic;
-		font-size: 0.9rem;
-		line-height: 1.9;
-		color: var(--latin-color);
+		font-size: 1rem;
+		line-height: 1.85;
+		color: var(--color-fg);
 	}
 
 	/* Stanza paragraphs rendered by renderBody() */
@@ -447,6 +503,79 @@
 	@media (prefers-reduced-motion: reduce) {
 		* {
 			transition: none !important;
+		}
+	}
+
+	/* ─────────────────────────────────────────────────────────────────
+	   Right-sticky TOC (mirrors the /a-propos pattern)
+	──────────────────────────────────────────────────────────────────── */
+	.missal-toc {
+		position: fixed;
+		right: 24px;
+		top: 100px;
+		width: 220px;
+		max-height: calc(100vh - 120px);
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-border) transparent;
+	}
+	.toc-label {
+		font-family: var(--font-ui);
+		font-size: 9px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.24em;
+		color: var(--color-accent-text);
+		margin: 0 0 12px;
+		opacity: 0.85;
+	}
+	.toc-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+	}
+	.toc-list li a {
+		display: block;
+		font-family: var(--font-ui);
+		font-size: 12px;
+		line-height: 1.45;
+		padding: 3px 0;
+		color: var(--color-subtle);
+		text-decoration: none;
+		opacity: 0.8;
+		transition:
+			color 200ms ease,
+			opacity 200ms ease;
+	}
+	.toc-list li a:hover {
+		color: var(--color-fg);
+		opacity: 1;
+	}
+	.toc-list li.toc-active a {
+		color: var(--color-accent-text);
+		opacity: 1;
+		font-weight: 600;
+	}
+	.toc-list li.toc-section {
+		margin-top: 0.7rem;
+	}
+	.toc-list li.toc-section:first-child {
+		margin-top: 0;
+	}
+	.toc-list li.toc-section a {
+		font-size: 10px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--color-fg);
+		padding: 4px 0 2px;
+	}
+	@media (max-width: 1100px) {
+		.missal-toc {
+			display: none;
 		}
 	}
 </style>
