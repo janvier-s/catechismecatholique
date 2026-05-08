@@ -70,10 +70,10 @@ describe('buildChapterFiles', () => {
 		const structure = buildStructure(minimal as Parameters<typeof buildStructure>[0]);
 		const chapters = buildChapterFiles(structure, []);
 		const names = chapters.map((c) => c.slug);
-		expect(names).toEqual(['chapitre-a', 'chapitre-b']);
+		expect(names).toEqual(['1-chapitre-a', '2-chapitre-b']);
 		expect(chapters[0]!.next?.title).toBe('Chapitre-B');
 		expect(chapters[0]!.next?.kind).toBe('chapter');
-		expect(chapters[0]!.next?.href).toBe('/cec/test/alpha/chapitre-b');
+		expect(chapters[0]!.next?.href).toBe('/cec/1-test/1-alpha/2-chapitre-b');
 		expect(chapters[0]!.prev).toBeUndefined();
 		expect(chapters[1]!.prev?.title).toBe('Chapitre-A');
 		expect(chapters[1]!.prev?.kind).toBe('chapter');
@@ -151,21 +151,21 @@ describe('buildChapterFiles', () => {
 		it("routes through the section page when the next chapter's section has intro paragraphs", () => {
 			const structure = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 			const chapters = buildChapterFiles(structure, []);
-			const chapA = chapters.find((c) => c.slug === 'chap-a')!;
+			const chapA = chapters.find((c) => c.slug === '1-chap-a')!;
 			expect(chapA.next?.kind).toBe('section');
-			expect(chapA.next?.href).toBe('/cec/test/beta');
+			expect(chapA.next?.href).toBe('/cec/1-test/2-beta');
 			expect(chapA.next?.title).toBe('Beta');
 		});
 
 		it('routes the prev link through the section page in the reverse direction', () => {
 			const structure = buildStructure(fixture as Parameters<typeof buildStructure>[0]);
 			const chapters = buildChapterFiles(structure, []);
-			const chapB = chapters.find((c) => c.slug === 'chap-b')!;
+			const chapB = chapters.find((c) => c.slug === '1-chap-b')!;
 			// chap-b's section IS the one with intro paragraphs, but the PREV
 			// chapter (chap-a) lives in another section without an intro.
 			// chap-b's prev points back to chap-a as a normal chapter link.
 			expect(chapB.prev?.kind).toBe('chapter');
-			expect(chapB.prev?.href).toBe('/cec/test/alpha/chap-a');
+			expect(chapB.prev?.href).toBe('/cec/1-test/1-alpha/1-chap-a');
 		});
 
 		it('routes through the part page when crossing parts AND target part has intro', () => {
@@ -234,9 +234,9 @@ describe('buildChapterFiles', () => {
 			];
 			const structure = buildStructure(partIntroFixture as Parameters<typeof buildStructure>[0]);
 			const chapters = buildChapterFiles(structure, []);
-			const chapA = chapters.find((c) => c.slug === 'chap-a')!;
+			const chapA = chapters.find((c) => c.slug === '1-chap-a')!;
 			expect(chapA.next?.kind).toBe('part');
-			expect(chapA.next?.href).toBe('/cec/two');
+			expect(chapA.next?.href).toBe('/cec/2-two');
 			expect(chapA.next?.title).toBe('Two');
 		});
 	});
