@@ -62,7 +62,13 @@
 	const html = $derived.by(() => {
 		if (phase === 'loading' || phase === 'empty') return '';
 		const slice = phase === 'done' ? fullMd : fullMd.slice(0, cursor);
-		return marked.parse(slice) as string;
+		const raw = marked.parse(slice) as string;
+		// marked encodes apostrophes as &#39;. Match all known summary-label
+		// variants so the accent colour applies consistently across all entries.
+		return raw.replace(
+			/<strong>((?:Ce qu(?:&#39;|')il faut retenir|R[eé]sum[eé]\s+Cl[eé]|L(?:&#39;|')essentiel|En bref|En r[eé]sum[eé]|Le (?:point|message)\s+(?:essentiel|cl[eé]))\s*:)/gi,
+			'<strong class="retenir">$1'
+		);
 	});
 </script>
 
@@ -76,6 +82,7 @@
 	{:else if phase === 'empty'}
 		<p class="empty">Aucune explication disponible pour ce paragraphe.</p>
 	{:else}
+		<p class="eyebrow">Explication générée par IA</p>
 		<div class="ia-body">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 			{@html html}
@@ -83,12 +90,39 @@
 				<span class="blink-cursor" aria-hidden="true">▋</span>
 			{/if}
 		</div>
+		{#if phase === 'done'}
+			<p class="disclaimer">
+				Cette explication est générée par intelligence artificielle. La précision théologique peut
+				varier ; référez-vous toujours au texte original du Catéchisme.
+			</p>
+		{/if}
 	{/if}
 </div>
 
 <style>
 	.tab-ia {
 		padding: 1rem 1rem 2rem;
+	}
+
+	.eyebrow {
+		font-family: var(--font-ui);
+		font-size: 0.625rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin-bottom: 0.75rem;
+	}
+
+	.disclaimer {
+		margin-top: 1.25rem;
+		padding-top: 0.875rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		line-height: 1.5;
+		color: var(--color-muted);
+		font-style: italic;
 	}
 
 	/* Thinking dots */
@@ -157,8 +191,13 @@
 	.ia-body :global(p:last-child) {
 		margin-bottom: 0;
 	}
-	.ia-body :global(ul),
+	.ia-body :global(ul) {
+		list-style-type: disc;
+		padding-left: 1.25rem;
+		margin-bottom: 0.75em;
+	}
 	.ia-body :global(ol) {
+		list-style-type: decimal;
 		padding-left: 1.25rem;
 		margin-bottom: 0.75em;
 	}
@@ -171,6 +210,9 @@
 	.ia-body :global(strong) {
 		font-weight: 600;
 		color: var(--color-heading);
+	}
+	.ia-body :global(strong.retenir) {
+		color: var(--color-accent);
 	}
 
 	.empty {
