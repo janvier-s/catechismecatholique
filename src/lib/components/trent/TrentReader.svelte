@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SvelteSet } from 'svelte/reactivity';
 	import type { TrentSectionFile, TrentFootnote } from '$lib/data/types';
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
@@ -30,7 +31,7 @@
 	}
 
 	function footnotesForParagraph(paragraphHtml: string): TrentFootnote[] {
-		const nums = new Set<number>();
+		const nums = new SvelteSet<number>();
 		const re = /data-n="(\d+)"/g;
 		let m;
 		while ((m = re.exec(paragraphHtml)) !== null) nums.add(parseInt(m[1]!, 10));

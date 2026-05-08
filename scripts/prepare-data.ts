@@ -443,9 +443,7 @@ async function main() {
 		const piusXGrandOutDir = join(OUT, 'pius-x-grand');
 		mkdirSync(piusXGrandOutDir, { recursive: true });
 		const piusX = preparePiusXGrand({ sourceDir: piusXGrandSourceDir, outDir: piusXGrandOutDir });
-		endStep(
-			`${piusX.totalParts} parts, ${piusX.totalChapters} chapters, ${piusX.totalQA} Q&A`
-		);
+		endStep(`${piusX.totalParts} parts, ${piusX.totalChapters} chapters, ${piusX.totalQA} Q&A`);
 	} else {
 		endStep('source not found — skipped');
 	}

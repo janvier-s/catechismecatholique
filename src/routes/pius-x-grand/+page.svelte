@@ -17,8 +17,8 @@
 		<p class="hero-kicker">Édition française</p>
 		<h1 class="hero-title">Grand Catéchisme de saint Pie X</h1>
 		<p class="hero-lede">
-			Promulgué par Pie&nbsp;X en 1905, ce catéchisme présente la foi catholique en {data.structure.total_qa} questions
-			et réponses destinées à l'instruction des fidèles.
+			Promulgué par Pie&nbsp;X en 1905, ce catéchisme présente la foi catholique en {data.structure
+				.total_qa} questions et réponses destinées à l'instruction des fidèles.
 		</p>
 	</header>
 
@@ -28,7 +28,8 @@
 			{#if firstChapter}
 				<a class="part-card" href="/pius-x-grand/{part.slug}/{firstChapter.slug}">
 					<span class="part-kicker">
-						Q.&nbsp;{part.chapters[0]?.qa_range[0]}–{part.chapters[part.chapters.length - 1]?.qa_range[1]}
+						Q.&nbsp;{part.chapters[0]?.qa_range[0]}–{part.chapters[part.chapters.length - 1]
+							?.qa_range[1]}
 					</span>
 					<h2 class="part-title">{part.title}</h2>
 					{#if part.chapters.length > 1}

@@ -337,72 +337,72 @@
 					Ce catéchisme ne contient pas de notes.
 				</p>
 			{:else}
-			<label class="flex items-center gap-2.5 cursor-pointer">
-				<input
-					type="checkbox"
-					checked={$prefs.hideAllNotes}
-					onchange={(e) => setHideAll(e.currentTarget.checked)}
-					class="prefs-check-input"
-				/>
-				<span class="prefs-check" aria-hidden="true">
-					{#if $prefs.hideAllNotes}<span class="prefs-check-mark">✓</span>{/if}
-				</span>
-				<span class="font-semibold">Masquer toutes les notes</span>
-			</label>
-			{#if !isTrent}
-				<div class="pl-6 space-y-3 text-[14px] border-l border-border ml-1.5">
-					{#if isCecOnly}
+				<label class="flex items-center gap-2.5 cursor-pointer">
+					<input
+						type="checkbox"
+						checked={$prefs.hideAllNotes}
+						onchange={(e) => setHideAll(e.currentTarget.checked)}
+						class="prefs-check-input"
+					/>
+					<span class="prefs-check" aria-hidden="true">
+						{#if $prefs.hideAllNotes}<span class="prefs-check-mark">✓</span>{/if}
+					</span>
+					<span class="font-semibold">Masquer toutes les notes</span>
+				</label>
+				{#if !isTrent}
+					<div class="pl-6 space-y-3 text-[14px] border-l border-border ml-1.5">
+						{#if isCecOnly}
+							<label class="flex items-center gap-2.5 cursor-pointer">
+								<input
+									type="checkbox"
+									checked={$prefs.hideCrossRefs}
+									onchange={(e) => updatePref('hideCrossRefs', e.currentTarget.checked)}
+									class="prefs-check-input"
+								/>
+								<span class="prefs-check" aria-hidden="true">
+									{#if $prefs.hideCrossRefs}<span class="prefs-check-mark">✓</span>{/if}
+								</span>
+								<span>Renvois (§)</span>
+							</label>
+							<label class="flex items-center gap-2.5 cursor-pointer">
+								<input
+									type="checkbox"
+									checked={$prefs.hideBibleInline}
+									onchange={(e) => updatePref('hideBibleInline', e.currentTarget.checked)}
+									class="prefs-check-input"
+								/>
+								<span class="prefs-check" aria-hidden="true">
+									{#if $prefs.hideBibleInline}<span class="prefs-check-mark">✓</span>{/if}
+								</span>
+								<span>Réfs. bibliques en ligne</span>
+							</label>
+							<label class="flex items-center gap-2.5 cursor-pointer">
+								<input
+									type="checkbox"
+									checked={$prefs.hideBibleMarkers}
+									onchange={(e) => updatePref('hideBibleMarkers', e.currentTarget.checked)}
+									class="prefs-check-input"
+								/>
+								<span class="prefs-check" aria-hidden="true">
+									{#if $prefs.hideBibleMarkers}<span class="prefs-check-mark">✓</span>{/if}
+								</span>
+								<span>Réfs. bibliques en exposant</span>
+							</label>
+						{/if}
 						<label class="flex items-center gap-2.5 cursor-pointer">
 							<input
 								type="checkbox"
-								checked={$prefs.hideCrossRefs}
-								onchange={(e) => updatePref('hideCrossRefs', e.currentTarget.checked)}
+								checked={$prefs.hideSourceFootnotes}
+								onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
 								class="prefs-check-input"
 							/>
 							<span class="prefs-check" aria-hidden="true">
-								{#if $prefs.hideCrossRefs}<span class="prefs-check-mark">✓</span>{/if}
+								{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
 							</span>
-							<span>Renvois (§)</span>
+							<span>Sources</span>
 						</label>
-						<label class="flex items-center gap-2.5 cursor-pointer">
-							<input
-								type="checkbox"
-								checked={$prefs.hideBibleInline}
-								onchange={(e) => updatePref('hideBibleInline', e.currentTarget.checked)}
-								class="prefs-check-input"
-							/>
-							<span class="prefs-check" aria-hidden="true">
-								{#if $prefs.hideBibleInline}<span class="prefs-check-mark">✓</span>{/if}
-							</span>
-							<span>Réfs. bibliques en ligne</span>
-						</label>
-						<label class="flex items-center gap-2.5 cursor-pointer">
-							<input
-								type="checkbox"
-								checked={$prefs.hideBibleMarkers}
-								onchange={(e) => updatePref('hideBibleMarkers', e.currentTarget.checked)}
-								class="prefs-check-input"
-							/>
-							<span class="prefs-check" aria-hidden="true">
-								{#if $prefs.hideBibleMarkers}<span class="prefs-check-mark">✓</span>{/if}
-							</span>
-							<span>Réfs. bibliques en exposant</span>
-						</label>
-					{/if}
-					<label class="flex items-center gap-2.5 cursor-pointer">
-						<input
-							type="checkbox"
-							checked={$prefs.hideSourceFootnotes}
-							onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
-							class="prefs-check-input"
-						/>
-						<span class="prefs-check" aria-hidden="true">
-							{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
-						</span>
-						<span>Sources</span>
-					</label>
-				</div>
-			{/if}
+					</div>
+				{/if}
 			{/if}
 		</div>
 	{/if}

@@ -143,7 +143,10 @@ function partFor(chapNum: number): { slug: string; title: string } {
 // ─── Text helpers ─────────────────────────────────────────────────────────────
 
 function normalizeWs(s: string): string {
-	return s.replace(/\s+/g, ' ').replace(/ /g, ' ').trim();
+	return s
+		.replace(/\s+/g, ' ')
+		.replace(/\u00a0/g, ' ')
+		.trim();
 }
 
 // Simple sentence case: first letter upper, rest lower.
@@ -153,7 +156,7 @@ function toSentenceCase(s: string): string {
 }
 
 // Strip Roman numeral prefix like "I — ", "I. — ", "II.— ", "II — " etc.
-const ROMAN_PREFIX_RE = /^([IVXLCDM]+)\.?\s*[—–\-]+\s*/;
+const ROMAN_PREFIX_RE = /^([IVXLCDM]+)\.?\s*[—–-]+\s*/;
 
 // Proper-noun substitutions to fix lowercased theological terms.
 const TITLE_SUBS: Array<[RegExp, string]> = [
@@ -416,7 +419,7 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 			}
 		} catch (e) {
 			const err = e as Error;
-			throw new Error(`Error parsing ${fname}: ${err.message}`);
+			throw new Error(`Error parsing ${fname}: ${err.message}`, { cause: e });
 		}
 	}
 

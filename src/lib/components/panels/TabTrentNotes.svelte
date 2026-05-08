@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SvelteSet } from 'svelte/reactivity';
 	import { studyPanel } from '$lib/stores/studyPanel';
 	import { loadNclBook } from '$lib/data/loaders';
 	import { bookBySlug } from '$lib/utils/bibleBookSlug';
@@ -33,7 +34,7 @@
 		// Eagerly fetch every NCL book referenced by parseable footnotes so
 		// we can render verse text inline. Books are cached; refetching is
 		// cheap, but we still de-duplicate to avoid redundant Promise churn.
-		const usfxes = new Set<string>();
+		const usfxes = new SvelteSet<string>();
 		const parsed: { fn: TrentFootnote; ref: ReturnType<typeof parseTrentBibleRef> }[] = [];
 		for (const fn of fns) {
 			const ref = parseTrentBibleRef(fn.text);

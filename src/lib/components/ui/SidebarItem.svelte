@@ -9,8 +9,10 @@
 		typeLabel?: string;
 		/** Heading level for compendium entries (2, 3, 4). Drives per-row styling. */
 		level?: 2 | 3 | 4;
-		/** Eyebrow above the title (e.g. "Chapitre II"). */
+		/** First eyebrow (e.g. "Chapitre 3"). */
 		kicker?: string;
+		/** Second eyebrow below kicker (e.g. "Du second article du Symbole"). */
+		kicker2?: string;
 		children?: Item[];
 	};
 	let {
@@ -104,6 +106,9 @@
 			{#if item.kicker}
 				<span class="kicker">{item.kicker}</span>
 			{/if}
+			{#if item.kicker2}
+				<span class="kicker kicker-sub">{item.kicker2}</span>
+			{/if}
 			{#if item.typeLabel}
 				<span class="font-semibold">
 					{item.typeLabel}
@@ -167,6 +172,13 @@
 		text-transform: uppercase;
 		color: var(--color-muted);
 		margin-bottom: 0.1rem;
+	}
+	.kicker-sub {
+		text-transform: none;
+		font-weight: 500;
+		letter-spacing: 0.02em;
+		font-size: 12px;
+		margin-bottom: 0.15rem;
 	}
 	/* When the row is active (is-active sets the red bg + white text), the
 	   kicker should also flip to white so it stays readable. */

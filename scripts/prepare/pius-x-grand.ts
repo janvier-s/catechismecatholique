@@ -29,13 +29,7 @@ function textOf(node: ParseNode): string {
 	for (const c of node.childNodes ?? []) s += textOf(c);
 	return s;
 }
-function outerHtml(node: ParseNode): string {
-	return serialize(node as Parameters<typeof serialize>[0]);
-}
-function findOne(
-	node: ParseNode,
-	pred: (n: ParseNode) => boolean
-): ParseNode | undefined {
+function findOne(node: ParseNode, pred: (n: ParseNode) => boolean): ParseNode | undefined {
 	for (const n of iter(node)) if (pred(n)) return n;
 }
 
@@ -54,17 +48,16 @@ function innerContent(node: ParseNode): string {
 	);
 }
 
-// Strip xmlns from outer HTML (parse5 adds them to XHTML re-serializations).
-function cleanHtml(html: string): string {
-	return normalizeWs(html).replace(/\s+xmlns(?::\w+)?="[^"]*"/g, '');
-}
-
 // Extract the title part of an h1/h2 heading, stripping the span.h-ch kicker.
 function headingTitle(node: ParseNode): { kicker: string; title: string } {
 	const hCh = findOne(node, (n) => hasClass(n, 'h-ch'));
 	const kicker = hCh ? normalizeWs(textOf(hCh)) : '';
 	let full = normalizeWs(textOf(node));
-	if (kicker) full = full.slice(kicker.length).replace(/^\s*[-—–.]\s*/, '').trim();
+	if (kicker)
+		full = full
+			.slice(kicker.length)
+			.replace(/^\s*[-—–.]\s*/, '')
+			.trim();
 	return { kicker, title: full };
 }
 
@@ -316,11 +309,6 @@ export function preparePiusXGrand(args: { sourceDir: string; outDir: string }): 
 
 			structChapters.push({ slug: chSlug, title: rawCh.title, ordinal, qa_range: qaRange });
 		}
-
-		const partQaRange: [number, number] =
-			structChapters.length > 0
-				? [structChapters[0]!.qa_range[0], structChapters[structChapters.length - 1]!.qa_range[1]]
-				: [0, 0];
 
 		allStructParts.push({
 			slug: partSlug,

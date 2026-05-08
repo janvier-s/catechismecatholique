@@ -60,8 +60,10 @@
 		typeLabel?: string;
 		/** Heading level for compendium entries (2, 3, 4). Drives sidebar styling. */
 		level?: 2 | 3 | 4;
-		/** Eyebrow above the title (e.g. "Chapitre II") for compendium h3 entries. */
+		/** First eyebrow (e.g. "Chapitre 3"). */
 		kicker?: string;
+		/** Second eyebrow (e.g. "Du second article du Symbole"). */
+		kicker2?: string;
 		children?: Item[];
 	};
 
@@ -410,16 +412,12 @@
 			if (!trentStructure) return [];
 			return trentStructure.parts.map((part, partIdx): Item => {
 				const isPrologue = part.slug === 'prologue';
-				// Trent has no part- or chapter-level pages; deepest entry is the
-				// section. Use the first chapter's first section as the part link
-				// and the chapter's first section as the chapter link, mirroring
-				// the table-of-contents behaviour on /trente/sommaire.
 				const firstCh = part.chapters[0];
 				const firstSec = firstCh?.sections[0];
 				const partHref =
 					firstCh && firstSec ? `/trente/${firstCh.slug}/${firstSec.slug}` : '/trente';
 				const partTypeLabel = isPrologue ? undefined : 'Partie';
-				const partNumber = isPrologue ? undefined : partIdx; // 1, 2, 3, 4
+				const partNumber = isPrologue ? undefined : partIdx;
 				return {
 					title: part.title,
 					...(partTypeLabel ? { typeLabel: partTypeLabel } : {}),
@@ -428,9 +426,15 @@
 					children: part.chapters.map((ch): Item => {
 						const chFirstSec = ch.sections[0];
 						const chHref = chFirstSec ? `/trente/${ch.slug}/${chFirstSec.slug}` : '/trente';
+						// Split "Du Xième article : Et en Jésus-Christ..." into
+						// kicker2 (descriptor) + title (article content).
+						const colonIdx = ch.title.indexOf(' : ');
+						const chTitle = colonIdx > 0 ? ch.title.slice(colonIdx + 3) : ch.title;
+						const chKicker2 = colonIdx > 0 ? ch.title.slice(0, colonIdx) : undefined;
 						return {
-							title: ch.title,
-							...(ch.number > 0 ? { number: ch.number, typeLabel: 'Chapitre' } : {}),
+							title: chTitle,
+							...(ch.number > 0 ? { kicker: `Chapitre ${ch.number}` } : {}),
+							...(chKicker2 ? { kicker2: chKicker2 } : {}),
 							href: chHref,
 							children: ch.sections.map(
 								(sec): Item => ({
