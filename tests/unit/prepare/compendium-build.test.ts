@@ -56,15 +56,15 @@ describe('buildCompendium', () => {
 	it('groups questions under their part and section', () => {
 		const out = buildCompendium({ sourceJson: SOURCE_QS, toc: TOC, files: FILES });
 		expect(out.structure.parts).toHaveLength(2);
-		expect(out.structure.parts[0]).toMatchObject({ slug: 'part-1', number: 1, title: 'Part 1' });
+		expect(out.structure.parts[0]).toMatchObject({ slug: '1-part-1', number: 1, title: 'Part 1' });
 		expect(out.structure.parts[0]?.sections[0]?.q_range).toEqual([1, 2]);
 		expect(out.structure.parts[1]?.sections[0]?.q_range).toEqual([3, 3]);
 	});
 
 	it('emits one bundle per part with ordered flow', () => {
 		const out = buildCompendium({ sourceJson: SOURCE_QS, toc: TOC, files: FILES });
-		expect(Object.keys(out.parts).sort()).toEqual(['part-1', 'part-2']);
-		const flow = out.parts['part-1']!.flow;
+		expect(Object.keys(out.parts).sort()).toEqual(['1-part-1', '2-part-2']);
+		const flow = out.parts['1-part-1']!.flow;
 		expect(flow.map((n) => n.kind)).toEqual(['heading', 'question', 'question']);
 	});
 
@@ -78,14 +78,14 @@ describe('buildCompendium', () => {
 	it('emits q-ranges aligned to parts', () => {
 		const out = buildCompendium({ sourceJson: SOURCE_QS, toc: TOC, files: FILES });
 		expect(out.qRanges).toEqual([
-			{ part: 'part-1', from: 1, to: 2 },
-			{ part: 'part-2', from: 3, to: 3 }
+			{ part: '1-part-1', from: 1, to: 2 },
+			{ part: '2-part-2', from: 3, to: 3 }
 		]);
 	});
 
 	it('parses bible refs from source verses field', () => {
 		const out = buildCompendium({ sourceJson: SOURCE_QS, toc: TOC, files: FILES });
-		const q2 = out.parts['part-1']!.flow.find((n) => n.kind === 'question' && n.data.number === 2);
+		const q2 = out.parts['1-part-1']!.flow.find((n) => n.kind === 'question' && n.data.number === 2);
 		expect(q2 && q2.kind === 'question' && q2.data.bible_refs[0]?.text).toBe('Mt 1:1');
 	});
 

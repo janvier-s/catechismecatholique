@@ -1,6 +1,6 @@
 import type { HtmlEvent, AppendixEvent } from './html';
 import type { TocEntry } from './toc';
-import { slugify } from '../slug';
+import { slugify, shortSlug } from '../slug';
 import type {
 	CompendiumPart,
 	CompendiumFlowNode,
@@ -256,7 +256,7 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 						continue;
 					}
 					const number = (idx + 1) as 1 | 2 | 3 | 4;
-					const slug = slugify(tocEntry.label);
+					const slug = `${number}-${shortSlug(tocEntry.label, 30)}`;
 					const title = titleCase(tocEntry.label);
 					currentPart = { slug, number, title };
 					partOrder.push(currentPart);
