@@ -25,6 +25,7 @@
 		return it.children.some((c) => isAncestorOrSelf(c, target));
 	}
 
+	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
 	const isAncestor = $derived(
 		item.children ? item.children.some((c) => isAncestorOrSelf(c, activeHref)) : false
 	);
@@ -53,15 +54,21 @@
 	// exact match wins; otherwise this entry only highlights when none of
 	// its descendants match (i.e. the active path lives inside this entry's
 	// scope but no deeper item claims it).
+	//
+	// The `+ '/'` sub-path match is gated on hasChildren: items with
+	// children rely on isAncestor to suppress them when a child matches,
+	// but childless items (e.g. a chapter's "Préambule" entry whose href
+	// is the bare chapter URL) would otherwise wrongly highlight whenever
+	// the user reads any article in that chapter (since the article URL
+	// starts with the chapter URL + '/').
 	const isPrefixMatch = $derived(
 		activeHref === item.href ||
 			activeHref.startsWith(item.href + '#') ||
-			activeHref.startsWith(item.href + '/')
+			(hasChildren && activeHref.startsWith(item.href + '/'))
 	);
 	const isActive = $derived((isPrefixMatch || isHashMatch) && !isAncestor);
 
 	let manualExpanded: boolean | null = $state(null);
-	const hasChildren = $derived(Boolean(item.children && item.children.length > 0));
 	// Auto-expand wins when the item or one of its descendants is the active
 	// route. Manual toggles only apply outside of that. Without this, a
 	// previously-collapsed-then-revisited entry stayed collapsed even when

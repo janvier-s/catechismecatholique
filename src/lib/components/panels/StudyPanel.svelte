@@ -43,7 +43,7 @@
 	type TabDef = { id: PanelTab; label: string };
 	const ALL_TABS: TabDef[] = [
 		{ id: 'cross-refs', label: 'Renvois' },
-		{ id: 'cited-by', label: 'Cités par' },
+		{ id: 'cited-by', label: 'Cités dans' },
 		{ id: 'sources', label: 'Sources' },
 		{ id: 'compendium', label: 'Compendium' },
 		{ id: 'bible', label: 'Bible' },
@@ -113,19 +113,19 @@
 		const sourcesCount = paragraph.magisterial_refs.filter(
 			(r) => r.type === 'magisterial' || r.type === 'patristic' || r.type === 'liturgical'
 		).length;
-		// Cités par hidden if the citers are exactly the same set as cross_refs
+		// Cités dans hidden if the citers are exactly the same set as cross_refs
 		const citerSet = new Set(citedByList.map(String));
 		const crossSet = new Set(paragraph.cross_refs);
 		const sameAsRenvois =
 			citerSet.size === crossSet.size && [...citerSet].every((x) => crossSet.has(x));
 		const hasCitedBy = citedByList.length > 0 && !sameAsRenvois;
 
-		// Order: CCC graph (Renvois then Cités par) → external corpora citing
+		// Order: CCC graph (Renvois then Cités dans) → external corpora citing
 		// this paragraph (Sources then Compendium) → Bible cluster (this
 		// paragraph's verses, then commentary on related verses) → chapter-
 		// level summary (En Bref).
 		if (hasCrossRefs) out.push({ id: 'cross-refs', label: 'Renvois' });
-		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités par' });
+		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités dans' });
 		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
 		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
 		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
