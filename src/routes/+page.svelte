@@ -125,7 +125,7 @@
 				<div class="daily-row">
 					<h2 id="daily-heading" class="daily-eyebrow">Paragraphe du jour</h2>
 					<a
-						href="/ccc/{data.dailyNumber}"
+						href="/cec/{data.dailyNumber}"
 						class="daily-mark"
 						aria-label="Lire le paragraphe {data.dailyNumber} dans son contexte"
 					>
@@ -139,7 +139,7 @@
 		{/if}
 
 		<!-- Primary CTA -->
-		<a class="cta-primary reveal r-cta" href="/ccc">
+		<a class="cta-primary reveal r-cta" href="/cec">
 			Lire le Catéchisme
 			<span class="cta-arrow" aria-hidden="true">→</span>
 		</a>

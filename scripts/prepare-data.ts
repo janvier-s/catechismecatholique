@@ -65,9 +65,9 @@ async function main() {
 	const missing = expected.filter((f) => !existsSync(join(SOURCES, f)));
 	if (missing.length > 0) {
 		const hasGeneratedData =
-			existsSync(join(OUT, 'ccc/structure.json')) &&
-			existsSync(join(OUT, 'ccc/paragraphs')) &&
-			readdirSync(join(OUT, 'ccc/paragraphs')).length > 0;
+			existsSync(join(OUT, 'cec/structure.json')) &&
+			existsSync(join(OUT, 'cec/paragraphs')) &&
+			readdirSync(join(OUT, 'cec/paragraphs')).length > 0;
 		if (hasGeneratedData) {
 			console.log(
 				`prepare-data: source files missing (${missing.join(', ')}), but generated data exists at ${OUT} — skipping rebuild.`
@@ -89,22 +89,22 @@ async function main() {
 			rmSync(OUT, { recursive: true });
 		}
 	}
-	mkdirSync(join(OUT, 'ccc'), { recursive: true });
-	mkdirSync(join(OUT, 'ccc/paragraphs'), { recursive: true });
-	mkdirSync(join(OUT, 'ccc/chapters'), { recursive: true });
-	mkdirSync(join(OUT, 'ccc/chapters-full'), { recursive: true });
-	mkdirSync(join(OUT, 'ccc/guide-de-lecture'), { recursive: true });
+	mkdirSync(join(OUT, 'cec'), { recursive: true });
+	mkdirSync(join(OUT, 'cec/paragraphs'), { recursive: true });
+	mkdirSync(join(OUT, 'cec/chapters'), { recursive: true });
+	mkdirSync(join(OUT, 'cec/chapters-full'), { recursive: true });
+	mkdirSync(join(OUT, 'cec/guide-de-lecture'), { recursive: true });
 	mkdirSync(join(OUT, 'bible'), { recursive: true });
 
 	logStep('building structure');
 	const rawParts = JSON.parse(readFileSync(join(SOURCES, 'ccc_paras_processed.json'), 'utf8'));
 	fixCccParaSourceTypos(rawParts);
 	const structure = buildStructure(rawParts);
-	writeFileSync(join(OUT, 'ccc/structure.json'), JSON.stringify(structure, null, 2));
-	// Slim variant for /ccc/sommaire: full structure tree minus the
+	writeFileSync(join(OUT, 'cec/structure.json'), JSON.stringify(structure, null, 2));
+	// Slim variant for /cec/sommaire: full structure tree minus the
 	// `paragraphs: number[]` arrays at chapter/article/etc levels (the sommaire
 	// renders titles + headings, not paragraph numbers). Cuts the SSR HTML
-	// payload of /ccc/sommaire roughly in half.
+	// payload of /cec/sommaire roughly in half.
 	const stripParagraphArrays = (obj: unknown): unknown => {
 		if (Array.isArray(obj)) return obj.map(stripParagraphArrays);
 		if (obj && typeof obj === 'object') {
@@ -119,7 +119,7 @@ async function main() {
 		return obj;
 	};
 	writeFileSync(
-		join(OUT, 'ccc/structure-toc.json'),
+		join(OUT, 'cec/structure-toc.json'),
 		JSON.stringify(stripParagraphArrays(structure))
 	);
 	endStep(`${structure.parts.length} parts`);
@@ -134,13 +134,13 @@ async function main() {
 	const paragraphs = extractParagraphs(rawParts);
 	patchParagraph2267(paragraphs);
 	for (const [n, p] of paragraphs) {
-		writeFileSync(join(OUT, `ccc/paragraphs/${n}.json`), JSON.stringify(p));
+		writeFileSync(join(OUT, `cec/paragraphs/${n}.json`), JSON.stringify(p));
 	}
 	endStep(`${paragraphs.size} paragraphs`);
 
 	logStep('building cited-by');
 	const citedBy = buildCitedBy(paragraphs);
-	writeFileSync(join(OUT, 'ccc/cited-by.json'), JSON.stringify(citedBy));
+	writeFileSync(join(OUT, 'cec/cited-by.json'), JSON.stringify(citedBy));
 	endStep(`${Object.keys(citedBy).length} paragraphs cited`);
 
 	logStep('extracting en bref');
@@ -161,7 +161,7 @@ async function main() {
 	logStep('building chapters');
 	const chapters = buildChapterFiles(structure, enbref, paragraphes);
 	for (const ch of chapters) {
-		writeFileSync(join(OUT, `ccc/chapters/${ch.slug}.json`), JSON.stringify(ch));
+		writeFileSync(join(OUT, `cec/chapters/${ch.slug}.json`), JSON.stringify(ch));
 	}
 	endStep(`${chapters.length} chapters`);
 
@@ -190,28 +190,28 @@ async function main() {
 		const bundle = { chapter: ch, paragraphs: orderedParagraphs, enBrefParagraphMap };
 		const json = JSON.stringify(bundle);
 		chaptersFullBytes += json.length;
-		writeFileSync(join(OUT, `ccc/chapters-full/${ch.slug}.json`), json);
+		writeFileSync(join(OUT, `cec/chapters-full/${ch.slug}.json`), json);
 	}
 	endStep(`${chapters.length} bundles, ${(chaptersFullBytes / 1024 / 1024).toFixed(1)} MB total`);
 
 	logStep('building headings index (autocomplete)');
 	const { buildHeadingsIndex } = await import('./prepare/headings-index.ts');
 	const headings = buildHeadingsIndex(structure, chapters);
-	writeFileSync(join(OUT, 'ccc/headings.json'), JSON.stringify(headings));
+	writeFileSync(join(OUT, 'cec/headings.json'), JSON.stringify(headings));
 	endStep(`${headings.length} entries`);
 
 	logStep('building paragraph context');
 	const paragraphContext = buildParagraphContext(rawParts, structure);
-	mkdirSync(join(OUT, 'ccc/paragraph-context'), { recursive: true });
+	mkdirSync(join(OUT, 'cec/paragraph-context'), { recursive: true });
 	for (const [n, ctx] of Object.entries(paragraphContext)) {
-		writeFileSync(join(OUT, `ccc/paragraph-context/${n}.json`), JSON.stringify(ctx));
+		writeFileSync(join(OUT, `cec/paragraph-context/${n}.json`), JSON.stringify(ctx));
 	}
 	endStep(`${Object.keys(paragraphContext).length} paragraphs mapped (sharded)`);
 
 	logStep('parsing abbreviations');
 	const sigles = readFileSync(join(SOURCES, 'sigles.xhtml'), 'utf8');
 	const abbrs = parseSigles(sigles);
-	writeFileSync(join(OUT, 'ccc/abbreviations.json'), JSON.stringify(abbrs, null, 2));
+	writeFileSync(join(OUT, 'cec/abbreviations.json'), JSON.stringify(abbrs, null, 2));
 	endStep(`${Object.keys(abbrs).length} entries`);
 
 	logStep('building glossary');
@@ -222,7 +222,7 @@ async function main() {
 	const frGlossXml = new Map<string, string>();
 	for (const f of frGlossFiles) frGlossXml.set(f, readFileSync(join(frGlossDir, f), 'utf8'));
 	const glossary = buildGlossary(enGlossXml, frGlossXml);
-	writeFileSync(join(OUT, 'ccc/glossary.json'), JSON.stringify(glossary));
+	writeFileSync(join(OUT, 'cec/glossary.json'), JSON.stringify(glossary));
 	// Slim variant for /glossaire index: just clusters + featured entries
 	// (slug/term/totalRefs) + total count. The detail page (/glossaire/[term])
 	// still loads the full glossary.json. Cuts the SSR HTML payload of
@@ -236,7 +236,7 @@ async function main() {
 			.filter((e): e is NonNullable<typeof e> => Boolean(e))
 			.map((e) => ({ slug: e.slug, term: e.term, totalRefs: e.totalRefs }))
 	};
-	writeFileSync(join(OUT, 'ccc/glossary-index.json'), JSON.stringify(slimGlossary));
+	writeFileSync(join(OUT, 'cec/glossary-index.json'), JSON.stringify(slimGlossary));
 	endStep(
 		`${glossary.entries.length} entries, ${glossary.clusters.length} clusters, ${glossary.featured.length} featured`
 	);
@@ -244,7 +244,7 @@ async function main() {
 	logStep('building search suggestions (related topics)');
 	const { buildSearchSuggestions } = await import('./prepare/search-suggestions.ts');
 	const searchSuggestions = buildSearchSuggestions(glossary);
-	writeFileSync(join(OUT, 'ccc/search-suggestions.json'), JSON.stringify(searchSuggestions));
+	writeFileSync(join(OUT, 'cec/search-suggestions.json'), JSON.stringify(searchSuggestions));
 	endStep(
 		`${Object.keys(searchSuggestions.lookup).length} lookup keys, ${Object.keys(searchSuggestions.suggestions).length} entries`
 	);
@@ -255,7 +255,7 @@ async function main() {
 	const sourceEntries = sourceFiles.flatMap((f) =>
 		parseSourceTable(readFileSync(join(sourcesDir, f), 'utf8'))
 	);
-	writeFileSync(join(OUT, 'ccc/sources-index.json'), JSON.stringify(sourceEntries, null, 2));
+	writeFileSync(join(OUT, 'cec/sources-index.json'), JSON.stringify(sourceEntries, null, 2));
 	endStep(`${sourceEntries.length} entries`);
 
 	logStep('processing bible index');
@@ -264,7 +264,7 @@ async function main() {
 		readFileSync(join(SOURCES, 'ccc_bible_index_clean.json'), 'utf8')
 	) as Record<string, number[]>;
 	const bibleIdx = processBibleIndex(rawBibleIdx, knownParas);
-	writeFileSync(join(OUT, 'ccc/bible-index.json'), JSON.stringify(bibleIdx));
+	writeFileSync(join(OUT, 'cec/bible-index.json'), JSON.stringify(bibleIdx));
 	endStep(`${Object.keys(bibleIdx).length} bible refs`);
 
 	logStep('parsing NCL bible');
@@ -311,7 +311,7 @@ async function main() {
 	const { buildBibleVerseIndex } = await import('./prepare/bible-verse-index.ts');
 	const { BOOKS } = await import('../src/lib/utils/bibleBookSlug.ts');
 	const verseIdx = buildBibleVerseIndex(ncl, bibleIdx, BOOKS);
-	writeFileSync(join(OUT, 'ccc/bible-verse-index.json'), JSON.stringify(verseIdx));
+	writeFileSync(join(OUT, 'cec/bible-verse-index.json'), JSON.stringify(verseIdx));
 	const verseCount = Object.values(verseIdx).reduce(
 		(t, byCh) => t + Object.values(byCh).reduce((c, byV) => c + Object.keys(byV).length, 0),
 		0
@@ -384,7 +384,7 @@ async function main() {
 
 		// Drop the old verse-index file if it still exists
 		try {
-			unlinkSync(join(OUT, 'ccc/concordance-verse-index.json'));
+			unlinkSync(join(OUT, 'cec/concordance-verse-index.json'));
 		} catch {
 			// File already gone — ignore.
 		}
@@ -417,14 +417,14 @@ async function main() {
 	logStep('building search index');
 	mkdirSync(join(OUT, 'search'), { recursive: true });
 	const allParagraphs: import('../src/lib/data/types').Paragraph[] = [];
-	for (const f of readdirSync(join(OUT, 'ccc/paragraphs'))) {
+	for (const f of readdirSync(join(OUT, 'cec/paragraphs'))) {
 		if (!f.endsWith('.json')) continue;
-		allParagraphs.push(JSON.parse(readFileSync(join(OUT, 'ccc/paragraphs', f), 'utf8')));
+		allParagraphs.push(JSON.parse(readFileSync(join(OUT, 'cec/paragraphs', f), 'utf8')));
 	}
 	const allChapters: import('../src/lib/data/types').Chapter[] = [];
-	for (const f of readdirSync(join(OUT, 'ccc/chapters'))) {
+	for (const f of readdirSync(join(OUT, 'cec/chapters'))) {
 		if (!f.endsWith('.json')) continue;
-		allChapters.push(JSON.parse(readFileSync(join(OUT, 'ccc/chapters', f), 'utf8')));
+		allChapters.push(JSON.parse(readFileSync(join(OUT, 'cec/chapters', f), 'utf8')));
 	}
 	const { buildSearchIndex } = await import('./prepare/search-index.ts');
 	const search = buildSearchIndex(

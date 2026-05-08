@@ -32,7 +32,7 @@
 	});
 
 	// Resolve the active node from the URL so the panorama can highlight
-	// where the reader currently is. Path segments under /ccc/<part>/...
+	// where the reader currently is. Path segments under /cec/<part>/...
 	const segments = $derived(page.url.pathname.split('/').filter(Boolean));
 	const active = $derived({
 		part: (segments[1] ?? null) as string | null,

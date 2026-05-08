@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
-	import EnBrefBlock from '$lib/components/ccc/EnBrefBlock.svelte';
+	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
+	import EnBrefBlock from '$lib/components/cec/EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
@@ -21,19 +21,19 @@
 					'@type': 'ListItem',
 					position: 2,
 					name: data.chapter.part_title,
-					item: `${page.url.origin}/ccc/${data.chapter.part_slug}`
+					item: `${page.url.origin}/cec/${data.chapter.part_slug}`
 				},
 				{
 					'@type': 'ListItem',
 					position: 3,
 					name: data.chapter.section_title,
-					item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}`
+					item: `${page.url.origin}/cec/${data.chapter.part_slug}/${data.chapter.section_slug}`
 				},
 				{
 					'@type': 'ListItem',
 					position: 4,
 					name: data.chapter.title,
-					item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}`
+					item: `${page.url.origin}/cec/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}`
 				},
 				{ '@type': 'ListItem', position: 5, name: data.article.title }
 			]
@@ -72,9 +72,9 @@
 	<div class="breadcrumb-row mb-6">
 		<nav class="breadcrumb-rail font-ui text-sm" aria-label="Fil d'Ariane">
 			<ol class="space-y-1">
-				<li><a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a></li>
+				<li><a href="/cec" class="text-muted hover:text-accent">Catéchisme</a></li>
 				<li class="pl-5">
-					<a href="/ccc/{data.chapter.part_slug}" class="text-muted hover:text-accent">
+					<a href="/cec/{data.chapter.part_slug}" class="text-muted hover:text-accent">
 						<span class="font-semibold bc-kicker"
 							>{data.chapter.part_number ? `Partie ${data.chapter.part_number}` : 'Prologue'}</span
 						>
@@ -83,7 +83,7 @@
 				</li>
 				<li class="pl-10">
 					<a
-						href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}"
+						href="/cec/{data.chapter.part_slug}/{data.chapter.section_slug}"
 						class="text-muted hover:text-accent"
 					>
 						<span class="font-semibold bc-kicker"
@@ -96,7 +96,7 @@
 				</li>
 				<li class="pl-[3.75rem]">
 					<a
-						href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
+						href="/cec/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
 						class="text-muted hover:text-accent"
 					>
 						<span class="font-semibold bc-kicker"
@@ -172,7 +172,7 @@
 		{#if data.prevArticle}
 			<NavCard
 				direction="prev"
-				href={`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.prevArticle.slug}`}
+				href={`/cec/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.prevArticle.slug}`}
 				eyebrow="← Précédent"
 				title={(data.prevArticle.number ? `Article ${data.prevArticle.number}. ` : '') +
 					data.prevArticle.title}
@@ -180,7 +180,7 @@
 		{:else}
 			<NavCard
 				direction="prev"
-				href="/ccc/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
+				href="/cec/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
 				eyebrow="← Retour au chapitre"
 				title={data.chapter.title}
 			/>
@@ -189,7 +189,7 @@
 		{#if data.nextArticle}
 			<NavCard
 				direction="next"
-				href={`/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.nextArticle.slug}`}
+				href={`/cec/${data.chapter.part_slug}/${data.chapter.section_slug}/${data.chapter.slug}/${data.nextArticle.slug}`}
 				eyebrow="Suivant →"
 				title={(data.nextArticle.number ? `Article ${data.nextArticle.number}. ` : '') +
 					data.nextArticle.title}

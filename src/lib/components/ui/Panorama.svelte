@@ -46,7 +46,7 @@
 	}: { parts: Part[]; headingLevel?: 2 | 3; active?: ActivePath } = $props();
 
 	// Only highlight the deepest level the reader is currently at — so on
-	// /ccc/[part] only the part banner lights up, on /ccc/[part]/[section]
+	// /cec/[part] only the part banner lights up, on /cec/[part]/[section]
 	// only the section heading, etc. Avoids the visually-noisy "every
 	// ancestor is highlighted" treatment.
 	const deepest = $derived<'article' | 'chapter' | 'section' | 'part' | null>(
@@ -125,11 +125,11 @@
 				{/if}
 				{#if headingLevel === 2}
 					<h2 class="pano-banner-title">
-						<a href="/ccc/{part.slug}">{part.title}</a>
+						<a href="/cec/{part.slug}">{part.title}</a>
 					</h2>
 				{:else}
 					<h3 class="pano-banner-title">
-						<a href="/ccc/{part.slug}">{part.title}</a>
+						<a href="/cec/{part.slug}">{part.title}</a>
 					</h3>
 				{/if}
 				{#if part.range}
@@ -141,7 +141,7 @@
 				{@const sectionOnPath = partOnPath && active.section === section.slug}
 				{@const sectionActive = sectionOnPath && deepest === 'section'}
 				<section class="pano-section" class:is-active={sectionActive}>
-					<a class="pano-section-head" href="/ccc/{part.slug}/{section.slug}">
+					<a class="pano-section-head" href="/cec/{part.slug}/{section.slug}">
 						{#if section.number}
 							<span class="pano-section-num">Section {section.number}</span>
 						{/if}
@@ -156,7 +156,7 @@
 					{#if section.chapters.length > 0}
 						<div class="pano-grid" data-cols={Math.min(section.chapters.length, 3)}>
 							{#each section.chapters as chapter (chapter.slug)}
-								{@const href = `/ccc/${part.slug}/${section.slug}/${chapter.slug}`}
+								{@const href = `/cec/${part.slug}/${section.slug}/${chapter.slug}`}
 								{@const chapterOnPath = sectionOnPath && active.chapter === chapter.slug}
 								{@const chapterActive = chapterOnPath && deepest === 'chapter'}
 								<div class="pano-cell" class:is-active={chapterActive}>
@@ -211,7 +211,7 @@
 					{#if section.articles_direct && section.articles_direct.length > 0}
 						<div class="pano-grid" data-cols={Math.min(section.articles_direct.length, 4)}>
 							{#each section.articles_direct as article (article.slug)}
-								{@const href = `/ccc/${part.slug}/${section.slug}/${article.slug}`}
+								{@const href = `/cec/${part.slug}/${section.slug}/${article.slug}`}
 								{@const tag =
 									ARTICLE_TAG_OVERRIDE[article.slug] ??
 									(article.number !== undefined ? `Article ${article.number}` : '')}

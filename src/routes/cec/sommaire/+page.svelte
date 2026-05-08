@@ -93,7 +93,7 @@
 			La foi professée, célébrée, vécue, et priée.
 		</p>
 		<div class="toc-actions">
-			<a class="panorama-link" href="/ccc/panorama">
+			<a class="panorama-link" href="/cec/panorama">
 				Voir le panorama <span class="panorama-arrow" aria-hidden="true">→</span>
 			</a>
 		</div>
@@ -108,7 +108,7 @@
 						<p class="part-eyebrow">Partie {roman}</p>
 					{/if}
 					<h2 class="part-title">
-						<a href="/ccc/{part.slug}">
+						<a href="/cec/{part.slug}">
 							{#if !part.prologue}
 								<span class="numeral-inline" aria-hidden="true">{roman}.</span>
 								<span>{part.title}</span>
@@ -126,7 +126,7 @@
 					<div class="sections">
 						{#each part.sections as section (section.slug)}
 							<section class="section">
-								<a class="row row-section" href="/ccc/{part.slug}/{section.slug}">
+								<a class="row row-section" href="/cec/{part.slug}/{section.slug}">
 									<span class="row-label">
 										<span class="label-tag">
 											{section.number ? `Section ${section.number}` : 'Section'}
@@ -145,7 +145,7 @@
 											<li class="chapter-block">
 												<a
 													class="row row-chapter"
-													href="/ccc/{part.slug}/{section.slug}/{chap.slug}"
+													href="/cec/{part.slug}/{section.slug}/{chap.slug}"
 												>
 													<span class="row-label">
 														<span class="label-tag">Chapitre {chap.number}</span>
@@ -158,7 +158,7 @@
 												</a>
 												{#if chap.articles.length === 0 && chap.headings?.length}
 													{@const tree = nestHeadings(chap.headings)}
-													{@const chapHref = `/ccc/${part.slug}/${section.slug}/${chap.slug}`}
+													{@const chapHref = `/cec/${part.slug}/${section.slug}/${chap.slug}`}
 													<ul class="headings headings-chapter" role="list">
 														{#each tree as node (node.heading.id)}
 															<li>
@@ -191,7 +191,7 @@
 														chapStart && firstArtStart && chapStart < firstArtStart
 															? firstArtStart - 1
 															: null}
-													{@const chapHrefBase = `/ccc/${part.slug}/${section.slug}/${chap.slug}`}
+													{@const chapHrefBase = `/cec/${part.slug}/${section.slug}/${chap.slug}`}
 													<ul class="articles" role="list">
 														{#if chapStart && preambuleEnd !== null}
 															<li>
@@ -209,7 +209,7 @@
 															</li>
 														{/if}
 														{#each chap.articles as article (article.slug)}
-															{@const articleHref = `/ccc/${part.slug}/${section.slug}/${chap.slug}/${article.slug}`}
+															{@const articleHref = `/cec/${part.slug}/${section.slug}/${chap.slug}/${article.slug}`}
 															<li>
 																<a class="row row-article" href={articleHref}>
 																	<span class="row-label">
@@ -269,7 +269,7 @@
 								{#if section.articles_direct?.length}
 									<ul class="articles articles-direct" role="list">
 										{#each section.articles_direct as article (article.slug)}
-											{@const articleHref = `/ccc/${part.slug}/${section.slug}/${article.slug}`}
+											{@const articleHref = `/cec/${part.slug}/${section.slug}/${article.slug}`}
 											<li>
 												<a class="row row-article" href={articleHref}>
 													<span class="row-label">

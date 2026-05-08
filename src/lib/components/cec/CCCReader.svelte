@@ -66,12 +66,12 @@
 			crumbs={[
 				{ href: '/ccc', title: 'Catéchisme' },
 				{
-					href: `/ccc/${chapter.part_slug}`,
+					href: `/cec/${chapter.part_slug}`,
 					kicker: chapter.part_number ? `Partie ${chapter.part_number}` : 'Prologue',
 					title: chapter.part_title
 				},
 				{
-					href: `/ccc/${chapter.part_slug}/${chapter.section_slug}`,
+					href: `/cec/${chapter.part_slug}/${chapter.section_slug}`,
 					kicker: chapter.section_number ? `Section ${chapter.section_number}` : 'Section',
 					title: chapter.section_title
 				}

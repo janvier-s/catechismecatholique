@@ -15,19 +15,19 @@ export function buildHeadingsIndex(structure: Structure, chapters: Chapter[]): H
 	const entries: HeadingEntry[] = [];
 
 	for (const part of structure.parts) {
-		const partHref = part.slug === 'prologue' ? '/ccc/prologue' : `/ccc/${part.slug}`;
+		const partHref = part.slug === 'prologue' ? '/cec/prologue' : `/cec/${part.slug}`;
 		entries.push({ t: part.title, s: '', h: partHref, k: 'part' });
 
 		for (const hd of part.intro_headings ?? []) {
 			if (hd.level <= 2)
-				entries.push({ t: hd.title, s: part.title, h: `/ccc/${hd.paragraph_start}`, k: 'heading' });
+				entries.push({ t: hd.title, s: part.title, h: `/cec/${hd.paragraph_start}`, k: 'heading' });
 		}
 
 		for (const sec of part.sections) {
 			entries.push({
 				t: sec.title,
 				s: part.title,
-				h: `/ccc/${part.slug}/${sec.slug}`,
+				h: `/cec/${part.slug}/${sec.slug}`,
 				k: 'section'
 			});
 
@@ -36,7 +36,7 @@ export function buildHeadingsIndex(structure: Structure, chapters: Chapter[]): H
 					entries.push({
 						t: hd.title,
 						s: `${part.title} · ${sec.title}`,
-						h: `/ccc/${hd.paragraph_start}`,
+						h: `/cec/${hd.paragraph_start}`,
 						k: 'heading'
 					});
 			}
@@ -45,7 +45,7 @@ export function buildHeadingsIndex(structure: Structure, chapters: Chapter[]): H
 				entries.push({
 					t: ch.title,
 					s: `${part.title} · ${sec.title}`,
-					h: `/ccc/${part.slug}/${sec.slug}/${ch.slug}`,
+					h: `/cec/${part.slug}/${sec.slug}/${ch.slug}`,
 					k: 'chapter'
 				});
 			}
@@ -58,11 +58,11 @@ export function buildHeadingsIndex(structure: Structure, chapters: Chapter[]): H
 
 		for (const hd of ch.headings) {
 			if (hd.level === 2)
-				entries.push({ t: hd.title, s: ch_title, h: `/ccc/${hd.paragraph_start}`, k: 'heading' });
+				entries.push({ t: hd.title, s: ch_title, h: `/cec/${hd.paragraph_start}`, k: 'heading' });
 		}
 
 		for (const art of ch.articles) {
-			const artHref = `/ccc/${part_slug}/${section_slug}/${ch_slug}/${art.slug}`;
+			const artHref = `/cec/${part_slug}/${section_slug}/${ch_slug}/${art.slug}`;
 			entries.push({ t: art.title, s: `${section_title} · ${ch_title}`, h: artHref, k: 'article' });
 
 			for (const hd of art.headings) {
@@ -70,7 +70,7 @@ export function buildHeadingsIndex(structure: Structure, chapters: Chapter[]): H
 					entries.push({
 						t: hd.title,
 						s: art.title,
-						h: `/ccc/${hd.paragraph_start}`,
+						h: `/cec/${hd.paragraph_start}`,
 						k: 'heading'
 					});
 			}

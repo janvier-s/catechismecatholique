@@ -3,13 +3,13 @@ import { detectIntent } from '../../src/lib/utils/searchIntent';
 
 describe('detectIntent', () => {
 	it('detects a paragraph number', () => {
-		expect(detectIntent('27')).toEqual({ kind: 'paragraph', href: '/ccc/27' });
-		expect(detectIntent('§27')).toEqual({ kind: 'paragraph', href: '/ccc/27' });
-		expect(detectIntent('§ 27')).toEqual({ kind: 'paragraph', href: '/ccc/27' });
+		expect(detectIntent('27')).toEqual({ kind: 'paragraph', href: '/cec/27' });
+		expect(detectIntent('§27')).toEqual({ kind: 'paragraph', href: '/cec/27' });
+		expect(detectIntent('§ 27')).toEqual({ kind: 'paragraph', href: '/cec/27' });
 	});
 
 	it('detects a paragraph range', () => {
-		expect(detectIntent('27-30')).toEqual({ kind: 'paragraph', href: '/ccc/27-30' });
+		expect(detectIntent('27-30')).toEqual({ kind: 'paragraph', href: '/cec/27-30' });
 	});
 
 	it('detects a bible reference (colon)', () => {

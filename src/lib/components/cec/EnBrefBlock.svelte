@@ -18,7 +18,7 @@
 	{#each paragraphs as p (p.number)}
 		<div class="flex gap-4 mb-3 last:mb-0">
 			<a
-				href="/ccc/{p.number}"
+				href="/cec/{p.number}"
 				class="flex-none w-12 text-right pt-1 font-ui font-semibold text-accent tabular-nums hover:underline text-sm"
 				aria-label="Lien vers le paragraphe {p.number}"
 			>

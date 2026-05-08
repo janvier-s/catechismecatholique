@@ -223,7 +223,7 @@
 				const m = (sup.textContent ?? '').match(/(\d+)/);
 				const target = m ? parseInt(m[1]!, 10) : NaN;
 				if (Number.isFinite(target)) {
-					void goto(`/ccc/${target}`);
+					void goto(`/cec/${target}`);
 					return;
 				}
 			}

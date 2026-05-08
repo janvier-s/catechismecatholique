@@ -24,9 +24,9 @@
 		// Sidebar is the catechism's structural TOC. Show only inside the
 		// CCC reading surfaces; hide on the index, sommaire, bible, search,
 		// about, and the bare home page.
-		if (p.startsWith('/ccc')) {
-			if (p === '/ccc' || p === '/ccc/') return false;
-			if (p.startsWith('/ccc/sommaire') || p.startsWith('/ccc/panorama')) return false;
+		if (p.startsWith('/cec')) {
+			if (p === '/cec' || p === '/cec/') return false;
+			if (p.startsWith('/cec/sommaire') || p.startsWith('/cec/panorama')) return false;
 			return true;
 		}
 		// Compendium part reader (not the landing or q-redirect)
@@ -38,15 +38,15 @@
 	});
 
 	// Close the StudyPanel when its context becomes irrelevant: leaving the
-	// /ccc or /bible reading surfaces, or entering a Bible concordance view
+	// /cec or /bible reading surfaces, or entering a Bible concordance view
 	// (which has its own resizable right pane and shouldn't render two panels).
 	afterNavigate(({ from, to }) => {
 		if (!from || !to) return;
 		const fromPath = from.url.pathname;
 		const toPath = to.url.pathname;
 
-		const fromOnCcc = fromPath.startsWith('/ccc');
-		const toOnCcc = toPath.startsWith('/ccc');
+		const fromOnCcc = fromPath.startsWith('/cec');
+		const toOnCcc = toPath.startsWith('/cec');
 		const fromOnBible = fromPath.startsWith('/bible');
 		const toOnBible = toPath.startsWith('/bible');
 		const toOnConcordance = /\/bible\/[^/]+\/\d+\/concordance/.test(toPath);

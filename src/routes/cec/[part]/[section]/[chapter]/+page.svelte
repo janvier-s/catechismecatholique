@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CCCReader from '$lib/components/ccc/CCCReader.svelte';
+	import CCCReader from '$lib/components/cec/CCCReader.svelte';
 	import { page } from '$app/state';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
@@ -14,13 +14,13 @@
 					'@type': 'ListItem',
 					position: 2,
 					name: data.chapter.part_title,
-					item: `${page.url.origin}/ccc/${data.chapter.part_slug}`
+					item: `${page.url.origin}/cec/${data.chapter.part_slug}`
 				},
 				{
 					'@type': 'ListItem',
 					position: 3,
 					name: data.chapter.section_title,
-					item: `${page.url.origin}/ccc/${data.chapter.part_slug}/${data.chapter.section_slug}`
+					item: `${page.url.origin}/cec/${data.chapter.part_slug}/${data.chapter.section_slug}`
 				},
 				{ '@type': 'ListItem', position: 4, name: data.chapter.title }
 			]

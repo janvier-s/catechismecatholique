@@ -23,7 +23,7 @@
 	async function loadEntries(): Promise<HeadingEntry[]> {
 		if (allEntries) return allEntries;
 		if (loadPromise) return loadPromise;
-		loadPromise = fetch('/data/ccc/headings.json')
+		loadPromise = fetch('/data/cec/headings.json')
 			.then((r) => r.json() as Promise<HeadingEntry[]>)
 			.then((data) => {
 				allEntries = data;

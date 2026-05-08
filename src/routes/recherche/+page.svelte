@@ -208,11 +208,11 @@
 
 	function hitHref(h: Hit): string {
 		if (h.kind === 'compendium-question') return `/compendium/q/${h.number}`;
-		if (h.kind === 'paragraph') return `/ccc/${h.number}`;
+		if (h.kind === 'paragraph') return `/cec/${h.number}`;
 		const anchor = h.id.split('#')[1] ?? '';
-		if (h.paragraph_start) return `/ccc/${h.paragraph_start}${anchor ? '#' + anchor : ''}`;
-		if (h.chapter_slug) return `/ccc/${h.chapter_slug}${anchor ? '#' + anchor : ''}`;
-		return '/ccc';
+		if (h.paragraph_start) return `/cec/${h.paragraph_start}${anchor ? '#' + anchor : ''}`;
+		if (h.chapter_slug) return `/cec/${h.chapter_slug}${anchor ? '#' + anchor : ''}`;
+		return '/cec';
 	}
 
 	function hitMatchTerms(h: Hit): string[] {
@@ -417,9 +417,9 @@
 			</ul>
 
 			<p class="mt-12 pt-6 border-t border-border/60 font-ui text-[12px] text-muted text-center">
-				Parcourir le Catéchisme&nbsp;: <a class="browse-link" href="/ccc/sommaire">Sommaire</a>
+				Parcourir le Catéchisme&nbsp;: <a class="browse-link" href="/cec/sommaire">Sommaire</a>
 				<span aria-hidden="true">·</span>
-				<a class="browse-link" href="/ccc/prologue">Prologue</a>
+				<a class="browse-link" href="/cec/prologue">Prologue</a>
 				<span aria-hidden="true">·</span>
 				<a class="browse-link" href="/glossaire">Glossaire</a>
 			</p>
@@ -437,7 +437,7 @@
 				>
 			</p>
 			<p class="mt-2 font-ui text-[13px]">
-				<a class="browse-link" href="/ccc/sommaire">Voir le Sommaire du Catéchisme →</a>
+				<a class="browse-link" href="/cec/sommaire">Voir le Sommaire du Catéchisme →</a>
 			</p>
 		</section>
 	{:else}

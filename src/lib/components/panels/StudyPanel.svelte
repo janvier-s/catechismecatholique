@@ -16,7 +16,7 @@
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
 	// When the panel is open and the user navigates to a paragraph route
-	// (/ccc/{n} or /ccc/{n}-{m}), update the panel's context to follow.
+	// (/cec/{n} or /cec/{n}-{m}), update the panel's context to follow.
 	// Read the URL reactively, but pull store state with `get` so this effect
 	// only re-runs on URL changes — otherwise updating the store inside this
 	// effect would loop and clobber explicit context changes from elsewhere.
@@ -24,7 +24,7 @@
 		const path = page.url.pathname;
 		const s = get(studyPanel);
 		if (!s.open) return;
-		const m = path.match(/^\/ccc\/(\d+)(?:-\d+)?$/);
+		const m = path.match(/^\/cec\/(\d+)(?:-\d+)?$/);
 		if (!m) return;
 		const n = parseInt(m[1]!, 10);
 		if (!Number.isFinite(n)) return;
@@ -211,7 +211,7 @@
 				{:else if $studyPanel.context?.kind === 'paragraph'}
 					{@const ctxM = $studyPanel.context}
 					<a
-						href="/ccc/{ctxM.paragraph}"
+						href="/cec/{ctxM.paragraph}"
 						class="text-accent font-semibold hover:underline tabular-nums"
 					>
 						CEC {ctxM.paragraph}
@@ -281,7 +281,7 @@
 					</span>
 				{:else if ctx?.kind === 'paragraph'}
 					<a
-						href="/ccc/{ctx.paragraph}"
+						href="/cec/{ctx.paragraph}"
 						class="text-accent font-semibold hover:underline tabular-nums"
 					>
 						CEC {ctx.paragraph}

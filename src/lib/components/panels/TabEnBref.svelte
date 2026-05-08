@@ -4,8 +4,8 @@
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 	import { loadParagraphContext, loadChapter, loadParagraph } from '$lib/data/loaders';
 	import type { ParagraphContext, Paragraph, Chapter } from '$lib/data/types';
-	import ParagraphRenderer from '../ccc/ParagraphRenderer.svelte';
-	import CitationBlock from '../ccc/CitationBlock.svelte';
+	import ParagraphRenderer from '../cec/ParagraphRenderer.svelte';
+	import CitationBlock from '../cec/CitationBlock.svelte';
 
 	function onNumberClick(n: number) {
 		const s = get(studyPanel);
@@ -89,7 +89,7 @@
 					{#each block.paragraphs as p (p.number)}
 						<div class="mb-3 last:mb-0">
 							<a
-								href="/ccc/{p.number}"
+								href="/cec/{p.number}"
 								onclick={() => onNumberClick(p.number)}
 								class="block mb-1 text-sm font-semibold text-accent tabular-nums hover:underline font-ui"
 							>

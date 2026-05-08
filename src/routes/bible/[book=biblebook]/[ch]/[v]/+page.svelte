@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
+	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 </script>

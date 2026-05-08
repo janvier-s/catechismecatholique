@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { match } from '../../src/params/cccref';
+import { match } from '../../src/params/cecref';
 
-describe('cccref matcher', () => {
+describe('cecref matcher', () => {
 	it('matches single paragraph numbers', () => {
 		expect(match('27')).toBe(true);
 		expect(match('1')).toBe(true);

@@ -64,7 +64,7 @@
 			n'importe quel titre pour entrer dans la lecture.
 		</p>
 		<p class="back">
-			<a class="back-link" href="/ccc/sommaire">
+			<a class="back-link" href="/cec/sommaire">
 				<span class="back-arrow" aria-hidden="true">←</span> Sommaire détaillé
 			</a>
 		</p>

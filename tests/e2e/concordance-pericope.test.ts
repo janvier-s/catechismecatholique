@@ -11,8 +11,8 @@ test('concordance page renders pericopes with French titles and CCC chips', asyn
 	// Pericope card should show "Genèse 3:1-24" range and at least one CCC chip
 	await expect(page.getByText('Genèse 3:1-24').first()).toBeVisible();
 	// Scope to the pericope card so we don't match the topbar/footer links
-	// (Sommaire, Panorama, etc.) that also start with /ccc/.
-	const cccChip = page.locator('.pericope-detail a[href^="/ccc/"]').first();
+	// (Sommaire, Panorama, etc.) that also start with /cec/.
+	const cccChip = page.locator('.pericope-detail a[href^="/cec/"]').first();
 	await expect(cccChip).toBeVisible();
 });
 
@@ -28,12 +28,12 @@ test('clicking a pericope header on the left highlights the matching pericope on
 	await expect(rightCard).toBeInViewport();
 });
 
-test('CCC chip on the concordance page navigates to /ccc/<n>', async ({ page }) => {
+test('CCC chip on the concordance page navigates to /cec/<n>', async ({ page }) => {
 	await page.goto('/bible/genese/3/concordance');
-	// Scope to the pericope card to avoid matching topbar/footer /ccc/ links.
-	const cccChip = page.locator('.pericope-detail a[href^="/ccc/"]').first();
+	// Scope to the pericope card to avoid matching topbar/footer /cec/ links.
+	const cccChip = page.locator('.pericope-detail a[href^="/cec/"]').first();
 	const href = await cccChip.getAttribute('href');
-	expect(href).toMatch(/^\/ccc\/\d+(-\d+)?$/);
+	expect(href).toMatch(/^\/cec\/\d+(-\d+)?$/);
 	await cccChip.click();
 	await expect(page).toHaveURL(href!);
 });

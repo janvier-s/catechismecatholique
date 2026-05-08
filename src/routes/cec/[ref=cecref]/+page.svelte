@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
+	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
@@ -13,7 +13,7 @@
 
 	function chapterUrl(c: NonNullable<typeof data.context>): string {
 		if (!c.section || !c.chapter) return '';
-		return `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`;
+		return `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`;
 	}
 	function fmtRange(r: { from: number; to: number } | undefined): string {
 		if (!r) return '';
@@ -43,35 +43,35 @@
 			return {
 				label: 'Lire la rubrique complète',
 				title: c.heading.title,
-				href: `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${articlePart}#${c.heading.id}`
+				href: `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${articlePart}#${c.heading.id}`
 			};
 		}
 		if (c.article && c.chapter && c.section) {
 			return {
 				label: "Lire l'article complet",
 				title: c.article.title,
-				href: `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}`
+				href: `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}`
 			};
 		}
 		if (c.chapter && c.section) {
 			return {
 				label: 'Lire le chapitre complet',
 				title: c.chapter.title,
-				href: `/ccc/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`
+				href: `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`
 			};
 		}
 		if (c.section) {
 			return {
 				label: 'Lire la section complète',
 				title: c.section.title,
-				href: `/ccc/${c.part.slug}/${c.section.slug}`
+				href: `/cec/${c.part.slug}/${c.section.slug}`
 			};
 		}
 		const partLabel = c.part.number ? 'Lire la partie complète' : 'Lire le prologue complet';
 		return {
 			label: partLabel,
 			title: c.part.title,
-			href: `/ccc/${c.part.slug}`
+			href: `/cec/${c.part.slug}`
 		};
 	}
 </script>
@@ -95,10 +95,10 @@
 		<nav class="breadcrumb-rail mb-8 font-ui text-sm" aria-label="Fil d'Ariane">
 			<ol class="space-y-1">
 				<li>
-					<a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a>
+					<a href="/cec" class="text-muted hover:text-accent">Catéchisme</a>
 				</li>
 				<li class="pl-5">
-					<a href="/ccc/{c.part.slug}" class="text-muted hover:text-accent">
+					<a href="/cec/{c.part.slug}" class="text-muted hover:text-accent">
 						<span class="font-semibold bc-kicker">
 							{c.part.number ? `Partie ${c.part.number}` : 'Prologue'}
 						</span>
@@ -112,7 +112,7 @@
 				</li>
 				{#if c.section}
 					<li class="pl-10">
-						<a href="/ccc/{c.part.slug}/{c.section.slug}" class="text-muted hover:text-accent">
+						<a href="/cec/{c.part.slug}/{c.section.slug}" class="text-muted hover:text-accent">
 							<span class="font-semibold bc-kicker">
 								{c.section.number ? `Section ${c.section.number}` : 'Section'}
 							</span>
@@ -197,7 +197,7 @@
 		aria-label="Paragraphe précédent ou suivant"
 	>
 		{#if hasPrev}
-			<a class="paragraph-nav-card prev" href="/ccc/{prevNum}">
+			<a class="paragraph-nav-card prev" href="/cec/{prevNum}">
 				<span class="paragraph-nav-eyebrow">← Précédent</span>
 				<span class="paragraph-nav-title">§&nbsp;{prevNum}</span>
 			</a>
@@ -205,7 +205,7 @@
 			<span class="paragraph-nav-spacer"></span>
 		{/if}
 		{#if hasNext}
-			<a class="paragraph-nav-card next" href="/ccc/{nextNum}">
+			<a class="paragraph-nav-card next" href="/cec/{nextNum}">
 				<span class="paragraph-nav-eyebrow">Suivant →</span>
 				<span class="paragraph-nav-title">§&nbsp;{nextNum}</span>
 			</a>

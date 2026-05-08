@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { CompendiumPart } from '$lib/data/types';
-	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
-	import CitationBlock from '$lib/components/ccc/CitationBlock.svelte';
+	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
+	import CitationBlock from '$lib/components/cec/CitationBlock.svelte';
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 

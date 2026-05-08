@@ -12,5 +12,5 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const nonPrologue = struct.parts.filter((p) => !p.prologue);
 	const target = nonPrologue[idx - 1];
 	if (!target) throw error(404, 'Partie inconnue');
-	throw redirect(308, `/ccc/${target.slug}`);
+	throw redirect(308, `/cec/${target.slug}`);
 };

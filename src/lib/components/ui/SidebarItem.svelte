@@ -28,8 +28,8 @@
 	// article entry) won't equal it but is still the visible context.
 	const isActiveBase = $derived(activeHref.startsWith(item.href + '#'));
 	// Heading entries in the sidebar use article-prefixed hrefs (e.g.
-	// /ccc/x/y/chapter/article-1#h-id) but on a chapter page the scroll-spy
-	// produces activeHref = /ccc/x/y/chapter#h-id (no article slug). When
+	// /cec/x/y/chapter/article-1#h-id) but on a chapter page the scroll-spy
+	// produces activeHref = /cec/x/y/chapter#h-id (no article slug). When
 	// the hash matches and the item's path is a deeper version of the
 	// active path, treat it as the active entry. This is what lets the
 	// Roman headings sync as the reader scrolls a chapter page.

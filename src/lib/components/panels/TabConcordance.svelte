@@ -114,7 +114,7 @@
 					<div class="mt-3 flex flex-wrap justify-center gap-x-2 gap-y-1">
 						{#each entry.cccRanges as r (`${r.from}-${r.to}`)}
 							<a
-								href={r.from === r.to ? `/ccc/${r.from}` : `/ccc/${r.from}-${r.to}`}
+								href={r.from === r.to ? `/cec/${r.from}` : `/cec/${r.from}-${r.to}`}
 								class="font-ui text-[12px] text-accent hover:underline whitespace-nowrap tabular-nums"
 							>
 								{r.from === r.to ? r.from : `${r.from}-${r.to}`}

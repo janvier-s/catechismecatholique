@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ReadableUnit from '$lib/components/ccc/ReadableUnit.svelte';
+	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
@@ -30,7 +30,7 @@
 		<nav class="breadcrumb-rail font-ui text-sm" aria-label="Fil d'Ariane">
 			<ol class="space-y-1">
 				<li>
-					<a href="/ccc" class="text-muted hover:text-accent">Catéchisme</a>
+					<a href="/cec" class="text-muted hover:text-accent">Catéchisme</a>
 				</li>
 				<li class="pl-5">
 					{#if data.part.number}
@@ -83,7 +83,7 @@
 		<ol class="space-y-6">
 			{#each data.part.sections as section (section.slug)}
 				<li>
-					<a href="/ccc/{data.part.slug}/{section.slug}" class="block group">
+					<a href="/cec/{data.part.slug}/{section.slug}" class="block group">
 						<h3 class="font-ui text-2xl font-semibold group-hover:text-accent">
 							<span class="font-semibold">Section {section.number} :</span>
 							{section.title}
@@ -114,7 +114,7 @@
 				title={data.prev.title}
 			/>
 		{:else}
-			<NavCard direction="prev" href="/ccc" eyebrow="← Catéchisme" title="Sommaire complet" />
+			<NavCard direction="prev" href="/cec" eyebrow="← Catéchisme" title="Sommaire complet" />
 		{/if}
 		{#if data.next}
 			<NavCard

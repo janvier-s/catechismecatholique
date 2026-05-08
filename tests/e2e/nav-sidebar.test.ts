@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test('sidebar lists parts inside reader pages', async ({ page }) => {
-	// Sidebar is hidden on /ccc index and /ccc/sommaire; it appears once you
+	// Sidebar is hidden on /cec index and /cec/sommaire; it appears once you
 	// enter a reading surface (paragraph, chapter, etc.).
-	await page.goto('/ccc/27');
+	await page.goto('/cec/27');
 	const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
 	await expect(sidebar).toBeVisible();
 	await expect(sidebar.getByRole('link').first()).toBeVisible();
@@ -17,11 +17,11 @@ test('sidebar is hidden on the homepage', async ({ page }) => {
 
 test('sidebar auto-expands active chapter branch', async ({ page }) => {
 	const fs = await import('node:fs');
-	const struct = JSON.parse(fs.readFileSync('static/data/ccc/structure.json', 'utf8'));
+	const struct = JSON.parse(fs.readFileSync('static/data/cec/structure.json', 'utf8'));
 	const part = struct.parts.find((p: { prologue?: boolean }) => !p.prologue);
 	const section = part.sections[0];
 	const chapter = section.chapters[0];
-	const url = `/ccc/${part.slug}/${section.slug}/${chapter.slug}`;
+	const url = `/cec/${part.slug}/${section.slug}/${chapter.slug}`;
 	await page.goto(url);
 	const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
 	// Match the chapter link by href — the visible label includes

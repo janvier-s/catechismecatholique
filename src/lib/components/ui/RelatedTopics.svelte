@@ -13,7 +13,7 @@
 	async function load(): Promise<SuggestionsBundle> {
 		if (bundle) return bundle;
 		if (loadPromise) return loadPromise;
-		loadPromise = fetch('/data/ccc/search-suggestions.json')
+		loadPromise = fetch('/data/cec/search-suggestions.json')
 			.then((r) => r.json() as Promise<SuggestionsBundle>)
 			.then((d) => {
 				bundle = d;

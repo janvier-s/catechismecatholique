@@ -5,7 +5,7 @@
 
 	const label = $derived(range.from === range.to ? `§${range.from}` : `§${range.from}-${range.to}`);
 	const href = $derived(
-		range.from === range.to ? `/ccc/${range.from}` : `/ccc/${range.from}-${range.to}`
+		range.from === range.to ? `/cec/${range.from}` : `/cec/${range.from}-${range.to}`
 	);
 </script>
 

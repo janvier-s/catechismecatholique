@@ -22,15 +22,15 @@
 			anchors: [
 				{
 					label: 'Le Symbole des Apôtres',
-					href: '/ccc/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi'
+					href: '/cec/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi'
 				},
 				{
 					label: 'Je crois en Dieu le Père',
-					href: '/ccc/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi/je-crois-en-dieu-le-pere'
+					href: '/cec/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi/je-crois-en-dieu-le-pere'
 				},
 				{
 					label: 'Je crois en Jésus-Christ',
-					href: '/ccc/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi/je-crois-en-jesus-christ-le-fils-unique-de-dieu'
+					href: '/cec/la-profession-de-la-foi/la-profession-de-la-foi-chretienne-les-symboles-de-la-foi/je-crois-en-jesus-christ-le-fils-unique-de-dieu'
 				}
 			]
 		},
@@ -46,11 +46,11 @@
 			anchors: [
 				{
 					label: 'Les sept sacrements',
-					href: '/ccc/la-celebration-du-mystere-chretien/les-sept-sacrements-de-leglise'
+					href: '/cec/la-celebration-du-mystere-chretien/les-sept-sacrements-de-leglise'
 				},
 				{
 					label: "Les sacrements de l'initiation chrétienne",
-					href: '/ccc/la-celebration-du-mystere-chretien/les-sept-sacrements-de-leglise/les-sacrements-de-linitiation-chretienne'
+					href: '/cec/la-celebration-du-mystere-chretien/les-sept-sacrements-de-leglise/les-sacrements-de-linitiation-chretienne'
 				}
 			]
 		},
@@ -65,11 +65,11 @@
 			anchors: [
 				{
 					label: 'Les Dix commandements',
-					href: '/ccc/la-vie-dans-le-christ/les-dix-commandements'
+					href: '/cec/la-vie-dans-le-christ/les-dix-commandements'
 				},
 				{
 					label: 'La dignité de la personne humaine',
-					href: '/ccc/la-vie-dans-le-christ/la-vocation-de-lhomme-la-vie-dans-lesprit/la-dignite-de-la-personne-humaine'
+					href: '/cec/la-vie-dans-le-christ/la-vocation-de-lhomme-la-vie-dans-lesprit/la-dignite-de-la-personne-humaine'
 				}
 			]
 		},
@@ -85,11 +85,11 @@
 			anchors: [
 				{
 					label: 'Le Notre Père',
-					href: '/ccc/la-priere-chretienne/la-priere-du-seigneur-notre-pere'
+					href: '/cec/la-priere-chretienne/la-priere-du-seigneur-notre-pere'
 				},
 				{
 					label: 'La prière dans la vie chrétienne',
-					href: '/ccc/la-priere-chretienne/la-priere-dans-la-vie-chretienne'
+					href: '/cec/la-priere-chretienne/la-priere-dans-la-vie-chretienne'
 				}
 			]
 		}
@@ -116,7 +116,7 @@
 	</header>
 
 	<section class="prologue" aria-labelledby="prologue-title">
-		<a href="/ccc/prologue" class="prologue-link">
+		<a href="/cec/prologue" class="prologue-link">
 			<span class="prologue-kicker">Prologue · 1–25</span>
 			<span id="prologue-title" class="prologue-lede">
 				Plan d'ensemble du Catéchisme et transmission de la foi.
@@ -128,7 +128,7 @@
 	<section class="parts" aria-label="Les quatre parties du Catéchisme">
 		{#each PARTS as p (p.slug)}
 			<article class="part-card">
-				<a href="/ccc/{p.slug}" class="part-head">
+				<a href="/cec/{p.slug}" class="part-head">
 					<span class="part-kicker">{p.kicker} · {p.range}</span>
 					<h2 class="part-title">{p.title}</h2>
 				</a>
@@ -150,9 +150,9 @@
 	</section>
 
 	<nav class="quick-links" aria-label="Navigation complémentaire">
-		<a href="/ccc/sommaire" class="quick-link">Sommaire complet</a>
+		<a href="/cec/sommaire" class="quick-link">Sommaire complet</a>
 		<span class="quick-sep" aria-hidden="true">·</span>
-		<a href="/ccc/panorama" class="quick-link">Panorama</a>
+		<a href="/cec/panorama" class="quick-link">Panorama</a>
 		<span class="quick-sep" aria-hidden="true">·</span>
 		<a href="/glossaire" class="quick-link">Glossaire</a>
 		<span class="quick-sep" aria-hidden="true">·</span>

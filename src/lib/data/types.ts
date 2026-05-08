@@ -264,7 +264,7 @@ export type NclSectionMap = Record<string, NclSection[]>; // keyed by USFX
 /**
  * A contiguous CCC paragraph range. A bare paragraph number is `{from: n, to: n}`.
  * Source ranges like `337-354` are preserved as a single entry so the UI can
- * render them as one "337-354" chip linking to `/ccc/337-354`.
+ * render them as one "337-354" chip linking to `/cec/337-354`.
  */
 export interface CccRange {
 	from: number;

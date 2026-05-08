@@ -24,21 +24,21 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		const lastChap = lastSec?.chapters[lastSec.chapters.length - 1];
 		if (lastChap) {
 			prev = {
-				href: `/ccc/${p.slug}/${lastSec!.slug}/${lastChap.slug}`,
+				href: `/cec/${p.slug}/${lastSec!.slug}/${lastChap.slug}`,
 				label: '← Chapitre précédent',
 				title: p.title
 			};
 			break;
 		}
 		if (p.slug === 'prologue') {
-			prev = { href: '/ccc/prologue', label: '← Prologue', title: 'Prologue' };
+			prev = { href: '/cec/prologue', label: '← Prologue', title: 'Prologue' };
 			break;
 		}
 	}
 	const firstSec = part.sections[0] ?? null;
 	let next: { href: string; label: string; title: string } | null = firstSec
 		? {
-				href: `/ccc/${part.slug}/${firstSec.slug}`,
+				href: `/cec/${part.slug}/${firstSec.slug}`,
 				label: 'Première section →',
 				title: firstSec.title
 			}
@@ -49,7 +49,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		const nextPart = struct.parts[partIdx + 1];
 		if (nextPart) {
 			next = {
-				href: `/ccc/${nextPart.slug}`,
+				href: `/cec/${nextPart.slug}`,
 				label: 'Partie suivante →',
 				title: nextPart.title
 			};

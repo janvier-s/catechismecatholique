@@ -1,7 +1,7 @@
 /**
  * Sidebar entry matching — pulled out of SidebarItem.svelte so the multiple
  * match shapes are unit-testable. activeHref often carries a scroll-spy
- * heading hash like "/ccc/x/y/chapter#some-heading" while the tree entries
+ * heading hash like "/cec/x/y/chapter#some-heading" while the tree entries
  * are stored without the hash. Three match shapes have to work for the
  * sidebar to highlight correctly across page kinds:
  *

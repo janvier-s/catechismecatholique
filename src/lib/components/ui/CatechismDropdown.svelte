@@ -196,7 +196,7 @@
 	// Pre-populate cascade. When the user is on a deep CCC URL, follow it so
 	// the dropdown opens revealing the current location instead of always
 	// the first part. Falls back to the first part when the URL doesn't
-	// resolve into the structure (e.g. /ccc, /ccc/sommaire).
+	// resolve into the structure (e.g. /ccc, /cec/sommaire).
 	$effect(() => {
 		if (!open) return;
 		if (parts.length === 0) return;
@@ -267,22 +267,22 @@
 		const section = activeSectionSlug;
 		// articles_direct on section have no chapter segment
 		if (sectionDirectArticles.length > 0) {
-			return `/ccc/${part}/${section}/${a.slug}`;
+			return `/cec/${part}/${section}/${a.slug}`;
 		}
 		const chap = activeChapterSlug;
-		return `/ccc/${part}/${section}/${chap}/${a.slug}`;
+		return `/cec/${part}/${section}/${chap}/${a.slug}`;
 	}
 
 	function chapterHref(c: Chapter): string {
-		return `/ccc/${activePartSlug}/${activeSectionSlug}/${c.slug}`;
+		return `/cec/${activePartSlug}/${activeSectionSlug}/${c.slug}`;
 	}
 
 	function headingHref(h: Heading): string {
-		return `/ccc/${activePartSlug}/${activeSectionSlug}/${activeChapterSlug}#${h.id}`;
+		return `/cec/${activePartSlug}/${activeSectionSlug}/${activeChapterSlug}#${h.id}`;
 	}
 
 	function sectionHref(s: Section): string {
-		return `/ccc/${activePartSlug}/${s.slug}`;
+		return `/cec/${activePartSlug}/${s.slug}`;
 	}
 
 	// Column lengths for keyboard navigation bounds
@@ -442,14 +442,14 @@
 				<!-- Mobile fallback: simple single-column list (parts + prologue) -->
 				<p class="eyebrow" aria-hidden="true">Catéchisme</p>
 				{#if prologue}
-					<a class="m-row m-row-prologue" href="/ccc/{prologue.slug}" onclick={close}>
+					<a class="m-row m-row-prologue" href="/cec/{prologue.slug}" onclick={close}>
 						<span class="m-row-label">Prologue</span>
 					</a>
 				{/if}
 				<ol class="m-list">
 					{#each parts as part (part.slug)}
 						<li>
-							<a class="m-row" href="/ccc/{part.slug}" onclick={close}>
+							<a class="m-row" href="/cec/{part.slug}" onclick={close}>
 								<span class="m-numeral" aria-hidden="true">{ROMAN[part.number ?? 0]}</span>
 								<span class="m-body">
 									<span class="m-kicker">Partie&nbsp;{part.number}</span>
@@ -460,7 +460,7 @@
 						</li>
 					{/each}
 				</ol>
-				<a class="m-sommaire" href="/ccc/sommaire" onclick={close}>
+				<a class="m-sommaire" href="/cec/sommaire" onclick={close}>
 					<span>Sommaire complet</span>
 					<span class="sommaire-arrow" aria-hidden="true">→</span>
 				</a>
@@ -476,7 +476,7 @@
 									<li>
 										<a
 											class="cell cell-prologue"
-											href="/ccc/{it.item.slug}"
+											href="/cec/{it.item.slug}"
 											data-kb-col="0"
 											data-kb-index={i}
 											tabindex={kbCol === 0 && kbIndex === i ? 0 : -1}
@@ -501,7 +501,7 @@
 										<a
 											class="cell cell-part"
 											class:is-active={isActive}
-											href="/ccc/{part.slug}"
+											href="/cec/{part.slug}"
 											data-kb-col="0"
 											data-kb-index={i}
 											tabindex={kbCol === 0 && kbIndex === i ? 0 : -1}
@@ -663,7 +663,7 @@
 				</div>
 
 				<!-- Footer bar — entire row is the sommaire link, centered. -->
-				<a class="panel-foot foot-link foot-link-primary" href="/ccc/sommaire" onclick={close}>
+				<a class="panel-foot foot-link foot-link-primary" href="/cec/sommaire" onclick={close}>
 					<span>Sommaire complet</span>
 					<span class="sommaire-arrow" aria-hidden="true">→</span>
 				</a>

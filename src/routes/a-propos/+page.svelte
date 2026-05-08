@@ -430,7 +430,7 @@
 	<p class="laus-deo"><em>Laus Deo.</em></p>
 
 	<div class="cta-row">
-		<a href="/ccc" class="cta-btn">Lire le Catéchisme →</a>
+		<a href="/cec" class="cta-btn">Lire le Catéchisme →</a>
 	</div>
 </ProseLayout>
 

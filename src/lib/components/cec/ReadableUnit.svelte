@@ -23,20 +23,20 @@
 		if ($prefs.crossRefsLayout !== 'side') return null;
 		if (unit.kind === 'ccc-paragraph') {
 			return unit.data.cross_refs.length > 0
-				? { label: 'Renvois', refs: [...new Set(unit.data.cross_refs)], hrefPrefix: '/ccc/' }
+				? { label: 'Renvois', refs: [...new Set(unit.data.cross_refs)], hrefPrefix: '/cec/' }
 				: null;
 		}
 		return unit.data.ccc_refs.length > 0
 			? {
 					label: 'Renvois CEC',
 					refs: [...new Set(unit.data.ccc_refs.map(String))],
-					hrefPrefix: '/ccc/'
+					hrefPrefix: '/cec/'
 				}
 			: null;
 	});
 
 	const numberHref = $derived(
-		unit.kind === 'ccc-paragraph' ? `/ccc/${unit.data.number}` : `#q-${unit.data.number}`
+		unit.kind === 'ccc-paragraph' ? `/cec/${unit.data.number}` : `#q-${unit.data.number}`
 	);
 	const anchorId = $derived(
 		unit.kind === 'compendium-question' ? `q-${unit.data.number}` : undefined

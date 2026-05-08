@@ -6,7 +6,7 @@ import type { PageLoad } from './$types';
 // When `chapter` doesn't resolve, the third path segment may be an
 // articles_direct slug (sections like "Notre Père" expose articles directly,
 // no enclosing chapter). Look it up in the structure and redirect to the
-// canonical paragraph-range URL the cccref route handles.
+// canonical paragraph-range URL the cecref route handles.
 async function maybeRedirectArticlesDirect(
 	part: string,
 	section: string,
@@ -19,7 +19,7 @@ async function maybeRedirectArticlesDirect(
 	if (article && article.paragraphs.length > 0) {
 		const from = article.paragraphs[0]!;
 		const to = article.paragraphs[article.paragraphs.length - 1]!;
-		throw redirect(307, from === to ? `/ccc/${from}` : `/ccc/${from}-${to}`);
+		throw redirect(307, from === to ? `/cec/${from}` : `/cec/${from}-${to}`);
 	}
 	return null;
 }

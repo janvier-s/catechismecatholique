@@ -12,17 +12,17 @@ export const GET: RequestHandler = () => {
 		readFileSync(join(process.cwd(), 'static/data/bible/chapter-counts.json'), 'utf-8')
 	);
 	const glossary: { entries: { slug: string }[] } = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/ccc/glossary.json'), 'utf-8')
+		readFileSync(join(process.cwd(), 'static/data/cec/glossary.json'), 'utf-8')
 	);
 	const glossaryIndex: { clusters: { id: string }[] } = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/ccc/glossary-index.json'), 'utf-8')
+		readFileSync(join(process.cwd(), 'static/data/cec/glossary-index.json'), 'utf-8')
 	);
 
 	const staticPages = [
 		'/',
-		'/ccc',
-		'/ccc/sommaire',
-		'/ccc/panorama',
+		'/cec',
+		'/cec/sommaire',
+		'/cec/panorama',
 		'/bible',
 		'/glossaire',
 		'/glossaire/tous',
@@ -31,7 +31,7 @@ export const GET: RequestHandler = () => {
 		'/mentions-legales'
 	];
 
-	const paragraphUrls = Array.from({ length: 2865 }, (_, i) => `/ccc/${i + 1}`);
+	const paragraphUrls = Array.from({ length: 2865 }, (_, i) => `/cec/${i + 1}`);
 
 	const bibleUrls: string[] = [];
 	for (const book of BOOKS) {

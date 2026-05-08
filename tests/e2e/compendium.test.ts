@@ -25,7 +25,7 @@ test.describe('Compendium', () => {
 		const firstRef = page.locator('aside.ccc-side-refs a.cross-ref-link').first();
 		const refNum = (await firstRef.textContent())?.trim();
 		await firstRef.click();
-		await expect(page).toHaveURL(new RegExp(`/ccc/${refNum}$`));
+		await expect(page).toHaveURL(new RegExp(`/cec/${refNum}$`));
 	});
 
 	test('q/N redirects to part anchor', async ({ page }) => {
@@ -35,7 +35,7 @@ test.describe('Compendium', () => {
 	});
 
 	test('topbar 3x3 menu links to /compendium', async ({ page }) => {
-		await page.goto('/ccc');
+		await page.goto('/cec');
 		await page.locator('.desktop-menu-trigger').click();
 		// Each menu row is an <a class="menu-row"> with label + description spans.
 		// The accessible name includes both spans, so match by href instead of text.
@@ -46,7 +46,7 @@ test.describe('Compendium', () => {
 	test('topbar 3x3 menu has Prières & Formules entry that links to /compendium/annexe', async ({
 		page
 	}) => {
-		await page.goto('/ccc');
+		await page.goto('/cec');
 		await page.locator('.desktop-menu-trigger').click();
 		await page.locator('a.menu-row[href="/compendium/annexe"]').click();
 		await expect(page).toHaveURL('/compendium/annexe');

@@ -14,7 +14,7 @@ export function detectIntent(input: string): Intent {
 	if (pMatch) {
 		const from = pMatch[1]!;
 		const to = pMatch[2];
-		return { kind: 'paragraph', href: to ? `/ccc/${from}-${to}` : `/ccc/${from}` };
+		return { kind: 'paragraph', href: to ? `/cec/${from}-${to}` : `/cec/${from}` };
 	}
 
 	// Bible: book abbr + ch + sep + verse[-range]. Sep is ':' or ',' (French uses comma).

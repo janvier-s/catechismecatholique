@@ -61,8 +61,8 @@
 
 	type Link = { href: string; label: string; description: string };
 	const links: Link[] = [
-		{ href: '/ccc/sommaire', label: 'Sommaire', description: 'La table des matières complète.' },
-		{ href: '/ccc/panorama', label: 'Panorama', description: "Vue d'ensemble en un coup d'œil." },
+		{ href: '/cec/sommaire', label: 'Sommaire', description: 'La table des matières complète.' },
+		{ href: '/cec/panorama', label: 'Panorama', description: "Vue d'ensemble en un coup d'œil." },
 		{
 			href: '/compendium',
 			label: 'Compendium',
