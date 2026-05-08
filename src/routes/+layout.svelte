@@ -55,6 +55,17 @@
 			if (get(studyPanel).open) closePanel();
 		}
 
+		// Hash anchor scroll: re-run after a layout frame so element positions
+		// are settled, using instant so there's no animated slam over a long
+		// page. scroll-padding-top on html clears the sticky topbar.
+		const hash = to?.url.hash;
+		if (hash) {
+			const id = hash.slice(1);
+			requestAnimationFrame(() => {
+				document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+			});
+		}
+
 		// Re-trigger the page-fade by re-applying the class. Bump the key so
 		// Svelte updates the attribute, then reflow before the keyframe runs.
 		fadeKey++;

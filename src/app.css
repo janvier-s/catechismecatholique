@@ -247,6 +247,10 @@
 		color: var(--color-fg);
 		font-family: var(--font-body);
 		scroll-behavior: smooth;
+		/* Offset anchor scrolls so targets clear the sticky topbar (~80px
+		   desktop, ~58px mobile). 6rem gives comfortable breathing room at
+		   all breakpoints and matches the scroll-mt-24 on headings. */
+		scroll-padding-top: 6rem;
 		/* Reserve the vertical scrollbar gutter so locking <html> overflow
 		   (e.g. when the panorama modal opens) doesn't shift layout when
 		   the scrollbar disappears. */
