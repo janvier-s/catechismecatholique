@@ -42,11 +42,11 @@
 
 	type TabDef = { id: PanelTab; label: string };
 	const ALL_TABS: TabDef[] = [
-		{ id: 'bible', label: 'Bible' },
 		{ id: 'cross-refs', label: 'Renvois' },
 		{ id: 'cited-by', label: 'Cités par' },
 		{ id: 'sources', label: 'Sources' },
 		{ id: 'compendium', label: 'Compendium' },
+		{ id: 'bible', label: 'Bible' },
 		{ id: 'concordance', label: 'Concordance' },
 		{ id: 'en-bref', label: 'En Bref' }
 	];
@@ -120,14 +120,15 @@
 			citerSet.size === crossSet.size && [...citerSet].every((x) => crossSet.has(x));
 		const hasCitedBy = citedByList.length > 0 && !sameAsRenvois;
 
-		// Order: paragraph's own bible refs → CCC graph (Renvois then Cités par)
-		// → external corpora citing this paragraph (Sources then Compendium) →
-		// related Bible commentary (Concordance) → chapter-level summary (En Bref).
-		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
+		// Order: CCC graph (Renvois then Cités par) → external corpora citing
+		// this paragraph (Sources then Compendium) → Bible cluster (this
+		// paragraph's verses, then commentary on related verses) → chapter-
+		// level summary (En Bref).
 		if (hasCrossRefs) out.push({ id: 'cross-refs', label: 'Renvois' });
 		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités par' });
 		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
 		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
+		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
 		// Always show Concordance for paragraph contexts; the tab body handles empty state.
 		out.push({ id: 'concordance', label: 'Concordance' });
 		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
