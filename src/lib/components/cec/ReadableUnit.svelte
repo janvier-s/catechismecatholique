@@ -3,7 +3,7 @@
 	import type { Paragraph, CompendiumQuestion } from '$lib/data/types';
 	import ParagraphRenderer from './ParagraphRenderer.svelte';
 	import CitationBlock from './CitationBlock.svelte';
-	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
+	import { studyPanel, openPanel, closePanel } from '$lib/stores/studyPanel';
 	import { prefs } from '$lib/stores/prefs';
 
 	type Unit =
@@ -21,6 +21,12 @@
 		if (unit.kind !== 'ccc-paragraph') return;
 		e.preventDefault();
 		const s = get(studyPanel);
+		// Toggle: clicking the number again while the panel is already open for
+		// this paragraph closes it.
+		if (s.open && s.context?.kind === 'paragraph' && s.context.paragraph === unit.data.number) {
+			closePanel();
+			return;
+		}
 		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab ?? 'cross-refs');
 	}
 
@@ -73,14 +79,6 @@
 	<div class="paragraph-grid">
 		<div class="number-wrap flex-none w-12 flex items-start justify-end gap-0.5 pt-1">
 			{#if unit.kind === 'ccc-paragraph'}
-				<button
-					type="button"
-					class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
-					onclick={onNumberClick}
-					aria-label={`Ouvrir le panneau d'étude pour le paragraphe ${unit.data.number}`}
-				>
-					{unit.data.number}
-				</button>
 				<a
 					href={numberHref}
 					class="number-link"
@@ -92,6 +90,14 @@
 						/>
 					</svg>
 				</a>
+				<button
+					type="button"
+					class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
+					onclick={onNumberClick}
+					aria-label={`Ouvrir le panneau d'étude pour le paragraphe ${unit.data.number}`}
+				>
+					{unit.data.number}
+				</button>
 			{:else}
 				<a
 					href={numberHref}

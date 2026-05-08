@@ -178,7 +178,7 @@
 			{#each r.verses as v (v.v)}
 				<span class="block">
 					{#if r.verses.length > 1}
-						<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-1"
+						<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-2"
 							>{v.v}</sup
 						>
 					{/if}
@@ -195,7 +195,7 @@
 	{#if refs.length === 0}
 		<p class="text-muted italic">Aucune référence biblique.</p>
 	{:else}
-		<ul bind:this={listEl} class="space-y-5">
+		<ul bind:this={listEl} class="space-y-3 sm:space-y-5">
 			{#each resolved as r (r.raw + ':' + r.idx)}
 				{#if r.style === 'cluster-leader'}
 					<li class="cluster-header" aria-hidden="true">
@@ -256,22 +256,23 @@
 		font-size: 0.85em;
 	}
 	/* Cluster verses — leader's verse + all its members, indented under the
-	   header with a subtle accent rule. */
+	   header with a subtle accent rule. No border-radius so the left border
+	   draws as one unbroken line across all members. */
 	li.cluster-verse {
 		margin-left: 0.75rem;
 		padding-left: 0.75rem;
 		border-left: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+		border-radius: 0;
 	}
-	/* Continuous rule: consecutive cluster verses touch (no margin gap) so the
-	   left border draws as one unbroken line. Inner padding-top provides the
-	   breathing room. */
+	/* Consecutive cluster verses: no gap so the left border is continuous.
+	   Inner padding-top provides the breathing room instead. */
 	li.cluster-verse + li.cluster-verse {
 		margin-top: 0;
 		padding-top: 0.5rem;
 	}
-	/* The header has no border, so an empty margin between header and first
-	   verse doesn't break the rule visually. Keep it as margin. */
+	/* Header sits immediately above the first cluster verse — tight gap so the
+	   marker reads as attached to the group, not floating above it. */
 	li.cluster-header + li.cluster-verse {
-		margin-top: 0.25rem;
+		margin-top: 0;
 	}
 </style>

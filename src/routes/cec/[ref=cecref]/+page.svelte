@@ -198,16 +198,22 @@
 	>
 		{#if hasPrev}
 			<a class="paragraph-nav-card prev" href="/cec/{prevNum}">
-				<span class="paragraph-nav-eyebrow">← Précédent</span>
-				<span class="paragraph-nav-title">§&nbsp;{prevNum}</span>
+				<span class="paragraph-nav-arrow" aria-hidden="true">←</span>
+				<span class="paragraph-nav-body">
+					<span class="paragraph-nav-eyebrow">Précédent</span>
+					<span class="paragraph-nav-title">{prevNum}</span>
+				</span>
 			</a>
 		{:else}
 			<span class="paragraph-nav-spacer"></span>
 		{/if}
 		{#if hasNext}
 			<a class="paragraph-nav-card next" href="/cec/{nextNum}">
-				<span class="paragraph-nav-eyebrow">Suivant →</span>
-				<span class="paragraph-nav-title">§&nbsp;{nextNum}</span>
+				<span class="paragraph-nav-body">
+					<span class="paragraph-nav-eyebrow">Suivant</span>
+					<span class="paragraph-nav-title">{nextNum}</span>
+				</span>
+				<span class="paragraph-nav-arrow" aria-hidden="true">→</span>
 			</a>
 		{:else}
 			<span class="paragraph-nav-spacer"></span>
@@ -220,8 +226,9 @@
 		flex: 1;
 		min-width: 0;
 		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.75rem;
 		padding: 0.7rem 1rem;
 		background: var(--color-panel);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
@@ -238,10 +245,26 @@
 		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
 		color: var(--color-accent-text);
 	}
-	.paragraph-nav-card.prev {
-		text-align: left;
-	}
 	.paragraph-nav-card.next {
+		text-align: right;
+	}
+	.paragraph-nav-arrow {
+		flex-shrink: 0;
+		font-size: 1.1rem;
+		color: var(--color-muted);
+		transition: color 140ms ease;
+	}
+	.paragraph-nav-card:hover .paragraph-nav-arrow {
+		color: var(--color-accent-text);
+	}
+	.paragraph-nav-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		flex: 1;
+		min-width: 0;
+	}
+	.paragraph-nav-card.next .paragraph-nav-body {
 		text-align: right;
 	}
 	.paragraph-nav-eyebrow {
@@ -251,6 +274,9 @@
 		text-transform: uppercase;
 		letter-spacing: 0.18em;
 		color: var(--color-muted);
+	}
+	.paragraph-nav-card:hover .paragraph-nav-eyebrow {
+		color: var(--color-accent-text);
 	}
 	.paragraph-nav-title {
 		font-family: var(--font-heading);
