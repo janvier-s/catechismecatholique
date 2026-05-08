@@ -1,1 +1,42 @@
-{"part":{"slug":"la-vie-dans-le-christ","title":"La vie dans le Christ","number":3,"range":{"from":1691,"to":2557}},"section":{"slug":"la-vocation-de-lhomme-la-vie-dans-lesprit","title":"La vocation de l’homme : La vie dans l’esprit","number":1,"range":{"from":1699,"to":2051}},"chapter":{"slug":"la-dignite-de-la-personne-humaine","title":"La dignité de la personne humaine","number":1,"range":{"from":1700,"to":1876}},"article":{"slug":"le-peche","title":"Le péché","number":8,"range":{"from":1846,"to":1876}},"heading":{"id":"iii-la-diversite-des-peches","title":"III. La diversité des péchés"}}
+{
+	"part": {
+		"slug": "3-vie-dans-le-christ",
+		"title": "La vie dans le Christ",
+		"number": 3,
+		"range": {
+			"from": 1691,
+			"to": 2557
+		}
+	},
+	"section": {
+		"slug": "1-vocation-de-lhomme-la-vie-dans",
+		"title": "La vocation de l’homme : La vie dans l’esprit",
+		"number": 1,
+		"range": {
+			"from": 1699,
+			"to": 2051
+		}
+	},
+	"chapter": {
+		"slug": "1-dignite-de-la-personne-humaine",
+		"title": "La dignité de la personne humaine",
+		"number": 1,
+		"range": {
+			"from": 1700,
+			"to": 1876
+		}
+	},
+	"article": {
+		"slug": "8-peche",
+		"title": "Le péché",
+		"number": 8,
+		"range": {
+			"from": 1846,
+			"to": 1876
+		}
+	},
+	"heading": {
+		"id": "iii-la-diversite-des-peches",
+		"title": "III. La diversité des péchés"
+	}
+}

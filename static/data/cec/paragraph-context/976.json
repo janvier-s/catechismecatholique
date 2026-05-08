@@ -1,1 +1,38 @@
-{"part":{"slug":"la-profession-de-la-foi","title":"La profession de la foi","number":1,"range":{"from":26,"to":1065}},"section":{"slug":"la-profession-de-la-foi-chretienne-les-symboles-de-la-foi","title":"La profession de la foi chrétienne – les symboles de la foi","number":2,"range":{"from":185,"to":1065}},"chapter":{"slug":"je-crois-en-lesprit-saint","title":"Je crois en l’Esprit-Saint","number":3,"range":{"from":683,"to":1065}},"article":{"slug":"je-crois-au-pardon-des-peches","title":"« Je crois au pardon des péchés »","number":10,"range":{"from":976,"to":987}}}
+{
+	"part": {
+		"slug": "1-profession-de-la-foi",
+		"title": "La profession de la foi",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 1065
+		}
+	},
+	"section": {
+		"slug": "2-profession-de-la-foi",
+		"title": "La profession de la foi chrétienne – les symboles de la foi",
+		"number": 2,
+		"range": {
+			"from": 185,
+			"to": 1065
+		}
+	},
+	"chapter": {
+		"slug": "3-je-crois-en-lesprit-saint",
+		"title": "Je crois en l’Esprit-Saint",
+		"number": 3,
+		"range": {
+			"from": 683,
+			"to": 1065
+		}
+	},
+	"article": {
+		"slug": "10-je-crois-au-pardon-des-peches",
+		"title": "« Je crois au pardon des péchés »",
+		"number": 10,
+		"range": {
+			"from": 976,
+			"to": 987
+		}
+	}
+}

@@ -1,1 +1,14 @@
-{"part":{"slug":"prologue","title":"Prologue","range":{"from":1,"to":25}},"heading":{"id":"iii-le-but-et-les-destinataires-de-ce-catechisme","title":"III. Le but et les destinataires de ce Catéchisme"}}
+{
+	"part": {
+		"slug": "prologue",
+		"title": "Prologue",
+		"range": {
+			"from": 1,
+			"to": 25
+		}
+	},
+	"heading": {
+		"id": "iii-le-but-et-les-destinataires-de-ce-catechisme",
+		"title": "III. Le but et les destinataires de ce Catéchisme"
+	}
+}

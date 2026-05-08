@@ -1,1 +1,11 @@
-{"part":{"slug":"la-vie-dans-le-christ","title":"La vie dans le Christ","number":3,"range":{"from":1691,"to":2557}}}
+{
+	"part": {
+		"slug": "3-vie-dans-le-christ",
+		"title": "La vie dans le Christ",
+		"number": 3,
+		"range": {
+			"from": 1691,
+			"to": 2557
+		}
+	}
+}

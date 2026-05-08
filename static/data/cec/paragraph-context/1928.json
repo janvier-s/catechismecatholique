@@ -1,1 +1,38 @@
-{"part":{"slug":"la-vie-dans-le-christ","title":"La vie dans le Christ","number":3,"range":{"from":1691,"to":2557}},"section":{"slug":"la-vocation-de-lhomme-la-vie-dans-lesprit","title":"La vocation de l’homme : La vie dans l’esprit","number":1,"range":{"from":1699,"to":2051}},"chapter":{"slug":"la-communaute-humaine","title":"La communauté humaine","number":2,"range":{"from":1877,"to":1948}},"article":{"slug":"la-justice-sociale","title":"La justice sociale","number":3,"range":{"from":1928,"to":1948}}}
+{
+	"part": {
+		"slug": "3-vie-dans-le-christ",
+		"title": "La vie dans le Christ",
+		"number": 3,
+		"range": {
+			"from": 1691,
+			"to": 2557
+		}
+	},
+	"section": {
+		"slug": "1-vocation-de-lhomme-la-vie-dans",
+		"title": "La vocation de l’homme : La vie dans l’esprit",
+		"number": 1,
+		"range": {
+			"from": 1699,
+			"to": 2051
+		}
+	},
+	"chapter": {
+		"slug": "2-communaute-humaine",
+		"title": "La communauté humaine",
+		"number": 2,
+		"range": {
+			"from": 1877,
+			"to": 1948
+		}
+	},
+	"article": {
+		"slug": "3-justice-sociale",
+		"title": "La justice sociale",
+		"number": 3,
+		"range": {
+			"from": 1928,
+			"to": 1948
+		}
+	}
+}

@@ -1,1 +1,42 @@
-{"part":{"slug":"la-profession-de-la-foi","title":"La profession de la foi","number":1,"range":{"from":26,"to":1065}},"section":{"slug":"je-crois-nous-croyons","title":"« Je crois » – « nous croyons »","number":1,"range":{"from":26,"to":184}},"chapter":{"slug":"la-reponse-de-lhomme-a-dieu","title":"La réponse de l’homme à Dieu","number":3,"range":{"from":142,"to":184}},"article":{"slug":"je-crois","title":"Je crois","number":1,"range":{"from":144,"to":165}},"heading":{"id":"la-perseverance-dans-la-foi","title":"La persévérance dans la foi"}}
+{
+	"part": {
+		"slug": "1-profession-de-la-foi",
+		"title": "La profession de la foi",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 1065
+		}
+	},
+	"section": {
+		"slug": "1-je-crois-nous-croyons",
+		"title": "« Je crois » – « nous croyons »",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 184
+		}
+	},
+	"chapter": {
+		"slug": "3-reponse-de-lhomme-a-dieu",
+		"title": "La réponse de l’homme à Dieu",
+		"number": 3,
+		"range": {
+			"from": 142,
+			"to": 184
+		}
+	},
+	"article": {
+		"slug": "1-je-crois",
+		"title": "Je crois",
+		"number": 1,
+		"range": {
+			"from": 144,
+			"to": 165
+		}
+	},
+	"heading": {
+		"id": "la-perseverance-dans-la-foi",
+		"title": "La persévérance dans la foi"
+	}
+}

@@ -1,1 +1,42 @@
-{"part":{"slug":"la-profession-de-la-foi","title":"La profession de la foi","number":1,"range":{"from":26,"to":1065}},"section":{"slug":"la-profession-de-la-foi-chretienne-les-symboles-de-la-foi","title":"La profession de la foi chrétienne – les symboles de la foi","number":2,"range":{"from":185,"to":1065}},"chapter":{"slug":"je-crois-en-lesprit-saint","title":"Je crois en l’Esprit-Saint","number":3,"range":{"from":683,"to":1065}},"article":{"slug":"je-crois-en-lesprit-saint","title":"« Je crois en l’Esprit-Saint »","number":8,"range":{"from":687,"to":747}},"heading":{"id":"lattente-du-messie-et-de-son-esprit","title":"L’attente du Messie et de son Esprit"}}
+{
+	"part": {
+		"slug": "1-profession-de-la-foi",
+		"title": "La profession de la foi",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 1065
+		}
+	},
+	"section": {
+		"slug": "2-profession-de-la-foi",
+		"title": "La profession de la foi chrétienne – les symboles de la foi",
+		"number": 2,
+		"range": {
+			"from": 185,
+			"to": 1065
+		}
+	},
+	"chapter": {
+		"slug": "3-je-crois-en-lesprit-saint",
+		"title": "Je crois en l’Esprit-Saint",
+		"number": 3,
+		"range": {
+			"from": 683,
+			"to": 1065
+		}
+	},
+	"article": {
+		"slug": "8-je-crois-en-lesprit-saint",
+		"title": "« Je crois en l’Esprit-Saint »",
+		"number": 8,
+		"range": {
+			"from": 687,
+			"to": 747
+		}
+	},
+	"heading": {
+		"id": "lattente-du-messie-et-de-son-esprit",
+		"title": "L’attente du Messie et de son Esprit"
+	}
+}

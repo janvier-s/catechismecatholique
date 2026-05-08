@@ -1,1 +1,42 @@
-{"part":{"slug":"la-celebration-du-mystere-chretien","title":"La célébration du mystère chrétien","number":2,"range":{"from":1066,"to":1690}},"section":{"slug":"les-sept-sacrements-de-leglise","title":"Les sept sacrements de l’Église","number":2,"range":{"from":1210,"to":1690}},"chapter":{"slug":"les-sacrements-du-service-de-la-communion","title":"Les sacrements du service de la communion","number":3,"range":{"from":1533,"to":1666}},"article":{"slug":"le-sacrement-du-mariage","title":"Le sacrement du mariage","number":7,"range":{"from":1601,"to":1666}},"heading":{"id":"lunite-et-lindissolubilite-du-mariage","title":"L’unité et l’indissolubilité du mariage"}}
+{
+	"part": {
+		"slug": "2-celebration-du-mystere",
+		"title": "La célébration du mystère chrétien",
+		"number": 2,
+		"range": {
+			"from": 1066,
+			"to": 1690
+		}
+	},
+	"section": {
+		"slug": "2-sept-sacrements-de-leglise",
+		"title": "Les sept sacrements de l’Église",
+		"number": 2,
+		"range": {
+			"from": 1210,
+			"to": 1690
+		}
+	},
+	"chapter": {
+		"slug": "3-sacrements-du-service-de-la",
+		"title": "Les sacrements du service de la communion",
+		"number": 3,
+		"range": {
+			"from": 1533,
+			"to": 1666
+		}
+	},
+	"article": {
+		"slug": "7-sacrement-du-mariage",
+		"title": "Le sacrement du mariage",
+		"number": 7,
+		"range": {
+			"from": 1601,
+			"to": 1666
+		}
+	},
+	"heading": {
+		"id": "lunite-et-lindissolubilite-du-mariage",
+		"title": "L’unité et l’indissolubilité du mariage"
+	}
+}

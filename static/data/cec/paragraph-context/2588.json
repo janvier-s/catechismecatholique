@@ -1,1 +1,42 @@
-{"part":{"slug":"la-priere-chretienne","title":"La prière chrétienne","number":4,"range":{"from":2558,"to":2865}},"section":{"slug":"la-priere-dans-la-vie-chretienne","title":"La prière dans la vie chrétienne","number":1,"range":{"from":2558,"to":2758}},"chapter":{"slug":"la-revelation-de-la-priere-lappel-universel-a-la-priere","title":"La révélation de la prière – l’appel universel à la prière","number":1,"range":{"from":2566,"to":2649}},"article":{"slug":"dans-lancien-testament","title":"Dans l’ancien testament","number":1,"range":{"from":2568,"to":2597}},"heading":{"id":"les-psaumes-priere-de-lassemblee","title":"Les Psaumes, prière de l’Assemblée"}}
+{
+	"part": {
+		"slug": "4-priere-chretienne",
+		"title": "La prière chrétienne",
+		"number": 4,
+		"range": {
+			"from": 2558,
+			"to": 2865
+		}
+	},
+	"section": {
+		"slug": "1-priere-dans-la-vie-chretienne",
+		"title": "La prière dans la vie chrétienne",
+		"number": 1,
+		"range": {
+			"from": 2558,
+			"to": 2758
+		}
+	},
+	"chapter": {
+		"slug": "1-revelation-de-la-priere-lappel",
+		"title": "La révélation de la prière – l’appel universel à la prière",
+		"number": 1,
+		"range": {
+			"from": 2566,
+			"to": 2649
+		}
+	},
+	"article": {
+		"slug": "1-dans-lancien-testament",
+		"title": "Dans l’ancien testament",
+		"number": 1,
+		"range": {
+			"from": 2568,
+			"to": 2597
+		}
+	},
+	"heading": {
+		"id": "les-psaumes-priere-de-lassemblee",
+		"title": "Les Psaumes, prière de l’Assemblée"
+	}
+}

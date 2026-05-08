@@ -1,0 +1,3715 @@
+{
+	"chapter": {
+		"corpus": "ccc",
+		"slug": "2-sacrements-de-guerison",
+		"title": "Les sacrements de guérison",
+		"number": 2,
+		"part_slug": "2-celebration-du-mystere",
+		"part_title": "La célébration du mystère chrétien",
+		"part_number": 2,
+		"section_slug": "2-sept-sacrements-de-leglise",
+		"section_title": "Les sept sacrements de l’Église",
+		"section_number": 2,
+		"paragraphs": [
+			1420,
+			1421,
+			1422,
+			1423,
+			1424,
+			1425,
+			1426,
+			1427,
+			1428,
+			1429,
+			1430,
+			1431,
+			1432,
+			1433,
+			1434,
+			1435,
+			1436,
+			1437,
+			1438,
+			1439,
+			1440,
+			1441,
+			1442,
+			1443,
+			1444,
+			1445,
+			1446,
+			1447,
+			1448,
+			1449,
+			1450,
+			1451,
+			1452,
+			1453,
+			1454,
+			1455,
+			1456,
+			1457,
+			1458,
+			1459,
+			1460,
+			1461,
+			1462,
+			1463,
+			1464,
+			1465,
+			1466,
+			1467,
+			1468,
+			1469,
+			1470,
+			1471,
+			1472,
+			1473,
+			1474,
+			1475,
+			1476,
+			1477,
+			1478,
+			1479,
+			1480,
+			1481,
+			1482,
+			1483,
+			1484,
+			1485,
+			1486,
+			1487,
+			1488,
+			1489,
+			1490,
+			1491,
+			1492,
+			1493,
+			1494,
+			1495,
+			1496,
+			1497,
+			1498,
+			1499,
+			1500,
+			1501,
+			1502,
+			1503,
+			1504,
+			1505,
+			1506,
+			1507,
+			1508,
+			1509,
+			1510,
+			1511,
+			1512,
+			1513,
+			1514,
+			1515,
+			1516,
+			1517,
+			1518,
+			1519,
+			1520,
+			1521,
+			1522,
+			1523,
+			1524,
+			1525,
+			1526,
+			1527,
+			1528,
+			1529,
+			1530,
+			1531,
+			1532
+		],
+		"en_brefs": [
+			{
+				"paragraphs": [
+					1485,
+					1486,
+					1487,
+					1488,
+					1489,
+					1490,
+					1491,
+					1492,
+					1493,
+					1494,
+					1495,
+					1496,
+					1497,
+					1498
+				]
+			},
+			{
+				"paragraphs": [
+					1526,
+					1527,
+					1528,
+					1529,
+					1530,
+					1531,
+					1532
+				]
+			}
+		],
+		"headings": [],
+		"articles": [
+			{
+				"slug": "4-sacrement-de-la-penitence-et",
+				"title": "Le sacrement de la pénitence et de la réconciliation",
+				"number": 4,
+				"paragraphs": [
+					1422,
+					1423,
+					1424,
+					1425,
+					1426,
+					1427,
+					1428,
+					1429,
+					1430,
+					1431,
+					1432,
+					1433,
+					1434,
+					1435,
+					1436,
+					1437,
+					1438,
+					1439,
+					1440,
+					1441,
+					1442,
+					1443,
+					1444,
+					1445,
+					1446,
+					1447,
+					1448,
+					1449,
+					1450,
+					1451,
+					1452,
+					1453,
+					1454,
+					1455,
+					1456,
+					1457,
+					1458,
+					1459,
+					1460,
+					1461,
+					1462,
+					1463,
+					1464,
+					1465,
+					1466,
+					1467,
+					1468,
+					1469,
+					1470,
+					1471,
+					1472,
+					1473,
+					1474,
+					1475,
+					1476,
+					1477,
+					1478,
+					1479,
+					1480,
+					1481,
+					1482,
+					1483,
+					1484,
+					1485,
+					1486,
+					1487,
+					1488,
+					1489,
+					1490,
+					1491,
+					1492,
+					1493,
+					1494,
+					1495,
+					1496,
+					1497,
+					1498
+				],
+				"headings": [
+					{
+						"id": "i-comment-est-appele-ce-sacrement",
+						"level": 2,
+						"title": "I. Comment est appelé ce sacrement ?",
+						"paragraph_start": 1423
+					},
+					{
+						"id": "ii-pourquoi-un-sacrement-de-la-reconciliation-apres-le-bapteme",
+						"level": 2,
+						"title": "II. Pourquoi un sacrement de la réconciliation après le Baptême ?",
+						"paragraph_start": 1425
+					},
+					{
+						"id": "iii-la-conversion-des-baptises",
+						"level": 2,
+						"title": "III. La conversion des baptisés",
+						"paragraph_start": 1427
+					},
+					{
+						"id": "iv-la-penitence-interieure",
+						"level": 2,
+						"title": "IV. La pénitence intérieure",
+						"paragraph_start": 1430
+					},
+					{
+						"id": "v-les-multiples-formes-de-la-penitence-dans-la-vie-chretienne",
+						"level": 2,
+						"title": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+						"paragraph_start": 1434
+					},
+					{
+						"id": "vi-le-sacrement-de-la-penitence-et-de-la-reconciliation",
+						"level": 2,
+						"title": "VI. Le sacrement de la pénitence et de la réconciliation",
+						"paragraph_start": 1440
+					},
+					{
+						"id": "dieu-seul-pardonne-le-peche",
+						"level": 3,
+						"title": "Dieu seul pardonne le péché",
+						"paragraph_start": 1441
+					},
+					{
+						"id": "reconciliation-avec-leglise",
+						"level": 3,
+						"title": "Réconciliation avec l’Église",
+						"paragraph_start": 1443
+					},
+					{
+						"id": "le-sacrement-du-pardon",
+						"level": 3,
+						"title": "Le sacrement du pardon",
+						"paragraph_start": 1446
+					},
+					{
+						"id": "vii-les-actes-du-penitent",
+						"level": 2,
+						"title": "VII. Les actes du pénitent",
+						"paragraph_start": 1450
+					},
+					{
+						"id": "la-contrition",
+						"level": 3,
+						"title": "La contrition",
+						"paragraph_start": 1451
+					},
+					{
+						"id": "la-confession-des-peches",
+						"level": 3,
+						"title": "La confession des péchés",
+						"paragraph_start": 1455
+					},
+					{
+						"id": "la-satisfaction",
+						"level": 3,
+						"title": "La satisfaction",
+						"paragraph_start": 1459
+					},
+					{
+						"id": "viii-le-ministre-de-ce-sacrement",
+						"level": 2,
+						"title": "VIII. Le ministre de ce sacrement",
+						"paragraph_start": 1461
+					},
+					{
+						"id": "ix-les-effets-de-ce-sacrement",
+						"level": 2,
+						"title": "IX. Les effets de ce sacrement",
+						"paragraph_start": 1468
+					},
+					{
+						"id": "x-les-indulgences",
+						"level": 2,
+						"title": "X. Les indulgences",
+						"paragraph_start": 1471
+					},
+					{
+						"id": "les-peines-du-peche",
+						"level": 3,
+						"title": "Les peines du péché",
+						"paragraph_start": 1472
+					},
+					{
+						"id": "dans-la-communion-des-saints",
+						"level": 3,
+						"title": "Dans la communion des saints",
+						"paragraph_start": 1474
+					},
+					{
+						"id": "obtenir-lindulgence-de-dieu-par-leglise",
+						"level": 3,
+						"title": "Obtenir l’indulgence de Dieu par l’Église",
+						"paragraph_start": 1478
+					},
+					{
+						"id": "xi-la-celebration-du-sacrement-de-penitence",
+						"level": 2,
+						"title": "XI. La célébration du sacrement de pénitence",
+						"paragraph_start": 1480
+					}
+				]
+			},
+			{
+				"slug": "5-lonction-des-malades",
+				"title": "L’onction des malades",
+				"number": 5,
+				"paragraphs": [
+					1499,
+					1500,
+					1501,
+					1502,
+					1503,
+					1504,
+					1505,
+					1506,
+					1507,
+					1508,
+					1509,
+					1510,
+					1511,
+					1512,
+					1513,
+					1514,
+					1515,
+					1516,
+					1517,
+					1518,
+					1519,
+					1520,
+					1521,
+					1522,
+					1523,
+					1524,
+					1525,
+					1526,
+					1527,
+					1528,
+					1529,
+					1530,
+					1531,
+					1532
+				],
+				"headings": [
+					{
+						"id": "i-ses-fondements-dans-leconomie-du-salut",
+						"level": 2,
+						"title": "I. Ses fondements dans l’Économie du Salut",
+						"paragraph_start": 1500
+					},
+					{
+						"id": "la-maladie-dans-la-vie-humaine",
+						"level": 3,
+						"title": "La maladie dans la vie humaine",
+						"paragraph_start": 1500
+					},
+					{
+						"id": "le-malade-devant-dieu",
+						"level": 3,
+						"title": "Le malade devant Dieu",
+						"paragraph_start": 1502
+					},
+					{
+						"id": "le-christ-medecin",
+						"level": 3,
+						"title": "Le Christ – médecin",
+						"paragraph_start": 1503
+					},
+					{
+						"id": "guerissez-les-malades",
+						"level": 3,
+						"title": "« Guérissez les malades... »",
+						"paragraph_start": 1506
+					},
+					{
+						"id": "un-sacrement-des-malades",
+						"level": 3,
+						"title": "Un sacrement des malades",
+						"paragraph_start": 1511
+					},
+					{
+						"id": "ii-qui-recoit-et-qui-administre-ce-sacrement",
+						"level": 2,
+						"title": "II. Qui reçoit et qui administre ce sacrement ?",
+						"paragraph_start": 1514
+					},
+					{
+						"id": "en-cas-de-maladie-grave",
+						"level": 3,
+						"title": "En cas de maladie grave...",
+						"paragraph_start": 1514
+					},
+					{
+						"id": "quil-appelle-les-presbytres-de-leglise",
+						"level": 3,
+						"title": "« ... qu’il appelle les presbytres de l’Église »",
+						"paragraph_start": 1516
+					},
+					{
+						"id": "iii-comment-est-celebre-ce-sacrement",
+						"level": 2,
+						"title": "III. Comment est célébré ce sacrement ?",
+						"paragraph_start": 1517
+					},
+					{
+						"id": "iv-les-effets-de-la-celebration-de-ce-sacrement",
+						"level": 2,
+						"title": "IV. Les effets de la célébration de ce sacrement",
+						"paragraph_start": 1520
+					},
+					{
+						"id": "v-le-viatique-dernier-sacrement-du-chretien",
+						"level": 2,
+						"title": "V. Le Viatique, dernier sacrement du chrétien",
+						"paragraph_start": 1524
+					}
+				]
+			}
+		],
+		"prev": {
+			"kind": "chapter",
+			"href": "/cec/2-celebration-du-mystere/2-sept-sacrements-de-leglise/1-sacrements-de-linitiation",
+			"title": "Les sacrements de l’initiation chrétienne"
+		},
+		"next": {
+			"kind": "chapter",
+			"href": "/cec/2-celebration-du-mystere/2-sept-sacrements-de-leglise/3-sacrements-du-service-de-la",
+			"title": "Les sacrements du service de la communion"
+		}
+	},
+	"paragraphs": [
+		{
+			"corpus": "ccc",
+			"number": 1420,
+			"text_html": "<span>Par les sacrements de l’initiation chrétienne, l’homme reçoit la vie nouvelle du Christ. Or, cette vie, nous la portons « en des vases d’argile » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Maintenant, elle est encore « cachée avec le Christ en Dieu » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Nous sommes encore dans « notre demeure terrestre » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> soumise à la souffrance, à la maladie et à la mort. Cette vie nouvelle d’enfant de Dieu peut être affaiblie et même perdue par le péché.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "2 Co 4:7"
+				},
+				{
+					"text": "Col 3:3"
+				},
+				{
+					"text": "2 Co 5:1"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "2 Co 4:7",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Col 3:3",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "2 Co 5:1",
+					"idx": 3
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1421,
+			"text_html": "<span>Le Seigneur Jésus-Christ, médecin de nos âmes et de nos corps, Lui qui a remis les péchés au paralytique et lui a rendu la santé du corps <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, a voulu que son Église continue, dans la force de l’Esprit Saint, son œuvre de guérison et de salut, même auprès de ses propres membres. C’est le but des deux sacrements de guérison : du sacrement de Pénitence et de l’Onction des malades.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Mc 2:1-12"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mc 2:1-12",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1422,
+			"text_html": "<span>« Ceux qui s’approchent du sacrement de Pénitence y reçoivent de la miséricorde de Dieu le pardon de l’offense qu’ils lui<sup class=\"srcRef cccRef\">§980</sup> ont faite et du même coup sont réconciliés avec l’Église que leur péché a blessée et qui, par la charité, l’exemple, les prières, travaille à leur conversion » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"980"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "LG 11",
+					"idx": "a",
+					"doc_raw": "LG 11"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1423,
+			"text_html": "<span>Il est appelé <i class=\"typo_italic\">sacrement de conversion</i> puisqu’il réalise sacramentellement l’appel de Jésus à la conversion <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, la démarche de revenir au Père<sup class=\"srcRef cccRef\">§1989</sup> <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> dont on s’est éloigné par le péché.</span><br/><span>Il est appelé <i class=\"typo_italic\">sacrement de Pénitence</i> puisqu’il consacre<sup class=\"srcRef cccRef\">§1440</sup> une démarche personnelle et ecclésiale de conversion, de repentir et de satisfaction du chrétien pécheur.</span>",
+			"cross_refs": [
+				"1989",
+				"1440"
+			],
+			"bible_refs": [
+				{
+					"text": "Mc 1:15"
+				},
+				{
+					"text": "Lc 15:18"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mc 1:15",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Lc 15:18",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1424,
+			"text_html": "<span>Il est appelé <i class=\"typo_italic\">sacrement de la confession</i> puisque l’aveu, la confession des péchés devant le prêtre est un élément essentiel<sup class=\"srcRef cccRef\">§1456</sup> de ce sacrement. Dans un sens profond ce sacrement est aussi une « confession », reconnaissance et louange de la sainteté de Dieu et de sa miséricorde envers l’homme pécheur.</span><br/><span>Il est appelé <i class=\"typo_italic\">sacrement du pardon</i> puisque<sup class=\"srcRef cccRef\">§1449</sup> par l’absolution sacramentelle du prêtre, Dieu accorde au pénitent « le pardon et la paix » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span><br/><span>Il est appelé <i class=\"typo_italic\">sacrement de Réconciliation</i> car il donne<sup class=\"srcRef cccRef\">§1442</sup> au pécheur l’amour de Dieu qui réconcilie : « Laissez-vous réconcilier avec Dieu » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Celui qui vit de l’amour miséricordieux de Dieu est prêt à répondre à l’appel du Seigneur : « Va d’abord te réconcilier avec ton frère » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>.</span>",
+			"cross_refs": [
+				"1456",
+				"1449",
+				"1442"
+			],
+			"bible_refs": [
+				{
+					"text": "2 Co 5:20"
+				},
+				{
+					"text": "Mt 5:24"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "liturgical",
+					"raw": "OP formule de l’absolution",
+					"idx": "a"
+				},
+				{
+					"type": "bible",
+					"raw": "2 Co 5:20",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Mt 5:24",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1425,
+			"text_html": "<span>« Vous avez été lavés, vous avez été sanctifiés, vous avez été justifiés au nom du Seigneur Jésus-Christ et par l’Esprit<sup class=\"srcRef cccRef\">§1263</sup> de notre Dieu » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Il faut se rendre compte de la grandeur du don de Dieu qui nous est fait dans les sacrements de l’initiation chrétienne pour saisir à quel point le péché est une chose exclue pour celui qui a « revêtu le Christ » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Mais l’apôtre saint Jean dit aussi : « Si nous disons que nous sommes sans péché, nous nous abusons nous-mêmes, et la vérité n’est point en nous » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>. Et le Seigneur lui-même nous a enseigné de prier<sup class=\"srcRef cccRef\">§2838</sup> : « Pardonne-nous nos offenses » <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup> en liant le pardon mutuel de nos offenses au pardon que Dieu accordera à nos péchés.</span>",
+			"cross_refs": [
+				"1263",
+				"2838"
+			],
+			"bible_refs": [
+				{
+					"text": "1 Co 6:11"
+				},
+				{
+					"text": "Ga 3:27"
+				},
+				{
+					"text": "1 Jn 1:8"
+				},
+				{
+					"text": "Lc 11:4"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "1 Co 6:11",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Ga 3:27",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "1 Jn 1:8",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 11:4",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1426,
+			"text_html": "<span>La <i class=\"typo_italic\">conversion</i> au Christ, la nouvelle naissance du Baptême, le don de l’Esprit Saint, le Corps et le Sang du Christ reçus en nourriture, nous ont rendu « saints et immaculés devant lui » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, comme l’Église elle-même, épouse du Christ, est « sainte et immaculée devant lui » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Cependant, la vie nouvelle reçue dans l’initiation chrétienne n’a pas supprimé la fragilité et la faiblesse de la nature humaine, ni l’inclination au péché que la tradition appelle la <i class=\"typo_italic\">concupiscence</i>, qui demeure dans les baptisés<sup class=\"srcRef cccRef\">§405</sup><sup class=\"srcRef cccRef\">§978</sup> pour qu’ils fassent leurs preuves dans le combat de la vie chrétienne aidés par<sup class=\"srcRef cccRef\">§1264</sup> la grâce du Christ <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Ce combat est celui de la <i class=\"typo_italic\">conversion</i> en vue de la sainteté et de la vie éternelle à laquelle le Seigneur ne cesse de nous appeler <sup class=\"srcRef docRef\" data-idx=\"b\">b</sup><sup class=\"srcRef docRef\" data-idx=\"c\">c</sup>.</span>",
+			"cross_refs": [
+				"405",
+				"978",
+				"1264"
+			],
+			"bible_refs": [
+				{
+					"text": "Ep 1:4"
+				},
+				{
+					"text": "Ep 5:27"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Ep 1:4",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Ep 5:27",
+					"idx": 2
+				},
+				{
+					"type": "ds",
+					"raw": "voir DS 1515",
+					"idx": "a"
+				},
+				{
+					"type": "ds",
+					"raw": "voir DS 1545",
+					"idx": "b"
+				},
+				{
+					"type": "magisterial",
+					"raw": "LG 40",
+					"idx": "c",
+					"doc_raw": "LG 40"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1427,
+			"text_html": "<span>Jésus appelle à la conversion. Cet appel est une partie essentielle de l’annonce du Royaume : « Les temps sont accomplis<sup class=\"srcRef cccRef\">§541</sup> et le Royaume de Dieu est tout proche ; repentez-vous et croyez à la Bonne Nouvelle » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Dans la prédication de l’Église cet appel s’adresse d’abord à ceux qui ne connaissent pas encore le Christ et son Évangile. Aussi, le Baptême est-il le lieu principal de la conversion première et fondamentale. C’est par la foi en la Bonne Nouvelle et par le Baptême <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> que l’on renonce au mal et qu’on acquiert le salut, c’est-à-dire la rémission de tous les péchés et le don de la vie nouvelle.</span>",
+			"cross_refs": [
+				"541"
+			],
+			"bible_refs": [
+				{
+					"text": "Mc 1:15"
+				},
+				{
+					"text": "Ac 2:38"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Mc 1:15",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Ac 2:38",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1428,
+			"text_html": "<span>Or, l’appel du Christ à la conversion continue à retentir dans la vie des chrétiens. Cette <i class=\"typo_italic\">seconde conversion</i> est une<sup class=\"srcRef cccRef\">§1036</sup> tâche ininterrompue pour toute l’Église qui « enferme des pécheurs dans son propre sein » et qui « est donc à la fois sainte et appelée à se purifier, et qui poursuit constamment son effort de pénitence et de renouvellement » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Cet effort de conversion n’est<sup class=\"srcRef cccRef\">§853</sup> pas seulement une œuvre humaine. Elle est le mouvement du « cœur contrit » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> attiré et mû par la grâce <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> à répondre à l’amour miséricordieux de Dieu qui<sup class=\"srcRef cccRef\">§1996</sup> nous a aimés le premier <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [
+				"1036",
+				"853",
+				"1996"
+			],
+			"bible_refs": [
+				{
+					"text": "Ps 51:19"
+				},
+				{
+					"text": "Jn 6:44"
+				},
+				{
+					"text": "Jn 12:32"
+				},
+				{
+					"text": "1 Jn 4:10"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "LG 8",
+					"idx": "a",
+					"doc_raw": "LG 8"
+				},
+				{
+					"type": "bible",
+					"raw": "Ps 51:19",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 6:44",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "12:32",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "voir 1 Jn 4:10",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1429,
+			"text_html": "<span>En témoigne la conversion de saint Pierre après le triple reniement de son Maître. Le regard d’infinie miséricorde de Jésus provoque les larmes du repentir <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> et, après la résurrection du Seigneur, la triple affirmation de son amour envers lui <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. La seconde conversion a aussi une dimension <i class=\"typo_italic\">communautaire</i>. Cela apparaît dans l’appel du Seigneur à toute une Église : « Repends-toi ! » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Lc 22:61"
+				},
+				{
+					"text": "Jn 21:15-17"
+				},
+				{
+					"text": "Ap 2:5"
+				},
+				{
+					"text": "Ap 2:16"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Saint Ambroise dit des deux conversions que, dans l’Église, « il y a l’eau et les larmes : l’eau du Baptême et les larmes de la Pénitence » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Lc 22:61",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 21:15-17",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Ap 2:5",
+					"idx": 3
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "2:16",
+					"idx": 4
+				},
+				{
+					"type": "patristic",
+					"raw": "epistulæ 41:12 : PL 16:1116B",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1430,
+			"text_html": "<span>Comme déjà chez les prophètes, l’appel de Jésus à la conversion et à la pénitence ne vise pas d’abord des œuvres extérieures, « le sac et la cendre », les jeûnes et les mortifications, mais <i class=\"typo_italic\">la conversion du cœur<sup class=\"srcRef cccRef\">§1098</sup>, la pénitence intérieure.</i> Sans elle, les œuvres de pénitence restent stériles et mensongères ; par contre, la conversion intérieure pousse à l’expression de cette attitude en des signes visibles, des gestes et des œuvres de pénitence <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [
+				"1098"
+			],
+			"bible_refs": [
+				{
+					"text": "Jl 2:12-13"
+				},
+				{
+					"text": "Is 1:16-17"
+				},
+				{
+					"text": "Mt 6:1-6"
+				},
+				{
+					"text": "Mt 6:16-18"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Jl 2:12-13",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Is 1:16-17",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Mt 6:1-6",
+					"idx": 3
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "6:16-18",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1431,
+			"text_html": "<span>La pénitence intérieure est une réorientation radicale de toute la vie, un retour, une conversion vers Dieu de tout notre cœur, une cessation du péché, une aversion du mal, avec une répugnance envers<sup class=\"srcRef cccRef\">§1451</sup> les mauvaises actions que nous avons commises. En même temps, elle comporte le désir et la résolution de changer de vie avec l’espérance de la miséricorde divine et la confiance en l’aide de sa grâce. Cette conversion du cœur est accompagnée d’une douleur et d’une tristesse salutaires que les Pères ont appelées <i class=\"typo_italic\">animi cruciatus</i> (affliction de l’esprit), <i class=\"typo_italic\">compunctio cordis</i> <sup class=\"srcRef cccRef\">§368</sup> <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>.</span>",
+			"cross_refs": [
+				"1451",
+				"368"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1677-1678",
+					"idx": "a"
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1705",
+					"idx": 1
+				},
+				{
+					"type": "magisterial",
+					"raw": "Catech. R. 2:5, 4",
+					"idx": "b",
+					"doc_raw": "Catech. R. 2:5, 4"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1432,
+			"text_html": "<span>Le cœur de l’homme est lourd et endurci. Il faut que Dieu donne à l’homme un cœur nouveau <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. La conversion est d’abord<sup class=\"srcRef cccRef\">§1989</sup> une œuvre de la grâce de Dieu qui fait revenir nos cœurs à lui : « Convertis-nous, Seigneur, et nous serons convertis » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Dieu nous donne la force de commencer à nouveau. C’est en découvrant la grandeur de l’amour de Dieu que notre cœur est ébranlé par l’horreur et le poids du péché et qu’il commence à craindre d’offenser Dieu par le péché et d’être séparé de lui. Le cœur humain se convertit en regardant vers Celui que nos péchés ont transpercé <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup> :</span>",
+			"cross_refs": [
+				"1989"
+			],
+			"bible_refs": [
+				{
+					"text": "Ez 36:26-27"
+				},
+				{
+					"text": "Lm 5:21"
+				},
+				{
+					"text": "Jn 19:37"
+				},
+				{
+					"text": "Za 12:10"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Ayons les yeux fixés sur le sang du Christ et comprenons combien il est précieux à son Père car, répandu pour notre salut, il a ménagé au monde entier la grâce du repentir <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Ez 36:26-27",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Lm 5:21",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 19:37",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "Za 12:10",
+					"idx": 4
+				},
+				{
+					"type": "patristic",
+					"raw": "saint Clément de Rome, epistula ad Corinthios 7:4",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1433,
+			"text_html": "<span>Depuis Pâques, c’est l’Esprit Saint qui confond le monde en matière de péché <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, à savoir que le monde n’a pas cru<sup class=\"srcRef cccRef\">§729</sup> en Celui que le Père a envoyé. Mais ce même Esprit, qui dévoile le péché, est<sup class=\"srcRef cccRef\">§692</sup><sup class=\"srcRef cccRef\">§1848</sup> le Consolateur <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> qui donne au cœur de l’homme la grâce du repentir et de la conversion <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"729",
+				"692",
+				"1848"
+			],
+			"bible_refs": [
+				{
+					"text": "Jn 16:8-9"
+				},
+				{
+					"text": "Jn 15:26"
+				},
+				{
+					"text": "Ac 2:36-38"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jn 16:8-9",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 15:26",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "voir Ac 2:36-38",
+					"idx": 3
+				},
+				{
+					"type": "magisterial",
+					"raw": "voir Jean-Paul II, DeV 27-48",
+					"idx": "a",
+					"doc_raw": "Jean-Paul II, DeV 27-48"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1434,
+			"text_html": "<span>La pénitence intérieure du chrétien peut avoir des expressions très variées. L’Écriture et les Pères insistent surtout sur trois<sup class=\"srcRef cccRef\">§1969</sup> formes : <i class=\"typo_italic\">le jeûne, la prière, l’aumône</i> <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>, qui expriment la conversion par rapport à soi-même, par rapport à Dieu et par rapport aux autres. À côté de la purification radicale opérée par le Baptême ou par le martyre, ils citent, comme moyen d’obtenir le pardon des péchés, les efforts accomplis pour se réconcilier avec son prochain, les larmes de pénitence, le souci du salut du prochain <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> l’intercession des saints et la pratique de la charité « qui couvre une multitude de péchés » <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [
+				"1969"
+			],
+			"bible_refs": [
+				{
+					"text": "Tb 12:8"
+				},
+				{
+					"text": "Mt 6:1-18"
+				},
+				{
+					"text": "Jc 5:20"
+				},
+				{
+					"text": "Jc 1 P 4:8"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Tb 12:8",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Mt 6:1-18",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jc 5:20",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "1 P 4:8",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1435,
+			"text_html": "<span>La conversion se réalise dans la vie quotidienne par des gestes de réconciliation, par le souci des pauvres, l’exercice et la défense de la justice et du droit <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>, par l’aveu des fautes aux frères, la correction fraternelle, la révision de vie, l’examen de conscience, la direction spirituelle, l’acceptation des souffrances, l’endurance de la persécution à cause de la justice. Prendre sa croix, chaque jour, et suivre Jésus est le chemin le plus sûr de la pénitence <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Am 5:24"
+				},
+				{
+					"text": "Is 1:17"
+				},
+				{
+					"text": "Lc 9:23"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Am 5:24",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Is 1:17",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "voir Lc 9:23",
+					"idx": 3
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1436,
+			"text_html": "<span> <i class=\"typo_italic\">Eucharistie et Pénitence</i>. La conversion et la pénitence quotidiennes trouvent leur source et leur nourriture dans l’Eucharistie, car en elle est rendu présent le sacrifice du Christ qui nous a réconciliés avec Dieu ; par elle sont nourris et fortifiés ceux qui vivent de la vie du Christ ; « elle est l’antidote<sup class=\"srcRef cccRef\">§1394</sup> qui nous libère de nos fautes quotidiennes et nous préserve des péchés mortels » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"1394"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1638",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1437,
+			"text_html": "<span>La lecture de l’Écriture Sainte, la prière de la Liturgie des Heures et du Notre Père, tout acte sincère de culte ou de piété ravive en nous l’esprit de conversion et de pénitence et contribue au pardon de nos péchés.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1438,
+			"text_html": "<span> <i class=\"typo_italic\">Les temps et les jours de pénitence</i> au cours de l’année liturgique (le temps du carême, chaque vendredi en mémoire de la mort du Seigneur) sont<sup class=\"srcRef cccRef\">§540</sup> des moments forts de la pratique pénitentielle de l’Église (voir SC 109-110 ; <b class=\"bold\">⇒</b> CIC, can. 1249-1253 ; CCEO, can. 880-883). Ces temps sont particulièrement appropriés pour les exercices spirituels, les liturgies pénitentielles, les pèlerinages en signe de pénitence, les privations volontaires comme le jeûne et l’aumône, le partage fraternel<sup class=\"srcRef cccRef\">§2043</sup> <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup><sup class=\"srcRef docRef\" data-idx=\"c\">c</sup>.</span>",
+			"cross_refs": [
+				"540",
+				"2043"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir SC 109-110",
+					"idx": "a",
+					"doc_raw": "SC 109-110"
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ CIC, can. 1249-1253",
+					"idx": "b",
+					"doc_raw": "⇒ CIC, can. 1249-1253"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 880-883",
+					"idx": "c",
+					"doc_raw": "CCEO, can. 880-883"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1439,
+			"text_html": "<span>Le <i class=\"typo_italic\">mouvement de la conversion et de la pénitence</i> a été merveilleusement décrit par Jésus dans la parabole dite « du fils prodigue<sup class=\"srcRef cccRef\">§545</sup> » dont le centre est « le père miséricordieux » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> : la fascination d’une liberté illusoire, l’abandon de la maison paternelle ; la misère extrême dans laquelle le fils se trouve après avoir dilapidé sa fortune ; l’humiliation profonde de se voir obligé de paître des porcs, et pire encore, celle de désirer se nourrir des caroubes que mangeaient les cochons ; la réflexion sur les biens perdus ; le repentir et la décision de se déclarer coupable devant son père ; le chemin du retour ; l’accueil généreux par le père ; la joie du père : ce sont là des traits propres au processus de conversion. La belle robe, l’anneau et le banquet de fête sont des symboles de cette vie nouvelle, pure, digne, pleine de joie qu’est la vie de l’homme qui revient à Dieu et au sein de sa famille, qui est l’Église. Seul le cœur du Christ qui connaît les profondeurs de l’amour de son Père, a pu nous révéler l’abîme de sa miséricorde d’une manière si pleine de simplicité et de beauté.</span>",
+			"cross_refs": [
+				"545"
+			],
+			"bible_refs": [
+				{
+					"text": "Lc 15:11-24"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Lc 15:11-24",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1440,
+			"text_html": "<span>Le péché est avant tout offense à Dieu, rupture de la communion avec Lui. Il porte en même temps atteinte<sup class=\"srcRef cccRef\">§1850</sup> à la communion avec l’Église. C’est pourquoi la conversion apporte à la fois le pardon de Dieu et la réconciliation avec l’Église, ce qu’exprime et réalise liturgiquement le sacrement de la Pénitence et de la Réconciliation <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"1850"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir LG 11",
+					"idx": "a",
+					"doc_raw": "LG 11"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1441,
+			"text_html": "<span>Dieu seul pardonne les péchés <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Parce que Jésus est le Fils de Dieu, il dit de lui-même<sup class=\"srcRef cccRef\">§270</sup><sup class=\"srcRef cccRef\">§431</sup> : « Le Fils de l’homme a le pouvoir de remettre les péchés sur la terre » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> et il exerce ce pouvoir divin : « Tes<sup class=\"srcRef cccRef\">§589</sup> péchés sont pardonnés ! » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>. Plus encore : en vertu de sa divine autorité, il donne ce pouvoir aux hommes <sup class=\"srcRef bibleRef\" data-idx=\"5\">5</sup> pour qu’ils l’exercent en son nom.</span>",
+			"cross_refs": [
+				"270",
+				"431",
+				"589"
+			],
+			"bible_refs": [
+				{
+					"text": "Mc 2:7"
+				},
+				{
+					"text": "Mc 2:10"
+				},
+				{
+					"text": "Mc 2:5"
+				},
+				{
+					"text": "Lc 7:48"
+				},
+				{
+					"text": "Jn 20:21-23"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mc 2:7",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Mc 2:10",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Mc 2:5",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 7:48",
+					"idx": 4
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 20:21-23",
+					"idx": 5
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1442,
+			"text_html": "<span>Le Christ a voulu que son Église soit tout entière, dans sa prière, sa vie et son agir, le signe et l’instrument du pardon et de la réconciliation qu’Il nous a acquis au prix de son sang. Il a cependant confié<sup class=\"srcRef cccRef\">§983</sup> l’exercice du pouvoir d’absolution au ministère apostolique. Celui-ci est chargé du « ministère de la réconciliation » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. L’apôtre est envoyé « au nom du Christ », et « c’est Dieu lui-même » qui, à travers lui, exhorte et supplie : « Laissez vous réconcilier avec Dieu » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>.</span>",
+			"cross_refs": [
+				"983"
+			],
+			"bible_refs": [
+				{
+					"text": "2 Co 5:18"
+				},
+				{
+					"text": "2 Co 5:20"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "2 Co 5:18",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "2 Co 5:20",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1443,
+			"text_html": "<span>Durant sa vie publique, Jésus n’a pas seulement pardonné les péchés, il a aussi manifesté l’effet de ce pardon : il a réintégré les pécheurs pardonnés dans la communauté du peuple de Dieu d’où le péché les avait éloignés ou même exclus. Un signe éclatant en est le fait que Jésus<sup class=\"srcRef cccRef\">§545</sup> admet les pécheurs à sa table, plus encore, qu’il se met lui-même à leur table, geste qui exprime de façon bouleversante à la fois le pardon de Dieu <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> et le retour au sein du peuple de Dieu <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>.</span>",
+			"cross_refs": [
+				"545"
+			],
+			"bible_refs": [
+				{
+					"text": "Lc 15"
+				},
+				{
+					"text": "Lc 19:9"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Lc 15",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Lc 19:9",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1444,
+			"text_html": "<span>En donnant part aux apôtres de son propre pouvoir de pardonner les péchés, le Seigneur leur donne aussi l’autorité<sup class=\"srcRef cccRef\">§981</sup> de réconcilier les pécheurs avec l’Église. Cette dimension ecclésiale de leur tâche s’exprime notamment dans la parole solennelle du Christ à Simon Pierre : « Je te donnerai les clefs du Royaume des cieux ; tout ce que tu lieras sur la terre sera lié aux cieux, et tout ce que tu délieras sur la terre sera délié aux cieux » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. « Cette même charge de lier et de délier qui a été donnée à Pierre a été aussi donnée au collège des apôtres unis à leur chef <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"981"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 16:19"
+				},
+				{
+					"text": "Mt 18:18"
+				},
+				{
+					"text": "Mt 28:16-20"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Mt 16:19",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Mt 18:18",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "28:16-20",
+					"idx": 3
+				},
+				{
+					"type": "magisterial",
+					"raw": "LG 22",
+					"idx": "a",
+					"doc_raw": "LG 22"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1445,
+			"text_html": "<span>Les mots <i class=\"typo_italic\">lier et délier<sup class=\"srcRef cccRef\">§553</sup></i> signifient : celui que vous exclurez de votre communion, celui-là sera exclu de la communion avec Dieu ; celui que vous recevez de nouveau dans votre communion, Dieu l’accueillera aussi dans la sienne. <i class=\"typo_italic\">La réconciliation avec l’Église est inséparable de la réconciliation avec Dieu</i>.</span>",
+			"cross_refs": [
+				"553"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1446,
+			"text_html": "<span>Le Christ a institué le sacrement de Pénitence pour tous les membres pécheurs de son Église, avant tout<sup class=\"srcRef cccRef\">§979</sup> pour ceux qui, après le baptême, sont tombés dans le péché grave et qui ont ainsi<sup class=\"srcRef cccRef\">§1856</sup> perdu la grâce baptismale et blessé la communion ecclésiale. C’est à eux que le sacrement de Pénitence offre une nouvelle possibilité de se convertir et de retrouver la grâce de la justification. Les<sup class=\"srcRef cccRef\">§1990</sup> Pères de l’Église présentent ce sacrement comme « la seconde planche [de salut] après le naufrage qu’est la perte de la grâce » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>.</span>",
+			"cross_refs": [
+				"979",
+				"1856",
+				"1990"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "patristic",
+					"raw": "Tertullien, de pænitientia . 4:2",
+					"idx": "a"
+				},
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1542",
+					"idx": "b"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1447,
+			"text_html": "<span>Au cours des siècles, la forme concrète, selon laquelle l’Église a exercé ce pouvoir reçu du Seigneur, a beaucoup varié. Durant les premiers siècles, la réconciliation des chrétiens qui avaient commis des péchés particulièrement graves après leur Baptême (par exemple l’idolâtrie, l’homicide ou l’adultère), était liée à une discipline très rigoureuse, selon laquelle les pénitents devaient faire pénitence publique pour leurs péchés, souvent durant de longues années, avant de recevoir la réconciliation. À cet « ordre des pénitents » (qui ne concernait que certains péchés graves) on n’était admis que rarement et, dans certaines régions, une seule fois dans sa vie. Pendant le septième siècle, inspirés par la tradition monastique d’Orient, les missionnaires irlandais apportèrent en Europe continentale la pratique « privée » de la pénitence qui n’exige pas la réalisation publique et prolongée d’œuvres de pénitence avant de recevoir la réconciliation avec l’Église. Le sacrement se réalise désormais d’une manière plus secrète entre le pénitent et le prêtre. Cette nouvelle pratique prévoyait la possibilité de la réitération et ouvrait ainsi le chemin à une fréquentation régulière de ce sacrement. Elle permettait d’intégrer dans une seule célébration sacramentelle le pardon des péchés graves et des péchés véniels. C’est, dans les grandes lignes, cette forme de la pénitence que l’Église pratique jusqu’à nos jours.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1448,
+			"text_html": "<span>À travers les changements que la discipline et la célébration de ce sacrement ont connu au cours des siècles, on discerne la même <i class=\"typo_italic\">structure fondamentale</i>. Elle comporte deux éléments également essentiels ; d’une part, les actes de l’homme qui se convertit sous l’action de l’Esprit Saint : à savoir la contrition, l’aveu et la satisfaction ; d’autre part, l’action de Dieu par l’intervention de l’Église. L’Église qui, par l’évêque et ses prêtres, donne au nom de Jésus-Christ le pardon des péchés et fixe la modalité de la satisfaction, prie aussi pour le pécheur et fait pénitence avec lui. Ainsi le pécheur est guéri et rétabli dans la communion ecclésiale.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1449,
+			"text_html": "<span>La formule d’absolution en usage dans l’Église latine exprime les éléments essentielles de ce sacrement : le Père des miséricordes est<sup class=\"srcRef cccRef\">§1481</sup> la source de tout pardon. Il réalise la réconciliation des pécheurs par la Pâque<sup class=\"srcRef cccRef\">§234</sup> de son Fils et le don de son Esprit, à travers la prière et le ministère de l’Église :</span>",
+			"cross_refs": [
+				"1481",
+				"234"
+			],
+			"bible_refs": [],
+			"citations": [
+				{
+					"text_html": "<span>« Que Dieu notre Père vous montre sa miséricorde ; par la mort et la résurrection de son Fils, il a réconcilié le monde avec lui et il a envoyé l’Esprit Saint pour la rémission des péchés : par le ministère de l’Église, qu’il vous donne le pardon et la paix. Et moi, au nom du Père et du Fils et du Saint-Esprit, je vous pardonne tous vos péchés ». <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup></span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "liturgical",
+					"raw": "Ordo Pænitentiæ 46. 55 [Polyglotte Vaticane 1974, p. 27. 37]",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1450,
+			"text_html": "<span>« La Pénitence oblige le pécheur à accepter volontiers tous ses éléments : dans son cœur, la contrition ; dans sa bouche, la confession ; dans son comportement, une totale humilité ou une fructueuse satisfaction » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "Catech. R. 2:5, 21",
+					"idx": "a",
+					"doc_raw": "Catech. R. 2:5, 21"
+				},
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1673",
+					"idx": "b"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1451,
+			"text_html": "<span>Parmi les actes du pénitent, la contrition vient en premier lieu. Elle est « une douleur de l’âme et une détestation du péché<sup class=\"srcRef cccRef\">§431</sup> commis avec la résolution de ne plus pécher à l’avenir » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"431"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1676",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1452,
+			"text_html": "<span>Quand elle provient de l’amour de Dieu aimé plus que tout, la contrition est appelée « parfaite » (contrition de charité). Une<sup class=\"srcRef cccRef\">§1822</sup> telle contrition remet les fautes vénielles ; elle obtient aussi le pardon des péchés mortels, si elle comporte la ferme résolution de recourir dès que possible à la confession sacramentelle (voir concile de Trente : DS 1677).</span>",
+			"cross_refs": [
+				"1822"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1677",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1453,
+			"text_html": "<span>La contrition dite « imparfaite » (ou « attrition ») est, elle aussi, un don de Dieu, une impulsion de l’Esprit Saint. Elle naît de la considération de la laideur du péché ou de la crainte de la damnation éternelle et des autres peines dont est menacé le pécheur (contrition par crainte). Un tel ébranlement de la conscience peut amorcer une évolution intérieure qui sera parachevée sous l’action de la grâce, par l’absolution sacramentelle. Par elle-même, cependant, la contrition imparfaite n’obtient pas le pardon des péchés graves, mais elle dispose à l’obtenir dans le sacrement de la Pénitence (voir concile de Trente : DS 1678 ; 1705).</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1678",
+					"idx": "a"
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1705",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1454,
+			"text_html": "<span>Il convient de préparer la réception de ce sacrement par un <i class=\"typo_italic\">examen de conscience</i> fait à la lumière de la Parole de Dieu. Les textes les plus adaptés à cet effet sont à chercher dans le Décalogue et dans la catéchèse morale des Évangiles et des lettres apostoliques : Sermon sur la montagne, les enseignements apostoliques <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Rm 12"
+				},
+				{
+					"text": "Rm 15"
+				},
+				{
+					"text": "1 Co 12"
+				},
+				{
+					"text": "1 Co 13"
+				},
+				{
+					"text": "Ga 5"
+				},
+				{
+					"text": "Ep 4"
+				},
+				{
+					"text": "Ep 6"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Rm 12-15",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "1 Co 12-13",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Ga 5",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "Ep 4-6",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1455,
+			"text_html": "<span>La confession des péchés (l’aveu), même d’un point de vue simplement humain, nous libère et facilite notre réconciliation<sup class=\"srcRef cccRef\">§1424</sup> avec les autres. Par l’aveu, l’homme regarde en face les péchés dont il s’est rendu coupable ; il en assume la responsabilité et par là, il s’ouvre de nouveau à Dieu et à la communion<sup class=\"srcRef cccRef\">§1734</sup> de l’Église afin de rendre possible un nouvel avenir.</span>",
+			"cross_refs": [
+				"1424",
+				"1734"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1456,
+			"text_html": "<span>L’aveu au prêtre constitue une partie essentielle du sacrement de Pénitence : « Les pénitents doivent, dans la confession, énumérer tous les péchés mortels dont ils ont conscience après<sup class=\"srcRef cccRef\">§1855</sup> s’être examinés sérieusement, même si ces péchés sont très secrets et s’ils ont été commis seulement<sup class=\"srcRef cccRef\">§1505</sup> contre les deux derniers préceptes du Décalogue <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>, car parfois ces péchés blessent plus grièvement l’âme et sont plus dangereux que ceux qui ont été commis au su de tous » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup> :</span>",
+			"cross_refs": [
+				"1855",
+				"1505"
+			],
+			"bible_refs": [
+				{
+					"text": "Ex 20:17"
+				},
+				{
+					"text": "Mt 5:28"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Lorsque les fidèles du Christ s’efforcent de confesser tous les péchés qui leur viennent à la mémoire, on ne peut pas douter qu’ils les présentent tous au pardon de la miséricorde divine. Ceux qui agissent autrement et qui en cachent sciemment quelques-uns ne proposent à la bonté divine rien qu’elle puisse remettre par l’intermédiaire du prêtre. Car « si le malade rougit de découvrir sa plaie au médecin, la médecine ne soigne pas ce qu’elle ignore » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Ex 20:17",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Mt 5:28",
+					"idx": 2
+				},
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1680",
+					"idx": "a"
+				},
+				{
+					"type": "patristic",
+					"raw": "saint Jérôme, commentarii in Ecclesiasten 10:11 : PL 23:1096",
+					"idx": "b"
+				},
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1680",
+					"idx": "c"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1457,
+			"text_html": "<span>D’après le commandement de l’Église, « tout fidèle parvenu à l’âge de la discrétion doit confesser au moins une fois<sup class=\"srcRef cccRef\">§2042</sup> par an, les péchés graves dont il a conscience » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup><sup class=\"srcRef docRef\" data-idx=\"c\">c</sup>. Celui qui a conscience d’avoir commis un péché mortel ne doit<sup class=\"srcRef cccRef\">§1385</sup> pas recevoir la Sainte Communion, même s’il éprouve une grande contrition, sans avoir préalablement reçu l’absolution sacramentelle <sup class=\"srcRef docRef\" data-idx=\"d\">d</sup><sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, à moins qu’il n’ait un motif grave pour communier et qu’il ne lui soit possible d’accéder à un confesseur <sup class=\"srcRef docRef\" data-idx=\"e\">e</sup><sup class=\"srcRef docRef\" data-idx=\"f\">f</sup>. Les enfants doivent accéder au sacrement de la Pénitence avant de recevoir pour la première fois la Sainte. Communion <sup class=\"srcRef docRef\" data-idx=\"g\">g</sup>.</span>",
+			"cross_refs": [
+				"2042",
+				"1385"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "ds",
+					"raw": "DS 1683",
+					"idx": "a"
+				},
+				{
+					"type": "ds",
+					"raw": "voir DS 1708",
+					"idx": "b"
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ CIC, can. 989",
+					"idx": "c",
+					"doc_raw": "⇒ CIC, can. 989"
+				},
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1647",
+					"idx": "d"
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1661",
+					"idx": 1
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 916",
+					"idx": "e",
+					"doc_raw": "⇒ CIC, can. 916"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 711",
+					"idx": "f",
+					"doc_raw": "CCEO, can. 711"
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 914",
+					"idx": "g",
+					"doc_raw": "⇒ CIC, can. 914"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1458,
+			"text_html": "<span>Sans être strictement nécessaire, la confession des fautes quotidiennes (péchés véniels) est<sup class=\"srcRef cccRef\">§2468</sup> néanmoins vivement recommandée par l’Église (voir concile de Trente : DS 1680 ; <b class=\"bold\">⇒</b> CIC, can. 988, § 2). En effet, la confession régulière de nos péchés véniels nous<sup class=\"srcRef cccRef\">§1783</sup> aide à former notre conscience, à lutter contre nos penchants mauvais, à nous laisser guérir par le Christ, à progresser dans la vie de l’Esprit. En recevant plus fréquemment par ce sacrement, le don de la miséricorde du Père, nous sommes poussés à être miséricordieux comme lui <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup> :</span>",
+			"cross_refs": [
+				"1783",
+				"2468"
+			],
+			"bible_refs": [
+				{
+					"text": "Lc 6:36"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Celui qui confesse ses péchés agit déjà avec Dieu. Dieu accuse tes péchés ; si tu les accuses toi aussi, tu te joins à Dieu. L’homme et le pécheur sont pour ainsi dire deux réalités : quand tu entends parler de l’homme, c’est Dieu qui l’a fait ; quand tu entends parler du pécheur, c’est l’homme lui-même qui l’a fait. Détruis ce que tu as fais pour que Dieu sauve ce qu’il a fait... Quand tu commences à détester ce que tu as fait, c’est alors que tes œuvres bonnes commencent parce que tu accuses tes œuvres mauvaises. Le commencement des œuvres bonnes, c’est la confession des œuvres mauvaises. Tu fais la vérité et tu viens à la Lumière (saint Augustin, <i class=\"typo_italic\">in evangelium Johannis tractatus</i> 12, 13).</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1680",
+					"idx": "a"
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ CIC, can. 988, § 2",
+					"idx": "b",
+					"doc_raw": "⇒ CIC, can. 988, § 2"
+				},
+				{
+					"type": "bible",
+					"raw": "voir Lc 6:36",
+					"idx": 1
+				},
+				{
+					"type": "patristic",
+					"raw": "saint Augustin, in evangelium Johannis tractatus 12:13",
+					"idx": "c"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1459,
+			"text_html": "<span>Beaucoup de péchés causent du tort au prochain. Il faut faire le possible pour le réparer <sup class=\"srcRef cccRef\">§2412</sup>choses volées, rétablir la réputation de celui qui a été calomnié, compenser<sup class=\"srcRef cccRef\">§2487</sup> des blessures). La simple justice exige cela. Mais en plus, le péché blesse et affaiblit le pécheur lui-même, ainsi que ses relations avec Dieu et avec le prochain. L’absolution enlève le péché, mais elle ne remédie pas à tous les désordres que le péché a causés (voir concile de Trente : DS 1712). Relevé du péché, le pécheur doit encore recouvrer la pleine santé spirituelle. Il doit donc faire quelque chose de plus pour réparer ses<sup class=\"srcRef cccRef\">§1473</sup> péchés : il doit « satisfaire » de manière appropriée ou « expier » ses péchés. Cette satisfaction s’appelle aussi « pénitence ».</span>",
+			"cross_refs": [
+				"2412",
+				"2487",
+				"1473"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1712",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1460,
+			"text_html": "<span>La <i class=\"typo_italic\">pénitence</i> que le confesseur impose, doit tenir compte de la situation personnelle du pénitent et doit chercher son bien spirituel. Elle doit correspondre autant que possible à la gravité et à la nature des péchés commis. Elle peut consister dans la prière, une offrande<sup class=\"srcRef cccRef\">§2447</sup>, dans les œuvres de miséricorde, le service du prochain, dans des privations volontaires, des sacrifices, et surtout dans l’acceptation patiente de la croix que nous devons porter. De telles pénitences aident à nous configurer au Christ<sup class=\"srcRef cccRef\">§2011</sup> qui, seul, a expié pour<sup class=\"srcRef cccRef\">§618</sup> nos péchés <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> une fois pour toutes. Elles nous permettent de devenir les cohéritiers du Christ ressuscité, « puisque nous souffrons avec lui » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef docRef\" data-idx=\"a\">a</sup> :</span>",
+			"cross_refs": [
+				"2447",
+				"618",
+				"2011"
+			],
+			"bible_refs": [
+				{
+					"text": "Rm 3:25"
+				},
+				{
+					"text": "1 Jn 2:1-2"
+				},
+				{
+					"text": "Rm 8:17"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Mais notre satisfaction, celle que nous acquittons pour nos péchés, n’est que par Jésus-Christ : nous qui, de nous-mêmes comme tels, ne pouvons rien nous-mêmes, avec l’aide « de celui qui nous fortifie, nous pouvons tout » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Ainsi l’homme n’a rien dont il puisse se glorifier, mais toute notre « gloire » est dans le Christ... en qui nous satisfaisons, « en faisant de dignes fruits de pénitence » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>, qui en Lui puisent leur force, par Lui sont offerts au Père et grâce à Lui sont acceptés par le Père <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Rm 3:25",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "1 Jn 2:1-2",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Rm 8:17",
+					"idx": 3
+				},
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1690",
+					"idx": "a"
+				},
+				{
+					"type": "bible",
+					"raw": "Ph 4:13",
+					"idx": 4
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 3:8",
+					"idx": 5
+				},
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1691",
+					"idx": "b"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1461,
+			"text_html": "<span>Puisque le Christ a confié à ses apôtres le ministère de la réconciliation <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>, les évêques, leurs successeurs, et les presbytres<sup class=\"srcRef cccRef\">§981</sup>, collaborateurs des évêques, continuent à exercer ce ministère. En effet, ce sont les évêques et les presbytres, qui ont, en vertu du sacrement de l’Ordre, le pouvoir de pardonner tous les péchés « au nom du Père et du Fils et du Saint-Esprit ».</span>",
+			"cross_refs": [
+				"981"
+			],
+			"bible_refs": [
+				{
+					"text": "Jn 20:23"
+				},
+				{
+					"text": "2 Co 5:18"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Jn 20:23",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "2 Co 5:18",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1462,
+			"text_html": "<span>Le pardon des péchés réconcilie avec Dieu mais aussi avec l’Église. L’évêque, chef visible de l’Église particulière, est<sup class=\"srcRef cccRef\">§886</sup> donc considéré à juste titre, depuis les temps anciens, comme celui qui a principalement le pouvoir et le ministère de la réconciliation : il est le modérateur de la discipline pénitentielle <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Les presbytres, ses collaborateurs, l’exercent dans<sup class=\"srcRef cccRef\">§1567</sup> la mesure où ils en ont reçu la charge soit de leur évêque (ou d’un supérieur religieux) soit du Pape, à travers le droit de l’Église <sup class=\"srcRef docRef\" data-idx=\"b\">b</sup><sup class=\"srcRef docRef\" data-idx=\"c\">c</sup><sup class=\"srcRef docRef\" data-idx=\"d\">d</sup><sup class=\"srcRef docRef\" data-idx=\"e\">e</sup>.</span>",
+			"cross_refs": [
+				"886",
+				"1567"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "LG 26",
+					"idx": "a",
+					"doc_raw": "LG 26"
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 844",
+					"idx": "b",
+					"doc_raw": "⇒ CIC, can. 844"
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ 967-969",
+					"idx": "c",
+					"doc_raw": "⇒ 967-969"
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ 972",
+					"idx": "d",
+					"doc_raw": "⇒ 972"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 722, §§ 3-4",
+					"idx": "e",
+					"doc_raw": "CCEO, can. 722, §§ 3-4"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1463,
+			"text_html": "<span>Certains péchés particulièrement graves sont frappés de l’excommunication, la peine ecclésiastique la plus sévère, qui empêche le réception des sacrements et l’exercice de certains actes ecclésiastiques <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup><sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, et dont l’absolution, par conséquent, ne peut être accordée, selon le droit de l’Église, que par le Pape, l’évêque du lieu ou des prêtres autorisés par eux <sup class=\"srcRef docRef\" data-idx=\"c\">c</sup><sup class=\"srcRef docRef\" data-idx=\"d\">d</sup>. En cas de danger de mort tout prêtre, même dépourvu de la faculté d’entendre les confessions, peut absoudre de tout péché <sup class=\"srcRef docRef\" data-idx=\"e\">e</sup><sup class=\"srcRef docRef\" data-idx=\"f\">f</sup> et de toute excommunication<sup class=\"srcRef cccRef\">§982</sup>.</span>",
+			"cross_refs": [
+				"982"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 1331",
+					"idx": "a",
+					"doc_raw": "⇒ CIC, can. 1331"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 1431",
+					"idx": "b",
+					"doc_raw": "CCEO, can. 1431"
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1434",
+					"idx": 1
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 1354-1357",
+					"idx": "c",
+					"doc_raw": "⇒ CIC, can. 1354-1357"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 1420",
+					"idx": "d",
+					"doc_raw": "CCEO, can. 1420"
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 976",
+					"idx": "e",
+					"doc_raw": "⇒ CIC, can. 976"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 725",
+					"idx": "f",
+					"doc_raw": "CCEO, can. 725"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1464,
+			"text_html": "<span>Les prêtres doivent encourager les fidèles à accéder au sacrement de la Pénitence et doivent se montrer disponibles à célébrer ce sacrement chaque fois que les chrétiens le demandent de manière raisonnable <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup><sup class=\"srcRef docRef\" data-idx=\"c\">c</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 986",
+					"idx": "a",
+					"doc_raw": "⇒ CIC, can. 986"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 735",
+					"idx": "b",
+					"doc_raw": "CCEO, can. 735"
+				},
+				{
+					"type": "magisterial",
+					"raw": "PO 13",
+					"idx": "c",
+					"doc_raw": "PO 13"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1465,
+			"text_html": "<span>En célébrant le sacrement de la Pénitence, le prêtre accomplit le ministère du Bon Pasteur qui cherche la brebis perdue<sup class=\"srcRef cccRef\">§983</sup>, celui du Bon Samaritain qui panse les blessures, du Père qui attend le Fils prodigue et l’accueille à son retour, du juste Juge qui ne fait pas acception de personne et dont le jugement est à la fois juste et miséricordieux. Bref, le prêtre est le signe et l’instrument de l’amour miséricordieux de Dieu envers le pécheur.</span>",
+			"cross_refs": [
+				"983"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1466,
+			"text_html": "<span>Le confesseur n’est pas le maître, mais le serviteur du pardon de Dieu. Le ministre de ce sacrement doit s’unir à l’intention et à la charité<sup class=\"srcRef cccRef\">§1551</sup> du Christ <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Il doit avoir une connaissance éprouvée du comportement chrétien<sup class=\"srcRef cccRef\">§2690</sup>, l’expérience des choses humaines, le respect et la délicatesse envers celui qui est tombé ; il doit aimer la vérité, être fidèle au magistère de l’Église et conduire le pénitent avec patience vers la guérison et la pleine maturité. Il doit prier et faire pénitence pour lui en le confiant à la miséricorde du Seigneur.</span>",
+			"cross_refs": [
+				"1551",
+				"2690"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir PO 13",
+					"idx": "a",
+					"doc_raw": "PO 13"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1467,
+			"text_html": "<span>Étant donnée la délicatesse et la grandeur de ce ministère et le respect dû aux personnes, l’Église déclare que tout prêtre qui entend des confessions est obligé de garder un secret absolu au sujet<sup class=\"srcRef cccRef\">§2490</sup> des péchés que ses pénitents lui ont confessés, sous des peines très sévères <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>. Il ne peut pas non plus faire état des connaissances que la confession lui donne sur la vie des pénitents. Ce secret, qui n’admet pas d’exceptions, s’appelle le « sceau sacramentel », car ce que le pénitent a manifesté au prêtre reste « scellé » par le sacrement.</span>",
+			"cross_refs": [
+				"2490"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "canon_law",
+					"raw": "⇒ CIC, can. 1388, §1",
+					"idx": "a",
+					"doc_raw": "⇒ CIC, can. 1388, §1"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 1456",
+					"idx": "b",
+					"doc_raw": "CCEO, can. 1456"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1468,
+			"text_html": "<span>« Toute l’efficacité de la Pénitence consiste à nous rétablir dans la grâce de Dieu et à nous unir à Lui dans une souveraine amitié » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Le but et l’effet de ce sacrement sont donc la <i class=\"typo_italic\">réconciliation avec Dieu.</i> Chez ceux qui reçoivent le sacrement de Pénitence avec un cœur contrit et dans une disposition religieuse, « il est suivi de la paix et de la tranquillité de la conscience, qu’accompagne<sup class=\"srcRef cccRef\">§2305</sup> une forte consolation spirituelle » <sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>. En effet, le sacrement de la réconciliation avec Dieu apporte une véritable « résurrection spirituelle », une restitution de la dignité et des biens de la vie des enfants de Dieu dont le plus précieux est l’amitié de Dieu <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>",
+			"cross_refs": [
+				"2305"
+			],
+			"bible_refs": [
+				{
+					"text": "Lc 15:32"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "Catech. R. 2:5, 18",
+					"idx": "a",
+					"doc_raw": "Catech. R. 2:5, 18"
+				},
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1674",
+					"idx": "b"
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 15:32",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1469,
+			"text_html": "<span>Ce sacrement nous <i class=\"typo_italic\">réconcilie avec l’Église.</i> Le péché ébrèche ou brise la communion fraternelle. Le sacrement de Pénitence la répare ou la restaure<sup class=\"srcRef cccRef\">§953</sup>. En ce sens, il ne guérit pas seulement celui qui est rétabli dans la communion ecclésiale, il a aussi un effet vivifiant sur la vie de l’Église qui a souffert du péché d’un de ses membres <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Rétabli ou affermi dans la communion des saints, le pécheur est fortifié par l’échange des biens spirituels<sup class=\"srcRef cccRef\">§949</sup> entre tous les membres vivants du Corps du Christ, qu’ils soient encore dans l’état de pèlerinage ou qu’ils soient déjà dans la patrie céleste <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup> :</span>",
+			"cross_refs": [
+				"953",
+				"949"
+			],
+			"bible_refs": [
+				{
+					"text": "1 Co 12:26"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Il faut rappeler que la réconciliation avec Dieu a comme conséquence, pour ainsi dire, d’autres réconciliations qui porteront remède à d’autres ruptures produites par le péché : le pénitent pardonné se réconcilie avec lui-même dans la profondeur de son être, où il récupère la propre vérité intérieure ; il se réconcilie avec les frères que de quelque manière il a offensé et blessé ; il se réconcilie avec l’Église ; il se réconcilie avec la création toute entière <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir 1 Co 12:26",
+					"idx": 1
+				},
+				{
+					"type": "magisterial",
+					"raw": "voir LG 48-50",
+					"idx": "a",
+					"doc_raw": "LG 48-50"
+				},
+				{
+					"type": "magisterial",
+					"raw": "RP 31",
+					"idx": "b",
+					"doc_raw": "RP 31"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1470,
+			"text_html": "<span>Dans ce sacrement, le pécheur, en se remettant au jugement miséricordieux de Dieu, <i class=\"typo_italic\">anticipe</i> d’une certaine façon<sup class=\"srcRef cccRef\">§678</sup><sup class=\"srcRef cccRef\">§1039</sup> <i class=\"typo_italic\">le jugement</i> auquel il sera soumis à la fin de cette vie terrestre. Car c’est maintenant, dans cette vie-ci, que nous est offert le choix entre la vie et la mort, et ce n’est que par le chemin de la conversion que nous pouvons entrer dans le Royaume d’où exclut le péché grave <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>. En se convertissant au Christ par la pénitence et la foi, le pécheur passe de la mort à la vie « et il n’est pas soumis au jugement » <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [
+				"678",
+				"1039"
+			],
+			"bible_refs": [
+				{
+					"text": "1 Co 5:11"
+				},
+				{
+					"text": "Ga 5:19-21"
+				},
+				{
+					"text": "Ap 22:15"
+				},
+				{
+					"text": "Jn 5:24"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir 1 Co 5:11",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Ga 5:19-21",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Ap 22:15",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "Jn 5:24",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1471,
+			"text_html": "<span>La doctrine et la pratique des indulgences dans l’Église sont étroitement liées aux effets du sacrement de Pénitence.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1472,
+			"text_html": "<span>Pour comprendre cette doctrine et cette pratique de l’Église il faut voir que le péché <i class=\"typo_italic\">a une double conséquence</i>. Le péché grave nous<sup class=\"srcRef cccRef\">§1861</sup> prive de la communion avec Dieu, et par là il nous rend incapables de la vie éternelle, dont la privation s’appelle la « peine éternelle » du péché. D’autre part, tout péché, même véniel, entraîne un attachement malsain aux créatures, qui a besoin de purification, soit ici-bas, soit après la mort, dans l’état qu’on appelle Purgatoire. Cette purification libère de ce qu’on appelle la « peine<sup class=\"srcRef cccRef\">§1031</sup> temporelle » du péché. Ces deux peines ne doivent pas être conçues comme une espèce de vengeance, infligée par Dieu de l’extérieur, mais bien comme découlant de la nature même du péché. Une conversion qui procède d’une fervente charité, peut arriver à la totale purification du pécheur, de sorte qu’aucune peine ne subsisterait <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>",
+			"cross_refs": [
+				"1861",
+				"1031"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1712-1713",
+					"idx": "a"
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1820",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1473,
+			"text_html": "<span>Le pardon du péché et la restauration de la communion avec Dieu entraînent la remise des peines éternelles du péché. Mais des peines temporelles du péché demeurent. Le chrétien doit s’efforcer, en supportant patiemment les souffrances et les épreuves de toutes sortes et, le jour venu, en faisant sereinement face à la mort, d’accepter comme une grâce ces peines temporelles du péché ; il doit s’appliquer, par<sup class=\"srcRef cccRef\">§2447</sup> les œuvres de miséricorde et de charité, ainsi que par la prière et les différentes pratiques de la pénitence, à se dépouiller complètement du « vieil homme » et à revêtir « l’homme nouveau » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>",
+			"cross_refs": [
+				"2447"
+			],
+			"bible_refs": [
+				{
+					"text": "Ep 4:24"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Ep 4:24",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1474,
+			"text_html": "<span>Le chrétien qui cherche à se purifier de son péché et à se sanctifier avec l’aide de la grâce de Dieu ne se trouve pas seul. « La vie de chacun des enfants de Dieu se trouve liée d’une façon<sup class=\"srcRef cccRef\">§946-959</sup> admirable, dans le Christ et par le Christ, avec la vie de tous les autres frères chrétiens, dans l’unité surnaturelle du Corps mystique<sup class=\"srcRef cccRef\">§795</sup> du Christ, comme dans une personne mystique » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"946-959",
+				"795"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "Paul VI, const. ap. « Indulgentiarum doctrina » 5",
+					"idx": "a",
+					"doc_raw": "Paul VI, const. ap. « Indulgentiarum doctrina » 5"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1475,
+			"text_html": "<span>Dans la communion des saints « il existe donc entre les fidèles – ceux qui sont en possession de la patrie céleste, ceux qui ont été admis à expier au purgatoire ou ceux qui sont encore en pèlerinage sur la terre – un constant lien d’amour et un abondant échange de tous biens » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Dans cet échange admirable, la sainteté de l’un profite aux autres, bien au-delà du dommage que le péché de l’un a pu causer aux autres. Ainsi, le recours à la communion des saints permet au pécheur contrit d’être plus tôt et plus efficacement purifié des peines du péché.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "Paul VI, const. ap. « Indulgentiarum doctrina » 5",
+					"idx": "a",
+					"doc_raw": "Paul VI, const. ap. « Indulgentiarum doctrina » 5"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1476,
+			"text_html": "<span>Ces biens spirituels de la communion des saints, nous les appelons aussi le <i class=\"typo_italic\">trésor de l’Église</i>, « qui n’est pas une somme de biens, ainsi qu’il en est des richesses matérielles accumulées au cours des siècles, mais qui est le prix infini et inépuisable qu’ont auprès de Dieu les expiations et les mérites du Christ Notre Seigneur<sup class=\"srcRef cccRef\">§617</sup>, offerts pour que l’humanité soit libérée du péché et parvienne à la communion avec le Père. C’est dans le Christ, notre Rédempteur, que se trouvent en abondance les satisfactions et les mérites de sa rédemption <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> ».</span>",
+			"cross_refs": [
+				"617"
+			],
+			"bible_refs": [
+				{
+					"text": "He 7:23-25"
+				},
+				{
+					"text": "He 9:11-28"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir He 7:23-25",
+					"idx": 1
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "9:11-28",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1477,
+			"text_html": "<span>« Appartiennent également à ce trésor le prix vraiment immense, incommensurable et toujours nouveau qu’ont auprès de Dieu les prières et les bonnes œuvres de la bienheureuse Vierge Marie et de tous les saints qui<sup class=\"srcRef cccRef\">§969</sup> se sont sanctifiés par la grâce du Christ, en marchant sur ses traces, et ont accompli une œuvre agréable au Père, de sorte qu’en travaillant à leur propre salut, ils ont coopéré également au salut de leurs frères dans l’unité du Corps mystique » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"969"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "Paul VI, const. ap. « Indulgentiarum doctrina » 5",
+					"idx": "a",
+					"doc_raw": "Paul VI, const. ap. « Indulgentiarum doctrina » 5"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1478,
+			"text_html": "<span>L’indulgence s’obtient par l’Église qui, en vertu du pouvoir de lier et de délier qui lui a été accordé par le Christ Jésus, intervient<sup class=\"srcRef cccRef\">§981</sup> en faveur d’un chrétien et lui ouvre le trésor des mérites du Christ et des saints pour obtenir du Père des miséricordes la remise des peines temporelles dues pour ses péchés. C’est ainsi que l’Église ne veut pas seulement venir en aide à ce chrétien, mais aussi l’inciter à des œuvres de piété, de pénitence et de charité <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>.</span>",
+			"cross_refs": [
+				"981"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir Paul VI, loc. cit. 8",
+					"idx": "a",
+					"doc_raw": "Paul VI, loc. cit. 8"
+				},
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1835",
+					"idx": "b"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1479,
+			"text_html": "<span>Puisque les fidèles défunts en voie de purification sont aussi membres de la même communion des saints, nous pouvons les<sup class=\"srcRef cccRef\">§1032</sup> aider entre autres en obtenant pour eux des indulgences, de sorte qu’ils soient acquittés des peines temporelles dues pour leurs péchés.</span>",
+			"cross_refs": [
+				"1032"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1480,
+			"text_html": "<span>Comme tous les sacrements, la pénitence est une action liturgique. Tels sont ordinairement les éléments de la célébration : salutation et bénédiction du prêtre, lecture de la Parole de Dieu pour éclairer la conscience et susciter la contrition, et exhortation à la repentance ; la confession qui reconnaît les péchés et les manifeste au prêtre ; l’imposition et acceptation de la pénitence ; l’absolution du prêtre ; louange d’action de grâces et envoi avec la bénédiction du prêtre.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1481,
+			"text_html": "<span>La liturgie byzantine connaît plusieurs formules d’absolution, de forme déprécative, qui expriment admirablement le mystère du pardon : « Que<sup class=\"srcRef cccRef\">§1449</sup> le Dieu, qui par le prophète Nathan, a pardonné à David lorsqu’il eut confessé ses propres péchés, et à Pierre lorsqu’il eut pleuré amèrement, et à la courtisane lorsqu’elle eut répandu ses larmes sur ses pieds, et au pharisien, et au prodigue, que ce même Dieu vous pardonne, par moi, pécheur, en cette vie et dans l’autre et qu’Il vous fasse comparaître sans vous condamner à son redoutable tribunal, Lui qui est béni dans les siècles des siècles. Amen. » (<i class=\"typo_italic\">Euxologia to mega</i> [Athens 1992] p. 222)</span>",
+			"cross_refs": [
+				"1449"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1482,
+			"text_html": "<span>Le sacrement de la Pénitence peut aussi avoir lieu dans le cadre d’une <i class=\"typo_italic\">célébration communautaire</i>, dans laquelle on se prépare ensemble à la confession et on rend grâce ensemble pour le pardon reçu. Ici, la confession personnelle des péchés et l’absolution individuelle sont insérées dans une liturgie de la Parole de Dieu, avec lectures et homélie, examen de conscience mené en commun, demande communautaire du pardon, prière du « Notre Père » et action de grâce en commun. Cette célébration communautaire exprime plus clairement le caractère ecclésial de la pénitence. Quelle que soit cependant la manière de sa célébration, le sacrement<sup class=\"srcRef cccRef\">§1140</sup> de Pénitence est toujours, d’après sa nature même, une action liturgique, donc ecclésiale et publique <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"1140"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir SC 26-27",
+					"idx": "a",
+					"doc_raw": "SC 26-27"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1483,
+			"text_html": "<span>En des cas de nécessité grave on peut recourir à la <i class=\"typo_italic\">célébration communautaire de la réconciliation avec confession générale et absolution générale</i>. Une telle nécessité grave peut se présenter lorsqu’il y a un danger imminent de mort sans<sup class=\"srcRef cccRef\">§1401</sup> que le ou les prêtres aient le temps suffisant pour entendre la confession de chaque pénitent. La nécessité grave peut exister aussi lorsque, compte tenu du nombre des pénitents, il n’y a pas assez de confesseurs pour entendre dûment les confessions individuelles dans un temps raisonnable, de sorte que les pénitents, sans faute de leur part, se verraient privés pendant longtemps de la grâce sacramentelle ou de la sainte communion. Dans ce cas les fidèles doivent avoir, pour la validité de l’absolution, le propos de confesser individuellement leurs péchés graves en temps voulu <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. C’est à l’Évêque diocésain de juger si les conditions requises pour l’absolution générale existent <sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>. Un grand concours de fidèles à l’occasion de grandes fêtes ou de pèlerinages ne constitue pas un cas d’une telle grave nécessité <sup class=\"srcRef docRef\" data-idx=\"c\">c</sup>.</span>",
+			"cross_refs": [
+				"1401"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 962, § 1",
+					"idx": "a",
+					"doc_raw": "⇒ CIC, can. 962, § 1"
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 961, § 2",
+					"idx": "b",
+					"doc_raw": "⇒ CIC, can. 961, § 2"
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 961, § 1",
+					"idx": "c",
+					"doc_raw": "⇒ CIC, can. 961, § 1"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1484,
+			"text_html": "<span>« La confession individuelle et intégrale suivie de l’absolution demeure le seul mode ordinaire par lequel les fidèles se réconcilient avec Dieu et l’Église, sauf si une impossibilité physique ou morale dispense d’une telle confession » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Ceci n’est pas sans raisons profondes. Le Christ agit en chacun des sacrements. Il s’adresse personnellement à chacun des pécheurs : « Mon<sup class=\"srcRef cccRef\">§878</sup> enfant, tes péchés sont remis » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> ; il est le médecin qui se penche sur chacun des malades qui ont besoin de lui <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> pour les guérir ; il les relève et les réintègre dans la communion fraternelle. La confession personnelle est donc la forme la plus significative de la réconciliation avec Dieu et avec l’Église.</span>",
+			"cross_refs": [
+				"878"
+			],
+			"bible_refs": [
+				{
+					"text": "Mc 2:5"
+				},
+				{
+					"text": "Mc 2:17"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "OP 31",
+					"idx": "a",
+					"doc_raw": "OP 31"
+				},
+				{
+					"type": "bible",
+					"raw": "Mc 2:5",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mc 2:17",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1485,
+			"text_html": "<span><i class=\"typo_italic\">« Le soir de Pâques, le Seigneur Jésus se montra à ses Apôtres et leur dit : ‘Recevez l’Esprit Saint. Ceux à qui vous remettrez les péchés, ils leur seront remis. Ceux à qui vous les retiendrez, ils leur seront retenus’ » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Jn 20:22-23"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jn 20:22-23",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1486,
+			"text_html": "<span><i class=\"typo_italic\">Le pardon des péchés commis après le Baptême est accordé par un sacrement propre appelé sacrement de la conversion, de la confession, de la pénitence ou de la réconciliation.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1487,
+			"text_html": "<span><i class=\"typo_italic\">Qui pèche blesse l’honneur de Dieu et son amour, sa propre dignité d’homme appelé à être fils de Dieu et le bien-être spirituel de l’Église dont chaque chrétien doit être une pierre vivante.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1488,
+			"text_html": "<span><i class=\"typo_italic\">Aux yeux de la foi, aucun mal n’est plus grave que le péché et rien n’a de pires conséquences pour les pécheurs eux-mêmes, pour l’Église et pour le monde entier.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1489,
+			"text_html": "<span><i class=\"typo_italic\">Revenir à la communion avec Dieu après l’avoir perdue par le péché, est un mouvement né de la grâce du Dieu plein de miséricorde et soucieux du salut des hommes. Il faut demander ce don précieux pour soi-même comme pour autrui.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1490,
+			"text_html": "<span><i class=\"typo_italic\">Le mouvement de retour à Dieu, appelé conversion et repentir, implique une douleur et une aversion vis-à-vis des péchés commis, et le propos ferme de ne plus pécher à l’avenir. La conversion touche donc le passé et l’avenir ; elle se nourrit de l’espérance en la miséricorde divine.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1491,
+			"text_html": "<span><i class=\"typo_italic\">Le sacrement de la Pénitence est constitué par l’ensemble des trois actes posés par le pénitent, et par l’absolution du prêtre. Les actes du pénitent sont : le repentir, la confession ou manifestation des péchés au prêtre et le propos d’accomplir la réparation et les œuvres de réparation.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1492,
+			"text_html": "<span><i class=\"typo_italic\">Le repentir (appelé aussi contrition) doit être inspiré par des motifs qui relèvent de la foi. Si le repentir est conçu par amour de charité envers Dieu, on le dit « parfait » ; s’il est fondé sur d’autres motifs, on l’appelle « imparfait ».</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1493,
+			"text_html": "<span><i class=\"typo_italic\">Celui qui veut obtenir la réconciliation avec Dieu et avec l’Église, doit confesser au prêtre tous les péchés graves qu’il n’a pas encore confessé et dont il se souvient après avoir examiné soigneusement sa conscience. Sans être en soi nécessaire, la confession des fautes vénielles est néanmoins vivement recommandée par l’Église.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1494,
+			"text_html": "<span><i class=\"typo_italic\">Le confesseur propose au pénitent l’accomplissement de certains actes de « satisfaction » ou de « pénitence », en vue de réparer le dommage causé par le péché et de rétablir les habitudes propres au disciple du Christ.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1495,
+			"text_html": "<span><i class=\"typo_italic\">Seuls les prêtres qui ont reçu de l’autorité de l’Église la faculté d’absoudre peuvent pardonner les péchés au nom du Christ.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1496,
+			"text_html": "<span><i class=\"typo_italic\">Les effets spirituels du sacrement de Pénitence sont :</i></span><br/><span> <i class=\"typo_italic\">– la réconciliation avec Dieu par laquelle le pénitent recouvre la grâce</i>,</span><br/><span><i class=\"typo_italic\">– la réconciliation avec l’Église ; </i></span><br/><span><i class=\"typo_italic\">– la remise de la peine éternelle encourue par les péchés mortels ; </i></span><br/><span><i class=\"typo_italic\">– la remise, au moins en partie, des peines temporelles, suites du péché ; </i></span><br/><span><i class=\"typo_italic\">– la paix et la sérénité de la conscience, et la consolation spirituelle ; </i></span><br/><span><i class=\"typo_italic\">– l’accroissement des forces spirituelles pour le combat chrétien.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1497,
+			"text_html": "<span><i class=\"typo_italic\">La confession individuelle et intégrale des péchés graves suivie de l’absolution demeure le seul moyen ordinaire pour la réconciliation avec Dieu et avec l’Église.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1498,
+			"text_html": "<span><i class=\"typo_italic\">Par les indulgences les fidèles peuvent obtenir pour eux-mêmes et aussi pour les âmes du Purgatoire, la rémission des peines temporelles, suites des péchés.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1499,
+			"text_html": "<span>« Par l’Onction sacrée des malades et la prière des prêtres, c’est l’Église toute entière qui recommande les malades au Seigneur souffrant et glorifié, pour qu’il les soulage et les sauve ; bien mieux, elle les exhorte, en s’associant librement à la passion et à la mort du Christ à apporter leur part pour le bien du peuple de Dieu » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "LG 11",
+					"idx": "a",
+					"doc_raw": "LG 11"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1500,
+			"text_html": "<span>La maladie et la souffrance ont toujours été parmi les problèmes les plus graves qui éprouvent la vie humaine. Dans la maladie, l’homme fait l’expérience de son impuissance, de ses limites et de sa finitude. Toute maladie peut nous faire entrevoir la mort<sup class=\"srcRef cccRef\">§1006</sup>.</span>",
+			"cross_refs": [
+				"1006"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1501,
+			"text_html": "<span>La maladie peut conduire à l’angoisse, au repliement sur soi, parfois même au désespoir et à la révolte contre Dieu. Elle peut aussi rendre la personne plus mûre, l’aider à discerner dans sa vie ce qui n’est pas essentiel pour se tourner vers ce qui l’est. Très souvent, la maladie provoque une recherche de Dieu, un retour à Lui.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1502,
+			"text_html": "<span>L’homme de l’Ancien Testament vit la maladie en face de Dieu. C’est devant Dieu qu’il déverse sa plainte sur sa maladie <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> et c’est de Lui, le Maître de la vie et de la mort, qu’il implore la guérison <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>. La maladie devient chemin de conversion <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup><sup class=\"srcRef bibleRef\" data-idx=\"5\">5</sup><sup class=\"srcRef bibleRef\" data-idx=\"6\">6</sup> et le pardon de Dieu inaugure la guérison <sup class=\"srcRef bibleRef\" data-idx=\"7\">7</sup><sup class=\"srcRef bibleRef\" data-idx=\"8\">8</sup><sup class=\"srcRef bibleRef\" data-idx=\"9\">9</sup>. Israël fait<sup class=\"srcRef cccRef\">§164</sup> l’expérience que la maladie est, d’une façon mystérieuse<sup class=\"srcRef cccRef\">§376</sup>, liée au péché et au mal, et que la fidélité à Dieu, selon sa Loi, rend la vie : « car c’est moi, le Seigneur, qui suis ton médecin » <sup class=\"srcRef bibleRef\" data-idx=\"10\">10</sup>. Le prophète entrevoit que la souffrance peut aussi avoir un sens rédempteur pour les péchés des autres <sup class=\"srcRef bibleRef\" data-idx=\"11\">11</sup>. Enfin, Isaïe annonce que Dieu amènera un temps pour Sion où il pardonnera toute faute et guérira toute maladie <sup class=\"srcRef bibleRef\" data-idx=\"12\">12</sup>.</span>",
+			"cross_refs": [
+				"164",
+				"376"
+			],
+			"bible_refs": [
+				{
+					"text": "Ps 38"
+				},
+				{
+					"text": "Ps 6:3"
+				},
+				{
+					"text": "Is 38"
+				},
+				{
+					"text": "Ps 38:5"
+				},
+				{
+					"text": "Ps 39:9"
+				},
+				{
+					"text": "Ps 39:12"
+				},
+				{
+					"text": "Ps 32:5"
+				},
+				{
+					"text": "Ps 107:20"
+				},
+				{
+					"text": "Mc 2:5-12"
+				},
+				{
+					"text": "Ex 15:26"
+				},
+				{
+					"text": "Is 53:11"
+				},
+				{
+					"text": "Is 33:24"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Ps 38",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Ps 6:3",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Is 38",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "voir Ps 38:5",
+					"idx": 4
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "39:9",
+					"idx": 5
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "39:12",
+					"idx": 6
+				},
+				{
+					"type": "bible",
+					"raw": "voir Ps 32:5",
+					"idx": 7
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "107:20",
+					"idx": 8
+				},
+				{
+					"type": "bible",
+					"raw": "Mc 2:5-12",
+					"idx": 9
+				},
+				{
+					"type": "bible",
+					"raw": "Ex 15:26",
+					"idx": 10
+				},
+				{
+					"type": "bible",
+					"raw": "voir Is 53:11",
+					"idx": 11
+				},
+				{
+					"type": "bible",
+					"raw": "voir Is 33:24",
+					"idx": 12
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1503,
+			"text_html": "<span>La compassion du Christ envers les malades et ses nombreuses guérisons d’infirmes de toute sorte <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> sont un signe éclatant<sup class=\"srcRef cccRef\">§549</sup> de ce « que Dieu a visité son peuple » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> et que le Royaume de Dieu est tout proche. Jésus n’a pas seulement pouvoir de guérir, mais aussi de pardonner les péchés <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> : il est venu guérir l’homme tout entier, âme et corps<sup class=\"srcRef cccRef\">§1421</sup> ; il est le médecin dont les malades ont besoin <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>. Sa compassion envers tous ceux qui souffrent va si loin qu’il s’identifie avec eux : « J’ai été malade et vous m’avez visité » <sup class=\"srcRef bibleRef\" data-idx=\"5\">5</sup>. Son amour de prédilection pour les infirmes n’a cessé, tout au long des siècles, d’éveiller l’attention toute particulière des chrétiens envers tous<sup class=\"srcRef cccRef\">§2288</sup> ceux qui souffrent dans leur corps et dans leur âme. Elle est à l’origine des efforts inlassables pour les soulager.</span>",
+			"cross_refs": [
+				"549",
+				"1421",
+				"2288"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 4:24"
+				},
+				{
+					"text": "Lc 7:16"
+				},
+				{
+					"text": "Mc 2:5-12"
+				},
+				{
+					"text": "Mc 2:17"
+				},
+				{
+					"text": "Mt 25:36"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mt 4:24",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 7:16",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mc 2:5-12",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mc 2:17",
+					"idx": 4
+				},
+				{
+					"type": "bible",
+					"raw": "Mt 25:36",
+					"idx": 5
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1504,
+			"text_html": "<span>Souvent Jésus<sup class=\"srcRef cccRef\">§696</sup> demande aux malades de croire <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>. Il se sert de signes pour guérir : salive et imposition des mains <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup><sup class=\"srcRef bibleRef\" data-idx=\"5\">5</sup>, boue et ablution <sup class=\"srcRef bibleRef\" data-idx=\"6\">6</sup>. Les malades cherchent à le toucher <sup class=\"srcRef bibleRef\" data-idx=\"7\">7</sup><sup class=\"srcRef bibleRef\" data-idx=\"8\">8</sup><sup class=\"srcRef bibleRef\" data-idx=\"9\">9</sup> « car une force sortait de lui qui les guérissait tous » <sup class=\"srcRef bibleRef\" data-idx=\"10\">10</sup>. Ainsi, dans les sacrements, le Christ continue à nous « toucher » pour nous guérir.</span>",
+			"cross_refs": [
+				"696"
+			],
+			"bible_refs": [
+				{
+					"text": "Mc 5:34"
+				},
+				{
+					"text": "Mc 5:36"
+				},
+				{
+					"text": "Mc 9:23"
+				},
+				{
+					"text": "Mc 7:32-36"
+				},
+				{
+					"text": "Mc 8:22-25"
+				},
+				{
+					"text": "Jn 9:6"
+				},
+				{
+					"text": "Mc 1:41"
+				},
+				{
+					"text": "Mc 3:10"
+				},
+				{
+					"text": "Mc 6:56"
+				},
+				{
+					"text": "Lc 6:19"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mc 5:34",
+					"idx": 1
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "5:36",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "9:23",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mc 7:32-36",
+					"idx": 4
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "8:22-25",
+					"idx": 5
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 9:6 s",
+					"idx": 6
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mc 1:41",
+					"idx": 7
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "3:10",
+					"idx": 8
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "6:56",
+					"idx": 9
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 6:19",
+					"idx": 10
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1505,
+			"text_html": "<span>Ému par tant de souffrances, le Christ non seulement se laisse toucher par les malades, mais il fait siennes leurs misères : « Il a pris nos infirmités et s’est chargé de nos maladies » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Il n’a pas guéri tous les malades. Ses guérisons étaient des signes de la venue du Royaume de Dieu. Ils annonçaient une guérison plus radicale : la victoire sur le péché<sup class=\"srcRef cccRef\">§440</sup> et la mort par sa Pâque. Sur la Croix, le Christ a pris sur lui tout le poids du mal <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> et a enlevé le « péché du monde » <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>, dont la maladie n’est qu’une conséquence. Par sa passion et sa mort sur la Croix, le Christ a donné un sens nouveau à la souffrance : elle peut désormais nous configurer à lui et nous unir à sa passion<sup class=\"srcRef cccRef\">§307</sup> rédemptrice.</span>",
+			"cross_refs": [
+				"440",
+				"307"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 8:17"
+				},
+				{
+					"text": "Is 53:4"
+				},
+				{
+					"text": "Is 53:4-6"
+				},
+				{
+					"text": "Jn 1:29"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Mt 8:17",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Is 53:4",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "voir Is 53:4-6",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "Jn 1:29",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1506,
+			"text_html": "<span>Le Christ invite ses disciples à le suivre en prenant à leur tour leur croix <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. En le suivant, ils acquièrent un nouveau regard sur la maladie et sur les malades. Jésus les associe à sa vie pauvre et servante. Il les fait participer à son ministère de compassion et de guérison : « Ils s’en allèrent prêcher qu’on se repentît ; et ils chassaient beaucoup de démons et faisaient des onctions d’huile à de nombreux malades et les guérissaient » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Mt 10:38"
+				},
+				{
+					"text": "Mc 6:12-13"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mt 10:38",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Mc 6:12-13",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1507,
+			"text_html": "<span>Le Seigneur ressuscité renouvelle cet envoi <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> et le confirme par les signes que l’Église accomplit en invoquant son nom <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>. Ces signes manifestent d’une manière spéciale que Jésus<sup class=\"srcRef cccRef\">§430</sup> est vraiment « Dieu qui sauve » <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup><sup class=\"srcRef bibleRef\" data-idx=\"5\">5</sup>.</span>",
+			"cross_refs": [
+				"430"
+			],
+			"bible_refs": [
+				{
+					"text": "Ac 9:34"
+				},
+				{
+					"text": "Ac 14:3"
+				},
+				{
+					"text": "Mt 1:21"
+				},
+				{
+					"text": "Ac 4:12"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "« Par mon nom [...] ils imposeront les mains aux malades et ceux-ci seront guéris » : Mc 16:17-18",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Ac 9:34",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "14:3",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mt 1:21",
+					"idx": 4
+				},
+				{
+					"type": "bible",
+					"raw": "Ac 4:12",
+					"idx": 5
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1508,
+			"text_html": "<span>L’Esprit Saint donne à certains un charisme spécial de guérison <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> pour manifester la force de la grâce du Ressuscité. Même les<sup class=\"srcRef cccRef\">§798</sup> prières les plus intenses n’obtiennent toutefois pas la guérison de toutes les maladies. Ainsi saint Paul doit apprendre du Seigneur que « ma grâce te suffit : car ma puissance se déploie dans la faiblesse » <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>, et que les souffrances à endurer peuvent avoir comme sens que « je complète dans ma chair ce qui manque aux épreuves du Christ pour son Corps qui est l’Église » <sup class=\"srcRef bibleRef\" data-idx=\"5\">5</sup>.</span>",
+			"cross_refs": [
+				"798"
+			],
+			"bible_refs": [
+				{
+					"text": "1 Co 12:9"
+				},
+				{
+					"text": "1 Co 12:28"
+				},
+				{
+					"text": "1 Co 12:30"
+				},
+				{
+					"text": "2 Co 12:9"
+				},
+				{
+					"text": "Col 1:24"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir 1 Co 12:9",
+					"idx": 1
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "12:28",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "12:30",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "2 Co 12:9",
+					"idx": 4
+				},
+				{
+					"type": "bible",
+					"raw": "Col 1:24",
+					"idx": 5
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1509,
+			"text_html": "<span>« Guérissez les malades ! » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Cette charge, l’Église l’a reçue du Seigneur et tâche de la réaliser autant par les soins qu’elle apporte aux malades que par la prière d’intercession avec laquelle elle les accompagne. Elle croit en la présence vivifiante du Christ, médecin des âmes et des corps. Cette présence est particulièrement agissante à travers les sacrements, et de manière toute spéciale par l’Eucharistie, pain qui donne la vie<sup class=\"srcRef cccRef\">§1405</sup> éternelle <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup> et dont saint Paul insinue le lien avec la santé corporelle <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [
+				"1405"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 10:8"
+				},
+				{
+					"text": "Jn 6:54"
+				},
+				{
+					"text": "Jn 6:58"
+				},
+				{
+					"text": "1 Co 11:30"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Mt 10:8",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 6:54",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "6:58",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "voir 1 Co 11:30",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1510,
+			"text_html": "<span>L’Église apostolique connaît cependant un rite propre en faveur des malades, attesté par saint Jacques : « Quelqu’un parmi vous est malade ? Qu’il appelle les presbytres de l’Église et qu’ils prient sur lui, après l’avoir oint d’huile au nom du Seigneur. La prière de la foi sauvera le patient, et le Seigneur le relèvera. S’il a commis des péchés, ils lui seront remis » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. La Tradition a reconnu dans ce rite un des sept sacrements<sup class=\"srcRef cccRef\">§1117</sup> de l’Église <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>",
+			"cross_refs": [
+				"1117"
+			],
+			"bible_refs": [
+				{
+					"text": "Jc 5:14-15"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jc 5:14-15",
+					"idx": 1
+				},
+				{
+					"type": "ds",
+					"raw": "voir DS 216",
+					"idx": "a"
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1324-1325",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1695-1696",
+					"idx": 3
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1716-1717",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1511,
+			"text_html": "<span>L’Église croit et <i class=\"typo_italic\">confesse</i> qu’il existe, parmi les sept sacrements, un sacrement spécialement destiné à réconforter ceux qui sont éprouvés par la maladie : l’Onction des malades :</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [
+				{
+					"text_html": "<span>Cette onction sainte des malades a été instituée par le Christ notre Seigneur comme un sacrement du Nouveau Testament, véritablement et proprement dit, insinué par Marc [voir Mc 6, 13], mais recommandé aux fidèles et promulgué par Jacques, apôtre et frère du Seigneur [voir Jc 5, 14-15] <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1695",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1512,
+			"text_html": "<span>Dans la tradition liturgique, tant en Orient qu’en Occident, on possède dès l’antiquité, des témoignages d’onctions de malades pratiquées avec de l’huile bénite. Au cours des siècles, l’Onction des malades a été conférée de plus en plus exclusivement à ceux qui étaient sur le point de mourir. À cause de cela elle avait reçu le nom d’ « Extrême-Onction ». Malgré cette évolution la liturgie n’a jamais omis de prier le Seigneur afin que le malade recouvre sa santé si cela est convenable à son salut <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "ds",
+					"raw": "voir DS 1696",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1513,
+			"text_html": "<span>La Constitution apostolique « Sacram unctionem infirmorum » du 30 novembre 1972, à la suite du deuxième Concile du Vatican <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup> a établi que désormais, dans le rite romain, on observe ce qui suit :</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [
+				{
+					"text_html": "<span>Le sacrement de l’Onction des malades est conféré aux personnes dangereusement malades, en les oignant sur le front et sur les mains avec de l’huile dûment bénite – huile d’olive ou autre huile extraite de plantes – en disant une seule fois : « Per istam sanctam unctionem et suam piissimam misericordiam adiuvet te Dominus gratia Spiritus Sancti, ut a peccatis liberatum te salvet atque propitius allevet » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir SC 73",
+					"idx": "a",
+					"doc_raw": "SC 73"
+				},
+				{
+					"type": "canon_law",
+					"raw": "Par cette onction sainte, que le Seigneur, en sa grande bonté vous réconforte par la grâce de l’Esprit Saint. Ainsi, vous ayant libéré de tous péchés, qu’Il vous sauve et vous relève–voir ⇒ CIC, can. 847, § 1",
+					"idx": "b",
+					"doc_raw": "Par cette onction sainte, que le Seigneur, en sa grande bonté vous réconforte par la grâce de l’Esprit Saint. Ainsi, vous ayant libéré de tous péchés, qu’Il vous sauve et vous relève–voir ⇒ CIC, can. 847, § 1"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1514,
+			"text_html": "<span>L’Onction des malades « n’est pas seulement le sacrement de ceux qui se trouvent à toute extrémité. Aussi, le temps opportun pour la recevoir est-il certainement déjà arrivé lorsque le fidèle commence à être en danger de mort à cause de la maladie par suite d’affaiblissement physique ou de vieillesse » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup><sup class=\"srcRef docRef\" data-idx=\"c\">c</sup><sup class=\"srcRef docRef\" data-idx=\"d\">d</sup><sup class=\"srcRef docRef\" data-idx=\"e\">e</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "SC 73",
+					"idx": "a",
+					"doc_raw": "SC 73"
+				},
+				{
+					"type": "canon_law",
+					"raw": "voir ⇒ CIC, can. 1004, § 1",
+					"idx": "b",
+					"doc_raw": "⇒ CIC, can. 1004, § 1"
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ 1005",
+					"idx": "c",
+					"doc_raw": "⇒ 1005"
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ 1007",
+					"idx": "d",
+					"doc_raw": "⇒ 1007"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 738",
+					"idx": "e",
+					"doc_raw": "CCEO, can. 738"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1515,
+			"text_html": "<span>Si un malade qui a reçu l’Onction recouvre la santé, il peut, en cas de nouvelle maladie grave, recevoir de nouveau ce sacrement. Au cours de la même maladie, ce sacrement peut être réitéré si la maladie s’aggrave. Il est approprié de recevoir l’Onction des malades au seuil d’une opération importante. Il en va de même pour les personnes âgées dont la fragilité s’accentue.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1516,
+			"text_html": "<span>Seuls les prêtres (évêques et presbytres) sont les ministres de l’Onction des malades (voir concile de Trente : DS 1697 ; 1719 ; <b class=\"bold\">⇒</b> CIC, can. 1003 ; CCEO, can. 739, § 1). C’est le devoir des pasteurs d’instruire les fidèles des bienfaits de ce sacrement. Que les fidèles encouragent les malades à faire appel au prêtre pour recevoir ce sacrement. Que les malades se préparent pour le recevoir dans les bonnes dispositions, avec l’aide de leur pasteur et de toute la communauté ecclésiale qui est invitée à entourer tout spécialement les malades de ses prières et de ses attentions fraternelles.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1697",
+					"idx": "a"
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "1719",
+					"idx": 1
+				},
+				{
+					"type": "canon_law",
+					"raw": "⇒ CIC, can. 1003",
+					"idx": "b",
+					"doc_raw": "⇒ CIC, can. 1003"
+				},
+				{
+					"type": "canon_law",
+					"raw": "CCEO, can. 739, § 1",
+					"idx": "c",
+					"doc_raw": "CCEO, can. 739, § 1"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1517,
+			"text_html": "<span>Comme tous les sacrements, l’Onction des malades est une célébration liturgique et communautaire<sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>, qu’elle ait lieu en famille<sup class=\"srcRef cccRef\">§1140</sup>, à l’hôpital ou à l’Église, pour un seul malade ou pour tout un groupe d’infirmes. Il est très convenable qu’elle soit célébrée au sein de l’Eucharistie, mémorial de la Pâque du Seigneur. Si les circonstances y invitent, la célébration du sacrement peut être précédée du sacrement de Pénitence et suivie du sacrement de l’Eucharistie. En tant que sacrement de la Pâque du Christ, l’Eucharistie devrait toujours être le dernier sacrement de la pérégrination terrestre, le « viatique » pour le « passage<sup class=\"srcRef cccRef\">§1524</sup> » vers la vie éternelle.</span>",
+			"cross_refs": [
+				"1140",
+				"1524"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir SC 27",
+					"idx": "a",
+					"doc_raw": "SC 27"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1518,
+			"text_html": "<span>Parole et sacrement forment un tout inséparable. La Liturgie de la Parole, précédée d’un acte de pénitence, ouvre la célébration. Les paroles du Christ, le témoignage des Apôtres éveillent la foi du malade et de la communauté pour demander au Seigneur la force de son Esprit.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1519,
+			"text_html": "<span>La célébration du sacrement comprend principalement les éléments suivants : « les prêtres de l’Église » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> imposent – en silence – les mains aux malades ; ils prient sur les malades dans la foi de l’Église <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> ; c’est l’épiclèse propre de ce sacrement ; ils donnent alors l’onction avec l’huile bénite, si possible, par l’évêque.</span><br/><span>Ces actions liturgiques indiquent quelle grâce ce sacrement confère aux malades.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Jc 5:14"
+				},
+				{
+					"text": "Jc 5:15"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jc 5:14",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jc 5:15",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1520,
+			"text_html": "<span>Un <i class=\"typo_italic\">don particulier de l’Esprit Saint.</i> La grâce première de ce sacrement est une grâce de réconfort, de paix et de courage pour<sup class=\"srcRef cccRef\">§733</sup> vaincre les difficultés propres à l’état de maladie grave ou à la fragilité de la vieillesse. Cette grâce est un don du Saint-Esprit qui renouvelle la confiance et la foi en Dieu et fortifie contre les tentations du malin, tentation de découragement et d’angoisse de la mort <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Cette assistance du Seigneur par la force de son Esprit veut conduire le malade à la guérison de l’âme, mais aussi à celle du corps, si telle est la volonté de Dieu <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. En outre, « s’il a commis des péchés, ils lui seront remis » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>.</span>",
+			"cross_refs": [
+				"733"
+			],
+			"bible_refs": [
+				{
+					"text": "He 2:15"
+				},
+				{
+					"text": "Jc 5:15"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir He 2:15",
+					"idx": 1
+				},
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Florence : DS 1325",
+					"idx": "a"
+				},
+				{
+					"type": "bible",
+					"raw": "Jc 5:15",
+					"idx": 2
+				},
+				{
+					"type": "conciliar",
+					"raw": "voir concile de Trente : DS 1717",
+					"idx": "b"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1521,
+			"text_html": "<span>L’<i class=\"typo_italic\">union à la Passion du Christ.</i> Par la grâce de ce sacrement, le malade reçoit la force et le don de s’unir plus intimement à la Passion du Christ : il est d’une certaine façon <i class=\"typo_italic\">consacré</i> pour porter<sup class=\"srcRef cccRef\">§1535</sup> du fruit par la configuration à la Passion rédemptrice du Sauveur. La souffrance, séquelle du péché originel, reçoit un sens nouveau : elle devient participation à l’œuvre<sup class=\"srcRef cccRef\">§1499</sup> salvifique de Jésus.</span>",
+			"cross_refs": [
+				"1535",
+				"1499"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1522,
+			"text_html": "<span>Une <i class=\"typo_italic\">grâce ecclésiale</i>. Les malades qui reçoivent ce sacrement, « en s’associant librement à la Passion et à la mort du Christ », apportent « leur part pour le bien du peuple de Dieu » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. En célébrant ce sacrement, l’Église, dans la communion des saints, intercède pour le bien<sup class=\"srcRef cccRef\">§953</sup> du malade. Et le malade, à son tour, par la grâce de ce sacrement, contribue à la sanctification de l’Église et au bien de tous les hommes pour lesquels l’Église souffre et s’offre, par le Christ, à Dieu le Père.</span>",
+			"cross_refs": [
+				"953"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "LG 11",
+					"idx": "a",
+					"doc_raw": "LG 11"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1523,
+			"text_html": "<span>Une <i class=\"typo_italic\">préparation au dernier passage</i>. Si le sacrement de l’Onction des malades est accordé à tous ceux qui souffrent de maladies et d’infirmités graves, il l’est à plus forte raison à ceux qui sont sur le point de sortir de cette vie <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>, de sorte qu’on l’a aussi appelé <i class=\"typo_italic\">sacramentum exeuntium</i> <sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>. L’Onction des malades achève de nous conformer à la mort et à la résurrection du Christ, comme le Baptême avait commencé de le faire. Elle parachève les onctions<sup class=\"srcRef cccRef\">§1294</sup> saintes qui jalonnent toute la vie chrétienne ; celle du Baptême avait scellé en nous la vie nouvelle ; celle de la Confirmation nous avait fortifiés pour le combat de cette vie. Cette dernière onction munit la fin de notre vie terrestre<sup class=\"srcRef cccRef\">§1020</sup> comme d’un solide rempart en vue des dernières luttes avant l’entrée dans la Maison du Père <sup class=\"srcRef docRef\" data-idx=\"c\">c</sup>.</span>",
+			"cross_refs": [
+				"1020",
+				"1294"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "conciliar",
+					"raw": "In exitu vitæ constituti : concile de Trente : DS 1698",
+					"idx": "a"
+				},
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1698",
+					"idx": "b"
+				},
+				{
+					"type": "conciliar",
+					"raw": "concile de Trente : DS 1694",
+					"idx": "c"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1524,
+			"text_html": "<span>À ceux qui vont quitter cette vie, l’Église offre, en plus de l’Onction des malades, l’Eucharistie comme viatique. Reçue à ce moment<sup class=\"srcRef cccRef\">§1392</sup> de passage vers le Père, la Communion au Corps et au Sang du Christ a une signification et une importance particulières. Elle est semence de vie éternelle et puissance de résurrection, selon les paroles du Seigneur : « Celui qui mange ma chair et boit mon sang a la vie éternelle et moi, je le ressusciterai au dernier jour » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Sacrement du Christ mort et ressuscité, l’Eucharistie est ici sacrement du passage de la mort à la vie, de ce monde vers le Père <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>.</span>",
+			"cross_refs": [
+				"1392"
+			],
+			"bible_refs": [
+				{
+					"text": "Jn 6:54"
+				},
+				{
+					"text": "Jn 13:1"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jn 6:54",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 13:1",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1525,
+			"text_html": "<span>Ainsi, comme les sacrements du Baptême, de la Confirmation et de l’Eucharistie constituent une unité appelée « les<sup class=\"srcRef cccRef\">§1680</sup> sacrements de l’initiation chrétienne », on peut dire que la Pénitence, la Sainte Onction et l’Eucharistie, en tant que viatique, constituent, quand la vie chrétienne touche à son terme, « les sacrements qui préparent à la Patrie<sup class=\"srcRef cccRef\">§2299</sup> » ou les sacrements qui achèvent la pérégrination.</span>",
+			"cross_refs": [
+				"1680",
+				"2299"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1526,
+			"text_html": "<span><i class=\"typo_italic\">« Quelqu’un parmi vous est-il malade ? Qu’il appelle les presbytres de l’Église et qu’ils prient sur lui, après l’avoir oint d’huile au nom du Seigneur. La prière de la foi sauvera le patient, et le Seigneur le relèvera. S’il a commis des péchés, ils lui seront remis » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Jc 5:14-15"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jc 5:14-15",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 1527,
+			"text_html": "<span><i class=\"typo_italic\">Le sacrement de l’Onction des malades a pour but de conférer une grâce spéciale au chrétien qui éprouve les difficultés inhérentes à l’état de maladie grave ou à la vieillesse.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1528,
+			"text_html": "<span><i class=\"typo_italic\">Le temps opportun pour recevoir la Sainte Onction est certainement arrivé lorsque le fidèle commence à se trouver en danger de mort pour cause de maladie ou de vieillesse.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1529,
+			"text_html": "<span><i class=\"typo_italic\">Chaque fois qu’un chrétien tombe gravement malade, il peut recevoir la Sainte Onction, de même lorsqu’après l’avoir reçue la maladie s’aggrave.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1530,
+			"text_html": "<span><i class=\"typo_italic\">Seuls les prêtres (presbytres et évêques) peuvent donner le sacrement de l’Onction des malades ; pour le conférer ils emploient de l’huile bénite par l’Évêque, ou, au besoin, par le presbytre célébrant lui-même.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1531,
+			"text_html": "<span><i class=\"typo_italic\">L’essentiel de la célébration de ce sacrement consiste en l’onction sur le front et les mains du malade (dans le rite romain) ou sur d’autres parties du corps (en Orient), onction accompagnée de la prière liturgique du prêtre célébrant qui demande la grâce spéciale de ce sacrement.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 1532,
+			"text_html": "<span><i class=\"typo_italic\">La grâce spéciale du Sacrement de l’Onction des malades a comme effets :</i></span><br/><span><i class=\"typo_italic\">– l’union du malade à la Passion du Christ, pour son bien et pour celui de toute l’Église ; </i></span><br/><span><i class=\"typo_italic\">– le réconfort, la paix et le courage pour supporter chrétiennement les souffrances de la maladie ou de la vieillesse ; </i></span><br/><span><i class=\"typo_italic\">– le pardon des péchés si le malade n’a pas pu l’obtenir par le sacrement de la Pénitence ; </i></span><br/><span><i class=\"typo_italic\">– le rétablissement de la santé, si cela convient au salut spirituel ; </i></span><br/><span><i class=\"typo_italic\">– la préparation au passage à la vie éternelle.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		}
+	],
+	"enBrefParagraphMap": {
+		"1485": {
+			"corpus": "ccc",
+			"number": 1485,
+			"text_html": "<span><i class=\"typo_italic\">« Le soir de Pâques, le Seigneur Jésus se montra à ses Apôtres et leur dit : ‘Recevez l’Esprit Saint. Ceux à qui vous remettrez les péchés, ils leur seront remis. Ceux à qui vous les retiendrez, ils leur seront retenus’ » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Jn 20:22-23"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jn 20:22-23",
+					"idx": 1
+				}
+			]
+		},
+		"1486": {
+			"corpus": "ccc",
+			"number": 1486,
+			"text_html": "<span><i class=\"typo_italic\">Le pardon des péchés commis après le Baptême est accordé par un sacrement propre appelé sacrement de la conversion, de la confession, de la pénitence ou de la réconciliation.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1487": {
+			"corpus": "ccc",
+			"number": 1487,
+			"text_html": "<span><i class=\"typo_italic\">Qui pèche blesse l’honneur de Dieu et son amour, sa propre dignité d’homme appelé à être fils de Dieu et le bien-être spirituel de l’Église dont chaque chrétien doit être une pierre vivante.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1488": {
+			"corpus": "ccc",
+			"number": 1488,
+			"text_html": "<span><i class=\"typo_italic\">Aux yeux de la foi, aucun mal n’est plus grave que le péché et rien n’a de pires conséquences pour les pécheurs eux-mêmes, pour l’Église et pour le monde entier.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1489": {
+			"corpus": "ccc",
+			"number": 1489,
+			"text_html": "<span><i class=\"typo_italic\">Revenir à la communion avec Dieu après l’avoir perdue par le péché, est un mouvement né de la grâce du Dieu plein de miséricorde et soucieux du salut des hommes. Il faut demander ce don précieux pour soi-même comme pour autrui.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1490": {
+			"corpus": "ccc",
+			"number": 1490,
+			"text_html": "<span><i class=\"typo_italic\">Le mouvement de retour à Dieu, appelé conversion et repentir, implique une douleur et une aversion vis-à-vis des péchés commis, et le propos ferme de ne plus pécher à l’avenir. La conversion touche donc le passé et l’avenir ; elle se nourrit de l’espérance en la miséricorde divine.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1491": {
+			"corpus": "ccc",
+			"number": 1491,
+			"text_html": "<span><i class=\"typo_italic\">Le sacrement de la Pénitence est constitué par l’ensemble des trois actes posés par le pénitent, et par l’absolution du prêtre. Les actes du pénitent sont : le repentir, la confession ou manifestation des péchés au prêtre et le propos d’accomplir la réparation et les œuvres de réparation.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1492": {
+			"corpus": "ccc",
+			"number": 1492,
+			"text_html": "<span><i class=\"typo_italic\">Le repentir (appelé aussi contrition) doit être inspiré par des motifs qui relèvent de la foi. Si le repentir est conçu par amour de charité envers Dieu, on le dit « parfait » ; s’il est fondé sur d’autres motifs, on l’appelle « imparfait ».</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1493": {
+			"corpus": "ccc",
+			"number": 1493,
+			"text_html": "<span><i class=\"typo_italic\">Celui qui veut obtenir la réconciliation avec Dieu et avec l’Église, doit confesser au prêtre tous les péchés graves qu’il n’a pas encore confessé et dont il se souvient après avoir examiné soigneusement sa conscience. Sans être en soi nécessaire, la confession des fautes vénielles est néanmoins vivement recommandée par l’Église.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1494": {
+			"corpus": "ccc",
+			"number": 1494,
+			"text_html": "<span><i class=\"typo_italic\">Le confesseur propose au pénitent l’accomplissement de certains actes de « satisfaction » ou de « pénitence », en vue de réparer le dommage causé par le péché et de rétablir les habitudes propres au disciple du Christ.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1495": {
+			"corpus": "ccc",
+			"number": 1495,
+			"text_html": "<span><i class=\"typo_italic\">Seuls les prêtres qui ont reçu de l’autorité de l’Église la faculté d’absoudre peuvent pardonner les péchés au nom du Christ.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1496": {
+			"corpus": "ccc",
+			"number": 1496,
+			"text_html": "<span><i class=\"typo_italic\">Les effets spirituels du sacrement de Pénitence sont :</i></span><br/><span> <i class=\"typo_italic\">– la réconciliation avec Dieu par laquelle le pénitent recouvre la grâce</i>,</span><br/><span><i class=\"typo_italic\">– la réconciliation avec l’Église ; </i></span><br/><span><i class=\"typo_italic\">– la remise de la peine éternelle encourue par les péchés mortels ; </i></span><br/><span><i class=\"typo_italic\">– la remise, au moins en partie, des peines temporelles, suites du péché ; </i></span><br/><span><i class=\"typo_italic\">– la paix et la sérénité de la conscience, et la consolation spirituelle ; </i></span><br/><span><i class=\"typo_italic\">– l’accroissement des forces spirituelles pour le combat chrétien.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1497": {
+			"corpus": "ccc",
+			"number": 1497,
+			"text_html": "<span><i class=\"typo_italic\">La confession individuelle et intégrale des péchés graves suivie de l’absolution demeure le seul moyen ordinaire pour la réconciliation avec Dieu et avec l’Église.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1498": {
+			"corpus": "ccc",
+			"number": 1498,
+			"text_html": "<span><i class=\"typo_italic\">Par les indulgences les fidèles peuvent obtenir pour eux-mêmes et aussi pour les âmes du Purgatoire, la rémission des peines temporelles, suites des péchés.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1526": {
+			"corpus": "ccc",
+			"number": 1526,
+			"text_html": "<span><i class=\"typo_italic\">« Quelqu’un parmi vous est-il malade ? Qu’il appelle les presbytres de l’Église et qu’ils prient sur lui, après l’avoir oint d’huile au nom du Seigneur. La prière de la foi sauvera le patient, et le Seigneur le relèvera. S’il a commis des péchés, ils lui seront remis » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Jc 5:14-15"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jc 5:14-15",
+					"idx": 1
+				}
+			]
+		},
+		"1527": {
+			"corpus": "ccc",
+			"number": 1527,
+			"text_html": "<span><i class=\"typo_italic\">Le sacrement de l’Onction des malades a pour but de conférer une grâce spéciale au chrétien qui éprouve les difficultés inhérentes à l’état de maladie grave ou à la vieillesse.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1528": {
+			"corpus": "ccc",
+			"number": 1528,
+			"text_html": "<span><i class=\"typo_italic\">Le temps opportun pour recevoir la Sainte Onction est certainement arrivé lorsque le fidèle commence à se trouver en danger de mort pour cause de maladie ou de vieillesse.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1529": {
+			"corpus": "ccc",
+			"number": 1529,
+			"text_html": "<span><i class=\"typo_italic\">Chaque fois qu’un chrétien tombe gravement malade, il peut recevoir la Sainte Onction, de même lorsqu’après l’avoir reçue la maladie s’aggrave.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1530": {
+			"corpus": "ccc",
+			"number": 1530,
+			"text_html": "<span><i class=\"typo_italic\">Seuls les prêtres (presbytres et évêques) peuvent donner le sacrement de l’Onction des malades ; pour le conférer ils emploient de l’huile bénite par l’Évêque, ou, au besoin, par le presbytre célébrant lui-même.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1531": {
+			"corpus": "ccc",
+			"number": 1531,
+			"text_html": "<span><i class=\"typo_italic\">L’essentiel de la célébration de ce sacrement consiste en l’onction sur le front et les mains du malade (dans le rite romain) ou sur d’autres parties du corps (en Orient), onction accompagnée de la prière liturgique du prêtre célébrant qui demande la grâce spéciale de ce sacrement.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"1532": {
+			"corpus": "ccc",
+			"number": 1532,
+			"text_html": "<span><i class=\"typo_italic\">La grâce spéciale du Sacrement de l’Onction des malades a comme effets :</i></span><br/><span><i class=\"typo_italic\">– l’union du malade à la Passion du Christ, pour son bien et pour celui de toute l’Église ; </i></span><br/><span><i class=\"typo_italic\">– le réconfort, la paix et le courage pour supporter chrétiennement les souffrances de la maladie ou de la vieillesse ; </i></span><br/><span><i class=\"typo_italic\">– le pardon des péchés si le malade n’a pas pu l’obtenir par le sacrement de la Pénitence ; </i></span><br/><span><i class=\"typo_italic\">– le rétablissement de la santé, si cela convient au salut spirituel ; </i></span><br/><span><i class=\"typo_italic\">– la préparation au passage à la vie éternelle.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		}
+	}
+}

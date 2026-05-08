@@ -1,1 +1,42 @@
-{"part":{"slug":"la-profession-de-la-foi","title":"La profession de la foi","number":1,"range":{"from":26,"to":1065}},"section":{"slug":"la-profession-de-la-foi-chretienne-les-symboles-de-la-foi","title":"La profession de la foi chrétienne – les symboles de la foi","number":2,"range":{"from":185,"to":1065}},"chapter":{"slug":"je-crois-en-lesprit-saint","title":"Je crois en l’Esprit-Saint","number":3,"range":{"from":683,"to":1065}},"article":{"slug":"je-crois-a-la-resurrection-de-la-chair","title":"« Je crois à la résurrection de la chair »","number":11,"range":{"from":988,"to":1019}},"heading":{"id":"le-sens-de-la-mort-chretienne","title":"Le sens de la mort chrétienne"}}
+{
+	"part": {
+		"slug": "1-profession-de-la-foi",
+		"title": "La profession de la foi",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 1065
+		}
+	},
+	"section": {
+		"slug": "2-profession-de-la-foi",
+		"title": "La profession de la foi chrétienne – les symboles de la foi",
+		"number": 2,
+		"range": {
+			"from": 185,
+			"to": 1065
+		}
+	},
+	"chapter": {
+		"slug": "3-je-crois-en-lesprit-saint",
+		"title": "Je crois en l’Esprit-Saint",
+		"number": 3,
+		"range": {
+			"from": 683,
+			"to": 1065
+		}
+	},
+	"article": {
+		"slug": "11-je-crois-a-la-resurrection-de",
+		"title": "« Je crois à la résurrection de la chair »",
+		"number": 11,
+		"range": {
+			"from": 988,
+			"to": 1019
+		}
+	},
+	"heading": {
+		"id": "le-sens-de-la-mort-chretienne",
+		"title": "Le sens de la mort chrétienne"
+	}
+}

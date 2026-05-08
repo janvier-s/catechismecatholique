@@ -1,1 +1,22 @@
-[{"part":"la-profession-de-la-foi","from":1,"to":217},{"part":"la-celebration-du-mystere-chretien","from":218,"to":356},{"part":"la-vie-dans-le-christ","from":357,"to":533},{"part":"la-priere-chretienne","from":534,"to":598}]
+[
+	{
+		"part": "1-profession-de-la-foi",
+		"from": 1,
+		"to": 217
+	},
+	{
+		"part": "2-celebration-du-mystere",
+		"from": 218,
+		"to": 356
+	},
+	{
+		"part": "3-vie-dans-le-christ",
+		"from": 357,
+		"to": 533
+	},
+	{
+		"part": "4-priere-chretienne",
+		"from": 534,
+		"to": 598
+	}
+]

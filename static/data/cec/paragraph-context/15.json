@@ -1,1 +1,14 @@
-{"part":{"slug":"prologue","title":"Prologue","range":{"from":1,"to":25}},"heading":{"id":"deuxieme-partie-les-sacrements-de-la-foi","title":"Deuxième partie : Les sacrements de la foi"}}
+{
+	"part": {
+		"slug": "prologue",
+		"title": "Prologue",
+		"range": {
+			"from": 1,
+			"to": 25
+		}
+	},
+	"heading": {
+		"id": "deuxieme-partie-les-sacrements-de-la-foi",
+		"title": "Deuxième partie : Les sacrements de la foi"
+	}
+}

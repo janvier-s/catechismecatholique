@@ -1,1 +1,42 @@
-{"part":{"slug":"la-vie-dans-le-christ","title":"La vie dans le Christ","number":3,"range":{"from":1691,"to":2557}},"section":{"slug":"la-vocation-de-lhomme-la-vie-dans-lesprit","title":"La vocation de l’homme : La vie dans l’esprit","number":1,"range":{"from":1699,"to":2051}},"chapter":{"slug":"la-dignite-de-la-personne-humaine","title":"La dignité de la personne humaine","number":1,"range":{"from":1700,"to":1876}},"article":{"slug":"la-moralite-des-passions","title":"La moralité des passions","number":5,"range":{"from":1762,"to":1775}},"heading":{"id":"ii-passions-et-vie-morale","title":"II. Passions et vie morale"}}
+{
+	"part": {
+		"slug": "3-vie-dans-le-christ",
+		"title": "La vie dans le Christ",
+		"number": 3,
+		"range": {
+			"from": 1691,
+			"to": 2557
+		}
+	},
+	"section": {
+		"slug": "1-vocation-de-lhomme-la-vie-dans",
+		"title": "La vocation de l’homme : La vie dans l’esprit",
+		"number": 1,
+		"range": {
+			"from": 1699,
+			"to": 2051
+		}
+	},
+	"chapter": {
+		"slug": "1-dignite-de-la-personne-humaine",
+		"title": "La dignité de la personne humaine",
+		"number": 1,
+		"range": {
+			"from": 1700,
+			"to": 1876
+		}
+	},
+	"article": {
+		"slug": "5-moralite-des-passions",
+		"title": "La moralité des passions",
+		"number": 5,
+		"range": {
+			"from": 1762,
+			"to": 1775
+		}
+	},
+	"heading": {
+		"id": "ii-passions-et-vie-morale",
+		"title": "II. Passions et vie morale"
+	}
+}

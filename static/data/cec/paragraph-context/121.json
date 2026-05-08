@@ -1,1 +1,42 @@
-{"part":{"slug":"la-profession-de-la-foi","title":"La profession de la foi","number":1,"range":{"from":26,"to":1065}},"section":{"slug":"je-crois-nous-croyons","title":"« Je crois » – « nous croyons »","number":1,"range":{"from":26,"to":184}},"chapter":{"slug":"dieu-a-la-rencontre-de-lhomme","title":"Dieu à la rencontre de l’homme","number":2,"range":{"from":50,"to":141}},"article":{"slug":"la-sainte-ecriture","title":"La sainte écriture","number":3,"range":{"from":101,"to":141}},"heading":{"id":"lancien-testament","title":"L’Ancien Testament"}}
+{
+	"part": {
+		"slug": "1-profession-de-la-foi",
+		"title": "La profession de la foi",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 1065
+		}
+	},
+	"section": {
+		"slug": "1-je-crois-nous-croyons",
+		"title": "« Je crois » – « nous croyons »",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 184
+		}
+	},
+	"chapter": {
+		"slug": "2-dieu-a-la-rencontre-de-lhomme",
+		"title": "Dieu à la rencontre de l’homme",
+		"number": 2,
+		"range": {
+			"from": 50,
+			"to": 141
+		}
+	},
+	"article": {
+		"slug": "3-sainte-ecriture",
+		"title": "La sainte écriture",
+		"number": 3,
+		"range": {
+			"from": 101,
+			"to": 141
+		}
+	},
+	"heading": {
+		"id": "lancien-testament",
+		"title": "L’Ancien Testament"
+	}
+}

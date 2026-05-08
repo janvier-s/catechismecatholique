@@ -1,1 +1,42 @@
-{"part":{"slug":"la-celebration-du-mystere-chretien","title":"La célébration du mystère chrétien","number":2,"range":{"from":1066,"to":1690}},"section":{"slug":"les-sept-sacrements-de-leglise","title":"Les sept sacrements de l’Église","number":2,"range":{"from":1210,"to":1690}},"chapter":{"slug":"les-sacrements-de-linitiation-chretienne","title":"Les sacrements de l’initiation chrétienne","number":1,"range":{"from":1212,"to":1419}},"article":{"slug":"le-sacrement-de-la-confirmation","title":"Le sacrement de la confirmation","number":2,"range":{"from":1285,"to":1321}},"heading":{"id":"i-la-confirmation-dans-leconomie-du-salut","title":"I. La confirmation dans l’économie du salut"}}
+{
+	"part": {
+		"slug": "2-celebration-du-mystere",
+		"title": "La célébration du mystère chrétien",
+		"number": 2,
+		"range": {
+			"from": 1066,
+			"to": 1690
+		}
+	},
+	"section": {
+		"slug": "2-sept-sacrements-de-leglise",
+		"title": "Les sept sacrements de l’Église",
+		"number": 2,
+		"range": {
+			"from": 1210,
+			"to": 1690
+		}
+	},
+	"chapter": {
+		"slug": "1-sacrements-de-linitiation",
+		"title": "Les sacrements de l’initiation chrétienne",
+		"number": 1,
+		"range": {
+			"from": 1212,
+			"to": 1419
+		}
+	},
+	"article": {
+		"slug": "2-sacrement-de-la-confirmation",
+		"title": "Le sacrement de la confirmation",
+		"number": 2,
+		"range": {
+			"from": 1285,
+			"to": 1321
+		}
+	},
+	"heading": {
+		"id": "i-la-confirmation-dans-leconomie-du-salut",
+		"title": "I. La confirmation dans l’économie du salut"
+	}
+}

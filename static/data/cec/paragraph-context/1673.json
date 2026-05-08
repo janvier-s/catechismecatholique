@@ -1,1 +1,42 @@
-{"part":{"slug":"la-celebration-du-mystere-chretien","title":"La célébration du mystère chrétien","number":2,"range":{"from":1066,"to":1690}},"section":{"slug":"les-sept-sacrements-de-leglise","title":"Les sept sacrements de l’Église","number":2,"range":{"from":1210,"to":1690}},"chapter":{"slug":"les-autres-celebrations-liturgiques","title":"Les autres célébrations liturgiques","number":4,"range":{"from":1667,"to":1690}},"article":{"slug":"les-sacramentaux","title":"Les sacramentaux","number":1,"range":{"from":1667,"to":1679}},"heading":{"id":"les-formes-variees-des-sacramentaux","title":"Les formes variées des sacramentaux"}}
+{
+	"part": {
+		"slug": "2-celebration-du-mystere",
+		"title": "La célébration du mystère chrétien",
+		"number": 2,
+		"range": {
+			"from": 1066,
+			"to": 1690
+		}
+	},
+	"section": {
+		"slug": "2-sept-sacrements-de-leglise",
+		"title": "Les sept sacrements de l’Église",
+		"number": 2,
+		"range": {
+			"from": 1210,
+			"to": 1690
+		}
+	},
+	"chapter": {
+		"slug": "4-autres-celebrations",
+		"title": "Les autres célébrations liturgiques",
+		"number": 4,
+		"range": {
+			"from": 1667,
+			"to": 1690
+		}
+	},
+	"article": {
+		"slug": "1-sacramentaux",
+		"title": "Les sacramentaux",
+		"number": 1,
+		"range": {
+			"from": 1667,
+			"to": 1679
+		}
+	},
+	"heading": {
+		"id": "les-formes-variees-des-sacramentaux",
+		"title": "Les formes variées des sacramentaux"
+	}
+}

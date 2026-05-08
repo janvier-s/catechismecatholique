@@ -1,1 +1,20 @@
-{"part":{"slug":"la-profession-de-la-foi","title":"La profession de la foi","number":1,"range":{"from":26,"to":1065}},"section":{"slug":"la-profession-de-la-foi-chretienne-les-symboles-de-la-foi","title":"La profession de la foi chrétienne – les symboles de la foi","number":2,"range":{"from":185,"to":1065}}}
+{
+	"part": {
+		"slug": "1-profession-de-la-foi",
+		"title": "La profession de la foi",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 1065
+		}
+	},
+	"section": {
+		"slug": "2-profession-de-la-foi",
+		"title": "La profession de la foi chrétienne – les symboles de la foi",
+		"number": 2,
+		"range": {
+			"from": 185,
+			"to": 1065
+		}
+	}
+}

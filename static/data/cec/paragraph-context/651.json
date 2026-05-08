@@ -1,1 +1,42 @@
-{"part":{"slug":"la-profession-de-la-foi","title":"La profession de la foi","number":1,"range":{"from":26,"to":1065}},"section":{"slug":"la-profession-de-la-foi-chretienne-les-symboles-de-la-foi","title":"La profession de la foi chrétienne – les symboles de la foi","number":2,"range":{"from":185,"to":1065}},"chapter":{"slug":"je-crois-en-jesus-christ-le-fils-unique-de-dieu","title":"Je crois en Jésus-Christ, le Fils unique de Dieu","number":2,"range":{"from":422,"to":682}},"article":{"slug":"jesus-christ-est-descendu-aux-enfers-est-ressuscite-des-morts-le-troisieme-jour","title":"« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »","number":5,"range":{"from":631,"to":658}},"heading":{"id":"iii-sens-et-portee-salvifique-de-la-resurrection","title":"III. Sens et portée salvifique de la Résurrection"}}
+{
+	"part": {
+		"slug": "1-profession-de-la-foi",
+		"title": "La profession de la foi",
+		"number": 1,
+		"range": {
+			"from": 26,
+			"to": 1065
+		}
+	},
+	"section": {
+		"slug": "2-profession-de-la-foi",
+		"title": "La profession de la foi chrétienne – les symboles de la foi",
+		"number": 2,
+		"range": {
+			"from": 185,
+			"to": 1065
+		}
+	},
+	"chapter": {
+		"slug": "2-je-crois-en-jesus-christ-le",
+		"title": "Je crois en Jésus-Christ, le Fils unique de Dieu",
+		"number": 2,
+		"range": {
+			"from": 422,
+			"to": 682
+		}
+	},
+	"article": {
+		"slug": "5-jesus-christ-est-descendu-aux",
+		"title": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+		"number": 5,
+		"range": {
+			"from": 631,
+			"to": 658
+		}
+	},
+	"heading": {
+		"id": "iii-sens-et-portee-salvifique-de-la-resurrection",
+		"title": "III. Sens et portée salvifique de la Résurrection"
+	}
+}

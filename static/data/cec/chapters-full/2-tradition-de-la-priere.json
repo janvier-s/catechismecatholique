@@ -1,0 +1,1299 @@
+{
+	"chapter": {
+		"corpus": "ccc",
+		"slug": "2-tradition-de-la-priere",
+		"title": "La tradition de la prière",
+		"number": 2,
+		"part_slug": "4-priere-chretienne",
+		"part_title": "La prière chrétienne",
+		"part_number": 4,
+		"section_slug": "1-priere-dans-la-vie-chretienne",
+		"section_title": "La prière dans la vie chrétienne",
+		"section_number": 1,
+		"paragraphs": [
+			2650,
+			2651,
+			2652,
+			2653,
+			2654,
+			2655,
+			2656,
+			2657,
+			2658,
+			2659,
+			2660,
+			2661,
+			2662,
+			2663,
+			2664,
+			2665,
+			2666,
+			2667,
+			2668,
+			2669,
+			2670,
+			2671,
+			2672,
+			2673,
+			2674,
+			2675,
+			2676,
+			2677,
+			2678,
+			2679,
+			2680,
+			2681,
+			2682,
+			2683,
+			2684,
+			2685,
+			2686,
+			2687,
+			2688,
+			2689,
+			2690,
+			2691,
+			2692,
+			2693,
+			2694,
+			2695,
+			2696
+		],
+		"en_brefs": [
+			{
+				"paragraphs": [
+					2661,
+					2662
+				]
+			},
+			{
+				"paragraphs": [
+					2680,
+					2681,
+					2682
+				]
+			},
+			{
+				"paragraphs": [
+					2692,
+					2693,
+					2694,
+					2695,
+					2696
+				]
+			}
+		],
+		"headings": [],
+		"articles": [
+			{
+				"slug": "1-sources-de-la-priere",
+				"title": "Aux sources de la prière",
+				"number": 1,
+				"paragraphs": [
+					2652,
+					2653,
+					2654,
+					2655,
+					2656,
+					2657,
+					2658,
+					2659,
+					2660,
+					2661,
+					2662
+				],
+				"headings": [
+					{
+						"id": "la-parole-de-dieu",
+						"level": 3,
+						"title": "La Parole de Dieu",
+						"paragraph_start": 2653
+					},
+					{
+						"id": "la-liturgie-de-leglise",
+						"level": 3,
+						"title": "La Liturgie de l’Église",
+						"paragraph_start": 2655
+					},
+					{
+						"id": "les-vertus-theologales",
+						"level": 3,
+						"title": "Les vertus théologales",
+						"paragraph_start": 2656
+					},
+					{
+						"id": "aujourdhui",
+						"level": 3,
+						"title": "« Aujourd’hui »",
+						"paragraph_start": 2659
+					}
+				]
+			},
+			{
+				"slug": "2-chemin-de-la-priere",
+				"title": "Le chemin de la prière",
+				"number": 2,
+				"paragraphs": [
+					2663,
+					2664,
+					2665,
+					2666,
+					2667,
+					2668,
+					2669,
+					2670,
+					2671,
+					2672,
+					2673,
+					2674,
+					2675,
+					2676,
+					2677,
+					2678,
+					2679,
+					2680,
+					2681,
+					2682
+				],
+				"headings": [
+					{
+						"id": "la-priere-au-pere",
+						"level": 3,
+						"title": "La prière au Père",
+						"paragraph_start": 2664
+					},
+					{
+						"id": "la-priere-a-jesus",
+						"level": 3,
+						"title": "La prière à Jésus",
+						"paragraph_start": 2665
+					},
+					{
+						"id": "viens-esprit-saint",
+						"level": 3,
+						"title": "« Viens, Esprit Saint »",
+						"paragraph_start": 2670
+					},
+					{
+						"id": "en-communion-avec-la-sainte-mere-de-dieu",
+						"level": 3,
+						"title": "En communion avec la Sainte Mère de Dieu",
+						"paragraph_start": 2673
+					}
+				]
+			},
+			{
+				"slug": "3-guides-pour-la-priere",
+				"title": "Des guides pour la prière",
+				"number": 3,
+				"paragraphs": [
+					2683,
+					2684,
+					2685,
+					2686,
+					2687,
+					2688,
+					2689,
+					2690,
+					2691,
+					2692,
+					2693,
+					2694,
+					2695,
+					2696
+				],
+				"headings": [
+					{
+						"id": "une-nuee-de-temoins",
+						"level": 3,
+						"title": "Une nuée de témoins",
+						"paragraph_start": 2683
+					},
+					{
+						"id": "serviteurs-de-la-priere",
+						"level": 3,
+						"title": "Serviteurs de la prière",
+						"paragraph_start": 2685
+					},
+					{
+						"id": "des-lieux-favorables-a-la-priere",
+						"level": 3,
+						"title": "Des lieux favorables à la prière",
+						"paragraph_start": 2691
+					}
+				]
+			}
+		],
+		"prev": {
+			"kind": "chapter",
+			"href": "/cec/4-priere-chretienne/1-priere-dans-la-vie-chretienne/1-revelation-de-la-priere-lappel",
+			"title": "La révélation de la prière – l’appel universel à la prière"
+		},
+		"next": {
+			"kind": "chapter",
+			"href": "/cec/4-priere-chretienne/1-priere-dans-la-vie-chretienne/3-vie-de-priere",
+			"title": "La vie de prière"
+		}
+	},
+	"paragraphs": [
+		{
+			"corpus": "ccc",
+			"number": 2650,
+			"text_html": "<span>La prière ne se réduit pas au jaillissement spontané d’une impulsion intérieure : pour prier, il faut le vouloir. Il ne suffit pas non plus de savoir ce que les Écritures révèlent sur la prière : il faut aussi apprendre à prier. Or, c’est par une transmission vivante (la sainte Tradition) que l’Esprit<sup class=\"srcRef cccRef\">§75</sup> Saint, dans « l’Église croyante et priante » (DV 8), apprend à prier aux enfants de Dieu.</span>",
+			"cross_refs": [
+				"75"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "DV 8",
+					"idx": "a",
+					"doc_raw": "DV 8"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2651,
+			"text_html": "<span>La tradition de la prière chrétienne est l’une des formes de croissance de la Tradition de la foi, en particulier par la contemplation et l’étude<sup class=\"srcRef cccRef\">§94</sup> des croyants qui gardent en leur cœur les événements et les paroles de l’Économie du salut, et par la pénétration profonde des réalités spirituelles dont ils font l’expérience <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"94"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir DV 8",
+					"idx": "a",
+					"doc_raw": "DV 8"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2652,
+			"text_html": "<span>L’Esprit Saint est « l’eau vive » qui, dans le cœur priant, « jaillit en Vie éternelle » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. C’est lui qui nous apprend<sup class=\"srcRef cccRef\">§694</sup> à l’accueillir à la Source même : le Christ. Or, il y a dans la vie chrétienne des points de source où le Christ nous attend pour nous abreuver de l’Esprit Saint :</span>",
+			"cross_refs": [
+				"694"
+			],
+			"bible_refs": [
+				{
+					"text": "Jn 4:14"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Jn 4:14",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2653,
+			"text_html": "<span>L’Église « exhorte avec force et de façon spéciale tous les chrétiens [...] à acquérir par une lecture fréquente des<sup class=\"srcRef cccRef\">§133</sup> divines Écritures ‘la science éminente de Jésus-Christ’... Mais la prière doit accompagner<sup class=\"srcRef cccRef\">§1100</sup> la lecture de la Sainte Écriture pour que se noue un dialogue entre Dieu et l’homme, car ‘c’est à lui que nous nous adressons quand nous prions, c’est lui que nous écoutons quand nous lisons les oracles divins’ <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup> » <sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>.</span>",
+			"cross_refs": [
+				"133",
+				"1100"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "patristic",
+					"raw": "saint Ambroise, de officiis ministrorum 1:88 : PL 16:50A",
+					"idx": "a"
+				},
+				{
+					"type": "magisterial",
+					"raw": "DV 25",
+					"idx": "b",
+					"doc_raw": "DV 25"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2654,
+			"text_html": "<span>Les Pères spirituels, paraphrasant Mt 7, 7, résument ainsi les dispositions du cœur nourri par la Parole de Dieu dans la prière : « Cherchez en lisant, et vous trouverez en méditant ; frappez en priant, et il vous sera ouvert par la contemplation » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "patristic",
+					"raw": "voir Guigue le Chartreux, scala claustralium : PL 184:476C",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2655,
+			"text_html": "<span>La mission du Christ et de l’Esprit Saint qui, dans la Liturgie sacramentelle de l’Église, annonce, actualise et communique le Mystère du salut<sup class=\"srcRef cccRef\">§1073</sup>, se poursuit dans le cœur qui prie. Les Pères<sup class=\"srcRef cccRef\">§368</sup> spirituels comparent parfois le cœur à un autel. La prière intériorise et assimile la Liturgie pendant et après sa célébration. Même lorsqu’elle est vécue « dans le secret » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, la prière est toujours prière <i class=\"typo_italic\">de l’Église</i>, elle est communion avec la Trinité Sainte<sup class=\"srcRef cccRef\">§1812-1829</sup> <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"1073",
+				"368",
+				"1812-1829"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 6:6"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Mt 6:6",
+					"idx": 1
+				},
+				{
+					"type": "magisterial",
+					"raw": "voir IGLH 9",
+					"idx": "a",
+					"doc_raw": "IGLH 9"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2656,
+			"text_html": "<span>On entre en prière comme on entre en Liturgie : par la porte étroite de la <i class=\"typo_italic\">foi.</i> À travers les signes de sa Présence, c’est la Face du Seigneur que nous cherchons et désirons, c’est sa Parole que nous voulons écouter et garder.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2657,
+			"text_html": "<span>L’Esprit Saint qui nous apprend à célébrer la Liturgie dans l’attente du retour du Christ, nous éduque à prier dans l’<i class=\"typo_italic\">espérance</i>. Inversement, la prière de l’Église et la prière personnelle nourrissent en nous l’espérance. Les psaumes tout particulièrement, avec leur langage concret et varié, nous apprennent à fixer notre espérance en Dieu : « J’espérais le Seigneur d’un grand espoir, il s’est penché vers moi, il écouta mon cri » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. « Que le Dieu de l’espérance vous donne en plénitude dans votre acte de foi la joie et la paix afin que l’espérance surabonde en nous par la puissance de l’Esprit Saint » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>.</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Ps 40:2"
+				},
+				{
+					"text": "Rm 15:13"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Ps 40:2",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Rm 15:13",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2658,
+			"text_html": "<span>« L’espérance ne peut décevoir, puisque l’<i class=\"typo_italic\">amour</i> de Dieu est répandu dans nos cœurs par le Saint-Esprit qui nous fut donné » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. La prière, formée par la vie liturgique, puise tout dans l’Amour dont nous sommes aimés dans le Christ et qui nous donne<sup class=\"srcRef cccRef\">§826</sup> d’y répondre en aimant comme Lui nous a aimés. L’Amour est <i class=\"typo_italic\">la</i> source de la prière ; qui y puise, atteint le sommet de la prière :</span>",
+			"cross_refs": [
+				"826"
+			],
+			"bible_refs": [
+				{
+					"text": "Rm 5:5"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Je vous aime, ô mon Dieu, et mon seul désir est de vous aimer jusqu’au dernier soupir de ma vie. Je vous aime, ô mon Dieu infiniment aimable, et j’aime mieux mourir en vous aimant, que de vivre sans vous aimer. Je vous aime, Seigneur, et la seule grâce que je vous demande, c’est de vous aimer éternellement... Mon Dieu, si ma langue ne peut dire à tous moments que je vous aime, je veux que mon cœur vous le répète autant de fois que je respire <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Rm 5:5",
+					"idx": 1
+				},
+				{
+					"type": "patristic",
+					"raw": "saint Jean Marie Baptiste Vianney, prière",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2659,
+			"text_html": "<span>Nous apprenons à prier à certains moments en écoutant la Parole du Seigneur et en participant à son Mystère pascal, mais<sup class=\"srcRef cccRef\">§1165</sup> c’est en tout temps, dans les événements de <i class=\"typo_italic\">chaque jour</i>, que son Esprit nous est offert pour faire jaillir la prière. L’enseignement de Jésus sur la prière à notre Père est dans la même ligne que celui sur la Providence<sup class=\"srcRef cccRef\">§305</sup> <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup> : le temps est entre les mains du Père ; c’est dans le présent que nous le rencontrons, ni hier ni demain, mais aujourd’hui : « Aujourd’hui, puissiez vous écouter sa voix ; n’endurcissez pas vos cœurs » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>.</span>",
+			"cross_refs": [
+				"1165",
+				"305"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 6:11"
+				},
+				{
+					"text": "Mt 6:34"
+				},
+				{
+					"text": "Ps 95:7-8"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mt 6:11",
+					"idx": 1
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "6:34",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "Ps 95:7-8",
+					"idx": 3
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2660,
+			"text_html": "<span>Prier dans les événements de chaque jour et de chaque instant est l’un des secrets du Royaume révélés aux « tout-petits », aux serviteurs du Christ, aux pauvres des béatitudes. Il est juste et bon<sup class=\"srcRef cccRef\">§2546</sup><sup class=\"srcRef cccRef\">§2632</sup> de prier pour que la venue du Royaume de justice et de paix influence la marche de l’histoire, mais il est aussi important de pétrir par la prière la pâte des humbles situations quotidiennes. Toutes les formes de prière peuvent être ce levain auquel le Seigneur compare le Royaume <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>",
+			"cross_refs": [
+				"2546",
+				"2632"
+			],
+			"bible_refs": [
+				{
+					"text": "Lc 13:20-21"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Lc 13:20-21",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2661,
+			"text_html": "<span><i class=\"typo_italic\">C’est par une transmission vivante, la Tradition, que, dans l’Église, l’Esprit Saint apprend à prier aux enfants de Dieu.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2662,
+			"text_html": "<span><i class=\"typo_italic\">La Parole de Dieu, la liturgie de l’Église, les vertus de foi, d’espérance et de charité sont des sources de la prière.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2663,
+			"text_html": "<span>Dans la tradition vivante de la prière, chaque Église propose à ses fidèles, selon le contexte historique, sociale et culturel, le langage<sup class=\"srcRef cccRef\">§1201</sup> de leur prière : paroles, mélodies, gestes, iconographie. Il appartient au magistère <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup> de discerner la fidélité de ces chemins de prière à la tradition de la foi apostolique, et il revient aux pasteurs et aux catéchètes d’en expliquer le sens, toujours relatif à Jésus-Christ.</span>",
+			"cross_refs": [
+				"1201"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir DV 10",
+					"idx": "a",
+					"doc_raw": "DV 10"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2664,
+			"text_html": "<span>Il n’est pas d’autre chemin de la prière chrétienne que le Christ. Que notre prière soit communautaire ou personnelle, vocale ou intérieure, elle n’a accès au Père que si nous prions « dans le Nom<sup class=\"srcRef cccRef\">§2780</sup> » de Jésus. La sainte Humanité de Jésus est donc le chemin par lequel l’Esprit Saint nous apprend à prier Dieu notre Père.</span>",
+			"cross_refs": [
+				"2780"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2665,
+			"text_html": "<span>La prière de l’Église, nourrie par la Parole de Dieu et la célébration de la Liturgie, nous apprend à prier le Seigneur Jésus<sup class=\"srcRef cccRef\">§451</sup>. Même si elle est surtout adressée au Père, elle comporte, dans toutes les traditions liturgiques, des formes de prière adressées au Christ. Certains psaumes, selon leur actualisation dans la Prière de l’Église, et le Nouveau Testament mettent sur nos lèvres et gravent dans nos cœurs les invocations de cette prière au Christ : Fils de Dieu, Verbe de Dieu, Seigneur, Sauveur, Agneau de Dieu, Roi, Fils bien-aimé, Fils de la Vierge, bon Berger, notre Vie, notre Lumière, notre Espérance, notre Résurrection, Ami des hommes...</span>",
+			"cross_refs": [
+				"451"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2666,
+			"text_html": "<span>Mais le Nom qui contient tout est celui que le Fils de Dieu reçoit dans son Incarnation : JÉSUS. Le Nom divin est indicible<sup class=\"srcRef cccRef\">§432</sup> par les lèvres humaines <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>, mais en assumant notre humanité le Verbe de Dieu nous le livre et nous pouvons l’invoquer : « Jésus », « YHWH sauve » <sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup>. Le Nom de Jésus contient tout : Dieu et l’homme et toute l’Économie de la création et du salut. Prier<sup class=\"srcRef cccRef\">§435</sup> « Jésus », c’est l’invoquer, l’appeler en nous. Son Nom est le seul qui contient la Présence qu’il signifie. Jésus est Ressuscité, et quiconque invoque son Nom accueille le Fils de Dieu qui l’a aimé et s’est livré pour lui <sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup><sup class=\"srcRef bibleRef\" data-idx=\"5\">5</sup><sup class=\"srcRef bibleRef\" data-idx=\"6\">6</sup><sup class=\"srcRef bibleRef\" data-idx=\"7\">7</sup>.</span>",
+			"cross_refs": [
+				"432",
+				"435"
+			],
+			"bible_refs": [
+				{
+					"text": "Ex 3:14"
+				},
+				{
+					"text": "Ex 33:19-23"
+				},
+				{
+					"text": "Mt 1:21"
+				},
+				{
+					"text": "Rm 10:13"
+				},
+				{
+					"text": "Ac 2:21"
+				},
+				{
+					"text": "Ac 3:15-16"
+				},
+				{
+					"text": "Ga 2:20"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Ex 3:14",
+					"idx": 1
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "33:19-23",
+					"idx": 2
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mt 1:21",
+					"idx": 3
+				},
+				{
+					"type": "bible",
+					"raw": "voir Rm 10:13",
+					"idx": 4
+				},
+				{
+					"type": "bible",
+					"raw": "Ac 2:21",
+					"idx": 5
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "3:15-16",
+					"idx": 6
+				},
+				{
+					"type": "bible",
+					"raw": "Ga 2:20",
+					"idx": 7
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2667,
+			"text_html": "<span>Cette invocation de foi toute simple a été développée dans la tradition de la prière sous maintes formes en Orient et en Occident. La formulation la plus habituelle, transmise par les spirituels du Sinaï, de Syrie et de l’Athos est l’invocation<sup class=\"srcRef cccRef\">§2616</sup> : « Jésus, Christ, Fils de Dieu, Seigneur, aie pitié de nous, pécheurs ! » Elle conjugue l’hymne christologique de Ph 2, 6-11 avec l’appel du publicain et des mendiants de la lumière <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup><sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Par elle, le cœur est accordé à la misère des hommes et à la Miséricorde de leur Sauveur.</span>",
+			"cross_refs": [
+				"2616"
+			],
+			"bible_refs": [
+				{
+					"text": "Mc 10:46-52"
+				},
+				{
+					"text": "Lc 18:13"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mc 10:46-52",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 18:13",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2668,
+			"text_html": "<span>L’invocation du saint Nom de Jésus est le chemin le plus simple de la prière continuelle. Souvent répétée par un cœur humblement<sup class=\"srcRef cccRef\">§435</sup> attentif, elle ne se disperse pas dans un « flot de paroles » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, mais « garde la Parole et produit du fruit par la constance » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Elle est possible « en tout temps », car elle n’est pas une occupation à côté d’une autre mais l’unique occupation, celle d’aimer Dieu, qui anime et transfigure toute action dans le Christ Jésus.</span>",
+			"cross_refs": [
+				"435"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 6:7"
+				},
+				{
+					"text": "Lc 8:15"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Mt 6:7",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Lc 8:15",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2669,
+			"text_html": "<span>La prière de l’Église vénère et honore le <i class=\"typo_italic\">Cœur de Jésus</i>, comme elle invoque son Très saint Nom. Elle adore le Verbe incarné<sup class=\"srcRef cccRef\">§478</sup> et son Cœur qui par amour des hommes, s’est laissé transpercer par nos péchés. La prière chrétienne<sup class=\"srcRef cccRef\">§1674</sup> aime suivre le <i class=\"typo_italic\">chemin de la croix</i> à la suite du Sauveur. Les stations du Prétoire au Golgotha et au Tombeau scandent la marche de Jésus qui a racheté le monde par sa sainte Croix.</span>",
+			"cross_refs": [
+				"478",
+				"1674"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2670,
+			"text_html": "<span>« Nul ne peut dire : ‘Jésus est Seigneur’, que sous l’action de l’Esprit Saint » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Chaque fois que nous commençons à prier Jésus, c’est l’Esprit Saint qui, par sa grâce prévenante<sup class=\"srcRef cccRef\">§683</sup>, nous attire sur le Chemin de la prière. Puisqu’il nous apprend à prier en nous rappelant<sup class=\"srcRef cccRef\">§2001</sup> le Christ, comment ne pas le prier lui-même ? C’est pourquoi l’Église nous invite à implorer chaque jour le Saint Esprit, spécialement au commencement et au terme de toute<sup class=\"srcRef cccRef\">§1310</sup> action importante.</span>",
+			"cross_refs": [
+				"683",
+				"2001",
+				"1310"
+			],
+			"bible_refs": [
+				{
+					"text": "1 Co 12:3"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>Si l’Esprit ne doit pas être adoré, comment me divinise-t-il par le Baptême ? Et s’il doit être adoré, ne doit-il pas être l’objet d’un culte particulier ? <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "1 Co 12:3",
+					"idx": 1
+				},
+				{
+					"type": "patristic",
+					"raw": "saint Grégoire de Naz., orationes theologicæ 5:28 : PG 36:165C",
+					"idx": "a"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2671,
+			"text_html": "<span>La forme traditionnelle de la demande de l’Esprit est d’invoquer le Père par le Christ notre Seigneur pour qu’il nous donne l’Esprit Consolateur <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Jésus insiste sur cette demande en son Nom au moment même où il promet le don de l’Esprit de Vérité <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>. Mais la prière la plus simple et la plus directe est aussi traditionnelle : « Viens, Esprit Saint », et chaque tradition liturgique l’a développée dans des antiennes et des hymnes :</span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "Lc 11:13"
+				},
+				{
+					"text": "Jn 14:17"
+				},
+				{
+					"text": "Jn 15:26"
+				},
+				{
+					"text": "Jn 16:13"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>« Viens, Esprit Saint, emplis les cœurs de tes fidèles, et allume en eux le feu de ton amour » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span><br/><span>« Roi céleste, Esprit Consolateur, Esprit de Vérité, partout présent et emplissant tout, trésor de tout bien et source de la Vie, viens, habite en nous, purifie-nous et sauve-nous, ô Toi qui es Bon ! » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup><sup class=\"srcRef bibleRef\" data-idx=\"3\">3</sup><sup class=\"srcRef bibleRef\" data-idx=\"4\">4</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Lc 11:13",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Jn 14:17",
+					"idx": 2
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "15:26",
+					"idx": 3
+				},
+				{
+					"type": "bible_continuation",
+					"raw": "16:13",
+					"idx": 4
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2672,
+			"text_html": "<span>L’Esprit Saint, dont l’Onction imprègne tout notre être, est le Maître intérieur de la prière chrétienne. Il est l’artisan de la tradition<sup class=\"srcRef cccRef\">§695</sup> vivante de la prière. Certes, il y a autant de cheminements dans la prière que de priants, mais c’est le même Esprit qui agit en tous et avec tous. C’est dans la communion de l’Esprit Saint que la prière chrétienne est prière dans l’Église.</span>",
+			"cross_refs": [
+				"695"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2673,
+			"text_html": "<span>Dans la prière, l’Esprit Saint nous unit à la Personne du Fils Unique, en son Humanité glorifiée. C’est par elle<sup class=\"srcRef cccRef\">§689</sup> et en elle que notre prière filiale communie dans l’Église avec la Mère de Jésus <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>",
+			"cross_refs": [
+				"689"
+			],
+			"bible_refs": [
+				{
+					"text": "Ac 1:14"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Ac 1:14",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2674,
+			"text_html": "<span>Depuis le consentement apporté dans la foi à l’Annonciation et maintenu sans hésitation sous la croix, la maternité de Marie<sup class=\"srcRef cccRef\">§494</sup> s’étend désormais aux frères et aux sœurs de son Fils « qui sont encore des pèlerins et qui sont en butte aux dangers et aux misères » <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Jésus, l’unique Médiateur, est le Chemin de notre prière ; Marie, sa Mère et notre Mère, lui est toute transparente : elle « montre le Chemin » (<i class=\"typo_italic\">Hodoghitria</i>), elle en est « le Signe », selon l’iconographie traditionnelle en Orient et en Occident.</span>",
+			"cross_refs": [
+				"494"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "LG 62",
+					"idx": "a",
+					"doc_raw": "LG 62"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2675,
+			"text_html": "<span>C’est à partir de cette coopération singulière de Marie à l’action de l’Esprit Saint que les Églises ont développé<sup class=\"srcRef cccRef\">§970</sup> la prière à la sainte Mère de Dieu, en la centrant sur la Personne du Christ manifestée dans<sup class=\"srcRef cccRef\">§512</sup> ses mystères. Dans les innombrables hymnes et antiennes qui expriment cette prière, deux mouvements alternent habituellement : l’un « magnifie » le Seigneur pour les<sup class=\"srcRef cccRef\">§2619</sup> « grandes choses » qu’il a faites pour son humble servante, et par elle, pour tous les humains <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> ; l’autre confie à la Mère de Jésus les supplications et les louanges des enfants de Dieu, puisqu’elle connaît maintenant l’humanité qui en elle est épousée par le Fils de Dieu.</span>",
+			"cross_refs": [
+				"970",
+				"512",
+				"2619"
+			],
+			"bible_refs": [
+				{
+					"text": "Lc 1:46-55"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Lc 1:46-55",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2676,
+			"text_html": "<span>Ce double mouvement de la prière à Marie<sup class=\"srcRef cccRef\">§722</sup><sup class=\"srcRef cccRef\">§490</sup><sup class=\"srcRef cccRef\">§435</sup> a trouvé une expression privilégiée dans la prière de l’« Ave Maria » :<sup class=\"srcRef cccRef\">§146</sup></span>",
+			"cross_refs": [
+				"722",
+				"490",
+				"435",
+				"146"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2677,
+			"text_html": "<span> <i class=\"typo_italic\">« Sainte Marie, Mère de Dieu, prie pour nous... »</i> Avec Elisabeth nous nous émerveillons : « Comment m’est-il donné<sup class=\"srcRef cccRef\">§1020</sup> que vienne<sup class=\"srcRef cccRef\">§495</sup> à moi la mère de mon Seigneur ? » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Parce qu’elle nous donne Jésus son fils, Marie est la mère de Dieu et notre mère ; nous pouvons lui confier tous nos soucis et nos demandes : elle prie pour nous comme elle a prié pour elle-même : « Qu’il me soit fait selon ta parole » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. En nous confiant à sa prière nous nous abandonnons avec elle à la volonté de Dieu : « Que ta volonté soit faite ».</span>",
+			"cross_refs": [
+				"495",
+				"1020"
+			],
+			"bible_refs": [
+				{
+					"text": "Lc 1:43"
+				},
+				{
+					"text": "Lc 1:38"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "Lc 1:43",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "Lc 1:38",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2678,
+			"text_html": "<span>La piété médiévale de l’Occident a développé la prière du Rosaire, en substitut populaire de la Prière des Heures. En Orient, la forme<sup class=\"srcRef cccRef\">§971</sup><sup class=\"srcRef cccRef\">§1674</sup> litanique de l’Acathiste et de la Paraclisis est restée plus proche de l’office choral dans les Églises byzantines, tandis que les traditions arménienne, copte et syriaque, ont préféré les hymnes et les cantiques populaires à la Mère de Dieu. Mais dans l’Ave Maria, les théotokia, les hymnes de saint Ephrem ou de saint Grégoire de Narek, la tradition de la prière est ici fondamentalement la même.</span>",
+			"cross_refs": [
+				"971",
+				"1674"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2679,
+			"text_html": "<span>Marie est l’Orante parfaite, figure de l’Église. Quand nous la prions, nous adhérons avec elle au Dessein du Père, qui<sup class=\"srcRef cccRef\">§967</sup> envoie son Fils pour sauver tous les hommes. Comme le disciple bien-aimé, nous accueillons chez nous <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> la Mère de Jésus, devenue la mère de tous les vivants. Nous pouvons prier avec elle et la prier. La prière de l’Église est comme portée par la prière de Marie. Elle lui est unie dans l’espérance<sup class=\"srcRef cccRef\">§972</sup> <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"967",
+				"972"
+			],
+			"bible_refs": [
+				{
+					"text": "Jn 19:27"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Jn 19:27",
+					"idx": 1
+				},
+				{
+					"type": "magisterial",
+					"raw": "voir LG 68-69",
+					"idx": "a",
+					"doc_raw": "LG 68-69"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2680,
+			"text_html": "<span><i class=\"typo_italic\">La prière est principalement adressée au Père ; de même, elle se porte vers Jésus, notamment par l’invocation de son saint Nom : « Jésus, Christ, Fils de Dieu, Seigneur, aie pitié de nous, pécheurs ! »</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2681,
+			"text_html": "<span><i class=\"typo_italic\">« Nul ne peut dire : ‘Jésus est le Seigneur’, sinon sous l’action de l’Esprit Saint » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. L’Église nous invite à invoquer le Saint Esprit comme le Maître intérieur de la prière chrétienne.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "1 Co 12:3"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "1 Co 12:3",
+					"idx": 1
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2682,
+			"text_html": "<span><i class=\"typo_italic\">En vertu de sa coopération singulière à l’action de l’Esprit Saint, l’Église aime à prier en communion avec la Vierge Marie, pour magnifier avec elle les grandes choses que Dieu a réalisées en elle et pour lui confier supplications et louanges.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2683,
+			"text_html": "<span>Les témoins qui nous ont précédés dans le Royaume <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>, spécialement ceux que l’Église reconnaît comme « saints », participent à la tradition vivante de la prière, par le modèle de leur vie, par la transmission de leurs écrits et par leur prière aujourd’hui. Ils contemplent Dieu<sup class=\"srcRef cccRef\">§956</sup>, ils le louent et ne cessent pas de prendre soin de ceux qu’ils ont laissé sur la terre. En entrant « dans la joie » de leur Maître, ils ont été « établis sur beaucoup » <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>. Leur intercession est leur plus haut service du Dessein de Dieu. Nous pouvons et devons les prier d’intercéder pour nous et pour le monde entier.</span>",
+			"cross_refs": [
+				"956"
+			],
+			"bible_refs": [
+				{
+					"text": "He 12:1"
+				},
+				{
+					"text": "Mt 25:21"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir He 12:1",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Mt 25:21",
+					"idx": 2
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2684,
+			"text_html": "<span>Dans la communion des saints se sont développées tout au long de l’histoire des Églises diverses <i class=\"typo_italic\">spiritualités</i>. Le charisme<sup class=\"srcRef cccRef\">§917</sup> personnel d’un témoin de l’Amour de Dieu pour les hommes a pu être transmis, tel « l’esprit » d’Elie à Elisée <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup> et à Jean-Baptiste <sup class=\"srcRef bibleRef\" data-idx=\"2\">2</sup>, pour que des<sup class=\"srcRef cccRef\">§919</sup> disciples aient part à cet esprit <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. Une spiritualité est aussi au confluent d’autres courants, liturgiques et théologiques, et témoigne de l’inculturation de la foi dans un milieu humain<sup class=\"srcRef cccRef\">§1202</sup> et son histoire. Les spiritualités chrétiennes participent à la tradition vivante de la prière et sont des guides indispensables pour les fidèles. Elles réfractent, dans leur riche diversité, la pure et unique Lumière de l’Esprit Saint.</span>",
+			"cross_refs": [
+				"917",
+				"919",
+				"1202"
+			],
+			"bible_refs": [
+				{
+					"text": "2 R 2:9"
+				},
+				{
+					"text": "Lc 1:17"
+				}
+			],
+			"citations": [
+				{
+					"text_html": "<span>« L’Esprit est vraiment le lieu des saints, et le saint est pour l’Esprit un lieu propre, puisqu’il s’offre à habiter avec Dieu et est appelé son temple » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>.</span>"
+				}
+			],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir 2 R 2:9",
+					"idx": 1
+				},
+				{
+					"type": "bible",
+					"raw": "voir Lc 1:17",
+					"idx": 2
+				},
+				{
+					"type": "magisterial",
+					"raw": "voir PC 2",
+					"idx": "a",
+					"doc_raw": "PC 2"
+				},
+				{
+					"type": "patristic",
+					"raw": "saint Basile, liber de Spiritu Sancto 26:62 : PG 32:184A",
+					"idx": "b"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2685,
+			"text_html": "<span>La <i class=\"typo_italic\">famille chrétienne</i> est le premier lieu de l’éducation à la prière. Fondée sur le sacrement de Mariage, elle est<sup class=\"srcRef cccRef\">§1657</sup> « l’Église domestique » où les enfants de Dieu apprennent à prier « en Église » et à persévérer dans la prière. Pour les jeunes enfants en particulier, la prière familiale quotidienne est le premier témoin de la mémoire vivante de l’Église éveillée patiemment par l’Esprit Saint.</span>",
+			"cross_refs": [
+				"1657"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2686,
+			"text_html": "<span>Les <i class=\"typo_italic\">ministres ordonnés</i>, sont aussi responsables de la formation à la prière de leurs frères et sœurs dans le Christ. Serviteurs<sup class=\"srcRef cccRef\">§1547</sup> du bon Pasteur, ils sont ordonnés pour guider le peuple de Dieu aux sources vives de la prière : la Parole de Dieu, la Liturgie, la vie théologale, l’Aujourd’hui de Dieu dans les situations concrètes <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span>",
+			"cross_refs": [
+				"1547"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir PO 4-6",
+					"idx": "a",
+					"doc_raw": "PO 4-6"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2687,
+			"text_html": "<span>De nombreux <i class=\"typo_italic\">religieux</i> ont consacré toute leur vie à la prière. Depuis le désert d’Égypte, des ermites, des moines<sup class=\"srcRef cccRef\">§916</sup> et des moniales ont donné leur temps à la louange de Dieu et à l’intercession pour son peuple. La vie consacrée ne se maintient et ne se propage pas sans la prière ; elle est une des sources vives de la contemplation et de la vie spirituelle dans l’Église</span>",
+			"cross_refs": [
+				"916"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2688,
+			"text_html": "<span>La <i class=\"typo_italic\">catéchèse</i> des enfants, des jeunes et des adultes, vise à ce que la Parole de Dieu soit méditée dans la prière personnelle, actualisée dans la prière liturgique, et intériorisée en tout temps afin de porter son fruit dans une vie nouvelle. La catéchèse est aussi le moment où la piété populaire<sup class=\"srcRef cccRef\">§1674</sup> peut être discernée et éduquée <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>. La mémorisation des prières fondamentales offre un support indispensable à la vie de la prière, mais il est important d’en faire goûter le sens <sup class=\"srcRef docRef\" data-idx=\"b\">b</sup>.</span>",
+			"cross_refs": [
+				"1674"
+			],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "magisterial",
+					"raw": "voir CT 54",
+					"idx": "a",
+					"doc_raw": "CT 54"
+				},
+				{
+					"type": "magisterial",
+					"raw": "voir CT 55",
+					"idx": "b",
+					"doc_raw": "CT 55"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2689,
+			"text_html": "<span>Des <i class=\"typo_italic\">groupes de prière</i>, voire des « écoles de prière », sont aujourd’hui l’un des signes et l’un des ressorts du renouveau de la prière dans l’Église, à condition de s’abreuver aux sources authentiques de la prière chrétienne. Le souci de la communion est signe de la véritable prière dans l’Église.</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2690,
+			"text_html": "<span>L’Esprit Saint donne à certains fidèles des dons de sagesse, de foi et de discernement en vue de ce bien commun qu’est la prière (<i class=\"typo_italic\">direction spirituelle</i>). Ceux et celles qui en sont dotés sont de véritables serviteurs de la Tradition vivante de la prière :</span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [
+				{
+					"text_html": "<span>C’est pour cela que l’âme qui veut avancer dans la perfection, doit, selon le conseil de saint Jean de la Croix, « bien considérer entre quelles mains elle se remet, car tel sera le maître, tel sera le disciple ; tel sera le père, tel sera le fils ». Et encore : « Non seulement le directeur doit être savant et prudent, mais encore expérimenté... Si le guide spirituel n’a pas l’expérience de la vie spirituelle, il est incapable d’y conduire les âmes que Dieu pourtant appelle, et il ne les comprendra même pas » (<i class=\"typo_italic\">llama de amor viva</i> strophe 3).</span>"
+				}
+			],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2691,
+			"text_html": "<span>L’église, maison de Dieu, est le lieu propre de la prière liturgique pour la communauté paroissiale. Elle est aussi<sup class=\"srcRef cccRef\">§1181</sup><sup class=\"srcRef cccRef\">§2197</sup> le lieu privilégié de l’adoration de la présence réelle du Christ dans le Saint Sacrement<sup class=\"srcRef cccRef\">§1379</sup>. Le choix d’un lieu favorable n’est pas indifférent à la vérité de la prière :</span><br/><span>– pour la prière personnelle, ce peut être un « coin de prière », avec les saintes Écritures et des icônes, afin d’être « là, dans le secret » devant notre Père <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. Dans une famille chrétienne, ce genre de petit oratoire favorise la prière en commun.</span><br/><span>– dans les régions où il existe des monastères, la vocation de ces communautés est de favoriser le partage de la Prière des Heures avec les fidèles et de permettre la solitude nécessaire à une prière personnelle plus intense <sup class=\"srcRef docRef\" data-idx=\"a\">a</sup>.</span><br/><span>– les pèlerinages évoquent notre marche sur terre vers le ciel. Ils sont traditionnellement des temps forts de renouveau de la prière. Les sanctuaires sont, pour les pèlerins en quête de leurs sources vives, des lieux exceptionnels pour vivre « en Église » les formes de la prière chrétienne.</span>",
+			"cross_refs": [
+				"1181",
+				"2197",
+				"1379"
+			],
+			"bible_refs": [
+				{
+					"text": "Mt 6:6"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "voir Mt 6:6",
+					"idx": 1
+				},
+				{
+					"type": "magisterial",
+					"raw": "voir PC 7",
+					"idx": "a",
+					"doc_raw": "PC 7"
+				}
+			]
+		},
+		{
+			"corpus": "ccc",
+			"number": 2692,
+			"text_html": "<span><i class=\"typo_italic\">Dans sa prière, l’Église pérégrinante est associée à celle des saints dont elle sollicite l’intercession.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2693,
+			"text_html": "<span><i class=\"typo_italic\">Les différentes spiritualités chrétiennes participent à la tradition vivante de la prière et sont des guides précieux pour la vie spirituelle.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2694,
+			"text_html": "<span><i class=\"typo_italic\">La famille chrétienne est le premier lieu de l’éducation à la prière.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2695,
+			"text_html": "<span><i class=\"typo_italic\">Les ministres ordonnés, la vie consacrée, la catéchèse, les groupes de prière, la « direction spirituelle » assurent dans l’Église une aide pour la prière.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		{
+			"corpus": "ccc",
+			"number": 2696,
+			"text_html": "<span><i class=\"typo_italic\">Les lieux les plus favorables pour la prière sont l’oratoire personnel ou familial, les monastères, les sanctuaires de pèlerinage et, surtout, l’église qui est le lieu propre de la prière liturgique pour la communauté paroissiale et le lieu privilégié de l’adoration eucharistique.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		}
+	],
+	"enBrefParagraphMap": {
+		"2661": {
+			"corpus": "ccc",
+			"number": 2661,
+			"text_html": "<span><i class=\"typo_italic\">C’est par une transmission vivante, la Tradition, que, dans l’Église, l’Esprit Saint apprend à prier aux enfants de Dieu.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2662": {
+			"corpus": "ccc",
+			"number": 2662,
+			"text_html": "<span><i class=\"typo_italic\">La Parole de Dieu, la liturgie de l’Église, les vertus de foi, d’espérance et de charité sont des sources de la prière.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2680": {
+			"corpus": "ccc",
+			"number": 2680,
+			"text_html": "<span><i class=\"typo_italic\">La prière est principalement adressée au Père ; de même, elle se porte vers Jésus, notamment par l’invocation de son saint Nom : « Jésus, Christ, Fils de Dieu, Seigneur, aie pitié de nous, pécheurs ! »</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2681": {
+			"corpus": "ccc",
+			"number": 2681,
+			"text_html": "<span><i class=\"typo_italic\">« Nul ne peut dire : ‘Jésus est le Seigneur’, sinon sous l’action de l’Esprit Saint » <sup class=\"srcRef bibleRef\" data-idx=\"1\">1</sup>. L’Église nous invite à invoquer le Saint Esprit comme le Maître intérieur de la prière chrétienne.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [
+				{
+					"text": "1 Co 12:3"
+				}
+			],
+			"citations": [],
+			"magisterial_refs": [
+				{
+					"type": "bible",
+					"raw": "1 Co 12:3",
+					"idx": 1
+				}
+			]
+		},
+		"2682": {
+			"corpus": "ccc",
+			"number": 2682,
+			"text_html": "<span><i class=\"typo_italic\">En vertu de sa coopération singulière à l’action de l’Esprit Saint, l’Église aime à prier en communion avec la Vierge Marie, pour magnifier avec elle les grandes choses que Dieu a réalisées en elle et pour lui confier supplications et louanges.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2692": {
+			"corpus": "ccc",
+			"number": 2692,
+			"text_html": "<span><i class=\"typo_italic\">Dans sa prière, l’Église pérégrinante est associée à celle des saints dont elle sollicite l’intercession.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2693": {
+			"corpus": "ccc",
+			"number": 2693,
+			"text_html": "<span><i class=\"typo_italic\">Les différentes spiritualités chrétiennes participent à la tradition vivante de la prière et sont des guides précieux pour la vie spirituelle.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2694": {
+			"corpus": "ccc",
+			"number": 2694,
+			"text_html": "<span><i class=\"typo_italic\">La famille chrétienne est le premier lieu de l’éducation à la prière.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2695": {
+			"corpus": "ccc",
+			"number": 2695,
+			"text_html": "<span><i class=\"typo_italic\">Les ministres ordonnés, la vie consacrée, la catéchèse, les groupes de prière, la « direction spirituelle » assurent dans l’Église une aide pour la prière.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		},
+		"2696": {
+			"corpus": "ccc",
+			"number": 2696,
+			"text_html": "<span><i class=\"typo_italic\">Les lieux les plus favorables pour la prière sont l’oratoire personnel ou familial, les monastères, les sanctuaires de pèlerinage et, surtout, l’église qui est le lieu propre de la prière liturgique pour la communauté paroissiale et le lieu privilégié de l’adoration eucharistique.</i></span>",
+			"cross_refs": [],
+			"bible_refs": [],
+			"citations": [],
+			"magisterial_refs": []
+		}
+	}
+}
