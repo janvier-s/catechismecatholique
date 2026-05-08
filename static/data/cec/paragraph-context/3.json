@@ -1,14 +1,1 @@
-{
-	"part": {
-		"slug": "prologue",
-		"title": "Prologue",
-		"range": {
-			"from": 1,
-			"to": 25
-		}
-	},
-	"heading": {
-		"id": "i-la-vie-de-lhomme-connaitre-et-aimer-dieu",
-		"title": "I. La vie de l’homme – connaître et aimer Dieu"
-	}
-}
+{"part":{"slug":"prologue","title":"Prologue","range":{"from":1,"to":25}},"heading":{"id":"i-la-vie-de-lhomme-connaitre-et-aimer-dieu","title":"I. La vie de l’homme – connaître et aimer Dieu"}}

@@ -1,14 +1,1 @@
-{
-	"part": {
-		"slug": "prologue",
-		"title": "Prologue",
-		"range": {
-			"from": 1,
-			"to": 25
-		}
-	},
-	"heading": {
-		"id": "par-dessus-tout-la-charite",
-		"title": "Par-dessus tout – la Charité"
-	}
-}
+{"part":{"slug":"prologue","title":"Prologue","range":{"from":1,"to":25}},"heading":{"id":"par-dessus-tout-la-charite","title":"Par-dessus tout – la Charité"}}

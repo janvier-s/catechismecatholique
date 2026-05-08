@@ -1,14 +1,1 @@
-{
-	"part": {
-		"slug": "prologue",
-		"title": "Prologue",
-		"range": {
-			"from": 1,
-			"to": 25
-		}
-	},
-	"heading": {
-		"id": "ii-transmettre-la-foi-la-catechese",
-		"title": "II. Transmettre la foi – la catéchèse"
-	}
-}
+{"part":{"slug":"prologue","title":"Prologue","range":{"from":1,"to":25}},"heading":{"id":"ii-transmettre-la-foi-la-catechese","title":"II. Transmettre la foi – la catéchèse"}}

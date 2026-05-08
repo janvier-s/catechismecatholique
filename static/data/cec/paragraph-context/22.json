@@ -1,14 +1,1 @@
-{
-	"part": {
-		"slug": "prologue",
-		"title": "Prologue",
-		"range": {
-			"from": 1,
-			"to": 25
-		}
-	},
-	"heading": {
-		"id": "v-indications-pratiques-pour-lusage-de-ce-catechisme",
-		"title": "V. Indications pratiques pour l’usage de ce Catéchisme"
-	}
-}
+{"part":{"slug":"prologue","title":"Prologue","range":{"from":1,"to":25}},"heading":{"id":"v-indications-pratiques-pour-lusage-de-ce-catechisme","title":"V. Indications pratiques pour l’usage de ce Catéchisme"}}
