@@ -40,32 +40,32 @@
 			}
 
 			// Group Q numbers by part so we load each part bundle at most once.
-			const numbersByPart = new Map<string, number[]>();
+			// Plain objects (not Maps) — these are transient inside the effect
+			// closure and don't need Svelte reactivity.
+			const numbersByPart: Record<string, number[]> = {};
 			for (const n of qNumbers) {
 				const range = ranges.find((r: CompendiumQRange) => n >= r.from && n <= r.to);
 				if (!range) continue;
-				const arr = numbersByPart.get(range.part) ?? [];
-				arr.push(n);
-				numbersByPart.set(range.part, arr);
+				(numbersByPart[range.part] = numbersByPart[range.part] ?? []).push(n);
 			}
 
 			// Fetch each needed part bundle and pull out the matching questions.
 			const parts = await Promise.all(
-				[...numbersByPart.keys()].map((slug) =>
+				Object.keys(numbersByPart).map((slug) =>
 					loadCompendiumPart(slug).then((p) => ({ slug, part: p }))
 				)
 			);
-			const byNumber = new Map<number, { partSlug: string; q: CompendiumQuestion }>();
+			const byNumber: Record<number, { partSlug: string; q: CompendiumQuestion }> = {};
 			for (const { slug, part } of parts) {
 				for (const node of part.flow) {
 					if (node.kind === 'question')
-						byNumber.set(node.data.number, { partSlug: slug, q: node.data });
+						byNumber[node.data.number] = { partSlug: slug, q: node.data };
 				}
 			}
 
 			hits = qNumbers
 				.map((n) => {
-					const entry = byNumber.get(n);
+					const entry = byNumber[n];
 					if (!entry) return null;
 					return {
 						number: n,
@@ -109,7 +109,7 @@
 					<p class="font-heading italic text-[15px] font-semibold text-fg leading-snug mb-1">
 						{h.question}
 					</p>
-					<div class="font-body text-[13.5px] leading-relaxed text-subtle line-clamp-3">
+					<div class="answer font-body text-[13.5px] leading-relaxed text-subtle">
 						{@html h.answer_html}
 					</div>
 				</a>
@@ -119,19 +119,10 @@
 {/if}
 
 <style>
-	/* Truncate the answer preview to 3 lines so the tab fits multiple Q cards
-	   without scrolling each into a wall of text. */
-	.line-clamp-3 {
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 3;
-		line-clamp: 3;
-		overflow: hidden;
-	}
-	/* Strip the answer's <p> margin since the line-clamp container expects
-	   inline-ish content for the ellipsis to land cleanly. */
-	.line-clamp-3 :global(p) {
+	.answer :global(p) {
 		margin: 0;
-		display: inline;
+	}
+	.answer :global(p + p) {
+		margin-top: 0.5rem;
 	}
 </style>

@@ -74,8 +74,13 @@ test.describe('Compendium', () => {
 		const compendiumTab = page.getByRole('button', { name: 'Compendium', exact: true }).first();
 		await expect(compendiumTab).toBeVisible();
 		await compendiumTab.click();
-		// The tab body lists Q.2 with a link to the part anchor.
-		const qLink = page.locator('a[href^="/compendium/la-profession-de-la-foi#q-2"]').first();
+		// The tab body lists Q.2 with a link to the part anchor. Both mobile
+		// and desktop panels render the body in DOM; .filter({ visible }) skips
+		// the hidden one.
+		const qLink = page
+			.locator('a[href^="/compendium/la-profession-de-la-foi#q-2"]')
+			.filter({ visible: true })
+			.first();
 		await expect(qLink).toBeVisible();
 		await qLink.click();
 		await expect(page).toHaveURL(/\/compendium\/la-profession-de-la-foi#q-2$/);
