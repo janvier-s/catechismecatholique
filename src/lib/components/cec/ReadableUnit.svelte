@@ -19,9 +19,14 @@
 		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab ?? 'cross-refs');
 	}
 
+	// CCC paragraphs surface cross-refs inline (sup markers in the text) when in
+	// 'inline' mode, so the aside is gated on the 'side' layout preference. The
+	// Compendium answer is plain prose with no inline marker mechanism, so its
+	// refs are always rendered — the aside gracefully falls back to a static
+	// block below the answer when the user is in 'inline' mode.
 	const sideRefs = $derived.by(() => {
-		if ($prefs.crossRefsLayout !== 'side') return null;
 		if (unit.kind === 'ccc-paragraph') {
+			if ($prefs.crossRefsLayout !== 'side') return null;
 			return unit.data.cross_refs.length > 0
 				? { label: 'Renvois', refs: [...new Set(unit.data.cross_refs)], hrefPrefix: '/cec/' }
 				: null;
@@ -120,11 +125,12 @@
 		position: relative;
 		padding-right: 12rem;
 	}
+	/* Default placement: static block below the answer (used by Compendium
+	   questions in 'inline' mode, since they have no inline marker
+	   mechanism). The 'side' selector below pulls it into the right gutter. */
 	.ccc-side-refs {
-		position: absolute;
-		top: 0.25rem;
-		right: 0;
-		width: 10rem;
+		margin-top: 0.5rem;
+		margin-left: 4rem;
 		font-family: var(--font-ui);
 		font-size: 0.75rem;
 		line-height: 1.4;
@@ -132,6 +138,16 @@
 		background: color-mix(in srgb, var(--color-fg) 4%, transparent);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
 		border-radius: 0.375rem;
+	}
+	@media (min-width: 901px) {
+		:global(html[data-cross-refs-layout='side']) .ccc-side-refs {
+			position: absolute;
+			top: 0.25rem;
+			right: 0;
+			width: 10rem;
+			margin-top: 0;
+			margin-left: 0;
+		}
 	}
 	.ccc-side-refs .label {
 		font-size: 0.625rem;
