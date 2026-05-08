@@ -9,7 +9,7 @@
 
 	const PARTS: PartCard[] = [
 		{
-			slug: 'la-profession-de-la-foi',
+			slug: '1-profession-de-la-foi',
 			kicker: 'Première partie',
 			title: 'La profession de la foi',
 			range: 'Q. 1–217',
@@ -19,7 +19,7 @@
 				"l'Esprit Saint et l'Église."
 		},
 		{
-			slug: 'la-celebration-du-mystere-chretien',
+			slug: '2-celebration-du-mystere',
 			kicker: 'Deuxième partie',
 			title: 'La célébration du mystère chrétien',
 			range: 'Q. 218–356',
@@ -28,7 +28,7 @@
 				'sacrements, par lesquels le mystère pascal du Christ rejoint la vie des fidèles.'
 		},
 		{
-			slug: 'la-vie-dans-le-christ',
+			slug: '3-vie-dans-le-christ',
 			kicker: 'Troisième partie',
 			title: 'La vie dans le Christ',
 			range: 'Q. 357–533',
@@ -37,7 +37,7 @@
 				"à la béatitude et l'observance du Décalogue à la lumière de l'Évangile."
 		},
 		{
-			slug: 'la-priere-chretienne',
+			slug: '4-priere-chretienne',
 			kicker: 'Quatrième partie',
 			title: 'La prière chrétienne',
 			range: 'Q. 534–598',
