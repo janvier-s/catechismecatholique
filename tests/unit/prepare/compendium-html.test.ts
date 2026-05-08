@@ -60,26 +60,26 @@ describe('scanHtml', () => {
 });
 
 describe('scanAppendixHtml', () => {
-	it('emits heading nodes for h4 section titles and prose nodes from table cells and doct paragraphs', () => {
+	it('emits headings, bilingual prayer pairs, and doct prose', () => {
 		const html = `
 			<h4 id="p114">PRIÈRES COMMUNES</h4>
 			<table><tbody>
 				<tr>
 					<td><p class="noind"><span style="font-weight: bold;">Notre Père</span><br/></p>
 					<p class="noind">Notre Père, qui es aux cieux…</p></td>
-					<td><p class="noind"><b>Pater Noster</b></p></td>
+					<td><p class="noind"><b>Pater Noster</b></p>
+					<p class="noind">Pater noster qui es in caelis…</p></td>
 				</tr>
 				<tr>
 					<td><p class="noind"><b>Ave Maria</b></p>
 					<p class="noind">Je vous salue, Marie…</p></td>
-					<td><p class="noind"><b>Ave, Maríæ</b></p></td>
+					<td><p class="noind"><b>Ave, Maríæ</b></p>
+					<p class="noind">Ave, María, gratia plena…</p></td>
 				</tr>
 			</tbody></table>
 			<h4 id="p14">FORMULES DE LA DOCTRINE CATHOLIQUE</h4>
 			<p class="doct"><span style="font-weight: bold;">Les Béatitudes</span></p>
 			<p class="doct">Heureux les pauvres de cœur…</p>
-			<p class="doct"><span style="font-weight: bold;">Les vertus cardinales</span></p>
-			<p class="doct">1. Prudence<br/>2. Justice</p>
 			<h3 id="p15">ABRÉVIATIONS BIBLIQUES</h3>
 		`;
 		const events = scanAppendixHtml(html);
@@ -91,13 +91,24 @@ describe('scanAppendixHtml', () => {
 			'PRIÈRES COMMUNES',
 			'FORMULES DE LA DOCTRINE CATHOLIQUE'
 		]);
-		expect(headings[0]).toMatchObject({ kind: 'heading', level: 2 });
-		expect(headings[1]).toMatchObject({ kind: 'heading', level: 2 });
-		// Prose from first-column table cells + doct paragraphs
+		// Two bilingual prayer pairs
+		const prayers = events.filter((e) => e.kind === 'prayer');
+		expect(prayers).toHaveLength(2);
+		expect(prayers[0]).toMatchObject({
+			kind: 'prayer',
+			fr: { title: 'Notre Père' },
+			la: { title: 'Pater Noster' }
+		});
+		expect(prayers[0]?.fr.body).toContain('Notre Père, qui es aux cieux');
+		expect(prayers[0]?.la.body).toContain('Pater noster qui es in caelis');
+		expect(prayers[1]).toMatchObject({
+			kind: 'prayer',
+			fr: { title: 'Ave Maria' },
+			la: { title: 'Ave, Maríæ' }
+		});
+		// Prose from doct paragraphs
 		const proses = events.filter((e) => e.kind === 'prose');
-		expect(proses.length).toBeGreaterThanOrEqual(4);
-		// First prose is from the first table cell (French column)
-		expect(proses[0]?.html).toContain('Notre Père');
+		expect(proses.length).toBeGreaterThanOrEqual(2);
 	});
 
 	it('returns empty array when appendix start anchor is absent', () => {

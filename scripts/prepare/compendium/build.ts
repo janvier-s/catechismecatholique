@@ -390,6 +390,8 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 					id: `s-${slugify(ev.text)}`,
 					title: titleCase(ev.text)
 				});
+			} else if (ev.kind === 'prayer') {
+				flow.push({ kind: 'prayer', fr: ev.fr, la: ev.la });
 			} else {
 				flow.push({ kind: 'prose', html: ev.html });
 			}

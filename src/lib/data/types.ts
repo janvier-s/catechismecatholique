@@ -401,17 +401,27 @@ export interface CompendiumQuestionNode {
 	data: CompendiumQuestion;
 }
 
-/** Static prose block (used by the appendix: prayers, doctrinal formulas). */
+/** Static prose block (used by the appendix: doctrinal formulas, etc). */
 export interface CompendiumProseNode {
 	kind: 'prose';
 	html: string;
+}
+
+/** Bilingual prayer block — French and Latin laid out side by side.
+ *  `body` strings are plain text with `\n` between lines and `\n\n`
+ *  between paragraphs; the renderer is responsible for line-break styling. */
+export interface CompendiumPrayerNode {
+	kind: 'prayer';
+	fr: { title?: string; body: string };
+	la: { title?: string; body: string };
 }
 
 export type CompendiumFlowNode =
 	| CompendiumHeadingNode
 	| CompendiumEpigraphNode
 	| CompendiumQuestionNode
-	| CompendiumProseNode;
+	| CompendiumProseNode
+	| CompendiumPrayerNode;
 
 export interface CompendiumPart {
 	slug: string;

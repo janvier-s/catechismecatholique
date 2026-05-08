@@ -20,7 +20,10 @@ import { build, files, version, prerendered } from '$service-worker';
 declare const self: ServiceWorkerGlobalScope;
 
 const CACHE_VERSION = `app-${version}`;
-const DATA_CACHE = 'data-v1';
+// Bumped to v2: the Compendium data + /cec rename invalidated the previous
+// data shape. Tie to the build version so future schema changes bust the
+// cache automatically without requiring a manual bump here.
+const DATA_CACHE = `data-${version}`;
 const FONT_CACHE = 'fonts-v1';
 
 // Build-versioned assets + static files + prerendered HTML — known up front.

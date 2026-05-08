@@ -49,18 +49,20 @@
 					{node.title}
 				</h2>
 			{:else if node.level === 3}
-				<div class="mt-12 mb-4 scroll-mt-24" id={node.id}>
+				<div class="mt-12 mb-4">
 					{#if node.kicker}
 						<p class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted mb-1">
 							{node.kicker}
 						</p>
 					{/if}
-					<h3 class="font-ui text-xl font-semibold text-accent">{node.title}</h3>
+					<h3 id={node.id} class="font-ui text-xl font-semibold text-accent scroll-mt-24">
+						{node.title}
+					</h3>
 				</div>
 			{:else}
 				<h4
 					id={node.id}
-					class="font-ui text-xs font-semibold mt-8 mb-3 scroll-mt-24 uppercase tracking-[0.18em] text-muted"
+					class="font-ui text-base font-semibold mt-10 mb-4 scroll-mt-24 uppercase tracking-[0.16em] text-fg"
 				>
 					{node.title}
 				</h4>
@@ -73,7 +75,30 @@
 			</div>
 		{:else if node.kind === 'prose'}
 			<div class="compendium-prose mb-6">{@html node.html}</div>
-		{:else}
+		{:else if node.kind === 'prayer'}
+			<div class="prayer-pair" lang="fr">
+				<div class="prayer-side prayer-fr" lang="fr">
+					{#if node.fr.title}<p class="prayer-title">{node.fr.title}</p>{/if}
+					{#each node.fr.body.split(/\n\n+/) as para (para)}
+						<p class="prayer-body">
+							{#each para.split('\n') as line, i (i)}
+								{#if i > 0}<br />{/if}{line}
+							{/each}
+						</p>
+					{/each}
+				</div>
+				<div class="prayer-side prayer-la" lang="la">
+					{#if node.la.title}<p class="prayer-title">{node.la.title}</p>{/if}
+					{#each node.la.body.split(/\n\n+/) as para (para)}
+						<p class="prayer-body">
+							{#each para.split('\n') as line, i (i)}
+								{#if i > 0}<br />{/if}{line}
+							{/each}
+						</p>
+					{/each}
+				</div>
+			</div>
+		{:else if node.kind === 'question'}
 			<ReadableUnit unit={{ kind: 'compendium-question', data: node.data }} />
 		{/if}
 	{/each}

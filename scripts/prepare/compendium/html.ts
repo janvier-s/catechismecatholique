@@ -36,7 +36,15 @@ function parseEpigraph(inner: string): { text: string; attribution?: string } {
 
 export type AppendixEvent =
 	| { kind: 'heading'; level: 2 | 3; text: string }
-	| { kind: 'prose'; html: string };
+	| { kind: 'prose'; html: string }
+	/** Bilingual prayer pair extracted from a two-column <tr> in the prayers
+	 *  section. Each side carries its title (bold first paragraph) plus the
+	 *  body lines. The renderer lays them out side by side. */
+	| {
+			kind: 'prayer';
+			fr: { title?: string; body: string };
+			la: { title?: string; body: string };
+	  };
 
 const APPENDIX_START = /id="p114"/;
 const APPENDIX_END = /id="p15"/;
@@ -83,21 +91,20 @@ export function scanAppendixHtml(html: string): AppendixEvent[] {
 			const text = stripTagsKeepInline(m[1]);
 			if (text) out.push({ kind: 'heading', level: 2, text });
 		} else if (m[2] !== undefined) {
-			// <tr> row: extract first <td> only (French column)
-			const firstTd = /<td\b[^>]*>([\s\S]*?)<\/td>/i.exec(m[2]);
-			if (firstTd) {
-				const cellHtml = firstTd[1] ?? '';
-				// Collect all <p class="noind"> paragraphs inside this cell
-				const pRe = /<p\s+class="noind"[^>]*>([\s\S]*?)<\/p>/gi;
-				let pMatch: RegExpExecArray | null;
-				const cellLines: string[] = [];
-				while ((pMatch = pRe.exec(cellHtml)) !== null) {
-					const text = cleanHtml(pMatch[1] ?? '');
-					if (text) cellLines.push(text);
-				}
-				if (cellLines.length > 0) {
-					out.push({ kind: 'prose', html: cellLines.join('\n') });
-				}
+			// <tr> row: bilingual prayer — extract BOTH <td> cells (FR | LA).
+			// Each cell typically has a bold first <p> (title) followed by
+			// body <p>'s. We split the title from the body so the renderer
+			// can style them as a pair.
+			const cells: string[] = [];
+			const tdRe = /<td\b[^>]*>([\s\S]*?)<\/td>/gi;
+			let tdMatch: RegExpExecArray | null;
+			while ((tdMatch = tdRe.exec(m[2])) !== null) {
+				cells.push(tdMatch[1] ?? '');
+			}
+			const fr = parsePrayerCell(cells[0] ?? '');
+			const la = parsePrayerCell(cells[1] ?? '');
+			if (fr.body || la.body || fr.title || la.title) {
+				out.push({ kind: 'prayer', fr, la });
 			}
 		} else if (m[3] !== undefined) {
 			// <p class="doct"> paragraph
@@ -116,6 +123,64 @@ function cleanHtml(s: string): string {
 		.replace(/<\/?(?!em\b|strong\b|b\b|i\b|span\b|sup\b)[a-z][^>]*>/gi, '')
 		.replace(/\s+/g, ' ')
 		.trim();
+}
+
+/** Strip every HTML tag (and entities). Used for title text where we don't
+ *  want any inline markup — the renderer applies its own bold styling. */
+function stripAllTags(s: string): string {
+	return s
+		.replace(/<[^>]+>/g, '')
+		.replace(/&#160;|&nbsp;/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+}
+
+/** Convert <br> to literal newlines and strip block tags, keeping inline ones.
+ *  Used for prayer body text where line breaks carry meaning. */
+function cleanLines(s: string): string {
+	return s
+		.replace(/<br\s*\/?>/gi, '\n')
+		.replace(/&#160;|&nbsp;/g, ' ')
+		.replace(/<\/?(?!em\b|strong\b|b\b|i\b|span\b|sup\b)[a-z][^>]*>/gi, '')
+		.replace(/[ \t]+/g, ' ')
+		.replace(/\n[ \t]+/g, '\n')
+		.replace(/[ \t]+\n/g, '\n')
+		.replace(/\n{2,}/g, '\n')
+		.trim();
+}
+
+/** Parse one <td> from a bilingual prayer row. The first <p> in each cell
+ *  is the prayer title (bold); subsequent <p>s are body lines. We treat
+ *  any <p> whose stripped content is wrapped in <b>/<strong>/<span style="font-weight: bold"> as the title. */
+function parsePrayerCell(cellHtml: string): { title?: string; body: string } {
+	const pRe = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
+	const paragraphs: { html: string; isTitle: boolean }[] = [];
+	let pMatch: RegExpExecArray | null;
+	while ((pMatch = pRe.exec(cellHtml)) !== null) {
+		const inner = pMatch[1] ?? '';
+		// Detect title: the entire content is bold (b, strong, or span style).
+		const stripped = inner.replace(/<br\s*\/?>/gi, '').trim();
+		const isTitle =
+			/^<(?:b|strong)\b[^>]*>[\s\S]*?<\/(?:b|strong)>\s*$/i.test(stripped) ||
+			/^<span\s+style="[^"]*font-weight:\s*bold[^"]*"[^>]*>[\s\S]*?<\/span>\s*$/i.test(stripped);
+		paragraphs.push({ html: inner, isTitle });
+	}
+
+	if (paragraphs.length === 0) return { body: '' };
+
+	// Take the first paragraph as title only if it's tagged bold; otherwise no title.
+	// Title text is fully stripped (the renderer styles it as bold itself).
+	let title: string | undefined;
+	const start = paragraphs[0]!.isTitle ? 1 : 0;
+	if (start === 1) {
+		title = stripAllTags(paragraphs[0]!.html).trim();
+	}
+	const body = paragraphs
+		.slice(start)
+		.map((p) => cleanLines(p.html))
+		.filter(Boolean)
+		.join('\n\n');
+	return { title, body };
 }
 
 /** Strip all tags (for heading text). */
