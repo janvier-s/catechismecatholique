@@ -46,9 +46,9 @@
 		{ id: 'cross-refs', label: 'Renvois' },
 		{ id: 'cited-by', label: 'Cités par' },
 		{ id: 'sources', label: 'Sources' },
-		{ id: 'en-bref', label: 'En Bref' },
+		{ id: 'compendium', label: 'Compendium' },
 		{ id: 'concordance', label: 'Concordance' },
-		{ id: 'compendium', label: 'Compendium' }
+		{ id: 'en-bref', label: 'En Bref' }
 	];
 
 	let paragraph: Paragraph | null = $state(null);
@@ -120,14 +120,17 @@
 			citerSet.size === crossSet.size && [...citerSet].every((x) => crossSet.has(x));
 		const hasCitedBy = citedByList.length > 0 && !sameAsRenvois;
 
+		// Order: paragraph's own bible refs → CCC graph (Renvois then Cités par)
+		// → external corpora citing this paragraph (Sources then Compendium) →
+		// related Bible commentary (Concordance) → chapter-level summary (En Bref).
 		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
 		if (hasCrossRefs) out.push({ id: 'cross-refs', label: 'Renvois' });
 		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités par' });
 		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
-		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
+		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
 		// Always show Concordance for paragraph contexts; the tab body handles empty state.
 		out.push({ id: 'concordance', label: 'Concordance' });
-		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
+		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
 		return out;
 	});
 
