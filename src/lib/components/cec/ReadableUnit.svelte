@@ -50,7 +50,7 @@
 		}
 		if (unit.data.ccc_refs.length === 0) return null;
 		return {
-			label: 'Renvois CEC',
+			label: 'CEC',
 			refs: compactRanges(unit.data.ccc_refs),
 			hrefPrefix: '/cec/'
 		};

@@ -90,7 +90,7 @@
 			<span class="missal-rule missal-rule-r"></span>
 		</div>
 		<p class="missal-lede">
-			Le Pater, le Credo, le Confiteor — et les formules essentielles de la doctrine,
+			Le Pater, le Credo, le Confiteor, et les formules essentielles de la doctrine,
 			en&nbsp;français et en&nbsp;latin.
 		</p>
 	</header>
@@ -349,11 +349,11 @@
 	.prayer-title {
 		font-family: var(--font-heading);
 		font-weight: 700;
-		font-size: 0.75rem;
-		letter-spacing: 0.2em;
+		font-size: 1.05rem;
+		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		margin: 0 0 calc(var(--rh) * 0.55);
-		line-height: 1.3;
+		margin: 0 0 calc(var(--rh) * 0.7);
+		line-height: 1.25;
 	}
 
 	.prayer-title--fr {
@@ -363,17 +363,17 @@
 	.prayer-title--la {
 		color: var(--color-fg);
 		font-weight: 700;
-		letter-spacing: 0.2em;
+		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		font-size: 0.75rem;
+		font-size: 1.05rem;
 	}
 
 	/* Keep French and Latin titles vertically aligned when Latin title is absent */
 	.prayer-title-spacer {
 		display: block;
 		/* Same height as .prayer-title + its margin */
-		height: calc(0.75rem * 1.3 + var(--rh) * 0.55);
-		margin-bottom: calc(var(--rh) * 0.55);
+		height: calc(1.05rem * 1.25 + var(--rh) * 0.7);
+		margin-bottom: calc(var(--rh) * 0.7);
 	}
 
 	.prayer-body {
@@ -540,7 +540,11 @@
 	.toc-list li a {
 		display: block;
 		font-family: var(--font-ui);
-		font-size: 12px;
+		/* Normalise the mixed-case source data ("DOXOLOGIE" vs "Notre Père"
+		   vs "Angelus") to a uniform uppercase rhythm in the TOC. */
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 11px;
 		line-height: 1.45;
 		padding: 3px 0;
 		color: var(--color-subtle);
@@ -566,12 +570,12 @@
 		margin-top: 0;
 	}
 	.toc-list li.toc-section a {
-		font-size: 10px;
+		font-size: 11px;
 		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.14em;
-		color: var(--color-fg);
-		padding: 4px 0 2px;
+		letter-spacing: 0.22em;
+		color: var(--color-accent-text);
+		padding: 4px 0 4px;
+		opacity: 1;
 	}
 	@media (max-width: 1100px) {
 		.missal-toc {
