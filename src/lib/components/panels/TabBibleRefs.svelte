@@ -9,8 +9,9 @@
 	type RefStyle = 'inline' | 'sup';
 	type ParsedRef = {
 		raw: string;
-		idx: number; // 1-based, matches data-idx on the in-text marker
-		style: RefStyle; // 'sup' = "voir N" footnote in text; 'inline' = parens in text
+		idx: number;
+		marker: number; // 1-based number to display; differs from idx for cluster members
+		style: RefStyle;
 		book: BookInfo;
 		chapter: number;
 		fromV?: number;
@@ -51,7 +52,12 @@
 	});
 
 	// Verse part is optional so chapter-only refs (e.g. "Os 11", "Ez 16") parse.
-	function parseRef(raw: string, idx: number, style: RefStyle): ParsedRef | null {
+	function parseRef(
+		raw: string,
+		idx: number,
+		marker: number,
+		style: RefStyle
+	): ParsedRef | null {
 		const m = raw.match(/^([1-3]?\s*[A-Za-zÉéèê]+)\s+(\d+)(?::(\d+)(?:-(\d+))?)?/);
 		if (!m) return null;
 		const book = bookByAbbr(m[1]!.trim());
@@ -59,14 +65,21 @@
 		const chapter = parseInt(m[2]!, 10);
 		const fromV = m[3] ? parseInt(m[3], 10) : undefined;
 		const toV = m[4] ? parseInt(m[4], 10) : fromV;
-		return { raw, idx, style, book, chapter, fromV, toV };
+		return { raw, idx, marker, style, book, chapter, fromV, toV };
 	}
 
-	// Marker style mirrors the text: refs whose magisterial raw starts with "voir"
-	// render as sup footnotes in text, the rest as inline (Book Ch, V) parens.
-	function styleForIdx(idx: number): RefStyle {
+	function markerAndStyleForIdx(idx: number): { marker: number; style: RefStyle } {
 		const m = magisterial.find((r) => Number(r.idx) === idx);
-		return m && /^voir\s/i.test(m.raw) ? 'sup' : 'inline';
+		if (!m) return { marker: idx, style: 'inline' };
+		// Cluster member — share leader's marker, always sup style.
+		if (m.marker_idx !== undefined && m.marker_idx !== idx) {
+			return { marker: m.marker_idx, style: 'sup' };
+		}
+		// Cluster leader — at least one other ref points at me. Always sup.
+		const isLeader = magisterial.some((r) => r.marker_idx === idx);
+		if (isLeader) return { marker: idx, style: 'sup' };
+		// Solo ref — existing voir heuristic.
+		return { marker: idx, style: /^voir\s/i.test(m.raw) ? 'sup' : 'inline' };
 	}
 
 	$effect(() => {
@@ -74,7 +87,8 @@
 		const out: RefWithVerses[] = [];
 		for (let i = 0; i < refs.length; i++) {
 			const idx = i + 1;
-			const parsed = parseRef(refs[i]!.text, idx, styleForIdx(idx));
+			const { marker, style } = markerAndStyleForIdx(idx);
+			const parsed = parseRef(refs[i]!.text, idx, marker, style);
 			if (!parsed) continue;
 			const verses: { v: number; text: string }[] = [];
 			if (parsed.fromV !== undefined && parsed.toV !== undefined) {
@@ -113,7 +127,7 @@
 				<li data-idx={r.idx} class="rounded">
 					<div class="flex items-baseline gap-1.5">
 						{#if r.style === 'sup'}
-							<sup class="ref-marker">{r.idx}</sup>
+							<sup class="ref-marker">{r.marker}</sup>
 						{/if}
 						<a
 							href="/bible/{r.book.slug}/{r.chapter}{r.fromV !== undefined ? `/${r.fromV}` : ''}"
