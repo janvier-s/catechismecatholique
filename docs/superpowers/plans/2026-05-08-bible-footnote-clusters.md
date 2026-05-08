@@ -244,7 +244,16 @@ export function groupConsecutiveBibleSups<T extends RefLike>(input: {
     }
 
     // Build a Set of [start,end) ranges to strip. Then walk the string once.
-    const stripRanges = runs.flatMap((run) => run.slice(1).map(({ start, end }) => ({ start, end })));
+    // Strip range for each trailing member extends back to the previous sup's
+    // end, so whitespace between consecutive sups is consumed too — otherwise
+    // a paragraph like `<sup1>  <sup2>.` would collapse to `<sup1>  .` with
+    // dangling whitespace before the period.
+    const stripRanges: { start: number; end: number }[] = [];
+    for (const run of runs) {
+        for (let i = 1; i < run.length; i++) {
+            stripRanges.push({ start: run[i - 1]!.end, end: run[i]!.end });
+        }
+    }
     stripRanges.sort((a, b) => a.start - b.start);
 
     const out: string[] = [];
