@@ -110,9 +110,7 @@ test('§1021 collapses 4 consecutive bibleRef sups and renumbers markers sequent
 	// Verse rows for the cluster (data-idx 4, 5, 6, 7) carry .cluster-verse
 	// AND have NO marker inside.
 	for (const idx of [4, 5, 6, 7]) {
-		const row = panel
-			.locator(`li.cluster-verse[data-idx="${idx}"]`)
-			.filter({ visible: true });
+		const row = panel.locator(`li.cluster-verse[data-idx="${idx}"]`).filter({ visible: true });
 		await expect(row).toHaveCount(1);
 		await expect(row.locator('sup.ref-marker')).toHaveCount(0);
 	}

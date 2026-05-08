@@ -114,16 +114,12 @@
 			const leaderIdx = targetMag.marker_idx;
 			flashIdxs = [
 				leaderIdx,
-				...magisterial
-					.filter((r) => r.marker_idx === leaderIdx)
-					.map((r) => Number(r.idx))
+				...magisterial.filter((r) => r.marker_idx === leaderIdx).map((r) => Number(r.idx))
 			];
 		} else if (magisterial.some((r) => r.marker_idx === target)) {
 			flashIdxs = [
 				target,
-				...magisterial
-					.filter((r) => r.marker_idx === target)
-					.map((r) => Number(r.idx))
+				...magisterial.filter((r) => r.marker_idx === target).map((r) => Number(r.idx))
 			];
 		} else {
 			flashIdxs = [target];
@@ -147,10 +143,7 @@
 				const offset = targetRect.top - containerRect.top + scrollEl.scrollTop - 8;
 				// Only scroll if the row isn't fully visible — avoids the
 				// "page jiggles every time" feel for short paragraphs.
-				if (
-					targetRect.top < containerRect.top ||
-					targetRect.bottom > containerRect.bottom
-				) {
+				if (targetRect.top < containerRect.top || targetRect.bottom > containerRect.bottom) {
 					scrollEl.scrollTo({ top: offset, behavior: 'smooth' });
 				}
 			}
@@ -178,9 +171,7 @@
 			{#each r.verses as v (v.v)}
 				<span class="block">
 					{#if r.verses.length > 1}
-						<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-2"
-							>{v.v}</sup
-						>
+						<sup class="top-0 align-baseline text-xs text-accent tabular-nums mr-2">{v.v}</sup>
 					{/if}
 					{v.text}
 				</span>
