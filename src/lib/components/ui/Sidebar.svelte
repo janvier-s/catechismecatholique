@@ -60,8 +60,6 @@
 		level?: 2 | 3 | 4;
 		/** Eyebrow above the title (e.g. "Chapitre II") for compendium h3 entries. */
 		kicker?: string;
-		/** Question range under this heading (compendium). */
-		qRange?: [number, number];
 		children?: Item[];
 	};
 
@@ -415,8 +413,7 @@
 							title: node.title,
 							href: `${partHref}#${node.id}`,
 							level: node.level,
-							...(node.kicker ? { kicker: node.kicker } : {}),
-							...(node.q_range ? { qRange: node.q_range } : {})
+							...(node.kicker ? { kicker: node.kicker } : {})
 						};
 						if (node.level === 2) {
 							children.push(item);

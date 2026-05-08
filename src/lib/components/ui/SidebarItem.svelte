@@ -11,8 +11,6 @@
 		level?: 2 | 3 | 4;
 		/** Eyebrow above the title (e.g. "Chapitre II"). */
 		kicker?: string;
-		/** Question range under this heading (compendium). */
-		qRange?: [number, number];
 		children?: Item[];
 	};
 	let {
@@ -118,15 +116,15 @@
 </li>
 
 <style>
-	/* Children list — nested entries get a clear left indent + a hairline
-	   gutter rule so the hierarchy is unmistakable in deep trees. */
+	/* Children list — nested entries get a modest left indent + a hairline
+	   gutter rule so the hierarchy is unmistakable but compact. */
 	.children {
-		margin-left: 1rem;
+		margin-left: 0.5rem;
 	}
 	.children-deep {
-		margin-left: 1.25rem;
-		padding-left: 0.75rem;
-		border-left: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+		margin-left: 0.5rem;
+		padding-left: 0.5rem;
+		border-left: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
 	}
 	/* Default size for entries that don't carry a Compendium heading level
 	   (CCC sidebar items, parts/sections by typeLabel). */

@@ -52,10 +52,11 @@ test.describe('Compendium', () => {
 		await expect(page).toHaveURL('/prieres-formules');
 	});
 
-	test('prières & formules renders prose', async ({ page }) => {
+	test('prières & formules renders bilingual prayers', async ({ page }) => {
 		await page.goto('/prieres-formules');
 		await expect(page.getByRole('heading', { level: 1 })).toContainText('Prières');
-		await expect(page.locator('.compendium-prose').first()).toBeVisible();
+		await expect(page.locator('.prayer-pair').first()).toBeVisible();
+		await expect(page.locator('.prayer-col--la').first()).toBeVisible();
 	});
 
 	test('legacy /compendium/annexe redirects to /prieres-formules', async ({ page }) => {

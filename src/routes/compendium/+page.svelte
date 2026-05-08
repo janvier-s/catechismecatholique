@@ -70,13 +70,11 @@
 
 	<section class="parts" aria-label="Les quatre parties du Compendium">
 		{#each PARTS as p (p.slug)}
-			<article class="part-card">
-				<a href="/compendium/{p.slug}" class="part-head">
-					<span class="part-kicker">{p.kicker} · {p.range}</span>
-					<h2 class="part-title">{p.title}</h2>
-				</a>
+			<a class="part-card" href="/compendium/{p.slug}">
+				<span class="part-kicker">{p.kicker} · {p.range}</span>
+				<h2 class="part-title">{p.title}</h2>
 				<p class="part-lede">{p.lede}</p>
-			</article>
+			</a>
 		{/each}
 	</section>
 
@@ -142,15 +140,18 @@
 		border: 1px solid var(--color-border);
 		border-radius: 6px;
 		background: color-mix(in srgb, var(--color-border) 12%, transparent);
-		transition: border-color 150ms ease;
+		text-decoration: none;
+		color: inherit;
+		transition:
+			border-color 150ms ease,
+			background-color 150ms ease;
 	}
 	.part-card:hover {
 		border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
 	}
-	.part-head {
-		display: block;
-		text-decoration: none;
-		color: inherit;
+	.part-card:hover .part-title {
+		color: var(--color-accent);
 	}
 	.part-kicker {
 		display: block;
@@ -170,9 +171,6 @@
 		color: var(--color-fg);
 		margin: 0 0 0.85rem;
 		transition: color 150ms ease;
-	}
-	.part-head:hover .part-title {
-		color: var(--color-accent);
 	}
 	.part-lede {
 		font-family: var(--font-body);

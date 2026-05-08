@@ -24,6 +24,30 @@ function stripTags(s: string): string {
 		.trim();
 }
 
+/**
+ * Strip block tags but preserve italic emphasis (<i>, <em>, and bare
+ * inline italic spans) — used for question answers where book references
+ * and proper names ("<i>Abraham</i>", "<i>Rm</i>") are typeset in italic.
+ *
+ * Outputs `<i>…</i>` consistently regardless of how the EPUB markup
+ * encoded the italic (i, em, or span style="font-style: italic;").
+ */
+function preserveItalics(s: string): string {
+	let out = s;
+	// Normalise italic span variants → <i>…</i>
+	out = out.replace(
+		/<span\s+[^>]*style="[^"]*font-style:\s*italic[^"]*"[^>]*>([\s\S]*?)<\/span>/gi,
+		'<i>$1</i>'
+	);
+	out = out.replace(/<em\b[^>]*>([\s\S]*?)<\/em>/gi, '<i>$1</i>');
+	// Strip everything else (block elements, line breaks → spaces).
+	out = out.replace(/<br\s*\/?>/gi, ' ');
+	out = out.replace(/<\/?(?!i\b)[a-z][^>]*>/gi, '');
+	// Collapse whitespace.
+	out = out.replace(/\s+/g, ' ').trim();
+	return out;
+}
+
 function parseEpigraph(inner: string): { text: string; attribution?: string } {
 	// Inner shape (per EPUB): <p>«italic quote» (attribution).<br/></p>
 	// Extract the LAST parenthesized block as the attribution; everything
@@ -211,7 +235,10 @@ export function scanHtml(html: string): HtmlEvent[] {
 			const after = TOKEN.lastIndex;
 			ANSWER_RE.lastIndex = after;
 			const ans = ANSWER_RE.exec(html);
-			const answer = ans ? stripTags(ans[1] ?? '') : '';
+			// Preserve <i> emphasis from the EPUB — book refs and proper names
+			// are typeset italic, and the source JSON has them flattened
+			// (which sometimes loses inter-word spaces around the italics).
+			const answer = ans ? preserveItalics(ans[1] ?? '') : '';
 			matches.push({
 				start: m.index,
 				ev: { kind: 'question', number, question, answer }

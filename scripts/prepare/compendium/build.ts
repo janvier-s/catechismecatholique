@@ -121,8 +121,37 @@ function parseBibleRef(raw: string): BibleRef {
 	};
 }
 
+/**
+ * Clean prose text from the source JSON: fix typographic issues that exist
+ * in the upstream Compendium data (missing spaces, lowercase "saint" before
+ * names, missing space after "cf."), and apply French nbsp conventions
+ * around guillemets and high punctuation.
+ */
+function cleanProse(s: string): string {
+	let out = s;
+	// Insert a space at LowerUpper word boundaries: "Abrahamqui" → "Abraham qui",
+	// "laVierge" → "la Vierge". Won't touch valid compounds (those use hyphens).
+	out = out.replace(/([a-zà-ÿ])([A-ZÀ-Ö])/gu, '$1 $2');
+	// "cf." or "Cf." immediately followed by a letter: insert a space.
+	out = out.replace(/\b(cf|Cf|CF)\.([A-Za-zÀ-Ö])/g, '$1. $2');
+	// Capitalize "saint/sainte/saints/saintes" when used as the title of a
+	// proper noun (followed by an uppercase initial, possibly with hyphen or
+	// guillemet). "saint Augustin" → "Saint Augustin".
+	out = out.replace(
+		/(^|[\s(«—–-])(saint|sainte|saints|saintes)(\s+[A-ZÀ-ÖÉÈÊÎÔÂÛŒÆ])/gu,
+		(_m, before, word, rest) => before + word.charAt(0).toUpperCase() + word.slice(1) + rest
+	);
+	// French nbsp typography around guillemets and high punctuation.
+	// Replace ASCII space with U+00A0 so the punctuation never wraps alone.
+	const NBSP = '\u00A0';
+	out = out.replace(/«[ \t]+/g, '«' + NBSP);
+	out = out.replace(/[ \t]+»/g, NBSP + '»');
+	out = out.replace(/[ \t]+([:;?!])/g, NBSP + '$1');
+	return out;
+}
+
 function answerToHtml(answer: string): string {
-	const trimmed = answer.trim();
+	const trimmed = cleanProse(answer.trim());
 	if (!trimmed) return '';
 	return `<p>${trimmed}</p>`;
 }
@@ -146,7 +175,15 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 				partSlug: string;
 		  }
 		| { kind: 'epigraph'; text: string; attribution?: string; partSlug: string }
-		| { kind: 'question'; number: number; partSlug: string; sectionTitle: string };
+		| {
+				kind: 'question';
+				number: number;
+				/** Answer text scraped from the EPUB HTML — preserves spaces around
+				 *  italic spans where the source JSON has them stripped. */
+				htmlAnswer: string;
+				partSlug: string;
+				sectionTitle: string;
+		  };
 
 	const flowItems: FlowItem[] = [];
 
@@ -261,8 +298,8 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 			} else if (ev.kind === 'epigraph' && currentPart) {
 				flowItems.push({
 					kind: 'epigraph',
-					text: ev.text,
-					attribution: ev.attribution,
+					text: cleanProse(ev.text),
+					attribution: ev.attribution ? cleanProse(ev.attribution) : undefined,
 					partSlug: currentPart.slug
 				});
 			} else if (ev.kind === 'question' && currentPart) {
@@ -282,6 +319,7 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 				flowItems.push({
 					kind: 'question',
 					number: ev.number,
+					htmlAnswer: ev.answer,
 					partSlug: currentPart.slug,
 					sectionTitle: currentSection?.title ?? ''
 				});
@@ -324,8 +362,12 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 				data: {
 					corpus: 'compendium',
 					number: item.number,
-					question: src.paragraph_question.trim(),
-					answer_html: answerToHtml(src.paragraph),
+					question: cleanProse(src.paragraph_question.trim()),
+					// Prefer the EPUB HTML answer text over the source JSON: the
+					// JSON has italic-span stripping that lost spaces between
+					// words ("Abrahamqui", "laVierge Mariequi"). The HTML
+					// scanner preserves them.
+					answer_html: answerToHtml(item.htmlAnswer || src.paragraph),
 					ccc_refs: src.ccc_refs.map((s) => parseInt(s, 10)).filter((n) => Number.isFinite(n)),
 					bible_refs: src.verses.map(parseBibleRef)
 				}
