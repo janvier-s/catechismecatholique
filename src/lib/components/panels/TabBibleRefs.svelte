@@ -105,13 +105,60 @@
 		const ctx = $studyPanel.context;
 		const target = ctx?.kind === 'paragraph' ? ctx.bibleRefIdx : undefined;
 		if (target === undefined || resolved.length === 0 || !listEl) return;
+
+		// Build the set of idxs to flash. If `target` is a cluster member or
+		// leader, expand to the full cluster; otherwise it's just the one row.
+		const targetMag = magisterial.find((r) => Number(r.idx) === target);
+		let flashIdxs: number[];
+		if (targetMag?.marker_idx !== undefined && targetMag.marker_idx !== target) {
+			const leaderIdx = targetMag.marker_idx;
+			flashIdxs = [
+				leaderIdx,
+				...magisterial
+					.filter((r) => r.marker_idx === leaderIdx)
+					.map((r) => Number(r.idx))
+			];
+		} else if (magisterial.some((r) => r.marker_idx === target)) {
+			flashIdxs = [
+				target,
+				...magisterial
+					.filter((r) => r.marker_idx === target)
+					.map((r) => Number(r.idx))
+			];
+		} else {
+			flashIdxs = [target];
+		}
+
 		(async () => {
 			await tick();
-			const el = listEl?.querySelector<HTMLElement>(`[data-idx="${target}"]`);
-			if (!el) return;
-			el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			el.classList.add('ref-flash');
-			setTimeout(() => el.classList.remove('ref-flash'), 1400);
+			const rows = flashIdxs
+				.map((idx) => listEl?.querySelector<HTMLElement>(`[data-idx="${idx}"]`))
+				.filter((el): el is HTMLElement => el != null);
+			if (rows.length === 0) return;
+
+			// Scroll only the panel's inner overflow container so the outer
+			// document doesn't jump. If the closest .styled-scroll ancestor is
+			// missing for any reason, skip scrolling — the flash still pulls
+			// the eye.
+			const scrollEl = rows[0]!.closest<HTMLElement>('.styled-scroll');
+			if (scrollEl) {
+				const containerRect = scrollEl.getBoundingClientRect();
+				const targetRect = rows[0]!.getBoundingClientRect();
+				const offset = targetRect.top - containerRect.top + scrollEl.scrollTop - 8;
+				// Only scroll if the row isn't fully visible — avoids the
+				// "page jiggles every time" feel for short paragraphs.
+				if (
+					targetRect.top < containerRect.top ||
+					targetRect.bottom > containerRect.bottom
+				) {
+					scrollEl.scrollTo({ top: offset, behavior: 'smooth' });
+				}
+			}
+
+			for (const el of rows) el.classList.add('ref-flash');
+			setTimeout(() => {
+				for (const el of rows) el.classList.remove('ref-flash');
+			}, 1400);
 		})();
 	});
 </script>
@@ -215,12 +262,16 @@
 		padding-left: 0.75rem;
 		border-left: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
 	}
-	/* Tighten the vertical rhythm WITHIN a cluster: the parent ul's space-y-5
-	   utility is too generous for header→first-verse and verse→verse adjacency.
-	   Specificity beats Tailwind's .space-y-5 > * + * because we go via two
-	   classes + svelte's scoping hash (auto-added by the compiler). */
-	li.cluster-header + li.cluster-verse,
+	/* Continuous rule: consecutive cluster verses touch (no margin gap) so the
+	   left border draws as one unbroken line. Inner padding-top provides the
+	   breathing room. */
 	li.cluster-verse + li.cluster-verse {
-		margin-top: 0.5rem;
+		margin-top: 0;
+		padding-top: 0.5rem;
+	}
+	/* The header has no border, so an empty margin between header and first
+	   verse doesn't break the rule visually. Keep it as margin. */
+	li.cluster-header + li.cluster-verse {
+		margin-top: 0.25rem;
 	}
 </style>

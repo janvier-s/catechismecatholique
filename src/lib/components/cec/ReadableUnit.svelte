@@ -12,9 +12,14 @@
 
 	let { unit }: { unit: Unit } = $props();
 
-	function onNumberClick() {
-		// Compendium tab opens in Phase 2; for now, only CCC paragraphs open the study panel.
+	function onNumberClick(e: MouseEvent) {
+		// Cmd/Ctrl/Shift/middle-click: let the browser handle it (open in new tab,
+		// new window, etc.) — no panel. <button> doesn't navigate by default, but
+		// the guard is kept for symmetry / safety if the handler is reused on an
+		// <a> element.
+		if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
 		if (unit.kind !== 'ccc-paragraph') return;
+		e.preventDefault();
 		const s = get(studyPanel);
 		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab ?? 'cross-refs');
 	}
@@ -66,16 +71,37 @@
 
 <article class="mb-8 ccc-paragraph" class:has-side-refs={sideRefs !== null} id={anchorId}>
 	<div class="paragraph-grid">
-		<a
-			href={numberHref}
-			onclick={onNumberClick}
-			class="number-col flex-none w-12 text-right pt-1 font-ui font-semibold text-accent tabular-nums hover:underline"
-			aria-label={unit.kind === 'ccc-paragraph'
-				? `Lien vers le paragraphe ${unit.data.number}`
-				: `Question ${unit.data.number}`}
-		>
-			{unit.data.number}
-		</a>
+		<div class="number-wrap flex-none w-12 flex items-start justify-end gap-0.5 pt-1">
+			{#if unit.kind === 'ccc-paragraph'}
+				<button
+					type="button"
+					class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
+					onclick={onNumberClick}
+					aria-label={`Ouvrir le panneau d'étude pour le paragraphe ${unit.data.number}`}
+				>
+					{unit.data.number}
+				</button>
+				<a
+					href={numberHref}
+					class="number-link"
+					aria-label={`Voir le paragraphe ${unit.data.number} dans une page dédiée`}
+				>
+					<svg class="link-icon" viewBox="0 0 256 256" aria-hidden="true">
+						<path
+							d="M137.54,186.36a8,8,0,0,1,0,11.31l-9.94,10A56,56,0,0,1,48.38,128.4L72.5,104.28A56,56,0,0,1,149.31,102a8,8,0,1,1-10.64,12,40,40,0,0,0-54.85,1.63L59.7,139.72a40,40,0,0,0,56.57,56.56l9.94-9.94A8,8,0,0,1,137.54,186.36Zm70.08-138a56.08,56.08,0,0,0-79.22,0l-9.94,9.95a8,8,0,0,0,11.32,11.31l9.94-9.94a40,40,0,0,1,56.56,56.56L172.16,140.4A40,40,0,0,1,117.31,142,8,8,0,1,0,106.67,154a56,56,0,0,0,76.81-2.26l24.12-24.12A56.08,56.08,0,0,0,207.62,48.38Z"
+						/>
+					</svg>
+				</a>
+			{:else}
+				<a
+					href={numberHref}
+					class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
+					aria-label={`Question ${unit.data.number}`}
+				>
+					{unit.data.number}
+				</a>
+			{/if}
+		</div>
 		<div class="content-col text-lg">
 			{#if unit.kind === 'ccc-paragraph'}
 				<ParagraphRenderer
@@ -271,5 +297,24 @@
 	}
 	.compendium-answer :global(p:last-child) {
 		margin-bottom: 0;
+	}
+
+	/* Link icon: hidden by default, revealed when the number column is hovered.
+	   The anchor is sized to match the button so the two targets sit flush. */
+	.number-link {
+		opacity: 0;
+		transition: opacity 120ms ease;
+		color: var(--color-muted);
+		display: flex;
+		align-items: center;
+	}
+	.number-wrap:hover .number-link,
+	.number-link:focus-visible {
+		opacity: 1;
+	}
+	.link-icon {
+		width: 0.85em;
+		height: 0.85em;
+		fill: currentColor;
 	}
 </style>

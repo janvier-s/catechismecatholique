@@ -300,4 +300,22 @@
 		text-decoration-thickness: 1px;
 		color: var(--color-accent);
 	}
+	/* All clickable in-prose markers tint to accent on hover so the reader
+	   feels they're interactive. Cursor is already pointer via the role/sup. */
+	.prose-paragraph :global(sup.srcRef),
+	.prose-paragraph :global(button.bible-inline) {
+		cursor: pointer;
+		transition: color 120ms ease;
+	}
+	.prose-paragraph :global(sup.srcRef:hover),
+	.prose-paragraph :global(button.bible-inline:hover) {
+		color: var(--color-accent);
+	}
+	.prose-paragraph :global(sup.srcRef:focus-visible),
+	.prose-paragraph :global(button.bible-inline:focus-visible) {
+		color: var(--color-accent);
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
 </style>
