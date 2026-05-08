@@ -133,32 +133,40 @@
 	.lvl-default {
 		font-size: 13px;
 	}
-	/* Compendium heading levels — each step down the hierarchy reads as
-	   smaller / lighter so the eye can scan a deep tree at a glance. */
+	/* Compendium heading levels — match the CCC sidebar register: plain
+	   foreground colour with weight + size variation only. The active row
+	   is the only one that gets the accent background, same as the CCC. */
 	.lvl-2 {
 		font-size: 14px;
 		font-weight: 600;
 		color: var(--color-fg);
 	}
 	.lvl-3 {
-		font-size: 13px;
-		font-weight: 600;
-		color: var(--color-accent-text);
+		font-size: 13.5px;
+		font-weight: 500;
+		color: var(--color-fg);
 	}
 	.lvl-4 {
 		font-size: 12.5px;
 		font-weight: 400;
-		color: var(--color-fg);
+		color: var(--color-subtle);
 	}
+	/* Kicker is the only spot that uses accent — and only as a muted eyebrow
+	   above the chapter title, matching how CCC shows "Article 1 :" tags. */
 	.kicker {
 		display: block;
 		font-family: var(--font-ui);
-		font-size: 10.5px;
+		font-size: 10px;
 		font-weight: 600;
-		letter-spacing: 0.14em;
+		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		color: var(--color-accent);
+		color: var(--color-muted);
 		margin-bottom: 0.1rem;
+	}
+	/* When the row is active (is-active sets the red bg + white text), the
+	   kicker should also flip to white so it stays readable. */
+	.is-active .kicker {
+		color: rgba(255, 255, 255, 0.85);
 	}
 	/* Slightly darker than the bare accent so white text clears WCAG AA
 	   (4.5:1) — the raw accent in dark/oled themes is too light for white
