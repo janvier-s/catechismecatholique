@@ -15,6 +15,8 @@ ln -sf ../../../DOCTRINA/sources/CCC/thematic_cross-refs thematic_cross-refs
 ln -sf ../../../DOCTRINA/sources/ccc_ascension/bm_glossary.xhtml ccc_glossary_en.xhtml
 rm -rf cec-ai
 ln -sf ../../../DOCTRINA/JSON/CCC_AI cec-ai
+rm -rf trent
+ln -sf "/Users/Janvier/Development/for-the-kingdom/magisterium/sources/done/Catechisme de Trente/Catéchisme_du_concile_de_Trente/html_files" trent
 ln -sf ../../../../SCRIPTURA/sources/NCL/francl_usfx/francl_usfx.xml ncl/francl_usfx.xml
 ln -sf ../../../../Website/CCC/catechisme-logo.png logos/catechisme-logo.png
 ln -sf ../../../../Website/CCC/catechisme-logo-white.png logos/catechisme-logo-white.png

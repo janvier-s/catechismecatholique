@@ -466,3 +466,83 @@ export interface CompendiumQRange {
 
 /** Reverse index: ccc paragraph number → compendium question numbers citing it. */
 export type CompendiumCitedBy = Record<number, number[]>;
+
+// ─── Trent ───────────────────────────────────────────────────────────────────
+
+export interface TrentParagraph {
+	number: number;
+	html: string;
+}
+
+export interface TrentFootnote {
+	n: number;
+	text: string;
+}
+
+export interface TrentNav {
+	href: string;
+	title: string;
+	kind: 'section' | 'chapter';
+}
+
+export interface TrentSectionFile {
+	corpus: 'trent';
+	chapter_number: number;
+	chapter_slug: string;
+	chapter_title: string;
+	part_slug: string;
+	part_title: string;
+	slug: string;
+	title: string;
+	ordinal: number;
+	paragraph_numbers: number[];
+	paragraphs: TrentParagraph[];
+	footnotes: TrentFootnote[];
+	prev?: TrentNav;
+	next?: TrentNav;
+}
+
+export interface TrentChapterSection {
+	slug: string;
+	title: string;
+	ordinal: number;
+	paragraph_range: [number, number];
+}
+
+export interface TrentChapterFile {
+	corpus: 'trent';
+	number: number;
+	slug: string;
+	title: string;
+	part_slug: string;
+	part_title: string;
+	sections: TrentChapterSection[];
+	prev?: TrentNav;
+	next?: TrentNav;
+}
+
+export interface TrentStructureChapter {
+	number: number;
+	slug: string;
+	title: string;
+	paragraph_range: [number, number];
+	section_count: number;
+}
+
+export interface TrentStructurePart {
+	slug: string;
+	title: string;
+	chapters: TrentStructureChapter[];
+}
+
+export interface TrentStructure {
+	parts: TrentStructurePart[];
+	total_paragraphs: number;
+}
+
+export interface TrentParagraphContext {
+	corpus: 'trent';
+	part: { slug: string; title: string };
+	chapter: { number: number; slug: string; title: string };
+	section: { slug: string; title: string; ordinal: number };
+}

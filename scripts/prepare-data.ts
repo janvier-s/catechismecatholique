@@ -28,6 +28,7 @@ import { buildCitedBy } from './prepare/cited-by.ts';
 import { parseSourceTable } from './prepare/sources-index.ts';
 import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
+import { prepareTrent } from './prepare/trent.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -421,6 +422,19 @@ async function main() {
 		outDir: cecAiDir
 	});
 	void cecAi;
+
+	logStep('building Trent catechism');
+	const trentSourceDir = join(SOURCES, 'trent');
+	if (existsSync(trentSourceDir)) {
+		const trentOutDir = join(OUT, 'trent');
+		mkdirSync(trentOutDir, { recursive: true });
+		const trent = prepareTrent({ sourceDir: trentSourceDir, outDir: trentOutDir });
+		endStep(
+			`${trent.totalChapters} chapters, ${trent.totalSections} sections, ${trent.totalParagraphs} paragraphs`
+		);
+	} else {
+		endStep('source not found — skipped');
+	}
 
 	logStep('building search index');
 	mkdirSync(join(OUT, 'search'), { recursive: true });
