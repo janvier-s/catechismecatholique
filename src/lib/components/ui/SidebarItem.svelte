@@ -106,11 +106,6 @@
 				</span>
 			{/if}
 			{item.title}
-			{#if item.qRange}
-				<span class="qrange"
-					>Q. {item.qRange[0]}{item.qRange[0] === item.qRange[1] ? '' : `–${item.qRange[1]}`}</span
-				>
-			{/if}
 		</a>
 	</div>
 	{#if item.children && expanded}
@@ -141,36 +136,29 @@
 	/* Compendium heading levels — each step down the hierarchy reads as
 	   smaller / lighter so the eye can scan a deep tree at a glance. */
 	.lvl-2 {
-		font-size: 13px;
+		font-size: 14px;
 		font-weight: 600;
 		color: var(--color-fg);
 	}
 	.lvl-3 {
-		font-size: 12.5px;
-		font-weight: 500;
-		color: var(--color-fg);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--color-accent-text);
 	}
 	.lvl-4 {
-		font-size: 11.5px;
+		font-size: 12.5px;
 		font-weight: 400;
-		color: var(--color-muted);
-		font-style: italic;
+		color: var(--color-fg);
 	}
 	.kicker {
 		display: block;
 		font-family: var(--font-ui);
-		font-size: 9.5px;
+		font-size: 10.5px;
 		font-weight: 600;
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
 		color: var(--color-accent);
-		margin-bottom: 0.05rem;
-	}
-	.qrange {
-		font-family: var(--font-ui);
-		font-size: 10.5px;
-		color: var(--color-muted);
-		margin-left: 0.4rem;
+		margin-bottom: 0.1rem;
 	}
 	/* Slightly darker than the bare accent so white text clears WCAG AA
 	   (4.5:1) — the raw accent in dark/oled themes is too light for white

@@ -43,19 +43,24 @@ test.describe('Compendium', () => {
 		await expect(page).toHaveURL('/compendium');
 	});
 
-	test('topbar 3x3 menu has Prières & Formules entry that links to /compendium/annexe', async ({
+	test('topbar 3x3 menu has Prières & Formules entry that links to /prieres-formules', async ({
 		page
 	}) => {
 		await page.goto('/cec');
 		await page.locator('.desktop-menu-trigger').click();
-		await page.locator('a.menu-row[href="/compendium/annexe"]').click();
-		await expect(page).toHaveURL('/compendium/annexe');
+		await page.locator('a.menu-row[href="/prieres-formules"]').click();
+		await expect(page).toHaveURL('/prieres-formules');
 	});
 
-	test('appendix renders prose', async ({ page }) => {
-		await page.goto('/compendium/annexe');
-		await expect(page.getByRole('heading', { level: 1 })).toContainText('Annexe');
+	test('prières & formules renders prose', async ({ page }) => {
+		await page.goto('/prieres-formules');
+		await expect(page.getByRole('heading', { level: 1 })).toContainText('Prières');
 		await expect(page.locator('.compendium-prose').first()).toBeVisible();
+	});
+
+	test('legacy /compendium/annexe redirects to /prieres-formules', async ({ page }) => {
+		await page.goto('/compendium/annexe');
+		await expect(page).toHaveURL('/prieres-formules');
 	});
 
 	// TODO: The committed search-index.json was built without CCC source files present,

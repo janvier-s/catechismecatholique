@@ -46,7 +46,7 @@
 
 	function fmtRange(r?: [number, number]): string {
 		if (!r) return '';
-		return r[0] === r[1] ? `Q. ${r[0]}` : `Q. ${r[0]}–${r[1]}`;
+		return r[0] === r[1] ? `${r[0]}` : `${r[0]}–${r[1]}`;
 	}
 </script>
 
@@ -54,7 +54,7 @@
 	<title>Sommaire · Compendium du Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
-		content="Table des matières complète du Compendium du Catéchisme de l'Église catholique : quatre parties, sections, chapitres, sous-sections — 598 questions et réponses."
+		content="Table des matières complète du Compendium du Catéchisme de l'Église catholique : quatre parties, sections, chapitres — 598 questions et réponses."
 	/>
 </svelte:head>
 
@@ -73,62 +73,71 @@
 		</p>
 	</header>
 
-	<ol class="parts">
+	<ul class="parts" role="list">
 		{#each data.parts as part, i (part.slug)}
 			{@const partNum = data.structure.parts[i]?.number}
 			{@const headings = nestHeadings(part)}
-			<li class="part">
-				<a class="part-link" href={`/compendium/${part.slug}`}>
-					{#if partNum}
-						<span class="part-kicker">Partie {partNum}</span>
-					{/if}
-					<span class="part-title">{part.title}</span>
+			<li class="part-block">
+				<a class="row row-part" href={`/compendium/${part.slug}`}>
+					<span class="row-label">
+						{#if partNum}<span class="label-tag">Partie {partNum}</span>{/if}
+						<span class="label-title">{part.title}</span>
+					</span>
 				</a>
 				{#if headings.length > 0}
-					<ol class="sections">
+					<ul class="sections" role="list">
 						{#each headings as h2 (h2.id)}
-							<li class="section">
-								<a class="section-link" href={`/compendium/${part.slug}#${h2.id}`}>
-									<span class="section-title">{h2.title}</span>
-									{#if h2.qRange}<span class="range">{fmtRange(h2.qRange)}</span>{/if}
+							<li class="section-block">
+								<a class="row row-section" href={`/compendium/${part.slug}#${h2.id}`}>
+									<span class="row-label">
+										<span class="label-title">{h2.title}</span>
+									</span>
+									<span class="dotleader" aria-hidden="true"></span>
+									{#if h2.qRange}<span class="row-range">{fmtRange(h2.qRange)}</span>{/if}
 								</a>
 								{#if h2.children.length > 0}
-									<ol class="subsections">
+									<ul class="chapters" role="list">
 										{#each h2.children as h3 (h3.id)}
-											<li class="subsection">
-												<a class="subsection-link" href={`/compendium/${part.slug}#${h3.id}`}>
-													{#if h3.kicker}<span class="sub-kicker">{h3.kicker}</span>{/if}
-													<span class="subsection-title">{h3.title}</span>
-													{#if h3.qRange}<span class="range">{fmtRange(h3.qRange)}</span>{/if}
+											<li class="chapter-block">
+												<a class="row row-chapter" href={`/compendium/${part.slug}#${h3.id}`}>
+													<span class="row-label">
+														{#if h3.kicker}<span class="label-tag">{h3.kicker}</span>{/if}
+														<span class="label-title">{h3.title}</span>
+													</span>
+													<span class="dotleader" aria-hidden="true"></span>
+													{#if h3.qRange}<span class="row-range">{fmtRange(h3.qRange)}</span>{/if}
 												</a>
 												{#if h3.children.length > 0}
-													<ol class="subsubsections">
+													<ul class="headings" role="list">
 														{#each h3.children as h4 (h4.id)}
-															<li class="subsubsection">
+															<li>
 																<a
-																	class="subsubsection-link"
+																	class="row row-heading"
 																	href={`/compendium/${part.slug}#${h4.id}`}
 																>
-																	<span class="subsubsection-title">{h4.title}</span>
-																	{#if h4.qRange}<span class="range range-small"
-																			>{fmtRange(h4.qRange)}</span
-																		>{/if}
+																	<span class="row-label">
+																		<span class="label-title">{h4.title}</span>
+																	</span>
+																	<span class="dotleader" aria-hidden="true"></span>
+																	{#if h4.qRange}
+																		<span class="row-range">{fmtRange(h4.qRange)}</span>
+																	{/if}
 																</a>
 															</li>
 														{/each}
-													</ol>
+													</ul>
 												{/if}
 											</li>
 										{/each}
-									</ol>
+									</ul>
 								{/if}
 							</li>
 						{/each}
-					</ol>
+					</ul>
 				{/if}
 			</li>
 		{/each}
-	</ol>
+	</ul>
 
 	<nav class="toc-back" aria-label="Retour">
 		<a href="/compendium" class="back-link">← Compendium</a>
@@ -202,145 +211,141 @@
 		margin: 0;
 	}
 
-	.parts {
+	/* Lists */
+	.parts,
+	.sections,
+	.chapters,
+	.headings {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
-	.part {
+	.part-block {
 		margin-bottom: 2.25rem;
 	}
-	.part-link {
-		display: block;
+	.section-block {
+		margin-bottom: 0.85rem;
+	}
+	.chapter-block {
+		margin-bottom: 0.5rem;
+	}
+	.sections {
+		padding-left: 0.5rem;
+	}
+	.chapters {
+		padding-left: 1.25rem;
+	}
+	.headings {
+		padding-left: 1.25rem;
+	}
+
+	/* Row scaffolding — same shape as /cec/sommaire: title, dotleader, range. */
+	.row {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
 		text-decoration: none;
 		color: inherit;
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid var(--color-border);
-		margin-bottom: 0.75rem;
+		padding: 0.2rem 0;
+		transition: color 150ms ease;
 	}
-	.part-link:hover .part-title {
-		color: var(--color-accent);
+	.row-label {
+		flex: 0 1 auto;
+		min-width: 0;
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
 	}
-	.part-kicker {
-		display: block;
+	.label-tag {
+		flex: none;
 		font-family: var(--font-ui);
-		font-size: 0.68rem;
+		font-size: 0.62rem;
 		font-weight: 600;
 		letter-spacing: 0.16em;
 		text-transform: uppercase;
 		color: var(--color-accent);
-		margin-bottom: 0.25rem;
 	}
-	.part-title {
+	.label-title {
+		font-family: var(--font-body);
+		color: var(--color-fg);
+	}
+	.row:hover .label-title {
+		color: var(--color-accent);
+	}
+	.row-range {
+		flex: none;
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-weight: 500;
+		color: var(--color-muted);
+		font-feature-settings: 'tnum';
+		letter-spacing: 0.02em;
+		min-width: 3rem;
+		text-align: right;
+	}
+
+	/* Per-level type sizing */
+	.row-part {
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+		margin-bottom: 0.75rem;
+	}
+	.row-part .label-tag {
+		font-size: 0.68rem;
+	}
+	.row-part .label-title {
 		font-family: var(--font-heading);
 		font-size: 1.5rem;
 		font-weight: 600;
 		line-height: 1.2;
-		color: var(--color-fg);
-		transition: color 150ms ease;
 	}
-
-	.sections {
-		list-style: none;
-		margin: 0;
-		padding: 0 0 0 0.5rem;
-	}
-	.section {
-		margin-bottom: 0.75rem;
-	}
-	.section-link {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		gap: 1rem;
+	.row-section .label-title {
 		font-family: var(--font-ui);
-		text-decoration: none;
-		color: inherit;
-		padding: 0.15rem 0;
-	}
-	.section-title {
 		font-size: 1rem;
 		font-weight: 600;
-		color: var(--color-fg);
-		transition: color 150ms ease;
 	}
-	.section-link:hover .section-title {
-		color: var(--color-accent);
-	}
-
-	.subsections {
-		list-style: none;
-		margin: 0.35rem 0 0;
-		padding: 0 0 0 1.25rem;
-		border-left: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
-	}
-	.subsection {
-		margin-bottom: 0.4rem;
-	}
-	.subsection-link {
-		display: flex;
-		flex-direction: column;
-		text-decoration: none;
-		color: inherit;
-		padding: 0.15rem 0;
-	}
-	.sub-kicker {
-		font-family: var(--font-ui);
-		font-size: 0.62rem;
-		font-weight: 600;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-	}
-	.subsection-title {
+	.row-chapter .label-title {
 		font-family: var(--font-heading);
 		font-size: 1.05rem;
 		font-weight: 500;
-		color: var(--color-fg);
-		transition: color 150ms ease;
 	}
-	.subsection-link:hover .subsection-title {
-		color: var(--color-accent);
-	}
-
-	.subsubsections {
-		list-style: none;
-		margin: 0.3rem 0 0.5rem;
-		padding: 0 0 0 1.25rem;
-		border-left: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
-	}
-	.subsubsection {
-		margin-bottom: 0.15rem;
-	}
-	.subsubsection-link {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		gap: 1rem;
+	.row-heading .label-title {
 		font-family: var(--font-ui);
-		font-size: 0.85rem;
+		font-size: 0.88rem;
 		font-weight: 400;
-		color: var(--color-subtle);
-		text-decoration: none;
 		font-style: italic;
-		padding: 0.1rem 0;
-	}
-	.subsubsection-link:hover {
-		color: var(--color-accent);
+		color: var(--color-subtle);
 	}
 
-	.range {
-		flex: none;
-		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		font-style: normal;
-		color: var(--color-muted);
-		letter-spacing: 0.04em;
-		white-space: nowrap;
+	.dotleader {
+		flex: 1 1 auto;
+		min-width: 1.5rem;
+		align-self: end;
+		height: 1px;
+		margin-bottom: 0.5em;
+		background-image: radial-gradient(
+			circle,
+			color-mix(in srgb, var(--color-fg) 28%, transparent) 0.5px,
+			transparent 1px
+		);
+		background-size: 6px 2px;
+		background-repeat: repeat-x;
+		background-position: 0 50%;
+		opacity: 0.7;
 	}
-	.range-small {
-		font-size: 0.68rem;
+
+	@media (max-width: 600px) {
+		.dotleader {
+			display: none;
+		}
+		.row {
+			flex-wrap: wrap;
+		}
+		.row-range {
+			order: -1;
+			min-width: 3rem;
+			text-align: left;
+		}
 	}
 
 	.toc-back {

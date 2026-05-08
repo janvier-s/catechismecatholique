@@ -5,25 +5,38 @@
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 
-	let { part }: { part: CompendiumPart } = $props();
+	// `standalone` is true when this part is rendered at its own top-level
+	// route (e.g. /prieres-formules) rather than under /compendium/[part].
+	// In that case we drop the "Compendium >" parent crumb and use a tailored
+	// eyebrow + title.
+	let { part, standalone = false }: { part: CompendiumPart; standalone?: boolean } = $props();
+
+	const headerTitle = $derived(standalone ? 'Prières & formules' : part.title);
+	const headerEyebrow = $derived(
+		standalone ? 'Annexe' : part.number ? `Partie ${part.number}` : 'Annexe'
+	);
 </script>
 
 <main class="mx-auto max-w-reader px-6 max-md:px-0 py-10" use:scrollSpy>
 	<header class="mb-8">
-		<BreadcrumbRail
-			crumbs={[
-				{ href: '/compendium', title: 'Compendium' },
-				part.number
-					? { href: `/compendium/${part.slug}`, kicker: `Partie ${part.number}`, title: part.title }
-					: { href: `/compendium/${part.slug}`, title: part.title }
-			]}
-		/>
-		{#if part.number}
-			<p class="font-ui text-sm uppercase tracking-wider text-muted">Partie {part.number}</p>
+		{#if standalone}
+			<BreadcrumbRail crumbs={[{ href: '/prieres-formules', title: headerTitle }]} />
 		{:else}
-			<p class="font-ui text-sm uppercase tracking-wider text-muted">Annexe</p>
+			<BreadcrumbRail
+				crumbs={[
+					{ href: '/compendium', title: 'Compendium' },
+					part.number
+						? {
+								href: `/compendium/${part.slug}`,
+								kicker: `Partie ${part.number}`,
+								title: part.title
+							}
+						: { href: `/compendium/${part.slug}`, title: part.title }
+				]}
+			/>
 		{/if}
-		<h1 class="font-heading text-4xl font-semibold mt-1 text-heading">{part.title}</h1>
+		<p class="font-ui text-sm uppercase tracking-wider text-muted">{headerEyebrow}</p>
+		<h1 class="font-heading text-4xl font-semibold mt-1 text-heading">{headerTitle}</h1>
 	</header>
 
 	{#each part.flow as node, i (i)}

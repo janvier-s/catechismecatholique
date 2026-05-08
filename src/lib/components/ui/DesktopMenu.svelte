@@ -69,7 +69,7 @@
 			description: 'Le Catéchisme en 598 questions et réponses.'
 		},
 		{
-			href: '/compendium/annexe',
+			href: '/prieres-formules',
 			label: 'Prières & Formules',
 			description: 'Prières communes et formules de la doctrine catholique.'
 		},
