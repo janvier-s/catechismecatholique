@@ -15,8 +15,9 @@
 	function update() {
 		if (!scrollEl) return;
 		const { scrollLeft, scrollWidth, clientWidth } = scrollEl;
-		canLeft = scrollLeft > 1;
-		canRight = scrollLeft + clientWidth < scrollWidth - 1;
+		const hasOverflow = scrollWidth > clientWidth + 1;
+		canLeft = hasOverflow && scrollLeft > 1;
+		canRight = hasOverflow && scrollLeft + clientWidth < scrollWidth - 1;
 	}
 
 	function nudge(dir: -1 | 1) {
