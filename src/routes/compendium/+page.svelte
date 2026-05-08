@@ -81,13 +81,7 @@
 	</section>
 
 	<nav class="quick-links" aria-label="Navigation complémentaire">
-		<a href="/cec" class="quick-link">Catéchisme</a>
-		<span class="quick-sep" aria-hidden="true">·</span>
-		<a href="/compendium/annexe" class="quick-link">Prières & formules</a>
-		<span class="quick-sep" aria-hidden="true">·</span>
-		<a href="/glossaire" class="quick-link">Glossaire</a>
-		<span class="quick-sep" aria-hidden="true">·</span>
-		<a href="/recherche" class="quick-link">Recherche</a>
+		<a href="/compendium/sommaire" class="quick-link">Sommaire complet</a>
 	</nav>
 </main>
 
@@ -209,10 +203,5 @@
 	}
 	.quick-link:hover {
 		color: var(--color-accent);
-	}
-	.quick-sep {
-		font-family: var(--font-ui);
-		font-size: 0.65rem;
-		color: var(--color-border);
 	}
 </style>

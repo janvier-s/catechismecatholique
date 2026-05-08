@@ -136,11 +136,36 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 
 	// Walk the HTML files in document order and assign each question to (part, section).
 	type FlowItem =
-		| { kind: 'heading'; level: 2 | 3 | 4; id: string; title: string; partSlug: string }
+		| {
+				kind: 'heading';
+				level: 2 | 3 | 4;
+				id: string;
+				title: string;
+				kicker?: string;
+				q_range?: [number, number];
+				partSlug: string;
+		  }
 		| { kind: 'epigraph'; text: string; attribution?: string; partSlug: string }
 		| { kind: 'question'; number: number; partSlug: string; sectionTitle: string };
 
 	const flowItems: FlowItem[] = [];
+
+	// Roman numerals for Compendium chapters (depth-4 / our level-3 entries)
+	// within each section. Resets whenever a new depth-3 section opens.
+	const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+	let chapterIdxInSection = 0;
+
+	// Pointers to the most-recent heading at each level, so we can patch
+	// their q_range as questions arrive.
+	let openH2: FlowItem | null = null;
+	let openH3: FlowItem | null = null;
+	let openH4: FlowItem | null = null;
+
+	const extendRange = (h: FlowItem | null, n: number) => {
+		if (!h || h.kind !== 'heading') return;
+		if (!h.q_range) h.q_range = [n, n];
+		else h.q_range[1] = n;
+	};
 	const partOrder: { slug: string; number: 1 | 2 | 3 | 4; title: string }[] = [];
 	const sectionsByPart = new Map<string, CompendiumStructureSection[]>();
 
@@ -203,17 +228,35 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 					pushSectionIfClosed();
 					pushPartDirectIfAny();
 					currentSection = { title: titleCase(tocEntry.label), from: 0, to: 0 };
-					// EPUB depth 3 → section (h2), depth 4 → subsection (h3),
+					// EPUB depth 3 → section (h2), depth 4 → subsection (h3 = "Chapitre"),
 					// depth 5+ → sub-subsection (h4). Cap at 4 so deeper trees
 					// degrade gracefully rather than producing unstyled levels.
 					const headingLevel: 2 | 3 | 4 = tocEntry.depth === 3 ? 2 : tocEntry.depth === 4 ? 3 : 4;
-					flowItems.push({
+					// Reset chapter index when a new section (level 2) opens.
+					if (headingLevel === 2) chapterIdxInSection = 0;
+					const node: FlowItem = {
 						kind: 'heading',
 						level: headingLevel,
 						id: `s-${slugify(tocEntry.label)}`,
 						title: titleCase(tocEntry.label),
 						partSlug: currentPart.slug
-					});
+					};
+					if (headingLevel === 3) {
+						chapterIdxInSection++;
+						const roman = ROMAN[chapterIdxInSection] ?? `${chapterIdxInSection}`;
+						node.kicker = `Chapitre ${roman}`;
+					}
+					flowItems.push(node);
+					if (headingLevel === 2) {
+						openH2 = node;
+						openH3 = null;
+						openH4 = null;
+					} else if (headingLevel === 3) {
+						openH3 = node;
+						openH4 = null;
+					} else {
+						openH4 = node;
+					}
 				}
 			} else if (ev.kind === 'epigraph' && currentPart) {
 				flowItems.push({
@@ -231,6 +274,11 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 					if (partDirectFrom === 0) partDirectFrom = ev.number;
 					partDirectTo = ev.number;
 				}
+				// Patch q_range on each open heading so consumers (sommaire,
+				// sidebar) can show "Q. N–M" next to a heading.
+				extendRange(openH2, ev.number);
+				extendRange(openH3, ev.number);
+				extendRange(openH4, ev.number);
 				flowItems.push({
 					kind: 'question',
 					number: ev.number,
@@ -257,7 +305,9 @@ export function buildCompendium(input: BuildInput): BuildOutput {
 				kind: 'heading',
 				level: item.level,
 				id: item.id,
-				title: item.title
+				title: item.title,
+				...(item.kicker ? { kicker: item.kicker } : {}),
+				...(item.q_range ? { q_range: item.q_range } : {})
 			});
 		} else if (item.kind === 'epigraph') {
 			partBundle.flow.push({

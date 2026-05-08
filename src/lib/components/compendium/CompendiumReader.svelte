@@ -36,13 +36,18 @@
 					{node.title}
 				</h2>
 			{:else if node.level === 3}
-				<h3 id={node.id} class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent">
-					{node.title}
-				</h3>
+				<div class="mt-12 mb-4 scroll-mt-24" id={node.id}>
+					{#if node.kicker}
+						<p class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted mb-1">
+							{node.kicker}
+						</p>
+					{/if}
+					<h3 class="font-ui text-xl font-semibold text-accent">{node.title}</h3>
+				</div>
 			{:else}
 				<h4
 					id={node.id}
-					class="font-ui text-base font-semibold mt-8 mb-3 scroll-mt-24 uppercase tracking-wider text-muted"
+					class="font-ui text-xs font-semibold mt-8 mb-3 scroll-mt-24 uppercase tracking-[0.18em] text-muted"
 				>
 					{node.title}
 				</h4>

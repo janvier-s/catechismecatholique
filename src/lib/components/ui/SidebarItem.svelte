@@ -9,6 +9,10 @@
 		typeLabel?: string;
 		/** Heading level for compendium entries (2, 3, 4). Drives per-row styling. */
 		level?: 2 | 3 | 4;
+		/** Eyebrow above the title (e.g. "Chapitre II"). */
+		kicker?: string;
+		/** Question range under this heading (compendium). */
+		qRange?: [number, number];
 		children?: Item[];
 	};
 	let {
@@ -92,6 +96,9 @@
 			class:lvl-4={item.level === 4}
 			class:lvl-default={item.level === undefined}
 		>
+			{#if item.kicker}
+				<span class="kicker">{item.kicker}</span>
+			{/if}
 			{#if item.typeLabel}
 				<span class="font-semibold">
 					{item.typeLabel}
@@ -99,10 +106,15 @@
 				</span>
 			{/if}
 			{item.title}
+			{#if item.qRange}
+				<span class="qrange"
+					>Q. {item.qRange[0]}{item.qRange[0] === item.qRange[1] ? '' : `–${item.qRange[1]}`}</span
+				>
+			{/if}
 		</a>
 	</div>
 	{#if item.children && expanded}
-		<ul class="ml-3">
+		<ul class="children" class:children-deep={depth >= 1}>
 			{#each item.children as child (child.href)}
 				<Self item={child} {activeHref} depth={depth + 1} />
 			{/each}
@@ -111,6 +123,16 @@
 </li>
 
 <style>
+	/* Children list — nested entries get a clear left indent + a hairline
+	   gutter rule so the hierarchy is unmistakable in deep trees. */
+	.children {
+		margin-left: 1rem;
+	}
+	.children-deep {
+		margin-left: 1.25rem;
+		padding-left: 0.75rem;
+		border-left: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+	}
 	/* Default size for entries that don't carry a Compendium heading level
 	   (CCC sidebar items, parts/sections by typeLabel). */
 	.lvl-default {
@@ -129,9 +151,26 @@
 		color: var(--color-fg);
 	}
 	.lvl-4 {
-		font-size: 12px;
+		font-size: 11.5px;
 		font-weight: 400;
-		color: var(--color-subtle);
+		color: var(--color-muted);
+		font-style: italic;
+	}
+	.kicker {
+		display: block;
+		font-family: var(--font-ui);
+		font-size: 9.5px;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 0.05rem;
+	}
+	.qrange {
+		font-family: var(--font-ui);
+		font-size: 10.5px;
+		color: var(--color-muted);
+		margin-left: 0.4rem;
 	}
 	/* Slightly darker than the bare accent so white text clears WCAG AA
 	   (4.5:1) — the raw accent in dark/oled themes is too light for white

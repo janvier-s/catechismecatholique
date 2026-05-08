@@ -374,12 +374,20 @@ export interface CompendiumHeadingNode {
 	kind: 'heading';
 	/**
 	 * 2 = section (under a Part — large serif h2 with rule)
-	 * 3 = subsection (medium ui h3 in accent)
+	 * 3 = subsection / "chapter" (medium ui h3 in accent)
 	 * 4 = sub-subsection (smaller h4, muted)
 	 */
 	level: 2 | 3 | 4;
 	id: string;
 	title: string;
+	/**
+	 * Optional eyebrow rendered above/before the title. Used by the build
+	 * pipeline to label Compendium chapters as "Chapitre I", "Chapitre II"
+	 * etc. (level-3 entries get this; level-2 and level-4 don't).
+	 */
+	kicker?: string;
+	/** First and last question numbers under this heading (range). */
+	q_range?: [number, number];
 }
 
 export interface CompendiumEpigraphNode {
