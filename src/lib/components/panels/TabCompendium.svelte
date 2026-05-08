@@ -109,7 +109,7 @@
 					<p class="font-heading italic text-[15px] font-semibold text-fg leading-snug mb-1">
 						{h.question}
 					</p>
-					<div class="answer font-body text-[13.5px] leading-relaxed text-subtle">
+					<div class="answer font-body text-[15px] leading-relaxed">
 						{@html h.answer_html}
 					</div>
 				</a>

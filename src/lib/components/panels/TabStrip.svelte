@@ -126,49 +126,41 @@
 		background: var(--color-accent);
 	}
 
-	/* Chevrons sit on top of the track edges; they're hidden until the track
-	   actually has overflow in that direction. The fade gradient hints that
-	   more content lies beyond. */
+	/* Chevrons sit on top of the track edges, full tab height, with a solid
+	   panel-colour background. They're hidden (display:none) until the track
+	   actually has overflow in that direction, so they don't sit on top of
+	   the rightmost tab when there's nothing to scroll to. */
 	.chev {
 		position: absolute;
 		top: 0;
-		bottom: 1px;
+		bottom: 0;
 		width: 28px;
-		display: flex;
+		display: none;
 		align-items: center;
 		justify-content: center;
 		font-size: 18px;
 		line-height: 1;
 		color: var(--color-fg);
-		background: transparent;
+		background: var(--color-panel);
 		border: 0;
 		cursor: pointer;
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 120ms ease;
 		z-index: 2;
+		/* A 1px border on the inner edge keeps the chev visually distinct
+		   from the tabs scrolling underneath. */
 	}
 	.chev-l {
 		left: 0;
-		background: linear-gradient(
-			to right,
-			var(--color-panel) 60%,
-			color-mix(in srgb, var(--color-panel) 0%, transparent)
-		);
+		border-right: 1px solid var(--color-border);
 	}
 	.chev-r {
 		right: 0;
-		background: linear-gradient(
-			to left,
-			var(--color-panel) 60%,
-			color-mix(in srgb, var(--color-panel) 0%, transparent)
-		);
+		border-left: 1px solid var(--color-border);
 	}
 	.chev-shown {
-		opacity: 1;
-		pointer-events: auto;
+		display: flex;
 	}
 	.chev:hover {
 		color: var(--color-accent);
+		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-panel));
 	}
 </style>
