@@ -397,33 +397,36 @@
 				const isActive = activeCompendiumPart?.slug === part.slug;
 				let children: Item[] | undefined;
 				if (isActive && activeCompendiumPart) {
-					// For the active part, expand: section headings + their questions.
+					// Build a 3-deep heading tree (h2 → h3 → h4). Individual
+					// questions are NOT included — the sidebar is a structural
+					// outline of the part, not a Q-by-Q index.
 					children = [];
-					let currentSection: Item | null = null;
+					let currentH2: Item | null = null;
+					let currentH3: Item | null = null;
 					for (const node of activeCompendiumPart.flow) {
-						if (node.kind === 'heading' && node.level === 2) {
-							currentSection = {
-								title: node.title,
-								href: `${partHref}#${node.id}`,
-								children: []
-							};
-							children.push(currentSection);
-						} else if (node.kind === 'question') {
-							const qItem: Item = {
-								title: node.data.question,
-								number: node.data.number,
-								typeLabel: 'Q',
-								href: `${partHref}#q-${node.data.number}`
-							};
-							if (currentSection) {
-								(currentSection.children = currentSection.children ?? []).push(qItem);
-							} else {
-								children.push(qItem);
-							}
+						if (node.kind !== 'heading') continue;
+						const item: Item = {
+							title: node.title,
+							href: `${partHref}#${node.id}`
+						};
+						if (node.level === 2) {
+							children.push(item);
+							currentH2 = item;
+							currentH3 = null;
+						} else if (node.level === 3) {
+							const parent = currentH2 ?? null;
+							if (parent) (parent.children = parent.children ?? []).push(item);
+							else children.push(item);
+							currentH3 = item;
+						} else {
+							// level 4
+							const parent = currentH3 ?? currentH2 ?? null;
+							if (parent) (parent.children = parent.children ?? []).push(item);
+							else children.push(item);
 						}
 					}
 				} else {
-					// Non-active parts: show just section headings as a peek.
+					// Non-active parts: show just the depth-2 sections as a peek.
 					children = part.sections.map(
 						(sec): Item => ({
 							title: sec.title,
