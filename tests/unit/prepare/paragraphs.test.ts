@@ -41,8 +41,7 @@ describe('extractParagraphs', () => {
 	});
 
 	it('propagates marker_idx for consecutive bibleRef sups (§1021 case)', () => {
-		const sup = (idx: number) =>
-			`<sup class="srcRef bibleRef" data-idx="${idx}">${idx}</sup>`;
+		const sup = (idx: number) => `<sup class="srcRef bibleRef" data-idx="${idx}">${idx}</sup>`;
 		const html = `<span>texte ${sup(4)}${sup(5)}${sup(6)}${sup(7)} parlent.</span>`;
 		const fixture = [
 			{
@@ -72,7 +71,11 @@ describe('extractParagraphs', () => {
 		];
 		const result = extractParagraphs(fixture as Parameters<typeof extractParagraphs>[0]);
 		const p = result.get(1021);
-		expect(p?.text_html).toBe(`<span>Texte ${sup(4)} parlent.</span>`);
+		// Surviving sup is renumbered to 1 (only bibleRef sup left in the paragraph).
+		expect(p?.text_html).toBe(
+			`<span>Texte <sup class="srcRef bibleRef" data-idx="4">1</sup> parlent.</span>`
+		);
 		expect(p?.magisterial_refs.map((r) => r.marker_idx)).toEqual([undefined, 4, 4, 4]);
+		expect(p?.magisterial_refs.map((r) => r.display_idx)).toEqual([1, 1, 1, 1]);
 	});
 });

@@ -164,7 +164,7 @@ interface RefLike {
 export function groupConsecutiveBibleSups<T extends RefLike>(input: {
 	html: string;
 	refs: T[];
-}): { html: string; refs: (T & { marker_idx?: number })[] } {
+}): { html: string; refs: (T & { marker_idx?: number; display_idx?: number })[] } {
 	const { html, refs } = input;
 
 	// Collect every bibleRef sup with its position. Plain regex over a known
@@ -175,29 +175,7 @@ export function groupConsecutiveBibleSups<T extends RefLike>(input: {
 	while ((m = BIBLE_SUP_RE.exec(html)) !== null) {
 		hits.push({ idx: parseInt(m[1]!, 10), start: m.index, end: m.index + m[0].length });
 	}
-	if (hits.length < 2) return { html, refs: [...refs] };
 
-	// Walk the hit list, growing maximal runs where the gap between two hits
-	// is whitespace-only. Any non-whitespace character (including another sup
-	// class like cccRef) breaks the run.
-	const runs: SupHit[][] = [];
-	let current: SupHit[] = [hits[0]!];
-	for (let i = 1; i < hits.length; i++) {
-		const gap = html.slice(hits[i - 1]!.end, hits[i]!.start);
-		if (/^\s*$/.test(gap)) {
-			current.push(hits[i]!);
-		} else {
-			if (current.length > 1) runs.push(current);
-			current = [hits[i]!];
-		}
-	}
-	if (current.length > 1) runs.push(current);
-
-	if (runs.length === 0) return { html, refs: [...refs] };
-
-	// Apply changes: refs first (cheap copy), then html (rebuild from slices
-	// so we walk the string exactly once and never have to re-index after
-	// edits invalidate offsets).
 	const refsByIdx = new Map<number, number>();
 	refs.forEach((r, i) => {
 		if (r.type !== 'bible' && r.type !== 'bible_continuation') return;
@@ -207,6 +185,25 @@ export function groupConsecutiveBibleSups<T extends RefLike>(input: {
 	});
 
 	const nextRefs = refs.map((r) => ({ ...r }));
+
+	// Walk the hit list, growing maximal runs where the gap between two hits
+	// is whitespace-only. Any non-whitespace character (including another sup
+	// class like cccRef) breaks the run.
+	const runs: SupHit[][] = [];
+	if (hits.length >= 2) {
+		let current: SupHit[] = [hits[0]!];
+		for (let i = 1; i < hits.length; i++) {
+			const gap = html.slice(hits[i - 1]!.end, hits[i]!.start);
+			if (/^\s*$/.test(gap)) {
+				current.push(hits[i]!);
+			} else {
+				if (current.length > 1) runs.push(current);
+				current = [hits[i]!];
+			}
+		}
+		if (current.length > 1) runs.push(current);
+	}
+
 	for (const run of runs) {
 		const leader = run[0]!.idx;
 		for (let i = 1; i < run.length; i++) {
@@ -228,13 +225,43 @@ export function groupConsecutiveBibleSups<T extends RefLike>(input: {
 	}
 	stripRanges.sort((a, b) => a.start - b.start);
 
-	const out: string[] = [];
+	const stripped: string[] = [];
 	let cursor = 0;
 	for (const { start, end } of stripRanges) {
-		out.push(html.slice(cursor, start));
+		stripped.push(html.slice(cursor, start));
 		cursor = end;
 	}
-	out.push(html.slice(cursor));
+	stripped.push(html.slice(cursor));
+	const strippedHtml = stripped.join('');
 
-	return { html: out.join(''), refs: nextRefs };
+	// Walk surviving sups in DOM order; renumber inner text and capture
+	// orig-idx → display-idx so we can mirror the renumbering on the refs side.
+	let counter = 0;
+	const idxToDisplay = new Map<number, number>();
+	const renumberedHtml = strippedHtml.replace(
+		/<sup class="srcRef bibleRef" data-idx="(\d+)">\d+<\/sup>/g,
+		(_match, dataIdx: string) => {
+			counter++;
+			idxToDisplay.set(parseInt(dataIdx, 10), counter);
+			return `<sup class="srcRef bibleRef" data-idx="${dataIdx}">${counter}</sup>`;
+		}
+	);
+
+	// Leaders / solos: display_idx = their renumbered counter.
+	for (const [origIdx, displayIdx] of idxToDisplay) {
+		const ri = refsByIdx.get(origIdx);
+		if (ri !== undefined) (nextRefs[ri] as RefLike).display_idx = displayIdx;
+	}
+	// Cluster members: inherit their leader's display_idx.
+	for (const run of runs) {
+		const leaderIdx = run[0]!.idx;
+		const leaderDisplay = idxToDisplay.get(leaderIdx);
+		if (leaderDisplay === undefined) continue;
+		for (let i = 1; i < run.length; i++) {
+			const ri = refsByIdx.get(run[i]!.idx);
+			if (ri !== undefined) (nextRefs[ri] as RefLike).display_idx = leaderDisplay;
+		}
+	}
+
+	return { html: renumberedHtml, refs: nextRefs };
 }

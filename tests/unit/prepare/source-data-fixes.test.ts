@@ -147,7 +147,8 @@ describe('groupConsecutiveBibleSups', () => {
 		const refs = [{ type: 'bible' as const, raw: 'voir Mt 5:1', idx: 1 }];
 		const result = groupConsecutiveBibleSups({ html, refs });
 		expect(result.html).toBe(html);
-		expect(result.refs).toEqual(refs);
+		expect(result.refs[0]!.display_idx).toBe(1);
+		expect(result.refs[0]!.marker_idx).toBeUndefined();
 	});
 
 	it('collapses two consecutive sups, marking the second member', () => {
@@ -158,8 +159,10 @@ describe('groupConsecutiveBibleSups', () => {
 		];
 		const result = groupConsecutiveBibleSups({ html, refs });
 		expect(result.html).toBe(`<span>texte ${sup(1)}.</span>`);
-		expect(result.refs[0]).toEqual(refs[0]);
-		expect(result.refs[1]).toEqual({ ...refs[1], marker_idx: 1 });
+		expect(result.refs[0]!.marker_idx).toBeUndefined();
+		expect(result.refs[0]!.display_idx).toBe(1);
+		expect(result.refs[1]!.marker_idx).toBe(1);
+		expect(result.refs[1]!.display_idx).toBe(1);
 	});
 
 	it('collapses a 4-sup cluster (§1021 case)', () => {
@@ -171,11 +174,18 @@ describe('groupConsecutiveBibleSups', () => {
 			{ type: 'bible_continuation' as const, raw: '12:23', idx: 7 }
 		];
 		const result = groupConsecutiveBibleSups({ html, refs });
-		expect(result.html).toBe(`<span>${sup(4)} parlent.</span>`);
+		// Surviving leader's inner text is renumbered to 1 (only bibleRef sup left).
+		expect(result.html).toBe(
+			`<span><sup class="srcRef bibleRef" data-idx="4">1</sup> parlent.</span>`
+		);
 		expect(result.refs[0]!.marker_idx).toBeUndefined();
+		expect(result.refs[0]!.display_idx).toBe(1);
 		expect(result.refs[1]!.marker_idx).toBe(4);
+		expect(result.refs[1]!.display_idx).toBe(1);
 		expect(result.refs[2]!.marker_idx).toBe(4);
+		expect(result.refs[2]!.display_idx).toBe(1);
 		expect(result.refs[3]!.marker_idx).toBe(4);
+		expect(result.refs[3]!.display_idx).toBe(1);
 	});
 
 	it('handles two non-adjacent clusters in the same paragraph', () => {
@@ -189,7 +199,10 @@ describe('groupConsecutiveBibleSups', () => {
 			{ type: 'bible' as const, raw: 'Jn 1:3', idx: 6 }
 		];
 		const result = groupConsecutiveBibleSups({ html, refs });
-		expect(result.html).toBe(`<span>A ${sup(1)}. B ${sup(3)}. C ${sup(4)}.</span>`);
+		// Surviving sups in order: idx=1, idx=3, idx=4 → renumbered 1, 2, 3.
+		expect(result.html).toBe(
+			`<span>A <sup class="srcRef bibleRef" data-idx="1">1</sup>. B <sup class="srcRef bibleRef" data-idx="3">2</sup>. C <sup class="srcRef bibleRef" data-idx="4">3</sup>.</span>`
+		);
 		expect(result.refs.map((r) => r.marker_idx)).toEqual([
 			undefined,
 			1,
@@ -198,6 +211,8 @@ describe('groupConsecutiveBibleSups', () => {
 			4,
 			4
 		]);
+		// Leader 1 → 1; member 2 inherits 1. Solo 3 → 2. Leader 4 → 3; members 5,6 inherit 3.
+		expect(result.refs.map((r) => r.display_idx)).toEqual([1, 1, 2, 3, 3, 3]);
 	});
 
 	it('does NOT cluster across a non-bibleRef sup (cccRef breaks the run)', () => {
@@ -209,6 +224,9 @@ describe('groupConsecutiveBibleSups', () => {
 		const result = groupConsecutiveBibleSups({ html, refs });
 		expect(result.html).toBe(html);
 		expect(result.refs.every((r) => r.marker_idx === undefined)).toBe(true);
+		// Both bibleRef sups are renumbered 1, 2 (matching their original idx, no
+		// visible change), and display_idx is set on both refs.
+		expect(result.refs.map((r) => r.display_idx)).toEqual([1, 2]);
 	});
 
 	it('does NOT cluster sups separated by literal text', () => {
@@ -220,6 +238,7 @@ describe('groupConsecutiveBibleSups', () => {
 		const result = groupConsecutiveBibleSups({ html, refs });
 		expect(result.html).toBe(html);
 		expect(result.refs.every((r) => r.marker_idx === undefined)).toBe(true);
+		expect(result.refs.map((r) => r.display_idx)).toEqual([1, 2]);
 	});
 
 	it('treats whitespace + NBSP between sups as consecutive', () => {
@@ -235,5 +254,8 @@ describe('groupConsecutiveBibleSups', () => {
 		// trailing <sup> elements would leave "<sup1>  ." here.
 		expect(result.html).not.toMatch(/<\/sup>\s+\./);
 		expect(result.refs[1]!.marker_idx).toBe(1);
+		// Surviving leader is renumbered to 1; member inherits 1.
+		expect(result.refs[0]!.display_idx).toBe(1);
+		expect(result.refs[1]!.display_idx).toBe(1);
 	});
 });

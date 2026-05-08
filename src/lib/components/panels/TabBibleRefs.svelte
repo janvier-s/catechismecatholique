@@ -6,7 +6,7 @@
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
 	import type { BibleRef, MagisterialRefRecord, NclBible } from '$lib/data/types';
 
-	type RefStyle = 'inline' | 'sup';
+	type RefStyle = 'inline' | 'sup' | 'cluster-member';
 	type ParsedRef = {
 		raw: string;
 		idx: number;
@@ -52,12 +52,7 @@
 	});
 
 	// Verse part is optional so chapter-only refs (e.g. "Os 11", "Ez 16") parse.
-	function parseRef(
-		raw: string,
-		idx: number,
-		marker: number,
-		style: RefStyle
-	): ParsedRef | null {
+	function parseRef(raw: string, idx: number, marker: number, style: RefStyle): ParsedRef | null {
 		const m = raw.match(/^([1-3]?\s*[A-Za-zÉéèê]+)\s+(\d+)(?::(\d+)(?:-(\d+))?)?/);
 		if (!m) return null;
 		const book = bookByAbbr(m[1]!.trim());
@@ -71,15 +66,16 @@
 	function markerAndStyleForIdx(idx: number): { marker: number; style: RefStyle } {
 		const m = magisterial.find((r) => Number(r.idx) === idx);
 		if (!m) return { marker: idx, style: 'inline' };
-		// Cluster member — share leader's marker, always sup style.
+		const display = m.display_idx ?? idx;
+		// Cluster member — no marker, indented with left rule.
 		if (m.marker_idx !== undefined && m.marker_idx !== idx) {
-			return { marker: m.marker_idx, style: 'sup' };
+			return { marker: display, style: 'cluster-member' };
 		}
 		// Cluster leader — at least one other ref points at me. Always sup.
 		const isLeader = magisterial.some((r) => r.marker_idx === idx);
-		if (isLeader) return { marker: idx, style: 'sup' };
+		if (isLeader) return { marker: display, style: 'sup' };
 		// Solo ref — existing voir heuristic.
-		return { marker: idx, style: /^voir\s/i.test(m.raw) ? 'sup' : 'inline' };
+		return { marker: display, style: /^voir\s/i.test(m.raw) ? 'sup' : 'inline' };
 	}
 
 	$effect(() => {
@@ -124,7 +120,7 @@
 	{:else}
 		<ul bind:this={listEl} class="space-y-5">
 			{#each resolved as r (r.raw + ':' + r.idx)}
-				<li data-idx={r.idx} class="rounded">
+				<li data-idx={r.idx} class="rounded" class:cluster-member={r.style === 'cluster-member'}>
 					<div class="flex items-baseline gap-1.5">
 						{#if r.style === 'sup'}
 							<sup class="ref-marker">{r.marker}</sup>
@@ -183,5 +179,16 @@
 	}
 	sup.ref-marker {
 		font-size: 0.75em;
+	}
+	li.cluster-member {
+		/* Override the negative-margin compensation so the indent reads.
+		   Members sit in a visually-grouped block under their leader. */
+		margin-left: 0.75rem;
+		margin-right: -0.5rem;
+		padding-left: 0.75rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+	}
+	li.cluster-member + li.cluster-member {
+		margin-top: -0.25rem;
 	}
 </style>

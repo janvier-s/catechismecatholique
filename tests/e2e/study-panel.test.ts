@@ -43,7 +43,7 @@ test('inline bible ref opens the study panel on the Bible tab', async ({ page })
 	await expect(panel).toBeVisible();
 });
 
-test('§1021 collapses 4 consecutive bibleRef sups and shares marker 4 in the panel', async ({
+test('§1021 collapses 4 consecutive bibleRef sups and renumbers markers sequentially', async ({
 	page
 }) => {
 	await page.goto('/cec/1021');
@@ -77,21 +77,42 @@ test('§1021 collapses 4 consecutive bibleRef sups and shares marker 4 in the pa
 	});
 	expect(adjacentSupPairs).toBe(0);
 
+	// Prose: the displayed numbers on bibleRef sups are sequential 1..5 — no
+	// gap left by the collapsed cluster (which used to expose 1,2,3,4,8).
+	const proseMarkers = await page.evaluate(() => {
+		return Array.from(document.querySelectorAll('sup.srcRef.bibleRef')).map((s) =>
+			(s.textContent ?? '').trim()
+		);
+	});
+	expect(proseMarkers).toEqual(['1', '2', '3', '4', '5']);
+
 	// Open the panel on the cluster's leader sup (idx 4) and switch to the Bible tab.
 	await page.locator('sup.srcRef.bibleRef[data-idx="4"]').first().click();
 	const bibleTab = page.getByRole('button', { name: 'Bible', exact: true }).first();
 	await bibleTab.click();
 
-	// The cluster yields four verse-rows: 2 Co 5:8, Ph 1:23, He 9:27, He 12:23.
-	// Each row's marker (the leading <sup>) reads "4".
-	const rows = page
-		.locator('li[data-idx]')
-		.filter({ has: page.locator('sup.ref-marker') })
-		.filter({ visible: true });
-	// Read all marker texts; we expect at least four "4"s in a row.
-	const markers = await rows.evaluateAll((els) =>
-		els.map((el) => el.querySelector('sup.ref-marker')?.textContent?.trim() ?? '')
+	// Side panel: 8 ref rows total. Markers (visible sup.ref-marker) appear on
+	// rows with data-idx ∈ {1,2,3,4,8}, reading "1","2","3","4","5". Rows with
+	// data-idx ∈ {5,6,7} have NO marker AND have the .cluster-member class.
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	const rows = panel.locator('li[data-idx]');
+	await expect(rows).toHaveCount(8);
+
+	const rowSummary = await rows.evaluateAll((els) =>
+		els.map((el) => ({
+			idx: el.getAttribute('data-idx'),
+			marker: el.querySelector('sup.ref-marker')?.textContent?.trim() ?? null,
+			isClusterMember: el.classList.contains('cluster-member')
+		}))
 	);
-	const fours = markers.filter((m) => m === '4').length;
-	expect(fours).toBeGreaterThanOrEqual(4);
+	expect(rowSummary).toEqual([
+		{ idx: '1', marker: '1', isClusterMember: false },
+		{ idx: '2', marker: '2', isClusterMember: false },
+		{ idx: '3', marker: '3', isClusterMember: false },
+		{ idx: '4', marker: '4', isClusterMember: false },
+		{ idx: '5', marker: null, isClusterMember: true },
+		{ idx: '6', marker: null, isClusterMember: true },
+		{ idx: '7', marker: null, isClusterMember: true },
+		{ idx: '8', marker: '5', isClusterMember: false }
+	]);
 });

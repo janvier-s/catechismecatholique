@@ -29,6 +29,11 @@ export interface MagisterialRefRecord {
 	 *  under one footnote number. Solo refs leave it undefined (display marker
 	 *  equals their own idx). */
 	marker_idx?: number;
+	/** Sequential 1-based number to display in the marker (in prose AND in the
+	 *  side panel). Differs from `idx` because clustering removes some sups, so
+	 *  surviving sups are renumbered consecutively. Cluster members share their
+	 *  leader's `display_idx`. */
+	display_idx?: number;
 }
 
 export interface Paragraph {
