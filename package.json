@@ -33,6 +33,7 @@
 		"@sveltejs/adapter-cloudflare": "^7.2.8",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
+		"@types/marked": "^5.0.2",
 		"@types/node": "^20",
 		"@types/xml2js": "^0.4.14",
 		"autoprefixer": "^10.5.0",
@@ -56,6 +57,7 @@
 		"xml2js": "^0.6.2"
 	},
 	"dependencies": {
+		"marked": "^18.0.3",
 		"minisearch": "^7.2.0"
 	}
 }

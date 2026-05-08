@@ -8,7 +8,8 @@ export type PanelTab =
 	| 'en-bref'
 	| 'concordance'
 	| 'bible-verse'
-	| 'compendium';
+	| 'compendium'
+	| 'ia';
 
 // PanelContext is a discriminated union: 'paragraph' contexts come from CCC
 // paragraph clicks (and carry the paragraph number plus an optional bible_refs

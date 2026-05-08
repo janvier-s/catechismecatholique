@@ -20,6 +20,7 @@
 	import TabBibleVerse from './TabBibleVerse.svelte';
 	import TabConcordance from './TabConcordance.svelte';
 	import TabCompendium from './TabCompendium.svelte';
+	import TabIA from './TabIA.svelte';
 	import TabStrip from './TabStrip.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
@@ -132,6 +133,7 @@
 		// Always show Concordance for paragraph contexts; the tab body handles empty state.
 		out.push({ id: 'concordance', label: 'Concordance' });
 		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
+		out.push({ id: 'ia', label: 'IA' });
 		return out;
 	});
 
@@ -273,6 +275,8 @@
 					<TabBibleVerse />
 				{:else if $studyPanel.activeTab === 'compendium'}
 					<TabCompendium />
+				{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
+					<TabIA paragraphNumber={$studyPanel.context.paragraph} />
 				{/if}
 			</div>
 		{/if}
@@ -329,6 +333,8 @@
 						<TabBibleVerse />
 					{:else if $studyPanel.activeTab === 'compendium'}
 						<TabCompendium />
+					{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
+						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
 					{/if}
 				</div>
 			{/if}

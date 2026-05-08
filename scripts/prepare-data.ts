@@ -27,6 +27,7 @@ import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
 import { parseSourceTable } from './prepare/sources-index.ts';
 import { prepareCompendium } from './prepare/compendium/index.ts';
+import { prepareCecAi } from './prepare/cec-ai.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -413,6 +414,13 @@ async function main() {
 		outDir: COMPENDIUM_OUT
 	});
 	endStep(`${compendium.questionDocs.length} compendium docs ready`);
+
+	const cecAiDir = join(OUT, 'cec/ai');
+	const cecAi = prepareCecAi({
+		sourceDir: join(SOURCES, 'cec-ai'),
+		outDir: cecAiDir
+	});
+	void cecAi;
 
 	logStep('building search index');
 	mkdirSync(join(OUT, 'search'), { recursive: true });

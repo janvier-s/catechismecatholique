@@ -275,6 +275,39 @@ export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBo
 	return p;
 }
 
+// ─── CEC AI Explanations ──────────────────────────────────────────────────
+
+let cecAiManifestPromise: Promise<Set<number>> | null = null;
+const cecAiCache = new Map<number, Promise<string | null>>();
+
+function loadCecAiManifest(fetcher: Fetch = fetch): Promise<Set<number>> {
+	if (!cecAiManifestPromise) {
+		cecAiManifestPromise = (async () => {
+			const r = await fetcher('/data/cec/ai/manifest.json');
+			if (!r.ok) return new Set<number>();
+			const arr = (await r.json()) as number[];
+			return new Set(arr);
+		})();
+	}
+	return cecAiManifestPromise;
+}
+
+export function loadCecAiExplanation(n: number, fetcher: Fetch = fetch): Promise<string | null> {
+	let p = cecAiCache.get(n);
+	if (!p) {
+		p = (async () => {
+			const manifest = await loadCecAiManifest(fetcher);
+			if (!manifest.has(n)) return null;
+			const r = await fetcher(`/data/cec/ai/${n}.json`);
+			if (!r.ok) return null;
+			const data = (await r.json()) as { md: string };
+			return data.md;
+		})();
+		cecAiCache.set(n, p);
+	}
+	return p;
+}
+
 // ─── Compendium Loaders ────────────────────────────────────────────────────
 
 let compendiumStructurePromise: Promise<CompendiumStructure> | null = null;
