@@ -82,6 +82,7 @@
 				<a
 					href={numberHref}
 					class="number-link"
+					title={`Ouvrir §${unit.data.number} dans sa propre page`}
 					aria-label={`Voir le paragraphe ${unit.data.number} dans une page dédiée`}
 				>
 					<svg class="link-icon" viewBox="0 0 256 256" aria-hidden="true">
@@ -313,6 +314,7 @@
 		color: var(--color-muted);
 		display: flex;
 		align-items: center;
+		align-self: center;
 	}
 	.number-wrap:hover .number-link,
 	.number-link:focus-visible {
