@@ -77,7 +77,7 @@
 
 <article class="mb-8 ccc-paragraph" class:has-side-refs={sideRefs !== null} id={anchorId}>
 	<div class="paragraph-grid">
-		<div class="number-wrap flex-none w-12 flex items-start justify-end gap-0.5 pt-1">
+		<div class="number-wrap flex-none w-12 flex items-center justify-end gap-0.5 pt-1">
 			{#if unit.kind === 'ccc-paragraph'}
 				<a
 					href={numberHref}
@@ -308,13 +308,15 @@
 
 	/* Link icon: hidden by default, revealed when the number column is hovered.
 	   The anchor is sized to match the button so the two targets sit flush. */
+	.number-wrap {
+		align-self: flex-start;
+	}
 	.number-link {
 		opacity: 0;
 		transition: opacity 120ms ease;
 		color: var(--color-muted);
 		display: flex;
 		align-items: center;
-		align-self: center;
 	}
 	.number-wrap:hover .number-link,
 	.number-link:focus-visible {
