@@ -53,9 +53,7 @@ describe('shortSlug', () => {
 	});
 
 	it('strips French articles at the start (de, la, le, du, des, l, d, à)', () => {
-		expect(shortSlug('La célébration du mystère chrétien', 30)).toBe(
-			'celebration-du-mystere'
-		);
+		expect(shortSlug('La célébration du mystère chrétien', 30)).toBe('celebration-du-mystere');
 		expect(shortSlug("L'homme est capable de Dieu", 30)).toBe('homme-est-capable-de-dieu');
 	});
 

@@ -85,7 +85,9 @@ describe('buildCompendium', () => {
 
 	it('parses bible refs from source verses field', () => {
 		const out = buildCompendium({ sourceJson: SOURCE_QS, toc: TOC, files: FILES });
-		const q2 = out.parts['1-part-1']!.flow.find((n) => n.kind === 'question' && n.data.number === 2);
+		const q2 = out.parts['1-part-1']!.flow.find(
+			(n) => n.kind === 'question' && n.data.number === 2
+		);
 		expect(q2 && q2.kind === 'question' && q2.data.bible_refs[0]?.text).toBe('Mt 1:1');
 	});
 
