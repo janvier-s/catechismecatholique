@@ -99,6 +99,7 @@ interface PiusXStructureChapter {
 	title: string;
 	ordinal: number;
 	qa_range: [number, number];
+	sections: { title: string | null }[];
 }
 
 interface PiusXStructurePart {
@@ -259,11 +260,17 @@ export function preparePiusXGrand(args: { sourceDir: string; outDir: string }): 
 	const allChapters: AssignedChapter[] = [];
 	const allStructParts: PiusXStructurePart[] = [];
 
+	const PART_SLUG_OVERRIDES: Record<number, string> = {
+		1: '1-credo'
+	};
+
 	for (const part of rawParts) {
 		const partSlug =
 			part.ordinal === 0
 				? '0-lecon-preliminaire'
-				: numberedSlug(part.ordinal, part.title, 15, partSlugs);
+				: (PART_SLUG_OVERRIDES[part.ordinal] ??
+					numberedSlug(part.ordinal, part.title, 15, partSlugs));
+		if (PART_SLUG_OVERRIDES[part.ordinal]) partSlugs.add(partSlug);
 
 		const chapterSlugs = new Set<string>();
 		const structChapters: PiusXStructureChapter[] = [];
@@ -307,7 +314,13 @@ export function preparePiusXGrand(args: { sourceDir: string; outDir: string }): 
 				qaRange
 			});
 
-			structChapters.push({ slug: chSlug, title: rawCh.title, ordinal, qa_range: qaRange });
+			structChapters.push({
+				slug: chSlug,
+				title: rawCh.title,
+				ordinal,
+				qa_range: qaRange,
+				sections: filteredSections.map((s) => ({ title: s.title }))
+			});
 		}
 
 		allStructParts.push({

@@ -52,7 +52,7 @@
 				<div class="chapters">
 					{#each part.chapters as ch (ch.slug)}
 						<div class="chapter-block">
-							<div class="row row-chapter">
+							<a class="row row-chapter" href="/trente/{ch.slug}">
 								<span class="row-label">
 									{#if ch.number > 0}
 										<span class="label-tag">Chapitre {ch.number}</span>
@@ -61,7 +61,7 @@
 								</span>
 								<span class="dotleader" aria-hidden="true"></span>
 								<span class="row-range">{fmtRange(ch.paragraph_range)}</span>
-							</div>
+							</a>
 
 							{#if ch.sections.length > 1}
 								<ul class="sections" role="list">

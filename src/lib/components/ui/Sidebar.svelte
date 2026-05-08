@@ -8,7 +8,8 @@
 		loadParagraphContext,
 		loadCompendiumStructure,
 		loadCompendiumPart,
-		loadTrentStructure
+		loadTrentStructure,
+		loadPiusXGrandStructure
 	} from '$lib/data/loaders';
 	import type {
 		Chapter,
@@ -16,7 +17,8 @@
 		Corpus,
 		CompendiumStructure,
 		CompendiumPart,
-		TrentStructure
+		TrentStructure,
+		PiusXGrandStructure
 	} from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
@@ -88,6 +90,16 @@
 		if (corpus !== 'trent') return;
 		(async () => {
 			trentStructure = await loadTrentStructure();
+		})();
+	});
+
+	// ─── Grand Catéchisme (Pie X) state ───────────────────────────────────────
+	let piusXGrandStructure: PiusXGrandStructure | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'pius-x-grand') return;
+		(async () => {
+			piusXGrandStructure = await loadPiusXGrandStructure();
 		})();
 	});
 
@@ -183,7 +195,25 @@
 			// and double-highlight an unrelated entry alongside the new article.
 			const ah = $activeHeading;
 			const hash = ah && ah.pathname === page.url.pathname ? `#${ah.id}` : '';
-			return page.url.pathname + hash;
+			const raw = page.url.pathname + hash;
+			// Trent chapter pages emit section headings as #h-{slug}. The sidebar
+			// items link to /trente/{chapter}/{slug} (path segments, not hashes).
+			// Convert /trente/{chapter}#h-{slug} → /trente/{chapter}/{slug} so the
+			// existing prefix-match logic highlights the right section item.
+			if (corpus === 'trent') {
+				const m = raw.match(/^(\/trente\/[^/]+)#h-(.+)$/);
+				if (m) return `${m[1]}/${m[2]}`;
+			}
+			// Grand Catéchisme part pages emit:
+			//   chapter headings: #c-{chSlug}        → /grand-catechisme/{part}/{chSlug}
+			//   section headings: #c-{chSlug}-s-{si} → /grand-catechisme/{part}/{chSlug}#s-{si}
+			if (corpus === 'pius-x-grand') {
+				const mSec = raw.match(/^(\/grand-catechisme\/[^/]+)#c-(.+)-s-(\d+)$/);
+				if (mSec) return `${mSec[1]}/${mSec[2]}#s-${mSec[3]}`;
+				const mCh = raw.match(/^(\/grand-catechisme\/[^/]+)#c-(.+)$/);
+				if (mCh) return `${mCh[1]}/${mCh[2]}`;
+			}
+			return raw;
 		}
 		const c = activeContext;
 		if (!c) return page.url.pathname;
@@ -408,6 +438,35 @@
 	}
 
 	const tree: Item[] = $derived.by(() => {
+		if (corpus === 'pius-x-grand') {
+			if (!piusXGrandStructure) return [];
+			return piusXGrandStructure.parts.map(
+				(part): Item => ({
+					title: part.title,
+					href: `/grand-catechisme/${part.slug}`,
+					children: part.chapters.map((ch): Item => {
+						const chHref = `/grand-catechisme/${part.slug}/${ch.slug}`;
+						// Build section children from structure data (no extra fetches).
+						// Show sections for chapters that have 2+ titled sections.
+						const titled = ch.sections
+							.map((sec, si) => ({ sec, si }))
+							.filter(({ sec }) => sec.title !== null);
+						const sectionChildren: Item[] | undefined =
+							titled.length > 1
+								? titled.map(({ sec, si }) => ({
+										title: sec.title!,
+										href: `${chHref}#s-${si}`
+									}))
+								: undefined;
+						return {
+							title: ch.title,
+							href: chHref,
+							children: sectionChildren
+						};
+					})
+				})
+			);
+		}
 		if (corpus === 'trent') {
 			if (!trentStructure) return [];
 			return trentStructure.parts.map((part, partIdx): Item => {
@@ -424,8 +483,7 @@
 					...(partNumber !== undefined ? { number: partNumber } : {}),
 					href: partHref,
 					children: part.chapters.map((ch): Item => {
-						const chFirstSec = ch.sections[0];
-						const chHref = chFirstSec ? `/trente/${ch.slug}/${chFirstSec.slug}` : '/trente';
+						const chHref = `/trente/${ch.slug}`;
 						// Split "Du Xième article : Et en Jésus-Christ..." into
 						// kicker2 (descriptor) + title (article content).
 						const colonIdx = ch.title.indexOf(' : ');
@@ -573,7 +631,9 @@
 			? 'Plan du Compendium'
 			: corpus === 'trent'
 				? 'Plan du Catéchisme de Trente'
-				: 'Plan du Catéchisme'}
+				: corpus === 'pius-x-grand'
+					? 'Plan du Grand Catéchisme'
+					: 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">

@@ -12,7 +12,7 @@
 			slug: '1-profession-de-la-foi',
 			kicker: 'Première partie',
 			title: 'La profession de la foi',
-			range: 'Q. 1–217',
+			range: '1–217',
 			lede:
 				"Ce que l'Église croit. La première partie présente, à travers le Symbole des Apôtres, " +
 				"la révélation de Dieu, la foi de l'Église, le mystère trinitaire, le Christ Sauveur, " +
@@ -22,7 +22,7 @@
 			slug: '2-celebration-du-mystere',
 			kicker: 'Deuxième partie',
 			title: 'La célébration du mystère chrétien',
-			range: 'Q. 218–356',
+			range: '218–356',
 			lede:
 				"Ce que l'Église célèbre. La deuxième partie est consacrée à la liturgie et aux sept " +
 				'sacrements, par lesquels le mystère pascal du Christ rejoint la vie des fidèles.'
@@ -31,7 +31,7 @@
 			slug: '3-vie-dans-le-christ',
 			kicker: 'Troisième partie',
 			title: 'La vie dans le Christ',
-			range: 'Q. 357–533',
+			range: '357–533',
 			lede:
 				"Ce que l'Église vit. La troisième partie expose la vie morale du chrétien, sa vocation " +
 				"à la béatitude et l'observance du Décalogue à la lumière de l'Évangile."
@@ -40,7 +40,7 @@
 			slug: '4-priere-chretienne',
 			kicker: 'Quatrième partie',
 			title: 'La prière chrétienne',
-			range: 'Q. 534–598',
+			range: '534–598',
 			lede:
 				"Ce que l'Église prie. La quatrième partie est consacrée à la prière chrétienne et " +
 				'culmine dans la méditation du Notre Père, la prière que le Seigneur lui-même a ' +

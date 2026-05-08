@@ -12,12 +12,17 @@
           "qa_range": [
             1,
             14
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         }
       ]
     },
     {
-      "slug": "1-symbole-des",
+      "slug": "1-credo",
       "title": "Le symbole des Apôtres ou Credo",
       "ordinal": 1,
       "chapters": [
@@ -28,6 +33,11 @@
           "qa_range": [
             15,
             21
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -37,6 +47,17 @@
           "qa_range": [
             22,
             67
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Dieu le Père et la création."
+            },
+            {
+              "title": "§ 2. Les Anges."
+            },
+            {
+              "title": "§ 3. L’homme."
+            }
           ]
         },
         {
@@ -46,6 +67,11 @@
           "qa_range": [
             68,
             81
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -55,6 +81,11 @@
           "qa_range": [
             82,
             94
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -64,6 +95,11 @@
           "qa_range": [
             95,
             113
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -73,6 +109,11 @@
           "qa_range": [
             114,
             118
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -82,6 +123,11 @@
           "qa_range": [
             119,
             123
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -91,6 +137,11 @@
           "qa_range": [
             124,
             129
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -100,6 +151,11 @@
           "qa_range": [
             130,
             141
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -109,6 +165,26 @@
           "qa_range": [
             142,
             233
+          ],
+          "sections": [
+            {
+              "title": "§ 1. L’Église en général."
+            },
+            {
+              "title": "§ 2. L’Église en particulier."
+            },
+            {
+              "title": "§ 3. L’Église enseignante et l’Église enseignée."
+            },
+            {
+              "title": "§ 4. Pape et Évêques"
+            },
+            {
+              "title": "§ 5. La communion des saints."
+            },
+            {
+              "title": "§ 6. Ceux qui sont hommes d’Église"
+            }
           ]
         },
         {
@@ -118,6 +194,11 @@
           "qa_range": [
             234,
             237
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -127,6 +208,11 @@
           "qa_range": [
             238,
             244
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -136,6 +222,11 @@
           "qa_range": [
             245,
             251
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         }
       ]
@@ -152,6 +243,11 @@
           "qa_range": [
             252,
             277
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -161,6 +257,32 @@
           "qa_range": [
             278,
             322
+          ],
+          "sections": [
+            {
+              "title": "§ 1. L’oraison dominicale en général."
+            },
+            {
+              "title": "§ 2. La première demande."
+            },
+            {
+              "title": "§ 3. La seconde demande."
+            },
+            {
+              "title": "§ 4. La troisième demande."
+            },
+            {
+              "title": "§ 5. La quatrième demande."
+            },
+            {
+              "title": "§ 6. La cinquième demande."
+            },
+            {
+              "title": "§ 7. La sixième demande."
+            },
+            {
+              "title": "§ 8. La septième demande."
+            }
           ]
         },
         {
@@ -170,6 +292,11 @@
           "qa_range": [
             323,
             337
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -179,6 +306,11 @@
           "qa_range": [
             338,
             340
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         }
       ]
@@ -195,6 +327,11 @@
           "qa_range": [
             341,
             348
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -204,6 +341,17 @@
           "qa_range": [
             349,
             397
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Le premier commandement."
+            },
+            {
+              "title": "§ 2. Le second commandement."
+            },
+            {
+              "title": "§ 3. Le troisième commandement."
+            }
           ]
         },
         {
@@ -213,6 +361,26 @@
           "qa_range": [
             398,
             467
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Le quatrième commandement."
+            },
+            {
+              "title": "§ 2. Le cinquième commandement."
+            },
+            {
+              "title": "§ 3. Le sixième et le neuvième commandement."
+            },
+            {
+              "title": "§ 4. Le septième commandement."
+            },
+            {
+              "title": "§ 5. Le huitième commandement."
+            },
+            {
+              "title": "§ 6. Le dixième commandement."
+            }
           ]
         },
         {
@@ -222,6 +390,26 @@
           "qa_range": [
             468,
             506
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Les préceptes de l’Église en général."
+            },
+            {
+              "title": "§ 2. Le premier précepte de l’Église"
+            },
+            {
+              "title": "§ 3. Le second précepte de l’Église"
+            },
+            {
+              "title": "§ 4. Le troisième précepte de l’Église"
+            },
+            {
+              "title": "§ 5. Le quatrième précepte de l’Église"
+            },
+            {
+              "title": "§ 6. Le cinquième précepte de l’Église"
+            }
           ]
         },
         {
@@ -231,6 +419,14 @@
           "qa_range": [
             507,
             515
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Les devoirs d’état."
+            },
+            {
+              "title": "§ 2. Les conseils évangéliques."
+            }
           ]
         }
       ]
@@ -247,6 +443,17 @@
           "qa_range": [
             516,
             549
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Nature des sacrements."
+            },
+            {
+              "title": "§ 2. L’effet principal des sacrements : La Grâce."
+            },
+            {
+              "title": "§ 3. Le caractère imprimé par certains sacrements"
+            }
           ]
         },
         {
@@ -256,6 +463,23 @@
           "qa_range": [
             550,
             575
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Nature et effets du baptême."
+            },
+            {
+              "title": "§ 2. Ministre du baptême."
+            },
+            {
+              "title": "§ 3. Rite du Baptême et dispositions de celui qui le reçoit à l’âge de raison."
+            },
+            {
+              "title": "§ 4. Nécessité du Baptême et devoirs du baptisé"
+            },
+            {
+              "title": "§ 5. Le nom et les parrains."
+            }
           ]
         },
         {
@@ -265,6 +489,11 @@
           "qa_range": [
             576,
             594
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -274,6 +503,23 @@
           "qa_range": [
             595,
             649
+          ],
+          "sections": [
+            {
+              "title": "§ 1. La nature de l’Eucharistie et la présence réelle de Jésus-Christ dans ce sacrement."
+            },
+            {
+              "title": "§ 2. L’institution et les effets du sacrement de l’Eucharistie."
+            },
+            {
+              "title": "§ 3. Les dispositions nécessaires pour bien communier."
+            },
+            {
+              "title": "§ 4. La manière de communier."
+            },
+            {
+              "title": "§ 5. Le précepte de la communion."
+            }
           ]
         },
         {
@@ -283,6 +529,14 @@
           "qa_range": [
             650,
             670
+          ],
+          "sections": [
+            {
+              "title": "§ 1. L’essence, l’institution et les fins du saint sacrifice de la Messe."
+            },
+            {
+              "title": "§ 2. La manière d’assister à la Messe."
+            }
           ]
         },
         {
@@ -292,6 +546,38 @@
           "qa_range": [
             671,
             805
+          ],
+          "sections": [
+            {
+              "title": "§ 1. La pénitence en général."
+            },
+            {
+              "title": "§ 2. Les effets et la nécessité du sacrement de Pénitence et les dispositions pour le bien recevoir."
+            },
+            {
+              "title": "§ 3. L’examen."
+            },
+            {
+              "title": "§ 4. La douleur."
+            },
+            {
+              "title": "§ 5. Le bon propos."
+            },
+            {
+              "title": "§ 6. L’accusation des péchés au confesseur."
+            },
+            {
+              "title": "§ 7. La manière de se confesser."
+            },
+            {
+              "title": "§ 8. L’absolution."
+            },
+            {
+              "title": "§ 9. La satisfaction ou pénitence."
+            },
+            {
+              "title": "§ 10. Les indulgences."
+            }
           ]
         },
         {
@@ -301,6 +587,11 @@
           "qa_range": [
             806,
             811
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -310,6 +601,11 @@
           "qa_range": [
             812,
             826
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -319,6 +615,17 @@
           "qa_range": [
             827,
             852
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Nature du sacrement du Mariage."
+            },
+            {
+              "title": "§ 2. Ministres, cérémonies et dispositions."
+            },
+            {
+              "title": "§ 3. Conditions et empêchements."
+            }
           ]
         }
       ]
@@ -335,6 +642,32 @@
           "qa_range": [
             853,
             912
+          ],
+          "sections": [
+            {
+              "title": "§ 1. Les vertus théologales."
+            },
+            {
+              "title": "§ 2. La Foi."
+            },
+            {
+              "title": "§ 3. Les mystères."
+            },
+            {
+              "title": "§ 4. L’Écriture Sainte."
+            },
+            {
+              "title": "§ 5. La Tradition."
+            },
+            {
+              "title": "§ 6. L’Espérance."
+            },
+            {
+              "title": "§ 7. La Charité."
+            },
+            {
+              "title": "§ 8. Les vertus cardinales"
+            }
           ]
         },
         {
@@ -344,6 +677,11 @@
           "qa_range": [
             913,
             921
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -353,6 +691,11 @@
           "qa_range": [
             922,
             936
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -362,6 +705,11 @@
           "qa_range": [
             937,
             940
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -371,6 +719,11 @@
           "qa_range": [
             941,
             954
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -380,6 +733,11 @@
           "qa_range": [
             955,
             963
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -389,6 +747,11 @@
           "qa_range": [
             964,
             967
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         },
         {
@@ -398,6 +761,11 @@
           "qa_range": [
             968,
             989
+          ],
+          "sections": [
+            {
+              "title": null
+            }
           ]
         }
       ]

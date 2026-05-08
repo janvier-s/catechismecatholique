@@ -24,7 +24,7 @@
             },
             {
               "slug": "2-leglise-a",
-              "title": "I — L’Église a besoin de pasteurs",
+              "title": "L’Église a besoin de pasteurs",
               "ordinal": 2,
               "paragraph_range": [
                 4,
@@ -33,7 +33,7 @@
             },
             {
               "slug": "3-autorite-des",
-              "title": "II — Autorité des pasteurs",
+              "title": "Autorité des pasteurs",
               "ordinal": 3,
               "paragraph_range": [
                 5,
@@ -42,7 +42,7 @@
             },
             {
               "slug": "4-fonctions-et",
-              "title": "III — Fonctions et devoirs des pasteurs",
+              "title": "Fonctions et devoirs des pasteurs",
               "ordinal": 4,
               "paragraph_range": [
                 6,
@@ -51,7 +51,7 @@
             },
             {
               "slug": "5-maniere",
-              "title": "IV — Manière d’instruire les fidèles",
+              "title": "Manière d’instruire les fidèles",
               "ordinal": 5,
               "paragraph_range": [
                 16,
@@ -60,7 +60,7 @@
             },
             {
               "slug": "6-principaux",
-              "title": "V — Principaux articles de la doctrine chrétienne",
+              "title": "Principaux articles de la doctrine chrétienne",
               "ordinal": 6,
               "paragraph_range": [
                 20,
@@ -86,7 +86,7 @@
           "sections": [
             {
               "slug": "1-foi",
-              "title": "I — De la foi",
+              "title": "De la foi",
               "ordinal": 1,
               "paragraph_range": [
                 29,
@@ -95,7 +95,7 @@
             },
             {
               "slug": "2-symbole",
-              "title": "II — Du symbole",
+              "title": "Du symbole",
               "ordinal": 2,
               "paragraph_range": [
                 30,
@@ -124,7 +124,7 @@
             },
             {
               "slug": "2-je-crois",
-              "title": "I — Je crois",
+              "title": "Je crois",
               "ordinal": 2,
               "paragraph_range": [
                 33,
@@ -133,7 +133,7 @@
             },
             {
               "slug": "3-dieu",
-              "title": "II — En Dieu",
+              "title": "En Dieu",
               "ordinal": 3,
               "paragraph_range": [
                 37,
@@ -142,7 +142,7 @@
             },
             {
               "slug": "4-pere",
-              "title": "III — Le pere",
+              "title": "Le pere",
               "ordinal": 4,
               "paragraph_range": [
                 45,
@@ -151,7 +151,7 @@
             },
             {
               "slug": "5-tout-puissant",
-              "title": "IV — Tout puissant",
+              "title": "Tout puissant",
               "ordinal": 5,
               "paragraph_range": [
                 54,
@@ -160,7 +160,7 @@
             },
             {
               "slug": "6-createur-du",
-              "title": "V — Createur du ciel et de la terre",
+              "title": "Createur du ciel et de la terre",
               "ordinal": 6,
               "paragraph_range": [
                 62,
@@ -169,7 +169,7 @@
             },
             {
               "slug": "7-providence",
-              "title": "VI — Providence",
+              "title": "Providence",
               "ordinal": 7,
               "paragraph_range": [
                 70,
@@ -198,7 +198,7 @@
             },
             {
               "slug": "2-peche-originel",
-              "title": "I — Péché originel",
+              "title": "Péché originel",
               "ordinal": 2,
               "paragraph_range": [
                 75,
@@ -207,7 +207,7 @@
             },
             {
               "slug": "3-jesus-christ",
-              "title": "II — En Jésus-Christ",
+              "title": "En Jésus-Christ",
               "ordinal": 3,
               "paragraph_range": [
                 81,
@@ -216,7 +216,7 @@
             },
             {
               "slug": "4-son-fils-unique",
-              "title": "III — Son fils unique",
+              "title": "Son fils unique",
               "ordinal": 4,
               "paragraph_range": [
                 89,
@@ -225,7 +225,7 @@
             },
             {
               "slug": "5-notre-seigneur",
-              "title": "IV — Notre-Seigneur",
+              "title": "Notre-Seigneur",
               "ordinal": 5,
               "paragraph_range": [
                 93,
@@ -254,7 +254,7 @@
             },
             {
               "slug": "2-qui-a-ete-concu",
-              "title": "I — Qui a été conçu du Saint-Esprit",
+              "title": "Qui a été conçu du Saint-Esprit",
               "ordinal": 2,
               "paragraph_range": [
                 100,
@@ -263,7 +263,7 @@
             },
             {
               "slug": "3-qui-est-ne-de",
-              "title": "II — Qui est né de la Vierge Marie",
+              "title": "Qui est né de la Vierge Marie",
               "ordinal": 3,
               "paragraph_range": [
                 110,
@@ -292,7 +292,7 @@
             },
             {
               "slug": "2-qui-a-souffert",
-              "title": "I — Qui a souffert sous ponce-pilate",
+              "title": "Qui a souffert sous ponce-pilate",
               "ordinal": 2,
               "paragraph_range": [
                 121,
@@ -301,7 +301,7 @@
             },
             {
               "slug": "3-est-mort-et-a",
-              "title": "II — Est mort, et a été enseveli",
+              "title": "Est mort, et a été enseveli",
               "ordinal": 3,
               "paragraph_range": [
                 127,
@@ -310,7 +310,7 @@
             },
             {
               "slug": "4-causes-de-la",
-              "title": "III — Causes de la mort de Jésus-Christ",
+              "title": "Causes de la mort de Jésus-Christ",
               "ordinal": 4,
               "paragraph_range": [
                 134,
@@ -319,7 +319,7 @@
             },
             {
               "slug": "5-douleurs-de",
-              "title": "IV — Douleurs de Jésus-Christ dans son corps et dans son ame",
+              "title": "Douleurs de Jésus-Christ dans son corps et dans son ame",
               "ordinal": 5,
               "paragraph_range": [
                 140,
@@ -328,7 +328,7 @@
             },
             {
               "slug": "6-fruits-de-la",
-              "title": "V — Fruits de la mort de Jésus-Christ",
+              "title": "Fruits de la mort de Jésus-Christ",
               "ordinal": 6,
               "paragraph_range": [
                 146,
@@ -357,7 +357,7 @@
             },
             {
               "slug": "2-il-est-descendu",
-              "title": "I — Il est descendu aux enfers",
+              "title": "Il est descendu aux enfers",
               "ordinal": 2,
               "paragraph_range": [
                 156,
@@ -366,7 +366,7 @@
             },
             {
               "slug": "3-il-est",
-              "title": "II — Il est ressuscité des morts",
+              "title": "Il est ressuscité des morts",
               "ordinal": 3,
               "paragraph_range": [
                 170,
@@ -375,7 +375,7 @@
             },
             {
               "slug": "4-troisieme-jour",
-              "title": "III — Le troisième jour",
+              "title": "Le troisième jour",
               "ordinal": 4,
               "paragraph_range": [
                 176,
@@ -384,7 +384,7 @@
             },
             {
               "slug": "5-causes-fin-et",
-              "title": "IV — Causes, fin et fruits de la résurrection",
+              "title": "Causes, fin et fruits de la résurrection",
               "ordinal": 5,
               "paragraph_range": [
                 180,
@@ -413,7 +413,7 @@
             },
             {
               "slug": "2-il-est-monte-au",
-              "title": "I — Il est monté au ciel",
+              "title": "Il est monté au ciel",
               "ordinal": 2,
               "paragraph_range": [
                 192,
@@ -422,7 +422,7 @@
             },
             {
               "slug": "3-il-est-assis-a",
-              "title": "II — Il est assis a la droite du père tout-puissant",
+              "title": "Il est assis a la droite du père tout-puissant",
               "ordinal": 3,
               "paragraph_range": [
                 197,
@@ -431,7 +431,7 @@
             },
             {
               "slug": "4-causes-et",
-              "title": "III — Causes et raisons de l’ascension de notre-Seigneur",
+              "title": "Causes et raisons de l’ascension de notre-Seigneur",
               "ordinal": 4,
               "paragraph_range": [
                 202,
@@ -460,7 +460,7 @@
             },
             {
               "slug": "2-certitude-du",
-              "title": "I — Certitude du jugement",
+              "title": "Certitude du jugement",
               "ordinal": 2,
               "paragraph_range": [
                 217,
@@ -469,7 +469,7 @@
             },
             {
               "slug": "3-deux-jugements",
-              "title": "II — Deux jugements, l’un particulier et l’autre général",
+              "title": "Deux jugements, l’un particulier et l’autre général",
               "ordinal": 3,
               "paragraph_range": [
                 218,
@@ -478,7 +478,7 @@
             },
             {
               "slug": "4-raisons-du",
-              "title": "III — Raisons du jugement général",
+              "title": "Raisons du jugement général",
               "ordinal": 4,
               "paragraph_range": [
                 222,
@@ -487,7 +487,7 @@
             },
             {
               "slug": "5-pourquoi-le",
-              "title": "IV — Pourquoi le jugement donné a Jésus-Christ",
+              "title": "Pourquoi le jugement donné a Jésus-Christ",
               "ordinal": 5,
               "paragraph_range": [
                 229,
@@ -496,7 +496,7 @@
             },
             {
               "slug": "6-signes",
-              "title": "V — Signes précurseurs du jugement",
+              "title": "Signes précurseurs du jugement",
               "ordinal": 6,
               "paragraph_range": [
                 231,
@@ -505,7 +505,7 @@
             },
             {
               "slug": "7-sentence-des",
-              "title": "VI — La sentence des bons et celle des méchants",
+              "title": "La sentence des bons et celle des méchants",
               "ordinal": 7,
               "paragraph_range": [
                 233,
@@ -525,7 +525,7 @@
           "sections": [
             {
               "slug": "1-necessite-de-la",
-              "title": "I — Nécessité de la foi au Saint-Esprit",
+              "title": "Nécessité de la foi au Saint-Esprit",
               "ordinal": 1,
               "paragraph_range": [
                 237,
@@ -534,7 +534,7 @@
             },
             {
               "slug": "2-ce-que-cest-que",
-              "title": "II — Ce que c’est que le Saint-Esprit",
+              "title": "Ce que c’est que le Saint-Esprit",
               "ordinal": 2,
               "paragraph_range": [
                 239,
@@ -543,7 +543,7 @@
             },
             {
               "slug": "3-choses-qui-sont",
-              "title": "III — Des choses qui sont spécialement attribuées au Saint-Esprit",
+              "title": "Des choses qui sont spécialement attribuées au Saint-Esprit",
               "ordinal": 3,
               "paragraph_range": [
                 250,
@@ -572,7 +572,7 @@
             },
             {
               "slug": "2-ce-que-cest-que",
-              "title": "I — Ce que c’est que l’Église",
+              "title": "Ce que c’est que l’Église",
               "ordinal": 2,
               "paragraph_range": [
                 257,
@@ -581,7 +581,7 @@
             },
             {
               "slug": "3-deux-parties-de",
-              "title": "II — Deux parties de l’Église, l’une triomphante, l’autre militante",
+              "title": "Deux parties de l’Église, l’une triomphante, l’autre militante",
               "ordinal": 3,
               "paragraph_range": [
                 259,
@@ -590,7 +590,7 @@
             },
             {
               "slug": "4-qui-sont-ceux",
-              "title": "III — Qui sont ceux qui n’appartiennent pas a l’Église",
+              "title": "Qui sont ceux qui n’appartiennent pas a l’Église",
               "ordinal": 4,
               "paragraph_range": [
                 265,
@@ -599,7 +599,7 @@
             },
             {
               "slug": "5-caracteres",
-              "title": "IV — Caractères propres de l’Église, unité",
+              "title": "Caractères propres de l’Église, unité",
               "ordinal": 5,
               "paragraph_range": [
                 268,
@@ -608,7 +608,7 @@
             },
             {
               "slug": "6-saintete-de",
-              "title": "V — Sainteté de l’Église",
+              "title": "Sainteté de l’Église",
               "ordinal": 6,
               "paragraph_range": [
                 277,
@@ -617,7 +617,7 @@
             },
             {
               "slug": "7-leglise-est",
-              "title": "VI — L’Église est catholique",
+              "title": "L’Église est catholique",
               "ordinal": 7,
               "paragraph_range": [
                 282,
@@ -626,7 +626,7 @@
             },
             {
               "slug": "8-leglise-est",
-              "title": "VII — L’Église est apostolique",
+              "title": "L’Église est apostolique",
               "ordinal": 8,
               "paragraph_range": [
                 284,
@@ -635,7 +635,7 @@
             },
             {
               "slug": "9-figures-de",
-              "title": "VIII — Figures de l’Église dans l’ancien testament",
+              "title": "Figures de l’Église dans l’ancien testament",
               "ordinal": 9,
               "paragraph_range": [
                 285,
@@ -644,7 +644,7 @@
             },
             {
               "slug": "10-comment-la",
-              "title": "IX — Comment la vérité de l’Église est un article de foi",
+              "title": "Comment la vérité de l’Église est un article de foi",
               "ordinal": 10,
               "paragraph_range": [
                 288,
@@ -653,7 +653,7 @@
             },
             {
               "slug": "11-communion-des",
-              "title": "X — La communion des saints",
+              "title": "La communion des saints",
               "ordinal": 11,
               "paragraph_range": [
                 291,
@@ -682,7 +682,7 @@
             },
             {
               "slug": "2-il-y-a-dans",
-              "title": "I — Il y a dans l’Église un pouvoir de remettre les péchés",
+              "title": "Il y a dans l’Église un pouvoir de remettre les péchés",
               "ordinal": 2,
               "paragraph_range": [
                 304,
@@ -691,7 +691,7 @@
             },
             {
               "slug": "3-qui-a-ete",
-              "title": "II — A qui a été confié, dans l’Église, le pouvoir de remettre les péchés",
+              "title": "A qui a été confié, dans l’Église, le pouvoir de remettre les péchés",
               "ordinal": 3,
               "paragraph_range": [
                 307,
@@ -700,7 +700,7 @@
             },
             {
               "slug": "4-pouvoir-de",
-              "title": "III — Le pouvoir de remettre les péchés est un grand bienfait",
+              "title": "Le pouvoir de remettre les péchés est un grand bienfait",
               "ordinal": 4,
               "paragraph_range": [
                 308,
@@ -709,7 +709,7 @@
             },
             {
               "slug": "5-comment-les",
-              "title": "IV — Comment les fidèles doivent faire usage de la rémission des péchés",
+              "title": "Comment les fidèles doivent faire usage de la rémission des péchés",
               "ordinal": 5,
               "paragraph_range": [
                 314,
@@ -729,7 +729,7 @@
           "sections": [
             {
               "slug": "1-preuve-de-la",
-              "title": "I — Preuve de la résurrection",
+              "title": "Preuve de la résurrection",
               "ordinal": 1,
               "paragraph_range": [
                 316,
@@ -738,7 +738,7 @@
             },
             {
               "slug": "2-etat-des-corps",
-              "title": "II — État des corps ressuscités",
+              "title": "État des corps ressuscités",
               "ordinal": 2,
               "paragraph_range": [
                 330,
@@ -747,7 +747,7 @@
             },
             {
               "slug": "3-qualites-des",
-              "title": "III — Qualités des corps ressuscités",
+              "title": "Qualités des corps ressuscités",
               "ordinal": 3,
               "paragraph_range": [
                 336,
@@ -756,7 +756,7 @@
             },
             {
               "slug": "4-fruits-a-tirer",
-              "title": "IV — Fruits a tirer de cet article",
+              "title": "Fruits a tirer de cet article",
               "ordinal": 4,
               "paragraph_range": [
                 345,
@@ -785,7 +785,7 @@
             },
             {
               "slug": "2-quest-ce-que-la",
-              "title": "I — Qu’est-ce que la vie éternelle ?",
+              "title": "Qu’est-ce que la vie éternelle ?",
               "ordinal": 2,
               "paragraph_range": [
                 351,
@@ -794,7 +794,7 @@
             },
             {
               "slug": "3-nature-du",
-              "title": "II — Nature du bonheur éternel",
+              "title": "Nature du bonheur éternel",
               "ordinal": 3,
               "paragraph_range": [
                 360,
@@ -829,7 +829,7 @@
             },
             {
               "slug": "2-explication-du",
-              "title": "I — Explication du mot sacrement",
+              "title": "Explication du mot sacrement",
               "ordinal": 2,
               "paragraph_range": [
                 382,
@@ -838,7 +838,7 @@
             },
             {
               "slug": "3-definition-du",
-              "title": "II — Définition du sacrement",
+              "title": "Définition du sacrement",
               "ordinal": 3,
               "paragraph_range": [
                 388,
@@ -847,7 +847,7 @@
             },
             {
               "slug": "4-ce-qui-est",
-              "title": "III — Ce qui est signifié par les sacrements",
+              "title": "Ce qui est signifié par les sacrements",
               "ordinal": 4,
               "paragraph_range": [
                 401,
@@ -856,7 +856,7 @@
             },
             {
               "slug": "5-raisons-qui-ont",
-              "title": "IV — Des raisons qui ont fait instituer les sacrements",
+              "title": "Des raisons qui ont fait instituer les sacrements",
               "ordinal": 5,
               "paragraph_range": [
                 403,
@@ -865,7 +865,7 @@
             },
             {
               "slug": "6-matiere-et",
-              "title": "V — Matière et forme des sacrements",
+              "title": "Matière et forme des sacrements",
               "ordinal": 6,
               "paragraph_range": [
                 411,
@@ -874,7 +874,7 @@
             },
             {
               "slug": "7-ceremonies",
-              "title": "VI — Cérémonies employées dans l’administration des sacrements",
+              "title": "Cérémonies employées dans l’administration des sacrements",
               "ordinal": 7,
               "paragraph_range": [
                 415,
@@ -883,7 +883,7 @@
             },
             {
               "slug": "8-nombre-des",
-              "title": "VII — Du nombre des sacrements",
+              "title": "Du nombre des sacrements",
               "ordinal": 8,
               "paragraph_range": [
                 417,
@@ -892,7 +892,7 @@
             },
             {
               "slug": "9-lauteur-et-du",
-              "title": "VIII — De l’auteur et du ministre des sacrements",
+              "title": "De l’auteur et du ministre des sacrements",
               "ordinal": 9,
               "paragraph_range": [
                 429,
@@ -901,7 +901,7 @@
             },
             {
               "slug": "10-effets-des",
-              "title": "IX — Effets des sacrements",
+              "title": "Effets des sacrements",
               "ordinal": 10,
               "paragraph_range": [
                 434,
@@ -910,7 +910,7 @@
             },
             {
               "slug": "11-caractere",
-              "title": "X — Caractère imprimé par trois sacrements",
+              "title": "Caractère imprimé par trois sacrements",
               "ordinal": 11,
               "paragraph_range": [
                 437,
@@ -939,7 +939,7 @@
             },
             {
               "slug": "2-ce-que-cest-que",
-              "title": "I — Ce que c’est que le baptême pour le nom et pour la chose",
+              "title": "Ce que c’est que le baptême pour le nom et pour la chose",
               "ordinal": 2,
               "paragraph_range": [
                 441,
@@ -948,7 +948,7 @@
             },
             {
               "slug": "3-linstitution-du",
-              "title": "II — De l’institution du baptême",
+              "title": "De l’institution du baptême",
               "ordinal": 3,
               "paragraph_range": [
                 462,
@@ -957,7 +957,7 @@
             },
             {
               "slug": "4-ministres-du",
-              "title": "III — Des ministres du baptême",
+              "title": "Des ministres du baptême",
               "ordinal": 4,
               "paragraph_range": [
                 469,
@@ -966,7 +966,7 @@
             },
             {
               "slug": "5-parrains-et",
-              "title": "IV — Des parrains et marraines",
+              "title": "Des parrains et marraines",
               "ordinal": 5,
               "paragraph_range": [
                 475,
@@ -986,7 +986,7 @@
           "sections": [
             {
               "slug": "1-necessite-du",
-              "title": "I — Nécessité du baptême",
+              "title": "Nécessité du baptême",
               "ordinal": 1,
               "paragraph_range": [
                 482,
@@ -995,7 +995,7 @@
             },
             {
               "slug": "2-dispositions",
-              "title": "II — Des dispositions nécessaires pour recevoir le bapteme",
+              "title": "Des dispositions nécessaires pour recevoir le bapteme",
               "ordinal": 2,
               "paragraph_range": [
                 493,
@@ -1004,7 +1004,7 @@
             },
             {
               "slug": "3-effets-du",
-              "title": "III — Des effets du baptême",
+              "title": "Des effets du baptême",
               "ordinal": 3,
               "paragraph_range": [
                 497,
@@ -1013,7 +1013,7 @@
             },
             {
               "slug": "4-prieres-et-des",
-              "title": "IV — Des prières et des cérémonies du baptême",
+              "title": "Des prières et des cérémonies du baptême",
               "ordinal": 4,
               "paragraph_range": [
                 518,
@@ -1033,7 +1033,7 @@
           "sections": [
             {
               "slug": "1-confirmation",
-              "title": "I — La confirmation est un vrai sacrement",
+              "title": "La confirmation est un vrai sacrement",
               "ordinal": 1,
               "paragraph_range": [
                 534,
@@ -1042,7 +1042,7 @@
             },
             {
               "slug": "2-matiere-et",
-              "title": "II — Matière et forme de la confirmation",
+              "title": "Matière et forme de la confirmation",
               "ordinal": 2,
               "paragraph_range": [
                 544,
@@ -1051,7 +1051,7 @@
             },
             {
               "slug": "3-ministres-de-la",
-              "title": "III — Des ministres de la confirmation",
+              "title": "Des ministres de la confirmation",
               "ordinal": 3,
               "paragraph_range": [
                 552,
@@ -1060,7 +1060,7 @@
             },
             {
               "slug": "4-necessite-de-la",
-              "title": "IV — Nécessité de la confirmation",
+              "title": "Nécessité de la confirmation",
               "ordinal": 4,
               "paragraph_range": [
                 556,
@@ -1069,7 +1069,7 @@
             },
             {
               "slug": "5-effets-du",
-              "title": "V — Des effets du sacrement de confirmation",
+              "title": "Des effets du sacrement de confirmation",
               "ordinal": 5,
               "paragraph_range": [
                 561,
@@ -1078,7 +1078,7 @@
             },
             {
               "slug": "6-ceremonies-du",
-              "title": "VI — Des cérémonies du sacrement de confirmation",
+              "title": "Des cérémonies du sacrement de confirmation",
               "ordinal": 6,
               "paragraph_range": [
                 566,
@@ -1107,7 +1107,7 @@
             },
             {
               "slug": "2-institution-de",
-              "title": "I — Institution de l’Eucharistie ses différents noms",
+              "title": "Institution de l’Eucharistie ses différents noms",
               "ordinal": 2,
               "paragraph_range": [
                 574,
@@ -1116,7 +1116,7 @@
             },
             {
               "slug": "3-leucharistie",
-              "title": "II — L’Eucharistie est un vrai sacrement : sa matière",
+              "title": "L’Eucharistie est un vrai sacrement : sa matière",
               "ordinal": 3,
               "paragraph_range": [
                 582,
@@ -1125,7 +1125,7 @@
             },
             {
               "slug": "4-forme-de",
-              "title": "III — Forme de l’Eucharistie",
+              "title": "Forme de l’Eucharistie",
               "ordinal": 4,
               "paragraph_range": [
                 605,
@@ -1145,7 +1145,7 @@
           "sections": [
             {
               "slug": "1-presence-reelle",
-              "title": "I — La présence réelle",
+              "title": "La présence réelle",
               "ordinal": 1,
               "paragraph_range": [
                 614,
@@ -1154,7 +1154,7 @@
             },
             {
               "slug": "2-jesus-christ",
-              "title": "II — Jésus-Christ est tout entier dans l'Eucharistie",
+              "title": "Jésus-Christ est tout entier dans l'Eucharistie",
               "ordinal": 2,
               "paragraph_range": [
                 631,
@@ -1163,7 +1163,7 @@
             },
             {
               "slug": "3-transsubstantia",
-              "title": "III — De la transsubstantiation",
+              "title": "De la transsubstantiation",
               "ordinal": 3,
               "paragraph_range": [
                 636,
@@ -1172,7 +1172,7 @@
             },
             {
               "slug": "4-comment-sopere",
-              "title": "IV — Comment s’opère la transsubstantiation",
+              "title": "Comment s’opère la transsubstantiation",
               "ordinal": 4,
               "paragraph_range": [
                 639,
@@ -1181,7 +1181,7 @@
             },
             {
               "slug": "5-accidents-du",
-              "title": "V — Des accidents du pain et du vin",
+              "title": "Des accidents du pain et du vin",
               "ordinal": 5,
               "paragraph_range": [
                 644,
@@ -1201,7 +1201,7 @@
           "sections": [
             {
               "slug": "1-vertu-et-des",
-              "title": "I — De la vertu et des fruits de l’Eucharistie",
+              "title": "De la vertu et des fruits de l’Eucharistie",
               "ordinal": 1,
               "paragraph_range": [
                 648,
@@ -1210,7 +1210,7 @@
             },
             {
               "slug": "2-trois-manieres",
-              "title": "II — Trois manières de participer a l’Eucharistie",
+              "title": "Trois manières de participer a l’Eucharistie",
               "ordinal": 2,
               "paragraph_range": [
                 659,
@@ -1219,7 +1219,7 @@
             },
             {
               "slug": "3-dispositions",
-              "title": "III — Des dispositions nécessaires pour communier",
+              "title": "Des dispositions nécessaires pour communier",
               "ordinal": 3,
               "paragraph_range": [
                 664,
@@ -1228,7 +1228,7 @@
             },
             {
               "slug": "4-lobligation-de",
-              "title": "IV — De l’obligation de communier",
+              "title": "De l’obligation de communier",
               "ordinal": 4,
               "paragraph_range": [
                 671,
@@ -1237,7 +1237,7 @@
             },
             {
               "slug": "5-communion-sous",
-              "title": "V — Communion sous les deux espéces",
+              "title": "Communion sous les deux espéces",
               "ordinal": 5,
               "paragraph_range": [
                 679,
@@ -1246,7 +1246,7 @@
             },
             {
               "slug": "6-ministre-du",
-              "title": "VI — Ministre du sacrement de l’Eucharistie",
+              "title": "Ministre du sacrement de l’Eucharistie",
               "ordinal": 6,
               "paragraph_range": [
                 687,
@@ -1255,7 +1255,7 @@
             },
             {
               "slug": "7-leucharistie",
-              "title": "VII — De l’Eucharistie considérée comme sacrifice",
+              "title": "De l’Eucharistie considérée comme sacrifice",
               "ordinal": 7,
               "paragraph_range": [
                 689,
@@ -1264,7 +1264,7 @@
             },
             {
               "slug": "8-sacrifice-de-la",
-              "title": "VIII — Le sacrifice de la messe est le même que celui de la croix",
+              "title": "Le sacrifice de la messe est le même que celui de la croix",
               "ordinal": 8,
               "paragraph_range": [
                 698,
@@ -1273,7 +1273,7 @@
             },
             {
               "slug": "9-ceremonies-de",
-              "title": "IX — Cérémonies de la messe",
+              "title": "Cérémonies de la messe",
               "ordinal": 9,
               "paragraph_range": [
                 702,
@@ -1302,7 +1302,7 @@
             },
             {
               "slug": "2-nom-et-de-la",
-              "title": "I — Du nom et de la vertu de pénitence",
+              "title": "Du nom et de la vertu de pénitence",
               "ordinal": 2,
               "paragraph_range": [
                 704,
@@ -1311,7 +1311,7 @@
             },
             {
               "slug": "3-penitence",
-              "title": "II — De la pénitence considérée comme sacrement",
+              "title": "De la pénitence considérée comme sacrement",
               "ordinal": 3,
               "paragraph_range": [
                 723,
@@ -1320,7 +1320,7 @@
             },
             {
               "slug": "4-matiere-et",
-              "title": "III — Matière et forme du sacrement de pénitence",
+              "title": "Matière et forme du sacrement de pénitence",
               "ordinal": 4,
               "paragraph_range": [
                 727,
@@ -1329,7 +1329,7 @@
             },
             {
               "slug": "5-effets-du",
-              "title": "IV — Des effets du sacrement de pénitence",
+              "title": "Des effets du sacrement de pénitence",
               "ordinal": 5,
               "paragraph_range": [
                 734,
@@ -1349,7 +1349,7 @@
           "sections": [
             {
               "slug": "1-quest-ce-que-la",
-              "title": "I — Qu’est-ce que la contrition",
+              "title": "Qu’est-ce que la contrition",
               "ordinal": 1,
               "paragraph_range": [
                 743,
@@ -1358,7 +1358,7 @@
             },
             {
               "slug": "2-qualites-de-la",
-              "title": "II — Qualités de la contrition",
+              "title": "Qualités de la contrition",
               "ordinal": 2,
               "paragraph_range": [
                 749,
@@ -1367,7 +1367,7 @@
             },
             {
               "slug": "3-effets-de-la",
-              "title": "III — Des effets de la contrition et des moyens de l’exciter",
+              "title": "Des effets de la contrition et des moyens de l’exciter",
               "ordinal": 3,
               "paragraph_range": [
                 766,
@@ -1387,7 +1387,7 @@
           "sections": [
             {
               "slug": "1-confession",
-              "title": "I — De la confession",
+              "title": "De la confession",
               "ordinal": 1,
               "paragraph_range": [
                 770,
@@ -1396,7 +1396,7 @@
             },
             {
               "slug": "2-utilite-et",
-              "title": "II — Utilité et nécessité de la confession",
+              "title": "Utilité et nécessité de la confession",
               "ordinal": 2,
               "paragraph_range": [
                 771,
@@ -1405,7 +1405,7 @@
             },
             {
               "slug": "3-jesus-christ",
-              "title": "III — Jésus-Christ auteur le la confession",
+              "title": "Jésus-Christ auteur le la confession",
               "ordinal": 3,
               "paragraph_range": [
                 778,
@@ -1414,7 +1414,7 @@
             },
             {
               "slug": "4-lobligation-de",
-              "title": "IV — De l’obligation de se confesser",
+              "title": "De l’obligation de se confesser",
               "ordinal": 4,
               "paragraph_range": [
                 783,
@@ -1423,7 +1423,7 @@
             },
             {
               "slug": "5-qualites-de-la",
-              "title": "V — Des qualités de la confession",
+              "title": "Des qualités de la confession",
               "ordinal": 5,
               "paragraph_range": [
                 786,
@@ -1432,7 +1432,7 @@
             },
             {
               "slug": "6-ministre-du",
-              "title": "VI — Du ministre du sacrement de pénitence",
+              "title": "Du ministre du sacrement de pénitence",
               "ordinal": 6,
               "paragraph_range": [
                 793,
@@ -1461,7 +1461,7 @@
             },
             {
               "slug": "2-quest-ce-que-la",
-              "title": "I — Qu’est-ce que la satisfaction",
+              "title": "Qu’est-ce que la satisfaction",
               "ordinal": 2,
               "paragraph_range": [
                 806,
@@ -1470,7 +1470,7 @@
             },
             {
               "slug": "3-necessite-de-la",
-              "title": "II — Nécessité de la satisfaction",
+              "title": "Nécessité de la satisfaction",
               "ordinal": 3,
               "paragraph_range": [
                 812,
@@ -1479,7 +1479,7 @@
             },
             {
               "slug": "4-effets-et",
-              "title": "III — Effets et avantages de la satisfaction",
+              "title": "Effets et avantages de la satisfaction",
               "ordinal": 4,
               "paragraph_range": [
                 817,
@@ -1488,7 +1488,7 @@
             },
             {
               "slug": "5-diverses",
-              "title": "IV — Diverses espèces d’oeuvres satisfactoires",
+              "title": "Diverses espèces d’oeuvres satisfactoires",
               "ordinal": 5,
               "paragraph_range": [
                 825,
@@ -1517,7 +1517,7 @@
             },
             {
               "slug": "2-lextreme",
-              "title": "I — De l’extrême-onction et de la nature du sacrement de l’extrême-onction",
+              "title": "De l’extrême-onction et de la nature du sacrement de l’extrême-onction",
               "ordinal": 2,
               "paragraph_range": [
                 836,
@@ -1526,7 +1526,7 @@
             },
             {
               "slug": "3-qui-sont-ceux-a",
-              "title": "II — Qui sont ceux a qui l’extrême-onction doit être administrée",
+              "title": "Qui sont ceux a qui l’extrême-onction doit être administrée",
               "ordinal": 3,
               "paragraph_range": [
                 846,
@@ -1535,7 +1535,7 @@
             },
             {
               "slug": "4-dispositions",
-              "title": "III — Des dispositions nécessaires pour recevoir l’extrême-onction",
+              "title": "Des dispositions nécessaires pour recevoir l’extrême-onction",
               "ordinal": 4,
               "paragraph_range": [
                 850,
@@ -1544,7 +1544,7 @@
             },
             {
               "slug": "5-quels-sont-les",
-              "title": "IV — Quels sont les ministres de ce sacrement",
+              "title": "Quels sont les ministres de ce sacrement",
               "ordinal": 5,
               "paragraph_range": [
                 851,
@@ -1553,7 +1553,7 @@
             },
             {
               "slug": "6-effets-de",
-              "title": "V — Des effets de l’extrême-onction",
+              "title": "Des effets de l’extrême-onction",
               "ordinal": 6,
               "paragraph_range": [
                 852,
@@ -1582,7 +1582,7 @@
             },
             {
               "slug": "2-il-est-utile",
-              "title": "I — Il est utile d’expliquer aux fidèles le sacrement de l’ordre",
+              "title": "Il est utile d’expliquer aux fidèles le sacrement de l’ordre",
               "ordinal": 2,
               "paragraph_range": [
                 859,
@@ -1591,7 +1591,7 @@
             },
             {
               "slug": "3-puissance",
-              "title": "II — De la puissance ecclésiastique",
+              "title": "De la puissance ecclésiastique",
               "ordinal": 3,
               "paragraph_range": [
                 869,
@@ -1600,7 +1600,7 @@
             },
             {
               "slug": "4-lordre-est-un",
-              "title": "III — L’ordre est un vrai sacrement",
+              "title": "L’ordre est un vrai sacrement",
               "ordinal": 4,
               "paragraph_range": [
                 877,
@@ -1609,7 +1609,7 @@
             },
             {
               "slug": "5-tonsure",
-              "title": "IV — De la tonsure",
+              "title": "De la tonsure",
               "ordinal": 5,
               "paragraph_range": [
                 880,
@@ -1618,7 +1618,7 @@
             },
             {
               "slug": "6-ordres-mineurs",
-              "title": "V — Des ordres mineurs",
+              "title": "Des ordres mineurs",
               "ordinal": 6,
               "paragraph_range": [
                 886,
@@ -1627,7 +1627,7 @@
             },
             {
               "slug": "7-ordres-majeurs",
-              "title": "VI — Des ordres majeurs",
+              "title": "Des ordres majeurs",
               "ordinal": 7,
               "paragraph_range": [
                 890,
@@ -1636,7 +1636,7 @@
             },
             {
               "slug": "8-sacerdoce",
-              "title": "VII — Du sacerdoce",
+              "title": "Du sacerdoce",
               "ordinal": 8,
               "paragraph_range": [
                 897,
@@ -1645,7 +1645,7 @@
             },
             {
               "slug": "9-degres-et",
-              "title": "VIII — Degrés et fonctions du sacerdoce",
+              "title": "Degrés et fonctions du sacerdoce",
               "ordinal": 9,
               "paragraph_range": [
                 903,
@@ -1654,7 +1654,7 @@
             },
             {
               "slug": "10-dispositions",
-              "title": "IX — Des dispositions nécessaires pour les ordres",
+              "title": "Des dispositions nécessaires pour les ordres",
               "ordinal": 10,
               "paragraph_range": [
                 918,
@@ -1663,7 +1663,7 @@
             },
             {
               "slug": "11-effets-de",
-              "title": "X — Des effets de l’ordre",
+              "title": "Des effets de l’ordre",
               "ordinal": 11,
               "paragraph_range": [
                 926,
@@ -1692,7 +1692,7 @@
             },
             {
               "slug": "2-quest-ce-que-le",
-              "title": "I — Qu’est-ce que le mariage",
+              "title": "Qu’est-ce que le mariage",
               "ordinal": 2,
               "paragraph_range": [
                 931,
@@ -1701,7 +1701,7 @@
             },
             {
               "slug": "3-mariage",
-              "title": "II — Du mariage considéré par rapport a la nature",
+              "title": "Du mariage considéré par rapport a la nature",
               "ordinal": 3,
               "paragraph_range": [
                 947,
@@ -1710,7 +1710,7 @@
             },
             {
               "slug": "4-motifs-et-des",
-              "title": "III — Des motifs et des fins du mariage",
+              "title": "Des motifs et des fins du mariage",
               "ordinal": 4,
               "paragraph_range": [
                 950,
@@ -1719,7 +1719,7 @@
             },
             {
               "slug": "5-sacrement-de",
-              "title": "IV — Du sacrement de mariage",
+              "title": "Du sacrement de mariage",
               "ordinal": 5,
               "paragraph_range": [
                 956,
@@ -1728,7 +1728,7 @@
             },
             {
               "slug": "6-avantages-et",
-              "title": "V — Des avantages et des biens du mariage",
+              "title": "Des avantages et des biens du mariage",
               "ordinal": 6,
               "paragraph_range": [
                 964,
@@ -1737,7 +1737,7 @@
             },
             {
               "slug": "7-devoirs",
-              "title": "VI — Devoirs réciproques des époux",
+              "title": "Devoirs réciproques des époux",
               "ordinal": 7,
               "paragraph_range": [
                 975,
@@ -1746,7 +1746,7 @@
             },
             {
               "slug": "8-formalites-du",
-              "title": "VII — Des formalités du mariage",
+              "title": "Des formalités du mariage",
               "ordinal": 8,
               "paragraph_range": [
                 981,
@@ -1781,7 +1781,7 @@
             },
             {
               "slug": "2-necessite",
-              "title": "I — Nécessité d’étudier et d’expliquer le Décalogue",
+              "title": "Nécessité d’étudier et d’expliquer le Décalogue",
               "ordinal": 2,
               "paragraph_range": [
                 992,
@@ -1790,7 +1790,7 @@
             },
             {
               "slug": "3-dieu-auteur-du",
-              "title": "II — Dieu auteur du Décalogue",
+              "title": "Dieu auteur du Décalogue",
               "ordinal": 3,
               "paragraph_range": [
                 994,
@@ -1799,7 +1799,7 @@
             },
             {
               "slug": "4-necessite-de",
-              "title": "III — Nécessité de garder les commandements",
+              "title": "Nécessité de garder les commandements",
               "ordinal": 4,
               "paragraph_range": [
                 1003,
@@ -1808,7 +1808,7 @@
             },
             {
               "slug": "5-avantage-de-la",
-              "title": "IV — Avantage de la loi de Dieu",
+              "title": "Avantage de la loi de Dieu",
               "ordinal": 5,
               "paragraph_range": [
                 1004,
@@ -1817,7 +1817,7 @@
             },
             {
               "slug": "6-recit-abrege-de",
-              "title": "I — Récit abrégé de l’histoire sacrée",
+              "title": "Récit abrégé de l’histoire sacrée",
               "ordinal": 6,
               "paragraph_range": [
                 1009,
@@ -1846,7 +1846,7 @@
             },
             {
               "slug": "2-recit-abrege-de",
-              "title": "I — Récit abrégé de l’histoire sacrée",
+              "title": "Récit abrégé de l’histoire sacrée",
               "ordinal": 2,
               "paragraph_range": [
                 1012,
@@ -1855,7 +1855,7 @@
             },
             {
               "slug": "3-application-de",
-              "title": "II — Application de cette histoire aux chrétiens",
+              "title": "Application de cette histoire aux chrétiens",
               "ordinal": 3,
               "paragraph_range": [
                 1017,
@@ -1864,7 +1864,7 @@
             },
             {
               "slug": "4-objet-du",
-              "title": "III — Objet du premier commandement",
+              "title": "Objet du premier commandement",
               "ordinal": 4,
               "paragraph_range": [
                 1021,
@@ -1873,7 +1873,7 @@
             },
             {
               "slug": "5-culte-et-de",
-              "title": "IV — Du culte et de l’invocation des anges et des saints",
+              "title": "Du culte et de l’invocation des anges et des saints",
               "ordinal": 5,
               "paragraph_range": [
                 1027,
@@ -1882,7 +1882,7 @@
             },
             {
               "slug": "6-choses",
-              "title": "V — Choses défendues par le premier commandement",
+              "title": "Choses défendues par le premier commandement",
               "ordinal": 6,
               "paragraph_range": [
                 1038,
@@ -1891,7 +1891,7 @@
             },
             {
               "slug": "7-on-peut",
-              "title": "VI — On peut cependant chez les chrétiens représenter la divinité par des symboles",
+              "title": "On peut cependant chez les chrétiens représenter la divinité par des symboles",
               "ordinal": 7,
               "paragraph_range": [
                 1045,
@@ -1900,7 +1900,7 @@
             },
             {
               "slug": "8-images-de-jesus",
-              "title": "VII — Les images de Jésus-Christ, de la sainte vierge et des saints sont permises",
+              "title": "Les images de Jésus-Christ, de la sainte vierge et des saints sont permises",
               "ordinal": 8,
               "paragraph_range": [
                 1047,
@@ -1909,7 +1909,7 @@
             },
             {
               "slug": "9-motifs",
-              "title": "VIII — Motifs d’observer la loi : recompenses et chatiments",
+              "title": "Motifs d’observer la loi : recompenses et chatiments",
               "ordinal": 9,
               "paragraph_range": [
                 1050,
@@ -1938,7 +1938,7 @@
             },
             {
               "slug": "2-ce-qui-est",
-              "title": "I — Ce qui est ordonné par le second commandement",
+              "title": "Ce qui est ordonné par le second commandement",
               "ordinal": 2,
               "paragraph_range": [
                 1070,
@@ -1947,7 +1947,7 @@
             },
             {
               "slug": "3-serment",
-              "title": "II — Du serment",
+              "title": "Du serment",
               "ordinal": 3,
               "paragraph_range": [
                 1081,
@@ -1956,7 +1956,7 @@
             },
             {
               "slug": "4-conditions",
-              "title": "III — Conditions nécessaires pour que le serment soit permis",
+              "title": "Conditions nécessaires pour que le serment soit permis",
               "ordinal": 4,
               "paragraph_range": [
                 1084,
@@ -1965,7 +1965,7 @@
             },
             {
               "slug": "5-ce-qui-est",
-              "title": "IV — Ce qui est défendu par le second commandement",
+              "title": "Ce qui est défendu par le second commandement",
               "ordinal": 5,
               "paragraph_range": [
                 1096,
@@ -1974,7 +1974,7 @@
             },
             {
               "slug": "6-chatiments-de",
-              "title": "V — Chatiments de ceux qui violent le second commandement",
+              "title": "Chatiments de ceux qui violent le second commandement",
               "ordinal": 6,
               "paragraph_range": [
                 1108,
@@ -2003,7 +2003,7 @@
             },
             {
               "slug": "2-comparaison-du",
-              "title": "I — Comparaison du troisième commandement avec les autres",
+              "title": "Comparaison du troisième commandement avec les autres",
               "ordinal": 2,
               "paragraph_range": [
                 1117,
@@ -2012,7 +2012,7 @@
             },
             {
               "slug": "3-souvenez-vous",
-              "title": "II — Souvenez-vous de sanctifier le jour du sabbat",
+              "title": "Souvenez-vous de sanctifier le jour du sabbat",
               "ordinal": 3,
               "paragraph_range": [
                 1121,
@@ -2021,7 +2021,7 @@
             },
             {
               "slug": "4-vous",
-              "title": "III — Vous travaillerez pendant six jours, etc",
+              "title": "Vous travaillerez pendant six jours, etc",
               "ordinal": 4,
               "paragraph_range": [
                 1128,
@@ -2030,7 +2030,7 @@
             },
             {
               "slug": "5-dimanche",
-              "title": "IV — Le dimanche substitué au sabbat. fêtes de l’Église",
+              "title": "Le dimanche substitué au sabbat. fêtes de l’Église",
               "ordinal": 5,
               "paragraph_range": [
                 1136,
@@ -2039,7 +2039,7 @@
             },
             {
               "slug": "6-oeuvres",
-              "title": "V — Des oeuvres serviles",
+              "title": "Des oeuvres serviles",
               "ordinal": 6,
               "paragraph_range": [
                 1141,
@@ -2048,7 +2048,7 @@
             },
             {
               "slug": "7-quelles-sont",
-              "title": "VI — Quelles sont les oeuvres commandées le dimanche ?",
+              "title": "Quelles sont les oeuvres commandées le dimanche ?",
               "ordinal": 7,
               "paragraph_range": [
                 1145,
@@ -2057,7 +2057,7 @@
             },
             {
               "slug": "8-principaux",
-              "title": "VII — Principaux avantages de la sanctification du dimanche",
+              "title": "Principaux avantages de la sanctification du dimanche",
               "ordinal": 8,
               "paragraph_range": [
                 1148,
@@ -2086,7 +2086,7 @@
             },
             {
               "slug": "2-difference-des",
-              "title": "I — Différence des trois premiers commandements et des suivants",
+              "title": "Différence des trois premiers commandements et des suivants",
               "ordinal": 2,
               "paragraph_range": [
                 1156,
@@ -2095,7 +2095,7 @@
             },
             {
               "slug": "3-honorez-votre",
-              "title": "II — Honorez votre père et votre mère",
+              "title": "Honorez votre père et votre mère",
               "ordinal": 3,
               "paragraph_range": [
                 1162,
@@ -2104,7 +2104,7 @@
             },
             {
               "slug": "4-quoi-consiste",
-              "title": "III — En quoi consiste l’honneur dû aux parents",
+              "title": "En quoi consiste l’honneur dû aux parents",
               "ordinal": 4,
               "paragraph_range": [
                 1169,
@@ -2113,7 +2113,7 @@
             },
             {
               "slug": "5-qui-sont-ceux",
-              "title": "IV — Qui sont ceux que l’on doit encore honorer avec les parents, et comment ?",
+              "title": "Qui sont ceux que l’on doit encore honorer avec les parents, et comment ?",
               "ordinal": 5,
               "paragraph_range": [
                 1177,
@@ -2122,7 +2122,7 @@
             },
             {
               "slug": "6-chatiment",
-              "title": "VI — Chatiment réservé a ceux qui violent le quatrième précepte",
+              "title": "Chatiment réservé a ceux qui violent le quatrième précepte",
               "ordinal": 6,
               "paragraph_range": [
                 1186,
@@ -2131,7 +2131,7 @@
             },
             {
               "slug": "7-devoirs-des",
-              "title": "VII — Devoirs des parents et des supérieurs envers leurs enfants et leurs inférieurs",
+              "title": "Devoirs des parents et des supérieurs envers leurs enfants et leurs inférieurs",
               "ordinal": 7,
               "paragraph_range": [
                 1188,
@@ -2160,7 +2160,7 @@
             },
             {
               "slug": "2-quels-sont-les",
-              "title": "I — Quels sont les meurtres qui ne sont point ici défendus",
+              "title": "Quels sont les meurtres qui ne sont point ici défendus",
               "ordinal": 2,
               "paragraph_range": [
                 1198,
@@ -2169,7 +2169,7 @@
             },
             {
               "slug": "3-meurtres",
-              "title": "II — Meurtres défendus",
+              "title": "Meurtres défendus",
               "ordinal": 3,
               "paragraph_range": [
                 1203,
@@ -2178,7 +2178,7 @@
             },
             {
               "slug": "4-autres-choses",
-              "title": "III — Autres choses défendues par ce précepte",
+              "title": "Autres choses défendues par ce précepte",
               "ordinal": 4,
               "paragraph_range": [
                 1207,
@@ -2187,7 +2187,7 @@
             },
             {
               "slug": "5-moyens-deviter",
-              "title": "IV — Moyens d’éviter les fautes contraires au cinquième commandement",
+              "title": "Moyens d’éviter les fautes contraires au cinquième commandement",
               "ordinal": 5,
               "paragraph_range": [
                 1212,
@@ -2196,7 +2196,7 @@
             },
             {
               "slug": "6-ce-qui-est",
-              "title": "V — Ce qui est commandé par ce précepte",
+              "title": "Ce qui est commandé par ce précepte",
               "ordinal": 6,
               "paragraph_range": [
                 1214,
@@ -2225,7 +2225,7 @@
             },
             {
               "slug": "2-ladultere",
-              "title": "I — De l’adultère",
+              "title": "De l’adultère",
               "ordinal": 2,
               "paragraph_range": [
                 1234,
@@ -2234,7 +2234,7 @@
             },
             {
               "slug": "3-ce-qui-est",
-              "title": "II — Ce qui est commandé par le sixième commandement",
+              "title": "Ce qui est commandé par le sixième commandement",
               "ordinal": 3,
               "paragraph_range": [
                 1241,
@@ -2243,7 +2243,7 @@
             },
             {
               "slug": "4-remedes-contre",
-              "title": "III — Remèdes contre les mauvaises pensées",
+              "title": "Remèdes contre les mauvaises pensées",
               "ordinal": 4,
               "paragraph_range": [
                 1243,
@@ -2252,7 +2252,7 @@
             },
             {
               "slug": "5-autres-remedes",
-              "title": "IV — Autres remèdes contre l’impureté",
+              "title": "Autres remèdes contre l’impureté",
               "ordinal": 5,
               "paragraph_range": [
                 1249,
@@ -2281,7 +2281,7 @@
             },
             {
               "slug": "2-quest-ce-que-le",
-              "title": "I — Qu’est-ce que le vol ?",
+              "title": "Qu’est-ce que le vol ?",
               "ordinal": 2,
               "paragraph_range": [
                 1259,
@@ -2290,7 +2290,7 @@
             },
             {
               "slug": "3-vol-est-un",
-              "title": "II — Le vol est un grand péché",
+              "title": "Le vol est un grand péché",
               "ordinal": 3,
               "paragraph_range": [
                 1262,
@@ -2299,7 +2299,7 @@
             },
             {
               "slug": "4-differentes",
-              "title": "III — Différentes espèces de vol",
+              "title": "Différentes espèces de vol",
               "ordinal": 4,
               "paragraph_range": [
                 1265,
@@ -2308,7 +2308,7 @@
             },
             {
               "slug": "5-rapine",
-              "title": "IV — De la rapine",
+              "title": "De la rapine",
               "ordinal": 5,
               "paragraph_range": [
                 1272,
@@ -2317,7 +2317,7 @@
             },
             {
               "slug": "6-restitution",
-              "title": "V — De la restitution",
+              "title": "De la restitution",
               "ordinal": 6,
               "paragraph_range": [
                 1280,
@@ -2326,7 +2326,7 @@
             },
             {
               "slug": "7-oeuvres-de",
-              "title": "VI — Des oeuvres de miséricorde",
+              "title": "Des oeuvres de miséricorde",
               "ordinal": 7,
               "paragraph_range": [
                 1290,
@@ -2335,7 +2335,7 @@
             },
             {
               "slug": "8-il-faut-se",
-              "title": "VII — Il faut se mettre en état de faire l’aumône",
+              "title": "Il faut se mettre en état de faire l’aumône",
               "ordinal": 8,
               "paragraph_range": [
                 1295,
@@ -2344,7 +2344,7 @@
             },
             {
               "slug": "9-chatiments-du",
-              "title": "VIII — Chatiments du vol: récompenses des oeuvres de miséricorde",
+              "title": "Chatiments du vol: récompenses des oeuvres de miséricorde",
               "ordinal": 9,
               "paragraph_range": [
                 1297,
@@ -2353,7 +2353,7 @@
             },
             {
               "slug": "10-excuses-des",
-              "title": "IX — Excuses des voleurs",
+              "title": "Excuses des voleurs",
               "ordinal": 10,
               "paragraph_range": [
                 1300,
@@ -2382,7 +2382,7 @@
             },
             {
               "slug": "2-faux-temoignage",
-              "title": "I — Du faux témoignage",
+              "title": "Du faux témoignage",
               "ordinal": 2,
               "paragraph_range": [
                 1312,
@@ -2391,7 +2391,7 @@
             },
             {
               "slug": "3-medisance-et-de",
-              "title": "II — De la médisance et de la calomnie",
+              "title": "De la médisance et de la calomnie",
               "ordinal": 3,
               "paragraph_range": [
                 1322,
@@ -2400,7 +2400,7 @@
             },
             {
               "slug": "4-flatterie-le",
-              "title": "III — La flatterie, le mensonge et la dissimulation",
+              "title": "La flatterie, le mensonge et la dissimulation",
               "ordinal": 4,
               "paragraph_range": [
                 1327,
@@ -2409,7 +2409,7 @@
             },
             {
               "slug": "5-quoi-nous",
-              "title": "IV — A quoi nous sommes obligés par ce commandement",
+              "title": "A quoi nous sommes obligés par ce commandement",
               "ordinal": 5,
               "paragraph_range": [
                 1335,
@@ -2418,7 +2418,7 @@
             },
             {
               "slug": "6-motifs-de",
-              "title": "V — Motifs de détester le mensonge",
+              "title": "Motifs de détester le mensonge",
               "ordinal": 6,
               "paragraph_range": [
                 1344,
@@ -2427,7 +2427,7 @@
             },
             {
               "slug": "7-vaines-excuses",
-              "title": "VI — Vaines excuses des menteurs",
+              "title": "Vaines excuses des menteurs",
               "ordinal": 7,
               "paragraph_range": [
                 1351,
@@ -2456,7 +2456,7 @@
             },
             {
               "slug": "2-difference-et",
-              "title": "I — Différence et nécessité de ces deux commandements",
+              "title": "Différence et nécessité de ces deux commandements",
               "ordinal": 2,
               "paragraph_range": [
                 1360,
@@ -2465,7 +2465,7 @@
             },
             {
               "slug": "3-quest-ce-que-la",
-              "title": "II — Qu’est-ce que la concupiscence",
+              "title": "Qu’est-ce que la concupiscence",
               "ordinal": 3,
               "paragraph_range": [
                 1367,
@@ -2474,7 +2474,7 @@
             },
             {
               "slug": "4-quelle-est-la",
-              "title": "III — Quelle est la convoitise qui est ici défendue",
+              "title": "Quelle est la convoitise qui est ici défendue",
               "ordinal": 4,
               "paragraph_range": [
                 1373,
@@ -2483,7 +2483,7 @@
             },
             {
               "slug": "5-differentes",
-              "title": "IV — Différentes espèces de bien d’autrui que l’on ne doit pas désirer",
+              "title": "Différentes espèces de bien d’autrui que l’on ne doit pas désirer",
               "ordinal": 5,
               "paragraph_range": [
                 1378,
@@ -2492,7 +2492,7 @@
             },
             {
               "slug": "6-il-est-defendu",
-              "title": "V — Il est défendu de désirer la femme de son prochain",
+              "title": "Il est défendu de désirer la femme de son prochain",
               "ordinal": 6,
               "paragraph_range": [
                 1384,
@@ -2501,7 +2501,7 @@
             },
             {
               "slug": "7-ce-que-dieu",
-              "title": "VI — Ce que Dieu ordonne par ces deux commandements",
+              "title": "Ce que Dieu ordonne par ces deux commandements",
               "ordinal": 7,
               "paragraph_range": [
                 1388,
@@ -2510,7 +2510,7 @@
             },
             {
               "slug": "8-qui-sont-ceux",
-              "title": "VII — Qui sont ceux qui pèchent contre ces deux commandements",
+              "title": "Qui sont ceux qui pèchent contre ces deux commandements",
               "ordinal": 8,
               "paragraph_range": [
                 1396,
@@ -2545,7 +2545,7 @@
             },
             {
               "slug": "2-necessite-de-la",
-              "title": "I — De la nécessité de la prière",
+              "title": "De la nécessité de la prière",
               "ordinal": 2,
               "paragraph_range": [
                 1401,
@@ -2554,7 +2554,7 @@
             },
             {
               "slug": "3-utilite-et",
-              "title": "II — Utilité et fruits de la prière",
+              "title": "Utilité et fruits de la prière",
               "ordinal": 3,
               "paragraph_range": [
                 1406,
@@ -2563,7 +2563,7 @@
             },
             {
               "slug": "4-diverses",
-              "title": "III — Des diverses parties de la prière",
+              "title": "Des diverses parties de la prière",
               "ordinal": 4,
               "paragraph_range": [
                 1423,
@@ -2572,7 +2572,7 @@
             },
             {
               "slug": "5-ce-quil-faut",
-              "title": "IV — Ce qu’il faut demander dans la prière",
+              "title": "Ce qu’il faut demander dans la prière",
               "ordinal": 5,
               "paragraph_range": [
                 1434,
@@ -2581,7 +2581,7 @@
             },
             {
               "slug": "6-pour-qui-faut",
-              "title": "V — Pour qui faut-il prier",
+              "title": "Pour qui faut-il prier",
               "ordinal": 6,
               "paragraph_range": [
                 1439,
@@ -2590,7 +2590,7 @@
             },
             {
               "slug": "7-qui-doit-on",
-              "title": "VI — A qui doit-on adresser des prières",
+              "title": "A qui doit-on adresser des prières",
               "ordinal": 7,
               "paragraph_range": [
                 1453,
@@ -2599,7 +2599,7 @@
             },
             {
               "slug": "8-preparation-a",
-              "title": "VII — De la préparation a la prière",
+              "title": "De la préparation a la prière",
               "ordinal": 8,
               "paragraph_range": [
                 1456,
@@ -2608,7 +2608,7 @@
             },
             {
               "slug": "9-maniere-de",
-              "title": "VIII — Manière de prier: qualités de la prière",
+              "title": "Manière de prier: qualités de la prière",
               "ordinal": 9,
               "paragraph_range": [
                 1470,
@@ -2637,7 +2637,7 @@
             },
             {
               "slug": "2-notre-pere",
-              "title": "I — Notre père",
+              "title": "Notre père",
               "ordinal": 2,
               "paragraph_range": [
                 1483,
@@ -2646,7 +2646,7 @@
             },
             {
               "slug": "3-pourquoi-chacun",
-              "title": "II — Pourquoi chacun dit-il notre père",
+              "title": "Pourquoi chacun dit-il notre père",
               "ordinal": 3,
               "paragraph_range": [
                 1504,
@@ -2655,7 +2655,7 @@
             },
             {
               "slug": "4-qui-etes-dans",
-              "title": "III — Qui êtes dans les cieux",
+              "title": "Qui êtes dans les cieux",
               "ordinal": 4,
               "paragraph_range": [
                 1513,
@@ -2675,7 +2675,7 @@
           "sections": [
             {
               "slug": "1-pourquoi-cette",
-              "title": "I — Pourquoi cette demande est la première ?",
+              "title": "Pourquoi cette demande est la première ?",
               "ordinal": 1,
               "paragraph_range": [
                 1517,
@@ -2684,7 +2684,7 @@
             },
             {
               "slug": "2-quest-ce-que-la",
-              "title": "II — Qu’est-ce que la gloire de Dieu ?",
+              "title": "Qu’est-ce que la gloire de Dieu ?",
               "ordinal": 2,
               "paragraph_range": [
                 1520,
@@ -2693,7 +2693,7 @@
             },
             {
               "slug": "3-objet-de-la",
-              "title": "III — Objet de la première demande",
+              "title": "Objet de la première demande",
               "ordinal": 3,
               "paragraph_range": [
                 1523,
@@ -2702,7 +2702,7 @@
             },
             {
               "slug": "4-un-vrai",
-              "title": "IV — Un vrai chrétien doit honorer ce saint nom par ses actions",
+              "title": "Un vrai chrétien doit honorer ce saint nom par ses actions",
               "ordinal": 4,
               "paragraph_range": [
                 1528,
@@ -2722,7 +2722,7 @@
           "sections": [
             {
               "slug": "1-royaume-de-dieu",
-              "title": "I — Du royaume de Dieu",
+              "title": "Du royaume de Dieu",
               "ordinal": 1,
               "paragraph_range": [
                 1531,
@@ -2731,7 +2731,7 @@
             },
             {
               "slug": "2-ce-qui-est",
-              "title": "II — Ce qui est compris dans cette demande",
+              "title": "Ce qui est compris dans cette demande",
               "ordinal": 2,
               "paragraph_range": [
                 1534,
@@ -2740,7 +2740,7 @@
             },
             {
               "slug": "3-miseres-de",
-              "title": "III — Des misères de cette vie",
+              "title": "Des misères de cette vie",
               "ordinal": 3,
               "paragraph_range": [
                 1538,
@@ -2749,7 +2749,7 @@
             },
             {
               "slug": "4-quel-est-lobjet",
-              "title": "IV — Quel est l’objet de la deuxième demande",
+              "title": "Quel est l’objet de la deuxième demande",
               "ordinal": 4,
               "paragraph_range": [
                 1545,
@@ -2758,7 +2758,7 @@
             },
             {
               "slug": "5-dans-quels",
-              "title": "V — Dans quels sentiments il faut faire cette demande",
+              "title": "Dans quels sentiments il faut faire cette demande",
               "ordinal": 5,
               "paragraph_range": [
                 1561,
@@ -2787,7 +2787,7 @@
             },
             {
               "slug": "2-miseres-du",
-              "title": "I — Misères du genre humain, leur cause",
+              "title": "Misères du genre humain, leur cause",
               "ordinal": 2,
               "paragraph_range": [
                 1567,
@@ -2796,7 +2796,7 @@
             },
             {
               "slug": "3-nous-demandons",
-              "title": "II — Nous demandons le remède a nos misères par ces mots que votre volonté soit faite, etc...",
+              "title": "Nous demandons le remède a nos misères par ces mots que votre volonté soit faite, etc...",
               "ordinal": 3,
               "paragraph_range": [
                 1576,
@@ -2805,7 +2805,7 @@
             },
             {
               "slug": "4-ce-que-cest-que",
-              "title": "III — Ce que c’est que la volonté de Dieu",
+              "title": "Ce que c’est que la volonté de Dieu",
               "ordinal": 4,
               "paragraph_range": [
                 1580,
@@ -2814,7 +2814,7 @@
             },
             {
               "slug": "5-sur-la-terre",
-              "title": "IV — Sur la terre comme au ciel",
+              "title": "Sur la terre comme au ciel",
               "ordinal": 5,
               "paragraph_range": [
                 1595,
@@ -2843,7 +2843,7 @@
             },
             {
               "slug": "2-quelle-maniere",
-              "title": "I — De quelle manière il faut demander les biens de la vie",
+              "title": "De quelle manière il faut demander les biens de la vie",
               "ordinal": 2,
               "paragraph_range": [
                 1608,
@@ -2852,7 +2852,7 @@
             },
             {
               "slug": "3-notre-pain",
-              "title": "II — Notre pain quotidien",
+              "title": "Notre pain quotidien",
               "ordinal": 3,
               "paragraph_range": [
                 1618,
@@ -2861,7 +2861,7 @@
             },
             {
               "slug": "4-donnez-nous",
-              "title": "III — Donnez-nous aujourd’hui",
+              "title": "Donnez-nous aujourd’hui",
               "ordinal": 4,
               "paragraph_range": [
                 1632,
@@ -2870,7 +2870,7 @@
             },
             {
               "slug": "5-pain-spirituel",
-              "title": "IV — Du pain spirituel",
+              "title": "Du pain spirituel",
               "ordinal": 5,
               "paragraph_range": [
                 1637,
@@ -2899,7 +2899,7 @@
             },
             {
               "slug": "2-dispositions",
-              "title": "I — Des dispositions nécessaires pour faire cette prière. — repentir",
+              "title": "Des dispositions nécessaires pour faire cette prière. — repentir",
               "ordinal": 2,
               "paragraph_range": [
                 1652,
@@ -2908,7 +2908,7 @@
             },
             {
               "slug": "3-confiance-en",
-              "title": "II — Confiance en Dieu",
+              "title": "Confiance en Dieu",
               "ordinal": 3,
               "paragraph_range": [
                 1664,
@@ -2917,7 +2917,7 @@
             },
             {
               "slug": "4-ce-quon-entend",
-              "title": "III — Ce qu’on entend par le mot dettes",
+              "title": "Ce qu’on entend par le mot dettes",
               "ordinal": 4,
               "paragraph_range": [
                 1668,
@@ -2926,7 +2926,7 @@
             },
             {
               "slug": "5-comme-nous",
-              "title": "IV — Comme nous pardonnons a ceux qui nous ont offensés",
+              "title": "Comme nous pardonnons a ceux qui nous ont offensés",
               "ordinal": 5,
               "paragraph_range": [
                 1676,
@@ -2935,7 +2935,7 @@
             },
             {
               "slug": "6-motifs-et",
-              "title": "V — Motifs et manières de pardonner au prochain",
+              "title": "Motifs et manières de pardonner au prochain",
               "ordinal": 6,
               "paragraph_range": [
                 1679,
@@ -2944,7 +2944,7 @@
             },
             {
               "slug": "7-dispositions",
-              "title": "VI — Dispositions nécessaires pour faire cette prière avec fruit",
+              "title": "Dispositions nécessaires pour faire cette prière avec fruit",
               "ordinal": 7,
               "paragraph_range": [
                 1685,
@@ -2973,7 +2973,7 @@
             },
             {
               "slug": "2-pourquoi-jesus",
-              "title": "I — Pourquoi Jésus-Christ nous a ordonné cette sixième demande ?",
+              "title": "Pourquoi Jésus-Christ nous a ordonné cette sixième demande ?",
               "ordinal": 2,
               "paragraph_range": [
                 1694,
@@ -2982,7 +2982,7 @@
             },
             {
               "slug": "3-tentations-de",
-              "title": "II — Des tentations ; de leurs causes",
+              "title": "Des tentations ; de leurs causes",
               "ordinal": 3,
               "paragraph_range": [
                 1697,
@@ -2991,7 +2991,7 @@
             },
             {
               "slug": "4-demons",
-              "title": "III — Des démons",
+              "title": "Des démons",
               "ordinal": 4,
               "paragraph_range": [
                 1700,
@@ -3000,7 +3000,7 @@
             },
             {
               "slug": "5-quest-ce-quetre",
-              "title": "IV — Qu’est-ce qu’être tenté et induit en tentation",
+              "title": "Qu’est-ce qu’être tenté et induit en tentation",
               "ordinal": 5,
               "paragraph_range": [
                 1711,
@@ -3009,7 +3009,7 @@
             },
             {
               "slug": "6-quest-ce-quon",
-              "title": "V — Qu’est-ce qu’on demande a Dieu par ces paroles ne nous induisez point en tentation",
+              "title": "Qu’est-ce qu’on demande a Dieu par ces paroles ne nous induisez point en tentation",
               "ordinal": 6,
               "paragraph_range": [
                 1725,
@@ -3018,7 +3018,7 @@
             },
             {
               "slug": "7-motifs-et",
-              "title": "VI — Motifs et moyens de résister au démon",
+              "title": "Motifs et moyens de résister au démon",
               "ordinal": 7,
               "paragraph_range": [
                 1729,
@@ -3047,7 +3047,7 @@
             },
             {
               "slug": "2-comment-on-doit",
-              "title": "I — Comment on doit demander d’être délivré du mal.",
+              "title": "Comment on doit demander d’être délivré du mal.",
               "ordinal": 2,
               "paragraph_range": [
                 1743,
@@ -3056,7 +3056,7 @@
             },
             {
               "slug": "3-quels-sont-les",
-              "title": "II — Quels sont les maux dont nous demandons ici d’être délivrés",
+              "title": "Quels sont les maux dont nous demandons ici d’être délivrés",
               "ordinal": 3,
               "paragraph_range": [
                 1753,
@@ -3065,7 +3065,7 @@
             },
             {
               "slug": "4-patience",
-              "title": "III — De la patience nécessaire dans les maux",
+              "title": "De la patience nécessaire dans les maux",
               "ordinal": 4,
               "paragraph_range": [
                 1765,
@@ -3074,7 +3074,7 @@
             },
             {
               "slug": "5-conclusion-de",
-              "title": "IV — Conclusion de l’oraison dominicale. amen. (ainsi soit-il !)",
+              "title": "Conclusion de l’oraison dominicale. amen. (ainsi soit-il !)",
               "ordinal": 5,
               "paragraph_range": [
                 1770,

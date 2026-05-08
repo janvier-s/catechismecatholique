@@ -592,6 +592,7 @@ export interface PiusXGrandStructureChapter {
 	title: string;
 	ordinal: number;
 	qa_range: [number, number];
+	sections: { title: string | null }[];
 }
 
 export interface PiusXGrandStructurePart {

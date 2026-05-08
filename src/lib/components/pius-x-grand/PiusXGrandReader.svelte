@@ -25,9 +25,9 @@
 	<header class="mb-8">
 		<BreadcrumbRail
 			crumbs={[
-				{ href: '/pius-x-grand', title: 'Grand Catéchisme' },
+				{ href: '/grand-catechisme', title: 'Grand Catéchisme' },
 				{
-					href: '/pius-x-grand',
+					href: '/grand-catechisme',
 					kicker: chapter.part_title,
 					title: chapter.title
 				}
@@ -41,7 +41,7 @@
 
 	{#each chapter.sections as section, si (si)}
 		{#if section.title !== null}
-			<h3 class="section-heading">{section.title}</h3>
+			<h3 class="section-heading" id="s-{si}">{section.title}</h3>
 		{/if}
 		{#each section.qa as qa (qa.n)}
 			<article class="qa-item" id="q-{qa.n}">

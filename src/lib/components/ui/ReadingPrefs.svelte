@@ -5,7 +5,7 @@
 
 	const isTrent = $derived(page.url.pathname.startsWith('/trente'));
 	const isCompendium = $derived(page.url.pathname.startsWith('/compendium'));
-	const isPiusX = $derived(page.url.pathname.startsWith('/pius-x-grand'));
+	const isPiusX = $derived(page.url.pathname.startsWith('/grand-catechisme'));
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX);
 
 	let activeTab: 'text' | 'reading' | 'notes' = $state('text');

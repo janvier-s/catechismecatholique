@@ -40,6 +40,11 @@
 			if (p.startsWith('/trente/sommaire')) return false;
 			return true;
 		}
+		// Grand Catéchisme chapter reader (hide on landing and sommaire)
+		if (p.startsWith('/grand-catechisme/')) {
+			if (p.startsWith('/grand-catechisme/sommaire')) return false;
+			return true;
+		}
 		return false;
 	});
 
@@ -57,12 +62,15 @@
 		const toOnBible = toPath.startsWith('/bible');
 		const fromOnTrent = fromPath.startsWith('/trente');
 		const toOnTrent = toPath.startsWith('/trente');
+		const fromOnGrandCatechisme = fromPath.startsWith('/grand-catechisme');
+		const toOnGrandCatechisme = toPath.startsWith('/grand-catechisme');
 		const toOnConcordance = /\/bible\/[^/]+\/\d+\/concordance/.test(toPath);
 
 		if (
 			(fromOnCcc && !toOnCcc) ||
 			(fromOnBible && !toOnBible) ||
 			(fromOnTrent && !toOnTrent) ||
+			(fromOnGrandCatechisme && !toOnGrandCatechisme) ||
 			toOnConcordance
 		) {
 			if (get(studyPanel).open) closePanel();
@@ -112,7 +120,9 @@
 				? 'compendium'
 				: page.url.pathname.startsWith('/trente')
 					? 'trent'
-					: 'ccc'}
+					: page.url.pathname.startsWith('/grand-catechisme')
+						? 'pius-x-grand'
+						: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

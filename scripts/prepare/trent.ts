@@ -186,9 +186,8 @@ function cleanSectionTitle(raw: string): string {
 		.trim();
 	const m = stripped.match(ROMAN_PREFIX_RE);
 	if (m) {
-		const roman = m[1]!.toUpperCase();
 		const body = stripped.slice(m[0].length);
-		return `${roman} — ${applyTitleSubs(toSentenceCase(body))}`;
+		return applyTitleSubs(toSentenceCase(body));
 	}
 	return applyTitleSubs(toSentenceCase(stripped));
 }
@@ -602,14 +601,14 @@ export function prepareTrent(args: { sourceDir: string; outDir: string }): {
 			})),
 			...(prevLastSection && {
 				prev: {
-					href: `/trente/${prevLastSection.chapterSlug}/${prevLastSection.sectionSlug}`,
+					href: `/trente/${prevLastSection.chapterSlug}`,
 					title: prevChapter!.title,
 					kind: 'chapter'
 				}
 			}),
 			...(nextFirstSection && {
 				next: {
-					href: `/trente/${nextFirstSection.chapterSlug}/${nextFirstSection.sectionSlug}`,
+					href: `/trente/${nextFirstSection.chapterSlug}`,
 					title: nextChapter!.title,
 					kind: 'chapter'
 				}

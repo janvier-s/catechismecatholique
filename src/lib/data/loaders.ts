@@ -443,7 +443,15 @@ export function loadPiusXGrandChapter(
 		p = (async () => {
 			const r = await fetcher(`/data/pius-x-grand/chapters/${partSlug}/${chapterSlug}.json`);
 			if (!r.ok) return null;
-			return (await r.json()) as PiusXGrandChapterFile;
+			const ch = (await r.json()) as PiusXGrandChapterFile;
+			// Rewrite legacy hrefs
+			const fix = (href: string) =>
+				href
+					.replace('/pius-x-grand/', '/grand-catechisme/')
+					.replace('/1-symbole-des/', '/1-credo/');
+			if (ch.prev) ch.prev = { ...ch.prev, href: fix(ch.prev.href) };
+			if (ch.next) ch.next = { ...ch.next, href: fix(ch.next.href) };
+			return ch;
 		})();
 		piusXGrandChapterCache.set(key, p);
 	}
