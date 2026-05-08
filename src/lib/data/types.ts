@@ -1,4 +1,4 @@
-export type Corpus = 'ccc' | 'compendium' | 'trent';
+export type Corpus = 'ccc' | 'compendium' | 'trent' | 'pius-x-grand';
 
 export interface BibleRef {
 	text: string;
@@ -552,4 +552,56 @@ export interface TrentParagraphContext {
 	part: { slug: string; title: string };
 	chapter: { number: number; slug: string; title: string };
 	section: { slug: string; title: string; ordinal: number };
+}
+
+// ─── Grand Catéchisme (Pie X) ─────────────────────────────────────────────
+
+export interface PiusXGrandQA {
+	n: number;
+	q: string;
+	a: string;
+}
+
+export interface PiusXGrandSection {
+	title: string | null;
+	qa: PiusXGrandQA[];
+}
+
+export interface PiusXGrandNav {
+	href: string;
+	title: string;
+	kind: 'chapter' | 'part';
+}
+
+export interface PiusXGrandChapterFile {
+	corpus: 'pius-x-grand';
+	part_slug: string;
+	part_title: string;
+	part_ordinal: number;
+	slug: string;
+	title: string;
+	ordinal: number;
+	sections: PiusXGrandSection[];
+	qa_range: [number, number];
+	prev?: PiusXGrandNav;
+	next?: PiusXGrandNav;
+}
+
+export interface PiusXGrandStructureChapter {
+	slug: string;
+	title: string;
+	ordinal: number;
+	qa_range: [number, number];
+}
+
+export interface PiusXGrandStructurePart {
+	slug: string;
+	title: string;
+	ordinal: number;
+	chapters: PiusXGrandStructureChapter[];
+}
+
+export interface PiusXGrandStructure {
+	parts: PiusXGrandStructurePart[];
+	total_qa: number;
 }

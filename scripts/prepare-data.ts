@@ -29,6 +29,7 @@ import { parseSourceTable } from './prepare/sources-index.ts';
 import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
 import { prepareTrent } from './prepare/trent.ts';
+import { preparePiusXGrand } from './prepare/pius-x-grand.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -431,6 +432,19 @@ async function main() {
 		const trent = prepareTrent({ sourceDir: trentSourceDir, outDir: trentOutDir });
 		endStep(
 			`${trent.totalChapters} chapters, ${trent.totalSections} sections, ${trent.totalParagraphs} paragraphs`
+		);
+	} else {
+		endStep('source not found — skipped');
+	}
+
+	logStep('building Grand Catéchisme (Pie X)');
+	const piusXGrandSourceDir = join(SOURCES, 'pius-x-grand');
+	if (existsSync(piusXGrandSourceDir)) {
+		const piusXGrandOutDir = join(OUT, 'pius-x-grand');
+		mkdirSync(piusXGrandOutDir, { recursive: true });
+		const piusX = preparePiusXGrand({ sourceDir: piusXGrandSourceDir, outDir: piusXGrandOutDir });
+		endStep(
+			`${piusX.totalParts} parts, ${piusX.totalChapters} chapters, ${piusX.totalQA} Q&A`
 		);
 	} else {
 		endStep('source not found — skipped');

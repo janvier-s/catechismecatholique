@@ -17,7 +17,9 @@ import type {
 	TrentStructure,
 	TrentChapterFile,
 	TrentSectionFile,
-	TrentParagraphContext
+	TrentParagraphContext,
+	PiusXGrandStructure,
+	PiusXGrandChapterFile
 } from './types';
 
 type Fetch = typeof fetch;
@@ -411,6 +413,39 @@ export function loadTrentParagraphContext(
 			return (await r.json()) as TrentParagraphContext;
 		})();
 		trentParagraphContextCache.set(n, p);
+	}
+	return p;
+}
+
+// ─── Grand Catéchisme (Pie X) Loaders ────────────────────────────────────
+
+let piusXGrandStructurePromise: Promise<PiusXGrandStructure> | null = null;
+const piusXGrandChapterCache = new Map<string, Promise<PiusXGrandChapterFile | null>>();
+
+export function loadPiusXGrandStructure(fetcher: Fetch = fetch): Promise<PiusXGrandStructure> {
+	if (!piusXGrandStructurePromise) {
+		piusXGrandStructurePromise = fetchJson<PiusXGrandStructure>(
+			'/data/pius-x-grand/structure.json',
+			fetcher
+		);
+	}
+	return piusXGrandStructurePromise;
+}
+
+export function loadPiusXGrandChapter(
+	partSlug: string,
+	chapterSlug: string,
+	fetcher: Fetch = fetch
+): Promise<PiusXGrandChapterFile | null> {
+	const key = `${partSlug}/${chapterSlug}`;
+	let p = piusXGrandChapterCache.get(key);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/pius-x-grand/chapters/${partSlug}/${chapterSlug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as PiusXGrandChapterFile;
+		})();
+		piusXGrandChapterCache.set(key, p);
 	}
 	return p;
 }

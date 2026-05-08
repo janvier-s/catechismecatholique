@@ -1,0 +1,407 @@
+{
+  "parts": [
+    {
+      "slug": "0-lecon-preliminaire",
+      "title": "La doctrine chrétienne et ses parties principales.",
+      "ordinal": 0,
+      "chapters": [
+        {
+          "slug": "1-doctrine",
+          "title": "La doctrine chrétienne et ses parties principales.",
+          "ordinal": 1,
+          "qa_range": [
+            1,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "1-symbole-des",
+      "title": "Le symbole des Apôtres ou Credo",
+      "ordinal": 1,
+      "chapters": [
+        {
+          "slug": "1-credo-en",
+          "title": "Le Credo en général",
+          "ordinal": 1,
+          "qa_range": [
+            15,
+            21
+          ]
+        },
+        {
+          "slug": "2-premier-article",
+          "title": "Le premier article du Symbole.",
+          "ordinal": 2,
+          "qa_range": [
+            22,
+            67
+          ]
+        },
+        {
+          "slug": "3-second-article",
+          "title": "Le second article.",
+          "ordinal": 3,
+          "qa_range": [
+            68,
+            81
+          ]
+        },
+        {
+          "slug": "4-troisieme",
+          "title": "Le troisième article.",
+          "ordinal": 4,
+          "qa_range": [
+            82,
+            94
+          ]
+        },
+        {
+          "slug": "5-quatrieme",
+          "title": "Le quatrième article.",
+          "ordinal": 5,
+          "qa_range": [
+            95,
+            113
+          ]
+        },
+        {
+          "slug": "6-cinquieme",
+          "title": "Le cinquième article.",
+          "ordinal": 6,
+          "qa_range": [
+            114,
+            118
+          ]
+        },
+        {
+          "slug": "7-sixieme-article",
+          "title": "Le sixième article.",
+          "ordinal": 7,
+          "qa_range": [
+            119,
+            123
+          ]
+        },
+        {
+          "slug": "8-septieme",
+          "title": "Le septième article.",
+          "ordinal": 8,
+          "qa_range": [
+            124,
+            129
+          ]
+        },
+        {
+          "slug": "9-huitieme",
+          "title": "Le huitième article.",
+          "ordinal": 9,
+          "qa_range": [
+            130,
+            141
+          ]
+        },
+        {
+          "slug": "10-neuvieme",
+          "title": "Le neuvième article.",
+          "ordinal": 10,
+          "qa_range": [
+            142,
+            233
+          ]
+        },
+        {
+          "slug": "11-dixieme-article",
+          "title": "Le dixième article.",
+          "ordinal": 11,
+          "qa_range": [
+            234,
+            237
+          ]
+        },
+        {
+          "slug": "12-onzieme-article",
+          "title": "Le onzième article.",
+          "ordinal": 12,
+          "qa_range": [
+            238,
+            244
+          ]
+        },
+        {
+          "slug": "13-douzieme",
+          "title": "Le douzième article.",
+          "ordinal": 13,
+          "qa_range": [
+            245,
+            251
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "2-priere",
+      "title": "La prière",
+      "ordinal": 2,
+      "chapters": [
+        {
+          "slug": "1-priere-en",
+          "title": "La prière en général.",
+          "ordinal": 1,
+          "qa_range": [
+            252,
+            277
+          ]
+        },
+        {
+          "slug": "2-loraison",
+          "title": "L’oraison dominicale.",
+          "ordinal": 2,
+          "qa_range": [
+            278,
+            322
+          ]
+        },
+        {
+          "slug": "3-lave-maria",
+          "title": "L’Ave Maria.",
+          "ordinal": 3,
+          "qa_range": [
+            323,
+            337
+          ]
+        },
+        {
+          "slug": "4-linvocation-des",
+          "title": "L’invocation des Saints.",
+          "ordinal": 4,
+          "qa_range": [
+            338,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "3-commandements",
+      "title": "Les commandements de Dieu et de l’Église",
+      "ordinal": 3,
+      "chapters": [
+        {
+          "slug": "1-commandements",
+          "title": "Les commandements de Dieu en général.",
+          "ordinal": 1,
+          "qa_range": [
+            341,
+            348
+          ]
+        },
+        {
+          "slug": "2-commandements",
+          "title": "Les commandements qui regardent Dieu.",
+          "ordinal": 2,
+          "qa_range": [
+            349,
+            397
+          ]
+        },
+        {
+          "slug": "3-commandements",
+          "title": "Les commandements qui concernent le prochain.",
+          "ordinal": 3,
+          "qa_range": [
+            398,
+            467
+          ]
+        },
+        {
+          "slug": "4-preceptes-de",
+          "title": "Les préceptes de l’Église",
+          "ordinal": 4,
+          "qa_range": [
+            468,
+            506
+          ]
+        },
+        {
+          "slug": "5-devoirs",
+          "title": "Les devoirs particuliers de chaque état et les conseils évangéliques.",
+          "ordinal": 5,
+          "qa_range": [
+            507,
+            515
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "4-sacrements",
+      "title": "Les sacrements",
+      "ordinal": 4,
+      "chapters": [
+        {
+          "slug": "1-sacrements-en",
+          "title": "Les sacrements en général.",
+          "ordinal": 1,
+          "qa_range": [
+            516,
+            549
+          ]
+        },
+        {
+          "slug": "2-bapteme",
+          "title": "Le Baptême.",
+          "ordinal": 2,
+          "qa_range": [
+            550,
+            575
+          ]
+        },
+        {
+          "slug": "3-confirmation",
+          "title": "La Confirmation.",
+          "ordinal": 3,
+          "qa_range": [
+            576,
+            594
+          ]
+        },
+        {
+          "slug": "4-leucharistie",
+          "title": "L’Eucharistie.",
+          "ordinal": 4,
+          "qa_range": [
+            595,
+            649
+          ]
+        },
+        {
+          "slug": "5-saint-sacrifice",
+          "title": "Le saint sacrifice de la Messe.",
+          "ordinal": 5,
+          "qa_range": [
+            650,
+            670
+          ]
+        },
+        {
+          "slug": "6-penitence",
+          "title": "La pénitence.",
+          "ordinal": 6,
+          "qa_range": [
+            671,
+            805
+          ]
+        },
+        {
+          "slug": "7-lextreme",
+          "title": "L’Extrême-onction",
+          "ordinal": 7,
+          "qa_range": [
+            806,
+            811
+          ]
+        },
+        {
+          "slug": "8-lordre",
+          "title": "L’Ordre",
+          "ordinal": 8,
+          "qa_range": [
+            812,
+            826
+          ]
+        },
+        {
+          "slug": "9-mariage",
+          "title": "Le Mariage.",
+          "ordinal": 9,
+          "qa_range": [
+            827,
+            852
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "5-principales",
+      "title": "Les principales vertus et les autres choses qu’un chrétien doit savoir",
+      "ordinal": 5,
+      "chapters": [
+        {
+          "slug": "1-principales",
+          "title": "Les principales vertus.",
+          "ordinal": 1,
+          "qa_range": [
+            853,
+            912
+          ]
+        },
+        {
+          "slug": "2-dons-du-saint",
+          "title": "Les dons du saint-Esprit.",
+          "ordinal": 2,
+          "qa_range": [
+            913,
+            921
+          ]
+        },
+        {
+          "slug": "3-beatitudes",
+          "title": "Les Béatitudes évangéliques.",
+          "ordinal": 3,
+          "qa_range": [
+            922,
+            936
+          ]
+        },
+        {
+          "slug": "4-oeuvres-de",
+          "title": "Les œuvres de miséricorde.",
+          "ordinal": 4,
+          "qa_range": [
+            937,
+            940
+          ]
+        },
+        {
+          "slug": "5-peches-et-leurs",
+          "title": "Les péchés et leurs espèces principales.",
+          "ordinal": 5,
+          "qa_range": [
+            941,
+            954
+          ]
+        },
+        {
+          "slug": "6-vices-et-les",
+          "title": "Les vices et les autres péchés très graves.",
+          "ordinal": 6,
+          "qa_range": [
+            955,
+            963
+          ]
+        },
+        {
+          "slug": "7-fins-dernieres",
+          "title": "Les Fins dernières et les autres moyens principaux pour éviter le péché.",
+          "ordinal": 7,
+          "qa_range": [
+            964,
+            967
+          ]
+        },
+        {
+          "slug": "8-exercices-pieux",
+          "title": "Les exercices pieux conseillés au chrétien pour chaque jour.",
+          "ordinal": 8,
+          "qa_range": [
+            968,
+            989
+          ]
+        }
+      ]
+    }
+  ],
+  "total_qa": 989
+}

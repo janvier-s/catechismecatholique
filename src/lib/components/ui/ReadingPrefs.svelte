@@ -5,7 +5,8 @@
 
 	const isTrent = $derived(page.url.pathname.startsWith('/trente'));
 	const isCompendium = $derived(page.url.pathname.startsWith('/compendium'));
-	const isCecOnly = $derived(!isTrent && !isCompendium);
+	const isPiusX = $derived(page.url.pathname.startsWith('/pius-x-grand'));
+	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX);
 
 	let activeTab: 'text' | 'reading' | 'notes' = $state('text');
 	let fontDropdownOpen = $state(false);
@@ -78,8 +79,8 @@
 	const activeFont = $derived(getFontById($prefs.fontFamily) ?? FONTS[0]!);
 
 	function setHideAll(on: boolean) {
-		if (isTrent) {
-			// On Trent pages only the source-footnotes control is relevant.
+		if (isTrent || isPiusX) {
+			// On Trent and Pie X pages only the source-footnotes control is relevant.
 			prefs.update((p) => ({ ...p, hideAllNotes: on, hideSourceFootnotes: on }));
 		} else {
 			prefs.update((p) => ({
@@ -94,7 +95,7 @@
 	}
 
 	$effect(() => {
-		if (isTrent) {
+		if (isTrent || isPiusX) {
 			const all = $prefs.hideSourceFootnotes;
 			if ($prefs.hideAllNotes !== all) {
 				prefs.update((p) => ({ ...p, hideAllNotes: all }));
@@ -331,6 +332,11 @@
 
 	{#if activeTab === 'notes'}
 		<div class="space-y-4">
+			{#if isPiusX}
+				<p class="text-[13px] text-muted leading-relaxed">
+					Ce catéchisme ne contient pas de notes.
+				</p>
+			{:else}
 			<label class="flex items-center gap-2.5 cursor-pointer">
 				<input
 					type="checkbox"
@@ -396,6 +402,7 @@
 						<span>Sources</span>
 					</label>
 				</div>
+			{/if}
 			{/if}
 		</div>
 	{/if}

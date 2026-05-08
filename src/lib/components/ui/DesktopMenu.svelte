@@ -74,6 +74,11 @@
 			description: 'Le catéchisme du Concile de Trente (1566).'
 		},
 		{
+			href: '/pius-x-grand',
+			label: 'Grand Catéchisme',
+			description: 'Le Grand Catéchisme de saint Pie X en 989 questions.'
+		},
+		{
 			href: '/prieres-formules',
 			label: 'Prières & Formules',
 			description: 'Prières communes et formules de la doctrine catholique.'
