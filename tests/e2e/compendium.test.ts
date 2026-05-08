@@ -64,6 +64,23 @@ test.describe('Compendium', () => {
 		await expect(page).toHaveURL('/prieres-formules');
 	});
 
+	test('study panel exposes Compendium tab on a CCC paragraph that has citers', async ({
+		page
+	}) => {
+		// CCC §27 is cited by Compendium Q.2 (per static/data/compendium/cited-by.json).
+		await page.goto('/cec/27');
+		// Click the §27 number to open the study panel (any tab — we'll switch).
+		await page.locator('a.number-col[href="/cec/27"]').first().click();
+		const compendiumTab = page.getByRole('button', { name: 'Compendium', exact: true }).first();
+		await expect(compendiumTab).toBeVisible();
+		await compendiumTab.click();
+		// The tab body lists Q.2 with a link to the part anchor.
+		const qLink = page.locator('a[href^="/compendium/la-profession-de-la-foi#q-2"]').first();
+		await expect(qLink).toBeVisible();
+		await qLink.click();
+		await expect(page).toHaveURL(/\/compendium\/la-profession-de-la-foi#q-2$/);
+	});
+
 	// TODO: The committed search-index.json was built without CCC source files present,
 	// so it only contains p: (paragraph) IDs and no c: (compendium-question) IDs.
 	// prepare-data skips rebuilding when CCC sources are missing but generated data exists.

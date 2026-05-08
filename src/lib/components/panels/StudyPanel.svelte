@@ -3,7 +3,13 @@
 	import { get } from 'svelte/store';
 	import { fly } from 'svelte/transition';
 	import { studyPanel, openPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
-	import { loadParagraph, loadCitedBy, loadParagraphContext, loadChapter } from '$lib/data/loaders';
+	import {
+		loadParagraph,
+		loadCitedBy,
+		loadParagraphContext,
+		loadChapter,
+		loadCompendiumCitedBy
+	} from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
 	import TabBibleRefs from './TabBibleRefs.svelte';
@@ -13,6 +19,7 @@
 	import TabSources from './TabSources.svelte';
 	import TabBibleVerse from './TabBibleVerse.svelte';
 	import TabConcordance from './TabConcordance.svelte';
+	import TabCompendium from './TabCompendium.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
 	// When the panel is open and the user navigates to a paragraph route
@@ -39,12 +46,14 @@
 		{ id: 'cited-by', label: 'Cités par' },
 		{ id: 'sources', label: 'Sources' },
 		{ id: 'en-bref', label: 'En Bref' },
-		{ id: 'concordance', label: 'Concordance' }
+		{ id: 'concordance', label: 'Concordance' },
+		{ id: 'compendium', label: 'Compendium' }
 	];
 
 	let paragraph: Paragraph | null = $state(null);
 	let citedByList: number[] = $state([]);
 	let hasEnBref: boolean = $state(false);
+	let compendiumCiters: number[] = $state([]);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
@@ -52,6 +61,7 @@
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
+			compendiumCiters = [];
 			return;
 		}
 		// Bible-verse mode has no paragraph context; TabBibleVerse loads its own data.
@@ -59,17 +69,20 @@
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
+			compendiumCiters = [];
 			return;
 		}
 		const paragraphNum = ctx.paragraph;
 		(async () => {
-			const [p, citedBy, pc] = await Promise.all([
+			const [p, citedBy, pc, compendiumCB] = await Promise.all([
 				loadParagraph(paragraphNum),
 				loadCitedBy(),
-				loadParagraphContext(paragraphNum)
+				loadParagraphContext(paragraphNum),
+				loadCompendiumCitedBy()
 			]);
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
+			compendiumCiters = compendiumCB[paragraphNum] ?? [];
 
 			// hasEnBref: the paragraph's chapter has at least one en_bref block
 			if (pc?.chapter) {
@@ -113,6 +126,7 @@
 		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
 		// Always show Concordance for paragraph contexts; the tab body handles empty state.
 		out.push({ id: 'concordance', label: 'Concordance' });
+		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
 		return out;
 	});
 
@@ -294,11 +308,11 @@
 					Aucune note d'étude pour ce paragraphe.
 				</div>
 			{:else}
-				<div class="flex border-b border-border font-ui text-xs">
+				<div class="flex border-b border-border font-ui text-xs overflow-x-auto">
 					{#each visibleTabs as tab (tab.id)}
 						<button
 							type="button"
-							class="flex-1 py-2 hover:bg-accent/10"
+							class="flex-1 py-2 px-2 hover:bg-accent/10 whitespace-nowrap"
 							class:bg-accent={$studyPanel.activeTab === tab.id}
 							class:!text-white={$studyPanel.activeTab === tab.id}
 							onclick={() => studyPanel.update((s) => ({ ...s, activeTab: tab.id }))}
@@ -322,6 +336,8 @@
 						<TabConcordance />
 					{:else if $studyPanel.activeTab === 'bible-verse'}
 						<TabBibleVerse />
+					{:else if $studyPanel.activeTab === 'compendium'}
+						<TabCompendium />
 					{/if}
 				</div>
 			{/if}
