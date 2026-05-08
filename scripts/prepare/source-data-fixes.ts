@@ -134,3 +134,107 @@ export function fixCccParaSourceTypos(parts: RawTreeNode[]): void {
 	}
 	for (const p of parts) walk(p);
 }
+
+const BIBLE_SUP_RE = /<sup class="srcRef bibleRef" data-idx="(\d+)">\d+<\/sup>/g;
+
+interface SupHit {
+	idx: number;
+	start: number;
+	end: number;
+}
+
+interface RefLike {
+	type: string;
+	raw: string;
+	idx?: string | number;
+	[key: string]: unknown;
+}
+
+/**
+ * Detect runs of consecutive `<sup class="srcRef bibleRef">` markers in the
+ * paragraph html — runs of length ≥ 2 represent a single source footnote that
+ * the upstream pipeline split per-verse. For each run, mark the trailing
+ * members' magisterial-ref entries with `marker_idx = leader_idx` and strip
+ * their `<sup>` element from the html. The leader's sup stays in place.
+ *
+ * "Consecutive" means whitespace-only (incl. NBSP) between two markers — any
+ * other text or tag breaks the run. Pure function: returns a new html string
+ * and a new refs array; inputs are not mutated.
+ */
+export function groupConsecutiveBibleSups<T extends RefLike>(input: {
+	html: string;
+	refs: T[];
+}): { html: string; refs: (T & { marker_idx?: number })[] } {
+	const { html, refs } = input;
+
+	// Collect every bibleRef sup with its position. Plain regex over a known
+	// canonical shape — the upstream emits exactly one variant of the tag.
+	const hits: SupHit[] = [];
+	BIBLE_SUP_RE.lastIndex = 0;
+	let m: RegExpExecArray | null;
+	while ((m = BIBLE_SUP_RE.exec(html)) !== null) {
+		hits.push({ idx: parseInt(m[1]!, 10), start: m.index, end: m.index + m[0].length });
+	}
+	if (hits.length < 2) return { html, refs: [...refs] };
+
+	// Walk the hit list, growing maximal runs where the gap between two hits
+	// is whitespace-only. Any non-whitespace character (including another sup
+	// class like cccRef) breaks the run.
+	const runs: SupHit[][] = [];
+	let current: SupHit[] = [hits[0]!];
+	for (let i = 1; i < hits.length; i++) {
+		const gap = html.slice(hits[i - 1]!.end, hits[i]!.start);
+		if (/^\s*$/.test(gap)) {
+			current.push(hits[i]!);
+		} else {
+			if (current.length > 1) runs.push(current);
+			current = [hits[i]!];
+		}
+	}
+	if (current.length > 1) runs.push(current);
+
+	if (runs.length === 0) return { html, refs: [...refs] };
+
+	// Apply changes: refs first (cheap copy), then html (rebuild from slices
+	// so we walk the string exactly once and never have to re-index after
+	// edits invalidate offsets).
+	const refsByIdx = new Map<number, number>();
+	refs.forEach((r, i) => {
+		if (r.idx !== undefined && r.idx !== null) {
+			const n = typeof r.idx === 'number' ? r.idx : parseInt(String(r.idx), 10);
+			if (Number.isFinite(n)) refsByIdx.set(n, i);
+		}
+	});
+
+	const nextRefs = refs.map((r) => ({ ...r }));
+	for (const run of runs) {
+		const leader = run[0]!.idx;
+		for (let i = 1; i < run.length; i++) {
+			const ri = refsByIdx.get(run[i]!.idx);
+			if (ri !== undefined) (nextRefs[ri] as RefLike).marker_idx = leader;
+		}
+	}
+
+	// Build a Set of [start,end) ranges to strip. Then walk the string once.
+	// Strip range for each trailing member extends back to the previous sup's
+	// end, so whitespace between consecutive sups is consumed too — otherwise
+	// a paragraph like `<sup1>  <sup2>.` would collapse to `<sup1>  .` with
+	// dangling whitespace before the period.
+	const stripRanges: { start: number; end: number }[] = [];
+	for (const run of runs) {
+		for (let i = 1; i < run.length; i++) {
+			stripRanges.push({ start: run[i - 1]!.end, end: run[i]!.end });
+		}
+	}
+	stripRanges.sort((a, b) => a.start - b.start);
+
+	const out: string[] = [];
+	let cursor = 0;
+	for (const { start, end } of stripRanges) {
+		out.push(html.slice(cursor, start));
+		cursor = end;
+	}
+	out.push(html.slice(cursor));
+
+	return { html: out.join(''), refs: nextRefs };
+}

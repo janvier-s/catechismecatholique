@@ -24,6 +24,11 @@ export interface MagisterialRefRecord {
 	raw: string;
 	idx?: string | number;
 	doc_raw?: string;
+	/** Displayed marker number in text + side panel. For cluster members this
+	 *  points to the cluster leader's idx so the side panel groups all verses
+	 *  under one footnote number. Solo refs leave it undefined (display marker
+	 *  equals their own idx). */
+	marker_idx?: number;
 }
 
 export interface Paragraph {
