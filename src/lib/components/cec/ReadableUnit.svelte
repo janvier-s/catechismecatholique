@@ -322,6 +322,10 @@
 	.number-link:focus-visible {
 		opacity: 1;
 	}
+	.number-link:hover,
+	.number-link:focus-visible {
+		color: var(--color-accent);
+	}
 	.link-icon {
 		width: 0.85em;
 		height: 0.85em;
