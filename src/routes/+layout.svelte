@@ -45,6 +45,11 @@
 			if (p.startsWith('/grand-catechisme/sommaire')) return false;
 			return true;
 		}
+		// Petit Catéchisme part reader (hide on landing and sommaire)
+		if (p.startsWith('/petit-catechisme/')) {
+			if (p.startsWith('/petit-catechisme/sommaire')) return false;
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -68,6 +73,8 @@
 		const toOnTrent = toPath.startsWith('/trente');
 		const fromOnGrandCatechisme = fromPath.startsWith('/grand-catechisme');
 		const toOnGrandCatechisme = toPath.startsWith('/grand-catechisme');
+		const fromOnPetitCatechisme = fromPath.startsWith('/petit-catechisme');
+		const toOnPetitCatechisme = toPath.startsWith('/petit-catechisme');
 		const fromOnCalendrier = fromPath.startsWith('/calendrier');
 		const toOnCalendrier = toPath.startsWith('/calendrier');
 		const toOnConcordance = /\/bible\/[^/]+\/\d+\/concordance/.test(toPath);
@@ -77,6 +84,7 @@
 			(fromOnBible && !toOnBible) ||
 			(fromOnTrent && !toOnTrent) ||
 			(fromOnGrandCatechisme && !toOnGrandCatechisme) ||
+			(fromOnPetitCatechisme && !toOnPetitCatechisme) ||
 			(fromOnCalendrier && !toOnCalendrier) ||
 			toOnConcordance
 		) {
@@ -129,9 +137,11 @@
 					? 'trent'
 					: page.url.pathname.startsWith('/grand-catechisme')
 						? 'pius-x-grand'
-						: page.url.pathname.startsWith('/calendrier')
-							? 'calendrier'
-							: 'ccc'}
+						: page.url.pathname.startsWith('/petit-catechisme')
+							? 'pius-x-petit'
+							: page.url.pathname.startsWith('/calendrier')
+								? 'calendrier'
+								: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

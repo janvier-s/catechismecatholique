@@ -110,6 +110,66 @@
           "qa_range": [
             161,
             212
+          ],
+          "sections": [
+            {
+              "title": "Les commandements de Dieu en général"
+            },
+            {
+              "title": "Les commandements de Dieu en particulier",
+              "commandments": [
+                {
+                  "roman": "Ier",
+                  "ordinal": 1,
+                  "text": "Je suis le Seigneur ton Dieu, tu n’auras pas d’autre Dieu que moi."
+                },
+                {
+                  "roman": "IIe",
+                  "ordinal": 2,
+                  "text": "Tu ne prononceras pas le nom de Dieu en vain."
+                },
+                {
+                  "roman": "IIIe",
+                  "ordinal": 3,
+                  "text": "Souviens-toi de sanctifier les fêtes."
+                },
+                {
+                  "roman": "IVe",
+                  "ordinal": 4,
+                  "text": "Honore ton père et ta mère."
+                },
+                {
+                  "roman": "Ve",
+                  "ordinal": 5,
+                  "text": "Tu ne tueras pas."
+                },
+                {
+                  "roman": "VIe",
+                  "ordinal": 6,
+                  "text": "Tu ne commettras pas d’actes impurs."
+                },
+                {
+                  "roman": "VIIe",
+                  "ordinal": 7,
+                  "text": "Tu ne voleras pas."
+                },
+                {
+                  "roman": "VIIIe",
+                  "ordinal": 8,
+                  "text": "Tu ne diras pas de faux témoignages."
+                },
+                {
+                  "roman": "IXe",
+                  "ordinal": 9,
+                  "text": "Tu ne désireras pas la femme d’autrui."
+                },
+                {
+                  "roman": "Xe",
+                  "ordinal": 10,
+                  "text": "Tu ne désireras pas le bien d’autrui."
+                }
+              ]
+            }
           ]
         },
         {
@@ -128,6 +188,17 @@
           "qa_range": [
             227,
             266
+          ],
+          "sections": [
+            {
+              "title": "Les vertus en général - les vertus théologales"
+            },
+            {
+              "title": "La pratique des actes de foi,"
+            },
+            {
+              "title": "Les vertus morales et les vices ◆ les Béatitudes évangéliques"
+            }
           ]
         }
       ]
@@ -179,6 +250,20 @@
               "qa_range": [
                 316,
                 354
+              ],
+              "sections": [
+                {
+                  "title": "Le sacrement : son institution, sa fin"
+                },
+                {
+                  "title": "La présence réelle de Jésus-Christ dans l’eucharistie"
+                },
+                {
+                  "title": "La sainte communion : dispositions, obligation, effets"
+                },
+                {
+                  "title": "Le saint sacrifice de la Messe"
+                }
               ]
             },
             {
@@ -188,6 +273,20 @@
               "qa_range": [
                 355,
                 391
+              ],
+              "sections": [
+                {
+                  "title": "Le sacrement et ses parties - l’examen de conscience"
+                },
+                {
+                  "title": "La douleur et le ferme propos"
+                },
+                {
+                  "title": "La confession des péchés"
+                },
+                {
+                  "title": "L’absolution, la satisfaction,"
+                }
               ]
             },
             {

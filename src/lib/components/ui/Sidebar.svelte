@@ -10,6 +10,7 @@
 		loadCompendiumPart,
 		loadTrentStructure,
 		loadPiusXGrandStructure,
+		loadPiusXPetitStructure,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -21,6 +22,7 @@
 		CompendiumPart,
 		TrentStructure,
 		PiusXGrandStructure,
+		PiusXPetitStructure,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -76,6 +78,23 @@
 
 	let { corpus = 'ccc' as Corpus }: { corpus?: Corpus } = $props();
 
+	const sommaireHref = $derived.by((): string | null => {
+		switch (corpus) {
+			case 'ccc':
+				return '/cec/sommaire';
+			case 'compendium':
+				return '/compendium/sommaire';
+			case 'trent':
+				return '/trente/sommaire';
+			case 'pius-x-grand':
+				return '/grand-catechisme/sommaire';
+			case 'pius-x-petit':
+				return '/petit-catechisme/sommaire';
+			default:
+				return null;
+		}
+	});
+
 	let structure: { parts: Part[] } | null = $state(null);
 	let activeChapter: Chapter | null = $state(null);
 	let activeContext: ParagraphContext | null = $state(null);
@@ -105,6 +124,16 @@
 		if (corpus !== 'pius-x-grand') return;
 		(async () => {
 			piusXGrandStructure = await loadPiusXGrandStructure();
+		})();
+	});
+
+	// ─── Petit Catéchisme (Pie X 1912) state ─────────────────────────────────
+	let piusXPetitStructure: PiusXPetitStructure | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'pius-x-petit') return;
+		(async () => {
+			piusXPetitStructure = await loadPiusXPetitStructure();
 		})();
 	});
 
@@ -242,6 +271,13 @@
 				const mSec = raw.match(/^(\/grand-catechisme\/[^/]+)#c-(.+)-s-(\d+)$/);
 				if (mSec) return `${mSec[1]}/${mSec[2]}#s-${mSec[3]}`;
 				const mCh = raw.match(/^(\/grand-catechisme\/[^/]+)#c-(.+)$/);
+				if (mCh) return `${mCh[1]}/${mCh[2]}`;
+			}
+			// Petit Catéchisme part pages emit the same heading pattern.
+			if (corpus === 'pius-x-petit') {
+				const mSec = raw.match(/^(\/petit-catechisme\/[^/]+)#c-(.+)-s-(\d+)$/);
+				if (mSec) return `${mSec[1]}/${mSec[2]}#s-${mSec[3]}`;
+				const mCh = raw.match(/^(\/petit-catechisme\/[^/]+)#c-(.+)$/);
 				if (mCh) return `${mCh[1]}/${mCh[2]}`;
 			}
 			return raw;
@@ -498,6 +534,51 @@
 				})
 			);
 		}
+		if (corpus === 'pius-x-petit') {
+			if (!piusXPetitStructure) return [];
+
+			function petitChapterItem(
+				partSlug: string,
+				ch: import('$lib/data/types').PiusXPetitStructureChapter
+			): Item {
+				const chHref = `/petit-catechisme/${partSlug}/${ch.slug}`;
+				const sections = ch.sections;
+				const children: Item[] | undefined =
+					sections && sections.length > 0
+						? sections.flatMap((sec, si): Item[] => {
+								const secItem: Item = { title: sec.title, href: `${chHref}#s-${si}` };
+								if (sec.commandments && sec.commandments.length > 0) {
+									secItem.children = sec.commandments.map(
+										(cmd): Item => ({
+											title: `${cmd.roman} ${cmd.text}`,
+											href: `${chHref}#cmd-${cmd.ordinal}`
+										})
+									);
+								}
+								return [secItem];
+							})
+						: undefined;
+				return { title: ch.title, href: chHref, children };
+			}
+
+			const allParts: Item[] = [];
+
+			allParts.push({
+				title: piusXPetitStructure.intro.title,
+				href: `/petit-catechisme/${piusXPetitStructure.intro.part_slug}`
+			});
+
+			for (const part of piusXPetitStructure.parts) {
+				const partHref = `/petit-catechisme/${part.slug}`;
+				const chapters = part.chapters
+					? part.chapters.map((ch) => petitChapterItem(part.slug, ch))
+					: part.sections!.flatMap((sec) =>
+							sec.chapters.map((ch) => petitChapterItem(part.slug, ch))
+						);
+				allParts.push({ title: part.title, href: partHref, children: chapters });
+			}
+			return allParts;
+		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];
 			const SEASON_LABELS: Record<CalendrierSeason, string> = {
@@ -701,7 +782,15 @@
 	aria-hidden={!$sidebarOpen}
 >
 	<div class="flex items-center justify-between p-2 border-b border-border">
-		<span class="font-ui text-xs uppercase tracking-wider text-muted ml-2">Sommaire</span>
+		{#if sommaireHref}
+			<a
+				href={sommaireHref}
+				class="font-ui text-xs uppercase tracking-wider text-muted ml-2 hover:text-accent transition-colors"
+				>Sommaire</a
+			>
+		{:else}
+			<span class="font-ui text-xs uppercase tracking-wider text-muted ml-2">Sommaire</span>
+		{/if}
 		<button
 			type="button"
 			onclick={() => sidebarOpen.set(false)}
@@ -720,9 +809,11 @@
 				? 'Plan du Catéchisme de Trente'
 				: corpus === 'pius-x-grand'
 					? 'Plan du Grand Catéchisme'
-					: corpus === 'calendrier'
-						? 'Calendrier liturgique'
-						: 'Plan du Catéchisme'}
+					: corpus === 'pius-x-petit'
+						? 'Plan du Petit Catéchisme'
+						: corpus === 'calendrier'
+							? 'Calendrier liturgique'
+							: 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">

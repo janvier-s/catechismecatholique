@@ -20,6 +20,8 @@ import type {
 	TrentParagraphContext,
 	PiusXGrandStructure,
 	PiusXGrandChapterFile,
+	PiusXPetitStructure,
+	PiusXPetitChapterFile,
 	CalendrierIndexFile,
 	CalendrierYearFile,
 	CalendrierYearKey
@@ -457,6 +459,43 @@ export function loadPiusXGrandChapter(
 			return ch;
 		})();
 		piusXGrandChapterCache.set(key, p);
+	}
+	return p;
+}
+
+// ─── Petit Catéchisme (Pie X 1912) Loaders ───────────────────────────────────
+
+let piusXPetitStructurePromise: Promise<PiusXPetitStructure> | null = null;
+const piusXPetitChapterCache = new Map<string, Promise<PiusXPetitChapterFile | null>>();
+
+export function loadPiusXPetitStructure(fetcher: Fetch = fetch): Promise<PiusXPetitStructure> {
+	if (!piusXPetitStructurePromise) {
+		piusXPetitStructurePromise = fetchJson<PiusXPetitStructure>(
+			'/data/pius-x-petit/structure.json',
+			fetcher
+		);
+	}
+	return piusXPetitStructurePromise;
+}
+
+export function loadPiusXPetitChapter(
+	partSlug: string,
+	chapterSlug: string,
+	fetcher: Fetch = fetch
+): Promise<PiusXPetitChapterFile | null> {
+	const key = `${partSlug}/${chapterSlug}`;
+	let p = piusXPetitChapterCache.get(key);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/pius-x-petit/${partSlug}/${chapterSlug}.json`);
+			if (!r.ok) return null;
+			const ch = (await r.json()) as PiusXPetitChapterFile;
+			const fix = (href: string) => href.replace('/pius-x-petit/', '/petit-catechisme/');
+			if (ch.prev) ch.prev = { ...ch.prev, href: fix(ch.prev.href) };
+			if (ch.next) ch.next = { ...ch.next, href: fix(ch.next.href) };
+			return ch;
+		})();
+		piusXPetitChapterCache.set(key, p);
 	}
 	return p;
 }

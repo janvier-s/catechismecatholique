@@ -118,6 +118,31 @@ export function bookTestament(slug: string): Testament {
 export const OT_BOOKS: BookInfo[] = BOOKS.slice(0, NT_START_INDEX);
 export const NT_BOOKS: BookInfo[] = BOOKS.slice(NT_START_INDEX);
 
+// ─── Verse-ref linkifier ──────────────────────────────────────────────────────
+// Builds maps and regex once at module load time.
+const ABBR_TO_SLUG = new Map<string, string>();
+const ABBR_TO_FULL = new Map<string, string>();
+for (const book of BOOKS) {
+	for (const abbr of book.abbrs) {
+		ABBR_TO_SLUG.set(abbr, book.slug);
+		ABBR_TO_FULL.set(abbr, book.frenchName);
+	}
+}
+
+// Sort longest-first so multi-word abbreviations ("1 Tm") match before their
+// short counterparts ("Tm") in the alternation.
+const SORTED_ABBRS = [...ABBR_TO_SLUG.keys()].sort((a, b) => b.length - a.length);
+const ABBR_PATTERN = SORTED_ABBRS.map((a) => a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+const VERSE_REF_RE = new RegExp(`(${ABBR_PATTERN})\\s+(\\d+),\\s*(\\d+(?:[–-]\\d+)?)`, 'g');
+
+export function linkifyVerseRefs(text: string): string {
+	return text.replace(VERSE_REF_RE, (match, abbr: string, chapter: string, verse: string) => {
+		const slug = ABBR_TO_SLUG.get(abbr);
+		if (!slug) return match;
+		return `<a href="/bible/${slug}/${chapter}" class="verse-ref" data-slug="${slug}" data-chapter="${chapter}" data-verse="${verse}">${match}</a>`;
+	});
+}
+
 /** Previous book in canonical order, or undefined at Genesis. */
 export function getPrevBook(slug: string): BookInfo | undefined {
 	const idx = BOOKS.findIndex((b) => b.slug === slug);

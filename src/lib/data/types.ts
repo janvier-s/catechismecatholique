@@ -1,4 +1,10 @@
-export type Corpus = 'ccc' | 'compendium' | 'trent' | 'pius-x-grand' | 'calendrier';
+export type Corpus =
+	| 'ccc'
+	| 'compendium'
+	| 'trent'
+	| 'pius-x-grand'
+	| 'pius-x-petit'
+	| 'calendrier';
 
 export interface BibleRef {
 	text: string;
@@ -605,6 +611,108 @@ export interface PiusXGrandStructurePart {
 export interface PiusXGrandStructure {
 	parts: PiusXGrandStructurePart[];
 	total_qa: number;
+}
+
+// ─── Petit Catéchisme (Pie X 1912) ───────────────────────────────────────────
+
+export interface PiusXPetitQA {
+	n: number;
+	q: string;
+	a: string;
+	required: boolean;
+}
+
+export interface PiusXPetitCommandment {
+	roman: string;
+	ordinal: number;
+	biblical_text: string;
+	qa: PiusXPetitQA[];
+}
+
+export interface PiusXPetitSection {
+	title: string | null;
+	qa: PiusXPetitQA[];
+	commandments?: PiusXPetitCommandment[];
+}
+
+export interface PiusXPetitFootnote {
+	n: number;
+	text: string;
+}
+
+export interface PiusXPetitOraison {
+	html: string;
+	cite?: string;
+}
+
+export interface PiusXPetitEpigraph {
+	text: string;
+}
+
+export interface PiusXPetitNav {
+	href: string;
+	title: string;
+	kind: 'chapter' | 'part';
+}
+
+export interface PiusXPetitChapterFile {
+	corpus: 'pius-x-petit';
+	part_slug: string;
+	part_title?: string;
+	part_ordinal?: number;
+	slug: string;
+	title: string;
+	ordinal?: number;
+	epigraph?: PiusXPetitEpigraph;
+	sections: PiusXPetitSection[];
+	oraisons: PiusXPetitOraison[];
+	footnotes: PiusXPetitFootnote[];
+	qa_range: [number, number];
+	prev?: PiusXPetitNav;
+	next?: PiusXPetitNav;
+}
+
+export interface PiusXPetitStructureChapterSection {
+	title: string;
+	commandments?: { roman: string; ordinal: number; text: string }[];
+}
+
+export interface PiusXPetitStructureChapter {
+	slug: string;
+	title: string;
+	ordinal: number;
+	qa_range: [number, number];
+	sections?: PiusXPetitStructureChapterSection[];
+}
+
+export interface PiusXPetitStructureSection {
+	slug: string;
+	title: string;
+	chapters: PiusXPetitStructureChapter[];
+}
+
+export interface PiusXPetitStructurePart {
+	slug: string;
+	ordinal: number;
+	title: string;
+	subtitle?: string;
+	qa_range: [number, number];
+	chapters?: PiusXPetitStructureChapter[];
+	sections?: PiusXPetitStructureSection[];
+}
+
+export interface PiusXPetitStructureIntro {
+	slug: string;
+	title: string;
+	qa_range: [number, number];
+	part_slug: string;
+}
+
+export interface PiusXPetitStructure {
+	corpus: 'pius-x-petit';
+	total_qa: number;
+	intro: PiusXPetitStructureIntro;
+	parts: PiusXPetitStructurePart[];
 }
 
 // ─── Liturgical calendar (calendrier) ──────────────────────────────────────

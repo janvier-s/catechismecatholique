@@ -6,7 +6,7 @@
 	const TOOLTIP_W = 300;
 	const CLAMP = TOOLTIP_W / 2 + 16;
 	const SELECTOR =
-		'a.compendium-bible-ref, a.trent-bible-ref, a.bibRef[data-slug], sup.srcRef.bibleRef[data-slug], button.bible-inline[data-slug], sup.trent-fn-marker[data-slug], [data-cec]';
+		'a.compendium-bible-ref, a.trent-bible-ref, a.bibRef[data-slug], sup.srcRef.bibleRef[data-slug], button.bible-inline[data-slug], sup.trent-fn-marker[data-slug], a.verse-ref[data-slug], [data-cec]';
 
 	let x = $state(0);
 	let y = $state(0);

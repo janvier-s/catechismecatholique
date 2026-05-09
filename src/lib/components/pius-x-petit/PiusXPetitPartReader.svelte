@@ -1,0 +1,445 @@
+<script lang="ts">
+	import type {
+		PiusXPetitChapterFile,
+		PiusXPetitStructurePart,
+		PiusXPetitStructureIntro
+	} from '$lib/data/types';
+	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
+	import NavCard from '$lib/components/ui/NavCard.svelte';
+	import { scrollSpy } from '$lib/utils/scrollSpy';
+	import { prefs } from '$lib/stores/prefs';
+	import { getFontById } from '$lib/data/fonts';
+	import { linkifyVerseRefs } from '$lib/utils/bibleBookSlug';
+	import { frenchPunct } from '$lib/utils/typography';
+
+	type PartNav = { slug: string; title: string };
+
+	let {
+		part,
+		chapters,
+		prevPart,
+		nextPart
+	}: {
+		part: PiusXPetitStructurePart | PiusXPetitStructureIntro;
+		chapters: PiusXPetitChapterFile[];
+		prevPart?: PartNav;
+		nextPart?: PartNav;
+	} = $props();
+
+	const readerFont = $derived(getFontById($prefs.fontFamily));
+
+	const isIntro = $derived(!('ordinal' in part));
+
+	const ORDINALS = ['Première', 'Deuxième', 'Troisième'];
+	const partLabel = $derived(
+		isIntro
+			? 'Introduction'
+			: (() => {
+					const p = part as PiusXPetitStructurePart;
+					return (ORDINALS[p.ordinal - 1] ?? `Partie ${p.ordinal}`) + ' partie';
+				})()
+	);
+
+	const lastChapter = $derived(chapters[chapters.length - 1]);
+</script>
+
+<main
+	class="mx-auto max-w-reader px-6 max-md:px-0 py-10"
+	data-corpus="pius-x-petit"
+	style:font-family={readerFont?.stack ?? undefined}
+	use:scrollSpy
+>
+	<header class="mb-8">
+		<BreadcrumbRail
+			crumbs={[
+				{ href: '/petit-catechisme', title: 'Petit Catéchisme' },
+				{
+					href: `/petit-catechisme/${part.slug ?? '0-intro'}`,
+					kicker: partLabel,
+					title: part.title
+				}
+			]}
+		/>
+		<p class="font-ui text-sm uppercase tracking-wider text-muted">
+			{partLabel} · {chapters[0]?.qa_range[0]}–{lastChapter?.qa_range[1]}
+		</p>
+		<h1 class="font-heading text-4xl font-semibold mt-1 text-heading">{part.title}</h1>
+		{#if 'subtitle' in part && part.subtitle}
+			<p class="part-subtitle">{part.subtitle}</p>
+		{/if}
+	</header>
+
+	{#each chapters as chapter (chapter.slug)}
+		<section class="chapter-block">
+			{#if chapters.length > 1}
+				<h2 class="chapter-heading" id="c-{chapter.slug}">{chapter.title}</h2>
+			{/if}
+
+			{#if chapter.epigraph}
+				<blockquote class="epigraph">
+					{@html frenchPunct(linkifyVerseRefs(chapter.epigraph.text))}
+				</blockquote>
+			{/if}
+
+			{#each chapter.sections as section, si (si)}
+				{#if section.title !== null}
+					<h3 class="section-heading" id="c-{chapter.slug}-s-{si}">{section.title}</h3>
+				{/if}
+
+				{#if section.commandments && section.commandments.length > 0}
+					{#each section.commandments as cmd (cmd.ordinal)}
+						<div class="commandment-block" id="cmd-{cmd.ordinal}">
+							<h4 class="commandment-head">
+								<span class="commandment-roman">{cmd.roman}</span>
+								<span class="commandment-text">{cmd.biblical_text}</span>
+							</h4>
+							{#each cmd.qa as qa (qa.n)}
+								{@render qaRow(qa)}
+							{/each}
+						</div>
+					{/each}
+				{:else}
+					{#each section.qa as qa (qa.n)}
+						{@render qaRow(qa)}
+					{/each}
+				{/if}
+			{/each}
+
+			{#if chapter.oraisons && chapter.oraisons.length > 0}
+				<div class="oraisons">
+					{#each chapter.oraisons as or, oi (oi)}
+						<div class="oraison">
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+							<div class="oraison-text">{@html frenchPunct(or.html)}</div>
+							{#if or.cite}
+								<p class="oraison-cite">{or.cite}</p>
+							{/if}
+						</div>
+					{/each}
+				</div>
+			{/if}
+
+			{#if chapter.footnotes && chapter.footnotes.length > 0}
+				<footer class="footnotes">
+					<ol class="footnote-list">
+						{#each chapter.footnotes as fn (fn.n)}
+							<li id="fn-{chapter.slug}-{fn.n}" class="footnote-item">
+								<span class="footnote-n">{fn.n}.</span>
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								{@html frenchPunct(linkifyVerseRefs(fn.text))}
+							</li>
+						{/each}
+					</ol>
+				</footer>
+			{/if}
+		</section>
+	{/each}
+
+	<nav
+		class="mt-16 pt-6 border-t border-border flex items-stretch justify-between gap-6 font-ui"
+		aria-label="Partie précédente ou suivante"
+	>
+		{#if prevPart}
+			<NavCard
+				direction="prev"
+				href="/petit-catechisme/{prevPart.slug}"
+				eyebrow="← Partie précédente"
+				title={prevPart.title}
+			/>
+		{:else}
+			<span class="nav-spacer"></span>
+		{/if}
+		{#if nextPart}
+			<NavCard
+				direction="next"
+				href="/petit-catechisme/{nextPart.slug}"
+				eyebrow="Partie suivante →"
+				title={nextPart.title}
+			/>
+		{:else}
+			<span class="nav-spacer"></span>
+		{/if}
+	</nav>
+</main>
+
+{#snippet qaRow(qa: import('$lib/data/types').PiusXPetitQA)}
+	<article class="qa-item" id="q-{qa.n}" class:qa-required={qa.required}>
+		<div class="qa-grid">
+			<div class="number-wrap">
+				<span class="number-col font-ui font-semibold tabular-nums">
+					{qa.n}
+				</span>
+			</div>
+			<div class="content-col">
+				{#if qa.q}
+					<p class="pius-question">
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						{@html frenchPunct(qa.q)}
+					</p>
+				{/if}
+				<div class="pius-answer">
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					{@html frenchPunct(qa.a)}
+				</div>
+			</div>
+		</div>
+	</article>
+{/snippet}
+
+<style>
+	.part-subtitle {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 1rem;
+		color: var(--color-subtle);
+		margin: 0.5rem 0 0;
+	}
+
+	.chapter-block {
+		margin-bottom: 3.5rem;
+	}
+
+	.chapter-heading {
+		font-family: var(--font-heading);
+		font-size: 1.55rem;
+		font-weight: 600;
+		line-height: 1.2;
+		color: var(--color-heading, var(--color-fg));
+		margin: 0 0 1.5rem;
+		padding-bottom: 0.6rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.section-heading {
+		font-family: var(--font-ui);
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--color-muted);
+		margin: 2.5rem 0 1.25rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.epigraph {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 0.95rem;
+		line-height: 1.7;
+		color: var(--color-subtle);
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+		margin: 0 0 2rem;
+		padding: 0.5rem 0 0.5rem 1.25rem;
+	}
+
+	.commandment-block {
+		margin: 2rem 0;
+		padding: 1rem 1.25rem;
+		background: color-mix(in srgb, var(--color-border) 20%, transparent);
+		border-radius: 4px;
+		border-left: 3px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+	}
+
+	.commandment-head {
+		display: flex;
+		align-items: baseline;
+		gap: 0.85rem;
+		margin: 0 0 1.1rem;
+		padding-bottom: 0.6rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.commandment-roman {
+		flex: none;
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+	}
+
+	.commandment-text {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 0.97rem;
+		color: var(--color-subtle);
+	}
+
+	.qa-item {
+		margin-bottom: 1.75rem;
+	}
+
+	.qa-grid {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.number-wrap {
+		flex: none;
+		width: 3.5rem;
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-start;
+		padding-top: 0.15rem;
+	}
+
+	.number-col {
+		color: var(--color-accent);
+		font-size: 0.85rem;
+		line-height: 1.6;
+		display: flex;
+		align-items: baseline;
+		gap: 0.2rem;
+	}
+
+	.content-col {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.pius-question {
+		font-family: var(--font-body);
+		font-style: italic;
+		color: var(--color-muted);
+		margin: 0 0 0.3em;
+		line-height: 1.55;
+	}
+
+	.pius-answer :global(p) {
+		margin-bottom: 0.75em;
+		line-height: 1.65;
+	}
+
+	.pius-answer :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.pius-answer :global(p.list) {
+		padding-left: 1.25em;
+		margin-bottom: 0.4em;
+	}
+
+	.pius-answer :global(sup.piusPetitRef) {
+		font-size: 0.72em;
+		color: var(--color-accent);
+		cursor: default;
+	}
+
+	.oraisons {
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px dashed color-mix(in srgb, var(--color-border) 80%, transparent);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.oraison {
+		padding: 0.85rem 1rem 0.85rem 1.25rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+		background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+		border-radius: 0 4px 4px 0;
+	}
+
+	.oraison-text {
+		font-family: var(--font-body);
+		font-size: 0.95rem;
+		font-style: italic;
+		line-height: 1.8;
+		color: var(--color-subtle);
+	}
+
+	.oraison-cite {
+		font-family: var(--font-ui);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		opacity: 0.75;
+		margin: 0.5rem 0 0;
+	}
+
+	.footnotes {
+		margin-top: 2.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--color-border);
+	}
+
+	.footnote-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+	}
+
+	.footnote-item {
+		font-family: var(--font-body);
+		font-size: 0.85rem;
+		line-height: 1.55;
+		color: var(--color-subtle);
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.footnote-n {
+		flex: none;
+		font-family: var(--font-ui);
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		min-width: 1.25rem;
+	}
+
+	.footnote-item :global(a.verse-ref) {
+		color: var(--color-accent);
+		text-decoration: none;
+		border-bottom: 1px dotted color-mix(in srgb, var(--color-accent) 50%, transparent);
+	}
+	.footnote-item :global(a.verse-ref:hover) {
+		border-bottom-style: solid;
+	}
+	.epigraph :global(a.verse-ref) {
+		color: inherit;
+		text-decoration: underline dotted var(--color-muted);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.15em;
+		transition: color 120ms ease;
+	}
+	.epigraph :global(a.verse-ref:hover) {
+		color: var(--color-accent);
+		text-decoration: underline solid var(--color-accent);
+		text-decoration-thickness: 1px;
+	}
+
+	.nav-spacer {
+		flex: 1;
+	}
+
+	@media (max-width: 640px) {
+		.qa-grid {
+			flex-direction: column;
+			gap: 0.2rem;
+		}
+
+		.number-wrap {
+			width: auto;
+			justify-content: flex-start;
+			padding-top: 0;
+		}
+
+		.content-col {
+			font-size: 1rem;
+			line-height: 1.6;
+		}
+
+		.commandment-head {
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+	}
+</style>

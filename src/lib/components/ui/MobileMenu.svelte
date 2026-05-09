@@ -82,6 +82,7 @@
 				{ href: '/compendium', label: 'Compendium' },
 				{ href: '/trente', label: 'Catéchisme de Trente' },
 				{ href: '/grand-catechisme', label: 'Grand Catéchisme' },
+				{ href: '/petit-catechisme', label: 'Petit Catéchisme' },
 				{ href: '/calendrier', label: 'Calendrier liturgique' },
 				{ href: '/prieres-formules', label: 'Prières & Formules' },
 				{ href: '/glossaire', label: 'Glossaire' },

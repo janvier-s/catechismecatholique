@@ -80,6 +80,11 @@
 			description: 'Le Grand Catéchisme de saint Pie X en 989 questions.'
 		},
 		{
+			href: '/petit-catechisme',
+			label: 'Petit Catéchisme',
+			description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X (1912).'
+		},
+		{
 			href: '/calendrier',
 			label: 'Calendrier liturgique',
 			description: 'Le calendrier romain croisé au Catéchisme.'

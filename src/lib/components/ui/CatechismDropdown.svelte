@@ -85,7 +85,8 @@
 	let prologue: Part | null = $state(null);
 	let open = $state(false);
 	let panelEl: HTMLDivElement | undefined = $state();
-	let triggerEl: HTMLButtonElement | undefined = $state();
+	let triggerEl: HTMLElement | undefined = $state();
+	let skipNextFocusOpen = false;
 	let containerEl: HTMLDivElement | undefined = $state();
 	let isMobile = $state(false);
 
@@ -251,15 +252,8 @@
 		open = false;
 		kbCol = 0;
 		kbIndex = 0;
-	}
-
-	function toggle() {
-		if (open) close();
-		else {
-			open = true;
-			kbCol = 0;
-			kbIndex = 0;
-		}
+		skipNextFocusOpen = true;
+		queueMicrotask(() => triggerEl?.focus());
 	}
 
 	function articleHref(a: Article): string {
@@ -305,7 +299,6 @@
 			if (e.key === 'Escape') {
 				e.preventDefault();
 				close();
-				triggerEl?.focus();
 				return;
 			}
 			if (isMobile) return; // simpler nav on mobile (browser default)
@@ -392,13 +385,18 @@
 	}}
 	onmouseleave={scheduleClose}
 >
-	<button
-		type="button"
+	<a
+		href="/cec"
 		bind:this={triggerEl}
 		class="catdrop-trigger font-ui text-sm font-semibold"
 		class:is-open={open}
-		onclick={toggle}
-		onfocus={() => (open = true)}
+		onfocus={() => {
+			if (skipNextFocusOpen) {
+				skipNextFocusOpen = false;
+				return;
+			}
+			open = true;
+		}}
 		aria-haspopup="menu"
 		aria-expanded={open}
 		aria-controls="catechism-menu"
@@ -418,7 +416,7 @@
 				<path d="M1 1.25 L5 4.75 L9 1.25" />
 			</svg>
 		</span>
-	</button>
+	</a>
 
 	{#if open}
 		<div

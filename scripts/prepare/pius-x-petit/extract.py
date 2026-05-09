@@ -29,8 +29,8 @@ PDF_PATH = (
 )
 
 OUT_PATH = (
-    Path(__file__).resolve().parents[3]
-    / "static/data/pius-x-petit/_raw/lines.json"
+    Path(__file__).resolve().parent
+    / "_raw/lines.json"
 )
 
 START_LABEL = "Sec2:13"

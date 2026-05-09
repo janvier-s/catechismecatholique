@@ -30,6 +30,7 @@ import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
 import { prepareTrent } from './prepare/trent.ts';
 import { preparePiusXGrand } from './prepare/pius-x-grand.ts';
+import { preparePiusXPetit } from './prepare/pius-x-petit.ts';
 import { prepareCalendrier } from './prepare/calendrier.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -445,6 +446,17 @@ async function main() {
 		mkdirSync(piusXGrandOutDir, { recursive: true });
 		const piusX = preparePiusXGrand({ sourceDir: piusXGrandSourceDir, outDir: piusXGrandOutDir });
 		endStep(`${piusX.totalParts} parts, ${piusX.totalChapters} chapters, ${piusX.totalQA} Q&A`);
+	} else {
+		endStep('source not found — skipped');
+	}
+
+	logStep('building Petit Catéchisme (Pie X 1912)');
+	const piusXPetitRawDir = new URL('./prepare/pius-x-petit/_raw', import.meta.url).pathname;
+	if (existsSync(piusXPetitRawDir)) {
+		const piusXPetitOutDir = join(OUT, 'pius-x-petit');
+		mkdirSync(piusXPetitOutDir, { recursive: true });
+		const petit = preparePiusXPetit({ rawDir: piusXPetitRawDir, outDir: piusXPetitOutDir });
+		endStep(`${petit.totalQA} Q&A`);
 	} else {
 		endStep('source not found — skipped');
 	}

@@ -90,11 +90,17 @@ interface IntroFile {
 	next?: { href: string; title: string; kind: 'chapter' | 'part' };
 }
 
+interface StructureChapterSection {
+	title: string;
+	commandments?: { roman: string; ordinal: number; text: string }[];
+}
+
 interface StructureChapter {
 	slug: string;
 	title: string;
 	ordinal: number;
 	qa_range: [number, number];
+	sections?: StructureChapterSection[];
 }
 
 interface StructureSection {
@@ -1172,14 +1178,40 @@ export function preparePiusXPetit(args: { rawDir: string; outDir: string }): {
 			const qa_range: [number, number] = [chQs[0]?.n ?? 0, chQs[chQs.length - 1]?.n ?? 0];
 			for (const q of chQs) partQs.push(q.n);
 
+			const titledSections: StructureChapterSection[] | undefined = (() => {
+				const out = ch.sections
+					.filter((s) => s.title !== null)
+					.map((s) => ({
+						title: s.title!,
+						...(s.commandments && s.commandments.length > 0
+							? {
+									commandments: s.commandments.map((c) => ({
+										roman: c.roman,
+										ordinal: c.ordinal,
+										text: c.biblical_text
+									}))
+								}
+							: {})
+					}));
+				return out.length > 0 ? out : undefined;
+			})();
+
+			const structCh: StructureChapter = {
+				slug,
+				title: ch.title,
+				ordinal,
+				qa_range,
+				...(titledSections ? { sections: titledSections } : {})
+			};
+
 			const sectionMeta: { section_slug?: string; section_title?: string } = {};
 			if (part.ordinal === 3 && chapterToSectionIndex[ci] !== undefined) {
 				const sec = partSections[chapterToSectionIndex[ci]!]!;
 				sectionMeta.section_slug = sec.slug;
 				sectionMeta.section_title = sec.title;
-				sec.chapters.push({ slug, title: ch.title, ordinal, qa_range });
+				sec.chapters.push(structCh);
 			} else {
-				partChapters.push({ slug, title: ch.title, ordinal, qa_range });
+				partChapters.push(structCh);
 			}
 
 			const file: ChapterFile = {
@@ -1313,7 +1345,7 @@ function rawSectionsToOutput(secs: RawSection[]): Section[] {
 const isMain = import.meta.url === `file://${process.argv[1]}`;
 if (isMain) {
 	const root = new URL('../..', import.meta.url).pathname;
-	const rawDir = join(root, 'static/data/pius-x-petit/_raw');
+	const rawDir = new URL('./_raw', import.meta.url).pathname;
 	const outDir = join(root, 'static/data/pius-x-petit');
 	const r = preparePiusXPetit({ rawDir, outDir });
 	console.log(`Total Q&A: ${r.totalQA}`);
