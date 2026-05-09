@@ -461,6 +461,27 @@ async function main() {
 		endStep('source not found — skipped');
 	}
 
+	// Copy the pre-extracted appendix JSONs (Histoire de la Révélation, Année
+	// liturgique, Instructions aux éducateurs) into the live data dir. Source
+	// of truth lives under scripts/prepare/pius-x-petit/_appendices/, generated
+	// by the local extract-*.py scripts (which need the source PDF — not
+	// available on CI, so we ship the JSON alongside the scripts).
+	logStep('copying Petit Catéchisme appendices');
+	const piusXPetitAppDir = new URL('./prepare/pius-x-petit/_appendices', import.meta.url).pathname;
+	if (existsSync(piusXPetitAppDir)) {
+		const dest = join(OUT, 'pius-x-petit', 'appendices');
+		mkdirSync(dest, { recursive: true });
+		let copied = 0;
+		for (const f of readdirSync(piusXPetitAppDir)) {
+			if (!f.endsWith('.json')) continue;
+			writeFileSync(join(dest, f), readFileSync(join(piusXPetitAppDir, f)));
+			copied++;
+		}
+		endStep(`${copied} appendices`);
+	} else {
+		endStep('source not found — skipped');
+	}
+
 	logStep('building liturgical calendar');
 	const calendrierSourceDir = join(SOURCES, 'calendrier');
 	if (existsSync(calendrierSourceDir)) {

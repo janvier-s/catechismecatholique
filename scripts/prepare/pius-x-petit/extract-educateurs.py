@@ -14,7 +14,7 @@ from pathlib import Path
 
 OUT_PATH = (
     Path(__file__).resolve().parents[3]
-    / "static/data/pius-x-petit/appendices/educateurs.json"
+    / "scripts/prepare/pius-x-petit/_appendices/educateurs.json"
 )
 
 PROPER_NOUNS = [

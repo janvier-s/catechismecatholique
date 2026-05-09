@@ -34,10 +34,10 @@ test('Catéchisme dropdown opens with parts', async ({ page }) => {
 	await page.goto('/');
 	// The dropdown also opens on mouseenter; hover deterministically opens
 	// the panel without the click-toggle quirk.
-	await page
-		.getByRole('link', { name: /Catéchisme/i })
-		.first()
-		.hover();
+	// Hover the dropdown trigger specifically — `getByRole('link', {name: /Catéchisme/i})`
+	// also matches the home logo (alt="Catéchisme de l'Église Catholique"), which
+	// comes first in DOM order. The trigger is the only `.catdrop-trigger`.
+	await page.locator('.catdrop-trigger').hover();
 	await expect(page.locator('#catechism-menu')).toBeVisible();
 	// The cell-tag span renders "Partie 1" (with a non-breaking space)
 	await expect(
@@ -50,10 +50,10 @@ test('Catéchisme dropdown opens with parts', async ({ page }) => {
 
 test('Catéchisme dropdown cascades to chapters on hover', async ({ page }) => {
 	await page.goto('/');
-	await page
-		.getByRole('link', { name: /Catéchisme/i })
-		.first()
-		.hover();
+	// Hover the dropdown trigger specifically — `getByRole('link', {name: /Catéchisme/i})`
+	// also matches the home logo (alt="Catéchisme de l'Église Catholique"), which
+	// comes first in DOM order. The trigger is the only `.catdrop-trigger`.
+	await page.locator('.catdrop-trigger').hover();
 	await expect(page.locator('#catechism-menu')).toBeVisible();
 	// Cells are plain <a> links. Hover the Partie 1 cell.
 	await page

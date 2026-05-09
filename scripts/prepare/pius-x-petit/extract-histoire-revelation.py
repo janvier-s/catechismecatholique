@@ -28,7 +28,7 @@ PDF_PATH = (
 
 OUT_PATH = (
     Path(__file__).resolve().parents[3]
-    / "static/data/pius-x-petit/appendices/histoire-revelation.json"
+    / "scripts/prepare/pius-x-petit/_appendices/histoire-revelation.json"
 )
 
 # 0-indexed PDF pages covering the chapter
