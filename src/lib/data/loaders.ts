@@ -19,7 +19,10 @@ import type {
 	TrentSectionFile,
 	TrentParagraphContext,
 	PiusXGrandStructure,
-	PiusXGrandChapterFile
+	PiusXGrandChapterFile,
+	CalendrierIndexFile,
+	CalendrierYearFile,
+	CalendrierYearKey
 } from './types';
 
 type Fetch = typeof fetch;
@@ -454,6 +457,30 @@ export function loadPiusXGrandChapter(
 			return ch;
 		})();
 		piusXGrandChapterCache.set(key, p);
+	}
+	return p;
+}
+
+// ─── Liturgical calendar (calendrier) loaders ──────────────────────────────
+
+let calendrierIndexPromise: Promise<CalendrierIndexFile> | null = null;
+const calendrierYearCache = new Map<CalendrierYearKey, Promise<CalendrierYearFile>>();
+
+export function loadCalendrierIndex(fetcher: Fetch = fetch): Promise<CalendrierIndexFile> {
+	if (!calendrierIndexPromise) {
+		calendrierIndexPromise = fetchJson<CalendrierIndexFile>('/data/calendrier/index.json', fetcher);
+	}
+	return calendrierIndexPromise;
+}
+
+export function loadCalendrierYear(
+	key: CalendrierYearKey,
+	fetcher: Fetch = fetch
+): Promise<CalendrierYearFile> {
+	let p = calendrierYearCache.get(key);
+	if (!p) {
+		p = fetchJson<CalendrierYearFile>(`/data/calendrier/annee-${key}.json`, fetcher);
+		calendrierYearCache.set(key, p);
 	}
 	return p;
 }

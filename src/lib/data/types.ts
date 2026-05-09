@@ -1,4 +1,4 @@
-export type Corpus = 'ccc' | 'compendium' | 'trent' | 'pius-x-grand';
+export type Corpus = 'ccc' | 'compendium' | 'trent' | 'pius-x-grand' | 'calendrier';
 
 export interface BibleRef {
 	text: string;
@@ -592,7 +592,7 @@ export interface PiusXGrandStructureChapter {
 	title: string;
 	ordinal: number;
 	qa_range: [number, number];
-	sections: { title: string | null }[];
+	sections: { title: string | null; qa_range: [number, number] }[];
 }
 
 export interface PiusXGrandStructurePart {
@@ -605,4 +605,40 @@ export interface PiusXGrandStructurePart {
 export interface PiusXGrandStructure {
 	parts: PiusXGrandStructurePart[];
 	total_qa: number;
+}
+
+// ─── Liturgical calendar (calendrier) ──────────────────────────────────────
+
+export type CalendrierSeason = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
+export type CalendrierYearKey = 'a' | 'b' | 'c';
+
+export interface CalendrierCluster {
+	i: number;
+	theme: string;
+	refs: string;
+	paragraphs: number[];
+}
+
+export interface CalendrierFeast {
+	slug: string;
+	title: string;
+	season: CalendrierSeason;
+	clusters: CalendrierCluster[];
+}
+
+export interface CalendrierFixedFeast extends CalendrierFeast {
+	date: string;
+	month_index: number;
+}
+
+export interface CalendrierYearFile {
+	key: CalendrierYearKey;
+	feasts: CalendrierFeast[];
+}
+
+export interface CalendrierIndexFile {
+	years: { key: CalendrierYearKey; total_feasts: number; total_clusters: number }[];
+	fixed_feasts: CalendrierFixedFeast[];
+	total_feasts: number;
+	total_clusters: number;
 }

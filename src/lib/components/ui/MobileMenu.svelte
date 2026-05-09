@@ -82,6 +82,7 @@
 				{ href: '/compendium', label: 'Compendium' },
 				{ href: '/trente', label: 'Catéchisme de Trente' },
 				{ href: '/grand-catechisme', label: 'Grand Catéchisme' },
+				{ href: '/calendrier', label: 'Calendrier liturgique' },
 				{ href: '/prieres-formules', label: 'Prières & Formules' },
 				{ href: '/glossaire', label: 'Glossaire' },
 				{ href: '/recherche', label: 'Recherche' }
@@ -103,10 +104,25 @@
 		}
 	];
 
-	function isActive(href: string): boolean {
+	// Active entry: only the longest matching href across all groups (exact
+	// match or path-prefix). On /cec/sommaire that means /cec/sommaire wins,
+	// not the broader /cec entry.
+	const activeHref = $derived.by(() => {
 		const p: string = page.url.pathname;
-		if (href === '/recherche' || href === '/a-propos') return p === href;
-		return p === href || p.startsWith(href + '/');
+		let best: string | null = null;
+		for (const group of groups) {
+			for (const link of group.links) {
+				if (link.href === p) return link.href;
+				if (p.startsWith(link.href + '/')) {
+					if (!best || link.href.length > best.length) best = link.href;
+				}
+			}
+		}
+		return best;
+	});
+
+	function isActive(href: string): boolean {
+		return href === activeHref;
 	}
 </script>
 

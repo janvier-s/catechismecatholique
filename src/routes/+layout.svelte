@@ -45,6 +45,10 @@
 			if (p.startsWith('/grand-catechisme/sommaire')) return false;
 			return true;
 		}
+		// Liturgical calendar year/solennites pages (hide on landing)
+		if (p.startsWith('/calendrier/')) {
+			return true;
+		}
 		return false;
 	});
 
@@ -64,6 +68,8 @@
 		const toOnTrent = toPath.startsWith('/trente');
 		const fromOnGrandCatechisme = fromPath.startsWith('/grand-catechisme');
 		const toOnGrandCatechisme = toPath.startsWith('/grand-catechisme');
+		const fromOnCalendrier = fromPath.startsWith('/calendrier');
+		const toOnCalendrier = toPath.startsWith('/calendrier');
 		const toOnConcordance = /\/bible\/[^/]+\/\d+\/concordance/.test(toPath);
 
 		if (
@@ -71,6 +77,7 @@
 			(fromOnBible && !toOnBible) ||
 			(fromOnTrent && !toOnTrent) ||
 			(fromOnGrandCatechisme && !toOnGrandCatechisme) ||
+			(fromOnCalendrier && !toOnCalendrier) ||
 			toOnConcordance
 		) {
 			if (get(studyPanel).open) closePanel();
@@ -122,7 +129,9 @@
 					? 'trent'
 					: page.url.pathname.startsWith('/grand-catechisme')
 						? 'pius-x-grand'
-						: 'ccc'}
+						: page.url.pathname.startsWith('/calendrier')
+							? 'calendrier'
+							: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

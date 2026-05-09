@@ -99,7 +99,7 @@ interface PiusXStructureChapter {
 	title: string;
 	ordinal: number;
 	qa_range: [number, number];
-	sections: { title: string | null }[];
+	sections: { title: string | null; qa_range: [number, number] }[];
 }
 
 interface PiusXStructurePart {
@@ -319,7 +319,11 @@ export function preparePiusXGrand(args: { sourceDir: string; outDir: string }): 
 				title: rawCh.title,
 				ordinal,
 				qa_range: qaRange,
-				sections: filteredSections.map((s) => ({ title: s.title }))
+				sections: filteredSections.map((s) => {
+					const first = s.qa[0]?.n ?? firstQN;
+					const last = s.qa[s.qa.length - 1]?.n ?? lastQN;
+					return { title: s.title, qa_range: [first, last] as [number, number] };
+				})
 			});
 		}
 

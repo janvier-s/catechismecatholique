@@ -110,10 +110,9 @@
 				<span class="kicker kicker-sub">{item.kicker2}</span>
 			{/if}
 			{#if item.typeLabel}
-				<span class="font-semibold">
-					{item.typeLabel}
-					{item.number ?? ''} :
-				</span>
+				<span class="kicker"
+					>{item.typeLabel}{item.number !== undefined ? ` ${item.number}` : ''}</span
+				>
 			{/if}
 			{item.title}
 		</a>

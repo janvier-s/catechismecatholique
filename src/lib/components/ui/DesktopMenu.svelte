@@ -2,6 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { afterNavigate } from '$app/navigation';
+	import { page } from '$app/state';
 
 	let open = $state(false);
 	let triggerEl: HTMLButtonElement | undefined = $state();
@@ -79,6 +80,11 @@
 			description: 'Le Grand Catéchisme de saint Pie X en 989 questions.'
 		},
 		{
+			href: '/calendrier',
+			label: 'Calendrier liturgique',
+			description: 'Le calendrier romain croisé au Catéchisme.'
+		},
+		{
 			href: '/prieres-formules',
 			label: 'Prières & Formules',
 			description: 'Prières communes et formules de la doctrine catholique.'
@@ -99,6 +105,20 @@
 			description: 'Mot, paragraphe ou référence biblique.'
 		}
 	];
+
+	// Active entry: longest matching href (exact match or path-prefix). Returns
+	// at most one href so only one row is highlighted on a given page.
+	const activeHref = $derived.by(() => {
+		const p = page.url.pathname;
+		let best: string | null = null;
+		for (const link of links) {
+			if (link.href === p) return link.href;
+			if (p.startsWith(link.href + '/')) {
+				if (!best || link.href.length > best.length) best = link.href;
+			}
+		}
+		return best;
+	});
 </script>
 
 <div class="hidden md:block relative" data-desktop-menu>
@@ -138,7 +158,13 @@
 			<ul class="menu-list">
 				{#each links as link (link.href)}
 					<li>
-						<a class="menu-row" href={link.href} onclick={close}>
+						<a
+							class="menu-row"
+							class:is-active={link.href === activeHref}
+							href={link.href}
+							aria-current={link.href === activeHref ? 'page' : undefined}
+							onclick={close}
+						>
 							<span class="menu-row-label">{link.label}</span>
 							<span class="menu-row-desc">{link.description}</span>
 						</a>
@@ -212,6 +238,13 @@
 	.menu-row:hover {
 		border-left-color: var(--color-accent);
 		color: var(--color-accent-text);
+	}
+	.menu-row.is-active {
+		border-left-color: var(--color-accent);
+		background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+	}
+	.menu-row.is-active .menu-row-label {
+		color: var(--color-accent);
 	}
 	.menu-row-label {
 		display: block;

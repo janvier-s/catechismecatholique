@@ -30,6 +30,7 @@ import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
 import { prepareTrent } from './prepare/trent.ts';
 import { preparePiusXGrand } from './prepare/pius-x-grand.ts';
+import { prepareCalendrier } from './prepare/calendrier.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
@@ -444,6 +445,17 @@ async function main() {
 		mkdirSync(piusXGrandOutDir, { recursive: true });
 		const piusX = preparePiusXGrand({ sourceDir: piusXGrandSourceDir, outDir: piusXGrandOutDir });
 		endStep(`${piusX.totalParts} parts, ${piusX.totalChapters} chapters, ${piusX.totalQA} Q&A`);
+	} else {
+		endStep('source not found — skipped');
+	}
+
+	logStep('building liturgical calendar');
+	const calendrierSourceDir = join(SOURCES, 'calendrier');
+	if (existsSync(calendrierSourceDir)) {
+		const calendrierOutDir = join(OUT, 'calendrier');
+		mkdirSync(calendrierOutDir, { recursive: true });
+		const cal = prepareCalendrier({ sourceDir: calendrierSourceDir, outDir: calendrierOutDir });
+		endStep(`${cal.totalFeasts} feasts (${cal.totalFixed} fixed), ${cal.totalClusters} clusters`);
 	} else {
 		endStep('source not found — skipped');
 	}

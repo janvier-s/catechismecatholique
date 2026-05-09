@@ -9,7 +9,9 @@
 		loadCompendiumStructure,
 		loadCompendiumPart,
 		loadTrentStructure,
-		loadPiusXGrandStructure
+		loadPiusXGrandStructure,
+		loadCalendrierIndex,
+		loadCalendrierYear
 	} from '$lib/data/loaders';
 	import type {
 		Chapter,
@@ -18,7 +20,10 @@
 		CompendiumStructure,
 		CompendiumPart,
 		TrentStructure,
-		PiusXGrandStructure
+		PiusXGrandStructure,
+		CalendrierFeast,
+		CalendrierFixedFeast,
+		CalendrierSeason
 	} from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
@@ -100,6 +105,32 @@
 		if (corpus !== 'pius-x-grand') return;
 		(async () => {
 			piusXGrandStructure = await loadPiusXGrandStructure();
+		})();
+	});
+
+	// ─── Liturgical calendar state ────────────────────────────────────────────
+	let calendrierFeasts: (CalendrierFeast | CalendrierFixedFeast)[] = $state([]);
+	let calendrierBaseHref: string = $state('/calendrier');
+
+	$effect(() => {
+		if (corpus !== 'calendrier') return;
+		const m = page.url.pathname.match(/^\/calendrier\/([^/]+)/);
+		const annee = m ? m[1] : null;
+		if (!annee) {
+			calendrierFeasts = [];
+			return;
+		}
+		calendrierBaseHref = `/calendrier/${annee}`;
+		(async () => {
+			if (annee === 'solennites') {
+				const idx = await loadCalendrierIndex();
+				calendrierFeasts = idx.fixed_feasts;
+			} else if (annee === 'a' || annee === 'b' || annee === 'c') {
+				const year = await loadCalendrierYear(annee);
+				calendrierFeasts = year.feasts;
+			} else {
+				calendrierFeasts = [];
+			}
 		})();
 	});
 
@@ -467,6 +498,62 @@
 				})
 			);
 		}
+		if (corpus === 'calendrier') {
+			if (calendrierFeasts.length === 0) return [];
+			const SEASON_LABELS: Record<CalendrierSeason, string> = {
+				avent: 'Avent',
+				noel: 'Noël',
+				careme: 'Carême',
+				pascal: 'Triduum & Pâques',
+				solennite: 'Solennités du Seigneur',
+				ordinaire: 'Temps Ordinaire'
+			};
+			const SEASON_ORDER: CalendrierSeason[] = [
+				'avent',
+				'noel',
+				'careme',
+				'pascal',
+				'solennite',
+				'ordinaire'
+			];
+			const baseHref = calendrierBaseHref;
+			const isFixed = baseHref === '/calendrier/solennites';
+
+			function feastToItem(f: CalendrierFeast | CalendrierFixedFeast): Item {
+				const feastHref = `${baseHref}#f-${f.slug}`;
+				const showClusters = f.clusters.length > 1;
+				return {
+					title: f.title,
+					...('date' in f && f.date ? { kicker: f.date } : {}),
+					href: feastHref,
+					children: showClusters
+						? f.clusters.map(
+								(c): Item => ({
+									title: c.theme,
+									href: `${baseHref}#c-${f.slug}-${c.i}`
+								})
+							)
+						: undefined
+				};
+			}
+
+			if (isFixed) {
+				return calendrierFeasts.map(feastToItem);
+			}
+
+			const groups: Partial<Record<CalendrierSeason, (CalendrierFeast | CalendrierFixedFeast)[]>> =
+				{};
+			for (const f of calendrierFeasts) {
+				(groups[f.season] ??= []).push(f);
+			}
+			return SEASON_ORDER.filter((s) => groups[s]).map(
+				(s): Item => ({
+					title: SEASON_LABELS[s],
+					href: `${baseHref}#season-${s}`,
+					children: groups[s]!.map(feastToItem)
+				})
+			);
+		}
 		if (corpus === 'trent') {
 			if (!trentStructure) return [];
 			return trentStructure.parts.map((part, partIdx): Item => {
@@ -633,7 +720,9 @@
 				? 'Plan du Catéchisme de Trente'
 				: corpus === 'pius-x-grand'
 					? 'Plan du Grand Catéchisme'
-					: 'Plan du Catéchisme'}
+					: corpus === 'calendrier'
+						? 'Calendrier liturgique'
+						: 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">

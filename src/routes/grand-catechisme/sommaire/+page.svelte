@@ -41,19 +41,39 @@
 					<h2 class="part-title">{part.title}</h2>
 				</header>
 
-				<ul class="chapters" role="list">
+				<div class="chapters">
 					{#each part.chapters as ch (ch.slug)}
-						<li>
+						{@const titledSections = ch.sections.filter((s) => s.title !== null)}
+						<div class="chapter-block">
 							<a class="row row-chapter" href="/grand-catechisme/{part.slug}/{ch.slug}">
 								<span class="row-label">
 									<span class="label-title">{ch.title}</span>
 								</span>
 								<span class="dotleader" aria-hidden="true"></span>
-								<span class="row-range">Q.&nbsp;{fmtRange(ch.qa_range)}</span>
+								<span class="row-range">{fmtRange(ch.qa_range)}</span>
 							</a>
-						</li>
+
+							{#if titledSections.length > 1}
+								<ul class="sections" role="list">
+									{#each ch.sections as sec, si (si)}
+										{#if sec.title !== null}
+											<li>
+												<a
+													class="row row-section"
+													href="/grand-catechisme/{part.slug}/{ch.slug}#s-{si}"
+												>
+													<span class="label-title">{sec.title}</span>
+													<span class="dotleader" aria-hidden="true"></span>
+													<span class="row-range">{fmtRange(sec.qa_range)}</span>
+												</a>
+											</li>
+										{/if}
+									{/each}
+								</ul>
+							{/if}
+						</div>
 					{/each}
-				</ul>
+				</div>
 			</article>
 		{/each}
 	</div>
@@ -178,12 +198,35 @@
 	}
 
 	.chapters {
-		list-style: none;
-		padding: 0 0 0 clamp(0.85rem, 2.4vw, 1.5rem);
-		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		padding-left: clamp(0.85rem, 2.4vw, 1.5rem);
+	}
+	.chapter-block {
 		display: flex;
 		flex-direction: column;
 		gap: 0.1rem;
+	}
+	.sections {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		padding-left: 1.4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.05rem;
+	}
+	.row-section {
+		font-family: var(--font-body);
+		font-size: 0.92rem;
+		color: var(--color-muted);
+		line-height: 1.5;
+		padding-top: 0.18rem;
+		padding-bottom: 0.18rem;
+	}
+	.row-section:hover {
+		color: var(--color-accent);
 	}
 
 	.row {
