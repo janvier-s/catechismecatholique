@@ -67,6 +67,34 @@
 		{/each}
 	</section>
 
+	<section class="appendices" aria-label="Annexes">
+		<h2 class="appendices-title">Annexes</h2>
+		<a class="appendix-card" href="/petit-catechisme/histoire-revelation">
+			<span class="appendix-kicker">Appendice</span>
+			<span class="appendix-name">Très bref résumé de l’histoire de la Révélation divine</span>
+			<span class="appendix-lede"
+				>Le récit de la Révélation, de la création à la Pentecôte, en vingt-huit paragraphes.</span
+			>
+			<span class="appendix-arrow" aria-hidden="true">→</span>
+		</a>
+		<a class="appendix-card" href="/petit-catechisme/annee-liturgique">
+			<span class="appendix-kicker">Appendice</span>
+			<span class="appendix-name">L’année liturgique et la discipline ecclésiastique</span>
+			<span class="appendix-lede"
+				>Les fêtes, l’abstinence et le jeûne, le jeûne eucharistique, et les indulgences.</span
+			>
+			<span class="appendix-arrow" aria-hidden="true">→</span>
+		</a>
+		<a class="appendix-card" href="/petit-catechisme/educateurs">
+			<span class="appendix-kicker">Appendice</span>
+			<span class="appendix-name">Instructions aux parents et aux éducateurs chrétiens</span>
+			<span class="appendix-lede"
+				>Neuf instructions sur la transmission de la foi dans la famille et l’école.</span
+			>
+			<span class="appendix-arrow" aria-hidden="true">→</span>
+		</a>
+	</section>
+
 	<nav class="quick-links" aria-label="Navigation complémentaire">
 		<a href="/petit-catechisme/sommaire" class="quick-link">Sommaire complet</a>
 	</nav>
@@ -229,6 +257,81 @@
 		line-height: 1.6;
 		color: var(--color-subtle);
 		margin: 0;
+	}
+
+	.appendices {
+		max-width: 44rem;
+		margin: 0 auto 2.5rem;
+	}
+	.appendices-title {
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0 0 0.85rem;
+	}
+	.appendix-card {
+		display: flex;
+		align-items: baseline;
+		gap: 1rem;
+		padding: 0.85rem 0;
+		border-top: 1px solid var(--color-border);
+		border-bottom: 1px solid var(--color-border);
+		text-decoration: none;
+		color: inherit;
+		flex-wrap: wrap;
+		transition: border-color 150ms ease;
+	}
+	.appendix-card:hover {
+		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+	}
+	.appendix-kicker {
+		flex: none;
+		font-family: var(--font-ui);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+	}
+	.appendix-name {
+		flex: 0 0 auto;
+		font-family: var(--font-body);
+		font-size: 0.97rem;
+		font-weight: 600;
+		color: var(--color-fg);
+	}
+	.appendix-lede {
+		flex: 1 1 60%;
+		font-family: var(--font-body);
+		font-size: 0.95rem;
+		font-style: italic;
+		color: var(--color-subtle);
+	}
+	.appendix-arrow {
+		flex: none;
+		font-size: 1.05rem;
+		color: var(--color-muted);
+		transition:
+			transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+			color 150ms ease;
+	}
+	.appendix-card:hover .appendix-arrow {
+		color: var(--color-accent);
+		transform: translateX(3px);
+	}
+	@media (max-width: 640px) {
+		.appendix-card {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.25rem;
+			padding: 0.85rem 0.25rem;
+		}
+		.appendix-arrow {
+			align-self: flex-end;
+		}
 	}
 
 	.quick-links {

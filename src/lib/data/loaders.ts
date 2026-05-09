@@ -500,6 +500,94 @@ export function loadPiusXPetitChapter(
 	return p;
 }
 
+// ─── Pie X Petit appendix loaders ──────────────────────────────────────────
+
+export type PiusXPetitAppendix = {
+	corpus: 'pius-x-petit';
+	slug: string;
+	title: string;
+	kicker?: string;
+	sections: Array<{
+		roman: string;
+		title: string;
+		paragraphs: Array<{ n: number; html: string }>;
+	}>;
+	footnotes: Array<{ n: number; text: string }>;
+};
+
+export type PiusXPetitLiturgicalBlock =
+	| { kind: 'h'; text: string }
+	| { kind: 'intro'; html: string }
+	| { kind: 'para'; n?: number; html: string }
+	| { kind: 'ol_roman'; items: Array<{ roman: string; html: string }> }
+	| { kind: 'ol'; items: Array<{ n: number; label?: string; html: string; sub?: string[] }> }
+	| { kind: 'ul'; items: Array<{ html: string; note?: string; sub?: string[] }> }
+	| { kind: 'concession'; n: number; html: string; note?: string }
+	| { kind: 'oraison'; html: string; cite?: string }
+	| { kind: 'prayer'; title: string; html: string };
+
+export type PiusXPetitLiturgicalAppendix = {
+	corpus: 'pius-x-petit';
+	slug: string;
+	title: string;
+	kicker?: string;
+	chapters: Array<{
+		roman: string;
+		title: string;
+		subtitle?: string;
+		sections: Array<{
+			n: number;
+			title: string;
+			blocks: PiusXPetitLiturgicalBlock[];
+		}>;
+	}>;
+};
+
+const piusXPetitAppendixCache = new Map<string, Promise<unknown | null>>();
+
+function loadPiusXPetitAppendixGeneric<T>(slug: string, fetcher: Fetch): Promise<T | null> {
+	let p = piusXPetitAppendixCache.get(slug) as Promise<T | null> | undefined;
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/pius-x-petit/appendices/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as T;
+		})();
+		piusXPetitAppendixCache.set(slug, p);
+	}
+	return p;
+}
+
+export function loadPiusXPetitAppendix(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<PiusXPetitAppendix | null> {
+	return loadPiusXPetitAppendixGeneric<PiusXPetitAppendix>(slug, fetcher);
+}
+
+export type PiusXPetitFlatAppendix = {
+	corpus: 'pius-x-petit';
+	slug: string;
+	title: string;
+	kicker?: string;
+	paragraphs: Array<{ n: number; html: string }>;
+	oraison?: { html: string; cite?: string };
+};
+
+export function loadPiusXPetitFlatAppendix(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<PiusXPetitFlatAppendix | null> {
+	return loadPiusXPetitAppendixGeneric<PiusXPetitFlatAppendix>(slug, fetcher);
+}
+
+export function loadPiusXPetitLiturgicalAppendix(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<PiusXPetitLiturgicalAppendix | null> {
+	return loadPiusXPetitAppendixGeneric<PiusXPetitLiturgicalAppendix>(slug, fetcher);
+}
+
 // ─── Liturgical calendar (calendrier) loaders ──────────────────────────────
 
 let calendrierIndexPromise: Promise<CalendrierIndexFile> | null = null;
