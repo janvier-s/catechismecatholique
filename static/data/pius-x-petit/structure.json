@@ -1,0 +1,241 @@
+{
+  "corpus": "pius-x-petit",
+  "intro": {
+    "slug": "premieres-notions",
+    "title": "Premières notions de la Foi chrétienne",
+    "qa_range": [
+      1,
+      27
+    ],
+    "part_slug": "0-intro"
+  },
+  "parts": [
+    {
+      "slug": "1-credo",
+      "ordinal": 1,
+      "title": "Credo",
+      "subtitle": "Principales vérités de la Foi chrétienne",
+      "qa_range": [
+        28,
+        160
+      ],
+      "chapters": [
+        {
+          "slug": "1-mysteres-principaux",
+          "title": "Les mystères principaux — Le signe de la Croix",
+          "ordinal": 1,
+          "qa_range": [
+            28,
+            36
+          ]
+        },
+        {
+          "slug": "2-lunite-et-la-trinite",
+          "title": "L’Unité et la Trinité de Dieu",
+          "ordinal": 2,
+          "qa_range": [
+            37,
+            50
+          ]
+        },
+        {
+          "slug": "3-creation-du-monde",
+          "title": "La création du monde — L’origine et la chute de l’homme",
+          "ordinal": 3,
+          "qa_range": [
+            51,
+            75
+          ]
+        },
+        {
+          "slug": "4-lincarnation-la",
+          "title": "L’Incarnation, la Passion et la Mort du Fils de Dieu",
+          "ordinal": 4,
+          "qa_range": [
+            76,
+            94
+          ]
+        },
+        {
+          "slug": "5-venue-de-jesus",
+          "title": "La venue de Jésus-Christ à la fin du monde — Les deux jugements : l’un particulier, l’autre général",
+          "ordinal": 5,
+          "qa_range": [
+            95,
+            104
+          ]
+        },
+        {
+          "slug": "6-leglise-catholique",
+          "title": "L’Église catholique — La communion des saints",
+          "ordinal": 6,
+          "qa_range": [
+            105,
+            132
+          ]
+        },
+        {
+          "slug": "7-remission-des-peches",
+          "title": "La rémission des péchés — Le péché",
+          "ordinal": 7,
+          "qa_range": [
+            133,
+            155
+          ]
+        },
+        {
+          "slug": "8-resurrection-de-la",
+          "title": "La résurrection de la chair — La vie éternelle — Amen",
+          "ordinal": 8,
+          "qa_range": [
+            156,
+            160
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "2-morale",
+      "ordinal": 2,
+      "title": "La morale chrétienne",
+      "qa_range": [
+        161,
+        266
+      ],
+      "chapters": [
+        {
+          "slug": "1-commandements-de",
+          "title": "Les commandements de Dieu",
+          "ordinal": 1,
+          "qa_range": [
+            161,
+            212
+          ]
+        },
+        {
+          "slug": "2-preceptes-de-leglise",
+          "title": "Les préceptes de l’Église",
+          "ordinal": 2,
+          "qa_range": [
+            213,
+            226
+          ]
+        },
+        {
+          "slug": "3-vertus",
+          "title": "Les vertus",
+          "ordinal": 3,
+          "qa_range": [
+            227,
+            266
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "3-moyens-grace",
+      "ordinal": 3,
+      "title": "Les moyens de la grâce",
+      "qa_range": [
+        267,
+        433
+      ],
+      "sections": [
+        {
+          "slug": "1-sacrements",
+          "title": "Les sacrements",
+          "chapters": [
+            {
+              "slug": "1-sacrements-en",
+              "title": "Les sacrements en général",
+              "ordinal": 1,
+              "qa_range": [
+                267,
+                289
+              ]
+            },
+            {
+              "slug": "2-bapteme",
+              "title": "Le Baptême",
+              "ordinal": 2,
+              "qa_range": [
+                290,
+                303
+              ]
+            },
+            {
+              "slug": "3-confirmation",
+              "title": "La Confirmation",
+              "ordinal": 3,
+              "qa_range": [
+                304,
+                315
+              ]
+            },
+            {
+              "slug": "4-leucharistie",
+              "title": "L’Eucharistie",
+              "ordinal": 4,
+              "qa_range": [
+                316,
+                354
+              ]
+            },
+            {
+              "slug": "5-penitence",
+              "title": "La Pénitence",
+              "ordinal": 5,
+              "qa_range": [
+                355,
+                391
+              ]
+            },
+            {
+              "slug": "6-lextreme-onction",
+              "title": "L’Extrême-Onction",
+              "ordinal": 6,
+              "qa_range": [
+                392,
+                396
+              ]
+            },
+            {
+              "slug": "7-lordre",
+              "title": "L’Ordre",
+              "ordinal": 7,
+              "qa_range": [
+                397,
+                405
+              ]
+            },
+            {
+              "slug": "8-mariage",
+              "title": "Le Mariage",
+              "ordinal": 8,
+              "qa_range": [
+                406,
+                413
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "2-priere",
+          "title": "La prière",
+          "chapters": [
+            {
+              "slug": "9-priere-moyen",
+              "title": "La prière, moyen impétratoire",
+              "ordinal": 9,
+              "qa_range": [
+                414,
+                433
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "total_qa": 433
+}
