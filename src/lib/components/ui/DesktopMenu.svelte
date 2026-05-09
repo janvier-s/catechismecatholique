@@ -61,62 +61,92 @@
 	});
 
 	type Link = { href: string; label: string; description: string };
-	const links: Link[] = [
-		{ href: '/cec/sommaire', label: 'Sommaire', description: 'La table des matières complète.' },
-		{ href: '/cec/panorama', label: 'Panorama', description: "Vue d'ensemble en un coup d'œil." },
+	type Group = { title: string; links: Link[] };
+	const groups: Group[] = [
 		{
-			href: '/compendium',
-			label: 'Compendium',
-			description: 'Le Catéchisme en 598 questions et réponses.'
+			title: 'Le Catéchisme',
+			links: [
+				{
+					href: '/cec',
+					label: 'Lecture intégrale',
+					description: 'Les 2 865 paragraphes du Catéchisme.'
+				},
+				{
+					href: '/cec/sommaire',
+					label: 'Sommaire',
+					description: 'La table des matières complète.'
+				},
+				{
+					href: '/cec/panorama',
+					label: 'Panorama',
+					description: "Vue d'ensemble en un coup d'œil."
+				},
+				{
+					href: '/recherche',
+					label: 'Recherche',
+					description: 'Mot, paragraphe ou référence biblique.'
+				}
+			]
 		},
 		{
-			href: '/trente',
-			label: 'Catéchisme de Trente',
-			description: 'Le catéchisme du Concile de Trente (1566).'
+			title: 'Autres catéchismes',
+			links: [
+				{
+					href: '/compendium',
+					label: 'Compendium',
+					description: 'Le Catéchisme en 598 questions et réponses.'
+				},
+				{
+					href: '/trente',
+					label: 'Catéchisme de Trente',
+					description: 'Le Catéchisme du Concile de Trente (1566).'
+				},
+				{
+					href: '/grand-catechisme',
+					label: 'Grand Catéchisme',
+					description: 'Le Grand Catéchisme de saint Pie X (1905) en 989 questions.'
+				},
+				{
+					href: '/petit-catechisme',
+					label: 'Petit Catéchisme',
+					description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X (1912).'
+				}
+			]
 		},
 		{
-			href: '/grand-catechisme',
-			label: 'Grand Catéchisme',
-			description: 'Le Grand Catéchisme de saint Pie X en 989 questions.'
-		},
-		{
-			href: '/petit-catechisme',
-			label: 'Petit Catéchisme',
-			description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X (1912).'
-		},
-		{
-			href: '/calendrier',
-			label: 'Calendrier liturgique',
-			description: 'Le calendrier romain croisé au Catéchisme.'
-		},
-		{
-			href: '/prieres-formules',
-			label: 'Prières & Formules',
-			description: 'Prières communes et formules de la doctrine catholique.'
-		},
-		{
-			href: '/glossaire',
-			label: 'Glossaire',
-			description: 'Les termes théologiques classés par thème.'
-		},
-		{
-			href: '/bible',
-			label: 'Concordance biblique',
-			description: 'Chaque verset croisé avec le Catéchisme.'
-		},
-		{
-			href: '/recherche',
-			label: 'Recherche',
-			description: 'Mot, paragraphe ou référence biblique.'
+			title: 'Études & outils',
+			links: [
+				{
+					href: '/bible',
+					label: 'Concordance biblique',
+					description: 'Chaque verset croisé avec le Catéchisme.'
+				},
+				{
+					href: '/glossaire',
+					label: 'Glossaire',
+					description: 'Les termes théologiques classés par thème.'
+				},
+				{
+					href: '/calendrier',
+					label: 'Calendrier liturgique',
+					description: 'Le calendrier romain croisé au Catéchisme.'
+				},
+				{
+					href: '/prieres-formules',
+					label: 'Prières & Formules',
+					description: 'Prières communes et formules de la doctrine Catholique.'
+				}
+			]
 		}
 	];
+	const allLinks: Link[] = groups.flatMap((g) => g.links);
 
 	// Active entry: longest matching href (exact match or path-prefix). Returns
 	// at most one href so only one row is highlighted on a given page.
 	const activeHref = $derived.by(() => {
 		const p = page.url.pathname;
 		let best: string | null = null;
-		for (const link of links) {
+		for (const link of allLinks) {
 			if (link.href === p) return link.href;
 			if (p.startsWith(link.href + '/')) {
 				if (!best || link.href.length > best.length) best = link.href;
@@ -159,23 +189,29 @@
 			aria-label="Outils et navigation"
 			transition:fly={{ y: -6, duration: 160, easing: cubicOut }}
 		>
-			<p class="menu-eyebrow">Outils</p>
-			<ul class="menu-list">
-				{#each links as link (link.href)}
-					<li>
-						<a
-							class="menu-row"
-							class:is-active={link.href === activeHref}
-							href={link.href}
-							aria-current={link.href === activeHref ? 'page' : undefined}
-							onclick={close}
-						>
-							<span class="menu-row-label">{link.label}</span>
-							<span class="menu-row-desc">{link.description}</span>
-						</a>
-					</li>
+			<div class="menu-grid">
+				{#each groups as group (group.title)}
+					<section class="menu-col" class:menu-col-featured={group.title === 'Le Catéchisme'}>
+						<p class="menu-eyebrow">{group.title}</p>
+						<ul class="menu-list">
+							{#each group.links as link (link.href)}
+								<li>
+									<a
+										class="menu-row"
+										class:is-active={link.href === activeHref}
+										href={link.href}
+										aria-current={link.href === activeHref ? 'page' : undefined}
+										onclick={close}
+									>
+										<span class="menu-row-label">{link.label}</span>
+										<span class="menu-row-desc">{link.description}</span>
+									</a>
+								</li>
+							{/each}
+						</ul>
+					</section>
 				{/each}
-			</ul>
+			</div>
 		</div>
 	{/if}
 </div>
@@ -207,37 +243,81 @@
 		position: absolute;
 		right: 0;
 		top: calc(100% + 6px);
-		width: 280px;
+		width: min(820px, calc(100vw - 2rem));
 		background: var(--color-panel);
 		border: 1px solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.75rem 0;
+		border-radius: 6px;
+		padding: 1rem 0.75rem;
 		z-index: var(--z-dropdown);
+	}
+	.menu-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-rows: auto repeat(4, 1fr);
+		gap: 0.4rem 0;
+	}
+	.menu-col {
+		display: grid;
+		grid-template-rows: subgrid;
+		grid-row: 1 / -1;
+		min-width: 0;
+		padding: 0 0.6rem;
+		position: relative;
+	}
+	/* Hairline separators between columns — gradient-fade like the
+	   Catéchisme dropdown. */
+	.menu-col + .menu-col::before {
+		content: '';
+		position: absolute;
+		top: 0.4rem;
+		bottom: 0.4rem;
+		left: 0;
+		width: 1px;
+		background: linear-gradient(
+			to bottom,
+			transparent,
+			color-mix(in srgb, var(--color-fg) 14%, transparent) 20%,
+			color-mix(in srgb, var(--color-fg) 14%, transparent) 80%,
+			transparent
+		);
+		pointer-events: none;
+	}
+	.menu-col-featured .menu-eyebrow {
+		color: var(--color-accent);
 	}
 	.menu-eyebrow {
 		font-family: var(--font-ui);
-		font-size: 0.6rem;
+		font-size: 0.62rem;
 		font-weight: 600;
-		letter-spacing: 0.24em;
+		letter-spacing: 0.3em;
 		text-transform: uppercase;
 		color: var(--color-muted);
-		margin: 0 0 0.45rem 1.1rem;
+		margin: 0 0 0.55rem;
+		padding-left: 0.85rem;
 	}
 	.menu-list {
 		list-style: none;
 		margin: 0;
 		padding: 0;
+		display: contents;
+	}
+	.menu-list > li {
+		min-width: 0;
 		display: flex;
-		flex-direction: column;
+	}
+	.menu-list > li > .menu-row {
+		flex: 1;
 	}
 	.menu-row {
 		display: block;
-		padding: 0.5rem 1.1rem;
+		padding: 0.45rem 0.85rem;
 		text-decoration: none;
 		color: var(--color-fg);
 		border-left: 2px solid transparent;
+		border-radius: 0 4px 4px 0;
 		transition:
 			border-color 120ms ease,
+			background-color 120ms ease,
 			color 120ms ease;
 	}
 	.menu-row:hover {

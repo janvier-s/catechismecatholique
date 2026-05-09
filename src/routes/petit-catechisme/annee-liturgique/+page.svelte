@@ -227,7 +227,11 @@
 	}
 
 	.al-section {
-		margin-bottom: 2.5rem;
+		margin-bottom: 5rem;
+	}
+	.al-section + .al-section {
+		padding-top: 1.5rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
 	}
 
 	.al-section-heading {
@@ -267,6 +271,12 @@
 		font-family: var(--font-body);
 		line-height: 1.75;
 	}
+	/* Intros sit at the same left edge as numbered paragraph bodies so the
+	   bullet lists nest visibly underneath. */
+	.al-prose {
+		padding-left: 3rem;
+		margin-bottom: 1.25rem;
+	}
 	.al-prose :global(p),
 	.al-content :global(p) {
 		margin: 0 0 0.75em;
@@ -293,7 +303,7 @@
 
 	.al-num-wrap {
 		flex: none;
-		width: 3.5rem;
+		width: 2rem;
 		display: flex;
 		justify-content: flex-end;
 		align-items: flex-start;
@@ -302,7 +312,7 @@
 
 	.al-num {
 		color: var(--color-accent);
-		font-size: 0.85rem;
+		font-size: 0.78rem;
 		line-height: 1.6;
 	}
 
@@ -341,7 +351,7 @@
 		flex: 1;
 	}
 
-	/* Numbered ol — number in left margin, body aligned with surrounding prose */
+	/* Numbered ol */
 	.al-ol {
 		list-style: none;
 		margin: 0 0 1rem;
@@ -351,33 +361,34 @@
 		gap: 0.5rem;
 	}
 	.al-ol > li {
-		position: relative;
+		display: flex;
+		gap: 0.85rem;
 		font-family: var(--font-body);
 		line-height: 1.65;
 	}
 	.al-ol-num {
-		position: absolute;
-		right: calc(100% + 0.6rem);
-		top: 0.05rem;
+		flex: none;
 		font-family: var(--font-ui);
 		font-size: 0.85rem;
 		font-weight: 600;
 		color: var(--color-accent);
-		white-space: nowrap;
+		min-width: 2.25rem;
+		padding-top: 0.05rem;
 	}
 	.al-ol-body {
-		min-width: 0;
+		flex: 1;
 	}
 	.al-ol-body :global(strong) {
 		color: var(--color-accent);
 		font-weight: 600;
 	}
 
-	/* Bullet list */
+	/* Bullet list — indented to nest visually under the preceding numbered
+	   paragraph (whose body sits ~3rem in from the section's left edge). */
 	.al-ul {
 		list-style: none;
 		margin: 0 0 1.25rem;
-		padding: 0;
+		padding: 0 0 0 4.5rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.65rem;
@@ -520,19 +531,18 @@
 		.al-content {
 			font-size: 1rem;
 		}
+		.al-ul {
+			padding-left: 1.5rem;
+		}
+		.al-prose {
+			padding-left: 0;
+		}
+		.al-ol > li,
 		.al-ol-roman li {
 			flex-direction: column;
 			gap: 0.2rem;
 		}
-		.al-ol > li {
-			padding-left: 2.25rem;
-		}
-		.al-ol-num {
-			position: absolute;
-			right: auto;
-			left: 0;
-			top: 0.05rem;
-		}
+		.al-ol-num,
 		.al-roman {
 			padding-top: 0;
 		}

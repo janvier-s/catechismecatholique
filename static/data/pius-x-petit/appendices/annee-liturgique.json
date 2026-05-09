@@ -1,771 +1,771 @@
 {
-  "corpus": "pius-x-petit",
-  "slug": "annee-liturgique",
-  "title": "L’année liturgique et la discipline ecclésiastique",
-  "kicker": "Appendice",
-  "chapters": [
-    {
-      "roman": "I",
-      "title": "L’année liturgique",
-      "subtitle": "D’après le code des rubriques du Bréviaire et du Missel Romain du 25 juillet 1960",
-      "sections": [
-        {
-          "n": 1,
-          "title": "Notions sur les fêtes chrétiennes",
-          "blocks": [
-            {
-              "kind": "para",
-              "n": 1,
-              "html": "<p>Ce n’est pas seulement par la doctrine chrétienne et par l’Histoire Sainte, mais encore par ses fêtes, que l’Église nous rappelle et nous enseigne concrètement les vérités de la Foi et les meilleurs exemples des vertus chrétiennes.</p>"
-            },
-            {
-              "kind": "para",
-              "n": 2,
-              "html": "<p>Les fêtes ont été instituées pour rendre à Dieu en public, dans ses Saints temples, le culte suprême d’adoration, de louange, de remerciement, de réparation. Tout y a été admirablement disposé et adapté aux circonstances : les cérémonies, les paroles, les chants, l’ordonnance extérieure en tous ses détails. Ainsi, elles peuvent faire pénétrer profondément dans l’esprit les mystères, les vérités ou les faits que nous célébrons, et nous porter aux sentiments et aux actes qui y correspondent.</p><p>Si les fidèles étaient bien instruits de ces fêtes et les célébraient avec l’esprit voulu de l’Église en leur institution, on obtiendrait une rénovation et un accroissement notable de Foi, de piété et de connaissance religieuse. En conséquence, on aurait de la part des fidèles une Vie chrétienne plus forte et plus féconde en œuvres.</p>"
-            },
-            {
-              "kind": "para",
-              "n": 3,
-              "html": "<p>L’année entière est consacrée à Dieu. Il ne se passe point de jour sans que l’Église nous lise, à la Messe et à l’office, quelques extraits des Saintes Écritures qui sont l’œuvre de Dieu, sans qu’elle nous suggère, avec une merveilleuse variété, des formules appropriées de louanges et de prières au Seigneur, notre premier principe et notre dernière fin.</p><p>Elle nous rappelle les infinies perfections de Dieu, ses bienfaits immenses, sa loi Sainte.</p><p>Elle nous rapporte chaque jour, à l’évangile de la Messe, quelque miracle ou quelque enseignement de Notre Seigneur Jésus-Christ, qui est la Voie, la Vérité et la Vie, et qui, seul, a « Les paroles de la Vie éternelle ».</p><p>Mais comme nous ne sommes d’ordinaire obligés d’assister au Saint Sacrifice que les dimanches, la Sainte Église y a sagement réparti le Saint évangile et les écrits apostoliques. De la sorte, la Vie entière et la doctrine du Sauveur sont lues et expliquées aux fidèles durant l’année, formant Ainsi un vrai cours d’instruction religieuse chrétienne.</p>"
-            },
-            {
-              "kind": "para",
-              "n": 4,
-              "html": "<p>En outre, l’Église a institué des fêtes spéciales. Elle vénère, le premier dimanche après la Pentecôte, le mystère fondamental du christianisme, la très Sainte Trinité, à qui elle offre continuellement l’honneur, la gloire et le sacrifice.</p><p>Elle rappelle et célèbre les faits principaux de la Vie du Seigneur Ainsi que les mystères essentiels qui manifestent plus clairement son infinie miséricorde envers nous :</p>"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "Sa naissance à Noël ou fête de la Nativité de Notre-Seigneur (25 décembre) ;"
-                },
-                {
-                  "html": "Sa Circoncision en l’octave de la Nativité (1<sup>er</sup> janvier) ;"
-                },
-                {
-                  "html": "Sa manifestation à l’Épiphanie (6 janvier) ;"
-                },
-                {
-                  "html": "Son baptême (13 janvier) ;"
-                },
-                {
-                  "html": "Sa Transfiguration au Mont Thabor (6 août) ;"
-                },
-                {
-                  "html": "Sa Passion et sa Mort le Vendredi Saint ;"
-                },
-                {
-                  "html": "Sa glorieuse résurrection à Pâques ;"
-                },
-                {
-                  "html": "Son Ascension triomphante ;"
-                },
-                {
-                  "html": "L’envoi du Saint-Esprit sur l’Église à la Pentecôte ;"
-                },
-                {
-                  "html": "La présence réelle de son Corps et de son Sang dans la très Sainte Eucharistie (Fête-Dieu ou Corpus Christi) le jeudi qui suit le I<sup>er</sup> dimanche après la Pentecôte ;"
-                },
-                {
-                  "html": "Son Cœur infiniment miséricordieux, le vendredi qui suit le II<sup>e</sup> dimanche après la Pentecôte ;"
-                },
-                {
-                  "html": "Son très Précieux Sang (le 1<sup>er</sup> juillet) ;"
-                },
-                {
-                  "html": "Sa royauté sociale, à la fête de Notre Seigneur Jésus-Christ Roi, le dernier dimanche d’octobre."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p>La célébration des fêtes de Noël, de Pâques et de Pentecôte est prolongée pendant huit jours consécutifs, appelés octave. D’autre part, l’Église nous prépare aux deux premières par un temps de prière et de jeûne : l’Avent, qui précède Noël, et le Carême institué en mémoire des quarante jours de jeûne du Sauveur, et consacré d’une façon toute spéciale à la pénitence, à l’instruction catéchistique et à la prédication.</p><p>Cette préparation à Pâques est suivie d’une longue période joyeuse, appelée temps Pascal, en souvenir des quarante jours que Jésus-Christ glorieux a passés sur la terre après sa résurrection.</p>"
-            },
-            {
-              "kind": "para",
-              "n": 5,
-              "html": "<p>L’Église célèbre avec la plus grande solennité les privilèges singuliers de la très Sainte Vierge Marie, propres à elle seule comme Mère de Dieu :</p>"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "Son exemption du péché originel en la fête de l’Immaculée Conception (8 décembre) ;"
-                },
-                {
-                  "html": "L’élévation immédiate de son corps virginal avec son âme dans la gloire céleste en la fête de l’Assomption (15 août)."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Outre sa Maternité divine (fêtée le 11 octobre), le peuple chrétien célèbre, avec grande joie, les événements les plus mémorables de sa Vie :</p>"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "Sa Nativité (8 septembre) ;"
-                },
-                {
-                  "html": "L’Annonciation (25 mars) ;"
-                },
-                {
-                  "html": "La Visitation (2 juillet) ;"
-                },
-                {
-                  "html": "La Purification (2 février)."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Plusieurs jours lui ont été aussi consacrés pour commémorer d’autres mystères de sa Vie ou quelques-uns de ses bienfaits plus insignes :</p>"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "Notre-Dame des Sept Douleurs : le vendredi de la Passion de Notre-Seigneur et le 15 septembre ;"
-                },
-                {
-                  "html": "Marie Reine (31 mai) ;"
-                },
-                {
-                  "html": "Le Cœur immaculé de Marie (22 août) ;"
-                },
-                {
-                  "html": "Le Saint Rosaire (7 octobre), solennisé le I<sup>er</sup> dimanche d’octobre."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Elle célèbre aussi d’autres fêtes particulières qui alimentent la piété des fidèles envers leur Mère du Ciel.</p>"
-            },
-            {
-              "kind": "para",
-              "n": 6,
-              "html": "<p>La gloire de tous les anges et de tous les Saints de l’Église triomphante nous est présentée en la fête de la Toussaint (1<sup>er</sup> novembre), afin qu’en nous réjouissant de leur triomphe, nous nous sentions portés à marcher sur leurs traces.</p><p>Le lendemain, comme pour donner une suite naturelle à la fête de tous les Saints, l’Église nous rappelle tous nos chers défunts du Purgatoire (Commémoration des fidèles défunts, 2 novembre), afin que nous les aidions par nos prières et qu’à la pensée de leurs souffrances nous nous sentions nous-mêmes stimulés à faire pénitence de nos péchés et à pratiquer toute sorte de bonnes œuvres.</p><p>Parmi le cortège des anges et Saints, l’Église ne célèbre avec une grande solennité, que les tout principaux :</p>"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "Saint Michel Archange en la fête de la dédicace (29 septembre) ;"
-                },
-                {
-                  "html": "Saint Joseph, époux de la Vierge Marie, Confesseur, Patron de l’Église universelle (19 mars) ; et Saint Joseph, artisan (1<sup>er</sup> mai) ;"
-                },
-                {
-                  "html": "Saint Jean-Baptiste, Précurseur de Notre-Seigneur, en la fête de sa Nativité (24 juin) ;"
-                },
-                {
-                  "html": "Les Saints Pierre et Paul, Princes des Apôtres (29 juin)."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Non contente d’honorer presque chaque jour un Saint en particulier, l’Église rappelle quotidiennement par son Martyrologe les noms des autres Saints et bienheureux dont on célèbre la mémoire dans les différentes églises particulières.</p><p>Elle nous montre Ainsi qu’elle les voudrait toujours présents à la mémoire des fidèles, honorés et invoqués par eux pour leur édification, leur soutien et leur encouragement.</p>"
-            },
-            {
-              "kind": "para",
-              "n": 7,
-              "html": "<p>Certains jours enfin méritent particulièrement, de notre part, attention et observance. Ce sont :</p>"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "Les féries de l’Avent et du Carême consacrées au jeûne et à la pénitence ;"
-                },
-                {
-                  "html": "Les vigiles instituées comme préparation aux plus grandes fêtes ;"
-                },
-                {
-                  "html": "Les Quatre-Temps, les Litanies majeures (en la fête de Saint Marc, le 25 avril) et les Litanies mineures ou rogations (les trois jours précédant l’Ascension) pour demander la grâce d’avoir de bons prêtres et la conservation des fruits de la terre ;"
-                },
-                {
-                  "html": "Le Triduum Sacré ou trois derniers jours de la Semaine Sainte, tout spécialement consacré à nous représenter, dans la forme la plus vive, les atroces souffrances et la mort ignominieuse que l’Homme-Dieu supporta pour nous racheter, nous, indignes pécheurs, de l’esclavage de Satan et de la mort."
-                }
-              ]
-            },
-            {
-              "kind": "para",
-              "n": 8,
-              "html": "<p>Que tout bon chrétien s’efforce donc, s’aidant de la prédication et de quelque livre approprié, de comprendre et de faire sien l’esprit de chacune de ces fêtes.</p><p>Qu’il connaisse l’objet et la fin spéciale de la fête, médite la Vérité, la vertu, le prodige, le bienfait qui nous y est particulièrement rappelé.</p><p>Qu’il cherche enfin à en tirer le meilleur profit pour son âme.</p><p>Par ce moyen, il connaîtra mieux et aimera avec plus de ferveur Dieu, Notre Seigneur Jésus-Christ, la très Sainte Vierge, les anges et les Saints, et il sera porté à mettre en pratique leurs exemples et leurs enseignements.</p><p>Il s’attachera avec affection à la liturgie sacrée, à la prédication et à l’Église, et il tâchera de communiquer aussi aux autres ce goût et cet amour.</p><p>Toute fête sera dès lors pour lui un jour de Dieu, une vraie fête qui réjouira son âme, la restaurera, la retrempera, la remplira d’une nouvelle vigueur pour porter les souffrances et les luttes quotidiennes de toute la Semaine.</p>"
-            }
-          ]
-        },
-        {
-          "n": 2,
-          "title": "Les temps de l’année liturgique",
-          "blocks": [
-            {
-              "kind": "ol_roman",
-              "items": [
-                {
-                  "roman": "I",
-                  "html": "Le temps de l’<em>Avent</em>, du I<sup>er</sup> dimanche de l’Avent à la vigile de Noël."
-                },
-                {
-                  "roman": "II",
-                  "html": "Le temps de la <em>Naissance du Christ</em>, de Noël au 13 janvier, qui comprend les temps de Noël et de l’Épiphanie."
-                },
-                {
-                  "roman": "III",
-                  "html": "Le temps de la <em>Septuagésime</em>, qui inclut les dimanches de Septuagésime, de Sexagésime et de Quinquagésime."
-                },
-                {
-                  "roman": "IV",
-                  "html": "Le temps du <em>Carême</em>, du mercredi des Cendres au Samedi Saint, qui comprend les temps de la Quadragésime et de la Passion."
-                },
-                {
-                  "roman": "V",
-                  "html": "Le temps <em>Pascal</em>, du dimanche de la résurrection au samedi de la Pentecôte, qui regroupe les temps de Pâques, de l’Ascension et l’octave de la Pentecôte."
-                },
-                {
-                  "roman": "VI",
-                  "html": "Le temps de l’<em>année</em> ou temps « <em>per annum</em> », du 14 janvier au samedi précédant le dimanche de la Septuagésime, et de la fête de la Sainte Trinité au samedi précédant le I<sup>er</sup> dimanche de l’Avent."
-                }
-              ]
-            },
-            {
-              "kind": "oraison",
-              "html": "Ô Dieu, qui chaque année, nous réjouissez en la solennité de la Résurrection du Seigneur, faites, dans votre bonté, qu’au moyen de ces fêtes que nous célébrons dans le temps, nous méritions d’arriver aux joies éternelles.",
-              "cite": "Oraison du mercredi de Pâques"
-            },
-            {
-              "kind": "oraison",
-              "html": "Nous vous en supplions, Seigneur, donnez à vos fidèles de ressentir toujours de la joie en vénérant vos Saints et d’être toujours assistés de leur prière. Par Jésus-Christ, votre Fils, Notre Seigneur. Ainsi soit-il.",
-              "cite": "Postcommunion de la Messe de saint Damase, 11 décembre"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "roman": "II",
-      "title": "La discipline ecclésiastique",
-      "sections": [
-        {
-          "n": 1,
-          "title": "Les jours de fêtes d’obligation",
-          "blocks": [
-            {
-              "kind": "h",
-              "text": "I. Dans l’Église Universelle"
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Le dimanche doit être observé comme le principal jour de fête de précepte. Ce jour-là sont célébrées plusieurs fêtes de I<sup>ère</sup> classe dans l’Église universelle : Pâques ou Fête de la résurrection, la Pentecôte et la Fête de la très Sainte Trinité.</p><p>De plus, l’Église universelle célèbre dans l’année dix fêtes de précepte.</p>"
-            },
-            {
-              "kind": "intro",
-              "html": "<p><em>Cinq fêtes en l’honneur de Notre Seigneur Jésus-Christ :</em></p>"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 1,
-                  "html": "La Nativité de Notre Seigneur Jésus-Christ (25 décembre) ;"
-                },
-                {
-                  "n": 2,
-                  "html": "La Circoncision en l’octave de la Nativité (1<sup>er</sup> janvier) ;"
-                },
-                {
-                  "n": 3,
-                  "html": "L’Épiphanie (6 janvier) ;"
-                },
-                {
-                  "n": 4,
-                  "html": "L’Ascension (quarante jours après Pâques) ;"
-                },
-                {
-                  "n": 5,
-                  "html": "La Fête-Dieu ou Fête du très Saint Corps du Christ (jeudi qui suit le I<sup>er</sup> dimanche après la Pentecôte)."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p><em>Deux fêtes en l’honneur de la très Sainte Vierge Marie :</em></p>"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 6,
-                  "html": "L’Immaculée Conception (8 décembre) ;"
-                },
-                {
-                  "n": 7,
-                  "html": "L’Assomption (15 août)."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p><em>Trois fêtes en l’honneur des Saints :</em></p>"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 8,
-                  "html": "Saint Joseph (19 mars) ;"
-                },
-                {
-                  "n": 9,
-                  "html": "Les Saints Apôtres Pierre et Paul (29 juin) ;"
-                },
-                {
-                  "n": 10,
-                  "html": "La Toussaint (1<sup>er</sup> novembre)."
-                }
-              ]
-            },
-            {
-              "kind": "h",
-              "text": "II. En France"
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Par décret du cardinal Caprara, concédé à Napoléon en 1802, les fêtes d’obligation en vigueur en France ont été restreintes au nombre de quatre :</p>"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 1,
-                  "html": "La Nativité de Notre Seigneur Jésus-Christ (25 décembre) ;"
-                },
-                {
-                  "n": 2,
-                  "html": "L’Ascension (quarante jours après Pâques) ;"
-                },
-                {
-                  "n": 3,
-                  "html": "L’Assomption (15 août) ;"
-                },
-                {
-                  "n": 4,
-                  "html": "La Toussaint (1<sup>er</sup> novembre)."
-                }
-              ]
-            },
-            {
-              "kind": "intro",
-              "html": "<p>L’Épiphanie, la Fête-Dieu et la fête des Saints Apôtres Pierre et Paul, quant à elles, sont solennisées le dimanche qui suit leur célébration.</p>"
-            }
-          ]
-        },
-        {
-          "n": 2,
-          "title": "Les jours d’abstinence et de jeûne",
-          "blocks": [
-            {
-              "kind": "h",
-              "text": "I. Jours d’abstinence de viande"
-            },
-            {
-              "kind": "intro",
-              "html": "<p>L’abstinence de viande sera observée chaque vendredi de l’année, (à moins que ne soit célébrée ce jour-là une fête chômée de l’Église universelle) et plus gravement les jours de jeûne : le mercredi des Cendres et le Vendredi Saint.</p>"
-            },
-            {
-              "kind": "h",
-              "text": "II. Jours de jeûne"
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Le jeûne est à observer :</p>"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 1,
-                  "html": "Le mercredi des Cendres ;"
-                },
-                {
-                  "n": 2,
-                  "html": "Le Vendredi Saint."
-                }
-              ]
-            },
-            {
-              "kind": "h",
-              "text": "III. Pratique traditionnelle de l’Église"
-            },
-            {
-              "kind": "intro",
-              "html": "<p>Selon la tradition multi-séculaire, en vigueur dans l’Église jusqu’au XX<sup>e</sup> siècle, les fidèles sont vivement encouragés à observer le jeûne et l’abstinence :</p>"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 1,
-                  "html": "Les vendredis de Carême, voire, pour ceux qui le peuvent, tous les jours de Semaine du Carême ;"
-                },
-                {
-                  "n": 2,
-                  "html": "Les mercredis, vendredis et samedis des Quatre-Temps :",
-                  "sub": [
-                    "De l’Avent, dans la troisième Semaine,",
-                    "De la Quadragésime, dans la première Semaine de Carême,",
-                    "De la Pentecôte, pendant l’octave,",
-                    "De septembre, dans la troisième Semaine de ce mois ;"
-                  ]
-                },
-                {
-                  "n": 3,
-                  "html": "Les quatre vigiles de Noël, de la Pentecôte, de la Toussaint et de l’Immaculée Conception."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "n": 3,
-          "title": "Le jeûne eucharistique",
-          "blocks": [
-            {
-              "kind": "intro",
-              "html": "<p>Dès l’époque la plus ancienne, l’Église imposa le jeûne avant de recevoir l’Eucharistie et se montra sévère dans l’application de cette discipline. Les motifs ont déjà été exprimés par Saint Paul. L’abstention de nourriture et de boisson convient au profond respect que nous devons avoir envers la Majesté suprême de Jésus-Christ avant de le recevoir sous les voiles de l’Eucharistie. Ce jeûne fut traditionnellement observé depuis minuit. Pie XII atténua la rigueur de la loi et réduisit le temps du jeûne à trois heures pour faciliter aux fidèles un accès fréquent à la table eucharistique.</p><p>Par la suite, la discipline fut considérablement amoindrie, au point d’avoir été réduite à une heure (Code 1983). Cependant, de par la nature même des choses, une heure n’est pas un temps suffisant pour permettre la digestion, ni pour parler véritablement de « Jeûne ». Si donc l’obligation légale n’exige pas davantage, l’obligation morale de droit naturel, quant à elle, demeure.</p><p>C’est pourquoi les fidèles sont vivement encouragés à suivre les prescriptions suivantes du pape Pie XII publiées dans son Motu proprio <em>Sacram communionem</em> du 19 mars 1957 :</p>"
-            },
-            {
-              "kind": "oraison",
-              "html": "« 2. Les prêtres et les fidèles sont tenus à s’abstenir, pendant trois heures, d’aliments solides et de boissons alcoolisées, pendant une heure de boissons non alcoolisées, respectivement avant la Messe ou la Sainte communion : l’eau pure ne rompt pas le jeûne. (...) <br><br>4. Les malades, même s’ils ne sont pas alités, peuvent prendre des boissons non alcoolisées et de véritables remèdes, aussi bien solides que liquides, respectivement avant la Messe ou la Sainte communion, sans limites de temps. <br><br>Toutefois, nous exhortons vivement les prêtres et les fidèles qui sont en mesure de le faire, d’observer, avant la Messe ou la Sainte communion, l’antique et vénérable forme du jeûne eucharistique »,",
-              "cite": "Pie XII, Motu proprio Sacram communionem, 19 mars 1957"
-            },
-            {
-              "kind": "intro",
-              "html": "<p>C’est-à-dire le jeûne naturel observé depuis minuit.</p>"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "roman": "III",
-      "title": "Les indulgences",
-      "subtitle": "D’après l’Enchiridion Indulgentiarum Romain du 16 juillet 1999",
-      "sections": [
-        {
-          "n": 1,
-          "title": "Normes générales sur les indulgences",
-          "blocks": [
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 1,
-                  "html": "L’indulgence est la remise devant Dieu de la peine temporelle due pour les péchés déjà effacés quant à la faute, que le fidèle, bien disposé et à certaines conditions déterminées, reçoit par l’intervention de l’Église qui, en tant que ministre de la rédemption, distribue et applique avec autorité le trésor des satisfactions du Christ et des Saints.",
-                  "label": "n. 1"
-                },
-                {
-                  "n": 2,
-                  "html": "L’indulgence est partielle ou plénière selon qu’elle libère en partie ou totalement de la peine temporelle due pour les péchés.",
-                  "label": "n. 2"
-                },
-                {
-                  "n": 3,
-                  "html": "Tout fidèle peut gagner des indulgences partielles ou plénières pour lui-même, ou les appliquer aux défunts par mode de suffrage.",
-                  "label": "n. 3"
-                },
-                {
-                  "n": 4,
-                  "html": "Au fidèle qui, au moins le Cœur contrit, accomplit une œuvre à laquelle est attachée une indulgence partielle, est appliquée par l’Église la remise d’une peine temporelle de même valeur que celle qu’il obtient déjà par son œuvre.",
-                  "label": "n. 4"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "n": 2,
-          "title": "Conditions requises pour gagner les indulgences",
-          "blocks": [
-            {
-              "kind": "h",
-              "text": "I. Conditions générales"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 17,
-                  "html": "<strong>§ 1.</strong> Pour avoir capacité à gagner des indulgences, il faut être baptisé, non excommunié et en état de grâce, au moins à la fin des œuvres prescrites.<br><strong>§ 2.</strong> Cependant, pour qu’un sujet capable gagne des indulgences, il doit avoir l’intention au moins générale de les acquérir, et accomplir les œuvres imposées dans le temps fixé et de la manière prescrite, selon la teneur de la concession.",
-                  "label": "n. 17"
-                },
-                {
-                  "n": 18,
-                  "html": "<strong>§ 1.</strong> L’indulgence plénière ne peut être acquise qu’une seule fois par jour ; l’indulgence partielle peut l’être plusieurs fois.",
-                  "label": "n. 18"
-                }
-              ]
-            },
-            {
-              "kind": "h",
-              "text": "II. Conditions pour l’indulgence plénière"
-            },
-            {
-              "kind": "ol",
-              "items": [
-                {
-                  "n": 19,
-                  "html": "L’œuvre prescrite pour acquérir l’indulgence plénière attachée à une Église ou à un oratoire consiste à y faire une pieuse Visite, au cours de laquelle on récite l’oraison dominicale et le symbole de la Foi (Pater et Credo), à moins que la concession n’en dispose autrement.",
-                  "label": "n. 19"
-                },
-                {
-                  "n": 20,
-                  "html": "<strong>§ 1.</strong> Pour gagner l’indulgence plénière, en plus d’exclure toute affection au péché, même véniel, il est requis d’accomplir l’œuvre indulgenciée et de remplir les trois conditions : confession sacramentelle, communion eucharistique et prière aux intentions du Souverain Pontife.<br><strong>§ 2.</strong> Avec une seule confession sacramentelle, on peut acquérir plusieurs indulgences plénières ; mais avec une seule communion eucharistique et une seule prière aux intentions du Souverain Pontife, on n’acquiert qu’une seule indulgence plénière.<br><strong>§ 3.</strong> Les trois conditions peuvent être remplies plusieurs jours avant ou après l’accomplissement de l’œuvre prescrite ; cependant, il convient de recevoir la communion et de prier aux intentions du Souverain Pontife le jour même où l’on accomplit l’œuvre.<br><strong>§ 4.</strong> S’il manque la pleine disposition, ou si l’œuvre requise n’est pas entièrement exécutée et les trois conditions susdites ne sont pas remplies, l’indulgence sera seulement partielle.<br><strong>§ 5.</strong> La condition de prier aux intentions du Souverain Pontife est remplie si l’on récite à son intention un Pater et un Ave ; cependant les fidèles sont libres de réciter toute autre prière selon la piété et dévotion de chacun.",
-                  "label": "n. 20"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "n": 3,
-          "title": "Quatre concessions générales concernant les indulgences partielles",
-          "blocks": [
-            {
-              "kind": "intro",
-              "html": "<p>Sont proposées avant tout quatre concessions d’indulgences invitant le fidèle à pénétrer d’esprit chrétien les actions qui sont en quelque sorte la trame de sa Vie quotidienne, et à chercher la perfection de la charité dans ses occupations ordinaires.</p>"
-            },
-            {
-              "kind": "concession",
-              "n": 1,
-              "html": "Une indulgence partielle est accordée au fidèle qui, accomplissant ses devoirs et supportant les adversités de la Vie, élève son âme vers Dieu avec une humble confiance, en ajoutant, ne serait-ce que mentalement, une pieuse invocation.",
-              "note": "Par cette première concession, les fidèles sont conduits en quelque sorte à mettre en pratique le commandement du Christ : « Il est nécessaire de prier sans cesse et de ne pas se décourager » ; en même temps ils sont exhortés à s’acquitter de leurs devoirs d’une façon telle qu’ils gardent et accroissent leur union au Christ."
-            },
-            {
-              "kind": "concession",
-              "n": 2,
-              "html": "Une indulgence partielle est accordée au fidèle qui, en esprit de Foi et avec un Cœur miséricordieux, s’emploie, par sa personne ou par ses biens, au service de ses frères dans le besoin.",
-              "note": "Par la concession de cette indulgence, le fidèle est engagé, en suivant l’exemple et le commandement du Christ, à accomplir plus fréquemment des œuvres de charité et de miséricorde."
-            },
-            {
-              "kind": "concession",
-              "n": 3,
-              "html": "Une indulgence partielle est accordée au fidèle qui, en esprit de pénitence, s’abstient spontanément de quelque chose de licite qui lui est agréable.",
-              "note": "Cette concession convient particulièrement à notre époque en laquelle, en complément de la loi, d’ailleurs très douce, sur l’abstinence de viande et le jeûne, il convient tout à fait que les fidèles soient incités à exercer d’eux-mêmes la pénitence."
-            },
-            {
-              "kind": "concession",
-              "n": 4,
-              "html": "Une indulgence partielle est accordée au fidèle qui, de façon spontanée, rend ouvertement un témoignage de Foi devant les autres en des circonstances particulières de la Vie quotidienne.",
-              "note": "Cette concession incite le fidèle à professer ouvertement sa Foi devant les autres, pour la gloire de Dieu et l’édification de l’Église."
-            }
-          ]
-        },
-        {
-          "n": 4,
-          "title": "Liste des indulgences plénières",
-          "blocks": [
-            {
-              "kind": "h",
-              "text": "I. Indulgences plénières que l’on peut obtenir chaque jour"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "Adoration eucharistique, pendant au moins une demi-heure (conc. 7 § 1, 1)"
-                },
-                {
-                  "html": "Exercice pieux du Chemin de Croix (conc. 13, 2)"
-                },
-                {
-                  "html": "Lecture ou écoute de la Sainte Écriture, pendant au moins une demi-heure (conc. 30)"
-                },
-                {
-                  "html": "Prières des églises orientales : Acathiste ou Paraclisis (conc. 23 § 1)",
-                  "note": "Récitation de l’hymne <em>Acathiste</em> ou de l’office <em>Paraclisis</em> dans une Église ou un oratoire, ou en famille, dans une communauté religieuse, au sein d’une association de fidèles et généralement quand on se rassemble pour une fin honnête."
-                },
-                {
-                  "html": "Rosaire marial (conc. 17 § 1)",
-                  "note": "Récitation du Rosaire dans une Église ou un oratoire, ou en famille, dans une communauté religieuse, au sein d’une association de fidèles et en général lorsque plusieurs se retrouvent pour une fin honnête.<br>a) Il suffit d’en réciter seulement le tiers ; mais les cinq dizaines doivent être récitées sans interruption ;<br>b) À la prière vocale doit s’ajouter la pieuse méditation des mystères."
-                },
-                {
-                  "html": "Visite en forme de pèlerinage aux basiliques Patriarcales de Rome (conc. 33 § 1, 1)",
-                  "note": "En y récitant le Pater et le Credo."
-                }
-              ]
-            },
-            {
-              "kind": "h",
-              "text": "II. Indulgences plénières accordées certains jours déterminés"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "1<sup>er</sup> janvier (conc. 26 § 1, 1)",
-                  "note": "Participation au chant ou à la récitation solennelle dans une Église ou un oratoire de l’hymne <em>Veni Creator</em>."
-                },
-                {
-                  "html": "Semaine pour l’unité des chrétiens (conc. 11 § 1)",
-                  "note": "Participation à quelque cérémonie."
-                },
-                {
-                  "html": "22 février : Chaire de Saint Pierre, Apôtre (conc. 33 § 1, 3)",
-                  "note": "Visite d’une Église cathédrale en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "Tous les vendredis de Carême (conc. 8 § 1, 2)",
-                  "note": "Récitation de la prière <em>Ô bon et très doux Jésus</em> devant la représentation de Jésus-Christ crucifié."
-                },
-                {
-                  "html": "Jeudi Saint (conc. 7 § 1, 2)",
-                  "note": "Récitation pieuse du <em>Tantum ergo</em> au cours de la déposition solennelle du Saint-Sacrement à l’issue de la Messe « <em>in Cena Domini</em> »."
-                },
-                {
-                  "html": "Vendredi Saint (conc. 13 § 1)",
-                  "note": "Participation pieuse à l’adoration de la Croix au cours de l’office liturgique solennel."
-                },
-                {
-                  "html": "Samedi Saint (conc. 28 § 1)",
-                  "note": "Renouvellement des promesses du Baptême lors de la célébration de la Vigile pascale."
-                },
-                {
-                  "html": "Solennité de Pentecôte (conc. 26 § 1, 1)",
-                  "note": "Participation au chant ou à la récitation solennelle dans une Église ou un oratoire de l’hymne <em>Veni Creator</em>."
-                },
-                {
-                  "html": "Solennité du Corps et du Sang du Christ (conc. 7 § 1, 3)",
-                  "note": "Participation à la procession eucharistique solennelle."
-                },
-                {
-                  "html": "Solennité du Sacré-Cœur de Jésus (conc. 3)",
-                  "note": "Récitation publique de l’acte de réparation <em>Iesu dulcissime</em>."
-                },
-                {
-                  "html": "Solennité des Saints Apôtres Pierre et Paul (conc. 14 § 1 ; 33 § 1, 2 et 3)",
-                  "note": "- Utilisation en esprit de dévotion d’un objet de piété (crucifix ou croix, chapelet, scapulaire ou médaille) bénit par le Souverain Pontife ou par tout autre évêque, en y ajoutant une formule légitime de profession de Foi.<br>- Visite d’une des quatre basiliques patriarcales de Rome, d’une basilique mineure ou d’une Église cathédrale, en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "2 août (conc. 33 § 1, 2, 3, 5) : indulgence de la « Portioncule »",
-                  "note": "Visite d’une des quatre basiliques patriarcales de Rome, d’une basilique mineure, d’une Église cathédrale ou de l’Église paroissiale, en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "Solennité du Christ-Roi (conc. 2)",
-                  "note": "Récitation publique de l’acte de consécration du genre humain au Christ-Roi <em>Iesu dulcissime, Redemptor</em>."
-                },
-                {
-                  "html": "Tous les jours du 1<sup>er</sup> au 8 novembre (conc. 29 § 1, 1)",
-                  "note": "Visite d’un cimetière en priant pour les défunts, ne serait-ce que mentalement. Indulgence applicable seulement aux âmes du purgatoire."
-                },
-                {
-                  "html": "Commémoration de tous les fidèles défunts (conc. 29 § 1, 2)",
-                  "note": "Visite d’une Église ou d’un oratoire en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "9 novembre : dédicace de l’archibasilique du très Saint Sauveur au Latran (conc. 33 § 1, 3)",
-                  "note": "Visite d’une Église cathédrale en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "31 décembre (conc. 26 § 1, 2)",
-                  "note": "Participation au chant ou à la récitation solennelle dans une Église ou un oratoire de l’hymne <em>Te Deum</em>."
-                }
-              ]
-            },
-            {
-              "kind": "h",
-              "text": "III. Indulgences plénières accordées en des circonstances particulières"
-            },
-            {
-              "kind": "ul",
-              "items": [
-                {
-                  "html": "À l’article de la mort (conc. 12)",
-                  "note": "Réception de la bénédiction apostolique administrée par le prêtre.<br>Si le prêtre ne peut être présent, notre Sainte Mère l’Église concède avec bonté à ce fidèle l’indulgence plénière à l’article de la mort, pourvu qu’il soit bien disposé et qu’il ait récité habituellement quelques prières durant sa Vie ; dans ce cas l’Église supplée aux trois conditions habituelles requises pour l’indulgence plénière. Pour acquérir cette indulgence plénière, il est recommandé d’utiliser un crucifix ou une croix.<br>Le fidèle peut gagner cette indulgence plénière « <em>in articulo mortis</em> » même si, ce jour-là, il a déjà gagné une autre indulgence plénière."
-                },
-                {
-                  "html": "Bénédiction papale <em>urbi et orbi</em> (conc. 4)"
-                },
-                {
-                  "html": "Célébrations jubilaires des ordinations (conc. 27 § 2)",
-                  "note": "- Aux prêtres qui célèbrent à l’occasion du 25<sup>e</sup>, 50<sup>e</sup>, 60<sup>e</sup> et 70<sup>e</sup> anniversaire de leur ordination sacerdotale, et qui auront renouvelé devant Dieu la résolution d’accomplir fidèlement les devoirs de leur vocation ;<br>- Aux évêques qui lors des 25<sup>e</sup>, 40<sup>e</sup>, et 50<sup>e</sup> anniversaires de leur sacre auront renouvelé devant Dieu la résolution d’accomplir fidèlement les devoirs de leur état ;<br>- Aux fidèles qui assistent à la Messe jubilaire."
-                },
-                {
-                  "html": "Célébration liturgique du Fondateur d’instituts de Vie consacrée et de Sociétés de Vie apostolique (conc. 33 § 1, 7)",
-                  "note": "Visite d’une Église ou d’un oratoire de l’Institut ou de la Société, en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "Congrès eucharistique (conc. 7 § 1, 4)",
-                  "note": "Assistance à la cérémonie de clôture."
-                },
-                {
-                  "html": "Exercices spirituels ou retraite spirituelle (conc. 10 § 1)",
-                  "note": "Au fidèle qui s’y consacre au moins trois jours entiers."
-                },
-                {
-                  "html": "Jour anniversaire de son baptême (conc. 28 § 1)",
-                  "note": "Renouvellement des promesses du Baptême selon une formule légitimement approuvée."
-                },
-                {
-                  "html": "Jour de la consécration de la famille au Sacré-Cœur de Jésus ou à la Sainte Famille (conc. 1)"
-                },
-                {
-                  "html": "Jour de la consécration d’une Église ou d’un autel (conc. 33 § 1, 6)",
-                  "note": "Visite de l’Église, en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "Jour fixé pour une Église de « Station » (conc. 33 § 2)",
-                  "note": "Participation aux offices dans cette Église."
-                },
-                {
-                  "html": "Journée universellement dédiée à célébrer quelque fin religieuse (conc. 5)",
-                  "note": "Participation à cette célébration."
-                },
-                {
-                  "html": "Missions Sacrées (conc. 16 § 1)",
-                  "note": "Assistance à la clôture solennelle d’une Mission sacrée après avoir écouté quelques prédications."
-                },
-                {
-                  "html": "Pèlerinage (conc. 33 § 1, 1, 3 ou 4)",
-                  "note": "Visite d’une des quatre basiliques patriarcales de Rome en y récitant le Pater et le Credo.<br>Participation à un pèlerinage collectif dans un sanctuaire constitué par l’autorité compétente."
-                },
-                {
-                  "html": "Première Communion (conc. 8 § 1, 1)",
-                  "note": "Réception pour la première fois de la Sainte Eucharistie ou assistance à la Première Communion d’autres personnes."
-                },
-                {
-                  "html": "Première Messe (conc. 27 § 1)",
-                  "note": "Au prêtre qui célèbre sa Première Messe en présence de peuple au jour fixé ; aux fidèles qui assistent à cette Messe."
-                },
-                {
-                  "html": "Solennité du titulaire d’une basilique mineure, d’une Église cathédrale, d’un sanctuaire, d’une Église paroissiale (conc. 33 § 1, 2-5)",
-                  "note": "Visite de l’Église ou du sanctuaire, en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "Synode diocésain (conc. 31)",
-                  "note": "Visite de l’Église où se tient le Synode diocésain en y récitant le Pater et le Credo."
-                },
-                {
-                  "html": "Une fois par an, en un jour choisi librement (conc. 33 § 1, 2, 4)",
-                  "note": "Visite d’une basilique mineure ou d’un sanctuaire constitué par l’autorité compétente."
-                },
-                {
-                  "html": "Visite pastorale (conc. 32)",
-                  "note": "Assistance à un office présidé par le Visiteur."
-                }
-              ]
-            },
-            {
-              "kind": "prayer",
-              "title": "Prière pour gagner les indulgences partielles",
-              "html": "Divin Cœur de Jésus, je vous offre par le Cœur Immaculé de Marie, les prières, les œuvres et les souffrances de cette journée en réparation de nos offenses et à toutes les intentions pour lesquelles vous vous immolez continuellement sur l’autel. Je désire aussi gagner en ce jour toutes les indulgences que je puis."
-            }
-          ]
-        }
-      ]
-    }
-  ]
+	"corpus": "pius-x-petit",
+	"slug": "annee-liturgique",
+	"title": "L’année liturgique et la discipline ecclésiastique",
+	"kicker": "Appendice",
+	"chapters": [
+		{
+			"roman": "I",
+			"title": "L’année liturgique",
+			"subtitle": "D’après le code des rubriques du Bréviaire et du Missel Romain du 25 juillet 1960",
+			"sections": [
+				{
+					"n": 1,
+					"title": "Notions sur les fêtes chrétiennes",
+					"blocks": [
+						{
+							"kind": "para",
+							"n": 1,
+							"html": "<p>Ce n’est pas seulement par la doctrine chrétienne et par l’Histoire Sainte, mais encore par ses fêtes, que l’Église nous rappelle et nous enseigne concrètement les vérités de la Foi et les meilleurs exemples des vertus chrétiennes.</p>"
+						},
+						{
+							"kind": "para",
+							"n": 2,
+							"html": "<p>Les fêtes ont été instituées pour rendre à Dieu en public, dans ses Saints temples, le culte suprême d’adoration, de louange, de remerciement, de réparation. Tout y a été admirablement disposé et adapté aux circonstances : les cérémonies, les paroles, les chants, l’ordonnance extérieure en tous ses détails. Ainsi, elles peuvent faire pénétrer profondément dans l’esprit les mystères, les vérités ou les faits que nous célébrons, et nous porter aux sentiments et aux actes qui y correspondent.</p><p>Si les fidèles étaient bien instruits de ces fêtes et les célébraient avec l’esprit voulu de l’Église en leur institution, on obtiendrait une rénovation et un accroissement notable de Foi, de piété et de connaissance religieuse. En conséquence, on aurait de la part des fidèles une Vie chrétienne plus forte et plus féconde en œuvres.</p>"
+						},
+						{
+							"kind": "para",
+							"n": 3,
+							"html": "<p>L’année entière est consacrée à Dieu. Il ne se passe point de jour sans que l’Église nous lise, à la Messe et à l’office, quelques extraits des Saintes Écritures qui sont l’œuvre de Dieu, sans qu’elle nous suggère, avec une merveilleuse variété, des formules appropriées de louanges et de prières au Seigneur, notre premier principe et notre dernière fin.</p><p>Elle nous rappelle les infinies perfections de Dieu, ses bienfaits immenses, sa loi Sainte.</p><p>Elle nous rapporte chaque jour, à l’évangile de la Messe, quelque miracle ou quelque enseignement de Notre Seigneur Jésus-Christ, qui est la Voie, la Vérité et la Vie, et qui, seul, a « Les paroles de la Vie éternelle ».</p><p>Mais comme nous ne sommes d’ordinaire obligés d’assister au Saint Sacrifice que les dimanches, la Sainte Église y a sagement réparti le Saint évangile et les écrits apostoliques. De la sorte, la Vie entière et la doctrine du Sauveur sont lues et expliquées aux fidèles durant l’année, formant Ainsi un vrai cours d’instruction religieuse chrétienne.</p>"
+						},
+						{
+							"kind": "para",
+							"n": 4,
+							"html": "<p>En outre, l’Église a institué des fêtes spéciales. Elle vénère, le premier dimanche après la Pentecôte, le mystère fondamental du christianisme, la très Sainte Trinité, à qui elle offre continuellement l’honneur, la gloire et le sacrifice.</p><p>Elle rappelle et célèbre les faits principaux de la Vie du Seigneur Ainsi que les mystères essentiels qui manifestent plus clairement son infinie miséricorde envers nous :</p>"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "Sa naissance à Noël ou fête de la Nativité de Notre-Seigneur (25 décembre) ;"
+								},
+								{
+									"html": "Sa Circoncision en l’octave de la Nativité (1<sup>er</sup> janvier) ;"
+								},
+								{
+									"html": "Sa manifestation à l’Épiphanie (6 janvier) ;"
+								},
+								{
+									"html": "Son baptême (13 janvier) ;"
+								},
+								{
+									"html": "Sa Transfiguration au Mont Thabor (6 août) ;"
+								},
+								{
+									"html": "Sa Passion et sa Mort le Vendredi Saint ;"
+								},
+								{
+									"html": "Sa glorieuse résurrection à Pâques ;"
+								},
+								{
+									"html": "Son Ascension triomphante ;"
+								},
+								{
+									"html": "L’envoi du Saint-Esprit sur l’Église à la Pentecôte ;"
+								},
+								{
+									"html": "La présence réelle de son Corps et de son Sang dans la très Sainte Eucharistie (Fête-Dieu ou Corpus Christi) le jeudi qui suit le I<sup>er</sup> dimanche après la Pentecôte ;"
+								},
+								{
+									"html": "Son Cœur infiniment miséricordieux, le vendredi qui suit le II<sup>e</sup> dimanche après la Pentecôte ;"
+								},
+								{
+									"html": "Son très Précieux Sang (le 1<sup>er</sup> juillet) ;"
+								},
+								{
+									"html": "Sa royauté sociale, à la fête de Notre Seigneur Jésus-Christ Roi, le dernier dimanche d’octobre."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p>La célébration des fêtes de Noël, de Pâques et de Pentecôte est prolongée pendant huit jours consécutifs, appelés octave. D’autre part, l’Église nous prépare aux deux premières par un temps de prière et de jeûne : l’Avent, qui précède Noël, et le Carême institué en mémoire des quarante jours de jeûne du Sauveur, et consacré d’une façon toute spéciale à la pénitence, à l’instruction catéchistique et à la prédication.</p><p>Cette préparation à Pâques est suivie d’une longue période joyeuse, appelée temps Pascal, en souvenir des quarante jours que Jésus-Christ glorieux a passés sur la terre après sa résurrection.</p>"
+						},
+						{
+							"kind": "para",
+							"n": 5,
+							"html": "<p>L’Église célèbre avec la plus grande solennité les privilèges singuliers de la très Sainte Vierge Marie, propres à elle seule comme Mère de Dieu :</p>"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "Son exemption du péché originel en la fête de l’Immaculée Conception (8 décembre) ;"
+								},
+								{
+									"html": "L’élévation immédiate de son corps virginal avec son âme dans la gloire céleste en la fête de l’Assomption (15 août)."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Outre sa Maternité divine (fêtée le 11 octobre), le peuple chrétien célèbre, avec grande joie, les événements les plus mémorables de sa Vie :</p>"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "Sa Nativité (8 septembre) ;"
+								},
+								{
+									"html": "L’Annonciation (25 mars) ;"
+								},
+								{
+									"html": "La Visitation (2 juillet) ;"
+								},
+								{
+									"html": "La Purification (2 février)."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Plusieurs jours lui ont été aussi consacrés pour commémorer d’autres mystères de sa Vie ou quelques-uns de ses bienfaits plus insignes :</p>"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "Notre-Dame des Sept Douleurs : le vendredi de la Passion de Notre-Seigneur et le 15 septembre ;"
+								},
+								{
+									"html": "Marie Reine (31 mai) ;"
+								},
+								{
+									"html": "Le Cœur immaculé de Marie (22 août) ;"
+								},
+								{
+									"html": "Le Saint Rosaire (7 octobre), solennisé le I<sup>er</sup> dimanche d’octobre."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Elle célèbre aussi d’autres fêtes particulières qui alimentent la piété des fidèles envers leur Mère du Ciel.</p>"
+						},
+						{
+							"kind": "para",
+							"n": 6,
+							"html": "<p>La gloire de tous les anges et de tous les Saints de l’Église triomphante nous est présentée en la fête de la Toussaint (1<sup>er</sup> novembre), afin qu’en nous réjouissant de leur triomphe, nous nous sentions portés à marcher sur leurs traces.</p><p>Le lendemain, comme pour donner une suite naturelle à la fête de tous les Saints, l’Église nous rappelle tous nos chers défunts du Purgatoire (Commémoration des fidèles défunts, 2 novembre), afin que nous les aidions par nos prières et qu’à la pensée de leurs souffrances nous nous sentions nous-mêmes stimulés à faire pénitence de nos péchés et à pratiquer toute sorte de bonnes œuvres.</p><p>Parmi le cortège des anges et Saints, l’Église ne célèbre avec une grande solennité, que les tout principaux :</p>"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "Saint Michel Archange en la fête de la dédicace (29 septembre) ;"
+								},
+								{
+									"html": "Saint Joseph, époux de la Vierge Marie, Confesseur, Patron de l’Église universelle (19 mars) ; et Saint Joseph, artisan (1<sup>er</sup> mai) ;"
+								},
+								{
+									"html": "Saint Jean-Baptiste, Précurseur de Notre-Seigneur, en la fête de sa Nativité (24 juin) ;"
+								},
+								{
+									"html": "Les Saints Pierre et Paul, Princes des Apôtres (29 juin)."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Non contente d’honorer presque chaque jour un Saint en particulier, l’Église rappelle quotidiennement par son Martyrologe les noms des autres Saints et bienheureux dont on célèbre la mémoire dans les différentes églises particulières.</p><p>Elle nous montre Ainsi qu’elle les voudrait toujours présents à la mémoire des fidèles, honorés et invoqués par eux pour leur édification, leur soutien et leur encouragement.</p>"
+						},
+						{
+							"kind": "para",
+							"n": 7,
+							"html": "<p>Certains jours enfin méritent particulièrement, de notre part, attention et observance. Ce sont :</p>"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "Les féries de l’Avent et du Carême consacrées au jeûne et à la pénitence ;"
+								},
+								{
+									"html": "Les vigiles instituées comme préparation aux plus grandes fêtes ;"
+								},
+								{
+									"html": "Les Quatre-Temps, les Litanies majeures (en la fête de Saint Marc, le 25 avril) et les Litanies mineures ou rogations (les trois jours précédant l’Ascension) pour demander la grâce d’avoir de bons prêtres et la conservation des fruits de la terre ;"
+								},
+								{
+									"html": "Le Triduum Sacré ou trois derniers jours de la Semaine Sainte, tout spécialement consacré à nous représenter, dans la forme la plus vive, les atroces souffrances et la mort ignominieuse que l’Homme-Dieu supporta pour nous racheter, nous, indignes pécheurs, de l’esclavage de Satan et de la mort."
+								}
+							]
+						},
+						{
+							"kind": "para",
+							"n": 8,
+							"html": "<p>Que tout bon chrétien s’efforce donc, s’aidant de la prédication et de quelque livre approprié, de comprendre et de faire sien l’esprit de chacune de ces fêtes.</p><p>Qu’il connaisse l’objet et la fin spéciale de la fête, médite la Vérité, la vertu, le prodige, le bienfait qui nous y est particulièrement rappelé.</p><p>Qu’il cherche enfin à en tirer le meilleur profit pour son âme.</p><p>Par ce moyen, il connaîtra mieux et aimera avec plus de ferveur Dieu, Notre Seigneur Jésus-Christ, la très Sainte Vierge, les anges et les Saints, et il sera porté à mettre en pratique leurs exemples et leurs enseignements.</p><p>Il s’attachera avec affection à la liturgie sacrée, à la prédication et à l’Église, et il tâchera de communiquer aussi aux autres ce goût et cet amour.</p><p>Toute fête sera dès lors pour lui un jour de Dieu, une vraie fête qui réjouira son âme, la restaurera, la retrempera, la remplira d’une nouvelle vigueur pour porter les souffrances et les luttes quotidiennes de toute la Semaine.</p>"
+						}
+					]
+				},
+				{
+					"n": 2,
+					"title": "Les temps de l’année liturgique",
+					"blocks": [
+						{
+							"kind": "ol_roman",
+							"items": [
+								{
+									"roman": "I",
+									"html": "Le temps de l’<em>Avent</em>, du I<sup>er</sup> dimanche de l’Avent à la vigile de Noël."
+								},
+								{
+									"roman": "II",
+									"html": "Le temps de la <em>Naissance du Christ</em>, de Noël au 13 janvier, qui comprend les temps de Noël et de l’Épiphanie."
+								},
+								{
+									"roman": "III",
+									"html": "Le temps de la <em>Septuagésime</em>, qui inclut les dimanches de Septuagésime, de Sexagésime et de Quinquagésime."
+								},
+								{
+									"roman": "IV",
+									"html": "Le temps du <em>Carême</em>, du mercredi des Cendres au Samedi Saint, qui comprend les temps de la Quadragésime et de la Passion."
+								},
+								{
+									"roman": "V",
+									"html": "Le temps <em>Pascal</em>, du dimanche de la résurrection au samedi de la Pentecôte, qui regroupe les temps de Pâques, de l’Ascension et l’octave de la Pentecôte."
+								},
+								{
+									"roman": "VI",
+									"html": "Le temps de l’<em>année</em> ou temps « <em>per annum</em> », du 14 janvier au samedi précédant le dimanche de la Septuagésime, et de la fête de la Sainte Trinité au samedi précédant le I<sup>er</sup> dimanche de l’Avent."
+								}
+							]
+						},
+						{
+							"kind": "oraison",
+							"html": "Ô Dieu, qui chaque année, nous réjouissez en la solennité de la Résurrection du Seigneur, faites, dans votre bonté, qu’au moyen de ces fêtes que nous célébrons dans le temps, nous méritions d’arriver aux joies éternelles.",
+							"cite": "Oraison du mercredi de Pâques"
+						},
+						{
+							"kind": "oraison",
+							"html": "Nous vous en supplions, Seigneur, donnez à vos fidèles de ressentir toujours de la joie en vénérant vos Saints et d’être toujours assistés de leur prière. Par Jésus-Christ, votre Fils, Notre Seigneur. Ainsi soit-il.",
+							"cite": "Postcommunion de la Messe de saint Damase, 11 décembre"
+						}
+					]
+				}
+			]
+		},
+		{
+			"roman": "II",
+			"title": "La discipline ecclésiastique",
+			"sections": [
+				{
+					"n": 1,
+					"title": "Les jours de fêtes d’obligation",
+					"blocks": [
+						{
+							"kind": "h",
+							"text": "I. Dans l’Église Universelle"
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Le dimanche doit être observé comme le principal jour de fête de précepte. Ce jour-là sont célébrées plusieurs fêtes de I<sup>ère</sup> classe dans l’Église universelle : Pâques ou Fête de la résurrection, la Pentecôte et la Fête de la très Sainte Trinité.</p><p>De plus, l’Église universelle célèbre dans l’année dix fêtes de précepte.</p>"
+						},
+						{
+							"kind": "intro",
+							"html": "<p><em>Cinq fêtes en l’honneur de Notre Seigneur Jésus-Christ :</em></p>"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 1,
+									"html": "La Nativité de Notre Seigneur Jésus-Christ (25 décembre) ;"
+								},
+								{
+									"n": 2,
+									"html": "La Circoncision en l’octave de la Nativité (1<sup>er</sup> janvier) ;"
+								},
+								{
+									"n": 3,
+									"html": "L’Épiphanie (6 janvier) ;"
+								},
+								{
+									"n": 4,
+									"html": "L’Ascension (quarante jours après Pâques) ;"
+								},
+								{
+									"n": 5,
+									"html": "La Fête-Dieu ou Fête du très Saint Corps du Christ (jeudi qui suit le I<sup>er</sup> dimanche après la Pentecôte)."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p><em>Deux fêtes en l’honneur de la très Sainte Vierge Marie :</em></p>"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 6,
+									"html": "L’Immaculée Conception (8 décembre) ;"
+								},
+								{
+									"n": 7,
+									"html": "L’Assomption (15 août)."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p><em>Trois fêtes en l’honneur des Saints :</em></p>"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 8,
+									"html": "Saint Joseph (19 mars) ;"
+								},
+								{
+									"n": 9,
+									"html": "Les Saints Apôtres Pierre et Paul (29 juin) ;"
+								},
+								{
+									"n": 10,
+									"html": "La Toussaint (1<sup>er</sup> novembre)."
+								}
+							]
+						},
+						{
+							"kind": "h",
+							"text": "II. En France"
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Par décret du cardinal Caprara, concédé à Napoléon en 1802, les fêtes d’obligation en vigueur en France ont été restreintes au nombre de quatre :</p>"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 1,
+									"html": "La Nativité de Notre Seigneur Jésus-Christ (25 décembre) ;"
+								},
+								{
+									"n": 2,
+									"html": "L’Ascension (quarante jours après Pâques) ;"
+								},
+								{
+									"n": 3,
+									"html": "L’Assomption (15 août) ;"
+								},
+								{
+									"n": 4,
+									"html": "La Toussaint (1<sup>er</sup> novembre)."
+								}
+							]
+						},
+						{
+							"kind": "intro",
+							"html": "<p>L’Épiphanie, la Fête-Dieu et la fête des Saints Apôtres Pierre et Paul, quant à elles, sont solennisées le dimanche qui suit leur célébration.</p>"
+						}
+					]
+				},
+				{
+					"n": 2,
+					"title": "Les jours d’abstinence et de jeûne",
+					"blocks": [
+						{
+							"kind": "h",
+							"text": "I. Jours d’abstinence de viande"
+						},
+						{
+							"kind": "intro",
+							"html": "<p>L’abstinence de viande sera observée chaque vendredi de l’année, (à moins que ne soit célébrée ce jour-là une fête chômée de l’Église universelle) et plus gravement les jours de jeûne : le mercredi des Cendres et le Vendredi Saint.</p>"
+						},
+						{
+							"kind": "h",
+							"text": "II. Jours de jeûne"
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Le jeûne est à observer :</p>"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 1,
+									"html": "Le mercredi des Cendres ;"
+								},
+								{
+									"n": 2,
+									"html": "Le Vendredi Saint."
+								}
+							]
+						},
+						{
+							"kind": "h",
+							"text": "III. Pratique traditionnelle de l’Église"
+						},
+						{
+							"kind": "intro",
+							"html": "<p>Selon la tradition multi-séculaire, en vigueur dans l’Église jusqu’au XX<sup>e</sup> siècle, les fidèles sont vivement encouragés à observer le jeûne et l’abstinence :</p>"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 1,
+									"html": "Les vendredis de Carême, voire, pour ceux qui le peuvent, tous les jours de Semaine du Carême ;"
+								},
+								{
+									"n": 2,
+									"html": "Les mercredis, vendredis et samedis des Quatre-Temps :",
+									"sub": [
+										"De l’Avent, dans la troisième Semaine,",
+										"De la Quadragésime, dans la première Semaine de Carême,",
+										"De la Pentecôte, pendant l’octave,",
+										"De septembre, dans la troisième Semaine de ce mois ;"
+									]
+								},
+								{
+									"n": 3,
+									"html": "Les quatre vigiles de Noël, de la Pentecôte, de la Toussaint et de l’Immaculée Conception."
+								}
+							]
+						}
+					]
+				},
+				{
+					"n": 3,
+					"title": "Le jeûne eucharistique",
+					"blocks": [
+						{
+							"kind": "intro",
+							"html": "<p>Dès l’époque la plus ancienne, l’Église imposa le jeûne avant de recevoir l’Eucharistie et se montra sévère dans l’application de cette discipline. Les motifs ont déjà été exprimés par Saint Paul. L’abstention de nourriture et de boisson convient au profond respect que nous devons avoir envers la Majesté suprême de Jésus-Christ avant de le recevoir sous les voiles de l’Eucharistie. Ce jeûne fut traditionnellement observé depuis minuit. Pie XII atténua la rigueur de la loi et réduisit le temps du jeûne à trois heures pour faciliter aux fidèles un accès fréquent à la table eucharistique.</p><p>Par la suite, la discipline fut considérablement amoindrie, au point d’avoir été réduite à une heure (Code 1983). Cependant, de par la nature même des choses, une heure n’est pas un temps suffisant pour permettre la digestion, ni pour parler véritablement de « Jeûne ». Si donc l’obligation légale n’exige pas davantage, l’obligation morale de droit naturel, quant à elle, demeure.</p><p>C’est pourquoi les fidèles sont vivement encouragés à suivre les prescriptions suivantes du pape Pie XII publiées dans son Motu proprio <em>Sacram communionem</em> du 19 mars 1957 :</p>"
+						},
+						{
+							"kind": "oraison",
+							"html": "« 2. Les prêtres et les fidèles sont tenus à s’abstenir, pendant trois heures, d’aliments solides et de boissons alcoolisées, pendant une heure de boissons non alcoolisées, respectivement avant la Messe ou la Sainte communion : l’eau pure ne rompt pas le jeûne. (...) <br><br>4. Les malades, même s’ils ne sont pas alités, peuvent prendre des boissons non alcoolisées et de véritables remèdes, aussi bien solides que liquides, respectivement avant la Messe ou la Sainte communion, sans limites de temps. <br><br>Toutefois, nous exhortons vivement les prêtres et les fidèles qui sont en mesure de le faire, d’observer, avant la Messe ou la Sainte communion, l’antique et vénérable forme du jeûne eucharistique »,",
+							"cite": "Pie XII, Motu proprio Sacram communionem, 19 mars 1957"
+						},
+						{
+							"kind": "intro",
+							"html": "<p>C’est-à-dire le jeûne naturel observé depuis minuit.</p>"
+						}
+					]
+				}
+			]
+		},
+		{
+			"roman": "III",
+			"title": "Les indulgences",
+			"subtitle": "D’après l’Enchiridion Indulgentiarum Romain du 16 juillet 1999",
+			"sections": [
+				{
+					"n": 1,
+					"title": "Normes générales sur les indulgences",
+					"blocks": [
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 1,
+									"html": "L’indulgence est la remise devant Dieu de la peine temporelle due pour les péchés déjà effacés quant à la faute, que le fidèle, bien disposé et à certaines conditions déterminées, reçoit par l’intervention de l’Église qui, en tant que ministre de la rédemption, distribue et applique avec autorité le trésor des satisfactions du Christ et des Saints.",
+									"label": "n. 1"
+								},
+								{
+									"n": 2,
+									"html": "L’indulgence est partielle ou plénière selon qu’elle libère en partie ou totalement de la peine temporelle due pour les péchés.",
+									"label": "n. 2"
+								},
+								{
+									"n": 3,
+									"html": "Tout fidèle peut gagner des indulgences partielles ou plénières pour lui-même, ou les appliquer aux défunts par mode de suffrage.",
+									"label": "n. 3"
+								},
+								{
+									"n": 4,
+									"html": "Au fidèle qui, au moins le Cœur contrit, accomplit une œuvre à laquelle est attachée une indulgence partielle, est appliquée par l’Église la remise d’une peine temporelle de même valeur que celle qu’il obtient déjà par son œuvre.",
+									"label": "n. 4"
+								}
+							]
+						}
+					]
+				},
+				{
+					"n": 2,
+					"title": "Conditions requises pour gagner les indulgences",
+					"blocks": [
+						{
+							"kind": "h",
+							"text": "I. Conditions générales"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 17,
+									"html": "<strong>§ 1.</strong> Pour avoir capacité à gagner des indulgences, il faut être baptisé, non excommunié et en état de grâce, au moins à la fin des œuvres prescrites.<br><strong>§ 2.</strong> Cependant, pour qu’un sujet capable gagne des indulgences, il doit avoir l’intention au moins générale de les acquérir, et accomplir les œuvres imposées dans le temps fixé et de la manière prescrite, selon la teneur de la concession.",
+									"label": "n. 17"
+								},
+								{
+									"n": 18,
+									"html": "<strong>§ 1.</strong> L’indulgence plénière ne peut être acquise qu’une seule fois par jour ; l’indulgence partielle peut l’être plusieurs fois.",
+									"label": "n. 18"
+								}
+							]
+						},
+						{
+							"kind": "h",
+							"text": "II. Conditions pour l’indulgence plénière"
+						},
+						{
+							"kind": "ol",
+							"items": [
+								{
+									"n": 19,
+									"html": "L’œuvre prescrite pour acquérir l’indulgence plénière attachée à une Église ou à un oratoire consiste à y faire une pieuse Visite, au cours de laquelle on récite l’oraison dominicale et le symbole de la Foi (Pater et Credo), à moins que la concession n’en dispose autrement.",
+									"label": "n. 19"
+								},
+								{
+									"n": 20,
+									"html": "<strong>§ 1.</strong> Pour gagner l’indulgence plénière, en plus d’exclure toute affection au péché, même véniel, il est requis d’accomplir l’œuvre indulgenciée et de remplir les trois conditions : confession sacramentelle, communion eucharistique et prière aux intentions du Souverain Pontife.<br><strong>§ 2.</strong> Avec une seule confession sacramentelle, on peut acquérir plusieurs indulgences plénières ; mais avec une seule communion eucharistique et une seule prière aux intentions du Souverain Pontife, on n’acquiert qu’une seule indulgence plénière.<br><strong>§ 3.</strong> Les trois conditions peuvent être remplies plusieurs jours avant ou après l’accomplissement de l’œuvre prescrite ; cependant, il convient de recevoir la communion et de prier aux intentions du Souverain Pontife le jour même où l’on accomplit l’œuvre.<br><strong>§ 4.</strong> S’il manque la pleine disposition, ou si l’œuvre requise n’est pas entièrement exécutée et les trois conditions susdites ne sont pas remplies, l’indulgence sera seulement partielle.<br><strong>§ 5.</strong> La condition de prier aux intentions du Souverain Pontife est remplie si l’on récite à son intention un Pater et un Ave ; cependant les fidèles sont libres de réciter toute autre prière selon la piété et dévotion de chacun.",
+									"label": "n. 20"
+								}
+							]
+						}
+					]
+				},
+				{
+					"n": 3,
+					"title": "Quatre concessions générales concernant les indulgences partielles",
+					"blocks": [
+						{
+							"kind": "intro",
+							"html": "<p>Sont proposées avant tout quatre concessions d’indulgences invitant le fidèle à pénétrer d’esprit chrétien les actions qui sont en quelque sorte la trame de sa Vie quotidienne, et à chercher la perfection de la charité dans ses occupations ordinaires.</p>"
+						},
+						{
+							"kind": "concession",
+							"n": 1,
+							"html": "Une indulgence partielle est accordée au fidèle qui, accomplissant ses devoirs et supportant les adversités de la Vie, élève son âme vers Dieu avec une humble confiance, en ajoutant, ne serait-ce que mentalement, une pieuse invocation.",
+							"note": "Par cette première concession, les fidèles sont conduits en quelque sorte à mettre en pratique le commandement du Christ : « Il est nécessaire de prier sans cesse et de ne pas se décourager » ; en même temps ils sont exhortés à s’acquitter de leurs devoirs d’une façon telle qu’ils gardent et accroissent leur union au Christ."
+						},
+						{
+							"kind": "concession",
+							"n": 2,
+							"html": "Une indulgence partielle est accordée au fidèle qui, en esprit de Foi et avec un Cœur miséricordieux, s’emploie, par sa personne ou par ses biens, au service de ses frères dans le besoin.",
+							"note": "Par la concession de cette indulgence, le fidèle est engagé, en suivant l’exemple et le commandement du Christ, à accomplir plus fréquemment des œuvres de charité et de miséricorde."
+						},
+						{
+							"kind": "concession",
+							"n": 3,
+							"html": "Une indulgence partielle est accordée au fidèle qui, en esprit de pénitence, s’abstient spontanément de quelque chose de licite qui lui est agréable.",
+							"note": "Cette concession convient particulièrement à notre époque en laquelle, en complément de la loi, d’ailleurs très douce, sur l’abstinence de viande et le jeûne, il convient tout à fait que les fidèles soient incités à exercer d’eux-mêmes la pénitence."
+						},
+						{
+							"kind": "concession",
+							"n": 4,
+							"html": "Une indulgence partielle est accordée au fidèle qui, de façon spontanée, rend ouvertement un témoignage de Foi devant les autres en des circonstances particulières de la Vie quotidienne.",
+							"note": "Cette concession incite le fidèle à professer ouvertement sa Foi devant les autres, pour la gloire de Dieu et l’édification de l’Église."
+						}
+					]
+				},
+				{
+					"n": 4,
+					"title": "Liste des indulgences plénières",
+					"blocks": [
+						{
+							"kind": "h",
+							"text": "I. Indulgences plénières que l’on peut obtenir chaque jour"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "Adoration eucharistique, pendant au moins une demi-heure (conc. 7 § 1, 1)"
+								},
+								{
+									"html": "Exercice pieux du Chemin de Croix (conc. 13, 2)"
+								},
+								{
+									"html": "Lecture ou écoute de la Sainte Écriture, pendant au moins une demi-heure (conc. 30)"
+								},
+								{
+									"html": "Prières des églises orientales : Acathiste ou Paraclisis (conc. 23 § 1)",
+									"note": "Récitation de l’hymne <em>Acathiste</em> ou de l’office <em>Paraclisis</em> dans une Église ou un oratoire, ou en famille, dans une communauté religieuse, au sein d’une association de fidèles et généralement quand on se rassemble pour une fin honnête."
+								},
+								{
+									"html": "Rosaire marial (conc. 17 § 1)",
+									"note": "Récitation du Rosaire dans une Église ou un oratoire, ou en famille, dans une communauté religieuse, au sein d’une association de fidèles et en général lorsque plusieurs se retrouvent pour une fin honnête.<br>a) Il suffit d’en réciter seulement le tiers ; mais les cinq dizaines doivent être récitées sans interruption ;<br>b) À la prière vocale doit s’ajouter la pieuse méditation des mystères."
+								},
+								{
+									"html": "Visite en forme de pèlerinage aux basiliques Patriarcales de Rome (conc. 33 § 1, 1)",
+									"note": "En y récitant le Pater et le Credo."
+								}
+							]
+						},
+						{
+							"kind": "h",
+							"text": "II. Indulgences plénières accordées certains jours déterminés"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "1<sup>er</sup> janvier (conc. 26 § 1, 1)",
+									"note": "Participation au chant ou à la récitation solennelle dans une Église ou un oratoire de l’hymne <em>Veni Creator</em>."
+								},
+								{
+									"html": "Semaine pour l’unité des chrétiens (conc. 11 § 1)",
+									"note": "Participation à quelque cérémonie."
+								},
+								{
+									"html": "22 février : Chaire de Saint Pierre, Apôtre (conc. 33 § 1, 3)",
+									"note": "Visite d’une Église cathédrale en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "Tous les vendredis de Carême (conc. 8 § 1, 2)",
+									"note": "Récitation de la prière <em>Ô bon et très doux Jésus</em> devant la représentation de Jésus-Christ crucifié."
+								},
+								{
+									"html": "Jeudi Saint (conc. 7 § 1, 2)",
+									"note": "Récitation pieuse du <em>Tantum ergo</em> au cours de la déposition solennelle du Saint-Sacrement à l’issue de la Messe « <em>in Cena Domini</em> »."
+								},
+								{
+									"html": "Vendredi Saint (conc. 13 § 1)",
+									"note": "Participation pieuse à l’adoration de la Croix au cours de l’office liturgique solennel."
+								},
+								{
+									"html": "Samedi Saint (conc. 28 § 1)",
+									"note": "Renouvellement des promesses du Baptême lors de la célébration de la Vigile pascale."
+								},
+								{
+									"html": "Solennité de Pentecôte (conc. 26 § 1, 1)",
+									"note": "Participation au chant ou à la récitation solennelle dans une Église ou un oratoire de l’hymne <em>Veni Creator</em>."
+								},
+								{
+									"html": "Solennité du Corps et du Sang du Christ (conc. 7 § 1, 3)",
+									"note": "Participation à la procession eucharistique solennelle."
+								},
+								{
+									"html": "Solennité du Sacré-Cœur de Jésus (conc. 3)",
+									"note": "Récitation publique de l’acte de réparation <em>Iesu dulcissime</em>."
+								},
+								{
+									"html": "Solennité des Saints Apôtres Pierre et Paul (conc. 14 § 1 ; 33 § 1, 2 et 3)",
+									"note": "- Utilisation en esprit de dévotion d’un objet de piété (crucifix ou croix, chapelet, scapulaire ou médaille) bénit par le Souverain Pontife ou par tout autre évêque, en y ajoutant une formule légitime de profession de Foi.<br>- Visite d’une des quatre basiliques patriarcales de Rome, d’une basilique mineure ou d’une Église cathédrale, en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "2 août (conc. 33 § 1, 2, 3, 5) : indulgence de la « Portioncule »",
+									"note": "Visite d’une des quatre basiliques patriarcales de Rome, d’une basilique mineure, d’une Église cathédrale ou de l’Église paroissiale, en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "Solennité du Christ-Roi (conc. 2)",
+									"note": "Récitation publique de l’acte de consécration du genre humain au Christ-Roi <em>Iesu dulcissime, Redemptor</em>."
+								},
+								{
+									"html": "Tous les jours du 1<sup>er</sup> au 8 novembre (conc. 29 § 1, 1)",
+									"note": "Visite d’un cimetière en priant pour les défunts, ne serait-ce que mentalement. Indulgence applicable seulement aux âmes du purgatoire."
+								},
+								{
+									"html": "Commémoration de tous les fidèles défunts (conc. 29 § 1, 2)",
+									"note": "Visite d’une Église ou d’un oratoire en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "9 novembre : dédicace de l’archibasilique du très Saint Sauveur au Latran (conc. 33 § 1, 3)",
+									"note": "Visite d’une Église cathédrale en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "31 décembre (conc. 26 § 1, 2)",
+									"note": "Participation au chant ou à la récitation solennelle dans une Église ou un oratoire de l’hymne <em>Te Deum</em>."
+								}
+							]
+						},
+						{
+							"kind": "h",
+							"text": "III. Indulgences plénières accordées en des circonstances particulières"
+						},
+						{
+							"kind": "ul",
+							"items": [
+								{
+									"html": "À l’article de la mort (conc. 12)",
+									"note": "Réception de la bénédiction apostolique administrée par le prêtre.<br>Si le prêtre ne peut être présent, notre Sainte Mère l’Église concède avec bonté à ce fidèle l’indulgence plénière à l’article de la mort, pourvu qu’il soit bien disposé et qu’il ait récité habituellement quelques prières durant sa Vie ; dans ce cas l’Église supplée aux trois conditions habituelles requises pour l’indulgence plénière. Pour acquérir cette indulgence plénière, il est recommandé d’utiliser un crucifix ou une croix.<br>Le fidèle peut gagner cette indulgence plénière « <em>in articulo mortis</em> » même si, ce jour-là, il a déjà gagné une autre indulgence plénière."
+								},
+								{
+									"html": "Bénédiction papale <em>urbi et orbi</em> (conc. 4)"
+								},
+								{
+									"html": "Célébrations jubilaires des ordinations (conc. 27 § 2)",
+									"note": "- Aux prêtres qui célèbrent à l’occasion du 25<sup>e</sup>, 50<sup>e</sup>, 60<sup>e</sup> et 70<sup>e</sup> anniversaire de leur ordination sacerdotale, et qui auront renouvelé devant Dieu la résolution d’accomplir fidèlement les devoirs de leur vocation ;<br>- Aux évêques qui lors des 25<sup>e</sup>, 40<sup>e</sup>, et 50<sup>e</sup> anniversaires de leur sacre auront renouvelé devant Dieu la résolution d’accomplir fidèlement les devoirs de leur état ;<br>- Aux fidèles qui assistent à la Messe jubilaire."
+								},
+								{
+									"html": "Célébration liturgique du Fondateur d’instituts de Vie consacrée et de Sociétés de Vie apostolique (conc. 33 § 1, 7)",
+									"note": "Visite d’une Église ou d’un oratoire de l’Institut ou de la Société, en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "Congrès eucharistique (conc. 7 § 1, 4)",
+									"note": "Assistance à la cérémonie de clôture."
+								},
+								{
+									"html": "Exercices spirituels ou retraite spirituelle (conc. 10 § 1)",
+									"note": "Au fidèle qui s’y consacre au moins trois jours entiers."
+								},
+								{
+									"html": "Jour anniversaire de son baptême (conc. 28 § 1)",
+									"note": "Renouvellement des promesses du Baptême selon une formule légitimement approuvée."
+								},
+								{
+									"html": "Jour de la consécration de la famille au Sacré-Cœur de Jésus ou à la Sainte Famille (conc. 1)"
+								},
+								{
+									"html": "Jour de la consécration d’une Église ou d’un autel (conc. 33 § 1, 6)",
+									"note": "Visite de l’Église, en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "Jour fixé pour une Église de « Station » (conc. 33 § 2)",
+									"note": "Participation aux offices dans cette Église."
+								},
+								{
+									"html": "Journée universellement dédiée à célébrer quelque fin religieuse (conc. 5)",
+									"note": "Participation à cette célébration."
+								},
+								{
+									"html": "Missions Sacrées (conc. 16 § 1)",
+									"note": "Assistance à la clôture solennelle d’une Mission sacrée après avoir écouté quelques prédications."
+								},
+								{
+									"html": "Pèlerinage (conc. 33 § 1, 1, 3 ou 4)",
+									"note": "Visite d’une des quatre basiliques patriarcales de Rome en y récitant le Pater et le Credo.<br>Participation à un pèlerinage collectif dans un sanctuaire constitué par l’autorité compétente."
+								},
+								{
+									"html": "Première Communion (conc. 8 § 1, 1)",
+									"note": "Réception pour la première fois de la Sainte Eucharistie ou assistance à la Première Communion d’autres personnes."
+								},
+								{
+									"html": "Première Messe (conc. 27 § 1)",
+									"note": "Au prêtre qui célèbre sa Première Messe en présence de peuple au jour fixé ; aux fidèles qui assistent à cette Messe."
+								},
+								{
+									"html": "Solennité du titulaire d’une basilique mineure, d’une Église cathédrale, d’un sanctuaire, d’une Église paroissiale (conc. 33 § 1, 2-5)",
+									"note": "Visite de l’Église ou du sanctuaire, en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "Synode diocésain (conc. 31)",
+									"note": "Visite de l’Église où se tient le Synode diocésain en y récitant le Pater et le Credo."
+								},
+								{
+									"html": "Une fois par an, en un jour choisi librement (conc. 33 § 1, 2, 4)",
+									"note": "Visite d’une basilique mineure ou d’un sanctuaire constitué par l’autorité compétente."
+								},
+								{
+									"html": "Visite pastorale (conc. 32)",
+									"note": "Assistance à un office présidé par le Visiteur."
+								}
+							]
+						},
+						{
+							"kind": "prayer",
+							"title": "Prière pour gagner les indulgences partielles",
+							"html": "Divin Cœur de Jésus, je vous offre par le Cœur Immaculé de Marie, les prières, les œuvres et les souffrances de cette journée en réparation de nos offenses et à toutes les intentions pour lesquelles vous vous immolez continuellement sur l’autel. Je désire aussi gagner en ce jour toutes les indulgences que je puis."
+						}
+					]
+				}
+			]
+		}
+	]
 }
