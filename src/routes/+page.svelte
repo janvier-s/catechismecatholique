@@ -1,20 +1,29 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import type { PageData } from './$types';
+	import { frenchPunct } from '$lib/utils/typography';
 
 	let { data }: { data: PageData } = $props();
 
 	// The daily paragraph is a teaser, not the reader. Strip the inline sup
 	// markers (cccRef/bibleRef/docRef) so the prose reads as flowing text
 	// and remains plain, selectable HTML — no interactive buttons.
+	// Whitespace cleanup only collapses orphan space before clinging
+	// sentence punctuation (`,.)`); guillemets and high punctuation are
+	// re-spaced by frenchPunct (which re-inserts a NBSP).
 	function cleanTeaserHtml(html: string): string {
-		return html
-			.replace(/<sup\s[^>]*>[^<]*<\/sup>/gi, '')
-			.replace(/\s+([,.;:!?»)])/g, '$1')
-			.replace(/\s{2,}/g, ' ');
+		return frenchPunct(
+			html
+				.replace(/<sup\s[^>]*>[^<]*<\/sup>/gi, '')
+				.replace(/\s+([,.)])/g, '$1')
+				.replace(/\s{2,}/g, ' ')
+		);
 	}
 
 	const teaserHtml = $derived(data.paragraph ? cleanTeaserHtml(data.paragraph.text_html) : '');
+	const teaserCitations = $derived(
+		data.paragraph?.citations?.map((c) => cleanTeaserHtml(c.text_html)) ?? []
+	);
 
 	const jsonLdScript = $derived(
 		`<${'script'} type="application/ld+json">${JSON.stringify({
@@ -133,6 +142,9 @@
 					</a>
 					<div class="daily-text">
 						<div class="prose-teaser">{@html teaserHtml}</div>
+						{#each teaserCitations as cite (cite)}
+							<blockquote class="prose-teaser-citation">{@html cite}</blockquote>
+						{/each}
 					</div>
 				</div>
 			</section>
@@ -330,6 +342,19 @@
 	/* The Catechism HTML wraps the body in a <span>. Make it block-level so
 	   it can lay out as a paragraph and respect line-height. */
 	.prose-teaser :global(span) {
+		display: inline;
+	}
+	.prose-teaser-citation {
+		margin: 0.85rem 0 0;
+		padding-left: 1rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+		font-family: var(--font-body);
+		font-size: 0.92rem;
+		font-style: italic;
+		line-height: 1.7;
+		color: var(--color-subtle);
+	}
+	.prose-teaser-citation :global(span) {
 		display: inline;
 	}
 

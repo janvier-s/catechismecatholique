@@ -1011,7 +1011,7 @@
 	}
 	.panel-foot:hover .sommaire-arrow,
 	.panel-foot:focus-visible .sommaire-arrow {
-		transform: translateX(3px);
+		transform: translateX(4px);
 	}
 	/* Mobile fallback ------------------------------------------------- */
 	.catdrop-panel.is-mobile {
@@ -1119,12 +1119,12 @@
 		outline: none;
 	}
 	.sommaire-arrow {
-		font-family: var(--font-heading);
-		font-size: 0.85rem;
-		transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+		display: inline-block;
+		line-height: 1;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	.m-sommaire:hover .sommaire-arrow {
-		transform: translateX(3px);
+		transform: translateX(4px);
 	}
 
 	/* Reduced motion --------------------------------------------------- */

@@ -1,13 +1,22 @@
 /**
  * Inserts a non-breaking space before French high-punctuation marks
- * (:  ;  ?  !) in HTML text nodes. Tags are passed through untouched.
+ * (:  ;  ?  !) and inside guillemets (« X / X ») in HTML text nodes.
+ * Tags are passed through untouched.
+ *
+ * Guillemets always get a NBSP — even when the source had no whitespace
+ * (e.g. when an inline cross-ref/footnote marker between the word and `»`
+ * is hidden via CSS, eating the space the marker provided).
  */
 export function frenchPunct(html: string): string {
 	return html
 		.split(/(<[^>]*>)/)
-		.map((part, i) =>
+		.map((part, i) => {
 			// Even indices are text nodes; odd indices are HTML tags.
-			i % 2 === 0 ? part.replace(/ *([;:?!])/g, ' $1') : part
-		)
+			if (i % 2 !== 0) return part;
+			return part
+				.replace(/[  ]*([;:?!])/g, ' $1')
+				.replace(/«[  ]*/g, '« ')
+				.replace(/[  ]*»/g, ' »');
+		})
 		.join('');
 }
