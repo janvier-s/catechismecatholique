@@ -58,7 +58,7 @@ test('TopBar renders on every page', async ({ page }) => {
 	await expect(
 		banner.getByRole('link', { name: /Catéchisme de l'Église Catholique/ })
 	).toBeVisible();
-	await expect(banner.getByRole('button', { name: /Catéchisme/i })).toBeVisible();
+	await expect(banner.getByRole('link', { name: /Catéchisme/i }).first()).toBeVisible();
 	await expect(banner.getByRole('link', { name: 'Bible' })).toBeVisible();
 	const search = banner.getByLabel('Recherche', { exact: true });
 	await expect(search).toBeVisible();

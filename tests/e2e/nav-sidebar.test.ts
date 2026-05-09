@@ -35,7 +35,7 @@ test('Catéchisme dropdown opens with parts', async ({ page }) => {
 	// The dropdown also opens on mouseenter; hover deterministically opens
 	// the panel without the click-toggle quirk.
 	await page
-		.getByRole('button', { name: /Catéchisme/i })
+		.getByRole('link', { name: /Catéchisme/i })
 		.first()
 		.hover();
 	await expect(page.locator('#catechism-menu')).toBeVisible();
@@ -51,7 +51,7 @@ test('Catéchisme dropdown opens with parts', async ({ page }) => {
 test('Catéchisme dropdown cascades to chapters on hover', async ({ page }) => {
 	await page.goto('/');
 	await page
-		.getByRole('button', { name: /Catéchisme/i })
+		.getByRole('link', { name: /Catéchisme/i })
 		.first()
 		.hover();
 	await expect(page.locator('#catechism-menu')).toBeVisible();
