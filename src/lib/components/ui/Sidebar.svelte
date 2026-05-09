@@ -485,7 +485,7 @@
 						const sectionChildren: Item[] | undefined =
 							titled.length > 1
 								? titled.map(({ sec, si }) => ({
-										title: sec.title!,
+										title: sec.title!.replace(/^§\s*\d+\.\s*/, ''),
 										href: `${chHref}#s-${si}`
 									}))
 								: undefined;
@@ -529,7 +529,7 @@
 					children: showClusters
 						? f.clusters.map(
 								(c): Item => ({
-									title: c.theme,
+									title: c.theme.charAt(0).toUpperCase() + c.theme.slice(1),
 									href: `${baseHref}#c-${f.slug}-${c.i}`
 								})
 							)

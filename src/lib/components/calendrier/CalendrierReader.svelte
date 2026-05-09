@@ -89,6 +89,14 @@
 		await fetchParagraphs(key, cluster.paragraphs);
 	}
 
+	function capitalize(s: string): string {
+		return s.charAt(0).toUpperCase() + s.slice(1);
+	}
+
+	function stripNotes(html: string): string {
+		return html.replace(/\s*<sup[^>]*>[\s\S]*?<\/sup>/g, '');
+	}
+
 	async function toggleAllInFeast(feast: CalendrierFeast | CalendrierFixedFeast) {
 		const allOpen =
 			feast.clusters.length > 0 &&
@@ -145,7 +153,7 @@
 							aria-expanded={isOpen}
 						>
 							<span class="caret" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
-							<span class="cluster-theme">{cluster.theme}</span>
+							<span class="cluster-theme">{capitalize(cluster.theme)}</span>
 							<span class="cluster-refs">{cluster.refs}</span>
 						</button>
 					</h3>
@@ -159,7 +167,7 @@
 										<a class="par-num" href="/cec/{p.number}">§{p.number}</a>
 										<div class="par-text">
 											<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-											{@html p.text_html}
+											{@html stripNotes(p.text_html)}
 										</div>
 									</div>
 								{/each}

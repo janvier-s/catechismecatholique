@@ -31,7 +31,7 @@
 		}
 	];
 
-	const totalClusters = $derived(data.index.total_clusters);
+	const totalThemes = $derived(data.index.total_clusters);
 </script>
 
 <svelte:head>
@@ -50,12 +50,12 @@
 			Pour chaque dimanche et chaque grande fête du calendrier romain, les paragraphes du Catéchisme
 			à méditer&nbsp;: une lecture suivie de la doctrine catholique au rythme de la liturgie.
 			<br /><span class="hero-stat"
-				>{data.index.total_feasts} célébrations · {totalClusters} clusters de référence</span
+				>{data.index.total_feasts} fêtes · {totalThemes} thèmes de référence</span
 			>
 		</p>
 	</header>
 
-	<section class="years" aria-label="Les trois années liturgiques">
+	<div class="cards" aria-label="Les années liturgiques">
 		{#each YEARS as year, i (year.key)}
 			{@const stats = data.index.years[i]}
 			<a class="year-card" href="/calendrier/{year.key}">
@@ -64,17 +64,14 @@
 				<p class="year-lede">{year.lede}</p>
 				{#if stats}
 					<p class="year-stat">
-						{stats.total_feasts} célébrations · {stats.total_clusters} clusters
+						{stats.total_feasts} fêtes · {stats.total_clusters} thèmes
 					</p>
 				{/if}
 			</a>
 		{/each}
-	</section>
-
-	<section class="fixed" aria-labelledby="fixed-title">
 		<a class="fixed-card" href="/calendrier/solennites">
 			<span class="fixed-kicker">Solennités · dates fixes</span>
-			<h2 id="fixed-title" class="fixed-title">Les grandes solennités du calendrier</h2>
+			<h2 class="fixed-title">Les grandes solennités du calendrier</h2>
 			<p class="fixed-lede">
 				Saint Joseph, saint Pierre et saint Paul, l'Assomption, la Toussaint, l'Immaculée Conception
 				— les solennités principales avec leurs paragraphes du Catéchisme.
@@ -85,7 +82,7 @@
 				{/each}
 			</ul>
 		</a>
-	</section>
+	</div>
 </main>
 
 <style>
@@ -134,14 +131,13 @@
 		color: var(--color-muted);
 	}
 
-	.years {
+	.cards {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 1.25rem;
-		margin-bottom: 2rem;
 	}
 	@media (max-width: 760px) {
-		.years {
+		.cards {
 			grid-template-columns: 1fr;
 			gap: 1rem;
 		}
@@ -209,10 +205,8 @@
 		margin: 0.4rem 0 0;
 	}
 
-	.fixed {
-		margin-top: 0;
-	}
 	.fixed-card {
+		grid-column: 1 / -1;
 		padding: 1.75rem 1.75rem 1.5rem;
 	}
 	.fixed-title {
