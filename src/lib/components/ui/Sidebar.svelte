@@ -11,9 +11,12 @@
 		loadTrentStructure,
 		loadPiusXGrandStructure,
 		loadPiusXPetitStructure,
+		loadPiusXPetitLiturgicalAppendix,
+		loadPiusXPetitAppendix,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
+	import type { PiusXPetitLiturgicalAppendix, PiusXPetitAppendix } from '$lib/data/loaders';
 	import type {
 		Chapter,
 		ParagraphContext,
@@ -134,6 +137,40 @@
 		if (corpus !== 'pius-x-petit') return;
 		(async () => {
 			piusXPetitStructure = await loadPiusXPetitStructure();
+		})();
+	});
+
+	// Appendix outline (loaded on demand for the appendix pages so the sidebar
+	// shows the chapter/section outline of the page being read).
+	type PetitAppendixSlug = 'annee-liturgique' | 'histoire-revelation';
+	let piusXPetitAppendix: PiusXPetitLiturgicalAppendix | PiusXPetitAppendix | null = $state(null);
+	let piusXPetitAppendixSlug: PetitAppendixSlug | null = $state(null);
+
+	const activePetitAppendix = $derived.by((): PetitAppendixSlug | null => {
+		const m = page.url.pathname.match(/^\/petit-catechisme\/([^/]+)/);
+		const slug = m ? m[1] : null;
+		if (slug === 'annee-liturgique' || slug === 'histoire-revelation') return slug;
+		return null;
+	});
+
+	$effect(() => {
+		if (corpus !== 'pius-x-petit') return;
+		const slug = activePetitAppendix;
+		if (!slug) {
+			piusXPetitAppendix = null;
+			piusXPetitAppendixSlug = null;
+			return;
+		}
+		if (piusXPetitAppendixSlug === slug && piusXPetitAppendix) return;
+		(async () => {
+			const data =
+				slug === 'annee-liturgique'
+					? await loadPiusXPetitLiturgicalAppendix(slug)
+					: await loadPiusXPetitAppendix(slug);
+			if (activePetitAppendix === slug) {
+				piusXPetitAppendix = data;
+				piusXPetitAppendixSlug = slug;
+			}
 		})();
 	});
 
@@ -535,6 +572,37 @@
 			);
 		}
 		if (corpus === 'pius-x-petit') {
+			// Appendix outline takes precedence on appendix pages.
+			if (activePetitAppendix && piusXPetitAppendix) {
+				const baseHref = `/petit-catechisme/${activePetitAppendix}`;
+				if (activePetitAppendix === 'annee-liturgique') {
+					const ap = piusXPetitAppendix as PiusXPetitLiturgicalAppendix;
+					return ap.chapters.map(
+						(ch): Item => ({
+							title: ch.title,
+							kicker: `Chapitre ${ch.roman}`,
+							href: `${baseHref}#ch-${ch.roman}`,
+							children: ch.sections.map(
+								(sec): Item => ({
+									title: sec.title,
+									href: `${baseHref}#ch-${ch.roman}-s-${sec.n}`
+								})
+							)
+						})
+					);
+				}
+				if (activePetitAppendix === 'histoire-revelation') {
+					const ap = piusXPetitAppendix as PiusXPetitAppendix;
+					return ap.sections.map(
+						(sec): Item => ({
+							title: sec.title,
+							kicker: sec.roman,
+							href: `${baseHref}#s-${sec.roman}`
+						})
+					);
+				}
+			}
+
 			if (!piusXPetitStructure) return [];
 
 			function petitChapterItem(

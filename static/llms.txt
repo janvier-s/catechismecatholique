@@ -55,6 +55,30 @@ Chaque question Compendium est liée aux paragraphes CEC qu'elle cite ; ces lien
 
 ---
 
+## Petit Catéchisme de saint Pie X (1912)
+
+Édition française du *Petit Catéchisme de saint Pie X* (1912), catéchisme synthétique en questions-réponses approuvé par le pape Pie X. Trois parties principales précédées d'une introduction, complétées de trois annexes.
+
+- **Premières notions de la Foi chrétienne** (Q. 1–27) — introduction
+- **Partie 1 — Credo** (Q. 28–160) — principales vérités de la Foi
+- **Partie 2 — La morale chrétienne** (Q. 161 et suivantes) — commandements et préceptes
+- **Partie 3 — Les moyens de la grâce** — sacrements, prière, liturgie
+
+### Accès au Petit Catéchisme
+
+- Accueil : `https://catechismecatholique.fr/petit-catechisme`
+- Sommaire : `https://catechismecatholique.fr/petit-catechisme/sommaire`
+- Introduction : `/petit-catechisme/0-intro`
+- Parties : `/petit-catechisme/1-credo`, `/petit-catechisme/2-morale`, `/petit-catechisme/3-moyens-grace`
+
+### Annexes
+
+- Brève histoire de la Religion révélée : `/petit-catechisme/histoire-revelation`
+- Notions sur l'année liturgique : `/petit-catechisme/annee-liturgique`
+- Instructions pour les éducateurs : `/petit-catechisme/educateurs`
+
+---
+
 ## Annexe — Prières et Formules
 
 Textes liturgiques et formules de prière traditionnelles tirés de l'annexe du Compendium : Credo, Notre Père, Ave Maria, Gloria, Acte de contrition, Angélus, Rosaire, formules sacramentelles, prières en latin et en français.

@@ -19,7 +19,7 @@
 
 <main class="toc">
 	<header class="toc-head">
-		<p class="eyebrow">Table des matières</p>
+		<p class="eyebrow">Petit Catéchisme de saint Pie X</p>
 		<h1 class="title">Sommaire</h1>
 		<div class="ornament" aria-hidden="true">
 			<span class="rule rule-l"></span>
@@ -27,8 +27,7 @@
 			<span class="rule rule-r"></span>
 		</div>
 		<p class="lede">
-			Introduction, trois parties, {data.structure.total_qa} questions et réponses.<br />
-			Le Credo, la Morale, les Sacrements et la Prière.
+			Introduction, trois parties,<br />433 questions et réponses.
 		</p>
 		<div class="toc-actions">
 			<a class="index-link" href="/petit-catechisme">← Retour à l'accueil</a>
@@ -36,21 +35,14 @@
 	</header>
 
 	<div class="parts">
-		<article class="part">
+		<article class="part is-intro">
 			<header class="part-head">
-				<h2 class="part-title">{data.structure.intro.title}</h2>
+				<a class="part-title-link" href="/petit-catechisme/{data.structure.intro.part_slug}">
+					<h2 class="part-title">{data.structure.intro.title}</h2>
+					<span class="dotleader" aria-hidden="true"></span>
+					<span class="row-range">{fmtRange(data.structure.intro.qa_range)}</span>
+				</a>
 			</header>
-			<div class="chapters">
-				<div class="chapter-block">
-					<a class="row row-chapter" href="/petit-catechisme/{data.structure.intro.part_slug}">
-						<span class="row-label">
-							<span class="label-title">{data.structure.intro.title}</span>
-						</span>
-						<span class="dotleader" aria-hidden="true"></span>
-						<span class="row-range">{fmtRange(data.structure.intro.qa_range)}</span>
-					</a>
-				</div>
-			</div>
 		</article>
 
 		{#each data.structure.parts as part (part.slug)}
@@ -236,6 +228,19 @@
 		margin-bottom: calc(var(--rh) * 1.25);
 		padding-bottom: calc(var(--rh) * 0.5);
 		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+	}
+	.is-intro .part-head {
+		margin-bottom: 0;
+	}
+	.part-title-link {
+		display: flex;
+		align-items: baseline;
+		gap: 0.65rem;
+		text-decoration: none;
+		color: inherit;
+	}
+	.part-title-link:hover .part-title {
+		color: var(--color-accent);
 	}
 	.part-title {
 		font-family: var(--font-heading);

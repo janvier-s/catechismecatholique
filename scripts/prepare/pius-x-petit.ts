@@ -1029,7 +1029,7 @@ function strHtmlAfterOffset(l: RawLine, offset: number): string {
 
 // Sentence-case helper for section titles ("LES VERTUS EN GÉNÉRAL" -> "Les vertus en général").
 function sentenceCaseSection(s: string): string {
-	const trimmed = normalizeWs(s.replace(/[.\s]+$/, ''));
+	const trimmed = normalizeWs(s.replace(/[.\s]+$/, '')).replace(/\s*◆\s*/g, ' — ');
 	if (!trimmed) return trimmed;
 	const lower = trimmed.toLowerCase();
 	const cased = lower.charAt(0).toUpperCase() + lower.slice(1);

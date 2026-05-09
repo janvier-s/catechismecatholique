@@ -21,7 +21,7 @@
 
 <main class="toc">
 	<header class="toc-head">
-		<p class="eyebrow">Table des matières</p>
+		<p class="eyebrow">Catéchisme du Concile de Trente</p>
 		<h1 class="title">Sommaire</h1>
 		<div class="ornament" aria-hidden="true">
 			<span class="rule rule-l"></span>

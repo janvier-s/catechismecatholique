@@ -654,3 +654,10 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		opacity: 1;
 	}
 }
+
+/* Make all text selectable, including links. Browsers default <a> to
+   draggable, which suppresses text selection on mousedown. */
+a {
+	-webkit-user-drag: none;
+	user-select: text;
+}

@@ -341,7 +341,7 @@
 		flex: 1;
 	}
 
-	/* Numbered ol */
+	/* Numbered ol — number in left margin, body aligned with surrounding prose */
 	.al-ol {
 		list-style: none;
 		margin: 0 0 1rem;
@@ -351,22 +351,22 @@
 		gap: 0.5rem;
 	}
 	.al-ol > li {
-		display: flex;
-		gap: 0.85rem;
+		position: relative;
 		font-family: var(--font-body);
 		line-height: 1.65;
 	}
 	.al-ol-num {
-		flex: none;
+		position: absolute;
+		right: calc(100% + 0.6rem);
+		top: 0.05rem;
 		font-family: var(--font-ui);
 		font-size: 0.85rem;
 		font-weight: 600;
 		color: var(--color-accent);
-		min-width: 2.25rem;
-		padding-top: 0.05rem;
+		white-space: nowrap;
 	}
 	.al-ol-body {
-		flex: 1;
+		min-width: 0;
 	}
 	.al-ol-body :global(strong) {
 		color: var(--color-accent);
@@ -520,12 +520,19 @@
 		.al-content {
 			font-size: 1rem;
 		}
-		.al-ol > li,
 		.al-ol-roman li {
 			flex-direction: column;
 			gap: 0.2rem;
 		}
-		.al-ol-num,
+		.al-ol > li {
+			padding-left: 2.25rem;
+		}
+		.al-ol-num {
+			position: absolute;
+			right: auto;
+			left: 0;
+			top: 0.05rem;
+		}
 		.al-roman {
 			padding-top: 0;
 		}
