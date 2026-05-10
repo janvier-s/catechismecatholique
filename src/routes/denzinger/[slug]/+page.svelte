@@ -48,14 +48,17 @@
 
 	<section class="body" aria-label="Texte de la section">
 		{#each unit.entries as entry, ei (entry.n)}
-			{@const showDoc =
-				entry.document && (ei === 0 || unit.entries[ei - 1]?.document !== entry.document)}
-			{#if showDoc}
-				<h2 class="document">{frenchPunct(entry.document!)}</h2>
+			{@const prev = unit.entries[ei - 1]}
+			{@const showSection = entry.section && (ei === 0 || prev?.section !== entry.section)}
+			{@const showChapter = entry.chapter && (ei === 0 || prev?.chapter !== entry.chapter)}
+			{#if showSection}
+				<h2 class="section-h2" id="dh-{entry.n}-section">{frenchPunct(entry.section!)}</h2>
+			{/if}
+			{#if showChapter}
+				<h3 class="chapter-h3">{frenchPunct(entry.chapter!)}</h3>
 			{/if}
 			<article class="entry" id="dh-{entry.n}">
 				<a class="entry-num" href="#dh-{entry.n}" aria-label="Permalink DH {entry.n}">
-					<span class="entry-num-prefix">DH</span>
 					<span class="entry-num-value">{entry.n}</span>
 				</a>
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
@@ -149,34 +152,10 @@
 		scroll-margin-top: 5rem;
 	}
 	.entry-num {
-		display: inline-flex;
-		align-items: baseline;
-		gap: 0.35em;
+		display: inline-block;
 		text-decoration: none;
 		color: var(--color-accent);
 		margin: 0 0 0.45rem;
-	}
-	.document {
-		font-family: var(--font-heading);
-		font-size: 1.2rem;
-		font-weight: 600;
-		line-height: 1.35;
-		color: var(--color-heading, var(--color-fg));
-		margin: 2.5rem 0 1.25rem;
-		padding-bottom: 0.55rem;
-		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 14%, transparent);
-		scroll-margin-top: 5rem;
-	}
-	.document:first-of-type {
-		margin-top: 1rem;
-	}
-	.entry-num-prefix {
-		font-family: var(--font-ui);
-		font-size: 0.62rem;
-		font-weight: 700;
-		letter-spacing: 0.22em;
-		text-transform: uppercase;
-		color: var(--color-muted);
 	}
 	.entry-num-value {
 		font-family: var(--font-heading);
@@ -187,6 +166,35 @@
 	}
 	.entry-num:hover .entry-num-value {
 		text-decoration: underline;
+	}
+
+	/* Section h2 — top-level decree/doctrine heading
+	   ("Doctrine sur le sacrement de la pénitence", "Décret sur la
+	   justification") — clearly delineates a major sub-division. */
+	.section-h2 {
+		font-family: var(--font-heading);
+		font-size: 1.45rem;
+		font-weight: 700;
+		line-height: 1.3;
+		color: var(--color-heading, var(--color-fg));
+		margin: 3rem 0 1.5rem;
+		padding-bottom: 0.65rem;
+		border-bottom: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+		scroll-margin-top: 5rem;
+	}
+	.section-h2:first-of-type {
+		margin-top: 1rem;
+	}
+	/* Chapter h3 — subdivision under a section ("Chap. 5. Le culte…",
+	   "Canons sur le sacrement de baptême"). Quieter than section-h2. */
+	.chapter-h3 {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-size: 1.05rem;
+		font-weight: 600;
+		line-height: 1.45;
+		color: var(--color-heading, var(--color-fg));
+		margin: 2rem 0 0.75rem;
 	}
 	.entry-body {
 		min-width: 0;

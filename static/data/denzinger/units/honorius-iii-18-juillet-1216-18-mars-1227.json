@@ -13,6 +13,8 @@
       "n": 822,
       "anchor": "c3b",
       "html": "<p><br> Comme nous l'avons entendu, un abus très pernicieux s'est développé dans ta région, à savoir que lors du sacrifice on utilise une plus grande quantité d'eau que de vin : car selon la coutume bien fondée de l'ensemble de l'Eglise, il faut utiliser plus de vin que d'eau. C'est pourquoi Nous ordonnons à ta fraternité par lettre apostolique que désormais tu ne le fasses plus, et que tu n'admettes pas que cela se fasse dans ta province.</p><p><center></p>",
+      "section": "L'eau mêlée au vin lors du sacrifice de la messe.",
+      "chapter": null,
       "document": "L'eau mêlée au vin lors du sacrifice de la messe."
     }
   ],
@@ -23,5 +25,14 @@
   "next": {
     "slug": "gregoire-ix-19-mars-1227-22-aout-1241",
     "title": "GREGOIRE IX : 19 mars 1227 - 22 août 1241"
-  }
+  },
+  "sections": [
+    {
+      "title": "L'eau mêlée au vin lors du sacrifice de la messe.",
+      "anchor": "dh-822",
+      "first_n": 822,
+      "last_n": 822,
+      "chapters": []
+    }
+  ]
 }

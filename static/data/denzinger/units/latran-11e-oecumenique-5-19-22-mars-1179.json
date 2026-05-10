@@ -14,42 +14,56 @@
       "n": 751,
       "anchor": "c05",
       "html": "<p><br> Chap. 10. On ne recevra pas de moines dans un monastère contre de l'argent... Si quelqu'un, après avoir été expulsé, à donné quelque somme d'argent pour être reçu, il n'ira pas jusqu'aux ordres sacrés ; celui qui aura reçu cet argent sera puni par la privation de sa charge.</p><p></p>",
+      "section": "Simonie",
+      "chapter": null,
       "document": "Simonie"
     },
     {
       "n": 753,
       "anchor": "c1a",
       "html": "<p><br> </p>",
+      "section": "Lettre \" In civitate tua \" à l'archevêque de Gènes, date incertaine.",
+      "chapter": null,
       "document": "Lettre \" In civitate tua \" à l'archevêque de Gènes, date incertaine."
     },
     {
       "n": 754,
       "anchor": "c1b",
       "html": "<p><br> </p>",
+      "section": "Lettre \" Ex publico instrumento \" A l'évêque de Brescia, date incertaine.",
+      "chapter": null,
       "document": "Lettre \" Ex publico instrumento \" A l'évêque de Brescia, date incertaine."
     },
     {
       "n": 755,
       "anchor": "c1c",
       "html": "<p><br> Après le consentement légitime 'de praesenti' il est licite à l'un, même si l'autre s'y oppose, de choisir le monastère, comme d'ailleurs des saints ont été éloignés des noces par un appel, aussi longtemps du moins qu'aucune union charnelle n'a existé entre eux ; et si l'autre qui reste, malgré une monition, ne veut pas garder la continence, il lui est permis de s'engager dans un deuxième mariage ;car puisqu'ils ne sont pas devenus une seule chair, l'un peut parfaitement passer à Dieu et l'autre demeurer dans le siècle.</p>",
+      "section": "L'effet du consentement matrimonial.",
+      "chapter": null,
       "document": "L'effet du consentement matrimonial."
     },
     {
       "n": 756,
       "anchor": "c1d",
       "html": "<p><br> Si (entre un homme et une femme) intervient un consentement légitime 'de praesenti'..., en sorte que l'un reçoit expressément l'autre comme son époux par consentement mutuel et avec les paroles habituelles... qu'il y ait eu un serment ou non, il n'est pas permis à la femme d'épouser un autre. Et si elle a épousé, et même si l'union charnelle a suivi, elle doit être séparée de celui-là et être contrainte par la sévérité ecclésiastique à revenir au premier, et cela même si d'autres pensent autrement et si certains de nos prédécesseurs aussi ont pu en juger autrement.</p><p></p>",
+      "section": "L'effet du consentement matrimonial.",
+      "chapter": null,
       "document": "L'effet du consentement matrimonial."
     },
     {
       "n": 757,
       "anchor": "c1e",
       "html": "<p><br> Si quelqu'un plonge un enfant trois fois dans l'eau au nom du Père et du Fils et de l'Esprit Saint, Amen, et qu'il ne dit pas : \" Je te baptise au nom du Père et du Fils et de l'Esprit Saint, Amen \", l'enfant n'est pas baptisé.</p>",
+      "section": "La forme du baptême.",
+      "chapter": null,
       "document": "La forme du baptême."
     },
     {
       "n": 758,
       "anchor": "c1f",
       "html": "<p><br> Mais ceux pour lesquels il existe un doute s'ils ont été baptisés, ils seront baptisés en faisant précéder ces mots : \" Si tu es baptisé, je ne te baptise pas ; mais si tu n'es pas encore baptisé, je te baptise, etc... \"</p><p><center></p>",
+      "section": "La forme du baptême.",
+      "chapter": null,
       "document": "La forme du baptême."
     }
   ],
@@ -60,5 +74,42 @@
   "next": {
     "slug": "lucius-iii-1er-septembre-1181-25-novembre-118",
     "title": "LUCIUS III : 1er septembre 1181 - 25 novembre 118"
-  }
+  },
+  "sections": [
+    {
+      "title": "Simonie",
+      "anchor": "dh-751",
+      "first_n": 751,
+      "last_n": 751,
+      "chapters": []
+    },
+    {
+      "title": "Lettre \" In civitate tua \" à l'archevêque de Gènes, date incertaine.",
+      "anchor": "dh-753",
+      "first_n": 753,
+      "last_n": 753,
+      "chapters": []
+    },
+    {
+      "title": "Lettre \" Ex publico instrumento \" A l'évêque de Brescia, date incertaine.",
+      "anchor": "dh-754",
+      "first_n": 754,
+      "last_n": 754,
+      "chapters": []
+    },
+    {
+      "title": "L'effet du consentement matrimonial.",
+      "anchor": "dh-755",
+      "first_n": 755,
+      "last_n": 756,
+      "chapters": []
+    },
+    {
+      "title": "La forme du baptême.",
+      "anchor": "dh-757",
+      "first_n": 757,
+      "last_n": 758,
+      "chapters": []
+    }
+  ]
 }

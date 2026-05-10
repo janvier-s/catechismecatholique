@@ -13,6 +13,8 @@
       "n": 105,
       "anchor": "cjs",
       "html": "<p><br> Mais il (Calixte) amena Zéphirin lui-même à affirmer publiquement : \" Je ne connais qu'un seul Dieu, le Christ Jésus, et en dehors de lui nul autre qui fût engendré et qui ait souffert \". Mais en disant alors : \" Ce n'est pas le Père qui est mort, mais le Fils \", il (Calixte) maintint indéfiniment la querelle au sein du peuple.</p><p><center></p>",
+      "section": "Le Verbe fait chair (authenticité douteuse)",
+      "chapter": null,
       "document": "Le Verbe fait chair (authenticité douteuse)"
     }
   ],
@@ -23,5 +25,14 @@
   "next": {
     "slug": "corneille-mars-251-juin-septembre-253",
     "title": "CORNEILLE : mars 251-juin (septembre ?) 253"
-  }
+  },
+  "sections": [
+    {
+      "title": "Le Verbe fait chair (authenticité douteuse)",
+      "anchor": "dh-105",
+      "first_n": 105,
+      "last_n": 105,
+      "chapters": []
+    }
+  ]
 }

@@ -13,12 +13,16 @@
       "n": 1145,
       "anchor": "dem",
       "html": "<p><br> L'honnêteté de la sainte piété avec laquelle les fils bien- aimés, l'abbé et l'assemblée du monastère des apôtres Pierre et Paul et de la sainte vierge et martyre Osyth de l'ordre de saint Augustin dans l'Essex, dans le diocèse de Londres, rendent au Très-Haut leur culte dévot et zélé, mérite que... pour autant que Nous le pouvons avec Dieu, Nous écoutions avec faveur leurs requêtes. C'est pourquoi, cédant aux supplications de l'abbé et de l'assemblée en cette affaire, Nous accordons par les présentes, en vertu de l'autorité apostolique, à ce même abbé, à ses successeurs et à leurs chanoines, que ce même abbé et ses successeurs pour toujours, les abbés de ce monastère, durant le temps où ils seront en fonction, peuvent conférer librement et licitement, aux temps prescrits par le droit, à tous et à chacun des chanoines de ce monastère qui ont fait, ou qui auront fait profession, tous les ordres mineurs ainsi que les ordres du sous-diaconat, du diaconat et du presbytérat, et que lesdits chanoines qui auront été promus par ces mêmes abbés pourront exercer librement et licitement leur fonction dans les ordres ainsi reçus, sans qu'aucune constitution apostolique ou aucun édit contraire le contredisant - confirmé par quelque authentification que ce soit - puisse y mettre obstacle de quelque manière que ce soit.<br> Comme un don gracieux plus riche encore, Nous concédons à l'abbé et à l'assemblée, et Nous décidons en vertu de cette même autorité, que s'il devait arriver à l'avenir que des grâces, des permissions, des privilèges ou d'autres concessions ou lettres apostoliques concernant la collation ou la réception de ces ordres ou une autre matière ou affaire qui ont été concédés par le Siège apostolique ou en vertu de l'autorité susdite de façon non perpétuelle ou pour un certain temps à l'abbé et à l'assemblée précités, ou à d'autres dans le pays d'Angleterre ou ailleurs, soient révoqués, restreints ou diminués par ce même Siège, de façon générale ou particulière,<br> pour autant la présente concession ne sera révoquée, restreinte ou diminuée d'aucune manière de ce fait. Au contraire, à moins qu'il n'en soit fait mention de façon complète, explicite et littérale, cette lettre gardera toute la vigueur de sa validité, sans qu'aucune constitution concédée... et aucun édit contraire y fasse obstacle.</p><p></p>",
+      "section": "Bulle \" sacrae religionis \" 1er février 1400",
+      "chapter": null,
       "document": "Bulle \" sacrae religionis \" 1er février 1400"
     },
     {
       "n": 1146,
       "anchor": "den",
       "html": "<p><br> La prévoyance circonspecte du Siège apostolique révoque et annule parfois ce qui a été concédé ou ordonné par elle, dans la mesure où... elle reconnaît que cela est d'une grande utilité, en particulier pour les cathédrales et pour les prélats qui y président. Il y a peu en effet Nous avons pensé devoir donner suite à la requête instante des fils bien-aimés, l'abbé et l'assemblée du monastère Sainte-Osyth de l'ordre de saint Augustin dans le diocèse de Londres, et permettre à ce même abbé et à ses successeurs, en vertu de l'autorité apostolique et comme une grâce spéciale, par une autre lettre venant de Nous 1145 , comme cela est dit de façon explicite dans cette lettre,</p><p>1 - tout d'abord que l'abbé lui-même et ses successeurs les abbés, durant le temps où ils sont en fonction, utilisent librement la mitre, l'anneau, et tous les autres insignes pontificaux, et que dans ledit monastère et dans les prieurés dépendant de ce monastère ainsi que dans les églises paroissiales ou autres qui relèvent d'eux - même si elles devaient ne pas leur être soumises de plein droit - ils donnent à l'occasion la bénédiction solennelle après la célébration de la messe, des vêpres ou des matines, pourvu que lors d'une telle bénédiction ne soient pas présents un évêque ou un légat du Siège apostolique,<br> 2.- et ensuite que l'abbé et les successeurs susdits puissent conférer librement et licitement, aux temps prescrits par le droit, à tous et à chacun des chanoines qui ont fait ou auront fait profession, tous les ordres mineurs ainsi que les ordres du sous-diaconat, du diaconat et du presbytérat, sans que les constitutions de notre prédécesseur d'heureuse mémoire, le pape Alexandre IV, qui commence par \"Abbates\" et toute autre constitution apostolique y fasse obstacle de quelque façon que ce soit.<br> Cependant, étant donné que, comme le dit le contenu de la requête qui Nous est parvenue il y a peu de la part de notre vénérable frère Robert, l'évêque de Londres, le monastère susdit dans lequel ce même évêque a le droit de patronat a été fondé par certains prédécesseurs de cet évêque..., et que de telles lettres ou concessions ont pour effet de léser gravement l'évêque lui- même, sa juridiction ordinaire et l'Eglise de Londres, Nous avons été priés humblement par cet évêque de daigner, dans notre bonté apostolique, Nous soucier qu'il n'y ait pas de dommage pour lui et pour cette Eglise dans ce qui précède. Voulant pourvoir à cela... et cédant à ces demandes, en vertu de notre autorité apostolique et de par une science plus certaine, Nous révoquons, cassons et annulons par les présentes cette lettre et ces concessions, et Nous voulons qu'elles soient sans validité et sans portée.</p><p><center></p>",
+      "section": "Bulle \" Apostolicae Sedis \", 6 février 1403",
+      "chapter": null,
       "document": "Bulle \" Apostolicae Sedis \", 6 février 1403"
     }
   ],
@@ -29,5 +33,21 @@
   "next": {
     "slug": "gregoire-xii-30-novembre-1406-4-juillet",
     "title": "GRÉGOIRE XII: 30 novembre 1406-4 juillet"
-  }
+  },
+  "sections": [
+    {
+      "title": "Bulle \" sacrae religionis \" 1er février 1400",
+      "anchor": "dh-1145",
+      "first_n": 1145,
+      "last_n": 1145,
+      "chapters": []
+    },
+    {
+      "title": "Bulle \" Apostolicae Sedis \", 6 février 1403",
+      "anchor": "dh-1146",
+      "first_n": 1146,
+      "last_n": 1146,
+      "chapters": []
+    }
+  ]
 }

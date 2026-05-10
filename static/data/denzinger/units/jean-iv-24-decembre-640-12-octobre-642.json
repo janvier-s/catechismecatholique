@@ -13,12 +13,16 @@
       "n": 497,
       "anchor": "cur",
       "html": "<p><br> C'est de cette façon donc qu'il apparaît... qu'il (le pape Honorius) a écrit (à Serge), à savoir que dans notre Sauveur il n'y a d'aucune manière deux volontés opposées, c'est-à-dire dans ses membres <i>Rm 7,23</i> puisqu'il n'a contracté aucun défaut de la transgression du premier homme.<br> Mais pour que nul, de moindre intelligence, ne blâme (Honorius) de ce qu'il ne parle que de la nature humaine et non pas également de la nature divine... celui qui en débat doit savoir qu'il s'agit d'une réponse donnée à une question dudit patriarche. Pour le reste aussi on a coutume d'appliquer l'aide de la médecine là où se trouve la blessure. Et le bienheureux Apôtre lui aussi, manifestement, l'a souvent fait lorsqu'il s'adaptait à l'habitude des auditeurs ; tantôt, lorsqu'il parle de la nature la plus éminente, il se tait totalement quant à la nature humaine ; tantôt, traitant de l'économie humaine, il ne touche pas le mystère de sa divinité...</p>",
+      "section": "La signification des paroles d'Honorius concernant les deux volontés",
+      "chapter": null,
       "document": "La signification des paroles d'Honorius concernant les deux volontés"
     },
     {
       "n": 498,
       "anchor": "cus",
       "html": "<p><br> Mon prédécesseur susdit disait donc, dans son enseignement sur le mystère de l'Incarnation du Christ,qu'il n'a pas existé en lui, comme en nous pécheurs, deux volontés contraires, de l'esprit et de la chair. Ce que certains ont retourné en leur propre conception, et ils ont pensé qu'il aurait enseigné une seule volonté de sa divinité et de son humanité, ce qui est totalement contraire à la vérité.</p><p><hr> </p>",
+      "section": "La signification des paroles d'Honorius concernant les deux volontés",
+      "chapter": null,
       "document": "La signification des paroles d'Honorius concernant les deux volontés"
     }
   ],
@@ -29,5 +33,14 @@
   "next": {
     "slug": "martin-1er-5-juillet-649-17-juin-653-16-septembre-655",
     "title": "MARTIN 1er : 5 juillet 649 - 17 juin 653 (16 septembre 655)"
-  }
+  },
+  "sections": [
+    {
+      "title": "La signification des paroles d'Honorius concernant les deux volontés",
+      "anchor": "dh-497",
+      "first_n": 497,
+      "last_n": 498,
+      "chapters": []
+    }
+  ]
 }

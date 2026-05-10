@@ -13,12 +13,16 @@
       "n": 401,
       "anchor": "csc",
       "html": "<p><br> (L'empereur Justinien) a fait savoir que des controverses avaient surgi à propos des trois questions suivantes : (I) Si le Christ notre Dieu peut être dit \" un de la Trinité \", c'est-à-dire une personne sainte des trois personnes de la sainte Trinité. (II) Si le Christ Dieu, impassible selon la divinité, a souffert dans la chair. (III) Si Marie, toujours vierge, doit être appelée proprement et véritablement Mère de notre Seigneur et Dieu le Christ...<br> (L'expression \" un de la Trinité a souffert \"). Que le Christ est vraiment un de la sainte Trinité, c'est-à-dire une sainte personne ou substance, que les Grecs appellent hypostase, des trois personnes de la sainte Trinité, nous les montrons clairement par ces témoignages (sont cités entre autres <i>Gn 3,22 1Co 8,6</i> la profession de foi de Nicée Can.125-126 .<br> (Le Christ, \" Dieu qui a souffert dans la chair \"). Mais que Dieu a souffert dans la chair, nous voulons malgré tout le confirmer par ces témoignages <i>Dt 28,66 Jn 14,6 Ml 3,8 Ac 3,15 Ac 20,28 1Co 2,8</i> Cyrille d'Alexandrie, anathème 12 Can.263 ; Léon 1er, Tome à Flavien Can.290- 295 ; entre autres).<br> (Le titre \" Mère de Dieu \"). Nous enseignons qu'il est juste que Marie, glorieuse, sainte et toujours vierge, soit appelée par les catholiques, en un sens propre et véritable, Mère de Dieu et Mère de Dieu le Verbe incarné en elle. Car, en un sens propre et véritable, c'est le même, incarné en ces derniers temps, qui a daigné naître de la sainte et glorieuse Vierge sa mère. C'est pourquoi, le Fils de Dieu s'étant, en un sens prorpe et véritable, incarné en elle et étant né d'elle, nous confessons qu'en un sens propre et véritable elle est la Mère de Dieu qui s'est incarné et qui est né d'elle. En un sens propre, pour qu'on ne croie pas que le Seigneur Jésus ait reçu le nom de Dieu comme un titre d'honneur ou de faveur, comme l'a pensé Nestorius en sa sottise. En un sens véritable, pour qu'on ne croie pas qu'il ait pris une chair imaginaire ou irréelle en quelque façon, comme l'a affirmé Eutychès en son impiété.</p>",
+      "section": "Communication des idiomes",
+      "chapter": null,
       "document": "Communication des idiomes"
     },
     {
       "n": 402,
       "anchor": "csd",
       "html": "<p><br> (Résumé de la christologie) Par là est donc montré clairement ce qu'attendait l'empereur, ce à quoi est attachée l'Eglise romaine et qu'elle tient en honneur, à savoir que le Christ notre Seigneur, comme nous l'avons souvent dit, est l'un de la sainte Trinité, qu'il doit être reconnu comme de deux natures, c'est-à- dire complet dans la divinité et dans l'humanité, la chair n'ayant pas existé auparavant pour s'unir ensuite au Verbe, mais recevant en Dieu Verbe lui-même le commencement qui la fait exister. Pour la raison en effet que la chair du Verbe a pris son commencement du corps de la mère, les propriétés et la vérité de chacune des natures, à savoir de la divinité et de l'humanité, étant sauves (voir 293 ), nous confessons de façon catholique Fils de Dieu notre Seigneur Jésus Christ, tout changement et toute confusion ultérieurs étant écartés. Car nous ne reconnaissons les natures en lui qu'en considérant et en confessant les différences de la divinité et de l'humanité. Mais par le fait que nous parlons de deux natures nous ne reconnaissons pas deux personnes dans le Christ, de telle façon que nous semblions opérer une division de l'union et qu'il y ait - loin de nous une telle pensée ! - une quaternité et non une trinité, comme le pense Nestorius dans sa folie ; et nous ne confondons pas non plus ces natures unies lorsque nous confessons l'unique personne du Christ, comme le pense Eutychès dans son impiété. Mais tout comme l'Eglise romaine a reçu et vénéré jusqu'ici le Tomus du pape Léon et toutes ses lettres, ainsi que les quatre conciles de Nicée, de Constantinople, le premier d'Ephèse et celui de Chalcédoine, nous les suivons, nous les embrassons et nous les observons.</p><p><center></p>",
+      "section": "Communication des idiomes",
+      "chapter": null,
       "document": "Communication des idiomes"
     }
   ],
@@ -29,5 +33,14 @@
   "next": {
     "slug": "vigile-11-novembre-537-7-juin-555",
     "title": "VIGILE : 11 novembre 537-7 juin 555"
-  }
+  },
+  "sections": [
+    {
+      "title": "Communication des idiomes",
+      "anchor": "dh-401",
+      "first_n": 401,
+      "last_n": 402,
+      "chapters": []
+    }
+  ]
 }

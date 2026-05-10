@@ -695,25 +695,58 @@
 		}
 		if (corpus === 'denzinger') {
 			if (!denzingerStructure) return [];
-			// Render the unit hierarchy: parts → units (flat under each part).
-			// The full nested tree lives on /denzinger/sommaire; this rail
-			// surfaces direct unit links so the reader can jump section-to-
-			// section without leaving the chrome.
+			// Render parts → units → sections (decree/doctrine titles).
+			// Sections only render when the unit has 2+ of them (avoid
+			// duplicating the unit title for single-section units).
 			return denzingerStructure.parts.map(
 				(p): Item => ({
 					title: p.title,
 					kicker: `DH ${p.first_n ?? '?'}–${p.last_n ?? '?'}`,
 					href: `/denzinger/sommaire#${p.slug}`,
-					children: p.units.map(
-						(u): Item => ({
+					children: p.units.map((u): Item => {
+						const range =
+							u.first_n != null
+								? `DH ${u.first_n}${u.last_n !== u.first_n ? `–${u.last_n}` : ''}`
+								: undefined;
+						function fmtRange(a: number, b: number): string {
+							return `DH ${a}${b !== a ? `–${b}` : ''}`;
+						}
+						const sections = u.sections ?? [];
+						// Build a flat list of section + chapter items, only when
+						// the unit has more than one chunk worth surfacing.
+						const sectionItems: Item[] = [];
+						for (const s of sections) {
+							if (s.title) {
+								sectionItems.push({
+									title: s.title,
+									href: `/denzinger/${u.slug}#${s.anchor}`,
+									kicker: fmtRange(s.first_n, s.last_n),
+									children: s.chapters?.length
+										? s.chapters.map((c) => ({
+												title: c.title,
+												href: `/denzinger/${u.slug}#${c.anchor}`,
+												kicker: fmtRange(c.first_n, c.last_n)
+											}))
+										: undefined
+								});
+							} else if (s.chapters?.length) {
+								// No section title — surface chapters at unit level.
+								for (const c of s.chapters) {
+									sectionItems.push({
+										title: c.title,
+										href: `/denzinger/${u.slug}#${c.anchor}`,
+										kicker: fmtRange(c.first_n, c.last_n)
+									});
+								}
+							}
+						}
+						return {
 							title: u.title,
-							kicker:
-								u.first_n != null
-									? `DH ${u.first_n}${u.last_n !== u.first_n ? `–${u.last_n}` : ''}`
-									: undefined,
-							href: `/denzinger/${u.slug}`
-						})
-					)
+							kicker: range,
+							href: `/denzinger/${u.slug}`,
+							children: sectionItems.length > 1 ? sectionItems : undefined
+						};
+					})
 				})
 			);
 		}

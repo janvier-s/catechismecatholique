@@ -13,18 +13,24 @@
       "n": 701,
       "anchor": "czx",
       "html": "<p><br> ... Comme nous l'avons appris par son aveu, Daibert a été certes ordonné diacre par le simoniaque Guezelo, mais non de façon simoniaque, et par le jugement du bienheureux pape Innocent il fut déclaré, on le sait, qu'en tant qu'hérétique, Guezelo, dont il est établi qu'il fut ordonné par des hérétiques, du moment qu'il n'avait rien, n'a rien pu donner à celui à qui il a imposé les mains. Confirmés par l'autorité d'un si grand pape et fortifiés par le témoignage du pape Damase qui dit : \" Il faut réitérer ce qui a été mal fait \", puisque les besoins de l'Eglise sont pressants, nous établissons à nouveau comme diacre Daibert qui s'est détaché de corps et d'âme des hérétiques, et qui s'applique de toutes ses forces au bien de l'Eglise. Nous estimons que cela ne doit pas être considéré comme une réitération, mais seulement comme une pleine collation du diaconat, puisque, comme nous le disions, celui qui n'avait rien n'a rien pu donner.</p><p><hr> </p>",
+      "section": "L'invalidité de l'ordination reçue d'un simoniaque",
+      "chapter": null,
       "document": "L'invalidité de l'ordination reçue d'un simoniaque"
     },
     {
       "n": 702,
       "anchor": "czy",
       "html": "<p><br> </p>",
+      "section": "Lettre \" Gaudemus filii \" à Lanzo, Rudolf et d'autres, 1er février 1091.",
+      "chapter": null,
       "document": "Lettre \" Gaudemus filii \" à Lanzo, Rudolf et d'autres, 1er février 1091."
     },
     {
       "n": 703,
       "anchor": "czz",
       "html": "<p><br> Can. 1. Nul désormais ne peut être élu évêque s'il n'a pas été trouvé pieux dans les ordres sacrés. Or nous appelons ordres sacrés le diaconat et le presbytérat. De ceux-là en effet on lit que l'Eglise primitive les avait ; pour eux seuls nous avons un précepte de l'Apôtre.</p><p><center></p>",
+      "section": "Le caractère sacramentel du diaconat",
+      "chapter": null,
       "document": "Le caractère sacramentel du diaconat"
     }
   ],
@@ -35,5 +41,28 @@
   "next": {
     "slug": "pascal-ii-14-aout-1099-21-janvier-1118",
     "title": "PASCAL II : 14 août 1099-21 janvier 1118"
-  }
+  },
+  "sections": [
+    {
+      "title": "L'invalidité de l'ordination reçue d'un simoniaque",
+      "anchor": "dh-701",
+      "first_n": 701,
+      "last_n": 701,
+      "chapters": []
+    },
+    {
+      "title": "Lettre \" Gaudemus filii \" à Lanzo, Rudolf et d'autres, 1er février 1091.",
+      "anchor": "dh-702",
+      "first_n": 702,
+      "last_n": 702,
+      "chapters": []
+    },
+    {
+      "title": "Le caractère sacramentel du diaconat",
+      "anchor": "dh-703",
+      "first_n": 703,
+      "last_n": 703,
+      "chapters": []
+    }
+  ]
 }

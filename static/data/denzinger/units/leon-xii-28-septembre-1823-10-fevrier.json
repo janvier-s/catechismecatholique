@@ -14,6 +14,8 @@
       "n": 2720,
       "anchor": "ekl",
       "html": "<p><br> (Une certaine secte) qui se présente sous une apparence engageante de piété et de libéralité, professe et prône le tolérantisme (c'est ainsi qu'ils disent) ou l'indifférentisme, non seulement dans le domaine civil dont Nous ne parlons pas ici, mais également en matière religieuse, en enseignant qu'une large liberté a été donnée par Dieu à chacun, qui permet à chacun d'embrasser ou d'adopter, sans péril pour son salut, la secte ou l'opinion qui lui convient selon son jugement privé. (Référence est faite, contre cela, à <i>Rm 16,17</i> s.)</p><p><center></p>",
+      "section": "Indifférentisme",
+      "chapter": null,
       "document": "Indifférentisme"
     }
   ],
@@ -24,5 +26,14 @@
   "next": {
     "slug": "pie-viii-31-mars-1829-30-novembre-1830",
     "title": "PIE VIII : 31 mars 1829-30 novembre 1830"
-  }
+  },
+  "sections": [
+    {
+      "title": "Indifférentisme",
+      "anchor": "dh-2720",
+      "first_n": 2720,
+      "last_n": 2720,
+      "chapters": []
+    }
+  ]
 }

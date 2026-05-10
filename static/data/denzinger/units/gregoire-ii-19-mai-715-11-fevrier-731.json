@@ -13,12 +13,16 @@
       "n": 580,
       "anchor": "cw0",
       "html": "<p><br> Tu as fait savoir que certains ont été baptisés sans interrogation sur le Symbole par des prêtres adultères et indignes. En cette affaire, ta charité doit tenir l'antique coutume de l'Eglise : si quelqu'un a été baptisé au nom du Père et du Fils et de l'Esprit Saint, il n'est permis d'aucune manière de le rebaptiser ; ce n'est pas en effet au nom de celui qui baptise, mais au nom de la Trinité qu'il a reçu le don de cette grâce. Et il faut tenir ce que dit l'Apôtre : un seul Dieu, une seule foi, un seul baptême <i>Ep 4,5</i>. Mais nous te prescrivons de donner à ceux-là, avec plus de zèle encore un enseignement spirituel.</p><p></p>",
+      "section": "Forme et ministre du baptême.",
+      "chapter": null,
       "document": "Forme et ministre du baptême."
     },
     {
       "n": 581,
       "anchor": "cw1",
       "html": "<p><br> Et tu affirmes que nous nous prosternons devant des pierres, des murs et des planches de bois. Il n'en est rien, ô empereur ; nous y trouvons un rappel et un stimulant : ils élèvent vers le ciel notre esprit lourd et épais, ce qui est la raison d'être de leurs noms, de leurs titres inscrits, de leurs traits distinctifs ; mais nous n'en faisons pas des dieux, comme tu le prétends - et puisse cela ne pas arriver ! - car nous ne mettons pas notre espérance en eux. Et si c'est une image du Seigneur, nous disons: eigneur Jésus Christ, Fils de Dieu, secours-nous et sauve-nous. Si c'en est une de sa sainte Mère, nous disons: Toi qui as porté Dieu, sainte Mère du Seigneur, intercède auprès<br> de ton fils, notre vrai Dieu, pour le salut de nos âmes. Et pour un martyr : saint Etienne, premier martyr, toi qui as versé ton sang pour le Christ, puisque tu peux lui parler librement, intercède pour nous. Et pour tous ceux qui dans le martyre ont témoigné de leur foi, voilà ce que nous disons, voilà les prières que nous adressons par leur intercession ; et il n'est pas vrai, comme tu le prétends, ô empereur, que nous appellions \" dieux \" les martyrs.</p><p><center></p>",
+      "section": "La vénération des saintes images",
+      "chapter": null,
       "document": "La vénération des saintes images"
     }
   ],
@@ -29,5 +33,21 @@
   "next": {
     "slug": "gregoire-iii-18-mars-731-28-29-novembre-741",
     "title": "GREGOIRE III : 18 mars 731-28 (29 ?) novembre 741"
-  }
+  },
+  "sections": [
+    {
+      "title": "Forme et ministre du baptême.",
+      "anchor": "dh-580",
+      "first_n": 580,
+      "last_n": 580,
+      "chapters": []
+    },
+    {
+      "title": "La vénération des saintes images",
+      "anchor": "dh-581",
+      "first_n": 581,
+      "last_n": 581,
+      "chapters": []
+    }
+  ]
 }

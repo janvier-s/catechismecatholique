@@ -13,6 +13,8 @@
       "n": 362,
       "anchor": "cq1",
       "html": "<p><br> </p>",
+      "section": "L'origine de l'âme et le péché originel",
+      "chapter": null,
       "document": "L'origine de l'âme et le péché originel"
     }
   ],
@@ -23,5 +25,14 @@
   "next": {
     "slug": "hormisdas-20-juillet-514-6-aout-523",
     "title": "HORMISDAS : 20 juillet 514-6 août 523"
-  }
+  },
+  "sections": [
+    {
+      "title": "L'origine de l'âme et le péché originel",
+      "anchor": "dh-362",
+      "first_n": 362,
+      "last_n": 362,
+      "chapters": []
+    }
+  ]
 }

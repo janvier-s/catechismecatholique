@@ -14,6 +14,8 @@
       "n": 592,
       "anchor": "cxc",
       "html": "<p><br> (Réponse 14). Pour ce qui concerne ce presbytre qui a baptisé de façon si grossière : Je plonge au nom du Père, et je plonge au nom du Fils et je plonge au nom de l'Esprit Saint, et qui même comme prêtre ne sait pas si c'est un évêque qui l'a béni : celui-là, qui est dans l'ignorance quant à son ordination, il doit absolument être déposé... ; mais les enfants qu'il a baptisés, bien que de façon grossière, puisqu'ils ont été baptisés au nom de la sainte Trinité, qu'ils demeurent dans ce baptême.</p><p><center></p>",
+      "section": "La forme du baptême.",
+      "chapter": null,
       "document": "La forme du baptême."
     }
   ],
@@ -24,5 +26,14 @@
   "next": {
     "slug": "adrien-ier-9-fevrier-772-25-decembre-795",
     "title": "ADRIEN Ier : 9 février 772-25 décembre 795"
-  }
+  },
+  "sections": [
+    {
+      "title": "La forme du baptême.",
+      "anchor": "dh-592",
+      "first_n": 592,
+      "last_n": 592,
+      "chapters": []
+    }
+  ]
 }

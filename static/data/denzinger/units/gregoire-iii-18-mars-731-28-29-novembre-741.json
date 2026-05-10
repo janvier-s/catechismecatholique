@@ -13,12 +13,16 @@
       "n": 582,
       "anchor": "cw2",
       "html": "<p><br> Pour ce qui concerne ceux dont tu as dit qu'ils ont été baptisés par des païens, s'il en est ainsi, nous te commandons de les baptiser à nouveau au nom de la Trinité. ... Mais nous te prescrivons aussi que soient baptisés également ceux qui doutent s'ils ont été baptisés ou non, ou qui l'ont été par un presbytre qui sacrifie à Jupiter et qui mange des viandes immolées.</p><p></p>",
+      "section": "Le baptême de validité douteuse.",
+      "chapter": null,
       "document": "Le baptême de validité douteuse."
     },
     {
       "n": 583,
       "anchor": "cw3",
       "html": "<p><br> Tu as cherché à savoir s'il est permis de présenter des oblations pour des défunts. La sainte Eglise tient que chacun peut présenter des oblations pour ses morts véritablement chrétiens, et que les presbytres peuvent faire mémoire d'eux. Et bien que tous nous soyons soumis au péché, il convient que le prêtre fasse mémoire des catholiques défunts et intercède pour eux. Mais cela, il ne sera pas permis de le faire pour des impies, même s'ils ont été chrétiens.</p><p><center></p>",
+      "section": "Sacrifice de la messe pour des défunts.",
+      "chapter": null,
       "document": "Sacrifice de la messe pour des défunts."
     }
   ],
@@ -29,5 +33,21 @@
   "next": {
     "slug": "zacharie-10-3-decembre-741-22-15-mars-752",
     "title": "ZACHARIE : 10(3?) décembre 741-22(15?) mars 752"
-  }
+  },
+  "sections": [
+    {
+      "title": "Le baptême de validité douteuse.",
+      "anchor": "dh-582",
+      "first_n": 582,
+      "last_n": 582,
+      "chapters": []
+    },
+    {
+      "title": "Sacrifice de la messe pour des défunts.",
+      "anchor": "dh-583",
+      "first_n": 583,
+      "last_n": 583,
+      "chapters": []
+    }
+  ]
 }

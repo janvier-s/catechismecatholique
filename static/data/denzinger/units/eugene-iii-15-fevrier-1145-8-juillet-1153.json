@@ -13,6 +13,8 @@
       "n": 745,
       "anchor": "c00",
       "html": "<p><br> \" Au sujet du premier (chapitre) seulement le pontife romain décida, afin qu'aucun concept en théologie n'opère une séparation entre nature et personne, et afin qu'on ne parle pas de Dieu comme \" essence divine \" au sens d'un ablatif seulement, mais également au sens d'un nominatif. \"</p><p><center></p>",
+      "section": "La Trinité divine",
+      "chapter": null,
       "document": "La Trinité divine"
     }
   ],
@@ -23,5 +25,14 @@
   "next": {
     "slug": "alexandre-iii-7-septembre-1159-30-aout-1181",
     "title": "ALEXANDRE III : 7 septembre 1159-30 août 1181"
-  }
+  },
+  "sections": [
+    {
+      "title": "La Trinité divine",
+      "anchor": "dh-745",
+      "first_n": 745,
+      "last_n": 745,
+      "chapters": []
+    }
+  ]
 }

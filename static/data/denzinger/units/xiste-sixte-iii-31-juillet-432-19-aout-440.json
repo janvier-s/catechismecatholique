@@ -14,18 +14,24 @@
       "n": 271,
       "anchor": "con",
       "html": "<p><br> Ce que nous pensons et disons au sujet de la Vierge Mère de Dieu et du mode de l'Incarnation du Fils unique de Dieu, nous le dirons brièvement et autant qu'il est nécessaire, non pour ajouter quelque chose, mais pour vous en assurer pleinement, comme nous le tenons depuis le commencement, pour l'avoir reçu des divines Ecritures et de la tradition des saints pères, sans rien ajouter à la foi qui a été exposée par les saints pères de Nicée. Comme nous l'avons déjà dit, elle suffit à la connaissance de la vraie foi et à la réfutation de toute erreur hérétique. Nous parlerons donc sans avoir l'audace d'aborder ce qui est inaccessible, mais, en confessant notre propre faiblesse, nous fermerons la bouche à ceux qui veulent nous attaquer parce que nous scrutons ce qui est au- dessus de l'homme.</p>",
+      "section": "Les deux natures en Christ",
+      "chapter": null,
       "document": "Les deux natures en Christ"
     },
     {
       "n": 272,
       "anchor": "coo",
       "html": "<p><br> Nous confessons donc notre Seigneur Jésus-Christ, Fils unique de Dieu, Dieu parfait et homme parfait, fait d'une âme raisonnable et d'un corps, engendré du Père avant les siècles en sa divinité, et à la fin des jours le même pour nous et pour notre salut, né de la Vierge Marie en son humanité ; le même consubstantiel au Père en sa divinité et consubstantiel à nous en son humanité. Car des deux natures l'union s'est faite ; c'est pourquoi nous confessons un seul Christ, un seul Fils, un seul Seigneur. Et à cause de cette notion d'une union sans mélange, nous confessons que la sainte vierge est Mère de Dieu, parce que le Verbe de Dieu s'est fait chair et s'est fait homme, et que dès la conception il s'est uni le Temple qu'il a pris d'elle.</p>",
+      "section": "Les deux natures en Christ",
+      "chapter": null,
       "document": "Les deux natures en Christ"
     },
     {
       "n": 273,
       "anchor": "cop",
       "html": "<p><br> Quant aux expressions des évangiles et des apôtres au sujet du Seigneur, nous savons que les théologiens appliquent les unes indifféremment, parce qu'elles visent l'unique personne, mais qu'ils distinguent les autres parce qu'elles visent les deux natures, et qu'ils attribuent à la divinité du Christ celles qui conviennent à Dieu, et à son humanité celles qui marquent son abaissement.</p><p><center></p>",
+      "section": "Les deux natures en Christ",
+      "chapter": null,
       "document": "Les deux natures en Christ"
     }
   ],
@@ -36,5 +42,14 @@
   "next": {
     "slug": "leon-ier-le-grand-29-septembre-440-10-novembre",
     "title": "LEON Ier LE GRAND : 29 septembre 440-10 novembre"
-  }
+  },
+  "sections": [
+    {
+      "title": "Les deux natures en Christ",
+      "anchor": "dh-271",
+      "first_n": 271,
+      "last_n": 273,
+      "chapters": []
+    }
+  ]
 }

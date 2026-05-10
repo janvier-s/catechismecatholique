@@ -824,7 +824,24 @@ export interface DenzingerEntry {
 	n: number;
 	anchor: string;
 	html: string;
+	section: string | null;
+	chapter: string | null;
 	document: string | null;
+}
+
+export interface DenzingerUnitChapter {
+	title: string;
+	anchor: string;
+	first_n: number;
+	last_n: number;
+}
+
+export interface DenzingerUnitSection {
+	title: string;
+	anchor: string;
+	first_n: number;
+	last_n: number;
+	chapters: DenzingerUnitChapter[];
 }
 
 export interface DenzingerUnit {
@@ -834,6 +851,7 @@ export interface DenzingerUnit {
 	part_slug: string | null;
 	part_title: string | null;
 	entries: DenzingerEntry[];
+	sections: DenzingerUnitSection[];
 	prev: { slug: string; title: string } | null;
 	next: { slug: string; title: string } | null;
 }
@@ -845,6 +863,7 @@ export interface DenzingerStructureUnit {
 	entry_count: number;
 	first_n: number | null;
 	last_n: number | null;
+	sections: DenzingerUnitSection[];
 }
 
 export interface DenzingerStructurePart {

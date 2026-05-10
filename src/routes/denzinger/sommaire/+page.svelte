@@ -59,6 +59,34 @@
 								<span class="dotleader" aria-hidden="true"></span>
 								<span class="row-range">{fmtRange(unit.first_n, unit.last_n)}</span>
 							</a>
+							{#if unit.sections && unit.sections.length > 0}
+								<div class="sections">
+									{#each unit.sections as sec (sec.anchor)}
+										{#if sec.title}
+											<a class="row row-section" href="/denzinger/{unit.slug}#{sec.anchor}">
+												<span class="row-label">
+													<span class="label-title">{sec.title}</span>
+												</span>
+												<span class="dotleader" aria-hidden="true"></span>
+												<span class="row-range">{fmtRange(sec.first_n, sec.last_n)}</span>
+											</a>
+										{/if}
+										{#if sec.chapters && sec.chapters.length > 0}
+											<div class="chapters">
+												{#each sec.chapters as ch (ch.anchor)}
+													<a class="row row-chapter" href="/denzinger/{unit.slug}#{ch.anchor}">
+														<span class="row-label">
+															<span class="label-title">{ch.title}</span>
+														</span>
+														<span class="dotleader" aria-hidden="true"></span>
+														<span class="row-range">{fmtRange(ch.first_n, ch.last_n)}</span>
+													</a>
+												{/each}
+											</div>
+										{/if}
+									{/each}
+								</div>
+							{/if}
 						</div>
 					{/each}
 				</div>
@@ -253,6 +281,29 @@
 		letter-spacing: 0.04em;
 		color: var(--color-subtle);
 		white-space: nowrap;
+	}
+
+	.sections,
+	.chapters {
+		display: flex;
+		flex-direction: column;
+		padding-left: 1.25rem;
+		border-left: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+		margin-left: 0.25rem;
+	}
+	.row-section .label-title {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--color-fg);
+	}
+	.row-section:hover .label-title,
+	.row-chapter:hover .label-title {
+		color: var(--color-accent);
+	}
+	.row-chapter .label-title {
+		font-size: 0.85rem;
+		font-style: italic;
+		color: var(--color-subtle);
 	}
 
 	.toc-foot {

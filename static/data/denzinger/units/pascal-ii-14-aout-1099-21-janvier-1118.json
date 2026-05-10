@@ -13,30 +13,40 @@
       "n": 704,
       "anchor": "cz0",
       "html": "<p><br> J'anathématise toute hérésie et principalement celle qui perturbe l'état présent de l'Eglise, qui enseigne et qui affirme qu'il faut négliger un anathème et dédaigner les lois de l'Eglise. Et je promets obéissance au pontife du Siège apostolique, au seigneur Pascal et à ses successeurs, en prenant à témoin le Christ et l'Eglise, affirmant ce qu'affirme l'Eglise sainte et universelle, et condamnant ce qu'elle condamne.</p><p></p>",
+      "section": "L'obéissance à l'Eglise.",
+      "chapter": null,
       "document": "L'obéissance à l'Eglise."
     },
     {
       "n": 705,
       "anchor": "cz1",
       "html": "<p><br> (4) Depuis de nombreuses années déjà l'étendue de l'empire teutonique est séparée de l'unité du Siège apostolique. Or dans ce schisme le danger est devenu tellement grand - nous le disons avec une grande douleur - qu'à peine on trouve encore quelques prêtres ou clercs catholiques dans des contrées aussi étendues. Puisque donc beaucoup de fils se trouvent jetés dans cette dévastation, la nécessité de la paix chrétienne exige que le coeur maternel de l'Eglise s'ouvre sur eux.<br> Instruits par les exemples et les écrits de nos Pères qui, à différentes époques, ont reçu dans leurs ordres des novatiens, des donatistes et d'autres hérétiques, nous recevons dans l'office épiscopal les évêques de cet empire qui ont été ordonnés dans le schisme, à moins qu'ils se révèlent être des intrus, des simoniaques ou des criminels. Nous déterminons la même chose pour les clercs, quel que soit leur ordre, que leur vie et leur science recommandent.</p><p></p>",
+      "section": "Ordinations hérétiques et simoniaques",
+      "chapter": null,
       "document": "Ordinations hérétiques et simoniaques"
     },
     {
       "n": 706,
       "anchor": "cz2",
       "html": "<p><br> Can. 9 . Quiconque pille les biens des naufragés, qu'il soit exclu du seuil de l'Eglise comme les pillards et les fratricides.</p>",
+      "section": "Pillage des naufragés et simonie.",
+      "chapter": null,
       "document": "Pillage des naufragés et simonie."
     },
     {
       "n": 707,
       "anchor": "cz3",
       "html": "<p><br> Can. 10 . Ce qui a été décidé pour les simoniaques, nous aussi nous le confirmons selon le jugement du Saint-Esprit de par notre autorité apostolique. (2) Aussi tout ce qui été acquis, soit dans les ordres sacrés, soit dans les affaires ecclésiastiques, moyennant la promesse ou le don d'argent, nous décidons que cela est nul et ne peut jamais avoir aucune valeur. (4) Quant à ceux qui sciemment ont accepté d'être consacrés - ou mieux : profanés- par des simoniaques, nous déclarons leur consécration totalement nulle.</p>",
+      "section": "Pillage des naufragés et simonie.",
+      "chapter": null,
       "document": "Pillage des naufragés et simonie."
     },
     {
       "n": 708,
       "anchor": "cz4",
       "html": "<p><br> Can. 15 . Nous prescrivons également que pour le chrême, le baptême et la sépulture rien ne sera jamais exigé.</p><p><center></p>",
+      "section": "Pillage des naufragés et simonie.",
+      "chapter": null,
       "document": "Pillage des naufragés et simonie."
     }
   ],
@@ -47,5 +57,28 @@
   "next": {
     "slug": "calixte-ii-2-2-1119-13-12-1124-1er-concile-du-latran-9e-oecu",
     "title": "CALIXTE II : 2.2.1119 - 13.12.1124 1er concile du LATRAN (9e oecuménique) 18-27 mars-(6 avril ?)1123"
-  }
+  },
+  "sections": [
+    {
+      "title": "L'obéissance à l'Eglise.",
+      "anchor": "dh-704",
+      "first_n": 704,
+      "last_n": 704,
+      "chapters": []
+    },
+    {
+      "title": "Ordinations hérétiques et simoniaques",
+      "anchor": "dh-705",
+      "first_n": 705,
+      "last_n": 705,
+      "chapters": []
+    },
+    {
+      "title": "Pillage des naufragés et simonie.",
+      "anchor": "dh-706",
+      "first_n": 706,
+      "last_n": 708,
+      "chapters": []
+    }
+  ]
 }

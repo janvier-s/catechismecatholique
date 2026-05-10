@@ -167,6 +167,20 @@ def clean_entry_body(html: str) -> str:
     return html
 
 
+# An h2 is a "chapter" if it starts with one of these prefixes (sub-section
+# under a document/decree). Everything else is treated as a "section" — the
+# top-level document/decree heading.
+CHAPTER_H2_RE = re.compile(
+    r"^\s*(?:Chap(?:\.|itre)|Can(?:\.|on)|Préambule|Préambu1e|"
+    r"Suite des canons?|Avant[- ]?propos|Notes? préliminaires?)",
+    re.IGNORECASE,
+)
+
+
+def is_chapter_h2(text: str) -> bool:
+    return bool(CHAPTER_H2_RE.match(text))
+
+
 # Inline chapter-heading patterns sometimes left as plain text in catho.org
 # bodies (instead of <h2>). When such a heading sits at the *end* of one
 # entry's body, it actually belongs as the document context of the NEXT
@@ -434,14 +448,19 @@ def main() -> None:
     n_to_unit = {}
     unit_slug_seen = {}
     stack = []
-    current_h2 = None
+    current_section: str | None = None  # top-level decree/document h2
+    current_chapter: str | None = None  # "Chap. N." sub-level h2
     last_unit_path = ()
     for ev in all_events:
         if ev[0] == "h1":
             push_h1(ev[1])
             continue
         if ev[0] == "h2":
-            current_h2 = ev[1]
+            if is_chapter_h2(ev[1]):
+                current_chapter = ev[1]
+            else:
+                current_section = ev[1]
+                current_chapter = None  # new section resets the chapter
             continue
         if ev[0] == "entry":
             n, anchor, body_html = ev[1], ev[2], ev[3]
@@ -470,7 +489,10 @@ def main() -> None:
                     "n": n,
                     "anchor": anchor,
                     "html": body_html,
-                    "document": current_h2,
+                    "section": current_section,
+                    "chapter": current_chapter,
+                    # Backward-compat: `document` = chapter if present, else section.
+                    "document": current_chapter or current_section,
                 }
             )
             n_to_unit[n] = current_unit["slug"]
@@ -493,6 +515,54 @@ def main() -> None:
         u["next"] = (
             {"slug": next_u["slug"], "title": next_u["title"]} if next_u else None
         )
+        # Compact tree of section-level h2s + chapter-level h3s for the
+        # sommaire and sidebar. Each section/chapter anchors at its first
+        # entry's #dh-N.
+        sections_summary: list[dict[str, Any]] = []
+        for entry in u["entries"]:
+            sec = entry.get("section")
+            cha = entry.get("chapter")
+            anchor = f"dh-{entry['n']}"
+            if sec:
+                if not sections_summary or sections_summary[-1]["title"] != sec:
+                    sections_summary.append(
+                        {
+                            "title": sec,
+                            "anchor": anchor,
+                            "first_n": entry["n"],
+                            "last_n": entry["n"],
+                            "chapters": [],
+                        }
+                    )
+                else:
+                    sections_summary[-1]["last_n"] = entry["n"]
+            if cha:
+                # Attach chapter under the latest section (or create a
+                # synthetic top-level group when there's no section).
+                if not sections_summary:
+                    sections_summary.append(
+                        {
+                            "title": "",
+                            "anchor": anchor,
+                            "first_n": entry["n"],
+                            "last_n": entry["n"],
+                            "chapters": [],
+                        }
+                    )
+                last_section = sections_summary[-1]
+                chapters = last_section["chapters"]
+                if not chapters or chapters[-1]["title"] != cha:
+                    chapters.append(
+                        {
+                            "title": cha,
+                            "anchor": anchor,
+                            "first_n": entry["n"],
+                            "last_n": entry["n"],
+                        }
+                    )
+                else:
+                    chapters[-1]["last_n"] = entry["n"]
+        u["sections"] = sections_summary
         with open(OUT_UNITS / f"{u['slug']}.json", "w", encoding="utf-8") as fh:
             json.dump(u, fh, ensure_ascii=False, indent=2)
 
@@ -513,6 +583,7 @@ def main() -> None:
                 "entry_count": len(u["entries"]),
                 "first_n": u["entries"][0]["n"] if u["entries"] else None,
                 "last_n": u["entries"][-1]["n"] if u["entries"] else None,
+                "sections": u.get("sections", []),
             }
         )
     for slug in ["1-symboles-de-foi", "2-magistere-de-leglise", "3-tables", "4-quatrieme"]:

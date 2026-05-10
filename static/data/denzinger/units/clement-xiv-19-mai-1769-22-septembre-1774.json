@@ -14,6 +14,8 @@
       "n": 2588,
       "anchor": "egw",
       "html": "<p><br> </p>",
+      "section": "Privilège paulin",
+      "chapter": null,
       "document": "Privilège paulin"
     }
   ],
@@ -24,5 +26,14 @@
   "next": {
     "slug": "pie-vi-15-fevrier-1775-29-aout-1799",
     "title": "PIE VI : 15 Février 1775-29 août 1799"
-  }
+  },
+  "sections": [
+    {
+      "title": "Privilège paulin",
+      "anchor": "dh-2588",
+      "first_n": 2588,
+      "last_n": 2588,
+      "chapters": []
+    }
+  ]
 }

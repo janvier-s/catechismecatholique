@@ -13,24 +13,32 @@
       "n": 747,
       "anchor": "c01",
       "html": "<p><br> </p>",
+      "section": "Concile de Tours, commencé le 19 mai 1163.",
+      "chapter": null,
       "document": "Concile de Tours, commencé le 19 mai 1163."
     },
     {
       "n": 748,
       "anchor": "c02",
       "html": "<p><br> </p>",
+      "section": "Lettre \"Ex litteris tuis\" au sultan qui réside à Iconium, 1169.",
+      "chapter": null,
       "document": "Lettre \"Ex litteris tuis\" au sultan qui réside à Iconium, 1169."
     },
     {
       "n": 749,
       "anchor": "c03",
       "html": "<p><br> </p>",
+      "section": "Lettre \" Cum in nostra \" à l'archevêque Guillaume de Sens, 28 mai 1170.",
+      "chapter": null,
       "document": "Lettre \" Cum in nostra \" à l'archevêque Guillaume de Sens, 28 mai 1170."
     },
     {
       "n": 750,
       "anchor": "c04",
       "html": "<p><br> </p>",
+      "section": "Lettre \" Cum Christus \" à l'archevêque Guillaume de Reims, 18 février 1177.",
+      "chapter": null,
       "document": "Lettre \" Cum Christus \" à l'archevêque Guillaume de Reims, 18 février 1177."
     }
   ],
@@ -41,5 +49,35 @@
   "next": {
     "slug": "latran-11e-oecumenique-5-19-22-mars-1179",
     "title": "LATRAN (11e oecuménique) 5-19 (22?) mars 1179"
-  }
+  },
+  "sections": [
+    {
+      "title": "Concile de Tours, commencé le 19 mai 1163.",
+      "anchor": "dh-747",
+      "first_n": 747,
+      "last_n": 747,
+      "chapters": []
+    },
+    {
+      "title": "Lettre \"Ex litteris tuis\" au sultan qui réside à Iconium, 1169.",
+      "anchor": "dh-748",
+      "first_n": 748,
+      "last_n": 748,
+      "chapters": []
+    },
+    {
+      "title": "Lettre \" Cum in nostra \" à l'archevêque Guillaume de Sens, 28 mai 1170.",
+      "anchor": "dh-749",
+      "first_n": 749,
+      "last_n": 749,
+      "chapters": []
+    },
+    {
+      "title": "Lettre \" Cum Christus \" à l'archevêque Guillaume de Reims, 18 février 1177.",
+      "anchor": "dh-750",
+      "first_n": 750,
+      "last_n": 750,
+      "chapters": []
+    }
+  ]
 }

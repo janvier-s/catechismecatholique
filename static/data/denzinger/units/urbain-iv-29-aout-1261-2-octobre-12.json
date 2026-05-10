@@ -13,12 +13,16 @@
       "n": 846,
       "anchor": "c3x",
       "html": "<p><br> Or lors de l'institution de ce sacrement il dit lui-même aux apôtres : \" Faites ceci en mémoire de moi \" <i>Lc 22,19</i>, afin que ce sacrement sublime et vénérable soit pour nous un mémorial éminent et insigne de l'amour extraordinaire par lequel il nous a aimés. Un mémorial admirable, dis-je... dans lequel nous obtenons sûrement une aide pour la vie et pour la mort. C'est là le mémorial...salvifique dans lequel nous faisons mémoire avec gratitude de notre Rédemption, dans lequel nous sommes éloignés du mal et confortés dans le bien, et progressons dans la croissance des vertus et des grâces, dans lequel en vérité nous progressons de par la présence corporelle du Sauveur lui-même.<br> D'autres réalités dont nous faisons mémoire, nous les embrassons par l'esprit et par l'intelligence, mais nous n'en possédons pas pour autant la présence réelle. Mais dans cette commémoration sacramentelle du Christ, Jésus Christ nous est présent, certes sous une autre forme, mais dans sa propre substance. Avant de monter au ciel il dit en effet aux apôtres et à leurs successeurs : \" Voici, je suis avec vous jusqu'à la consommation des siècles \" <i>Mt 28,20</i> et il les conforta par la promesse bienfaisante qu'il demeurera et sera aussi avec eux d'une présence corporelle.</p><p></p>",
+      "section": "L'eucharistie comme mémorial du Christ.",
+      "chapter": null,
       "document": "L'eucharistie comme mémorial du Christ."
     },
     {
       "n": 847,
       "anchor": "c3y",
       "html": "<p><br> Dépassant toute plénitude de largesse, allant au-delà de toute mesure de l'amour, il se distribua en nourriture. O libéralité unique et admirable, où le donateur devient le don, et où ce qui est donné est pleinement identique à celui qui donne ! ...<br> Il s'est donc donné en nourriture pour que l'homme, qui avait été abattu par la mort, fût relevé par une nourriture à la vie... Manger a blessé et manger a guéri. Voici que de là où est née la blessure est venu aussi le remède, et de là où la mort s'est introduite est sortie aussi la vie. De ce manger- là en effet il est dit : \" Du jour où tu en mangeras, de mort tu mourras \" <i>Gn 2,17</i> mais de ce manger-ci on peut lire : \" Celui qui aura mangé de ce pain vivra à jamais \" <i>Jn 6,52</i>...<br> Ce fut aussi une libéralité qui convient et un acte approprié que le Verbe éternel de Dieu, qui est l'aliment et le réconfort de la créature raisonnable, s'étant fait chair se soit donné en nourriture à la chair et au corps de la créature raisonnable, c'est-à-dire à l'homme...Ce pain est consommé, mais il n'est pas épuisé ; il est mangé, mais il n'est pas changé, car il n'est nullement transformé en celui qui le mange, mais s'il est reçu dignement, celui qui le reçoit lui est conformé.</p><p><center></p>",
+      "section": "L'Eucharistie, aliment de l'âme.",
+      "chapter": null,
       "document": "L'Eucharistie, aliment de l'âme."
     }
   ],
@@ -29,5 +33,21 @@
   "next": {
     "slug": "clement-iv-5-fevrier-1265-29-novembre-1268",
     "title": "CLEMENT IV : 5 Février 1265-29 novembre 1268."
-  }
+  },
+  "sections": [
+    {
+      "title": "L'eucharistie comme mémorial du Christ.",
+      "anchor": "dh-846",
+      "first_n": 846,
+      "last_n": 846,
+      "chapters": []
+    },
+    {
+      "title": "L'Eucharistie, aliment de l'âme.",
+      "anchor": "dh-847",
+      "first_n": 847,
+      "last_n": 847,
+      "chapters": []
+    }
+  ]
 }
