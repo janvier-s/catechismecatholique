@@ -822,21 +822,39 @@ export interface CatIllustreStructure {
 
 export interface DenzingerEntry {
 	n: number;
-	title: string;
+	anchor: string;
 	html: string;
+	document: string | null;
+}
+
+export interface DenzingerUnit {
+	slug: string;
+	title: string;
+	breadcrumb: string[];
 	part_slug: string | null;
 	part_title: string | null;
-	section_slug: string | null;
-	section_title: string | null;
-	pope: string | null;
-	document: string | null;
+	entries: DenzingerEntry[];
+	prev: { slug: string; title: string } | null;
+	next: { slug: string; title: string } | null;
+}
+
+export interface DenzingerStructureUnit {
+	slug: string;
+	title: string;
+	breadcrumb: string[];
+	entry_count: number;
+	first_n: number | null;
+	last_n: number | null;
 }
 
 export interface DenzingerStructurePart {
 	slug: string;
 	title: string;
-	range: [number, number];
-	count: number;
+	units: DenzingerStructureUnit[];
+	unit_count: number;
+	entry_count: number;
+	first_n: number | null;
+	last_n: number | null;
 }
 
 export interface DenzingerStructure {
@@ -845,8 +863,10 @@ export interface DenzingerStructure {
 	subtitle: string;
 	parts: DenzingerStructurePart[];
 	all_numbers: number[];
+	total_entries: number;
+	total_units: number;
 }
 
 export interface DenzingerEntryIndex {
-	[n: string]: { title: string; part_slug: string };
+	[n: string]: { unit_slug: string };
 }

@@ -1,0 +1,54 @@
+{
+  "slug": "orientales",
+  "title": "Orientales",
+  "breadcrumb": [
+    "PREMIERE PARTIE",
+    "SYMBOLES DE FOI (1-76)",
+    "SYMBOLES STRUCTURES",
+    "I. Schéma trinitaire tripartite.",
+    "B. FORMULES ORIENTALES",
+    "Orientales"
+  ],
+  "part_slug": "1-symboles-de-foi",
+  "part_title": "Première partie",
+  "entries": [
+    {
+      "n": 60,
+      "anchor": "cjf",
+      "html": "<p><br> Je crois et je suis baptisé en l'unique inengendré, seul vrai Dieu, tout- puissant, Père du Christ, créateur et auteur de toutes choses, de qui sont toutes choses.<br> Et au Seigneur Jésus, le Christ, son Fils monogène, le premier-né de toute créature, engendré avant les siècles par la prédilection du Père, non pas créé, par qui tout a été fait, au ciel et sur la terre, le visible et l'invisible ;<br> dans les derniers jours il est descendu des cieux et a pris chair, engendré de la sainte Vierge Marie, il a vécu saintement selon les lois de Dieu son Père, il a été crucifié sous Ponce Pilate, et il est mort pour nous, et il est ressuscité des morts après sa Passion le troisième jour, et il est monté aux cieux et s'est assis à la droite du Père, et il reviendra dans la gloire lors de l'accomplissement des temps pour juger les vivants et les morts ; son Règne n'aura pas de fin.<br> Je suis baptisé aussi en l'Esprit Saint, c'est-à-dire le Paraclet, qui a agi en tous les saints depuis le commencement et qui ensuite a été envoyé également aux apôtres d'auprès du Père selon la promesse de notre Sauveur et Seigneur Jésus Christ, et après les autres à tous ceux qui croient dans la sainte Eglise catholique et apostolique, en la résurrection de la chair, en la rémission des péchés, en un Royaume des cieux et en la vie du siècle à venir.</p><p></p>",
+      "document": "Constitutions apostoliques. vers 380."
+    },
+    {
+      "n": 61,
+      "anchor": "cjg",
+      "html": "<p><br> Crois-tu en Dieu, le Père tout-puissant ?<br> Crois-tu également en Jésus Christ, le Fils de Dieu, qui vient du Père, qui depuis le commencement est avec Dieu, qui est né de Marie la Vierge par l'Esprit Saint, qui a été crucifié sous Ponce Pilate, est mort, est ressuscité le troisième jour, à nouveau vivant, d'entre les morts, est monté au ciel, siège à la droite du Père, et qui viendra juger les vivants et les morts ?<br> Crois-tu également en l'Esprit Saint, en la Sainte Eglise ?</p><p></p>",
+      "document": "Testament de Notre Seigneur Jésus Christ."
+    },
+    {
+      "n": 62,
+      "anchor": "cjh",
+      "html": "<p><br> Tu crois en notre Seigneur Jésus Christ, le Fils unique de Dieu le Père, qui, d'une manière admirable, est devenu homme à cause de nous en une unité inconcevable par son Esprit Saint de Marie la Vierge sainte, sans la semence de l'homme,<br> et qu'il a été crucifié pour nous sous Ponce Pilate, est mort en même temps pour notre salut selon sa volonté, est ressuscité le troisième jour, a libéré ceux qui étaient enchaînés, est monté aux cieux, siège à la droite de son Père bon dans les hauteurs, et vient à nouveau juger les vivants et les morts selon sa révélation et son Règne.<br> Et tu crois en l'Esprit Saint, bon et qui donne la vie, qui purifie tout, dans la sainte Eglise.</p><p></p>",
+      "document": "a) Version copte : profession de foi après le baptême."
+    },
+    {
+      "n": 63,
+      "anchor": "cji",
+      "html": "<p><br> Crois-tu au nom de Jésus Christ, notre Seigneur, le Fils Unique de Dieu le Père, qu'il est devenu homme par un miracle inconcevable du Saint- Esprit et de la Vierge Marie, sans la semence de l'homme, et qu'il a été crucifié aux jours de Ponce Pilate, est mort en même temps pour notre salut selon sa volonté, est ressuscité le troisième jour d'entre les morts, a libéré ceux qui étaient enchaînés, est monté aux cieux, siège à la droite du Père et viendra juger les vivants et les morts selon sa révélation et son Règne ?<br> Crois-tu en l'Esprit Saint, bon et qui purifie, et en la sainte Eglise ? Et crois-tu en la résurrection de la chair qui attend tous les hommes en un Règne et en un jugement éternel ?</p><p><hr> </p>",
+      "document": "( cf. [Can.4>4])"
+    },
+    {
+      "n": 64,
+      "anchor": "cjj",
+      "html": "<p><br> Crois-tu en Dieu, le Père tout-puissant ?<br> Crois-tu en Jésus Christ, le Fils de Dieu, que Marie, la Vierge, a engendré du Saint-Esprit (qui est venu pour sauver le genre humain,) qui a été crucifié (pour nous) sous Ponce Pilate, est mort et qui est ressuscité d'entre les morts le troisième jour, et qui est monté aux cieux, qui siège à la droite du Père et viendra juger les vivants et les morts ?<br> Crois-tu en l'Esprit Saint (paraclet qui procède du Père et du Fils) ?</p><p><center></p>",
+      "document": "Canons d'Hippolyte."
+    }
+  ],
+  "prev": {
+    "slug": "symboles-locaux",
+    "title": "Symboles Locaux"
+  },
+  "next": {
+    "slug": "ii-schema-bipartite-trinitaire-christologique",
+    "title": "II. Schéma bipartite trinitaire-christologique."
+  }
+}

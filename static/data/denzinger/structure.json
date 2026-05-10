@@ -6,392 +6,1735 @@
     {
       "slug": "1-symboles-de-foi",
       "title": "Première partie",
-      "range": [
-        1,
-        76
+      "units": [
+        {
+          "slug": "symbole-de-foi",
+          "title": "Symbole de foi",
+          "breadcrumb": [
+            "PREMIERE PARTIE",
+            "SYMBOLES DE FOI (1-76)",
+            "Symbole de foi"
+          ],
+          "entry_count": 6,
+          "first_n": 1,
+          "last_n": 6
+        },
+        {
+          "slug": "symbole-des-apotres",
+          "title": "Symbole des Apôtres",
+          "breadcrumb": [
+            "PREMIERE PARTIE",
+            "SYMBOLES DE FOI (1-76)",
+            "SYMBOLES STRUCTURES",
+            "I. Schéma trinitaire tripartite.",
+            "A- FORMULES OCCIDENTALES",
+            "Symbole des Apôtres"
+          ],
+          "entry_count": 19,
+          "first_n": 10,
+          "last_n": 36
+        },
+        {
+          "slug": "symboles-locaux",
+          "title": "Symboles Locaux",
+          "breadcrumb": [
+            "PREMIERE PARTIE",
+            "SYMBOLES DE FOI (1-76)",
+            "SYMBOLES STRUCTURES",
+            "I. Schéma trinitaire tripartite.",
+            "B. FORMULES ORIENTALES",
+            "Symboles Locaux"
+          ],
+          "entry_count": 13,
+          "first_n": 40,
+          "last_n": 55
+        },
+        {
+          "slug": "orientales",
+          "title": "Orientales",
+          "breadcrumb": [
+            "PREMIERE PARTIE",
+            "SYMBOLES DE FOI (1-76)",
+            "SYMBOLES STRUCTURES",
+            "I. Schéma trinitaire tripartite.",
+            "B. FORMULES ORIENTALES",
+            "Orientales"
+          ],
+          "entry_count": 5,
+          "first_n": 60,
+          "last_n": 64
+        },
+        {
+          "slug": "ii-schema-bipartite-trinitaire-christologique",
+          "title": "II. Schéma bipartite trinitaire-christologique.",
+          "breadcrumb": [
+            "PREMIERE PARTIE",
+            "SYMBOLES DE FOI (1-76)",
+            "SYMBOLES STRUCTURES",
+            "II. Schéma bipartite trinitaire-christologique."
+          ],
+          "entry_count": 6,
+          "first_n": 71,
+          "last_n": 76
+        }
       ],
-      "count": 49
+      "unit_count": 5,
+      "entry_count": 49,
+      "first_n": 1,
+      "last_n": 76
     },
     {
       "slug": "2-magistere-de-leglise",
       "title": "Deuxième partie",
-      "range": [
-        101,
-        3930
+      "units": [
+        {
+          "slug": "clement-1er-de-rome-92-88-101-97",
+          "title": "CLEMENT 1er DE ROME : 92 (88 ?)-101 (97 ?)",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ANACLET : 76 (80 ,) - 90 (88 ?)",
+            "CLEMENT 1er DE ROME : 92 (88 ?)-101 (97 ?)"
+          ],
+          "entry_count": 2,
+          "first_n": 101,
+          "last_n": 102
+        },
+        {
+          "slug": "zephirin-198-199-217",
+          "title": "ZEPHIRIN : 198 (199 ?)-217",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZEPHIRIN : 198 (199 ?)-217"
+          ],
+          "entry_count": 1,
+          "first_n": 105,
+          "last_n": 105
+        },
+        {
+          "slug": "corneille-mars-251-juin-septembre-253",
+          "title": "CORNEILLE : mars 251-juin (septembre ?) 253",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "CORNEILLE : mars 251-juin (septembre ?) 253"
+          ],
+          "entry_count": 2,
+          "first_n": 108,
+          "last_n": 109
+        },
+        {
+          "slug": "etienne-ier-12-28-mai-254-2-aout-257",
+          "title": "ETIENNE Ier : 12 (28 ?) mai 254 - 2 août 257",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LUCIUS : 25 (26 ?) juin 253 - 5 mars 254",
+            "ETIENNE Ier : 12 (28 ?) mai 254 - 2 août 257"
+          ],
+          "entry_count": 2,
+          "first_n": 110,
+          "last_n": 111
+        },
+        {
+          "slug": "denys-22-juillet-259-260-27-26-decembre-268",
+          "title": "DENYS : 22 juillet 259 (260 ?)-27 (26 ?) décembre 268",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "DENYS : 22 juillet 259 (260 ?)-27 (26 ?) décembre 268"
+          ],
+          "entry_count": 4,
+          "first_n": 112,
+          "last_n": 115
+        },
+        {
+          "slug": "marcellin-30-juin-295-296-25-octobre-15-janvier-3",
+          "title": "MARCELLIN : 30 juin 295 (296 ?)-25 octobre (15 janvier ?) 3",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "MARCELLIN : 30 juin 295 (296 ?)-25 octobre (15 janvier ?) 3"
+          ],
+          "entry_count": 5,
+          "first_n": 117,
+          "last_n": 121
+        },
+        {
+          "slug": "silvestre-ier-31-janvier-314-31-decembre-335",
+          "title": "SILVESTRE Ier : 31 janvier 314 - 31 décembre 335",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "EUSEBE : 18 avril 309 (310 ?) - 17 août 309 (310 ?)",
+            "SILVESTRE Ier : 31 janvier 314 - 31 décembre 335"
+          ],
+          "entry_count": 1,
+          "first_n": 123,
+          "last_n": 123
+        },
+        {
+          "slug": "1er-concile-de-nicee-1er-oecumenique-19-juin-25-aout-325",
+          "title": "1er concile de NICEE (1er oecuménique) 19 juin-25 août 325",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "EUSEBE : 18 avril 309 (310 ?) - 17 août 309 (310 ?)",
+            "1er concile de NICEE (1er oecuménique) 19 juin-25 août 325"
+          ],
+          "entry_count": 7,
+          "first_n": 125,
+          "last_n": 131
+        },
+        {
+          "slug": "jules-ier-6-fevrier-337-12-avril-352",
+          "title": "JULES Ier : 6 février 337-12 avril 352",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "MARC : 18 janvier - 7 octobre 336",
+            "JULES Ier : 6 février 337-12 avril 352"
+          ],
+          "entry_count": 5,
+          "first_n": 132,
+          "last_n": 136
+        },
+        {
+          "slug": "libere-17-mai-352-24-septembre-366",
+          "title": "LIBERE : 17 mai 352-24 septembre 366",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LIBERE : 17 mai 352-24 septembre 366"
+          ],
+          "entry_count": 6,
+          "first_n": 138,
+          "last_n": 143
+        },
+        {
+          "slug": "decembre-384",
+          "title": "DECEMBRE 384",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LIBERE : 17 mai 352-24 septembre 366",
+            "DECEMBRE 384"
+          ],
+          "entry_count": 6,
+          "first_n": 144,
+          "last_n": 149
+        },
+        {
+          "slug": "1er-concile-de-constantinople-2e-concile-oecumenique",
+          "title": "1er concile de CONSTANTINOPLE (2e concile Oecuménique)",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LIBERE : 17 mai 352-24 septembre 366",
+            "1er concile de CONSTANTINOPLE (2e concile Oecuménique)"
+          ],
+          "entry_count": 30,
+          "first_n": 150,
+          "last_n": 179
+        },
+        {
+          "slug": "sirice-decembre-384-12-janvier-385-26-novembre",
+          "title": "SIRICE : décembre 384 (12 janvier 385 ?)-26 novembre",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "SIRICE : décembre 384 (12 janvier 385 ?)-26 novembre"
+          ],
+          "entry_count": 5,
+          "first_n": 181,
+          "last_n": 185
+        },
+        {
+          "slug": "carthage-28-aout-397",
+          "title": "Carthage, 28 août 397",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "SIRICE : décembre 384 (12 janvier 385 ?)-26 novembre",
+            "Carthage, 28 août 397"
+          ],
+          "entry_count": 1,
+          "first_n": 186,
+          "last_n": 186
+        },
+        {
+          "slug": "anastase-ier-27-novembre-399-402-19-decembre-40-1er-concile-",
+          "title": "ANASTASE Ier : 27 novembre 399-402 (19 décembre 40 1er. concile de Tolède, septembre 400 (405 ?)",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "SIRICE : décembre 384 (12 janvier 385 ?)-26 novembre",
+            "ANASTASE Ier : 27 novembre 399-402 (19 décembre 40 1er. concile de Tolède, septembre 400 (405 ?)"
+          ],
+          "entry_count": 23,
+          "first_n": 187,
+          "last_n": 209
+        },
+        {
+          "slug": "innocent-ier-21-22-decembre-402-12-mars",
+          "title": "INNOCENT Ier : 21 (22 ?) décembre 402 -12 mars",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "SIRICE : décembre 384 (12 janvier 385 ?)-26 novembre",
+            "INNOCENT Ier : 21 (22 ?) décembre 402 -12 mars"
+          ],
+          "entry_count": 9,
+          "first_n": 211,
+          "last_n": 219
+        },
+        {
+          "slug": "zosime-18-mars-417-26-decembre-418",
+          "title": "ZOSIME : 18 mars 417-26 décembre 418",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZOSIME : 18 mars 417-26 décembre 418"
+          ],
+          "entry_count": 11,
+          "first_n": 221,
+          "last_n": 231
+        },
+        {
+          "slug": "boniface-ier-29-decembre-418-4-septembre-422",
+          "title": "BONIFACE Ier : 29 décembre 418-4 septembre 422",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZOSIME : 18 mars 417-26 décembre 418",
+            "BONIFACE Ier : 29 décembre 418-4 septembre 422"
+          ],
+          "entry_count": 4,
+          "first_n": 232,
+          "last_n": 235
+        },
+        {
+          "slug": "celestin-ier-10-septembre-422-27-juil",
+          "title": "CELESTIN Ier : 10 septembre 422 - 27 juil",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZOSIME : 18 mars 417-26 décembre 418",
+            "CELESTIN Ier : 10 septembre 422 - 27 juil"
+          ],
+          "entry_count": 14,
+          "first_n": 236,
+          "last_n": 249
+        },
+        {
+          "slug": "oecumenique-22-juin-septembre-431",
+          "title": "Oecuménique) 22 juin - septembre 431",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZOSIME : 18 mars 417-26 décembre 418",
+            "Oecuménique) 22 juin - septembre 431"
+          ],
+          "entry_count": 19,
+          "first_n": 250,
+          "last_n": 268
+        },
+        {
+          "slug": "xiste-sixte-iii-31-juillet-432-19-aout-440",
+          "title": "XISTE (SIXTE) III : 31 juillet 432 - 19 août 440",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZOSIME : 18 mars 417-26 décembre 418",
+            "XISTE (SIXTE) III : 31 juillet 432 - 19 août 440"
+          ],
+          "entry_count": 3,
+          "first_n": 271,
+          "last_n": 273
+        },
+        {
+          "slug": "leon-ier-le-grand-29-septembre-440-10-novembre",
+          "title": "LEON Ier LE GRAND : 29 septembre 440-10 novembre",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZOSIME : 18 mars 417-26 décembre 418",
+            "LEON Ier LE GRAND : 29 septembre 440-10 novembre"
+          ],
+          "entry_count": 17,
+          "first_n": 280,
+          "last_n": 299
+        },
+        {
+          "slug": "oecumenique-8-octobre-debut-de-novembre-451",
+          "title": "Oecuménique) 8 octobre - début de novembre 451",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ZOSIME : 18 mars 417-26 décembre 418",
+            "Oecuménique) 8 octobre - début de novembre 451"
+          ],
+          "entry_count": 28,
+          "first_n": 300,
+          "last_n": 329
+        },
+        {
+          "slug": "simplicius-3-mars-468-10-mars-483",
+          "title": "SIMPLICIUS : 3 mars 468-10 mars 483",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "SIMPLICIUS : 3 mars 468-10 mars 483"
+          ],
+          "entry_count": 14,
+          "first_n": 330,
+          "last_n": 343
+        },
+        {
+          "slug": "felix-ii-13-mars-483-1er-mars-492",
+          "title": "FELIX II : 13 mars 483-1er mars 492",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "FELIX II : 13 mars 483-1er mars 492"
+          ],
+          "entry_count": 1,
+          "first_n": 345,
+          "last_n": 345
+        },
+        {
+          "slug": "gelase-ier-1er-mars-492-21-novembre-496",
+          "title": "GELASE Ier : 1er mars 492-21 novembre 496",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "FELIX II : 13 mars 483-1er mars 492",
+            "GELASE Ier : 1er mars 492-21 novembre 496"
+          ],
+          "entry_count": 9,
+          "first_n": 347,
+          "last_n": 355
+        },
+        {
+          "slug": "anastase-ii-24-novembre-496-17",
+          "title": "ANASTASE II : 24 novembre 496-17",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "ANASTASE II : 24 novembre 496-17"
+          ],
+          "entry_count": 6,
+          "first_n": 356,
+          "last_n": 361
+        },
+        {
+          "slug": "symmaque-22-novembre-498-19-juillet-514",
+          "title": "SYMMAQUE : 22 novembre 498-19 juillet 514",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "SYMMAQUE : 22 novembre 498-19 juillet 514"
+          ],
+          "entry_count": 1,
+          "first_n": 362,
+          "last_n": 362
+        },
+        {
+          "slug": "hormisdas-20-juillet-514-6-aout-523",
+          "title": "HORMISDAS : 20 juillet 514-6 août 523",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "HORMISDAS : 20 juillet 514-6 août 523"
+          ],
+          "entry_count": 7,
+          "first_n": 363,
+          "last_n": 369
+        },
+        {
+          "slug": "felix-iii-12-juillet-526-22-septembre",
+          "title": "FELIX III : 12 juillet 526-22 septembre",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "FELIX III : 12 juillet 526-22 septembre"
+          ],
+          "entry_count": 28,
+          "first_n": 370,
+          "last_n": 397
+        },
+        {
+          "slug": "ii-22-septembre",
+          "title": "II : 22 septembre",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "II : 22 septembre"
+          ],
+          "entry_count": 3,
+          "first_n": 398,
+          "last_n": 400
+        },
+        {
+          "slug": "jean-ii-2-janvier-533-8-mai-535",
+          "title": "JEAN II : 2 Janvier 533-8 mai 535",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "JEAN II : 2 Janvier 533-8 mai 535"
+          ],
+          "entry_count": 2,
+          "first_n": 401,
+          "last_n": 402
+        },
+        {
+          "slug": "vigile-11-novembre-537-7-juin-555",
+          "title": "VIGILE : 11 novembre 537-7 juin 555",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "VIGILE : 11 novembre 537-7 juin 555"
+          ],
+          "entry_count": 18,
+          "first_n": 403,
+          "last_n": 420
+        },
+        {
+          "slug": "2e-concile-de-constantinople-5e-oecumenique-5-mai-2-juin-553",
+          "title": "2e Concile de CONSTANTINOPLE (5e oecuménique) 5 mai-2 juin 553",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "VIGILE : 11 novembre 537-7 juin 555",
+            "2e Concile de CONSTANTINOPLE (5e oecuménique) 5 mai-2 juin 553"
+          ],
+          "entry_count": 18,
+          "first_n": 421,
+          "last_n": 438
+        },
+        {
+          "slug": "pelage-1er-16-avril-556-3-m",
+          "title": "PELAGE 1er : 16 avril 556 - 3 m",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "VIGILE : 11 novembre 537-7 juin 555",
+            "PELAGE 1er : 16 avril 556 - 3 m"
+          ],
+          "entry_count": 7,
+          "first_n": 441,
+          "last_n": 447
+        },
+        {
+          "slug": "jean-iii-17-juillet-561-13-juillet-574",
+          "title": "JEAN III : 17 juillet 561-13 juillet 574",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "JEAN III : 17 juillet 561-13 juillet 574"
+          ],
+          "entry_count": 14,
+          "first_n": 451,
+          "last_n": 464
+        },
+        {
+          "slug": "pelage-ii-26-novembre-579-7-fevrier-590",
+          "title": "PELAGE II : 26 novembre 579-7 février 590",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "PELAGE II : 26 novembre 579-7 février 590"
+          ],
+          "entry_count": 3,
+          "first_n": 468,
+          "last_n": 470
+        },
+        {
+          "slug": "gregoire-ier-le-grand-3-septembre-590-12-ma",
+          "title": "GREGOIRE Ier LE GRAND : 3 septembre 590-12 ma",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "PELAGE II : 26 novembre 579-7 février 590",
+            "GREGOIRE Ier LE GRAND : 3 septembre 590-12 ma"
+          ],
+          "entry_count": 9,
+          "first_n": 472,
+          "last_n": 480
+        },
+        {
+          "slug": "honorius-ier-27-octobre-625-12-octobre",
+          "title": "HONORIUS Ier : 27 octobre 625-12 octobre",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "BONIFACE V : 23 décembre 619 - 25 octob",
+            "HONORIUS Ier : 27 octobre 625-12 octobre"
+          ],
+          "entry_count": 8,
+          "first_n": 485,
+          "last_n": 493
+        },
+        {
+          "slug": "jean-iv-24-decembre-640-12-octobre-642",
+          "title": "JEAN IV : 24 décembre 640-12 octobre 642",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "JEAN IV : 24 décembre 640-12 octobre 642"
+          ],
+          "entry_count": 2,
+          "first_n": 497,
+          "last_n": 498
+        },
+        {
+          "slug": "martin-1er-5-juillet-649-17-juin-653-16-septemb",
+          "title": "MARTIN 1er : 5 juillet 649-17 juin 653 (16 septemb",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "JEAN IV : 24 décembre 640-12 octobre 642",
+            "MARTIN 1er : 5 juillet 649-17 juin 653 (16 septemb"
+          ],
+          "entry_count": 23,
+          "first_n": 500,
+          "last_n": 522
+        },
+        {
+          "slug": "adeodat-ii-11-avril-672-17-16-juin-676",
+          "title": "ADEODAT II : 11 avril 672-17 (16 ?) juin 676",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ADEODAT II : 11 avril 672-17 (16 ?) juin 676"
+          ],
+          "entry_count": 17,
+          "first_n": 525,
+          "last_n": 541
+        },
+        {
+          "slug": "agathon-27-juin-678-10-janvier-681",
+          "title": "AGATHON : 27 juin 678 - 10 janvier 681",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "AGATHON : 27 juin 678 - 10 janvier 681"
+          ],
+          "entry_count": 7,
+          "first_n": 542,
+          "last_n": 548
+        },
+        {
+          "slug": "3e-concile-de-constantinople-6e-oecumenique-7-novembre-680-1",
+          "title": "3e concile de CONSTANTINOPLE (6e oecuménique) 7 novembre 680-16 septembre 681.",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "AGATHON : 27 juin 678 - 10 janvier 681",
+            "3e concile de CONSTANTINOPLE (6e oecuménique) 7 novembre 680-16 septembre 681."
+          ],
+          "entry_count": 10,
+          "first_n": 550,
+          "last_n": 559
+        },
+        {
+          "slug": "leon-ii-17-aout-682-3-juillet-683",
+          "title": "LEON II : 17 août 682-3 juillet 683",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "LEON II : 17 août 682-3 juillet 683"
+          ],
+          "entry_count": 3,
+          "first_n": 561,
+          "last_n": 563
+        },
+        {
+          "slug": "benoit-ii-26-juin-684-8-mai-685",
+          "title": "BENOIT II : 26 juin 684-8 mai 685",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "BENOIT II : 26 juin 684-8 mai 685"
+          ],
+          "entry_count": 1,
+          "first_n": 564,
+          "last_n": 564
+        },
+        {
+          "slug": "serge-ier-15-decembre-687-8-septembre-701",
+          "title": "SERGE Ier : 15 décembre 687-8 septembre 701",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "CONON : 21 octobre 686 - 21 septembre 687",
+            "SERGE Ier : 15 décembre 687-8 septembre 701"
+          ],
+          "entry_count": 10,
+          "first_n": 566,
+          "last_n": 575
+        },
+        {
+          "slug": "gregoire-ii-19-mai-715-11-fevrier-731",
+          "title": "GREGOIRE II : 19 mai 715-11 février 731",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "GREGOIRE II : 19 mai 715-11 février 731"
+          ],
+          "entry_count": 2,
+          "first_n": 580,
+          "last_n": 581
+        },
+        {
+          "slug": "gregoire-iii-18-mars-731-28-29-novembre-741",
+          "title": "GREGOIRE III : 18 mars 731-28 (29 ?) novembre 741",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "GREGOIRE III : 18 mars 731-28 (29 ?) novembre 741"
+          ],
+          "entry_count": 2,
+          "first_n": 582,
+          "last_n": 583
+        },
+        {
+          "slug": "zacharie-10-3-decembre-741-22-15-mars-752",
+          "title": "ZACHARIE : 10(3?) décembre 741-22(15?) mars 752",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ZACHARIE : 10(3?) décembre 741-22(15?) mars 752"
+          ],
+          "entry_count": 4,
+          "first_n": 586,
+          "last_n": 589
+        },
+        {
+          "slug": "etienne-ii-iii-26-mars-752-26-avril-757",
+          "title": "ETIENNE II (III) : 26 mars 752-26 avril 757",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ZACHARIE : 10(3?) décembre 741-22(15?) mars 752",
+            "ETIENNE II (III) : 26 mars 752-26 avril 757"
+          ],
+          "entry_count": 1,
+          "first_n": 592,
+          "last_n": 592
+        },
+        {
+          "slug": "adrien-ier-9-fevrier-772-25-decembre-795",
+          "title": "ADRIEN Ier : 9 février 772-25 décembre 795",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ZACHARIE : 10(3?) décembre 741-22(15?) mars 752",
+            "ADRIEN Ier : 9 février 772-25 décembre 795"
+          ],
+          "entry_count": 2,
+          "first_n": 595,
+          "last_n": 596
+        },
+        {
+          "slug": "2e-concile-de-nicee-7e-oecumenique-24-septembre-23-octobre-7",
+          "title": "2e Concile de NICEE (7e Oecuménique) 24 septembre - 23 octobre 787",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ZACHARIE : 10(3?) décembre 741-22(15?) mars 752",
+            "2e Concile de NICEE (7e Oecuménique) 24 septembre - 23 octobre 787"
+          ],
+          "entry_count": 16,
+          "first_n": 600,
+          "last_n": 615
+        },
+        {
+          "slug": "leon-iii-27-decembre-795-12-juin-816",
+          "title": "LEON III : 27 décembre 795-12 juin 816",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "LEON III : 27 décembre 795-12 juin 816"
+          ],
+          "entry_count": 4,
+          "first_n": 616,
+          "last_n": 619
+        },
+        {
+          "slug": "leon-iv-10-avril-847-17-juillet-855",
+          "title": "LEON IV : 10 avril 847-17 juillet 855",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "LEON IV : 10 avril 847-17 juillet 855"
+          ],
+          "entry_count": 14,
+          "first_n": 620,
+          "last_n": 633
+        },
+        {
+          "slug": "nicolas-ier-24-avril-858-13-novembre-867",
+          "title": "NICOLAS Ier : 24 avril 858-13 novembre 867",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "BENOIT III : juillet 855-17 avril 858",
+            "NICOLAS Ier : 24 avril 858-13 novembre 867"
+          ],
+          "entry_count": 14,
+          "first_n": 635,
+          "last_n": 648
+        },
+        {
+          "slug": "hadrien-ii-14-decembre-867-14-decembre-872",
+          "title": "HADRIEN II : 14 décembre 867-14 décembre 872",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "HADRIEN II : 14 décembre 867-14 décembre 872"
+          ],
+          "entry_count": 15,
+          "first_n": 650,
+          "last_n": 664
+        },
+        {
+          "slug": "jean-viii-14-decembre-872-16-decembre-882",
+          "title": "JEAN VIII : 14 décembre 872-16 décembre 882",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "JEAN VIII : 14 décembre 872-16 décembre 882"
+          ],
+          "entry_count": 1,
+          "first_n": 668,
+          "last_n": 668
+        },
+        {
+          "slug": "etienne-v-vi-septembre-885-14-septembre-891",
+          "title": "ETIENNE V (VI) : septembre 885-14 septembre 891",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ADRIEN III : 17 mai 884-septembre 885",
+            "ETIENNE V (VI) : septembre 885-14 septembre 891"
+          ],
+          "entry_count": 1,
+          "first_n": 670,
+          "last_n": 670
+        },
+        {
+          "slug": "jean-xv-aout-985-mars-996",
+          "title": "JEAN XV : août 985-mars 996",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "JEAN XV : août 985-mars 996"
+          ],
+          "entry_count": 1,
+          "first_n": 675,
+          "last_n": 675
+        },
+        {
+          "slug": "leon-ix-12-fevrier-1049-19-avril-1054",
+          "title": "LEON IX : 12 février 1049-19 avril 1054",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "LEON IX : 12 février 1049-19 avril 1054"
+          ],
+          "entry_count": 8,
+          "first_n": 680,
+          "last_n": 687
+        },
+        {
+          "slug": "nicolas-ii-6-decembre-1058-27-juillet-1061",
+          "title": "NICOLAS II : 6 décembre 1058-27 juillet 1061",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "NICOLAS II : 6 décembre 1058-27 juillet 1061"
+          ],
+          "entry_count": 5,
+          "first_n": 690,
+          "last_n": 694
+        },
+        {
+          "slug": "alexandre-ii-1er-octobre-1061-21-avril-1073",
+          "title": "ALEXANDRE II : 1er octobre 1061-21 avril 1073.",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ALEXANDRE II : 1er octobre 1061-21 avril 1073."
+          ],
+          "entry_count": 2,
+          "first_n": 695,
+          "last_n": 698
+        },
+        {
+          "slug": "gregoire-vii-22-avril-1073-25-mai-1085",
+          "title": "GREGOIRE VII : 22 avril 1073-25 mai 1085",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "GREGOIRE VII : 22 avril 1073-25 mai 1085"
+          ],
+          "entry_count": 1,
+          "first_n": 700,
+          "last_n": 700
+        },
+        {
+          "slug": "urbain-ii-12-mars-1088-29-juillet-1099",
+          "title": "URBAIN II : 12 mars 1088-29 juillet 1099",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "URBAIN II : 12 mars 1088-29 juillet 1099"
+          ],
+          "entry_count": 3,
+          "first_n": 701,
+          "last_n": 703
+        },
+        {
+          "slug": "pascal-ii-14-aout-1099-21-janvier-1118",
+          "title": "PASCAL II : 14 août 1099-21 janvier 1118",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "PASCAL II : 14 août 1099-21 janvier 1118"
+          ],
+          "entry_count": 5,
+          "first_n": 704,
+          "last_n": 708
+        },
+        {
+          "slug": "calixte-ii-2-2-1119-13-12-1124-1er-concile-du-latran-9e-oecu",
+          "title": "CALIXTE II : 2.2.1119 - 13.12.1124 1er concile du LATRAN (9e oecuménique) 18-27 mars-(6 avril ?)1123",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "CALIXTE II : 2.2.1119 - 13.12.1124 1er concile du LATRAN (9e oecuménique) 18-27 mars-(6 avril ?)1123"
+          ],
+          "entry_count": 3,
+          "first_n": 710,
+          "last_n": 712
+        },
+        {
+          "slug": "innocent-ii-14-2-1130-24-9-1143-2e-concile-du-latran-10eme-o",
+          "title": "INNOCENT II :14.2.1130 - 24.9.1143 2e concile du LATRAN (10ème oecuménique)",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "INNOCENT II :14.2.1130 - 24.9.1143 2e concile du LATRAN (10ème oecuménique)"
+          ],
+          "entry_count": 24,
+          "first_n": 715,
+          "last_n": 741
+        },
+        {
+          "slug": "eugene-iii-15-fevrier-1145-8-juillet-1153",
+          "title": "EUGENE III : 15 février 1145-8 juillet 1153",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "EUGENE III : 15 février 1145-8 juillet 1153"
+          ],
+          "entry_count": 1,
+          "first_n": 745,
+          "last_n": 745
+        },
+        {
+          "slug": "alexandre-iii-7-septembre-1159-30-aout-1181",
+          "title": "ALEXANDRE III : 7 septembre 1159-30 août 1181",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ALEXANDRE III : 7 septembre 1159-30 août 1181"
+          ],
+          "entry_count": 4,
+          "first_n": 747,
+          "last_n": 750
+        },
+        {
+          "slug": "latran-11e-oecum-5-19-22-mar",
+          "title": "LATRAN (11e oecum 5-19 (22?) mar",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ALEXANDRE III : 7 septembre 1159-30 août 1181",
+            "LATRAN (11e oecum 5-19 (22?) mar"
+          ],
+          "entry_count": 7,
+          "first_n": 751,
+          "last_n": 758
+        },
+        {
+          "slug": "lucius-iii-1er-septembre-1181-25-novembre-118",
+          "title": "LUCIUS III : 1er septembre 1181 - 25 novembre 118",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "LUCIUS III : 1er septembre 1181 - 25 novembre 118"
+          ],
+          "entry_count": 3,
+          "first_n": 760,
+          "last_n": 762
+        },
+        {
+          "slug": "urbain-iii-25-novembre-1185-19-20-octobre-1187",
+          "title": "URBAIN III : 25 novembre 1185 - 19/20 octobre 1187",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "URBAIN III : 25 novembre 1185 - 19/20 octobre 1187"
+          ],
+          "entry_count": 1,
+          "first_n": 764,
+          "last_n": 764
+        },
+        {
+          "slug": "innocent-iii-8-janvier-1198-16-juillet-1216",
+          "title": "INNOCENT III : 8 janvier 1198-16 juillet 1216",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "INNOCENT III : 8 janvier 1198-16 juillet 1216"
+          ],
+          "entry_count": 34,
+          "first_n": 766,
+          "last_n": 799
+        },
+        {
+          "slug": "4e-concile-du-latran-12eme-oecumeniq-11-30-novembre-1215",
+          "title": "4e concile du LATRAN (12eme Oecuméniq 11-30 novembre 1215",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "INNOCENT III : 8 janvier 1198-16 juillet 1216",
+            "4e concile du LATRAN (12eme Oecuméniq 11-30 novembre 1215"
+          ],
+          "entry_count": 21,
+          "first_n": 800,
+          "last_n": 820
+        },
+        {
+          "slug": "honorius-iii-18-juillet-1216-18-mars-1227",
+          "title": "HONORIUS III : 18 juillet 1216 - 18 mars 1227",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "HONORIUS III : 18 juillet 1216 - 18 mars 1227"
+          ],
+          "entry_count": 1,
+          "first_n": 822,
+          "last_n": 822
+        },
+        {
+          "slug": "gregoire-ix-19-mars-1227-22-aout-1241",
+          "title": "GREGOIRE IX : 19 mars 1227 - 22 août 1241",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "GREGOIRE IX : 19 mars 1227 - 22 août 1241"
+          ],
+          "entry_count": 6,
+          "first_n": 824,
+          "last_n": 829
+        },
+        {
+          "slug": "innocent-iv-25-juin-1243-7-decembre-1254",
+          "title": "INNOCENT IV : 25 juin 1243 - 7 décembre 1254",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "INNOCENT IV : 25 juin 1243 - 7 décembre 1254"
+          ],
+          "entry_count": 10,
+          "first_n": 830,
+          "last_n": 839
+        },
+        {
+          "slug": "alexandre-iv-12-decembre-1254-25-mai-126",
+          "title": "ALEXANDRE IV : 12 décembre 1254 - 25 mai 126",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "ALEXANDRE IV : 12 décembre 1254 - 25 mai 126"
+          ],
+          "entry_count": 5,
+          "first_n": 840,
+          "last_n": 844
+        },
+        {
+          "slug": "urbain-iv-29-aout-1261-2-octobre-12",
+          "title": "URBAIN IV : 29 août 1261 - 2 octobre 12",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "URBAIN IV : 29 août 1261 - 2 octobre 12"
+          ],
+          "entry_count": 2,
+          "first_n": 846,
+          "last_n": 847
+        },
+        {
+          "slug": "clement-iv-5-fevrier-1265-29-novembre-1268",
+          "title": "CLEMENT IV : 5 Février 1265-29 novembre 1268.",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "CLEMENT IV : 5 Février 1265-29 novembre 1268."
+          ],
+          "entry_count": 1,
+          "first_n": 849,
+          "last_n": 849
+        },
+        {
+          "slug": "gregoire-x-1er-septembre-1271-10-janv",
+          "title": "GREGOIRE X : 1er septembre 1271 - 10 janv",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "GREGOIRE X : 1er septembre 1271 - 10 janv"
+          ],
+          "entry_count": 12,
+          "first_n": 850,
+          "last_n": 861
+        },
+        {
+          "slug": "boniface-viii-24-decembre-1294-11-octobre-1303",
+          "title": "BONIFACE VIII : 24 décembre 1294-11 octobre 1303",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "BONIFACE VIII : 24 décembre 1294-11 octobre 1303"
+          ],
+          "entry_count": 8,
+          "first_n": 866,
+          "last_n": 875
+        },
+        {
+          "slug": "benoit-xi-22-octobre-1303-7-juillet-13",
+          "title": "BENOIT XI : 22 octobre 1303-7 juillet 13",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "BENOIT XI : 22 octobre 1303-7 juillet 13"
+          ],
+          "entry_count": 1,
+          "first_n": 880,
+          "last_n": 880
+        },
+        {
+          "slug": "clement-v-5-juin-1305-20-avril-1314",
+          "title": "CLEMENT V : 5 juin 1305-20 avril 1314",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "CLEMENT V : 5 juin 1305-20 avril 1314"
+          ],
+          "entry_count": 16,
+          "first_n": 891,
+          "last_n": 908
+        },
+        {
+          "slug": "jean-xxii-7-aout-1316-4-decembre-1334",
+          "title": "JEAN XXII : 7 août 1316-4 décembre 1334",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "JEAN XXII : 7 août 1316-4 décembre 1334"
+          ],
+          "entry_count": 54,
+          "first_n": 910,
+          "last_n": 991
+        },
+        {
+          "slug": "benoit-xii-20-decembre-1334-25-avril-1342",
+          "title": "BENOIT XII: 20 décembre 1334 - 25 avril 1342",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "BENOIT XII: 20 décembre 1334 - 25 avril 1342"
+          ],
+          "entry_count": 18,
+          "first_n": 1000,
+          "last_n": 1020
+        },
+        {
+          "slug": "clement-vi-7-mai-1342-6-decembre-1352",
+          "title": "CLEMENT VI : 7 Mai 1342 - 6 Décembre 1352",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "CLEMENT VI : 7 Mai 1342 - 6 Décembre 1352"
+          ],
+          "entry_count": 61,
+          "first_n": 1025,
+          "last_n": 1085
+        },
+        {
+          "slug": "urbain-v-28-septembre-1362-19-decembre",
+          "title": "URBAIN V : 28 Septembre 1362 - 19 Décembre",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "URBAIN V : 28 Septembre 1362 - 19 Décembre"
+          ],
+          "entry_count": 11,
+          "first_n": 1087,
+          "last_n": 1097
+        },
+        {
+          "slug": "gregoire-xi-30-decembre-1370-26-27-mars",
+          "title": "GREGOIRE XI : 30 Décembre 1370 - 26/27 mars",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "GREGOIRE XI : 30 Décembre 1370 - 26/27 mars"
+          ],
+          "entry_count": 29,
+          "first_n": 1101,
+          "last_n": 1139
+        },
+        {
+          "slug": "boniface-ix-2-novembre-1389-1er-octobre-1404",
+          "title": "BONIFACE IX: 2 novembre 1389-1er octobre 1404",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "BONIFACE IX: 2 novembre 1389-1er octobre 1404"
+          ],
+          "entry_count": 2,
+          "first_n": 1145,
+          "last_n": 1146
+        },
+        {
+          "slug": "gregoire-xii-30-novembre-1406-4-juillet",
+          "title": "GRÉGOIRE XII: 30 novembre 1406-4 juillet",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "GRÉGOIRE XII: 30 novembre 1406-4 juillet"
+          ],
+          "entry_count": 79,
+          "first_n": 1151,
+          "last_n": 1235
+        },
+        {
+          "slug": "martin-v-11-novembre-1417-20-fev",
+          "title": "MARTIN V : 11 novembre 1417-20 fév",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "MARTIN V : 11 novembre 1417-20 fév"
+          ],
+          "entry_count": 87,
+          "first_n": 1247,
+          "last_n": 1353
+        },
+        {
+          "slug": "calixte-iii-8-avril-1455-6-aou",
+          "title": "CALIXTE III : 8 avril 1455 - 6 Aoû",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "CALIXTE III : 8 avril 1455 - 6 Aoû"
+          ],
+          "entry_count": 3,
+          "first_n": 1355,
+          "last_n": 1357
+        },
+        {
+          "slug": "pie-ii-19-aout-1458-14-aout",
+          "title": "PIE II : 19 Août 1458 - 14 Août",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "PIE II : 19 Août 1458 - 14 Août"
+          ],
+          "entry_count": 11,
+          "first_n": 1361,
+          "last_n": 1385
+        },
+        {
+          "slug": "sixte-iv-9-aout-1471-12-aout",
+          "title": "SIXTE IV : 9 août 1471 - 12 août",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "SIXTE IV : 9 août 1471 - 12 août"
+          ],
+          "entry_count": 22,
+          "first_n": 1391,
+          "last_n": 1426
+        },
+        {
+          "slug": "innocent-viii-29-aout-1484-25-j",
+          "title": "INNOCENT VIII : 29 août 1484-25 j",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "INNOCENT VIII : 29 août 1484-25 j"
+          ],
+          "entry_count": 1,
+          "first_n": 1435,
+          "last_n": 1435
+        },
+        {
+          "slug": "leon-x-11-mars-1513-1er-decembre-15",
+          "title": "LEON X : 11 mars 1513-1er décembre 15",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "LEON X : 11 mars 1513-1er décembre 15"
+          ],
+          "entry_count": 51,
+          "first_n": 1440,
+          "last_n": 1492
+        },
+        {
+          "slug": "paul-iii-13-octobre-1534-10-novembre-1549",
+          "title": "PAUL III: 13 octobre 1534-10 novembre 1549",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "BONIFACE",
+            "PAUL III: 13 octobre 1534-10 novembre 1549"
+          ],
+          "entry_count": 2,
+          "first_n": 1495,
+          "last_n": 1497
+        },
+        {
+          "slug": "trente-19eme-oecumen-13-decembre-1545-4-decemb",
+          "title": "TRENTE ( 19ème oecumén 13 Décembre 1545-4 décemb",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "CONCILE DE",
+            "TRENTE ( 19ème oecumén 13 Décembre 1545-4 décemb"
+          ],
+          "entry_count": 110,
+          "first_n": 1500,
+          "last_n": 1630
+        },
+        {
+          "slug": "iii-7-fevrier-15",
+          "title": "III: 7 février 15",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "JULES",
+            "III: 7 février 15"
+          ],
+          "entry_count": 80,
+          "first_n": 1635,
+          "last_n": 1719
+        },
+        {
+          "slug": "pie-iv-25-decembre-1559-9-decem",
+          "title": "PIE IV : 25 Décembre 1559-9 décem",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "JULES",
+            "PIE IV : 25 Décembre 1559-9 décem"
+          ],
+          "entry_count": 184,
+          "first_n": 1725,
+          "last_n": 1983
+        },
+        {
+          "slug": "gregoire-xiii-13-mai-1572-10-avr",
+          "title": "GREGOIRE XIII: 13 mai 1572-10 avr",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "JULES",
+            "GREGOIRE XIII: 13 mai 1572-10 avr"
+          ],
+          "entry_count": 4,
+          "first_n": 1985,
+          "last_n": 1988
+        },
+        {
+          "slug": "innocent-ix-29-octobre-30-decembre-1591",
+          "title": "INNOCENT IX : 29 octobre - 30 décembre 1591",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "JULES",
+            "INNOCENT IX : 29 octobre - 30 décembre 1591"
+          ],
+          "entry_count": 6,
+          "first_n": 1989,
+          "last_n": 1995
+        },
+        {
+          "slug": "paul-v-16-mai-1605-28-ja",
+          "title": "PAUL V : 16 mai 1605-28 ja",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PAUL V : 16 mai 1605-28 ja"
+          ],
+          "entry_count": 1,
+          "first_n": 1997,
+          "last_n": 1997
+        },
+        {
+          "slug": "urbain-viii-6-aout-1623-29-juillet-1644",
+          "title": "URBAIN VIII : 6 août 1623-29 juillet 1644",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "URBAIN VIII : 6 août 1623-29 juillet 1644"
+          ],
+          "entry_count": 10,
+          "first_n": 1998,
+          "last_n": 2008
+        },
+        {
+          "slug": "alexandre-vii-7-avril-1655-22-m",
+          "title": "ALEXANDRE VII : 7 avril 1655-22 m",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "ALEXANDRE VII : 7 avril 1655-22 m"
+          ],
+          "entry_count": 54,
+          "first_n": 2010,
+          "last_n": 2070
+        },
+        {
+          "slug": "innocent-xi-21-septembre-1676-12-aout-1689",
+          "title": "INNOCENT XI : 21 septembre 1676-12 août 1689",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "INNOCENT XI : 21 septembre 1676-12 août 1689"
+          ],
+          "entry_count": 155,
+          "first_n": 2090,
+          "last_n": 2268
+        },
+        {
+          "slug": "alexandre-viii-6-octobre-1689-1er-fevrie",
+          "title": "ALEXANDRE VIII : 6 octobre 1689 - 1er févrie",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "ALEXANDRE VIII : 6 octobre 1689 - 1er févrie"
+          ],
+          "entry_count": 39,
+          "first_n": 2281,
+          "last_n": 2331
+        },
+        {
+          "slug": "innocent-xii-12-juillet-1691-27-septembre",
+          "title": "INNOCENT XII : 12 JUILLET 1691-27 septembre",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "INNOCENT XII : 12 JUILLET 1691-27 septembre"
+          ],
+          "entry_count": 25,
+          "first_n": 2340,
+          "last_n": 2374
+        },
+        {
+          "slug": "clement-xi-23-novembre-1700-19-mars-17",
+          "title": "CLEMENT XI : 23 novembre 1700 - 19 Mars 17",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "CLEMENT XI : 23 novembre 1700 - 19 Mars 17"
+          ],
+          "entry_count": 107,
+          "first_n": 2380,
+          "last_n": 2502
+        },
+        {
+          "slug": "clement-xii-12-juillet-1730-6-fevrier-1740",
+          "title": "CLEMENT XII : 12 juillet 1730-6 février 1740",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "CLEMENT XII : 12 juillet 1730-6 février 1740"
+          ],
+          "entry_count": 5,
+          "first_n": 2509,
+          "last_n": 2513
+        },
+        {
+          "slug": "benoit-xiv-17-aout-1740-3-mai-1758",
+          "title": "BENOIT XIV : 17 août 1740-3 mai 1758",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "BENOIT XIV : 17 août 1740-3 mai 1758"
+          ],
+          "entry_count": 54,
+          "first_n": 2515,
+          "last_n": 2575
+        },
+        {
+          "slug": "clement-xiii-6-juillet-1758-2-fevrier-1769",
+          "title": "CLÉMENT XIII: 6 juillet 1758-2 février 1769",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "CLÉMENT XIII: 6 juillet 1758-2 février 1769"
+          ],
+          "entry_count": 6,
+          "first_n": 2580,
+          "last_n": 2585
+        },
+        {
+          "slug": "clement-xiv-19-mai-1769-22-septembre-1774",
+          "title": "CLÉMENT XIV: 19 mai 1769-22 septembre 1774",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "CLÉMENT XIV: 19 mai 1769-22 septembre 1774"
+          ],
+          "entry_count": 1,
+          "first_n": 2588,
+          "last_n": 2588
+        },
+        {
+          "slug": "pie-vi-15-fevrier-1775-29-aout-1799",
+          "title": "PIE VI : 15 Février 1775-29 août 1799",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE VI : 15 Février 1775-29 août 1799"
+          ],
+          "entry_count": 109,
+          "first_n": 2590,
+          "last_n": 2700
+        },
+        {
+          "slug": "pie-vii-14-mars-1800-20-aout-1823",
+          "title": "Pie VII : 14 mars 1800-20 août 1823",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE VI : 15 Février 1775-29 août 1799",
+            "Pie VII : 14 mars 1800-20 août 1823"
+          ],
+          "entry_count": 7,
+          "first_n": 2705,
+          "last_n": 2718
+        },
+        {
+          "slug": "leon-xii-28-septembre-1823-10-fevrier",
+          "title": "LEON XII : 28 septembre 1823-10 février",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "LEON XII : 28 septembre 1823-10 février"
+          ],
+          "entry_count": 1,
+          "first_n": 2720,
+          "last_n": 2720
+        },
+        {
+          "slug": "pie-viii-31-mars-1829-30-novembre-1830",
+          "title": "PIE VIII : 31 mars 1829-30 novembre 1830",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE VIII : 31 mars 1829-30 novembre 1830"
+          ],
+          "entry_count": 3,
+          "first_n": 2722,
+          "last_n": 2724
+        },
+        {
+          "slug": "gregoire-xvi-2-fevrier-183l-1er-juin",
+          "title": "GREGOIRE XVI ; 2 février 183l - 1er juin",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE VIII : 31 mars 1829-30 novembre 1830",
+            "GREGOIRE XVI ; 2 février 183l - 1er juin"
+          ],
+          "entry_count": 31,
+          "first_n": 2725,
+          "last_n": 2772
+        },
+        {
+          "slug": "pie-ix-16-juin-1846-7-fevrier-1878",
+          "title": "PIE IX : 16 juin 1846-7 février 1878",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE IX : 16 juin 1846-7 février 1878"
+          ],
+          "entry_count": 166,
+          "first_n": 2775,
+          "last_n": 2999
+        },
+        {
+          "slug": "1er-concile-du-vatican-20e-oecumenique-8-decembre-1869-20-oc",
+          "title": "1er concile du VATICAN (20e oecuménique) 8 décembre 1869-20 octobre 1870",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE IX : 16 juin 1846-7 février 1878",
+            "1er concile du VATICAN (20e oecuménique) 8 décembre 1869-20 octobre 1870"
+          ],
+          "entry_count": 217,
+          "first_n": 3000,
+          "last_n": 3358
+        },
+        {
+          "slug": "pie-x-4-aout-1903-20-aout-1914",
+          "title": "Pie X: 4 août 1903-20 août 1914",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE IX : 16 juin 1846-7 février 1878",
+            "Pie X: 4 août 1903-20 août 1914"
+          ],
+          "entry_count": 199,
+          "first_n": 3370,
+          "last_n": 3624
+        },
+        {
+          "slug": "benoit-xv-3-septembre-1914-22-janv",
+          "title": "BENOIT XV : 3 septembre 1914-22 janv",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "BENOIT XV : 3 septembre 1914-22 janv"
+          ],
+          "entry_count": 15,
+          "first_n": 3628,
+          "last_n": 3650
+        },
+        {
+          "slug": "pie-xi-6-fevrier-1922-10-fevr",
+          "title": "PIE XI: 6 février 1922-10 févr",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "PIE XI: 6 février 1922-10 févr"
+          ],
+          "entry_count": 81,
+          "first_n": 3660,
+          "last_n": 3928
+        },
+        {
+          "slug": "jean-xxiii-28-octobre-1958-3-juin-19",
+          "title": "JEAN XXIII: 28 octobre 1958-3 juin 19",
+          "breadcrumb": [
+            "DEUXIEME PARTIE",
+            "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+            "LEON",
+            "JEAN XXIII: 28 octobre 1958-3 juin 19"
+          ],
+          "entry_count": 1,
+          "first_n": 3930,
+          "last_n": 3930
+        }
       ],
-      "count": 2782
-    }
-  ],
-  "sections": [
-    {
-      "slug": "sec-2-symbole-de-foi",
-      "title": "Symbole de foi",
-      "part_slug": "1-symboles-de-foi",
-      "range": [
-        1,
-        6
-      ],
-      "count": 6
-    },
-    {
-      "slug": "sec-6-symbole-des-aptres",
-      "title": "Symbole des Apôtres",
-      "part_slug": "1-symboles-de-foi",
-      "range": [
-        10,
-        36
-      ],
-      "count": 14
-    },
-    {
-      "slug": "sec-8-symboles-locaux",
-      "title": "Symboles Locaux",
-      "part_slug": "1-symboles-de-foi",
-      "range": [
-        40,
-        55
-      ],
-      "count": 10
-    },
-    {
-      "slug": "sec-11-orientales",
-      "title": "Orientales",
-      "part_slug": "1-symboles-de-foi",
-      "range": [
-        60,
-        64
-      ],
-      "count": 5
-    },
-    {
-      "slug": "sec-12-ii-schma-bipartite-trinitairechristologique",
-      "title": "II. Schéma bipartite trinitaire-christologique.",
-      "part_slug": "1-symboles-de-foi",
-      "range": [
-        72,
-        76
-      ],
-      "count": 3
-    },
-    {
-      "slug": "sec-13-documents-du-magistere-de-leglise-1013997",
-      "title": "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        101,
-        115
-      ],
-      "count": 9
-    },
-    {
-      "slug": "sec-14-15-janvier-3",
-      "title": "(15 janvier ?) 3",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        117,
-        121
-      ],
-      "count": 4
-    },
-    {
-      "slug": "sec-15-11-janvier-31",
-      "title": "?) - 11 janvier 31",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        123,
-        123
-      ],
-      "count": 1
-    },
-    {
-      "slug": "sec-16-1er-concile-de-nicee-1er-oecumnique-19-juin25-aot-325",
-      "title": "1er concile de NICEE (1er oecuménique) 19 juin-25 août 325",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        125,
-        143
-      ],
-      "count": 16
-    },
-    {
-      "slug": "sec-17-decembre-384",
-      "title": "DECEMBRE 384",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        144,
-        149
-      ],
-      "count": 5
-    },
-    {
-      "slug": "sec-18-1er-concile-de-constantinople-2e-concile-oecumnique",
-      "title": "1er concile de CONSTANTINOPLE (2e concile Oecuménique)",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        150,
-        185
-      ],
-      "count": 10
-    },
-    {
-      "slug": "sec-20-carthage-28-aot-397",
-      "title": "Carthage, 28 août 397",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        186,
-        249
-      ],
-      "count": 27
-    },
-    {
-      "slug": "sec-22-oecumnique-22-juin-septembre-431",
-      "title": "Oecuménique) 22 juin - septembre 431",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        250,
-        299
-      ],
-      "count": 22
-    },
-    {
-      "slug": "sec-24-oecumnique-8-octobre-dbut-de-novembre-451",
-      "title": "Oecuménique) 8 octobre - début de novembre 451",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        300,
-        347
-      ],
-      "count": 24
-    },
-    {
-      "slug": "sec-25-49221-novembre-496",
-      "title": "492-21 novembre 496",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        348,
-        355
-      ],
-      "count": 7
-    },
-    {
-      "slug": "sec-26-anastase-ii",
-      "title": "ANASTASE II :",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        356,
-        356
-      ],
-      "count": 1
-    },
-    {
-      "slug": "sec-27-24-novembre-49617",
-      "title": "24 novembre 496-17",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        357,
-        362
-      ],
-      "count": 5
-    },
-    {
-      "slug": "sec-28-juillet-514",
-      "title": "juillet 514",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        363,
-        397
-      ],
-      "count": 11
-    },
-    {
-      "slug": "sec-29-boniface",
-      "title": "BONIFACE",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        398,
-        420
-      ],
-      "count": 10
-    },
-    {
-      "slug": "sec-31-5e-oecumnique-5-mai2-juin-553",
-      "title": "(5e oecuménique) 5 mai-2 juin 553",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        421,
-        480
-      ],
-      "count": 22
-    },
-    {
-      "slug": "sec-32-deusdedit-adodat",
-      "title": "DEUSDEDIT (Adéodat",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        485,
-        548
-      ],
-      "count": 21
-    },
-    {
-      "slug": "sec-34-6e-oecumnique-7-novembre-68016-septembre-681",
-      "title": "(6e oecuménique) 7 novembre 680-16 septembre 681.",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        550,
-        586
-      ],
-      "count": 16
-    },
-    {
-      "slug": "sec-35-mars-752",
-      "title": "mars 752",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        587,
-        596
-      ],
-      "count": 6
-    },
-    {
-      "slug": "sec-37-7e-oecumnique-24-septembre-23-octobre-787",
-      "title": "(7e Oecuménique) 24 septembre - 23 octobre 787",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        600,
-        675
-      ],
-      "count": 35
-    },
-    {
-      "slug": "sec-38-jean-xix-avril-mai-1024-1032",
-      "title": "JEAN XIX avril - mai 1024 - 1032",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        680,
-        687
-      ],
-      "count": 3
-    },
-    {
-      "slug": "sec-39-io5729-mars-1058",
-      "title": "IO57-29 mars 1058",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        690,
-        750
-      ],
-      "count": 26
-    },
-    {
-      "slug": "sec-41-latran-11e-oecum-519-22-mar",
-      "title": "LATRAN (11e oecum 5-19 (22?) mar",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        751,
-        799
-      ],
-      "count": 38
-    },
-    {
-      "slug": "sec-43-12eme-oecumniq-1130-novembre-1215",
-      "title": "(12eme Oecuméniq 11-30 novembre 1215",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        800,
-        1357
-      ],
-      "count": 99
-    },
-    {
-      "slug": "sec-44-aot-1458-14-aot",
-      "title": "Août 1458 - 14 Août",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        1361,
-        1497
-      ],
-      "count": 26
-    },
-    {
-      "slug": "sec-47-dcembre-15454-dcemb",
-      "title": "Décembre 1545-4 décemb",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        1500,
-        1630
-      ],
-      "count": 32
-    },
-    {
-      "slug": "sec-48-jules",
-      "title": "JULES",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        1635,
-        1725
-      ],
-      "count": 29
-    },
-    {
-      "slug": "sec-49-dcembre-15599-dcem",
-      "title": "Décembre 1559-9 décem",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        1726,
-        1995
-      ],
-      "count": 48
-    },
-    {
-      "slug": "sec-50-leon",
-      "title": "LEON",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        1997,
-        2588
-      ],
-      "count": 63
-    },
-    {
-      "slug": "sec-51-septembre-1774",
-      "title": "septembre 1774",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        2590,
-        2598
-      ],
-      "count": 3
-    },
-    {
-      "slug": "sec-52-erreurs-du-synode-de-pistoie",
-      "title": "Erreurs du Synode de Pistoie",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        2600,
-        2724
-      ],
-      "count": 64
-    },
-    {
-      "slug": "sec-53-gregoire-xvi-2-fvrier-183l-1er-juin",
-      "title": "GREGOIRE XVI ; 2 février 183l - 1er juin",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        2725,
-        2999
-      ],
-      "count": 68
-    },
-    {
-      "slug": "sec-55-20e-oecumnique-8-dcembre-186920-octobre-1870",
-      "title": "(20e oecuménique) 8 décembre 1869-20 octobre 1870",
-      "part_slug": "2-magistere-de-leglise",
-      "range": [
-        3000,
-        3930
-      ],
-      "count": 222
+      "unit_count": 126,
+      "entry_count": 2789,
+      "first_n": 101,
+      "last_n": 3930
     }
   ],
   "all_numbers": [
@@ -462,6 +1805,7 @@
     121,
     123,
     125,
+    126,
     127,
     128,
     129,
@@ -481,6 +1825,7 @@
     144,
     145,
     146,
+    147,
     148,
     149,
     150,
@@ -737,6 +2082,7 @@
     419,
     420,
     421,
+    422,
     423,
     424,
     425,
@@ -1173,10 +2519,12 @@
     971,
     972,
     973,
+    974,
     975,
     976,
     977,
     978,
+    979,
     980,
     990,
     991,
@@ -1857,6 +3205,7 @@
     1906,
     1907,
     1908,
+    1909,
     1910,
     1911,
     1912,
@@ -3223,8 +4572,11 @@
     3922,
     3923,
     3924,
+    3925,
     3926,
     3928,
     3930
-  ]
+  ],
+  "total_entries": 2838,
+  "total_units": 131
 }

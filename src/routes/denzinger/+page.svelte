@@ -2,29 +2,27 @@
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-
-	const totalEntries = $derived(data.structure.all_numbers.length);
 </script>
 
 <svelte:head>
 	<title>Denzinger — Enchiridion Symbolorum · Catéchisme</title>
 	<meta
 		name="description"
-		content="Édition française du Denzinger, Enchiridion Symbolorum — recueil canonique des symboles, définitions et déclarations magistérielles de l'Église catholique des origines à nos jours."
+		content="Édition française du Denzinger, Enchiridion Symbolorum — recueil canonique des symboles, définitions et déclarations magistérielles de l'Église catholique des origines à 1959."
 	/>
 </svelte:head>
 
 <main class="dz-index">
 	<header class="hero">
-		<p class="hero-kicker">Édition française · Source : JesusMarie.com</p>
+		<p class="hero-kicker">Édition française · Source : catho.org · 37e édition</p>
 		<h1 class="hero-title">
 			Denzinger<br /><em class="hero-em">Enchiridion Symbolorum</em>
 		</h1>
 		<p class="hero-lede">
-			{data.structure.subtitle} — recueil canonique des symboles, définitions et déclarations magistérielles
-			de l'Église catholique des origines à nos jours.
-			{totalEntries.toLocaleString('fr-FR')} entrées numérotées de
-			{data.structure.all_numbers[0]} à {data.structure.all_numbers[totalEntries - 1]}.
+			{data.structure.subtitle} — {data.structure.total_entries.toLocaleString('fr-FR')} entrées canoniques
+			(DH {data.structure.all_numbers[0]}–DH {data.structure.all_numbers[
+				data.structure.all_numbers.length - 1
+			]}), groupées en {data.structure.total_units} sections : symboles de foi, conciles, pontificats.
 		</p>
 		<a class="hero-toc" href="/denzinger/sommaire">Sommaire complet →</a>
 	</header>
@@ -33,7 +31,7 @@
 		{#each data.structure.parts as part (part.slug)}
 			<a class="part-card" href="/denzinger/sommaire#{part.slug}">
 				<span class="part-kicker">
-					{part.range[0]}–{part.range[1]} · {part.count} entrées
+					{part.unit_count} sections · DH {part.first_n}–{part.last_n}
 				</span>
 				<h2 class="part-title">{part.title}</h2>
 				<span class="part-arrow" aria-hidden="true">→</span>
@@ -59,7 +57,7 @@
 					type="number"
 					name="n"
 					min={data.structure.all_numbers[0]}
-					max={data.structure.all_numbers[totalEntries - 1]}
+					max={data.structure.all_numbers[data.structure.all_numbers.length - 1]}
 					placeholder="Numéro DH (ex. 1500)"
 					required
 				/>
@@ -105,7 +103,7 @@
 		font-size: 0.7em;
 	}
 	.hero-lede {
-		max-width: 52ch;
+		max-width: 56ch;
 		margin: 1.25rem auto 0;
 		font-style: italic;
 		font-size: 1rem;

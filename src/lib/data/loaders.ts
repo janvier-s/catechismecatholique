@@ -29,7 +29,7 @@ import type {
 	CatIllustreChapter,
 	CatIllustreFlatPage,
 	DenzingerStructure,
-	DenzingerEntry,
+	DenzingerUnit,
 	DenzingerEntryIndex
 } from './types';
 
@@ -658,7 +658,7 @@ export function loadCatIllustreChapter(
 
 let denzingerStructurePromise: Promise<DenzingerStructure> | null = null;
 let denzingerIndexPromise: Promise<DenzingerEntryIndex> | null = null;
-const denzingerEntryCache = new Map<number, Promise<DenzingerEntry | null>>();
+const denzingerUnitCache = new Map<string, Promise<DenzingerUnit | null>>();
 
 export function loadDenzingerStructure(fetcher: Fetch = fetch): Promise<DenzingerStructure> {
 	if (!denzingerStructurePromise) {
@@ -677,18 +677,18 @@ export function loadDenzingerIndex(fetcher: Fetch = fetch): Promise<DenzingerEnt
 	return denzingerIndexPromise;
 }
 
-export function loadDenzingerEntry(
-	n: number,
+export function loadDenzingerUnit(
+	slug: string,
 	fetcher: Fetch = fetch
-): Promise<DenzingerEntry | null> {
-	let p = denzingerEntryCache.get(n);
+): Promise<DenzingerUnit | null> {
+	let p = denzingerUnitCache.get(slug);
 	if (!p) {
 		p = (async () => {
-			const r = await fetcher(`/data/denzinger/entries/${n}.json`);
+			const r = await fetcher(`/data/denzinger/units/${slug}.json`);
 			if (!r.ok) return null;
-			return (await r.json()) as DenzingerEntry;
+			return (await r.json()) as DenzingerUnit;
 		})();
-		denzingerEntryCache.set(n, p);
+		denzingerUnitCache.set(slug, p);
 	}
 	return p;
 }

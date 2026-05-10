@@ -85,10 +85,17 @@ export const GET: RequestHandler = () => {
 		...glossary.entries.map((e) => `/glossaire/${e.slug}`)
 	];
 
-	const denzingerStructure: { all_numbers: number[] } = JSON.parse(
+	const denzingerStructure: {
+		parts: { units: { slug: string }[] }[];
+	} = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/denzinger/structure.json'), 'utf-8')
 	);
-	const denzingerUrls = denzingerStructure.all_numbers.map((n) => `/denzinger/n/${n}`);
+	const denzingerUrls: string[] = [];
+	for (const part of denzingerStructure.parts) {
+		for (const unit of part.units) {
+			denzingerUrls.push(`/denzinger/${unit.slug}`);
+		}
+	}
 
 	const allUrls = [
 		...staticPages,

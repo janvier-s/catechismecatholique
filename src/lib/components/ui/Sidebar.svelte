@@ -695,14 +695,25 @@
 		}
 		if (corpus === 'denzinger') {
 			if (!denzingerStructure) return [];
-			// 2,500+ entries — sidebar shows parts only; the per-entry index
-			// lives on /denzinger/sommaire which the rail's "Sommaire" link
-			// jumps to.
+			// Render the unit hierarchy: parts → units (flat under each part).
+			// The full nested tree lives on /denzinger/sommaire; this rail
+			// surfaces direct unit links so the reader can jump section-to-
+			// section without leaving the chrome.
 			return denzingerStructure.parts.map(
 				(p): Item => ({
 					title: p.title,
-					kicker: `${p.range[0]}–${p.range[1]}`,
-					href: `/denzinger/sommaire#${p.slug}`
+					kicker: `DH ${p.first_n ?? '?'}–${p.last_n ?? '?'}`,
+					href: `/denzinger/sommaire#${p.slug}`,
+					children: p.units.map(
+						(u): Item => ({
+							title: u.title,
+							kicker:
+								u.first_n != null
+									? `DH ${u.first_n}${u.last_n !== u.first_n ? `–${u.last_n}` : ''}`
+									: undefined,
+							href: `/denzinger/${u.slug}`
+						})
+					)
 				})
 			);
 		}

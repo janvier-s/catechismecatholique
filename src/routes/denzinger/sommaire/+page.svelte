@@ -1,24 +1,43 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import type { DenzingerStructureUnit } from '$lib/data/types';
 
 	let { data }: { data: PageData } = $props();
 
-	const byPart = $derived.by(() => {
-		const out: Record<string, number[]> = {};
-		for (const part of data.structure.parts) out[part.slug] = [];
-		for (const n of data.structure.all_numbers) {
-			const slug = data.index[String(n)]?.part_slug;
-			if (slug && slug in out) out[slug]!.push(n);
+	type TreeNode = {
+		title: string;
+		// Direct children. The deepest leaves carry a `unit` reference (and
+		// their breadcrumb's last segment matches `title`).
+		children: TreeNode[];
+		unit?: DenzingerStructureUnit;
+	};
+
+	function buildTree(units: DenzingerStructureUnit[]): TreeNode[] {
+		const roots: TreeNode[] = [];
+		for (const u of units) {
+			let cur: TreeNode[] = roots;
+			for (let i = 0; i < u.breadcrumb.length; i++) {
+				const seg = u.breadcrumb[i] ?? '';
+				let node: TreeNode | undefined = cur.find((c) => c.title === seg);
+				if (!node) {
+					node = { title: seg, children: [] };
+					cur.push(node);
+				}
+				if (i === u.breadcrumb.length - 1) {
+					node.unit = u;
+				}
+				cur = node.children;
+			}
 		}
-		return out;
-	});
+		return roots;
+	}
 </script>
 
 <svelte:head>
 	<title>Sommaire · Denzinger</title>
 	<meta
 		name="description"
-		content="Sommaire complet du Denzinger — toutes les entrées numérotées de l'Enchiridion Symbolorum, classées par parties."
+		content="Sommaire complet du Denzinger — hiérarchie des parties, sections et pontificats avec liens vers chaque section de lecture."
 	/>
 </svelte:head>
 
@@ -32,9 +51,9 @@
 			<span class="rule rule-r"></span>
 		</div>
 		<p class="lede">
-			{data.structure.all_numbers.length.toLocaleString('fr-FR')} entrées numérotées de DH {data
-				.structure.all_numbers[0]} à DH
-			{data.structure.all_numbers[data.structure.all_numbers.length - 1]}.
+			{data.structure.total_entries.toLocaleString('fr-FR')} entrées (DH {data.structure
+				.all_numbers[0]}–{data.structure.all_numbers[data.structure.all_numbers.length - 1]})
+			organisées en {data.structure.total_units} sections.
 		</p>
 		<div class="toc-actions">
 			<a class="index-link" href="/denzinger">← Retour à l'accueil</a>
@@ -43,22 +62,19 @@
 
 	<div class="parts">
 		{#each data.structure.parts as part (part.slug)}
+			{@const tree = buildTree(part.units)}
 			<article class="part" id={part.slug}>
 				<header class="part-head">
 					<p class="part-eyebrow">
-						{part.range[0]}–{part.range[1]} · {part.count.toLocaleString('fr-FR')} entrées
+						{part.unit_count} sections · DH {part.first_n}–{part.last_n}
 					</p>
 					<h2 class="part-title">{part.title}</h2>
 				</header>
-				<div class="entries">
-					{#each byPart[part.slug] ?? [] as n (n)}
-						{@const meta = data.index[String(n)]}
-						<a class="row" href="/denzinger/n/{n}">
-							<span class="row-num">{n}</span>
-							<span class="row-title">{meta?.title || '—'}</span>
-						</a>
+				<ul class="tree">
+					{#each tree as node (node.title)}
+						{@render branch(node, 0)}
 					{/each}
-				</div>
+				</ul>
 			</article>
 		{/each}
 	</div>
@@ -67,6 +83,33 @@
 		<span class="fleuron">✠</span>
 	</footer>
 </main>
+
+{#snippet branch(node: TreeNode, depth: number)}
+	<li class="tree-node" data-depth={depth}>
+		{#if node.unit}
+			<a class="leaf" href="/denzinger/{node.unit.slug}">
+				<span class="leaf-title">{node.title}</span>
+				<span class="dotleader" aria-hidden="true"></span>
+				<span class="leaf-range">
+					{#if node.unit.first_n != null}
+						DH {node.unit.first_n}{node.unit.last_n !== node.unit.first_n
+							? `–${node.unit.last_n}`
+							: ''}
+					{/if}
+				</span>
+			</a>
+		{:else}
+			<p class="branch">{node.title}</p>
+		{/if}
+		{#if node.children.length > 0}
+			<ul class="tree">
+				{#each node.children as child (child.title)}
+					{@render branch(child, depth + 1)}
+				{/each}
+			</ul>
+		{/if}
+	</li>
+{/snippet}
 
 <style>
 	.toc {
@@ -153,9 +196,6 @@
 		color: var(--color-accent);
 		text-decoration: none;
 	}
-	.index-link:hover {
-		text-decoration: underline;
-	}
 
 	.parts {
 		display: flex;
@@ -188,43 +228,91 @@
 		margin: 0;
 		color: var(--color-heading, var(--color-fg));
 	}
-	.entries {
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
+
+	.tree {
+		list-style: none;
+		margin: 0;
+		padding: 0;
 	}
-	.row {
-		display: grid;
-		grid-template-columns: 4rem 1fr;
-		gap: 0.85rem;
-		align-items: baseline;
-		padding: 0.35rem 0.6rem;
-		text-decoration: none;
-		color: var(--color-fg);
-		border-radius: 3px;
-		transition: background-color 120ms ease;
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		line-height: 1.55;
+	.tree-node {
+		margin: 0.05rem 0;
 	}
-	.row:hover {
-		background: var(--hover-tint);
+	.tree-node[data-depth='1'] > .tree {
+		padding-left: 1rem;
 	}
-	.row:hover .row-title {
-		color: var(--color-accent);
+	.tree-node[data-depth='2'] > .tree {
+		padding-left: 1rem;
 	}
-	.row-num {
+	.tree-node[data-depth='3'] > .tree {
+		padding-left: 1rem;
+	}
+	.tree-node[data-depth='4'] > .tree {
+		padding-left: 1rem;
+	}
+	.tree-node[data-depth='5'] > .tree {
+		padding-left: 1rem;
+	}
+
+	.branch {
 		font-family: var(--font-ui);
 		font-size: 0.78rem;
 		font-weight: 600;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0.85rem 0 0.4rem;
+	}
+	.tree-node[data-depth='0'] > .branch {
+		font-size: 0.85rem;
+		letter-spacing: 0.22em;
+		color: var(--color-fg);
+	}
+
+	.leaf {
+		display: flex;
+		align-items: baseline;
+		gap: 0.65rem;
+		text-decoration: none;
+		color: var(--color-fg);
+		padding: 0.3rem 0.5rem;
+		margin-left: -0.5rem;
+		border-radius: 2px;
+		transition: background-color 120ms ease;
+	}
+	.leaf:hover {
+		background: var(--hover-tint);
+	}
+	.leaf:hover .leaf-title {
+		color: var(--color-accent);
+	}
+	.leaf-title {
+		font-family: var(--font-body);
+		font-size: 0.95rem;
+	}
+	.dotleader {
+		flex: 1 1 auto;
+		min-width: 1rem;
+		align-self: end;
+		height: 1px;
+		margin-bottom: 0.5em;
+		background-image: radial-gradient(
+			circle,
+			color-mix(in srgb, var(--color-fg) 28%, transparent) 0.5px,
+			transparent 1px
+		);
+		background-size: 6px 2px;
+		background-repeat: repeat-x;
+		background-position: 0 50%;
+		opacity: 0.7;
+	}
+	.leaf-range {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 500;
 		font-variant-numeric: tabular-nums lining-nums;
 		letter-spacing: 0.04em;
-		color: var(--color-accent);
-		text-align: right;
-	}
-	.row-title {
-		min-width: 0;
-		overflow-wrap: anywhere;
+		color: var(--color-muted);
+		white-space: nowrap;
 	}
 
 	.toc-foot {

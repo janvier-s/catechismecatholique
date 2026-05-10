@@ -1,29 +1,26 @@
 #!/usr/bin/env python3
 """
 Extract `Denzinger, Enchiridion Symbolorum` (édition française, 37e édition,
-JesusMarie / Ictus 3) from catho.org. The HTML structure is far more
-extractable than the JesusMarie PDF: clean anchors per entry, explicit pope
-blocks, document headings as `<h2>` / `<center><b>…</b></center>`.
+JesusMarie / Ictus 3) from catho.org into hierarchical reading units.
 
-Strategy:
+The body pages of catho.org expose a clean structure:
 
-1. Fetch the TOC page (`9.php?d=g0`) into a local cache, discover every
-   body page referenced (`bvx`, `bvy`, …, `bxi`). Cache each body page too.
-2. Walk the TOC and stream each `<a name=...>` block, classifying it as
-   one of: PART header, SECTION header, document line, pope/period line,
-   or entry row. This gives us the structural hierarchy (parts → sections
-   → documents → pope blocks) AND the per-entry titles in document order.
-3. Walk each body page and split it on `<a name=anchor>` markers to
-   recover the body HTML for each entry.
-4. Combine: emit per-entry JSON
-       { n, title, html, part_slug, section, document, pope }
-   plus a structure.json with the part hierarchy and the index.
+  <h1> ... </h1>     — section / sub-section / pope-block headings
+  <h2> ... </h2>     — document title (Lettre, Bulle, Encyclique, …)
+  <a name=…><b>N</b> — entry marker; body follows until next <a name=…>
 
-Cache lives under scripts/data-sources/denzinger/cache/. Re-runs are
-offline.
+We walk every body page in order, infer a level for each <h1>, maintain a
+level-managed stack of headings (the breadcrumb path), and group entries
+into "reading units" identified by their position in that stack. Each
+reading unit becomes one page of the site; entries within a unit are
+rendered inline with their <h2> document headings as sub-dividers.
 
-Server etiquette: 1.5-second sleep between requests on first fetch; 1
-parallelism. Total ~25 small HTML pages.
+Output:
+  static/data/denzinger/structure.json   — hierarchy of reading units
+  static/data/denzinger/units/{slug}.json — full unit (entries + bodies)
+  static/data/denzinger/index.json       — {n: {slug, …}} for permalinks
+
+Cache: scripts/data-sources/denzinger/cache/. Re-runs are offline.
 """
 
 from __future__ import annotations
@@ -32,17 +29,16 @@ import json
 import re
 import sys
 import time
+import unicodedata
 import urllib.request
 from pathlib import Path
-from typing import Any, Iterator
-
-from bs4 import BeautifulSoup, NavigableString, Tag
+from typing import Any
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent.parent
 CACHE_DIR = ROOT / "scripts/data-sources/denzinger/cache"
 OUT_DIR = ROOT / "static/data/denzinger"
-OUT_ENTRIES = OUT_DIR / "entries"
+OUT_UNITS = OUT_DIR / "units"
 
 BASE_URL = "http://catho.org/9.php?d="
 TOC_KEY = "g0"
@@ -65,277 +61,87 @@ def fetch_cached(key: str) -> str:
     with urllib.request.urlopen(req, timeout=30) as resp:
         raw = resp.read()
     cached.write_bytes(raw)
-    time.sleep(1.5)  # be polite
+    time.sleep(1.5)
     return raw.decode("iso-8859-1")
 
 
-def fetch_toc() -> BeautifulSoup:
-    html = fetch_cached(TOC_KEY)
-    return BeautifulSoup(html, "html.parser")
-
-
-def fetch_body_page(key: str) -> BeautifulSoup:
-    html = fetch_cached(key)
-    return BeautifulSoup(html, "html.parser")
-
-
-# ─── TOC walker ─────────────────────────────────────────────────────────────
+# ─── Heading-level inference ────────────────────────────────────────────────
 
 
 PART_TITLES = {
     "PREMIERE PARTIE": "Première partie",
     "DEUXIEME PARTIE": "Deuxième partie",
     "TROISIEME PARTIE": "Troisième partie",
+    "QUATRIEME PARTIE": "Quatrième partie",
 }
 PART_SLUGS = {
     "PREMIERE PARTIE": "1-symboles-de-foi",
     "DEUXIEME PARTIE": "2-magistere-de-leglise",
     "TROISIEME PARTIE": "3-tables",
+    "QUATRIEME PARTIE": "4-quatrieme",
 }
+
+# Heading levels (lower = wider scope; pushing a heading at level L pops
+# all stack items at level >= L). Tuned for the catho.org structure:
+#   1: PARTIE (PREMIERE/DEUXIEME/…)
+#   2: Range subtitle "ALL_CAPS (n-m)"
+#   3: All-caps section without range / numeric prefix
+#   4: Roman-numeral-prefixed sub-section ("I. …", "II. …")
+#   5: Letter-prefixed sub-section ("A- …", "B. …")
+#   6: Pope block "NAME : YEAR-…"
+#   7: Mixed-case named section ("Symbole des Apôtres", "Symboles Locaux")
+LEVEL_PART = 1
+LEVEL_PARTSUB = 2
+LEVEL_BIGSEC = 3
+LEVEL_ROMAN = 4
+LEVEL_ALPHA = 5
+LEVEL_POPE = 6
+LEVEL_NAMED = 7
+
+POPE_RE = re.compile(r"^[A-ZÉÈÀÂÎÔÛÇ][A-ZÉÈÀÂÎÔÛÇ' \-IVX0-9]*\s*:\s*.*\d")
+
+
+def detect_level(text: str) -> int:
+    s = text.strip()
+    if s in PART_TITLES:
+        return LEVEL_PART
+    if re.search(r"\(\s*\d+\s*[-–—]\s*\d+", s):
+        return LEVEL_PARTSUB
+    if POPE_RE.match(s) and ":" in s:
+        return LEVEL_POPE
+    if re.match(r"^[IVXLCDM]+\.\s", s):
+        return LEVEL_ROMAN
+    if re.match(r"^[A-Z][\.\-]\s", s):
+        return LEVEL_ALPHA
+    if re.match(r"^[A-ZÉÈÀÂÎÔÛÇ \-]+$", s) and len(s) >= 4:
+        # ALL_CAPS without numeric prefix → big section (e.g. SYMBOLES
+        # STRUCTURES, FORMULES OCCIDENTALES).
+        return LEVEL_BIGSEC
+    return LEVEL_NAMED
+
+
+# ─── Body page walker ───────────────────────────────────────────────────────
+
+
+def slugify(s: str, max_len: int = 60) -> str:
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = re.sub(r"[^a-zA-Z0-9 ]+", " ", s).lower().strip()
+    s = re.sub(r"\s+", "-", s)
+    return s[:max_len] or "section"
 
 
 def normalize_ws(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
-def parse_toc(soup: BeautifulSoup) -> tuple[
-    list[dict[str, Any]],  # entries: {n, title, page, anchor, pope, document, section, part_slug, part_title}
-    list[dict[str, Any]],  # structure_parts: {slug, title, range, count}
-    list[dict[str, Any]],  # structure_sections: {slug, title, part_slug, range}
-]:
-    """Walk the TOC table row-by-row and emit one record per entry plus a
-    structural summary by part and section."""
-    entries: list[dict[str, Any]] = []
+def clean_entry_body(html: str) -> str:
+    """Tidy an entry's raw segment into clean paragraph HTML.
 
-    # Track running context
-    current_part_slug: str | None = None
-    current_part_title: str | None = None
-    current_section_slug: str | None = None
-    current_section_title: str | None = None
-    current_document: str | None = None
-    current_pope: str | None = None
-
-    section_counter = 0
-
-    def slugify(s: str) -> str:
-        s = re.sub(r"[^a-z0-9 ]", "", s.lower())
-        s = re.sub(r"\s+", "-", s.strip())
-        return s[:60] or "section"
-
-    def update_context_from_chunks(chunks: list[tuple[str, str]]) -> None:
-        nonlocal current_part_slug, current_part_title
-        nonlocal current_section_slug, current_section_title
-        nonlocal current_document, current_pope, section_counter
-        for kind, val in chunks:
-            if kind == "text":
-                current_document = val
-            elif kind == "pope":
-                current_pope = val
-            elif kind == "section":
-                if val in PART_TITLES:
-                    current_part_slug = PART_SLUGS[val]
-                    current_part_title = PART_TITLES[val]
-                    current_section_slug = None
-                    current_section_title = None
-                else:
-                    section_counter += 1
-                    current_section_slug = f"sec-{section_counter}-{slugify(val)}"
-                    current_section_title = val
-
-    def chunks_from_td(td: Tag) -> list[tuple[str, str]]:
-        """Walk a TD recursively and emit (kind, value) chunks: text /
-        pope / section. The TOC HTML is malformed — `<a name=…>` tags are
-        opened but never closed, so BeautifulSoup wraps the next <center>
-        inside the unclosed <a>. We can't trust child structure; instead
-        we walk descendants in order and treat each <center> as a heading
-        regardless of nesting depth."""
-        chunks: list[tuple[str, str]] = []
-        buf: list[str] = []
-
-        def flush_buf() -> None:
-            text = normalize_ws(" ".join(buf))
-            if text:
-                chunks.append(("text", text))
-            buf.clear()
-
-        def classify_heading(inner: str) -> tuple[str, str]:
-            # Pope blocks have the shape "NAME : DATE/YEAR …" where the
-            # name is mixed-case (e.g. "CLEMENT 1er DE ROME") and the date
-            # contains digits. Match by structure: a colon present, AND
-            # something digit-y after it.
-            if ":" in inner:
-                left, right = inner.split(":", 1)
-                if re.search(r"\d", right) and len(left.strip()) >= 2:
-                    return ("pope", inner)
-            return ("section", inner)
-
-        # Walk in document order, but skip into <center> tags atomically
-        # (collect their text and emit a heading chunk).
-        skip_until: Tag | None = None
-
-        def emit_heading(inner: str) -> None:
-            # Headings in the source often wrap onto a second <center>
-            # ("PAUL III: 13 octobre" / "1534-10 novembre 1549" or "II.
-            # Schéma bipartite" / "trinitaire-christologique."). Merge a
-            # continuation that starts with a lowercase letter or a digit
-            # into the previous heading instead of emitting a new one.
-            if chunks:
-                last_kind, last_val = chunks[-1]
-                if last_kind in ("section", "pope") and re.match(
-                    r"^[a-z0-9\-]", inner
-                ):
-                    chunks[-1] = (last_kind, f"{last_val} {inner}")
-                    # Re-classify: if the merged result now has a colon +
-                    # date, upgrade section→pope.
-                    merged = chunks[-1][1]
-                    new_kind = classify_heading(merged)[0]
-                    chunks[-1] = (new_kind, merged)
-                    return
-            chunks.append(classify_heading(inner))
-
-        for el in td.descendants:
-            if skip_until is not None:
-                # Wait until we exit the current <center> subtree.
-                # BS doesn't make this easy without checking ancestors —
-                # easier path: skip elements whose ancestor list includes
-                # the skip target.
-                if el is skip_until or skip_until in getattr(el, "parents", []):
-                    continue
-                skip_until = None
-            if isinstance(el, NavigableString):
-                # Skip strings inside a <center> (handled by its parent).
-                if any(p.name == "center" for p in el.parents):
-                    continue
-                buf.append(str(el))
-                continue
-            if isinstance(el, Tag):
-                if el.name == "br":
-                    flush_buf()
-                    continue
-                if el.name == "center":
-                    flush_buf()
-                    inner = normalize_ws(el.get_text())
-                    if inner:
-                        emit_heading(inner)
-                    skip_until = el
-                    continue
-                # Other tags (a, b, i, …) — let descendants iteration
-                # surface their text children separately.
-                continue
-        flush_buf()
-        return chunks
-
-    # Filter to leaf TRs only (skip wrapper TRs whose TD contains a nested
-    # <table>) — otherwise the outer wrapper TR is treated as if it owned
-    # entry 1 with all part headings concatenated as its post-chunks.
-    leaf_trs = [tr for tr in soup.select("tr") if not tr.select_one("table")]
-    for tr in leaf_trs:
-        link = tr.select_one("td:first-child a[href*='#']")
-        if not link:
-            # Heading-only row — second TD carries part / section headings.
-            tds = tr.select("td")
-            if len(tds) >= 2:
-                update_context_from_chunks(chunks_from_td(tds[1]))
-            continue
-
-        # Parse the entry number.
-        href = link.get("href", "")
-        m = re.match(r"9\.php\?d=([^#]+)#(.+)", href)
-        if not m:
-            continue
-        page_key = m.group(1)
-        anchor = m.group(2)
-        try:
-            n = int(link.get_text(strip=True))
-        except ValueError:
-            continue
-
-        body_td = tr.select("td")[1] if len(tr.select("td")) > 1 else None
-        if body_td is None:
-            continue
-
-        chunks = chunks_from_td(body_td)
-        # Title = the LEADING text chunk(s) — i.e. text that appears
-        # BEFORE any section/pope chunk in the TD. Text chunks that come
-        # AFTER a heading are document context for the NEXT entry, not
-        # this one's title. (E.g. entry 76's row contains the Part 2
-        # transition headings + pope blocks + "Lettre aux Corinthiens";
-        # the latter is the document for entry 101, not 76's title.)
-        first_text = ""
-        post_chunks: list[tuple[str, str]] = []
-        seen_heading = False
-        for kind, val in chunks:
-            if not seen_heading and kind == "text" and not first_text:
-                first_text = val
-                continue
-            if kind in ("section", "pope"):
-                seen_heading = True
-            post_chunks.append((kind, val))
-
-        entries.append(
-            {
-                "n": n,
-                "title": first_text,
-                "page": page_key,
-                "anchor": anchor,
-                "part_slug": current_part_slug,
-                "part_title": current_part_title,
-                "section_slug": current_section_slug,
-                "section_title": current_section_title,
-                "document": current_document,
-                "pope": current_pope,
-            }
-        )
-
-        update_context_from_chunks(post_chunks)
-
-    # Build summary by part/section.
-    parts_struct: list[dict[str, Any]] = []
-    by_part: dict[str, list[int]] = {}
-    for e in entries:
-        if e["part_slug"]:
-            by_part.setdefault(e["part_slug"], []).append(e["n"])
-    for slug in ["1-symboles-de-foi", "2-magistere-de-leglise", "3-tables"]:
-        ns = by_part.get(slug, [])
-        if not ns:
-            continue
-        title = next((e["part_title"] for e in entries if e["part_slug"] == slug), slug)
-        parts_struct.append(
-            {
-                "slug": slug,
-                "title": title,
-                "range": [ns[0], ns[-1]],
-                "count": len(ns),
-            }
-        )
-
-    sections_struct: list[dict[str, Any]] = []
-    seen_sections: set[str] = set()
-    for e in entries:
-        if not e["section_slug"] or e["section_slug"] in seen_sections:
-            continue
-        seen_sections.add(e["section_slug"])
-        ns_in_sec = [x["n"] for x in entries if x["section_slug"] == e["section_slug"]]
-        sections_struct.append(
-            {
-                "slug": e["section_slug"],
-                "title": e["section_title"],
-                "part_slug": e["part_slug"],
-                "range": [ns_in_sec[0], ns_in_sec[-1]],
-                "count": len(ns_in_sec),
-            }
-        )
-
-    return entries, parts_struct, sections_struct
-
-
-# ─── Body-page walker ───────────────────────────────────────────────────────
-
-
-def clean_body_segment(html: str) -> str:
-    """Tidy an entry's raw segment into clean paragraph HTML."""
-    # Truncate at the page footer / navigation block. The catho.org body
-    # pages all end with the same footer markers.
+    Truncate at the page footer / nav block. Drop icon links. Collapse
+    `<br><br>` into paragraph breaks. Strip catho.org's internal `9.php`
+    cross-refs (we re-link to our own permalinks elsewhere).
+    """
     cut_re = re.compile(
         r"<a\s+name\s*=\s*\"?vers\"?|<table[^>]*bgcolor=#3366cc",
         flags=re.IGNORECASE,
@@ -343,316 +149,312 @@ def clean_body_segment(html: str) -> str:
     m = cut_re.search(html)
     if m:
         html = html[: m.start()]
-    # Drop the per-paragraph icon/decoration links (LA.gif / c.gif) that
-    # link to the Latin counterpart and the cross-ref index.
     html = re.sub(r"<a [^>]*><img [^>]*></a>", "", html, flags=re.IGNORECASE)
-    # Strip catho.org internal cross-reference anchors — they'd 404
-    # against our routing. Keep the link text inline.
     html = re.sub(
         r"<a\s+href=[^>]*9\.php[^>]*>([^<]*)</a>",
         r"\1",
         html,
         flags=re.IGNORECASE,
     )
-    # Strip any remaining stray <a href=...> opening/closing pairs.
     html = re.sub(r"<a\s+href=[^>]*>", "", html, flags=re.IGNORECASE)
     html = re.sub(r"</a>", "", html, flags=re.IGNORECASE)
-    # Convert blocks of 2+ <br> into paragraph breaks. Single <br> stays.
     html = re.sub(r"(?:\s*<br\s*/?>\s*){2,}", "</p><p>", html, flags=re.IGNORECASE)
-    # Drop centered headings that crept in (rare).
     html = re.sub(r"<center>.*?</center>", "", html, flags=re.IGNORECASE | re.DOTALL)
-    # Wrap in <p>; collapse whitespace.
     html = "<p>" + html + "</p>"
     html = re.sub(r"<p>\s*</p>", "", html)
     html = re.sub(r"\s+", " ", html).strip()
-    # Strip stray remaining inline anchors.
     html = re.sub(r"<a\s+(?:name|Name)\s*=\s*\"?[^\">]+\"?\s*>", "", html)
     return html
 
 
-def parse_body_page_html(html: str) -> dict[str, dict[str, Any]]:
-    """Return {anchor → {n, html}} for one body page.
+# Event = ('h1', text) | ('h2', text) | ('entry', n, anchor, body_html)
 
-    Strategy: split the raw HTML on `<a name=ANCHOR>` markers. For each
-    segment, recognise an entry marker if the leading inline content is
-    `<b>NUM</b><br>`; otherwise the anchor is a section/heading anchor
-    with no entry attached and we skip it.
-    """
+
+def parse_body_page(html: str) -> list[tuple]:
+    """Stream events from one body page in document order."""
     m = re.search(r"<body[^>]*>(.*)</body>", html, flags=re.DOTALL | re.IGNORECASE)
-    body_html = m.group(1) if m else html
+    body = m.group(1) if m else html
 
-    anchor_re = re.compile(
-        r'<a\s+(?:name|Name)\s*=\s*"?([A-Za-z0-9_]+)"?\s*>',
-        flags=re.IGNORECASE,
+    # Build a positional event list by scanning for our three markers.
+    events: list[tuple] = []
+    pattern = re.compile(
+        r"<h1[^>]*>(?P<h1>.*?)</h1>"
+        r"|<h2[^>]*>(?P<h2>.*?)</h2>"
+        r"|<a\s+(?:name|Name)\s*=\s*\"?(?P<anchor>[A-Za-z0-9_]+)\"?\s*>\s*<b>\s*(?P<n>\d+)\s*</b>",
+        flags=re.IGNORECASE | re.DOTALL,
     )
-    pieces = anchor_re.split(body_html)
-    out: dict[str, dict[str, Any]] = {}
-    i = 1
-    while i < len(pieces):
-        anchor = pieces[i]
-        content = pieces[i + 1] if i + 1 < len(pieces) else ""
-        i += 2
-        m_num = re.match(
-            r"^\s*<b>\s*(\d+)\s*</b>\s*(?:<br\s*/?>\s*)+",
-            content,
-            flags=re.IGNORECASE,
-        )
-        if not m_num:
-            continue
-        n = int(m_num.group(1))
-        body = content[m_num.end() :]
-        out[anchor] = {"n": n, "html": clean_body_segment(body)}
-    return out
+    matches = list(pattern.finditer(body))
+    for i, m in enumerate(matches):
+        if m.group("h1") is not None:
+            text = normalize_ws(re.sub(r"<[^>]+>", "", m.group("h1")))
+            if text:
+                events.append(("h1", text))
+        elif m.group("h2") is not None:
+            text = normalize_ws(re.sub(r"<[^>]+>", "", m.group("h2")))
+            if text:
+                events.append(("h2", text))
+        elif m.group("anchor") is not None:
+            anchor = m.group("anchor")
+            n = int(m.group("n"))
+            # Body for this entry runs until the next anchor / h1 / h2
+            # match — i.e. the NEXT match in our list.
+            body_start = m.end()
+            body_end = matches[i + 1].start() if i + 1 < len(matches) else len(body)
+            entry_html = body[body_start:body_end]
+            events.append(("entry", n, anchor, clean_entry_body(entry_html)))
+    return events
 
 
-def parse_body_page(soup: BeautifulSoup) -> dict[str, str]:
-    """[Legacy stub kept for backward compat — unused.]"""
-    body = soup.body
-    if body is None:
-        return {}
+# ─── Driver: walk all body pages, build reading units ──────────────────────
 
-    # Walk all descendants in document order, splitting on <a Name=…>.
-    out: dict[str, str] = {}
-    current_anchor: str | None = None
-    current_chunks: list[str] = []
 
-    def flush() -> None:
-        if current_anchor is None:
-            return
-        # Body content may include the leading "<b>NUM</b><br>" that we want
-        # to drop (the page renders the entry number visually before the
-        # body — we already have it in the index).
-        html = "".join(current_chunks).strip()
-        # Strip leading <b>NUM</b><br>
-        html = re.sub(r"^\s*<b>\s*\d+\s*</b>\s*(<br\s*/?>\s*)+", "", html)
-        # Strip trailing footnote-link decorations <a href=…><img …></a>
-        html = re.sub(
-            r"<a [^>]*><img [^>]*></a>",
-            "",
-            html,
-        )
-        # Convert sequences of <br> into paragraph breaks.
-        # Two-or-more <br> → end-paragraph + new-paragraph.
-        html = re.sub(r"(?:\s*<br\s*/?>\s*){2,}", "</p><p>", html, flags=re.IGNORECASE)
-        # Single <br> stays as-is (line breaks within a stanza).
-        # Wrap whole thing in <p>.
-        html = "<p>" + html + "</p>"
-        # Tidy up empty paragraphs.
-        html = re.sub(r"<p>\s*</p>", "", html)
-        # Collapse internal whitespace runs.
-        html = re.sub(r"\s+", " ", html)
-        out[current_anchor] = html.strip()
+def discover_body_pages(toc_html: str) -> list[str]:
+    pages: list[str] = []
+    seen: set[str] = set()
+    for m in re.finditer(r"9\.php\?d=([a-z0-9]+)#", toc_html):
+        k = m.group(1)
+        if k not in seen:
+            seen.add(k)
+            pages.append(k)
+    return pages
 
-    # We need to walk children at body level but consider deeply-nested
-    # content — anchor markers appear at multiple depths. Use recursive
-    # traversal preserving order.
-    def walk(node: Tag) -> Iterator:
-        for child in node.children:
-            yield child
 
-    # Flatten into a stream of (kind, payload) events. We iterate the body
-    # and split on `<a name="...">` markers.
-    for el in body.descendants:
-        if isinstance(el, Tag) and el.name == "a" and (el.get("name") or el.get("Name")):
-            name = el.get("name") or el.get("Name")
-            flush()
-            current_anchor = name
-            current_chunks = []
-            continue
-        # Drop the entire <a href=...><img.../></a> footer/icon decorations.
+_MONTHS_LOWER = [
+    "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
+    "septembre", "octobre", "novembre", "décembre",
+    "févr", "juill", "sept", "oct", "nov", "déc",
+]
+_MONTHS_ALT = "|".join(_MONTHS_LOWER + [m.capitalize() for m in _MONTHS_LOWER])
+CONTINUATION_PREFIX_RE = re.compile(rf"^(?:[a-z0-9\-:\(]|(?:{_MONTHS_ALT})\b)")
+
+
+def merge_wrapped_h1(events: list[tuple]) -> list[tuple]:
+    """The source wraps long h1s onto a second h1 ("II. Schéma bipartite"
+    / "trinitaire-christologique." or "PIE IV : 25" / "Décembre 1559-9
+    décem"). Merge a continuation that doesn't look like a fresh
+    standalone heading into the previous one. Heuristic: continuation
+    starts with lowercase, a digit, a leading colon/paren, or a French
+    month name."""
+    out: list[tuple] = []
+    for ev in events:
         if (
-            isinstance(el, Tag)
-            and el.name == "a"
-            and el.get("href")
-            and not el.get("name")
-            and not el.get("Name")
+            ev[0] == "h1"
+            and out
+            and out[-1][0] == "h1"
+            and CONTINUATION_PREFIX_RE.match(ev[1])
         ):
-            # Skip — usually nav/icon links.
+            out[-1] = ("h1", out[-1][1] + " " + ev[1])
             continue
-        if isinstance(el, NavigableString):
-            if current_anchor is None:
-                continue
-            current_chunks.append(str(el))
-            continue
-        if isinstance(el, Tag):
-            if current_anchor is None:
-                continue
-            # Keep only inline-style tags (br, b, i, em, strong, sup, span,
-            # center). For container tags (table, td, tr, html, head, body)
-            # we rely on the .descendants iteration to surface their text
-            # children separately.
-            if el.name in ("br", "b", "i", "em", "strong", "sup"):
-                # Emit the tag itself as a marker so we preserve it in
-                # output.
-                if el.name == "br":
-                    current_chunks.append("<br>")
-                # For other inline tags, descendants walk also yields their
-                # text children — to avoid duplication, we don't emit the
-                # opening/closing tags here; we just rely on the text nodes.
-                continue
-            if el.name == "center":
-                # A centered heading inside an entry's body is rare; drop.
-                continue
-    flush()
+        out.append(ev)
     return out
-
-
-# ─── Driver ─────────────────────────────────────────────────────────────────
-
-
-def html_clean(html: str) -> str:
-    """Light cleanup applied to entry bodies before saving."""
-    # Remove common navigational debris.
-    html = re.sub(r"<a[^>]*\bname=\"?vers\"?[^>]*>\s*", "", html, flags=re.IGNORECASE)
-    html = re.sub(r"<table[^>]*>.*?</table>", "", html, flags=re.IGNORECASE | re.DOTALL)
-    # Trim multiple paragraph-breaks.
-    html = re.sub(r"(<p>\s*</p>)+", "", html)
-    return html.strip()
 
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    OUT_ENTRIES.mkdir(parents=True, exist_ok=True)
+    OUT_UNITS.mkdir(parents=True, exist_ok=True)
 
-    print("fetching TOC…")
-    toc_soup = fetch_toc()
-    entries, parts_struct, sections_struct = parse_toc(toc_soup)
-    print(f"  {len(entries)} entries, {len(parts_struct)} parts, {len(sections_struct)} sections")
+    print("fetching TOC for body-page discovery…")
+    toc_html = fetch_cached(TOC_KEY)
+    pages = discover_body_pages(toc_html)
+    # Use only pages explicitly linked from the French TOC. (Probing past
+    # the last linked page surfaces the Latin edition pages — bxj+ — that
+    # restate the same entries with Latin text and the same anchor names,
+    # which would otherwise overwrite our French entries.)
+    print(f"  {len(pages)} body pages (TOC-linked)")
 
-    pages_needed = sorted({e["page"] for e in entries})
-    print(f"fetching {len(pages_needed)} body pages…")
-    for k in pages_needed:
-        was_cached = (CACHE_DIR / f"{k}.html").exists()
-        fetch_cached(k)
-        if not was_cached:
-            print(f"  {k} (fetched)")
-
-    # Discover ALL body pages by walking the alphabetical sequence used by
-    # catho.org. We fetched the ones the TOC mentions, but body pages may
-    # also exist for entries not surfaced in the TOC (sub-numbered passages
-    # within a long document). Probe forward until we get a 404 / empty.
-    print("probing for additional body pages…")
-    extra_pages: list[str] = []
-    last_page = pages_needed[-1] if pages_needed else "bvx"
-
-    def next_page_key(k: str) -> str | None:
-        # The catho.org keys roll bv* → bw* → bx*; within each cluster the
-        # last char goes a..z then 0..9. Build the next key.
-        prefix = k[:-1]
-        last = k[-1]
-        order = "abcdefghijklmnopqrstuvwxyz0123456789"
-        if last in order:
-            idx = order.index(last)
-            if idx + 1 < len(order):
-                return prefix + order[idx + 1]
-            # Roll over: bv9 → bwa, bw9 → bxa, bx9 → bya etc.
-            if len(prefix) >= 2:
-                next_prefix = prefix[:-1] + chr(ord(prefix[-1]) + 1)
-                return next_prefix + order[0]
-        return None
-
-    cur = next_page_key(last_page)
-    while cur and cur < "bya":
-        try:
-            html = fetch_cached(cur)
-        except Exception:
-            break
-        if "<a name=" not in html.lower():
-            break
-        extra_pages.append(cur)
-        nxt = next_page_key(cur)
-        if not nxt:
-            break
-        cur = nxt
-    if extra_pages:
-        print(f"  extra pages: {extra_pages}")
-
-    all_pages = pages_needed + extra_pages
-
+    # Build a single global event stream from all pages.
     print("parsing body pages…")
-    # Parse each body page; result is {(page, anchor) → {n, html}}.
-    bodies: dict[tuple[str, str], dict[str, Any]] = {}
-    by_n: dict[int, dict[str, Any]] = {}
-    for k in all_pages:
-        html = (CACHE_DIR / f"{k}.html").read_bytes().decode("iso-8859-1")
-        page_entries = parse_body_page_html(html)
-        for anchor, info in page_entries.items():
-            bodies[(k, anchor)] = info
-            n = info["n"]
-            if n not in by_n:
-                by_n[n] = {"n": n, "html": info["html"], "page": k, "anchor": anchor}
-    print(f"  parsed {len(bodies)} body anchors, {len(by_n)} unique entry numbers")
+    all_events: list[tuple] = []
+    for k in pages:
+        html = fetch_cached(k)
+        events = parse_body_page(html)
+        events = merge_wrapped_h1(events)
+        all_events.extend(events)
+    print(f"  {len(all_events)} events")
 
-    # Merge: combine body-discovered entries with TOC metadata. For entries
-    # in the TOC, use the TOC title + context. For entries only in the body
-    # pages, inherit context from the previous entry that DID have it.
-    toc_by_n = {e["n"]: e for e in entries}
-    sorted_ns = sorted(by_n.keys())
+    # Walk the stream, maintain h1 stack, group entries into reading units.
+    print("building reading units…")
+    stack: list[tuple[int, str]] = []  # (level, text)
+    current_h2: str | None = None
+    units: list[dict[str, Any]] = []
+    current_unit: dict[str, Any] | None = None
+    n_to_unit: dict[int, str] = {}
+    unit_slug_seen: dict[str, int] = {}
 
-    print("writing per-entry JSON…")
-    inherited_part_slug: str | None = None
-    inherited_part_title: str | None = None
-    inherited_section_slug: str | None = None
-    inherited_section_title: str | None = None
-    inherited_document: str | None = None
-    inherited_pope: str | None = None
-    written = 0
-    for n in sorted_ns:
-        body_info = by_n[n]
-        meta = toc_by_n.get(n)
-        if meta:
-            if meta["part_slug"]:
-                inherited_part_slug = meta["part_slug"]
-                inherited_part_title = meta["part_title"]
-            if meta["section_slug"]:
-                inherited_section_slug = meta["section_slug"]
-                inherited_section_title = meta["section_title"]
-            if meta["document"]:
-                inherited_document = meta["document"]
-            if meta["pope"]:
-                inherited_pope = meta["pope"]
-            title = meta["title"]
-        else:
-            title = ""
+    def stack_key() -> tuple:
+        return tuple(t for _, t in stack)
 
-        record = {
-            "n": n,
-            "title": title,
-            "html": body_info["html"],
-            "part_slug": inherited_part_slug,
-            "part_title": inherited_part_title,
-            "section_slug": inherited_section_slug,
-            "section_title": inherited_section_title,
-            "document": inherited_document,
-            "pope": inherited_pope,
-        }
-        with open(OUT_ENTRIES / f"{n}.json", "w", encoding="utf-8") as fh:
-            json.dump(record, fh, ensure_ascii=False, indent=2)
-        written += 1
+    def open_unit_if_needed() -> None:
+        nonlocal current_unit
+        if current_unit is None:
+            return
+        # noop; each entry checks via path comparison
+        pass
 
-    # Rebuild parts_struct using the actual emitted entry numbers (which
-    # include body-only entries inheriting from the previous TOC context).
-    final_by_part: dict[str, list[int]] = {}
-    for n in sorted_ns:
-        meta = toc_by_n.get(n)
-        # Resolve the part from the merged record we just wrote.
-        path = OUT_ENTRIES / f"{n}.json"
-        with open(path, "r", encoding="utf-8") as fh:
-            r = json.load(fh)
-        if r.get("part_slug"):
-            final_by_part.setdefault(r["part_slug"], []).append(n)
-    final_parts_struct: list[dict[str, Any]] = []
-    for slug in ["1-symboles-de-foi", "2-magistere-de-leglise", "3-tables"]:
-        ns = final_by_part.get(slug, [])
-        if not ns:
+    def make_unit_slug(path: list[str]) -> str:
+        # Use the LAST item in the path (the deepest section / pope) as
+        # the human-readable slug. Disambiguate by appending "-N" on
+        # collisions.
+        base = slugify(path[-1]) if path else "unknown"
+        n = unit_slug_seen.get(base, 0)
+        unit_slug_seen[base] = n + 1
+        return base if n == 0 else f"{base}-{n + 1}"
+
+    def push_h1(text: str) -> None:
+        level = detect_level(text)
+        while stack and stack[-1][0] >= level:
+            stack.pop()
+        stack.append((level, text))
+
+    last_unit_path: tuple = ()
+    for ev in all_events:
+        if ev[0] == "h1":
+            push_h1(ev[1])
+            current_h2 = None
             continue
-        title = next((p["title"] for p in parts_struct if p["slug"] == slug), slug)
-        final_parts_struct.append(
+        if ev[0] == "h2":
+            current_h2 = ev[1]
+            continue
+        if ev[0] == "entry":
+            n, anchor, body_html = ev[1], ev[2], ev[3]
+            path = stack_key()
+            if path != last_unit_path:
+                # Open a new unit.
+                path_list = list(path)
+                slug = make_unit_slug(path_list)
+                # Determine the part this unit belongs to: the LEVEL_PART
+                # entry in the stack, if any.
+                part_text = next(
+                    (t for lvl, t in stack if lvl == LEVEL_PART), None
+                )
+                part_slug = PART_SLUGS.get(part_text or "", None)
+                part_title = PART_TITLES.get(part_text or "", None)
+                current_unit = {
+                    "slug": slug,
+                    "title": path_list[-1] if path_list else "",
+                    "breadcrumb": path_list,
+                    "part_slug": part_slug,
+                    "part_title": part_title,
+                    "entries": [],
+                }
+                units.append(current_unit)
+                last_unit_path = path
+            assert current_unit is not None
+            current_unit["entries"].append(
+                {
+                    "n": n,
+                    "anchor": anchor,
+                    "html": body_html,
+                    "document": current_h2,
+                }
+            )
+            n_to_unit[n] = current_unit["slug"]
+            current_h2 = None  # clear so each entry's doc is set explicitly
+    # Actually reset of current_h2 is wrong — h2 applies to the FOLLOWING
+    # entries until another h2 appears. Recompute by re-walking:
+    # (the cheap fix above was wrong; do a second pass.)
+    units = []
+    current_unit = None
+    n_to_unit = {}
+    unit_slug_seen = {}
+    stack = []
+    current_h2 = None
+    last_unit_path = ()
+    for ev in all_events:
+        if ev[0] == "h1":
+            push_h1(ev[1])
+            continue
+        if ev[0] == "h2":
+            current_h2 = ev[1]
+            continue
+        if ev[0] == "entry":
+            n, anchor, body_html = ev[1], ev[2], ev[3]
+            path = stack_key()
+            if path != last_unit_path:
+                path_list = list(path)
+                slug = make_unit_slug(path_list)
+                part_text = next(
+                    (t for lvl, t in stack if lvl == LEVEL_PART), None
+                )
+                part_slug = PART_SLUGS.get(part_text or "", None)
+                part_title = PART_TITLES.get(part_text or "", None)
+                current_unit = {
+                    "slug": slug,
+                    "title": path_list[-1] if path_list else "",
+                    "breadcrumb": path_list,
+                    "part_slug": part_slug,
+                    "part_title": part_title,
+                    "entries": [],
+                }
+                units.append(current_unit)
+                last_unit_path = path
+            assert current_unit is not None
+            current_unit["entries"].append(
+                {
+                    "n": n,
+                    "anchor": anchor,
+                    "html": body_html,
+                    "document": current_h2,
+                }
+            )
+            n_to_unit[n] = current_unit["slug"]
+    print(f"  {len(units)} reading units, {sum(len(u['entries']) for u in units)} entries")
+
+    # Write per-unit JSON. Add prev/next for in-part navigation.
+    print("writing units…")
+    for i, u in enumerate(units):
+        prev_u = next(
+            (units[j] for j in range(i - 1, -1, -1) if units[j]["part_slug"] == u["part_slug"]),
+            None,
+        )
+        next_u = next(
+            (units[j] for j in range(i + 1, len(units)) if units[j]["part_slug"] == u["part_slug"]),
+            None,
+        )
+        u["prev"] = (
+            {"slug": prev_u["slug"], "title": prev_u["title"]} if prev_u else None
+        )
+        u["next"] = (
+            {"slug": next_u["slug"], "title": next_u["title"]} if next_u else None
+        )
+        with open(OUT_UNITS / f"{u['slug']}.json", "w", encoding="utf-8") as fh:
+            json.dump(u, fh, ensure_ascii=False, indent=2)
+
+    # Build a hierarchical structure (tree) of units by part. Each part
+    # contains the units in document order with their breadcrumb depth so
+    # the sommaire can render a nested outline.
+    print("writing structure + index…")
+    parts_struct: list[dict[str, Any]] = []
+    by_part: dict[str, list[dict[str, Any]]] = {}
+    for u in units:
+        if not u["part_slug"]:
+            continue
+        by_part.setdefault(u["part_slug"], []).append(
+            {
+                "slug": u["slug"],
+                "title": u["title"],
+                "breadcrumb": u["breadcrumb"],
+                "entry_count": len(u["entries"]),
+                "first_n": u["entries"][0]["n"] if u["entries"] else None,
+                "last_n": u["entries"][-1]["n"] if u["entries"] else None,
+            }
+        )
+    for slug in ["1-symboles-de-foi", "2-magistere-de-leglise", "3-tables", "4-quatrieme"]:
+        units_in_part = by_part.get(slug, [])
+        if not units_in_part:
+            continue
+        title = next(
+            (PART_TITLES[k] for k, v in PART_SLUGS.items() if v == slug), slug
+        )
+        parts_struct.append(
             {
                 "slug": slug,
                 "title": title,
-                "range": [ns[0], ns[-1]],
-                "count": len(ns),
+                "units": units_in_part,
+                "unit_count": len(units_in_part),
+                "entry_count": sum(u["entry_count"] for u in units_in_part),
+                "first_n": units_in_part[0]["first_n"],
+                "last_n": units_in_part[-1]["last_n"],
             }
         )
 
@@ -660,29 +462,25 @@ def main() -> None:
         "corpus": "denzinger",
         "title": "Denzinger — Enchiridion Symbolorum",
         "subtitle": "Symboles et définitions de la Foi catholique (37e édition)",
-        "parts": final_parts_struct,
-        "sections": sections_struct,
-        "all_numbers": sorted_ns,
+        "parts": parts_struct,
+        "all_numbers": sorted(n_to_unit.keys()),
+        "total_entries": sum(len(u["entries"]) for u in units),
+        "total_units": len(units),
     }
     with open(OUT_DIR / "structure.json", "w", encoding="utf-8") as fh:
         json.dump(structure, fh, ensure_ascii=False, indent=2)
-    # Build the slim index from the on-disk records (so it matches what the
-    # site will actually load, including inherited context).
-    index: dict[str, Any] = {}
-    for n in sorted_ns:
-        with open(OUT_ENTRIES / f"{n}.json", "r", encoding="utf-8") as fh:
-            r = json.load(fh)
-        index[str(n)] = {
-            "title": r.get("title") or "",
-            "part_slug": r.get("part_slug"),
-            "section_slug": r.get("section_slug"),
-            "document": r.get("document"),
-            "pope": r.get("pope"),
-        }
+
+    index = {
+        str(n): {"unit_slug": slug}
+        for n, slug in n_to_unit.items()
+    }
     with open(OUT_DIR / "index.json", "w", encoding="utf-8") as fh:
         json.dump(index, fh, ensure_ascii=False, separators=(",", ":"))
 
-    print(f"wrote {written} entries")
+    print(f"done: {len(units)} units, {len(n_to_unit)} entries indexed")
+    # Print a sample histogram of unit sizes.
+    sizes = sorted(len(u["entries"]) for u in units)
+    print(f"  unit-size: min={sizes[0]} median={sizes[len(sizes)//2]} max={sizes[-1]}")
 
 
 if __name__ == "__main__":
