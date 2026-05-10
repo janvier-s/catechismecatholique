@@ -14,9 +14,22 @@ export const load: PageLoad = async ({ params, fetch }) => {
 		loadConcordanceChapter(book.slug, ch, fetch),
 		loadChapterCounts(fetch)
 	]);
-	if (!chapterData) throw error(404, 'No concordance data for this chapter');
-
 	if (!bookData) throw error(404);
+	if (!chapterData) {
+		// Concordance not available for this chapter — render a friendly
+		// "pas disponible" stub instead of 404'ing.
+		return {
+			book,
+			chapter: ch,
+			verses: [],
+			chapterData: null,
+			totalChapters: Object.keys(bookData)
+				.map((k) => parseInt(k, 10))
+				.reduce((m, n) => Math.max(m, n), 0),
+			chapterCounts,
+			missing: true as const
+		};
+	}
 	const chData = bookData[String(ch)];
 	if (!chData) throw error(404);
 
