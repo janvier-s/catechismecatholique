@@ -37,6 +37,49 @@ function stripInlineDocCitations(html: string): string {
 	);
 }
 
+/**
+ * Citations attached to a paragraph (patristic/liturgical quotes shown
+ * indented under the prose) re-use LOCAL data-idx counters ("1", "2", …)
+ * for their inline sup markers — but the paragraph's `magisterial_refs`
+ * is a single global sequence shared with the main text. The result is
+ * markers like §2852's citation ending in `<sup data-idx="1">1</sup>
+ * <sup data-idx="2">2</sup>` — which the runtime renderer maps back to
+ * the FIRST two refs (Jn 8:44 / Ap 12:9) instead of the trailing two
+ * (Rm 8:31 / saint Ambroise). The Ambroise marker disappears entirely
+ * because it should be a `docRef` (letter idx) but is emitted as
+ * `bibleRef`.
+ *
+ * Fix: walk citation sup markers in document order, pop the next
+ * un-consumed entry from `magisterial_refs` (those whose idx isn't
+ * already used by main `text_html`), and rewrite each sup with the
+ * correct idx + class (`bibleRef` for type=bible, `docRef` for
+ * everything else — patristic/liturgical/etc.).
+ */
+function reindexCitationSupMarkers(
+	mainHtml: string,
+	citations: { text_html: string }[],
+	refs: Paragraph['magisterial_refs']
+): { text_html: string }[] {
+	if (citations.length === 0) return citations;
+	const consumed = new Set<string>();
+	for (const m of mainHtml.matchAll(/data-idx="([^"]+)"/g)) consumed.add(m[1]!);
+	const remaining = refs.filter((r) => !consumed.has(String(r.idx)));
+	if (remaining.length === 0) return citations;
+	let cursor = 0;
+	return citations.map((c) => {
+		const newHtml = c.text_html.replace(
+			/<sup class="srcRef \w+Ref" data-idx="[^"]+">[^<]*<\/sup>/g,
+			() => {
+				const r = remaining[cursor++];
+				if (!r) return '';
+				const cls = r.type === 'bible' ? 'bibleRef' : 'docRef';
+				return `<sup class="srcRef ${cls}" data-idx="${r.idx}">${r.idx}</sup>`;
+			}
+		);
+		return { text_html: newHtml };
+	});
+}
+
 export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 	const out = new Map<number, Paragraph>();
 	function walk(node: RawNode) {
@@ -59,7 +102,11 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 				bible_refs: mergeBibleRefContinuations(
 					(node.bible_refs ?? []).map((b) => ({ text: b.text }))
 				),
-				citations: (node.citations ?? []).map((c) => ({ text_html: c.text_html })),
+				citations: reindexCitationSupMarkers(
+					grouped.html,
+					(node.citations ?? []).map((c) => ({ text_html: c.text_html })),
+					grouped.refs
+				),
 				magisterial_refs: grouped.refs
 			});
 		}

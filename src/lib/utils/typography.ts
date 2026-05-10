@@ -7,6 +7,9 @@
  * (e.g. when an inline cross-ref/footnote marker between the word and `»`
  * is hidden via CSS, eating the space the marker provided).
  */
+const NBSP = ' ';
+const WS_CLASS = '[ \\u00A0]';
+
 export function frenchPunct(html: string): string {
 	return html
 		.split(/(<[^>]*>)/)
@@ -14,9 +17,9 @@ export function frenchPunct(html: string): string {
 			// Even indices are text nodes; odd indices are HTML tags.
 			if (i % 2 !== 0) return part;
 			return part
-				.replace(/[  ]*([;:?!])/g, ' $1')
-				.replace(/«[  ]*/g, '« ')
-				.replace(/[  ]*»/g, ' »');
+				.replace(new RegExp(`${WS_CLASS}*([;:?!])`, 'g'), `${NBSP}$1`)
+				.replace(new RegExp(`«${WS_CLASS}*`, 'g'), `«${NBSP}`)
+				.replace(new RegExp(`${WS_CLASS}*»`, 'g'), `${NBSP}»`);
 		})
 		.join('');
 }
