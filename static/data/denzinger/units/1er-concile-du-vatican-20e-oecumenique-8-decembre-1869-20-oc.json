@@ -2084,13 +2084,13 @@
   "sections": [
     {
       "title": "3ème session, 1870 : constitution dogmatique \"Dei Filius\" sur la foi catholique.",
-      "anchor": "dh-3000",
+      "anchor": "s-3000",
       "first_n": 3000,
       "last_n": 3000,
       "chapters": [
         {
           "title": "Préambule",
-          "anchor": "dh-3000",
+          "anchor": "c-3000",
           "first_n": 3000,
           "last_n": 3000
         }
@@ -2098,261 +2098,261 @@
     },
     {
       "title": "Le Dieu unique, parfait, distinct du monde.",
-      "anchor": "dh-3001",
+      "anchor": "s-3001",
       "first_n": 3001,
       "last_n": 3001,
       "chapters": []
     },
     {
       "title": "L'acte de la création : sa perfection, sa fin et son effet.",
-      "anchor": "dh-3002",
+      "anchor": "s-3002",
       "first_n": 3002,
       "last_n": 3002,
       "chapters": []
     },
     {
       "title": "La Providence divine",
-      "anchor": "dh-3003",
+      "anchor": "s-3003",
       "first_n": 3003,
       "last_n": 3003,
       "chapters": []
     },
     {
       "title": "Le fait de la Révélation surnaturelle",
-      "anchor": "dh-3004",
+      "anchor": "s-3004",
       "first_n": 3004,
       "last_n": 3004,
       "chapters": []
     },
     {
       "title": "Sa nécessité",
-      "anchor": "dh-3005",
+      "anchor": "s-3005",
       "first_n": 3005,
       "last_n": 3005,
       "chapters": []
     },
     {
       "title": "Ses sources",
-      "anchor": "dh-3006",
+      "anchor": "s-3006",
       "first_n": 3006,
       "last_n": 3006,
       "chapters": []
     },
     {
       "title": "Son interprète : l'Eglise",
-      "anchor": "dh-3007",
+      "anchor": "s-3007",
       "first_n": 3007,
       "last_n": 3007,
       "chapters": []
     },
     {
       "title": "Ce qu'est la foi",
-      "anchor": "dh-3008",
+      "anchor": "s-3008",
       "first_n": 3008,
       "last_n": 3008,
       "chapters": []
     },
     {
       "title": "La foi est conforme à la raison",
-      "anchor": "dh-3009",
+      "anchor": "s-3009",
       "first_n": 3009,
       "last_n": 3009,
       "chapters": []
     },
     {
       "title": "La foi, un don de Dieu",
-      "anchor": "dh-3010",
+      "anchor": "s-3010",
       "first_n": 3010,
       "last_n": 3010,
       "chapters": []
     },
     {
       "title": "L'objet de la foi",
-      "anchor": "dh-3011",
+      "anchor": "s-3011",
       "first_n": 3011,
       "last_n": 3011,
       "chapters": []
     },
     {
       "title": "La nécessité de la foi",
-      "anchor": "dh-3012",
+      "anchor": "s-3012",
       "first_n": 3012,
       "last_n": 3012,
       "chapters": []
     },
     {
       "title": "Les secours extérieurs et intérieurs de la foi",
-      "anchor": "dh-3013",
+      "anchor": "s-3013",
       "first_n": 3013,
       "last_n": 3014,
       "chapters": []
     },
     {
       "title": "Deux ordres de connaissances",
-      "anchor": "dh-3015",
+      "anchor": "s-3015",
       "first_n": 3015,
       "last_n": 3015,
       "chapters": []
     },
     {
       "title": "La part de la raison dans l'élaboration de la vérité surnaturelle",
-      "anchor": "dh-3016",
+      "anchor": "s-3016",
       "first_n": 3016,
       "last_n": 3016,
       "chapters": []
     },
     {
       "title": "Pas d'opposition entre foi et raison",
-      "anchor": "dh-3017",
+      "anchor": "s-3017",
       "first_n": 3017,
       "last_n": 3018,
       "chapters": []
     },
     {
       "title": "L'aide mutuelle que s'apportent la foi et la raison",
-      "anchor": "dh-3019",
+      "anchor": "s-3019",
       "first_n": 3019,
       "last_n": 3019,
       "chapters": []
     },
     {
       "title": "Ce qu'est le progrès dans la science théologique",
-      "anchor": "dh-3020",
+      "anchor": "s-3020",
       "first_n": 3020,
       "last_n": 3020,
       "chapters": []
     },
     {
       "title": "Contre toutes les erreurs concernant l'existence de Dieu créateur.",
-      "anchor": "dh-3021",
+      "anchor": "s-3021",
       "first_n": 3021,
       "last_n": 3021,
       "chapters": []
     },
     {
       "title": "Contre le matérialisme",
-      "anchor": "dh-3022",
+      "anchor": "s-3022",
       "first_n": 3022,
       "last_n": 3022,
       "chapters": []
     },
     {
       "title": "Contre le Panthéisme et ses différentes formes",
-      "anchor": "dh-3023",
+      "anchor": "s-3023",
       "first_n": 3023,
       "last_n": 3024,
       "chapters": []
     },
     {
       "title": "Contre Panthéistes et matérialistes contre les Günthériens, et les Hermésiens.",
-      "anchor": "dh-3025",
+      "anchor": "s-3025",
       "first_n": 3025,
       "last_n": 3025,
       "chapters": []
     },
     {
       "title": "Contre ceux qui nient la théologie naturelle",
-      "anchor": "dh-3026",
+      "anchor": "s-3026",
       "first_n": 3026,
       "last_n": 3026,
       "chapters": []
     },
     {
       "title": "Contre le déisme",
-      "anchor": "dh-3027",
+      "anchor": "s-3027",
       "first_n": 3027,
       "last_n": 3027,
       "chapters": []
     },
     {
       "title": "Contre le rationalisme sans limites",
-      "anchor": "dh-3028",
+      "anchor": "s-3028",
       "first_n": 3028,
       "last_n": 3028,
       "chapters": []
     },
     {
       "title": "Contre la critique de la Bible par les rationalistes",
-      "anchor": "dh-3029",
+      "anchor": "s-3029",
       "first_n": 3029,
       "last_n": 3029,
       "chapters": []
     },
     {
       "title": "Contre l'autonomie de la raison",
-      "anchor": "dh-3031",
+      "anchor": "s-3031",
       "first_n": 3031,
       "last_n": 3032,
       "chapters": []
     },
     {
       "title": "Contre le fidéisme",
-      "anchor": "dh-3033",
+      "anchor": "s-3033",
       "first_n": 3033,
       "last_n": 3033,
       "chapters": []
     },
     {
       "title": "Contre l'agnosticisme et le mythologisme",
-      "anchor": "dh-3034",
+      "anchor": "s-3034",
       "first_n": 3034,
       "last_n": 3034,
       "chapters": []
     },
     {
       "title": "Contre les hermésiens",
-      "anchor": "dh-3035",
+      "anchor": "s-3035",
       "first_n": 3035,
       "last_n": 3036,
       "chapters": []
     },
     {
       "title": "4. La foi et la raison",
-      "anchor": "dh-3041",
+      "anchor": "s-3041",
       "first_n": 3041,
       "last_n": 3043,
       "chapters": []
     },
     {
       "title": "Epilogue",
-      "anchor": "dh-3044",
+      "anchor": "s-3044",
       "first_n": 3044,
       "last_n": 3045,
       "chapters": []
     },
     {
       "title": "4ème session, 18 juillet 1870 : première constitution dogmatique \"Pastor aeternu",
-      "anchor": "dh-3050",
+      "anchor": "s-3050",
       "first_n": 3050,
       "last_n": 3075,
       "chapters": [
         {
           "title": "Préambule sur l'institution et le fondement de l'Eglise",
-          "anchor": "dh-3050",
+          "anchor": "c-3050",
           "first_n": 3050,
           "last_n": 3052
         },
         {
           "title": "Chap. 1 - L'institution de la primauté apostolique en saint Pierre.",
-          "anchor": "dh-3053",
+          "anchor": "c-3053",
           "first_n": 3053,
           "last_n": 3055
         },
         {
           "title": "Chap. 2. La perpétuité de la primauté de saint Pierre.",
-          "anchor": "dh-3056",
+          "anchor": "c-3056",
           "first_n": 3056,
           "last_n": 3058
         },
         {
           "title": "Chap. 3. Pouvoir et nature de la primauté du pontife romain",
-          "anchor": "dh-3059",
+          "anchor": "c-3059",
           "first_n": 3059,
           "last_n": 3064
         },
         {
           "title": "Chap. 4. Le magistère infaillible du pontife romain",
-          "anchor": "dh-3065",
+          "anchor": "c-3065",
           "first_n": 3065,
           "last_n": 3075
         }
@@ -2360,322 +2360,322 @@
     },
     {
       "title": "Foi et intention du ministre du sacrement",
-      "anchor": "dh-3100",
+      "anchor": "s-3100",
       "first_n": 3100,
       "last_n": 3102,
       "chapters": []
     },
     {
       "title": "Gains perçus pour un prêt",
-      "anchor": "dh-3105",
+      "anchor": "s-3105",
       "first_n": 3105,
       "last_n": 3109,
       "chapters": []
     },
     {
       "title": "La juridiction du pape et des évêques a) Déclaration commune des évêques d'Allemagne, janvier-février 1875.",
-      "anchor": "dh-3112",
+      "anchor": "s-3112",
       "first_n": 3112,
       "last_n": 3116,
       "chapters": []
     },
     {
       "title": "évêques d'Allemagne, 4",
-      "anchor": "dh-3117",
+      "anchor": "s-3117",
       "first_n": 3117,
       "last_n": 3117,
       "chapters": []
     },
     {
       "title": "La doctrine de la transsubstantiation dans l'eucharistie.",
-      "anchor": "dh-3121",
+      "anchor": "s-3121",
       "first_n": 3121,
       "last_n": 3124,
       "chapters": []
     },
     {
       "title": "Foi et intention du ministre du sacrement.",
-      "anchor": "dh-3126",
+      "anchor": "s-3126",
       "first_n": 3126,
       "last_n": 3126,
       "chapters": []
     },
     {
       "title": "Le baptême conféré de façon absolue et sous condition",
-      "anchor": "dh-3128",
+      "anchor": "s-3128",
       "first_n": 3128,
       "last_n": 3128,
       "chapters": []
     },
     {
       "title": "Les droits de l'homme dans la société.",
-      "anchor": "dh-3130",
+      "anchor": "s-3130",
       "first_n": 3130,
       "last_n": 3133,
       "chapters": []
     },
     {
       "title": "L'importance de la philosophie pour l'affermissement de la foi",
-      "anchor": "dh-3135",
+      "anchor": "s-3135",
       "first_n": 3135,
       "last_n": 3138,
       "chapters": []
     },
     {
       "title": "L'excellence de la méthode scolastique et l'autorité qui revient à Thomas d'Aq",
-      "anchor": "dh-3139",
+      "anchor": "s-3139",
       "first_n": 3139,
       "last_n": 3140,
       "chapters": []
     },
     {
       "title": "La nature du mariage chrétien.",
-      "anchor": "dh-3142",
+      "anchor": "s-3142",
       "first_n": 3142,
       "last_n": 3143,
       "chapters": []
     },
     {
       "title": "Le pouvoir de l'Eglise sur le mariage chrétien",
-      "anchor": "dh-3144",
+      "anchor": "s-3144",
       "first_n": 3144,
       "last_n": 3146,
       "chapters": []
     },
     {
       "title": "La décision est importante pour le jugement à porter sur la méthode Knaus- Ogi",
-      "anchor": "dh-3148",
+      "anchor": "s-3148",
       "first_n": 3148,
       "last_n": 3148,
       "chapters": []
     },
     {
       "title": "Le pouvoir dans la société civile",
-      "anchor": "dh-3150",
+      "anchor": "s-3150",
       "first_n": 3150,
       "last_n": 3152,
       "chapters": []
     },
     {
       "title": "La liberté d'attaquer des ouvrages qui ont été retirés de la procédure par la Congrégation de l'Index",
-      "anchor": "dh-3154",
+      "anchor": "s-3154",
       "first_n": 3154,
       "last_n": 3155,
       "chapters": []
     },
     {
       "title": "Francs-maçons",
-      "anchor": "dh-3156",
+      "anchor": "s-3156",
       "first_n": 3156,
       "last_n": 3158,
       "chapters": []
     },
     {
       "title": "Francs - Maçons",
-      "anchor": "dh-3159",
+      "anchor": "s-3159",
       "first_n": 3159,
       "last_n": 3160,
       "chapters": []
     },
     {
       "title": "L'assistance du médecin ou du confesseur à un duel",
-      "anchor": "dh-3162",
+      "anchor": "s-3162",
       "first_n": 3162,
       "last_n": 3162,
       "chapters": []
     },
     {
       "title": "L'usage onaniste du mariage",
-      "anchor": "dh-3185",
+      "anchor": "s-3185",
       "first_n": 3185,
       "last_n": 3187,
       "chapters": []
     },
     {
       "title": "Crémation des corps",
-      "anchor": "dh-3188",
+      "anchor": "s-3188",
       "first_n": 3188,
       "last_n": 3188,
       "chapters": []
     },
     {
       "title": "Divorce Civil",
-      "anchor": "dh-3190",
+      "anchor": "s-3190",
       "first_n": 3190,
       "last_n": 3193,
       "chapters": []
     },
     {
       "title": "Crémation des corps",
-      "anchor": "dh-3195",
+      "anchor": "s-3195",
       "first_n": 3195,
       "last_n": 3196,
       "chapters": []
     },
     {
       "title": "Le vin de messe",
-      "anchor": "dh-3198",
+      "anchor": "s-3198",
       "first_n": 3198,
       "last_n": 3198,
       "chapters": []
     },
     {
       "title": "Erreurs d'Antonio ROSMINI-SERBATI",
-      "anchor": "dh-3201",
+      "anchor": "s-3201",
       "first_n": 3201,
       "last_n": 3241,
       "chapters": []
     },
     {
       "title": "Craniotomie",
-      "anchor": "dh-3258",
+      "anchor": "s-3258",
       "first_n": 3258,
       "last_n": 3258,
       "chapters": []
     },
     {
       "title": "La place de saint Joseph dans l'économie du salut",
-      "anchor": "dh-3260",
+      "anchor": "s-3260",
       "first_n": 3260,
       "last_n": 3263,
       "chapters": []
     },
     {
       "title": "Le vin de messe.",
-      "anchor": "dh-3264",
+      "anchor": "s-3264",
       "first_n": 3264,
       "last_n": 3264,
       "chapters": []
     },
     {
       "title": "Duel",
-      "anchor": "dh-3272",
+      "anchor": "s-3272",
       "first_n": 3272,
       "last_n": 3273,
       "chapters": []
     },
     {
       "title": "Marie médiatrice des grâces",
-      "anchor": "dh-3274",
+      "anchor": "s-3274",
       "first_n": 3274,
       "last_n": 3275,
       "chapters": []
     },
     {
       "title": "Crémation des corps",
-      "anchor": "dh-3276",
+      "anchor": "s-3276",
       "first_n": 3276,
       "last_n": 3279,
       "chapters": []
     },
     {
       "title": "Les autorités pour l'interprétation de la sainte Ecriture.",
-      "anchor": "dh-3280",
+      "anchor": "s-3280",
       "first_n": 3280,
       "last_n": 3284,
       "chapters": []
     },
     {
       "title": "Le baptême d'enfants de parents infidèles",
-      "anchor": "dh-3296",
+      "anchor": "s-3296",
       "first_n": 3296,
       "last_n": 3296,
       "chapters": []
     },
     {
       "title": "Avortement",
-      "anchor": "dh-3298",
+      "anchor": "s-3298",
       "first_n": 3298,
       "last_n": 3298,
       "chapters": []
     },
     {
       "title": "Le vin de messe",
-      "anchor": "dh-3312",
+      "anchor": "s-3312",
       "first_n": 3312,
       "last_n": 3313,
       "chapters": []
     },
     {
       "title": "Ordinations anglicanes",
-      "anchor": "dh-3315",
+      "anchor": "s-3315",
       "first_n": 3315,
       "last_n": 3319,
       "chapters": []
     },
     {
       "title": "Marie médiatrice des grâces",
-      "anchor": "dh-3320",
+      "anchor": "s-3320",
       "first_n": 3320,
       "last_n": 3321,
       "chapters": []
     },
     {
       "title": "Réponse du Saint-Office, 17 mars 1897. fécondation artificielle",
-      "anchor": "dh-3323",
+      "anchor": "s-3323",
       "first_n": 3323,
       "last_n": 3323,
       "chapters": []
     },
     {
       "title": "La foi et l'intention requises pour le baptême.",
-      "anchor": "dh-3333",
+      "anchor": "s-3333",
       "first_n": 3333,
       "last_n": 3335,
       "chapters": []
     },
     {
       "title": "Différentes manières d'extraire un foetus",
-      "anchor": "dh-3336",
+      "anchor": "s-3336",
       "first_n": 3336,
       "last_n": 3338,
       "chapters": []
     },
     {
       "title": "L'identité du sacrifice de la croix et du sacrifice de la messe",
-      "anchor": "dh-3339",
+      "anchor": "s-3339",
       "first_n": 3339,
       "last_n": 3339,
       "chapters": []
     },
     {
       "title": "L'erreur de l'adaptation des doctrines de la foi à la conception moderne.",
-      "anchor": "dh-3340",
+      "anchor": "s-3340",
       "first_n": 3340,
       "last_n": 3342,
       "chapters": []
     },
     {
       "title": "Le dédain des vertus surnaturelles et des vertus passives",
-      "anchor": "dh-3343",
+      "anchor": "s-3343",
       "first_n": 3343,
       "last_n": 3346,
       "chapters": []
     },
     {
       "title": "Le pouvoir royal du Christ",
-      "anchor": "dh-3350",
+      "anchor": "s-3350",
       "first_n": 3350,
       "last_n": 3352,
       "chapters": []
     },
     {
       "title": "Le très saint Coeur de Jésus, objet de vénération",
-      "anchor": "dh-3353",
+      "anchor": "s-3353",
       "first_n": 3353,
       "last_n": 3353,
       "chapters": []
     },
     {
       "title": "La matière du baptême",
-      "anchor": "dh-3356",
+      "anchor": "s-3356",
       "first_n": 3356,
       "last_n": 3356,
       "chapters": []
     },
     {
       "title": "Différentes manières d'extraire un foetus",
-      "anchor": "dh-3358",
+      "anchor": "s-3358",
       "first_n": 3358,
       "last_n": 3358,
       "chapters": []

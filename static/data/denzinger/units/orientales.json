@@ -67,34 +67,34 @@
   "sections": [
     {
       "title": "Constitutions apostoliques. vers 380.",
-      "anchor": "dh-60",
+      "anchor": "s-60",
       "first_n": 60,
       "last_n": 60,
       "chapters": []
     },
     {
       "title": "Testament de Notre Seigneur Jésus Christ.",
-      "anchor": "dh-61",
+      "anchor": "s-61",
       "first_n": 61,
       "last_n": 61,
       "chapters": []
     },
     {
       "title": "Constitutions de l'Eglise égyptienne. Cf. [Can.3>3] a) Version copte : profession de foi après le baptême.",
-      "anchor": "dh-62",
+      "anchor": "s-62",
       "first_n": 62,
       "last_n": 62,
       "chapters": []
     },
     {
       "title": "b) Version éthiopienne : profession de foi après le baptême. ( cf. [Can.4>4])",
-      "anchor": "dh-63",
+      "anchor": "s-63",
       "first_n": 63,
       "last_n": 64,
       "chapters": [
         {
           "title": "Canons d'Hippolyte.",
-          "anchor": "dh-64",
+          "anchor": "c-64",
           "first_n": 64,
           "last_n": 64
         }

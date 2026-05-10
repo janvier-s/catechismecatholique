@@ -600,36 +600,35 @@ def main() -> None:
             {"slug": next_u["slug"], "title": next_u["title"]} if next_u else None
         )
         # Compact tree of section-level h2s + chapter-level h3s for the
-        # sommaire and sidebar. Each section/chapter anchors at its first
-        # entry's #dh-N.
+        # sommaire and sidebar. Each section/chapter anchors at its own
+        # heading id (`s-{first_n}` / `c-{first_n}`) so scroll-spy can
+        # detect them as h2/h3s and the sidebar highlight matches.
         sections_summary: list[dict[str, Any]] = []
         for entry in u["entries"]:
             sec = entry.get("section")
             cha = entry.get("chapter")
-            anchor = f"dh-{entry['n']}"
+            n = entry["n"]
             if sec:
                 if not sections_summary or sections_summary[-1]["title"] != sec:
                     sections_summary.append(
                         {
                             "title": sec,
-                            "anchor": anchor,
-                            "first_n": entry["n"],
-                            "last_n": entry["n"],
+                            "anchor": f"s-{n}",
+                            "first_n": n,
+                            "last_n": n,
                             "chapters": [],
                         }
                     )
                 else:
-                    sections_summary[-1]["last_n"] = entry["n"]
+                    sections_summary[-1]["last_n"] = n
             if cha:
-                # Attach chapter under the latest section (or create a
-                # synthetic top-level group when there's no section).
                 if not sections_summary:
                     sections_summary.append(
                         {
                             "title": "",
-                            "anchor": anchor,
-                            "first_n": entry["n"],
-                            "last_n": entry["n"],
+                            "anchor": f"s-{n}",
+                            "first_n": n,
+                            "last_n": n,
                             "chapters": [],
                         }
                     )
@@ -639,13 +638,13 @@ def main() -> None:
                     chapters.append(
                         {
                             "title": cha,
-                            "anchor": anchor,
-                            "first_n": entry["n"],
-                            "last_n": entry["n"],
+                            "anchor": f"c-{n}",
+                            "first_n": n,
+                            "last_n": n,
                         }
                     )
                 else:
-                    chapters[-1]["last_n"] = entry["n"]
+                    chapters[-1]["last_n"] = n
         u["sections"] = sections_summary
         with open(OUT_UNITS / f"{u['slug']}.json", "w", encoding="utf-8") as fh:
             json.dump(u, fh, ensure_ascii=False, indent=2)

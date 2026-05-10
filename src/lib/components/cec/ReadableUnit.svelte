@@ -281,11 +281,21 @@
 	}
 
 	/* Phone: number rides above the text instead of beside it; cross-refs
-	   sit flush left under the body so nothing is left margin-orphaned. */
+	   sit flush left under the body so nothing is left margin-orphaned.
+	   Hide the permalink icon on mobile (irrelevant) and left-align the
+	   number with the prose. */
 	@media (max-width: 640px) {
 		.paragraph-grid {
 			flex-direction: column;
 			gap: 0.25rem;
+		}
+		.paragraph-grid :global(.number-wrap) {
+			width: auto;
+			justify-content: flex-start;
+			padding-top: 0;
+		}
+		.paragraph-grid :global(.number-link) {
+			display: none;
 		}
 		.paragraph-grid :global(.number-col) {
 			width: auto;

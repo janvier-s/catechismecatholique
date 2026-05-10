@@ -75,42 +75,42 @@
   "sections": [
     {
       "title": "Lettre des apôtres (version éthiopienne).",
-      "anchor": "dh-1",
+      "anchor": "s-1",
       "first_n": 1,
       "last_n": 1,
       "chapters": []
     },
     {
       "title": "Papyrus liturgique de Dêr-Balyzeh. (liturgie du 4ème s).",
-      "anchor": "dh-2",
+      "anchor": "s-2",
       "first_n": 2,
       "last_n": 2,
       "chapters": []
     },
     {
       "title": "Constitutions de l'Eglise égyptienne, vers 500. a) Version copte : symbole baptismal.",
-      "anchor": "dh-3",
+      "anchor": "s-3",
       "first_n": 3,
       "last_n": 3,
       "chapters": []
     },
     {
       "title": "b) Version éthiopienne sous forme interrogative.",
-      "anchor": "dh-4",
+      "anchor": "s-4",
       "first_n": 4,
       "last_n": 4,
       "chapters": []
     },
     {
       "title": "c) Version éthiopienne sous forme affirmative.",
-      "anchor": "dh-5",
+      "anchor": "s-5",
       "first_n": 5,
       "last_n": 5,
       "chapters": []
     },
     {
       "title": "Symbole baptismal de l'Eglise arménienne(Petit symbole de foi)",
-      "anchor": "dh-6",
+      "anchor": "s-6",
       "first_n": 6,
       "last_n": 6,
       "chapters": []

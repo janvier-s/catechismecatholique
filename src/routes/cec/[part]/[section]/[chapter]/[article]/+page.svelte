@@ -68,7 +68,7 @@
 	{@html breadcrumbJsonLdScript}
 </svelte:head>
 
-<main class="mx-auto max-w-reader px-6 max-md:px-0 py-10" use:scrollSpy>
+<main class="mx-auto max-w-reader px-6 max-md:px-4 py-10" use:scrollSpy>
 	<div class="breadcrumb-row mb-6">
 		<nav class="breadcrumb-rail font-ui text-sm" aria-label="Fil d'Ariane">
 			<ol class="space-y-1">

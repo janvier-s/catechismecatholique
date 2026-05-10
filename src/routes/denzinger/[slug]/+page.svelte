@@ -87,10 +87,10 @@
 			{@const showSection = entry.section && (ei === 0 || prev?.section !== entry.section)}
 			{@const showChapter = entry.chapter && (ei === 0 || prev?.chapter !== entry.chapter)}
 			{#if showSection}
-				<h2 class="section-h2" id="dh-{entry.n}-section">{frenchPunct(entry.section!)}</h2>
+				<h2 class="section-h2" id="s-{entry.n}">{frenchPunct(entry.section!)}</h2>
 			{/if}
 			{#if showChapter}
-				<h3 class="chapter-h3">{frenchPunct(entry.chapter!)}</h3>
+				<h3 class="chapter-h3" id="c-{entry.n}">{frenchPunct(entry.chapter!)}</h3>
 			{/if}
 			<article class="entry" id="dh-{entry.n}">
 				<a class="entry-num" href="#dh-{entry.n}" aria-label="Permalink DH {entry.n}">

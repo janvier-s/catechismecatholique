@@ -17,7 +17,7 @@
 	);
 </script>
 
-<main class="mx-auto max-w-reader px-6 max-md:px-0 py-10" data-corpus="compendium" use:scrollSpy>
+<main class="mx-auto max-w-reader px-6 max-md:px-4 py-10" data-corpus="compendium" use:scrollSpy>
 	<header class="mb-8">
 		{#if standalone}
 			<BreadcrumbRail crumbs={[{ href: '/prieres-formules', title: headerTitle }]} />

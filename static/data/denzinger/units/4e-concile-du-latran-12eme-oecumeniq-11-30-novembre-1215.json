@@ -213,83 +213,83 @@
   "sections": [
     {
       "title": "Définition contre les albigeois et les cathares",
-      "anchor": "dh-800",
+      "anchor": "s-800",
       "first_n": 800,
       "last_n": 802,
       "chapters": []
     },
     {
       "title": "La Trinité",
-      "anchor": "dh-803",
+      "anchor": "s-803",
       "first_n": 803,
       "last_n": 808,
       "chapters": []
     },
     {
       "title": "La nécessité de la mission canonique.",
-      "anchor": "dh-809",
+      "anchor": "s-809",
       "first_n": 809,
       "last_n": 809,
       "chapters": []
     },
     {
       "title": "Le mépris à l'égard des rites sacramentels de l'Eglise latine.",
-      "anchor": "dh-810",
+      "anchor": "s-810",
       "first_n": 810,
       "last_n": 810,
       "chapters": []
     },
     {
       "title": "La prééminence du Siège romain.",
-      "anchor": "dh-811",
+      "anchor": "s-811",
       "first_n": 811,
       "last_n": 811,
       "chapters": []
     },
     {
       "title": "L'obligation de la confession annuelle et de la communion Pascale.",
-      "anchor": "dh-812",
+      "anchor": "s-812",
       "first_n": 812,
       "last_n": 814,
       "chapters": []
     },
     {
       "title": "Moyens interdits pour rétablir la santé.",
-      "anchor": "dh-815",
+      "anchor": "s-815",
       "first_n": 815,
       "last_n": 815,
       "chapters": []
     },
     {
       "title": "La bonne foi nécessaire pour la prescription.",
-      "anchor": "dh-816",
+      "anchor": "s-816",
       "first_n": 816,
       "last_n": 816,
       "chapters": []
     },
     {
       "title": "Les mariages clandestins ne sont pas permis.",
-      "anchor": "dh-817",
+      "anchor": "s-817",
       "first_n": 817,
       "last_n": 817,
       "chapters": []
     },
     {
       "title": "Usage indigne des reliques.",
-      "anchor": "dh-818",
+      "anchor": "s-818",
       "first_n": 818,
       "last_n": 818,
       "chapters": []
     },
     {
       "title": "Abus concernant les indulgences.",
-      "anchor": "dh-819",
+      "anchor": "s-819",
       "first_n": 819,
       "last_n": 820,
       "chapters": [
         {
           "title": "Chap. 63. Simonie.",
-          "anchor": "dh-820",
+          "anchor": "c-820",
           "first_n": 820,
           "last_n": 820
         }

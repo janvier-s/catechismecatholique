@@ -25,7 +25,7 @@
 </script>
 
 <main
-	class="mx-auto max-w-reader px-6 max-md:px-0 py-10"
+	class="mx-auto max-w-reader px-6 max-md:px-4 py-10"
 	data-corpus="pius-x-grand"
 	style:font-family={readerFont?.stack ?? undefined}
 	use:scrollSpy
