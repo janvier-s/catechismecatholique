@@ -498,6 +498,90 @@ def main() -> None:
             n_to_unit[n] = current_unit["slug"]
     print(f"  {len(units)} reading units, {sum(len(u['entries']) for u in units)} entries")
 
+    # ─── Linkify DH cross-refs INSIDE each entry's body HTML ──────────────
+    # Single source of truth for ref detection: the rewritten HTML, the
+    # per-entry dh_refs list, and the cited-by reverse index all derive
+    # from `is_dh_candidate` below.
+    print("linkifying DH cross-refs…")
+    months = (
+        "janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|"
+        "septembre|octobre|novembre|décembre|decembre|janv|févr|fevr|sept|oct|nov|déc|dec"
+    )
+    months_after_re = re.compile(rf"^\s*(?:{months})\b", re.IGNORECASE)
+    months_before_re = re.compile(rf"(?:{months})\s+$", re.IGNORECASE)
+    cluster_before_re = re.compile(
+        r"(?:[;,:\"»]|\bet\b|\bou\b|voir|cf\.|n°|suprà|supra|infra)\s*$",
+        re.IGNORECASE,
+    )
+    cluster_after_re = re.compile(r"^\s*(?:[;,]|\bet\b|\bou\b|-)\s*\d{3,4}\b")
+    bare_dh_re = re.compile(r"(?<![\w/])(\d{3,4})(?![\w/])")
+    tag_or_italic_re = re.compile(
+        r"(<(?:i|em)\b[^>]*>.*?</(?:i|em)>|<[^>]*>)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    DH_MAX = 3997
+
+    def is_dh_candidate(cand: int, entry_n: int, before: str, after: str) -> bool:
+        if cand == entry_n or cand < 100 or cand > DH_MAX:
+            return False
+        in_cluster = bool(
+            cluster_before_re.search(before) or cluster_after_re.match(after)
+        )
+        in_date = bool(
+            months_after_re.match(after) or months_before_re.search(before)
+        )
+        if cand >= 2000:
+            return True
+        if cand >= 1000:
+            return in_cluster
+        return not in_date or in_cluster
+
+    def linkify_dh_in_html(html: str, entry_n: int) -> tuple[str, list[int]]:
+        out_parts: list[str] = []
+        refs_found: set[int] = set()
+        for piece in tag_or_italic_re.split(html):
+            if not piece:
+                continue
+            if piece.startswith("<"):
+                out_parts.append(piece)
+                continue
+            text = piece
+            cursor = 0
+            rebuilt: list[str] = []
+            for m in bare_dh_re.finditer(text):
+                cand = int(m.group(1))
+                start, end = m.span()
+                before = text[max(0, start - 24) : start]
+                after = text[end : end + 24]
+                if not is_dh_candidate(cand, entry_n, before, after):
+                    continue
+                rebuilt.append(text[cursor:start])
+                rebuilt.append(
+                    f'<a class="ref-dh" href="/denzinger/n/{cand}" '
+                    f'data-dh="{cand}">{m.group(0)}</a>'
+                )
+                cursor = end
+                refs_found.add(cand)
+            rebuilt.append(text[cursor:])
+            out_parts.append("".join(rebuilt))
+        return "".join(out_parts), sorted(refs_found)
+
+    cited_by: dict[int, list[int]] = {}
+    refs_in_entry: dict[int, list[int]] = {}
+    for u in units:
+        for entry in u["entries"]:
+            n = entry["n"]
+            new_html, refs = linkify_dh_in_html(entry["html"], n)
+            entry["html"] = new_html
+            entry["dh_refs"] = refs
+            if refs:
+                refs_in_entry[n] = refs
+                for target in refs:
+                    cited_by.setdefault(target, []).append(n)
+    print(
+        f"  {len(refs_in_entry)} entries with refs, {len(cited_by)} cited-by"
+    )
+
     # Write per-unit JSON. Add prev/next for in-part navigation.
     print("writing units…")
     for i, u in enumerate(units):
@@ -623,69 +707,6 @@ def main() -> None:
     }
     with open(OUT_DIR / "index.json", "w", encoding="utf-8") as fh:
         json.dump(index, fh, ensure_ascii=False, separators=(",", ":"))
-
-    # Reverse-index: for each entry N, list the entries that cite N in
-    # their body. Conservative heuristic to avoid picking up dates and
-    # other false-positive numbers (mirrors the client-side linkifier):
-    #   - 3-4 digit candidates only;
-    #   - skip numbers inside <i>/<em> (Bible refs / scripture citations);
-    #   - skip when adjacent to a French month name (year with date
-    #     context);
-    #   - 4-digit ≥1000 only when in a ref-cluster context (";", ",",
-    #     "voir", "cf.", "n°", "suprà", "infra").
-    print("computing cited-by reverse index…")
-    months = (
-        "janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|"
-        "septembre|octobre|novembre|décembre|decembre|janv|févr|fevr|sept|oct|nov|déc|dec"
-    )
-    months_after_re = re.compile(rf"^\s*(?:{months})\b", re.IGNORECASE)
-    months_before_re = re.compile(rf"(?:{months})\s+$", re.IGNORECASE)
-    cluster_before_re = re.compile(
-        r"(?:[;,:\"»]|\bet\b|\bou\b|voir|cf\.|n°|suprà|supra|infra)\s*$",
-        re.IGNORECASE,
-    )
-    cluster_after_re = re.compile(r"^\s*(?:[;,]|\bet\b|\bou\b|-)\s*\d{3,4}\b")
-    italic_re = re.compile(r"<(i|em)\b[^>]*>.*?</\1>", re.IGNORECASE | re.DOTALL)
-    # Allow hyphen on either side so range citations like "3022-3023" pick
-    # up both numbers (3022 has `-` after, 3023 has `-` before).
-    bare_dh_re = re.compile(r"(?<![\w/])(\d{3,4})(?![\w/])")
-
-    cited_by: dict[int, list[int]] = {}
-    refs_in_entry: dict[int, list[int]] = {}
-    valid_ns = set(n_to_unit.keys())
-    for u in units:
-        for entry in u["entries"]:
-            n = entry["n"]
-            # Strip <i>/<em> blocks and other tags before scanning for refs.
-            stripped = italic_re.sub(" ", entry["html"])
-            stripped = re.sub(r"<[^>]+>", " ", stripped)
-            stripped = re.sub(r"\s+", " ", stripped)
-            seen: set[int] = set()
-            for m in bare_dh_re.finditer(stripped):
-                cand = int(m.group(1))
-                if cand == n or cand in seen or cand not in valid_ns:
-                    continue
-                start, end = m.span()
-                before = stripped[max(0, start - 24) : start]
-                after = stripped[end : end + 24]
-                in_cluster = bool(
-                    cluster_before_re.search(before) or cluster_after_re.match(after)
-                )
-                in_date = bool(
-                    months_after_re.match(after) or months_before_re.search(before)
-                )
-                if cand >= 2000:
-                    pass  # always linkify (DH range, no year overlap)
-                elif cand >= 1000:
-                    if not in_cluster:
-                        continue
-                else:
-                    if in_date and not in_cluster:
-                        continue
-                seen.add(cand)
-                cited_by.setdefault(cand, []).append(n)
-            if seen:
-                refs_in_entry[n] = sorted(seen)
 
     with open(OUT_DIR / "cited-by.json", "w", encoding="utf-8") as fh:
         json.dump(

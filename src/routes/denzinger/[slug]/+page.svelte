@@ -26,67 +26,6 @@
 		}
 	}
 
-	// Set of valid DH numbers across the whole corpus, used to validate
-	// candidate cross-references. We also accept numbers in the broader
-	// expected DH range (1-3997) — a few entries are missing in the
-	// catho.org export, but their DH numbers are still legitimate refs.
-	// /denzinger/n/[number] handles missing-entry lookups gracefully.
-	const validNs = $derived(new Set(data.structure.all_numbers));
-	const DH_MAX = 3997;
-	function isValidDh(n: number): boolean {
-		if (validNs.has(n)) return true;
-		return n >= 1 && n <= DH_MAX;
-	}
-
-	const MONTHS_AFTER_RE =
-		/^\s*(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre|janv|f[ée]vr|sept|oct|nov|d[ée]c)\b/i;
-	const MONTHS_BEFORE_RE =
-		/(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre|janv|f[ée]vr|sept|oct|nov|d[ée]c)\s+$/i;
-
-	const CLUSTER_BEFORE_RE = /(?:[;,:"»]|\bet\b|\bou\b|voir|cf\.|n°|suprà|supra|infra)\s*$/i;
-	const CLUSTER_AFTER_RE = /^\s*(?:[;,]|\bet\b|\bou\b|-)\s*\d{3,4}\b/;
-
-	function linkifyDhRefs(html: string): string {
-		// Conservative DH-cross-ref linkifier:
-		//   - Skip text inside <i>/<em> (Bible refs / scripture).
-		//   - Skip 1-2 digit numbers (footnote numerals, etc.).
-		//   - Numbers ≥ 2000 (within DH range): linkify unconditionally —
-		//     no Denzinger years lie there, so it's almost always a DH ref.
-		//   - 1000-1999: ambiguous (year vs DH); only linkify when in a
-		//     ref-cluster context.
-		//   - 100-999: linkify unless adjacent to a month name (date).
-		//   - Hyphen ranges ("3022-3023") and "X et Y" / "X ou Y" / "voir X"
-		//     all count as ref-cluster contexts.
-		return html
-			.split(/(<\/?(?:i|em)\b[^>]*>|<[^>]*>)/)
-			.map((part, i, arr) => {
-				if (i % 2 !== 0) return part;
-				const prevTag = (arr[i - 1] ?? '') as string;
-				if (/^<(i|em)\b/i.test(prevTag)) return part;
-				return part.replace(/(?<![\w/])(\d{3,4})(?![\w/])/g, (m, num: string, offset: number) => {
-					const n = parseInt(num, 10);
-					if (!isValidDh(n)) return m;
-					const before = part.slice(Math.max(0, offset - 24), offset);
-					const after = part.slice(offset + m.length, offset + m.length + 24);
-					const inCluster = CLUSTER_BEFORE_RE.test(before) || CLUSTER_AFTER_RE.test(after);
-					const inDate = MONTHS_AFTER_RE.test(after) || MONTHS_BEFORE_RE.test(before);
-					if (n >= 2000) {
-						// Almost certainly a DH ref.
-						return `<a class="ref-dh" href="/denzinger/n/${n}" data-dh="${n}">${m}</a>`;
-					}
-					if (n >= 1000) {
-						if (!inCluster) return m;
-						return `<a class="ref-dh" href="/denzinger/n/${n}" data-dh="${n}">${m}</a>`;
-					}
-					// 100-999: linkify unless date context (and no cluster
-					// signal to override).
-					if (inDate && !inCluster) return m;
-					return `<a class="ref-dh" href="/denzinger/n/${n}" data-dh="${n}">${m}</a>`;
-				});
-			})
-			.join('');
-	}
-
 	// Denzinger uses no-space Bible abbreviations ("1Co 1,30", "2Tm 2,5",
 	// "1Jn 4,1") that the CCC abbrev list — which expects "1 Co" / "1 Jn"
 	// — doesn't match. Insert the missing space before linkifying.
@@ -98,9 +37,10 @@
 	}
 
 	function renderEntry(html: string): string {
-		// Apply Bible-ref linkification, then DH cross-ref linkification,
-		// then French-punct NBSP normalization.
-		return frenchPunct(linkifyDhRefs(linkifyVerseRefs(expandBibleAbbrevs(html))));
+		// DH cross-refs are pre-linkified at extract time (single source of
+		// truth: scripts/prepare/denzinger/extract.py). Render-time only
+		// handles Bible-ref linkification + French-punct NBSP.
+		return frenchPunct(linkifyVerseRefs(expandBibleAbbrevs(html)));
 	}
 </script>
 

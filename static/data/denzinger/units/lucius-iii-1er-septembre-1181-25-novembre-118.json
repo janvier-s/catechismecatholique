@@ -15,7 +15,8 @@
       "html": "<p><br> Par cette constitution, en vertu de l'autorité apostolique, nous condamnons toute hérésie, quel que soit le nom par lequel elle peut être désignée : en premier lieu nous décrétons donc que sont soumis à un anathème perpétuel les cathares et les patarins, et ceux qui s'appellent mensongèrement d'un faux nom humiliés ou pauvres de Lyon, passagiens, joséphins et arnoldistes.</p>",
       "section": "Condamnation des erreurs des sectes laïques au sujet du pouvoir de la hiérarch",
       "chapter": null,
-      "document": "Condamnation des erreurs des sectes laïques au sujet du pouvoir de la hiérarch"
+      "document": "Condamnation des erreurs des sectes laïques au sujet du pouvoir de la hiérarch",
+      "dh_refs": []
     },
     {
       "n": 761,
@@ -23,15 +24,19 @@
       "html": "<p><br> Et parce que certains sous l'apparence de la piété... s'arrogent l'autorité de prêcher... nous lions par le même lien de l'anathème tous ceux qui, alors que cela leur était interdit ou qu'ils n'étaient pas envoyés, osent prêcher de façon privée ou publique sans en avoir reçu le pouvoir du Siège apostolique ou de l'évêque du lieu, et tous ceux qui ne craignent pas de penser et d'enseigner autrement au sujet du sacrement du corps et du sang de notre Seigneur Jésus Christ, ou du baptême ou de la confession des péchés, du mariage ou des autres sacrements de l'Eglise, que ce que prêche et observe la très sainte Eglise romaine, ainsi que, d'une façon générale, tous ceux que cette même Eglise romaine ou les divers évêques dans leurs diocèses avec le conseil des clercs, ou les clercs eux-mêmes lorsque le Siège était vacant, ont jugés hérétiques, si nécessaire, avec le conseil des évêques voisins.</p><p></p>",
       "section": "Condamnation des erreurs des sectes laïques au sujet du pouvoir de la hiérarch",
       "chapter": null,
-      "document": "Condamnation des erreurs des sectes laïques au sujet du pouvoir de la hiérarch"
+      "document": "Condamnation des erreurs des sectes laïques au sujet du pouvoir de la hiérarch",
+      "dh_refs": []
     },
     {
       "n": 762,
       "anchor": "c1i",
-      "html": "<p><br> La prieure et le couvent de Colonantia ont interrogé le Siège apostolique sur le point de savoir si un homme jeune, à qui ont été enlevés les organes sexuels, peut être ordonné au presbytérat avec la permission des canons.<br> Soucieux de voir observée en cette affaire la distinction canonique, Nous chargeons par cet écrit Apostolique ta fraternité de rechercher la vérité avec une grande diligence, afin de savoir s'il a été castré par des ennemis ou par des médecins, ou s'il a lui-même porté la main sur lui-même parce qu'il n'a pas su s'opposer au vice de la chair. Les canons admettent en effet les premiers 128 (a) s'ils sont aptes par ailleurs mais ils commandent que le troisième soit puni comme ayant été homicide pour lui-même.</p><p><center></p>",
+      "html": "<p><br> La prieure et le couvent de Colonantia ont interrogé le Siège apostolique sur le point de savoir si un homme jeune, à qui ont été enlevés les organes sexuels, peut être ordonné au presbytérat avec la permission des canons.<br> Soucieux de voir observée en cette affaire la distinction canonique, Nous chargeons par cet écrit Apostolique ta fraternité de rechercher la vérité avec une grande diligence, afin de savoir s'il a été castré par des ennemis ou par des médecins, ou s'il a lui-même porté la main sur lui-même parce qu'il n'a pas su s'opposer au vice de la chair. Les canons admettent en effet les premiers <a class=\"ref-dh\" href=\"/denzinger/n/128\" data-dh=\"128\">128</a> (a) s'ils sont aptes par ailleurs mais ils commandent que le troisième soit puni comme ayant été homicide pour lui-même.</p><p><center></p>",
       "section": "Castration",
       "chapter": null,
-      "document": "Castration"
+      "document": "Castration",
+      "dh_refs": [
+        128
+      ]
     }
   ],
   "prev": {

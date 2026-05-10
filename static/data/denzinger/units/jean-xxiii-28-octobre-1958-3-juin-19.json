@@ -13,10 +13,13 @@
     {
       "n": 3930,
       "anchor": "fau",
-      "html": "<p><br> Question : Est-il permis à des citoyens catholiques, lorsqu'ils élisent les représentants du peuple, de donner leur suffrage à des partis ou à des candidats qui, même s'ils ne proclament pas des principes contraires à la doctrine catholique, voire revendiquent le nom de chrétiens, s'unissent néanmoins de fait aux communistes et les soutiennent par leur action ?<br> Réponse (confirmée par le souverain pontife le 2 avril) : Non, selon la directive du décret du Saint-Office du 1er juillet 1949, n. 1 3865 .</p><p></p>",
+      "html": "<p><br> Question : Est-il permis à des citoyens catholiques, lorsqu'ils élisent les représentants du peuple, de donner leur suffrage à des partis ou à des candidats qui, même s'ils ne proclament pas des principes contraires à la doctrine catholique, voire revendiquent le nom de chrétiens, s'unissent néanmoins de fait aux communistes et les soutiennent par leur action ?<br> Réponse (confirmée par le souverain pontife le 2 avril) : Non, selon la directive du décret du Saint-Office du 1er juillet 1949, n. 1 <a class=\"ref-dh\" href=\"/denzinger/n/3865\" data-dh=\"3865\">3865</a> .</p><p></p>",
       "section": "Election de députés qui soutiennent le communisme",
       "chapter": null,
-      "document": "Election de députés qui soutiennent le communisme"
+      "document": "Election de députés qui soutiennent le communisme",
+      "dh_refs": [
+        3865
+      ]
     }
   ],
   "prev": {

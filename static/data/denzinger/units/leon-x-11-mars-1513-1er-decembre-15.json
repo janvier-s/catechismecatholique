@@ -12,18 +12,24 @@
     {
       "n": 1440,
       "anchor": "dkz",
-      "html": "<p><br> De nos jours... le semeur de zizanie, l'antique ennemi du genre humain <i>Mt 13,25</i> a osé à nouveau semer et multiplier dans le champ du Seigneur des erreurs très pernicieuses, qui ont toujours été rejetées par les fidèles, au sujet de l'âme et principalement de l'âme raisonnable, à savoir que celle-ci serait mortelle et unique en tous les hommes. Et certains, s'adonnant à la philosophie avec témérité, soutiennent que cela est vrai, au moins selon la philosophie :<br> Désirant appliquer un remède opportun contre cette peste, avec l'approbation de ce saint concile, Nous condamnons et réprouvons tous ceux qui affirment que l'âme intellective est mortelle ou unique en tous les hommes, ou qui sont dans le doute à ce sujet.<br> En effet, non seulement celle-ci est vraiment, par soi et essentiellement forme du corps humain, comme il est dit dans le canon de notre prédécesseur, le pape Clément V, publié au concile de Vienne 902 , mais elle est à la vérité immortelle, sujette à la multiplicité selon la multiplicité des corps dans lesquels elle est infusée, effectivement multipliée et sujette à être multipliée dans l'avenir. ...</p>",
+      "html": "<p><br> De nos jours... le semeur de zizanie, l'antique ennemi du genre humain <i>Mt 13,25</i> a osé à nouveau semer et multiplier dans le champ du Seigneur des erreurs très pernicieuses, qui ont toujours été rejetées par les fidèles, au sujet de l'âme et principalement de l'âme raisonnable, à savoir que celle-ci serait mortelle et unique en tous les hommes. Et certains, s'adonnant à la philosophie avec témérité, soutiennent que cela est vrai, au moins selon la philosophie :<br> Désirant appliquer un remède opportun contre cette peste, avec l'approbation de ce saint concile, Nous condamnons et réprouvons tous ceux qui affirment que l'âme intellective est mortelle ou unique en tous les hommes, ou qui sont dans le doute à ce sujet.<br> En effet, non seulement celle-ci est vraiment, par soi et essentiellement forme du corps humain, comme il est dit dans le canon de notre prédécesseur, le pape Clément V, publié au concile de Vienne <a class=\"ref-dh\" href=\"/denzinger/n/902\" data-dh=\"902\">902</a> , mais elle est à la vérité immortelle, sujette à la multiplicité selon la multiplicité des corps dans lesquels elle est infusée, effectivement multipliée et sujette à être multipliée dans l'avenir. ...</p>",
       "section": "Doctrine concernant l'âme humaine, contre les néo- aristotéliciens",
       "chapter": null,
-      "document": "Doctrine concernant l'âme humaine, contre les néo- aristotéliciens"
+      "document": "Doctrine concernant l'âme humaine, contre les néo- aristotéliciens",
+      "dh_refs": [
+        902
+      ]
     },
     {
       "n": 1441,
       "anchor": "dk0",
-      "html": "<p><br> Puisque la vérité ne peut aucunement être contraire à la vérité, Nous définissons donc comme étant complètement fausse toute assertion contraire à la vérité de la foi éclairée 3017 , et Nous interdisons avec la plus grande rigueur de permettre que soit enseignée une position différente. Et Nous décidons que tous ceux qui adhèrent à l'affirmation d'une telle erreur, en disséminant de la sorte les hérésies les plus condamnables, doivent être totalement évités et punis, comme étant de détestables et abominables hérétiques et infidèles qui ébranlent la foi catholique.</p><p></p>",
+      "html": "<p><br> Puisque la vérité ne peut aucunement être contraire à la vérité, Nous définissons donc comme étant complètement fausse toute assertion contraire à la vérité de la foi éclairée <a class=\"ref-dh\" href=\"/denzinger/n/3017\" data-dh=\"3017\">3017</a> , et Nous interdisons avec la plus grande rigueur de permettre que soit enseignée une position différente. Et Nous décidons que tous ceux qui adhèrent à l'affirmation d'une telle erreur, en disséminant de la sorte les hérésies les plus condamnables, doivent être totalement évités et punis, comme étant de détestables et abominables hérétiques et infidèles qui ébranlent la foi catholique.</p><p></p>",
       "section": "Doctrine concernant l'âme humaine, contre les néo- aristotéliciens",
       "chapter": null,
-      "document": "Doctrine concernant l'âme humaine, contre les néo- aristotéliciens"
+      "document": "Doctrine concernant l'âme humaine, contre les néo- aristotéliciens",
+      "dh_refs": [
+        3017
+      ]
     },
     {
       "n": 1442,
@@ -31,7 +37,8 @@
       "html": "<p><br> Certains maîtres et docteurs disent que ces monts ne sont pas licites lorsque, après un certain temps, les administrateurs de tels monts exigent des pauvres mêmes à qui le prêt est fait quelque chose de plus que le capital ; pour cette raison, ces monts n'échapperaient pas au crime d'usure... puisque notre Seigneur, comme l'atteste l'évangéliste Luc <i>Lc 6,34</i> ss., nous a obligés par un précepte clair à ne pas attendre d'un prêt plus que le capital. En effet, il y a précisément usure lorsque, par suite de l'usage d'une chose qui ne produit pas de fruits, l'on s'efforce d'obtenir un surplus et un fruit sans effort, sans frais et sans risques. ...</p>",
       "section": "L'usure et les monts de piété.",
       "chapter": null,
-      "document": "L'usure et les monts de piété."
+      "document": "L'usure et les monts de piété.",
+      "dh_refs": []
     },
     {
       "n": 1443,
@@ -39,7 +46,8 @@
       "html": "<p><br> De nombreux autres maîtres et docteurs affirment... que, pour un bien si grand et si nécessaire à la chose publique, rien ne doit être exigé ni espéré en raison du seul prêt, mais que, pour indemniser ces mêmes monts pour les dépenses des mêmes administrateurs et pour tout ce qui se rattache à leur nécessaire entretien, il est permis, sans faire preuve de lucre et pourvu que ce soit nécessaire et modéré, d'exiger et de prélever quelque chose de la part de ceux qui sont avantagés par un tel prêt, puisque la règle de droit prévoit que celui qui profite du bienfait doit aussi porter le fardeau, en particulier lorsque l'autorité apostolique y consent. Ces derniers maîtres et docteurs montrent d'autre part que cette position a été approuvée par nos prédécesseurs, les pontifes romains d'heureuse mémoire, Paul II, Sixte IV, Innocent VIII, Alexandre VI et Jules II.</p>",
       "section": "L'usure et les monts de piété.",
       "chapter": null,
-      "document": "L'usure et les monts de piété."
+      "document": "L'usure et les monts de piété.",
+      "dh_refs": []
     },
     {
       "n": 1444,
@@ -47,7 +55,8 @@
       "html": "<p><br> Nous voulons donc Nous occuper de cette question comme il convient par souci de justice, d'une part, afin de ne pas ouvrir l'abîme de l'usure, par amour de la piété et de la vérité, d'autre part, afin de subvenir aux besoins des pauvres. En entretenant ces deux préoccupations, puisqu'elles paraissent concerner la paix et la tranquillité de toute république chrétienne, avec l'approbation du saint concile, Nous déclarons et définissons que les monts-de- piété déjà mentionnés, créés par les républiques et approuvés et confirmés depuis ce temps par l'autorité du Siège apostolique,<br> dans lesquels, en compensation et en indemnisation des seules dépenses encourues pour leurs administrateurs et les autres choses qui concernent leur maintien, on reçoit quelque chose de modéré en plus du prêt, sans lucre et à titre d'indemnité,<br> ne présentent pas d'apparence de mal, n'incitent pas au péché et ne doivent d'aucune façon être condamnés ; bien plus, Nous déclarons et définissons qu'un tel prêt est méritoire, qu'il doit être loué et approuvé, qu'il ne doit aucunement être réputé usuraire...<br> Nous voulons que tous... ceux qui désormais oseront prêcher ou disputer, oralement ou par écrit, à l'encontre de la présente déclaration et décision... encourent la peine d'une excommunication déjà portée...</p><p></p>",
       "section": "L'usure et les monts de piété.",
       "chapter": null,
-      "document": "L'usure et les monts de piété."
+      "document": "L'usure et les monts de piété.",
+      "dh_refs": []
     },
     {
       "n": 1445,
@@ -55,7 +64,8 @@
       "html": "<p><br> Nous estimons ne pas pouvoir ni devoir, sans manquer à notre conscience..., être retenu ni empêché de révoquer cette (Pragmatique) Sanction (de Bourges) si néfaste, ni ce qu'elle contient.<br> Le fait que cette même Sanction et son contenu aient été publiés au concile de Bâle et que, pendant la tenue du concile, ils aient été reçus et acceptés par l'assemblée de Bourges, ne doit pas Nous impressionner puisque tout cela a été fait après le transfert du même concile de Bâle (à Ferrare, le 18 septembre 1437) par le pape Eugène IV, notre prédécesseur, par le conciliabule de Bâle... et ne pouvait donc plus avoir aucune valeur. En effet, non seulement au témoignage de la sainte Ecriture, des affirmations des saints Pères et des autres pontifes romains, nos prédécesseurs, et des décrets des saints canons, mais aussi du propre aveu de ces mêmes conciles, il apparaît clairement que seul le pontife romain en exercice, du fait qu'il a autorité sur tous les conciles, a plein droit et plein pouvoir de convoquer, de transférer et de dissoudre les conciles...</p><p></p>",
       "section": "Le rapport entre le pape et le concile.",
       "chapter": null,
-      "document": "Le rapport entre le pape et le concile."
+      "document": "Le rapport entre le pape et le concile.",
+      "dh_refs": []
     },
     {
       "n": 1447,
@@ -63,7 +73,8 @@
       "html": "<p><br> ... Pour qu'à l'avenir personne ne puisse alléguer qu'il ignore la doctrine de l'Eglise romaine sur ces indulgences et leur efficacité, ni s'excuser en prétextant l'ignorance, ni recourir à une protestation sans fondement, mais pour qu'on puisse convaincre ces gens d'être coupables de mensonge notoire et les condamner justement, Nous avons pensé devoir vous signifier par cette lettre ce que l'Eglise romaine, que les autres doivent suivre comme leur mère, a enseigné <br></p>",
       "section": "Indulgences",
       "chapter": null,
-      "document": "Indulgences"
+      "document": "Indulgences",
+      "dh_refs": []
     },
     {
       "n": 1448,
@@ -71,7 +82,8 @@
       "html": "<p><br> Le pontife romain, successeur de Pierre, détenteur des clés et vicaire de Jésus Christ sur terre, en vertu du pouvoir des clés qui ouvrent le Royaume des cieux en enlevant dans les fidèles ce qui y fait obstacle, c'est- à-dire la coulpe et la peine due pour les péchés actuels : la coulpe, au moyen du sacrement de pénitence, la peine temporelle due, selon la justice divine, au moyen de l'indulgence de l'Eglise, peut, pour de justes raisons, concéder à ces fidèles, membres du Christ par le lien de la charité, qu'ils soient en cette vie ou au purgatoire, des indulgences tirées de la surabondance des mérites du Christ et des saints. Quand, en vertu de son autorité apostolique, il concède l'indulgence pour les vivants comme pour les morts, il distribue selon sa coutume le trésor des mérites de Jésus Christ et des saints, en appliquant l'indulgence elle-même par l'absolution ou en l'appliquant par manière d'intercession.<br> C'est pourquoi tous ceux, vivants ou morts, qui ont reçu vraiment cette indulgence, sont libérés de la peine temporelle due, selon la justice divine, pour leurs péchés actuels, dans la mesure équivalente à l'indulgence concédée ou acquise.</p>",
       "section": "Indulgences",
       "chapter": null,
-      "document": "Indulgences"
+      "document": "Indulgences",
+      "dh_refs": []
     },
     {
       "n": 1449,
@@ -79,7 +91,8 @@
       "html": "<p><br> Et nous décrétons en vertu de l'autorité apostolique et par la teneur des présentes, qu'ainsi tous doivent penser et prêcher sous peine d'excommunication latae sententiae.</p><p></p>",
       "section": "Indulgences",
       "chapter": null,
-      "document": "Indulgences"
+      "document": "Indulgences",
+      "dh_refs": []
     },
     {
       "n": 1451,
@@ -87,7 +100,8 @@
       "html": "<p><br> 1. C'est une opinion hérétique, mais fréquente, que les sacrements de la Loi nouvelle donnent la grâce sanctifiante à ceux qui n'y mettent pas obstacle.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1452,
@@ -95,7 +109,8 @@
       "html": "<p><br> 2. Nier que le péché demeure dans un enfant après le baptême est fouler aux pieds tout à la fois Paul et le Christ.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1453,
@@ -103,7 +118,8 @@
       "html": "<p><br> 3. Le foyer du péché empêche l'entrée du ciel pour l'âme qui quitte son corps, même s'il n'y a pas de péché actuel.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1454,
@@ -111,7 +127,8 @@
       "html": "<p><br> 4. La charité imparfaite du mourant comprend nécessairement une grande crainte qui par elle-même suffit à entraîner la peine du purgatoire et qui empêche d'entrer au ciel.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1455,
@@ -119,7 +136,8 @@
       "html": "<p><br> 5. Les trois parties de la pénitence, contrition, confession et satisfaction, n'ont de fondement ni dans la sainte Ecriture, ni chez les saints docteurs anciens du christianisme.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1456,
@@ -127,7 +145,8 @@
       "html": "<p><br> 6. La contrition, que préparent la recherche, la récapitulation et la détestation des péchés, lorsqu'on repense à sa vie dans l'amertume de son coeur <i>Is 38,15</i>, en pesant la gravité, le nombre et la laideur des péchés, en voyant la béatitude éternelle perdue et la damnation éternelle encourue, cette contrition rend hypocrite et même plus pécheur.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1457,
@@ -135,7 +154,8 @@
       "html": "<p><br> 7. Très vrai et plus excellent que tous les enseignements donnés jusqu'à ce jour sur les sortes de contrition est le proverbe : \"Ne pas faire le mal à l'avenir est souveraine pénitence ; la meilleure pénitence, c'est la vie nouvelle.\"</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1458,
@@ -143,7 +163,8 @@
       "html": "<p><br> 8. N'aie nullement la présomption de confesser les péchés véniels ni même tous les pêchés mortels, car il est impossible que tu connaisses tous tes péchés mortels. Voilà pourquoi dans la primitive Eglise, on confessait seulement les péchés mortels manifestes.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1459,
@@ -151,7 +172,8 @@
       "html": "<p><br> 9. Quand nous voulons confesser tous nos péchés clairement, nous voulons équivalemment ne rien laisser pardonner à la miséricorde de Dieu.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1460,
@@ -159,7 +181,8 @@
       "html": "<p><br> 10. Personne n'a ses péchés remis s'il ne croit qu'ils sont remis quand le prêtre les remet ; bien plus, le péché demeurerait si l'on ne croyait qu'il est remis ; car la remise des péchés et la donation de la grâce ne suffisent pas, mais il faut encore croire que le péché est remis.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1461,
@@ -167,7 +190,8 @@
       "html": "<p><br> 11. Tu ne dois nullement avoir confiance d'être absous à cause de ta contrition, mais à cause de la parole du Christ \"Ce que tu délieras\", etc. <i>Mt 16,19</i> C'est pourquoi, je te le dis, aie confiance si tu as obtenu l'absolution du prêtre, et crois fortement que tu es absous tu seras vraiment absous, quoi qu'il en soit de la contrition.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1462,
@@ -175,7 +199,8 @@
       "html": "<p><br> 12. Si par impossible un pénitent n'était pas contrit, ou si le prêtre ne l'absolvait pas sérieusement, mais par plaisanterie, si pourtant le pénitent se croit absous, il l'est en toute vérité.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1463,
@@ -183,7 +208,8 @@
       "html": "<p><br> 13. Dans le sacrement de pénitence et dans la rémission des péchés, le pape ou un évêque ne fait pas plus que le moindre des prêtres ; bien plus, là où il n'y aurait pas de prêtre, n'importe quel chrétien, même une femme ou un enfant, en peut tout autant.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1464,
@@ -191,7 +217,8 @@
       "html": "<p><br> 14. Personne n'est obligé de répondre au prêtre qu'il est contrit, et le prêtre ne doit pas le demander.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1465,
@@ -199,7 +226,8 @@
       "html": "<p><br> 15. Grande est l'erreur de ceux qui s'approchent du sacrement de l'eucharistie en ayant confiance de s'être confessés, de n'être conscients d'aucun péché mortel, d'avoir fait précéder des prières et des préparations : tous ceux-là mangent et boivent leur jugement. Mais s'ils croient et s'ils ont confiance d'obtenir la grâce, cette seule foi les rend purs et dignes.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1466,
@@ -207,7 +235,8 @@
       "html": "<p><br> 16. Il semble opportun que l'Eglise décide dans un concile commun de donner la communion aux laïcs sous les deux espèces et les gens de Bohème qui communient sous les deux espèces ne sont pas des hérétiques mais des schismatiques.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1467,
@@ -215,7 +244,8 @@
       "html": "<p><br> 17. Les trésors de l'Eglise d'où le pape donne les indulgences, ne sont pas les mérites du Christ et des saints.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1468,
@@ -223,7 +253,8 @@
       "html": "<p><br> 18. Les indulgences sont une pieuse fraude pour les fidèles et une dispense des bonnes oeuvres ; elles sont du nombre des choses permises, pas du nombre des choses utiles.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1469,
@@ -231,7 +262,8 @@
       "html": "<p><br> 19. Les indulgences pour ceux qui les gagnent vraiment, n'ont pas de valeur pour remettre la peine due aux péchés actuels devant la justice de Dieu.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1470,
@@ -239,7 +271,8 @@
       "html": "<p><br> 20. Se fourvoient ceux qui croient que les indulgences sont salutaires et utiles au profit spirituel.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1471,
@@ -247,7 +280,8 @@
       "html": "<p><br> 21. Les indulgences ne sont nécessaires que pour les fautes graves publiques, et elles ne sont réellement accordées qu'aux gens endurcis et aux impatients.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1472,
@@ -255,7 +289,8 @@
       "html": "<p><br> 22. Il est six espèces d'hommes pour lesquels les indulgences ne sont ni nécessaires ni utiles : les morts ou les moribonds, les malades, ceux qui ont un empêchement légitime, ceux qui n'ont pas commis de fautes graves ceux qui ont commis des fautes graves mais non publiques ceux qui font des oeuvres meilleures.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1473,
@@ -263,7 +298,8 @@
       "html": "<p><br> 23. Les excommunications ne sont que des peines extérieures et elles ne privent pas l'homme des prières spirituelles communes de l'Eglise.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1474,
@@ -271,7 +307,8 @@
       "html": "<p><br> 24. Il faut enseigner aux chrétiens d'aimer l'excommunication plutôt que de la craindre.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1475,
@@ -279,7 +316,8 @@
       "html": "<p><br> 25. Le pontife romain successeur de Pierre, n'est pas le vicaire du Christ établi par le Christ lui-même, dans la personne de Pierre, sur toutes les Eglises du monde entier.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1476,
@@ -287,7 +325,8 @@
       "html": "<p><br> 26. La parole du Christ à Pierre \"tout ce que tu lieras sur la terre, etc.\" <i>Mt 16,19</i> s'étend uniquement à ce que Pierre lui-même a lié.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1477,
@@ -295,7 +334,8 @@
       "html": "<p><br> 27. Il est certain qu'il n'est aucunement au pouvoir de l'Eglise ou du pape d'établir des articles de foi, et moins encore des lois concernant les moeurs ou les bonnes oeuvres.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1478,
@@ -303,7 +343,8 @@
       "html": "<p><br> 28. Si le pape pensait de telle ou telle matière avec une grande partie de l'Eglise, il ne se tromperait pas ; cependant, ce n'est ni un péché ni une hérésie de penser le contraire, surtout dans une question qui n'est pas nécessaire au salut, jusqu'à ce que le concile universel ait condamné une opinion et approuvé l'autre.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1479,
@@ -311,7 +352,8 @@
       "html": "<p><br> 29. Le chemin nous est ouvert pour énerver l'autorité des conciles, contredire leurs actes, juger leurs décrets, confesser avec confiance ce qui semble vrai, que cela ait été approuvé ou réprouvé par un concile quel qu'il soit.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1480,
@@ -319,7 +361,8 @@
       "html": "<p><br> 30. Certains articles de Jean Hus qui ont été condamnés au concile de Constance sont tout à fait chrétiens, très vrais et évangéliques : pas même l'Eglise entière ne pourrait les condamner.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1481,
@@ -327,7 +370,8 @@
       "html": "<p><br> 31. En toute oeuvre bonne le juste pèche.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1482,
@@ -335,7 +379,8 @@
       "html": "<p><br> 32. Une oeuvre bonne parfaitement accomplie est un péché véniel.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1483,
@@ -343,7 +388,8 @@
       "html": "<p><br> 33. Que des hérétiques aient été brûlés est contraire à la volonté de l'Esprit.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1484,
@@ -351,7 +397,8 @@
       "html": "<p><br> 34. Se battre contre les Turcs, c'est s'opposer à Dieu qui par eux visite nos iniquités.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1485,
@@ -359,7 +406,8 @@
       "html": "<p><br> 35. Personne n'est certain qu'il ne pèche pas sans cesse naturellement, en raison du vice très caché de l'orgueil.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1486,
@@ -367,7 +415,8 @@
       "html": "<p><br> 36. Le libre arbitre, après le péché, n'est quelque chose que de nom ; et aussi longtemps qu'il fait ce qui est en son pouvoir, il pèche mortellement.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1487,
@@ -375,7 +424,8 @@
       "html": "<p><br> 37. On ne peut pas prouver le purgatoire par un texte de la sainte Ecriture qui soit dans le canon.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1488,
@@ -383,7 +433,8 @@
       "html": "<p><br> 38. Les âmes du purgatoire ne sont pas sûres de leur salut, du moins pas toutes. Aucune raison et aucun texte d'Ecriture ne prouve qu'elles ne sont pas dans un état où elles méritent et où leur charité augmente.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1489,
@@ -391,7 +442,8 @@
       "html": "<p><br> 39. Les âmes du purgatoire ne cessent de pécher aussi longtemps qu'elles cherchent le repos et ont horreur des peines.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1490,
@@ -399,7 +451,8 @@
       "html": "<p><br> 40. Les âmes libérées du purgatoire grâce aux suffrages des vivants sont moins heureuses que si elles avaient satisfait par elles-mêmes.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1491,
@@ -407,7 +460,8 @@
       "html": "<p><br> 41. Les prélats ecclésiastiques et les princes séculiers n'agiraient pas mal s'ils détruisaient tous les mendiants.</p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     },
     {
       "n": 1492,
@@ -415,7 +469,8 @@
       "html": "<p><br> (Censure :) Tous et chacun des articles ou des erreurs précités, nous les condamnons, les réprouvons et les rejetons totalement, selon le cas, comme hérétiques, ou scandaleux, ou faux, ou comme offensant les oreilles pies ou comme induisant en erreur les esprits simples et comme opposés à la vérité catholique.</p><p><center></p>",
       "section": "Erreurs de Martin Luther.",
       "chapter": null,
-      "document": "Erreurs de Martin Luther."
+      "document": "Erreurs de Martin Luther.",
+      "dh_refs": []
     }
   ],
   "prev": {

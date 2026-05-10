@@ -15,15 +15,19 @@
       "html": "<p><br> Nous avons consulté publiquement au sujet de ton presbytre Guillandus (Gisandus) soupçonné du meurtre de son évêque, ton prédécesseur... S'il n'existe pas d'accusateurs qui soient certains, alors, selon ce que dicte la justice et sans qu'il y ait de controverse, le presbytre doit recevoir à nouveau tout ce qu'il a perdu pour cette raison de façon injuste, aussi bien le sacerdoce que la totalité de ses bénéfices ; mais nous laissons à ton jugement, s'il n'y a pas d'accusateur, qu'il présente de lui-même une justification à deux prêtres qui lui sont liés.<br> Enfin nous voulons que tu n'utilises pas toi-même et que tu ne demandes d'aucune manière la loi populaire et appuyée par aucune sanction canonique, à savoir le contact d'eau bouillante ou glacée, ou d'un fer ardent, ou toute invention populaire (car ce sont de purs inventions où l'envie est à l'oeuvre) bien plus nous le prohibons très fermement en vertu de l'autorité apostolique.</p><p></p>",
       "section": "Condamnation des ordalies.",
       "chapter": null,
-      "document": "Condamnation des ordalies."
+      "document": "Condamnation des ordalies.",
+      "dh_refs": []
     },
     {
       "n": 698,
       "anchor": "czv",
-      "html": "<p><br> Bien que nous ne doutions pas que ce soit par un effet du zèle de la dévotion que ton excellence ordonne de mener les juifs au culte de la chrétienté, nous n'en avons pas moins estimé nécessaire de t'envoyer notre lettre pour t'admonester, puisque tu sembles le faire par un zèle désordonné. Notre Seigneur Jésus Christ en effet, comme on le lit, n'a contraint personne a son service par force, mais, toute liberté de juger par lui-même étant laissée à chacun, tous ceux qu'il a prédestinés à la vie éternelle il ne les a pas rappelés de l'erreur en jugeant, mais en répandant son propre sang. ...<br> De même le bienheureux Grégoire interdit dans une de ses lettres que ce même peuple soit amené à la foi par la violence<br> (cf. 480 ).</p><p><center></p>",
+      "html": "<p><br> Bien que nous ne doutions pas que ce soit par un effet du zèle de la dévotion que ton excellence ordonne de mener les juifs au culte de la chrétienté, nous n'en avons pas moins estimé nécessaire de t'envoyer notre lettre pour t'admonester, puisque tu sembles le faire par un zèle désordonné. Notre Seigneur Jésus Christ en effet, comme on le lit, n'a contraint personne a son service par force, mais, toute liberté de juger par lui-même étant laissée à chacun, tous ceux qu'il a prédestinés à la vie éternelle il ne les a pas rappelés de l'erreur en jugeant, mais en répandant son propre sang. ...<br> De même le bienheureux Grégoire interdit dans une de ses lettres que ce même peuple soit amené à la foi par la violence<br> (cf. <a class=\"ref-dh\" href=\"/denzinger/n/480\" data-dh=\"480\">480</a> ).</p><p><center></p>",
       "section": "Tolérance à l'égard de la conviction religieuse d'autrui.",
       "chapter": null,
-      "document": "Tolérance à l'égard de la conviction religieuse d'autrui."
+      "document": "Tolérance à l'égard de la conviction religieuse d'autrui.",
+      "dh_refs": [
+        480
+      ]
     }
   ],
   "prev": {

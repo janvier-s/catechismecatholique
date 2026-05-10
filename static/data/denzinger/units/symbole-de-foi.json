@@ -12,10 +12,14 @@
     {
       "n": 1,
       "anchor": "ch5",
-      "html": "<p><br> ( oeuvre apocryphe, écrite vers 160-170)</p><p>au Père, souverain de l'Univers, et en Jésus Christ (notre Sauveur), et au Saint-Esprit (Paraclet), et en la sainte Eglise, et en la rémission des péchés.</p><p></p>",
+      "html": "<p><br> ( oeuvre apocryphe, écrite vers <a class=\"ref-dh\" href=\"/denzinger/n/160\" data-dh=\"160\">160</a>-<a class=\"ref-dh\" href=\"/denzinger/n/170\" data-dh=\"170\">170</a>)</p><p>au Père, souverain de l'Univers, et en Jésus Christ (notre Sauveur), et au Saint-Esprit (Paraclet), et en la sainte Eglise, et en la rémission des péchés.</p><p></p>",
       "section": "Lettre des apôtres (version éthiopienne).",
       "chapter": null,
-      "document": "Lettre des apôtres (version éthiopienne)."
+      "document": "Lettre des apôtres (version éthiopienne).",
+      "dh_refs": [
+        160,
+        170
+      ]
     },
     {
       "n": 2,
@@ -23,7 +27,8 @@
       "html": "<p><br> (Fragment du VIs découvert en Haute Egypte, contient la liturgie du milieu du IVs. Le symbole semble plus ancien).</p><p>Je crois en Dieu Père tout-puissant, et en son Fils, unique engendré, notre Seigneur Jésus Christ et en l'Esprit Saint, et en la résurrection de la chair, dans la sainte Eglise catholique.</p><p></p>",
       "section": "Papyrus liturgique de Dêr-Balyzeh. (liturgie du 4ème s).",
       "chapter": null,
-      "document": "Papyrus liturgique de Dêr-Balyzeh. (liturgie du 4ème s)."
+      "document": "Papyrus liturgique de Dêr-Balyzeh. (liturgie du 4ème s).",
+      "dh_refs": []
     },
     {
       "n": 3,
@@ -31,7 +36,8 @@
       "html": "<p><br> (remontent à la traditio apostolica d'Hippolyte de Rome voir Can. 10</p><p>Je crois en un seul Dieu vrai, Père tout-puissant, et en son Fils, unique engendré, Jésus Christ, notre Seigneur et sauveur, et en son Saint-Esprit qui donne vie à toute chose, Trinité consubstantielle, une seule divinité, une seule puissance, un seul règne, une seule foi, un seul baptême (cf. <i>Ep 4,5</i> dans la sainte Eglise catholique et apostolique, en une vie éternelle. Amen.</p><p></p>",
       "section": "Constitutions de l'Eglise égyptienne, vers 500. a) Version copte : symbole baptismal.",
       "chapter": null,
-      "document": "Constitutions de l'Eglise égyptienne, vers 500. a) Version copte : symbole baptismal."
+      "document": "Constitutions de l'Eglise égyptienne, vers 500. a) Version copte : symbole baptismal.",
+      "dh_refs": []
     },
     {
       "n": 4,
@@ -39,7 +45,8 @@
       "html": "<p><br> Crois-tu en un seul Dieu, le Père tout-puissant, et en son Fils unique Jésus Christ, notre Seigneur et sauveur et en l'Esprit Saint qui donne vie à toute la création, la Trinité égale en divinité, et un seul Seigneur, un seul règne, une seule foi, un seul baptême (cf. <i>Ep 4,5</i>) dans la sainte Eglise catholique et une vie éternelle ?</p><p></p>",
       "section": "b) Version éthiopienne sous forme interrogative.",
       "chapter": null,
-      "document": "b) Version éthiopienne sous forme interrogative."
+      "document": "b) Version éthiopienne sous forme interrogative.",
+      "dh_refs": []
     },
     {
       "n": 5,
@@ -47,7 +54,8 @@
       "html": "<p><br> Je crois en un seul Dieu, le Père, souverain de toutes choses, et en un seul Fils, le Seigneur Jésus Christ, et au Saint-Esprit, et en la résurrection de la chair, et en la sainte Eglise une, catholique.</p><p></p>",
       "section": "c) Version éthiopienne sous forme affirmative.",
       "chapter": null,
-      "document": "c) Version éthiopienne sous forme affirmative."
+      "document": "c) Version éthiopienne sous forme affirmative.",
+      "dh_refs": []
     },
     {
       "n": 6,
@@ -55,7 +63,8 @@
       "html": "<p><br> Nous croyons en la très sainte Trinité, au Père, et au Fils, et au Saint- Esprit, en l'Annonciation par Gabriel, (en la conception de Marie,) en la naissance du Christ, au baptême, (en la fête) en la Passion (volontaire), en la crucifixion, la sépulture durant trois jours, la Résurrection (bienheureuse),en l'Ascension divine, en la session à la droite du Père, en la venue terrible (et glorieuse) - nous professons et croyons (nous croyons et professons).</p><p><center></p>",
       "section": "Symbole baptismal de l'Eglise arménienne(Petit symbole de foi)",
       "chapter": null,
-      "document": "Symbole baptismal de l'Eglise arménienne(Petit symbole de foi)"
+      "document": "Symbole baptismal de l'Eglise arménienne(Petit symbole de foi)",
+      "dh_refs": []
     }
   ],
   "prev": null,

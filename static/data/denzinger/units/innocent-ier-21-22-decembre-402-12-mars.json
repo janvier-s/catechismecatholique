@@ -16,7 +16,8 @@
       "html": "<p><br> (Chap. 8, Par 11) (Il est bon de veiller)... à ce que ceux qui viennent des novatiens ou des montanistes soient reçus seulement par l'imposition des mains ; car bien que l'ayant été par des hérétiques, ils ont cependant été baptisés au nom du Christ.</p><p><hr> </p>",
       "section": "Baptême des hérétiques",
       "chapter": null,
-      "document": "Baptême des hérétiques"
+      "document": "Baptême des hérétiques",
+      "dh_refs": []
     },
     {
       "n": 212,
@@ -24,7 +25,8 @@
       "html": "<p><br> </p>",
       "section": "Lettre \" Consulenti tibi \" à l'Evêque Exupère de Toulouse, 20 février 405",
       "chapter": null,
-      "document": "Lettre \" Consulenti tibi \" à l'Evêque Exupère de Toulouse, 20 février 405"
+      "document": "Lettre \" Consulenti tibi \" à l'Evêque Exupère de Toulouse, 20 février 405",
+      "dh_refs": []
     },
     {
       "n": 213,
@@ -32,15 +34,20 @@
       "html": "<p><br> (Chap. 7) Les livres qui ont été reçus dans le canon sont indiqués dans un bref appendice. C'est là (ce) que tu as désiré te voir indiquer :<br> Cinq livres de Moïse, c'est-à-dire Genèse, Exode, Lévitique, Nombres, Deutéronome, et un de Josué, un des Juges, quatre livres des Rois, en même temps Ruth, seize livres des Prophètes, cinq livres de Salomon, le Psautier.<br> De même les livres des histoires : un livre de Job, un de Tobie, un d'Esther, un de Judith, deux des Maccabées, deux d'Esdras, deux des Chroniques.<br> De même ceux du Nouveau Testament : quatre des évangiles, 13 (14) épîtres de l'apôtre Paul, trois épîtres de Jean, deux épîtres de Pierre, (une épître de Jude), une épître de Jacques, les Actes des Apôtres, l'Apocalypse de Jean.<br> Quant au reste, qui figure soit sous le nom de Matthieu ou sous celui de Jacques le Mineur, soit sous celui de Pierre et de Jean, ce qui a été écrit par un certain Leukios, (ou sous le nom d'André, ce qui l'a été par les philosophes Xenocharides et Léonidas,) ou sous le nom de Thomas, et s'il existe d'autres écrits, non seulement il faut le rejeter, mais comme tu le sais, le condamner.</p><p></p>",
       "section": "Le canon des saintes Ecritures et les livres apocryphes",
       "chapter": null,
-      "document": "Le canon des saintes Ecritures et les livres apocryphes"
+      "document": "Le canon des saintes Ecritures et les livres apocryphes",
+      "dh_refs": []
     },
     {
       "n": 214,
       "anchor": "cmx",
-      "html": "<p><br> (On explique pourquoi selon les canons 8 et 19 de Nicée Can.127-128 il faut rebaptiser les paulianistes qui reviennent à l'Eglise mais non les novatiens :)</p><p>(Chap. 5, Par 10) Qu'il existe une distinction entre ces deux hérésies, la raison le fait apparaître, car les paulianistes ne baptisent pas du tout au nom du Père et du Fils et de l'Esprit Saint, et les novatiens baptisent dans ces mêmes noms redoutables et vénérables, et chez eux jamais n'a été mise en cause l'unité de la puissance divine, c'est-à-dire du Père et du Fils et de l'Esprit Saint.</p><p></p>",
+      "html": "<p><br> (On explique pourquoi selon les canons 8 et 19 de Nicée Can.<a class=\"ref-dh\" href=\"/denzinger/n/127\" data-dh=\"127\">127</a>-<a class=\"ref-dh\" href=\"/denzinger/n/128\" data-dh=\"128\">128</a> il faut rebaptiser les paulianistes qui reviennent à l'Eglise mais non les novatiens :)</p><p>(Chap. 5, Par 10) Qu'il existe une distinction entre ces deux hérésies, la raison le fait apparaître, car les paulianistes ne baptisent pas du tout au nom du Père et du Fils et de l'Esprit Saint, et les novatiens baptisent dans ces mêmes noms redoutables et vénérables, et chez eux jamais n'a été mise en cause l'unité de la puissance divine, c'est-à-dire du Père et du Fils et de l'Esprit Saint.</p><p></p>",
       "section": "La forme du baptême",
       "chapter": null,
-      "document": "La forme du baptême"
+      "document": "La forme du baptême",
+      "dh_refs": [
+        127,
+        128
+      ]
     },
     {
       "n": 215,
@@ -48,7 +55,8 @@
       "html": "<p><br> (Chap. 3, Par 6) Pour ce qui est de la confirmation des enfants, on sait qu'elle ne doit pas être faite par un autre que l'évêque. Les presbytres en effet, bien que prêtres du second rang, n'ont pas le degré suprême du pontificat. Que ce pontificat revienne seulement aux évêques, pour qu'ils Consignent ou transmettent l'Esprit Paraclet, non seulement la coutume de l'Eglise l'atteste, mais également ce passage des Actes des Apôtres qui rapporte que Pierre et Jean furent envoyés pour transmettre l'Esprit Saint à ceux qui étaient déjà baptisés (voir <i>Ac 8,14-17</i>). Aux presbytres en effet il est permis, lorsqu'ils baptisent soit sans l'évêque, soit en présence de l'évêque, d'oindre les baptisés de chrême, mais qui aura été consacré par l'évêque ; mais non de signer le front avec cette même huile, ce qui revient aux seuls évêques lorsqu'ils transmettent l'Esprit Paraclet. Les paroles cependant je ne puis les dire, pour ne pas sembler révéler (le mystère) plutôt que de répondre à une demande.</p><p></p>",
       "section": "Le ministre de la confirmation.",
       "chapter": null,
-      "document": "Le ministre de la confirmation."
+      "document": "Le ministre de la confirmation.",
+      "dh_refs": []
     },
     {
       "n": 216,
@@ -56,7 +64,8 @@
       "html": "<p><br> (Chap. 8, Par. II) Puisque ta charité a voulu consulter au sujet de ceci comme du reste, mon fils, le diacre Célestin, a ajouté dans sa lettre que ta charité mentionnait ce qui est écrit dans l'épître de saint Jacques : \" Quelqu'un parmi vous est-il malade? Qu'il appelle les presbytres de l'Eglise et qu'ils prient sur lui, après l'avoir oint d'huile au nom du Seigneur. La prière de la foi sauvera le patient et le Seigneur le relèvera. S'il a commis des péchés, ils lui seront remis \" <i>Jc 5,14-15</i>. Il n'y a pas de doute qu'il faille l'entendre et le comprendre des fidèles malades qui peuvent être oints de l'huile sainte du chrême, laquelle étant confectionnée par l'évêque, il est permis non seulement aux prêtres, mais aussi à tous les chrétiens d'en user pour faire l'onction, dans leurs nécessités personnelles, ou celles des leurs.<br> Par ailleurs, cette addition nous semble superflue : on se demande si l'évêque peut faire ce qui est certainement permis aux presbytres. Car la raison pour laquelle on parle des presbytres est que les évêques, empêchés par d'autres occupations, ne peuvent se rendre chez tous les malades. Mais si un évêque en a la possibilité, et s'il juge que quelqu'un mérite d'être visité par lui, il peut le bénir et lui faire l'onction du chrême sans difficulté, puisque c'est lui qui fait le chrême. On ne peut en faire l'onction sur les pénitents, parce qu'elle est de l'ordre du sacrement. Car ceux auxquels on refuse les autres sacrements, comment penser qu'on puisse leur en concéder un de cette espèce ?</p><p></p>",
       "section": "Onction des malades",
       "chapter": null,
-      "document": "Onction des malades"
+      "document": "Onction des malades",
+      "dh_refs": []
     },
     {
       "n": 217,
@@ -64,7 +73,8 @@
       "html": "<p><br> (Chap. 1) En Nous consultant sur les choses divines ... fidèles aux exemples de la tradition ancienne, ...vous avez affirmé la vigueur de votre esprit religieux de la vraie façon, pas moins maintenant où vous demandez conseil qu'auparavant lorsque vous vous êtes prononcés, vous qui avez approuvé de vous en rapporter à notre jugement, sachant ce qui est dû au Siège apostolique, puisque Nous tous qui sommes établis en cette place désirons suivre l'Apôtre de qui est issu l'épiscopat et toute l'autorité de ce nom. C'est en le suivant que Nous avons appris à condamner le mal comme à approuver ce qui est louable, comme ce que vous avez estimé dans la vigilance de votre office sacerdotal, à savoir qu'on ne doit pas fouler aux pieds les ordonnances des Pères ; car ceux-ci, dans une pensée plus divine qu'humaine, avaient décrété que n'importe quelle affaire à traiter, fût-ce des provinces les plus éloignées et les plus retirées, ne serait pas considérée comme finie avant d'avoir été portée à la connaissance de ce Siège, pour qu'il confirmât de toute son autorité les justes sentences et que les autres Eglises - comme les eaux qui jaillissent de leur source originelle et qui s'écoulent dans toutes les régions du monde par de purs ruisseaux venus de la source non corrompue - reçoivent de lui ce qu'elles prescriront et sachent qui elles doivent purifier et qui, souillé d'une fange ineffaçable, ne recevra pas l'eau digne des corps purs.</p><p></p>",
       "section": "La prééminence du Siège de Rome",
       "chapter": null,
-      "document": "La prééminence du Siège de Rome"
+      "document": "La prééminence du Siège de Rome",
+      "dh_refs": []
     },
     {
       "n": 218,
@@ -72,7 +82,8 @@
       "html": "<p><br> (Chap. 2) Avec diligence donc, et comme il convient, vous avez consulté les arcanes de la charge apostolique - de la charge, dis-je, de celui à qui appartient \" en dehors des choses extérieures, la sollicitude de toutes les Eglises \" <i>2Co 11,28</i> - au sujet de la position à tenir dans des questions douteuses, et vous vous êtes conformé en cela à ce qui est la règle ancienne, laquelle, vous le savez, a toujours été observée avec moi par l'univers entier... Pourquoi avez-vous aussi confirmé cela par votre agir, si ce n'est parce que vous savez que des réponses coulent toujours de la source apostolique dans toutes les provinces, pour ceux qui en font la requête ? Surtout chaque fois qu'est débattue une affaire de foi, je pense que tous nos frères et coévêques ne doivent en référer Pierre, c'est-à-dire au garant de son nom et de sa charge, comme l'a fait maintenant Votre Charité pour demander ce qui peut être profitable à toutes les Eglises ensemble dans le monde entier. Elles doivent en effet devenir plus prudentes, lorsqu'elles voient que, selon la relation du double synode, les inventeurs du mal sont séparés de la communion de par les déterminations de notre jugement.</p><p></p>",
       "section": "La prééminence du Siège romain",
       "chapter": null,
-      "document": "La prééminence du Siège romain"
+      "document": "La prééminence du Siège romain",
+      "dh_refs": []
     },
     {
       "n": 219,
@@ -80,7 +91,8 @@
       "html": "<p><br> (Chap. 5) ... que les petits enfants peuvent, même sans la grâce du baptême, jouir des récompenses de la vie éternelle, cela est stupide au plus haut point. Si, en effet, ils ne mangent pas la chair du Fils de l'homme et ne boivent pas son sang, ils n'auront pas la vie en eux (voir <i>Jn 6,53</i>). Ceux qui soutiennent que ces enfants l'auront sans être renés, me paraissent vouloir rendre vain le baptême lui-même, en prêchant qu'ils ont ce que la foi professe ne pouvoir leur être conféré que par le baptême.<br> Si donc, comme ils le veulent, il n'y a aucune fâcheuse conséquence à ne pas renaître, il leur faut aussi professer que les saintes eaux de la nouvelle naissance ne servent à rien. Mais, la vérité peut avoir rapidement raison de la doctrine erronée de ces hommes vains avec les paroles que le Seigneur dit dans l'Evangile : \" Laissez venir à moi les petits enfants et ne les empêchez pas ; car c'est à leurs pareils qu'appartient le Royaume des cieux. (voir <i>Mt 19,14 Mc 10,14 Lc 18,16</i> .</p><p><center></p>",
       "section": "La nécessité du baptême",
       "chapter": null,
-      "document": "La nécessité du baptême"
+      "document": "La nécessité du baptême",
+      "dh_refs": []
     }
   ],
   "prev": {

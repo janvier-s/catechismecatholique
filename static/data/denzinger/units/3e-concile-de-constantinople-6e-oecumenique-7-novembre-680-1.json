@@ -13,18 +13,25 @@
     {
       "n": 550,
       "anchor": "cwc",
-      "html": "<p><br> Après avoir examiné les lettres dogmatiques écrites par Serge, jadis patriarche de cette ville impériale et confiée à la protection de Dieu, à Cyrus, alors évêque de Phasis, ainsi qu'à Honorius, jadis pape de l'ancienne Rome, comme aussi 1a lettre écrite par celui-ci, Honorius, en réponse à ce même Serge 487 , et après avoir trouvé qu'elles contredisent totalement les enseignements apostoliques et les commandements des saints conciles et de tous les saints Pères reconnus, et qu'elles suivent bien plutôt les fausses doctrines des hérétiques, nous les rejetons totalement et nous les abominons comme dommageables pour les âmes.</p>",
+      "html": "<p><br> Après avoir examiné les lettres dogmatiques écrites par Serge, jadis patriarche de cette ville impériale et confiée à la protection de Dieu, à Cyrus, alors évêque de Phasis, ainsi qu'à Honorius, jadis pape de l'ancienne Rome, comme aussi 1a lettre écrite par celui-ci, Honorius, en réponse à ce même Serge <a class=\"ref-dh\" href=\"/denzinger/n/487\" data-dh=\"487\">487</a> , et après avoir trouvé qu'elles contredisent totalement les enseignements apostoliques et les commandements des saints conciles et de tous les saints Pères reconnus, et qu'elles suivent bien plutôt les fausses doctrines des hérétiques, nous les rejetons totalement et nous les abominons comme dommageables pour les âmes.</p>",
       "section": "Condamnation des monothélètes et du pape Honorius Ier",
       "chapter": null,
-      "document": "Condamnation des monothélètes et du pape Honorius Ier"
+      "document": "Condamnation des monothélètes et du pape Honorius Ier",
+      "dh_refs": [
+        487
+      ]
     },
     {
       "n": 551,
       "anchor": "cwd",
-      "html": "<p><br> Quant à ceux c'est-à-dire ceux-là même dont nous rejetons les doctrines impies, nous avons jugé que leurs noms également devaient être bannis de la sainte Eglise, à savoir les noms de Serge... qui a commencé à écrire au sujet de cette doctrine impie, de Cyrus d'Alexandrie, de Pyrrhus, de Paul et de Pierre, et de ceux qui ont présidé sur le siège de cette ville confiée à la protection de Dieu et qui ont pensé comme ceux-là ; ensuite également celui de Théodore, jadis évêque de Pharan ; toutes ces personnes ont été mentionnées par Agathon, le pape très saint et trois fois bienheureux de l'ancienne Rome, dans sa lettre à... l'empereur 542-545 et rejetées par lui comme ayant pensé contrairement à notre foi orthodoxe ; et nous décrétons que ceux- là sont également soumis à l'anathème.</p>",
+      "html": "<p><br> Quant à ceux c'est-à-dire ceux-là même dont nous rejetons les doctrines impies, nous avons jugé que leurs noms également devaient être bannis de la sainte Eglise, à savoir les noms de Serge... qui a commencé à écrire au sujet de cette doctrine impie, de Cyrus d'Alexandrie, de Pyrrhus, de Paul et de Pierre, et de ceux qui ont présidé sur le siège de cette ville confiée à la protection de Dieu et qui ont pensé comme ceux-là ; ensuite également celui de Théodore, jadis évêque de Pharan ; toutes ces personnes ont été mentionnées par Agathon, le pape très saint et trois fois bienheureux de l'ancienne Rome, dans sa lettre à... l'empereur <a class=\"ref-dh\" href=\"/denzinger/n/542\" data-dh=\"542\">542</a>-<a class=\"ref-dh\" href=\"/denzinger/n/545\" data-dh=\"545\">545</a> et rejetées par lui comme ayant pensé contrairement à notre foi orthodoxe ; et nous décrétons que ceux- là sont également soumis à l'anathème.</p>",
       "section": "Condamnation des monothélètes et du pape Honorius Ier",
       "chapter": null,
-      "document": "Condamnation des monothélètes et du pape Honorius Ier"
+      "document": "Condamnation des monothélètes et du pape Honorius Ier",
+      "dh_refs": [
+        542,
+        545
+      ]
     },
     {
       "n": 552,
@@ -32,15 +39,26 @@
       "html": "<p><br> Mais avec eux nous sommes d'avis de bannir aussi de la sainte Eglise de Dieu Honorius, jadis pape de l'ancienne Rome, et de le frapper d'anathème, parce que nous avons trouvé dans la lettre écrite par lui à Serge qu'il a suivi en tout l'opinion de celui-ci et qu'il a confirmé ses enseignements impies.</p><p></p>",
       "section": "Condamnation des monothélètes et du pape Honorius Ier",
       "chapter": null,
-      "document": "Condamnation des monothélètes et du pape Honorius Ier"
+      "document": "Condamnation des monothélètes et du pape Honorius Ier",
+      "dh_refs": []
     },
     {
       "n": 553,
       "anchor": "cwf",
-      "html": "<p><br> Le présent saint concile oecuménique a reçu fidèlement et accueilli à bras ouverts la relation faite par le très saint et bienheureux pape de l'ancienne Rome Agathon à notre très religieux et fidèle empereur Constantin, qui a nommément rejeté ceux qui ont prêché et enseigné, comme on l'a montré plus haut, une seule volonté et une seule activité dans l'économie du Christ notre vrai Dieu fait chair (voir 542-545 ; de la même manière il a reçu aussi l'autre relation synodale envoyée sous le même pape très saint par le saint synode des cent vingt-cinq évêques aimés de Dieu à Sa Sérénité divinement sage (voir 546- 548 ). Ca ces relations étaient en accord avec le saint concile de Chalcédoine (voir 300-306 et avec le Tome de Léon, le très saint et bienheureux pape de la même ancienne Rome, adressé à Saint Flavien (voir 290- 295 , que ce concile a appelé colonne de l'orthodoxie.</p>",
+      "html": "<p><br> Le présent saint concile oecuménique a reçu fidèlement et accueilli à bras ouverts la relation faite par le très saint et bienheureux pape de l'ancienne Rome Agathon à notre très religieux et fidèle empereur Constantin, qui a nommément rejeté ceux qui ont prêché et enseigné, comme on l'a montré plus haut, une seule volonté et une seule activité dans l'économie du Christ notre vrai Dieu fait chair (voir <a class=\"ref-dh\" href=\"/denzinger/n/542\" data-dh=\"542\">542</a>-<a class=\"ref-dh\" href=\"/denzinger/n/545\" data-dh=\"545\">545</a> ; de la même manière il a reçu aussi l'autre relation synodale envoyée sous le même pape très saint par le saint synode des cent vingt-cinq évêques aimés de Dieu à Sa Sérénité divinement sage (voir <a class=\"ref-dh\" href=\"/denzinger/n/546\" data-dh=\"546\">546</a>- <a class=\"ref-dh\" href=\"/denzinger/n/548\" data-dh=\"548\">548</a> ). Ca ces relations étaient en accord avec le saint concile de Chalcédoine (voir <a class=\"ref-dh\" href=\"/denzinger/n/300\" data-dh=\"300\">300</a>-<a class=\"ref-dh\" href=\"/denzinger/n/306\" data-dh=\"306\">306</a> et avec le Tome de Léon, le très saint et bienheureux pape de la même ancienne Rome, adressé à Saint Flavien (voir <a class=\"ref-dh\" href=\"/denzinger/n/290\" data-dh=\"290\">290</a>- <a class=\"ref-dh\" href=\"/denzinger/n/295\" data-dh=\"295\">295</a> , que ce concile a appelé colonne de l'orthodoxie.</p>",
       "section": "Définition des deux vouloirs et opérations dans le Christ.",
       "chapter": null,
-      "document": "Définition des deux vouloirs et opérations dans le Christ."
+      "document": "Définition des deux vouloirs et opérations dans le Christ.",
+      "dh_refs": [
+        290,
+        295,
+        300,
+        306,
+        542,
+        545,
+        546,
+        548
+      ]
     },
     {
       "n": 554,
@@ -48,7 +66,8 @@
       "html": "<p><br> Elles étaient en accord aussi avec les lettres synodales écrites par le bienheureux Cyrille contre l'impie Nestorius et envoyées aux évêques orientaux. Suivant donc les cinq conciles saints et oecuméniques, et les saints Pères approuvés, celui-ci définit et confesse unanimement notre Seigneur Jésus Christ, notre vrai Dieu, un de la sainte, consubstantielle et vivifiante Trinité, parfait en divinité, et parfait, le même, en humanité ; vraiment Dieu, et vraiment homme, le même, fait d'une âme raisonnable et d'un corps ; consubstantiel au Père selon la divinité, et consubstantiel à nous, le même, selon l'humanité ; en tout semblable à nous, sauf le péché <i>He 4,15</i></p>",
       "section": "Définition des deux vouloirs et opérations dans le Christ.",
       "chapter": null,
-      "document": "Définition des deux vouloirs et opérations dans le Christ."
+      "document": "Définition des deux vouloirs et opérations dans le Christ.",
+      "dh_refs": []
     },
     {
       "n": 555,
@@ -56,7 +75,8 @@
       "html": "<p><br> Engendré du Père avant les siècles selon la divinité, et dans les derniers jours, pour nous et pour notre salut, le même, de l'Esprit Saint et de la Vierge Marie, laquelle est de plein droit et véritablement Mère de Dieu, selon l'humanité ; un seul et même Christ, Fils, Seigneur, unique engendré, reconnu en deux natures sans confusion, sans changement, sans séparation, sans division ; la différence des natures n'étant nullement supprimée à cause de l'union, la propriété de chaque nature étant bien plutôt sauvegardée et concourant à une seule personne et une seule hypostase ; il n'est ni partagé ni divisé en deux personnes, mais il est un seul et même Fils, unique engendré, Dieu Verbe, Seigneur Jésus Christ, selon que depuis longtemps les prophètes l'ont dit de lui, que Jésus le Christ lui-même nous l'a enseigné et que le Symbole des saints Pères nous l'a transmis301 .</p>",
       "section": "Définition des deux vouloirs et opérations dans le Christ.",
       "chapter": null,
-      "document": "Définition des deux vouloirs et opérations dans le Christ."
+      "document": "Définition des deux vouloirs et opérations dans le Christ.",
+      "dh_refs": []
     },
     {
       "n": 556,
@@ -64,15 +84,24 @@
       "html": "<p><br> Nous proclamons de la même manière en lui, selon l'enseignement des saints Pères, deux volontés ou vouloirs naturels et deux activités naturelles, sans division, sans changement, sans partage et sans confusion. Les deux vouloirs naturels ne sont pas, comme l'ont dit les hérétiques impies, opposés l'un à l'autre, loin de là. Mais son vouloir humain suit son vouloir divin et tout- puissant, il ne lui résiste pas et ne s'oppose pas à lui, il s'y soumet plutôt. Il fallait que le vouloir de la chair fût mû et fût soumis au vouloir divin, selon le très sage Athanase. Car de même que sa chair est dite et qu'elle est la chair du Dieu Verbe, de même le vouloir naturel de sa chair est dit et il est le propre vouloir du Dieu Verbe, comme lui-même déclare : \" Je suis descendu du ciel, non pour faire mon vouloir, mais le vouloir du Père qui m'a envoyé \" <i>Jn 6,38</i> Il déclare sien le vouloir de sa chair, puisque la chair est devenue sienne. Car de même que sa chair animée, toute sainte et immaculée, n'a pas été supprimée en étant divinisée, mais qu'elle est demeurée dans sa propre limite et dans sa raison d'être, de même son vouloir humain en étant divinité n'a pas été supprimé. Il a été plutôt sauvegardé, selon le mot de Grégoire le Théologien : \" Car l'acte de volonté de celui que l'on considère en tant que Sauveur n'est pas opposé à Dieu, étant totalement divinisé \".</p>",
       "section": "Définition des deux vouloirs et opérations dans le Christ.",
       "chapter": null,
-      "document": "Définition des deux vouloirs et opérations dans le Christ."
+      "document": "Définition des deux vouloirs et opérations dans le Christ.",
+      "dh_refs": []
     },
     {
       "n": 557,
       "anchor": "cwj",
-      "html": "<p><br> Nous glorifions deux activités naturelles, sans division, sans changement, sans partage, sans confusion, en notre Seigneur Jésus Christ, notre vrai Dieu, c'est-à-dire une activité divine et une activité humaine, selon Léon l'inspiré de Dieu, qui affirme très clairement : \" Chaque nature fait en communion avec l'autre ce qui lui est propre, le Verbe opérant ce qui est du Verbe, et le corps exécutant ce qui est du corps \" 294 . En effet nous n'accorderons pas qu'il y ait une seule activité naturelle de Dieu et de la créature de peur d'élever le créé à la substance divine et d'abaisser la sublimité de la nature divine au niveau qui convient aux êtres engendrés. Car nous reconnaissons que les miracles et les souffrances sont ceux d'un seul et du même, selon l'une et l'autre nature dont il est composé et dans lesquelles il a son être, comme l'a dit l'admirable Cyrille.(cf. 255 260 271-273 423</p>",
+      "html": "<p><br> Nous glorifions deux activités naturelles, sans division, sans changement, sans partage, sans confusion, en notre Seigneur Jésus Christ, notre vrai Dieu, c'est-à-dire une activité divine et une activité humaine, selon Léon l'inspiré de Dieu, qui affirme très clairement : \" Chaque nature fait en communion avec l'autre ce qui lui est propre, le Verbe opérant ce qui est du Verbe, et le corps exécutant ce qui est du corps \" <a class=\"ref-dh\" href=\"/denzinger/n/294\" data-dh=\"294\">294</a> . En effet nous n'accorderons pas qu'il y ait une seule activité naturelle de Dieu et de la créature de peur d'élever le créé à la substance divine et d'abaisser la sublimité de la nature divine au niveau qui convient aux êtres engendrés. Car nous reconnaissons que les miracles et les souffrances sont ceux d'un seul et du même, selon l'une et l'autre nature dont il est composé et dans lesquelles il a son être, comme l'a dit l'admirable Cyrille.(cf. <a class=\"ref-dh\" href=\"/denzinger/n/255\" data-dh=\"255\">255</a> <a class=\"ref-dh\" href=\"/denzinger/n/260\" data-dh=\"260\">260</a> <a class=\"ref-dh\" href=\"/denzinger/n/271\" data-dh=\"271\">271</a>-<a class=\"ref-dh\" href=\"/denzinger/n/273\" data-dh=\"273\">273</a> <a class=\"ref-dh\" href=\"/denzinger/n/423\" data-dh=\"423\">423</a></p>",
       "section": "Définition des deux vouloirs et opérations dans le Christ.",
       "chapter": null,
-      "document": "Définition des deux vouloirs et opérations dans le Christ."
+      "document": "Définition des deux vouloirs et opérations dans le Christ.",
+      "dh_refs": [
+        255,
+        260,
+        271,
+        273,
+        294,
+        423
+      ]
     },
     {
       "n": 558,
@@ -80,7 +109,8 @@
       "html": "<p><br> Conservant totalement ce qui est sans confusion ni division, nous proclamons le tout dans une formule concise : croyant que l'un de la Trinité est aussi après l'Incarnation notre Seigneur Jésus Christ, notre vrai Dieu, nous disons qu'il a deux natures brillant dans son unique hypostase. En elle, tout au long de son existence selon l'économie, il a manifesté ses miracles et ses souffrances, non pas en apparence, mais en vérité. La différence naturelle en cette unique hypostase même se reconnaît à ce que l'une et l'autre nature veut et opère ce qui lui est propre en communion avec l'autre. Pour cette raison nous glorifions deux vouloirs et deux activités naturels concourant l'un avec l'autre au salut du genre humain.</p>",
       "section": "Définition des deux vouloirs et opérations dans le Christ.",
       "chapter": null,
-      "document": "Définition des deux vouloirs et opérations dans le Christ."
+      "document": "Définition des deux vouloirs et opérations dans le Christ.",
+      "dh_refs": []
     },
     {
       "n": 559,
@@ -88,7 +118,8 @@
       "html": "<p><br> Après avoir formulé ces points avec une précision et une justesse totales, nous définissons qu'il n'est permis à personne de proposer une autre confession de foi, c'est-à-dire de l'écrire, de la composer, de la méditer ou de l'enseigner à d'autres. Quant à ceux qui oseraient composer une autre confession de foi, diffuser, enseigner, ou transmettre un autre symbole à ceux qui veulent se convertir du paganisme, du judaïsme ou de quelque hérésie que ce soit à la connaissance de la vérité, ou introduire un nouveau langage ou une expression inventée afin d'infirmer les points que nous venons de définir, s'ils étaient évêques ou clercs, ils seraient exclus, les évêques de l'épiscopat et les clercs du clergé ; s'ils étaient moines ou laïcs, ils seraient frappés d'anathème.</p><p><center></p>",
       "section": "Définition des deux vouloirs et opérations dans le Christ.",
       "chapter": null,
-      "document": "Définition des deux vouloirs et opérations dans le Christ."
+      "document": "Définition des deux vouloirs et opérations dans le Christ.",
+      "dh_refs": []
     }
   ],
   "prev": {
