@@ -641,11 +641,14 @@ def main() -> None:
     months_after_re = re.compile(rf"^\s*(?:{months})\b", re.IGNORECASE)
     months_before_re = re.compile(rf"(?:{months})\s+$", re.IGNORECASE)
     cluster_before_re = re.compile(
-        r"[;,]\s*$|(?:voir|cf\.|n°|suprà|supra|infra)\s+$", re.IGNORECASE
+        r"(?:[;,:\"»]|\bet\b|\bou\b|voir|cf\.|n°|suprà|supra|infra)\s*$",
+        re.IGNORECASE,
     )
-    cluster_after_re = re.compile(r"^\s*[;,]\s*\d{3,4}\b")
+    cluster_after_re = re.compile(r"^\s*(?:[;,]|\bet\b|\bou\b|-)\s*\d{3,4}\b")
     italic_re = re.compile(r"<(i|em)\b[^>]*>.*?</\1>", re.IGNORECASE | re.DOTALL)
-    bare_dh_re = re.compile(r"(?<![\w/-])(\d{3,4})(?![\w/-])")
+    # Allow hyphen on either side so range citations like "3022-3023" pick
+    # up both numbers (3022 has `-` after, 3023 has `-` before).
+    bare_dh_re = re.compile(r"(?<![\w/])(\d{3,4})(?![\w/])")
 
     cited_by: dict[int, list[int]] = {}
     refs_in_entry: dict[int, list[int]] = {}
@@ -665,12 +668,19 @@ def main() -> None:
                 start, end = m.span()
                 before = stripped[max(0, start - 24) : start]
                 after = stripped[end : end + 24]
-                if months_after_re.match(after) or months_before_re.search(before):
-                    continue
-                if cand >= 1000:
-                    if not (
-                        cluster_before_re.search(before) or cluster_after_re.match(after)
-                    ):
+                in_cluster = bool(
+                    cluster_before_re.search(before) or cluster_after_re.match(after)
+                )
+                in_date = bool(
+                    months_after_re.match(after) or months_before_re.search(before)
+                )
+                if cand >= 2000:
+                    pass  # always linkify (DH range, no year overlap)
+                elif cand >= 1000:
+                    if not in_cluster:
+                        continue
+                else:
+                    if in_date and not in_cluster:
                         continue
                 seen.add(cand)
                 cited_by.setdefault(cand, []).append(n)

@@ -18,6 +18,11 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	if (!Number.isFinite(n) || n < 1) throw error(404, 'Numéro invalide');
 	const index = await loadDenzingerIndex(fetch);
 	const meta = index[String(n)];
-	if (!meta) throw error(404, `Entrée DH ${n} introuvable`);
+	if (!meta) {
+		// The number is in DH range but not present in this edition (a few
+		// entries are missing in the catho.org export). Render a stub page
+		// instead of 404'ing.
+		return { n, missing: true as const };
+	}
 	throw redirect(308, `/denzinger/${meta.unit_slug}#dh-${n}`);
 };
