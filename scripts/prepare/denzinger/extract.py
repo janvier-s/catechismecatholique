@@ -42,12 +42,21 @@ OUT_ENTRIES = OUT_DIR / "entries"
 JUNK_RES = [
     re.compile(r"^\s*1000_livres_religieux_gratuits_telechargeables_sur_jesusmarie\.com\s*$"),
     re.compile(r"^\s*www\.JesusMarie\.com.*"),
-    re.compile(r"^\s*file:///.*"),
     re.compile(r"^\s*denzinger - suite.*"),
     re.compile(r"^\s*télécharger le Denzinger\s*$"),
     re.compile(r"^\s*Symboles et Définitions de la Foi Catholique\s*$"),
     re.compile(r"^\s*Denzinger\s*$"),
+    re.compile(r"^\s*source\s*:\s*catho\.org\s*$", re.IGNORECASE),
 ]
+
+# The PDF concatenates multiple HTML pages; pdftotext reproduces each page's
+# `file:///D|/.../{name}.html (N of M)2006-...` running footer. The TOC pages
+# are 01denzinger.html and 02-08denzinger_suite[1-7].html — body pages are
+# named like 10denzinger_numero_1_a_numero_63.html, 11denzinger_numero_64_…,
+# etc. Detecting the page-name lets us ignore stray pure-digit lines (dates,
+# page wraps) inside the TOC.
+PAGE_FOOTER_RE = re.compile(r"file:///[^\s]+/(\w+denzinger[^\s]*)\.html")
+BODY_PAGE_RE = re.compile(r"^\d+denzinger_numero_", re.IGNORECASE)
 
 PART_HEADERS = {
     "PREMIERE PARTIE": "1-symboles-de-foi",
@@ -100,10 +109,37 @@ def main() -> None:
     OUT_ENTRIES.mkdir(parents=True, exist_ok=True)
 
     raw = pdftotext(PDF_PATH)
-    lines = raw.split("\n")
+    # Page footers (`file:///D|/.../{name}.html (N of M)…`) appear at the
+    # BOTTOM of each PDF page, after that page's content. So the page's
+    # content is everything we've seen since the previous footer; we tag
+    # those buffered lines with the current footer's classification, then
+    # drain the buffer.
+    lines_with_meta: list[tuple[str, bool]] = []
+    page_buf: list[str] = []
+    seen_first_body_page = False
+    for ln in raw.split("\n"):
+        m = PAGE_FOOTER_RE.search(ln)
+        if m:
+            page_name = m.group(1)
+            is_body = bool(BODY_PAGE_RE.match(page_name))
+            if is_body:
+                seen_first_body_page = True
+            for buf_line in page_buf:
+                if is_junk(buf_line):
+                    continue
+                lines_with_meta.append((buf_line, is_body))
+            page_buf = []
+            continue
+        page_buf.append(ln)
+    # Tail content past the last footer (final pages with no trailing URL):
+    # treat as body iff any body page has been seen.
+    for buf_line in page_buf:
+        if is_junk(buf_line):
+            continue
+        lines_with_meta.append((buf_line, seen_first_body_page))
 
-    # Drop junk lines.
-    lines = [ln for ln in lines if not is_junk(ln)]
+    lines = [ln for ln, _ in lines_with_meta]
+    in_body_flags = [b for _, b in lines_with_meta]
 
     # Walk the stream.
     entries: dict[int, dict[str, Any]] = {}
@@ -267,9 +303,15 @@ def main() -> None:
                 j += 1
             return saw_long_body_first
 
+        # Only consider digit lines as candidate entry markers when we're
+        # inside a body page (filename `\d+denzinger_numero_…`). The TOC
+        # pages contain stray wrapped dates that would otherwise pollute
+        # the monotone last_n.
         n = looks_like_number(line)
+        if n is not None and not in_body_flags[i]:
+            n = None
         if n is not None and not is_likely_entry_marker(i):
-            n = None  # treat as ordinary text below
+            n = None
         if n is not None:
             min_n = part_min_n[current_part]
             if n > last_n and n >= min_n:
