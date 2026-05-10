@@ -288,6 +288,8 @@ TRUNCATION_FIXES: dict[str, str] = {
         "Calomnies contre quelques décisions en matière de foi prises depuis quelques siècles",
     "Concile de Rome, Lettre synodale \"omnium bonorum spes\" aux empereurs, 27 mars":
         "Concile de Rome, Lettre synodale \"omnium bonorum spes\" aux empereurs, 27 mars 449",
+    "Chap. 7. La préparation à apporter pour qu'on reçoive dignement la sainte eucha":
+        "Chap. 7. La préparation à apporter pour qu'on reçoive dignement la sainte eucharistie",
 }
 
 

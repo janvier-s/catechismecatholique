@@ -50,14 +50,14 @@
 		{#each unit.entries as entry, ei (entry.n)}
 			{@const showDoc =
 				entry.document && (ei === 0 || unit.entries[ei - 1]?.document !== entry.document)}
+			{#if showDoc}
+				<h2 class="document">{frenchPunct(entry.document!)}</h2>
+			{/if}
 			<article class="entry" id="dh-{entry.n}">
 				<a class="entry-num" href="#dh-{entry.n}" aria-label="Permalink DH {entry.n}">
 					<span class="entry-num-prefix">DH</span>
 					<span class="entry-num-value">{entry.n}</span>
 				</a>
-				{#if showDoc}
-					<h2 class="document">{frenchPunct(entry.document!)}</h2>
-				{/if}
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<div class="entry-body">{@html frenchPunct(entry.html)}</div>
 			</article>
@@ -145,15 +145,8 @@
 	}
 
 	.entry {
-		margin: 1.75rem 0 1.5rem;
+		margin: 1.25rem 0 1.5rem;
 		scroll-margin-top: 5rem;
-		padding-top: 1rem;
-		border-top: 1px dashed color-mix(in srgb, var(--color-border) 90%, transparent);
-	}
-	.entry:first-of-type {
-		border-top: 0;
-		padding-top: 0;
-		margin-top: 0.5rem;
 	}
 	.entry-num {
 		display: inline-flex;
@@ -165,12 +158,17 @@
 	}
 	.document {
 		font-family: var(--font-heading);
-		font-style: italic;
-		font-size: 1.05rem;
+		font-size: 1.2rem;
 		font-weight: 600;
-		line-height: 1.45;
+		line-height: 1.35;
 		color: var(--color-heading, var(--color-fg));
-		margin: 0 0 0.6rem;
+		margin: 2.5rem 0 1.25rem;
+		padding-bottom: 0.55rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 14%, transparent);
+		scroll-margin-top: 5rem;
+	}
+	.document:first-of-type {
+		margin-top: 1rem;
 	}
 	.entry-num-prefix {
 		font-family: var(--font-ui);
