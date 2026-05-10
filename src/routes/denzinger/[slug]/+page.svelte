@@ -206,7 +206,7 @@
 		line-height: 1.8;
 	}
 	.entry-body :global(p) {
-		margin: 0 0 0.65em;
+		margin: 0 0 1em;
 	}
 	.entry-body :global(p:last-child) {
 		margin-bottom: 0;
