@@ -4,7 +4,6 @@
   "breadcrumb": [
     "DEUXIEME PARTIE",
     "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
-    "BONIFACE",
     "JEAN II : 2 Janvier 533-8 mai 535"
   ],
   "part_slug": "2-magistere-de-leglise",
@@ -24,8 +23,8 @@
     }
   ],
   "prev": {
-    "slug": "ii-22-septembre",
-    "title": "II : 22 septembre"
+    "slug": "boniface-ii-22-septembre",
+    "title": "BONIFACE II : 22 septembre"
   },
   "next": {
     "slug": "vigile-11-novembre-537-7-juin-555",

@@ -68,7 +68,8 @@
 			{#each group.entries as entry (entry.n)}
 				<article class="entry" id="dh-{entry.n}">
 					<a class="entry-num" href="#dh-{entry.n}" aria-label="Permalink DH {entry.n}">
-						{entry.n}
+						<span class="entry-num-prefix">DH</span>
+						<span class="entry-num-value">{entry.n}</span>
 					</a>
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<div class="entry-body">{@html frenchPunct(entry.html)}</div>
@@ -164,7 +165,7 @@
 		font-weight: 600;
 		line-height: 1.45;
 		color: var(--color-heading, var(--color-fg));
-		margin: 2.25rem 0 1rem;
+		margin: 2.25rem 0 0.4rem;
 		padding-top: 1rem;
 		border-top: 1px dashed color-mix(in srgb, var(--color-border) 90%, transparent);
 		scroll-margin-top: 5rem;
@@ -176,29 +177,39 @@
 	}
 
 	.entry {
-		display: grid;
-		grid-template-columns: 3rem 1fr;
-		gap: 0.85rem;
-		margin: 0.75rem 0 1.25rem;
+		margin: 0.85rem 0 1.5rem;
 		scroll-margin-top: 5rem;
 	}
 	.entry-num {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.35em;
+		text-decoration: none;
+		color: var(--color-accent);
+		margin: 0 0 0.55rem;
+	}
+	.entry-num-prefix {
 		font-family: var(--font-ui);
-		font-size: 0.78rem;
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+	}
+	.entry-num-value {
+		font-family: var(--font-heading);
+		font-size: 1.5rem;
 		font-weight: 600;
 		font-variant-numeric: tabular-nums lining-nums;
-		color: var(--color-accent);
-		text-decoration: none;
-		text-align: right;
-		padding-top: 0.3rem;
+		line-height: 1;
 	}
-	.entry-num:hover {
+	.entry-num:hover .entry-num-value {
 		text-decoration: underline;
 	}
 	.entry-body {
 		min-width: 0;
 		font-size: 1rem;
-		line-height: 1.75;
+		line-height: 1.8;
 	}
 	.entry-body :global(p) {
 		margin: 0 0 0.65em;
@@ -214,9 +225,6 @@
 		margin-top: 3rem;
 	}
 	@media (max-width: 640px) {
-		.entry {
-			grid-template-columns: 2.4rem 1fr;
-		}
 		.pager {
 			grid-template-columns: 1fr;
 		}

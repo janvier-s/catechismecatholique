@@ -29,7 +29,8 @@
 
 	<section class="parts" aria-label="Parties">
 		{#each data.structure.parts as part (part.slug)}
-			<a class="part-card" href="/denzinger/sommaire#{part.slug}">
+			{@const firstUnit = part.units[0]}
+			<a class="part-card" href="/denzinger/{firstUnit?.slug ?? ''}">
 				<span class="part-kicker">
 					{part.unit_count} sections · DH {part.first_n}–{part.last_n}
 				</span>

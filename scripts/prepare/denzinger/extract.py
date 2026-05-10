@@ -225,7 +225,11 @@ _MONTHS_LOWER = [
     "févr", "juill", "sept", "oct", "nov", "déc",
 ]
 _MONTHS_ALT = "|".join(_MONTHS_LOWER + [m.capitalize() for m in _MONTHS_LOWER])
-CONTINUATION_PREFIX_RE = re.compile(rf"^(?:[a-z0-9\-:\(]|(?:{_MONTHS_ALT})\b)")
+CONTINUATION_PREFIX_RE = re.compile(
+    rf"^(?:[a-z0-9\-:\(]"
+    rf"|[IVX]+\s*[:.]"  # pope-ordinal continuation: "II : 22 septembre"
+    rf"|(?:{_MONTHS_ALT})\b)"
+)
 
 
 def merge_wrapped_h1(events: list[tuple]) -> list[tuple]:
