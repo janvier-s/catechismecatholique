@@ -120,7 +120,7 @@
 				{
 					href: '/denzinger',
 					label: 'Denzinger',
-					description: "L'Enchiridion Symbolorum — recueil canonique des définitions du Magistère."
+					description: "L'Enchiridion Symbolorum, recueil canonique des définitions du Magistère."
 				}
 			]
 		},

@@ -8,20 +8,6 @@
 	let { data }: { data: PageData } = $props();
 
 	const unit = $derived(data.unit);
-	// Group entries by their preceding document line so the page renders
-	// each <h2> document once, with its entries listed underneath.
-	const groups = $derived.by(() => {
-		const out: { document: string | null; entries: typeof unit.entries }[] = [];
-		for (const e of unit.entries) {
-			const last = out[out.length - 1];
-			if (!last || last.document !== e.document) {
-				out.push({ document: e.document, entries: [e] });
-			} else {
-				last.entries.push(e);
-			}
-		}
-		return out;
-	});
 </script>
 
 <svelte:head>
@@ -61,20 +47,20 @@
 	</header>
 
 	<section class="body" aria-label="Texte de la section">
-		{#each groups as group, gi (gi)}
-			{#if group.document}
-				<h2 class="document" id="doc-{gi}">{frenchPunct(group.document)}</h2>
-			{/if}
-			{#each group.entries as entry (entry.n)}
-				<article class="entry" id="dh-{entry.n}">
-					<a class="entry-num" href="#dh-{entry.n}" aria-label="Permalink DH {entry.n}">
-						<span class="entry-num-prefix">DH</span>
-						<span class="entry-num-value">{entry.n}</span>
-					</a>
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<div class="entry-body">{@html frenchPunct(entry.html)}</div>
-				</article>
-			{/each}
+		{#each unit.entries as entry, ei (entry.n)}
+			{@const showDoc =
+				entry.document && (ei === 0 || unit.entries[ei - 1]?.document !== entry.document)}
+			<article class="entry" id="dh-{entry.n}">
+				<a class="entry-num" href="#dh-{entry.n}" aria-label="Permalink DH {entry.n}">
+					<span class="entry-num-prefix">DH</span>
+					<span class="entry-num-value">{entry.n}</span>
+				</a>
+				{#if showDoc}
+					<h2 class="document">{frenchPunct(entry.document!)}</h2>
+				{/if}
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+				<div class="entry-body">{@html frenchPunct(entry.html)}</div>
+			</article>
 		{/each}
 	</section>
 
@@ -158,27 +144,16 @@
 		margin-top: 2rem;
 	}
 
-	.document {
-		font-family: var(--font-heading);
-		font-style: italic;
-		font-size: 1.05rem;
-		font-weight: 600;
-		line-height: 1.45;
-		color: var(--color-heading, var(--color-fg));
-		margin: 2.25rem 0 0.4rem;
+	.entry {
+		margin: 1.75rem 0 1.5rem;
+		scroll-margin-top: 5rem;
 		padding-top: 1rem;
 		border-top: 1px dashed color-mix(in srgb, var(--color-border) 90%, transparent);
-		scroll-margin-top: 5rem;
 	}
-	.document:first-of-type {
+	.entry:first-of-type {
 		border-top: 0;
 		padding-top: 0;
-		margin-top: 0;
-	}
-
-	.entry {
-		margin: 0.85rem 0 1.5rem;
-		scroll-margin-top: 5rem;
+		margin-top: 0.5rem;
 	}
 	.entry-num {
 		display: inline-flex;
@@ -186,7 +161,16 @@
 		gap: 0.35em;
 		text-decoration: none;
 		color: var(--color-accent);
-		margin: 0 0 0.55rem;
+		margin: 0 0 0.45rem;
+	}
+	.document {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-size: 1.05rem;
+		font-weight: 600;
+		line-height: 1.45;
+		color: var(--color-heading, var(--color-fg));
+		margin: 0 0 0.6rem;
 	}
 	.entry-num-prefix {
 		font-family: var(--font-ui);

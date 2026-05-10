@@ -167,6 +167,27 @@ def clean_entry_body(html: str) -> str:
     return html
 
 
+# Inline chapter-heading patterns sometimes left as plain text in catho.org
+# bodies (instead of <h2>). When such a heading sits at the *end* of one
+# entry's body, it actually belongs as the document context of the NEXT
+# entry. Detect it, strip it, and emit a synthetic h2 event in its place.
+INLINE_CHAPTER_HEADING_RE = re.compile(
+    r"<p>\s*((?:Chap(?:itre)?|Can(?:on)?|Préambule)\.?\s*\d*\.?\s*[^<]+)</p>\s*$",
+    flags=re.IGNORECASE,
+)
+
+
+def split_trailing_inline_heading(body_html: str) -> tuple[str, str | None]:
+    """If the body's last <p> is an inline chapter/canon heading, split it
+    out so the caller can emit a synthetic h2 event."""
+    m = INLINE_CHAPTER_HEADING_RE.search(body_html)
+    if not m:
+        return body_html, None
+    heading = normalize_ws(m.group(1).rstrip(". "))
+    new_body = body_html[: m.start()].rstrip()
+    return new_body, heading
+
+
 # Event = ('h1', text) | ('h2', text) | ('entry', n, anchor, body_html)
 
 
@@ -196,12 +217,16 @@ def parse_body_page(html: str) -> list[tuple]:
         elif m.group("anchor") is not None:
             anchor = m.group("anchor")
             n = int(m.group("n"))
-            # Body for this entry runs until the next anchor / h1 / h2
-            # match — i.e. the NEXT match in our list.
             body_start = m.end()
             body_end = matches[i + 1].start() if i + 1 < len(matches) else len(body)
             entry_html = body[body_start:body_end]
-            events.append(("entry", n, anchor, clean_entry_body(entry_html)))
+            cleaned = clean_entry_body(entry_html)
+            cleaned, trailing_heading = split_trailing_inline_heading(cleaned)
+            events.append(("entry", n, anchor, cleaned))
+            if trailing_heading:
+                # Promote inline "Chap. N." paragraph at the body's tail
+                # to a synthetic h2 so the next entry inherits it.
+                events.append(("h2", trailing_heading))
     return events
 
 
@@ -232,25 +257,70 @@ CONTINUATION_PREFIX_RE = re.compile(
 )
 
 
-def merge_wrapped_h1(events: list[tuple]) -> list[tuple]:
-    """The source wraps long h1s onto a second h1 ("II. Schéma bipartite"
-    / "trinitaire-christologique." or "PIE IV : 25" / "Décembre 1559-9
-    décem"). Merge a continuation that doesn't look like a fresh
+# Manual fixes for headings the catho.org Ictus-3 export truncates mid-text
+# (the truncations are in the source — re-running the extractor cannot
+# recover them, so we patch the small set of known cases by hand).
+TRUNCATION_FIXES: dict[str, str] = {
+    # Pope/council headings (h1)
+    "BENOIT XV : 3 septembre 1914-22 janv": "BENOIT XV : 3 septembre 1914 - 22 janvier 1922",
+    "BONIFACE V : 23 décembre 619 - 25 octob": "BONIFACE V : 23 décembre 619 - 25 octobre 625",
+    "GREGOIRE X : 1er septembre 1271 - 10 janv": "GREGOIRE X : 1er septembre 1271 - 10 janvier 1276",
+    "GREGOIRE XIII: 13 mai 1572-10 avr": "GREGOIRE XIII : 13 mai 1572 - 10 avril 1585",
+    "LATRAN (11e oecum 5-19 (22?) mar": "LATRAN (11e oecuménique) 5-19 (22?) mars 1179",
+    "MARTIN 1er : 5 juillet 649-17 juin 653 (16 septemb": "MARTIN 1er : 5 juillet 649 - 17 juin 653 (16 septembre 655)",
+    "MARTIN V : 11 novembre 1417-20 fév": "MARTIN V : 11 novembre 1417 - 20 février 1431",
+    "PIE XI: 6 février 1922-10 févr": "PIE XI : 6 février 1922 - 10 février 1939",
+    "TRENTE ( 19ème oecumén 13 Décembre 1545-4 décemb": "TRENTE (19ème oecuménique) 13 décembre 1545 - 4 décembre 1563",
+    # Document/section headings (h2) cut mid-word in the source
+    "Chap. 1. La présence réelle de notre Seigneur Jésus Christ dans le très saint s":
+        "Chap. 1. La présence réelle de notre Seigneur Jésus Christ dans le très saint sacrement",
+    "Chap. 16. Le fruit de la justification : le mérite, les bonnes oeuvres. Sa nat":
+        "Chap. 16. Le fruit de la justification : le mérite, les bonnes oeuvres. Sa nature",
+    "Chap. 4. Esquisse d'une description de la justification de l'impie. Son mode d":
+        "Chap. 4. Esquisse d'une description de la justification de l'impie. Son mode",
+    "Chapitre 2. Le pouvoir de l'Eglise dans l'administration du sacrement de l'euc":
+        "Chapitre 2. Le pouvoir de l'Eglise dans l'administration du sacrement de l'eucharistie",
+    "Chapitre 8. Rejet de la langue vulgaire dans la messe ; explication de ses mys":
+        "Chapitre 8. Rejet de la langue vulgaire dans la messe ; explication de ses mystères",
+    "II. La question synoptique, ou les rapports mutuels entre les trois premiers é":
+        "II. La question synoptique, ou les rapports mutuels entre les trois premiers évangiles",
+    "Calomnies contre quelques décisions en matière de foi prises depuis quelques s":
+        "Calomnies contre quelques décisions en matière de foi prises depuis quelques siècles",
+    "Concile de Rome, Lettre synodale \"omnium bonorum spes\" aux empereurs, 27 mars":
+        "Concile de Rome, Lettre synodale \"omnium bonorum spes\" aux empereurs, 27 mars 449",
+}
+
+
+def apply_truncation_fixes(text: str) -> str:
+    return TRUNCATION_FIXES.get(text, text)
+
+
+def merge_wrapped_headings(events: list[tuple]) -> list[tuple]:
+    """The source wraps long h1s AND h2s onto a second heading of the
+    same type ("II. Schéma bipartite" / "trinitaire-christologique." or
+    "Chap. 5. Le culte et la vénération qui sont dus à ce très" / "saint
+    sacrement."). Merge a continuation that doesn't look like a fresh
     standalone heading into the previous one. Heuristic: continuation
-    starts with lowercase, a digit, a leading colon/paren, or a French
-    month name."""
+    starts with lowercase, a digit, a leading colon/paren, a French
+    month name, a Roman pope-ordinal, or "qu'" / "l'" elision."""
     out: list[tuple] = []
     for ev in events:
         if (
-            ev[0] == "h1"
+            ev[0] in ("h1", "h2")
             and out
-            and out[-1][0] == "h1"
+            and out[-1][0] == ev[0]
             and CONTINUATION_PREFIX_RE.match(ev[1])
         ):
-            out[-1] = ("h1", out[-1][1] + " " + ev[1])
+            out[-1] = (ev[0], out[-1][1] + " " + ev[1])
             continue
         out.append(ev)
-    return out
+    # Apply manual truncation fixes for headings the source export
+    # truncates mid-text. Covers both h1 (pope/council blocks) and h2
+    # (document / chapter headings).
+    return [
+        (e[0], apply_truncation_fixes(e[1])) if e[0] in ("h1", "h2") else e
+        for e in out
+    ]
 
 
 def main() -> None:
@@ -272,7 +342,7 @@ def main() -> None:
     for k in pages:
         html = fetch_cached(k)
         events = parse_body_page(html)
-        events = merge_wrapped_h1(events)
+        events = merge_wrapped_headings(events)
         all_events.extend(events)
     print(f"  {len(all_events)} events")
 
