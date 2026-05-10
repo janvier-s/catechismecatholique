@@ -73,21 +73,29 @@
 		aria-expanded={open}
 	>
 		<svg
-			width="16"
-			height="14"
-			viewBox="0 0 16 14"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="1.5"
-			stroke-linecap="round"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 256 256"
+			class="w-[18px] h-[18px]"
 			aria-hidden="true"
 		>
-			<line x1="1" y1="2" x2="15" y2="2" />
-			<line x1="1" y1="7" x2="15" y2="7" />
-			<line x1="1" y1="12" x2="15" y2="12" />
-			<circle cx="5" cy="2" r="2" fill="currentColor" stroke="none" />
-			<circle cx="11" cy="7" r="2" fill="currentColor" stroke="none" />
-			<circle cx="7" cy="12" r="2" fill="currentColor" stroke="none" />
+			<circle
+				cx="128"
+				cy="128"
+				r="40"
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="16"
+			/>
+			<path
+				d="M130.05,206.11c-1.34,0-2.69,0-4,0L94,224a104.61,104.61,0,0,1-34.11-19.2l-.12-36c-.71-1.12-1.38-2.25-2-3.41L25.9,147.24a99.15,99.15,0,0,1,0-38.46l31.84-18.1c.65-1.15,1.32-2.29,2-3.41l.16-36A104.58,104.58,0,0,1,94,32l32,17.89c1.34,0,2.69,0,4,0L162,32a104.61,104.61,0,0,1,34.11,19.2l.12,36c.71,1.12,1.38,2.25,2,3.41l31.85,18.14a99.15,99.15,0,0,1,0,38.46l-31.84,18.1c-.65,1.15-1.32,2.29-2,3.41l-.16,36A104.58,104.58,0,0,1,162,224Z"
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="16"
+			/>
 		</svg>
 	</button>
 

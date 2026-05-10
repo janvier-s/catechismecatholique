@@ -34,9 +34,4 @@
 		flex: 1 1 auto;
 		min-width: 0;
 	}
-	@media (max-width: 640px) {
-		.breadcrumb-row {
-			padding: 0 1rem;
-		}
-	}
 </style>

@@ -520,11 +520,14 @@
 				'mark'
 				'prose';
 			gap: 0.4rem;
-			justify-items: center;
-			text-align: center;
+			justify-items: start;
+			text-align: left;
+		}
+		.daily-eyebrow {
+			text-align: left;
 		}
 		.daily-mark {
-			justify-content: center;
+			justify-content: flex-start;
 			margin-top: 0;
 		}
 		.daily-text {

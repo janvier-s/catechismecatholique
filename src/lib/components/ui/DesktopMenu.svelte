@@ -178,16 +178,46 @@
 		aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
 		onclick={() => (open = !open)}
 	>
-		<svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
-			<circle cx="4" cy="4" r="1.3" />
-			<circle cx="9" cy="4" r="1.3" />
-			<circle cx="14" cy="4" r="1.3" />
-			<circle cx="4" cy="9" r="1.3" />
-			<circle cx="9" cy="9" r="1.3" />
-			<circle cx="14" cy="9" r="1.3" />
-			<circle cx="4" cy="14" r="1.3" />
-			<circle cx="9" cy="14" r="1.3" />
-			<circle cx="14" cy="14" r="1.3" />
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 256 256"
+			width="20"
+			height="20"
+			aria-hidden="true"
+		>
+			<line
+				x1="40"
+				y1="64"
+				x2="216"
+				y2="64"
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="16"
+			/>
+			<line
+				x1="40"
+				y1="128"
+				x2="216"
+				y2="128"
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="16"
+			/>
+			<line
+				x1="40"
+				y1="192"
+				x2="216"
+				y2="192"
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="16"
+			/>
 		</svg>
 	</button>
 
