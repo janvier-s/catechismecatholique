@@ -1,11 +1,11 @@
 {
   "corpus": "denzinger",
   "title": "Denzinger — Enchiridion Symbolorum",
-  "subtitle": "Symboles et Définitions de la Foi Catholique",
+  "subtitle": "Symboles et définitions de la Foi catholique (37e édition)",
   "parts": [
     {
       "slug": "1-symboles-de-foi",
-      "title": "Symboles de Foi",
+      "title": "Première partie",
       "range": [
         1,
         76
@@ -14,12 +14,384 @@
     },
     {
       "slug": "2-magistere-de-leglise",
-      "title": "Documents du Magistère de l’Église",
+      "title": "Deuxième partie",
       "range": [
         101,
         3930
       ],
-      "count": 2553
+      "count": 2782
+    }
+  ],
+  "sections": [
+    {
+      "slug": "sec-2-symbole-de-foi",
+      "title": "Symbole de foi",
+      "part_slug": "1-symboles-de-foi",
+      "range": [
+        1,
+        6
+      ],
+      "count": 6
+    },
+    {
+      "slug": "sec-6-symbole-des-aptres",
+      "title": "Symbole des Apôtres",
+      "part_slug": "1-symboles-de-foi",
+      "range": [
+        10,
+        36
+      ],
+      "count": 14
+    },
+    {
+      "slug": "sec-8-symboles-locaux",
+      "title": "Symboles Locaux",
+      "part_slug": "1-symboles-de-foi",
+      "range": [
+        40,
+        55
+      ],
+      "count": 10
+    },
+    {
+      "slug": "sec-11-orientales",
+      "title": "Orientales",
+      "part_slug": "1-symboles-de-foi",
+      "range": [
+        60,
+        64
+      ],
+      "count": 5
+    },
+    {
+      "slug": "sec-12-ii-schma-bipartite-trinitairechristologique",
+      "title": "II. Schéma bipartite trinitaire-christologique.",
+      "part_slug": "1-symboles-de-foi",
+      "range": [
+        72,
+        76
+      ],
+      "count": 3
+    },
+    {
+      "slug": "sec-13-documents-du-magistere-de-leglise-1013997",
+      "title": "DOCUMENTS DU MAGISTERE DE L'EGLISE (101-3997)",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        101,
+        115
+      ],
+      "count": 9
+    },
+    {
+      "slug": "sec-14-15-janvier-3",
+      "title": "(15 janvier ?) 3",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        117,
+        121
+      ],
+      "count": 4
+    },
+    {
+      "slug": "sec-15-11-janvier-31",
+      "title": "?) - 11 janvier 31",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        123,
+        123
+      ],
+      "count": 1
+    },
+    {
+      "slug": "sec-16-1er-concile-de-nicee-1er-oecumnique-19-juin25-aot-325",
+      "title": "1er concile de NICEE (1er oecuménique) 19 juin-25 août 325",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        125,
+        143
+      ],
+      "count": 16
+    },
+    {
+      "slug": "sec-17-decembre-384",
+      "title": "DECEMBRE 384",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        144,
+        149
+      ],
+      "count": 5
+    },
+    {
+      "slug": "sec-18-1er-concile-de-constantinople-2e-concile-oecumnique",
+      "title": "1er concile de CONSTANTINOPLE (2e concile Oecuménique)",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        150,
+        185
+      ],
+      "count": 10
+    },
+    {
+      "slug": "sec-20-carthage-28-aot-397",
+      "title": "Carthage, 28 août 397",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        186,
+        249
+      ],
+      "count": 27
+    },
+    {
+      "slug": "sec-22-oecumnique-22-juin-septembre-431",
+      "title": "Oecuménique) 22 juin - septembre 431",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        250,
+        299
+      ],
+      "count": 22
+    },
+    {
+      "slug": "sec-24-oecumnique-8-octobre-dbut-de-novembre-451",
+      "title": "Oecuménique) 8 octobre - début de novembre 451",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        300,
+        347
+      ],
+      "count": 24
+    },
+    {
+      "slug": "sec-25-49221-novembre-496",
+      "title": "492-21 novembre 496",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        348,
+        355
+      ],
+      "count": 7
+    },
+    {
+      "slug": "sec-26-anastase-ii",
+      "title": "ANASTASE II :",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        356,
+        356
+      ],
+      "count": 1
+    },
+    {
+      "slug": "sec-27-24-novembre-49617",
+      "title": "24 novembre 496-17",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        357,
+        362
+      ],
+      "count": 5
+    },
+    {
+      "slug": "sec-28-juillet-514",
+      "title": "juillet 514",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        363,
+        397
+      ],
+      "count": 11
+    },
+    {
+      "slug": "sec-29-boniface",
+      "title": "BONIFACE",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        398,
+        420
+      ],
+      "count": 10
+    },
+    {
+      "slug": "sec-31-5e-oecumnique-5-mai2-juin-553",
+      "title": "(5e oecuménique) 5 mai-2 juin 553",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        421,
+        480
+      ],
+      "count": 22
+    },
+    {
+      "slug": "sec-32-deusdedit-adodat",
+      "title": "DEUSDEDIT (Adéodat",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        485,
+        548
+      ],
+      "count": 21
+    },
+    {
+      "slug": "sec-34-6e-oecumnique-7-novembre-68016-septembre-681",
+      "title": "(6e oecuménique) 7 novembre 680-16 septembre 681.",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        550,
+        586
+      ],
+      "count": 16
+    },
+    {
+      "slug": "sec-35-mars-752",
+      "title": "mars 752",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        587,
+        596
+      ],
+      "count": 6
+    },
+    {
+      "slug": "sec-37-7e-oecumnique-24-septembre-23-octobre-787",
+      "title": "(7e Oecuménique) 24 septembre - 23 octobre 787",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        600,
+        675
+      ],
+      "count": 35
+    },
+    {
+      "slug": "sec-38-jean-xix-avril-mai-1024-1032",
+      "title": "JEAN XIX avril - mai 1024 - 1032",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        680,
+        687
+      ],
+      "count": 3
+    },
+    {
+      "slug": "sec-39-io5729-mars-1058",
+      "title": "IO57-29 mars 1058",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        690,
+        750
+      ],
+      "count": 26
+    },
+    {
+      "slug": "sec-41-latran-11e-oecum-519-22-mar",
+      "title": "LATRAN (11e oecum 5-19 (22?) mar",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        751,
+        799
+      ],
+      "count": 38
+    },
+    {
+      "slug": "sec-43-12eme-oecumniq-1130-novembre-1215",
+      "title": "(12eme Oecuméniq 11-30 novembre 1215",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        800,
+        1357
+      ],
+      "count": 99
+    },
+    {
+      "slug": "sec-44-aot-1458-14-aot",
+      "title": "Août 1458 - 14 Août",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        1361,
+        1497
+      ],
+      "count": 26
+    },
+    {
+      "slug": "sec-47-dcembre-15454-dcemb",
+      "title": "Décembre 1545-4 décemb",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        1500,
+        1630
+      ],
+      "count": 32
+    },
+    {
+      "slug": "sec-48-jules",
+      "title": "JULES",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        1635,
+        1725
+      ],
+      "count": 29
+    },
+    {
+      "slug": "sec-49-dcembre-15599-dcem",
+      "title": "Décembre 1559-9 décem",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        1726,
+        1995
+      ],
+      "count": 48
+    },
+    {
+      "slug": "sec-50-leon",
+      "title": "LEON",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        1997,
+        2588
+      ],
+      "count": 63
+    },
+    {
+      "slug": "sec-51-septembre-1774",
+      "title": "septembre 1774",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        2590,
+        2598
+      ],
+      "count": 3
+    },
+    {
+      "slug": "sec-52-erreurs-du-synode-de-pistoie",
+      "title": "Erreurs du Synode de Pistoie",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        2600,
+        2724
+      ],
+      "count": 64
+    },
+    {
+      "slug": "sec-53-gregoire-xvi-2-fvrier-183l-1er-juin",
+      "title": "GREGOIRE XVI ; 2 février 183l - 1er juin",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        2725,
+        2999
+      ],
+      "count": 68
+    },
+    {
+      "slug": "sec-55-20e-oecumnique-8-dcembre-186920-octobre-1870",
+      "title": "(20e oecuménique) 8 décembre 1869-20 octobre 1870",
+      "part_slug": "2-magistere-de-leglise",
+      "range": [
+        3000,
+        3930
+      ],
+      "count": 222
     }
   ],
   "all_numbers": [
@@ -291,8 +663,137 @@
     343,
     345,
     347,
-    495,
-    496,
+    348,
+    349,
+    350,
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    359,
+    360,
+    361,
+    362,
+    363,
+    364,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370,
+    371,
+    372,
+    373,
+    374,
+    375,
+    376,
+    377,
+    378,
+    379,
+    380,
+    381,
+    382,
+    383,
+    384,
+    385,
+    386,
+    387,
+    388,
+    389,
+    390,
+    391,
+    392,
+    393,
+    394,
+    395,
+    396,
+    397,
+    398,
+    399,
+    400,
+    401,
+    402,
+    403,
+    404,
+    405,
+    406,
+    407,
+    408,
+    409,
+    410,
+    411,
+    412,
+    413,
+    414,
+    415,
+    416,
+    417,
+    418,
+    419,
+    420,
+    421,
+    423,
+    424,
+    425,
+    426,
+    427,
+    428,
+    429,
+    430,
+    431,
+    432,
+    433,
+    434,
+    435,
+    436,
+    437,
+    438,
+    441,
+    442,
+    443,
+    444,
+    445,
+    446,
+    447,
+    451,
+    452,
+    453,
+    454,
+    455,
+    456,
+    457,
+    458,
+    459,
+    460,
+    461,
+    462,
+    463,
+    464,
+    468,
+    469,
+    470,
+    472,
+    473,
+    474,
+    475,
+    476,
+    477,
+    478,
+    479,
+    480,
+    485,
+    486,
+    487,
+    488,
+    490,
+    491,
+    492,
+    493,
     497,
     498,
     500,
@@ -805,6 +1306,7 @@
     1153,
     1154,
     1155,
+    1156,
     1157,
     1158,
     1159,
@@ -825,6 +1327,7 @@
     1174,
     1175,
     1176,
+    1177,
     1178,
     1179,
     1180,
@@ -1124,7 +1627,6 @@
     1571,
     1572,
     1573,
-    1574,
     1575,
     1576,
     1577,
@@ -1546,7 +2048,6 @@
     2135,
     2136,
     2137,
-    2138,
     2139,
     2140,
     2141,
@@ -1637,7 +2138,6 @@
     2243,
     2244,
     2245,
-    2246,
     2247,
     2248,
     2249,
@@ -1761,6 +2261,7 @@
     2430,
     2431,
     2432,
+    2433,
     2434,
     2435,
     2436,
@@ -1831,6 +2332,7 @@
     2501,
     2502,
     2509,
+    2510,
     2511,
     2512,
     2513,
@@ -1869,10 +2371,58 @@
     2552,
     2553,
     2554,
-    2555,
     2556,
     2557,
     2558,
+    2559,
+    2560,
+    2561,
+    2562,
+    2564,
+    2565,
+    2566,
+    2567,
+    2568,
+    2569,
+    2570,
+    2571,
+    2572,
+    2573,
+    2574,
+    2575,
+    2580,
+    2581,
+    2582,
+    2583,
+    2584,
+    2585,
+    2588,
+    2590,
+    2592,
+    2593,
+    2594,
+    2595,
+    2596,
+    2597,
+    2598,
+    2600,
+    2601,
+    2602,
+    2603,
+    2604,
+    2605,
+    2606,
+    2607,
+    2608,
+    2609,
+    2610,
+    2611,
+    2612,
+    2613,
+    2614,
+    2615,
+    2616,
+    2617,
     2618,
     2619,
     2620,
@@ -1967,6 +2517,56 @@
     2722,
     2723,
     2724,
+    2725,
+    2726,
+    2727,
+    2730,
+    2731,
+    2732,
+    2738,
+    2739,
+    2740,
+    2743,
+    2745,
+    2746,
+    2750,
+    2751,
+    2752,
+    2753,
+    2754,
+    2755,
+    2756,
+    2758,
+    2759,
+    2760,
+    2762,
+    2763,
+    2765,
+    2766,
+    2767,
+    2768,
+    2769,
+    2771,
+    2772,
+    2775,
+    2776,
+    2777,
+    2778,
+    2779,
+    2780,
+    2781,
+    2782,
+    2783,
+    2784,
+    2785,
+    2791,
+    2792,
+    2795,
+    2800,
+    2801,
+    2802,
+    2803,
+    2804,
     2811,
     2812,
     2813,
@@ -2026,6 +2626,7 @@
     2893,
     2894,
     2895,
+    2896,
     2901,
     2902,
     2903,

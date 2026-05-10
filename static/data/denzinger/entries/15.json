@@ -1,8 +1,11 @@
 {
   "n": 15,
-  "title": "Evêque de Ravenne de 433 à 458",
-  "html": "<p>Je crois en Dieu, le Père tout-puissant, et en Christ Jésus, son Fils unique, notre Seigneur, qui est né de l'Esprit Saint, de Marie la Vierge, qui sous Ponce Pilate a été crucifié et enseveli, le troisième jour est ressuscité d'entre les morts, est monté aux cieux, siège à la droite du Père, d'où il viendra juger les vivants et les morts. Je crois (60 : nous croyons) en l'Esprit Saint, la sainte Eglise (62 : catholique), la rémission des péchés, la résurrection de la chair, la vie éternelle.</p><p>Tyrannius Rufinus : Expositio (ou Commentarius) in symbolum. écrit vers 404, symbole d'Aquilée, sa patrie</p>",
+  "title": "Tyrannius Rufinus : Expositio (ou Commentarius) in symbolum.",
+  "html": "<p>Je crois en Dieu, le Père tout-puissant, et en Christ Jésus, son Fils unique, notre Seigneur, qui est né de l'Esprit Saint, de Marie la Vierge, qui sous Ponce Pilate a été crucifié et enseveli, le troisième jour est ressuscité d'entre les morts, est monté aux cieux, siège à la droite du Père, d'où il viendra juger les vivants et les morts.<br> Je crois (60 : nous croyons) en l'Esprit Saint, la sainte Eglise (62 : catholique), la rémission des péchés, la résurrection de la chair, la vie éternelle.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-6-symbole-des-aptres",
+  "section_title": "Symbole des Apôtres",
+  "document": "tradition du symbole",
+  "pope": null
 }

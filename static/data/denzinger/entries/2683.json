@@ -1,8 +1,11 @@
 {
   "n": 2683,
-  "title": "",
-  "html": "<p>83. La règle III qui, après avoir dit : \"un petit corps demeurant au sein de la société civile sans être vraiment une partie, et qui constitue dans l'état une petite monarchie est toujours dangereux\", accuse pour cette raison les monastères privés, groupés par le lien d'un institut commun, sous un seul chef, d'être autant de monarchies particulières, dangereuses et nocives pour la république civile,</p><p>(est) fausse, téméraire, fait injure aux instituts réguliers approuvés par le Saint-Siège en vue du progrès de la religion, favorise les attaques et les calomnies des hérétiques à l'égard de ces instituts.</p><p>Du système ou de l'ensemble des ordonnances tirées des règles susdites, ramené aux huit articles suivants pour la réforme des réguliers</p>",
+  "title": "Du système ou de l'ensemble des ordonnances tirées des règles",
+  "html": "<p>83. La règle III qui, après avoir dit : \"un petit corps demeurant au sein de la société civile sans être vraiment une partie, et qui constitue dans l'état une petite monarchie est toujours dangereux\", accuse pour cette raison les monastères privés, groupés par le lien d'un institut commun, sous un seul chef, d'être autant de monarchies particulières, dangereuses et nocives pour la république civile,<br> (est) fausse, téméraire, fait injure aux instituts réguliers approuvés par le Saint-Siège en vue du progrès de la religion, favorise les attaques et les calomnies des hérétiques à l'égard de ces instituts.</p>",
   "part_slug": "2-magistere-de-leglise",
-  "pope": null,
-  "document": "Encyclique \"Vix pervenit\" aux évêques d'Italie, 1er novembre"
+  "part_title": "Deuxième partie",
+  "section_slug": "sec-52-erreurs-du-synode-de-pistoie",
+  "section_title": "Erreurs du Synode de Pistoie",
+  "document": "Des trois règles posées par le synode pour être le fondement de la",
+  "pope": "PIE VI : 15 Février 1775-29 août 1799"
 }

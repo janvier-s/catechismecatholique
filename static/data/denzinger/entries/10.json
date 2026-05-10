@@ -1,8 +1,11 @@
 {
   "n": 10,
-  "title": "",
-  "html": "<p>(Crois-tu en Dieu, le Père tout-puissant ?) Crois-tu au Christ Jésus, le Fils de Dieu, qui est né par le Saint-Esprit de Marie, la Vierge, et a été crucifié sous Ponce Pilate, et est mort, et a été enseveli, et est ressuscité le troisième jour vivant d'entre les morts, et est monté aux cieux, et siège à la droite du Père, et qui viendra juger les vivants et les morts ? Crois-tu en l'Esprit-Saint, et la Sainte Eglise et la résurrection de la chair ?</p><p>Psautier du roi Aethelstan. (livre liturgique début IXs). Ce symbole fait partie des formes les plus anciennes</p>",
+  "title": "Psautier du roi Aethelstan. (livre liturgique début IXs).",
+  "html": "<p>(Crois-tu en Dieu, le Père tout-puissant ?) Crois-tu au Christ Jésus, le Fils de Dieu, qui est né par le Saint-Esprit de Marie, la Vierge, et a été crucifié sous Ponce Pilate, et est mort, et a été enseveli, et est ressuscité le troisième jour vivant d'entre les morts, et est monté aux cieux, et siège à la droite du Père, et qui viendra juger les vivants et les morts ? Crois-tu en l'Esprit-Saint, et la Sainte Eglise et la résurrection de la chair ?</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-6-symbole-des-aptres",
+  "section_title": "Symbole des Apôtres",
+  "document": "Hippolyte de Rome , \" Traditio apostolica \" (version latine).",
+  "pope": null
 }

@@ -1,8 +1,11 @@
 {
   "n": 1,
-  "title": "",
-  "html": "<p>( oeuvre apocryphe, écrite vers 160-170) au Père, souverain de l'Univers, et en Jésus Christ (notre Sauveur), et au Saint-Esprit (Paraclet), et en la sainte Eglise, et en la rémission des péchés.</p><p>Papyrus liturgique de Dêr-Balyzeh. (liturgie du 4ème s).</p>",
+  "title": "Lettre des apôtres (version éthiopienne).",
+  "html": "<p>( oeuvre apocryphe, écrite vers 160-170)</p><p>au Père, souverain de l'Univers, et en Jésus Christ (notre Sauveur), et au Saint-Esprit (Paraclet), et en la sainte Eglise, et en la rémission des péchés.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Lettre des apôtres (version éthiopienne)."
+  "part_title": "Première partie",
+  "section_slug": "sec-2-symbole-de-foi",
+  "section_title": "Symbole de foi",
+  "document": null,
+  "pope": null
 }

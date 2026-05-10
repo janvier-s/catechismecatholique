@@ -1,8 +1,11 @@
 {
   "n": 14,
-  "title": "tradition du symbole Sermons 212 à 215 citent le même symbole à peu près, vers 392",
-  "html": "<p>Je crois en Dieu, le père tout-puissant, et en Jésus Christ, son Fils unique, notre Seigneur, qui est né de l'Esprit Saint et de la Vierge Marie ( a souffert ) sous Ponce Pilate a été crucifié et enseveli, le</p><p>troisième jour est ressuscité d'entre les morts, est monté au ciel, siège à la droite du Père, d'où il viendra pour juger les vivants et les morts ; et en l'Esprit Saint, en la sainte Eglise, la rémission des péchés, la résurrection de la chair.</p><p>Pierre Chrysologue : Sermons 57-62. Evêque de Ravenne de 433 à 458</p>",
+  "title": "Pierre Chrysologue : Sermons 57-62.",
+  "html": "<p>Je crois en Dieu, le père tout-puissant, et en Jésus Christ, son Fils unique, notre Seigneur, qui est né de l'Esprit Saint et de la Vierge Marie ( a souffert ) sous Ponce Pilate a été crucifié et enseveli, le troisième jour est ressuscité d'entre les morts, est monté au ciel, siège à la droite du Père, d'où il viendra pour juger les vivants et les morts ;<br> et en l'Esprit Saint, en la sainte Eglise, la rémission des péchés, la résurrection de la chair.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-6-symbole-des-aptres",
+  "section_title": "Symbole des Apôtres",
+  "document": "tradition du symbole",
+  "pope": null
 }

@@ -482,10 +482,10 @@ async function main() {
 		endStep('source not found — skipped');
 	}
 
-	logStep('extracting Denzinger (Enchiridion Symbolorum, Fr — JesusMarie PDF)');
-	const denzingerPdf = join(SOURCES, 'denzinger/source.pdf');
+	logStep('extracting Denzinger (Enchiridion Symbolorum — catho.org HTML)');
+	const denzingerCacheDir = join(SOURCES, 'denzinger/cache');
 	const denzingerOutDir = join(OUT, 'denzinger');
-	if (existsSync(denzingerPdf)) {
+	if (existsSync(denzingerCacheDir) || existsSync(join(SOURCES, 'denzinger'))) {
 		mkdirSync(denzingerOutDir, { recursive: true });
 		const script = new URL('./prepare/denzinger/extract.py', import.meta.url).pathname;
 		const { spawnSync } = await import('node:child_process');

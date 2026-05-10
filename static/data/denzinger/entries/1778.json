@@ -1,8 +1,11 @@
 {
   "n": 1778,
-  "title": "",
-  "html": "<p>8. Si quelqu'un dit que les évêques qui sont choisis par l'autorité du pontife romain ne sont pas de légitimes et véritables évêques, mais une invention humaine : qu'il soit anathème.</p><p>24ème session, 11 novembre 1563. Doctrine et canons sur le sacrement de mariage</p>",
+  "title": "24ème session, 11 novembre 1563.",
+  "html": "<p>8. Si quelqu'un dit que les évêques qui sont choisis par l'autorité du pontife romain ne sont pas de légitimes et véritables évêques, mais une invention humaine : qu'il soit anathème.</p>",
   "part_slug": "2-magistere-de-leglise",
-  "pope": null,
-  "document": "Canons sur le sacrement de l'ordre"
+  "part_title": "Deuxième partie",
+  "section_slug": "sec-49-dcembre-15599-dcem",
+  "section_title": "Décembre 1559-9 décem",
+  "document": "23e session, 15 juillet 1563-doctrine et canons sur le",
+  "pope": "PIE IV : 25"
 }

@@ -36,6 +36,9 @@
 		{:else}
 			<h1 class="title title-num">N° {data.entry.n}</h1>
 		{/if}
+		{#if data.entry.pope}
+			<p class="pope">{data.entry.pope}</p>
+		{/if}
 		{#if data.entry.document}
 			<p class="document">{frenchPunct(data.entry.document)}</p>
 		{/if}
@@ -111,9 +114,18 @@
 		color: var(--color-muted);
 		font-weight: 500;
 	}
+	.pope {
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 1rem 0 0.25rem;
+	}
 	.document {
 		max-width: 44ch;
-		margin: 0.85rem auto 0;
+		margin: 0.5rem auto 0;
 		font-style: italic;
 		font-size: 0.95rem;
 		line-height: 1.6;

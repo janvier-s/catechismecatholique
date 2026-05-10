@@ -1,8 +1,11 @@
 {
   "n": 23,
-  "title": "",
-  "html": "<p>Je crois (Crois-tu..?) en Dieu, le Père tout-puissant, et en Jésus Christ, son Fils unique, notre Dieu et Seigneur, qui est né de l'Esprit Saint et (de) Marie la Vierge, qui a souffert sous Ponce Pilate, a été crucifié et enseveli, est descendu aux enfers, le troisième jour est ressuscité vivant d'entre les morts, est monté aux cieux, siège à la droite de Dieu le Père tout-puissant (du Père), d'où il viendra juger les vivants et les morts. Je crois (Crois-tu...?) en l'Esprit saint, la sainte Eglise catholique, la rémission de tous les péchés, la</p><p>résurrection de la (de cette) chair et la vie éternelle.</p><p>Fragments d'un symbole gaulois plus ancien, (Cyprien, Ev. de Toulon vers 530 + Fauste, Ev. de Riez vers 470)</p>",
+  "title": "Ildefonse de Tolède : De cognitione baptismi. (659-669)",
+  "html": "<p>Je crois (Crois-tu..?) en Dieu, le Père tout-puissant, et en Jésus Christ, son Fils unique, notre Dieu et Seigneur, qui est né de l'Esprit Saint et (de) Marie la Vierge, qui a souffert sous Ponce Pilate, a été crucifié et enseveli,<br> est descendu aux enfers, le troisième jour est ressuscité vivant d'entre les morts, est monté aux cieux, siège à la droite de Dieu le Père tout-puissant (du Père), d'où il viendra juger les vivants et les morts. Je crois (Crois-tu...?) en l'Esprit saint, la sainte Eglise catholique, la rémission de tous les péchés, la résurrection de la (de cette) chair et la vie éternelle.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-6-symbole-des-aptres",
+  "section_title": "Symbole des Apôtres",
+  "document": "Nicétas, évêque de Remesiana: explication du symbole.",
+  "pope": null
 }

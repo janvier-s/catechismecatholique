@@ -1,8 +1,11 @@
 {
   "n": 40,
-  "title": "",
-  "html": "<p>Nous croyons en un seul Dieu, Père tout-puissant, créateur de toutes les choses visibles et invisibles. Et en un seul Seigneur Jésus Christ, le Verbe de Dieu, Dieu de Dieu, lumière de lumière, vie de vie, Fils, unique engendré, premier-né de toutes les créatures, engendré du Père avant tous les siècles, par qui également tout a été fait, qui, pour notre salut s'est incarné et a demeuré parmi les hommes, a souffert, le troisième jour est ressuscité monté vers le Père, et viendra à nouveau dans la gloire juger les vivants et les morts. Nous croyons également en un seul Esprit Saint.</p><p>Cyrille, évêque de Jérusalem : Catéchèse VI-XVIII, vers 348. ( texte reconstitué à partir de catéchèses)</p>",
+  "title": "Cyrille, évêque de Jérusalem : Catéchèse VI-XVIII, vers 348.",
+  "html": "<p>Nous croyons en un seul Dieu, Père tout-puissant, créateur de toutes les choses visibles et invisibles.<br> Et en un seul Seigneur Jésus Christ, le Verbe de Dieu, Dieu de Dieu, lumière de lumière, vie de vie, Fils, unique engendré, premier-né de toutes les créatures, engendré du Père avant tous les siècles, par qui également tout a été fait, qui, pour notre salut s'est incarné et a demeuré parmi les hommes, a souffert, le troisième jour est ressuscité monté vers le Père, et viendra à nouveau dans la gloire juger les vivants et les morts. Nous croyons également en un seul Esprit Saint.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-8-symboles-locaux",
+  "section_title": "Symboles Locaux",
+  "document": "Eusèbe, évêque de Césarée : Lettre à son diocèse, 325.",
+  "pope": null
 }

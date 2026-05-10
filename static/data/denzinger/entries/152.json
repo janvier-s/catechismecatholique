@@ -1,8 +1,11 @@
 {
   "n": 152,
-  "title": "d'Antioche, 152 Trinité et Incarnation",
+  "title": "Trinité et Incarnation",
   "html": "<p>Parce que après le concile de Nicée a surgi cette erreur, et que certains osèrent dire d'une bouche sacrilège que l'Esprit Saint a été fait par le Fils :</p>",
   "part_slug": "2-magistere-de-leglise",
-  "pope": null,
-  "document": "Concile de Rome. 382."
+  "part_title": "Deuxième partie",
+  "section_slug": "sec-18-1er-concile-de-constantinople-2e-concile-oecumnique",
+  "section_title": "1er concile de CONSTANTINOPLE (2e concile Oecuménique)",
+  "document": "d'Antioche, 152",
+  "pope": "DAMASE Ier : 1er OCTOBRE 366 - 11"
 }

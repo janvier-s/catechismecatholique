@@ -1,8 +1,11 @@
 {
   "n": 5,
-  "title": "",
+  "title": "c) Version éthiopienne sous forme affirmative.",
   "html": "<p>Je crois en un seul Dieu, le Père, souverain de toutes choses, et en un seul Fils, le Seigneur Jésus Christ, et au Saint-Esprit, et en la résurrection de la chair, et en la sainte Eglise une, catholique.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole baptismal de l'Eglise arménienne(Petit symbole de foi)"
+  "part_title": "Première partie",
+  "section_slug": "sec-2-symbole-de-foi",
+  "section_title": "Symbole de foi",
+  "document": "Constitutions de l'Eglise égyptienne, vers 500.",
+  "pope": null
 }

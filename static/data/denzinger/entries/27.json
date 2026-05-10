@@ -1,8 +1,11 @@
 {
   "n": 27,
-  "title": "symbole",
-  "html": "<p>Je crois en Dieu, le Père tout-puissant, créateur du ciel et de la terre. Je crois également en Jésus Christ, son Fils, unique engendré, éternel, qui a été conçu de l'Esprit Saint, est né de Marie la Vierge, a souffert sous Ponce Pilate, a été crucifié, est mort et a été enseveli, est descendu aux enfers ; le troisième jour il est ressuscité d'entre les morts, est monté aux cieux, siège à la droite de Dieu le Père tout-puissant, d'où il viendra juger les vivants et les morts. Je crois au Saint-Esprit, la sainte Eglise catholique, la communion des saints, la rémission des péchés, la vie éternelle.</p><p>Pirmin : Collection de textes de divers livres canoniques. (Gaule Narbonnaise vers 720 )</p>",
+  "title": "Missale Gallicanum Vetus : Sermon (9 de Césaire d'Arles) sur le",
+  "html": "<p>Je crois en Dieu, le Père tout-puissant, créateur du ciel et de la terre. Je crois également en Jésus Christ, son Fils, unique engendré, éternel, qui a été conçu de l'Esprit Saint, est né de Marie la Vierge, a souffert sous Ponce Pilate, a été crucifié, est mort et a été enseveli, est descendu aux enfers ; le troisième jour il est ressuscité d'entre les morts, est monté aux cieux, siège à la droite de Dieu le Père tout-puissant, d'où il viendra juger les vivants et les morts.<br> Je crois au Saint-Esprit, la sainte Eglise catholique, la communion des saints, la rémission des péchés, la vie éternelle.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-6-symbole-des-aptres",
+  "section_title": "Symbole des Apôtres",
+  "document": "Fragments d'un symbole gaulois plus ancien,",
+  "pope": null
 }

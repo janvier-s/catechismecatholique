@@ -1,8 +1,11 @@
 {
   "n": 2,
-  "title": "",
-  "html": "<p>(Fragment du VIs découvert en Haute Egypte, contient la liturgie du milieu du IVs. Le symbole semble plus ancien). Je crois en Dieu Père tout-puissant, et en son Fils, unique engendré, notre Seigneur Jésus Christ et en l'Esprit Saint, et en la résurrection de la chair, dans la sainte Eglise catholique.</p><p>a) Version copte : symbole baptismal.</p>",
+  "title": "Papyrus liturgique de Dêr-Balyzeh. (liturgie du 4ème s).",
+  "html": "<p>(Fragment du VIs découvert en Haute Egypte, contient la liturgie du milieu du IVs. Le symbole semble plus ancien).</p><p>Je crois en Dieu Père tout-puissant, et en son Fils, unique engendré, notre Seigneur Jésus Christ et en l'Esprit Saint, et en la résurrection de la chair, dans la sainte Eglise catholique.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Constitutions de l'Eglise égyptienne, vers 500."
+  "part_title": "Première partie",
+  "section_slug": "sec-2-symbole-de-foi",
+  "section_title": "Symbole de foi",
+  "document": null,
+  "pope": null
 }

@@ -824,7 +824,10 @@ export interface DenzingerEntry {
 	n: number;
 	title: string;
 	html: string;
-	part_slug: string;
+	part_slug: string | null;
+	part_title: string | null;
+	section_slug: string | null;
+	section_title: string | null;
 	pope: string | null;
 	document: string | null;
 }

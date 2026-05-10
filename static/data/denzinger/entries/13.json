@@ -1,8 +1,11 @@
 {
   "n": 13,
-  "title": "sans doute transcrite par un scribe selon St Ambroise avant 397",
-  "html": "<p>Je crois en Dieu, le Père tout puissant et en Jésus Christ, son Fils unique, notre Seigneur, qui est né du Saint-Esprit, de Marie la Vierge, a souffert sous Ponce Pilate, est mort, a été enseveli, le troisième jour est ressuscité d'entre les morts, est monté aux cieux, siège à la droite du Père, d'où il viendra juger les vivants et les morts ; et en l'esprit Saint, la sainte Eglise, la rémission des péchés, la résurrection de la chair.</p><p>Augustin : Sermon 213 (\"Sermo Guelferbytanus\") lors de la tradition du symbole Sermons 212 à 215 citent le même symbole à peu près, vers 392</p>",
+  "title": "Augustin : Sermon 213 (\"Sermo Guelferbytanus\") lors de la",
+  "html": "<p>Je crois en Dieu, le Père tout puissant et en Jésus Christ, son Fils unique, notre Seigneur, qui est né du Saint-Esprit, de Marie la Vierge, a souffert sous Ponce Pilate, est mort, a été enseveli, le troisième jour est ressuscité d'entre les morts, est monté aux cieux, siège à la droite du Père, d'où il viendra juger les vivants et les morts ; et en l'esprit Saint, la sainte Eglise, la rémission des péchés, la résurrection de la chair.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-6-symbole-des-aptres",
+  "section_title": "Symbole des Apôtres",
+  "document": "Ambroise, évêque de Milan : Explanatio Symboli.",
+  "pope": null
 }

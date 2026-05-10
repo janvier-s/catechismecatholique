@@ -1,8 +1,11 @@
 {
   "n": 2980,
-  "title": "",
-  "html": "<p>80. Le pontife romain peut et doit se réconcilier et composer avec le progrès, le libéralisme et la culture moderne.</p><p>Instruction de la Sacrée Pénitencerie, 15 janvier 1866. Le mariage civil</p>",
+  "title": "Instruction de la Sacrée Pénitencerie, 15 janvier 1866.",
+  "html": "<p>80. Le pontife romain peut et doit se réconcilier et composer avec le progrès, le libéralisme et la culture moderne.</p>",
   "part_slug": "2-magistere-de-leglise",
-  "pope": null,
-  "document": "Encyclique \"Quanta cura\", 8 décembre 1864."
+  "part_title": "Deuxième partie",
+  "section_slug": "sec-53-gregoire-xvi-2-fvrier-183l-1er-juin",
+  "section_title": "GREGOIRE XVI ; 2 février 183l - 1er juin",
+  "document": "romain",
+  "pope": "PIE IX : 16 juin 1846-7 février 1878"
 }

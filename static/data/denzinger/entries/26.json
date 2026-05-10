@@ -1,8 +1,11 @@
 {
   "n": 26,
   "title": "",
-  "html": "<p>Je crois également en l'Esprit Saint, la sainte Eglise, la communion des saints, la rémission des péchés, la résurrection de la chair, la vie éternelle.</p><p>Missale Gallicanum Vetus : Sermon (9 de Césaire d'Arles) sur le symbole</p>",
+  "html": "<p>Je crois également en l'Esprit Saint, la sainte Eglise, la communion des saints, la rémission des péchés, la résurrection de la chair, la vie éternelle.</p>",
   "part_slug": "1-symboles-de-foi",
-  "pope": null,
-  "document": "Symbole des Apôtres"
+  "part_title": "Première partie",
+  "section_slug": "sec-6-symbole-des-aptres",
+  "section_title": "Symbole des Apôtres",
+  "document": "Nicétas, évêque de Remesiana: explication du symbole.",
+  "pope": null
 }
