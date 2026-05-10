@@ -677,6 +677,31 @@ export function loadDenzingerIndex(fetcher: Fetch = fetch): Promise<DenzingerEnt
 	return denzingerIndexPromise;
 }
 
+let denzingerCitedByPromise: Promise<Record<string, number[]>> | null = null;
+let denzingerRefsPromise: Promise<Record<string, number[]>> | null = null;
+
+export function loadDenzingerCitedBy(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
+	if (!denzingerCitedByPromise) {
+		denzingerCitedByPromise = (async () => {
+			const r = await fetcher('/data/denzinger/cited-by.json');
+			if (!r.ok) return {};
+			return (await r.json()) as Record<string, number[]>;
+		})();
+	}
+	return denzingerCitedByPromise;
+}
+
+export function loadDenzingerRefs(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
+	if (!denzingerRefsPromise) {
+		denzingerRefsPromise = (async () => {
+			const r = await fetcher('/data/denzinger/refs.json');
+			if (!r.ok) return {};
+			return (await r.json()) as Record<string, number[]>;
+		})();
+	}
+	return denzingerRefsPromise;
+}
+
 export function loadDenzingerUnit(
 	slug: string,
 	fetcher: Fetch = fetch

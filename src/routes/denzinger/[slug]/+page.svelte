@@ -3,11 +3,55 @@
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { frenchPunct } from '$lib/utils/typography';
+	import { linkifyVerseRefs } from '$lib/utils/bibleBookSlug';
+	import { openPanel } from '$lib/stores/studyPanel';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
 	const unit = $derived(data.unit);
+
+	function onEntryClick(e: MouseEvent) {
+		const target = e.target as HTMLElement;
+		// Click on the prominent DH number opens the study panel.
+		const numLink = target.closest<HTMLElement>('a.entry-num');
+		if (numLink) {
+			e.preventDefault();
+			const article = numLink.closest<HTMLElement>('article.entry');
+			const id = article?.id ?? '';
+			const m = id.match(/^dh-(\d+)$/);
+			if (m) {
+				openPanel({ kind: 'denzinger-entry', n: parseInt(m[1]!, 10) }, 'denzinger-cross-refs');
+			}
+		}
+	}
+
+	// Set of valid DH numbers across the whole corpus, used to validate
+	// candidate cross-references (avoids treating dates / footnote numerals
+	// as DH refs when they happen to fall in the right range).
+	const validNs = $derived(new Set(data.structure.all_numbers));
+
+	function linkifyDhRefs(html: string): string {
+		// Bare 2-4 digit numbers in body prose that match a known DH number.
+		// Skip numbers inside HTML tags by splitting on tags first.
+		return html
+			.split(/(<[^>]*>)/)
+			.map((part, i) => {
+				if (i % 2 !== 0) return part; // tag pass-through
+				return part.replace(/(?<![\w/-])(\d{2,4})(?![\w/-])/g, (m, num: string) => {
+					const n = parseInt(num, 10);
+					if (!validNs.has(n)) return m;
+					return `<a class="ref-dh" href="/denzinger/n/${n}" data-dh="${n}">${m}</a>`;
+				});
+			})
+			.join('');
+	}
+
+	function renderEntry(html: string): string {
+		// Apply Bible-ref linkification, then DH cross-ref linkification,
+		// then French-punct NBSP normalization.
+		return frenchPunct(linkifyDhRefs(linkifyVerseRefs(html)));
+	}
 </script>
 
 <svelte:head>
@@ -46,7 +90,8 @@
 		</p>
 	</header>
 
-	<section class="body" aria-label="Texte de la section">
+	<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+	<section class="body" aria-label="Texte de la section" onclick={onEntryClick}>
 		{#each unit.entries as entry, ei (entry.n)}
 			{@const prev = unit.entries[ei - 1]}
 			{@const showSection = entry.section && (ei === 0 || prev?.section !== entry.section)}
@@ -62,7 +107,7 @@
 					<span class="entry-num-value">{entry.n}</span>
 				</a>
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-				<div class="entry-body">{@html frenchPunct(entry.html)}</div>
+				<div class="entry-body">{@html renderEntry(entry.html)}</div>
 			</article>
 		{/each}
 	</section>
@@ -207,6 +252,24 @@
 	}
 	.entry-body :global(p) {
 		margin: 0 0 1em;
+	}
+	.entry-body :global(a.verse-ref),
+	.entry-body :global(a.ref-dh) {
+		color: inherit;
+		text-decoration: underline dotted var(--color-muted);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
+		transition: color 120ms ease;
+	}
+	.entry-body :global(a.verse-ref:hover),
+	.entry-body :global(a.ref-dh:hover) {
+		color: var(--color-accent);
+		text-decoration: underline solid var(--color-accent);
+	}
+	.entry-body :global(a.ref-dh) {
+		font-family: var(--font-ui);
+		font-weight: 600;
+		font-size: 0.9em;
 	}
 	.entry-body :global(p:last-child) {
 		margin-bottom: 0;

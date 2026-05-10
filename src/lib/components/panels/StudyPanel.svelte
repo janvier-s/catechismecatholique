@@ -22,6 +22,7 @@
 	import TabCompendium from './TabCompendium.svelte';
 	import TabIA from './TabIA.svelte';
 	import TabTrentNotes from './TabTrentNotes.svelte';
+	import TabDenzingerRefs from './TabDenzingerRefs.svelte';
 	import TabStrip from './TabStrip.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
@@ -67,8 +68,8 @@
 			compendiumCiters = [];
 			return;
 		}
-		// Bible-verse mode and trent-paragraph mode have no CCC paragraph context.
-		if (ctx.kind === 'verse' || ctx.kind === 'trent-paragraph') {
+		// Modes that have no CCC paragraph context.
+		if (ctx.kind === 'verse' || ctx.kind === 'trent-paragraph' || ctx.kind === 'denzinger-entry') {
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
@@ -115,6 +116,13 @@
 				return [{ id: 'trent-notes', label: 'Notes' }];
 			}
 			return [];
+		}
+		// Denzinger entry mode: cross-refs + cited-by tabs.
+		if (ctx?.kind === 'denzinger-entry') {
+			return [
+				{ id: 'denzinger-cross-refs', label: 'Renvois' },
+				{ id: 'denzinger-cited-by', label: 'Cités dans' }
+			];
 		}
 		if (!paragraph) return ALL_TABS;
 		const hasBible = paragraph.bible_refs.length > 0;
@@ -292,6 +300,11 @@
 					<TabIA paragraphNumber={$studyPanel.context.paragraph} />
 				{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
 					<TabTrentNotes />
+				{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
+					<TabDenzingerRefs
+						n={$studyPanel.context.n}
+						mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
+					/>
 				{/if}
 			</div>
 		{/if}
@@ -356,6 +369,11 @@
 						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
 					{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
 						<TabTrentNotes />
+					{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
+						<TabDenzingerRefs
+							n={$studyPanel.context.n}
+							mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
+						/>
 					{/if}
 				</div>
 			{/if}

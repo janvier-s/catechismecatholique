@@ -624,7 +624,49 @@ def main() -> None:
     with open(OUT_DIR / "index.json", "w", encoding="utf-8") as fh:
         json.dump(index, fh, ensure_ascii=False, separators=(",", ":"))
 
-    print(f"done: {len(units)} units, {len(n_to_unit)} entries indexed")
+    # Reverse-index: for each entry N, list the entries that cite N in
+    # their body. Detection heuristic: a "bare" number in body prose that
+    # matches a known DH number (in `n_to_unit`).
+    print("computing cited-by reverse index…")
+    bare_dh_re = re.compile(r"(?<![\w/-])(\d{2,4})(?![\w/-])")
+    cited_by: dict[int, list[int]] = {}
+    refs_in_entry: dict[int, list[int]] = {}
+    valid_ns = set(n_to_unit.keys())
+    for u in units:
+        for entry in u["entries"]:
+            n = entry["n"]
+            text = re.sub(r"<[^>]+>", " ", entry["html"])
+            text = re.sub(r"\s+", " ", text)
+            seen: set[int] = set()
+            for m in bare_dh_re.finditer(text):
+                cand = int(m.group(1))
+                if cand == n or cand in seen:
+                    continue
+                if cand in valid_ns:
+                    seen.add(cand)
+                    cited_by.setdefault(cand, []).append(n)
+            if seen:
+                refs_in_entry[n] = sorted(seen)
+
+    with open(OUT_DIR / "cited-by.json", "w", encoding="utf-8") as fh:
+        json.dump(
+            {str(k): sorted(set(v)) for k, v in cited_by.items()},
+            fh,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+    with open(OUT_DIR / "refs.json", "w", encoding="utf-8") as fh:
+        json.dump(
+            {str(k): v for k, v in refs_in_entry.items()},
+            fh,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+
+    print(
+        f"done: {len(units)} units, {len(n_to_unit)} entries indexed; "
+        f"{len(cited_by)} cited-by, {len(refs_in_entry)} entries with refs"
+    )
     # Print a sample histogram of unit sizes.
     sizes = sorted(len(u["entries"]) for u in units)
     print(f"  unit-size: min={sizes[0]} median={sizes[len(sizes)//2]} max={sizes[-1]}")

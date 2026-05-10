@@ -10,7 +10,9 @@ export type PanelTab =
 	| 'bible-verse'
 	| 'compendium'
 	| 'ia'
-	| 'trent-notes';
+	| 'trent-notes'
+	| 'denzinger-cross-refs'
+	| 'denzinger-cited-by';
 
 export type TrentFootnote = { n: number; text: string };
 
@@ -23,7 +25,8 @@ export type TrentFootnote = { n: number; text: string };
 export type PanelContext =
 	| { kind: 'paragraph'; paragraph: number; bibleRefIdx?: number }
 	| { kind: 'verse'; verseUsfx: string; verseChapter: number; verseVerse: number }
-	| { kind: 'trent-paragraph'; paragraph: number; footnotes: TrentFootnote[] };
+	| { kind: 'trent-paragraph'; paragraph: number; footnotes: TrentFootnote[] }
+	| { kind: 'denzinger-entry'; n: number };
 
 export interface PanelState {
 	open: boolean;
