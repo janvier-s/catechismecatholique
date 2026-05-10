@@ -183,9 +183,11 @@
 			viewBox="0 0 256 256"
 			width="20"
 			height="20"
+			class="burger-icon"
 			aria-hidden="true"
 		>
 			<line
+				class="burger-top"
 				x1="40"
 				y1="64"
 				x2="216"
@@ -197,6 +199,7 @@
 				stroke-width="16"
 			/>
 			<line
+				class="burger-mid"
 				x1="40"
 				y1="128"
 				x2="216"
@@ -208,6 +211,7 @@
 				stroke-width="16"
 			/>
 			<line
+				class="burger-bot"
 				x1="40"
 				y1="192"
 				x2="216"
@@ -279,6 +283,26 @@
 	.desktop-menu-trigger.is-open {
 		background: color-mix(in srgb, var(--color-accent) 12%, transparent);
 		color: var(--color-accent);
+	}
+	/* Hamburger ↔ X morph: top and bottom bars rotate to form an X
+	   centered on the middle of the icon (y=128 in the 256 viewBox) and
+	   the middle bar fades out. */
+	.burger-top,
+	.burger-mid,
+	.burger-bot {
+		transform-origin: 128px 128px;
+		transition:
+			transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 160ms ease;
+	}
+	.desktop-menu-trigger.is-open .burger-top {
+		transform: translateY(64px) rotate(45deg);
+	}
+	.desktop-menu-trigger.is-open .burger-mid {
+		opacity: 0;
+	}
+	.desktop-menu-trigger.is-open .burger-bot {
+		transform: translateY(-64px) rotate(-45deg);
 	}
 	.desktop-menu-panel {
 		position: absolute;
