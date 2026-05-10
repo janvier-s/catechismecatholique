@@ -155,7 +155,11 @@
 		display: inline-block;
 		text-decoration: none;
 		color: var(--color-accent);
-		margin: 0 0 0.45rem;
+		font-family: var(--font-ui);
+		font-size: 0.85rem;
+		font-weight: 600;
+		font-variant-numeric: tabular-nums lining-nums;
+		margin: 0 0 0.4rem;
 	}
 	.entry-num-value {
 		font-family: var(--font-heading);
