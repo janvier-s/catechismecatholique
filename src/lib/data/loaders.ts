@@ -24,7 +24,10 @@ import type {
 	PiusXPetitChapterFile,
 	CalendrierIndexFile,
 	CalendrierYearFile,
-	CalendrierYearKey
+	CalendrierYearKey,
+	CatIllustreStructure,
+	CatIllustreChapter,
+	CatIllustreFlatPage
 } from './types';
 
 type Fetch = typeof fetch;
@@ -524,6 +527,7 @@ export type PiusXPetitLiturgicalBlock =
 	| { kind: 'ul'; items: Array<{ html: string; note?: string; sub?: string[] }> }
 	| { kind: 'concession'; n: number; html: string; note?: string }
 	| { kind: 'oraison'; html: string; cite?: string }
+	| { kind: 'quote'; html: string; cite?: string }
 	| { kind: 'prayer'; title: string; html: string };
 
 export type PiusXPetitLiturgicalAppendix = {
@@ -608,6 +612,41 @@ export function loadCalendrierYear(
 	if (!p) {
 		p = fetchJson<CalendrierYearFile>(`/data/calendrier/annee-${key}.json`, fetcher);
 		calendrierYearCache.set(key, p);
+	}
+	return p;
+}
+
+// ─── Catéchisme illustré loaders ───────────────────────────────────────────
+
+let catIllustreStructurePromise: Promise<CatIllustreStructure> | null = null;
+
+export function loadCatIllustreStructure(fetcher: Fetch = fetch): Promise<CatIllustreStructure> {
+	if (!catIllustreStructurePromise) {
+		catIllustreStructurePromise = fetchJson<CatIllustreStructure>(
+			'/data/catechisme-illustre/structure.json',
+			fetcher
+		);
+	}
+	return catIllustreStructurePromise;
+}
+
+const catIllustreChapterCache = new Map<
+	string,
+	Promise<CatIllustreChapter | CatIllustreFlatPage | null>
+>();
+
+export function loadCatIllustreChapter(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<CatIllustreChapter | CatIllustreFlatPage | null> {
+	let p = catIllustreChapterCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/catechisme-illustre/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as CatIllustreChapter | CatIllustreFlatPage;
+		})();
+		catIllustreChapterCache.set(slug, p);
 	}
 	return p;
 }

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
+	import OraisonBlock from '$lib/components/ui/OraisonBlock.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { prefs } from '$lib/stores/prefs';
 	import { getFontById } from '$lib/data/fonts';
@@ -51,15 +52,7 @@
 	{/each}
 
 	{#if appendix.oraison}
-		<blockquote class="ed-oraison">
-			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-			<div class="ed-oraison-text">
-				{@html frenchPunct(linkifyVerseRefs(appendix.oraison.html))}
-			</div>
-			{#if appendix.oraison.cite}
-				<p class="ed-oraison-cite">{appendix.oraison.cite}</p>
-			{/if}
-		</blockquote>
+		<OraisonBlock html={linkifyVerseRefs(appendix.oraison.html)} cite={appendix.oraison.cite} />
 	{/if}
 </main>
 
@@ -112,31 +105,6 @@
 	.ed-content :global(a.verse-ref:hover) {
 		color: var(--color-accent);
 		text-decoration: underline solid var(--color-accent);
-	}
-
-	.ed-oraison {
-		margin: 2.5rem 0 0;
-		padding: 1rem 1.25rem;
-		border-left: 2px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 4%, transparent);
-		border-radius: 0 4px 4px 0;
-	}
-	.ed-oraison-text {
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		font-style: italic;
-		line-height: 1.75;
-		color: var(--color-subtle);
-	}
-	.ed-oraison-cite {
-		font-family: var(--font-ui);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		opacity: 0.85;
-		margin: 0.6rem 0 0;
 	}
 
 	@media (max-width: 640px) {

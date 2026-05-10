@@ -79,6 +79,21 @@ Chaque question Compendium est liée aux paragraphes CEC qu'elle cite ; ces lien
 
 ---
 
+## Catéchisme illustré des vérités nécessaires (1897)
+
+Édition Wikisource du *Catéchisme illustré des vérités nécessaires* (par A. L. R., 1897), manuel d'instruction populaire de la fin du XIX<sup>e</sup> siècle composé de 12 images accompagnées de 12 leçons. Chaque leçon comprend un texte numéroté, une série de questions-réponses, et une explication de l'illustration.
+
+### Accès
+
+- Accueil : `https://catechismecatholique.fr/catechisme-illustre`
+- Sommaire : `/catechisme-illustre/sommaire`
+- Leçons (1–12) : `/catechisme-illustre/{slug}` — par exemple `/catechisme-illustre/1-dieu`, `/catechisme-illustre/4-sauveur`, `/catechisme-illustre/12-ciel`
+- Préface, Introduction, Avis, Prières : `/catechisme-illustre/{preface|introduction|avis|prieres}`
+
+Les illustrations sont servies en WebP optimisé sous `/data/catechisme-illustre/images/{slug}.webp`.
+
+---
+
 ## Annexe — Prières et Formules
 
 Textes liturgiques et formules de prière traditionnelles tirés de l'annexe du Compendium : Credo, Notre Père, Ave Maria, Gloria, Acte de contrition, Angélus, Rosaire, formules sacramentelles, prières en latin et en français.

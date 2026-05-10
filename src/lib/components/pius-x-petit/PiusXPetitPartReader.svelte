@@ -6,6 +6,7 @@
 	} from '$lib/data/types';
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
+	import OraisonBlock from '$lib/components/ui/OraisonBlock.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { prefs } from '$lib/stores/prefs';
 	import { getFontById } from '$lib/data/fonts';
@@ -108,13 +109,7 @@
 			{#if chapter.oraisons && chapter.oraisons.length > 0}
 				<div class="oraisons">
 					{#each chapter.oraisons as or, oi (oi)}
-						<div class="oraison">
-							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-							<div class="oraison-text">{@html frenchPunct(or.html)}</div>
-							{#if or.cite}
-								<p class="oraison-cite">{or.cite}</p>
-							{/if}
-						</div>
+						<OraisonBlock html={or.html} cite={or.cite} />
 					{/each}
 				</div>
 			{/if}
@@ -328,38 +323,10 @@
 	}
 
 	.oraisons {
-		margin-top: 2.5rem;
-		padding-top: 1.5rem;
-		border-top: 1px dashed color-mix(in srgb, var(--color-border) 80%, transparent);
+		margin-top: 3rem;
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
-	}
-
-	.oraison {
-		padding: 0.85rem 1rem 0.85rem 1.25rem;
-		border-left: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 4%, transparent);
-		border-radius: 0 4px 4px 0;
-	}
-
-	.oraison-text {
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		font-style: italic;
-		line-height: 1.8;
-		color: var(--color-subtle);
-	}
-
-	.oraison-cite {
-		font-family: var(--font-ui);
-		font-size: 0.68rem;
-		font-weight: 600;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		opacity: 0.75;
-		margin: 0.5rem 0 0;
+		gap: 1.5rem;
 	}
 
 	.footnotes {

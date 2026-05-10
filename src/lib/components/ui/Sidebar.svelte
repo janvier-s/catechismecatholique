@@ -13,6 +13,7 @@
 		loadPiusXPetitStructure,
 		loadPiusXPetitLiturgicalAppendix,
 		loadPiusXPetitAppendix,
+		loadCatIllustreStructure,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -26,6 +27,7 @@
 		TrentStructure,
 		PiusXGrandStructure,
 		PiusXPetitStructure,
+		CatIllustreStructure,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -93,6 +95,8 @@
 				return '/grand-catechisme/sommaire';
 			case 'pius-x-petit':
 				return '/petit-catechisme/sommaire';
+			case 'catechisme-illustre':
+				return '/catechisme-illustre/sommaire';
 			default:
 				return null;
 		}
@@ -137,6 +141,16 @@
 		if (corpus !== 'pius-x-petit') return;
 		(async () => {
 			piusXPetitStructure = await loadPiusXPetitStructure();
+		})();
+	});
+
+	// ─── Catéchisme illustré (1897) state ───────────────────────────────────
+	let catIllustreStructure: CatIllustreStructure | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'catechisme-illustre') return;
+		(async () => {
+			catIllustreStructure = await loadCatIllustreStructure();
 		})();
 	});
 
@@ -647,6 +661,24 @@
 			}
 			return allParts;
 		}
+		if (corpus === 'catechisme-illustre') {
+			if (!catIllustreStructure) return [];
+			const out: Item[] = [];
+			for (const f of catIllustreStructure.front_matter) {
+				out.push({ title: f.title, href: `/catechisme-illustre/${f.slug}` });
+			}
+			for (const ch of catIllustreStructure.chapters) {
+				out.push({
+					title: ch.title,
+					kicker: `Leçon ${ch.roman}`,
+					href: `/catechisme-illustre/${ch.slug}`
+				});
+			}
+			for (const f of catIllustreStructure.back_matter) {
+				out.push({ title: f.title, href: `/catechisme-illustre/${f.slug}` });
+			}
+			return out;
+		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];
 			const SEASON_LABELS: Record<CalendrierSeason, string> = {
@@ -879,9 +911,11 @@
 					? 'Plan du Grand Catéchisme'
 					: corpus === 'pius-x-petit'
 						? 'Plan du Petit Catéchisme'
-						: corpus === 'calendrier'
-							? 'Calendrier liturgique'
-							: 'Plan du Catéchisme'}
+						: corpus === 'catechisme-illustre'
+							? 'Plan du Catéchisme illustré'
+							: corpus === 'calendrier'
+								? 'Calendrier liturgique'
+								: 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">

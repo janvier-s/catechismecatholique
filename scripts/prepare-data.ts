@@ -482,6 +482,24 @@ async function main() {
 		endStep('source not found — skipped');
 	}
 
+	logStep('extracting Catéchisme illustré (Wikisource EPUB)');
+	const catIllustreEpub = join(SOURCES, 'catechisme-illustre/source.epub');
+	const catIllustreOutDir = join(OUT, 'catechisme-illustre');
+	if (existsSync(catIllustreEpub)) {
+		mkdirSync(catIllustreOutDir, { recursive: true });
+		const script = new URL('./prepare/catechisme-illustre/extract.py', import.meta.url).pathname;
+		const { spawnSync } = await import('node:child_process');
+		const proc = spawnSync('python3', [script], { stdio: 'inherit' });
+		if (proc.status !== 0) {
+			throw new Error(`extract.py failed (exit ${proc.status})`);
+		}
+		endStep('chapters + images written');
+	} else if (existsSync(catIllustreOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
 	logStep('building liturgical calendar');
 	const calendrierSourceDir = join(SOURCES, 'calendrier');
 	if (existsSync(calendrierSourceDir)) {

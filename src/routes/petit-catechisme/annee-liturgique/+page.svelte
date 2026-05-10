@@ -1,5 +1,6 @@
 <script lang="ts">
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
+	import OraisonBlock from '$lib/components/ui/OraisonBlock.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { prefs } from '$lib/stores/prefs';
 	import { getFontById } from '$lib/data/fonts';
@@ -164,13 +165,9 @@
 								</div>
 							</article>
 						{:else if block.kind === 'oraison'}
-							<blockquote class="al-oraison">
-								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								<div class="al-oraison-text">{@html fp(block.html)}</div>
-								{#if block.cite}
-									<p class="al-oraison-cite">{block.cite}</p>
-								{/if}
-							</blockquote>
+							<OraisonBlock html={block.html} cite={block.cite} />
+						{:else if block.kind === 'quote'}
+							<OraisonBlock html={block.html} cite={block.cite} eyebrow="Magistère" />
 						{:else if block.kind === 'prayer'}
 							<aside class="al-prayer">
 								<p class="al-prayer-title">‡ {block.title}</p>
@@ -445,32 +442,6 @@
 	.al-concession-rule {
 		font-family: var(--font-body);
 		line-height: 1.7;
-	}
-
-	/* Oraison */
-	.al-oraison {
-		margin: 1.5rem 0;
-		padding: 1rem 1.25rem;
-		border-left: 2px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-		background: color-mix(in srgb, var(--color-accent) 4%, transparent);
-		border-radius: 0 4px 4px 0;
-	}
-	.al-oraison-text {
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		font-style: italic;
-		line-height: 1.75;
-		color: var(--color-subtle);
-	}
-	.al-oraison-cite {
-		font-family: var(--font-ui);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		opacity: 0.85;
-		margin: 0.6rem 0 0;
 	}
 
 	/* Closing prayer box */

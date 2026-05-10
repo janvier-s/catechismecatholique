@@ -1,0 +1,63 @@
+{
+  "kind": "chapter",
+  "ordinal": 2,
+  "roman": "II",
+  "slug": "2-homme",
+  "title": "L’Homme",
+  "subtitle": "Dieu habite le monde. Adam et Ève ne connaissent que le Bien. Tout leur obéit. C’est le bonheur universel.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/2-homme.webp",
+    "alt": "L’Innocence originelle",
+    "caption": "L’Innocence originelle"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Après le Ciel, la Terre et les Anges, Dieu fit les Plantes et les Bêtes de toute sorte. Mais il n’y avait encore personne pour le connaître, l’aimer et le servir sur terre, et c’est pourquoi il fit l’Homme… Ce fut comme un travail de six jours, six jours de Dieu ; le septième, il se reposa. Et c’est pourquoi Dieu a voulu, depuis, que nous prenions six jours pour travailler, et le septième pour nous reposer et prier. C’est l’origine du <i>Dimanche</i>.."
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Pour faire l’Homme, Dieu prit de la terre et il lui souffla une âme : c’est pourquoi notre corps redevient poussière, mais notre âme ne meurt plus. À la mort, elle retourne chez Dieu, qui la juge, la récompense, ou la punit. C’est elle qui nous fait vivre, penser et parler."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Dieu fit l’Homme mâle et femelle : l’un s’appela <i>Adam</i>, l’autre , l’autre <i>Ève</i>. Et il les unit, il les bénit, il les maria, et c’est d’eux que tous les hommes sont sortis, les Blancs et les Noirs. Le temps et le pays ont changé leur couleur ; mais nous sommes tous frères.. Et il les unit, il les bénit, il les maria, et c’est d’eux que tous les hommes sont sortis, les Blancs et les Noirs. Le temps et le pays ont changé leur couleur ; mais nous sommes tous frères."
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Ainsi, quand Dieu fit les oiseaux, il les lâcha tous pêle-mêle et les laissa libres de s’unir et de se quitter, les moutons aussi, les singes aussi, et toutes les Bêtes ; mais pour les Hommes, il les unit un par un, un homme pour une femme, une femme pour un homme. Et tous ceux qui, depuis, ont fait autrement, ont imité les bêtes et oublié qu’ils sont hommes…"
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "En sortant des mains du Créateur, Adam et Ève étaient parfaitement heureux, sans maladie, sans faim, sans tristesse et sans péché : ils ne connaissaient pas le Mal."
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "Alors Dieu voulut les éprouver et voir s’ils resteraient bons ou mauvais. Il les plaça dans son Jardin, et leur montrant un arbre il les avertit : « Ceci est l’arbre du Mal, ne mangez pas de son fruit ; je le défends. Si vous en mangez, vous deviendrez les esclaves du Démon et vous mourrez, vous et vos enfants. » Et ils dirent : « C’est bien. »"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Qui a fait le premier homme et la première femme ?",
+      "a": "C’est Dieu."
+    },
+    {
+      "n": 2,
+      "q": "Et c’est d’eux que sont sortis tous les hommes ?",
+      "a": "Oui."
+    },
+    {
+      "n": 3,
+      "q": "Au commencement, Dieu les fit-il heureux ?",
+      "a": "Oui : ils ne savaient pas le Mal."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente Dieu créant et animant tout : la lumière, les eaux, les terres, les plantes, les bêtes, le premier homme et la première femme.</span></p><p><span>Adam et Ève sont purs et heureux. Dieu leur a défendu de manger le fruit de l’arbre du Mal ; mais déjà Ève le regarde au loin…</span></p>"
+}

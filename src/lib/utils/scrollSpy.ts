@@ -13,11 +13,12 @@ import { activeHeading } from '$lib/stores/scrollSpy';
  * the heading scrolled past, the active highlight blanked out even though
  * the reader was still inside that section. This implementation instead
  * tracks the most-recently-passed heading: the LAST `h2[id]` / `h3[id]`
- * whose top edge is at or above a small offset from the top of the
- * viewport. While reading any paragraph between two headings, the previous
- * heading stays highlighted.
+ * whose top edge is at or above the activation line. The line sits at
+ * roughly the upper third of the viewport so a heading lights up in the
+ * sidebar as soon as it scrolls into the comfortable reading band — not
+ * only when it has reached the very top.
  */
-const ACTIVE_OFFSET = 100; // px from viewport top
+const ACTIVE_OFFSET_RATIO = 0.33;
 
 export const scrollSpy: Action<HTMLElement> = (node) => {
 	const headings = Array.from(
@@ -29,10 +30,11 @@ export const scrollSpy: Action<HTMLElement> = (node) => {
 
 	function update() {
 		raf = 0;
+		const activationLine = window.innerHeight * ACTIVE_OFFSET_RATIO;
 		let active: string | null = null;
 		for (const h of headings) {
 			const top = h.getBoundingClientRect().top;
-			if (top <= ACTIVE_OFFSET) active = h.id;
+			if (top <= activationLine) active = h.id;
 			else break;
 		}
 		// Fall back to the first heading when the page is at the very top

@@ -1,0 +1,125 @@
+{
+  "corpus": "catechisme-illustre",
+  "title": "Catéchisme illustré des vérités nécessaires",
+  "subtitle": "12 Images, 12 Leçons",
+  "author": "A. L. R.",
+  "year": 1897,
+  "front_matter": [
+    {
+      "slug": "preface",
+      "title": "Préface"
+    },
+    {
+      "slug": "introduction",
+      "title": "Introduction"
+    }
+  ],
+  "chapters": [
+    {
+      "slug": "1-dieu",
+      "ordinal": 1,
+      "roman": "I",
+      "title": "Dieu",
+      "subtitle": "Un seul Dieu en trois personnes ; Crée le Ciel et la Terre ; Récompense le bien dans les Anges, punit le mal dans les Démons.",
+      "image_url": "/data/catechisme-illustre/images/1-dieu.webp"
+    },
+    {
+      "slug": "2-homme",
+      "ordinal": 2,
+      "roman": "II",
+      "title": "L’Homme",
+      "subtitle": "Dieu habite le monde. Adam et Ève ne connaissent que le Bien. Tout leur obéit. C’est le bonheur universel.",
+      "image_url": "/data/catechisme-illustre/images/2-homme.webp"
+    },
+    {
+      "slug": "3-homme-apres-le-peche",
+      "ordinal": 3,
+      "roman": "III",
+      "title": "L’Homme après le Péché",
+      "subtitle": "La première famille transmet à tous ses enfants la maladie originelle. — La terre maudite. — Satan, roi du monde.",
+      "image_url": "/data/catechisme-illustre/images/3-homme-apres-le-peche.webp"
+    },
+    {
+      "slug": "4-sauveur",
+      "ordinal": 4,
+      "roman": "IV",
+      "title": "Le Sauveur",
+      "subtitle": "Le Démon perd les Hommes par l’Orgueil, la Convoitise et la Sensualité. Dieu vient les sauver par l’Humilité, la Pauvreté et la Souffrance.",
+      "image_url": "/data/catechisme-illustre/images/4-sauveur.webp"
+    },
+    {
+      "slug": "5-enseignement-du-sauveur",
+      "ordinal": 5,
+      "roman": "V",
+      "title": "L’Enseignement du Sauveur",
+      "subtitle": "Jésus est venu rappeler aux hommes la loi de Dieu. Il montre à tous le chemin du Ciel : qui veut y aller n’a qu’à le suivre.",
+      "image_url": "/data/catechisme-illustre/images/5-enseignement-du-sauveur.webp"
+    },
+    {
+      "slug": "6-rachat-du-monde",
+      "ordinal": 6,
+      "roman": "VI",
+      "title": "Le Rachat du Monde",
+      "subtitle": "Jésus meurt sur la Croix pour les Hommes : il s’offre à Dieu, son sang lave la Terre, et toutes les races attendent de lui leur salut.",
+      "image_url": "/data/catechisme-illustre/images/6-rachat-du-monde.webp"
+    },
+    {
+      "slug": "7-mission-des-apotres",
+      "ordinal": 7,
+      "roman": "VII",
+      "title": "La Mission des Apôtres",
+      "subtitle": "Jésus monte au Ciel et envoie ses Apôtres au Monde. Pierre est leur chef. La Pape lui succède, et l’annonce de l’Évangile se poursuit.",
+      "image_url": "/data/catechisme-illustre/images/7-mission-des-apotres.webp"
+    },
+    {
+      "slug": "8-bapteme",
+      "ordinal": 8,
+      "roman": "VIII",
+      "title": "Le Baptême",
+      "subtitle": "Un Apôtre donne le Baptême établi par Jésus pour être la marque de ses enfants. Le Démon se retire, et un Ange inscrit le nom du nouveau Chrétien.",
+      "image_url": "/data/catechisme-illustre/images/8-bapteme.webp"
+    },
+    {
+      "slug": "9-deux-routes",
+      "ordinal": 9,
+      "roman": "IX",
+      "title": "Les deux Routes",
+      "subtitle": "L’une, éclairée par la Lumière de l’Église, est suivie par l’âme en état de grâce ; l’autre, dans la nuit, est celle de l’âme marquée du signe de Satan.",
+      "image_url": "/data/catechisme-illustre/images/9-deux-routes.webp"
+    },
+    {
+      "slug": "10-fin",
+      "ordinal": 10,
+      "roman": "X",
+      "title": "La Fin",
+      "subtitle": "C’est le dernier jour du monde, la Résurrection et le Jugement. L’Ange de Dieu a sa liste, Satan montre la sienne : où est mon nom ?",
+      "image_url": "/data/catechisme-illustre/images/10-fin.webp"
+    },
+    {
+      "slug": "11-enfer",
+      "ordinal": 11,
+      "roman": "XI",
+      "title": "L’Enfer",
+      "subtitle": "Le Jugement est fini. Le Trou de l’Abîme s’ouvre, et, comme une masse effrayante de charbons vivants, les Damnés y roulent. Lucifer préside.",
+      "image_url": "/data/catechisme-illustre/images/11-enfer.webp"
+    },
+    {
+      "slug": "12-ciel",
+      "ordinal": 12,
+      "roman": "XII",
+      "title": "Le Ciel",
+      "subtitle": "Jésus triomphant reçoit les Saints. À droite, Marie. Sur sa tête, une couronne de Séraphins. Chaque Ange gardien présente son Élu.",
+      "image_url": "/data/catechisme-illustre/images/12-ciel.webp"
+    }
+  ],
+  "back_matter": [
+    {
+      "slug": "avis",
+      "title": "Avis"
+    },
+    {
+      "slug": "prieres",
+      "title": "Prières"
+    }
+  ]
+}

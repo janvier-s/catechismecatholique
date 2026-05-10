@@ -1,0 +1,83 @@
+{
+  "kind": "chapter",
+  "ordinal": 1,
+  "roman": "I",
+  "slug": "1-dieu",
+  "title": "Dieu",
+  "subtitle": "Un seul Dieu en trois personnes ; Crée le Ciel et la Terre ; Récompense le bien dans les Anges, punit le mal dans les Démons.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/1-dieu.webp",
+    "alt": "Dieu",
+    "caption": "Dieu"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Au commencement, il n’y avait rien, excepté <span class=\"small-caps\">Dieu</span> tout seul. Et Dieu parla, et tout ce qui est fut créé. Dieu a donc tout fait, il peut tout, il dirige tout, il entend tout, il voit tout, il sait tout, il est partout. Il n’est pas né, il ne meurt pas :  tout seul. Et Dieu parla, et tout ce qui est fut créé. Dieu a donc tout fait, il peut tout, il dirige tout, il entend tout, il voit tout, il sait tout, il est partout. Il n’est pas né, il ne meurt pas : <span class=\"small-caps\">il est</span>.."
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "C’est notre Maître, car il a fait le Ciel et la Terre comme un ouvrier fait sa maison ; mais c’est aussi notre Père, car il nous donne la vie, la force, la nourriture, et tout ce que nous avons."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Dieu a parlé aux premiers hommes et il leur a dit ce qu’ils devaient faire ; mais beaucoup l’ont oublié, et d’autres ne veulent plus le savoir… Ce qu’il a dit, tu le trouveras ici…"
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Nous ne voyons pas Dieu : il n’a pas de corps, il ne mange pas, il n’a besoin de rien, c’est un esprit… Regarde le vent qui passe : peux-tu le prendre en main, peux-tu le voir ? — Non ; tu ne vois que les branches d’arbre qu’il agite, et tu dis : C’est le vent qui passe ! De même, tu ne vois pas Dieu ; mais tu vois le Ciel, la Terre, et tout le reste, et tu dis : Dieu a passé là. Car s’il faut un ouvrier pour faire une case, pour faire le monde il faut Dieu."
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Il n’y a qu’un Dieu. Mais en Dieu il y a trois personnes : le Père, le Fils, le Saint-Esprit… Dans le soleil, il y a le rayon de l’astre, il y a sa lumière, il y a sa chaleur, et tout cela ne fait qu’un soleil. Ainsi en Dieu : il y a trois personnes, et ces trois personnes sont égales en tout, et ces trois personnes ne font qu’un Dieu. C’est ce qu’on appelle la <span class=\"small-caps\">Trinité</span>.."
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "Avant tout, Dieu créa des esprits qu’on appelle des <span class=\"small-caps\">Anges</span>, c’est-à-dire , c’est-à-dire <i>Envoyés</i>. Les uns restèrent bons et sont au Ciel : leur chef s’appelle Michel. Mais les autres se révoltèrent et, pour leur peine, ils furent jetés dans le feu de l’Enfer et devinrent les démons : leur chef s’appelle Lucifer.. Les uns restèrent bons et sont au Ciel : leur chef s’appelle Michel. Mais les autres se révoltèrent et, pour leur peine, ils furent jetés dans le feu de l’Enfer et devinrent les démons : leur chef s’appelle Lucifer."
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "Car Dieu voit le bien, et il le récompense ; il voit le mal, et il le punit…"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Qui est-ce qui a tout créé ?",
+      "a": "C’est Dieu."
+    },
+    {
+      "n": 2,
+      "q": "Combien y a-t-il de Dieux ?",
+      "a": "Il n’y a qu’un Dieu."
+    },
+    {
+      "n": 3,
+      "q": "Combien de personnes en Dieu ?",
+      "a": "Trois."
+    },
+    {
+      "n": 4,
+      "q": "Dieu récompense-t-il le bien ?",
+      "a": "Oui, toujours."
+    },
+    {
+      "n": 5,
+      "q": "Dieu punit-il le mal ?",
+      "a": "Oui, toujours."
+    },
+    {
+      "n": 6,
+      "q": "Dieu est-il notre Père ?",
+      "a": "Oui, c’est lui qui nous donne tout."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente Dieu, unique et éternel, sous la forme d’une grande lumière. Mais en réalité Dieu n’a pas de figure : on ne peut le représenter.</span></p><p><span>Les trois Personnes sont figurées comme elles ont apparu autrefois aux hommes : le Père comme un vieillard, le Fils comme un homme, le Saint-Esprit comme une colombe.</span></p><p><span>Dieu crée les Anges, des milliers et des milliers.</span></p><p><span>Les uns restent au ciel : Michel est leur chef.</span></p><p><span>Les autres sont chassés dans l’Enfer, Lucifer à leur tête. Ce sont les mauvais esprits, qui ne veulent que du mal aux hommes et à Dieu. Mais contre Dieu et les hommes de Dieu ils ne peuvent rien.</span></p><p><span>Dans un coin, la Terre ; et dans l’espace, les étoiles…</span></p>"
+}

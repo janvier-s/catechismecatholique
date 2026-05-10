@@ -544,7 +544,7 @@ CHAPTER_II = {
                     "prescriptions suivantes du pape Pie XII publiées dans son Motu proprio "
                     "<em>Sacram communionem</em> du 19 mars 1957 :"
                 )},
-                {"kind": "oraison", "html": fix_caps(
+                {"kind": "quote", "html": fix_caps(
                     "« 2. Les prêtres et les fidèles sont tenus à s’abstenir, pendant trois "
                     "heures, d’aliments solides et de boissons alcoolisées, pendant une heure de "
                     "boissons non alcoolisées, respectivement avant la Messe ou la sainte "

@@ -1,0 +1,78 @@
+{
+  "kind": "chapter",
+  "ordinal": 4,
+  "roman": "IV",
+  "slug": "4-sauveur",
+  "title": "Le Sauveur",
+  "subtitle": "Le Démon perd les Hommes par l’Orgueil, la Convoitise et la Sensualité. Dieu vient les sauver par l’Humilité, la Pauvreté et la Souffrance.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/4-sauveur.webp",
+    "alt": "Le Sauveur",
+    "caption": "Le Sauveur"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Dieu avait donc promis de sauver les hommes, de les racheter de l’esclavage du Démon et de leur rouvrir le Ciel après leur mort…"
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Il n’y a qu’un seul Dieu. Il n’a jamais eu ni père ni mère, il n’est pas né, il ne mourra pas, il est éternel. Il n’a non plus ni corps, ni figure, et si on le représente sur des images, c’est uniquement pour en donner une idée."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Il n’y a qu’un Dieu ; mais en Dieu il y a trois personnes, dont chacune a son nom : le Père, le Fils et le Saint-Esprit. Or, ce fut le Fils qui descendit sur terre pour nous instruire et pour nous sauver."
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Comprends bien cela. Dieu n’a pas de corps ; mais pour se montrer à nous, pour parler avec nous, pour souffrir pour nous, il prit un corps et une âme comme nous : il se fit Homme. Seulement, en se faisant Homme il resta Dieu : ce fut un Homme-Dieu."
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Il y avait alors au pays de Judée une jeune femme qui s’appelait Marie. Jamais il n’y en eut de plus belle et de plus pure, car le démon n’avait pas reçu la permission de mettre sa marque en son âme : ce fut en elle que Dieu descendit."
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "De son sein il passa dans ses bras comme un rayon de soleil passe à travers un verre, et il parut sous la forme d’un petit enfant qui fut appelé Jésus, c’est-à-dire <i>Sauveur</i>.."
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "Ainsi Marie n’enfanta point un Homme, mais un Homme-Dieu. Seul, un Homme pouvait souffrir et faire notre pénitence ; seul, un Dieu pouvait nous rouvrir le Ciel : c’est pourquoi Dieu se fit Homme."
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Qui perdit nos premiers parents et nous avec eux ?",
+      "a": "Le Démon."
+    },
+    {
+      "n": 2,
+      "q": "Qui nous a de nouveau sauvés ?",
+      "a": "Dieu."
+    },
+    {
+      "n": 3,
+      "q": "Comment Dieu a-t-il fait pour nous sauver ?",
+      "a": "Il s’est fait Homme."
+    },
+    {
+      "n": 4,
+      "q": "Comment s’est appelé Dieu fait Homme ?",
+      "a": "Jésus."
+    },
+    {
+      "n": 5,
+      "q": "Quelle est sa mère ?",
+      "a": "Marie."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente, au loin, l’Arbre du Mal ; le Démon-Serpent ; Adam et Ève, avec leurs premiers enfants ;</span></p><p><span>En avant, Marie, et entre ses bras le Fils de Dieu fait Homme qui vient de naître sous la forme d’un petit enfant…</span></p><p><span>Ainsi, le Démon nous perd en se faisant Serpent ; Dieu nous sauve en se faisant Homme…</span></p>"
+}

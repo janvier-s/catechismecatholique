@@ -1,0 +1,68 @@
+{
+  "kind": "chapter",
+  "ordinal": 10,
+  "roman": "X",
+  "slug": "10-fin",
+  "title": "La Fin",
+  "subtitle": "C’est le dernier jour du monde, la Résurrection et le Jugement. L’Ange de Dieu a sa liste, Satan montre la sienne : où est mon nom ?",
+  "image": {
+    "src": "/data/catechisme-illustre/images/10-fin.webp",
+    "alt": "La Fin",
+    "caption": "La Fin"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Tout meurt, et il arrivera un jour où le monde entier finira… Plus d’hommes, plus de bêtes, plus de plantes, plus rien : le feu du Ciel a tout dévoré…"
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Et alors, apparaîtra de nouveau Jésus-Christ, sa croix en main, porté sur les nuages, et escorté par toute l’armée des Anges."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Une première fois, il est descendu sous la forme d’un petit enfant, il a grandi comme l’un de nous, il est mort comme un coupable. C’est que, en effet, il avait pris sur lui tous les péchés des hommes, il était coupable de tous leurs crimes. Et il en reçut le châtiment, l’épouvantable châtiment de la Croix…"
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Mais maintenant, voilà qu’il arrive pour voir ce que l’on a fait de sa parole, ce que l’on a fait de son sang : qui, parmi les hommes, a voulu profiter de son sacrifice, et qui s’est tourné du côté de Satan ?"
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Et comme, après une pluie, repoussent dans une grande plaine les herbes brûlés par l’incendie, ainsi, par la puissance de Dieu, les Morts sortiront alors de la terre et des eaux où ils avaient été dispersés. Chaque âme retrouvera son corps, sa figure, ses membres avec lesquels elle s’est perdue ou sauvée,… et, tous les enfants d’Adam étant réunis autour de leur Père, le Jugement commencera…"
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "L’Ange de Dieu montre sa liste, Satan montre la sienne."
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "Ce sera là le grand Jour du Monde, le dernier règlement des comptes, l’heure de la Justice suprême : personne n’y sera oublié, ni toi, ni moi. Et ceux qui se plaignent maintenant de ne pas voir Dieu seront satisfaits : ils le verront ce jour-là…"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Le monde finira-t-il un jour ?",
+      "a": "Oui."
+    },
+    {
+      "n": 2,
+      "q": "Et Jésus reviendra ?",
+      "a": "Oui, pour juger tous les hommes."
+    },
+    {
+      "n": 3,
+      "q": "Alors, les Hommes ressusciteront ?",
+      "a": "Oui, les bons et les méchants."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente les hommes qui ressuscitent et Jésus qui vient les juger.</span></p>"
+}

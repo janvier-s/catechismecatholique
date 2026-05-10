@@ -1,0 +1,63 @@
+{
+  "kind": "chapter",
+  "ordinal": 9,
+  "roman": "IX",
+  "slug": "9-deux-routes",
+  "title": "Les deux Routes",
+  "subtitle": "L’une, éclairée par la Lumière de l’Église, est suivie par l’âme en état de grâce ; l’autre, dans la nuit, est celle de l’âme marquée du signe de Satan.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/9-deux-routes.webp",
+    "alt": "Les Deux Routes de la vie",
+    "caption": "Les Deux Routes de la vie"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Il y a deux Routes dans la Vie : la Route du Bien et la Route du Mal. Et chacun est libre de choisir."
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Dans la Route du Bien marchent tous ceux qui sont baptisés et observent de leur mieux les Commandements de Dieu : ce sont les bons Chrétiens. La lumière de Dieu est en leur cœur, et ils s’en vont, heureux et joyeux, au grand soleil de la Vérité."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Peut-être sont-ils pauvres, peut-être sont-ils malades, peut-être ont-ils d’autres misères : mais tout cela n’est rien, car tout cela finira… À leur mort, leur âme sera emportée par les Anges et Dieu la reconnaîtra. La récompense est là-haut…"
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Dans la Route du Mal, marchent tous ceux qui n’ont pas voulu être baptisés ou qui ont souillé leur baptême en brisant leurs engagements. Le démon est redevenu leur Maître, et il a écrit sa signature en leur cœur. Ce sont les ivrognes, les assassins, les voleurs, les empoisonneurs, les impudiques, ceux et celles qui vivent mal, ceux qui font des sacrifices aux esprits, ceux qui refusent de suivre les Commandements, ceux qui voient où est la vraie Religion et ne veulent pas l’embrasser…"
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Peut-être ils sont riches, contents et forts. Ils se trouvent heureux. Mais ils mourront bientôt, et Dieu, voyant en leur âme le signe du Démon, les rejettera loin de lui…"
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "Voilà les deux Routes devant toi : choisis !"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Combien de Routes dans la vie ?",
+      "a": "Deux, le Bien et le Mal."
+    },
+    {
+      "n": 2,
+      "q": "Qui est dans la Route du Bien ?",
+      "a": "Les bons Chrétiens."
+    },
+    {
+      "n": 3,
+      "q": "Qui est dans la Route du Mal ?",
+      "a": "Les Païens qui veulent rester Païens, et les Chrétiens qui leur ressemblent."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente le bon et le mauvais chemin. Dans le bon, une famille chrétienne (père, mère et enfants), puis beaucoup d’autres de tout âge et de toute race, qui marchent unis dans la Lumière de l’Église Catholique…</span></p><p><span>Dans le mauvais chemin, se poussent ceux que le Démon a marqués, ivrognes, assassins, voleurs, impudiques, mauvais sorciers…</span></p><p><span>On peut sortir du mauvais chemin pour rentrer dans le bon : quelques-uns le font…</span></p>"
+}

@@ -50,6 +50,11 @@
 			if (p.startsWith('/petit-catechisme/sommaire')) return false;
 			return true;
 		}
+		// Catéchisme illustré chapter reader (hide on landing and sommaire)
+		if (p.startsWith('/catechisme-illustre/')) {
+			if (p.startsWith('/catechisme-illustre/sommaire')) return false;
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -139,9 +144,11 @@
 						? 'pius-x-grand'
 						: page.url.pathname.startsWith('/petit-catechisme')
 							? 'pius-x-petit'
-							: page.url.pathname.startsWith('/calendrier')
-								? 'calendrier'
-								: 'ccc'}
+							: page.url.pathname.startsWith('/catechisme-illustre')
+								? 'catechisme-illustre'
+								: page.url.pathname.startsWith('/calendrier')
+									? 'calendrier'
+									: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

@@ -1,0 +1,73 @@
+{
+  "kind": "chapter",
+  "ordinal": 8,
+  "roman": "VIII",
+  "slug": "8-bapteme",
+  "title": "Le Baptême",
+  "subtitle": "Un Apôtre donne le Baptême établi par Jésus pour être la marque de ses enfants. Le Démon se retire, et un Ange inscrit le nom du nouveau Chrétien.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/8-bapteme.webp",
+    "alt": "Le Baptême",
+    "caption": "Le Baptême"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Les Apôtres partirent donc, ils commencèrent à instruire les hommes, et à ceux qui voulaient aller au Ciel après leur mort, ils en donnaient le moyen que Jésus leur avait enseigné. Quel est ce moyen ?"
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Quand un comme retrouve son agneau chez un voleur, il enlève la marque du voleur et lui fait la sienne à la place. De même Dieu retrouvant un homme qui veut le suivre, efface la marque du Démon dans son cœur et met la sienne à la place : cette marque de Dieu, c’est le <span class=\"small-caps\">Baptême</span>.."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Le Baptême efface le péché originel et tous les autres péchés, il rend l’âme pure, il met au cœur la lumière de Dieu, et celui qui la reçoit est inscrit dans la grande famille des Chrétiens et des Catholiques, c’est-à-dire des enfants du Christ-Jésus répandus dans le monde entier. On n’est plus seul ici-bas ; on a 25 millions de frères…"
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Au milieu de tous les autres, Dieu reconnaît l’homme baptisé : c’est son enfant, à lui, il l’aime, il le garde, et le défend au Démon, aux esprits et aux fétiches de lui faire du mal. Aussi, les Chrétiens n’ont peur de rien."
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Quand il s’agit d’un enfant, d’un petit enfant, on le baptise en se réservant de l’instruire plus tard. Mais un homme doit commencer par s’instruire de la Religion, se mettre en règle avec les Commandements de Dieu, et se repentir de ses péchés."
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "De plus, en recevant le Baptême, il renie le Démon, ses œuvres, ses mensonges, et il promet de rester du côté de Dieu et de sa Religion, toujours, même s’il fallait mourir."
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "La marque du Baptême, une fois faite dans l’âme, ne peut plus être effacée par personne…"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Y a-t-il un moyen d’effacer en nous la marque du Démon ?",
+      "a": "Oui."
+    },
+    {
+      "n": 2,
+      "q": "Quel est ce moyen ?",
+      "a": "C’est le Baptême."
+    },
+    {
+      "n": 3,
+      "q": "Qui a fait le Baptême ?",
+      "a": "C’est Jésus notre Sauveur."
+    },
+    {
+      "n": 4,
+      "q": "Un homme baptisé est donc l’enfant de Dieu ?",
+      "a": "Oui."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente un Apôtre, un Missionnaire, baptisant un homme… Au même instant, le Démon quitte son cœur avec des fétiches, et l’Ange de Dieu inscrit son nom sur le Livre du Ciel…</span></p>"
+}

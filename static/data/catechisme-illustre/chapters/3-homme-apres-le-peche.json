@@ -1,0 +1,88 @@
+{
+  "kind": "chapter",
+  "ordinal": 3,
+  "roman": "III",
+  "slug": "3-homme-apres-le-peche",
+  "title": "L’Homme après le Péché",
+  "subtitle": "La première famille transmet à tous ses enfants la maladie originelle. — La terre maudite. — Satan, roi du monde.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/3-homme-apres-le-peche.webp",
+    "alt": "Le Péché",
+    "caption": "Le Péché"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Adam et Ève étaient donc heureux dans le Jardin de Dieu, parce qu’ils ne connaissaient pas le Mal."
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Le Démon en fut jaloux. Et ayant pris la forme du Serpent, il vint tenter la femme : « Sais-tu pourquoi, lui dit-il, Dieu vous a défendu ce fruit ? C’est qu’il craint que vous deveniez comme lui, sachant le Bien et le Mal… » Ève crut le Démon, voulut devenir comme Dieu, mangea du fruit, et en donna à Adam…"
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Aussitôt, leurs yeux s’ouvrirent, ils connurent le Mal, et virent leur Péché : Dieu s’était retiré de leur cœur, et Lucifer y avait écrit son nom. Ils étaient ses esclaves."
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Et voilà maintenant qu’il les domine, eux et tous les enfants qui sortiront d’eux. Satan est devenu le roi du monde ! On ne le voit pas, mais c’est lui qui préside à tout le mal qui se fait, c’est lui qu’invoquent les mauvais sorciers, c’est lui qui reçoit les offrandes faites aux esprits des morts."
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Voilà le <span class=\"small-caps\">Péché originel</span>, qui a fait le malheur de toute la famille d’Adam, c’est-à-dire de tous les hommes. C’est lui qui a mis dans leur cœur les trois désirs immodérés qui les perdent : désir des Grandeurs, désir des Richesses, désir des Voluptés… C’est aussi depuis ce temps-là que notre esprit s’est obscurci, que notre cœur est mauvais, que nous devons travailler pour vivre, que nous sommes malades, que nous mourons…, qui a fait le malheur de toute la famille d’Adam, c’est-à-dire de tous les hommes. C’est lui qui a mis dans leur cœur les trois désirs immodérés qui les perdent : désir des Grandeurs, désir des Richesses, désir des Voluptés… C’est aussi depuis ce temps-là que notre esprit s’est obscurci, que notre cœur est mauvais, que nous devons travailler pour vivre, que nous sommes malades, que nous mourons…"
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "Mais ce qui est pire que tout le reste, c’est que, après la mort, l’âme chargée du Péché ne trouve plus le chemin du Ciel. Qui le lui montrera ? qui nous rachètera ?"
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "C’est Dieu. Car Dieu est notre père, et, nous voyant perdus, il eut pitié de nous. Et il dit : « Je vous enverrai un Sauveur, et tout homme qui voudra le suivre retrouvera le Ciel après la mort, et s’y reposera des misères de la vie. »"
+    },
+    {
+      "kind": "para",
+      "n": 8,
+      "html": "Et les hommes se dispersèrent, famille par famille, tribu par tribu, peuplant la terre, emportant quelques vérités, oubliant Dieu, suivant leurs mauvais désirs, et attendant…"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Qui perdit Adam et Ève et tous leurs enfants ?",
+      "a": "Le Démon."
+    },
+    {
+      "n": 2,
+      "q": "Ainsi tous les hommes naissent avec cette marque du péché ?",
+      "a": "Oui."
+    },
+    {
+      "n": 3,
+      "q": "Et, si cette marque du péché reste dans l’âme, l’âme ne peut aller au Ciel ?",
+      "a": "Elle ne le peut."
+    },
+    {
+      "n": 4,
+      "q": "Après le péché d’Adam, qui promit de venir nous sauver ?",
+      "a": "Dieu lui-même."
+    },
+    {
+      "n": 5,
+      "q": "Ainsi, Dieu ne nous a fait que du bien ?",
+      "a": "Oui, toujours."
+    },
+    {
+      "n": 6,
+      "q": "Et c’est le Démon qui a fait le mal, le péché et la mort ?",
+      "a": "Oui."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente au loin l’Arbre du Mal, avec le Démon changé en Serpent. Adam et Ève ont mangé le fruit défendu, et les voilà maintenant chassés du Jardin de Dieu, tristes, malheureux, marqués du Péché originel, eux et tous leurs enfants, et tous les enfants de toutes les races.</span></p><p><span>La terre est nue. Du sable, des pierres, des épines. Si tu veux manger, il faut maintenant travailler. C’est pourquoi Adam s’est fait des outils…</span></p><p><span>Au-dessus, la figure de Lucifer, pour montrer qu’il est devenu le roi du monde. Dieu s’est retiré…</span></p>"
+}

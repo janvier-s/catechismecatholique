@@ -110,6 +110,12 @@
 					href: '/petit-catechisme',
 					label: 'Petit Catéchisme',
 					description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X (1912).'
+				},
+				{
+					href: '/catechisme-illustre',
+					label: 'Catéchisme illustré',
+					description:
+						'Le Catéchisme illustré des vérités nécessaires (1897), 12 images, 12 leçons.'
 				}
 			]
 		},
@@ -253,7 +259,7 @@
 	.menu-grid {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		grid-template-rows: auto repeat(4, 1fr);
+		grid-template-rows: auto repeat(5, 1fr);
 		gap: 0.4rem 0;
 	}
 	.menu-col {

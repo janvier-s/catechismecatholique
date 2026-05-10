@@ -1,0 +1,58 @@
+{
+  "kind": "chapter",
+  "ordinal": 12,
+  "roman": "XII",
+  "slug": "12-ciel",
+  "title": "Le Ciel",
+  "subtitle": "Jésus triomphant reçoit les Saints. À droite, Marie. Sur sa tête, une couronne de Séraphins. Chaque Ange gardien présente son Élu.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/12-ciel.webp",
+    "alt": "Le Ciel",
+    "caption": "Le Ciel"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Le Jugement général est terminé, et le Trou de l’Abîme vient de se fermer pour toujours sur les démons et les damnés : nul d’entre eux ne tracassera plus les Élus."
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Alors Jésus se retourne vers ceux qui portent son signe : « Venez maintenant, vous, les bien-aimés de Dieu. Montons ensemble au Ciel : vos misères sont finies !… »"
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Et plus doucement qu’une plume légère monte en l’air, pendant qu’une Lumière qu’on n’avait jamais vue éclaire tout, qu’une sorte de brise embaume l’espace, et que les chants lointains se répondent à travers les étoiles, — les Élus se sentent portés en haut, et les voilà, chacun présenté par son Ange gardien, devant le Seigneur Jésus qui les bénit… La bonne mère Marie, qui a si souvent prié pour nous, se retrouve ici, et c’est elle qu’on salue la première, après le Sauveur qu’elle nous a donné…"
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Dieu nous apparaît, mais si beau qu’on ne peut plus en détourner les yeux : on verra désormais tout en Lui, comme sur terre on voyait tout dans l’air. Voici Adam et Ève, nos premiers parents, qui ont obtenu miséricorde, voici ceux de nos ancêtres qui ont été sauvés, voici nos amis, nos enfants, nos missionnaires, des hommes et des femmes que nous avons instruits, baptisés ou secourus…"
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "C’est le Ciel, c’est le bonheur, c’est l’éternité… Et pour conquérir ce trésor immense, que faut-il ? Homme, mon frère, je suis venu te le dire de la part de Dieu : Devenir et demeurer Chrétien…"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Où vont ceux qui meurent avec le signe de Dieu ?",
+      "a": "Au Ciel."
+    },
+    {
+      "n": 2,
+      "q": "Qu’est-ce que le Ciel ?",
+      "a": "L’endroit du bonheur, où l’on voit Dieu toujours."
+    },
+    {
+      "n": 3,
+      "q": "Que faire pour aller au Ciel ?",
+      "a": "Il faut :"
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente le Ciel. En haut, N.-S. Jésus-Christ ouvre les bras pour accueillir les Élus ; à sa droite, la sainte Vierge Marie reconnaît les siens ; sur sa tête, une grande couronne de Séraphins…</span></p><p><span>En bas, les Anges arrivent en longue file, chacun présentant au Sauveur l’homme dont il a été chargé…</span></p><p><span>Au loin, les étoiles, à travers lesquelles les corps glorieux pourront passer désormais, rapides comme la pensée…</span></p>"
+}

@@ -1,0 +1,88 @@
+{
+  "kind": "chapter",
+  "ordinal": 7,
+  "roman": "VII",
+  "slug": "7-mission-des-apotres",
+  "title": "La Mission des Apôtres",
+  "subtitle": "Jésus monte au Ciel et envoie ses Apôtres au Monde. Pierre est leur chef. La Pape lui succède, et l’annonce de l’Évangile se poursuit.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/7-mission-des-apotres.webp",
+    "alt": "La Mission des apôtres",
+    "caption": "La Mission des apôtres"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Jésus-Christ est Dieu et Homme. — Quand il mourut, ce n’est pas Dieu qui mourut. — Dieu ne meurt pas. — Ce fut l’Homme."
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Or, il avait dit : « Je mourrai, puisque je veux mourir. Mais trois jours après ma mort je ressusciterai vivant. »"
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Trois jours après sa mort, il ressuscita, comme il l’avait dit. Il réunit de nouveau ses disciples, il leur donna ses derniers enseignements, il les bénit, et, devant eux, il s’éleva doucement au Ciel : c’est là qu’il est aujourd’hui, et il n’en reviendra qu’au dernier jour, quand le monde finira."
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Or, pendant sa vie, il avait choisi douze hommes qui furent appelés <span class=\"small-caps\">apôtres</span>, c’est-à-dire , c’est-à-dire <i>Envoyés</i>, et il les avait instruits de toute la Religion. Parmi eux, il prit Pierre et l’établit chef de tous les autres, pour être son remplaçant sur la terre., et il les avait instruits de toute la Religion. Parmi eux, il prit Pierre et l’établit chef de tous les autres, pour être son remplaçant sur la terre."
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Et il leur dit : « Maintenant, mon œuvre est finie, je m’en vais ; mais du Ciel je veillerai sur vous jusqu’à la fin des temps. Vous avez la parole de Dieu : si quelqu’un se présente après moi pour la changer au nom de Dieu, ne le croyez pas. La parole de Dieu ne change pas…"
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "« Allez donc et enseignez toutes les nations ! »"
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "Et les Apôtres partirent…"
+    },
+    {
+      "kind": "para",
+      "n": 8,
+      "html": "Pierre est mort. Les Apôtres sont morts. Mais à Pierre a succédé le Pape, c’est-à-dire le Père qui demeure à Rome et qui est le chef de la Religion de Jésus ; aux Apôtres ont succédé les Évêques ; aux premiers Missionnaires ont succédé les Missionnaires d’aujourd’hui."
+    },
+    {
+      "kind": "para",
+      "n": 9,
+      "html": "Les Missionnaires viennent donc de Dieu, et c’est pourquoi Dieu leur a dit : « Allez. Celui qui vous écoute, m’écoute ; celui qui vous méprise, me méprise… »"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Que fit Jésus-Christ après sa Mort ?",
+      "a": "Il ressuscita."
+    },
+    {
+      "n": 2,
+      "q": "Et après sa Résurrection ?",
+      "a": "Il monta au Ciel."
+    },
+    {
+      "n": 3,
+      "q": "A-t-il nommé un chef de la Religion pour le remplacer ?",
+      "a": "Oui."
+    },
+    {
+      "n": 4,
+      "q": "Quel est-il ?",
+      "a": "Le Pape de Rome."
+    },
+    {
+      "n": 5,
+      "q": "C’est donc le Pape qui envoie les Missionnaires ?",
+      "a": "Oui : c’est l’ordre de Dieu."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente Jésus-Christ montant au Ciel, bénissant les Apôtres et les envoyant par le monde.</span></p><p><span>Pierre est leur chef. Lui seul a le Livre des Paroles de Dieu, car lui seul peut en expliquer les passages difficiles. Lui seul aussi a les Clés du Ciel, c’est-à-dire le pouvoir de remettre les péchés des hommes et de leur ouvrir le Ciel. En dehors de lui, il n’y a que de mauvaises clés…</span></p><p><span>Au loin, un Missionnaire, qui continue le travail des Apôtres sous les ordres du Pape.</span></p>"
+}

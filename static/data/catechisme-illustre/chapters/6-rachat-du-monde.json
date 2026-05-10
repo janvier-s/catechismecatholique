@@ -1,0 +1,68 @@
+{
+  "kind": "chapter",
+  "ordinal": 6,
+  "roman": "VI",
+  "slug": "6-rachat-du-monde",
+  "title": "Le Rachat du Monde",
+  "subtitle": "Jésus meurt sur la Croix pour les Hommes : il s’offre à Dieu, son sang lave la Terre, et toutes les races attendent de lui leur salut.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/6-rachat-du-monde.webp",
+    "alt": "Le Rachat du monde",
+    "caption": "Le Rachat du monde"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Jésus prit trois ans pour instruire les hommes. Les uns le suivirent, les autres gardèrent leurs coutumes mauvaises, quelques-uns devinrent ses ennemis ; car Dieu veut bien mettre tout le monde sur le chemin du Ciel, mais il ne veut y traîner personne malgré lui… C’est pourquoi, parmi les hommes, il y en aura toujours de bons, et toujours de mauvais ; mais tous sauront ce qu’ils ont à faire pour se sauver, s’ils veulent se sauver…"
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Après les avoir instruits, il fallait les racheter."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Si le père et la mère se sont vendus comme esclaves, tous leurs enfants seront esclaves ; et si le père et la mère ont une maladie dans le sang, la maladie passera à tous leurs descendants. — Ainsi, comme Adam et Ève se sont vendus au Démon, tous les hommes naissent avec la marque du Démon. De plus, affaiblis par la maladie primitive de leurs père et mère, qui est la concupiscence originelle, ils font ensuite des péchés personnels de toute sorte, ils volent, ils tuent, ils commettent des choses honteuses…"
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Les voilà perdus ! Dieu n’a plus qu’à les laisser mourir tous et tomber en Enfer avec le Démon…"
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Et Jésus dit : « Non ! Je prends sur moi le grand procès de Dieu avec les Hommes. C’est moi le coupable : punis-moi ! »"
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "Et Jésus fut tué pour nous, pour toi, pour moi, pour tous ceux qui sont nés d’Adam. Des hommes, ne sachant pas ce qu’ils faisaient, le clouèrent sur une croix, ils lui percèrent le côté, et son sang coula sur la Terre comme pour la laver de tous ses crimes…"
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "Alors Dieu eut pitié de nous, et le Ciel fut rouvert à tous ceux qui veulent y aller. Voilà ce qu’on appelle le <span class=\"small-caps\">Rachat du Monde</span>, et c’est la grande nouvelle que les Missionnaires sont venus annoncer jusqu’ici…, et c’est la grande nouvelle que les Missionnaires sont venus annoncer jusqu’ici…"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Qui a vendu les Hommes au Démon ?",
+      "a": "Leur père Adam."
+    },
+    {
+      "n": 2,
+      "q": "Qui les a rachetés ?",
+      "a": "Jésus-Christ."
+    },
+    {
+      "n": 3,
+      "q": "Comment Jésus-Christ les a-t-il rachetés ?",
+      "a": "Par sa mort."
+    }
+  ],
+  "image_explanation_html": "<p><br />\nElle représente Jésus sur la Croix, s’offrant à Dieu pour le monde. Les Hommes de toute race attendent leur salut. \nreprésente Jésus sur la Croix, s’offrant à Dieu pour le monde. Les Hommes de toute race attendent leur salut.</p>"
+}

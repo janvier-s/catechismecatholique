@@ -1,0 +1,68 @@
+{
+  "kind": "chapter",
+  "ordinal": 11,
+  "roman": "XI",
+  "slug": "11-enfer",
+  "title": "L’Enfer",
+  "subtitle": "Le Jugement est fini. Le Trou de l’Abîme s’ouvre, et, comme une masse effrayante de charbons vivants, les Damnés y roulent. Lucifer préside.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/11-enfer.webp",
+    "alt": "L’Enfer",
+    "caption": "L’Enfer"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "Le Jugement général est terminé. Jésus, se tournant vers ceux qui portent le signe de Satan, leur a dit :"
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "« Hors d’ici, les maudits ! Allez au feu éternel, qui fut allumé au commencement pour le Démon et ses esprits révoltés !… »"
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Tout à coup, il se creuse un abîme épouvantable, d’où le feu jaillit et où les démons, sous la figure de serpents et de bêtes affreuses, attendent les hommes damnés."
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "Et déjà, rouges de la flamme qui les brûle à l’intérieur, criant et blasphémant, ils tombent, grappes énormes, cohue effrayante, éternels charbons de l’éternel Enfer…"
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "Puis Dieu ferme le Trou de l’Abîme, et rien, ni homme ni démon, rien n’en sortira jamais plus…"
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "Voilà l’Enfer, où l’on ne boit plus, où l’on ne mange plus, où l’on ne dort plus, où l’on brûle toujours, où l’on ne meurt jamais…"
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "Et maintenant, homme, pense à toi-même. Entre le Ciel et l’Enfer, ton âme est suspendue comme par un fil, le fil de la vie. Si ce fil vient à se rompre, qu’adviendra-t-il ? Ton âme est-elle assez légère pour monter au Ciel ? est-elle assez chargée de péchés pour tomber en Enfer ?… C’est là ta seule affaire importante : c’est la seule à laquelle tu ne penses pas !"
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Où iront ceux qui sont morts avec la marque du Démon ?",
+      "a": "En Enfer."
+    },
+    {
+      "n": 2,
+      "q": "Qu’est-ce que l’Enfer ?",
+      "a": "Un endroit où l’on brûle toujours."
+    },
+    {
+      "n": 3,
+      "q": "Ainsi, une fois en Enfer, on n’en sort plus ?",
+      "a": "Jamais."
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente l’Enfer. Le Trou de l’Abîme vient de s’ouvrir, et l’on aperçoit encore un coin du Ciel. Les hommes damnés, déjà rouges comme des tisons ardents, brûlent à l’intérieur et tombent les uns sur les autres, roulant par paquets dans le Puits de Feu, immense et éternel.</span></p><p><span>Le chef des démons, Lucifer, jouissant de son œuvre, préside à cette chute épouvantable et compte tous ceux qui sont à lui…</span></p><p><span>Quelques-uns, les premiers tombés, se débattent contre des démons changés en serpents, qui leur souhaitent la bienvenue parmi eux, pendant que les flammes, sortant d’entre les rochers, commencent à leur lécher les membres…</span></p>"
+}

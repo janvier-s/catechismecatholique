@@ -1,0 +1,123 @@
+{
+  "kind": "chapter",
+  "ordinal": 5,
+  "roman": "V",
+  "slug": "5-enseignement-du-sauveur",
+  "title": "L’Enseignement du Sauveur",
+  "subtitle": "Jésus est venu rappeler aux hommes la loi de Dieu. Il montre à tous le chemin du Ciel : qui veut y aller n’a qu’à le suivre.",
+  "image": {
+    "src": "/data/catechisme-illustre/images/5-enseignement-du-sauveur.webp",
+    "alt": "L’Enseignement du Sauveur",
+    "caption": "L’Enseignement du Sauveur"
+  },
+  "blocks": [
+    {
+      "kind": "para",
+      "n": 1,
+      "html": "L’Enfant-Jésus grandit, devint homme et annonça pendant trois ans la parole de Dieu. Dieu avait déjà instruit les hommes des premiers temps, mais en se dispersant ils avaient oublié, et plusieurs s’étaient fait des religions fausses et mauvaises. Au lieu de prier Dieu, ils priaient les démons et les âmes mortes : les démons les trompaient et les perdaient."
+    },
+    {
+      "kind": "para",
+      "n": 2,
+      "html": "Jésus vint rappeler la vérité. Et pour montrer qu’il était Dieu et l’envoyé de Dieu, qu’il fallait le croire, qu’il fallait le suivre, d’un mot il guérissait les malades, ressuscitait les morts, faisait des choses merveilleuses."
+    },
+    {
+      "kind": "para",
+      "n": 3,
+      "html": "Voici maintenant la Loi de Dieu, telle qu’il l’a donnée lui-même en <i>dix Commandements :</i>"
+    },
+    {
+      "kind": "para",
+      "n": 4,
+      "html": "1. Je suis le Seigneur ton Dieu ; tu n’en serviras point d’autre ;"
+    },
+    {
+      "kind": "para",
+      "n": 5,
+      "html": "2. Tu ne blasphémeras point mon nom ;"
+    },
+    {
+      "kind": "para",
+      "n": 6,
+      "html": "3. Garde mon jour ;"
+    },
+    {
+      "kind": "para",
+      "n": 7,
+      "html": "4. Honore ton père et ta mère ;"
+    },
+    {
+      "kind": "para",
+      "n": 8,
+      "html": "5. Tu ne tueras point ;"
+    },
+    {
+      "kind": "para",
+      "n": 9,
+      "html": "6. Tu ne feras point d’impuretés ;"
+    },
+    {
+      "kind": "para",
+      "n": 10,
+      "html": "7. Tu ne voleras pas ;"
+    },
+    {
+      "kind": "para",
+      "n": 11,
+      "html": "8. Tu ne mentiras point ;"
+    },
+    {
+      "kind": "para",
+      "n": 12,
+      "html": "9. Tu ne désireras point d’autre femme que la tienne ;"
+    },
+    {
+      "kind": "para",
+      "n": 13,
+      "html": "10. Tu ne convoiteras pas le bien des autres."
+    },
+    {
+      "kind": "para",
+      "n": 14,
+      "html": "Voilà ce que Dieu commande : si tous les hommes suivaient parfaitement cette loi, ils seraient tous heureux, heureux sur la terre, et heureux après leur mort. Mais avant tout il faut te faire instruire de la Religion et recevoir le Baptême… Puis, pas d’orgueil, pas d’avarice, pas d’impureté, pas de jalousie, pas d’ivresse, pas de paresse à servir Dieu."
+    },
+    {
+      "kind": "para",
+      "n": 15,
+      "html": "C’est là le chemin du Ciel. Nous le croyons, parce que Dieu l’a dit : Dieu ne peut ni se tromper, ni tromper les hommes."
+    }
+  ],
+  "questions": [
+    {
+      "n": 1,
+      "q": "Dieu a-t-il donné sa Loi aux Hommes ?",
+      "a": "Oui."
+    },
+    {
+      "n": 2,
+      "q": "Combien y a-t-il de commandements de Dieu ?",
+      "a": "Dix."
+    },
+    {
+      "n": 3,
+      "q": "Pour qui sont-ils faits ?",
+      "a": "Pour tous les Hommes."
+    },
+    {
+      "n": 4,
+      "q": "Pourquoi ?",
+      "a": "Parce que Dieu est le Maître de tous."
+    },
+    {
+      "n": 5,
+      "q": "Si tu les suis, où iras-tu à la mort ?",
+      "a": "Au Ciel…"
+    },
+    {
+      "n": 6,
+      "q": "Et si tu n’en veux pas ?",
+      "a": "Dieu ne voudra pas de moi…"
+    }
+  ],
+  "image_explanation_html": "<p><br />\n\nElle <span>représente Jésus instruisant les hommes, jeunes et vieux, hommes et femmes, riches et pauvres, de toute race et de toute langue : car il est le Maître de tous, le Père de tous, et il veut les sauver tous.</span></p><p><span>Plusieurs l’écoutent, d’autres lui prêtent peu d’attention, d’autres s’en vont à leurs affaires, peut-être quelques-uns en rient et l’insultent…</span></p><p><span>C’est ainsi que, plus tard, on recevra aussi ses Missionnaires : il l’a prédit.</span></p>"
+}

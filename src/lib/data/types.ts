@@ -4,6 +4,7 @@ export type Corpus =
 	| 'trent'
 	| 'pius-x-grand'
 	| 'pius-x-petit'
+	| 'catechisme-illustre'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -749,4 +750,69 @@ export interface CalendrierIndexFile {
 	fixed_feasts: CalendrierFixedFeast[];
 	total_feasts: number;
 	total_clusters: number;
+}
+
+// ─── Catéchisme illustré des vérités nécessaires (1897) ────────────────────
+
+export interface CatIllustreImage {
+	src: string;
+	alt: string;
+	caption: string;
+}
+
+export interface CatIllustreBlock {
+	kind: 'para';
+	n: number;
+	html: string;
+}
+
+export interface CatIllustreQA {
+	n: number;
+	q: string;
+	a: string;
+}
+
+export interface CatIllustreChapter {
+	kind: 'chapter';
+	ordinal: number;
+	roman: string;
+	slug: string;
+	title: string;
+	subtitle: string;
+	image: CatIllustreImage | null;
+	blocks: CatIllustreBlock[];
+	questions: CatIllustreQA[];
+	image_explanation_html: string;
+}
+
+export interface CatIllustreFlatPage {
+	slug: string;
+	title: string;
+	kind: 'flat';
+	html: string;
+}
+
+export interface CatIllustreStructureChapter {
+	slug: string;
+	ordinal: number;
+	roman: string;
+	title: string;
+	subtitle: string;
+	image_url: string | null;
+}
+
+export interface CatIllustreStructureFlat {
+	slug: string;
+	title: string;
+}
+
+export interface CatIllustreStructure {
+	corpus: 'catechisme-illustre';
+	title: string;
+	subtitle: string;
+	author: string;
+	year: number;
+	front_matter: CatIllustreStructureFlat[];
+	chapters: CatIllustreStructureChapter[];
+	back_matter: CatIllustreStructureFlat[];
 }
