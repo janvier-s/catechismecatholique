@@ -625,26 +625,55 @@ def main() -> None:
         json.dump(index, fh, ensure_ascii=False, separators=(",", ":"))
 
     # Reverse-index: for each entry N, list the entries that cite N in
-    # their body. Detection heuristic: a "bare" number in body prose that
-    # matches a known DH number (in `n_to_unit`).
+    # their body. Conservative heuristic to avoid picking up dates and
+    # other false-positive numbers (mirrors the client-side linkifier):
+    #   - 3-4 digit candidates only;
+    #   - skip numbers inside <i>/<em> (Bible refs / scripture citations);
+    #   - skip when adjacent to a French month name (year with date
+    #     context);
+    #   - 4-digit ≥1000 only when in a ref-cluster context (";", ",",
+    #     "voir", "cf.", "n°", "suprà", "infra").
     print("computing cited-by reverse index…")
-    bare_dh_re = re.compile(r"(?<![\w/-])(\d{2,4})(?![\w/-])")
+    months = (
+        "janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|"
+        "septembre|octobre|novembre|décembre|decembre|janv|févr|fevr|sept|oct|nov|déc|dec"
+    )
+    months_after_re = re.compile(rf"^\s*(?:{months})\b", re.IGNORECASE)
+    months_before_re = re.compile(rf"(?:{months})\s+$", re.IGNORECASE)
+    cluster_before_re = re.compile(
+        r"[;,]\s*$|(?:voir|cf\.|n°|suprà|supra|infra)\s+$", re.IGNORECASE
+    )
+    cluster_after_re = re.compile(r"^\s*[;,]\s*\d{3,4}\b")
+    italic_re = re.compile(r"<(i|em)\b[^>]*>.*?</\1>", re.IGNORECASE | re.DOTALL)
+    bare_dh_re = re.compile(r"(?<![\w/-])(\d{3,4})(?![\w/-])")
+
     cited_by: dict[int, list[int]] = {}
     refs_in_entry: dict[int, list[int]] = {}
     valid_ns = set(n_to_unit.keys())
     for u in units:
         for entry in u["entries"]:
             n = entry["n"]
-            text = re.sub(r"<[^>]+>", " ", entry["html"])
-            text = re.sub(r"\s+", " ", text)
+            # Strip <i>/<em> blocks and other tags before scanning for refs.
+            stripped = italic_re.sub(" ", entry["html"])
+            stripped = re.sub(r"<[^>]+>", " ", stripped)
+            stripped = re.sub(r"\s+", " ", stripped)
             seen: set[int] = set()
-            for m in bare_dh_re.finditer(text):
+            for m in bare_dh_re.finditer(stripped):
                 cand = int(m.group(1))
-                if cand == n or cand in seen:
+                if cand == n or cand in seen or cand not in valid_ns:
                     continue
-                if cand in valid_ns:
-                    seen.add(cand)
-                    cited_by.setdefault(cand, []).append(n)
+                start, end = m.span()
+                before = stripped[max(0, start - 24) : start]
+                after = stripped[end : end + 24]
+                if months_after_re.match(after) or months_before_re.search(before):
+                    continue
+                if cand >= 1000:
+                    if not (
+                        cluster_before_re.search(before) or cluster_after_re.match(after)
+                    ):
+                        continue
+                seen.add(cand)
+                cited_by.setdefault(cand, []).append(n)
             if seen:
                 refs_in_entry[n] = sorted(seen)
 

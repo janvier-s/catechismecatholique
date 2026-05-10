@@ -31,16 +31,45 @@
 	// as DH refs when they happen to fall in the right range).
 	const validNs = $derived(new Set(data.structure.all_numbers));
 
+	const MONTHS_AFTER_RE =
+		/^\s*(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre|janv|f[ée]vr|sept|oct|nov|d[ée]c)\b/i;
+	const MONTHS_BEFORE_RE =
+		/(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre|janv|f[ée]vr|sept|oct|nov|d[ée]c)\s+$/i;
+
 	function linkifyDhRefs(html: string): string {
-		// Bare 2-4 digit numbers in body prose that match a known DH number.
-		// Skip numbers inside HTML tags by splitting on tags first.
+		// Conservative DH-cross-ref linkifier. Skips:
+		//   - text inside <i>/<em> (Bible refs and scripture citations);
+		//   - numbers preceded or followed by a French month name (years
+		//     with a date context);
+		//   - 1- and 2-digit numbers (overlap with footnote numerals,
+		//     ages, day-of-month, …);
+		//   - 4-digit numbers ≥ 1000 unless they sit in a clear ref
+		//     cluster ("voir 1568", "1568 ; 1572 ; …", "cf. 397", "n°
+		//     2068"). Standalone 4-digit numbers are almost always years.
 		return html
-			.split(/(<[^>]*>)/)
-			.map((part, i) => {
+			.split(/(<\/?(?:i|em)\b[^>]*>|<[^>]*>)/)
+			.map((part, i, arr) => {
 				if (i % 2 !== 0) return part; // tag pass-through
-				return part.replace(/(?<![\w/-])(\d{2,4})(?![\w/-])/g, (m, num: string) => {
+				const prevTag = (arr[i - 1] ?? '') as string;
+				if (/^<(i|em)\b/i.test(prevTag)) return part;
+				return part.replace(/(?<![\w/-])(\d{3,4})(?![\w/-])/g, (m, num: string, offset: number) => {
 					const n = parseInt(num, 10);
 					if (!validNs.has(n)) return m;
+					const before = part.slice(Math.max(0, offset - 24), offset);
+					const after = part.slice(offset + m.length, offset + m.length + 24);
+					// Date context (year ± month name).
+					if (MONTHS_AFTER_RE.test(after) || MONTHS_BEFORE_RE.test(before)) {
+						return m;
+					}
+					// 4-digit numbers ≥ 1000 are usually years. Require an
+					// explicit ref signal to linkify.
+					if (n >= 1000) {
+						const isClusterMember =
+							/[;,]\s*$/.test(before) ||
+							/^\s*[;,]\s*\d{3,4}\b/.test(after) ||
+							/(voir|cf\.|n°|suprà|infra|supra)\s+$/i.test(before);
+						if (!isClusterMember) return m;
+					}
 					return `<a class="ref-dh" href="/denzinger/n/${n}" data-dh="${n}">${m}</a>`;
 				});
 			})
