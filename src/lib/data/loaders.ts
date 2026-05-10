@@ -27,7 +27,10 @@ import type {
 	CalendrierYearKey,
 	CatIllustreStructure,
 	CatIllustreChapter,
-	CatIllustreFlatPage
+	CatIllustreFlatPage,
+	DenzingerStructure,
+	DenzingerEntry,
+	DenzingerEntryIndex
 } from './types';
 
 type Fetch = typeof fetch;
@@ -647,6 +650,45 @@ export function loadCatIllustreChapter(
 			return (await r.json()) as CatIllustreChapter | CatIllustreFlatPage;
 		})();
 		catIllustreChapterCache.set(slug, p);
+	}
+	return p;
+}
+
+// ─── Denzinger loaders ─────────────────────────────────────────────────────
+
+let denzingerStructurePromise: Promise<DenzingerStructure> | null = null;
+let denzingerIndexPromise: Promise<DenzingerEntryIndex> | null = null;
+const denzingerEntryCache = new Map<number, Promise<DenzingerEntry | null>>();
+
+export function loadDenzingerStructure(fetcher: Fetch = fetch): Promise<DenzingerStructure> {
+	if (!denzingerStructurePromise) {
+		denzingerStructurePromise = fetchJson<DenzingerStructure>(
+			'/data/denzinger/structure.json',
+			fetcher
+		);
+	}
+	return denzingerStructurePromise;
+}
+
+export function loadDenzingerIndex(fetcher: Fetch = fetch): Promise<DenzingerEntryIndex> {
+	if (!denzingerIndexPromise) {
+		denzingerIndexPromise = fetchJson<DenzingerEntryIndex>('/data/denzinger/index.json', fetcher);
+	}
+	return denzingerIndexPromise;
+}
+
+export function loadDenzingerEntry(
+	n: number,
+	fetcher: Fetch = fetch
+): Promise<DenzingerEntry | null> {
+	let p = denzingerEntryCache.get(n);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/denzinger/entries/${n}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as DenzingerEntry;
+		})();
+		denzingerEntryCache.set(n, p);
 	}
 	return p;
 }

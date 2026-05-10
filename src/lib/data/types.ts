@@ -5,6 +5,7 @@ export type Corpus =
 	| 'pius-x-grand'
 	| 'pius-x-petit'
 	| 'catechisme-illustre'
+	| 'denzinger'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -815,4 +816,34 @@ export interface CatIllustreStructure {
 	front_matter: CatIllustreStructureFlat[];
 	chapters: CatIllustreStructureChapter[];
 	back_matter: CatIllustreStructureFlat[];
+}
+
+// ─── Denzinger — Enchiridion Symbolorum (FR, JesusMarie 2006) ───────────────
+
+export interface DenzingerEntry {
+	n: number;
+	title: string;
+	html: string;
+	part_slug: string;
+	pope: string | null;
+	document: string | null;
+}
+
+export interface DenzingerStructurePart {
+	slug: string;
+	title: string;
+	range: [number, number];
+	count: number;
+}
+
+export interface DenzingerStructure {
+	corpus: 'denzinger';
+	title: string;
+	subtitle: string;
+	parts: DenzingerStructurePart[];
+	all_numbers: number[];
+}
+
+export interface DenzingerEntryIndex {
+	[n: string]: { title: string; part_slug: string };
 }

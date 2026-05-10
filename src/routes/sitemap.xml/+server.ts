@@ -56,6 +56,8 @@ export const GET: RequestHandler = () => {
 		'/catechisme-illustre/12-ciel',
 		'/catechisme-illustre/avis',
 		'/catechisme-illustre/prieres',
+		'/denzinger',
+		'/denzinger/sommaire',
 		'/prieres-formules',
 		'/bible',
 		'/glossaire',
@@ -83,12 +85,18 @@ export const GET: RequestHandler = () => {
 		...glossary.entries.map((e) => `/glossaire/${e.slug}`)
 	];
 
+	const denzingerStructure: { all_numbers: number[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/denzinger/structure.json'), 'utf-8')
+	);
+	const denzingerUrls = denzingerStructure.all_numbers.map((n) => `/denzinger/n/${n}`);
+
 	const allUrls = [
 		...staticPages,
 		...paragraphUrls,
 		...compendiumUrls,
 		...bibleUrls,
-		...glossaryUrls
+		...glossaryUrls,
+		...denzingerUrls
 	];
 
 	const xml = [

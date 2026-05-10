@@ -55,6 +55,11 @@
 			if (p.startsWith('/catechisme-illustre/sommaire')) return false;
 			return true;
 		}
+		// Denzinger entry pages (hide on landing and sommaire)
+		if (p.startsWith('/denzinger/')) {
+			if (p.startsWith('/denzinger/sommaire')) return false;
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -146,9 +151,11 @@
 							? 'pius-x-petit'
 							: page.url.pathname.startsWith('/catechisme-illustre')
 								? 'catechisme-illustre'
-								: page.url.pathname.startsWith('/calendrier')
-									? 'calendrier'
-									: 'ccc'}
+								: page.url.pathname.startsWith('/denzinger')
+									? 'denzinger'
+									: page.url.pathname.startsWith('/calendrier')
+										? 'calendrier'
+										: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

@@ -14,6 +14,7 @@
 		loadPiusXPetitLiturgicalAppendix,
 		loadPiusXPetitAppendix,
 		loadCatIllustreStructure,
+		loadDenzingerStructure,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -28,6 +29,7 @@
 		PiusXGrandStructure,
 		PiusXPetitStructure,
 		CatIllustreStructure,
+		DenzingerStructure,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -97,6 +99,8 @@
 				return '/petit-catechisme/sommaire';
 			case 'catechisme-illustre':
 				return '/catechisme-illustre/sommaire';
+			case 'denzinger':
+				return '/denzinger/sommaire';
 			default:
 				return null;
 		}
@@ -151,6 +155,16 @@
 		if (corpus !== 'catechisme-illustre') return;
 		(async () => {
 			catIllustreStructure = await loadCatIllustreStructure();
+		})();
+	});
+
+	// ─── Denzinger state ─────────────────────────────────────────────────────
+	let denzingerStructure: DenzingerStructure | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'denzinger') return;
+		(async () => {
+			denzingerStructure = await loadDenzingerStructure();
 		})();
 	});
 
@@ -679,6 +693,19 @@
 			}
 			return out;
 		}
+		if (corpus === 'denzinger') {
+			if (!denzingerStructure) return [];
+			// 2,500+ entries — sidebar shows parts only; the per-entry index
+			// lives on /denzinger/sommaire which the rail's "Sommaire" link
+			// jumps to.
+			return denzingerStructure.parts.map(
+				(p): Item => ({
+					title: p.title,
+					kicker: `${p.range[0]}–${p.range[1]}`,
+					href: `/denzinger/sommaire#${p.slug}`
+				})
+			);
+		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];
 			const SEASON_LABELS: Record<CalendrierSeason, string> = {
@@ -913,9 +940,11 @@
 						? 'Plan du Petit Catéchisme'
 						: corpus === 'catechisme-illustre'
 							? 'Plan du Catéchisme illustré'
-							: corpus === 'calendrier'
-								? 'Calendrier liturgique'
-								: 'Plan du Catéchisme'}
+							: corpus === 'denzinger'
+								? 'Plan du Denzinger'
+								: corpus === 'calendrier'
+									? 'Calendrier liturgique'
+									: 'Plan du Catéchisme'}
 		style="scrollbar-gutter: stable;"
 	>
 		<ul class="space-y-0.5">

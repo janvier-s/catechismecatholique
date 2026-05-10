@@ -94,6 +94,18 @@ Les illustrations sont servies en WebP optimisé sous `/data/catechisme-illustre
 
 ---
 
+## Denzinger — Enchiridion Symbolorum (édition française)
+
+Recueil canonique des symboles, définitions et déclarations magistérielles de l'Église catholique des origines à 2006, dans l'édition française servie par JesusMarie.com (basée sur le Denzinger-Hünermann). Chaque entrée porte un numéro DH référencé dans la majorité des manuels et des notes du Catéchisme.
+
+- Accueil : `https://catechismecatholique.fr/denzinger`
+- Sommaire complet : `/denzinger/sommaire`
+- Une entrée individuelle : `/denzinger/n/{numéro}` (ex. `/denzinger/n/1500`, `/denzinger/n/3074`)
+
+L'extraction Phase 1 inclut le texte intégral des entrées numérotées et le titre/document associé. La hiérarchie pape-document-concile et les renvois croisés vers les paragraphes du CEC seront affinés ultérieurement.
+
+---
+
 ## Annexe — Prières et Formules
 
 Textes liturgiques et formules de prière traditionnelles tirés de l'annexe du Compendium : Credo, Notre Père, Ave Maria, Gloria, Acte de contrition, Angélus, Rosaire, formules sacramentelles, prières en latin et en français.

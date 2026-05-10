@@ -482,6 +482,24 @@ async function main() {
 		endStep('source not found — skipped');
 	}
 
+	logStep('extracting Denzinger (Enchiridion Symbolorum, Fr — JesusMarie PDF)');
+	const denzingerPdf = join(SOURCES, 'denzinger/source.pdf');
+	const denzingerOutDir = join(OUT, 'denzinger');
+	if (existsSync(denzingerPdf)) {
+		mkdirSync(denzingerOutDir, { recursive: true });
+		const script = new URL('./prepare/denzinger/extract.py', import.meta.url).pathname;
+		const { spawnSync } = await import('node:child_process');
+		const proc = spawnSync('python3', [script], { stdio: 'inherit' });
+		if (proc.status !== 0) {
+			throw new Error(`denzinger extract.py failed (exit ${proc.status})`);
+		}
+		endStep('entries written');
+	} else if (existsSync(denzingerOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
 	logStep('extracting Catéchisme illustré (Wikisource EPUB)');
 	const catIllustreEpub = join(SOURCES, 'catechisme-illustre/source.epub');
 	const catIllustreOutDir = join(OUT, 'catechisme-illustre');

@@ -116,6 +116,11 @@
 					label: 'Catéchisme illustré',
 					description:
 						'Le Catéchisme illustré des vérités nécessaires (1897), 12 images, 12 leçons.'
+				},
+				{
+					href: '/denzinger',
+					label: 'Denzinger',
+					description: "L'Enchiridion Symbolorum — recueil canonique des définitions du Magistère."
 				}
 			]
 		},
@@ -259,7 +264,7 @@
 	.menu-grid {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		grid-template-rows: auto repeat(5, 1fr);
+		grid-template-rows: auto repeat(6, 1fr);
 		gap: 0.4rem 0;
 	}
 	.menu-col {
