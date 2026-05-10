@@ -116,9 +116,10 @@
 <style>
 	.gear-icon {
 		transform-origin: center;
+		transform: rotate(30deg);
 		transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	button[aria-expanded='true'] .gear-icon {
-		transform: rotate(30deg);
+		transform: rotate(60deg);
 	}
 </style>

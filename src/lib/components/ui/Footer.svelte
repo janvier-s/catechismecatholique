@@ -28,10 +28,13 @@
 
 	<p class="footer-motto">
 		<span class="footer-cross" aria-hidden="true">✠</span>
-		<span
-			>MMXXVI · Pour la plus grande gloire de Dieu ·
-			<abbr title="Ad Majorem Dei Gloriam">A.M.D.G.</abbr></span
-		>
+		<span>
+			MMXXVI · Pour la plus grande gloire de Dieu ·
+			<span class="amdg" tabindex="0">
+				<abbr>A.M.D.G.</abbr>
+				<span class="amdg-tip" role="tooltip">Ad Maiorem Dei Gloriam</span>
+			</span>
+		</span>
 	</p>
 	<p class="footer-copy">
 		Texte du Catéchisme © Libreria Editrice Vaticana &nbsp;·&nbsp; Bible © 2022 Fraternité de
@@ -116,6 +119,43 @@
 
 	.footer-motto abbr {
 		text-decoration: none;
+	}
+
+	.amdg {
+		position: relative;
+		display: inline-block;
+		cursor: help;
+		border-bottom: 1px dotted color-mix(in srgb, var(--color-fg) 35%, transparent);
+		outline: none;
+	}
+	.amdg-tip {
+		position: absolute;
+		left: 50%;
+		bottom: calc(100% + 0.5rem);
+		transform: translateX(-50%);
+		white-space: nowrap;
+		padding: 0.45rem 0.75rem;
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-size: 0.85rem;
+		font-weight: 500;
+		letter-spacing: 0.01em;
+		background: var(--color-panel);
+		color: var(--color-fg);
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
+		box-shadow: 0 4px 14px color-mix(in srgb, var(--color-fg) 12%, transparent);
+		opacity: 0;
+		pointer-events: none;
+		transition:
+			opacity 140ms ease,
+			transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
+		transform: translateX(-50%) translateY(4px);
+	}
+	.amdg:hover .amdg-tip,
+	.amdg:focus-visible .amdg-tip {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
 	}
 
 	@media (max-width: 640px) {

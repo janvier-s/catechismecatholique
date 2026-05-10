@@ -284,13 +284,16 @@
 		background: color-mix(in srgb, var(--color-accent) 12%, transparent);
 		color: var(--color-accent);
 	}
-	/* Hamburger ↔ X morph: top and bottom bars rotate to form an X
-	   centered on the middle of the icon (y=128 in the 256 viewBox) and
-	   the middle bar fades out. */
+	/* Hamburger ↔ X morph: top and bottom bars rotate around the icon's
+	   centre to cross at the middle, while the middle bar fades out.
+	   Use transform-box: fill-box so transform-origin coordinates are
+	   relative to each line's own bounding box (50% 50% = its midpoint),
+	   then translate the midpoint to the SVG centre and rotate. */
 	.burger-top,
 	.burger-mid,
 	.burger-bot {
-		transform-origin: 128px 128px;
+		transform-box: fill-box;
+		transform-origin: 50% 50%;
 		transition:
 			transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
 			opacity 160ms ease;
