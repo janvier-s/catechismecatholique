@@ -42,6 +42,10 @@ import type {
 	PgmrParagraphLocator,
 	VatIIStructure,
 	VatIIDoc,
+	CicStructure,
+	CicLivre,
+	CicCanonLocator,
+	CicCode,
 	ParagraphThemeRef
 } from './types';
 
@@ -882,6 +886,44 @@ export function loadVatIIDoc(slug: string, fetcher: Fetch = fetch): Promise<VatI
 		vatIIDocCache.set(slug, p);
 	}
 	return p;
+}
+
+// ─── CIC loaders ────────────────────────────────────────────────────────────
+
+let cicStructurePromise: Promise<CicStructure> | null = null;
+let cicCanonsPromise: Promise<Record<CicCode, Record<string, CicCanonLocator>>> | null = null;
+const cicLivreCache = new Map<string, Promise<CicLivre | null>>();
+
+export function loadCicStructure(fetcher: Fetch = fetch): Promise<CicStructure> {
+	if (!cicStructurePromise) {
+		cicStructurePromise = fetchJson<CicStructure>('/data/cic/structure.json', fetcher);
+	}
+	return cicStructurePromise;
+}
+
+export function loadCicLivre(slug: string, fetcher: Fetch = fetch): Promise<CicLivre | null> {
+	let p = cicLivreCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/cic/livres/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as CicLivre;
+		})();
+		cicLivreCache.set(slug, p);
+	}
+	return p;
+}
+
+export function loadCicCanons(
+	fetcher: Fetch = fetch
+): Promise<Record<CicCode, Record<string, CicCanonLocator>>> {
+	if (!cicCanonsPromise) {
+		cicCanonsPromise = fetchJson<Record<CicCode, Record<string, CicCanonLocator>>>(
+			'/data/cic/canons.json',
+			fetcher
+		);
+	}
+	return cicCanonsPromise;
 }
 
 // ─── Catho paragraph-themes index ──────────────────────────────────────────

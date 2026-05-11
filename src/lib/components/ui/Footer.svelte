@@ -23,6 +23,7 @@
 				<li><a href="/denzinger">Denzinger</a></li>
 				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
 				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>
+				<li><a href="/cic">Code de Droit Canonique</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">

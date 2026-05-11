@@ -77,6 +77,10 @@
 		if (p.startsWith('/vatican-ii/')) {
 			return true;
 		}
+		// CIC livre reader (hide on landing + canon redirect)
+		if (p.startsWith('/cic/') && !p.startsWith('/cic/c/')) {
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -178,9 +182,11 @@
 												? 'pgmr'
 												: page.url.pathname.startsWith('/vatican-ii')
 													? 'vatican-ii'
-													: page.url.pathname.startsWith('/calendrier')
-														? 'calendrier'
-														: 'ccc'}
+													: page.url.pathname.startsWith('/cic')
+														? 'cic'
+														: page.url.pathname.startsWith('/calendrier')
+															? 'calendrier'
+															: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

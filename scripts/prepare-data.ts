@@ -30,6 +30,7 @@ import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCdse } from './prepare/cdse/index.ts';
 import { preparePgmr } from './prepare/pgmr/index.ts';
 import { prepareVaticanII } from './prepare/vatican-ii/index.ts';
+import { prepareCic } from './prepare/cic/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
 import { prepareTrent } from './prepare/trent.ts';
 import { preparePiusXGrand } from './prepare/pius-x-grand.ts';
@@ -467,6 +468,24 @@ async function main() {
 		const present = vatII.structure.docs.filter((d) => d.present).length;
 		endStep(`${present}/${vatII.structure.docs.length} docs`);
 	} else if (existsSync(vatIIOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
+	logStep('building Code de Droit Canonique (1917 + 1983)');
+	const cicEpub = join(SOURCES, 'cic/cic.epub');
+	const cicOutDir = join(OUT, 'cic');
+	if (existsSync(cicEpub)) {
+		mkdirSync(cicOutDir, { recursive: true });
+		const cic = prepareCic({ epubPath: cicEpub, outDir: cicOutDir });
+		const livre83 = cic.structure.codes.find((c) => c.code === '1983')!.livres.length;
+		const livre17 = cic.structure.codes.find((c) => c.code === '1917')!.livres.length;
+		endStep(
+			`1983: ${livre83} livres / ${Object.keys(cic.canons['1983']).length} canons · ` +
+				`1917: ${livre17} livres / ${Object.keys(cic.canons['1917']).length} canons`
+		);
+	} else if (existsSync(cicOutDir)) {
 		endStep('source not found — using committed snapshot');
 	} else {
 		endStep('source not found — skipped');

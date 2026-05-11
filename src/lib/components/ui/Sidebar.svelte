@@ -23,6 +23,8 @@
 		loadPgmrChapter,
 		loadVatIIStructure,
 		loadVatIIDoc,
+		loadCicStructure,
+		loadCicLivre,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -46,6 +48,8 @@
 		PgmrChapter,
 		VatIIStructure,
 		VatIIDoc,
+		CicStructure,
+		CicLivre,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -127,6 +131,8 @@
 				return '/pgmr';
 			case 'vatican-ii':
 				return '/vatican-ii';
+			case 'cic':
+				return '/cic';
 			default:
 				return null;
 		}
@@ -309,6 +315,34 @@
 		}
 		(async () => {
 			vatIIActiveDoc = await loadVatIIDoc(slug);
+		})();
+	});
+
+	// ─── CIC state ───────────────────────────────────────────────────────────
+	let cicStructure: CicStructure | null = $state(null);
+	let cicActiveLivre: CicLivre | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'cic') return;
+		(async () => {
+			cicStructure = await loadCicStructure();
+		})();
+	});
+
+	const cicActiveSlug = $derived.by((): string | null => {
+		const m = page.url.pathname.match(/^\/cic\/(?:1983|1917)\/([^/]+)/);
+		return m ? m[1]! : null;
+	});
+
+	$effect(() => {
+		if (corpus !== 'cic') return;
+		const slug = cicActiveSlug;
+		if (!slug) {
+			cicActiveLivre = null;
+			return;
+		}
+		(async () => {
+			cicActiveLivre = await loadCicLivre(slug);
 		})();
 	});
 
@@ -1080,6 +1114,43 @@
 					children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
 				}
 			];
+		}
+		if (corpus === 'cic') {
+			if (!cicStructure || !cicActiveSlug) return [];
+			const activeLivre = cicActiveLivre;
+			// Show only the active livre's TOC (no cross-livre clutter, like
+			// the Vatican II rail). Each heading becomes one Item; canons
+			// aren't enumerated individually (would be hundreds).
+			if (!activeLivre || activeLivre.slug !== cicActiveSlug) return [];
+			const items: Item[] = [];
+			const base = `/cic/${activeLivre.code}/${activeLivre.slug}`;
+			items.push({
+				title: activeLivre.title,
+				kicker: `${activeLivre.code} · Livre ${activeLivre.n}`,
+				href: base,
+				defaultExpanded: true,
+				children: activeLivre.blocks
+					.filter((b) => b.kind === 'heading')
+					.map((b) => {
+						const h = b as Extract<typeof b, { kind: 'heading' }>;
+						const labelMap = {
+							partie: 'Partie',
+							section: 'Section',
+							titre: 'Titre',
+							chapitre: 'Chap.',
+							article: 'Art.'
+						} as const;
+						const level: 2 | 3 | 4 =
+							h.level === 'partie' || h.level === 'section' ? 2 : h.level === 'titre' ? 3 : 4;
+						return {
+							title: h.title,
+							href: `${base}#${h.anchor}`,
+							level,
+							...(h.label ? { kicker: `${labelMap[h.level]} ${h.label}` } : {})
+						};
+					})
+			});
+			return items;
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

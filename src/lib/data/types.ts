@@ -10,6 +10,7 @@ export type Corpus =
 	| 'cdse'
 	| 'pgmr'
 	| 'vatican-ii'
+	| 'cic'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -1100,4 +1101,45 @@ export interface VatIIDoc {
 	blocks: VatIIBlock[];
 	footnotes: VatIIFootnote[];
 	toc: VatIITocEntry[];
+}
+
+// ─── Code de Droit Canonique (CIC, 1917 + 1983) ──────────────────────────
+
+export type CicCode = '1983' | '1917';
+
+export type CicNode =
+	| {
+			kind: 'heading';
+			level: 'partie' | 'section' | 'titre' | 'chapitre' | 'article';
+			label?: string;
+			title: string;
+			anchor: string;
+	  }
+	| { kind: 'canon'; n: number; html: string };
+
+export interface CicLivre {
+	code: CicCode;
+	n: number;
+	slug: string;
+	title: string;
+	canonRange: [number, number];
+	blocks: CicNode[];
+}
+
+export interface CicLivreRef {
+	code: CicCode;
+	n: number;
+	slug: string;
+	title: string;
+	canonRange: [number, number];
+	totalCanons: number;
+}
+
+export interface CicStructure {
+	codes: { code: CicCode; livres: CicLivreRef[] }[];
+}
+
+export interface CicCanonLocator {
+	code: CicCode;
+	livreSlug: string;
 }

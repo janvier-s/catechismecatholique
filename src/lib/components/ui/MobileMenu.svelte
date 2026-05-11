@@ -89,6 +89,7 @@
 				{ href: '/denzinger', label: 'Denzinger' },
 				{ href: '/doctrine-sociale', label: 'Doctrine sociale' },
 				{ href: '/pgmr', label: 'Présentation Générale du Missel Romain' },
+				{ href: '/cic', label: 'Code de Droit Canonique' },
 				{ href: '/calendrier', label: 'Calendrier liturgique' },
 				{ href: '/prieres-formules', label: 'Prières & Formules' },
 				{ href: '/glossaire', label: 'Glossaire' },

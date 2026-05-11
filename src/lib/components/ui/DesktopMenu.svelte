@@ -180,6 +180,12 @@
 					label: 'Présentation Générale du Missel Romain',
 					eyebrow: '2002',
 					description: 'Norme liturgique de la messe romaine en 9 chapitres.'
+				},
+				{
+					href: '/cic',
+					label: 'Code de Droit Canonique',
+					eyebrow: '1917 + 1983',
+					description: "Les deux codes de droit canonique de l'Église latine."
 				}
 			]
 		}
