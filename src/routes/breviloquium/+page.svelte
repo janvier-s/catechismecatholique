@@ -34,7 +34,7 @@
 
 	<nav class="parts" aria-label="Parties">
 		{#each data.structure.parts as part (part.slug)}
-			<section class="part">
+			<section class="part" id={part.slug}>
 				<header class="part-head">
 					<p class="part-kicker">
 						{#if part.kind === 'partie'}
@@ -128,6 +128,7 @@
 		margin-top: 2.5rem;
 		border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
 		padding-top: 1.5rem;
+		scroll-margin-top: 80px;
 	}
 	.part-head {
 		margin-bottom: 1rem;

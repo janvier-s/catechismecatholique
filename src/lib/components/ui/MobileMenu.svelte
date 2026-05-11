@@ -102,7 +102,7 @@
 			]
 		},
 		{
-			title: 'Théologie & doctrine',
+			title: 'Catéchèse & doctrine',
 			links: [
 				{ href: '/breviloquium', label: 'Breviloquium (Bonaventure)' },
 				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique' },

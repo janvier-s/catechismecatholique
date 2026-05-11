@@ -29,7 +29,7 @@
 			</ul>
 		</div>
 		<div class="footer-col">
-			<p class="footer-col-head">Théologie & doctrine</p>
+			<p class="footer-col-head">Catéchèse & doctrine</p>
 			<ul>
 				<li><a href="/breviloquium">Breviloquium</a></li>
 				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>

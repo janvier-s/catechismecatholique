@@ -149,7 +149,7 @@
 			]
 		},
 		{
-			title: 'Théologie & doctrine',
+			title: 'Catéchèse & doctrine',
 			links: [
 				{
 					href: '/breviloquium',
