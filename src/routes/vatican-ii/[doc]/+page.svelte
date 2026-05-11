@@ -252,14 +252,19 @@
 	}
 
 	.paragraph {
-		margin: 1.5rem 0;
+		margin: 1.75rem 0;
 		scroll-margin-top: 80px;
+	}
+	/* When a § has a title, give it some extra breathing room above so it
+	   reads like a sub-section opener rather than just another paragraph. */
+	.paragraph:has(.paragraph-title) {
+		margin-top: 2.25rem;
 	}
 	.paragraph-head {
 		display: flex;
 		align-items: baseline;
-		gap: 0.6rem;
-		margin-bottom: 0.4rem;
+		gap: 0.7rem;
+		margin-bottom: 0.55rem;
 	}
 	.paragraph-num {
 		font-family: var(--font-ui);
@@ -269,16 +274,18 @@
 		color: var(--color-muted);
 		text-decoration: none;
 		flex: 0 0 auto;
+		/* Align baseline with the larger title text. */
+		align-self: baseline;
 	}
 	.paragraph-num:hover {
 		color: var(--color-accent);
 	}
 	.paragraph-title {
 		font-family: var(--font-heading);
-		font-style: italic;
-		font-weight: 600;
-		font-size: 1.05rem;
-		line-height: 1.3;
+		font-weight: 700;
+		font-size: clamp(1.15rem, 1.3vw, 1.3rem);
+		line-height: 1.25;
+		letter-spacing: -0.005em;
 		margin: 0;
 		color: var(--color-heading, var(--color-fg));
 		text-wrap: balance;
