@@ -168,8 +168,11 @@ function extractFootnotes(html: string): VatIIFootnote[] {
 function levelFromTitle(title: string): number {
 	const upper = title.toUpperCase();
 	if (/CHAPITRE\b/.test(upper)) return 2;
-	if (/^[IVXLC]+\b[\s.:-]/.test(title)) return 3;
-	if (/^[A-Z]\.\s/.test(title)) return 3;
+	if (/^[IVXLC]+\b[\s.:\-—]/.test(title)) return 3;
+	// Single-capital-letter prefixes (A., B), a)) are sub-parts of the Roman
+	// sub-chapters they fall under — one level deeper.
+	if (/^[A-Z][.)]\s/.test(title)) return 4;
+	if (/^[a-z]\)\s/.test(title)) return 4;
 	return 3;
 }
 
@@ -209,7 +212,10 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 			html: bodies.join('\n'),
 			footnoteRefs: refs
 		});
-		if (title) toc.push({ level: levelFromTitle(title), anchor, title, n });
+		// § titles always sit one level below the chapter/sub-chapter
+		// headings (lvl=4), so the sidebar nests them under the nearest
+		// Roman/letter divider.
+		if (title) toc.push({ level: 4, anchor, title, n });
 	}
 
 	function visitParagraphs(scope: string) {
@@ -330,12 +336,25 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 				continue;
 			}
 			if (cur.isPureTitle) {
+				// A bold-only <p> is either (a) a chapter/sub-chapter divider
+				// or (b) the missing title of an upcoming numpara whose body
+				// is prose (style B — SC §1 "Préambule"). Distinguish by
+				// looking at the title prefix: "CHAPITRE …", "I. …", "A. …",
+				// "a) …" are dividers; bare titles are pending § titles.
+				const t = cur.titleText!;
+				const looksLikeDivider =
+					/^CHAPITRE\b/i.test(t) ||
+					/^[IVXLC]+\b[\s.:\-—]/.test(t) ||
+					/^[A-Z][.):)]\s/.test(t) ||
+					/^[a-z]\)\s/.test(t);
 				let k = i + 1;
 				while (k < items.length && items[k]!.numpara === undefined && !items[k]!.isPureTitle) k++;
-				if (k < items.length && items[k]!.numpara !== undefined && !items[k]!.isPureTitle) {
-					pendingTitle = cur.titleText!;
+				const nextIsProseNumpara =
+					k < items.length && items[k]!.numpara !== undefined && !items[k]!.isPureTitle;
+				if (nextIsProseNumpara && !looksLikeDivider) {
+					pendingTitle = t;
 				} else {
-					emitHeading(cur.titleText!, levelFromTitle(cur.titleText!));
+					emitHeading(t, levelFromTitle(t));
 				}
 				i++;
 				continue;

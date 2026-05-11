@@ -1009,33 +1009,37 @@
 				};
 			});
 		}
-		// Flat TOC list → nested Item tree. Headings/§ titles at higher levels
-		// become parents of lower-level entries that follow them.
+		// Flatten the build-time toc into a list of root-level sidebar Items.
+		// We keep them flat (no parent-child) but pass `level` so SidebarItem
+		// renders them with the right typographic hierarchy — no expand
+		// clicks required, every heading/§-title is always visible.
 		function tocToItems(
 			toc: { level: number; anchor: string; title: string; n?: number }[],
 			base: string
 		): Item[] {
-			type Frame = { item: Item; level: number };
-			const root: Item[] = [];
-			const stack: Frame[] = [];
-			for (const e of toc) {
-				const item: Item = {
-					title: e.title,
+			return toc.map((e): Item => {
+				let kicker: string | undefined;
+				let displayTitle = e.title;
+				// CHAPITRE prefix → eyebrow + title. Roman/letter sub-chapter
+				// prefixes (I., A.) stay inline; they read as one line.
+				const chap = displayTitle.match(/^(CHAPITRE\s+[A-ZIVXLC]+)(?:\s*[:.\-—]\s*)(.+)$/i);
+				if (chap) {
+					kicker = chap[1]!.toUpperCase();
+					displayTitle = chap[2]!;
+				} else if (e.n !== undefined) {
+					// § paragraph title: red non-italic number + italic title.
+					// SidebarItem renders {@html …} so we can ship the markup.
+					displayTitle = `<span class="vii-num">${e.n}.</span> <em class="vii-title">${e.title}</em>`;
+				}
+				// Map build-time toc levels to SidebarItem visual levels.
+				const level: 2 | 3 | 4 = e.level <= 2 ? 2 : e.level === 3 ? 3 : 4;
+				return {
+					title: displayTitle,
 					href: `${base}#${e.anchor}`,
-					children: []
+					level,
+					...(kicker ? { kicker } : {})
 				};
-				while (stack.length > 0 && stack[stack.length - 1]!.level >= e.level) stack.pop();
-				if (stack.length === 0) root.push(item);
-				else stack[stack.length - 1]!.item.children!.push(item);
-				stack.push({ item, level: e.level });
-			}
-			// Strip empty children arrays so SidebarItem renders correctly.
-			const clean = (items: Item[]): Item[] =>
-				items.map((it) => ({
-					...it,
-					children: it.children && it.children.length > 0 ? clean(it.children) : undefined
-				}));
-			return clean(root);
+			});
 		}
 		if (corpus === 'vatican-ii') {
 			if (!vatIIStructure || !vatIIActiveSlug) return [];

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
+	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { frenchPunct } from '$lib/utils/typography';
 	import type { PageData } from './$types';
 
@@ -26,7 +27,7 @@
 	/>
 </svelte:head>
 
-<main class="vii-reader">
+<main class="vii-reader" use:scrollSpy>
 	<header class="head">
 		<BreadcrumbRail
 			crumbs={[
@@ -54,7 +55,7 @@
 					</h4>
 				{/if}
 			{:else}
-				<section class="paragraph" id="p{block.n}">
+				<section class="paragraph" id={block.title ? undefined : `p${block.n}`}>
 					<header class="paragraph-head">
 						<a
 							class="paragraph-num"
@@ -64,7 +65,9 @@
 							{block.n}
 						</a>
 						{#if block.title}
-							<h3 class="paragraph-title">{frenchPunct(block.title)}</h3>
+							<!-- id on the heading so scrollSpy (h2/h3/h4[id]) can
+							     track it and so deep-link anchors resolve here. -->
+							<h3 class="paragraph-title" id="p{block.n}">{frenchPunct(block.title)}</h3>
 						{/if}
 					</header>
 					{#if block.html}

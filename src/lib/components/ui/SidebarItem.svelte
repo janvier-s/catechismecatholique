@@ -195,4 +195,17 @@
 	.is-active:hover {
 		color: #fff !important;
 	}
+	/* Vatican II § entries: red non-italic number prefix + italic body. */
+	:global(.vii-num) {
+		color: var(--color-accent);
+		font-style: normal;
+		font-weight: 600;
+		margin-right: 0.25em;
+	}
+	:global(.vii-title) {
+		font-style: italic;
+	}
+	.is-active :global(.vii-num) {
+		color: #fff;
+	}
 </style>
