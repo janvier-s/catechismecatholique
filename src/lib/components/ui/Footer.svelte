@@ -18,8 +18,9 @@
 				<li><a href="/grand-catechisme">Grand Catéchisme</a></li>
 				<li><a href="/petit-catechisme">Petit Catéchisme</a></li>
 				<li><a href="/catechisme-illustre">Catéchisme illustré</a></li>
-				<li><a href="/boulanger">Catéchisme Boulanger</a></li>
+				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>
 				<li><a href="/denzinger">Denzinger</a></li>
+				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">

@@ -10,6 +10,7 @@ export type PanelTab =
 	| 'concordance'
 	| 'bible-verse'
 	| 'compendium'
+	| 'cdse-citers'
 	| 'ia'
 	| 'trent-notes'
 	| 'denzinger-cross-refs'

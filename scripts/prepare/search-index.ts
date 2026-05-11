@@ -4,13 +4,13 @@ import type { Paragraph, Chapter, ParagraphContext } from '../../src/lib/data/ty
 
 export interface SearchDoc {
 	id: string;
-	kind: 'paragraph' | 'heading' | 'compendium-question';
+	kind: 'paragraph' | 'heading' | 'compendium-question' | 'cdse-paragraph';
 	number?: number;
 	text: string;
 	title?: string; // breadcrumb / chapter title
 	paragraph_start?: number; // for heading hits — link target
 	chapter_slug?: string;
-	corpus?: 'ccc' | 'compendium';
+	corpus?: 'ccc' | 'compendium' | 'cdse';
 	compendium_part?: string;
 }
 
@@ -19,6 +19,13 @@ export interface CompendiumSearchDoc {
 	question: string;
 	answer: string;
 	partSlug: string;
+}
+
+export interface CdseSearchDoc {
+	number: number;
+	text: string;
+	chapterSlug: string;
+	chapterTitle: string;
 }
 
 const OPTIONS = {
@@ -49,7 +56,8 @@ export function buildSearchIndex(
 	paragraphs: Paragraph[],
 	chapters: Chapter[],
 	contexts: Record<number, ParagraphContext>,
-	compendium: CompendiumSearchDoc[] = []
+	compendium: CompendiumSearchDoc[] = [],
+	cdse: CdseSearchDoc[] = []
 ): { documents: SearchDoc[]; serialized: string } {
 	const docs: SearchDoc[] = [];
 
@@ -92,6 +100,18 @@ export function buildSearchIndex(
 			title: '',
 			corpus: 'compendium',
 			compendium_part: q.partSlug
+		});
+	}
+
+	for (const d of cdse) {
+		docs.push({
+			id: `cdse:${d.number}`,
+			kind: 'cdse-paragraph',
+			number: d.number,
+			text: d.text,
+			title: d.chapterTitle,
+			chapter_slug: d.chapterSlug,
+			corpus: 'cdse'
 		});
 	}
 

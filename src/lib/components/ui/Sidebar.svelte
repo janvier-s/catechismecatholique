@@ -17,6 +17,8 @@
 		loadDenzingerStructure,
 		loadBoulangerStructure,
 		loadBoulangerLesson,
+		loadCdseStructure,
+		loadCdseChapter,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -34,6 +36,8 @@
 		DenzingerStructure,
 		BoulangerStructure,
 		BoulangerLesson,
+		CdseStructure,
+		CdseChapter,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -106,7 +110,9 @@
 			case 'denzinger':
 				return '/denzinger/sommaire';
 			case 'boulanger':
-				return '/boulanger/sommaire';
+				return '/doctrine-catholique/sommaire';
+			case 'cdse':
+				return '/doctrine-sociale';
 			default:
 				return null;
 		}
@@ -189,7 +195,7 @@
 	// active lesson's mini-TOC inline so the user can navigate within the
 	// leçon without leaving the sidebar.
 	const boulangerActiveSlug = $derived.by((): string | null => {
-		const m = page.url.pathname.match(/^\/boulanger\/([^/]+)/);
+		const m = page.url.pathname.match(/^\/doctrine-catholique\/([^/]+)/);
 		const slug = m ? m[1]! : null;
 		return slug && slug !== 'sommaire' ? slug : null;
 	});
@@ -203,6 +209,35 @@
 		}
 		(async () => {
 			boulangerActiveLesson = await loadBoulangerLesson(slug);
+		})();
+	});
+
+	// ─── CDSE state ──────────────────────────────────────────────────────────
+	let cdseStructure: CdseStructure | null = $state(null);
+	let cdseActiveChapter: CdseChapter | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'cdse') return;
+		(async () => {
+			cdseStructure = await loadCdseStructure();
+		})();
+	});
+
+	const cdseActiveSlug = $derived.by((): string | null => {
+		const m = page.url.pathname.match(/^\/doctrine-sociale\/([^/]+)/);
+		const slug = m ? m[1]! : null;
+		return slug && slug !== 'p' ? slug : null;
+	});
+
+	$effect(() => {
+		if (corpus !== 'cdse') return;
+		const slug = cdseActiveSlug;
+		if (!slug) {
+			cdseActiveChapter = null;
+			return;
+		}
+		(async () => {
+			cdseActiveChapter = await loadCdseChapter(slug);
 		})();
 	});
 
@@ -797,8 +832,8 @@
 					title: t.title,
 					kicker: `Tome ${t.n}`,
 					href: t.lessons[0]
-						? `/boulanger/${t.lessons[0].slug}`
-						: `/boulanger/sommaire#tome-${t.n}`,
+						? `/doctrine-catholique/${t.lessons[0].slug}`
+						: `/doctrine-catholique/sommaire#tome-${t.n}`,
 					children: t.lessons.map((l): Item => {
 						const isActive = l.slug === activeSlug;
 						const miniTocChildren =
@@ -807,13 +842,13 @@
 										(item): Item => ({
 											title: item.label,
 											kicker: `${item.roman}.`,
-											href: `/boulanger/${l.slug}#${item.anchor}`,
+											href: `/doctrine-catholique/${l.slug}#${item.anchor}`,
 											children: item.children.length
 												? item.children.map(
 														(c): Item => ({
 															title: c.label,
 															kicker: `${c.n}°`,
-															href: `/boulanger/${l.slug}#${c.anchor}`
+															href: `/doctrine-catholique/${l.slug}#${c.anchor}`
 														})
 													)
 												: undefined
@@ -823,12 +858,62 @@
 						return {
 							title: l.title,
 							kicker: `Leçon ${l.n}`,
-							href: `/boulanger/${l.slug}`,
+							href: `/doctrine-catholique/${l.slug}`,
 							children: miniTocChildren
 						};
 					})
 				})
 			);
+		}
+		if (corpus === 'cdse') {
+			if (!cdseStructure) return [];
+			const activeSlug = cdseActiveSlug;
+			const activeChapter = cdseActiveChapter;
+			const out: Item[] = [];
+			for (const p of cdseStructure.parts) {
+				if (p.kind === 'index') continue;
+				const partItem: Item = {
+					title: p.title,
+					kicker:
+						p.kind === 'part'
+							? p.title.replace(/ partie$/i, '')
+							: p.kind === 'intro'
+								? 'Introduction'
+								: p.kind === 'conclusion'
+									? 'Conclusion'
+									: 'Préambule',
+					href: p.chapters[0] ? `/doctrine-sociale/${p.chapters[0].slug}` : '/doctrine-sociale',
+					children: p.chapters.map((c): Item => {
+						const isActive = c.slug === activeSlug;
+						const miniTocChildren =
+							isActive && activeChapter?.slug === c.slug
+								? activeChapter.blocks
+										.filter((b) => b.kind === 'heading' && b.level === 1)
+										.map(
+											(b): Item => ({
+												title: b.kind === 'heading' ? b.title : '',
+												href: `/doctrine-sociale/${c.slug}#${b.kind === 'heading' ? b.anchor : ''}`
+											})
+										)
+								: undefined;
+						return {
+							title: c.title,
+							kicker:
+								c.n !== null
+									? `Chapitre ${c.n}`
+									: p.kind === 'intro'
+										? 'Introduction'
+										: p.kind === 'conclusion'
+											? 'Conclusion'
+											: undefined,
+							href: `/doctrine-sociale/${c.slug}`,
+							children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
+						};
+					})
+				};
+				out.push(partItem);
+			}
+			return out;
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

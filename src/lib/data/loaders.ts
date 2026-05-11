@@ -34,6 +34,9 @@ import type {
 	BoulangerStructure,
 	BoulangerLesson,
 	BoulangerSommaire,
+	CdseStructure,
+	CdseChapter,
+	CdseParagraphLocator,
 	ParagraphThemeRef
 } from './types';
 
@@ -762,6 +765,55 @@ export function loadBoulangerLesson(
 		boulangerLessonCache.set(slug, p);
 	}
 	return p;
+}
+
+// ─── CDSE loaders ───────────────────────────────────────────────────────────
+
+let cdseStructurePromise: Promise<CdseStructure> | null = null;
+let cdseParagraphsPromise: Promise<Record<string, CdseParagraphLocator>> | null = null;
+let cdseCitedByCccPromise: Promise<Record<string, number[]>> | null = null;
+const cdseChapterCache = new Map<string, Promise<CdseChapter | null>>();
+
+export function loadCdseStructure(fetcher: Fetch = fetch): Promise<CdseStructure> {
+	if (!cdseStructurePromise) {
+		cdseStructurePromise = fetchJson<CdseStructure>('/data/cdse/structure.json', fetcher);
+	}
+	return cdseStructurePromise;
+}
+
+export function loadCdseChapter(slug: string, fetcher: Fetch = fetch): Promise<CdseChapter | null> {
+	let p = cdseChapterCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/cdse/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as CdseChapter;
+		})();
+		cdseChapterCache.set(slug, p);
+	}
+	return p;
+}
+
+export function loadCdseParagraphs(
+	fetcher: Fetch = fetch
+): Promise<Record<string, CdseParagraphLocator>> {
+	if (!cdseParagraphsPromise) {
+		cdseParagraphsPromise = fetchJson<Record<string, CdseParagraphLocator>>(
+			'/data/cdse/paragraphs.json',
+			fetcher
+		);
+	}
+	return cdseParagraphsPromise;
+}
+
+export function loadCdseCitedByCcc(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
+	if (!cdseCitedByCccPromise) {
+		cdseCitedByCccPromise = fetchJson<Record<string, number[]>>(
+			'/data/cdse/cited-by-ccc.json',
+			fetcher
+		);
+	}
+	return cdseCitedByCccPromise;
 }
 
 // ─── Catho paragraph-themes index ──────────────────────────────────────────

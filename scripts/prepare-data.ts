@@ -27,6 +27,7 @@ import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
 import { parseSourceTable } from './prepare/sources-index.ts';
 import { prepareCompendium } from './prepare/compendium/index.ts';
+import { prepareCdse } from './prepare/cdse/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
 import { prepareTrent } from './prepare/trent.ts';
 import { preparePiusXGrand } from './prepare/pius-x-grand.ts';
@@ -425,6 +426,21 @@ async function main() {
 	});
 	endStep(`${compendium.questionDocs.length} compendium docs ready`);
 
+	logStep('building Compendium de la doctrine sociale (CDSE)');
+	const cdseEpub = join(SOURCES, 'cdse/CDSE.epub');
+	const cdseOutDir = join(OUT, 'cdse');
+	if (existsSync(cdseEpub)) {
+		mkdirSync(cdseOutDir, { recursive: true });
+		const cdse = prepareCdse({ epubPath: cdseEpub, outDir: cdseOutDir });
+		endStep(
+			`${cdse.structure.totalParagraphs} paragraphs, ${Object.keys(cdse.chapters).length} chapters`
+		);
+	} else if (existsSync(cdseOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
 	const cecAiDir = join(OUT, 'cec/ai');
 	const cecAi = prepareCecAi({
 		sourceDir: join(SOURCES, 'cec-ai'),
@@ -567,11 +583,42 @@ async function main() {
 		allChapters.push(JSON.parse(readFileSync(join(OUT, 'cec/chapters', f), 'utf8')));
 	}
 	const { buildSearchIndex } = await import('./prepare/search-index.ts');
+	// Collect CDSE paragraphs for the search index. If the CDSE shards exist
+	// (built earlier in this run or already committed), flatten them into
+	// {number, text, chapterSlug, chapterTitle} docs.
+	const cdseSearchDocs: import('./prepare/search-index.ts').CdseSearchDoc[] = [];
+	const cdseChaptersDir = join(OUT, 'cdse/chapters');
+	if (existsSync(cdseChaptersDir)) {
+		type CdseChapterShard = {
+			slug: string;
+			title: string;
+			blocks: ({ kind: 'paragraph'; n: number; html: string } | { kind: 'heading' })[];
+		};
+		for (const f of readdirSync(cdseChaptersDir)) {
+			if (!f.endsWith('.json')) continue;
+			const ch = JSON.parse(readFileSync(join(cdseChaptersDir, f), 'utf8')) as CdseChapterShard;
+			for (const b of ch.blocks) {
+				if (b.kind !== 'paragraph') continue;
+				const text = b.html
+					.replace(/<sup[^>]*>[^<]*<\/sup>/g, '')
+					.replace(/<[^>]+>/g, ' ')
+					.replace(/\s+/g, ' ')
+					.trim();
+				cdseSearchDocs.push({
+					number: b.n,
+					text,
+					chapterSlug: ch.slug,
+					chapterTitle: ch.title
+				});
+			}
+		}
+	}
 	const search = buildSearchIndex(
 		allParagraphs,
 		allChapters,
 		paragraphContext,
-		compendium.questionDocs
+		compendium.questionDocs,
+		cdseSearchDocs
 	);
 	writeFileSync(join(OUT, 'search/search-index.json'), search.serialized);
 	endStep(`${search.documents.length} docs (${(search.serialized.length / 1024).toFixed(1)} KB)`);

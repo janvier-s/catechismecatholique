@@ -4,13 +4,13 @@ import type { PageLoad } from './$types';
 
 export interface SearchHit {
 	id: string;
-	kind: 'paragraph' | 'heading' | 'compendium-question';
+	kind: 'paragraph' | 'heading' | 'compendium-question' | 'cdse-paragraph';
 	number?: number;
 	text: string;
 	title?: string;
 	paragraph_start?: number;
 	chapter_slug?: string;
-	corpus?: 'ccc' | 'compendium';
+	corpus?: 'ccc' | 'compendium' | 'cdse';
 	compendium_part?: string;
 	score: number;
 	match: Record<string, string[]>;

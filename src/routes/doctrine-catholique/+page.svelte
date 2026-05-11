@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Catéchisme Boulanger · La Doctrine catholique</title>
+	<title>La Doctrine Catholique · Abbé Boulenger (1927)</title>
 	<meta
 		name="description"
 		content="La Doctrine catholique de l'Abbé Boulenger (Vitte, 1927) — 53 leçons en trois tomes : Le Dogme, La Morale, Les Moyens de Sanctification."
@@ -20,7 +20,7 @@
 			Manuel de catéchisme en {data.structure.tomes.reduce((t, tm) => t + tm.lessons.length, 0)} leçons,
 			réparti en trois tomes : Le Dogme, La Morale et Les Moyens de Sanctification.
 		</p>
-		<a class="hero-toc" href="/boulanger/sommaire">Sommaire complet →</a>
+		<a class="hero-toc" href="/doctrine-catholique/sommaire">Sommaire complet →</a>
 	</header>
 
 	<div class="tomes">
@@ -31,7 +31,7 @@
 					<span class="tome-kicker">Tome {tome.n}</span>
 					{#if firstSlug}
 						<h2 class="tome-title">
-							<a class="tome-title-link" href="/boulanger/{firstSlug}">{tome.title}</a>
+							<a class="tome-title-link" href="/doctrine-catholique/{firstSlug}">{tome.title}</a>
 						</h2>
 					{:else}
 						<h2 class="tome-title">{tome.title}</h2>
@@ -41,7 +41,7 @@
 				<ul class="lessons">
 					{#each tome.lessons as lesson (lesson.slug)}
 						<li>
-							<a class="lesson-row" href="/boulanger/{lesson.slug}">
+							<a class="lesson-row" href="/doctrine-catholique/{lesson.slug}">
 								<span class="lesson-num">{lesson.n}</span>
 								<span class="lesson-title">{lesson.title}</span>
 								<span class="lesson-arrow" aria-hidden="true">→</span>

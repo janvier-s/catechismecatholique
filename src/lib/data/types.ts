@@ -7,6 +7,7 @@ export type Corpus =
 	| 'catechisme-illustre'
 	| 'denzinger'
 	| 'boulanger'
+	| 'cdse'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -961,4 +962,50 @@ export interface BoulangerStructureTome {
 
 export interface BoulangerStructure {
 	tomes: BoulangerStructureTome[];
+}
+
+// ─── CDSE — Compendium de la doctrine sociale de l'Église (2004) ──────────
+
+export type CdseBlock =
+	| { kind: 'heading'; level: number; anchor: string; title: string }
+	| { kind: 'paragraph'; n: number; anchor: string; html: string; footnoteRefs: number[] };
+
+export interface CdseFootnote {
+	n: number;
+	html: string;
+	cccRefs: number[];
+}
+
+export interface CdseChapter {
+	slug: string;
+	n: number | null;
+	title: string;
+	partSlug: string;
+	partTitle: string;
+	blocks: CdseBlock[];
+	footnotes: CdseFootnote[];
+}
+
+export interface CdseChapterRef {
+	slug: string;
+	n: number | null;
+	title: string;
+	paragraphRange: [number, number] | null;
+}
+
+export interface CdsePartRef {
+	slug: string;
+	kind: 'front' | 'intro' | 'part' | 'conclusion' | 'index';
+	title: string;
+	chapters: CdseChapterRef[];
+}
+
+export interface CdseStructure {
+	parts: CdsePartRef[];
+	totalParagraphs: number;
+}
+
+export interface CdseParagraphLocator {
+	chapterSlug: string;
+	partSlug: string;
 }

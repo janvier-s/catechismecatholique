@@ -51,7 +51,7 @@
 </script>
 
 <svelte:head>
-	<title>{lesson.title} · Catéchisme Boulanger</title>
+	<title>{lesson.title} · La Doctrine Catholique</title>
 	<meta
 		name="description"
 		content={`Leçon ${lesson.n} — ${lesson.title} · La Doctrine catholique, Abbé Boulenger (1927), Tome ${lesson.tome} : ${lesson.tome_title}.`}
@@ -62,8 +62,12 @@
 	<header class="head">
 		<BreadcrumbRail
 			crumbs={[
-				{ href: '/boulanger', title: 'Catéchisme Boulanger' },
-				{ href: `/boulanger/${lesson.slug}`, kicker: `Leçon ${lesson.n}`, title: lesson.title }
+				{ href: '/doctrine-catholique', title: 'La Doctrine Catholique' },
+				{
+					href: `/doctrine-catholique/${lesson.slug}`,
+					kicker: `Leçon ${lesson.n}`,
+					title: lesson.title
+				}
 			]}
 		/>
 		<p class="kicker">
@@ -126,7 +130,7 @@
 	<nav class="pager" aria-label="Leçons adjacentes">
 		{#if data.prev}
 			<NavCard
-				href="/boulanger/{data.prev.slug}"
+				href="/doctrine-catholique/{data.prev.slug}"
 				title={`${data.prev.n}. ${data.prev.title}`}
 				eyebrow="Leçon précédente"
 				direction="prev"
@@ -136,7 +140,7 @@
 		{/if}
 		{#if data.next}
 			<NavCard
-				href="/boulanger/{data.next.slug}"
+				href="/doctrine-catholique/{data.next.slug}"
 				title={`${data.next.n}. ${data.next.title}`}
 				eyebrow="Leçon suivante"
 				direction="next"

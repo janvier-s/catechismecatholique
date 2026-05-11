@@ -10,13 +10,13 @@ import type { RequestHandler } from './$types';
 
 interface SearchResultDoc {
 	id: string;
-	kind: 'paragraph' | 'heading' | 'compendium-question';
+	kind: 'paragraph' | 'heading' | 'compendium-question' | 'cdse-paragraph';
 	number?: number;
 	text: string;
 	title?: string;
 	paragraph_start?: number;
 	chapter_slug?: string;
-	corpus?: 'ccc' | 'compendium';
+	corpus?: 'ccc' | 'compendium' | 'cdse';
 	compendium_part?: string;
 	score: number;
 	match: Record<string, string[]>;
@@ -287,7 +287,7 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 		title: r.title as string | undefined,
 		paragraph_start: r.paragraph_start as number | undefined,
 		chapter_slug: r.chapter_slug as string | undefined,
-		corpus: r.corpus as 'ccc' | 'compendium' | undefined,
+		corpus: r.corpus as 'ccc' | 'compendium' | 'cdse' | undefined,
 		compendium_part: r.compendium_part as string | undefined,
 		score: r.score,
 		match: r.match

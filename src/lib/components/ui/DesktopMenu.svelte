@@ -118,15 +118,26 @@
 						'Le Catéchisme illustré des vérités nécessaires (1897), 12 images, 12 leçons.'
 				},
 				{
-					href: '/boulanger',
-					label: 'Catéchisme Boulanger',
+					href: '/doctrine-catholique',
+					label: 'La Doctrine Catholique',
 					description:
 						"La Doctrine catholique de l'Abbé Boulenger (1927), 53 leçons en trois tomes."
-				},
+				}
+			]
+		},
+		{
+			title: 'Magistère',
+			links: [
 				{
 					href: '/denzinger',
 					label: 'Denzinger',
 					description: "L'Enchiridion Symbolorum, recueil canonique des définitions du Magistère."
+				},
+				{
+					href: '/doctrine-sociale',
+					label: 'Doctrine sociale',
+					description:
+						"Compendium de la doctrine sociale de l'Église (2004), 583 paragraphes en trois parties."
 				}
 			]
 		},
@@ -317,7 +328,7 @@
 		position: absolute;
 		right: 0;
 		top: calc(100% + 6px);
-		width: min(820px, calc(100vw - 2rem));
+		width: min(1040px, calc(100vw - 2rem));
 		background: var(--color-panel);
 		border: 1px solid var(--color-border);
 		border-radius: 6px;
@@ -326,7 +337,7 @@
 	}
 	.menu-grid {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		grid-template-rows: auto repeat(6, 1fr);
 		gap: 0.4rem 0;
 	}

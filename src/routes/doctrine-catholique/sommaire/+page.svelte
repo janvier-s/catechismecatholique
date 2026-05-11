@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	<title>Sommaire · Catéchisme Boulanger</title>
+	<title>Sommaire · La Doctrine Catholique</title>
 	<meta
 		name="description"
 		content="Table des matières de La Doctrine catholique de l'Abbé Boulenger : trois tomes et 53 leçons."
@@ -33,7 +33,7 @@
 			{data.structure.tomes.length} tomes · {totalLessons} leçons
 		</p>
 		<div class="toc-actions">
-			<a class="index-link" href="/boulanger">← Retour à l'accueil</a>
+			<a class="index-link" href="/doctrine-catholique">← Retour à l'accueil</a>
 		</div>
 	</header>
 
@@ -45,7 +45,7 @@
 					<p class="part-kicker">Tome {tome.n}</p>
 					{#if firstSlug}
 						<h2 class="part-title">
-							<a class="part-title-link" href="/boulanger/{firstSlug}">{tome.title}</a>
+							<a class="part-title-link" href="/doctrine-catholique/{firstSlug}">{tome.title}</a>
 						</h2>
 					{:else}
 						<h2 class="part-title">{tome.title}</h2>
@@ -55,7 +55,7 @@
 					{#each tome.lessons as lesson (lesson.slug)}
 						{@const miniToc = miniTocBySlug.get(lesson.slug) ?? []}
 						<article class="lesson">
-							<a class="row" href="/boulanger/{lesson.slug}">
+							<a class="row" href="/doctrine-catholique/{lesson.slug}">
 								<span class="row-label">
 									<span class="row-num">{lesson.n}.</span>
 									<span class="label-title">{lesson.title}</span>
@@ -66,7 +66,7 @@
 								<ol class="lesson-parts">
 									{#each miniToc as item (item.anchor)}
 										<li class="lesson-part">
-											<a class="part-row" href="/boulanger/{lesson.slug}#{item.anchor}">
+											<a class="part-row" href="/doctrine-catholique/{lesson.slug}#{item.anchor}">
 												<span class="part-roman">{item.roman}.</span>
 												<span class="part-label">{frenchPunct(item.label)}</span>
 											</a>
@@ -74,7 +74,10 @@
 												<ol class="part-subs">
 													{#each item.children as child (child.anchor)}
 														<li>
-															<a class="sub-row" href="/boulanger/{lesson.slug}#{child.anchor}">
+															<a
+																class="sub-row"
+																href="/doctrine-catholique/{lesson.slug}#{child.anchor}"
+															>
 																<span class="sub-num">{child.n}°</span>
 																<span class="sub-label">{frenchPunct(child.label)}</span>
 															</a>

@@ -21,7 +21,7 @@
 	const requested = new SvelteSet<number>();
 	$effect(() => {
 		for (const h of data.hits) {
-			if (h.kind === 'compendium-question') continue;
+			if (h.kind === 'compendium-question' || h.kind === 'cdse-paragraph') continue;
 			const num = h.kind === 'paragraph' ? h.number : h.paragraph_start;
 			if (!num || requested.has(num)) continue;
 			requested.add(num);
@@ -45,12 +45,13 @@
 	let visiblePages = $state(1);
 
 	// Active filter tab — Tout / Sections / Paragraphes / Compendium. URL state is canonical.
-	const activeType = $derived<'all' | 'headings' | 'paragraphs' | 'compendium'>(
+	const activeType = $derived<'all' | 'headings' | 'paragraphs' | 'compendium' | 'cdse'>(
 		(page.url.searchParams.get('type') as
 			| 'all'
 			| 'headings'
 			| 'paragraphs'
 			| 'compendium'
+			| 'cdse'
 			| null) ?? 'all'
 	);
 
@@ -208,6 +209,7 @@
 
 	function hitHref(h: Hit): string {
 		if (h.kind === 'compendium-question') return `/compendium/q/${h.number}`;
+		if (h.kind === 'cdse-paragraph') return `/doctrine-sociale/p/${h.number}`;
 		if (h.kind === 'paragraph') return `/cec/${h.number}`;
 		const anchor = h.id.split('#')[1] ?? '';
 		if (h.paragraph_start) return `/cec/${h.paragraph_start}${anchor ? '#' + anchor : ''}`;
@@ -230,6 +232,7 @@
 
 	function hitContextLine(h: Hit): string | null {
 		if (h.kind === 'compendium-question') return h.compendium_part ?? null;
+		if (h.kind === 'cdse-paragraph') return h.title ?? null;
 		const num = h.kind === 'paragraph' ? h.number : h.paragraph_start;
 		if (!num) return null;
 		const ctx = contexts[num];
@@ -253,6 +256,7 @@
 	const compendiumCount = $derived(
 		data.hits.filter((h) => h.kind === 'compendium-question').length
 	);
+	const cdseCount = $derived(data.hits.filter((h) => h.kind === 'cdse-paragraph').length);
 	const totalCount = $derived(data.hits.length);
 
 	const filteredHits = $derived.by<Hit[]>(() => {
@@ -260,12 +264,13 @@
 		if (activeType === 'paragraphs') return data.hits.filter((h) => h.kind === 'paragraph');
 		if (activeType === 'compendium')
 			return data.hits.filter((h) => h.kind === 'compendium-question');
+		if (activeType === 'cdse') return data.hits.filter((h) => h.kind === 'cdse-paragraph');
 		return data.hits;
 	});
 	const visibleHits = $derived(filteredHits.slice(0, visiblePages * PAGE_SIZE));
 	const hasMore = $derived(visibleHits.length < filteredHits.length);
 
-	function tabHref(type: 'all' | 'headings' | 'paragraphs' | 'compendium'): string {
+	function tabHref(type: 'all' | 'headings' | 'paragraphs' | 'compendium' | 'cdse'): string {
 		// Plain string assembly — URLSearchParams would trigger
 		// svelte/prefer-svelte-reactivity, but this is a one-shot pure
 		// builder with no reactivity needed.
@@ -508,6 +513,16 @@
 						Compendium <span class="tabular-nums text-muted">({compendiumCount})</span>
 					</a>
 				{/if}
+				{#if cdseCount > 0}
+					<a
+						href={tabHref('cdse')}
+						class="tab"
+						class:active={activeType === 'cdse'}
+						aria-current={activeType === 'cdse' ? 'true' : undefined}
+					>
+						Doctrine sociale <span class="tabular-nums text-muted">({cdseCount})</span>
+					</a>
+				{/if}
 			</nav>
 
 			{#if visibleHits.length > 5}
@@ -532,6 +547,14 @@
 								<div class="result-eyebrow tabular-nums">
 									<span class="tag">COMPENDIUM</span>
 									<span class="ref">Q. {h.number}</span>
+								</div>
+								<div class="result-snippet">
+									{@html snippetHtml(h)}
+								</div>
+							{:else if h.kind === 'cdse-paragraph'}
+								<div class="result-eyebrow tabular-nums">
+									<span class="tag">DOCTRINE SOCIALE</span>
+									<span class="ref">§ {h.number}</span>
 								</div>
 								<div class="result-snippet">
 									{@html snippetHtml(h)}

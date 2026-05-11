@@ -10,7 +10,8 @@
 		loadChapter,
 		loadCompendiumCitedBy,
 		loadParagraphThemes,
-		loadConcordanceParagraphManifest
+		loadConcordanceParagraphManifest,
+		loadCdseCitedByCcc
 	} from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
@@ -22,6 +23,7 @@
 	import TabBibleVerse from './TabBibleVerse.svelte';
 	import TabConcordance from './TabConcordance.svelte';
 	import TabCompendium from './TabCompendium.svelte';
+	import TabCdseCiters from './TabCdseCiters.svelte';
 	import TabIA from './TabIA.svelte';
 	import TabTrentNotes from './TabTrentNotes.svelte';
 	import TabDenzingerRefs from './TabDenzingerRefs.svelte';
@@ -55,6 +57,7 @@
 	let citedByList: number[] = $state([]);
 	let hasEnBref: boolean = $state(false);
 	let compendiumCiters: number[] = $state([]);
+	let cdseCiters: number[] = $state([]);
 	let hasThemes: boolean = $state(false);
 	let hasConcordance: boolean = $state(false);
 	let dataReady: boolean = $state(false);
@@ -66,6 +69,7 @@
 			citedByList = [];
 			hasEnBref = false;
 			compendiumCiters = [];
+			cdseCiters = [];
 			hasThemes = false;
 			hasConcordance = false;
 			dataReady = false;
@@ -77,6 +81,7 @@
 			citedByList = [];
 			hasEnBref = false;
 			compendiumCiters = [];
+			cdseCiters = [];
 			hasThemes = false;
 			hasConcordance = false;
 			dataReady = true;
@@ -85,17 +90,19 @@
 		const paragraphNum = ctx.paragraph;
 		dataReady = false;
 		(async () => {
-			const [p, citedBy, pc, compendiumCB, themesMap, concManifest] = await Promise.all([
+			const [p, citedBy, pc, compendiumCB, themesMap, concManifest, cdseCB] = await Promise.all([
 				loadParagraph(paragraphNum),
 				loadCitedBy(),
 				loadParagraphContext(paragraphNum),
 				loadCompendiumCitedBy(),
 				loadParagraphThemes(),
-				loadConcordanceParagraphManifest()
+				loadConcordanceParagraphManifest(),
+				loadCdseCitedByCcc()
 			]);
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
 			compendiumCiters = compendiumCB[paragraphNum] ?? [];
+			cdseCiters = cdseCB[String(paragraphNum)] ?? [];
 			hasThemes = (themesMap[String(paragraphNum)]?.length ?? 0) > 0;
 			hasConcordance = concManifest.has(paragraphNum);
 
@@ -166,6 +173,7 @@
 			citerSet.size === crossSet.size && [...citerSet].every((x) => crossSet.has(x));
 		const hasCitedBy = optimistic || (citedByList.length > 0 && !sameAsRenvois);
 		const hasCompendium = optimistic || compendiumCiters.length > 0;
+		const hasCdseCiters = optimistic || cdseCiters.length > 0;
 		const hasThemesG = optimistic || hasThemes;
 		const hasConcordanceG = optimistic || hasConcordance;
 		const hasEnBrefG = optimistic || hasEnBref;
@@ -183,6 +191,7 @@
 		const cit: TabDef[] = [];
 		if (hasSources) cit.push({ id: 'sources', label: 'Sources' });
 		if (hasCompendium) cit.push({ id: 'compendium', label: 'Compendium' });
+		if (hasCdseCiters) cit.push({ id: 'cdse-citers', label: 'Doctrine sociale' });
 		if (cit.length === 1) groups.push({ id: 'g-citations', label: cit[0]!.label, children: cit });
 		else if (cit.length > 1) groups.push({ id: 'g-citations', label: 'Citations', children: cit });
 
@@ -408,6 +417,8 @@
 					<TabBibleVerse />
 				{:else if $studyPanel.activeTab === 'compendium'}
 					<TabCompendium />
+				{:else if $studyPanel.activeTab === 'cdse-citers'}
+					<TabCdseCiters />
 				{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
 					<TabIA paragraphNumber={$studyPanel.context.paragraph} />
 				{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
@@ -495,6 +506,8 @@
 						<TabBibleVerse />
 					{:else if $studyPanel.activeTab === 'compendium'}
 						<TabCompendium />
+					{:else if $studyPanel.activeTab === 'cdse-citers'}
+						<TabCdseCiters />
 					{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
 						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
 					{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}

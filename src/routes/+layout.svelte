@@ -61,8 +61,8 @@
 			return true;
 		}
 		// Boulanger reader (hide on landing and sommaire)
-		if (p.startsWith('/boulanger/')) {
-			if (p.startsWith('/boulanger/sommaire')) return false;
+		if (p.startsWith('/doctrine-catholique/')) {
+			if (p.startsWith('/doctrine-catholique/sommaire')) return false;
 			return true;
 		}
 		// Liturgical calendar year/solennites pages (hide on landing)
@@ -158,11 +158,13 @@
 								? 'catechisme-illustre'
 								: page.url.pathname.startsWith('/denzinger')
 									? 'denzinger'
-									: page.url.pathname.startsWith('/boulanger')
+									: page.url.pathname.startsWith('/doctrine-catholique')
 										? 'boulanger'
-										: page.url.pathname.startsWith('/calendrier')
-											? 'calendrier'
-											: 'ccc'}
+										: page.url.pathname.startsWith('/doctrine-sociale')
+											? 'cdse'
+											: page.url.pathname.startsWith('/calendrier')
+												? 'calendrier'
+												: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}
