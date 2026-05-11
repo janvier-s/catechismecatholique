@@ -33,7 +33,8 @@ import type {
 	DenzingerEntryIndex,
 	BoulangerStructure,
 	BoulangerLesson,
-	BoulangerSommaire
+	BoulangerSommaire,
+	ParagraphThemeRef
 } from './types';
 
 type Fetch = typeof fetch;
@@ -761,4 +762,15 @@ export function loadBoulangerLesson(
 		boulangerLessonCache.set(slug, p);
 	}
 	return p;
+}
+
+// ─── Catho paragraph-themes index ──────────────────────────────────────────
+
+let _paragraphThemesCache: Record<string, ParagraphThemeRef[]> | null = null;
+
+export async function loadParagraphThemes(): Promise<Record<string, ParagraphThemeRef[]>> {
+	if (_paragraphThemesCache) return _paragraphThemesCache;
+	const res = await fetch('/data/cec/paragraph-themes.json');
+	_paragraphThemesCache = await res.json();
+	return _paragraphThemesCache!;
 }

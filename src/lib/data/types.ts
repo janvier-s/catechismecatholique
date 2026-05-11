@@ -328,6 +328,13 @@ export interface ConcordanceByParagraphEntry {
 export type ConcordanceByParagraph = Record<string, ConcordanceByParagraphEntry[]>;
 // Keys are stringified paragraph numbers ("1850").
 
+// Paragraph-level thematic refs from the catho.org concordance.
+// Shape of /data/cec/paragraph-themes.json: paragraphNumber → [{name, slug}].
+export interface ParagraphThemeRef {
+	name: string; // Display name of the catho theme
+	slug: string; // Glossary entry slug (may or may not exist as an entry)
+}
+
 // Glossary (thematic index + Levada definitions). Built by
 // scripts/prepare/glossary.ts.
 export type GlossaryClusterId =

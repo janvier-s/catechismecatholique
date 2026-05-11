@@ -21,6 +21,12 @@ import { parseGlossaryFr, type GlossaryFrEntry } from './glossary-fr.ts';
 import { EN_OVERLAY, type EnOverlay } from './glossary-en-overlay.ts';
 import { CLUSTERS, clusterFor, type Cluster, type ClusterId } from './glossary-clusters.ts';
 import { GLOSSARY_EXTRAS } from './glossary-extras.ts';
+import {
+	CATHO_SLUG_MAP,
+	CATHO_NEW_ENTRY_NAMES,
+	CATHO_NEW_ENTRY_CLUSTERS,
+	getCathoThemes
+} from './glossary-catho.ts';
 
 export interface GlossaryEntry {
 	slug: string;
@@ -44,6 +50,7 @@ export interface GlossaryBundle {
 	entries: GlossaryEntry[];
 	clusters: GlossaryClusterMeta[];
 	featured: string[]; // slugs of the top ~24 by totalRefs
+	newEntrySlugs?: Map<string, string>; // catho new-entry name → generated slug
 }
 
 // Strip French inflection markers like `(s)`, `(e)`, `(se)` from a term so
@@ -184,6 +191,54 @@ export function buildGlossary(enXml: string, frXmlByFile: Map<string, string>): 
 		});
 	}
 
+	// Fourth pass: catho.org thematic concordance integration.
+	// A. Enrich existing entries with additional catho refs.
+	// B. Add genuinely new entries for concepts missing from all prior passes.
+	const cathoThemes = getCathoThemes();
+	const cathoThemesByName = new Map(cathoThemes.map((t) => [t.theme, t.cec]));
+
+	// Build a lookup from slug → entry for fast enrichment.
+	const outBySlug = new Map<string, GlossaryEntry>();
+	for (const e of out) outBySlug.set(e.slug, e);
+
+	// A. Enrich existing entries.
+	for (const [themeName, targetSlug] of Object.entries(CATHO_SLUG_MAP)) {
+		if (targetSlug === null) continue; // skip-listed
+		const entry = outBySlug.get(targetSlug);
+		if (!entry) continue;
+		const cathoRefs = cathoThemesByName.get(themeName);
+		if (!cathoRefs || cathoRefs.length === 0) continue;
+		// Merge catho refs into directRefs and refsCovered, recompute totalRefs.
+		entry.directRefs = dedupSort([...entry.directRefs, ...cathoRefs]);
+		entry.refsCovered = dedupSort([...entry.refsCovered, ...cathoRefs]);
+		entry.totalRefs =
+			entry.directRefs.length + entry.subEntries.reduce((a, s) => a + s.refs.length, 0);
+	}
+
+	// B. Add new entries.
+	// Rebuild existingByNorm to include pass-3 additions before checking.
+	const existingByNormFull = new Set(out.map((e) => normCompare(e.term)));
+	const newEntrySlugs = new Map<string, string>();
+	for (const name of CATHO_NEW_ENTRY_NAMES) {
+		if (existingByNormFull.has(normCompare(name))) continue; // guard against duplicates
+		const refs = cathoThemesByName.get(name) ?? [];
+		const slug = uniqueSlug(SLUG_FALLBACK(name), slugUsed);
+		newEntrySlugs.set(name, slug);
+		const clusters = CATHO_NEW_ENTRY_CLUSTERS[name] ?? [];
+		out.push({
+			slug,
+			term: name,
+			definition: undefined,
+			directRefs: refs,
+			subEntries: [],
+			seeAlso: [],
+			clusters,
+			totalRefs: refs.length,
+			refsCovered: dedupSort(refs),
+			standalone: true
+		});
+	}
+
 	// Sort entries alphabetically by their normalised term.
 	out.sort((a, b) => normCompare(a.term).localeCompare(normCompare(b.term)));
 
@@ -203,7 +258,7 @@ export function buildGlossary(enXml: string, frXmlByFile: Map<string, string>): 
 		.slice(0, 24)
 		.map((e) => e.slug);
 
-	return { entries: out, clusters: clusterMeta, featured };
+	return { entries: out, clusters: clusterMeta, featured, newEntrySlugs };
 }
 
 function uniqueSlug(seed: string, used: Set<string>): string {

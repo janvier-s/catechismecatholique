@@ -5,6 +5,7 @@ export type PanelTab =
 	| 'cross-refs'
 	| 'cited-by'
 	| 'sources'
+	| 'themes'
 	| 'en-bref'
 	| 'concordance'
 	| 'bible-verse'

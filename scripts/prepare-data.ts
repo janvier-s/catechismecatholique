@@ -246,6 +246,12 @@ async function main() {
 		`${glossary.entries.length} entries, ${glossary.clusters.length} clusters, ${glossary.featured.length} featured`
 	);
 
+	// Build catho paragraph-themes inverted index
+	const { buildParagraphThemesIndex } = await import('./prepare/glossary-catho.ts');
+	const paragraphThemes = buildParagraphThemesIndex(glossary.newEntrySlugs ?? new Map());
+	writeFileSync(join(OUT, 'cec/paragraph-themes.json'), JSON.stringify(paragraphThemes));
+	logStep(`paragraph-themes: ${Object.keys(paragraphThemes).length} paragraphs indexed`);
+
 	logStep('building search suggestions (related topics)');
 	const { buildSearchSuggestions } = await import('./prepare/search-suggestions.ts');
 	const searchSuggestions = buildSearchSuggestions(glossary);

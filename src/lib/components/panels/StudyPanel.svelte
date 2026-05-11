@@ -23,6 +23,7 @@
 	import TabIA from './TabIA.svelte';
 	import TabTrentNotes from './TabTrentNotes.svelte';
 	import TabDenzingerRefs from './TabDenzingerRefs.svelte';
+	import TabThemes from './TabThemes.svelte';
 	import TabStrip from './TabStrip.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
@@ -48,6 +49,7 @@
 		{ id: 'cross-refs', label: 'Renvois' },
 		{ id: 'cited-by', label: 'Cités dans' },
 		{ id: 'sources', label: 'Sources' },
+		{ id: 'themes', label: 'Thèmes' },
 		{ id: 'compendium', label: 'Compendium' },
 		{ id: 'bible', label: 'Bible' },
 		{ id: 'concordance', label: 'Concordance' },
@@ -144,6 +146,8 @@
 		if (hasCrossRefs) out.push({ id: 'cross-refs', label: 'Renvois' });
 		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités dans' });
 		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
+		// Always show Thèmes for paragraph contexts; the tab body handles empty state.
+		out.push({ id: 'themes', label: 'Thèmes' });
 		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
 		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
 		// Always show Concordance for paragraph contexts; the tab body handles empty state.
@@ -290,6 +294,8 @@
 					<TabEnBref />
 				{:else if $studyPanel.activeTab === 'sources'}
 					<TabSources />
+				{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
+					<TabThemes />
 				{:else if $studyPanel.activeTab === 'concordance'}
 					<TabConcordance />
 				{:else if $studyPanel.activeTab === 'bible-verse'}
@@ -359,6 +365,8 @@
 						<TabEnBref />
 					{:else if $studyPanel.activeTab === 'sources'}
 						<TabSources />
+					{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
+						<TabThemes />
 					{:else if $studyPanel.activeTab === 'concordance'}
 						<TabConcordance />
 					{:else if $studyPanel.activeTab === 'bible-verse'}
