@@ -122,6 +122,36 @@ function stripCrossLinks(html: string): string {
 }
 
 /**
+ * Canon bodies contain cross-references encoded as EPUB-internal links —
+ * `<a href="fr83l2_split1.html#f2.230">cf. can. 230</a>`. The href points
+ * at a sibling EPUB file we don't ship; left untouched, the prerenderer
+ * 404s on every one. Rewrite them to canonical deep-link URLs so the
+ * references stay clickable, then drop any internal-file href we can't
+ * resolve.
+ *   fr17*.html#f1.N  →  /cic/1917/c/N
+ *   fr83*.html#f2.N  →  /cic/1983/c/N
+ */
+function rewriteCanonLinks(html: string): string {
+	return (
+		html
+			.replace(
+				/<a\s+([^>]*?)href="fr(17|83)[^"]*?#f[12]\.(\d+)"([^>]*)>/g,
+				(_m, pre, code, n, post) => {
+					const target = code === '17' ? `/cic/1917/c/${n}` : `/cic/1983/c/${n}`;
+					return `<a ${pre}href="${target}"${post}>`;
+				}
+			)
+			// Bare same-file anchors — anchor prefix encodes the code (f1 = 1917,
+			// f2 = 1983), so we can resolve without knowing the originating file.
+			.replace(/<a\s+([^>]*?)href="#f([12])\.(\d+)"([^>]*)>/g, (_m, pre, fcode, n, post) => {
+				const target = fcode === '1' ? `/cic/1917/c/${n}` : `/cic/1983/c/${n}`;
+				return `<a ${pre}href="${target}"${post}>`;
+			})
+			.replace(/<a\s+[^>]*href="fr(?:17|83)[^"]*"[^>]*>([\s\S]*?)<\/a>/g, '$1')
+	);
+}
+
+/**
  * Parse one or more HTML files belonging to a single Livre and emit the
  * ordered block stream (headings + canons with bodies).
  */
@@ -251,7 +281,7 @@ function parseLivre(files: ContentFile[]): {
 		while ((pm = pRe.exec(slice))) {
 			const attrs = pm[1] ?? '';
 			if (/class="cn"/.test(attrs)) continue;
-			const body = decodeEntities(pm[2] ?? '').trim();
+			const body = rewriteCanonLinks(decodeEntities(pm[2] ?? '')).trim();
 			if (body) bodies.push(`<p>${body}</p>`);
 		}
 		blocks.push({ kind: 'canon', n: m.n, html: bodies.join('\n') });

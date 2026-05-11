@@ -1136,38 +1136,68 @@
 				);
 			}
 
-			// /cic/[code]/[livre] reader — show only the active livre's TOC.
+			// /cic/[code]/[livre] reader — show the livre's heading tree, properly
+			// nested so chapitres sit under their titre and articles under their
+			// chapitre (matches the body's visual hierarchy).
 			const activeLivre = cicActiveLivre;
 			if (!activeLivre || activeLivre.slug !== cicActiveSlug) return [];
-			const items: Item[] = [];
 			const base = `/cic/${activeLivre.code}/${activeLivre.slug}`;
-			items.push({
-				title: activeLivre.title,
-				kicker: `Livre ${activeLivre.n}`,
-				href: base,
-				defaultExpanded: true,
-				children: activeLivre.blocks
-					.filter((b) => b.kind === 'heading')
-					.map((b) => {
-						const h = b as Extract<typeof b, { kind: 'heading' }>;
-						const labelMap = {
-							partie: 'Partie',
-							section: 'Section',
-							titre: 'Titre',
-							chapitre: 'Chap.',
-							article: 'Art.'
-						} as const;
-						const level: 2 | 3 | 4 =
-							h.level === 'partie' || h.level === 'section' ? 2 : h.level === 'titre' ? 3 : 4;
-						return {
-							title: h.title,
-							href: `${base}#${h.anchor}`,
-							level,
-							...(h.label ? { kicker: `${labelMap[h.level]} ${h.label}` } : {})
-						};
-					})
-			});
-			return items;
+			const labelMap = {
+				partie: 'Partie',
+				section: 'Section',
+				titre: 'Titre',
+				chapitre: 'Chap.',
+				article: 'Art.'
+			} as const;
+			const depthMap = { partie: 1, section: 2, titre: 3, chapitre: 4, article: 5 } as const;
+			const levelMap: Record<keyof typeof depthMap, 2 | 3 | 4> = {
+				partie: 2,
+				section: 2,
+				titre: 3,
+				chapitre: 4,
+				article: 4
+			};
+
+			const headings = activeLivre.blocks.filter((b) => b.kind === 'heading') as Extract<
+				(typeof activeLivre.blocks)[number],
+				{ kind: 'heading' }
+			>[];
+
+			const root: Item[] = [];
+			const stack: { depth: number; item: Item }[] = [];
+			for (const h of headings) {
+				const d = depthMap[h.level];
+				while (stack.length && stack[stack.length - 1]!.depth >= d) stack.pop();
+				const item: Item = {
+					title: h.title,
+					href: `${base}#${h.anchor}`,
+					level: levelMap[h.level],
+					...(h.label ? { kicker: `${labelMap[h.level]} ${h.label}` } : {}),
+					children: []
+				};
+				if (stack.length === 0) root.push(item);
+				else stack[stack.length - 1]!.item.children!.push(item);
+				stack.push({ depth: d, item });
+			}
+			// Strip empty children arrays so leaf items don't render the
+			// expand chevron.
+			function prune(items: Item[]) {
+				for (const it of items) {
+					if (it.children && it.children.length === 0) delete it.children;
+					else if (it.children) prune(it.children);
+				}
+			}
+			prune(root);
+
+			return [
+				{
+					title: activeLivre.title,
+					kicker: `Livre ${activeLivre.n}`,
+					href: base,
+					defaultExpanded: true,
+					children: root
+				}
+			];
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

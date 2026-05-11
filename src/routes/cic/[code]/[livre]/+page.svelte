@@ -143,48 +143,68 @@
 		line-height: var(--reader-line-height, 1.6);
 	}
 
-	/* Heading levels: Partie / Section ≥ Titre > Chapitre > Article. */
+	/* Heading hierarchy: Partie ▸ Section ▸ Titre ▸ Chapitre ▸ Article.
+	   Size + vertical rhythm carry the nesting — bigger top margins on
+	   higher levels visually group what follows. */
 	.h-partie,
 	.h-section {
 		font-family: var(--font-heading);
-		font-size: 1.5rem;
 		font-weight: 700;
 		text-align: center;
-		margin: 3rem 0 1.25rem;
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
 		text-wrap: balance;
 		scroll-margin-top: 80px;
 	}
+	.h-partie {
+		font-size: clamp(1.7rem, 3.5vw, 2.1rem);
+		margin: 4rem 0 1.5rem;
+		padding-bottom: 0.75rem;
+		border-bottom: 2px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+		letter-spacing: 0.01em;
+	}
+	.h-section {
+		font-size: clamp(1.4rem, 3vw, 1.7rem);
+		margin: 3rem 0 1.25rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+	}
+
 	.h-titre,
 	.h-chapitre,
 	.h-article {
 		font-family: var(--font-heading);
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
-		margin: 2rem 0 0.85rem;
+		gap: 0.3rem;
 		scroll-margin-top: 80px;
 		text-wrap: balance;
 	}
 	.h-titre {
-		font-size: 1.3rem;
+		font-size: clamp(1.35rem, 2.6vw, 1.6rem);
 		font-weight: 700;
+		margin: 2.75rem 0 1rem;
+		padding-top: 0.85rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-fg) 14%, transparent);
 	}
 	.h-chapitre {
 		font-size: 1.1rem;
 		font-weight: 600;
+		margin: 2rem 0 0.75rem 1.25rem;
+		padding-left: 0.85rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
 	}
 	.h-article {
-		font-size: 1rem;
+		font-size: 0.95rem;
 		font-weight: 600;
 		font-style: italic;
 		color: var(--color-subtle);
+		margin: 1.5rem 0 0.65rem 2.5rem;
+		padding-left: 0.85rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-fg) 18%, transparent);
 	}
 	.h-label {
 		font-family: var(--font-ui);
 		font-style: normal;
-		font-size: 0.7rem;
+		font-size: 0.72rem;
 		font-weight: 700;
 		letter-spacing: 0.18em;
 		text-transform: uppercase;
