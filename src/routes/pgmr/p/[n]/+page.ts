@@ -2,7 +2,10 @@ import { error, redirect } from '@sveltejs/kit';
 import { loadPgmrParagraphs } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
-export const prerender = true;
+// Worker-served redirect (one route handler, not N prerendered files).
+// Cloudflare Pages caps static deploys at 20 000 files; pre-rendering every
+// /pgmr/p/N pushed us over.
+export const prerender = false;
 
 export const load: PageLoad = async ({ params, fetch }) => {
 	const n = parseInt(params.n, 10);

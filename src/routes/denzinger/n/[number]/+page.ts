@@ -1,17 +1,11 @@
 import { error, redirect } from '@sveltejs/kit';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { loadDenzingerIndex } from '$lib/data/loaders';
-import type { PageLoad, EntryGenerator } from './$types';
+import type { PageLoad } from './$types';
 
-export const prerender = true;
-
-export const entries: EntryGenerator = () => {
-	const index = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/denzinger/index.json'), 'utf-8')
-	) as Record<string, { unit_slug: string }>;
-	return Object.keys(index).map((n) => ({ number: n }));
-};
+// Worker-served redirect: 2851 entries pushed the prerender output past
+// Cloudflare Pages' 20 000-file cap. The Worker resolves the slug per
+// request — tiny payload, fine for low-traffic deep links.
+export const prerender = false;
 
 export const load: PageLoad = async ({ params, fetch }) => {
 	const n = parseInt(params.number, 10);

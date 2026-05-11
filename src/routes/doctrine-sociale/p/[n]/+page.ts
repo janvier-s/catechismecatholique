@@ -2,7 +2,8 @@ import { error, redirect } from '@sveltejs/kit';
 import { loadCdseParagraphs } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
-export const prerender = true;
+// Worker-served redirect (see /pgmr/p/[n]).
+export const prerender = false;
 
 export const load: PageLoad = async ({ params, fetch }) => {
 	const n = parseInt(params.n, 10);
