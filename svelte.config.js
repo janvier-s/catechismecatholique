@@ -9,9 +9,29 @@ const config = {
 	},
 	kit: {
 		adapter: adapter({
+			// Cloudflare Pages enforces ≤100 routing rules and ≤100 chars per
+			// rule. The `<all>` auto-expansion blows past both (a Boulanger
+			// lesson filename produces a 103-char rule). List wildcards for
+			// every static dir/file served directly by Pages instead.
 			routes: {
 				include: ['/*'],
-				exclude: ['<all>']
+				exclude: [
+					'/_app/*',
+					'/data/*',
+					'/img/*',
+					'/fonts/*',
+					'/favicon.ico',
+					'/favicon.svg',
+					'/favicon-96x96.png',
+					'/apple-touch-icon.png',
+					'/web-app-manifest-192x192.png',
+					'/web-app-manifest-512x512.png',
+					'/site.webmanifest',
+					'/llms.txt',
+					'/robots.txt',
+					'/theme-init.js',
+					'/service-worker.js'
+				]
 			}
 		}),
 		inlineStyleThreshold: 2048,
