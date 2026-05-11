@@ -8,6 +8,7 @@ export type Corpus =
 	| 'denzinger'
 	| 'boulanger'
 	| 'cdse'
+	| 'pgmr'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -1008,4 +1009,40 @@ export interface CdseStructure {
 export interface CdseParagraphLocator {
 	chapterSlug: string;
 	partSlug: string;
+}
+
+// ─── PGMR — Présentation Générale du Missel Romain (2002) ─────────────────
+
+export type PgmrBlock =
+	| { kind: 'heading'; level: number; anchor: string; title: string }
+	| { kind: 'paragraph'; n: number; anchor: string; html: string; footnoteRefs: number[] };
+
+export interface PgmrFootnote {
+	n: number;
+	html: string;
+	cccRefs: number[];
+}
+
+export interface PgmrChapter {
+	slug: string;
+	n: number | null;
+	title: string;
+	blocks: PgmrBlock[];
+	footnotes: PgmrFootnote[];
+}
+
+export interface PgmrChapterRef {
+	slug: string;
+	n: number | null;
+	title: string;
+	paragraphRange: [number, number] | null;
+}
+
+export interface PgmrStructure {
+	chapters: PgmrChapterRef[];
+	totalParagraphs: number;
+}
+
+export interface PgmrParagraphLocator {
+	chapterSlug: string;
 }

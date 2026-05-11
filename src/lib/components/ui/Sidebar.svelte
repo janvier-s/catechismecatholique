@@ -19,6 +19,8 @@
 		loadBoulangerLesson,
 		loadCdseStructure,
 		loadCdseChapter,
+		loadPgmrStructure,
+		loadPgmrChapter,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -38,6 +40,8 @@
 		BoulangerLesson,
 		CdseStructure,
 		CdseChapter,
+		PgmrStructure,
+		PgmrChapter,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -113,6 +117,8 @@
 				return '/doctrine-catholique/sommaire';
 			case 'cdse':
 				return '/doctrine-sociale';
+			case 'pgmr':
+				return '/pgmr';
 			default:
 				return null;
 		}
@@ -238,6 +244,35 @@
 		}
 		(async () => {
 			cdseActiveChapter = await loadCdseChapter(slug);
+		})();
+	});
+
+	// ─── PGMR state ──────────────────────────────────────────────────────────
+	let pgmrStructure: PgmrStructure | null = $state(null);
+	let pgmrActiveChapter: PgmrChapter | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'pgmr') return;
+		(async () => {
+			pgmrStructure = await loadPgmrStructure();
+		})();
+	});
+
+	const pgmrActiveSlug = $derived.by((): string | null => {
+		const m = page.url.pathname.match(/^\/pgmr\/([^/]+)/);
+		const slug = m ? m[1]! : null;
+		return slug && slug !== 'p' ? slug : null;
+	});
+
+	$effect(() => {
+		if (corpus !== 'pgmr') return;
+		const slug = pgmrActiveSlug;
+		if (!slug) {
+			pgmrActiveChapter = null;
+			return;
+		}
+		(async () => {
+			pgmrActiveChapter = await loadPgmrChapter(slug);
 		})();
 	});
 
@@ -914,6 +949,31 @@
 				out.push(partItem);
 			}
 			return out;
+		}
+		if (corpus === 'pgmr') {
+			if (!pgmrStructure) return [];
+			const activeSlug = pgmrActiveSlug;
+			const activeChapter = pgmrActiveChapter;
+			return pgmrStructure.chapters.map((c): Item => {
+				const isActive = c.slug === activeSlug;
+				const miniTocChildren =
+					isActive && activeChapter?.slug === c.slug
+						? activeChapter.blocks
+								.filter((b) => b.kind === 'heading' && b.level === 1)
+								.map(
+									(b): Item => ({
+										title: b.kind === 'heading' ? b.title : '',
+										href: `/pgmr/${c.slug}#${b.kind === 'heading' ? b.anchor : ''}`
+									})
+								)
+						: undefined;
+				return {
+					title: c.title,
+					kicker: c.n !== null ? `Chapitre ${c.n}` : 'Préambule',
+					href: `/pgmr/${c.slug}`,
+					children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
+				};
+			});
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

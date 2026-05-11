@@ -37,6 +37,9 @@ import type {
 	CdseStructure,
 	CdseChapter,
 	CdseParagraphLocator,
+	PgmrStructure,
+	PgmrChapter,
+	PgmrParagraphLocator,
 	ParagraphThemeRef
 } from './types';
 
@@ -814,6 +817,44 @@ export function loadCdseCitedByCcc(fetcher: Fetch = fetch): Promise<Record<strin
 		);
 	}
 	return cdseCitedByCccPromise;
+}
+
+// ─── PGMR loaders ──────────────────────────────────────────────────────────
+
+let pgmrStructurePromise: Promise<PgmrStructure> | null = null;
+let pgmrParagraphsPromise: Promise<Record<string, PgmrParagraphLocator>> | null = null;
+const pgmrChapterCache = new Map<string, Promise<PgmrChapter | null>>();
+
+export function loadPgmrStructure(fetcher: Fetch = fetch): Promise<PgmrStructure> {
+	if (!pgmrStructurePromise) {
+		pgmrStructurePromise = fetchJson<PgmrStructure>('/data/pgmr/structure.json', fetcher);
+	}
+	return pgmrStructurePromise;
+}
+
+export function loadPgmrChapter(slug: string, fetcher: Fetch = fetch): Promise<PgmrChapter | null> {
+	let p = pgmrChapterCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/pgmr/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as PgmrChapter;
+		})();
+		pgmrChapterCache.set(slug, p);
+	}
+	return p;
+}
+
+export function loadPgmrParagraphs(
+	fetcher: Fetch = fetch
+): Promise<Record<string, PgmrParagraphLocator>> {
+	if (!pgmrParagraphsPromise) {
+		pgmrParagraphsPromise = fetchJson<Record<string, PgmrParagraphLocator>>(
+			'/data/pgmr/paragraphs.json',
+			fetcher
+		);
+	}
+	return pgmrParagraphsPromise;
 }
 
 // ─── Catho paragraph-themes index ──────────────────────────────────────────

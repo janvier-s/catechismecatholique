@@ -28,6 +28,7 @@ import { buildCitedBy } from './prepare/cited-by.ts';
 import { parseSourceTable } from './prepare/sources-index.ts';
 import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCdse } from './prepare/cdse/index.ts';
+import { preparePgmr } from './prepare/pgmr/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
 import { prepareTrent } from './prepare/trent.ts';
 import { preparePiusXGrand } from './prepare/pius-x-grand.ts';
@@ -436,6 +437,21 @@ async function main() {
 			`${cdse.structure.totalParagraphs} paragraphs, ${Object.keys(cdse.chapters).length} chapters`
 		);
 	} else if (existsSync(cdseOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
+	logStep('building Présentation Générale du Missel Romain (PGMR)');
+	const pgmrHtml = join(SOURCES, 'pgmr/source.html');
+	const pgmrOutDir = join(OUT, 'pgmr');
+	if (existsSync(pgmrHtml)) {
+		mkdirSync(pgmrOutDir, { recursive: true });
+		const pgmr = preparePgmr({ htmlPath: pgmrHtml, outDir: pgmrOutDir });
+		endStep(
+			`${pgmr.structure.totalParagraphs} paragraphs, ${Object.keys(pgmr.chapters).length} chapters`
+		);
+	} else if (existsSync(pgmrOutDir)) {
 		endStep('source not found — using committed snapshot');
 	} else {
 		endStep('source not found — skipped');

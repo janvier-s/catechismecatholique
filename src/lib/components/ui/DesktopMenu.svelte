@@ -138,6 +138,12 @@
 					label: 'Doctrine sociale',
 					description:
 						"Compendium de la doctrine sociale de l'Église (2004), 583 paragraphes en trois parties."
+				},
+				{
+					href: '/pgmr',
+					label: 'PGMR',
+					description:
+						'Présentation Générale du Missel Romain (2002), norme liturgique de la messe en 399 paragraphes.'
 				}
 			]
 		},
