@@ -374,6 +374,7 @@
 		width: 1em;
 		height: 1em;
 		fill: currentColor;
-		margin-right: 2px;
+		margin-right: 4px;
+		margin-top: 2px;
 	}
 </style>
