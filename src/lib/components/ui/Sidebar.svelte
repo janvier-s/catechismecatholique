@@ -1039,34 +1039,27 @@
 			return clean(root);
 		}
 		if (corpus === 'vatican-ii') {
-			if (!vatIIStructure) return [];
-			const activeSlug = vatIIActiveSlug;
+			if (!vatIIStructure || !vatIIActiveSlug) return [];
 			const activeDoc = vatIIActiveDoc;
+			const docRef = vatIIStructure.docs.find((d) => d.slug === vatIIActiveSlug);
+			if (!docRef) return [];
 			const KIND_SHORT = {
 				constitution: 'Const.',
 				decree: 'Décret',
 				declaration: 'Décl.'
 			} as const;
-			// Flat list ordered by promulgation date. Kind grouping is shown
-			// on the /vatican-ii index page; in the rail we keep it flat so
-			// every doc is visible without expand-clicks. Kicker carries the
-			// abbreviation + kind + year.
-			return vatIIStructure.docs
-				.filter((d) => d.present)
-				.sort((a, b) => a.date.localeCompare(b.date))
-				.map((d): Item => {
-					const isActive = d.slug === activeSlug;
-					const miniTocChildren =
-						isActive && activeDoc?.slug === d.slug
-							? tocToItems(activeDoc.toc, `/vatican-ii/${d.slug}`)
-							: undefined;
-					return {
-						title: d.title,
-						kicker: `${d.abbr} · ${KIND_SHORT[d.kind]} ${d.date.slice(0, 4)}`,
-						href: `/vatican-ii/${d.slug}`,
-						children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
-					};
-				});
+			const miniTocChildren =
+				activeDoc?.slug === docRef.slug
+					? tocToItems(activeDoc.toc, `/vatican-ii/${docRef.slug}`)
+					: undefined;
+			return [
+				{
+					title: docRef.title,
+					kicker: `${docRef.abbr} · ${KIND_SHORT[docRef.kind]} ${docRef.date.slice(0, 4)}`,
+					href: `/vatican-ii/${docRef.slug}`,
+					children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
+				}
+			];
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];
