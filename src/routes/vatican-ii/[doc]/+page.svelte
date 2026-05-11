@@ -13,12 +13,6 @@
 		declaration: 'Déclaration'
 	} as const;
 
-	// Mini-TOC: use the build-time toc that already covers headings + §
-	// titles at every level. We restrict the in-page <details> to the most
-	// important entries (chapter/section dividers); the sidebar shows the
-	// full hierarchy.
-	const miniToc = $derived(doc.toc.filter((e) => e.level <= 2));
-
 	function renderHtml(html: string): string {
 		return frenchPunct(html);
 	}
@@ -46,22 +40,6 @@
 		<h1 class="title">{doc.title}</h1>
 		<p class="subtitle">{frenchPunct(doc.subtitle)}</p>
 	</header>
-
-	{#if miniToc.length > 1}
-		<details class="mini-toc" open>
-			<summary>
-				<span class="mini-toc-label">Plan</span>
-				<span class="mini-toc-count">{miniToc.length} sections</span>
-			</summary>
-			<ol class="mini-toc-list">
-				{#each miniToc as item (item.anchor)}
-					<li>
-						<a class="mini-toc-link" href="#{item.anchor}">{frenchPunct(item.title)}</a>
-					</li>
-				{/each}
-			</ol>
-		</details>
-	{/if}
 
 	<article class="body reader-prose">
 		{#each doc.blocks as block, i (i)}
@@ -173,50 +151,6 @@
 		line-height: 1.4;
 		color: var(--color-subtle);
 		margin: 0.4rem 0 0;
-	}
-
-	.mini-toc {
-		border: 1px solid color-mix(in srgb, var(--color-fg) 14%, transparent);
-		border-radius: 6px;
-		padding: 0.5rem 1rem;
-		margin-bottom: 2rem;
-		font-family: var(--font-ui);
-	}
-	.mini-toc summary {
-		cursor: pointer;
-		display: flex;
-		align-items: baseline;
-		gap: 0.75rem;
-		padding: 0.4rem 0;
-		font-size: 0.85rem;
-	}
-	.mini-toc-label {
-		font-weight: 600;
-	}
-	.mini-toc-count {
-		margin-left: auto;
-		font-size: 0.72rem;
-		color: var(--color-muted);
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-	}
-	.mini-toc-list {
-		list-style: decimal;
-		padding: 0.5rem 0 0.75rem 2rem;
-		margin: 0;
-	}
-	.mini-toc-link {
-		display: block;
-		padding: 0.25rem 0.4rem;
-		font-size: 0.85rem;
-		line-height: 1.4;
-		color: var(--color-fg);
-		text-decoration: none;
-		border-radius: 4px;
-	}
-	.mini-toc-link:hover {
-		background: color-mix(in srgb, var(--color-accent) 8%, transparent);
-		color: var(--color-accent);
 	}
 
 	.body {

@@ -65,6 +65,18 @@
 			if (p.startsWith('/doctrine-catholique/sommaire')) return false;
 			return true;
 		}
+		// CDSE chapter reader (hide on landing)
+		if (p.startsWith('/doctrine-sociale/')) {
+			return true;
+		}
+		// PGMR chapter reader (hide on landing)
+		if (p.startsWith('/pgmr/')) {
+			return true;
+		}
+		// Vatican II doc reader (hide on landing)
+		if (p.startsWith('/vatican-ii/')) {
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
