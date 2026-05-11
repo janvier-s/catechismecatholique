@@ -262,10 +262,15 @@
 	   optimal viewing region" — and since the topbar's input sits in the
 	   top 6rem (which scroll-padding marks obscured), the page smooth-scrolls
 	   up ~50px per character. scroll-margin-top: -6rem cancels that out for
-	   the inputs themselves while preserving anchor-link offsets elsewhere. */
+	   the inputs themselves while preserving anchor-link offsets elsewhere.
+	   The :has() rule disables smooth-scroll entirely while the input is
+	   focused — belt-and-suspenders in case the caret algorithm still fires. */
 	.topbar input[type='search'],
 	.topbar input[type='text'] {
 		scroll-margin-top: -6rem;
+	}
+	html:has(.topbar input:focus) {
+		scroll-behavior: auto;
 	}
 	@media (prefers-reduced-motion: reduce) {
 		html {

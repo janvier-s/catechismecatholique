@@ -60,9 +60,11 @@
 		<h1 class="font-heading text-4xl font-semibold mb-1">
 			{#if data.entry.directRefs.length > 0 && data.entry.subEntries.length === 0}
 				<a
-					href="/cec/{data.entry.directRefs.length > 1 ? data.entry.directRefs.join(',') : data.entry.directRefs[0]}?label={encodeURIComponent(data.entry.term)}"
-					class="hover:text-accent hover:underline"
-				>{data.entry.term}</a>
+					href="/cec/{data.entry.directRefs.length > 1
+						? data.entry.directRefs.join(',')
+						: data.entry.directRefs[0]}?label={encodeURIComponent(data.entry.term)}"
+					class="hover:text-accent hover:underline">{data.entry.term}</a
+				>
 			{:else}
 				{data.entry.term}
 			{/if}
@@ -91,7 +93,9 @@
 				{/each}
 				{#if data.entry.directRefs.length > 1}
 					<br /><a
-						href="/cec/{data.entry.directRefs.join(',')}?label={encodeURIComponent(data.entry.term)}"
+						href="/cec/{data.entry.directRefs.join(',')}?label={encodeURIComponent(
+							data.entry.term
+						)}"
 						class="font-ui text-[14px] text-muted hover:text-foreground hover:underline"
 					>
 						Lire les {data.entry.directRefs.length} paragraphes →
@@ -112,7 +116,9 @@
 					<li>
 						{#if sub.refs.length > 0}
 							<a
-								href="/cec/{sub.refs.length > 1 ? sub.refs.join(',') : sub.refs[0]}?label={encodeURIComponent(sub.label)}"
+								href="/cec/{sub.refs.length > 1
+									? sub.refs.join(',')
+									: sub.refs[0]}?label={encodeURIComponent(sub.label)}"
 								class="font-body text-[16px] font-semibold mb-1 hover:text-accent hover:underline"
 								>{sub.label}</a
 							>
