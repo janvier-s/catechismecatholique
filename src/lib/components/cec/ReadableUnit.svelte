@@ -346,7 +346,9 @@
 	   The anchor is sized to match the button so the two targets sit flush. */
 	.number-wrap {
 		align-self: flex-start;
-		margin-right: 7px;
+	}
+	.number-col {
+		margin-right: 10px;
 	}
 	/* Hang the permalink icon to the left of the number, outside the column,
 	   so the number aligns flush with the paragraph title. */
