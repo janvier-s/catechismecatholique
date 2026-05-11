@@ -13,6 +13,11 @@ import { join } from 'node:path';
 import { buildVatIIDoc, type VatIIBlock, type VatIIFootnote } from './build.ts';
 import { VATICAN_II_REGISTRY, type VatIIDocKind } from './registry.ts';
 import { logStep, endStep } from '../validators.ts';
+import { sanitizeExternalHrefs } from '../sanitize-external-hrefs.ts';
+
+const KNOWN_VAT_II_SLUGS = new Set(
+	VATICAN_II_REGISTRY.filter((d) => d.file !== null).map((d) => d.slug)
+);
 
 export interface VatIIDocRef {
 	slug: string;
@@ -91,6 +96,17 @@ export function prepareVaticanII(args: PrepareVatIIArgs): PrepareVatIIResult {
 				.sort()
 				.map((f) => readFileSync(join(tmp, f), 'utf8'));
 			const out = buildVatIIDoc({ contentFiles });
+			// Sanitize external vatican.va hrefs: rewrite cross-doc refs to
+			// our internal /vatican-ii/<slug> routes, strip non-Vatican-II
+			// archive/holy_father/roman_curia links (prerender would 404).
+			for (const b of out.blocks) {
+				if (b.kind === 'paragraph') {
+					b.html = sanitizeExternalHrefs(b.html, KNOWN_VAT_II_SLUGS);
+				}
+			}
+			for (const fn of out.footnotes) {
+				fn.html = sanitizeExternalHrefs(fn.html, KNOWN_VAT_II_SLUGS);
+			}
 			const doc: VatIIDoc = {
 				slug: spec.slug,
 				abbr: spec.abbr,
