@@ -87,7 +87,7 @@
 				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique' },
 				{ href: '/denzinger', label: 'Denzinger' },
 				{ href: '/doctrine-sociale', label: 'Doctrine sociale' },
-				{ href: '/pgmr', label: 'PGMR' },
+				{ href: '/pgmr', label: 'Présentation Générale du Missel Romain' },
 				{ href: '/calendrier', label: 'Calendrier liturgique' },
 				{ href: '/prieres-formules', label: 'Prières & Formules' },
 				{ href: '/glossaire', label: 'Glossaire' },

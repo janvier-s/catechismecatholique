@@ -24,7 +24,7 @@
 	<header class="head">
 		<BreadcrumbRail
 			crumbs={[
-				{ href: '/pgmr', title: 'PGMR' },
+				{ href: '/pgmr', title: 'Présentation Générale du Missel Romain' },
 				{
 					href: `/pgmr/${chapter.slug}`,
 					kicker: chapter.n !== null ? `Chapitre ${chapter.n}` : 'Préambule',
@@ -119,8 +119,8 @@
 		color: var(--color-heading, var(--color-fg));
 	}
 	.body {
-		font-size: 1rem;
-		line-height: 1.75;
+		font-size: var(--reader-font-size, 17px);
+		line-height: var(--reader-line-height, 1.6);
 	}
 	.section-heading {
 		font-family: var(--font-heading);
@@ -186,11 +186,16 @@
 		margin: 0 0 1rem;
 	}
 	.footnotes-list {
-		padding-left: 2rem;
+		padding-left: 2.5rem;
 		margin: 0;
+		list-style: decimal;
 	}
 	.footnotes-list li {
 		margin-bottom: 0.5rem;
+	}
+	.footnotes-list li::marker {
+		font-variant-numeric: tabular-nums;
+		color: var(--color-muted);
 	}
 	.footnote-body :global(p) {
 		margin: 0;

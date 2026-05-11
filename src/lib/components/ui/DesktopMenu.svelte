@@ -60,7 +60,7 @@
 		return () => document.removeEventListener('keydown', onKeydown);
 	});
 
-	type Link = { href: string; label: string; description: string };
+	type Link = { href: string; label: string; description: string; eyebrow?: string };
 	type Group = { title: string; links: Link[] };
 	const groups: Group[] = [
 		{
@@ -89,65 +89,6 @@
 			]
 		},
 		{
-			title: 'Autres catéchismes',
-			links: [
-				{
-					href: '/compendium',
-					label: 'Compendium',
-					description: 'Le Catéchisme en 598 questions et réponses.'
-				},
-				{
-					href: '/trente',
-					label: 'Catéchisme de Trente',
-					description: 'Le Catéchisme du Concile de Trente (1566).'
-				},
-				{
-					href: '/grand-catechisme',
-					label: 'Grand Catéchisme',
-					description: 'Le Grand Catéchisme de saint Pie X (1905) en 989 questions.'
-				},
-				{
-					href: '/petit-catechisme',
-					label: 'Petit Catéchisme',
-					description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X (1912).'
-				},
-				{
-					href: '/catechisme-illustre',
-					label: 'Catéchisme illustré',
-					description:
-						'Le Catéchisme illustré des vérités nécessaires (1897), 12 images, 12 leçons.'
-				},
-				{
-					href: '/doctrine-catholique',
-					label: 'La Doctrine Catholique',
-					description:
-						"La Doctrine catholique de l'Abbé Boulenger (1927), 53 leçons en trois tomes."
-				}
-			]
-		},
-		{
-			title: 'Magistère',
-			links: [
-				{
-					href: '/denzinger',
-					label: 'Denzinger',
-					description: "L'Enchiridion Symbolorum, recueil canonique des définitions du Magistère."
-				},
-				{
-					href: '/doctrine-sociale',
-					label: 'Doctrine sociale',
-					description:
-						"Compendium de la doctrine sociale de l'Église (2004), 583 paragraphes en trois parties."
-				},
-				{
-					href: '/pgmr',
-					label: 'PGMR',
-					description:
-						'Présentation Générale du Missel Romain (2002), norme liturgique de la messe en 399 paragraphes.'
-				}
-			]
-		},
-		{
 			title: 'Études & outils',
 			links: [
 				{
@@ -169,6 +110,70 @@
 					href: '/prieres-formules',
 					label: 'Prières & Formules',
 					description: 'Prières communes et formules de la doctrine Catholique.'
+				}
+			]
+		},
+		{
+			title: 'Autres catéchismes',
+			links: [
+				{
+					href: '/compendium',
+					label: 'Compendium',
+					eyebrow: '2005',
+					description: 'Le Catéchisme en 598 questions et réponses.'
+				},
+				{
+					href: '/trente',
+					label: 'Catéchisme de Trente',
+					eyebrow: '1566',
+					description: 'Le Catéchisme du Concile de Trente.'
+				},
+				{
+					href: '/grand-catechisme',
+					label: 'Grand Catéchisme',
+					eyebrow: '1905',
+					description: 'Le Grand Catéchisme de saint Pie X en 989 questions.'
+				},
+				{
+					href: '/petit-catechisme',
+					label: 'Petit Catéchisme',
+					eyebrow: '1912',
+					description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X.'
+				},
+				{
+					href: '/catechisme-illustre',
+					label: 'Catéchisme illustré',
+					eyebrow: '1897',
+					description: 'Les vérités nécessaires en 12 leçons illustrées.'
+				},
+				{
+					href: '/doctrine-catholique',
+					label: 'La Doctrine Catholique',
+					eyebrow: '1927',
+					description: 'Abbé Boulenger, 53 leçons en trois tomes.'
+				}
+			]
+		},
+		{
+			title: 'Magistère',
+			links: [
+				{
+					href: '/denzinger',
+					label: 'Denzinger',
+					eyebrow: 'Enchiridion Symbolorum',
+					description: 'Recueil canonique des définitions du Magistère.'
+				},
+				{
+					href: '/doctrine-sociale',
+					label: 'Doctrine sociale',
+					eyebrow: '2004',
+					description: 'Compendium en 583 paragraphes, trois parties.'
+				},
+				{
+					href: '/pgmr',
+					label: 'Présentation Générale du Missel Romain',
+					eyebrow: '2002',
+					description: 'Norme liturgique de la messe romaine en 9 chapitres.'
 				}
 			]
 		}
@@ -271,6 +276,9 @@
 										aria-current={link.href === activeHref ? 'page' : undefined}
 										onclick={close}
 									>
+										{#if link.eyebrow}
+											<span class="menu-row-eyebrow">{link.eyebrow}</span>
+										{/if}
 										<span class="menu-row-label">{link.label}</span>
 										<span class="menu-row-desc">{link.description}</span>
 									</a>
@@ -421,6 +429,20 @@
 	}
 	.menu-row.is-active .menu-row-label {
 		color: var(--color-accent);
+	}
+	.menu-row-eyebrow {
+		display: block;
+		font-family: var(--font-ui);
+		font-size: 0.62rem;
+		font-weight: 600;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		font-variant-numeric: tabular-nums;
+		margin-bottom: 0.15rem;
+	}
+	.menu-row.is-active .menu-row-eyebrow {
+		color: color-mix(in srgb, var(--color-accent) 70%, var(--color-muted));
 	}
 	.menu-row-label {
 		display: block;
