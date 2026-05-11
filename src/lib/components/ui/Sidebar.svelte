@@ -1042,44 +1042,31 @@
 			if (!vatIIStructure) return [];
 			const activeSlug = vatIIActiveSlug;
 			const activeDoc = vatIIActiveDoc;
-			const KIND_LABEL = {
-				constitution: 'Constitutions',
-				decree: 'Décrets',
-				declaration: 'Déclarations'
+			const KIND_SHORT = {
+				constitution: 'Const.',
+				decree: 'Décret',
+				declaration: 'Décl.'
 			} as const;
-			const KIND_ORDER = ['constitution', 'decree', 'declaration'] as const;
-			const out: Item[] = [];
-			for (const k of KIND_ORDER) {
-				const docs = vatIIStructure.docs
-					.filter((d) => d.kind === k && d.present)
-					.sort((a, b) => a.date.localeCompare(b.date));
-				if (docs.length === 0) continue;
-				out.push({
-					// Unique href per kind so Svelte's keyed `{#each}` doesn't
-					// dedupe the three groups down to one. They aren't real
-					// destinations — the user clicks children — but the key
-					// has to be unique.
-					title: KIND_LABEL[k],
-					href: `/vatican-ii#kind-${k}`,
-					children: docs.map((d): Item => {
-						const isActive = d.slug === activeSlug;
-						// Use the doc's pre-computed toc (headings + § titles at
-						// every level). Build a nested tree from the flat list
-						// using the `level` field.
-						const miniTocChildren =
-							isActive && activeDoc?.slug === d.slug
-								? tocToItems(activeDoc.toc, `/vatican-ii/${d.slug}`)
-								: undefined;
-						return {
-							title: d.title,
-							kicker: d.abbr,
-							href: `/vatican-ii/${d.slug}`,
-							children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
-						};
-					})
+			// Flat list ordered by promulgation date. Kind grouping is shown
+			// on the /vatican-ii index page; in the rail we keep it flat so
+			// every doc is visible without expand-clicks. Kicker carries the
+			// abbreviation + kind + year.
+			return vatIIStructure.docs
+				.filter((d) => d.present)
+				.sort((a, b) => a.date.localeCompare(b.date))
+				.map((d): Item => {
+					const isActive = d.slug === activeSlug;
+					const miniTocChildren =
+						isActive && activeDoc?.slug === d.slug
+							? tocToItems(activeDoc.toc, `/vatican-ii/${d.slug}`)
+							: undefined;
+					return {
+						title: d.title,
+						kicker: `${d.abbr} · ${KIND_SHORT[d.kind]} ${d.date.slice(0, 4)}`,
+						href: `/vatican-ii/${d.slug}`,
+						children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
+					};
 				});
-			}
-			return out;
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

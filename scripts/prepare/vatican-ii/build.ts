@@ -111,7 +111,7 @@ function collectParagraphs(scope: string): string[] {
  * bold/strong/em wrappers with no plain prose left over.
  */
 function detectTitle(body: string): string | null {
-	let core = body.replace(/<a[^>]*class="footnote"[^>]*>[\s\S]*?<\/a>/g, '');
+	const core = body.replace(/<a[^>]*class="footnote"[^>]*>[\s\S]*?<\/a>/g, '');
 	const hadBoldWrappers =
 		/<(?:strong|b|em|i)\b/.test(core) || /<span\s+class="(?:bold|emphasis)"/.test(core);
 	if (!hadBoldWrappers) return null;
