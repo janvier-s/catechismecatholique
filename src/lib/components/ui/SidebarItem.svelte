@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Self from './SidebarItem.svelte';
 	import { itemMatches } from './sidebarMatch';
+	import { frenchPunct } from '$lib/utils/typography';
 
 	type Item = {
 		title: string;
@@ -111,10 +112,10 @@
 			{/if}
 			{#if item.typeLabel}
 				<span class="kicker"
-					>{item.typeLabel}{item.number !== undefined ? ` ${item.number}` : ''}</span
+					>{item.typeLabel}{item.number !== undefined ? ` ${item.number}` : ''}</span
 				>
 			{/if}
-			{item.title}
+			{@html frenchPunct(item.title)}
 		</a>
 	</div>
 	{#if item.children && expanded}

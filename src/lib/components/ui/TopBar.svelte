@@ -18,6 +18,19 @@
 	let topbarSuggestOpen = $state(false);
 	let topbarSuggestEl: SearchSuggest | undefined = $state();
 
+	// The browser's caret-into-view algorithm fires on every keystroke and
+	// scrolls the page ~56px upward because scroll-padding-top:6rem makes it
+	// think the topbar input is inside the "obscured" zone. CSS alone
+	// (scroll-margin-top:-6rem) doesn't reliably stop it. Record scrollY
+	// before each input event and restore on the next frame if it changed.
+	function lockScrollOnInput() {
+		if (typeof window === 'undefined') return;
+		const y = window.scrollY;
+		requestAnimationFrame(() => {
+			if (window.scrollY !== y) window.scrollTo({ top: y, behavior: 'instant' });
+		});
+	}
+
 	// Shrink-on-scroll (mobile only — desktop topbar stays as-is). The
 	// .is-condensed class trims the bar height from 58 → 44 px once the user
 	// has scrolled past ~40 px, recovering reading area in long catechism
@@ -140,6 +153,7 @@
 						onfocus={() => (topbarSuggestOpen = true)}
 						onblur={() => setTimeout(() => (topbarSuggestOpen = false), 150)}
 						onkeydown={(e) => topbarSuggestEl?.handleKeydown(e)}
+						oninput={lockScrollOnInput}
 					/>
 					<span class="search-placeholder" aria-hidden="true">
 						Rechercher : <i>Eucharistie</i> ou 1324-1327
