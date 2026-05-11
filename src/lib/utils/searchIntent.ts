@@ -9,6 +9,17 @@ export function detectIntent(input: string): Intent {
 	const q = input.trim();
 	if (!q) return { kind: 'text', q };
 
+	// Multi-paragraph list: §1, §3, §240 or 1,3,240 (comma-separated, 2+ refs)
+	const multiMatch = q.match(/^(?:§\s*\d+\s*,\s*)+§?\s*\d+$|^\d+(?:,\s*\d+)+$/);
+	if (multiMatch) {
+		const nums = q
+			.replace(/§/g, '')
+			.split(',')
+			.map((s) => s.trim())
+			.filter((s) => /^\d+$/.test(s));
+		if (nums.length >= 2) return { kind: 'paragraph', href: `/cec/${nums.join(',')}` };
+	}
+
 	// Paragraph: optional § prefix, then digits or digit-range
 	const pMatch = q.match(/^§?\s*(\d+)(?:[-–](\d+))?$/);
 	if (pMatch) {

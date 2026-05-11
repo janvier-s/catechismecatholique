@@ -80,6 +80,14 @@
 					<a href="/cec/{seg.first}" class="text-accent hover:underline tabular-nums">{seg.label}</a
 					>
 				{/each}
+				{#if data.entry.directRefs.length > 1}
+					<br /><a
+						href="/cec/{data.entry.directRefs.join(',')}?label={encodeURIComponent(data.entry.term)}"
+						class="font-ui text-[14px] text-muted hover:text-foreground hover:underline"
+					>
+						Lire les {data.entry.directRefs.length} paragraphes →
+					</a>
+				{/if}
 			</p>
 		</section>
 	{/if}
@@ -93,7 +101,15 @@
 			<ul class="space-y-3">
 				{#each data.entry.subEntries as sub, i (sub.label + i)}
 					<li>
-						<p class="font-body text-[16px] font-semibold mb-1">{sub.label}</p>
+						{#if sub.refs.length > 0}
+							<a
+								href="/cec/{sub.refs.length > 1 ? sub.refs.join(',') : sub.refs[0]}?label={encodeURIComponent(sub.label)}"
+								class="font-body text-[16px] font-semibold mb-1 hover:text-accent hover:underline"
+								>{sub.label}</a
+							>
+						{:else}
+							<p class="font-body text-[16px] font-semibold mb-1">{sub.label}</p>
+						{/if}
 						<p class="font-ui text-[16px] tabular-nums text-muted leading-snug">
 							{#each refSegments(sub.refs) as seg, j (seg.first)}
 								{#if j > 0}<span class="mr-[0.23rem]">,</span>{/if}

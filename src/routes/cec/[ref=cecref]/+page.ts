@@ -4,7 +4,22 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, fetch }) => {
 	const ref = params.ref!;
-	const isRange = ref.includes('-');
+	const isMulti = ref.includes(',');
+	const isRange = !isMulti && ref.includes('-');
+
+	if (isMulti) {
+		const numbers = [
+			...new Set(
+				ref
+					.split(',')
+					.map((s) => parseInt(s, 10))
+					.filter((n) => n >= 1 && n <= 2865)
+			)
+		].sort((a, b) => a - b);
+		if (numbers.length === 0) throw error(404, 'Références invalides');
+		const paragraphs = await Promise.all(numbers.map((n) => loadParagraph(n, fetch)));
+		return { kind: 'multi' as const, numbers, paragraphs };
+	}
 
 	if (isRange) {
 		const parts = ref.split('-').map((s) => parseInt(s, 10));

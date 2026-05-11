@@ -403,6 +403,8 @@
 						<a href={exampleHref('27')} class="ex-term">§ 27</a>
 						<span class="ex-sep" aria-hidden="true">·</span>
 						<a href={exampleHref('1324-1327')} class="ex-term">§ 1324–1327</a>
+						<span class="ex-sep" aria-hidden="true">·</span>
+						<a href={exampleHref('27,245,460')} class="ex-term">§ 27, 245, 460</a>
 					</span>
 				</li>
 				<li class="leader-row">

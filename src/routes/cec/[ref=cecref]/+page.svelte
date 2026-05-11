@@ -1,16 +1,29 @@
 <script lang="ts">
 	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
+	import { page } from '$app/state';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
+	const multiLabel = $derived(
+		data.kind === 'multi' ? (page.url.searchParams.get('label') ?? null) : null
+	);
+
 	// Prev/next paragraph navigation. For ranges, prev steps back from the
 	// first paragraph and next steps forward from the last — so navigation
-	// keeps moving linearly through the catechism.
-	const prevNum = $derived(data.kind === 'paragraph' ? data.paragraph.number - 1 : data.from - 1);
-	const nextNum = $derived(data.kind === 'paragraph' ? data.paragraph.number + 1 : data.to + 1);
-	const hasPrev = $derived(prevNum >= 1);
-	const hasNext = $derived(nextNum <= 2865);
+	// keeps moving linearly through the catechism. Not shown for multi views.
+	const prevNum = $derived(
+		data.kind === 'paragraph'
+			? data.paragraph.number - 1
+			: data.kind === 'range'
+				? data.from - 1
+				: 0
+	);
+	const nextNum = $derived(
+		data.kind === 'paragraph' ? data.paragraph.number + 1 : data.kind === 'range' ? data.to + 1 : 0
+	);
+	const hasPrev = $derived(data.kind !== 'multi' && prevNum >= 1);
+	const hasNext = $derived(data.kind !== 'multi' && nextNum <= 2865);
 
 	function chapterUrl(c: NonNullable<typeof data.context>): string {
 		if (!c.section || !c.chapter) return '';
@@ -81,11 +94,17 @@
 	{#if data.kind === 'paragraph'}
 		<title>Paragraphe {data.paragraph.number} du Catéchisme de l'Église Catholique</title>
 		<meta name="description" content={paraExcerpt(data.paragraph.text_html)} />
-	{:else}
+	{:else if data.kind === 'range'}
 		<title>Paragraphes {data.from}–{data.to} du Catéchisme de l'Église Catholique</title>
 		<meta
 			name="description"
 			content="Paragraphes {data.from}–{data.to} du Catéchisme de l'Église Catholique."
+		/>
+	{:else}
+		<title>{data.numbers.length} paragraphes — Catéchisme de l'Église Catholique</title>
+		<meta
+			name="description"
+			content="Sélection de {data.numbers.length} paragraphes du Catéchisme de l'Église Catholique."
 		/>
 	{/if}
 </svelte:head>
@@ -187,25 +206,55 @@
 		{/if}
 	{:else if data.kind === 'paragraph'}
 		<ReadableUnit unit={{ kind: 'ccc-paragraph', data: data.paragraph }} />
+	{:else if data.kind === 'multi'}
+		<header class="mb-8">
+			<a
+				href="/cec"
+				class="inline-flex items-center gap-1 font-ui text-sm text-muted hover:text-accent mb-4"
+			>
+				<span aria-hidden="true">←</span> Catéchisme
+			</a>
+			{#if multiLabel}
+				<h1 class="font-heading text-2xl font-semibold mb-1">{multiLabel}</h1>
+			{/if}
+			<p class="font-ui text-[12px] uppercase tracking-[0.15em] text-muted">
+				{data.numbers.length} paragraphes sélectionnés
+			</p>
+			<p class="font-ui text-sm text-muted mt-1 tabular-nums">
+				{data.numbers.join(', ')}
+			</p>
+		</header>
+		<div class="border-t border-border pt-6">
+			{#each data.paragraphs as p (p.number)}
+				<ReadableUnit unit={{ kind: 'ccc-paragraph', data: p }} />
+			{/each}
+		</div>
 	{:else}
 		{#each data.paragraphs as p (p.number)}
 			<ReadableUnit unit={{ kind: 'ccc-paragraph', data: p }} />
 		{/each}
 	{/if}
 
-	<nav
-		class="mt-10 pt-6 border-t border-border flex items-stretch justify-between gap-4"
-		aria-label="Paragraphe précédent ou suivant"
-	>
-		{#if hasPrev}
-			<NavCard direction="prev" href="/cec/{prevNum}" eyebrow="Précédent" title={String(prevNum)} />
-		{:else}
-			<span style="flex:1"></span>
-		{/if}
-		{#if hasNext}
-			<NavCard direction="next" href="/cec/{nextNum}" eyebrow="Suivant" title={String(nextNum)} />
-		{:else}
-			<span style="flex:1"></span>
-		{/if}
-	</nav>
+	{#if data.kind !== 'multi'}
+		<nav
+			class="mt-10 pt-6 border-t border-border flex items-stretch justify-between gap-4"
+			aria-label="Paragraphe précédent ou suivant"
+		>
+			{#if hasPrev}
+				<NavCard
+					direction="prev"
+					href="/cec/{prevNum}"
+					eyebrow="Précédent"
+					title={String(prevNum)}
+				/>
+			{:else}
+				<span style="flex:1"></span>
+			{/if}
+			{#if hasNext}
+				<NavCard direction="next" href="/cec/{nextNum}" eyebrow="Suivant" title={String(nextNum)} />
+			{:else}
+				<span style="flex:1"></span>
+			{/if}
+		</nav>
+	{/if}
 </main>
