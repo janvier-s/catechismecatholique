@@ -348,7 +348,7 @@
 		margin: 0.85rem 0 0;
 		padding-left: 1rem;
 		border-left: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
-		font-family: var(--font-body);
+		font-family: serif;
 		font-size: 0.92rem;
 		font-style: italic;
 		line-height: 1.7;
