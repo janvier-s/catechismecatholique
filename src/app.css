@@ -688,3 +688,20 @@ a {
 	-webkit-user-drag: none;
 	user-select: text;
 }
+
+/* Vatican II sidebar § entries: red non-italic number prefix +
+   italic body. Defined globally because the classes only appear
+   inside {@html …} in SidebarItem and would otherwise be
+   tree-shaken from scoped styles. */
+.vii-num {
+	color: var(--color-accent);
+	font-style: normal;
+	font-weight: 600;
+	margin-right: 0.25em;
+}
+.vii-title {
+	font-style: italic;
+}
+.is-active .vii-num {
+	color: #fff;
+}

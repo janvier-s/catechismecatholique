@@ -96,6 +96,8 @@
 		kicker?: string;
 		/** Second eyebrow (e.g. "Du second article du Symbole"). */
 		kicker2?: string;
+		/** Start expanded even when not on the active path. */
+		defaultExpanded?: boolean;
 		children?: Item[];
 	};
 
@@ -1009,37 +1011,52 @@
 				};
 			});
 		}
-		// Flatten the build-time toc into a list of root-level sidebar Items.
-		// We keep them flat (no parent-child) but pass `level` so SidebarItem
-		// renders them with the right typographic hierarchy — no expand
-		// clicks required, every heading/§-title is always visible.
+		// Build a nested Item tree from the flat toc using `level`. Every
+		// node is `defaultExpanded` so the rail shows the full hierarchy
+		// without click-to-expand (this is a small corpus).
 		function tocToItems(
 			toc: { level: number; anchor: string; title: string; n?: number }[],
 			base: string
 		): Item[] {
-			return toc.map((e): Item => {
+			type Frame = { item: Item; level: number };
+			const root: Item[] = [];
+			const stack: Frame[] = [];
+			for (const e of toc) {
 				let kicker: string | undefined;
 				let displayTitle = e.title;
-				// CHAPITRE prefix → eyebrow + title. Roman/letter sub-chapter
-				// prefixes (I., A.) stay inline; they read as one line.
 				const chap = displayTitle.match(/^(CHAPITRE\s+[A-ZIVXLC]+)(?:\s*[:.\-—]\s*)(.+)$/i);
 				if (chap) {
 					kicker = chap[1]!.toUpperCase();
 					displayTitle = chap[2]!;
 				} else if (e.n !== undefined) {
-					// § paragraph title: red non-italic number + italic title.
-					// SidebarItem renders {@html …} so we can ship the markup.
+					// Red non-italic number + italic body. Styled via global
+					// rules in app.css so Svelte doesn't tree-shake the class
+					// names (they appear only inside {@html …}).
 					displayTitle = `<span class="vii-num">${e.n}.</span> <em class="vii-title">${e.title}</em>`;
 				}
-				// Map build-time toc levels to SidebarItem visual levels.
+				// Visual level clamped to 4 — tree-building uses the raw
+				// e.level (which may go up to 5 for §s under letter sub-
+				// headings) but SidebarItem only styles up to lvl-4.
 				const level: 2 | 3 | 4 = e.level <= 2 ? 2 : e.level === 3 ? 3 : 4;
-				return {
+				const item: Item = {
 					title: displayTitle,
 					href: `${base}#${e.anchor}`,
 					level,
-					...(kicker ? { kicker } : {})
+					defaultExpanded: true,
+					...(kicker ? { kicker } : {}),
+					children: []
 				};
-			});
+				while (stack.length > 0 && stack[stack.length - 1]!.level >= e.level) stack.pop();
+				if (stack.length === 0) root.push(item);
+				else stack[stack.length - 1]!.item.children!.push(item);
+				stack.push({ item, level: e.level });
+			}
+			const clean = (items: Item[]): Item[] =>
+				items.map((it) => ({
+					...it,
+					children: it.children && it.children.length > 0 ? clean(it.children) : undefined
+				}));
+			return clean(root);
 		}
 		if (corpus === 'vatican-ii') {
 			if (!vatIIStructure || !vatIIActiveSlug) return [];

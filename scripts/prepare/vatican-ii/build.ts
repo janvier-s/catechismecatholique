@@ -134,7 +134,7 @@ function detectTitle(body: string): string | null {
 
 function rewriteFootnoteRefs(body: string): { html: string; refs: number[] } {
 	const refs: number[] = [];
-	const out = body.replace(
+	let out = body.replace(
 		/<a[^>]*href="#ftn\.[^"]*"[^>]*class="footnote"[^>]*>[\s\S]*?<sup[^>]*>\s*\[(\d+)\]\s*<\/sup>[\s\S]*?<\/a>/g,
 		(_full, num) => {
 			const fn = parseInt(num, 10);
@@ -142,6 +142,12 @@ function rewriteFootnoteRefs(body: string): { html: string; refs: number[] } {
 			return `<sup class="vat-ii-fn-ref" data-fn="${fn}">${fn}</sup>`;
 		}
 	);
+	// Strip dangling internal anchors that point at EPUB-internal element ids
+	// (e.g. <a href="#d5e658">…</a>) — the SvelteKit prerender crawler treats
+	// them as same-page links and fails when the target id isn't on the page.
+	out = out.replace(/<a\b[^>]*href="#d5e\d+"[^>]*>([\s\S]*?)<\/a>/g, '$1');
+	// Also drop <a name="d5eXXX"> anchor placeholders inherited from the EPUB.
+	out = out.replace(/<a\s+name="d5e\d+"[^>]*>(\s*)<\/a>/g, '$1');
 	return { html: out, refs };
 }
 
@@ -168,9 +174,14 @@ function extractFootnotes(html: string): VatIIFootnote[] {
 function levelFromTitle(title: string): number {
 	const upper = title.toUpperCase();
 	if (/CHAPITRE\b/.test(upper)) return 2;
-	if (/^[IVXLC]+\b[\s.:\-—]/.test(title)) return 3;
-	// Single-capital-letter prefixes (A., B), a)) are sub-parts of the Roman
-	// sub-chapters they fall under — one level deeper.
+	// Roman section markers: multi-char (II, III, IV…), OR the bare "I" /
+	// "V" / "X" (the single-letter Roman starters that ARE used as section
+	// markers in practice). Check Roman BEFORE letter, so "I." resolves
+	// to a Roman sub-chapter (lvl 3) and not a letter sub-heading.
+	if (/^(?:I{1,3}|I[VX]|V|VI{1,3}|X{1,3}|XI{1,3}|XIV|XV|XVI{1,3}|XIX|XX)\b[\s.:\-—]/.test(title))
+		return 3;
+	// Letter sub-headings (A., B., C., D., …) — sub-parts of the Roman
+	// sub-chapter they fall under.
 	if (/^[A-Z][.)]\s/.test(title)) return 4;
 	if (/^[a-z]\)\s/.test(title)) return 4;
 	return 3;
@@ -212,10 +223,11 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 			html: bodies.join('\n'),
 			footnoteRefs: refs
 		});
-		// § titles always sit one level below the chapter/sub-chapter
-		// headings (lvl=4), so the sidebar nests them under the nearest
-		// Roman/letter divider.
-		if (title) toc.push({ level: 4, anchor, title, n });
+		// § titles sit at level 5 so they nest under letter sub-headings
+		// (level 4) which themselves nest under Roman sub-chapters (level 3).
+		// The sidebar clamps visual styling at level 4; the higher level is
+		// only used for tree-building.
+		if (title) toc.push({ level: 5, anchor, title, n });
 	}
 
 	function visitParagraphs(scope: string) {
@@ -344,7 +356,7 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 				const t = cur.titleText!;
 				const looksLikeDivider =
 					/^CHAPITRE\b/i.test(t) ||
-					/^[IVXLC]+\b[\s.:\-—]/.test(t) ||
+					/^(?:I{1,3}|I[VX]|V|VI{1,3}|X{1,3}|XI{1,3}|XIV|XV|XVI{1,3}|XIX|XX)\b[\s.:\-—]/.test(t) ||
 					/^[A-Z][.):)]\s/.test(t) ||
 					/^[a-z]\)\s/.test(t);
 				let k = i + 1;

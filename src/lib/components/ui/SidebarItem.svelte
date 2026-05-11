@@ -14,6 +14,10 @@
 		kicker?: string;
 		/** Second eyebrow below kicker (e.g. "Du second article du Symbole"). */
 		kicker2?: string;
+		/** Start the subtree expanded even when the item isn't on the active
+		 *  path. Used by short corpora (Vatican II) where every entry should
+		 *  be visible by default. */
+		defaultExpanded?: boolean;
 		children?: Item[];
 	};
 	let {
@@ -77,7 +81,9 @@
 	// previously-collapsed-then-revisited entry stayed collapsed even when
 	// the URL navigated INTO it (e.g. clicking "Suivant" between articles).
 	const onActivePath = $derived(isActive || isAncestor || isActiveBase);
-	const expanded = $derived(onActivePath ? true : (manualExpanded ?? false));
+	const expanded = $derived(
+		onActivePath ? true : (manualExpanded ?? item.defaultExpanded ?? false)
+	);
 </script>
 
 <li>
@@ -194,18 +200,5 @@
 	}
 	.is-active:hover {
 		color: #fff !important;
-	}
-	/* Vatican II § entries: red non-italic number prefix + italic body. */
-	:global(.vii-num) {
-		color: var(--color-accent);
-		font-style: normal;
-		font-weight: 600;
-		margin-right: 0.25em;
-	}
-	:global(.vii-title) {
-		font-style: italic;
-	}
-	.is-active :global(.vii-num) {
-		color: #fff;
 	}
 </style>

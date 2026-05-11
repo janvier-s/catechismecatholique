@@ -173,19 +173,41 @@
 		scroll-margin-top: 80px;
 		text-wrap: balance;
 	}
+	/* Roman sub-chapters (I., II., III., …) — upright weighty heading
+	   that sits between the CHAPITRE divider and the § body. A short
+	   centered accent rule above gives it a chapter-like beat without
+	   being as loud as the full CHAPITRE underline. */
 	.sub-heading {
 		font-family: var(--font-heading);
-		font-size: 1.15rem;
-		font-weight: 600;
-		font-style: italic;
-		line-height: 1.3;
-		margin: 2rem 0 0.85rem;
+		font-size: 1.3rem;
+		font-weight: 700;
+		line-height: 1.25;
+		letter-spacing: -0.003em;
+		margin: 2.5rem 0 0.9rem;
 		color: var(--color-heading, var(--color-fg));
 		scroll-margin-top: 80px;
 		text-wrap: balance;
 	}
+	.sub-heading::before {
+		content: '';
+		display: block;
+		width: 2.5rem;
+		height: 2px;
+		background: var(--color-accent);
+		opacity: 0.55;
+		margin-bottom: 0.65rem;
+	}
+	/* Letter sub-headings (A. Normes…, B. Normes…) — upright, slightly
+	   bigger than body, with a thin accent rule on the left to mark them
+	   as sub-sections of the Roman parent. No red, no italic. */
 	.sub-heading-deep {
-		font-size: 1rem;
+		font-size: 1.1rem;
+		font-style: normal;
+		font-weight: 600;
+		color: var(--color-fg);
+		margin: 1.75rem 0 0.75rem;
+		padding-left: 0.65rem;
+		border-left: 2px solid var(--color-accent);
 	}
 
 	.paragraph {
@@ -205,21 +227,23 @@
 	}
 	.paragraph-num {
 		font-family: var(--font-ui);
-		font-size: 0.85rem;
+		font-size: 0.95rem;
 		font-weight: 700;
 		font-variant-numeric: tabular-nums;
-		color: var(--color-muted);
+		color: var(--color-accent);
 		text-decoration: none;
 		flex: 0 0 auto;
-		/* Align baseline with the larger title text. */
 		align-self: baseline;
 	}
 	.paragraph-num:hover {
-		color: var(--color-accent);
+		opacity: 0.75;
 	}
+	/* § title: italic body, the number badge to the left supplies the red
+	   accent so the title reads like an editorial sub-section. */
 	.paragraph-title {
 		font-family: var(--font-heading);
-		font-weight: 700;
+		font-style: italic;
+		font-weight: 600;
 		font-size: clamp(1.15rem, 1.3vw, 1.3rem);
 		line-height: 1.25;
 		letter-spacing: -0.005em;
