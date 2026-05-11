@@ -9,6 +9,7 @@ export type Corpus =
 	| 'boulanger'
 	| 'cdse'
 	| 'pgmr'
+	| 'vatican-ii'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -1045,4 +1046,43 @@ export interface PgmrStructure {
 
 export interface PgmrParagraphLocator {
 	chapterSlug: string;
+}
+
+// ─── Vatican II (1962-1965) ────────────────────────────────────────────────
+
+export type VatIIDocKind = 'constitution' | 'declaration' | 'decree';
+
+export type VatIIBlock =
+	| { kind: 'heading'; level: number; anchor: string; title: string }
+	| { kind: 'paragraph'; n: number; anchor: string; html: string; footnoteRefs: number[] };
+
+export interface VatIIFootnote {
+	n: number;
+	html: string;
+}
+
+export interface VatIIDocRef {
+	slug: string;
+	abbr: string;
+	kind: VatIIDocKind;
+	date: string;
+	title: string;
+	subtitle: string;
+	totalParagraphs: number;
+	present: boolean;
+}
+
+export interface VatIIStructure {
+	docs: VatIIDocRef[];
+}
+
+export interface VatIIDoc {
+	slug: string;
+	abbr: string;
+	kind: VatIIDocKind;
+	date: string;
+	title: string;
+	subtitle: string;
+	blocks: VatIIBlock[];
+	footnotes: VatIIFootnote[];
 }

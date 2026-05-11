@@ -29,6 +29,7 @@ import { parseSourceTable } from './prepare/sources-index.ts';
 import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCdse } from './prepare/cdse/index.ts';
 import { preparePgmr } from './prepare/pgmr/index.ts';
+import { prepareVaticanII } from './prepare/vatican-ii/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
 import { prepareTrent } from './prepare/trent.ts';
 import { preparePiusXGrand } from './prepare/pius-x-grand.ts';
@@ -452,6 +453,20 @@ async function main() {
 			`${pgmr.structure.totalParagraphs} paragraphs, ${Object.keys(pgmr.chapters).length} chapters`
 		);
 	} else if (existsSync(pgmrOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
+	logStep('building Vatican II');
+	const vatIIEpubDir = join(SOURCES, 'vatican-ii/epubs');
+	const vatIIOutDir = join(OUT, 'vatican-ii');
+	if (existsSync(vatIIEpubDir)) {
+		mkdirSync(vatIIOutDir, { recursive: true });
+		const vatII = prepareVaticanII({ epubDir: vatIIEpubDir, outDir: vatIIOutDir });
+		const present = vatII.structure.docs.filter((d) => d.present).length;
+		endStep(`${present}/${vatII.structure.docs.length} docs`);
+	} else if (existsSync(vatIIOutDir)) {
 		endStep('source not found — using committed snapshot');
 	} else {
 		endStep('source not found — skipped');

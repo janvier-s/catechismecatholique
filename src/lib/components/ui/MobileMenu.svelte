@@ -85,6 +85,7 @@
 				{ href: '/petit-catechisme', label: 'Petit Catéchisme' },
 				{ href: '/catechisme-illustre', label: 'Catéchisme illustré' },
 				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique' },
+				{ href: '/vatican-ii', label: 'Vatican II' },
 				{ href: '/denzinger', label: 'Denzinger' },
 				{ href: '/doctrine-sociale', label: 'Doctrine sociale' },
 				{ href: '/pgmr', label: 'Présentation Générale du Missel Romain' },

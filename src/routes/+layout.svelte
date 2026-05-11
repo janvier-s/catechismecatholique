@@ -164,9 +164,11 @@
 											? 'cdse'
 											: page.url.pathname.startsWith('/pgmr')
 												? 'pgmr'
-												: page.url.pathname.startsWith('/calendrier')
-													? 'calendrier'
-													: 'ccc'}
+												: page.url.pathname.startsWith('/vatican-ii')
+													? 'vatican-ii'
+													: page.url.pathname.startsWith('/calendrier')
+														? 'calendrier'
+														: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

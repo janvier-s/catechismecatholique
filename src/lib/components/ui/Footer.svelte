@@ -19,6 +19,7 @@
 				<li><a href="/petit-catechisme">Petit Catéchisme</a></li>
 				<li><a href="/catechisme-illustre">Catéchisme illustré</a></li>
 				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>
+				<li><a href="/vatican-ii">Vatican II</a></li>
 				<li><a href="/denzinger">Denzinger</a></li>
 				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
 				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>

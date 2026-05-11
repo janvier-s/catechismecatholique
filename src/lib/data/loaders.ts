@@ -40,6 +40,8 @@ import type {
 	PgmrStructure,
 	PgmrChapter,
 	PgmrParagraphLocator,
+	VatIIStructure,
+	VatIIDoc,
 	ParagraphThemeRef
 } from './types';
 
@@ -855,6 +857,31 @@ export function loadPgmrParagraphs(
 		);
 	}
 	return pgmrParagraphsPromise;
+}
+
+// ─── Vatican II loaders ─────────────────────────────────────────────────────
+
+let vatIIStructurePromise: Promise<VatIIStructure> | null = null;
+const vatIIDocCache = new Map<string, Promise<VatIIDoc | null>>();
+
+export function loadVatIIStructure(fetcher: Fetch = fetch): Promise<VatIIStructure> {
+	if (!vatIIStructurePromise) {
+		vatIIStructurePromise = fetchJson<VatIIStructure>('/data/vatican-ii/structure.json', fetcher);
+	}
+	return vatIIStructurePromise;
+}
+
+export function loadVatIIDoc(slug: string, fetcher: Fetch = fetch): Promise<VatIIDoc | null> {
+	let p = vatIIDocCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/vatican-ii/docs/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as VatIIDoc;
+		})();
+		vatIIDocCache.set(slug, p);
+	}
+	return p;
 }
 
 // ─── Catho paragraph-themes index ──────────────────────────────────────────

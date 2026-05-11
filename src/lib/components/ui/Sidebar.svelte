@@ -21,6 +21,8 @@
 		loadCdseChapter,
 		loadPgmrStructure,
 		loadPgmrChapter,
+		loadVatIIStructure,
+		loadVatIIDoc,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -42,6 +44,8 @@
 		CdseChapter,
 		PgmrStructure,
 		PgmrChapter,
+		VatIIStructure,
+		VatIIDoc,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -119,6 +123,8 @@
 				return '/doctrine-sociale';
 			case 'pgmr':
 				return '/pgmr';
+			case 'vatican-ii':
+				return '/vatican-ii';
 			default:
 				return null;
 		}
@@ -273,6 +279,34 @@
 		}
 		(async () => {
 			pgmrActiveChapter = await loadPgmrChapter(slug);
+		})();
+	});
+
+	// ─── Vatican II state ────────────────────────────────────────────────────
+	let vatIIStructure: VatIIStructure | null = $state(null);
+	let vatIIActiveDoc: VatIIDoc | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'vatican-ii') return;
+		(async () => {
+			vatIIStructure = await loadVatIIStructure();
+		})();
+	});
+
+	const vatIIActiveSlug = $derived.by((): string | null => {
+		const m = page.url.pathname.match(/^\/vatican-ii\/([^/]+)/);
+		return m ? m[1]! : null;
+	});
+
+	$effect(() => {
+		if (corpus !== 'vatican-ii') return;
+		const slug = vatIIActiveSlug;
+		if (!slug) {
+			vatIIActiveDoc = null;
+			return;
+		}
+		(async () => {
+			vatIIActiveDoc = await loadVatIIDoc(slug);
 		})();
 	});
 
@@ -974,6 +1008,49 @@
 					children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
 				};
 			});
+		}
+		if (corpus === 'vatican-ii') {
+			if (!vatIIStructure) return [];
+			const activeSlug = vatIIActiveSlug;
+			const activeDoc = vatIIActiveDoc;
+			const KIND_LABEL = {
+				constitution: 'Constitutions',
+				decree: 'Décrets',
+				declaration: 'Déclarations'
+			} as const;
+			const KIND_ORDER = ['constitution', 'decree', 'declaration'] as const;
+			const out: Item[] = [];
+			for (const k of KIND_ORDER) {
+				const docs = vatIIStructure.docs
+					.filter((d) => d.kind === k && d.present)
+					.sort((a, b) => a.date.localeCompare(b.date));
+				if (docs.length === 0) continue;
+				out.push({
+					title: KIND_LABEL[k],
+					href: '/vatican-ii',
+					children: docs.map((d): Item => {
+						const isActive = d.slug === activeSlug;
+						const miniTocChildren =
+							isActive && activeDoc?.slug === d.slug
+								? activeDoc.blocks
+										.filter((b) => b.kind === 'heading' && b.level === 1)
+										.map(
+											(b): Item => ({
+												title: b.kind === 'heading' ? b.title : '',
+												href: `/vatican-ii/${d.slug}#${b.kind === 'heading' ? b.anchor : ''}`
+											})
+										)
+								: undefined;
+						return {
+							title: d.title,
+							kicker: d.abbr,
+							href: `/vatican-ii/${d.slug}`,
+							children: miniTocChildren && miniTocChildren.length > 0 ? miniTocChildren : undefined
+						};
+					})
+				});
+			}
+			return out;
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

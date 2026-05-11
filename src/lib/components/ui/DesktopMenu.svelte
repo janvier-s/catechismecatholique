@@ -158,6 +158,12 @@
 			title: 'Magistère',
 			links: [
 				{
+					href: '/vatican-ii',
+					label: 'Vatican II',
+					eyebrow: '1962–1965',
+					description: 'Les seize documents du concile œcuménique.'
+				},
+				{
 					href: '/denzinger',
 					label: 'Denzinger',
 					eyebrow: 'Enchiridion Symbolorum',
