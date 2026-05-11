@@ -6,6 +6,7 @@ export type Corpus =
 	| 'pius-x-petit'
 	| 'catechisme-illustre'
 	| 'denzinger'
+	| 'boulanger'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -888,4 +889,69 @@ export interface DenzingerStructure {
 
 export interface DenzingerEntryIndex {
 	[n: string]: { unit_slug: string };
+}
+
+// ─── Catéchisme Boulanger — La Doctrine catholique (1927) ───────────────────
+
+export interface BoulangerBlock {
+	section: 'mots' | 'developpement' | 'conclusion' | 'lectures' | 'questionnaire' | 'devoirs';
+	/** `roman-heading`/`sub-heading` = pre-rendered h2/h3 chrome; `list` = <ol>;
+	 *  `paragraph` = plain prose. Older `heading` blocks are stripped at build. */
+	kind: 'paragraph' | 'roman-heading' | 'sub-heading' | 'list';
+	html: string;
+}
+
+export interface BoulangerMiniTocChild {
+	n: number;
+	label: string;
+	anchor: string;
+}
+
+export interface BoulangerMiniTocItem {
+	n: number;
+	roman: string;
+	label: string;
+	anchor: string;
+	children: BoulangerMiniTocChild[];
+}
+
+export interface BoulangerLesson {
+	slug: string;
+	tome: number;
+	tome_title: string;
+	n: number;
+	title: string;
+	mini_toc: BoulangerMiniTocItem[];
+	blocks: BoulangerBlock[];
+}
+
+export interface BoulangerStructureLessonRef {
+	slug: string;
+	n: number;
+	title: string;
+}
+
+export interface BoulangerSommaireLesson {
+	slug: string;
+	mini_toc: BoulangerMiniTocItem[];
+}
+
+export interface BoulangerSommaireTome {
+	n: number;
+	title: string;
+	lessons: BoulangerSommaireLesson[];
+}
+
+export interface BoulangerSommaire {
+	tomes: BoulangerSommaireTome[];
+}
+
+export interface BoulangerStructureTome {
+	n: number;
+	title: string;
+	lessons: BoulangerStructureLessonRef[];
+}
+
+export interface BoulangerStructure {
+	tomes: BoulangerStructureTome[];
 }

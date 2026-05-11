@@ -97,13 +97,26 @@ export const GET: RequestHandler = () => {
 		}
 	}
 
+	const boulangerStructure: {
+		tomes: { lessons: { slug: string }[] }[];
+	} = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/boulanger/structure.json'), 'utf-8')
+	);
+	const boulangerUrls: string[] = ['/boulanger', '/boulanger/sommaire'];
+	for (const tome of boulangerStructure.tomes) {
+		for (const lesson of tome.lessons) {
+			boulangerUrls.push(`/boulanger/${lesson.slug}`);
+		}
+	}
+
 	const allUrls = [
 		...staticPages,
 		...paragraphUrls,
 		...compendiumUrls,
 		...bibleUrls,
 		...glossaryUrls,
-		...denzingerUrls
+		...denzingerUrls,
+		...boulangerUrls
 	];
 
 	const xml = [

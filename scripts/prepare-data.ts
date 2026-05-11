@@ -500,6 +500,25 @@ async function main() {
 		endStep('source not found — skipped');
 	}
 
+	logStep('extracting Catéchisme Boulanger (La Doctrine catholique)');
+	const boulangerSourceDoc = join(SOURCES, 'boulanger/source.doc');
+	const boulangerSourceHtml = join(SOURCES, 'boulanger/source.html');
+	const boulangerOutDir = join(OUT, 'boulanger');
+	if (existsSync(boulangerSourceDoc) || existsSync(boulangerSourceHtml)) {
+		mkdirSync(boulangerOutDir, { recursive: true });
+		const script = new URL('./prepare/boulanger/extract.py', import.meta.url).pathname;
+		const { spawnSync } = await import('node:child_process');
+		const proc = spawnSync('python3', [script], { stdio: 'inherit' });
+		if (proc.status !== 0) {
+			throw new Error(`boulanger extract.py failed (exit ${proc.status})`);
+		}
+		endStep('lessons written');
+	} else if (existsSync(boulangerOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
 	logStep('extracting Catéchisme illustré (Wikisource EPUB)');
 	const catIllustreEpub = join(SOURCES, 'catechisme-illustre/source.epub');
 	const catIllustreOutDir = join(OUT, 'catechisme-illustre');

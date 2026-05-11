@@ -80,7 +80,6 @@
 		</p>
 	</header>
 
-	<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
 	<section class="body" aria-label="Texte de la section" onclick={onEntryClick}>
 		{#each unit.entries as entry, ei (entry.n)}
 			{@const prev = unit.entries[ei - 1]}

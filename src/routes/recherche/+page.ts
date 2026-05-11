@@ -16,28 +16,47 @@ export interface SearchHit {
 	match: Record<string, string[]>;
 }
 
+export interface SearchSuggestion {
+	term: string;
+	slug: string;
+}
+
 export const load: PageLoad = async ({ url, fetch }) => {
 	const raw = url.searchParams.get('q')?.trim() ?? '';
-	if (!raw) return { q: '', hits: [] as SearchHit[] };
+	const empty = {
+		q: '',
+		hits: [] as SearchHit[],
+		mode: 'and' as 'and' | 'or',
+		matchedTokens: [] as string[],
+		tokens: [] as string[],
+		suggestions: [] as SearchSuggestion[]
+	};
+	if (!raw) return empty;
 
-	// Run intent detection BEFORE search so bookmarked URLs with a numeric or
-	// biblical query land on the right page (mirrors the TopBar form behavior).
 	const intent = detectIntent(raw);
 	if (intent.kind === 'paragraph' || intent.kind === 'bible') {
 		throw redirect(303, intent.href);
 	}
 
 	const q = intent.q;
-	if (q.length < 2) return { q, hits: [] as SearchHit[] };
+	if (q.length < 2) return { ...empty, q };
 
 	const r = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
-	if (!r.ok) return { q, hits: [] as SearchHit[] };
-	const data = (await r.json()) as { hits: SearchHit[] };
+	if (!r.ok) return { ...empty, q };
+	const data = (await r.json()) as {
+		hits: SearchHit[];
+		mode?: 'and' | 'or';
+		tokens?: string[];
+		matchedTokens?: string[];
+		suggestions?: SearchSuggestion[];
+	};
 
-	// Paragraph contexts (Partie · Section · Chapitre breadcrumbs) used to
-	// load here, but inlining the 1.8 MB bundle into every search HTML
-	// response was the largest payload on the site. The page now fetches
-	// the bundle client-side after first paint and decorates rows
-	// progressively — see +page.svelte.
-	return { q, hits: data.hits };
+	return {
+		q,
+		hits: data.hits,
+		mode: data.mode ?? 'and',
+		tokens: data.tokens ?? [],
+		matchedTokens: data.matchedTokens ?? [],
+		suggestions: data.suggestions ?? []
+	};
 };

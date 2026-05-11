@@ -118,6 +118,12 @@
 						'Le Catéchisme illustré des vérités nécessaires (1897), 12 images, 12 leçons.'
 				},
 				{
+					href: '/boulanger',
+					label: 'Catéchisme Boulanger',
+					description:
+						"La Doctrine catholique de l'Abbé Boulenger (1927), 53 leçons en trois tomes."
+				},
+				{
 					href: '/denzinger',
 					label: 'Denzinger',
 					description: "L'Enchiridion Symbolorum, recueil canonique des définitions du Magistère."

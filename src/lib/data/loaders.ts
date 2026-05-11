@@ -30,7 +30,10 @@ import type {
 	CatIllustreFlatPage,
 	DenzingerStructure,
 	DenzingerUnit,
-	DenzingerEntryIndex
+	DenzingerEntryIndex,
+	BoulangerStructure,
+	BoulangerLesson,
+	BoulangerSommaire
 } from './types';
 
 type Fetch = typeof fetch;
@@ -714,6 +717,48 @@ export function loadDenzingerUnit(
 			return (await r.json()) as DenzingerUnit;
 		})();
 		denzingerUnitCache.set(slug, p);
+	}
+	return p;
+}
+
+// ─── Boulanger loaders ──────────────────────────────────────────────────────
+
+let boulangerStructurePromise: Promise<BoulangerStructure> | null = null;
+let boulangerSommairePromise: Promise<BoulangerSommaire> | null = null;
+const boulangerLessonCache = new Map<string, Promise<BoulangerLesson | null>>();
+
+export function loadBoulangerStructure(fetcher: Fetch = fetch): Promise<BoulangerStructure> {
+	if (!boulangerStructurePromise) {
+		boulangerStructurePromise = fetchJson<BoulangerStructure>(
+			'/data/boulanger/structure.json',
+			fetcher
+		);
+	}
+	return boulangerStructurePromise;
+}
+
+export function loadBoulangerSommaire(fetcher: Fetch = fetch): Promise<BoulangerSommaire> {
+	if (!boulangerSommairePromise) {
+		boulangerSommairePromise = fetchJson<BoulangerSommaire>(
+			'/data/boulanger/sommaire.json',
+			fetcher
+		);
+	}
+	return boulangerSommairePromise;
+}
+
+export function loadBoulangerLesson(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<BoulangerLesson | null> {
+	let p = boulangerLessonCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/boulanger/lessons/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as BoulangerLesson;
+		})();
+		boulangerLessonCache.set(slug, p);
 	}
 	return p;
 }

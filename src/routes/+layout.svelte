@@ -60,6 +60,11 @@
 			if (p.startsWith('/denzinger/sommaire')) return false;
 			return true;
 		}
+		// Boulanger reader (hide on landing and sommaire)
+		if (p.startsWith('/boulanger/')) {
+			if (p.startsWith('/boulanger/sommaire')) return false;
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -153,9 +158,11 @@
 								? 'catechisme-illustre'
 								: page.url.pathname.startsWith('/denzinger')
 									? 'denzinger'
-									: page.url.pathname.startsWith('/calendrier')
-										? 'calendrier'
-										: 'ccc'}
+									: page.url.pathname.startsWith('/boulanger')
+										? 'boulanger'
+										: page.url.pathname.startsWith('/calendrier')
+											? 'calendrier'
+											: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

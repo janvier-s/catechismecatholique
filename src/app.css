@@ -256,6 +256,17 @@
 		   the scrollbar disappears. */
 		scrollbar-gutter: stable;
 	}
+
+	/* Cancel scroll-padding-top for inputs inside the sticky topbar. Without
+	   this, every keystroke fires the browser's "scroll caret into the
+	   optimal viewing region" — and since the topbar's input sits in the
+	   top 6rem (which scroll-padding marks obscured), the page smooth-scrolls
+	   up ~50px per character. scroll-margin-top: -6rem cancels that out for
+	   the inputs themselves while preserving anchor-link offsets elsewhere. */
+	.topbar input[type='search'],
+	.topbar input[type='text'] {
+		scroll-margin-top: -6rem;
+	}
 	@media (prefers-reduced-motion: reduce) {
 		html {
 			scroll-behavior: auto;
@@ -288,6 +299,17 @@
 	:focus:not(:focus-visible) {
 		outline: none;
 	}
+}
+
+/* Reader prose: restore paragraph margins inside {@html ...} content blocks.
+   Tailwind's preflight zeroes all <p> margins; readers that render trusted
+   HTML opt into normal flow by adding `class="reader-prose"` to the
+   containing element. Cheap, global, and predictable. */
+.reader-prose p {
+	margin: 0 0 1em;
+}
+.reader-prose p:last-child {
+	margin-bottom: 0;
 }
 
 /* Reading prefs — toggles driven by data attributes on <html>, set by

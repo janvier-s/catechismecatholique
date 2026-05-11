@@ -11,6 +11,18 @@
 			</ul>
 		</div>
 		<div class="footer-col">
+			<p class="footer-col-head">Autres catéchismes</p>
+			<ul>
+				<li><a href="/compendium">Compendium</a></li>
+				<li><a href="/trente">Catéchisme de Trente</a></li>
+				<li><a href="/grand-catechisme">Grand Catéchisme</a></li>
+				<li><a href="/petit-catechisme">Petit Catéchisme</a></li>
+				<li><a href="/catechisme-illustre">Catéchisme illustré</a></li>
+				<li><a href="/boulanger">Catéchisme Boulanger</a></li>
+				<li><a href="/denzinger">Denzinger</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
 			<p class="footer-col-head">Bible</p>
 			<ul>
 				<li><a href="/bible">Lire la Bible</a></li>
@@ -55,8 +67,10 @@
 
 	.footer-cols {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, auto));
-		gap: 2rem clamp(2rem, 6vw, 4rem);
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 2rem clamp(1.5rem, 3vw, 3rem);
+		max-width: 64rem;
+		width: 100%;
 		text-align: left;
 	}
 
@@ -156,6 +170,13 @@
 	.amdg:focus-visible .amdg-tip {
 		opacity: 1;
 		transform: translateX(-50%) translateY(0);
+	}
+
+	@media (max-width: 960px) {
+		.footer-cols {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			max-width: 32rem;
+		}
 	}
 
 	@media (max-width: 640px) {

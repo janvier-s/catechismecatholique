@@ -430,6 +430,16 @@
 			<p class="font-body italic text-muted text-[16px]">
 				Aucun résultat pour «&nbsp;{data.q}&nbsp;».
 			</p>
+			{#if data.suggestions.length > 0}
+				<p class="mt-6 font-ui text-[12px] uppercase tracking-[0.2em] text-muted">Termes proches</p>
+				<ul class="mt-2 flex flex-wrap justify-center gap-2 list-none p-0">
+					{#each data.suggestions as s (s.slug)}
+						<li>
+							<a class="suggestion-pill" href="/glossaire/{s.slug}">{s.term}</a>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 			<RelatedTopics query={data.q} />
 			<p class="mt-6 font-ui text-[13px]">
 				<a class="browse-link" href="/glossaire?q={encodeURIComponent(data.q)}"
@@ -448,6 +458,16 @@
 					Résultats pour <span class="text-foreground">«&nbsp;{data.q}&nbsp;»</span>
 				</p>
 			</div>
+			{#if data.mode === 'or' && data.matchedTokens.length > 0}
+				<p class="partial-banner font-ui text-[12px] mb-4 text-muted">
+					Aucun résultat ne contient l'expression complète. Affichage des résultats contenant
+					{#each data.matchedTokens as t, i (t)}<span class="text-foreground"
+							>«&nbsp;{t}&nbsp;»</span
+						>{#if i < data.matchedTokens.length - 1}{i === data.matchedTokens.length - 2
+								? ' et '
+								: ', '}{/if}{/each}.
+				</p>
+			{/if}
 
 			<RelatedTopics query={data.q} />
 
@@ -566,7 +586,7 @@
 	.search-line {
 		position: relative;
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 		background: var(--color-panel);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 22%, transparent);
 		border-radius: 6px;
@@ -624,7 +644,7 @@
 	.search-affordances {
 		flex: none;
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 		gap: 0.75rem;
 		padding-left: 0.5rem;
 	}
@@ -839,5 +859,26 @@
 		color: inherit;
 		border-radius: 2px;
 		padding: 1px 3px;
+	}
+
+	.suggestion-pill {
+		display: inline-block;
+		padding: 0.3rem 0.7rem;
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		color: var(--color-fg);
+		border: 1px solid var(--color-border);
+		border-radius: 999px;
+		background: var(--color-panel);
+		text-decoration: none;
+		transition:
+			border-color 120ms ease,
+			color 120ms ease,
+			background-color 120ms ease;
+	}
+	.suggestion-pill:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+		background: color-mix(in srgb, var(--color-accent) 8%, transparent);
 	}
 </style>

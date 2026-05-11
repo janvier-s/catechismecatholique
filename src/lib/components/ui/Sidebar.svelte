@@ -15,6 +15,8 @@
 		loadPiusXPetitAppendix,
 		loadCatIllustreStructure,
 		loadDenzingerStructure,
+		loadBoulangerStructure,
+		loadBoulangerLesson,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -30,6 +32,8 @@
 		PiusXPetitStructure,
 		CatIllustreStructure,
 		DenzingerStructure,
+		BoulangerStructure,
+		BoulangerLesson,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -101,6 +105,8 @@
 				return '/catechisme-illustre/sommaire';
 			case 'denzinger':
 				return '/denzinger/sommaire';
+			case 'boulanger':
+				return '/boulanger/sommaire';
 			default:
 				return null;
 		}
@@ -165,6 +171,38 @@
 		if (corpus !== 'denzinger') return;
 		(async () => {
 			denzingerStructure = await loadDenzingerStructure();
+		})();
+	});
+
+	// ─── Boulanger state ─────────────────────────────────────────────────────
+	let boulangerStructure: BoulangerStructure | null = $state(null);
+	let boulangerActiveLesson: BoulangerLesson | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'boulanger') return;
+		(async () => {
+			boulangerStructure = await loadBoulangerStructure();
+		})();
+	});
+
+	// Active lesson slug from the current URL — the reader expands the
+	// active lesson's mini-TOC inline so the user can navigate within the
+	// leçon without leaving the sidebar.
+	const boulangerActiveSlug = $derived.by((): string | null => {
+		const m = page.url.pathname.match(/^\/boulanger\/([^/]+)/);
+		const slug = m ? m[1]! : null;
+		return slug && slug !== 'sommaire' ? slug : null;
+	});
+
+	$effect(() => {
+		if (corpus !== 'boulanger') return;
+		const slug = boulangerActiveSlug;
+		if (!slug) {
+			boulangerActiveLesson = null;
+			return;
+		}
+		(async () => {
+			boulangerActiveLesson = await loadBoulangerLesson(slug);
 		})();
 	});
 
@@ -745,6 +783,48 @@
 							kicker: range,
 							href: `/denzinger/${u.slug}`,
 							children: sectionItems.length > 1 ? sectionItems : undefined
+						};
+					})
+				})
+			);
+		}
+		if (corpus === 'boulanger') {
+			if (!boulangerStructure) return [];
+			const activeSlug = boulangerActiveSlug;
+			const activeLesson = boulangerActiveLesson;
+			return boulangerStructure.tomes.map(
+				(t): Item => ({
+					title: t.title,
+					kicker: `Tome ${t.n}`,
+					href: t.lessons[0]
+						? `/boulanger/${t.lessons[0].slug}`
+						: `/boulanger/sommaire#tome-${t.n}`,
+					children: t.lessons.map((l): Item => {
+						const isActive = l.slug === activeSlug;
+						const miniTocChildren =
+							isActive && activeLesson?.slug === l.slug
+								? activeLesson.mini_toc.map(
+										(item): Item => ({
+											title: item.label,
+											kicker: `${item.roman}.`,
+											href: `/boulanger/${l.slug}#${item.anchor}`,
+											children: item.children.length
+												? item.children.map(
+														(c): Item => ({
+															title: c.label,
+															kicker: `${c.n}°`,
+															href: `/boulanger/${l.slug}#${c.anchor}`
+														})
+													)
+												: undefined
+										})
+									)
+								: undefined;
+						return {
+							title: l.title,
+							kicker: `Leçon ${l.n}`,
+							href: `/boulanger/${l.slug}`,
+							children: miniTocChildren
 						};
 					})
 				})

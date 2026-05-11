@@ -1,7 +1,7 @@
 {
 	"name": "Catéchisme de l'Église Catholique",
 	"short_name": "Catéchisme",
-	"description": "Édition française du Catéchisme de l'Église Catholique : lecture, recherche et concordance biblique en ligne.",
+	"description": "Bibliothèque catéchétique catholique : CEC, Compendium, Denzinger, Boulanger, saint Pie X et plus. Lecture, recherche et étude en français.",
 	"lang": "fr",
 	"start_url": "/",
 	"scope": "/",

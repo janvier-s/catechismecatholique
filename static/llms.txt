@@ -106,6 +106,22 @@ L'extraction Phase 1 inclut le texte intégral des entrées numérotées et le t
 
 ---
 
+## La Doctrine catholique — Boulanger (53 leçons)
+
+*La Doctrine catholique* de l'abbé N. Boulanger (début XX<sup>e</sup> siècle) est un cours de catéchisme supérieur en trois tomes, destiné aux adultes et aux jeunes gens souhaitant approfondir leur foi. Il se distingue par un style pédagogique clair, une structure en leçons thématiques, et un traitement doctrinal rigoureux.
+
+- **Tome 1 — Le Dogme** (15 leçons) — existence de Dieu, Trinité, création, Incarnation, Rédemption, ecclésiologie, eschatologie.
+- **Tome 2 — La Morale** (23 leçons) — fin dernière, vertus, péché, commandements, devoirs d'état, vie sociale.
+- **Tome 3 — Les Moyens de sanctification** (15 leçons) — sacrements, prière, liturgie, vie intérieure.
+
+### Accès à Boulanger
+
+- Accueil : `https://catechismecatholique.fr/boulanger`
+- Sommaire : `/boulanger/sommaire`
+- Une leçon : `/boulanger/{slug}` — ex. `/boulanger/tome-1-lecon-01-le-probleme-de-la-destinee`
+
+---
+
 ## Annexe — Prières et Formules
 
 Textes liturgiques et formules de prière traditionnelles tirés de l'annexe du Compendium : Credo, Notre Père, Ave Maria, Gloria, Acte de contrition, Angélus, Rosaire, formules sacramentelles, prières en latin et en français.

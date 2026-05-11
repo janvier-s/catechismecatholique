@@ -1,11 +1,5 @@
 <script lang="ts">
-	import {
-		loadDenzingerStructure,
-		loadDenzingerCitedBy,
-		loadDenzingerRefs,
-		loadDenzingerIndex
-	} from '$lib/data/loaders';
-	import { onMount } from 'svelte';
+	import { loadDenzingerCitedBy, loadDenzingerRefs, loadDenzingerIndex } from '$lib/data/loaders';
 
 	type Mode = 'cross-refs' | 'cited-by';
 	let { n, mode }: { n: number; mode: Mode } = $props();
@@ -16,7 +10,7 @@
 
 	$effect(() => {
 		const _n = n;
-		const _mode = mode;
+		void mode;
 		loading = true;
 		(async () => {
 			const [refs, citedBy, index] = await Promise.all([
