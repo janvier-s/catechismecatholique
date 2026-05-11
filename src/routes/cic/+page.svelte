@@ -60,7 +60,7 @@
 				<p class="card-stats">
 					<span>{stats.livres} livres</span>
 					<span aria-hidden="true">·</span>
-					<span>{stats.canons.toLocaleString('fr-FR').replace(/[\u00a0\u202f]/g, ' ')} canons</span>
+					<span>{stats.canons.toString()} canons</span>
 				</p>
 				<span class="card-cta" aria-hidden="true">Lire le code →</span>
 			</a>

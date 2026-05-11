@@ -27,9 +27,9 @@
 			<span class="rule rule-r"></span>
 		</div>
 		<p class="lede">
-			{data.structure.total_entries.toLocaleString('fr-FR')} entrées (DH {data.structure
-				.all_numbers[0]}–{data.structure.all_numbers[data.structure.all_numbers.length - 1]})<br
-			/>en {data.structure.total_units} sections.
+			{data.structure.total_entries.toString()} entrées (DH {data.structure.all_numbers[0]}–{data
+				.structure.all_numbers[data.structure.all_numbers.length - 1]})<br />en {data.structure
+				.total_units} sections.
 		</p>
 		<div class="toc-actions">
 			<a class="index-link" href="/denzinger">← Retour à l'accueil</a>

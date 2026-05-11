@@ -69,7 +69,7 @@
 				{
 					href: '/cec',
 					label: 'Lecture intégrale',
-					description: 'Les 2 865 paragraphes du Catéchisme.'
+					description: 'Les 2865 paragraphes du Catéchisme.'
 				},
 				{
 					href: '/cec/sommaire',
@@ -190,7 +190,7 @@
 					href: '/cic/1983',
 					label: 'Code de Droit Canonique',
 					eyebrow: '1983',
-					description: 'Codex Iuris Canonici en vigueur — 1 752 canons.'
+					description: 'Codex Iuris Canonici en vigueur (1752 canons).'
 				},
 				{
 					href: '/cic/1917',
