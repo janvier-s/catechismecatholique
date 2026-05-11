@@ -57,7 +57,16 @@
 	</nav>
 
 	<header class="mb-6">
-		<h1 class="font-heading text-4xl font-semibold mb-1">{data.entry.term}</h1>
+		<h1 class="font-heading text-4xl font-semibold mb-1">
+			{#if data.entry.directRefs.length > 0 && data.entry.subEntries.length === 0}
+				<a
+					href="/cec/{data.entry.directRefs.length > 1 ? data.entry.directRefs.join(',') : data.entry.directRefs[0]}?label={encodeURIComponent(data.entry.term)}"
+					class="hover:text-accent hover:underline"
+				>{data.entry.term}</a>
+			{:else}
+				{data.entry.term}
+			{/if}
+		</h1>
 		{#if data.entry.latin}
 			<p class="font-body italic text-muted text-[16px]">{data.entry.latin}</p>
 		{/if}
