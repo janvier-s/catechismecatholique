@@ -1055,8 +1055,12 @@
 					.sort((a, b) => a.date.localeCompare(b.date));
 				if (docs.length === 0) continue;
 				out.push({
+					// Unique href per kind so Svelte's keyed `{#each}` doesn't
+					// dedupe the three groups down to one. They aren't real
+					// destinations — the user clicks children — but the key
+					// has to be unique.
 					title: KIND_LABEL[k],
-					href: '/vatican-ii',
+					href: `/vatican-ii#kind-${k}`,
 					children: docs.map((d): Item => {
 						const isActive = d.slug === activeSlug;
 						// Use the doc's pre-computed toc (headings + § titles at

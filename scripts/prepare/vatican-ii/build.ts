@@ -2,13 +2,23 @@
  * Generic Vatican II EPUB → JSON builder.
  *
  * Source structure (per vatican.va canonical numbering):
- *  - Each §N is a section with: an optional bold title, plus 0+ prose
- *    paragraphs as its body. The EPUB inconsistently encodes the title
- *    either INSIDE the numpara <p> (style A) or in a SEPARATE bold <p>
- *    immediately before the numpara <p> (style B, SC §1 "Préambule").
- *  - Numbered paragraphs are introduced by <span class="numpara">N.</span>.
- *  - Standalone bold-only <p>s between numparas are chapter/section
- *    dividers (e.g. "CHAPITRE PREMIER", "I. Nature de la liturgie…").
+ *  - Each §N is a section: optional title + 0+ continuation prose
+ *    paragraphs. Title comes from inside the numpara <p> (style A) or
+ *    the immediately preceding bold-only <p> (style B, SC §1 "Préambule").
+ *  - Numbered paragraphs are normally introduced by
+ *    <span class="numpara">N.</span>. Three other encodings appear in
+ *    practice; we accept them all:
+ *      A. Standard:  <p>...<span class="numpara">N.</span>...</p>
+ *      B. Alt-form:  <p>...<span class="emphasis"><em><span class="bold">
+ *                    <strong>N. [title-text]</strong>...</p>
+ *                    (LG §64, GS §7/§31, SC §13/§14/§18/§26/§40)
+ *      C. Plain:     <p>N. [title-text] [body...]</p>  — no markup.
+ *                    (IM §23/§24, GS §17). We accept this only when N
+ *                    is exactly the previously-seen-N plus one, to
+ *                    avoid mis-detecting prose that starts with a digit.
+ *  - Standalone bold-only <p>s between numbered sections become chapter
+ *    or section divider headings (e.g. "CHAPITRE PREMIER",
+ *    "I. Nature de la liturgie…").
  *  - The outermost <section> in each file carries the doc-title page
  *    salutation; we drop the first heading we produce.
  */
@@ -96,26 +106,12 @@ function collectParagraphs(scope: string): string[] {
 }
 
 /**
- * Extract a paragraph's canonical number marker. Normally tagged
- * <span class="numpara">N.</span>, but in some paragraphs (e.g. SC §13,
- * §14, §18, §26, §40) the marker is encoded as a leading nested-bold-strong
- * "<emphasis><em><bold><strong>N.</strong>". We try both forms.
+ * Title detection: a paragraph body is a "pure title" when its prose,
+ * minus the numpara marker and footnote anchors, consists entirely of
+ * bold/strong/em wrappers with no plain prose left over.
  */
-function detectNumpara(body: string): { n: number; markup: string } | null {
-	const m1 = body.match(/<span\s+class="numpara">(\d+)\.<\/span>\s*/);
-	if (m1) return { n: parseInt(m1[1]!, 10), markup: m1[0] };
-	const m2 = body.match(
-		/^\s*<span[^>]*class="emphasis"[^>]*><em><span[^>]*class="bold"[^>]*><strong>(\d+)\.<\/strong><\/span><\/em><\/span>\s*/
-	);
-	if (m2) return { n: parseInt(m2[1]!, 10), markup: m2[0] };
-	return null;
-}
-
 function detectTitle(body: string): string | null {
-	const np = detectNumpara(body);
-	let core = np ? body.substring(np.markup.length) : body;
-	core = core.replace(/<span\s+class="numpara">\d+\.<\/span>\s*/, '');
-	core = core.replace(/<a[^>]*class="footnote"[^>]*>[\s\S]*?<\/a>/g, '');
+	let core = body.replace(/<a[^>]*class="footnote"[^>]*>[\s\S]*?<\/a>/g, '');
 	const hadBoldWrappers =
 		/<(?:strong|b|em|i)\b/.test(core) || /<span\s+class="(?:bold|emphasis)"/.test(core);
 	if (!hadBoldWrappers) return null;
@@ -182,6 +178,7 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 	const toc: VatIITocEntry[] = [];
 	const takenAnchors = new Set<string>();
 	let firstHeadingSkipped = false;
+	let lastSeenN = 0; // For style-C (plain) detection.
 
 	function uniqueAnchor(base: string): string {
 		let anchor = base;
@@ -215,36 +212,94 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 		if (title) toc.push({ level: levelFromTitle(title), anchor, title, n });
 	}
 
-	/**
-	 * Two-pass walk of a scope's <p> list: gather paragraph metadata, then
-	 * emit numbered sections with their titles (resolved from either inside
-	 * the numpara or the immediately preceding bold-only <p>) and any
-	 * leftover bold-only <p>s as chapter dividers.
-	 */
 	function visitParagraphs(scope: string) {
 		type Item = {
-			body: string;
+			body: string; // raw original
 			numpara?: number;
-			numparaMarkup?: string;
+			stripped?: string; // body with numpara markup removed
 			titleText?: string;
-			isPureTitle: boolean; // entire body is title-styled (no leftover prose)
+			isPureTitle: boolean;
 		};
-		const items: Item[] = collectParagraphs(scope).map((body) => {
-			const np = detectNumpara(body);
+		const rawBodies = collectParagraphs(scope);
+
+		// PASS 1 — deterministic numpara detection (forms A and B). We
+		// record which N is claimed by which raw <p> index so the plain
+		// form (C) in pass 2 can't steal a digit that's really a
+		// sub-list marker inside an existing section.
+		const deterministic = new Map<number, { idx: number; body: string }>();
+		for (let i = 0; i < rawBodies.length; i++) {
+			const body = rawBodies[i]!;
+			let m: RegExpExecArray | null;
+			m = /<span\s+class="numpara">(\d+)\.<\/span>\s*/.exec(body);
+			if (m) {
+				const n = parseInt(m[1]!, 10);
+				if (!deterministic.has(n)) {
+					const stripped = body.substring(0, m.index) + body.substring(m.index + m[0].length);
+					deterministic.set(n, { idx: i, body: stripped });
+				}
+				continue;
+			}
+			m =
+				/^(\s*<span[^>]*class="emphasis"[^>]*><em><span[^>]*class="bold"[^>]*><strong>)(\d+)\.\s*/.exec(
+					body
+				);
+			if (m) {
+				const n = parseInt(m[2]!, 10);
+				if (!deterministic.has(n)) {
+					deterministic.set(n, { idx: i, body: body.replace(m[0], m[1]!) });
+				}
+			}
+		}
+		const claimedByIdx = new Map<number, { n: number; body: string }>();
+		for (const [n, v] of deterministic) claimedByIdx.set(v.idx, { n, body: v.body });
+
+		// PASS 2 — walk in order, accepting plain-form C only when N ==
+		// runningLast + 1 AND N isn't deterministically claimed elsewhere.
+		const items: Item[] = [];
+		let runningLast = lastSeenN;
+		for (let i = 0; i < rawBodies.length; i++) {
+			const body = rawBodies[i]!;
+			const det = claimedByIdx.get(i);
+			if (det) {
+				const titleText = detectTitle(det.body);
+				items.push({
+					body,
+					numpara: det.n,
+					stripped: det.body,
+					titleText: titleText ?? undefined,
+					isPureTitle: !!titleText
+				});
+				runningLast = Math.max(runningLast, det.n);
+				continue;
+			}
+			const pm = /^(\s*(?:<[^>]+>\s*)*)(\d+)\.\s+/.exec(body);
+			if (pm) {
+				const n = parseInt(pm[2]!, 10);
+				if (n === runningLast + 1 && !deterministic.has(n)) {
+					const stripped = body.replace(pm[0], pm[1] ?? '');
+					const titleText = detectTitle(stripped);
+					items.push({
+						body,
+						numpara: n,
+						stripped,
+						titleText: titleText ?? undefined,
+						isPureTitle: !!titleText
+					});
+					runningLast = n;
+					continue;
+				}
+			}
 			const titleText = detectTitle(body);
-			return {
+			items.push({
 				body,
-				numpara: np ? np.n : undefined,
-				numparaMarkup: np ? np.markup : undefined,
 				titleText: titleText ?? undefined,
 				isPureTitle: !!titleText
-			};
-		});
+			});
+		}
 
 		let i = 0;
-		// Bold-only <p> seen with no numpara consumer yet. If the next item
-		// is a numpara <p> whose body is prose (no embedded title), this
-		// pending bold paragraph IS that section's title (style B).
+		// Bold-only <p> seen with no consumer yet. If the next item is a
+		// numpara <p> whose body is prose, this pending title attaches to it.
 		let pendingTitle: string | null = null;
 
 		while (i < items.length) {
@@ -257,18 +312,11 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 				const bodies: string[] = [];
 				const refs: number[] = [];
 				if (!cur.isPureTitle) {
-					// The numpara <p> carries prose (possibly with a leading
-					// bold accent). Strip the numpara markup (whichever form
-					// detectNumpara matched) and keep the rest as the first
-					// body fragment.
-					const innerBody = cur.numparaMarkup
-						? cur.body.substring(cur.body.indexOf(cur.numparaMarkup) + cur.numparaMarkup.length)
-						: cur.body;
-					const rw = rewriteFootnoteRefs(innerBody);
+					const inner = cur.stripped ?? cur.body;
+					const rw = rewriteFootnoteRefs(inner);
 					bodies.push(`<p>${rw.html.trim()}</p>`);
 					refs.push(...rw.refs);
 				}
-				// Slurp following non-numpara, non-title items as body.
 				let j = i + 1;
 				while (j < items.length && items[j]!.numpara === undefined && !items[j]!.isPureTitle) {
 					const rw = rewriteFootnoteRefs(items[j]!.body);
@@ -277,12 +325,11 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 					j++;
 				}
 				emitSection(cur.numpara, title, bodies, refs);
+				lastSeenN = Math.max(lastSeenN, cur.numpara);
 				i = j;
 				continue;
 			}
 			if (cur.isPureTitle) {
-				// Look ahead: is the next numpara <p> body prose (not pure
-				// title)? If so, this bold <p> is its title (style B).
 				let k = i + 1;
 				while (k < items.length && items[k]!.numpara === undefined && !items[k]!.isPureTitle) k++;
 				if (k < items.length && items[k]!.numpara !== undefined && !items[k]!.isPureTitle) {
@@ -293,20 +340,12 @@ export function buildVatIIDoc(args: { contentFiles: string[] }): VatIIDocOutput 
 				i++;
 				continue;
 			}
-			// Prose <p> outside any section. Edge case (preface before §1).
-			// Attach to next section's body if pendingTitle is set? Otherwise
-			// emit as standalone n=0 paragraph.
-			const rw = rewriteFootnoteRefs(cur.body);
-			blocks.push({
-				kind: 'paragraph',
-				n: 0,
-				anchor: uniqueAnchor('p-pre'),
-				html: `<p>${rw.html.trim()}</p>`,
-				footnoteRefs: rw.refs
-			});
+			// Prose <p> outside any section (preface before §1, signature
+			// pages). Skip rather than emit as a stray paragraph — these
+			// almost always are: "Moi, Paul, évêque…", "(Suivent les
+			// signatures des Pères)", or stray footnote stubs.
 			i++;
 		}
-		// Any unconsumed pendingTitle becomes a heading.
 		if (pendingTitle) emitHeading(pendingTitle, levelFromTitle(pendingTitle));
 	}
 
