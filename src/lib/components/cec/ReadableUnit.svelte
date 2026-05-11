@@ -78,7 +78,7 @@
 
 <article class="mb-8 ccc-paragraph" class:has-side-refs={sideRefs !== null} id={anchorId}>
 	<div class="paragraph-grid">
-		<div class="number-wrap flex-none w-12 flex items-center justify-end gap-0.5 pt-1">
+		<div class="number-wrap flex-none w-12 flex items-start justify-end relative">
 			{#if unit.kind === 'ccc-paragraph'}
 				<a
 					href={numberHref}
@@ -96,6 +96,7 @@
 					type="button"
 					class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
 					onclick={onNumberClick}
+					title={`Ouvrir le panneau d'étude — §${unit.data.number}`}
 					aria-label={`Ouvrir le panneau d'étude pour le paragraphe ${unit.data.number}`}
 				>
 					{unit.data.number}
@@ -345,8 +346,14 @@
 	   The anchor is sized to match the button so the two targets sit flush. */
 	.number-wrap {
 		align-self: flex-start;
+		margin-right: 7px;
 	}
+	/* Hang the permalink icon to the left of the number, outside the column,
+	   so the number aligns flush with the paragraph title. */
 	.number-link {
+		position: absolute;
+		right: calc(100% + 2px);
+		top: 0;
 		opacity: 0;
 		transition: opacity 120ms ease;
 		color: var(--color-muted);
@@ -362,8 +369,9 @@
 		color: var(--color-accent);
 	}
 	.link-icon {
-		width: 0.85em;
-		height: 0.85em;
+		width: 1em;
+		height: 1em;
 		fill: currentColor;
+		margin-right: 2px;
 	}
 </style>
