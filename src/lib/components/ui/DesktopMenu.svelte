@@ -182,10 +182,16 @@
 					description: 'Norme liturgique de la messe romaine en 9 chapitres.'
 				},
 				{
-					href: '/cic',
+					href: '/cic/1983',
 					label: 'Code de Droit Canonique',
-					eyebrow: '1917 + 1983',
-					description: "Les deux codes de droit canonique de l'Église latine."
+					eyebrow: '1983',
+					description: 'Codex Iuris Canonici en vigueur — 1 752 canons.'
+				},
+				{
+					href: '/cic/1917',
+					label: 'Code Pio-Benedictin',
+					eyebrow: '1917',
+					description: "Premier code unifié du droit de l'Église latine."
 				}
 			]
 		}

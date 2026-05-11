@@ -3,59 +3,73 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const CODE_LABEL = { '1983': 'Code de 1983', '1917': 'Code de 1917' } as const;
-	const CODE_SUBTITLE = {
-		'1983': 'Promulgué par saint Jean-Paul II le 25 janvier 1983.',
-		'1917': 'Promulgué par Benoît XV le 27 mai 1917 (Codex Pio-Benedictin).'
+	const codes = $derived(data.structure.codes);
+
+	const META = {
+		'1983': {
+			eyebrow: 'Codex Iuris Canonici · 1983',
+			title: 'Code de Droit Canonique',
+			subtitle: 'Promulgué par saint Jean-Paul II',
+			date: '25 janvier 1983',
+			lede: "Le code en vigueur dans l'Église latine, fruit de la révision voulue par le concile Vatican II."
+		},
+		'1917': {
+			eyebrow: 'Codex Iuris Canonici · 1917',
+			title: 'Code Pio-Benedictin',
+			subtitle: 'Promulgué par Benoît XV',
+			date: '27 mai 1917',
+			lede: "Premier code unifié du droit canonique de l'Église latine, en vigueur jusqu'en 1983."
+		}
 	} as const;
+
+	function statsFor(code: '1983' | '1917') {
+		const c = codes.find((x) => x.code === code);
+		if (!c) return { livres: 0, canons: 0 };
+		const canons = c.livres.reduce((s, l) => s + l.totalCanons, 0);
+		return { livres: c.livres.length, canons };
+	}
 </script>
 
 <svelte:head>
-	<title>Code de Droit Canonique (1917 + 1983)</title>
+	<title>Code de Droit Canonique — 1917 et 1983</title>
 	<meta
 		name="description"
-		content="Les deux codes de droit canonique de l'Église latine : 1917 (Codex Pio-Benedictin, 2 414 canons) et 1983 (1 752 canons)."
+		content="Les deux codes de droit canonique de l'Église latine : le Code de 1983 promulgué par saint Jean-Paul II, et le Code Pio-Benedictin de 1917."
 	/>
 </svelte:head>
 
-<main class="cic-index">
+<main class="cic-chooser">
 	<header class="hero">
-		<p class="hero-kicker">Église latine · CODEX IURIS CANONICI</p>
+		<p class="hero-kicker">Église latine</p>
 		<h1 class="hero-title">Code de Droit Canonique</h1>
 		<p class="hero-lede">
-			Les deux codes de droit canonique en vigueur dans l'Église latine — la version actuelle
-			promulguée par saint Jean-Paul II en 1983 (1 752 canons), et le code Pio-Benedictin de 1917
-			qu'elle a remplacé (2 414 canons).
+			L'Église latine a connu deux codifications successives de son droit. Choisissez l'un des deux
+			codes pour le parcourir livre par livre.
 		</p>
 	</header>
 
-	{#each data.structure.codes as code (code.code)}
-		<section class="code">
-			<header class="code-head">
-				<p class="code-kicker">{code.code}</p>
-				<h2 class="code-title">{CODE_LABEL[code.code]}</h2>
-				<p class="code-sub">{CODE_SUBTITLE[code.code]}</p>
-			</header>
-			<ul class="livres">
-				{#each code.livres as livre (livre.slug)}
-					<li>
-						<a class="livre-row" href={`/cic/${code.code}/${livre.slug}`}>
-							<span class="livre-num">Livre {livre.n}</span>
-							<span class="livre-title">{livre.title}</span>
-							<span class="livre-range">
-								{livre.canonRange[0]}–{livre.canonRange[1]}
-							</span>
-							<span class="livre-arrow" aria-hidden="true">→</span>
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</section>
-	{/each}
+	<div class="cards">
+		{#each ['1983', '1917'] as const as code (code)}
+			{@const stats = statsFor(code)}
+			<a class="card" href={`/cic/${code}`}>
+				<p class="card-eyebrow">{META[code].eyebrow}</p>
+				<h2 class="card-title">{META[code].title}</h2>
+				<p class="card-sub">{META[code].subtitle}</p>
+				<p class="card-date">{META[code].date}</p>
+				<p class="card-lede">{META[code].lede}</p>
+				<p class="card-stats">
+					<span>{stats.livres} livres</span>
+					<span aria-hidden="true">·</span>
+					<span>{stats.canons.toLocaleString('fr-FR').replace(/[\u00a0\u202f]/g, ' ')} canons</span>
+				</p>
+				<span class="card-cta" aria-hidden="true">Lire le code →</span>
+			</a>
+		{/each}
+	</div>
 </main>
 
 <style>
-	.cic-index {
+	.cic-chooser {
 		max-width: 900px;
 		margin: 0 auto;
 		padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
@@ -64,7 +78,7 @@
 	}
 	.hero {
 		text-align: center;
-		margin-bottom: clamp(2rem, 5vw, 3.5rem);
+		margin-bottom: clamp(2rem, 5vw, 3rem);
 	}
 	.hero-kicker {
 		font-family: var(--font-ui);
@@ -93,89 +107,92 @@
 		color: var(--color-subtle);
 	}
 
-	.code {
-		margin-top: 3rem;
-		border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
-		padding-top: 1.5rem;
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+		gap: 1.25rem;
 	}
-	.code-head {
-		margin-bottom: 1.25rem;
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		padding: 1.5rem 1.5rem 1.75rem;
+		border: 1px solid color-mix(in srgb, var(--color-fg) 14%, transparent);
+		border-radius: 6px;
+		text-decoration: none;
+		color: var(--color-fg);
+		background: var(--color-panel);
+		transition:
+			border-color 150ms ease,
+			color 150ms ease,
+			transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
-	.code-kicker {
+	.card:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+		transform: translateY(-2px);
+	}
+	.card-eyebrow {
 		font-family: var(--font-ui);
-		font-size: 0.68rem;
+		font-size: 0.66rem;
 		font-weight: 700;
 		letter-spacing: 0.22em;
+		text-transform: uppercase;
 		color: var(--color-accent);
 		font-variant-numeric: tabular-nums;
 		margin: 0 0 0.25rem;
 	}
-	.code-title {
+	.card-title {
 		font-family: var(--font-heading);
-		font-size: 1.4rem;
+		font-size: 1.5rem;
 		font-weight: 700;
 		margin: 0;
+		line-height: 1.2;
 	}
-	.code-sub {
+	.card-sub {
 		font-family: var(--font-body);
 		font-style: italic;
 		font-size: 0.9rem;
 		color: var(--color-subtle);
-		margin: 0.35rem 0 0;
+		margin: 0.25rem 0 0;
 	}
-
-	.livres {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-	}
-	.livre-row {
-		display: grid;
-		grid-template-columns: 5.5rem 1fr auto auto;
-		gap: 0.85rem;
-		align-items: baseline;
-		padding: 0.7rem 0.85rem;
-		text-decoration: none;
-		color: var(--color-fg);
-		border-radius: 4px;
-		transition:
-			background-color 120ms ease,
-			color 120ms ease;
-	}
-	.livre-row:hover {
-		background: color-mix(in srgb, var(--color-accent) 6%, transparent);
-		color: var(--color-accent);
-	}
-	.livre-num {
-		font-family: var(--font-ui);
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-	}
-	.livre-title {
-		font-family: var(--font-heading);
-		font-style: italic;
-		font-weight: 600;
-		font-size: 1.05rem;
-	}
-	.livre-range {
+	.card-date {
 		font-family: var(--font-ui);
 		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		color: var(--color-muted);
 		font-variant-numeric: tabular-nums;
-		color: var(--color-muted);
+		margin: 0 0 0.35rem;
 	}
-	.livre-arrow {
-		color: var(--color-muted);
-		font-size: 0.85rem;
-		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	.card-lede {
+		font-size: 0.92rem;
+		line-height: 1.55;
+		color: var(--color-fg);
+		margin: 0.5rem 0 0;
 	}
-	.livre-row:hover .livre-arrow {
-		transform: translateX(3px);
+	.card-stats {
+		display: flex;
+		gap: 0.5rem;
+		margin: 0.85rem 0 0;
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		font-variant-numeric: tabular-nums;
+	}
+	.card-cta {
+		margin-top: auto;
+		padding-top: 1rem;
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-weight: 600;
 		color: var(--color-accent);
+	}
+	.card:hover .card-cta {
+		text-decoration: underline;
+		text-underline-offset: 3px;
 	}
 </style>

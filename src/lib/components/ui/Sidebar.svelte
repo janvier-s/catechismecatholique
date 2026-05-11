@@ -1116,17 +1116,34 @@
 			];
 		}
 		if (corpus === 'cic') {
-			if (!cicStructure || !cicActiveSlug) return [];
+			if (!cicStructure) return [];
+			// Identify which code's index/reader we're on. Without an active
+			// code, fall back to listing both (defensive — the layout normally
+			// hides the sidebar at /cic exactly).
+			const codeMatch = page.url.pathname.match(/^\/cic\/(1983|1917)/);
+			const activeCode = codeMatch?.[1] as '1983' | '1917' | undefined;
+
+			if (activeCode && !cicActiveSlug) {
+				// /cic/[code] index — show that code's livres as a flat list.
+				const entry = cicStructure.codes.find((c) => c.code === activeCode);
+				if (!entry) return [];
+				return entry.livres.map(
+					(l): Item => ({
+						title: l.title,
+						kicker: `Livre ${l.n}`,
+						href: `/cic/${activeCode}/${l.slug}`
+					})
+				);
+			}
+
+			// /cic/[code]/[livre] reader — show only the active livre's TOC.
 			const activeLivre = cicActiveLivre;
-			// Show only the active livre's TOC (no cross-livre clutter, like
-			// the Vatican II rail). Each heading becomes one Item; canons
-			// aren't enumerated individually (would be hundreds).
 			if (!activeLivre || activeLivre.slug !== cicActiveSlug) return [];
 			const items: Item[] = [];
 			const base = `/cic/${activeLivre.code}/${activeLivre.slug}`;
 			items.push({
 				title: activeLivre.title,
-				kicker: `${activeLivre.code} · Livre ${activeLivre.n}`,
+				kicker: `Livre ${activeLivre.n}`,
 				href: base,
 				defaultExpanded: true,
 				children: activeLivre.blocks

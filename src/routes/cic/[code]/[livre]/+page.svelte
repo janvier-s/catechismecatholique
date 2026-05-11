@@ -27,8 +27,12 @@
 			crumbs={[
 				{ href: '/cic', title: 'Code de Droit Canonique' },
 				{
+					href: `/cic/${livre.code}`,
+					title: livre.code === '1983' ? 'Code de 1983' : 'Code Pio-Benedictin (1917)'
+				},
+				{
 					href: `/cic/${livre.code}/${livre.slug}`,
-					kicker: `${livre.code} · Livre ${livre.n}`,
+					kicker: `Livre ${livre.n}`,
 					title: livre.title
 				}
 			]}

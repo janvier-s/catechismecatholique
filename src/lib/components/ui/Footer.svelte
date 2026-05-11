@@ -23,7 +23,8 @@
 				<li><a href="/denzinger">Denzinger</a></li>
 				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
 				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>
-				<li><a href="/cic">Code de Droit Canonique</a></li>
+				<li><a href="/cic/1983">Code de Droit Canonique (1983)</a></li>
+				<li><a href="/cic/1917">Code Pio-Benedictin (1917)</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">
@@ -46,10 +47,10 @@
 		<span class="footer-cross" aria-hidden="true">✠</span>
 		<span>
 			MMXXVI · Pour la plus grande gloire de Dieu ·
-			<span class="amdg" tabindex="0">
+			<button type="button" class="amdg" aria-label="Ad Maiorem Dei Gloriam">
 				<abbr>A.M.D.G.</abbr>
 				<span class="amdg-tip" role="tooltip">Ad Maiorem Dei Gloriam</span>
-			</span>
+			</button>
 		</span>
 	</p>
 	<p class="footer-copy">
@@ -143,7 +144,13 @@
 		position: relative;
 		display: inline-block;
 		cursor: help;
+		border: 0;
 		border-bottom: 1px dotted color-mix(in srgb, var(--color-fg) 35%, transparent);
+		background: transparent;
+		padding: 0;
+		color: inherit;
+		font: inherit;
+		letter-spacing: inherit;
 		outline: none;
 	}
 	.amdg-tip {
