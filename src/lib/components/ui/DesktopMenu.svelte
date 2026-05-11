@@ -114,7 +114,7 @@
 			]
 		},
 		{
-			title: 'Autres catéchismes',
+			title: 'Catéchismes',
 			links: [
 				{
 					href: '/compendium',
@@ -129,6 +129,12 @@
 					description: 'Le Catéchisme du Concile de Trente.'
 				},
 				{
+					href: '/catechisme-illustre',
+					label: 'Catéchisme illustré',
+					eyebrow: '1897',
+					description: 'Les vérités nécessaires en 12 leçons illustrées.'
+				},
+				{
 					href: '/grand-catechisme',
 					label: 'Grand Catéchisme',
 					eyebrow: '1905',
@@ -139,18 +145,23 @@
 					label: 'Petit Catéchisme',
 					eyebrow: '1912',
 					description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X.'
-				},
-				{
-					href: '/catechisme-illustre',
-					label: 'Catéchisme illustré',
-					eyebrow: '1897',
-					description: 'Les vérités nécessaires en 12 leçons illustrées.'
-				},
+				}
+			]
+		},
+		{
+			title: 'Théologie & doctrine',
+			links: [
 				{
 					href: '/doctrine-catholique',
 					label: 'La Doctrine Catholique',
 					eyebrow: '1927',
 					description: 'Abbé Boulenger, 53 leçons en trois tomes.'
+				},
+				{
+					href: '/doctrine-sociale',
+					label: 'Doctrine sociale',
+					eyebrow: '2004',
+					description: 'Compendium en 583 paragraphes, trois parties.'
 				}
 			]
 		},
@@ -170,18 +181,6 @@
 					description: 'Recueil canonique des définitions du Magistère.'
 				},
 				{
-					href: '/doctrine-sociale',
-					label: 'Doctrine sociale',
-					eyebrow: '2004',
-					description: 'Compendium en 583 paragraphes, trois parties.'
-				},
-				{
-					href: '/pgmr',
-					label: 'Présentation Générale du Missel Romain',
-					eyebrow: '2002',
-					description: 'Norme liturgique de la messe romaine en 9 chapitres.'
-				},
-				{
 					href: '/cic/1983',
 					label: 'Code de Droit Canonique',
 					eyebrow: '1983',
@@ -192,6 +191,12 @@
 					label: 'Code Pio-Benedictin',
 					eyebrow: '1917',
 					description: "Premier code unifié du droit de l'Église latine."
+				},
+				{
+					href: '/pgmr',
+					label: 'Présentation Générale du Missel Romain',
+					eyebrow: '2002',
+					description: 'Norme liturgique de la messe romaine en 9 chapitres.'
 				}
 			]
 		}
@@ -360,7 +365,7 @@
 		position: absolute;
 		right: 0;
 		top: calc(100% + 6px);
-		width: min(1040px, calc(100vw - 2rem));
+		width: min(1240px, calc(100vw - 2rem));
 		background: var(--color-panel);
 		border: 1px solid var(--color-border);
 		border-radius: 6px;
@@ -369,7 +374,7 @@
 	}
 	.menu-grid {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(5, minmax(0, 1fr));
 		grid-template-rows: auto repeat(6, 1fr);
 		gap: 0.4rem 0;
 	}

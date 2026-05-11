@@ -74,27 +74,48 @@
 	type Group = { title: string; links: Link[] };
 	const groups: Group[] = [
 		{
-			title: 'Catéchisme',
+			title: 'Le Catéchisme',
 			links: [
-				{ href: '/cec', label: 'Lire le Catéchisme' },
+				{ href: '/cec', label: 'Lecture intégrale' },
 				{ href: '/cec/sommaire', label: 'Sommaire' },
 				{ href: '/cec/panorama', label: 'Panorama' },
+				{ href: '/recherche', label: 'Recherche' }
+			]
+		},
+		{
+			title: 'Études & outils',
+			links: [
+				{ href: '/bible', label: 'Concordance biblique' },
+				{ href: '/glossaire', label: 'Glossaire' },
+				{ href: '/calendrier', label: 'Calendrier liturgique' },
+				{ href: '/prieres-formules', label: 'Prières & Formules' }
+			]
+		},
+		{
+			title: 'Catéchismes',
+			links: [
 				{ href: '/compendium', label: 'Compendium' },
 				{ href: '/trente', label: 'Catéchisme de Trente' },
-				{ href: '/grand-catechisme', label: 'Grand Catéchisme' },
-				{ href: '/petit-catechisme', label: 'Petit Catéchisme' },
 				{ href: '/catechisme-illustre', label: 'Catéchisme illustré' },
+				{ href: '/grand-catechisme', label: 'Grand Catéchisme' },
+				{ href: '/petit-catechisme', label: 'Petit Catéchisme' }
+			]
+		},
+		{
+			title: 'Théologie & doctrine',
+			links: [
 				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique' },
+				{ href: '/doctrine-sociale', label: 'Doctrine sociale' }
+			]
+		},
+		{
+			title: 'Magistère',
+			links: [
 				{ href: '/vatican-ii', label: 'Vatican II' },
 				{ href: '/denzinger', label: 'Denzinger' },
-				{ href: '/doctrine-sociale', label: 'Doctrine sociale' },
-				{ href: '/pgmr', label: 'Présentation Générale du Missel Romain' },
 				{ href: '/cic/1983', label: 'Code de Droit Canonique (1983)' },
 				{ href: '/cic/1917', label: 'Code Pio-Benedictin (1917)' },
-				{ href: '/calendrier', label: 'Calendrier liturgique' },
-				{ href: '/prieres-formules', label: 'Prières & Formules' },
-				{ href: '/glossaire', label: 'Glossaire' },
-				{ href: '/recherche', label: 'Recherche' }
+				{ href: '/pgmr', label: 'Présentation Générale du Missel Romain' }
 			]
 		},
 		{

@@ -1,42 +1,54 @@
 <footer class="site-footer">
 	<nav class="footer-cols" aria-label="Navigation du pied de page">
 		<div class="footer-col">
-			<p class="footer-col-head">Catéchisme</p>
+			<p class="footer-col-head">Le Catéchisme</p>
 			<ul>
-				<li><a href="/cec">Lire le Catéchisme</a></li>
+				<li><a href="/cec">Lecture intégrale</a></li>
 				<li><a href="/cec/sommaire">Sommaire</a></li>
 				<li><a href="/cec/panorama">Panorama</a></li>
-				<li><a href="/glossaire">Glossaire</a></li>
 				<li><a href="/recherche">Recherche</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">
-			<p class="footer-col-head">Autres catéchismes</p>
+			<p class="footer-col-head">Études & outils</p>
 			<ul>
-				<li><a href="/compendium">Compendium</a></li>
-				<li><a href="/trente">Catéchisme de Trente</a></li>
-				<li><a href="/grand-catechisme">Grand Catéchisme</a></li>
-				<li><a href="/petit-catechisme">Petit Catéchisme</a></li>
-				<li><a href="/catechisme-illustre">Catéchisme illustré</a></li>
-				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>
-				<li><a href="/vatican-ii">Vatican II</a></li>
-				<li><a href="/denzinger">Denzinger</a></li>
-				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
-				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>
-				<li><a href="/cic/1983">Code de Droit Canonique (1983)</a></li>
-				<li><a href="/cic/1917">Code Pio-Benedictin (1917)</a></li>
+				<li><a href="/bible">Concordance biblique</a></li>
+				<li><a href="/glossaire">Glossaire</a></li>
+				<li><a href="/calendrier">Calendrier liturgique</a></li>
+				<li><a href="/prieres-formules">Prières & Formules</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">
-			<p class="footer-col-head">Bible</p>
+			<p class="footer-col-head">Catéchismes</p>
 			<ul>
-				<li><a href="/bible">Lire la Bible</a></li>
-				<li><a href="/bible">Concordance</a></li>
+				<li><a href="/compendium">Compendium</a></li>
+				<li><a href="/trente">Catéchisme de Trente</a></li>
+				<li><a href="/catechisme-illustre">Catéchisme illustré</a></li>
+				<li><a href="/grand-catechisme">Grand Catéchisme</a></li>
+				<li><a href="/petit-catechisme">Petit Catéchisme</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<p class="footer-col-head">Théologie & doctrine</p>
+			<ul>
+				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>
+				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<p class="footer-col-head">Magistère</p>
+			<ul>
+				<li><a href="/vatican-ii">Vatican II</a></li>
+				<li><a href="/denzinger">Denzinger</a></li>
+				<li><a href="/cic/1983">Code de Droit Canonique (1983)</a></li>
+				<li><a href="/cic/1917">Code Pio-Benedictin (1917)</a></li>
+				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">
 			<p class="footer-col-head">Le site</p>
 			<ul>
+				<li><a href="/bible">Lire la Bible</a></li>
 				<li><a href="/a-propos">À propos</a></li>
 				<li><a href="/mentions-legales">Mentions légales</a></li>
 			</ul>
@@ -72,9 +84,9 @@
 
 	.footer-cols {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 2rem clamp(1.5rem, 3vw, 3rem);
-		max-width: 64rem;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 2rem clamp(1rem, 2vw, 2rem);
+		max-width: 76rem;
 		width: 100%;
 		text-align: left;
 	}
@@ -183,7 +195,13 @@
 		transform: translateX(-50%) translateY(0);
 	}
 
-	@media (max-width: 960px) {
+	@media (max-width: 1100px) {
+		.footer-cols {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			max-width: 44rem;
+		}
+	}
+	@media (max-width: 720px) {
 		.footer-cols {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 			max-width: 32rem;
