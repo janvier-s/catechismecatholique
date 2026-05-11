@@ -8,7 +8,9 @@
 		loadCitedBy,
 		loadParagraphContext,
 		loadChapter,
-		loadCompendiumCitedBy
+		loadCompendiumCitedBy,
+		loadParagraphThemes,
+		loadConcordanceParagraphManifest
 	} from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
@@ -45,21 +47,17 @@
 	});
 
 	type TabDef = { id: PanelTab; label: string };
-	const ALL_TABS: TabDef[] = [
-		{ id: 'cross-refs', label: 'Renvois' },
-		{ id: 'cited-by', label: 'Cités dans' },
-		{ id: 'sources', label: 'Sources' },
-		{ id: 'themes', label: 'Thèmes' },
-		{ id: 'compendium', label: 'Compendium' },
-		{ id: 'bible', label: 'Bible' },
-		{ id: 'concordance', label: 'Concordance' },
-		{ id: 'en-bref', label: 'En Bref' }
-	];
+	type Group = { id: string; label: string; children: TabDef[]; iconHtml?: string };
+
+	const IA_ICON_HTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" /></svg>`;
 
 	let paragraph: Paragraph | null = $state(null);
 	let citedByList: number[] = $state([]);
 	let hasEnBref: boolean = $state(false);
 	let compendiumCiters: number[] = $state([]);
+	let hasThemes: boolean = $state(false);
+	let hasConcordance: boolean = $state(false);
+	let dataReady: boolean = $state(false);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
@@ -68,6 +66,9 @@
 			citedByList = [];
 			hasEnBref = false;
 			compendiumCiters = [];
+			hasThemes = false;
+			hasConcordance = false;
+			dataReady = false;
 			return;
 		}
 		// Modes that have no CCC paragraph context.
@@ -76,19 +77,27 @@
 			citedByList = [];
 			hasEnBref = false;
 			compendiumCiters = [];
+			hasThemes = false;
+			hasConcordance = false;
+			dataReady = true;
 			return;
 		}
 		const paragraphNum = ctx.paragraph;
+		dataReady = false;
 		(async () => {
-			const [p, citedBy, pc, compendiumCB] = await Promise.all([
+			const [p, citedBy, pc, compendiumCB, themesMap, concManifest] = await Promise.all([
 				loadParagraph(paragraphNum),
 				loadCitedBy(),
 				loadParagraphContext(paragraphNum),
-				loadCompendiumCitedBy()
+				loadCompendiumCitedBy(),
+				loadParagraphThemes(),
+				loadConcordanceParagraphManifest()
 			]);
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
 			compendiumCiters = compendiumCB[paragraphNum] ?? [];
+			hasThemes = (themesMap[String(paragraphNum)]?.length ?? 0) > 0;
+			hasConcordance = concManifest.has(paragraphNum);
 
 			// hasEnBref: the paragraph's chapter has at least one en_bref block
 			if (pc?.chapter) {
@@ -101,69 +110,150 @@
 			} else {
 				hasEnBref = false;
 			}
+			dataReady = true;
 		})();
 	});
 
-	// Visible tabs depend on what data is available for the current paragraph.
-	const visibleTabs: TabDef[] = $derived.by(() => {
-		const out: TabDef[] = [];
-		// Bible-verse mode: only one tab is meaningful.
+	// Visible tab groups depend on what data is available for the current
+	// paragraph. Each group renders as a single entry in the tab strip; groups
+	// with multiple children show a sub-toggle inside the panel body to switch
+	// between them. Pairs that conceptually share a topic are grouped so the
+	// strip stays compact even when many tabs have data.
+	const visibleGroups: Group[] = $derived.by(() => {
 		const ctx = $studyPanel.context;
 		if (ctx?.kind === 'verse') {
-			return [{ id: 'bible-verse', label: 'CEC' }];
+			return [{ id: 'bible-verse', label: 'CEC', children: [{ id: 'bible-verse', label: 'CEC' }] }];
 		}
-		// Trent paragraph mode: only footnotes tab.
 		if (ctx?.kind === 'trent-paragraph') {
 			if (ctx.footnotes.length > 0) {
-				return [{ id: 'trent-notes', label: 'Notes' }];
+				return [
+					{ id: 'trent-notes', label: 'Notes', children: [{ id: 'trent-notes', label: 'Notes' }] }
+				];
 			}
 			return [];
 		}
-		// Denzinger entry mode: cross-refs + cited-by tabs.
 		if (ctx?.kind === 'denzinger-entry') {
 			return [
-				{ id: 'denzinger-cross-refs', label: 'Renvois' },
-				{ id: 'denzinger-cited-by', label: 'Cités dans' }
+				{
+					id: 'denzinger-cross-refs',
+					label: 'Renvois',
+					children: [{ id: 'denzinger-cross-refs', label: 'Renvois' }]
+				},
+				{
+					id: 'denzinger-cited-by',
+					label: 'Cités dans',
+					children: [{ id: 'denzinger-cited-by', label: 'Cités dans' }]
+				}
 			];
 		}
-		if (!paragraph) return ALL_TABS;
-		const hasBible = paragraph.bible_refs.length > 0;
-		const hasCrossRefs = paragraph.cross_refs.length > 0;
-		const sourcesCount = paragraph.magisterial_refs.filter(
-			(r) => r.type === 'magisterial' || r.type === 'patristic' || r.type === 'liturgical'
-		).length;
+		if (ctx?.kind !== 'paragraph') return [];
+
+		// While data is loading, render an optimistic strip so the tabs don't
+		// flash. Once `dataReady` flips true, gates below filter out empties.
+		const optimistic = !dataReady;
+		const hasBible = optimistic || (paragraph?.bible_refs.length ?? 0) > 0;
+		const hasCrossRefs = optimistic || (paragraph?.cross_refs.length ?? 0) > 0;
+		const sourcesCount = paragraph
+			? paragraph.magisterial_refs.filter(
+					(r) => r.type === 'magisterial' || r.type === 'patristic' || r.type === 'liturgical'
+				).length
+			: 0;
+		const hasSources = optimistic || sourcesCount > 0;
 		// Cités dans hidden if the citers are exactly the same set as cross_refs
 		const citerSet = new Set(citedByList.map(String));
-		const crossSet = new Set(paragraph.cross_refs);
+		const crossSet = new Set(paragraph?.cross_refs ?? []);
 		const sameAsRenvois =
 			citerSet.size === crossSet.size && [...citerSet].every((x) => crossSet.has(x));
-		const hasCitedBy = citedByList.length > 0 && !sameAsRenvois;
+		const hasCitedBy = optimistic || (citedByList.length > 0 && !sameAsRenvois);
+		const hasCompendium = optimistic || compendiumCiters.length > 0;
+		const hasThemesG = optimistic || hasThemes;
+		const hasConcordanceG = optimistic || hasConcordance;
+		const hasEnBrefG = optimistic || hasEnBref;
 
-		// Order: CCC graph (Renvois then Cités dans) → external corpora citing
-		// this paragraph (Sources then Compendium) → Bible cluster (this
-		// paragraph's verses, then commentary on related verses) → chapter-
-		// level summary (En Bref).
-		if (hasCrossRefs) out.push({ id: 'cross-refs', label: 'Renvois' });
-		if (hasCitedBy) out.push({ id: 'cited-by', label: 'Cités dans' });
-		if (sourcesCount > 0) out.push({ id: 'sources', label: 'Sources' });
-		// Always show Thèmes for paragraph contexts; the tab body handles empty state.
-		out.push({ id: 'themes', label: 'Thèmes' });
-		if (hasBible) out.push({ id: 'bible', label: 'Bible' });
-		if (compendiumCiters.length > 0) out.push({ id: 'compendium', label: 'Compendium' });
-		// Always show Concordance for paragraph contexts; the tab body handles empty state.
-		out.push({ id: 'concordance', label: 'Concordance' });
-		if (hasEnBref) out.push({ id: 'en-bref', label: 'En Bref' });
-		out.push({ id: 'ia', label: 'IA' });
-		return out;
+		const groups: Group[] = [];
+
+		// Renvois group: CCC-internal graph (outgoing renvois + incoming citers)
+		const ccc: TabDef[] = [];
+		if (hasCrossRefs) ccc.push({ id: 'cross-refs', label: 'Renvois' });
+		if (hasCitedBy) ccc.push({ id: 'cited-by', label: 'Cités dans' });
+		if (ccc.length === 1) groups.push({ id: 'g-ccc', label: ccc[0]!.label, children: ccc });
+		else if (ccc.length > 1) groups.push({ id: 'g-ccc', label: 'Renvois', children: ccc });
+
+		// Citations group: external corpora that cite this paragraph
+		const cit: TabDef[] = [];
+		if (hasSources) cit.push({ id: 'sources', label: 'Sources' });
+		if (hasCompendium) cit.push({ id: 'compendium', label: 'Compendium' });
+		if (cit.length === 1) groups.push({ id: 'g-citations', label: cit[0]!.label, children: cit });
+		else if (cit.length > 1) groups.push({ id: 'g-citations', label: 'Citations', children: cit });
+
+		// Bible group: this paragraph's verse refs + concordance on related verses
+		const bib: TabDef[] = [];
+		if (hasBible) bib.push({ id: 'bible', label: 'Bible' });
+		if (hasConcordanceG) bib.push({ id: 'concordance', label: 'Concordance' });
+		if (bib.length === 1) groups.push({ id: 'g-bible', label: bib[0]!.label, children: bib });
+		else if (bib.length > 1) groups.push({ id: 'g-bible', label: 'Bible', children: bib });
+
+		if (hasThemesG)
+			groups.push({
+				id: 'g-themes',
+				label: 'Thèmes',
+				children: [{ id: 'themes', label: 'Thèmes' }]
+			});
+		if (hasEnBrefG)
+			groups.push({
+				id: 'g-en-bref',
+				label: 'En Bref',
+				children: [{ id: 'en-bref', label: 'En Bref' }]
+			});
+		groups.push({
+			id: 'g-ia',
+			label: 'IA',
+			children: [{ id: 'ia', label: 'IA' }],
+			iconHtml: IA_ICON_HTML
+		});
+
+		return groups;
 	});
+
+	// Per-group memory of which sub-tab was last selected, so that switching
+	// away from a group and back returns to the same view.
+	let lastSub: Record<string, PanelTab> = $state({});
+
+	// Which group currently owns the active leaf tab?
+	const activeGroup: Group | null = $derived.by(() => {
+		const a = $studyPanel.activeTab;
+		if (!a) return null;
+		return visibleGroups.find((g) => g.children.some((c) => c.id === a)) ?? null;
+	});
+
+	const stripTabs: (TabDef & { iconHtml?: string })[] = $derived(
+		visibleGroups.map((g) => ({ id: g.id as PanelTab, label: g.label, iconHtml: g.iconHtml }))
+	);
+
+	function selectGroup(gid: string): void {
+		const g = visibleGroups.find((x) => x.id === gid);
+		if (!g) return;
+		const remembered = lastSub[gid];
+		const target =
+			remembered && g.children.some((c) => c.id === remembered) ? remembered : g.children[0]!.id;
+		studyPanel.update((s) => ({ ...s, activeTab: target }));
+	}
+
+	function selectSubTab(t: PanelTab): void {
+		const g = activeGroup;
+		if (g) lastSub[g.id] = t;
+		studyPanel.update((s) => ({ ...s, activeTab: t }));
+	}
 
 	// If the active tab is no longer visible, snap to the first visible one.
 	$effect(() => {
 		if (!$studyPanel.open) return;
-		if (visibleTabs.length === 0) return;
+		if (visibleGroups.length === 0) return;
 		const active = $studyPanel.activeTab;
-		if (!active || !visibleTabs.some((t) => t.id === active)) {
-			studyPanel.update((s) => ({ ...s, activeTab: visibleTabs[0]!.id }));
+		const stillVisible =
+			active && visibleGroups.some((g) => g.children.some((c) => c.id === active));
+		if (!stillVisible) {
+			studyPanel.update((s) => ({ ...s, activeTab: visibleGroups[0]!.children[0]!.id }));
 		}
 	});
 
@@ -273,16 +363,32 @@
 				✕
 			</button>
 		</header>
-		{#if visibleTabs.length === 0}
+		{#if visibleGroups.length === 0}
 			<div class="flex-1 flex items-center justify-center p-6 text-sm text-muted italic">
 				Aucune note d'étude pour ce paragraphe.
 			</div>
 		{:else}
 			<TabStrip
-				tabs={visibleTabs}
-				active={$studyPanel.activeTab}
-				onSelect={(id) => studyPanel.update((s) => ({ ...s, activeTab: id }))}
+				tabs={stripTabs}
+				active={(activeGroup?.id ?? null) as PanelTab | null}
+				onSelect={(id) => selectGroup(id)}
 			/>
+			{#if activeGroup && activeGroup.children.length > 1}
+				<div class="sub-toggle" role="tablist" aria-label="Sous-onglets">
+					{#each activeGroup.children as c (c.id)}
+						<button
+							type="button"
+							role="tab"
+							aria-selected={$studyPanel.activeTab === c.id}
+							class="sub-toggle-btn"
+							class:sub-toggle-active={$studyPanel.activeTab === c.id}
+							onclick={() => selectSubTab(c.id)}
+						>
+							{c.label}
+						</button>
+					{/each}
+				</div>
+			{/if}
 			<div class="flex-1 overflow-y-auto p-4 styled-scroll">
 				{#if $studyPanel.activeTab === 'bible'}
 					<TabBibleRefs />
@@ -344,16 +450,32 @@
 				{/if}
 			{/snippet}
 
-			{#if visibleTabs.length === 0}
+			{#if visibleGroups.length === 0}
 				<div class="flex-1 flex items-center justify-center p-6 text-sm text-muted italic">
 					Aucune note d'étude pour ce paragraphe.
 				</div>
 			{:else}
 				<TabStrip
-					tabs={visibleTabs}
-					active={$studyPanel.activeTab}
-					onSelect={(id) => studyPanel.update((s) => ({ ...s, activeTab: id }))}
+					tabs={stripTabs}
+					active={(activeGroup?.id ?? null) as PanelTab | null}
+					onSelect={(id) => selectGroup(id)}
 				/>
+				{#if activeGroup && activeGroup.children.length > 1}
+					<div class="sub-toggle" role="tablist" aria-label="Sous-onglets">
+						{#each activeGroup.children as c (c.id)}
+							<button
+								type="button"
+								role="tab"
+								aria-selected={$studyPanel.activeTab === c.id}
+								class="sub-toggle-btn"
+								class:sub-toggle-active={$studyPanel.activeTab === c.id}
+								onclick={() => selectSubTab(c.id)}
+							>
+								{c.label}
+							</button>
+						{/each}
+					</div>
+				{/if}
 				<div class="flex-1 overflow-y-auto p-4 styled-scroll">
 					{#if $studyPanel.activeTab === 'bible'}
 						<TabBibleRefs />
@@ -388,3 +510,40 @@
 		</PanelShell>
 	</div>
 {/if}
+
+<style>
+	.sub-toggle {
+		display: flex;
+		gap: 4px;
+		padding: 6px 10px;
+		border-bottom: 1px solid var(--color-border);
+		background: color-mix(in srgb, var(--color-panel) 92%, var(--color-fg) 8%);
+		font-family: var(--font-ui);
+		font-size: 11px;
+	}
+	.sub-toggle-btn {
+		flex: 1 0 auto;
+		padding: 4px 10px;
+		border: 1px solid var(--color-border);
+		border-radius: 999px;
+		background: transparent;
+		color: var(--color-muted);
+		cursor: pointer;
+		transition:
+			background-color 120ms ease,
+			color 120ms ease,
+			border-color 120ms ease;
+	}
+	.sub-toggle-btn:hover {
+		color: var(--color-accent);
+		border-color: var(--color-accent);
+	}
+	.sub-toggle-active {
+		background: var(--color-accent);
+		color: #fff;
+		border-color: var(--color-accent);
+	}
+	.sub-toggle-active:hover {
+		color: #fff;
+	}
+</style>

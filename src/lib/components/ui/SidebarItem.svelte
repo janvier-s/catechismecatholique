@@ -112,7 +112,7 @@
 			{/if}
 			{#if item.typeLabel}
 				<span class="kicker"
-					>{item.typeLabel}{item.number !== undefined ? ` ${item.number}` : ''}</span
+					>{item.typeLabel}{item.number !== undefined ? `\u00a0${item.number}` : ''}</span
 				>
 			{/if}
 			{@html frenchPunct(item.title)}

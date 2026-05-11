@@ -186,7 +186,7 @@
 	   itself only renders when there are refs to show. */
 	:global(html[data-cross-refs-layout='side']) .ccc-paragraph {
 		position: relative;
-		padding-right: 12rem;
+		padding-right: 6rem;
 	}
 	/* Default placement: static block below the answer (used by Compendium
 	   questions in 'inline' mode, since they have no inline marker
@@ -207,7 +207,7 @@
 			position: absolute;
 			top: 0.25rem;
 			right: 0;
-			width: 10rem;
+			width: 5rem;
 			margin-top: 0;
 			margin-left: 0;
 		}
