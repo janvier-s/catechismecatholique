@@ -10,7 +10,7 @@ import {
 import { execSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { buildVatIIDoc, type VatIIBlock, type VatIIFootnote } from './build.ts';
+import { buildVatIIDoc, type VatIIBlock, type VatIIFootnote, type VatIITocEntry } from './build.ts';
 import { VATICAN_II_REGISTRY, type VatIIDocKind } from './registry.ts';
 import { logStep, endStep } from '../validators.ts';
 import { sanitizeExternalHrefs } from '../sanitize-external-hrefs.ts';
@@ -42,6 +42,7 @@ export interface VatIIDoc {
 	title: string;
 	subtitle: string;
 	blocks: VatIIBlock[];
+	toc: VatIITocEntry[];
 	footnotes: VatIIFootnote[];
 }
 
@@ -115,7 +116,8 @@ export function prepareVaticanII(args: PrepareVatIIArgs): PrepareVatIIResult {
 				title: spec.title,
 				subtitle: spec.subtitle,
 				blocks: out.blocks,
-				footnotes: out.footnotes
+				footnotes: out.footnotes,
+				toc: out.toc
 			};
 			docs[spec.slug] = doc;
 			refs.push({

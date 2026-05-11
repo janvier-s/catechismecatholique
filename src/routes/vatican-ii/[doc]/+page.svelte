@@ -13,14 +13,11 @@
 		declaration: 'Déclaration'
 	} as const;
 
-	type TocItem = { anchor: string; title: string };
-	const miniToc = $derived.by<TocItem[]>(() => {
-		const out: TocItem[] = [];
-		for (const b of doc.blocks) {
-			if (b.kind === 'heading' && b.level === 1) out.push({ anchor: b.anchor, title: b.title });
-		}
-		return out;
-	});
+	// Mini-TOC: use the build-time toc that already covers headings + §
+	// titles at every level. We restrict the in-page <details> to the most
+	// important entries (chapter/section dividers); the sidebar shows the
+	// full hierarchy.
+	const miniToc = $derived(doc.toc.filter((e) => e.level <= 2));
 
 	function renderHtml(html: string): string {
 		return frenchPunct(html);
@@ -69,9 +66,9 @@
 	<article class="body reader-prose">
 		{#each doc.blocks as block, i (i)}
 			{#if block.kind === 'heading'}
-				{#if block.level === 1}
+				{#if block.level <= 2}
 					<h2 class="section-heading" id={block.anchor}>{frenchPunct(block.title)}</h2>
-				{:else if block.level === 2}
+				{:else if block.level === 3}
 					<h3 class="sub-heading" id={block.anchor}>{frenchPunct(block.title)}</h3>
 				{:else}
 					<h4 class="sub-heading sub-heading-deep" id={block.anchor}>
@@ -79,17 +76,24 @@
 					</h4>
 				{/if}
 			{:else}
-				<div class="paragraph" id="p{block.n}">
-					<a
-						class="paragraph-num"
-						href={`/vatican-ii/${doc.slug}#p${block.n}`}
-						aria-label={`Paragraphe ${block.n}`}
-					>
-						{block.n}
-					</a>
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<div class="paragraph-body">{@html renderHtml(block.html)}</div>
-				</div>
+				<section class="paragraph" id="p{block.n}">
+					<header class="paragraph-head">
+						<a
+							class="paragraph-num"
+							href={`/vatican-ii/${doc.slug}#p${block.n}`}
+							aria-label={`Paragraphe ${block.n}`}
+						>
+							{block.n}
+						</a>
+						{#if block.title}
+							<h3 class="paragraph-title">{frenchPunct(block.title)}</h3>
+						{/if}
+					</header>
+					{#if block.html}
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<div class="paragraph-body">{@html renderHtml(block.html)}</div>
+					{/if}
+				</section>
 			{/if}
 		{/each}
 	</article>
@@ -221,12 +225,16 @@
 	}
 	.section-heading {
 		font-family: var(--font-heading);
-		font-size: 1.4rem;
+		font-size: clamp(1.45rem, 2.4vw, 1.7rem);
 		font-weight: 700;
-		line-height: 1.25;
-		margin: 2.5rem 0 1rem;
+		line-height: 1.2;
+		letter-spacing: -0.005em;
+		margin: 3rem 0 1.25rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
 		color: var(--color-heading, var(--color-fg));
 		scroll-margin-top: 80px;
+		text-wrap: balance;
 	}
 	.sub-heading {
 		font-family: var(--font-heading);
@@ -234,20 +242,24 @@
 		font-weight: 600;
 		font-style: italic;
 		line-height: 1.3;
-		margin: 1.75rem 0 0.75rem;
+		margin: 2rem 0 0.85rem;
 		color: var(--color-heading, var(--color-fg));
 		scroll-margin-top: 80px;
+		text-wrap: balance;
 	}
 	.sub-heading-deep {
 		font-size: 1rem;
 	}
 
 	.paragraph {
-		display: grid;
-		grid-template-columns: 3rem 1fr;
-		gap: 0.5rem;
-		margin: 1.25rem 0;
+		margin: 1.5rem 0;
 		scroll-margin-top: 80px;
+	}
+	.paragraph-head {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		margin-bottom: 0.4rem;
 	}
 	.paragraph-num {
 		font-family: var(--font-ui);
@@ -255,15 +267,27 @@
 		font-weight: 700;
 		font-variant-numeric: tabular-nums;
 		color: var(--color-muted);
-		text-align: right;
-		padding-top: 0.25rem;
 		text-decoration: none;
+		flex: 0 0 auto;
 	}
 	.paragraph-num:hover {
 		color: var(--color-accent);
 	}
-	.paragraph-body :global(p) {
+	.paragraph-title {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-weight: 600;
+		font-size: 1.05rem;
+		line-height: 1.3;
 		margin: 0;
+		color: var(--color-heading, var(--color-fg));
+		text-wrap: balance;
+	}
+	.paragraph-body :global(p) {
+		margin: 0 0 0.75rem;
+	}
+	.paragraph-body :global(p:last-child) {
+		margin-bottom: 0;
 	}
 	.paragraph-body :global(.emphasis em),
 	.paragraph-body :global(em) {

@@ -1009,6 +1009,35 @@
 				};
 			});
 		}
+		// Flat TOC list → nested Item tree. Headings/§ titles at higher levels
+		// become parents of lower-level entries that follow them.
+		function tocToItems(
+			toc: { level: number; anchor: string; title: string; n?: number }[],
+			base: string
+		): Item[] {
+			type Frame = { item: Item; level: number };
+			const root: Item[] = [];
+			const stack: Frame[] = [];
+			for (const e of toc) {
+				const item: Item = {
+					title: e.title,
+					href: `${base}#${e.anchor}`,
+					kicker: e.n !== undefined ? `§ ${e.n}` : undefined,
+					children: []
+				};
+				while (stack.length > 0 && stack[stack.length - 1]!.level >= e.level) stack.pop();
+				if (stack.length === 0) root.push(item);
+				else stack[stack.length - 1]!.item.children!.push(item);
+				stack.push({ item, level: e.level });
+			}
+			// Strip empty children arrays so SidebarItem renders correctly.
+			const clean = (items: Item[]): Item[] =>
+				items.map((it) => ({
+					...it,
+					children: it.children && it.children.length > 0 ? clean(it.children) : undefined
+				}));
+			return clean(root);
+		}
 		if (corpus === 'vatican-ii') {
 			if (!vatIIStructure) return [];
 			const activeSlug = vatIIActiveSlug;
@@ -1030,16 +1059,12 @@
 					href: '/vatican-ii',
 					children: docs.map((d): Item => {
 						const isActive = d.slug === activeSlug;
+						// Use the doc's pre-computed toc (headings + § titles at
+						// every level). Build a nested tree from the flat list
+						// using the `level` field.
 						const miniTocChildren =
 							isActive && activeDoc?.slug === d.slug
-								? activeDoc.blocks
-										.filter((b) => b.kind === 'heading' && b.level === 1)
-										.map(
-											(b): Item => ({
-												title: b.kind === 'heading' ? b.title : '',
-												href: `/vatican-ii/${d.slug}#${b.kind === 'heading' ? b.anchor : ''}`
-											})
-										)
+								? tocToItems(activeDoc.toc, `/vatican-ii/${d.slug}`)
 								: undefined;
 						return {
 							title: d.title,

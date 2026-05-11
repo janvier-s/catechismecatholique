@@ -1054,11 +1054,25 @@ export type VatIIDocKind = 'constitution' | 'declaration' | 'decree';
 
 export type VatIIBlock =
 	| { kind: 'heading'; level: number; anchor: string; title: string }
-	| { kind: 'paragraph'; n: number; anchor: string; html: string; footnoteRefs: number[] };
+	| {
+			kind: 'paragraph';
+			n: number;
+			anchor: string;
+			title?: string;
+			html: string;
+			footnoteRefs: number[];
+	  };
 
 export interface VatIIFootnote {
 	n: number;
 	html: string;
+}
+
+export interface VatIITocEntry {
+	level: number;
+	anchor: string;
+	title: string;
+	n?: number;
 }
 
 export interface VatIIDocRef {
@@ -1085,4 +1099,5 @@ export interface VatIIDoc {
 	subtitle: string;
 	blocks: VatIIBlock[];
 	footnotes: VatIIFootnote[];
+	toc: VatIITocEntry[];
 }
