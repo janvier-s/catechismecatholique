@@ -1022,7 +1022,6 @@
 				const item: Item = {
 					title: e.title,
 					href: `${base}#${e.anchor}`,
-					kicker: e.n !== undefined ? String(e.n) : undefined,
 					children: []
 				};
 				while (stack.length > 0 && stack[stack.length - 1]!.level >= e.level) stack.pop();
