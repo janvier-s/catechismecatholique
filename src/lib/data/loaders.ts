@@ -46,6 +46,8 @@ import type {
 	CicLivre,
 	CicCanonLocator,
 	CicCode,
+	BrevStructure,
+	BrevChapter,
 	ParagraphThemeRef
 } from './types';
 
@@ -924,6 +926,34 @@ export function loadCicCanons(
 		);
 	}
 	return cicCanonsPromise;
+}
+
+// ─── Breviloquium (Saint Bonaventure) ──────────────────────────────────────
+
+let brevStructurePromise: Promise<BrevStructure> | null = null;
+const brevChapterCache = new Map<string, Promise<BrevChapter | null>>();
+
+export function loadBreviloquiumStructure(fetcher: Fetch = fetch): Promise<BrevStructure> {
+	if (!brevStructurePromise) {
+		brevStructurePromise = fetchJson<BrevStructure>('/data/breviloquium/structure.json', fetcher);
+	}
+	return brevStructurePromise;
+}
+
+export function loadBreviloquiumChapter(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<BrevChapter | null> {
+	let p = brevChapterCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/breviloquium/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as BrevChapter;
+		})();
+		brevChapterCache.set(slug, p);
+	}
+	return p;
 }
 
 // ─── Catho paragraph-themes index ──────────────────────────────────────────

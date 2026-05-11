@@ -152,6 +152,12 @@
 			title: 'Théologie & doctrine',
 			links: [
 				{
+					href: '/breviloquium',
+					label: 'Breviloquium',
+					eyebrow: '1257',
+					description: 'Saint Bonaventure, somme théologique en 7 parties.'
+				},
+				{
 					href: '/doctrine-catholique',
 					label: 'La Doctrine Catholique',
 					eyebrow: '1927',

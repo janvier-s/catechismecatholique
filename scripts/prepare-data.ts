@@ -29,6 +29,7 @@ import { parseSourceTable } from './prepare/sources-index.ts';
 import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCdse } from './prepare/cdse/index.ts';
 import { preparePgmr } from './prepare/pgmr/index.ts';
+import { prepareBreviloquium } from './prepare/breviloquium/index.ts';
 import { prepareVaticanII } from './prepare/vatican-ii/index.ts';
 import { prepareCic } from './prepare/cic/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
@@ -468,6 +469,19 @@ async function main() {
 		const present = vatII.structure.docs.filter((d) => d.present).length;
 		endStep(`${present}/${vatII.structure.docs.length} docs`);
 	} else if (existsSync(vatIIOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
+	}
+
+	logStep('building Breviloquium (Saint Bonaventure)');
+	const brevHtml = join(SOURCES, 'breviloquium/source.html');
+	const brevOutDir = join(OUT, 'breviloquium');
+	if (existsSync(brevHtml)) {
+		mkdirSync(brevOutDir, { recursive: true });
+		const brev = prepareBreviloquium({ htmlPath: brevHtml, outDir: brevOutDir });
+		endStep(`${brev.structure.parts.length} parts, ${brev.structure.totalChapters} chapters`);
+	} else if (existsSync(brevOutDir)) {
 		endStep('source not found — using committed snapshot');
 	} else {
 		endStep('source not found — skipped');

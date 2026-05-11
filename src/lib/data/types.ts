@@ -11,6 +11,7 @@ export type Corpus =
 	| 'pgmr'
 	| 'vatican-ii'
 	| 'cic'
+	| 'breviloquium'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -1142,4 +1143,46 @@ export interface CicStructure {
 export interface CicCanonLocator {
 	code: CicCode;
 	livreSlug: string;
+}
+
+// ─── Breviloquium (Saint Bonaventure, 1257) ────────────────────────────────
+
+export type BrevPartKind = 'prologue' | 'partie' | 'conclusion';
+
+export interface BrevChapterRef {
+	slug: string;
+	title: string;
+	ordinal: number;
+	label: string;
+}
+
+export interface BrevPart {
+	slug: string;
+	kind: BrevPartKind;
+	ordinal?: number;
+	roman?: string;
+	title: string;
+	chapters: BrevChapterRef[];
+}
+
+export interface BrevStructure {
+	parts: BrevPart[];
+	totalChapters: number;
+}
+
+export type BrevBlock = { kind: 'paragraph'; html: string };
+
+export interface BrevChapter {
+	slug: string;
+	partSlug: string;
+	partKind: BrevPartKind;
+	partRoman?: string;
+	partOrdinal?: number;
+	partTitle: string;
+	label: string;
+	title: string;
+	ordinal: number;
+	blocks: BrevBlock[];
+	prev?: { slug: string; title: string; label: string };
+	next?: { slug: string; title: string; label: string };
 }

@@ -104,6 +104,7 @@
 		{
 			title: 'Théologie & doctrine',
 			links: [
+				{ href: '/breviloquium', label: 'Breviloquium (Bonaventure)' },
 				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique' },
 				{ href: '/doctrine-sociale', label: 'Doctrine sociale' }
 			]

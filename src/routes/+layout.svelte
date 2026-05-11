@@ -81,6 +81,10 @@
 		if (p.startsWith('/cic/') && !p.startsWith('/cic/c/')) {
 			return true;
 		}
+		// Breviloquium chapter reader (hide on landing)
+		if (p.startsWith('/breviloquium/')) {
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -184,9 +188,11 @@
 													? 'vatican-ii'
 													: page.url.pathname.startsWith('/cic')
 														? 'cic'
-														: page.url.pathname.startsWith('/calendrier')
-															? 'calendrier'
-															: 'ccc'}
+														: page.url.pathname.startsWith('/breviloquium')
+															? 'breviloquium'
+															: page.url.pathname.startsWith('/calendrier')
+																? 'calendrier'
+																: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

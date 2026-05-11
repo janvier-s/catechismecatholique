@@ -25,6 +25,7 @@
 		loadVatIIDoc,
 		loadCicStructure,
 		loadCicLivre,
+		loadBreviloquiumStructure,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -50,6 +51,7 @@
 		VatIIDoc,
 		CicStructure,
 		CicLivre,
+		BrevStructure,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -133,6 +135,8 @@
 				return '/vatican-ii';
 			case 'cic':
 				return '/cic';
+			case 'breviloquium':
+				return '/breviloquium';
 			default:
 				return null;
 		}
@@ -344,6 +348,21 @@
 		(async () => {
 			cicActiveLivre = await loadCicLivre(slug);
 		})();
+	});
+
+	// ─── Breviloquium state ──────────────────────────────────────────────────
+	let brevStructure: BrevStructure | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'breviloquium') return;
+		(async () => {
+			brevStructure = await loadBreviloquiumStructure();
+		})();
+	});
+
+	const brevActiveSlug = $derived.by((): string | null => {
+		const m = page.url.pathname.match(/^\/breviloquium\/([^/]+)/);
+		return m ? m[1]! : null;
 	});
 
 	// Appendix outline (loaded on demand for the appendix pages so the sidebar
@@ -1198,6 +1217,38 @@
 					children: root
 				}
 			];
+		}
+		if (corpus === 'breviloquium') {
+			if (!brevStructure) return [];
+			// Show every part with its chapter list. Auto-expand the part
+			// containing the active chapter; collapse the rest so the rail
+			// stays compact (79 chapters is too many for one flat list).
+			const items: Item[] = [];
+			for (const part of brevStructure.parts) {
+				const containsActive = part.chapters.some((c) => c.slug === brevActiveSlug);
+				const partKicker =
+					part.kind === 'partie'
+						? `Partie ${part.roman}`
+						: part.kind === 'prologue'
+							? 'Préambule'
+							: 'Épilogue';
+				items.push({
+					title: part.title,
+					kicker: partKicker,
+					href: `/breviloquium#${part.slug}`,
+					level: 2,
+					defaultExpanded: containsActive,
+					children: part.chapters.map(
+						(c): Item => ({
+							title: c.title,
+							kicker: c.label,
+							href: `/breviloquium/${c.slug}`,
+							level: 4
+						})
+					)
+				});
+			}
+			return items;
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];
