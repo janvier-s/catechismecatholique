@@ -67,9 +67,25 @@
 	});
 
 	type Link = { href: string; label: string; description?: string; eyebrow?: string };
-	type Group = { title: string; links: Link[] };
+	type Group = { title: string; links: Link[]; mobileOnly?: boolean };
 
 	const groups: Group[] = [
+		{
+			title: 'Lecture',
+			mobileOnly: true,
+			links: [
+				{
+					href: '/cec',
+					label: "Catéchisme de l'Église Catholique",
+					description: 'Les 2865 paragraphes du Catéchisme.'
+				},
+				{
+					href: '/bible',
+					label: 'Bible',
+					description: 'Texte intégral, croisé verset par verset avec le Catéchisme.'
+				}
+			]
+		},
 		{
 			title: 'Études & outils',
 			links: [
@@ -191,7 +207,11 @@
 	>
 		<nav class="body styled-scroll" aria-label="Sections">
 			{#each groups as group (group.title)}
-				<section class="group" class:group-tools={group.title === 'Études & outils'}>
+				<section
+					class="group"
+					class:group-tools={group.title === 'Études & outils'}
+					class:group-mobile-only={group.mobileOnly}
+				>
 					<p class="group-eyebrow">{group.title}</p>
 					<ul class="links">
 						{#each group.links as link (link.href)}
@@ -383,6 +403,13 @@
 	/* Only the "Études & outils" group uses italics — it reads as tool-like,
 	   matches how those entries appear elsewhere on the site. Italics
 	   carry no extra weight; otherwise they read as shouty. */
+	/* Hide mobile-only groups (e.g. Lecture: CCC + Bible) on md+ where
+	   those links live in the topbar nav. */
+	@media (min-width: 768px) {
+		.group-mobile-only {
+			display: none;
+		}
+	}
 	.group-tools .link-label {
 		font-style: italic;
 		font-weight: 400;
