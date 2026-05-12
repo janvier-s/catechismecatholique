@@ -12,6 +12,7 @@
 		<div class="footer-col">
 			<p class="footer-col-head">Études & outils</p>
 			<ul>
+				<li><a href="/bible">Lire la Bible</a></li>
 				<li><a href="/bible">Concordance biblique</a></li>
 				<li><a href="/glossaire">Glossaire</a></li>
 				<li><a href="/calendrier">Calendrier liturgique</a></li>
@@ -30,7 +31,7 @@
 			</ul>
 		</div>
 		<div class="footer-col">
-			<p class="footer-col-head">Catéchèse & doctrine</p>
+			<p class="footer-col-head">Catéchèse</p>
 			<ul>
 				<li><a href="/didache">La Didachè</a></li>
 				<li><a href="/catecheses-mystagogiques">Catéchèses mystagogiques</a></li>
@@ -45,19 +46,17 @@
 			<ul>
 				<li><a href="/vatican-ii">Vatican II</a></li>
 				<li><a href="/denzinger">Denzinger</a></li>
-				<li><a href="/cic/1983">Code de Droit Canonique (1983)</a></li>
+				<li><a href="/cic/1983">Code de Droit Canonique</a></li>
 				<li><a href="/cic/1917">Code Pio-Benedictin (1917)</a></li>
 				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>
 			</ul>
 		</div>
-		<div class="footer-col">
-			<p class="footer-col-head">Le site</p>
-			<ul>
-				<li><a href="/bible">Lire la Bible</a></li>
-				<li><a href="/a-propos">À propos</a></li>
-				<li><a href="/mentions-legales">Mentions légales</a></li>
-			</ul>
-		</div>
+	</nav>
+
+	<nav class="footer-meta" aria-label="Pages secondaires">
+		<a href="/a-propos">À propos</a>
+		<span aria-hidden="true">·</span>
+		<a href="/mentions-legales">Mentions légales</a>
 	</nav>
 
 	<p class="footer-motto">
@@ -89,7 +88,7 @@
 
 	.footer-cols {
 		display: grid;
-		grid-template-columns: repeat(6, minmax(0, 1fr));
+		grid-template-columns: repeat(5, minmax(0, 1fr));
 		gap: 2rem clamp(1rem, 2vw, 2rem);
 		max-width: 76rem;
 		width: 100%;
@@ -125,6 +124,32 @@
 	}
 	.footer-col a:hover {
 		color: var(--color-accent-text);
+	}
+
+	/* Secondary nav row: À propos · Mentions légales. Sits on its own
+	   line below the column nav, separated by a hairline rule. */
+	.footer-meta {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.55rem;
+		width: 100%;
+		max-width: 64rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		color: var(--color-muted);
+	}
+	.footer-meta a {
+		color: inherit;
+		text-decoration: none;
+		transition: color 140ms ease;
+	}
+	.footer-meta a:hover {
+		color: var(--color-accent);
 	}
 
 	.footer-motto {

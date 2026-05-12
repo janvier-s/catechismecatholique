@@ -23,7 +23,7 @@
 	<title>{doc.title} · Vatican II</title>
 	<meta
 		name="description"
-		content={`${doc.title} — ${doc.subtitle} (${doc.date.slice(0, 4)}). ${KIND_LABEL[doc.kind]} du concile Vatican II.`}
+		content={`${doc.title} · ${doc.subtitle} (${doc.date.slice(0, 4)}). ${KIND_LABEL[doc.kind]} du concile Vatican II.`}
 	/>
 </svelte:head>
 

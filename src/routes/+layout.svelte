@@ -65,7 +65,8 @@
 			if (p.startsWith('/doctrine-catholique/sommaire')) return false;
 			return true;
 		}
-		// CDSE chapter reader (hide on landing)
+		// CDSE landing + chapter reader
+		if (p === '/doctrine-sociale' || p === '/doctrine-sociale/') return true;
 		if (p.startsWith('/doctrine-sociale/')) {
 			return true;
 		}

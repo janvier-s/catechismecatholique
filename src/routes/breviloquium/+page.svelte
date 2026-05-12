@@ -8,22 +8,26 @@
 </script>
 
 <svelte:head>
-	<title>Breviloquium — Saint Bonaventure (1257)</title>
+	<title>Breviloquium · Saint Bonaventure (1257)</title>
 	<meta
 		name="description"
-		content="Le Breviloquium de saint Bonaventure (1257) — somme de théologie en sept parties, traduite en français, présentée chapitre par chapitre."
+		content="Le Breviloquium de saint Bonaventure (1257), somme de théologie en sept parties, traduite en français, présentée chapitre par chapitre."
 	/>
 </svelte:head>
 
 <main class="brev-index">
+	<a class="back" href="/bibliotheque#shelf-II">
+		<span class="back-arrow" aria-hidden="true">←</span>
+		Retour à la Bibliothèque
+	</a>
 	<header class="hero">
 		<p class="hero-kicker">Saint Bonaventure · 1257</p>
 		<h1 class="hero-title">Breviloquium</h1>
 		<p class="hero-sub">Somme abrégée de la théologie chrétienne</p>
 		<p class="hero-lede">
-			Le <em>Breviloquium</em> de saint Bonaventure offre, en sept parties, une vue d'ensemble de la foi
-			catholique — de la Trinité jusqu'aux fins dernières, en passant par la création, le péché, l'Incarnation,
-			la grâce et les sacrements.
+			Achevé vers l'an 1257, le <em>Breviloquium</em> de saint Bonaventure offre, en sept parties,
+			une vue d'ensemble de la foi catholique : de la Trinité jusqu'aux fins dernières, en passant
+			par la création, le péché, l'Incarnation, la grâce et les sacrements.
 		</p>
 		{#if firstChapter}
 			<p class="hero-cta">
@@ -71,6 +75,29 @@
 		color: var(--color-fg);
 		font-family: var(--font-body);
 	}
+	.back {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0 0 1.5rem;
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		text-decoration: none;
+		transition: color 140ms ease;
+	}
+	.back-arrow {
+		display: inline-block;
+		line-height: 1;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.back:hover .back-arrow {
+		transform: translateX(-4px);
+	}
+
 	.hero {
 		text-align: center;
 		margin-bottom: clamp(2.5rem, 6vw, 4rem);

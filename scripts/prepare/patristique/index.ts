@@ -38,7 +38,7 @@ export const PATRISTIQUE_WORKS: PatWorkConfigExt[] = [
 		subtitle: 'Aux nouveaux baptisés',
 		author: 'Saint Cyrille de Jérusalem',
 		date: 'vers 350',
-		translator: 'Traducteur ancien (XIXᵉ siècle)',
+		translator: '',
 		htmlPath: 'catecheses-mystagogiques.md',
 		format: 'markdown',
 		expectedChapters: 5

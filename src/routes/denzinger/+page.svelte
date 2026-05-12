@@ -14,7 +14,7 @@
 
 <main class="dz-index">
 	<header class="hero">
-		<p class="hero-kicker">Édition française · Source : catho.org · 37e édition</p>
+		<p class="hero-kicker">Édition française · 37e édition</p>
 		<h1 class="hero-title">
 			Denzinger<br /><em class="hero-em">Enchiridion Symbolorum</em>
 		</h1>

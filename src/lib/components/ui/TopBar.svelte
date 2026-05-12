@@ -62,7 +62,12 @@
 	<div
 		class="relative px-4 md:px-6 py-2 md:py-3 flex items-center gap-3 md:gap-6 min-h-[58px] md:min-h-[80px]"
 	>
-		<a href="/" class="flex items-center gap-3 flex-none">
+		<a
+			href="/"
+			class="flex items-center gap-3 flex-none"
+			title="Accueil"
+			aria-label="Accueil — Catéchisme de l'Église Catholique"
+		>
 			<LogoMark />
 			<Wordmark />
 		</a>

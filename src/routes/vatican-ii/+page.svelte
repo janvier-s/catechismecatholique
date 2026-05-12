@@ -39,8 +39,8 @@
 		<p class="hero-kicker">Concile œcuménique · 1962–1965</p>
 		<h1 class="hero-title">Vatican II</h1>
 		<p class="hero-lede">
-			Les seize documents du XXI<sup>e</sup> concile œcuménique — quatre constitutions, neuf décrets
-			et trois déclarations — promulgués entre 1963 et 1965 sous Jean XXIII et Paul VI.
+			Les seize documents du XXI<sup>e</sup> concile œcuménique (quatre constitutions, neuf décrets
+			et trois déclarations) promulgués entre 1963 et 1965 sous Jean XXIII et Paul VI.
 			{presentCount} documents disponibles ({totalParagraphs} paragraphes).
 		</p>
 	</header>

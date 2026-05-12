@@ -145,7 +145,7 @@ function parseChapterHeading(
 	const t = text.trim();
 	let m: RegExpMatchArray | null;
 	if ((m = t.match(/^§\s*(\d+)\.\s*(.*)$/))) {
-		return { label: `§ ${m[1]}`, title: tidyTitle(m[2]!), ordinal: parseInt(m[1]!, 10) };
+		return { label: `Chapitre ${m[1]}`, title: tidyTitle(m[2]!), ordinal: parseInt(m[1]!, 10) };
 	}
 	if ((m = t.match(/^Chapitre\s+(\d+)\s*[:.]\s*(.*)$/i))) {
 		return {
