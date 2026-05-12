@@ -578,6 +578,10 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 /* Print stylesheet · collapse all chrome, render prose at full reading width
    in black ink on white. Optimised for studying paragraphs at a desk. */
 @media print {
+	@page {
+		size: A4;
+		margin: 18mm 16mm 18mm 16mm;
+	}
 	:root {
 		--color-bg: #ffffff;
 		--color-panel: #ffffff;
@@ -587,12 +591,17 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		--color-accent: #000000;
 		--color-accent-text: #000000;
 		--color-border: #cccccc;
+		/* Reader prefs that affect on-screen reading would distort the
+		   paper layout; pin them to print-sensible values. */
+		--reader-font-size: 11pt;
+		--reader-line-height: 1.5;
 	}
+	html,
 	body {
-		background: #ffffff;
-		color: #000000;
+		background: #ffffff !important;
+		color: #000000 !important;
 	}
-	/* Hide app chrome that doesn't belong on paper. */
+	/* Hide app chrome that doesn't belong on paper. Grouped by intent. */
 	.topbar,
 	.site-footer,
 	.skip-link,
@@ -605,7 +614,28 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	#mobile-menu,
 	.hamburger,
 	.cec-pill,
-	button.bible-inline {
+	button.bible-inline,
+	/* Editorial chrome (back-link, breadcrumbs, pager, panorama trigger). */
+	.back-to-biblio,
+	.back-row,
+	.breadcrumb-rail,
+	.breadcrumb-row,
+	[aria-label='Fil d''Ariane'],
+	[aria-label='Partie précédente ou suivante'],
+	[aria-label='Sections adjacentes dans la même partie'],
+	[aria-label='Chapitre précédent ou suivant'],
+	[aria-label='Navigation'],
+	[aria-label='Navigation entre leçons'],
+	[aria-label='Voir la concordance'],
+	.pager,
+	/* Hover-revealed permalink icons. */
+	.number-link,
+	.chapter-anchor,
+	/* Concordance / Bible filter bar. */
+	.chapter-filter-bar,
+	/* Tooltip overlays. */
+	.amdg-tip,
+	[role='tooltip'] {
 		display: none !important;
 	}
 	/* Reset the page-fade keyframe so prose paints immediately. */
@@ -622,6 +652,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	/* Keep paragraph numbers visible but understated. */
 	.ccc-paragraph .number-col {
 		color: #555555 !important;
+		background: transparent !important;
 	}
 	/* Drop the side-margin cross-refs aside on paper · too noisy. */
 	.ccc-side-refs {
@@ -633,23 +664,41 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	sup.srcRef.docRef {
 		display: none !important;
 	}
-	/* Avoid breaking paragraphs across pages where possible. */
+	/* Avoid breaking paragraphs, citation blocks, and list items across pages. */
 	.ccc-paragraph,
 	.prose-paragraph,
+	.citation-block,
+	.qa-item,
+	.entry,
+	.compendium-question,
+	.compendium-answer,
+	figure,
+	blockquote,
 	li {
 		break-inside: avoid;
 		page-break-inside: avoid;
 	}
+	/* Keep headings glued to the first paragraph that follows them. */
 	h1,
 	h2,
-	h3 {
+	h3,
+	h4 {
 		break-after: avoid;
 		page-break-after: avoid;
+		color: #000000 !important;
+	}
+	/* Orphan/widow control · keep at least two lines together at page edges. */
+	p {
+		orphans: 3;
+		widows: 3;
 	}
 	/* Pure black serif for the body · reverts theme-driven font choices. */
 	body,
 	.prose-paragraph,
-	.content-col {
+	.content-col,
+	.reader-prose,
+	.compendium-question,
+	.compendium-answer {
 		font-family: 'Libre Baskerville', Georgia, serif !important;
 		color: #000000 !important;
 	}
@@ -657,16 +706,45 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		color: #000000 !important;
 		text-decoration: underline !important;
 	}
-	/* Hide href tooltips for in-page anchors only; keep external URLs after
-	   the link text so a printed page records its sources. */
+	/* In-page anchors and same-origin links: no URL annotation. */
 	a[href^='/']:after,
 	a[href^='#']:after {
 		content: '' !important;
 	}
+	/* External URLs: show after link text for traceable paper sources. */
 	a[href^='http']:after {
 		content: ' (' attr(href) ')';
-		font-size: 0.85em;
+		font-size: 0.8em;
 		color: #555555;
+		word-break: break-all;
+	}
+	/* Force decorative box-shadows and gradients off · cleaner ink output. */
+	* {
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+	/* Cover/hero illustrations and decorative ornaments: skip on paper. */
+	.hero-ornament,
+	.shelf-rule,
+	.illustration figcaption,
+	img[src*='/img/bibliotheque/'],
+	img[src*='/img/og-image'] {
+		display: none !important;
+	}
+	/* Bible verse numbers: keep them but inline so they don't sit in a
+	   gutter that compresses the verse on narrow paper margins. */
+	.verse-row {
+		display: block !important;
+		grid-template-columns: none !important;
+		margin: 0 0 0.35em 0 !important;
+		padding: 0 !important;
+	}
+	.verse-num {
+		display: inline !important;
+		width: auto !important;
+		margin-right: 0.4em !important;
+		text-align: left !important;
+		font-weight: 600;
 	}
 }
 
