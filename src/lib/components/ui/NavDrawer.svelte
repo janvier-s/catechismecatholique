@@ -66,8 +66,18 @@
 		};
 	});
 
+	import { corporaInNavGroup } from '$lib/corpora';
+
 	type Link = { href: string; label: string; description?: string; eyebrow?: string };
 	type Group = { title: string; links: Link[]; mobileOnly?: boolean };
+
+	function fromRegistry(group: 'catechismes' | 'catechese' | 'magistere'): Link[] {
+		return corporaInNavGroup(group).map((c) => ({
+			href: c.urlPrefix,
+			label: c.title,
+			eyebrow: c.eyebrow
+		}));
+	}
 
 	const groups: Group[] = [
 		{
@@ -116,44 +126,15 @@
 				}
 			]
 		},
-		{
-			title: 'Catéchismes',
-			links: [
-				{
-					href: '/compendium',
-					label: 'Compendium',
-					eyebrow: '2005'
-				},
-				{ href: '/trente', label: 'Catéchisme de Trente', eyebrow: '1566' },
-				{ href: '/catechisme-illustre', label: 'Catéchisme illustré', eyebrow: '1897' },
-				{ href: '/grand-catechisme', label: 'Grand Catéchisme', eyebrow: '1905' },
-				{ href: '/petit-catechisme', label: 'Petit Catéchisme', eyebrow: '1912' },
-				{ href: '/catechisme-adultes', label: 'Catéchisme pour Adultes', eyebrow: '1991' }
-			]
-		},
-		{
-			title: 'Catéchèse & doctrine',
-			links: [
-				{ href: '/didache', label: 'La Didachè', eyebrow: 'Iᵉʳ siècle' },
-				{
-					href: '/catecheses-mystagogiques',
-					label: 'Catéchèses mystagogiques',
-					eyebrow: 'vers 350'
-				},
-				{ href: '/discours-catechetique', label: 'Discours catéchétique', eyebrow: 'IVᵉ siècle' },
-				{ href: '/breviloquium', label: 'Breviloquium', eyebrow: '1257' },
-				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique', eyebrow: '1927' },
-				{ href: '/doctrine-sociale', label: 'Doctrine sociale', eyebrow: '2004' }
-			]
-		},
+		{ title: 'Catéchismes', links: fromRegistry('catechismes') },
+		{ title: 'Catéchèse & doctrine', links: fromRegistry('catechese') },
 		{
 			title: 'Magistère',
+			// The 1917 code is the only sub-item that doesn't map to its
+			// own CorpusRecord (CIC owns both); add it inline.
 			links: [
-				{ href: '/vatican-ii', label: 'Vatican II', eyebrow: '1962–1965' },
-				{ href: '/enchiridion', label: 'Enchiridion Symbolorum', eyebrow: 'Denzinger' },
-				{ href: '/cic/1983', label: 'Code de Droit Canonique', eyebrow: '1983' },
-				{ href: '/cic/1917', label: 'Code Pio-Benedictin', eyebrow: '1917' },
-				{ href: '/pgmr', label: 'Présentation Générale du Missel Romain', eyebrow: '2002' }
+				...fromRegistry('magistere'),
+				{ href: '/cic/1917', label: 'Code Pio-Benedictin', eyebrow: '1917' }
 			]
 		}
 	];

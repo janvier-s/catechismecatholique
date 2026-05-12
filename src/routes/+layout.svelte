@@ -10,6 +10,8 @@
 	import Footer from '$lib/components/ui/Footer.svelte';
 	import BibleRefTooltip from '$lib/components/ui/BibleRefTooltip.svelte';
 	import BackToBibliotheque from '$lib/components/ui/BackToBibliotheque.svelte';
+	import { corpusForPath } from '$lib/corpora';
+	import type { Corpus } from '$lib/data/types';
 	import { closePanel, studyPanel } from '$lib/stores/studyPanel';
 
 	let { children } = $props();
@@ -20,6 +22,17 @@
 	// state on every link click.
 	let fadeKey = $state(0);
 	let contentEl: HTMLElement | undefined = $state();
+
+	// Sidebar corpus dispatch · the registry handles 14 of 15 cases;
+	// /cec (CCC) and /calendrier aren't in the registry (CCC is implicit,
+	// calendrier is a feature not a corpus), so they're resolved inline.
+	const sidebarCorpus = $derived.by((): Corpus => {
+		const p = page.url.pathname;
+		const c = corpusForPath(p);
+		if (c) return c.id;
+		if (p.startsWith('/calendrier')) return 'calendrier';
+		return 'ccc';
+	});
 
 	const showSidebar = $derived.by(() => {
 		const p = page.url.pathname;
@@ -176,43 +189,7 @@
 <TopBar />
 <div class="flex">
 	{#if showSidebar}
-		<Sidebar
-			corpus={page.url.pathname.startsWith('/compendium')
-				? 'compendium'
-				: page.url.pathname.startsWith('/trente')
-					? 'trent'
-					: page.url.pathname.startsWith('/grand-catechisme')
-						? 'pius-x-grand'
-						: page.url.pathname.startsWith('/petit-catechisme')
-							? 'pius-x-petit'
-							: page.url.pathname.startsWith('/catechisme-illustre')
-								? 'catechisme-illustre'
-								: page.url.pathname.startsWith('/enchiridion')
-									? 'denzinger'
-									: page.url.pathname.startsWith('/doctrine-catholique')
-										? 'boulanger'
-										: page.url.pathname.startsWith('/doctrine-sociale')
-											? 'cdse'
-											: page.url.pathname.startsWith('/pgmr')
-												? 'pgmr'
-												: page.url.pathname.startsWith('/vatican-ii')
-													? 'vatican-ii'
-													: page.url.pathname.startsWith('/cic')
-														? 'cic'
-														: page.url.pathname.startsWith('/breviloquium')
-															? 'breviloquium'
-															: page.url.pathname.startsWith('/didache')
-																? 'didache'
-																: page.url.pathname.startsWith('/discours-catechetique')
-																	? 'discours-catechetique'
-																	: page.url.pathname.startsWith('/catecheses-mystagogiques')
-																		? 'catecheses-mystagogiques'
-																		: page.url.pathname.startsWith('/catechisme-adultes')
-																			? 'catechisme-adultes'
-																			: page.url.pathname.startsWith('/calendrier')
-																				? 'calendrier'
-																				: 'ccc'}
-		/>
+		<Sidebar corpus={sidebarCorpus} />
 		<SidebarToggle />
 	{/if}
 	<div

@@ -1,10 +1,12 @@
 <script lang="ts">
 	import MetaTags from '$lib/components/ui/MetaTags.svelte';
+	import { CORPORA, FEATURED, TOOLS, type CorpusRecord } from '$lib/corpora';
 
 	// Bibliothèque: a bibliographic register of every corpus the site
 	// hosts. Visual language draws from medieval scriptoria (rubrics,
 	// fleurons, hanging Roman numerals) but the typography and grid are
-	// fully modern. Page is static; no `data` from +page.ts is consumed.
+	// fully modern. Shelves I/II/III are derived from `$lib/corpora`;
+	// Shelf IV (tools) is a flat-tile row from TOOLS.
 
 	type Work = {
 		slug: string;
@@ -28,276 +30,91 @@
 
 	const PLACEHOLDER = '/img/bibliotheque/placeholder.png';
 
+	function workFromCorpus(c: CorpusRecord): Work {
+		return {
+			slug: c.id,
+			href: c.urlPrefix,
+			title: c.title,
+			subtitle: c.subtitle,
+			blurb: c.blurb,
+			year: c.year,
+			image: c.cover,
+			focus: c.coverFocus
+		};
+	}
+
+	function shelfWorks(shelf: 'I' | 'II' | 'III'): Work[] {
+		return CORPORA.filter((c) => c.shelf === shelf).map(workFromCorpus);
+	}
+
+	// CIC 1917 ships its own Bibliothèque card alongside the 1983 code
+	// (which is the canonical CIC record). Encycliques is a placeholder
+	// route with no corpus record yet · render an "à venir" card here.
+	const cic1917: Work = {
+		slug: 'cic-1917',
+		href: '/cic/1917',
+		title: 'Code Pio Benedictin',
+		subtitle: 'Codex Iuris Canonici précédent',
+		blurb: "Premier code unifié du droit de l'Église latine, en vigueur jusqu'en 1983.",
+		year: '1917',
+		image: '/img/bibliotheque/cic-1917.webp'
+	};
+	const encycliques: Work = {
+		slug: 'encycliques',
+		href: '/encycliques',
+		title: 'Encycliques',
+		subtitle: 'Lettres pontificales hors Vatican II',
+		blurb: 'Recueil des encycliques majeures du Magistère pontifical (à venir).',
+		year: 'Recueil',
+		image: '/img/bibliotheque/encycliques.webp',
+		focus: 'top'
+	};
+
 	// The two foundational works the rest of the library serves: the
 	// Catéchisme de l'Église Catholique (the site's primary text) and the
 	// Bible. Rendered as larger featured cards above the four shelves.
-	const featured: Work[] = [
-		{
-			slug: 'cec',
-			href: '/cec',
-			title: "Catéchisme de l'Église Catholique",
-			subtitle: 'Catechismus Catholicae Ecclesiae, édition française',
-			blurb:
-				'Deux mille huit cent soixante cinq paragraphes en quatre parties. Le texte de référence.',
-			year: '1992',
-			image: '/img/bibliotheque/cec.webp'
-		},
-		{
-			slug: 'bible',
-			href: '/bible',
-			title: 'Bible',
-			subtitle: 'Édition catholique en français',
-			blurb: 'Texte intégral, lu chapitre par chapitre, croisé verset par verset au Catéchisme.',
-			year: 'Écritures',
-			image: '/img/bibliotheque/bible.webp'
-		}
-	];
+	const featured: Work[] = FEATURED.map((f) => ({
+		slug: f.id,
+		href: f.urlPrefix,
+		title: f.title,
+		subtitle: f.subtitle,
+		blurb: f.blurb,
+		year: f.year,
+		image: f.cover
+	}));
 
 	const shelves: Shelf[] = [
 		{
 			roman: 'I',
 			title: 'Catéchismes',
 			kicker: 'Exposés systématiques de la foi',
-			works: [
-				{
-					slug: 'compendium',
-					focus: 'top',
-					href: '/compendium',
-					title: 'Compendium',
-					subtitle: "Abrégé officiel du Catéchisme de l'Église Catholique",
-					blurb: 'Cinq cent quatre vingt dix huit questions reprises de la grande édition de 1992.',
-					year: '2005',
-					image: '/img/bibliotheque/compendium.webp'
-				},
-				{
-					slug: 'trente',
-					focus: 'top',
-					href: '/trente',
-					title: 'Catéchisme du Concile de Trente',
-					subtitle: 'Catechismus ex decreto Concilii Tridentini',
-					blurb: 'Le catéchisme romain promulgué après le Concile de Trente, en quatre parties.',
-					year: '1566',
-					image: '/img/bibliotheque/trente.webp'
-				},
-				{
-					slug: 'petit-catechisme',
-					href: '/petit-catechisme',
-					title: 'Petit Catéchisme',
-					subtitle: 'Catéchisme de la Doctrine Chrétienne',
-					blurb:
-						"L'abrégé pour les fidèles, ordonné par saint Pie X pour les premiers enseignements.",
-					year: '1912',
-					image: '/img/bibliotheque/petit-catechisme.webp'
-				},
-				{
-					slug: 'grand-catechisme',
-					href: '/grand-catechisme',
-					title: 'Grand Catéchisme',
-					subtitle: 'Catéchisme de saint Pie X, version étendue',
-					blurb: "Neuf cent quatre vingt neuf questions et réponses sur l'ensemble de la doctrine.",
-					year: '1905',
-					image: '/img/bibliotheque/grand-catechisme.webp'
-				},
-				{
-					slug: 'catechisme-adultes',
-					focus: 'top',
-					href: '/catechisme-adultes',
-					title: 'Catéchisme pour Adultes',
-					subtitle: 'Catéchisme des Évêques de France',
-					blurb: 'Exposé thématique en quarante sept sections, adressé aux fidèles adultes.',
-					year: '1991',
-					image: '/img/bibliotheque/catechisme-adultes.webp'
-				},
-				{
-					slug: 'catechisme-illustre',
-					href: '/catechisme-illustre',
-					title: 'Catéchisme illustré',
-					subtitle: 'Les vérités nécessaires en douze leçons',
-					blurb: 'Douze leçons accompagnées de gravures sur bois, pour la catéchèse populaire.',
-					year: '1897',
-					image: '/img/bibliotheque/catechisme-illustre.webp'
-				}
-			]
+			works: shelfWorks('I')
 		},
 		{
 			roman: 'II',
 			title: 'Catéchèse & doctrine',
 			kicker: 'Synthèses doctrinales et catéchèses patristiques',
-			works: [
-				{
-					slug: 'didache',
-					focus: 'top',
-					href: '/didache',
-					title: 'La Didachè',
-					subtitle: 'Doctrine des douze Apôtres',
-					blurb: 'Plus ancien document catéchétique chrétien, en seize courts chapitres.',
-					year: 'Iᵉʳ siècle',
-					image: '/img/bibliotheque/didache.webp'
-				},
-				{
-					slug: 'catecheses-mystagogiques',
-					focus: 'bottom',
-					href: '/catecheses-mystagogiques',
-					title: 'Catéchèses mystagogiques',
-					subtitle: 'Saint Cyrille de Jérusalem, aux nouveaux baptisés',
-					blurb: "Cinq instructions sur les sacrements de l'initiation, données vers 350.",
-					year: 'vers 350',
-					image: '/img/bibliotheque/catecheses-mystagogiques.webp'
-				},
-				{
-					slug: 'discours-catechetique',
-					focus: 'top',
-					href: '/discours-catechetique',
-					title: 'Discours catéchétique',
-					subtitle: 'Saint Grégoire de Nysse, Oratio catechetica magna',
-					blurb: 'Manuel théologique patristique en quarante chapitres, par un Père cappadocien.',
-					year: 'IVᵉ siècle',
-					image: '/img/bibliotheque/discours-catechetique.webp'
-				},
-				{
-					slug: 'breviloquium',
-					focus: 'top',
-					href: '/breviloquium',
-					title: 'Breviloquium',
-					subtitle: 'Saint Bonaventure, somme théologique abrégée',
-					blurb: 'Sept parties, soixante dix neuf chapitres : un compendium de la théologie.',
-					year: '1257',
-					image: '/img/bibliotheque/breviloquium.webp'
-				},
-				{
-					slug: 'doctrine-catholique',
-					focus: 'top',
-					href: '/doctrine-catholique',
-					title: 'La Doctrine Catholique',
-					subtitle: 'Abbé Boulenger, en cinquante trois leçons',
-					blurb: 'Une pédagogie de la doctrine pour adultes, organisée en trois tomes.',
-					year: '1927',
-					image: '/img/bibliotheque/doctrine-catholique.webp'
-				},
-				{
-					slug: 'doctrine-sociale',
-					href: '/doctrine-sociale',
-					title: 'Doctrine sociale',
-					subtitle: "Compendium de la doctrine sociale de l'Église",
-					blurb: 'Cinq cent quatre vingt trois paragraphes en trois parties.',
-					year: '2004',
-					image: '/img/bibliotheque/doctrine-sociale.webp'
-				}
-			]
+			works: shelfWorks('II')
 		},
 		{
 			roman: 'III',
 			title: 'Magistère',
 			kicker: 'Documents conciliaires, canoniques et liturgiques',
-			works: [
-				{
-					slug: 'vatican-ii',
-					href: '/vatican-ii',
-					title: 'Vatican II',
-					subtitle: 'Les seize documents du Concile œcuménique',
-					blurb: 'Quatre constitutions, neuf décrets et trois déclarations.',
-					year: '1962 à 1965',
-					image: '/img/bibliotheque/vatican-ii.webp'
-				},
-				{
-					slug: 'enchiridion',
-					href: '/enchiridion',
-					title: 'Enchiridion Symbolorum',
-					subtitle: 'Denzinger',
-					blurb: 'Recueil canonique des symboles, définitions et déclarations du Magistère.',
-					year: 'Recueil',
-					image: '/img/bibliotheque/enchiridion.webp'
-				},
-				{
-					slug: 'cic-1983',
-					href: '/cic/1983',
-					title: 'Code de Droit Canonique',
-					subtitle: 'Codex Iuris Canonici en vigueur',
-					blurb: 'Mille sept cent cinquante deux canons. Promulgué par saint Jean Paul II.',
-					year: '1983',
-					image: '/img/bibliotheque/cic-1983.webp'
-				},
-				{
-					slug: 'cic-1917',
-					href: '/cic/1917',
-					title: 'Code Pio Benedictin',
-					subtitle: 'Codex Iuris Canonici précédent',
-					blurb: "Premier code unifié du droit de l'Église latine, en vigueur jusqu'en 1983.",
-					year: '1917',
-					image: '/img/bibliotheque/cic-1917.webp'
-				},
-				{
-					slug: 'pgmr',
-					href: '/pgmr',
-					title: 'Présentation Générale du Missel Romain',
-					subtitle: 'Norme liturgique en neuf chapitres',
-					blurb: 'Le texte de référence pour la célébration ordinaire de la messe romaine.',
-					year: '2002',
-					image: '/img/bibliotheque/pgmr.webp'
-				},
-				{
-					slug: 'encycliques',
-					focus: 'top',
-					href: '/encycliques',
-					title: 'Encycliques',
-					subtitle: 'Lettres pontificales hors Vatican II',
-					blurb: 'Recueil des encycliques majeures du Magistère pontifical (à venir).',
-					year: 'Recueil',
-					image: '/img/bibliotheque/encycliques.webp'
-				}
-			]
+			works: [...shelfWorks('III'), cic1917, encycliques]
 		},
 		{
 			roman: 'IV',
 			title: 'Études & outils',
 			kicker: 'Outils transversaux pour la lecture du Catéchisme',
-			works: [
-				{
-					slug: 'recherche',
-					href: '/recherche',
-					title: 'Recherche',
-					subtitle: 'Un champ pour tout retrouver',
-					blurb: 'Mot, paragraphe, ou référence biblique : un seul champ pour tout.',
-					year: 'Outil',
-					image: PLACEHOLDER
-				},
-				{
-					slug: 'glossaire',
-					href: '/glossaire',
-					title: 'Glossaire',
-					subtitle: 'Les termes théologiques classés',
-					blurb: 'Définitions, renvois croisés, regroupement par grands thèmes doctrinaux.',
-					year: 'Outil',
-					image: PLACEHOLDER
-				},
-				{
-					slug: 'bible',
-					href: '/bible',
-					title: 'Concordance biblique',
-					subtitle: 'Chaque verset croisé avec le Catéchisme',
-					blurb: 'Lecture intégrale et concordance verset par verset avec les paragraphes du CEC.',
-					year: 'Outil',
-					image: '/img/bibliotheque/bible.webp'
-				},
-				{
-					slug: 'calendrier',
-					href: '/calendrier',
-					title: 'Calendrier liturgique',
-					subtitle: 'Calendrier romain croisé au Catéchisme',
-					blurb: 'Pour chaque jour du temps liturgique, les paragraphes du CEC à méditer.',
-					year: 'Outil',
-					image: PLACEHOLDER
-				},
-				{
-					slug: 'prieres',
-					href: '/prieres-formules',
-					title: 'Prières & Formules',
-					subtitle: 'Recueil des prières et formules essentielles',
-					blurb: 'Pater, Ave, Credo, actes de foi, Salve Regina, et autres prières usuelles.',
-					year: 'Outil',
-					image: PLACEHOLDER
-				}
-			]
+			works: TOOLS.map((t) => ({
+				slug: t.slug,
+				href: t.href,
+				title: t.title,
+				subtitle: t.subtitle,
+				blurb: t.blurb,
+				year: 'Outil',
+				image: t.cover ?? PLACEHOLDER
+			}))
 		}
 	];
 

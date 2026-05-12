@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { corpusById } from '$lib/corpora';
 	import { sidebarOpen } from '$lib/stores/sidebar';
 	import { activeHeading } from '$lib/stores/scrollSpy';
 	import {
@@ -114,44 +115,10 @@
 	let { corpus = 'ccc' as Corpus }: { corpus?: Corpus } = $props();
 
 	const sommaireHref = $derived.by((): string | null => {
-		switch (corpus) {
-			case 'ccc':
-				return '/cec/sommaire';
-			case 'compendium':
-				return '/compendium/sommaire';
-			case 'trent':
-				return '/trente/sommaire';
-			case 'pius-x-grand':
-				return '/grand-catechisme/sommaire';
-			case 'pius-x-petit':
-				return '/petit-catechisme/sommaire';
-			case 'catechisme-illustre':
-				return '/catechisme-illustre/sommaire';
-			case 'denzinger':
-				return '/enchiridion/sommaire';
-			case 'boulanger':
-				return '/doctrine-catholique/sommaire';
-			case 'cdse':
-				return '/doctrine-sociale';
-			case 'pgmr':
-				return '/pgmr';
-			case 'vatican-ii':
-				return '/vatican-ii';
-			case 'cic':
-				return '/cic';
-			case 'breviloquium':
-				return '/breviloquium';
-			case 'didache':
-				return '/didache';
-			case 'discours-catechetique':
-				return '/discours-catechetique';
-			case 'catecheses-mystagogiques':
-				return '/catecheses-mystagogiques';
-			case 'catechisme-adultes':
-				return '/catechisme-adultes';
-			default:
-				return null;
-		}
+		// CCC is implicit · not in the registry yet (it's the site's
+		// primary text). The registry handles every shelved corpus.
+		if (corpus === 'ccc') return '/cec/sommaire';
+		return corpusById(corpus)?.sommaireHref ?? null;
 	});
 
 	let structure: { parts: Part[] } | null = $state(null);

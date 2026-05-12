@@ -1,3 +1,11 @@
+<script lang="ts">
+	import { corporaInNavGroup } from '$lib/corpora';
+
+	const catechismes = $derived(corporaInNavGroup('catechismes'));
+	const catechese = $derived(corporaInNavGroup('catechese'));
+	const magistere = $derived(corporaInNavGroup('magistere'));
+</script>
+
 <footer class="site-footer">
 	<nav class="footer-cols" aria-label="Navigation du pied de page">
 		<div class="footer-col">
@@ -22,33 +30,26 @@
 		<div class="footer-col">
 			<p class="footer-col-head">Catéchismes</p>
 			<ul>
-				<li><a href="/compendium">Compendium</a></li>
-				<li><a href="/trente">Catéchisme de Trente</a></li>
-				<li><a href="/catechisme-illustre">Catéchisme illustré</a></li>
-				<li><a href="/grand-catechisme">Grand Catéchisme</a></li>
-				<li><a href="/petit-catechisme">Petit Catéchisme</a></li>
-				<li><a href="/catechisme-adultes">Catéchisme pour Adultes</a></li>
+				{#each catechismes as c (c.id)}
+					<li><a href={c.urlPrefix}>{c.title}</a></li>
+				{/each}
 			</ul>
 		</div>
 		<div class="footer-col">
 			<p class="footer-col-head">Catéchèse &amp; doctrine</p>
 			<ul>
-				<li><a href="/didache">La Didachè</a></li>
-				<li><a href="/catecheses-mystagogiques">Catéchèses mystagogiques</a></li>
-				<li><a href="/discours-catechetique">Discours catéchétique</a></li>
-				<li><a href="/breviloquium">Breviloquium</a></li>
-				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>
-				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
+				{#each catechese as c (c.id)}
+					<li><a href={c.urlPrefix}>{c.title}</a></li>
+				{/each}
 			</ul>
 		</div>
 		<div class="footer-col">
 			<p class="footer-col-head">Magistère</p>
 			<ul>
-				<li><a href="/vatican-ii">Vatican II</a></li>
-				<li><a href="/enchiridion">Enchiridion Symbolorum</a></li>
-				<li><a href="/cic/1983">Code de Droit Canonique</a></li>
+				{#each magistere as c (c.id)}
+					<li><a href={c.urlPrefix}>{c.title}</a></li>
+				{/each}
 				<li><a href="/cic/1917">Code Pio-Benedictin (1917)</a></li>
-				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>
 			</ul>
 		</div>
 	</nav>

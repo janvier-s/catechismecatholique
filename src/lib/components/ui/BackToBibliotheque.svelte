@@ -1,37 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { corpusForPath } from '$lib/corpora';
 
-	// Maps the leading path segment of every shelved corpus to the
-	// Bibliothèque shelf it lives on. Returning null means the back-link
-	// should not render on this route.
-	const SHELF_BY_PREFIX: Array<[RegExp, string]> = [
-		// Shelf I · catechisms
-		[/^\/compendium(\/|$)/, 'I'],
-		[/^\/trente(\/|$)/, 'I'],
-		[/^\/petit-catechisme(\/|$)/, 'I'],
-		[/^\/grand-catechisme(\/|$)/, 'I'],
-		[/^\/catechisme-adultes(\/|$)/, 'I'],
-		[/^\/catechisme-illustre(\/|$)/, 'I'],
-		// Shelf II · patristic & doctrinal syntheses
-		[/^\/didache(\/|$)/, 'II'],
-		[/^\/catecheses-mystagogiques(\/|$)/, 'II'],
-		[/^\/discours-catechetique(\/|$)/, 'II'],
-		[/^\/breviloquium(\/|$)/, 'II'],
-		[/^\/doctrine-catholique(\/|$)/, 'II'],
-		[/^\/doctrine-sociale(\/|$)/, 'II'],
-		// Shelf III · magisterium
-		[/^\/vatican-ii(\/|$)/, 'III'],
-		[/^\/enchiridion(\/|$)/, 'III'],
-		[/^\/cic(\/|$)/, 'III'],
-		[/^\/pgmr(\/|$)/, 'III'],
-		[/^\/encycliques(\/|$)/, 'III']
-	];
-
+	// The back-link only renders on shelved corpora. /encycliques is a
+	// placeholder route that lives on Shelf III but has no CorpusRecord
+	// yet; map it inline until the corpus exists.
 	const target = $derived.by(() => {
 		const p = page.url.pathname;
-		for (const [re, shelf] of SHELF_BY_PREFIX) {
-			if (re.test(p)) return `/bibliotheque#shelf-${shelf}`;
-		}
+		const c = corpusForPath(p);
+		if (c) return `/bibliotheque#shelf-${c.shelf}`;
+		if (p === '/encycliques' || p.startsWith('/encycliques/')) return '/bibliotheque#shelf-III';
 		return null;
 	});
 </script>

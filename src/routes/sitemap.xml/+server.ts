@@ -2,11 +2,23 @@ import type { RequestHandler } from './$types';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { BOOKS } from '$lib/utils/bibleBookSlug';
+import { CORPORA } from '$lib/corpora';
 
 export const prerender = true;
 
 const SITE = 'https://catechismecatholique.fr';
 
+/**
+ * Build the URL list for every page worth indexing:
+ *  · site-level statics (home, à-propos, /cec landing/sommaire/panorama, …)
+ *  · /cec/{n} 1-2865 and /compendium/q/{n} 1-598 (the two largest
+ *    paragraph-keyed corpora · not in CORPORA because their "unit"
+ *    URLs are numeric ids generated independently of a structure file)
+ *  · every Bible book + chapter
+ *  · glossary clusters + entries
+ *  · every shelved corpus' landing, extras, and structure-derived units
+ *    (driven entirely by `src/lib/corpora.ts`)
+ */
 export const GET: RequestHandler = () => {
 	const chapterCounts: Record<string, number> = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/bible/chapter-counts.json'), 'utf-8')
@@ -18,76 +30,29 @@ export const GET: RequestHandler = () => {
 		readFileSync(join(process.cwd(), 'static/data/cec/glossary-index.json'), 'utf-8')
 	);
 
-	const staticPages = [
+	// Site-level static pages that aren't a corpus and aren't derivable.
+	const sitePages = [
 		'/',
 		'/cec',
 		'/cec/sommaire',
 		'/cec/panorama',
-		'/compendium',
-		'/compendium/sommaire',
-		'/compendium/1-profession-de-la-foi',
-		'/compendium/2-celebration-du-mystere',
-		'/compendium/3-vie-dans-le-christ',
-		'/compendium/4-priere-chretienne',
-		'/petit-catechisme',
-		'/petit-catechisme/sommaire',
-		'/petit-catechisme/0-intro',
-		'/petit-catechisme/1-credo',
-		'/petit-catechisme/2-morale',
-		'/petit-catechisme/3-moyens-grace',
-		'/petit-catechisme/annee-liturgique',
-		'/petit-catechisme/educateurs',
-		'/petit-catechisme/histoire-revelation',
-		'/catechisme-illustre',
-		'/catechisme-illustre/sommaire',
-		'/catechisme-illustre/preface',
-		'/catechisme-illustre/introduction',
-		'/catechisme-illustre/1-dieu',
-		'/catechisme-illustre/2-homme',
-		'/catechisme-illustre/3-homme-apres-le-peche',
-		'/catechisme-illustre/4-sauveur',
-		'/catechisme-illustre/5-enseignement-du-sauveur',
-		'/catechisme-illustre/6-rachat-du-monde',
-		'/catechisme-illustre/7-mission-des-apotres',
-		'/catechisme-illustre/8-bapteme',
-		'/catechisme-illustre/9-deux-routes',
-		'/catechisme-illustre/10-fin',
-		'/catechisme-illustre/11-enfer',
-		'/catechisme-illustre/12-ciel',
-		'/catechisme-illustre/avis',
-		'/catechisme-illustre/prieres',
-		'/enchiridion',
-		'/enchiridion/sommaire',
-		'/prieres-formules',
 		'/bible',
 		'/glossaire',
 		'/glossaire/tous',
 		'/recherche',
-		'/a-propos',
-		'/mentions-legales',
+		'/calendrier',
+		'/prieres-formules',
 		'/bibliotheque',
 		'/encycliques',
-		'/calendrier',
-		'/grand-catechisme',
-		'/grand-catechisme/sommaire',
-		'/trente',
-		'/trente/sommaire',
-		'/doctrine-catholique',
-		'/doctrine-sociale',
-		'/pgmr',
-		'/vatican-ii',
-		'/cic',
-		'/cic/1983',
-		'/cic/1917',
-		'/breviloquium',
-		'/didache',
-		'/discours-catechetique',
-		'/catecheses-mystagogiques',
-		'/catechisme-adultes'
+		'/a-propos',
+		'/mentions-legales'
 	];
 
+	// Every CCC paragraph (1..2865) and Compendium question (1..598).
+	// Counts are stable promulgated figures; not derived from structure
+	// because the structure JSONs don't expose a flat length and walking
+	// the tree per build adds cost for zero practical benefit.
 	const paragraphUrls = Array.from({ length: 2865 }, (_, i) => `/cec/${i + 1}`);
-
 	const compendiumUrls = Array.from({ length: 598 }, (_, i) => `/compendium/q/${i + 1}`);
 
 	const bibleUrls: string[] = [];
@@ -104,102 +69,49 @@ export const GET: RequestHandler = () => {
 		...glossary.entries.map((e) => `/glossaire/${e.slug}`)
 	];
 
-	const denzingerStructure: {
-		parts: { units: { slug: string }[] }[];
-	} = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/enchiridion/structure.json'), 'utf-8')
-	);
-	const denzingerUrls: string[] = [];
-	for (const part of denzingerStructure.parts) {
-		for (const unit of part.units) {
-			denzingerUrls.push(`/enchiridion/${unit.slug}`);
+	// Every shelved corpus contributes (landing + extras + units). The
+	// structure-file read is gated so a corpus that hasn't shipped data
+	// yet doesn't fail the prerender.
+	const corpusUrls: string[] = [];
+	for (const c of CORPORA) {
+		corpusUrls.push(c.sitemap.landing);
+		if (c.sitemap.extraPaths) corpusUrls.push(...c.sitemap.extraPaths);
+		if (c.sitemap.structureFile && c.sitemap.units) {
+			const path = join(process.cwd(), c.sitemap.structureFile);
+			try {
+				const struct = JSON.parse(readFileSync(path, 'utf-8'));
+				corpusUrls.push(...c.sitemap.units(struct));
+			} catch (err) {
+				console.warn(`[sitemap] skipping ${c.id} units: ${(err as Error).message}`);
+			}
 		}
 	}
 
-	const boulangerStructure: {
-		tomes: { lessons: { slug: string }[] }[];
-	} = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/boulanger/structure.json'), 'utf-8')
-	);
-	const boulangerUrls: string[] = ['/doctrine-catholique', '/doctrine-catholique/sommaire'];
-	for (const tome of boulangerStructure.tomes) {
-		for (const lesson of tome.lessons) {
-			boulangerUrls.push(`/doctrine-catholique/${lesson.slug}`);
-		}
-	}
-
-	// CIC · both codes, every livre
-	const cicStructure: { codes: { code: string; livres: { slug: string }[] }[] } = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/cic/structure.json'), 'utf-8')
-	);
-	const cicUrls: string[] = [];
-	for (const code of cicStructure.codes) {
-		for (const livre of code.livres) {
-			cicUrls.push(`/cic/${code.code}/${livre.slug}`);
-		}
-	}
-
-	// Vatican II · every document
-	const vatIIStructure: { docs: { slug: string; present?: boolean }[] } = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/vatican-ii/structure.json'), 'utf-8')
-	);
-	const vatIIUrls = vatIIStructure.docs
-		.filter((d) => d.present !== false)
-		.map((d) => `/vatican-ii/${d.slug}`);
-
-	// PGMR + Doctrine sociale (CDSE) · per-chapter pages
-	const pgmrStructure: { chapters: { slug: string }[] } = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/pgmr/structure.json'), 'utf-8')
-	);
-	const pgmrUrls = pgmrStructure.chapters.map((c) => `/pgmr/${c.slug}`);
-
-	const cdseStructure: { parts: { chapters: { slug: string }[] }[] } = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/cdse/structure.json'), 'utf-8')
-	);
-	const cdseUrls: string[] = [];
-	for (const part of cdseStructure.parts) {
-		for (const ch of part.chapters) cdseUrls.push(`/doctrine-sociale/${ch.slug}`);
-	}
-
-	// Breviloquium · every chapter
-	const brevStructure: { parts: { chapters: { slug: string }[] }[] } = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/breviloquium/structure.json'), 'utf-8')
-	);
-	const brevUrls: string[] = [];
-	for (const part of brevStructure.parts) {
-		for (const ch of part.chapters) brevUrls.push(`/breviloquium/${ch.slug}`);
-	}
-
-	// Catéchisme pour Adultes · every section page
+	// CPA's section list is small enough to keep inline · its structure
+	// shape differs from every other corpus (a flat `sections` array
+	// rather than a parts/chapters tree).
 	const cpaStructure: { sections: { slug: string }[] } = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/catechisme-adultes/structure.json'), 'utf-8')
 	);
 	const cpaUrls = cpaStructure.sections.map((s) => `/catechisme-adultes/${s.slug}`);
 
-	// Patristique single-page works: just the landing pages (already in
-	// staticPages). Chapter anchors live under hash fragments and don't
-	// need their own sitemap entries.
-
 	const allUrls = [
-		...staticPages,
+		...sitePages,
 		...paragraphUrls,
 		...compendiumUrls,
 		...bibleUrls,
 		...glossaryUrls,
-		...denzingerUrls,
-		...boulangerUrls,
-		...cicUrls,
-		...vatIIUrls,
-		...pgmrUrls,
-		...cdseUrls,
-		...brevUrls,
+		...corpusUrls,
 		...cpaUrls
 	];
+
+	// Dedupe (corpus landings can overlap with sitePages).
+	const unique = Array.from(new Set(allUrls));
 
 	const xml = [
 		'<?xml version="1.0" encoding="UTF-8"?>',
 		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-		...allUrls.map((url) => `  <url><loc>${SITE}${url}</loc></url>`),
+		...unique.map((url) => `  <url><loc>${SITE}${url}</loc></url>`),
 		'</urlset>'
 	].join('\n');
 
