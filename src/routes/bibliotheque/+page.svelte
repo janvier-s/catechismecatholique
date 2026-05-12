@@ -79,7 +79,6 @@
 				},
 				{
 					slug: 'petit-catechisme',
-					focus: 'top',
 					href: '/petit-catechisme',
 					title: 'Petit Catéchisme',
 					subtitle: 'Catéchisme de la Doctrine Chrétienne',
