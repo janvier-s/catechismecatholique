@@ -24,11 +24,11 @@ export function prepareCpa(args: PrepareCpaArgs): CpaBuildResult {
 	endStep(`${sCount} sections, ${chCount} chapters, ${pCount} paragraphs`);
 
 	logStep('CPA: writing output');
-	mkdirSync(join(args.outDir, 'chapters'), { recursive: true });
+	mkdirSync(join(args.outDir, 'sections'), { recursive: true });
 	writeFileSync(join(args.outDir, 'structure.json'), JSON.stringify(out.structure));
-	for (const [slug, ch] of Object.entries(out.chapters)) {
-		writeFileSync(join(args.outDir, 'chapters', `${slug}.json`), JSON.stringify(ch));
+	for (const [slug, sec] of Object.entries(out.sections)) {
+		writeFileSync(join(args.outDir, 'sections', `${slug}.json`), JSON.stringify(sec));
 	}
-	endStep(`structure + ${chCount} shards`);
+	endStep(`structure + ${out.structure.sections.length} section shards`);
 	return out;
 }

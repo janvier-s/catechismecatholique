@@ -4,7 +4,7 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const firstChapter = $derived(data.structure.sections[0]?.chapters[0]?.slug ?? '');
+	const firstSection = $derived(data.structure.sections[0]?.slug ?? '');
 </script>
 
 <svelte:head>
@@ -25,9 +25,9 @@
 			à la mentalité française propose un exposé thématique de la foi : moins technique que le CEC, il
 			accompagne le lecteur à travers les grands mouvements de la Révélation divine.
 		</p>
-		{#if firstChapter}
+		{#if firstSection}
 			<p class="hero-cta">
-				<a class="cta-link" href={`/catechisme-adultes/${firstChapter}`}>Commencer la lecture →</a>
+				<a class="cta-link" href={`/catechisme-adultes/${firstSection}`}>Commencer la lecture →</a>
 			</p>
 		{/if}
 		<p class="hero-stats">
@@ -42,20 +42,22 @@
 	{#each data.structure.sections as section (section.slug)}
 		<section class="section" id={section.slug}>
 			<header class="section-head">
-				<p class="section-kicker">Section {section.ordinal}</p>
-				<h2 class="section-title">{frenchPunct(section.title)}</h2>
+				<a class="section-link" href={`/catechisme-adultes/${section.slug}`}>
+					<p class="section-kicker">Section {section.ordinal}</p>
+					<h2 class="section-title">{frenchPunct(section.title)}</h2>
+				</a>
 			</header>
 			<ol class="chapters">
 				{#each section.chapters as ch (ch.slug)}
 					<li>
-						<a class="chapter-row" href={`/catechisme-adultes/${ch.slug}`}>
+						<a class="chapter-row" href={`/catechisme-adultes/${section.slug}#${ch.slug}`}>
 							<span class="chapter-ord">{ch.ordinal}</span>
 							<span class="chapter-title">{frenchPunct(ch.title)}</span>
 							<span class="chapter-range">
 								{#if ch.paraRange[0] === ch.paraRange[1]}
-									§ {ch.paraRange[0]}
+									{ch.paraRange[0]}
 								{:else}
-									§ {ch.paraRange[0]}–{ch.paraRange[1]}
+									{ch.paraRange[0]}–{ch.paraRange[1]}
 								{/if}
 							</span>
 							<span class="chapter-arrow" aria-hidden="true">→</span>
@@ -149,6 +151,14 @@
 	}
 	.section-head {
 		margin-bottom: 1rem;
+	}
+	.section-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+	.section-link:hover .section-title {
+		color: var(--color-accent);
 	}
 	.section-kicker {
 		font-family: var(--font-ui);

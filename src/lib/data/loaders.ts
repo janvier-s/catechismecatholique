@@ -52,7 +52,7 @@ import type {
 	PatChapter,
 	PatFull,
 	CpaStructure,
-	CpaChapter,
+	CpaSectionFull,
 	ParagraphThemeRef
 } from './types';
 
@@ -991,7 +991,7 @@ export type _PatChapterLoaderTypeHint = PatChapter;
 // ─── Catéchisme pour Adultes (CPA) ─────────────────────────────────────────
 
 let cpaStructurePromise: Promise<CpaStructure> | null = null;
-const cpaChapterCache = new Map<string, Promise<CpaChapter | null>>();
+const cpaSectionCache = new Map<string, Promise<CpaSectionFull | null>>();
 
 export function loadCpaStructure(fetcher: Fetch = fetch): Promise<CpaStructure> {
 	if (!cpaStructurePromise) {
@@ -1003,15 +1003,18 @@ export function loadCpaStructure(fetcher: Fetch = fetch): Promise<CpaStructure> 
 	return cpaStructurePromise;
 }
 
-export function loadCpaChapter(slug: string, fetcher: Fetch = fetch): Promise<CpaChapter | null> {
-	let p = cpaChapterCache.get(slug);
+export function loadCpaSection(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<CpaSectionFull | null> {
+	let p = cpaSectionCache.get(slug);
 	if (!p) {
 		p = (async () => {
-			const r = await fetcher(`/data/catechisme-adultes/chapters/${slug}.json`);
+			const r = await fetcher(`/data/catechisme-adultes/sections/${slug}.json`);
 			if (!r.ok) return null;
-			return (await r.json()) as CpaChapter;
+			return (await r.json()) as CpaSectionFull;
 		})();
-		cpaChapterCache.set(slug, p);
+		cpaSectionCache.set(slug, p);
 	}
 	return p;
 }

@@ -15,23 +15,42 @@
  */
 export type CpaBlock = { kind: 'paragraph'; n?: number; html: string };
 
+export interface CpaChapter {
+	slug: string; // local anchor id within the section page (e.g. "c-12")
+	ordinal: number; // global chapter ordinal
+	title: string;
+	paraRange: [number, number];
+	blocks: CpaBlock[];
+}
+
 export interface CpaChapterRef {
 	slug: string;
 	ordinal: number;
 	title: string;
-	/** First/last paragraph number in this chapter. */
 	paraRange: [number, number];
 }
 
-/** Section header — a top-level grouping that bundles 1..N chapters. The
- *  source markdown encodes these as `## Section title` lines with no body
- *  between them and the next `##`. Sections themselves don't have reader
- *  pages, only the chapters under them do. */
+/** Section header — top-level grouping that bundles 1..N chapters. The
+ *  source markdown encodes these as bare `## Section title` lines with no
+ *  body between them and the next `##`. Sections are the unit of
+ *  navigation: each section gets its own reader page with all its
+ *  chapters inline, anchored as `#c-N`. */
 export interface CpaSection {
 	slug: string;
 	ordinal: number;
 	title: string;
+	paraRange: [number, number] | null;
 	chapters: CpaChapterRef[];
+}
+
+export interface CpaSectionFull {
+	slug: string;
+	ordinal: number;
+	title: string;
+	paraRange: [number, number] | null;
+	chapters: CpaChapter[];
+	prev?: { slug: string; title: string };
+	next?: { slug: string; title: string };
 }
 
 export interface CpaStructure {
@@ -46,21 +65,9 @@ export interface CpaStructure {
 	totalParagraphs: number;
 }
 
-export interface CpaChapter {
-	slug: string;
-	ordinal: number;
-	title: string;
-	paraRange: [number, number];
-	sectionSlug: string;
-	sectionTitle: string;
-	blocks: CpaBlock[];
-	prev?: { slug: string; title: string };
-	next?: { slug: string; title: string };
-}
-
 export interface CpaBuildResult {
 	structure: CpaStructure;
-	chapters: Record<string, CpaChapter>;
+	sections: Record<string, CpaSectionFull>;
 }
 
 /** Minimal inline markdown → HTML: bold (**…**), italic (*…*), preserve
@@ -158,9 +165,8 @@ export function buildCpa(args: { markdown: string }): CpaBuildResult {
 	//     that follows belongs to it until the next section header.
 	//   - The lone "Introduction" up top has paragraphs but no section
 	//     preceding it; we wrap it in a synthetic "Introduction" section.
-	const sections: CpaSection[] = [];
-	const chaptersMap: Record<string, CpaChapter> = {};
-	let currentSection: CpaSection | null = null;
+	const sectionsFull: CpaSectionFull[] = [];
+	let currentSection: { ref: CpaSection; full: CpaSectionFull } | null = null;
 	let chapterOrdinal = 0;
 	let totalParagraphs = 0;
 
@@ -173,70 +179,90 @@ export function buildCpa(args: { markdown: string }): CpaBuildResult {
 			.replace(/[^a-z0-9]+/g, '-')
 			.replace(/^-+|-+$/g, '')
 			.replace(/-{2,}/g, '-')
-			.slice(0, 60);
+			.slice(0, 50);
 	}
+	const usedSlugs = new Set<string>();
 	function uniqueSectionSlug(base: string): string {
-		let slug = `s-${sections.length + 1}-${base}`.slice(0, 60).replace(/-+$/, '');
-		// Ensure uniqueness — slugify collisions are vanishingly rare here,
-		// but stay defensive.
+		let slug = base || 'section';
 		let i = 2;
-		while (sections.some((s) => s.slug === slug)) slug = `${slug}-${i++}`;
+		while (usedSlugs.has(slug)) slug = `${base}-${i++}`;
+		usedSlugs.add(slug);
 		return slug;
+	}
+
+	function openSection(title: string) {
+		const slug = uniqueSectionSlug(slugify(title));
+		const ordinal = sectionsFull.length + 1;
+		const full: CpaSectionFull = {
+			slug,
+			ordinal,
+			title,
+			paraRange: null,
+			chapters: []
+		};
+		sectionsFull.push(full);
+		currentSection = {
+			ref: { slug, ordinal, title, paraRange: null, chapters: [] },
+			full
+		};
 	}
 
 	for (const h2 of rawH2s) {
 		const isChapter = h2.paraNumbers.length > 0;
 		if (!isChapter) {
-			// Section header
-			const sectionSlug = uniqueSectionSlug(slugify(h2.title));
-			currentSection = {
-				slug: sectionSlug,
-				ordinal: sections.length + 1,
-				title: h2.title,
-				chapters: []
-			};
-			sections.push(currentSection);
+			openSection(h2.title);
 			continue;
 		}
-		// Chapter — ensure we have a section to attach to.
-		if (!currentSection) {
-			currentSection = {
-				slug: uniqueSectionSlug('introduction'),
-				ordinal: sections.length + 1,
-				title: 'Introduction',
-				chapters: []
-			};
-			sections.push(currentSection);
-		}
+		if (!currentSection) openSection('Introduction');
+		const section = currentSection!;
 		chapterOrdinal += 1;
 		totalParagraphs += h2.paraNumbers.length;
 		const slug = `c-${chapterOrdinal}`;
 		const paraRange: [number, number] = [Math.min(...h2.paraNumbers), Math.max(...h2.paraNumbers)];
 		const ref: CpaChapterRef = { slug, ordinal: chapterOrdinal, title: h2.title, paraRange };
-		currentSection.chapters.push(ref);
-		chaptersMap[slug] = {
+		section.ref.chapters.push(ref);
+		section.full.chapters.push({
 			slug,
 			ordinal: chapterOrdinal,
 			title: h2.title,
 			paraRange,
-			sectionSlug: currentSection.slug,
-			sectionTitle: currentSection.title,
 			blocks: h2.blocks
-		};
+		});
 	}
 
-	// Wire prev/next across the global chapter sequence so the reader can
-	// navigate seamlessly from one chapter to the next regardless of which
-	// section they fall under.
-	const flat: CpaChapter[] = [];
-	for (const s of sections) for (const r of s.chapters) flat.push(chaptersMap[r.slug]!);
-	for (let i = 0; i < flat.length; i++) {
-		const c = flat[i]!;
-		const prev = flat[i - 1];
-		const next = flat[i + 1];
-		if (prev) c.prev = { slug: prev.slug, title: prev.title };
-		if (next) c.next = { slug: next.slug, title: next.title };
+	// Compute each section's overall paragraph range from its chapters' ranges
+	// and wire prev/next pointers between adjacent sections.
+	for (const sec of sectionsFull) {
+		if (sec.chapters.length > 0) {
+			const lo = Math.min(...sec.chapters.map((c) => c.paraRange[0]));
+			const hi = Math.max(...sec.chapters.map((c) => c.paraRange[1]));
+			sec.paraRange = [lo, hi];
+		}
 	}
+	for (let i = 0; i < sectionsFull.length; i++) {
+		const s = sectionsFull[i]!;
+		const prev = sectionsFull[i - 1];
+		const next = sectionsFull[i + 1];
+		if (prev) s.prev = { slug: prev.slug, title: prev.title };
+		if (next) s.next = { slug: next.slug, title: next.title };
+	}
+
+	// Build the slim structure (refs only) for the index/sidebar.
+	const sections: CpaSection[] = sectionsFull.map((s) => ({
+		slug: s.slug,
+		ordinal: s.ordinal,
+		title: s.title,
+		paraRange: s.paraRange,
+		chapters: s.chapters.map((c) => ({
+			slug: c.slug,
+			ordinal: c.ordinal,
+			title: c.title,
+			paraRange: c.paraRange
+		}))
+	}));
+
+	const fullMap: Record<string, CpaSectionFull> = {};
+	for (const s of sectionsFull) fullMap[s.slug] = s;
 
 	const structure: CpaStructure = {
 		slug: 'catechisme-adultes',
@@ -246,9 +272,9 @@ export function buildCpa(args: { markdown: string }): CpaBuildResult {
 		date: '1991',
 		source: 'catho.org',
 		sections,
-		totalChapters: flat.length,
+		totalChapters: chapterOrdinal,
 		totalParagraphs
 	};
 
-	return { structure, chapters: chaptersMap };
+	return { structure, sections: fullMap };
 }

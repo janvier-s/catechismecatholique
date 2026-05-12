@@ -1198,6 +1198,14 @@ export interface PatFull {
 
 export type CpaBlock = { kind: 'paragraph'; n?: number; html: string };
 
+export interface CpaChapter {
+	slug: string;
+	ordinal: number;
+	title: string;
+	paraRange: [number, number];
+	blocks: CpaBlock[];
+}
+
 export interface CpaChapterRef {
 	slug: string;
 	ordinal: number;
@@ -1209,7 +1217,18 @@ export interface CpaSection {
 	slug: string;
 	ordinal: number;
 	title: string;
+	paraRange: [number, number] | null;
 	chapters: CpaChapterRef[];
+}
+
+export interface CpaSectionFull {
+	slug: string;
+	ordinal: number;
+	title: string;
+	paraRange: [number, number] | null;
+	chapters: CpaChapter[];
+	prev?: { slug: string; title: string };
+	next?: { slug: string; title: string };
 }
 
 export interface CpaStructure {
@@ -1222,18 +1241,6 @@ export interface CpaStructure {
 	sections: CpaSection[];
 	totalChapters: number;
 	totalParagraphs: number;
-}
-
-export interface CpaChapter {
-	slug: string;
-	ordinal: number;
-	title: string;
-	paraRange: [number, number];
-	sectionSlug: string;
-	sectionTitle: string;
-	blocks: CpaBlock[];
-	prev?: { slug: string; title: string };
-	next?: { slug: string; title: string };
 }
 
 // ─── Breviloquium (Saint Bonaventure, 1257) ────────────────────────────────
