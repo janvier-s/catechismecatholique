@@ -22,7 +22,22 @@
 
 	function nudge(dir: -1 | 1) {
 		if (!scrollEl) return;
-		scrollEl.scrollBy({ left: dir * Math.round(scrollEl.clientWidth * 0.6), behavior: 'smooth' });
+		const delta = dir * Math.round(scrollEl.clientWidth * 0.6);
+		// `scrollBy({ behavior: 'smooth' })` is flaky on iOS Safari — sometimes
+		// no-ops when triggered from a click handler. Assign scrollLeft
+		// directly as a hard fallback, then schedule a smooth re-snap.
+		const target = scrollEl.scrollLeft + delta;
+		scrollEl.scrollLeft = target;
+		// Try the smooth behaviour too in case the browser supports it; the
+		// hard assignment above already moved us if smooth bailed.
+		try {
+			scrollEl.scrollTo({ left: target, behavior: 'smooth' });
+		} catch {
+			/* ignore: older Safari throws on options bag */
+		}
+		// In case Safari ignored the scroll, refresh the chevron state on
+		// the next frame so the buttons disappear when we've reached the end.
+		requestAnimationFrame(update);
 	}
 
 	$effect(() => {
@@ -105,6 +120,7 @@
 		overflow-x: auto;
 		scroll-behavior: smooth;
 		scrollbar-width: none;
+		touch-action: pan-x;
 	}
 	.track::-webkit-scrollbar {
 		display: none;

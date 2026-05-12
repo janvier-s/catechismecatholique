@@ -337,7 +337,7 @@
 		role="dialog"
 		aria-modal="true"
 		aria-label="Panneau d'étude"
-		transition:fly={{ y: 30, duration: 200 }}
+		transition:fly={{ y: 30, duration: 200, opacity: 1 }}
 	>
 		<header class="flex items-center justify-between px-3 py-2 border-b border-border font-ui">
 			<div class="min-w-0">
