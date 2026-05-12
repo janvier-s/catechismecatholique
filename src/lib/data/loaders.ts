@@ -50,6 +50,7 @@ import type {
 	BrevChapter,
 	PatStructure,
 	PatChapter,
+	PatFull,
 	ParagraphThemeRef
 } from './types';
 
@@ -961,7 +962,7 @@ export function loadBreviloquiumChapter(
 // ─── Patristique (Didachè, Discours catéchétique, …) ──────────────────────
 
 const patStructureCache = new Map<string, Promise<PatStructure>>();
-const patChapterCache = new Map<string, Promise<PatChapter | null>>();
+const patFullCache = new Map<string, Promise<PatFull>>();
 
 export function loadPatStructure(work: string, fetcher: Fetch = fetch): Promise<PatStructure> {
 	let p = patStructureCache.get(work);
@@ -972,23 +973,18 @@ export function loadPatStructure(work: string, fetcher: Fetch = fetch): Promise<
 	return p;
 }
 
-export function loadPatChapter(
-	work: string,
-	slug: string,
-	fetcher: Fetch = fetch
-): Promise<PatChapter | null> {
-	const key = `${work}/${slug}`;
-	let p = patChapterCache.get(key);
+export function loadPatFull(work: string, fetcher: Fetch = fetch): Promise<PatFull> {
+	let p = patFullCache.get(work);
 	if (!p) {
-		p = (async () => {
-			const r = await fetcher(`/data/${work}/chapters/${slug}.json`);
-			if (!r.ok) return null;
-			return (await r.json()) as PatChapter;
-		})();
-		patChapterCache.set(key, p);
+		p = fetchJson<PatFull>(`/data/${work}/full.json`, fetcher);
+		patFullCache.set(work, p);
 	}
 	return p;
 }
+
+// Suppress unused-import warning — PatChapter is re-exported via types but
+// not consumed here directly after the loader simplification.
+export type _PatChapterLoaderTypeHint = PatChapter;
 
 // ─── Catho paragraph-themes index ──────────────────────────────────────────
 

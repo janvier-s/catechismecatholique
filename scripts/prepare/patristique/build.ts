@@ -50,9 +50,15 @@ export interface PatChapter {
 	next?: { slug: string; label: string };
 }
 
+export interface PatFull {
+	structure: PatStructure;
+	chapters: PatChapter[]; // ordered, full content
+}
+
 export interface PatBuildResult {
 	structure: PatStructure;
 	chapters: Record<string, PatChapter>;
+	full: PatFull;
 }
 
 const ROMAN_RE = /^([IVXLCDM]+)\.\s+/;
@@ -185,6 +191,8 @@ export function buildPatristiqueWork(args: {
 
 	const chapterMap: Record<string, PatChapter> = {};
 	for (const c of chapters) chapterMap[c.slug] = c;
+	const full: PatFull = { structure: null!, chapters };
+	// (structure is filled in below, then assigned to full.structure)
 
 	const structure: PatStructure = {
 		slug: config.slug,
@@ -202,5 +210,6 @@ export function buildPatristiqueWork(args: {
 		}))
 	};
 
-	return { structure, chapters: chapterMap };
+	full.structure = structure;
+	return { structure, chapters: chapterMap, full };
 }

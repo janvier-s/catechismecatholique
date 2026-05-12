@@ -85,8 +85,9 @@
 		if (p.startsWith('/breviloquium/')) {
 			return true;
 		}
-		// Patristic catecheses (hide on landing)
-		if (p.startsWith('/didache/') || p.startsWith('/discours-catechetique/')) {
+		// Patristic catecheses — single-page reader, sidebar tracks chapters
+		// via scroll-spy, so show on the landing too.
+		if (p === '/didache' || p === '/discours-catechetique') {
 			return true;
 		}
 		// Liturgical calendar year/solennites pages (hide on landing)

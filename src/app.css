@@ -333,7 +333,8 @@
 	font-size: calc(var(--reader-font-size, 17px) - 1px);
 	line-height: 1.55;
 }
-html[data-justified='true'] .prose-paragraph {
+html[data-justified='true'] .prose-paragraph,
+html[data-justified='true'] .reader-prose p {
 	text-align: justify;
 	hyphens: auto;
 }

@@ -112,8 +112,6 @@
 	}
 	.para {
 		margin: 0 0 1rem;
-		text-align: justify;
-		hyphens: auto;
 	}
 	.pager {
 		display: flex;

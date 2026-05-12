@@ -1271,7 +1271,7 @@
 			return patStructure.chapters.map(
 				(c): Item => ({
 					title: c.label,
-					href: `/${corpus}/${c.slug}`,
+					href: `/${corpus}#${c.slug}`,
 					level: 4
 				})
 			);

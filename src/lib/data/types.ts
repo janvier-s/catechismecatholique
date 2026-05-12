@@ -1181,6 +1181,11 @@ export interface PatChapter {
 	next?: { slug: string; label: string };
 }
 
+export interface PatFull {
+	structure: PatStructure;
+	chapters: PatChapter[];
+}
+
 // ─── Breviloquium (Saint Bonaventure, 1257) ────────────────────────────────
 
 export type BrevPartKind = 'prologue' | 'partie' | 'conclusion';

@@ -47,11 +47,12 @@ export function preparePatristique(args: PreparePatristiqueArgs): Record<string,
 			`Patristique ${work.slug}: expected ${expected} chapters, got ${out.structure.totalChapters}`
 		);
 		const outDir = join(args.outDirRoot, work.slug);
-		mkdirSync(join(outDir, 'chapters'), { recursive: true });
+		mkdirSync(outDir, { recursive: true });
+		// Single-page reader loads `full.json` (structure + ordered chapters
+		// with full content) — works are small enough that one fetch is
+		// faster than a 40-shard fan-out.
+		writeFileSync(join(outDir, 'full.json'), JSON.stringify(out.full));
 		writeFileSync(join(outDir, 'structure.json'), JSON.stringify(out.structure));
-		for (const [slug, ch] of Object.entries(out.chapters)) {
-			writeFileSync(join(outDir, 'chapters', `${slug}.json`), JSON.stringify(ch));
-		}
 		endStep(`${out.structure.totalChapters} chapters`);
 		results[work.slug] = out;
 	}
