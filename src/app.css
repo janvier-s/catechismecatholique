@@ -666,12 +666,18 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	.topbar > div {
 		padding: 0 !important;
 		min-height: 0 !important;
-		justify-content: flex-start !important;
+		justify-content: center !important;
 	}
 	/* Wordmark is hidden below 768px on screen. Print emulates a narrow
 	   viewport in some browsers, so force it visible on paper. */
 	.wordmark {
 		display: flex !important;
+	}
+	/* Bump the logo on paper · 56px reads small once the topbar is
+	   stripped of its sticky chrome. */
+	.logo-mark img {
+		width: 72px !important;
+		height: 72px !important;
 	}
 	/* Full-width prose column. */
 	main {
