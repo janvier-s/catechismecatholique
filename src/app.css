@@ -246,7 +246,11 @@
 		background: var(--color-bg);
 		color: var(--color-fg);
 		font-family: var(--font-body);
-		scroll-behavior: smooth;
+		/* Smooth-scroll is intentionally NOT set on <html>. When cross-page
+		   nav restores scroll then SvelteKit jumps to top, smooth makes the
+		   user watch the page scroll up — jarring. Per-action smooth scrolls
+		   (panorama, anchor jumps) opt in via JS where needed. */
+		scroll-behavior: auto;
 		/* Offset anchor scrolls so targets clear the sticky topbar (~80px
 		   desktop, ~58px mobile). 6rem gives comfortable breathing room at
 		   all breakpoints and matches the scroll-mt-24 on headings. */

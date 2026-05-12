@@ -31,7 +31,7 @@
 			</ul>
 		</div>
 		<div class="footer-col">
-			<p class="footer-col-head">Catéchèse</p>
+			<p class="footer-col-head">Catéchèse &amp; doctrine</p>
 			<ul>
 				<li><a href="/didache">La Didachè</a></li>
 				<li><a href="/catecheses-mystagogiques">Catéchèses mystagogiques</a></li>

@@ -493,7 +493,6 @@
 	}
 	.hero-title {
 		font-family: var(--font-heading);
-		font-style: italic;
 		font-weight: 700;
 		font-size: clamp(3rem, 8vw, 5.5rem);
 		line-height: 1;
