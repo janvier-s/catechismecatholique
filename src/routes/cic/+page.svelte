@@ -54,7 +54,7 @@
 	</header>
 
 	<div class="cards">
-		{#each ['1983', '1917'] as const as code (code)}
+		{#each ['1917', '1983'] as const as code (code)}
 			{@const stats = statsFor(code)}
 			<a class="card" href={`/cic/${code}`}>
 				<p class="card-eyebrow">{META[code].eyebrow}</p>

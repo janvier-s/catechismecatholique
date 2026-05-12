@@ -625,11 +625,20 @@
 			grid-template-columns: 1fr;
 		}
 	}
-	/* Five tools in a 2-col grid leaves the last tile (Prières & Formules)
-	   half-width with an empty cell beside it. Span it across both
-	   columns. On mobile (single col) `grid-column: 1 / -1` is a no-op. */
+	/* Five tools in a 2-col grid leave the last tile (Prières & Formules)
+	   alone in row 3. Span the tile full-width and re-grid its inner
+	   layout so the mark + body sit centred horizontally, text-aligned
+	   centre, rather than hard-left in a wide row. */
 	.tools-grid .tool-wrap:last-child {
 		grid-column: 1 / -1;
+	}
+	.tools-grid .tool-wrap:last-child .tool {
+		grid-template-columns: auto auto;
+		justify-content: center;
+		text-align: center;
+	}
+	.tools-grid .tool-wrap:last-child .tool-body {
+		align-items: center;
 	}
 	.tool-wrap {
 		display: flex;
