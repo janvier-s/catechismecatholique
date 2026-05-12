@@ -109,10 +109,19 @@
 		<p class="hero-kicker">Édition française</p>
 		<h1 class="hero-title">Catéchisme de l'Église Catholique</h1>
 		<p class="hero-lede">
-			Promulgué par saint Jean-Paul&nbsp;II en 1992, le Catéchisme expose, en 2&nbsp;865 paragraphes
+			Promulgué par saint Jean-Paul&nbsp;II en 1992, le Catéchisme expose, en 2865 paragraphes
 			organisés en quatre parties, l'ensemble de la foi catholique :<br />
 			ce qu'elle croit, ce qu'elle célèbre, comment elle vit et comment elle prie.
 		</p>
+		<nav class="hero-tools" aria-label="Outils du Catéchisme">
+			<a href="/cec/sommaire">Sommaire complet</a>
+			<span aria-hidden="true">·</span>
+			<a href="/cec/panorama">Panorama</a>
+			<span aria-hidden="true">·</span>
+			<a href="/glossaire">Glossaire</a>
+			<span aria-hidden="true">·</span>
+			<a href="/recherche">Recherche</a>
+		</nav>
 	</header>
 
 	<section class="prologue" aria-labelledby="prologue-title">
@@ -197,6 +206,31 @@
 		line-height: 1.65;
 		color: var(--color-subtle);
 		margin: 0;
+	}
+	.hero-tools {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: baseline;
+		gap: 0.5rem 0.65rem;
+		margin: 1.5rem auto 0;
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+	}
+	.hero-tools a {
+		color: var(--color-accent);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		padding-bottom: 0.1rem;
+		transition: border-color 140ms ease;
+	}
+	.hero-tools a:hover,
+	.hero-tools a:focus-visible {
+		border-bottom-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
 	}
 
 	/* Prologue --------------------------------------------------------- */

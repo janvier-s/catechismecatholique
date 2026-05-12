@@ -74,6 +74,11 @@
 			title: 'Études & outils',
 			links: [
 				{
+					href: '/recherche',
+					label: 'Recherche',
+					description: 'Mot, paragraphe ou référence biblique.'
+				},
+				{
 					href: '/bible',
 					label: 'Concordance biblique',
 					description: 'Chaque verset croisé avec le Catéchisme.'
@@ -184,28 +189,9 @@
 		aria-label="Navigation"
 		transition:fly={{ x: 360, duration: 240, easing: cubicOut }}
 	>
-		<header class="head">
-			<span class="ornament" aria-hidden="true">
-				<span class="rule"></span>
-				<span class="fleuron">✠</span>
-				<span class="rule"></span>
-			</span>
-			<button type="button" class="close-btn" onclick={close} aria-label="Fermer">
-				<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-					<path
-						d="M5 5l14 14M19 5L5 19"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.6"
-						stroke-linecap="round"
-					/>
-				</svg>
-			</button>
-		</header>
-
-		<nav class="body" aria-label="Sections">
+		<nav class="body styled-scroll" aria-label="Sections">
 			{#each groups as group (group.title)}
-				<section class="group">
+				<section class="group" class:group-tools={group.title === 'Études & outils'}>
 					<p class="group-eyebrow">{group.title}</p>
 					<ul class="links">
 						{#each group.links as link (link.href)}
@@ -293,11 +279,13 @@
 		transform: translateY(-6.5px) rotate(-45deg);
 	}
 
-	/* Backdrop sits below the topbar (so it doesn't dim the bar itself). */
+	/* Backdrop sits below the topbar (so it doesn't dim the bar itself).
+	   Always dim toward black so dark themes don't get a *lighter* scrim
+	   from `color-mix` on `--color-fg`. */
 	.backdrop {
 		position: fixed;
 		inset: var(--topbar-height, 80px) 0 0 0;
-		background: color-mix(in srgb, var(--color-fg) 32%, transparent);
+		background: rgba(0, 0, 0, 0.42);
 		backdrop-filter: blur(2px);
 		z-index: calc(var(--z-modal) - 1);
 	}
@@ -328,60 +316,11 @@
 		}
 	}
 
-	.head {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 1rem 1.25rem 0.75rem;
-		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
-	}
-	.ornament {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.55rem;
-		flex: 1;
-		max-width: 220px;
-	}
-	.rule {
-		flex: 1;
-		height: 1px;
-		background: linear-gradient(
-			to right,
-			transparent,
-			color-mix(in srgb, var(--color-fg) 22%, transparent),
-			transparent
-		);
-	}
-	.fleuron {
-		font-family: var(--font-heading);
-		font-size: 0.95rem;
-		color: var(--color-accent);
-		line-height: 1;
-	}
-	.close-btn {
-		flex: 0 0 auto;
-		width: 32px;
-		height: 32px;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		border: 0;
-		background: transparent;
-		color: var(--color-muted);
-		cursor: pointer;
-		border-radius: 6px;
-		transition: color 140ms ease;
-	}
-	.close-btn:hover {
-		color: var(--color-accent);
-	}
-
 	/* Body: scrollable list of grouped links. */
 	.body {
 		flex: 1 1 auto;
 		overflow-y: auto;
-		padding: 0.5rem 0 1rem;
-		scrollbar-width: thin;
+		padding: 1rem 0;
 	}
 	.group + .group {
 		margin-top: 0.5rem;
@@ -436,11 +375,16 @@
 	}
 	.link-label {
 		font-family: var(--font-heading);
-		font-style: italic;
+		font-style: normal;
 		font-size: 1rem;
 		font-weight: 600;
 		line-height: 1.3;
 		text-wrap: balance;
+	}
+	/* Only the "Études & outils" group uses italics — it reads as tool-like,
+	   matches how those entries appear elsewhere on the site. */
+	.group-tools .link-label {
+		font-style: italic;
 	}
 	.link-desc {
 		font-family: var(--font-body);
