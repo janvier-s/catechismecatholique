@@ -98,7 +98,7 @@ async function main() {
 	// commit as a snapshot. Without this, a `prepare-data` run on a machine
 	// missing DIDACHE_SOURCE_DIR wipes the 3000-file concordance and the
 	// build's "using committed snapshot" path has nothing to fall back to.
-	const PRESERVE = new Set(['concordance']);
+	const PRESERVE = new Set(['concordance', 'prieres']);
 	if (existsSync(OUT)) {
 		// Same wipe strategy whether OUT is a symlink (clear target's
 		// contents) or a real dir (here we used to rmSync the whole dir, but
