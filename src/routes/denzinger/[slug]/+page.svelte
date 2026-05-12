@@ -98,7 +98,7 @@
 					<span class="entry-num-value">{entry.n}</span>
 				</a>
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-				<div class="entry-body">{@html renderEntry(entry.html)}</div>
+				<div class="entry-body reader-prose">{@html renderEntry(entry.html)}</div>
 			</article>
 		{/each}
 	</section>
@@ -238,8 +238,6 @@
 	}
 	.entry-body {
 		min-width: 0;
-		font-size: 1rem;
-		line-height: 1.8;
 	}
 	.entry-body :global(p) {
 		margin: 0 0 1em;

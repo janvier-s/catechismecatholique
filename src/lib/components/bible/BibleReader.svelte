@@ -131,7 +131,7 @@
 						>
 							{v.v}
 						</span>
-						<p class="verse-text font-body text-[18px] max-md:text-[15px] leading-[1.7] flex-1">
+						<p class="verse-text font-body flex-1">
 							{v.text}{#if c > 0}<VerseMarker
 									bookSlug={book.slug}
 									bookUsfx={book.usfx}
@@ -166,6 +166,15 @@
 <style>
 	.dim {
 		opacity: 0.35;
+	}
+	.verse-text {
+		font-size: var(--reader-font-size, 17px);
+		line-height: var(--reader-line-height, 1.7);
+	}
+	@media (max-width: 767px) {
+		.verse-text {
+			font-size: calc(var(--reader-font-size, 17px) - 3px);
+		}
 	}
 	.verse-row {
 		transition-duration: 150ms;

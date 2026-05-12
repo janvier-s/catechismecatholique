@@ -58,7 +58,7 @@
 	{/if}
 
 	{#if chapter.kind === 'chapter'}
-		<section class="prose" aria-label="Texte de la leçon">
+		<section class="prose reader-prose" aria-label="Texte de la leçon">
 			{#each chapter.blocks as block (block.n)}
 				<article class="para">
 					<span class="para-num" aria-hidden="true">{block.n}</span>
@@ -94,7 +94,7 @@
 		{/if}
 	{:else}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		<section class="prose flat">{@html frenchPunct(chapter.html)}</section>
+		<section class="prose flat reader-prose">{@html frenchPunct(chapter.html)}</section>
 	{/if}
 
 	<nav class="pager" aria-label="Navigation entre leçons">
@@ -187,8 +187,6 @@
 
 	.prose {
 		font-family: var(--font-body);
-		font-size: 1.05rem;
-		line-height: 1.8;
 	}
 
 	.para {

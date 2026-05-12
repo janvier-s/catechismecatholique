@@ -292,6 +292,8 @@
 	.content-col {
 		flex: 1;
 		min-width: 0;
+		font-size: var(--reader-font-size, 17px);
+		line-height: var(--reader-line-height, 1.6);
 	}
 
 	.pius-question {

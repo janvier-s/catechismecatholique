@@ -326,7 +326,8 @@
    doesn't require re-rendering the paragraph. */
 .prose-paragraph[data-paragraph],
 .compendium-question,
-.compendium-answer {
+.compendium-answer,
+.reader-prose {
 	font-size: var(--reader-font-size, 17px);
 	line-height: var(--reader-line-height, 1.6);
 }

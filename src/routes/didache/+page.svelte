@@ -5,7 +5,7 @@
 	let { data }: { data: PageData } = $props();
 
 	const lede =
-		"Composée à la fin du premier siècle, avant même l'achèvement du Nouveau Testament, la Didachè (« Doctrine des douze Apôtres ») est le plus ancien document catéchétique de l'Église chrétienne. Elle rassemble en seize courts chapitres l'enseignement moral, liturgique et disciplinaire transmis aux premiers fidèles : les deux voies, le baptême, la prière, l'Eucharistie, le ministère et le retour du Seigneur.";
+		"Composée à la fin du 1ᵉʳ siècle, avant même l'achèvement du Nouveau Testament, la Didachè (« Doctrine des douze Apôtres ») est le plus ancien document catéchétique de l'Église chrétienne. Elle rassemble en seize courts chapitres l'enseignement moral, liturgique et disciplinaire transmis aux premiers fidèles : les deux voies, le baptême, la prière, l'Eucharistie, le ministère et le retour du Seigneur.";
 </script>
 
 <PatPage full={data.full} {lede} />
