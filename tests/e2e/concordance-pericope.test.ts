@@ -48,12 +48,15 @@ test.describe('concordance — data-dependent', () => {
 	});
 });
 
-// This test verifies negative behaviour and passes regardless of whether
-// concordance source data is available.
-test('chapters without concordance data: no link, route 404s', async ({ page }) => {
+// Negative behaviour: chapters with no concordance entries don't expose
+// the "Voir la concordance" link on the reader, and the /concordance route
+// renders a friendly "pas disponible" stub (intentionally 200, not 404 —
+// see commit df4dae47).
+test('chapters without concordance data: no link, route renders fallback', async ({ page }) => {
 	await page.goto('/bible/1-chroniques/1');
 	await expect(page.getByRole('link', { name: /Voir la concordance/i })).toHaveCount(0);
 
 	const response = await page.goto('/bible/1-chroniques/1/concordance');
-	expect(response?.status()).toBe(404);
+	expect(response?.status()).toBe(200);
+	await expect(page.getByText(/Aucun croisement avec le Catéchisme/i)).toBeVisible();
 });
