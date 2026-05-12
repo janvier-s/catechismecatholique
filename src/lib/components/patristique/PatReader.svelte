@@ -124,6 +124,21 @@
 		text-align: justify;
 		hyphens: auto;
 	}
+	/* Hemmer/Méridier verse markers (`[N]` in the source) — small accent
+	   superscripts that don't break the line height. `:global` because the
+	   class is set inside `{@html …}` content and would otherwise be
+	   tree-shaken away. */
+	.para :global(sup.verse-num) {
+		display: inline-block;
+		font-family: var(--font-ui);
+		font-size: 0.62em;
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+		color: var(--color-accent);
+		margin-right: 0.25em;
+		vertical-align: 0.45em;
+		line-height: 1;
+	}
 	.pager {
 		display: flex;
 		gap: 1rem;

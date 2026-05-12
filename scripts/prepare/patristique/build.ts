@@ -95,6 +95,10 @@ function cleanInner(html: string): string {
 	h = h.replace(/&nbsp;/g, ' ');
 	h = h.replace(/&#160;/g, ' ');
 	h = h.replace(/\s+/g, ' ').trim();
+	// Convert bracketed verse markers ("[2]", "[3]", …) to small superscript
+	// numbers. These mark the Hemmer/Méridier verse divisions inside each
+	// chapter — rendered as accent-colored superscripts in the reader.
+	h = h.replace(/\[(\d+)\]/g, '<sup class="verse-num">$1</sup>');
 	return h;
 }
 
