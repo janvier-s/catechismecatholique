@@ -30,6 +30,7 @@ import { prepareCompendium } from './prepare/compendium/index.ts';
 import { prepareCdse } from './prepare/cdse/index.ts';
 import { preparePgmr } from './prepare/pgmr/index.ts';
 import { prepareBreviloquium } from './prepare/breviloquium/index.ts';
+import { preparePatristique } from './prepare/patristique/index.ts';
 import { prepareVaticanII } from './prepare/vatican-ii/index.ts';
 import { prepareCic } from './prepare/cic/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
@@ -472,6 +473,15 @@ async function main() {
 		endStep('source not found — using committed snapshot');
 	} else {
 		endStep('source not found — skipped');
+	}
+
+	logStep('building patristic catecheses (Didachè + Discours)');
+	const patSources = join(SOURCES, 'patristique');
+	if (existsSync(patSources)) {
+		preparePatristique({ sourcesDir: patSources, outDirRoot: OUT });
+		endStep('done');
+	} else {
+		endStep('source dir not found — skipped');
 	}
 
 	logStep('building Breviloquium (Saint Bonaventure)');

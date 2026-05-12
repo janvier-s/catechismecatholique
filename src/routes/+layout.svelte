@@ -85,6 +85,10 @@
 		if (p.startsWith('/breviloquium/')) {
 			return true;
 		}
+		// Patristic catecheses (hide on landing)
+		if (p.startsWith('/didache/') || p.startsWith('/discours-catechetique/')) {
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -190,9 +194,13 @@
 														? 'cic'
 														: page.url.pathname.startsWith('/breviloquium')
 															? 'breviloquium'
-															: page.url.pathname.startsWith('/calendrier')
-																? 'calendrier'
-																: 'ccc'}
+															: page.url.pathname.startsWith('/didache')
+																? 'didache'
+																: page.url.pathname.startsWith('/discours-catechetique')
+																	? 'discours-catechetique'
+																	: page.url.pathname.startsWith('/calendrier')
+																		? 'calendrier'
+																		: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

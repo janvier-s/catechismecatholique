@@ -12,6 +12,8 @@ export type Corpus =
 	| 'vatican-ii'
 	| 'cic'
 	| 'breviloquium'
+	| 'didache'
+	| 'discours-catechetique'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -1143,6 +1145,40 @@ export interface CicStructure {
 export interface CicCanonLocator {
 	code: CicCode;
 	livreSlug: string;
+}
+
+// ─── Patristique (Didachè, Discours catéchétique, …) ──────────────────────
+
+export type PatBlock = { kind: 'paragraph'; html: string };
+
+export interface PatChapterRef {
+	slug: string;
+	ordinal: number;
+	roman: string;
+	label: string;
+}
+
+export interface PatStructure {
+	slug: string;
+	title: string;
+	subtitle?: string;
+	author: string;
+	date: string;
+	translator: string;
+	chapters: PatChapterRef[];
+	totalChapters: number;
+}
+
+export interface PatChapter {
+	slug: string;
+	workSlug: string;
+	workTitle: string;
+	ordinal: number;
+	roman: string;
+	label: string;
+	blocks: PatBlock[];
+	prev?: { slug: string; label: string };
+	next?: { slug: string; label: string };
 }
 
 // ─── Breviloquium (Saint Bonaventure, 1257) ────────────────────────────────

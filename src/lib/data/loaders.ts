@@ -48,6 +48,8 @@ import type {
 	CicCode,
 	BrevStructure,
 	BrevChapter,
+	PatStructure,
+	PatChapter,
 	ParagraphThemeRef
 } from './types';
 
@@ -952,6 +954,38 @@ export function loadBreviloquiumChapter(
 			return (await r.json()) as BrevChapter;
 		})();
 		brevChapterCache.set(slug, p);
+	}
+	return p;
+}
+
+// ─── Patristique (Didachè, Discours catéchétique, …) ──────────────────────
+
+const patStructureCache = new Map<string, Promise<PatStructure>>();
+const patChapterCache = new Map<string, Promise<PatChapter | null>>();
+
+export function loadPatStructure(work: string, fetcher: Fetch = fetch): Promise<PatStructure> {
+	let p = patStructureCache.get(work);
+	if (!p) {
+		p = fetchJson<PatStructure>(`/data/${work}/structure.json`, fetcher);
+		patStructureCache.set(work, p);
+	}
+	return p;
+}
+
+export function loadPatChapter(
+	work: string,
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<PatChapter | null> {
+	const key = `${work}/${slug}`;
+	let p = patChapterCache.get(key);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/${work}/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as PatChapter;
+		})();
+		patChapterCache.set(key, p);
 	}
 	return p;
 }

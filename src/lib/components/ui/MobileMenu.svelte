@@ -104,6 +104,8 @@
 		{
 			title: 'Catéchèse & doctrine',
 			links: [
+				{ href: '/didache', label: 'La Didachè' },
+				{ href: '/discours-catechetique', label: 'Discours catéchétique (Grégoire de Nysse)' },
 				{ href: '/breviloquium', label: 'Breviloquium (Bonaventure)' },
 				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique' },
 				{ href: '/doctrine-sociale', label: 'Doctrine sociale' }

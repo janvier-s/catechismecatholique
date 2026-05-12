@@ -26,6 +26,7 @@
 		loadCicStructure,
 		loadCicLivre,
 		loadBreviloquiumStructure,
+		loadPatStructure,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -52,6 +53,7 @@
 		CicStructure,
 		CicLivre,
 		BrevStructure,
+		PatStructure,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -137,6 +139,10 @@
 				return '/cic';
 			case 'breviloquium':
 				return '/breviloquium';
+			case 'didache':
+				return '/didache';
+			case 'discours-catechetique':
+				return '/discours-catechetique';
 			default:
 				return null;
 		}
@@ -357,6 +363,16 @@
 		if (corpus !== 'breviloquium') return;
 		(async () => {
 			brevStructure = await loadBreviloquiumStructure();
+		})();
+	});
+
+	// ─── Patristique state (Didachè, Discours catéchétique) ──────────────────
+	let patStructure: PatStructure | null = $state(null);
+
+	$effect(() => {
+		if (corpus !== 'didache' && corpus !== 'discours-catechetique') return;
+		(async () => {
+			patStructure = await loadPatStructure(corpus);
 		})();
 	});
 
@@ -1249,6 +1265,16 @@
 				});
 			}
 			return items;
+		}
+		if (corpus === 'didache' || corpus === 'discours-catechetique') {
+			if (!patStructure) return [];
+			return patStructure.chapters.map(
+				(c): Item => ({
+					title: c.label,
+					href: `/${corpus}/${c.slug}`,
+					level: 4
+				})
+			);
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

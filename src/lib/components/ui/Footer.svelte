@@ -31,6 +31,8 @@
 		<div class="footer-col">
 			<p class="footer-col-head">Catéchèse & doctrine</p>
 			<ul>
+				<li><a href="/didache">La Didachè</a></li>
+				<li><a href="/discours-catechetique">Discours catéchétique</a></li>
 				<li><a href="/breviloquium">Breviloquium</a></li>
 				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>
 				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>

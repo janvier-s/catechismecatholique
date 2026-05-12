@@ -152,6 +152,18 @@
 			title: 'Catéchèse & doctrine',
 			links: [
 				{
+					href: '/didache',
+					label: 'La Didachè',
+					eyebrow: 'Ier siècle',
+					description: 'Doctrine des douze Apôtres, plus ancien texte catéchétique.'
+				},
+				{
+					href: '/discours-catechetique',
+					label: 'Discours catéchétique',
+					eyebrow: 'IVe siècle',
+					description: 'Grégoire de Nysse, manuel patristique en 40 chapitres.'
+				},
+				{
 					href: '/breviloquium',
 					label: 'Breviloquium',
 					eyebrow: '1257',
