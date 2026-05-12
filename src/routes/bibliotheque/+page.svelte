@@ -193,7 +193,6 @@
 					{#each shelf.works as work, wi (work.slug)}
 						<li class="tool-wrap" style="--card-index: {wi}">
 							<a class="tool" href={work.href}>
-								<span class="tool-mark" aria-hidden="true">✠</span>
 								<span class="tool-body">
 									<h3 class="tool-title">{work.title}</h3>
 									{#if work.subtitle}
@@ -633,7 +632,7 @@
 		grid-column: 1 / -1;
 	}
 	.tools-grid .tool-wrap:last-child .tool {
-		grid-template-columns: auto auto;
+		grid-template-columns: auto;
 		justify-content: center;
 		text-align: center;
 	}
@@ -648,7 +647,7 @@
 	}
 	.tool {
 		display: grid;
-		grid-template-columns: 1.5rem 1fr auto;
+		grid-template-columns: 1fr auto;
 		align-items: start;
 		gap: 0.85rem;
 		width: 100%;
@@ -676,13 +675,6 @@
 		background: color-mix(in srgb, var(--color-accent) 5%, transparent);
 		color: var(--color-accent);
 		outline: none;
-	}
-	.tool-mark {
-		font-family: var(--font-heading);
-		color: var(--color-accent);
-		font-size: 0.95rem;
-		line-height: 1.4;
-		text-align: center;
 	}
 	.tool-body {
 		display: flex;
