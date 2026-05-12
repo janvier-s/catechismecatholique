@@ -605,8 +605,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	#mobile-menu,
 	.hamburger,
 	.cec-pill,
-	button.bible-inline,
-	.page-fade {
+	button.bible-inline {
 		display: none !important;
 	}
 	/* Reset the page-fade keyframe so prose paints immediately. */

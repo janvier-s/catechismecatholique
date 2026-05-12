@@ -78,29 +78,31 @@
 
 <article class="mb-8 ccc-paragraph" class:has-side-refs={sideRefs !== null} id={anchorId}>
 	<div class="paragraph-grid">
-		<div class="number-wrap flex-none w-12 flex items-start justify-end relative">
+		<div class="number-wrap flex-none w-12 flex items-start justify-end">
 			{#if unit.kind === 'ccc-paragraph'}
-				<a
-					href={numberHref}
-					class="number-link"
-					title={`Ouvrir §${unit.data.number} dans sa propre page`}
-					aria-label={`Voir le paragraphe ${unit.data.number} dans une page dédiée`}
-				>
-					<svg class="link-icon" viewBox="0 0 256 256" aria-hidden="true">
-						<path
-							d="M137.54,186.36a8,8,0,0,1,0,11.31l-9.94,10A56,56,0,0,1,48.38,128.4L72.5,104.28A56,56,0,0,1,149.31,102a8,8,0,1,1-10.64,12,40,40,0,0,0-54.85,1.63L59.7,139.72a40,40,0,0,0,56.57,56.56l9.94-9.94A8,8,0,0,1,137.54,186.36Zm70.08-138a56.08,56.08,0,0,0-79.22,0l-9.94,9.95a8,8,0,0,0,11.32,11.31l9.94-9.94a40,40,0,0,1,56.56,56.56L172.16,140.4A40,40,0,0,1,117.31,142,8,8,0,1,0,106.67,154a56,56,0,0,0,76.81-2.26l24.12-24.12A56.08,56.08,0,0,0,207.62,48.38Z"
-						/>
-					</svg>
-				</a>
-				<button
-					type="button"
-					class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
-					onclick={onNumberClick}
-					title={`Ouvrir le panneau d'étude · §${unit.data.number}`}
-					aria-label={`Ouvrir le panneau d'étude pour le paragraphe ${unit.data.number}`}
-				>
-					{unit.data.number}
-				</button>
+				<span class="number-stack">
+					<a
+						href={numberHref}
+						class="number-link"
+						title={`Ouvrir §${unit.data.number} dans sa propre page`}
+						aria-label={`Voir le paragraphe ${unit.data.number} dans une page dédiée`}
+					>
+						<svg class="link-icon" viewBox="0 0 256 256" aria-hidden="true">
+							<path
+								d="M137.54,186.36a8,8,0,0,1,0,11.31l-9.94,10A56,56,0,0,1,48.38,128.4L72.5,104.28A56,56,0,0,1,149.31,102a8,8,0,1,1-10.64,12,40,40,0,0,0-54.85,1.63L59.7,139.72a40,40,0,0,0,56.57,56.56l9.94-9.94A8,8,0,0,1,137.54,186.36Zm70.08-138a56.08,56.08,0,0,0-79.22,0l-9.94,9.95a8,8,0,0,0,11.32,11.31l9.94-9.94a40,40,0,0,1,56.56,56.56L172.16,140.4A40,40,0,0,1,117.31,142,8,8,0,1,0,106.67,154a56,56,0,0,0,76.81-2.26l24.12-24.12A56.08,56.08,0,0,0,207.62,48.38Z"
+							/>
+						</svg>
+					</a>
+					<button
+						type="button"
+						class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
+						onclick={onNumberClick}
+						title={`Ouvrir le panneau d'étude · §${unit.data.number}`}
+						aria-label={`Ouvrir le panneau d'étude pour le paragraphe ${unit.data.number}`}
+					>
+						{unit.data.number}
+					</button>
+				</span>
 			{:else}
 				<a
 					href={numberHref}
@@ -343,19 +345,21 @@
 	}
 
 	/* Link icon: hidden by default, revealed when the number column is hovered.
-	   The anchor is sized to match the button so the two targets sit flush. */
+	   Anchored to the LEFT edge of the visible digit (not the wrap), so the
+	   gap stays constant whether the number is "1" or "2865". */
 	.number-wrap {
 		align-self: flex-start;
 	}
-	.number-col {
+	.number-stack {
+		position: relative;
+		display: inline-block;
 		margin-right: 10px;
 	}
-	/* Hang the permalink icon to the left of the number, outside the column,
-	   so the number aligns flush with the paragraph title. */
 	.number-link {
 		position: absolute;
-		right: calc(100% + 2px);
+		right: 100%;
 		top: 0;
+		margin-right: 4px;
 		opacity: 0;
 		transition: opacity 120ms ease;
 		color: var(--color-muted);
@@ -374,7 +378,6 @@
 		width: 1em;
 		height: 1em;
 		fill: currentColor;
-		margin-right: 4px;
 		margin-top: 2px;
 	}
 </style>
