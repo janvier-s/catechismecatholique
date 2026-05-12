@@ -40,7 +40,7 @@
 			}
 
 			// Group Q numbers by part so we load each part bundle at most once.
-			// Plain objects (not Maps) — these are transient inside the effect
+			// Plain objects (not Maps) · these are transient inside the effect
 			// closure and don't need Svelte reactivity.
 			const numbersByPart: Record<string, number[]> = {};
 			for (const n of qNumbers) {

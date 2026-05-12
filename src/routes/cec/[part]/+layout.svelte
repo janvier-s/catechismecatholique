@@ -17,7 +17,7 @@
 	// see before clicking.
 	setContext('part-panorama', {
 		open: () => (panoramaOpen = true),
-		// Getters so descendants always read the live partie data — without
+		// Getters so descendants always read the live partie data · without
 		// them the value would be captured at first render and go stale
 		// when the user navigates between parties.
 		get partTitle() {

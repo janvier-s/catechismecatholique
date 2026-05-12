@@ -71,7 +71,7 @@
 									{:else if e.seeAlso?.length}
 										{e.seeAlso.length} {e.seeAlso.length > 1 ? 'liens' : 'lien'}
 									{:else}
-										<span aria-hidden="true">—</span>
+										<span aria-hidden="true">·</span>
 									{/if}
 								</span>
 							</a>

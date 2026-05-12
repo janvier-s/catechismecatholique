@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>{status} — {message}</title>
+	<title>{status} · {message}</title>
 </svelte:head>
 
 <main class="error">

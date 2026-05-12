@@ -54,7 +54,7 @@
 	<title>{lesson.title} · La Doctrine Catholique</title>
 	<meta
 		name="description"
-		content={`Leçon ${lesson.n} — ${lesson.title} · La Doctrine catholique, Abbé Boulenger (1927), Tome ${lesson.tome} : ${lesson.tome_title}.`}
+		content={`Leçon ${lesson.n} · ${lesson.title} · La Doctrine catholique, Abbé Boulenger (1927), Tome ${lesson.tome} : ${lesson.tome_title}.`}
 	/>
 </svelte:head>
 
@@ -189,7 +189,7 @@
 		gap: 3rem;
 	}
 
-	/* ── Mini-TOC — clickable lesson outline ────────────────────────────────── */
+	/* ── Mini-TOC · clickable lesson outline ────────────────────────────────── */
 	.mini-toc {
 		max-width: 720px;
 		margin: 0 auto 3rem;
@@ -310,7 +310,7 @@
 		color: inherit;
 	}
 
-	/* ── Section chrome — minimal: eyebrow label + content ─────────────────── */
+	/* ── Section chrome · minimal: eyebrow label + content ─────────────────── */
 	.section {
 		padding: 0;
 	}
@@ -322,15 +322,15 @@
 		letter-spacing: 0.22em;
 		text-transform: uppercase;
 		color: var(--color-accent);
-		/* No border-bottom here — the first h2.dev-roman provides its own rule.
+		/* No border-bottom here · the first h2.dev-roman provides its own rule.
 		   Having both produced a double-rule stacked 1.5rem apart. */
 		padding-bottom: 0;
 		margin-bottom: 1.25rem;
 	}
 
 	/* Each block is its own structural unit (one <p>, one <h2>, one <ol>, …).
-	   Spacing lives on the .block container — the inner elements all carry
-	   margin: 0 — because Tailwind preflight zeroes <p> margins AND we
+	   Spacing lives on the .block container · the inner elements all carry
+	   margin: 0 · because Tailwind preflight zeroes <p> margins AND we
 	   wrap each <p> as the sole child of its .block, which causes a
 	   `:last-child { margin: 0 }` rule to defeat any margin we'd put on <p>.
 	   Moving spacing to the container is robust against that. */
@@ -354,7 +354,7 @@
 		margin-top: 0.4rem;
 	}
 
-	/* ── Roman-heading block — extra space before, tighter space after ─────── */
+	/* ── Roman-heading block · extra space before, tighter space after ─────── */
 	.block-roman-heading {
 		margin-top: 3.75rem;
 		margin-bottom: 1.5rem;
@@ -385,7 +385,7 @@
 		flex-shrink: 0;
 	}
 
-	/* ── Sub-heading block — generous top margin separates sub-sections ─────── */
+	/* ── Sub-heading block · generous top margin separates sub-sections ─────── */
 	.block-sub-heading {
 		margin-top: 2.5rem;
 		margin-bottom: 1.75em;
@@ -414,7 +414,7 @@
 		min-width: 1.6rem;
 	}
 
-	/* ── Conclusion — visually distinct callout ────────────────────────────── */
+	/* ── Conclusion · visually distinct callout ────────────────────────────── */
 	.section-conclusion {
 		padding: 1.25rem 1.5rem;
 		border-radius: 6px;
@@ -423,7 +423,7 @@
 	}
 	.section-conclusion .section-eyebrow {
 		margin-bottom: 1rem;
-		/* Restore a subtle rule inside the callout box — no h2 follows here. */
+		/* Restore a subtle rule inside the callout box · no h2 follows here. */
 		padding-bottom: 0.45rem;
 		border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
 	}
@@ -439,7 +439,7 @@
 		border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 22%, transparent);
 	}
 
-	/* ── Mots / Lectures / Questionnaire / Devoirs — quieter prose ─────────── */
+	/* ── Mots / Lectures / Questionnaire / Devoirs · quieter prose ─────────── */
 	.section-mots .block :global(p),
 	.section-lectures .block :global(p),
 	.section-questionnaire .block :global(p) {

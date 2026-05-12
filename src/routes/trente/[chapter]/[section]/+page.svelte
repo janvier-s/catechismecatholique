@@ -40,7 +40,7 @@
 	<title>{data.section.title} · Catéchisme du Concile de Trente</title>
 	<meta
 		name="description"
-		content={`${data.section.chapter_title} — Section ${data.section.ordinal} : ${data.section.title}. Catéchisme du Concile de Trente.`}
+		content={`${data.section.chapter_title} · Section ${data.section.ordinal} : ${data.section.title}. Catéchisme du Concile de Trente.`}
 	/>
 	{@html breadcrumbJsonLdScript}
 </svelte:head>

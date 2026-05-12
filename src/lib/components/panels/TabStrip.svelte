@@ -23,7 +23,7 @@
 	function nudge(dir: -1 | 1) {
 		if (!scrollEl) return;
 		const delta = dir * Math.round(scrollEl.clientWidth * 0.6);
-		// `scrollBy({ behavior: 'smooth' })` is flaky on iOS Safari — sometimes
+		// `scrollBy({ behavior: 'smooth' })` is flaky on iOS Safari · sometimes
 		// no-ops when triggered from a click handler. Assign scrollLeft
 		// directly as a hard fallback, then schedule a smooth re-snap.
 		const target = scrollEl.scrollLeft + delta;

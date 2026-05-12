@@ -29,7 +29,7 @@
 	<title>{chapter.title} · Compendium de la doctrine sociale</title>
 	<meta
 		name="description"
-		content={`${chapter.partTitle} — ${chapter.title}. Compendium de la doctrine sociale de l'Église (2004).`}
+		content={`${chapter.partTitle} · ${chapter.title}. Compendium de la doctrine sociale de l'Église (2004).`}
 	/>
 </svelte:head>
 

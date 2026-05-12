@@ -174,7 +174,7 @@
 		min-height: 0;
 		overflow: hidden;
 	}
-	/* Thin accent strip across the top edge — quiet wayfinding cue that ties
+	/* Thin accent strip across the top edge · quiet wayfinding cue that ties
 	   the dialog to the site's accent color without shouting. */
 	.panorama-dialog-accent {
 		display: block;

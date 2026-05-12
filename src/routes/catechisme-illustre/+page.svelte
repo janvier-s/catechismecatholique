@@ -9,7 +9,7 @@
 	<title>Catéchisme illustré des vérités nécessaires · Catéchisme</title>
 	<meta
 		name="description"
-		content="Catéchisme illustré des vérités nécessaires, par A.&nbsp;L.&nbsp;R. (Wikisource) — 12 images, 12 leçons : la foi catholique enseignée par l'image et la parole."
+		content="Catéchisme illustré des vérités nécessaires, par A.&nbsp;L.&nbsp;R. (Wikisource) · 12 images, 12 leçons : la foi catholique enseignée par l'image et la parole."
 	/>
 </svelte:head>
 

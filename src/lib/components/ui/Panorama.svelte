@@ -45,7 +45,7 @@
 		active = {}
 	}: { parts: Part[]; headingLevel?: 2 | 3; active?: ActivePath } = $props();
 
-	// Only highlight the deepest level the reader is currently at — so on
+	// Only highlight the deepest level the reader is currently at · so on
 	// /cec/[part] only the part banner lights up, on /cec/[part]/[section]
 	// only the section heading, etc. Avoids the visually-noisy "every
 	// ancestor is highlighted" treatment.
@@ -63,7 +63,7 @@
 
 	const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
-	// Render a paragraph range without the § symbol — just the bare numbers,
+	// Render a paragraph range without the § symbol · just the bare numbers,
 	// e.g. "26 – 49" or "27" for a single paragraph.
 	function fmtRange(r: Range | undefined): string {
 		if (!r) return '';
@@ -76,7 +76,7 @@
 	const ARTICLE_SUBTITLE: Record<string, string> = {
 		'quest-ce-que-la-priere': 'La prière comme don de Dieu'
 	};
-	// "La doxologie finale" closes Part 4 with no article number — render
+	// "La doxologie finale" closes Part 4 with no article number · render
 	// the tag as "Fin" so it reads as a closing capstone.
 	const ARTICLE_TAG_OVERRIDE: Record<string, string> = {
 		'la-doxologie-finale': 'Fin'
@@ -253,7 +253,7 @@
 		color: var(--color-fg);
 	}
 
-	/* Part banner — quiet bottom rule only; prologue gets no rule at all */
+	/* Part banner · quiet bottom rule only; prologue gets no rule at all */
 	.pano-banner {
 		text-align: center;
 		padding: 1.5rem 1rem 1.4rem;
@@ -391,7 +391,7 @@
 	.pano-cell:hover {
 		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
-	/* Active highlights — show readers where they currently are.
+	/* Active highlights · show readers where they currently are.
 	   Each active node gets a "›" chevron to the left of its title so
 	   the cue is glance-able even without the colour shift. */
 	.pano-part.is-active .pano-banner-title,
@@ -533,7 +533,7 @@
 		margin-top: 0.15rem;
 	}
 	/* Flex spacer that pushes the range to the bottom of the cell while
-	   guaranteeing a minimum gap above it — replaces `margin-top: auto`
+	   guaranteeing a minimum gap above it · replaces `margin-top: auto`
 	   on the range, which left single-line cards with the range butted
 	   right under the title. */
 	.pano-cell-spacer {

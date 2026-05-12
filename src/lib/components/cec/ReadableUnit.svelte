@@ -15,7 +15,7 @@
 
 	function onNumberClick(e: MouseEvent) {
 		// Cmd/Ctrl/Shift/middle-click: let the browser handle it (open in new tab,
-		// new window, etc.) — no panel. <button> doesn't navigate by default, but
+		// new window, etc.) · no panel. <button> doesn't navigate by default, but
 		// the guard is kept for symmetry / safety if the handler is reused on an
 		// <a> element.
 		if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
@@ -49,7 +49,7 @@
 	// CCC paragraphs surface cross-refs inline (sup markers in the text) when in
 	// 'inline' mode, so the aside is gated on the 'side' layout preference. The
 	// Compendium answer is plain prose with no inline marker mechanism, so its
-	// refs are always rendered — the aside gracefully falls back to a static
+	// refs are always rendered · the aside gracefully falls back to a static
 	// block below the answer when the user is in 'inline' mode.
 	const sideRefs = $derived.by(() => {
 		if (unit.kind === 'ccc-paragraph') {
@@ -96,7 +96,7 @@
 					type="button"
 					class="number-col font-ui font-semibold text-accent tabular-nums hover:underline"
 					onclick={onNumberClick}
-					title={`Ouvrir le panneau d'étude — §${unit.data.number}`}
+					title={`Ouvrir le panneau d'étude · §${unit.data.number}`}
 					aria-label={`Ouvrir le panneau d'étude pour le paragraphe ${unit.data.number}`}
 				>
 					{unit.data.number}
@@ -226,7 +226,7 @@
 		gap: 0.25rem 0.5rem;
 	}
 	.ccc-side-refs .cross-ref-link {
-		/* Use the lighter accent variant — accent-text is tuned per theme to
+		/* Use the lighter accent variant · accent-text is tuned per theme to
 		   reach AA against the page background, while plain accent is tuned
 		   to be a bg colour with white text. */
 		color: var(--color-accent-text);

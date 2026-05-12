@@ -27,8 +27,8 @@
 	}
 
 	// Denzinger uses no-space Bible abbreviations ("1Co 1,30", "2Tm 2,5",
-	// "1Jn 4,1") that the CCC abbrev list — which expects "1 Co" / "1 Jn"
-	// — doesn't match. Insert the missing space before linkifying.
+	// "1Jn 4,1") that the CCC abbrev list · which expects "1 Co" / "1 Jn"
+	// · doesn't match. Insert the missing space before linkifying.
 	function expandBibleAbbrevs(html: string): string {
 		return html.replace(
 			/(?<![\w/])([1-3])(Co|Cor|R|Rs|Rois|Ch|Chr|S|Sa|Sm|Sam|Tm|Ti|Tim|Th|Thes|P|Pe|Pi|Pierre|Jn|Jean|M|Macc|Mc|Esd|Tb|Es)\b/g,
@@ -48,7 +48,7 @@
 	<title>{unit.title} · Denzinger</title>
 	<meta
 		name="description"
-		content={`${unit.title} — ${unit.entries.length} entrées du Denzinger (DH ${unit.entries[0]?.n}–${unit.entries[unit.entries.length - 1]?.n}).`}
+		content={`${unit.title} · ${unit.entries.length} entrées du Denzinger (DH ${unit.entries[0]?.n}–${unit.entries[unit.entries.length - 1]?.n}).`}
 	/>
 </svelte:head>
 
@@ -208,9 +208,9 @@
 		text-decoration: underline;
 	}
 
-	/* Section h2 — top-level decree/doctrine heading
+	/* Section h2 · top-level decree/doctrine heading
 	   ("Doctrine sur le sacrement de la pénitence", "Décret sur la
-	   justification") — clearly delineates a major sub-division. */
+	   justification") · clearly delineates a major sub-division. */
 	.section-h2 {
 		font-family: var(--font-heading);
 		font-size: 1.45rem;
@@ -225,7 +225,7 @@
 	.section-h2:first-of-type {
 		margin-top: 1rem;
 	}
-	/* Chapter h3 — subdivision under a section ("Chap. 5. Le culte…",
+	/* Chapter h3 · subdivision under a section ("Chap. 5. Le culte…",
 	   "Canons sur le sacrement de baptême"). Quieter than section-h2. */
 	.chapter-h3 {
 		font-family: var(--font-heading);

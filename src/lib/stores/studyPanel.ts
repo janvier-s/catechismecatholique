@@ -21,7 +21,7 @@ export type TrentFootnote = { n: number; text: string };
 // PanelContext is a discriminated union: 'paragraph' contexts come from CCC
 // paragraph clicks (and carry the paragraph number plus an optional bible_refs
 // idx for the Bible tab to scroll to). 'verse' contexts come from clicking a
-// Bible verse marker — only the bible-verse tab is meaningful in that mode.
+// Bible verse marker · only the bible-verse tab is meaningful in that mode.
 // 'trent-paragraph' contexts come from Trent paragraph clicks and carry the
 // footnotes relevant to that paragraph.
 export type PanelContext =

@@ -34,7 +34,7 @@
 			const chapter: Chapter = await loadChapter(context.chapter.slug);
 
 			// Show every en_bref in the article (or chapter, when there's no
-			// active article — chapters like "L'homme est capable de Dieu"
+			// active article · chapters like "L'homme est capable de Dieu"
 			// have headings + en_brefs without article wrappers). Sorted by
 			// proximity to the paragraph that opened the panel so the most
 			// relevant block lands at the top.

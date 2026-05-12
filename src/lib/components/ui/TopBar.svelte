@@ -8,7 +8,7 @@
 	import { page } from '$app/state';
 	import { detectIntent } from '$lib/utils/searchIntent';
 
-	// Hide the global search on /recherche — the page owns its own input there
+	// Hide the global search on /recherche · the page owns its own input there
 	// and we don't want two affordances competing for the same query.
 	const onRecherche = $derived(page.url.pathname === '/recherche');
 
@@ -29,7 +29,7 @@
 		});
 	}
 
-	// Shrink-on-scroll (mobile only — desktop topbar stays as-is). The
+	// Shrink-on-scroll (mobile only · desktop topbar stays as-is). The
 	// .is-condensed class trims the bar height from 58 → 44 px once the user
 	// has scrolled past ~40 px, recovering reading area in long catechism
 	// chapters. CSS handles the transition.
@@ -66,7 +66,7 @@
 			href="/"
 			class="flex items-center gap-3 flex-none"
 			title="Accueil"
-			aria-label="Accueil — Catéchisme de l'Église Catholique"
+			aria-label="Accueil · Catéchisme de l'Église Catholique"
 		>
 			<LogoMark />
 			<Wordmark />
@@ -197,7 +197,7 @@
 				width 200ms cubic-bezier(0.22, 1, 0.36, 1),
 				height 200ms cubic-bezier(0.22, 1, 0.36, 1);
 		}
-		/* Condensed state — shrinks the bar but keeps the logo a clear tap target. */
+		/* Condensed state · shrinks the bar but keeps the logo a clear tap target. */
 		.topbar.is-condensed {
 			--topbar-height: 46px;
 		}
@@ -224,7 +224,7 @@
 		right: 0;
 		z-index: calc(var(--z-modal) + 1);
 	}
-	/* Native placeholder is always hidden — the styled overlay below shows in
+	/* Native placeholder is always hidden · the styled overlay below shows in
 	   its place so we can italicize the keyword example. */
 	.search-input::placeholder {
 		color: transparent;

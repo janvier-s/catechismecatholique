@@ -890,7 +890,7 @@
 		color: var(--color-muted);
 		margin: 0.15rem 0 0;
 	}
-	/* Tool tiles drop to single-column on tablet/below — collapse the
+	/* Tool tiles drop to single-column on tablet/below · collapse the
 	   3-col grid layout (tool-mark · body · …) since the CTA now sits
 	   inside the body. */
 	.tool {

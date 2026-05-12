@@ -73,7 +73,7 @@
 			]}
 		/>
 		<p class="font-ui text-sm uppercase tracking-wider text-muted">
-			Chapitre {section.chapter_number} — Section {section.ordinal}
+			Chapitre {section.chapter_number} · Section {section.ordinal}
 		</p>
 		<h1 class="font-heading text-4xl font-semibold mt-1 text-heading">{section.title}</h1>
 	</header>
@@ -91,7 +91,7 @@
 						onclick={() => onParagraphClick(p)}
 						aria-label={hasNotes
 							? `Ouvrir les notes du paragraphe ${p.number}`
-							: `Paragraphe ${p.number} — aucune note`}
+							: `Paragraphe ${p.number} · aucune note`}
 					>
 						{p.number}
 					</button>

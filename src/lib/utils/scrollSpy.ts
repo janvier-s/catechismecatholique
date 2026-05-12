@@ -9,13 +9,13 @@ import { activeHeading } from '$lib/stores/scrollSpy';
  *   <main use:scrollSpy>...</main>
  *
  * The earlier IntersectionObserver approach only marked a heading active
- * while it was physically intersecting a thin strip below the topbar — once
+ * while it was physically intersecting a thin strip below the topbar · once
  * the heading scrolled past, the active highlight blanked out even though
  * the reader was still inside that section. This implementation instead
  * tracks the most-recently-passed heading: the LAST `h2[id]` / `h3[id]`
  * whose top edge is at or above the activation line. The line sits at
  * roughly the upper third of the viewport so a heading lights up in the
- * sidebar as soon as it scrolls into the comfortable reading band — not
+ * sidebar as soon as it scrolls into the comfortable reading band · not
  * only when it has reached the very top.
  */
 const ACTIVE_OFFSET_RATIO = 0.33;

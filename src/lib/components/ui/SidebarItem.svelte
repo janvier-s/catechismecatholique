@@ -134,7 +134,7 @@
 </li>
 
 <style>
-	/* Children list — nested entries get a modest left indent + a hairline
+	/* Children list · nested entries get a modest left indent + a hairline
 	   gutter rule so the hierarchy is unmistakable but compact. */
 	.children {
 		margin-left: 0.5rem;
@@ -149,7 +149,7 @@
 	.lvl-default {
 		font-size: 13px;
 	}
-	/* Compendium heading levels — match the CCC sidebar register: plain
+	/* Compendium heading levels · match the CCC sidebar register: plain
 	   foreground colour with weight + size variation only. The active row
 	   is the only one that gets the accent background, same as the CCC. */
 	.lvl-2 {
@@ -167,7 +167,7 @@
 		font-weight: 400;
 		color: var(--color-subtle);
 	}
-	/* Kicker is the only spot that uses accent — and only as a muted eyebrow
+	/* Kicker is the only spot that uses accent · and only as a muted eyebrow
 	   above the chapter title, matching how CCC shows "Article 1 :" tags. */
 	.kicker {
 		display: block;
@@ -192,7 +192,7 @@
 		color: rgba(255, 255, 255, 0.85);
 	}
 	/* Slightly darker than the bare accent so white text clears WCAG AA
-	   (4.5:1) — the raw accent in dark/oled themes is too light for white
+	   (4.5:1) · the raw accent in dark/oled themes is too light for white
 	   foreground (Lighthouse measured 4.14:1). */
 	.is-active {
 		background: color-mix(in srgb, var(--color-accent) 85%, black);

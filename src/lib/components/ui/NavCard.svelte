@@ -12,7 +12,7 @@
 	} = $props();
 
 	// Existing callers embed the arrow in the eyebrow string ("← Chapitre précédent",
-	// "Chapitre suivant →"). Strip it — the arrow is now its own rendered column.
+	// "Chapitre suivant →"). Strip it · the arrow is now its own rendered column.
 	const label = $derived(eyebrow.replace(/^←\s*|\s*→$/g, '').trim());
 </script>
 

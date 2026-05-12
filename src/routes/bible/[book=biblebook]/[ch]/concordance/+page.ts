@@ -16,7 +16,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	]);
 	if (!bookData) throw error(404);
 	if (!chapterData) {
-		// Concordance not available for this chapter — render a friendly
+		// Concordance not available for this chapter · render a friendly
 		// "pas disponible" stub instead of 404'ing.
 		return {
 			book,

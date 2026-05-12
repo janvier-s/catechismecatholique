@@ -66,7 +66,7 @@ async function fetchJson<T>(url: string, fetcher: Fetch): Promise<T> {
 
 // Module-level promise cache for the verse index: the page load fills the
 // cache, and TabBibleVerse hits the same promise instead of re-fetching.
-// Safe at module scope — the file is static for the server's lifetime, and
+// Safe at module scope · the file is static for the server's lifetime, and
 // SvelteKit's Cloudflare adapter discards modules between requests anyway.
 let bibleVerseIndexPromise: Promise<BibleVerseIndex> | null = null;
 
@@ -130,7 +130,7 @@ export function loadAbbreviations(fetcher: Fetch = fetch): Promise<AbbreviationM
 	return fetchJson<AbbreviationMap>('/data/cec/abbreviations.json', fetcher);
 }
 
-// Per-paragraph context shard — used by paragraph and search routes so the
+// Per-paragraph context shard · used by paragraph and search routes so the
 // SSR payload doesn't inline the entire 1.8 MB bundle. Returns null on 404
 // (out-of-range numbers) instead of throwing so callers can degrade gracefully.
 const paragraphContextCache = new Map<number, Promise<ParagraphContext | null>>();
@@ -300,7 +300,7 @@ export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBo
 	let p = nclBookCache.get(usfx);
 	if (!p) {
 		p = (async () => {
-			// Manifest is the fast path — when it's reachable, gates speculative
+			// Manifest is the fast path · when it's reachable, gates speculative
 			// 404s on missing books. When the deploy or dev server hasn't served
 			// it yet, fall through and try the shard directly: a missing manifest
 			// shouldn't make every Bible chapter 404.
@@ -984,7 +984,7 @@ export function loadPatFull(work: string, fetcher: Fetch = fetch): Promise<PatFu
 	return p;
 }
 
-// Suppress unused-import warning — PatChapter is re-exported via types but
+// Suppress unused-import warning · PatChapter is re-exported via types but
 // not consumed here directly after the loader simplification.
 export type _PatChapterLoaderTypeHint = PatChapter;
 

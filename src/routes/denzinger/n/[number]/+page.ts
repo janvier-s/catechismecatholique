@@ -4,7 +4,7 @@ import type { PageLoad } from './$types';
 
 // Worker-served redirect: 2851 entries pushed the prerender output past
 // Cloudflare Pages' 20 000-file cap. The Worker resolves the slug per
-// request — tiny payload, fine for low-traffic deep links.
+// request · tiny payload, fine for low-traffic deep links.
 export const prerender = false;
 
 export const load: PageLoad = async ({ params, fetch }) => {

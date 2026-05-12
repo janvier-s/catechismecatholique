@@ -21,7 +21,7 @@
 			key: 'b',
 			title: 'Année B',
 			evangelist: 'saint Marc',
-			lede: "L'Évangile de saint Marc — le plus ancien et le plus dépouillé — est lu chaque dimanche, complété par saint Jean au temps pascal."
+			lede: "L'Évangile de saint Marc · le plus ancien et le plus dépouillé · est lu chaque dimanche, complété par saint Jean au temps pascal."
 		},
 		{
 			key: 'c',
@@ -74,7 +74,7 @@
 			<h2 class="fixed-title">Les grandes solennités du calendrier</h2>
 			<p class="fixed-lede">
 				Saint Joseph, saint Pierre et saint Paul, l'Assomption, la Toussaint, l'Immaculée Conception
-				— les solennités principales avec leurs paragraphes du Catéchisme.
+				· les solennités principales avec leurs paragraphes du Catéchisme.
 			</p>
 			<ul class="fixed-list">
 				{#each data.index.fixed_feasts as f (f.slug)}

@@ -45,7 +45,7 @@
 	// When the panel is open and the user navigates to a paragraph route
 	// (/cec/{n} or /cec/{n}-{m}), update the panel's context to follow.
 	// Read the URL reactively, but pull store state with `get` so this effect
-	// only re-runs on URL changes — otherwise updating the store inside this
+	// only re-runs on URL changes · otherwise updating the store inside this
 	// effect would loop and clobber explicit context changes from elsewhere.
 	$effect(() => {
 		const path = page.url.pathname;

@@ -23,7 +23,7 @@ interface SearchResultDoc {
 }
 
 // œ expands to 'oe' at index time, but a user who types the modern French
-// spelling (e.g. 'ecumenique') gets 'ecumenique' from processTerm — no match.
+// spelling (e.g. 'ecumenique') gets 'ecumenique' from processTerm · no match.
 // Map the e-only form → canonical oe-form before handing off to MiniSearch.
 const OE_ALIASES: Record<string, string> = {
 	ecumenique: 'oecumenique',
@@ -149,7 +149,7 @@ function applyPhraseBoost<T extends Record<string, unknown>>(results: T[], token
 }
 
 // Trim each hit's text to a window centered on the first matching token. The
-// client renders a 220-char snippet via bestSnippet — anything beyond that is
+// client renders a 220-char snippet via bestSnippet · anything beyond that is
 // wasted bytes and inflates the response (worst case ~150 KB from a 2-char
 // query). Window: up to MAX chars, biased to start at first match minus PRE.
 // Falls back to leading text when no match is found within scan budget.
@@ -222,7 +222,7 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 	if (q.length < 2) return json({ q, hits: [] });
 
 	// Reject queries that consist of nothing but stop words ("le", "le est",
-	// etc.) — they'd match nearly every paragraph and aren't meaningful.
+	// etc.) · they'd match nearly every paragraph and aren't meaningful.
 	// Stop words inside a multi-word query are kept (e.g. "image de Dieu"
 	// stays as written).
 	const tokens = searchTokenizer(q);
@@ -230,7 +230,7 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 		return json({ q, hits: [] });
 	}
 
-	// Content tokens (non-stop) drive the OR fallback and suggestions — a
+	// Content tokens (non-stop) drive the OR fallback and suggestions · a
 	// paragraph matching only "de" is never useful. AND search keeps the stop
 	// words: for "pain de vie" we want pain AND de AND vie as a hard filter,
 	// then the phrase boost surfaces the literal "pain de vie" matches first.
@@ -245,13 +245,13 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 	const orQ = contentTokens.map((t) => OE_ALIASES[t] ?? t).join(' ');
 	// AND combination: every token must match. With OR (MiniSearch's default),
 	// a query like "image de Dieu" matched any paragraph containing just
-	// "Dieu" — irrelevant for a corpus where that word appears everywhere.
+	// "Dieu" · irrelevant for a corpus where that word appears everywhere.
 	// Restrict prefix expansion to tokens of length ≥ 4 so common short French
 	// words don't pull in unintended matches.
 	// Fuzzy is disabled: with the catechism's curated French vocabulary, even
 	// 1-edit fuzzy matches are too aggressive (e.g. `maitre`→`naitre`).
 	// Field weights: `text` carries the actual content (paragraph body, or
-	// heading line). `title` only carries the chapter title — that's ambient
+	// heading line). `title` only carries the chapter title · that's ambient
 	// context, not what the document is about. Without this skew, every
 	// heading inside a chapter whose title contains the query gets a free
 	// boost, which is how off-topic section titles surfaced ahead of the
@@ -262,17 +262,17 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 		boost: { text: 2, title: 0.3 }
 	};
 	// Try strict AND first (every token must match). If nothing comes back,
-	// fall back to OR — a query like "n'ai pas peur" stays useful when only
+	// fall back to OR · a query like "n'ai pas peur" stays useful when only
 	// "peur" actually occurs in the corpus.
 	let raw = ms.search(andQ, { ...searchOpts, combineWith: 'AND' });
 	let mode: 'and' | 'or' = 'and';
 	if (raw.length === 0 && tokens.length > 1) {
-		// Drop AND to OR — and drop stop words too, so we don't surface
+		// Drop AND to OR · and drop stop words too, so we don't surface
 		// paragraphs that only match "de" / "le" / "pas".
 		raw = ms.search(orQ, { ...searchOpts, combineWith: 'OR' });
 		mode = 'or';
 	}
-	// Cap server-side at 200 — enough to support a few "Voir plus" pages
+	// Cap server-side at 200 · enough to support a few "Voir plus" pages
 	// without overwhelming the client. The page paginates the visible slice.
 	// Pipeline: BM25 → position boost → phrase boost. Position runs before
 	// phrase so within each phrase-or-not group, results are still ordered by

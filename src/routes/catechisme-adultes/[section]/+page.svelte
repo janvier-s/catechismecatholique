@@ -13,7 +13,7 @@
 	<title>{section.title} · Catéchisme pour Adultes</title>
 	<meta
 		name="description"
-		content={`Section ${section.ordinal} — ${section.title}. Catéchisme pour Adultes des Évêques de France (1991).`}
+		content={`Section ${section.ordinal} · ${section.title}. Catéchisme pour Adultes des Évêques de France (1991).`}
 	/>
 </svelte:head>
 

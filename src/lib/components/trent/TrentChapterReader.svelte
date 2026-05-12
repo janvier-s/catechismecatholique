@@ -109,7 +109,7 @@
 								onclick={() => onParagraphClick(p, section.footnotes)}
 								aria-label={hasNotes
 									? `Ouvrir les notes du paragraphe ${p.number}`
-									: `Paragraphe ${p.number} — aucune note`}
+									: `Paragraphe ${p.number} · aucune note`}
 							>
 								{p.number}
 							</button>

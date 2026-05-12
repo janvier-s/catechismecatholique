@@ -25,7 +25,7 @@
 
 	// $derived so the maps recompute when the user navigates to a different
 	// chapter (the component instance is reused with new `chapter` props).
-	// IIFEs only ran once at mount and left these stale — manifested as the
+	// IIFEs only ran once at mount and left these stale · manifested as the
 	// chapter's headings + article anchors disappearing on every nav.
 	const insertionsByParagraph = $derived.by(() => {
 		const map = new SvelteMap<number, Insertion[]>();
@@ -97,7 +97,7 @@
 						id={ins.article.slug}
 						class="font-heading text-3xl font-semibold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
 					>
-						{ins.article.number ? `Article ${ins.article.number} — ` : ''}{ins.article.title}
+						{ins.article.number ? `Article ${ins.article.number} · ` : ''}{ins.article.title}
 					</h2>
 				{:else if ins.kind === 'paragraphe'}
 					<h3

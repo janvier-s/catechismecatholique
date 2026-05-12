@@ -5,21 +5,21 @@
 	// Bibliothèque shelf it lives on. Returning null means the back-link
 	// should not render on this route.
 	const SHELF_BY_PREFIX: Array<[RegExp, string]> = [
-		// Shelf I — catechisms
+		// Shelf I · catechisms
 		[/^\/compendium(\/|$)/, 'I'],
 		[/^\/trente(\/|$)/, 'I'],
 		[/^\/petit-catechisme(\/|$)/, 'I'],
 		[/^\/grand-catechisme(\/|$)/, 'I'],
 		[/^\/catechisme-adultes(\/|$)/, 'I'],
 		[/^\/catechisme-illustre(\/|$)/, 'I'],
-		// Shelf II — patristic & doctrinal syntheses
+		// Shelf II · patristic & doctrinal syntheses
 		[/^\/didache(\/|$)/, 'II'],
 		[/^\/catecheses-mystagogiques(\/|$)/, 'II'],
 		[/^\/discours-catechetique(\/|$)/, 'II'],
 		[/^\/breviloquium(\/|$)/, 'II'],
 		[/^\/doctrine-catholique(\/|$)/, 'II'],
 		[/^\/doctrine-sociale(\/|$)/, 'II'],
-		// Shelf III — magisterium
+		// Shelf III · magisterium
 		[/^\/vatican-ii(\/|$)/, 'III'],
 		[/^\/denzinger(\/|$)/, 'III'],
 		[/^\/cic(\/|$)/, 'III'],

@@ -53,21 +53,21 @@
 		const inlineAsMarkers = $prefs.inlineAsMarkers;
 		const sideRefs = $prefs.crossRefsLayout === 'side' && !inPanel;
 		// Reset to the source HTML each pass so transformations are idempotent
-		// — toggling a pref re-applies the right rules from scratch instead of
+		// · toggling a pref re-applies the right rules from scratch instead of
 		// compounding on already-mutated DOM (which would corrupt the markup
 		// the second time the effect runs).
 		// eslint-disable-next-line svelte/no-dom-manipulating
 		containerEl.innerHTML = html;
 		void bibleRefs;
 
-		// Plain Map is fine here — refsByIdx is local to this $effect, never reactive.
+		// Plain Map is fine here · refsByIdx is local to this $effect, never reactive.
 		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const refsByIdx = new Map<string, MagisterialRefRecord>();
 		for (const r of bibleRefs) {
 			if (r.idx !== undefined && r.idx !== null) refsByIdx.set(String(r.idx), r);
 		}
 
-		// Pass 0: bibRef anchors — these appear in some paragraphs as
+		// Pass 0: bibRef anchors · these appear in some paragraphs as
 		// <a class="bibRef">Sg 13:5</a> directly in the prose, with no href or
 		// data attributes set by the data pipeline. Resolve the URL here so
 		// they navigate correctly and pick up the hover tooltip.
@@ -165,7 +165,7 @@
 				}
 			}
 			// All sup.srcRef variants (cccRef / bibleRef / docRef) are clickable.
-			// Tag them as buttons for AT and accept Enter/Space — actual click
+			// Tag them as buttons for AT and accept Enter/Space · actual click
 			// dispatch is handled by the container delegate further below.
 			sup.setAttribute('tabindex', '0');
 			sup.setAttribute('role', 'button');
@@ -187,7 +187,7 @@
 		// For inline bible-ref buttons we also pull any IMMEDIATELY-following
 		// punctuation (period, comma, etc.) into the wrap. Otherwise the
 		// browser may break between the inline-block button and the trailing
-		// "." — leaving a period orphaned at the start of the next line.
+		// "." · leaving a period orphaned at the start of the next line.
 		// (Buttons are always atomic inline-block per UA stylesheet, so a CSS
 		// `display: inline` override is ineffective in practice.)
 		const markers = containerEl.querySelectorAll<HTMLElement>('sup.srcRef, button.bible-inline');
@@ -223,7 +223,7 @@
 			marker.parentNode!.insertBefore(wrap, marker);
 			wrap.appendChild(marker);
 			// Glue trailing punctuation to inline bible refs. The next sibling
-			// is a text node like ". La plus grave..." — peel the leading
+			// is a text node like ". La plus grave..." · peel the leading
 			// punctuation run into the wrap so the period can't break to its
 			// own line. Buttons render as atomic inline-block per UA stylesheet
 			// (CSS display: inline doesn't actually take effect on <button>),
@@ -241,7 +241,7 @@
 			}
 		}
 
-		// Click handler — DR study-mode pattern: clicking ANY marker on a
+		// Click handler · DR study-mode pattern: clicking ANY marker on a
 		// paragraph opens the panel for that paragraph (not for the marker's
 		// target). The marker class picks the tab.
 		// - inline bible ref button → Bible tab

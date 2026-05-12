@@ -10,7 +10,7 @@
 	);
 
 	// Prev/next paragraph navigation. For ranges, prev steps back from the
-	// first paragraph and next steps forward from the last — so navigation
+	// first paragraph and next steps forward from the last · so navigation
 	// keeps moving linearly through the catechism. Not shown for multi views.
 	const prevNum = $derived(
 		data.kind === 'paragraph'
@@ -101,7 +101,7 @@
 			content="Paragraphes {data.from}–{data.to} du Catéchisme de l'Église Catholique."
 		/>
 	{:else}
-		<title>{data.numbers.length} paragraphes — Catéchisme de l'Église Catholique</title>
+		<title>{data.numbers.length} paragraphes · Catéchisme de l'Église Catholique</title>
 		<meta
 			name="description"
 			content="Sélection de {data.numbers.length} paragraphes du Catéchisme de l'Église Catholique."

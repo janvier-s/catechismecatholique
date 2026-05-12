@@ -99,7 +99,7 @@
 	<div class="missal-body">
 		{#each data.part.flow as node, i (i)}
 			{#if node.kind === 'heading'}
-				<!-- Section heading — both levels render the same here (all are h2) -->
+				<!-- Section heading · both levels render the same here (all are h2) -->
 				<div class="section-head" id={node.id}>
 					<div class="section-rule" aria-hidden="true">
 						<span class="section-rule-line"></span>
@@ -137,7 +137,7 @@
 					</div>
 				</article>
 			{:else if node.kind === 'prose'}
-				<!-- Doctrine formula block — monolingual, typographically careful -->
+				<!-- Doctrine formula block · monolingual, typographically careful -->
 				<div
 					class="doctrine-block"
 					class:doctrine-heading={node.html.startsWith('<span style="font-weight: bold;')}
@@ -305,11 +305,11 @@
 	}
 
 	/* ─────────────────────────────────────────────────────────────────
-	   Prayer pairs — bilingual side-by-side
+	   Prayer pairs · bilingual side-by-side
 	──────────────────────────────────────────────────────────────────── */
 	.prayer-pair {
 		display: grid;
-		/* 10fr | 1px separator | 10fr — equal columns */
+		/* 10fr | 1px separator | 10fr · equal columns */
 		grid-template-columns: 10fr 1px 10fr;
 		column-gap: var(--col-gap);
 		align-items: start;
@@ -421,13 +421,13 @@
 		color: var(--color-fg);
 	}
 
-	/* Bold-cap blocks are subheadings — add breathing room above */
+	/* Bold-cap blocks are subheadings · add breathing room above */
 	.doctrine-heading {
 		margin-top: calc(var(--rh) * 1.75);
 		margin-bottom: calc(var(--rh) * 0.1);
 	}
 
-	/* The raw HTML uses inline <span> + <b> for structure — normalise */
+	/* The raw HTML uses inline <span> + <b> for structure · normalise */
 	:global(.doctrine-html b),
 	:global(.doctrine-html strong) {
 		font-weight: 700;
@@ -458,7 +458,7 @@
 	}
 
 	/* ─────────────────────────────────────────────────────────────────
-	   Responsive — stack columns below 700px
+	   Responsive · stack columns below 700px
 	──────────────────────────────────────────────────────────────────── */
 	@media (max-width: 699px) {
 		.prayer-pair {
@@ -487,7 +487,7 @@
 			margin-top: calc(var(--rh) * 0.75);
 		}
 
-		/* Suppress the title-spacer on mobile — no alignment needed */
+		/* Suppress the title-spacer on mobile · no alignment needed */
 		.prayer-title-spacer {
 			display: none;
 		}

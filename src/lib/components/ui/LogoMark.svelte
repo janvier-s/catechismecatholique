@@ -29,7 +29,7 @@
 		width: 100%;
 		height: 100%;
 	}
-	/* Default mark size — desktop 56 px, mobile 38 px. The shrink-on-scroll
+	/* Default mark size · desktop 56 px, mobile 38 px. The shrink-on-scroll
 	   topbar overrides this to 30 px when condensed. */
 	.logo-mark {
 		width: 38px;

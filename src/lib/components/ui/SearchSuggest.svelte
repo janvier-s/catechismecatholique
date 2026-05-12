@@ -16,7 +16,7 @@
 		onSelect?: (href: string) => void;
 	} = $props();
 
-	// Module-level cache — fetched at most once per page load.
+	// Module-level cache · fetched at most once per page load.
 	let allEntries: HeadingEntry[] | null = null;
 	let loadPromise: Promise<HeadingEntry[]> | null = null;
 

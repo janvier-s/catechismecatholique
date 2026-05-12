@@ -400,7 +400,7 @@
 		line-height: 1.3;
 		text-wrap: balance;
 	}
-	/* Only the "Études & outils" group uses italics — it reads as tool-like,
+	/* Only the "Études & outils" group uses italics · it reads as tool-like,
 	   matches how those entries appear elsewhere on the site. Italics
 	   carry no extra weight; otherwise they read as shouty. */
 	/* Hide mobile-only groups (e.g. Lecture: CCC + Bible) on md+ where

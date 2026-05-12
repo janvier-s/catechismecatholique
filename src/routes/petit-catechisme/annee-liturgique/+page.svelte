@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-	<title>{appendix.title} — Petit Catéchisme</title>
+	<title>{appendix.title} · Petit Catéchisme</title>
 	<meta
 		name="description"
 		content="L’année liturgique et la discipline ecclésiastique : fêtes, jours d’abstinence, jeûne, indulgences, en appendice au Petit Catéchisme de saint Pie X."
@@ -380,7 +380,7 @@
 		font-weight: 600;
 	}
 
-	/* Bullet list — indented to nest visually under the preceding numbered
+	/* Bullet list · indented to nest visually under the preceding numbered
 	   paragraph (whose body sits ~3rem in from the section's left edge). */
 	.al-ul {
 		list-style: none;

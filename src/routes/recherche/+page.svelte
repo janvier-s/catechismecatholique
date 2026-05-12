@@ -39,12 +39,12 @@
 	let suggestEl: SearchSuggest | undefined = $state();
 	let suggestOpen = $state(false);
 
-	// Pagination — show in batches of PAGE_SIZE; "Voir plus" reveals the next
+	// Pagination · show in batches of PAGE_SIZE; "Voir plus" reveals the next
 	// batch. Reset whenever the query changes.
 	const PAGE_SIZE = 30;
 	let visiblePages = $state(1);
 
-	// Active filter tab — Tout / Sections / Paragraphes / Compendium. URL state is canonical.
+	// Active filter tab · Tout / Sections / Paragraphes / Compendium. URL state is canonical.
 	const activeType = $derived<'all' | 'headings' | 'paragraphs' | 'compendium' | 'cdse'>(
 		(page.url.searchParams.get('type') as
 			| 'all'
@@ -59,7 +59,7 @@
 		// Keep input in sync with the URL when the user navigates via links/back.
 		q = data.q ?? '';
 		visiblePages = 1;
-		// Capture EVERY query that lands on this page into recents — covers
+		// Capture EVERY query that lands on this page into recents · covers
 		// header-bar submissions and clicked example links the same way as
 		// the local form's submit handler.
 		if (data.q && data.q.trim().length >= 2) pushRecent(data.q.trim());
@@ -89,7 +89,7 @@
 		try {
 			localStorage.setItem(RECENT_KEY, JSON.stringify(next));
 		} catch {
-			/* quota or disabled — silent */
+			/* quota or disabled · silent */
 		}
 	}
 	function clearRecents() {
@@ -105,7 +105,7 @@
 
 	onMount(() => {
 		recents = readRecents();
-		// Auto-focus when there's no active query — the empty state expects input.
+		// Auto-focus when there's no active query · the empty state expects input.
 		if (!data.q && inputEl) inputEl.focus();
 	});
 
@@ -118,7 +118,7 @@
 		suggestOpen = false;
 		const trimmed = q.trim();
 		if (!trimmed) return;
-		// Honor intent detection on the client too — the page load will redirect
+		// Honor intent detection on the client too · the page load will redirect
 		// for paragraph/bible kinds, but routing client-side first avoids a
 		// pointless intermediate render of the search results page.
 		const intent = detectIntent(trimmed);
@@ -237,7 +237,7 @@
 		if (!num) return null;
 		const ctx = contexts[num];
 		if (!ctx) return null;
-		// Some paragraphs (e.g. prologue) only carry part + heading — no
+		// Some paragraphs (e.g. prologue) only carry part + heading · no
 		// section/chapter. Fall back to whatever titles exist so every row gets
 		// at least a part-level breadcrumb instead of a blank line.
 		const parts: string[] = [];
@@ -271,7 +271,7 @@
 	const hasMore = $derived(visibleHits.length < filteredHits.length);
 
 	function tabHref(type: 'all' | 'headings' | 'paragraphs' | 'compendium' | 'cdse'): string {
-		// Plain string assembly — URLSearchParams would trigger
+		// Plain string assembly · URLSearchParams would trigger
 		// svelte/prefer-svelte-reactivity, but this is a one-shot pure
 		// builder with no reactivity needed.
 		const parts: string[] = [];
@@ -292,7 +292,7 @@
 
 	// TODO(deferred): client-side "did you mean" suggestions on zero-results.
 	// Requires loading the index dictionary client-side or shipping a small
-	// Levenshtein-1 lookup table. Skipped for this pass — see design spec.
+	// Levenshtein-1 lookup table. Skipped for this pass · see design spec.
 </script>
 
 <svelte:head>
@@ -355,7 +355,7 @@
 	</header>
 
 	{#if !data.q}
-		<!-- Empty state — recents (if any), then suggestion examples, then browse -->
+		<!-- Empty state · recents (if any), then suggestion examples, then browse -->
 		<section class="mt-12 max-w-[640px] mx-auto" aria-label="Suggestions">
 			{#if recents.length > 0}
 				<div class="mb-10">
@@ -641,7 +641,7 @@
 	.search-input::placeholder {
 		color: transparent;
 	}
-	/* Hide the native browser search clear icon — we provide our own. */
+	/* Hide the native browser search clear icon · we provide our own. */
 	.search-input::-webkit-search-cancel-button {
 		-webkit-appearance: none;
 		display: none;
@@ -851,9 +851,9 @@
 		gap: 0.6rem;
 		padding: 3px 0;
 	}
-	/* Editorial em-dash bullet — matches the hairline list register elsewhere. */
+	/* Editorial em-dash bullet · matches the hairline list register elsewhere. */
 	.recent-list li::before {
-		content: '—';
+		content: '·';
 		color: var(--color-muted);
 		flex: none;
 	}
@@ -877,7 +877,7 @@
 		border-bottom-color: var(--color-accent-text);
 	}
 
-	/* Highlights — keep the 20% accent tint, drop the bold weight that made
+	/* Highlights · keep the 20% accent tint, drop the bold weight that made
 	   results-heavy pages feel jittery. */
 	:global(.search-highlight) {
 		background: color-mix(in srgb, var(--color-accent) 20%, transparent);

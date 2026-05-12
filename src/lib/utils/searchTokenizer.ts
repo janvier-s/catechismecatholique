@@ -33,7 +33,7 @@ export function processTerm(term: string): string | null {
 	return t;
 }
 
-// Common French stop words. Used at query time only — paragraphs are still
+// Common French stop words. Used at query time only · paragraphs are still
 // indexed in full so phrase queries like "le Père" can find the literal
 // match. The set is the diacritic-stripped/lowercased form (matching what
 // `processTerm` produces) so membership checks line up with the tokenizer

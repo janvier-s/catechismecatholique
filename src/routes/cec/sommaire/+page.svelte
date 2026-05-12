@@ -326,7 +326,7 @@
 </main>
 
 <style>
-	/* Spacing rhythm — every vertical gap is a multiple of --rh. */
+	/* Spacing rhythm · every vertical gap is a multiple of --rh. */
 	.toc {
 		--rh: 1.5rem;
 		--rail: color-mix(in srgb, var(--color-accent) 35%, transparent);
@@ -506,7 +506,7 @@
 		background-size: 100% 1px;
 	}
 
-	/* Prologue: smaller, simpler — no eyebrow, smaller title, sits as a quiet
+	/* Prologue: smaller, simpler · no eyebrow, smaller title, sits as a quiet
 	   opener above the four parts. Negative margin compensates for the flex
 	   gap on .parts so the prologue tucks closer to Partie I. */
 	.part.is-prologue {
@@ -771,7 +771,7 @@
 			flex-wrap: nowrap;
 			align-items: baseline;
 		}
-		/* Dot leaders look cramped on narrow screens — drop them. The range
+		/* Dot leaders look cramped on narrow screens · drop them. The range
 		   moves to the LEFT of the row in a fixed-width column so all entries
 		   line up vertically (e.g. 26-49 / 50-141 / 142-184), then the title
 		   flows next to it. */

@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-	<title>{appendix.title} — Petit Catéchisme</title>
+	<title>{appendix.title} · Petit Catéchisme</title>
 	<meta
 		name="description"
 		content="Très bref résumé de l’histoire de la Révélation divine, en appendice au Petit Catéchisme de saint Pie X."

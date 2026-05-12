@@ -87,12 +87,12 @@
 		if (p.startsWith('/breviloquium/')) {
 			return true;
 		}
-		// Patristic catecheses — single-page reader, sidebar tracks chapters
+		// Patristic catecheses · single-page reader, sidebar tracks chapters
 		// via scroll-spy, so show on the landing too.
 		if (p === '/didache' || p === '/discours-catechetique' || p === '/catecheses-mystagogiques') {
 			return true;
 		}
-		// Catéchisme pour Adultes — chapter reader (hide on landing index).
+		// Catéchisme pour Adultes · chapter reader (hide on landing index).
 		if (p.startsWith('/catechisme-adultes/')) {
 			return true;
 		}
@@ -230,7 +230,7 @@
 <BibleRefTooltip />
 
 <style>
-	/* Visible only when focused — first-Tab affordance for keyboard / AT users
+	/* Visible only when focused · first-Tab affordance for keyboard / AT users
 	   to bypass the topbar on every page (WCAG 2.4.1 Bypass Blocks). */
 	.skip-link {
 		position: absolute;

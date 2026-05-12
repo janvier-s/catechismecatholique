@@ -7,7 +7,7 @@
 
 	// The daily paragraph is a teaser, not the reader. Strip the inline sup
 	// markers (cccRef/bibleRef/docRef) so the prose reads as flowing text
-	// and remains plain, selectable HTML — no interactive buttons.
+	// and remains plain, selectable HTML · no interactive buttons.
 	// Whitespace cleanup only collapses orphan space before clinging
 	// sentence punctuation (`,.)`); guillemets and high punctuation are
 	// re-spaced by frenchPunct (which re-inserts a NBSP).
@@ -73,7 +73,7 @@
 	<meta property="og:image:height" content="630" />
 	<meta
 		property="og:image:alt"
-		content="Catéchisme de l'Église Catholique — Édition française définitive"
+		content="Catéchisme de l'Église Catholique · Édition française définitive"
 	/>
 	{@html jsonLdScript}
 </svelte:head>
@@ -358,7 +358,7 @@
 		display: inline;
 	}
 
-	/* Founding quotation — quiet epigraph with a small inked signature.
+	/* Founding quotation · quiet epigraph with a small inked signature.
 	   Sits between the daily paragraph and the nav row. */
 	.founding-quote {
 		max-width: 38rem;
@@ -409,7 +409,7 @@
 		color: var(--color-accent);
 	}
 
-	/* Primary CTA — accent-coloured pill that takes the visual focus
+	/* Primary CTA · accent-coloured pill that takes the visual focus
 	   previously held by the secondary nav row. */
 	.cta-primary {
 		align-self: center;
@@ -457,7 +457,7 @@
 		user-select: none;
 	}
 
-	/* Reveal — gentle slide-up, all elements together. Avoids opacity fade so
+	/* Reveal · gentle slide-up, all elements together. Avoids opacity fade so
 	   the hero title is eligible as the page's LCP candidate (an opacity:0
 	   element is skipped by browser LCP detection, which made Lighthouse pick
 	   the topbar search placeholder instead). */
@@ -559,7 +559,7 @@
 		}
 	}
 
-	/* Short viewports — keep it on one screen at 1280×800. */
+	/* Short viewports · keep it on one screen at 1280×800. */
 	@media (max-height: 820px) {
 		.line-1,
 		.line-3 {

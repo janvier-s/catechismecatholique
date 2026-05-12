@@ -1,5 +1,5 @@
 /**
- * Sidebar entry matching — pulled out of SidebarItem.svelte so the multiple
+ * Sidebar entry matching · pulled out of SidebarItem.svelte so the multiple
  * match shapes are unit-testable. activeHref often carries a scroll-spy
  * heading hash like "/cec/x/y/chapter#some-heading" while the tree entries
  * are stored without the hash. Three match shapes have to work for the
@@ -11,7 +11,7 @@
  *       one structural level (e.g. chapter for en_bref, article for headings)
  *       while activeHref may be produced by scroll-spy at another level. Match
  *       when the hashes agree and the two paths are along the same chapter
- *       prefix — i.e. one is an ancestor of the other.
+ *       prefix · i.e. one is an ancestor of the other.
  */
 export function itemMatches(itemHref: string, target: string): boolean {
 	const base = target.replace(/#.*$/, '');

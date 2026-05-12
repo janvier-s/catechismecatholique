@@ -13,13 +13,13 @@
 	<title>Sommaire · Denzinger</title>
 	<meta
 		name="description"
-		content="Sommaire complet du Denzinger — toutes les sections de l'Enchiridion Symbolorum, classées par parties."
+		content="Sommaire complet du Denzinger · toutes les sections de l'Enchiridion Symbolorum, classées par parties."
 	/>
 </svelte:head>
 
 <main class="toc">
 	<header class="toc-head">
-		<p class="eyebrow">Denzinger — Enchiridion Symbolorum</p>
+		<p class="eyebrow">Denzinger · Enchiridion Symbolorum</p>
 		<h1 class="title">Sommaire</h1>
 		<div class="ornament" aria-hidden="true">
 			<span class="rule rule-l"></span>

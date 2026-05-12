@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	<title>{appendix.title} — Petit Catéchisme</title>
+	<title>{appendix.title} · Petit Catéchisme</title>
 	<meta
 		name="description"
 		content="Instructions aux parents et aux éducateurs chrétiens, en appendice au Petit Catéchisme de saint Pie X."

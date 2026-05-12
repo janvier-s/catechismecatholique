@@ -111,7 +111,7 @@
 		{/each}
 	</div>
 
-	<!-- Both lists always in DOM — hidden preserves each testament's scroll position -->
+	<!-- Both lists always in DOM · hidden preserves each testament's scroll position -->
 	<div class="flex-1 flex flex-col min-h-0">
 		<div
 			bind:this={otContainer}

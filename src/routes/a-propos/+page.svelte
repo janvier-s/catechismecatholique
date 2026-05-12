@@ -527,7 +527,7 @@
 		color: #fff;
 	}
 
-	/* Logo block — logo above, prose below so the image can run larger
+	/* Logo block · logo above, prose below so the image can run larger
 	   than a thumbnail. */
 	.logo-block {
 		display: flex;
@@ -578,7 +578,7 @@
 		}
 	}
 
-	/* Why-study figure — centred diagram of the four parts with a caption,
+	/* Why-study figure · centred diagram of the four parts with a caption,
 	   followed by a list of three reasons rendered as bigger, well-spaced
 	   bullets that read as a manifesto rather than a checklist. */
 	.why-study {
@@ -630,7 +630,7 @@
 		line-height: 1.6;
 	}
 
-	/* Papal quote — round portrait at the left, quote and signed attribution
+	/* Papal quote · round portrait at the left, quote and signed attribution
 	   on the right. No left rule. Signature sits ABOVE the source line so
 	   it reads as the visual seal of the citation. */
 	.papal-quote {

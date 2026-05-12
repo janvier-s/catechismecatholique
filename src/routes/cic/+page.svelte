@@ -31,7 +31,7 @@
 </script>
 
 <svelte:head>
-	<title>Code de Droit Canonique — 1917 et 1983</title>
+	<title>Code de Droit Canonique · 1917 et 1983</title>
 	<meta
 		name="description"
 		content="Les deux codes de droit canonique de l'Église latine : le Code de 1983 promulgué par saint Jean-Paul II, et le Code Pio-Benedictin de 1917."

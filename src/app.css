@@ -248,7 +248,7 @@
 		font-family: var(--font-body);
 		/* Smooth-scroll is intentionally NOT set on <html>. When cross-page
 		   nav restores scroll then SvelteKit jumps to top, smooth makes the
-		   user watch the page scroll up — jarring. Per-action smooth scrolls
+		   user watch the page scroll up · jarring. Per-action smooth scrolls
 		   (panorama, anchor jumps) opt in via JS where needed. */
 		scroll-behavior: auto;
 		/* Offset anchor scrolls so targets clear the sticky topbar (~80px
@@ -263,12 +263,12 @@
 
 	/* Cancel scroll-padding-top for inputs inside the sticky topbar. Without
 	   this, every keystroke fires the browser's "scroll caret into the
-	   optimal viewing region" — and since the topbar's input sits in the
+	   optimal viewing region" · and since the topbar's input sits in the
 	   top 6rem (which scroll-padding marks obscured), the page smooth-scrolls
 	   up ~50px per character. scroll-margin-top: -6rem cancels that out for
 	   the inputs themselves while preserving anchor-link offsets elsewhere.
 	   The :has() rule disables smooth-scroll entirely while the input is
-	   focused — belt-and-suspenders in case the caret algorithm still fires. */
+	   focused · belt-and-suspenders in case the caret algorithm still fires. */
 	.topbar input[type='search'],
 	.topbar input[type='text'] {
 		scroll-margin-top: -6rem;
@@ -321,7 +321,7 @@
 	margin-bottom: 0;
 }
 
-/* Reading prefs — toggles driven by data attributes on <html>, set by
+/* Reading prefs · toggles driven by data attributes on <html>, set by
    prefs.subscribe. CSS is the source of truth so toggling is instant and
    doesn't require re-rendering the paragraph. */
 .prose-paragraph[data-paragraph],
@@ -332,7 +332,7 @@
 	line-height: var(--reader-line-height, 1.6);
 }
 /* StudyPanel content shrinks one pixel below the reader's chosen size
-   and tightens its leading — the panel column is much narrower than the
+   and tightens its leading · the panel column is much narrower than the
    main reader, so the reader's line-height reads loose at that width. */
 .prose-paragraph[data-paragraph][data-in-panel='true'] {
 	font-size: calc(var(--reader-font-size, 17px) - 1px);
@@ -357,14 +357,14 @@ html[data-column-width='wide'] .max-w-reader {
 /* En-marge mode: widen the container so the refs box sits in the right
    margin, outside the prose column. The article uses padding-right + an
    absolutely positioned aside (see ParagraphView.svelte). Scoped to CCC
-   readers — Trent and Compendium have no side refs, so their column-width
+   readers · Trent and Compendium have no side refs, so their column-width
    pref must not be hijacked by this override. */
 html[data-cross-refs-layout='side'] main[data-corpus='ccc'].max-w-reader {
 	max-width: min(1180px, 100% - 48px);
 }
 /* En-marge mode: the side aside lists every cross-ref already, so the
    inline cccRef sup markers in the prose would be a redundant second
-   copy. Hide them when the layout is "side" — they remain visible in
+   copy. Hide them when the layout is "side" · they remain visible in
    the default inline layout. */
 html[data-cross-refs-layout='side'] .prose-paragraph .ref-cccRef {
 	display: none;
@@ -418,7 +418,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	}
 }
 
-/* Logo theme swap — only show the right variant for the current theme. */
+/* Logo theme swap · only show the right variant for the current theme. */
 .logo-light {
 	display: block;
 }
@@ -463,7 +463,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 }
 
 /* Stylized scrollbars for internal scroll containers. Apply via the
-   `styled-scroll` utility — never on <html>/<body>. Firefox uses the
+   `styled-scroll` utility · never on <html>/<body>. Firefox uses the
    `scrollbar-*` properties; Webkit/Chromium uses ::-webkit-scrollbar.
    Thumb is a themed grey via --color-muted so it stays neutral across
    light / sepia / dark / oled regardless of the parent's currentColor
@@ -488,7 +488,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	background-color: color-mix(in srgb, var(--color-muted) 70%, transparent);
 }
 
-/* Accent variant — combine with `styled-scroll`. Used in places where the
+/* Accent variant · combine with `styled-scroll`. Used in places where the
    scrollbar should read as a primary affordance (e.g. the Sommaire sidebar)
    rather than a quiet utility. */
 .styled-scroll-accent {
@@ -563,7 +563,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	}
 }
 
-/* Topbar height — hoisted to :root so sticky elements that aren't inside
+/* Topbar height · hoisted to :root so sticky elements that aren't inside
    .topbar (e.g. the Bible chapter nav) can position themselves relative to
    the actual topbar instead of hardcoding 80px and overlapping at mobile. */
 :root {
@@ -575,7 +575,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	}
 }
 
-/* Print stylesheet — collapse all chrome, render prose at full reading width
+/* Print stylesheet · collapse all chrome, render prose at full reading width
    in black ink on white. Optimised for studying paragraphs at a desk. */
 @media print {
 	:root {
@@ -624,7 +624,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	.ccc-paragraph .number-col {
 		color: #555555 !important;
 	}
-	/* Drop the side-margin cross-refs aside on paper — too noisy. */
+	/* Drop the side-margin cross-refs aside on paper · too noisy. */
 	.ccc-side-refs {
 		display: none !important;
 	}
@@ -647,7 +647,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		break-after: avoid;
 		page-break-after: avoid;
 	}
-	/* Pure black serif for the body — reverts theme-driven font choices. */
+	/* Pure black serif for the body · reverts theme-driven font choices. */
 	body,
 	.prose-paragraph,
 	.content-col {
@@ -671,7 +671,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	}
 }
 
-/* Global page fade — same 280ms ease-out reveal the homepage uses, applied
+/* Global page fade · same 280ms ease-out reveal the homepage uses, applied
    to the layout's content wrapper so every route gets the same subtle
    in-transition. The {#key page.url.pathname} block in +layout.svelte
    remounts the wrapper on navigation so the animation re-triggers. */

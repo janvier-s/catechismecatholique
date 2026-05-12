@@ -54,7 +54,7 @@
 	<title>Sommaire · Compendium du Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
-		content="Table des matières complète du Compendium du Catéchisme de l'Église catholique : quatre parties, sections, chapitres — 598 questions et réponses."
+		content="Table des matières complète du Compendium du Catéchisme de l'Église catholique : quatre parties, sections, chapitres · 598 questions et réponses."
 	/>
 </svelte:head>
 
@@ -239,7 +239,7 @@
 		padding-left: 1.25rem;
 	}
 
-	/* Row scaffolding — same shape as /cec/sommaire: title, dotleader, range. */
+	/* Row scaffolding · same shape as /cec/sommaire: title, dotleader, range. */
 	.row {
 		display: flex;
 		align-items: baseline;

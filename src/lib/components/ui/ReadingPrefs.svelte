@@ -34,7 +34,7 @@
 		if (fontDropdownOpen) positionFontMenu();
 	}
 
-	// Close the font dropdown when the user switches tabs — otherwise it
+	// Close the font dropdown when the user switches tabs · otherwise it
 	// floats orphaned over the new tab's content.
 	$effect(() => {
 		// Read activeTab so this effect retracks on change.
@@ -68,7 +68,7 @@
 		};
 	});
 
-	// Auto is intentionally omitted — users want an explicit choice here.
+	// Auto is intentionally omitted · users want an explicit choice here.
 	const THEME_SWATCHES = [
 		{ id: 'light' as const, label: 'Clair', bg: '#f8f5ef', fg: '#1c1710', lines: '#c8bfb0' },
 		{ id: 'sepia' as const, label: 'Sépia', bg: '#f2e8d8', fg: '#2c1e10', lines: '#c0a888' },
@@ -462,7 +462,7 @@
 		justify-content: center;
 	}
 
-	/* Inactive segmented-pill border — `--color-border` reads too quiet on
+	/* Inactive segmented-pill border · `--color-border` reads too quiet on
 	   the warm panel; this pulls a stronger hairline derived from the
 	   foreground colour so the controls are visibly bounded at rest. */
 	.pill-border {
@@ -472,7 +472,7 @@
 		border-color: color-mix(in srgb, var(--color-fg) 35%, transparent);
 	}
 
-	/* Hairline checkbox — native input is visually hidden but kept in flow
+	/* Hairline checkbox · native input is visually hidden but kept in flow
 	   for keyboard + a11y. The adjacent .prefs-check span is the visual
 	   surface and reflects checked state via the serif checkmark glyph. */
 	.prefs-check-input {
@@ -510,7 +510,7 @@
 		font-size: 12px;
 		line-height: 1;
 		color: var(--color-accent-text);
-		/* Optical alignment — Libre Baskerville's check sits a hair high. */
+		/* Optical alignment · Libre Baskerville's check sits a hair high. */
 		transform: translateY(-0.5px);
 	}
 </style>

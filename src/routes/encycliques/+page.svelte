@@ -1,6 +1,6 @@
 <svelte:head>
 	<title>Encycliques · Bientôt disponible</title>
-	<meta name="description" content="Recueil des encycliques pontificales — section à venir." />
+	<meta name="description" content="Recueil des encycliques pontificales · section à venir." />
 </svelte:head>
 
 <main class="stub">

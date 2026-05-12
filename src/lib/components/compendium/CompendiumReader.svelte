@@ -70,7 +70,7 @@
 		{:else if node.kind === 'epigraph'}
 			<div class="epigraph-wrap">
 				<CitationBlock
-					html={`<em>${node.text}</em>${node.attribution ? ` — <span class='attrib'>${node.attribution}</span>` : ''}`}
+					html={`<em>${node.text}</em>${node.attribution ? ` · <span class='attrib'>${node.attribution}</span>` : ''}`}
 				/>
 			</div>
 		{:else if node.kind === 'prose'}

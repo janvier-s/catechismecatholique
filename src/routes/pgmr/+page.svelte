@@ -11,7 +11,7 @@
 	<title>Présentation Générale du Missel Romain</title>
 	<meta
 		name="description"
-		content="Présentation Générale du Missel Romain (PGMR, 2002) — 399 paragraphes en 9 chapitres précédés d'un préambule."
+		content="Présentation Générale du Missel Romain (PGMR, 2002) · 399 paragraphes en 9 chapitres précédés d'un préambule."
 	/>
 </svelte:head>
 

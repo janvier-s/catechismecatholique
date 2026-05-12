@@ -22,7 +22,7 @@
 	function startTyping() {
 		phase = 'typing';
 		cursor = 0;
-		const CHARS_PER_FRAME = 6; // ~360 chars/sec at 60fps — fast AI feel
+		const CHARS_PER_FRAME = 6; // ~360 chars/sec at 60fps · fast AI feel
 
 		function tick() {
 			cursor = Math.min(cursor + CHARS_PER_FRAME, fullMd.length);

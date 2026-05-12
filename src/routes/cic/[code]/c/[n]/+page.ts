@@ -3,7 +3,7 @@ import { loadCicCanons } from '$lib/data/loaders';
 import type { CicCode } from '$lib/data/types';
 import type { PageLoad } from './$types';
 
-// Worker-served — one redirect per canon would otherwise add ~4 000
+// Worker-served · one redirect per canon would otherwise add ~4 000
 // prerendered files.
 export const prerender = false;
 

@@ -20,7 +20,7 @@
 	</nav>
 
 	<header class="mb-8">
-		<h1 class="font-heading text-3xl font-semibold mb-2">Glossaire — A-Z</h1>
+		<h1 class="font-heading text-3xl font-semibold mb-2">Glossaire · A-Z</h1>
 		<p class="text-muted text-[15px] leading-relaxed mb-3">
 			Tous les termes du glossaire, classés par ordre alphabétique.
 		</p>
@@ -76,7 +76,7 @@
 									{:else if e.seeAlso?.length}
 										{e.seeAlso.length} {e.seeAlso.length > 1 ? 'liens' : 'lien'}
 									{:else}
-										<span aria-hidden="true">—</span>
+										<span aria-hidden="true">·</span>
 									{/if}
 								</span>
 							</a>

@@ -10,10 +10,10 @@
 </script>
 
 <svelte:head>
-	<title>{meta.title} — {meta.author}</title>
+	<title>{meta.title} · {meta.author}</title>
 	<meta
 		name="description"
-		content={`${meta.title} (${meta.date}) — ${meta.author}. Traduction ${meta.translator}.`}
+		content={`${meta.title} (${meta.date}) · ${meta.author}. Traduction ${meta.translator}.`}
 	/>
 </svelte:head>
 

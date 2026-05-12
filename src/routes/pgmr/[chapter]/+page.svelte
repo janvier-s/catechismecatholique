@@ -16,7 +16,7 @@
 	<title>{chapter.title} · Présentation Générale du Missel Romain</title>
 	<meta
 		name="description"
-		content={`${chapter.n !== null ? `Chapitre ${chapter.n}` : 'Préambule'} — ${chapter.title}. Présentation Générale du Missel Romain (2002).`}
+		content={`${chapter.n !== null ? `Chapitre ${chapter.n}` : 'Préambule'} · ${chapter.title}. Présentation Générale du Missel Romain (2002).`}
 	/>
 </svelte:head>
 

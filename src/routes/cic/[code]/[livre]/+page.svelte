@@ -17,7 +17,7 @@
 	<title>Livre {livre.n} · {livre.title} · Code de Droit Canonique {livre.code}</title>
 	<meta
 		name="description"
-		content={`Livre ${livre.n} (${livre.canonRange[0]}–${livre.canonRange[1]}) — ${livre.title}. Code de Droit Canonique de ${livre.code}.`}
+		content={`Livre ${livre.n} (${livre.canonRange[0]}–${livre.canonRange[1]}) · ${livre.title}. Code de Droit Canonique de ${livre.code}.`}
 	/>
 </svelte:head>
 
@@ -144,7 +144,7 @@
 	}
 
 	/* Heading hierarchy: Partie ▸ Section ▸ Titre ▸ Chapitre ▸ Article.
-	   Size + vertical rhythm carry the nesting — bigger top margins on
+	   Size + vertical rhythm carry the nesting · bigger top margins on
 	   higher levels visually group what follows. */
 	.h-partie,
 	.h-section {

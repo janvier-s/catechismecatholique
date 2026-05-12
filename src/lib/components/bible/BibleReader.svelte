@@ -63,7 +63,7 @@
 	}
 </script>
 
-<!-- Chapter navigation bar — sticky below the global TopBar (80px). -->
+<!-- Chapter navigation bar · sticky below the global TopBar (80px). -->
 <ChapterNavBar {book} {chapter} {totalChapters} {chapterCounts} variant="reader" />
 
 <main class="mx-auto max-w-reader px-6 max-md:px-4 pt-8 max-md:pt-5 pb-16">

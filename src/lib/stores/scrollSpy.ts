@@ -10,7 +10,7 @@ import { writable } from 'svelte/store';
  * can't bleed into the next page's activeHref. Without this, navigating from
  * a chapter view (where, say, en-bref-68 was active) to a different
  * article's page would briefly produce activeHref = "/article-2#en-bref-68"
- * — making BOTH the previous article's En Bref entry AND the new article
+ * · making BOTH the previous article's En Bref entry AND the new article
  * highlight in the sidebar.
  *
  * Null when no article page is mounted or before the first heading enters

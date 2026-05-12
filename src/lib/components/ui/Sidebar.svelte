@@ -227,7 +227,7 @@
 		})();
 	});
 
-	// Active lesson slug from the current URL — the reader expands the
+	// Active lesson slug from the current URL · the reader expands the
 	// active lesson's mini-TOC inline so the user can navigate within the
 	// leçon without leaving the sidebar.
 	const boulangerActiveSlug = $derived.by((): string | null => {
@@ -502,7 +502,7 @@
 		return n >= 1 && n <= 2865 ? n : null;
 	});
 
-	// Per-paragraph context lookup (~30 byte shard) — replaces a 1.83 MB bundle
+	// Per-paragraph context lookup (~30 byte shard) · replaces a 1.83 MB bundle
 	// fetch that the audit flagged as the largest avoidable payload on /cec.
 	let ctxLoadGen = 0;
 	$effect(() => {
@@ -548,7 +548,7 @@
 			// On non-paragraph URLs (article / chapter / section / part), append
 			// the scroll-spy heading hash so the Sidebar highlights the section
 			// the reader is currently in. The hash is only applied when it was
-			// emitted by scroll-spy on THIS pathname — otherwise a hash from a
+			// emitted by scroll-spy on THIS pathname · otherwise a hash from a
 			// previous page would briefly bleed into the next page's activeHref
 			// and double-highlight an unrelated entry alongside the new article.
 			const ah = $activeHeading;
@@ -601,7 +601,7 @@
 	});
 
 	// Load detailed chapter data when on a chapter URL OR when on a paragraph URL
-	// whose context places it in a chapter — so we can expand headings/en_brefs.
+	// whose context places it in a chapter · so we can expand headings/en_brefs.
 	let chapterLoadGen = 0;
 	$effect(() => {
 		if (corpus !== 'ccc') return;
@@ -615,7 +615,7 @@
 			return;
 		}
 		// Skip the network round-trip when the slug already matches what's
-		// loaded — keeps the rich tree rendering uninterrupted while the
+		// loaded · keeps the rich tree rendering uninterrupted while the
 		// reader navigates between articles within the same chapter.
 		if (activeChapter?.slug === slug) return;
 		const myGen = ++chapterLoadGen;
@@ -634,7 +634,7 @@
 		const out: Item[] = [];
 		const detail = activeChapter && activeChapter.slug === ch.slug ? activeChapter : null;
 
-		// Préambule — paragraphs that sit in the chapter before the first
+		// Préambule · paragraphs that sit in the chapter before the first
 		// article (e.g. Chapter 2's §§422-429 "La Bonne Nouvelle"). Surface
 		// them as a top-level entry so readers can jump in without guessing
 		// they live "above" Article 2.
@@ -773,7 +773,7 @@
 				});
 			}
 			if (articlesSource.length === 0) {
-				// Chapter has no articles — fall back to chapter-level headings
+				// Chapter has no articles · fall back to chapter-level headings
 				// + en_brefs.
 				for (const h of chapterHeadings) {
 					out.push({ title: h.title, href: `${baseHref}#${h.id}` });
@@ -963,7 +963,7 @@
 										: undefined
 								});
 							} else if (s.chapters?.length) {
-								// No section title — surface chapters at unit level.
+								// No section title · surface chapters at unit level.
 								for (const c of s.chapters) {
 									sectionItems.push({
 										title: c.title,
@@ -1113,7 +1113,7 @@
 			for (const e of toc) {
 				let kicker: string | undefined;
 				let displayTitle = e.title;
-				const chap = displayTitle.match(/^(CHAPITRE\s+[A-ZIVXLC]+)(?:\s*[:.\-—]\s*)(.+)$/i);
+				const chap = displayTitle.match(/^(CHAPITRE\s+[A-ZIVXLC]+)(?:\s*[:.\-·]\s*)(.+)$/i);
 				if (chap) {
 					kicker = chap[1]!.toUpperCase();
 					displayTitle = chap[2]!;
@@ -1123,7 +1123,7 @@
 					// names (they appear only inside {@html …}).
 					displayTitle = `<span class="vii-num">${e.n}.</span> <em class="vii-title">${e.title}</em>`;
 				}
-				// Visual level clamped to 4 — tree-building uses the raw
+				// Visual level clamped to 4 · tree-building uses the raw
 				// e.level (which may go up to 5 for §s under letter sub-
 				// headings) but SidebarItem only styles up to lvl-4.
 				const level: 2 | 3 | 4 = e.level <= 2 ? 2 : e.level === 3 ? 3 : 4;
@@ -1173,13 +1173,13 @@
 		if (corpus === 'cic') {
 			if (!cicStructure) return [];
 			// Identify which code's index/reader we're on. Without an active
-			// code, fall back to listing both (defensive — the layout normally
+			// code, fall back to listing both (defensive · the layout normally
 			// hides the sidebar at /cic exactly).
 			const codeMatch = page.url.pathname.match(/^\/cic\/(1983|1917)/);
 			const activeCode = codeMatch?.[1] as '1983' | '1917' | undefined;
 
 			if (activeCode && !cicActiveSlug) {
-				// /cic/[code] index — show that code's livres as a flat list.
+				// /cic/[code] index · show that code's livres as a flat list.
 				const entry = cicStructure.codes.find((c) => c.code === activeCode);
 				if (!entry) return [];
 				return entry.livres.map(
@@ -1191,7 +1191,7 @@
 				);
 			}
 
-			// /cic/[code]/[livre] reader — show the livre's heading tree, properly
+			// /cic/[code]/[livre] reader · show the livre's heading tree, properly
 			// nested so chapitres sit under their titre and articles under their
 			// chapitre (matches the body's visual hierarchy).
 			const activeLivre = cicActiveLivre;
@@ -1320,7 +1320,7 @@
 		if (corpus === 'catechisme-adultes') {
 			if (!cpaStructure) return [];
 			// Auto-expand the section we're currently reading (the work has
-			// 47 sections — keeping the rest collapsed makes the rail usable).
+			// 47 sections · keeping the rest collapsed makes the rail usable).
 			const m = page.url.pathname.match(/^\/catechisme-adultes\/([^/]+)/);
 			const activeSectionSlug = m ? m[1] : null;
 			return cpaStructure.sections.map((section): Item => {
@@ -1442,7 +1442,7 @@
 				let children: Item[] | undefined;
 				if (isActive && activeCompendiumPart) {
 					// Build a 3-deep heading tree (h2 → h3 → h4). Individual
-					// questions are NOT included — the sidebar is a structural
+					// questions are NOT included · the sidebar is a structural
 					// outline of the part, not a Q-by-Q index.
 					children = [];
 					let currentH2: Item | null = null;

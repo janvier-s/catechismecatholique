@@ -5,7 +5,7 @@
 
 	// Numbered chapters (1..12), grouped under their part for display.
 	// Front matter (Secrétairerie, Présentation) is browsable but not the
-	// headline of the index — we surface it as a small "Préambule" rail.
+	// headline of the index · we surface it as a small "Préambule" rail.
 	const numberedParts = $derived(data.structure.parts.filter((p) => p.kind === 'part'));
 	const intro = $derived(data.structure.parts.find((p) => p.kind === 'intro'));
 	const conclusion = $derived(data.structure.parts.find((p) => p.kind === 'conclusion'));
@@ -16,7 +16,7 @@
 	<title>Compendium de la doctrine sociale de l'Église</title>
 	<meta
 		name="description"
-		content="Compendium de la doctrine sociale de l'Église (2004) — 583 paragraphes en trois parties, du Conseil pontifical Justice et Paix."
+		content="Compendium de la doctrine sociale de l'Église (2004) · 583 paragraphes en trois parties, du Conseil pontifical Justice et Paix."
 	/>
 </svelte:head>
 

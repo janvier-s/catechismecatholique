@@ -5,10 +5,10 @@
 </script>
 
 <svelte:head>
-	<title>Denzinger — Enchiridion Symbolorum · Catéchisme</title>
+	<title>Denzinger · Enchiridion Symbolorum · Catéchisme</title>
 	<meta
 		name="description"
-		content="Édition française du Denzinger, Enchiridion Symbolorum — recueil canonique des symboles, définitions et déclarations magistérielles de l'Église catholique des origines à 1959."
+		content="Édition française du Denzinger, Enchiridion Symbolorum · recueil canonique des symboles, définitions et déclarations magistérielles de l'Église catholique des origines à 1959."
 	/>
 </svelte:head>
 
@@ -19,7 +19,7 @@
 			Denzinger<br /><em class="hero-em">Enchiridion Symbolorum</em>
 		</h1>
 		<p class="hero-lede">
-			{data.structure.subtitle} — {data.structure.total_entries.toString()} entrées canoniques (DH {data
+			{data.structure.subtitle} · {data.structure.total_entries.toString()} entrées canoniques (DH {data
 				.structure.all_numbers[0]}–DH {data.structure.all_numbers[
 				data.structure.all_numbers.length - 1
 			]}), groupées en {data.structure.total_units} sections : symboles de foi, conciles, pontificats.

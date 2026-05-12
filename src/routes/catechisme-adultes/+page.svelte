@@ -11,7 +11,7 @@
 	<title>Catéchisme pour Adultes des Évêques de France (1991)</title>
 	<meta
 		name="description"
-		content={`Le Catéchisme pour Adultes publié par les Évêques de France en 1991. ${data.structure.totalChapters} chapitres, ${data.structure.totalParagraphs} paragraphes — un exposé thématique de la foi catholique.`}
+		content={`Le Catéchisme pour Adultes publié par les Évêques de France en 1991. ${data.structure.totalChapters} chapitres, ${data.structure.totalParagraphs} paragraphes · un exposé thématique de la foi catholique.`}
 	/>
 </svelte:head>
 

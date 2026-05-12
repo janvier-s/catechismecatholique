@@ -173,7 +173,7 @@
 		scroll-margin-top: 80px;
 		text-wrap: balance;
 	}
-	/* Roman sub-chapters (I., II., III., …) — upright weighty heading
+	/* Roman sub-chapters (I., II., III., …) · upright weighty heading
 	   that sits between the CHAPITRE divider and the § body. A short
 	   centered accent rule above gives it a chapter-like beat without
 	   being as loud as the full CHAPITRE underline. */
@@ -197,7 +197,7 @@
 		opacity: 0.55;
 		margin-bottom: 0.65rem;
 	}
-	/* Letter sub-headings (A. Normes…, B. Normes…) — upright, slightly
+	/* Letter sub-headings (A. Normes…, B. Normes…) · upright, slightly
 	   bigger than body, with a thin accent rule on the left to mark them
 	   as sub-sections of the Roman parent. No red, no italic. */
 	.sub-heading-deep {

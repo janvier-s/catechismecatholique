@@ -17,7 +17,7 @@
 		chapterData: ConcordanceChapter;
 	} = $props();
 
-	// No pre-selection — the chapter lands with the verse list visible
+	// No pre-selection · the chapter lands with the verse list visible
 	// only; the detail card opens on first user click.
 	let selectedPericopeRef = $state<string | null>(null);
 

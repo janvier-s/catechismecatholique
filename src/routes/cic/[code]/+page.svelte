@@ -12,13 +12,13 @@
 			kicker: 'Codex Iuris Canonici · 1983',
 			title: 'Code de Droit Canonique',
 			subtitle: 'Promulgué par saint Jean-Paul II le 25 janvier 1983',
-			lede: "Le code en vigueur dans l'Église latine — 1752 canons répartis en sept livres, fruit de la révision voulue par le concile Vatican II."
+			lede: "Le code en vigueur dans l'Église latine · 1752 canons répartis en sept livres, fruit de la révision voulue par le concile Vatican II."
 		},
 		'1917': {
 			kicker: 'Codex Iuris Canonici · 1917',
 			title: 'Code Pio-Benedictin',
 			subtitle: 'Promulgué par Benoît XV le 27 mai 1917',
-			lede: "Premier code unifié du droit de l'Église latine — 2414 canons répartis en cinq livres, en vigueur jusqu'en 1983."
+			lede: "Premier code unifié du droit de l'Église latine · 2414 canons répartis en cinq livres, en vigueur jusqu'en 1983."
 		}
 	};
 

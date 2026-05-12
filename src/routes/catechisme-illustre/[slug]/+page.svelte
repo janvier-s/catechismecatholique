@@ -16,7 +16,7 @@
 	<meta
 		name="description"
 		content={chapter.kind === 'chapter'
-			? `${chapter.title} — Catéchisme illustré des vérités nécessaires (1897). ${(chapter.subtitle ?? '').slice(0, 140)}`
+			? `${chapter.title} · Catéchisme illustré des vérités nécessaires (1897). ${(chapter.subtitle ?? '').slice(0, 140)}`
 			: `${chapter.title} du Catéchisme illustré des vérités nécessaires (1897).`}
 	/>
 </svelte:head>
@@ -76,7 +76,7 @@
 							<span class="q-num">{qa.n}.</span>
 							<span class="q-text">{frenchPunct(qa.q)}</span>
 							{#if qa.a}
-								<span class="q-sep" aria-hidden="true">—</span>
+								<span class="q-sep" aria-hidden="true">·</span>
 								<span class="q-answer">{frenchPunct(qa.a)}</span>
 							{/if}
 						</li>

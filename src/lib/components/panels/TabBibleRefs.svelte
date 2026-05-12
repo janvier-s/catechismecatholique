@@ -70,16 +70,16 @@
 		const m = magisterial.find((r) => Number(r.idx) === idx);
 		if (!m) return { marker: idx, style: 'inline' };
 		const display = m.display_idx ?? idx;
-		// Cluster member — no marker, indented with left rule.
+		// Cluster member · no marker, indented with left rule.
 		if (m.marker_idx !== undefined && m.marker_idx !== idx) {
 			return { marker: display, style: 'cluster-member' };
 		}
-		// Cluster leader — at least one other ref points at me. Marker labels
+		// Cluster leader · at least one other ref points at me. Marker labels
 		// the WHOLE group via a header row, so the leader's verse row carries
 		// no inline marker.
 		const isLeader = magisterial.some((r) => r.marker_idx === idx);
 		if (isLeader) return { marker: display, style: 'cluster-leader' };
-		// Solo ref — existing voir heuristic.
+		// Solo ref · existing voir heuristic.
 		return { marker: display, style: /^voir\s/i.test(m.raw) ? 'sup' : 'inline' };
 	}
 
@@ -137,14 +137,14 @@
 
 			// Scroll only the panel's inner overflow container so the outer
 			// document doesn't jump. If the closest .styled-scroll ancestor is
-			// missing for any reason, skip scrolling — the flash still pulls
+			// missing for any reason, skip scrolling · the flash still pulls
 			// the eye.
 			const scrollEl = rows[0]!.closest<HTMLElement>('.styled-scroll');
 			if (scrollEl) {
 				const containerRect = scrollEl.getBoundingClientRect();
 				const targetRect = rows[0]!.getBoundingClientRect();
 				const offset = targetRect.top - containerRect.top + scrollEl.scrollTop - 8;
-				// Only scroll if the row isn't fully visible — avoids the
+				// Only scroll if the row isn't fully visible · avoids the
 				// "page jiggles every time" feel for short paragraphs.
 				if (targetRect.top < containerRect.top || targetRect.bottom > containerRect.bottom) {
 					scrollEl.scrollTo({ top: offset, behavior: 'smooth' });
@@ -236,7 +236,7 @@
 	sup.ref-marker {
 		font-size: 0.75em;
 	}
-	/* Cluster header — the marker that labels a footnote group. Sits on its
+	/* Cluster header · the marker that labels a footnote group. Sits on its
 	   own row above the cluster verses so it visually attaches to the whole
 	   group, not just the first verse. */
 	li.cluster-header {
@@ -246,7 +246,7 @@
 	li.cluster-header sup.ref-marker {
 		font-size: 0.85em;
 	}
-	/* Cluster verses — leader's verse + all its members, indented under the
+	/* Cluster verses · leader's verse + all its members, indented under the
 	   header with a subtle accent rule. No border-radius so the left border
 	   draws as one unbroken line across all members. */
 	li.cluster-verse {
@@ -261,7 +261,7 @@
 		margin-top: 0;
 		padding-top: 0.5rem;
 	}
-	/* Header sits immediately above the first cluster verse — tight gap so the
+	/* Header sits immediately above the first cluster verse · tight gap so the
 	   marker reads as attached to the group, not floating above it. */
 	li.cluster-header + li.cluster-verse {
 		margin-top: 0;

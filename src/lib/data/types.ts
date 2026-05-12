@@ -137,7 +137,7 @@ export interface ChapterArticle {
 	/**
 	 * "Paragraphe N. TITLE" wrappers nested between an article and its
 	 * Roman-numeral headings (when the upstream tree drops them but the raw
-	 * source preserves them). Optional — only the long doctrinal articles
+	 * source preserves them). Optional · only the long doctrinal articles
 	 * carry these subdivisions.
 	 */
 	paragraphes?: ChapterParagraphe[];
@@ -175,7 +175,7 @@ export interface StructureNode {
 /**
  * Shapes produced by `scripts/prepare/structure.ts` and consumed by the
  * `+page.ts` route loaders. Sections and parts may carry intro paragraphs /
- * headings — paragraphs that live directly under them rather than inside any
+ * headings · paragraphs that live directly under them rather than inside any
  * chapter (e.g. §§185-197 for Section 2 of Part 1, Part 2's "Pourquoi la
  * Liturgie?" §§1066-1075). Articles_direct covers sections that expose
  * articles without an enclosing chapter (e.g. "Notre Père").
@@ -203,7 +203,7 @@ export interface StructureSection {
 	intro_paragraphs?: number[];
 	intro_headings?: ChapterHeading[];
 	/** En Bref blocks nested directly under the section (outside any chapter).
-	 *  Only some sections have these — the Décalogue's §§2075-2082 block is
+	 *  Only some sections have these · the Décalogue's §§2075-2082 block is
 	 *  the canonical example. */
 	en_brefs?: { paragraphs: number[] }[];
 }
@@ -408,7 +408,7 @@ export interface CompendiumQuestion {
 export interface CompendiumHeadingNode {
 	kind: 'heading';
 	/**
-	 * 2 = section (under a Part — large serif h2 with rule)
+	 * 2 = section (under a Part · large serif h2 with rule)
 	 * 3 = subsection / "chapter" (medium ui h3 in accent)
 	 * 4 = sub-subsection (smaller h4, muted)
 	 */
@@ -442,7 +442,7 @@ export interface CompendiumProseNode {
 	html: string;
 }
 
-/** Bilingual prayer block — French and Latin laid out side by side.
+/** Bilingual prayer block · French and Latin laid out side by side.
  *  `body` strings are plain text with `\n` between lines and `\n\n`
  *  between paragraphs; the renderer is responsible for line-break styling. */
 export interface CompendiumPrayerNode {
@@ -835,7 +835,7 @@ export interface CatIllustreStructure {
 	back_matter: CatIllustreStructureFlat[];
 }
 
-// ─── Denzinger — Enchiridion Symbolorum (FR, JesusMarie 2006) ───────────────
+// ─── Denzinger · Enchiridion Symbolorum (FR, JesusMarie 2006) ───────────────
 
 export interface DenzingerEntry {
 	n: number;
@@ -907,7 +907,7 @@ export interface DenzingerEntryIndex {
 	[n: string]: { unit_slug: string };
 }
 
-// ─── Catéchisme Boulanger — La Doctrine catholique (1927) ───────────────────
+// ─── Catéchisme Boulanger · La Doctrine catholique (1927) ───────────────────
 
 export interface BoulangerBlock {
 	section: 'mots' | 'developpement' | 'conclusion' | 'lectures' | 'questionnaire' | 'devoirs';
@@ -972,7 +972,7 @@ export interface BoulangerStructure {
 	tomes: BoulangerStructureTome[];
 }
 
-// ─── CDSE — Compendium de la doctrine sociale de l'Église (2004) ──────────
+// ─── CDSE · Compendium de la doctrine sociale de l'Église (2004) ──────────
 
 export type CdseBlock =
 	| { kind: 'heading'; level: number; anchor: string; title: string }
@@ -1018,7 +1018,7 @@ export interface CdseParagraphLocator {
 	partSlug: string;
 }
 
-// ─── PGMR — Présentation Générale du Missel Romain (2002) ─────────────────
+// ─── PGMR · Présentation Générale du Missel Romain (2002) ─────────────────
 
 export type PgmrBlock =
 	| { kind: 'heading'; level: number; anchor: string; title: string }

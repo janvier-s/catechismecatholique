@@ -13,7 +13,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	return { part };
 };
 
-// Crawl reaches the four parts via the landing page — list them explicitly
+// Crawl reaches the four parts via the landing page · list them explicitly
 // for resilience. 'annexe' is also enumerated here so prerender produces an
 // HTML redirect (the load function above throws redirect to /prieres-formules);
 // without it, hitting /compendium/annexe in a static export would 404.

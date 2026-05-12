@@ -128,7 +128,7 @@ export const GET: RequestHandler = () => {
 		}
 	}
 
-	// CIC — both codes, every livre
+	// CIC · both codes, every livre
 	const cicStructure: { codes: { code: string; livres: { slug: string }[] }[] } = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/cic/structure.json'), 'utf-8')
 	);
@@ -139,7 +139,7 @@ export const GET: RequestHandler = () => {
 		}
 	}
 
-	// Vatican II — every document
+	// Vatican II · every document
 	const vatIIStructure: { docs: { slug: string; present?: boolean }[] } = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/vatican-ii/structure.json'), 'utf-8')
 	);
@@ -147,7 +147,7 @@ export const GET: RequestHandler = () => {
 		.filter((d) => d.present !== false)
 		.map((d) => `/vatican-ii/${d.slug}`);
 
-	// PGMR + Doctrine sociale (CDSE) — per-chapter pages
+	// PGMR + Doctrine sociale (CDSE) · per-chapter pages
 	const pgmrStructure: { chapters: { slug: string }[] } = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/pgmr/structure.json'), 'utf-8')
 	);
@@ -161,7 +161,7 @@ export const GET: RequestHandler = () => {
 		for (const ch of part.chapters) cdseUrls.push(`/doctrine-sociale/${ch.slug}`);
 	}
 
-	// Breviloquium — every chapter
+	// Breviloquium · every chapter
 	const brevStructure: { parts: { chapters: { slug: string }[] }[] } = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/breviloquium/structure.json'), 'utf-8')
 	);
@@ -170,7 +170,7 @@ export const GET: RequestHandler = () => {
 		for (const ch of part.chapters) brevUrls.push(`/breviloquium/${ch.slug}`);
 	}
 
-	// Catéchisme pour Adultes — every section page
+	// Catéchisme pour Adultes · every section page
 	const cpaStructure: { sections: { slug: string }[] } = JSON.parse(
 		readFileSync(join(process.cwd(), 'static/data/catechisme-adultes/structure.json'), 'utf-8')
 	);

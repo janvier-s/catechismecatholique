@@ -15,10 +15,10 @@
 </script>
 
 <svelte:head>
-	<title>{chapter.label} — {chapter.title} · Breviloquium</title>
+	<title>{chapter.label} · {chapter.title} · Breviloquium</title>
 	<meta
 		name="description"
-		content={`${chapter.label} — ${chapter.title}. ${chapter.partTitle}. Breviloquium de saint Bonaventure (1257).`}
+		content={`${chapter.label} · ${chapter.title}. ${chapter.partTitle}. Breviloquium de saint Bonaventure (1257).`}
 	/>
 </svelte:head>
 

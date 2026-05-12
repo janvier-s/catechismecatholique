@@ -3,7 +3,7 @@
 /// <reference lib="esnext" />
 /// <reference lib="webworker" />
 
-// Service worker — offline reading for the catechism + bible.
+// Service worker · offline reading for the catechism + bible.
 //
 // Strategies:
 // - app shell + prerendered HTML + build assets: cached on install, served
@@ -26,7 +26,7 @@ const CACHE_VERSION = `app-${version}`;
 const DATA_CACHE = `data-${version}`;
 const FONT_CACHE = 'fonts-v1';
 
-// Build-versioned assets + static files + prerendered HTML — known up front.
+// Build-versioned assets + static files + prerendered HTML · known up front.
 const APP_SHELL = [...build, ...files, ...prerendered];
 
 self.addEventListener('install', (event) => {
@@ -66,31 +66,31 @@ self.addEventListener('fetch', (event) => {
 	// /api/search is dynamic; don't intercept (Cloudflare edge cache handles it).
 	if (url.pathname.startsWith('/api/')) return;
 
-	// /data/* — immutable text, cache-first.
+	// /data/* · immutable text, cache-first.
 	if (url.pathname.startsWith('/data/')) {
 		event.respondWith(cacheFirst(req, DATA_CACHE));
 		return;
 	}
 
-	// /fonts/* — versioned long-cache assets.
+	// /fonts/* · versioned long-cache assets.
 	if (url.pathname.startsWith('/fonts/')) {
 		event.respondWith(cacheFirst(req, FONT_CACHE));
 		return;
 	}
 
-	// App shell + prerendered HTML — try cache first, fall back to network.
+	// App shell + prerendered HTML · try cache first, fall back to network.
 	if (APP_SHELL.includes(url.pathname)) {
 		event.respondWith(cacheFirst(req, CACHE_VERSION));
 		return;
 	}
 
-	// HTML / other GETs — network-first, cache as backup, fall back to "/".
+	// HTML / other GETs · network-first, cache as backup, fall back to "/".
 	if (req.mode === 'navigate' || req.headers.get('accept')?.includes('text/html')) {
 		event.respondWith(networkFirstWithFallback(req));
 		return;
 	}
 
-	// Anything else — pass through.
+	// Anything else · pass through.
 });
 
 async function cacheFirst(req: Request, cacheName: string): Promise<Response> {

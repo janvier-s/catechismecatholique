@@ -83,7 +83,7 @@
 		margin: 1rem 0 0;
 	}
 	.oraison-cite::before {
-		content: '— ';
+		content: '· ';
 		opacity: 0.6;
 	}
 </style>
