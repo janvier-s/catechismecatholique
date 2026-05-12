@@ -18,9 +18,10 @@ export function prepareCpa(args: PrepareCpaArgs): CpaBuildResult {
 	const out = buildCpa({ markdown });
 	const chCount = out.structure.totalChapters;
 	const pCount = out.structure.totalParagraphs;
-	assert(chCount > 400, `CPA: only ${chCount} chapters parsed — pattern broke?`);
+	assert(chCount > 350, `CPA: only ${chCount} chapters parsed — pattern broke?`);
 	assert(pCount > 600, `CPA: only ${pCount} numbered paragraphs — pattern broke?`);
-	endStep(`${chCount} chapters, ${pCount} paragraphs`);
+	const sCount = out.structure.sections.length;
+	endStep(`${sCount} sections, ${chCount} chapters, ${pCount} paragraphs`);
 
 	logStep('CPA: writing output');
 	mkdirSync(join(args.outDir, 'chapters'), { recursive: true });

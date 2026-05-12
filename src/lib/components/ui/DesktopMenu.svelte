@@ -145,6 +145,12 @@
 					label: 'Petit Catéchisme',
 					eyebrow: '1912',
 					description: 'Le Catéchisme de la Doctrine Chrétienne de Pie X.'
+				},
+				{
+					href: '/catechisme-adultes',
+					label: 'Catéchisme pour Adultes',
+					eyebrow: '1991',
+					description: 'Évêques de France, exposé thématique en 47 sections.'
 				}
 			]
 		},
@@ -180,12 +186,6 @@
 					label: 'La Doctrine Catholique',
 					eyebrow: '1927',
 					description: 'Abbé Boulenger, 53 leçons en trois tomes.'
-				},
-				{
-					href: '/catechisme-adultes',
-					label: 'Catéchisme pour Adultes',
-					eyebrow: '1991',
-					description: 'Évêques de France, 416 chapitres thématiques.'
 				},
 				{
 					href: '/doctrine-sociale',

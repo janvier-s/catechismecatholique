@@ -22,6 +22,10 @@
 			crumbs={[
 				{ href: '/catechisme-adultes', title: 'Catéchisme pour Adultes' },
 				{
+					href: `/catechisme-adultes#${chapter.sectionSlug}`,
+					title: chapter.sectionTitle
+				},
+				{
 					href: `/catechisme-adultes/${chapter.slug}`,
 					kicker: `Chapitre ${chapter.ordinal}`,
 					title: chapter.title
@@ -29,14 +33,11 @@
 			]}
 		/>
 		<p class="kicker">
-			Chapitre {chapter.ordinal}
-			{#if chapter.paraRange}
-				· §
-				{#if chapter.paraRange[0] === chapter.paraRange[1]}
-					{chapter.paraRange[0]}
-				{:else}
-					{chapter.paraRange[0]}–{chapter.paraRange[1]}
-				{/if}
+			{chapter.sectionTitle} · Chapitre {chapter.ordinal} · §
+			{#if chapter.paraRange[0] === chapter.paraRange[1]}
+				{chapter.paraRange[0]}
+			{:else}
+				{chapter.paraRange[0]}–{chapter.paraRange[1]}
 			{/if}
 		</p>
 		<h1 class="title">{frenchPunct(chapter.title)}</h1>

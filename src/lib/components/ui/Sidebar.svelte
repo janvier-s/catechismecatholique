@@ -1319,17 +1319,30 @@
 		}
 		if (corpus === 'catechisme-adultes') {
 			if (!cpaStructure) return [];
-			return cpaStructure.chapters.map((c): Item => {
-				const kicker = c.paraRange
-					? c.paraRange[0] === c.paraRange[1]
-						? `§ ${c.paraRange[0]}`
-						: `§ ${c.paraRange[0]}–${c.paraRange[1]}`
-					: '';
+			// Identify which section the active chapter belongs to so we can
+			// auto-expand it (the work has 47 sections — collapsing the rest
+			// keeps the rail navigable).
+			const m = page.url.pathname.match(/^\/catechisme-adultes\/([^/]+)/);
+			const activeChapterSlug = m ? m[1] : null;
+			return cpaStructure.sections.map((section): Item => {
+				const containsActive = section.chapters.some((c) => c.slug === activeChapterSlug);
 				return {
-					title: c.title,
-					...(kicker ? { kicker } : {}),
-					href: `/catechisme-adultes/${c.slug}`,
-					level: 4
+					title: section.title,
+					kicker: `Section ${section.ordinal}`,
+					href: `/catechisme-adultes#${section.slug}`,
+					level: 2,
+					defaultExpanded: containsActive,
+					children: section.chapters.map(
+						(c): Item => ({
+							title: c.title,
+							kicker:
+								c.paraRange[0] === c.paraRange[1]
+									? `§ ${c.paraRange[0]}`
+									: `§ ${c.paraRange[0]}–${c.paraRange[1]}`,
+							href: `/catechisme-adultes/${c.slug}`,
+							level: 4
+						})
+					)
 				};
 			});
 		}

@@ -4,16 +4,14 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const firstChapter = $derived(data.structure.chapters[0]?.slug ?? '');
+	const firstChapter = $derived(data.structure.sections[0]?.chapters[0]?.slug ?? '');
 </script>
 
 <svelte:head>
 	<title>Catéchisme pour Adultes des Évêques de France (1991)</title>
 	<meta
 		name="description"
-		content="Le Catéchisme pour Adultes publié par les Évêques de France en 1991. {data.structure
-			.totalChapters} chapitres, {data.structure
-			.totalParagraphs} paragraphes — un exposé thématique de la foi catholique."
+		content={`Le Catéchisme pour Adultes publié par les Évêques de France en 1991. ${data.structure.totalChapters} chapitres, ${data.structure.totalParagraphs} paragraphes — un exposé thématique de la foi catholique.`}
 	/>
 </svelte:head>
 
@@ -33,34 +31,40 @@
 			</p>
 		{/if}
 		<p class="hero-stats">
+			<span>{data.structure.sections.length} sections</span>
+			<span aria-hidden="true">·</span>
 			<span>{data.structure.totalChapters} chapitres</span>
 			<span aria-hidden="true">·</span>
 			<span>{data.structure.totalParagraphs} paragraphes</span>
 		</p>
 	</header>
 
-	<ol class="chapters">
-		{#each data.structure.chapters as ch (ch.slug)}
-			<li>
-				<a class="chapter-row" href={`/catechisme-adultes/${ch.slug}`}>
-					<span class="chapter-ord">{ch.ordinal}</span>
-					<span class="chapter-title">{frenchPunct(ch.title)}</span>
-					{#if ch.paraRange}
-						<span class="chapter-range">
-							{#if ch.paraRange[0] === ch.paraRange[1]}
-								§ {ch.paraRange[0]}
-							{:else}
-								§ {ch.paraRange[0]}–{ch.paraRange[1]}
-							{/if}
-						</span>
-					{:else}
-						<span class="chapter-range">—</span>
-					{/if}
-					<span class="chapter-arrow" aria-hidden="true">→</span>
-				</a>
-			</li>
-		{/each}
-	</ol>
+	{#each data.structure.sections as section (section.slug)}
+		<section class="section" id={section.slug}>
+			<header class="section-head">
+				<p class="section-kicker">Section {section.ordinal}</p>
+				<h2 class="section-title">{frenchPunct(section.title)}</h2>
+			</header>
+			<ol class="chapters">
+				{#each section.chapters as ch (ch.slug)}
+					<li>
+						<a class="chapter-row" href={`/catechisme-adultes/${ch.slug}`}>
+							<span class="chapter-ord">{ch.ordinal}</span>
+							<span class="chapter-title">{frenchPunct(ch.title)}</span>
+							<span class="chapter-range">
+								{#if ch.paraRange[0] === ch.paraRange[1]}
+									§ {ch.paraRange[0]}
+								{:else}
+									§ {ch.paraRange[0]}–{ch.paraRange[1]}
+								{/if}
+							</span>
+							<span class="chapter-arrow" aria-hidden="true">→</span>
+						</a>
+					</li>
+				{/each}
+			</ol>
+		</section>
+	{/each}
 </main>
 
 <style>
@@ -133,6 +137,36 @@
 		letter-spacing: 0.16em;
 		text-transform: uppercase;
 		color: var(--color-muted);
+	}
+
+	.section {
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		scroll-margin-top: 80px;
+	}
+	.section + .section {
+		border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+	}
+	.section-head {
+		margin-bottom: 1rem;
+	}
+	.section-kicker {
+		font-family: var(--font-ui);
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		font-variant-numeric: tabular-nums;
+		margin: 0 0 0.25rem;
+	}
+	.section-title {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-size: 1.4rem;
+		font-weight: 700;
+		margin: 0;
+		text-wrap: balance;
 	}
 
 	.chapters {

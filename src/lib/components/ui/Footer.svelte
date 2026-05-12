@@ -26,6 +26,7 @@
 				<li><a href="/catechisme-illustre">Catéchisme illustré</a></li>
 				<li><a href="/grand-catechisme">Grand Catéchisme</a></li>
 				<li><a href="/petit-catechisme">Petit Catéchisme</a></li>
+				<li><a href="/catechisme-adultes">Catéchisme pour Adultes</a></li>
 			</ul>
 		</div>
 		<div class="footer-col">
@@ -36,7 +37,6 @@
 				<li><a href="/discours-catechetique">Discours catéchétique</a></li>
 				<li><a href="/breviloquium">Breviloquium</a></li>
 				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>
-				<li><a href="/catechisme-adultes">Catéchisme pour Adultes</a></li>
 				<li><a href="/doctrine-sociale">Doctrine sociale</a></li>
 			</ul>
 		</div>

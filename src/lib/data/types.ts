@@ -1202,7 +1202,14 @@ export interface CpaChapterRef {
 	slug: string;
 	ordinal: number;
 	title: string;
-	paraRange: [number, number] | null;
+	paraRange: [number, number];
+}
+
+export interface CpaSection {
+	slug: string;
+	ordinal: number;
+	title: string;
+	chapters: CpaChapterRef[];
 }
 
 export interface CpaStructure {
@@ -1212,7 +1219,7 @@ export interface CpaStructure {
 	author: string;
 	date: string;
 	source: string;
-	chapters: CpaChapterRef[];
+	sections: CpaSection[];
 	totalChapters: number;
 	totalParagraphs: number;
 }
@@ -1221,7 +1228,9 @@ export interface CpaChapter {
 	slug: string;
 	ordinal: number;
 	title: string;
-	paraRange: [number, number] | null;
+	paraRange: [number, number];
+	sectionSlug: string;
+	sectionTitle: string;
 	blocks: CpaBlock[];
 	prev?: { slug: string; title: string };
 	next?: { slug: string; title: string };
