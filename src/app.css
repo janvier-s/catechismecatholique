@@ -668,6 +668,11 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		min-height: 0 !important;
 		justify-content: flex-start !important;
 	}
+	/* Wordmark is hidden below 768px on screen. Print emulates a narrow
+	   viewport in some browsers, so force it visible on paper. */
+	.wordmark {
+		display: flex !important;
+	}
 	/* Full-width prose column. */
 	main {
 		max-width: none !important;
