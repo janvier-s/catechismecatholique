@@ -34,21 +34,19 @@ test.describe('Compendium', () => {
 		expect(res?.status()).toBe(200);
 	});
 
-	test('topbar 3x3 menu links to /compendium', async ({ page }) => {
+	test('nav drawer links to /compendium', async ({ page }) => {
 		await page.goto('/cec');
-		await page.locator('.desktop-menu-trigger').click();
-		// Each menu row is an <a class="menu-row"> with label + description spans.
-		// The accessible name includes both spans, so match by href instead of text.
-		await page.locator('a.menu-row[href="/compendium"]').click();
+		await page.locator('.drawer-trigger').click();
+		await page.locator('#nav-drawer a[href="/compendium"]').click();
 		await expect(page).toHaveURL('/compendium');
 	});
 
-	test('topbar 3x3 menu has Prières & Formules entry that links to /prieres-formules', async ({
+	test('nav drawer has Prières & Formules entry that links to /prieres-formules', async ({
 		page
 	}) => {
 		await page.goto('/cec');
-		await page.locator('.desktop-menu-trigger').click();
-		await page.locator('a.menu-row[href="/prieres-formules"]').click();
+		await page.locator('.drawer-trigger').click();
+		await page.locator('#nav-drawer a[href="/prieres-formules"]').click();
 		await expect(page).toHaveURL('/prieres-formules');
 	});
 

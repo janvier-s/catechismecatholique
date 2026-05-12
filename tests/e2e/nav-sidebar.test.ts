@@ -30,48 +30,11 @@ test('sidebar auto-expands active chapter branch', async ({ page }) => {
 	await expect(sidebar.locator(`a[href="${url}"]`)).toBeVisible();
 });
 
-test('Catéchisme dropdown opens with parts', async ({ page }) => {
+// The Catéchisme hover-cascade dropdown was retired when the topbar
+// nav got simplified to direct links + a right-side drawer. The drawer
+// itself is exercised in tests/e2e/compendium.test.ts.
+test('topbar Catéchisme link goes to /cec', async ({ page }) => {
 	await page.goto('/');
-	// The dropdown also opens on mouseenter; hover deterministically opens
-	// the panel without the click-toggle quirk.
-	// Hover the dropdown trigger specifically — `getByRole('link', {name: /Catéchisme/i})`
-	// also matches the home logo (alt="Catéchisme de l'Église Catholique"), which
-	// comes first in DOM order. The trigger is the only `.catdrop-trigger`.
-	await page.locator('.catdrop-trigger').hover();
-	await expect(page.locator('#catechism-menu')).toBeVisible();
-	// The cell-tag span renders "Partie 1" (with a non-breaking space)
-	await expect(
-		page
-			.locator('#catechism-menu .cell-tag')
-			.filter({ hasText: /Partie\s*1/ })
-			.first()
-	).toBeVisible();
-});
-
-test('Catéchisme dropdown cascades to chapters on hover', async ({ page }) => {
-	await page.goto('/');
-	// Hover the dropdown trigger specifically — `getByRole('link', {name: /Catéchisme/i})`
-	// also matches the home logo (alt="Catéchisme de l'Église Catholique"), which
-	// comes first in DOM order. The trigger is the only `.catdrop-trigger`.
-	await page.locator('.catdrop-trigger').hover();
-	await expect(page.locator('#catechism-menu')).toBeVisible();
-	// Cells are plain <a> links. Hover the Partie 1 cell.
-	await page
-		.locator('#catechism-menu a')
-		.filter({ hasText: /Partie\s*1/ })
-		.first()
-		.hover();
-	// Hover the first Section 1 cell
-	await page
-		.locator('#catechism-menu a')
-		.filter({ hasText: /Section\s*1/ })
-		.first()
-		.hover();
-	// At least one chapter link should appear
-	await expect(
-		page
-			.locator('#catechism-menu a')
-			.filter({ hasText: /Chapitre\s*1/ })
-			.first()
-	).toBeVisible();
+	await page.getByRole('navigation', { name: /Navigation principale/i }).getByText('Catéchisme').click();
+	await expect(page).toHaveURL(/\/cec$/);
 });
