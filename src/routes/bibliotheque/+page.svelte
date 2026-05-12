@@ -236,12 +236,13 @@
 				},
 				{
 					slug: 'encycliques',
+					focus: 'top',
 					href: '/encycliques',
 					title: 'Encycliques',
 					subtitle: 'Lettres pontificales hors Vatican II',
 					blurb: 'Recueil des encycliques majeures du Magistère pontifical (à venir).',
 					year: 'Recueil',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/encycliques.webp'
 				}
 			]
 		},
@@ -371,8 +372,8 @@
 			</header>
 
 			{#if shelf.roman === 'IV'}
-				<!-- Études & outils: not "books". Rendered as flat compact tiles
-				     with a small accent rule, no cover image, no Lire CTA. -->
+				<!-- Études & outils: not "books". Flat compact tiles with the
+				     same uppercase CTA as the book cards, no cover image. -->
 				<ul class="tools-grid">
 					{#each shelf.works as work, wi (work.slug)}
 						<li class="tool-wrap" style="--card-index: {wi}">
@@ -384,8 +385,10 @@
 										<p class="tool-sub">{work.subtitle}</p>
 									{/if}
 									<p class="tool-blurb">{work.blurb}</p>
+									<span class="card-cta">
+										Ouvrir<span class="card-cta-arrow" aria-hidden="true">→</span>
+									</span>
 								</span>
-								<span class="tool-arrow" aria-hidden="true">→</span>
 							</a>
 						</li>
 					{/each}
@@ -422,15 +425,6 @@
 			{/if}
 		</section>
 	{/each}
-
-	<footer class="colophon">
-		<p>
-			<em
-				>Catalogue mis à jour au fur et à mesure des ajouts. Les couvertures réelles remplaceront
-				progressivement le visuel transitoire.</em
-			>
-		</p>
-	</footer>
 </main>
 
 <style>
@@ -881,32 +875,11 @@
 		color: var(--color-muted);
 		margin: 0.15rem 0 0;
 	}
-	.tool-arrow {
-		font-family: var(--font-heading);
-		font-size: 1.1rem;
-		color: color-mix(in srgb, var(--color-fg) 35%, transparent);
-		align-self: center;
-		transition:
-			color 160ms ease,
-			transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	.tool:hover .tool-arrow,
-	.tool:focus-visible .tool-arrow {
-		color: var(--color-accent);
-		transform: translateX(3px);
-	}
-
-	/* Colophon ---------------------------------------------------------- */
-	.colophon {
-		margin-top: clamp(3rem, 6vw, 4.5rem);
-		text-align: center;
-		font-family: var(--font-body);
-		font-size: 0.82rem;
-		color: var(--color-muted);
-		line-height: 1.6;
-	}
-	.colophon p {
-		margin: 0;
+	/* Tool tiles drop to single-column on tablet/below — collapse the
+	   3-col grid layout (tool-mark · body · …) since the CTA now sits
+	   inside the body. */
+	.tool {
+		grid-template-columns: 1.5rem 1fr;
 	}
 
 	/* Motion preferences ----------------------------------------------- */
