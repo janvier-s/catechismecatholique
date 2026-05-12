@@ -198,7 +198,7 @@
 
 		{@const level = deepestLevel(c)}
 		{#if level}
-			<p class="mt-12 font-ui text-sm">
+			<p class="context-deeper mt-12 font-ui text-sm">
 				<a href={level.href} class="text-accent hover:underline">
 					{level.label}&nbsp;: {level.title} →
 				</a>

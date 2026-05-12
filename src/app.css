@@ -602,12 +602,8 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		color: #000000 !important;
 	}
 	/* Hide app chrome that doesn't belong on paper. Grouped by intent. */
-	/* Belt-and-suspenders: any chrome that sits directly under <body>
-	   (TopBar, Footer, BibleRefTooltip) is non-content by construction. */
-	body > header,
 	body > footer,
 	body > [role='tooltip'],
-	.topbar,
 	.site-footer,
 	.skip-link,
 	[data-prefs-menu],
@@ -616,22 +612,31 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	[aria-label='Fermer le sommaire'],
 	[aria-label="Panneau d'étude"],
 	[aria-label='Menu mobile'],
+	[aria-label='Navigation principale'],
+	[aria-label='Ouvrir la recherche'],
 	#mobile-menu,
 	.hamburger,
 	.cec-pill,
 	button.bible-inline,
+	/* Topbar: keep the brand mark, drop every other affordance. */
+	.topbar nav,
+	.topbar form,
+	.topbar button,
+	.topbar [aria-label='Ouvrir la recherche'],
 	/* Editorial chrome (back-link, breadcrumbs, pager, panorama trigger). */
 	.back-to-biblio,
 	.back-row,
 	.breadcrumb-rail,
 	.breadcrumb-row,
-	[aria-label='Fil d''Ariane'],
+	[aria-label="Fil d'Ariane"],
 	[aria-label='Partie précédente ou suivante'],
+	[aria-label='Paragraphe précédent ou suivant'],
 	[aria-label='Sections adjacentes dans la même partie'],
 	[aria-label='Chapitre précédent ou suivant'],
 	[aria-label='Navigation'],
 	[aria-label='Navigation entre leçons'],
 	[aria-label='Voir la concordance'],
+	.context-deeper,
 	.pager,
 	/* Hover-revealed permalink icons. */
 	.number-link,
@@ -647,6 +652,21 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	.page-fade {
 		opacity: 1 !important;
 		animation: none !important;
+	}
+	/* Topbar in print: a quiet masthead with just the logo + wordmark.
+	   Drop sticky, border, and background so it reads as a flat header. */
+	.topbar {
+		position: static !important;
+		border: 0 !important;
+		background: transparent !important;
+		min-height: 0 !important;
+		padding: 0 0 8mm 0 !important;
+		margin: 0 !important;
+	}
+	.topbar > div {
+		padding: 0 !important;
+		min-height: 0 !important;
+		justify-content: flex-start !important;
 	}
 	/* Full-width prose column. */
 	main {
