@@ -1,4 +1,6 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
+
 	type PartCard = {
 		kicker: string;
 		title: string;
@@ -45,13 +47,18 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Catéchisme du Concile de Trente · Édition française complète</title>
-	<meta
-		name="description"
-		content="Lisez le Catéchisme du Concile de Trente (1566) en français : prologue, quatre parties, 1 787 paragraphes sur la foi, les sacrements, les commandements et la prière."
-	/>
-</svelte:head>
+<MetaTags
+	title="Catéchisme du Concile de Trente"
+	description="Lisez le Catéchisme du Concile de Trente (1566) en français : prologue, quatre parties, 1787 paragraphes sur la foi, les sacrements, les commandements et la prière."
+	image="/img/bibliotheque/trente.webp"
+	schema={{
+		kind: 'book',
+		name: 'Catéchisme du Concile de Trente',
+		author: 'Saint Pie V',
+		datePublished: '1566',
+		about: "Catéchisme romain commandé par le concile de Trente à l'usage des pasteurs"
+	}}
+/>
 
 <main class="trente-index">
 	<header class="hero">

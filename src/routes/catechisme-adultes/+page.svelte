@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import { frenchPunct } from '$lib/utils/typography';
 	import type { PageData } from './$types';
 
@@ -7,13 +8,18 @@
 	const firstSection = $derived(data.structure.sections[0]?.slug ?? '');
 </script>
 
-<svelte:head>
-	<title>Catéchisme pour Adultes des Évêques de France (1991)</title>
-	<meta
-		name="description"
-		content={`Le Catéchisme pour Adultes publié par les Évêques de France en 1991. ${data.structure.totalChapters} chapitres, ${data.structure.totalParagraphs} paragraphes · un exposé thématique de la foi catholique.`}
-	/>
-</svelte:head>
+<MetaTags
+	title="Catéchisme pour Adultes des Évêques de France (1991)"
+	description={`Le Catéchisme pour Adultes publié par les Évêques de France en 1991 : ${data.structure.totalChapters} chapitres, ${data.structure.totalParagraphs} paragraphes, un exposé thématique de la foi catholique.`}
+	image="/img/bibliotheque/catechisme-adultes.webp"
+	schema={{
+		kind: 'book',
+		name: 'Catéchisme pour Adultes',
+		author: 'Conférence des Évêques de France',
+		datePublished: '1991',
+		about: 'Exposé thématique de la foi catholique'
+	}}
+/>
 
 <main class="cpa-index">
 	<header class="hero">

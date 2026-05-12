@@ -1,16 +1,22 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-	<title>Denzinger · Enchiridion Symbolorum · Catéchisme</title>
-	<meta
-		name="description"
-		content="Édition française du Denzinger, Enchiridion Symbolorum · recueil canonique des symboles, définitions et déclarations magistérielles de l'Église catholique des origines à 1959."
-	/>
-</svelte:head>
+<MetaTags
+	title="Denzinger · Enchiridion Symbolorum"
+	description="Édition française du Denzinger, Enchiridion Symbolorum : recueil canonique des symboles, définitions et déclarations magistérielles de l'Église catholique des origines à 1959."
+	image="/img/bibliotheque/denzinger.webp"
+	schema={{
+		kind: 'book',
+		name: 'Enchiridion Symbolorum, definitionum et declarationum',
+		author: 'Heinrich Denzinger',
+		bookEdition: '37ᵉ édition',
+		about: "Symboles, définitions et déclarations du Magistère de l'Église catholique"
+	}}
+/>
 
 <main class="dz-index">
 	<header class="hero">

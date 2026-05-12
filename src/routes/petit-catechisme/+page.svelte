@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -17,14 +18,18 @@
 	const ORDINALS = ['Première', 'Deuxième', 'Troisième'];
 </script>
 
-<svelte:head>
-	<title>Petit Catéchisme de saint Pie X · Catéchisme</title>
-	<meta
-		name="description"
-		content="Le Catéchisme de la Doctrine Chrétienne de saint Pie X (1912) en {data.structure
-			.total_qa} questions et réponses : les vérités fondamentales de la foi catholique à l'usage de toute la jeunesse chrétienne."
-	/>
-</svelte:head>
+<MetaTags
+	title="Petit Catéchisme de saint Pie X"
+	description={`Le Catéchisme de la Doctrine Chrétienne de saint Pie X (1912) en ${data.structure.total_qa} questions et réponses : les vérités fondamentales de la foi catholique à l'usage de toute la jeunesse chrétienne.`}
+	image="/img/bibliotheque/petit-catechisme.webp"
+	schema={{
+		kind: 'book',
+		name: 'Catéchisme de la Doctrine Chrétienne (édition mineure)',
+		author: 'Saint Pie X',
+		datePublished: '1912',
+		about: 'Catéchisme abrégé en questions et réponses'
+	}}
+/>
 
 <main class="pc-index">
 	<header class="hero">

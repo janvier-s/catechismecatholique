@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -22,14 +23,18 @@
 	const mainParts = $derived(data.structure.parts.filter((p) => p.slug !== LECON_PRELIM_SLUG));
 </script>
 
-<svelte:head>
-	<title>Grand Catéchisme de saint Pie X · Catéchisme</title>
-	<meta
-		name="description"
-		content="Le Grand Catéchisme de saint Pie X en {data.structure
-			.total_qa} questions et réponses sur la foi catholique&nbsp;: le Credo, la prière, les commandements, les sacrements et les vertus."
-	/>
-</svelte:head>
+<MetaTags
+	title="Grand Catéchisme de saint Pie X"
+	description={`Le Grand Catéchisme de saint Pie X en ${data.structure.total_qa} questions et réponses sur la foi catholique : le Credo, la prière, les commandements, les sacrements et les vertus.`}
+	image="/img/bibliotheque/grand-catechisme.webp"
+	schema={{
+		kind: 'book',
+		name: 'Catéchisme de la Doctrine Chrétienne (édition majeure)',
+		author: 'Saint Pie X',
+		datePublished: '1905',
+		about: 'Catéchisme romain en questions et réponses'
+	}}
+/>
 
 <main class="gc-index">
 	<header class="hero">

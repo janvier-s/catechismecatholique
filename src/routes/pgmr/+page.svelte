@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -7,13 +8,18 @@
 	const numberedChapters = $derived(data.structure.chapters.filter((c) => c.n !== null));
 </script>
 
-<svelte:head>
-	<title>Présentation Générale du Missel Romain</title>
-	<meta
-		name="description"
-		content="Présentation Générale du Missel Romain (PGMR, 2002) · 399 paragraphes en 9 chapitres précédés d'un préambule."
-	/>
-</svelte:head>
+<MetaTags
+	title="Présentation Générale du Missel Romain"
+	description="Présentation Générale du Missel Romain (PGMR, 2002) : 399 paragraphes en 9 chapitres précédés d'un préambule."
+	image="/img/bibliotheque/pgmr.webp"
+	schema={{
+		kind: 'book',
+		name: 'Présentation Générale du Missel Romain',
+		author: 'Congrégation pour le Culte divin',
+		datePublished: '2002',
+		about: 'Document normatif accompagnant le Missel romain'
+	}}
+/>
 
 <main class="pg-index">
 	<header class="hero">

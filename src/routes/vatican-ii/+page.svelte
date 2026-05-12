@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 	import type { VatIIDocKind } from '$lib/data/types';
 
@@ -26,13 +27,18 @@
 	const presentCount = $derived(data.structure.docs.filter((d) => d.present).length);
 </script>
 
-<svelte:head>
-	<title>Concile Vatican II</title>
-	<meta
-		name="description"
-		content="Les seize documents du concile Vatican II (1962-1965) : 4 constitutions, 9 décrets et 3 déclarations."
-	/>
-</svelte:head>
+<MetaTags
+	title="Concile Vatican II"
+	description="Les seize documents du concile Vatican II (1962-1965) : 4 constitutions, 9 décrets et 3 déclarations."
+	image="/img/bibliotheque/vatican-ii.webp"
+	schema={{
+		kind: 'book',
+		name: 'Documents du concile Vatican II',
+		datePublished: '1965',
+		about:
+			"Constitutions, décrets et déclarations du XXIᵉ concile œcuménique de l'Église catholique"
+	}}
+/>
 
 <main class="vii-index">
 	<header class="hero">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { frenchPunct } from '$lib/utils/typography';
 	import type { PatFull } from '$lib/data/types';
@@ -9,13 +10,19 @@
 	const meta = $derived(full.structure);
 </script>
 
-<svelte:head>
-	<title>{meta.title} · {meta.author}</title>
-	<meta
-		name="description"
-		content={`${meta.title} (${meta.date}) · ${meta.author}. Traduction ${meta.translator}.`}
-	/>
-</svelte:head>
+<MetaTags
+	title={`${meta.title} · ${meta.author}`}
+	description={`${meta.title} (${meta.date}), ${meta.author}. ${lede.slice(0, 140)}`}
+	image={`/img/bibliotheque/${meta.slug}.webp`}
+	schema={{
+		kind: 'book',
+		name: meta.title,
+		author: meta.author,
+		datePublished: meta.date,
+		translator: meta.translator || undefined,
+		about: meta.subtitle || undefined
+	}}
+/>
 
 <main class="pat-page" use:scrollSpy>
 	<header class="hero">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -12,13 +13,18 @@
 	const front = $derived(data.structure.parts.filter((p) => p.kind === 'front'));
 </script>
 
-<svelte:head>
-	<title>Compendium de la doctrine sociale de l'Église</title>
-	<meta
-		name="description"
-		content="Compendium de la doctrine sociale de l'Église (2004) · 583 paragraphes en trois parties, du Conseil pontifical Justice et Paix."
-	/>
-</svelte:head>
+<MetaTags
+	title="Compendium de la doctrine sociale de l'Église"
+	description="Compendium de la doctrine sociale de l'Église (2004) : 583 paragraphes en trois parties, du Conseil pontifical Justice et Paix."
+	image="/img/bibliotheque/doctrine-sociale.webp"
+	schema={{
+		kind: 'book',
+		name: "Compendium de la doctrine sociale de l'Église",
+		author: 'Conseil pontifical Justice et Paix',
+		datePublished: '2004',
+		about: "Synthèse de l'enseignement social de l'Église catholique"
+	}}
+/>
 
 <main class="ds-index">
 	<header class="hero">

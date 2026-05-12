@@ -1,16 +1,22 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-	<title>La Doctrine Catholique · Abbé Boulenger (1927)</title>
-	<meta
-		name="description"
-		content="La Doctrine catholique de l'Abbé Boulenger (Vitte, 1927) : 53 leçons en trois tomes (Dogme, Morale, Moyens de sanctification)."
-	/>
-</svelte:head>
+<MetaTags
+	title="La Doctrine Catholique · Abbé Boulenger (1927)"
+	description="La Doctrine catholique de l'Abbé Boulenger (Vitte, 1927) : 53 leçons en trois tomes (Dogme, Morale, Moyens de sanctification)."
+	image="/img/bibliotheque/doctrine-catholique.webp"
+	schema={{
+		kind: 'book',
+		name: 'La Doctrine catholique',
+		author: 'Abbé A. Boulenger',
+		datePublished: '1927',
+		about: "Cours élémentaire d'instruction religieuse en 53 leçons"
+	}}
+/>
 
 <main class="bl-index">
 	<header class="hero">

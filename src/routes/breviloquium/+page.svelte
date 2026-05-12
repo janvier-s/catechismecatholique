@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import { frenchPunct } from '$lib/utils/typography';
 	import type { PageData } from './$types';
 
@@ -7,13 +8,18 @@
 	const firstChapter = $derived(data.structure.parts[0]?.chapters[0]?.slug ?? '');
 </script>
 
-<svelte:head>
-	<title>Breviloquium · Saint Bonaventure (1257)</title>
-	<meta
-		name="description"
-		content="Le Breviloquium de saint Bonaventure (1257), somme de théologie en sept parties, traduite en français, présentée chapitre par chapitre."
-	/>
-</svelte:head>
+<MetaTags
+	title="Breviloquium · Saint Bonaventure (1257)"
+	description="Le Breviloquium de saint Bonaventure (1257), somme de théologie en sept parties, traduite en français, présentée chapitre par chapitre."
+	image="/img/bibliotheque/breviloquium.webp"
+	schema={{
+		kind: 'book',
+		name: 'Breviloquium',
+		author: 'Saint Bonaventure',
+		datePublished: '1257',
+		about: 'Somme abrégée de la théologie chrétienne'
+	}}
+/>
 
 <main class="brev-index">
 	<header class="hero">

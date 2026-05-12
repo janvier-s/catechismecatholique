@@ -1,4 +1,6 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
+
 	type Anchor = { label: string; href: string };
 	type PartCard = {
 		slug: string;
@@ -96,13 +98,19 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Catéchisme de l'Église Catholique · Lire l'édition française complète</title>
-	<meta
-		name="description"
-		content="Lisez le Catéchisme de l'Église Catholique en français : prologue, quatre parties, 2865 paragraphes. Recherche par mot-clé, référence biblique et thème."
-	/>
-</svelte:head>
+<MetaTags
+	title="Catéchisme de l'Église Catholique · Lire l'édition française complète"
+	description="Lisez le Catéchisme de l'Église Catholique en français : prologue, quatre parties, 2865 paragraphes. Recherche par mot-clé, référence biblique et thème."
+	image="/img/bibliotheque/cec.webp"
+	schema={{
+		kind: 'book',
+		name: "Catéchisme de l'Église Catholique",
+		author: 'Saint Jean-Paul II',
+		datePublished: '1992',
+		bookEdition: 'editio typica · 1997',
+		about: 'Exposé organique et systématique de la foi catholique'
+	}}
+/>
 
 <main class="ccc-index">
 	<header class="hero">

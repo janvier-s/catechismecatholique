@@ -1,4 +1,6 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
+
 	type PartCard = {
 		slug: string;
 		kicker: string;
@@ -49,13 +51,18 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Compendium · Catéchisme de l'Église catholique</title>
-	<meta
-		name="description"
-		content="Le Compendium du Catéchisme de l'Église catholique en français : 598 questions et réponses qui présentent l'essentiel de la foi catholique."
-	/>
-</svelte:head>
+<MetaTags
+	title="Compendium du Catéchisme de l'Église catholique"
+	description="Le Compendium du Catéchisme de l'Église catholique en français : 598 questions et réponses qui présentent l'essentiel de la foi catholique."
+	image="/img/bibliotheque/compendium.webp"
+	schema={{
+		kind: 'book',
+		name: "Compendium du Catéchisme de l'Église catholique",
+		author: 'Benoît XVI',
+		datePublished: '2005',
+		about: "Synthèse du Catéchisme de l'Église catholique en questions et réponses"
+	}}
+/>
 
 <main class="compendium-index">
 	<header class="hero">
@@ -63,8 +70,8 @@
 		<h1 class="hero-title">Compendium du Catéchisme</h1>
 		<p class="hero-lede">
 			Promulgué par Benoît&nbsp;XVI en 2005, le Compendium présente l'essentiel de la foi catholique
-			en 598 questions et réponses,<br />
-			fidèles à la structure du Catéchisme : ce que l'Église croit, célèbre, vit et prie.
+			en 598 questions et réponses, fidèles à la structure du Catéchisme : ce que l'Église croit,
+			célèbre, vit et prie.
 		</p>
 	</header>
 

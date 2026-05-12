@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -30,13 +31,17 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Code de Droit Canonique · 1917 et 1983</title>
-	<meta
-		name="description"
-		content="Les deux codes de droit canonique de l'Église latine : le Code de 1983 promulgué par saint Jean-Paul II, et le Code Pio-Benedictin de 1917."
-	/>
-</svelte:head>
+<MetaTags
+	title="Code de Droit Canonique · 1917 et 1983"
+	description="Les deux codes de droit canonique de l'Église latine : le Code de 1983 promulgué par saint Jean-Paul II, et le Code Pio-Benedictin de 1917."
+	image="/img/bibliotheque/cic-1983.webp"
+	schema={{
+		kind: 'book',
+		name: 'Codex Iuris Canonici',
+		datePublished: '1983',
+		about: "Droit canonique de l'Église latine"
+	}}
+/>
 
 <main class="cic-chooser">
 	<header class="hero">

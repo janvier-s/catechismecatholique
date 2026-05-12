@@ -1,4 +1,6 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
+
 	// Bibliothèque: a bibliographic register of every corpus the site
 	// hosts. Visual language draws from medieval scriptoria (rubrics,
 	// fleurons, hanging Roman numerals) but the typography and grid are
@@ -305,13 +307,10 @@
 	const totalShelves = $derived(shelves.length);
 </script>
 
-<svelte:head>
-	<title>Bibliothèque · Catéchisme de l'Église Catholique</title>
-	<meta
-		name="description"
-		content="Tous les textes hébergés sur le site, en quatre rayons : catéchismes, catéchèse et doctrine, magistère, études et outils. Vingt deux œuvres au total."
-	/>
-</svelte:head>
+<MetaTags
+	title="Bibliothèque · Catéchisme de l'Église Catholique"
+	description="Tous les textes hébergés sur le site, en quatre rayons : catéchismes, catéchèse et doctrine, magistère, études et outils. Vingt deux œuvres au total."
+/>
 
 <main class="biblio">
 	<header class="hero">

@@ -1,17 +1,23 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import type { PageData } from './$types';
 	import { frenchPunct } from '$lib/utils/typography';
 
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-	<title>Catéchisme illustré des vérités nécessaires · Catéchisme</title>
-	<meta
-		name="description"
-		content="Catéchisme illustré des vérités nécessaires, par A.&nbsp;L.&nbsp;R. (Wikisource) · 12 images, 12 leçons : la foi catholique enseignée par l'image et la parole."
-	/>
-</svelte:head>
+<MetaTags
+	title="Catéchisme illustré des vérités nécessaires"
+	description="Catéchisme illustré des vérités nécessaires, par A. L. R. (Wikisource) : 12 images, 12 leçons. La foi catholique enseignée par l'image et la parole."
+	image="/img/bibliotheque/catechisme-illustre.webp"
+	schema={{
+		kind: 'book',
+		name: 'Catéchisme illustré des vérités nécessaires',
+		author: 'A. L. R.',
+		datePublished: '1897',
+		about: 'Catéchisme imagé pour catéchumènes et fidèles'
+	}}
+/>
 
 <main class="ci-index">
 	<header class="hero">
