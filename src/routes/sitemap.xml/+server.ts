@@ -64,7 +64,26 @@ export const GET: RequestHandler = () => {
 		'/glossaire/tous',
 		'/recherche',
 		'/a-propos',
-		'/mentions-legales'
+		'/mentions-legales',
+		'/bibliotheque',
+		'/encycliques',
+		'/calendrier',
+		'/grand-catechisme',
+		'/grand-catechisme/sommaire',
+		'/trente',
+		'/trente/sommaire',
+		'/doctrine-catholique',
+		'/doctrine-sociale',
+		'/pgmr',
+		'/vatican-ii',
+		'/cic',
+		'/cic/1983',
+		'/cic/1917',
+		'/breviloquium',
+		'/didache',
+		'/discours-catechetique',
+		'/catecheses-mystagogiques',
+		'/catechisme-adultes'
 	];
 
 	const paragraphUrls = Array.from({ length: 2865 }, (_, i) => `/cec/${i + 1}`);
@@ -109,6 +128,58 @@ export const GET: RequestHandler = () => {
 		}
 	}
 
+	// CIC — both codes, every livre
+	const cicStructure: { codes: { code: string; livres: { slug: string }[] }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/cic/structure.json'), 'utf-8')
+	);
+	const cicUrls: string[] = [];
+	for (const code of cicStructure.codes) {
+		for (const livre of code.livres) {
+			cicUrls.push(`/cic/${code.code}/${livre.slug}`);
+		}
+	}
+
+	// Vatican II — every document
+	const vatIIStructure: { docs: { slug: string; present?: boolean }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/vatican-ii/structure.json'), 'utf-8')
+	);
+	const vatIIUrls = vatIIStructure.docs
+		.filter((d) => d.present !== false)
+		.map((d) => `/vatican-ii/${d.slug}`);
+
+	// PGMR + Doctrine sociale (CDSE) — per-chapter pages
+	const pgmrStructure: { chapters: { slug: string }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/pgmr/structure.json'), 'utf-8')
+	);
+	const pgmrUrls = pgmrStructure.chapters.map((c) => `/pgmr/${c.slug}`);
+
+	const cdseStructure: { parts: { chapters: { slug: string }[] }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/cdse/structure.json'), 'utf-8')
+	);
+	const cdseUrls: string[] = [];
+	for (const part of cdseStructure.parts) {
+		for (const ch of part.chapters) cdseUrls.push(`/doctrine-sociale/${ch.slug}`);
+	}
+
+	// Breviloquium — every chapter
+	const brevStructure: { parts: { chapters: { slug: string }[] }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/breviloquium/structure.json'), 'utf-8')
+	);
+	const brevUrls: string[] = [];
+	for (const part of brevStructure.parts) {
+		for (const ch of part.chapters) brevUrls.push(`/breviloquium/${ch.slug}`);
+	}
+
+	// Catéchisme pour Adultes — every section page
+	const cpaStructure: { sections: { slug: string }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/catechisme-adultes/structure.json'), 'utf-8')
+	);
+	const cpaUrls = cpaStructure.sections.map((s) => `/catechisme-adultes/${s.slug}`);
+
+	// Patristique single-page works: just the landing pages (already in
+	// staticPages). Chapter anchors live under hash fragments and don't
+	// need their own sitemap entries.
+
 	const allUrls = [
 		...staticPages,
 		...paragraphUrls,
@@ -116,7 +187,13 @@ export const GET: RequestHandler = () => {
 		...bibleUrls,
 		...glossaryUrls,
 		...denzingerUrls,
-		...boulangerUrls
+		...boulangerUrls,
+		...cicUrls,
+		...vatIIUrls,
+		...pgmrUrls,
+		...cdseUrls,
+		...brevUrls,
+		...cpaUrls
 	];
 
 	const xml = [

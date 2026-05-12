@@ -1,7 +1,7 @@
 {
 	"name": "Catéchisme de l'Église Catholique",
 	"short_name": "Catéchisme",
-	"description": "Bibliothèque catéchétique catholique : CEC, Compendium, Denzinger, Boulanger, saint Pie X et plus. Lecture, recherche et étude en français.",
+	"description": "Bibliothèque catéchétique catholique : CEC, Bible, Compendium, Trente, saint Pie X, Vatican II, Code de Droit Canonique, Pères de l'Église. Lecture, recherche et étude en français.",
 	"lang": "fr",
 	"start_url": "/",
 	"scope": "/",

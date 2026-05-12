@@ -116,9 +116,37 @@ L'extraction Phase 1 inclut le texte intégral des entrées numérotées et le t
 
 ### Accès à Boulanger
 
-- Accueil : `https://catechismecatholique.fr/boulanger`
-- Sommaire : `/boulanger/sommaire`
-- Une leçon : `/boulanger/{slug}` — ex. `/boulanger/tome-1-lecon-01-le-probleme-de-la-destinee`
+- Accueil : `https://catechismecatholique.fr/doctrine-catholique`
+- Sommaire : `/doctrine-catholique/sommaire`
+- Une leçon : `/doctrine-catholique/{slug}` — ex. `/doctrine-catholique/tome-1-lecon-01-le-probleme-de-la-destinee`
+
+---
+
+## Catéchismes additionnels
+
+- **Catéchisme du Concile de Trente** (1566) : `/trente` — quatre parties (Credo, sacrements, Décalogue, Pater).
+- **Grand Catéchisme** de saint Pie X (1905) : `/grand-catechisme` — 989 questions étendues.
+- **Catéchisme pour Adultes** des Évêques de France (1991) : `/catechisme-adultes` — 47 sections / 370 chapitres / 665 paragraphes numérotés.
+
+## Catéchèse patristique et doctrinale
+
+- **La Didachè** (Iᵉʳ siècle, traduction Hemmer 1907) : `/didache` — 16 chapitres, plus ancien document catéchétique chrétien.
+- **Catéchèses mystagogiques** de saint Cyrille de Jérusalem (vers 350) : `/catecheses-mystagogiques` — 5 instructions sur les sacrements d'initiation.
+- **Discours catéchétique** de saint Grégoire de Nysse (IVᵉ siècle, Méridier 1908) : `/discours-catechetique` — 40 chapitres.
+- **Breviloquium** de saint Bonaventure (1257) : `/breviloquium` — 7 parties, 79 chapitres.
+- **Compendium de la doctrine sociale de l'Église** (2004) : `/doctrine-sociale` — 583 paragraphes en trois parties.
+
+## Magistère
+
+- **Vatican II** (1962–1965) : `/vatican-ii` — 16 documents (4 constitutions, 9 décrets, 3 déclarations).
+- **Code de Droit Canonique** (1983) : `/cic/1983` — Codex Iuris Canonici, 1752 canons.
+- **Code Pio-Benedictin** (1917) : `/cic/1917` — premier code unifié, 2414 canons.
+- **Présentation Générale du Missel Romain** (2002) : `/pgmr` — norme liturgique, 9 chapitres.
+- **Encycliques** (à venir) : `/encycliques`.
+
+## Bibliothèque
+
+Catalogue de tous les corpus hébergés : `/bibliotheque` — quatre rayons (Catéchismes, Catéchèse & doctrine, Magistère, Études & outils) avec couvertures et notices.
 
 ---
 

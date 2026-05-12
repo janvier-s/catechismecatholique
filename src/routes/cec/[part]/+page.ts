@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { loadStructure, loadParagraph } from '$lib/data/loaders';
 import type { Structure } from '$lib/data/types';
 import type { PageLoad } from './$types';
@@ -7,6 +7,14 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const struct = (await loadStructure(fetch)) as Structure;
 	const part = struct.parts.find((p) => p.slug === params.part);
 	if (!part) throw error(404, 'Partie introuvable');
+
+	// Parts that carry no intro paragraphs of their own (1, 4) would render
+	// an essentially empty title + section-list page. Redirect to the first
+	// section so visitors land on actual content.
+	if ((part.intro_paragraphs ?? []).length === 0 && part.sections.length > 0) {
+		const first = part.sections[0]!;
+		throw redirect(307, `/cec/${part.slug}/${first.slug}`);
+	}
 
 	// Pre-load any part-level intro paragraphs (Part 2's "Pourquoi la
 	// Liturgie?" §§1066-1075, Part 3's §§1691-1698) so the page renders
