@@ -12,6 +12,10 @@
 		blurb: string;
 		year: string;
 		image: string;
+		/** Which edge of the cover to anchor when cropping inside the 3:4
+		 *  card. Defaults to centre. Use 'top' for a head-anchored
+		 *  illustration, 'bottom' for a footer plate. */
+		focus?: 'top' | 'center' | 'bottom';
 	};
 	type Shelf = {
 		roman: 'I' | 'II' | 'III' | 'IV';
@@ -22,6 +26,31 @@
 
 	const PLACEHOLDER = '/img/bibliotheque/placeholder.png';
 
+	// The two foundational works the rest of the library serves: the
+	// Catéchisme de l'Église Catholique (the site's primary text) and the
+	// Bible. Rendered as larger featured cards above the four shelves.
+	const featured: Work[] = [
+		{
+			slug: 'cec',
+			href: '/cec',
+			title: "Catéchisme de l'Église Catholique",
+			subtitle: 'Catechismus Catholicae Ecclesiae, édition française',
+			blurb:
+				'Deux mille huit cent soixante cinq paragraphes en quatre parties. Le texte de référence.',
+			year: '1992',
+			image: '/img/bibliotheque/cec.webp'
+		},
+		{
+			slug: 'bible',
+			href: '/bible',
+			title: 'Bible',
+			subtitle: 'Édition catholique en français',
+			blurb: 'Texte intégral, lu chapitre par chapitre, croisé verset par verset au Catéchisme.',
+			year: 'Écritures',
+			image: '/img/bibliotheque/bible.webp'
+		}
+	];
+
 	const shelves: Shelf[] = [
 		{
 			roman: 'I',
@@ -29,22 +58,35 @@
 			kicker: 'Exposés systématiques de la foi',
 			works: [
 				{
+					slug: 'compendium',
+					focus: 'top',
+					href: '/compendium',
+					title: 'Compendium',
+					subtitle: "Abrégé officiel du Catéchisme de l'Église Catholique",
+					blurb: 'Cinq cent quatre vingt dix huit questions reprises de la grande édition de 1992.',
+					year: '2005',
+					image: '/img/bibliotheque/compendium.webp'
+				},
+				{
 					slug: 'trente',
+					focus: 'top',
 					href: '/trente',
 					title: 'Catéchisme du Concile de Trente',
 					subtitle: 'Catechismus ex decreto Concilii Tridentini',
 					blurb: 'Le catéchisme romain promulgué après le Concile de Trente, en quatre parties.',
 					year: '1566',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/trente.webp'
 				},
 				{
-					slug: 'catechisme-illustre',
-					href: '/catechisme-illustre',
-					title: 'Catéchisme illustré',
-					subtitle: 'Les vérités nécessaires en douze leçons',
-					blurb: 'Douze leçons accompagnées de gravures sur bois, pour la catéchèse populaire.',
-					year: '1897',
-					image: PLACEHOLDER
+					slug: 'petit-catechisme',
+					focus: 'top',
+					href: '/petit-catechisme',
+					title: 'Petit Catéchisme',
+					subtitle: 'Catéchisme de la Doctrine Chrétienne',
+					blurb:
+						"L'abrégé pour les fidèles, ordonné par saint Pie X pour les premiers enseignements.",
+					year: '1912',
+					image: '/img/bibliotheque/petit-catechisme.webp'
 				},
 				{
 					slug: 'grand-catechisme',
@@ -53,35 +95,26 @@
 					subtitle: 'Catéchisme de saint Pie X, version étendue',
 					blurb: "Neuf cent quatre vingt neuf questions et réponses sur l'ensemble de la doctrine.",
 					year: '1905',
-					image: PLACEHOLDER
-				},
-				{
-					slug: 'petit-catechisme',
-					href: '/petit-catechisme',
-					title: 'Petit Catéchisme',
-					subtitle: 'Catéchisme de la Doctrine Chrétienne',
-					blurb:
-						"L'abrégé pour les fidèles, ordonné par saint Pie X pour les premiers enseignements.",
-					year: '1912',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/grand-catechisme.webp'
 				},
 				{
 					slug: 'catechisme-adultes',
+					focus: 'top',
 					href: '/catechisme-adultes',
 					title: 'Catéchisme pour Adultes',
 					subtitle: 'Catéchisme des Évêques de France',
 					blurb: 'Exposé thématique en quarante sept sections, adressé aux fidèles adultes.',
 					year: '1991',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/catechisme-adultes.webp'
 				},
 				{
-					slug: 'compendium',
-					href: '/compendium',
-					title: 'Compendium',
-					subtitle: "Abrégé officiel du Catéchisme de l'Église Catholique",
-					blurb: 'Cinq cent quatre vingt dix huit questions reprises de la grande édition de 1992.',
-					year: '2005',
-					image: PLACEHOLDER
+					slug: 'catechisme-illustre',
+					href: '/catechisme-illustre',
+					title: 'Catéchisme illustré',
+					subtitle: 'Les vérités nécessaires en douze leçons',
+					blurb: 'Douze leçons accompagnées de gravures sur bois, pour la catéchèse populaire.',
+					year: '1897',
+					image: '/img/bibliotheque/catechisme-illustre.webp'
 				}
 			]
 		},
@@ -97,34 +130,37 @@
 					subtitle: 'Doctrine des douze Apôtres',
 					blurb: 'Plus ancien document catéchétique chrétien, en seize courts chapitres.',
 					year: 'Iᵉʳ siècle',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/didache.webp'
 				},
 				{
 					slug: 'catecheses-mystagogiques',
+					focus: 'bottom',
 					href: '/catecheses-mystagogiques',
 					title: 'Catéchèses mystagogiques',
 					subtitle: 'Saint Cyrille de Jérusalem, aux nouveaux baptisés',
 					blurb: "Cinq instructions sur les sacrements de l'initiation, données vers 350.",
 					year: 'vers 350',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/catecheses-mystagogiques.webp'
 				},
 				{
 					slug: 'discours-catechetique',
+					focus: 'top',
 					href: '/discours-catechetique',
 					title: 'Discours catéchétique',
 					subtitle: 'Saint Grégoire de Nysse, Oratio catechetica magna',
 					blurb: 'Manuel théologique patristique en quarante chapitres, par un Père cappadocien.',
 					year: 'IVᵉ siècle',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/discours-catechetique.webp'
 				},
 				{
 					slug: 'breviloquium',
+					focus: 'top',
 					href: '/breviloquium',
 					title: 'Breviloquium',
 					subtitle: 'Saint Bonaventure, somme théologique abrégée',
 					blurb: 'Sept parties, soixante dix neuf chapitres : un compendium de la théologie.',
 					year: '1257',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/breviloquium.webp'
 				},
 				{
 					slug: 'doctrine-catholique',
@@ -133,7 +169,7 @@
 					subtitle: 'Abbé Boulenger, en cinquante trois leçons',
 					blurb: 'Une pédagogie de la doctrine pour adultes, organisée en trois tomes.',
 					year: '1927',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/doctrine-catholique.webp'
 				},
 				{
 					slug: 'doctrine-sociale',
@@ -142,7 +178,7 @@
 					subtitle: "Compendium de la doctrine sociale de l'Église",
 					blurb: 'Cinq cent quatre vingt trois paragraphes en trois parties.',
 					year: '2004',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/doctrine-sociale.webp'
 				}
 			]
 		},
@@ -158,7 +194,7 @@
 					subtitle: 'Les seize documents du Concile œcuménique',
 					blurb: 'Quatre constitutions, neuf décrets et trois déclarations.',
 					year: '1962 à 1965',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/vatican-ii.webp'
 				},
 				{
 					slug: 'denzinger',
@@ -167,7 +203,7 @@
 					subtitle: 'Enchiridion Symbolorum',
 					blurb: 'Recueil canonique des symboles, définitions et déclarations du Magistère.',
 					year: 'Recueil',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/denzinger.webp'
 				},
 				{
 					slug: 'cic-1983',
@@ -176,7 +212,7 @@
 					subtitle: 'Codex Iuris Canonici en vigueur',
 					blurb: 'Mille sept cent cinquante deux canons. Promulgué par saint Jean Paul II.',
 					year: '1983',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/cic-1983.webp'
 				},
 				{
 					slug: 'cic-1917',
@@ -185,7 +221,7 @@
 					subtitle: 'Codex Iuris Canonici précédent',
 					blurb: "Premier code unifié du droit de l'Église latine, en vigueur jusqu'en 1983.",
 					year: '1917',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/cic-1917.webp'
 				},
 				{
 					slug: 'pgmr',
@@ -194,6 +230,15 @@
 					subtitle: 'Norme liturgique en neuf chapitres',
 					blurb: 'Le texte de référence pour la célébration ordinaire de la messe romaine.',
 					year: '2002',
+					image: '/img/bibliotheque/pgmr.webp'
+				},
+				{
+					slug: 'encycliques',
+					href: '/encycliques',
+					title: 'Encycliques',
+					subtitle: 'Lettres pontificales hors Vatican II',
+					blurb: 'Recueil des encycliques majeures du Magistère pontifical (à venir).',
+					year: 'Recueil',
 					image: PLACEHOLDER
 				}
 			]
@@ -228,7 +273,7 @@
 					subtitle: 'Chaque verset croisé avec le Catéchisme',
 					blurb: 'Lecture intégrale et concordance verset par verset avec les paragraphes du CEC.',
 					year: 'Outil',
-					image: PLACEHOLDER
+					image: '/img/bibliotheque/bible.webp'
 				},
 				{
 					slug: 'calendrier',
@@ -252,7 +297,9 @@
 		}
 	];
 
-	const totalWorks = $derived(shelves.reduce((sum, shelf) => sum + shelf.works.length, 0));
+	const totalWorks = $derived(
+		featured.length + shelves.reduce((sum, shelf) => sum + shelf.works.length, 0)
+	);
 	const totalShelves = $derived(shelves.length);
 </script>
 
@@ -285,48 +332,92 @@
 		</p>
 	</header>
 
+	<!-- Featured: the two foundational works the rest of the library serves. -->
+	<section class="featured" aria-label="Œuvres fondatrices">
+		{#each featured as work, fi (work.slug)}
+			<a class="card card-featured" href={work.href} style="--card-index: {fi}">
+				<figure class="cover">
+					<img
+						src={work.image}
+						alt={`${work.title}, couverture`}
+						loading="lazy"
+						style={`object-position: 50% ${work.focus === 'top' ? '0%' : work.focus === 'bottom' ? '100%' : '50%'}`}
+					/>
+					<span class="cover-shine" aria-hidden="true"></span>
+				</figure>
+				<div class="card-body">
+					<p class="card-year">{work.year}</p>
+					<h3 class="card-title card-title-featured">{work.title}</h3>
+					{#if work.subtitle}
+						<p class="card-sub">{work.subtitle}</p>
+					{/if}
+					<p class="card-blurb">{work.blurb}</p>
+					<span class="card-cta">
+						Lire<span class="card-cta-arrow" aria-hidden="true">→</span>
+					</span>
+				</div>
+			</a>
+		{/each}
+	</section>
+
 	{#each shelves as shelf, si (shelf.roman)}
 		<section class="shelf" style="--shelf-index: {si}" aria-labelledby={`shelf-${shelf.roman}`}>
-			<aside class="shelf-marker" aria-hidden="true">{shelf.roman}</aside>
 			<header class="shelf-head">
-				<p class="shelf-kicker">Rayon {shelf.roman} · {shelf.works.length} œuvres</p>
 				<h2 id={`shelf-${shelf.roman}`} class="shelf-title">{shelf.title}</h2>
 				<p class="shelf-sub">{shelf.kicker}</p>
 				<span class="shelf-rule" aria-hidden="true"></span>
 			</header>
 
-			<ul class="grid">
-				{#each shelf.works as work, wi (work.slug)}
-					<li class="card-wrap" style="--card-index: {wi}">
-						<a class="card" href={work.href}>
-							<figure class="cover">
-								<img src={work.image} alt={`${work.title}, couverture`} loading="lazy" />
-								<span class="cover-shine" aria-hidden="true"></span>
-							</figure>
-							<div class="card-body">
-								<p class="card-year">{work.year}</p>
-								<h3 class="card-title">{work.title}</h3>
-								{#if work.subtitle}
-									<p class="card-sub">{work.subtitle}</p>
-								{/if}
-								<p class="card-blurb">{work.blurb}</p>
-								<span class="card-arrow" aria-hidden="true">
-									<svg viewBox="0 0 24 12" width="22" height="11">
-										<path
-											d="M0.5 6h21.5M16.5 1.5L22 6l-5.5 4.5"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="1.2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										/>
-									</svg>
+			{#if shelf.roman === 'IV'}
+				<!-- Études & outils: not "books". Rendered as flat compact tiles
+				     with a small accent rule, no cover image, no Lire CTA. -->
+				<ul class="tools-grid">
+					{#each shelf.works as work, wi (work.slug)}
+						<li class="tool-wrap" style="--card-index: {wi}">
+							<a class="tool" href={work.href}>
+								<span class="tool-mark" aria-hidden="true">✠</span>
+								<span class="tool-body">
+									<h3 class="tool-title">{work.title}</h3>
+									{#if work.subtitle}
+										<p class="tool-sub">{work.subtitle}</p>
+									{/if}
+									<p class="tool-blurb">{work.blurb}</p>
 								</span>
-							</div>
-						</a>
-					</li>
-				{/each}
-			</ul>
+								<span class="tool-arrow" aria-hidden="true">→</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
+			{:else}
+				<ul class="grid">
+					{#each shelf.works as work, wi (work.slug)}
+						<li class="card-wrap" style="--card-index: {wi}">
+							<a class="card" href={work.href}>
+								<figure class="cover">
+									<img
+										src={work.image}
+										alt={`${work.title}, couverture`}
+										loading="lazy"
+										style={`object-position: 50% ${work.focus === 'top' ? '0%' : work.focus === 'bottom' ? '100%' : '50%'}`}
+									/>
+									<span class="cover-shine" aria-hidden="true"></span>
+								</figure>
+								<div class="card-body">
+									<p class="card-year">{work.year}</p>
+									<h3 class="card-title">{work.title}</h3>
+									{#if work.subtitle}
+										<p class="card-sub">{work.subtitle}</p>
+									{/if}
+									<p class="card-blurb">{work.blurb}</p>
+									<span class="card-cta">
+										Lire<span class="card-cta-arrow" aria-hidden="true">→</span>
+									</span>
+								</div>
+							</a>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</section>
 	{/each}
 
@@ -454,45 +545,9 @@
 		}
 	}
 
-	/* Roman numeral hanging in the left margin on desktop, inline on tablet. */
-	.shelf-marker {
-		position: absolute;
-		top: -0.5rem;
-		left: -3.5rem;
-		font-family: var(--font-heading);
-		font-style: italic;
-		font-weight: 400;
-		font-size: 4rem;
-		line-height: 1;
-		color: transparent;
-		-webkit-text-stroke: 1px color-mix(in srgb, var(--color-accent) 65%, transparent);
-		letter-spacing: 0.02em;
-		user-select: none;
-	}
-	@media (max-width: 900px) {
-		.shelf-marker {
-			position: static;
-			display: block;
-			font-size: 2.4rem;
-			-webkit-text-stroke: 1px var(--color-accent);
-			color: transparent;
-			margin-bottom: 0.4rem;
-		}
-	}
-
 	.shelf-head {
 		margin-bottom: 1.75rem;
 		position: relative;
-	}
-	.shelf-kicker {
-		font-family: var(--font-ui);
-		font-size: 0.66rem;
-		font-weight: 700;
-		letter-spacing: 0.24em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		font-variant-numeric: tabular-nums;
-		margin: 0 0 0.4rem;
 	}
 	.shelf-title {
 		font-family: var(--font-heading);
@@ -502,12 +557,6 @@
 		line-height: 1.1;
 		margin: 0;
 		text-wrap: balance;
-	}
-	/* Drop-cap: oversize the first letter of the shelf title, tint with accent. */
-	.shelf-title::first-letter {
-		font-size: 1.35em;
-		color: color-mix(in srgb, var(--color-accent) 75%, var(--color-fg));
-		padding-right: 0.04em;
 	}
 	.shelf-sub {
 		font-family: var(--font-body);
@@ -529,15 +578,45 @@
 	}
 
 	/* Card grid --------------------------------------------------------- */
+	/* Fixed 3 columns on desktop avoids orphan single-card last rows that
+	   `auto-fit` produces at wide viewports. Drops to 2 on tablet and 1
+	   on phone via plain media queries. */
 	.grid {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+		grid-template-columns: repeat(3, 1fr);
 		gap: 1.6rem 1.4rem;
 	}
+	@media (max-width: 880px) {
+		.grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 560px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Featured row: the two foundational works, side by side. */
+	.featured {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.6rem 1.4rem;
+		margin-bottom: clamp(2.5rem, 5vw, 4rem);
+		padding-bottom: clamp(2rem, 5vw, 3.5rem);
+		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+	}
+	@media (max-width: 560px) {
+		.featured {
+			grid-template-columns: 1fr;
+		}
+	}
+
 	.card-wrap {
+		display: flex;
 		opacity: 0;
 		animation: card-in 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 		animation-delay: calc(var(--card-index) * 40ms + var(--shelf-index, 0) * 120ms + 200ms);
@@ -562,9 +641,17 @@
 		padding: 0.5rem 0.5rem 0.85rem;
 		border-radius: 4px;
 		position: relative;
+		width: 100%;
 		transition:
 			transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
 			color 160ms ease;
+	}
+	/* Featured cards in the top row stretch full width of their grid cell
+	   and use the same stretch behaviour as shelf cards. */
+	.card-featured {
+		opacity: 0;
+		animation: card-in 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation-delay: calc(var(--card-index) * 60ms + 100ms);
 	}
 	.card::after {
 		content: '';
@@ -635,6 +722,7 @@
 		gap: 0.25rem;
 		padding: 0 0.1rem;
 		position: relative;
+		flex: 1 1 auto;
 	}
 	.card-year {
 		font-family: var(--font-ui);
@@ -675,17 +763,133 @@
 		color: var(--color-muted);
 		margin: 0;
 	}
-	.card-arrow {
+	/* CTA: same visual register as the homepage's primary CTA. Accent
+	   colour, ui font, letter-spaced caps, arrow that translates on
+	   hover. Sized down to a card-appropriate scale. Pushed to the
+	   bottom of the body via margin-top auto so it lines up across
+	   cards regardless of how long each blurb is. */
+	.card-cta {
 		display: inline-flex;
 		align-items: center;
-		margin-top: 0.5rem;
+		gap: 0.5rem;
+		margin-top: auto;
+		padding-top: 0.65rem;
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		font-variant-numeric: tabular-nums;
+	}
+	.card-cta-arrow {
+		display: inline-block;
+		line-height: 1;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.card:hover .card-cta-arrow,
+	.card:focus-visible .card-cta-arrow {
+		transform: translateX(4px);
+	}
+
+	.card-title-featured {
+		font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+	}
+
+	/* Études & outils ------------------------------------------------- */
+	/* The fourth shelf carries tools rather than books, so it deliberately
+	   skips the cover-image treatment. A flat 2-column tile list with a
+	   small fleuron marker keeps the visual language consistent (italic
+	   titles, accent rule on hover) without misrepresenting these as
+	   bound works. */
+	.tools-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.6rem 1.2rem;
+	}
+	@media (max-width: 720px) {
+		.tools-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+	.tool-wrap {
+		display: flex;
+		opacity: 0;
+		animation: card-in 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation-delay: calc(var(--card-index) * 40ms + var(--shelf-index, 0) * 120ms + 200ms);
+	}
+	.tool {
+		display: grid;
+		grid-template-columns: 1.5rem 1fr auto;
+		align-items: start;
+		gap: 0.85rem;
+		width: 100%;
+		padding: 0.95rem 1rem 1rem;
+		text-decoration: none;
+		color: var(--color-fg);
+		border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+		transition:
+			background-color 160ms ease,
+			color 160ms ease;
+	}
+	.tool:hover,
+	.tool:focus-visible {
+		background: color-mix(in srgb, var(--color-accent) 5%, transparent);
+		color: var(--color-accent);
+		outline: none;
+	}
+	.tool-mark {
+		font-family: var(--font-heading);
+		color: var(--color-accent);
+		font-size: 0.95rem;
+		line-height: 1.4;
+		text-align: center;
+	}
+	.tool-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		min-width: 0;
+	}
+	.tool-title {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-weight: 700;
+		font-size: 1.05rem;
+		line-height: 1.25;
+		margin: 0;
+		color: inherit;
+		text-wrap: balance;
+	}
+	.tool-sub {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 0.84rem;
+		color: var(--color-subtle);
+		margin: 0;
+		line-height: 1.4;
+	}
+	.tool-blurb {
+		font-family: var(--font-body);
+		font-size: 0.82rem;
+		line-height: 1.5;
+		color: var(--color-muted);
+		margin: 0.15rem 0 0;
+	}
+	.tool-arrow {
+		font-family: var(--font-heading);
+		font-size: 1.1rem;
 		color: color-mix(in srgb, var(--color-fg) 35%, transparent);
+		align-self: center;
 		transition:
 			color 160ms ease,
-			transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+			transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
-	.card:hover .card-arrow,
-	.card:focus-visible .card-arrow {
+	.tool:hover .tool-arrow,
+	.tool:focus-visible .tool-arrow {
 		color: var(--color-accent);
 		transform: translateX(3px);
 	}
@@ -714,7 +918,7 @@
 		.card,
 		.card::after,
 		.cover img,
-		.card-arrow {
+		.card-cta-arrow {
 			transition: none;
 		}
 	}
