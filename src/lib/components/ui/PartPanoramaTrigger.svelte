@@ -17,7 +17,7 @@
 	});
 </script>
 
-{#if ctx}
+{#if ctx && !ctx.isPrologue}
 	<button
 		type="button"
 		class="trigger"
