@@ -668,12 +668,24 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		min-height: 0 !important;
 		justify-content: center !important;
 	}
-	/* The brand link wraps both marks; stack them vertically and centre. */
+	/* Brand link: 3-column grid so the logo hangs on the left edge while
+	   the wordmark sits in the true horizontal centre of the page. The
+	   empty third column balances the right side. */
 	.topbar > div > a[href='/'] {
-		flex-direction: column !important;
+		display: grid !important;
+		grid-template-columns: 1fr 1fr 1fr !important;
 		align-items: center !important;
-		gap: 6px !important;
-		margin: 0 auto !important;
+		width: 100% !important;
+		gap: 0 !important;
+		margin: 0 !important;
+	}
+	.topbar .logo-mark {
+		grid-column: 1 !important;
+		justify-self: start !important;
+	}
+	.topbar .wordmark {
+		grid-column: 2 !important;
+		justify-self: center !important;
 	}
 	/* Drop empty spacer + every other direct child of the topbar inner
 	   row; the brand link is the only thing left on paper. */
@@ -707,11 +719,15 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	.ccc-side-refs {
 		display: none !important;
 	}
-	/* Hide cccRef sup decorations; bibleRef inline citations stay because
-	   they belong to the original text. */
-	sup.srcRef.cccRef,
-	sup.srcRef.docRef {
+	/* Hide every footnote / cross-ref marker · cccRef, docRef, bibleRef,
+	   and patristic verse-number superscripts. The inline parenthetical
+	   refs stay; only the small floating markers go. Margin/padding
+	   reset so adjacent text closes up cleanly. */
+	sup.srcRef,
+	sup.verse-num {
 		display: none !important;
+		margin: 0 !important;
+		padding: 0 !important;
 	}
 	/* Avoid breaking paragraphs, citation blocks, and list items across pages. */
 	.ccc-paragraph,
