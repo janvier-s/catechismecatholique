@@ -653,14 +653,14 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		opacity: 1 !important;
 		animation: none !important;
 	}
-	/* Topbar in print: a quiet masthead with just the logo + wordmark.
-	   Drop sticky, border, and background so it reads as a flat header. */
+	/* Topbar in print: a quiet centred masthead · logo above wordmark,
+	   no border or background. */
 	.topbar {
 		position: static !important;
 		border: 0 !important;
 		background: transparent !important;
 		min-height: 0 !important;
-		padding: 0 0 8mm 0 !important;
+		padding: 0 0 6mm 0 !important;
 		margin: 0 !important;
 	}
 	.topbar > div {
@@ -668,16 +668,23 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		min-height: 0 !important;
 		justify-content: center !important;
 	}
+	/* The brand link wraps both marks; stack them vertically and centre. */
+	.topbar > div > a[href='/'] {
+		flex-direction: column !important;
+		align-items: center !important;
+		gap: 6px !important;
+	}
 	/* Wordmark is hidden below 768px on screen. Print emulates a narrow
 	   viewport in some browsers, so force it visible on paper. */
 	.wordmark {
 		display: flex !important;
 	}
 	/* Bump the logo on paper · 56px reads small once the topbar is
-	   stripped of its sticky chrome. */
-	.logo-mark img {
-		width: 72px !important;
-		height: 72px !important;
+	   stripped of its sticky chrome. Size the wrapper (which constrains
+	   the img via width:100%/height:100%) so the aspect ratio is kept. */
+	.logo-mark {
+		width: 64px !important;
+		height: 64px !important;
 	}
 	/* Full-width prose column. */
 	main {
