@@ -731,7 +731,7 @@
 	}
 	.card-title {
 		font-family: var(--font-heading);
-		font-style: italic;
+		font-style: normal;
 		font-weight: 700;
 		font-size: 1.18rem;
 		line-height: 1.18;
