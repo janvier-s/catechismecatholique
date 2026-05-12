@@ -93,11 +93,19 @@ async function main() {
 	// bin/use-local-data-cache.sh has been used to escape iCloud
 	// eviction), preserve the link and clear its target's contents
 	// instead of deleting the link itself.
+	//
+	// Preserve directories whose source isn't part of this repo and that we
+	// commit as a snapshot. Without this, a `prepare-data` run on a machine
+	// missing DIDACHE_SOURCE_DIR wipes the 3000-file concordance and the
+	// build's "using committed snapshot" path has nothing to fall back to.
+	const PRESERVE = new Set(['concordance']);
 	if (existsSync(OUT)) {
-		if (lstatSync(OUT).isSymbolicLink()) {
-			for (const f of readdirSync(OUT)) rmSync(join(OUT, f), { recursive: true });
-		} else {
-			rmSync(OUT, { recursive: true });
+		// Same wipe strategy whether OUT is a symlink (clear target's
+		// contents) or a real dir (here we used to rmSync the whole dir, but
+		// that obliterated the preserved subtrees too).
+		for (const f of readdirSync(OUT)) {
+			if (PRESERVE.has(f)) continue;
+			rmSync(join(OUT, f), { recursive: true });
 		}
 	}
 	mkdirSync(join(OUT, 'cec'), { recursive: true });
@@ -342,6 +350,7 @@ async function main() {
 			process.env.DIDACHE_SOURCE_DIR ?? join(ROOT, '..', 'DOCTRINA', 'sources', 'didache');
 
 		const htmlFiles: string[] = [];
+		let sourcePresent = true;
 		try {
 			const stat = statSync(sourceDir);
 			if (!stat.isDirectory()) throw new Error(`not a directory: ${sourceDir}`);
@@ -354,71 +363,85 @@ async function main() {
 		} catch (e) {
 			const err = e as NodeJS.ErrnoException;
 			if (err.code === 'ENOENT' || err.message?.startsWith('not a directory:')) {
-				console.warn(`  (no DIDACHE_SOURCE_DIR at ${sourceDir} — emitting empty concordance)`);
+				sourcePresent = false;
 			} else {
 				throw e;
 			}
 		}
 
-		const nclSections = JSON.parse(readFileSync(join(OUT, 'bible/ncl-sections.json'), 'utf8'));
-		const { byBook, byParagraph, manifest, stats } = buildConcordancePericopes(
-			htmlFiles,
-			ncl,
-			knownParas,
-			BOOKS,
-			nclSections
-		);
-
-		const concordanceDir = join(OUT, 'concordance');
-		mkdirSync(concordanceDir, { recursive: true });
-		for (const [usfx, byCh] of Object.entries(byBook)) {
-			const slug = BOOKS.find((b) => b.usfx === usfx)!.slug;
-			const bookDir = join(concordanceDir, slug);
-			mkdirSync(bookDir, { recursive: true });
-			for (const [ch, chapter] of Object.entries(byCh)) {
-				writeFileSync(join(bookDir, `${ch}.json`), JSON.stringify(chapter));
-			}
-		}
-		writeFileSync(join(concordanceDir, 'manifest.json'), JSON.stringify(manifest));
-		writeFileSync(join(concordanceDir, 'by-paragraph.json'), JSON.stringify(byParagraph));
-
-		// Per-paragraph shards: each paragraph with concordance data gets its
-		// own /data/concordance/by-paragraph/{n}.json so the panel only fetches
-		// the entries it needs. The companion manifest lists which paragraph
-		// numbers exist so callers can skip 404s.
-		const byParagraphDir = join(concordanceDir, 'by-paragraph');
-		mkdirSync(byParagraphDir, { recursive: true });
-		const byParagraphNumbers: number[] = [];
-		for (const [pNumStr, entries] of Object.entries(byParagraph)) {
-			writeFileSync(join(byParagraphDir, `${pNumStr}.json`), JSON.stringify(entries));
-			byParagraphNumbers.push(parseInt(pNumStr, 10));
-		}
-		byParagraphNumbers.sort((a, b) => a - b);
-		writeFileSync(
-			join(concordanceDir, 'by-paragraph-manifest.json'),
-			JSON.stringify(byParagraphNumbers)
-		);
-
-		// Drop the old verse-index file if it still exists
-		try {
-			unlinkSync(join(OUT, 'cec/concordance-verse-index.json'));
-		} catch {
-			// File already gone — ignore.
-		}
-
-		if (stats.unknownBooks.length > 0)
-			console.warn('  unknown books:', stats.unknownBooks.join(', '));
-		if (stats.unknownParagraphs.length > 0)
-			console.warn(`  ${stats.unknownParagraphs.length} unknown CCC paragraphs (dropped)`);
-		if (stats.unparseableRanges.length > 0)
-			console.warn(`  ${stats.unparseableRanges.length} unparseable ranges`);
-		if (stats.booksWithZeroEntries.length > 0)
-			console.warn(
-				`  ${stats.booksWithZeroEntries.length} books with zero entries: ${stats.booksWithZeroEntries.join(', ')}`
+		// When the source dir is missing OR contains no HTML files, keep the
+		// committed snapshot. Writing an empty concordance here used to clobber
+		// the entire /data/concordance/ tree (3000+ files) on every dev build —
+		// the link disappeared site-wide.
+		if (!sourcePresent || htmlFiles.length === 0) {
+			endStep(
+				sourcePresent
+					? 'no source files — using committed snapshot'
+					: 'source not found — using committed snapshot'
 			);
-		if (stats.pericopesWithoutTitle > 0)
-			console.warn(`  ${stats.pericopesWithoutTitle} pericopes without NCL title (kept titleless)`);
-		endStep(`${stats.commentaryFiles} files, ${stats.pericopesEmitted} pericopes`);
+		} else {
+			const nclSections = JSON.parse(readFileSync(join(OUT, 'bible/ncl-sections.json'), 'utf8'));
+			const { byBook, byParagraph, manifest, stats } = buildConcordancePericopes(
+				htmlFiles,
+				ncl,
+				knownParas,
+				BOOKS,
+				nclSections
+			);
+
+			const concordanceDir = join(OUT, 'concordance');
+			mkdirSync(concordanceDir, { recursive: true });
+			for (const [usfx, byCh] of Object.entries(byBook)) {
+				const slug = BOOKS.find((b) => b.usfx === usfx)!.slug;
+				const bookDir = join(concordanceDir, slug);
+				mkdirSync(bookDir, { recursive: true });
+				for (const [ch, chapter] of Object.entries(byCh)) {
+					writeFileSync(join(bookDir, `${ch}.json`), JSON.stringify(chapter));
+				}
+			}
+			writeFileSync(join(concordanceDir, 'manifest.json'), JSON.stringify(manifest));
+			writeFileSync(join(concordanceDir, 'by-paragraph.json'), JSON.stringify(byParagraph));
+
+			// Per-paragraph shards: each paragraph with concordance data gets its
+			// own /data/concordance/by-paragraph/{n}.json so the panel only fetches
+			// the entries it needs. The companion manifest lists which paragraph
+			// numbers exist so callers can skip 404s.
+			const byParagraphDir = join(concordanceDir, 'by-paragraph');
+			mkdirSync(byParagraphDir, { recursive: true });
+			const byParagraphNumbers: number[] = [];
+			for (const [pNumStr, entries] of Object.entries(byParagraph)) {
+				writeFileSync(join(byParagraphDir, `${pNumStr}.json`), JSON.stringify(entries));
+				byParagraphNumbers.push(parseInt(pNumStr, 10));
+			}
+			byParagraphNumbers.sort((a, b) => a - b);
+			writeFileSync(
+				join(concordanceDir, 'by-paragraph-manifest.json'),
+				JSON.stringify(byParagraphNumbers)
+			);
+
+			// Drop the old verse-index file if it still exists
+			try {
+				unlinkSync(join(OUT, 'cec/concordance-verse-index.json'));
+			} catch {
+				// File already gone — ignore.
+			}
+
+			if (stats.unknownBooks.length > 0)
+				console.warn('  unknown books:', stats.unknownBooks.join(', '));
+			if (stats.unknownParagraphs.length > 0)
+				console.warn(`  ${stats.unknownParagraphs.length} unknown CCC paragraphs (dropped)`);
+			if (stats.unparseableRanges.length > 0)
+				console.warn(`  ${stats.unparseableRanges.length} unparseable ranges`);
+			if (stats.booksWithZeroEntries.length > 0)
+				console.warn(
+					`  ${stats.booksWithZeroEntries.length} books with zero entries: ${stats.booksWithZeroEntries.join(', ')}`
+				);
+			if (stats.pericopesWithoutTitle > 0)
+				console.warn(
+					`  ${stats.pericopesWithoutTitle} pericopes without NCL title (kept titleless)`
+				);
+			endStep(`${stats.commentaryFiles} files, ${stats.pericopesEmitted} pericopes`);
+		}
 	}
 
 	logStep('building compendium');
