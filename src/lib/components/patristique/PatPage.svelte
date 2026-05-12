@@ -100,7 +100,7 @@
 	.pat-page {
 		max-width: 720px;
 		margin: 0 auto;
-		padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+		padding: clamp(0.5rem, 2.5vw, 1.5rem) clamp(1.25rem, 4vw, 2.5rem);
 		color: var(--color-fg);
 		font-family: var(--font-body);
 	}

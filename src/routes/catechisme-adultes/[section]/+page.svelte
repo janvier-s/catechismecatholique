@@ -84,7 +84,7 @@
 	.cpa-reader {
 		max-width: 720px;
 		margin: 0 auto;
-		padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+		padding: clamp(0.5rem, 2.5vw, 1.5rem) clamp(1.25rem, 4vw, 2.5rem);
 		color: var(--color-fg);
 		font-family: var(--font-body);
 	}
@@ -99,15 +99,16 @@
 		text-transform: uppercase;
 		color: var(--color-accent);
 		font-variant-numeric: tabular-nums;
-		margin: 1.25rem 0 0.5rem;
+		margin: 0.25rem 0 0.4rem;
 	}
 	.title {
 		font-family: var(--font-heading);
-		font-style: italic;
 		font-size: clamp(1.9rem, 4.5vw, 2.7rem);
 		font-weight: 700;
 		line-height: 1.15;
+		letter-spacing: -0.01em;
 		margin: 0;
+		color: var(--color-heading, var(--color-fg));
 		text-wrap: balance;
 	}
 	.body {
@@ -122,7 +123,6 @@
 	}
 	.chapter-h {
 		font-family: var(--font-heading);
-		font-style: italic;
 		font-size: 1.45rem;
 		font-weight: 700;
 		color: var(--color-heading, var(--color-fg));

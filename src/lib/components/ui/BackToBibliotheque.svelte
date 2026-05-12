@@ -40,14 +40,14 @@
 	<div class="back-row">
 		<a class="back-to-biblio" href={target}>
 			<span class="arrow" aria-hidden="true">←</span>
-			Bibliothèque
+			Retour à la Bibliothèque
 		</a>
 	</div>
 {/if}
 
 <style>
 	.back-row {
-		padding: 1rem clamp(1rem, 4vw, 2.5rem) 0;
+		padding: 0.85rem clamp(1rem, 4vw, 2.5rem) 0;
 	}
 	.back-to-biblio {
 		display: inline-flex;

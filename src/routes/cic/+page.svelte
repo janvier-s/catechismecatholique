@@ -72,7 +72,7 @@
 	.cic-chooser {
 		max-width: 900px;
 		margin: 0 auto;
-		padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
+		padding: clamp(0.75rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem);
 		color: var(--color-fg);
 		font-family: var(--font-body);
 	}
@@ -83,10 +83,10 @@
 	.hero-kicker {
 		font-family: var(--font-ui);
 		font-size: 0.68rem;
-		font-weight: 500;
-		letter-spacing: 0.32em;
+		font-weight: 600;
+		letter-spacing: 0.28em;
 		text-transform: uppercase;
-		color: var(--color-muted);
+		color: var(--color-accent);
 		margin: 0 0 0.85rem;
 	}
 	.hero-title {

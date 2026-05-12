@@ -73,7 +73,7 @@
 	.cpa-index {
 		max-width: 820px;
 		margin: 0 auto;
-		padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
+		padding: clamp(0.75rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem);
 		color: var(--color-fg);
 		font-family: var(--font-body);
 	}
@@ -95,16 +95,16 @@
 	}
 	.hero-title {
 		font-family: var(--font-heading);
-		font-style: italic;
 		font-size: clamp(2.2rem, 5.5vw, 3.4rem);
 		font-weight: 700;
 		line-height: 1.1;
+		letter-spacing: -0.01em;
 		margin: 0;
+		color: var(--color-heading, var(--color-fg));
 		text-wrap: balance;
 	}
 	.hero-sub {
 		font-family: var(--font-body);
-		font-style: italic;
 		font-size: 1rem;
 		color: var(--color-subtle);
 		margin: 0.6rem 0 0;
@@ -142,11 +142,13 @@
 	}
 
 	.section {
-		margin-top: 2.5rem;
-		padding-top: 1.5rem;
+		margin-top: 1.5rem;
+		padding-top: 1rem;
 		scroll-margin-top: 80px;
 	}
 	.section + .section {
+		margin-top: 1.75rem;
+		padding-top: 1.5rem;
 		border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
 	}
 	.section-head {
@@ -172,10 +174,10 @@
 	}
 	.section-title {
 		font-family: var(--font-heading);
-		font-style: italic;
 		font-size: 1.4rem;
 		font-weight: 700;
 		margin: 0;
+		color: var(--color-heading, var(--color-fg));
 		text-wrap: balance;
 	}
 

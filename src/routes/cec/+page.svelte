@@ -222,14 +222,17 @@
 		color: var(--color-muted);
 	}
 	.hero-tools a {
-		color: var(--color-accent);
+		color: var(--color-fg);
 		text-decoration: none;
 		border-bottom: 1px solid transparent;
 		padding-bottom: 0.1rem;
-		transition: border-color 140ms ease;
+		transition:
+			color 140ms ease,
+			border-color 140ms ease;
 	}
 	.hero-tools a:hover,
 	.hero-tools a:focus-visible {
+		color: var(--color-accent);
 		border-bottom-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
 	}
 

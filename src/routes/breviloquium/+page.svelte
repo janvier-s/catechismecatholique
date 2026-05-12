@@ -67,7 +67,7 @@
 	.brev-index {
 		max-width: 760px;
 		margin: 0 auto;
-		padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
+		padding: clamp(0.75rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem);
 		color: var(--color-fg);
 		font-family: var(--font-body);
 	}
