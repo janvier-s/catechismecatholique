@@ -35,7 +35,7 @@
 	<header
 		class="sticky top-0 z-[var(--z-topbar)] bg-glass backdrop-blur-sm border-b border-border font-ui"
 	>
-		<div class="px-6 max-md:px-2 flex items-center gap-3" style="height: 50px;">
+		<div class="px-6 max-md:px-4 flex items-center gap-3" style="height: 50px;">
 			<a
 				href="/bible/{book.slug}/{chapter}"
 				class="text-[12px] uppercase tracking-[0.15em] text-subtle hover:text-accent transition-colors shrink-0"
@@ -104,7 +104,7 @@
 	</header>
 {:else}
 	<div
-		class="sticky top-[var(--topbar-height,80px)] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-2 flex items-center gap-[10px] font-ui"
+		class="sticky top-[var(--topbar-height,80px)] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-4 flex items-center gap-[10px] font-ui"
 		style="height: 50px;"
 	>
 		<div
