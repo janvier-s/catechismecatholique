@@ -660,7 +660,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		border: 0 !important;
 		background: transparent !important;
 		min-height: 0 !important;
-		padding: 0 0 6mm 0 !important;
+		padding: 0 0 4mm 0 !important;
 		margin: 0 !important;
 	}
 	.topbar > div {
@@ -673,6 +673,12 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		flex-direction: column !important;
 		align-items: center !important;
 		gap: 6px !important;
+		margin: 0 auto !important;
+	}
+	/* Drop empty spacer + every other direct child of the topbar inner
+	   row; the brand link is the only thing left on paper. */
+	.topbar > div > *:not(a[href='/']) {
+		display: none !important;
 	}
 	/* Wordmark is hidden below 768px on screen. Print emulates a narrow
 	   viewport in some browsers, so force it visible on paper. */
