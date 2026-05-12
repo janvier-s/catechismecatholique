@@ -125,6 +125,7 @@
 			works: [
 				{
 					slug: 'didache',
+					focus: 'top',
 					href: '/didache',
 					title: 'La Didachè',
 					subtitle: 'Doctrine des douze Apôtres',
@@ -164,6 +165,7 @@
 				},
 				{
 					slug: 'doctrine-catholique',
+					focus: 'top',
 					href: '/doctrine-catholique',
 					title: 'La Doctrine Catholique',
 					subtitle: 'Abbé Boulenger, en cinquante trois leçons',
