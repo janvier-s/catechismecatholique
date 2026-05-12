@@ -632,8 +632,6 @@
 		grid-column: 1 / -1;
 	}
 	.tools-grid .tool-wrap:last-child .tool {
-		grid-template-columns: auto;
-		justify-content: center;
 		text-align: center;
 	}
 	.tools-grid .tool-wrap:last-child .tool-body {
@@ -646,10 +644,7 @@
 		animation-delay: calc(var(--card-index) * 40ms + var(--shelf-index, 0) * 120ms + 200ms);
 	}
 	.tool {
-		display: grid;
-		grid-template-columns: 1fr auto;
-		align-items: start;
-		gap: 0.85rem;
+		display: block;
 		width: 100%;
 		padding: 0.95rem 1rem 1rem;
 		text-decoration: none;
