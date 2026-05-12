@@ -35,6 +35,9 @@ test('sidebar auto-expands active chapter branch', async ({ page }) => {
 // itself is exercised in tests/e2e/compendium.test.ts.
 test('topbar Catéchisme link goes to /cec', async ({ page }) => {
 	await page.goto('/');
-	await page.getByRole('navigation', { name: /Navigation principale/i }).getByText('Catéchisme').click();
+	await page
+		.getByRole('navigation', { name: /Navigation principale/i })
+		.getByText('Catéchisme')
+		.click();
 	await expect(page).toHaveURL(/\/cec$/);
 });

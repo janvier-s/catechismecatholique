@@ -75,6 +75,7 @@
 		>
 			<a href="/cec" class="hover:text-accent">Catéchisme</a>
 			<a href="/bible" class="hover:text-accent">Bible</a>
+			<a href="/bibliotheque" class="hover:text-accent">Bibliothèque</a>
 		</nav>
 		<a
 			href="/recherche"
