@@ -47,30 +47,19 @@
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
-      "body": ""
+      "title": "L'Angélus",
+      "body": "V. L'Ange du Seigneur a annoncé à Marie.\nR. Et elle a conçu du Saint-Esprit.\nJe vous salue, Marie…\n\nV. Voici la servante du Seigneur.\nR. Qu'il me soit fait selon votre parole.\nJe vous salue, Marie…\n\nV. Et le Verbe s'est fait chair.\nR. Et il a habité parmi nous.\nJe vous salue, Marie…\n\nV. Priez pour nous, sainte Mère de Dieu.\nR. Afin que nous soyons rendus dignes des promesses de Jésus-Christ.\n\nPrions.\nRépandez, s'il vous plaît, Seigneur, votre grâce dans nos âmes, afin qu'ayant connu, par la voix de l'Ange, l'Incarnation de Jésus-Christ votre Fils, nous arrivions, par sa Passion et par sa Croix, à la gloire de sa Résurrection. Par le même Jésus-Christ notre Seigneur.\nR. Ainsi soit-il."
     },
     "la": {
-      "title": "À l'Angélus le matin, le midi et le soir",
-      "body": "V. Angelus Dómini nuntiávit María.\nR. Et concépit de Spíritu Sancto. Ave María...\n\nV. Ecce ancílla Dómini.\nR. Fiat mihi secúndum verbum tuum. Ave María...\n\nV. Et Verbum caro factum est.\nR. Et habitávit in nobis. Ave María...\n\nV. Ora pro nobis, sancta Dei Génetrix.\nR. Ut digni efficiámur promissiónibus Christi."
+      "title": "Angelus Domini",
+      "body": "V. Angelus Dómini nuntiávit Maríæ.\nR. Et concépit de Spíritu Sancto.\nAve María…\n\nV. Ecce ancílla Dómini.\nR. Fiat mihi secúndum verbum tuum.\nAve María…\n\nV. Et Verbum caro factum est.\nR. Et habitávit in nobis.\nAve María…\n\nV. Ora pro nobis, sancta Dei Génetrix.\nR. Ut digni efficiámur promissiónibus Christi.\n\nOrémus.\nGrátiam tuam, quǽsumus, Dómine, méntibus nostris infúnde: ut qui, Angelo nuntiánte, Christi Fílii tui incarnatiónem cognóvimus, per passiónem ejus et crucem, ad resurrectiónis glóriam perducámur. Per eúndem Christum Dóminum nostrum.\nR. Amen."
     }
   },
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
-      "body": ""
-    },
-    "la": {
-      "title": "Orémus",
-      "body": "GRÁTIAM tuam quæsumus, Dómine, méntibus nostris infúnde : ut qui, Angelo nuntiánte, Christi Fílii tui incarnatiónem cognóvimus; per passiónem eius et crucem, ad resurrectiónis glóriam perducámur. Per eúndem Christum Dóminum nostrum.\nR. Amen.\n\nV. L'Ange du Seigneur a annoncé à Marie.\nR. Et elle a conçu du Saint-Esprit. Je vous salue, Marie...\n\nV. Voici la servante du Seigneur.\nR. Qu'il me soit fait selon votre parole. Je vous salue, Marie...\n\nV. Et le Verbe s'est fait chair.\nR. Et il a habité parmi nous. Je vous salue, Marie...\n\nV. Priez pour nous, sainte Mère de Dieu.\nR. Afin que nous soyons rendus dignes des promesses de Jésus-Christ."
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "Prions",
-      "body": "RÉPANDEZ, s'il vous plaît, Seigneur, votre grâce dans nos âmes, afin qu'ayant connu, par la voix de l'Ange, l'Incarnation de Jésus-Christ votre Fils, nous arrivions, par sa Passion et par sa Croix, à la gloire de sa Résurrection. Par le même Jésus-Christ notre Seigneur.\nR. Ainsi soit-il."
+      "title": "Les Mystères du Rosaire",
+      "body": "Mystères joyeux (lundi et samedi)\n1. L'Annonciation\n2. La Visitation\n3. La Nativité\n4. La Présentation de Jésus au Temple\n5. Le Recouvrement de Jésus au Temple\n\nMystères douloureux (mardi et vendredi)\n1. L'Agonie de Jésus au jardin des Oliviers\n2. La Flagellation de Jésus\n3. Le Couronnement d'épines\n4. Le Portement de la Croix\n5. Le Crucifiement et la mort de Jésus\n\nMystères glorieux (mercredi et dimanche)\n1. La Résurrection\n2. L'Ascension\n3. La Descente du Saint-Esprit sur les Apôtres\n4. L'Assomption de la Vierge Marie\n5. Le Couronnement de la Vierge Marie au Ciel"
     },
     "la": {
       "title": "",
@@ -80,111 +69,34 @@
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
-      "body": ""
+      "title": "Sous votre protection",
+      "body": "Nous avons recours à votre protection, sainte Mère de Dieu: ne rejetez pas les prières que nous vous adressons dans nos besoins; mais délivrez-nous toujours de tous les dangers, ô Vierge glorieuse et bénie."
     },
     "la": {
-      "title": "",
-      "body": ""
+      "title": "Sub tuum praesidium",
+      "body": "Sub tuum præsídium confúgimus, sancta Dei Génetrix: nostras deprecatiónes ne despícias in necessitátibus; sed a perículis cunctis líbera nos semper, Virgo gloriósa et benedícta."
     }
   },
   {
     "kind": "prayer",
     "fr": {
-      "title": "Joyeux (lundi et jeudi)",
-      "body": "1. L'Annonciation\n2. La Visitation\n3. La Nativité\n4. La Présentation de Jésus au Temple\n5. Le Recouvrement de Jésus au Temple"
-    },
-    "la": {
-      "title": "",
-      "body": ""
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "Douloureux (mardi et vendredi)",
-      "body": "1. L'Agonie de Jésus au jardin des Oliviers\n2. La Flagellation de Jésus\n3. Le Couronnement d'épines\n4. Le Portement de la Croix\n5. Le Crucifiement"
-    },
-    "la": {
-      "title": "",
-      "body": ""
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "Glorieux (mercredi, samedi et dimanche)",
-      "body": "1. La Résurrection\n2. L'Ascension\n3. La Descente du Saint-Esprit sur les Apôtres\n4. L'Assomption\n5. Le Couronnement de la Vierge Marie au Ciel"
-    },
-    "la": {
-      "title": "",
-      "body": ""
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "",
-      "body": ""
-    },
-    "la": {
-      "title": "Le Sub tuum",
-      "body": "SUB tuum præsídium confúgimus, sancta Dei Génetrix: nostras deprecatiónes ne despícias in necessitátibus ; sed a perículis cunctis líbera nos semper, Virgo gloriósa et benedícta.\n\nNous avons ne cours à votre protection, sainte Mère de Dieu: ne rejetez pas les prières que nous vous adressons dans nos besoins; mais délivrez-nous toujours de tous les dangers, ô Vierge glorieuse et bénie."
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "",
-      "body": ""
-    },
-    "la": {
       "title": "Litanies de la très sainte Vierge",
-      "body": "Kýrie, eléison.\nChriste, eléison.\nKýrie, eléison.\nChriste, audi nos.\nChriste, exáudi nos.\nPater de cælis, Deus, miserére nobis.\nFili, Redémptor mundi, Deus, miserére nobis.\nSpíritus Sancte, Deus, miserére nobis.\nSancta Trínitas, unus Deus, miserére nobis.\nSancta María, ora pro nobis.\nSancta Dei Génetrix,\nSancta Virgo vírginum,\nMater Christi,\nMater divínæ grátiæ,\nMater puríssima,\nMater castíssima,\nMater invioláta,\nMater intemeráta,\nMater amábilis,\nMater admirábilis,\nMater boni consílii,\nMater Creatóris,\nMater Salvatóris,\nVirgo prudentíssima,\nVirgo veneránda,\nVirgo prædicánda,\nVirgo potens,\nVirgo clemens,\nVirgo fidélis,\nSpéculum iustítiæ,\nSedes sapiéntiæ,\nCausa nostra lætítiæ,\nVas spirituale,\nVas honorábile,\nVas insigne devotiónis,\nRosa mystica,\nTurris Davídica,\nTurris ebúrnea,\nDomus aurea,\nFoderis arca,\nlanua cæli,\nStella matutína,\nSalus infirmórum,\nRefúgium peccatórum,\nConsolátrix afflictórum,\nAuxílium Christianórum,\nRegína Angelórum,\nRegína Patriarchárum,\nRegína Prophetárum,\nRegína Apostolórum,\nRegína Mártyrum,\nRegína Confessórum,\nRegína Vírginum,\nRegina Sanctórum ómnium,\nRegína sine labe origináli\nconcépta,\nRegina in cælum assúmpta,\nRegina sacratissimi Rosárii,\nRegina pacis,\nAgnus Dei, qui tollis peccáta mundi, parce nobis,\nDómine.\nAgnus Dei, qui tollis peccáta mundi, exáudi nos,\nDómine.\nAgnus Dei, qui tollis peccáta mundi, miserére nobis.\n\nV. Ora pro nobis, sancta Dei Génetrix.\nR. Ut digni efficiámur promissiónibus Christi."
+      "body": "Seigneur, ayez pitié de nous.\nJésus-Christ, ayez pitié de nous.\nSeigneur, ayez pitié de nous.\nJésus-Christ, écoutez-nous.\nJésus-Christ, exaucez-nous.\n\nPère céleste, qui êtes Dieu, ayez pitié de nous.\nFils Rédempteur du monde, qui êtes Dieu, ayez pitié de nous.\nEsprit-Saint, qui êtes Dieu, ayez pitié de nous.\nTrinité Sainte, qui êtes un seul Dieu, ayez pitié de nous.\n\nSainte Marie, priez pour nous.\nSainte Mère de Dieu,\nSainte Vierge des vierges,\nMère du Christ,\nMère de l'Église,\nMère de la divine grâce,\nMère très pure,\nMère très chaste,\nMère toujours vierge,\nMère sans tache,\nMère aimable,\nMère admirable,\nMère du bon conseil,\nMère du Créateur,\nMère du Sauveur,\nMère de miséricorde,\n\nVierge très prudente,\nVierge vénérable,\nVierge digne de louanges,\nVierge puissante,\nVierge clémente,\nVierge fidèle,\n\nMiroir de justice,\nSiège de la Sagesse,\nCause de notre joie,\nVase spirituel,\nVase d'honneur,\nVase insigne de dévotion,\nRose mystique,\nTour de David,\nTour d'ivoire,\nMaison d'or,\nArche d'alliance,\nPorte du Ciel,\nÉtoile du matin,\n\nSalut des infirmes,\nRefuge des pécheurs,\nConsolatrice des affligés,\nSecours des chrétiens,\n\nReine des Anges,\nReine des Patriarches,\nReine des Prophètes,\nReine des Apôtres,\nReine des Martyrs,\nReine des Confesseurs,\nReine des Vierges,\nReine de tous les Saints,\nReine conçue sans le péché originel,\nReine élevée au Ciel,\nReine du très saint Rosaire,\nReine de la famille,\nReine de la paix.\n\nAgneau de Dieu qui effacez les péchés du monde, pardonnez-nous, Seigneur.\nAgneau de Dieu qui effacez les péchés du monde, exaucez-nous, Seigneur.\nAgneau de Dieu qui effacez les péchés du monde, ayez pitié de nous.\n\nV. Priez pour nous, sainte Mère de Dieu.\nR. Afin que nous soyons rendus dignes des promesses de Jésus-Christ.\n\nPrions.\nDaignez nous accorder, Seigneur, à nous vos serviteurs, de jouir toujours de la santé de l'âme et du corps; et par la glorieuse intercession de la bienheureuse Marie toujours Vierge, d'être délivrés des tristesses du temps présent et d'avoir part aux joies éternelles. Par Jésus-Christ notre Seigneur.\nR. Ainsi soit-il."
+    },
+    "la": {
+      "title": "Litaniæ Lauretanæ",
+      "body": "Kýrie, eléison.\nChriste, eléison.\nKýrie, eléison.\nChriste, audi nos.\nChriste, exáudi nos.\n\nPater de cælis, Deus, miserére nobis.\nFili, Redémptor mundi, Deus, miserére nobis.\nSpíritus Sancte, Deus, miserére nobis.\nSancta Trínitas, unus Deus, miserére nobis.\n\nSancta María, ora pro nobis.\nSancta Dei Génetrix,\nSancta Virgo vírginum,\nMater Christi,\nMater Ecclésiæ,\nMater divínæ grátiæ,\nMater puríssima,\nMater castíssima,\nMater invioláta,\nMater intemeráta,\nMater amábilis,\nMater admirábilis,\nMater boni consílii,\nMater Creatóris,\nMater Salvatóris,\nMater misericórdiæ,\n\nVirgo prudentíssima,\nVirgo veneránda,\nVirgo prædicánda,\nVirgo potens,\nVirgo clemens,\nVirgo fidélis,\n\nSpéculum iustítiæ,\nSedes sapiéntiæ,\nCausa nostræ lætítiæ,\nVas spirituále,\nVas honorábile,\nVas insígne devotiónis,\nRosa mýstica,\nTurris davídica,\nTurris ebúrnea,\nDomus áurea,\nFœderis arca,\nIánua cæli,\nStella matutína,\n\nSalus infirmórum,\nRefúgium peccatórum,\nConsolátrix afflictórum,\nAuxílium christianórum,\n\nRegína Angelórum,\nRegína Patriarchárum,\nRegína Prophetárum,\nRegína Apostolórum,\nRegína Mártyrum,\nRegína Confessórum,\nRegína Vírginum,\nRegína Sanctórum ómnium,\nRegína sine labe origináli concépta,\nRegína in cælum assúmpta,\nRegína sacratíssimi Rosárii,\nRegína famíliæ,\nRegína pacis.\n\nAgnus Dei, qui tollis peccáta mundi, parce nobis, Dómine.\nAgnus Dei, qui tollis peccáta mundi, exáudi nos, Dómine.\nAgnus Dei, qui tollis peccáta mundi, miserére nobis.\n\nV. Ora pro nobis, sancta Dei Génetrix.\nR. Ut digni efficiámur promissiónibus Christi.\n\nOrémus.\nConcéde nos fámulos tuos, quǽsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére: et gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia. Per Christum Dóminum nostrum.\nR. Amen."
     }
   },
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
-      "body": ""
+      "title": "Souvenez-vous",
+      "body": "Souvenez-vous, ô très miséricordieuse Vierge Marie, qu'on n'a jamais entendu dire qu'aucun de ceux qui ont eu recours à votre protection, imploré votre assistance ou réclamé vos suffrages, ait été abandonné. Animé d'une pareille confiance, ô Vierge des Vierges, ô ma Mère, je viens à vous; gémissant sous le poids de mes péchés, je me prosterne à vos pieds. Ô Mère du Verbe incarné, ne méprisez pas mes prières, mais écoutez-les favorablement et daignez les exaucer. Ainsi soit-il."
     },
     "la": {
-      "title": "Orémus",
-      "body": "Concede nos fámulos tuos, •quæsumus, Dómine Deus, perpétua mentis et córporis sanitáte gaudére : et gloriósa beátæ Maríæ semper Vírginis intercessióne, a præsénti liberári tristítia, et ætérna pérfrui lætítia. Per Christum Dóminum nostrum.\n\nR. Amen.\n\nSeigneur, ayez pitié de nous.\nJésus-Christ, ayez pitié de nous.\nSeigneur, ayez pitié de nous.\nJésus-Christ, écoutez-nous.\nJésus-Christ, exaucez-nous.\nPère céleste, qui êtes Dieu, ayez pitié de nous.\nFils Rédempteur du monde, qui\nêtes Dieu, ayez pitié de nous.\nEsprit-Saint, qui êtes Dieu, ayez pitié de nous.\nTrinité Sainte, qui êtes un seul\nDieu, ayez pitié de nous.\nSainte Marie, priez pour nous.\nSainte Mère de Dieu,\nSainte Vierge des vierges,\nMère du Christ,\nMère de la divine grâce,\nMère très pure,\nMère très chaste,\nMère sans tache,\nMère toujours vierge,\nMère aimable,\nMère admirable,\nMère du bon conseil,\nMère du Créateur,\nMère du Sauveur,\nVierge très prudente,\nVierge vénérable,\nVierge digne de louanges,\nVierge puissante,\nVierge clémente,\nVierge fidèle,\nMiroir de justice,\nSiège de la Sagesse,\nCause de notre joie,\nVase spirituel,\nVase d’honneur,\nVase insigne de dévotion,\nRose mystique,\nTour de David,\nTour d’ivoire,\nMaison d’or,\nArche d’alliance,\nPorte du Ciel,\nÉtoile du matin,\nSalut des infirmes,\nRefuge des pécheurs,\nConsolatrice des affligés,\nSecours des chrétiens,\nReine des Anges,\nReine des Patriarches,\nReine des Prophètes,\nReine des Apôtres,\nReine des Martyrs,\nReine des Confesseurs,\nReine des Vierges,\nReine de tous les Saints,\nReine conçue sans le péché\noriginel,\nReine élevée aux cieux,\nReine du très saint Rosaire,\nReine de la paix,\nAgneau de Dieu, qui effacez les péchés du monde, pardonnez-nous, Seigneur.\nAgneau de Dieu, qui effacez les péchés du monde, exaucez-nous, Seigneur.\nAgneau de Dieu, qui effacez les péchés du monde, ayez pitié de nous.\nV. Priez pour nous, Sainte Mère de Dieu.\nR. Afin que nous devenions dignes des promesses de Jésus-Christ."
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "Prions",
-      "body": "DAIGNEZ nous accorder, Seigneur, à nous vos serviteurs, de jouir toujours de la santé de l’âme et du corps ; et par la glorieuse intercession de la bienheureuse Marie toujours Vierge, d’être délivrés des tristesses du temps présent et d’avoir part aux joies éternelles. Par Jésus-Christ notre Seigneur.\nR. Ainsi soit-il."
-    },
-    "la": {
-      "title": "",
-      "body": ""
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "",
-      "body": ""
-    },
-    "la": {
-      "title": "Autre prière",
-      "body": "SANTA María, succúrre míseris, iuva pusillánimes, réfove flébiles, ora pro pópulo, intérveni pro clero, intercéde pro devóto femíneo sexu : séntiant omnes tuum iuvámen, quicúmque célebrant tuum sanctum patrocínium.\n\nSAINTE Marie, secourez les malheureux, venez en aide aux faibles, consolez les affligés, priez pour le peuple, intervenez en faveur du clergé, intercédez pour les femmes consacrées par vœu au Seigneur: qu'ils éprouvent tous votre assistance, ceux qui célèbrent et invoquent votre saint patronage."
-    }
-  },
-  {
-    "kind": "prayer",
-    "fr": {
-      "title": "",
-      "body": ""
-    },
-    "la": {
-      "title": "",
-      "body": ""
+      "title": "Memorare",
+      "body": "Memoráre, o piíssima Virgo María, non esse audítum a sǽculo, quemquam ad tua curréntem præsídia, tua implorántem auxília, tua peténtem suffrágia, esse derelíctum. Ego tali animátus confidéntia, ad te, Virgo Vírginum, Mater, curro, ad te vénio, coram te gemens peccátor assísto. Noli, Mater Verbi, verba mea despícere; sed áudi propítia et exáudi. Amen."
     }
   },
   {
@@ -202,7 +114,7 @@
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
+      "title": "Acte de contrition",
       "body": "Mon très miséricordieux Sauveur, j'ai péché et beaucoup péché contre vous par ma faute, par ma très grande faute, en étant rebelle à votre sainte loi, en donnant la préférence sur vous, mon Dieu et mon Père du Ciel, à de misérables créatures et à mes caprices. Bien que je ne mérite que châtiments, ne me refusez pas la grâce de bien connaître, détester, et confesser sincèrement tous mes péchés, afin que je puisse obtenir votre pardon et me corriger véritablement.\nVierge sainte, intercédez pour moi. Pater. Ave.\n\n1. On fait soigneusement l'examen des péchés commis par pensées, par paroles, par actions et par omissions, contre les commandements de Dieu, les préceptes de l'Église et les devoirs de son état.\n\n2. On songe au grand mal qu'on a commis en offensant gravement Dieu, notre Seigneur et Père, qui nous a comblés de si nombreux bienfaits, nous aime tant et mérite infiniment d'être aimé par-dessus toutes choses et servi en toute fidélité. On s'attache à la pensée que la Passion de Notre Seigneur Jésus-Christ fut occasionnée par nos péchés. On médite sur la perte de la grâce et du paradis ainsi que sur le châtiment de l'enfer que l'on a mérité. Puis, rempli de regret, on récite l'**Acte de contrition.**\n\n3. Une fois en présence du confesseur, le pénitent s'agenouille, fait le signe de la Croix et demande la bénédiction. Il se confesse ensuite humblement. 4. Après l'aveu des péchés, il écoute attentivement les avis du confesseur, accepte la pénitence imposée. Au moment de l'absolution il récite avec piété l'**Acte de contrition.**"
     },
     "la": {
@@ -219,8 +131,8 @@
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
-      "body": "Aussitôt après la confession, sauf si les circonstances rendent la chose impossible ou si le confesseur en a disposé autrement, le pénitent fait la pénitence imposée. Il se rappelle et grave bien dans son esprit les conseils reçus, renouvelle les bonnes résolutions et remercie le Seigneur.\n\nCOMME vous avez été bon avec moi, Seigneur ! Les paroles me manquent pour vous remercier. Au lieu de me punir pour tant de péchés que j'ai commis, vous me les avez tous pardonnés avec une infinie miséricorde, en cette sainte confession. De nouveau, je m'en repens de tout mon cœur ; je promets, avec le secours de votre grâce, de ne plus vous offenser, et de réparer par des bonnes œuvres et par beaucoup d'amour les innombrables offenses que je vous ai faites durant ma vie.\nVierge sainte, Anges et Saints du ciel, je vous remercie de votre assistance ; rendez grâces pour moi au Seigneur de ses miséricordes, et obtenez-moi la persévérance et le progrès dans le bien.\n\nDans les tentations, on n'oubliera pas d'invoquer l'aide de Dieu, en disant, par exemple :\nMON Jésus, aidez-moi et donnez-moi la grâce de ne jamais vous offenser."
+      "title": "Action de grâces",
+      "body": "COMME vous avez été bon avec moi, Seigneur ! Les paroles me manquent pour vous remercier. Au lieu de me punir pour tant de péchés que j'ai commis, vous me les avez tous pardonnés avec une infinie miséricorde, en cette sainte confession. De nouveau, je m'en repens de tout mon cœur ; je promets, avec le secours de votre grâce, de ne plus vous offenser, et de réparer par des bonnes œuvres et par beaucoup d'amour les innombrables offenses que je vous ai faites durant ma vie.\nVierge sainte, Anges et Saints du ciel, je vous remercie de votre assistance ; rendez grâces pour moi au Seigneur de ses miséricordes, et obtenez-moi la persévérance et le progrès dans le bien.\n\nDans les tentations, on n'oubliera pas d'invoquer l'aide de Dieu, en disant, par exemple :\nMON Jésus, aidez-moi et donnez-moi la grâce de ne jamais vous offenser."
     },
     "la": {
       "title": "",
@@ -386,23 +298,23 @@
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
-      "body": ""
+      "title": "Ô Salutaire Hostie",
+      "body": "Ô Salutaire Hostie, qui ouvrez la porte du Ciel,\nl'ennemi nous presse par ses attaques: donnez-nous la force, secourez-nous.\n\nGloire éternelle au Seigneur unique en trois Personnes;\nqu'il nous donne dans la patrie la vie qui n'aura pas de fin. Ainsi soit-il."
     },
     "la": {
-      "title": "O Salutaris hostia",
-      "body": "O SALUTÁRIS Hóstia, Qua cæli pandis óstium, Bella premunt hostília, Da robur, fer auxílium.\n\nUni trinóque Dómino Sit sempitérna glória, Qui vitam sine término Nobis donet in pátria. Amen.\n\nÔ SALUTAIRE Hostie, qui ouvrez la porte du Ciel, l'ennemi nous presse par ses attaques; donnez-nous la force, secourez-nous.\n\nGloire éternelle au Seigneur Unique en trois Personnes; qu'il nous donne en la patrie la vie qui n'aura pas de fin. Ainsi soit-il."
+      "title": "O Salutaris Hostia",
+      "body": "O salutáris Hóstia, quæ cæli pandis óstium:\nbella premunt hostília, da robur, fer auxílium.\n\nUni trinóque Dómino sit sempitérna glória,\nqui vitam sine término nobis donet in pátria. Amen."
     }
   },
   {
     "kind": "prayer",
     "fr": {
-      "title": "",
-      "body": ""
+      "title": "Adorons donc prosternés",
+      "body": "Adorons donc prosternés un si grand sacrement;\nque la figure antique fasse place au rite nouveau,\net que la foi supplée à la défaillance des sens.\n\nAu Père et au Fils, louange et jubilation,\nsalut, honneur, puissance et bénédiction;\nà celui qui procède de l'un et de l'autre, pareil hommage. Ainsi soit-il."
     },
     "la": {
       "title": "Tantum ergo",
-      "body": "TANTUM ergo Sacraméntum Venerémur cérnui ; Et antíquum documéntum Novo cedat rítui ; Præstet fides suppleméntum Sénsuum deféctui.\n\nGenitóri Genitóque Laus et iubilatio, Salus, honor, virtus quoque Sit et benedíctio : Procedénti ab utróque Compar sit laudátio. Amen.\n\nADORONs donc prosternés, un si grand sacrement; que la figure antique fasse place au rite nouveau, et que la foi supplée au défaut des sens.\n\nÀ Dieu le Père et au Fils, louange et jubilation, salut, honneur, puissance et bénédiction, pareil hommage à celui qui procède de l'un et de l'autre. Ainsi soit-il."
+      "body": "Tantum ergo Sacraméntum venerémur cérnui:\net antíquum documéntum novo cedat rítui:\npræstet fides suppleméntum sénsuum deféctui.\n\nGenitóri, Genitóque laus et iubilátio,\nsalus, honor, virtus quoque sit et benedíctio:\nprocedénti ab utróque compar sit laudátio. Amen."
     }
   }
 ]
