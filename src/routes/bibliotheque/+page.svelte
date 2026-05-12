@@ -810,6 +810,12 @@
 			grid-template-columns: 1fr;
 		}
 	}
+	/* Five tools in a 2-col grid leaves the last tile (Prières & Formules)
+	   half-width with an empty cell beside it. Span it across both
+	   columns. On mobile (single col) `grid-column: 1 / -1` is a no-op. */
+	.tools-grid .tool-wrap:last-child {
+		grid-column: 1 / -1;
+	}
 	.tool-wrap {
 		display: flex;
 		opacity: 0;
