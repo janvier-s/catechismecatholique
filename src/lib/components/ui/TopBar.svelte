@@ -2,9 +2,7 @@
 	import LogoMark from './LogoMark.svelte';
 	import Wordmark from './Wordmark.svelte';
 	import ModeToggle from './ModeToggle.svelte';
-	import CatechismDropdown from './CatechismDropdown.svelte';
-	import DesktopMenu from './DesktopMenu.svelte';
-	import MobileMenu from './MobileMenu.svelte';
+	import NavDrawer from './NavDrawer.svelte';
 	import SearchSuggest from './SearchSuggest.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
@@ -75,9 +73,8 @@
 			class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none relative z-[1]"
 			aria-label="Navigation principale"
 		>
-			<CatechismDropdown />
+			<a href="/cec" class="hover:text-accent">Catéchisme</a>
 			<a href="/bible" class="hover:text-accent">Bible</a>
-			<a href="/a-propos" class="hover:text-accent">À propos</a>
 		</nav>
 		<a
 			href="/recherche"
@@ -100,8 +97,7 @@
 			</svg>
 		</a>
 		<ModeToggle />
-		<DesktopMenu />
-		<MobileMenu />
+		<NavDrawer />
 
 		{#if !onRecherche}
 			<!-- Search is absolutely positioned so it stays centered on the
