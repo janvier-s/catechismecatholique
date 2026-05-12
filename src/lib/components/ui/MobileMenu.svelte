@@ -112,6 +112,7 @@
 				{ href: '/discours-catechetique', label: 'Discours catéchétique (Grégoire de Nysse)' },
 				{ href: '/breviloquium', label: 'Breviloquium (Bonaventure)' },
 				{ href: '/doctrine-catholique', label: 'La Doctrine Catholique' },
+				{ href: '/catechisme-adultes', label: 'Catéchisme pour Adultes (Évêques de France)' },
 				{ href: '/doctrine-sociale', label: 'Doctrine sociale' }
 			]
 		},

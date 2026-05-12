@@ -90,6 +90,10 @@
 		if (p === '/didache' || p === '/discours-catechetique' || p === '/catecheses-mystagogiques') {
 			return true;
 		}
+		// Catéchisme pour Adultes — chapter reader (hide on landing index).
+		if (p.startsWith('/catechisme-adultes/')) {
+			return true;
+		}
 		// Liturgical calendar year/solennites pages (hide on landing)
 		if (p.startsWith('/calendrier/')) {
 			return true;
@@ -201,9 +205,11 @@
 																	? 'discours-catechetique'
 																	: page.url.pathname.startsWith('/catecheses-mystagogiques')
 																		? 'catecheses-mystagogiques'
-																		: page.url.pathname.startsWith('/calendrier')
-																			? 'calendrier'
-																			: 'ccc'}
+																		: page.url.pathname.startsWith('/catechisme-adultes')
+																			? 'catechisme-adultes'
+																			: page.url.pathname.startsWith('/calendrier')
+																				? 'calendrier'
+																				: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

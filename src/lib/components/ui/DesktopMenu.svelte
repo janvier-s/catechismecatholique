@@ -182,6 +182,12 @@
 					description: 'Abbé Boulenger, 53 leçons en trois tomes.'
 				},
 				{
+					href: '/catechisme-adultes',
+					label: 'Catéchisme pour Adultes',
+					eyebrow: '1991',
+					description: 'Évêques de France, 416 chapitres thématiques.'
+				},
+				{
 					href: '/doctrine-sociale',
 					label: 'Doctrine sociale',
 					eyebrow: '2004',

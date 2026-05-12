@@ -15,6 +15,7 @@ export type Corpus =
 	| 'didache'
 	| 'discours-catechetique'
 	| 'catecheses-mystagogiques'
+	| 'catechisme-adultes'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -1191,6 +1192,39 @@ export interface PatChapter {
 export interface PatFull {
 	structure: PatStructure;
 	chapters: PatChapter[];
+}
+
+// ─── Catéchisme pour Adultes des Évêques de France (1991) ─────────────────
+
+export type CpaBlock = { kind: 'paragraph'; n?: number; html: string };
+
+export interface CpaChapterRef {
+	slug: string;
+	ordinal: number;
+	title: string;
+	paraRange: [number, number] | null;
+}
+
+export interface CpaStructure {
+	slug: 'catechisme-adultes';
+	title: string;
+	subtitle: string;
+	author: string;
+	date: string;
+	source: string;
+	chapters: CpaChapterRef[];
+	totalChapters: number;
+	totalParagraphs: number;
+}
+
+export interface CpaChapter {
+	slug: string;
+	ordinal: number;
+	title: string;
+	paraRange: [number, number] | null;
+	blocks: CpaBlock[];
+	prev?: { slug: string; title: string };
+	next?: { slug: string; title: string };
 }
 
 // ─── Breviloquium (Saint Bonaventure, 1257) ────────────────────────────────

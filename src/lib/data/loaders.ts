@@ -51,6 +51,8 @@ import type {
 	PatStructure,
 	PatChapter,
 	PatFull,
+	CpaStructure,
+	CpaChapter,
 	ParagraphThemeRef
 } from './types';
 
@@ -985,6 +987,34 @@ export function loadPatFull(work: string, fetcher: Fetch = fetch): Promise<PatFu
 // Suppress unused-import warning — PatChapter is re-exported via types but
 // not consumed here directly after the loader simplification.
 export type _PatChapterLoaderTypeHint = PatChapter;
+
+// ─── Catéchisme pour Adultes (CPA) ─────────────────────────────────────────
+
+let cpaStructurePromise: Promise<CpaStructure> | null = null;
+const cpaChapterCache = new Map<string, Promise<CpaChapter | null>>();
+
+export function loadCpaStructure(fetcher: Fetch = fetch): Promise<CpaStructure> {
+	if (!cpaStructurePromise) {
+		cpaStructurePromise = fetchJson<CpaStructure>(
+			'/data/catechisme-adultes/structure.json',
+			fetcher
+		);
+	}
+	return cpaStructurePromise;
+}
+
+export function loadCpaChapter(slug: string, fetcher: Fetch = fetch): Promise<CpaChapter | null> {
+	let p = cpaChapterCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/catechisme-adultes/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as CpaChapter;
+		})();
+		cpaChapterCache.set(slug, p);
+	}
+	return p;
+}
 
 // ─── Catho paragraph-themes index ──────────────────────────────────────────
 

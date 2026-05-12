@@ -27,6 +27,7 @@
 		loadCicLivre,
 		loadBreviloquiumStructure,
 		loadPatStructure,
+		loadCpaStructure,
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
@@ -54,6 +55,7 @@
 		CicLivre,
 		BrevStructure,
 		PatStructure,
+		CpaStructure,
 		CalendrierFeast,
 		CalendrierFixedFeast,
 		CalendrierSeason
@@ -145,6 +147,8 @@
 				return '/discours-catechetique';
 			case 'catecheses-mystagogiques':
 				return '/catecheses-mystagogiques';
+			case 'catechisme-adultes':
+				return '/catechisme-adultes';
 			default:
 				return null;
 		}
@@ -380,6 +384,15 @@
 			return;
 		(async () => {
 			patStructure = await loadPatStructure(corpus);
+		})();
+	});
+
+	// ─── CPA (Catéchisme pour Adultes) state ─────────────────────────────────
+	let cpaStructure: CpaStructure | null = $state(null);
+	$effect(() => {
+		if (corpus !== 'catechisme-adultes') return;
+		(async () => {
+			cpaStructure = await loadCpaStructure();
 		})();
 	});
 
@@ -1301,6 +1314,22 @@
 					href: `/${corpus}#${c.slug}`,
 					level: hasTitle ? 2 : 4,
 					...(children ? { children } : {})
+				};
+			});
+		}
+		if (corpus === 'catechisme-adultes') {
+			if (!cpaStructure) return [];
+			return cpaStructure.chapters.map((c): Item => {
+				const kicker = c.paraRange
+					? c.paraRange[0] === c.paraRange[1]
+						? `§ ${c.paraRange[0]}`
+						: `§ ${c.paraRange[0]}–${c.paraRange[1]}`
+					: '';
+				return {
+					title: c.title,
+					...(kicker ? { kicker } : {}),
+					href: `/catechisme-adultes/${c.slug}`,
+					level: 4
 				};
 			});
 		}

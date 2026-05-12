@@ -30,6 +30,7 @@ import { prepareCdse } from './prepare/cdse/index.ts';
 import { preparePgmr } from './prepare/pgmr/index.ts';
 import { prepareBreviloquium } from './prepare/breviloquium/index.ts';
 import { preparePatristique } from './prepare/patristique/index.ts';
+import { prepareCpa } from './prepare/cpa/index.ts';
 import { prepareVaticanII } from './prepare/vatican-ii/index.ts';
 import { prepareCic } from './prepare/cic/index.ts';
 import { prepareCecAi } from './prepare/cec-ai.ts';
@@ -504,6 +505,19 @@ async function main() {
 		endStep('done');
 	} else {
 		endStep('source dir not found — skipped');
+	}
+
+	logStep('building Catéchisme pour Adultes (Évêques de France)');
+	const cpaMd = join(SOURCES, 'cpa/source.md');
+	const cpaOutDir = join(OUT, 'catechisme-adultes');
+	if (existsSync(cpaMd)) {
+		mkdirSync(cpaOutDir, { recursive: true });
+		const cpa = prepareCpa({ markdownPath: cpaMd, outDir: cpaOutDir });
+		endStep(`${cpa.structure.totalChapters} chapters, ${cpa.structure.totalParagraphs} paragraphs`);
+	} else if (existsSync(cpaOutDir)) {
+		endStep('source not found — using committed snapshot');
+	} else {
+		endStep('source not found — skipped');
 	}
 
 	logStep('building Breviloquium (Saint Bonaventure)');
