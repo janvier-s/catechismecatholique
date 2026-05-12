@@ -602,6 +602,11 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		color: #000000 !important;
 	}
 	/* Hide app chrome that doesn't belong on paper. Grouped by intent. */
+	/* Belt-and-suspenders: any chrome that sits directly under <body>
+	   (TopBar, Footer, BibleRefTooltip) is non-content by construction. */
+	body > header,
+	body > footer,
+	body > [role='tooltip'],
 	.topbar,
 	.site-footer,
 	.skip-link,
