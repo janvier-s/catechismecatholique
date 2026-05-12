@@ -11,6 +11,7 @@
 	import BibleRefTooltip from '$lib/components/ui/BibleRefTooltip.svelte';
 	import BackToBibliotheque from '$lib/components/ui/BackToBibliotheque.svelte';
 	import { corpusForPath } from '$lib/corpora';
+	import { resolveOgImage } from '$lib/og-image';
 	import type { Corpus } from '$lib/data/types';
 	import { closePanel, studyPanel } from '$lib/stores/studyPanel';
 
@@ -32,6 +33,16 @@
 		if (c) return c.id;
 		if (p.startsWith('/calendrier')) return 'calendrier';
 		return 'ccc';
+	});
+
+	// og:image inheritance · every page (reader or landing) emits a
+	// share-card image inferred from the corpus that owns its path.
+	// MetaTags emits its own og:image on landings when used; multiple
+	// tags are harmless (crawlers pick · for shared inference both
+	// resolve to the same image anyway). See src/lib/og-image.ts.
+	const ogImage = $derived.by(() => {
+		const r = resolveOgImage(page.url.pathname);
+		return { ...r, url: `${page.url.origin}${r.path}` };
 	});
 
 	const showSidebar = $derived.by(() => {
@@ -88,11 +99,12 @@
 		if (p.startsWith('/pgmr/')) {
 			return true;
 		}
-		// Vatican II doc reader (hide on landing)
+		// Vatican II + CIC landings function as catalog pages (the
+		// body already lists every doc/code as cards); the sidebar
+		// would just duplicate that. Show sidebar only on reader pages.
 		if (p.startsWith('/vatican-ii/')) {
 			return true;
 		}
-		// CIC livre reader (hide on landing + canon redirect)
 		if (p.startsWith('/cic/') && !p.startsWith('/cic/c/')) {
 			return true;
 		}
@@ -181,7 +193,11 @@
 	<meta property="og:locale" content="fr_FR" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="{page.url.origin}{page.url.pathname}" />
+	<meta property="og:image" content={ogImage.url} />
+	<meta property="og:image:width" content={String(ogImage.width)} />
+	<meta property="og:image:height" content={String(ogImage.height)} />
 	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:image" content={ogImage.url} />
 </svelte:head>
 
 <a href="#main-content" class="skip-link">Aller au contenu</a>

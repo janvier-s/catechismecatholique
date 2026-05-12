@@ -13,9 +13,6 @@
 		property="og:description"
 		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
-	<meta property="og:image" content="https://catechismecatholique.fr/img/og-image.png" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
 </svelte:head>
 
 <ProseLayout

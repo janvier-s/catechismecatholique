@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { resolveOgImage } from '$lib/og-image';
 
 	type BookSchema = {
 		kind: 'book';
@@ -37,7 +38,8 @@
 	} = $props();
 
 	const origin = $derived(page.url.origin);
-	const ogImage = $derived(image ? `${origin}${image}` : `${origin}/img/og-image.png`);
+	const resolved = $derived(resolveOgImage(page.url.pathname, image));
+	const ogImage = $derived(`${origin}${resolved.path}`);
 
 	const ld = $derived.by(() => {
 		if (!schema) return null;
@@ -55,7 +57,7 @@
 				...(schema.datePublished ? { datePublished: schema.datePublished } : {}),
 				...(schema.bookEdition ? { bookEdition: schema.bookEdition } : {}),
 				...(schema.about ? { about: schema.about } : {}),
-				...(image ? { image: ogImage } : {}),
+				image: ogImage,
 				url: `${origin}${page.url.pathname}`
 			};
 		}
@@ -67,7 +69,7 @@
 			isAccessibleForFree: true,
 			...(schema.datePublished ? { datePublished: schema.datePublished } : {}),
 			...(schema.isPartOf ? { isPartOf: { '@type': 'Book', name: schema.isPartOf } } : {}),
-			...(image ? { image: ogImage } : {}),
+			image: ogImage,
 			url: `${origin}${page.url.pathname}`
 		};
 	});
@@ -77,15 +79,14 @@
 	{#if emitTitle}<title>{title}</title>{/if}
 	{#if emitDescription}<meta name="description" content={description} />{/if}
 
+	<!-- og:image / twitter:image are emitted at the layout level via
+	     resolveOgImage(); MetaTags only handles per-page title,
+	     description, alt text, and JSON-LD payload. -->
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	<meta property="og:image" content={ogImage} />
-	<meta property="og:image:width" content={image ? '800' : '1200'} />
-	<meta property="og:image:height" content={image ? '800' : '630'} />
 	<meta property="og:image:alt" content={title} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
-	<meta name="twitter:image" content={ogImage} />
 
 	{#if ld}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->

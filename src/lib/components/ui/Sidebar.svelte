@@ -1139,9 +1139,10 @@
 		}
 		if (corpus === 'cic') {
 			if (!cicStructure) return [];
-			// Identify which code's index/reader we're on. Without an active
-			// code, fall back to listing both (defensive · the layout normally
-			// hides the sidebar at /cic exactly).
+			// Identify which code's index/reader we're on. The /cic
+			// landing functions as a catalog page (cards for both codes)
+			// and the layout hides the sidebar there, so this matcher is
+			// only consulted on /cic/{code}[/{livre}].
 			const codeMatch = page.url.pathname.match(/^\/cic\/(1983|1917)/);
 			const activeCode = codeMatch?.[1] as '1983' | '1917' | undefined;
 

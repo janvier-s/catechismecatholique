@@ -68,9 +68,6 @@
 		property="og:description"
 		content="Édition française définitive du Catéchisme de l'Église Catholique. Lecture, recherche et navigation par paragraphe, référence biblique et thème."
 	/>
-	<meta property="og:image" content="{page.url.origin}/img/og-image.png" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
 	<meta
 		property="og:image:alt"
 		content="Catéchisme de l'Église Catholique · Édition française définitive"
