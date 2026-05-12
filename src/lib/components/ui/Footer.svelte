@@ -32,6 +32,7 @@
 			<p class="footer-col-head">Catéchèse & doctrine</p>
 			<ul>
 				<li><a href="/didache">La Didachè</a></li>
+				<li><a href="/catecheses-mystagogiques">Catéchèses mystagogiques</a></li>
 				<li><a href="/discours-catechetique">Discours catéchétique</a></li>
 				<li><a href="/breviloquium">Breviloquium</a></li>
 				<li><a href="/doctrine-catholique">La Doctrine Catholique</a></li>

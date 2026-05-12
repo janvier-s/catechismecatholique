@@ -158,6 +158,12 @@
 					description: 'Doctrine des douze Apôtres, plus ancien texte catéchétique.'
 				},
 				{
+					href: '/catecheses-mystagogiques',
+					label: 'Catéchèses mystagogiques',
+					eyebrow: 'vers 350',
+					description: 'Saint Cyrille de Jérusalem, 5 instructions aux nouveaux baptisés.'
+				},
+				{
 					href: '/discours-catechetique',
 					label: 'Discours catéchétique',
 					eyebrow: 'IVe siècle',

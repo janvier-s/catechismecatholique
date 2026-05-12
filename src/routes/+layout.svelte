@@ -87,7 +87,7 @@
 		}
 		// Patristic catecheses — single-page reader, sidebar tracks chapters
 		// via scroll-spy, so show on the landing too.
-		if (p === '/didache' || p === '/discours-catechetique') {
+		if (p === '/didache' || p === '/discours-catechetique' || p === '/catecheses-mystagogiques') {
 			return true;
 		}
 		// Liturgical calendar year/solennites pages (hide on landing)
@@ -199,9 +199,11 @@
 																? 'didache'
 																: page.url.pathname.startsWith('/discours-catechetique')
 																	? 'discours-catechetique'
-																	: page.url.pathname.startsWith('/calendrier')
-																		? 'calendrier'
-																		: 'ccc'}
+																	: page.url.pathname.startsWith('/catecheses-mystagogiques')
+																		? 'catecheses-mystagogiques'
+																		: page.url.pathname.startsWith('/calendrier')
+																			? 'calendrier'
+																			: 'ccc'}
 		/>
 		<SidebarToggle />
 	{/if}

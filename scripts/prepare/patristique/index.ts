@@ -1,9 +1,15 @@
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildPatristiqueWork, type PatBuildResult, type PatWorkConfig } from './build.ts';
+import { buildPatristiqueMarkdown } from './markdown-build.ts';
 import { logStep, endStep, assert } from '../validators.ts';
 
-export const PATRISTIQUE_WORKS: PatWorkConfig[] = [
+type PatWorkConfigExt = PatWorkConfig & {
+	format: 'wikisource-html' | 'markdown';
+	expectedChapters: number;
+};
+
+export const PATRISTIQUE_WORKS: PatWorkConfigExt[] = [
 	{
 		slug: 'didache',
 		title: 'La Didachè',
@@ -11,7 +17,9 @@ export const PATRISTIQUE_WORKS: PatWorkConfig[] = [
 		author: 'Auteur anonyme',
 		date: 'vers 80–100',
 		translator: 'Hippolyte Hemmer, 1907',
-		htmlPath: 'didache.html'
+		htmlPath: 'didache.html',
+		format: 'wikisource-html',
+		expectedChapters: 16
 	},
 	{
 		slug: 'discours-catechetique',
@@ -20,7 +28,20 @@ export const PATRISTIQUE_WORKS: PatWorkConfig[] = [
 		author: 'Saint Grégoire de Nysse',
 		date: 'vers 385',
 		translator: 'Louis Méridier, 1908',
-		htmlPath: 'discours-catechetique.html'
+		htmlPath: 'discours-catechetique.html',
+		format: 'wikisource-html',
+		expectedChapters: 40
+	},
+	{
+		slug: 'catecheses-mystagogiques',
+		title: 'Catéchèses mystagogiques',
+		subtitle: 'Aux nouveaux baptisés',
+		author: 'Saint Cyrille de Jérusalem',
+		date: 'vers 350',
+		translator: 'Traducteur ancien (XIXᵉ siècle)',
+		htmlPath: 'catecheses-mystagogiques.md',
+		format: 'markdown',
+		expectedChapters: 5
 	}
 ];
 
@@ -39,12 +60,14 @@ export function preparePatristique(args: PreparePatristiqueArgs): Record<string,
 			continue;
 		}
 		logStep(`Patristique: ${work.slug}`);
-		const html = readFileSync(src, 'utf8');
-		const out = buildPatristiqueWork({ html, config: work });
-		const expected = work.slug === 'didache' ? 16 : 40;
+		const raw = readFileSync(src, 'utf8');
+		const out =
+			work.format === 'markdown'
+				? buildPatristiqueMarkdown({ markdown: raw, config: work })
+				: buildPatristiqueWork({ html: raw, config: work });
 		assert(
-			out.structure.totalChapters === expected,
-			`Patristique ${work.slug}: expected ${expected} chapters, got ${out.structure.totalChapters}`
+			out.structure.totalChapters === work.expectedChapters,
+			`Patristique ${work.slug}: expected ${work.expectedChapters} chapters, got ${out.structure.totalChapters}`
 		);
 		const outDir = join(args.outDirRoot, work.slug);
 		mkdirSync(outDir, { recursive: true });

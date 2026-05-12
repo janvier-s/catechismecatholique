@@ -35,27 +35,45 @@
 	<article class="prose reader-prose">
 		{#each full.chapters as ch (ch.slug)}
 			<section class="chapter" id={ch.slug} aria-labelledby={`h-${ch.slug}`}>
-				<h2 class="chapter-h" id={`h-${ch.slug}`}>
-					<span class="chapter-roman">{ch.roman}</span>
-					<a
-						class="chapter-anchor"
-						href={`/${work}#${ch.slug}`}
-						aria-label={`Lien direct au chapitre ${ch.roman}`}
-					>
-						<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-							<path
-								d="M9.5 14.5L14.5 9.5M7 17L10 14M14 10L17 7M5 19a3 3 0 010-4l3-3a3 3 0 014 0M16 5a3 3 0 014 4l-3 3a3 3 0 01-4 0"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.6"
-								stroke-linecap="round"
-							/>
-						</svg>
-					</a>
-				</h2>
+				<header class="chapter-head">
+					<h2 class="chapter-h" id={`h-${ch.slug}`}>
+						<span class="chapter-roman">{ch.roman}</span>
+						{#if ch.title}
+							<span class="chapter-title">{frenchPunct(ch.title)}</span>
+						{/if}
+						<a
+							class="chapter-anchor"
+							href={`/${work}#${ch.slug}`}
+							aria-label={`Lien direct au chapitre ${ch.roman}`}
+						>
+							<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+								<path
+									d="M9.5 14.5L14.5 9.5M7 17L10 14M14 10L17 7M5 19a3 3 0 010-4l3-3a3 3 0 014 0M16 5a3 3 0 014 4l-3 3a3 3 0 01-4 0"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.6"
+									stroke-linecap="round"
+								/>
+							</svg>
+						</a>
+					</h2>
+				</header>
 				{#each ch.blocks as block, i (i)}
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<p class="para">{@html frenchPunct(block.html)}</p>
+					{#if block.kind === 'subheading'}
+						<h3 class="subheading">{frenchPunct(block.text)}</h3>
+					{:else if block.kind === 'epigraph'}
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<p class="epigraph">{@html frenchPunct(block.html)}</p>
+					{:else}
+						<p class="para">
+							{#if block.n}
+								<span class="para-num" aria-hidden="true">{block.n}.</span>
+							{/if}
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->{@html frenchPunct(
+								block.html
+							)}
+						</p>
+					{/if}
 				{/each}
 			</section>
 		{/each}
@@ -147,16 +165,21 @@
 	.chapter + .chapter {
 		margin-top: 2.5rem;
 	}
+	.chapter-head {
+		margin: 0 0 1.25rem;
+	}
 	.chapter-h {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: baseline;
-		gap: 0.5rem;
-		margin: 0 0 1rem;
+		gap: 0.65rem;
+		margin: 0;
 		font-family: var(--font-heading);
 		font-style: italic;
 		font-size: 1.6rem;
 		font-weight: 700;
 		color: var(--color-heading, var(--color-fg));
+		text-wrap: balance;
 	}
 	.chapter-roman {
 		display: inline-flex;
@@ -167,6 +190,41 @@
 		border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
 		min-width: 2.5em;
 		justify-content: center;
+		flex: 0 0 auto;
+	}
+	.chapter-title {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+	.subheading {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: var(--color-heading, var(--color-fg));
+		margin: 1.75rem 0 0.75rem;
+		padding-left: 0.75rem;
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+		text-wrap: balance;
+	}
+	.epigraph {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 0.92rem;
+		color: var(--color-subtle);
+		line-height: 1.55;
+		margin: 0 0 1.5rem;
+		padding: 0 0 0.75rem;
+		border-bottom: 1px dashed color-mix(in srgb, var(--color-fg) 18%, transparent);
+	}
+	.para-num {
+		display: inline-block;
+		font-family: var(--font-ui);
+		font-size: 0.78em;
+		font-weight: 700;
+		color: var(--color-accent);
+		margin-right: 0.45em;
+		font-variant-numeric: tabular-nums;
 	}
 	.chapter-anchor {
 		display: inline-flex;

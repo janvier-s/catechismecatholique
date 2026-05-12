@@ -18,7 +18,10 @@ export interface PatWorkConfig {
 	htmlPath: string;
 }
 
-export type PatBlock = { kind: 'paragraph'; html: string };
+export type PatBlock =
+	| { kind: 'paragraph'; n?: number; html: string }
+	| { kind: 'subheading'; text: string }
+	| { kind: 'epigraph'; html: string };
 
 export interface PatChapterRef {
 	slug: string; // "c-1"
@@ -45,6 +48,10 @@ export interface PatChapter {
 	ordinal: number;
 	roman: string;
 	label: string;
+	/** Optional chapter title — present for works whose chapters are titled
+	 *  (Cyrille's catéchèses mystagogiques) and absent for those that aren't
+	 *  (Didachè, Discours catéchétique). */
+	title?: string;
 	blocks: PatBlock[];
 	prev?: { slug: string; label: string };
 	next?: { slug: string; label: string };

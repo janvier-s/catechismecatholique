@@ -143,6 +143,8 @@
 				return '/didache';
 			case 'discours-catechetique':
 				return '/discours-catechetique';
+			case 'catecheses-mystagogiques':
+				return '/catecheses-mystagogiques';
 			default:
 				return null;
 		}
@@ -370,7 +372,12 @@
 	let patStructure: PatStructure | null = $state(null);
 
 	$effect(() => {
-		if (corpus !== 'didache' && corpus !== 'discours-catechetique') return;
+		if (
+			corpus !== 'didache' &&
+			corpus !== 'discours-catechetique' &&
+			corpus !== 'catecheses-mystagogiques'
+		)
+			return;
 		(async () => {
 			patStructure = await loadPatStructure(corpus);
 		})();
@@ -1266,7 +1273,11 @@
 			}
 			return items;
 		}
-		if (corpus === 'didache' || corpus === 'discours-catechetique') {
+		if (
+			corpus === 'didache' ||
+			corpus === 'discours-catechetique' ||
+			corpus === 'catecheses-mystagogiques'
+		) {
 			if (!patStructure) return [];
 			return patStructure.chapters.map(
 				(c): Item => ({

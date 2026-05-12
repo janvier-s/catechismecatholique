@@ -14,6 +14,7 @@ export type Corpus =
 	| 'breviloquium'
 	| 'didache'
 	| 'discours-catechetique'
+	| 'catecheses-mystagogiques'
 	| 'calendrier';
 
 export interface BibleRef {
@@ -1149,7 +1150,10 @@ export interface CicCanonLocator {
 
 // ─── Patristique (Didachè, Discours catéchétique, …) ──────────────────────
 
-export type PatBlock = { kind: 'paragraph'; html: string };
+export type PatBlock =
+	| { kind: 'paragraph'; n?: number; html: string }
+	| { kind: 'subheading'; text: string }
+	| { kind: 'epigraph'; html: string };
 
 export interface PatChapterRef {
 	slug: string;
@@ -1176,6 +1180,7 @@ export interface PatChapter {
 	ordinal: number;
 	roman: string;
 	label: string;
+	title?: string;
 	blocks: PatBlock[];
 	prev?: { slug: string; label: string };
 	next?: { slug: string; label: string };
