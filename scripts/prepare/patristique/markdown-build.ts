@@ -40,6 +40,18 @@ import type {
 	PatWorkConfig
 } from './build.ts';
 
+function slugify(s: string): string {
+	return s
+		.normalize('NFKD')
+		.replace(/[̀-ͯ]/g, '')
+		.replace(/[’‘'`]/g, '')
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '')
+		.replace(/-{2,}/g, '-')
+		.slice(0, 40);
+}
+
 const ROMAN: Record<number, string> = {
 	1: 'I',
 	2: 'II',
@@ -172,7 +184,9 @@ export function buildPatristiqueMarkdown(args: {
 		// Subheading inside a chapter.
 		if (line.startsWith('### ')) {
 			flushAll();
-			current.blocks.push({ kind: 'subheading', text: line.replace(/^###\s+/, '').trim() });
+			const text = line.replace(/^###\s+/, '').trim();
+			const anchor = `${current.ordinal}-${slugify(text)}`;
+			current.blocks.push({ kind: 'subheading', anchor, text });
 			continue;
 		}
 
@@ -247,12 +261,19 @@ export function buildPatristiqueMarkdown(args: {
 		date: args.config.date,
 		translator: args.config.translator,
 		totalChapters: chapters.length,
-		chapters: chapters.map((c) => ({
-			slug: c.slug,
-			ordinal: c.ordinal,
-			roman: c.roman,
-			label: c.label
-		}))
+		chapters: chapters.map((c) => {
+			const subheadings = c.blocks
+				.filter((b): b is Extract<PatBlock, { kind: 'subheading' }> => b.kind === 'subheading')
+				.map((b) => ({ anchor: b.anchor, text: b.text }));
+			return {
+				slug: c.slug,
+				ordinal: c.ordinal,
+				roman: c.roman,
+				label: c.label,
+				...(c.title ? { title: c.title } : {}),
+				...(subheadings.length ? { subheadings } : {})
+			};
+		})
 	};
 	const full: PatFull = { structure, chapters };
 	return { structure, chapters: chapterMap, full };

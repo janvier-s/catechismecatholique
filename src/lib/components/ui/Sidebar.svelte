@@ -1279,13 +1279,30 @@
 			corpus === 'catecheses-mystagogiques'
 		) {
 			if (!patStructure) return [];
-			return patStructure.chapters.map(
-				(c): Item => ({
-					title: c.label,
+			return patStructure.chapters.map((c): Item => {
+				// When a chapter has a title (Cyrille's catecheses), surface
+				// the title as the primary label and keep the formal "Catéchèse N"
+				// as a kicker. Subheadings (if any) nest as children so the
+				// expand triangle appears and tracks the active section.
+				const hasTitle = Boolean(c.title);
+				const children =
+					c.subheadings && c.subheadings.length
+						? c.subheadings.map(
+								(sh): Item => ({
+									title: sh.text,
+									href: `/${corpus}#${sh.anchor}`,
+									level: 4
+								})
+							)
+						: undefined;
+				return {
+					title: hasTitle ? c.title! : c.label,
+					...(hasTitle ? { kicker: c.label } : {}),
 					href: `/${corpus}#${c.slug}`,
-					level: 4
-				})
-			);
+					level: hasTitle ? 2 : 4,
+					...(children ? { children } : {})
+				};
+			});
 		}
 		if (corpus === 'calendrier') {
 			if (calendrierFeasts.length === 0) return [];

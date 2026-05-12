@@ -20,7 +20,7 @@ export interface PatWorkConfig {
 
 export type PatBlock =
 	| { kind: 'paragraph'; n?: number; html: string }
-	| { kind: 'subheading'; text: string }
+	| { kind: 'subheading'; anchor: string; text: string }
 	| { kind: 'epigraph'; html: string };
 
 export interface PatChapterRef {
@@ -28,6 +28,12 @@ export interface PatChapterRef {
 	ordinal: number;
 	roman: string;
 	label: string; // "Chapitre I"
+	/** Chapter title for works that carry one (Catéchèses mystagogiques);
+	 *  absent for unnumbered works (Didachè, Discours catéchétique). */
+	title?: string;
+	/** Flat list of subheadings inside the chapter — drives the nested
+	 *  sidebar tree. Absent for works that have no subheadings. */
+	subheadings?: { anchor: string; text: string }[];
 }
 
 export interface PatStructure {

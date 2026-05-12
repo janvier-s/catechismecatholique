@@ -253,7 +253,6 @@ export function buildBreviloquium(args: { html: string }): BrevBuildResult {
 	}
 
 	let currentPart: BrevPart | null = null;
-	let conclusionPending = false;
 
 	for (let i = 0; i < headings.length; i++) {
 		const h = headings[i]!;
@@ -263,12 +262,10 @@ export function buildBreviloquium(args: { html: string }): BrevBuildResult {
 		if (h.level === 1) {
 			const parsed = parsePartieHeading(h.text);
 			if (!parsed) {
-				// Empty / non-matching h1: don't open a new part. If the next
-				// h2 is "Conclusion", it'll go into its own synthesized part.
-				conclusionPending = true;
+				// Empty / non-matching h1: don't open a new part. (The
+				// conclusion is detected from its h2 text directly below.)
 				continue;
 			}
-			conclusionPending = false;
 			const partSlug =
 				parsed.kind === 'prologue'
 					? uniqueSlug('prologue', usedPartSlugs)
@@ -304,7 +301,6 @@ export function buildBreviloquium(args: { html: string }): BrevBuildResult {
 			};
 			parts.push(owningPart);
 			currentPart = owningPart;
-			conclusionPending = false;
 		} else if (currentPart) {
 			owningPart = currentPart;
 		} else {

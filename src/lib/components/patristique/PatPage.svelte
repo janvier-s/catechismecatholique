@@ -60,7 +60,7 @@
 				</header>
 				{#each ch.blocks as block, i (i)}
 					{#if block.kind === 'subheading'}
-						<h3 class="subheading">{frenchPunct(block.text)}</h3>
+						<h3 class="subheading" id={block.anchor}>{frenchPunct(block.text)}</h3>
 					{:else if block.kind === 'epigraph'}
 						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 						<p class="epigraph">{@html frenchPunct(block.html)}</p>
@@ -206,6 +206,7 @@
 		padding-left: 0.75rem;
 		border-left: 2px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
 		text-wrap: balance;
+		scroll-margin-top: 80px;
 	}
 	.epigraph {
 		font-family: var(--font-body);

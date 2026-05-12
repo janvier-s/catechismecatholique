@@ -1152,7 +1152,7 @@ export interface CicCanonLocator {
 
 export type PatBlock =
 	| { kind: 'paragraph'; n?: number; html: string }
-	| { kind: 'subheading'; text: string }
+	| { kind: 'subheading'; anchor: string; text: string }
 	| { kind: 'epigraph'; html: string };
 
 export interface PatChapterRef {
@@ -1160,6 +1160,8 @@ export interface PatChapterRef {
 	ordinal: number;
 	roman: string;
 	label: string;
+	title?: string;
+	subheadings?: { anchor: string; text: string }[];
 }
 
 export interface PatStructure {
