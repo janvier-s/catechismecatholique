@@ -56,8 +56,8 @@ export const GET: RequestHandler = () => {
 		'/catechisme-illustre/12-ciel',
 		'/catechisme-illustre/avis',
 		'/catechisme-illustre/prieres',
-		'/denzinger',
-		'/denzinger/sommaire',
+		'/enchiridion',
+		'/enchiridion/sommaire',
 		'/prieres-formules',
 		'/bible',
 		'/glossaire',
@@ -107,12 +107,12 @@ export const GET: RequestHandler = () => {
 	const denzingerStructure: {
 		parts: { units: { slug: string }[] }[];
 	} = JSON.parse(
-		readFileSync(join(process.cwd(), 'static/data/denzinger/structure.json'), 'utf-8')
+		readFileSync(join(process.cwd(), 'static/data/enchiridion/structure.json'), 'utf-8')
 	);
 	const denzingerUrls: string[] = [];
 	for (const part of denzingerStructure.parts) {
 		for (const unit of part.units) {
-			denzingerUrls.push(`/denzinger/${unit.slug}`);
+			denzingerUrls.push(`/enchiridion/${unit.slug}`);
 		}
 	}
 

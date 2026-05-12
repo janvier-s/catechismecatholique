@@ -616,7 +616,7 @@ async function main() {
 
 	logStep('extracting Denzinger (Enchiridion Symbolorum — catho.org HTML)');
 	const denzingerCacheDir = join(SOURCES, 'denzinger/cache');
-	const denzingerOutDir = join(OUT, 'denzinger');
+	const denzingerOutDir = join(OUT, 'enchiridion');
 	if (existsSync(denzingerCacheDir) || existsSync(join(SOURCES, 'denzinger'))) {
 		mkdirSync(denzingerOutDir, { recursive: true });
 		const script = new URL('./prepare/denzinger/extract.py', import.meta.url).pathname;

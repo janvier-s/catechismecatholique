@@ -686,7 +686,7 @@ const denzingerUnitCache = new Map<string, Promise<DenzingerUnit | null>>();
 export function loadDenzingerStructure(fetcher: Fetch = fetch): Promise<DenzingerStructure> {
 	if (!denzingerStructurePromise) {
 		denzingerStructurePromise = fetchJson<DenzingerStructure>(
-			'/data/denzinger/structure.json',
+			'/data/enchiridion/structure.json',
 			fetcher
 		);
 	}
@@ -695,7 +695,7 @@ export function loadDenzingerStructure(fetcher: Fetch = fetch): Promise<Denzinge
 
 export function loadDenzingerIndex(fetcher: Fetch = fetch): Promise<DenzingerEntryIndex> {
 	if (!denzingerIndexPromise) {
-		denzingerIndexPromise = fetchJson<DenzingerEntryIndex>('/data/denzinger/index.json', fetcher);
+		denzingerIndexPromise = fetchJson<DenzingerEntryIndex>('/data/enchiridion/index.json', fetcher);
 	}
 	return denzingerIndexPromise;
 }
@@ -706,7 +706,7 @@ let denzingerRefsPromise: Promise<Record<string, number[]>> | null = null;
 export function loadDenzingerCitedBy(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
 	if (!denzingerCitedByPromise) {
 		denzingerCitedByPromise = (async () => {
-			const r = await fetcher('/data/denzinger/cited-by.json');
+			const r = await fetcher('/data/enchiridion/cited-by.json');
 			if (!r.ok) return {};
 			return (await r.json()) as Record<string, number[]>;
 		})();
@@ -717,7 +717,7 @@ export function loadDenzingerCitedBy(fetcher: Fetch = fetch): Promise<Record<str
 export function loadDenzingerRefs(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
 	if (!denzingerRefsPromise) {
 		denzingerRefsPromise = (async () => {
-			const r = await fetcher('/data/denzinger/refs.json');
+			const r = await fetcher('/data/enchiridion/refs.json');
 			if (!r.ok) return {};
 			return (await r.json()) as Record<string, number[]>;
 		})();
@@ -732,7 +732,7 @@ export function loadDenzingerUnit(
 	let p = denzingerUnitCache.get(slug);
 	if (!p) {
 		p = (async () => {
-			const r = await fetcher(`/data/denzinger/units/${slug}.json`);
+			const r = await fetcher(`/data/enchiridion/units/${slug}.json`);
 			if (!r.ok) return null;
 			return (await r.json()) as DenzingerUnit;
 		})();

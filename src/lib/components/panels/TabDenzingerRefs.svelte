@@ -47,7 +47,7 @@
 	<ul class="list">
 		{#each items as item (item.n)}
 			<li>
-				<a class="row" href="/denzinger/{item.unit_slug}#dh-{item.n}">
+				<a class="row" href="/enchiridion/{item.unit_slug}#dh-{item.n}">
 					<span class="row-num">DH {item.n}</span>
 					<span class="row-arrow" aria-hidden="true">→</span>
 				</a>

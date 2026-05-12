@@ -21,7 +21,7 @@
 		[/^\/doctrine-sociale(\/|$)/, 'II'],
 		// Shelf III · magisterium
 		[/^\/vatican-ii(\/|$)/, 'III'],
-		[/^\/denzinger(\/|$)/, 'III'],
+		[/^\/enchiridion(\/|$)/, 'III'],
 		[/^\/cic(\/|$)/, 'III'],
 		[/^\/pgmr(\/|$)/, 'III'],
 		[/^\/encycliques(\/|$)/, 'III']

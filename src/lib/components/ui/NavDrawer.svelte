@@ -150,7 +150,7 @@
 			title: 'Magistère',
 			links: [
 				{ href: '/vatican-ii', label: 'Vatican II', eyebrow: '1962–1965' },
-				{ href: '/denzinger', label: 'Denzinger', eyebrow: 'Symbolorum' },
+				{ href: '/enchiridion', label: 'Enchiridion Symbolorum', eyebrow: 'Denzinger' },
 				{ href: '/cic/1983', label: 'Code de Droit Canonique', eyebrow: '1983' },
 				{ href: '/cic/1917', label: 'Code Pio-Benedictin', eyebrow: '1917' },
 				{ href: '/pgmr', label: 'Présentation Générale du Missel Romain', eyebrow: '2002' }

@@ -128,7 +128,7 @@
 			case 'catechisme-illustre':
 				return '/catechisme-illustre/sommaire';
 			case 'denzinger':
-				return '/denzinger/sommaire';
+				return '/enchiridion/sommaire';
 			case 'boulanger':
 				return '/doctrine-catholique/sommaire';
 			case 'cdse':
@@ -935,7 +935,7 @@
 				(p): Item => ({
 					title: p.title,
 					kicker: `DH ${p.first_n ?? '?'}–${p.last_n ?? '?'}`,
-					href: `/denzinger/sommaire#${p.slug}`,
+					href: `/enchiridion/sommaire#${p.slug}`,
 					children: p.units.map((u): Item => {
 						const range =
 							u.first_n != null
@@ -952,12 +952,12 @@
 							if (s.title) {
 								sectionItems.push({
 									title: s.title,
-									href: `/denzinger/${u.slug}#${s.anchor}`,
+									href: `/enchiridion/${u.slug}#${s.anchor}`,
 									kicker: fmtRange(s.first_n, s.last_n),
 									children: s.chapters?.length
 										? s.chapters.map((c) => ({
 												title: c.title,
-												href: `/denzinger/${u.slug}#${c.anchor}`,
+												href: `/enchiridion/${u.slug}#${c.anchor}`,
 												kicker: fmtRange(c.first_n, c.last_n)
 											}))
 										: undefined
@@ -967,7 +967,7 @@
 								for (const c of s.chapters) {
 									sectionItems.push({
 										title: c.title,
-										href: `/denzinger/${u.slug}#${c.anchor}`,
+										href: `/enchiridion/${u.slug}#${c.anchor}`,
 										kicker: fmtRange(c.first_n, c.last_n)
 									});
 								}
@@ -976,7 +976,7 @@
 						return {
 							title: u.title,
 							kicker: range,
-							href: `/denzinger/${u.slug}`,
+							href: `/enchiridion/${u.slug}`,
 							children: sectionItems.length > 1 ? sectionItems : undefined
 						};
 					})
@@ -1575,7 +1575,7 @@
 						: corpus === 'catechisme-illustre'
 							? 'Plan du Catéchisme illustré'
 							: corpus === 'denzinger'
-								? 'Plan du Denzinger'
+								? "Plan de l'Enchiridion"
 								: corpus === 'calendrier'
 									? 'Calendrier liturgique'
 									: 'Plan du Catéchisme'}

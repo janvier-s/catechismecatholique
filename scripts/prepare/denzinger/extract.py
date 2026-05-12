@@ -16,9 +16,9 @@ reading unit becomes one page of the site; entries within a unit are
 rendered inline with their <h2> document headings as sub-dividers.
 
 Output:
-  static/data/denzinger/structure.json   — hierarchy of reading units
-  static/data/denzinger/units/{slug}.json — full unit (entries + bodies)
-  static/data/denzinger/index.json       — {n: {slug, …}} for permalinks
+  static/data/enchiridion/structure.json   — hierarchy of reading units
+  static/data/enchiridion/units/{slug}.json — full unit (entries + bodies)
+  static/data/enchiridion/index.json       — {n: {slug, …}} for permalinks
 
 Cache: scripts/data-sources/denzinger/cache/. Re-runs are offline.
 """
@@ -37,7 +37,7 @@ from typing import Any
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent.parent
 CACHE_DIR = ROOT / "scripts/data-sources/denzinger/cache"
-OUT_DIR = ROOT / "static/data/denzinger"
+OUT_DIR = ROOT / "static/data/enchiridion"
 OUT_UNITS = OUT_DIR / "units"
 
 BASE_URL = "http://catho.org/9.php?d="
@@ -557,7 +557,7 @@ def main() -> None:
                     continue
                 rebuilt.append(text[cursor:start])
                 rebuilt.append(
-                    f'<a class="ref-dh" href="/denzinger/n/{cand}" '
+                    f'<a class="ref-dh" href="/enchiridion/n/{cand}" '
                     f'data-dh="{cand}">{m.group(0)}</a>'
                 )
                 cursor = end

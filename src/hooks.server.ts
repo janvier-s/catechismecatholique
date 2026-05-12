@@ -12,5 +12,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const target = '/cec' + p.slice(4) + event.url.search;
 		throw redirect(308, target);
 	}
+	// The Denzinger landing was renamed to /enchiridion to reflect that
+	// Enchiridion Symbolorum is the work's actual title; "Denzinger" is the
+	// editor's name. Keep the old URLs alive with a permanent redirect.
+	if (p === '/denzinger' || p.startsWith('/denzinger/')) {
+		const target = '/enchiridion' + p.slice('/denzinger'.length) + event.url.search;
+		throw redirect(308, target);
+	}
 	return resolve(event);
 };

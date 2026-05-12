@@ -200,13 +200,13 @@
 					image: '/img/bibliotheque/vatican-ii.webp'
 				},
 				{
-					slug: 'denzinger',
-					href: '/denzinger',
-					title: 'Denzinger',
-					subtitle: 'Enchiridion Symbolorum',
+					slug: 'enchiridion',
+					href: '/enchiridion',
+					title: 'Enchiridion Symbolorum',
+					subtitle: 'Denzinger',
 					blurb: 'Recueil canonique des symboles, définitions et déclarations du Magistère.',
 					year: 'Recueil',
-					image: '/img/bibliotheque/denzinger.webp'
+					image: '/img/bibliotheque/enchiridion.webp'
 				},
 				{
 					slug: 'cic-1983',

@@ -45,7 +45,7 @@
 			<p class="footer-col-head">Magistère</p>
 			<ul>
 				<li><a href="/vatican-ii">Vatican II</a></li>
-				<li><a href="/denzinger">Denzinger</a></li>
+				<li><a href="/enchiridion">Enchiridion Symbolorum</a></li>
 				<li><a href="/cic/1983">Code de Droit Canonique</a></li>
 				<li><a href="/cic/1917">Code Pio-Benedictin (1917)</a></li>
 				<li><a href="/pgmr">Présentation Générale du Missel Romain</a></li>

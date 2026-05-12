@@ -57,8 +57,8 @@
 			return true;
 		}
 		// Denzinger entry pages (hide on landing and sommaire)
-		if (p.startsWith('/denzinger/')) {
-			if (p.startsWith('/denzinger/sommaire')) return false;
+		if (p.startsWith('/enchiridion/')) {
+			if (p.startsWith('/enchiridion/sommaire')) return false;
 			return true;
 		}
 		// Boulanger reader (hide on landing and sommaire)
@@ -187,7 +187,7 @@
 							? 'pius-x-petit'
 							: page.url.pathname.startsWith('/catechisme-illustre')
 								? 'catechisme-illustre'
-								: page.url.pathname.startsWith('/denzinger')
+								: page.url.pathname.startsWith('/enchiridion')
 									? 'denzinger'
 									: page.url.pathname.startsWith('/doctrine-catholique')
 										? 'boulanger'
