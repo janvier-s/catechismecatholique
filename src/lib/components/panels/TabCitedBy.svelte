@@ -5,22 +5,25 @@
 	import ParagraphList from './ParagraphList.svelte';
 
 	let citers: number[] = $state([]);
+	let loaded = $state(false);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
+		loaded = false;
 		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
 			const all = await loadCitedBy();
 			citers = all[ctx.paragraph] ?? [];
+			loaded = true;
 		})();
 	});
 </script>
 
-{#if citers.length > 0}
+{#if loaded && citers.length > 0}
 	<p class="text-muted text-xs mb-3 font-ui">
 		{citers.length}
 		{pluralFr(citers.length, 'paragraphe')}
 		{citers.length === 1 ? 'cite' : 'citent'} ce paragraphe :
 	</p>
 {/if}
-<ParagraphList numbers={citers} emptyMessage="Aucun paragraphe ne cite ce paragraphe." />
+<ParagraphList numbers={citers} emptyMessage="Aucun paragraphe ne cite ce paragraphe." {loaded} />

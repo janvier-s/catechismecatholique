@@ -8,8 +8,9 @@
 
 	let {
 		numbers,
-		emptyMessage = 'Aucun paragraphe.'
-	}: { numbers: number[]; emptyMessage?: string } = $props();
+		emptyMessage = 'Aucun paragraphe.',
+		loaded = true
+	}: { numbers: number[]; emptyMessage?: string; loaded?: boolean } = $props();
 
 	let paragraphs: Paragraph[] = $state([]);
 
@@ -25,7 +26,9 @@
 	}
 </script>
 
-{#if numbers.length === 0}
+{#if !loaded}
+	<p class="text-muted italic font-ui text-sm" aria-hidden="true">&nbsp;</p>
+{:else if numbers.length === 0}
 	<p class="text-muted italic font-ui text-sm">{emptyMessage}</p>
 {:else}
 	<div class="space-y-5">

@@ -9,6 +9,7 @@
 	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
 	import Footer from '$lib/components/ui/Footer.svelte';
 	import BibleRefTooltip from '$lib/components/ui/BibleRefTooltip.svelte';
+	import BackToBibliotheque from '$lib/components/ui/BackToBibliotheque.svelte';
 	import { closePanel, studyPanel } from '$lib/stores/studyPanel';
 
 	let { children } = $props();
@@ -220,6 +221,7 @@
 		class="flex-1 min-w-0 page-fade"
 		data-fade-key={fadeKey}
 	>
+		<BackToBibliotheque />
 		{@render children()}
 	</div>
 	<StudyPanel />

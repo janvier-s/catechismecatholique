@@ -24,9 +24,11 @@
 	let bible: NclBible | null = $state(null);
 	let resolved: RefWithVerses[] = $state([]);
 	let listEl: HTMLUListElement | undefined = $state();
+	let loaded = $state(false);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
+		loaded = false;
 		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
 			const p = await loadParagraph(ctx.paragraph);
@@ -48,6 +50,7 @@
 				if (data) next[list[i]!] = data;
 			}
 			bible = next;
+			loaded = true;
 		})();
 	});
 
@@ -178,7 +181,9 @@
 {/snippet}
 
 <div class="font-ui text-sm">
-	{#if refs.length === 0}
+	{#if !loaded}
+		<p class="text-muted italic" aria-hidden="true">&nbsp;</p>
+	{:else if refs.length === 0}
 		<p class="text-muted italic">Aucune référence biblique.</p>
 	{:else}
 		<ul bind:this={listEl} class="space-y-3 sm:space-y-5">

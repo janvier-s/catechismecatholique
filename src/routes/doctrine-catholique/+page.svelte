@@ -8,7 +8,7 @@
 	<title>La Doctrine Catholique · Abbé Boulenger (1927)</title>
 	<meta
 		name="description"
-		content="La Doctrine catholique de l'Abbé Boulenger (Vitte, 1927) — 53 leçons en trois tomes : Le Dogme, La Morale, Les Moyens de Sanctification."
+		content="La Doctrine catholique de l'Abbé Boulenger (Vitte, 1927) : 53 leçons en trois tomes (Dogme, Morale, Moyens de sanctification)."
 	/>
 </svelte:head>
 
@@ -18,7 +18,7 @@
 		<h1 class="hero-title">La Doctrine catholique</h1>
 		<p class="hero-lede">
 			Manuel de catéchisme en {data.structure.tomes.reduce((t, tm) => t + tm.lessons.length, 0)} leçons,
-			réparti en trois tomes : Le Dogme, La Morale et Les Moyens de Sanctification.
+			organisé en trois tomes (Dogme, Morale, Moyens de sanctification).
 		</p>
 		<a class="hero-toc" href="/doctrine-catholique/sommaire">Sommaire complet →</a>
 	</header>

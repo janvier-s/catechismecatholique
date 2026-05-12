@@ -5,9 +5,11 @@
 
 	let refs: MagisterialRefRecord[] = $state([]);
 	let abbrs: AbbreviationMap = $state({});
+	let loaded = $state(false);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
+		loaded = false;
 		if (ctx?.kind !== 'paragraph') return;
 		(async () => {
 			const [p, a] = await Promise.all([loadParagraph(ctx.paragraph), loadAbbreviations()]);
@@ -15,6 +17,7 @@
 				(r) => r.type === 'magisterial' || r.type === 'patristic' || r.type === 'liturgical'
 			);
 			abbrs = a;
+			loaded = true;
 		})();
 	});
 
@@ -41,7 +44,9 @@
 </script>
 
 <div class="font-ui text-sm">
-	{#if refs.length === 0}
+	{#if !loaded}
+		<p class="text-muted italic" aria-hidden="true">&nbsp;</p>
+	{:else if refs.length === 0}
 		<p class="text-muted italic">Aucune source.</p>
 	{:else}
 		<ul class="space-y-2">

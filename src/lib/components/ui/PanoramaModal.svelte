@@ -137,7 +137,14 @@
 				</svg>
 			</button>
 		</header>
-		<div class="panorama-dialog-body styled-scroll">
+		<div
+			class="panorama-dialog-body styled-scroll"
+			onclick={(e) => {
+				const a = (e.target as HTMLElement | null)?.closest('a[href]');
+				if (a) close();
+			}}
+			role="presentation"
+		>
 			{@render children()}
 		</div>
 	</div>

@@ -18,10 +18,6 @@
 </svelte:head>
 
 <main class="pat-page" use:scrollSpy>
-	<a class="back" href="/bibliotheque#shelf-II">
-		<span class="back-arrow" aria-hidden="true">←</span>
-		Retour à la Bibliothèque
-	</a>
 	<header class="hero">
 		<p class="hero-kicker">{meta.author} · {meta.date}</p>
 		<h1 class="hero-title">{frenchPunct(meta.title)}</h1>
@@ -107,35 +103,6 @@
 		padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
 		color: var(--color-fg);
 		font-family: var(--font-body);
-	}
-
-	/* Back link to the Bibliothèque (anchored to the relevant shelf).
-	   Lives above the hero, mirrors the homepage CTA register but
-	   smaller — text + leading arrow that translates on hover. */
-	.back {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin: 0 0 1.5rem;
-		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-		text-decoration: none;
-		transition: color 140ms ease;
-	}
-	.back:hover {
-		color: var(--color-accent-text, var(--color-accent));
-	}
-	.back-arrow {
-		display: inline-block;
-		line-height: 1;
-		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	.back:hover .back-arrow {
-		transform: translateX(-4px);
 	}
 
 	/* Hero */

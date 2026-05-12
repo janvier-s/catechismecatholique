@@ -48,7 +48,9 @@ test('prologue renders paragraphs', async ({ page }) => {
 test('partie/1 redirects to part slug', async ({ page }) => {
 	const res = await page.goto('/cec/partie/1');
 	expect(res?.status()).toBe(200);
-	expect(page.url()).toMatch(/\/cec\/[a-z0-9-]+$/);
+	// Part 1 has no intro paragraphs, so we further redirect from
+	// /cec/{part-slug} to its first section /cec/{part-slug}/{section-slug}.
+	expect(page.url()).toMatch(/\/cec\/[a-z0-9-]+(?:\/[a-z0-9-]+)?$/);
 	expect(page.url()).not.toContain('/partie/');
 });
 

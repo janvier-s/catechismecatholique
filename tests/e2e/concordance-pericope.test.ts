@@ -24,6 +24,9 @@ test.describe('concordance — data-dependent', () => {
 		await page.goto('/bible/genese/3/concordance');
 		await expect(page.getByText('La faute et le châtiment').first()).toBeVisible();
 		await expect(page.getByText('Genèse 3:1-24').first()).toBeVisible();
+		// Pericopes are no longer auto-selected — click the first one to
+		// expand the detail card before asserting on the CCC chip.
+		await page.getByRole('button', { name: 'Genèse 3:1-24' }).first().click();
 		const cccChip = page.locator('.pericope-detail a[href^="/cec/"]').first();
 		await expect(cccChip).toBeVisible();
 	});
@@ -40,6 +43,7 @@ test.describe('concordance — data-dependent', () => {
 
 	test('CCC chip on the concordance page navigates to /cec/<n>', async ({ page }) => {
 		await page.goto('/bible/genese/3/concordance');
+		await page.getByRole('button', { name: 'Genèse 3:1-24' }).first().click();
 		const cccChip = page.locator('.pericope-detail a[href^="/cec/"]').first();
 		const href = await cccChip.getAttribute('href');
 		expect(href).toMatch(/^\/cec\/\d+(-\d+)?$/);

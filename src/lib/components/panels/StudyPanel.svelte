@@ -2,6 +2,17 @@
 	import { page } from '$app/state';
 	import { get } from 'svelte/store';
 	import { fly } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
+
+	// Custom mobile slide-up: translateY from 100% to 0 so the sheet always
+	// slides from fully below the viewport, regardless of intrinsic height.
+	function slideUp(_node: HTMLElement, { duration = 280 } = {}) {
+		return {
+			duration,
+			easing: cubicOut,
+			css: (t: number) => `transform: translateY(${(1 - t) * 100}%);`
+		};
+	}
 	import { studyPanel, openPanel, closePanel, type PanelTab } from '$lib/stores/studyPanel';
 	import {
 		loadParagraph,
@@ -292,6 +303,25 @@
 		const prevOverflow = html.style.overflow;
 		html.style.overflow = 'hidden';
 
+		// Push a history entry so the device back gesture closes the sheet
+		// instead of leaving the page. Pair with a popstate listener that
+		// closes the panel when the entry is popped.
+		let pushedHistory = false;
+		try {
+			history.pushState({ studyPanel: true }, '');
+			pushedHistory = true;
+		} catch {
+			pushedHistory = false;
+		}
+		let closedByBack = false;
+		const onPopState = () => {
+			if (get(studyPanel).open) {
+				closedByBack = true;
+				closePanel();
+			}
+		};
+		window.addEventListener('popstate', onPopState);
+
 		queueMicrotask(() => {
 			const closeBtn = sheetEl?.querySelector<HTMLElement>('button[aria-label="Fermer"]');
 			closeBtn?.focus();
@@ -321,6 +351,16 @@
 		return () => {
 			html.style.overflow = prevOverflow;
 			document.removeEventListener('keydown', onTabTrap);
+			window.removeEventListener('popstate', onPopState);
+			// If close was triggered by the X button or backdrop (not back
+			// gesture), pop the synthetic entry so the back stack stays clean.
+			if (pushedHistory && !closedByBack && history.state?.studyPanel) {
+				try {
+					history.back();
+				} catch {
+					// ignore
+				}
+			}
 			lastTrigger?.focus?.();
 			lastTrigger = null;
 		};
@@ -337,7 +377,7 @@
 		role="dialog"
 		aria-modal="true"
 		aria-label="Panneau d'étude"
-		transition:fly={{ y: 30, duration: 200, opacity: 1 }}
+		transition:slideUp={{ duration: 280 }}
 	>
 		<header class="flex items-center justify-between px-3 py-2 border-b border-border font-ui">
 			<div class="min-w-0">
