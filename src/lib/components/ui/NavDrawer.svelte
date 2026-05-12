@@ -79,14 +79,14 @@
 					description: 'Mot, paragraphe ou référence biblique.'
 				},
 				{
-					href: '/bible',
-					label: 'Concordance biblique',
-					description: 'Chaque verset croisé avec le Catéchisme.'
-				},
-				{
 					href: '/glossaire',
 					label: 'Glossaire',
 					description: 'Les termes théologiques classés par thème.'
+				},
+				{
+					href: '/bible',
+					label: 'Concordance biblique',
+					description: 'Chaque verset croisé avec le Catéchisme.'
 				},
 				{
 					href: '/calendrier',
