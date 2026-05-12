@@ -830,6 +830,17 @@
 			background-color 160ms ease,
 			color 160ms ease;
 	}
+	/* Hide the divider above the first row so the section reads as a
+	   single contained block (top edge defined by the shelf rule). At
+	   2-column the first row is two tiles; on mobile it's one. */
+	.tool-wrap:nth-child(-n + 2) .tool {
+		border-top: 0;
+	}
+	@media (max-width: 720px) {
+		.tool-wrap:nth-child(2) .tool {
+			border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+		}
+	}
 	.tool:hover,
 	.tool:focus-visible {
 		background: color-mix(in srgb, var(--color-accent) 5%, transparent);
