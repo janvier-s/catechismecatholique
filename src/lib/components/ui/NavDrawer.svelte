@@ -303,7 +303,6 @@
 		background: var(--color-bg);
 		color: var(--color-fg);
 		border-left: 1px solid var(--color-border);
-		box-shadow: -16px 0 32px -28px color-mix(in srgb, var(--color-fg) 32%, transparent);
 		z-index: var(--z-modal);
 		display: flex;
 		flex-direction: column;
@@ -382,9 +381,11 @@
 		text-wrap: balance;
 	}
 	/* Only the "Études & outils" group uses italics — it reads as tool-like,
-	   matches how those entries appear elsewhere on the site. */
+	   matches how those entries appear elsewhere on the site. Italics
+	   carry no extra weight; otherwise they read as shouty. */
 	.group-tools .link-label {
 		font-style: italic;
+		font-weight: 400;
 	}
 	.link-desc {
 		font-family: var(--font-body);
