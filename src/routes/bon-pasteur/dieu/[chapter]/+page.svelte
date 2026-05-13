@@ -1,5 +1,4 @@
 <script lang="ts">
-	import BackToBibliotheque from '$lib/components/ui/BackToBibliotheque.svelte';
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import SidebarItem from '$lib/components/ui/SidebarItem.svelte';
@@ -120,7 +119,12 @@
 
 	<!-- ── Content ───────────────────────────────────────────────────────── -->
 	<div class="dieu-outer">
-		<BackToBibliotheque />
+		<div class="back-row">
+			<a class="back-to-biblio" href="/bibliotheque#shelf-I">
+				<span class="back-arrow" aria-hidden="true">←</span>
+				Retour à la Bibliothèque
+			</a>
+		</div>
 		<div class="dieu-main">
 			<div class="dieu-content">
 				<header class="head">
@@ -187,6 +191,40 @@
 </div>
 
 <style>
+	/* ── Back link ─────────────────────────────────────────────────────── */
+	.back-row {
+		padding: 0.85rem clamp(1rem, 4vw, 2.5rem) 0;
+	}
+
+	.back-to-biblio {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		text-decoration: none;
+		padding: 0.25rem 0;
+		transition: color 140ms ease;
+	}
+
+	.back-to-biblio:hover {
+		color: var(--color-fg);
+	}
+
+	.back-arrow {
+		display: inline-block;
+		line-height: 1;
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.back-to-biblio:hover .back-arrow {
+		transform: translateX(-3px);
+	}
+
 	/* ── Layout ────────────────────────────────────────────────────────── */
 	.dieu-layout {
 		display: flex;
