@@ -10,7 +10,11 @@
 		const c = corpusForPath(p);
 		if (c) return `/bibliotheque#shelf-${c.shelf}`;
 		if (p === '/encycliques' || p.startsWith('/encycliques/')) return '/bibliotheque#shelf-III';
-		if (p === '/bon-pasteur' || p.startsWith('/bon-pasteur/')) return '/bibliotheque#shelf-I';
+		if (p === '/bon-pasteur' || p.startsWith('/bon-pasteur/')) {
+			// dieu chapter pages render their own back link inside the content column
+			if (p.startsWith('/bon-pasteur/dieu/')) return null;
+			return '/bibliotheque#shelf-I';
+		}
 		return null;
 	});
 </script>

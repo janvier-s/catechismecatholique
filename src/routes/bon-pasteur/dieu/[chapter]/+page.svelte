@@ -1,4 +1,5 @@
 <script lang="ts">
+	import BackToBibliotheque from '$lib/components/ui/BackToBibliotheque.svelte';
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import SidebarItem from '$lib/components/ui/SidebarItem.svelte';
@@ -100,19 +101,8 @@
 		aria-label="Plan du cours Dieu"
 	>
 		<!-- Header -->
-		<div class="border-b border-border px-4 py-3">
-			<p class="font-ui text-[9.5px] uppercase tracking-[0.14em] text-muted mb-0.5">
-				Institut du Bon Pasteur
-			</p>
-			<p class="font-heading italic font-bold text-[1.05rem] leading-tight text-fg m-0">Dieu</p>
-			<a
-				href="https://www.institutdubonpasteur.org/"
-				class="font-ui text-[10px] text-muted hover:text-accent transition-colors"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				institutdubonpasteur.org&nbsp;↗
-			</a>
+		<div class="flex items-center p-2 border-b border-border">
+			<span class="font-ui text-xs uppercase tracking-wider text-muted ml-2">Sommaire</span>
 		</div>
 		<!-- Nav -->
 		<nav
@@ -130,6 +120,8 @@
 
 	<!-- ── Content ───────────────────────────────────────────────────────── -->
 	<div class="dieu-outer">
+		<BackToBibliotheque />
+		<div class="dieu-main">
 		<div class="dieu-content">
 			<header class="head">
 				<BreadcrumbRail
@@ -190,6 +182,7 @@
 				{/if}
 			</nav>
 		</div>
+		</div>
 	</div>
 </div>
 
@@ -208,6 +201,12 @@
 	.dieu-outer {
 		flex: 1;
 		min-width: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.dieu-main {
+		flex: 1;
 		display: flex;
 		justify-content: center;
 	}
