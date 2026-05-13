@@ -354,7 +354,7 @@ export function linkifyVaticanIIBibleRefs(html: string): string {
 	// Merge split-prefix emphasis blocks ("1" in its own <em>, then book ref)
 	// into a single emphasis block with "{digit} {abbr}" inside the ss span.
 	const merged = html.replace(
-		/<span class="emphasis"><em>\s*([123])\s*<\/em><\/span>[\s ]+<span class="emphasis"><em><span class="ss">([A-Za-z]+)<\/span>/g,
+		/<span class="emphasis"><em>\s*([123])\s*<\/em><\/span>[\s\u00a0]+<span class="emphasis"><em><span class="ss">([A-Za-z]+)<\/span>/g,
 		(_m, digit: string, abbr: string) =>
 			`<span class="emphasis"><em><span class="ss">${digit} ${abbr}</span>`
 	);
