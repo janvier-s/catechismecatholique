@@ -48,7 +48,8 @@
 	description="Trois cours de catéchèse de l'Institut du Bon Pasteur : catéchisme pour adultes, doctrine de la foi et liturgie catholique."
 />
 
-<CollectionPage kicker="Institut du Bon Pasteur" title="Catéchèse" {groups}>
+<div class="ibp-wrap">
+<CollectionPage kicker="Institut du Bon Pasteur" title="Catéchèse du<br />Bon Pasteur" {groups}>
 	{#snippet lede()}
 		<p class="ibp-desc">
 			Fondé en 2006, l'Institut du Bon Pasteur est une société de vie apostolique dont les prêtres
@@ -144,8 +145,13 @@
 		/>
 	{/snippet}
 </CollectionPage>
+</div>
 
 <style>
+	.ibp-wrap :global(.hero-title) {
+		font-style: normal;
+	}
+
 	.ibp-desc {
 		max-width: 52ch;
 		margin: 0 auto;

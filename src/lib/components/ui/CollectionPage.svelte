@@ -47,7 +47,8 @@
 			<span class="rule"></span>
 		</span>
 		<p class="hero-kicker">{kicker}</p>
-		<h1 class="hero-title">{title}</h1>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<h1 class="hero-title">{@html title}</h1>
 		<div class="hero-lede">{@render lede()}</div>
 	</header>
 
