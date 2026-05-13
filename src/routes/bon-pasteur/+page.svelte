@@ -140,7 +140,7 @@
 	{#snippet footer()}
 		<YoutubePlaylist
 			playlist={data.playlist}
-			heading="Enseignements par des prêtres"
+			heading="Enseignements des prêtres de l'Institut du Bon Pasteur"
 			channel={{ name: 'CREDO', href: 'https://www.youtube.com/@credo_off' }}
 		/>
 	{/snippet}

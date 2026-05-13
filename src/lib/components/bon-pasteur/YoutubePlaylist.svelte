@@ -157,7 +157,6 @@
 
 	.ytp-heading {
 		font-family: var(--font-heading);
-		font-style: italic;
 		font-size: clamp(1.45rem, 3vw, 2rem);
 		font-weight: 700;
 		line-height: 1.15;
