@@ -80,8 +80,6 @@
 		>
 			<a href="/cec" class="hover:text-accent">Catéchisme</a>
 			<a href="/bible" class="hover:text-accent">Bible</a>
-			<a href="/bon-pasteur" class="hover:text-accent">IBP</a>
-			<a href="/encycliques" class="hover:text-accent">Encycliques</a>
 			<a href="/bibliotheque" class="hover:text-accent">Bibliothèque</a>
 		</nav>
 		<a
