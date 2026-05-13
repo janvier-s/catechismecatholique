@@ -17,7 +17,7 @@
 				},
 				{
 					slug: 'dieu',
-					href: null,
+					href: '/bon-pasteur/dieu',
 					image: '/img/bibliotheque/ibp-dieu.webp',
 					eyebrow: '13 chapitres',
 					title: 'Dieu',
@@ -46,7 +46,6 @@
 
 <CollectionPage kicker="Institut du Bon Pasteur" title="Catéchèse" {groups}>
 	{#snippet lede()}
-		Trois cours de catéchèse dispensés par des prêtres de l'Institut du Bon Pasteur, disponibles
-		prochainement.
+		Trois cours de catéchèse dispensés par des prêtres de l'Institut du Bon Pasteur.
 	{/snippet}
 </CollectionPage>

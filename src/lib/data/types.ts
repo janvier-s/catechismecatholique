@@ -1284,3 +1284,27 @@ export interface BrevChapter {
 	prev?: { slug: string; title: string; label: string };
 	next?: { slug: string; title: string; label: string };
 }
+
+// ─── IBP · Dieu ────────────────────────────────────────────────────────────
+
+export type DieuBlock =
+	| { kind: 'heading'; level: 2 | 3; title: string; anchor: string }
+	| { kind: 'paragraph'; html: string }
+	| { kind: 'definition'; term: string; html: string };
+
+export interface DieuChapterRef {
+	slug: string;
+	n: number;
+	title: string;
+}
+
+export interface DieuStructure {
+	chapters: DieuChapterRef[];
+}
+
+export interface DieuChapter {
+	slug: string;
+	n: number;
+	title: string;
+	blocks: DieuBlock[];
+}

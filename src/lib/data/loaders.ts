@@ -53,7 +53,9 @@ import type {
 	PatFull,
 	CpaStructure,
 	CpaSectionFull,
-	ParagraphThemeRef
+	ParagraphThemeRef,
+	DieuStructure,
+	DieuChapter
 } from './types';
 
 type Fetch = typeof fetch;
@@ -1028,4 +1030,32 @@ export async function loadParagraphThemes(): Promise<Record<string, ParagraphThe
 	const res = await fetch('/data/cec/paragraph-themes.json');
 	_paragraphThemesCache = await res.json();
 	return _paragraphThemesCache!;
+}
+
+// ─── IBP · Dieu loaders ─────────────────────────────────────────────────────
+
+let dieuStructurePromise: Promise<DieuStructure> | null = null;
+const dieuChapterCache = new Map<string, Promise<DieuChapter | null>>();
+
+export function loadDieuStructure(fetcher: Fetch = fetch): Promise<DieuStructure> {
+	if (!dieuStructurePromise) {
+		dieuStructurePromise = fetchJson<DieuStructure>(
+			'/data/bon-pasteur/dieu/structure.json',
+			fetcher
+		);
+	}
+	return dieuStructurePromise;
+}
+
+export function loadDieuChapter(slug: string, fetcher: Fetch = fetch): Promise<DieuChapter | null> {
+	let p = dieuChapterCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/bon-pasteur/dieu/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as DieuChapter;
+		})();
+		dieuChapterCache.set(slug, p);
+	}
+	return p;
 }
