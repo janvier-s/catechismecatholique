@@ -100,6 +100,7 @@
 	.hero-title {
 		font-family: var(--font-heading);
 		font-size: clamp(2.4rem, 6vw, 4rem);
+		font-style: normal;
 		font-weight: 700;
 		line-height: 1.05;
 		letter-spacing: -0.01em;

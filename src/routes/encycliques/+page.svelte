@@ -8,9 +8,17 @@
 	description="Recueil des encycliques majeures du Magistère pontifical. Section en préparation."
 />
 
-<CollectionPage kicker="Magistère pontifical" title="Encycliques">
-	{#snippet lede()}
-		Lettres encycliques des souverains pontifes sur la doctrine, la morale et la société, hors
-		documents conciliaires. Classées par pontificat, de Léon XIII à nos jours. En préparation.
-	{/snippet}
-</CollectionPage>
+<div class="enc-wrap">
+	<CollectionPage kicker="Magistère pontifical" title="Encycliques">
+		{#snippet lede()}
+			Lettres encycliques des souverains pontifes sur la doctrine, la morale et la société, hors
+			documents conciliaires. Classées par pontificat, de Léon XIII à nos jours. En préparation.
+		{/snippet}
+	</CollectionPage>
+</div>
+
+<style>
+	.enc-wrap :global(.hero-title) {
+		font-style: normal;
+	}
+</style>
