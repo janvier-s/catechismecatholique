@@ -43,7 +43,7 @@
 					slug: 'liturgie-laguerie',
 					href: null,
 					image: '/img/bibliotheque/ibp-liturgie-laguerie.webp',
-					eyebrow: 'À venir',
+					eyebrow: '22 chapitres',
 					title: 'La Liturgie pour les Nuls',
 					subtitle: 'Abbé Philippe Laguérie',
 					blurb: 'La messe et le culte catholique expliqués pour tous.'
