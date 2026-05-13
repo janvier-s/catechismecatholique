@@ -55,6 +55,8 @@
 	</nav>
 
 	<nav class="footer-meta" aria-label="Pages secondaires">
+		<a href="/bibliotheque">Bibliothèque</a>
+		<span aria-hidden="true">·</span>
 		<a href="/a-propos">À propos</a>
 		<span aria-hidden="true">·</span>
 		<a href="/mentions-legales">Mentions légales</a>

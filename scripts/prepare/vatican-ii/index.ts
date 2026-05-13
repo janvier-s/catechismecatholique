@@ -62,6 +62,25 @@ export function prepareVaticanII(args: PrepareVatIIArgs): PrepareVatIIResult {
 
 	for (const spec of VATICAN_II_REGISTRY) {
 		if (!spec.file) {
+			// Check for a pre-scraped JSON file (produced by scrape-vatii-missing.py).
+			// If present, read it and treat it as fully built rather than absent.
+			const prebuilt = join(args.outDir, 'docs', `${spec.slug}.json`);
+			if (existsSync(prebuilt)) {
+				const doc = JSON.parse(readFileSync(prebuilt, 'utf8')) as VatIIDoc;
+				docs[spec.slug] = doc;
+				const total = doc.blocks.filter((b) => b.kind === 'paragraph').length;
+				refs.push({
+					slug: spec.slug,
+					abbr: spec.abbr,
+					kind: spec.kind,
+					date: spec.date,
+					title: spec.title,
+					subtitle: spec.subtitle,
+					totalParagraphs: total,
+					present: true
+				});
+				continue;
+			}
 			refs.push({
 				slug: spec.slug,
 				abbr: spec.abbr,

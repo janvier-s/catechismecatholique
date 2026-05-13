@@ -6,7 +6,7 @@ export interface BookInfo {
 }
 
 export const BOOKS: BookInfo[] = [
-	{ usfx: 'GEN', slug: 'genese', frenchName: 'Genèse', abbrs: ['Gn', 'Gen'] },
+	{ usfx: 'GEN', slug: 'genese', frenchName: 'Genèse', abbrs: ['Gn', 'Gen', 'Genesis'] },
 	{ usfx: 'EXO', slug: 'exode', frenchName: 'Exode', abbrs: ['Ex', 'Exo', 'Exod'] },
 	{ usfx: 'LEV', slug: 'levitique', frenchName: 'Lévitique', abbrs: ['Lv', 'Lev'] },
 	{ usfx: 'NUM', slug: 'nombres', frenchName: 'Nombres', abbrs: ['Nb', 'Num'] },
@@ -28,17 +28,17 @@ export const BOOKS: BookInfo[] = [
 	{ usfx: '1MA', slug: '1-maccabees', frenchName: '1 Maccabées', abbrs: ['1 M', '1 Macc'] },
 	{ usfx: '2MA', slug: '2-maccabees', frenchName: '2 Maccabées', abbrs: ['2 M', '2 Macc'] },
 	{ usfx: 'JOB', slug: 'job', frenchName: 'Job', abbrs: ['Jb', 'Job'] },
-	{ usfx: 'PSA', slug: 'psaumes', frenchName: 'Psaumes', abbrs: ['Ps'] },
-	{ usfx: 'PRO', slug: 'proverbes', frenchName: 'Proverbes', abbrs: ['Pr', 'Prov'] },
+	{ usfx: 'PSA', slug: 'psaumes', frenchName: 'Psaumes', abbrs: ['Ps', 'Psalm', 'Psalms'] },
+	{ usfx: 'PRO', slug: 'proverbes', frenchName: 'Proverbes', abbrs: ['Pr', 'Prov', 'Proverbs'] },
 	{ usfx: 'ECC', slug: 'qoheleth', frenchName: 'Qohélet', abbrs: ['Qo', 'Eccl'] },
 	{ usfx: 'SNG', slug: 'cantique', frenchName: 'Cantique des cantiques', abbrs: ['Ct', 'Song'] },
 	{ usfx: 'WIS', slug: 'sagesse', frenchName: 'Sagesse', abbrs: ['Sg', 'Wis'] },
 	{ usfx: 'SIR', slug: 'siracide', frenchName: 'Siracide', abbrs: ['Si', 'Sir'] },
-	{ usfx: 'ISA', slug: 'isaie', frenchName: 'Isaïe', abbrs: ['Is', 'Isa'] },
+	{ usfx: 'ISA', slug: 'isaie', frenchName: 'Isaïe', abbrs: ['Is', 'Isa', 'Isaiah'] },
 	{ usfx: 'JER', slug: 'jeremie', frenchName: 'Jérémie', abbrs: ['Jr', 'Jer'] },
 	{ usfx: 'LAM', slug: 'lamentations', frenchName: 'Lamentations', abbrs: ['Lm', 'Lam'] },
 	{ usfx: 'BAR', slug: 'baruch', frenchName: 'Baruch', abbrs: ['Ba', 'Bar'] },
-	{ usfx: 'EZK', slug: 'ezechiel', frenchName: 'Ézéchiel', abbrs: ['Ez', 'Ezek'] },
+	{ usfx: 'EZK', slug: 'ezechiel', frenchName: 'Ézéchiel', abbrs: ['Ez', 'Ezek', 'Ezekiel'] },
 	{ usfx: 'DAN', slug: 'daniel', frenchName: 'Daniel', abbrs: ['Dn', 'Dan'] },
 	{ usfx: 'HOS', slug: 'osee', frenchName: 'Osée', abbrs: ['Os', 'Hos'] },
 	{ usfx: 'JOL', slug: 'joel', frenchName: 'Joël', abbrs: ['Jl', 'Joel'] },
@@ -52,9 +52,9 @@ export const BOOKS: BookInfo[] = [
 	{ usfx: 'HAG', slug: 'aggee', frenchName: 'Aggée', abbrs: ['Ag', 'Hag'] },
 	{ usfx: 'ZEC', slug: 'zacharie', frenchName: 'Zacharie', abbrs: ['Za', 'Zech'] },
 	{ usfx: 'MAL', slug: 'malachie', frenchName: 'Malachie', abbrs: ['Ml', 'Mal'] },
-	{ usfx: 'MAT', slug: 'matthieu', frenchName: 'Matthieu', abbrs: ['Mt', 'Matt'] },
-	{ usfx: 'MRK', slug: 'marc', frenchName: 'Marc', abbrs: ['Mc', 'Mk'] },
-	{ usfx: 'LUK', slug: 'luc', frenchName: 'Luc', abbrs: ['Lc', 'Lk'] },
+	{ usfx: 'MAT', slug: 'matthieu', frenchName: 'Matthieu', abbrs: ['Mt', 'Matt', 'Matthew'] },
+	{ usfx: 'MRK', slug: 'marc', frenchName: 'Marc', abbrs: ['Mc', 'Mk', 'Mark', 'Marc'] },
+	{ usfx: 'LUK', slug: 'luc', frenchName: 'Luc', abbrs: ['Lc', 'Lk', 'Luke'] },
 	{ usfx: 'JHN', slug: 'jean', frenchName: 'Jean', abbrs: ['Jn', 'John'] },
 	{ usfx: 'ACT', slug: 'actes', frenchName: 'Actes des Apôtres', abbrs: ['Ac', 'Acts'] },
 	{ usfx: 'ROM', slug: 'romains', frenchName: 'Romains', abbrs: ['Rm', 'Rom'] },
@@ -81,14 +81,19 @@ export const BOOKS: BookInfo[] = [
 	{ usfx: 'TIT', slug: 'tite', frenchName: 'Tite', abbrs: ['Tt', 'Titus'] },
 	{ usfx: 'PHM', slug: 'philemon', frenchName: 'Philémon', abbrs: ['Phm', 'Phlm'] },
 	{ usfx: 'HEB', slug: 'hebreux', frenchName: 'Hébreux', abbrs: ['He', 'Heb'] },
-	{ usfx: 'JAS', slug: 'jacques', frenchName: 'Jacques', abbrs: ['Jc', 'Jas'] },
+	{ usfx: 'JAS', slug: 'jacques', frenchName: 'Jacques', abbrs: ['Jc', 'Jas', 'James'] },
 	{ usfx: '1PE', slug: '1-pierre', frenchName: '1 Pierre', abbrs: ['1 P', '1 Pet'] },
 	{ usfx: '2PE', slug: '2-pierre', frenchName: '2 Pierre', abbrs: ['2 P', '2 Pet'] },
 	{ usfx: '1JN', slug: '1-jean', frenchName: '1 Jean', abbrs: ['1 Jn', '1 John'] },
 	{ usfx: '2JN', slug: '2-jean', frenchName: '2 Jean', abbrs: ['2 Jn', '2 John'] },
 	{ usfx: '3JN', slug: '3-jean', frenchName: '3 Jean', abbrs: ['3 Jn', '3 John'] },
 	{ usfx: 'JUD', slug: 'jude', frenchName: 'Jude', abbrs: ['Jude'] },
-	{ usfx: 'REV', slug: 'apocalypse', frenchName: 'Apocalypse', abbrs: ['Ap', 'Rev'] }
+	{
+		usfx: 'REV',
+		slug: 'apocalypse',
+		frenchName: 'Apocalypse',
+		abbrs: ['Ap', 'Rev', 'Revelation', 'Revelations']
+	}
 ];
 
 export function bookBySlug(slug: string): BookInfo | undefined {
@@ -98,8 +103,10 @@ export function bookByUsfx(usfx: string): BookInfo | undefined {
 	return BOOKS.find((b) => b.usfx === usfx);
 }
 export function bookByAbbr(abbr: string): BookInfo | undefined {
-	const norm = abbr.trim();
-	return BOOKS.find((b) => b.abbrs.some((a) => a === norm));
+	const lower = abbr.trim().toLowerCase();
+	return BOOKS.find(
+		(b) => b.abbrs.some((a) => a.toLowerCase() === lower) || b.frenchName.toLowerCase() === lower
+	);
 }
 
 export type Testament = 'OT' | 'NT';

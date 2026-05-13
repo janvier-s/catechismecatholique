@@ -118,17 +118,17 @@
 		suggestOpen = false;
 		const trimmed = q.trim();
 		if (!trimmed) return;
-		// Honor intent detection on the client too · the page load will redirect
-		// for paragraph/bible kinds, but routing client-side first avoids a
-		// pointless intermediate render of the search results page.
+		// Paragraph refs navigate directly; Bible refs go through search so
+		// the Bible card and citing CEC paragraphs both appear.
 		const intent = detectIntent(trimmed);
-		if (intent.kind === 'paragraph' || intent.kind === 'bible') {
+		if (intent.kind === 'paragraph') {
 			pushRecent(trimmed);
 			void goto(intent.href);
 			return;
 		}
-		pushRecent(intent.q);
-		void goto(`/recherche?q=${encodeURIComponent(intent.q)}`);
+		const searchQ = intent.kind === 'bible' ? trimmed : intent.q;
+		pushRecent(searchQ);
+		void goto(`/recherche?q=${encodeURIComponent(searchQ)}`);
 	}
 
 	function handleSuggestSelect(href: string) {
@@ -281,13 +281,13 @@
 		return qs ? `/recherche?${qs}` : '/recherche';
 	}
 
-	// Example queries for the empty state. Paragraph and bible examples resolve
-	// through detectIntent so the link goes straight to the destination, not the
-	// search page.
+	// Example queries for the empty state. Paragraph refs navigate directly;
+	// Bible refs and text go through the search page so the Bible card and
+	// citing CEC paragraphs both appear.
 	function exampleHref(q: string): string {
 		const intent = detectIntent(q);
-		if (intent.kind === 'paragraph' || intent.kind === 'bible') return intent.href;
-		return `/recherche?q=${encodeURIComponent(intent.q)}`;
+		if (intent.kind === 'paragraph') return intent.href;
+		return `/recherche?q=${encodeURIComponent(q)}`;
 	}
 
 	// TODO(deferred): client-side "did you mean" suggestions on zero-results.
@@ -297,19 +297,28 @@
 
 <svelte:head>
 	<title
-		>Recherche{data.q ? ` : ${data.q.slice(0, 80)}` : ''} du Catéchisme de l'Église Catholique</title
+		>Recherche{data.q ? ` « ${data.q.slice(0, 80)} »` : ''} · Catéchisme de l'Église Catholique</title
 	>
 	<meta
 		name="description"
-		content="Recherchez dans les 2865 paragraphes du Catéchisme de l'Église Catholique par mot-clé, numéro de paragraphe ou référence biblique."
+		content="Recherchez dans le Catéchisme de l'Église Catholique, le Compendium et la Doctrine sociale. Mot-clé, numéro de paragraphe, ou référence biblique."
 	/>
 	<meta name="robots" content="noindex, follow" />
 </svelte:head>
 
-<main class="mx-auto max-w-[60rem] px-6 py-10">
-	<header class="mb-8 text-center">
-		<h1 class="font-ui text-sm uppercase tracking-[0.22em] text-muted mb-6">Recherche</h1>
-		<form class="search-form mx-auto max-w-[640px]" onsubmit={handleSubmit}>
+<main class="recherche">
+	<header class="search-hero">
+		<span class="hero-ornament" aria-hidden="true">
+			<span class="rule"></span>
+			<span class="fleuron">✠</span>
+			<span class="rule"></span>
+		</span>
+		<p class="hero-kicker">Catalogue général</p>
+		<h1 class="hero-title">Recherche</h1>
+		<p class="hero-lede">
+			Catéchisme · Compendium · Doctrine sociale. Par mot, paragraphe ou référence biblique.
+		</p>
+		<form class="search-form" onsubmit={handleSubmit}>
 			<div class="search-wrap">
 				<div class="search-line">
 					<input
@@ -355,83 +364,70 @@
 	</header>
 
 	{#if !data.q}
-		<!-- Empty state · recents (if any), then suggestion examples, then browse -->
-		<section class="mt-12 max-w-[640px] mx-auto" aria-label="Suggestions">
+		<!-- Empty state -->
+		<section class="empty-state" aria-label="Suggestions">
 			{#if recents.length > 0}
-				<div class="mb-10">
-					<div class="flex items-baseline justify-between mb-3">
-						<h2 class="font-ui text-[11px] uppercase tracking-[0.2em] text-muted">
-							Récemment consulté
-						</h2>
-						<button
-							type="button"
-							class="font-ui text-[12px] text-muted hover:text-accent"
-							onclick={clearRecents}
-						>
-							effacer
-						</button>
+				<div class="recents">
+					<div class="recents-head">
+						<h2 class="recents-label">Récemment consulté</h2>
+						<button type="button" class="recents-clear" onclick={clearRecents}>effacer</button>
 					</div>
 					<ul class="recent-list">
 						{#each recents as r (r)}
 							<li>
-								<a
-									href="/recherche?q={encodeURIComponent(r)}"
-									class="font-body italic text-[16px] text-foreground hover:text-accent"
-								>
-									{r}
-								</a>
+								<a href="/recherche?q={encodeURIComponent(r)}" class="recent-link">{r}</a>
 							</li>
 						{/each}
 					</ul>
 				</div>
 			{/if}
 
-			<h2 class="font-ui text-[11px] uppercase tracking-[0.2em] text-muted mb-3">
-				Quelques exemples
-			</h2>
-			<ul class="space-y-2">
-				<li class="leader-row">
-					<span class="leader-label">Par mot</span>
-					<span class="leader-fill" aria-hidden="true"></span>
-					<span class="leader-examples">
+			<div class="example-blocks">
+				<div class="example-block">
+					<p class="example-kind">Thèmes et doctrines</p>
+					<p class="example-terms">
 						<a href={exampleHref('trinité')} class="ex-term">trinité</a>
 						<span class="ex-sep" aria-hidden="true">·</span>
 						<a href={exampleHref('eucharistie')} class="ex-term">eucharistie</a>
 						<span class="ex-sep" aria-hidden="true">·</span>
 						<a href={exampleHref('grâce')} class="ex-term">grâce</a>
-					</span>
-				</li>
-				<li class="leader-row">
-					<span class="leader-label">Par paragraphe</span>
-					<span class="leader-fill" aria-hidden="true"></span>
-					<span class="leader-examples">
-						<a href={exampleHref('27')} class="ex-term">§ 27</a>
+					</p>
+				</div>
+				<div class="example-block">
+					<p class="example-kind">Numéros de paragraphe</p>
+					<p class="example-terms">
+						<a href={exampleHref('27')} class="ex-term">27</a>
 						<span class="ex-sep" aria-hidden="true">·</span>
-						<a href={exampleHref('1324-1327')} class="ex-term">§ 1324–1327</a>
+						<a href={exampleHref('1324-1327')} class="ex-term">1324–1327</a>
 						<span class="ex-sep" aria-hidden="true">·</span>
-						<a href={exampleHref('27,245,460')} class="ex-term">§ 27, 245, 460</a>
-					</span>
-				</li>
-				<li class="leader-row">
-					<span class="leader-label">Par référence biblique</span>
-					<span class="leader-fill" aria-hidden="true"></span>
-					<span class="leader-examples">
-						<a href={exampleHref('Jn 1, 14')} class="ex-term">Jn 1, 14</a>
+						<a href={exampleHref('27,245,460')} class="ex-term">27, 245, 460</a>
+					</p>
+				</div>
+				<div class="example-block">
+					<p class="example-kind">
+						Références bibliques <span class="example-kind-note"
+							>virgule ou deux-points · plages : Jn 3:16-17 · multiples : Jn 3:16.18</span
+						>
+					</p>
+					<p class="example-terms">
+						<a href={exampleHref('Jn 3, 16')} class="ex-term">Jn 3, 16</a>
 						<span class="ex-sep" aria-hidden="true">·</span>
-						<a href={exampleHref('Gn 1, 1')} class="ex-term">Gn 1, 1</a>
-					</span>
-				</li>
-			</ul>
+						<a href={exampleHref('Matt 5:3-5')} class="ex-term">Matt 5:3-5</a>
+						<span class="ex-sep" aria-hidden="true">·</span>
+						<a href={exampleHref('Matthieu 16:18')} class="ex-term">Matthieu 16:18</a>
+					</p>
+				</div>
+			</div>
 
-			<p class="mt-12 pt-6 border-t border-border/60 font-ui text-[12px] text-muted text-center">
-				Parcourir le Catéchisme&nbsp;: <a class="browse-link" href="/cec/sommaire">Sommaire</a>
-				<span aria-hidden="true">·</span>
-				<a class="browse-link" href="/cec/prologue">Prologue</a>
+			<p class="browse-footer">
+				Parcourir&nbsp;: <a class="browse-link" href="/cec/sommaire">Sommaire du CEC</a>
 				<span aria-hidden="true">·</span>
 				<a class="browse-link" href="/glossaire">Glossaire</a>
+				<span aria-hidden="true">·</span>
+				<a class="browse-link" href="/bibliotheque">Bibliothèque</a>
 			</p>
 		</section>
-	{:else if data.hits.length === 0}
+	{:else if !data.bibleCard && data.hits.length === 0}
 		<!-- Zero-results state -->
 		<section class="mt-10 max-w-[640px] mx-auto text-center">
 			<p class="font-body italic text-muted text-[16px]">
@@ -458,146 +454,288 @@
 			</p>
 		</section>
 	{:else}
-		<!-- Results -->
+		<!-- Results (includes Bible card when searching a verse) -->
 		<section class="mt-8">
-			<div class="flex items-baseline justify-between mb-3 gap-4">
-				<p class="font-ui text-xs text-muted tabular-nums">
-					Résultats pour <span class="text-foreground">«&nbsp;{data.q}&nbsp;»</span>
-				</p>
-			</div>
-			{#if data.mode === 'or' && data.matchedTokens.length > 0}
-				<p class="partial-banner font-ui text-[12px] mb-4 text-muted">
-					Aucun résultat ne contient l'expression complète. Affichage des résultats contenant
-					{#each data.matchedTokens as t, i (t)}<span class="text-foreground"
-							>«&nbsp;{t}&nbsp;»</span
-						>{#if i < data.matchedTokens.length - 1}{i === data.matchedTokens.length - 2
-								? ' et '
-								: ', '}{/if}{/each}.
-				</p>
-			{/if}
-
-			<RelatedTopics query={data.q} />
-
-			<nav class="filter-tabs mb-4 flex items-baseline gap-5" aria-label="Filtrer les résultats">
-				<a
-					href={tabHref('all')}
-					class="tab"
-					class:active={activeType === 'all'}
-					aria-current={activeType === 'all' ? 'true' : undefined}
-				>
-					Tout <span class="tabular-nums text-muted">({totalCount})</span>
-				</a>
-				<a
-					href={tabHref('headings')}
-					class="tab"
-					class:active={activeType === 'headings'}
-					aria-current={activeType === 'headings' ? 'true' : undefined}
-				>
-					Sections <span class="tabular-nums text-muted">({headingCount})</span>
-				</a>
-				<a
-					href={tabHref('paragraphs')}
-					class="tab"
-					class:active={activeType === 'paragraphs'}
-					aria-current={activeType === 'paragraphs' ? 'true' : undefined}
-				>
-					Paragraphes <span class="tabular-nums text-muted">({paragraphCount})</span>
-				</a>
-				{#if compendiumCount > 0}
-					<a
-						href={tabHref('compendium')}
-						class="tab"
-						class:active={activeType === 'compendium'}
-						aria-current={activeType === 'compendium' ? 'true' : undefined}
-					>
-						Compendium <span class="tabular-nums text-muted">({compendiumCount})</span>
+			{#if data.bibleCard}
+				{#if data.bibleCard.additionalVerses?.length}
+					<!-- Multiple discrete verses: card is a container, each verse is its own link -->
+					<div class="bible-card">
+						<span class="bible-card-eyebrow">
+							<span class="bible-card-tag">Bible</span>
+							<span class="bible-card-ref">{data.bibleCard.bookName} {data.bibleCard.chapter}</span>
+						</span>
+						<span class="bible-card-body">
+							<span class="bible-card-title"
+								>{data.bibleCard.bookName} {data.bibleCard.chapter}</span
+							>
+							{#if data.bibleCard.verseTexts?.length}
+								<span class="bible-card-verses">
+									{#each data.bibleCard.verseTexts as vt (vt.verse)}
+										<span class="bible-verse-text">
+											<sup class="bible-verse-num">{vt.verse}</sup>{vt.text}
+										</span>
+									{/each}
+								</span>
+							{/if}
+							<span class="bible-card-verse-links">
+								<a class="bible-card-verse-link" href={data.bibleCard.href}
+									>v. {data.bibleCard.verse} →</a
+								>
+								{#each data.bibleCard.additionalVerses as av (av.verse)}
+									<a class="bible-card-verse-link" href={av.href}>v. {av.verse} →</a>
+								{/each}
+							</span>
+						</span>
+					</div>
+				{:else}
+					<!-- Single verse or range: whole card is a link -->
+					<a class="bible-card" href={data.bibleCard.href}>
+						<span class="bible-card-eyebrow">
+							<span class="bible-card-tag">Bible</span>
+							<span class="bible-card-ref"
+								>{data.bibleCard.bookName}
+								{data.bibleCard.chapter}, {data.bibleCard.verse}{data.bibleCard.verseEnd
+									? `–${data.bibleCard.verseEnd}`
+									: ''}</span
+							>
+						</span>
+						<span class="bible-card-body">
+							<span class="bible-card-title"
+								>{data.bibleCard.bookName}
+								{data.bibleCard.chapter}, {data.bibleCard.verse}{data.bibleCard.verseEnd
+									? `–${data.bibleCard.verseEnd}`
+									: ''}</span
+							>
+							{#if data.bibleCard.verseTexts?.length}
+								<span class="bible-card-verses">
+									{#each data.bibleCard.verseTexts as vt (vt.verse)}
+										<span class="bible-verse-text">
+											{#if (data.bibleCard.verseTexts?.length ?? 0) > 1}<sup class="bible-verse-num"
+													>{vt.verse}</sup
+												>{/if}{vt.text}
+										</span>
+									{/each}
+								</span>
+							{/if}
+							<span class="bible-card-cta">Lire dans la Bible →</span>
+						</span>
 					</a>
 				{/if}
-				{#if cdseCount > 0}
-					<a
-						href={tabHref('cdse')}
-						class="tab"
-						class:active={activeType === 'cdse'}
-						aria-current={activeType === 'cdse' ? 'true' : undefined}
-					>
-						Doctrine sociale <span class="tabular-nums text-muted">({cdseCount})</span>
-					</a>
-				{/if}
-			</nav>
-
-			{#if visibleHits.length > 5}
-				<p class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted mb-2">
-					Plus pertinents
-				</p>
 			{/if}
 
-			<ul class="result-list">
-				{#each visibleHits as h (h.id)}
-					<li class="result-row group">
-						<a href={hitHref(h)} class="result-link">
-							{#if h.kind === 'heading'}
-								<div class="result-eyebrow tabular-nums">
-									<span class="tag">TITRE DE SECTION</span>
-									{#if h.paragraph_start}<span class="ref">CEC {h.paragraph_start}</span>{/if}
-								</div>
-								<div class="result-headline">
-									{@html highlight(h.text, hitMatchTerms(h))}
-								</div>
-							{:else if h.kind === 'compendium-question'}
-								<div class="result-eyebrow tabular-nums">
-									<span class="tag">COMPENDIUM</span>
-									<span class="ref">Q. {h.number}</span>
-								</div>
-								<div class="result-snippet">
-									{@html snippetHtml(h)}
-								</div>
-							{:else if h.kind === 'cdse-paragraph'}
-								<div class="result-eyebrow tabular-nums">
-									<span class="tag">DOCTRINE SOCIALE</span>
-									<span class="ref">§ {h.number}</span>
-								</div>
-								<div class="result-snippet">
-									{@html snippetHtml(h)}
-								</div>
-							{:else}
-								<div class="result-eyebrow tabular-nums">
-									<span class="ref">CEC {h.number}</span>
-								</div>
-								<div class="result-snippet">
-									{@html snippetHtml(h)}
-								</div>
-							{/if}
-							{#if hitContextLine(h)}
-								<div class="result-trail">{hitContextLine(h)}</div>
-							{/if}
-						</a>
-					</li>
-				{/each}
-			</ul>
-
-			{#if hasMore}
-				<div class="mt-8 flex items-baseline justify-between gap-4">
-					<p class="font-ui text-[12px] text-muted tabular-nums">
-						{visibleHits.length} sur {filteredHits.length}
+			{#if data.hits.length > 0}
+				<div class="flex items-baseline justify-between mb-3 gap-4">
+					<p class="font-ui text-xs text-muted tabular-nums">
+						{data.bibleCard
+							? 'Paragraphes du Catéchisme citant ce verset'
+							: `Résultats pour « ${data.q} »`}
 					</p>
-					<button type="button" class="show-more" onclick={() => (visiblePages += 1)}>
-						Voir {Math.min(PAGE_SIZE, filteredHits.length - visibleHits.length)} de plus
-					</button>
 				</div>
-			{:else if filteredHits.length > PAGE_SIZE}
-				<p class="mt-8 font-ui text-[12px] text-muted tabular-nums text-center">
-					{filteredHits.length} résultats affichés
-				</p>
+				{#if data.mode === 'or' && data.matchedTokens.length > 0}
+					<p class="partial-banner font-ui text-[12px] mb-4 text-muted">
+						Aucun résultat ne contient l'expression complète. Affichage des résultats contenant
+						{#each data.matchedTokens as t, i (t)}<span class="text-foreground"
+								>«&nbsp;{t}&nbsp;»</span
+							>{#if i < data.matchedTokens.length - 1}{i === data.matchedTokens.length - 2
+									? ' et '
+									: ', '}{/if}{/each}.
+					</p>
+				{/if}
+
+				<RelatedTopics query={data.q} />
+
+				<nav class="filter-tabs mb-4 flex items-baseline gap-5" aria-label="Filtrer les résultats">
+					<a
+						href={tabHref('all')}
+						class="tab"
+						class:active={activeType === 'all'}
+						aria-current={activeType === 'all' ? 'true' : undefined}
+					>
+						Tout <span class="tabular-nums text-muted">({totalCount})</span>
+					</a>
+					<a
+						href={tabHref('headings')}
+						class="tab"
+						class:active={activeType === 'headings'}
+						aria-current={activeType === 'headings' ? 'true' : undefined}
+					>
+						Sections <span class="tabular-nums text-muted">({headingCount})</span>
+					</a>
+					<a
+						href={tabHref('paragraphs')}
+						class="tab"
+						class:active={activeType === 'paragraphs'}
+						aria-current={activeType === 'paragraphs' ? 'true' : undefined}
+					>
+						Paragraphes <span class="tabular-nums text-muted">({paragraphCount})</span>
+					</a>
+					{#if compendiumCount > 0}
+						<a
+							href={tabHref('compendium')}
+							class="tab"
+							class:active={activeType === 'compendium'}
+							aria-current={activeType === 'compendium' ? 'true' : undefined}
+						>
+							Compendium <span class="tabular-nums text-muted">({compendiumCount})</span>
+						</a>
+					{/if}
+					{#if cdseCount > 0}
+						<a
+							href={tabHref('cdse')}
+							class="tab"
+							class:active={activeType === 'cdse'}
+							aria-current={activeType === 'cdse' ? 'true' : undefined}
+						>
+							Doctrine sociale <span class="tabular-nums text-muted">({cdseCount})</span>
+						</a>
+					{/if}
+				</nav>
+
+				{#if visibleHits.length > 5}
+					<p class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted mb-2">
+						Plus pertinents
+					</p>
+				{/if}
+
+				<ul class="result-list">
+					{#each visibleHits as h (h.id)}
+						<li class="result-row group">
+							<a href={hitHref(h)} class="result-link">
+								{#if h.kind === 'heading'}
+									<div class="result-eyebrow tabular-nums">
+										<span class="tag">TITRE DE SECTION</span>
+										{#if h.paragraph_start}<span class="ref">CEC {h.paragraph_start}</span>{/if}
+									</div>
+									<div class="result-headline">
+										{@html highlight(h.text, hitMatchTerms(h))}
+									</div>
+								{:else if h.kind === 'compendium-question'}
+									<div class="result-eyebrow tabular-nums">
+										<span class="tag">COMPENDIUM</span>
+										<span class="ref">Q. {h.number}</span>
+									</div>
+									<div class="result-snippet">
+										{@html snippetHtml(h)}
+									</div>
+								{:else if h.kind === 'cdse-paragraph'}
+									<div class="result-eyebrow tabular-nums">
+										<span class="tag">DOCTRINE SOCIALE</span>
+										<span class="ref">{h.number}</span>
+									</div>
+									<div class="result-snippet">
+										{@html snippetHtml(h)}
+									</div>
+								{:else}
+									<div class="result-eyebrow tabular-nums">
+										<span class="ref">CEC {h.number}</span>
+									</div>
+									<div class="result-snippet">
+										{@html snippetHtml(h)}
+									</div>
+								{/if}
+								{#if hitContextLine(h)}
+									<div class="result-trail">{hitContextLine(h)}</div>
+								{/if}
+							</a>
+						</li>
+					{/each}
+				</ul>
+
+				{#if hasMore}
+					<div class="mt-8 flex items-baseline justify-between gap-4">
+						<p class="font-ui text-[12px] text-muted tabular-nums">
+							{visibleHits.length} sur {filteredHits.length}
+						</p>
+						<button type="button" class="show-more" onclick={() => (visiblePages += 1)}>
+							Voir {Math.min(PAGE_SIZE, filteredHits.length - visibleHits.length)} de plus
+						</button>
+					</div>
+				{:else if filteredHits.length > PAGE_SIZE}
+					<p class="mt-8 font-ui text-[12px] text-muted tabular-nums text-center">
+						{filteredHits.length} résultats affichés
+					</p>
+				{/if}
 			{/if}
 		</section>
 	{/if}
 </main>
 
 <style>
-	/* --- search input --- */
+	/* ── Container ─────────────────────────────────────────────── */
+	.recherche {
+		max-width: 60rem;
+		margin: 0 auto;
+		padding: clamp(0.5rem, 2vw, 1.5rem) clamp(1.25rem, 4vw, 2.5rem) 6rem;
+		color: var(--color-fg);
+		font-family: var(--font-body);
+	}
+
+	/* ── Hero ────────────────────────────────────────────────────── */
+	.search-hero {
+		text-align: center;
+		padding: 1rem 0 clamp(2rem, 4vw, 3rem);
+	}
+	.hero-ornament {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		max-width: 220px;
+		width: 100%;
+		margin: 0 auto 1.1rem;
+	}
+	.rule {
+		flex: 1;
+		height: 1px;
+		background: linear-gradient(
+			to right,
+			transparent,
+			color-mix(in srgb, var(--color-fg) 20%, transparent),
+			transparent
+		);
+	}
+	.fleuron {
+		font-family: var(--font-heading);
+		font-size: 0.95rem;
+		color: var(--color-accent);
+		line-height: 1;
+	}
+	.hero-kicker {
+		font-family: var(--font-ui);
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.32em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0 0 0.45rem;
+	}
+	.hero-title {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-weight: 700;
+		font-size: clamp(2rem, 4.5vw, 3.2rem);
+		line-height: 1.05;
+		letter-spacing: -0.005em;
+		margin: 0 0 0.75rem;
+		color: var(--color-fg);
+	}
+	.hero-lede {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 0.9rem;
+		color: var(--color-subtle);
+		margin: 0 auto 1.75rem;
+		max-width: 46ch;
+		line-height: 1.6;
+	}
+
+	/* ── Search form (centred inside hero) ─────────────────────── */
 	.search-form {
 		width: 100%;
+		max-width: 640px;
+		margin: 0 auto;
 	}
+
+	/* --- search input --- */
 	.search-wrap {
 		position: relative;
 	}
@@ -695,49 +833,132 @@
 		opacity: 0.7;
 	}
 
-	/* --- empty state leader rows --- */
-	.leader-row {
+	/* ── Empty state ─────────────────────────────────────────────── */
+	.empty-state {
+		max-width: 640px;
+		margin: 0 auto;
+	}
+
+	.recents {
+		margin-bottom: 2.5rem;
+	}
+	.recents-head {
 		display: flex;
 		align-items: baseline;
-		gap: 0.75rem;
-		padding: 0.25rem 0;
-		font-family: var(--font-body);
-		font-size: 15px;
+		justify-content: space-between;
+		margin-bottom: 0.65rem;
 	}
-	.leader-label {
-		flex: none;
+	.recents-label {
 		font-family: var(--font-ui);
-		font-size: 12px;
+		font-size: 0.68rem;
 		font-weight: 600;
-		color: var(--color-fg);
-		letter-spacing: 0.02em;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0;
 	}
-	.leader-fill {
-		flex: 1;
-		height: 0;
-		border-bottom: 1px dotted var(--color-border);
-		align-self: end;
-		margin-bottom: 4px;
+	.recents-clear {
+		font-family: var(--font-ui);
+		font-size: 0.75rem;
+		color: var(--color-muted);
+		background: none;
+		border: 0;
+		padding: 0;
+		cursor: pointer;
+		transition: color 120ms ease;
 	}
-	.leader-examples {
-		flex: none;
-		display: inline-flex;
-		gap: 0.5rem;
+	.recents-clear:hover {
+		color: var(--color-accent);
+	}
+	.recent-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.recent-list li {
+		display: flex;
 		align-items: baseline;
+		gap: 0.6rem;
+		padding: 3px 0;
+	}
+	/* Middot bullet · matches the hairline list register elsewhere. */
+	.recent-list li::before {
+		content: '·';
+		color: var(--color-muted);
+		flex: none;
+	}
+	.recent-link {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 1rem;
+		color: var(--color-fg);
+		text-decoration: none;
+		transition: color 120ms ease;
+	}
+	.recent-link:hover {
+		color: var(--color-accent);
+	}
+
+	.example-blocks {
+		display: flex;
+		flex-direction: column;
+		gap: 1.85rem;
+		margin: 0 0 2.5rem;
+	}
+	.example-kind {
+		font-family: var(--font-ui);
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.24em;
+		text-transform: uppercase;
+		color: var(--color-subtle);
+		margin: 0 0 0.55rem;
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.example-kind-note {
+		font-weight: 400;
+		letter-spacing: 0.04em;
+		text-transform: none;
+		color: var(--color-muted);
+		font-style: italic;
+		opacity: 0.8;
+	}
+	.example-terms {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.4rem 0.55rem;
+		margin: 0;
 	}
 	.ex-term {
+		font-family: var(--font-heading);
 		font-style: italic;
+		font-size: 1.25rem;
 		color: var(--color-fg);
-		text-decoration-color: transparent;
+		text-decoration: none;
+		line-height: 1.3;
+		transition: color 120ms ease;
 	}
 	.ex-term:hover {
 		color: var(--color-accent);
-		text-decoration: underline;
-		text-decoration-color: currentColor;
-		text-underline-offset: 3px;
 	}
 	.ex-sep {
 		color: var(--color-muted);
+		font-size: 0.85rem;
+		line-height: 1;
+	}
+
+	.browse-footer {
+		padding-top: 1.5rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		color: var(--color-muted);
+		text-align: center;
+		line-height: 1.8;
 	}
 
 	.browse-link {
@@ -749,6 +970,113 @@
 	.browse-link:hover {
 		color: var(--color-accent);
 		border-bottom-color: var(--color-accent);
+	}
+
+	/* --- Bible card --------------------------------------------------------- */
+	/* Appears at the top of results when the query is a Bible verse reference.
+	   Styled as a distinct featured result: accent left border, serif title,
+	   so it reads as "here is the verse" not "here is a search result". */
+	.bible-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		padding: 0.9rem 0.9rem 0.9rem 1.1rem;
+		margin-bottom: 1.5rem;
+		border: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+		border-left: 3px solid var(--color-accent);
+		border-radius: 4px;
+		background: color-mix(in srgb, var(--color-accent) 4%, var(--color-panel));
+		text-decoration: none;
+		color: var(--color-fg);
+		transition:
+			background-color 160ms ease,
+			border-color 160ms ease;
+	}
+	.bible-card:hover {
+		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-panel));
+	}
+	.bible-card-eyebrow {
+		display: flex;
+		align-items: baseline;
+		gap: 0.55rem;
+		font-family: var(--font-ui);
+		font-size: 10.5px;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+	.bible-card-tag {
+		color: var(--color-accent);
+	}
+	.bible-card-ref {
+		color: var(--color-muted);
+	}
+	.bible-card-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.bible-card-title {
+		font-family: var(--font-heading);
+		font-style: italic;
+		font-size: 1.3rem;
+		font-weight: 700;
+		line-height: 1.2;
+		color: var(--color-fg);
+	}
+	.bible-card:hover .bible-card-title {
+		color: var(--color-accent);
+	}
+	.bible-card-cta {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		white-space: nowrap;
+		align-self: flex-start;
+	}
+	.bible-card-verses {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+	.bible-verse-text {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 0.93rem;
+		line-height: 1.6;
+		color: var(--color-fg);
+	}
+	.bible-verse-num {
+		font-family: var(--font-ui);
+		font-style: normal;
+		font-size: 0.6em;
+		font-weight: 700;
+		color: var(--color-accent);
+		margin-right: 0.2em;
+		vertical-align: super;
+		font-variant-numeric: tabular-nums;
+	}
+	.bible-card-verse-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 1rem;
+	}
+	.bible-card-verse-link {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		text-decoration: none;
+		white-space: nowrap;
+		transition: color 120ms ease;
+	}
+	.bible-card-verse-link:hover {
+		color: var(--color-fg);
 	}
 
 	/* --- filter tabs --- */
@@ -838,24 +1166,6 @@
 		font-style: italic;
 		color: var(--color-subtle);
 		opacity: 0.75;
-	}
-
-	.recent-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-	.recent-list li {
-		display: flex;
-		align-items: baseline;
-		gap: 0.6rem;
-		padding: 3px 0;
-	}
-	/* Editorial em-dash bullet · matches the hairline list register elsewhere. */
-	.recent-list li::before {
-		content: '·';
-		color: var(--color-muted);
-		flex: none;
 	}
 
 	.show-more {

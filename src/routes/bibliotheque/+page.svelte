@@ -70,10 +70,21 @@
 		focus: 'top'
 	};
 
-	// The two foundational works the rest of the library serves: the
-	// Catéchisme de l'Église Catholique (the site's primary text) and the
-	// Bible. Rendered as larger featured cards above the four shelves.
-	const featured: Work[] = FEATURED.map((f) => ({
+	const ibp: Work = {
+		slug: 'bon-pasteur',
+		href: '/bon-pasteur',
+		title: 'Institut du Bon Pasteur',
+		subtitle: 'Catéchisme, doctrine et liturgie',
+		blurb:
+			"Trois cours de catéchèse de l'Institut du Bon Pasteur : adultes, doctrine de la foi et liturgie.",
+		year: 'IBP',
+		image: '/img/bibliotheque/bon-pasteur.webp'
+	};
+
+	// The three foundational works: CEC (primary text), Compendium (its
+	// official abridgement), and the Bible. Featured above the shelves.
+	// Compendium is promoted out of shelf I so its shelf slot goes to IBP.
+	const [cec, bible] = FEATURED.map((f) => ({
 		slug: f.id,
 		href: f.urlPrefix,
 		title: f.title,
@@ -82,13 +93,21 @@
 		year: f.year,
 		image: f.cover
 	}));
+	const featured: Work[] = [
+		cec!,
+		workFromCorpus(CORPORA.find((c) => c.id === 'compendium')!),
+		bible!
+	];
 
 	const shelves: Shelf[] = [
 		{
 			roman: 'I',
 			title: 'Catéchismes',
 			kicker: 'Exposés systématiques de la foi',
-			works: shelfWorks('I')
+			works: (() => {
+				const s = shelfWorks('I').filter((w) => w.slug !== 'compendium');
+				return [...s.slice(0, 3), ibp, ...s.slice(3)];
+			})()
 		},
 		{
 			roman: 'II',
@@ -100,7 +119,17 @@
 			roman: 'III',
 			title: 'Magistère',
 			kicker: 'Documents conciliaires, canoniques et liturgiques',
-			works: [...shelfWorks('III'), cic1917, encycliques]
+			works: (() => {
+				const bySlug = new Map(shelfWorks('III').map((w) => [w.slug, w]));
+				return [
+					bySlug.get('vatican-ii')!,
+					bySlug.get('denzinger')!,
+					encycliques,
+					cic1917,
+					bySlug.get('cic')!,
+					bySlug.get('pgmr')!
+				];
+			})()
 		},
 		{
 			roman: 'IV',
@@ -121,7 +150,6 @@
 	const totalWorks = $derived(
 		featured.length + shelves.reduce((sum, shelf) => sum + shelf.works.length, 0)
 	);
-	const totalShelves = $derived(shelves.length);
 </script>
 
 <MetaTags
@@ -145,8 +173,6 @@
 		</p>
 		<p class="hero-stats">
 			<span>{totalWorks} œuvres</span>
-			<span aria-hidden="true">·</span>
-			<span>{totalShelves} rayons</span>
 		</p>
 	</header>
 
@@ -409,16 +435,21 @@
 		}
 	}
 
-	/* Featured row: the two foundational works, side by side. */
+	/* Featured row: CEC, Compendium, Bible side by side. */
 	.featured {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 1.6rem 1.4rem;
 		margin-bottom: clamp(2.5rem, 5vw, 4rem);
 		padding-bottom: clamp(2rem, 5vw, 3.5rem);
 		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
 	}
-	@media (max-width: 560px) {
+	@media (max-width: 760px) {
+		.featured {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	@media (max-width: 480px) {
 		.featured {
 			grid-template-columns: 1fr;
 		}
@@ -649,21 +680,9 @@
 		padding: 0.95rem 1rem 1rem;
 		text-decoration: none;
 		color: var(--color-fg);
-		border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
 		transition:
 			background-color 160ms ease,
 			color 160ms ease;
-	}
-	/* Hide the divider above the first row so the section reads as a
-	   single contained block (top edge defined by the shelf rule). At
-	   2-column the first row is two tiles; on mobile it's one. */
-	.tool-wrap:nth-child(-n + 2) .tool {
-		border-top: 0;
-	}
-	@media (max-width: 720px) {
-		.tool-wrap:nth-child(2) .tool {
-			border-top: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
-		}
 	}
 	.tool:hover,
 	.tool:focus-visible {
@@ -702,13 +721,6 @@
 		color: var(--color-muted);
 		margin: 0.15rem 0 0;
 	}
-	/* Tool tiles drop to single-column on tablet/below · collapse the
-	   3-col grid layout (tool-mark · body · …) since the CTA now sits
-	   inside the body. */
-	.tool {
-		grid-template-columns: 1.5rem 1fr;
-	}
-
 	/* Motion preferences ----------------------------------------------- */
 	@media (prefers-reduced-motion: reduce) {
 		.shelf,

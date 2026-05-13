@@ -93,6 +93,11 @@
 					href: '/bible',
 					label: 'Bible',
 					description: 'Texte intégral, croisé verset par verset avec le Catéchisme.'
+				},
+				{
+					href: '/bibliotheque',
+					label: 'Bibliothèque',
+					description: 'Tous les textes hébergés sur le site.'
 				}
 			]
 		},

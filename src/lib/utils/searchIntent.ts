@@ -2,7 +2,16 @@ import { bookByAbbr } from './bibleBookSlug';
 
 export type Intent =
 	| { kind: 'paragraph'; href: string }
-	| { kind: 'bible'; href: string }
+	| {
+			kind: 'bible';
+			href: string;
+			bookName: string;
+			usfx: string;
+			chapter: string;
+			verse: string;
+			verseEnd?: string;
+			additionalVerses?: Array<{ verse: string; href: string }>;
+	  }
 	| { kind: 'text'; q: string };
 
 export function detectIntent(input: string): Intent {
@@ -28,15 +37,37 @@ export function detectIntent(input: string): Intent {
 		return { kind: 'paragraph', href: to ? `/cec/${from}-${to}` : `/cec/${from}` };
 	}
 
-	// Bible: book abbr + ch + sep + verse[-range]. Sep is ':' or ',' (French uses comma).
-	const bMatch = q.match(/^([1-3]?\s*[A-Za-zÉéèêÊ]+)\s+(\d+)\s*[:,]\s*(\d+)(?:\s*-\s*\d+)?$/);
+	// Bible: book abbr + ch + sep + verse + optional range (- or –) or dot-separated additional
+	// verses (French scholarly notation: Jn 3:16.18 or Jn 3, 16.18).
+	// Sep between ch and verse is ':' or ',' (French uses comma).
+	const bMatch = q.match(
+		/^([1-3]?\s*[\p{L}]+)\s+(\d+)\s*[:,]\s*(\d+)((?:\s*[-–]\s*\d+|\s*\.\s*\d+)*)$/u
+	);
 	if (bMatch) {
 		const abbr = bMatch[1]!.trim();
 		const book = bookByAbbr(abbr);
 		if (book) {
+			const chapter = bMatch[2]!;
+			const verse = bMatch[3]!;
+			const tail = (bMatch[4] ?? '').trim();
+			const rangeMatch = tail.match(/^[-–]\s*(\d+)$/);
+			const additionalMatches = !rangeMatch ? [...tail.matchAll(/\.\s*(\d+)/gu)] : [];
 			return {
 				kind: 'bible',
-				href: `/bible/${book.slug}/${bMatch[2]}/${bMatch[3]}`
+				href: `/bible/${book.slug}/${chapter}/${verse}`,
+				bookName: book.frenchName,
+				usfx: book.usfx,
+				chapter,
+				verse,
+				...(rangeMatch ? { verseEnd: rangeMatch[1] } : {}),
+				...(additionalMatches.length > 0
+					? {
+							additionalVerses: additionalMatches.map((m) => ({
+								verse: m[1]!,
+								href: `/bible/${book.slug}/${chapter}/${m[1]}`
+							}))
+						}
+					: {})
 			};
 		}
 	}
