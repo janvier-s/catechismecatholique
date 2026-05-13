@@ -161,7 +161,7 @@
 	/* ── Hero ───────────────────────────────────────────────────────── */
 	.collection-hero {
 		text-align: center;
-		padding: 1rem 0 clamp(3rem, 6vw, 5rem);
+		padding: 1rem 0 0;
 	}
 	.hero-ornament {
 		display: inline-flex;
