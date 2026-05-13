@@ -354,14 +354,16 @@
 		font-weight: 600;
 		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		color: var(--color-accent);
-		margin-bottom: 0.2rem;
+		color: var(--color-muted);
+		margin-bottom: 0.35rem;
 	}
 
 	.definition-body {
 		font-size: 0.92rem;
 		line-height: 1.55;
 		color: var(--color-subtle);
+		border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+		padding-left: 0.85rem;
 	}
 
 	.definition-body :global(p) {
