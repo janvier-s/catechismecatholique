@@ -147,7 +147,7 @@
 								<h3 class="sub-heading" id={block.anchor}>{block.title}</h3>
 							{/if}
 						{:else if block.kind === 'definition'}
-							<div class="definition" class:def-long={block.term.length > 10}>
+							<div class="definition">
 								<span class="definition-term">{block.term}</span>
 								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 								<div class="definition-body">{@html block.html}</div>
@@ -345,47 +345,27 @@
 
 	/* ── Definition ────────────────────────────────────────────────────── */
 	.definition {
-		display: grid;
-		grid-template-columns: 7.5rem 1fr;
-		gap: 0 0.5rem;
-		align-items: baseline;
-		margin: 0.5rem 0;
-		font-size: 0.92rem;
-		line-height: 1.55;
-	}
-
-	.definition.def-long {
-		grid-template-columns: 14rem 1fr;
+		margin: 1rem 0;
 	}
 
 	.definition-term {
-		font-family: var(--font-heading);
-		font-style: italic;
+		font-family: var(--font-ui);
+		font-size: 0.68rem;
 		font-weight: 600;
-		color: var(--color-fg);
-	}
-
-	.definition-term::after {
-		content: '\00a0:';
-		font-style: normal;
-		font-weight: 400;
-		color: var(--color-muted);
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 0.2rem;
 	}
 
 	.definition-body {
+		font-size: 0.92rem;
+		line-height: 1.55;
 		color: var(--color-subtle);
-		flex: 1;
 	}
 
 	.definition-body :global(p) {
 		margin: 0;
-	}
-
-	@media (max-width: 480px) {
-		.definition {
-			grid-template-columns: 1fr;
-			gap: 0.1rem;
-		}
 	}
 
 	/* ── Illustrations ─────────────────────────────────────────────────── */
