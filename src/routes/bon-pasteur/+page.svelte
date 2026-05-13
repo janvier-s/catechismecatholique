@@ -54,7 +54,7 @@
 			Fondé en 2006, l'Institut du Bon Pasteur est une société de vie apostolique dont les prêtres
 			célèbrent les sacrements selon la forme extraordinaire du rite romain. Les cours présentés ici
 			ont été dispensés par des prêtres de l'Institut et s'inscrivent dans la Tradition de l'Église
-			catholique.
+			Catholique.
 		</p>
 		<div class="ibp-links">
 			<a
