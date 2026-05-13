@@ -3,6 +3,7 @@
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { frenchPunct } from '$lib/utils/typography';
+	import { linkifyVaticanIIBibleRefs } from '$lib/utils/linkifyRefs';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -15,7 +16,7 @@
 	} as const;
 
 	function renderHtml(html: string): string {
-		return frenchPunct(html);
+		return frenchPunct(linkifyVaticanIIBibleRefs(html));
 	}
 </script>
 
@@ -86,7 +87,7 @@
 				{#each doc.footnotes as fn (fn.n)}
 					<li id="fn-{fn.n}" value={fn.n}>
 						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-						<div class="footnote-body">{@html fn.html}</div>
+						<div class="footnote-body">{@html renderHtml(fn.html)}</div>
 					</li>
 				{/each}
 			</ol>
@@ -261,6 +262,21 @@
 	.paragraph-body :global(em) {
 		font-style: italic;
 	}
+	.paragraph-body :global(a.vat-ii-bible-ref),
+	.footnote-body :global(a.vat-ii-bible-ref) {
+		color: inherit;
+		text-decoration: underline dotted var(--color-muted);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
+		transition: color 120ms ease;
+	}
+	.paragraph-body :global(a.vat-ii-bible-ref:hover),
+	.footnote-body :global(a.vat-ii-bible-ref:hover) {
+		color: var(--color-accent);
+		text-decoration: underline solid var(--color-accent);
+		text-decoration-thickness: 1px;
+	}
+
 	.paragraph-body :global(.vat-ii-fn-ref) {
 		font-family: var(--font-ui);
 		font-size: 0.7rem;
@@ -269,6 +285,11 @@
 		vertical-align: super;
 		line-height: 0;
 		margin: 0 0.15em;
+		cursor: help;
+		transition: opacity 120ms ease;
+	}
+	.paragraph-body :global(.vat-ii-fn-ref:hover) {
+		opacity: 0.7;
 	}
 
 	.footnotes {

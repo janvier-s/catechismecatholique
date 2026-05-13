@@ -1,9 +1,38 @@
 <script lang="ts">
 	import { corporaInNavGroup } from '$lib/corpora';
 
-	const catechismes = $derived(corporaInNavGroup('catechismes'));
+	const catechismes = $derived(
+		(() => {
+			const base = corporaInNavGroup('catechismes')
+				.filter((c) => c.id !== 'compendium')
+				.map((c) => ({ href: c.urlPrefix, title: c.title }));
+			const ibpEntry = { href: '/bon-pasteur', title: 'Institut du Bon Pasteur' };
+			const idx = base.findIndex((c) => c.href === '/grand-catechisme');
+			if (idx === -1) return [...base, ibpEntry];
+			return [...base.slice(0, idx + 1), ibpEntry, ...base.slice(idx + 1)];
+		})()
+	);
 	const catechese = $derived(corporaInNavGroup('catechese'));
-	const magistere = $derived(corporaInNavGroup('magistere'));
+	// Magistère column · explicit order: Vatican II · Enchiridion · Encycliques
+	// (new) · Code Pio-Benedictin (1917) · CIC · PGMR. The 1917 code and
+	// Encycliques have no CorpusRecord, so they're inserted inline.
+	const magistere = $derived(
+		(() => {
+			const reg = new Map(
+				corporaInNavGroup('magistere').map(
+					(c) => [c.urlPrefix, { href: c.urlPrefix, title: c.title }] as const
+				)
+			);
+			return [
+				reg.get('/vatican-ii'),
+				reg.get('/enchiridion'),
+				{ href: '/encycliques', title: 'Encycliques' },
+				{ href: '/cic/1917', title: 'Code Pio-Benedictin (1917)' },
+				reg.get('/cic'),
+				reg.get('/pgmr')
+			].filter((l): l is { href: string; title: string } => !!l);
+		})()
+	);
 </script>
 
 <footer class="site-footer">
@@ -12,6 +41,7 @@
 			<p class="footer-col-head">Le Catéchisme</p>
 			<ul>
 				<li><a href="/cec">Lecture intégrale</a></li>
+				<li><a href="/compendium">Compendium</a></li>
 				<li><a href="/cec/sommaire">Sommaire</a></li>
 				<li><a href="/cec/panorama">Panorama</a></li>
 				<li><a href="/recherche">Recherche</a></li>
@@ -30,8 +60,8 @@
 		<div class="footer-col">
 			<p class="footer-col-head">Catéchismes</p>
 			<ul>
-				{#each catechismes as c (c.id)}
-					<li><a href={c.urlPrefix}>{c.title}</a></li>
+				{#each catechismes as c (c.href)}
+					<li><a href={c.href}>{c.title}</a></li>
 				{/each}
 			</ul>
 		</div>
@@ -46,10 +76,9 @@
 		<div class="footer-col">
 			<p class="footer-col-head">Magistère</p>
 			<ul>
-				{#each magistere as c (c.id)}
-					<li><a href={c.urlPrefix}>{c.title}</a></li>
+				{#each magistere as c (c.href)}
+					<li><a href={c.href}>{c.title}</a></li>
 				{/each}
-				<li><a href="/cic/1917">Code Pio-Benedictin (1917)</a></li>
 			</ul>
 		</div>
 	</nav>

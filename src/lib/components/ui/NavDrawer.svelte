@@ -79,6 +79,12 @@
 		}));
 	}
 
+	function withInsertAfter(links: Link[], afterHref: string, extra: Link): Link[] {
+		const idx = links.findIndex((l) => l.href === afterHref);
+		if (idx === -1) return [...links, extra];
+		return [...links.slice(0, idx + 1), extra, ...links.slice(idx + 1)];
+	}
+
 	const groups: Group[] = [
 		{
 			title: 'Lecture',
@@ -131,16 +137,30 @@
 				}
 			]
 		},
-		{ title: 'Catéchismes', links: fromRegistry('catechismes') },
+		{
+			title: 'Catéchismes',
+			links: withInsertAfter(fromRegistry('catechismes'), '/grand-catechisme', {
+				href: '/bon-pasteur',
+				label: 'Institut du Bon Pasteur'
+			})
+		},
 		{ title: 'Catéchèse & doctrine', links: fromRegistry('catechese') },
 		{
 			title: 'Magistère',
-			// The 1917 code is the only sub-item that doesn't map to its
-			// own CorpusRecord (CIC owns both); add it inline.
-			links: [
-				...fromRegistry('magistere'),
-				{ href: '/cic/1917', label: 'Code Pio-Benedictin', eyebrow: '1917' }
-			]
+			// Custom order: Vatican II · Enchiridion · Encycliques (new) · Code
+			// Pio-Benedictin · Code de Droit Canonique · PGMR. CIC 1917 and
+			// Encycliques have no CorpusRecord, so they're inserted inline.
+			links: (() => {
+				const reg = new Map(fromRegistry('magistere').map((l) => [l.href, l] as const));
+				return [
+					reg.get('/vatican-ii'),
+					reg.get('/enchiridion'),
+					{ href: '/encycliques', label: 'Encycliques' },
+					{ href: '/cic/1917', label: 'Code Pio-Benedictin', eyebrow: '1917' },
+					reg.get('/cic'),
+					reg.get('/pgmr')
+				].filter((l): l is Link => !!l);
+			})()
 		}
 	];
 

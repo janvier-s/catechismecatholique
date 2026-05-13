@@ -220,6 +220,185 @@ export function linkifyTrentFootnote(text: string): string {
 }
 
 // ---------------------------------------------------------------------------
+// Vatican II Bible refs
+// ---------------------------------------------------------------------------
+
+const ROMAN_VAL: Record<string, number> = {
+	i: 1,
+	v: 5,
+	x: 10,
+	l: 50,
+	c: 100,
+	d: 500,
+	m: 1000
+};
+
+function romanToInt(roman: string): number | null {
+	const s = roman.trim().toLowerCase();
+	if (!s || !/^[ivxlcdm]+$/.test(s)) return null;
+	let total = 0;
+	let prev = 0;
+	for (let i = s.length - 1; i >= 0; i--) {
+		const v = ROMAN_VAL[s[i]!]!;
+		if (v < prev) total -= v;
+		else {
+			total += v;
+			prev = v;
+		}
+	}
+	return total > 0 ? total : null;
+}
+
+type VatTok = { kind: 'book' | 'chap' | 'verse'; text: string; start: number; end: number };
+
+function tokenizeVatIIRef(inner: string): VatTok[] {
+	const re = /<span class="(ss|ssc|ssv)">([^<]+)<\/span>/g;
+	const out: VatTok[] = [];
+	let m;
+	while ((m = re.exec(inner)) !== null) {
+		const cls = m[1]!;
+		const kind: 'book' | 'chap' | 'verse' =
+			cls === 'ss' ? 'book' : cls === 'ssc' ? 'chap' : 'verse';
+		out.push({ kind, text: m[2]!, start: m.index, end: m.index + m[0].length });
+	}
+	return out;
+}
+
+type VatCluster = { chNum: number; verses: number[]; openIdx: number; closeIdx: number };
+
+function parseChapter(text: string): number | null {
+	const t = text.trim();
+	if (/^\d+$/.test(t)) {
+		const n = parseInt(t, 10);
+		return Number.isFinite(n) && n > 0 ? n : null;
+	}
+	return romanToInt(t);
+}
+
+function parseVatIIClusters(inner: string): VatCluster[] {
+	const toks = tokenizeVatIIRef(inner);
+	const clusters: VatCluster[] = [];
+	let cur: VatCluster | null = null;
+
+	for (let i = 0; i < toks.length; i++) {
+		const t = toks[i]!;
+		if (t.kind === 'book') continue;
+
+		const prev = i > 0 ? toks[i - 1]! : null;
+		const sep = prev ? inner.slice(prev.end, t.start) : '';
+
+		if (t.kind === 'chap') {
+			const ch = parseChapter(t.text);
+			if (ch === null) continue;
+			if (cur) clusters.push(cur);
+			cur = { chNum: ch, verses: [], openIdx: t.start, closeIdx: t.end };
+			continue;
+		}
+
+		// verse token
+		if (!cur) continue;
+		const vNum = parseInt(t.text, 10);
+		if (!Number.isFinite(vNum)) continue;
+
+		// Verse range endpoint: prev separator is `-` / `–`
+		if (/^\s*[-–]\s*$/.test(sep) && cur.verses.length > 0) {
+			const last = cur.verses[cur.verses.length - 1]!;
+			if (vNum > last && vNum - last <= 60) {
+				for (let v = last + 1; v <= vNum; v++) cur.verses.push(v);
+			} else {
+				cur.verses.push(vNum);
+			}
+			cur.closeIdx = t.end;
+			continue;
+		}
+
+		// `X et Y, Z` pattern: ssv after ` et ` followed by `, ssv` means Y
+		// is a new chapter (often arabic). Open a new cluster.
+		const next = i + 1 < toks.length ? toks[i + 1]! : null;
+		const isChapterLikeAfterEt =
+			/^\s*et\s*$/.test(sep) &&
+			next?.kind === 'verse' &&
+			/^\s*,\s*$/.test(inner.slice(t.end, next.start));
+		if (isChapterLikeAfterEt) {
+			if (cur) clusters.push(cur);
+			cur = { chNum: vNum, verses: [], openIdx: t.start, closeIdx: t.end };
+			continue;
+		}
+
+		// Otherwise: additional verse in current cluster.
+		cur.verses.push(vNum);
+		cur.closeIdx = t.end;
+	}
+	if (cur) clusters.push(cur);
+	return clusters;
+}
+
+/**
+ * Linkify Bible references in Vatican II prose. The source HTML encodes refs as
+ *   <span class="emphasis"><em>
+ *     <span class="ss">{Abbr}</span> <span class="ssc">{ChapRoman}</span>,
+ *     <span class="ssv">{Verse}</span>[-<span class="ssv">{Verse2}</span>]
+ *   </em></span>
+ *
+ * Abbreviations are concatenated for numbered books ("1Tm", "2P", "2Co"); a
+ * handful of sources split the digit prefix into a separate emphasis block
+ * (`<em>1</em></span> <span...><em><span class="ss">Jn</span>...`); those are
+ * merged before parsing so the abbr resolves correctly.
+ *
+ * Compound refs like `Jn xiv, 26 ; xvi, 12-13 ; vii, 39` are split into one
+ * <a class="vat-ii-bible-ref"> anchor per chapter cluster. Each anchor carries
+ * the full verse list as data-verses so the BibleRefTooltip can show every
+ * cited verse in a single preview.
+ */
+export function linkifyVaticanIIBibleRefs(html: string): string {
+	// Merge split-prefix emphasis blocks ("1" in its own <em>, then book ref)
+	// into a single emphasis block with "{digit} {abbr}" inside the ss span.
+	const merged = html.replace(
+		/<span class="emphasis"><em>\s*([123])\s*<\/em><\/span>[\s ]+<span class="emphasis"><em><span class="ss">([A-Za-z]+)<\/span>/g,
+		(_m, digit: string, abbr: string) =>
+			`<span class="emphasis"><em><span class="ss">${digit} ${abbr}</span>`
+	);
+
+	return merged.replace(
+		/<span class="emphasis"><em>(<span class="ss">([^<]+)<\/span>[\s\S]*?)<\/em><\/span>/g,
+		(match, inner: string, abbrRaw: string) => {
+			const trimmed = abbrRaw.trim();
+			const abbrNorm = /^[1-3][A-Za-z]/.test(trimmed)
+				? `${trimmed[0]} ${trimmed.slice(1)}`
+				: trimmed;
+			const book = bookByAbbr(abbrNorm);
+			if (!book) return match;
+
+			const clusters = parseVatIIClusters(inner);
+			if (clusters.length === 0) return match;
+
+			// Extend the first cluster's anchor to include the book ss span and
+			// any leading text so the whole `{Abbr} {Chap}, {Verse}` reads as one
+			// clickable unit.
+			clusters[0]!.openIdx = 0;
+
+			let body = '';
+			let pos = 0;
+			for (const c of clusters) {
+				body += inner.slice(pos, c.openIdx);
+				const content = inner.slice(c.openIdx, c.closeIdx);
+				const firstV = c.verses[0];
+				const href =
+					firstV !== undefined
+						? `/bible/${book.slug}/${c.chNum}/${firstV}`
+						: `/bible/${book.slug}/${c.chNum}`;
+				const dataVerse = firstV !== undefined ? ` data-verse="${firstV}"` : '';
+				const dataVerses = c.verses.length > 1 ? ` data-verses="${c.verses.join(',')}"` : '';
+				body += `<a class="vat-ii-bible-ref" href="${href}" data-slug="${book.slug}" data-chapter="${c.chNum}"${dataVerse}${dataVerses}>${content}</a>`;
+				pos = c.closeIdx;
+			}
+			body += inner.slice(pos);
+			return `<span class="emphasis"><em>${body}</em></span>`;
+		}
+	);
+}
+
+// ---------------------------------------------------------------------------
 
 /**
  * Linkify §NNN patterns to /cec/NNN links.

@@ -154,7 +154,7 @@
 
 <MetaTags
 	title="Bibliothèque · Catéchisme de l'Église Catholique"
-	description="Tous les textes hébergés sur le site, en quatre rayons : catéchismes, catéchèse et doctrine, magistère, études et outils. Vingt deux œuvres au total."
+	description="Tous les textes hébergés sur le site, en quatre rayons : catéchismes, catéchèse et doctrine, magistère, études et outils."
 />
 
 <main class="biblio">
@@ -386,7 +386,6 @@
 	}
 	.shelf-title {
 		font-family: var(--font-heading);
-		font-style: italic;
 		font-weight: 700;
 		font-size: clamp(1.85rem, 3.5vw, 2.4rem);
 		line-height: 1.1;

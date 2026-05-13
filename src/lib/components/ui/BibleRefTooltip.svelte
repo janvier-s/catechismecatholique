@@ -6,7 +6,7 @@
 	const TOOLTIP_W = 300;
 	const CLAMP = TOOLTIP_W / 2 + 16;
 	const SELECTOR =
-		'a.compendium-bible-ref, a.trent-bible-ref, a.bibRef[data-slug], sup.srcRef.bibleRef[data-slug], button.bible-inline[data-slug], sup.trent-fn-marker[data-slug], a.verse-ref[data-slug], [data-cec]';
+		'a.compendium-bible-ref, a.trent-bible-ref, a.vat-ii-bible-ref, a.bibRef[data-slug], sup.srcRef.bibleRef[data-slug], button.bible-inline[data-slug], sup.trent-fn-marker[data-slug], a.verse-ref[data-slug], sup.vat-ii-fn-ref[data-fn], [data-cec]';
 
 	let x = $state(0);
 	let y = $state(0);
@@ -19,6 +19,7 @@
 	let refLabel = $state('');
 	let refHref = $state<string | null>(null);
 	let verseText = $state('');
+	let verseHtml = $state('');
 	let isCec = $state(false);
 	let visible = $state(false);
 	let anchorEl = $state<HTMLElement | null>(null);
@@ -84,6 +85,7 @@
 	$effect(() => {
 		if (!visible || !anchorEl) {
 			verseText = '';
+			verseHtml = '';
 			refLabel = '';
 			refHref = null;
 			isCec = false;
@@ -101,12 +103,29 @@
 		y = flipBelow ? rect.bottom : rect.top;
 		maxH = `${Math.min(Math.max(flipBelow ? spaceBelow : spaceAbove, 80), windowH * 0.6)}px`;
 
+		// Vatican II footnote markers: pull the rendered footnote body HTML
+		// directly from the page (#fn-N) and show it in the tooltip.
+		const fnNum = anchorEl.dataset.fn;
+		if (anchorEl.matches('sup.vat-ii-fn-ref') && fnNum) {
+			const body = document.querySelector(`#fn-${fnNum} .footnote-body`);
+			isCec = false;
+			verseText = '';
+			loading = false;
+			if (body) {
+				refLabel = `Note ${fnNum}`;
+				refHref = `#fn-${fnNum}`;
+				verseHtml = body.innerHTML;
+			}
+			return;
+		}
+
 		const cecNum = anchorEl.dataset.cec;
 		if (cecNum) {
 			const num = parseInt(cecNum, 10);
 			if (!Number.isFinite(num)) return;
 			loading = true;
 			verseText = '';
+			verseHtml = '';
 			refLabel = '';
 			isCec = true;
 			loadParagraph(num)
@@ -131,6 +150,15 @@
 		const slug = anchorEl.dataset.slug ?? '';
 		const chapter = parseInt(anchorEl.dataset.chapter ?? '', 10);
 		const verse = parseInt(anchorEl.dataset.verse ?? '', 10);
+		const versesAttr = anchorEl.dataset.verses ?? '';
+		const verseList = versesAttr
+			? versesAttr
+					.split(',')
+					.map((v) => parseInt(v, 10))
+					.filter((n) => Number.isFinite(n))
+			: Number.isFinite(verse)
+				? [verse]
+				: [];
 		if (!slug || !chapter) return;
 
 		isCec = false;
@@ -139,6 +167,7 @@
 
 		loading = true;
 		verseText = '';
+		verseHtml = '';
 		refLabel = '';
 
 		loadNclBook(book.usfx)
@@ -146,9 +175,23 @@
 				if (!data) return;
 				const chData = data[String(chapter)];
 				if (!chData) return;
-				if (verse && chData[String(verse)]) {
-					refLabel = `${book.frenchName} ${chapter},${verse}`;
-					verseText = chData[String(verse)] ?? '';
+				if (verseList.length > 0) {
+					const first = verseList[0]!;
+					const last = verseList[verseList.length - 1]!;
+					const consecutive = verseList.every((v, i) => i === 0 || v === verseList[i - 1]! + 1);
+					if (first === last) {
+						refLabel = `${book.frenchName} ${chapter},${first}`;
+					} else if (consecutive) {
+						refLabel = `${book.frenchName} ${chapter},${first}-${last}`;
+					} else {
+						refLabel = `${book.frenchName} ${chapter},${verseList.join('.')}`;
+					}
+					const parts: string[] = [];
+					for (const v of verseList) {
+						const t = chData[String(v)];
+						if (t) parts.push(t);
+					}
+					verseText = parts.join(' ');
 				} else {
 					const firstKey = Object.keys(chData).sort((a, b) => +a - +b)[0];
 					if (firstKey) {
@@ -166,7 +209,7 @@
 
 <svelte:window bind:innerWidth={windowW} bind:innerHeight={windowH} />
 
-{#if visible && (loading || verseText)}
+{#if visible && (loading || verseText || verseHtml)}
 	<div
 		class="tooltip"
 		class:flip-below={flipBelow}
@@ -182,6 +225,18 @@
 			<div class="loading">
 				<div class="shimmer"></div>
 				<div class="shimmer shimmer-short"></div>
+			</div>
+		{:else if verseHtml}
+			<div class="entry">
+				<div class="header">
+					{#if refHref}
+						<a href={refHref} class="tt-num">{refLabel}</a>
+					{:else}
+						<span class="tt-ref">{refLabel}</span>
+					{/if}
+				</div>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+				<div class="fn-body">{@html verseHtml}</div>
 			</div>
 		{:else if verseText}
 			<div class="entry">
@@ -303,6 +358,39 @@
 	}
 	.verse-text--cec {
 		font-style: normal;
+	}
+
+	/* Vatican II footnote body: rendered HTML may contain paragraphs, italics,
+	   linkified bible refs (a.vat-ii-bible-ref). Match the verse-text reading
+	   feel but allow block-level paragraph spacing. */
+	.fn-body {
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--color-fg);
+		padding: 0 12px;
+		opacity: 0.92;
+	}
+	.fn-body :global(p) {
+		margin: 0 0 0.5em;
+		display: inline;
+	}
+	.fn-body :global(p:last-child) {
+		margin-bottom: 0;
+	}
+	.fn-body :global(em),
+	.fn-body :global(i) {
+		font-style: italic;
+	}
+	.fn-body :global(a.vat-ii-bible-ref) {
+		color: inherit;
+		text-decoration: underline dotted var(--color-muted);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
+	}
+	.fn-body :global(a.vat-ii-bible-ref:hover) {
+		color: var(--color-accent);
+		text-decoration: underline solid var(--color-accent);
 	}
 
 	.loading {

@@ -80,7 +80,7 @@ export const BOOKS: BookInfo[] = [
 	{ usfx: '2TI', slug: '2-timothee', frenchName: '2 Timothée', abbrs: ['2 Tm', '2 Tim'] },
 	{ usfx: 'TIT', slug: 'tite', frenchName: 'Tite', abbrs: ['Tt', 'Titus'] },
 	{ usfx: 'PHM', slug: 'philemon', frenchName: 'Philémon', abbrs: ['Phm', 'Phlm'] },
-	{ usfx: 'HEB', slug: 'hebreux', frenchName: 'Hébreux', abbrs: ['He', 'Heb'] },
+	{ usfx: 'HEB', slug: 'hebreux', frenchName: 'Hébreux', abbrs: ['He', 'Hb', 'Heb'] },
 	{ usfx: 'JAS', slug: 'jacques', frenchName: 'Jacques', abbrs: ['Jc', 'Jas', 'James'] },
 	{ usfx: '1PE', slug: '1-pierre', frenchName: '1 Pierre', abbrs: ['1 P', '1 Pet'] },
 	{ usfx: '2PE', slug: '2-pierre', frenchName: '2 Pierre', abbrs: ['2 P', '2 Pet'] },
