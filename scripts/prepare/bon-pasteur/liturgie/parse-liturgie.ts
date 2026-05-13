@@ -1,24 +1,33 @@
 #!/usr/bin/env node
 /**
- * One-time parser: converts "La Liturgie Juice/txt/Chapitre N. Title.txt"
- * files into structured JSON for /bon-pasteur/liturgie. Text only · pass 2
- * will handle images extracted from the .docx sources.
+ * Parser for "Chapitre N. Title.docx" in CUSTODIO/IBP/La Liturgie. Uses
+ * mammoth to recover paragraph structure, heading levels and inline image
+ * positions from the Word documents, then emits the same block shape as
+ * the Dieu corpus (heading | paragraph | image).
+ *
+ * Images are written to static/img/bon-pasteur/liturgie/ch-NN/ as webp,
+ * referenced from each chapter's JSON. Run from repo root:
  *
  *   npx tsx scripts/prepare/bon-pasteur/liturgie/parse-liturgie.ts
  */
-import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import mammoth from 'mammoth';
+import sharp from 'sharp';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = join(__dirname, '../../../..');
 const SRC =
-	'/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/DOCTRINA/sources/post-tradi/La Liturgie Juice/txt';
-const OUT = join(REPO, 'static/data/bon-pasteur/liturgie');
+	'/Users/Janvier/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/CUSTODIO/IBP/La Liturgie';
+const OUT_DATA = join(REPO, 'static/data/bon-pasteur/liturgie');
+const OUT_IMG = join(REPO, 'static/img/bon-pasteur/liturgie');
+const IMG_URL_PREFIX = '/img/bon-pasteur/liturgie';
 
 type Block =
 	| { kind: 'heading'; level: 2 | 3; title: string; anchor: string }
-	| { kind: 'paragraph'; html: string };
+	| { kind: 'paragraph'; html: string }
+	| { kind: 'image'; src: string; alt: string };
 
 interface Chapter {
 	slug: string;
@@ -27,9 +36,7 @@ interface Chapter {
 	blocks: Block[];
 }
 
-function esc(s: string): string {
-	return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
+const FN_RE = /^Chapitre\s+(\d+)\.\s+(.+)\.docx$/;
 
 function slugify(s: string): string {
 	return s
@@ -45,143 +52,246 @@ function stripTrailingColon(s: string): string {
 	return s.replace(/\s*:+\s*$/, '').trim();
 }
 
-// Source filenames look like: "Chapitre 10. L'année liturgique - Le temps de l'Avent.txt"
-const FN_RE = /^Chapitre\s+(\d+)\.\s+(.+)\.txt$/;
-// First-content "Chapitre 2 : ..." line · used to confirm the chapter title.
-const CHAPTER_LINE_RE = /^Chapitre\s+(\d+)\s*:\s*(.+?)(?:\s*:)?\s*$/;
-// A standalone heading: a non-empty trimmed line that ends in ` :` and
-// whose pre-colon text has < 80 chars (so we don't capture long paragraphs
-// that happen to end with a colon).
-const HEADING_RE = /^(.{1,80}?)\s*:\s*$/;
-// Lead-in pattern: "Term : body text" on a single paragraph line. We bold
-// the term in the rendered HTML so the sub-section reads visually.
-const LEADIN_RE = /^(.{1,80}?)\s*:\s+(.+)$/;
-
-function isBullet(line: string): boolean {
-	return /^\s*[•·\-]\s/.test(line) || /^\t[•·]\t/.test(line);
+// Tokenize a flat HTML string emitted by mammoth into block elements.
+// mammoth emits a sequence of <h1..6>, <p>, <ul>/<ol>, <img>; nested
+// content stays within one block.
+function tokenizeBlocks(html: string): { tag: string; inner: string; attrs: string }[] {
+	const re = /<(h[1-6]|p|ul|ol|img)([^>]*)>([\s\S]*?)<\/\1>|<img([^>]*)\/?\s*>/g;
+	const out: { tag: string; inner: string; attrs: string }[] = [];
+	let m: RegExpExecArray | null;
+	while ((m = re.exec(html)) !== null) {
+		if (m[4] !== undefined) {
+			out.push({ tag: 'img', inner: '', attrs: m[4] });
+		} else {
+			out.push({ tag: m[1]!, inner: m[3] ?? '', attrs: m[2] ?? '' });
+		}
+	}
+	return out;
 }
 
-function cleanBullet(line: string): string {
-	return line
-		.replace(/^\t[•·]\t/, '')
-		.replace(/^\s*[•·\-]\s*/, '')
-		.replace(/,$/, '')
+function attrValue(attrs: string, name: string): string | undefined {
+	const m = attrs.match(new RegExp(`${name}="([^"]*)"`, 'i'));
+	return m?.[1];
+}
+
+function plainText(html: string): string {
+	return html
+		.replace(/<[^>]+>/g, '')
+		.replace(/&nbsp;/g, ' ')
+		.replace(/&amp;/g, '&')
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/\s+/g, ' ')
 		.trim();
 }
 
-function paragraphHtml(text: string): string {
-	// Detect lead-in "Term : body" only on lines short enough that the
-	// term reads like a phrase rather than a sentence with a stray colon.
-	const m = text.match(LEADIN_RE);
-	if (m && m[1].length <= 60 && !m[1].includes('.')) {
-		return `<p><strong>${esc(m[1])} :</strong> ${esc(m[2])}</p>`;
-	}
-	return `<p>${esc(text)}</p>`;
-}
+async function processChapter(n: number, fileTitle: string, docxPath: string): Promise<Chapter> {
+	const chDir = `ch-${String(n).padStart(2, '0')}`;
+	const outImgDir = join(OUT_IMG, chDir);
+	rmSync(outImgDir, { recursive: true, force: true });
+	mkdirSync(outImgDir, { recursive: true });
+	let imgIdx = 0;
 
-function parseChapter(n: number, srcTitle: string, text: string): Chapter {
-	const normalized = text.replace(/ /g, ' ').replace(/\r/g, '');
-	const lines = normalized.split('\n');
+	const result = await mammoth.convertToHtml(
+		{ path: docxPath },
+		{
+			convertImage: mammoth.images.imgElement(async (image) => {
+				imgIdx++;
+				const ext = (image.contentType || 'image/png').split('/')[1]!.split('+')[0]!;
+				const buf = await image.read();
+				const slug = `img-${String(imgIdx).padStart(2, '0')}`;
+				const outFile = join(outImgDir, `${slug}.webp`);
+				let pipeline = sharp(buf, { failOn: 'none' });
+				if (ext === 'tiff' || ext === 'tif') {
+					// TIFFs from these scans are often huge; downscale.
+					pipeline = pipeline.resize({ width: 1200, withoutEnlargement: true });
+				} else {
+					pipeline = pipeline.resize({ width: 1200, withoutEnlargement: true });
+				}
+				await pipeline.webp({ quality: 82 }).toFile(outFile);
+				return { src: `${IMG_URL_PREFIX}/${chDir}/${slug}.webp`, alt: '' };
+			})
+		}
+	);
+
+	const html = result.value;
+	const tokens = tokenizeBlocks(html);
 
 	const blocks: Block[] = [];
-	let title = srcTitle;
-	let pendingPara: string[] = [];
-	let pendingBullets: string[] = [];
-	// Skip the front-matter block (book title, author, institute, duplicated
-	// chapter headers). We treat anything before the first "Chapitre N :" line
-	// as front-matter.
-	let sawChapter = false;
+	let title = fileTitle;
+	const seenAnchors = new Set<string>();
+	// .docx files prepend page chrome (page number, book title, author,
+	// institute) and repeat the chapter header twice (Roman + Arabic). We
+	// skip all of that until we've seen the *Arabic* form, then skip any
+	// further paragraphs whose plain text starts with "Chapitre". Body
+	// content begins after.
+	let inBody = false;
 
-	function flushBullets() {
-		if (pendingBullets.length === 0) return;
-		const items = pendingBullets.map((b) => `<li>${esc(b)}</li>`).join('');
-		blocks.push({ kind: 'paragraph', html: `<ul>${items}</ul>` });
-		pendingBullets = [];
-	}
-	function flushPara() {
-		flushBullets();
-		if (pendingPara.length === 0) return;
-		const joined = pendingPara.join(' ').replace(/\s+/g, ' ').trim();
-		if (joined) blocks.push({ kind: 'paragraph', html: paragraphHtml(joined) });
-		pendingPara = [];
+	function pushHeading(text: string) {
+		const t = stripTrailingColon(text);
+		if (!t) return;
+		let anchor = slugify(t);
+		let suffix = 2;
+		while (seenAnchors.has(anchor)) anchor = `${slugify(t)}-${suffix++}`;
+		seenAnchors.add(anchor);
+		blocks.push({ kind: 'heading', level: 2, title: t, anchor });
 	}
 
-	for (const raw of lines) {
-		const stripped = raw.trim();
-
-		if (!stripped) {
-			flushPara();
+	for (const tok of tokens) {
+		// Real semantic headings (h1..h6) coming from mammoth — these are rare
+		// in this corpus (the docx uses bold rather than heading styles) but
+		// support them anyway. They override the body-detection state.
+		if (tok.tag.startsWith('h')) {
+			const t = plainText(tok.inner);
+			if (/^Chapitre\s+\d+/i.test(t)) {
+				// Always prefer the filename title (canonical casing); docx
+				// internal title is often lowercase or truncated.
+				inBody = true;
+				continue;
+			}
+			if (!inBody) continue;
+			pushHeading(t);
 			continue;
 		}
 
-		// Pre-chapter front-matter: skip until we see the canonical
-		// "Chapitre N : ..." line. We keep the filename title (which is
-		// often more complete than the inline one).
-		if (!sawChapter) {
-			const cm = stripped.match(CHAPTER_LINE_RE);
-			if (cm && Number(cm[1]) === n) {
-				sawChapter = true;
+		if (tok.tag === 'p') {
+			const trimmed = tok.inner.trim();
+			if (!trimmed) continue;
+			const text = plainText(trimmed);
+
+			// Pre-body chrome: page number, book title, author, institute,
+			// the Roman-numeral chapter line. Skip until we see "Chapitre N"
+			// in arabic digits.
+			if (!inBody) {
+				if (/^Chapitre\s+\d+\s*:/i.test(text)) {
+					inBody = true;
+				}
+				continue;
+			}
+
+			// Defensive: any further "Chapitre …" lines in the body (the
+			// duplicated header) are also dropped.
+			if (/^Chapitre\s+(?:\d+|[IVX]+)\s*:/i.test(text)) continue;
+
+			// A paragraph that contains *only* an image becomes an image block.
+			const onlyImg = trimmed.match(/^<img([^>]*)\/?\s*>$/);
+			if (onlyImg) {
+				const src = attrValue(onlyImg[1]!, 'src');
+				const alt = attrValue(onlyImg[1]!, 'alt') ?? '';
+				if (src) blocks.push({ kind: 'image', src, alt });
+				continue;
+			}
+
+			// A paragraph whose entire content is wrapped in <strong> is a
+			// bold-as-heading section title. Emit as heading.
+			const onlyStrong = trimmed.match(/^<strong>([\s\S]+?)<\/strong>$/);
+			if (onlyStrong) {
+				pushHeading(plainText(onlyStrong[1]!));
+				continue;
+			}
+
+			// Otherwise: pull out any inline images first, then emit prose.
+			let prose = trimmed;
+			const imgRe = /<img([^>]*)\/?\s*>/g;
+			let im: RegExpExecArray | null;
+			const imgBlocks: Block[] = [];
+			while ((im = imgRe.exec(trimmed)) !== null) {
+				const src = attrValue(im[1]!, 'src');
+				const alt = attrValue(im[1]!, 'alt') ?? '';
+				if (src) imgBlocks.push({ kind: 'image', src, alt });
+			}
+			prose = prose.replace(imgRe, '').trim();
+			blocks.push(...imgBlocks);
+			if (prose && plainText(prose)) {
+				blocks.push({ kind: 'paragraph', html: `<p>${prose}</p>` });
 			}
 			continue;
 		}
 
-		// Bullets · the txt file uses "\t•\t" or " • " markers.
-		if (isBullet(raw) || isBullet(stripped)) {
-			flushPara();
-			pendingBullets.push(cleanBullet(raw));
+		if (tok.tag === 'ul' || tok.tag === 'ol') {
+			if (!inBody) continue;
+			blocks.push({ kind: 'paragraph', html: `<${tok.tag}>${tok.inner}</${tok.tag}>` });
 			continue;
 		}
 
-		// Standalone heading: short line that's *just* "X :".
-		const hm = stripped.match(HEADING_RE);
-		if (hm && pendingPara.length === 0) {
-			flushPara();
-			const t = stripTrailingColon(hm[1]);
-			// Indent-prefixed lines (tab in raw) → h3; flush flat → h2.
-			const level = raw.startsWith('\t') ? 3 : 2;
-			blocks.push({ kind: 'heading', level, title: t, anchor: slugify(t) });
+		if (tok.tag === 'img') {
+			if (!inBody) continue;
+			const src = attrValue(tok.attrs, 'src');
+			const alt = attrValue(tok.attrs, 'alt') ?? '';
+			if (src) blocks.push({ kind: 'image', src, alt });
 			continue;
 		}
-
-		pendingPara.push(stripped);
 	}
-	flushPara();
 
 	return {
-		slug: `ch-${String(n).padStart(2, '0')}`,
+		slug: chDir,
 		n,
-		title,
-		blocks
+		title: title.trim(),
+		blocks: mergeDashLists(blocks)
 	};
+}
+
+// The .docx files use literal "- " dashes rather than Word's list style
+// for many bullet sequences, so mammoth emits each line as its own
+// paragraph. Stitch consecutive dash-paragraphs back into a <ul>.
+function mergeDashLists(blocks: Block[]): Block[] {
+	const out: Block[] = [];
+	let buffer: string[] = [];
+	const flush = () => {
+		if (buffer.length >= 2) {
+			const items = buffer.map((s) => `<li>${s}</li>`).join('');
+			out.push({ kind: 'paragraph', html: `<ul>${items}</ul>` });
+		} else {
+			for (const s of buffer) out.push({ kind: 'paragraph', html: `<p>- ${s}</p>` });
+		}
+		buffer = [];
+	};
+	for (const b of blocks) {
+		if (b.kind === 'paragraph') {
+			const m = b.html.match(/^<p>-\s+([\s\S]+?)\s*<\/p>$/);
+			if (m) {
+				buffer.push(m[1]!.replace(/,$/, '').trim());
+				continue;
+			}
+		}
+		flush();
+		out.push(b);
+	}
+	flush();
+	return out;
 }
 
 // ── Drive ────────────────────────────────────────────────────────────────
 
-mkdirSync(join(OUT, 'chapters'), { recursive: true });
+mkdirSync(join(OUT_DATA, 'chapters'), { recursive: true });
+mkdirSync(OUT_IMG, { recursive: true });
 
-const files = readdirSync(SRC).filter(
-	(f) => FN_RE.test(f) && !f.toLowerCase().startsWith('all the text')
-);
+const files = readdirSync(SRC)
+	.filter((f) => FN_RE.test(f))
+	.sort();
 
 const chapters: Chapter[] = [];
 for (const f of files) {
 	const m = f.match(FN_RE)!;
 	const n = Number(m[1]);
 	const fileTitle = m[2].trim();
-	const text = readFileSync(join(SRC, f), 'utf-8');
-	chapters.push(parseChapter(n, fileTitle, text));
+	const ch = await processChapter(n, fileTitle, join(SRC, f));
+	chapters.push(ch);
+	console.log(
+		`[liturgie] ch-${String(n).padStart(2, '0')} "${ch.title}" — ${ch.blocks.length} blocks`
+	);
 }
 chapters.sort((a, b) => a.n - b.n);
 
-// Per-chapter JSON
 for (const ch of chapters) {
-	writeFileSync(join(OUT, 'chapters', `${ch.slug}.json`), JSON.stringify(ch));
+	writeFileSync(join(OUT_DATA, 'chapters', `${ch.slug}.json`), JSON.stringify(ch));
 }
+writeFileSync(
+	join(OUT_DATA, 'structure.json'),
+	JSON.stringify({
+		chapters: chapters.map((c) => ({ slug: c.slug, n: c.n, title: c.title }))
+	})
+);
 
-// structure.json
-const structure = {
-	chapters: chapters.map((c) => ({ slug: c.slug, n: c.n, title: c.title }))
-};
-writeFileSync(join(OUT, 'structure.json'), JSON.stringify(structure));
-
-console.log(`[liturgie] wrote ${chapters.length} chapters → ${OUT}`);
+console.log(`[liturgie] wrote ${chapters.length} chapters → ${OUT_DATA}`);

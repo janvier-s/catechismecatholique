@@ -9,6 +9,7 @@
 		if (c) return `/bibliotheque#shelf-${c.shelf}`;
 		if (p === '/bon-pasteur' || p.startsWith('/bon-pasteur/')) {
 			if (p.startsWith('/bon-pasteur/dieu/')) return null;
+			if (p.startsWith('/bon-pasteur/liturgie/')) return null;
 			return '/bibliotheque#shelf-I';
 		}
 		return null;

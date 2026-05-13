@@ -1061,6 +1061,38 @@ export function loadDieuChapter(slug: string, fetcher: Fetch = fetch): Promise<D
 	return p;
 }
 
+// ─── IBP · Liturgie loaders ─────────────────────────────────────────────────
+// Same block shape as Dieu, so we re-use the Dieu types directly.
+
+let liturgieStructurePromise: Promise<DieuStructure> | null = null;
+const liturgieChapterCache = new Map<string, Promise<DieuChapter | null>>();
+
+export function loadLiturgieStructure(fetcher: Fetch = fetch): Promise<DieuStructure> {
+	if (!liturgieStructurePromise) {
+		liturgieStructurePromise = fetchJson<DieuStructure>(
+			'/data/bon-pasteur/liturgie/structure.json',
+			fetcher
+		);
+	}
+	return liturgieStructurePromise;
+}
+
+export function loadLiturgieChapter(
+	slug: string,
+	fetcher: Fetch = fetch
+): Promise<DieuChapter | null> {
+	let p = liturgieChapterCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/bon-pasteur/liturgie/chapters/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as DieuChapter;
+		})();
+		liturgieChapterCache.set(slug, p);
+	}
+	return p;
+}
+
 let bonPasteurPlaylistPromise: Promise<BonPasteurPlaylist> | null = null;
 
 export function loadBonPasteurPlaylist(fetcher: Fetch = fetch): Promise<BonPasteurPlaylist> {

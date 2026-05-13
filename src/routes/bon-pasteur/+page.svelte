@@ -40,7 +40,7 @@
 				},
 				{
 					slug: 'liturgie',
-					href: null,
+					href: '/bon-pasteur/liturgie/ch-01',
 					image: '/img/bibliotheque/ibp-liturgie.webp',
 					eyebrow: '10 chapitres',
 					title: 'La Liturgie',
