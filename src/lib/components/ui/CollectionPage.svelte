@@ -48,7 +48,7 @@
 		</span>
 		<p class="hero-kicker">{kicker}</p>
 		<h1 class="hero-title">{title}</h1>
-		<p class="hero-lede">{@render lede()}</p>
+		<div class="hero-lede">{@render lede()}</div>
 	</header>
 
 	{#each groups as group, gi (gi)}

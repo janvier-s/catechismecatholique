@@ -122,66 +122,66 @@
 	<div class="dieu-outer">
 		<BackToBibliotheque />
 		<div class="dieu-main">
-		<div class="dieu-content">
-			<header class="head">
-				<BreadcrumbRail
-					crumbs={[
-						{ href: '/bon-pasteur', title: 'Institut du Bon Pasteur' },
-						{ href: `/bon-pasteur/dieu/${ch.slug}`, kicker: `Ch. ${ch.n}`, title: ch.title }
-					]}
-				/>
-				<p class="kicker">Chapitre {ch.n}</p>
-				<h1 class="title">{ch.title}</h1>
-			</header>
+			<div class="dieu-content">
+				<header class="head">
+					<BreadcrumbRail
+						crumbs={[
+							{ href: '/bon-pasteur', title: 'Institut du Bon Pasteur' },
+							{ href: `/bon-pasteur/dieu/${ch.slug}`, kicker: `Ch. ${ch.n}`, title: ch.title }
+						]}
+					/>
+					<p class="kicker">Chapitre {ch.n}</p>
+					<h1 class="title">{ch.title}</h1>
+				</header>
 
-			<article class="dieu-body reader-prose">
-				{#each ch.blocks as block, i (i)}
-					{#if block.kind === 'heading'}
-						{#if block.level === 2}
-							<h2 class="section-heading" id={block.anchor}>{block.title}</h2>
+				<article class="dieu-body reader-prose">
+					{#each ch.blocks as block, i (i)}
+						{#if block.kind === 'heading'}
+							{#if block.level === 2}
+								<h2 class="section-heading" id={block.anchor}>{block.title}</h2>
+							{:else}
+								<h3 class="sub-heading" id={block.anchor}>{block.title}</h3>
+							{/if}
+						{:else if block.kind === 'definition'}
+							<div class="definition">
+								<span class="definition-term">{block.term}</span>
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								<div class="definition-body">{@html block.html}</div>
+							</div>
+						{:else if block.kind === 'image'}
+							<figure class="illus">
+								<img src={block.src} alt={block.alt} loading="lazy" />
+							</figure>
 						{:else}
-							<h3 class="sub-heading" id={block.anchor}>{block.title}</h3>
-						{/if}
-					{:else if block.kind === 'definition'}
-						<div class="definition">
-							<span class="definition-term">{block.term}</span>
 							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-							<div class="definition-body">{@html block.html}</div>
-						</div>
-					{:else if block.kind === 'image'}
-						<figure class="illus">
-							<img src={block.src} alt={block.alt} loading="lazy" />
-						</figure>
-					{:else}
-						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-						<div class="prose-block">{@html block.html}</div>
-					{/if}
-				{/each}
-			</article>
+							<div class="prose-block">{@html block.html}</div>
+						{/if}
+					{/each}
+				</article>
 
-			<nav class="pager" aria-label="Navigation entre chapitres">
-				{#if data.prev}
-					<NavCard
-						href="/bon-pasteur/dieu/{data.prev.slug}"
-						eyebrow="Ch. {data.prev.n}"
-						title={data.prev.title}
-						direction="prev"
-					/>
-				{:else}
-					<span></span>
-				{/if}
-				{#if data.next}
-					<NavCard
-						href="/bon-pasteur/dieu/{data.next.slug}"
-						eyebrow="Ch. {data.next.n}"
-						title={data.next.title}
-						direction="next"
-					/>
-				{:else}
-					<span></span>
-				{/if}
-			</nav>
-		</div>
+				<nav class="pager" aria-label="Navigation entre chapitres">
+					{#if data.prev}
+						<NavCard
+							href="/bon-pasteur/dieu/{data.prev.slug}"
+							eyebrow="Ch. {data.prev.n}"
+							title={data.prev.title}
+							direction="prev"
+						/>
+					{:else}
+						<span></span>
+					{/if}
+					{#if data.next}
+						<NavCard
+							href="/bon-pasteur/dieu/{data.next.slug}"
+							eyebrow="Ch. {data.next.n}"
+							title={data.next.title}
+							direction="next"
+						/>
+					{:else}
+						<span></span>
+					{/if}
+				</nav>
+			</div>
 		</div>
 	</div>
 </div>
