@@ -16,5 +16,5 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const next =
 		idx >= 0 && idx < structure.chapters.length - 1 ? structure.chapters[idx + 1]! : null;
 
-	return { chapter, prev, next };
+	return { chapter, chapters: structure.chapters, prev, next };
 };

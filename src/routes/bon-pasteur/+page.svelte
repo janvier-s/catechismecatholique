@@ -2,6 +2,10 @@
 	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import CollectionPage from '$lib/components/ui/CollectionPage.svelte';
 	import type { CollectionGroup } from '$lib/components/ui/CollectionPage.svelte';
+	import YoutubePlaylist from '$lib/components/bon-pasteur/YoutubePlaylist.svelte';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
 
 	const groups: CollectionGroup[] = [
 		{
@@ -17,7 +21,7 @@
 				},
 				{
 					slug: 'dieu',
-					href: '/bon-pasteur/dieu',
+					href: '/bon-pasteur/dieu/ch-01',
 					image: '/img/bibliotheque/ibp-dieu.webp',
 					eyebrow: '13 chapitres',
 					title: 'Dieu',
@@ -47,5 +51,13 @@
 <CollectionPage kicker="Institut du Bon Pasteur" title="Catéchèse" {groups}>
 	{#snippet lede()}
 		Trois cours de catéchèse dispensés par des prêtres de l'Institut du Bon Pasteur.
+	{/snippet}
+
+	{#snippet footer()}
+		<YoutubePlaylist
+			playlist={data.playlist}
+			heading="Enseignements par des prêtres"
+			channel={{ name: 'CREDO', href: 'https://www.youtube.com/@credo_off' }}
+		/>
 	{/snippet}
 </CollectionPage>

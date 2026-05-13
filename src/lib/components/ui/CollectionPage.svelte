@@ -28,12 +28,14 @@
 		kicker,
 		title,
 		lede,
-		groups = []
+		groups = [],
+		footer
 	}: {
 		kicker: string;
 		title: string;
 		lede: Snippet;
 		groups?: CollectionGroup[];
+		footer?: Snippet;
 	} = $props();
 </script>
 
@@ -140,6 +142,10 @@
 			</ul>
 		</section>
 	{/each}
+
+	{#if footer}
+		{@render footer()}
+	{/if}
 </main>
 
 <style>

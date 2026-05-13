@@ -1290,7 +1290,8 @@ export interface BrevChapter {
 export type DieuBlock =
 	| { kind: 'heading'; level: 2 | 3; title: string; anchor: string }
 	| { kind: 'paragraph'; html: string }
-	| { kind: 'definition'; term: string; html: string };
+	| { kind: 'definition'; term: string; html: string }
+	| { kind: 'image'; src: string; alt: string };
 
 export interface DieuChapterRef {
 	slug: string;
@@ -1307,4 +1308,19 @@ export interface DieuChapter {
 	n: number;
 	title: string;
 	blocks: DieuBlock[];
+}
+
+export interface BonPasteurPlaylistVideo {
+	id: string;
+	title: string;
+	thumbnail: string;
+	duration: string;
+	views: string;
+}
+
+export interface BonPasteurPlaylist {
+	playlistId: string;
+	playlistTitle: string;
+	fetchedAt: string;
+	videos: BonPasteurPlaylistVideo[];
 }

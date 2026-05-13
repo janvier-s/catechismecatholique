@@ -67,9 +67,10 @@ const config = {
 				'default-src': ['self'],
 				'script-src': ['self', 'static.cloudflareinsights.com'],
 				'style-src': ['self', 'unsafe-inline'],
-				'img-src': ['self', 'data:'],
+				'img-src': ['self', 'data:', 'https://i.ytimg.com', 'https://*.ytimg.com'],
 				'font-src': ['self'],
 				'connect-src': ['self', 'cloudflareinsights.com'],
+				'frame-src': ['https://www.youtube-nocookie.com'],
 				'base-uri': ['self'],
 				'form-action': ['self'],
 				'object-src': ['none']

@@ -55,7 +55,8 @@ import type {
 	CpaSectionFull,
 	ParagraphThemeRef,
 	DieuStructure,
-	DieuChapter
+	DieuChapter,
+	BonPasteurPlaylist
 } from './types';
 
 type Fetch = typeof fetch;
@@ -1058,4 +1059,16 @@ export function loadDieuChapter(slug: string, fetcher: Fetch = fetch): Promise<D
 		dieuChapterCache.set(slug, p);
 	}
 	return p;
+}
+
+let bonPasteurPlaylistPromise: Promise<BonPasteurPlaylist> | null = null;
+
+export function loadBonPasteurPlaylist(fetcher: Fetch = fetch): Promise<BonPasteurPlaylist> {
+	if (!bonPasteurPlaylistPromise) {
+		bonPasteurPlaylistPromise = fetchJson<BonPasteurPlaylist>(
+			'/data/bon-pasteur/playlist.json',
+			fetcher
+		);
+	}
+	return bonPasteurPlaylistPromise;
 }
