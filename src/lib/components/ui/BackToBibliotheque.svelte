@@ -2,14 +2,11 @@
 	import { page } from '$app/state';
 	import { corpusForPath } from '$lib/corpora';
 
-	// The back-link only renders on shelved corpora. /encycliques is a
-	// placeholder route that lives on Shelf III but has no CorpusRecord
-	// yet; map it inline until the corpus exists.
+	// The back-link only renders on shelved corpora.
 	const target = $derived.by(() => {
 		const p = page.url.pathname;
 		const c = corpusForPath(p);
 		if (c) return `/bibliotheque#shelf-${c.shelf}`;
-		if (p === '/encycliques' || p.startsWith('/encycliques/')) return '/bibliotheque#shelf-III';
 		if (p === '/bon-pasteur' || p.startsWith('/bon-pasteur/')) {
 			if (p.startsWith('/bon-pasteur/dieu/')) return null;
 			return '/bibliotheque#shelf-I';

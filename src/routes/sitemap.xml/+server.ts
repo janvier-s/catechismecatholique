@@ -43,7 +43,6 @@ export const GET: RequestHandler = () => {
 		'/calendrier',
 		'/prieres-formules',
 		'/bibliotheque',
-		'/encycliques',
 		'/a-propos',
 		'/mentions-legales'
 	];

@@ -465,6 +465,25 @@ export const CORPORA: CorpusRecord[] = [
 		}
 	},
 	{
+		id: 'documents-pontificaux',
+		urlPrefix: '/documents-pontificaux',
+		shelf: 'III',
+		navGroup: 'magistere',
+		title: 'Documents pontificaux',
+		subtitle: 'Encycliques, exhortations, constitutions et notes doctrinales',
+		eyebrow: 'Depuis 1879',
+		blurb: 'Recueil des documents majeurs du Magistère pontifical, de Léon XIII à nos jours.',
+		year: 'Depuis 1879',
+		cover: '/img/bibliotheque/documents-pontificaux.webp',
+		sommaireHref: '/documents-pontificaux',
+		description:
+			'Encycliques, exhortations apostoliques, constitutions apostoliques et notes doctrinales du Magistère pontifical, de Léon XIII à nos jours, ainsi que les sessions du concile de Trente.',
+		about: 'Documents majeurs du Magistère pontifical',
+		sitemap: {
+			landing: '/documents-pontificaux'
+		}
+	},
+	{
 		id: 'cic',
 		urlPrefix: '/cic',
 		shelf: 'III',

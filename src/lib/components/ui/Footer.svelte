@@ -13,9 +13,9 @@
 		})()
 	);
 	const catechese = $derived(corporaInNavGroup('catechese'));
-	// Magistère column · explicit order: Vatican II · Enchiridion · Encycliques
-	// (new) · Code Pio-Benedictin (1917) · CIC · PGMR. The 1917 code and
-	// Encycliques have no CorpusRecord, so they're inserted inline.
+	// Magistère column · explicit order: Vatican II · Enchiridion · Documents
+	// pontificaux · Code Pio-Benedictin (1917) · CIC · PGMR. The 1917 code
+	// has no CorpusRecord and is inserted inline.
 	const magistere = $derived(
 		(() => {
 			const reg = new Map(
@@ -26,7 +26,7 @@
 			return [
 				reg.get('/vatican-ii'),
 				reg.get('/enchiridion'),
-				{ href: '/encycliques', title: 'Encycliques' },
+				reg.get('/documents-pontificaux'),
 				{ href: '/cic/1917', title: 'Code Pio-Benedictin (1917)' },
 				reg.get('/cic'),
 				reg.get('/pgmr')

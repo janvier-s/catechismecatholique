@@ -127,15 +127,15 @@
 		{ title: 'Catéchèse & doctrine', links: fromRegistry('catechese') },
 		{
 			title: 'Magistère',
-			// Custom order: Vatican II · Enchiridion · Encycliques (new) · Code
-			// Pio-Benedictin · Code de Droit Canonique · PGMR. CIC 1917 and
-			// Encycliques have no CorpusRecord, so they're inserted inline.
+			// Custom order: Vatican II · Enchiridion · Documents pontificaux ·
+			// Code Pio-Benedictin · Code de Droit Canonique · PGMR. CIC 1917
+			// has no CorpusRecord and is inserted inline.
 			links: (() => {
 				const reg = new Map(fromRegistry('magistere').map((l) => [l.href, l] as const));
 				return [
 					reg.get('/vatican-ii'),
 					reg.get('/enchiridion'),
-					{ href: '/encycliques', label: 'Encycliques' },
+					reg.get('/documents-pontificaux'),
 					{ href: '/cic/1917', label: 'Code Pio-Benedictin', eyebrow: '1917' },
 					reg.get('/cic'),
 					reg.get('/pgmr')

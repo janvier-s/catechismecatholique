@@ -48,8 +48,7 @@
 	}
 
 	// CIC 1917 ships its own Bibliothèque card alongside the 1983 code
-	// (which is the canonical CIC record). Encycliques is a placeholder
-	// route with no corpus record yet · render an "à venir" card here.
+	// (which is the canonical CIC record).
 	const cic1917: Work = {
 		slug: 'cic-1917',
 		href: '/cic/1917',
@@ -58,16 +57,6 @@
 		blurb: "Premier code unifié du droit de l'Église latine, en vigueur jusqu'en 1983.",
 		year: '1917',
 		image: '/img/bibliotheque/cic-1917.webp'
-	};
-	const encycliques: Work = {
-		slug: 'encycliques',
-		href: '/encycliques',
-		title: 'Encycliques',
-		subtitle: 'Lettres pontificales hors Vatican II',
-		blurb: 'Recueil des encycliques majeures du Magistère pontifical (à venir).',
-		year: 'Recueil',
-		image: '/img/bibliotheque/encycliques.webp',
-		focus: 'top'
 	};
 
 	const ibp: Work = {
@@ -124,7 +113,7 @@
 				return [
 					bySlug.get('vatican-ii')!,
 					bySlug.get('denzinger')!,
-					encycliques,
+					bySlug.get('documents-pontificaux')!,
 					cic1917,
 					bySlug.get('cic')!,
 					bySlug.get('pgmr')!

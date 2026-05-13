@@ -16,6 +16,7 @@ export type Corpus =
 	| 'discours-catechetique'
 	| 'catecheses-mystagogiques'
 	| 'catechisme-adultes'
+	| 'documents-pontificaux'
 	| 'calendrier';
 
 export interface BibleRef {
