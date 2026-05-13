@@ -23,7 +23,7 @@
 				{
 					slug: 'liturgie-laguerie',
 					href: null,
-					image: '/img/bibliotheque/ibp-liturgie-laguerie.webp',
+					image: '/img/bibliotheque/ibp-liturgie-nuls.webp',
 					eyebrow: '22 chapitres',
 					title: 'La Liturgie pour les Nuls',
 					subtitle: 'Abbé Philippe Laguérie',
