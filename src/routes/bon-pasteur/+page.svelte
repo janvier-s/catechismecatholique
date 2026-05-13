@@ -21,6 +21,15 @@
 					blurb: `De l'existence de Dieu aux sacrements, de la morale aux vertus cardinales.`
 				},
 				{
+					slug: 'liturgie-laguerie',
+					href: null,
+					image: '/img/bibliotheque/ibp-liturgie-laguerie.webp',
+					eyebrow: '22 chapitres',
+					title: 'La Liturgie pour les Nuls',
+					subtitle: 'Abbé Philippe Laguérie',
+					blurb: 'La messe et le culte catholique expliqués pour tous.'
+				},
+				{
 					slug: 'dieu',
 					href: '/bon-pasteur/dieu/ch-01',
 					image: '/img/bibliotheque/ibp-dieu.webp',
@@ -38,15 +47,6 @@
 					subtitle: 'Abbé Marin Cottard',
 					blurb:
 						'Actes du culte, lieux sacrés, autel, vases et vêtements liturgiques, année liturgique.'
-				},
-				{
-					slug: 'liturgie-laguerie',
-					href: null,
-					image: '/img/bibliotheque/ibp-liturgie-laguerie.webp',
-					eyebrow: '22 chapitres',
-					title: 'La Liturgie pour les Nuls',
-					subtitle: 'Abbé Philippe Laguérie',
-					blurb: 'La messe et le culte catholique expliqués pour tous.'
 				}
 			]
 		}
