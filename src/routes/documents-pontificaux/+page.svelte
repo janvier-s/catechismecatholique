@@ -2,6 +2,10 @@
 	import MetaTags from '$lib/components/ui/MetaTags.svelte';
 	import CollectionPage from '$lib/components/ui/CollectionPage.svelte';
 	import type { CollectionGroup } from '$lib/components/ui/CollectionPage.svelte';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+	const availableImages = $derived(new Set(data.availableSlugs));
 
 	// One record per planned document. `present: true` flips a card from
 	// stub (not clickable) to a real link once content lands · until then
@@ -210,20 +214,22 @@
 	const totalCount = DOCS.length;
 	const presentCount = DOCS.filter((d) => d.present).length;
 
-	const groups: CollectionGroup[] = KIND_ORDER.filter((k) => grouped[k].length > 0).map((kind) => ({
-		title: KIND_LABEL[kind],
-		kicker: KIND_KICKER[kind],
-		count: `${grouped[kind].length}`,
-		columns: 4,
-		items: grouped[kind].map((doc) => ({
-			slug: doc.slug,
-			href: doc.present ? `/documents-pontificaux/${doc.slug}` : null,
-			image: `/img/bibliotheque/dp-${doc.slug}.webp`,
-			eyebrow: `${doc.author} · ${doc.date}`,
-			title: doc.title,
-			blurb: doc.blurb
+	const groups = $derived<CollectionGroup[]>(
+		KIND_ORDER.filter((k) => grouped[k].length > 0).map((kind) => ({
+			title: KIND_LABEL[kind],
+			kicker: KIND_KICKER[kind],
+			count: `${grouped[kind].length}`,
+			columns: 4,
+			items: grouped[kind].map((doc) => ({
+				slug: doc.slug,
+				href: doc.present ? `/documents-pontificaux/${doc.slug}` : null,
+				image: availableImages.has(doc.slug) ? `/img/bibliotheque/dp-${doc.slug}.webp` : undefined,
+				eyebrow: `${doc.author} · ${doc.date}`,
+				title: doc.title,
+				blurb: doc.blurb
+			}))
 		}))
-	}));
+	);
 </script>
 
 <MetaTags
