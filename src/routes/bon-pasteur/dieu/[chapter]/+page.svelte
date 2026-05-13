@@ -147,7 +147,7 @@
 								<h3 class="sub-heading" id={block.anchor}>{block.title}</h3>
 							{/if}
 						{:else if block.kind === 'definition'}
-							<div class="definition">
+							<div class="definition" class:def-long={block.term.length > 10}>
 								<span class="definition-term">{block.term}</span>
 								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 								<div class="definition-body">{@html block.html}</div>
@@ -346,12 +346,16 @@
 	/* ── Definition ────────────────────────────────────────────────────── */
 	.definition {
 		display: grid;
-		grid-template-columns: 9rem 1fr;
+		grid-template-columns: 7.5rem 1fr;
 		gap: 0 0.5rem;
 		align-items: baseline;
 		margin: 0.5rem 0;
 		font-size: 0.92rem;
 		line-height: 1.55;
+	}
+
+	.definition.def-long {
+		grid-template-columns: 14rem 1fr;
 	}
 
 	.definition-term {
