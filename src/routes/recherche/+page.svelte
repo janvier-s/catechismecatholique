@@ -297,7 +297,7 @@
 
 <svelte:head>
 	<title
-		>Recherche{data.q ? ` « ${data.q.slice(0, 80)} »` : ''} · Catéchisme de l'Église Catholique</title
+		>Recherche{data.q ? ` « ${data.q.slice(0, 80)} »` : ''} · Catéchisme de l'Église Catholique</title
 	>
 	<meta
 		name="description"

@@ -58,7 +58,7 @@ const CHAPTER_RE = /^Chapitre\s+(\d+)\s*:\s*(.+?)(?:\s*:)?\s*$/;
 
 function parseChapter(n: number, text: string): DieuChapter {
 	// Normalize non-breaking space (U+00A0) to regular space throughout
-	const normalized = text.replace(/ /g, ' ');
+	const normalized = text.replace(/\u00A0/g, ' ');
 	const lines = normalized.split('\n');
 	const blocks: DieuBlock[] = [];
 	let title = `Chapitre ${n}`;
