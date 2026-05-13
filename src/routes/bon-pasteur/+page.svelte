@@ -160,6 +160,7 @@
 		justify-content: center;
 		gap: 0.25rem;
 		margin-top: 1.5rem;
+		margin-bottom: -1rem;
 		flex-wrap: wrap;
 	}
 
@@ -174,6 +175,7 @@
 		text-decoration: none;
 		font-family: var(--font-ui);
 		font-size: 0.64rem;
+		font-style: normal;
 		font-weight: 600;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
