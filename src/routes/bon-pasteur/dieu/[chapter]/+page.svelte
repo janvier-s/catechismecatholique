@@ -345,8 +345,9 @@
 
 	/* ── Definition ────────────────────────────────────────────────────── */
 	.definition {
-		display: flex;
-		gap: 0.4rem;
+		display: grid;
+		grid-template-columns: 9rem 1fr;
+		gap: 0 0.5rem;
 		align-items: baseline;
 		margin: 0.5rem 0;
 		font-size: 0.92rem;
@@ -358,8 +359,6 @@
 		font-style: italic;
 		font-weight: 600;
 		color: var(--color-fg);
-		white-space: nowrap;
-		flex-shrink: 0;
 	}
 
 	.definition-term::after {
@@ -380,7 +379,7 @@
 
 	@media (max-width: 480px) {
 		.definition {
-			flex-direction: column;
+			grid-template-columns: 1fr;
 			gap: 0.1rem;
 		}
 	}
