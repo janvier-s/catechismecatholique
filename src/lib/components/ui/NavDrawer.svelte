@@ -193,11 +193,7 @@
 	>
 		<nav class="body styled-scroll" aria-label="Sections">
 			{#each groups as group (group.title)}
-				<section
-					class="group"
-					class:group-tools={group.title === 'Études & outils'}
-	
-				>
+				<section class="group" class:group-tools={group.title === 'Études & outils'}>
 					<p class="group-eyebrow">{group.title}</p>
 					<ul class="links">
 						{#each group.links as link (link.href)}
@@ -389,7 +385,7 @@
 	/* Only the "Études & outils" group uses italics · it reads as tool-like,
 	   matches how those entries appear elsewhere on the site. Italics
 	   carry no extra weight; otherwise they read as shouty. */
-.group-tools .link-label {
+	.group-tools .link-label {
 		font-style: italic;
 		font-weight: 400;
 	}

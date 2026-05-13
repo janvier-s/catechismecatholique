@@ -9,6 +9,7 @@
 
 	const groups: CollectionGroup[] = [
 		{
+			columns: 4,
 			items: [
 				{
 					slug: 'catechisme-adultes-ibp',
@@ -37,6 +38,15 @@
 					subtitle: 'Abbé Marin Cottard',
 					blurb:
 						'Actes du culte, lieux sacrés, autel, vases et vêtements liturgiques, année liturgique.'
+				},
+				{
+					slug: 'liturgie-laguerie',
+					href: null,
+					image: '/img/bibliotheque/ibp-liturgie-laguerie.webp',
+					eyebrow: 'À venir',
+					title: 'La Liturgie pour les Nuls',
+					subtitle: 'Abbé Philippe Laguérie',
+					blurb: 'La messe et le culte catholique expliqués pour tous.'
 				}
 			]
 		}
@@ -45,7 +55,7 @@
 
 <MetaTags
 	title="Institut du Bon Pasteur · Catéchèse"
-	description="Trois cours de catéchèse de l'Institut du Bon Pasteur : catéchisme pour adultes, doctrine de la foi et liturgie catholique."
+	description="Quatre cours de catéchèse de l'Institut du Bon Pasteur : catéchisme pour adultes, doctrine de la foi, liturgie catholique et la liturgie pour les nuls."
 />
 
 <div class="ibp-wrap">
