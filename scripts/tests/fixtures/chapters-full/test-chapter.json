@@ -1,17 +1,17 @@
 {
-  "chapter": {
-    "corpus": "ccc",
-    "slug": "test-chapter",
-    "title": "Test chapter",
-    "number": 1,
-    "part_slug": "1-profession-de-la-foi",
-    "part_title": "La profession de la foi",
-    "section_slug": "1-je-crois",
-    "section_title": "Je crois",
-    "paragraphs": [27, 28],
-    "articles": [],
-    "headings": []
-  },
-  "paragraphs": [],
-  "enBrefParagraphMap": {}
+	"chapter": {
+		"corpus": "ccc",
+		"slug": "test-chapter",
+		"title": "Test chapter",
+		"number": 1,
+		"part_slug": "1-profession-de-la-foi",
+		"part_title": "La profession de la foi",
+		"section_slug": "1-je-crois",
+		"section_title": "Je crois",
+		"paragraphs": [27, 28],
+		"articles": [],
+		"headings": []
+	},
+	"paragraphs": [],
+	"enBrefParagraphMap": {}
 }
