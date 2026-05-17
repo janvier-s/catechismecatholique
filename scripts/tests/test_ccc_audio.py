@@ -111,3 +111,32 @@ def test_apply_general_replacements_greek():
     assert "κύριος" in out
     assert "ἐκκλησία" in out
     assert "kyrios" not in out
+
+
+def test_strip_annotations_removes_voir():
+    src = "Un texte (voir DV 2) qui continue."
+    assert ccc_audio.strip_annotations(src) == "Un texte qui continue."
+
+
+def test_strip_annotations_removes_doc_sigla_parens():
+    assert ccc_audio.strip_annotations("Texte (DV 10) ici.") == "Texte ici."
+    assert ccc_audio.strip_annotations("Texte (saint Augustin, PG 35, 980) ici.") == "Texte ici."
+
+
+def test_strip_annotations_removes_bible_parens():
+    assert ccc_audio.strip_annotations("Le verbe (Jn 1:1) divin.") == "Le verbe divin."
+
+
+def test_strip_annotations_preserves_normal_parens():
+    src = "Le verbe (la Parole) divin."
+    assert ccc_audio.strip_annotations(src) == "Le verbe (la Parole) divin."
+
+
+def test_expand_bible_refs():
+    assert ccc_audio.expand_bible_refs("voir Mt 28:19") == "voir Matthieu 28:19"
+    assert ccc_audio.expand_bible_refs("voir 1 Co 13") == "voir 1 Corinthiens 13"
+
+
+def test_expand_bible_refs_ignores_isolated_abbr():
+    # "Si" without trailing number is not a Bible ref
+    assert ccc_audio.expand_bible_refs("Si tu veux") == "Si tu veux"

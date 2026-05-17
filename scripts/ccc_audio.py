@@ -260,3 +260,77 @@ def apply_general_replacements(text: str) -> str:
     text = re.sub(r"(?i)\boikonomia\b", "Οἰκονομία", text)
     text = text.replace("(« omnipotens sempiterne Deus... »)", "(« omnipotènsse sèmpiterné Déousse... »)")
     return text
+
+
+_DOC_SIGLA = [
+    "DS", "LG", "GS", "DV", "SC", "CD", "AA", "AG", "OT", "PO",
+    "SRS", "RH", "RP", "MF", "FC", "DeV", "CL", "CT", "IGLH",
+    "OEx", "OP", "OCV", "OcM", "CCEO", "CDF", "NA", "IM", "LH", "MR",
+    "PG", "PL", "CSEL", "CCL", "SPF", "CIC", "CA",
+]
+_DOC_SIGLA_PAT = "|".join(sorted(_DOC_SIGLA, key=len, reverse=True))
+
+BIBLE_NAMES = {
+    "Gn": "Genèse", "Ex": "Exode", "Lv": "Lévitique", "Nb": "Nombres",
+    "Dt": "Deutéronome", "Jos": "Josué", "Jg": "Juges", "Rt": "Ruth",
+    "Esd": "Esdras", "Tb": "Tobie", "Jdt": "Judith", "Jb": "Job",
+    "Ps": "Psaumes", "Pr": "Proverbes", "Qo": "Qohéleth",
+    "Ct": "Cantique des cantiques", "Sg": "Sagesse",
+    "Si": "Siracide", "Ne": "Néhémie", "Est": "Esther",
+    "Is": "Isaïe", "Jr": "Jérémie", "Lm": "Lamentations",
+    "Ba": "Baruch", "Ez": "Ézékiel", "Dn": "Daniel",
+    "Os": "Osée", "Jl": "Joël", "Am": "Amos", "Ab": "Abdias",
+    "Jon": "Jonas", "Mi": "Michée", "Na": "Nahum", "Ha": "Habaquq",
+    "So": "Sophonie", "Ag": "Aggée", "Za": "Zacharie", "Ml": "Malachie",
+    "Mt": "Matthieu", "Mc": "Marc", "Lc": "Luc", "Jn": "Jean",
+    "Ac": "Actes", "Rm": "Romains", "Ga": "Galates",
+    "Ep": "Éphésiens", "Ph": "Philippiens", "Col": "Colossiens",
+    "Tt": "Tite", "Phm": "Philémon", "He": "Hébreux",
+    "Jc": "Jacques", "Jude": "Jude", "Ap": "Apocalypse",
+}
+_NUMBERED_BIBLE = {
+    "S": "Samuel", "R": "Rois", "Ch": "Chroniques",
+    "Co": "Corinthiens", "Th": "Thessaloniciens", "Tm": "Timothée",
+    "P": "Pierre", "Jn": "Jean", "M": "Maccabées",
+}
+_AMBIGUOUS_BIBLE = {"Si", "Ne", "Est"}
+
+_BIBLE_ANNOT_ABBR = "|".join(sorted(BIBLE_NAMES, key=len, reverse=True))
+
+
+def strip_annotations(text: str) -> str:
+    """Remove parenthesized reference annotations (DS, PG, PL, voir, bible refs)."""
+    text = re.sub(r"\s*\(voir\s+[^)]*\)", "", text)
+    text = re.sub(r"\s*\[(?:" + _DOC_SIGLA_PAT + r")\s*\d+[^\]]*\]", "", text)
+    text = re.sub(r"\s*\([^)]*?(?:" + _DOC_SIGLA_PAT + r")\s+\d+[^)]*\)", "", text)
+    text = re.sub(r"\s*\((?:" + _BIBLE_ANNOT_ABBR + r")\s*\d+(?::\d+(?:[–-]\d+)?)?\s*\)", "", text)
+    text = re.sub(r"\s*\(saint(?:e)?\s+[^)]*\d+[^)]*\)", "", text)
+    text = re.sub(r"\s*\(concile\s+[^)]*\d+[^)]*\)", "", text)
+    text = re.sub(r"\s*\([^)]*\bp\.\s*\d+[^)]*\)", "", text)
+    text = re.sub(r"\s*\(Symbole de Nicée-Constantinople\)", "", text)
+    text = re.sub(r"\s+\.", ".", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
+_RE_BIBLE_NUM = re.compile(
+    r"\b([123])\s*(" + "|".join(re.escape(k) for k in sorted(_NUMBERED_BIBLE, key=len, reverse=True)) +
+    r")\b(?=\s*\d|[,.]?\s*et\b|\s*[:;,]|\s*\))"
+)
+_SAFE_ABBR = sorted([k for k in BIBLE_NAMES if k not in _AMBIGUOUS_BIBLE], key=len, reverse=True)
+_RE_BIBLE_SAFE = re.compile(
+    r"\b(" + "|".join(re.escape(k) for k in _SAFE_ABBR) + r")\b(?=\s*\d|[,.]?\s*et\b|\s*[:;,]|\s*\))"
+)
+_RE_BIBLE_AMBIG = re.compile(
+    r"\b(" + "|".join(re.escape(k) for k in sorted(_AMBIGUOUS_BIBLE, key=len, reverse=True)) +
+    r")\b(?=\s*\d)"
+)
+
+
+def expand_bible_refs(text: str) -> str:
+    text = _RE_BIBLE_NUM.sub(
+        lambda m: f"{m.group(1)} {_NUMBERED_BIBLE[m.group(2)]}", text
+    )
+    text = _RE_BIBLE_SAFE.sub(lambda m: BIBLE_NAMES[m.group(1)], text)
+    text = _RE_BIBLE_AMBIG.sub(lambda m: BIBLE_NAMES[m.group(1)], text)
+    return text
