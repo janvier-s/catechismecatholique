@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { get } from 'svelte/store';
-	import { fly, fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 
 	// Custom mobile slide-up: translateY from 100% to 0 so the sheet always
@@ -446,40 +446,38 @@
 					{/each}
 				{/if}
 			</div>
-			{#key $studyPanel.activeTab}
-				<div class="flex-1 overflow-y-auto p-4 styled-scroll" in:fade={{ duration: 100 }}>
-					{#if $studyPanel.activeTab === 'bible'}
-						<TabBibleRefs />
-					{:else if $studyPanel.activeTab === 'cross-refs'}
-						<TabCrossRefs />
-					{:else if $studyPanel.activeTab === 'cited-by'}
-						<TabCitedBy />
-					{:else if $studyPanel.activeTab === 'en-bref'}
-						<TabEnBref />
-					{:else if $studyPanel.activeTab === 'sources'}
-						<TabSources />
-					{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
-						<TabThemes />
-					{:else if $studyPanel.activeTab === 'concordance'}
-						<TabConcordance />
-					{:else if $studyPanel.activeTab === 'bible-verse'}
-						<TabBibleVerse />
-					{:else if $studyPanel.activeTab === 'compendium'}
-						<TabCompendium />
-					{:else if $studyPanel.activeTab === 'cdse-citers'}
-						<TabCdseCiters />
-					{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
-						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
-					{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
-						<TabTrentNotes />
-					{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
-						<TabDenzingerRefs
-							n={$studyPanel.context.n}
-							mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
-						/>
-					{/if}
-				</div>
-			{/key}
+			<div class="flex-1 overflow-y-auto p-4 styled-scroll">
+				{#if $studyPanel.activeTab === 'bible'}
+					<TabBibleRefs />
+				{:else if $studyPanel.activeTab === 'cross-refs'}
+					<TabCrossRefs />
+				{:else if $studyPanel.activeTab === 'cited-by'}
+					<TabCitedBy />
+				{:else if $studyPanel.activeTab === 'en-bref'}
+					<TabEnBref />
+				{:else if $studyPanel.activeTab === 'sources'}
+					<TabSources />
+				{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
+					<TabThemes />
+				{:else if $studyPanel.activeTab === 'concordance'}
+					<TabConcordance />
+				{:else if $studyPanel.activeTab === 'bible-verse'}
+					<TabBibleVerse />
+				{:else if $studyPanel.activeTab === 'compendium'}
+					<TabCompendium />
+				{:else if $studyPanel.activeTab === 'cdse-citers'}
+					<TabCdseCiters />
+				{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
+					<TabIA paragraphNumber={$studyPanel.context.paragraph} />
+				{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
+					<TabTrentNotes />
+				{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
+					<TabDenzingerRefs
+						n={$studyPanel.context.n}
+						mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
+					/>
+				{/if}
+			</div>
 		{/if}
 	</div>
 
@@ -544,40 +542,38 @@
 						{/each}
 					{/if}
 				</div>
-				{#key $studyPanel.activeTab}
-					<div class="flex-1 overflow-y-auto p-4 styled-scroll" in:fade={{ duration: 100 }}>
-						{#if $studyPanel.activeTab === 'bible'}
-							<TabBibleRefs />
-						{:else if $studyPanel.activeTab === 'cross-refs'}
-							<TabCrossRefs />
-						{:else if $studyPanel.activeTab === 'cited-by'}
-							<TabCitedBy />
-						{:else if $studyPanel.activeTab === 'en-bref'}
-							<TabEnBref />
-						{:else if $studyPanel.activeTab === 'sources'}
-							<TabSources />
-						{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
-							<TabThemes />
-						{:else if $studyPanel.activeTab === 'concordance'}
-							<TabConcordance />
-						{:else if $studyPanel.activeTab === 'bible-verse'}
-							<TabBibleVerse />
-						{:else if $studyPanel.activeTab === 'compendium'}
-							<TabCompendium />
-						{:else if $studyPanel.activeTab === 'cdse-citers'}
-							<TabCdseCiters />
-						{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
-							<TabIA paragraphNumber={$studyPanel.context.paragraph} />
-						{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
-							<TabTrentNotes />
-						{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
-							<TabDenzingerRefs
-								n={$studyPanel.context.n}
-								mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
-							/>
-						{/if}
-					</div>
-				{/key}
+				<div class="flex-1 overflow-y-auto p-4 styled-scroll">
+					{#if $studyPanel.activeTab === 'bible'}
+						<TabBibleRefs />
+					{:else if $studyPanel.activeTab === 'cross-refs'}
+						<TabCrossRefs />
+					{:else if $studyPanel.activeTab === 'cited-by'}
+						<TabCitedBy />
+					{:else if $studyPanel.activeTab === 'en-bref'}
+						<TabEnBref />
+					{:else if $studyPanel.activeTab === 'sources'}
+						<TabSources />
+					{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
+						<TabThemes />
+					{:else if $studyPanel.activeTab === 'concordance'}
+						<TabConcordance />
+					{:else if $studyPanel.activeTab === 'bible-verse'}
+						<TabBibleVerse />
+					{:else if $studyPanel.activeTab === 'compendium'}
+						<TabCompendium />
+					{:else if $studyPanel.activeTab === 'cdse-citers'}
+						<TabCdseCiters />
+					{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
+						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
+					{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
+						<TabTrentNotes />
+					{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
+						<TabDenzingerRefs
+							n={$studyPanel.context.n}
+							mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
+						/>
+					{/if}
+				</div>
 			{/if}
 		</PanelShell>
 	</div>

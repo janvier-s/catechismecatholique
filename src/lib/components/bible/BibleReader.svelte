@@ -193,7 +193,7 @@
 	}
 	.verse-text--cited {
 		text-decoration: underline dotted;
-		text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+		text-decoration-color: currentColor;
 		text-underline-offset: 4px;
 		text-decoration-thickness: 1px;
 	}
@@ -206,7 +206,6 @@
 		align-self: center;
 		flex-shrink: 0;
 		padding-left: 0.5rem;
-		opacity: 0.8;
 		text-align: right;
 	}
 	.verse-row {
