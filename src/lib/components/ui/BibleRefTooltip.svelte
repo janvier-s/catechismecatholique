@@ -25,6 +25,7 @@
 	let anchorEl = $state<HTMLElement | null>(null);
 
 	let hideTimer: ReturnType<typeof setTimeout> | null = null;
+	let showTimer: ReturnType<typeof setTimeout> | null = null;
 
 	const left = $derived(Math.min(Math.max(x, CLAMP), windowW - CLAMP));
 
@@ -42,10 +43,22 @@
 		}
 	}
 
+	function cancelShow() {
+		if (showTimer) {
+			clearTimeout(showTimer);
+			showTimer = null;
+		}
+	}
+
 	function showFor(el: HTMLElement) {
 		cancelHide();
-		anchorEl = el;
-		visible = true;
+		cancelShow();
+		// Brief delay prevents accidental triggers on quick mouse movements
+		// across small elements (superscripts, verse numbers).
+		showTimer = setTimeout(() => {
+			anchorEl = el;
+			visible = true;
+		}, 120);
 	}
 
 	$effect(() => {
@@ -57,9 +70,10 @@
 		const onOut = (e: MouseEvent) => {
 			const el = (e.target as HTMLElement).closest<HTMLElement>(SELECTOR);
 			if (!el) return;
+			cancelShow();
 			const related = e.relatedTarget as HTMLElement | null;
 			if (related?.closest?.('[role="tooltip"]')) return;
-			scheduleHide();
+			if (visible) scheduleHide();
 		};
 		const onFocusIn = (e: FocusEvent) => {
 			const el = (e.target as HTMLElement).closest<HTMLElement>(SELECTOR);
@@ -79,6 +93,7 @@
 			document.removeEventListener('focusin', onFocusIn);
 			document.removeEventListener('focusout', onFocusOut);
 			if (hideTimer) clearTimeout(hideTimer);
+			if (showTimer) clearTimeout(showTimer);
 		};
 	});
 
