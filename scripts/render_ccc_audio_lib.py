@@ -65,3 +65,36 @@ def build_edge_tts_argv(
         argv.append(f"--rate={extra_rate_pct:+d}%")
     argv.extend(["--text", text, "--write-media", str(out_path)])
     return argv
+
+
+from mutagen.mp3 import MP3
+
+
+def generate_silence(duration_ms: int, out_path: Path) -> bool:
+    cmd = [
+        "ffmpeg", "-y",
+        "-f", "lavfi",
+        "-i", "anullsrc=r=24000:cl=mono",
+        "-t", str(duration_ms / 1000.0),
+        "-acodec", "libmp3lame",
+        str(out_path),
+    ]
+    return subprocess.run(cmd, capture_output=True, text=True).returncode == 0
+
+
+def concat_mp3s(inputs: list[Path], out_path: Path) -> bool:
+    listing = "\n".join(f"file '{p}'" for p in inputs)
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+        f.write(listing)
+        list_path = f.name
+    cmd = ["ffmpeg", "-y", "-f", "concat", "-safe", "0",
+           "-i", list_path, "-c", "copy", str(out_path)]
+    rc = subprocess.run(cmd, capture_output=True, text=True).returncode
+    Path(list_path).unlink(missing_ok=True)
+    return rc == 0
+
+
+def probe_duration_ms(path: Path) -> int:
+    """Return MP3 duration in milliseconds via mutagen."""
+    audio = MP3(str(path))
+    return int(audio.info.length * 1000)

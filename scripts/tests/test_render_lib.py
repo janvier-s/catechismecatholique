@@ -55,3 +55,40 @@ def test_build_edge_tts_argv_remy_no_jitter():
     assert "fr-FR-RemyMultilingualNeural" in argv
     assert "--rate=-10%" in argv
     assert not any("--pitch=" in a for a in argv)
+
+
+import shutil
+
+
+def test_generate_silence_creates_file(tmp_path):
+    if shutil.which("ffmpeg") is None:
+        import pytest
+        pytest.skip("ffmpeg not installed")
+    out = tmp_path / "silence.mp3"
+    assert rlib.generate_silence(200, out) is True
+    assert out.exists()
+    assert out.stat().st_size > 0
+
+
+def test_concat_mp3s_joins_files(tmp_path):
+    if shutil.which("ffmpeg") is None:
+        import pytest
+        pytest.skip("ffmpeg not installed")
+    a = tmp_path / "a.mp3"
+    b = tmp_path / "b.mp3"
+    rlib.generate_silence(100, a)
+    rlib.generate_silence(150, b)
+    out = tmp_path / "out.mp3"
+    assert rlib.concat_mp3s([a, b], out) is True
+    assert out.exists()
+
+
+def test_probe_duration_ms_returns_int(tmp_path):
+    if shutil.which("ffmpeg") is None:
+        import pytest
+        pytest.skip("ffmpeg not installed")
+    f = tmp_path / "tone.mp3"
+    rlib.generate_silence(250, f)
+    ms = rlib.probe_duration_ms(f)
+    assert isinstance(ms, int)
+    assert 200 < ms < 400
