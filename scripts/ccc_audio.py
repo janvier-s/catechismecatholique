@@ -739,6 +739,7 @@ def build_paragraph_entry(
         "kind": "paragraph",
         "number": n,
         "file_number": file_number,
+        "is_en_bref": is_en_bref(paragraph),
         "location": location,
         "segments": segments,
     }

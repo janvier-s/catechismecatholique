@@ -511,3 +511,20 @@ def test_leakage_allowlist_in_runtime(tmp_path):
     assert "Jésus" not in flagged_words
     # Either both flagged, or hunspell missing (then flagged is empty).
     assert flagged == [] or ("blarg" in flagged_words and "foozar" in flagged_words)
+
+
+def test_paragraph_entry_marks_is_en_bref():
+    italic_paragraph = {
+        "number": 44,
+        "text_html": '<span><i class="typo_italic">Body.</i></span>',
+        "citations": [], "magisterial_refs": [],
+    }
+    entry, _ = ccc_audio.build_paragraph_entry(seq=60, paragraph=italic_paragraph, location={})
+    assert entry["is_en_bref"] is True
+
+
+def test_paragraph_entry_marks_is_en_bref_false_for_normal():
+    paragraph = {"number": 1, "text_html": "<span>Plain.</span>",
+                 "citations": [], "magisterial_refs": []}
+    entry, _ = ccc_audio.build_paragraph_entry(seq=3, paragraph=paragraph, location={})
+    assert entry["is_en_bref"] is False
