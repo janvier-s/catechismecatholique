@@ -261,6 +261,36 @@ def apply_general_replacements(text: str) -> str:
     text = text.replace("Théotokos", "Θεοτόκος")
     text = re.sub(r"(?i)\boikonomia\b", "Οἰκονομία", text)
     text = text.replace("(« omnipotens sempiterne Deus... »)", "(« omnipotènsse sèmpiterné Déousse... »)")
+    # Recurring Latin words in body / citation text (phonetic table reviewed 2026-05-18).
+    # Order: longer phrases before single words to avoid partial overlap.
+    text = re.sub(r"(?<!\w)Christus(?!\w)", "Kristousse", text)
+    text = re.sub(r"(?<!\w)Christi(?!\w)", "Kristi", text)
+    text = re.sub(r"(?<!\w)Spiritus(?!\w)", "Spirritousse", text)
+    text = re.sub(r"(?<!\w)Sancti(?!\w)", "Sannkti", text)
+    text = re.sub(r"(?<!\w)sancti(?!\w)", "sannkti", text)
+    text = re.sub(r"(?<!\w)sancta(?!\w)", "sannkta", text)
+    text = re.sub(r"(?<!\w)sanctam(?!\w)", "sannktame", text)
+    text = re.sub(r"(?<!\w)presbyterium(?!\w)", "présbytérioum", text)
+    text = re.sub(r"(?<!\w)munus(?!\w)", "mounousse", text)
+    text = re.sub(r"(?<!\w)doni(?!\w)", "donni", text)
+    text = re.sub(r"(?<!\w)Signaculum(?!\w)", "Signakouloum", text)
+    text = re.sub(r"(?<!\w)signaculum(?!\w)", "signakouloum", text)
+    text = re.sub(r"(?<!\w)myron(?!\w)", "μύρον", text)
+    text = re.sub(r"(?<!\w)viris(?!\w)", "viriss", text)
+    text = re.sub(r"(?<!\w)unctionem(?!\w)", "ounktsionème", text)
+    text = re.sub(r"(?<!\w)totus(?!\w)", "totousse", text)
+    text = re.sub(r"(?<!\w)sponsal(?!\w)", "sponssale", text)
+    text = re.sub(r"(?<!\w)regendi(?!\w)", "rétchèndi", text)
+    text = re.sub(r"(?<!\w)ordinatio(?!\w)", "ordinatsio", text)
+    text = re.sub(r"(?<!\w)liturgicum(?!\w)", "litourgikoum", text)
+    text = re.sub(r"(?<!\w)lectio(?!\w)", "lectsio", text)
+    text = re.sub(r"(?<!\w)gratia(?!\w)", "gratsia", text)
+    text = re.sub(r"(?<!\w)docendi(?!\w)", "dotchèndi", text)
+    text = re.sub(r"(?<!\w)Capitis(?!\w)", "Capitisse", text)
+    text = re.sub(r"(?<!\w)capitis(?!\w)", "capitisse", text)
+    text = re.sub(r"(?<!\w)Vexilla(?!\w)", "Veksilla", text)
+    text = re.sub(r"(?<!\w)Regis(?!\w)", "Régisse", text)
+    text = re.sub(r"(?<!\w)Accipe(?!\w)", "Atchipé", text)
     return text
 
 
@@ -991,6 +1021,22 @@ DEFAULT_LEAKAGE_ALLOWLIST: set[str] = {
     "Déousse", "sèmpiterné", "omnipotènsse",
     "vié",  # output of "viæ"
     "lèx", "Lèx",
+    # Phonetic outputs from apply_general_replacements (Latin body substitutions).
+    "Kristousse", "Spirritousse", "Sannkti", "sannkti", "sannkta", "sannktame",
+    "présbytérioum", "mounousse", "donni", "Signakouloum", "signakouloum",
+    "viriss", "ounktsionème", "totousse", "sponssale", "rétchèndi",
+    "ordinatsio", "litourgikoum", "lectsio", "gratsia", "dotchèndi",
+    "Capitisse", "capitisse", "Veksilla", "Régisse", "Atchipé",
+    # Words read fine as-is in Belgian French — no substitution, just allowlist.
+    "Abba", "divina",
+    # Elision artifacts: hunspell rejects elision before capitalized name.
+    # Belgian French reads them correctly aloud.
+    "S'Il", "s'Il", "d'Elie", "d'Élie", "d'Eternel", "d'Éternel",
+    "puisqu'Il", "Puisqu'Il", "lorsqu'Il", "qu'Il", "qu'Israël",
+    "qu'Hippolyte",
+    # Orphan elisions before guillemets / quoted text. Belgian French reads
+    # them as expected — hunspell just rejects standalone "qu'" or "'".
+    "qu'", "'",
 }
 
 
