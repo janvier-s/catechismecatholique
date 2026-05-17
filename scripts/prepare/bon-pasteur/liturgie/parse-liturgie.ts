@@ -52,7 +52,8 @@ interface Chapter {
 
 const FN_RE = /^Chapitre\s+(\d+)\.\s+(.+)\.docx$/;
 const A_RETENIR_RE = /^(?:À|A)\s*retenir\s*!?\s*$/i;
-const ETYMOLOGY_RE = /^([A-ZÀ-ÖØ-Þ][\wÀ-ÖØ-öø-ÿ'’\- ]+?)\s*\((?:du|de la|de l['’])\s*(grec|latin|hébreu)\b/;
+const ETYMOLOGY_RE =
+	/^([A-ZÀ-ÖØ-Þ][\wÀ-ÖØ-öø-ÿ'’\- ]+?)\s*\((?:du|de la|de l['’])\s*(grec|latin|hébreu)\b/;
 
 function slugify(s: string): string {
 	return s
