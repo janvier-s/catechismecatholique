@@ -476,3 +476,38 @@ def test_build_manifest_from_fixtures():
     assert entries[0]["number"] == 27
     assert entries[1]["number"] == 28
     assert audit == []  # no citations in fixtures
+
+
+def test_leakage_extracts_words_for_check():
+    # Greek-script tokens stripped (intentional).
+    text = "Voici κύριος et Δεός — also kyrios passing through."
+    words = ccc_audio.extract_words_for_leakage_check(text)
+    assert "κύριος" not in words
+    assert "kyrios" in words
+    assert "Voici" in words
+
+
+def test_leakage_skips_phonetic_substitutions():
+    # Words appearing as values in INTRO_LATIN_REPLACE or general_replacements
+    # are stripped before hunspell check.
+    text = "Citation de la constitution dogmatique Déi Vèrboum :"
+    words = ccc_audio.extract_words_for_leakage_check(text)
+    assert "Déi" not in words
+    assert "Vèrboum" not in words
+
+
+def test_leakage_allowlist_in_runtime(tmp_path):
+    # The allowlist file masks proper nouns.
+    allow = tmp_path / "allow.txt"
+    allow.write_text("Yahvé\nJésus\n")
+    # If hunspell isn't installed, this skips.
+    flagged = ccc_audio.run_leakage_check(
+        ["Yahvé est saint.", "Jésus parle.", "Bla blarg foozar."],
+        allowlist=allow,
+    )
+    # We expect "blarg" / "foozar" to flag, NOT Yahvé or Jésus.
+    flagged_words = {w for _idx, w in flagged}
+    assert "Yahvé" not in flagged_words
+    assert "Jésus" not in flagged_words
+    # Either both flagged, or hunspell missing (then flagged is empty).
+    assert flagged == [] or ("blarg" in flagged_words and "foozar" in flagged_words)

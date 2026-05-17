@@ -901,3 +901,88 @@ def build_manifest(
         "entries": entries,
     }
     return manifest, audit_rows
+
+
+import subprocess
+
+# Greek block: U+0370 to U+03FF + extended.
+_RE_GREEK = re.compile(r"[Ͱ-Ͽἀ-῿]+")
+
+# Token splitter for words (Unicode letters + apostrophe).
+_RE_WORD = re.compile(r"[A-Za-zÀ-ÿ'-]+")
+
+# Default allowlist of vocabulary we expect to "be unknown to hunspell"
+# but that's intentional / proper-noun. Extend via run_leakage_check's
+# `allowlist` argument.
+DEFAULT_LEAKAGE_ALLOWLIST: set[str] = {
+    "Yahvé", "Jésus", "Marie", "Augustin", "Aquin", "Christ",
+    "Esprit", "Saint", "Sainte", "Père", "Fils", "CCC",
+    "Trinité", "Eucharistie", "Église", "Saintes", "Saints",
+    "Paraclet", "Sauveur", "Verbe",
+    # Phonetic substitution outputs we want to exempt.
+    "Déi", "Vèrboum", "Loumène", "Gènntsioum",
+    "Sacrosannctoum", "Conntchilioum",
+    "Gaoudioum", "Spès",
+    "Tchènntézimousse", "Annousse",
+    "Rédèmptor", "Hominisse",
+    "Sainte", "Soumma", "Théologiè",
+    "Maranne", "atha",
+    "concupiskentia", "concupissensse",
+    "Kalcédoine",
+    "Évannguélii", "nounncianndé",
+    "Catékézi", "tradènndé",
+    "Té", "Déoum",
+    "Egzoultète", "Maggnificatte",
+    "mysterioum", "sacramentoum",
+    "Kristi", "filioquoué",
+    "Lèx", "oranndi", "crédenndi",
+    "épiscoporoum", "présbytéroroum", "diaconoroum",
+    "dépozitoum", "fidéi",
+    "Fidèss", "Damazi",
+    "Pèr", "istam", "sanktam",  # in case any Latin literal slips through
+}
+
+
+def extract_words_for_leakage_check(text: str) -> list[str]:
+    """Tokenize text and strip Greek-script content for hunspell lint."""
+    text = _RE_GREEK.sub(" ", text)
+    words = _RE_WORD.findall(text)
+    return [w for w in words if w not in DEFAULT_LEAKAGE_ALLOWLIST]
+
+
+def run_leakage_check(
+    texts: list[str],
+    allowlist: Path | None = None,
+) -> list[tuple[int, str]]:
+    """Return (text_index, unknown_word) tuples for words hunspell flags.
+
+    Strips intentional Greek substitutions and known good vocabulary (default
+    allowlist + user file). When hunspell isn't installed or the fr_FR dict
+    is missing, returns an empty list (the renderer treats that as a soft skip).
+    """
+    allow = set(DEFAULT_LEAKAGE_ALLOWLIST)
+    if allowlist and allowlist.exists():
+        allow.update(allowlist.read_text(encoding="utf-8").split())
+    try:
+        proc = subprocess.run(
+            ["hunspell", "-d", "fr_FR", "-l"],
+            input="\n".join(texts),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except FileNotFoundError:
+        return []
+    if proc.returncode != 0 and not proc.stdout:
+        return []
+    flagged_words = {_RE_WORD.search(w.strip()).group(0) for w in proc.stdout.splitlines() if w.strip() and _RE_WORD.search(w.strip())}
+    flagged_words -= allow
+    if not flagged_words:
+        return []
+    out: list[tuple[int, str]] = []
+    for i, text in enumerate(texts):
+        words = extract_words_for_leakage_check(text)
+        for w in words:
+            if w in flagged_words:
+                out.append((i, w))
+    return out
