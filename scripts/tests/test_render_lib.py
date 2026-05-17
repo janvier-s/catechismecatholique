@@ -113,3 +113,25 @@ def test_tag_mp3_writes_id3(tmp_path):
     assert str(tags["TALB"]) == "L'homme est capable de Dieu"
     assert str(tags["TRCK"]) == "0003"
     assert "Dieu" in str(tags["COMM::fra"])
+
+
+def test_render_entry_produces_mp3(tmp_path):
+    if shutil.which("ffmpeg") is None or shutil.which("edge-tts") is None:
+        import pytest
+        pytest.skip("ffmpeg or edge-tts not installed")
+    entry = {
+        "seq": 1,
+        "kind": "paragraph",
+        "number": 1,
+        "file_number": "0001",
+        "location": {"chapter_title": "Test"},
+        "segments": [
+            {"voice": "gerard", "text": "Paragraphe 1.", "targets": ["v1"]},
+            {"voice": "remy", "text": "Dieu, infiniment Parfait.", "targets": ["v1", "v2"]},
+        ],
+    }
+    state = rlib.JitterState(seed=42)
+    out = tmp_path / "ccc_0001.mp3"
+    rlib.render_entry(entry=entry, target="v1", out_path=out, jitter=state, gap_ms=200)
+    assert out.exists()
+    assert out.stat().st_size > 0

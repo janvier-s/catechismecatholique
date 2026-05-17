@@ -100,6 +100,65 @@ def probe_duration_ms(path: Path) -> int:
     return int(audio.info.length * 1000)
 
 
+import shutil
+
+
+def _segments_for_target(entry: dict, target: str) -> list[dict]:
+    return [s for s in entry["segments"] if target in s["targets"]]
+
+
+def render_entry(
+    *,
+    entry: dict,
+    target: str,
+    out_path: Path,
+    jitter: JitterState,
+    gap_ms: int,
+    skip_existing: bool = False,
+) -> bool:
+    """Render one manifest entry to a single MP3 at out_path. Returns True on success."""
+    if skip_existing and out_path.exists():
+        return True
+
+    segments = _segments_for_target(entry, target)
+    if not segments:
+        return False
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if len(segments) == 1:
+        seg = segments[0]
+        pitch, rate = (None, None)
+        if seg["voice"] == "gerard" and seg["text"].startswith("Paragraphe "):
+            pitch, rate = jitter.next_announce()
+        argv = build_edge_tts_argv(seg["voice"], seg["text"], out_path,
+                                    extra_pitch_hz=pitch, extra_rate_pct=rate)
+        return subprocess.run(argv, capture_output=True, text=True).returncode == 0
+
+    # Multi-segment: render each, glue with silence, concat.
+    tmpdir = Path(tempfile.mkdtemp(prefix=f"ccc_{entry['seq']}_"))
+    try:
+        files: list[Path] = []
+        for i, seg in enumerate(segments):
+            seg_file = tmpdir / f"seg_{i:02d}.mp3"
+            pitch, rate = (None, None)
+            if seg["voice"] == "gerard" and seg["text"].startswith("Paragraphe "):
+                pitch, rate = jitter.next_announce()
+            argv = build_edge_tts_argv(seg["voice"], seg["text"], seg_file,
+                                        extra_pitch_hz=pitch, extra_rate_pct=rate)
+            if subprocess.run(argv, capture_output=True, text=True).returncode != 0:
+                return False
+            files.append(seg_file)
+            if i < len(segments) - 1:
+                gap_file = tmpdir / f"gap_{i:02d}.mp3"
+                if not generate_silence(gap_ms, gap_file):
+                    return False
+                files.append(gap_file)
+        return concat_mp3s(files, out_path)
+    finally:
+        shutil.rmtree(tmpdir, ignore_errors=True)
+
+
 from mutagen.id3 import ID3, TIT2, TALB, TPE1, TRCK, TCON, COMM, ID3NoHeaderError
 
 
