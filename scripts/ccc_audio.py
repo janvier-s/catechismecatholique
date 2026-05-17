@@ -547,7 +547,10 @@ def _tier1_magisterial(raw: str) -> str | None:
     # Sigla expansion (DV 10, GS 19, etc.).
     m = re.match(r"^(" + "|".join(SIGLA_MAP) + r")\b", raw)
     if m:
-        return apply_intro_phonetic(_fmt_intro(f"de la {SIGLA_MAP[m.group(1)]}"))
+        title = SIGLA_MAP[m.group(1)]
+        # French vowel-initial words elide "de la" → "de l'".
+        prep = "de l'" if title[:1].lower() in "aeiouhéèêâî" else f"de la "
+        return apply_intro_phonetic(_fmt_intro(f"{prep}{title}"))
     return None
 
 
@@ -621,9 +624,9 @@ def derive_citation_intro(
     elif typ == "liturgical":
         tier1 = _tier1_liturgical(raw)
     elif typ == "canon_law":
-        return _TIER3_GENERIC["canon_law"], 1
+        return apply_intro_phonetic(_TIER3_GENERIC["canon_law"]), 1
     elif typ == "ds":
-        return _TIER3_GENERIC["ds"], 1
+        return apply_intro_phonetic(_TIER3_GENERIC["ds"]), 1
     if tier1:
         return apply_intro_phonetic(tier1), 1
     # Tier 2: scan body for saint name + speech verb.
@@ -631,7 +634,7 @@ def derive_citation_intro(
     if prep:
         return apply_intro_phonetic(_fmt_intro(prep)), 2
     # Tier 3 fallback.
-    return _TIER3_GENERIC.get(typ, "Citation :"), 3
+    return apply_intro_phonetic(_TIER3_GENERIC.get(typ, "Citation :")), 3
 
 
 def _docref_idxs(body_html: str) -> set[str]:
@@ -910,7 +913,12 @@ import subprocess
 _RE_GREEK = re.compile(r"[Ͱ-Ͽἀ-῿]+")
 
 # Token splitter for words (Unicode letters + apostrophe).
-_RE_WORD = re.compile(r"[A-Za-zÀ-ÿ'-]+")
+_RE_WORD = re.compile(r"[A-Za-zÀ-ÿ'’‘\-]+")
+
+
+def _normalize_apostrophes(text: str) -> str:
+    """Replace typographic apostrophes with ASCII so hunspell recognizes elisions."""
+    return text.replace("’", "'").replace("‘", "'")
 
 # Default allowlist of vocabulary we expect to "be unknown to hunspell"
 # but that's intentional / proper-noun. Extend via run_leakage_check's
@@ -941,6 +949,48 @@ DEFAULT_LEAKAGE_ALLOWLIST: set[str] = {
     "dépozitoum", "fidéi",
     "Fidèss", "Damazi",
     "Pèr", "istam", "sanktam",  # in case any Latin literal slips through
+    # French proper nouns and theological terms hunspell fr_FR doesn't ship.
+    "Nazianze", "Nysse", "Melchisédech", "Elie", "Élie", "Epoux", "Époux",
+    "magistérielle", "magistérielles", "pérégrinante", "pérégrinant",
+    "déifiante", "déifiantes", "pluriformité", "postbaptismale",
+    "presbytre", "presbytres", "presbytérium",
+    "Iesu", "Iesum",  # Latin "Jesus" in Latin citation contexts
+    "plaît", "plait",  # source has it with and without circumflex
+    "mass", "média", "médias",  # "mass média" appears in §2496
+    # French biblical and historical proper nouns hunspell doesn't ship.
+    "Nisan", "Lévi", "Gethsémani", "Débora", "Abram", "Ste",
+    # Source abbreviations that appear in body text.
+    "OEx", "can",
+    # French verb forms and rare French words hunspell misses.
+    "révèlera", "eucharistiés",
+    # English fragments in cited quotes (§313 Catherine of Siena).
+    "of", "well",
+    # All INTRO_LATIN_REPLACE outputs (phonetic announce tokens).
+    "Déi", "Vèrboum",
+    "Dènntzingueur",
+    "Loumène", "Gènntsioum",
+    "Sacrosannctoum", "Conntchilioum",
+    "Gaoudioum", "ète", "Spès",
+    "Nostra", "Étaté",
+    "Kristousse", "Dominousse",
+    "Apostolikame", "Actouositatème",
+    "Ade", "Gènntèsse",
+    "Optatame", "Totiousse",
+    "Présbytéroroum", "Ordinisse",
+    "Catékézi", "tradènndé",
+    "Évannguélii", "nounncianndé",
+    "Sacrame", "ounnktsionème", "innfirmoroum",
+    "Houmani", "Génnérisse",
+    "Ponntifikalé", "Romanoum",
+    "Donoume", "Vité",
+    "Tchènntézimousse", "Annousse",
+    "Rédèmptor", "Hominisse",
+    "Sollicitoudo", "Réi", "Sotsialisse",
+    "Familiarisse", "Conssortio",
+    # Per-paragraph phonetic outputs not yet allowlisted.
+    "Déousse", "sèmpiterné", "omnipotènsse",
+    "vié",  # output of "viæ"
+    "lèx", "Lèx",
 }
 
 
@@ -965,9 +1015,12 @@ def run_leakage_check(
     if allowlist and allowlist.exists():
         allow.update(allowlist.read_text(encoding="utf-8").split())
     try:
+        # Normalize typographic apostrophes so hunspell's elision rules apply,
+        # and strip Greek-script content so it doesn't orphan French elisions.
+        normalized = [_RE_GREEK.sub(" ", _normalize_apostrophes(t)) for t in texts]
         proc = subprocess.run(
             ["hunspell", "-d", "fr_FR", "-l"],
-            input="\n".join(texts),
+            input="\n".join(normalized),
             capture_output=True,
             text=True,
             check=False,
@@ -982,7 +1035,8 @@ def run_leakage_check(
         return []
     out: list[tuple[int, str]] = []
     for i, text in enumerate(texts):
-        words = extract_words_for_leakage_check(text)
+        # Match using normalized apostrophes so we find words flagged after normalization.
+        words = extract_words_for_leakage_check(_normalize_apostrophes(text))
         for w in words:
             if w in flagged_words:
                 out.append((i, w))
