@@ -127,6 +127,7 @@
 						class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1"
 						class:is-active={active}
 						type={isClickable ? 'button' : undefined}
+						role={isClickable ? 'button' : undefined}
 						onclick={isClickable
 							? () =>
 									openPanel(

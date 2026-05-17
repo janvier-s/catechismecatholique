@@ -91,15 +91,22 @@
 </script>
 
 {#if open}
-	<div class="overlay" transition:fade={{ duration: 150 }} onclick={close} role="presentation">
+	<div
+		class="overlay"
+		transition:fade={{ duration: 150 }}
+		onclick={(e) => {
+			if (e.target === e.currentTarget) close();
+		}}
+		role="presentation"
+	>
 		<div
 			class="dialog"
 			bind:this={dialogEl}
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="share-dialog-title"
+			tabindex="-1"
 			transition:fly={{ y: 12, duration: 200 }}
-			onclick={(e) => e.stopPropagation()}
 		>
 			<div class="header">
 				<h2 id="share-dialog-title" class="title">
