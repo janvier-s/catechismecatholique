@@ -334,3 +334,55 @@ def expand_bible_refs(text: str) -> str:
     text = _RE_BIBLE_SAFE.sub(lambda m: BIBLE_NAMES[m.group(1)], text)
     text = _RE_BIBLE_AMBIG.sub(lambda m: BIBLE_NAMES[m.group(1)], text)
     return text
+
+
+# Paragraphs whose citation trailing-paren content is meaningful (an
+# author or work title) and should be kept and surfaced as a Gérard
+# attribution segment rather than silently stripped.
+KEEP_TRAILING_PAREN: set[int] = {260, 469}
+
+
+_RE_REF_TRAILING_BODY = re.compile(
+    r"\s+\(([A-ZÄÀÂÇÉÈÊËÎÏÔŒÙÛÜŸ].*\d)\)(\.?)$"
+)
+
+
+def strip_ref_parens(text: str) -> str:
+    """Strip trailing parenthesized reference from a body paragraph.
+
+    Conservative: matches only `(Upper… number)` at end of string.
+    Also delegates to strip_annotations for named annotation patterns.
+    """
+    text = strip_annotations(text)
+    return _RE_REF_TRAILING_BODY.sub(r"\2", text)
+
+
+def strip_trailing_parens(text: str, paragraph_number: int) -> tuple[str, str | None]:
+    """Strip a citation's trailing parenthesized fragment.
+
+    Returns (cleaned_text, captured_attribution).
+    captured_attribution is non-None only when paragraph_number is in
+    KEEP_TRAILING_PAREN — those parens are author/work attributions
+    worth surfacing.
+    """
+    stripped = text.rstrip(". ")
+    if not stripped.endswith(")"):
+        return text, None
+    depth = 0
+    match_pos = -1
+    for pos in range(len(stripped) - 1, -1, -1):
+        if stripped[pos] == ")":
+            depth += 1
+        elif stripped[pos] == "(":
+            depth -= 1
+            if depth == 0:
+                match_pos = pos
+                break
+    if match_pos < 0:
+        return text, None
+    before = stripped[:match_pos].rstrip()
+    captured = stripped[match_pos + 1:-1].strip()
+    after = text[len(stripped):]
+    if paragraph_number in KEEP_TRAILING_PAREN:
+        return before + after, captured
+    return before + after, None

@@ -140,3 +140,29 @@ def test_expand_bible_refs():
 def test_expand_bible_refs_ignores_isolated_abbr():
     # "Si" without trailing number is not a Bible ref
     assert ccc_audio.expand_bible_refs("Si tu veux") == "Si tu veux"
+
+
+def test_strip_ref_parens_body():
+    src = "Le verbe est divin (Symbole de Nicée-Constantinople)."
+    # body-level uses a stricter regex aimed at trailing refs
+    assert ccc_audio.strip_ref_parens(src) == "Le verbe est divin."
+
+
+def test_strip_trailing_parens_default():
+    src = "Citation texte (sermones 241, 2 : PL 38, 1134)"
+    cleaned, captured = ccc_audio.strip_trailing_parens(src, paragraph_number=32)
+    assert cleaned == "Citation texte"
+    assert captured is None
+
+
+def test_strip_trailing_parens_keep_for_260():
+    src = "Citation texte (Prière de la Bienheureuse Élisabeth de la Trinité)"
+    cleaned, captured = ccc_audio.strip_trailing_parens(src, paragraph_number=260)
+    assert cleaned == "Citation texte"
+    assert captured == "Prière de la Bienheureuse Élisabeth de la Trinité"
+
+
+def test_strip_trailing_parens_no_parens():
+    cleaned, captured = ccc_audio.strip_trailing_parens("Pas de parenthèse.", paragraph_number=1)
+    assert cleaned == "Pas de parenthèse."
+    assert captured is None
