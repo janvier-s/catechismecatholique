@@ -768,3 +768,69 @@ def build_en_bref_combined_entry(
         "location": location,
         "segments": segments,
     }
+
+
+import json
+
+
+def _chapter_part_order(chapter: dict) -> tuple[int, int, int]:
+    """Sort key: (part_number, section_number, chapter_number)."""
+    return (
+        chapter.get("part_number") or 0,
+        chapter.get("section_number") or 0,
+        chapter.get("number") or 0,
+    )
+
+
+def load_corpus(
+    chapters_full_dir: Path,
+    paragraphs_dir: Path,
+) -> list[dict]:
+    """Walk chapters-full + paragraphs, yield {paragraph, location} in CCC order.
+
+    `chapters_full_dir`: holds {slug}.json files with `{"chapter": {...}}` wrappers.
+    `paragraphs_dir`: holds {n}.json files keyed by CCC paragraph number.
+
+    Returns a flat list in the canonical reading order: paragraphs within
+    a chapter follow the chapter's `paragraphs` array.
+    """
+    chapters: list[dict] = []
+    for path in sorted(chapters_full_dir.glob("*.json")):
+        with path.open(encoding="utf-8") as f:
+            wrapper = json.load(f)
+        chapters.append(wrapper["chapter"])
+    chapters.sort(key=_chapter_part_order)
+
+    out: list[dict] = []
+    for ch in chapters:
+        location_base = {
+            "part_slug": ch.get("part_slug"),
+            "part_title": ch.get("part_title"),
+            "part_number": ch.get("part_number"),
+            "section_slug": ch.get("section_slug"),
+            "section_title": ch.get("section_title"),
+            "section_number": ch.get("section_number"),
+            "chapter_slug": ch.get("slug"),
+            "chapter_title": ch.get("title"),
+            "chapter_number": ch.get("number"),
+            "article_number": None,
+            "heading2_title": None,
+        }
+        # Map paragraph number to article info from ch["articles"].
+        article_lookup: dict[int, dict] = {}
+        for art in ch.get("articles", []):
+            for n in art.get("paragraphs", []):
+                article_lookup[n] = {"number": art.get("number"), "title": art.get("title")}
+        for num in ch.get("paragraphs", []):
+            ppath = paragraphs_dir / f"{num}.json"
+            if not ppath.exists():
+                continue
+            with ppath.open(encoding="utf-8") as f:
+                paragraph = json.load(f)
+            location = dict(location_base)
+            art = article_lookup.get(num)
+            if art:
+                location["article_number"] = art["number"]
+                location["article_title"] = art["title"]
+            out.append({"paragraph": paragraph, "location": location})
+    return out
