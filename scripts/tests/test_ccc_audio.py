@@ -62,3 +62,23 @@ def test_convert_roman_numerals_in_text():
     assert ccc_audio.convert_roman_numerals("Au IIe siècle") == "Au deuxième siècle"
     assert ccc_audio.convert_roman_numerals("Vatican II") == "Vatican 2"
     assert ccc_audio.convert_roman_numerals("voir I)") == "voir 1)"
+
+
+def test_clean_text_strips_srcref_sups():
+    html = 'Voir <sup class="srcRef docRef" data-idx="a">a</sup> ce texte.'
+    assert ccc_audio.clean_text(html) == "Voir ce texte."
+
+
+def test_clean_text_preserves_other_sups():
+    html = 'E=mc<sup>2</sup>.'
+    assert ccc_audio.clean_text(html) == "E=mc2."
+
+
+def test_clean_text_normalizes_whitespace():
+    html = '<span>Un texte   avec\nlignes.</span>'
+    assert ccc_audio.clean_text(html) == "Un texte avec lignes."
+
+
+def test_clean_text_french_punctuation_spacing():
+    html = '<span>Phrase , bizarre . Et »attendue .»</span>'
+    assert ccc_audio.clean_text(html) == "Phrase, bizarre. Et »attendue. »"

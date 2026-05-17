@@ -127,3 +127,27 @@ def convert_roman_numerals(text: str) -> str:
     text = _ROMAN_NUM_RE.sub(lambda m: str(roman_to_arabic(m.group(0))), text)
     text = _ROMAN_ENUM_RE.sub(lambda m: str(roman_to_arabic(m.group(1))) + m.group(2), text)
     return text
+
+
+_RE_SUP_SRC = re.compile(r'<sup[^>]*\bsrcRef\b[^>]*>.*?</sup>', re.DOTALL)
+_RE_SUP_KEEP = re.compile(r'<sup[^>]*>(.*?)</sup>', re.DOTALL)
+_RE_BR = re.compile(r'<br\s*/?>', re.IGNORECASE)
+_RE_HTML = re.compile(r'<[^>]+>')
+_RE_WS = re.compile(r'\s+')
+_RE_SPACE_BEFORE_PUNCT = re.compile(r'\s+([.,])')
+_RE_SPACE_BEFORE_GUILLEMET = re.compile(r'(\S)»')
+_RE_GUILLEMET_PERIOD = re.compile(r'\s*»\s*\.')
+
+
+def clean_text(html: str) -> str:
+    """Strip HTML, collapse whitespace, fix French punctuation spacing."""
+    text = _RE_SUP_SRC.sub("", html)
+    text = _RE_SUP_KEEP.sub(r"\1", text)
+    text = _RE_BR.sub(" ", text)
+    text = _RE_HTML.sub("", text)
+    text = text.replace(" ", " ")
+    text = _RE_WS.sub(" ", text)
+    text = _RE_SPACE_BEFORE_PUNCT.sub(r"\1", text)
+    text = _RE_SPACE_BEFORE_GUILLEMET.sub(r"\1 »", text)
+    text = _RE_GUILLEMET_PERIOD.sub(". »", text)
+    return text.strip()
