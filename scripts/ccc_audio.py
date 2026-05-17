@@ -488,6 +488,124 @@ def apply_intro_phonetic(text: str) -> str:
     return text
 
 
+_PAPAL_NAMES = [
+    "Benoît XII", "Benoît XIV", "Benoît XV", "Benoît XVI",
+    "Léon XIII", "Pie IX", "Pie X", "Pie XI", "Pie XII",
+    "Jean XXIII", "Paul VI", "Jean-Paul I", "Jean-Paul II",
+    "François",
+]
+_PAPAL_DISPLAY: dict[str, str] = {
+    "Jean-Paul II": "du pape saint Jean-Paul 2",
+    "Paul VI": "du pape saint Paul 6",
+    "Benoît XII": "du pape Benoît 12",
+    "Pie XII": "du pape Pie 12",
+    "Léon XIII": "du pape Léon 13",
+    "Pie X": "du pape saint Pie 10",
+    "Pie IX": "du pape Pie 9",
+    "Jean XXIII": "du pape saint Jean 23",
+}
+
+_TIER3_GENERIC: dict[str, str] = {
+    "patristic": "Citation patristique :",
+    "magisterial": "Citation magistérielle :",
+    "conciliar": "Citation conciliaire :",
+    "liturgical": "Citation liturgique :",
+    "ds": "Citation du Denzinger :",
+    "canon_law": "Citation du Code de droit canonique :",
+}
+
+
+def _fmt_intro(prep: str) -> str:
+    """Format the announce string from a 'de X' / 'du X' / 'd'X' fragment."""
+    return f"Citation {prep} :"
+
+
+def _tier1_patristic(raw: str) -> str | None:
+    # Exact AUTHOR_MAP entry.
+    if raw in AUTHOR_MAP:
+        return _fmt_intro(AUTHOR_MAP[raw])
+    # "saint X, work" or "Sainte X, work" or "saint X work".
+    m = re.match(r"^(?P<name>(?:[Ss](?:ain)?t(?:e)?)\s+[A-ZÉÈÊÀÂÇÎÏÔŒÙÛ][\w\-']+(?:\s+(?:de|d')\s*[A-ZÉ][\w\-']+)?)", raw)
+    if m:
+        normalized = re.sub(r"^St\b", "saint", m.group("name"))
+        normalized = re.sub(r"^Ste\b", "Sainte", normalized)
+        return _fmt_intro(f"de {fix_saint_liaison(normalized)}")
+    return None
+
+
+def _tier1_magisterial(raw: str) -> str | None:
+    # Exact AUTHOR_MAP entry.
+    if raw in AUTHOR_MAP:
+        return _fmt_intro(AUTHOR_MAP[raw])
+    # Papal name at start.
+    for name in sorted(_PAPAL_NAMES, key=len, reverse=True):
+        if raw.startswith(name):
+            display = _PAPAL_DISPLAY.get(name, f"du pape {name}")
+            return _fmt_intro(display)
+    # Sigla expansion (DV 10, GS 19, etc.).
+    m = re.match(r"^(" + "|".join(SIGLA_MAP) + r")\b", raw)
+    if m:
+        return apply_intro_phonetic(_fmt_intro(f"de la {SIGLA_MAP[m.group(1)]}"))
+    return None
+
+
+def _tier1_conciliar(raw: str) -> str | None:
+    if raw in AUTHOR_MAP:
+        return _fmt_intro(AUTHOR_MAP[raw])
+    m = re.match(
+        r"^(?:voir\s+)?(?P<name>concile\s+(?:de|du|d')\s+[A-Za-zÉÈÊÀÂÇÎÏÔŒÙÛ\- ]+?)(?=\s*:|\s*,|\s+\d|$)",
+        raw, re.IGNORECASE,
+    )
+    if not m:
+        return None
+    nm = convert_roman_numerals(m.group("name").strip())
+    # Normalize to lowercase "concile" so the announce reads "du concile de Trente".
+    nm = re.sub(r"^[Cc]oncile\b", "concile", nm)
+    return _fmt_intro(f"du {nm}")
+
+
+def _tier1_liturgical(raw: str) -> str | None:
+    if raw in AUTHOR_MAP:
+        return _fmt_intro(AUTHOR_MAP[raw])
+    if raw.startswith("MR"):
+        return _fmt_intro("du Missel romain")
+    if raw.startswith("LH"):
+        return _fmt_intro("de la Liturgie des heures")
+    if raw.startswith("Pontificale Romanum"):
+        return _fmt_intro("du Pontifical romain")
+    if raw.startswith("Liturgie byzantine"):
+        return _fmt_intro("de la Liturgie byzantine")
+    return None
+
+
+def derive_citation_intro(
+    mref: dict | None,
+    body_text: str,
+) -> tuple[str, int]:
+    """Return (announce_text, tier_used). Tier 2 added in Task 12."""
+    if mref is None:
+        return "Citation :", 3
+    typ = mref.get("type")
+    raw = mref.get("raw", "")
+    tier1: str | None = None
+    if typ == "patristic":
+        tier1 = _tier1_patristic(raw)
+    elif typ == "magisterial":
+        tier1 = _tier1_magisterial(raw)
+    elif typ == "conciliar":
+        tier1 = _tier1_conciliar(raw)
+    elif typ == "liturgical":
+        tier1 = _tier1_liturgical(raw)
+    elif typ == "canon_law":
+        return _TIER3_GENERIC["canon_law"], 1
+    elif typ == "ds":
+        return _TIER3_GENERIC["ds"], 1
+    if tier1:
+        return apply_intro_phonetic(tier1), 1
+    # Tier 3 fallback (Tier 2 added in Task 12).
+    return _TIER3_GENERIC.get(typ, "Citation :"), 3
+
+
 def _docref_idxs(body_html: str) -> set[str]:
     return set(re.findall(r'docRef" data-idx="([^"]+)"', body_html))
 

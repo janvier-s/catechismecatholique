@@ -247,3 +247,65 @@ def test_apply_intro_phonetic_centesimus():
 def test_apply_intro_phonetic_passthrough():
     out = ccc_audio.apply_intro_phonetic("Citation de saint Augustin :")
     assert out == "Citation de saint Augustin :"
+
+
+def test_derive_intro_patristic_saint_in_raw():
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "patristic", "raw": "saint Augustin, confessiones 1:1"},
+        body_text="",
+    )
+    # Lowercase "saint" in source → lowercase "sainte" after liaison fix.
+    assert intro == "Citation de sainte Augustin :"
+    assert tier == 1
+
+
+def test_derive_intro_author_map_exact():
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "patristic", "raw": "Augustin de Dace"},
+        body_text="",
+    )
+    assert intro == "Citation d'Augustin de Dace :"
+    assert tier == 1
+
+
+def test_derive_intro_sigla_dv():
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "magisterial", "raw": "DV 10"},
+        body_text="",
+    )
+    assert intro == "Citation de la constitution dogmatique Déi Vèrboum :"
+    assert tier == 1
+
+
+def test_derive_intro_conciliar():
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "conciliar", "raw": "concile de Trente : DS 1525"},
+        body_text="",
+    )
+    assert intro == "Citation du concile de Trente :"
+    assert tier == 1
+
+
+def test_derive_intro_canon_law():
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "canon_law", "raw": "voir CIC, can. 847, § 1"},
+        body_text="",
+    )
+    assert intro == "Citation du Code de droit canonique :"
+    assert tier == 1
+
+
+def test_derive_intro_tier3_fallback_for_poes_9():
+    # §227 trap: raw="Poes. 9" must NOT match Grégoire — it falls through.
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "patristic", "raw": "Poes. 9"},
+        body_text="Texte sans mention de saint.",
+    )
+    assert intro == "Citation patristique :"
+    assert tier == 3
+
+
+def test_derive_intro_no_mref():
+    intro, tier = ccc_audio.derive_citation_intro(mref=None, body_text="")
+    assert intro == "Citation :"
+    assert tier == 3
