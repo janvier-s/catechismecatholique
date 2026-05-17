@@ -461,3 +461,18 @@ def test_load_corpus_walks_in_order():
     assert p27["paragraph"]["number"] == 27
     assert p27["location"]["chapter_slug"] == "test-chapter"
     assert p28["paragraph"]["number"] == 28
+
+
+def test_build_manifest_from_fixtures():
+    manifest, audit = ccc_audio.build_manifest(
+        chapters_full_dir=FIXTURES / "chapters-full",
+        paragraphs_dir=FIXTURES / "paragraphs",
+    )
+    assert manifest["version"] == 1
+    assert manifest["voices"]["gerard"] == "fr-BE-GerardNeural"
+    entries = manifest["entries"]
+    assert len(entries) == 2
+    assert entries[0]["kind"] == "paragraph"
+    assert entries[0]["number"] == 27
+    assert entries[1]["number"] == 28
+    assert audit == []  # no citations in fixtures

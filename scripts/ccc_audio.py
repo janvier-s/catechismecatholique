@@ -836,3 +836,68 @@ def load_corpus(
                 location["article_title"] = art["title"]
             out.append({"paragraph": paragraph, "location": location})
     return out
+
+
+from datetime import datetime, timezone
+
+VOICES = {
+    "gerard": "fr-BE-GerardNeural",
+    "remy": "fr-FR-RemyMultilingualNeural",
+    "fabrice": "fr-CH-FabriceNeural",
+}
+VOICE_OPTS = {
+    "gerard":  {"volume": "-10%"},
+    "remy":    {"rate":   "-10%"},
+    "fabrice": {"volume": "-10%", "rate": "-10%"},
+}
+
+
+def build_manifest(
+    chapters_full_dir: Path,
+    paragraphs_dir: Path,
+) -> tuple[dict, list[dict]]:
+    """Build full manifest dict + flat audit row list."""
+    corpus = load_corpus(chapters_full_dir, paragraphs_dir)
+    entries: list[dict] = []
+    audit_rows: list[dict] = []
+    seen_numbers: dict[int, int] = {}
+
+    # Group en-bref paragraphs by chapter for combined entries.
+    en_bref_by_chapter: dict[str, list[dict]] = {}
+
+    seq = 0
+    for item in corpus:
+        paragraph = item["paragraph"]
+        location = item["location"]
+        n = paragraph["number"]
+        seen_numbers[n] = seen_numbers.get(n, 0) + 1
+        seq += 1
+        entry, rows = build_paragraph_entry(
+            seq=seq,
+            paragraph=paragraph,
+            location=location,
+            occurrence_index=seen_numbers[n],
+        )
+        entries.append(entry)
+        audit_rows.extend(rows)
+        if is_en_bref(paragraph):
+            slug = location.get("chapter_slug") or "_unknown"
+            en_bref_by_chapter.setdefault(slug, []).append(paragraph)
+
+    # Emit one en_bref_combined entry per chapter that has en brefs.
+    for slug, paras in en_bref_by_chapter.items():
+        seq += 1
+        location = {"chapter_slug": slug}
+        entries.append(build_en_bref_combined_entry(
+            seq=seq, chapter_slug=slug, en_bref_paragraphs=paras, location=location,
+        ))
+
+    manifest = {
+        "version": 1,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "source": "static/data/cec/chapters-full",
+        "voices": VOICES,
+        "voice_opts": VOICE_OPTS,
+        "entries": entries,
+    }
+    return manifest, audit_rows
