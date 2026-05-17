@@ -93,16 +93,18 @@ def test_fix_saint_liaison():
 
 
 def test_apply_text_replace_for_1513():
-    src = '« Per istam sanctam unctionem et suam piissimam misericordiam adiuvet te Dominus gratia Spiritus Sancti, ut a peccatis liberatum te salvet atque propitius allevet »'
+    # Match the exact form clean_text produces (period before closing guillemet).
+    src = '« Per istam sanctam unctionem et suam piissimam misericordiam adiuvet te Dominus gratia Spiritus Sancti, ut a peccatis liberatum te salvet atque propitius allevet. »'
     out = ccc_audio.apply_text_replace(src, 1513)
     assert "Par cette onction sainte" in out
-    assert "Latin" not in out.lower() or "Per istam" not in out
+    assert "Per istam" not in out
 
 
 def test_apply_text_replace_for_2854():
-    src = "Libera nos, quæsumus, Domine, ab omnibus malis, da propitius pacem in diebus nostris, ut, ope misericordiæ tuæ adiuti, et a peccatis simus semper liberi et ab omni perturbatione securi : exspectantes beatam spem et adventum Salvatoris nostri Iesu Christi"
+    src = "Libera nos, quæsumus, Domine, ab omnibus malis, da propitius pacem in diebus nostris, ut, ope misericordiæ tuæ adiuti, et a peccatis simus semper liberi et ab omni perturbatione securi : exspectantes beatam spem et adventum Salvatoris nostri Iesu Christi."
     out = ccc_audio.apply_text_replace(src, 2854)
     assert out.startswith("Délivre-nous de tout mal, Seigneur")
+    assert "Libera nos" not in out
 
 
 def test_apply_general_replacements_greek():

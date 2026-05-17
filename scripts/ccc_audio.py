@@ -211,7 +211,7 @@ TEXT_REPLACE: dict[int, dict[str, str]] = {
     1325: {"mysterium": "mysterioum"},
     1348: {"in persona Christi": "in persona Kristi"},
     1513: {
-        "« Per istam sanctam unctionem et suam piissimam misericordiam adiuvet te Dominus gratia Spiritus Sancti, ut a peccatis liberatum te salvet atque propitius allevet »":
+        "« Per istam sanctam unctionem et suam piissimam misericordiam adiuvet te Dominus gratia Spiritus Sancti, ut a peccatis liberatum te salvet atque propitius allevet. »":
             "« Par cette onction sainte, que le Seigneur, en sa grande bonté vous réconforte par la grâce de l'Esprit Saint. Ainsi, vous ayant libéré de tous péchés, qu'Il vous sauve et vous relève. »",
     },
     1523: {"sacramentum": "sacramentoum"},
@@ -220,8 +220,8 @@ TEXT_REPLACE: dict[int, dict[str, str]] = {
     2622: {"Magnificat": "Maggnificatte"},
     2763: {"summa theologiæ": "Soumma Théologiè"},
     2854: {
-        "Libera nos, quæsumus, Domine, ab omnibus malis, da propitius pacem in diebus nostris, ut, ope misericordiæ tuæ adiuti, et a peccatis simus semper liberi et ab omni perturbatione securi : exspectantes beatam spem et adventum Salvatoris nostri Iesu Christi":
-            "Délivre-nous de tout mal, Seigneur, et donne la paix à notre temps ; par ta miséricorde, libère-nous du péché, rassure-nous devant les épreuves en cette vie où nous espérons le bonheur que Tu promets et l'avènement de Jésus-Christ, notre Sauveur",
+        "Libera nos, quæsumus, Domine, ab omnibus malis, da propitius pacem in diebus nostris, ut, ope misericordiæ tuæ adiuti, et a peccatis simus semper liberi et ab omni perturbatione securi : exspectantes beatam spem et adventum Salvatoris nostri Iesu Christi.":
+            "Délivre-nous de tout mal, Seigneur, et donne la paix à notre temps ; par ta miséricorde, libère-nous du péché, rassure-nous devant les épreuves en cette vie où nous espérons le bonheur que Tu promets et l'avènement de Jésus-Christ, notre Sauveur.",
     },
 }
 
@@ -291,6 +291,54 @@ def apply_general_replacements(text: str) -> str:
     text = re.sub(r"(?<!\w)Vexilla(?!\w)", "Veksilla", text)
     text = re.sub(r"(?<!\w)Regis(?!\w)", "Régisse", text)
     text = re.sub(r"(?<!\w)Accipe(?!\w)", "Atchipé", text)
+    # Greek transliterations → Greek script (religious terms).
+    text = re.sub(r"(?<!\w)Aeiparthenos(?!\w)", "Ἀειπάρθενος", text)
+    text = re.sub(r"(?<!\w)Hagiou(?!\w)", "ἁγίου", text)
+    text = re.sub(r"(?<!\w)hagia(?!\w)", "ἁγία", text)
+    text = re.sub(r"(?<!\w)Hodoghitria(?!\w)", "Ὁδηγήτρια", text)
+    text = re.sub(r"(?<!\w)Kyriakè(?!\w)", "κυριακή", text)
+    text = re.sub(r"(?<!\w)Kuriakè(?!\w)", "κυριακή", text)
+    text = re.sub(r"(?<!\w)kuriakè(?!\w)", "κυριακή", text)
+    text = re.sub(r"(?<!\w)Panaghia(?!\w)", "Παναγία", text)
+    text = re.sub(r"(?<!\w)Pantocratôr(?!\w)", "Παντοκράτωρ", text)
+    text = re.sub(r"(?<!\w)Paraclisis(?!\w)", "Παράκλησις", text)
+    text = re.sub(r"(?<!\w)Patros(?!\w)", "Πατρός", text)
+    text = re.sub(r"(?<!\w)Pneumatos(?!\w)", "Πνεύματος", text)
+    text = re.sub(r"(?<!\w)Sphragis(?!\w)", "Σφραγίς", text)
+    text = re.sub(r"(?<!\w)sphragis(?!\w)", "σφραγίς", text)
+    text = re.sub(r"(?<!\w)synaxis(?!\w)", "σύναξις", text)
+    text = re.sub(r"(?<!\w)théotokia(?!\w)", "θεοτόκια", text)
+    text = re.sub(r"(?<!\w)ek-kalein(?!\w)", "ἐκκαλεῖν", text)
+    text = re.sub(r"(?<!\w)eu-logia(?!\w)", "εὐλογία", text)
+    text = re.sub(r"(?<!\w)eulogein(?!\w)", "εὐλογεῖν", text)
+    text = re.sub(r"(?<!\w)eucharistein(?!\w)", "εὐχαριστεῖν", text)
+    text = re.sub(r"(?<!\w)hèméra(?!\w)", "ἡμέρα", text)
+    text = re.sub(r"(?<!\w)monoghenis(?!\w)", "μονογενής", text)
+    # Latin religious terms phoneticized for Belgian French reading.
+    text = re.sub(r"(?<!\w)Sacram unctionem infirmorum(?!\w)", "Sacrame ounnktsionème innfirmoroum", text)
+    text = re.sub(r"(?<!\w)AAS(?!\w)", "A.A.S.", text)
+    text = re.sub(r"(?<!\w)Canonici(?!\w)", "Kanoniki", text)
+    text = re.sub(r"(?<!\w)Codicis(?!\w)", "Kodicisse", text)
+    text = re.sub(r"(?<!\w)Commissio(?!\w)", "Komissio", text)
+    text = re.sub(r"(?<!\w)Iuris(?!\w)", "Iouris", text)
+    text = re.sub(r"(?<!\w)Pontificia(?!\w)", "Ponntifitchia", text)
+    text = re.sub(r"(?<!\w)Creator(?!\w)", "Créator", text)
+    text = re.sub(r"(?<!\w)Dominica(?!\w)", "Dominika", text)
+    text = re.sub(r"(?<!\w)Dominus(?!\w)", "Dominousse", text)
+    text = re.sub(r"(?<!\w)Ecclesia(?!\w)", "Ekklézia", text)
+    text = re.sub(r"(?<!\w)Ecclesiam(?!\w)", "Ekkléziame", text)
+    text = re.sub(r"(?<!\w)Eius(?!\w)", "Éiousse", text)
+    text = re.sub(r"(?<!\w)eius(?!\w)", "éiousse", text)
+    text = re.sub(r"(?<!\w)Hymnus(?!\w)", "Ymnousse", text)
+    text = re.sub(r"(?<!\w)Ordinatio(?!\w)", "Ordinatsio", text)
+    text = re.sub(r"(?<!\w)Pentecostes(?!\w)", "Penntécostèsse", text)
+    text = re.sub(r"(?<!\w)Pulcher(?!\w)", "Poulker", text)
+    text = re.sub(r"(?<!\w)Recolitur(?!\w)", "Récolitour", text)
+    text = re.sub(r"(?<!\w)Sacram(?!\w)", "Sacrame", text)
+    text = re.sub(r"(?<!\w)Salvatoris(?!\w)", "Salvatorisse", text)
+    text = re.sub(r"(?<!\w)Veni(?!\w)", "Véni", text)
+    text = re.sub(r"(?<!\w)Vesperas(?!\w)", "Vespérasse", text)
+    text = re.sub(r"(?<!\w)Isrælitica(?!\w)", "Isrælitika", text)
     return text
 
 
@@ -818,25 +866,45 @@ def _chapter_part_order(chapter: dict) -> tuple[int, int, int]:
     )
 
 
+def _load_paragraph(paragraphs_dir: Path, num: int) -> dict | None:
+    p = paragraphs_dir / f"{num}.json"
+    if not p.exists():
+        return None
+    with p.open(encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_corpus(
     chapters_full_dir: Path,
     paragraphs_dir: Path,
+    structure_path: Path | None = None,
 ) -> list[dict]:
-    """Walk chapters-full + paragraphs, yield {paragraph, location} in CCC order.
+    """Walk the CCC structure top-to-bottom and yield {paragraph, location} in order.
 
-    `chapters_full_dir`: holds {slug}.json files with `{"chapter": {...}}` wrappers.
-    `paragraphs_dir`: holds {n}.json files keyed by CCC paragraph number.
-
-    Returns a flat list in the canonical reading order: paragraphs within
-    a chapter follow the chapter's `paragraphs` array.
+    Uses `structure.json` (when present at the conventional location next to
+    chapters-full) to cover paragraphs that sit at Part-intro, Section-intro,
+    or section-direct article levels — these aren't in chapters-full's
+    chapter.paragraphs arrays. Falls back to walking chapters-full if
+    structure.json is unavailable.
     """
+    if structure_path is None:
+        structure_path = chapters_full_dir.parent / "structure.json"
+    if structure_path.exists():
+        return _load_corpus_from_structure(structure_path, paragraphs_dir)
+    return _load_corpus_from_chapters_full(chapters_full_dir, paragraphs_dir)
+
+
+def _load_corpus_from_chapters_full(
+    chapters_full_dir: Path,
+    paragraphs_dir: Path,
+) -> list[dict]:
+    """Legacy walker — used when structure.json is absent (e.g. unit-test fixtures)."""
     chapters: list[dict] = []
     for path in sorted(chapters_full_dir.glob("*.json")):
         with path.open(encoding="utf-8") as f:
             wrapper = json.load(f)
         chapters.append(wrapper["chapter"])
     chapters.sort(key=_chapter_part_order)
-
     out: list[dict] = []
     for ch in chapters:
         location_base = {
@@ -850,25 +918,94 @@ def load_corpus(
             "chapter_title": ch.get("title"),
             "chapter_number": ch.get("number"),
             "article_number": None,
+            "article_title": None,
             "heading2_title": None,
         }
-        # Map paragraph number to article info from ch["articles"].
         article_lookup: dict[int, dict] = {}
         for art in ch.get("articles", []):
             for n in art.get("paragraphs", []):
                 article_lookup[n] = {"number": art.get("number"), "title": art.get("title")}
         for num in ch.get("paragraphs", []):
-            ppath = paragraphs_dir / f"{num}.json"
-            if not ppath.exists():
+            paragraph = _load_paragraph(paragraphs_dir, num)
+            if paragraph is None:
                 continue
-            with ppath.open(encoding="utf-8") as f:
-                paragraph = json.load(f)
             location = dict(location_base)
             art = article_lookup.get(num)
             if art:
                 location["article_number"] = art["number"]
                 location["article_title"] = art["title"]
             out.append({"paragraph": paragraph, "location": location})
+    return out
+
+
+def _load_corpus_from_structure(
+    structure_path: Path,
+    paragraphs_dir: Path,
+) -> list[dict]:
+    """Walk structure.json top-down: Part → (Part intro) → Section → (Section intro)
+    → (section-direct articles) → Chapter → (Chapter paragraphs / articles)."""
+    with structure_path.open(encoding="utf-8") as f:
+        structure = json.load(f)
+
+    out: list[dict] = []
+
+    def add_paragraphs(nums: list[int], base_loc: dict, article: dict | None = None) -> None:
+        for n in nums:
+            paragraph = _load_paragraph(paragraphs_dir, n)
+            if paragraph is None:
+                continue
+            loc = dict(base_loc)
+            if article is not None:
+                loc["article_number"] = article.get("number")
+                loc["article_title"] = article.get("title")
+            out.append({"paragraph": paragraph, "location": loc})
+
+    for part in structure.get("parts", []):
+        part_loc = {
+            "part_slug": part.get("slug"),
+            "part_title": part.get("title"),
+            "part_number": part.get("number"),
+            "section_slug": None, "section_title": None, "section_number": None,
+            "chapter_slug": None, "chapter_title": None, "chapter_number": None,
+            "article_number": None, "article_title": None,
+            "heading2_title": None,
+        }
+        # Part-level intro paragraphs (e.g. Prologue §1-25).
+        add_paragraphs(part.get("intro_paragraphs", []), part_loc)
+
+        for section in part.get("sections", []):
+            sec_loc = dict(part_loc)
+            sec_loc.update({
+                "section_slug": section.get("slug"),
+                "section_title": section.get("title"),
+                "section_number": section.get("number"),
+            })
+            add_paragraphs(section.get("intro_paragraphs", []), sec_loc)
+
+            # Section-direct articles (e.g. §2759-§2865 Pater Noster commentary).
+            for art in section.get("articles_direct", []):
+                add_paragraphs(art.get("paragraphs", []), sec_loc, article=art)
+
+            for chapter in section.get("chapters", []):
+                ch_loc = dict(sec_loc)
+                ch_loc.update({
+                    "chapter_slug": chapter.get("slug"),
+                    "chapter_title": chapter.get("title"),
+                    "chapter_number": chapter.get("number"),
+                })
+                # Build per-paragraph article lookup for chapter-direct paragraphs.
+                article_lookup: dict[int, dict] = {}
+                for art in chapter.get("articles", []):
+                    for n in art.get("paragraphs", []):
+                        article_lookup[n] = art
+                added_via_articles: set[int] = set()
+                for art in chapter.get("articles", []):
+                    add_paragraphs(art.get("paragraphs", []), ch_loc, article=art)
+                    added_via_articles.update(art.get("paragraphs", []))
+                # Add any chapter.paragraphs that weren't covered by articles.
+                remaining = [n for n in chapter.get("paragraphs", []) if n not in added_via_articles]
+                add_paragraphs(remaining, ch_loc)
+
     return out
 
 
@@ -1037,6 +1174,36 @@ DEFAULT_LEAKAGE_ALLOWLIST: set[str] = {
     # Orphan elisions before guillemets / quoted text. Belgian French reads
     # them as expected — hunspell just rejects standalone "qu'" or "'".
     "qu'", "'",
+    # Biblical, patristic, and historical proper nouns hunspell fr_FR misses.
+    "Amalécites", "Arius", "Barrabas", "Eli", "Elisabeth", "Élisabeth",
+    "Elisée", "Élisée", "Enosh", "Ephrem", "Éphrem", "Esaü", "Eunice",
+    "Jaïre", "Jessé", "Mambré", "Miryam", "Naïm", "Rébecca", "Sarepta",
+    "Syméon", "Tryphon", "Cédar", "Céphas", "Théotokos", "Theotokos",
+    "Bonaventure", "Cassien", "Césarie", "Fulgence", "Mélode", "Narek",
+    "Naz", "Neri", "Polycarpe", "Pélage", "Ruspe", "Samosate", "Flüe",
+    "Hallelou-Ya", "Pâque", "Pâques",
+    # Places.
+    "Laodicée", "Norwich", "Philippes",
+    # Source has them with apostrophe-attached capital that hunspell rejects.
+    "l'Athos", "l'Horeb", "l'Epouse", "l'Epoux", "l'Évangile",
+    "l'Epître", "l'Évênement", "l'Evénement", "l'incorruption", "d'Arimathie",
+    "L'Epoux", "L'Epouse", "L'Epître", "L'Evénement",
+    # French theological / niche vocabulary hunspell fr_FR doesn't ship.
+    "synaxe", "syndérèse", "philocalie", "tropaire", "tropaires",
+    "antichristique", "catéchuménale", "catéchètes", "déprécative",
+    "litanique", "sapientielle", "connaturalité", "postbaptismal",
+    "quadriforme", "protévangile", "Protévangile",
+    "possèderont", "considèrera", "succèderaient", "s'inspiré",
+    "lorsqu'est", "chérubinique",
+    # Source has these without their proper accent — TTS still pronounces them OK.
+    "Eternelle", "Etre", "Epouse", "Epoux",
+    # New phonetic outputs from apply_general_replacements.
+    "Ekklézia", "Ekkléziame", "Éiousse", "éiousse",
+    "Komissio", "Kodicisse", "Kanoniki", "Iouris", "Ponntifitchia",
+    "Créator", "Dominika", "Dominousse", "Ymnousse",
+    "Penntécostèsse", "Poulker", "Récolitour", "Sacrame",
+    "Salvatorisse", "Véni", "Vespérasse", "Isrælitika",
+    "Ordinatsio",
 }
 
 
