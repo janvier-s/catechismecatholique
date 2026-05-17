@@ -400,3 +400,29 @@ def is_en_bref(paragraph: dict) -> bool:
     inner = re.sub(r"^<span>", "", html)
     inner = re.sub(r"</span>$", "", inner).strip()
     return inner.startswith('<i class="typo_italic">') and inner.endswith("</i>")
+
+
+def _docref_idxs(body_html: str) -> set[str]:
+    return set(re.findall(r'docRef" data-idx="([^"]+)"', body_html))
+
+
+def match_citations(
+    citations: list[dict],
+    magisterial_refs: list[dict],
+    body_html: str,
+) -> list[tuple[dict, dict | None]]:
+    """Pair each citation with the most likely non-bible magisterial_ref.
+
+    Strategy: drop mrefs whose idx appears inline in the body (those are
+    footnotes, not citation sources). What remains is matched 1:1 with
+    citations[] in array order.
+    """
+    non_bible = [r for r in magisterial_refs if r["type"] not in ("bible", "bible_continuation")]
+    inline_idxs = _docref_idxs(body_html)
+    remaining = [r for r in non_bible if r["idx"] not in inline_idxs]
+    if len(remaining) < len(citations):
+        remaining = non_bible  # fall back to all non-bible refs
+    matched: list[tuple[dict, dict | None]] = []
+    for i, cit in enumerate(citations):
+        matched.append((cit, remaining[i] if i < len(remaining) else None))
+    return matched

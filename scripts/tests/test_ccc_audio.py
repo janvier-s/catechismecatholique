@@ -189,3 +189,38 @@ def test_is_en_bref_false_for_22_meta_paragraph():
         "number": 22,
         "text_html": '<span><i class="typo_italic">À la fin de chaque unité.</i></span>',
     })
+
+
+def test_match_citations_simple():
+    citations = [{"text_html": "<span>cit text</span>"}]
+    mrefs = [{"type": "patristic", "raw": "saint Augustin, confessiones 1:1", "idx": "a"}]
+    body_html = "<span>body</span>"
+    matched = ccc_audio.match_citations(citations, mrefs, body_html)
+    assert len(matched) == 1
+    cit, ref = matched[0]
+    assert cit == citations[0]
+    assert ref == mrefs[0]
+
+
+def test_match_citations_skips_inline_docrefs():
+    # If mref idx appears as data-idx in body, it's inline (footnote), not the citation's source.
+    citations = [{"text_html": "<span>cit text</span>"}]
+    mrefs = [
+        {"type": "magisterial", "raw": "DV 2", "idx": "a"},
+        {"type": "patristic", "raw": "adversus hæreses 3:20", "idx": "b"},
+    ]
+    body_html = 'see <sup class="srcRef docRef" data-idx="a">a</sup> here'
+    matched = ccc_audio.match_citations(citations, mrefs, body_html)
+    cit, ref = matched[0]
+    assert ref["idx"] == "b"
+
+
+def test_match_citations_excludes_bible_types():
+    citations = [{"text_html": "<span>cit text</span>"}]
+    mrefs = [
+        {"type": "bible", "raw": "Mt 5:1", "idx": "1"},
+        {"type": "patristic", "raw": "saint Paul", "idx": "a"},
+    ]
+    matched = ccc_audio.match_citations(citations, mrefs, "<span></span>")
+    cit, ref = matched[0]
+    assert ref["type"] == "patristic"
