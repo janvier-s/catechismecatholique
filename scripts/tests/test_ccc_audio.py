@@ -40,3 +40,25 @@ def test_should_spell_paragraph_number():
     assert ccc_audio.should_spell_paragraph_number(91)
     assert not ccc_audio.should_spell_paragraph_number(27)
     assert not ccc_audio.should_spell_paragraph_number(100)  # 0 in tens
+
+
+def test_roman_to_arabic_basic():
+    assert ccc_audio.roman_to_arabic("I") == 1
+    assert ccc_audio.roman_to_arabic("IV") == 4
+    assert ccc_audio.roman_to_arabic("IX") == 9
+    assert ccc_audio.roman_to_arabic("XII") == 12
+    assert ccc_audio.roman_to_arabic("MMXXVI") == 2026
+
+
+def test_number_to_french_ordinal():
+    assert ccc_audio.number_to_french_ordinal(1) == "premier"
+    assert ccc_audio.number_to_french_ordinal(2) == "deuxième"
+    assert ccc_audio.number_to_french_ordinal(5) == "cinquième"
+    assert ccc_audio.number_to_french_ordinal(9) == "neuvième"
+    assert ccc_audio.number_to_french_ordinal(21) == "vingt-et-unième"
+
+
+def test_convert_roman_numerals_in_text():
+    assert ccc_audio.convert_roman_numerals("Au IIe siècle") == "Au deuxième siècle"
+    assert ccc_audio.convert_roman_numerals("Vatican II") == "Vatican 2"
+    assert ccc_audio.convert_roman_numerals("voir I)") == "voir 1)"

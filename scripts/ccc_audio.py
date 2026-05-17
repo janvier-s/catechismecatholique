@@ -71,3 +71,59 @@ def should_spell_paragraph_number(n: int) -> bool:
     """
     tens = (n % 100) // 10
     return tens in (7, 8, 9)
+
+
+import re
+
+_ROMAN_VALUES = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+_ROMAN_NUM_RE = re.compile(r"\b[IVXLCDM]{2,}\b")
+_ROMAN_ENUM_RE = re.compile(r"\b([IVX])([.)])")
+_ROMAN_ORD_RE = re.compile(r"\b([IVXLCDM]{2,})e\b")
+_ROMAN_SIECLE_RE = re.compile(r"\b([IVXLCDM]+)e?\s+siècle\b", re.IGNORECASE)
+
+
+def roman_to_arabic(roman: str) -> int:
+    total = 0
+    prev = 0
+    for c in reversed(roman.upper()):
+        v = _ROMAN_VALUES.get(c, 0)
+        if v < prev:
+            total -= v
+        else:
+            total += v
+        prev = v
+    return total
+
+
+def number_to_french_ordinal(n: int) -> str:
+    if n == 1:
+        return "premier"
+    card = number_to_french(n)
+    if n % 10 == 1 and n != 11:
+        return card + "ième"
+    if card.endswith("cinq"):
+        return card[:-4] + "cinquième"
+    if card.endswith("neuf"):
+        return card[:-4] + "neuvième"
+    if card.endswith("e"):
+        card = card[:-1]
+    card = card.rstrip("s")
+    return card + "ième"
+
+
+def convert_roman_numerals(text: str) -> str:
+    """Replace Roman numerals in text with Arabic / French ordinals.
+
+    "IIe siècle" → "deuxième siècle"
+    "Vatican II"  → "Vatican 2"
+    Single Roman in "I)" enumeration → "1)"
+    """
+    text = _ROMAN_SIECLE_RE.sub(
+        lambda m: f"{number_to_french_ordinal(roman_to_arabic(m.group(1)))} siècle", text
+    )
+    text = _ROMAN_ORD_RE.sub(
+        lambda m: number_to_french_ordinal(roman_to_arabic(m.group(1))), text
+    )
+    text = _ROMAN_NUM_RE.sub(lambda m: str(roman_to_arabic(m.group(0))), text)
+    text = _ROMAN_ENUM_RE.sub(lambda m: str(roman_to_arabic(m.group(1))) + m.group(2), text)
+    return text
