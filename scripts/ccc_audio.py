@@ -656,3 +656,88 @@ def match_citations(
     for i, cit in enumerate(citations):
         matched.append((cit, remaining[i] if i < len(remaining) else None))
     return matched
+
+
+def _build_body_text(paragraph: dict) -> str:
+    """Run the full body-cleaning pipeline on a source paragraph."""
+    text = clean_text(paragraph["text_html"])
+    text = fix_saint_liaison(text)
+    text = apply_text_replace(text, paragraph["number"])
+    text = apply_general_replacements(text)
+    text = strip_annotations(text)
+    text = expand_bible_refs(text)
+    text = convert_roman_numerals(text)
+    text = strip_ref_parens(text)
+    return text
+
+
+def _build_citation_text(citation: dict, paragraph_number: int) -> tuple[str, str | None]:
+    text = clean_text(citation["text_html"])
+    text = fix_saint_liaison(text)
+    text = apply_text_replace(text, paragraph_number)
+    text = apply_general_replacements(text)
+    text = strip_annotations(text)
+    text = expand_bible_refs(text)
+    text = convert_roman_numerals(text)
+    text, trailing = strip_trailing_parens(text, paragraph_number)
+    return text, trailing
+
+
+def build_paragraph_entry(
+    seq: int,
+    paragraph: dict,
+    location: dict,
+    occurrence_index: int = 1,
+) -> tuple[dict, list[dict]]:
+    """Build one paragraph entry + audit rows for its citations.
+
+    `occurrence_index` only matters when the same paragraph number appears
+    twice in the manifest (e.g. data quirks); for the canonical first
+    occurrence pass 1.
+    """
+    n = paragraph["number"]
+    suffix = f"_{occurrence_index}" if occurrence_index > 1 else ""
+    file_number = f"{n:04d}{suffix}"
+
+    announce_n = number_to_french(n) if should_spell_paragraph_number(n) else str(n)
+    announce = f"Paragraphe {announce_n}."
+
+    segments: list[dict] = [
+        {"voice": "gerard", "text": announce, "targets": ["v1"]},
+    ]
+
+    body = _build_body_text(paragraph)
+    if body:
+        segments.append({"voice": "remy", "text": body, "targets": ["v1", "v2"]})
+
+    audit_rows: list[dict] = []
+    citations = paragraph.get("citations", [])
+    mrefs = paragraph.get("magisterial_refs", [])
+    matched = match_citations(citations, mrefs, paragraph["text_html"])
+
+    for i, (cit, ref) in enumerate(matched):
+        cit_text, trailing = _build_citation_text(cit, n)
+        intro, tier = derive_citation_intro(ref, body_text=body)
+        segments.append({"voice": "gerard", "text": intro, "targets": ["v1", "v2"]})
+        segments.append({"voice": "fabrice", "text": cit_text, "targets": ["v1", "v2"]})
+        if trailing:
+            segments.append({"voice": "gerard", "text": trailing + ".", "targets": ["v1", "v2"]})
+        audit_rows.append({
+            "paragraph": n,
+            "citation_index": i,
+            "mref_type": ref.get("type") if ref else "",
+            "mref_idx": ref.get("idx") if ref else "",
+            "mref_raw": ref.get("raw") if ref else "",
+            "tier_used": tier,
+            "derived_intro": intro,
+        })
+
+    entry = {
+        "seq": seq,
+        "kind": "paragraph",
+        "number": n,
+        "file_number": file_number,
+        "location": location,
+        "segments": segments,
+    }
+    return entry, audit_rows

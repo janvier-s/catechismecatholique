@@ -348,3 +348,71 @@ def test_tier2_falls_to_tier3_when_no_saint_in_body():
     )
     assert intro == "Citation patristique :"
     assert tier == 3
+
+
+def test_build_paragraph_entry_no_citation():
+    paragraph = {
+        "number": 1,
+        "text_html": "<span>Dieu, infiniment Parfait.</span>",
+        "citations": [],
+        "magisterial_refs": [],
+    }
+    location = {"chapter_title": "Prologue"}
+    entry, _audit = ccc_audio.build_paragraph_entry(seq=3, paragraph=paragraph, location=location)
+    assert entry["seq"] == 3
+    assert entry["kind"] == "paragraph"
+    assert entry["number"] == 1
+    assert entry["file_number"] == "0001"
+    segments = entry["segments"]
+    assert segments[0] == {"voice": "gerard", "text": "Paragraphe 1.", "targets": ["v1"]}
+    assert segments[1]["voice"] == "remy"
+    assert "Dieu, infiniment Parfait" in segments[1]["text"]
+    assert segments[1]["targets"] == ["v1", "v2"]
+
+
+def test_build_paragraph_entry_75_spelled_out():
+    paragraph = {
+        "number": 75, "text_html": "<span>Texte.</span>",
+        "citations": [], "magisterial_refs": [],
+    }
+    entry, _ = ccc_audio.build_paragraph_entry(seq=80, paragraph=paragraph, location={})
+    assert entry["segments"][0]["text"] == "Paragraphe soixante-quinze."
+
+
+def test_build_paragraph_entry_with_citation():
+    paragraph = {
+        "number": 30,
+        "text_html": "<span>Saint Augustin écrit alors :</span>",
+        "citations": [{"text_html": "<span>Tu es grand, Seigneur.</span>"}],
+        "magisterial_refs": [{"type": "patristic", "raw": "saint Augustin, confessiones 1:1", "idx": "a"}],
+    }
+    entry, audit = ccc_audio.build_paragraph_entry(seq=40, paragraph=paragraph, location={})
+    voices = [s["voice"] for s in entry["segments"]]
+    assert voices == ["gerard", "remy", "gerard", "fabrice"]
+    assert entry["segments"][2]["text"] == "Citation de sainte Augustin :"
+    assert entry["segments"][3]["text"] == "Tu es grand, Seigneur."
+    assert len(audit) == 1
+    assert audit[0]["paragraph"] == 30
+    assert audit[0]["tier_used"] == 1
+
+
+def test_build_paragraph_entry_empty_body_skipped():
+    # §21 / §118 case
+    paragraph = {
+        "number": 21, "text_html": "<span></span>",
+        "citations": [{"text_html": "<span>Citation only.</span>"}],
+        "magisterial_refs": [{"type": "patristic", "raw": "saint Augustin", "idx": "a"}],
+    }
+    entry, _ = ccc_audio.build_paragraph_entry(seq=25, paragraph=paragraph, location={})
+    voices = [s["voice"] for s in entry["segments"]]
+    assert voices == ["gerard", "gerard", "fabrice"]  # no remy body
+
+
+def test_build_paragraph_entry_dup_number_suffix():
+    paragraph = {
+        "number": 100, "text_html": "<span>X.</span>",
+        "citations": [], "magisterial_refs": [],
+    }
+    # Caller provides occurrence_index for duplicates.
+    entry, _ = ccc_audio.build_paragraph_entry(seq=120, paragraph=paragraph, location={}, occurrence_index=2)
+    assert entry["file_number"] == "0100_2"
