@@ -98,3 +98,34 @@ def probe_duration_ms(path: Path) -> int:
     """Return MP3 duration in milliseconds via mutagen."""
     audio = MP3(str(path))
     return int(audio.info.length * 1000)
+
+
+from mutagen.id3 import ID3, TIT2, TALB, TPE1, TRCK, TCON, COMM, ID3NoHeaderError
+
+
+def tag_mp3(
+    path: Path,
+    *,
+    title: str,
+    album: str,
+    track: int,
+    comment: str = "",
+) -> None:
+    try:
+        tags = ID3(str(path))
+    except ID3NoHeaderError:
+        tags = ID3()
+    tags.delall("TIT2")
+    tags.delall("TALB")
+    tags.delall("TPE1")
+    tags.delall("TRCK")
+    tags.delall("TCON")
+    tags.delall("COMM")
+    tags.add(TIT2(encoding=3, text=title))
+    tags.add(TALB(encoding=3, text=album))
+    tags.add(TPE1(encoding=3, text="Catechisme de l'Eglise catholique"))
+    tags.add(TRCK(encoding=3, text=f"{track:04d}"))
+    tags.add(TCON(encoding=3, text="Speech"))
+    if comment:
+        tags.add(COMM(encoding=3, lang="fra", desc="", text=comment))
+    tags.save(str(path))

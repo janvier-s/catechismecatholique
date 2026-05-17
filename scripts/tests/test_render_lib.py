@@ -92,3 +92,24 @@ def test_probe_duration_ms_returns_int(tmp_path):
     ms = rlib.probe_duration_ms(f)
     assert isinstance(ms, int)
     assert 200 < ms < 400
+
+
+def test_tag_mp3_writes_id3(tmp_path):
+    if shutil.which("ffmpeg") is None:
+        import pytest
+        pytest.skip("ffmpeg not installed")
+    f = tmp_path / "tag.mp3"
+    rlib.generate_silence(300, f)
+    rlib.tag_mp3(
+        f,
+        title="CCC §1",
+        album="L'homme est capable de Dieu",
+        track=3,
+        comment="Dieu, infiniment Parfait.",
+    )
+    from mutagen.id3 import ID3
+    tags = ID3(str(f))
+    assert str(tags["TIT2"]) == "CCC §1"
+    assert str(tags["TALB"]) == "L'homme est capable de Dieu"
+    assert str(tags["TRCK"]) == "0003"
+    assert "Dieu" in str(tags["COMM::fra"])
