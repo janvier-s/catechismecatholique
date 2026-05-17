@@ -67,7 +67,7 @@
 		// variants so the accent colour applies consistently across all entries.
 		return raw.replace(
 			/<strong>((?:Ce qu(?:&#39;|')il faut retenir|R[eé]sum[eé]\s+Cl[eé]|L(?:&#39;|')essentiel|En bref|En r[eé]sum[eé]|Le (?:point|message)\s+(?:essentiel|cl[eé]))\s*:)/gi,
-			'<strong class="retenir">$1'
+			'<strong><span class="retenir">$1</span>'
 		);
 	});
 </script>
@@ -211,7 +211,7 @@
 		font-weight: 600;
 		color: var(--color-heading);
 	}
-	.ia-body :global(strong.retenir) {
+	.ia-body :global(.retenir) {
 		color: var(--color-accent);
 	}
 

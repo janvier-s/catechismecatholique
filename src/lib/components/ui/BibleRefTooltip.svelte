@@ -23,6 +23,7 @@
 	let isCec = $state(false);
 	let visible = $state(false);
 	let anchorEl = $state<HTMLElement | null>(null);
+	let tooltipEl = $state<HTMLDivElement | undefined>();
 
 	let hideTimer: ReturnType<typeof setTimeout> | null = null;
 	let showTimer: ReturnType<typeof setTimeout> | null = null;
@@ -220,12 +221,25 @@
 				loading = false;
 			});
 	});
+
+	$effect(() => {
+		void verseText;
+		void verseHtml;
+		void loading;
+		if (!tooltipEl) return;
+		requestAnimationFrame(() => {
+			if (!tooltipEl) return;
+			tooltipEl.style.overflowY =
+				tooltipEl.scrollHeight > tooltipEl.clientHeight + 2 ? 'auto' : 'hidden';
+		});
+	});
 </script>
 
 <svelte:window bind:innerWidth={windowW} bind:innerHeight={windowH} />
 
 {#if visible && (loading || verseText || verseHtml)}
 	<div
+		bind:this={tooltipEl}
 		class="tooltip"
 		class:flip-below={flipBelow}
 		style="left:{left}px;top:{y}px;max-height:{maxH};"
@@ -275,28 +289,13 @@
 		position: fixed;
 		z-index: 9000;
 		transform: translateX(-50%) translateY(-100%);
-		width: 300px;
-		overflow-y: auto;
+		width: 380px;
+		overflow-y: hidden;
 		background: var(--color-panel);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 20%, transparent);
 		border-radius: 8px;
-		padding: 0 0 12px;
+		padding: 0 0 20px;
 		pointer-events: auto;
-	}
-
-	/* Styled scrollbar */
-	.tooltip::-webkit-scrollbar {
-		width: 4px;
-	}
-	.tooltip::-webkit-scrollbar-track {
-		background: transparent;
-	}
-	.tooltip::-webkit-scrollbar-thumb {
-		background: color-mix(in srgb, var(--color-fg) 20%, transparent);
-		border-radius: 2px;
-	}
-	.tooltip::-webkit-scrollbar-thumb:hover {
-		background: color-mix(in srgb, var(--color-fg) 35%, transparent);
 	}
 
 	/* Invisible bridge so mouse can travel from anchor to tooltip */
@@ -331,7 +330,7 @@
 		position: sticky;
 		top: 2px;
 		background: var(--color-panel);
-		padding: 4px 12px 8px;
+		padding: 4px 20px 8px;
 	}
 	.header:has(.tt-num) {
 		padding: 4px 0 8px;
@@ -367,7 +366,7 @@
 		font-style: italic;
 		line-height: 1.65;
 		color: var(--color-fg);
-		padding: 0 12px;
+		padding: 0 20px;
 		margin: 0;
 		opacity: 0.9;
 	}
@@ -383,7 +382,7 @@
 		font-size: 14px;
 		line-height: 1.6;
 		color: var(--color-fg);
-		padding: 0 12px;
+		padding: 0 20px;
 		opacity: 0.92;
 	}
 	.fn-body :global(p) {

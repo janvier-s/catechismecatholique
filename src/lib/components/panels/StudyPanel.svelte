@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { get } from 'svelte/store';
-	import { fly } from 'svelte/transition';
+	import { fly, fade } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 
 	// Custom mobile slide-up: translateY from 100% to 0 so the sheet always
@@ -166,8 +166,9 @@
 		}
 		if (ctx?.kind !== 'paragraph') return [];
 
-		// While data is loading, render an optimistic strip so the tabs don't
-		// flash. Once `dataReady` flips true, gates below filter out empties.
+		// While data is loading, render the full optimistic strip so the active
+		// tab is never snapped away (En Bref, Compendium etc. stay selected across
+		// paragraph navigation). Once `dataReady` flips, gates filter out empties.
 		const optimistic = !dataReady;
 		const hasBible = optimistic || (paragraph?.bible_refs.length ?? 0) > 0;
 		const hasCrossRefs = optimistic || (paragraph?.cross_refs.length ?? 0) > 0;
@@ -424,59 +425,60 @@
 				active={(activeGroup?.id ?? null) as PanelTab | null}
 				onSelect={(id) => selectGroup(id)}
 			/>
-			<!-- Sub-toggle always in DOM to prevent layout shift; visibility toggled via CSS -->
 			<div
 				class="sub-toggle"
 				class:sub-toggle--visible={activeGroup && activeGroup.children.length > 1}
 				role="tablist"
 				aria-label="Sous-onglets"
 			>
-				{#if activeGroup && activeGroup.children.length > 1}
-					{#each activeGroup.children as c (c.id)}
-						<button
-							type="button"
-							role="tab"
-							aria-selected={$studyPanel.activeTab === c.id}
-							class="sub-toggle-btn"
-							class:sub-toggle-active={$studyPanel.activeTab === c.id}
-							onclick={() => selectSubTab(c.id)}
-						>
-							{c.label}
-						</button>
-					{/each}
-				{/if}
+				{#each activeGroup && activeGroup.children.length > 1 ? activeGroup.children : [] as c (c.id)}
+					<button
+						type="button"
+						role="tab"
+						aria-selected={$studyPanel.activeTab === c.id}
+						class="sub-toggle-btn"
+						class:sub-toggle-active={$studyPanel.activeTab === c.id}
+						onclick={() => selectSubTab(c.id)}
+					>
+						{c.label}
+					</button>
+				{/each}
 			</div>
 			<div class="flex-1 overflow-y-auto p-4 styled-scroll">
-				{#if $studyPanel.activeTab === 'bible'}
-					<TabBibleRefs />
-				{:else if $studyPanel.activeTab === 'cross-refs'}
-					<TabCrossRefs />
-				{:else if $studyPanel.activeTab === 'cited-by'}
-					<TabCitedBy />
-				{:else if $studyPanel.activeTab === 'en-bref'}
-					<TabEnBref />
-				{:else if $studyPanel.activeTab === 'sources'}
-					<TabSources />
-				{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
-					<TabThemes />
-				{:else if $studyPanel.activeTab === 'concordance'}
-					<TabConcordance />
-				{:else if $studyPanel.activeTab === 'bible-verse'}
-					<TabBibleVerse />
-				{:else if $studyPanel.activeTab === 'compendium'}
-					<TabCompendium />
-				{:else if $studyPanel.activeTab === 'cdse-citers'}
-					<TabCdseCiters />
-				{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
-					<TabIA paragraphNumber={$studyPanel.context.paragraph} />
-				{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
-					<TabTrentNotes />
-				{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
-					<TabDenzingerRefs
-						n={$studyPanel.context.n}
-						mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
-					/>
-				{/if}
+				{#key $studyPanel.activeTab}
+					<div in:fade={{ duration: 120 }}>
+						{#if $studyPanel.activeTab === 'bible'}
+							<TabBibleRefs />
+						{:else if $studyPanel.activeTab === 'cross-refs'}
+							<TabCrossRefs />
+						{:else if $studyPanel.activeTab === 'cited-by'}
+							<TabCitedBy />
+						{:else if $studyPanel.activeTab === 'en-bref'}
+							<TabEnBref />
+						{:else if $studyPanel.activeTab === 'sources'}
+							<TabSources />
+						{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
+							<TabThemes />
+						{:else if $studyPanel.activeTab === 'concordance'}
+							<TabConcordance />
+						{:else if $studyPanel.activeTab === 'bible-verse'}
+							<TabBibleVerse />
+						{:else if $studyPanel.activeTab === 'compendium'}
+							<TabCompendium />
+						{:else if $studyPanel.activeTab === 'cdse-citers'}
+							<TabCdseCiters />
+						{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
+							<TabIA paragraphNumber={$studyPanel.context.paragraph} />
+						{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
+							<TabTrentNotes />
+						{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
+							<TabDenzingerRefs
+								n={$studyPanel.context.n}
+								mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
+							/>
+						{/if}
+					</div>
+				{/key}
 			</div>
 		{/if}
 	</div>
@@ -519,60 +521,62 @@
 					active={(activeGroup?.id ?? null) as PanelTab | null}
 					onSelect={(id) => selectGroup(id)}
 				/>
-				<!-- Sub-toggle is always in the DOM so it never causes a layout shift when
-					 it appears or disappears. Visibility is toggled via CSS. -->
 				<div
 					class="sub-toggle"
 					class:sub-toggle--visible={activeGroup && activeGroup.children.length > 1}
 					role="tablist"
 					aria-label="Sous-onglets"
 				>
-					{#if activeGroup && activeGroup.children.length > 1}
-						{#each activeGroup.children as c (c.id)}
-							<button
-								type="button"
-								role="tab"
-								aria-selected={$studyPanel.activeTab === c.id}
-								class="sub-toggle-btn"
-								class:sub-toggle-active={$studyPanel.activeTab === c.id}
-								onclick={() => selectSubTab(c.id)}
-							>
-								{c.label}
-							</button>
-						{/each}
-					{/if}
+					{#each activeGroup && activeGroup.children.length > 1 ? activeGroup.children : [] as c (c.id)}
+						<button
+							type="button"
+							role="tab"
+							aria-selected={$studyPanel.activeTab === c.id}
+							class="sub-toggle-btn"
+							class:sub-toggle-active={$studyPanel.activeTab === c.id}
+							onclick={() => selectSubTab(c.id)}
+						>
+							{c.label}
+						</button>
+					{/each}
 				</div>
 				<div class="flex-1 overflow-y-auto p-4 styled-scroll">
-					{#if $studyPanel.activeTab === 'bible'}
-						<TabBibleRefs />
-					{:else if $studyPanel.activeTab === 'cross-refs'}
-						<TabCrossRefs />
-					{:else if $studyPanel.activeTab === 'cited-by'}
-						<TabCitedBy />
-					{:else if $studyPanel.activeTab === 'en-bref'}
-						<TabEnBref />
-					{:else if $studyPanel.activeTab === 'sources'}
-						<TabSources />
-					{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
-						<TabThemes />
-					{:else if $studyPanel.activeTab === 'concordance'}
-						<TabConcordance />
-					{:else if $studyPanel.activeTab === 'bible-verse'}
-						<TabBibleVerse />
-					{:else if $studyPanel.activeTab === 'compendium'}
-						<TabCompendium />
-					{:else if $studyPanel.activeTab === 'cdse-citers'}
-						<TabCdseCiters />
-					{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
-						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
-					{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
-						<TabTrentNotes />
-					{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
-						<TabDenzingerRefs
-							n={$studyPanel.context.n}
-							mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
-						/>
-					{/if}
+					{#key $studyPanel.activeTab}
+						<div in:fade={{ duration: 120 }}>
+							{#if $studyPanel.activeTab === 'bible'}
+								<TabBibleRefs />
+							{:else if $studyPanel.activeTab === 'cross-refs'}
+								<TabCrossRefs />
+							{:else if $studyPanel.activeTab === 'cited-by'}
+								<TabCitedBy />
+							{:else if $studyPanel.activeTab === 'en-bref'}
+								<TabEnBref />
+							{:else if $studyPanel.activeTab === 'sources'}
+								<TabSources />
+							{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
+								<TabThemes />
+							{:else if $studyPanel.activeTab === 'concordance'}
+								<TabConcordance />
+							{:else if $studyPanel.activeTab === 'bible-verse'}
+								<TabBibleVerse />
+							{:else if $studyPanel.activeTab === 'compendium'}
+								<TabCompendium />
+							{:else if $studyPanel.activeTab === 'cdse-citers'}
+								<TabCdseCiters />
+							{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
+								<TabIA paragraphNumber={$studyPanel.context.paragraph} />
+							{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
+								<TabTrentNotes />
+							{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
+								<TabDenzingerRefs
+									n={$studyPanel.context.n}
+									mode={$studyPanel.activeTab === 'denzinger-cross-refs'
+										? 'cross-refs'
+										: 'cited-by'}
+								/>
+							{/if}
+						</div>
+					{/key}
 				</div>
 			{/if}
 		</PanelShell>
@@ -583,19 +587,20 @@
 	.sub-toggle {
 		display: flex;
 		gap: 4px;
-		padding: 6px 10px;
+		padding: 0 10px;
 		border-bottom: 1px solid var(--color-border);
 		background: color-mix(in srgb, var(--color-panel) 92%, var(--color-fg) 8%);
 		font-family: var(--font-ui);
 		font-size: 11px;
-		/* Always in DOM to avoid layout shift; hidden when not needed */
-		min-height: 37px;
-		visibility: hidden;
-		pointer-events: none;
+		overflow: hidden;
+		max-height: 0;
+		transition:
+			max-height 150ms ease,
+			padding 150ms ease;
 	}
 	.sub-toggle--visible {
-		visibility: visible;
-		pointer-events: auto;
+		max-height: 60px;
+		padding: 6px 10px;
 	}
 	.sub-toggle-btn {
 		flex: 1 0 auto;

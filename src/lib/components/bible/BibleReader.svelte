@@ -38,7 +38,7 @@
 		return m;
 	});
 
-	let dimNonCited = $state(false);
+	let studyMode = $state(true);
 
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
 	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
@@ -86,7 +86,7 @@
 		{/if}
 
 		{#if totalCited > 0}
-			<ChapterFilterBar bind:dimNonCited citedCount={totalCited} />
+			<ChapterFilterBar bind:studyMode citedCount={totalCited} />
 		{/if}
 
 		<ol class="list-none space-y-3 max-md:space-y-0">
@@ -120,42 +120,42 @@
 				{/each}
 
 				{@const active = isVerseActive(v.v)}
-				<li id="v{v.v}" class="transition-opacity" class:dim={dimNonCited && c === 0}>
-					{#if c > 0}
-						<button
-							type="button"
-							class="verse-row verse-row--cited flex gap-3 w-full text-left rounded-md px-2 -mx-2 py-1"
-							class:is-active={active}
-							onclick={() =>
-								openPanel(
-									{ kind: 'verse', verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v.v },
-									'bible-verse'
-								)}
-							aria-label="Verset {v.v} — {c} {c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme"
+				{@const isClickable = c > 0 && studyMode}
+				<li id="v{v.v}" class="transition-opacity">
+					<svelte:element
+						this={isClickable ? 'button' : 'div'}
+						class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1"
+						class:is-active={active}
+						type={isClickable ? 'button' : undefined}
+						onclick={isClickable
+							? () =>
+									openPanel(
+										{ kind: 'verse', verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v.v },
+										'bible-verse'
+									)
+							: undefined}
+						aria-label={isClickable
+							? `Verset ${v.v} — ${c} ${c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme`
+							: undefined}
+					>
+						<span
+							class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
 						>
+							{v.v}
+						</span>
+						<p class="verse-text font-body flex-1" class:verse-text--cited={isClickable}>
+							{v.text}
+						</p>
+						{#if studyMode}
 							<span
-								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+								class="verse-cec-count max-md:hidden"
+								class:count-hidden={c === 0}
+								aria-hidden="true"
 							>
-								{v.v}
-							</span>
-							<p class="verse-text verse-text--cited font-body flex-1">{v.text}</p>
-							<span class="verse-cec-count max-md:hidden" aria-hidden="true">
 								{c}&nbsp;{c === 1 ? 'paragraphe' : 'paragraphes'}
 							</span>
-						</button>
-					{:else}
-						<div
-							class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1"
-							class:is-active={active}
-						>
-							<span
-								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
-							>
-								{v.v}
-							</span>
-							<p class="verse-text font-body flex-1">{v.text}</p>
-						</div>
-					{/if}
+						{/if}
+					</svelte:element>
 				</li>
 			{/each}
 		</ol>
@@ -179,9 +179,6 @@
 </main>
 
 <style>
-	.dim {
-		opacity: 0.35;
-	}
 	.verse-text {
 		font-size: var(--reader-font-size, 17px);
 		line-height: var(--reader-line-height, 1.7);
@@ -193,41 +190,41 @@
 	}
 	.verse-text--cited {
 		text-decoration: underline dotted;
-		text-decoration-color: currentColor;
+		text-decoration-color: var(--color-accent);
 		text-underline-offset: 4px;
 		text-decoration-thickness: 1px;
 	}
 	.verse-cec-count {
 		font-family: var(--font-ui);
-		font-size: 0.65rem;
+		font-size: 0.75rem;
 		font-weight: 500;
 		color: var(--color-accent);
 		white-space: nowrap;
 		align-self: center;
 		flex-shrink: 0;
-		padding-left: 0.5rem;
+		width: 6.5rem;
 		text-align: right;
+	}
+	.count-hidden {
+		visibility: hidden;
 	}
 	.verse-row {
 		transition-duration: 150ms;
 	}
-	/* Reset button appearance for cited verse rows */
 	button.verse-row {
 		appearance: none;
 		border: none;
 		font: inherit;
 		cursor: pointer;
 		align-items: baseline;
+		width: 100%;
+		text-align: left;
 	}
 	.verse-row:hover {
 		background-color: color-mix(in srgb, var(--color-accent) 5%, transparent);
 	}
 	.verse-row.is-active {
 		background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
-	}
-	/* When the parent <li> is dimmed, hover should still feel responsive. */
-	:global(.dim) .verse-row:hover {
-		background-color: color-mix(in srgb, var(--color-accent) 4%, transparent);
 	}
 	.verse-row:focus-visible {
 		outline: 2px solid var(--color-accent);

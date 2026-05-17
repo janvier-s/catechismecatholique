@@ -416,3 +416,31 @@ def test_build_paragraph_entry_dup_number_suffix():
     # Caller provides occurrence_index for duplicates.
     entry, _ = ccc_audio.build_paragraph_entry(seq=120, paragraph=paragraph, location={}, occurrence_index=2)
     assert entry["file_number"] == "0100_2"
+
+
+def test_build_en_bref_combined_entry():
+    paragraphs = [
+        {"number": 44, "text_html": '<span><i class="typo_italic">Premier point.</i></span>',
+         "citations": [], "magisterial_refs": []},
+        {"number": 45, "text_html": '<span><i class="typo_italic">Deuxième point.</i></span>',
+         "citations": [], "magisterial_refs": []},
+    ]
+    location = {"chapter_title": "Test", "chapter_slug": "test-chap"}
+    entry = ccc_audio.build_en_bref_combined_entry(
+        seq=300,
+        chapter_slug="test-chap",
+        en_bref_paragraphs=paragraphs,
+        location=location,
+    )
+    assert entry["kind"] == "en_bref_combined"
+    assert entry["chapter_slug"] == "test-chap"
+    assert entry["file_number"] == "eb_test-chap"
+    assert entry["paragraph_range"] == [44, 45]
+    segments = entry["segments"]
+    assert segments[0] == {"voice": "gerard", "text": "En bref.", "targets": ["v1"]}
+    assert segments[1]["voice"] == "remy"
+    assert "Premier point" in segments[1]["text"]
+    assert segments[2]["voice"] == "remy"
+    assert "Deuxième point" in segments[2]["text"]
+    # All segments V1-only.
+    assert all(s["targets"] == ["v1"] for s in segments)

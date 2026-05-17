@@ -2,6 +2,7 @@
 	import Self from './SidebarItem.svelte';
 	import { itemMatches } from './sidebarMatch';
 	import { frenchPunct } from '$lib/utils/typography';
+	import { page } from '$app/state';
 
 	type Item = {
 		title: string;
@@ -75,6 +76,19 @@
 	);
 	const isActive = $derived((isPrefixMatch || isHashMatch) && !isAncestor);
 
+	function handleClick(e: MouseEvent) {
+		const hashIdx = item.href.indexOf('#');
+		if (hashIdx < 0) return;
+		const itemPath = item.href.slice(0, hashIdx);
+		if (!itemPath || itemPath !== page.url.pathname) return;
+		const hash = item.href.slice(hashIdx + 1);
+		const target = document.getElementById(hash);
+		if (!target) return;
+		e.preventDefault();
+		target.scrollIntoView({ block: 'start', behavior: 'smooth' });
+		history.pushState(null, '', item.href);
+	}
+
 	let manualExpanded: boolean | null = $state(null);
 	// Auto-expand wins when the item or one of its descendants is the active
 	// route. Manual toggles only apply outside of that. Without this, a
@@ -103,6 +117,7 @@
 		{/if}
 		<a
 			href={item.href}
+			onclick={handleClick}
 			class="flex-1 py-1 px-1.5 rounded leading-snug hover:bg-accent/10 hover:text-accent"
 			class:is-active={isActive}
 			class:lvl-2={item.level === 2}

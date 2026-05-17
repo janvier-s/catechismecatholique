@@ -82,8 +82,9 @@ export function buildChapterFiles(
 		const prevFlat = g > 0 ? flat[g - 1]! : undefined;
 		const nextFlat = g + 1 < flat.length ? flat[g + 1]! : undefined;
 
+		const chapterParaSet = new Set(c.paragraphs);
 		const chapterEnBrefs = enBrefs
-			.filter((b) => b.parent_kind === 'chapter' && b.parent_slug === c.slug)
+			.filter((b) => b.parent_kind === 'chapter' && b.paragraphs.some((p) => chapterParaSet.has(p)))
 			.map((b) => ({ paragraphs: b.paragraphs }));
 
 		const chapter: Chapter = {

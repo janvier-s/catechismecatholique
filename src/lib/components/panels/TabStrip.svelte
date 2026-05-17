@@ -11,6 +11,8 @@
 	let scrollEl: HTMLDivElement | undefined = $state();
 	let canLeft = $state(false);
 	let canRight = $state(false);
+	let thumbRatio = $state(1);
+	let scrollRatio = $state(0);
 
 	function update() {
 		if (!scrollEl) return;
@@ -18,25 +20,20 @@
 		const hasOverflow = scrollWidth > clientWidth + 1;
 		canLeft = hasOverflow && scrollLeft > 1;
 		canRight = hasOverflow && scrollLeft + clientWidth < scrollWidth - 1;
+		thumbRatio = scrollWidth > 0 ? Math.min(1, clientWidth / scrollWidth) : 1;
+		scrollRatio = scrollWidth > clientWidth ? scrollLeft / (scrollWidth - clientWidth) : 0;
 	}
 
 	function nudge(dir: -1 | 1) {
 		if (!scrollEl) return;
 		const delta = dir * Math.round(scrollEl.clientWidth * 0.6);
-		// `scrollBy({ behavior: 'smooth' })` is flaky on iOS Safari · sometimes
-		// no-ops when triggered from a click handler. Assign scrollLeft
-		// directly as a hard fallback, then schedule a smooth re-snap.
 		const target = scrollEl.scrollLeft + delta;
 		scrollEl.scrollLeft = target;
-		// Try the smooth behaviour too in case the browser supports it; the
-		// hard assignment above already moved us if smooth bailed.
 		try {
 			scrollEl.scrollTo({ left: target, behavior: 'smooth' });
 		} catch {
 			/* ignore: older Safari throws on options bag */
 		}
-		// In case Safari ignored the scroll, refresh the chevron state on
-		// the next frame so the buttons disappear when we've reached the end.
 		requestAnimationFrame(update);
 	}
 
@@ -53,67 +50,90 @@
 		};
 	});
 
-	// When the active tab changes, scroll it into view if it's clipped.
+	// When the active tab or tab list changes, scroll the active tab into view
+	// and immediately re-check chevron/scrollbar state (scrollWidth may have
+	// changed when tabs were added or removed without the ResizeObserver firing).
 	$effect(() => {
 		void active;
 		void tabs;
 		queueMicrotask(() => {
 			if (!scrollEl) return;
 			const idx = tabs.findIndex((t) => t.id === active);
-			if (idx < 0) return;
-			const btn = scrollEl.children[idx] as HTMLElement | undefined;
-			btn?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+			if (idx >= 0) {
+				const btn = scrollEl.children[idx] as HTMLElement | undefined;
+				// Instant (no smooth) to avoid many scroll events during animation
+				// that would cause repeated state updates and visual flicker.
+				btn?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+			}
+			update();
 		});
 	});
 </script>
 
-<div class="strip">
-	<button
-		type="button"
-		class="chev chev-l"
-		class:chev-shown={canLeft}
-		aria-label="Onglets précédents"
-		tabindex={canLeft ? 0 : -1}
-		onclick={() => nudge(-1)}
-	>
-		‹
-	</button>
-	<div bind:this={scrollEl} class="track">
-		{#each tabs as tab (tab.id)}
-			<button
-				type="button"
-				class="tab"
-				class:tab-active={active === tab.id}
-				onclick={() => onSelect(tab.id)}
-			>
-				<span>{tab.label}</span>
-				{#if tab.iconHtml}
-					<span class="tab-icon" aria-hidden="true">{@html tab.iconHtml}</span>
-				{/if}
-			</button>
-		{/each}
+<div class="tab-wrap">
+	<div class="strip">
+		<button
+			type="button"
+			class="chev chev-l"
+			class:chev-shown={canLeft}
+			aria-label="Onglets précédents"
+			tabindex={canLeft ? 0 : -1}
+			onclick={() => nudge(-1)}
+		>
+			‹
+		</button>
+		<div bind:this={scrollEl} class="track">
+			{#each tabs as tab (tab.id)}
+				<button
+					type="button"
+					class="tab"
+					class:tab-active={active === tab.id}
+					onclick={() => onSelect(tab.id)}
+				>
+					<span>{tab.label}</span>
+					{#if tab.iconHtml}
+						<span class="tab-icon" aria-hidden="true">{@html tab.iconHtml}</span>
+					{/if}
+				</button>
+			{/each}
+		</div>
+		<button
+			type="button"
+			class="chev chev-r"
+			class:chev-shown={canRight}
+			aria-label="Onglets suivants"
+			tabindex={canRight ? 0 : -1}
+			onclick={() => nudge(1)}
+		>
+			›
+		</button>
 	</div>
-	<button
-		type="button"
-		class="chev chev-r"
-		class:chev-shown={canRight}
-		aria-label="Onglets suivants"
-		tabindex={canRight ? 0 : -1}
-		onclick={() => nudge(1)}
-	>
-		›
-	</button>
+
+	<!-- Scroll position indicator. Always in DOM (no {#if}) to avoid mount/
+	     unmount layout recalculations that cause tab-button flicker. Only
+	     visible on hover when there is actually overflow content. -->
+	<div class="bar-zone" class:bar-has-overflow={thumbRatio < 1} aria-hidden="true">
+		<div class="bar-track">
+			<div class="bar-thumb" style="left: calc({scrollRatio} * 39px)"></div>
+		</div>
+	</div>
 </div>
 
 <style>
+	.tab-wrap {
+		display: flex;
+		flex-direction: column;
+		font-family: var(--font-ui);
+		font-size: 12px;
+	}
+
 	.strip {
 		position: relative;
 		display: flex;
 		align-items: stretch;
 		border-bottom: 1px solid var(--color-border);
-		font-family: var(--font-ui);
-		font-size: 12px;
 	}
+
 	.track {
 		flex: 1;
 		display: flex;
@@ -125,15 +145,18 @@
 	.track::-webkit-scrollbar {
 		display: none;
 	}
+
 	.tab {
 		flex: 1 0 auto;
 		padding: 8px 12px;
 		white-space: nowrap;
-		color: inherit;
+		color: var(--color-fg);
 		background: transparent;
 		border: 0;
 		cursor: pointer;
-		transition: background-color 120ms ease;
+		transition:
+			background-color 120ms ease,
+			color 120ms ease;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -160,15 +183,14 @@
 	}
 
 	/* Chevrons sit on top of the track edges, full tab height, with a solid
-	   panel-colour background. They're hidden (display:none) until the track
-	   actually has overflow in that direction, so they don't sit on top of
-	   the rightmost tab when there's nothing to scroll to. */
+	   panel-colour background. They use opacity rather than display:none so
+	   any brief state change fades invisibly instead of flashing. */
 	.chev {
 		position: absolute;
 		top: 0;
 		bottom: 0;
 		width: 28px;
-		display: none;
+		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 18px;
@@ -178,8 +200,9 @@
 		border: 0;
 		cursor: pointer;
 		z-index: 2;
-		/* A 1px border on the inner edge keeps the chev visually distinct
-		   from the tabs scrolling underneath. */
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 120ms ease;
 	}
 	.chev-l {
 		left: 0;
@@ -190,10 +213,45 @@
 		border-left: 1px solid var(--color-border);
 	}
 	.chev-shown {
-		display: flex;
+		opacity: 1;
+		pointer-events: auto;
 	}
 	.chev:hover {
 		color: var(--color-accent);
 		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-panel));
+	}
+
+	/* Narrow centered scroll indicator sits below the tab strip row.
+	   Only shows on hover when there is overflow to scroll. */
+	.bar-zone {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 14px;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 200ms ease;
+	}
+	.tab-wrap:hover .bar-has-overflow {
+		opacity: 1;
+	}
+
+	.bar-track {
+		position: relative;
+		width: 56px;
+		height: 3px;
+		background: color-mix(in srgb, var(--color-fg) 12%, transparent);
+		border-radius: 2px;
+		overflow: hidden;
+	}
+
+	.bar-thumb {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 17px;
+		background: var(--color-accent);
+		border-radius: 2px;
+		opacity: 0.8;
 	}
 </style>

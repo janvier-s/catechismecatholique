@@ -741,3 +741,30 @@ def build_paragraph_entry(
         "segments": segments,
     }
     return entry, audit_rows
+
+
+def build_en_bref_combined_entry(
+    seq: int,
+    chapter_slug: str,
+    en_bref_paragraphs: list[dict],
+    location: dict,
+) -> dict:
+    """Build a single combined entry for a chapter's en bref points (V1 only)."""
+    segments: list[dict] = [
+        {"voice": "gerard", "text": "En bref.", "targets": ["v1"]},
+    ]
+    nums: list[int] = []
+    for p in en_bref_paragraphs:
+        nums.append(p["number"])
+        body = _build_body_text(p)
+        if body:
+            segments.append({"voice": "remy", "text": body, "targets": ["v1"]})
+    return {
+        "seq": seq,
+        "kind": "en_bref_combined",
+        "chapter_slug": chapter_slug,
+        "file_number": f"eb_{chapter_slug}",
+        "paragraph_range": [nums[0], nums[-1]] if nums else [],
+        "location": location,
+        "segments": segments,
+    }

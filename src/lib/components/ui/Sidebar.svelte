@@ -1508,7 +1508,7 @@
 -->
 <aside
 	class="sidebar-rail hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] bg-panel border-r border-border z-20 flex-none flex-col"
-	aria-hidden={!$sidebarOpen}
+	inert={!$sidebarOpen}
 >
 	<div class="flex items-center justify-between p-2 border-b border-border">
 		{#if sommaireHref}
