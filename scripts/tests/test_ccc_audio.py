@@ -444,3 +444,20 @@ def test_build_en_bref_combined_entry():
     assert "Deuxième point" in segments[2]["text"]
     # All segments V1-only.
     assert all(s["targets"] == ["v1"] for s in segments)
+
+
+from pathlib import Path
+
+FIXTURES = Path(__file__).parent / "fixtures"
+
+
+def test_load_corpus_walks_in_order():
+    corpus = ccc_audio.load_corpus(
+        chapters_full_dir=FIXTURES / "chapters-full",
+        paragraphs_dir=FIXTURES / "paragraphs",
+    )
+    assert len(corpus) == 2
+    p27, p28 = corpus
+    assert p27["paragraph"]["number"] == 27
+    assert p27["location"]["chapter_slug"] == "test-chapter"
+    assert p28["paragraph"]["number"] == 28

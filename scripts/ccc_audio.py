@@ -3,6 +3,8 @@
 See docs/superpowers/specs/2026-05-17-ccc-audio-design.md.
 """
 
+from pathlib import Path
+
 __version__ = "0.1.0"
 
 _UNITS = ["", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf",
