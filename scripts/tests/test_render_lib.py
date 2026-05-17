@@ -135,3 +135,47 @@ def test_render_entry_produces_mp3(tmp_path):
     rlib.render_entry(entry=entry, target="v1", out_path=out, jitter=state, gap_ms=200)
     assert out.exists()
     assert out.stat().st_size > 0
+
+
+def test_render_cli_v1_creates_files(tmp_path):
+    if shutil.which("ffmpeg") is None or shutil.which("edge-tts") is None:
+        import pytest
+        pytest.skip("ffmpeg or edge-tts not installed")
+    manifest = {
+        "version": 1,
+        "voices": rlib.VOICES,
+        "voice_opts": {},
+        "entries": [
+            {
+                "seq": 1, "kind": "paragraph", "number": 1, "file_number": "0001",
+                "location": {"chapter_title": "Test"},
+                "segments": [
+                    {"voice": "remy", "text": "Texte court.", "targets": ["v1", "v2"]},
+                ],
+            },
+        ],
+    }
+    manifest_path = tmp_path / "m.json"
+    import json
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    out_dir = tmp_path / "audio"
+    import subprocess
+    import sys
+    from pathlib import Path as _P
+    root = _P(__file__).resolve().parent.parent
+    result = subprocess.run(
+        [
+            sys.executable, str(root / "render-ccc-audio.py"),
+            "--target", "v1",
+            "--manifest", str(manifest_path),
+            "--out-dir", str(out_dir),
+            "--seed", "42",
+        ],
+        capture_output=True, text=True,
+    )
+    assert result.returncode == 0, result.stderr
+    assert (out_dir / "ccc_0001.mp3").exists()
+    assert (out_dir / "index.json").exists()
+    index = json.loads((out_dir / "index.json").read_text(encoding="utf-8"))
+    assert "1" in index["paragraphs"]
+    assert index["paragraphs"]["1"]["file"] == "ccc_0001.mp3"
