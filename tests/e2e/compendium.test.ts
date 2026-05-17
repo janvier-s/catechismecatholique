@@ -69,11 +69,11 @@ test.describe('Compendium', () => {
 		await page.goto('/cec/27');
 		// Click the §27 number to open the study panel.
 		await page.locator('button.number-col').first().click();
-		// The strip shows grouped tabs ("Citations" wraps Sources + Compendium).
-		// The group buttons are plain <button>s in TabStrip; the inner sub-toggle
-		// uses role="tab". Click into the Citations group first, then pick the
-		// Compendium sub-tab.
-		const citationsTab = page.getByRole('button', { name: 'Citations', exact: true }).first();
+		// The strip shows grouped tabs · the "Sources" group wraps Sources +
+		// Compendium sub-tabs. Group buttons are plain <button>s in TabStrip;
+		// the inner sub-toggle uses role="tab". Click into the Sources group
+		// first, then pick the Compendium sub-tab.
+		const citationsTab = page.getByRole('button', { name: 'Sources', exact: true }).first();
 		await expect(citationsTab).toBeVisible();
 		await citationsTab.click();
 		const compendiumTab = page.getByRole('tab', { name: 'Compendium', exact: true }).first();
