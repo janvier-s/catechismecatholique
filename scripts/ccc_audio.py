@@ -386,3 +386,17 @@ def strip_trailing_parens(text: str, paragraph_number: int) -> tuple[str, str | 
     if paragraph_number in KEEP_TRAILING_PAREN:
         return before + after, captured
     return before + after, None
+
+
+# Paragraphs that look italic-wrapped but are NOT en brefs.
+EN_BREF_EXCLUSIONS: set[int] = {22}
+
+
+def is_en_bref(paragraph: dict) -> bool:
+    """True when the paragraph's text_html is wholly wrapped in <i class="typo_italic">."""
+    if paragraph["number"] in EN_BREF_EXCLUSIONS:
+        return False
+    html = paragraph.get("text_html", "").strip()
+    inner = re.sub(r"^<span>", "", html)
+    inner = re.sub(r"</span>$", "", inner).strip()
+    return inner.startswith('<i class="typo_italic">') and inner.endswith("</i>")

@@ -166,3 +166,26 @@ def test_strip_trailing_parens_no_parens():
     cleaned, captured = ccc_audio.strip_trailing_parens("Pas de parenthèse.", paragraph_number=1)
     assert cleaned == "Pas de parenthèse."
     assert captured is None
+
+
+def test_is_en_bref_true_for_italic_wrap():
+    assert ccc_audio.is_en_bref({
+        "number": 44,
+        "text_html": '<span><i class="typo_italic">Tout ce qui est dans le ciel.</i></span>',
+    })
+
+
+def test_is_en_bref_false_for_normal_paragraph():
+    assert not ccc_audio.is_en_bref({
+        "number": 1,
+        "text_html": '<span>Dieu, infiniment <i class="typo_italic">parfait</i>.</span>',
+    })
+
+
+def test_is_en_bref_false_for_22_meta_paragraph():
+    # §22 is wholly italic but is the meta-paragraph describing what
+    # en brefs are, not an en-bref itself.
+    assert not ccc_audio.is_en_bref({
+        "number": 22,
+        "text_html": '<span><i class="typo_italic">À la fin de chaque unité.</i></span>',
+    })
