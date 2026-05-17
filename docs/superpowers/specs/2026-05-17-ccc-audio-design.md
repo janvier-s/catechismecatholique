@@ -2,7 +2,7 @@
 
 Generate a delightful three-voice audio rendering of the Catéchisme de l'Église catholique in French. Two deployment targets share one source-of-truth manifest:
 
-- **V1** — per-paragraph MP3s consumed inline by the SvelteKit reader at `static/audio/cec/`. Includes paragraphs and "En bref" paragraphs; gitignored, generated locally.
+- **V1** — per-paragraph MP3s consumed inline by the SvelteKit reader at `static/audio/cec/`. Includes every paragraph (italic "en bref" paragraphs render identically to regular paragraphs) plus one extra combined `ccc_eb_{chapter_slug}.mp3` per chapter for the study-panel "En bref" tab. Gitignored, generated locally.
 - **V2** — full audiobook in iCloud at `~/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/DOCTRINA/AUDIO/CCC/`. Includes headings (chapter / article / heading2) with paragraph-range announces, paragraphs, and En brefs, plus an ordered playlist.
 
 ## Phasing
@@ -97,19 +97,31 @@ These stack with the base VOICE_OPTS at render time (e.g. `--volume=-10% --pitch
 
 V1 renders all segments. V2 drops `targets=["v1"]` segments — body and citation only.
 
-**Paragraph (en_bref kind):**
+**En bref paragraphs are plain paragraphs.** They're CCC paragraphs (§44, §45, …) whose source `text_html` is wholly wrapped in `<i class="typo_italic">`. Detection rule: outer `<span>` strip → starts with `<i class="typo_italic">` AND ends with `</i>`. Initial exclusion list: `{22}` (meta-paragraph explaining what en brefs are). Manifest builder prints the detected cluster list to stdout as part of `--lint` output — eyeball it for false positives before generating audio.
+
+Italic-wrapped paragraphs render identically to other paragraphs (same `"Paragraphe N."` V1 announce, same body voice). The italic flag is stored only as `is_en_bref: true` in `audio-index.json` for the reader UI to use (styling, grouping into the En bref tab).
+
+**En bref combined entry (V1 only, one per chapter that has en bref paragraphs):**
 ```json
 {
-  "seq": 60, "kind": "en_bref", "number": 44, "file_number": "0044",
+  "seq": 250,
+  "kind": "en_bref_combined",
+  "chapter_slug": "1-homme-est-capable-de-dieu",
+  "file_number": "eb_1-homme-est-capable-de-dieu",
+  "paragraph_range": [44, 49],
   "location": { … },
   "segments": [
-    { "voice": "gerard", "text": "En bref, paragraphe 44.", "targets": ["v1"] },
-    { "voice": "remy",   "text": "…",                       "targets": ["v1", "v2"] }
+    { "voice": "gerard", "text": "En bref.",              "targets": ["v1"] },
+    { "voice": "remy",   "text": "Le désir de Dieu…",     "targets": ["v1"] },
+    { "voice": "remy",   "text": "Quand l'homme écoute…", "targets": ["v1"] },
+    …
   ]
 }
 ```
 
-En brefs are CCC paragraphs (§44, §45, …) whose source `text_html` is wholly wrapped in `<i class="typo_italic">`. Detection rule: outer `<span>` strip → starts with `<i class="typo_italic">` AND ends with `</i>`. Initial exclusion list: `{22}` (meta-paragraph explaining what en brefs are). Manifest builder prints the detected cluster list to stdout — review before generating audio.
+This is an additional asset that backs the study panel's "En bref" tab — one combined file per chapter, no per-paragraph "Paragraphe N." announces, just a single Gérard "En bref." opener then Rémy reading each italic paragraph back-to-back. Gap between bodies is 350 ms. Not produced for V2 (V2 handles "En bref" differently — see V2 deferred notes below).
+
+**V2 "En bref" header (Phase 2, deferred):** Treated as a header-level entry, analogous to chapter/article/heading2. Inserted in V2 flow before each chapter's first italic-wrapped paragraph. Segments: `[gerard "En bref."]` + optional `[gerard "Paragraphes X à Y."]`. Final wording and whether to include the range decided in Phase 2.
 
 **Heading (V2 only, levels: chapter / article / heading2):**
 ```json
@@ -178,9 +190,9 @@ For each citation, derive the announce string. First match wins.
 | `ds` | always | `Citation du Denzinger :` |
 | `canon_law` | always | `Citation du Code de droit canonique :` |
 
-### Tier 2 — body scan (only when Tier 1 yields nothing for type=`patristic`)
+### Tier 2 — body scan (any type, when Tier 1 yields no human author)
 
-Look in the paragraph body for the pattern `saint(?:e)? [A-Z]\w+( de \w+)?` adjacent to a verb in `{ affirme, parle, écrit, dit }` in the sentence immediately preceding the citation marker. Use the detected author. Example: §32 → `Citation de saint Paul :`. §53 → `Citation de Sainte Irénée de Lyon :`.
+Trigger when Tier 1's match for the citation's `mref` does not yield a saint/papal/conciliar name (i.e. Tier 1 either produced a generic by-type intro like `Citation liturgique :` or nothing). Look in the paragraph body for the pattern `saint(?:e)? [A-Z]\w+( de \w+)?` adjacent to a verb in `{ affirme, parle, écrit, dit, enseigne, raconte }` in the sentence immediately preceding the citation marker. Use the detected author. Examples: §32 → `Citation de saint Paul :`. §53 → `Citation de Sainte Irénée de Lyon :`. Works across all mref types — not just patristic — since e.g. a liturgical or magisterial citation can still have a saintly author named in the body.
 
 ### Tier 3 — type-generic fallback
 
@@ -287,14 +299,14 @@ For Apple Books / Audible-style consumption, an optional `--concat` flag on the 
 
 Both targets, applied at render time via `mutagen`:
 
-| Tag | Paragraph | Paragraph (en_bref) | Heading (V2) |
+| Tag | Paragraph | En bref combined (V1) | Heading (V2) |
 |---|---|---|---|
-| TIT2 (title) | `CCC §N` | `CCC en bref §N` | heading title verbatim |
+| TIT2 (title) | `CCC §N` | `CCC en bref — {chapter title}` | heading title verbatim |
 | TALB (album) | chapter title | chapter title | chapter title |
 | TPE1 (artist) | `Catéchisme de l'Église catholique` | same | same |
 | TRCK (track) | seq zero-padded | seq zero-padded | seq zero-padded |
 | TCON (genre) | `Speech` | `Speech` | `Speech` |
-| COMM (comment) | first 80 chars of body | first 80 chars of body | (empty) |
+| COMM (comment) | first 80 chars of body | (empty) | (empty) |
 
 ## Output naming & layout
 
@@ -310,9 +322,23 @@ Both targets, applied at render time via `mutagen`:
 **V1 (in-repo, in-reader) — flat dir:**
 - `static/audio/cec/` (gitignored)
 - Filename: `ccc_{file_number}.mp3` (no seq prefix — V1 doesn't sequence; stable URL = stable name)
-  - Paragraph: `ccc_0001.mp3`
-  - En bref: `ccc_0044.mp3`
-- Audio index: `static/audio/cec/index.json` — `{ [paragraphNumber]: { file, duration_ms, has_citation, is_en_bref } }`. SvelteKit reader reads this to build single-paragraph players and range playlists like `/cec/201-205`.
+  - Paragraph (incl. italic en-bref paragraphs): `ccc_0001.mp3`, `ccc_0044.mp3`
+  - En bref combined: `ccc_eb_{chapter_slug}.mp3` (e.g. `ccc_eb_1-homme-est-capable-de-dieu.mp3`)
+- Audio index: `static/audio/cec/index.json`:
+  ```json
+  {
+    "paragraphs": {
+      "1": { "file": "ccc_0001.mp3", "duration_ms": 24500, "has_citation": false, "is_en_bref": false },
+      "44": { "file": "ccc_0044.mp3", "duration_ms": 8200, "has_citation": false, "is_en_bref": true },
+      …
+    },
+    "en_bref_combined": {
+      "1-homme-est-capable-de-dieu": { "file": "ccc_eb_1-homme-est-capable-de-dieu.mp3", "duration_ms": 45000, "paragraphs": [44, 45, 46, 47, 48, 49] },
+      …
+    }
+  }
+  ```
+  SvelteKit reader reads this to build single-paragraph players, range playlists like `/cec/201-205`, and the study panel's "En bref" tab (which uses the combined file, not the individual italic paragraphs).
 
 **Sidecars** at `~/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/DOCTRINA/JSON/CCC/`:
 - `ccc_audio.manifest.json` — the manifest
@@ -377,7 +403,7 @@ Spec leaves the Dei Verbum / Denzinger / Lumen Gentium / etc. table TBD with pro
 2. Review `ccc_audio.citation_audit.csv` end-to-end. Pay close attention to `tier_used ∈ {2, 3}` rows. Spot-check a handful of Tier 1 rows too.
 3. Phonetic table already approved (see table above); manifest builder applies `INTRO_LATIN_REPLACE`.
 4. Render smoke subset — Prologue paragraphs only: `python scripts/render-ccc-audio.py --target v1 --end-paragraph 25`.
-5. Listen end-to-end in the SvelteKit reader: voice consistency, pitch+rate jitter on Gérard's "Paragraphe N." announces, citation intros, en-bref flow, body cleanliness.
+5. Listen end-to-end in the SvelteKit reader: voice consistency, pitch+rate jitter on Gérard's "Paragraphe N." announces, citation intros, body cleanliness. Also render and audit at least one chapter's `ccc_eb_*` combined file once the prologue smoke pass is clean (Prologue has no en brefs, so pick chapter 1 of section 1 for the en-bref smoke).
 6. Approve audit + leakage hashes. Render the rest of V1 (split into paragraph-range batches if iCloud-style monitoring is desired locally).
 7. Phase 2 (V2 audiobook) gets its own smoke-test plan when that spec lands.
 
