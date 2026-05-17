@@ -224,3 +224,26 @@ def test_match_citations_excludes_bible_types():
     matched = ccc_audio.match_citations(citations, mrefs, "<span></span>")
     cit, ref = matched[0]
     assert ref["type"] == "patristic"
+
+
+def test_sigla_expand():
+    assert ccc_audio.expand_sigla("DV") == "constitution dogmatique Dei Verbum"
+    assert ccc_audio.expand_sigla("CIC") == "Code de droit canonique"
+    assert ccc_audio.expand_sigla("XYZ") is None  # unknown
+
+
+def test_apply_intro_phonetic_dei_verbum():
+    src = "Citation de la constitution dogmatique Dei Verbum :"
+    out = ccc_audio.apply_intro_phonetic(src)
+    assert "Déi Vèrboum" in out
+    assert "Dei Verbum" not in out
+
+
+def test_apply_intro_phonetic_centesimus():
+    out = ccc_audio.apply_intro_phonetic("Citation de Centesimus Annus :")
+    assert "Tchènntézimousse Annousse" in out
+
+
+def test_apply_intro_phonetic_passthrough():
+    out = ccc_audio.apply_intro_phonetic("Citation de saint Augustin :")
+    assert out == "Citation de saint Augustin :"

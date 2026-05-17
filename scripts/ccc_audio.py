@@ -402,6 +402,92 @@ def is_en_bref(paragraph: dict) -> bool:
     return inner.startswith('<i class="typo_italic">') and inner.endswith("</i>")
 
 
+# Full-string-match overrides for citation announce. Keys must be the
+# COMPLETE mref.raw value, not a prefix. Ambiguous bare work titles
+# (e.g. "Poes. 9") are deliberately NOT keys here — the §227 trap.
+AUTHOR_MAP: dict[str, str] = {
+    "Catech. R. 1:5": "du Catéchisme Romain",
+    "Catech. R. 3:37": "du Catéchisme Romain",
+    "Catech. R. préface 10": "du Catéchisme Romain",
+    "Catech. R. préface 11": "du Catéchisme Romain",
+    "Didaché 2:2": "de la Didachè",
+    "Epître à Diognète 5:5. 10": "de l'Épître à Diognète",
+    "Epître à Diognète 5:8-9": "de l'Épître à Diognète",
+    "Imitation du Christ 1:23": "de l'Imitation du Christ",
+    "Kontakion de Romanos le Mélode": "de saint Romanos le Mélode",
+    "Liturgia Byzantina. 2 oratio chirotoniæ presbyteralis": "de la Liturgie byzantine",
+    "Liturgie byzantine": "de la Liturgie byzantine",
+    "Pontificale Romanum": "du Pontifical romain",
+    "Pontificale Romanum. De Ordinatione Episcopi": "du Pontifical romain",
+    "Pontificale iuxta ritum Ecclesiæ Syrorum Occidentalium id est Antiochiæ": "du Pontifical syriaque",
+    "Ste Césarie la Jeune": "de Sainte Césarie la Jeune",
+    "Summa theologiæ 3:60": "de la Somme théologique",
+    "Tertullien de resurrectione carnis 1:1": "de Tertullien",
+    "Augustin de Dace": "d'Augustin de Dace",
+}
+
+
+# Doc sigla → full title (used by Tier 1 magisterial expansion).
+SIGLA_MAP: dict[str, str] = {
+    "DV": "constitution dogmatique Dei Verbum",
+    "LG": "constitution dogmatique Lumen Gentium",
+    "GS": "constitution pastorale Gaudium et Spes",
+    "SC": "constitution Sacrosanctum Concilium",
+    "NA": "déclaration Nostra Ætate",
+    "CD": "décret Christus Dominus",
+    "AA": "décret Apostolicam Actuositatem",
+    "AG": "décret Ad Gentes",
+    "OT": "décret Optatam Totius",
+    "PO": "décret Presbyterorum Ordinis",
+    "CT": "exhortation Catechesi tradendæ",
+    "FC": "exhortation Familiaris Consortio",
+    "RH": "encyclique Redemptor Hominis",
+    "SRS": "encyclique Sollicitudo Rei Socialis",
+    "CA": "encyclique Centesimus Annus",
+    "CIC": "Code de droit canonique",
+    "CCEO": "Code des canons des Églises orientales",
+}
+
+
+def expand_sigla(sigla: str) -> str | None:
+    return SIGLA_MAP.get(sigla)
+
+
+# Phonetic substitutions for Latin / foreign words that appear in
+# Gérard-spoken announce strings (citation intros + V2 headings).
+INTRO_LATIN_REPLACE: dict[str, str] = {
+    "Dei Verbum": "Déi Vèrboum",
+    "Denzinger": "Dènntzingueur",
+    "Lumen Gentium": "Loumène Gènntsioum",
+    "Sacrosanctum Concilium": "Sacrosannctoum Conntchilioum",
+    "Gaudium et Spes": "Gaoudioum ète Spès",
+    "Nostra Ætate": "Nostra Étaté",
+    "Christus Dominus": "Kristousse Dominousse",
+    "Apostolicam Actuositatem": "Apostolikame Actouositatème",
+    "Ad Gentes": "Ade Gènntèsse",
+    "Optatam Totius": "Optatame Totiousse",
+    "Presbyterorum Ordinis": "Présbytéroroum Ordinisse",
+    "Catechesi tradendæ": "Catékézi tradènndé",
+    "Evangelii nuntiandi": "Évannguélii nounncianndé",
+    "Sacram unctionem infirmorum": "Sacrame ounnktsionème innfirmoroum",
+    "Humani Generis": "Houmani Génnérisse",
+    "Pontificale Romanum": "Ponntifikalé Romanoum",
+    "Donum Vitæ": "Donoume Vité",
+    "Centesimus Annus": "Tchènntézimousse Annousse",
+    "Redemptor Hominis": "Rédèmptor Hominisse",
+    "Sollicitudo Rei Socialis": "Sollicitoudo Réi Sotsialisse",
+    "Familiaris Consortio": "Familiarisse Conssortio",
+}
+
+
+def apply_intro_phonetic(text: str) -> str:
+    """Substitute Latin/foreign tokens in announce strings with phonetic spellings."""
+    # Longest first to avoid substring shadowing.
+    for src in sorted(INTRO_LATIN_REPLACE, key=len, reverse=True):
+        text = text.replace(src, INTRO_LATIN_REPLACE[src])
+    return text
+
+
 def _docref_idxs(body_html: str) -> set[str]:
     return set(re.findall(r'docRef" data-idx="([^"]+)"', body_html))
 
