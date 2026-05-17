@@ -578,12 +578,34 @@ def _tier1_liturgical(raw: str) -> str | None:
     return None
 
 
+_TIER2_VERBS = r"(?:affirme|parle|écrit|dit|enseigne|raconte|s'écrie|déclare)"
+_TIER2_NAME = r"(?P<name>(?:[Ss]aint(?:e)?)\s+[A-ZÉÈÊÀÂÇÎÏÔŒÙÛ][\w\-']+(?:\s+(?:de|d')\s*[A-ZÉ][\w\-']+)?)"
+_RE_TIER2 = re.compile(
+    rf"{_TIER2_NAME}\s+(?:[^.:!?]*\s+)?{_TIER2_VERBS}\b"
+)
+
+
+def _tier2_body_scan(body_text: str) -> str | None:
+    """Return 'de saint X' fragment if a saint name + speech verb precedes citation in body."""
+    match = None
+    for m in _RE_TIER2.finditer(body_text):
+        match = m  # take the LAST one (closest to citation start)
+    if not match:
+        return None
+    name = match.group("name").strip()
+    return f"de {fix_saint_liaison(name)}"
+
+
 def derive_citation_intro(
     mref: dict | None,
     body_text: str,
 ) -> tuple[str, int]:
-    """Return (announce_text, tier_used). Tier 2 added in Task 12."""
+    """Return (announce_text, tier_used)."""
     if mref is None:
+        # Tier 2 can still recover from body.
+        prep = _tier2_body_scan(body_text)
+        if prep:
+            return apply_intro_phonetic(_fmt_intro(prep)), 2
         return "Citation :", 3
     typ = mref.get("type")
     raw = mref.get("raw", "")
@@ -602,7 +624,11 @@ def derive_citation_intro(
         return _TIER3_GENERIC["ds"], 1
     if tier1:
         return apply_intro_phonetic(tier1), 1
-    # Tier 3 fallback (Tier 2 added in Task 12).
+    # Tier 2: scan body for saint name + speech verb.
+    prep = _tier2_body_scan(body_text)
+    if prep:
+        return apply_intro_phonetic(_fmt_intro(prep)), 2
+    # Tier 3 fallback.
     return _TIER3_GENERIC.get(typ, "Citation :"), 3
 
 

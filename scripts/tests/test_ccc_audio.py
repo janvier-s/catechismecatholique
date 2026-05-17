@@ -309,3 +309,42 @@ def test_derive_intro_no_mref():
     intro, tier = ccc_audio.derive_citation_intro(mref=None, body_text="")
     assert intro == "Citation :"
     assert tier == 3
+
+
+def test_tier2_finds_saint_paul_in_body():
+    body = "saint Paul affirme au sujet des païens : "
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "patristic", "raw": "sermones 241:2 : PL 38:1134"},
+        body_text=body,
+    )
+    assert intro == "Citation de saint Paul :"
+    assert tier == 2
+
+
+def test_tier2_finds_saint_irenee_de_lyon():
+    body = "Saint Irénée de Lyon parle à maintes reprises : "
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "patristic", "raw": "adversus hæreses 3:20, 2"},
+        body_text=body,
+    )
+    assert intro == "Citation de Sainte Irénée de Lyon :"
+    assert tier == 2
+
+
+def test_tier2_not_triggered_when_tier1_already_authored():
+    body = "saint Pierre dit : "
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "patristic", "raw": "saint Augustin, confessiones 1:1"},
+        body_text=body,
+    )
+    assert intro == "Citation de sainte Augustin :"
+    assert tier == 1
+
+
+def test_tier2_falls_to_tier3_when_no_saint_in_body():
+    intro, tier = ccc_audio.derive_citation_intro(
+        mref={"type": "patristic", "raw": "Poes. 9"},
+        body_text="Pas de mention pertinente ici.",
+    )
+    assert intro == "Citation patristique :"
+    assert tier == 3
