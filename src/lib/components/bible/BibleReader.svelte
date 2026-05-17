@@ -1,11 +1,10 @@
 <script lang="ts">
 	import ChapterFilterBar from './ChapterFilterBar.svelte';
-	import VerseMarker from './VerseMarker.svelte';
 	import ChapterNavBar from './ChapterNavBar.svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import type { BibleVerseIndex, NclSection } from '$lib/data/types';
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
-	import { studyPanel } from '$lib/stores/studyPanel';
+	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 
 	let {
 		book,
@@ -122,25 +121,41 @@
 
 				{@const active = isVerseActive(v.v)}
 				<li id="v{v.v}" class="transition-opacity" class:dim={dimNonCited && c === 0}>
-					<div
-						class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1 max-md:block max-md:gap-0 max-md:px-0 max-md:mx-0"
-						class:is-active={active}
-					>
-						<span
-							class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+					{#if c > 0}
+						<button
+							type="button"
+							class="verse-row verse-row--cited flex gap-3 w-full text-left rounded-md px-2 -mx-2 py-1"
+							class:is-active={active}
+							onclick={() =>
+								openPanel(
+									{ kind: 'verse', verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v.v },
+									'bible-verse'
+								)}
+							aria-label="Verset {v.v} — {c} {c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme"
 						>
-							{v.v}
-						</span>
-						<p class="verse-text font-body flex-1">
-							{v.text}{#if c > 0}<VerseMarker
-									bookSlug={book.slug}
-									bookUsfx={book.usfx}
-									{chapter}
-									verse={v.v}
-									count={c}
-								/>{/if}
-						</p>
-					</div>
+							<span
+								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+							>
+								{v.v}
+							</span>
+							<p class="verse-text verse-text--cited font-body flex-1">{v.text}</p>
+							<span class="verse-cec-count max-md:hidden" aria-hidden="true">
+								{c}&nbsp;{c === 1 ? 'paragraphe' : 'paragraphes'}
+							</span>
+						</button>
+					{:else}
+						<div
+							class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1"
+							class:is-active={active}
+						>
+							<span
+								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+							>
+								{v.v}
+							</span>
+							<p class="verse-text font-body flex-1">{v.text}</p>
+						</div>
+					{/if}
 				</li>
 			{/each}
 		</ol>
@@ -176,8 +191,34 @@
 			font-size: calc(var(--reader-font-size, 17px) - 3px);
 		}
 	}
+	.verse-text--cited {
+		text-decoration: underline dotted;
+		text-decoration-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+		text-underline-offset: 4px;
+		text-decoration-thickness: 1px;
+	}
+	.verse-cec-count {
+		font-family: var(--font-ui);
+		font-size: 0.65rem;
+		font-weight: 500;
+		color: var(--color-accent);
+		white-space: nowrap;
+		align-self: center;
+		flex-shrink: 0;
+		padding-left: 0.5rem;
+		opacity: 0.8;
+		text-align: right;
+	}
 	.verse-row {
 		transition-duration: 150ms;
+	}
+	/* Reset button appearance for cited verse rows */
+	button.verse-row {
+		appearance: none;
+		border: none;
+		font: inherit;
+		cursor: pointer;
+		align-items: baseline;
 	}
 	.verse-row:hover {
 		background-color: color-mix(in srgb, var(--color-accent) 5%, transparent);
@@ -200,7 +241,6 @@
 	   "wrap around" that absolute/float approaches can produce. */
 	@media (max-width: 768px) {
 		.verse-row {
-			/* Override the Tailwind max-md:block from the markup. */
 			display: grid !important;
 			grid-template-columns: 1.5rem minmax(0, 1fr);
 			column-gap: 0;
@@ -211,9 +251,6 @@
 		}
 		.verse-row .verse-num {
 			width: auto;
-			/* Number digit sits at the right of the 1.5rem gutter column, with
-			   a hair of right padding for breathing space. The text column
-			   then starts exactly at the section-heading content edge. */
 			padding: 0 0.35rem 0 0;
 			text-align: right;
 			line-height: 1.7;

@@ -191,10 +191,11 @@
 
 		const groups: Group[] = [];
 
-		// Renvois group: CCC-internal graph (outgoing renvois + incoming citers)
+		// Renvois group: CCC-internal navigation (cross-refs, cited-by, themes)
 		const ccc: TabDef[] = [];
 		if (hasCrossRefs) ccc.push({ id: 'cross-refs', label: 'Renvois' });
 		if (hasCitedBy) ccc.push({ id: 'cited-by', label: 'Cités dans' });
+		if (hasThemesG) ccc.push({ id: 'themes', label: 'Thèmes' });
 		if (ccc.length === 1) groups.push({ id: 'g-ccc', label: ccc[0]!.label, children: ccc });
 		else if (ccc.length > 1) groups.push({ id: 'g-ccc', label: 'Renvois', children: ccc });
 
@@ -220,12 +221,6 @@
 		if (bib.length === 1) groups.push({ id: 'g-bible', label: bib[0]!.label, children: bib });
 		else if (bib.length > 1) groups.push({ id: 'g-bible', label: 'Bible', children: bib });
 
-		if (hasThemesG)
-			groups.push({
-				id: 'g-themes',
-				label: 'Thèmes',
-				children: [{ id: 'themes', label: 'Thèmes' }]
-			});
 		if (hasEnBrefG)
 			groups.push({
 				id: 'g-en-bref',
@@ -429,8 +424,14 @@
 				active={(activeGroup?.id ?? null) as PanelTab | null}
 				onSelect={(id) => selectGroup(id)}
 			/>
-			{#if activeGroup && activeGroup.children.length > 1}
-				<div class="sub-toggle" role="tablist" aria-label="Sous-onglets">
+			<!-- Sub-toggle always in DOM to prevent layout shift; visibility toggled via CSS -->
+			<div
+				class="sub-toggle"
+				class:sub-toggle--visible={activeGroup && activeGroup.children.length > 1}
+				role="tablist"
+				aria-label="Sous-onglets"
+			>
+				{#if activeGroup && activeGroup.children.length > 1}
 					{#each activeGroup.children as c (c.id)}
 						<button
 							type="button"
@@ -443,40 +444,42 @@
 							{c.label}
 						</button>
 					{/each}
-				</div>
-			{/if}
-			<div class="flex-1 overflow-y-auto p-4 styled-scroll">
-				{#if $studyPanel.activeTab === 'bible'}
-					<TabBibleRefs />
-				{:else if $studyPanel.activeTab === 'cross-refs'}
-					<TabCrossRefs />
-				{:else if $studyPanel.activeTab === 'cited-by'}
-					<TabCitedBy />
-				{:else if $studyPanel.activeTab === 'en-bref'}
-					<TabEnBref />
-				{:else if $studyPanel.activeTab === 'sources'}
-					<TabSources />
-				{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
-					<TabThemes />
-				{:else if $studyPanel.activeTab === 'concordance'}
-					<TabConcordance />
-				{:else if $studyPanel.activeTab === 'bible-verse'}
-					<TabBibleVerse />
-				{:else if $studyPanel.activeTab === 'compendium'}
-					<TabCompendium />
-				{:else if $studyPanel.activeTab === 'cdse-citers'}
-					<TabCdseCiters />
-				{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
-					<TabIA paragraphNumber={$studyPanel.context.paragraph} />
-				{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
-					<TabTrentNotes />
-				{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
-					<TabDenzingerRefs
-						n={$studyPanel.context.n}
-						mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
-					/>
 				{/if}
 			</div>
+			{#key $studyPanel.activeTab}
+				<div class="flex-1 overflow-y-auto p-4 styled-scroll" in:fade={{ duration: 100 }}>
+					{#if $studyPanel.activeTab === 'bible'}
+						<TabBibleRefs />
+					{:else if $studyPanel.activeTab === 'cross-refs'}
+						<TabCrossRefs />
+					{:else if $studyPanel.activeTab === 'cited-by'}
+						<TabCitedBy />
+					{:else if $studyPanel.activeTab === 'en-bref'}
+						<TabEnBref />
+					{:else if $studyPanel.activeTab === 'sources'}
+						<TabSources />
+					{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
+						<TabThemes />
+					{:else if $studyPanel.activeTab === 'concordance'}
+						<TabConcordance />
+					{:else if $studyPanel.activeTab === 'bible-verse'}
+						<TabBibleVerse />
+					{:else if $studyPanel.activeTab === 'compendium'}
+						<TabCompendium />
+					{:else if $studyPanel.activeTab === 'cdse-citers'}
+						<TabCdseCiters />
+					{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
+						<TabIA paragraphNumber={$studyPanel.context.paragraph} />
+					{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
+						<TabTrentNotes />
+					{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
+						<TabDenzingerRefs
+							n={$studyPanel.context.n}
+							mode={$studyPanel.activeTab === 'denzinger-cross-refs' ? 'cross-refs' : 'cited-by'}
+						/>
+					{/if}
+				</div>
+			{/key}
 		{/if}
 	</div>
 
