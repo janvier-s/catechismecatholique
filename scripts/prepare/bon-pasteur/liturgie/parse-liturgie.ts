@@ -227,7 +227,7 @@ async function processChapter(n: number, fileTitle: string, docxPath: string): P
 
 	const blocks: Block[] = [];
 	const seenAnchors = new Set<string>();
-	let title = fileTitle;
+	const title = fileTitle;
 	let inBody = false;
 	let calloutOpen = false;
 	let imgIdx = 0;
