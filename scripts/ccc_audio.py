@@ -151,3 +151,112 @@ def clean_text(html: str) -> str:
     text = _RE_SPACE_BEFORE_GUILLEMET.sub(r"\1 »", text)
     text = _RE_GUILLEMET_PERIOD.sub(". »", text)
     return text.strip()
+
+
+_RE_SAINT_VOWEL = re.compile(r"(?i)\bsaint\s+(?=[aeiouyh])")
+
+
+def fix_saint_liaison(text: str) -> str:
+    """`saint X` becomes `Sainte X` when X begins with a vowel or h.
+
+    Wrong gender, right pronunciation: Gérard reads the "t" in "Sainte"
+    where he'd otherwise drop it in "saint" before a consonant. Applied
+    indiscriminately because the audio cost of the gender mismatch is
+    lower than the cost of the missing liaison.
+    """
+    return _RE_SAINT_VOWEL.sub(
+        lambda m: "Sainte " if m.group(0)[0].isupper() else "sainte ",
+        text,
+    )
+
+
+# Per-paragraph pronunciation overrides.
+# Keys are CCC §. Values map exact source substring → replacement.
+TEXT_REPLACE: dict[int, dict[str, str]] = {
+    10: {
+        " (rapport final II B a 4)": "",
+        " (Discours 7 décembre 1985)": "",
+        "Evangelii nuntiandi": "Évannguélii nounncianndé",
+        "Catechesi tradendæ": "Catékézi tradènndé",
+    },
+    19: {" (par « voir »)": " (par « C F »)"},
+    84: {"depositum fidei": "dépozitoum fidéi"},
+    168: {"Te Deum": "Té Déoum"},
+    170: {
+        "summa theologiæ": "Soumma Théologiè",
+        "(saint Thomas d'Aquin, Soumma Théologiè 2-2, 1, 2, ad 2)": "",
+    },
+    190: {"(saint Irénée, demonstratio apostolica 100)": ""},
+    192: {"Fides Damasi": "Fidèss Damazi"},
+    235: {" (I),": " (1),", " (II),": " (2),", " (III)": " (3)"},
+    243: {"(voir Jn 14:26)": "", " (Défenseur)": " (ou Défenseur)"},
+    246: {"filioque": "filioquoué"},
+    247: {"filioque": "filioquoué"},
+    248: {"filioque": "filioquoué", " (concile de Florence en 1439 : DS 1302)": ""},
+    291: {" » »), ": ", ", " (Liturgie byzantine, Tropaire des vêpres de Pentecôte)": ""},
+    335: {
+        "In Paradisum deducant te angeli... de la Liturgie des défunts [OEx 50], ou encore dans l'« Hymne chérubinique » de la Liturgie byzantine":
+            "(ainsi dans In Paradissoum deducante té angeli... de la Liturgie des défunts, ou encore dans l'« Hymne chérubinique » de la Liturgie byzantine)",
+    },
+    647: {"Exsultet": "Egzoultète"},
+    774: {"mysterium": "mysterioum", "sacramentum": "sacramentoum"},
+    875: {"in persona Christi": "in persona Kristi"},
+    1124: {"Lex orandi": "Lèx oranndi", "lex credendi": "lèx crédenndi"},
+    1126: {"lex orandi": "lèx oranndi"},
+    1128: {"ex opere operato": "ex opéré opérato"},
+    1211: {"summa theologiæ": "Soumma Théologiè"},
+    1305: {"summa theologiæ": "Soumma Théologiè"},
+    1325: {"mysterium": "mysterioum"},
+    1348: {"in persona Christi": "in persona Kristi"},
+    1513: {
+        "« Per istam sanctam unctionem et suam piissimam misericordiam adiuvet te Dominus gratia Spiritus Sancti, ut a peccatis liberatum te salvet atque propitius allevet »":
+            "« Par cette onction sainte, que le Seigneur, en sa grande bonté vous réconforte par la grâce de l'Esprit Saint. Ainsi, vous ayant libéré de tous péchés, qu'Il vous sauve et vous relève. »",
+    },
+    1523: {"sacramentum": "sacramentoum"},
+    1548: {"in persona Christi": "in persona Kristi", "summa theologiæ": "Soumma Théologiè"},
+    2097: {"Magnificat": "Maggnificatte"},
+    2622: {"Magnificat": "Maggnificatte"},
+    2763: {"summa theologiæ": "Soumma Théologiè"},
+    2854: {
+        "Libera nos, quæsumus, Domine, ab omnibus malis, da propitius pacem in diebus nostris, ut, ope misericordiæ tuæ adiuti, et a peccatis simus semper liberi et ab omni perturbatione securi : exspectantes beatam spem et adventum Salvatoris nostri Iesu Christi":
+            "Délivre-nous de tout mal, Seigneur, et donne la paix à notre temps ; par ta miséricorde, libère-nous du péché, rassure-nous devant les épreuves en cette vie où nous espérons le bonheur que Tu promets et l'avènement de Jésus-Christ, notre Sauveur",
+    },
+}
+
+
+def apply_text_replace(text: str, paragraph_number: int) -> str:
+    """Apply per-paragraph TEXT_REPLACE overrides for the given paragraph."""
+    for src, dst in TEXT_REPLACE.get(paragraph_number, {}).items():
+        text = text.replace(src, dst)
+    return text
+
+
+def apply_general_replacements(text: str) -> str:
+    """Greek-script substitutions and corpus-wide Latin/French phonetic fixes."""
+    text = text.replace("concupiscentia", "concupiskentia")
+    text = text.replace("concupiscence", "concupissensse")
+    text = re.sub(r"(?i)\bmaran\s+atha\b", "Maranne atha", text)
+    text = re.sub(r"(?i)\bmarana\s+tha\b", "Maranne atha", text)
+    text = text.replace("(« in statu viæ »)", "(« inn statou vié »)")
+    text = text.replace("Chalcédoine", "Kalcédoine")
+    text = text.replace(
+        "« Non est enim aliud Dei mistériomm, nisi Christus »",
+        "« Nonne esste énim alioud Déi mistérioum, nissi Christouss »",
+    )
+    text = re.sub(r"(?i)\bkyrios\b", "κύριος", text)
+    text = re.sub(r"(?i)\bekklèsia\b", "ἐκκλησία", text)
+    text = re.sub(r"(?i)\bmysterion\b", "μυστήριον", text)
+    text = re.sub(r"(?i)\bapostoloi\b", "ἀπόστολοι", text)
+    text = re.sub(r"(?i)\bbaptizein\b", "βαπτίζω", text)
+    text = re.sub(r"(?i)\beucharistian\b", "εὐχαριστίαν", text)
+    text = re.sub(r"(?i)\btaxeis\b", "τάξις", text)
+    text = re.sub(r"(?i)\bsymbolon\b", "σύμβολον", text)
+    text = re.sub(r"(?i)\btheologia\b", "θεολογία", text)
+    text = text.replace("episcoporum", "épiscoporoum")
+    text = text.replace("presbyterorum", "présbytéroroum")
+    text = text.replace("diaconorum", "diaconoroum")
+    text = text.replace("Théotokosse", "Θεοτόκος")
+    text = text.replace("Théotokos", "Θεοτόκος")
+    text = re.sub(r"(?i)\boikonomia\b", "Οἰκονομία", text)
+    text = text.replace("(« omnipotens sempiterne Deus... »)", "(« omnipotènsse sèmpiterné Déousse... »)")
+    return text

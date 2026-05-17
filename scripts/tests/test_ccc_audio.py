@@ -82,3 +82,32 @@ def test_clean_text_normalizes_whitespace():
 def test_clean_text_french_punctuation_spacing():
     html = '<span>Phrase , bizarre . Et »attendue .»</span>'
     assert ccc_audio.clean_text(html) == "Phrase, bizarre. Et »attendue. »"
+
+
+def test_fix_saint_liaison():
+    # Case-preserving: only swap the t→te, not the leading capitalization.
+    assert ccc_audio.fix_saint_liaison("saint Augustin") == "sainte Augustin"
+    assert ccc_audio.fix_saint_liaison("saint Hippolyte") == "sainte Hippolyte"
+    assert ccc_audio.fix_saint_liaison("Saint Augustin") == "Sainte Augustin"
+    assert ccc_audio.fix_saint_liaison("saint Pierre") == "saint Pierre"  # P is not vowel/h
+
+
+def test_apply_text_replace_for_1513():
+    src = '« Per istam sanctam unctionem et suam piissimam misericordiam adiuvet te Dominus gratia Spiritus Sancti, ut a peccatis liberatum te salvet atque propitius allevet »'
+    out = ccc_audio.apply_text_replace(src, 1513)
+    assert "Par cette onction sainte" in out
+    assert "Latin" not in out.lower() or "Per istam" not in out
+
+
+def test_apply_text_replace_for_2854():
+    src = "Libera nos, quæsumus, Domine, ab omnibus malis, da propitius pacem in diebus nostris, ut, ope misericordiæ tuæ adiuti, et a peccatis simus semper liberi et ab omni perturbatione securi : exspectantes beatam spem et adventum Salvatoris nostri Iesu Christi"
+    out = ccc_audio.apply_text_replace(src, 2854)
+    assert out.startswith("Délivre-nous de tout mal, Seigneur")
+
+
+def test_apply_general_replacements_greek():
+    src = "le kyrios est le ekklèsia"
+    out = ccc_audio.apply_general_replacements(src)
+    assert "κύριος" in out
+    assert "ἐκκλησία" in out
+    assert "kyrios" not in out
