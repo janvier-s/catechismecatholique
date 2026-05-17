@@ -1311,6 +1311,21 @@ export interface DieuChapter {
 	blocks: DieuBlock[];
 }
 
+export type LiturgieBlock =
+	| { kind: 'heading'; level: 2 | 3 | 4; title: string; anchor: string }
+	| { kind: 'callout-heading'; title: string; anchor: string }
+	| { kind: 'paragraph'; html: string }
+	| { kind: 'quote'; html: string }
+	| { kind: 'definition'; term: string; html: string }
+	| { kind: 'image'; src: string; alt: string };
+
+export interface LiturgieChapter {
+	slug: string;
+	n: number;
+	title: string;
+	blocks: LiturgieBlock[];
+}
+
 export interface BonPasteurPlaylistVideo {
 	id: string;
 	title: string;

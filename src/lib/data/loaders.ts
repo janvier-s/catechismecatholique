@@ -56,6 +56,7 @@ import type {
 	ParagraphThemeRef,
 	DieuStructure,
 	DieuChapter,
+	LiturgieChapter,
 	BonPasteurPlaylist
 } from './types';
 
@@ -1062,10 +1063,9 @@ export function loadDieuChapter(slug: string, fetcher: Fetch = fetch): Promise<D
 }
 
 // ─── IBP · Liturgie loaders ─────────────────────────────────────────────────
-// Same block shape as Dieu, so we re-use the Dieu types directly.
 
 let liturgieStructurePromise: Promise<DieuStructure> | null = null;
-const liturgieChapterCache = new Map<string, Promise<DieuChapter | null>>();
+const liturgieChapterCache = new Map<string, Promise<LiturgieChapter | null>>();
 
 export function loadLiturgieStructure(fetcher: Fetch = fetch): Promise<DieuStructure> {
 	if (!liturgieStructurePromise) {
@@ -1080,13 +1080,13 @@ export function loadLiturgieStructure(fetcher: Fetch = fetch): Promise<DieuStruc
 export function loadLiturgieChapter(
 	slug: string,
 	fetcher: Fetch = fetch
-): Promise<DieuChapter | null> {
+): Promise<LiturgieChapter | null> {
 	let p = liturgieChapterCache.get(slug);
 	if (!p) {
 		p = (async () => {
 			const r = await fetcher(`/data/bon-pasteur/liturgie/chapters/${slug}.json`);
 			if (!r.ok) return null;
-			return (await r.json()) as DieuChapter;
+			return (await r.json()) as LiturgieChapter;
 		})();
 		liturgieChapterCache.set(slug, p);
 	}

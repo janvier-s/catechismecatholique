@@ -3,9 +3,36 @@
 	import NavCard from '$lib/components/ui/NavCard.svelte';
 	import SidebarItem from '$lib/components/ui/SidebarItem.svelte';
 	import type { PageData } from './$types';
+	import type { LiturgieBlock } from '$lib/data/types';
 
 	let { data }: { data: PageData } = $props();
 	const ch = $derived(data.chapter);
+
+	// ── Block grouping ───────────────────────────────────────────────────
+	// Callout sections ("À retenir") wrap blocks from the callout-heading
+	// until the next h2 into a styled aside. We pre-group so the template
+	// can emit the wrapping element cleanly.
+	type NormalGroup = { kind: 'normal'; blocks: LiturgieBlock[] };
+	type CalloutGroup = { kind: 'callout'; title: string; anchor: string; blocks: LiturgieBlock[] };
+	type RenderGroup = NormalGroup | CalloutGroup;
+
+	const renderGroups = $derived.by((): RenderGroup[] => {
+		const groups: RenderGroup[] = [];
+		let cur: RenderGroup = { kind: 'normal', blocks: [] };
+		groups.push(cur);
+		for (const b of ch.blocks) {
+			if (b.kind === 'callout-heading') {
+				cur = { kind: 'callout', title: b.title, anchor: b.anchor, blocks: [] };
+				groups.push(cur);
+			} else if (b.kind === 'heading' && b.level === 2 && cur.kind === 'callout') {
+				cur = { kind: 'normal', blocks: [b] };
+				groups.push(cur);
+			} else {
+				cur.blocks.push(b);
+			}
+		}
+		return groups;
+	});
 
 	// ── Sidebar heading tree ─────────────────────────────────────────────
 	type H2Group = { anchor: string; title: string; children: { anchor: string; title: string }[] };
@@ -14,12 +41,16 @@
 		const groups: H2Group[] = [];
 		let cur: H2Group | null = null;
 		for (const b of ch.blocks) {
-			if (b.kind !== 'heading') continue;
-			if (b.level === 2) {
+			if (b.kind === 'callout-heading') {
 				cur = { anchor: b.anchor, title: b.title, children: [] };
 				groups.push(cur);
-			} else if (b.level === 3 && cur) {
-				cur.children.push({ anchor: b.anchor, title: b.title });
+			} else if (b.kind === 'heading') {
+				if (b.level === 2) {
+					cur = { anchor: b.anchor, title: b.title, children: [] };
+					groups.push(cur);
+				} else if (b.level === 3 && cur) {
+					cur.children.push({ anchor: b.anchor, title: b.title });
+				}
 			}
 		}
 		return groups;
@@ -138,27 +169,47 @@
 					<h1 class="title">{ch.title}</h1>
 				</header>
 
-				<article class="liturgie-body reader-prose">
-					{#each ch.blocks as block, i (i)}
-						{#if block.kind === 'heading'}
-							{#if block.level === 2}
-								<h2 class="section-heading" id={block.anchor}>{block.title}</h2>
-							{:else}
-								<h3 class="sub-heading" id={block.anchor}>{block.title}</h3>
-							{/if}
-						{:else if block.kind === 'definition'}
-							<div class="definition">
-								<span class="definition-term">{block.term}</span>
-								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								<div class="definition-body">{@html block.html}</div>
-							</div>
-						{:else if block.kind === 'image'}
-							<figure class="illus">
-								<img src={block.src} alt={block.alt} loading="lazy" />
-							</figure>
+				{#snippet blockView(block: import('$lib/data/types').LiturgieBlock)}
+					{#if block.kind === 'heading'}
+						{#if block.level === 2}
+							<h2 class="section-heading" id={block.anchor}>{block.title}</h2>
+						{:else if block.level === 3}
+							<h3 class="sub-heading" id={block.anchor}>{block.title}</h3>
 						{:else}
+							<h4 class="sub-sub-heading">{block.title}</h4>
+						{/if}
+					{:else if block.kind === 'quote'}
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<blockquote class="liturgie-quote">{@html block.html}</blockquote>
+					{:else if block.kind === 'definition'}
+						<div class="definition">
+							<span class="definition-term">{block.term}</span>
 							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-							<div class="prose-block">{@html block.html}</div>
+							<div class="definition-body">{@html block.html}</div>
+						</div>
+					{:else if block.kind === 'image'}
+						<figure class="illus">
+							<img src={block.src} alt={block.alt} loading="lazy" />
+						</figure>
+					{:else if block.kind === 'paragraph'}
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<div class="prose-block">{@html block.html}</div>
+					{/if}
+				{/snippet}
+
+				<article class="liturgie-body reader-prose">
+					{#each renderGroups as group, gi (gi)}
+						{#if group.kind === 'callout'}
+							<aside class="a-retenir" id={group.anchor}>
+								<p class="a-retenir-label">{group.title}</p>
+								{#each group.blocks as block, i (i)}
+									{@render blockView(block)}
+								{/each}
+							</aside>
+						{:else}
+							{#each group.blocks as block, i (i)}
+								{@render blockView(block)}
+							{/each}
 						{/if}
 					{/each}
 				</article>
@@ -319,6 +370,59 @@
 		background: var(--color-accent);
 		opacity: 0.55;
 		margin-bottom: 0.65rem;
+	}
+
+	.sub-sub-heading {
+		font-family: var(--font-heading);
+		font-size: 1.05rem;
+		font-weight: 700;
+		line-height: 1.3;
+		letter-spacing: 0.01em;
+		margin: 1.75rem 0 0.5rem;
+		color: var(--color-fg);
+	}
+
+	/* ── Quote ─────────────────────────────────────────────────────────── */
+	.liturgie-quote {
+		margin: 1.5rem 0;
+		padding: 0.75rem 1.25rem;
+		border-left: 3px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+		font-style: italic;
+		color: var(--color-subtle);
+		font-size: 0.97rem;
+		line-height: 1.65;
+	}
+
+	.liturgie-quote :global(p) {
+		margin: 0;
+	}
+
+	/* ── À retenir callout ──────────────────────────────────────────────── */
+	.a-retenir {
+		margin: 2.5rem 0 1.5rem;
+		padding: 1.25rem 1.5rem 1.25rem;
+		border-radius: 6px;
+		background: color-mix(in srgb, var(--color-accent) 6%, var(--color-panel, transparent));
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+	}
+
+	.a-retenir-label {
+		font-family: var(--font-ui);
+		font-size: 0.67rem;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 1rem;
+	}
+
+	.a-retenir :global(.section-heading) {
+		margin-top: 1.25rem;
+		border-bottom-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+	}
+
+	.a-retenir :global(.sub-heading) {
+		margin-top: 1rem;
 	}
 
 	.prose-block :global(p) {
