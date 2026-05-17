@@ -441,6 +441,31 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 		display: block;
 	}
 }
+/* Print: always render the black-on-light logo at full size regardless of
+   the active theme or the responsive size that happens to apply. */
+@media print {
+	.logo-light,
+	[data-theme='dark'] .logo-light,
+	[data-theme='oled'] .logo-light,
+	[data-theme='auto'] .logo-light {
+		display: block !important;
+	}
+	.logo-dark,
+	[data-theme='dark'] .logo-dark,
+	[data-theme='oled'] .logo-dark,
+	[data-theme='auto'] .logo-dark {
+		display: none !important;
+	}
+}
+
+/* Single-paragraph print: when the user triggers print from one paragraph's
+   action menu, the JS handler tags every non-target paragraph with
+   data-print-hidden so only the chosen one ends up on paper. */
+@media print {
+	.ccc-paragraph[data-print-hidden] {
+		display: none !important;
+	}
+}
 
 /* Inked papal signatures (homepage + /a-propos): the SVGs render
    black-on-transparent. Invert + brighten so they read as white on
@@ -685,12 +710,29 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	.wordmark {
 		display: flex !important;
 	}
-	/* Bump the logo on paper · 56px reads small once the topbar is
-	   stripped of its sticky chrome. Size the wrapper (which constrains
-	   the img via width:100%/height:100%) so the aspect ratio is kept. */
-	.logo-mark {
+	/* Bump the logo on paper. Force a generous size that also wins against
+	   the topbar's condensed-state rule (which uses !important to shrink to
+	   30px when the page was scrolled at print time). The `html` selector
+	   bumps specificity past Svelte's scoped `.topbar.is-condensed .logo-mark`
+	   (which renders with a hashed class at the same specificity, so source
+	   order would otherwise decide the tie). */
+	html .logo-mark,
+	html .topbar .logo-mark,
+	html .topbar.is-condensed .logo-mark,
+	html .logo-mark img {
 		width: 64px !important;
 		height: 64px !important;
+		max-width: none !important;
+		max-height: none !important;
+	}
+	/* Lift any height clamp on the topbar itself so a 140px logo doesn't get
+	   visually clipped by an 80px/58px header. */
+	header.topbar,
+	header.topbar > div {
+		min-height: 0 !important;
+		height: auto !important;
+		max-height: none !important;
+		overflow: visible !important;
 	}
 	/* Full-width prose column. */
 	main {
