@@ -5,6 +5,15 @@ Generate a delightful three-voice audio rendering of the Catéchisme de l'Églis
 - **V1** — per-paragraph MP3s consumed inline by the SvelteKit reader at `static/audio/cec/`. Includes paragraphs and "En bref" paragraphs; gitignored, generated locally.
 - **V2** — full audiobook in iCloud at `~/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/DOCTRINA/AUDIO/CCC/`. Includes headings (chapter / article / heading2) with paragraph-range announces, paragraphs, and En brefs, plus an ordered playlist.
 
+## Phasing
+
+This spec is full-design for both targets, but implementation lands in two phases:
+
+- **Phase 1 (this implementation cycle): V1 only.** Build the manifest, render V1 MP3s into `static/audio/cec/`, emit the audio index. Run all lints and audits. Ship in-reader playback.
+- **Phase 2 (separate cycle): V2.** Render the audiobook (heading announces, range announces, en-bref grouping, playlist) into iCloud. Phase 2 will revisit edge cases the user has flagged around grouping AND will decide on a non-flat iCloud directory structure — iCloud has previously deleted contents of large flat directories without warning. Bucketing by hundred-block (e.g. `CCC/00xx/`) or by part/section is preferable; final layout is a Phase 2 decision.
+
+Audio generation runs locally — no Cloudflare-side rendering. V1 assets sit in `static/audio/cec/` (gitignored) for the SvelteKit dev server and Cloudflare Pages deploy to serve as static files.
+
 ## Pipeline shape
 
 ```
@@ -217,27 +226,27 @@ Gérard reads citation intros and heading announces. Latin proper names ("Dei Ve
 
 | Original | Proposed phonetic | User review |
 |---|---|---|
-| Dei Verbum | Déi Vèrboum | ? |
-| Denzinger | Dènntzingueur | ? |
-| Lumen Gentium | Loumène Gènntsioum | ? |
-| Sacrosanctum Concilium | Sacrosannctoum Conntsilioum | ? |
-| Gaudium et Spes | Gaoudioum ète Spès | ? |
-| Nostra Ætate | Nostra Étaté | ? |
-| Christus Dominus | Kristousse Dominousse | ? |
-| Apostolicam Actuositatem | Apostolikame Actouositatème | ? |
-| Ad Gentes | Ade Gènntèsse | ? |
-| Optatam Totius | Optatame Totiousse | ? |
-| Presbyterorum Ordinis | Présbytéroroum Ordinisse | ? |
-| Catechesi tradendæ | Catékézi tradènndé | ? (already in body map) |
-| Evangelii nuntiandi | Évannguélii nounncianndé | ? (already in body map) |
-| Sacram unctionem infirmorum | Sacrame ounnktsionème innfirmoroum | ? |
-| Humani Generis | Houmani Génnérisse | ? |
-| Pontificale Romanum | Ponntifikalé Romanoum | ? |
-| Donum Vitæ | Donoume Vité | ? |
-| Centesimus Annus | Tcènntézimousse Annousse | ? |
-| Redemptor Hominis | Rédèmnpteur Hominisse | ? |
-| Sollicitudo Rei Socialis | Sollicitoudo Réi Sotsialisse | ? |
-| Familiaris Consortio | Familiarisse Conssortio | ? |
+| Dei Verbum | Déi Vèrboum | ✓ |
+| Denzinger | Dènntzingueur | ✓ |
+| Lumen Gentium | Loumène Gènntsioum | ✓ |
+| Sacrosanctum Concilium | Sacrosannctoum Conntchilioum | ✓ |
+| Gaudium et Spes | Gaoudioum ète Spès | ✓ |
+| Nostra Ætate | Nostra Étaté | ✓ |
+| Christus Dominus | Kristousse Dominousse | ✓ |
+| Apostolicam Actuositatem | Apostolikame Actouositatème | ✓ |
+| Ad Gentes | Ade Gènntèsse | ✓ |
+| Optatam Totius | Optatame Totiousse | ✓ |
+| Presbyterorum Ordinis | Présbytéroroum Ordinisse | ✓ |
+| Catechesi tradendæ | Catékézi tradènndé | ✓ (already in body map) |
+| Evangelii nuntiandi | Évannguélii nounncianndé | ✓ (already in body map) |
+| Sacram unctionem infirmorum | Sacrame ounnktsionème innfirmoroum | ✓ |
+| Humani Generis | Houmani Génnérisse | ✓ |
+| Pontificale Romanum | Ponntifikalé Romanoum | ✓ |
+| Donum Vitæ | Donoume Vité | ✓ |
+| Centesimus Annus | Tchènntézimousse Annousse | ✓ |
+| Redemptor Hominis | Rédèmptor Hominisse | ✓ |
+| Sollicitudo Rei Socialis | Sollicitoudo Réi Sotsialisse | ✓ |
+| Familiaris Consortio | Familiarisse Conssortio | ✓ |
 
 These flow into a new `INTRO_LATIN_REPLACE` table in the manifest builder.
 
@@ -289,13 +298,14 @@ Both targets, applied at render time via `mutagen`:
 
 ## Output naming & layout
 
-**V2 (audiobook, iCloud) — flat dir:**
-- `~/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/DOCTRINA/AUDIO/CCC/`
-- Filename: `{seq:04}_ccc_{file_number}.mp3`
+**V2 (audiobook, iCloud) — Phase 2, layout TBD:**
+- Base dir: `~/Library/Mobile Documents/com~apple~CloudDocs/for-the-kingdom/DOCTRINA/AUDIO/CCC/`
+- **Subdivision required** — iCloud has previously deleted entire flat-directory contents. Phase 2 must split files across sub-buckets (likely hundred-block `00xx/`, `01xx/`, … sized to keep each dir under a couple hundred files). Final scheme decided in Phase 2.
+- Filename pattern (within whichever bucket): `{seq:04}_ccc_{file_number}.mp3`
   - Paragraph: `0003_ccc_0001.mp3`
   - Heading: `0001_ccc_h0001.mp3`
   - En bref: `0060_ccc_0044.mp3` (same pattern as paragraph — they ARE numbered paragraphs)
-- Playlist: `ccc_playlist.json` in the same dir
+- Playlist: `ccc_playlist.json` at the base dir, with bucket-aware file paths
 
 **V1 (in-repo, in-reader) — flat dir:**
 - `static/audio/cec/` (gitignored)
@@ -361,14 +371,15 @@ Spec leaves the Dei Verbum / Denzinger / Lumen Gentium / etc. table TBD with pro
 | Roman-numeral heading2 ordinal | `convert_roman_numerals` produces French ordinal words. Existing rule, preserved. |
 | Sequential pitch monotony on Gérard | Pitch + rate jitter on V1 "Paragraphe N." announces only. State persists across the render run. |
 
-## Render smoke-test plan
+## Phase 1 smoke-test plan (V1 only)
 
 1. `python scripts/build-ccc-manifest.py --lint`. Iterate until leakage report is clean.
-2. Review `ccc_audio.citation_audit.csv` end-to-end. Pay attention to `tier_used ∈ {2, 3}` rows.
-3. Sign off the phonetic table. Re-run manifest build so `INTRO_LATIN_REPLACE` is applied.
-4. Render smoke subset (V1 + V2 for §1-25, the Prologue): `python scripts/render-ccc-audio.py --target v1 --end-seq 30` then same for `v2`.
-5. Listen end-to-end: voice consistency, gap pacing, pitch jitter on V1, heading announces on V2, citation intros, en-bref flow.
-6. Approve audit + leakage hashes, render the rest (V1 and V2 in parallel processes; further split into seq ranges if needed).
+2. Review `ccc_audio.citation_audit.csv` end-to-end. Pay close attention to `tier_used ∈ {2, 3}` rows. Spot-check a handful of Tier 1 rows too.
+3. Phonetic table already approved (see table above); manifest builder applies `INTRO_LATIN_REPLACE`.
+4. Render smoke subset — Prologue paragraphs only: `python scripts/render-ccc-audio.py --target v1 --end-paragraph 25`.
+5. Listen end-to-end in the SvelteKit reader: voice consistency, pitch+rate jitter on Gérard's "Paragraphe N." announces, citation intros, en-bref flow, body cleanliness.
+6. Approve audit + leakage hashes. Render the rest of V1 (split into paragraph-range batches if iCloud-style monitoring is desired locally).
+7. Phase 2 (V2 audiobook) gets its own smoke-test plan when that spec lands.
 
 ## File deletions
 
@@ -377,14 +388,14 @@ Spec leaves the Dei Verbum / Denzinger / Lumen Gentium / etc. table TBD with pro
 - `scripts/transform-ccc-json.py` (replaced by `build-ccc-manifest.py`)
 - `scripts/generate-ccc-audio-dual.py` (replaced by `render-ccc-audio.py`)
 
-## Out of scope (downstream work in the SvelteKit app)
+## Out of scope (downstream)
 
 - New SvelteKit route(s) for paragraph-range pages like `/cec/201-205` and the in-reader audio player UI that builds playlists from `static/audio/cec/index.json`. The audio pipeline only commits to producing the assets and the index — UI wiring is a separate change.
-- Cloudflare Pages build wiring (`build:audio` npm script invocation, prebuild ordering relative to `prepare-data.ts`).
+- V2 audiobook rendering, playlist generation, and the iCloud bucketing decision — see Phasing section.
 
-## Open items requiring user input before render
+## Open items requiring user input before V1 render
 
-1. Phonetic table (Dei Verbum, Denzinger, Lumen Gentium, …) — review proposed entries.
-2. Sigla map expansions — confirm full doc titles for each sigla.
-3. Citation attribution audit — review CSV before signing off.
-4. Initial allowlist for French spellchecker — proper nouns to skip.
+1. ~~Phonetic table~~ ✓ approved.
+2. Sigla map expansions — confirm full doc titles for each sigla (`DV` → "constitution dogmatique Dei Verbum", etc.) — the spec lists initial guesses; user signs off before manifest build.
+3. Citation attribution audit — review CSV after first manifest build, before V1 render.
+4. Initial allowlist for French spellchecker — seed with proper nouns the spec already lists; expand during first leakage-report iteration.
