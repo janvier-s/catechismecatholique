@@ -77,6 +77,9 @@
 			: null
 	);
 	const isPlaylist = $derived(playlistItems.length > 1);
+	// Playlist UI (prev/next + "X sur Y" + track list) only when reading
+	// paragraphs. En-bref mode plays one combined file with no neighbors.
+	const showPlaylistUI = $derived(isPlaylist && mode === 'paragraph');
 
 	// Load audio index once.
 	$effect(() => {
@@ -238,8 +241,9 @@
 	function onEnded() {
 		isPlaying = false;
 		persist();
-		// Auto-advance only in playlist mode.
-		if (isPlaylist && nextInPlaylist !== null) {
+		// Auto-advance only when reading paragraphs in playlist mode.
+		// In en-bref mode there's only one combined file — nothing to advance to.
+		if (showPlaylistUI && nextInPlaylist !== null) {
 			goToParagraph(nextInPlaylist);
 		}
 	}
@@ -260,18 +264,18 @@
 		<p class="text-muted italic">Pas d'audio disponible pour ce paragraphe.</p>
 	{:else}
 		{#if enBrefChapterSlug}
-			<div class="mb-3 inline-flex rounded-full border border-fg/15 overflow-hidden text-xs">
+			<div class="mb-3 inline-flex gap-1 text-xs">
 				<button
 					type="button"
-					class="px-3 py-1 transition-colors"
+					class="mode-tab"
 					class:active={mode === 'paragraph'}
 					onclick={() => setMode('paragraph')}
 				>
-					CEC §{currentParagraph}
+					Paragraphe
 				</button>
 				<button
 					type="button"
-					class="px-3 py-1 transition-colors"
+					class="mode-tab"
 					class:active={mode === 'en-bref'}
 					onclick={() => setMode('en-bref')}
 				>
@@ -295,7 +299,7 @@
 		<div class="player rounded-lg p-4 space-y-3">
 			<div class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold flex items-center justify-between">
 				<span>{mode === 'en-bref' ? 'En bref' : `Paragraphe ${currentParagraph}`}</span>
-				{#if isPlaylist}
+				{#if showPlaylistUI}
 					<span class="text-fg/70 normal-case tracking-normal font-medium">
 						{playlistPosition + 1} sur {playlistItems.length}
 					</span>
@@ -303,7 +307,7 @@
 			</div>
 
 			<div class="flex items-center gap-3">
-				{#if isPlaylist}
+				{#if showPlaylistUI}
 					<button
 						type="button"
 						class="nav-icon"
@@ -333,7 +337,7 @@
 						>
 					{/if}
 				</button>
-				{#if isPlaylist}
+				{#if showPlaylistUI}
 					<button
 						type="button"
 						class="nav-icon"
@@ -424,7 +428,7 @@
 			</div>
 		</div>
 
-		{#if isPlaylist}
+		{#if showPlaylistUI}
 			<div class="mt-4">
 				<p class="text-[10px] uppercase tracking-[0.2em] text-muted font-bold mb-2">
 					Lecture en cours
@@ -438,7 +442,7 @@
 								class:playing={item.n === currentParagraph}
 								onclick={() => goToParagraph(item.n)}
 							>
-								<span class="text-accent tabular-nums font-semibold">§{item.n}</span>
+								<span class="text-accent tabular-nums font-semibold">Paragraphe {item.n}</span>
 								<span class="flex-1"></span>
 								<span class="tabular-nums text-[11px] text-muted">
 									{fmtTime(item.duration_ms / 1000)}
@@ -456,6 +460,23 @@
 	.player {
 		background: color-mix(in srgb, var(--color-fg) 5%, transparent);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
+	}
+	.mode-tab {
+		padding: 4px 12px;
+		border-radius: 999px;
+		color: var(--color-fg);
+		opacity: 0.65;
+		font-weight: 500;
+		transition: background-color 120ms, opacity 120ms;
+	}
+	.mode-tab:hover {
+		background: color-mix(in srgb, var(--color-fg) 6%, transparent);
+		opacity: 1;
+	}
+	.mode-tab.active {
+		background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+		color: var(--color-accent);
+		opacity: 1;
 	}
 	.play-btn {
 		display: inline-flex;
