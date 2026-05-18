@@ -127,7 +127,7 @@
 			<div class="socials">
 				<button
 					type="button"
-					class="social social-facebook"
+					class="social social-fb"
 					onclick={() => openShareUrl(facebookHref)}
 					aria-label="Partager sur Facebook"
 				>
@@ -312,7 +312,7 @@
 		width: 22px;
 		height: 22px;
 	}
-	.social-facebook {
+	.social-fb {
 		--brand: #1877f2;
 	}
 	.social-x {

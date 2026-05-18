@@ -184,6 +184,7 @@
 			onclick={onAudio}
 			disabled={!hasAudio}
 			aria-label={hasAudio ? 'Lecture audio du paragraphe' : 'Audio non disponible'}
+			title={hasAudio ? 'Lecture audio du paragraphe' : 'Audio non disponible'}
 		>
 			<span class="action-label">Audio</span>
 			<span class="action-icon">
@@ -201,6 +202,7 @@
 			class="action-btn"
 			onclick={onStudy}
 			aria-label="Ouvrir le panneau d'étude"
+			title="Ouvrir le panneau d'étude"
 		>
 			<span class="action-label">Étudier</span>
 			<span class="action-icon">
@@ -222,6 +224,7 @@
 			rel="noopener"
 			class="action-btn"
 			aria-label={`Ouvrir paragraphe ${paragraphNumber} dans un nouvel onglet`}
+			title={`Ouvrir paragraphe ${paragraphNumber} dans un nouvel onglet`}
 		>
 			<span class="action-label">Lien</span>
 			<span class="action-icon">
@@ -241,6 +244,7 @@
 			class:is-done={copyState === 'done'}
 			onclick={onCopy}
 			aria-label="Copier le texte du paragraphe avec sa citation"
+			title="Copier le texte du paragraphe avec sa citation"
 		>
 			<span class="action-label">{copyState === 'done' ? 'Copié' : 'Copier'}</span>
 			<span class="action-icon">
@@ -270,7 +274,13 @@
 			</span>
 		</button>
 
-		<button type="button" class="action-btn" onclick={onShare} aria-label="Partager ce paragraphe">
+		<button
+			type="button"
+			class="action-btn"
+			onclick={onShare}
+			aria-label="Partager ce paragraphe"
+			title="Partager ce paragraphe"
+		>
 			<span class="action-label">Partager</span>
 			<span class="action-icon">
 				<svg viewBox="0 0 24 24" aria-hidden="true">
@@ -282,7 +292,13 @@
 			</span>
 		</button>
 
-		<button type="button" class="action-btn" onclick={onPrint} aria-label="Imprimer ce paragraphe">
+		<button
+			type="button"
+			class="action-btn"
+			onclick={onPrint}
+			aria-label="Imprimer ce paragraphe"
+			title="Imprimer ce paragraphe"
+		>
 			<span class="action-label">Imprimer</span>
 			<span class="action-icon">
 				<svg viewBox="0 0 24 24" aria-hidden="true">

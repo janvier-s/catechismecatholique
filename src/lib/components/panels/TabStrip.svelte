@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PanelTab } from '$lib/stores/studyPanel';
 
-	type Tab = { id: PanelTab; label: string; iconHtml?: string };
+	type Tab = { id: PanelTab; label: string; iconHtml?: string; hasSubTabs?: boolean };
 	let {
 		tabs,
 		active,
@@ -90,7 +90,12 @@
 					class:tab-active={active === tab.id}
 					onclick={() => onSelect(tab.id)}
 				>
-					<span>{tab.label}</span>
+					<span class="tab-label-wrap">
+						<span class="tab-label">{tab.label}</span>
+						{#if tab.hasSubTabs}
+							<span class="tab-subdot" aria-hidden="true"></span>
+						{/if}
+					</span>
 					{#if tab.iconHtml}
 						<span class="tab-icon" aria-hidden="true">{@html tab.iconHtml}</span>
 					{/if}
@@ -164,6 +169,20 @@
 	}
 	.tab:hover {
 		background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+	}
+	.tab-label-wrap {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2px;
+		line-height: 1;
+	}
+	.tab-subdot {
+		width: 3px;
+		height: 3px;
+		border-radius: 50%;
+		background: currentColor;
+		opacity: 0.55;
 	}
 	.tab-icon {
 		display: inline-flex;

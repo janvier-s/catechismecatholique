@@ -206,42 +206,32 @@
 
 		const groups: Group[] = [];
 
-		// Renvois group: CCC-internal navigation (cross-refs, cited-by, themes)
-		const ccc: TabDef[] = [];
-		if (hasCrossRefs) ccc.push({ id: 'cross-refs', label: 'Renvois' });
-		if (hasCitedBy) ccc.push({ id: 'cited-by', label: 'Cités dans' });
-		if (hasThemesG) ccc.push({ id: 'themes', label: 'Thèmes' });
-		if (ccc.length === 1) groups.push({ id: 'g-ccc', label: ccc[0]!.label, children: ccc });
-		else if (ccc.length > 1) groups.push({ id: 'g-ccc', label: 'Renvois', children: ccc });
+		// Renvois group: every reference-style tab (intra-CCC + external sources).
+		// Mixing cross-refs, cited-by, themes, sources, and CDSE here keeps the
+		// "where is this paragraph related to other doctrine" mental model in
+		// one place and shrinks the strip from 6-7 tabs to 5.
+		const ren: TabDef[] = [];
+		if (hasCrossRefs) ren.push({ id: 'cross-refs', label: 'Renvois' });
+		if (hasCitedBy) ren.push({ id: 'cited-by', label: 'Cités dans' });
+		if (hasThemesG) ren.push({ id: 'themes', label: 'Thèmes' });
+		if (hasSources) ren.push({ id: 'sources', label: 'Sources' });
+		if (hasCdseCiters) ren.push({ id: 'cdse-citers', label: 'Doctrine sociale' });
+		if (ren.length > 0) groups.push({ id: 'g-renvois', label: 'Renvois', children: ren });
 
-		// Sources group: magisterial/patristic/liturgical references + doctrine sociale
-		const cit: TabDef[] = [];
-		if (hasSources) cit.push({ id: 'sources', label: 'Sources' });
-		if (hasCdseCiters) cit.push({ id: 'cdse-citers', label: 'Doctrine sociale' });
-		if (cit.length === 1) groups.push({ id: 'g-citations', label: cit[0]!.label, children: cit });
-		else if (cit.length > 1) groups.push({ id: 'g-citations', label: 'Sources', children: cit });
+		// Résumé group: condensed/summary content (En Bref + Compendium).
+		const res: TabDef[] = [];
+		if (hasEnBrefG) res.push({ id: 'en-bref', label: 'En Bref' });
+		if (hasCompendium) res.push({ id: 'compendium', label: 'Compendium' });
+		if (res.length > 0) groups.push({ id: 'g-resume', label: 'Résumé', children: res });
 
-		// Compendium always gets its own top-level tab so it's directly discoverable.
-		if (hasCompendium)
-			groups.push({
-				id: 'g-compendium',
-				label: 'Compendium',
-				children: [{ id: 'compendium', label: 'Compendium' }]
-			});
-
-		// Bible group: this paragraph's verse refs + concordance on related verses
+		// Bible group: this paragraph's verse refs + concordance on related verses.
+		// Always labeled "Bible" even when only Concordance has data, so the
+		// tab anchor is stable across paragraphs.
 		const bib: TabDef[] = [];
 		if (hasBible) bib.push({ id: 'bible', label: 'Bible' });
 		if (hasConcordanceG) bib.push({ id: 'concordance', label: 'Concordance' });
-		if (bib.length === 1) groups.push({ id: 'g-bible', label: bib[0]!.label, children: bib });
-		else if (bib.length > 1) groups.push({ id: 'g-bible', label: 'Bible', children: bib });
+		if (bib.length > 0) groups.push({ id: 'g-bible', label: 'Bible', children: bib });
 
-		if (hasEnBrefG)
-			groups.push({
-				id: 'g-en-bref',
-				label: 'En Bref',
-				children: [{ id: 'en-bref', label: 'En Bref' }]
-			});
 		if (hasAudioG)
 			groups.push({
 				id: 'g-audio',
@@ -269,8 +259,13 @@
 		return visibleGroups.find((g) => g.children.some((c) => c.id === a)) ?? null;
 	});
 
-	const stripTabs: (TabDef & { iconHtml?: string })[] = $derived(
-		visibleGroups.map((g) => ({ id: g.id as PanelTab, label: g.label, iconHtml: g.iconHtml }))
+	const stripTabs: (TabDef & { iconHtml?: string; hasSubTabs?: boolean })[] = $derived(
+		visibleGroups.map((g) => ({
+			id: g.id as PanelTab,
+			label: g.label,
+			iconHtml: g.iconHtml,
+			hasSubTabs: g.children.length > 1
+		}))
 	);
 
 	function selectGroup(gid: string): void {
