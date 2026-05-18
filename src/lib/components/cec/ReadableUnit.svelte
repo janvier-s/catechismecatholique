@@ -222,8 +222,9 @@
 	}
 	.ccc-side-refs ul {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem 0.5rem;
+		flex-direction: column;
+		gap: 0.25rem;
+		text-align: right;
 	}
 	.ccc-side-refs .cross-ref-link {
 		/* Use the lighter accent variant · accent-text is tuned per theme to

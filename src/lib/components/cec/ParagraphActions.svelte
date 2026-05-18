@@ -83,13 +83,43 @@
 
 	function onPrint() {
 		if (typeof window === 'undefined') return;
-		const target = String(paragraphNumber);
-		const others = Array.from(
-			document.querySelectorAll<HTMLElement>('.ccc-paragraph[data-cec-paragraph]')
-		).filter((el) => el.getAttribute('data-cec-paragraph') !== target);
-		others.forEach((el) => el.setAttribute('data-print-hidden', ''));
+		const targetEl = document.querySelector<HTMLElement>(
+			`.ccc-paragraph[data-cec-paragraph="${paragraphNumber}"]`
+		);
+		if (!targetEl) {
+			window.print();
+			return;
+		}
+
+		// Walk from target up to <body>, collecting the spine of ancestors that
+		// must stay visible. At each level, hide every sibling that isn't on
+		// the spine. This works regardless of how deeply the article is nested
+		// (Svelte block markers, layout wrappers, etc.).
+		const keep = new Set<Element>([targetEl]);
+		let node: Element | null = targetEl.parentElement;
+		while (node && node !== document.body) {
+			keep.add(node);
+			node = node.parentElement;
+		}
+		// Keep the topbar masthead · existing print CSS styles it as a centred
+		// header above the prose, so it should survive single-paragraph print.
+		const topbar = document.querySelector<HTMLElement>('.topbar');
+		if (topbar) keep.add(topbar);
+
+		const hidden: HTMLElement[] = [];
+		for (const el of keep) {
+			const parent = el.parentElement;
+			if (!parent) continue;
+			for (const child of Array.from(parent.children) as HTMLElement[]) {
+				if (!keep.has(child) && !child.hasAttribute('data-print-hidden')) {
+					child.setAttribute('data-print-hidden', '');
+					hidden.push(child);
+				}
+			}
+		}
+
 		const cleanup = () => {
-			others.forEach((el) => el.removeAttribute('data-print-hidden'));
+			hidden.forEach((el) => el.removeAttribute('data-print-hidden'));
 			window.removeEventListener('afterprint', cleanup);
 		};
 		window.addEventListener('afterprint', cleanup);

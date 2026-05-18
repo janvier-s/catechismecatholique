@@ -213,6 +213,26 @@ async function main() {
 	}
 	endStep(`${chapters.length} bundles, ${(chaptersFullBytes / 1024 / 1024).toFixed(1)} MB total`);
 
+	// Global en_bref index: lets the study panel find the "following" en_bref
+	// for any paragraph, even when the paragraph itself sits outside a chapter
+	// (e.g. section-intro paragraphs like §26). Sorted by first paragraph.
+	logStep('building en-brefs index');
+	const enBrefsIndex: Array<{ first: number; last: number; chapter_slug: string }> = [];
+	for (const ch of chapters) {
+		for (const block of ch.en_brefs) {
+			if (block.paragraphs.length > 0) {
+				enBrefsIndex.push({
+					first: block.paragraphs[0]!,
+					last: block.paragraphs[block.paragraphs.length - 1]!,
+					chapter_slug: ch.slug
+				});
+			}
+		}
+	}
+	enBrefsIndex.sort((a, b) => a.first - b.first);
+	writeFileSync(join(OUT, 'cec/en-brefs-index.json'), JSON.stringify(enBrefsIndex));
+	endStep(`${enBrefsIndex.length} en_bref blocks`);
+
 	logStep('building headings index (autocomplete)');
 	const { buildHeadingsIndex } = await import('./prepare/headings-index.ts');
 	const headings = buildHeadingsIndex(structure, chapters);

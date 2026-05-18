@@ -462,7 +462,7 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
    action menu, the JS handler tags every non-target paragraph with
    data-print-hidden so only the chosen one ends up on paper. */
 @media print {
-	.ccc-paragraph[data-print-hidden] {
+	[data-print-hidden] {
 		display: none !important;
 	}
 }

@@ -18,11 +18,11 @@
 		loadParagraph,
 		loadCitedBy,
 		loadParagraphContext,
-		loadChapter,
 		loadCompendiumCitedBy,
 		loadParagraphThemes,
 		loadConcordanceParagraphManifest,
-		loadCdseCitedByCcc
+		loadCdseCitedByCcc,
+		loadEnBrefsIndex
 	} from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
@@ -106,16 +106,18 @@
 		const paragraphNum = ctx.paragraph;
 		dataReady = false;
 		(async () => {
-			const [p, citedBy, pc, compendiumCB, themesMap, concManifest, cdseCB, audioIdx] = await Promise.all([
-				loadParagraph(paragraphNum),
-				loadCitedBy(),
-				loadParagraphContext(paragraphNum),
-				loadCompendiumCitedBy(),
-				loadParagraphThemes(),
-				loadConcordanceParagraphManifest(),
-				loadCdseCitedByCcc(),
-				loadAudioIndex()
-			]);
+			const [p, citedBy, pc, compendiumCB, themesMap, concManifest, cdseCB, audioIdx, enBrefsIdx] =
+				await Promise.all([
+					loadParagraph(paragraphNum),
+					loadCitedBy(),
+					loadParagraphContext(paragraphNum),
+					loadCompendiumCitedBy(),
+					loadParagraphThemes(),
+					loadConcordanceParagraphManifest(),
+					loadCdseCitedByCcc(),
+					loadAudioIndex(),
+					loadEnBrefsIndex()
+				]);
 			hasAudio = !!audioIdx && audioIdx.paragraphs[String(paragraphNum)] !== undefined;
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
@@ -124,17 +126,11 @@
 			hasThemes = (themesMap[String(paragraphNum)]?.length ?? 0) > 0;
 			hasConcordance = concManifest.has(paragraphNum);
 
-			// hasEnBref: the paragraph's chapter has at least one en_bref block
-			if (pc?.chapter) {
-				try {
-					const chapter = await loadChapter(pc.chapter.slug);
-					hasEnBref = (chapter.en_brefs?.length ?? 0) > 0;
-				} catch {
-					hasEnBref = false;
-				}
-			} else {
-				hasEnBref = false;
-			}
+			// hasEnBref: every paragraph gets an en_bref tab as long as one
+			// exists in the corpus at or after the current paragraph. The
+			// "following" en_bref (containing or next) is what TabEnBref shows.
+			void pc; // chapter context no longer gates the tab
+			hasEnBref = enBrefsIdx.some((b) => b.last >= paragraphNum);
 			dataReady = true;
 		})();
 	});

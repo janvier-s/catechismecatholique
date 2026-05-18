@@ -1507,7 +1507,7 @@
 	the SSR/hydration mismatch that previously caused CLS 0.16.
 -->
 <aside
-	class="sidebar-rail hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] bg-panel border-r border-border z-20 flex-none flex-col"
+	class="sidebar-rail hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] bg-panel border-r border-border z-0 flex-none flex-col"
 	inert={!$sidebarOpen}
 >
 	<div class="flex items-center justify-between p-2 border-b border-border">

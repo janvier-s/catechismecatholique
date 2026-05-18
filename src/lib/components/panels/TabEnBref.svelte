@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { get } from 'svelte/store';
-	import { page } from '$app/state';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
-	import { loadParagraphContext, loadChapter, loadParagraph } from '$lib/data/loaders';
-	import type { ParagraphContext, Paragraph, Chapter } from '$lib/data/types';
+	import { loadChapter, loadParagraph, loadEnBrefsIndex } from '$lib/data/loaders';
+	import type { Paragraph } from '$lib/data/types';
 	import ParagraphRenderer from '../cec/ParagraphRenderer.svelte';
 	import CitationBlock from '../cec/CitationBlock.svelte';
 
@@ -14,66 +13,36 @@
 
 	type Block = { paragraphs: Paragraph[]; firstNumber: number };
 
-	let context: ParagraphContext | null = $state(null);
 	let blocks: Block[] = $state([]);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
 		if (ctx?.kind !== 'paragraph') {
-			context = null;
 			blocks = [];
 			return;
 		}
 		const paragraphNum = ctx.paragraph;
 		(async () => {
-			context = await loadParagraphContext(paragraphNum);
-			if (!context?.chapter) {
+			// Find the "following" en_bref: the one containing this paragraph
+			// (if any), otherwise the next one in the corpus. This guarantees
+			// every paragraph surfaces an en_bref · including section-intro
+			// paragraphs like §26 that sit outside any chapter.
+			const index = await loadEnBrefsIndex();
+			const following = index.find((b) => b.last >= paragraphNum);
+			if (!following) {
 				blocks = [];
 				return;
 			}
-			const chapter: Chapter = await loadChapter(context.chapter.slug);
-
-			// Show every en_bref in the article (or chapter, when there's no
-			// active article · chapters like "L'homme est capable de Dieu"
-			// have headings + en_brefs without article wrappers). Sorted by
-			// proximity to the paragraph that opened the panel so the most
-			// relevant block lands at the top.
-			//
-			// An earlier version scoped to the active heading section, but
-			// the catechism's article-level en_brefs (e.g. the 7 blocks in
-			// «Je crois en Dieu le Père» Article 1) are organised by
-			// `Paragraphe` subdivision, not by Roman heading. The scope
-			// often missed the relevant block entirely and showed "Pas d'En
-			// Bref disponible" on sections that have plenty.
-			const article = chapter.articles.find((a) => a.slug === context!.article?.slug);
-			const candidates = chapter.en_brefs ?? [];
-
-			const rangeMatch = page.url.pathname.match(/^\/ccc\/(\d+)(?:-(\d+))?$/);
-			const viewFrom = rangeMatch ? parseInt(rangeMatch[1]!, 10) : paragraphNum;
-			const viewTo = rangeMatch?.[2] ? parseInt(rangeMatch[2], 10) : viewFrom;
-			const focal = (viewFrom + viewTo) / 2;
-
-			const articleMin = article?.paragraphs[0];
-			const articleMax = article?.paragraphs.at(-1);
-			const inScope = (block: { paragraphs: number[] }) => {
-				if (block.paragraphs.length === 0) return false;
-				if (articleMin === undefined || articleMax === undefined) return true;
-				const first = block.paragraphs[0]!;
-				return first >= articleMin && first <= articleMax;
-			};
-
-			const filtered = candidates.filter(inScope).sort((a, b) => {
-				const da = Math.abs(a.paragraphs[0]! - focal);
-				const db = Math.abs(b.paragraphs[0]! - focal);
-				return da - db;
-			});
-			const result: Block[] = [];
-			for (const block of filtered) {
-				if (block.paragraphs.length === 0) continue;
-				const records = await Promise.all(block.paragraphs.map((n) => loadParagraph(n)));
-				result.push({ paragraphs: records, firstNumber: block.paragraphs[0]! });
+			const chapter = await loadChapter(following.chapter_slug);
+			const target = chapter.en_brefs.find(
+				(b) => b.paragraphs[0] === following.first && b.paragraphs.length > 0
+			);
+			if (!target) {
+				blocks = [];
+				return;
 			}
-			blocks = result;
+			const records = await Promise.all(target.paragraphs.map((n) => loadParagraph(n)));
+			blocks = [{ paragraphs: records, firstNumber: target.paragraphs[0]! }];
 		})();
 	});
 </script>

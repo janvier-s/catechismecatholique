@@ -123,6 +123,19 @@ export function loadStructure(fetcher: Fetch = fetch): Promise<unknown> {
 	return fetchJson<unknown>('/data/cec/structure.json', fetcher);
 }
 
+export interface EnBrefIndexEntry {
+	first: number;
+	last: number;
+	chapter_slug: string;
+}
+let enBrefsIndexPromise: Promise<EnBrefIndexEntry[]> | null = null;
+export function loadEnBrefsIndex(fetcher: Fetch = fetch): Promise<EnBrefIndexEntry[]> {
+	if (!enBrefsIndexPromise) {
+		enBrefsIndexPromise = fetchJson<EnBrefIndexEntry[]>('/data/cec/en-brefs-index.json', fetcher);
+	}
+	return enBrefsIndexPromise;
+}
+
 // Slim TOC: full tree minus the `paragraphs: number[]` arrays at every level.
 // Used by /cec/sommaire which renders titles + headings only. About 70%
 // smaller than the full structure.
