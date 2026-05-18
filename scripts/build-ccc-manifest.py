@@ -29,6 +29,8 @@ def main() -> int:
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--audit", type=Path, required=True)
     p.add_argument("--leakage", type=Path, required=True)
+    p.add_argument("--structure", type=Path, default=None,
+                   help="Path to structure.json (default: <chapters-full>/../structure.json).")
     p.add_argument("--allowlist", type=Path, default=None,
                    help="Newline-separated extra words to consider known.")
     p.add_argument("--lint", action="store_true",
@@ -38,6 +40,7 @@ def main() -> int:
     manifest, audit_rows = ccc_audio.build_manifest(
         chapters_full_dir=args.chapters_full,
         paragraphs_dir=args.paragraphs,
+        structure_path=args.structure,
     )
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -58,7 +61,13 @@ def main() -> int:
     # Leakage report: collect every segment text
     texts: list[tuple[str, str]] = []  # (label, text)
     for entry in manifest["entries"]:
-        label = f"§{entry.get('number') or entry.get('chapter_slug')}"
+        if entry["kind"] == "heading":
+            rng = entry.get("paragraph_range", [])
+            label = f"h({entry['level']} §{rng[0] if rng else '?'})"
+        elif entry["kind"] == "paragraph":
+            label = f"§{entry['number']}"
+        else:
+            label = f"eb({entry.get('chapter_slug')})"
         for seg in entry["segments"]:
             texts.append((label, seg["text"]))
     flagged = ccc_audio.run_leakage_check(

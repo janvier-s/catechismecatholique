@@ -109,7 +109,9 @@ def number_to_french_ordinal(n: int) -> str:
         return card[:-4] + "neuvième"
     if card.endswith("e"):
         card = card[:-1]
-    card = card.rstrip("s")
+    # Strip plural "s" from "quatre-vingts" and "N-cents" but NOT from "trois".
+    # Both legit cases have "t" immediately before the "s".
+    card = re.sub(r"(?<=t)s$", "", card)
     return card + "ième"
 
 
@@ -877,6 +879,290 @@ def build_en_bref_combined_entry(
 import json
 
 
+# ---------------------------------------------------------------------------
+# V2 heading helpers
+# ---------------------------------------------------------------------------
+
+def _spell_range_num(n: int) -> str:
+    return number_to_french(n) if should_spell_paragraph_number(n) else str(n)
+
+
+def _format_range_announce(first: int, last: int) -> str:
+    """'Paragraphes X à Y.' or 'Paragraphe X.' when range collapses to one."""
+    if first == last:
+        return f"Paragraphe {_spell_range_num(first)}."
+    return f"Paragraphes {_spell_range_num(first)} à {_spell_range_num(last)}."
+
+
+_HEADING2_ROMAN_RE = re.compile(r"^([IVXLCDM]+)\.\s*")
+
+
+def _convert_heading2_title(title: str) -> str:
+    """Replace leading Roman numeral with French ordinal.
+
+    'I. Le désir de Dieu' → 'Premier. Le désir de Dieu'
+    """
+    m = _HEADING2_ROMAN_RE.match(title)
+    if not m:
+        return title
+    ordinal = number_to_french_ordinal(roman_to_arabic(m.group(1)))
+    ordinal = ordinal[0].upper() + ordinal[1:]
+    return f"{ordinal}. {title[m.end():]}"
+
+
+def _heading2_ranges(
+    paragraphs: list[int],
+    headings: list[dict],
+) -> list[tuple[dict, int, int]]:
+    """Return (heading, first_para, last_para) for each level-2 heading.
+
+    Level-3 headings are skipped — too granular for audio announces.
+    """
+    h2s = sorted(
+        [h for h in headings if h.get("level") == 2],
+        key=lambda h: h["paragraph_start"],
+    )
+    if not h2s:
+        return []
+    sorted_paras = sorted(paragraphs)
+    out: list[tuple[dict, int, int]] = []
+    for i, h in enumerate(h2s):
+        start = h["paragraph_start"]
+        end_excl = h2s[i + 1]["paragraph_start"] if i + 1 < len(h2s) else None
+        group = [p for p in sorted_paras if p >= start and (end_excl is None or p < end_excl)]
+        out.append((h, group[0] if group else start, group[-1] if group else start))
+    return out
+
+
+def build_heading_entry(
+    seq: int,
+    level: str,
+    title: str,
+    number: int | None,
+    paragraph_range: tuple[int, int],
+    location: dict,
+    file_number: str,
+) -> dict:
+    """Build a V2-only heading entry (kind='heading', targets=['v2'])."""
+    segments: list[dict] = []
+    if level == "chapter":
+        prefix = f"Chapitre {number} : " if number is not None else ""
+        announce = apply_intro_phonetic(f"{prefix}{title}.")
+        segments.append({"voice": "gerard", "text": announce, "targets": ["v2"]})
+        segments.append({"voice": "gerard", "text": _format_range_announce(*paragraph_range), "targets": ["v2"]})
+    elif level == "article":
+        if number is not None:
+            announce = apply_intro_phonetic(f"Article {number} : {title}.")
+        else:
+            announce = apply_intro_phonetic(f"{title}.")
+        segments.append({"voice": "gerard", "text": announce, "targets": ["v2"]})
+        segments.append({"voice": "gerard", "text": _format_range_announce(*paragraph_range), "targets": ["v2"]})
+    elif level == "heading2":
+        text = apply_intro_phonetic(_convert_heading2_title(title))
+        if not text.endswith("."):
+            text += "."
+        segments.append({"voice": "gerard", "text": text, "targets": ["v2"]})
+    return {
+        "seq": seq,
+        "kind": "heading",
+        "level": level,
+        "file_number": file_number,
+        "paragraph_range": list(paragraph_range),
+        "location": location,
+        "segments": segments,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Structured entry builder (V2-aware, uses structure.json)
+# ---------------------------------------------------------------------------
+
+def _build_entries_structured(
+    structure_path: Path,
+    paragraphs_dir: Path,
+) -> tuple[list[dict], list[dict]]:
+    """Walk structure.json and emit interleaved heading + paragraph entries.
+
+    Heading entries are V2-only; paragraph/en_bref entries carry both targets
+    as built by build_paragraph_entry / build_en_bref_combined_entry.
+    """
+    with structure_path.open(encoding="utf-8") as f:
+        structure = json.load(f)
+
+    entries: list[dict] = []
+    audit_rows: list[dict] = []
+    seen_numbers: dict[int, int] = {}
+    en_bref_by_chapter: dict[str, list[dict]] = {}
+    _seq = 0
+    _hseq = 0
+
+    def _next_seq() -> int:
+        nonlocal _seq
+        _seq += 1
+        return _seq
+
+    def _next_hnum() -> str:
+        nonlocal _hseq
+        _hseq += 1
+        return f"h{_hseq:04d}"
+
+    def _add_para(paragraph: dict, location: dict) -> None:
+        n = paragraph["number"]
+        seen_numbers[n] = seen_numbers.get(n, 0) + 1
+        entry, rows = build_paragraph_entry(
+            seq=_next_seq(), paragraph=paragraph, location=location,
+            occurrence_index=seen_numbers[n],
+        )
+        entries.append(entry)
+        audit_rows.extend(rows)
+        if is_en_bref(paragraph):
+            slug = (location.get("chapter_slug")
+                    or location.get("section_slug")
+                    or "_unknown")
+            en_bref_by_chapter.setdefault(slug, []).append(paragraph)
+
+    def _load(n: int) -> dict | None:
+        return _load_paragraph(paragraphs_dir, n)
+
+    def _emit_heading(
+        level: str, title: str, number: int | None,
+        para_range: tuple[int, int], location: dict,
+    ) -> None:
+        entries.append(build_heading_entry(
+            seq=_next_seq(), level=level, title=title, number=number,
+            paragraph_range=para_range, location=location, file_number=_next_hnum(),
+        ))
+
+    def _emit_paras_with_h2s(
+        sorted_paras: list[int], headings: list[dict], location: dict,
+    ) -> None:
+        """Emit paragraph entries, inserting heading2 entries at boundaries."""
+        h2_ranges = _heading2_ranges(sorted_paras, headings)
+        if not h2_ranges:
+            for n in sorted_paras:
+                p = _load(n)
+                if p:
+                    _add_para(p, location)
+            return
+        first_h2_start = h2_ranges[0][0]["paragraph_start"]
+        for n in sorted_paras:
+            if n < first_h2_start:
+                p = _load(n)
+                if p:
+                    _add_para(p, location)
+        for h, h_first, h_last in h2_ranges:
+            _emit_heading("heading2", h["title"], None, (h_first, h_last), location)
+            for n in sorted_paras:
+                if h_first <= n <= h_last:
+                    p = _load(n)
+                    if p:
+                        _add_para(p, location)
+
+    def _emit_article(
+        art: dict, ch_loc: dict, orphans: list[int] | None = None,
+    ) -> None:
+        """Emit article heading + orphan paras (if any) + article paragraphs."""
+        art_paras = sorted(art.get("paragraphs", []))
+        pre = sorted(orphans or [])
+        art_first = pre[0] if pre else (art_paras[0] if art_paras else art["range"]["from"])
+        art_last = art["range"]["to"]
+        art_loc = {
+            **ch_loc,
+            "article_number": art.get("number"),
+            "article_title": art.get("title"),
+        }
+        _emit_heading("article", art["title"], art.get("number"),
+                      (art_first, art_last), art_loc)
+        for n in pre:
+            p = _load(n)
+            if p:
+                _add_para(p, ch_loc)  # orphans carry chapter-level location
+        _emit_paras_with_h2s(art_paras, art.get("headings", []), art_loc)
+
+    def _emit_chapter(chapter: dict, sec_loc: dict) -> None:
+        """Emit chapter heading + all articles or direct paragraphs."""
+        articles = chapter.get("articles", [])
+        ch_paras = chapter.get("paragraphs", [])
+        ch_loc = {
+            **sec_loc,
+            "chapter_slug": chapter.get("slug"),
+            "chapter_title": chapter.get("title"),
+            "chapter_number": chapter.get("number"),
+            "article_number": None,
+            "article_title": None,
+        }
+        if articles:
+            covered = {n for art in articles for n in art.get("paragraphs", [])}
+            orphans = sorted(set(ch_paras) - covered)
+            ch_first = orphans[0] if orphans else articles[0]["range"]["from"]
+            ch_last = articles[-1]["range"]["to"]
+            _emit_heading("chapter", chapter["title"], chapter["number"],
+                          (ch_first, ch_last), ch_loc)
+            for i, art in enumerate(articles):
+                _emit_article(art, ch_loc, orphans=orphans if i == 0 else None)
+        else:
+            if not ch_paras:
+                return
+            sorted_paras = sorted(ch_paras)
+            _emit_heading("chapter", chapter["title"], chapter["number"],
+                          (sorted_paras[0], sorted_paras[-1]), ch_loc)
+            _emit_paras_with_h2s(sorted_paras, chapter.get("headings", []), ch_loc)
+
+    def _emit_intro_block(
+        para_nums: list[int], title: str, location: dict,
+    ) -> None:
+        """Emit a standalone chapter-level heading + introductory paragraphs."""
+        loaded = [(n, _load(n)) for n in para_nums]
+        loaded = [(n, p) for n, p in loaded if p]
+        if not loaded:
+            return
+        first_n, last_n = loaded[0][0], loaded[-1][0]
+        _emit_heading("chapter", title, None, (first_n, last_n), location)
+        for _, p in loaded:
+            _add_para(p, location)
+
+    for part in structure.get("parts", []):
+        part_loc: dict = {
+            "part_slug": part.get("slug"),
+            "part_title": part.get("title"),
+            "part_number": part.get("number"),
+            "section_slug": None, "section_title": None, "section_number": None,
+            "chapter_slug": None, "chapter_title": None, "chapter_number": None,
+            "article_number": None, "article_title": None, "heading2_title": None,
+        }
+        _emit_intro_block(part.get("intro_paragraphs", []), part["title"], part_loc)
+
+        for section in part.get("sections", []):
+            sec_loc: dict = {
+                **part_loc,
+                "section_slug": section.get("slug"),
+                "section_title": section.get("title"),
+                "section_number": section.get("number"),
+                "chapter_slug": None, "chapter_title": None, "chapter_number": None,
+                "article_number": None, "article_title": None,
+            }
+            _emit_intro_block(
+                section.get("intro_paragraphs", []), section["title"], sec_loc,
+            )
+            for eb in section.get("en_brefs", []) or []:
+                for n in eb.get("paragraphs", []):
+                    p = _load(n)
+                    if p:
+                        _add_para(p, sec_loc)
+            for art in section.get("articles_direct", []):
+                _emit_article(art, sec_loc)
+            for chapter in section.get("chapters", []):
+                _emit_chapter(chapter, sec_loc)
+
+    for slug, paras in en_bref_by_chapter.items():
+        entries.append(build_en_bref_combined_entry(
+            seq=_next_seq(), chapter_slug=slug,
+            en_bref_paragraphs=paras, location={"chapter_slug": slug},
+        ))
+
+    return entries, audit_rows
+
+
 def _chapter_part_order(chapter: dict) -> tuple[int, int, int]:
     """Sort key: (part_number, section_number, chapter_number)."""
     return (
@@ -1052,47 +1338,50 @@ VOICE_OPTS = {
 def build_manifest(
     chapters_full_dir: Path,
     paragraphs_dir: Path,
+    structure_path: Path | None = None,
 ) -> tuple[dict, list[dict]]:
-    """Build full manifest dict + flat audit row list."""
-    corpus = load_corpus(chapters_full_dir, paragraphs_dir)
-    entries: list[dict] = []
-    audit_rows: list[dict] = []
-    seen_numbers: dict[int, int] = {}
+    """Build full manifest dict + flat audit row list.
 
-    # Group en-bref paragraphs by chapter for combined entries.
-    en_bref_by_chapter: dict[str, list[dict]] = {}
+    When structure.json is present (derived from chapters_full_dir.parent if
+    not supplied), uses the structured walker which interleaves V2 heading
+    entries with paragraph entries. Falls back to a flat walker (no heading
+    entries) when structure.json is absent — used in unit-test fixtures.
+    """
+    if structure_path is None:
+        structure_path = chapters_full_dir.parent / "structure.json"
 
-    seq = 0
-    for item in corpus:
-        paragraph = item["paragraph"]
-        location = item["location"]
-        n = paragraph["number"]
-        seen_numbers[n] = seen_numbers.get(n, 0) + 1
-        seq += 1
-        entry, rows = build_paragraph_entry(
-            seq=seq,
-            paragraph=paragraph,
-            location=location,
-            occurrence_index=seen_numbers[n],
-        )
-        entries.append(entry)
-        audit_rows.extend(rows)
-        if is_en_bref(paragraph):
-            # Prefer chapter_slug; fall back to section_slug for section-level
-            # en-brefs (e.g. Dix Commandements §2075-2082 and the Pater Noster
-            # articles_direct en-brefs that have no chapter slug).
-            slug = (location.get("chapter_slug")
-                    or location.get("section_slug")
-                    or "_unknown")
-            en_bref_by_chapter.setdefault(slug, []).append(paragraph)
-
-    # Emit one en_bref_combined entry per chapter that has en brefs.
-    for slug, paras in en_bref_by_chapter.items():
-        seq += 1
-        location = {"chapter_slug": slug}
-        entries.append(build_en_bref_combined_entry(
-            seq=seq, chapter_slug=slug, en_bref_paragraphs=paras, location=location,
-        ))
+    if structure_path.exists():
+        entries, audit_rows = _build_entries_structured(structure_path, paragraphs_dir)
+    else:
+        corpus = load_corpus(chapters_full_dir, paragraphs_dir, structure_path=None)
+        entries = []
+        audit_rows = []
+        seen_numbers: dict[int, int] = {}
+        en_bref_by_chapter: dict[str, list[dict]] = {}
+        seq = 0
+        for item in corpus:
+            paragraph = item["paragraph"]
+            location = item["location"]
+            n = paragraph["number"]
+            seen_numbers[n] = seen_numbers.get(n, 0) + 1
+            seq += 1
+            entry, rows = build_paragraph_entry(
+                seq=seq, paragraph=paragraph, location=location,
+                occurrence_index=seen_numbers[n],
+            )
+            entries.append(entry)
+            audit_rows.extend(rows)
+            if is_en_bref(paragraph):
+                slug = (location.get("chapter_slug")
+                        or location.get("section_slug")
+                        or "_unknown")
+                en_bref_by_chapter.setdefault(slug, []).append(paragraph)
+        for slug, paras in en_bref_by_chapter.items():
+            seq += 1
+            entries.append(build_en_bref_combined_entry(
+                seq=seq, chapter_slug=slug, en_bref_paragraphs=paras,
+                location={"chapter_slug": slug},
+            ))
 
     manifest = {
         "version": 1,
