@@ -422,6 +422,14 @@ def expand_bible_refs(text: str) -> str:
 KEEP_TRAILING_PAREN: set[int] = {260, 469}
 
 
+# Paragraphs whose single citation block actually contains quotes from
+# multiple authors. Author-specific intros would be misleading; fall
+# back to plain "Citation :".
+#   §32:  Paul + Augustin
+#   §313: Catherine de Sienne + Thomas More + Julian of Norwich
+FORCE_GENERIC_CITATION_INTRO: set[int] = {32, 313}
+
+
 _RE_REF_TRAILING_BODY = re.compile(
     r"\s+\(([A-ZÄÀÂÇÉÈÊËÎÏÔŒÙÛÜŸ].*\d)\)(\.?)$"
 )
@@ -801,6 +809,10 @@ def build_paragraph_entry(
     for i, (cit, ref) in enumerate(matched):
         cit_text, trailing = _build_citation_text(cit, n)
         intro, tier = derive_citation_intro(ref, body_text=body)
+        # Some single citation blocks contain quotes from multiple authors,
+        # making a specific attribution misleading. Force a generic intro.
+        if n in FORCE_GENERIC_CITATION_INTRO:
+            intro = "Citation :"
         segments.append({"voice": "gerard", "text": intro, "targets": ["v1", "v2"]})
         segments.append({"voice": "fabrice", "text": cit_text, "targets": ["v1", "v2"]})
         if trailing:

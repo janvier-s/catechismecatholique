@@ -15,7 +15,7 @@ VOICES = {
 BASE_OPTS = {
     "gerard":  ["--volume=-10%"],
     "remy":    ["--rate=-10%"],
-    "fabrice": ["--volume=-10%", "--rate=-10%"],
+    "fabrice": ["--volume=-5%", "--rate=-20%"],
 }
 
 
