@@ -12,8 +12,16 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	if (!lesson) throw error(404, 'Leçon introuvable');
 
 	const idx = structure.lessons.findIndex((l) => l.slug === params.lecon);
-	const prev = idx > 0 ? structure.lessons[idx - 1]! : null;
-	const next = idx >= 0 && idx < structure.lessons.length - 1 ? structure.lessons[idx + 1]! : null;
+	// Skip prev/next entries that aren't yet authored. Otherwise the pager would
+	// link to a 404 page, which breaks the prerender crawl.
+	const prev =
+		idx > 0 ? (structure.lessons[idx - 1]!.available ? structure.lessons[idx - 1]! : null) : null;
+	const next =
+		idx >= 0 && idx < structure.lessons.length - 1
+			? structure.lessons[idx + 1]!.available
+				? structure.lessons[idx + 1]!
+				: null
+			: null;
 
 	return { lesson, lessons: structure.lessons, prev, next };
 };
