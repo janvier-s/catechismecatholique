@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { get } from 'svelte/store';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
-	import { loadChapter, loadParagraph, loadEnBrefsIndex } from '$lib/data/loaders';
+	import { loadParagraph, loadEnBrefsIndex } from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import ParagraphRenderer from '../cec/ParagraphRenderer.svelte';
 	import CitationBlock from '../cec/CitationBlock.svelte';
@@ -29,20 +29,12 @@
 			// paragraphs like §26 that sit outside any chapter.
 			const index = await loadEnBrefsIndex();
 			const following = index.find((b) => b.last >= paragraphNum);
-			if (!following) {
+			if (!following || following.paragraphs.length === 0) {
 				blocks = [];
 				return;
 			}
-			const chapter = await loadChapter(following.chapter_slug);
-			const target = chapter.en_brefs.find(
-				(b) => b.paragraphs[0] === following.first && b.paragraphs.length > 0
-			);
-			if (!target) {
-				blocks = [];
-				return;
-			}
-			const records = await Promise.all(target.paragraphs.map((n) => loadParagraph(n)));
-			blocks = [{ paragraphs: records, firstNumber: target.paragraphs[0]! }];
+			const records = await Promise.all(following.paragraphs.map((n) => loadParagraph(n)));
+			blocks = [{ paragraphs: records, firstNumber: following.paragraphs[0]! }];
 		})();
 	});
 </script>

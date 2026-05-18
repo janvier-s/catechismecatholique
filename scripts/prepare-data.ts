@@ -216,22 +216,85 @@ async function main() {
 	// Global en_bref index: lets the study panel find the "following" en_bref
 	// for any paragraph, even when the paragraph itself sits outside a chapter
 	// (e.g. section-intro paragraphs like §26). Sorted by first paragraph.
+	//
+	// Each entry embeds the full paragraph list so TabEnBref can render
+	// without a second `loadChapter` round-trip — which previously dropped
+	// section-level en-brefs (parent_kind === 'section') entirely and made
+	// the tab fragile to any chapter-load failure.
+	//
+	// Sources merged into the index, in priority order:
+	//   1. Source-tagged <en_bref> nodes (both chapter- and section-parented)
+	//   2. Trimmed-at-Paragraphe-boundaries variants of those
+	//   3. Synthetic clusters of contiguous <i class="typo_italic"> paragraphs
+	//      in regions the source didn't tag — needed because the Pater Noster
+	//      commentary (§2759-2865) uses italic summary paragraphs but never
+	//      wraps them in <en_bref> nodes, leaving 107 paragraphs without a
+	//      surfaceable en-bref.
 	logStep('building en-brefs index');
-	const enBrefsIndex: Array<{ first: number; last: number; chapter_slug: string }> = [];
-	for (const ch of chapters) {
-		for (const block of ch.en_brefs) {
-			if (block.paragraphs.length > 0) {
-				enBrefsIndex.push({
-					first: block.paragraphs[0]!,
-					last: block.paragraphs[block.paragraphs.length - 1]!,
-					chapter_slug: ch.slug
-				});
+	type EnBrefIndexEntry = {
+		first: number;
+		last: number;
+		paragraphs: number[];
+		parent_kind: 'chapter' | 'section' | 'synthetic';
+		parent_slug?: string;
+	};
+	const enBrefsIndex: EnBrefIndexEntry[] = [];
+	const coveredNumbers = new Set<number>();
+	for (const b of enbref) {
+		if (b.paragraphs.length === 0) continue;
+		enBrefsIndex.push({
+			first: b.paragraphs[0]!,
+			last: b.paragraphs[b.paragraphs.length - 1]!,
+			paragraphs: [...b.paragraphs],
+			parent_kind: b.parent_kind,
+			parent_slug: b.parent_slug
+		});
+		for (const n of b.paragraphs) coveredNumbers.add(n);
+	}
+	// Synthetic: scan for contiguous italic-typo paragraphs in uncovered ranges.
+	const isItalicEnBrefStyle = (html: string): boolean => {
+		const inner = html
+			.trim()
+			.replace(/^<span>/, '')
+			.replace(/<\/span>$/, '')
+			.trim();
+		return inner.startsWith('<i class="typo_italic">') && inner.endsWith('</i>');
+	};
+	const orphanItalic: number[] = [];
+	for (const [n, p] of paragraphs) {
+		if (coveredNumbers.has(n)) continue;
+		if (isItalicEnBrefStyle(p.text_html ?? '')) orphanItalic.push(n);
+	}
+	orphanItalic.sort((a, b) => a - b);
+	let syntheticCount = 0;
+	if (orphanItalic.length > 0) {
+		let cluster: number[] = [orphanItalic[0]!];
+		const flush = () => {
+			if (cluster.length === 0) return;
+			enBrefsIndex.push({
+				first: cluster[0]!,
+				last: cluster[cluster.length - 1]!,
+				paragraphs: [...cluster],
+				parent_kind: 'synthetic'
+			});
+			syntheticCount++;
+		};
+		for (let i = 1; i < orphanItalic.length; i++) {
+			const n = orphanItalic[i]!;
+			if (n === cluster[cluster.length - 1]! + 1) {
+				cluster.push(n);
+			} else {
+				flush();
+				cluster = [n];
 			}
 		}
+		flush();
 	}
 	enBrefsIndex.sort((a, b) => a.first - b.first);
 	writeFileSync(join(OUT, 'cec/en-brefs-index.json'), JSON.stringify(enBrefsIndex));
-	endStep(`${enBrefsIndex.length} en_bref blocks`);
+	endStep(
+		`${enBrefsIndex.length} en_bref blocks (${syntheticCount} synthetic from orphan italic clusters)`
+	);
 
 	logStep('building headings index (autocomplete)');
 	const { buildHeadingsIndex } = await import('./prepare/headings-index.ts');

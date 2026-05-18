@@ -128,12 +128,22 @@ export function loadStructure(fetcher: Fetch = fetch): Promise<unknown> {
 export interface EnBrefIndexEntry {
 	first: number;
 	last: number;
-	chapter_slug: string;
+	paragraphs: number[];
+	parent_kind: 'chapter' | 'section' | 'synthetic';
+	parent_slug?: string;
 }
 let enBrefsIndexPromise: Promise<EnBrefIndexEntry[]> | null = null;
 export function loadEnBrefsIndex(fetcher: Fetch = fetch): Promise<EnBrefIndexEntry[]> {
 	if (!enBrefsIndexPromise) {
-		enBrefsIndexPromise = fetchJson<EnBrefIndexEntry[]>('/data/cec/en-brefs-index.json', fetcher);
+		enBrefsIndexPromise = fetchJson<EnBrefIndexEntry[]>(
+			'/data/cec/en-brefs-index.json',
+			fetcher
+		).catch((e) => {
+			// Drop the cached rejected promise so the next caller retries
+			// instead of inheriting a poisoned cache for the whole session.
+			enBrefsIndexPromise = null;
+			throw e;
+		});
 	}
 	return enBrefsIndexPromise;
 }
