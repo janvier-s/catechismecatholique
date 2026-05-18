@@ -76,9 +76,19 @@
 	let hasAudio: boolean = $state(false);
 	let dataReady: boolean = $state(false);
 
+	// Tab clicks update $studyPanel.activeTab, which emits a new store object
+	// even though context/open are unchanged — that would re-fire the loader
+	// below and flash the optimistic tab strip. Guard on a stable key derived
+	// from the bits this effect actually cares about.
+	let prevLoaderKey: string | null = null;
+
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (!ctx || !$studyPanel.open) {
+		const open = $studyPanel.open;
+		const key = open && ctx ? JSON.stringify(ctx) : '__closed__';
+		if (key === prevLoaderKey) return;
+		prevLoaderKey = key;
+		if (!ctx || !open) {
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
