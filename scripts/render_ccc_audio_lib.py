@@ -15,7 +15,7 @@ VOICES = {
 BASE_OPTS = {
     "gerard":  ["--volume=-10%"],
     "remy":    ["--rate=-10%"],
-    "fabrice": ["--volume=-5%", "--rate=-20%"],
+    "fabrice": ["--volume=-5%", "--rate=-15%"],
 }
 
 
@@ -56,12 +56,13 @@ def build_edge_tts_argv(
     out_path: Path,
     extra_pitch_hz: int | None = None,
     extra_rate_pct: int | None = None,
-    suppress_base_volume: bool = False,
+    override_volume_pct: int | None = None,
 ) -> list[str]:
     argv = ["edge-tts", "--voice", VOICES[voice]]
     opts = BASE_OPTS[voice]
-    if suppress_base_volume:
+    if override_volume_pct is not None:
         opts = [o for o in opts if not o.startswith("--volume=")]
+        opts = list(opts) + [f"--volume={override_volume_pct:+d}%"]
     argv.extend(opts)
     if extra_pitch_hz is not None:
         argv.append(f"--pitch={extra_pitch_hz:+d}Hz")
@@ -130,28 +131,30 @@ def render_entry(
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    def _opts_for(seg: dict) -> tuple[int | None, int | None, bool]:
-        """Return (pitch, rate, suppress_base_volume) for a single segment.
+    def _opts_for(seg: dict) -> tuple[int | None, int | None, int | None]:
+        """Return (pitch, rate, override_volume_pct) for a single segment.
 
         Gérard's 'Paragraphe N.' announces get pitch/rate jitter and the
-        base -10% volume. Gérard's citation/en-bref announces drop the
-        base volume so they don't sound quieter than the surrounding
-        body/citation voices.
+        base -10% volume. Gérard's citation/en-bref announces sit at -20%
+        — quieter than the body voices so they read as a label, not a
+        spoken sentence.
         """
         is_gerard = seg["voice"] == "gerard"
         is_paragraph = is_gerard and seg["text"].startswith("Paragraphe ")
         if is_paragraph:
             p, r = jitter.next_announce()
-            return p, r, False
-        suppress = is_gerard and not is_paragraph
-        return None, None, suppress
+            return p, r, None
+        if is_gerard:
+            # Citation / En bref announce — override volume to -20%.
+            return None, None, -20
+        return None, None, None
 
     if len(segments) == 1:
         seg = segments[0]
-        pitch, rate, suppress_vol = _opts_for(seg)
+        pitch, rate, vol = _opts_for(seg)
         argv = build_edge_tts_argv(seg["voice"], seg["text"], out_path,
                                     extra_pitch_hz=pitch, extra_rate_pct=rate,
-                                    suppress_base_volume=suppress_vol)
+                                    override_volume_pct=vol)
         return subprocess.run(argv, capture_output=True, text=True).returncode == 0
 
     # Multi-segment: render each, glue with silence, concat.
@@ -160,10 +163,10 @@ def render_entry(
         files: list[Path] = []
         for i, seg in enumerate(segments):
             seg_file = tmpdir / f"seg_{i:02d}.mp3"
-            pitch, rate, suppress_vol = _opts_for(seg)
+            pitch, rate, vol = _opts_for(seg)
             argv = build_edge_tts_argv(seg["voice"], seg["text"], seg_file,
                                         extra_pitch_hz=pitch, extra_rate_pct=rate,
-                                        suppress_base_volume=suppress_vol)
+                                        override_volume_pct=vol)
             if subprocess.run(argv, capture_output=True, text=True).returncode != 0:
                 return False
             files.append(seg_file)

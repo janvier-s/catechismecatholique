@@ -399,15 +399,29 @@ def test_build_paragraph_entry_with_citation():
 
 
 def test_build_paragraph_entry_empty_body_skipped():
-    # §21 / §118 case
+    # §118 has empty body + a citation; we expect no Rémy segment.
+    # (§21 also has empty body but is in NO_CITATION_INTRO, so it would skip
+    # the "Citation :" announce — covered by a separate test.)
     paragraph = {
-        "number": 21, "text_html": "<span></span>",
+        "number": 118, "text_html": "<span></span>",
         "citations": [{"text_html": "<span>Citation only.</span>"}],
         "magisterial_refs": [{"type": "patristic", "raw": "saint Augustin", "idx": "a"}],
     }
-    entry, _ = ccc_audio.build_paragraph_entry(seq=25, paragraph=paragraph, location={})
+    entry, _ = ccc_audio.build_paragraph_entry(seq=125, paragraph=paragraph, location={})
     voices = [s["voice"] for s in entry["segments"]]
     assert voices == ["gerard", "gerard", "fabrice"]  # no remy body
+
+
+def test_build_paragraph_entry_no_citation_intro_for_21():
+    # §21 is in NO_CITATION_INTRO — Fabrice reads the citation without a "Citation :" announce.
+    paragraph = {
+        "number": 21, "text_html": "<span></span>",
+        "citations": [{"text_html": "<span>Les citations en petits caractères.</span>"}],
+        "magisterial_refs": [],
+    }
+    entry, _ = ccc_audio.build_paragraph_entry(seq=23, paragraph=paragraph, location={})
+    voices = [s["voice"] for s in entry["segments"]]
+    assert voices == ["gerard", "fabrice"]  # Paragraphe 21. then Fabrice — no intro
 
 
 def test_build_paragraph_entry_dup_number_suffix():

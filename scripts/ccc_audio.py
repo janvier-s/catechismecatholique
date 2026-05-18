@@ -430,6 +430,13 @@ KEEP_TRAILING_PAREN: set[int] = {260, 469}
 FORCE_GENERIC_CITATION_INTRO: set[int] = {32, 313}
 
 
+# Paragraphs where the citation IS the body (no separate French preamble),
+# so the "Citation X :" announce would be redundant — the listener
+# already knows what's coming from the "Paragraphe N." announce.
+#   §21: meta-paragraph defining what citations are; body is empty.
+NO_CITATION_INTRO: set[int] = {21}
+
+
 _RE_REF_TRAILING_BODY = re.compile(
     r"\s+\(([A-ZÄÀÂÇÉÈÊËÎÏÔŒÙÛÜŸ].*\d)\)(\.?)$"
 )
@@ -813,7 +820,8 @@ def build_paragraph_entry(
         # making a specific attribution misleading. Force a generic intro.
         if n in FORCE_GENERIC_CITATION_INTRO:
             intro = "Citation :"
-        segments.append({"voice": "gerard", "text": intro, "targets": ["v1", "v2"]})
+        if n not in NO_CITATION_INTRO:
+            segments.append({"voice": "gerard", "text": intro, "targets": ["v1", "v2"]})
         segments.append({"voice": "fabrice", "text": cit_text, "targets": ["v1", "v2"]})
         if trailing:
             segments.append({"voice": "gerard", "text": trailing + ".", "targets": ["v1", "v2"]})
