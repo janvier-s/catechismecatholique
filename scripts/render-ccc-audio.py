@@ -101,11 +101,16 @@ def main() -> int:
             if seg["voice"] == "remy":
                 body_preview = seg["text"][:80]
                 break
+        loc = entry["location"]
+        album = (loc.get("chapter_title")
+                 or loc.get("section_title")
+                 or loc.get("part_title")
+                 or "CCC")
         if entry["kind"] == "paragraph":
             rlib.tag_mp3(
                 out_path,
                 title=f"CCC §{entry['number']}",
-                album=entry["location"].get("chapter_title", "CCC"),
+                album=album,
                 track=entry["seq"],
                 comment=body_preview,
             )
@@ -118,10 +123,11 @@ def main() -> int:
                 "is_en_bref": is_eb,
             }
         else:
+            chapter_label = loc.get("chapter_title") or entry["chapter_slug"]
             rlib.tag_mp3(
                 out_path,
-                title=f"CCC en bref — {entry['location'].get('chapter_title', entry['chapter_slug'])}",
-                album=entry["location"].get("chapter_title", "CCC"),
+                title=f"CCC en bref — {chapter_label}",
+                album=album,
                 track=entry["seq"],
             )
             index["en_bref_combined"][entry["chapter_slug"]] = {
