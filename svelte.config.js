@@ -69,11 +69,7 @@ const config = {
 				'style-src': ['self', 'unsafe-inline'],
 				'img-src': ['self', 'data:', 'https://i.ytimg.com', 'https://*.ytimg.com'],
 				'font-src': ['self'],
-				'connect-src': [
-					'self',
-					'cloudflareinsights.com',
-					'https://audio.catechismecatholique.fr'
-				],
+				'connect-src': ['self', 'cloudflareinsights.com', 'https://audio.catechismecatholique.fr'],
 				'media-src': ['self', 'https://audio.catechismecatholique.fr'],
 				'frame-src': ['https://www.youtube-nocookie.com'],
 				'base-uri': ['self'],
