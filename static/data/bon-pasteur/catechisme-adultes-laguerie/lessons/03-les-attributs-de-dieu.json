@@ -1,0 +1,245 @@
+{
+	"slug": "03-les-attributs-de-dieu",
+	"n": 3,
+	"title": "Les attributs de Dieu",
+	"pdf": "Courskt3.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les cinq voies de saint Thomas nous ont déjà donné quelques attributs de Dieu : il est cause de tout, nécessaire, suprême intelligence, premier moteur immobile, fin de toutes choses. Il faut maintenant aller plus loin et essayer, d'abord, de définir Dieu, puis d'énumérer ses principaux attributs. Connaître Dieu, puisqu'il n'est l'objet d'aucun concept clair, c'est principalement méditer ses attributs.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Peut-on définir Dieu ?",
+			"anchor": "peut-on-definir-dieu"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi une définition au sens strict est impossible",
+			"anchor": "pourquoi-une-definition-au-sens-strict-est-impossible"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Toute définition de dictionnaire procède de la même manière : on classe la chose dans un <em>genre</em>, et on ajoute sa <em>différence spécifique</em>. Un fauteuil est une chaise (genre) avec des accoudoirs et un rembourrage (différence). Une mobylette est un bicycle (genre) à moteur (différence). Une dame est une femme (genre) mariée (différence).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le catéchisme pour enfants tente de définir Dieu de cette façon : « Dieu est un esprit éternel, infiniment parfait, créateur et maître de toute chose. » Bonne formule pour enseigner, mais en toute rigueur les termes <em>esprit</em> et <em>être</em>, qu'on prend ici comme genre, ne sont pas des genres :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><em>Esprit</em> ne dit que quelque chose de négatif (« être sans corps, sans matière ») : un genre défini par la négation est insuffisant.</li><li><em>Être</em> ne peut pas davantage être un genre, parce que tout ce qui existe a l'être. Un genre commun à tout n'est plus un genre. Aristote le disait : l'être est « toujours autre dans les choses autres ».</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu est si transcendant, si unique, qu'on ne peut le ranger dans aucun genre. Une définition au sens strict, par genre et différence, est donc impossible pour Dieu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La meilleure définition : saint Thomas",
+			"anchor": "la-meilleure-definition-saint-thomas"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Dieu est l'être (et non pas un être) dont l'essence est d'exister.</p>",
+			"attribution": "Saint Thomas d'Aquin"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Thomas évite de classer Dieu dans le genre <em>être</em> : Dieu n'est pas <em>un</em> être parmi d'autres, il est <em>cet</em> être unique dont la spécificité est que son essence se confond avec son existence.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Essence",
+			"html": "<p>Ce qu'une chose est. Notre intelligence saisit immédiatement l'essence : dire « voiture », « cheval », « table », c'est saisir une essence. L'esprit fonctionne au carburant des essences ; même les enfants le font naturellement.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Existence",
+			"html": "<p>Ce qui fait qu'une chose est. À ne pas confondre avec le simple fait d'être : l'existence (en latin <em>esse</em>) est le principe qui pose l'être dans la réalité.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dans toute créature, ces deux principes sont réellement distincts. Le petit frère que vos parents n'ont pas eu aurait eu la même essence que vous (un homme, animal raisonnable) ; il lui manque seulement d'avoir reçu l'existence. C'est le statut même de la créature : être ce qu'elle est, sans nécessairement être.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>En Dieu seul, essence et existence sont une seule réalité : Dieu ne peut pas ne pas être ce qu'il est, parce qu'il <strong>est</strong> l'exister. C'est aussi le nom que Dieu se donne à lui-même sur le mont Sinaï, devant Moïse : <em>« Je suis celui qui suis »</em> (Ex 3, 14). <em>Yahvé</em> signifie : Je suis.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi Dieu reste pour nous insaisissable",
+			"anchor": "pourquoi-dieu-reste-insaisissable"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Précisément parce que l'essence de Dieu est <em>l'exister</em>, et que notre intelligence ne sait pas conceptualiser l'exister (elle ne conceptualise que les essences), nous n'arrivons pas à nous former un concept clair de Dieu comme nous le faisons de tout autre être. C'est par <em>analogie</em>, à travers les créatures, que nous pouvons en parler. Dieu reste, pour notre esprit, un mystère insondable.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Essence, substance, nature",
+			"anchor": "essence-substance-nature"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Trois mots désignent la même réalité foncière d'un être, mais sous des rapports différents :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>Essence</strong> : la réalité foncière considérée par rapport à l'exister (ce que la chose est).</li><li><strong>Substance</strong> : la même réalité considérée par rapport aux accidents (<em>sub-stare</em>, ce qui se tient dessous les apparences variables). Un homme est blanc, noir, jaune, grand, petit, blond, brun : ce sont des accidents. Tous ont la même substance, qui est d'être animal raisonnable.</li><li><strong>Nature</strong> : la même réalité considérée par rapport à l'agir. On va à la chasse avec un chien et non un chat parce que la <em>nature</em> du chien convient à cet agir.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu n'a qu'une essence (qui est d'exister), qu'une substance, qu'une nature. Le seul « accident » en Dieu, comme on le verra dans la Trinité, est la relation qui constitue les Personnes. Mais surtout, en Dieu, <strong>être et agir ne font qu'un</strong> : Dieu est ce qu'il fait, et cela a des conséquences considérables.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les attributs de Dieu",
+			"anchor": "les-attributs-de-dieu"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les attributs se déduisent de l'essence de Dieu et s'enchaînent les uns aux autres. Méditer chacun, une demi-heure durant, suffit à découvrir le relief étonnant que prend Dieu dans son mystère.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "1. La toute-puissance",
+			"anchor": "la-toute-puissance"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu est tout-puissant. Il peut tout, parce qu'à tout instant il donne l'être à toute chose. Si Dieu cessait un instant de me communiquer l'être qui lui est propre, je disparaîtrais. Rien n'échappe à son pouvoir : ni les êtres qui sont, ni ceux qui pourraient être.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu seul, à proprement parler, <em>crée</em>, c'est-à-dire fait être <em>ex nihilo</em>. Les hommes ne transforment que la matière préexistante. Le marbre de la <em>Pietà</em> n'est pas de Michel-Ange : c'est Dieu qui l'a fait. La création est le propre de Dieu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Peut-il faire un cercle carré ? Non. Mais ce n'est pas une limite à sa puissance : un cercle carré serait contraire à l'être lui-même, c'est-à-dire à la sagesse divine. Ne pas pouvoir faire l'absurde n'est pas une impuissance, c'est une perfection.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "2. L'ubiquité",
+			"anchor": "l-ubiquite"
+		},
+		{
+			"kind": "definition",
+			"term": "Ubiquité",
+			"html": "<p>Du latin <em>ubique</em>, partout. Présence universelle de Dieu en tout lieu, en tout temps, sans aucune exception.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Parce que Dieu donne l'être à toute chose, il est présent à toute chose comme cause. Et parce qu'en Dieu son agir et son être ne se distinguent pas, il y est tout entier : par sa puissance, par sa présence, par sa substance. « C'est en lui que nous avons la vie, le mouvement et l'être » (Ac 17, 28).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ce n'est pas le panthéisme, qui identifierait Dieu et le monde. Au contraire : <strong>c'est le monde qui est en Dieu</strong> comme le contenu dans le contenant, et non l'inverse. L'être infini de Dieu déborde infiniment ce monde, qui est par rapport à lui comme une goutte dans l'océan. Saint Thomas dit que la chose la plus monstrueuse pour un homme, c'est de ne pas penser à Dieu : on vit de Dieu, on reçoit en permanence l'être de Dieu, on ne peut pas lui être étranger.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "3. La simplicité",
+			"anchor": "la-simplicite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On dit tant de choses sur Dieu qu'on finit par s'imaginer qu'il est compliqué. C'est l'inverse : Dieu est l'être le plus simple qui soit. Il n'a en lui aucune des distinctions qui marquent la créature :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li>Pas de distinction <em>corps / âme</em>, ni <em>matière / forme</em>.</li><li>Pas de distinction <em>être / agir</em> (à la différence de l'homme, qui peut faire du bien ou du mal et sera jugé sur ses œuvres).</li><li>Pas de distinction <em>essence / existence</em> (qui est le statut même de la créature).</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Plus un être s'approche de Dieu, plus il devient simple. La sainteté est une simplification : un homme qui se rapproche de Dieu se dépouille. Ne pas confondre simplicité (perfection) et simplisme (manque d'intelligence). Dieu n'a en lui qu'une seule idée, son Verbe, et c'est dans cette idée infiniment unique que se déploie son intelligence infinie. Les hommes croient à tort multiplier leur intelligence en multipliant leurs idées.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "4. L'infinité",
+			"anchor": "l-infinite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu est infini <em>parce qu'</em>il est simple. Ce qui limite un être, c'est son essence. Parce qu'un éléphant est éléphant, il n'est pas dauphin ; parce que je suis homme, je ne courrai jamais comme un léopard, je ne nagerai jamais comme un dauphin. L'essence me limite.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Or l'essence de Dieu n'est pas d'être ceci ou cela : elle est <em>d'être</em>. Dès lors, rien ne le limite : il est infini. Une bonne image : un océan, s'il n'était pas fait d'eau mais d'être, et sans rivage. Tous les attributs de Dieu sont à affirmer comme infinis. C'est ainsi que l'on peut maintenant dire que Dieu est non plus seulement « suprêmement » mais <strong>infiniment</strong> intelligent, infiniment puissant, infiniment bon.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "5. L'éternité",
+			"anchor": "l-eternite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour les enfants, on dit que Dieu « a toujours été, est et sera toujours ». C'est exact mais insuffisant : cela reste dans la catégorie du temps. L'éternité de Dieu, c'est <strong>l'absence de temps</strong>, le fait d'être absolument hors du temps.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Aristote définit le temps comme <em>la mesure du mouvement selon l'avant et l'après</em>. Dans la réalité, il n'y a que du mouvement ; le temps est la psychologie de cette saisie successive par notre intelligence. Quand notre esprit est totalement fixé (au cinéma, dans une grande contemplation), nous sortons de la conscience du temps : 1h30 paraissent une minute.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Or l'esprit de Dieu est tout entier fixé sur son essence, en un acte unique et infini. Pour Dieu, il n'y a pas de succession. Adam et Ève, Vercingétorix, l'année 2014, l'an 3000, la création et la fin du monde, votre naissance et votre mort : tout est présent à Dieu d'un seul coup. <em>Pas de calendrier ni de montre pour Dieu.</em> Dans la vie spirituelle, ce point est décisif : Dieu ne nous demande pas ce que nous fûmes ni ce que nous serons, il nous demande d'être maintenant en sa présence.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "6. La Providence",
+			"anchor": "la-providence"
+		},
+		{
+			"kind": "definition",
+			"term": "Providence",
+			"html": "<p>Du latin <em>pro-videre</em>, voir devant, anticiper. Action de Dieu qui mène chaque être, individuellement, à sa fin.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Puisque Dieu voit tout simultanément et qu'il est cause efficiente et finale de tout, il mène chaque être à son terme. Cette fin n'est jamais manquée par Dieu lui-même, même si un homme ou un ange peut, par sa liberté, la manquer pour lui-même.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est le christianisme qui a libéré le monde du <em>fatum</em> grec, ce destin mécanique et inexorable qui écrasait les hommes de la tragédie antique. Un chrétien sait qu'il est mené par un être infiniment puissant, infiniment bon, infiniment clairvoyant, qui est à l'origine de ce qu'il est, qui demeure en lui, et qui le mène à son bien. Un homme qui a compris cela ne se laisse plus impressionner par ce qui arrive.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "7. L'amour",
+			"anchor": "l-amour"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu est amour infini. Les Grecs (Platon, Aristote) ont parfaitement vu que Dieu est intelligence infinie et bien souverain : « tout bien est en Dieu », il est « l'être le plus désirable qui soit » (<em>prôton eraston</em>). Mais ils n'ont jamais imaginé que Dieu puisse <em>aimer</em>. Et, dans leur logique, ils avaient raison.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>En effet, si aimer c'est se porter vers une chose parce qu'elle est bonne (amour naturel), celui qui possède tout bien en lui-même ne peut pas aimer un autre que lui. Le Dieu d'Aristote est donc enfermé dans son auto-contemplation, incapable d'amour.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Mais l'amour n'est pas seulement cela. <strong>L'amour, c'est aussi se donner, c'est être bon, c'est verser sur les autres le poids de sa propre bonté.</strong> Cette seconde manière d'aimer, c'est la <em>charité</em>. Et c'est elle qui se trouve en Dieu. Dieu n'aime pas les choses parce qu'elles sont bonnes : <strong>il aime les choses parce que lui est bon</strong> et qu'il se communique.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et nous verrons pourquoi Dieu est bon : c'est parce qu'il n'est pas seul, c'est parce qu'ils sont trois. C'est le mystère de la Sainte Trinité, objet de la leçon suivante. Méditer que Dieu peut pencher sur le moindre roseau pensant un amour infini, voilà ce qui change la vie d'un homme.</p>"
+		}
+	]
+}

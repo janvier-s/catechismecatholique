@@ -1,0 +1,330 @@
+{
+	"slug": "15-le-bapteme",
+	"n": 15,
+	"title": "Le Baptême",
+	"pdf": "Courskt15.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Premier des sacrements, le baptême est la <strong>naissance dans la vie divine</strong>. Sans lui, pas de vie sacramentelle · il est la porte des autres sacrements, ce que les théologiens appellent en latin <em>janua sacramentorum</em>. Les catéchumènes peuvent avoir la foi avant le baptême, mais aucun autre sacrement n'est valide sans lui. Le mot vient du grec <em>baptizein</em>, <em>plonger dans l'eau</em>, au sens de laver, purifier.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le signe sensible",
+			"anchor": "signe-sensible"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Parce que le baptême, pour donner la vie surnaturelle, doit effacer tout péché (et en particulier le péché originel), Notre Seigneur a voulu son rite comme une <strong>ablution</strong> · le fait de laver, de purifier.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Matière éloignée : l'eau",
+			"anchor": "matiere-eloignee"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Toute eau non altérée ni corrompue. Règle générale pour la matière d'un sacrement : <strong>ce que le jugement commun appelle de l'eau</strong>.</p><ul><li>Eau de mer ? Oui, c'est de l'eau.</li><li>Eau pétillante ? Oui, c'est de l'eau.</li><li>Thé ou café ? Non · ce sont du thé et du café, même s'ils sont composés à 99 % d'eau.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Anecdote classique des examens de jeunes prêtres. Un vieux chanoine demande : <em>« Peut-on baptiser avec de la soupe ? »</em> Le jeune répond, <em>cum grano salis</em> : <em>« Avec la soupe de l'évêché, certainement pas ; mais avec la soupe du séminaire, peut-être bien. »</em></p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Matière prochaine : l'ablution",
+			"anchor": "matiere-prochaine"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'eau a deux usages principaux : <em>désaltérer</em> et <em>laver</em>. C'est le second qui est retenu pour le baptême. L'eau doit donc <strong>couler</strong> sur le baptisé · on ne se contente pas de le toucher. Trois modes historiques d'ablution :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Par immersion",
+			"html": "<p>Plonger entièrement le corps dans l'eau. Pratique quasi universelle jusqu'au XIIe siècle, encore courante en Orient. C'est ce mode qui explique l'existence ancienne des <em>diaconesses</em> · pieuses laïques (sans aucun sacrement) qui assistaient l'évêque pour le baptême des femmes, lesquelles étaient en tenue légère.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Par aspersion",
+			"html": "<p>Jeter de l'eau sur le corps avec un goupillon. Plus utilisée aujourd'hui hormis cas de grande nécessité. C'est le mode qu'utilisait saint François Xavier · n'ayant pas le temps matériel de baptiser autrement les centaines de milliers de personnes qui se présentaient, il aspergeait largement à la volée.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Par infusion",
+			"html": "<p>Verser de l'eau (trois fois en l'honneur des trois Personnes divines) sur le corps, généralement la tête. Pratique actuelle. Une fois suffirait à la validité.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Important pour la validité</strong> : c'est la <em>même personne</em>, le ministre, qui doit verser l'eau et prononcer la forme. Pas un qui verse, l'autre qui parle.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La forme",
+			"anchor": "forme"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Telle que le Christ l'a donnée juste avant son Ascension :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Allez donc, enseignez toutes les nations, les baptisant au nom du Père, et du Fils, et du Saint-Esprit.</p>",
+			"attribution": "Matthieu 28, 19"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quatre éléments requis à la validité : <strong>le ministre</strong> (« Je »), <strong>le baptisé</strong> (« te »), <strong>l'action sacramentelle</strong> (« baptise »), <strong>l'invocation des trois Personnes divines</strong>. Si un prêtre, par fantaisie, omet l'une des trois Personnes, le baptême est <em>invalide</em> et doit être refait.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Détail liturgique : on ne répond <em>pas</em> « Amen » à la formule du baptême · le fait même de recevoir le sacrement est déjà une profession de foi. C'est le seul sacrement où on ne devrait pas répondre Amen · et curieusement, c'est celui où les fidèles le font le plus.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les effets du baptême",
+			"anchor": "effets"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quatre effets, à retenir absolument. Mais attention · les catéchismes les présentent souvent dans un <em>ordre didactique</em> qui n'est pas le bon. Voici d'abord l'ordre courant, puis l'<strong>ordre réel et théologique</strong> qui éclaire tout.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les quatre effets (ordre didactique)",
+			"anchor": "ordre-didactique"
+		},
+		{
+			"kind": "definition",
+			"term": "1. Rémission du péché originel",
+			"html": "<p>Le baptême efface le péché originel (que tous portent) et, chez l'adulte, tous les péchés personnels commis avant. Parce qu'il est une <em>naissance</em>, il efface aussi <strong>toutes les peines dues à ces péchés</strong> · ce que la pénitence ne fait qu'en partie. Quelqu'un qui meurt aussitôt après son baptême va tout droit au ciel.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. La grâce sanctifiante",
+			"html": "<p>Principe de la nouvelle vie dans le Christ Jésus. C'est la faveur de Dieu déposée en nous, participation à sa vie même (cf. leçon 12).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. Le caractère",
+			"html": "<p>Marque ineffaçable dans l'âme · <strong>caractère d'enfant de Dieu</strong>. Saint Jean : <em>« À tous ceux qui l'ont reçu, il a donné le pouvoir de devenir enfants de Dieu »</em> (Jn 1, 12).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "4. L'entrée dans l'Église",
+			"html": "<p>Admission visible dans la société des membres de Jésus-Christ. C'est par le baptême d'eau qu'on devient membre de l'Église.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'ordre réel et théologique",
+			"anchor": "ordre-reel"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'ordre réel inverse à peu près tout. Il faut le saisir, sinon on ne comprend pas comment fonctionne le baptême.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Premier (cause) : le caractère.</strong> C'est l'effet radical, toujours donné dans un baptême valide. Le baptisé est <em>fait fils de Dieu</em>, marqué pour l'éternité.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Deuxième (conséquence) : la grâce sanctifiante.</strong> Parce qu'un fils normal aime son père d'un amour filial. La grâce est cet amour de Dieu en tant que <em>filial</em>, et seul un fils peut aimer son père comme un fils.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Troisième : la rémission des péchés.</strong> Parce que la grâce sanctifiante et le péché sont incompatibles comme l'eau et le feu. On croit souvent que c'est l'inverse · que les péchés sont d'abord pardonnés, et qu'<em>ensuite</em> la grâce est versée comme on verserait un grand cru dans une bouteille nettoyée. C'est faux. <strong>C'est parce que la grâce arrive que la saleté du péché s'en va.</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Quatrième : l'entrée dans l'Église.</strong> Conséquence directe du caractère (et non de la grâce, ni de la rémission des péchés). C'est pourquoi un baptisé reste membre de l'Église même quand il perd la grâce · sinon l'Église serait un moulin où l'on entre et sort selon les chutes. L'Église, comme la filiation, est attachée au caractère, qui est indélébile.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>D'où la <strong>revivescence</strong> des effets : quand quelqu'un est baptisé sans dispositions (sans regretter ses péchés), il reçoit validement le caractère et l'entrée dans l'Église (effets 1 et 4), mais pas la grâce ni la rémission (effets 2 et 3). Le jour où il se convertit, la grâce et la rémission lui sont données · sans qu'on rebaptise.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Fils de Dieu : un état, pas une métaphore",
+			"anchor": "fils-de-dieu"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comme un fils selon la chair reste fils, qu'il soit bon ou voyou, le baptisé reste fils de Dieu, qu'il soit fervent ou criminel. La parabole du fils prodigue le montre : le cadet ne cesse pas d'être fils en allant manger avec les pourceaux · à son retour, le père l'embrasse comme <em>son fils</em>. Et un ami du fils, même très vertueux, ne peut pas aimer le père <em>comme un fils</em> · seul un fils peut le faire, parce que c'est <em>filial</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est pourquoi les théologies qui font de <em>tout homme</em> un fils de Dieu (théorie des « chrétiens anonymes » de Rahner) sont fausses : tout homme est créature de Dieu, certes, mais on ne devient fils de Dieu que par le baptême. Dire que tout le monde est fils de Dieu, c'est dire que personne ne l'est.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "La nécessité du baptême",
+			"anchor": "necessite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La théologie distingue deux nécessités :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Nécessité de moyen",
+			"html": "<p>Condition <em>sine qua non</em>. Sans ce moyen, on ne peut pas atteindre le but, comme sans la clef on ne peut pas ouvrir la serrure.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Nécessité de précepte",
+			"html": "<p>Obligation morale imposée par un commandement de Dieu ou de l'Église.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour tous, <strong>le baptême est de nécessité de moyen <em>et</em> de précepte</strong>. Cette double nécessité est rare en théologie. Les deux textes capitaux :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Nul, s'il ne renaît de l'eau et de l'Esprit, ne peut entrer dans le royaume des cieux.</p>",
+			"attribution": "Jean 3, 5 (entretien avec Nicodème)"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Celui qui croira et sera baptisé sera sauvé. Celui qui ne croira pas, sera condamné.</p>",
+			"attribution": "Marc 16, 16"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Notez le deuxième membre · il ne mentionne pas le baptême, car celui qui n'a pas la foi ne demandera pas le baptême. Inversement, celui qui prétendrait avoir la foi tout en refusant le baptême ne l'a pas vraiment : <em>« Celui qui croira <em>et</em> sera baptisé »</em>, c'est-à-dire que la foi authentique conduit au baptême.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Baptême de sang et baptême de désir",
+			"anchor": "sang-et-desir"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Si quelqu'un, sans faute de sa part (cas de l'ignorance invincible), ne peut recevoir le baptême sacramentel, il peut en obtenir <em>certains</em> effets · mais non tous · de deux manières exceptionnelles. <strong>Ce ne sont pas des sacrements</strong> : ils ne donnent ni le caractère (effet 1) ni l'entrée dans l'Église (effet 4). Mais ils donnent la grâce sanctifiante (effet 2) et la rémission des péchés (effet 3) par un acte de <strong>charité parfaite</strong>.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Baptême de sang",
+			"html": "<p>Quand un catéchumène (ou un païen mis face au Christ) donne sa vie pour Jésus-Christ. Acte suprême de l'amour · <em>« Il n'y a pas de plus grand amour que de donner sa vie pour ceux qu'on aime »</em> (Jn 15, 13). Saint Augustin a écrit un long sermon pour rassurer · les catéchumènes martyrs sont certainement sauvés.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Baptême de désir",
+			"html": "<p>Acte de charité parfaite produit en dehors du martyre · quelqu'un dans l'ignorance invincible, ou un catéchumène avant son baptême, se met à aimer Dieu par-dessus tout. La grâce et la rémission lui sont accordées immédiatement. <strong>Ce n'est pas le « désir du baptême »</strong> · mais il en comporte forcément le désir si celui-ci est connu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le sujet du baptême",
+			"anchor": "sujet"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Pour la validité</strong> : tout homme non encore baptisé qui a l'intention (s'il est adulte) de le recevoir. Même un adulte qui voudrait rester dans le péché peut être validement baptisé · il recevra le caractère et l'entrée dans l'Église, mais ni la grâce ni la rémission. État anormal mais possible.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Pour la licéité</strong> chez les adultes, trois conditions :</p><ul><li><strong>La foi.</strong> On ne baptise jamais un adulte sans la foi.</li><li><strong>La contrition ou au moins l'attrition</strong> de ses péchés · le regret, fût-il seulement motivé par la crainte des peines de l'enfer ou par la honte. Sans confession (pas encore possible avant le baptême · le baptême lui-même remet tout).</li><li><strong>L'intention droite</strong> de mener une vie chrétienne, conséquence de la foi et du regret.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Mise en garde sérieuse · ceux qui se font baptiser pour épouser <em>mademoiselle Chose</em>. On n'est pas baptisé pour faire plaisir à sa fiancée. Cela n'a aucun sens. À l'occasion des fiançailles, certains parviennent à une vraie conversion · soit. Mais grande prudence requise.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le baptême des enfants",
+			"anchor": "enfants"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Petit « miracle » sacramentel · c'est le baptême lui-même qui donne la foi à l'enfant qui ne peut encore la professer. Il est baptisé dans la foi de l'Église et de ses parents. Cette pratique remonte aux apôtres : saint Polycarpe de Smyrne, martyrisé en 155 à 86 ans, déclare devant le préfet · <em>« Je sers le Christ depuis que je suis </em>infans<em> »</em>, <em>infans</em> en latin désignant précisément le tout-petit qui ne parle pas encore. 86 ans avant 155, on est en 69 · les apôtres ne sont même pas tous morts.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le scandale du baptême différé",
+			"anchor": "bapteme-differe"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pratique désastreuse du début de l'Église · certains chrétiens, et non des moindres, repoussaient leur baptême jusqu'au dernier moment pour bénéficier d'une remise totale des peines tout en continuant à pécher. Exemple célèbre · l'empereur <strong>Constantin le Grand</strong>, baptisé <em>in extremis</em>, à moitié dans le coma. C'est se moquer de Dieu. Quand on veut servir Dieu, on le sert tout de suite, de toutes ses forces · on ne lui donne pas les débris mourants d'une vie de péché.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le ministre",
+			"anchor": "ministre"
+		},
+		{
+			"kind": "definition",
+			"term": "Ministre ordinaire",
+			"html": "<p>Le prêtre, ou le diacre délégué par lui.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Ministre extraordinaire",
+			"html": "<p><strong>Tout homme</strong>, même non chrétien, en cas de danger de mort ou d'extrême nécessité. Il suffit qu'il pose la matière et la forme avec l'intention de <em>faire ce que veut l'Église</em>, même s'il n'a pas la foi, même s'il ne sait pas ce que cela signifie. Saint Thomas est ici totalement externiste, et heureusement · sinon il faudrait sans cesse se demander ce qu'il y a dans la tête des ministres. Cette extension extraordinaire est unique au baptême, parce que c'est le seul sacrement de nécessité absolue au salut.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Parrain et marraine",
+			"anchor": "parrain-marraine"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le baptême étant une seconde naissance, le baptisé reçoit des <strong>parents dans la foi</strong>. Comme dans la nature on a un père et une mère, dans la grâce on a un parrain et une marraine · un et un seul de chaque, jamais deux parrains. Le minimum requis par le droit canon : un parrain pour les hommes, une marraine pour les femmes. Le mieux : les deux.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Conditions de validité du parrainage",
+			"anchor": "validite-parrainage"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li>Avoir la <strong>foi</strong> · sans quoi on n'est pas père dans la foi.</li><li>Avoir <strong>l'intention</strong> de devenir parrain.</li><li>Être <strong>catholique</strong> · pas hérétique ni excommunié. Un parrain orthodoxe est invalide · la foi du parrain doit être celle dans laquelle on baptise.</li><li><strong>Ne pas être le père selon la chair</strong> · ce sont deux naissances distinctes.</li><li>Être <strong>désigné par les parents</strong> (ou par le baptisé s'il est adulte).</li><li>Autrefois : <strong>toucher physiquement</strong> le filleul pendant l'administration (n'est plus requis dans le droit actuel).</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Conditions de licéité",
+			"anchor": "liceite-parrainage"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li>Avoir <strong>14 ans</strong> (dispense possible dans les familles très chrétiennes).</li><li>Être <strong>instruit dans la religion</strong> · un parrain est censé en savoir plus que son filleul.</li><li>Ne pas être lui-même un tout jeune chrétien (« novice »).</li><li>Être en <strong>situation régulière</strong> · pas de concubinage notoire ni d'état de péché public. Sinon, quel exemple ?</li><li>Ne pas être dans les <strong>ordres sacrés</strong> sans dispense de l'ordinaire · un prêtre s'occupe de toutes les brebis, non d'une en particulier.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Très important</strong> : le parrainage est un <em>empêchement de mariage</em>. Si vous baptisez votre fiancé, ne le prenez surtout pas comme marraine · plus de mariage possible.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le baptême est une merveille. Il faut se souvenir tous les jours qu'on est baptisé · qu'on est fils de Dieu, et qu'un fils de Dieu doit vivre comme un fils de Dieu. Aimer son Père, fuir le mal par amour pour lui. C'est cela, vivre de son baptême.</p>"
+		}
+	]
+}

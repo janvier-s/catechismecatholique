@@ -1,0 +1,296 @@
+{
+	"slug": "10-l-eglise-2e-partie",
+	"n": 10,
+	"title": "L'Église (2e partie)",
+	"pdf": "Courskt10.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La leçon précédente a défini l'Église : société visible et surnaturelle, fondée par Notre Seigneur Jésus-Christ, faite d'un corps et d'une âme indissociables. Restent deux questions capitales : <strong>l'autorité</strong> qui la gouverne (le pape et les évêques) et les <strong>notes</strong> qui permettent à tout homme de bonne foi de la reconnaître entre toutes les sociétés qui se réclament du Christ.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le pape",
+			"anchor": "le-pape"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Parce que l'Église est une société visible (sans quoi ce ne serait pas une véritable société), elle doit avoir une autorité visible. Or son chef unique, Notre Seigneur Jésus-Christ, n'est plus visible depuis son Ascension dans la gloire, même s'il a promis : <em>« Voici que je suis avec vous tous les jours, jusqu'à la consommation des siècles »</em> (Mt 28, 20). Il a donc établi un <strong>représentant visible</strong> de son autorité : le pape.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le pape",
+			"html": "<p>Successeur de saint Pierre, représentant de Notre Seigneur Jésus-Christ, chef visible de l'Église.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La promesse à Pierre",
+			"anchor": "promesse-a-pierre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'institution s'est faite en deux temps. <strong>D'abord la promesse</strong>, à Césarée de Philippe, après la magnifique confession de Pierre. Jésus interroge ses apôtres : <em>« Que disent les gens du Fils de l'homme ? »</em> Pierre, comme toujours, prend la parole : Élie, Jérémie, l'un des prophètes. <em>« Et vous, qui dites-vous que je suis ? »</em></p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Tu es le Christ, le Fils du Dieu vivant.</p>",
+			"attribution": "Matthieu 16, 16 (saint Pierre)"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Bienheureux es-tu, Simon fils de Jonas, car ce n'est pas la chair et le sang qui te l'ont révélé, mais mon Père qui est dans les cieux. Et moi, je te dis que tu es Pierre, et sur cette pierre je bâtirai mon Église, et les portes de l'enfer ne prévaudront point contre elle. Je te donnerai les clefs du royaume des cieux : tout ce que tu lieras sur la terre sera lié dans les cieux, et tout ce que tu délieras sur la terre sera délié dans les cieux.</p>",
+			"attribution": "Matthieu 16, 17-19"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On ne peut pas être plus clair. C'est une promesse, au futur, d'une précision chirurgicale. (J'ai rencontré une fois dans le train, étant séminariste, un pasteur protestant à qui je citais ce texte. Il m'a répondu, après quelques contorsions, que la pierre dont parle Jésus, ce n'était pas Pierre, c'était Jésus lui-même. Alors pourquoi changer son nom en <em>Képhas</em> ? La mauvaise foi à l'état chimiquement pur.)</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La tenue de la promesse",
+			"anchor": "tenue-de-la-promesse"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Jésus tient sa promesse le soir même de sa Résurrection, au bord du lac de Tibériade. N'oublions pas que Pierre l'a renié trois fois pendant la Passion. Par trois fois Jésus le tire par la manche :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Simon, fils de Jonas, m'aimes-tu ?... Pais mes agneaux. Pais mes brebis.</p>",
+			"attribution": "Jean 21, 15-17"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Notez : <em>mes</em> brebis, non pas <em>tes</em> brebis. Pierre devient le pasteur du troupeau qui reste celui du Christ. C'est pourquoi on appelle très justement le pape le <em>représentant</em> de Jésus-Christ ; le chef de l'Église, à proprement parler, c'est et reste Notre Seigneur.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La succession : l'évêque de Rome",
+			"anchor": "succession"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pierre a été martyrisé à Rome en 67, crucifié la tête en bas par humilité. Comment désigner son successeur ? Très simplement : Pierre exerce une <strong>charge épiscopale</strong> sur l'Église entière. Or il était notoire dès le premier siècle que cette charge avait son siège à Rome, capitale du monde antique. Lui succède donc celui qui lui succède dans cette charge épiscopale, c'est-à-dire <strong>l'évêque de Rome</strong>. Il est élu par les curés de Rome, devenus cardinaux, au cours d'un conclave.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les pouvoirs du pape",
+			"anchor": "pouvoirs-du-pape"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les pouvoirs du pape sont ceux de l'Église tout entière, et les pouvoirs de l'Église sont ceux du Christ lui-même. C'est un des fondements de toute la théologie ecclésiologique. Or le Christ possède, par le mystère même de son Incarnation, <strong>trois prérogatives</strong> qu'aucun autre ne peut avoir au même degré.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le Christ Prophète",
+			"html": "<p>Le prophète est celui qui parle au nom de Dieu, et dont la parole est Parole de Dieu. Le Christ, étant à la fois Dieu et homme, est le seul prophète au sens absolu : il parle au nom de Dieu avec l'autorité même de Dieu, par sa propre constitution. (Triste époque où, dans la rue, « le prophète » fait penser à Mahomet. Le prophète de Dieu, par excellence et de tous les temps, c'est Notre Seigneur.)</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le Christ Roi",
+			"html": "<p>Le roi est celui qui gouverne une société, à laquelle il appartient. Impossible de concevoir un roi plus roi que Jésus-Christ : il est homme, donc membre de la société humaine, et il a l'autorité souveraine de Dieu, parce qu'il est Dieu.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le Christ Prêtre",
+			"html": "<p>Le prêtre est celui qui fait la jonction entre les hommes et Dieu. Qui peut faire mieux ce pont que celui qui est à la fois homme et Dieu ? Et le Christ est prêtre par sa naissance même, non par ordination · les autres prêtres le sont par ordination.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ces trois prérogatives, le Christ les a données à son Église, qui les transmet à ses pasteurs. L'Église a donc <strong>trois pouvoirs</strong> :</p><ul><li><strong>Le magistère</strong> (du Christ Prophète) : pouvoir d'enseigner. <em>« Allez, enseignez toutes les nations »</em> (Mt 28, 19).</li><li><strong>L'ordre</strong> (du Christ Prêtre) : pouvoir de sanctifier par les sacrements. <em>« Baptisant au nom du Père, et du Fils, et du Saint-Esprit »</em> (Mt 28, 19).</li><li><strong>Le gouvernement</strong> (du Christ Roi) : pouvoir de diriger. <em>« Leur apprenant à garder tout ce que je vous ai commandé »</em> (Mt 28, 20).</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Ordre et juridiction",
+			"anchor": "ordre-et-juridiction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Distinction capitale, que beaucoup de fidèles ne parviennent jamais à se mettre dans la tête. Sur les trois pouvoirs, on en groupe deux sous le nom de <strong>juridiction</strong> : le magistère et le gouvernement. L'<strong>ordre</strong> est à part.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Ordre",
+			"html": "<p>Pouvoir <em>physique</em> du diacre, du prêtre et de l'évêque, transmis par le sacrement de l'Ordre · imposition des mains et préface consécratoire. Ce pouvoir grave un caractère ineffaçable dans l'âme : un prêtre reste prêtre pour l'éternité. On peut le démettre de ses fonctions ; on ne peut pas lui enlever son sacerdoce.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Juridiction",
+			"html": "<p>Mission d'enseigner et de gouverner, confiée par l'Église à ceux qui sont déjà revêtus du sacrement de l'Ordre. Elle est donnée habituellement par le supérieur (le pape la donne aux évêques, l'évêque à ses curés) et peut être retirée. Elle est extraordinairement donnée par le droit lui-même : en cas de danger de mort, n'importe quel prêtre, même apostat ou hérétique, peut et doit donner les sacrements.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le pape, ayant la charge épiscopale de l'Église entière, possède ces trois pouvoirs en plénitude. L'évêque, sur son diocèse. Le curé, sur sa paroisse.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'infaillibilité du pape",
+			"anchor": "infaillibilite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Doctrine sans cesse trahie par deux excès opposés : la <em>papolâtrie</em>, qui prend pour parole d'Évangile tout ce que dit le pape (même son choix entre choux de Bruxelles et navets) ; et le mépris, qui en fait un évêque parmi d'autres. Il faut savoir précisément quand le pape est infaillible et quand il ne l'est pas. Et quand il ne l'est pas, il peut se tromper · c'est dire la même chose.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Premier point capital : <strong>c'est d'abord l'Église qui est infaillible</strong>, non le pape personnellement. Jésus l'a promis : <em>« Sur cette pierre je bâtirai mon Église, et les portes de l'enfer ne prévaudront point contre elle. »</em> Que serait-ce pour l'Église de défaillir ? Ce serait nous enseigner une erreur sur la foi ou sur les mœurs, c'est-à-dire nous priver des deux choses qui nous garantissent d'aller au ciel. Si cela se produisait, les portes de l'enfer auraient prévalu. C'est donc l'Église qui est infaillible.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le pape devient infaillible <em>parce que</em>, dans certaines conditions, il parle au nom de l'Église entière. Le concile Vatican I (1870) l'a défini avec précision : le pape jouit alors de <em>« l'infaillibilité dont l'Église elle-même est dotée »</em>. C'est pourquoi un évêque, lui, ne peut jamais parler infailliblement seul : il n'est pas évêque de l'Église, mais d'un diocèse. Les évêques peuvent parler infailliblement ensemble, en concile œcuménique, parce qu'ils représentent alors collégialement l'Église entière.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les <strong>quatre conditions</strong> de l'infaillibilité pontificale, à retenir, sont :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "1. Parler comme pape",
+			"html": "<p>Comme pasteur suprême de l'Église. Un pape qui écrit à sa cousine pour donner son avis sur le climat n'est pas infaillible. Il est pape, mais il ne parle pas <em>comme</em> pape.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. S'adresser à l'Église entière",
+			"html": "<p>Un document destiné à un seul évêque, à une conférence épiscopale, à un continent, ne suffit pas : par le fait même, ce n'est plus le pasteur de l'Église universelle qui parle dans cet acte.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. Enseigner la foi ou les mœurs",
+			"html": "<p>Et seulement la foi ou les mœurs, parce que ce sont les deux choses indispensables au salut. Sur les règlements, l'administration, la diplomatie, le pape peut se tromper · cela ne nous empêche pas d'aller au ciel.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "4. Avoir l'intention d'obliger",
+			"html": "<p>Le pape doit clairement signifier qu'il veut que ce point soit tenu définitivement par toute l'Église. C'est la forme, donc l'élément le plus important.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Si les quatre conditions sont réunies, le pape est infaillible. Si une seule manque, il ne l'est pas, et il peut se tromper. Cela ne signifie pas qu'on ne respecte plus sa parole, mais qu'on ne la tient plus comme garantie par le Saint-Esprit.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'usage de l'infaillibilité est rare. Pie XII, l'un des plus grands papes du XXe siècle, n'en a usé que deux fois : pour la matière et la forme du sacrement de l'Ordre dans <em>Sacramentum ordinis</em> (1947), et pour le dogme de l'<strong>Assomption</strong> de la Vierge Marie (1950). Saint Jean-Paul II en a fait usage dans <em>Ordinatio sacerdotalis</em> (1994) pour déclarer que l'Église ne peut conférer l'ordination sacerdotale aux femmes. Inversement, des papes se sont trompés quand ils n'ont pas engagé cette infaillibilité : le pape Honorius dans la querelle monothélite, le pape Libère qui a signé une formule arienne à Sirmium (avant de se rétracter et de mourir martyr).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les notes de l'Église",
+			"anchor": "les-notes"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Notre Seigneur n'a fondé qu'<em>une seule</em> Église · <em>« Tu es Pierre, et sur cette pierre je bâtirai <strong>mon Église</strong> »</em> (Mt 16, 18, au singulier). Pas trente-six. Pas une concubine à côté d'une épouse légitime. Or il existe d'autres communautés qui revendiquent chacune d'être l'Église du Christ, à commencer par le schisme catastrophique de Michel Cérulaire en 1054 qui a séparé presque tout l'Orient, y compris les Églises fondées par les apôtres eux-mêmes. Il faut donc des <strong>marques caractéristiques</strong> pour reconnaître la véritable Église.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Note",
+			"html": "<p>En philosophie, propriété qui appartient à un seul sujet, toujours et partout. Comme le rire est le propre de l'homme (Dieu ne rit pas, les anges non plus, les animaux font des grimaces) · si quelqu'un rit, vous pouvez en conclure qu'il est homme. Une note est une propriété qui caractérise et permet de reconnaître.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les quatre notes de l'Église sont dans le Credo, chantées chaque dimanche : <em>« Je crois en l'Église, <strong>une</strong>, <strong>sainte</strong>, <strong>catholique</strong> et <strong>apostolique</strong>. »</em> Et l'Église, et elle seule, possède ces quatre propriétés.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "1. L'unité",
+			"anchor": "unite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Église est une, en deux sens : il n'y en a qu'<em>une seule</em>, et celle-ci est <em>une</em> en elle-même, sans division. Elle l'est de trois manières :</p><ul><li><strong>Par sa doctrine</strong> : d'un bout à l'autre de la planète, l'Église catholique enseigne la même chose. Le protestantisme, faute de principe d'unité, est un pullulement d'obédiences.</li><li><strong>Par ses sacrements</strong> : <em>sept</em>, ni plus, ni moins, comme l'a défini infailliblement le concile de Trente. Les protestants en reconnaissent qui cinq, qui deux (baptême et eucharistie), qui un, qui aucun (les anabaptistes). L'Église catholique, sept · partout.</li><li><strong>Par son chef</strong> : le pape. Sans ce principe d'autorité, l'unité doctrinale et sacramentelle ne tiendrait pas. Prenez du recul sur deux mille ans : c'est lumineux.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "2. La sainteté",
+			"anchor": "saintete"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est la note la plus caractéristique, parce que produire de la sainteté est précisément ce pour quoi l'Église existe. Les autres notes sont des moyens ; celle-ci est la fin. L'Église est sainte de trois manières :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Par son fondateur.</strong> Notre Seigneur Jésus-Christ. Or comment les anglicans se rattachent-ils à Henri VIII, qui changeait d'épouse en assassinant la précédente ? Comment les luthériens se rattachent-ils à un fondateur dont la vie personnelle est ce qu'on sait ? Comment les orthodoxes se rattachent-ils à Michel Cérulaire ? La sainteté du fondateur est un argument décisif.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Par sa doctrine.</strong> Toute la doctrine de l'Église est sainte. Prenez l'unicité et l'indissolubilité du mariage : seule l'Église catholique l'enseigne pleinement. Même les orthodoxes admettent un deuxième mariage liturgiquement, ce qui contredit l'unicité. Aujourd'hui, qui défend encore le droit naturel ? L'Église catholique, et elle seule.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Par les faits.</strong> C'est l'argument décisif. Deux mille ans de sainteté héroïque, des millions de martyrs (on en estime entre six et dix millions sous l'Empire romain · les cinquante premiers papes sont tous martyrs), des dizaines de milliers de saints canonisés, et cela continue. Le Christ a dit : <em>« Sans la foi, il est impossible de plaire à Dieu »</em> (He 11, 6) · et la foi pleine, c'est dans son Église. Aucun saint au sens fort n'existe en dehors d'elle.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "3. La catholicité",
+			"anchor": "catholicite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><em>Katholikos</em>, en grec : universel. L'Église est universelle parce qu'elle ne dépend ni d'un lieu, ni d'une époque, ni d'un peuple, ni d'un gouvernement, ni d'une culture. Coupée ici, elle repousse là · arbre vert dont la sève vient du Christ. Adaptée à toute époque et toute civilisation parce qu'elle vient de la grâce de Dieu, qui transcende toutes ces conditions.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Contre-exemples : les évêques orthodoxes inféodés au régime communiste pendant soixante-dix ans ; le luthéranisme indissociable des princes allemands qui en firent l'instrument de leur autonomie politique. La théologie de l'<em>inculturation</em>, qui prétend que l'Église doit se mouler sur chaque culture pour y survivre, méconnaît cette transcendance. L'Église, par son message si puissant, n'a pas à s'inféoder. Elle s'adapte en pastorale ; elle ne change pas en doctrine.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "4. L'apostolicité",
+			"anchor": "apostolicite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Église se rattache à son fondateur par les apôtres, et à eux par une succession ininterrompue d'évêques. Comme les évêques seuls peuvent en ordonner d'autres validement (un prêtre ne peut pas le faire), cette chaîne forme un arbre généalogique qui remonte aux Douze.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Mais attention · les orthodoxes ont aussi cette succession. Il faut distinguer :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Apostolicité matérielle",
+			"html": "<p>La succession sacramentelle, transmise par la consécration épiscopale. Les orthodoxes l'ont.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Apostolicité formelle",
+			"html": "<p>La permanence dans la foi des apôtres <em>et</em> dans la reconnaissance de leur chef, Pierre, dont le pape est le successeur. C'est ce qui fait que la succession soit véritablement <em>apostolique</em>. La matière sans la forme ne suffit pas.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les évêques orthodoxes sont valablement évêques par leur ordination ; mais il leur manque l'apostolicité formelle, c'est-à-dire la communion avec le pape.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les notes de l'Église se méditent ; il ne suffit pas de les énumérer. À certaines époques, elles peuvent paraître amoindries · les XIVe et XVe siècles ont été catastrophiques : grand schisme, papes corrompus, évêques concubinaires, simonie. Et pourtant ces deux siècles sont aussi ceux de Jeanne d'Arc, de sainte Catherine de Sienne, de sainte Brigitte de Suède, de saint Vincent Ferrier (qui aurait ressuscité une quarantaine de morts). Qu'on aligne quatre saints de cette envergure en cent ans et l'on voit bien que l'Église, malgré ses crises, est toujours <em>l'arbre vert</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Qui veut y voir clair le peut, à toute époque. Réunir des millions d'hommes pendant deux mille ans pour les sanctifier à la suite d'un crucifié, dont nous savons qu'il est ressuscité et qu'il est Fils de Dieu, c'est un miracle permanent. Cette Église <em>une, sainte, catholique, apostolique et romaine</em>, est bien celle que Notre Seigneur a fondée. C'est notre mère ; c'est par elle que nous serons sauvés.</p>"
+		}
+	]
+}

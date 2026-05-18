@@ -1,0 +1,32 @@
+{
+	"lessons": [
+		{ "slug": "01-la-doctrine-catholique", "n": 1, "title": "La doctrine catholique", "available": true },
+		{ "slug": "02-l-existence-de-dieu", "n": 2, "title": "L'existence de Dieu", "available": true },
+		{ "slug": "03-les-attributs-de-dieu", "n": 3, "title": "Les attributs de Dieu", "available": true },
+		{ "slug": "04-les-mysteres", "n": 4, "title": "Les mystères", "available": true },
+		{ "slug": "05-les-anges", "n": 5, "title": "Les anges", "available": true },
+		{ "slug": "06-l-homme", "n": 6, "title": "L'homme", "available": true },
+		{ "slug": "07-le-peche-originel", "n": 7, "title": "Le Péché Originel", "available": true },
+		{ "slug": "08-l-incarnation", "n": 8, "title": "L'Incarnation", "available": true },
+		{ "slug": "09-l-eglise-1re-partie", "n": 9, "title": "L'Église (1re partie)", "available": true },
+		{ "slug": "10-l-eglise-2e-partie", "n": 10, "title": "L'Église (2e partie)", "available": true },
+		{ "slug": "11-les-fins-dernieres", "n": 11, "title": "Les Fins dernières", "available": true },
+		{ "slug": "12-la-grace", "n": 12, "title": "La Grâce", "available": true },
+		{ "slug": "13-la-priere", "n": 13, "title": "La prière", "available": true },
+		{ "slug": "14-les-sacrements", "n": 14, "title": "Les sacrements", "available": true },
+		{ "slug": "15-le-bapteme", "n": 15, "title": "Le Baptême", "available": true },
+		{ "slug": "16-la-confirmation", "n": 16, "title": "La Confirmation", "available": true },
+		{ "slug": "17-la-penitence", "n": 17, "title": "La Pénitence" },
+		{ "slug": "18-l-eucharistie", "n": 18, "title": "L'Eucharistie" },
+		{ "slug": "19-le-sacrifice-de-la-messe", "n": 19, "title": "Le Sacrifice de la messe" },
+		{ "slug": "20-l-ordre-et-l-extreme-onction", "n": 20, "title": "L'Ordre et l'Extrême-Onction" },
+		{ "slug": "21-le-mariage", "n": 21, "title": "Le Mariage" },
+		{ "slug": "22-la-morale", "n": 22, "title": "La morale" },
+		{ "slug": "23-la-foi-et-l-esperance", "n": 23, "title": "La Foi et l'Espérance" },
+		{ "slug": "24-la-charite", "n": 24, "title": "La Charité" },
+		{ "slug": "25-la-prudence", "n": 25, "title": "La Prudence" },
+		{ "slug": "26-la-justice", "n": 26, "title": "La Justice" },
+		{ "slug": "27-la-temperance", "n": 27, "title": "La Tempérance" },
+		{ "slug": "28-la-force", "n": 28, "title": "La Force" }
+	]
+}

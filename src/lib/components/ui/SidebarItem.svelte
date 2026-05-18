@@ -19,6 +19,9 @@
 		 *  path. Used by short corpora (Vatican II) where every entry should
 		 *  be visible by default. */
 		defaultExpanded?: boolean;
+		/** When true, render the row as a non-clickable greyed entry (e.g. a lesson
+		 *  that doesn't exist yet). Children are still rendered/recursed. */
+		disabled?: boolean;
 		children?: Item[];
 	};
 	let {
@@ -115,29 +118,53 @@
 		{:else}
 			<span class="w-4 flex-none" aria-hidden="true"></span>
 		{/if}
-		<a
-			href={item.href}
-			onclick={handleClick}
-			class="flex-1 py-1 px-1.5 rounded leading-snug hover:bg-accent/10 hover:text-accent"
-			class:is-active={isActive}
-			class:lvl-2={item.level === 2}
-			class:lvl-3={item.level === 3}
-			class:lvl-4={item.level === 4}
-			class:lvl-default={item.level === undefined}
-		>
-			{#if item.kicker}
-				<span class="kicker">{item.kicker}</span>
-			{/if}
-			{#if item.kicker2}
-				<span class="kicker kicker-sub">{item.kicker2}</span>
-			{/if}
-			{#if item.typeLabel}
-				<span class="kicker"
-					>{item.typeLabel}{item.number !== undefined ? `\u00a0${item.number}` : ''}</span
-				>
-			{/if}
-			{@html frenchPunct(item.title)}
-		</a>
+		{#if item.disabled}
+			<span
+				class="flex-1 py-1 px-1.5 rounded leading-snug is-disabled"
+				class:lvl-2={item.level === 2}
+				class:lvl-3={item.level === 3}
+				class:lvl-4={item.level === 4}
+				class:lvl-default={item.level === undefined}
+				aria-disabled="true"
+			>
+				{#if item.kicker}
+					<span class="kicker">{item.kicker}</span>
+				{/if}
+				{#if item.kicker2}
+					<span class="kicker kicker-sub">{item.kicker2}</span>
+				{/if}
+				{#if item.typeLabel}
+					<span class="kicker"
+						>{item.typeLabel}{item.number !== undefined ? `\u00a0${item.number}` : ''}</span
+					>
+				{/if}
+				{@html frenchPunct(item.title)}
+			</span>
+		{:else}
+			<a
+				href={item.href}
+				onclick={handleClick}
+				class="flex-1 py-1 px-1.5 rounded leading-snug hover:bg-accent/10 hover:text-accent"
+				class:is-active={isActive}
+				class:lvl-2={item.level === 2}
+				class:lvl-3={item.level === 3}
+				class:lvl-4={item.level === 4}
+				class:lvl-default={item.level === undefined}
+			>
+				{#if item.kicker}
+					<span class="kicker">{item.kicker}</span>
+				{/if}
+				{#if item.kicker2}
+					<span class="kicker kicker-sub">{item.kicker2}</span>
+				{/if}
+				{#if item.typeLabel}
+					<span class="kicker"
+						>{item.typeLabel}{item.number !== undefined ? `\u00a0${item.number}` : ''}</span
+					>
+				{/if}
+				{@html frenchPunct(item.title)}
+			</a>
+		{/if}
 	</div>
 	{#if item.children && expanded}
 		<ul class="children" class:children-deep={depth >= 1}>
@@ -215,5 +242,15 @@
 	}
 	.is-active:hover {
 		color: #fff !important;
+	}
+	/* Disabled rows · lessons not yet authored. Greyed, no hover affordance,
+	   no cursor pointer (rendered as a <span>, not an <a>). */
+	.is-disabled {
+		display: block;
+		color: color-mix(in srgb, var(--color-fg) 35%, transparent);
+		cursor: default;
+	}
+	.is-disabled .kicker {
+		color: color-mix(in srgb, var(--color-muted) 70%, transparent);
 	}
 </style>

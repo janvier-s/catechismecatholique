@@ -1,0 +1,319 @@
+{
+	"slug": "16-la-confirmation",
+	"n": 16,
+	"title": "La Confirmation",
+	"pdf": "Courskt16.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La confirmation est au baptême ce que la plénitude est au commencement. C'est le <strong>sacrement de la croissance</strong> qui parachève les dons du baptême et permet, par la surabondance de ses grâces, de vivre en bon chrétien non seulement <em>pour soi</em>, mais à <em>la face du monde</em>. D'où son importance considérable aujourd'hui, dans des sociétés où la pression contre le christianisme est forte.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Confirmer",
+			"html": "<p>Du latin <em>cum-firmare</em>, « signer avec ». Signer avec la grâce de son baptême, l'affermir, la fortifier, la perfectionner. Mot introduit en Occident par saint Léon le Grand au Ve siècle. Saint Augustin parle d'<em>imposition des mains</em>, saint Cyrille de Jérusalem du <em>chrême mystique</em>.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le signe sensible",
+			"anchor": "signe-sensible"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Matière éloignée : le saint chrême",
+			"anchor": "saint-chreme"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le saint <em>chrême</em> (du grec <em>chrisma</em>, qui a donné <em>Christ</em>, l'oint) est un mélange d'<strong>huile d'olive</strong> et de <strong>baume</strong>, consacré par l'évêque le jeudi saint. C'est l'une des trois huiles saintes de l'Église :</p><ul><li>L'<em>huile des catéchumènes</em>, pour les exorcismes du baptême et l'onction des mains des prêtres.</li><li>L'<em>huile des infirmes</em>, pour le seul sacrement d'extrême-onction.</li><li>Le <em>saint chrême</em>, huile de consécration · ordination des évêques, confirmation, et onction du baptisé.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Symbolisme : l'<strong>huile</strong> représente, dans toute l'Antiquité, la <em>force</em>. Les athlètes des arènes s'en frottaient le corps pour nourrir les muscles et devenir insaisissables aux mains de leurs adversaires · double signification reprise ici : la force du soldat du Christ et son insaisissabilité face aux assauts du monde. Le <strong>baume</strong>, parfum précieux d'Arabie, indique la <em>bonne odeur</em> du chrétien. Saint Paul · <em>« Nous sommes parmi les nations la bonne odeur du Christ »</em> (2 Co 2, 15). Une odeur, par nature, se répand.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Matière prochaine et forme",
+			"anchor": "matiere-prochaine-forme"
+		},
+		{
+			"kind": "definition",
+			"term": "Matière prochaine",
+			"html": "<p>L'<strong>onction</strong> au saint chrême, faite sur le front · en forme de croix, emblème du chrétien. L'évêque accompagne le geste d'une imposition de la main.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Forme",
+			"html": "<p><em>« Je te marque du signe de la croix et te confirme avec le chrême du salut, au nom du Père et du Fils et du Saint-Esprit. Amen. »</em></p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le caractère",
+			"anchor": "caractere"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comme le baptême et l'ordre, la confirmation imprime dans l'âme une <strong>marque ineffaçable</strong> · le pouvoir, la puissance spirituelle d'un <em>soldat</em> et d'un <em>témoin</em> de Jésus-Christ. Le mot grec <em>martyr</em> signifie précisément « témoin ».</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois caractères comparés",
+			"anchor": "trois-caracteres"
+		},
+		{
+			"kind": "definition",
+			"term": "Baptême",
+			"html": "<p>Caractère d'<em>enfant de Dieu</em>. Donné <strong>pour soi, par rapport à soi</strong> · il sanctifie le sujet dans sa relation à Dieu.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Confirmation",
+			"html": "<p>Caractère de <em>soldat et témoin</em>. Donné <strong>pour soi, par rapport aux autres</strong> · il sanctifie le sujet, mais en vue de l'affronter au monde.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Ordre",
+			"html": "<p>Caractère de <em>ministre</em>. Donné <strong>pour les autres</strong> · sa fin propre n'est pas la sainteté du sujet (qui en bénéficie), mais la sanctification des autres.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Christiani propter nos, episcopi propter vos. Nous sommes chrétiens pour nous-mêmes ; nous sommes évêques (ou prêtres) pour vous.</p>",
+			"attribution": "Saint Augustin"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul l'avait formulé autrement, en distinguant ce qui relève du baptême et ce qui relève de la confirmation :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Corde creditur ad justitiam, ore autem confessio fit ad salutem. On croit dans son cœur pour parvenir à la justice ; mais c'est la confession de la bouche qui fait le salut.</p>",
+			"attribution": "Romains 10, 10"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il manquerait fondamentalement quelque chose à un chrétien dont la bouche ne parlerait pas et dont la vie ne se répandrait pas comme la bonne odeur de Jésus-Christ.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le soufflet et le martyre",
+			"anchor": "soufflet-et-martyre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Après le rite sacramentel, l'évêque donne un petit <strong>soufflet</strong> sur la joue du nouveau confirmé (rite non sacramentel mais éloquent). C'est pour lui enseigner qu'un chrétien doit s'attendre à <em>souffrir des injures</em> pour l'honneur du Christ · <em>« Tous ceux qui veulent vivre pieusement dans le Christ Jésus souffriront persécution »</em> (2 Tm 3, 12).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'acte suprême du confirmé, c'est le <strong>martyre</strong>, acte héroïque de la vertu de Force. <em>« Il n'y a pas de plus grand amour que de donner sa vie pour ceux qu'on aime »</em> (Jn 15, 13). Saint Ignace d'Antioche, conduit aux lions sous Trajan, écrivait dans ses lettres qu'il <em>n'était pas encore parfaitement chrétien</em>, mais qu'il allait le devenir sous la dent des fauves. Voilà la doctrine du confirmé.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La démission moderne",
+			"anchor": "demission-moderne"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Aujourd'hui, on a perdu le sens de la confirmation. La démission des chrétiens n'est plus d'abord une apostasie intérieure · c'est une <em>démission face au monde</em>, le silence devant la pression sociale. En 1968, dans une classe de lycée qui comptait 90 % de chrétiens en cinquième, il n'en restait plus que 5 ou 10 % deux ans après · les autres étaient passés au maoïsme, au trotskisme, etc. Non pas qu'ils aient cessé de croire intérieurement · ils n'osaient plus le dire. C'est précisément ce que la confirmation arme.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Aparté sur la France · quand saint Pie X, génialement, a permis la communion aux jeunes enfants (« laissez venir à moi les petits enfants »), il aurait fallu, théologiquement, redonner toute sa place à la confirmation comme couronnement de la formation chrétienne · ce qu'on fait dans d'autres pays. La France a inventé à la place la <em>communion solennelle</em> · qui est, théologiquement, du bricolage. La confirmation s'est trouvée reléguée à une petite parenthèse, alors qu'elle devrait être donnée juste avant la puberté pour armer l'enfant face aux combats qu'il va devoir mener.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les effets",
+			"anchor": "effets"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comme dans tout sacrement à caractère, les effets découlent du caractère comme de leur source. Deux effets distincts à examiner.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "1. Augmentation de la grâce sanctifiante",
+			"anchor": "augmentation-grace"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Effet commun à tous les sacrements. Toute augmentation de la grâce sanctifiante suppose une <em>mission du Saint-Esprit</em> · on attribue cette œuvre extérieure de la Trinité à la troisième Personne, parce que son effet est la charité divine.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'inhabitation du Saint-Esprit",
+			"anchor": "inhabitation"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Doctrine capitale à saisir. Dieu est présent à ses créatures de <strong>deux manières</strong> totalement différentes :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Présence d'ubiquité",
+			"html": "<p>Dieu est partout dans toute créature, par son efficience, sa présence et sa substance (saint Thomas), parce qu'il maintient les choses dans l'être. Universelle · vraie même des démons en enfer. Sinon, ils disparaîtraient. Intérêt spirituel : nul.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Inhabitation",
+			"html": "<p>Dieu est présent dans l'âme des justes <em>comme l'objet aimé</em>, comme un hôte familier. Cette présence n'existe que chez ceux qui ont la grâce sanctifiante et la charité. <strong>L'amour rend présent l'être aimé</strong>, à la différence de la connaissance qui le laisse absent (sa fiancée à New York, je peux la connaître à fond · elle reste absente ; mais l'amour la rend présente en moi).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est pourquoi, en ce point, <strong>la charité l'emporte sur la foi</strong> · même si l'intelligence est en soi une faculté plus noble que la volonté. C'est l'inhabitation du Saint-Esprit dans l'âme des justes · expérience accessible · si l'on aime Dieu de tout son cœur, Dieu est présent.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "2. La grâce sacramentelle : plénitude des vertus et des dons",
+			"anchor": "grace-sacramentelle"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Effet propre de la confirmation · la plénitude des vertus et des dons du Saint-Esprit, qui permet à l'âme de réaliser la fin du sacrement (vie publique d'un chrétien parfait). Ces vertus et ces dons existent déjà dans le baptême, mais comme un gland qui deviendra un chêne · la confirmation est la croissance.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Vertus et dons du Saint-Esprit",
+			"anchor": "vertus-et-dons"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Sept vertus, sept dons. N'essayez pas de les apprendre par cœur · vous ne les retiendrez que quand vous les aurez compris.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La différence : la barque",
+			"anchor": "barque"
+		},
+		{
+			"kind": "definition",
+			"term": "Vertu",
+			"html": "<p>Disposition stable et surnaturelle qui nous permet de faire le bien · mais <strong>c'est nous qui agissons</strong>, sous la motion divine. Mesure humaine, mode humain d'opérer.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Don du Saint-Esprit",
+			"html": "<p>Disposition habituelle pareillement surnaturelle · mais ici <strong>c'est le Saint-Esprit qui agit en nous</strong>, et nous sommes <em>agis</em>. Mesure et mode divins. <em>« Ceux-là sont fils de Dieu qui sont agis par l'Esprit de Dieu »</em> (Rm 8, 14) · saint Paul ne dit pas « menés » mais « agis », au passif.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comparaison classique · une barque sur les flots, deux manières de la faire avancer. <strong>Avec les rames</strong> · on tire, ça avance · c'est la vertu, effort humain sous la grâce. <strong>Avec la voile</strong> · on dresse, le vent pousse, ça va beaucoup plus vite, sans effort · ce sont les dons, qui captent le souffle du Saint-Esprit. Sans la voile, le vent peut souffler · il ne sert à rien.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et les dons ne sont pas un luxe réservé aux grands saints · saint Thomas enseigne qu'<strong>ils sont nécessaires au salut</strong>. Sans eux, dans les périls innombrables de la vie, on rate forcément quelque tournant mortel. Ils sont l'<em>instinct surnaturel</em> du chrétien · énumérés par le prophète Isaïe (11, 2-3) comme reposant en plénitude sur le Messie.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les dons qui surélèvent la foi",
+			"anchor": "dons-foi"
+		},
+		{
+			"kind": "definition",
+			"term": "Don d'intelligence",
+			"html": "<p>Connaissance <em>intime</em> des mystères surnaturels eux-mêmes. Saint Thomas, à la fin de sa vie, devant la grandeur des mystères que Dieu lui montre, veut brûler sa Somme : <em>« Tout ce que j'ai écrit me semble de la paille. »</em></p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Don de science",
+			"html": "<p>Connaissance surnaturelle des choses créées vues sous le regard de Dieu. Saint François d'Assise, dans le <em>Cantique du soleil</em>, voit dans chaque créature une louange du Créateur, prêche aux oiseaux, aux poissons.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le don qui surélève l'espérance",
+			"anchor": "don-esperance"
+		},
+		{
+			"kind": "definition",
+			"term": "Don de crainte",
+			"html": "<p>Non la peur de Dieu (qui ferait reculer), mais la <em>défiance de soi</em> qui permet de s'appuyer entièrement sur Dieu. Plus je me défie de moi, plus je m'appuie sur lui · inversement proportionnels. Sainte Jeanne d'Arc, à son procès : <em>« Si j'y suis, Dieu m'y garde ; si je n'y suis pas, Dieu m'y mette. »</em> Et : <em>« Je serais la plus malheureuse des filles si je savais ne pas être en état de grâce. »</em> Tout est ciselé · défiance de soi, appui en Dieu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le don qui surélève la charité",
+			"anchor": "don-charite"
+		},
+		{
+			"kind": "definition",
+			"term": "Don de sagesse",
+			"html": "<p>Le plus grand des dons. Connaître les raisons ultimes des jugements divins par une intimité avec Dieu · voir toute chose <em>du regard que Dieu y porte</em>. La nature a quelque chose de violent (les lions mangent les gazelles, les baleines avalent le plancton) · le don de sagesse fait percer cette apparence et voir la charité de Dieu déposée en toute chose. Saint Paul scrute ainsi <em>« les profondeurs de Dieu »</em> (1 Co 2, 10) et les desseins éternels qui se réalisent dans le Christ.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les dons qui surélèvent les vertus morales",
+			"anchor": "dons-vertus-morales"
+		},
+		{
+			"kind": "definition",
+			"term": "Don de conseil (surélève la prudence)",
+			"html": "<p>La prudence connaît les principes ; le don de conseil descend jusque dans les circonstances particulières, où l'application des principes est si complexe que la prudence humaine n'y suffit pas. Exemple : David, poursuivi avec 600 hommes affamés, donne à manger les pains de proposition réservés aux seuls prêtres (1 S 21). Légalement interdit · spirituellement juste. Le Christ lui-même cite l'épisode (Mc 2, 25-26).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Don de piété (surélève la justice)",
+			"html": "<p>La justice stricte peut devenir injuste · <em>« Summum jus, summa injuria »</em>, disaient les anciens. La piété surélève la justice par des raisons supérieures. David, persécuté trois fois par Saül qui essaie de l'embrocher au javelot, aurait eu toutes les raisons humaines de tuer Saül quand il l'a tenu endormi à sa merci · il refuse, par piété, parce que Saül est encore <em>l'oint du Seigneur</em>. À la mort de Saül, David fait exécuter sur-le-champ celui qui s'en vante.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Don de force (surélève force et tempérance)",
+			"html": "<p>Maîtrise des passions au-delà de toute mesure humaine. Saint Ignace d'Antioche, livré aux lions à Rome sous Trajan (107), écrit dans ses lettres que <em>si le lion ne se précipite pas</em>, il le frappera du poing pour assurer son martyre · et c'est ce qu'il fit (le lion eut peur). Saint Laurent, diacre de Rome grillé vif sur un trépied, demande au bout d'un moment qu'on le <em>retourne</em> pour griller de l'autre côté. La petite Blandine de Lyon, encornée par un taureau furieux, demande en revenant : <em>« Quand est-ce que ça commence ? »</em></p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le ministre",
+			"anchor": "ministre"
+		},
+		{
+			"kind": "definition",
+			"term": "Ministre ordinaire",
+			"html": "<p>L'<strong>évêque</strong>. C'est le pasteur normal d'un chrétien · les prêtres ne sont que ses collaborateurs. C'est donc à l'évêque de porter le chrétien à sa perfection. Comme Michel-Ange, qui choisissait lui-même son marbre dans la montagne, en faisait dégrossir l'ébauche par ses élèves, mais finissait <em>de sa main</em> le visage de la Vierge et du Christ · ainsi l'évêque met la dernière touche au chef-d'œuvre.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Ministre extraordinaire",
+			"html": "<p>Le <strong>prêtre</strong>, ayant reçu juridiction spéciale (délégation de l'évêque) pour cela. Confirme alors validement.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Parrain et marraine",
+			"anchor": "parrain-marraine"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comme au baptême, il faut un parrain et une marraine · pour soutenir le confirmé dans le combat chrétien. Image du soldat qui entre dans la milice sous la direction d'aînés expérimentés. Pendant la guerre de 14, les jeunes recrues envoyées sans expérience au front mouraient en trois semaines · ils ne voyaient pas les gaz, ne mettaient pas leur masque, allumaient une cigarette en pleine nuit. Les vieux baroudeurs survivaient. Le combat chrétien réclame pareillement l'exemple des anciens.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La confirmation, mise de côté en France depuis un siècle, est pourtant indispensable au chrétien d'aujourd'hui. À celui qui m'écoute et qui n'est pas encore confirmé · interrogez-vous, et préparez-vous à recevoir ce sacrement. Avec sa plénitude des vertus et des dons du Saint-Esprit, le chrétien est <em>armé jusqu'aux dents</em> · il faut et il suffit qu'il utilise ses armes et qu'il les entretienne.</p>"
+		}
+	]
+}

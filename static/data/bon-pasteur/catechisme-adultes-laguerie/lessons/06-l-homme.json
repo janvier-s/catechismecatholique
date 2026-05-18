@@ -1,0 +1,185 @@
+{
+	"slug": "06-l-homme",
+	"n": 6,
+	"title": "L'homme",
+	"pdf": "Courskt6.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Après Dieu, après les anges, c'est notre tour. <em>Noverim te, noverim me</em>, disait saint Augustin : que je vous connaisse, Seigneur, et que je me connaisse. Cette connaissance de l'homme est nécessaire à toute progression vers Dieu. Elle l'est aussi à la suite logique du cours : il nous faut bientôt aborder le mystère du salut (Incarnation, Rédemption), et il faut donc savoir ce qu'est cet homme qu'il s'agit de sauver, et dans quel état il se trouve.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cette leçon traite de la <em>nature</em> de l'homme ; la suivante, des <em>prérogatives surnaturelles</em> d'Adam au paradis et du péché originel.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'homme est une créature composée d'<strong>une âme et d'un corps</strong>. Cette dualité le place au confluent de deux mondes : <em>au sommet</em> des êtres matériels, <em>au plus bas</em> des êtres spirituels. C'est sa noblesse, et c'est aussi sa complication : il est l'être le plus complexe de toute la création, et le « cœur » humain est le lieu où la matière et l'esprit se rencontrent.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'âme est un esprit immortel créé par Dieu pour être uni à un corps",
+			"anchor": "l-ame-est-un-esprit-immortel"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Définition à graver dans la mémoire : <strong>l'âme humaine est un esprit immortel, créé par Dieu, pour être uni à un corps</strong>. La Genèse dit : <em>« L'homme fut fait âme vivante »</em> (Gn 2, 7).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Âme",
+			"html": "<p>Du latin <em>anima</em>, ce qui anime, ce qui donne la vie. Tout vivant a une âme (les plantes, les animaux), parce qu'il y a en lui un principe de vie. Mais l'âme des plantes et des animaux est seulement l'organisation merveilleuse de leur matière, qui ne dépasse pas la matière. La spécificité de l'âme <em>humaine</em>, c'est qu'elle est <em>spirituelle</em>, et donc au-dessus de la matière.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Première preuve : l'intelligence manipule de l'immatériel",
+			"anchor": "preuve-intelligence-immateriel"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'esprit humain fait entrer en lui des réalités <em>universelles</em>, donc immatérielles, qu'on appelle <em>idées</em> ou <em>concepts</em>. La réalité sensible est toujours particulière (ce chat-ci, à ce moment) ; le <em>concept</em> de chat convient indifféremment à tous les chats. La nature humaine, dans la réalité, est individuée par chaque corps ; la <em>nature humaine</em> en tant que telle, comme idée, est commune à tous.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quand vous additionnez 2 + 2 = 4, vous manipulez cinq réalités totalement immatérielles. Vous pouvez aimer la <em>justice</em>, la <em>vérité</em>, la <em>fidélité</em>, qui ne sont pas des choses matérielles. Or le réceptacle d'une réalité immatérielle ne peut pas être lui-même matériel : une main peut saisir une autre main, mais pas elle-même, parce qu'elle est matière. L'esprit, lui, se saisit lui-même indirectement par ses concepts. <strong>Si l'esprit manipule de l'immatériel, c'est qu'il est lui-même immatériel.</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le langage humain le manifeste : quand deux hommes se parlent, le support est sensible (sons, lettres), mais le contenu échangé est intellectuel et universel. Aucun animal ne compte, ne récite, ne parle ainsi. Les abeilles communiquent par danse, les dauphins par sonar : c'est du sensible à du sensible. La parole humaine, elle, véhicule du spirituel.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Seconde preuve : la capacité d'aimer le bien universel",
+			"anchor": "preuve-amour-universel"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'homme est capable d'aimer non seulement tel bien sensible particulier (la crème au chocolat), mais le bien en lui-même : la justice, la fidélité, Dieu. Cette capacité d'aimer universellement, qu'on appelle <em>volonté</em>, suppose elle aussi une faculté immatérielle. C'est là, dit saint Augustin, la vraie valeur d'un homme : sa capacité infinie d'aimer ne peut être comblée que par Dieu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'âme est créée directement par Dieu",
+			"anchor": "l-ame-est-creee-directement-par-dieu"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Si l'esprit humain n'est pas le produit de l'organisation de la matière (qui ne peut produire que du matériel), alors il vient d'ailleurs. <strong>À chaque conception d'un être humain, Dieu intervient personnellement pour créer immédiatement une âme spirituelle</strong> (doctrine de foi). L'organisation de la matière ne saurait se hisser jusqu'au spirituel. La Genèse l'image en disant que Dieu « insuffle » dans les narines d'Adam.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le moment exact de cette création reste incertain (ni la science, ni la philosophie, ni la foi ne le précisent), mais tout porte à le situer dès la conception de l'embryon.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Âme et corps ne font qu'un seul être",
+			"anchor": "ame-et-corps-un-seul-etre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Descartes a écrit que l'âme est dans le corps « comme un pilote au commande de son navire ». Erreur grave. Le pilote peut descendre de son navire ; vous, vous ne pouvez pas descendre de votre corps. <strong>Vous n'êtes pas votre âme, vous n'êtes pas votre corps : vous êtes le composé substantiel des deux</strong>, et ce composé est <em>un seul être</em>. Dieu donne une seule existence à l'union.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Conséquence morale capitale : nul ne possède son corps comme une chose. Le suicide ne serait permis que si nous possédions notre corps comme un objet, mais nous <em>sommes</em> notre corps autant que notre âme. La « libre disposition de son corps » est un sophisme cartésien.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'âme est immortelle",
+			"anchor": "l-ame-est-immortelle"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Un être spirituel est par nature <em>simple</em>, sans parties. Or seul un être composé peut être détruit (par division). Donc l'âme spirituelle, indivisible, est <strong>indestructible</strong>. La phrase de Claude Bernard (« je croirai à l'âme quand je l'aurai rencontrée sous mon scalpel ») est d'une absurdité notoire : on ne tue jamais qu'un corps. L'âme survit à la mort, et Dieu, qui l'a créée immortelle, ne lui retire jamais l'être. Toutes les âmes humaines qui ont jamais existé existent encore.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les facultés de l'âme",
+			"anchor": "les-facultes-de-l-ame"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il y a, entre un sujet et un objet, deux mouvements possibles : l'objet vient dans le sujet (c'est la <em>connaissance</em>), ou le sujet se porte vers l'objet (c'est l'<em>amour</em>). Comme l'homme a un double niveau, spirituel et sensible, on obtient quatre grandes facultés :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<table><thead><tr><th></th><th>Spirituel</th><th>Sensible</th></tr></thead><tbody><tr><td><strong>Connaissance</strong></td><td>Intelligence</td><td>5 sens (+ 4 sens internes)</td></tr><tr><td><strong>Amour</strong></td><td>Volonté</td><td>Passions</td></tr></tbody></table>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les vertus qui perfectionnent ces facultés",
+			"anchor": "les-vertus-qui-perfectionnent"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li>Dans l'<strong>intelligence</strong> : la <em>foi</em> (vertu théologale) et la <em>prudence</em> (vertu morale).</li><li>Dans la <strong>volonté</strong> : l'<em>espérance</em> et la <em>charité</em> (théologales), la <em>justice</em> (morale).</li><li>Pour régler les passions (par la volonté qui les pilote) : la <em>tempérance</em> et la <em>force</em>.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il n'y a pas de vertu pour les sens (un aveugle n'est pas un coupable). Les vertus se logent là où il y a un choix moral : intelligence et volonté.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les onze passions",
+			"anchor": "les-onze-passions"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les <em>passions</em> sont les réactions sensibles de l'âme au bien sensible. Attention : ce sont des passions <em>de l'âme</em>, pas du corps. C'est pourquoi elles agitent nos « états d'âme » avec tant de force. <strong>Toutes les passions sont bonnes en elles-mêmes</strong> : c'est Dieu qui a fait l'homme ainsi. Elles sont comme un cheval de Camargue : pleines de vie, mais à dresser.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Aristote, repris intégralement par saint Thomas, en distingue onze, réparties en deux grands groupes selon que le bien est <em>facile</em> ou <em>ardu</em> (présentant une difficulté grave).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le concupiscible (bien facile, six passions)",
+			"anchor": "le-concupiscible"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On distingue par rapport à l'objet en soi, absent, ou présent ; et selon qu'il est jugé bon ou mauvais.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>Objet en soi</strong> : bien → <em>amour</em> ; mal → <em>haine</em>.</li><li><strong>Objet absent</strong> : bien → <em>désir</em> ; mal → <em>répulsion</em> (dégoût).</li><li><strong>Objet présent</strong> : bien → <em>joie</em> ; mal → <em>tristesse</em>.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'irascible (bien ardu, cinq passions)",
+			"anchor": "l-irascible"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Tiennent leur nom de la plus violente d'entre elles : la colère (<em>ira</em>).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>Objet bon</strong> (difficile à atteindre) : possible → <em>espoir</em> ; impossible → <em>désespoir</em>.</li><li><strong>Objet mauvais</strong> (à éviter) : on l'affronte → <em>audace</em> ; on le fuit → <em>crainte</em>.</li><li><strong>Mal présent</strong> qui s'impose : <em>colère</em>.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Exemple unique pour fixer les onze : un petit garçon attend le match de foot du mercredi après-midi. <em>Amour</em> du foot ; <em>haine</em> du foot (pour celui qui préfère lire) ; <em>désir</em> que le match ait lieu ; <em>répulsion</em> devant la visite de château proposée à la place ; <em>joie</em> que le match ait lieu, ou <em>tristesse</em> qu'il soit annulé. Sur le terrain : <em>espoir</em> de gagner contre les plus grands, ou <em>désespoir</em> ; <em>audace</em> d'aller toucher le ballon, ou <em>crainte</em> du choc ; et <em>colère</em> en cas d'injustice arbitrale. C'est exactement le clavier des passions humaines.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Toutes sont bonnes ; un homme qui n'aurait pas de passions ressemblerait à une Ferrari écrasée ou à un morceau de bois. Mais elles doivent être tenues par l'intelligence et la volonté, à proportion du bien réel. Cet ordre, qui devrait régner dans l'homme (intelligence, volonté, passions, corps), a été gravement perturbé par le péché originel : c'est l'objet de la leçon suivante.</p>"
+		}
+	]
+}

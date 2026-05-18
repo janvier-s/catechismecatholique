@@ -1,0 +1,212 @@
+{
+	"slug": "04-les-mysteres",
+	"n": 4,
+	"title": "Les mystères",
+	"pdf": "Courskt4.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Tout ce que nous avons dit jusqu'ici sur Dieu pourrait, à quelques détails près, être affirmé par les seules forces de notre intelligence naturelle. Avec cette leçon, nous plongeons dans la Révélation proprement dite, c'est-à-dire dans l'intimité même de Dieu. Aucune intelligence créée ne pourrait découvrir cela sans qu'il se révèle.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "A. Les mystères en général",
+			"anchor": "a-les-mysteres-en-general"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Qu'est-ce qu'un mystère ?",
+			"anchor": "qu-est-ce-qu-un-mystere"
+		},
+		{
+			"kind": "definition",
+			"term": "Mystère",
+			"html": "<p>Du grec <em>mustêrion</em>, chose cachée. Vérité tout à fait certaine, qu'il faut absolument croire pour être sauvé (parce que Dieu l'a révélée), mais qui, par sa nature même, dépasse les forces de notre intelligence finie.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quatre précisions essentielles encadrent cette notion.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>1. Un mystère n'est pas mystérieux en lui-même.</strong> Il est même tout simple et tout lumineux. C'est à cause de nous qu'il est en partie caché. Saint Paul le dit génialement : Dieu « habite une lumière inaccessible » (1 Tm 6, 16). Il n'y a aucune ténèbre en Dieu : il y a au contraire <em>trop</em> de lumière, et nous sommes comme des hiboux en plein soleil.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>2. Un mystère n'est pas contradictoire ni absurde.</strong> Il faut récuser la formule de Tertullien (reprise par Luther) : <em>« Credo quia absurdum »</em>, je crois parce que c'est absurde. Cette phrase est monstrueuse. Il n'y a rien d'absurde en Dieu, qui est toute clarté.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>3. On ne peut jamais le « comprendre »</strong>, c'est-à-dire en épuiser la richesse intelligible (<em>comprehendere</em>). Seul Dieu se comprend lui-même : l'intelligence créée ne saurait épuiser l'infini.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>4. Il faut néanmoins essayer d'en saisir le plus possible.</strong> Pas de « foi du charbonnier » : qui aime Dieu désire en savoir davantage sur lui, et c'est tout l'objet du catéchisme, de la philosophie et de la théologie.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi y a-t-il des mystères ?",
+			"anchor": "pourquoi-y-a-t-il-des-mysteres"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il y a des mystères parce que Dieu est infini, et que Dieu est lui-même le grand mystère. Le mystère est comme une équation mathématique dont l'inconnue est Dieu :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>Trinité</strong> : un seul Dieu en trois personnes.</li><li><strong>Incarnation</strong> : le Fils de Dieu fait homme.</li><li><strong>Rédemption</strong> : la mort du Fils de Dieu rachetant tous les hommes.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Une religion qui n'aurait pas de mystère, qui prétendrait que Dieu est simple à comprendre, serait certainement fausse : son Dieu serait à la mesure de l'homme, comme le « grand architecte » de Voltaire, ou comme un vaste ordinateur. Ce ne serait plus Dieu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il y a d'autres mystères que ces trois principaux. Par exemple, <em>la grâce</em> : « Sans moi vous ne pouvez rien faire » (Jn 15, 5), et pourtant nous restons libres. Ou encore <em>l'enfer</em> : mystère double, parce que nous ne savons pas la gravité du péché (offense à Dieu mystérieux), ni le malheur de perdre Dieu (qui nous est mystérieux). C'est pour rendre saisissable cette perte que Dieu, dit saint Augustin, a mis du feu en enfer.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "B. Le mystère de la Sainte Trinité",
+			"anchor": "b-le-mystere-de-la-sainte-trinite"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Remarques préalables",
+			"anchor": "remarques-prealables"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le mot <em>Trinité</em> signifie « trois en un » (<em>trine</em> = 3 ; <em>unité</em> = 1). Il ne figure pas en tant que tel dans le Nouveau Testament, mais la réalité y est partout, en pleine lumière. C'est Notre-Seigneur Jésus-Christ, deuxième personne, qui nous a révélé ce mystère, inconnu des hommes de l'Ancien Testament. Avec la lumière du Nouveau Testament, on découvre cependant dans l'Ancien des <em>indices</em> :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><em>« Faisons l'homme à notre image »</em> (Gn 1, 26) : Dieu unique parle au pluriel au moment de créer l'homme. Ce n'est pas un pluriel de majesté (inexistant en hébreu).</li><li>Abraham reçoit <em>trois</em> visiteurs (Gn 18) et n'en adore <em>qu'un</em>.</li><li>Isaïe (6, 3) voit les séraphins proclamer Dieu par trois fois : <em>« Sanctus, Sanctus, Sanctus »</em>.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Par ordre pédagogique on commencerait peut-être par étudier le Christ pour remonter à la Trinité ; on suit ici l'ordre des mystères, parce que la Trinité est éternelle, alors que l'Incarnation a une réalisation dans le temps.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Nature, substance, personne",
+			"anchor": "nature-substance-personne"
+		},
+		{
+			"kind": "definition",
+			"term": "Nature (essence, substance) en Dieu",
+			"html": "<p>Ce qu'un être <em>est</em>. En Dieu, cette nature est unique : elle est <em>d'exister</em>. C'est la divinité.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Personne",
+			"html": "<p>Sujet d'attribution, ce qui permet de dire « je ». Selon la définition classique de Boèce : <em>substance individuelle de nature raisonnable</em>. Chez l'homme, le principe d'individuation est la matière (le corps) ; tous les hommes partagent la même nature humaine mais constituent autant de personnes distinctes. Saint Thomas dit que la personne est <em>quod est perfectissimum in tota natura</em>, ce qu'il y a de plus parfait dans toute la création.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Une nature, trois personnes",
+			"anchor": "une-nature-trois-personnes"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Avec tout l'Évangile, nous affirmons qu'il y a en Dieu <strong>une seule nature</strong> (sinon il y aurait plusieurs Dieux, c'est-à-dire le polythéisme) et <strong>trois personnes</strong> : le Père, le Fils et le Saint-Esprit. Dieu est unique : aucune autre nature ne peut posséder l'être en plénitude. Mais en cet unique Dieu subsistent réellement trois sujets d'attribution.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Une analogie pour saisir le mystère",
+			"anchor": "une-analogie-pour-saisir-le-mystere"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Première opération : l'intelligence.</strong> Dieu est une nature infiniment intelligente. Or toute intelligence, pour connaître, produit un <em>verbe</em>, une parole intérieure. La nôtre balbutie : nous disons très peu de nous-mêmes. Mais l'intelligence de Dieu est infinie : le Verbe qu'elle produit dit <em>tout</em> ce que Dieu est, et il est aussi grand que Dieu. Le <strong>Père</strong> est principe de l'intelligence divine, le <strong>Fils</strong> est le terme : la nature divine, connue par la nature divine, dans un acte unique et infini. C'est pourquoi saint Jean dit : <em>« Au commencement était le Verbe, et le Verbe était auprès de Dieu, et le Verbe était Dieu »</em> (Jn 1, 1). Auprès de : il s'en distingue. Était Dieu : il est la même nature.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Seconde opération : l'amour.</strong> Cette nature divine, parfaitement connue, est aussi parfaitement aimée. Or quand Dieu aime, il ne donne pas un peu de lui-même : il se donne tout entier. L'amour commun du Père et du Fils, qui se rapporte tout entier sur la nature divine, a pour terme une troisième personne : le <strong>Saint-Esprit</strong>, qui est la nature divine infiniment aimée, et qui procède du Père et du Fils.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cette analogie ne dissipe pas le mystère : ce qui demeure inaccessible, c'est que ces deux opérations (intelligence et amour) infinies en Dieu aboutissent à des <em>personnes</em> réellement distinctes, et que le Verbe seul (non le Père ni l'Esprit) se soit incarné. On peut, à la suite d'Aristote (« la pensée de la pensée »), entrevoir que Dieu a un Verbe ; on ne peut pas, sans la Révélation, entrevoir que ce Verbe est une personne.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi le mystère de la Trinité n'est pas un luxe",
+			"anchor": "pourquoi-la-trinite-n-est-pas-un-luxe"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Sans la Trinité, Dieu ne serait pas amour. Un être seul qui possède en lui tout bien ne pourrait aimer les autres (l'objection de la leçon 3). Dieu n'aime pas les choses parce qu'elles sont bonnes, il les aime parce qu'il est bon. Et il est bon parce qu'il y a en lui une opération infinie d'amour qui a pour terme une autre personne que lui. Sans le Saint-Esprit, Dieu serait enfermé dans une auto-contemplation égoïste. La Trinité fonde la bonté de Dieu : c'est parce qu'<strong>ils sont trois</strong> que Dieu est le bon Dieu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "C. La doctrine des appropriations",
+			"anchor": "c-la-doctrine-des-appropriations"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Principe",
+			"anchor": "principe-des-appropriations"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Un être agit à l'extérieur de lui-même par sa <em>nature</em>. Or la nature divine est commune aux trois personnes. <strong>Tout ce que Dieu fait à l'extérieur de lui-même est donc commun au Père, au Fils et au Saint-Esprit</strong> : la création, la conservation, l'Incarnation, la Rédemption, l'envoi de la grâce, la résurrection des morts à la fin du monde. Les trois personnes le font ensemble.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Seules les deux opérations <em>internes</em> sont propres à une personne :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li>Le Père seul est principe de l'intelligence divine ; le Fils seul est son terme.</li><li>Le Père et le Fils sont principes communs de l'amour divin ; le Saint-Esprit seul en est le terme.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi l'Écriture attribue cependant",
+			"anchor": "pourquoi-l-ecriture-attribue"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pourtant, l'Écriture attribue continuellement telle œuvre extérieure à telle personne particulière. Pas au hasard : selon les caractères propres de chaque personne dans la Trinité. C'est ce qu'on appelle les <em>appropriations</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>Au Père</strong>, principe sans principe : les œuvres de <em>puissance</em>. La création (« Je crois en Dieu, le Père tout-puissant, créateur du ciel et de la terre »), les plus grands miracles.</li><li><strong>Au Fils</strong>, qui procède par voie d'intelligence : les œuvres de <em>sagesse</em> et de <em>jugement</em>. L'ordre du monde, dont le Père a tout disposé « par son Fils » (le prologue de Jean dit que c'est par le Verbe que tout a été fait), et le jugement dernier.</li><li><strong>Au Saint-Esprit</strong>, qui procède par voie d'amour : les œuvres de <em>charité</em>, de <em>miséricorde</em> et de <em>sanctification</em>. L'Incarnation (Marie a conçu « du Saint-Esprit »), la Rédemption (le Christ s'est offert « par l'Esprit éternel », He 9, 14), l'habitation de Dieu dans l'âme des justes, les dons de la grâce.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les trois personnes sont strictement égales, ayant la même nature divine unique. Et c'est saint Jean qui livre l'identité la plus saisissante de Dieu :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Dieu est amour.</p>",
+			"attribution": "1 Jean 4, 8"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cette identité <em>« Dieu est amour »</em> ne tient que parce que Dieu est Trinité. C'est pourquoi le Dieu chrétien est le « bon Dieu » : non par contingence, mais par sa constitution même.</p>"
+		}
+	]
+}

@@ -10,6 +10,9 @@
 		if (p === '/bon-pasteur' || p.startsWith('/bon-pasteur/')) {
 			if (p.startsWith('/bon-pasteur/dieu/')) return null;
 			if (p.startsWith('/bon-pasteur/liturgie/')) return null;
+			// CCA route renders its own in-page back link to /bon-pasteur,
+			// alongside the lesson rail instead of above the whole row.
+			if (p.startsWith('/bon-pasteur/catechisme-adultes-laguerie/')) return null;
 			return '/bibliotheque#shelf-I';
 		}
 		return null;

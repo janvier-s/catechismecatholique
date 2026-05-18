@@ -57,6 +57,8 @@ import type {
 	DieuStructure,
 	DieuChapter,
 	LiturgieChapter,
+	CcaStructure,
+	CcaLesson,
 	BonPasteurPlaylist
 } from './types';
 
@@ -1102,6 +1104,34 @@ export function loadLiturgieChapter(
 			return (await r.json()) as LiturgieChapter;
 		})();
 		liturgieChapterCache.set(slug, p);
+	}
+	return p;
+}
+
+// ─── IBP · Cours de catéchisme pour adultes loaders ─────────────────────────
+
+let ccaStructurePromise: Promise<CcaStructure> | null = null;
+const ccaLessonCache = new Map<string, Promise<CcaLesson | null>>();
+
+export function loadCcaStructure(fetcher: Fetch = fetch): Promise<CcaStructure> {
+	if (!ccaStructurePromise) {
+		ccaStructurePromise = fetchJson<CcaStructure>(
+			'/data/bon-pasteur/catechisme-adultes-laguerie/structure.json',
+			fetcher
+		);
+	}
+	return ccaStructurePromise;
+}
+
+export function loadCcaLesson(slug: string, fetcher: Fetch = fetch): Promise<CcaLesson | null> {
+	let p = ccaLessonCache.get(slug);
+	if (!p) {
+		p = (async () => {
+			const r = await fetcher(`/data/bon-pasteur/catechisme-adultes-laguerie/lessons/${slug}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as CcaLesson;
+		})();
+		ccaLessonCache.set(slug, p);
 	}
 	return p;
 }

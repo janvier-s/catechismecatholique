@@ -1,0 +1,263 @@
+{
+	"slug": "01-la-doctrine-catholique",
+	"n": 1,
+	"title": "La doctrine catholique",
+	"pdf": "Courskt1.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cette première leçon est introductive. Elle ne traite pas encore d'une vérité particulière de la foi : elle pose le cadre. Qu'est-ce qu'un catholique ? Que doit-il croire ? Où se trouve la doctrine catholique, et comment est-elle enseignée ? Sans ces préalables, on ne saurait ni par où commencer ni dans quel ordre étudier la foi.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le cours qui s'ouvre est un cours de catéchisme pour adultes, donné originellement à Paris dans les années 1980 pour des catéchumènes adultes, puis repris en vidéo pour les séminaristes de première année du séminaire Saint-Vincent de Courtalin. C'est du catéchisme, donc, et non de la théologie ni de la philosophie : on y donnera toute la théologie et la philosophie qu'on peut, mais on reste dans l'ordre d'une catéchèse, c'est-à-dire d'un enseignement oral et direct.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Qu'est-ce qu'un catholique ?",
+			"anchor": "qu-est-ce-qu-un-catholique"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dans le désert catéchétique où nous nous trouvons depuis trente ou quarante ans en France, on ne sait plus très bien ce qu'est un catholique. Trois conditions sont requises pour l'être véritablement, et chacune correspond à l'absence d'un défaut précis.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois conditions requises",
+			"anchor": "les-trois-conditions-requises"
+		},
+		{
+			"kind": "definition",
+			"term": "1. Le baptême (d'eau)",
+			"html": "<p>Avoir reçu le sacrement de baptême d'eau. C'est ce qui distingue le catholique du <em>païen</em>, c'est-à-dire de celui qui n'est pas baptisé. Le mot païen n'est pas péjoratif : il désignait à l'origine les habitants des campagnes (<em>pagus</em>), par opposition aux villes où les apôtres ont d'abord évangélisé.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. La foi (première vertu théologale)",
+			"html": "<p>Avoir la foi, c'est-à-dire tenir pour vrai ce que Dieu a révélé. Il y a des gens qui ont été baptisés petits et qui ont perdu la foi : ils ne sont plus catholiques. Celui qui rejette volontairement la foi qu'il a reçue est un <em>apostat</em> ; celui qui retient une partie de la foi mais en rejette une autre est un <em>hérétique</em>.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. La reconnaissance de l'autorité de l'Église",
+			"html": "<p>Cette condition découle de la foi elle-même. Jésus-Christ a rassemblé les chrétiens dans une Église, l'Église catholique apostolique et romaine. Avoir la foi, c'est nécessairement reconnaître que cette Église, voulue par le Christ, a autorité pour transmettre et garantir la foi. Celui qui rejette cette autorité tout en gardant le reste est un <em>schismatique</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Autrement dit, un catholique est quelqu'un de baptisé qui professe la foi catholique et reconnaît l'autorité de l'Église.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Ce que nous devons croire",
+			"anchor": "ce-que-nous-devons-croire"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Si la foi est l'une des trois conditions, il faut savoir ce que l'on doit croire. La réponse tient en deux propositions qui n'en font qu'une : <strong>nous devons croire ce que Dieu a révélé, et que l'Église nous enseigne</strong>. Ce ne sont pas deux objets de foi : il y a une seule chose à croire, la Parole de Dieu, mais c'est l'Église qui nous donne la garantie que telle vérité est bien révélée.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Révélation",
+			"anchor": "la-revelation"
+		},
+		{
+			"kind": "definition",
+			"term": "Révélation",
+			"html": "<p>Du latin <em>re-velare</em> : ôter le voile. Action de Dieu faisant connaître, de sa propre initiative, les vérités du Royaume des cieux. Comme une table couverte d'un drap : si l'on retire le drap, on voit les objets posés dessus. Dieu a retiré le voile qui cachait certains mystères (Trinité, Incarnation, Rédemption) auxquels la raison seule n'aurait jamais accédé.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les deux sources de la Révélation",
+			"anchor": "les-deux-sources-de-la-revelation"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La Révélation se trouve dans deux sources, ou canaux, où l'Église puise ce qu'elle enseigne :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>L'Écriture Sainte</strong> : l'ensemble des livres écrits sous la dictée de l'Esprit Saint.</li><li><strong>La Tradition orale</strong> : l'enseignement de la foi transmis depuis les apôtres jusqu'à nos jours par les évêques et le pape.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Tout n'a pas été écrit. Beaucoup de vérités révélées par Notre-Seigneur et les apôtres ont été transmises oralement et n'apparaissent pas explicitement dans la Bible. C'est pourquoi l'Église définit parfois solennellement des vérités qui ne se trouvent pas dans l'Écriture : par exemple, le dogme de l'<em>Immaculée Conception</em> ou celui de l'<em>Assomption de la Sainte Vierge</em>. Sans la Tradition, ces vérités révélées seraient perdues.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Des deux sources, la Tradition a une priorité chronologique : avant que les apôtres n'écrivent les premiers livres du Nouveau Testament (les épîtres de saint Paul aux Thessaloniciens sont parmi les plus anciennes), il y avait déjà des chrétiens qui avaient la foi. La Tradition est ce qui a finalement été mis par écrit dans les livres saints. Derrière chaque livre du Nouveau Testament, il y a un apôtre.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Sainte Écriture : structure",
+			"anchor": "la-sainte-ecriture-structure"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La Bible (<em>biblia</em>, le livre, en grec) est en réalité une bibliothèque de <strong>72 livres</strong>, tous inspirés par l'Esprit Saint et donc exempts d'erreur (c'est l'<em>inerrance</em>) : <strong>45 livres de l'Ancien Testament et 27 du Nouveau Testament</strong>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Ancien Testament</strong> (45 livres), réparti en trois catégories :</p><ul><li><strong>Livres historiques</strong> : le Pentateuque (Genèse, Exode, Lévitique, Nombres, Deutéronome), Josué, les Juges, Samuel, les Rois, les Maccabées, etc.</li><li><strong>Livres sapientiaux</strong> : écrits surtout par David et Salomon. Psaumes, Job, Cantique des cantiques, Sagesse, Ecclésiastique, Proverbes, Ecclésiaste.</li><li><strong>Livres prophétiques</strong> (environ 16) : les quatre <em>grands prophètes</em> (Isaïe, Jérémie, Daniel, Ézéchiel) et les douze <em>petits prophètes</em> (Osée, Joël, Amos, Abdias, Jonas, Michée, Nahum, Habacuc, Sophonie, Aggée, Zacharie, Malachie).</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Nouveau Testament</strong> (27 livres) : c'est la pleine lumière, le point culminant de la Révélation, qui donne le sens de toute l'Écriture. Tout catholique devrait le connaître, et le connaître dans l'ordre :</p><ul><li>Les <strong>quatre Évangiles</strong> : Matthieu, Marc, Luc, Jean.</li><li>Les <strong>Actes des Apôtres</strong> (par saint Luc).</li><li>Les <strong>14 épîtres de saint Paul</strong> : Romains, 1-2 Corinthiens, Galates, Éphésiens, Philippiens, Colossiens, 1-2 Thessaloniciens, 1-2 Timothée, Tite, Philémon, Hébreux.</li><li>Les <strong>épîtres catholiques</strong> : 1 Jacques, 1-2 Pierre, 1-2-3 Jean, 1 Jude.</li><li>L'<strong>Apocalypse</strong> de saint Jean (dernier livre de l'Écriture).</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Connaître l'ordre des épîtres de saint Paul est très utile pour retrouver rapidement une référence. Tous ces livres, parce que leur auteur principal est l'Esprit Saint, sont garantis sans erreur dans toutes leurs affirmations.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois étapes historiques de la Révélation",
+			"anchor": "les-trois-etapes-historiques-de-la-revelation"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu a parlé aux hommes en trois grandes périodes :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ol><li><strong>La Révélation primitive</strong>, faite aux premiers hommes, Adam et Ève. La Genèse nous dit qu'au commencement Adam et Ève conversaient avec Dieu « à la brise du soir » (Gn 3, 8) : l'humanité primitive était dans une grande beauté, équilibrée, pleine de grâce et de science. C'est par le péché que l'homme s'est dégradé. On trouve des traces de cette révélation primitive dans toutes les civilisations : récit d'un âge d'or, récit du Déluge. Le mythe grec de Pandore, par exemple, est presque un calque du récit de la chute. Ces traditions ont été reprises et fixées par Moïse dans le Pentateuque.</li><li><strong>La Révélation mosaïque</strong> (Moïse et les prophètes). Devant l'effondrement moral de l'humanité, Dieu reprend les choses en main en suscitant des prophètes dans un petit peuple, le peuple juif. Elle commence avec Abraham, se poursuit avec Isaac, Jacob, Moïse, et les prophètes de l'Ancien Testament.</li><li><strong>La Révélation chrétienne</strong>, qui est la pleine lumière : Dieu lui-même vient au secours de l'humanité en la personne de son propre Fils, Notre-Seigneur Jésus-Christ, et de ses apôtres. <strong>La Révélation est close à la mort du dernier apôtre, saint Jean, vers l'an 100.</strong> Depuis, Dieu ne révèle plus rien de nouveau : l'Église n'invente pas de vérités nouvelles, elle ne fait qu'expliciter le dépôt reçu.</li></ol>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le Magistère de l'Église",
+			"anchor": "le-magistere-de-l-eglise"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Seule l'Église, qui ne peut se tromper sur ce point, peut dire avec autorité ce que Dieu a révélé. Elle le fait par son <strong>Magistère</strong>.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Magistère",
+			"html": "<p>Du latin <em>magister</em>, maître d'école. Pouvoir d'enseigner reçu de Notre-Seigneur par les apôtres et leurs successeurs (le pape et les évêques). Comme le maître qui montre un mot écrit au tableau : ce ne sont pas ses paroles qu'on croit, c'est ce qui est inscrit au tableau, mais on ne le sait que parce qu'il le montre. De même, l'Église ne crée pas la vérité révélée : elle la désigne et la garantit.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est pourquoi « ce que Dieu a révélé » et « ce que l'Église enseigne » ne sont pas deux choses différentes : c'est la même Parole de Dieu, identifiée et transmise par l'Église. Sans le Magistère, chacun ferait son tri dans l'Écriture, comme Luther au XVI<sup>e</sup> siècle qui, en tirant sur certaines phrases de saint Paul, en a déduit qu'on était sauvé par la foi seule, indépendamment des œuvres : doctrine monstrueuse mais que l'Écriture seule, sans la garantie de l'Église, peut sembler appuyer. Si la foi catholique est demeurée identique pendant deux mille ans, c'est grâce à l'Église ; sans elle, la vérité révélée se serait depuis longtemps dissoute dans toutes sortes d'erreurs.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Qu'est-ce que le catéchisme ?",
+			"anchor": "qu-est-ce-que-le-catechisme"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Définition",
+			"anchor": "definition-du-catechisme"
+		},
+		{
+			"kind": "definition",
+			"term": "Catéchisme",
+			"html": "<p>L'exposé simple de la doctrine catholique. Il ne démontre pas ce qu'il affirme : il expose. C'est ce qui le distingue de la théologie, qui est une science et qui doit démontrer en puisant dans ses sources (Magistère, Tradition, Écriture, Pères de l'Église, droit canon, et même la raison naturelle).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le catéchisme est fait pour tous, à commencer par les humbles et les petits. On n'a pas besoin de tout démontrer aux enfants : on leur transmet la vérité reçue, ce qui suffit à fonder leur certitude. Catéchisme et théologie supposent l'un et l'autre la foi : le théologien qui perdrait la foi cesserait d'être théologien (et même chrétien).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois parties du catéchisme",
+			"anchor": "les-trois-parties-du-catechisme"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le catéchisme catholique se déploie toujours en trois grandes parties, qui correspondent aux trois vertus théologales :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>Le dogme</strong> : les vérités à croire. Cela correspond à la vertu de <strong>foi</strong>. On ne peut rien bâtir sur le vide : c'est par la vérité reçue qu'il faut commencer.</li><li><strong>Les moyens de salut</strong> : la grâce, la prière, les sacrements. Cela correspond à la vertu d'<strong>espérance</strong>. C'est la part propre du christianisme : les autres religions (l'islam, le judaïsme actuel, les religions extrême-orientales) reposent sur un dogme rudimentaire et une énorme morale, mais ne comportent pas cette deuxième partie. Le christianisme, lui, propose une véritable intimité de vie avec Dieu, dont Notre-Seigneur a donné les moyens.</li><li><strong>La morale</strong> : les commandements et les vertus à pratiquer. Cela correspond à la vertu de <strong>charité</strong>. Si nous faisons le bien, c'est parce que nous aimons Dieu ; sinon la morale n'a pas de sens.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Catéchisme et catéchèse",
+			"anchor": "catechisme-et-catechese"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il ne faut pas se laisser impressionner par les mots. Le <strong>catéchisme</strong> est le livre écrit qui contient la doctrine catholique. Cette mise par écrit est récente : elle date de l'imprimerie. Auparavant, il n'y avait pas de catéchismes proprement dits, mais des catéchèses, c'est-à-dire l'enseignement oral de la foi.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La <strong>catéchèse</strong> est donc l'enseignement oral de la foi, tel qu'il a été pratiqué jusqu'au Concile de Trente (1545-1563), qui a popularisé l'usage des catéchismes écrits. Le présent cours, donné oralement, est de la catéchèse ; mis par écrit ou en notes, il devient catéchisme. Parmi les grands catéchismes écrits, on retient le <em>Catéchisme du Concile de Trente</em>, le <em>Catéchisme de saint Pie X</em>, ou encore les catéchismes diocésains.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les symboles de la foi",
+			"anchor": "les-symboles-de-la-foi"
+		},
+		{
+			"kind": "definition",
+			"term": "Symbole",
+			"html": "<p>Du grec <em>symbolon</em> : résumé, abrégé. Rien à voir avec le sens moderne de « symbole » (signe figuratif). Un symbole de foi est une formule abrégée de la foi catholique. L'Église en reconnaît officiellement trois.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "1. Le Symbole des Apôtres",
+			"anchor": "le-symbole-des-apotres"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le plus ancien, le plus vénérable et le plus court. C'est la formule de foi du baptême dans l'Église romaine dès le I<sup>er</sup> siècle, et celle qu'on récite au début du chapelet. La tradition rapporte qu'avant de se séparer après la Pentecôte, les douze apôtres se seraient réunis pour fixer une formule commune en douze articles, un par apôtre.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "2. Le Symbole de Nicée",
+			"anchor": "le-symbole-de-nicee"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Formule du Concile de Nicée (325), réuni contre l'hérésie d'<em>Arius</em>, qui niait la divinité de Jésus-Christ. Trois cent dix-huit Pères y précisèrent la foi en proclamant le Christ « vrai Dieu né du vrai Dieu, lumière née de la lumière, engendré non pas créé, consubstantiel au Père ». Repris et complété au Concile de Constantinople (381), c'est le <em>Credo</em> que l'on chante à la messe du dimanche.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "3. Le Symbole de saint Athanase",
+			"anchor": "le-symbole-de-saint-athanase"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Attribué à saint Athanase, évêque d'Alexandrie au IV<sup>e</sup> siècle, principal adversaire d'Arius (on l'appelait le « marteau » des ariens). Plus long et plus élaboré, il précise encore la divinité de Jésus-Christ et le mystère de la Trinité. Il se récite dans l'Office divin, à Prime, le dimanche.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Plan du cours",
+			"anchor": "plan-du-cours"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le catéchisme suit l'ordre du <em>Symbole des Apôtres</em>. Le premier article est : « Je crois en Dieu, le Père tout-puissant, créateur du ciel et de la terre. » C'est donc par Dieu lui-même que nous commencerons : son existence, sa nature, ses attributs.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Trois remarques pour finir, qui s'appliquent à tout ce que nous étudierons :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li>L'Église ne pourrait jamais imposer la foi sur ce que Dieu n'aurait pas révélé.</li><li>La doctrine catholique est plus vaste que la Révélation parce qu'elle suppose aussi toutes les vérités nécessaires pour défendre cette Révélation.</li><li>La Révélation est close à la mort du dernier apôtre, saint Jean, vers l'an 100 après Jésus-Christ.</li></ul>"
+		}
+	]
+}

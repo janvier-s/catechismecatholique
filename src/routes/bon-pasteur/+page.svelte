@@ -13,9 +13,9 @@
 			items: [
 				{
 					slug: 'catechisme-adultes-ibp',
-					href: null,
+					href: '/bon-pasteur/catechisme-adultes-laguerie/01-la-doctrine-catholique',
 					image: '/img/bibliotheque/ibp-catechisme-adultes.webp',
-					eyebrow: '32 leçons',
+					eyebrow: '28 leçons',
 					title: 'Cours de catéchisme pour adultes',
 					subtitle: 'Séminaire Saint-Vincent de Courtalin',
 					blurb: `De l'existence de Dieu aux sacrements, de la morale aux vertus cardinales.`

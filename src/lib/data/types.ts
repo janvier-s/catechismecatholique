@@ -1326,6 +1326,33 @@ export interface LiturgieChapter {
 	blocks: LiturgieBlock[];
 }
 
+// ─── IBP · Cours de catéchisme pour adultes ────────────────────────────────
+
+export type CcaBlock =
+	| { kind: 'heading'; level: 2 | 3; title: string; anchor: string }
+	| { kind: 'paragraph'; html: string }
+	| { kind: 'quote'; html: string; attribution?: string }
+	| { kind: 'definition'; term: string; html: string };
+
+export interface CcaLessonRef {
+	slug: string;
+	n: number;
+	title: string;
+	available?: boolean;
+}
+
+export interface CcaStructure {
+	lessons: CcaLessonRef[];
+}
+
+export interface CcaLesson {
+	slug: string;
+	n: number;
+	title: string;
+	pdf?: string;
+	blocks: CcaBlock[];
+}
+
 export interface BonPasteurPlaylistVideo {
 	id: string;
 	title: string;

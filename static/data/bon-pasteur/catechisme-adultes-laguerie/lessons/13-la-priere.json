@@ -1,0 +1,304 @@
+{
+	"slug": "13-la-priere",
+	"n": 13,
+	"title": "La Prière",
+	"pdf": "Courskt13.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Avec les sacrements, la prière est l'un des deux <strong>moyens ordinaires</strong> par lesquels Dieu nous donne sa grâce. Mais elle a sur les sacrements un avantage capital : on peut être privé des sacrements (sans faute de sa part), jamais de la prière. C'est le moyen premier, sûr, et universellement accessible. <em>« Quiconque invoquera le nom du Seigneur sera sauvé »</em> (Jl 3, 5 ; Rm 10, 13).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les chrétiens de Chine évangélisés par saint François Xavier au XVIe siècle ont vécu près de trois siècles sans prêtres ni sacrements après le départ des missionnaires. Quand l'Église y est revenue au XIXe siècle, on a retrouvé des milliers de descendants vivant encore de cette grâce. Ils n'avaient gardé que le baptême et le mariage (sacrements administrables sans prêtre) · et la prière, sans laquelle rien n'aurait tenu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Définition de la prière",
+			"anchor": "definition"
+		},
+		{
+			"kind": "definition",
+			"term": "La prière (sainte Thérèse d'Avila)",
+			"html": "<p><em>« Élévation de notre âme vers Dieu »</em> · ou encore : <em>« parler à Dieu en l'aimant »</em>. Pas seulement parler · parler <strong>en aimant</strong>, en mettant dans la prière le poids de son âme. <em>« Le poids qui m'entraîne en avant, c'est mon amour »</em>, dit saint Augustin.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La prière, acte de la vertu de religion",
+			"anchor": "vertu-de-religion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La <em>religion</em> est cette partie de la justice par laquelle on rend à Dieu ce qu'on lui doit. Mais la stricte égalité de la justice est ici impossible · nul ne peut rendre à Dieu tout ce qu'il lui doit. On parle donc d'une vertu spéciale, la <em>vertu de religion</em>, qui se déploie en <strong>quatre actes</strong> :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "1. La dévotion",
+			"html": "<p>Promptitude à se livrer au service intérieur de Dieu (saint Thomas). N'évoquez surtout pas l'image de la vieille dame bigote dans ses pantoufles · c'est exactement le contraire. La dévotion est la <em>fraîcheur</em>, la <em>jeunesse</em> de l'âme, l'élan premier qui dit : « si l'honneur de Dieu est en jeu, j'y vais ». Sans dévotion, pas d'adoration, pas de prière, pas de sacrifice véritables.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. L'adoration",
+			"html": "<p>Totale soumission devant la souveraineté de Dieu, reconnaissance de son <em>dominium</em> universel. Moïse devant le buisson ardent : <em>« Je ne suis que cendre et poussière »</em>.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. La prière",
+			"html": "<p>Demande adressée à Dieu, dont nous étudions le détail.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "4. Le sacrifice",
+			"html": "<p>Offrande d'un bien immolé à la gloire de Dieu. Acte suprême de la vertu de religion. Nous le verrons à propos du sacrifice de la messe.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Une <strong>prière qui ne procède pas de la dévotion ne vaut rien</strong> · ce n'est même pas une prière, mais une formule extérieure.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois verbes",
+			"anchor": "trois-verbes"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La prière est un <em>verbe</em> · une parole. Or les anciens distinguaient trois verbes en l'homme.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Verbum oris (verbe de la bouche)",
+			"html": "<p>La parole prononcée, expression sonore que les autres entendent.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Verbum mentis (verbe mental)",
+			"html": "<p>La parole de l'esprit, pensée intérieure articulée. Pas besoin d'être exprimée vocalement ; on pense toute la journée sans parler. C'est elle qui sert à <em>connaître</em> (je me dis les choses pour les comprendre) et qui produit ensuite le verbum oris pour communiquer.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Verbum cordis (verbe du cœur)",
+			"html": "<p>Pensée encore confuse, antérieure à toute expression, que le verbum mentis va manifester. Tant qu'elle n'est pas dite intérieurement, je ne sais pas encore ce que je veux dire.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>La prière est essentiellement le verbum mentis</strong>, en tant qu'il est fait <em>sous le regard de Dieu</em> et <em>adressé à Dieu</em>. Pas besoin de prononcer vocalement · Dieu entend tout ce que pense notre esprit. Mieux encore : il entend même notre verbe du cœur, avant que nous-mêmes nous le sachions.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>D'où une <strong>hygiène du verbe mental</strong> · nos pensées sont sacrées, parce que Dieu les écoute. Vivre en présence de Dieu, c'est tenir constamment cet interlocuteur intérieur. Et si l'on prend l'habitude d'adresser ce verbe à Dieu, on ne peut plus penser n'importe quoi · ni saletés ni méchancetés ne survivent à la conscience que Dieu écoute. Quelqu'un qui parle tout seul dans la rue passe pour fou, parce que le verbe mental n'a pas pour fonction de s'adresser à soi-même · son grand interlocuteur permanent, c'est Dieu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et il ne s'agit pas seulement d'une affaire d'intelligence. Il faut le <em>poids</em> de la volonté · ce que le père Garrigou-Lagrange appelait le <em>vouloir foncier</em> de l'homme. La prière, c'est l'âme qui se penche vers Dieu avec tout ce qu'elle veut, tout ce qu'elle aime.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les fins de la prière",
+			"anchor": "fins"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>À quoi sert ce verbe mental adressé à Dieu ? <strong>Quatre buts</strong>, qu'il faut tous mettre dans toute prière :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "1. La louange (fin latreutique)",
+			"html": "<p>Du grec <em>latreia</em>, adoration. Magnifier la grandeur et la beauté de Dieu, parce qu'il mérite d'être loué.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. L'action de grâce (fin eucharistique)",
+			"html": "<p>Du grec <em>eucharistia</em>, rendre grâce. Remercier Dieu de tout · que sommes-nous, sinon la somme des dons qu'il nous a faits ?</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. L'amende honorable (fin propitiatoire)",
+			"html": "<p>Demander pardon. Le péché empêche cette transparence avec Dieu ; il faut s'en débarrasser pour s'approcher. Adam et Ève avant la chute n'en avaient pas besoin · nous, si.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "4. La demande (fin impétratoire)",
+			"html": "<p>Demander à Dieu ce que nous n'avons pas. C'est <em>formellement</em> la fin principale de la prière, dit saint Thomas. Les autres en sont les préambules.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il y a un irénisme spirituel idiot qui voudrait réduire la prière à la louange ou à l'action de grâce, comme si nous n'avions besoin de rien. Faux. <strong>La prière est essentiellement l'acte du mendiant qui, n'ayant rien, demande tout à Dieu</strong>. C'est très beau de louer Dieu, très beau de le remercier, très important de lui demander pardon · mais nous sommes des indigents, et il faut tout demander.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les conditions de la prière",
+			"anchor": "conditions"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quelles sont les conditions de la prière ? <strong>Il n'y en a pas.</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu n'en a posé aucune. Il faut, et il suffit, qu'une prière soit une <em>vraie</em> prière. Les longues énumérations de conditions (humilité, persévérance, attention, droiture, etc.) qu'on lit dans certains manuels découragent · on a l'impression qu'il faut être un saint avant même de commencer. Or toutes ces qualités <strong>font partie de l'essence même de la prière</strong>, elles n'en sont pas des conditions externes.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li><strong>Humilité ?</strong> Bien sûr · qui demande quelque chose reconnaît son indigence. Le mendiant qui fait l'aumône à la sortie d'une église est humble par le fait même.</li><li><strong>Persévérance ?</strong> Évidemment · quand on veut vraiment quelque chose, on insiste jusqu'à l'obtenir. Celui qui s'arrête avant d'être exaucé montre qu'il ne le voulait pas vraiment.</li><li><strong>Attention ?</strong> Évidemment · sinon ce n'est pas une prière, mais un marmonnement.</li><li><strong>État de grâce ?</strong> Non. Sinon le pécheur ne pourrait jamais se convertir, puisqu'il ne pourrait plus s'adresser à Dieu. Et Dieu n'a jamais posé cette condition · au contraire : <em>« Demandez et vous recevrez. »</em> Le pécheur a même plus besoin de prier que le juste. Le diable s'arrange souvent pour faire croire à celui qui a gravement péché qu'il ne peut plus prier ; c'est une ruse à démasquer.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>À tout moment, n'importe quel homme, en n'importe quel état, peut s'adresser à Dieu et être entendu. Cette inconditionnalité est le trésor de la prière.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "La prière doit être continuelle",
+			"anchor": "continuelle"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Il faut prier sans cesse et jamais se lasser.</p>",
+			"attribution": "Luc 18, 1"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comment est-ce possible ? Distinction de trois types de prière :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Prière actuelle",
+			"html": "<p>L'acte même de prier. Ne fait rien d'autre. Évidemment impossible toute la journée · sinon on ne pourrait plus exercer aucune activité (un devoir de mathématiques, par exemple).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Prière virtuelle",
+			"html": "<p>État d'union à Dieu qui <em>résulte</em> d'une prière actuelle précédente et qui demeure tant qu'on ne l'a pas révoqué (généralement par un péché, même véniel). Effet résiduel et durable d'une bonne prière. C'est elle que Notre Seigneur recommande quand il dit de prier sans cesse · elle est possible, souhaitable, demandée.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Prière habituelle",
+			"html": "<p>Récitation machinale, automatique, sans aucune attention · par exemple continuer mentalement un Je vous salue Marie quand on est dans le demi-sommeil ou qu'on pense à autre chose. <strong>Cela ne vaut rien, ce n'est pas une prière.</strong> Velléité naturelle, simple mécanisme.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>D'où l'importance de la <strong>prière du matin</strong> · l'Église fait dire au prêtre les trois quarts de son office liturgique avant six heures du matin (matines, laudes, prime). Pourquoi ? Pour mettre en route la prière virtuelle de toute la journée. Les chrétiens prient malheureusement souvent le soir et rarement le matin · or après la prière du soir, on dort, et la virtualité s'épuise. Soignez votre prière du matin · quinze minutes seul à seul avec Dieu, et toute la journée s'en trouve transformée.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les effets de la prière",
+			"anchor": "effets"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Demandez et vous recevrez ; cherchez et vous trouverez ; frappez et l'on vous ouvrira. Car quiconque demande reçoit, qui cherche trouve, et à celui qui frappe on ouvrira.</p>",
+			"attribution": "Matthieu 7, 7-8"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>La prière est infaillible.</strong> Toujours, sans exception. Cela paraît fort, mais Notre Seigneur l'a dit et redit. Il suffit qu'elle soit une vraie prière.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Selon l'objet",
+			"anchor": "selon-l-objet"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour les <strong>biens de la grâce</strong> et du salut (la conversion, la persévérance, le ciel), l'objet est sûrement bon · vous serez exaucé tel quel. Demandez votre salut éternel toute votre vie, vous l'obtiendrez : c'est garanti.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour les <strong>biens intermédiaires</strong> (la santé, le bac, le permis de conduire, l'argent, la guérison d'une maladie), qui ne sont pas <em>certainement</em> bons pour nous, vous serez exaucé · mais peut-être <em>autrement</em> que prévu. Dieu, qui voit ce qui vous convient, donne ce qui est vraiment bon. Saint Paul, le grand saint Paul qui ressuscitait des morts, avait <em>« une écharde dans la chair, un ange de Satan qui le souffletait »</em>. Il a supplié trois fois Dieu de l'en débarrasser. La réponse vint :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Ma grâce te suffit, car c'est dans la faiblesse que ma puissance déploie toute sa force.</p>",
+			"attribution": "2 Corinthiens 12, 9"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul <em>a été exaucé</em>, même si Dieu lui a laissé l'écharde. Autrement qu'il ne l'avait demandé, mais exaucé. Et la prière des damnés en enfer ? Elle serait exaucée aussi · mais ils ne demandent pas. Ils refusent. <em>« Frappez et l'on vous ouvrira »</em>, c'est garanti. Le problème, c'est qu'ils ne frappent pas.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Selon la persévérance",
+			"anchor": "selon-la-perseverance"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quand l'exaucement vient · c'est le secret de Dieu. Mais celui qui s'arrête de prier avant d'avoir reçu n'a pas vraiment prié. Quand on commande quelque chose dans un restaurant et qu'on ne l'a pas obtenu, on insiste · l'idée même de lâcher prouve qu'on ne voulait pas tellement. Avec Dieu, c'est pareil : celui qui se décourage ne peut pas se plaindre de n'avoir pas été exaucé.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Objections",
+			"anchor": "objections"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi dire à Dieu ce qu'il sait déjà ?",
+			"anchor": "ce-qu-il-sait"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Notre Seigneur a prévenu : <em>« Quand vous priez, ne multipliez pas les paroles, comme les païens · ils s'imaginent qu'à force de paroles ils seront exaucés. Votre Père sait ce qu'il vous faut avant que vous le lui demandiez »</em> (Mt 6, 7-8). Il ne dit pas <em>« ne dites rien »</em>, il dit <em>« ne multipliez pas »</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La raison fondamentale est admirable : <strong>la prière n'a pas pour but d'informer Dieu, ni de le changer · elle a pour but de changer celui qui prie</strong>. De l'améliorer, de le rendre meilleur, et donc de lui faire mériter ce qu'il demande. C'est pourquoi saint Thomas dit qu'on est plus facilement exaucé en priant pour soi que pour les autres · parce que la prière agit d'abord sur celui qui la fait. Quand quelque chose pèse sur le cœur, on le dit, même à celui qui le sait déjà · c'est tout le poids de l'amour qui s'exprime.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Tout est écrit à l'avance, à quoi bon prier ?",
+			"anchor": "ecrit-a-l-avance"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'objection musulmane (<em>inch'allah</em>) ou stoïcienne du destin. Réponse : Dieu n'est pas dans le temps, il est dans l'éternité. Son regard embrasse toute chose simultanément · il sait, dans son décret éternel, toutes les prières qui ont été faites, qui sont faites, et qui seront faites. Il en tient compte. Le christianisme nous a délivrés du fatum antique : il n'y a pas de destin aveugle, il y a la Providence d'un Dieu infiniment bon et lucide qui intègre dans son dessein éternel toutes les actions humaines, y compris nos prières.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On peut donc « infléchir le cœur de Dieu » · non pas en changeant ses desseins éternels (ils ne changent pas), mais parce qu'il a précisément voulu ces desseins <em>en y intégrant</em> nos prières. C'est pourquoi l'on peut prier pour un mort, ou pour quelqu'un qui n'est pas encore né : Dieu est éternel.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Augustin a deux phrases admirables pour conclure :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Fais ce que tu peux et demande ce que tu ne peux pas.</p>",
+			"attribution": "Saint Augustin"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il faut les deux. Celui qui ne fait pas ce qu'il peut n'a pas le droit de demander · c'est hypocrite. Celui qui prétend tout pouvoir et ne demande rien est hypocrite aussi. Dans l'ordre surnaturel, nous ne pouvons rien · il faut tout demander.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Un homme vaut ce que vaut sa prière.</p>",
+			"attribution": "Saint Augustin"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La religion étant l'intimité d'union avec Dieu, et la prière étant le lieu où cette intimité se réalise, la qualité de votre prière mesure ce que vous pesez véritablement devant Dieu. Archimède disait : <em>« Donnez-moi un levier et je soulèverai le monde. »</em> Ce levier, vous l'avez · c'est votre prière. À vous de vous y mettre.</p>"
+		}
+	]
+}

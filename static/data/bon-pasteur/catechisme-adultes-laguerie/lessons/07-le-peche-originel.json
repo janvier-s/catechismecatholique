@@ -1,0 +1,245 @@
+{
+	"slug": "07-le-peche-originel",
+	"n": 7,
+	"title": "Le Péché Originel",
+	"pdf": "Courskt7.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le péché originel est l'une des clés de la théologie catholique. Si on le supprime, on ne comprend plus rien aux œuvres de Dieu : ni la nécessité d'une Rédemption, ni l'omniprésence du mal dans l'histoire humaine. Avant d'aborder le mystère de l'Incarnation et de la Rédemption, il faut savoir ce qu'il s'agit de sauver, et dans quel état la chute a laissé la nature humaine.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les cinq états de la nature humaine",
+			"anchor": "les-cinq-etats-de-la-nature-humaine"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La nature humaine peut, en théorie ou en fait, se trouver dans cinq états. Deux sont purement théoriques (jamais réalisés), trois sont historiques.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "1. Nature pure (théorique)",
+			"html": "<p>La nature humaine (corps, âme, facultés) sans dons préternaturels, sans grâce, sans la faute. C'est la nature brute. Cet état n'a jamais existé, mais permet de penser à part ce qui revient à la nature.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. Nature intègre (théorique)",
+			"html": "<p>La nature avec les dons préternaturels, mais sans la grâce et sans la faute. Cet état n'a pas existé non plus : Dieu n'a jamais donné les dons préternaturels en dehors de la grâce.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. Justice originelle (réel)",
+			"html": "<p>La nature, avec la grâce sanctifiante et les dons préternaturels, avant la faute. C'est l'état dans lequel Adam et Ève ont été créés. La Genèse l'image en disant qu'ils conversaient avec Dieu « à la brise du soir » (Gn 3, 8).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "4. Nature déchue (réel)",
+			"html": "<p>La nature blessée par le péché, sans la grâce, sans les dons préternaturels. État de l'humanité après la chute, abstraction faite de la Rédemption.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "5. Nature restaurée (réel, le nôtre)",
+			"html": "<p>La nature, toujours blessée, mais avec la grâce récupérée par la Rédemption du Christ, et sans les dons préternaturels (qui ne sont pas restitués). C'est l'état actuel des baptisés.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les dons préternaturels",
+			"anchor": "les-dons-preternaturels"
+		},
+		{
+			"kind": "definition",
+			"term": "Préternaturel",
+			"html": "<p>Du latin <em>praeter</em>, « en dehors de ». Faveur surajoutée à la nature, ni naturelle ni surnaturelle au sens strict. Conséquence de la grâce, comme la bague est la conséquence des fiançailles : si la grâce est perdue, le don tombe avec.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quatre dons ont été accordés à Adam et Ève en raison de la grâce qu'ils possédaient.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "1. L'impassibilité",
+			"anchor": "l-impassibilite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Adam et Ève ignoraient toute souffrance, qu'elle fût physique ou intérieure, par une providence spéciale de Dieu. C'est le rêve éternel des hommes : ne pas souffrir. Toute la médecine du « bien-être » contemporaine en est nostalgique.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "2. L'immortalité",
+			"anchor": "l-immortalite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Adam et Ève ne devaient pas mourir. L'Écriture dit que <em>« la mort est entrée dans le monde par le péché »</em> (Sg 2, 24 ; Rm 5, 12), ce qui suppose qu'avant le péché, ils étaient préservés de cette nécessité naturelle. Les longévités prodigieuses des premiers patriarches (Mathusalem, 965 ans) en sont la rémanence affaiblie. La science moderne, qui découvre que le vieillissement est programmé dans l'ADN, sait que cette programmation pourrait théoriquement être désactivée : autre rêve actuel.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "3. La science infuse",
+			"anchor": "la-science-infuse"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Adam et Ève ayant été créés adultes, Dieu leur a donné directement le capital intellectuel et linguistique nécessaire (langage, concepts, savoir-faire vital), faute de quoi leur intelligence d'adultes nouveaux-nés serait restée inactive. C'est ce qui permet à Adam, dans la Genèse, de nommer les animaux (Gn 2, 19). Seul ce don ne devait pas se transmettre aux descendants : ceux-ci pouvaient apprendre normalement de leurs parents.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "4. L'intégrité (le plus beau des dons)",
+			"anchor": "l-integrite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'intégrité est la <strong>parfaite ordonnance des facultés</strong> dans l'homme. Le corps obéissait sans effort aux passions, les passions à la volonté, la volonté à l'intelligence, l'intelligence à Dieu. Aucune concupiscence, aucune révolte intérieure. Notre nature déchue est si tordue qu'on ne peut même pas concevoir cet état : pour en avoir une idée, il faut lire les Évangiles et regarder l'homme Jésus-Christ, parfaitement ordonné à tout instant.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Conséquence décisive</strong> : avant le péché, la concupiscence n'existait pas. Le péché originel <em>ne peut donc pas avoir été</em> un péché de la chair ou un dérèglement passionnel. Il a fallu qu'il soit un péché de l'esprit, plus précisément <em>une révolte de l'intelligence contre Dieu</em>.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "La révolte",
+			"anchor": "la-revolte"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Une épreuve, non une tentation",
+			"anchor": "une-epreuve-non-une-tentation"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comme pour les anges, Dieu a soumis Adam et Ève à une <em>épreuve</em> (proposition d'un bien plus grand), non à une <em>tentation</em> (proposition du mal). L'épreuve est constante dans toute la Sainte Écriture : Abraham, Job, Jonas. Elle est l'expression de l'amour de Dieu pour ses créatures, qu'il veut faire grandir. (Sur la traduction française du <em>Notre Père</em>, voir leçon 5.)</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La science du bien et du mal",
+			"anchor": "la-science-du-bien-et-du-mal"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'épreuve : <em>ne pas manger</em> de l'arbre de la connaissance du bien et du mal (Gn 2, 17). Il faut peser chaque mot : il ne s'agit pas de la <em>connaissance</em> du bien et du mal (tout homme sait spontanément qu'écraser une vieille dame est mal), mais de la <em>science</em> au sens fort, c'est-à-dire la connaissance par les causes : <em>pourquoi</em> une chose est bonne ou mauvaise. Cette science n'appartient qu'à Dieu, car la cause ultime du bien est la conformité à son essence.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'épreuve consistait donc à accepter cette dépendance : faire confiance à Dieu pour le pourquoi du bien et du mal. La refuser, c'est se substituer à Dieu, c'est l'orgueil — péché de l'esprit.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le dialogue avec le serpent",
+			"anchor": "le-dialogue-avec-le-serpent"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La scène de Genèse 3 est d'une finesse prodigieuse. Ève se promène, parfaitement ordonnée, sans aucune démangeaison de désobéir. Le serpent (figure du diable) lui demande si Dieu a interdit de manger des arbres du jardin ; elle répond avec exactitude que seul un arbre est interdit. Le serpent invente alors un <strong>blasphème</strong> : <em>« Vous ne mourrez pas du tout. Mais Dieu sait que, le jour où vous en mangerez, vos yeux s'ouvriront et vous serez comme des dieux, connaissant le bien et le mal »</em> (Gn 3, 4-5).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Trois affirmations monstrueuses contre Dieu : <strong>Dieu est menteur</strong> (il aurait dit faussement qu'on mourrait), <strong>Dieu est jaloux</strong> (il retient pour lui la science), <strong>Dieu est mauvais</strong>. Ève l'a cru. C'est <em>là</em> qu'est le péché. Avant cette acquiescence intellectuelle, elle ne pouvait pas pécher : c'était impossible dans l'ordre où elle était. Ce schéma se retrouve à chaque génération dans toute la pensée gnostique, manichéenne et maçonnique : inverser le bon Dieu en mauvais, et faire du diable celui qui « ouvre les yeux ».</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Adam, pour sa part, mangea du fruit sans qu'aucune ruse fût employée contre lui (Gn 3, 6). Sa responsabilité est même plus grande, parce qu'il jouissait d'une intelligence supérieure et qu'il acquiesça en pleine clarté.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "La transmission",
+			"anchor": "la-transmission"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le péché originel est <strong>personnel</strong> en Adam et Ève. Il n'est pas personnel en nous : un enfant qui se confesse n'a pas à confesser « le péché originel ». Mais parce que ce péché a blessé la <em>nature</em>, et que c'est la nature qui se transmet (par la génération), il atteint tous les descendants :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<ul><li>Ils naissent privés de la grâce sanctifiante.</li><li>Ils naissent privés des dons préternaturels.</li><li>Ils naissent avec une nature blessée et tendue.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul résume cette condition : nous naissons <em>« fils de colère »</em> (Ep 2, 3). L'homme est fait pour la grâce ; naître sans elle est déjà une privation, qui appelle réparation. <strong>La seule exception est la Vierge Marie</strong>, préservée par un privilège (l'Immaculée Conception).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les conséquences",
+			"anchor": "les-consequences"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les Pères de l'Église résument l'impact du péché originel en trois axiomes complémentaires.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "1. La nature reste capable de bien, mais difficilement",
+			"anchor": "la-nature-reste-capable-de-bien"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Contrairement à ce que prétendent Luther, Calvin, Baïus et les jansénistes, la nature humaine n'est pas <em>totalement</em> corrompue. Un boulanger qui fait du bon pain ne fait pas une action mauvaise sous prétexte qu'il n'est pas en état de grâce. L'intelligence reste ordonnée au vrai, la volonté reste ordonnée au bien. Mais <strong>l'aptitude</strong> au vrai et au bien est gravement entravée. Il faut vingt-cinq ans à un homme pour commencer à voir clairement le vrai, et autant pour aimer pratiquement le bien.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul l'a admirablement résumé : <em>« Malheureux homme que je suis ! Je fais le mal que je ne voudrais pas, et je ne fais pas le bien que je voudrais »</em> (Rm 7, 19-24).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "2. Les dons préternaturels ont disparu",
+			"anchor": "les-dons-pretern-disparu"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'homme est désormais <em>passible</em> (il souffre), <em>mortel</em> (il meurt), <em>ignorant</em> (il doit tout apprendre laborieusement), <em>concupiscent</em> (l'ordre intérieur est inversé : c'est le corps qui mène les passions, les passions qui meuvent la volonté, la volonté qui s'impose à l'intelligence).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "3. La grâce est perdue",
+			"anchor": "la-grace-est-perdue"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Sans la Rédemption, l'humanité serait condamnée comme les anges déchus. C'est ce qui rend la suite indispensable.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le Protévangile",
+			"anchor": "le-protevangile"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Immédiatement après le péché, Dieu n'abandonne pas l'homme. Il prononce, devant le serpent, la première promesse du salut :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Je mettrai une inimitié entre toi et la femme, entre ta postérité et sa postérité ; <em>elle</em> te brisera la tête, et toi, tu lui tendras des embûches au talon.</p>",
+			"attribution": "Genèse 3, 15 (Vulgate)"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est le <em>Protévangile</em>, le premier évangile. Le serpent vient de gagner une bataille, mais il perdra la guerre. Sa postérité essaiera de mordre au talon (de blesser), mais celle de la femme lui écrasera la tête. La femme est Marie ; sa postérité est le Christ. C'est l'objet des leçons à venir.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Note sur les enfants morts sans baptême.</strong> Ils ne peuvent être sauvés à proprement parler, n'ayant pas reçu la grâce. Mais ils ne sont pas non plus damnés, la nature humaine elle-même étant rachetée par le caractère universel de la Rédemption. La tradition les place dans les <em>limbes des enfants</em>, où ils jouissent d'une béatitude naturelle.</p>"
+		}
+	]
+}

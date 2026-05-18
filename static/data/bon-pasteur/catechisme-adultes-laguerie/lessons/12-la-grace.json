@@ -1,0 +1,306 @@
+{
+	"slug": "12-la-grace",
+	"n": 12,
+	"title": "La Grâce",
+	"pdf": "Courskt12.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le catéchisme se divise en trois parties : les vérités à croire (que nous avons achevées avec les fins dernières), la morale (les commandements), et entre les deux cette partie centrale, capitale, qui est la <strong>vie d'union avec Dieu</strong>. La religion catholique n'est pas seulement un dogme à croire ni une morale à pratiquer · elle est une intimité, une vie commune avec Dieu. Et le principe de cette vie nouvelle, c'est la <strong>grâce</strong>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est une caractéristique propre à notre religion. Dans les autres (Inde, Chine, Islam, et même en grande partie le judaïsme), il y a des vérités à croire et une morale à pratiquer, mais pas cette intimité avec Dieu fondée sur la grâce. Saint Jean l'a dit en une phrase : <em>« La loi nous a été donnée par Moïse ; la grâce et la vérité sont venues par Jésus-Christ »</em> (Jn 1, 17). La leçon 12 traite de la grâce elle-même · les deux suivantes traiteront des deux canaux par lesquels elle nous est donnée, la prière et les sacrements.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Nécessité de la grâce",
+			"anchor": "necessite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Notre Seigneur a été d'une précision impitoyable :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Sans moi, vous ne pouvez rien faire.</p>",
+			"attribution": "Jean 15, 5"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Rien · dans l'ordre surnaturel. On peut marcher, boire, dormir, faire ses courses sans Jésus-Christ. Mais entrer dans la vie d'union à Dieu, rien.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Ordre naturel et ordre surnaturel",
+			"anchor": "naturel-surnaturel"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Tout le catholicisme est fondé sur cette distinction · qui n'est pas une opposition.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Ordre naturel",
+			"html": "<p>Tout ce qui appartient à l'homme par sa nature : son corps, son âme, son intelligence, sa volonté, ses passions, et toute l'activité qui en découle pour une fin naturelle (vie honnête, connaissance de Dieu comme cause première). Ne confondez pas avec « matériel » : l'âme est spirituelle <em>et</em> naturelle.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Ordre surnaturel",
+			"html": "<p>Tout ce qui dépasse les forces de la nature : la grâce et son cortège (vertus théologales, dons du Saint-Esprit, caractères sacramentels), en vue de la fin surnaturelle qu'est la vision de Dieu face à face.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Thomas l'a résumé en une formule limpide : <em>« la grâce ne supprime pas la nature, mais la surélève »</em>. Pas d'ordre surnaturel sans une nature à surélever · le mot même l'indique. Mais confondre les deux, c'est détruire la religion du Christ. Les nouvelles théologies où tout homme serait <em>« un chrétien qui s'ignore »</em> sapent radicalement la nécessité même de recourir au Christ.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi la grâce est nécessaire",
+			"anchor": "pourquoi-necessaire"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Deux raisons. <strong>D'une part</strong>, aimer Dieu, qui est pourtant en soi l'être le plus désirable, le souverain bien, dépasse nos forces naturelles. <em>« Dieu est chose si bonne que dire ne se peut »</em>, dit Joinville à saint Louis · mais c'est la grâce qui le lui fait dire. Dieu, parce qu'il est invisible, ne peut être aimé spontanément par une intelligence et une volonté faites pour des objets concrets. Il faut la grâce. <strong>D'autre part</strong>, notre nature n'est pas seulement privée de la grâce depuis le péché originel · elle est <em>blessée</em>, tordue.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Conséquence saisissante : <strong>sans la grâce, un homme ne peut même pas pratiquer tous les dix commandements de l'ordre naturel</strong>. Pas un certain nombre · tous. Vous trouvez des païens honnêtes qui ne mentent pas, ou qui ne volent pas. Vous ne trouverez personne qui, sans la grâce, pratique simultanément <em>« tu aimeras le Seigneur ton Dieu de tout ton cœur »</em> et tous les autres. Les gens qui se vantent de « ne tuer ni voler » oublient les neuf autres commandements · à commencer par le premier.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Définition de la grâce",
+			"anchor": "definition"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce",
+			"html": "<p>Du grec <em>charis</em>, faveur, don gratuit. Secours surnaturel de Dieu qui nous fait vivre de sa vie. Participation à la nature et à la vie divines.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Trois mots à retenir : <strong>faveur, don, gratuité</strong>. Ce ne s'achète pas. Saint Pierre va jusqu'à dire que par la grâce nous devenons <em>« participants de la nature divine »</em> (<em>divinae consortes naturae</em>, 2 P 1, 4). Et la nature intime de Dieu, c'est la charité (<em>« Dieu est amour »</em>, 1 Jn 4, 8). Devenir participants de la grâce, c'est devenir participants de la charité divine elle-même.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'amour de Dieu n'est pas comme le nôtre",
+			"anchor": "amour-de-dieu"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour comprendre la grâce, il faut comprendre comment Dieu aime · et cela diffère radicalement de notre amour naturel.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>L'amour naturel subit son objet.</strong> Nous aimons les choses parce qu'elles sont bonnes. Vous aimez la forêt, la mer, la montagne parce que vous les trouvez belles, bonnes. La bonté de l'objet est le carburant de l'amour. Aussi bien dans l'ordre sensible que spirituel.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>L'amour de Dieu, lui, ne peut pas marcher ainsi</strong>, parce que tout bien est déjà en lui. Il n'est rien qu'il aurait à chercher au-dehors. Et pourtant Dieu aime · mais d'un autre amour, qu'on appelle <strong>charité</strong>. La charité ne subit pas la bonté de son objet · <em>elle la fait</em>. Saint Thomas va jusqu'à dire qu'on peut mesurer l'amour de Dieu pour quelqu'un à la somme des dons qu'il lui a faits, parce que c'est cet amour qui produit les biens dans les choses qu'il aime.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>À méditer : <strong>Dieu n'aime pas ses créatures parce qu'elles sont bonnes · les créatures deviennent bonnes parce que Dieu les aime.</strong> C'est l'inverse exact de ce que notre expérience nous suggère.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>La charité de Dieu a été répandue dans nos cœurs par l'Esprit Saint qui nous a été donné. Tous ceux qui sont mus par l'Esprit de Dieu, ceux-là sont fils de Dieu.</p>",
+			"attribution": "Romains 5, 5 ; 8, 14"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Voilà la grâce : non pas un effort de l'homme pour atteindre Dieu, mais un don de Dieu qui dépose en l'homme sa propre charité, et lui permet de l'aimer en retour. <em>« Ce n'est plus moi qui vis, c'est le Christ qui vit en moi »</em> (Ga 2, 20).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les différentes sortes de grâce",
+			"anchor": "sortes-de-grace"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On distingue la grâce selon deux axes :</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Grâce sanctifiante (habituelle) et grâce actuelle",
+			"anchor": "sanctifiante-actuelle"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce sanctifiante (ou habituelle)",
+			"html": "<p>La grâce au sens strict, quand on parle de « la grâce » sans préciser. Faveur divine qui demeure en nous tant que nous ne la rejetons pas. <em>Sanctifiante</em> parce qu'elle nous rend saints et agréables à Dieu. <em>Habituelle</em> parce qu'elle constitue un <em>habitus</em>, une disposition durable. D'où l'expression « état de grâce » : on y est même quand on n'y pense pas, même quand on dort.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce actuelle",
+			"html": "<p>Secours passager, motion divine donnée pour un acte précis (d'où son nom) pour le rendre surnaturel. On peut recevoir des grâces actuelles <em>sans</em> être en état de grâce · heureusement, sinon le pécheur ne sortirait jamais de son péché.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Grâce suffisante et grâce efficace",
+			"anchor": "suffisante-efficace"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Subdivisions de la grâce actuelle. Plus subtiles, plus théologiques · à connaître.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce suffisante",
+			"html": "<p>Celle que Dieu ne refuse à personne pour faire son salut. Elle suffit en elle-même · de soi, elle est suffisante. Mais elle peut ne pas produire son effet, parce que l'homme y met obstacle par le péché. Sa stérilité éventuelle ne vient pas d'elle, mais de l'homme.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce efficace",
+			"html": "<p>Celle qui produit son effet (d'où son nom). Elle fait faire le bien de façon infaillible. Elle est efficace à cause de Dieu, duquel seul vient tout salut. Mystère.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Économie du bien et économie du mal",
+			"anchor": "bien-et-mal"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Vérité capitale, qu'il faut tenir contre Calvin et les jansénistes : <strong>l'économie du bien n'est pas celle du mal</strong>.</p><ul><li>Si un homme fait le <strong>mal</strong>, c'est à cause de lui · Dieu n'y est pour rien. Aucune prédestination au mal.</li><li>Si un homme fait le <strong>bien</strong>, c'est à cause de Dieu · <em>« Dieu opère en vous le vouloir et le faire selon son bon plaisir »</em> (Ph 2, 13). Il y a donc une <em>prédestination au bien</em>, dans la pensée de saint Thomas. Tous ceux qui iront au ciel y iront parce que Dieu les y aura efficacement menés.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'erreur monstrueuse de Calvin (et de Jansénius dans la mesure où il l'a soutenue) est de prétendre symétriquement que ceux qui se perdent y auraient été <em>prédestinés</em> par Dieu. C'est un blasphème insupportable, condamné par l'Église. Dieu donne de faire le bien ; il ne donne jamais de faire le mal.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Grâce efficace et liberté",
+			"anchor": "grace-et-liberte"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Sous la grâce efficace, l'homme reste <strong>parfaitement libre</strong>. Comment cela ? Parce qu'un homme qui m'imposerait une action par contrainte extérieure violerait ma liberté, n'ayant aucun pouvoir sur ma volonté. Mais Dieu, qui est l'auteur même de ma volonté, peut la mouvoir <em>de l'intérieur</em>, en la laissant pleinement libre. Comparaison : un voleur entre dans une maison par effraction (il n'a pas la clef) ; le propriétaire entre par la porte avec la clef, sans rien casser. Seul Dieu peut entrer dans une âme par la porte.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Liberté (Léon XIII)",
+			"html": "<p><em>« La liberté est la faculté de se mouvoir dans le bien. »</em> Distincte du <strong>libre arbitre</strong>, qui est la simple possibilité d'opter pour le bien ou le mal. Un poisson dans l'eau est libre · il nage. Sorti de l'eau, il ne peut plus que crever. De même, l'homme dans le bien est libre · dans le mal, il devient esclave du péché. <em>« La vérité vous rendra libres »</em> (Jn 8, 32) ; <em>« Quiconque commet le péché est esclave du péché »</em> (Jn 8, 34).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le don de la grâce",
+			"anchor": "don-de-la-grace"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>À chacun de nous est donnée la grâce selon la mesure du don du Christ.</p>",
+			"attribution": "Éphésiens 4, 7"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dieu n'est pas un ordinateur · c'est un être libre, plein de bonté, qui fait de son bien ce qu'il veut. La parabole des ouvriers de la onzième heure le dit clairement : à ceux qui se plaignent que les derniers reçoivent autant qu'eux, le maître répond : <em>« Ne m'est-il pas permis de faire de mon bien ce que je veux ? Ou ton œil est-il mauvais parce que je suis bon ? »</em> (Mt 20, 15).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Grâce première et grâce seconde",
+			"anchor": "premiere-et-seconde"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce première",
+			"html": "<p>Passage de l'état de péché (sans la grâce) à l'état de grâce. Donnée ordinairement par les sacrements de <strong>baptême</strong> et de <strong>pénitence</strong>, qu'on appelle traditionnellement, par allusion à l'état où on les reçoit, <em>« sacrements des morts »</em> (terme contestable, parce qu'un sacrement, c'est précisément la vie).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce seconde",
+			"html": "<p>Augmentation de la grâce, donnée par les cinq autres sacrements, qu'on doit recevoir <em>déjà</em> en état de grâce. Tout sacrement est fait pour donner ou accroître la grâce.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Mais Dieu reste infiniment libre. Saint Paul cheminant vers Damas, chargé de l'arrêter des chrétiens, est terrassé par la grâce sans avoir reçu aucun sacrement (Ac 9). Dieu peut donner sa grâce à qui il veut, quand il veut, dans la mesure qu'il veut. Habituellement, cependant, il l'attache à <strong>deux canaux</strong> : la <strong>prière</strong> (leçon suivante) et les <strong>sacrements</strong> (leçons 14 et suivantes).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Comment on perd la grâce",
+			"anchor": "perte"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On perd la grâce par le <strong>péché mortel</strong>. La logique est simple : l'effet propre de la grâce est qu'étant agréable à Dieu, on l'aime par-dessus tout. Or, dans le péché mortel, on préfère autre chose à Dieu. Les deux ne peuvent pas coexister dans la même âme. Donc dès qu'on commet un péché grave, on perd ce don. <em>« Le salaire du péché, c'est la mort »</em> (Rm 6, 23).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le <strong>péché véniel</strong>, lui, ne touche pas la grâce sanctifiante. Il dispose au péché mortel (à force d'accepter de petites infidélités, on devient capable d'une grande), mais il ne fait pas perdre la charité.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La grâce ne diminue jamais",
+			"anchor": "ne-diminue-pas"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Thèse réjouissante de saint Thomas : <strong>tant qu'on ne perd pas la grâce, elle ne peut qu'augmenter.</strong> Elle ne diminue jamais. Fondement scripturaire :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Les dons de Dieu sont sans repentance.</p>",
+			"attribution": "Romains 11, 29"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul l'écrit à propos de l'élection du peuple juif (que Dieu ne retire pas, même quand ce peuple est infidèle), mais la vérité est universelle : Dieu ne reprend pas ce qu'il a donné. Conséquence pratique :</p><ul><li>Si vous n'avez jamais perdu la <em>foi</em>, vous n'avez jamais eu autant la foi qu'aujourd'hui.</li><li>Si vous n'avez jamais perdu l'<em>espérance</em>, vous n'avez jamais eu autant d'espérance.</li><li>Si vous n'avez jamais perdu la <em>charité</em>, vous n'avez jamais aimé Dieu autant que maintenant.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cela vaut la peine d'être médité.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Comment on retrouve la grâce",
+			"anchor": "retour"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Deux manières, qui seront détaillées avec le sacrement de pénitence :</p><ul><li>La <strong>confession sacramentelle</strong>. Avantage : elle ne suppose que la <em>crainte</em> de Dieu (contrition imparfaite, ou attrition), ce qui est plus facile à atteindre.</li><li>La <strong>contrition parfaite</strong> · acte sincère d'amour de Dieu par-dessus tout, qui rétablit immédiatement la grâce, avant même la confession (laquelle reste nécessaire ensuite si l'on peut s'y rendre).</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La grâce, principe du mérite",
+			"anchor": "merite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Sans grâce, aucun mérite surnaturel. Un homme peut être très méritant <em>naturellement</em> : se lever à cinq heures, travailler honnêtement toute sa vie, élever ses enfants. C'est du mérite naturel · cela ne sert pas pour la vie éternelle. Il y a des hommes capables d'efforts héroïques pour les affaires de ce monde, et incapables de bouger le petit doigt pour Dieu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ce qui mérite pour le ciel, c'est l'amour de Dieu, dont la racine est la foi et la réalité, la charité · et dont le principe radical est la grâce. <em>« Tout arbre que mon Père céleste n'a pas planté sera déraciné »</em> (Mt 15, 13). Quel gâchis dans la plupart des vies humaines · des trésors d'énergie déployés pour ce qui ne sert à rien, et rien pour ce qui demeure éternellement.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le mystère de la grâce est insondable : nous touchons à la liberté de Dieu et à la liberté de l'homme dans leur point de rencontre. Mais l'essentiel est clair · l'homme est fait pour vivre de la vie de Dieu, et ne le peut que par la grâce. Le pratique l'est tout autant : pas de grâce sans les canaux ordinaires que Dieu a établis pour nous, <em>la prière et les sacrements</em>. Ce seront nos prochaines leçons.</p>"
+		}
+	]
+}

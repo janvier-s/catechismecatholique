@@ -1,0 +1,356 @@
+{
+	"slug": "11-les-fins-dernieres",
+	"n": 11,
+	"title": "Les Fins Dernières",
+	"pdf": "Courskt11.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Voici la dernière leçon de la première partie du catéchisme · les vérités à croire. Nous avons vu (leçon 6) que l'âme humaine est immortelle, parce qu'elle dépasse infiniment la matière. Il nous reste à étudier ce que devient cette âme après la mort, et quel est son sort éternel. C'est ce qu'on appelle les <em>fins dernières</em>, ou, dans le langage savant, l'<em>eschatologie</em> (du grec <em>eschatos</em>, dernier).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Six étapes : la mort, le jugement particulier, le purgatoire, l'enfer, le ciel, et enfin le jugement général avec ses cinq épisodes finaux. Mettons un peu d'ordre dans tout cela, parce que l'expérience prouve que c'est de la bouillie pour chat dans la tête des meilleurs fidèles.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "La mort",
+			"anchor": "la-mort"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La mort est une réalité <strong>métaphysique</strong>, au-delà de la physique (<em>meta</em>, en grec, « au-delà »). Elle dépasse donc et la réalité et la connaissance scientifiques. L'homme est une <em>union substantielle</em> du corps et de l'âme, formant un seul être avec une seule existence. La mort vient briser cette unité.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La mort",
+			"html": "<p>Séparation de l'âme et du corps. C'est la seule définition vraie. Comme l'eau peut être réduite à ses gaz constituants (hydrogène et oxygène), mais ici la cassure est métaphysique, parce que l'un des deux éléments (l'âme) est spirituel.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Mort apparente et mort réelle",
+			"anchor": "mort-apparente-et-reelle"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Conséquence : <strong>le moment exact de la mort est incertain</strong>, parce qu'il n'est pas directement vérifiable. La mort réelle, étant métaphysique, n'est pas constatable scientifiquement. Il n'existe que des <em>indices</em> physiques : arrêt de la respiration, arrêt du cœur, encéphalogramme plat. Ces indices définissent la <em>mort apparente</em> ; ils ne prouvent pas la mort réelle.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les patients qu'on appelle « plantes vertes », qui ont perdu toute vie cérébrale mais conservent une vie organique, sont totalement vivants. Leur âme est encore là · l'âme rationnelle, végétative et sensitive sont une seule et même chose en l'homme. C'est pourquoi on peut encore leur donner les sacrements sous condition. Le seul indice <em>absolument</em> certain de la mort réelle, c'est la <strong>décomposition</strong> du corps · alors le tout substantiel est manifestement détruit.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La nécessité d'être prêt",
+			"anchor": "etre-pret"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La mort est un cataclysme. L'homme n'a pas été créé mortel : Dieu lui avait donné le don préternaturel d'immortalité, et c'est le péché originel qui a tout brisé. D'où l'avertissement constant de Notre Seigneur · veiller, prier, être prêt. Un homme qui ne pense pas à sa mort est un fou. Bien vivre, c'est apprendre à mourir.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Tenez-vous prêts, car le Fils de l'homme viendra à l'heure que vous ne pensez pas. Si le maître de maison savait à quelle heure le voleur doit venir, il veillerait et ne laisserait pas percer sa maison.</p>",
+			"attribution": "Luc 12, 39-40"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ce n'est pas que l'homme soit un « être-pour-la-mort » (Heidegger se trompait sur ce point) : nous sommes faits pour la vie, pour la vie éternelle. Mais pour y entrer, il faut bien passer par cette porte. Et le rendez-vous n'est pas avec la mort, il est avec Dieu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le jugement particulier",
+			"anchor": "jugement-particulier"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Vérité de foi définie : <strong>toutes les âmes sont jugées par Dieu immédiatement après la mort</strong>, dès qu'elles sont séparées du corps (concile de Florence, 1439 ; concile de Latran). L'exemple paradigmatique est celui du bon larron · à un crucifié qui va mourir dans quelques heures, Jésus garantit son sort le soir même :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>En vérité, je te le dis, aujourd'hui tu seras avec moi dans le paradis.</p>",
+			"attribution": "Luc 23, 43"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois issues",
+			"anchor": "trois-issues"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le jugement particulier débouche sur trois issues possibles :</p><ul><li>Si l'âme est en <strong>état de péché mortel</strong>, elle descend immédiatement en enfer, pour l'éternité (<em>« mox infernum descendunt »</em>, dit le concile de Latran).</li><li>Si elle est en <strong>état de grâce</strong> mais a encore à expier ses fautes vénielles ou les peines dues à ses péchés pardonnés, elle va au <strong>purgatoire</strong>.</li><li>Si elle est en état de grâce et n'a plus rien à expier, elle va directement au <strong>ciel</strong>.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Heureusement que Dieu a institué le purgatoire : sans rémission dans l'au-delà, il serait beaucoup plus difficile de sauver son âme. La plupart des bonnes gens, ceux qui meurent comme il faut, font leur séjour au purgatoire.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'illumination et le juge",
+			"anchor": "illumination-et-juge"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Juste après la mort, l'âme reçoit une <em>illumination</em> · ce n'est pas encore la vision de Dieu (sinon elle serait au ciel), mais une confrontation avec la sainteté divine, à la lumière de laquelle elle mesure ses mérites et ses fautes. Et c'est <strong>Jésus-Christ lui-même</strong> qui communique cette lumière : <em>« Le Père ne juge personne, mais il a remis tout jugement au Fils »</em> (Jn 5, 22). C'est lui qui est <em>« établi juge des vivants et des morts »</em> (Ac 10, 42) · non par simple appropriation, mais véritablement, parce qu'il est Verbe fait chair, à la fois Dieu (qui voit toute vérité) et homme (un juge doit être pris parmi les hommes).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Curiosité de l'Évangile : ce même Jésus qui jugera les vivants et les morts refuse les jugements humains. Quand deux frères viennent lui demander de trancher leur héritage, il répond : <em>« Qui m'a établi pour juge entre vous ? »</em> (Lc 12, 14). Les curés qui veulent se mêler de tout n'ont pas compris.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le purgatoire",
+			"anchor": "purgatoire"
+		},
+		{
+			"kind": "definition",
+			"term": "Purgatoire",
+			"html": "<p>Lieu de <em>souffrance</em>, et non de tourment, où les âmes des justes achèvent d'expier leurs péchés avant d'entrer dans la gloire.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Distinction capitale : la <strong>souffrance</strong> est utile, salutaire, chargée d'espérance ; c'est par elle que l'homme devient grand. Le <strong>tourment</strong> est vindicatif, sans espoir, terrible. Le purgatoire purifie ; il ne châtie pas.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'existence du purgatoire est attestée dans l'Écriture dès l'Ancien Testament. Lors de la guerre des Macchabées, Judas Macchabée envoie au Temple <em>« 12 000 drachmes d'argent pour offrir un sacrifice pour les morts »</em> (2 M 12, 43-46) : prier pour les morts n'aurait aucun sens s'il n'y avait, après la mort, ni rachat possible (enfer définitif) ni besoin de prière (ciel acquis). Il y a donc un état intermédiaire.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'état de ces âmes",
+			"anchor": "etat-des-ames"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ces âmes sont <strong>saintes</strong> : elles sont en état de grâce, elles aiment Dieu par-dessus tout, elles font partie de l'Église (souffrante). Elles ne sont plus militantes, parce qu'elles ont quitté la terre ; elles ne sont pas encore triomphantes, parce qu'elles ne voient pas encore Dieu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Leur peine est <strong>double</strong>, comme l'est tout péché. Le pécheur fait deux choses : il <em>se détourne</em> de Dieu, et il <em>se tourne vers</em> une créature. Deux peines correspondent :</p><ul><li>La <strong>peine du dam</strong> : être séparé de Dieu, privé de sa vision. Saint Thomas dit que <em>« la plus petite peine du purgatoire est supérieure à la plus grande de la terre »</em>. Pourquoi ? Parce que sur terre nous ne savons pas vraiment ce qu'est Dieu, et donc nous ne savons pas ce que c'est que d'en être séparés. Au purgatoire, on commence à le savoir.</li><li>La <strong>peine du feu</strong> · l'Église n'a pas défini de foi qu'il y avait du feu au purgatoire (à la différence de l'enfer). Mais il y a une peine sensible analogue, et tout aussi terrible.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "État de justice, non de miséricorde",
+			"anchor": "etat-de-justice"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Vérité capitale, souvent oubliée : ces âmes <strong>ne peuvent rien faire pour elles-mêmes</strong>. Sur terre, nous sommes dans l'<em>état de miséricorde</em> : il suffit d'invoquer Dieu, de demander pardon, et nous sommes exaucés. Profitons-en. Au purgatoire, on est dans l'<em>état de justice</em> : les dettes se paient.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Paradoxe : ces âmes ne peuvent rien pour elles-mêmes, mais elles peuvent prier <em>pour les autres</em>, et beaucoup de saintes personnes les invoquent et en sont exaucées. Et nous, pouvons-nous les aider ? Oui, mais d'une manière particulière, <strong>par mode de suffrage</strong>.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Mode de suffrage",
+			"html": "<p>Nos autres prières sont garanties d'être exaucées (<em>« demandez et vous recevrez »</em>) parce que nous sommes dans l'état de miséricorde et que Dieu l'a promis. Mais pour les âmes du purgatoire, qui sont dans l'état de justice, Dieu n'est pas tenu d'exaucer · tout y est suspendu à sa miséricorde libre. Nous présentons des suffrages (prières, sacrifices, messes) ; Dieu décide.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'enfer",
+			"anchor": "enfer"
+		},
+		{
+			"kind": "definition",
+			"term": "Enfer",
+			"html": "<p>Lieu de <em>tourments</em> (et non de souffrance), où les âmes des damnés sont torturées pour l'éternité avec les démons. À l'inverse du purgatoire, il n'y a pas d'espérance. Dante a écrit au-dessus de sa porte : <em>« Lasciate ogni speranza, voi ch'entrate. »</em></p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les deux peines",
+			"anchor": "deux-peines"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'enfer a, comme le purgatoire, une peine du dam et une peine du feu, mais ce sont des tourments éternels :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>La peine du dam</strong> · la plus terrible, certainement. C'est elle qui donne aux damnés leur nom. Être séparé de Dieu, maudit par lui, rejeté pour toujours. <em>« Retirez-vous de moi, maudits, allez au feu éternel qui a été préparé pour le diable et ses anges »</em> (Mt 25, 41). Que Dieu ne se souvienne plus de l'œuvre de ses mains · rien que de prononcer ces mots vous met la chair de poule.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>La peine du feu</strong> · cette fois définie de foi par l'Église. Pourquoi du feu en enfer ? Saint Augustin l'explique admirablement : précisément parce que nous ne savons pas ce que c'est que d'être privé de Dieu. La peine la plus immédiatement insupportable sur cette terre, c'est le feu · les gens se jettent du quarantième étage des Twin Towers plutôt que d'être brûlés. Dieu utilise donc le feu comme métaphore vraie : <em>« vous savez ce qu'est le feu ; eh bien, perdre Dieu, c'est pire ». </em>C'est une miséricorde de nous avoir mis du feu en enfer pour nous faire comprendre.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'éternité de l'enfer",
+			"anchor": "eternite-de-l-enfer"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'éternité de l'enfer est de foi. Quarante-cinq fois Jésus parle de l'enfer dans l'Évangile, et chaque fois il le dit <em>éternel</em>, <em>inextinguible</em>. Pourtant des hérétiques ont nié cela. Origène, exégète prodigieux mais original sur quelques points, a imaginé l'<em>apocatastase</em> : après quelques siècles d'enfer, Dieu reprend tout le monde, c'est la grande réconciliation finale. Sentimentalisme. Toute l'Écriture dit le contraire.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour faire saisir l'horreur de l'enfer, Notre Seigneur utilise une métaphore concrète : la <em>Géhenne</em>, vallée près de Jérusalem où l'on poussait avec de longues planches les cadavres lépreux qui pourrissaient au soleil. <em>« La géhenne du feu »</em>. Et il presse : <em>« Si ton œil te scandalise, arrache-le et jette-le loin de toi : mieux vaut entrer borgne dans la vie que d'être jeté avec tes deux yeux dans la géhenne de feu »</em> (Mt 18, 9). Difficile d'être plus clair.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Un mystère",
+			"anchor": "mystere-enfer"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'enfer est un mystère, et nul ne le comprend, parce que personne ne comprend pleinement la grandeur et la sainteté de Dieu. <em>« Il y a quelque chose d'infini dans le péché »</em>, dit saint Thomas : parce que c'est s'attaquer à un Bien infini. C'est pour cela qu'il appelle une peine infinie en durée. Et celui qui recompose la doctrine selon ses goûts apostasie · <em>« On ne se moque pas de Dieu : ce que l'homme aura semé, il le récoltera »</em> (Ga 6, 7).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'enfer est d'abord un <em>état</em>, mais aussi un <em>lieu</em>, que les Pères placent généralement au centre de la terre. La religion n'est pas une grande kermesse · il y aura des résultats.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le ciel",
+			"anchor": "ciel"
+		},
+		{
+			"kind": "definition",
+			"term": "Le ciel",
+			"html": "<p>Lieu de bonheur où les justes voient Dieu face à face et en jouissent pour l'éternité.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le bonheur du ciel n'est pas le paradis sensuel des religions humaines. C'est la <strong>vision de Dieu</strong> · ce que tout homme désire au plus profond, et que Dieu seul pouvait imaginer de nous donner. Car Dieu, par sa nature, est invisible aux yeux du corps, et même invisible à l'âme par ses moyens naturels. Le ciel est un miracle.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La vision béatifique",
+			"anchor": "vision-beatifique"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le ciel consiste en une <strong>vision directe de l'essence divine</strong> par notre intelligence, <em>sans idée, sans représentation, sans concept</em>, donc sans intermédiaire. Ici-bas, nous connaissons toujours au moyen de concepts mentaux. Si le ciel n'était que cela, ce ne serait pas la peine de se déplacer. Ce qu'il nous faut, c'est un branchement immédiat de notre capacité de connaître sur la totalité de l'être divin.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Lumière de gloire",
+			"html": "<p>Disposition habituelle surnaturelle qui rend l'intelligence humaine capable de voir Dieu en face, sans intermédiaire. Elle remplace la <em>foi</em> qui disparaît au ciel · la foi est un miroir (et un vrai miroir, parce que le témoignage de Dieu est vrai), mais ce n'est qu'un miroir. La lumière de gloire casse le miroir et donne le face-à-face. Saint Paul : <em>« Nous voyons à présent dans un miroir, en énigme ; mais alors, ce sera face à face »</em> (1 Co 13, 12).</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Ce que l'œil n'a pas vu, ce que l'oreille n'a pas entendu, ce qui n'est pas monté au cœur de l'homme, ce que Dieu a préparé pour ceux qui l'aiment.</p>",
+			"attribution": "1 Corinthiens 2, 9"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul savait de quoi il parlait : il a été ravi en Arabie · <em>« Je connais un homme dans le Christ, il y a quatorze ans, qui fut ravi jusqu'au troisième ciel. Si ce fut dans son corps ou hors de son corps, je l'ignore : Dieu le sait »</em> (2 Co 12, 2). Et quand il essaie d'en dire quelque chose, il s'arrête : il ne peut pas. C'est de cela qu'il témoigne quand il dit que rien ici-bas n'en donne idée.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les degrés et l'impeccabilité",
+			"anchor": "degres-impeccabilite"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le ciel a des <strong>degrés</strong>, selon la lumière de gloire reçue, laquelle est proportionnelle à la charité au moment de la mort. Saint Paul : <em>« Une étoile diffère d'une autre étoile en clarté »</em> (1 Co 15, 41).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Au ciel, <strong>on ne peut plus pécher</strong>. Pourquoi ? Parce que l'intelligence voit Dieu directement, et la volonté aime nécessairement le bien vu en pleine clarté. La volonté reste libre · au sens de pouvoir se mouvoir dans le bien · mais elle ne peut plus se détourner. Distinguez bien le paradis terrestre, où Adam et Ève ne voyaient pas Dieu (et pouvaient donc pécher), du ciel où l'on voit Dieu et où le péché devient impossible.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le jugement général",
+			"anchor": "jugement-general"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Nous serons tous jugés <strong>deux fois</strong> · une fois personnellement à notre mort (jugement particulier), une seconde fois collectivement à la fin du monde (jugement général). Pour comprendre le second, mettons un peu de chronologie.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La chronologie de la fin",
+			"anchor": "chronologie"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cinq étapes, dans l'ordre :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "1. La parousie",
+			"html": "<p>Retour glorieux de Jésus-Christ. Les anges l'avaient annoncé au moment de l'Ascension : <em>« Ce Jésus qui vient d'être enlevé du milieu de vous reviendra de la même manière que vous l'avez vu monter au ciel »</em> (Ac 1, 11). Et Notre Seigneur lui-même : <em>« Comme l'éclair part de l'Orient et brille jusqu'à l'Occident, ainsi sera la venue du Fils de l'homme »</em> (Mt 24, 27). Tout le monde sera au courant. Donc tous ceux qui vous disent « le Christ revient demain », les prophètes de l'Apocalypse à répétition, sont à congédier. En outre il y a des choses annoncées qui ne sont pas arrivées · le retour massif des Juifs au Christ (Rm 9-11), notamment.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. La résurrection de la chair",
+			"html": "<p>Tous, sans exception · <em>« L'heure vient où tous ceux qui sont dans les sépulcres entendront la voix du Fils de Dieu, et en sortiront : ceux qui auront fait le bien, pour une résurrection de vie ; ceux qui auront fait le mal, pour une résurrection de jugement »</em> (Jn 5, 28-29). Notez · « Fils de Dieu », non pas « Fils de l'homme » : Jésus se nomme rarement ainsi, mais ici la puissance déployée est divine. C'est lui qui ressuscitera tous les morts, après s'être lui-même ressuscité comme prémices. Saint Paul ajoute que ceux qui seront vivants à la parousie ne mourront pas (1 Th 4, 17).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. Le jugement général",
+			"html": "<p>Notre Seigneur, juge des vivants et des morts, sépare publiquement <em>« les brebis à sa droite et les boucs à sa gauche »</em> (Mt 25, 32-33). Les uns à la vie éternelle, les autres au feu éternel. Le 21e siècle s'offusque qu'on dise qu'il y a des bons et des mauvais : c'est dans tout l'Évangile.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "4. La fin des temps",
+			"html": "<p>Conséquence immédiate du jugement général. Le <em>temps</em> n'est pas le mouvement (qui est extramental) ; c'est la mesure que l'esprit humain prend du mouvement par saisies successives. Les anges ne sont pas dans le temps ; Dieu non plus ; les animaux non plus. Seul l'homme l'est. Quand l'esprit de tous les hommes est fixé sur son sort éternel, il n'y a plus de saisies successives · le temps s'arrête automatiquement.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "5. La fin du monde",
+			"html": "<p>Avec une réorganisation cosmique : <em>« un ciel nouveau et une terre nouvelle »</em> (Is 65, 17 ; Ap 21, 1). Dieu n'a pas de raison d'anéantir la beauté de ce qu'il a créé · l'océan, les montagnes, les étoiles. Il les transfigure. L'Église n'a pas défini les détails, parce que ce n'est pas son rôle : son rôle est d'envoyer les hommes au ciel, non de décrire la cosmologie future.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi un second jugement ?",
+			"anchor": "pourquoi-second-jugement"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Au jugement particulier, le sort de chaque homme est fixé. Pourquoi donc un jugement général ? Trois raisons, données par saint Thomas :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>1. La justice doit être publique.</strong> Le bien et le mal sont <em>transitifs</em> : ils débordent sur les autres. Un assassin n'a pas seulement fait du mal à sa victime ; il a affecté la communion humaine. Comme aux assises on confronte le criminel à ses victimes pour qu'il comprenne, Dieu fera publiquement justice pour que tout soit manifesté.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>2. Le grand humilié doit être réhabilité.</strong> Jésus-Christ est passé sur cette terre dans une humiliation cruelle : la crèche, le silence de Nazareth, la contradiction, la Passion, et même sa Résurrection, qui n'a été vue que par quelques témoins. Le grand accusé de l'histoire doit être glorifié à la face du monde entier.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>3. La sagesse de Dieu doit être manifestée.</strong> Sa miséricorde, sa providence, ses voies secrètes en toute chose, doivent éclater au grand jour.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et les péchés des élus, manifestés en public ? Ce sera pour leur gloire, non pour leur honte. Se convertir d'un péché est noble et grand. <em>« Il y aura plus de joie dans le ciel pour un seul pécheur qui se repent, que pour quatre-vingt-dix-neuf justes qui n'ont pas besoin de repentance »</em> (Lc 15, 7).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Oublier les fins dernières est la pire des folies. Le saint évêque d'Orléans Théodulphe disait que la pire illusion d'un homme est d'oublier sa fin. Nous ne sommes pas faits pour l'enfer ; nous sommes faits pour le ciel · <em>« Dieu veut que tous les hommes soient sauvés »</em> (1 Tm 2, 4). Mais l'enfer existe, parce que l'homme est libre. Tâchons de nous donner rendez-vous du bon côté.</p>"
+		}
+	]
+}

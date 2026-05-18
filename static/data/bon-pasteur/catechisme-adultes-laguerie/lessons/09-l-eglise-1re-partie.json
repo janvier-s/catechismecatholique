@@ -1,0 +1,323 @@
+{
+	"slug": "09-l-eglise-1re-partie",
+	"n": 9,
+	"title": "L'Église (1re partie)",
+	"pdf": "Courskt9.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Après le mystère de Notre Seigneur Jésus-Christ, il est normal de parler de l'Église. Bossuet a tout dit : <em>« L'Église, c'est Jésus-Christ continué, prolongé »</em>. Notre Seigneur n'a pas voulu que nous nous sanctifiions tout seuls, chacun pour soi, comme l'imaginent les protestants. Il a institué une <strong>société</strong> pour cela, et c'est en elle, par elle, qu'il reste parmi nous : <em>« Voici que je suis avec vous tous les jours, jusqu'à la consommation des siècles »</em> (Mt 28, 20).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Église est donc la suite logique du mystère de l'Incarnation rédemptrice. Nous commencerons par sa définition (1re partie), puis nous verrons quels sont ses membres et qui ne l'est pas, et enfin le sens du dogme <em>Hors de l'Église, pas de salut</em>. La leçon 10 traitera de la hiérarchie de l'Église et des notes qui permettent de la reconnaître.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Définition de l'Église",
+			"anchor": "definition"
+		},
+		{
+			"kind": "definition",
+			"term": "Église",
+			"html": "<p>Société de tous les chrétiens, fondée par Jésus-Christ et gouvernée par le pape et les évêques.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Deux éléments indissociables",
+			"anchor": "deux-elements"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dans l'Église, il y a deux éléments inséparables, et c'est capital à saisir d'emblée.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le corps (matière)",
+			"html": "<p>Aspect naturel : une société, un groupe d'hommes distinct, hiérarchiquement organisé. C'est ce que saint Paul appelle le <em>corps</em>. Il se voit, il se compte, il est repérable.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "L'âme (forme)",
+			"html": "<p>Aspect surnaturel : un esprit, une âme, un but commun. C'est ce qui fait que cette société-ci est l'Église de Jésus-Christ et non une société comme les autres.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Réduire l'Église à l'un ou l'autre, c'est la détruire entièrement. Deux erreurs s'opposent au cours de l'histoire :</p><ul><li>La réduire au <strong>corps</strong> seulement : on en fait un appareil administratif, une organisation non gouvernementale, une société de bienfaisance. C'est la pente actuelle, hélas.</li><li>La réduire à l'<strong>âme</strong> seulement : c'est l'erreur des Montanistes, des Spirituels franciscains, des Cathares, et de tous ceux qui, en général, ne supportent pas l'autorité hiérarchique. Pour eux, l'Église n'est faite que des « purs », des élus, de ceux qui sont en état de grâce. C'est tout aussi catastrophique.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les quatre causes de toute société",
+			"anchor": "quatre-causes"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Selon Aristote, toute chose existe par quatre causes : matérielle, formelle, efficiente, finale. Toute société les possède aussi, sans quoi elle ne tient pas. Prenez un simple club de pétanque : la <em>matière</em>, ce sont les joueurs ; la <em>forme</em>, c'est qu'ils sont réunis pour jouer à la pétanque (et non au bridge) ; la cause <em>efficiente</em>, c'est celui qui un jour a eu l'idée de réunir les amateurs et de fonder le club ; la cause <em>finale</em>, c'est la joie de jouer à la pétanque ensemble, ce qu'on ne peut pas faire seul.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Église possède ces quatre causes :</p><ul><li><strong>Matière</strong> : les baptisés. On appartient à l'Église par le sacrement de baptême (avec de l'eau).</li><li><strong>Forme</strong> : la foi catholique. Sans la foi, plus d'Église. Des baptisés qui ont notoirement abandonné la foi ne font plus partie de l'Église.</li><li><strong>Efficience</strong> : l'autorité. Notre Seigneur Jésus-Christ est le chef unique de l'Église, et son représentant visible est le pape, avec les évêques en communion avec lui. C'est ce qui explique que l'Église, seule de toutes les sociétés humaines, ait duré semblable à elle-même pendant deux mille ans.</li><li><strong>Fin</strong> : la vie éternelle. Si l'on perd cela de vue, on ne sait plus à quoi sert l'Église : elle devient une ONG.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois sociétés fondées par Dieu",
+			"anchor": "trois-societes"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il n'existe que <strong>trois sociétés fondées directement par Dieu</strong>. Toutes les autres sont des œuvres légitimes des hommes (clubs, entreprises, associations), à condition que leur objet soit bon. Mais trois seulement remontent à l'initiative divine.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "1. La famille (société conjugale)",
+			"html": "<p>Fondée par Dieu en créant l'homme et la femme (Gn 1, 27) et en instituant le mariage. Naturelle, sacramentelle pour les baptisés, mais <em>imparfaite</em>.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. L'État (société civile)",
+			"html": "<p>Fondé par Dieu en créant l'homme comme être social. L'homme n'est pas un ours. Naturelle, mais <em>parfaite</em>. Saint Paul écrit que ceux qui contestent l'autorité civile <em>« attirent sur eux la damnation »</em> (Rm 13, 2).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. L'Église (société du salut)",
+			"html": "<p>Fondée par Notre Seigneur Jésus-Christ. Surnaturelle <em>et</em> parfaite.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Société parfaite",
+			"html": "<p>Société qui a en elle-même tous les moyens de sa fin. La famille ne les a pas : pour éduquer ses enfants, elle a besoin de l'école, de la société civile, de l'Église. L'État, sur son terrain (bien commun temporel), les a. L'Église, sur son terrain (salut éternel), les a à profusion.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ces trois sociétés sont la prunelle des yeux de Dieu, donc des hommes. Quand on en attaque une, tout s'effondre : la famille décompose la société, l'État révolutionnaire ruine le bien commun, l'Église réduite à une ONG laisse les âmes sans pasteur.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le corps et l'âme de l'Église",
+			"anchor": "corps-et-ame"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois conditions pour appartenir au corps",
+			"anchor": "trois-conditions"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le corps de l'Église, c'est la société visible des chrétiens unis par <strong>trois liens</strong>, qui doivent tous être extérieurs et visibles, puisque l'appartenance au corps est elle-même visible.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>1. Le baptême d'eau.</strong> Le sacrement, dûment reçu, inscrit dans les registres. Pas le baptême de désir ou de sang (qui sauvent l'âme mais n'incorporent pas au corps visible). Les catéchumènes ont la foi, mais pas encore le baptême : ils ne sont pas encore membres du corps.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>2. La profession de la foi catholique.</strong> Pas seulement la foi intérieure, qui ne se voit pas, mais sa profession visible. Saint Paul l'a dit en or :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p><em>Corde creditur ad justitiam, ore autem confessio fit ad salutem.</em> On croit dans son cœur pour parvenir à la justice ; mais c'est la confession de la bouche qui fait le salut.</p>",
+			"attribution": "Romains 10, 10"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quelqu'un qui ne professerait jamais sa foi, à la limite, donne le soupçon de ne pas l'avoir, car il est de la nature de la foi d'être professée : <em>« J'ai cru, c'est pourquoi j'ai parlé »</em> (Ps 115, 1, repris en 2 Co 4, 13).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>3. La reconnaissance de l'autorité de l'Église.</strong> Conséquence immédiate de la foi : si l'on croit que Jésus-Christ a fondé une Église, on reconnaît son autorité. Attention : c'est la <em>reconnaissance</em> du principe, non l'obéissance ponctuelle. À qui fallait-il obéir pendant les soixante ans de la crise arienne, alors que le pape Libère a signé des formules ariennes ? Pendant la crise monothélite, sous le pape Honorius ? Refuser ponctuellement d'obéir à un ordre injuste ne fait pas le schismatique. Refuser le principe même de l'autorité, oui.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Remarque importante</strong> : l'état de grâce <em>n'est pas</em> une quatrième condition. Un baptisé en état de péché mortel reste membre de l'Église, comme un membre malade ou difforme reste membre du corps. Vouloir réduire l'Église aux seuls « purs » est la grande erreur des Montanistes, des Spirituels, de Baïus et des jansénistes. Et vouloir y réduire les seuls « prédestinés » est une absurdité : nul ne sait qui est prédestiné. L'Église est une société <em>visible</em>, et l'appartenance à son corps doit être visible.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'âme de l'Église",
+			"anchor": "ame-de-l-eglise"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'âme de l'Église, ce qui l'anime de l'intérieur, est de deux ordres :</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "L'âme incréée",
+			"html": "<p>Le Saint-Esprit lui-même, la troisième personne de la Sainte Trinité, qui coule dans les veines des membres de l'Église comme l'esprit commun d'un corps vivant. Saint Paul : <em>« Tous ceux qui sont mus par l'Esprit de Dieu, ceux-là sont fils de Dieu »</em> (Rm 8, 14).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "L'âme créée",
+			"html": "<p>La grâce sanctifiante, par laquelle nous vivons de la vie même de Jésus-Christ. Quand un baptisé est en état de péché mortel, il reste membre du corps de l'Église, mais il y a une violence en lui : il fait partie d'un corps dont il ne vit pas la vie.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Conséquence importante : <strong>l'Église a été fondée le jour de la Pentecôte</strong>. La plupart des chrétiens l'ignorent. Tous les éléments matériels étaient disposés par Jésus-Christ pendant sa vie publique (les apôtres choisis, la primauté de Pierre instituée, les sacrements promis), mais l'Église ne <em>naît</em> formellement que lorsque le Saint-Esprit, son âme incréée, descend sur ce corps préparé.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'Église, objet de foi",
+			"anchor": "objet-de-foi"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Église est un mystère, un objet de foi. Le Credo dit : <em>« Je crois en l'Église, une, sainte, catholique et apostolique. »</em> On peut s'étonner : pourquoi dois-je <em>croire</em> en une chose que je <em>vois</em> ? Je vois le pape, les évêques, les baptêmes, les paroisses. On ne peut pas voir et croire la même réalité.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La réponse est claire : ce que je vois, c'est le <em>corps</em> de l'Église. Ce que je crois, c'est l'<em>âme</em>, le caractère surnaturel, l'Esprit Saint qui l'anime, la grâce qui y circule. L'Église, considérée dans son tout, est un mystère.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les membres de l'Église",
+			"anchor": "les-membres"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois parties de l'Église",
+			"anchor": "trois-parties"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il ne faut pas oublier les amis. L'Église comprend trois parties :</p><ul><li><strong>L'Église militante</strong> : les chrétiens qui combattent encore sur terre. Quand on dit « l'Église » sans précision, c'est en général d'elle qu'on parle.</li><li><strong>L'Église souffrante</strong> : les âmes du purgatoire, parfaitement chrétiennes, certainement en état de grâce, sauvées, mais en train de se purifier des suites de leurs péchés.</li><li><strong>L'Église triomphante</strong> : ceux qui contemplent déjà la face de Dieu au ciel, et qui sont de plus en plus nombreux à mesure que l'histoire se déroule.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Qui ne fait pas partie de l'Église",
+			"anchor": "qui-n-en-fait-pas-partie"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il est aujourd'hui à la mode de mettre tout le monde dans l'Église : on dirait, à entendre certains prédicateurs, qu'il n'y a que les Martiens qui n'en font pas partie. Cela ne veut plus rien dire : une définition qui n'exclut rien ne définit plus rien. Cinq catégories ne font pas, ou plus, partie de l'Église militante.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "1. Les infidèles",
+			"html": "<p>Sans connotation péjorative : ce sont ceux qui n'ont ni la foi, ni le baptême. Les païens (<em>paganos</em>, c'est-à-dire les habitants de la campagne, parce que les apôtres ont d'abord évangélisé les villes). Ils ne font pas partie de l'Église, c'est tout · sans jugement sur leurs personnes.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "2. Les apostats",
+			"html": "<p>Ceux qui ont eu la foi, qui ont été baptisés, et qui ont rejeté la foi <em>tout entière</em>. Le baptême marque l'âme d'un caractère que personne ne peut effacer, donc ils restent baptisés ; mais ils n'ont plus la foi, donc plus l'Église.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "3. Les hérétiques",
+			"html": "<p>Du grec <em>hairesis</em>, « choix ». Ils ont été baptisés et conservent une partie de la foi, mais en refusent une autre : ils choisissent. Or refuser un seul dogme, c'est nier l'autorité de Dieu qui révèle, donc perdre la foi théologale tout entière, même si la conscience subjective garde l'illusion d'en garder beaucoup. Aujourd'hui, les sondages montrent que la moitié des « catholiques » ne croient pas à la Résurrection, ou refusent l'enfer : ce sont, théologiquement, des hérétiques. La distinction canonique veut qu'un hérétique notoire soit déclaré tel par l'autorité ; mais la qualification théologique objective ne dépend pas de cette procédure.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "4. Les schismatiques",
+			"html": "<p>Du grec <em>schisma</em>, « déchirure ». Ils ont la foi et le baptême, mais ils refusent le principe de l'autorité de l'Église. Quand le cardinal Cajetan a rencontré Luther, il ne lui a pas demandé d'abord d'abjurer telle ou telle proposition : il lui a demandé de reconnaître qu'il y a une Église qui a autorité. Luther a refusé : il est un schismatique typique. Et les schismatiques deviennent presque toujours hérétiques, parce que se couper du magistère finit par recomposer le paysage de la foi.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "5. Les excommuniés",
+			"html": "<p>Comme les schismatiques, sauf que ce n'est pas eux qui se retirent : c'est l'Église qui les retranche, pour une faute très grave. Exemples : celui qui frappe le pape (Guillaume de Nogaret, sous Philippe le Bel, contre Boniface VIII) ; celui qui commet ou favorise un avortement.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ces cinq catégories ne sont pas dressées pour exclure, mais pour <em>distinguer</em>. Sans cette distinction, le mot « Église » ne désigne plus rien. La théologie de Paul Néouhart (<em>« On ira tous au paradis, même les voleurs, même les bonnes sœurs »</em>) est précisément la négation de l'Église.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Hors de l'Église, pas de salut",
+			"anchor": "hors-de-l-eglise-pas-de-salut"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cet adage, formulé par saint Cyprien au IIIe siècle, est une vérité de foi définie par l'Église à plusieurs reprises (les textes du magistère sont innombrables, du IVe concile de Latran à <em>Cantate Domino</em>, en passant par <em>Unam Sanctam</em>). Deux tendances le mutilent : ceux qui l'entendent pour <em>chasser</em> tout le monde, et ceux qui le déclarent <em>relatif</em>. Il faut le comprendre exactement.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Premier sens : qui peut, doit",
+			"anchor": "qui-peut-doit"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Celui qui <strong>pourrait</strong> appartenir au corps de l'Église, et qui <strong>devrait</strong> y appartenir (parce qu'il a connaissance de la foi et du baptême), et qui refuse, est perdu. S'il persiste dans ce refus de la lumière jusqu'à la mort, il perd son âme. C'est ce que veut dire <em>fondamentalement</em> le dogme.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Second sens : l'ignorance invincible",
+			"anchor": "ignorance-invincible"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On envisage maintenant le cas (exceptionnel, mais peut-être nombreux) de celui qui, <strong>sans faute de sa part</strong>, ne peut accéder aux vérités du salut : la divinité du Christ, l'Évangile, la nécessité du baptême. Il est dans l'<em>ignorance invincible</em>. Il n'appartient pas au corps de l'Église, mais il peut être sauvé · à deux conditions, dont la première est de saint Paul :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Celui qui s'approche de Dieu doit croire qu'il existe, et qu'il est rémunérateur de ceux qui le cherchent.</p>",
+			"attribution": "Hébreux 11, 6"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cette phrase contient la <strong>foi minimum</strong> et l'<strong>espérance minimum</strong> requises pour le salut :</p><ul><li><em>Dieu existe</em> : pas seulement le savoir philosophiquement (cela ne sauve pas), mais le <em>croire</em>, vertu théologale, sur le témoignage de Dieu lui-même.</li><li><em>Il est rémunérateur de ceux qui le cherchent</em> : c'est-à-dire qu'il est Providence, qu'il a un plan pour moi, que si je le cherche il répondra à mon appel. C'est l'espérance.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Seconde condition : <strong>pratiquer ce qu'on ne peut pas ignorer de la loi de Dieu</strong>, c'est-à-dire la loi naturelle, le Décalogue, qui est inscrit dans la nature humaine (Rm 2, 14-15). Si cet homme observe les dix commandements par respect et amour de Dieu, il a la <em>charité</em>. Et la charité est état de grâce. Et qui est en état de grâce est sauvé.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi le dogme n'a pas d'exception",
+			"anchor": "pas-d-exception"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cet homme qui se sauve dans l'ignorance invincible ne contredit pas le dogme · au contraire. Comme il est en état de grâce, il appartient à l'<strong>âme de l'Église</strong>, qui est le Saint-Esprit et la grâce sanctifiante. Il n'appartient pas au corps, mais il est sauvé <em>dans</em> l'Église et <em>par</em> l'Église. Le dogme <em>Hors de l'Église, pas de salut</em> est donc rigoureusement universel : tout sauvé l'est par l'Église, soit par son corps, soit par son âme.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le nombre et la qualité de ces âmes sont le secret de Dieu. On peut espérer qu'elles sont nombreuses, et on doit prier qu'elles le soient. Mais il faut ajouter trois remarques honnêtes :</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>1.</strong> Une fausse religion <em>entrave</em> souvent plus qu'elle n'aide. Si elle enseigne la polygamie, le mépris de la vie, l'idolâtrie, elle détourne au lieu d'orienter. Il n'est pas indifférent de naître dans une religion qui contredit la loi naturelle.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>2.</strong> Le cas est rarement applicable dans les civilisations post-chrétiennes. Quelqu'un qui vit en France, où toute la culture pendant mille ans a été chrétienne, et qui refuse même d'ouvrir l'Évangile, n'est pas dans l'ignorance invincible · il est dans le refus volontaire. Les intellectuels corrompus qui connaissent parfaitement le christianisme et le rejettent toute leur vie ne sont pas couverts par cette exception.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>3.</strong> C'est pourquoi l'Église est <strong>missionnaire</strong>. Saint François Xavier a converti des centaines de milliers de personnes en Inde, au Japon, en Chine. L'Église a toujours envoyé ses missionnaires au bout du monde parce qu'elle ignore le nombre exact des âmes capables de salut et que le moyen <em>certain</em> est la pleine vérité : la foi du Christ, le baptême, la vie chrétienne. Saint Paul à Timothée :</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Dieu veut que tous les hommes soient sauvés et parviennent à la connaissance de la vérité.</p>",
+			"attribution": "1 Timothée 2, 4"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Église est cette société surnaturelle et parfaite, fondée par Jésus-Christ à la Pentecôte, dont nous sommes les membres par le baptême, la foi professée, la reconnaissance de l'autorité. Elle est le corps même du Christ, son épouse, son prolongement parmi nous. Connaître son existence est déjà une grâce ; vivre de sa vie est le salut. Pour le reste, prions pour ceux qui ne la connaissent pas, et remercions Dieu de la connaître.</p>"
+		}
+	]
+}
