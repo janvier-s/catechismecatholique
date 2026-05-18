@@ -30,6 +30,8 @@
 	import TabCrossRefs from './TabCrossRefs.svelte';
 	import TabCitedBy from './TabCitedBy.svelte';
 	import TabEnBref from './TabEnBref.svelte';
+	import TabAudio from './TabAudio.svelte';
+	import { loadAudioIndex } from '$lib/data/audioIndex';
 	import TabSources from './TabSources.svelte';
 	import TabBibleVerse from './TabBibleVerse.svelte';
 	import TabConcordance from './TabConcordance.svelte';
@@ -71,6 +73,7 @@
 	let cdseCiters: number[] = $state([]);
 	let hasThemes: boolean = $state(false);
 	let hasConcordance: boolean = $state(false);
+	let hasAudio: boolean = $state(false);
 	let dataReady: boolean = $state(false);
 
 	$effect(() => {
@@ -83,6 +86,7 @@
 			cdseCiters = [];
 			hasThemes = false;
 			hasConcordance = false;
+			hasAudio = false;
 			dataReady = false;
 			return;
 		}
@@ -95,21 +99,24 @@
 			cdseCiters = [];
 			hasThemes = false;
 			hasConcordance = false;
+			hasAudio = false;
 			dataReady = true;
 			return;
 		}
 		const paragraphNum = ctx.paragraph;
 		dataReady = false;
 		(async () => {
-			const [p, citedBy, pc, compendiumCB, themesMap, concManifest, cdseCB] = await Promise.all([
+			const [p, citedBy, pc, compendiumCB, themesMap, concManifest, cdseCB, audioIdx] = await Promise.all([
 				loadParagraph(paragraphNum),
 				loadCitedBy(),
 				loadParagraphContext(paragraphNum),
 				loadCompendiumCitedBy(),
 				loadParagraphThemes(),
 				loadConcordanceParagraphManifest(),
-				loadCdseCitedByCcc()
+				loadCdseCitedByCcc(),
+				loadAudioIndex()
 			]);
+			hasAudio = !!audioIdx && audioIdx.paragraphs[String(paragraphNum)] !== undefined;
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
 			compendiumCiters = compendiumCB[paragraphNum] ?? [];
@@ -189,6 +196,7 @@
 		const hasThemesG = optimistic || hasThemes;
 		const hasConcordanceG = optimistic || hasConcordance;
 		const hasEnBrefG = optimistic || hasEnBref;
+		const hasAudioG = optimistic || hasAudio;
 
 		const groups: Group[] = [];
 
@@ -227,6 +235,12 @@
 				id: 'g-en-bref',
 				label: 'En Bref',
 				children: [{ id: 'en-bref', label: 'En Bref' }]
+			});
+		if (hasAudioG)
+			groups.push({
+				id: 'g-audio',
+				label: 'Audio',
+				children: [{ id: 'audio', label: 'Audio' }]
 			});
 		groups.push({
 			id: 'g-ia',
@@ -455,6 +469,8 @@
 							<TabCitedBy />
 						{:else if $studyPanel.activeTab === 'en-bref'}
 							<TabEnBref />
+						{:else if $studyPanel.activeTab === 'audio'}
+							<TabAudio />
 						{:else if $studyPanel.activeTab === 'sources'}
 							<TabSources />
 						{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
@@ -551,6 +567,8 @@
 								<TabCitedBy />
 							{:else if $studyPanel.activeTab === 'en-bref'}
 								<TabEnBref />
+							{:else if $studyPanel.activeTab === 'audio'}
+								<TabAudio />
 							{:else if $studyPanel.activeTab === 'sources'}
 								<TabSources />
 							{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}

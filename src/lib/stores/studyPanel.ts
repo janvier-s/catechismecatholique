@@ -7,6 +7,7 @@ export type PanelTab =
 	| 'sources'
 	| 'themes'
 	| 'en-bref'
+	| 'audio'
 	| 'concordance'
 	| 'bible-verse'
 	| 'compendium'
