@@ -65,9 +65,7 @@
 		return items;
 	});
 
-	const playlistPosition = $derived(
-		playlistItems.findIndex((p) => p.n === currentParagraph)
-	);
+	const playlistPosition = $derived(playlistItems.findIndex((p) => p.n === currentParagraph));
 	const prevInPlaylist = $derived(
 		playlistPosition > 0 ? (playlistItems[playlistPosition - 1]?.n ?? null) : null
 	);
@@ -297,7 +295,9 @@
 		></audio>
 
 		<div class="player rounded-lg p-4 space-y-3">
-			<div class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold flex items-center justify-between">
+			<div
+				class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold flex items-center justify-between"
+			>
 				<span>{mode === 'en-bref' ? 'En bref' : `Paragraphe ${currentParagraph}`}</span>
 				{#if showPlaylistUI}
 					<span class="text-fg/70 normal-case tracking-normal font-medium">
@@ -329,7 +329,13 @@
 				>
 					{#if isPlaying}
 						<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"
-							><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg
+							><rect x="6" y="5" width="4" height="14" rx="1" /><rect
+								x="14"
+								y="5"
+								width="4"
+								height="14"
+								rx="1"
+							/></svg
 						>
 					{:else}
 						<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"
@@ -371,15 +377,40 @@
 
 			<div class="flex items-center justify-between gap-3">
 				<div class="flex items-center gap-0.5">
-					<button type="button" class="icon-btn" onclick={() => skip(-5)} aria-label="Reculer 5 secondes" title="Reculer 5s">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg
+					<button
+						type="button"
+						class="icon-btn"
+						onclick={() => skip(-5)}
+						aria-label="Reculer 5 secondes"
+						title="Reculer 5s"
+					>
+						<svg
+							viewBox="0 0 24 24"
+							width="18"
+							height="18"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg
 						>
 					</button>
-					<button type="button" class="icon-btn" onclick={() => skip(5)} aria-label="Avancer 5 secondes" title="Avancer 5s">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+					<button
+						type="button"
+						class="icon-btn"
+						onclick={() => skip(5)}
+						aria-label="Avancer 5 secondes"
+						title="Avancer 5s"
+					>
+						<svg
+							viewBox="0 0 24 24"
+							width="18"
+							height="18"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
 							><path d="M21 12a9 9 0 1 1-3-6.7" /><path d="M21 4v5h-5" /></svg
 						>
 					</button>
@@ -413,7 +444,8 @@
 
 				<div class="flex items-center gap-1.5">
 					<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" class="text-muted"
-						><path d="M3 9v6h4l5 5V4L7 9zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z" /></svg>
+						><path d="M3 9v6h4l5 5V4L7 9zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z" /></svg
+					>
 					<input
 						type="range"
 						min="0"
@@ -467,7 +499,9 @@
 		color: var(--color-fg);
 		opacity: 0.65;
 		font-weight: 500;
-		transition: background-color 120ms, opacity 120ms;
+		transition:
+			background-color 120ms,
+			opacity 120ms;
 	}
 	.mode-tab:hover {
 		background: color-mix(in srgb, var(--color-fg) 6%, transparent);
@@ -488,7 +522,9 @@
 		background: var(--color-accent);
 		color: white;
 		flex-shrink: 0;
-		transition: filter 120ms, transform 60ms;
+		transition:
+			filter 120ms,
+			transform 60ms;
 	}
 	.play-btn:hover {
 		filter: brightness(1.08);
@@ -534,7 +570,9 @@
 		border-radius: 6px;
 		color: var(--color-fg);
 		white-space: nowrap;
-		transition: background-color 120ms, color 120ms;
+		transition:
+			background-color 120ms,
+			color 120ms;
 	}
 	.speed-opt:hover {
 		background: color-mix(in srgb, var(--color-fg) 6%, transparent);
