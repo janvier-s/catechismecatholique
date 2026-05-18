@@ -303,6 +303,20 @@
 			</div>
 
 			<div class="flex items-center gap-3">
+				{#if isPlaylist}
+					<button
+						type="button"
+						class="nav-icon"
+						onclick={() => prevInPlaylist !== null && goToParagraph(prevInPlaylist)}
+						disabled={prevInPlaylist === null}
+						aria-label="Paragraphe précédent"
+						title="Précédent"
+					>
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"
+							><path d="M6 5h2v14H6zM20 5v14L10 12z" /></svg
+						>
+					</button>
+				{/if}
 				<button
 					type="button"
 					class="play-btn"
@@ -319,6 +333,20 @@
 						>
 					{/if}
 				</button>
+				{#if isPlaylist}
+					<button
+						type="button"
+						class="nav-icon"
+						onclick={() => nextInPlaylist !== null && goToParagraph(nextInPlaylist)}
+						disabled={nextInPlaylist === null}
+						aria-label="Paragraphe suivant"
+						title="Suivant"
+					>
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"
+							><path d="M16 5h2v14h-2zM4 5v14l10-7z" /></svg
+						>
+					</button>
+				{/if}
 
 				<div class="flex-1 flex items-center gap-2">
 					<input
@@ -419,30 +447,6 @@
 						</li>
 					{/each}
 				</ul>
-				<div class="flex items-center justify-between mt-3">
-					<button
-						type="button"
-						class="nav-btn"
-						onclick={() => prevInPlaylist !== null && goToParagraph(prevInPlaylist)}
-						disabled={prevInPlaylist === null}
-					>
-						<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"
-							><path d="M6 5h2v14H6zM20 5v14L10 12z" /></svg
-						>
-						<span>Précédent</span>
-					</button>
-					<button
-						type="button"
-						class="nav-btn"
-						onclick={() => nextInPlaylist !== null && goToParagraph(nextInPlaylist)}
-						disabled={nextInPlaylist === null}
-					>
-						<span>Suivant</span>
-						<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"
-							><path d="M16 5h2v14h-2zM4 5v14l10-7z" /></svg
-						>
-					</button>
-				</div>
 			</div>
 		{/if}
 	{/if}
@@ -492,17 +496,14 @@
 	}
 	.speed-menu {
 		position: absolute;
-		bottom: calc(100% + 6px);
-		left: 50%;
-		transform: translateX(-50%);
+		top: calc(100% + 6px);
 		display: flex;
+		flex-direction: column;
 		gap: 2px;
 		padding: 4px;
 		border-radius: 8px;
 		background: var(--color-bg, white);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 15%, transparent);
-		box-shadow: 0 6px 20px -4px color-mix(in srgb, var(--color-fg) 25%, transparent);
-		z-index: 10;
 	}
 	.speed-opt {
 		min-width: 38px;
@@ -572,22 +573,22 @@
 		border-left: 2px solid var(--color-accent);
 		padding-left: 8px;
 	}
-	.nav-btn {
+	.nav-icon {
 		display: inline-flex;
 		align-items: center;
-		gap: 4px;
-		padding: 5px 10px;
-		font-size: 11px;
-		font-weight: 600;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
 		border-radius: 6px;
 		color: var(--color-fg);
+		flex-shrink: 0;
 		transition: background-color 120ms;
 	}
-	.nav-btn:hover:not(:disabled) {
+	.nav-icon:hover:not(:disabled) {
 		background: color-mix(in srgb, var(--color-fg) 8%, transparent);
 	}
-	.nav-btn:disabled {
-		opacity: 0.35;
+	.nav-icon:disabled {
+		opacity: 0.3;
 		cursor: not-allowed;
 	}
 	button.active {
