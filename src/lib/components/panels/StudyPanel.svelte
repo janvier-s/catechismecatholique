@@ -222,7 +222,7 @@
 		const res: TabDef[] = [];
 		if (hasEnBrefG) res.push({ id: 'en-bref', label: 'En Bref' });
 		if (hasCompendium) res.push({ id: 'compendium', label: 'Compendium' });
-		if (res.length > 0) groups.push({ id: 'g-resume', label: 'Résumé', children: res });
+		if (res.length > 0) groups.push({ id: 'g-resume', label: 'Synthèse', children: res });
 
 		// Bible group: this paragraph's verse refs + concordance on related verses.
 		// Always labeled "Bible" even when only Concordance has data, so the

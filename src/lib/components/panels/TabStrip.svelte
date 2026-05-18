@@ -93,7 +93,7 @@
 					<span class="tab-label-wrap">
 						<span class="tab-label">{tab.label}</span>
 						{#if tab.hasSubTabs}
-							<span class="tab-subdot" aria-hidden="true"></span>
+							<span class="tab-subchev" aria-hidden="true">▾</span>
 						{/if}
 					</span>
 					{#if tab.iconHtml}
@@ -177,12 +177,11 @@
 		gap: 2px;
 		line-height: 1;
 	}
-	.tab-subdot {
-		width: 3px;
-		height: 3px;
-		border-radius: 50%;
-		background: currentColor;
+	.tab-subchev {
+		font-size: 9px;
+		line-height: 1;
 		opacity: 0.55;
+		margin-top: -1px;
 	}
 	.tab-icon {
 		display: inline-flex;
