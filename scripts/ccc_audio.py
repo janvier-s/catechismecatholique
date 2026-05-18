@@ -914,9 +914,10 @@ def _heading2_ranges(
     paragraphs: list[int],
     headings: list[dict],
 ) -> list[tuple[dict, int, int]]:
-    """Return (heading, first_para, last_para) for each level-2 heading.
+    """Return (heading, first_para, last_para) for each level-2 heading only.
 
-    Level-3 headings are skipped — too granular for audio announces.
+    Used to split paragraphs into heading2 groups; heading3 sub-ranges are
+    computed separately within each group.
     """
     h2s = sorted(
         [h for h in headings if h.get("level") == 2],
@@ -957,7 +958,9 @@ def build_heading_entry(
             announce = apply_intro_phonetic(f"{title}.")
         segments.append({"voice": "gerard", "text": announce, "targets": ["v2"]})
         segments.append({"voice": "gerard", "text": _format_range_announce(*paragraph_range), "targets": ["v2"]})
-    elif level == "heading2":
+    elif level in ("heading2", "heading3"):
+        # heading2 titles have leading Roman numerals ("I. Le désir…"); heading3 titles don't.
+        # _convert_heading2_title is a no-op when no leading Roman numeral is present.
         text = apply_intro_phonetic(_convert_heading2_title(title))
         if not text.endswith("."):
             text += "."
@@ -1033,16 +1036,47 @@ def _build_entries_structured(
             paragraph_range=para_range, location=location, file_number=_next_hnum(),
         ))
 
-    def _emit_paras_with_h2s(
-        sorted_paras: list[int], headings: list[dict], location: dict,
+    def _emit_h3s_in_range(
+        sorted_paras: list[int], h3_list: list[dict], location: dict,
     ) -> None:
-        """Emit paragraph entries, inserting heading2 entries at boundaries."""
-        h2_ranges = _heading2_ranges(sorted_paras, headings)
-        if not h2_ranges:
+        """Emit heading3 entries + paragraphs for a list of level-3 headings."""
+        if not h3_list:
             for n in sorted_paras:
                 p = _load(n)
                 if p:
                     _add_para(p, location)
+            return
+        first_h3_start = h3_list[0]["paragraph_start"]
+        for n in sorted_paras:
+            if n < first_h3_start:
+                p = _load(n)
+                if p:
+                    _add_para(p, location)
+        for i, h3 in enumerate(h3_list):
+            end_excl = h3_list[i + 1]["paragraph_start"] if i + 1 < len(h3_list) else None
+            h3_paras = [p for p in sorted_paras
+                        if p >= h3["paragraph_start"] and (end_excl is None or p < end_excl)]
+            h3_range = (h3_paras[0], h3_paras[-1]) if h3_paras else (h3["paragraph_start"], h3["paragraph_start"])
+            _emit_heading("heading3", h3["title"], None, h3_range, location)
+            for n in h3_paras:
+                p = _load(n)
+                if p:
+                    _add_para(p, location)
+
+    def _emit_paras_with_h2s(
+        sorted_paras: list[int], headings: list[dict], location: dict,
+    ) -> None:
+        """Emit paragraph entries, inserting heading2 + heading3 entries hierarchically.
+
+        heading3s are nested inside their parent heading2's paragraph range so
+        that paragraphs are never emitted twice when h2 and h3 share a start.
+        """
+        h3_list = sorted([h for h in headings if h.get("level") == 3],
+                         key=lambda h: h["paragraph_start"])
+        h2_ranges = _heading2_ranges(sorted_paras, headings)
+        if not h2_ranges:
+            # No heading2s — emit heading3s (if any) directly.
+            _emit_h3s_in_range(sorted_paras, h3_list, location)
             return
         first_h2_start = h2_ranges[0][0]["paragraph_start"]
         for n in sorted_paras:
@@ -1050,13 +1084,14 @@ def _build_entries_structured(
                 p = _load(n)
                 if p:
                     _add_para(p, location)
-        for h, h_first, h_last in h2_ranges:
-            _emit_heading("heading2", h["title"], None, (h_first, h_last), location)
-            for n in sorted_paras:
-                if h_first <= n <= h_last:
-                    p = _load(n)
-                    if p:
-                        _add_para(p, location)
+        for h2, h2_first, h2_last in h2_ranges:
+            h2_paras = [p for p in sorted_paras if h2_first <= p <= h2_last]
+            h2_range = (h2_paras[0], h2_paras[-1]) if h2_paras else (h2_first, h2_last)
+            _emit_heading("heading2", h2["title"], None, h2_range, location)
+            h3_in_h2 = [h for h in h3_list
+                        if h["paragraph_start"] >= h2["paragraph_start"]
+                        and h["paragraph_start"] <= h2_last]
+            _emit_h3s_in_range(h2_paras, h3_in_h2, location)
 
     def _emit_article(
         art: dict, ch_loc: dict, orphans: list[int] | None = None,
