@@ -886,3 +886,34 @@ a {
 .is-active .vii-num {
 	color: #fff;
 }
+
+/* Shared pill toggle used inside the study panel: bordered, pill-shaped,
+   solid accent fill when active. Used by the StudyPanel sub-tab toggle
+   and the TabAudio Paragraphe/En bref switch so the two render as one
+   visual primitive. */
+.pill-toggle {
+	flex: 1 0 auto;
+	padding: 4px 10px;
+	border: 1px solid var(--color-border);
+	border-radius: 999px;
+	background: transparent;
+	color: var(--color-muted);
+	cursor: pointer;
+	font-family: var(--font-ui);
+	font-size: 11px;
+	font-weight: 500;
+	transition:
+		background-color 120ms ease,
+		color 120ms ease,
+		border-color 120ms ease;
+}
+.pill-toggle:hover {
+	color: var(--color-accent);
+	border-color: var(--color-accent);
+}
+.pill-toggle.is-active,
+.pill-toggle.is-active:hover {
+	background: var(--color-accent);
+	color: #fff;
+	border-color: var(--color-accent);
+}

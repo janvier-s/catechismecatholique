@@ -17,7 +17,6 @@
 	import {
 		loadParagraph,
 		loadCitedBy,
-		loadParagraphContext,
 		loadCompendiumCitedBy,
 		loadParagraphThemes,
 		loadConcordanceParagraphManifest,
@@ -30,8 +29,13 @@
 	import TabCrossRefs from './TabCrossRefs.svelte';
 	import TabCitedBy from './TabCitedBy.svelte';
 	import TabEnBref from './TabEnBref.svelte';
-	import TabAudio from './TabAudio.svelte';
 	import { loadAudioIndex } from '$lib/data/audioIndex';
+	// TabAudio is dynamically imported when the Audio tab first activates.
+	// Static import would entangle its CSS into the audioIndex chunk and
+	// trigger "preloaded but not used" warnings on chapter reader pages
+	// where the panel never opens.
+	type TabAudioComponent = (typeof import('./TabAudio.svelte'))['default'];
+	let TabAudio: TabAudioComponent | null = $state(null);
 	import TabSources from './TabSources.svelte';
 	import TabBibleVerse from './TabBibleVerse.svelte';
 	import TabConcordance from './TabConcordance.svelte';
@@ -116,11 +120,10 @@
 		const paragraphNum = ctx.paragraph;
 		dataReady = false;
 		(async () => {
-			const [p, citedBy, pc, compendiumCB, themesMap, concManifest, cdseCB, audioIdx, enBrefsIdx] =
+			const [p, citedBy, compendiumCB, themesMap, concManifest, cdseCB, audioIdx, enBrefsIdx] =
 				await Promise.all([
 					loadParagraph(paragraphNum),
 					loadCitedBy(),
-					loadParagraphContext(paragraphNum),
 					loadCompendiumCitedBy(),
 					loadParagraphThemes(),
 					loadConcordanceParagraphManifest(),
@@ -135,11 +138,8 @@
 			cdseCiters = cdseCB[String(paragraphNum)] ?? [];
 			hasThemes = (themesMap[String(paragraphNum)]?.length ?? 0) > 0;
 			hasConcordance = concManifest.has(paragraphNum);
-
-			// hasEnBref: every paragraph gets an en_bref tab as long as one
-			// exists in the corpus at or after the current paragraph. The
-			// "following" en_bref (containing or next) is what TabEnBref shows.
-			void pc; // chapter context no longer gates the tab
+			// Every paragraph gets an en_bref tab as long as a summary exists
+			// at or after it: TabEnBref shows the "following" en_bref.
 			hasEnBref = enBrefsIdx.some((b) => b.last >= paragraphNum);
 			dataReady = true;
 		})();
@@ -283,6 +283,14 @@
 		studyPanel.update((s) => ({ ...s, activeTab: t }));
 	}
 
+	$effect(() => {
+		if ($studyPanel.activeTab === 'audio' && !TabAudio) {
+			import('./TabAudio.svelte').then((m) => {
+				TabAudio = m.default;
+			});
+		}
+	});
+
 	// If the active tab is no longer visible, snap to the first visible one.
 	$effect(() => {
 		if (!$studyPanel.open) return;
@@ -386,50 +394,26 @@
 </script>
 
 {#if $studyPanel.open}
-	<!-- Mobile: bottom-sheet overlay covering most of the screen. Hidden on
-	     lg+ where the resizable rail below takes over. -->
-	<div
-		bind:this={sheetEl}
-		class="lg:hidden fixed inset-x-0 bottom-0 z-[var(--z-modal)] bg-panel border-t border-border flex flex-col"
-		style="top: var(--topbar-height, 58px); max-height: calc(100dvh - var(--topbar-height, 58px));"
-		role="dialog"
-		aria-modal="true"
-		aria-label="Panneau d'étude"
-		transition:slideUp={{ duration: 280 }}
-	>
-		<header class="flex items-center justify-between px-3 py-2 border-b border-border font-ui">
-			<div class="min-w-0">
-				{#if $studyPanel.context?.kind === 'verse'}
-					{@const ctxM = $studyPanel.context}
-					<span class="text-accent font-semibold tabular-nums">
-						{BOOKS.find((b) => b.usfx === ctxM.verseUsfx)?.frenchName ?? ''}
-						{ctxM.verseChapter},
-						{ctxM.verseVerse}
-					</span>
-				{:else if $studyPanel.context?.kind === 'paragraph'}
-					{@const ctxM = $studyPanel.context}
-					<a
-						href="/cec/{ctxM.paragraph}"
-						class="text-accent font-semibold hover:underline tabular-nums"
-					>
-						CEC {ctxM.paragraph}
-					</a>
-				{:else if $studyPanel.context?.kind === 'trent-paragraph'}
-					{@const ctxM = $studyPanel.context}
-					<span class="text-accent font-semibold tabular-nums">
-						§ {ctxM.paragraph}
-					</span>
-				{/if}
-			</div>
-			<button
-				type="button"
-				class="w-8 h-8 rounded hover:bg-accent/10 text-muted hover:text-accent"
-				aria-label="Fermer"
-				onclick={closePanel}
-			>
-				✕
-			</button>
-		</header>
+	{#snippet header()}
+		{@const ctx = $studyPanel.context}
+		{#if ctx?.kind === 'verse'}
+			<span class="text-accent font-semibold tabular-nums">
+				{BOOKS.find((b) => b.usfx === ctx.verseUsfx)?.frenchName ?? ''}
+				{ctx.verseChapter},
+				{ctx.verseVerse}
+			</span>
+		{:else if ctx?.kind === 'paragraph'}
+			<a href="/cec/{ctx.paragraph}" class="text-accent font-semibold hover:underline tabular-nums">
+				CEC {ctx.paragraph}
+			</a>
+		{:else if ctx?.kind === 'trent-paragraph'}
+			<span class="text-accent font-semibold tabular-nums">
+				Paragraphe {ctx.paragraph}
+			</span>
+		{/if}
+	{/snippet}
+
+	{#snippet panelBody()}
 		{#if visibleGroups.length === 0}
 			<div class="flex-1 flex items-center justify-center p-6 text-sm text-muted italic">
 				Aucune note d'étude pour ce paragraphe.
@@ -451,8 +435,8 @@
 						type="button"
 						role="tab"
 						aria-selected={$studyPanel.activeTab === c.id}
-						class="sub-toggle-btn"
-						class:sub-toggle-active={$studyPanel.activeTab === c.id}
+						class="pill-toggle"
+						class:is-active={$studyPanel.activeTab === c.id}
 						onclick={() => selectSubTab(c.id)}
 					>
 						{c.label}
@@ -471,7 +455,11 @@
 						{:else if $studyPanel.activeTab === 'en-bref'}
 							<TabEnBref />
 						{:else if $studyPanel.activeTab === 'audio'}
-							<TabAudio />
+							{#if TabAudio}
+								<TabAudio />
+							{:else}
+								<p class="text-muted text-sm italic">Chargement…</p>
+							{/if}
 						{:else if $studyPanel.activeTab === 'sources'}
 							<TabSources />
 						{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
@@ -498,6 +486,33 @@
 				{/key}
 			</div>
 		{/if}
+	{/snippet}
+
+	<!-- Mobile: bottom-sheet overlay covering most of the screen. Hidden on
+	     lg+ where the resizable rail below takes over. -->
+	<div
+		bind:this={sheetEl}
+		class="lg:hidden fixed inset-x-0 bottom-0 z-[var(--z-modal)] bg-panel border-t border-border flex flex-col"
+		style="top: var(--topbar-height, 58px); max-height: calc(100dvh - var(--topbar-height, 58px));"
+		role="dialog"
+		aria-modal="true"
+		aria-label="Panneau d'étude"
+		transition:slideUp={{ duration: 280 }}
+	>
+		<header class="flex items-center justify-between px-3 py-2 border-b border-border font-ui">
+			<div class="min-w-0">
+				{@render header()}
+			</div>
+			<button
+				type="button"
+				class="w-8 h-8 rounded hover:bg-accent/10 text-muted hover:text-accent"
+				aria-label="Fermer"
+				onclick={closePanel}
+			>
+				✕
+			</button>
+		</header>
+		{@render panelBody()}
 	</div>
 
 	<!-- Desktop: sticky right rail with resize handle. -->
@@ -507,97 +522,10 @@
 	>
 		<PanelShell onClose={closePanel}>
 			{#snippet title()}
-				{@const ctx = $studyPanel.context}
-				{#if ctx?.kind === 'verse'}
-					<span class="text-accent font-semibold tabular-nums">
-						{BOOKS.find((b) => b.usfx === ctx.verseUsfx)?.frenchName ?? ''}
-						{ctx.verseChapter},
-						{ctx.verseVerse}
-					</span>
-				{:else if ctx?.kind === 'paragraph'}
-					<a
-						href="/cec/{ctx.paragraph}"
-						class="text-accent font-semibold hover:underline tabular-nums"
-					>
-						CEC {ctx.paragraph}
-					</a>
-				{:else if ctx?.kind === 'trent-paragraph'}
-					<span class="text-accent font-semibold tabular-nums">
-						§ {ctx.paragraph}
-					</span>
-				{/if}
+				{@render header()}
 			{/snippet}
 
-			{#if visibleGroups.length === 0}
-				<div class="flex-1 flex items-center justify-center p-6 text-sm text-muted italic">
-					Aucune note d'étude pour ce paragraphe.
-				</div>
-			{:else}
-				<TabStrip
-					tabs={stripTabs}
-					active={(activeGroup?.id ?? null) as PanelTab | null}
-					onSelect={(id) => selectGroup(id)}
-				/>
-				<div
-					class="sub-toggle"
-					class:sub-toggle--visible={activeGroup && activeGroup.children.length > 1}
-					role="tablist"
-					aria-label="Sous-onglets"
-				>
-					{#each activeGroup && activeGroup.children.length > 1 ? activeGroup.children : [] as c (c.id)}
-						<button
-							type="button"
-							role="tab"
-							aria-selected={$studyPanel.activeTab === c.id}
-							class="sub-toggle-btn"
-							class:sub-toggle-active={$studyPanel.activeTab === c.id}
-							onclick={() => selectSubTab(c.id)}
-						>
-							{c.label}
-						</button>
-					{/each}
-				</div>
-				<div class="flex-1 overflow-y-auto p-4 styled-scroll">
-					{#key $studyPanel.activeTab}
-						<div in:fade={{ duration: 120 }}>
-							{#if $studyPanel.activeTab === 'bible'}
-								<TabBibleRefs />
-							{:else if $studyPanel.activeTab === 'cross-refs'}
-								<TabCrossRefs />
-							{:else if $studyPanel.activeTab === 'cited-by'}
-								<TabCitedBy />
-							{:else if $studyPanel.activeTab === 'en-bref'}
-								<TabEnBref />
-							{:else if $studyPanel.activeTab === 'audio'}
-								<TabAudio />
-							{:else if $studyPanel.activeTab === 'sources'}
-								<TabSources />
-							{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
-								<TabThemes />
-							{:else if $studyPanel.activeTab === 'concordance'}
-								<TabConcordance />
-							{:else if $studyPanel.activeTab === 'bible-verse'}
-								<TabBibleVerse />
-							{:else if $studyPanel.activeTab === 'compendium'}
-								<TabCompendium />
-							{:else if $studyPanel.activeTab === 'cdse-citers'}
-								<TabCdseCiters />
-							{:else if $studyPanel.activeTab === 'ia' && $studyPanel.context?.kind === 'paragraph'}
-								<TabIA paragraphNumber={$studyPanel.context.paragraph} />
-							{:else if $studyPanel.activeTab === 'trent-notes' && $studyPanel.context?.kind === 'trent-paragraph'}
-								<TabTrentNotes />
-							{:else if ($studyPanel.activeTab === 'denzinger-cross-refs' || $studyPanel.activeTab === 'denzinger-cited-by') && $studyPanel.context?.kind === 'denzinger-entry'}
-								<TabDenzingerRefs
-									n={$studyPanel.context.n}
-									mode={$studyPanel.activeTab === 'denzinger-cross-refs'
-										? 'cross-refs'
-										: 'cited-by'}
-								/>
-							{/if}
-						</div>
-					{/key}
-				</div>
-			{/if}
+			{@render panelBody()}
 		</PanelShell>
 	</div>
 {/if}
@@ -621,29 +549,5 @@
 		max-height: 60px;
 		padding: 6px 10px;
 	}
-	.sub-toggle-btn {
-		flex: 1 0 auto;
-		padding: 4px 10px;
-		border: 1px solid var(--color-border);
-		border-radius: 999px;
-		background: transparent;
-		color: var(--color-muted);
-		cursor: pointer;
-		transition:
-			background-color 120ms ease,
-			color 120ms ease,
-			border-color 120ms ease;
-	}
-	.sub-toggle-btn:hover {
-		color: var(--color-accent);
-		border-color: var(--color-accent);
-	}
-	.sub-toggle-active {
-		background: var(--color-accent);
-		color: #fff;
-		border-color: var(--color-accent);
-	}
-	.sub-toggle-active:hover {
-		color: #fff;
-	}
+	/* .pill-toggle / .pill-toggle.is-active live in src/app.css. */
 </style>

@@ -1052,11 +1052,15 @@ export function loadCpaSection(
 
 let _paragraphThemesCache: Record<string, ParagraphThemeRef[]> | null = null;
 
-export async function loadParagraphThemes(): Promise<Record<string, ParagraphThemeRef[]>> {
+export async function loadParagraphThemes(
+	fetcher: Fetch = fetch
+): Promise<Record<string, ParagraphThemeRef[]>> {
 	if (_paragraphThemesCache) return _paragraphThemesCache;
-	const res = await fetch('/data/cec/paragraph-themes.json');
-	_paragraphThemesCache = await res.json();
-	return _paragraphThemesCache!;
+	_paragraphThemesCache = await fetchJson<Record<string, ParagraphThemeRef[]>>(
+		'/data/cec/paragraph-themes.json',
+		fetcher
+	);
+	return _paragraphThemesCache;
 }
 
 // ─── IBP · Dieu loaders ─────────────────────────────────────────────────────

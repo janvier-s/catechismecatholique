@@ -13,7 +13,7 @@
 	} = $props();
 
 	const paragraphPath = $derived(`/cec/${paragraphNumber}`);
-	const citation = $derived(`Catéchisme de l'Église catholique, §${paragraphNumber}`);
+	const citation = $derived(`Catéchisme de l'Église catholique, paragraphe ${paragraphNumber}`);
 
 	let copyState = $state<'idle' | 'done'>('idle');
 	let shareOpen = $state(false);
@@ -29,12 +29,10 @@
 	});
 
 	function onAudio() {
-		const s = get(studyPanel);
-		openPanel({ kind: 'paragraph', paragraph: paragraphNumber }, 'audio');
 		// If the panel was already open on the same paragraph, this re-targets
 		// the active tab to 'audio'. Existing playback state in TabAudio is
 		// preserved via localStorage.
-		void s;
+		openPanel({ kind: 'paragraph', paragraph: paragraphNumber }, 'audio');
 	}
 
 	// Open/close driven by JS so a brief excursion through the empty corridor
@@ -91,7 +89,7 @@
 
 	async function onCopy() {
 		const body = extractText(paragraphHtml);
-		const out = `${body}\n\n— ${citation}`;
+		const out = `${body}\n\n${citation}`;
 		try {
 			await navigator.clipboard.writeText(out);
 			copyState = 'done';

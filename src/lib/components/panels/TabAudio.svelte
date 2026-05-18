@@ -29,6 +29,13 @@
 	let rate = $state(1);
 	let volume = $state(1);
 	let ready = $state(false);
+	// Set when a navigation should resume playback after the new src loads.
+	// Consumed in onLoaded, replacing the previous setTimeout race.
+	let pendingAutoPlay = false;
+	// Guards the persisted-state restore so it only runs once per component
+	// mount. Without this the effect re-fires on every paragraph swap and can
+	// clobber in-session rate/volume changes with stale persisted values.
+	let restoredOnce = false;
 
 	const currentParagraph = $derived(
 		$studyPanel.context?.kind === 'paragraph' ? $studyPanel.context.paragraph : null
@@ -116,7 +123,8 @@
 	});
 
 	$effect(() => {
-		if (!audio || !ready) return;
+		if (!audio || !ready || restoredOnce) return;
+		restoredOnce = true;
 		try {
 			const raw = localStorage.getItem(STORAGE_KEY);
 			if (!raw) return;
@@ -184,10 +192,9 @@
 		audio.currentTime = sec;
 	}
 	function goToParagraph(n: number): void {
-		const wasPlaying = !audio?.paused;
+		pendingAutoPlay = !audio?.paused;
 		const s = get(studyPanel);
 		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab ?? 'audio');
-		if (wasPlaying) setTimeout(() => audio?.play(), 60);
 	}
 
 	function fmtTime(sec: number): string {
@@ -203,8 +210,8 @@
 		navigator.mediaSession.metadata = new MediaMetadata({
 			title:
 				mode === 'en-bref'
-					? `En bref — ${enBrefChapterTitle || 'CCC'}`
-					: `CCC §${currentParagraph}`,
+					? `En bref · ${enBrefChapterTitle || 'CCC'}`
+					: `Paragraphe ${currentParagraph}`,
 			artist: 'Catéchisme de l’Église catholique',
 			album: chapterTitle || 'CCC'
 		});
@@ -224,6 +231,10 @@
 		if (!audio) return;
 		duration = audio.duration;
 		ready = true;
+		if (pendingAutoPlay) {
+			pendingAutoPlay = false;
+			audio.play();
+		}
 	}
 	function onTimeUpdate() {
 		if (!audio) return;
@@ -241,7 +252,7 @@
 		isPlaying = false;
 		persist();
 		// Auto-advance only when reading paragraphs in playlist mode.
-		// In en-bref mode there's only one combined file — nothing to advance to.
+		// En-bref mode plays one combined file, so there's nothing to advance to.
 		if (showPlaylistUI && nextInPlaylist !== null) {
 			goToParagraph(nextInPlaylist);
 		}
@@ -251,9 +262,29 @@
 		if (mode === m) return;
 		mode = m;
 		ready = false;
+		isPlaying = false;
 		currentTime = 0;
 		duration = 0;
 	}
+
+	$effect(() => {
+		if (!speedMenuOpen) return;
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') speedMenuOpen = false;
+		};
+		const onPointer = (e: MouseEvent) => {
+			const t = e.target as Element | null;
+			if (!t?.closest('.speed-pill') && !t?.closest('.speed-menu')) {
+				speedMenuOpen = false;
+			}
+		};
+		document.addEventListener('keydown', onKey);
+		document.addEventListener('mousedown', onPointer);
+		return () => {
+			document.removeEventListener('keydown', onKey);
+			document.removeEventListener('mousedown', onPointer);
+		};
+	});
 </script>
 
 <div class="font-ui text-sm">
@@ -263,19 +294,19 @@
 		<p class="text-muted italic">Pas d'audio disponible pour ce paragraphe.</p>
 	{:else}
 		{#if enBrefChapterSlug}
-			<div class="mb-3 inline-flex gap-1 text-xs">
+			<div class="mx-auto mb-3 flex w-fit gap-1 text-xs">
 				<button
 					type="button"
-					class="mode-tab"
-					class:active={mode === 'paragraph'}
+					class="pill-toggle"
+					class:is-active={mode === 'paragraph'}
 					onclick={() => setMode('paragraph')}
 				>
 					Paragraphe
 				</button>
 				<button
 					type="button"
-					class="mode-tab"
-					class:active={mode === 'en-bref'}
+					class="pill-toggle"
+					class:is-active={mode === 'en-bref'}
 					onclick={() => setMode('en-bref')}
 				>
 					En bref
@@ -425,16 +456,19 @@
 							class="icon-btn speed-pill"
 							onclick={() => (speedMenuOpen = !speedMenuOpen)}
 							aria-label="Vitesse de lecture"
+							aria-haspopup="menu"
+							aria-controls="audio-speed-menu"
 							aria-expanded={speedMenuOpen}
 							title="Vitesse"
 						>
 							{rate === 1 ? '1×' : `${rate}×`}
 						</button>
 						{#if speedMenuOpen}
-							<div class="speed-menu" role="menu">
+							<div id="audio-speed-menu" class="speed-menu" role="menu">
 								{#each SPEEDS as s (s)}
 									<button
 										type="button"
+										role="menuitem"
 										class="speed-opt"
 										class:active={Math.abs(rate - s) < 0.01}
 										onclick={() => setRate(s)}
@@ -498,36 +532,7 @@
 		background: color-mix(in srgb, var(--color-fg) 5%, transparent);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
 	}
-	/* Matches the study-panel sub-toggle pill so the two read as the same UI
-	   primitive: bordered, pill-shaped, solid accent when active. */
-	.mode-tab {
-		flex: 1 0 auto;
-		padding: 4px 10px;
-		border: 1px solid var(--color-border);
-		border-radius: 999px;
-		background: transparent;
-		color: var(--color-muted);
-		cursor: pointer;
-		font-family: var(--font-ui);
-		font-size: 11px;
-		font-weight: 500;
-		transition:
-			background-color 120ms ease,
-			color 120ms ease,
-			border-color 120ms ease;
-	}
-	.mode-tab:hover {
-		color: var(--color-accent);
-		border-color: var(--color-accent);
-	}
-	.mode-tab.active {
-		background: var(--color-accent);
-		color: #fff;
-		border-color: var(--color-accent);
-	}
-	.mode-tab.active:hover {
-		color: #fff;
-	}
+	/* .pill-toggle / .pill-toggle.is-active live in src/app.css. */
 	.play-btn {
 		display: inline-flex;
 		align-items: center;
@@ -665,12 +670,5 @@
 	.nav-icon:disabled {
 		opacity: 0.3;
 		cursor: not-allowed;
-	}
-	button.active {
-		background: var(--color-accent);
-		color: white;
-	}
-	button:not(.active):not(.play-btn):not(.icon-btn):not(.nav-btn):not(.track-row):hover {
-		background: color-mix(in srgb, var(--color-fg) 5%, transparent);
 	}
 </style>
