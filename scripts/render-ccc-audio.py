@@ -52,10 +52,29 @@ def main() -> int:
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     entries = _v1_target_entries(manifest)
 
-    if args.start_paragraph is not None:
-        entries = [e for e in entries if e.get("number") is None or e["number"] >= args.start_paragraph]
-    if args.end_paragraph is not None:
-        entries = [e for e in entries if e.get("number") is None or e["number"] <= args.end_paragraph]
+    def _in_range(e: dict) -> bool:
+        # Paragraph entries: use entry["number"].
+        # en_bref_combined: use entry["paragraph_range"] = [first, last].
+        if e["kind"] == "paragraph":
+            n = e["number"]
+        else:
+            rng = e.get("paragraph_range") or []
+            if not rng:
+                return True
+            n_lo, n_hi = rng[0], rng[-1]
+            if args.start_paragraph is not None and n_hi < args.start_paragraph:
+                return False
+            if args.end_paragraph is not None and n_lo > args.end_paragraph:
+                return False
+            return True
+        if args.start_paragraph is not None and n < args.start_paragraph:
+            return False
+        if args.end_paragraph is not None and n > args.end_paragraph:
+            return False
+        return True
+
+    if args.start_paragraph is not None or args.end_paragraph is not None:
+        entries = [e for e in entries if _in_range(e)]
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     jitter = rlib.JitterState(seed=args.seed)
