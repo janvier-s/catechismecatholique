@@ -299,7 +299,11 @@
 			<div
 				class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold flex items-center justify-between"
 			>
-				<span>{mode === 'en-bref' ? 'En bref' : `Paragraphe ${currentParagraph}`}</span>
+				<span
+					>{mode === 'en-bref'
+						? 'Écouter l’En bref'
+						: `Écouter le Paragraphe ${currentParagraph}`}</span
+				>
 				{#if showPlaylistUI}
 					<span class="text-fg/70 normal-case tracking-normal font-medium">
 						{playlistPosition + 1} sur {playlistItems.length}
@@ -494,24 +498,35 @@
 		background: color-mix(in srgb, var(--color-fg) 5%, transparent);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
 	}
+	/* Matches the study-panel sub-toggle pill so the two read as the same UI
+	   primitive: bordered, pill-shaped, solid accent when active. */
 	.mode-tab {
-		padding: 4px 12px;
+		flex: 1 0 auto;
+		padding: 4px 10px;
+		border: 1px solid var(--color-border);
 		border-radius: 999px;
-		color: var(--color-fg);
-		opacity: 0.65;
+		background: transparent;
+		color: var(--color-muted);
+		cursor: pointer;
+		font-family: var(--font-ui);
+		font-size: 11px;
 		font-weight: 500;
 		transition:
-			background-color 120ms,
-			opacity 120ms;
+			background-color 120ms ease,
+			color 120ms ease,
+			border-color 120ms ease;
 	}
 	.mode-tab:hover {
-		background: color-mix(in srgb, var(--color-fg) 6%, transparent);
-		opacity: 1;
+		color: var(--color-accent);
+		border-color: var(--color-accent);
 	}
 	.mode-tab.active {
-		background: color-mix(in srgb, var(--color-accent) 14%, transparent);
-		color: var(--color-accent);
-		opacity: 1;
+		background: var(--color-accent);
+		color: #fff;
+		border-color: var(--color-accent);
+	}
+	.mode-tab.active:hover {
+		color: #fff;
 	}
 	.play-btn {
 		display: inline-flex;

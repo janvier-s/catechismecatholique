@@ -90,14 +90,23 @@
 					class:tab-active={active === tab.id}
 					onclick={() => onSelect(tab.id)}
 				>
-					<span class="tab-label-wrap">
-						<span class="tab-label">{tab.label}</span>
-						{#if tab.hasSubTabs}
-							<span class="tab-subchev" aria-hidden="true">▾</span>
-						{/if}
-					</span>
+					<span class="tab-label">{tab.label}</span>
 					{#if tab.iconHtml}
 						<span class="tab-icon" aria-hidden="true">{@html tab.iconHtml}</span>
+					{/if}
+					{#if tab.hasSubTabs}
+						<svg
+							class="tab-subchev"
+							aria-hidden="true"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M8.25 15 12 18.75 15.75 15" />
+						</svg>
 					{/if}
 				</button>
 			{/each}
@@ -152,6 +161,7 @@
 	}
 
 	.tab {
+		position: relative;
 		flex: 1 0 auto;
 		padding: 8px 12px;
 		white-space: nowrap;
@@ -170,18 +180,15 @@
 	.tab:hover {
 		background: color-mix(in srgb, var(--color-accent) 10%, transparent);
 	}
-	.tab-label-wrap {
-		display: inline-flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2px;
-		line-height: 1;
-	}
 	.tab-subchev {
-		font-size: 9px;
-		line-height: 1;
-		opacity: 0.55;
-		margin-top: -1px;
+		position: absolute;
+		bottom: 1px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 18px;
+		height: 18px;
+		opacity: 0.7;
+		pointer-events: none;
 	}
 	.tab-icon {
 		display: inline-flex;

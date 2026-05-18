@@ -218,10 +218,10 @@
 		if (hasCdseCiters) ren.push({ id: 'cdse-citers', label: 'Doctrine sociale' });
 		if (ren.length > 0) groups.push({ id: 'g-renvois', label: 'Renvois', children: ren });
 
-		// Résumé group: condensed/summary content (En Bref + Compendium).
+		// Synthèse group: condensed/summary content (Compendium + En Bref).
 		const res: TabDef[] = [];
-		if (hasEnBrefG) res.push({ id: 'en-bref', label: 'En Bref' });
 		if (hasCompendium) res.push({ id: 'compendium', label: 'Compendium' });
+		if (hasEnBrefG) res.push({ id: 'en-bref', label: 'En Bref' });
 		if (res.length > 0) groups.push({ id: 'g-resume', label: 'Synthèse', children: res });
 
 		// Bible group: this paragraph's verse refs + concordance on related verses.

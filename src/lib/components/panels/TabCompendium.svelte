@@ -6,14 +6,22 @@
 		loadCompendiumQRanges
 	} from '$lib/data/loaders';
 	import type { CompendiumQuestion, CompendiumQRange } from '$lib/data/types';
-	import { pluralFr } from '$lib/utils/i18n';
 
 	type Hit = {
 		number: number;
 		partSlug: string;
 		question: string;
 		answer_html: string;
+		cccRange: string | null;
 	};
+
+	function formatRange(refs: number[]): string | null {
+		if (!refs.length) return null;
+		const sorted = [...refs].sort((a, b) => a - b);
+		const min = sorted[0]!;
+		const max = sorted[sorted.length - 1]!;
+		return min === max ? `${min}` : `${min}-${max}`;
+	}
 
 	let hits: Hit[] = $state([]);
 	let loaded = $state(false);
@@ -71,7 +79,8 @@
 						number: n,
 						partSlug: entry.partSlug,
 						question: entry.q.question,
-						answer_html: entry.q.answer_html
+						answer_html: entry.q.answer_html,
+						cccRange: formatRange(entry.q.ccc_refs ?? [])
 					};
 				})
 				.filter((h): h is Hit => h !== null);
@@ -87,11 +96,6 @@
 		Aucune question du Compendium ne cite ce paragraphe.
 	</p>
 {:else}
-	<p class="text-muted text-xs mb-3 font-ui">
-		{hits.length}
-		{pluralFr(hits.length, 'question')} du Compendium {hits.length === 1 ? 'cite' : 'citent'} ce paragraphe
-		:
-	</p>
 	<ul class="space-y-4">
 		{#each hits as h (h.number)}
 			<li>
@@ -105,6 +109,11 @@
 						>
 							Q. {h.number}
 						</span>
+						{#if h.cccRange}
+							<span class="font-ui text-[11px] tabular-nums text-muted">
+								· {h.cccRange}
+							</span>
+						{/if}
 					</div>
 					<p class="font-heading italic text-[15px] font-semibold text-fg leading-snug mb-1">
 						{h.question}

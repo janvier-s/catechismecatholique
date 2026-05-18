@@ -69,9 +69,12 @@ test.describe('Compendium', () => {
 		await page.goto('/cec/27');
 		// Click the §27 number to open the study panel.
 		await page.locator('button.number-col').first().click();
-		// Compendium is its own top-level group in the tab strip (single-child
-		// group; the group button is labelled "Compendium" directly).
-		const compendiumTab = page.getByRole('button', { name: 'Compendium', exact: true }).first();
+		// Compendium now lives as a sub-tab inside the Synthèse group (Synthèse
+		// holds Compendium + En Bref). Open the group, then click the sub-tab.
+		const syntheseTab = page.getByRole('button', { name: /^Synth/ }).first();
+		await expect(syntheseTab).toBeVisible();
+		await syntheseTab.click();
+		const compendiumTab = page.getByRole('tab', { name: 'Compendium', exact: true }).first();
 		await expect(compendiumTab).toBeVisible();
 		await compendiumTab.click();
 		// The tab body lists Q.2 with a link to the part anchor. Both mobile

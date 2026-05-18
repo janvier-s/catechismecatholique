@@ -86,12 +86,13 @@
 	.theme-name {
 		font-family: var(--font-ui);
 		font-size: 13px;
-		font-weight: 500;
+		font-weight: 400;
 		line-height: 1.25;
 	}
 	.theme-count {
 		font-family: var(--font-ui);
 		font-size: 11px;
+		font-weight: 500;
 		font-variant-numeric: tabular-nums;
 		color: var(--color-muted);
 		align-self: flex-end;
