@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { get } from 'svelte/store';
 	import { studyPanel, openPanel, closePanel } from '$lib/stores/studyPanel';
+	import { loadAudioIndex } from '$lib/data/audioIndex';
 	import ShareModal from './ShareModal.svelte';
 
 	let {
@@ -16,6 +17,25 @@
 
 	let copyState = $state<'idle' | 'done'>('idle');
 	let shareOpen = $state(false);
+	let hasAudio = $state(false);
+
+	$effect(() => {
+		const n = paragraphNumber;
+		hasAudio = false;
+		(async () => {
+			const idx = await loadAudioIndex();
+			if (idx && idx.paragraphs[String(n)]) hasAudio = true;
+		})();
+	});
+
+	function onAudio() {
+		const s = get(studyPanel);
+		openPanel({ kind: 'paragraph', paragraph: paragraphNumber }, 'audio');
+		// If the panel was already open on the same paragraph, this re-targets
+		// the active tab to 'audio'. Existing playback state in TabAudio is
+		// preserved via localStorage.
+		void s;
+	}
 
 	// Open/close driven by JS so a brief excursion through the empty corridor
 	// between digit and cards doesn't dismiss the menu. Mouseenter on the
@@ -161,8 +181,9 @@
 		<button
 			type="button"
 			class="action-btn"
-			disabled
-			aria-label="Lecture audio (bientôt disponible)"
+			onclick={onAudio}
+			disabled={!hasAudio}
+			aria-label={hasAudio ? 'Lecture audio du paragraphe' : 'Audio non disponible'}
 		>
 			<span class="action-label">Audio</span>
 			<span class="action-icon">
