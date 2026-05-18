@@ -18,9 +18,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import render_ccc_audio_lib as rlib
 
 
-def _v1_out_filename(entry: dict) -> str:
+def _v1_out_relpath(entry: dict) -> str:
+    """Filename relative to the V1 output dir. en_bref_combined files
+    live in an `en-bref/` subfolder; regular paragraphs sit at the top."""
     if entry["kind"] == "en_bref_combined":
-        return f"ccc_eb_{entry['chapter_slug']}.mp3"
+        return f"en-bref/ccc_eb_{entry['chapter_slug']}.mp3"
     return f"ccc_{entry['file_number']}.mp3"
 
 
@@ -82,8 +84,9 @@ def main() -> int:
     index: dict = {"paragraphs": {}, "en_bref_combined": {}}
 
     for entry in entries:
-        filename = _v1_out_filename(entry)
-        out_path = args.out_dir / filename
+        rel = _v1_out_relpath(entry)
+        out_path = args.out_dir / rel
+        filename = Path(rel).name
         label = f"§{entry.get('number')}" if entry["kind"] == "paragraph" else f"eb {entry['chapter_slug']}"
         if args.dry_run:
             print(f"DRY {label} -> {filename}")
@@ -117,7 +120,7 @@ def main() -> int:
             has_citation = any(s["voice"] == "fabrice" for s in entry["segments"])
             is_eb = entry.get("is_en_bref", False)
             index["paragraphs"][str(entry["number"])] = {
-                "file": filename,
+                "file": rel,
                 "duration_ms": duration_ms,
                 "has_citation": has_citation,
                 "is_en_bref": is_eb,
@@ -131,7 +134,7 @@ def main() -> int:
                 track=entry["seq"],
             )
             index["en_bref_combined"][entry["chapter_slug"]] = {
-                "file": filename,
+                "file": rel,
                 "duration_ms": duration_ms,
                 "paragraphs": entry["paragraph_range"],
             }
