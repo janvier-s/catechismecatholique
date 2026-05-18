@@ -81,7 +81,18 @@ def main() -> int:
     args.out_dir.mkdir(parents=True, exist_ok=True)
     jitter = rlib.JitterState(seed=args.seed)
 
-    index: dict = {"paragraphs": {}, "en_bref_combined": {}}
+    # Merge into existing index when present so partial runs preserve prior
+    # entries instead of wiping them out.
+    index_path = args.out_dir / "index.json"
+    if index_path.exists():
+        try:
+            index: dict = json.loads(index_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            index = {"paragraphs": {}, "en_bref_combined": {}}
+        index.setdefault("paragraphs", {})
+        index.setdefault("en_bref_combined", {})
+    else:
+        index = {"paragraphs": {}, "en_bref_combined": {}}
 
     for entry in entries:
         rel = _v1_out_relpath(entry)
@@ -141,7 +152,7 @@ def main() -> int:
         print(f"OK  {label} -> {filename}  ({duration_ms}ms)")
 
     if not args.dry_run:
-        (args.out_dir / "index.json").write_text(
+        index_path.write_text(
             json.dumps(index, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )

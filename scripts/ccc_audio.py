@@ -1002,6 +1002,12 @@ def _load_corpus_from_structure(
             })
             add_paragraphs(section.get("intro_paragraphs", []), sec_loc)
 
+            # Section-level en-brefs (e.g. §2075-2082 summarising the Dix
+            # Commandements section intro). These paragraphs only appear under
+            # `section.en_brefs[].paragraphs`, not in any chapter list.
+            for eb in section.get("en_brefs", []) or []:
+                add_paragraphs(eb.get("paragraphs", []), sec_loc)
+
             # Section-direct articles (e.g. §2759-§2865 Pater Noster commentary).
             for art in section.get("articles_direct", []):
                 add_paragraphs(art.get("paragraphs", []), sec_loc, article=art)
@@ -1072,7 +1078,12 @@ def build_manifest(
         entries.append(entry)
         audit_rows.extend(rows)
         if is_en_bref(paragraph):
-            slug = location.get("chapter_slug") or "_unknown"
+            # Prefer chapter_slug; fall back to section_slug for section-level
+            # en-brefs (e.g. Dix Commandements §2075-2082 and the Pater Noster
+            # articles_direct en-brefs that have no chapter slug).
+            slug = (location.get("chapter_slug")
+                    or location.get("section_slug")
+                    or "_unknown")
             en_bref_by_chapter.setdefault(slug, []).append(paragraph)
 
     # Emit one en_bref_combined entry per chapter that has en brefs.
