@@ -95,6 +95,8 @@
 		// must stay visible. At each level, hide every sibling that isn't on
 		// the spine. This works regardless of how deeply the article is nested
 		// (Svelte block markers, layout wrappers, etc.).
+		// Non-reactive — synchronous walk inside a click handler, never read by Svelte.
+		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const keep = new Set<Element>([targetEl]);
 		let node: Element | null = targetEl.parentElement;
 		while (node && node !== document.body) {

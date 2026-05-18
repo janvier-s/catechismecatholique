@@ -161,7 +161,8 @@
 	}
 	function toggle(): void {
 		if (!audio) return;
-		audio.paused ? play() : pause();
+		if (audio.paused) play();
+		else pause();
 	}
 	function skip(deltaSec: number): void {
 		if (!audio) return;
@@ -427,7 +428,7 @@
 						</button>
 						{#if speedMenuOpen}
 							<div class="speed-menu" role="menu">
-								{#each SPEEDS as s}
+								{#each SPEEDS as s (s)}
 									<button
 										type="button"
 										class="speed-opt"
