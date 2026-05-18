@@ -56,9 +56,13 @@ def build_edge_tts_argv(
     out_path: Path,
     extra_pitch_hz: int | None = None,
     extra_rate_pct: int | None = None,
+    suppress_base_volume: bool = False,
 ) -> list[str]:
     argv = ["edge-tts", "--voice", VOICES[voice]]
-    argv.extend(BASE_OPTS[voice])
+    opts = BASE_OPTS[voice]
+    if suppress_base_volume:
+        opts = [o for o in opts if not o.startswith("--volume=")]
+    argv.extend(opts)
     if extra_pitch_hz is not None:
         argv.append(f"--pitch={extra_pitch_hz:+d}Hz")
     if extra_rate_pct is not None:
@@ -126,13 +130,28 @@ def render_entry(
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
+    def _opts_for(seg: dict) -> tuple[int | None, int | None, bool]:
+        """Return (pitch, rate, suppress_base_volume) for a single segment.
+
+        Gérard's 'Paragraphe N.' announces get pitch/rate jitter and the
+        base -10% volume. Gérard's citation/en-bref announces drop the
+        base volume so they don't sound quieter than the surrounding
+        body/citation voices.
+        """
+        is_gerard = seg["voice"] == "gerard"
+        is_paragraph = is_gerard and seg["text"].startswith("Paragraphe ")
+        if is_paragraph:
+            p, r = jitter.next_announce()
+            return p, r, False
+        suppress = is_gerard and not is_paragraph
+        return None, None, suppress
+
     if len(segments) == 1:
         seg = segments[0]
-        pitch, rate = (None, None)
-        if seg["voice"] == "gerard" and seg["text"].startswith("Paragraphe "):
-            pitch, rate = jitter.next_announce()
+        pitch, rate, suppress_vol = _opts_for(seg)
         argv = build_edge_tts_argv(seg["voice"], seg["text"], out_path,
-                                    extra_pitch_hz=pitch, extra_rate_pct=rate)
+                                    extra_pitch_hz=pitch, extra_rate_pct=rate,
+                                    suppress_base_volume=suppress_vol)
         return subprocess.run(argv, capture_output=True, text=True).returncode == 0
 
     # Multi-segment: render each, glue with silence, concat.
@@ -141,11 +160,10 @@ def render_entry(
         files: list[Path] = []
         for i, seg in enumerate(segments):
             seg_file = tmpdir / f"seg_{i:02d}.mp3"
-            pitch, rate = (None, None)
-            if seg["voice"] == "gerard" and seg["text"].startswith("Paragraphe "):
-                pitch, rate = jitter.next_announce()
+            pitch, rate, suppress_vol = _opts_for(seg)
             argv = build_edge_tts_argv(seg["voice"], seg["text"], seg_file,
-                                        extra_pitch_hz=pitch, extra_rate_pct=rate)
+                                        extra_pitch_hz=pitch, extra_rate_pct=rate,
+                                        suppress_base_volume=suppress_vol)
             if subprocess.run(argv, capture_output=True, text=True).returncode != 0:
                 return False
             files.append(seg_file)
