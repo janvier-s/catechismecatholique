@@ -5,7 +5,11 @@
 // R2_OAUTH_TOKEN is set explicitly.
 //
 // Usage:
-//   node scripts/upload-audio-to-r2.mjs [--concurrency 20]
+//   node scripts/upload-audio-to-r2.mjs [--concurrency=20]
+//   node scripts/upload-audio-to-r2.mjs --keys=cec/ccc_0058.mp3,cec/ccc_1333.mp3
+//
+// --keys filters to a specific set of R2 keys (comma-separated). Useful for
+// hotfixes where only a handful of files changed.
 //
 // Re-runs are safe: PUT is idempotent and existing objects are overwritten
 // with the new body.
@@ -31,6 +35,11 @@ function getToken() {
 	return m[1];
 }
 
+const keysFilter = (() => {
+	const arg = process.argv.find((a) => a.startsWith('--keys='));
+	return arg ? new Set(arg.slice(7).split(',')) : null;
+})();
+
 function buildJobs() {
 	const out = [];
 	for (const name of fs.readdirSync(AUDIO_DIR)) {
@@ -54,16 +63,25 @@ function buildJobs() {
 			}
 		}
 	}
-	return out;
+	return keysFilter ? out.filter((j) => keysFilter.has(j.key)) : out;
 }
 
 async function uploadOne(token, { local, key, ctype }) {
-	const body = await fs.promises.readFile(local);
 	const url = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/r2/buckets/${BUCKET}/objects/${key}`;
+	// Use a ReadableStream so large MP3s don't require full in-memory buffering
+	// and so that Node's fetch receives a proper body it can stream.
+	const body = fs.createReadStream(local);
+	const size = fs.statSync(local).size;
 	const res = await fetch(url, {
 		method: 'PUT',
-		headers: { Authorization: `Bearer ${token}`, 'Content-Type': ctype },
-		body
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': ctype,
+			'Content-Length': String(size)
+		},
+		body,
+		// @ts-ignore — duplex required when body is a stream in Node 18+
+		duplex: 'half'
 	});
 	if (!res.ok) {
 		const text = await res.text();
