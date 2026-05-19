@@ -102,8 +102,16 @@
 		</span>
 	</p>
 	<p class="footer-copy">
-		Texte du Catéchisme © Libreria Editrice Vaticana &nbsp;·&nbsp; Bible © 2022 Fraternité de
-		Tibériade
+		Texte du Catéchisme © 1997
+		<a
+			href="https://www.vatican.va/roman_curia/institutions_connected/lev/index_it.htm"
+			target="_blank"
+			rel="noopener noreferrer">Libreria Editrice Vaticana</a
+		>
+		&nbsp;·&nbsp; Bible © 2022
+		<a href="https://www.tiberiade.be/" target="_blank" rel="noopener noreferrer"
+			>Fraternité de Tibériade</a
+		>
 	</p>
 </footer>
 
@@ -208,6 +216,16 @@
 		margin: 0;
 		text-align: center;
 		line-height: 1.6;
+	}
+
+	.footer-copy a {
+		color: inherit;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.footer-copy a:hover {
+		color: var(--color-text);
 	}
 
 	.footer-motto abbr {
