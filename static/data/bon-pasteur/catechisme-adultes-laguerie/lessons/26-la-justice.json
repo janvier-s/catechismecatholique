@@ -1,0 +1,528 @@
+{
+	"slug": "26-la-justice",
+	"n": 26,
+	"title": "La Justice",
+	"pdf": "Courskt26-1.pdf, Courskt27-26-2.pdf, Courskt28-26-3.pdf, Courskt29-26-4.pdf, Courskt30-26-5.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction générale",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La justice est le <strong>gros morceau</strong> de la morale · une seule leçon n'y suffit pas, l'abbé y consacre cinq cours · que nous rassemblons ici en une seule leçon, articulée en cinq parties. La prudence règle le juste milieu de nos actions · la force et la tempérance règlent nos passions · <strong>la justice règle nos relations avec tous les autres</strong>. Elle nous ordonne au prochain selon l'égalité du droit. On peut presque dire que la justice est la morale à elle seule · qui rend à chacun ce qu'il lui doit est dans le droit chemin.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La justice",
+			"html": "<p><strong>Vertu surnaturelle qui pousse notre volonté à rendre à chacun ce qui lui est dû.</strong> C'est la vertu morale principale · les autres sont à son service. L'Écriture appelle <em>juste</em> l'homme saint (saint Joseph est <em>vir iustus</em>, Mt 1, 19).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'objet de la justice : le droit",
+			"anchor": "objet-droit"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'objet de la vertu de justice est le <strong>droit</strong> · c'est-à-dire l'expression de l'ordre juste qui existe entre les personnes, ou entre les personnes et les biens. Le droit est une chose <em>objective</em>, indépendante de la rectitude des personnes à s'y conformer. Les fameux « droits de l'homme » sont une expression creuse et ambiguë · ils désignent quelque chose d'objectif (le droit) par son seul aspect subjectif (le sujet du droit), ce qui ouvre la porte à toutes les revendications.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La justice est dans la <strong>volonté</strong>. Si quelqu'un est empêché matériellement de rendre le droit, il est néanmoins juste s'il en a la volonté · à l'inverse, est injuste celui qui, même rendant le droit, le fait avec l'intention de ne pas le rendre.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Religion et piété : deux vertus annexes",
+			"anchor": "religion-piete"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La justice suppose l'<em>égalité</em> entre ce qui est dû et ce qu'on donne. Mais dans certains cas, cette égalité est impossible · on emploie alors d'autres noms pour désigner cette justice imparfaite ·</p><ul><li>la <strong>religion</strong> est cette justice vis-à-vis de Dieu · imparfaite, parce qu'aucun homme ne peut rendre à Dieu tout ce qu'il lui doit ·</li><li>la <strong>piété</strong> est cette justice vis-à-vis des parents et de l'autorité · imparfaite pour la même raison.</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "I. La Religion (premier commandement)",
+			"anchor": "religion"
+		},
+		{
+			"kind": "definition",
+			"term": "La religion",
+			"html": "<p><strong>Vertu annexe de la justice par laquelle nous rendons à Dieu le culte qui lui est dû.</strong> Ce n'est pas une vertu théologale mais morale · car son objet n'est pas Dieu lui-même, mais le <em>culte de Dieu</em>.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les quatre manifestations de la religion",
+			"anchor": "manifestations"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quatre actes manifestent la vertu de religion ·</p><ul><li>l'<strong>adoration</strong> (du grec <em>latreia</em>) ·</li><li>l'<strong>action de grâces</strong> (<em>eucharistia</em>) ·</li><li>la <strong>prière</strong> (impétration) ·</li><li>l'<strong>amende honorable</strong> (propitiation).</li></ul><p>L'acte qui les résume toutes au plus haut degré est le <strong>sacrifice</strong> · il reconnaît le souverain droit de propriété sur toutes choses que seul Dieu possède · ce qu'on appelle <em>le domaine</em> (de <em>dominus</em>, le Seigneur).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Latrie et dulie",
+			"html": "<p>Dans l'adoration, on distingue ·</p><ul><li>la <strong>latrie</strong> (du grec <em>adorer</em>) · culte qui n'est dû qu'à Dieu seul ·</li><li>la <strong>dulie</strong> (du grec <em>honorer</em>) · culte dû aux saints, aux anges, et même aux personnes et objets sacrés.</li></ul><p>La Très Sainte Vierge reçoit une <em>hyperdulie</em>, à mi-chemin · mais jamais la latrie, qui appartient à Dieu seul.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Péchés contre la religion par excès",
+			"anchor": "peches-exces"
+		},
+		{
+			"kind": "definition",
+			"term": "L'idolâtrie",
+			"html": "<p>Rendre un culte divin à des idoles (du grec <em>eidolon</em>, image). Trois sortes ·</p><ul><li><em>idolâtrie par ignorance</em> · celle des païens qui croient dieux ce qu'ils adorent ·</li><li><em>idolâtrie formelle</em> · adorer d'autres dieux tout en sachant qu'ils ne le sont pas (cas courant des juifs dans l'Ancien Testament, qui retombaient dans l'idolâtrie cananéenne) ·</li><li><em>idolâtrie simulée</em> · par crainte de persécution, simuler l'adoration à des faux dieux.</li></ul><p>Les deux dernières sont toujours des péchés mortels. La première peut n'être pas grave en elle-même, mais le refus du vrai Dieu qu'elle suppose est coupable · un païen ne peut ignorer Dieu (cf. Rm 1, 20).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La superstition",
+			"html": "<p>Du latin <em>super-stare</em>, qui se tient au-dessus. Culte dévoyé qui accorde des effets à une pratique qui n'en a aucun, ou qui cherche des effets que la religion ne permet pas. Trois formes principales · la <em>vaine observance</em>, la <em>divination</em>, et la <em>magie</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>1. La vaine observance.</strong> Attribuer à certains actes des effets que Dieu n'a pas promis · malheur de passer sous une échelle, vendredi 13, treize à table, chats noirs, salière renversée, talismans, amulettes. Ces pratiques comportent toujours des péchés au moins véniels · et sont aussi de graves injustices pour ceux qui en font commerce.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>2. La divination.</strong> Découvrir des choses cachées ou secrètes (futures ou particulières) par des pratiques apparemment disproportionnées. Soit ce sont de purs mensonges inefficaces · soit elles sont vraies, et il y a recours au démon (gravissime).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Note sur les futurs contingents",
+			"html": "<p>Seul Dieu peut connaître un futur qui dépend de la volonté d'un agent libre (le <em>futur contingent</em>). En ce sens strict, la divination est toujours un mensonge. Mais le démon, beaucoup plus habile que nous à déduire ce qui va arriver à partir des faits déjà réalisés, peut prévoir bien des choses (cf. la pythonisse d'Endor, 1 S 28, 7-21). La divination est donc soit supercherie pour de l'argent · soit, le plus souvent, péché mortel parce qu'on y invoque le démon.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Méthodes nombreuses · <em>chiromancie</em> (lignes de la main), <em>pyromancie</em> (mouvements des flammes), <em>hydromancie</em> (couleurs de l'eau), <em>nécromancie</em> et <em>spiritisme</em> (qui invoquent les morts), <em>cartomancie</em> (cartes), <em>oniromancie</em> (rêves).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>3. La magie.</strong> Obtenir des effets spectaculaires apparemment inexplicables, pour le commerce ou pour nuire.</p><ul><li><em>Magie blanche</em> (prestidigitation) · pratique qui ne fait appel qu'à la seule habileté humaine (tirer vingt colombes d'un chapeau) · moralement bonne.</li><li><em>Magie noire</em> (diabolique) · recours au démon pour produire des effets qui dépassent les forces naturelles (les mages égyptiens de Pharaon, Simon le magicien · Ac 8, 9-13). Toujours péché mortel.</li></ul>"
+		},
+		{
+			"kind": "definition",
+			"term": "Hypnotisme, sorts, somnambulisme",
+			"html": "<p><strong>L'hypnotisme</strong> est un phénomène naturel · la puissance d'un regard peut paralyser les centres moteurs (les félins l'utilisent pour capturer leur proie). Chez l'homme, il a la moralité de ce à quoi on le fait servir · prestidigitation, bon · braquer une banque en hypnotisant le caissier, mauvais.</p><p><strong>Jeter un sort</strong> relève de la magie noire le plus souvent. Mais Dieu ne permet pas que cela puisse atteindre une personne irresponsable qui n'a pas elle-même pratiqué la superstition.</p><p><strong>Le somnambulisme</strong> est lui aussi un phénomène naturel (les sens internes ne marchent pas, les externes oui) · normalement neutre.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Péchés contre la religion par défaut",
+			"anchor": "peches-defaut"
+		},
+		{
+			"kind": "definition",
+			"term": "Le sacrilège",
+			"html": "<p>Profanation d'une chose ou d'une personne sacrée. Une personne ou une chose sont <em>sacrées</em> quand, par un acte de culte (consécration, bénédiction avec usage d'huile sainte), elles ont été retirées de l'usage profane pour ne servir qu'au culte de Dieu · prêtres, évêques, religieuses, églises, calices, patènes, cloches, etc. Le sacrilège consiste à utiliser pour un usage profane cette chose consacrée, ou à la remettre à l'usage profane (frapper un prêtre, vendre publiquement un objet sacré). De soi, péché grave.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "L'impiété",
+			"html": "<p>Manque de révérence aux choses saintes. Même quand elle croit en Dieu, l'impiété vit comme s'il n'existait pas · c'est une <em>indifférence pratique</em>, comme l'incrédulité est une indifférence théorique. C'est le grand mal de notre temps.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "II. Le nom de Dieu (deuxième commandement)",
+			"anchor": "nom-de-dieu"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Tu ne prononceras pas le nom de Dieu qu'avec respect.</p>",
+			"attribution": "Deuxième commandement"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le deuxième commandement est la suite du premier · le culte dû à Dieu doit nécessairement inclure le respect de son nom et la fidélité aux promesses faites à Dieu. Quatre développements · le serment, la tentation de Dieu, le blasphème, le vœu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le serment",
+			"anchor": "serment"
+		},
+		{
+			"kind": "definition",
+			"term": "Le serment",
+			"html": "<p><strong>Invocation du nom de Dieu comme témoin de la vérité de ses paroles.</strong> Deux conditions · 1° invoquer le nom de Dieu comme témoin · 2° l'intention de s'obliger à la vérité.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Attention au mot <em>jurer</em></strong> · il a deux sens en français · soit faire un serment (peut être légitime), soit blasphémer (toujours mauvais).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Un serment est légitime à <strong>trois conditions</strong> ·</p><ul><li><em>selon la vérité</em> · la chose dont on prend Dieu à témoin doit être vraie, ou au moins vue comme telle · sinon c'est un <strong>parjure</strong>, toujours péché mortel (grave injure à Dieu) ·</li><li><em>selon la justice</em> · la chose affirmée doit être honnête · sinon c'est un serment <em>frivole</em>, qui peut être grave (s'engager par serment à se venger d'un ennemi) ·</li><li><em>selon la nécessité</em> · on ne peut prendre Dieu à témoin pour une futilité.</li></ul>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Eh bien moi, je vous dis de ne pas jurer du tout · ni par le Ciel, car c'est le trône de Dieu · ni par la Terre, car c'est l'escabeau de ses pieds · ni par Jérusalem, car c'est la Ville du grand Roi · ne jure pas non plus par ta tête, car tu ne peux en rendre un seul cheveu blanc ou noir.</p>",
+			"attribution": "Mt 5, 34-36"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cela n'interdit cependant pas le serment légitime · on peut (et on doit parfois) prêter serment pour occuper une charge, dans les procès, etc. Notre-Seigneur lui-même a répondu sous serment au grand prêtre (Mt 26, 63-64).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La tentation de Dieu",
+			"anchor": "tentation"
+		},
+		{
+			"kind": "definition",
+			"term": "Tenter Dieu",
+			"html": "<p><strong>Mettre Dieu à l'épreuve, en le provoquant à manifester un de ses attributs.</strong> Exemples · sa puissance (on se jette dans le vide en attendant qu'il nous sauve) · sa bonté (on pèche, en comptant sur le pardon).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Deux formes ·</p><ul><li><em>formelle (expresse)</em> · quand on doute de l'attribut divin qu'on veut vérifier ·</li><li><em>implicite</em> · quand on compte sans raison sur l'intervention de Dieu (un malade attend la guérison et refuse tout remède · un prédicateur annonce un miracle pour frapper son auditoire).</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La tentation implicite était très répandue au Moyen Âge dans les <em>jugements de Dieu</em>. Elle reposait sur une grande foi · n'en restait pas moins peccamineuse. La tentation formelle est plus grave · elle comporte un doute et fait preuve d'insolence vis-à-vis de Dieu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le blasphème",
+			"anchor": "blaspheme"
+		},
+		{
+			"kind": "definition",
+			"term": "Le blasphème",
+			"html": "<p><strong>Injure adressée à Dieu, à ses œuvres, à ses saints.</strong> <em>Toujours</em> péché mortel · il ne peut y avoir de petite injure envers Dieu, car l'injure se mesure à la dignité de la personne offensée. Et la dignité de Dieu est infinie.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les expressions courantes où l'on emploie le nom de Dieu (<em>pardi</em>) que l'on remplace par <em>bleu</em> (ventrebleu, morbleu, sacrebleu), ou où il est évoqué (<em>bon sang</em> = sang de Dieu, <em>sapristi</em> pour sacristie) sont des blasphèmes ou non, selon la coutume locale et l'intention. L'expression <em>N.. de D…</em> en France est toujours prononcée comme une insulte · de toute manière, un chrétien doit ôter de son langage toutes ces expressions.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "L'imprécation",
+			"html": "<p>Parole de haine ou de colère par laquelle on souhaite le mal du prochain. Envers Dieu (« maudire Dieu »), toujours affreux blasphème. Envers soi-même (« que je meure », « Dieu me damne ») ou envers le prochain (« qu'il crève »), elle dépend du mal souhaité, de l'intention, et de l'advertance. Peut être péché grave. Une malédiction peut, exceptionnellement, être légitime · Noé maudissant Cham (Gn 9, 25).</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le vœu",
+			"anchor": "voeu"
+		},
+		{
+			"kind": "definition",
+			"term": "Le vœu",
+			"html": "<p><strong>Promesse faite à Dieu, d'un bien possible et meilleur, pour rendre un culte à Dieu.</strong> Trois précisions ·</p><ul><li>le bien voué doit être <em>meilleur que son contraire</em> (célibat / mariage · jeûne / manger) · sinon il n'y a aucune matière à honorer Dieu ·</li><li>le vœu ne vaut quelque chose que parce qu'il rend un culte à Dieu · il lui donne non seulement l'acte mais la <em>puissance</em>. Saint Thomas dit que le célibat n'honore Dieu que s'il est consacré · c'est plus de donner à Dieu tout un arbre avec ses fruits possibles, que de lui en donner une seule récolte ·</li><li>le vœu n'est pas contraire à la liberté · la liberté est, selon Léon XIII, <em>la faculté de se mouvoir dans le bien</em> · s'obliger au bien, c'est fixer la liberté en lui et se rendre encore plus libre.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Tout vœu oblige gravement, par la vertu de religion · il vaut mieux ne pas vouer que de ne pas tenir. Le vœu ne cesse que par ·</p><ul><li>le temps passé (pour un vœu temporaire) ·</li><li>un changement substantiel des conditions (j'ai voué de jeûner, je tombe malade) ·</li><li>la disparition de la cause finale (j'ai promis 100 euros à un pauvre, il devient riche) ·</li><li>dispense (l'évêque dispense d'un vœu privé, le pape des vœux publics).</li></ul><p>D'où la plus grande prudence avant de faire un vœu · toujours en parler à un prêtre · sinon on peut se lier imprudemment et vivre en état de péché.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "III. Le corps (cinquième commandement)",
+			"anchor": "corps"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Principes",
+			"anchor": "principes-corps"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le corps de l'homme <strong>ne lui appartient pas</strong>. Tout droit de propriété suppose que le sujet et l'objet du droit soient absolument distincts. Or chez l'homme, âme et corps sont un seul et même être, dans l'unité substantielle qui fait l'homme (contre Descartes, qui affirme que l'âme est dans le corps comme un pilote en son navire). Il n'y a donc aucun droit de propriété pleine de l'âme sur le corps.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Propriété pleine et droit d'usage",
+			"html": "<p>Distinguons · <strong>propriété pleine</strong> · je possède la chose <em>et</em> son usage (ma voiture). <strong>Droit d'usage</strong> · je ne possède que l'usage (voiture louée). Nous avons sur notre corps l'équivalent d'un <em>droit d'usage</em> · Dieu seul a la propriété de l'âme et du corps. <em>« Au commencement, Dieu a créé l'homme, et il l'a laissé dans la main de son conseil »</em> (Si 15, 14).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Qui dit droit d'usage dit <em>moralité</em> · respect de la finalité de la fonction exercée. Manger est moral dans la mesure où l'on se nourrit pour reprendre des forces · si on dissocie l'acte de sa fin, on pèche.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le suicide",
+			"anchor": "suicide"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le suicide est une injure grave · envers Dieu d'abord (dont on détruit le bien) · envers nous-mêmes (à qui nous devons l'intégrité nécessaire au bon usage du corps) · envers la société (dont le bien principal est l'homme).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Suicide direct et indirect",
+			"html": "<p><strong>Direct</strong> · quand on se donne directement la mort. Cas le plus courant (environ 11 000 suicides par an en France). Toujours faute très grave · interdit la sépulture ecclésiastique (en l'absence de circonstances atténuantes).</p><p><strong>Indirect</strong> · quand on accomplit un acte (bon ou indifférent) duquel résulte la mort, sans qu'on tue directement. Permis pour une cause très grave (bien commun, salut des âmes). Exemples · Éléazar empalant l'éléphant du chef adverse qui s'écroule sur lui (1 M 6, 46-47) · sainte Apollonie se jetant d'un toit pour échapper à ses persécuteurs (par inspiration du Saint-Esprit) · un soldat accomplissant un acte de bravoure dont il sait qu'il mourra · soigner les lépreux et en mourir · un prêtre donnant les sacrements en plein combat.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le 5e commandement interdit aussi, selon les mêmes principes ·</p><ul><li>les <strong>mutilations</strong> (sauf un membre gangrené qu'il faut retrancher comme partie nuisible au tout) ·</li><li>les <strong>excès manifestes</strong> par rapport à sa santé · on est tenu gravement aux moyens <em>ordinaires</em> pour conserver la vie · mais non aux moyens extraordinaires (acharnement thérapeutique non obligatoire).</li></ul>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'homicide",
+			"anchor": "homicide"
+		},
+		{
+			"kind": "definition",
+			"term": "L'homicide",
+			"html": "<p><strong>Acte par lequel on donne la mort, de sa propre autorité, à un homme (même coupable).</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La <em>société</em>, elle, a le droit de faire mourir un coupable · un homme, vis-à-vis de la société, n'est qu'une <em>partie</em> par rapport au tout. Si cette partie devient nuisible (assassin, dealer, terroriste, violeur), le pouvoir politique peut et doit la retrancher par la peine de mort. La peine capitale a d'ailleurs d'autres conséquences · la conversion fréquente du criminel face à la mort (tandis qu'en prison il finit de s'avilir), et la dissuasion d'une foule d'autres crimes.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'homicide est donc le péché de celui qui tue de sa propre autorité, ou (si c'est la société) de tuer un innocent. C'est <strong>l'injustice la plus grande dans l'ordre naturel</strong>, puisque la vie est le bien suprême de cet ordre. C'est l'un des <em>quatre péchés qui crient vers le ciel</em> · 1° l'homicide, 2° l'oppression du peuple (tyrannie), 3° la rétention du salaire de l'ouvrier, 4° le péché des habitants de Sodome (cf. Gn 18, 20-21). Ces quatre péchés mettent la victime dans un état de totale impuissance.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le 5e commandement et les animaux",
+			"html": "<p>Le 5e commandement vise la <em>vie humaine</em>, non les animaux, contre lesquels on ne peut pas pécher · ils n'ont aucun droit, qui est l'objet de la justice. Dans la cruauté ou le sadisme envers les bêtes, on pèche contre soi-même · c'est de l'<em>intempérance</em>, non de l'injustice.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La légitime défense",
+			"anchor": "legitime-defense"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Hormis le cas de la peine de mort (toujours infligée par la société · il n'y a plus de justice privée depuis l'abrogation de la loi du talion par Notre-Seigneur), un homme peut en tuer un autre dans un seul cas · la <strong>légitime défense</strong> contre un injuste agresseur, pour assurer sa sauvegarde personnelle et non au-delà.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Elle est morale parce qu'<em>on n'est jamais tenu à la justice envers quelqu'un si on devait soi-même en subir une plus grande ou équivalente</em>. Trois conditions ·</p><ul><li>que l'agresseur soit <em>injuste</em> (voleur, impudique, assassin) ·</li><li>qu'il n'y ait <em>aucun autre moyen</em> de se défendre (urgence, solitude) ·</li><li>qu'elle <em>cesse dès que l'injuste agresseur n'est plus en état de nuire</em> · sinon ce serait justice privée.</li></ul><p>On peut défendre ainsi · sa vie, son intégrité physique, son honneur, et même ses biens (important).</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Duel et torture",
+			"html": "<p><strong>Le duel</strong> (très pratiqué au XVIIe siècle) est de toute manière injuste, et frappé d'excommunication par l'Église · pas de péril imminent (pas de légitime défense), et le sort du combat ne détermine en rien la justice des partis.</p><p><strong>La torture</strong> n'est morale que dans le cas où le patient est déjà certainement coupable, et pour lui faire avouer une chose future qui doit nuire à la société. Sinon, immorale · la société n'a pouvoir que sur les individus comme personnes, non sur les membres d'un individu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "IV. La propriété (septième et dixième commandements)",
+			"anchor": "propriete"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le droit de propriété",
+			"anchor": "droit-propriete"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le droit de propriété est bien fondé sur le droit naturel. De <em>première intention</em>, Dieu a créé toutes choses pour que l'homme en dispose · elles appartiennent à tous (ce qui permettra, dans des cas exceptionnels, de s'emparer du bien d'autrui · cf. infra). De <em>seconde intention</em>, le Créateur veut que chaque homme puisse jouir d'un droit personnel sur ses biens, pour qu'ils soient mieux gérés et profitent davantage à l'ensemble. C'est le <strong>droit de propriété</strong>, garanti par Dieu, sacré · le violer s'appelle le <em>vol</em>, interdit par le 7e commandement.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Res clamat domino · la chose crie vers son maître.</p>",
+			"attribution": "Adage du droit"
+		},
+		{
+			"kind": "definition",
+			"term": "Possession et propriété · 7e et 10e",
+			"html": "<p>Ne pas confondre <strong>possession</strong> (fait · cette chose est entre mes mains) et <strong>propriété</strong> (droit). Le <strong>10e commandement</strong> (« tu ne convoiteras pas le bien d'autrui ») interdit <em>en désir</em> ce que le 7e posait <em>en acte</em> · tant est grande la concupiscence en ce domaine (comme la 9e double le 6e).</p><p>Les ennemis de la propriété sont tous des révolutionnaires et des ennemis de Dieu. Proudhon · <em>« la propriété, c'est le vol »</em>. Socialisme, communisme, collectivisme · directement contraires au droit naturel.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les quatre moyens d'acquérir la propriété",
+			"anchor": "acquisition"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>1. L'invention.</strong> De droit naturel, une chose sans propriétaire est au premier occupant · un trésor appartient à celui qui le découvre (le droit civil en donne la moitié au propriétaire du fond). Les animaux sauvages sont à ceux qui les capturent s'ils sont en liberté · ceux d'un fond fermé, au propriétaire du fond. Les animaux domestiques sont à leur maître, sauf retour à l'état sauvage. Les règlements civils (droits de pêche et de chasse) sont légitimes vu la puissance des armes modernes · on se doit de les suivre en conscience · le braconnage est un péché.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>2. L'accession.</strong> Tout ce qui découle d'une chose légitimement possédée appartient au propriétaire de la chose · les fruits d'un arbre, la récolte d'un champ. <em>L'accessoire suit le principal.</em></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>3. La prescription.</strong> Quand une chose est en possession continue d'un non-propriétaire, de bonne foi, sans contestation ni titre évident de propriété, au bout d'un long temps elle appartient au possesseur (30 ans pour l'immobilier, 1 à 3 ans pour le mobilier).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>4. Le contrat.</strong> Principal moyen aujourd'hui · convention par laquelle plusieurs personnes s'obligent en justice à donner ou à faire quelque chose. Le contrat oblige gravement · y manquer est péché grave contre la justice. Ne pas confondre contrat et simple promesse verbale (intention de s'obliger, forme écrite pour les contrats importants). <em>Le testament</em> est une forme particulière de contrat · non avec le défunt (qui n'a plus de droit), mais avec la société.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le vol",
+			"anchor": "vol"
+		},
+		{
+			"kind": "definition",
+			"term": "Le vol",
+			"html": "<p><strong>Appréhension d'une chose possédée par autrui avec l'intention de la faire sienne.</strong> C'est cette intention d'acquérir un droit qui est la forme du vol. Emprunter n'est pas voler, tant qu'on a l'intention de rendre. Le vol est péché mortel selon la matière · on convient généralement que la matière est grave quand elle dépasse une journée de salaire de celui qui vole (norme indicative, qu'il faut adapter).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Après tout vol, on est tenu à <strong>restitution</strong> · de l'objet à son propriétaire · ou, si la chose a péri, de son montant · ou, si le propriétaire est introuvable, donner aux pauvres le même montant. On n'est <em>pas</em> tenu de restituer quand il s'agit d'un bien de l'État (justice distributive, non commutative comme entre particuliers). L'État, lui, est tenu à restituer envers les particuliers quand il vole · impôts abusifs (jusqu'à 60 % dans nos pays), spoliation. On n'est pas tenu en justice de ramasser un objet perdu · mais si on l'a fait, on doit tout faire pour retrouver son propriétaire.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Cas exceptionnels",
+			"anchor": "cas-exceptionnels"
+		},
+		{
+			"kind": "definition",
+			"term": "L'extrême nécessité",
+			"html": "<p>Si l'on ne peut jamais <em>voler</em>, on peut quelquefois s'emparer du bien d'autrui en cas d'<strong>extrême nécessité</strong>. Les choses ainsi prises deviennent la propriété de celui qui les prend · mais il ne peut en faire usage que pour sortir de l'extrême nécessité. On est en extrême nécessité quand on manque des biens nécessaires à sa survie ou à sa santé. Application directe du principe que les biens, de première intention, appartiennent à tous.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La compensation occulte",
+			"html": "<p>Quand un homme a envers nous une <em>dette certaine</em> qu'il refuse de payer, qu'aucun moyen légal ne permet de recouvrer, et qu'il n'y a aucun risque pour un tiers · on peut se compenser <em>en cachette</em> sur l'un de ses biens équivalents (récupération). Cas exceptionnel et limite · il cause un préjudice au bien commun (incertitude sur la propriété). À ne pratiquer qu'avec scrupule, après conseil.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La damnification et le prêt à intérêt",
+			"anchor": "autres-points"
+		},
+		{
+			"kind": "definition",
+			"term": "L'injustice par damnification",
+			"html": "<p><strong>Dommage qu'on fait subir au prochain sans profit personnel</strong> (à la différence du vol). On détruit sa voiture, on casse sa vitrine. Péché grave aux mêmes conditions que le vol. On est tenu à restitution si l'on a été <em>vraiment</em> (manqué à la justice), <em>efficacement</em> (suivi d'effet), et <em>formellement</em> (subjectivement coupable) injuste. C'est le cas le plus courant · mais s'il manque un de ces trois éléments, on n'est pas obligé de restituer.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le prêt à intérêt",
+			"html": "<p>En soi, le prêt à intérêt est <em>immoral</em> · l'argent <strong>ne fait pas de petits</strong>, et toute l'Écriture le condamne comme <em>usure</em>. Mais compte tenu des circonstances présentes, où l'argent perd lui-même sa valeur (inflation, dévaluation), on peut le pratiquer <em>dans cette mesure</em> · l'intérêt compense la perte, il n'est plus un gain spéculatif sur le temps. Au-delà, péché d'usure.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "V. Les paroles (huitième commandement)",
+			"anchor": "paroles"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le 5e commandement interdit de porter atteinte à la vie du prochain · le 7e à ses biens · le <strong>8e à son honneur</strong>. Il est basé sur la condamnation du mensonge, mais dépasse largement cette interdiction.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le mensonge",
+			"anchor": "mensonge"
+		},
+		{
+			"kind": "definition",
+			"term": "Le mensonge",
+			"html": "<p><strong>Expression (le plus souvent une parole) contraire à ce que pense son auteur, dans l'intention de tromper.</strong> <em>Locutio contra mentem</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La chose <em>dite</em> peut être vraie · ce qui importe, c'est qu'on ne la pense pas. On peut donc mentir en disant quelque chose de vrai, et ne pas mentir en disant quelque chose de faux. Si je pense que Napoléon a gouverné l'Empire romain, je ne mens pas en le disant (je suis ignorant). De même, je mens en disant qu'il est mort à Sainte-Hélène si je pense le contraire.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'<em>intention de tromper</em> est le formel du mensonge · c'est en cela qu'il est mauvais et transitif. D'où il suit que les plaisanteries, les compliments hyperboliques, les politesses exagérées ne sont <strong>pas</strong> des mensonges, dans la mesure où objectivement elles ne doivent pas tromper une intelligence moyenne.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Trois sortes de mensonges",
+			"html": "<ul><li><strong>Joyeux</strong> · pour plaisanter ou rire.</li><li><strong>Officieux</strong> · pour sortir d'embarras (pour soi ou pour un autre).</li><li><strong>Pernicieux</strong> · pour nuire au prochain.</li></ul><p>Le mensonge est <em>toujours</em> un péché · le langage est fait de soi pour exprimer ce qu'on pense. Mais s'il se limite à cela, il est péché véniel (joyeux et officieux). Le mensonge pernicieux prend la gravité de l'injustice commise.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La restriction mentale",
+			"anchor": "restriction-mentale"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Devant l'indiscrétion du prochain et les injustices qui pourraient suivre la vérité, on ne peut <em>jamais</em> mentir · c'est intrinsèquement mauvais. On gardera donc le silence · mais ce n'est pas toujours possible · parfois ne rien dire est pire que parler. Exemple · on questionne le chef du personnel d'une entreprise · <em>« M. X a été mis à la porte pour vol, n'est-ce pas ? »</em> · ne rien dire, c'est acquiescer et diffamer.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La restriction mentale",
+			"html": "<p>On admet qu'on peut <strong>retenir une partie du discours</strong> qui donne un sens double à un propos, et permet, sans mentir, de répondre sans trahir. Exemple · <em>« M. X a démissionné »</em> · on ne dit pas <em>« il a été forcé de »</em>. Les secrétaires peuvent répondre que leur patron, demandé au téléphone, <em>« n'est pas là »</em> · sous-entendu, <em>« pour vous »</em>. L'usage de la restriction suppose une <em>cause proportionnée</em>, car elle nuit à la société. À manier avec scrupule.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le secret",
+			"anchor": "secret"
+		},
+		{
+			"kind": "definition",
+			"term": "Le secret",
+			"html": "<p><strong>Vérité connue d'un cercle restreint, que l'on n'a aucun droit de communiquer.</strong> Quatre sortes ·</p><ul><li><em>sacramentel</em> · ce qu'on dit en confession à un prêtre ·</li><li><em>professionnel</em> · avocats, médecins, prêtres, etc. ·</li><li><em>naturel</em> · je sais où M. X cache son argent liquide ·</li><li><em>promis</em> · on a fait la promesse de ne rien dire (le secret commis ne repose que sur la confiance).</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le secret est un dépôt sacré, qui oblige différemment selon sa nature ·</p><ul><li>le <strong>secret confessionnel</strong> n'a aucun motif de divulgation · le trahir entraîne l'excommunication ·</li><li>le <strong>secret professionnel</strong> oblige gravement · il ne peut être divulgué qu'en raison du bien commun (à ses seuls responsables), et pour un très grave devoir de charité (vous savez qu'on va incendier la maison de votre voisin). Sinon, péché mortel ·</li><li>les <em>autres</em> obligent plus ou moins gravement selon leur nature · le dommage causé doit être réparé.</li></ul><p>Un secret cesse de l'être quand il est divulgué par ailleurs · mais la prudence exige qu'il soit vraiment sur la place publique pour ne plus le considérer comme tel.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La diffamation",
+			"anchor": "diffamation"
+		},
+		{
+			"kind": "definition",
+			"term": "Diffamer",
+			"html": "<p><strong>Nuire au prochain dans sa réputation.</strong> Deux formes ·</p><ul><li><em>médisance</em> · ce qu'on dit est vrai ·</li><li><em>calomnie</em> · ce qu'on dit est faux.</li></ul><p>La calomnie ajoute l'odieux du mensonge · mais <strong>les deux péchés sont de même nature</strong>. Pourquoi ? Parce qu'un homme a droit à une réputation, <em>même fausse</em>. La réputation n'est pas un bien strictement personnel, c'est un bien social · un père de famille en a besoin pour sa femme, ses enfants, son patron. Un homme indigne qui ne mérite pas sa réputation y a néanmoins droit.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Calomnie et médisance sont péchés graves dès que la matière porte sur un bien important de l'honneur (accuser quelqu'un de paresse est moins grave que l'accuser de vol). Gravité aussi selon la dignité de l'offensé, la personne du diffamateur, et les circonstances.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Réparer la médisance",
+			"html": "<p>On doit réparer la médisance · et c'est <strong>beaucoup plus difficile</strong> que la calomnie · car la calomnie se rétracte (« j'ai menti »), tandis que la médisance ne se rétracte pas (ce qu'on a dit est vrai). Souvent on ne peut pas, et l'on garde sur la conscience ce mal qu'on a fait.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le jugement téméraire",
+			"html": "<p><strong>Croire le mal sur quelqu'un pour des raisons futiles ou légères.</strong> Peut aussi être péché mortel. L'autorité, chargée de juger, ne commet pas cette faute · au contraire, son devoir est de la prévenir. On n'est pas tenu de réparer si la faute est restée purement interne.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Conclusion sur les paroles",
+			"anchor": "conclusion-paroles"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On peut faire énormément de péchés avec la parole, facilement, rapidement · d'où la sévérité de l'Écriture qui affirme qu'<em>il faut tourner sept fois sa langue dans sa bouche avant de parler</em>. Saint Jacques compare la langue au gouvernail d'un navire · petite chose, qui fait dévier facilement le bateau entier (Jc 3, 4-5).</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Ne jugez pas, et vous ne serez pas jugés · ne condamnez pas, et vous ne serez pas condamnés.</p>",
+			"attribution": "Lc 6, 37"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion générale",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Telle est la justice · rendre à chacun ce qui lui est dû. À Dieu d'abord, par la <em>religion</em> · son culte, le respect de son nom, la fidélité des vœux. Au prochain ensuite, dans tous les domaines · sa vie et son corps (5e commandement), ses biens (7e et 10e), son honneur (8e). Les trois autres commandements du Décalogue (3e, 4e, 6e, 9e) seront traités sous la <em>tempérance</em> et la <em>force</em>, qui règlent les passions dont dépendent ces fautes.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quelqu'un qui rend en toute chose à chacun ce qui lui est dû est dans le droit chemin · c'est ce que l'Écriture appelle un <em>juste</em>, synonyme de saint. Les deux dernières leçons seront consacrées à la <strong>tempérance</strong> et à la <strong>force</strong>, qui rendent cette justice possible en réglant les passions du concupiscible et de l'irascible.</p>"
+		}
+	]
+}

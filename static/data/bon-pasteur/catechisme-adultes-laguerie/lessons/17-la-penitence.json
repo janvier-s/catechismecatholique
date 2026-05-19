@@ -1,0 +1,416 @@
+{
+	"slug": "17-la-penitence",
+	"n": 17,
+	"title": "La Pénitence",
+	"pdf": "Courskt17.pdf",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction",
+			"anchor": "introduction"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Après le baptême et la confirmation, voici le troisième sacrement dans l'ordre : la <strong>pénitence</strong>. Il y a en lui deux volets · la <em>vertu</em> de pénitence (qui appartient à la substance même du sacrement) et le <em>sacrement</em> institué par Jésus-Christ pour pardonner les péchés. C'est sous l'aspect du sacrement que nous l'étudierons.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le sacrement de pénitence",
+			"html": "<p>Sacrement institué par Jésus-Christ pour <strong>effacer les péchés commis après le baptême</strong>. De soi pour les péchés <em>graves</em>, quoiqu'on puisse se confesser pour son avancement et sa sanctification. Le baptême effaçait tout, mais il ne se réitère pas · il fallait donc un autre sacrement pour les fautes ultérieures.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les péchés véniels peuvent être remis de bien d'autres manières · un acte de charité, les sacramentaux, la messe entendue. Mais pour les péchés graves qui font perdre la grâce de Dieu, ce sacrement seul est requis. Le Concile de Trente l'appelle <em>« l'unique planche de salut après le naufrage »</em>. Expression virile et juste · le naufrage, c'est le péché grave qui nous fait perdre la grâce et tout son cortège de vertus et de dons. La planche qui nous ramène à bord, c'est le sacrement de pénitence.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le pouvoir de pardonner les péchés",
+			"anchor": "pouvoir-pardonner"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Seul Dieu peut pardonner",
+			"anchor": "seul-dieu-pardonne"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Soupesez-le · pardonner un péché ne peut être que le fait de celui qu'il offense. Si quelqu'un m'a insulté, il n'y a que moi qui puisse lui pardonner · il serait même assez violent qu'un tiers se mêlât de pardonner l'offense faite à un autre. Ce qui vaut entre hommes vaut a fortiori pour Dieu. <strong>Il n'y a que Dieu qui pardonne les péchés</strong>, puisqu'ils sont des offenses qui lui sont faites.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Jésus-Christ pardonne",
+			"anchor": "jesus-pardonne"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Or l'une des marques les plus extraordinaires de l'Évangile, c'est que <em>Jésus-Christ pardonne les péchés</em>. Il le fait avant même de faire un miracle · au paralytique qu'on descend par le toit dans la maison comble (Mc 2), il dit d'abord <em>« Tes péchés sont pardonnés »</em>. Scandale dans l'assistance · « Quel est celui-ci qui pardonne les péchés ? » Et le Seigneur d'enchaîner · <em>« Afin que vous sachiez que le Fils de l'homme a, sur la terre, le pouvoir de remettre les péchés · lève-toi, prends ton grabat et marche. »</em></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pareillement à Marie-Madeleine, venue pleurer sur ses pieds, mouiller ses pieds de larmes, les essuyer de ses cheveux, les baiser, les parfumer · Jésus se retourne et lui dit <em>« Tes péchés te sont pardonnés »</em> (Lc 7). Une fois compris qu'il est l'unique personne du Fils de Dieu en qui subsistent nature divine et nature humaine, ce pouvoir cesse d'étonner · il le tient de sa propre autorité, étant Dieu.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le pouvoir transmis aux apôtres",
+			"anchor": "pouvoir-transmis"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le plus extraordinaire, c'est qu'il a <strong>transmis ce pouvoir</strong>. Quand ? Au soir même de sa Résurrection · moment solennel. Il rentre dans la pièce où sont les apôtres, <em>souffle sur eux</em> et leur dit ·</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Recevez l'Esprit-Saint. Ceux à qui vous remettrez les péchés, ils leur seront remis ; ceux à qui vous les retiendrez, ils leur seront retenus.</p>",
+			"attribution": "Jean 20, 22-23"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Parole capitale, chaque mot pèse. D'abord · les apôtres, les évêques, les prêtres tiendront désormais ce pouvoir qui n'appartenait qu'au Christ. Ensuite · c'est <em>par le don de l'Esprit-Saint</em> qu'ils l'exerceront · le prêtre est un réservoir de l'Esprit, et c'est en redonnant l'Esprit-Saint au pécheur qu'il rend la grâce et que les péchés sont remis. Enfin · le pouvoir est de <em>remettre ou retenir</em> · ce qui suppose un <strong>jugement</strong>.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Tribunal de la miséricorde",
+			"html": "<p>Le sacrement est institué comme un <em>tribunal</em>. Le prêtre est juge · il lie ou délie, il absout ou il retient. Mais c'est un tribunal d'une espèce unique · son but est, non pas de punir, mais d'<strong>acquitter</strong> les contrevenants. C'est le génie de la bonté de Dieu, le tribunal de la miséricorde · 999 fois sur mille, le prêtre absout · le sacrement est fait pour cela.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le signe sensible",
+			"anchor": "signe-sensible"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La pénitence est un sacrement <strong>très spécial</strong> par son signe sensible · contrairement aux autres, le sujet lui-même y apporte la matière. Il faut le comprendre.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Matière éloignée : les péchés eux-mêmes",
+			"anchor": "matiere-eloignee"
+		},
+		{
+			"kind": "definition",
+			"term": "Matière éloignée",
+			"html": "<p>Les <strong>péchés</strong> eux-mêmes. À la différence des autres sacrements, où la matière se <em>pose</em> pour produire un effet (l'eau du baptême, le chrême de la confirmation), ici la matière se <em>retire</em>. On apporte les péchés pour qu'ils soient enlevés.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Matière prochaine : les actes du pénitent",
+			"anchor": "matiere-prochaine"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comment le pénitent apporte-t-il ses péchés ? Par ses propres actes. C'est la matière prochaine. <strong>Les dispositions du sujet appartiennent ici au signe sensible</strong> · sans elles, le sacrement est invalide de plein droit. Pas de matière, pas de sacrement. C'est dans cette matière prochaine que se loge la <em>vertu de pénitence</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Trois actes du pénitent constituent cette matière prochaine ·</p><ol><li>la <strong>contrition</strong> · le regret des fautes ;</li><li>la <strong>confession</strong> · l'aveu des péchés au prêtre ;</li><li>la <strong>réparation</strong> (ou satisfaction) · la pénitence acceptée.</li></ol>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "1. La contrition",
+			"anchor": "contrition"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Premier acte · regretter ses fautes. C'est la condition minimale · <strong>il n'y aura jamais aucune rémission pour celui qui ne regrette pas</strong>. Si vous trouvez vos péchés bien, vous n'avez nulle raison de les confesser ni d'en être pardonné · tout s'effondre. Aujourd'hui, on fait des défilés où l'on est fier de ses péchés · ces gens-là n'ont aucun sens à se confesser, puisque pour eux le péché n'est pas un péché.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dans le regret est nécessairement contenu le <em>ferme propos</em> · la décision de ne plus recommencer. Pas la certitude qu'on ne recommencera plus · la nature humaine est faible · mais la volonté présente de l'éviter. Sinon, c'est qu'on ne tient pas vraiment l'acte pour mauvais.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Deux sortes de contrition, à bien distinguer ·</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Contrition parfaite",
+			"html": "<p>Regret de ses fautes <strong>par amour de Dieu</strong> que l'on a offensé. Disposition merveilleuse · « j'aime Dieu, je l'ai offensé, je le regrette ». C'est de l'or en lingots. Cette disposition, à elle seule, <em>pardonne les péchés</em>, car celui qui aime Dieu par-dessus tout retrouve par ce fait même la grâce sanctifiante. Rappelez-vous · c'est le retour de la grâce qui pardonne les péchés, et non l'inverse.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Contrition imparfaite (attrition)",
+			"html": "<p>Regret des péchés <strong>par peur des peines</strong> qu'ils méritent ou <strong>honte de leur laideur</strong>. Il y a un commencement d'amour du bien (Dieu est ce bien, au moins comme norme et fin), mais insuffisant à rendre la charité. Cette disposition à elle seule ne pardonne pas · mais <em>avec l'absolution</em>, elle suffit. Voilà le petit miracle du sacrement.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Attritum fit contritum. Celui qui est attrit devient contrit.</p>",
+			"attribution": "Concile de Trente"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Autrement dit · celui qui entre au confessionnal par simple peur ou par simple honte en ressort avec l'<em>amour de Dieu</em>. Voilà ce que fait ce sacrement · il rend la charité à celui qui ne l'avait pas. Aucun sacerdoce n'a sans doute de pouvoir plus extraordinaire.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Pourquoi se confesser quand on a la contrition parfaite ?",
+			"anchor": "pourquoi-se-confesser"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>On objectera · si la contrition parfaite pardonne déjà les péchés, pourquoi aller à confesse ? Deux raisons.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Première raison.</strong> Vous n'avez pas la <em>certitude absolue</em> que votre contrition est parfaite. La contrition parfaite n'est pas rare quand on aime Dieu habituellement · mais on ne sait pas vraiment de quel poids ce regret pèse · ce n'est souvent que velléités. <em>« Nul ne sait s'il est digne d'amour ou de haine »</em> (Qo 9, 1). Pour assurer certainement la grâce, il faut se confesser.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Seconde raison.</strong> Il est normal que dans l'Église, société visible, la rémission du péché comporte une <em>démarche externe</em>. Autrefois, la pénitence publique faisait avouer le péché grave devant l'évêque et la communauté, et chassait pour un temps de l'Église · ce caractère public a été adouci, mais il reste · le péché grave demande un retour ecclésial.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "2. La confession",
+			"anchor": "confession"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La confession est de <strong>droit divin</strong> · elle appartient à la matière du sacrement (contre les modernistes qui voudraient s'en passer). Pas de matière soumise au juge, pas de sentence · le prêtre doit connaître la cause qu'il acquitte. La <em>première qualité d'un juge</em>, c'est la juridiction · la <em>seconde</em>, c'est la conscience professionnelle qui veut connaître ce qu'on lui soumet.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>D'où l'<em>invalidité</em> des absolutions collectives pour les péchés graves · le juge n'est pas saisi de la cause. On voit d'ailleurs son inconsistance · ceux qui les pratiquent recommandent ensuite à leurs pénitents d'aller se confesser personnellement · à quoi bon l'absolution préalable, alors ?</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le Concile de Trente fixe avec précision ce qu'on est tenu de dire, sous peine d'invalidité ·</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Les péchés mortels",
+			"html": "<p>Tous les péchés mortels commis <em>depuis la précédente bonne confession</em>, c'est-à-dire non encore pardonnés par les clés. On peut faire davantage par dévotion · mais cela seul est obligatoire.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le nombre",
+			"html": "<p>Tromper sa femme une fois est grave · la tromper continuellement, infiniment plus. Voler trois francs six sous dans la caisse, ou la dévaliser depuis des années, est de deux poids. Il faut donc dire <em>grosso modo</em> combien de fois.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Les circonstances qui changent l'espèce",
+			"html": "<p>Non pas <em>toutes</em> les circonstances aggravantes · seulement celles qui modifient le péché lui-même. Voler dans une église ajoute le <em>sacrilège</em> · frapper un évêque, le sacrilège ; voler un calice consacré, la profanation. Forniquer avec une célibataire est péché d'impureté · avec une femme mariée, c'est l'<em>adultère</em>, qui est une autre espèce · une grave injustice à l'égard du conjoint. Si vous êtes vous-même marié, c'est aussi un adultère de votre côté · peut-être deux adultères et une fornication s'ajoutent en une même faute.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les péchés <em>oubliés</em> ne rendent pas le sacrement invalide. Dieu demande la sincérité, pas une liste absolument complète. Vous les confesserez s'ils vous reviennent · mais ils ont déjà été pardonnés avec les autres par la grâce du sacrement. Aucune obligation de provoquer une nouvelle confession pour eux seuls.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "3. La réparation (ou satisfaction)",
+			"anchor": "reparation"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Celui qui regrette vraiment ses fautes est nécessairement désireux de les <em>réparer</em>, pour autant qu'il dépend de lui. C'est le prêtre qui impose cette réparation en donnant une « pénitence ». Sous peine d'invalidité, il faut au moins être <strong>décidé à la faire</strong>. Si vous l'oubliez ensuite, c'est un autre problème · cela ne casse pas le sacrement déjà reçu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Certains péchés comportent d'eux-mêmes une <em>pénitence obligée</em> · rendre ce qu'on a volé (ou un équivalent · le jeune homme qui a volé une moto, la dame qui a empoché un diamant en vitrine doivent restituer ou rendre la valeur · sinon le sacrement ne tient pas) · abandonner un complice habituel · réparer le tort fait à la réputation d'autrui · honorer Dieu spécialement si l'on a blasphémé.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>De façon générale, l'<strong>occasion prochaine</strong> du péché est à traiter comme le péché lui-même. Des fiancés décidés à attendre le mariage mais qui logent quotidiennement dans la même chambre · cela n'est pas possible · ou alors, s'ils résistent, on peut se demander s'ils sont faits pour le mariage. Un ordinateur qui fait sans cesse tomber, on s'en débarrasse ou on prend des mesures radicales. Pour les occasions <em>éloignées</em>, saint Paul disait qu'il faudrait <em>sortir du monde</em> · on les supporte. Pour les prochaines, on tranche tout de suite.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le prêtre peut donner une pénitence excessive · vous pouvez demander à la modifier. Jeûner tous les jours du carême à un maçon qui dépense six mille calories, lire toute la Bible · ce sont des pénitences extravagantes. On peut négocier · changer de confesseur. Mais il faut accepter la réparation <em>in voto</em>, dans l'intention.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La forme : l'absolution",
+			"anchor": "forme-absolution"
+		},
+		{
+			"kind": "definition",
+			"term": "Forme du sacrement",
+			"html": "<p>L'<strong>absolution</strong> · sentence du prêtre qui pardonne les péchés au nom du Christ. <em>« Je t'absous de tes péchés au nom du Père et du Fils et du Saint-Esprit. »</em> On répond <em>Amen</em> · ce qui ne se fait pas au baptême. C'est Dieu qui parle par la bouche du prêtre, prolongement du bras de la miséricorde divine.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Détails du rite · le prêtre tient la <strong>paume de la main</strong> tournée vers le pénitent · vestige de l'antique imposition des mains qui accompagnait la réintégration dans l'Église. Toute absolution suppose la <strong>présence physique</strong> du pénitent · les absolutions par téléphone, fax, internet sont très certainement invalides (sauf peut-être danger de mort et certitude morale sur l'identité du pénitent). Quelqu'un qui sort du confessionnal avant l'absolution · le prêtre peut la lui donner à quelques mètres, puisqu'il vient de quitter sa présence immédiate.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les effets de la pénitence",
+			"anchor": "effets"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Tout péché a <strong>trois conséquences redoutables</strong>, qu'il faut bien distinguer ·</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La faute (culpa)",
+			"html": "<p>La <em>responsabilité</em> encourue qui mérite la réprobation de Dieu. C'est le christianisme qui a rendu cette responsabilité personnelle aux hommes. Devant Dieu, pas de dissimulation possible · on est ce qu'on est. C'est la chose la plus terrible du péché · l'œil de Caïn dans la tombe qui regarde toujours · ce poids qui pousse le pécheur à fuir Dieu plutôt qu'à y revenir.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La peine (poena)",
+			"html": "<p>La <em>justice de Dieu</em> ayant été lésée doit être satisfaite · comme les plateaux d'une balance qu'il faut rééquilibrer. Celui qui blasphème habituellement doit, pour réparer, honorer Dieu d'autant.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "L'habitude (fomes peccati, foyer de péché)",
+			"html": "<p>Le péché laisse en nous une <em>disposition à pécher encore</em>. <em>« Qui a bu boira »</em> · l'ivrogne qui veut se convertir n'a jamais eu si soif. Un péché isolé est facile à surmonter · une chaîne ininterrompue creuse un sillon dont on sort très difficilement. C'est l'effet le plus tenace.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Ce que remettent le baptême et la pénitence",
+			"anchor": "tableau-effets"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le baptême et la pénitence ne traitent pas ces trois effets de la même façon. Tableau récapitulatif (0 = remis entièrement ; 1/2 = remis en partie) ·</p><table><thead><tr><th>Sacrement</th><th>Faute</th><th>Peine</th><th>Habitude</th></tr></thead><tbody><tr><td>Baptême</td><td>0</td><td>0</td><td>1/2</td></tr><tr><td>Pénitence</td><td>0</td><td>1/2</td><td>1/2</td></tr></tbody></table>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le baptême et la pénitence remettent <strong>tout de la faute</strong> · effet premier, propre à la grâce sanctifiante rendue. Pour la peine, le baptême la remet entièrement · le baptisé n'a aucun passé à satisfaire · le pénitent, en revanche, doit encore réparer le mal de ses fautes personnelles · le sacrement ne le décharge que partiellement. Pour l'habitude (foyer de péché), ni l'un ni l'autre ne l'effacent · même le baptême des adultes laisse les habitudes contractées · il faut continuer à prier, jeûner, lutter.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La grâce sanctifiante rendue",
+			"anchor": "grace-rendue"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La pénitence <strong>redonne la grâce sanctifiante</strong>, ou la confirme si elle est déjà là. <em>« C'est le retour de la grâce qui pardonne les péchés, et non l'inverse. »</em> Doctrine capitale, déjà vue pour le baptême · les chrétiens peinent à se la mettre dans la tête. Souvenez-vous · Jésus, en donnant le pouvoir, <em>souffle</em> sur les apôtres et leur dit « Recevez l'Esprit-Saint » · c'est en rendant l'Esprit que les péchés sont remis.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>D'où une conséquence rigoureuse · sans <em>amour</em> de Dieu, le sacrement est invalide. Sans la charité au moins en sa forme initiale · ce que le Concile de Trente appelle l'<em>amor in cohatione</em>, un commencement d'amour qui sait que Dieu est le bien · pas de grâce rendue, pas de péché pardonné. Le sacrement n'est pas un distributeur de jetons · il suppose ce minimum d'amour de Dieu que la peur servile elle-même contient déjà.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La grâce sacramentelle",
+			"anchor": "grace-sacramentelle"
+		},
+		{
+			"kind": "definition",
+			"term": "Grâce propre de la pénitence",
+			"html": "<p><strong>Détestation du péché</strong> et <strong>force de l'éviter</strong>. Coup de reins spirituel · celui qui sort du confessionnal fait attention dans les jours qui suivent · il pèche beaucoup moins facilement. Voilà pourquoi, quand on a contracté une habitude ancrée, il faut se confesser <em>régulièrement</em> · ces coups de reins répétés finissent par sortir la tête de l'eau.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le ministre",
+			"anchor": "ministre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le ministre est le <strong>prêtre</strong>, et lui seul (l'évêque l'étant à plus forte raison · l'évêque est un prêtre qui peut, en outre, ordonner). C'est l'une des deux grandes prérogatives du prêtre · célébrer le saint sacrifice de la messe et pardonner les péchés.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour exercer ce pouvoir, deux choses ·</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Pouvoir d'ordre",
+			"html": "<p>Conféré radicalement par l'ordination · c'est le sacerdoce qui rend le prêtre capable de pardonner. Sans lui, aucune absolution ne tient.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Juridiction",
+			"html": "<p>Pouvoir de l'Église qui <em>met les fidèles sous le pouvoir d'ordre d'un prêtre</em>. C'est la qualité radicale du juge · il faut être saisi de la cause. Aucun tribunal civil ne juge sans avoir d'abord été saisi par la puissance publique · l'Église pareillement.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Juridiction personnelle",
+			"html": "<p>Donnée par les supérieurs · pape (sur tous les chrétiens), évêque (sur son troupeau), curé (sur sa paroisse), vicaire, etc. Filière ordinaire de la pastorale.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Juridiction donnée par le droit (suppléance)",
+			"html": "<p>L'Église confère elle-même la juridiction dans certains cas · <em>danger de mort</em> (tout prêtre peut alors confesser n'importe quel baptisé), <em>erreur commune</em>, demande des fidèles, situations d'impossibilité. C'est souvent le cas aujourd'hui. Y revenir en cas de besoin · mais ne pas en faire du droit canon de pacotille.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Comment se confesser",
+			"anchor": "manière-se-confesser"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Très bref rituel, à l'usage de qui l'ignorerait. Se confesser est <em>facile</em> · c'est le diable qui essaie de nous le rendre difficile.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>1. Examen de conscience.</strong> Sérieux mais sans scrupule. Cinq minutes suffisent ordinairement · par définition, un péché grave se sait (matière grave, plein consentement, pleine advertance). Plus de temps si l'on n'est pas venu depuis longtemps.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>2. Demande de bénédiction.</strong> On s'agenouille en disant <em>« Bénissez-moi mon Père parce que j'ai péché. »</em> On laisse au prêtre le temps de bénir avant d'enchaîner.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>3. Confiteor.</strong> On récite le Confiteor jusqu'à <em>« ma très grande faute »</em>. S'il y a foule, on l'a récité avant pour ne pas faire attendre tout le monde.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>4. Temps écoulé.</strong> On dit depuis combien de temps on ne s'est pas confessé. Information capitale · ce n'est pas la même chose, huit jours ou cinquante ans.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>5. Aveu des péchés.</strong> On les dit · on répond aux questions du prêtre. C'est au pénitent de se confesser · ne pas attendre que le prêtre tire les ficelles. <em>Aucun nom propre ne doit être prononcé</em> · on ne dénonce personne, on ne parle pas du prochain. Le prêtre n'a pas le droit de demander le nom d'un complice.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>6. Fin du Confiteor.</strong> <em>« C'est pourquoi je supplie... »</em></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>7. Conseils du prêtre.</strong> Il est juge, mais aussi <em>médecin des âmes</em> · ses conseils ont une valeur de grâce sacramentelle. Pas un discours d'un quart d'heure (trop) · quelques mots qui portent.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>8. Pénitence reçue.</strong> On l'écoute, on l'accepte, on la retient. Ne pas quitter le confessionnal avant l'absolution.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>9. Acte de contrition.</strong> Pendant que le prêtre prononce l'absolution (trente secondes environ), on récite mentalement son acte de contrition · regretter les péchés avec le plus d'amour possible.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>10. Action de grâces.</strong> On remercie Dieu d'une si grande grâce et on accomplit la pénitence reçue · on n'oubliera pas. Beaucoup avouent en revenir avoir oublié la pénitence · soyez-y attentif.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Conclusion : Dieu veut tout oublier",
+			"anchor": "conclusion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le sacrement de pénitence est unique · n'importe quel chrétien baptisé peut s'y faire pardonner <em>n'importe quel péché</em>, n'importe quelle série, n'importe quelle vie de péché · avec la certitude propre aux sacrements que Dieu ne lui en parlera plus jamais.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Thomas donne du <strong>secret sacramentel</strong> une raison qui réjouit. Le prêtre ne doit jamais rien dire de ce qu'il a entendu · violation passible d'excommunication latæ sententiæ. On allègue d'ordinaire des raisons techniques · ne pas rendre la confession odieuse. Mais saint Thomas remonte plus haut · <em>c'est Dieu lui-même qui veut tout oublier</em>. Dieu décide que les péchés confessés non seulement il n'en tiendra plus compte · il <strong>veut faire en sorte qu'ils n'aient jamais existé</strong>.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Je jetterai vos péchés derrière mon dos.</p>",
+			"attribution": "Isaïe 38, 17"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Voilà la miséricorde de Dieu · il oublie. Dès lors, ceux qui ne se confessent pas et traînent leur péché comme un fardeau · que pouvait-il faire de mieux ? L'homme supporte des épreuves considérables · ce qu'il ne supporte pas, c'est sa faute, cette responsabilité qui l'écrase. Or il a le moyen de s'en débarrasser. <em>À bon entendeur, salut.</em></p>"
+		}
+	]
+}
