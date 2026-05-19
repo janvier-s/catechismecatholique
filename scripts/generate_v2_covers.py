@@ -30,12 +30,16 @@ RULE_C  = (60,  58,  62)
 
 SIZE = 1000
 
-ROOT      = Path(__file__).resolve().parent.parent
-LOGO      = ROOT / "static/img/logo/logo-dark-192.png"
-FONT_BOLD = Path.home() / "Library/Fonts/LibreBaskerville-Bold.ttf"
-FONT_ITAL = Path.home() / "Library/Fonts/LibreBaskerville-Italic.ttf"
+ROOT          = Path(__file__).resolve().parent.parent
+FONT_BOLD     = Path.home() / "Library/Fonts/LibreBaskerville-Bold.ttf"
+FONT_ITAL     = Path.home() / "Library/Fonts/LibreBaskerville-Italic.ttf"
 FONT_SANS_SRC = ROOT / "static/fonts/Gotham-Medium.woff2"
 FONT_SANS     = Path("/tmp/Gotham-Medium.ttf")
+
+# The shared album cover — per-file overlays are composited on top of this.
+COVER_IMG_DEFAULT = Path.home() / "Documents/ccc_v2_audio/cover.jpg"
+# Row (at SIZE×SIZE) where the cover's existing content ends and our overlay begins.
+OVERLAY_TOP = 700
 
 
 # ---------------------------------------------------------------------------
@@ -133,7 +137,7 @@ def _derive(group: dict) -> dict:
     loc   = group["location"]
     rng   = group["paragraph_range"]
     lo, hi = rng[0], rng[1]
-    range_str = f"§{lo} · {hi}" if lo != hi else f"§{lo}"
+    range_str = f"{lo} · {hi}" if lo != hi else str(lo)
 
     entries = group["entries"]
     first_h = next((e for e in entries if e["kind"] == "heading"), None)
@@ -205,8 +209,6 @@ def _derive(group: dict) -> dict:
 # Image rendering
 # ---------------------------------------------------------------------------
 
-HEADER_H    = 185   # logo + album title + rule
-FOOTER_H    = 145   # range + part label
 SIDE_MARGIN = 70
 MAX_W       = SIZE - 2 * SIDE_MARGIN  # 860px usable width
 LINE_GAP    = 12    # extra between lines
@@ -233,10 +235,9 @@ def _render_section(draw: ImageDraw.ImageDraw, y: int, info: dict,
     if title:
         # Pick font size so the longest wrapped line fits
         # Start at 60, scale down until wrapped lines fit
-        font_sz = 60 if is_primary else 46
+        font_sz = 52 if is_primary else 42
         font    = _serif(font_sz)
         lines   = _wrap_text(title, draw, font, MAX_W)
-        # If more than 3 lines, shrink
         while len(lines) > 3 and font_sz > 24:
             font_sz -= 4
             font  = _serif(font_sz)
@@ -249,37 +250,24 @@ def _render_section(draw: ImageDraw.ImageDraw, y: int, info: dict,
     return y
 
 
-def generate_cover(info: dict) -> Image.Image:
-    img  = Image.new("RGB", (SIZE, SIZE), BG)
+def generate_cover(info: dict, cover_img: Path = COVER_IMG_DEFAULT) -> Image.Image:
+    # Base: the shared album cover resized to working resolution.
+    img  = Image.open(cover_img).convert("RGB").resize((SIZE, SIZE), Image.LANCZOS)
     draw = ImageDraw.Draw(img)
 
-    # ---- HEADER (logo + album title + rule) --------------------------------
-    LOGO_SZ  = 60
-    logo_img = Image.open(LOGO).convert("RGBA").resize(
-        (LOGO_SZ, LOGO_SZ), Image.LANCZOS)
-    img.paste(logo_img, ((SIZE - LOGO_SZ) // 2, 30), logo_img)
+    # ---- OVERLAY SEPARATOR --------------------------------------------------
+    draw.line([(SIDE_MARGIN, OVERLAY_TOP), (SIZE - SIDE_MARGIN, OVERLAY_TOP)],
+              fill=RULE_C, width=1)
 
-    font_album = _sans(18)
-    y_album    = 30 + LOGO_SZ + 14
-    _draw_centered(draw, y_album, "CATÉCHISME DE L'ÉGLISE CATHOLIQUE",
-                   font_album, MUTED)
+    # ---- CONTENT ZONE (label + title, vertically centred in overlay) --------
+    # Available vertical space between separator and range footer.
+    RANGE_Y    = SIZE - 72        # where the range number sits
+    content_y0 = OVERLAY_TOP + 22
+    content_y1 = RANGE_Y - 18
 
-    y_rule = HEADER_H - 20
-    rx = SIDE_MARGIN
-    draw.line([(rx, y_rule), (SIZE - rx, y_rule)], fill=RULE_C, width=1)
-
-    # ---- CONTENT ZONE -------------------------------------------------------
-    content_h  = SIZE - HEADER_H - FOOTER_H   # ~670px
-    content_y0 = HEADER_H
-    content_y1 = SIZE - FOOTER_H
-
-    # Measure total height of content to vertically center it
-    # Quick pass: simulate rendering to measure
-    has_primary   = bool(info.get("title") or info.get("label"))
     has_secondary = bool(info.get("title2") or info.get("label2"))
 
     def _measure_content() -> int:
-        """Estimate total pixel height of content block."""
         h = 0
         for is_prim in ([True] + ([False] if has_secondary else [])):
             label = info.get("label") if is_prim else info.get("label2")
@@ -287,26 +275,24 @@ def generate_cover(info: dict) -> Image.Image:
             if label:
                 h += _line_h(_sans(22)) + LINE_GAP
             if title:
-                font_sz = 60 if is_prim else 46
+                font_sz = 52 if is_prim else 42
                 font    = _serif(font_sz)
                 lines   = _wrap_text(title, draw, font, MAX_W)
                 while len(lines) > 3 and font_sz > 24:
                     font_sz -= 4
                     font  = _serif(font_sz)
                     lines = _wrap_text(title, draw, font, MAX_W)
-                lh = _line_h(font)
-                h += lh * len(lines) + LINE_GAP * len(lines) + SECTION_GAP // 2
+                h += _line_h(font) * len(lines) + LINE_GAP * len(lines) + SECTION_GAP // 2
         if has_secondary:
-            h += 22 + 16  # rule + gap
+            h += 22 + 16  # mid-rule + gap
         return h
 
-    total_content = _measure_content()
-    y = content_y0 + max(0, (content_h - total_content) // 2)
+    total_h = _measure_content()
+    content_h = content_y1 - content_y0
+    y = content_y0 + max(0, (content_h - total_h) // 2)
 
-    # Primary section
     y = _render_section(draw, y, info, is_primary=True)
 
-    # Divider + secondary section (chapter+article case)
     if has_secondary:
         y += 10
         draw.line([(SIDE_MARGIN + 60, y), (SIZE - SIDE_MARGIN - 60, y)],
@@ -314,25 +300,14 @@ def generate_cover(info: dict) -> Image.Image:
         y += 16
         y = _render_section(draw, y, info, is_primary=False)
 
-    # ---- FOOTER (range + section label) ------------------------------------
-    footer_y = SIZE - FOOTER_H + 20
-    accent_rule_y = footer_y - 10
-    draw.line([(SIDE_MARGIN, accent_rule_y), (SIZE - SIDE_MARGIN, accent_rule_y)],
+    # ---- RANGE (Gotham, accent colour) -------------------------------------
+    draw.line([(SIDE_MARGIN, RANGE_Y - 14), (SIZE - SIDE_MARGIN, RANGE_Y - 14)],
               fill=ACCENT if info.get("eb") else RULE_C, width=1)
 
-    range_color = ACCENT
-    font_range  = _serif(46)
-    # Scale down if range text is very wide (shouldn't be, but safe)
+    font_range = _sans(44)
     while _text_w(draw, info["range_str"], font_range) > MAX_W:
-        font_range = _serif(font_range.size - 2)
-    _draw_centered(draw, footer_y + 4, info["range_str"], font_range, range_color)
-
-    # Part / section label below range
-    part_label = info.get("_part_label", "")
-    if part_label:
-        font_part = _sans(16)
-        _draw_centered(draw, footer_y + 4 + _line_h(font_range) + 10,
-                       part_label, font_part, MUTED)
+        font_range = _sans(font_range.size - 2)
+    _draw_centered(draw, RANGE_Y, info["range_str"], font_range, ACCENT)
 
     return img
 
@@ -361,15 +336,17 @@ def _part_label(loc: dict) -> str:
 
 
 def generate_all(audio_dir: Path, manifest_path: Path,
-                 dry_run: bool = False) -> None:
+                 dry_run: bool = False,
+                 cover_img: Path | None = None) -> None:
     import json
     import sys
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import ccc_audio
 
-    m      = json.loads(manifest_path.read_text(encoding="utf-8"))
-    groups = ccc_audio.build_v2_file_groups(m)
-    mp3map = _scan_mp3s(audio_dir)
+    m        = json.loads(manifest_path.read_text(encoding="utf-8"))
+    groups   = ccc_audio.build_v2_file_groups(m)
+    mp3map   = _scan_mp3s(audio_dir)
+    base_img = cover_img or (audio_dir / "cover.jpg")
 
     print(f"{'DRY RUN — ' if dry_run else ''}Generating {len(groups)} covers…")
 
@@ -391,7 +368,7 @@ def generate_all(audio_dir: Path, manifest_path: Path,
             hit += 1
             continue
 
-        img     = generate_cover(info)
+        img     = generate_cover(info, cover_img=base_img)
         jpg_buf = _img_to_bytes(img)
         _embed_apic(mp3, jpg_buf)
         print(f"  OK  {mp3.name[:70]}")
@@ -433,11 +410,14 @@ def main() -> None:
                    default=Path.home() / "Documents/ccc_v2_audio")
     p.add_argument("--manifest", type=Path,
                    default=Path("/tmp/ccc_audio.manifest.json"))
+    p.add_argument("--cover", type=Path, default=None,
+                   help="Base cover image. Defaults to <audio-dir>/cover.jpg.")
     p.add_argument("--dry-run", action="store_true",
                    help="Print what would be done without writing any files.")
     args = p.parse_args()
 
-    generate_all(args.audio_dir, args.manifest, dry_run=args.dry_run)
+    generate_all(args.audio_dir, args.manifest,
+                 dry_run=args.dry_run, cover_img=args.cover)
 
 
 if __name__ == "__main__":
