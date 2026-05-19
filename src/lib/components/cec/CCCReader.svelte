@@ -95,14 +95,14 @@
 				{#if ins.kind === 'article'}
 					<h2
 						id={ins.article.slug}
-						class="font-heading text-3xl font-semibold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
+						class="font-heading text-3xl font-semibold mt-16 mb-6 pb-2 border-b border-border text-heading"
 					>
 						{ins.article.number ? `Article ${ins.article.number} · ` : ''}{ins.article.title}
 					</h2>
 				{:else if ins.kind === 'paragraphe'}
 					<h3
 						id="paragraphe-{ins.paragraphe.number}"
-						class="font-heading text-2xl font-semibold mt-14 mb-5 pb-2 border-b border-border scroll-mt-24 text-heading"
+						class="font-heading text-2xl font-semibold mt-14 mb-5 pb-2 border-b border-border text-heading"
 					>
 						<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1">
 							Paragraphe {ins.paragraphe.number}
@@ -110,17 +110,11 @@
 						{ins.paragraphe.title}
 					</h3>
 				{:else if ins.heading.level === 2}
-					<h3
-						id={ins.heading.id}
-						class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
-					>
+					<h3 id={ins.heading.id} class="font-ui text-xl font-semibold mt-12 mb-4 text-accent">
 						{ins.heading.title}
 					</h3>
 				{:else}
-					<h4
-						id={ins.heading.id}
-						class="font-ui text-lg font-semibold mt-8 mb-3 scroll-mt-24 text-heading"
-					>
+					<h4 id={ins.heading.id} class="font-ui text-lg font-semibold mt-8 mb-3 text-heading">
 						{ins.heading.title}
 					</h4>
 				{/if}

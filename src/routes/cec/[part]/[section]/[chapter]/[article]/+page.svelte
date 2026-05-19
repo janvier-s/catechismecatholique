@@ -135,7 +135,7 @@
 			{#if paragraphe}
 				<h2
 					id="paragraphe-{paragraphe.number}"
-					class="font-heading text-2xl font-semibold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
+					class="font-heading text-2xl font-semibold mt-16 mb-6 pb-2 border-b border-border text-heading"
 				>
 					<span class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted block mb-1">
 						Paragraphe {paragraphe.number}
@@ -146,17 +146,11 @@
 			{@const headingsHere = data.article.headings.filter((h) => h.paragraph_start === p.number)}
 			{#each headingsHere as heading (heading.id)}
 				{#if heading.level <= 2}
-					<h3
-						id={heading.id}
-						class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
-					>
+					<h3 id={heading.id} class="font-ui text-xl font-semibold mt-12 mb-4 text-accent">
 						{heading.title}
 					</h3>
 				{:else}
-					<h4
-						id={heading.id}
-						class="font-ui text-lg font-semibold mt-8 mb-3 scroll-mt-24 text-heading"
-					>
+					<h4 id={heading.id} class="font-ui text-lg font-semibold mt-8 mb-3 text-heading">
 						{heading.title}
 					</h4>
 				{/if}

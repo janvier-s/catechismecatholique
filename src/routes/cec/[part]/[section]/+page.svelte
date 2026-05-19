@@ -61,17 +61,11 @@
 			{@const heading = headingByPara.get(p.number)}
 			{#if heading}
 				{#if heading.level <= 2}
-					<h2
-						id={heading.id}
-						class="font-ui text-xl font-semibold mt-12 mb-4 scroll-mt-24 text-accent"
-					>
+					<h2 id={heading.id} class="font-ui text-xl font-semibold mt-12 mb-4 text-accent">
 						{heading.title}
 					</h2>
 				{:else}
-					<h3
-						id={heading.id}
-						class="font-ui text-lg font-semibold mt-8 mb-3 scroll-mt-24 text-heading"
-					>
+					<h3 id={heading.id} class="font-ui text-lg font-semibold mt-8 mb-3 text-heading">
 						{heading.title}
 					</h3>
 				{/if}

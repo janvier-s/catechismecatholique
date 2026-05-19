@@ -6,7 +6,7 @@
 
 <aside
 	id="en-bref-{paragraphs[0]?.number ?? 'block'}"
-	class="en-bref my-12 rounded-lg p-6 scroll-mt-24"
+	class="en-bref my-12 rounded-lg p-6"
 	aria-labelledby="en-bref-label-{paragraphs[0]?.number ?? 'block'}"
 >
 	<p

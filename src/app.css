@@ -252,8 +252,11 @@
 		   (panorama, anchor jumps) opt in via JS where needed. */
 		scroll-behavior: auto;
 		/* Offset anchor scrolls so targets clear the sticky topbar (~80px
-		   desktop, ~58px mobile). 6rem gives comfortable breathing room at
-		   all breakpoints and matches the scroll-mt-24 on headings. */
+		   desktop, ~58px mobile). 6rem gives comfortable breathing room
+		   below the topbar without leaving the title at the scroll-spy
+		   activation line. Anchor targets must NOT also carry scroll-mt-*
+		   utilities · the values are additive for scrollIntoView, so doubling
+		   them pushes the title down to ~12rem, near the highlight threshold. */
 		scroll-padding-top: 6rem;
 		/* Reserve the vertical scrollbar gutter so locking <html> overflow
 		   (e.g. when the panorama modal opens) doesn't shift layout when

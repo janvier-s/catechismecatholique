@@ -44,7 +44,7 @@
 			{#if node.level === 2}
 				<h2
 					id={node.id}
-					class="font-heading text-3xl font-semibold mt-16 mb-6 pb-2 border-b border-border scroll-mt-24 text-heading"
+					class="font-heading text-3xl font-semibold mt-16 mb-6 pb-2 border-b border-border text-heading"
 				>
 					{node.title}
 				</h2>
@@ -55,14 +55,14 @@
 							{node.kicker}
 						</p>
 					{/if}
-					<h3 id={node.id} class="font-ui text-xl font-semibold text-accent scroll-mt-24">
+					<h3 id={node.id} class="font-ui text-xl font-semibold text-accent">
 						{node.title}
 					</h3>
 				</div>
 			{:else}
 				<h4
 					id={node.id}
-					class="font-ui text-base font-semibold mt-10 mb-4 scroll-mt-24 uppercase tracking-[0.16em] text-fg"
+					class="font-ui text-base font-semibold mt-10 mb-4 uppercase tracking-[0.16em] text-fg"
 				>
 					{node.title}
 				</h4>
