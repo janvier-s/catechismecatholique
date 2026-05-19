@@ -236,32 +236,31 @@ def apply_text_replace(text: str, paragraph_number: int) -> str:
 
 
 def apply_general_replacements(text: str) -> str:
-    """Greek-script substitutions and corpus-wide Latin/French phonetic fixes."""
+    """French phonetic substitutions for Greek/Latin religious terms and corpus-wide fixes."""
     text = text.replace("concupiscentia", "concupiskentia")
     text = text.replace("concupiscence", "concupissensse")
     text = re.sub(r"(?i)\bmaran\s+atha\b", "Maranne atha", text)
     text = re.sub(r"(?i)\bmarana\s+tha\b", "Maranne atha", text)
     text = text.replace("(« in statu viæ »)", "(« inn statou vié »)")
     text = text.replace("Chalcédoine", "Kalcédoine")
+    text = text.replace("Melchisédech", "Melkizédek")
     text = text.replace(
         "« Non est enim aliud Dei mistériomm, nisi Christus »",
         "« Nonne esste énim alioud Déi mistérioum, nissi Christouss »",
     )
-    text = re.sub(r"(?i)\bkyrios\b", "κύριος", text)
-    text = re.sub(r"(?i)\bekklèsia\b", "ἐκκλησία", text)
-    text = re.sub(r"(?i)\bmysterion\b", "μυστήριον", text)
-    text = re.sub(r"(?i)\bapostoloi\b", "ἀπόστολοι", text)
-    text = re.sub(r"(?i)\bbaptizein\b", "βαπτίζω", text)
-    text = re.sub(r"(?i)\beucharistian\b", "εὐχαριστίαν", text)
-    text = re.sub(r"(?i)\btaxeis\b", "τάξις", text)
-    text = re.sub(r"(?i)\bsymbolon\b", "σύμβολον", text)
-    text = re.sub(r"(?i)\btheologia\b", "θεολογία", text)
+    text = re.sub(r"(?i)\bkyrios\b", "kirios", text)
+    text = re.sub(r"(?i)\bekklèsia\b", "eklézia", text)
+    text = re.sub(r"(?i)\bmysterion\b", "mistérion", text)
+    text = re.sub(r"(?i)\bapostoloi\b", "apostoloï", text)
+    text = re.sub(r"(?i)\bbaptizein\b", "baptizèïne", text)
+    text = re.sub(r"(?i)\beucharistian\b", "évkaristiane", text)
+    text = re.sub(r"(?i)\btaxeis\b", "taksèïss", text)
+    text = re.sub(r"(?i)\bsymbolon\b", "simvolon", text)
+    text = re.sub(r"(?i)\btheologia\b", "téologia", text)
     text = text.replace("episcoporum", "épiscoporoum")
     text = text.replace("presbyterorum", "présbytéroroum")
     text = text.replace("diaconorum", "diaconoroum")
-    text = text.replace("Théotokosse", "Θεοτόκος")
-    text = text.replace("Théotokos", "Θεοτόκος")
-    text = re.sub(r"(?i)\boikonomia\b", "Οἰκονομία", text)
+    text = re.sub(r"(?i)\boikonomia\b", "oïkonomia", text)
     text = text.replace("(« omnipotens sempiterne Deus... »)", "(« omnipotènsse sèmpiterné Déousse... »)")
     # Recurring Latin words in body / citation text (phonetic table reviewed 2026-05-18).
     # Order: longer phrases before single words to avoid partial overlap.
@@ -277,7 +276,7 @@ def apply_general_replacements(text: str) -> str:
     text = re.sub(r"(?<!\w)doni(?!\w)", "donni", text)
     text = re.sub(r"(?<!\w)Signaculum(?!\w)", "Signakouloum", text)
     text = re.sub(r"(?<!\w)signaculum(?!\w)", "signakouloum", text)
-    text = re.sub(r"(?<!\w)myron(?!\w)", "μύρον", text)
+    text = re.sub(r"(?<!\w)myron(?!\w)", "mirone", text)
     text = re.sub(r"(?<!\w)viris(?!\w)", "viriss", text)
     text = re.sub(r"(?<!\w)unctionem(?!\w)", "ounktsionème", text)
     text = re.sub(r"(?<!\w)totus(?!\w)", "totousse", text)
@@ -293,29 +292,29 @@ def apply_general_replacements(text: str) -> str:
     text = re.sub(r"(?<!\w)Vexilla(?!\w)", "Veksilla", text)
     text = re.sub(r"(?<!\w)Regis(?!\w)", "Régisse", text)
     text = re.sub(r"(?<!\w)Accipe(?!\w)", "Atchipé", text)
-    # Greek transliterations → Greek script (religious terms).
-    text = re.sub(r"(?<!\w)Aeiparthenos(?!\w)", "Ἀειπάρθενος", text)
-    text = re.sub(r"(?<!\w)Hagiou(?!\w)", "ἁγίου", text)
-    text = re.sub(r"(?<!\w)hagia(?!\w)", "ἁγία", text)
-    text = re.sub(r"(?<!\w)Hodoghitria(?!\w)", "Ὁδηγήτρια", text)
-    text = re.sub(r"(?<!\w)Kyriakè(?!\w)", "κυριακή", text)
-    text = re.sub(r"(?<!\w)Kuriakè(?!\w)", "κυριακή", text)
-    text = re.sub(r"(?<!\w)kuriakè(?!\w)", "κυριακή", text)
-    text = re.sub(r"(?<!\w)Panaghia(?!\w)", "Παναγία", text)
-    text = re.sub(r"(?<!\w)Pantocratôr(?!\w)", "Παντοκράτωρ", text)
-    text = re.sub(r"(?<!\w)Paraclisis(?!\w)", "Παράκλησις", text)
-    text = re.sub(r"(?<!\w)Patros(?!\w)", "Πατρός", text)
-    text = re.sub(r"(?<!\w)Pneumatos(?!\w)", "Πνεύματος", text)
-    text = re.sub(r"(?<!\w)Sphragis(?!\w)", "Σφραγίς", text)
-    text = re.sub(r"(?<!\w)sphragis(?!\w)", "σφραγίς", text)
-    text = re.sub(r"(?<!\w)synaxis(?!\w)", "σύναξις", text)
-    text = re.sub(r"(?<!\w)théotokia(?!\w)", "θεοτόκια", text)
-    text = re.sub(r"(?<!\w)ek-kalein(?!\w)", "ἐκκαλεῖν", text)
-    text = re.sub(r"(?<!\w)eu-logia(?!\w)", "εὐλογία", text)
-    text = re.sub(r"(?<!\w)eulogein(?!\w)", "εὐλογεῖν", text)
-    text = re.sub(r"(?<!\w)eucharistein(?!\w)", "εὐχαριστεῖν", text)
-    text = re.sub(r"(?<!\w)hèméra(?!\w)", "ἡμέρα", text)
-    text = re.sub(r"(?<!\w)monoghenis(?!\w)", "μονογενής", text)
+    # Greek transliterations → French phonetic spellings (religious terms).
+    text = re.sub(r"(?<!\w)Aeiparthenos(?!\w)", "éïparthenoss", text)
+    text = re.sub(r"(?<!\w)Hagiou(?!\w)", "aghiou", text)
+    text = re.sub(r"(?<!\w)hagia(?!\w)", "aghia", text)
+    text = re.sub(r"(?<!\w)Hodoghitria(?!\w)", "odoghitria", text)
+    text = re.sub(r"(?<!\w)Kyriakè(?!\w)", "Kiriaké", text)
+    text = re.sub(r"(?<!\w)Kuriakè(?!\w)", "Kiriaké", text)
+    text = re.sub(r"(?<!\w)kuriakè(?!\w)", "kiriaké", text)
+    text = re.sub(r"(?<!\w)Panaghia(?!\w)", "Panayia", text)
+    text = re.sub(r"(?<!\w)Pantocratôr(?!\w)", "Pantokratore", text)
+    text = re.sub(r"(?<!\w)Paraclisis(?!\w)", "Paraklisiss", text)
+    text = re.sub(r"(?<!\w)Patros(?!\w)", "Patrôsse", text)
+    text = re.sub(r"(?<!\w)Pneumatos(?!\w)", "Pnèvmatosse", text)
+    text = re.sub(r"(?<!\w)Sphragis(?!\w)", "Sfragiss", text)
+    text = re.sub(r"(?<!\w)sphragis(?!\w)", "sfragiss", text)
+    text = re.sub(r"(?<!\w)synaxis(?!\w)", "sinaksiss", text)
+    text = re.sub(r"(?<!\w)théotokia(?!\w)", "téotokia", text)
+    text = re.sub(r"(?<!\w)ek-kalein(?!\w)", "ekkalèïne", text)
+    text = re.sub(r"(?<!\w)eu-logia(?!\w)", "évloghia", text)
+    text = re.sub(r"(?<!\w)eulogein(?!\w)", "évloghèïne", text)
+    text = re.sub(r"(?<!\w)eucharistein(?!\w)", "évkaristèïne", text)
+    text = re.sub(r"(?<!\w)hèméra(?!\w)", "émèra", text)
+    text = re.sub(r"(?<!\w)monoghenis(?!\w)", "monogéniss", text)
     # Latin religious terms phoneticized for Belgian French reading.
     text = re.sub(r"(?<!\w)Sacram unctionem infirmorum(?!\w)", "Sacrame ounnktsionème innfirmoroum", text)
     text = re.sub(r"(?<!\w)AAS(?!\w)", "A.A.S.", text)
@@ -806,9 +805,13 @@ def build_paragraph_entry(
         {"voice": "gerard", "text": announce, "targets": ["v1"]},
     ]
 
+    # En-bref paragraphs appear in their own dedicated en_bref_combined entry
+    # for V2, so they must not be duplicated in the main chapter file.
+    para_targets = ["v1"] if is_en_bref(paragraph) else ["v1", "v2"]
+
     body = _build_body_text(paragraph)
     if body:
-        segments.append({"voice": "remy", "text": body, "targets": ["v1", "v2"]})
+        segments.append({"voice": "remy", "text": body, "targets": para_targets})
 
     audit_rows: list[dict] = []
     citations = paragraph.get("citations", [])
@@ -823,10 +826,10 @@ def build_paragraph_entry(
         if n in FORCE_GENERIC_CITATION_INTRO:
             intro = "Citation :"
         if n not in NO_CITATION_INTRO:
-            segments.append({"voice": "gerard", "text": intro, "targets": ["v1", "v2"]})
-        segments.append({"voice": "fabrice", "text": cit_text, "targets": ["v1", "v2"]})
+            segments.append({"voice": "gerard", "text": intro, "targets": para_targets})
+        segments.append({"voice": "fabrice", "text": cit_text, "targets": para_targets})
         if trailing:
-            segments.append({"voice": "gerard", "text": trailing + ".", "targets": ["v1", "v2"]})
+            segments.append({"voice": "gerard", "text": trailing + ".", "targets": para_targets})
         audit_rows.append({
             "paragraph": n,
             "citation_index": i,
@@ -898,16 +901,15 @@ _HEADING2_ROMAN_RE = re.compile(r"^([IVXLCDM]+)\.\s*")
 
 
 def _convert_heading2_title(title: str) -> str:
-    """Replace leading Roman numeral with French ordinal.
+    """Replace leading Roman numeral with its Arabic equivalent.
 
-    'I. Le désir de Dieu' → 'Premier. Le désir de Dieu'
+    'I. Le désir de Dieu'   → '1. Le désir de Dieu'
+    'II. Les voies d'accès' → '2. Les voies d'accès'
     """
     m = _HEADING2_ROMAN_RE.match(title)
     if not m:
         return title
-    ordinal = number_to_french_ordinal(roman_to_arabic(m.group(1)))
-    ordinal = ordinal[0].upper() + ordinal[1:]
-    return f"{ordinal}. {title[m.end():]}"
+    return f"{roman_to_arabic(m.group(1))}. {title[m.end():]}"
 
 
 def _heading2_ranges(
@@ -943,21 +945,30 @@ def build_heading_entry(
     paragraph_range: tuple[int, int],
     location: dict,
     file_number: str,
+    announce_range: bool = True,
 ) -> dict:
-    """Build a V2-only heading entry (kind='heading', targets=['v2'])."""
+    """Build a V2-only heading entry (kind='heading', targets=['v2']).
+
+    announce_range=False suppresses the "Paragraphes X à Y." segment.
+    Use for chapter headings that open a file containing article sub-headings;
+    the article heading that follows is the actual file boundary and announces
+    its own range.
+    """
     segments: list[dict] = []
     if level == "chapter":
         prefix = f"Chapitre {number} : " if number is not None else ""
         announce = apply_intro_phonetic(f"{prefix}{title}.")
         segments.append({"voice": "gerard", "text": announce, "targets": ["v2"]})
-        segments.append({"voice": "gerard", "text": _format_range_announce(*paragraph_range), "targets": ["v2"]})
+        if announce_range:
+            segments.append({"voice": "gerard", "text": _format_range_announce(*paragraph_range), "targets": ["v2"]})
     elif level == "article":
         if number is not None:
             announce = apply_intro_phonetic(f"Article {number} : {title}.")
         else:
             announce = apply_intro_phonetic(f"{title}.")
         segments.append({"voice": "gerard", "text": announce, "targets": ["v2"]})
-        segments.append({"voice": "gerard", "text": _format_range_announce(*paragraph_range), "targets": ["v2"]})
+        if announce_range:
+            segments.append({"voice": "gerard", "text": _format_range_announce(*paragraph_range), "targets": ["v2"]})
     elif level in ("heading2", "heading3"):
         # heading2 titles have leading Roman numerals ("I. Le désir…"); heading3 titles don't.
         # _convert_heading2_title is a no-op when no leading Roman numeral is present.
@@ -974,6 +985,15 @@ def build_heading_entry(
         "location": location,
         "segments": segments,
     }
+
+
+# Para numbers that open a standalone intro file.
+# Everything else is buffered and prepended to the first file that follows.
+_STANDALONE_INTRO_STARTS: frozenset[int] = frozenset({
+    1,     # Prologue (§1–25)
+    185,   # La profession de la foi chrétienne — les symboles de la foi (§185–197)
+    2052,  # Les dix commandements (§2052–2074)
+})
 
 
 # ---------------------------------------------------------------------------
@@ -998,6 +1018,13 @@ def _build_entries_structured(
     en_bref_by_chapter: dict[str, list[dict]] = {}
     _seq = 0
     _hseq = 0
+    _pending: list[int] = []  # intro paras buffered for next file
+
+    def _pop_pending() -> list[int]:
+        nonlocal _pending
+        pre = list(_pending)
+        _pending = []
+        return pre
 
     def _next_seq() -> int:
         nonlocal _seq
@@ -1030,10 +1057,12 @@ def _build_entries_structured(
     def _emit_heading(
         level: str, title: str, number: int | None,
         para_range: tuple[int, int], location: dict,
+        announce_range: bool = True,
     ) -> None:
         entries.append(build_heading_entry(
             seq=_next_seq(), level=level, title=title, number=number,
             paragraph_range=para_range, location=location, file_number=_next_hnum(),
+            announce_range=announce_range,
         ))
 
     def _emit_h3s_in_range(
@@ -1094,11 +1123,11 @@ def _build_entries_structured(
             _emit_h3s_in_range(h2_paras, h3_in_h2, location)
 
     def _emit_article(
-        art: dict, ch_loc: dict, orphans: list[int] | None = None,
+        art: dict, ch_loc: dict, pre_paras: list[int] | None = None,
     ) -> None:
-        """Emit article heading + orphan paras (if any) + article paragraphs."""
+        """Emit article heading + pre-article paras (orphans / merged intros) + article paragraphs."""
         art_paras = sorted(art.get("paragraphs", []))
-        pre = sorted(orphans or [])
+        pre = sorted(pre_paras or [])
         art_first = pre[0] if pre else (art_paras[0] if art_paras else art["range"]["from"])
         art_last = art["range"]["to"]
         art_loc = {
@@ -1111,7 +1140,7 @@ def _build_entries_structured(
         for n in pre:
             p = _load(n)
             if p:
-                _add_para(p, ch_loc)  # orphans carry chapter-level location
+                _add_para(p, ch_loc)  # pre-paras carry chapter-level location
         _emit_paras_with_h2s(art_paras, art.get("headings", []), art_loc)
 
     def _emit_chapter(chapter: dict, sec_loc: dict) -> None:
@@ -1128,17 +1157,20 @@ def _build_entries_structured(
         }
         if articles:
             covered = {n for art in articles for n in art.get("paragraphs", [])}
-            orphans = sorted(set(ch_paras) - covered)
-            ch_first = orphans[0] if orphans else articles[0]["range"]["from"]
+            ch_orphans = sorted(set(ch_paras) - covered)
+            pre_all = sorted(_pop_pending() + ch_orphans)
+            ch_first = pre_all[0] if pre_all else articles[0]["range"]["from"]
             ch_last = articles[-1]["range"]["to"]
+            # Chapter heading is NOT the file boundary; the first article heading
+            # that follows announces its own range, so suppress range here.
             _emit_heading("chapter", chapter["title"], chapter["number"],
-                          (ch_first, ch_last), ch_loc)
+                          (ch_first, ch_last), ch_loc, announce_range=False)
             for i, art in enumerate(articles):
-                _emit_article(art, ch_loc, orphans=orphans if i == 0 else None)
+                _emit_article(art, ch_loc, pre_paras=pre_all if i == 0 else None)
         else:
             if not ch_paras:
                 return
-            sorted_paras = sorted(ch_paras)
+            sorted_paras = sorted(_pop_pending() + ch_paras)
             _emit_heading("chapter", chapter["title"], chapter["number"],
                           (sorted_paras[0], sorted_paras[-1]), ch_loc)
             _emit_paras_with_h2s(sorted_paras, chapter.get("headings", []), ch_loc)
@@ -1146,7 +1178,13 @@ def _build_entries_structured(
     def _emit_intro_block(
         para_nums: list[int], title: str, location: dict,
     ) -> None:
-        """Emit a standalone chapter-level heading + introductory paragraphs."""
+        """Emit a standalone heading + introductory paragraphs, or buffer for next file."""
+        nonlocal _pending
+        if not para_nums:
+            return
+        if para_nums[0] not in _STANDALONE_INTRO_STARTS:
+            _pending.extend(para_nums)
+            return
         loaded = [(n, _load(n)) for n in para_nums]
         loaded = [(n, p) for n, p in loaded if p]
         if not loaded:
@@ -1185,7 +1223,7 @@ def _build_entries_structured(
                     if p:
                         _add_para(p, sec_loc)
             for art in section.get("articles_direct", []):
-                _emit_article(art, sec_loc)
+                _emit_article(art, sec_loc, pre_paras=_pop_pending())
             for chapter in section.get("chapters", []):
                 _emit_chapter(chapter, sec_loc)
 
@@ -1196,6 +1234,80 @@ def _build_entries_structured(
         ))
 
     return entries, audit_rows
+
+
+def build_v2_file_groups(manifest: dict) -> list[dict]:
+    """Group manifest entries into V2 audio files.
+
+    Each group corresponds to one MP3 file.  File boundaries are:
+      - article headings (always)
+      - standalone chapter headings (announce_range=True, i.e. 2 segments)
+
+    Chapter headings without a range segment (announce_range=False) are
+    preambles: they sit in the first article's file, not their own file.
+    en_bref_combined entries are V1-only and are skipped.
+
+    Returns a list of dicts:
+      file_number      str   from the boundary heading entry
+      paragraph_range  list  [first, last]
+      location         dict
+      entries          list  all manifest entries belonging to this file
+    """
+    groups: list[dict] = []
+    current: dict | None = None
+    pending_preamble: list[dict] = []  # chapter-with-articles header waiting for first article
+
+    def _is_boundary(entry: dict) -> bool:
+        if entry["level"] == "article":
+            return True
+        if entry["level"] == "chapter":
+            # standalone chapters carry a range-announce segment; preambles don't
+            return len(entry["segments"]) >= 2
+        return False
+
+    for entry in manifest["entries"]:
+        if entry["kind"] == "en_bref_combined":
+            continue
+        if entry["kind"] == "heading":
+            if _is_boundary(entry):
+                if current is not None:
+                    groups.append(current)
+                current = {
+                    "file_number": entry["file_number"],
+                    "paragraph_range": list(entry["paragraph_range"]),
+                    "location": entry["location"],
+                    "entries": pending_preamble + [entry],
+                }
+                pending_preamble = []
+            elif entry["level"] == "chapter":
+                # preamble (precedes articles in its chapter)
+                if current is not None:
+                    groups.append(current)
+                    current = None
+                pending_preamble = [entry]
+            else:
+                # heading2 / heading3 — belong to the current file
+                if current is not None:
+                    current["entries"].append(entry)
+        else:
+            # paragraph
+            if current is not None:
+                current["entries"].append(entry)
+
+    if current is not None:
+        groups.append(current)
+
+    # Recompute paragraph_range from non-en-bref paragraphs only, since
+    # en-bref entries are excluded from V2 audio (targets stripped above).
+    for g in groups:
+        v2_para_nums = [
+            e["number"] for e in g["entries"]
+            if e["kind"] == "paragraph" and not e.get("is_en_bref")
+        ]
+        if v2_para_nums:
+            g["paragraph_range"] = [min(v2_para_nums), max(v2_para_nums)]
+
+    return groups
 
 
 def _chapter_part_order(chapter: dict) -> tuple[int, int, int]:
@@ -1559,11 +1671,20 @@ DEFAULT_LEAKAGE_ALLOWLIST: set[str] = {
     "Penntécostèsse", "Poulker", "Récolitour", "Sacrame",
     "Salvatorisse", "Véni", "Vespérasse", "Isrælitika",
     "Ordinatsio",
+    # Greek transliterations now rendered as French phonetics.
+    "kirios", "eklézia", "mistérion", "apostoloï", "baptizèïne",
+    "évkaristiane", "taksèïss", "simvolon", "téologia", "oïkonomia",
+    "mirone", "Théotokosse",
+    "éïparthenoss", "aghiou", "aghia", "odoghitria",
+    "Kiriaké", "kiriaké", "Panayia", "Pantokratore", "Paraklisiss",
+    "Patrôsse", "Pnèvmatosse", "Sfragiss", "sfragiss", "sinaksiss",
+    "téotokia", "ekkalèïne", "évloghia", "évloghèïne", "évkaristèïne",
+    "émèra", "monogéniss",
 }
 
 
 def extract_words_for_leakage_check(text: str) -> list[str]:
-    """Tokenize text and strip Greek-script content for hunspell lint."""
+    """Tokenize text for hunspell lint; strip any residual Greek-script characters."""
     text = _RE_GREEK.sub(" ", text)
     words = _RE_WORD.findall(text)
     return [w for w in words if w not in DEFAULT_LEAKAGE_ALLOWLIST]

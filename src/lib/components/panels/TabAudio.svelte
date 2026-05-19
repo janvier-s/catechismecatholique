@@ -36,6 +36,9 @@
 	// mount. Without this the effect re-fires on every paragraph swap and can
 	// clobber in-session rate/volume changes with stale persisted values.
 	let restoredOnce = false;
+	// Tracks the last requestPlay counter value seen, initialized to the store's
+	// current value so a pre-existing request doesn't fire on mount.
+	let lastRequestPlay = get(studyPanel).requestPlay ?? 0;
 
 	const currentParagraph = $derived(
 		$studyPanel.context?.kind === 'paragraph' ? $studyPanel.context.paragraph : null
@@ -225,6 +228,14 @@
 		navigator.mediaSession.setActionHandler('nexttrack', () => {
 			if (nextInPlaylist !== null) goToParagraph(nextInPlaylist);
 		});
+	});
+
+	$effect(() => {
+		const rp = $studyPanel.requestPlay ?? 0;
+		if (rp <= lastRequestPlay) return;
+		lastRequestPlay = rp;
+		if (ready) play();
+		else pendingAutoPlay = true;
 	});
 
 	function onLoaded() {

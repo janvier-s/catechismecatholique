@@ -35,7 +35,7 @@
 	// Group consecutive integers into compact range strings: [1,2,3,5,7,8] →
 	// ["1-3", "5", "7-8"]. The /cec/[ref=cecref] route accepts both forms.
 	function compactRanges(numbers: number[]): string[] {
-		const sorted = [...new Set(numbers)].filter((n) => Number.isFinite(n)).sort((a, b) => a - b);
+		const sorted = [...new Set(numbers)].filter((n) => Number.isFinite(n));
 		const out: string[] = [];
 		let i = 0;
 		while (i < sorted.length) {

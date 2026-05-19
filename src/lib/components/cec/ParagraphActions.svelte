@@ -29,10 +29,7 @@
 	});
 
 	function onAudio() {
-		// If the panel was already open on the same paragraph, this re-targets
-		// the active tab to 'audio'. Existing playback state in TabAudio is
-		// preserved via localStorage.
-		openPanel({ kind: 'paragraph', paragraph: paragraphNumber }, 'audio');
+		openPanel({ kind: 'paragraph', paragraph: paragraphNumber }, 'audio', true);
 	}
 
 	// Open/close driven by JS so a brief excursion through the empty corridor

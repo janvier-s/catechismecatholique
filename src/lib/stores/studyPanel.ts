@@ -35,13 +35,19 @@ export interface PanelState {
 	open: boolean;
 	activeTab: PanelTab | null;
 	context: PanelContext | null;
+	requestPlay?: number;
 }
 
 const initial: PanelState = { open: false, activeTab: null, context: null };
 export const studyPanel = writable<PanelState>(initial);
 
-export function openPanel(context: PanelContext, tab: PanelTab = 'bible'): void {
-	studyPanel.set({ open: true, activeTab: tab, context });
+export function openPanel(context: PanelContext, tab: PanelTab = 'bible', autoPlay = false): void {
+	studyPanel.update((s) => ({
+		open: true,
+		activeTab: tab,
+		context,
+		requestPlay: autoPlay ? (s.requestPlay ?? 0) + 1 : s.requestPlay
+	}));
 }
 
 export function closePanel(): void {
