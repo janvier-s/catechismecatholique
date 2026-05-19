@@ -805,9 +805,9 @@ def build_paragraph_entry(
         {"voice": "gerard", "text": announce, "targets": ["v1"]},
     ]
 
-    # En-bref paragraphs appear in their own dedicated en_bref_combined entry
-    # for V2, so they must not be duplicated in the main chapter file.
-    para_targets = ["v1"] if is_en_bref(paragraph) else ["v1", "v2"]
+    # En-bref paragraphs are split off into their own V2 file (via en_bref
+    # heading boundary in the structured walker); their bodies still target V2.
+    para_targets = ["v1", "v2"]
 
     body = _build_body_text(paragraph)
     if body:
@@ -976,6 +976,17 @@ def build_heading_entry(
         if not text.endswith("."):
             text += "."
         segments.append({"voice": "gerard", "text": text, "targets": ["v2"]})
+    elif level == "en_bref":
+        # V2 en-bref file boundary. No spoken "En bref" intro · only the range.
+        # TIT2 is derived from location at render time.
+        if announce_range:
+            segments.append({"voice": "gerard",
+                             "text": _format_range_announce(*paragraph_range),
+                             "targets": ["v2"]})
+    elif level == "continuation":
+        # V2 file boundary placed after an en-bref run when the article/section
+        # continues. No spoken audio · TIT2 derived from location at render time.
+        pass
     return {
         "seq": seq,
         "kind": "heading",
@@ -1065,32 +1076,57 @@ def _build_entries_structured(
             announce_range=announce_range,
         ))
 
+    def _emit_para_run(sorted_paras: list[int], location: dict) -> None:
+        """Emit paragraphs, splitting contiguous en-bref runs into their own V2
+        file groups via en_bref + continuation heading boundaries.
+
+        A continuation heading is always emitted after each en-bref run so any
+        subsequent non-boundary heading (h2/h3) or paragraph cannot merge back
+        into the en-bref file. Empty continuation groups (when the next entry
+        is itself a boundary heading) are dropped by build_v2_file_groups.
+        """
+        loaded: list[tuple[int, dict, bool]] = []
+        for n in sorted_paras:
+            p = _load(n)
+            if p:
+                loaded.append((n, p, is_en_bref(p)))
+        i = 0
+        while i < len(loaded):
+            if loaded[i][2]:
+                j = i
+                while j < len(loaded) and loaded[j][2]:
+                    j += 1
+                run = loaded[i:j]
+                first_n, last_n = run[0][0], run[-1][0]
+                _emit_heading("en_bref", "En bref", None,
+                              (first_n, last_n), location)
+                for _, p, _ in run:
+                    _add_para(p, location)
+                i = j
+                next_n = loaded[i][0] if i < len(loaded) else last_n
+                _emit_heading("continuation", "", None,
+                              (next_n, next_n), location,
+                              announce_range=False)
+            else:
+                _add_para(loaded[i][1], location)
+                i += 1
+
     def _emit_h3s_in_range(
         sorted_paras: list[int], h3_list: list[dict], location: dict,
     ) -> None:
         """Emit heading3 entries + paragraphs for a list of level-3 headings."""
         if not h3_list:
-            for n in sorted_paras:
-                p = _load(n)
-                if p:
-                    _add_para(p, location)
+            _emit_para_run(sorted_paras, location)
             return
         first_h3_start = h3_list[0]["paragraph_start"]
-        for n in sorted_paras:
-            if n < first_h3_start:
-                p = _load(n)
-                if p:
-                    _add_para(p, location)
+        _emit_para_run([n for n in sorted_paras if n < first_h3_start], location)
         for i, h3 in enumerate(h3_list):
             end_excl = h3_list[i + 1]["paragraph_start"] if i + 1 < len(h3_list) else None
             h3_paras = [p for p in sorted_paras
                         if p >= h3["paragraph_start"] and (end_excl is None or p < end_excl)]
             h3_range = (h3_paras[0], h3_paras[-1]) if h3_paras else (h3["paragraph_start"], h3["paragraph_start"])
             _emit_heading("heading3", h3["title"], None, h3_range, location)
-            for n in h3_paras:
-                p = _load(n)
-                if p:
-                    _add_para(p, location)
+            _emit_para_run(h3_paras, location)
 
     def _emit_paras_with_h2s(
         sorted_paras: list[int], headings: list[dict], location: dict,
@@ -1108,11 +1144,7 @@ def _build_entries_structured(
             _emit_h3s_in_range(sorted_paras, h3_list, location)
             return
         first_h2_start = h2_ranges[0][0]["paragraph_start"]
-        for n in sorted_paras:
-            if n < first_h2_start:
-                p = _load(n)
-                if p:
-                    _add_para(p, location)
+        _emit_para_run([n for n in sorted_paras if n < first_h2_start], location)
         for h2, h2_first, h2_last in h2_ranges:
             h2_paras = [p for p in sorted_paras if h2_first <= p <= h2_last]
             h2_range = (h2_paras[0], h2_paras[-1]) if h2_paras else (h2_first, h2_last)
@@ -1258,7 +1290,7 @@ def build_v2_file_groups(manifest: dict) -> list[dict]:
     pending_preamble: list[dict] = []  # chapter-with-articles header waiting for first article
 
     def _is_boundary(entry: dict) -> bool:
-        if entry["level"] == "article":
+        if entry["level"] in ("article", "en_bref", "continuation"):
             return True
         if entry["level"] == "chapter":
             # standalone chapters carry a range-announce segment; preambles don't
@@ -1297,13 +1329,17 @@ def build_v2_file_groups(manifest: dict) -> list[dict]:
     if current is not None:
         groups.append(current)
 
-    # Recompute paragraph_range from non-en-bref paragraphs only, since
-    # en-bref entries are excluded from V2 audio (targets stripped above).
+    # Drop empty continuation groups · they form when an en-bref run is
+    # immediately followed by an article/chapter/en_bref boundary (the
+    # continuation heading we emit defensively has no paragraphs after it).
+    groups = [g for g in groups
+              if any(e["kind"] == "paragraph" for e in g["entries"])]
+
+    # Recompute paragraph_range from the actual paragraphs in each group, so
+    # article files whose en-bref tail was split off into its own file report
+    # the trimmed range rather than the article's structural range.
     for g in groups:
-        v2_para_nums = [
-            e["number"] for e in g["entries"]
-            if e["kind"] == "paragraph" and not e.get("is_en_bref")
-        ]
+        v2_para_nums = [e["number"] for e in g["entries"] if e["kind"] == "paragraph"]
         if v2_para_nums:
             g["paragraph_range"] = [min(v2_para_nums), max(v2_para_nums)]
 
