@@ -179,8 +179,16 @@ def _derive(group: dict) -> dict:
                     range_str=range_str, eb=False)
 
     if level == "article":
-        art_num   = loc.get("article_number")
-        art_title = loc.get("article_title") or ""
+        art_num    = loc.get("article_number")
+        art_title  = loc.get("article_title") or ""
+        para_num   = group.get("paragraphe_number")
+        para_title = group.get("paragraphe_title")
+        if para_num is not None and para_title:
+            return dict(
+                label=_article_label(art_num), title=art_title,
+                label2=f"PARAGRAPHE {para_num}", title2=para_title,
+                range_str=range_str, eb=False,
+            )
         return dict(label=_article_label(art_num), title=art_title,
                     label2=None, title2=None,
                     range_str=range_str, eb=False)
@@ -195,6 +203,14 @@ def _derive(group: dict) -> dict:
     if level == "continuation":
         container = (loc.get("article_title") or loc.get("chapter_title")
                      or loc.get("section_title") or "")
+        para_num   = group.get("paragraphe_number")
+        para_title = group.get("paragraphe_title")
+        if para_num is not None and para_title:
+            return dict(
+                label=f"PARAGRAPHE {para_num}", title=para_title,
+                label2="SUITE", title2=container,
+                range_str=range_str, eb=False,
+            )
         return dict(label=None, title=container,
                     label2="SUITE", title2=None,
                     range_str=range_str, eb=False)
@@ -343,8 +359,9 @@ def generate_all(audio_dir: Path, manifest_path: Path,
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import ccc_audio
 
+    chapters_full_dir = ROOT / "static/data/cec/chapters-full"
     m        = json.loads(manifest_path.read_text(encoding="utf-8"))
-    groups   = ccc_audio.build_v2_file_groups(m)
+    groups   = ccc_audio.build_v2_file_groups(m, chapters_full_dir=chapters_full_dir)
     mp3map   = _scan_mp3s(audio_dir)
     base_img = cover_img or (audio_dir / "cover.jpg")
 

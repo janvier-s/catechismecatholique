@@ -1268,7 +1268,81 @@ def _build_entries_structured(
     return entries, audit_rows
 
 
-def build_v2_file_groups(manifest: dict) -> list[dict]:
+def _load_paragraphes_lookup(chapters_full_dir: Path) -> dict[int, dict]:
+    """Return {para_start: {number, title}} from chapters-full JSON files."""
+    result: dict[int, dict] = {}
+    for f in chapters_full_dir.glob("*.json"):
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        ch = data.get("chapter", {})
+        for art in ch.get("articles", []):
+            for p in art.get("paragraphes", []):
+                ps = p.get("paragraph_start")
+                if ps is not None:
+                    result[ps] = {"number": p["number"], "title": p["title"]}
+    return result
+
+
+def _patch_group_headings(groups: list[dict], chapters_full_dir: Path) -> None:
+    """Patch heading segments in each group to use actual file paragraph range.
+
+    For article groups: replace the original (full-article) range announcement
+    with one derived from the recomputed group range. When a CCC 'paragraphe'
+    (sub-article heading) starts at the same paragraph, also insert a spoken
+    subtitle before the range announcement.
+
+    For continuation groups that begin at a paragraphe boundary: add the
+    paragraphe subtitle and a range announcement (continuation headings are
+    otherwise silent).
+
+    Also stores paragraphe_number / paragraphe_title on the group dict so
+    callers (cover art, TIT2 derivation) can use them.
+    """
+    paragraphes = _load_paragraphes_lookup(chapters_full_dir)
+
+    for g in groups:
+        actual_lo, actual_hi = g["paragraph_range"]
+        first_h = next((e for e in g["entries"] if e["kind"] == "heading"), None)
+        if first_h is None:
+            continue
+        level = first_h["level"]
+
+        para_info = paragraphes.get(actual_lo)
+        if para_info:
+            g["paragraphe_number"] = para_info["number"]
+            g["paragraphe_title"] = para_info["title"]
+
+        range_seg = {"voice": "gerard",
+                     "text": _format_range_announce(actual_lo, actual_hi),
+                     "targets": ["v2"]}
+
+        if level == "article":
+            # Keep the article title segment; rebuild the rest.
+            title_segs = [s for s in first_h["segments"]
+                          if not s["text"].startswith("Paragraphe")]
+            new_segs = list(title_segs)
+            if para_info:
+                subtitle = apply_intro_phonetic(
+                    f"Paragraphe {para_info['number']} : {para_info['title']}."
+                )
+                new_segs.append({"voice": "gerard", "text": subtitle, "targets": ["v2"]})
+            new_segs.append(range_seg)
+            first_h["segments"] = new_segs
+
+        elif level == "continuation" and para_info:
+            segs = list(first_h.get("segments", []))
+            subtitle = apply_intro_phonetic(
+                f"Paragraphe {para_info['number']} : {para_info['title']}."
+            )
+            segs.append({"voice": "gerard", "text": subtitle, "targets": ["v2"]})
+            segs.append(range_seg)
+            first_h["segments"] = segs
+
+
+def build_v2_file_groups(manifest: dict,
+                         chapters_full_dir: Path | None = None) -> list[dict]:
     """Group manifest entries into V2 audio files.
 
     Each group corresponds to one MP3 file.  File boundaries are:
@@ -1279,11 +1353,16 @@ def build_v2_file_groups(manifest: dict) -> list[dict]:
     preambles: they sit in the first article's file, not their own file.
     en_bref_combined entries are V1-only and are skipped.
 
+    Pass chapters_full_dir to enable paragraphe subtitle injection and
+    correct per-file range announcements.
+
     Returns a list of dicts:
-      file_number      str   from the boundary heading entry
-      paragraph_range  list  [first, last]
-      location         dict
-      entries          list  all manifest entries belonging to this file
+      file_number        str   from the boundary heading entry
+      paragraph_range    list  [first, last]
+      location           dict
+      entries            list  all manifest entries belonging to this file
+      paragraphe_number  int   (optional) sub-article section number
+      paragraphe_title   str   (optional) sub-article section title
     """
     groups: list[dict] = []
     current: dict | None = None
@@ -1342,6 +1421,9 @@ def build_v2_file_groups(manifest: dict) -> list[dict]:
         v2_para_nums = [e["number"] for e in g["entries"] if e["kind"] == "paragraph"]
         if v2_para_nums:
             g["paragraph_range"] = [min(v2_para_nums), max(v2_para_nums)]
+
+    if chapters_full_dir is not None:
+        _patch_group_headings(groups, chapters_full_dir)
 
     return groups
 

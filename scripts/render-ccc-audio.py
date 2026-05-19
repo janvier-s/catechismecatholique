@@ -23,6 +23,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ccc_audio
 import render_ccc_audio_lib as rlib
 
+CHAPTERS_FULL_DIR = Path(__file__).resolve().parent.parent / "static/data/cec/chapters-full"
+
 
 # ---------------------------------------------------------------------------
 # V1 helpers
@@ -163,7 +165,7 @@ def _v2_out_relpath(group: dict) -> str:
 
 
 def _run_v2(args: argparse.Namespace, manifest: dict) -> int:
-    groups = ccc_audio.build_v2_file_groups(manifest)
+    groups = ccc_audio.build_v2_file_groups(manifest, chapters_full_dir=CHAPTERS_FULL_DIR)
 
     # Filter by explicit file number (single-file test mode).
     if args.file_number:
@@ -241,6 +243,7 @@ def _run_v2(args: argparse.Namespace, manifest: dict) -> int:
         # Boundary heading level decides how to derive the title.
         boundary = next((e for e in group["entries"] if e["kind"] == "heading"), None)
         level = boundary.get("level") if boundary else None
+        para_title = group.get("paragraphe_title")
         if level == "en_bref":
             container = (loc.get("article_title") or loc.get("chapter_title")
                          or loc.get("section_title") or "CCC")
@@ -248,7 +251,11 @@ def _run_v2(args: argparse.Namespace, manifest: dict) -> int:
         elif level == "continuation":
             container = (loc.get("article_title") or loc.get("chapter_title")
                          or loc.get("section_title") or "CCC")
-            title_seg = f"{container} (suite)"
+            title_seg = f"{para_title} (suite)" if para_title else f"{container} (suite)"
+        elif level == "article" and para_title:
+            art_num = loc.get("article_number")
+            prefix = f"Article {art_num} · " if art_num else ""
+            title_seg = f"{prefix}{para_title}"
         else:
             # Title = first heading segment text (already clean + phonetic).
             title_seg = next(
