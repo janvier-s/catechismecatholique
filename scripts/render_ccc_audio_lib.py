@@ -180,6 +180,119 @@ def render_entry(
         shutil.rmtree(tmpdir, ignore_errors=True)
 
 
+def render_segment_macos(
+    voice_name: str,
+    text: str,
+    out_path: Path,
+    rate_wpm: int | None = None,
+    volume_db: float = 0.0,
+) -> bool:
+    """Render one segment with macOS say, convert to MP3 via ffmpeg."""
+    aiff_path = out_path.with_suffix(".aiff")
+    try:
+        argv = ["say", "-v", voice_name, "-o", str(aiff_path)]
+        if rate_wpm is not None:
+            argv.extend(["-r", str(rate_wpm)])
+        argv.extend(["--", text])
+        if subprocess.run(argv, capture_output=True, text=True).returncode != 0:
+            return False
+        ff = ["ffmpeg", "-y", "-i", str(aiff_path)]
+        if volume_db != 0.0:
+            ff.extend(["-af", f"volume={volume_db:.1f}dB"])
+        ff.extend(["-codec:a", "libmp3lame", "-q:a", "4", str(out_path)])
+        return subprocess.run(ff, capture_output=True, text=True).returncode == 0
+    finally:
+        aiff_path.unlink(missing_ok=True)
+
+
+def _v2_opts_for(seg: dict) -> tuple[int | None, int | None, int | None]:
+    """Return (extra_pitch_hz, extra_rate_pct, override_volume_pct) for a V2 segment."""
+    if seg["voice"] != "gerard":
+        return None, None, None
+    text = seg["text"]
+    # Range announces and citation labels are structural cues — slightly quieter.
+    if text.startswith("Paragraphes ") or text.startswith("Paragraphe "):
+        return None, None, -20
+    if text.startswith("Citation"):
+        return None, None, -20
+    # Chapter / article titles and heading2/3 labels: normal Gerard volume.
+    return None, None, None
+
+
+def render_v2_group(
+    *,
+    group: dict,
+    out_path: Path,
+    gap_ms: int,
+    section_gap_ms: int = 600,
+    skip_existing: bool = False,
+    macos_gerard_voice: str | None = None,
+    macos_gerard_rate_wpm: int | None = None,
+) -> bool:
+    """Render all v2-targeted segments from a file group into one MP3.
+
+    Uses a wider `section_gap_ms` after every heading segment to give the
+    listener a breath before body text begins.
+
+    When `macos_gerard_voice` is set (e.g. "Thomas (Enhanced)"), Gerard
+    segments are rendered via macOS say + ffmpeg instead of edge-tts.
+    """
+    if skip_existing and out_path.exists():
+        return True
+
+    tagged: list[tuple[dict, bool]] = []
+    for entry in group["entries"]:
+        is_heading = entry["kind"] == "heading"
+        for seg in entry["segments"]:
+            if "v2" in seg["targets"]:
+                tagged.append((seg, is_heading))
+
+    if not tagged:
+        return False
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    def _render_seg(seg: dict, dest: Path) -> bool:
+        if macos_gerard_voice and seg["voice"] == "gerard":
+            # Quieter for structural labels (range announces, citation intros).
+            text = seg["text"]
+            is_label = (text.startswith("Paragraphes ") or
+                        text.startswith("Paragraphe ") or
+                        text.startswith("Citation"))
+            vol_db = -2.0 if is_label else 0.0
+            return render_segment_macos(
+                macos_gerard_voice, text, dest,
+                rate_wpm=macos_gerard_rate_wpm, volume_db=vol_db,
+            )
+        pitch, rate, vol = _v2_opts_for(seg)
+        argv = build_edge_tts_argv(seg["voice"], seg["text"], dest,
+                                    extra_pitch_hz=pitch, extra_rate_pct=rate,
+                                    override_volume_pct=vol)
+        return subprocess.run(argv, capture_output=True, text=True).returncode == 0
+
+    if len(tagged) == 1:
+        seg, _ = tagged[0]
+        return _render_seg(seg, out_path)
+
+    tmpdir = Path(tempfile.mkdtemp(prefix="ccc_v2_"))
+    try:
+        files: list[Path] = []
+        for i, (seg, is_heading) in enumerate(tagged):
+            seg_file = tmpdir / f"seg_{i:04d}.mp3"
+            if not _render_seg(seg, seg_file):
+                return False
+            files.append(seg_file)
+            if i < len(tagged) - 1:
+                this_gap = section_gap_ms if is_heading else gap_ms
+                gap_file = tmpdir / f"gap_{i:04d}.mp3"
+                if not generate_silence(this_gap, gap_file):
+                    return False
+                files.append(gap_file)
+        return concat_mp3s(files, out_path)
+    finally:
+        shutil.rmtree(tmpdir, ignore_errors=True)
+
+
 from mutagen.id3 import ID3, TIT2, TALB, TPE1, TRCK, TCON, COMM, ID3NoHeaderError
 
 
