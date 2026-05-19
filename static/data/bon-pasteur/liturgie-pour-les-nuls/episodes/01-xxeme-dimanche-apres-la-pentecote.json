@@ -1,0 +1,180 @@
+{
+	"slug": "01-xxeme-dimanche-apres-la-pentecote",
+	"n": 1,
+	"title": "XXème dimanche après la Pentecôte",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Introduction à la série",
+			"anchor": "introduction-a-la-serie"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cette série fait suite au cours de catéchisme pour adultes. L'abbé Laguérie a choisi d'étudier la Sainte Écriture dans et par la liturgie, en particulier d'aider les fidèles à comprendre le <em>propre de la messe</em> et sa cohérence interne. Une chose frappe quiconque nage dans la liturgie de la messe depuis des années : les textes qui composent le propre d'une même liturgie ne sont pas assemblés au hasard. Il y règne une harmonie, une sagesse qui n'a d'autre explication que le Saint-Esprit lui-même au travail dans l'Église.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Propre et ordinaire",
+			"anchor": "propre-et-ordinaire"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dans les textes de la messe, il faut distinguer l'<strong>ordinaire</strong> et le <strong>propre</strong>. L'ordinaire (essentiellement l'offertoire et le canon) reste toujours le même. Le <strong>propre</strong> est l'ensemble des textes qui changent à chaque messe, à chaque dimanche : l'introïte, la collecte, l'épître, le graduel, l'évangile, l'offertoire, la secrète, la communion et la postcommunion.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Une liturgie, c'est un contact avec Dieu. Ce contact est double : d'une part la <em>Parole de Dieu</em> qui pénètre dans nos âmes, d'autre part le <em>Corps du Seigneur</em> que nous mangeons dans l'Eucharistie. Le propre de la messe ne véhicule pas une idée abstraite ni un concept théologique : il nous délivre un message unique, une présence, un point de contact avec le Christ.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La méthode",
+			"anchor": "la-methode"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La méthode est simple et constante dans toute la série :</p><ul><li>Lire d'abord l'<strong>Évangile</strong>, texte majeur de tout propre de la messe.</li><li>Lire ensuite l'<strong>Épître</strong>, deuxième grand texte.</li><li>Dégager le <strong>message commun</strong>, le point d'impact unique entre Dieu et nous dans cette liturgie.</li><li>Vérifier comment les autres textes (introïte, offertoire, communion, collecte, secrète) font écho à ce message.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'introïte prend les choses dans leur grandeur et leur globalité, il donne le ton général. Les trois prières (collecte, secrète, postcommunion) s'adressent directement à Dieu. La collecte est la prière principale ; elle ramasse toutes les autres, ce qui lui a valu ce nom. L'offertoire et la communion, petits textes scripturaires, viennent eux aussi faire chorus au message délivré conjointement par l'épître et l'évangile.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Lex orandi, lex credendi</em> » : la loi de la prière établit la loi de la foi. La liturgie officielle de l'Église est le dépôt vivant de la foi catholique. C'est pourquoi on ne trafique pas la liturgie impunément.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Un bon sermon : un seul impact",
+			"anchor": "un-bon-sermon"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Un bon sermon n'est pas un sermon brillant. C'est un sermon qui délivre un seul message, un seul point d'impact, un peu comme on enfonce un clou. Nous ne sommes pas des idéologues : on ne fait pas un bon sermon avec une idée. Il y a des prédicateurs très brillants qui veulent tout dire à la fois ; on se souvient d'un d'entre eux qui, en cinquante-quatre minutes (un peu trop long pour un sermon), a passé en revue les quinze mystères du Rosaire <em>et</em> les sept sacrements. Les fidèles sortent émerveillés : <em>quel prédicateur !</em> Mais si on leur demande ce qu'il a dit, ils n'en savent rien. Ça ne marche pas.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le fidèle doit sortir de la liturgie, en plus du contact eucharistique, avec un point précis d'adhésion au mystère du Christ. La liturgie ne véhicule pas une idée, un thème, un concept : elle nous fait toucher Jésus-Christ sur un point particulier. Et ce point, c'est précisément ce que livre conjointement le propre de la messe, l'épître et l'évangile en tête.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'Évangile : le fils de l'officier royal (Jn 4, 46-53)",
+			"anchor": "l-evangile"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Lire l'évangile intelligemment, c'est d'abord situer les personnages et le lieu : <em>tous les mots sont importants dans l'Évangile</em>. Quand la même scène est racontée par plusieurs évangélistes, il faut comparer les versions parallèles ; pour cela, la <em>Synopse</em> du père Lagrange est un instrument précieux, où les récits identiques de saint Matthieu, saint Marc et saint Luc sont rangés en colonnes. Saint Jean, lui, fait souvent cavalier seul. C'est précisément le cas ici.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Nous sommes à Cana, en Galilée. Jésus vient de remonter de Judée. Il n'a encore accompli qu'un seul miracle : les noces de Cana. Un <em>regulus</em> (un petit officier royal, un officier de la cour d'Hérode en Galilée, qui n'a rien à voir avec le centurion romain) apprend que Jésus est là ; son fils se meurt à Capharnaüm, à quelques lieues. Il vient supplier Jésus de descendre guérir son enfant.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« En ce temps-là, il y avait un officier royal dont le fils était malade à Capharnaüm. Ayant appris que Jésus arrivait de Judée en Galilée, il alla vers lui et le supplia de venir chez lui pour guérir son fils qui se mourait. Jésus lui dit : <em>Si vous ne voyez des prodiges et des signes, vous ne croyez pas.</em> L'officier lui dit : Seigneur, descendez avant que mon fils ne meure. Jésus lui dit : <em>Va, ton fils vit.</em> Cet homme crut à la parole que Jésus lui avait dite, et il partit. » (Jn 4, 46-50)</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Jésus impose au <em>regulus</em> une épreuve de foi : il doit croire, sur la seule parole du Seigneur, que son fils vit, sans voir, sans miracle visible, sans signe. L'homme croit et repart. Comme il descend vers Capharnaüm, ses serviteurs viennent à sa rencontre : son fils est guéri depuis hier, à la septième heure, l'heure même où Jésus avait dit : <em>Va, ton fils vit.</em> Et il crut, lui et toute sa maison.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'Épître : soyez sages, remplis de l'Esprit (Éph 5, 15-21)",
+			"anchor": "l-epitre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'épître aux Éphésiens est l'une des trois épîtres où saint Paul n'a pas de problème à régler : il enseigne simplement la vérité du Christ. Avec les Philippiens et les Colossiens, elle est une sorte d'encyclique destinée à être lue dans toutes les églises d'Asie Mineure. Ailleurs (aux Galates, aux Corinthiens, aux Romains), saint Paul règle des querelles concrètes, et il lui arrive d'être furieux (lisez l'épître aux Galates du début à la fin). Ici, rien de tel : Paul y livre une doctrine pure et lumineuse.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« Mes frères, prenez bien garde à votre conduite et ne vivez pas comme des insensés, mais comme des hommes sages, profitant des moments qui vous sont donnés, <em>car les jours sont mauvais.</em> Aussi ne soyez pas imprudents, mais comprenez bien quelle est la volonté du Seigneur. Ne vous enivrez pas de vin (c'est la source de la luxure), mais remplissez-vous de l'Esprit Saint, vous entretenant de psaumes, d'hymnes et de cantiques spirituels, chantant et psalmodiant du fond de vos cœurs pour le Seigneur, rendant continuellement grâce pour toute chose à Dieu le Père, au nom de Notre Seigneur Jésus-Christ. » (Éph 5, 15-20)</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le message commun : les jours sont mauvais",
+			"anchor": "le-message-commun"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le pivot est dans l'épître : <em>les jours sont mauvais.</em> C'est la condition humaine. Nous sommes dans une vallée de larmes, loin de la patrie, loin du Seigneur. Tous les jours sont mauvais, même si nous pouvons nous le dissimuler. Il y a à cette misère deux mauvaises solutions et une bonne.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Première mauvaise solution : les plaisirs artificiels",
+			"html": "<p>S'enivrer de vin, se divertir, s'étourdir. Ce que Pascal appelait le <em>divertissement</em> : pour ne plus sentir le poids des jours mauvais, on se jette dans les plaisirs, la fête, l'oubli. Saint Paul dit clairement que cette voie mène à la luxure. Mauvaise solution.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Deuxième mauvaise solution : le miracle de confort",
+			"html": "<p>Vouloir que Dieu règle tous les problèmes d'un coup de baguette magique pour qu'on puisse ensuite mener une vie tranquille. C'est exactement ce que veut le <em>regulus</em> : pas la foi, pas le Christ, pas le Royaume, mais la guérison de son fils pour retrouver la paix. D'où la réponse du Seigneur : <em>Si vous ne voyez des signes et des prodiges, vous ne croyez pas.</em> Ce n'est pas la foi véritable, c'est la recherche d'un confort temporel.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La bonne solution : la foi en Jésus-Christ",
+			"html": "<p>Se remplir de l'Esprit Saint et chanter Dieu, même dans l'épreuve, même si les jours restent mauvais. Placer toute son espérance en Jésus-Christ, qui seul a les paroles de la vie éternelle, qui seul a solution sur la mort et sur la souffrance. Non pas une idée, non pas un concept : une adhésion au mystère du Christ, <em>in illo, per illum, in ipso</em>. Le <em>regulus</em> est finalement sauvé parce qu'il croit sur la seule parole du Seigneur, sans voir.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les autres textes du propre",
+			"anchor": "les-autres-textes"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'Introïte (Dn 3, 31)",
+			"anchor": "l-introite"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Omnia quae fecisti nobis, Domine, iusto iudicio fecisti.</em> Tout ce que vous nous avez fait, Seigneur, vous l'avez fait par un juste jugement, car nous avons péché contre vous et nous n'avons pas obéi à vos commandements. Mais glorifiez votre nom et agissez envers nous selon l'abondance de votre miséricorde. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Voilà la réponse chrétienne aux jours mauvais : non pas la révolte, non pas la plainte contre Dieu, mais la reconnaissance que sa Providence est juste. Dieu ne se trompe jamais. Pour le chrétien qui sait avoir péché, l'épreuve trouve toujours quelque chose qu'il n'a pas volé. Mais même celui qui n'a absolument pas péché peut être dans l'épreuve : qu'on songe à Job, ou à sainte Thérèse de l'Enfant-Jésus, immaculée du début à la fin de sa vie, qui s'offrit à la miséricorde divine et confiait dans une de ses lettres : <em>j'aurai du mal à m'habituer au ciel, je suis tellement habituée à la souffrance que je ne sais comment Dieu fera pour que je m'habitue à la joie et à la félicité éternelle.</em></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'introïte prend ainsi la chose dans sa dimension la plus haute et la plus générale : toute épreuve vient d'un juste jugement de Dieu, et notre seul recours est son infinie miséricorde.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'Offertoire (Ps 136)",
+			"anchor": "l-offertoire"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Super flumina Babylonis, illic sedimus et flevimus, cum recordaremur Sion.</em> Au bord des fleuves de Babylone, nous étions assis et nous pleurions en nous souvenant de Sion. Sur les saules des environs, nous avions suspendu nos harpes. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Image saisissante des jours mauvais par excellence : les Juifs déportés par Nabuchodonosor, privés de leur temple, de leurs prêtres, de leurs sacrifices, à trois mille kilomètres de leur terre. Assis sur les rives de l'Euphrate, ils pleurent. Ils ont suspendu leurs instruments et ils se demandent : <em>Quomodo cantabimus canticum Domini in terra aliena?</em> Comment chanterions-nous le cantique du Seigneur en terre étrangère ?</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Mais ils ont tort de se taire. Saint Paul, dans l'épître, dit précisément l'inverse : au cœur de l'épreuve, remplissez-vous de l'Esprit Saint et chantez des hymnes et des cantiques spirituels. Le silence des Juifs à Babylone est lui aussi une mauvaise solution : face aux jours mauvais, la mélancolie et l'accablement ne sont pas la réponse chrétienne.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Communion (Ps 118)",
+			"anchor": "la-communion"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Memento verbi tui servo tuo, in quo mihi spem dedisti : haec me consolata est in humilitate mea.</em> Souvenez-vous de votre parole à votre serviteur, par laquelle vous m'avez donné l'espérance : c'est elle qui m'a consolé dans mon humiliation. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Non pas les signes et les prodiges. Non pas le vin. Mais l'espérance que Dieu a déposée dans notre cœur par sa Parole, voilà ce qui console dans l'humiliation. C'est la réponse au <em>regulus</em> et aux Juifs de Babylone : l'unique consolation est l'espérance fondée sur la Parole du Seigneur. Là est la bonne solution, celle que l'officier royal a finalement choisie en croyant sur la parole du Christ, et son fils a vécu.</p>"
+		}
+	]
+}

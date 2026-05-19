@@ -1,0 +1,171 @@
+{
+	"slug": "06-la-toussaint",
+	"n": 6,
+	"title": "La Toussaint",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Origine de la fête",
+			"anchor": "origine"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La fête de la Toussaint remonte au pape Boniface IV, qui transforma le Panthéon de Rome (le temple de <em>tous les dieux</em>, <em>panta theos</em>) en église catholique le 13 mai 610. Cette ancienne basilique païenne, déjà déchue depuis Constantin, devenait <em>Sancta Maria ad Martyres</em>, Notre-Dame des Martyrs. Les colonnes de bronze du maître-autel de Saint-Pierre seront plus tard fondues à partir des plaques de sa toiture.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le titre s'élargit sous Grégoire IV (827-844), qui consacra l'édifice le 1ᵉʳ novembre, cette fois en l'honneur de <em>tous les saints</em>. On y joint les vierges, les confesseurs, tous ceux qui sont morts en odeur de sainteté sans avoir été martyrs, puisque l'ère des persécutions romaines est close depuis quelques siècles. C'est cette date du 1ᵉʳ novembre qui est restée. Douze siècles de tradition.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Avant d'aborder les textes, une rectification utile : la Toussaint n'est pas la fête des morts. C'est la fête des <em>vivants</em>, car notre Dieu est le Dieu d'Abraham, d'Isaac et de Jacob, qui sont vivants. La fête des fidèles défunts est le lendemain, 2 novembre. Et la liturgie de la Toussaint est faite pour nous qui vivons, comme le rappelait saint Augustin : même la liturgie funèbre est faite pour les vivants.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'Évangile : les huit Béatitudes (Mt 5, 1-12)",
+			"anchor": "l-evangile"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les chapitres 5, 6 et 7 de saint Matthieu composent l'immense Sermon sur la Montagne, probablement prononcé le lendemain du jour où Jésus a choisi ses Apôtres, dans la période la plus faste de son ministère galiléen. La voix de Jésus, au bord du lac de Génésareth, portait peut-être sur l'eau, ce qui expliquerait qu'elle ait été entendue de milliers de personnes accourues de Judée, de Tyr et de Sidon. Et ce sermon s'ouvre par les huit Béatitudes.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« En ce temps-là, voyant la foule, Jésus monta sur la montagne, et s'étant assis, ses disciples s'approchèrent de lui ; et prenant la parole, il les enseignait en disant : <em>Heureux les pauvres en esprit, car le royaume des cieux est à eux. Heureux les doux, car ils posséderont la terre. Heureux ceux qui pleurent, car ils seront consolés. Heureux ceux qui ont faim et soif de la justice, car ils seront rassasiés. Heureux les miséricordieux, car ils obtiendront miséricorde. Heureux les cœurs purs, car ils verront Dieu. Heureux les pacifiques, car ils seront appelés fils de Dieu. Heureux ceux qui souffrent persécution à cause de la justice, car le royaume des cieux est à eux. Heureux êtes-vous lorsque les hommes vous maudissent et vous persécutent à cause de moi : réjouissez-vous et soyez dans l'allégresse, car votre récompense est grande dans les cieux.</em> » (Mt 5, 1-12)</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Jésus est <em>assis</em>, attitude d'autorité, comme le confesseur, comme le juge. <em>La justice est rendue assise.</em> Toute la suite du sermon est conçue avec une autorité phénoménale : <em>vous avez appris qu'il a été dit aux anciens... et moi je vous dis...</em> Celui qui a parlé aux anciens, c'est Dieu ; celui qui dit maintenant <em>moi je vous dis</em> ne peut être qu'au même rang. Les foules sortiront <em>stupéfaites</em> : <em>jamais homme n'a parlé comme celui-là.</em></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Deux choses étonnent dans la formulation. D'abord, l'ambiguïté délibérée entre <em>présent</em> et <em>futur</em>. Le pauvre en esprit est <em>déjà</em> heureux maintenant, et il aura la béatitude éternelle ; c'est exactement la même chose. La béatitude est intemporelle. Le doux possède <em>déjà</em> en partie la terre ici-bas par son rayonnement, et il possédera le ciel. Cette ambiguïté est cultivée par le Seigneur : le code de la route et l'arrivée ne font qu'un.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ensuite, les moyens proposés sont déroutants, presque révoltants pour la nature humaine livrée à elle-même. <em>Heureux les pauvres ?</em> C'est à hurler ; il faut bien manger. <em>Heureux les doux ?</em> Mais les doux se font marcher sur la tête, les lobbies et les grandes gueules les écrasent. <em>Heureux ceux qui ont faim et soif de la justice ?</em> Ce sont ceux dans la poche desquels on prend, pas ceux qui s'en mettent plein les fouilles. <em>Heureux les cœurs purs ?</em> Quelle révolution : l'Antiquité, avec les épicuriens, faisait coïncider le bonheur et le plaisir. <em>Heureux les persécutés ?</em> Comble du paradoxe. Et pourtant cela <em>passe</em>, les foules le savent profondément. Le génie propre du Christ est de toucher l'homme à l'endroit le plus intime de ses aspirations, pas de ses démangeaisons.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Luc, dans sa version (Lc 6, 20-26), n'a que quatre Béatitudes mais les assortit de quatre <em>malédictions</em> corrélatives : <em>malheur à vous riches, repus, rieurs, et à vous lorsque tous les hommes diront du bien de vous.</em> Quand le monde entier dit du bien de quelqu'un, c'est très mauvais signe : les bons ont toujours été critiqués. Saint Matthieu garde l'intégralité des huit Béatitudes positives ; les malédictions, dans son intention, ont été prononcées à un autre moment.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'Épître : la multitude des élus (Ap 7, 2-12)",
+			"anchor": "l-epitre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'épître est tirée de l'Apocalypse, texte de prophétie dicté à saint Jean sur l'île de Patmos. <em>Une prophétie</em>, comme le Seigneur le précise lui-même, n'est pas faite pour qu'on note une date dans son agenda. Elle est faite pour que ceux qui vivront l'événement se souviennent qu'il a été prédit et adoptent la conduite requise : <em>je vous l'ai dit, afin que lorsque cela arrivera, vous vous souveniez que je vous l'avais dit</em> (Jn 14, 29).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le contexte : aux chapitres 4 à 6, saint Jean voit le ciel. Un trône immense ; sur le trône, Quelqu'un que l'on ne peut décrire, <em>semblable au jaspe et à la sardoine</em>, Dieu lui-même. Un arc-en-ciel d'émeraude tout autour. Vingt-quatre vieillards sur des trônes : les Pères de l'Église y voient les prêtres (les <em>presbuteros</em>, anciens, dont le mot dérive), en référence aux vingt-quatre classes sacerdotales instituées par David ; assis sur des trônes parce que Jésus a promis à Pierre, en réponse à sa question <em>nous avons tout quitté, qu'aurons-nous ?</em>, qu'ils <em>siégeraient sur douze trônes pour juger les douze tribus d'Israël</em> (Mt 19, 28). Sept esprits qui se tiennent en présence : les sept archanges, dont nous ne connaissons que trois noms (Michel, Gabriel, Raphaël). Avant la chute, ce rôle de porter à eux seuls la lumière de Dieu pour la transmettre aux autres anges était peut-être tenu par le seul Lucifer ; de là son nom même, <em>porteur de lumière</em>. Quatre animaux à face de lion, de taureau, d'homme et d'aigle : les quatre évangélistes (Marc, Luc, Matthieu, Jean). Et au centre, le <em>Livre de Vie</em> scellé de sept sceaux. Personne ne peut l'ouvrir, sauf <em>l'Agneau qui a été immolé.</em></p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« Moi, Jean, je vis un autre ange qui montait du côté où le soleil se lève, tenant le sceau du Dieu vivant ; et il cria d'une voix forte aux quatre anges qui avaient reçu le pouvoir de frapper la terre et la mer : <em>Ne faites pas de mal à la terre, ni à la mer, ni aux arbres, jusqu'à ce que nous ayons marqué au front les serviteurs de notre Dieu.</em> Et j'entendis le nombre de ceux qui avaient été marqués : cent quarante-quatre mille, de toutes les tribus d'Israël... Je vis ensuite une foule immense que personne ne pouvait dénombrer, de toute nation, de toute tribu, de tout peuple et de toute langue ; ils se tenaient devant le trône et devant l'Agneau, vêtus de robes blanches, avec des palmes à la main, et ils criaient à grande voix : <em>Le salut vient de notre Dieu qui est assis sur le trône et de l'Agneau !</em> » (Ap 7, 2-12)</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Cent quarante-quatre mille (douze fois douze fois mille) n'est pas un dénombrement. C'est la <em>plénitude</em>, le <em>plérôme</em> grec : douze, chiffre des tribus de Juda et des Apôtres, élevé au carré et multiplié par mille. La phrase suivante le confirme : <em>une foule que personne ne pouvait dénombrer.</em> La Sainte Écriture n'exagère pas : quand elle écrit <em>une multitude que personne ne pouvait dénombrer</em>, c'est qu'on est au-delà de tout dénombrement humain.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'abbé Claude Barthe l'a rappelé dans un de ses ouvrages récents : la liturgie traditionnelle de l'Église (son ordonnancement, ses encensements, sa hiérarchie) est très largement tirée de ce rituel céleste de l'Apocalypse. Quand nous célébrons la messe selon le rite ancien, nous mimons sur terre cette liturgie céleste que saint Jean a contemplée à Patmos.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le message commun : la route du ciel et le ciel",
+			"anchor": "le-message-commun"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La jonction est évidente. L'évangile dessine la route, les huit Béatitudes ; l'épître montre l'arrivée, la multitude innombrable des élus devant le trône. Et ces deux choses, route et arrivée, sont <em>déjà la même chose</em> chez ceux qui marchent dans les Béatitudes. Le doux possède déjà la terre ; le persécuté possède déjà le royaume des cieux. La Toussaint célèbre cette continuité, cette vie unique commencée ici-bas et qui ne sera que <em>déployée</em> dans la gloire.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Mais une condition demeure absolue. <em>Rien de souillé n'entrera dans le ciel</em> (Ap 21, 27). <em>Vous n'en sortirez pas que vous n'ayez payé jusqu'à la dernière obole</em> (Mt 5, 26), allusion classique au purgatoire. Tous les saints, sauf la Vierge Marie qui n'a jamais péché, ont eu besoin du pardon de Dieu pour entrer dans la gloire. C'est pourquoi seul l'Agneau immolé peut ouvrir le Livre de Vie : il n'y a pas un élu qui n'ait été <em>lavé dans son sang.</em></p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les autres textes du propre",
+			"anchor": "les-autres-textes"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'Introïte (Gaudeamus)",
+			"anchor": "l-introite"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Gaudeamus omnes in Domino, diem festum celebrantes sub honore Sanctorum omnium : de quorum solemnitate gaudent Angeli, et collaudant Filium Dei.</em> Réjouissons-nous tous dans le Seigneur, célébrant ce jour de fête en l'honneur de tous les saints ; à cette solennité les anges se réjouissent et louent ensemble le Fils de Dieu. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le ciel est une fête, et la Toussaint nous y associe pour un jour. La louange des anges, l'allégresse des saints, le <em>Filius Dei</em> au centre, tout l'ordonnancement de l'Apocalypse est résumé dans cet introïte qui ouvre la messe.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le Graduel (Ps 33)",
+			"anchor": "graduel"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Timete Dominum, omnes Sancti ejus, quoniam nihil deest timentibus eum. Inquirentes autem Dominum, non deficient omni bono.</em> Craignez le Seigneur, vous tous ses saints, car rien ne manque à ceux qui le craignent ; ceux qui cherchent le Seigneur ne seront privés d'aucun bien. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Antidote précis aux Béatitudes mal comprises. On pourrait craindre de perdre pied en suivant cette voie : pauvre, persécuté, en larmes. Le graduel rassure : ceux qui cherchent vraiment le Seigneur ne manqueront d'aucun bien. La crainte de Dieu n'est pas un appauvrissement, c'est l'entrée dans une plénitude.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'Offertoire (Sg 3, 1-3)",
+			"anchor": "l-offertoire"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Justorum animae in manu Dei sunt, et non tanget illos tormentum mortis : visi sunt oculis insipientium mori : illi autem sunt in pace.</em> Les âmes des justes sont dans la main de Dieu, et le tourment de la mort ne les atteindra pas ; aux yeux des insensés ils paraissent mourir, mais ils sont dans la paix. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Ancien Testament, où la perspective de la vie éternelle reste floue, exhortait les justes en disant : <em>attendez, le méchant prospère mais ça va changer ; vous souffrez mais vous serez consolés.</em> L'Évangile a accompli cette pédagogie : oui, les âmes des justes sont dans la main de Dieu, et ce qui paraît mort aux insensés est en réalité paix éternelle.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Communion (Mt 5, 8-10)",
+			"anchor": "la-communion"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Beati mundo corde, quoniam ipsi Deum videbunt ; beati pacifici, quoniam filii Dei vocabuntur ; beati qui persecutionem patiuntur propter justitiam, quoniam ipsorum est regnum caelorum.</em> »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La communion reprend trois Béatitudes (les cœurs purs, les pacifiques, les persécutés), et les met directement sur les lèvres du communiant. La route du ciel devient pain reçu : on ne se contente pas de l'écouter, on la mange.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Collecte",
+			"anchor": "la-collecte"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« Dieu tout-puissant et éternel, qui nous faites honorer dans une même solennité les mérites de tous vos saints, nous vous en prions, répandez sur nous, à la prière de tant d'intercesseurs, l'abondance désirée de votre pardon. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La grâce demandée est étonnante. On pourrait attendre qu'on demande la sainteté, la persévérance, la gloire. La collecte demande simplement <em>l'abondance désirée du pardon.</em> Parce que c'est par là que tout commence et que tout s'achève : entrer dans la gloire suppose d'avoir été lavé. Les saints sont nombreux ; ils intercèdent. L'unique grâce qu'on leur demande est celle dont nous avons tous besoin pour les rejoindre.</p>"
+		}
+	]
+}

@@ -12,7 +12,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Nous avons fini la justice · l'avant-dernière leçon nous présente la <strong>tempérance</strong>, qui rendra cette justice possible. Sans tenir ses passions, un homme ne sera jamais juste · un coléreux, un gourmand, un luxurieux manqueront tôt ou tard à rendre à chacun ce qui lui est dû. Les onze passions énumérées par saint Thomas et Aristote se répartissent en deux groupes ·</p><ul><li>les <em>passions au repos</em> (concupiscible) · amour, haine, désir, dégoût, joie, tristesse · réglées par la <strong>tempérance</strong> ·</li><li>les <em>passions violentes</em> (irascible) · crainte, audace, espoir, désespoir, colère · réglées par la <strong>force</strong> · que nous verrons la semaine prochaine.</li></ul>"
+			"html": "<p>Nous avons fini la justice ; l'avant-dernière leçon nous présente la <strong>tempérance</strong>, qui rendra cette justice possible. Sans tenir ses passions, un homme ne sera jamais juste ; un coléreux, un gourmand, un luxurieux manqueront tôt ou tard à rendre à chacun ce qui lui est dû. Les onze passions énumérées par saint Thomas et Aristote se répartissent en deux groupes :</p><ul><li>les <em>passions au repos</em> (concupiscible) ; amour, haine, désir, dégoût, joie, tristesse ; réglées par la <strong>tempérance</strong></li><li>les <em>passions violentes</em> (irascible) ; crainte, audace, espoir, désespoir, colère ; réglées par la <strong>force</strong>, que nous verrons la semaine prochaine.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les hommes ne sont pas si mauvais qu'il y paraît : s'il suffisait de le vouloir pour être juste et saint, beaucoup le seraient. Mais la volonté seule ne tient pas, parce que les passions débordent. J'en ai eu une illustration saisissante quand j'étais à Saint-Nicolas, dans un échange de correspondance avec le président <strong>François Mitterrand</strong>, alors atteint d'un cancer. Je lui avais fait remarquer qu'il allait paraître devant Dieu, et qu'il y aurait peut-être lieu de s'ajuster. Il m'a répondu, j'ai sa signature, par une longue citation de <em>Vauban</em>, signée de sa main, dont la pointe disait en substance : <em>si la vertu n'avait pas été aussi chère, j'aurais préféré ce chemin</em>. Aveu remarquable : l'homme connaît le bon chemin, il aurait voulu le prendre, mais il s'est laissé entraîner par ses passions.</p>"
 		},
 		{
 			"kind": "quote",
@@ -21,7 +25,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Beaucoup d'hommes seraient bien plus justes s'ils n'étaient pas sans cesse entraînés par leurs passions. La droiture, l'honnêteté, consistent le plus souvent à tenir ses passions · c'est-à-dire à être tempérant et fort.</p>"
+			"html": "<p>Beaucoup d'hommes seraient bien plus justes s'ils n'étaient pas sans cesse entraînés par leurs passions. La droiture, l'honnêteté, consistent le plus souvent à tenir ses passions, c'est-à-dire à être tempérant et fort.</p>"
 		},
 		{
 			"kind": "heading",
@@ -42,12 +46,12 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Distinction capitale · le <strong>sujet</strong> de la tempérance est la <em>volonté</em> · ce sont les passions qui sont réglées, mais elles ne se règlent pas elles-mêmes · c'est la volonté qui les tient. Sinon, on ne serait pas coupable d'être intempérant. Est tempérant celui qui <em>veut</em> l'être · est intempérant celui qui ne le veut pas. L'<strong>objet</strong>, ce sur quoi la vertu porte, ce sont les <em>passions à tenir</em> selon l'ordre de la raison.</p>"
+			"html": "<p>Distinction capitale ; le <strong>sujet</strong> de la tempérance est la <em>volonté</em> : ce sont les passions qui sont réglées, mais elles ne se règlent pas elles-mêmes : c'est la volonté qui les tient. Sinon, on ne serait pas coupable d'être intempérant. Est tempérant celui qui <em>veut</em> l'être ; est intempérant celui qui ne le veut pas. L'<strong>objet</strong>, ce sur quoi la vertu porte, ce sont les <em>passions à tenir</em> selon l'ordre de la raison.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Les passions sont bonnes",
-			"html": "<p><strong>Attention · toutes les passions sont bonnes</strong> · c'est Dieu qui les a faites. Un homme qui n'aurait pas plus de réactivité au bien sensible qu'un bout de bois ne serait pas un saint, mais un infirme. Il est <em>normal</em> d'être triste quand on apprend une mauvaise nouvelle · il est normal d'être joyeux quand on apprend une bonne. Le tout est qu'il n'y ait pas un excès de joie ou de tristesse qui nous fasse dévier du bon chemin.</p>"
+			"html": "<p><strong>Attention ; toutes les passions sont bonnes</strong> : c'est Dieu qui les a faites. Un homme qui n'aurait pas plus de réactivité au bien sensible qu'un bout de bois ne serait pas un saint, mais un infirme. Il est <em>normal</em> d'être triste quand on apprend une mauvaise nouvelle ; il est normal d'être joyeux quand on apprend une bonne. Le tout est qu'il n'y ait pas un excès de joie ou de tristesse qui nous fasse dévier du bon chemin. Toutes les passions doivent être tenues : regardez quelqu'un qui se laisse entraîner à la tristesse, il va faire le mal ; on ne peut pas vivre tout le temps dans la tristesse, il faut tenir la tristesse comme on tient la joie.</p><p>Les facultés de l'homme sont hiérarchisées : au-dessus de toutes, l'intelligence ; au-dessous, la volonté ; ensuite les passions ; finalement le corps. Le sujet de la tempérance, c'est donc bien la volonté qui, éclairée par la raison, tient les passions, lesquelles à leur tour gèrent le corps.</p>"
 		},
 		{
 			"kind": "heading",
@@ -57,21 +61,21 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Ne pas confondre la vertu de tempérance (habitus spirituel) avec le <em>sentiment naturel et instinctif de la pudeur</em>. La pudeur fuit la turpitude contraire à la tempérance · de la même manière que la <em>timidité</em> fuit naturellement la turpitude contraire à l'humilité.</p>"
+			"html": "<p>Ne pas confondre la vertu de tempérance (habitus spirituel) avec le <em>sentiment naturel et instinctif de la pudeur</em>. La pudeur fuit la turpitude contraire à la tempérance ; de la même manière que la <em>timidité</em> fuit naturellement la turpitude contraire à l'humilité.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La pudeur est au corps ce que la timidité est à l'esprit",
-			"html": "<p>Ce sont des <strong>instincts</strong>, pas des vertus · on n'est pas meilleur parce qu'on est timide, on n'est pas meilleur parce qu'on a de la pudeur. Mais ce sont des <em>remparts au vice</em>, mis par Dieu dans l'homme en attendant qu'il acquière la vertu correspondante. Un bébé n'est pas vertueux · un enfant n'est pas vertueux · il a besoin de ces rempards.</p>"
+			"html": "<p>Ce sont des <strong>instincts</strong>, pas des vertus ; on n'est pas meilleur parce qu'on est timide, on n'est pas meilleur parce qu'on a de la pudeur. Mais ce sont des <em>remparts au vice</em>, mis par Dieu dans l'homme en attendant qu'il acquière la vertu correspondante. Un bébé n'est pas vertueux ; un enfant n'est pas vertueux ; il a besoin de ces remparts. Dieu a déposé dans le petit d'homme une sorte de parapet instinctif, qui le protège pendant que la vertu se forme lentement.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>Ruiner la pudeur d'un enfant, c'est le condamner au vice.</strong> Les parents qui se promènent du matin au soir nus dans l'appartement, sous prétexte que <em>« c'est naturel, on est en famille »</em>, font œuvre de suicide moral · l'homme est profondément blessé, et si l'on supprime la pudeur, tout s'en va avec. De même, faites sauter la timidité d'un enfant et il deviendra orgueilleux · c'est ce qu'on voit partout, ces gamins de quatorze ans qui décident s'il y a un Dieu et ce qu'on a le droit de faire.</p>"
+			"html": "<p><strong>Ruiner la pudeur d'un enfant, c'est le condamner au vice.</strong> Les parents qui se promènent du matin au soir nus dans l'appartement, sous prétexte que <em>« c'est naturel, on est en famille »</em>, font œuvre de suicide moral ; l'homme est profondément blessé, et si l'on supprime la pudeur, tout s'en va avec. <em>C'est monstrueux</em>, et pourtant cela se voit partout. Un enfant n'est pas vertueux ; il est long, et difficile, d'acquérir la vertu. <strong>En attendant, il y a la pudeur</strong> : elle disparaîtra un jour, quand la tempérance aura monté ; pas avant. De même, faites sauter la timidité d'un enfant et il deviendra orgueilleux : c'est ce qu'on voit partout, ces gamins de quatorze ans qui décident s'il y a un Dieu et ce qu'on a le droit de faire. De quel droit décident-ils ? Parce que, quand ils étaient petits, au lieu de les former à l'humilité de notre position humaine, on a débridé ce rempart naturel de la timidité. Un enfant doit être timide, et il doit être pudique ; les parents doivent l'éduquer en respectant ces instincts protecteurs.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Quand pudeur et timidité disparaissent",
-			"html": "<p>Une fois la <em>tempérance</em> et l'<em>humilité</em> acquises (longues à former), la pudeur et la timidité peuvent disparaître · c'est normal. Saint François d'Assise se dépouille tout nu devant son évêque · il a la tempérance, il n'a plus besoin de pudeur. Un homme de quarante ans paralysé par la timidité est souvent, en réalité, très orgueilleux · il n'a pas remplacé l'instinct par la vertu d'humilité.</p>"
+			"html": "<p>Une fois la <em>tempérance</em> et l'<em>humilité</em> acquises (longues à former), la pudeur et la timidité peuvent disparaître : c'est normal. <strong>Les gens du Moyen Âge, qui étaient souvent vertueux, avaient peu de pudeur.</strong> Saint François d'Assise se dépouille tout nu devant son évêque et devant tout le monde, pour signifier qu'il ne devait plus rien à ses parents avant d'entrer dans les ordres ; il avait la tempérance, il n'avait plus besoin de pudeur. Un homme de quarante ou cinquante ans paralysé par la timidité est souvent, en réalité, très orgueilleux ; il n'a pas remplacé l'instinct par la vertu d'humilité. <em>Je suis timide, mais je me soigne</em>, comme dit l'autre : l'humilité doit croître, et la timidité s'effacer.</p>"
 		},
 		{
 			"kind": "heading",
@@ -81,12 +85,27 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le plaisir, chez l'homme, <strong>n'est pas mauvais de soi</strong>. Fait par Dieu, il est moralement <em>neutre</em>. Destiné à faciliter une fonction corporelle, il est un <strong>moyen</strong> · et il a la moralité d'un moyen · bon dans un acte ordonné à sa fin, mauvais dans un acte désordonné. Mais le plaisir <em>ne peut jamais être la fin de l'homme</em>, dont le bien est rationnel et honnête. <strong>Agir pour le seul plaisir est toujours un péché</strong>, plus ou moins grave selon le désordre par rapport à la fin de l'acte (thèse condamnée par Innocent XI contre les laxistes).</p>"
+			"html": "<p>Le plaisir, chez l'homme, <strong>n'est pas mauvais de soi</strong>. Fait par Dieu, il est moralement <em>neutre</em>. Destiné à faciliter une fonction corporelle, il est un <strong>moyen</strong>, et il a la moralité d'un moyen ; bon dans un acte ordonné à sa fin, mauvais dans un acte désordonné. Mais le plaisir <em>ne peut jamais être la fin de l'homme</em>, dont le bien est rationnel et honnête.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Agir pour le seul plaisir : la thèse d'Innocent XI",
+			"html": "<p>Le pape Innocent XI a condamné, parmi les propositions des laxistes, celle qui prétendait qu'agir par seul plaisir ne serait pas toujours coupable. La thèse, à première lecture, paraît assez violente ; il faut la moduler, j'en conviens. Mais en soi, le pape a entièrement raison : <strong>une action qui est faite pour le seul plaisir</strong>, sans la finalité de l'action, dont on se passerait bien si elle ne procurait pas du plaisir, et sans aucun respect de la finalité de cette action, <em>est totalement immorale</em>. Pourquoi ? Parce que c'est faire que l'esprit de l'homme serve à ce qui lui est inférieur, alors que c'est l'inverse qui doit se produire : ce qui est inférieur chez l'homme doit servir ce qui est supérieur, et non pas l'inverse. Voilà pourquoi la tempérance règle le plaisir.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "C'est Dieu qui a inventé le plaisir",
+			"html": "<p>Je le répète à tous les débauchés : qui a fait le plaisir ? C'est Dieu qui l'a inventé. Quand on mange un fromage ou des écrevisses, ça fait du bien. Quand on boit un petit <em>pomerol</em> ou un <em>Gevrey-Chambertin</em>, ça fait du bien. Le pomerol, l'homme l'a un peu travaillé, c'est entendu ; mais le plaisir lui-même, ce n'est pas l'homme qui l'a mis là. Il en profite, il l'aménage, il en fait de belles choses ; mais l'inventeur, c'est Dieu. On ne peut donc pas dire que le plaisir est mauvais ; il est comme les passions ; bon en soi.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "L'huile du moteur",
-			"html": "<p>Pourquoi Dieu a-t-il mis du plaisir dans certaines actions ? Pour les <strong>faciliter</strong>. Imaginez qu'il faille manger chaque jour avec la même conscience du devoir qu'on a en transportant des sacs de cinquante kilos au sixième étage · on mourrait tous d'inanition. Le plaisir est <em>comme l'huile du moteur</em> · ce n'est pas le moteur, mais sans elle la mécanique grippe. Bon dans l'action et au service de l'action · mauvais hors d'elle.</p>"
+			"html": "<p>Pourquoi Dieu a-t-il mis du plaisir dans certaines actions ? Pour les <strong>faciliter</strong>. Imaginez qu'il faille manger chaque jour avec la même conscience du devoir qu'on a en transportant à la brouette des monceaux de sable, ou en montant au sixième étage des sacs de cinquante kilos de ciment ou de chaux ; on finirait tous par mourir. Imaginez encore qu'il n'y ait aucun attrait physique d'un homme pour une femme et réciproquement : il y a longtemps que la population mondiale aurait péri ; et l'on sait que, l'enfant venu, il faut encore passer vingt-cinq ans à l'éduquer, ce qui est une grosse affaire. Dieu a facilité tout cela par cet attrait, ce plaisir. La comparaison est familière, peut-être un peu triviale : le plaisir est <em>comme l'huile du moteur</em> ; ce n'est pas le moteur, mais sans elle la mécanique casse très vite. Bon dans l'action et au service de l'action ; mauvais hors d'elle.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Vomitorium et triclinium",
+			"html": "<p>Pour bien saisir la nature morale du plaisir, prenons un exemple trivial mais clair. Dans les villas de la décadence romaine, il y avait des salles spéciales appelées <em>vomitoria</em>. Ces messieurs mangeaient toute la nuit, allongés sur leur <em>triclinium</em>, et régulièrement sortaient se gratter le fond de la glotte avec une plume, au doigt, pour recommencer à manger. On voit bien ce qui est monstrueux : ils avaient <strong>séparé le plaisir du manger de la fonction du manger</strong>, qui est de se nourrir. Ils prenaient l'un et rejetaient l'autre. C'est exactement le schéma qu'on retrouvera partout où le plaisir est désordonné.</p>"
 		},
 		{
 			"kind": "heading",
@@ -96,7 +115,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Deux grands plaisirs sont à régler · celui du <em>manger</em> et celui de la <em>délectation charnelle</em>. D'où quatre vertus distinctes ·</p><ul><li><strong>Abstinence</strong> · plaisir des aliments solides ·</li><li><strong>Sobriété</strong> · plaisir des boissons alcoolisées ·</li><li><strong>Chasteté</strong> · délectation vénérienne ·</li><li><strong>Pudicité</strong> · actes connexes (tenue, paroles, baisers, caresses, danses).</li></ul>"
+			"html": "<p>Deux grands plaisirs sont à régler ; celui du <em>manger</em> et celui de la <em>délectation charnelle</em>. D'où quatre vertus distinctes :</p><ul><li><strong>Abstinence</strong> : plaisir des aliments solides</li><li><strong>Sobriété</strong> : plaisir des boissons alcoolisées</li><li><strong>Chasteté</strong> : délectation vénérienne</li><li><strong>Pudicité</strong> : actes connexes (tenue, paroles, baisers, caresses, danses).</li></ul>"
 		},
 		{
 			"kind": "heading",
@@ -107,21 +126,21 @@
 		{
 			"kind": "definition",
 			"term": "L'abstinence",
-			"html": "<p><strong>Vertu qui règle la délectation du manger.</strong> On pèche contre l'abstinence quand on mange plus que de raison · soit pour le seul plaisir (intention) · soit qu'on sépare cet acte de sa fin, qui est de se nourrir.</p>"
+			"html": "<p><strong>Vertu qui règle la délectation du manger.</strong> On pèche contre l'abstinence quand on mange plus que de raison ; soit pour le seul plaisir (intention) ; soit qu'on sépare cet acte de sa fin, qui est de se nourrir. Précision pratique : si dans un grand dîner on vous sert dix fois plus que de raison, et que pour ne pas être un goujat vous mangez un peu plus, ce n'est pas un péché du tout ; ce n'est pas pour le plaisir qu'on fait cela, c'est parfois même assez pénible.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Les cinq manières d'être gourmand (saint Thomas)",
-			"html": "<p><em>Praepropere, Laute, Nimis, Ardenter, Studiose</em> · Avant le temps, Somptueusement, Trop, Goulûment, avec Raffinement.</p><ul><li><strong>Praepropere</strong> · manger n'importe quand · l'Américain qui ouvre le frigo toute la journée (un Américain sur quatre est obèse) ·</li><li><strong>Laute</strong> · dépenses somptuaires de nourriture · petit salaire, mais tout passe en mangeaille, mal vêtu, bazar partout ·</li><li><strong>Nimis</strong> · trop ·</li><li><strong>Ardenter</strong> · manger avec passion · on dévore, on engloutit, généralement pas beau à voir ·</li><li><strong>Studiose</strong> · ne rechercher que les mets les plus fins, les plus subtils.</li></ul>"
+			"html": "<p><em>Praepropere, Laute, Nimis, Ardenter, Studiose</em> : Avant le temps, Somptueusement, Trop, Goulûment, avec Raffinement.</p><ul><li><strong>Praepropere</strong> : manger n'importe quand ; l'Américain qui ouvre le frigo toute la journée (un Américain sur quatre est obèse). Il y a un petit déjeuner, un déjeuner, un dîner, et entre les repas on ne mange pas ; c'est tout simple</li><li><strong>Laute</strong> : dépenses somptuaires de nourriture ; petit salaire, mais tout passe en mangeaille, mal vêtu, bazar partout</li><li><strong>Nimis</strong> : trop ; celui qui se sert systématiquement une demi-portion supplémentaire</li><li><strong>Ardenter</strong> : manger avec passion ; on dévore, on engloutit, on déglutit ; généralement pas beau à voir</li><li><strong>Studiose</strong> : ne rechercher que les mets les plus fins, les plus subtils, les plus délicats.</li></ul>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>De soi, le péché contre l'abstinence est un <strong>péché véniel</strong> · c'est l'abus d'une chose permise, ce qui n'est pas un péché grave en matière. On pécherait gravement seulement dans le cas où l'on ruinerait sa santé.</p>"
+			"html": "<p>De soi, le péché contre l'abstinence est un <strong>péché véniel</strong> : c'est l'abus d'une chose permise, ce qui n'est pas un péché grave en matière. Celui qui mange systématiquement une bonne moitié de plus que ce qu'il devrait n'est pas bien : il est glouton, il recherche le plaisir du manger, c'est un péché ; mais il a tout de même le droit de manger, et il n'y a pas de déviation absolue par rapport à la fin. Pour qu'il y ait péché grave, il en faudrait beaucoup, beaucoup : il faudrait <strong>se rendre malade</strong>, nuire à sa santé. Là, oui, on bascule dans le grave.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Pourquoi la gourmandise est dite vice capital",
-			"html": "<p>La gourmandise est classée parmi les <em>sept vices capitaux</em>, même si le péché de gourmandise n'est habituellement que véniel · parce qu'un vice capital n'est pas un péché grave en soi, mais une disposition habituelle qui <strong>conduit à beaucoup d'autres péchés</strong>. Les quatre conséquences classiques (les <em>filiae gulae</em>) · <em>joie stupide</em> (le gros rigolard à qui tout fait rire), <em>bavardage creux</em>, <em>abrutissement de l'esprit</em>, et finalement <em>l'impureté</em>. C'est en raison de ces conséquences que la gourmandise est si redoutable.</p>"
+			"html": "<p>La gourmandise est classée parmi les <em>sept vices capitaux</em>, même si le péché de gourmandise n'est habituellement que véniel ; parce qu'un vice capital n'est pas un péché grave en soi, mais une disposition habituelle qui <strong>conduit à beaucoup d'autres péchés</strong>. Les quatre conséquences classiques (les <em>filiae gulae</em>) ; <em>joie stupide</em> (le gros rigolard à qui tout fait rire, même ce qui est triste et pénible), <em>bavardage creux</em> (on dit n'importe quoi parce qu'on a trop mangé), <em>abrutissement de l'esprit</em> (on n'arrive plus à concentrer son esprit ; on digère), et finalement <em>l'impureté</em>. C'est en raison de ces conséquences que la gourmandise est si redoutable.</p>"
 		},
 		{
 			"kind": "heading",
@@ -132,26 +151,31 @@
 		{
 			"kind": "definition",
 			"term": "La sobriété",
-			"html": "<p>Vertu qui règle l'usage des <strong>boissons alcoolisées</strong> · pas les autres (jus d'orange, Coca-Cola relèvent de l'abstinence). Vertu distincte de l'abstinence parce qu'il y a des gens très gourmands mais qui ne touchent pas une goutte d'alcool · et inversement, des ivrognes très mesurés dans le manger. Deux objets distincts, deux vertus.</p>"
+			"html": "<p>Vertu qui règle l'usage des <strong>boissons alcoolisées</strong> : pas les autres (jus d'orange, Coca-Cola relèvent de l'abstinence). Vertu distincte de l'abstinence parce qu'il y a des gens très gourmands mais qui ne touchent pas une goutte d'alcool, et inversement, des ivrognes très mesurés dans le manger. Deux objets distincts, deux vertus. L'alcool, on le sait, crée une euphorie et une dépendance qui demandent une surveillance spécifique.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Bonum vinum laetificat cor hominis",
+			"html": "<p>Avant d'aborder le péché, posons le bon usage. La voix du bon vivant ne ment pas : <em>un petit pomerol ou un Gevrey-Chambertin à table, ça fait du bien</em>, et le Psalmiste l'a chanté avant nous : <em>Bonum vinum laetificat cor hominis</em> ; le bon vin réjouit le cœur de l'homme (Ps 104, 15). C'est Dieu lui-même qui a voulu cette joie modeste du repas partagé. La sobriété ne consiste donc pas à fuir le vin, mais à en garder l'usage <strong>réglé par la raison</strong> et ordonné à la convivialité du repas. Les rigoristes qui refusent un verre à table se trompent autant, à leur manière, que les ivrognes.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Le formel du péché : ce n'est pas l'ébriété",
-			"html": "<p>L'ébriété est un <em>état physique</em>, non un état moral. Le formel du péché contre la sobriété est la <strong>recherche immodérée du plaisir du boire</strong>, pendant ou après l'acte. La seule perte de l'usage de la raison n'est pas en soi un péché (sinon le sommeil le serait). On pourrait donc se saouler dans des circonstances exceptionnelles · pour subir une opération sans anesthésie, pour éviter une grave contagion.</p>"
+			"html": "<p>L'ébriété est un <em>état physique</em>, non un état moral. Le formel du péché contre la sobriété est la <strong>recherche immodérée du plaisir du boire</strong>, pendant ou après l'acte. La seule perte de l'usage de la raison n'est pas en soi un péché (sinon le sommeil le serait). On pourrait donc se saouler dans des circonstances exceptionnelles ; pour subir une opération sans anesthésie sur le front, par exemple, ou pour éviter une grave contagion.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Les chanoines du Grand-Saint-Bernard",
-			"html": "<p>Une histoire célèbre · au temps d'une grande épidémie qui décima l'Europe au début du XXe siècle, le médecin de l'hospice du Grand-Saint-Bernard dit à l'abbé · <em>« Ceux qui se saouleront ont une chance de s'en sortir · les autres mourront tous. »</em> L'abbé laissa chaque chanoine choisir. Ceux qui n'ont pas voulu sont morts · ceux qui se sont saoulés ont survécu (avec une belle gueule de bois, mais vivants). On peut se saouler sans pécher.</p>"
+			"html": "<p>Une histoire célèbre ; au temps d'une grande épidémie qui décima l'Europe au début du XXe siècle (un tiers de la population y est passé), le médecin de l'hospice du Grand-Saint-Bernard dit à l'abbé : <em>« Ceux qui se saouleront ont une chance de s'en sortir ; les autres mourront tous. »</em> L'abbé, en ecclésiastique courageux, laissa chaque chanoine choisir. Ceux qui n'ont pas voulu sont morts emportés par la fièvre ; ceux qui se sont saoulés ont survécu (avec une belle gueule de bois, mais vivants). On peut se saouler sans pécher, c'est rare mais possible.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On fait <strong>péché mortel</strong> quand on abuse d'alcool jusqu'à constater qu'on va perdre l'usage de la raison · ce n'est pas la perte elle-même qui pèche, c'est de continuer à boire <em>en sachant</em> qu'on va y arriver. Les péchés commis durant l'ébriété sont imputables dans la mesure où ils pouvaient être prévus, même confusément. Pas la première fois (cas de Noé, Gn 9, 21) · mais après on sait, et on est responsable.</p>"
+			"html": "<p>On fait <strong>péché mortel</strong> quand on abuse d'alcool jusqu'à constater qu'on va perdre l'usage de la raison ; ce n'est pas la perte elle-même qui pèche, c'est de continuer à boire <em>en sachant</em> qu'on va y arriver. Les péchés commis durant l'ébriété sont imputables dans la mesure où ils pouvaient être prévus, même confusément. Pas la première fois (cas de Noé, Gn 9, 21), mais après on sait, et on est responsable. Certains, hélas, saoulent volontairement les autres pour leur faire commettre le mal ; ce péché-là est entièrement imputable à celui qui verse à boire.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La toxicomanie",
-			"html": "<p>Mêmes principes que l'ébriété, avec des conséquences décuplées · à côté de l'alcool, qui est un diesel, l'héroïne est un turbo-injection · dépendance acquise en trois à huit jours. <em>De plus</em> · on n'est jamais tenu de prendre ces produits (alors qu'on peut, et même qu'on doit parfois, prendre un peu de vin · <em>vinum laetificat cor hominis</em>, Ps 104, 15). La toxicomanie sort donc presque toujours du cadre moral.</p>"
+			"html": "<p>Mêmes principes que l'ébriété, avec des conséquences décuplées ; à côté de l'alcool, qui est un diesel, l'héroïne est un turbo-injection ; dépendance acquise en trois à huit jours. <em>De plus</em> : on n'est jamais tenu de prendre ces produits (sauf raison médicale grave), alors qu'on peut, et même qu'on doit parfois, prendre un peu de vin ; <em>Bonum vinum laetificat cor hominis</em> (Ps 104, 15). La toxicomanie sort donc presque toujours du cadre moral.</p>"
 		},
 		{
 			"kind": "heading",
@@ -162,25 +186,29 @@
 		{
 			"kind": "definition",
 			"term": "La chasteté",
-			"html": "<p>Vertu qui règle la <em>délectation vénérienne</em> (de <em>Venus, Veneris</em>) · le plaisir des relations charnelles. La délectation charnelle <strong>n'est licite que dans le cadre du mariage légitime</strong>. La raison est simple · l'acte qui la procure ne peut être licite que s'il n'est pas privé de sa fin (procréation et amour stable du mariage) et qu'on ne commet pas, ce faisant, la grave injustice de l'adultère. Dans tous les autres cas, péché mortel.</p>"
+			"html": "<p>Vertu qui règle la <em>délectation vénérienne</em> (de <em>Venus, Veneris</em>, déesse de l'amour) ; le plaisir des relations charnelles. La délectation charnelle <strong>n'est licite que dans le cadre du mariage légitime</strong>. La raison est simple ; l'acte qui la procure ne peut être licite que s'il n'est pas privé de sa fin (procréation et amour stable du mariage) et qu'on ne commet pas, ce faisant, la grave injustice de l'adultère. Dans tous les autres cas, péché mortel.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Trois cas de péché grave ·</p><ul><li><strong>usage solitaire</strong> de la fonction génitale · toujours privé de sa fin ·</li><li>quand on <strong>sépare l'usage de cette fonction de sa fin</strong>, dans le mariage comme hors mariage · contraception, onanisme, avortement ·</li><li>quand, en respectant l'ordre biologique de l'acte, on commet l'injustice de l'accomplir avec une autre personne que son mari ou sa femme · le plaisir n'est plus ordonné.</li></ul>"
+			"html": "<p>Trois cas de péché grave :</p><ul><li><strong>usage solitaire</strong> de la fonction génitale ; toujours privé de sa fin</li><li>quand on <strong>sépare l'usage de cette fonction de sa fin</strong>, dans le mariage comme hors mariage ; contraception, onanisme, avortement</li><li>quand, en respectant l'ordre biologique de l'acte, on commet l'injustice de l'accomplir avec une autre personne que son mari ou sa femme ; le plaisir n'est plus ordonné.</li></ul>"
 		},
 		{
 			"kind": "definition",
 			"term": "L'enjeu social",
-			"html": "<p>On dit que l'Église est sévère · oui et non. Elle respecte la finalité des choses. Mais qu'on regarde les <strong>conséquences</strong> des amusements modernes · les enfants n'ont plus de parents, ou n'en ont qu'un, ou n'en ont plus du tout · ils sont livrés à eux-mêmes parce que Monsieur et Madame se sont amusés un samedi soir. On dit « on a péché dix minutes » · oui · mais c'est une chose <em>gravement déviée de sa fin</em> · pas seulement la procréation, mais aussi l'<em>amour</em> qu'on doit à sa femme.</p>"
+			"html": "<p>On dit que l'Église est sévère ; oui et non. Elle respecte la finalité des choses. Mais qu'on regarde les <strong>conséquences</strong> des amusements modernes ; les enfants n'ont plus de parents, ou n'en ont qu'un, ou n'en ont plus du tout ; ils sont livrés à eux-mêmes parce que Monsieur et Madame se sont amusés un samedi soir. On dit « on a péché dix minutes » ; oui, mais c'est une chose <em>gravement déviée de sa fin</em> : pas seulement la procréation, mais aussi l'<em>amour</em> qu'on doit à sa femme. Le mariage, faut-il le rappeler, n'est pas seulement fait pour les enfants ; il est fait aussi pour aimer son conjoint, fin secondaire et réciproque voulue par le Créateur dès l'origine : <em>il n'est pas bon que l'homme soit seul, faisons-lui une aide qui lui soit semblable</em> (Gn 2, 18). Et pour nous chrétiens, il y a en plus le <strong>sacrement de mariage</strong>, encore plus noble.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quelqu'un qui mange trop continue tout de même à se nourrir ; la finalité du manger n'est pas <em>totalement</em> étrangère à son péché. Mais quand on a des relations hors mariage, la délectation charnelle est <strong>radicalement détournée de sa fin</strong>, même s'il vient un enfant ; car un enfant ne vient pas comme cela, d'un péché d'un soir, il doit venir dans le cadre de l'amour conjugal, de la stabilité de l'union, de l'éducation de la famille. C'est pourquoi la fornication n'est pas un simple excès comme la gourmandise ; c'est la <em>recherche du plaisir pour lui seul</em>, parce que tout le reste est bancal. Or rechercher le plaisir pour lui seul est toujours immoral. Le plaisir est un bon moyen voulu par Dieu dans un mariage, c'est très bien ; mais ôtez la fin, et il devient le pire ennemi de l'homme.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Recherche directe et recherche indirecte",
-			"html": "<p>Hors mariage ·</p><ul><li>la <strong>recherche directe</strong> de la délectation charnelle est <em>toujours</em> péché mortel · entièrement détournée de la fin ·</li><li>la <strong>recherche indirecte</strong> (le médecin tenté en soignant ses patientes, par exemple) est péché grave ou véniel selon la matière · tant qu'on ne la recherche pas directement, on la subit plus qu'on la cause · péché véniel · à condition qu'on soit prudent et qu'on prenne ses dispositions ·</li><li>les <strong>péchés internes</strong> (pensées, désirs) ont la même moralité que leurs correspondants externes · même si moins graves dans leurs conséquences.</li></ul>"
+			"html": "<p>Hors mariage :</p><ul><li>la <strong>recherche directe</strong> de la délectation charnelle est <em>toujours</em> péché mortel ; entièrement détournée de la fin</li><li>la <strong>recherche indirecte</strong> (le médecin tenté en soignant ses patientes, par exemple) est péché grave ou véniel selon la matière ; tant qu'on ne la recherche pas directement, on la subit plus qu'on la cause ; péché véniel ; à condition qu'on soit prudent et qu'on prenne ses dispositions ; sinon, qu'on trouve un autre exercice de son art</li><li>les <strong>péchés internes</strong> (pensées, désirs) ont la même moralité que leurs correspondants externes ; même si moins graves dans leurs conséquences.</li></ul>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La chair est le <strong>meilleur et le pire</strong> · le meilleur, comme Dieu l'a voulu dans le mariage · le pire partout ailleurs. Regardez ce monde écrasé sous la domination du plaisir · c'est l'esclavage. Baudelaire compare cela à un coup de fouet qui ne lâche jamais.</p>"
+			"html": "<p>La chair est le <strong>meilleur et le pire</strong> : le meilleur, comme Dieu l'a voulu dans le mariage (relations conjugales bonnes, droites, belles, voire méritoires, avec le plaisir qui les accompagne) ; le pire partout ailleurs. Regardez ce monde écrasé sous la domination du plaisir : c'est l'esclavage. Baudelaire évoque ce <em>plaisir effrayant qui ne lâche jamais, comme un coup de fouet qui fouette sans arrêt</em>. Voilà ce qu'on récolte quand on retranche la fin pour ne garder que le moyen.</p>"
 		},
 		{
 			"kind": "heading",
@@ -191,16 +219,26 @@
 		{
 			"kind": "definition",
 			"term": "La pudicité",
-			"html": "<p>Vertu qui règle tous les <strong>actes connexes</strong> de la précédente · tenue corporelle et vestimentaire, paroles, danses, baisers, caresses, attouchements, etc. Ils tirent leur moralité (ou immoralité) de deux choses ·</p><ul><li>de l'<strong>intention</strong> · si on les pose directement pour la recherche de la délectation, c'est péché grave ·</li><li>de leur <strong>relation objective</strong> à la délectation elle-même · même sans intention déclarée, certains gestes ne peuvent qu'amener à la luxure.</li></ul>"
+			"html": "<p>Vertu qui règle tous les <strong>actes connexes</strong> de la précédente ; tenue corporelle et vestimentaire, paroles sales, danses lascives, baisers, caresses, attouchements, etc. La chasteté étant une vertu dure (<em>castigo corpus meum et in servitutem redigo</em>, dit saint Paul ; je châtie mon corps et le réduis en servitude), mieux vaut ne pas attendre la luxure flagrante pour réagir : c'est en amont, par la pudicité, que la bataille se gagne. Ces actes tirent leur moralité (ou immoralité) de deux choses :</p><ul><li>de l'<strong>intention</strong> : si on les pose directement pour la recherche de la délectation, c'est péché grave</li><li>de leur <strong>relation objective</strong> à la délectation elle-même ; même sans intention déclarée, certains gestes ne peuvent qu'amener à la luxure.</li></ul>"
+		},
+		{
+			"kind": "definition",
+			"term": "Aparté : la chute de l'usage du baiser",
+			"html": "<p>Une remarque autobiographique. Quand j'étais jeune, les filles et les garçons ne s'embrassaient pas ; <em>j'étais à La Cannale, c'est arrivé après 68</em>. Maintenant tout le monde s'embrasse, les mœurs ont bien changé. Cela commence sur les joues, finit sur la bouche, et de proche en proche on glisse vers tout le reste. Il y a, c'est vrai, une évolution des coutumes ; mais il y a surtout la <strong>connexion objective</strong> entre ces gestes et la délectation charnelle, qu'on ne peut pas supprimer par décret sociologique.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Parfaitement licites entre époux dans le mariage, ces actes dégénèrent très vite en débauche partout ailleurs · y compris en famille. <em>C'est l'impudicité de ce monde qui le fait crouler sous la luxure généralisée.</em></p>"
+			"html": "<p>Parfaitement licites entre époux dans le mariage, ces actes dégénèrent très vite en débauche partout ailleurs ; y compris en famille. <em>C'est l'impudicité de ce monde qui le fait crouler sous la luxure généralisée.</em> On voit des gens pudiques qui ne sont pas forcément chastes, et on voit l'inverse : quelqu'un peut vivre dans la luxure complète et se ficher de tout ce qui l'entoure. Une femme peut se tenir mal par coquetterie, par désir de plaire, sans pourtant pécher charnellement. Et un débauché peut être par ailleurs d'une grande négligence de tenue. C'est bien pourquoi il faut deux vertus distinctes, l'une pour l'acte lui-même (la chasteté), l'autre pour tout ce qui l'entoure (la pudicité).</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Le fiancé qui dort à côté",
-			"html": "<p>L'exemple parlant · les fiancés qui dorment dans le même lit en disant qu'on ne fera pas de mal. Soit ils mentent (et alors ils font le mal · c'est sûr), soit ils n'ont pas la moindre tentation · et alors il y a un problème · « on n'épouse pas un morceau de marbre », il faut revoir la copie. La pudicité, c'est <strong>en amont</strong> qu'il faut prendre la question · pas une fois la luxure flagrante. Tout le désordre dont nous souffrons aujourd'hui commence par la chute de cette vertu modeste mais décisive.</p>"
+			"html": "<p>L'exemple parlant ; les fiancés qui dorment dans le même lit en disant qu'on ne fera pas de mal. Soit ils mentent (et alors ils font le mal : c'est sûr), soit ils n'ont pas la moindre tentation, et alors il y a un problème : <em>je ne vois pas comment on peut passer la nuit à côté d'une jeune fille qu'on est supposé aimer, sans avoir la moindre tentation</em>. Là, c'est embêtant pour le mariage, il y a quelque chose qui cloche : il faut revoir la copie. Ou bien on a affaire à un <strong>morceau de marbre</strong>, et on n'épouse pas un morceau de marbre, c'est très dangereux. La pudicité, c'est <strong>en amont</strong> qu'il faut prendre la question ; pas une fois la luxure flagrante. Tout le désordre dont nous souffrons aujourd'hui commence par la chute de cette vertu modeste mais décisive.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Contre les rigoristes",
+			"html": "<p>Attention cependant ; je ne suis pas de ces prêtres qui hurlent chaque fois qu'une dame montre un genou, ou qu'une femme n'a pas la tête couverte parce que saint Paul l'a dit aux Corinthiens. C'est vrai que saint Paul le dit (1 Co 11, 5-6) ; mais pourquoi ? Parce qu'à Corinthe, à son époque, les seules qui se promenaient tête nue étaient les <em>prostituées païennes</em>. La règle vestimentaire avait là un sens local et contextuel. Une fois ce contexte compris, on cesse d'en faire un absolu intemporel. La pudicité, ce n'est pas le scrupule de la jupe trop courte ou du chapeau oublié ; c'est la vigilance sur les <strong>actes connexes</strong> qui mènent objectivement à la luxure.</p>"
 		},
 		{
 			"kind": "heading",
@@ -215,7 +253,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La tempérance, modeste vertu, est la condition de la pureté du cœur · qui à son tour est la condition de la vision de Dieu. Sans elle, pas de justice possible · le luxurieux n'est plus fidèle, le coléreux frappe, le gourmand s'abrutit. La semaine prochaine, dernière leçon de l'année · la <strong>force</strong>, qui règle les passions violentes de l'irascible.</p>"
+			"html": "<p>La tempérance, modeste vertu, est la condition de la pureté du cœur, qui à son tour est la condition de la vision de Dieu. Sans elle, pas de justice possible ; le luxurieux n'est plus fidèle, le coléreux frappe, le gourmand s'abrutit. Retenons trois clefs :</p><ul><li>les <strong>passions sont bonnes</strong> ; c'est Dieu qui les a faites, et il a mis du plaisir dans certaines de nos actions pour les faciliter</li><li>le <strong>plaisir est un moyen</strong>, jamais une fin ; il a la moralité de l'acte qu'il accompagne, et n'a pas de moralité hors de cet acte</li><li>la <strong>pudeur et la timidité</strong> sont des remparts naturels ; il faut les respecter chez l'enfant, le temps que la tempérance et l'humilité prennent le relais.</li></ul><p>La semaine prochaine, dernière leçon de l'année ; la <strong>force</strong>, qui règle les passions violentes de l'irascible.</p>"
 		}
 	]
 }

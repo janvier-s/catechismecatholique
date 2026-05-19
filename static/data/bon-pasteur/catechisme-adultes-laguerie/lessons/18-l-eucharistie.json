@@ -12,12 +12,12 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Nous abordons le <strong>plus grand des sacrements</strong>, que saint Alphonse appelle le <em>« soleil de l'Église catholique »</em>. La matière est si abondante qu'elle nous retiendra deux leçons · l'<strong>Eucharistie</strong> aujourd'hui, le <strong>saint sacrifice de la Messe</strong> la semaine prochaine. Mais il s'agit d'un <em>seul et même sacrement</em>, qui a deux volets indissociables.</p>"
+			"html": "<p>Nous abordons le <strong>plus grand des sacrements</strong>, que saint Alphonse appelle le <em>« soleil de l'Église catholique »</em>. La matière est si abondante qu'elle nous retiendra deux leçons ; l'<strong>Eucharistie</strong> aujourd'hui, le <strong>saint sacrifice de la Messe</strong> la semaine prochaine. Mais il s'agit d'un <em>seul et même sacrement</em>, qui a deux volets indissociables.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Eucharistie",
-			"html": "<p>Du grec <em>eucharistia</em>, « action de grâces ». Sacrement du <strong>Corps et du Sang de Notre-Seigneur Jésus-Christ, offerts à Dieu en sacrifice pour la rémission des péchés</strong>. L'action de grâces culmine dans la <em>Préface</em> de la messe · elle a donné son nom à l'ensemble du sacrement.</p>"
+			"html": "<p>Du grec <em>eucharistia</em>, « action de grâces ». Sacrement du <strong>Corps et du Sang de Notre-Seigneur Jésus-Christ, offerts à Dieu en sacrifice pour la rémission des péchés</strong>. L'action de grâces culmine dans la <em>Préface</em> de la messe ; elle a donné son nom à l'ensemble du sacrement. La finalité du sacrifice est multiple : la gloire et la louange de Dieu, l'action de grâces, la <em>propitiation</em> pour la rémission des péchés, et la demande de grâces. Tout cela est l'Eucharistie ; et tout l'Eucharistie, c'est le saint sacrifice de la messe.</p>"
 		},
 		{
 			"kind": "heading",
@@ -27,11 +27,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Pour des raisons pédagogiques, nous étudions d'abord l'Eucharistie (la présence réelle), puis la messe. Mais l'<em>ordre théologique</em> est l'inverse · l'unique sacrement est d'abord le <strong>saint sacrifice de la Messe</strong>, dont l'Eucharistie est à la fois le <em>moyen</em> (la présence réelle rend possible l'offrande) et le <em>fruit</em> (par la communion, nous participons aux grâces du sacrifice).</p>"
+			"html": "<p>Pour des raisons pédagogiques, nous étudions d'abord l'Eucharistie (la présence réelle), puis la messe. Mais l'<em>ordre théologique</em> est l'inverse ; l'unique sacrement est d'abord le <strong>saint sacrifice de la Messe</strong>, dont l'Eucharistie est à la fois le <em>moyen</em> (la présence réelle rend possible l'offrande) et le <em>fruit</em> (par la communion, nous participons aux grâces du sacrifice).</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Remarque d'une importance capitale aujourd'hui. À force de ne parler que de la présence réelle, sans voir qu'elle est moyen et fruit du sacrifice du Seigneur, on a oublié ce dernier · on a réduit la messe à un repas où l'on mange le Corps et boit le Sang. Et finalement, on en vient à <em>nier la présence réelle elle-même</em>. Dans les années 50, on enseignait très bien l'Eucharistie · le sacrifice de la messe passait par pertes et profits. On a vu ce que cela a donné.</p>"
+			"html": "<p>Représentons cela par un schéma très simple. Le saint sacrifice de la messe est l'unique sacrement du Corps et du Sang du Seigneur (une croix au milieu) ; en <em>amont</em>, pour que le Christ offre son sacrifice, il faut bien qu'il soit là, présent réellement ; c'est l'Eucharistie comme présence. En <em>aval</em>, pour que nous participions à ce sacrifice par la présence réelle, c'est la <strong>communion</strong>. Communion non seulement au Christ présent, mais <em>communion au sacrifice de la messe</em>. Voilà l'unité organique de ce sacrement.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Remarque d'une importance capitale aujourd'hui. À force de ne parler que de la présence réelle, sans voir qu'elle est moyen et fruit du sacrifice du Seigneur, on a oublié ce dernier ; on a réduit la messe à un repas où l'on mange le Corps et boit le Sang. Et finalement, on en vient à <em>nier la présence réelle elle-même</em>. Dans les années 50, on enseignait très bien l'Eucharistie ; le sacrifice de la messe passait par pertes et profits. Moi-même j'ai été au catéchisme dans ma paroisse de <strong>Saint-Jean-Baptiste de Sault</strong> : le cours sur l'Eucharistie y faisait bonne figure, le cours sur la messe était <em>pratiquement inexistant</em>. On a bien vu, par la suite, ce que cela a donné.</p>"
 		},
 		{
 			"kind": "heading",
@@ -41,7 +45,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La foi catholique affirme qu'<strong>après leur consécration, le pain et le vin n'existent plus</strong> · mais sous leurs <em>espèces</em> (apparences, accidents) se trouvent le Corps et le Sang de Jésus-Christ. C'est ce que l'Église appelle, à la suite de saint Thomas d'Aquin et du Concile de Trente, la <em>transsubstantiation</em>.</p>"
+			"html": "<p>La foi catholique affirme qu'<strong>après leur consécration, le pain et le vin n'existent plus</strong>, mais sous leurs <em>espèces</em> (apparences, accidents) se trouvent le Corps et le Sang de Jésus-Christ. C'est ce que l'Église appelle, à la suite de saint Thomas d'Aquin et du Concile de Trente, la <em>transsubstantiation</em>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -51,16 +55,32 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Que le mot ne vous effraie pas. Dans tout être, il y a la <em>substance</em> (ce qu'il est profondément) et les <em>apparences</em> (espèces) sous lesquelles il se présente à nos sens. Les changements ordinaires de la nature sont des <em>changements substantiels</em> · ils touchent la forme (et parfois la composition) tandis qu'une matière demeure. Le jus de raisin devient du vin · le bois devient une armoire · l'eau se décompose en hydrogène et oxygène · quelque chose demeure (la matière), quelque chose change (la forme). C'est la loi commune.</p>"
+			"html": "<p>Que le mot ne vous effraie pas. Dans tout être, il y a la <em>substance</em> (ce qu'il est profondément) et les <em>apparences</em> (espèces) sous lesquelles il se présente à nos sens. Vous me regardez en ce moment : il y a les <em>apparences</em> de l'abbé Laguérie, et puis sa substance ; il y a les apparences de ce chandelier, et puis sa substance ; ainsi de suite pour tous les êtres.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les changements ordinaires de la nature sont des <em>changements substantiels</em> ; ils touchent la forme (et parfois la composition), tandis qu'une <em>matière demeure</em>. C'est même le seul type de changement que nous connaissions. Prenons quelques exemples.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Changement chimique</strong> : l'eau, faite de deux atomes d'hydrogène et d'un atome d'oxygène ; quand vous décomposez de l'eau en ces deux gaz, hydrogène et oxygène, vous ne faites pas une transsubstantiation, vous faites ce que les philosophes appellent un <em>changement substantiel</em>. Quelque chose a changé (la forme), quelque chose demeure (la matière).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Changement biologique</strong> : le jus de raisin devient du vin en fermentant ; ou le vin devient du vinaigre à force de dégénérer. Dans tout changement, quelque chose change et quelque chose demeure (sinon, ce n'est pas un changement, c'est une création) ; entre le jus de raisin non fermenté et le vin, la matière est la même, c'est la forme qui change.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p><strong>Changement artisanal</strong> : un menuisier prend du bois et en fait une très belle <em>armoire normande</em>, ou une très belle <em>table Henri IV</em> ; il opère un changement de forme, mais la matière demeure : c'est toujours du bois.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Transsubstantiation",
-			"html": "<p>Changement <em>d'une substance entière en une autre</em>. Non pas un changement de forme sur une matière qui demeure · <strong>toute la substance disparaît</strong>, matière et forme, pour laisser place à celle du Christ. Il ne reste du pain que les <em>espèces</em> · goût, couleur, apparence sensible. Changement unique en son genre · il n'a pas d'analogue dans la nature. D'où la nécessité d'un mot spécial.</p>"
+			"html": "<p>Changement <em>d'une substance entière en une autre</em>. Non pas un changement de forme sur une matière qui demeure ; <strong>toute la substance disparaît</strong>, matière et forme, pour laisser place à celle du Christ. Il ne reste du pain que les <em>espèces</em> : goût, couleur, apparence sensible. Changement unique en son genre ; il n'a pas d'analogue dans la nature. D'où la nécessité d'un mot spécial.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les paroles de la consécration disent ceci très exactement · <em>« Ceci est mon Corps »</em>, <em>« Ceci est mon Sang »</em>. Avant, c'était du pain · après, ce n'est plus du pain · c'est le Corps du Christ sous les apparences du pain. Pareillement pour le vin. C'est un <strong>miracle permanent</strong>, qui dure aussi longtemps que les espèces ne sont pas corrompues.</p>"
+			"html": "<p>Les paroles de la consécration disent ceci très exactement : <em>« Ceci est mon Corps »</em>, <em>« Ceci est mon Sang »</em>. Avant, c'était du pain ; après, ce n'est plus du pain : c'est le Corps du Christ sous les apparences du pain. Pareillement pour le vin. C'est un <strong>miracle permanent</strong>, qui dure aussi longtemps que les espèces ne sont pas corrompues.</p>"
 		},
 		{
 			"kind": "heading",
@@ -70,16 +90,16 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les paroles paraissent ne mettre que le Corps sous l'espèce du pain et que le Sang sous l'espèce du vin. Or Jésus-Christ, dans l'Eucharistie, est <em>vivant</em> · il l'annonce lui-même · <em>« Je suis le pain vivant descendu du ciel »</em> (Jn 6, 51). Un être vivant, c'est un corps uni à son âme · la mort est leur séparation. Donc sous l'espèce du pain, où est le Corps, il y a aussi nécessairement <strong>l'âme humaine</strong> du Christ · sinon il serait mort dans l'Eucharistie · ce serait un pain mort.</p>"
+			"html": "<p>Les paroles paraissent ne mettre que le Corps sous l'espèce du pain et que le Sang sous l'espèce du vin. Or Jésus-Christ, dans l'Eucharistie, est <em>vivant</em> ; il l'annonce lui-même : <em>« Je suis le pain vivant descendu du ciel »</em> (Jn 6, 51). Un être vivant, c'est un corps uni à son âme ; la mort est leur séparation. Donc sous l'espèce du pain, où est le Corps, il y a aussi nécessairement <strong>l'âme humaine</strong> du Christ, sinon il serait mort dans l'Eucharistie ; ce serait un pain mort.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Plus encore · depuis le mystère de l'Incarnation, l'humanité du Christ est <em>indissociablement unie</em> à sa divinité. Là où est l'âme et le corps du Christ, là est aussi sa <strong>divinité</strong>. D'où la loi suivante ·</p>"
+			"html": "<p>Plus encore ; depuis le mystère de l'Incarnation, l'humanité du Christ est <em>indissociablement unie</em> à sa divinité. Là où est l'âme et le corps du Christ, là est aussi sa <strong>divinité</strong>. D'où la loi suivante :</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Loi de concomitance",
-			"html": "<p>Sous chaque espèce (pain ou vin) se trouvent <strong>le Corps, le Sang, l'Âme et la Divinité de Jésus-Christ</strong> · c'est-à-dire <em>tout le Christ</em>, sa personne unique avec ses deux natures.</p>"
+			"html": "<p>Sous chaque espèce (pain ou vin) se trouvent <strong>le Corps, le Sang, l'Âme et la Divinité de Jésus-Christ</strong>, c'est-à-dire <em>tout le Christ</em>, sa personne unique avec ses deux natures.</p>"
 		},
 		{
 			"kind": "heading",
@@ -89,11 +109,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>Communion sous une seule espèce.</strong> Puisque tout le Christ est présent sous chaque espèce, on n'a <em>rien de plus</em> à communier sous les deux. L'Église fait donc communier les fidèles sous la seule espèce du pain · cela évite les risques de profanation que comporte le calice (gouttes répandues, etc.). Quelques rites particuliers communient sous les deux espèces · sans aucun bénéfice théologique.</p>"
+			"html": "<p><strong>Communion sous une seule espèce.</strong> Puisque tout le Christ est présent sous chaque espèce, on n'a <em>rien de plus</em> à communier sous les deux. L'Église fait donc communier les fidèles sous la seule espèce du pain ; cela évite les risques de profanation que comporte le calice (gouttes répandues, etc.). Quelques rites particuliers communient sous les deux espèces ; sans aucun bénéfice théologique. Si la communion sous les deux espèces était théologiquement requise, l'Église l'aurait imposée ; mais par la loi de concomitance, tout le Christ est sous chacune.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>Pourquoi alors deux espèces ?</strong> Si l'une suffit, pourquoi le pain <em>et</em> le vin ? Réponse complète la semaine prochaine. Indice · un être dont on met d'un côté le corps et de l'autre le sang, c'est un être <em>immolé</em>. La mise à part sacramentelle des deux espèces signifie le <strong>sacrifice</strong> · c'est ce qui réalise la messe.</p>"
+			"html": "<p><strong>Pourquoi alors deux espèces ?</strong> Si l'une suffit, pourquoi le pain <em>et</em> le vin ? Réponse complète la semaine prochaine. Indice ; un être dont on met d'un côté le corps et de l'autre le sang, c'est un être <em>immolé</em>. Si je mettais le corps de l'un d'entre vous d'un côté, son sang de l'autre, je l'aurais <em>égorgé</em>. La mise à part sacramentelle des deux espèces signifie le <strong>sacrifice</strong> : c'est ce qui réalise la messe.</p>"
 		},
 		{
 			"kind": "heading",
@@ -103,25 +123,49 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Jésus-Christ a institué ce sacrement la <strong>veille de sa mort, le jeudi saint</strong>, dans une circonstance toute solennelle · le dernier repas pris avec ses disciples. Saint Paul rapporte magnifiquement la scène · <em>« Le Seigneur Jésus, dans la nuit où il fut livré, prit du pain... »</em> (1 Co 11, 23). Il prit le pain, le rompit, le distribua à ses apôtres en disant ·</p>"
+			"html": "<p>Jésus-Christ a institué ce sacrement la <strong>veille de sa mort, le jeudi saint</strong>, dans une circonstance toute solennelle ; le dernier repas pris avec ses disciples. Saint Paul rapporte magnifiquement la scène : <em>« Le Seigneur Jésus, dans la nuit où il fut livré, prit du pain... »</em> (1 Co 11, 23). Il prit le pain, le rompit, le distribua à ses apôtres en disant :</p>"
 		},
 		{
 			"kind": "quote",
-			"html": "<p>Prenez et mangez · ceci est mon Corps, livré pour vous.</p>",
+			"html": "<p>Prenez et mangez ; ceci est mon Corps, livré pour vous.</p>",
 			"attribution": "Mt 26, 26 / 1 Co 11, 24"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Puis il prit la coupe de bénédiction (la troisième du repas pascal), la donna à ses apôtres ·</p>"
+			"html": "<p>Puis il prit la coupe de bénédiction (la troisième du repas pascal), la donna à ses apôtres :</p>"
 		},
 		{
 			"kind": "quote",
-			"html": "<p>Buvez-en tous · ceci est le calice de mon Sang, qui sera versé pour vous en rémission des péchés.</p>",
+			"html": "<p>Buvez-en tous ; ceci est le calice de mon Sang, qui sera versé pour vous en rémission des péchés.</p>",
 			"attribution": "Mt 26, 27-28"
 		},
 		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Hoc est : la clarté foudroyante des paroles",
+			"anchor": "hoc-est"
+		},
+		{
 			"kind": "paragraph",
-			"html": "<p>Les paroles ne peuvent être plus claires. <em>« Ceci est »</em> · en latin <em>« Hoc est »</em>, on peut même supprimer le verbe et il reste · <em>« ceci, mon Corps »</em>. Pas symbole de · <em>est</em>. Quand Jésus dit à un jeune homme <em>« lève-toi »</em>, le jeune homme se lève · quand il dit <em>« Lazare, sors »</em>, Lazare sort. Tout ce que dit le Christ se réalise. Ici on ne peut pas vérifier · ce n'est pas vérifiable · c'est pourquoi les paroles de la consécration ajoutent <em>« mysterium fidei »</em>, mystère de la foi.</p>"
+			"html": "<p>Les paroles ne peuvent être plus claires. <em>« Ceci est »</em> : en latin <em>« Hoc est »</em>. Vous qui êtes ou serez latinistes, vous savez qu'en latin <em>on peut me supprimer le verbe être</em> ; il reste alors la nudité éclatante de la formule : <em>« ceci, mon Corps »</em>. Pas symbole de ; pas mémoire de ; <em>est</em>. Ce n'est pas <em>memoria</em>, ce n'est pas <em>signum</em> : c'est <em>est</em>.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Miracles vérifiables, miracles invérifiables",
+			"anchor": "miracles-verifiables"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Quand Jésus-Christ dit à un jeune homme <em>« je te l'ordonne, lève-toi »</em>, le jeune homme se lève ; il était mort, c'est le jeune homme de Naïm. Quand il dit <em>« Lazare, dehors ! »</em>, Lazare sort de son tombeau, mort depuis quatre jours et <em>sentant déjà mauvais</em>, encore tout empaqueté dans ses bandelettes. Ce que Jésus-Christ dit se réalise ; on peut le vérifier. C'est tout l'Évangile.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il y a même un cas où le Seigneur fait exprès de croiser le vérifiable et l'invérifiable : le paralytique descendu par les <em>tuiles du toit</em> tellement il y avait du monde. Au lieu de le guérir, le Seigneur commence par lui dire : <em>« Tes péchés te sont remis. »</em> Ce n'est pas vérifiable, ça ne se voit pas, un péché qui rumine. Et tout le monde de murmurer ; <em>« mais qu'est-ce que c'est que cet homme qui remet les péchés ? »</em> Alors Jésus : <em>« Afin que vous sachiez que le Fils de l'homme a sur la terre le pouvoir de remettre les péchés... »</em> et il s'adresse au paralytique ; <em>« lève-toi, prends ton grabat, et rentre dans ta maison. »</em> Et il rentre. <strong>Ceci, qui est vérifiable, prouve cela, qui ne l'est pas.</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Toute la vie de Jésus-Christ est faite de ces miracles vérifiables : il calme la tempête d'un geste de la main ; il rend la vue aux aveugles, l'audition aux sourds, la parole aux muets ; il fait marcher les estropiés, il ressuscite les morts. <strong>Quand Jésus-Christ dit « Ceci est mon Corps », c'est son Corps.</strong> Quand il dit <em>« Ceci est mon Sang »</em>, c'est son Sang. Point barre. Cette fois, ce n'est pas vérifiable ; on ne peut qu'y croire. C'est pourquoi les paroles mêmes de la consécration ajoutent <em>« mysterium fidei »</em>, mystère de la foi. Voilà le sommet de la foi du chrétien.</p>"
 		},
 		{
 			"kind": "heading",
@@ -131,7 +175,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le Seigneur avait préparé ce mystère par un long discours après la multiplication des pains (Jn 6). Discours sidérant pour qui l'entendait pour la première fois ·</p>"
+			"html": "<p>Le Seigneur avait préparé ce mystère par un long discours après la multiplication des pains. Les foules le poursuivaient ; c'est agréable d'avoir un rabbi qui vous distribue du pain à volonté. Mais Jésus retourne la situation : <em>« Ne recherchez pas les nourritures d'en bas ; recherchez les nourritures d'en haut. Je vous donnerai un pain, et celui qui mangera ce pain aura la vie éternelle ; non comme vos pères qui ont mangé la manne et qui sont morts. »</em></p>"
 		},
 		{
 			"kind": "quote",
@@ -140,7 +184,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Imaginez ces paroles entendues pour la première fois · « celui qui mange ma chair... ». Si quelqu'un me tient ce langage aujourd'hui, je change de trottoir et je préviens les services publics. Beaucoup de disciples sont scandalisés et s'en vont. Les apôtres signalent au Maître que tout le monde se scandalise · loin de retirer ou d'expliquer symboliquement, le Christ <em>en remet une couche</em> · <em>« Si vous ne mangez la chair du Fils de l'homme et ne buvez son sang, vous n'aurez pas la vie en vous. »</em></p>"
+			"html": "<p>Imaginez ces paroles entendues pour la première fois : <em>« celui qui mange ma chair... »</em> Si quelqu'un me tient ce langage aujourd'hui, <strong>je change de trottoir et je préviens les services publics</strong> ; voilà ce qu'il faudrait faire si ce personnage n'était pas le Christ. Et beaucoup de disciples, en effet, sont scandalisés et s'en vont. Et nous, nous ne sommes pas scandalisés ; pourquoi ? Parce que nous sommes complètement <em>amortis, avachis, girafés</em>, comme le dit la formule. Nous ne nous rendons plus compte de la <em>violence</em> de ces paroles. Or il faut s'en rendre compte ; c'est l'enjeu de toute la foi.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les apôtres signalent au Maître que tout le monde se scandalise. Loin de retirer ou d'expliquer symboliquement, le Christ <em>en remet une couche</em> : <em>« Si vous ne mangez la chair du Fils de l'homme et ne buvez son sang, vous n'aurez pas la vie en vous ; mais celui qui mange ma chair et boit mon sang, moi je le ressusciterai au dernier jour. »</em> Fin de communication. L'Église n'a rien inventé ; <strong>c'est Jésus-Christ qui a tout dit à l'avance.</strong></p>"
 		},
 		{
 			"kind": "heading",
@@ -150,7 +198,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Au cénacle, après ces deux gestes, Jésus ajoute · <em>« Faites cela en mémoire de moi »</em> (Lc 22, 19). À ses apôtres, et à eux seuls. Jamais personne n'eût osé dire la messe sans cet ordre du Seigneur. Or qui ordonne suppose qu'il donne le <em>pouvoir</em> de faire. C'est par cette parole que Jésus-Christ <strong>institue en même temps le sacerdoce</strong> · le sacrement de l'Ordre, dont l'acte propre est la consécration eucharistique. Les apôtres n'ont pas eu besoin d'imposition des mains · Jésus leur donne directement la grâce, comme la Tête de son Corps · ses successeurs, eux, devront passer par le rite ordinaire.</p>"
+			"html": "<p>Au cénacle, après ces deux gestes, Jésus ajoute : <em>« Faites cela en mémoire de moi »</em> (Lc 22, 19). À ses apôtres, et à eux seuls. Jamais personne n'eût osé dire la messe sans cet ordre du Seigneur. Or qui ordonne suppose qu'il donne le <em>pouvoir</em> de faire. C'est par cette parole que Jésus-Christ <strong>institue en même temps le sacerdoce</strong> : le sacrement de l'Ordre, dont l'acte propre est la consécration eucharistique. Les apôtres n'ont pas eu besoin d'imposition des mains ; Jésus leur donne directement la grâce, comme la Tête de son Corps ; ses successeurs, eux, devront passer par le rite ordinaire.</p>"
 		},
 		{
 			"kind": "heading",
@@ -160,16 +208,16 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Luther voulait détruire la messe pour détruire la papauté (il y a, dit-il, un lien absolu entre les deux). Il a cherché, durant des années, à interpréter symboliquement les paroles du Christ. Témoignage stupéfiant ·</p>"
+			"html": "<p>Luther voulait détruire la messe pour détruire la papauté (il y a, dit-il, un lien absolu entre les deux ; et il avait raison sur ce point au moins, car la papauté repose sur le sacrifice de la messe). Il a cherché, durant des années, à interpréter symboliquement les paroles du Christ ; en pure perte. Témoignage stupéfiant, et pour une fois dépourvu de la grossièreté ordurière qui marque tant d'autres pages de cet auteur :</p>"
 		},
 		{
 			"kind": "quote",
-			"html": "<p>J'ai souvent beaucoup sué pour prouver qu'il n'y a dans l'Eucharistie que du pain et du vin · mais il n'y a pas moyen d'en sortir · le texte de l'Évangile est trop clair.</p>",
+			"html": "<p>J'ai souvent beaucoup sué pour prouver qu'il n'y a dans l'Eucharistie que du pain et du vin, mais il n'y a pas moyen d'en sortir ; le texte de l'Évangile est trop clair.</p>",
 			"attribution": "Martin Luther"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Aveu remarquable de la part de celui qui voulait s'en passer · l'Évangile est trop clair. <em>Ceci</em> est. Point barre.</p>"
+			"html": "<p>Il a <em>sué sang et eau</em>, c'est le cas de le dire, pour démontrer que les paroles du Seigneur étaient symboliques ; aveu remarquable de la part de celui qui voulait s'en passer. L'Évangile est trop clair. <em>Ceci</em> est. Point barre.</p>"
 		},
 		{
 			"kind": "heading",
@@ -186,12 +234,12 @@
 		{
 			"kind": "definition",
 			"term": "Le pain",
-			"html": "<p>De <strong>froment</strong> (blé) exclusivement. Toute autre céréale serait invalide · pas de seigle, pas de riz. Le pain est <em>azyme</em> en Occident (sans levure), souvenir historique de la Pâque juive où l'on ne mangeait que des azymes huit jours durant · il est probable que le Christ ait pris un azyme. Le pain levé reste valide (rites orientaux) · mais l'Église latine garde la coutume.</p>"
+			"html": "<p>De <strong>froment</strong> (blé) exclusivement. Jésus-Christ a pris du pain ; il n'a pas pris du riz, ni du manioc, ni je ne sais quoi : on ne dit pas la messe avec du seigle. C'est le blé qui fait le pain. Le pain est <em>azyme</em> en Occident (sans levure), souvenir historique de la Pâque juive où l'on ne mangeait que des azymes huit jours durant ; il est hautement probable que le Christ ait pris un azyme. Le pain levé reste valide (rites orientaux), mais l'Église latine garde la coutume ; le pain azyme a aussi une symbolique d'incorruptibilité, puisqu'il ne porte pas le ferment.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Le vin",
-			"html": "<p>Jus de raisin <strong>dans lequel on n'a pas enlevé les ferments</strong>, qu'il soit déjà fermenté ou non. Les petits cubes vendus dans le commerce, dont les ferments ont été retirés précisément pour empêcher la fermentation, donneraient un sacrement <em>invalide</em>. Saint Noé avait découvert qu'il y avait peu de différence entre son jus de raisin habituel et le suc fermenté · et il s'en saoula la première fois <em>sans faute</em>, sans l'avoir su.</p>"
+			"html": "<p>Jus de raisin <strong>dans lequel on n'a pas enlevé les ferments</strong>, qu'il soit déjà fermenté ou non. Les petits cubes de jus vendus dans le commerce, dont les ferments ont été retirés précisément pour empêcher la fermentation, donneraient un sacrement <em>invalide</em> : ce n'est plus du vin au sens sacramentel. Saint Noé avait découvert qu'il y avait peu de différence entre son jus de raisin habituel et le suc fermenté (qui s'appelle du vin) ; il s'en saoula la première fois <em>sans faute de sa part</em>, sans l'avoir su.</p>"
 		},
 		{
 			"kind": "heading",
@@ -201,7 +249,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Avant la consécration, c'est du pain et du vin · matière du sacrement. Après, ce sont les <em>espèces</em> · ce sont elles qui sont signes, qui renvoient à la réalité sublime cachée · le Corps et le Sang du Seigneur. À l'offertoire, déjà, le prêtre offre le Corps et le Sang qui vont apparaître · pas le pain et le vin.</p>"
+			"html": "<p>Avant la consécration, c'est du pain et du vin ; matière du sacrement. Après, ce sont les <em>espèces</em> : ce sont elles qui sont signes, qui renvoient à la réalité sublime cachée ; le Corps et le Sang du Seigneur. Avant la consécration, le pain ne renvoie pas au Corps du Seigneur, il est lui-même ; après la consécration, il n'y a plus de pain, il y a les <em>apparences</em> du pain, et ce sont ces apparences qui nous renvoient au mystère caché et à la grâce qu'il contient.</p>"
 		},
 		{
 			"kind": "heading",
@@ -212,7 +260,7 @@
 		{
 			"kind": "definition",
 			"term": "Forme du sacrement",
-			"html": "<p><em>« Ceci est mon Corps »</em> · <em>« Ceci est mon Sang »</em>. Paroles aussi claires qu'elles soient. Elles indiquent et opèrent à elles seules la transsubstantiation · elles suffisent à la validité. Les mots qui suivent (<em>« livré pour vous »</em>, <em>« versé pour la rémission des péchés »</em>) renvoient au sacrifice et ne sont pas nécessaires à la validité du seul changement eucharistique · ils le sont à la signification du sacrement comme messe.</p>"
+			"html": "<p><em>« Ceci est mon Corps »</em> : <em>« Ceci est mon Sang »</em>. Paroles aussi claires qu'elles soient. Elles indiquent et opèrent à elles seules la transsubstantiation ; elles suffisent à la validité. Les mots qui suivent (<em>« livré pour vous »</em>, <em>« versé pour la rémission des péchés »</em>) renvoient au sacrifice et ne sont pas nécessaires à la validité du seul changement eucharistique ; ils le sont à la signification du sacrement comme messe.</p>"
 		},
 		{
 			"kind": "heading",
@@ -222,11 +270,25 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La présence réelle <strong>demeure tant que les espèces ne sont pas corrompues</strong>. Dans la communion, les espèces disparaissent presque immédiatement à l'intérieur du communiant · la présence cesse avec elles. Mais les hosties conservées au tabernacle, intactes, sont signes permanents · Jésus-Christ habite réellement dans nos églises.</p>"
+			"html": "<p>La présence réelle <strong>demeure tant que les espèces ne sont pas corrompues</strong>. Ce sont les espèces qui sont signes ; tant qu'elles demeurent, la présence demeure ; quand elles cessent (par la mastication du communiant, ou par corruption naturelle), la présence cesse. Dans la communion, les espèces disparaissent presque immédiatement à l'intérieur du communiant ; la présence cesse avec elles. Mais les hosties conservées au tabernacle, intactes, sont signes permanents ; Jésus-Christ habite réellement dans nos églises.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Culte de latrie, tabernacle, processions",
+			"anchor": "latrie"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>D'où le <strong>culte de latrie</strong> dû à l'Eucharistie · l'adoration que l'on rend à Dieu seul, sans aucune restriction. Et d'où le tabernacle, le saint sacrement, les saluts, les processions. Le Christ a pris des <em>risques considérables</em> en se laissant ainsi parmi nous · profanations, vols de ciboires qu'on apprend en France tous les mois. Pourquoi le Seigneur a-t-il couru ce risque énorme ? Une seule explication · l'amour. <em>« Ayant aimé les siens qui étaient dans le monde, il les aima jusqu'à l'extrême »</em> (Jn 13, 1) · on peut lire <em>jusqu'à l'excès</em>.</p>"
+			"html": "<p>Voilà pourquoi <strong>nous adorons l'Eucharistie en dehors de la messe</strong>. C'est parfaitement normal : tant que les espèces sont là, elles sont signe efficace de la présence réelle ; il y aura cessation, si je puis dire, lorsque les espèces auront perdu leur valeur de signe. D'où l'Eucharistie consacrée placée dans les <strong>tabernacles</strong> ; et adorée pour ce qu'elle est : <em>le Christ Jésus tout entier</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>D'où aussi le <strong>culte de latrie</strong> dû à l'Eucharistie ; l'adoration absolue que l'on rend à Dieu seul, sans aucune restriction. Et d'où les <em>saluts du saint Sacrement</em>, les <em>processions</em> de la Fête-Dieu, l'<em>exposition</em>, la génuflexion en entrant dans une église. Tout cela découle nécessairement de la présence réelle ; ce n'est pas un ornement pieux ajouté de l'extérieur, c'est la conséquence rigoureuse du dogme.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Faut-il oser le dire ? Jésus-Christ a pris des <em>risques considérables</em> en se laissant ainsi parmi nous, dans son ingratitude, dans toute la grandeur de sa divinité sous des espèces si dérisoires : profanations un peu partout en France, vols de ciboires, sacrilèges. C'est à croire que les ennemis de l'Église savent mieux ce qu'est l'Eucharistie que certains chrétiens eux-mêmes. Pourquoi le Seigneur a-t-il couru ce risque énorme de confier ce qu'il y a de plus beau au ciel à des hommes, à son Église ? <strong>Je n'ai pas d'autre explication à vous fournir que celle-ci ; l'amour du Christ est sans limite.</strong> Saint Jean le dit, juste avant le récit de l'institution : <em>« ayant aimé les siens qui étaient dans le monde, il les aima jusqu'à l'extrême »</em> (Jn 13, 1) ; on peut lire <em>jusqu'à l'excès</em>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -236,11 +298,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le ministre est le <strong>prêtre, et lui seul</strong> (l'évêque l'étant à plus forte raison, puisque l'évêque est un prêtre qui peut ordonner). Le jeudi saint, les apôtres seuls étaient là · à eux seuls le Christ a confié ce pouvoir, qu'ils ont transmis à leurs successeurs par le sacrement de l'Ordre. <strong>Consacrer l'Eucharistie est l'acte sacerdotal par excellence</strong>, la sublime dignité du prêtre.</p>"
+			"html": "<p>Le ministre est le <strong>prêtre, et lui seul</strong> (l'évêque l'étant à plus forte raison, puisque l'évêque est un prêtre qui peut ordonner). Le jeudi saint, les apôtres seuls étaient là ; à eux seuls le Christ a confié ce pouvoir, qu'ils ont transmis à leurs successeurs par le sacrement de l'Ordre. <strong>Consacrer l'Eucharistie est l'acte sacerdotal par excellence</strong>, la sublime dignité du prêtre.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Conditions de validité · que le prêtre soit validement ordonné, et qu'il ait l'<em>intention de faire ce que veut l'Église</em> (réaliser le sacrifice et donc transsubstantier). Pas besoin d'être en état de grâce ni même d'avoir la foi pour la validité · un mauvais prêtre confectionne validement (rappelez-vous le baptême). La sainteté du prêtre concerne le mérite, pas la validité.</p>"
+			"html": "<p>Notez que la messe d'un prêtre, d'un évêque ou du pape est exactement la même messe ; <em>la messe du pape n'est pas plus grande que celle de n'importe quel curé</em>. Le plus grand pouvoir de l'un est aussi le plus grand pouvoir de l'autre ; ils participent au même sacerdoce, ils offrent le même sacrifice.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Conditions de validité : que le prêtre soit validement ordonné, et qu'il ait l'<em>intention de faire ce que veut l'Église</em> (réaliser le sacrifice et donc transsubstantier). Pas besoin d'être en état de grâce ni même d'avoir la foi pour la validité ; un mauvais prêtre confectionne validement (rappelez-vous le baptême). La sainteté du prêtre concerne le mérite, pas la validité.</p>"
 		},
 		{
 			"kind": "heading",
@@ -250,7 +316,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>L'<strong>ordination d'une femme est totalement invalide</strong>, et de soi monstrueuse. Le pape Jean-Paul II a tranché dogmatiquement la question (<em>Ordinatio sacerdotalis</em>, 1994), confirmant ce qu'enseignait le magistère ordinaire universel depuis deux mille ans. C'est l'un des rares documents proprement infaillibles de ce pontificat. Raison de fond · un sacrement est un signe sensible <em>institué par le Christ</em> · nous ne pouvons pas recomposer les sacrements à notre fantaisie. Jésus n'a pas appelé de femmes au sacerdoce · l'Église n'a pas le pouvoir d'en appeler. Pareillement, la « messe » d'un non-prêtre est invalide et une vraie monstruosité.</p>"
+			"html": "<p>L'<strong>ordination d'une femme est totalement invalide</strong>, et de soi monstrueuse. Le pape Jean-Paul II a tranché dogmatiquement la question (<em>Ordinatio sacerdotalis</em>, 1994), confirmant ce qu'enseignait le magistère ordinaire universel depuis deux mille ans. C'est l'un des rares documents proprement infaillibles de ce pontificat ; un document dogmatique de huit pages, très simple, devant les délires des communautés anglicanes et autres qui déteignaient un peu sur notre chère Église catholique. Raison de fond ; un sacrement est un <em>signe sensible institué par le Christ</em> : nous ne pouvons pas recomposer les sacrements à notre fantaisie. Jésus n'a pas appelé de femmes au sacerdoce ; l'Église n'a pas le pouvoir d'en appeler. Pareillement, la « messe » d'un non-prêtre est invalide et une vraie monstruosité.</p>"
 		},
 		{
 			"kind": "heading",
@@ -260,7 +326,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les effets de l'Eucharistie sont à prendre du côté de la <strong>communion</strong> · car communier, c'est participer au sacrifice de la messe dont l'Eucharistie est le moyen et le fruit. Même la communion reçue à domicile par un malade est participation au sacrifice eucharistique.</p>"
+			"html": "<p>Les effets de l'Eucharistie sont à prendre du côté de la <strong>communion</strong>, car communier, c'est participer au sacrifice de la messe dont l'Eucharistie est le moyen et le fruit. On ne communie pas pour communier ; <em>on communie aux grâces du sacrifice de la messe</em>. Même la communion reçue à domicile par un malade est participation au sacrifice eucharistique.</p>"
 		},
 		{
 			"kind": "heading",
@@ -270,11 +336,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Effet commun à tous les sacrements, mais ici par excellence · c'est le plus grand des sacrements parce qu'il contient non seulement la grâce, mais <strong>l'Auteur même de la grâce</strong>. <em>« Celui qui me mange vivra par moi »</em> (Jn 6, 57) · paroles incroyables. Aucun autre sacrement ne livre la personne du Christ elle-même · ils véhiculent ses grâces · l'Eucharistie le donne, lui.</p>"
+			"html": "<p>Effet commun à tous les sacrements, mais ici par excellence : c'est le plus grand des sacrements parce qu'il contient non seulement la grâce, mais <strong>l'Auteur même de la grâce</strong>. <em>« Celui qui me mange vivra par moi »</em> (Jn 6, 57) ; paroles incroyables. Aucun autre sacrement ne livre la personne du Christ elle-même ; ils véhiculent ses grâces ; l'Eucharistie le donne, lui.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Ceux qui communient régulièrement, comme les premiers chrétiens qui communiaient quotidiennement (le <em>« pain quotidien »</em> du Pater leur paraissait l'Eucharistie), constatent que la vie chrétienne devient extraordinairement plus facile. La femme à l'hémorroïsse qui touche la frange du manteau de Jésus et guérit (Mt 9) · à plus forte raison celui qui mange sa chair.</p>"
+			"html": "<p>Ceux qui communient régulièrement, comme les premiers chrétiens qui communiaient quotidiennement (ils prenaient au mot le <em>« pain quotidien »</em> du Pater qui leur paraissait l'Eucharistie ; ils communiaient le soir dans les catacombes, sous les persécutions, au péril de leur vie), constatent que la vie chrétienne devient extraordinairement plus facile ; <em>ça vous donne des ailes</em>. Ce n'est pas toujours perceptible au jour le jour, mais c'est cela qui transforme l'homme. La femme à l'hémorroïsse qui, n'osant pas demander un miracle, touche en cachette la frange du manteau de Jésus et guérit (Mt 9) : si <em>la frange du manteau</em> guérit, à plus forte raison celui qui <em>mange sa chair</em>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -289,7 +355,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La vie éternelle, c'est de connaître Dieu et celui qu'il a envoyé (Jn 17, 3). Deux grands moyens d'approcher du Christ · la Parole de Dieu qui nourrit l'intelligence, et la fréquentation des sacrements · spécialement de celui-ci, qui livre <em>physiquement</em> le Seigneur. L'Évangile insiste · les termes grecs de Jn 6 sont d'une violence saisissante · <em>τρώγειν</em>, « mâcher, dévorer ». Il y a dans l'Eucharistie une violence d'amour qu'on ne peut réduire.</p>"
+			"html": "<p>La vie éternelle, c'est de connaître Dieu et celui qu'il a envoyé (Jn 17, 3). Deux grands moyens d'approcher du Christ ; la Parole de Dieu qui nourrit l'intelligence, et la fréquentation des sacrements ; spécialement de celui-ci, qui livre <em>physiquement</em> le Seigneur. L'Évangile insiste ; les termes grecs de Jn 6 sont d'une violence saisissante ; <em>τρώγειν</em>, « mâcher, dévorer » ; il s'agit de <em>dévorer la chair</em>, de <em>boire le sang</em>. Il y a dans l'Eucharistie une <strong>violence d'amour</strong> qu'on ne peut réduire : ne pas essayer de la réduire. Quand le Christ dit <em>« mange ma chair, bois mon sang »</em>, l'homme ordinaire dit non : sauf qu'il s'agit du Christ, et que ce qu'il dit, il le fait.</p>"
 		},
 		{
 			"kind": "heading",
@@ -299,7 +365,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La communion fréquente <strong>réduit les vices</strong> et fait reculer la concupiscence. Les premiers chrétiens, qui communiaient tous les soirs dans les catacombes au péril de leur vie, étaient capables de donner cette vie pour le Christ · ceci explique cela. Là où le Christ grandit, la concupiscence diminue · c'est une simple loi des vases communicants spirituels.</p>"
+			"html": "<p>La communion fréquente <strong>réduit les vices</strong> et fait reculer la concupiscence. Les premiers chrétiens, qui communiaient tous les soirs dans les catacombes au péril de leur vie, étaient capables de donner cette vie pour le Christ ; ceci explique cela. Là où le Christ grandit, la concupiscence diminue : c'est une simple loi des vases communicants spirituels.</p>"
 		},
 		{
 			"kind": "heading",
@@ -309,7 +375,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>L'Eucharistie réalise le sacrifice de la Croix et en déverse les grâces sur nous · elle nous configure au Christ <em>immolé et glorieux</em>. Saint Paul l'avait dit ·</p>"
+			"html": "<p>L'Eucharistie réalise le sacrifice de la Croix et en déverse les grâces sur nous ; elle nous configure au Christ <em>immolé et glorieux</em>, aussi des mille feux de sa Résurrection et de son Ascension. Saint Paul l'avait dit :</p>"
 		},
 		{
 			"kind": "quote",
@@ -318,7 +384,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On ne peut ressembler plus à Jésus-Christ que là, en mangeant sa chair · <em>comprenne qui pourra</em>.</p>"
+			"html": "<p>On ne peut ressembler plus à Jésus-Christ que là, en mangeant sa chair ; <em>comprenne qui pourra</em>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -328,17 +394,17 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Deux conditions ·</p>"
+			"html": "<p>Deux conditions :</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "État de grâce",
-			"html": "<p>Indispensable · l'Eucharistie est faite pour <em>nous unir</em> au Christ · l'approcher sans l'aimer, sans la grâce, c'est lui faire injure · c'est commettre un <strong>sacrilège</strong>. D'où l'importance de se confesser avant de communier si l'on a un péché mortel sur la conscience.</p>"
+			"html": "<p>Indispensable ; l'Eucharistie est faite pour <em>nous unir</em> au Christ ; l'approcher sans l'aimer, sans la grâce, c'est lui faire injure : c'est commettre un <strong>sacrilège</strong>. D'où l'importance de se confesser avant de communier si l'on a un péché mortel sur la conscience.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Intention droite",
-			"html": "<p>Communier pour les raisons mêmes pour lesquelles le Christ a institué le sacrement · s'unir à lui, recevoir ses grâces, lui rendre l'action de grâces · non par convention sociale ou par habitude vide.</p>"
+			"html": "<p>Communier pour les raisons mêmes pour lesquelles le Christ a institué le sacrement ; s'unir à lui, recevoir ses grâces, lui rendre l'action de grâces ; non par convention sociale ou par habitude vide.</p>"
 		},
 		{
 			"kind": "heading",
@@ -348,11 +414,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le sacrement de l'Eucharistie n'a qu'une explication · <strong>l'amour insondable du Christ Jésus</strong>. Ses délices sont d'être avec les enfants des hommes (Pr 8, 31). Il a pris tous les risques pour rester avec nous · pour qu'au matin de chaque messe, sous des espèces dérisoires de pain et de vin, le Fils de Dieu fasse irruption dans nos églises et dans nos âmes.</p>"
+			"html": "<p>Le sacrement de l'Eucharistie n'a qu'une explication ; <strong>l'amour insondable du Christ Jésus</strong>. Ses délices sont d'être avec les enfants des hommes (Pr 8, 31). Il a pris tous les risques pour rester avec nous ; pour qu'au matin de chaque messe, sous des espèces dérisoires de pain et de vin, le Fils de Dieu fasse irruption dans nos églises et dans nos âmes.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Saint Paul disait commencer à mesurer <em>« la largeur, la longueur, la hauteur et la profondeur, et à connaître l'amour du Christ qui surpasse toute connaissance »</em> (Ep 3, 18-19). Tout est là. La semaine prochaine, nous verrons comment cette présence réelle s'inscrit dans le saint sacrifice de la Messe, qui en est l'unité.</p>"
+			"html": "<p>Saint Paul disait commencer à mesurer <em>« la largeur, la longueur, la hauteur et la profondeur, et à connaître l'amour du Christ qui surpasse toute connaissance »</em> (Ep 3, 18-19). Tout est là. La semaine prochaine, nous verrons comment cette présence réelle s'inscrit dans le saint sacrifice de la Messe, qui en est l'unité. À bon entendeur, salut.</p>"
 		}
 	]
 }

@@ -12,12 +12,12 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Avec cette leçon, nous rentrons cette fois dans la <strong>morale à proprement parler</strong>. Les trois vertus théologales (foi, espérance, charité) avaient un aspect moral, mais elles étaient faites fondamentalement pour nous <em>connecter avec Dieu</em>. Désormais nous nous demandons · qu'est-ce qui doit être fait dans l'agir de l'homme ? La première de toutes les vertus morales, qui intervient d'ailleurs dans <em>toutes</em> les autres, c'est la prudence.</p>"
+			"html": "<p>Avec cette leçon, nous rentrons cette fois carrément dans la <strong>morale à proprement parler</strong>. Les trois vertus théologales (foi, espérance, charité) avaient bien un aspect moral, mais elles étaient faites fondamentalement pour nous <em>connecter avec Dieu</em>, à la première personne. Désormais nous nous posons une autre question ; qu'est-ce qui, dans l'agir de l'homme, doit être fait ? La première de toutes les vertus morales, qui intervient d'ailleurs dans <em>toutes</em> les autres comme vous allez le voir, c'est la <strong>prudence</strong>.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Les quatre vertus cardinales",
-			"html": "<p>Dans l'ordre · <strong>prudence, justice, force, tempérance</strong>. Ordre énuméré dès le livre de la Sagesse (Sg 8, 7). Si l'on regarde la morale avec un peu de recul, <em>il n'y a au fond qu'une grande vertu morale · la justice</em>, qui consiste à rendre à chacun ce qu'on lui doit · quelqu'un qui rend à chacun ce qu'il doit est parfaitement dans la bonne morale. Mais pour exercer cette justice, il faut en amont la <strong>prudence</strong> qui fixe le juste milieu de chacune de nos actions · et il faut tenir ses passions pendant et après l'action, d'où la <em>force</em> et la <em>tempérance</em>. Les quatre vertus ne sont pas à égalité · la prudence vient en tête, parce qu'elle informe toutes les autres.</p>"
+			"html": "<p>Il y a quatre grandes vertus cardinales, c'est-à-dire morales. Le mot est tiré du latin <em>cardo, cardinis</em>, qui désigne le <strong>gond d'une porte</strong> ; ces quatre vertus sont celles autour desquelles tourne toute la vie morale, comme une porte tourne sur ses gonds. Dans l'ordre ; <strong>prudence, justice, force, tempérance</strong>. Ordre énuméré dès le livre de la Sagesse (Sg 8, 7), et tous les cours de catéchèse procèdent selon cet ordre. Si l'on regarde la morale avec un peu de recul, <em>il n'y a au fond qu'une grande vertu morale ; la justice</em>, qui consiste à rendre à chacun ce qu'on lui doit ; quelqu'un qui rend à chacun ce qu'il doit est parfaitement dans la bonne morale. Mais pour parvenir à exercer cette justice, il faut en amont la <strong>prudence</strong>, qui fixe le juste milieu de chacune de nos actions ; et il faut tenir ses passions pendant et après l'action, d'où la <em>force</em> et la <em>tempérance</em>. Quelqu'un qui ne tient pas ses passions fera des bêtises ; il sera imprudent, il sera injuste. Les quatre vertus ne sont donc pas à égalité ; elles ont un ordre, et la prudence vient en tête, parce qu'elle informe toutes les autres.</p>"
 		},
 		{
 			"kind": "heading",
@@ -28,7 +28,7 @@
 		{
 			"kind": "definition",
 			"term": "La prudence",
-			"html": "<p><strong>Première des quatre grandes vertus morales · elle surélève notre intelligence pour établir le juste milieu de chacune de nos actions</strong>, en vue de notre béatitude éternelle.</p>"
+			"html": "<p><strong>Première des quatre grandes vertus morales ; elle surélève notre intelligence pour établir le juste milieu de chacune de nos actions</strong>, en vue de notre béatitude éternelle.</p><p>Tous les mots sont importants. Avant de bien faire, il faut savoir ce qu'il faut faire ; il faut savoir quel est le juste milieu de chacune de mes actions. Nous sommes désormais dans la morale, nous regardons ce qu'il y a de bien ou de mal dans nos actions, et l'on peut en faire trop ou pas assez. En vue de quoi ? Nous sommes ici en catéchèse, donc en vue de notre fin surnaturelle, qui est la béatitude éternelle.</p>"
 		},
 		{
 			"kind": "heading",
@@ -38,7 +38,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Dans le domaine moral, il y a toujours un <strong>excès et un défaut possibles</strong>. La vertu, comme dit Aristote et après lui saint Thomas, c'est se tenir sur une <em>crête</em> · on peut tomber à droite ou à gauche. Je peux manger trop ou pas assez · faire trop d'aumônes (un père qui donne tout son salaire et ne nourrit pas sa femme et ses enfants) ou pas du tout (le portefeuille en peau de hérisson, qui ne touche jamais son argent). Je peux parler trop (les bavards qui ne laissent rien placer) ou pas assez (l'ours asocial qui ne répond même pas à un bonjour). C'est la prudence qui dit où est le juste milieu, à chaque fois.</p>"
+			"html": "<p>Dans le domaine moral, il y a toujours un <strong>excès et un défaut possibles</strong>. La vertu, comme dit Aristote et après lui saint Thomas, c'est se tenir sur une <em>crête</em> ; je dois marcher là-dessus, mais je peux tomber à droite ou à gauche ; il faut marcher en équilibre. Pour n'importe quelle action morale, il y a un excès et un défaut.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Prenez la nourriture ; il y a des gens qui mangent trop, ils grossissent, ils deviennent apathiques, ils sont fatigués ; c'est le plus courant. Et puis il y a des gens qui ne mangent pas assez, sans aller chercher les mannequins de mode qui sont des squelettes. Prenez l'aumône ; il y a des gens qui font trop d'aumônes, c'est assez rare, un père de famille qui donne tout son salaire aux pauvres et ne nourrit plus sa femme ni ses enfants, il pèche par excès dans l'aumône ; et puis il y a ceux qui ne la font pas, qui ont, comme on dit, <em>le portefeuille en peau de hérisson</em>, ils ne touchent jamais à leur argent, et c'est généralement le cas.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Prenez le langage ; il y a des gens qui parlent trop, des bavards, on ne peut pas en placer une, ils parlent, ils parlent, ils parlent, ils n'écoutent même pas ce qu'on leur dit ; il y a un excès. Et puis il y a des gens qui ne parlent pas assez ; vous les croisez, ils ne disent pas bonjour, vous leur posez une question, ils ne répondent pas ; ce sont des ours asociaux, pénibles, insupportables, et même ils ne répondront pas à des choses extrêmement importantes. C'est la prudence qui va me dire ; si je parle trop, tais-toi un petit peu ; si je ne parle pas assez, alors que je suis dans le monde et non un moine, tu devrais carrément répondre quand on te dit bonjour, et répondre quand on te pose une question, c'est le minimum de politesse à défaut de vertu.</p>"
 		},
 		{
 			"kind": "heading",
@@ -48,11 +56,19 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Dans le domaine <em>théologal</em>, il n'y a <strong>jamais d'excès</strong>, mais seulement du défaut · je n'ai jamais trop de foi, jamais trop d'espérance, jamais trop d'amour de Dieu. Plus j'en ai, mieux c'est · jusqu'à la foi qui transporte les montagnes. <em>Attention</em> · ce qui n'a pas d'excès, c'est l'<strong>objet</strong> de la vertu théologale, qui est toujours Dieu. L'<em>exercice</em>, lui, peut être intempestif. Quelqu'un qui se signe constamment, qui s'arrête en pleine rue pour faire ses prières publiquement, peut avoir un exercice de la foi disproportionné · ce n'est pas qu'il a trop de foi, c'est qu'il en use mal. Saint Patrick récitait chaque jour les 150 psaumes dans la glace · c'est ce qui a converti l'Irlande · <em>tant mieux pour Saint Patrick et tant mieux pour l'Irlande</em>. Mais si l'un d'entre nous s'amuse à imiter cela matériellement, il manque à la prudence.</p>"
+			"html": "<p>Dans le domaine <em>théologal</em>, il n'y a <strong>jamais d'excès</strong>, mais seulement du défaut. Je peux y aller à plein régime, et plus j'en ai, mieux c'est, jusqu'à la foi qui transporte les montagnes, tant mieux si vous l'avez. L'espérance ? Est-ce que vous espérez trop en Dieu ? Il n'y a pas d'excès, vous pouvez espérer en Dieu autant que vous voulez. Et la charité ? <em>Est-ce que vous aimez trop Dieu ? À un moment faudrait s'arrêter là ? Non non non non, pas du tout, prière de continuer infiniment à aimer Dieu.</em></p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La prudence intervient donc <strong>dans toute action morale, sans exception</strong> · et elle règle même l'exercice des vertus théologales.</p>"
+			"html": "<p><strong>Attention</strong> ; ce qui n'a pas d'excès, c'est l'<strong>objet</strong> de la vertu théologale, qui est toujours Dieu ; il n'y a jamais assez de foi en Dieu, jamais assez d'espérance en Dieu, jamais assez d'amour de Dieu. Mais l'<em>exercice</em> de la vertu théologale, lui, peut être intempestif. Quelqu'un qui se signe en permanence, toute la journée, même quand il se promène, quand il rentre chez lui, vous savez, c'est trop, c'est trop ; ce n'est pas qu'il a trop de foi, c'est que l'exercice de sa foi est <em>intempestif, intempestif</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Patrick récitait chaque jour les 150 psaumes dans la glace ; bon, c'est comme ça qu'il a converti l'Irlande. <em>Deo gratias</em>, tant mieux pour l'Irlande et tant mieux pour saint Patrick. Mais vous comprenez que si l'un d'entre nous s'amusait à faire la même chose, eh bien je pense que ce serait stupide. Les saints ont fait des choses extravagantes, vraiment extravagantes ; si c'est le Saint-Esprit qui les inspire, très bien pour eux, et quand on voit le fruit, on s'incline. Mais quelqu'un qui n'a pas cette inspiration et qui se met à imiter matériellement les saints, il manque à la prudence, il deviendra absolument pas saint avec ça ; c'est même catastrophique. <strong>Chacun a sa prudence, et c'est à lui de l'exercer.</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La prudence intervient donc <strong>dans toute action morale, sans exception</strong>, et elle règle même l'exercice des vertus théologales.</p>"
 		},
 		{
 			"kind": "heading",
@@ -62,11 +78,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La prudence est dans l'<strong>intelligence</strong>, parce que c'est l'intelligence qui juge · son acte fondamental est de juger. Objection · si la prudence se résolvait à l'intelligence, les gens intelligents seraient prudents et les gens bêtes seraient imprudents · il n'y aurait plus de mérite. Or ce n'est pas le cas · on voit très bien des gens très intelligents et très imprudents, et des gens d'intelligence moyenne très prudents.</p>"
+			"html": "<p>Où se loge la prudence ? Une question simple, mais qu'il faut bien comprendre. Nous avons deux grandes puissances spirituelles ; l'<strong>intelligence</strong> et la <strong>volonté</strong>. Puisque la prudence doit déterminer le juste milieu de mes actions entre l'excès et le défaut, c'est évidemment une vertu de l'intelligence ; son acte fondamental est de <em>juger</em>, et on juge avec son intelligence.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>C'est que la prudence est une vertu <em>morale</em> · la <strong>volonté</strong> la règle. Il faut <em>vouloir</em> être prudent pour l'être. On n'est jamais bon ou mauvais par son intelligence, on est bon ou mauvais par sa volonté · il n'y a pas de vertu morale où la volonté n'intervienne. Le prudent, ce n'est pas celui qui a le meilleur jugement, c'est celui qui veut bien user de son jugement pour rejoindre la fin. Celui qui plaide « je n'ai pas vu » alors qu'il fallait réfléchir est <em>responsable</em> · et s'il a mal agi, <em>coupable</em>.</p>"
+			"html": "<p>Objection ; si la prudence se résolvait à l'intelligence, les gens intelligents seraient prudents, les gens bêtes seraient imprudents, et l'on n'aurait aucun mérite à être prudent. Or ce n'est pas du tout comme cela que ça se passe ; vous voyez très bien que l'on peut être très intelligent et très imprudent, et que l'on peut être d'intelligence ordinaire et très prudent. Cependant, pas totalement stupide ; un fou, un aliéné, ne peut pas être prudent puisqu'il faut un jugement et qu'il en est incapable.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est que la prudence est une vertu <em>morale</em> ; la <strong>volonté</strong> y intervient nécessairement. On n'est jamais bon ou mauvais par son intelligence, on est bon ou mauvais par sa volonté, bonne ou mauvaise. Il n'y a pas de vertu morale où la volonté n'intervienne, c'est clair, c'est pas possible autrement. Le prudent, c'est celui qui a un jugement ordinaire mais qui <em>veut</em> faire le bien et qui veut être prudent ; celui-là est prudent. On est prudent parce qu'on veut être prudent, parce qu'on veut utiliser son intelligence à trouver le juste milieu de ses actions. Et celui qui plaide « je n'avais pas vu », alors qu'il fallait réfléchir, sa volonté devait le forcer à réfléchir ; comme on dit aujourd'hui ; il est <strong>responsable</strong>, et s'il a mal agi, <strong>coupable</strong>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -76,11 +96,32 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Il y a deux prudences, selon la fin que l'on poursuit ·</p><ul><li>la <strong>prudence naturelle</strong>, qui a pour fin le bien-vivre terrestre, la santé, l'honnêteté civile (les Suisses qui traversent toujours sur les clous, le respect de l'autorité, payer ses impôts, respecter les stops) ·</li><li>la <strong>prudence surnaturelle</strong>, qui nous ordonne à notre béatitude éternelle.</li></ul><p>On peut être très prudent naturellement et très imprudent surnaturellement · l'exemple-type · vivre en état de péché mortel tout en payant ses dettes et en traversant dans les clous. Saint Paul appelle <em>prudence de la chair</em> (Rm 8, 6) cette prudence humaine qui exclut la prudence du Royaume des Cieux.</p>"
+			"html": "<p>La moralité est toujours une question de <em>fin</em>. Pourquoi y a-t-il un problème moral chez l'homme et nulle part ailleurs, ni chez les minéraux, ni même chez les animaux qui sont programmés instinctivement ? Parce qu'il faut être intelligent ; avant de poser une action, l'homme sait à quoi elle va mener, il peut ajuster ses actions à la fin. La moralité, c'est tout simple ; j'ai un but, je le vois d'avance, j'ajuste mes actions en vue de cette fin, et je ne choisis pas une action qui m'en détourne.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Inversement · il était <em>humainement imprudent</em> pour sainte Jeanne d'Arc, jeune fille de dix-neuf ans, de vouloir libérer la France et bouter les Anglais dehors · elle y a perdu la vie et a fini sur un bûcher. Mais c'est un acte merveilleux de <strong>prudence divine</strong>. Saint François de Sales le dit · certains saints sont plus <em>admirables qu'imitables</em> · saint Siméon le Stylite a passé sa vie au sommet d'une colonne · si l'un d'entre nous s'avise de l'imiter matériellement, il ne deviendra pas saint, il deviendra fou.</p>"
+			"html": "<p>Il y a donc, selon la fin que l'on poursuit, <strong>deux prudences</strong> ;</p><ul><li>la <strong>prudence naturelle</strong>, qui a pour fin un certain bien-vivre terrestre, une certaine honnêteté civile</li><li>la <strong>prudence surnaturelle</strong>, qui nous ordonne à notre béatitude éternelle</li></ul><p>Ce sont deux vertus différentes, et l'on peut avoir l'une sans avoir l'autre.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les Suisses sont connus pour ne jamais traverser en dehors des clous ; ils respectent tous les stops. Enfin, pas tous les Suisses, mais en Italie tout le monde rit des stops, <em>un stop il passe à 60, les italiens, et la police dit rien</em>. Les Suisses sont généralement un peu plus prudents que les Italiens. C'est une prudence de la chair. Je me souviens, j'étais jeune séminariste comme vous l'êtes là, j'étais à <strong>Lausanne</strong>, et je traverse en dehors des clous, comme tout le monde fait en France. J'ai été sifflé par le gendarme suisse, comme tout le monde, j'ai été humilié par le flic, et tout le monde autour de moi était <em>scandalisé</em> parce qu'en soutane, le jeune séminariste, je traversais en dehors des clous. C'est la prudence humaine, c'est la prudence de la chair.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul appelle <em>prudence de la chair</em> (Rm 8, 6) cette prudence humaine qui exclut la prudence du Royaume des Cieux. On peut être très prudent dans ce monde et complètement fou dans l'autre ; quelqu'un d'honnête, qui paie ses dettes, ses impôts, qui traverse dans les clous, respecte les feux rouges, et qui ne pense jamais à son éternité, ne s'adresse jamais à Dieu, ne pense jamais à l'au-delà ; il est très prudent dans ce monde, mais totalement imprudent dans l'autre.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Inversement ; on ne peut pas avoir la prudence surnaturelle sans un peu de prudence naturelle, parce que <em>la grâce greffe sur la nature</em>, il n'y a pas de division entre les deux. Et pourtant ; il était <em>humainement imprudent</em> pour sainte Jeanne d'Arc, jeune fille de dix-neuf ans, de vouloir restaurer le royaume des Francs et bouter les Anglais dehors ; elle y a perdu la vie et a fini sur un bûcher ; ce n'est pas la prudence naturelle, c'est la prudence surnaturelle. Et l'on pourrait citer toute la vie des saints, ils ont une prudence surnaturelle qui parfois nous étonne nous-mêmes.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint François de Sales le dit très justement, parlant de certains saints ; ils sont <em>plus admirables qu'imitables</em>. Saint Siméon le Stylite a passé toute sa vie au sommet d'une colonne ; je suis désolé de vous dire que si l'un d'entre vous s'avise de cette idée, il ne deviendra pas saint, il deviendra fou. Donc saint Siméon est admirable, il n'est pas imitable, et ce ne serait pas de la prudence pour vous de dire ; je vais faire pénitence comme saint Siméon. Il y en a beaucoup d'autres. Tel saint a vécu nu toute sa vie sur des airs ; si l'un d'entre vous fait ça chez lui, les fous lui mettent un terme, et ainsi de suite. Toute la vie des saints est remplie de choses extravagantes ; c'est le Saint-Esprit, c'est du hors-norme, c'est du hors-norme. <strong>Chacun a sa prudence à exercer.</strong></p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Servato ordine finis",
+			"html": "<p>Souvenez-vous de la définition de la liberté ; <em>la liberté choisit les moyens en vue de la fin</em>. <em>Servato ordine finis</em> ; sans toucher à l'ordre de la fin. Sinon il n'y a pas de morale, on est complètement <em>démoral</em>. C'est ça la <em>gangrène</em> de ce monde moderne ; il passe son temps à choisir la fin. Mais la fin d'un homme n'est pas à choisir ; nous avons à ajuster nos actions en vue de la fin que Dieu nous propose. Il n'y a pas de liberté par rapport à la fin ; il n'y a de liberté que par rapport aux moyens, et concrètement par rapport à nos actions.</p>"
 		},
 		{
 			"kind": "heading",
@@ -90,7 +131,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Dans toute action prudente, nous avons trois choses à faire ·</p>"
+			"html": "<p>Dans toute action prudente, nous avons trois choses à faire. Et je le redirai ; <strong>on n'est pas prudent pour un autre, on est prudent pour soi</strong>. Beaucoup de gens sont des démissionnaires de la prudence, ils ne veulent jamais en prendre la responsabilité, ils préfèrent qu'on leur impose leur choix. La prudence de l'abbé Laguérie, c'est celle de l'abbé Laguérie ; et votre prudence, c'est la vôtre. Comme le dit le livre de la Sagesse, <em>Dieu a remis l'homme aux mains de son propre conseil</em>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -101,11 +142,15 @@
 		{
 			"kind": "definition",
 			"term": "Le conseil (consilium)",
-			"html": "<p><strong>Envisager toutes les solutions possibles</strong> avant de choisir. La fin est déjà fixée (ce n'est pas l'homme qui la choisit · servir Dieu et le rejoindre dans la vie éternelle) · la prudence porte sur les <em>moyens</em>. Avant de me précipiter à agir, je dois faire le panel des possibilités. Si je dois choisir un métier, une épouse, l'usage d'une grosse somme d'argent, je dois d'abord envisager tous les cas. Sinon je suis imprudent · car peut-être le bon moyen est précisément celui auquel je n'ai pas pensé. Ce premier acte doit être <strong>lent et réfléchi</strong>.</p>"
+			"html": "<p><strong>Envisager toutes les solutions possibles</strong> avant de choisir. La fin est déjà fixée (ce n'est pas l'homme qui la choisit ; servir Dieu et le rejoindre dans la vie éternelle) ; la prudence porte sur les <em>moyens</em>. Avant de me précipiter à agir, je dois faire une espèce de nomenclature, un répertoire, un panel des possibilités qui s'offrent à moi, toujours pour rejoindre la fin. Choisir, ça veut dire quoi ? Il faut que je connaisse tous les choix possibles avant de choisir.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Évidemment, on n'applique pas cela à chaque acte de la journée · sinon on devient cinglé. Pas de conseil long pour savoir si l'on prend tel ou tel classeur. Mais pour les décisions importantes (métier, mariage, déménagement, usage d'un capital), il faut prendre son temps.</p>"
+			"html": "<p>Je dois choisir un métier ? Un enfant dirait ; je veux être pilote de ligne, je veux être policier ; il y a beaucoup d'autres solutions, peut-être meilleures. Je dois choisir une épouse ? Il n'y a pas que la petite voisine, un panel plus important s'impose. J'ai une grosse somme d'argent qui me tombe d'un héritage ? Je sais ce que je vais faire, une Maserati ; il y a des milliers d'autres solutions, et probablement meilleures que d'acheter la dernière Maserati. Arrêtez-vous et regardez tous les moyens qui s'offrent à vous ; si vous ne faites pas ça, vous êtes imprudent, vous êtes un nul.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ce premier acte doit donc être <strong>lent et réfléchi</strong>. Évidemment, on n'applique pas cela à chaque acte de la journée, sinon on devient cinglé ; on ne fait pas le conseil pour savoir lequel de ses classeurs on prend. Mais pour les décisions importantes (le choix d'un métier, d'une épouse, déménager à Pampelune ou à Valparaiso), vous avez le temps de réfléchir aux bonnes solutions. C'est aussi pour ce premier acte qu'il existe une <em>Compagnie</em> entière fondée sur ce point ; les <em>Exercices spirituels</em> de saint Ignace sont le grand <em>locus classicus</em> pour qui veut bien choisir les meilleurs moyens en vue de la fin ; et saint Thomas dit la même chose. Ce n'est pas spécialement jésuite, c'est simplement thomiste.</p>"
 		},
 		{
 			"kind": "heading",
@@ -116,11 +161,15 @@
 		{
 			"kind": "definition",
 			"term": "Le jugement (iudicium)",
-			"html": "<p><strong>Choisir le meilleur moyen</strong> parmi tous ceux qu'on a envisagés · c'est le formel de la prudence. Le meilleur moyen est celui qui conduit <em>le plus sûrement à la fin</em>. Si je ne suis pas capable d'aller au cinéma sans offenser Dieu, le mieux est de ne pas y aller. Si je suis méchant et médisant dès que j'ai bu du vin, le mieux est de ne plus boire. Mais si je suis toujours triste et désagréable, le mieux sera peut-être d'en boire un peu plus. Ce deuxième acte doit être également <strong>lent et réfléchi</strong>.</p>"
+			"html": "<p><strong>Choisir le meilleur moyen</strong> parmi tous ceux qu'on a envisagés ; c'est le formel de la prudence. Le meilleur moyen, par définition, est celui qui mène <em>le plus sûrement à la fin</em> ; c'est tout simple, un moyen est ce qui obtient la fin, donc le meilleur moyen est celui qui obtient le plus sûrement la fin.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Un homme qui se demande s'il doit se marier ou rentrer au séminaire · sa fin est la même (servir Dieu) · mais le meilleur <em>moyen</em>, pour lui, peut être l'un ou l'autre. Pour celui qui serait incapable de garder la chasteté, le mariage est le meilleur moyen · pour d'autres, ce sera l'état religieux. Le surveillant de boîte de nuit qui n'a aucune tentation peut rester · celui qui en a doit changer de métier. La prudence est <strong>personnelle</strong> · à chacun son chemin.</p>"
+			"html": "<p>Exemple ; j'ai un rendez-vous ce soir à 17 heures à Marseille. Si je vais en voiture, c'est trop tard, je roule à 260, j'arriverai pas. À pied, à cheval, non ; en avion, peut-être ; en TGV, le temps de l'attraper à Paris, bon. Pour un rendez-vous dans trois jours, le TGV est le meilleur moyen, ça coûte moins cher. Le meilleur moyen est celui qui mène le plus sûrement à la fin. Ce second acte doit lui aussi être <strong>lent et réfléchi</strong> ; il faut prendre le temps de choisir.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Un homme qui se demande s'il doit se marier ou rentrer au monastère ; sa fin est la même (servir Dieu, l'aimer par-dessus tout, le rejoindre dans la vie éternelle), mais le meilleur <em>moyen</em>, pour lui, peut être l'un ou l'autre. Pour celui qui serait incapable de garder la chasteté, le mariage est le meilleur moyen ; pour d'autres, ce sera l'état religieux. Le surveillant de boîte de nuit qui n'a aucune tentation peut rester ; celui qui en a doit changer de métier. La prudence est <strong>personnelle</strong> ; à chacun son chemin, le meilleur moyen pour vous ne sera pas le même que pour le voisin.</p>"
 		},
 		{
 			"kind": "heading",
@@ -131,7 +180,11 @@
 		{
 			"kind": "definition",
 			"term": "La décision (imperium)",
-			"html": "<p><strong>Décider et passer à l'action.</strong> Une fois choisi le meilleur moyen, le plus imprudent serait de ne pas le mettre en œuvre · cela suppose une décision effective, qui passe à l'acte. À la différence des deux premiers, ce troisième acte doit être <strong>rapide</strong>. J'ai décidé de dépasser un automobiliste · il ne faut pas traîner. J'ai décidé de donner ma vie à Dieu · il faut le faire <em>tout de suite</em>. Sinon c'est gravement imprudent.</p>"
+			"html": "<p><strong>Décider et passer à l'action.</strong> Une fois choisi le meilleur moyen, le plus imprudent serait de ne rien faire. Saint Thomas ne distingue absolument pas le fait de décider de passer à l'action et l'action elle-même ; c'est le thomisme ; si je veux vraiment faire quelque chose, je le fais. Quand savez-vous que je veux me lever ? Quand je me lève. C'est l'<em>imperium</em>, la volonté qui dit ; maintenant que tout est clair, vas-y. Et la volonté dit vas-y, et j'y vais.</p><p>À la différence des deux premiers, ce troisième acte doit être <strong>rapide</strong>. Je sais tous les moyens, je sais quel est le bon, alors j'y vais. Il n'y a aucune raison d'attendre.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Exemple concret, sans moralité, juste pour fixer ; vous êtes sur la nationale, vous voulez doubler un camion qui vous gêne depuis un quart d'heure. Avant de doubler, vous regardez si vous pouvez vous rabattre, s'il y a une ligne jaune, si vous n'êtes pas en haut d'une côte ; le conseil est rapide mais réel. Vous décidez ; je peux doubler maintenant, ou bien j'attends la grande ligne droite là-bas, voilà mon meilleur moyen. Et après, vous appuyez à fond sur le champignon ; il ne faut pas que ça traîne. Or les gens font le contraire ; ils commencent à se déboîter, ils se demandent en plein milieu s'ils auront le temps, ils se rabattent, ils se redéboîtent ; exactement le contraire de la prudence.</p>"
 		},
 		{
 			"kind": "heading",
@@ -141,11 +194,19 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>L'imprudent (la plupart de nos contemporains) fait exactement l'inverse</strong> · rapide dans le conseil et le jugement, lent dans l'exécution. C'est catastrophique. On ne réfléchit pas, on décide vite, et ensuite on traîne pour exécuter.</p>"
+			"html": "<p><strong>L'imprudent (la plupart de nos contemporains) fait exactement l'inverse</strong> ; rapidité excessive dans le conseil et le jugement, inertie totale dans l'exécution.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Voilà aussi pourquoi il n'y a plus de chefs. La prudence est la vertu du chef par excellence · il doit réfléchir longtemps mais agir vite. Or depuis vingt-cinq ans on réforme le baccalauréat presque chaque année · on n'a pas réfléchi à la racine du problème et on remue les meubles en permanence. C'est l'inverse de la prudence.</p>"
+			"html": "<p>Regardez ; dès que vous posez une question à quelqu'un, généralement, il ne vous laisse pas finir votre phrase ; il a déjà la solution. C'est terrible, cette maladie ; les gens <em>éructent</em> leurs mots au lieu de réfléchir. Vous lui posez une question, à peine commencée, ils ont déjà la réponse ; et c'est sur des choses parfois très graves, très importantes. Et puis, au moment où les choses sont claires, où l'on a trouvé le bon moyen, il ne se passe plus rien. C'est comme tous ceux qui se font élire ; pendant la campagne, ils ont un avis sur tout ; quand ils sont au pouvoir, ils ne font rien, parfois le contraire ; aucune de leurs promesses tenues. C'est <em>diamétralement</em> l'inverse de la prudence ; rapidité excessive dans le conseil et le jugement, inertie totale dans l'exécution.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La prudence est essentiellement, dit saint Thomas après Aristote, une <strong>vertu du chef</strong>, parce que c'est le chef qui a la vision globale par rapport au bien commun ; à lui de connaître les différentes possibilités, de choisir, de mettre en œuvre ; le bien commun étant infiniment plus important que le bien privé. Or voilà pourquoi il n'y a plus de chefs aujourd'hui. Prenez le baccalauréat ; il n'y a pratiquement pas un ministre depuis trente ou quarante ans qui, tous les deux ou trois ans, ne fasse une réforme, voire chaque année. La nature humaine ne change pas comme ça d'année en année ; ce qui est bon une année le sera l'année suivante ; ce qui est catastrophique ne sera pas meilleur l'an d'après. Un chef qui change de décision presque chaque année sur une chose aussi importante, c'est qu'il est nul ; il n'est pas capable de savoir ce qu'il faut faire. C'est l'imprudence dans toute sa splendeur.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et Bonaparte ? <strong>Napoléon</strong> avait une envergure de chef considérable, capable de dicter une dizaine de lettres à la fois, il n'y en a pas eu beaucoup d'aussi doués. Il a livré <em>105 batailles</em>, en ayant perdu Moscou, perdu Waterloo, et ainsi de suite. Mais voilà ; à quoi bon ? <strong>À quoi bon, en vue de quoi ?</strong> Tout doué qu'il était, où menait tout cela ? C'est la prudence naturelle sans la prudence surnaturelle ; immense talent humain, sans rapport à la fin véritable, donc finalement vain.</p>"
 		},
 		{
 			"kind": "heading",
@@ -162,11 +223,11 @@
 		{
 			"kind": "definition",
 			"term": "Le principe",
-			"html": "<p>Pour qu'une action soit morale, <strong>il n'est jamais permis d'agir dans le doute</strong>. Celui qui agit ainsi endosse la responsabilité maximale et se trouve parfaitement immoral · même si, par hasard, l'action s'avère bonne. Exemple-type · un chasseur entend du bruit dans un fourré · il ne sait si c'est un lièvre ou un enfant qui ramasse sa balle · il tire quand même · <em>c'est un assassin · même s'il tue un lièvre</em>.</p>"
+			"html": "<p>Pour qu'une action soit morale, <strong>il n'est jamais permis d'agir dans le doute</strong>. Celui qui agit ainsi se trouve immoral à tous les coups ; même si, par hasard, l'action s'avère bonne au bout du compte. Exemple-type, classique de tous les manuels ; un chasseur est dans la forêt avec son fusil ; à côté il y a quelques maisons ; il entend du bruit dans un fourré. Il se dit ; ce doit être un lapin, mais ce pourrait aussi être un enfant qui a traversé la rue pour ramasser son ballon. Il tire quand même. Ce monsieur est un <strong>assassin</strong>. Il a tué un lapin, finalement ; tant mieux. Mais ce type est un assassin tout de même ; il ne savait pas si c'était un lapin ou un enfant, et il a tiré.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Il est donc nécessaire, avant toute action, de <em>sortir du doute</em>. C'est un des rôles majeurs de la prudence.</p>"
+			"html": "<p>Il est donc nécessaire, avant toute action, de <em>sortir du doute</em>. C'est un des rôles majeurs de la prudence. Exemple en matière de réputation ; on dit de monsieur Untel qu'il pique dans la caisse, on dit de madame Une-Telle ceci, cela. Je ne sais pas si c'est vrai ; alors je me tais. Si je commence à dire ; <em>oh, ça ne m'étonnerait pas, parce que celui-ci est comme ça, celle-là est comme ça</em>, taisez-vous, vous n'en savez rien et vous commettez une grave calomnie. Vous agissez dans le doute, c'est immoral.</p>"
 		},
 		{
 			"kind": "heading",
@@ -176,12 +237,20 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Cependant, il n'est pas nécessaire de parvenir à une <strong>certitude métaphysique</strong> (le tout est plus grand que la partie) ou <strong>physique</strong> (la main a cinq doigts) · ces exigences sont celles des <em>scrupuleux</em>, et leur font multiplier les fautes (parce que, ne pouvant jamais agir, ils tombent dans d'autres péchés ou se rendent malades). <strong>La certitude morale suffit</strong>, ou même une vraie et simple <em>probabilité</em>.</p>"
+			"html": "<p>Cependant, sortir du doute, ce n'est pas atteindre <strong>la certitude métaphysique</strong> (le tout est plus grand que la partie, la roue de mon vélo est plus petite que mon vélo) ; on n'y arrivera jamais dans l'ordre moral, inutile de la chercher. Ce n'est pas non plus la <strong>certitude physique</strong> (la main d'un homme normal a cinq doigts) ; ces exigences sont celles des <em>scrupuleux</em>, et leur font multiplier les fautes (parce que, ne pouvant jamais agir, ils tombent dans d'autres péchés ou se rendent malades).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ce qu'il faut, c'est la <strong>certitude morale</strong>, et elle suffit. Et quand on n'arrive pas à l'avoir, dit saint Thomas, il suffit même d'une véritable <em>probabilité</em>.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La probabilité en morale",
-			"html": "<p>On appelle probabilité, en morale, un <strong>assentiment qui, sans parvenir à la certitude, permet d'agir en toute sécurité, parce qu'il suffit à une vraie conviction</strong>. C'est quelque chose de positif, qui fait adhérer le jugement. Je peux donc l'utiliser, si je n'ai aucun autre moyen de sortir du doute.</p>"
+			"html": "<p>Attention, je ne suis pas <em>probabiliste</em>. La probabilité, en morale, <strong>ce n'est pas une opinion qui a quelques docteurs en sa faveur ; ce n'est pas une affaire de statistiques</strong>. C'est un jugement que les événements m'imposent, sans pour autant parvenir à la certitude morale. C'est positif, cela fait adhérer mon jugement ; je sors du doute, même si je n'arrive pas à la certitude.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et ce n'est <em>surtout</em> pas la probabilité par <strong>vote majoritaire</strong>. C'est l'erreur de la démocratie moderne ; <em>bientôt tout le monde pense qu'il faut marier les homosexuels, donc on peut</em>. Pas du tout ; cela restera totalement et éternellement immoral de marier ou de bénir les homosexuels, c'est clair, et ce n'est pas une question de statistiques ni de grand nombre, c'est totalement faux. La probabilité, c'est un jugement aux termes duquel je me fais moi-même une opinion qui, sans parvenir à la certitude, est positive et solide.</p>"
 		},
 		{
 			"kind": "heading",
@@ -191,23 +260,23 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>1.</strong> Je prends mon parapluie parce qu'il est <em>probable</em> qu'il va pleuvoir, quoiqu'il soit possible qu'il ne pleuve pas.</p>"
+			"html": "<p><strong>1.</strong> Je ne prends pas mon parapluie parce qu'il est <em>probable</em> qu'il ne va pas pleuvoir, en regardant le ciel ; quoiqu'il soit possible qu'il pleuve. S'il tombe finalement un déluge, je n'ai pas été imprudent ; j'ai agi selon une vraie probabilité.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>2.</strong> Je ne prends pas mon parapluie parce qu'il est probable qu'il ne va pas pleuvoir, quoiqu'il soit possible qu'il pleuve. S'il pleut, je n'ai pas été imprudent du tout.</p>"
+			"html": "<p><strong>2.</strong> S'il est probable que je n'ai pas remboursé cette dette de 5000 euros à monsieur Machin, je cherche à arriver à la certitude ; je retrouve les factures, les preuves, tant mieux. Si je n'y parviens pas, et qu'honnêtement, après recherche, je juge à la probabilité que je dois encore, alors je dois rembourser, et tant pis si en fait c'était déjà fait. Inversement ; s'il est probable que je les ai remboursés, je peux ne pas les rembourser ; même si finalement il s'avère que je restais lui devoir.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>3.</strong> S'il est probable que je n'ai pas remboursé cette dette, je dois la rembourser. S'il est probable que je l'ai remboursée, je ne pèche pas en ne la remboursant pas.</p>"
+			"html": "<p><strong>3.</strong> S'il est seulement <em>possible</em> que ce film soit bon, cela ne suffit pas pour aller le voir ; je pécherai. Aujourd'hui, vu le nombre de navets et de films corrompus, si vous ne connaissez pas un film qui sort, n'importe lequel, il est probable qu'il soit mauvais, comme la plupart ; donc vous n'y allez pas. Dans les années 40-50, on pouvait avec le nom des acteurs se faire une probabilité positive ; aujourd'hui non. <em>La probabilité, ce n'est pas une question de statistiques, c'est une question de prudence.</em></p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>4.</strong> S'il est seulement <em>possible</em> que ce film soit bon, cela ne suffit pas pour le regarder · je pécherai. Mais s'il est probable qu'il l'est, je puis le regarder sans pécher.</p>"
+			"html": "<p><strong>4.</strong> Inversement ; vous avez déjà vu trois films de <strong>Mel Gibson</strong>, ils vous ont plu, vous allez en voir un quatrième parce que c'est Mel Gibson. Et là, on ne sait pas pourquoi, Mel Gibson a pété un plomb et vous a fait un film totalement dégoûtant. <em>Est-ce que vous avez péché ? Non, ce n'est pas pécher.</em> Vous aviez une probabilité positive et solide, fondée sur l'expérience de trois films précédents ; vous n'aviez aucun motif d'attendre l'inverse ; vous y êtes allé en bonne conscience. Voilà la probabilité.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La distinction entre <em>possible</em> et <em>probable</em> est capitale. Le simple possible ne fait pas adhérer le jugement · il laisse dans le doute · agir là-dedans, c'est l'imprudence et l'immoralité. La probabilité, elle, donne une vraie conviction · elle suffit moralement.</p>"
+			"html": "<p>La distinction entre <em>possible</em> et <em>probable</em> est capitale. Le simple possible ne fait pas adhérer le jugement, il laisse dans le doute ; agir là-dedans, c'est l'imprudence et l'immoralité. La probabilité, elle, donne une vraie conviction, elle suffit moralement.</p>"
 		},
 		{
 			"kind": "heading",
@@ -216,9 +285,31 @@
 			"anchor": "conclusion"
 		},
 		{
+			"kind": "paragraph",
+			"html": "<p>La prudence est nécessaire ; nécessaire au salut de mon âme. Le mot lui-même rappelle la <em>providence</em> ; on voit à l'avance, on prévoit. Or les hommes ne sont prudents que s'ils pensent à leur destinée éternelle, à leur mort, à l'au-delà ; et l'on fait tout aujourd'hui pour leur cacher cela. La plupart des hommes vivent sans même se poser la question. Nous vivons dans un monde d'une imprudence folle ; <em>imprudence totale</em>. Tous les jours il faut penser à notre fin, et régler nos actions en fonction d'elle ; sinon nous sommes imprudents.</p>"
+		},
+		{
 			"kind": "definition",
-			"term": "Deux erreurs à éviter",
-			"html": "<p><strong>1.</strong> Agir imprudemment, sans réfléchir · la précipitation moderne.</p><p><strong>2.</strong> Vouloir se faire diriger par un autre · démissionner de sa propre prudence. Beaucoup de gens veulent que les autres décident à leur place · c'est plus confortable · c'est aussi gravement imprudent. <em>La prudence de Pierre n'est pas celle de Paul</em> · seul Pierre peut résoudre les questions morales qui sont les siennes. Les principes de la morale sont les mêmes pour tous · les applications concrètes, non.</p>"
+			"term": "Deux grandes erreurs à éviter",
+			"html": "<p><strong>1.</strong> Agir imprudemment, sans réfléchir ; la précipitation moderne, la plupart de nos contemporains ne sont plus capables de réflexion.</p><p><strong>2.</strong> Vouloir se faire diriger par un autre, démissionner de sa propre prudence. C'est plus commode, c'est plus confortable, mais c'est une démission ; et c'est gravement imprudent. Beaucoup vivent ainsi ; <em>moi je ne pense pas, c'est ma femme qui pense pour moi ; moi je ne pense pas, c'est mon patron qui pense pour moi ; moi je ne pense pas, c'est le curé qui pense pour moi</em>. Et l'on trouve cela très gentil, très humble ; je trouve cela follement imprudent. Intelligent ou pas, vous avez une prudence à exercer pour vous, des responsabilités à prendre, des choix qui n'appartiennent qu'à vous ; on peut écouter des conseils, à la limite les autres peuvent intervenir un peu dans le premier acte ; mais prendre <em>argent comptant</em> la prudence d'un autre pour la mienne, c'est follement imprudent.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Beaucoup de prêtres se trompent là-dessus ; quand les gens viennent me trouver pour leur donner des conseils, le prêtre doit donner les principes de la morale, qui sont les mêmes pour tous, et il ne doit pas substituer sa prudence à celle de monsieur ou madame qui lui demande conseil ; <em>parce que la prudence du prêtre, c'est la sienne ; moi je suis prudent pour l'abbé Laguérie, point barre ; je ne suis pas prudent pour les autres</em>.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>Qui m'a constitué juge entre vous ?</p>",
+			"attribution": "Lc 12, 14"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Deux jeunes gens viennent trouver le Seigneur Jésus-Christ ; ils se disputent à propos d'un héritage, l'un avait pris la part du lion et laissé les quenouilles à l'autre. <em>Qui m'a constitué juge entre vous ?</em> répond le Christ, lui qui pourtant viendra juger les vivants et les morts au dernier jour. Si le Christ refuse de substituer sa prudence à celle des deux frères, à plus forte raison un prêtre ne doit-il pas le faire. Il rappelle les principes ; <em>tu dois épouser celle-là, tu as la vocation, tu n'as pas la vocation</em>, qu'en sait-il ? Le directeur spirituel rappelle la doctrine, fait part de son expérience ; quand vous devez décider, c'est vous, pas lui, sinon ça ne marche pas, sinon ce n'est pas moral.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La prudence comme suspension",
+			"html": "<p>Je la compare volontiers à une <strong>suspension de voiture, un amortisseur</strong>. Vous avez les <em>principes</em> de la morale, qui sont les mêmes pour tous, qui ne bougent pas ; et puis vous avez la <em>route</em>, c'est-à-dire les événements concrets, les circonstances de la vie, qui nous dictent nos choix, et qui sont extrêmement chaotiques. Si l'on applique brutalement la chape des principes immuables à la route cahoteuse, on casse tout. C'est la prudence qui fait l'amortisseur ; <em>les principes étant toujours saufs, on s'adapte aux circonstances</em>, et on est bien obligé de s'y adapter ; mais on n'adapte jamais les principes aux circonstances. C'est ce qu'on essaie de faire avec le mariage et la bénédiction des homosexuels ; toujours non au principe, la sexualité contre nature est gravissime ; si l'Église bénit cela, elle devient folle. La prudence permet d'appliquer ces principes invariables à une réalité extrêmement mouvante, sans jamais les trahir.</p>"
 		},
 		{
 			"kind": "quote",
@@ -227,11 +318,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On se dirige par le conseil que Dieu a mis en nous · l'intelligence et la prudence qu'il nous a données. C'est notre tâche, pas celle d'un autre. La prudence est donc cette <strong>grande suspension de notre jugement</strong>, pour appliquer au domaine de l'action concrète les grands principes invariables de la morale. <em>Faire l'économie de la prudence, c'est toujours l'immoralité.</em></p>"
+			"html": "<p>On se dirige par le conseil que Dieu a mis en nous ; l'intelligence et la prudence qu'il nous a données. C'est notre tâche, pas celle d'un autre. Demandons donc à Dieu la grâce de prendre nos responsabilités et de les assumer. <em>Faire l'économie de la prudence, c'est toujours l'immoralité.</em></p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La semaine prochaine, nous abordons la <strong>justice</strong> · le gros morceau de la morale, qui nous occupera cinq leçons.</p>"
+			"html": "<p>La semaine prochaine, nous abordons la <strong>justice</strong> ; le gros morceau de la morale, qui nous occupera cinq leçons.</p>"
 		}
 	]
 }

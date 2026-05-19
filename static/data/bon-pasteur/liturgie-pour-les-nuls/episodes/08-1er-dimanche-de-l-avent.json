@@ -1,0 +1,188 @@
+{
+	"slug": "08-1er-dimanche-de-l-avent",
+	"n": 8,
+	"title": "1er dimanche de l'Avent",
+	"blocks": [
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le premier jour de l'année liturgique",
+			"anchor": "premier-jour"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le premier dimanche de l'Avent est le premier jour de l'année liturgique. Aristote disait que <em>le commencement est plus de la moitié de la chose</em> : bien démarrer porte presque jusqu'au terme ; mal commencer compromet toute la suite. Aussi ce dimanche est-il de première classe : aucune autre fête patronale ne peut le supplanter. On y sent une fraîcheur, une mise en route, un entrain printanier qui colorent tout le propre. C'est l'ouverture du grand cycle de Noël, premier des deux sommets de l'année, les <em>Pyrénées</em> qui montent vers la Nativité et l'Épiphanie, avant les <em>Alpes</em> de Pâques et de la Pentecôte.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'Évangile : signes dans le ciel (Lc 21, 25-33)",
+			"anchor": "l-evangile"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'évangile reprend, dans la version de saint Luc, le discours prophétique du Mont des Oliviers, le même que celui commenté la semaine dernière pour le vingt-quatrième et dernier dimanche après la Pentecôte. La liturgie nous remet cette page sous les yeux, mais cette fois pour orienter notre attente vers la Parousie.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« En ce temps-là, Jésus dit à ses disciples : <em>Il y aura des signes dans le soleil, dans la lune et dans les étoiles, et, sur la terre, les peuples seront dans l'angoisse à cause du fracas de la mer et des flots ; les hommes sécheront de frayeur dans l'attente de ce qui doit arriver à l'univers, car les puissances des cieux seront ébranlées. Alors on verra le Fils de l'homme venant sur les nuées du ciel avec une grande puissance et une grande majesté. Quand ces choses commenceront à arriver, redressez-vous et levez la tête, parce que votre délivrance approche.</em> Et il leur dit cette comparaison : <em>Voyez le figuier et tous les arbres : quand ils poussent leurs feuilles, vous savez par vous-mêmes que l'été est proche. Ainsi, vous aussi, quand vous verrez ces choses arriver, sachez que le royaume de Dieu est proche. En vérité je vous le dis, cette génération ne passera point que tout cela ne soit arrivé. Le ciel et la terre passeront, mais mes paroles ne passeront point.</em> » (Lc 21, 25-33)</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Pourquoi ce texte ouvre-t-il l'Avent ?",
+			"anchor": "pourquoi-ce-texte"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'Avent est un temps d'<em>attente</em>. Et la condition foncière du chrétien est d'attendre. Nous avons beau célébrer Noël depuis vingt siècles, l'Église sait que nous restons des hommes en marche : <em>nous n'avons pas ici-bas de demeure permanente, mais nous sommes en marche vers la cité future</em> (He 13, 14). En liant le premier avènement (de la miséricorde, dans la crèche) au second avènement (de la justice, dans la gloire), la liturgie superpose les deux et nous met dans la disposition juste : profiter du premier pour n'avoir pas à subir le second.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le Nouveau Testament multiplie les exhortations à veiller :</p><ul><li><em>Heureux les serviteurs qu'à son arrivée le maître trouvera vigilants : il les fera passer à table, il se ceindra lui-même et il les servira</em> (Lc 12, 37).</li><li><em>Si le maître de la maison savait à quelle heure le voleur doit venir, il veillerait ; le Fils de l'homme viendra à l'heure que vous ne pensez pas</em> (Mt 24, 43-44). Jésus se compare à un voleur, lui qui s'est aussi comparé à un Samaritain et qui a mangé avec les pécheurs.</li><li>La parabole du serviteur qui croit son maître en retard, se met à boire et à frapper ses compagnons, et que le maître surprend (Lc 12, 45-46).</li><li>La parabole du riche insensé qui construit des greniers plus grands : <em>cette nuit on te redemandera ton âme</em> (Lc 12, 20).</li><li>Les dix vierges du cortège nuptial, cinq prudentes, cinq folles. Il est permis de dormir, pourvu qu'on soit prêt au moment où l'époux paraît.</li></ul>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Théodulphe d'Orléans, pieux évêque carolingien et grand mélomane à qui l'on doit nombre de mélodies grégoriennes (dont l'hymne <em>Gloria laus</em> des Rameaux), le disait : <em>la pire illusion pour un chrétien est d'oublier le salut éternel.</em> Saint Paul ne dit pas autre chose : <em>si nous n'avons d'espérance dans le Christ que pour cette vie, nous sommes les plus à plaindre de tous les hommes</em> (1 Co 15, 19), le mot grec serait plutôt <em>les plus stupides</em>. Si l'on n'attend personne, autant profiter de la vie ; si l'on attend quelqu'un, il faut être prêt.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "L'Épître : la nuit s'avance, le jour approche (Rm 13, 11-14)",
+			"anchor": "l-epitre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'épître aux Romains est le grand traité de saint Paul : seize chapitres, dont les neuf premiers constituent <em>le traité de la foi catholique</em>. Saint Paul n'avait pas encore visité Rome lorsqu'il écrivit cette lettre ; la foi des Romains, évangélisés par saint Pierre et d'autres, était déjà connue dans tout l'empire. Paul a particulièrement soigné cette rédaction. La partie morale, dont est tiré le texte du jour, se trouve aux chapitres 12 et 13.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« Mes frères, sachez que c'est l'heure de sortir du sommeil ; à présent le salut est plus près de nous que lorsque nous avons embrassé la foi. La nuit s'est avancée, le jour approche. Dépouillons-nous donc des œuvres de ténèbres et revêtons les armes de la lumière. Conduisons-nous honnêtement comme en plein jour, ne nous laissant point aller aux excès de table et de boisson, ni à la luxure et à l'impudicité, ni aux querelles et aux jalousies. Mais revêtez-vous du Seigneur Jésus-Christ. » (Rm 13, 11-14)</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ce texte n'est pas anodin : c'est précisément lui qui, ouvert au hasard dans le jardin de Milan en 386 sur l'injonction d'une voix d'enfant <em>tolle lege</em>, a décidé la conversion de saint Augustin après vingt ans de combat avec la chair (<em>Confessions</em>, VIII, 12). La liturgie de l'Avent met sur nos lèvres le verset qui a tiré l'un des plus grands docteurs de l'Église du sommeil des œuvres de ténèbres.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le chrétien, homme du jour",
+			"anchor": "homme-du-jour"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul oppose les deux régimes. <em>Ce monde est ténèbres ; vous êtes lumière dans le Seigneur</em> (Éph 5, 8). Tout l'évangile de saint Jean joue de ce contraste : les hommes <em>ne viennent pas à la lumière de peur que leurs œuvres ne soient blâmées</em> (Jn 3, 20). Dieu est lumière (1 Jn 1, 5) ; le Christ est <em>lumen de lumine</em>, lumière née de la lumière. Le chrétien participe de ce régime : il se conduit toujours <em>comme en plein jour</em>, même la nuit. Les crimes se commettent dans l'ombre ; un chrétien marche à découvert.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Les trois excès des œuvres de ténèbres",
+			"anchor": "trois-exces"
+		},
+		{
+			"kind": "definition",
+			"term": "Les excès de table et de boisson",
+			"html": "<p>Premier degré : la gourmandise, l'ivresse. Ce ne sont pas les péchés les plus graves, mais ils dégradent l'âme et préparent les suivants. La table déréglée prépare le corps déréglé.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "La luxure et l'impudicité",
+			"html": "<p>Deuxième degré : la luxure (les péchés extérieurs proprement dits) et l'impudicité (le laisser-aller, l'immodestie). C'est la caractéristique du monde, dans l'Antiquité comme aujourd'hui. Seule la grâce du Christ a permis de transcender cette luxure dans laquelle le péché originel a effondré le genre humain.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Les querelles et les jalousies",
+			"html": "<p>Troisième degré, le plus subtil. On peut s'être délivré des deux premiers et rester englué dans le troisième. Les querelles, les jalousies, les médisances, les divisions stérilisent une vie chrétienne. Comme disait Bourdaloue de certains pénitents âgés, <em>ils n'ont pas quitté leurs péchés ; ce sont leurs péchés qui les ont abandonnés</em>. La langue peut paralyser une âme à elle seule.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Le message commun : être prêt",
+			"anchor": "le-message-commun"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La jonction est évidente. L'évangile décrit la venue du Maître ; l'épître prescrit la tenue de ceux qui l'attendent. Un chrétien ne dort pas spirituellement, même quand son corps repose : <em>je dors et mon cœur veille</em>, chante l'épouse du Cantique des Cantiques. Le salut est <em>plus près de nous que lorsque nous avons embrassé la foi</em>, ce n'est pas une lapalissade. Un homme de vingt ans ne pense guère à sa mort ; un homme de soixante ans qui ne pense pas à son éternité est fou. <em>Conduisons-nous honnêtement comme en plein jour</em>, en sachant que ce jour s'avance.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 2,
+			"title": "Les autres textes du propre",
+			"anchor": "les-autres-textes"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "L'Introïte (Ps 24, 1-3)",
+			"anchor": "l-introite"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Ad te levavi animam meam : Deus meus, in te confido, non erubescam. Neque irrideant me inimici mei : etenim universi qui te exspectant, non confundentur.</em> Vers vous, Seigneur, j'ai levé mon âme ; mon Dieu, en vous je me confie, je n'aurai pas à rougir. Que mes ennemis ne se rient pas de moi, car aucun de ceux qui vous attendent ne sera déçu. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Mot d'ouverture de toute l'année liturgique : <em>ad te levavi animam meam</em>. Un homme qui se met en marche au petit matin, qui dresse son âme vers Dieu et commence. D'une fraîcheur sans pareille. Et déjà la note du contraste avec le monde : <em>que mes ennemis ne se rient pas de moi</em>. Le juste qui pratique la vertu passe pour un benêt, un arriéré, quelqu'un qui n'aime pas la vie. Or c'est l'inverse : seuls les chrétiens aiment vraiment la vie. Le monde, qui se précipite vers la mort dans un trou et la pourriture, prétend l'aimer ; les chrétiens, eux, attendent une vie qui ne finit pas. De quoi ce monde se mêle-t-il quand il veut marier nos prêtres, leur apprendre à dire <em>Dominus vobiscum</em>, ou les empêcher de demeurer chastes ? Le méchant ne supporte pas le juste, parce que le juste lui est un reproche vivant. Mais <em>aucun de ceux qui attendent le Seigneur ne sera confondu</em>.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Collecte",
+			"anchor": "la-collecte"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Excita, quaesumus, Domine, potentiam tuam, et veni.</em> Réveillez, Seigneur, votre puissance, et venez, afin que par votre protection nous méritions d'être arrachés aux périls qui nous menacent à cause de nos péchés, et d'être sauvés par votre action libératrice. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Magnifique audace : <em>excita</em>, réveille-toi, Seigneur. Comme on aiguillonne un lion qui sommeille pour qu'il rugisse. La liberté chrétienne (vraie liberté de l'âme arrachée aux péchés) est le thème omniprésent de tout l'Avent. Le Rédempteur vient nous délivrer.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Le Graduel et l'Alléluia",
+			"anchor": "graduel-alleluia"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Universi qui te exspectant non confundentur, Domine.</em> Tous ceux qui vous attendent, Seigneur, ne seront pas confondus. » (Ps 24)</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Paul, à la fin de sa vie, disait : <em>j'ai achevé ma course, j'ai gardé la foi ; je sais en qui j'ai cru, et le juste juge me rendra la couronne de justice, non seulement à moi, mais à tous ceux qui auront aimé son avènement</em> (2 Tm 4, 7-8). L'avènement ne se redoute pas, il s'<em>aime</em>. L'amour finit par bannir la crainte.</p>"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Ostende nobis, Domine, misericordiam tuam, et Salutare tuum da nobis.</em> Montrez-nous, Seigneur, votre miséricorde, et donnez-nous le Sauveur que vous nous destinez. »</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Communion (Ps 84, 13)",
+			"anchor": "la-communion"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« <em>Dominus dabit benignitatem, et terra nostra dabit fructum suum.</em> Le Seigneur répandra ses bienfaits, et notre terre donnera son fruit. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Première allusion mariale de l'Avent. Le salut vient du ciel (le Père envoie son Fils), mais la terre, elle aussi, doit donner son fruit. Quel est ce fruit excellent de la terre ? La Vierge Marie. Si le Christ est <em>nôtre</em>, c'est qu'il partage notre nature humaine, et ce lien passe par Marie. Les antiennes des secondes vêpres de ce dimanche reprennent déjà le récit de l'Annonciation. Toute la suite de l'Avent sera marquée par la présence discrète et continue de la Vierge.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La Postcommunion",
+			"anchor": "la-postcommunion"
+		},
+		{
+			"kind": "quote",
+			"html": "<p>« Puissions-nous recevoir, Seigneur, au milieu de votre Temple, la grâce de votre miséricorde, afin que nous préludions par de dignes hommages aux solennités prochaines de notre rédemption. »</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Voilà tout le programme de l'Avent en une phrase. <em>Préluder par de dignes hommages</em> aux solennités à venir : Noël n'est pas une fête qu'on subit, c'est une fête qu'on prépare. Le premier dimanche ouvre cette préparation par la vigilance, la lumière, et la confiance dans le Sauveur qui vient.</p>"
+		}
+	]
+}

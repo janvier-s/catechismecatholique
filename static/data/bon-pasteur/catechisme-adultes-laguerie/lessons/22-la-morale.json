@@ -12,12 +12,12 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Nous voici parvenus à la <strong>troisième partie</strong> du cours de catéchèse · après les vérités à croire (le Credo), après les moyens de sanctification et la prière (l'union à Dieu), voici la morale catholique. Cette leçon est particulière · elle ne traite pas encore de telle ou telle obligation, mais des <em>grands principes</em> dont dépend toute la morale catholique. Sans cette introduction, le détail des obligations resterait suspendu en l'air.</p>"
+			"html": "<p>Nous voici parvenus à la <strong>troisième partie</strong> du cours de catéchèse ; après les vérités à croire (le Credo), après les moyens de sanctification et la prière (l'union à Dieu), voici la morale catholique. Cette leçon est particulière ; elle ne traite pas encore de telle ou telle obligation, mais des <em>grands principes</em> dont dépend toute la morale catholique. Sans cette introduction, le détail des obligations resterait suspendu en l'air.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La morale",
-			"html": "<p><strong>Connaissance de la bonté ou de la malice des actes humains en vue de la béatitude éternelle.</strong> La morale est la qualification morale, bonne ou mauvaise, des actes que l'homme pose. Il y a des morales qui visent simplement le bien-vivre en société · nous, nous nous attachons à cette <em>morale surnaturelle</em> qui vise la béatitude éternelle · les fins étant différentes, les moyens le sont aussi.</p>"
+			"html": "<p><strong>Connaissance de la bonté ou de la malice des actes humains en vue de la béatitude éternelle.</strong> La morale est la qualification morale, bonne ou mauvaise, des actes que l'homme pose. Il y a des morales qui visent simplement le bien-vivre en société ; nous, nous nous attachons à cette <em>morale surnaturelle</em> qui vise la béatitude éternelle ; les fins étant différentes, les moyens le sont aussi.</p>"
 		},
 		{
 			"kind": "heading",
@@ -27,15 +27,19 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La morale n'existe que chez l'homme, parce qu'il est le seul à être <strong>intelligent</strong>. Il pose une action · cette action a une fin · et comme il est capable de voir à l'avance si l'action posée mène bien à la fin objective, il peut aligner son intention sur cette finalité. Sans intelligence, pas d'anticipation de la fin · donc pas de morale.</p>"
+			"html": "<p>La morale n'existe que chez l'homme, parce qu'il est le seul à être <strong>intelligent</strong> (enfin, supposé l'être en puissance). Il pose une action ; cette action a une fin, et comme il est capable de voir à l'avance si l'action posée mène bien à la fin objective, il peut aligner son intention sur cette finalité. Sans intelligence, pas d'anticipation de la fin ; donc pas de morale.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Aucun animal n'a un comportement moral ou immoral · cela ne veut rien dire. L'animal fait toujours la volonté de Dieu (sans le savoir) · il ne peut pas envisager de ne pas faire ce que sa nature lui dicte. Tandis que l'homme, dès qu'il ouvre les yeux, rencontre un problème moral.</p>"
+			"html": "<p>Aucun animal n'a un comportement moral ou immoral ; cela ne veut rien dire. La morale commence lorsque quelqu'un est capable de savoir en posant une action si elle atteint la fin objective de cette action, et d'aligner son intention sur cette finalité. L'animal fait toujours la volonté de Dieu (sans le savoir) ; il ne peut pas envisager de ne pas faire ce que sa nature lui dicte. Tandis que l'homme, dès qu'il ouvre les yeux, rencontre un problème moral ; et c'est ce grand problème que nous abordons aujourd'hui.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>La morale, c'est toujours un respect de la fin.</strong> On mange pour se nourrir · et c'est le fait de se nourrir qui justifie l'action de manger. Si quelqu'un mange sans aucune référence au fait qu'il se nourrit, son acte n'est plus moral · il a dissocié l'action de sa fin. Les Romains, à certaines époques de décadence, avaient des <em>vomitoria</em> pour pouvoir manger toute la nuit · ils avaient séparé l'acte du manger de sa finalité. La morale, en deux mots, c'est <strong>l'ordination des actes à leurs fins</strong>.</p>"
+			"html": "<p><strong>La morale, c'est toujours un respect de la fin.</strong> On mange pour se nourrir, et c'est le fait de se nourrir qui justifie l'action de manger. Si quelqu'un mange sans aucune référence au fait qu'il se nourrit, son acte n'est plus moral ; il a dissocié l'action de sa fin.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'exemple est trivial mais il est clair ; les Romains, à certaines époques de décadence, avaient dans leurs grandes villes une salle qu'on appelait le <em>vomitorium</em> (on peut toujours les repérer aujourd'hui). Que faisaient ces Romains ? Pour pouvoir manger tranquillement toute la nuit sans en éprouver d'incommodité, ils allaient régulièrement <strong>se frotter le fond de la glotte avec une plume d'oie</strong> ; je vous passe les détails. On voit bien qu'ils avaient séparé l'action de sa fin. Et nous verrons en morale que le plaisir ne peut jamais être la fin de l'homme, parce que l'homme a une intelligence, une âme, une volonté, et partant une dignité qui est au-dessus de la satisfaction sensuelle. La morale, en deux mots, c'est <strong>l'ordination des actes à leurs fins</strong>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -45,12 +49,40 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les obligations morales imposées à l'homme viennent de deux sources ·</p><ol><li><strong>le droit naturel</strong>, dont le meilleur résumé est le <em>Décalogue</em>, les dix commandements donnés par Dieu à Moïse au Sinaï ·</li><li><strong>le droit positif</strong> (qui s'ajoute à l'autre), dont le meilleur résumé est le <em>Sermon sur la Montagne</em> · les chapitres V, VI, VII de saint Matthieu, qui commencent par les Béatitudes. On l'appelle aussi <em>la loi évangélique</em>.</li></ol><p>Les lois civiles aussi peuvent obliger en conscience, mais elles n'ont pas le statut de source première.</p>"
+			"html": "<p>Les obligations morales imposées à l'homme viennent de deux sources :</p><ol><li><strong>le droit naturel</strong>, dont le meilleur résumé est le <em>Décalogue</em>, les dix commandements donnés par Dieu à Moïse au Sinaï</li><li><strong>le droit positif</strong> (qui s'ajoute à l'autre), dont le meilleur résumé est le <em>Sermon sur la Montagne</em> : les chapitres V, VI, VII de saint Matthieu, qui commencent par les Béatitudes. On l'appelle aussi <em>la loi évangélique</em>.</li></ol><p>Les lois civiles aussi peuvent obliger en conscience, mais elles n'ont pas le statut de source première.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Ce qui reste de l'Ancien Testament",
-			"html": "<p>De tout le droit de l'Ancien Testament, composé · 1° de préceptes du culte (le Lévitique), 2° de préceptes sociaux (la théocratie juive), 3° de préceptes du droit naturel · <strong>seuls les derniers demeurent en vigueur</strong>, parce qu'ils sont immuables. Les autres ont été abolis par Notre-Seigneur · le voile du Temple s'est déchiré en deux. La loi du talion (« œil pour œil, dent pour dent ») est annulée par le Sermon sur la Montagne.</p>"
+			"html": "<p>Le fondement de l'Ancien Testament, c'est la <em>Torah</em> ; ce qui veut dire la <em>loi</em> (les cinq premiers livres de la Bible : Genèse, Exode, Lévitique, Nombres, Deutéronome). De tout ce droit, composé ; 1° de préceptes du culte (le Lévitique), 2° de préceptes sociaux (la théocratie juive), 3° de préceptes du droit naturel ; <strong>seuls les derniers demeurent en vigueur</strong>, parce qu'ils sont immuables. Les préceptes du culte juif sont caducs parce que le culte juif a été supprimé par Notre-Seigneur ; le voile du Temple s'est déchiré en deux. Les préceptes sociaux n'existent plus non plus, ils ont même cessé avant la fin de l'Ancien Testament avec l'instauration de la monarchie. La loi du talion (« œil pour œil, dent pour dent ») est annulée par le Sermon sur la Montagne.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La théocratie : seul gouvernement direct de Dieu",
+			"anchor": "theocratie"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'organisation d'Israël avant les rois était une <strong>théocratie</strong>, pas tout le temps d'ailleurs ; après il y a eu l'instauration de la monarchie avec Samuel, Saül et David. Mais avant, Dieu ne voulait pas qu'il y ait un roi parce que c'était lui le roi d'Israël ; il gouvernait directement par ses prophètes charismatiques et ses juges. C'est la seule théocratie valide. La théocratie, ce n'est pas le gouvernement au nom du Bien Commun (cela, ce sont tous les autres gouvernements) ; c'est le gouvernement <em>direct</em> de Dieu, ce qui suppose, pour connaître la volonté de Dieu qui gouverne, des prophètes. <strong>Pas de prophète, pas de théocratie.</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Voilà à quoi devraient penser ceux qui vivent encore aujourd'hui sous certaines théocraties ; suivez mon regard. Les préceptes du culte ont été supprimés complètement, il n'en reste rien ; les préceptes sociaux de la théocratie juive n'existent plus, ils ont même cessé d'ailleurs avant la fin de l'Ancien Testament, avec l'instauration de la monarchie.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "La loi du talion : abolie",
+			"anchor": "talion"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La loi du talion permettait de se venger personnellement ; si quelqu'un rentrait dans ton champ et te tuait une vache, tu rentrais dans le sien et tu lui tuais sa vache, tout seul, sans besoin de tribunaux. Le <em>Talmud</em> en rajoute ; pour un œil les deux yeux, et <strong>pour une dent toute la mâchoire</strong>. Aujourd'hui, vous n'avez plus le droit de faire justice privée ; vous pouvez vous défendre d'un injuste agresseur, nous le verrons, mais s'il y a lésion en justice vous allez devant les tribunaux. Un chrétien qui se ferait justice lui-même fait mal ; nous ne sommes plus dans une théocratie.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et Jésus a pulvérisé ces préceptes : <em>« Vous avez appris qu'il a été dit : œil pour œil, dent pour dent. Et moi je vous dis : ne résistez pas au méchant ; si quelqu'un veut faire avec toi mille pas, fais-en deux mille ; s'il veut prendre ta tunique, laisse-lui encore ton manteau »</em> (Mt 5, 38-41). La loi du talion, c'est fini.</p>"
 		},
 		{
 			"kind": "heading",
@@ -65,7 +97,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>« Naître » et « nature » sont le même mot · la nature, c'est tout ce qu'un être possède en naissant, le capital que lui donne sa naissance. Pas de nature, pas de droit naturel · et c'est précisément ce que les sociétés contemporaines refusent. Le droit naturel n'est pas une invention de Dieu, ce n'est pas du volontarisme · c'est le rappel par Dieu du fonctionnement de la nature. Comme une machine à laver fonctionne d'une certaine manière par sa structure, et qu'on y joint une notice qui ne fait que <em>redire</em> ce qui est déjà dans la machine, ainsi le Décalogue redit ce que Dieu avait gravé dans la nature humaine en la créant.</p>"
+			"html": "<p>« Naître » et « nature » sont le même mot ; la nature, c'est tout ce qu'un être possède en naissant, le capital que lui donne sa naissance. Pas de nature, pas de droit naturel, et c'est précisément ce que les sociétés contemporaines refusent. Le droit naturel n'est pas une invention de Dieu, ce n'est pas du volontarisme : c'est le rappel par Dieu du fonctionnement de la nature. Comme une machine à laver fonctionne d'une certaine manière par sa structure, et qu'on y joint une notice qui ne fait que <em>redire</em> ce qui est déjà dans la machine, ainsi le Décalogue redit ce que Dieu avait gravé dans la nature humaine en la créant.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il y a des données de la nature qui ne véhiculent pas de morale ; nous marchons plutôt sur nos jambes et sur nos pieds que sur nos mains. Vous avez toujours des gens qui font des prouesses sportives, pourquoi pas, il n'y a pas d'immoralité à marcher sur les mains. Mais n'empêche que <strong>on est fait pour marcher sur ses pieds</strong>, on entend avec ses oreilles, on voit avec ses yeux, on sent avec son nez ; voilà la nature. L'homme étant intelligent, il peut ordonner ses actions suivant la finalité de sa nature. Quand est-ce que Dieu a fait le droit naturel ? <strong>En créant l'homme tel qu'il l'a fait, c'est tout.</strong></p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Prenons un seul exemple qui distingue les deux ordres : <em>« Si quelqu'un te frappe sur la joue droite, tends-lui la joue gauche »</em> (Mt 5, 39). Cela, ce n'est pas du droit naturel. En principe, quand quelqu'un te frappe, <strong>le droit naturel, c'est plutôt de lui mettre ton poing dans la figure</strong> ; il y a quand même la légitime défense, si quelqu'un t'étrangle, tu te dégages. Je n'ai pas dit qu'il fallait tendre la joue gauche à celui qui nous frappe sur la droite ; c'est un autre esprit et une autre disposition. Mais évidemment le droit positif divin n'entre jamais en opposition avec le droit naturel, puisque l'un et l'autre viennent de Dieu.</p>"
 		},
 		{
 			"kind": "heading",
@@ -75,19 +115,37 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>1. Le droit naturel est immuable</strong>, comme l'est la nature humaine. La nature ne changeant pas, le droit naturel ne change pas. Un homme n'aura jamais le droit de mentir · pour que cela change, il faudrait désordonner l'orientation native de notre pensée à dire le vrai, et de notre langage à exprimer ce que nous pensons · impossible.</p>"
+			"html": "<p><strong>1. Le droit naturel est immuable</strong>, comme l'est la nature humaine. La nature ne changeant pas, le droit naturel ne change pas. Un homme n'aura jamais le droit de mentir ; pour que cela change, il faudrait désordonner l'orientation native de notre pensée à dire le vrai, et de notre langage à exprimer ce que nous pensons ; impossible.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>2. Le droit naturel existerait même si Dieu n'avait pas pris soin de le rappeler</strong> aux hommes au Sinaï. La machine à laver a son mode d'emploi en elle-même · le petit prospectus joint ne fait que le rappeler.</p>"
+			"html": "<p><strong>2. Le droit naturel existerait même si Dieu n'avait pas pris soin de le rappeler</strong> aux hommes au Sinaï. La machine à laver a son mode d'emploi en elle-même ; le petit prospectus joint ne fait que le rappeler.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>3. Le droit naturel strict ne comporte jamais d'exception.</strong> Pas de dispense, pas de passe-droit · toujours à cause de l'immuabilité de la nature. A-t-on de temps en temps le droit de mentir ? Non. De tuer un innocent ? Non. De préférer un autre à Dieu, ou de servir un autre comme Dieu ? Jamais. Le droit positif, lui, peut comporter des exceptions · il n'oblige pas lorsqu'il présente un grave inconvénient (un parent gravement malade dispense de la messe du dimanche). Le droit naturel, jamais.</p>"
+			"html": "<p><strong>3. Le droit naturel strict ne comporte jamais d'exception.</strong> Pas de dispense, pas de passe-droit ; toujours à cause de l'immuabilité de la nature. A-t-on de temps en temps le droit de mentir ? Non. De tuer un innocent ? Non. De préférer un autre à Dieu, ou de servir un autre comme Dieu ? Jamais. Le droit positif, lui, peut comporter des exceptions ; il n'oblige pas lorsqu'il présente un grave inconvénient (un parent gravement malade dispense de la messe du dimanche). Le droit naturel, jamais.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>4. Dieu est directement l'auteur du droit naturel</strong>, parce qu'il est le créateur de la nature. C'est précisément ce qu'on refuse aujourd'hui · la haine moderne du droit naturel est une haine de Dieu créateur. On a longtemps refusé Dieu comme sauveur · maintenant on ne le tolère même plus comme créateur. Théorie du genre, mariage entre personnes du même sexe, avortement, projet d'euthanasie · ce sont autant d'attaques directes contre l'ordre voulu par Dieu en créant l'homme tel qu'il est, homme et femme, social, vivant.</p>"
+			"html": "<p><strong>4. Dieu est directement l'auteur du droit naturel</strong>, parce qu'il est le créateur de la nature. C'est précisément ce qu'on refuse aujourd'hui ; la haine moderne du droit naturel est une haine de Dieu créateur. On a longtemps refusé Dieu comme sauveur ; maintenant on ne le tolère même plus comme créateur. Théorie du genre, mariage entre personnes du même sexe, avortement, projet d'euthanasie ; ce sont autant d'attaques directes contre l'ordre voulu par Dieu en créant l'homme tel qu'il est, homme et femme, social, vivant.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Les anticléricaux du XVIIIe et du XIXe siècle s'appuyaient encore sur le droit naturel pour attaquer la loi de l'Église ; ils inventaient toutes sortes de raisons tirées de la loi naturelle (ou de ce qu'ils en savaient) pour combattre les curés et tout ce qui était positif. Mais on n'est plus du tout dans ce scénario, c'est fini ; même la déesse Raison, la vertu sans Dieu, n'existe plus. Il s'agit maintenant de détruire le droit naturel <em>lui-même</em>, de dire qu'il n'y en a pas. Toutes les lois aujourd'hui mises en place dans nos sociétés occidentales s'en prennent au droit naturel directement. Dieu a-t-il fait un homme et une femme pour le mariage ? Non, répond la théorie du genre, c'est la culture humaine qui a inventé cela, l'Église qui a inventé cela ; il n'y a pas plus d'hommes que de femmes. On devient fou.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Quand l'Église elle-même s'est moquée du droit naturel",
+			"anchor": "eveques-60-70"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Je pense que l'Église a une petite responsabilité ; je pense aux <strong>évêques des années 60 et 70</strong> qui se moquaient ouvertement du droit naturel en France ; ils parlaient du « pseudo droit naturel ». Je pourrais donner des noms, mais je préfère pas, enfin ils sont morts. Quand vous avez un évêque qui se moque du droit naturel, il ne faut pas s'étonner de la décrépitude qui suit. Le droit naturel dit « tu ne tueras pas » ; en <strong>1975 on a voté l'avortement, 200000 morts par an</strong> rien qu'en France. Maintenant on marie les homosexuels ; et qu'est-ce qu'on fera demain ? Le droit naturel, c'est vraiment le rempart, et on n'en veut plus parce qu'on voit bien que c'est Dieu qui est derrière.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Personne d'entre nous n'a choisi d'être comme il est ; on est comme on est parce qu'on est né de notre papa et de notre maman, c'est un reçu. Il y a donc une <em>hargne contre Dieu</em> dans cette destruction systématique du droit naturel ; et on ne voit pas comment ces gens, qui s'en prennent sans arrêt à la loi naturelle, ne s'en prendraient pas plus directement à l'auteur de cette loi.</p>"
 		},
 		{
 			"kind": "heading",
@@ -97,11 +155,25 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On appelle <em>droit des nations</em> (<em>jus gentium</em>) la part du droit naturel admise par les nations civilisées. L'Empire romain en respectait beaucoup · l'interdiction de condamner sans <em>causa</em>, par exemple. Sur d'autres points il ne le respectait pas · le droit de vie et de mort du <em>pater familias</em> sur ses enfants et parfois sur sa femme était totalement contraire au droit naturel. Quand on voit les monstruosités légales qu'introduisent nos civilisations contemporaines, on se dit que le <em>jus gentium</em> est en train de fondre. Seule l'Église a défendu intégralement le droit naturel · toujours.</p>"
+			"html": "<p>On appelle <em>droit des nations</em> (<em>jus gentium</em>) la part du droit naturel admise par les nations civilisées. L'Empire romain en respectait beaucoup ; l'interdiction de condamner sans <em>causa</em>, par exemple. Sur d'autres points il ne le respectait pas ; le droit de vie et de mort du <em>pater familias</em> sur ses enfants et parfois sur sa femme était totalement contraire au droit naturel. Quand on voit les monstruosités légales qu'introduisent nos civilisations contemporaines, on se dit que <strong>le <em>jus gentium</em> est en train de fondre comme la banquise</strong>, si toutefois la banquise est en train de fondre ; je ne me prononce pas là-dessus. Seule l'Église a défendu intégralement le droit naturel ; toujours.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Où mène la dérive : le plan incliné",
+			"anchor": "plan-incline"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>C'est donc dans le droit naturel qu'un homme trouve d'abord la volonté de Dieu. Quelqu'un qui n'observe pas le droit naturel et qui prétend observer l'Évangile, c'est un menteur. Au jeune homme riche qui demande · <em>« Bon Maître, que ferai-je pour posséder la vie éternelle ? »</em>, Notre-Seigneur répond · <em>« Garde les commandements »</em> (Mt 19, 16-17). Le droit naturel est le socle · après on peut faire mieux.</p>"
+			"html": "<p>On peut avorter jusqu'à <strong>12 semaines en France</strong>, jusqu'à <strong>22 semaines aux Pays-Bas</strong>, et puis pourquoi pas après ? Ce sera peut-être l'<strong>infanticide</strong> ; on aura un enfant d'un an, il vous plaît pas, il y a trop de charges, vous l'étranglez. On ne sait pas où l'on va. À partir du moment où l'on ne respecte pas l'ordre naturel, jusqu'où va-t-on ? S'il est permis de tuer, il est permis de tuer tout le monde. J'ai le droit de tuer un enfant de 12 semaines en France, mais pas à 20 semaines ; aux Pays-Bas j'ai le droit à 22 semaines ; pourquoi pas 36 ? Et une fois né, pourquoi pas non plus ? Et puis les vieillards, et ensuite <strong>c'est Hitler, c'est Hitler, les handicapés on les envoie à la casserole</strong> parce qu'ils ne servent à rien, et ainsi de suite. On ne sait pas où l'on va.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Plus largement, la plupart des nations recevaient le droit naturel quand elles étaient civilisées, plus ou moins, jamais totalement. Il n'y a guère que l'Église qui a défendu intégralement le droit naturel ; c'est comme cela.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est donc dans le droit naturel qu'un homme trouve d'abord la volonté de Dieu. Quelqu'un qui n'observe pas le droit naturel et qui prétend observer l'Évangile, c'est un menteur. Quelqu'un qui ment du matin au soir, ce n'est pas la peine qu'il fasse semblant d'être charitable, cela ne veut plus rien dire. Le droit naturel, c'est <em>le socle de la moralité</em>. Au jeune homme riche qui demande : <em>« Bon Maître, que ferai-je pour posséder la vie éternelle ? »</em>, Notre-Seigneur ne répond pas « fais tes prières, fais un peu d'aumône » ; il répond : <em>« Garde les commandements »</em> (Mt 19, 16-17). Et les commandements, il n'y a pas de doute, c'est le Décalogue. Le droit naturel est le socle ; après on peut faire mieux.</p>"
 		},
 		{
 			"kind": "heading",
@@ -111,7 +183,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On l'appelle <em>positive</em> (« en plus ») parce qu'elle s'ajoute au droit naturel pour perfectionner l'homme et le faire ressembler à Dieu en imitant Notre-Seigneur, <em>image du Dieu invisible</em>. Elle est donc beaucoup plus exigeante et plus difficile, parce que beaucoup plus parfaite. Elle ne contredit jamais le droit naturel · car l'un et l'autre viennent de Dieu.</p>"
+			"html": "<p>On l'appelle <em>positive</em> (« en plus ») parce qu'elle s'ajoute au droit naturel pour perfectionner l'homme et le faire ressembler à Dieu en imitant Notre-Seigneur, <em>image du Dieu invisible</em>. Elle est donc beaucoup plus exigeante et plus difficile, parce que beaucoup plus parfaite. Elle ne contredit jamais le droit naturel, car l'un et l'autre viennent de Dieu.</p>"
 		},
 		{
 			"kind": "heading",
@@ -121,11 +193,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Pourquoi cette loi en plus ? Imaginez quelqu'un qui pratiquerait intégralement le droit naturel · il ne tue pas, il ne ment pas, il honore son père et sa mère, il ne désire ni la femme ni les biens d'autrui, il sanctifie le jour du Seigneur · il serait déjà très haut. Mais cela ne suffit pas à entrer dans <strong>l'intimité de Dieu</strong>. Et c'est cela que Dieu veut. La pratique du droit naturel nous emmène très haut, mais elle ne nous fait pas pénétrer dans le mystère de la charité divine. Pour y pénétrer, il faut agir comme Dieu agit.</p>"
+			"html": "<p>Pourquoi cette loi en plus ? Imaginez quelqu'un qui pratiquerait intégralement le droit naturel ; il ne tue pas, il ne ment pas, il honore son père et sa mère, il ne désire ni la femme ni les biens d'autrui, il sanctifie le jour du Seigneur ; il serait déjà très haut. Mais cela ne suffit pas à entrer dans <strong>l'intimité de Dieu</strong>. Et c'est cela que Dieu veut. La pratique du droit naturel nous emmène très haut, mais elle ne nous fait pas pénétrer dans le mystère de la charité divine. Pour y pénétrer, il faut agir comme Dieu agit.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Tous les préceptes de Notre-Seigneur visent à nous faire <strong>ressembler à Dieu</strong>. <em>« Priez pour ceux qui vous persécutent · bénissez ceux qui vous maudissent »</em> · c'est dur · et Jésus ajoute toujours · <em>« et vous serez semblables à votre Père qui est dans les cieux, car lui fait lever son soleil sur les bons comme sur les méchants, et tomber sa pluie sur les justes comme sur les injustes »</em> (Mt 5, 44-45). Dieu fait comme cela · faites pareil.</p>"
+			"html": "<p>Une parenthèse sur le repos du septième jour ; <strong>sanctifier le jour du Seigneur, c'est aussi du droit naturel</strong>, parce que Dieu a créé le monde en six jours et s'est reposé le septième. C'est dans la nature de l'homme de travailler six jours et de se reposer le septième. La <em>Révolution française</em> a voulu bouleverser cela avec son calendrier à <strong>décades</strong> ; on travaillait neuf jours et on se reposait un jour. Personne n'a suivi ; <strong>tout le monde était crevé, y compris les bêtes</strong> qui n'arrivaient pas à suivre. Le chiffre est dans la nature, c'est Dieu qui l'a mis. Je ferme la parenthèse.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Tous les préceptes de Notre-Seigneur visent à nous faire <strong>ressembler à Dieu</strong>. <em>« Priez pour ceux qui vous persécutent ; bénissez ceux qui vous maudissent »</em> : c'est dur, et Jésus ajoute toujours : <em>« et vous serez semblables à votre Père qui est dans les cieux, car lui fait lever son soleil sur les bons comme sur les méchants, et tomber sa pluie sur les justes comme sur les injustes »</em> (Mt 5, 44-45). Dieu fait comme cela ; faites pareil. Sans le soleil et sans la pluie, on mourrait de faim ; pour faire pousser du blé il faut les deux. Et Dieu donne les deux sur les bons comme sur les méchants ; il est comme cela. C'est une très bonne nouvelle, c'est l'Évangile, c'est que Dieu est si beau, si bon, si grand, si miséricordieux ; on l'a appris parce qu'il s'est révélé.</p>"
 		},
 		{
 			"kind": "quote",
@@ -134,7 +210,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On peut difficilement dire mieux. Les élus de Dieu, ce sont ceux qui sont, tôt ou tard, conformes à l'image du Fils. Dieu pardonne combien de fois ? Sans limite. <em>« Combien de fois pardonnerai-je ? »</em>, demande saint Pierre · <em>« Je ne te dis pas jusqu'à sept fois, mais jusqu'à soixante-dix fois sept fois »</em> · sans limite, parce que le pardon de Dieu est sans limite (Mt 18, 21-22).</p>"
+			"html": "<p>On peut difficilement dire mieux. Les élus de Dieu, ce sont ceux qui sont, tôt ou tard, conformes à l'image du Fils. Dieu pardonne combien de fois ? Sans limite. Saint Pierre s'approche de Jésus : <em>« Seigneur, combien de fois pardonnerai-je ? Jusqu'à sept fois ? »</em> ; et Jésus répond : <em>« Je ne te dis pas jusqu'à sept fois, mais jusqu'à soixante-dix fois sept fois »</em> (Mt 18, 21-22). J'ai fait la multiplication, <strong>cela fait 539</strong> ; mais ce n'est pas cela le problème, le problème c'est que c'est sans limite, parce que le pardon de Dieu est sans limite. On est dans un autre monde, le monde de Dieu, le monde de la ressemblance avec Dieu ; ce n'est plus selon la nature, c'est selon la grâce.</p>"
 		},
 		{
 			"kind": "heading",
@@ -144,12 +220,12 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La loi évangélique diffère du droit naturel ·</p><ul><li><strong>selon la grâce</strong>, et non selon la nature · elle suppose la vie de Dieu mise dans l'âme ·</li><li>on ne peut la suivre que si l'on recherche la <strong>perfection et la sainteté</strong>, non la simple justice ·</li><li>sa perfection lui vient de la <strong>ressemblance à Dieu</strong>.</li></ul>"
+			"html": "<p>La loi évangélique diffère du droit naturel :</p><ul><li><strong>selon la grâce</strong>, et non selon la nature ; elle suppose la vie de Dieu mise dans l'âme</li><li>on ne peut la suivre que si l'on recherche la <strong>perfection et la sainteté</strong>, non la simple justice</li><li>sa perfection lui vient de la <strong>ressemblance à Dieu</strong>.</li></ul>"
 		},
 		{
 			"kind": "definition",
 			"term": "Le grave inconvénient",
-			"html": "<p>La loi positive (en général) <strong>n'oblige pas lorsqu'elle présente un grave préjudice</strong>. Le droit naturel, toujours. Quand David et ses 600 hommes mouraient de faim, ils ont mangé les pains de proposition réservés au culte · et Notre-Seigneur leur donne raison · <em>« le sabbat est fait pour l'homme, non l'homme pour le sabbat »</em> (Mc 2, 27). Si ton bœuf tombe dans un puits le jour du sabbat, tu l'en retires immédiatement.</p>"
+			"html": "<p>La loi positive (en général) <strong>n'oblige pas lorsqu'elle présente un grave préjudice</strong>. Le droit naturel, toujours. Quand David, poursuivi par son fils Absalon, et ses 600 hommes mouraient de faim littéralement, il a été trouver <em>Achimélech</em> le grand prêtre : <em>« As-tu quelque chose à manger ? »</em> ; et ils ont mangé les <strong>pains de proposition</strong> réservés au culte. Notre-Seigneur leur donne raison : <em>« le sabbat est fait pour l'homme, non l'homme pour le sabbat »</em> (Mc 2, 27). Si ton bœuf tombe dans un puits le jour du sabbat, tu l'en retires immédiatement ; il en faut bien dix ou douze avec des cordes, et c'est normal, parce qu'à respecter le sabbat tu perdrais un bœuf, et cela coûte cher.</p>"
 		},
 		{
 			"kind": "heading",
@@ -159,11 +235,23 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Il faut <strong>enlever de sa tête</strong> ce schéma idiot et faux qui oppose l'Ancien Testament comme étant celui de la crainte et le Nouveau comme étant celui de l'amour. L'Ancien Testament demandait déjà l'amour · <em>« Tu aimeras le Seigneur ton Dieu de tout ton cœur, de toute ton âme, de toutes tes forces »</em> · c'est dans le Deutéronome, pas dans saint Jean. Et le Nouveau Testament demande encore la crainte · <em>« Craignez celui qui a le pouvoir de jeter dans la géhenne »</em> (Lc 12, 5).</p>"
+			"html": "<p>Il faut <strong>enlever de sa tête</strong> ce schéma idiot et faux qui oppose l'Ancien Testament comme étant celui de la crainte et le Nouveau comme étant celui de l'amour. L'Ancien Testament demandait déjà l'amour : <em>« Tu aimeras le Seigneur ton Dieu de tout ton cœur, de toute ton âme, de toutes tes forces »</em> : c'est dans le Deutéronome, pas dans saint Jean. Quand vous lisez les psaumes, vous voyez bien que l'intimité de David et d'Asaph avec Dieu est totale ; ils aiment Dieu, ils vivent avec lui, ils chantent et ils dansent avec Dieu, leur cœur est ouvert. Il y a de l'amour dans l'Ancien Testament. À quoi devraient penser les Juifs du Talmud et les musulmans qui se réfèrent à eux, qui prétendent qu'il n'y a d'amour que dans la religion chrétienne.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Ces deux lois s'opposent plutôt par leurs <em>perfections différentes</em> · par le dépassement de la simple justice (la justice devient synonyme de sainteté), et surtout par le fait capital que <strong>Notre-Seigneur est là</strong>. Il est le modèle inexistant auparavant et qui donne les moyens de la sainteté. <em>« Qui me voit voit le Père »</em> (Jn 14, 9) · ressembler à Jésus-Christ, c'est ressembler à Dieu.</p>"
+			"html": "<p>Et il y a de la crainte dans le Nouveau Testament : <em>« Ne craignez pas ceux qui tuent le corps ; craignez plutôt celui qui a le pouvoir de jeter dans la géhenne de feu ; oui, je vous le dis, craignez-le »</em> (Lc 12, 5). Celui-là, c'est Dieu. Craignons Dieu le moins possible, je vous le concède, aimons-le le plus possible, et si possible ne le craignons plus du tout dans la mesure où nous l'aimons parfaitement, comme dit saint Jean (<em>« l'amour parfait bannit toute crainte »</em>) ; mais le petit schéma à trois sous et demi qui oppose Ancien et Nouveau Testament sur ce point est totalement faux.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il est vrai cependant qu'il y a eu une <em>pédagogie de Dieu</em> avec les gens de l'Ancien Testament, qui étaient beaucoup plus rustres parce qu'ils n'avaient pas la lumière de l'Évangile. Quand Dieu envoie Josué conquérir la Palestine, il demande de frapper d'<em>anathème</em> tout le monde ; c'est une théocratie, il n'y a que Dieu qui peut prendre une décision comme celle-là. Et quand <strong>Saül se permet de ne pas tuer tout le monde</strong> dans ses conquêtes, Dieu le lui reproche ; et c'est le grand <strong>Samuel qui va assassiner de ses propres mains le roi Amalek</strong>. Ce sont des violences qui nous surprennent, mais elles n'ont plus cours sous le Nouveau Testament.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ces deux lois s'opposent plutôt par leurs <em>perfections différentes</em> : par le dépassement de la simple justice (la justice devient synonyme de sainteté), et surtout par le fait capital que <strong>Notre-Seigneur est là</strong>. Il est le modèle inexistant auparavant et qui donne les moyens de la sainteté. <em>« Qui me voit voit le Père »</em> (Jn 14, 9) ; ressembler à Jésus-Christ, c'est ressembler à Dieu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le grand moyen de la Nouvelle Alliance, c'est donc <em>l'Imitation de Jésus-Christ</em>. Notre-Seigneur ne donne pas seulement des commandements, il est le <strong>modèle à imiter</strong>. Vous voulez ressembler à Dieu ? Faites comme le Seigneur Jésus-Christ. C'est beaucoup plus facile de ressembler à Jésus-Christ que nous voyons par la foi, qu'à Dieu que nous ne voyons pas ; et si vous faites comme le Seigneur Jésus-Christ en toute chose, vous êtes copie conforme de Dieu et de sa volonté.</p>"
 		},
 		{
 			"kind": "heading",
@@ -173,7 +261,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On peut faire un cours de morale de deux manières · suivre les commandements (1, 2, 3 · c'est la manière jésuite) ou suivre les vertus (c'est la manière dominicaine de saint Thomas, que nous suivrons). La méthode des vertus est plus profonde et plus positive · plutôt que de répéter « ne fais pas, ne fais pas », elle dit « fais cela » · et c'est en accumulant le bien que l'on se retire du mal.</p>"
+			"html": "<p>On peut faire un cours de morale de deux manières ; suivre les commandements (1, 2, 3 : c'est la manière jésuite) ou suivre les vertus (c'est la manière dominicaine de saint Thomas, que nous suivrons). La méthode des vertus est plus profonde et plus positive ; plutôt que de répéter « ne fais pas, ne fais pas », elle dit « fais cela », et c'est en accumulant le bien que l'on se retire du mal.</p>"
 		},
 		{
 			"kind": "heading",
@@ -184,12 +272,20 @@
 		{
 			"kind": "definition",
 			"term": "Vertu",
-			"html": "<p><strong>Disposition habituelle à faire le bien.</strong> Elle est spirituelle, demeure dans le sujet, et permet de faire le bien <em>facilement, rapidement, et avec joie</em>. Retenez ces trois mots de saint Thomas · facilement, rapidement, avec joie. C'est à cela qu'on reconnaît la vertu.</p>"
+			"html": "<p><strong>Disposition habituelle à faire le bien.</strong> Elle est spirituelle, demeure dans le sujet, et permet de faire le bien <em>facilement, rapidement, et avec joie</em>. Retenez ces trois mots de saint Thomas ; facilement, rapidement, avec joie. C'est à cela qu'on reconnaît la vertu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Petit test ; est-ce que vous vous levez le matin à six heures <strong>facilement, rapidement et avec joie</strong> ? Si oui, vous avez la vertu de courage. Sinon, non, parce que sinon ce serait facile, ce serait rapide, ce serait avec joie. Et quand on voit qu'il y en a qui sont en retard, c'est qu'ils ne se sont pas levés facilement ni rapidement ; et quand on voit la tête qui tire, on voit très bien aussi que ce n'était pas véritablement avec joie. Je ferme la parenthèse.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Saint Thomas a raison ; la vertu rend le bien agréable. Prenez la <em>tempérance</em> : j'ai l'habitude (l'habitus, plutôt) que quand je n'ai plus faim, je m'arrête de manger, je ne me goinfre pas. C'est une disposition <em>en moi</em>. Ceux qui ne l'ont pas, les gourmands, il faut qu'ils grignotent toute la journée. Vous voyez la différence ; l'un fait le bien facilement, l'autre est entraîné par son vice.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Habitus",
-			"html": "<p>Mot latin sans équivalent français · toute <strong>disposition habituelle</strong>, qu'elle soit morale (vertu ou vice) ou intellectuelle (science, art). Ce n'est pas l'<em>habitude</em>, qui désigne la répétition des actes (j'ai l'habitude d'acheter mon journal à dix-sept heures). L'habitus est la disposition <em>en moi</em> qui me fait poser les actes facilement · acquise souvent par répétition, mais infusée parfois directement par Dieu (vertus surnaturelles).</p>"
+			"html": "<p>Mot latin sans équivalent français ; toute <strong>disposition habituelle</strong>, qu'elle soit morale (vertu ou vice) ou intellectuelle (science, art). Ce n'est pas l'<em>habitude</em>, qui désigne la répétition des actes (j'ai l'habitude d'acheter mon journal à dix-sept heures). L'habitus est la disposition <em>en moi</em> qui me fait poser les actes facilement ; acquise souvent par répétition, mais infusée parfois directement par Dieu (vertus surnaturelles).</p>"
 		},
 		{
 			"kind": "heading",
@@ -199,20 +295,30 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On distingue ·</p><ul><li><strong>les habitus intellectuels</strong> · science, art (le violoniste qui joue Paganini sans regarder ses notes, après vingt ans de travail à dix heures par jour). Ils ne nous intéressent pas ici, nous faisons de la morale ·</li><li><strong>les habitus moraux</strong> · ceux qui orientent l'agir au bien ou au mal.</li></ul>"
+			"html": "<p>On distingue :</p><ul><li><strong>les habitus intellectuels</strong> : science, art. Prenez quelqu'un qui commence le violon ; il fait trois notes et <em>ça grince</em>. Puis vous avez un violoniste qui a travaillé <strong>dix heures par jour pendant vingt ans</strong> ; il joue les concertos de Paganini sans regarder ses notes. Quelle est la différence ? Un habitus. Parler une langue, en parler dix, c'est aussi un habitus ; pas que ces gens-là soient plus intelligents, mais leur intelligence a acquis la disposition d'engranger facilement de nouvelles significations. Ces habitus ne nous intéressent pas ici, nous faisons de la morale</li><li><strong>les habitus moraux</strong> : ceux qui orientent l'agir au bien ou au mal.</li></ul>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Parmi les habitus moraux, on distingue ·</p><ul><li>ceux qui inclinent au <strong>bien</strong> · ce sont les <em>vertus</em> ·</li><li>ceux qui inclinent au <strong>mal</strong> · ce sont les <em>vices</em>. L'ivrogne qui ne peut plus s'empêcher de boire, le gourmand qui doit grignoter toute la journée, ont acquis un habitus du mal.</li></ul>"
+			"html": "<p>Parmi les habitus moraux, on distingue :</p><ul><li>ceux qui inclinent au <strong>bien</strong> : ce sont les <em>vertus</em></li><li>ceux qui inclinent au <strong>mal</strong> : ce sont les <em>vices</em>. L'ivrogne qui ne peut plus s'empêcher de boire, le gourmand qui doit grignoter toute la journée, ont acquis un habitus du mal.</li></ul>"
 		},
 		{
 			"kind": "definition",
 			"term": "Une précision sur les « péchés capitaux »",
-			"html": "<p>Ce qu'on appelle les <em>péchés capitaux</em> ne sont pas des péchés au sens propre (un péché est un acte) · ce sont des <strong>vices capitaux</strong>, c'est-à-dire des dispositions habituelles au mal. Orgueil, paresse, envie, luxure, gourmandise, avarice, colère · ce sont sept habitus mauvais, sources d'une multitude d'actes mauvais.</p>"
+			"html": "<p>Ce qu'on appelle les <em>péchés capitaux</em> ne sont pas des péchés au sens propre (un péché est un acte) ; ce sont des <strong>vices capitaux</strong>, c'est-à-dire des dispositions habituelles au mal. Orgueil, paresse, envie, luxure, gourmandise, avarice, colère ; ce sont sept habitus mauvais, sources d'une multitude d'actes mauvais.</p>"
+		},
+		{
+			"kind": "heading",
+			"level": 3,
+			"title": "Habitus naturels et surnaturels",
+			"anchor": "naturels-surnaturels"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On distingue enfin les vertus selon qu'elles sont <strong>naturelles ou surnaturelles</strong>. Il peut y avoir deux prudences dans un homme · la vertu naturelle qui le règle selon la droite raison, et la vertu surnaturelle qui l'ordonne à la béatitude éternelle. On peut être <em>naturellement</em> prudent (les Suisses traversent en dehors des clous) tout en étant <em>surnaturellement</em> imprudent (la même personne va se faire avorter en Suisse quand c'était interdit ailleurs). La distinction est capitale.</p>"
+			"html": "<p>On distingue enfin les habitus selon qu'ils sont <strong>naturels ou surnaturels</strong>. Les habitus naturels s'acquièrent par la répétition des actes ; comment devient-on un très grand violoniste ? En jouant beaucoup, beaucoup, beaucoup de violon. Dans tous les sports, dans toutes les disciplines, c'est pareil. Il y a des hommes plus grands, plus costauds que <strong><em>Renaud Lavillenie</em></strong> ; mais lui, par son habitus, arrive à <strong>sauter à la perche 6,17 m</strong>, c'est faramineux. D'autres n'ont pas ce qu'il a, lui.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il peut y avoir deux prudences dans un homme ; la vertu naturelle qui le règle selon la droite raison, et la vertu surnaturelle qui l'ordonne à la béatitude éternelle. On peut être <em>naturellement</em> prudent (les Suisses traversent en dehors des clous, tout est bien) tout en étant <em>surnaturellement</em> imprudent (la même personne, en état de péché permanent, risque de tomber en enfer en mourant ; ce n'est pas prudent du tout). Quand l'avortement était interdit en France, les Françaises allaient se faire avorter en Suisse ; prudence naturelle d'un côté, imprudence surnaturelle totale de l'autre. La distinction est capitale.</p>"
 		},
 		{
 			"kind": "heading",
@@ -228,7 +334,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les vertus théologales nous relient directement à Dieu · elles ont Dieu pour <em>objet immédiat</em>. Elles ne sont donc pas à proprement parler des vertus morales · leur fin n'est pas le bon agir, mais l'union à Dieu. Elles sont au nombre de trois ·</p><ul><li><strong>Foi</strong> · je crois Dieu (vertu de l'intelligence).</li><li><strong>Espérance</strong> · j'espère Dieu (vertu de la volonté · on n'espère pas <em>en</em> Dieu, on espère Dieu).</li><li><strong>Charité</strong> · j'aime Dieu (vertu de la volonté · amitié divine).</li></ul><p>Ces trois vertus sont <strong>toujours surnaturelles</strong> · il n'y a pas de foi naturelle au sens où l'on en parle ici · elles supposent la grâce, qui seule peut nous relier à Dieu lui-même.</p>"
+			"html": "<p>Les vertus théologales nous relient directement à Dieu ; elles ont Dieu pour <em>objet immédiat</em>. Elles ne sont donc pas à proprement parler des vertus morales ; leur fin n'est pas le bon agir, mais l'union à Dieu. Elles sont au nombre de trois :</p><ul><li><strong>Foi</strong> : je crois Dieu (vertu de l'intelligence).</li><li><strong>Espérance</strong> : j'espère Dieu (vertu de la volonté ; on n'espère pas <em>en</em> Dieu, on espère Dieu).</li><li><strong>Charité</strong> : j'aime Dieu (vertu de la volonté ; amitié divine).</li></ul><p>Ces trois vertus sont <strong>toujours surnaturelles</strong> ; il n'y a pas de foi naturelle au sens où l'on en parle ici ; elles supposent la grâce, qui seule peut nous relier à Dieu lui-même.</p>"
 		},
 		{
 			"kind": "heading",
@@ -238,16 +344,16 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les vertus <em>morales</em> ont pour objet une action · elles nous font agir bien. Les quatre principales sont dites <strong>cardinales</strong>, du latin <em>cardo, cardinis</em>, le gond · ce sont les vertus pivot de la vie morale, autour desquelles tournent toutes les autres. Elles peuvent être naturelles ou surnaturelles.</p>"
+			"html": "<p>Les vertus <em>morales</em> ont pour objet une action ; elles nous font agir bien. Les quatre principales sont dites <strong>cardinales</strong>, du latin <em>cardo, cardinis</em>, le gond (il ne faut pas voir rouge, ce n'est pas de cela qu'il s'agit) ; ce sont les vertus pivot de la vie morale, autour desquelles tournent toutes les autres. Elles peuvent être naturelles ou surnaturelles.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les vertus se distinguent par les facultés qu'elles élèvent ·</p><ul><li><strong>Prudence</strong> · vertu de l'<em>intelligence</em> · établit à chacune de nos actions le juste milieu de ce qu'il faut faire (ni trop ni trop peu). Une seule leçon lui sera consacrée.</li><li><strong>Justice</strong> · vertu de la <em>volonté</em> · rendre à chacun ce qu'on lui doit (à Dieu, à soi-même, aux autres). On peut presque dire que la justice est la morale à elle seule · si vous rendez à chacun ce que vous lui devez, vous êtes dans le droit chemin. Elle nous occupera <em>cinq leçons</em>, parce que c'est le gros morceau.</li><li><strong>Tempérance</strong> · règle, par la volonté, les passions du <em>concupiscible</em> (manger, boire, plaisir).</li><li><strong>Force</strong> · règle, par la volonté, les passions de l'<em>irascible</em> (crainte, espoir, désespoir, colère).</li></ul>"
+			"html": "<p>Les vertus se distinguent par les facultés qu'elles élèvent :</p><ul><li><strong>Prudence</strong> : vertu de l'<em>intelligence</em> : établit à chacune de nos actions le juste milieu de ce qu'il faut faire (ni trop ni trop peu). Une seule leçon lui sera consacrée.</li><li><strong>Justice</strong> : vertu de la <em>volonté</em> : rendre à chacun ce qu'on lui doit (à Dieu, à soi-même, aux autres). On peut presque dire que la justice est la morale à elle seule ; si vous rendez à chacun ce que vous lui devez, vous êtes dans le droit chemin. On est juste parce qu'on veut être juste, pas parce qu'on est plus intelligent qu'un autre. Elle nous occupera <em>cinq leçons</em>, parce que c'est le gros morceau.</li><li><strong>Tempérance</strong> : règle, par la volonté, les passions du <em>concupiscible</em> (manger, boire, plaisir).</li><li><strong>Force</strong> : règle, par la volonté, les passions de l'<em>irascible</em> (crainte, espoir, désespoir, colère).</li></ul>"
 		},
 		{
 			"kind": "definition",
 			"term": "Tempérance, force et volonté",
-			"html": "<p>Précision subtile · la tempérance règle le concupiscible et la force règle l'irascible · mais qui règle les passions ? La <strong>volonté</strong>. Donc ces deux vertus, bien qu'orientées vers les passions, sont logées dans la volonté. Un homme est bon ou mauvais, vertueux ou vicieux, finalement par sa volonté · pas par ses sens. Un aveugle ne manque pas de vertu parce qu'il ne voit pas · les sens marchent ou ne marchent pas, ils ne sont pas le siège de la moralité. Mais les passions, on doit pouvoir les <em>tenir</em>. Quelqu'un qui ne tient pas ses passions devient tout de suite injuste · le luxurieux n'est plus fidèle, le coléreux frappe ses enfants pour rien · les passions débordent et la justice s'effondre.</p>"
+			"html": "<p>Précision subtile ; la tempérance règle le concupiscible et la force règle l'irascible, mais qui règle les passions ? La <strong>volonté</strong>. Donc ces deux vertus, bien qu'orientées vers les passions, sont logées dans la volonté. Un homme est bon ou mauvais, vertueux ou vicieux, finalement par sa volonté ; pas par ses sens. Un aveugle ne manque pas de vertu parce qu'il ne voit pas ; les sens marchent ou ne marchent pas, ils ne sont pas le siège de la moralité. Mais les passions, on doit pouvoir les <em>tenir</em>. Quelqu'un qui ne tient pas ses passions devient tout de suite injuste ; <em>on devient toujours injuste à cause des passions</em>. Le luxurieux n'est plus fidèle à sa femme ; le coléreux, dès que la moutarde lui monte au nez, casse tout, gifle ses enfants qui n'ont rien fait, se fait virer par son patron ; les passions débordent et la justice s'effondre.</p>"
 		},
 		{
 			"kind": "heading",
@@ -257,16 +363,16 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Nous traiterons donc, dans cet ordre · <strong>Foi</strong>, <strong>Espérance</strong>, <strong>Charité</strong> · puis <strong>Prudence</strong> (une leçon) · puis <strong>Justice</strong> (cinq leçons · le gros morceau de la morale) · puis <strong>Tempérance</strong> et <strong>Force</strong> pour finir l'année.</p>"
+			"html": "<p>Nous traiterons donc, dans cet ordre ; <strong>Foi</strong>, <strong>Espérance</strong>, <strong>Charité</strong> : puis <strong>Prudence</strong> (une leçon) ; puis <strong>Justice</strong> (cinq leçons ; le gros morceau de la morale) ; puis <strong>Tempérance</strong> et <strong>Force</strong> pour finir l'année.</p>"
 		},
 		{
 			"kind": "quote",
-			"html": "<p>Et j'invite tous les chrétiens à lire et à relire régulièrement le code de la route · ce sont les chapitres V, VI, VII de saint Matthieu, et l'Évangile en général.</p>",
+			"html": "<p>Et j'invite tous les chrétiens à lire et à relire régulièrement le code de la route ; ce sont les chapitres V, VI, VII de saint Matthieu, et l'Évangile en général.</p>",
 			"attribution": "Abbé Laguérie"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Les chrétiens ne savent pas quelle est leur loi quotidienne. Quand on veut conduire une voiture, on apprend le code · et quand on a perdu trop de points, on le repasse, parce qu'on l'a oublié. Et c'est pour conduire une voiture sur les routes · pour aller au ciel, pour être comme Dieu, à plus forte raison faut-il connaître son code, qui est le Sermon sur la Montagne. La semaine prochaine, nous commencerons par la <em>Foi</em>.</p>"
+			"html": "<p>Les chrétiens ne savent pas quelle est leur loi quotidienne. Quand on veut conduire une voiture, on apprend le code, et quand on a perdu trop de points, on le repasse, parce qu'on l'a oublié. Et c'est pour conduire une voiture sur les routes ; pour aller au ciel, pour être comme Dieu, à plus forte raison faut-il connaître son code, qui est le Sermon sur la Montagne. La semaine prochaine, nous commencerons par la <em>Foi</em>.</p>"
 		}
 	]
 }

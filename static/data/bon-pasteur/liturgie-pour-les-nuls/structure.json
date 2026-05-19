@@ -1,0 +1,26 @@
+{
+	"episodes": [
+		{ "slug": "01-xxeme-dimanche-apres-la-pentecote", "n": 1, "title": "XXème dimanche après la Pentecôte" },
+		{ "slug": "02-xxieme-dimanche-apres-la-pentecote", "n": 2, "title": "XXIème dimanche après la Pentecôte" },
+		{ "slug": "03-xxiieme-dimanche-apres-la-pentecote", "n": 3, "title": "XXIIème dimanche après la Pentecôte" },
+		{ "slug": "04-xxiiieme-dimanche-apres-la-pentecote", "n": 4, "title": "XXIIIème dimanche après la Pentecôte" },
+		{ "slug": "05-la-fete-du-christ-roi", "n": 5, "title": "La Fête du Christ Roi" },
+		{ "slug": "06-la-toussaint", "n": 6, "title": "La Toussaint" },
+		{ "slug": "07-xxiveme-dimanche-apres-la-pentecote", "n": 7, "title": "XXIVème dimanche après la Pentecôte" },
+		{ "slug": "08-1er-dimanche-de-l-avent", "n": 8, "title": "1er dimanche de l'Avent" },
+		{ "slug": "09-iieme-dimanche-de-l-avent", "n": 9, "title": "IIème dimanche de l'Avent" },
+		{ "slug": "10-iiieme-dimanche-de-l-avent", "n": 10, "title": "IIIème dimanche de l'Avent" },
+		{ "slug": "11-iveme-dimanche-de-l-avent", "n": 11, "title": "IVème et dernier dimanche de l'Avent" },
+		{ "slug": "12-dimanche-de-la-septuagesime", "n": 12, "title": "Dimanche de la Septuagésime" },
+		{ "slug": "13-dimanche-de-la-sexagesime", "n": 13, "title": "Dimanche de la Sexagésime" },
+		{ "slug": "14-dimanche-de-la-quinquagesime", "n": 14, "title": "Dimanche de la Quinquagésime" },
+		{ "slug": "15-premier-dimanche-de-careme", "n": 15, "title": "Premier dimanche de Carême" },
+		{ "slug": "16-deuxieme-dimanche-de-careme", "n": 16, "title": "Deuxième dimanche de Carême" },
+		{ "slug": "17-il-etait-une-fois-dans-l-est", "n": 17, "title": "Il était une fois dans l'Est" },
+		{ "slug": "18-la-passion", "n": 18, "title": "La Passion de Notre Seigneur Jésus-Christ" },
+		{ "slug": "19-dimanche-des-rameaux", "n": 19, "title": "Dimanche des Rameaux" },
+		{ "slug": "20-dimanche-de-paques", "n": 20, "title": "Dimanche de Pâques" },
+		{ "slug": "21-jeudi-de-l-ascension", "n": 21, "title": "Jeudi de l'Ascension" },
+		{ "slug": "22-la-pentecote", "n": 22, "title": "La Pentecôte" }
+	]
+}

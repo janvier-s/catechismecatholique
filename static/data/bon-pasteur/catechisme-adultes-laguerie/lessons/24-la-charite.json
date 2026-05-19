@@ -12,7 +12,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Avec la charité, nous abordons le <strong>cœur même</strong> de la religion catholique · cette chose commune entre le ciel et la terre. La foi et l'espérance étaient le tremplin · la charité est la connexion intime entre Dieu et les hommes · elle est le mystère même de Dieu en nous. Ceci est possible · <em>nous pouvons aimer Dieu comme il mérite de l'être</em>. Il vaut le coup de s'y attarder.</p>"
+			"html": "<p>Avec la charité, nous abordons le <strong>cœur même</strong> de la religion catholique ; cette chose commune entre le ciel et la terre. La foi et l'espérance étaient le tremplin ; la charité est la connexion intime entre Dieu et les hommes ; elle est le mystère même de Dieu en nous. Ceci est possible ; <em>nous pouvons aimer Dieu comme il mérite de l'être</em>. Il vaut le coup de s'y attarder.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La charité est la troisième des vertus théologales. Elle n'est pas séparable en plusieurs charités ; il n'y a pas une charité de Dieu envers nous, puis une charité de nous envers Dieu, puis encore une charité envers le prochain. Tout cela est <strong>une seule et même réalité</strong> : l'amour qui est en Dieu, l'amour que Dieu porte aux hommes, l'amour que l'homme porte à Dieu, l'amour qu'un homme porte à ses frères. Une seule charité, qui circule.</p>"
 		},
 		{
 			"kind": "heading",
@@ -23,7 +27,7 @@
 		{
 			"kind": "definition",
 			"term": "La charité",
-			"html": "<p><strong>Vertu surnaturelle par laquelle nous aimons Dieu plus que tout, et le prochain comme nous-mêmes.</strong> Ce n'est pas deux amours · l'amour de Dieu et l'amour du prochain sont <em>une seule et même charité</em>. Une seule réalité.</p>"
+			"html": "<p><strong>Vertu surnaturelle par laquelle nous aimons Dieu plus que tout, et le prochain comme nous-mêmes.</strong> Ce n'est pas deux amours ; l'amour de Dieu et l'amour du prochain sont <em>une seule et même charité</em>. Une seule réalité.</p>"
 		},
 		{
 			"kind": "heading",
@@ -33,12 +37,24 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La charité est un amour surnaturel qui a pour principe la <strong>grâce</strong>. Aucun homme ne peut y parvenir par ses propres forces · ce n'est pas en se contorsionnant qu'on y arrive, c'est en la <em>recevant</em>. Aimer Dieu qu'on ne voit pas, infiniment transcendant · à bien y réfléchir c'est impossible aux forces humaines.</p>"
+			"html": "<p>La charité est un amour surnaturel qui a pour principe la <strong>grâce</strong>. Aucun homme ne peut y parvenir par ses propres forces ; ce n'est pas en se contorsionnant qu'on y arrive, c'est en la <em>recevant</em>. Aimer Dieu qu'on ne voit pas, infiniment transcendant ; à bien y réfléchir c'est impossible aux forces humaines.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>J'espère qu'il vous est déjà monté à l'esprit combien il est difficile, et même <em>inimaginable</em>, d'aimer Dieu. On ne le voit pas, il est infiniment transcendant. C'est difficile, et même, si vous réfléchissez bien, <strong>impossible</strong> d'aimer Dieu, qui pourtant est le souverain bien qu'on devrait aimer plus que tout. Eh bien, nous en sommes incapables, si Dieu lui-même ne nous donne de l'aimer.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Je peux aimer les biens sensibles ; je peux aimer, sous l'aspect du bien universel, la justice, la vérité, la beauté. Mais aimer Dieu, qu'on ne voit pas, qu'on ne peut même pas imaginer ? C'est impossible aux forces humaines. L'homme ne l'aurait même pas <em>conçu</em>, comme les Grecs : ils savaient bien que le désir tend vers un bien fini, mais aimer Dieu comme Dieu lui-même s'aime, ils n'y ont jamais pensé. C'est l'<strong>initiative de Dieu</strong>. Et il n'a pas attendu que nous soyons bons : c'est précisément l'inverse, c'est sa bonté communiquée à l'homme qui rend l'homme moins mauvais, et même très bon chez les saints.</p>"
 		},
 		{
 			"kind": "quote",
 			"html": "<p>La charité a été répandue dans nos cœurs par l'Esprit-Saint qui nous a été donné.</p>",
 			"attribution": "Rm 5, 5"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est l'Esprit-Saint qui communique la charité, car il est lui-même, en Dieu, la charité. La barre est donc très haute. Mais comment essayer de comprendre un peu ce que c'est ?</p>"
 		},
 		{
 			"kind": "heading",
@@ -48,16 +64,29 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Il n'existe pas de bonne <em>définition</em> de la charité · si elle existait, on commencerait par là. Saint Paul lui-même, dans le chapitre 13 de la première aux Corinthiens, ne définit pas · il <em>décrit</em> · « elle est patiente, serviable, elle ne se réjouit pas du mal mais se réjouit de la vérité, elle supporte tout, croit tout, espère tout, endure tout ». Saint Thomas, lui, fait deviner la chose par une comparaison · la charité est une <strong>amitié</strong> avec Dieu. Pas un amour. Une amitié.</p>"
+			"html": "<p>Il n'existe pas de bonne <em>définition</em> de la charité ; si elle existait, on commencerait par là. Saint Paul lui-même, dans le chapitre 13 de la première aux Corinthiens, ne définit pas ; il <em>décrit</em> : « elle est patiente, serviable, elle ne se réjouit pas du mal mais se réjouit de la vérité, elle supporte tout, croit tout, espère tout, endure tout ». Saint Thomas, lui, fait deviner la chose par une comparaison ; la charité est une <strong>amitié</strong> avec Dieu. Pas un amour. Une amitié.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Pourquoi « agapè » et non « eros »",
-			"html": "<p>Les apôtres ont délibérément choisi, pour traduire la chose, le mot grec <em>agapè</em>, presque tombé en désuétude, plutôt que les mots usuels pour l'amour (<em>eros</em>, <em>philia</em>). Ils voulaient éviter toutes les suggestions malencontreuses du mot « amour ». Toutes les traductions modernes qui rendent <em>caritas / agapè</em> par « amour » sont bancales · l'unique traduction correcte de <em>caritas</em> est <strong>charité</strong>. À une époque où le mot « amour » est devenu un quasi-synonyme de « sexe », l'erreur de traduction est désastreuse.</p>"
+			"html": "<p>Les apôtres ont délibérément choisi, pour traduire la chose, le mot grec <em>agapè</em>, presque tombé en désuétude, plutôt que les mots usuels pour l'amour (<em>eros</em>, <em>philia</em>). Ils voulaient éviter toutes les suggestions malencontreuses du mot « amour ». Toutes les traductions modernes qui rendent <em>caritas / agapè</em> par « amour » sont bancales ; l'unique traduction correcte de <em>caritas</em> est <strong>charité</strong>. À une époque où le mot « amour » est devenu un quasi-synonyme de « sexe », l'erreur de traduction est désastreuse.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Pourquoi l'amitié plutôt que l'amour ? Parce que l'amitié vraie est un <strong>amour de bienveillance</strong> · elle cherche le bien de l'aimé, gratuitement, sans intérêt, sans concupiscence. Deux amis peuvent se quitter cinq ans sans rien attendre l'un de l'autre · quand ils se retrouvent, c'est par pure gratuité. L'amour naturel (même conjugal, voulu par Dieu) comporte un <em>intérêt</em> considérable · la fidélité, les enfants, la communauté de vie. La charité, elle, ne comporte <strong>aucun</strong> intérêt.</p>"
+			"html": "<p>Pourquoi l'amitié plutôt que l'amour ? Parce que l'amitié vraie est un <strong>amour de bienveillance</strong> ; elle cherche le bien de l'aimé, gratuitement, sans intérêt, sans concupiscence. Deux amis peuvent se quitter cinq ans sans rien attendre l'un de l'autre ; quand ils se retrouvent, c'est par pure gratuité. L'amour naturel (même conjugal, voulu par Dieu) comporte un <em>intérêt</em> considérable ; la fidélité, les enfants, la communauté de vie. La charité, elle, ne comporte <strong>aucun</strong> intérêt.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'amitié, dans la réalité humaine, est déjà beaucoup plus proche de la charité que ne l'est l'amour. Aristote, le premier, en avait dégagé les caractéristiques ; saint Thomas, à sa suite, s'en sert comme tremplin pour la charité. Deux véritables amis ne sont pas liés par le profit ; leur amitié est au niveau du <em>bien honnête</em>, et non pas du bien utile ou du bien agréable seulement. Il n'y a pas de concupiscence dans l'amitié vraie ; il n'y a aucun enjeu d'intérêt. C'est exactement le terrain naturel sur lequel s'établira ensuite la charité surnaturelle.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Dans toute l'Écriture, l'amitié est ainsi louée sans arrêt, et toujours bien au-dessus de l'amour humain ordinaire. Petite parenthèse : c'est pour cette raison que toutes les traductions modernes du Nouveau Testament qui rendent <em>caritas</em> et <em>agapè</em> par « amour » sont <strong>bancales</strong>. Quand vous lisez « l'amour est patient, l'amour est serviable », et que vous ne savez rien du caractère sublime de la charité, et qu'en plus, dans la culture courante, « l'amour » est presque devenu un synonyme de « sexe », vous êtes en plein contresens. On ne peut plus comprendre ce qu'est l'amour de Dieu.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Reconnaître une fausse amitié",
+			"html": "<p>Prenez deux exemples qui se présentent tout seuls. « J'ai un ami parce qu'il me donne beaucoup d'argent. » Si c'est pour cela que vous êtes l'ami de quelqu'un, elle est belle, votre amitié. Ou bien : « J'ai un ami parce qu'il est très intelligent, et que je brille avec lui dans les salons. » Pas davantage de l'amitié. Une véritable amitié, ce qui est très rare, n'a pas d'autre motif que la <strong>bienveillance</strong> que vous portez à l'autre, et qu'il vous porte ; rien à voir avec le profit que vous en attendez.</p>"
 		},
 		{
 			"kind": "heading",
@@ -67,7 +96,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le seul motif de la charité est la <strong>bonté de Dieu</strong>, dans son mystère surnaturel trinitaire. Et la charité est un mystère parce qu'elle est la vie même de Dieu, au point que saint Jean a osé cette définition de Dieu ·</p>"
+			"html": "<p>Le seul motif de la charité est la <strong>bonté de Dieu</strong>, dans son mystère surnaturel trinitaire. Et la charité est un mystère parce qu'elle est la vie même de Dieu, au point que saint Jean a osé cette définition de Dieu :</p>"
 		},
 		{
 			"kind": "quote",
@@ -76,7 +105,16 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La charité nous permet d'aimer Dieu <em>comme Dieu s'aime lui-même</em>. Pourquoi y a-t-il de la charité en Dieu ? Parce que Dieu n'est pas seul · il y a trois Personnes divines. C'est ce don mutuel et gratuit, entre les Personnes, qui est constitutif de Dieu · et qui permet à saint Jean de dire que Dieu <em>est</em> la charité.</p>"
+			"html": "<p>La charité nous permet d'aimer Dieu <em>comme Dieu s'aime lui-même</em>. Pourquoi y a-t-il de la charité en Dieu ? Parce que Dieu n'est pas seul ; il y a trois Personnes divines. C'est ce don mutuel et gratuit, entre les Personnes, qui est constitutif de Dieu, et qui permet à saint Jean de dire que Dieu <em>est</em> la charité.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "L'intuition des Grecs et la Trinité",
+			"html": "<p>Les Grecs, qui réfléchissaient pourtant à Dieu, n'ont <em>jamais imaginé</em> qu'il puisse y avoir une once d'amour en Dieu. Et quelque part ils avaient raison : un dieu seul, à une seule personne, son amour ne serait qu'<strong>égoïsme</strong>, repli sur lui-même. Comment voulez-vous que Dieu, qui est le souverain bien, aime une chose parce qu'il la trouve bonne, alors que tout bien lui appartient déjà ? Si Dieu est seul, il ne peut pas aimer autre chose que lui. Le mystère trinitaire change tout : si Dieu est trois Personnes, alors son amour n'est plus égoïsme ; c'est le <em>don total</em> de toute la nature divine de l'un à l'autre. Voilà pourquoi notre Dieu est <strong>le bon Dieu</strong> : parce qu'il est trois, et qu'il aime gratuitement.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Et c'est là qu'on saisit pourquoi Dieu n'a <strong>qu'un seul amour</strong>. Nous, nous en avons trois, et nous sommes tiraillés entre eux. Dieu, lui, n'a que la charité ; il ne peut pas en être autrement. Pourquoi ? Parce que pour aimer d'un amour naturel, il faudrait que la bonté de l'aimé soit hors de soi ; or pour Dieu, toute bonté est déjà en lui, puisque c'est lui qui la fait. Dieu n'aime pas l'homme parce que l'homme est bon ; il aime l'homme parce que la bonté de l'homme, c'est <em>lui</em> qui l'a déposée. La beauté de la création, la bonté de l'œuvre, tout cela est d'abord en Dieu, qui en est le créateur. Dieu ne peut donc se porter vers une chose à cause de sa bonté ; il s'y porte à cause de sa propre bonté, qui se déverse. C'est ce qu'on appelle aimer de charité.</p>"
 		},
 		{
 			"kind": "heading",
@@ -86,12 +124,21 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Un homme est capable, par ses seules forces, d'un <strong>double amour naturel</strong> ·</p><ul><li><strong>amour sensible</strong> · la passion (j'aime le chocolat, j'aime la pluie, j'aime les poissons rouges) · attirance vers le bien sensible ·</li><li><strong>amour spirituel</strong> · la volonté (j'aime la vérité, la justice, la beauté) · attirance vers le bien universel.</li></ul><p>Saint Augustin résume · <em>pondus meum amor meus</em> · « mon amour est mon poids », ce qui m'entraîne en avant.</p>"
+			"html": "<p>Un homme est capable, par ses seules forces, d'un <strong>double amour naturel</strong> :</p><ul><li><strong>amour sensible</strong> : la passion (j'aime le chocolat, j'aime la pluie, j'aime les poissons rouges) ; attirance vers le bien sensible</li><li><strong>amour spirituel</strong> : la volonté (j'aime la vérité, la justice, la beauté) ; attirance vers le bien universel.</li></ul><p>Saint Augustin résume ; <em>pondus meum amor meus</em> : « mon amour est mon poids », ce qui m'entraîne en avant.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Les trois chevaux d'un même char",
+			"html": "<p>L'homme est comme un cocher qui conduit un char attelé de <strong>trois chevaux</strong> : l'amour sensible, l'amour spirituel, et la charité. La réussite humaine et chrétienne, c'est de faire marcher ces trois amours dans <em>le même sens</em> ; sinon le char est tiraillé, l'un veut aller à droite, l'autre à gauche, et l'on n'avance plus. La charité, loin de supprimer les deux autres amours, doit les <em>orienter</em> et les <em>surélever</em>, pour que les trois chevaux tirent ensemble.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Le moteur inversé",
-			"html": "<p>Le <em>carburant</em> de tout amour naturel (sensible ou spirituel), c'est <strong>la bonté de l'objet aimé</strong>. J'aime le chocolat parce que c'est bon · j'aime mon ami parce qu'il est bon. Si l'objet devient moins bon, on l'aime moins · s'il devient mauvais, on ne l'aime plus. C'est automatique.</p><p>Or la charité fonctionne <em>à l'envers</em> · son moteur n'est pas la bonté de l'aimé, mais <strong>la bonté de celui qui aime</strong>. Dieu d'abord, qui aime parce qu'<em>il</em> est bon. Nous ensuite, parce que Dieu nous donne cet amour.</p>"
+			"html": "<p>Le <em>carburant</em> de tout amour naturel (sensible ou spirituel), c'est <strong>la bonté de l'objet aimé</strong>. J'aime le chocolat parce que c'est bon ; j'aime mon ami parce qu'il est bon. Si l'objet devient moins bon, on l'aime moins ; s'il devient mauvais, on ne l'aime plus. C'est automatique.</p><p>Or la charité fonctionne <em>à l'envers</em> : son moteur n'est pas la bonté de l'aimé, mais <strong>la bonté de celui qui aime</strong>. Dieu d'abord, qui aime parce qu'<em>il</em> est bon. Nous ensuite, parce que Dieu nous donne cet amour.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Ce mécanisme du carburant explique le grand drame de l'amour conjugal purement naturel. <strong>On épouse une femme de 20 ans ; et puis quand elle a 80 ans, c'est plus difficile.</strong> Si l'on en reste à l'amour naturel seul, sensible ou spirituel, on dépend tout entier de la bonté de l'objet aimé ; quand cette bonté visible diminue, l'amour diminue aussi. C'est automatique, c'est terrible, et c'est tout l'amour humain. La charité, elle, ne diminue pas avec l'âge de l'épouse, parce qu'elle n'a jamais eu pour carburant la jeunesse ou la beauté ; elle a pour moteur la bonté reçue de Dieu.</p>"
 		},
 		{
 			"kind": "heading",
@@ -101,15 +148,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Pierre aime Paul · pourquoi ?</p><ul><li><em>Amour naturel</em> · Pierre aime Paul parce que <strong>Paul est bon</strong> (loyal, agréable, etc.).</li><li><em>Charité</em> · Pierre aime Paul parce que <strong>Pierre est bon</strong> · la bienveillance se déverse de Dieu sur Pierre, et de Pierre sur Paul, indépendamment de la bonté de Paul.</li></ul><p>De là deux conséquences immédiates ·</p>"
+			"html": "<p>Pierre aime Paul ; pourquoi ?</p><ul><li><em>Amour sensible</em> : Pierre aime Paul parce que Paul est agréable, toujours de bonne humeur, ou même parce qu'il a de l'argent. Ce n'est pas de l'amitié ; c'est de l'intérêt.</li><li><em>Amour spirituel</em> : Pierre aime Paul parce que Paul a des qualités de fond, de loyauté, de droiture. Déjà beaucoup mieux ; mais c'est toujours <strong>la bonté de Paul</strong> qui fait que Pierre l'aime.</li><li><em>Charité</em> : Pierre, devenu chrétien, reçoit de Dieu cette bienveillance. Pierre n'a plus besoin des qualités de Paul pour aimer Paul ; il l'aime parce que la bonté de Dieu se déverse de Dieu sur Pierre, et de Pierre sur Paul. Tout autre motif, toute autre réalité.</li></ul><p>De là deux conséquences immédiates :</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>1.</strong> <em>Dieu nous a aimés le premier, alors que nous étions mauvais, parce que lui est bon.</em> (cf. 1 Jn 4, 19) · il a pris l'initiative, parce qu'il a en lui-même cette bonté qui s'épanche.</p>"
+			"html": "<p><strong>1.</strong> <em>Dieu nous a aimés le premier, alors que nous étions mauvais, parce que lui est bon.</em> (cf. 1 Jn 4, 19) ; il a pris l'initiative, parce qu'il a en lui-même cette bonté qui s'épanche.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>2.</strong> Nous pouvons aimer nos ennemis. C'est strictement <em>impossible</em> à l'amour naturel · un ennemi, en tant qu'ennemi, est mauvais pour moi · je ne peux que m'en défendre. Mais si <em>moi</em> je suis bon (par la charité reçue), alors je peux aimer celui qui ne m'aime pas.</p>"
+			"html": "<p><strong>2.</strong> Nous pouvons aimer nos ennemis. C'est strictement <em>impossible</em> à l'amour naturel ; un ennemi, en tant qu'ennemi, est mauvais pour moi ; je ne peux que m'en défendre. Mais si <em>moi</em> je suis bon (par la charité reçue), alors je peux aimer celui qui ne m'aime pas.</p>"
 		},
 		{
 			"kind": "quote",
@@ -118,7 +165,19 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Dieu fait pleuvoir sur les bons et les méchants, il fait lever son soleil sur les justes et les injustes. C'est précisément cela, la charité · la gratuité absolue de l'amour divin. Et c'est pourquoi la nôtre est la seule religion à appeler Dieu <em>le bon Dieu</em>.</p>"
+			"html": "<p>Jésus ne va pas par le dos de la cuillère : prier pour ceux qui nous persécutent ; bénir ceux qui nous maudissent ; tendre la joue droite à celui qui nous frappe sur la gauche ; donner sa tunique à celui qui veut prendre son manteau ; faire deux mille pas avec celui qui nous en demande mille. Ce n'est pas humain, c'est <strong>impossible sans la charité</strong>. Mais Dieu fait précisément comme cela, et la charité nous fait ressembler à Dieu.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Refrain qu'il faut graver : Dieu <strong>fait tomber sa pluie sur les bons et les méchants</strong>, et <strong>lever son soleil sur les justes et les injustes</strong>. Dieu passe son temps à faire du bien à des gens qui, pour le moins, ne lui font pas de bien, et qui souvent lui font du mal. C'est cela, la charité ; cette gratuité absolue de l'amour divin. Dieu aime parce qu'il est bon, c'est tout. Et voilà pourquoi nous sommes la seule religion à appeler Dieu <em>le bon Dieu</em> ; il est bon parce qu'il est bon ; l'amour est en lui, c'est sa constitution même.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Reprenons la formule : Dieu <em>fait pleuvoir sur les bons et les méchants, fait lever son soleil sur les justes comme sur les injustes</em>. Cette image revient sans cesse dans l'Évangile, et c'est toute la morale du Nouveau Testament : <strong>faites comme Dieu</strong>. Lui fait du bien à ceux qui lui font du mal ; il bénit ceux qui le maudissent. Si la charité est en moi, elle me fait ressembler à Dieu, fondamentalement ; je deviens capable de faire du bien à des gens qui m'en font peu, ou qui m'en font même du mal. C'est strictement <em>inimaginable</em> à l'homme livré à ses seules forces ; et pourtant Jésus le demande, parce qu'il sait que la charité le rend possible.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Attention à une fausse pudeur. On n'aime pas un ennemi en tant qu'il est ennemi : sous cet aspect formel, il est mauvais pour moi, il me persécute, il me nuit, il veut me prendre ce qui m'appartient ; je devrais plutôt me défendre. On aime l'ennemi en tant qu'il est <em>homme</em>, en tant qu'il y a en lui quelque chose qui peut être recréé par la bonté reçue de Dieu. C'est une distinction capitale : la charité ne demande pas de devenir sot ou de tendre la joue sans intelligence ; elle demande de continuer à vouloir le bien de celui qui me veut du mal, parce que je suis bon, et que Dieu, en moi, est bon.</p>"
 		},
 		{
 			"kind": "heading",
@@ -128,11 +187,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Attention · la charité ne <strong>supprime pas</strong> les amours naturels · elle les surélève. Imaginez ce mari qui dirait à sa femme · « Ma chérie, je t'aime de charité · sensiblement tu ne me fais rien, naturellement je ne t'aime pas non plus, mais de charité je t'aime parce que <em>moi</em> je suis bon. » Il prendrait deux paires de claques · il ne les aurait pas volées. L'effet du sacrement de mariage est précisément d'<em>ajouter</em> la charité aux deux autres amours, pas de les remplacer.</p>"
+			"html": "<p>Attention ; la charité ne <strong>supprime pas</strong> les amours naturels ; elle les surélève. Imaginez ce mari qui dirait à sa femme ; « Ma chérie, je t'aime de charité ; sensiblement tu ne me fais rien, naturellement je ne t'aime pas non plus, mais de charité je t'aime parce que <em>moi</em> je suis bon. » <strong>Il prendrait deux paires de claques ; il ne les aurait pas volées.</strong> Autrement dit, il irait dire à sa femme : « je t'aime non pas parce que tu es belle, mais parce que moi je suis bon. » N'essayez pas, ça ne marchera pas ; ça tournera très mal. L'effet du sacrement de mariage est précisément d'<em>ajouter</em> la charité aux deux autres amours, pas de les remplacer.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Saint Thomas va plus loin · <strong>la charité entre deux personnes est plus grande quand elle est sous-tendue par un amour naturel fort</strong>. On doit aimer son frère de charité plus qu'un autre, parce qu'il est naturellement plus proche. Parmi les douze apôtres, il y avait trois paires de frères (Simon-André, Jean-Jacques, Simon-Jude) · saint Thomas remarque que Pierre devait aimer André de charité plus que les autres apôtres, parce que la charité était sous-tendue par la fraternité naturelle. La charité ne combat pas la nature · elle la décuple.</p>"
+			"html": "<p>Saint Thomas va plus loin ; <strong>la charité entre deux personnes est plus grande quand elle est sous-tendue par un amour naturel fort</strong>. On doit aimer son frère de charité plus qu'un autre, parce qu'il est naturellement plus proche. Parmi les douze apôtres, il y avait trois paires de frères (Simon-André, Jean-Jacques, Simon-Jude) ; saint Thomas remarque que Pierre devait aimer André de charité plus que les autres apôtres, parce que la charité était sous-tendue par la fraternité naturelle. La charité ne combat pas la nature ; elle la décuple.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Entre époux, cela se voit très bien : la charité reçue par le sacrement de mariage doit <em>multiplier</em> l'amour naturel, et non pas le combattre. Quand un homme va dans le même sens avec ses trois chevaux (le sensible, le spirituel, la charité), il avance, il vit ; quand les trois chevaux tirent chacun dans leur direction, le char piétine et finit par se renverser. La grâce du sacrement, c'est précisément d'orienter les trois amours dans le même sens, pour que tout le poids du cœur converge vers Dieu, et, dans la même course, vers l'épouse, vers les enfants, vers les amis. C'est tout sauf un combat ; c'est une <strong>convergence</strong>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -148,16 +211,28 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>C'est <strong>le même amour</strong> qui nous fait aimer Dieu et le prochain · il n'y a qu'une charité. Celui qui aime Dieu a reçu de Dieu cet amour · il est devenu bon lui-même · dès lors, il est comme Dieu, et aime gratuitement tous les autres, comme Dieu. <em>La charité ne trie pas.</em> Il n'y a pas de charité sélective · si quelqu'un a beaucoup de « charité » envers un certain cercle et déteste les autres, c'est qu'il n'a pas de charité du tout.</p>"
+			"html": "<p>C'est <strong>le même amour</strong> qui nous fait aimer Dieu et le prochain ; il n'y a qu'une charité. Celui qui aime Dieu a reçu de Dieu cet amour ; il est devenu bon lui-même ; dès lors, il est comme Dieu, et aime gratuitement tous les autres, comme Dieu. <em>La charité ne trie pas.</em> Il n'y a pas de charité sélective ; si quelqu'un a beaucoup de « charité » envers un certain cercle et déteste les autres, c'est qu'il n'a pas de charité du tout.</p>"
 		},
 		{
 			"kind": "quote",
-			"html": "<p>Si quelqu'un dit · « j'aime Dieu », et qu'il haïsse son frère, c'est un menteur · celui qui n'aime pas son frère qu'il voit, comment pourrait-il aimer Dieu qu'il ne voit pas ?</p>",
+			"html": "<p>Si quelqu'un dit ; « j'aime Dieu », et qu'il haïsse son frère, c'est un menteur ; celui qui n'aime pas son frère qu'il voit, comment pourrait-il aimer Dieu qu'il ne voit pas ?</p>",
 			"attribution": "1 Jn 4, 20"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Phrase magnifique de saint Jean · on peut toujours <em>baratiner</em> les hommes en disant « Mon Dieu, je vous aime » · Dieu ne se voit pas, le mensonge est facile. Mais la charité envers le prochain, elle, <strong>se mesure, se vérifie</strong>. Les gens qui sont des pestes, méchants, désagréables, insupportables · qu'ils ne viennent pas nous raconter qu'ils aiment Dieu · ce sont des menteurs, dit saint Jean.</p>"
+			"html": "<p>Phrase magnifique de saint Jean ; on peut toujours <em>baratiner</em> les hommes en disant « Mon Dieu, je vous aime » ; Dieu ne se voit pas, le mensonge est facile. Mais la charité envers le prochain, elle, <strong>se mesure, se vérifie</strong>. Les gens qui sont des pestes, méchants, désagréables, insupportables ; qu'ils ne viennent pas nous raconter qu'ils aiment Dieu ; ce sont des menteurs, dit saint Jean.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pas tous ceux qui disent <em>« Seigneur, Seigneur »</em> qui entreront dans le royaume des cieux, dit Jésus ; ce sont ceux qui font la volonté du Père. La charité envers Dieu, on peut s'en convaincre soi-même à grand renfort d'efforts intérieurs ; mais la charité envers le prochain, elle, ne se simule pas. Si vous voulez savoir si vous aimez Dieu, regardez d'abord si vous aimez votre prochain ; la réponse est là, et nulle part ailleurs.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Qu'est-ce que la charité, concrètement ? À l'exemple de saint Paul, on peut la décrire : c'est ce <strong>coup d'œil de bienveillance</strong> que vous portez sur le prochain, sans aucun autre motif. Vous l'avez ou vous ne l'avez pas. Ce n'est pas naturel ; naturellement on regarde l'autre en pesant : « tiens, lui, il a une qualité, ça me plaît » ; « lui, je passe de bons moments avec lui ». Non, ce coup d'œil-là, c'est encore du calcul. La charité, c'est le coup d'œil bienveillant <em>sans motif</em>, et il se vérifie, et il se vérifie, et il se vérifie.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Celui qui est dans la charité vis-à-vis de Dieu est, par là même, dans la charité vis-à-vis du prochain. Qu'est-ce qui le prouve ? Il est <em>agréable</em> à son prochain, il lui <em>fait du bien</em>, toujours, comme Dieu fait avec nous. Ne vous posez donc pas la question impossible « est-ce que j'aime vraiment Dieu ? » ; posez-vous la question vérifiable : « est-ce que je fais réellement du bien autour de moi ? ». Si vous aimez le prochain, vous pouvez être sûr que cet amour vous vient de Dieu et qu'il retombe sur Dieu, parce que la charité est <strong>une et indivisible</strong>.</p>"
 		},
 		{
 			"kind": "heading",
@@ -167,12 +242,20 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Une difficulté · si la charité est une amitié, elle doit être <em>réciproque</em>. Or comment être l'ami d'un non-ami ? Pour Dieu, pas de problème · qui l'aime en est aimé, échange parfait. Pour le prochain · même envers un ennemi, il y a déjà <em>échange</em> de biens · parce que cet amour gratuit que je déverse sur lui <em>tend à provoquer</em> en lui un retour. C'est cela, la charité <em>créatrice</em>.</p>"
+			"html": "<p>Une difficulté ; si la charité est une amitié, elle doit être <em>réciproque</em>. Or comment être l'ami d'un non-ami ? Il n'y a pas d'ami d'un ami ; pour qu'il y ait deux amis, il faut que l'un soit ami de l'autre, et vice versa. Les gens qui vous trouvent sympathique, qui vous poursuivent de leur amitié sans que vous y répondiez, ne sont pas vos amis ; pour être l'ami de quelqu'un, il faut que ce quelqu'un soit votre ami.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Pour Dieu, pas de problème ; qui l'aime en est aimé, échange parfait. Mais c'est aussi <em>en nous</em> que la charité commence à devenir réciproque : Dieu nous aime de charité, et quand cet amour est rendu à Dieu, alors c'est la <strong>parfaite charité</strong>. Quelqu'un qui n'aime pas Dieu, qui pourtant l'aime tant, est anormal ; c'est un ours difforme, c'est quelque chose de monstrueux. Pour le prochain ; même envers un ennemi, il y a déjà <em>échange</em> de biens, parce que cet amour gratuit que je déverse sur lui <em>tend à provoquer</em> en lui un retour. C'est cela, la charité <em>créatrice</em>.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La charité créatrice",
-			"html": "<p><strong>La charité est un amour créateur · elle n'attend pas la bonté de l'autre, elle la <em>provoque</em>.</strong> (Comme Dieu a fait avec nous · il nous a aimés alors que nous étions mauvais, et c'est sa bonté communiquée qui nous a rendus moins mauvais, et même bons chez les saints.) On ne désespère jamais d'un homme si on l'aime · il y a toujours la possibilité d'être recréé par la charité.</p>"
+			"html": "<p><strong>La charité est un amour créateur ; elle n'attend pas la bonté de l'autre, elle la <em>provoque</em>.</strong> (Comme Dieu a fait avec nous ; il nous a aimés alors que nous étions mauvais, et c'est sa bonté communiquée qui nous a rendus moins mauvais, et même bons chez les saints.) On ne désespère jamais d'un homme si on l'aime ; il y a toujours la possibilité d'être recréé par la charité.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Relisez le chapitre 13 de la première aux Corinthiens : personne n'a mieux exprimé les effets de la charité. <em>Elle supporte tout, elle croit tout, elle espère tout, elle endure tout.</em> Pourquoi croit-elle tout, espère-t-elle tout ? Parce qu'elle <strong>provoque la bonté</strong>. Elle ne désespère jamais d'un homme ; tant qu'il y a la charité, il y a la possibilité que celui qu'on aime devienne meilleur. C'est pour cela aussi que la charité parfaite <em>bannit la crainte</em> : quelqu'un qui aime Dieu de tout son cœur n'a plus peur de Dieu ; sa seule crainte est l'amour filial, la peur de blesser celui qu'on aime, et rien d'autre.</p>"
 		},
 		{
 			"kind": "heading",
@@ -182,12 +265,16 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La charité a un <strong>ordre</strong>. Nous devons aimer les êtres selon le degré de proximité qu'ils ont avec Dieu et avec nous-mêmes. Aimer tout le monde indistinctement, sur un mode abstrait, est <em>hypocrite</em> · il est facile d'aimer des gens à dix mille kilomètres · cela ne coûte rien. La parabole du bon Samaritain le dit · l'homme tombé aux mains des brigands devient le <em>prochain</em> de celui qui passe à côté · il n'était pas son prochain avant.</p>"
+			"html": "<p>La charité a un <strong>ordre</strong>. Nous devons aimer les êtres selon le degré de proximité qu'ils ont avec Dieu et avec nous-mêmes. Aimer tout le monde indistinctement, sur un mode abstrait, est <em>hypocrite</em> ; il est facile d'aimer des gens à dix mille kilomètres ; cela ne coûte rien. La parabole du bon Samaritain le dit ; l'homme tombé aux mains des brigands devient le <em>prochain</em> de celui qui passe à côté ; il n'était pas son prochain avant.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "L'ordre concret",
-			"html": "<p>Pour un homme marié · après Dieu, l'être le plus proche est <strong>sa femme</strong>, avant ses enfants, avant ses parents, avant ses frères, avant ses amis. Une femme et son mari sont <em>« deux en un seul »</em> · rien de plus proche. La charité due à un époux est plus grande que celle due aux enfants. Un frère est plus proche qu'un bon ami. Et ainsi de suite · plus la communication des biens est étroite, plus la charité doit être grande.</p>"
+			"html": "<p>Pour un homme marié ; après Dieu, l'être le plus proche est <strong>sa femme</strong>, avant ses enfants, avant ses parents, avant ses frères, avant ses amis. Une femme et son mari sont <em>« deux en un seul »</em> : rien de plus proche. La charité due à un époux est plus grande que celle due aux enfants. Un frère est plus proche qu'un bon ami. Et ainsi de suite ; plus la communication des biens est étroite, plus la charité doit être grande.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Messieurs et mesdames, les gens mariés qui m'écoutent, demandez-vous si la plus grande charité que vous avez dans votre vie, après Dieu, c'est bien envers votre épouse ou votre époux. Avant les enfants, avant le père, avant la mère, avant les frères. Une femme est beaucoup plus proche de son mari, avec qui elle fait <em>un</em>, que de ses propres enfants ; donc elle lui doit, dans l'ordre de la charité, davantage. Cela n'enlève évidemment rien à l'amour qu'on doit aux enfants ; mais l'ordre est là, et il faut le respecter, parce qu'il découle de la nature des liens.</p>"
 		},
 		{
 			"kind": "heading",
@@ -203,7 +290,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La charité étant surnaturelle, elle est directement donnée par Dieu. Concrètement ·</p><ul><li>par le <strong>baptême</strong>, qui met dans l'âme tout l'organisme surnaturel (foi, espérance, charité) · même chez le bébé, à l'état embryonnaire · les actes propres viendront plus tard ·</li><li>par tous les autres sacrements, et surtout par la <strong>communion eucharistique</strong>, qui est le point culminant de la charité ·</li><li>par toute augmentation de la <em>grâce sanctifiante</em>, à laquelle la charité est toujours liée.</li></ul><p>La grâce est un <em>habitus</em> logé dans l'essence de l'âme · la charité est un habitus opératif, logé dans la volonté · réalités distinctes, mais qui ne vont jamais l'une sans l'autre.</p>"
+			"html": "<p>La charité étant surnaturelle, elle est directement donnée par Dieu. Concrètement :</p><ul><li>par le <strong>baptême</strong>, qui met dans l'âme tout l'organisme surnaturel (foi, espérance, charité) ; même chez le bébé, à l'état embryonnaire ; les actes propres viendront plus tard</li><li>par tous les autres sacrements, et surtout par la <strong>communion eucharistique</strong>, qui est le point culminant de la charité</li><li>par toute augmentation de la <em>grâce sanctifiante</em>, à laquelle la charité est toujours liée.</li></ul><p>La grâce est un <em>habitus</em> logé dans l'essence de l'âme ; la charité est un habitus opératif, logé dans la volonté ; réalités distinctes, mais qui ne vont jamais l'une sans l'autre.</p>"
 		},
 		{
 			"kind": "heading",
@@ -213,16 +300,29 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Comme tous les dons surnaturels, la charité ne diminue pas · mais elle peut <strong>disparaître tout à fait</strong>. Et elle se perd beaucoup plus facilement que la foi ou l'espérance · pas besoin d'un péché spécifique contre elle · <em>tout péché mortel</em> la fait perdre.</p>"
+			"html": "<p>Comme tous les dons surnaturels, la charité ne diminue pas, mais elle peut <strong>disparaître tout à fait</strong>. Et elle se perd beaucoup plus facilement que la foi ou l'espérance ; pas besoin d'un péché spécifique contre elle ; <em>tout péché mortel</em> la fait perdre.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Pourquoi ? Parce que dans tout péché mortel, le pécheur préfère, dans une matière grave, un mal que Dieu réprouve · il préfère donc ce bien à Dieu. Il n'aime plus Dieu par-dessus tout. C'est incompatible. Pour retrouver la charité, il faut un <em>acte de charité parfaite</em> (qui suppose de rejeter le mal qu'on a préféré · garder la moto volée tout en se confessant ne marche pas) · ou, à défaut, un acte de contrition imparfaite et une confession sacramentelle.</p>"
+			"html": "<p>Pourquoi ? Parce que dans tout péché mortel, le pécheur préfère, dans une matière grave, un mal que Dieu réprouve ; il préfère donc ce bien à Dieu. Il n'aime plus Dieu par-dessus tout. C'est incompatible. Pour retrouver la charité, il faut un <em>acte de charité parfaite</em> (qui suppose de rejeter le mal qu'on a préféré ; garder la moto volée tout en se confessant ne marche pas) ; ou, à défaut, un acte de contrition imparfaite et une confession sacramentelle.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Comparons aux deux autres vertus théologales. Pour <em>perdre la foi</em>, il faut un péché caractéristique contraire directement à la foi : doute, apostasie, hérésie. Un crime abominable, en soi, ne fait pas perdre la foi ; il n'est pas dirigé contre elle. Pour <em>perdre l'espérance</em>, il faut un péché contre l'espérance : présomption ou désespoir. Mais pour <strong>perdre la charité</strong>, c'est beaucoup plus délicat : tout péché mortel suffit, parce que tout péché mortel implique, par sa structure même, de préférer quelque chose à Dieu. Quelqu'un qui doit aimer sa femme sensiblement, spirituellement et de charité, et qui la trompe, ne fait pas seulement perdre la charité : il a déjà, le plus souvent, perdu les autres amours auparavant.</p>"
+		},
+		{
+			"kind": "definition",
+			"term": "Le voleur de moto au confessionnal",
+			"html": "<p>Souvenez-vous de cet exemple moral. Un jeune homme a fini par craquer ; il a volé une <strong>belle motola de 25 000 euros dans la vitrine</strong> du magasin. Il arrive au confessionnal : « Mon père, pardonnez-moi, j'ai fait quelque chose de très mal, c'est terrible, je n'arrive plus à dormir. » Le prêtre l'écoute. Mais si, derrière, le jeune homme garde la moto, il <em>continue à préférer le mal</em> ; cette moto qui ne lui appartient pas, il l'a, il l'aime. Il faut qu'il vende la moto, ou plutôt qu'il la rende. Sans cela, pas d'acte de charité parfaite possible ; il reste dans son péché mortel.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>C'est pour la même raison qu'on demande aux pénitents non seulement de regretter, mais d'<em>abandonner l'affection au mal</em> qu'ils ont commis. Sans cela, le sacrement ne tient pas. On peut être tout à fait sincère dans la peine qu'on éprouve, et garder pourtant l'objet ou la liaison qui était la matière du péché. Le pénitent doit avoir vraiment décidé de quitter le mal ; sinon il continue à le préférer à Dieu, et la charité ne peut pas rentrer dans une volonté qui dit oui à Dieu en parole mais qui dit oui au mal en acte.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "L'acte de charité parfaite",
-			"html": "<p>Loin d'être difficile, il est <strong>à la portée de tous</strong>. Arrêtez-vous deux minutes · est-ce que Dieu est souverainement aimable ? Oui. Est-ce qu'il vous refusera la charité ? Non, il ne demande qu'à la donner. Est-ce qu'il vous aime infiniment plus que vous ne sauriez l'imaginer ? Oui. Alors il ne reste qu'à <em>abandonner le mal</em> · c'est cela, l'acte de charité parfaite. N'attendez pas d'aller vous confesser pour le faire.</p>"
+			"html": "<p>Loin d'être difficile, il est <strong>à la portée de tous</strong>. Arrêtez-vous deux minutes ; est-ce que Dieu est souverainement aimable ? Oui. Est-ce qu'il vous refusera la charité ? Non, il ne demande qu'à la donner. Est-ce qu'il vous aime infiniment plus que vous ne sauriez l'imaginer ? Oui. Alors il ne reste qu'à <em>abandonner le mal</em> : c'est cela, l'acte de charité parfaite. N'attendez pas d'aller vous confesser pour le faire.</p>"
 		},
 		{
 			"kind": "heading",
@@ -238,7 +338,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Toutes les autres vertus disparaîtront au ciel · les vertus morales (prudence, justice, force, tempérance) n'y auront plus de fonction. <strong>La foi disparaît</strong> · on ne croit plus en Dieu, on le voit. <strong>L'espérance disparaît</strong> · on n'attend plus Dieu, on le possède. Seule la <strong>charité demeure</strong> · elle est le seul lien véritable entre le ciel et la terre, la seule chose qui passe de l'un à l'autre.</p>"
+			"html": "<p>Toutes les autres vertus disparaîtront au ciel ; les vertus morales (prudence, justice, force, tempérance) n'y auront plus de fonction. <strong>La foi disparaît</strong> : on ne croit plus en Dieu, on le voit. <strong>L'espérance disparaît</strong> : on n'attend plus Dieu, on le possède. Seule la <strong>charité demeure</strong> ; elle est le seul lien véritable entre le ciel et la terre, la seule chose qui passe de l'un à l'autre.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Au ciel, on n'a plus besoin de vertus morales : on les exercera sans effort. La foi : « je ne crois pas que vous existez, je sais que vous existez puisque je vous vois ». L'espérance : « je ne vais plus attendre Dieu, puisque je le tiens, je le possède ». Mais la charité, on aime toujours Dieu au ciel. C'est très clair : la charité est la <em>seule chose</em> qui passe de la terre au ciel sans changer de nature ; tout le reste change, parce que la condition change ; la charité, elle, demeure la même, parce qu'elle est déjà, ici-bas, ce qu'elle sera là-haut.</p>"
 		},
 		{
 			"kind": "heading",
@@ -248,17 +352,30 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Sans la charité, un homme n'est rien et toutes ses autres vertus n'existent pas. Saint Paul est catégorique ·</p>"
+			"html": "<p>Sans la charité, un homme n'est rien et toutes ses autres vertus n'existent pas. Saint Paul est catégorique :</p>"
 		},
 		{
 			"kind": "quote",
-			"html": "<p>Quand je parlerais les langues des hommes et des anges, si je n'ai pas la charité, je suis un airain qui sonne ou une cymbale qui retentit. Quand j'aurais le don de prophétie, la science de tous les mystères, toute la foi à transporter les montagnes · si je n'ai pas la charité, je ne suis rien. Quand je distribuerais tous mes biens, je livrerais mon corps aux flammes · si je n'ai pas la charité, cela ne me sert de rien.</p>",
+			"html": "<p>Quand je parlerais les langues des hommes et des anges, si je n'ai pas la charité, je suis un airain qui sonne ou une cymbale qui retentit. Quand j'aurais le don de prophétie, la science de tous les mystères, toute la foi à transporter les montagnes ; si je n'ai pas la charité, je ne suis rien. Quand je distribuerais tous mes biens, je livrerais mon corps aux flammes ; si je n'ai pas la charité, cela ne me sert de rien.</p>",
 			"attribution": "1 Co 13, 1-3"
 		},
 		{
 			"kind": "definition",
+			"term": "Saint Laurent grillé sur les deux côtés",
+			"html": "<p>Pesez bien la phrase de saint Paul : « si je livrais mon corps aux flammes ». Prenez le martyre le plus héroïque qui soit : <strong>saint Laurent, grillé sur les deux côtés</strong> sur son gril. Eh bien, sans la charité, ce martyre serait <em>zéro</em>. Le corps consumé, oui ; la souffrance, oui ; mais s'il n'y a pas la charité au fond, ça ne sert de rien. C'est dire à quel point la charité <em>informe</em> tout : on peut faire le geste le plus extrême, sans la charité ce n'est qu'un cadavre de vertu. Saint Laurent, lui, avait la charité ; voilà pourquoi son martyre nous parle encore.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Suivons la liste de saint Paul. <em>Si j'avais la science de tous les mystères, si je connaissais la langue des hommes et des anges</em> : sans la charité, je ne suis rien, je suis un airain qui sonne. Pas de vertu de science sans la charité. <em>Si j'avais la foi à transporter les montagnes</em> : sans la charité, je ne suis rien. <em>Si je distribuais tous mes biens aux pauvres</em> : pas mal, ça ; eh bien sans la charité, ce n'est rien. <em>Si je livrais mon corps aux flammes</em> : héroïsme absolu ; sans la charité, zéro. Vous voyez bien qu'il n'y a pas de vertu sans la charité ; c'est impossible ; les autres « vertus » sans la charité ne sont que <strong>matière de vertu, squelette de vertu, cadavre de vertu</strong>. La vertu formellement, c'est la charité.</p>"
+		},
+		{
+			"kind": "definition",
 			"term": "À la base, non au sommet",
-			"html": "<p>Saint Paul écrit ailleurs · <em>« par-dessus tout cela, ayez la charité, qui est le lien de la perfection »</em> (Col 3, 14). À première vue on croirait que la charité couronne les vertus, qu'elle est la dernière acquise. <strong>C'est faux</strong>. Saint Thomas est formel · il n'y a pas <em>une seule</em> vertu si elle n'est pas informée par la charité. Ce sont des squelettes, des cadavres de vertus · pas des vertus. La charité est à la <strong>base</strong>, non au sommet · c'est elle qu'il faut enclencher en premier dans la vie spirituelle · les autres suivront comme conséquences.</p>"
+			"html": "<p>Saint Paul écrit ailleurs : <em>« par-dessus tout cela, ayez la charité, qui est le lien de la perfection »</em> (Col 3, 14). À première vue on croirait que la charité couronne les vertus, qu'elle est la dernière acquise. <strong>C'est faux</strong>. Saint Thomas est formel ; il n'y a pas <em>une seule</em> vertu si elle n'est pas informée par la charité. Ce sont des squelettes, des cadavres de vertus ; pas des vertus. La charité est à la <strong>base</strong>, non au sommet : c'est elle qu'il faut enclencher en premier dans la vie spirituelle ; les autres suivront comme conséquences.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Il faut donc tout de suite enclencher la charité, dès le départ de la vie spirituelle. Aimer Dieu, aimer le prochain : les autres vertus arriveront avec, parce qu'il n'y a pas de vertu sans charité. Si, à l'inverse, vous faites tout le reste sans la charité, qu'avez-vous fait ? <em>Rien</em>, dit saint Paul ; zéro, absolument rien, vous n'êtes rien. C'est le moteur, c'est le carburant ; sans lui, tout l'édifice n'est que matière, squelette, cadavre. Avec lui, tout le reste prend vie, vient à sa place, et l'on devient peu à peu miséricordieux, patient, bon, pardonnant ; non pas avant la charité, mais grâce à elle.</p>"
 		},
 		{
 			"kind": "heading",
@@ -268,21 +385,29 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>La perfection chrétienne consiste dans l'<strong>union à Dieu</strong> · ce que seule la charité accomplit. David l'avait deviné mille ans avant Jésus-Christ ·</p>"
+			"html": "<p>La perfection chrétienne consiste dans l'<strong>union à Dieu</strong> : ce que seule la charité accomplit. Quelle est la perfection d'un homme, son bien le plus haut ? Pour le roi-prophète, c'est <em>ne faire qu'un avec Dieu</em>. David l'avait deviné mille ans avant Jésus-Christ :</p>"
 		},
 		{
 			"kind": "quote",
-			"html": "<p>Mihi adhærere Deo bonum est · pour moi, mon bien est d'adhérer à Dieu.</p>",
+			"html": "<p>Mihi adhærere Deo bonum est ; pour moi, mon bien est d'adhérer à Dieu.</p>",
 			"attribution": "Ps 73, 28"
 		},
 		{
 			"kind": "definition",
-			"term": "Le Dieu des consolations",
-			"html": "<p>Saint François de Sales · <em>« il faut aimer le Dieu des consolations, et non pas les consolations de Dieu. »</em> Dès que vous aimez Dieu pour un autre motif que Dieu (les bienfaits qu'il vous accorde, la vocation qu'il vous a donnée, le paradis qu'il vous promet), ce n'est plus la charité parfaite. Le ciel, d'ailleurs, c'est Dieu · l'aimer pour le ciel revient à l'aimer pour lui-même. Il faut aimer Dieu parce que <strong>Dieu est Dieu</strong>, et surtout parce qu'il vous donne de l'aimer comme il s'aime lui-même.</p>"
+			"term": "Le Dieu des consolations (saint Denys, saint François de Sales)",
+			"html": "<p>Aparté pour les séminaristes d'abord, et pour les autres ensuite. <strong>Saint Denys</strong> l'avait formulé, et <strong>saint François de Sales</strong> l'a repris : <em>« il faut aimer le Dieu des consolations, et non pas les consolations de Dieu. »</em> Dès que vous aimez Dieu pour un autre motif que Dieu (les bienfaits qu'il vous accorde, la vocation qu'il vous a donnée, le paradis qu'il vous promet), ce n'est plus la charité parfaite. Bien sûr, il faut <em>remercier</em> Dieu pour les dons qu'il vous a faits, et ils sont immenses ; mais vous n'aimez pas Dieu à cause de ces dons. Vous aimez Dieu parce que <strong>Dieu est Dieu</strong>, et surtout parce qu'il vous donne de l'aimer comme il s'aime lui-même.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Voilà pourquoi les apôtres ont ressorti un mot ancien presque inusité, <em>agapè</em>, pour désigner cette chose qui est Dieu sur la terre · cela s'appelle la charité · comme ce sera Dieu au ciel. <em>Charitas numquam excidit</em> · la charité ne passera jamais (1 Co 13, 8). Je vous la souhaite à tous.</p>"
+			"html": "<p>Une précision utile, car on ne vit pas dans la charité parfaite. Tant qu'on est pécheur (et nous le sommes tous, et grandement), il vaut mieux <em>garder</em> les motifs d'aimer Dieu pour ses bienfaits, garder la crainte de Dieu, parce que ces appuis nous tiennent dans le bon chemin. La charité parfaite, qui bannit la crainte et tout intérêt, est l'état d'un saint accompli ; nous, nous y tendons. On peut imaginer un homme qui, à force d'aimer Dieu de tout son cœur, n'attendrait plus rien de Dieu (au sens où il n'aurait plus besoin d'arguments pour aimer), et n'aurait plus aucune crainte de Dieu qu'une crainte purement filiale, la peur de blesser celui qu'on aime. C'est l'idéal vers lequel marche la vie spirituelle.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Voilà pourquoi les apôtres ont ressorti un mot ancien presque inusité, <em>agapè</em>, pour désigner cette chose qui est Dieu sur la terre ; cela s'appelle la charité ; comme ce sera Dieu au ciel. <em>Charitas numquam excidit</em> : la charité ne passera jamais (1 Co 13, 8). Je vous la souhaite à tous.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Petit récapitulatif. La charité est <strong>une amitié avec Dieu</strong> : amour de bienveillance, gratuit, sans intérêt, dont le seul motif est la bonté de celui qui aime. Elle est <strong>une réalité unique</strong> : amour de Dieu, du prochain, des ennemis, des saints, tout cela par le même mouvement intérieur, et l'amour de Dieu se vérifie à l'amour du prochain. Elle a <strong>un ordre</strong> : la femme avant les enfants, le frère avant l'ami, le proche avant le lointain. Elle est <strong>la base</strong> de toute vertu, non leur couronnement : sans elle, rien ; avec elle, tout. Elle est <strong>la seule vertu éternelle</strong> : la foi et l'espérance disparaîtront, la charité demeure. Vivez de la charité.</p>"
 		}
 	]
 }

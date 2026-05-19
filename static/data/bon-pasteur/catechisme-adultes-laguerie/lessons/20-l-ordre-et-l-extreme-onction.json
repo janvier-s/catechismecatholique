@@ -12,17 +12,21 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Deux sacrements sanctifient un <strong>état de vie</strong> · les cinq autres sont ordonnés à la sainteté du chrétien comme individu · ces deux-ci sont ordonnés à la <em>société</em> surnaturelle qu'est l'Église ·</p><ul><li>le <strong>mariage</strong>, pour l'<em>accroissement</em> de la société chrétienne ·</li><li>l'<strong>ordre</strong>, pour le <em>gouvernement</em> de cette société.</li></ul>"
+			"html": "<p>Deux sacrements sanctifient un <strong>état de vie</strong> : les cinq autres sont ordonnés à la sainteté du chrétien comme individu ; ces deux-ci sont ordonnés à la <em>société</em> surnaturelle qu'est l'Église :</p><ul><li>le <strong>mariage</strong>, pour l'<em>accroissement</em> de la société chrétienne</li><li>l'<strong>ordre</strong>, pour le <em>gouvernement</em> de cette société.</li></ul>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Aujourd'hui · l'ordre, puis le sacrement des malades en annexe. Le mariage nous retiendra la semaine prochaine.</p>"
+			"html": "<p>Il faut les mettre à part. Ils sanctifient le sujet, certes, mais ils ne sont pas faits <em>pour</em> le sujet ; ils sont faits pour la société surnaturelle qu'est la sainte Église de Dieu. Aujourd'hui ; l'ordre, puis le sacrement des malades en annexe. Le mariage nous retiendra la semaine prochaine, et même deux semaines successives.</p>"
 		},
 		{
 			"kind": "heading",
 			"level": 2,
 			"title": "L'Ordre",
 			"anchor": "ordre"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Sacrement d'une <strong>importance décisive</strong> ; on peut dire que l'Église est <em>fondée</em> sur lui. On n'imagine pas une seconde l'Église de Notre-Seigneur Jésus-Christ sans ce pilier ; sans ce sacrement, plus de ministres ordonnés ; et une Église sans ministres ordonnés serait un <em>cadavre</em> attendant son âme, le Saint-Esprit. Il faut le dire ainsi : sans le sacerdoce, l'Église retombe à l'état où elle était la veille de la Pentecôte ; un corps sans souffle.</p>"
 		},
 		{
 			"kind": "heading",
@@ -33,15 +37,31 @@
 		{
 			"kind": "definition",
 			"term": "L'ordre",
-			"html": "<p>Sacrement qui <strong>sanctifie les ministres de Jésus-Christ</strong> et leur donne la grâce de remplir leurs trois fonctions · les trois pouvoirs mêmes du Christ qu'il a confiés à son Église ·</p><ul><li><em>prêcher</em> (magistère) ·</li><li><em>sanctifier</em> (ordre) ·</li><li><em>gouverner</em>.</li></ul>"
+			"html": "<p>Sacrement qui <strong>sanctifie les ministres de Jésus-Christ</strong> et leur donne la grâce de remplir leurs trois fonctions ; les trois pouvoirs mêmes du Christ qu'il a confiés à son Église :</p><ul><li><em>prêcher</em> (magistère)</li><li><em>sanctifier</em> (ordre)</li><li><em>gouverner</em>.</li></ul>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Précision capitale · de lui-même, le sacrement de l'ordre ne transmet sacramentellement que le <strong>pouvoir de sanctifier</strong> (administrer les sacrements). Les deux autres pouvoirs (magistère et gouvernement) sont conférés par l'<em>Église</em> à ceux qui sont revêtus de l'ordre · c'est la <strong>juridiction</strong>. Mais l'Église ne donne jamais ces pouvoirs qu'à des hommes déjà ordonnés.</p>"
+			"html": "<p>Précision capitale ; de lui-même, le sacrement de l'ordre ne transmet sacramentellement que le <strong>pouvoir de sanctifier</strong> (administrer les sacrements). Les deux autres pouvoirs (magistère et gouvernement) sont conférés par l'<em>Église</em> à ceux qui sont revêtus de l'ordre : c'est la <strong>juridiction</strong>. Mais l'Église ne donne jamais ces pouvoirs qu'à des hommes déjà ordonnés.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Choix théologique décisif · le Christ a-t-il donné ses pouvoirs à l'Église, qui se choisit ensuite des ministres ? Ou bien a-t-il transmis ses pouvoirs à <em>certains hommes</em> qu'il a chargés de bâtir l'Église ? La <strong>seconde voie est la tradition</strong>. La forme antique de la consécration épiscopale, conservée par toutes les Églises d'Orient depuis le IIe siècle et restaurée en 1968 dans le rite romain, le dit clairement · <em>« Reçois l'Esprit qui fait les princes, tel que Jésus-Christ l'a donné directement à ses apôtres pour qu'ils établissent en tout lieu des Églises à la gloire de son nom. »</em> L'autre théologie réduit le sacerdoce à une délégation du peuple chrétien · catastrophique.</p>"
+			"html": "<p>Bien sûr, il existe dans la première épître de saint Pierre un <em>sacerdoce commun des fidèles</em> ; par leur baptême, leur confirmation, leur prière, les fidèles, peuple choisi, peuple élu, <em>sacerdoce royal</em>, exercent une véritable fonction sacerdotale, réalité du corps mystique de Notre-Seigneur Jésus-Christ, qui ne fait qu'un avec lui et participe ainsi à ses fonctions sacerdotales. Parfait, rien à dire. Mais cette fonction n'est aucunement <em>ministérielle</em> ; on ne la confond pas avec le sacerdoce de ceux que le Christ a personnellement revêtus du pouvoir sacramentel d'agir en sa personne.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Si vous regardez la constitution même du sacrement de l'ordre, le rituel d'ordination des prêtres et des évêques, vous apercevez que Jésus-Christ donne un sacrement, un pouvoir physique, sacramentel, <em>immédiat</em> à ses prêtres ; et c'est sur ces prêtres qu'est fondée la sainte Église ; son gouvernement, ses lois, ses pouvoirs de prêcher, de sanctifier et de gouverner. Il y a là un choix à faire, et il est clair.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Choix théologique décisif ; le Christ a-t-il donné ses pouvoirs à l'Église, qui se choisit ensuite des ministres ? Ou bien a-t-il transmis ses pouvoirs à <em>certains hommes</em> qu'il a chargés de bâtir l'Église ? La <strong>seconde voie est la tradition</strong>. La forme antique de la consécration épiscopale, conservée par toutes les Églises d'Orient depuis le IIe siècle (saint Hippolyte de Rome en témoigne) et restaurée en 1968 dans le rite romain, le dit clairement : <em>« Reçois l'Esprit qui fait les princes, tel que Jésus-Christ l'a donné directement à ses apôtres pour qu'ils établissent en tout lieu des Églises à la gloire de son nom. »</em> C'est bien une transmission immédiate et sacramentelle du Christ à ses apôtres ; un pouvoir personnel qui passe du Christ dans ses apôtres et qui est fondateur de l'Église.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>L'autre théologie réduit le sacerdoce à une <em>délégation du peuple chrétien</em> ; catastrophique. On ne peut plus faire de prêtres avec cette mentalité. Si le prêtre n'est pas doté personnellement, sacramentellement, d'un pouvoir qui lui vient du Christ Jésus, il devient un administrateur interchangeable, déplaçable, qui peut prendre sa retraite ; ce n'est plus du tout une consécration au sens où nous l'entendons. Il y a un choix de théologie à faire, et ces deux théologies sont à mon avis <em>incompatibles</em>.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Précisons encore. Apparemment, puisque le sacerdoce confère à celui qui en est revêtu les trois pouvoirs de Jésus-Christ (magistère, ordre, gouvernement), on s'attendrait à ce qu'il transmette les trois sacramentellement. Apparemment seulement. En réalité, ce qui est transmis <em>sacramentellement</em> par l'ordre, c'est uniquement le pouvoir de <em>sanctifier</em> ; le caractère sacerdotal, nous le verrons. La transmission immédiate du Christ à ses prêtres, à ses évêques, c'est la capacité de sanctifier. Quant aux pouvoirs d'enseigner et de gouverner, ils sont conférés <em>par l'Église</em> à ceux qui sont déjà revêtus du sacrement : c'est la <em>juridiction</em>. La juridiction, c'est aussi le fait de placer des fidèles sous le pouvoir d'ordre du prêtre. Donc trois pouvoirs dans l'Église, transmis par deux voies différentes ; et jamais, jamais sans exception, la juridiction ne se donne à un non-ordonné. Il faut être au moins prêtre pour avoir juridiction.</p>"
 		},
 		{
 			"kind": "heading",
@@ -52,12 +72,24 @@
 		{
 			"kind": "definition",
 			"term": "Matière",
-			"html": "<p>L'<strong>imposition des mains de l'évêque</strong>. L'imposition des mains désigne dans l'Écriture la transmission d'un pouvoir. Saint Paul à Timothée · <em>« Je t'invite à raviver le don spirituel que Dieu a déposé en toi par l'imposition de mes mains »</em> (2 Tm 1, 6) · <em>« Ne te hâte pas d'imposer les mains à qui que ce soit »</em> (1 Tm 5, 22).</p>"
+			"html": "<p>L'<strong>imposition des mains de l'évêque</strong>. L'imposition des mains désigne toujours, dans l'Écriture et dans l'Église, la transmission d'un pouvoir. Nous l'avions vu pour le baptême ; les nombreuses impositions des mains du prêtre sur la tête du bébé ou de l'adulte désignent le caractère baptismal, le pouvoir de devenir enfant de Dieu. Pour le baptême ce n'était pas la matière du sacrement ; pour l'ordre, en revanche, c'est la matière elle-même : c'est en imposant les mains sur la tête d'un diacre que l'évêque en fera un prêtre. Saint Paul à Timothée : <em>« Je t'invite à raviver le don spirituel que Dieu a déposé en toi par l'imposition de mes mains »</em> (2 Tm 1, 6) ; <em>« Ne te hâte pas d'imposer les mains à qui que ce soit »</em> (1 Tm 5, 22). On ne saurait être plus clair ; c'est l'imposition des mains de l'apôtre saint Paul sur la tête de Timothée qui en a fait un évêque, l'évêque d'Éphèse, et c'est parce que Timothée est lui-même évêque qu'il peut à son tour imposer les mains.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Forme",
-			"html": "<p>La partie centrale lue de la <em>préface consécratoire</em> chantée par l'évêque. Pie XII a tranché ces deux points en 1947 (constitution <em>Sacramentum Ordinis</em>) · il a écarté la vieille hypothèse médiévale de la <em>porrection des instruments</em> (remise du calice avec « Recevez le pouvoir de célébrer la messe »), qui ne pouvait pas tenir devant l'Écriture.</p>"
+			"html": "<p>La partie centrale lue de la <em>préface consécratoire</em> chantée par l'évêque. Pie XII a tranché ces deux points en 1947 (constitution <em>Sacramentum Ordinis</em>) ; il a écarté la vieille hypothèse médiévale de la <em>porrection des instruments</em> (remise du calice rempli au diacre avec « Recevez le pouvoir de célébrer la messe pour les vivants et pour les morts »), qui ne pouvait plus tenir devant l'Écriture. Vieille querelle qui avait duré tout le Moyen Âge ; comme le pouvoir radical du prêtre est de dire la messe, on avait imaginé que la matière, ce devait être la remise du calice. À commencer par saint Thomas qui s'y est laissé prendre. Eh bien, <em>« on ne peut plus la soutenir »</em>, dit Pie XII ; déformation médiévale, parce que le Nouveau Testament parle toujours, sans exception, d'imposition des mains.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>La forme pour le presbytérat n'a pas changé entre l'ancien et le nouveau pontifical. Pour l'épiscopat, en revanche, elle a changé profondément en 1968 ; et c'est ici un point délicat. L'ancienne forme demandait à Dieu de <em>prolonger</em> dans son serviteur la dignité sacerdotale ; parachever la dignité d'un prêtre, c'est en faire un évêque. La nouvelle forme, <em>« Reçois l'Esprit qui fait les princes »</em>, est plus traditionnelle encore ; c'était la forme apostolique attestée par saint Hippolyte au IIe siècle, conservée intacte par tout l'Orient.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Détail historique éloquent ; pendant des siècles à Rome, on consacrait évêque l'<em>archidiacre</em>, très fréquemment, en une seule ordination ; il passait du diaconat à l'épiscopat directement, sans passer par le presbytérat. Cela aurait été <em>impossible</em> avec la forme médiévale (qui demandait à Dieu de <em>prolonger</em> la dignité sacerdotale, ce qui exige qu'il y ait déjà cette dignité à prolonger). Si l'ordination d'un diacre avec la forme médiévale aurait été invalide, c'est donc qu'à Rome on n'utilisait pas cette forme. Et nous savons historiquement, par les textes du IIe siècle (saint Hippolyte), que la forme romaine antique, c'était précisément <em>« Reçois l'Esprit qui fait les princes »</em>, c'est-à-dire la forme restaurée en 1968. La preuve historique est complète.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Une tension cependant ; les textes fondamentaux de Vatican II remettent l'épiscopat, après une longue éclipse théologique, à un niveau <em>apostolique incontestable, incontestable</em>. Et pourtant le nouveau rituel de l'ordination des prêtres laisse percer, en dehors de la forme elle-même, la théologie nouvelle (le sacerdoce comme délégation à l'Église, le prêtre comme représentant délégué). Il y a là une contradiction entre les textes fondamentaux du concile sur l'épiscopat et les nouveaux rituels presbytéraux ; cette parenthèse de signification théologique mériterait d'être approfondie, mais ce n'est pas l'objet d'un cours de catéchèse. On retient que les deux ordinations (presbytérale et épiscopale, ancien et nouveau rite) sont parfaitement valides ; il est impossible que l'Église erre dans un domaine aussi dogmatique et fondamental. Et on retient que la <em>forme</em> elle-même est plus traditionnelle dans le nouveau rite, parce que romaine d'origine ; mais la théologie suggérée dans le reste du rite presbytéral, là, on peut discuter.</p>"
 		},
 		{
 			"kind": "heading",
@@ -67,15 +99,19 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le Concile de Trente est formel · le Christ a institué l'ordre le <strong>jeudi saint</strong>, à la Cène, en donnant à ses seuls apôtres l'ordre de refaire ce qu'il venait d'accomplir · <em>« Faites cela en mémoire de moi »</em> (Lc 22, 19). Donner l'ordre, c'est donner le pouvoir · faire un tel miracle dépasse les forces de tout autre que le Fils de Dieu · s'il le confie à des hommes, c'est qu'il les en revêt sacramentellement.</p>"
+			"html": "<p>Le Concile de Trente est formel ; le Christ a institué l'ordre le <strong>jeudi saint</strong>, à la Cène, en donnant à ses seuls apôtres l'ordre de refaire ce qu'il venait d'accomplir : <em>« Faites cela en mémoire de moi »</em> (Lc 22, 19). Donner l'ordre, c'est donner le pouvoir ; faire un tel miracle, transformer le pain en son corps et le vin en son sang, dépasse les forces de tout autre que le Fils de Dieu ; s'il le confie à des hommes, c'est qu'il les en revêt sacramentellement. Et il le confie à ses <em>seuls apôtres</em>, présents à table avec lui ; à personne d'autre.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Constat décisif · l'Église n'existait pas encore quand le Christ institua l'ordre. L'<strong>Église naît à la Pentecôte</strong> · jusque-là, le groupe des disciples est un embryon, une matière, qui attend son âme · l'Esprit-Saint. Or au soir du jeudi saint et au soir de la Résurrection (pour le pouvoir de pardonner les péchés), le sacerdoce est déjà institué. <em>L'Église est fondée sur les apôtres, et non l'inverse</em> · les apôtres ne sont pas les ministres de l'Église, ils en sont les fondations.</p>"
+			"html": "<p>Constat décisif ; l'Église n'existait pas encore quand le Christ institua l'ordre. L'<strong>Église naît à la Pentecôte</strong> : jusque-là, le groupe des disciples est un embryon, une matière, qui attend son âme ; le Saint-Esprit. J'oserai dire (et l'image est forte) ; jusqu'à la Pentecôte, ce qui sera l'Église est comme un <em>cadavre</em> qui attend sa vie ; et sa vie, c'est l'Esprit-Saint. Or au soir du jeudi saint, et au soir de la Résurrection (pour le pouvoir de pardonner les péchés), le sacerdoce est déjà institué. <em>L'Église est fondée sur les apôtres, et non l'inverse</em> : les apôtres ne sont pas les ministres de l'Église, ils en sont les fondations.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le Christ, lui, n'est pas tenu de passer par un rite pour conférer la grâce · il la donne directement à ses apôtres. Ses successeurs, eux, n'ont d'autre moyen que l'<em>ordination sacramentelle</em>. Le pouvoir radical du sacerdoce est <strong>la célébration du saint sacrifice</strong> · les autres en découlent · pouvoir sur le corps physique du Christ (Eucharistie) entraîne pouvoir sur son corps mystique (Église, pardon des péchés).</p>"
+			"html": "<p>Le Christ, lui, n'est pas tenu de passer par un rite pour conférer la grâce ; il la donne directement à ses apôtres. Certaines icônes le représentent en train d'imposer les mains, comme s'il était lui-même ministre du sacrement qu'il institue ; c'est joli, mais sans consistance logique. Ses successeurs, eux, n'ont d'autre moyen que l'<em>ordination sacramentelle</em> ; il faut qu'ils appliquent matière et forme sur un sujet apte.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Le pouvoir radical du sacerdoce est <strong>la célébration du saint sacrifice</strong> ; les autres en découlent. Pouvoir sur le corps physique du Christ (Eucharistie) entraîne pouvoir sur son corps mystique (Église, pardon des péchés), donné le soir de la Résurrection, moment extrêmement solennel. Fondamentalement, un prêtre, c'est celui qui a le pouvoir de dire la messe et le pouvoir de pardonner les péchés ; tout le reste se greffe sur ces deux capacités. Gouverner une paroisse, organiser une communauté, donner des cours, oui, on en fait beaucoup ; mais essentiellement, le prêtre, c'est la messe et la confession.</p>"
 		},
 		{
 			"kind": "heading",
@@ -85,38 +121,42 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>L'ordre est un <em>sacrement unique</em>, mais à plusieurs <strong>degrés</strong> · parce qu'il confère un pouvoir actif, il s'exerce avec plus ou moins d'extension. Trois degrés, tous trois d'institution divine ·</p>"
+			"html": "<p>L'ordre est un <em>sacrement unique</em>, mais à plusieurs <strong>degrés</strong> : parce qu'il confère un pouvoir actif, il s'exerce avec plus ou moins d'extension. Comparaison simple ; dans une entreprise, on monte dans la hiérarchie, on a de plus en plus de pouvoir, et le grand patron a tous les pouvoirs. C'est pareil. Le baptême, lui, n'a pas de degré ; on est enfant de Dieu ou on ne l'est pas, marié ou pas marié, c'est tout ou rien. Le pouvoir baptismal est <em>passif</em>, reçu dans le sujet pour le sanctifier, pas pour agir. L'ordre, lui, est un pouvoir <em>actif</em>, fait pour agir ; il admet donc une hiérarchie selon l'extension du pouvoir reçu. Trois degrés, tous trois d'institution divine :</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "L'épiscopat",
-			"html": "<p>Plénitude du sacrement. <em>Episcopos</em>, en grec, « surveillant ». L'évêque peut administrer tous les sacrements, <strong>y compris l'ordre lui-même</strong> · c'est sa caractéristique propre · il est le <em>générateur du sacerdoce</em>. Toute la généalogie épiscopale remonte sans interruption aux apôtres, et par eux au Christ · c'est la note d'<em>apostolicité</em> de l'Église.</p>"
+			"html": "<p>Plénitude du sacrement. <em>Episcopos</em>, en grec, « surveillant », celui qui veille à l'ensemble de l'Église confiée à ses soins. Il est unique pour une Église locale, on s'en aperçoit dès la fin du Ier siècle (extraordinaire rapidité de la fondation des Églises). L'évêque peut administrer tous les sacrements, <strong>y compris l'ordre lui-même</strong> : c'est sa caractéristique propre ; il est le <em>générateur du sacerdoce</em>. Le prêtre peut tout faire ce que fait l'évêque, à ceci près qu'il ne peut pas ordonner ; ce serait totalement invalide. Toute la généalogie épiscopale remonte sans interruption aux apôtres, et par eux au Christ : c'est la note d'<em>apostolicité</em> de l'Église. Comme dans une généalogie naturelle ; fils de fils de fils, on retrace chaque évêque jusqu'aux Douze. C'est magnifique.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Le presbytérat (sacerdoce)",
-			"html": "<p><em>Presbyteros</em>, en grec, « ancien ». Très proche de l'épiscopat · le prêtre peut tout faire sauf ordonner. Il célèbre la messe avec la même validité, pardonne les péchés, confirme avec délégation, donne l'extrême-onction. Les apôtres ont choisi cette terminologie · <em>presbyteros</em>, <em>episcopos</em>, <em>diaconos</em> · pour éviter les termes des cultes idolâtriques (<em>hiereus</em>, <em>mageiros</em>). Pareil souci pour l'amour de Dieu (<em>agapè</em>, non <em>erôs</em>).</p>"
+			"html": "<p><em>Presbyteros</em>, en grec, « ancien ». Un prêtre de 24 ans est « ancien » par sa sagesse et par le sacrement de l'ordre, comme un vieux prêtre de 50 ans de sacerdoce ; ce n'est pas toujours évident pour les fidèles, mais c'est ainsi. Très proche de l'épiscopat ; le prêtre peut tout faire sauf ordonner. Il célèbre la messe avec la même validité, pardonne les péchés, confirme avec délégation, donne l'extrême-onction. La chose la plus grande que peut faire un prêtre ou un évêque, c'est célébrer la messe ; et là-dessus, ils sont à égalité de pouvoir. Dans le nouveau rituel, les prêtres sont d'ailleurs appelés <em>cooperatores ordinis nostri</em>, « coopérateurs de notre ordre », dit l'évêque ; magnifique formule conciliaire. La seule différence pratique tient à la charge propre de l'épiscopat : ordonner, et gouverner l'Église locale.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Note philologique des apôtres ; <em>presbyteros</em>, <em>episcopos</em>, <em>diaconos</em> : les apôtres ont voulu absolument <em>éviter</em> les anciens termes (<em>hiereus</em>, prêtre d'idole ; <em>mageiros</em>) pour bien distinguer le sacerdoce du Christ de tous les sacerdoces païens et des rites idolâtriques. Les Apôtres ont été extrêmement soigneux sur la terminologie. Pareil souci pour l'amour de Dieu : ils ont ressorti le vieux mot grec <em>agapè</em>, peu utilisé, pour éviter le terme ambigu d'<em>erôs</em> ; et c'est <em>agapè</em>, presque partout dans le Nouveau Testament, l'amour de Dieu, l'amour que Dieu a pour nous, l'amour que nous pouvons avoir pour Dieu ou pour nos frères. Soin admirable des Douze pour la langue qui devait dire la foi nouvelle. Dans le Nouveau Testament, au début, on ne distingue pas toujours <em>episcopos</em> et <em>presbyteros</em> ; saint Paul et les autres apôtres semblent les employer indifféremment, parce que les deux ont le pouvoir essentiel : dire la messe. La distinction s'impose dès saint Ignace d'Antioche (fin du Ier siècle) : partout, dans chaque Église fondée par les apôtres, un seul surveillant entouré d'un collège d'anciens. Organisation admirable, qui remonte certainement au Seigneur par les apôtres, et qui fait 2000 ans qu'elle dure.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Le diaconat",
-			"html": "<p><em>Diaconos</em>, en grec, « serviteur ». Le diacre a <em>aucune responsabilité d'âme</em> · il assiste le prêtre dans ses fonctions sans participer à sa charge propre. On ne confie jamais une paroisse à un diacre · pas de juridiction sur les âmes.</p>"
+			"html": "<p><em>Diaconos</em>, en grec, « serviteur ». Un serviteur sanctifié sacramentellement par la grâce de l'ordre. Le diacre n'a <em>aucune responsabilité d'âme</em> ; il assiste le prêtre et l'évêque dans leurs fonctions sacerdotales sans participer à sa charge propre. Il fait ce qu'on lui dit. On ne confie jamais une paroisse à un diacre ; pas de juridiction sur les âmes. C'est terrible, la responsabilité des âmes ; effrayant, même. Le diacre n'a pas ce poids ; admirable sagesse de l'Église, qui répartit les charges selon la mesure du pouvoir reçu.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Remarques ·</p>"
+			"html": "<p>Remarques :</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>1.</strong> Le diaconat se subdivise en fonctions · sous-diaconat, acolytat, exorcistat, portier, lecteur. Les <em>ordres mineurs</em> sont des sacrements (parties potentielles du sacrement de l'ordre).</p>"
+			"html": "<p><strong>1.</strong> Le diaconat se subdivise en fonctions ; sous-diaconat, acolytat, exorcistat, portier, lecteur. Le sous-diacre, c'est celui qui peut déjà servir le prêtre à la messe solennelle, et auquel l'Église a attaché l'équivalent du vœu et la récitation du bréviaire. Les <em>ordres mineurs</em> sont des sacrements (parties potentielles du sacrement de l'ordre, puisqu'on y reçoit une part de la puissance d'ordre, une petite part : portier, acolyte, etc.). À noter ; celui qui a proposé au Concile Vatican II de restaurer le <em>diaconat permanent</em>, c'est <em>Monseigneur Lefebvre</em>, comme on le sait. Diacre célibataire, un diacre qui demeure diacre, comme un beau diable au service de l'autel toute sa vie ; en soi excellente idée. Ensuite on a fait des diacres mariés, ce qui est autre chose, et on en a fait parfois de simples employés d'ONG ; mais l'idée d'origine était belle.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>2.</strong> La <em>tonsure</em> n'est pas un ordre · c'est un <strong>sacramental</strong> qui fait entrer dans le clergé. Un supérieur général peut tonsurer · pas un ordre.</p>"
+			"html": "<p><strong>2.</strong> La <em>tonsure</em> n'est pas un ordre : c'est un <strong>sacramental</strong> qui fait entrer dans le clergé. Un supérieur général peut tonsurer ; pas besoin d'évêque, parce que c'est une question de juridiction uniquement (le supérieur ne peut pas donner les ordres mêmes mineurs, mais il peut faire entrer dans le clergé). Autrefois, beaucoup recevaient la tonsure sans aller plus loin, pour toucher les <em>bénéfices ecclésiastiques</em> (revenus d'abbayes, exploitations agricoles, etc.) ; il y avait beaucoup d'arrivistes : il fallait être tonsuré pour toucher l'argent des bénéfices, alors on se faisait tonsurer et puis on ne faisait rien d'autre, pas de charge, mais on touchait. Le Concile de Trente a dit <em>basta !</em> ; nul ne reçoit la tonsure sans intention de monter jusqu'au sacerdoce. Cette loi a perdu son sens aujourd'hui ; on n'a jamais vu personne s'enrichir avec la tonsure, rassurez-vous, chers séminaristes ; si vous espériez quelques bénéfices, vous êtes mal tombés, c'est complètement raté ; ça vous coûtera plutôt que ça ne vous rapportera. On peut donc envisager qu'un frère qui sert la messe toute sa vie reçoive les ordres mineurs ; ils sont faits pour ça, et la prohibition de Trente n'a plus de fondement à notre époque.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>3.</strong> Seuls l'épiscopat et le presbytérat peuvent recevoir <em>juridiction</em> (responsabilité d'âmes). Un diocèse pour l'évêque, une paroisse pour le prêtre. Le pape, lui, a juridiction sur toute la terre · « l'évêque des évêques ».</p>"
+			"html": "<p><strong>3.</strong> Seuls l'épiscopat et le presbytérat peuvent recevoir <em>juridiction</em> (responsabilité d'âmes). Un diocèse pour l'évêque, une paroisse pour le prêtre. Le pape, lui, a juridiction sur toute la terre ; « l'évêque des évêques ». Distinction utile à voir en action : prenons l'<em>exorcisme</em>. L'exorcistat est un ordre, et le pouvoir d'ordre de l'exorciste, en soi, n'a pas besoin d'être presbytéral. Mais l'exorcisme efficace exige surtout la <em>juridiction</em>, qui fait 80 % de l'efficacité. C'est pourquoi l'Église confie toujours l'exorcisme à un prêtre, jamais à un simple ordonné exorciste sans juridiction, même pas à un diacre ; un bel exemple de la différence entre ordre et juridiction. On voit ici comme les deux pouvoirs jouent ensemble dans l'Église.</p>"
 		},
 		{
 			"kind": "heading",
@@ -127,17 +167,21 @@
 		{
 			"kind": "definition",
 			"term": "Le caractère",
-			"html": "<p><strong>Pouvoir indélébile</strong>, marqué définitivement dans l'âme (plus précisément dans l'intellect pratique, dit saint Thomas, parce que c'est une <em>lumière</em> ordonnée à l'action). De foi pour l'épiscopat et le presbytérat · certain pour le diaconat. C'est le caractère qui donne à l'évêque d'ordonner validement, au prêtre de célébrer, de pardonner, de confirmer, d'oindre les malades. <em>« Tu es prêtre pour l'éternité »</em> (Ps 109) · on est prêtre même sauvé au ciel ou damné en enfer.</p>"
+			"html": "<p><strong>Pouvoir indélébile</strong>, marque définitive dans l'âme, plus précisément dans l'intellect pratique, dit saint Thomas, parce que c'est une <em>lumière</em>, une capacité d'intelligence pratique ordonnée à l'action sacerdotale. De foi pour l'épiscopat et le presbytérat ; certain pour le diaconat (où l'on voit dans les Actes des Apôtres, lors de l'institution des sept, une imposition des mains et une préface consécratoire ; exactement le même rite). C'est le caractère qui donne à l'évêque d'ordonner validement, au prêtre de célébrer, de pardonner, de confirmer, d'oindre les malades. <em>« Tu es prêtre pour l'éternité »</em> (Ps 109, <em>tu es sacerdos in aeternum</em>), l'Écriture le répète chaque fois qu'elle parle du prêtre ; on est prêtre même sauvé au ciel ou damné en enfer ; le caractère ne s'efface pas.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La grâce sanctifiante",
-			"html": "<p>Augmentation · l'ordre est un sacrement <em>des vivants</em>. Normal que le ministre brille d'une grâce sanctifiante supérieure · pour éclairer les fidèles, il faut être plus saint qu'eux. Reçue dans un sujet indigne, cette grâce <em>reviviscerait</em> à sa conversion, en vertu du caractère.</p>"
+			"html": "<p>Augmentation ; l'ordre est un sacrement <em>des vivants</em>. Normal que le ministre brille d'une grâce sanctifiante supérieure ; pour éclairer les fidèles, pour les sanctifier, il faut être plus saint qu'eux. Reçue dans un sujet indigne, cette grâce <em>reviviscerait</em> à sa conversion, en vertu du caractère ; comme pour le baptême.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La grâce sacramentelle",
-			"html": "<p>Découle du caractère · garantie du <strong>secours divin</strong> dans l'exercice des fonctions sacerdotales. Pas une grâce pour tout faire · le prêtre n'a aucune grâce spéciale pour cuisiner, courir le 100 mètres ou gérer une entreprise. Mais dans tout acte sacerdotal proprement dit · prédication, sacrement, direction d'âmes · il est assisté.</p>"
+			"html": "<p>Découle du caractère ; garantie du <strong>secours divin</strong> dans l'exercice des fonctions sacerdotales. Vous verrez cette grâce à l'action ; quand il s'agit de poser un acte sacerdotal, vous serez aidés par Dieu, qui s'y est engagé le jour de votre ordination. Attention, pas une grâce pour tout. Le prêtre n'a aucune grâce spéciale pour faire la cuisine, courir le 100 mètres en 10 secondes, gérer une entreprise, créer une entreprise, écrire dans un journal. Certains prêtres croient qu'ils ont la grâce pour tout et se mêlent de tout ; c'est <em>catastrophique, catastrophique</em>. Mais dans tout acte sacerdotal proprement dit ; prédication, sacrement, direction d'âmes, vous touchez une âme, vous donnez des sacrements, vous serez <em>assistés</em>. Pas une grâce actuelle ponctuelle ; une grâce qui accompagne <em>continuellement</em> l'exercice de l'état sacerdotal, comme la grâce du mariage accompagne les époux dans ce qui relève du lien conjugal, tant que dure le mariage (jusqu'à la mort, pas dans la vie éternelle).</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Conséquence pastorale ; le prêtre n'a aucune grâce pour trancher les disputes matérielles. Quand on vient lui demander s'il faut déménager, changer de situation, acheter une voiture ou un frigidaire, il est aussi démuni qu'un autre ; on se débrouille. Notre-Seigneur le dit lui-même ; un jour, deux frères se disputaient un héritage, l'un d'eux vient le voir : <em>« Maître, dis à mon frère de partager avec moi l'héritage. »</em> Notez l'audace : il demande au Christ Jésus, qui jugera les vivants et les morts, de trancher un partage de magot. Réponse cinglante de Notre-Seigneur : <em>« Homme, qui m'a constitué juge ou partageur entre vous ? »</em> (Lc 12, 14). Le sacerdoce n'est pas pour ça. On nous demande pas de juger de toutes les questions de ce monde ; ce n'est ni notre compétence, ni notre sort, ni notre grâce.</p>"
 		},
 		{
 			"kind": "heading",
@@ -147,11 +191,15 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Toutes les grâces des sacrements nous font participer à la <strong>grâce capitale</strong> du Christ · celle qui coule de la Tête dans les membres et qui sanctifie l'Église. <em>Mais la grâce de l'ordre est unique</em> · elle fait participer à la <strong>grâce d'union</strong> du Christ · celle par laquelle son humanité subsiste dans la personne du Verbe, et qui le constitue prêtre · le seul pont possible entre Dieu et les hommes.</p>"
+			"html": "<p>Remarque théologique souvent disputée, mais pour moi sans l'ombre d'un doute. Toutes les grâces des sacrements nous font participer à la <strong>grâce capitale</strong> du Christ ; celle qui coule de la Tête dans les membres et qui sanctifie l'Église. <em>Mais la grâce de l'ordre est unique</em> ; elle fait participer à la <strong>grâce d'union</strong> du Christ ; celle par laquelle son humanité subsiste dans la personne du Verbe.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>D'où ce que sentent même les non-croyants · qu'un prêtre catholique a en lui quelque chose de sacré que n'ont pas les ministres des autres religions. Constatation que vous trouverez parfois sous des plumes athées · ils ont raison sans pouvoir l'expliquer.</p>"
+			"html": "<p>Rappel ; la <em>grâce d'union</em>, c'est le fait pour la nature humaine de Jésus-Christ de subsister non pas dans une personne humaine, mais dans la personne divine du Verbe. Grâce et don de Dieu, la plus grande faveur qu'on ait pu faire à un homme. Grâce infinie puisqu'elle n'a pas de terme fini : son terme, c'est la personne divine, la nature même de Dieu. Pourquoi le sacerdoce en découle-t-il ? Parce que ce qui constitue Notre-Seigneur prêtre, ce n'est pas sa grâce capitale (par laquelle il sanctifie son corps mystique) ; c'est sa grâce d'union elle-même. Un prêtre, c'est celui qui fait le <em>pont</em>, le lien, la liaison entre Dieu et les hommes ; et ce qui fait du Christ ce pont, c'est l'union hypostatique, et elle seule. La plupart des Pères de l'Église l'ont senti, même si leur explication n'est pas toujours facile ou cohérente ; le sacerdoce participe non à une grâce sanctifiante quelconque, mais à la grâce d'union elle-même, le seul pont possible entre Dieu et les hommes.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>D'où ce que sentent même les non-croyants ; qu'un prêtre catholique a en lui quelque chose de <em>sacré</em> que n'ont pas les ministres des autres religions. Constatation que vous trouverez parfois sous des plumes <em>athées</em>, militantes même ; chez quelqu'un comme Franz-Olivier Giesbert (qui n'est pas grenouille de bénitier) et d'autres journalistes de gauche, des gens qui ne croient pas en Dieu, qui ne croient même pas en Dieu, et qui pourtant affirment : <em>« Dans un prêtre catholique, il y a quelque chose d'intrinsèquement sacré. »</em> Ils ont profondément raison, profondément raison, sans pouvoir l'expliquer ; les gens le sentent, même s'ils en ignorent l'explication logique. Un ministre protestant accomplit ce qu'on lui demande, il prêche parce qu'il faut prêcher, il fait des choses ; mais la constitution de sa personne en tant que ministre ne passe pas. Le prêtre catholique, lui, est sacré <em>en sa personne même</em>, qu'il fasse ou non telle ou telle action.</p>"
 		},
 		{
 			"kind": "heading",
@@ -161,7 +209,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><em>Omnis episcopus, et solus episcopus</em> · tout évêque, et seulement l'évêque. C'est la différence fondamentale entre lui et le prêtre, qui peut tout faire sauf cela. C'est pourquoi l'évêque, qui seul fait les ministres, reçoit ordinairement la juridiction sur un troupeau · pouvoir royal qui en fait le docteur de la foi et le chef de l'Église locale.</p>"
+			"html": "<p><em>Omnis episcopus, et solus episcopus</em> : tout évêque, et seulement l'évêque. C'est la différence fondamentale entre lui et le prêtre, qui peut tout faire sauf cela. Depuis 2000 ans, dans l'Église, seuls les évêques ordonnent ; généalogie épiscopale ininterrompue qui remonte aux apôtres et par eux au Seigneur Jésus. C'est pourquoi l'évêque, qui seul fait les ministres, reçoit ordinairement la juridiction sur un troupeau ; pouvoir royal qui en fait le docteur de la foi et le chef de l'Église locale.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Note ; les pouvoirs d'enseigner et de gouverner ne sont pas transmis sacramentellement par l'ordre. Mais l'Ancien Testament connaissait déjà <em>trois onctions</em>, les mêmes trois fonctions : onction du <em>prophète</em> (les prophètes se consacraient eux-mêmes en répandant l'huile sur leur tête, ou un prophète en oignait un autre) ; onction du <em>prêtre</em> par hérédité d'Aaron, lignée naturelle (on était prêtre parce qu'on était fils d'Aaron, et grand prêtre si on était le fils aîné de l'aîné) ; onction du <em>roi</em>, Saül oint par Samuel, puis David. Trois fonctions vétéro-testamentaires que le Christ porte en plénitude et à un degré infini ; il les transmet toutes les trois à son Église, parce qu'il y a forcément dans l'Église le pouvoir d'enseigner, de sanctifier et de gouverner. Mais une seule est transmise sacramentellement (le pouvoir de sanctifier, qui est l'ordre) ; les deux autres, l'Église les rattache aux ordonnés par la juridiction.</p>"
 		},
 		{
 			"kind": "heading",
@@ -172,31 +224,31 @@
 		{
 			"kind": "definition",
 			"term": "L'homme",
-			"html": "<p><strong>Seul l'homme</strong> peut recevoir l'ordre. L'autorité dans l'Église s'exerce par les hommes · les apôtres seuls étaient présents à l'institution. Jean-Paul II l'a tranché dogmatiquement en 1994 (<em>Ordinatio sacerdotalis</em>) · l'ordination d'une femme est <em>totalement invalide</em>. On ne refait pas les sacrements à sa fantaisie.</p>"
+			"html": "<p><strong>Seul l'homme</strong> peut recevoir l'ordre. L'autorité dans l'Église s'exerce par les hommes ; les apôtres seuls étaient présents à l'institution. Jean-Paul II l'a tranché dogmatiquement en 1994 (<em>Ordinatio sacerdotalis</em>) ; l'ordination d'une femme est <em>totalement invalide</em>. On ne refait pas les sacrements à sa fantaisie ; le Christ seul peut lier une grâce à un rite sensible.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Baptisé",
-			"html": "<p>Pour avoir autorité dans une société, il faut en faire partie. On ne gouverne pas un pays sans en être citoyen.</p>"
+			"html": "<p>Pour avoir autorité dans une société, il faut en faire partie. On ne gouverne pas un pays sans en être citoyen ; on ne va pas prendre un Mexicain pour gouverner l'Autriche.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "La vocation",
-			"html": "<p><em>« Nul ne s'arroge à soi-même cet honneur, on y est appelé par Dieu, comme Aaron »</em> (He 5, 4). La vocation n'est pas un miracle visible · pas un ange, pas une lumière dans la tête. Elle a deux aspects · <em>matière</em> et <em>forme</em>.</p>"
+			"html": "<p><em>« Nul ne s'arroge à soi-même cet honneur, on y est appelé par Dieu, comme Aaron »</em> (He 5, 4). Il faut être un peu appelé par Dieu ; Jésus-Christ a appelé sans arrêt dans l'Évangile, certains l'ont suivi, d'autres non, à d'autres encore il a dit : <em>« Ce n'est pas la peine de me suivre. »</em> La vocation n'est pas un miracle visible ; pas un ange qui apparaît, pas une lumière dans la tête, pas le Saint-Esprit qu'on entrevoit. Non, non, non. C'est quelque chose de très simple. Tout jeune homme vraiment chrétien doit s'être posé la question un jour. Elle a deux aspects ; <em>matière</em> et <em>forme</em>, comme tout l'être.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Matière de la vocation",
-			"html": "<p>Les <strong>dispositions nécessaires</strong> (intellectuelles, morales, sacramentelles) avec une <em>volonté ferme</em> de servir le Seigneur dans une intention droite. Si vous envisagez sérieusement, en connaissance de cause, de vous donner à Dieu pour le sacerdoce, c'est forcément surnaturel · donc cela vient de Dieu.</p>"
+			"html": "<p>Les <strong>dispositions nécessaires</strong> (intellectuelles, morales, sacramentelles) avec une <em>volonté ferme</em> de servir le Seigneur dans une intention droite. Pas pour toucher des bénéfices, pas pour se la couler douce dans un monastère à ne rien faire ; pour servir. Si vous n'avez pas les dispositions, c'est <em>péché de fou</em> ; vous êtes déjà marié, monsieur, circulez ! Si en revanche vous envisagez sérieusement, en connaissance de cause, de vous donner à Dieu pour le sacerdoce, c'est forcément surnaturel ; donc cela vient de Dieu. CQFD.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Forme de la vocation",
-			"html": "<p>L'<strong>appel de l'évêque catholique</strong> qui ordonne. Si vous trouvez un évêque catholique qui consent à vous ordonner, c'est que vous avez la vocation · si vous n'en trouvez pas, c'est que vous ne l'avez pas. C'est l'Église qui authentifie.</p>"
+			"html": "<p>L'<strong>appel de l'évêque catholique</strong> qui ordonne. Si vous trouvez un évêque catholique qui consent à vous ordonner, c'est que vous avez la vocation ; si vous n'en trouvez pas, c'est que vous ne l'avez pas. C'est l'Église qui authentifie.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Remarque · une vie chrétienne intense est le terreau normal des vocations. Une enquête des évêques français dans les années 30 montrait que 98 à 99 % des vocations sortent de familles très catholiques et d'écoles très catholiques. Dieu peut faire des exceptions (saint Paul, persécuteur converti) · ce n'est pas la voie ordinaire. Saint Paul à Timothée · <em>« N'impose pas les mains à un néophyte »</em> · l'Église se méfie des conversions trop fraîches.</p>"
+			"html": "<p>Remarque ; une vie chrétienne intense, régulière, sérieuse, en particulier dans une bonne famille, est le terreau normal des vocations. Une <em>enquête des évêques français</em> dans les années 30 montrait que <strong>98 à 99 %</strong> des vocations sortent de familles très catholiques et d'écoles très catholiques. Ils n'étaient pas persuadés de ce résultat avant l'enquête ; ils ont vu noir sur blanc que les vocations naissent dans ces terreaux. Pas de mystère. Dieu peut faire des exceptions ; il a choisi douze apôtres, et puis tout d'un coup il a eu besoin d'un persécuteur, un ennemi juré de sa cause, et il a converti saint Paul. Donc Dieu fait ce qu'il veut. Mais généralement, ce n'est pas par du saint Paul que viennent les vocations ; saint Paul lui-même à Timothée : <em>« N'impose pas les mains à un néophyte »</em>, qui risquerait de tomber dans les pièges du diable. L'Église se méfie des conversions trop fraîches ; elle est prudente.</p>"
 		},
 		{
 			"kind": "heading",
@@ -206,7 +258,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Annexe brève · mais ne nous y trompons pas, ce sacrement est plein de joies pour le prêtre qui le donne et de grâces pour celui qui le reçoit. Le terme <em>extrême-onction</em> a fait du mal · il a fait croire qu'on n'appelait le prêtre que pour les agonisants. Le nom récent de <em>sacrement des malades</em> rétablit l'équilibre · on n'est pas <em>obligatoirement</em> à l'extrémité.</p>"
+			"html": "<p>Annexe brève, c'est vrai que c'est rapide ; mais ne nous y trompons pas, ce serait dommage de passer ce sacrement par pertes et profits. Ce n'est surtout pas mon intention, au contraire : ce sacrement est plein de joies pour le prêtre qui le donne et de grâces pour celui qui le reçoit. Je n'ai rarement eu tant de joie dans le ministère qu'en donnant des extrêmes-onctions ; vous comprendrez pourquoi. Le terme <em>extrême-onction</em>, il faut le dire, est un peu désagréable, parce qu'il a fait croire qu'on n'appelait le prêtre que pour les agonisants, qu'on allait « y rester ». Total non seulement c'est faux, mais tout dans le sacrement prouve le contraire : il n'est pas fait <em>pour</em> être extrême ; il peut l'être, simplement. Le nom récent de <em>sacrement des malades</em> rétablit l'équilibre, sans tomber dans l'autre travers (un sacrement irénique pour qui n'est pas malade). Il faut trouver le juste milieu entre ces deux termes ; l'un un peu extrémiste, l'autre un peu irénique.</p>"
 		},
 		{
 			"kind": "heading",
@@ -216,7 +268,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Institué par Notre-Seigneur, promulgué par <strong>saint Jacques</strong> ·</p>"
+			"html": "<p>Institué par Notre-Seigneur, promulgué par <strong>saint Jacques</strong> :</p>"
 		},
 		{
 			"kind": "quote",
@@ -225,7 +277,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Tous les effets du sacrement sont là · guérir l'âme et le corps · préparer éventuellement à une sainte mort, <em>éventuellement</em> · les prières mêmes du rite demandent la guérison, pas la mort paisible (qui n'est qu'un effet second, si telle est la volonté de Dieu).</p>"
+			"html": "<p>Tous les effets du sacrement sont là, <em>two for one</em> ; guérir l'âme et le corps ; et préparer éventuellement à une sainte mort, <em>éventuellement</em>. Si vous lisez toutes les prières de l'extrême-onction, vous voyez qu'elles demandent à Dieu de <em>rétablir</em> ce malade. Pratiquement il n'y a rien d'autre : il n'y a même pas, dans les prières, la demande que s'il venait à mourir il ait une mort paisible. Ça n'existe pas dans les prières ; lisez les vous-mêmes, vous ne le trouverez pas. <em>« Ut restitutus pristinis officiis suis »</em>, « pour qu'il soit rendu à ses fonctions précédentes » : voilà ce que demande l'Église. La mort paisible n'est qu'un effet second, si telle est la volonté de Dieu et si son heure est venue.</p>"
 		},
 		{
 			"kind": "heading",
@@ -236,12 +288,12 @@
 		{
 			"kind": "definition",
 			"term": "Matière",
-			"html": "<p><strong>Sept onctions</strong> à l'<em>huile des malades</em> (l'une des trois huiles saintes de l'Église, consacrée par l'évêque le jeudi saint), sur les <em>yeux, oreilles, narines, lèvres, mains, pieds, reins</em>. L'onction des reins est aujourd'hui interdite pour raisons d'hygiène · celle des pieds, facultative. Soit cinq onctions effectivement pratiquées. En cas d'urgence, on peut donner le sacrement par une seule onction sur le front.</p>"
+			"html": "<p><strong>Sept onctions</strong> à l'<em>huile des malades</em> (une des trois huiles saintes de l'Église, avec le saint chrême pour les consécrations et l'huile des catéchumènes pour les exorcismes ; toutes consacrées par l'évêque le jeudi saint), sur les <em>yeux, oreilles, narines, lèvres, mains, pieds, reins</em>. L'onction des reins est aujourd'hui interdite pour raisons d'hygiène ; celle des pieds, facultative. Soit cinq onctions effectivement pratiquées. En cas d'urgence, on peut donner le sacrement par une seule onction sur le front.</p>"
 		},
 		{
 			"kind": "definition",
 			"term": "Forme",
-			"html": "<p>Les paroles qui accompagnent chaque onction · <em>« Par cette sainte onction, et par sa très pieuse miséricorde, que Dieu vous pardonne les péchés commis par (tel sens). »</em></p>"
+			"html": "<p>Les paroles qui accompagnent chaque onction : <em>« Par cette sainte onction, et par sa très pieuse miséricorde, que Dieu vous pardonne les péchés commis par (tel sens). »</em></p>"
 		},
 		{
 			"kind": "heading",
@@ -251,7 +303,11 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>L'extrême-onction est le <strong>seul sacrement où un effet sensible</strong> (le soulagement du corps) est promis · sous condition de la volonté de Dieu qui peut, au contraire, rappeler à lui cette âme. Les prières demandent expressément le rétablissement du malade et son retour à ses fonctions précédentes. On voit parfois des guérisons étonnantes · personnes sorties d'un coma de plusieurs mois, agonisants qui repartent. Ces effets sensibles attestent la nature même du sacrement.</p>"
+			"html": "<p>L'extrême-onction est le <strong>seul sacrement où un effet sensible</strong> (le soulagement du corps) est promis ; sous condition de la volonté de Dieu qui peut, au contraire, rappeler à lui cette âme. Les prières demandent expressément le rétablissement du malade et son retour à ses fonctions précédentes. Aucun autre sacrement n'a d'effet sensible direct ; on peut très bien faire une bonne confession sans éprouver la moindre émotion, ce n'est pas prévu, ce n'est pas là (sauf à tourner de la tête à cause des vapeurs d'encens, mais c'est une autre histoire). Mais l'extrême-onction, oui ; la guérison et le soulagement du corps sont d'eux-mêmes des effets sensibles. Par définition. Et vous verrez, c'est étonnant ce qu'elle peut parfois faire ; on voit parfois des personnes sortir d'un coma de plusieurs mois, des agonisants qui repartent. C'est étonnant.</p>"
+		},
+		{
+			"kind": "paragraph",
+			"html": "<p>Anecdote pour illustrer, parmi une centaine que je pourrais raconter. J'avais affaire à deux vieilles demoiselles, deux sœurs. L'une m'appelle pour extrémonctionner l'autre, qui était dans le <em>coma depuis huit mois</em>. Je viens donc pour celle qui était dans le coma ; sa sœur, en bonne santé, m'accueille. J'entre, je commence ; absolution sous condition (puisqu'elle ne pouvait se confesser), puis le rite du sacrement des malades. Et là, sous l'onction, <em>elle se réveille</em> ; elle se redresse, elle commence à parler. Moi, ça ne m'a pas tellement surpris : je ne savais pas qu'elle était dans le coma depuis huit mois. Mais ce que voyant, sa sœur, étonnée de la voir parler comme cela, <em>tombe évanouie</em>, syncope complète. Plus de mille occupations pour moi : celle que je devais extrémonctionner qui parle, et l'autre qui tombe à la renverse. J'ai dû réveiller la sœur, lui imposer les mains et finalement <em>lui</em> donner aussi le sacrement à elle. L'une et l'autre s'en sont parfaitement remises, très très bien. Vous le verrez ; les prêtres qui sont près de vous vous le diront. Il y a des effets sensibles attachés à ce sacrement ; c'est très réconfortant de le donner.</p>"
 		},
 		{
 			"kind": "heading",
@@ -261,7 +317,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Cinq effets ·</p><ol><li>le <strong>soulagement du corps</strong>, parfois jusqu'à la guérison ·</li><li>le <strong>pardon des péchés véniels</strong> (direct, effet propre) ·</li><li>le <strong>pardon des péchés mortels</strong> par <em>accident</em>, quand l'âme est disposée (<em>attrition habituelle</em>) et ne peut se confesser · effet précieux pour qui ne peut plus parler ·</li><li>l'<strong>augmentation de la grâce sanctifiante</strong> (commune à tous les sacrements) ·</li><li>la <strong>grâce actuelle pour bien mourir</strong> si telle est la volonté de Dieu · paix, sérénité devant la mort, éloignement du démon.</li></ol>"
+			"html": "<p>Cinq effets :</p><ol><li>le <strong>soulagement du corps</strong>, parfois jusqu'à la guérison, et une certaine paix de l'âme qui en est la conséquence</li><li>le <strong>pardon des péchés véniels</strong> (direct, effet propre du sacrement)</li><li>le <strong>pardon des péchés mortels</strong> par <em>accident</em>, disent les théologiens, quand l'âme est disposée (<em>attrition habituelle</em> ; c'est-à-dire « je regrette mes péchés par crainte ou par honte, habituellement », pas une contrition parfaite par amour de Dieu, mais déjà une vraie disposition) et que la personne ne peut plus se confesser ; effet précieux pour qui ne peut plus parler ; à ne pas oublier dans la pratique pastorale</li><li>l'<strong>augmentation de la grâce sanctifiante</strong>, commune à tous les sacrements, fonds commun ; rien à apprendre de plus ici</li><li>la <strong>grâce actuelle pour bien mourir</strong> si telle est la volonté de Dieu, qui décide ; paix, sérénité devant la mort, éloignement du démon, qui à l'agonie se déchaîne pour saisir l'âme, on le voit bien. Vous le verrez, je vous assure, vous le verrez ; certains effets sont sensibles.</li></ol>"
 		},
 		{
 			"kind": "heading",
@@ -271,23 +327,23 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Il faut souffrir d'un mal qui <em>peut</em> entraîner jusqu'à la mort. Deux excès à éviter ·</p>"
+			"html": "<p>Il faut souffrir d'un mal qui <em>peut</em> entraîner jusqu'à la mort. Deux excès à éviter :</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>Excès actuel.</strong> Donner le sacrement à tous ceux qui ont plus de 65 ans · invalide pour la plupart, car ils ne sont pas malades. La vieillesse seule ne suffit pas · on peut être en pleine forme à 85 ans, et mourir d'une maladie à 18 ans.</p>"
+			"html": "<p><strong>Excès actuel.</strong> Donner le sacrement à tous ceux qui ont plus de 65 ans ; invalide pour la plupart, car ils ne sont pas malades. La vieillesse seule ne suffit pas ; on peut être en pleine forme à 85 ans, en parfait bolide même à 92 ans, et mourir d'une maladie à 18 ans. Pas non plus pour un rhume du jeune de 20 ans ; il faut du bon sens. Une grave bronchite d'un homme de 84 ans, oui ; un rhume bénin, non.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p><strong>Excès contraire.</strong> Attendre l'agonie ou la mort. <em>« Mon Père, venez vite, il vient de mourir »</em> · je suis prêtre, pas croque-mort. Il faut appeler à temps, avant la perte de la raison · que d'âmes se perdent par cette négligence.</p>"
+			"html": "<p><strong>Excès contraire.</strong> Attendre l'agonie ou la mort. Même à Saint-Nicolas-du-Chardonnet, on m'a appelé plusieurs fois : <em>« Mon Père, venez vite, il vient de mourir »</em> ; mais enfin, je <strong>ne suis pas un croque-mort</strong> ; je suis prêtre, c'est pour la vie, c'est pour donner la vie, soigner, guérir, sauver. Que de bêtises chez les gens, parce qu'ils perdent la foi ! Ils prennent le prêtre pour un entrepreneur de pompes funèbres parce qu'il est habillé de noir, je ne sais pas. Le prêtre, il vient donner la vie, il vient même <em>ressusciter</em>, guérir le malade ; il y a plus de chance, en appelant le prêtre, que votre malade soit rétabli, puisque c'est un des effets du sacrement. Autrefois, quand il y avait la foi, on appelait le prêtre, c'était normal, c'était tout à fait normal, et ce n'était <em>pas triste</em> ; au contraire, on pensait que le prêtre était à peu près le seul capable de sortir ce pauvre malade. Le terme d'extrême-onction a parfois rendu de mauvais services à cette mentalité, faisant croire qu'on appelait le prêtre quand on était déjà fichu. Pas du tout la pensée de l'Église. Il faut appeler à temps, avant la perte de la raison ; que d'âmes se perdent par cette négligence.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Tous les bons chrétiens devraient mourir avec l'extrême-onction · et la recevoir à chaque maladie sérieuse, à chaque opération grave. Ce n'est pas un luxe · c'est un sacrement, et un sacrement consolant pour le malade, pour son entourage, et pour le prêtre.</p>"
+			"html": "<p>Ce sacrement n'est <em>pas assez donné</em>. Tous les bons chrétiens devraient mourir avec l'extrême-onction, et la recevoir à chaque maladie sérieuse, à chaque opération grave. Le mal étant déjà là, il serait tout à fait normal de recevoir le sacrement des malades. Ce n'est pas un luxe : c'est un sacrement, et un sacrement <em>consolant</em> pour celui qui le reçoit, pour son entourage, et pour le prêtre. Je peux vous dire que je ne suis jamais rentré aussi content qu'après une belle extrême-onction, un beau sacrement des malades.</p>"
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>On peut le recevoir <strong>autant de fois</strong> qu'une nouvelle maladie se reproduit · les sacrements à caractère seuls ne se réitèrent jamais (baptême, confirmation, ordre) · les autres, oui · y compris le mariage en cas de veuvage.</p>"
+			"html": "<p>On peut le recevoir <strong>autant de fois</strong> qu'une nouvelle maladie se reproduit ; les sacrements à caractère seuls ne se réitèrent jamais (baptême, confirmation, ordre) ; les autres, oui ; y compris le mariage en cas de veuvage. Pour un cancer qui traîne cinq ans, pas la peine de redonner le sacrement, à moins d'une rémission totale entre les deux ; au-delà, à chaque rechute, on peut.</p>"
 		},
 		{
 			"kind": "heading",
@@ -297,7 +353,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Le <strong>prêtre seul</strong>, comme l'indique saint Jacques · <em>« les presbytres de l'Église »</em>. Le pluriel suggère que plusieurs prêtres peuvent donner le sacrement à la fois · ce qui explique un détail longtemps mystérieux du rituel · le prêtre impose <em>une</em> main, et dit · <em>« per istam positionem manuum nostrarum »</em>, « par l'imposition de <em>nos</em> mains » · au pluriel, parce que les prêtres venaient parfois à plusieurs.</p>"
+			"html": "<p>Le <strong>prêtre seul</strong>, comme l'indique saint Jacques : <em>« les presbytres de l'Église »</em>, ceux qui sont revêtus du sacrement de l'ordre. Et eux seuls. Le pluriel de saint Jacques suggère même que <em>plusieurs prêtres</em> peuvent donner le sacrement à la fois ; ce qui explique un détail longtemps mystérieux du rituel. <em>Trente ans</em> j'ai cherché l'explication de ce détail. Le prêtre impose <em>une seule</em> main sur la tête du malade, et la formule dit : <em>« per istam positionem manuum nostrarum »</em>, « par cette imposition de <em>nos mains</em> » ; <em>main</em> au singulier dans le geste, <em>mains</em> au pluriel dans la formule, et <em>nos</em> au pluriel possessif. Je me disais : pourquoi le prêtre parle-t-il au pluriel <em>nostrarum</em> et pose-t-il une seule main, et parle de ses mains au pluriel ? Eh bien, voilà : parce que les prêtres venaient parfois à plusieurs ; chacun faisait une onction et imposait sa main, comme le prévoit encore le rituel. Le pluriel de la formule a survécu au cas habituel du prêtre seul, vestige liturgique de la pratique apostolique attestée par saint Jacques.</p>"
 		},
 		{
 			"kind": "heading",
@@ -307,7 +363,7 @@
 		},
 		{
 			"kind": "paragraph",
-			"html": "<p>Deux sacrements qui portent l'Église · l'<em>ordre</em>, qui en bâtit la hiérarchie depuis le Christ, par le caractère sacerdotal qui participe à la grâce d'union elle-même · l'<em>extrême-onction</em>, qui prolonge la miséricorde du Christ guérisseur jusqu'au lit des malades. Que le prêtre soit toujours appelé · <em>à temps</em>, pour ne pas perdre l'âme · et <em>avec confiance</em>, car il vient donner la vie.</p>"
+			"html": "<p>Deux sacrements qui portent l'Église ; l'<em>ordre</em>, qui en bâtit la hiérarchie depuis le Christ, par le caractère sacerdotal qui participe à la grâce d'union elle-même, le seul pont possible entre Dieu et les hommes ; l'<em>extrême-onction</em>, qui prolonge la miséricorde du Christ guérisseur jusqu'au lit des malades, plein de joies pour le prêtre, plein de grâces pour le fidèle. Remercions Dieu des grâces de ce sacerdoce qu'il nous donne. Et que le prêtre soit toujours appelé pour le sacrement des malades ; <em>à temps</em>, pour ne pas perdre l'âme, et <em>avec confiance</em>, car il ne vient pas en croque-mort, il vient donner la vie.</p>"
 		}
 	]
 }
