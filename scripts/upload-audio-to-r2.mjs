@@ -80,7 +80,7 @@ async function uploadOne(token, { local, key, ctype }) {
 			'Content-Length': String(size)
 		},
 		body,
-		// @ts-ignore — duplex required when body is a stream in Node 18+
+		// @ts-expect-error — duplex required when body is a stream in Node 18+
 		duplex: 'half'
 	});
 	if (!res.ok) {
