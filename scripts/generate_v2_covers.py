@@ -40,7 +40,7 @@ FONT_SANS     = Path("/tmp/Gotham-Medium.ttf")
 COVER_IMG_DEFAULT = Path.home() / "Documents/ccc_v2_audio_v3/cover_files.jpg"
 # Row (at SIZE×SIZE) where the cover's existing content ends and our overlay begins.
 # cover_files.jpg has the design ending ~y=550; 600 leaves a clean 50px margin.
-OVERLAY_TOP = 600
+OVERLAY_TOP = 530
 
 
 # ---------------------------------------------------------------------------

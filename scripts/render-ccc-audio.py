@@ -269,10 +269,15 @@ def _run_v2(args: argparse.Namespace, manifest: dict) -> int:
             prefix = f"Article {art_num} · " if art_num else ""
             title_seg = f"{prefix}{para_title}"
         else:
-            # Title = first heading segment text (already clean + phonetic).
+            # Title = first v2 segment of the boundary heading (skip range announces
+            # like 'Paragraphes ...'). Falls back to first heading if no boundary.
+            src = boundary["segments"] if boundary else [
+                s for e in group["entries"] if e["kind"] == "heading"
+                for s in e["segments"]
+            ]
             title_seg = next(
-                (s["text"] for e in group["entries"] if e["kind"] == "heading"
-                 for s in e["segments"] if "v2" in s["targets"]),
+                (s["text"] for s in src
+                 if "v2" in s["targets"] and not s["text"].startswith(("Paragraphes ", "Paragraphe "))),
                 f"CCC {group['file_number']}",
             )
         album = (loc.get("section_title") or loc.get("part_title") or "CCC")
