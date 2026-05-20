@@ -219,6 +219,25 @@ def _v2_opts_for(seg: dict) -> tuple[int | None, int | None, int | None]:
     return None, None, None
 
 
+def _seg_type(seg: dict, entry: dict) -> str:
+    """Classify a v2 segment for chapter_map / SYLT consumers."""
+    text  = seg["text"]
+    voice = seg["voice"]
+    if entry["kind"] == "heading":
+        if text.startswith(("Paragraphes ", "Paragraphe ")):
+            return "range_announce"
+        level = entry.get("level") or "heading"
+        return f"heading_{level}"
+    # paragraph entry
+    if voice == "gerard" and text.startswith("Paragraphe "):
+        return "paragraph_announce"
+    if voice == "gerard" and text.startswith("Citation"):
+        return "citation_announce"
+    if voice == "fabrice":
+        return "citation"
+    return "body"
+
+
 def render_v2_group(
     *,
     group: dict,
@@ -228,33 +247,31 @@ def render_v2_group(
     skip_existing: bool = False,
     macos_gerard_voice: str | None = None,
     macos_gerard_rate_wpm: int | None = None,
-) -> bool:
+) -> tuple[bool, list[dict] | None]:
     """Render all v2-targeted segments from a file group into one MP3.
 
-    Uses a wider `section_gap_ms` after every heading segment to give the
-    listener a breath before body text begins.
-
-    When `macos_gerard_voice` is set (e.g. "Thomas (Enhanced)"), Gerard
-    segments are rendered via macOS say + ffmpeg instead of edge-tts.
+    Returns `(success, chapter_map)`. `chapter_map` is a list of dicts:
+        {start_ms, end_ms, type, voice, text, paragraph?, level?}
+    sorted in playback order, suitable for CHAP/CTOC, SYLT, and karaoke
+    timing. `None` when skipped or on failure.
     """
     if skip_existing and out_path.exists():
-        return True
+        return True, None
 
-    tagged: list[tuple[dict, bool]] = []
+    tagged: list[tuple[dict, dict, bool]] = []
     for entry in group["entries"]:
         is_heading = entry["kind"] == "heading"
         for seg in entry["segments"]:
             if "v2" in seg["targets"]:
-                tagged.append((seg, is_heading))
+                tagged.append((seg, entry, is_heading))
 
     if not tagged:
-        return False
+        return False, None
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     def _render_seg(seg: dict, dest: Path) -> bool:
         if macos_gerard_voice and seg["voice"] == "gerard":
-            # Quieter for structural labels (range announces, citation intros).
             text = seg["text"]
             is_label = (text.startswith("Paragraphes ") or
                         text.startswith("Paragraphe ") or
@@ -270,25 +287,50 @@ def render_v2_group(
                                     override_volume_pct=vol)
         return subprocess.run(argv, capture_output=True, text=True).returncode == 0
 
+    def _seg_entry(seg: dict, entry: dict, start_ms: int, end_ms: int) -> dict:
+        out: dict = {
+            "start_ms": start_ms,
+            "end_ms":   end_ms,
+            "type":     _seg_type(seg, entry),
+            "voice":    seg["voice"],
+            "text":     seg["text"],
+        }
+        if entry.get("level"):
+            out["level"] = entry["level"]
+        if "number" in entry:
+            out["paragraph"] = entry["number"]
+        return out
+
     if len(tagged) == 1:
-        seg, _ = tagged[0]
-        return _render_seg(seg, out_path)
+        seg, entry, _ = tagged[0]
+        if not _render_seg(seg, out_path):
+            return False, None
+        dur_ms = int(MP3(str(out_path)).info.length * 1000)
+        return True, [_seg_entry(seg, entry, 0, dur_ms)]
 
     tmpdir = Path(tempfile.mkdtemp(prefix="ccc_v2_"))
     try:
         files: list[Path] = []
-        for i, (seg, is_heading) in enumerate(tagged):
+        chapter_map: list[dict] = []
+        cursor_ms = 0
+        for i, (seg, entry, is_heading) in enumerate(tagged):
             seg_file = tmpdir / f"seg_{i:04d}.mp3"
             if not _render_seg(seg, seg_file):
-                return False
+                return False, None
+            seg_ms = int(MP3(str(seg_file)).info.length * 1000)
+            chapter_map.append(_seg_entry(seg, entry, cursor_ms, cursor_ms + seg_ms))
+            cursor_ms += seg_ms
             files.append(seg_file)
             if i < len(tagged) - 1:
                 this_gap = section_gap_ms if is_heading else gap_ms
                 gap_file = tmpdir / f"gap_{i:04d}.mp3"
                 if not generate_silence(this_gap, gap_file):
-                    return False
+                    return False, None
                 files.append(gap_file)
-        return concat_mp3s(files, out_path)
+                cursor_ms += this_gap
+        if not concat_mp3s(files, out_path):
+            return False, None
+        return True, chapter_map
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
 

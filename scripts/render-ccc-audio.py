@@ -227,13 +227,14 @@ def _run_v2(args: argparse.Namespace, manifest: dict) -> int:
         rng = group["paragraph_range"]
         label = f"{group['file_number']}  §{rng[0]}–§{rng[-1]}"
 
-        if not rlib.render_v2_group(
+        ok, chapter_map = rlib.render_v2_group(
             group=group, out_path=out_path,
             gap_ms=args.gap_ms, section_gap_ms=args.section_gap_ms,
             skip_existing=args.skip_existing,
             macos_gerard_voice=args.macos_gerard,
             macos_gerard_rate_wpm=args.macos_gerard_rate,
-        ):
+        )
+        if not ok:
             print(f"FAIL {label}", file=sys.stderr)
             continue
 
@@ -284,11 +285,14 @@ def _run_v2(args: argparse.Namespace, manifest: dict) -> int:
         track_num = int(group["file_number"][1:])  # "h0042" -> 42
         rlib.tag_mp3(out_path, title=title_seg, album=album, track=track_num)
 
-        index[group["file_number"]] = {
+        entry: dict = {
             "file": rel,
             "paragraph_range": group["paragraph_range"],
             "duration_ms": duration_ms,
         }
+        if chapter_map is not None:
+            entry["chapter_map"] = chapter_map
+        index[group["file_number"]] = entry
         print(f"OK  {label} -> {rel}  ({duration_ms}ms)")
 
     if groups:
