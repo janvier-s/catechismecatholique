@@ -1389,6 +1389,14 @@ def _patch_group_headings(groups: list[dict], chapters_full_dir: Path) -> None:
             segs.append(range_seg)
             boundary_h["segments"] = segs
 
+        elif level == "chapter":
+            # Standalone chapter: keep title segments, replace the existing
+            # range announce (which may span beyond the file, e.g. when the
+            # chapter's en_bref is split into its own file).
+            title_segs = [s for s in boundary_h["segments"]
+                          if not s["text"].startswith(("Paragraphes ", "Paragraphe "))]
+            boundary_h["segments"] = list(title_segs) + [range_seg]
+
 
 def build_v2_file_groups(manifest: dict,
                          chapters_full_dir: Path | None = None) -> list[dict]:
