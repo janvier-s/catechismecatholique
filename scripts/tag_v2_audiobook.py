@@ -19,8 +19,33 @@ ALBUM       = "Catéchisme de l'Église Catholique"
 ARTIST      = "Magistère de l'Église catholique"
 PUBLISHER   = "catechismecatholique.fr"
 COMMENT_URL = "https://catechismecatholique.fr"
-YEAR        = "2025"
+YEAR        = "2026"
 GENRE       = "Audiobook"
+LANGUAGE    = "fra"
+COPYRIGHT   = ("© Libreria Editrice Vaticana, 1992 · "
+               "Voix : edge-tts (Microsoft Azure) · "
+               "Édition audio : catechismecatholique.fr, 2026")
+ENCODER     = ("edge-tts fr-BE-GerardNeural / fr-FR-RemyMultilingualNeural / "
+               "fr-CH-FabriceNeural + ffmpeg libmp3lame")
+SOURCE_URL  = "https://www.vatican.va/archive/ccc/index_fr.htm"
+SORT_ALBUM  = "Catechisme de l'Eglise Catholique"
+SORT_ARTIST = "Magistere de l'Eglise catholique"
+
+
+def _strip_accents(s: str) -> str:
+    return "".join(c for c in unicodedata.normalize("NFD", s)
+                   if unicodedata.category(c) != "Mn")
+
+
+def _sort_key(title: str) -> str:
+    """Sort-friendly form: strip leading punctuation/quotes and diacritics."""
+    s = _strip_accents(_clean(title))
+    return s.lstrip("«»\"' \t·-—")
+
+
+def _para_range(p: Path) -> tuple[int, int] | None:
+    m = re.search(r"(\d{4})-(\d{4})\.mp3$", p.name)
+    return (int(m.group(1)), int(m.group(2))) if m else None
 
 # directory prefix → (disc_number, disc_title)
 _DISC_MAP = {
@@ -66,8 +91,10 @@ def _disc_for(mp3: Path, audio_dir: Path) -> tuple[int, str]:
 def tag_all(audio_dir: Path, cover_path: Path, manifest_path: Path) -> None:
     try:
         from mutagen.id3 import (
-            ID3, APIC, TALB, TIT2, TPE1, TPE2, TCON, TDRC,
-            TRCK, TPOS, TPUB, COMM, error as ID3Error,
+            ID3, APIC, TALB, TIT2, TIT3, TPE1, TPE2, TCON, TDRC,
+            TRCK, TPOS, TPUB, TCOM, TLAN, TCOP, TSSE,
+            TSOT, TSOA, TSOP, COMM, WOAR, WCOP,
+            error as ID3Error,
         )
         from mutagen.mp3 import MP3
     except ImportError:
@@ -115,21 +142,36 @@ def tag_all(audio_dir: Path, cover_path: Path, manifest_path: Path) -> None:
             audio.add_tags()
             tags = audio.tags  # type: ignore[assignment]
 
-        tags.delall("APIC")
-        tags.delall("TALB"); tags.delall("TIT2"); tags.delall("TPE1"); tags.delall("TPE2")
-        tags.delall("TCON"); tags.delall("TDRC"); tags.delall("TRCK"); tags.delall("TPOS")
-        tags.delall("TPUB"); tags.delall("COMM")
+        for f in ("APIC", "TALB", "TIT2", "TIT3", "TPE1", "TPE2",
+                  "TCON", "TDRC", "TRCK", "TPOS", "TPUB", "COMM",
+                  "TCOM", "TLAN", "TCOP", "TSSE",
+                  "TSOT", "TSOA", "TSOP", "WOAR", "WCOP"):
+            tags.delall(f)
+
+        rng = _para_range(p)
+        subtitle = f"Paragraphes {rng[0]} à {rng[1]}" if rng else None
 
         tags.add(APIC(encoding=3, mime="image/jpeg", type=3, desc="Cover", data=cover_data))
         tags.add(TALB(encoding=3, text=ALBUM))
         tags.add(TIT2(encoding=3, text=title))
+        if subtitle:
+            tags.add(TIT3(encoding=3, text=subtitle))
         tags.add(TPE1(encoding=3, text=ARTIST))
         tags.add(TPE2(encoding=3, text=ARTIST))
+        tags.add(TCOM(encoding=3, text=ARTIST))
         tags.add(TCON(encoding=3, text=GENRE))
         tags.add(TDRC(encoding=3, text=YEAR))
+        tags.add(TLAN(encoding=3, text=LANGUAGE))
         tags.add(TRCK(encoding=3, text=f"{track_num}/{track_total}"))
         tags.add(TPOS(encoding=3, text=f"{disc_num}/{total_discs}"))
         tags.add(TPUB(encoding=3, text=PUBLISHER))
+        tags.add(TCOP(encoding=3, text=COPYRIGHT))
+        tags.add(TSSE(encoding=3, text=ENCODER))
+        tags.add(TSOT(encoding=3, text=_sort_key(title)))
+        tags.add(TSOA(encoding=3, text=SORT_ALBUM))
+        tags.add(TSOP(encoding=3, text=SORT_ARTIST))
+        tags.add(WOAR(url=COMMENT_URL))
+        tags.add(WCOP(url=SOURCE_URL))
         tags.add(COMM(encoding=3, lang="fra", desc="", text=COMMENT_URL))
 
         tags.save(str(p))
