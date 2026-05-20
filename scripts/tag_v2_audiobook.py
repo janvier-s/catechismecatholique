@@ -16,7 +16,7 @@ import unicodedata
 from pathlib import Path
 
 ALBUM       = "Catéchisme de l'Église Catholique"
-ARTIST      = "Catéchisme de l'Église Catholique"
+ARTIST      = "Magistère de l'Église catholique"
 PUBLISHER   = "catechismecatholique.fr"
 COMMENT_URL = "https://catechismecatholique.fr"
 YEAR        = "2025"
