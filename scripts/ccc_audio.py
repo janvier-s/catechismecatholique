@@ -898,6 +898,7 @@ def _format_range_announce(first: int, last: int) -> str:
 
 
 _HEADING2_ROMAN_RE = re.compile(r"^([IVXLCDM]+)\.\s*")
+_HEADING_PAREN_RE = re.compile(r"\s*\([^)]*\)")
 
 
 def _convert_heading2_title(title: str) -> str:
@@ -910,6 +911,15 @@ def _convert_heading2_title(title: str) -> str:
     if not m:
         return title
     return f"{roman_to_arabic(m.group(1))}. {title[m.end():]}"
+
+
+def _strip_heading_parens(title: str) -> str:
+    """Remove parenthesized refs from a heading title.
+
+    '« Annoncer l'insondable richesse du Christ » (Ep 3, 8)'
+        → '« Annoncer l'insondable richesse du Christ »'
+    """
+    return _HEADING_PAREN_RE.sub("", title).strip()
 
 
 def _heading2_ranges(
@@ -972,7 +982,9 @@ def build_heading_entry(
     elif level in ("heading2", "heading3"):
         # heading2 titles have leading Roman numerals ("I. Le désir…"); heading3 titles don't.
         # _convert_heading2_title is a no-op when no leading Roman numeral is present.
-        text = apply_intro_phonetic(_convert_heading2_title(title))
+        # Strip parenthesized refs (e.g. scripture citations like "(Ep 3, 8)") — they're
+        # for the reader's eye, not the listener's ear.
+        text = apply_intro_phonetic(_strip_heading_parens(_convert_heading2_title(title)))
         if not text.endswith("."):
             text += "."
         segments.append({"voice": "gerard", "text": text, "targets": ["v2"]})
@@ -1156,8 +1168,15 @@ def _build_entries_structured(
 
     def _emit_article(
         art: dict, ch_loc: dict, pre_paras: list[int] | None = None,
+        chapter_headings: list[dict] | None = None,
     ) -> None:
-        """Emit article heading + pre-article paras (orphans / merged intros) + article paragraphs."""
+        """Emit article heading + pre-article paras (orphans / merged intros) + article paragraphs.
+
+        When ``chapter_headings`` is provided alongside ``pre_paras``, chapter-level
+        h2/h3 headings whose paragraph_start falls in the preamble range are
+        interleaved with the pre-paragraphs so listeners still hear those
+        section titles (otherwise the chapter preamble would be read as one
+        flat run of paragraphs)."""
         art_paras = sorted(art.get("paragraphs", []))
         pre = sorted(pre_paras or [])
         art_first = pre[0] if pre else (art_paras[0] if art_paras else art["range"]["from"])
@@ -1169,10 +1188,20 @@ def _build_entries_structured(
         }
         _emit_heading("article", art["title"], art.get("number"),
                       (art_first, art_last), art_loc)
-        for n in pre:
-            p = _load(n)
-            if p:
-                _add_para(p, ch_loc)  # pre-paras carry chapter-level location
+        if pre:
+            preamble_hs = [
+                h for h in (chapter_headings or [])
+                if h.get("paragraph_start") is not None
+                and pre[0] <= h["paragraph_start"] <= pre[-1]
+                and h.get("level") in (2, 3)
+            ]
+            if preamble_hs:
+                _emit_paras_with_h2s(pre, preamble_hs, ch_loc)
+            else:
+                for n in pre:
+                    p = _load(n)
+                    if p:
+                        _add_para(p, ch_loc)
         _emit_paras_with_h2s(art_paras, art.get("headings", []), art_loc)
 
     def _emit_chapter(chapter: dict, sec_loc: dict) -> None:
@@ -1197,8 +1226,13 @@ def _build_entries_structured(
             # that follows announces its own range, so suppress range here.
             _emit_heading("chapter", chapter["title"], chapter["number"],
                           (ch_first, ch_last), ch_loc, announce_range=False)
+            chapter_headings = chapter.get("headings", [])
             for i, art in enumerate(articles):
-                _emit_article(art, ch_loc, pre_paras=pre_all if i == 0 else None)
+                _emit_article(
+                    art, ch_loc,
+                    pre_paras=pre_all if i == 0 else None,
+                    chapter_headings=chapter_headings if i == 0 else None,
+                )
         else:
             if not ch_paras:
                 return
@@ -1302,12 +1336,27 @@ def _patch_group_headings(groups: list[dict], chapters_full_dir: Path) -> None:
     """
     paragraphes = _load_paragraphes_lookup(chapters_full_dir)
 
+    def _is_boundary_h(entry: dict) -> bool:
+        if entry["level"] in ("article", "en_bref", "continuation"):
+            return True
+        if entry["level"] == "chapter":
+            return len(entry.get("segments", [])) >= 2
+        return False
+
     for g in groups:
         actual_lo, actual_hi = g["paragraph_range"]
-        first_h = next((e for e in g["entries"] if e["kind"] == "heading"), None)
-        if first_h is None:
+        # Use the file's boundary heading (article / continuation / en_bref /
+        # standalone chapter). When a chapter preamble precedes the article
+        # heading in the entries list, we must patch the article heading, not
+        # the preamble heading.
+        boundary_h = next(
+            (e for e in g["entries"]
+             if e["kind"] == "heading" and _is_boundary_h(e)),
+            None,
+        )
+        if boundary_h is None:
             continue
-        level = first_h["level"]
+        level = boundary_h["level"]
 
         para_info = paragraphes.get(actual_lo)
         if para_info:
@@ -1320,7 +1369,7 @@ def _patch_group_headings(groups: list[dict], chapters_full_dir: Path) -> None:
 
         if level == "article":
             # Keep the article title segment; rebuild the rest.
-            title_segs = [s for s in first_h["segments"]
+            title_segs = [s for s in boundary_h["segments"]
                           if not s["text"].startswith("Paragraphe")]
             new_segs = list(title_segs)
             if para_info:
@@ -1329,16 +1378,16 @@ def _patch_group_headings(groups: list[dict], chapters_full_dir: Path) -> None:
                 )
                 new_segs.append({"voice": "gerard", "text": subtitle, "targets": ["v2"]})
             new_segs.append(range_seg)
-            first_h["segments"] = new_segs
+            boundary_h["segments"] = new_segs
 
         elif level == "continuation" and para_info:
-            segs = list(first_h.get("segments", []))
+            segs = list(boundary_h.get("segments", []))
             subtitle = apply_intro_phonetic(
                 f"Paragraphe {para_info['number']} : {para_info['title']}."
             )
             segs.append({"voice": "gerard", "text": subtitle, "targets": ["v2"]})
             segs.append(range_seg)
-            first_h["segments"] = segs
+            boundary_h["segments"] = segs
 
 
 def build_v2_file_groups(manifest: dict,

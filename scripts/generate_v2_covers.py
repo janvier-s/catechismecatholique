@@ -37,9 +37,10 @@ FONT_SANS_SRC = ROOT / "static/fonts/Gotham-Medium.woff2"
 FONT_SANS     = Path("/tmp/Gotham-Medium.ttf")
 
 # The shared album cover — per-file overlays are composited on top of this.
-COVER_IMG_DEFAULT = Path.home() / "Documents/ccc_v2_audio/cover.jpg"
+COVER_IMG_DEFAULT = Path.home() / "Documents/ccc_v2_audio_v3/cover_files.jpg"
 # Row (at SIZE×SIZE) where the cover's existing content ends and our overlay begins.
-OVERLAY_TOP = 700
+# cover_files.jpg has the design ending ~y=550; 600 leaves a clean 50px margin.
+OVERLAY_TOP = 600
 
 
 # ---------------------------------------------------------------------------
@@ -244,14 +245,14 @@ def _render_section(draw: ImageDraw.ImageDraw, y: int, info: dict,
     label_color = ACCENT if eb else MUTED
     title_color = HEADING
 
-    font_label = _sans(22)
+    font_label = _sans(18)
     if label:
         y = _draw_centered(draw, y, label, font_label, label_color) + LINE_GAP
 
     if title:
         # Pick font size so the longest wrapped line fits
         # Start at 60, scale down until wrapped lines fit
-        font_sz = 52 if is_primary else 42
+        font_sz = 44 if is_primary else 36
         font    = _serif(font_sz)
         lines   = _wrap_text(title, draw, font, MAX_W)
         while len(lines) > 3 and font_sz > 24:
@@ -289,9 +290,9 @@ def generate_cover(info: dict, cover_img: Path = COVER_IMG_DEFAULT) -> Image.Ima
             label = info.get("label") if is_prim else info.get("label2")
             title = info.get("title") if is_prim else info.get("title2")
             if label:
-                h += _line_h(_sans(22)) + LINE_GAP
+                h += _line_h(_sans(18)) + LINE_GAP
             if title:
-                font_sz = 52 if is_prim else 42
+                font_sz = 44 if is_prim else 36
                 font    = _serif(font_sz)
                 lines   = _wrap_text(title, draw, font, MAX_W)
                 while len(lines) > 3 and font_sz > 24:
@@ -320,7 +321,7 @@ def generate_cover(info: dict, cover_img: Path = COVER_IMG_DEFAULT) -> Image.Ima
     draw.line([(SIDE_MARGIN, RANGE_Y - 14), (SIZE - SIDE_MARGIN, RANGE_Y - 14)],
               fill=ACCENT if info.get("eb") else RULE_C, width=1)
 
-    font_range = _sans(44)
+    font_range = _sans(38)
     while _text_w(draw, info["range_str"], font_range) > MAX_W:
         font_range = _sans(font_range.size - 2)
     _draw_centered(draw, RANGE_Y, info["range_str"], font_range, ACCENT)

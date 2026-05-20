@@ -241,7 +241,19 @@ def _run_v2(args: argparse.Namespace, manifest: dict) -> int:
         loc = group["location"]
 
         # Boundary heading level decides how to derive the title.
-        boundary = next((e for e in group["entries"] if e["kind"] == "heading"), None)
+        # Skip chapter preamble headings (single segment, no range announce) to
+        # reach the real file boundary (article / en_bref / continuation /
+        # standalone chapter).
+        def _is_boundary_h(e: dict) -> bool:
+            lv = e.get("level")
+            if lv in ("article", "en_bref", "continuation"):
+                return True
+            return lv == "chapter" and len(e.get("segments", [])) >= 2
+
+        boundary = next(
+            (e for e in group["entries"] if e["kind"] == "heading" and _is_boundary_h(e)),
+            next((e for e in group["entries"] if e["kind"] == "heading"), None),
+        )
         level = boundary.get("level") if boundary else None
         para_title = group.get("paragraphe_title")
         if level == "en_bref":
