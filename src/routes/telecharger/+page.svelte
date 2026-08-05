@@ -65,6 +65,12 @@
 			url: PDF_2012_URL
 		}
 	];
+
+	function jsonLdScriptTag(data: unknown): string {
+		const open = '<' + 'script type="application/ld+json">';
+		const close = '<' + '/script>';
+		return `${open}${JSON.stringify(data)}${close}`;
+	}
 </script>
 
 <svelte:head>
@@ -84,9 +90,9 @@
 		content="Téléchargez gratuitement le Catéchisme de l'Église catholique en PDF : édition originale de 1992 et réédition du texte définitif de 2012. Lecture en ligne ou hors ligne, sans inscription."
 	/>
 	<meta property="og:url" content="https://catechismecatholique.fr/telecharger" />
-	{@html `<script type="application/ld+json">${JSON.stringify(faqJsonLd)}</script>`}
-	{#each editionsJsonLd as doc}
-		{@html `<script type="application/ld+json">${JSON.stringify(doc)}</script>`}
+	{@html jsonLdScriptTag(faqJsonLd)}
+	{#each editionsJsonLd as doc (doc.name)}
+		{@html jsonLdScriptTag(doc)}
 	{/each}
 </svelte:head>
 
@@ -96,9 +102,9 @@
 			<p class="eyebrow">Éditions imprimées · Gratuit</p>
 			<h1 class="title">Télécharger le Catéchisme de l'Église catholique en PDF</h1>
 			<p class="subhead">
-				Le texte intégral du Catéchisme de l'Église catholique à télécharger gratuitement en
-				PDF, pour le lire en ligne ou hors ligne, imprimer ou consulter hors connexion. Deux
-				éditions françaises disponibles&nbsp;: 1992 et 2012.
+				Le texte intégral du Catéchisme de l'Église catholique à télécharger gratuitement en PDF,
+				pour le lire en ligne ou hors ligne, imprimer ou consulter hors connexion. Deux éditions
+				françaises disponibles&nbsp;: 1992 et 2012.
 			</p>
 			<div class="ornament" aria-hidden="true">
 				<span class="fleuron">✠</span>
@@ -111,8 +117,8 @@
 				<p class="card-label">Édition française originale · 1992</p>
 				<h2 class="card-title">Catéchisme de l'Église catholique (1992)</h2>
 				<p class="card-desc">
-					Première édition française du Catéchisme de l'Église catholique, publiée par Mame et
-					Plon. Texte provisoire, antérieur à l'<i>editio typica</i> latine de 1997.
+					Première édition française du Catéchisme de l'Église catholique, publiée par Mame et Plon.
+					Texte provisoire, antérieur à l'<i>editio typica</i> latine de 1997.
 				</p>
 				<p class="card-meta">PDF · téléchargement gratuit · 33,6 Mo</p>
 				<a
@@ -129,8 +135,8 @@
 				<p class="card-label">Réédition du texte définitif · 2012</p>
 				<h2 class="card-title">Catéchisme de l'Église catholique (2012)</h2>
 				<p class="card-desc">
-					Réédition Bayard/Cerf/Fleurus-Mame du texte définitif de 1997/1998, publiée à
-					l'occasion de l'Année de la Foi, avec guide de lecture.
+					Réédition Bayard/Cerf/Fleurus-Mame du texte définitif de 1997/1998, publiée à l'occasion
+					de l'Année de la Foi, avec guide de lecture.
 				</p>
 				<p class="card-meta">PDF · téléchargement gratuit · 42,3 Mo</p>
 				<a
@@ -155,21 +161,21 @@
 			</p>
 			<p>
 				Environ 103 modifications séparent 1992 du texte définitif, la plupart mineures
-				(vocabulaire, références, formulations plus claires). Le cardinal Ratzinger, alors
-				préfet de la Congrégation pour la doctrine de la foi, avait précisé qu'il ne s'agissait
-				pas d'un « nouveau catéchisme » et que les possesseurs de l'édition de 1992 n'avaient pas
-				besoin de la remplacer.
+				(vocabulaire, références, formulations plus claires). Le cardinal Ratzinger, alors préfet de
+				la Congrégation pour la doctrine de la foi, avait précisé qu'il ne s'agissait pas d'un «
+				nouveau catéchisme » et que les possesseurs de l'édition de 1992 n'avaient pas besoin de la
+				remplacer.
 			</p>
 			<p>
 				Le changement le plus notable porte sur le paragraphe 2267 (peine de mort), qui intègre
-				l'enseignement d'<i>Evangelium vitae</i> (1995)&nbsp;: les cas de « nécessité absolue »
-				justifiant la peine de mort sont désormais décrits comme rares ou pratiquement
-				inexistants, grâce aux moyens modernes de rendre un coupable inoffensif.
+				l'enseignement d'<i>Evangelium vitae</i> (1995)&nbsp;: les cas de « nécessité absolue » justifiant
+				la peine de mort sont désormais décrits comme rares ou pratiquement inexistants, grâce aux moyens
+				modernes de rendre un coupable inoffensif.
 			</p>
 			<ul>
 				<li>
-					Anges gardiens (§336)&nbsp;: ils accompagnent la vie humaine « dès son commencement »,
-					et non plus seulement dès la naissance.
+					Anges gardiens (§336)&nbsp;: ils accompagnent la vie humaine « dès son commencement », et
+					non plus seulement dès la naissance.
 				</li>
 				<li>
 					Salut des non-baptisés de bonne volonté (§1281)&nbsp;: formulation en « peuvent être
@@ -181,9 +187,9 @@
 				</li>
 			</ul>
 			<p class="note">
-				La reformulation de 2018 du paragraphe 2267, qui qualifie la peine de mort
-				d'« inadmissible », est un changement ultérieur et distinct — non repris dans les deux
-				éditions proposées ici (1992 et 2012).
+				La reformulation de 2018 du paragraphe 2267, qui qualifie la peine de mort d'« inadmissible
+				», est un changement ultérieur et distinct — non repris dans les deux éditions proposées ici
+				(1992 et 2012).
 			</p>
 		</section>
 
@@ -192,15 +198,15 @@
 
 			<h3>Le Catéchisme de l'Église catholique est-il gratuit en PDF ?</h3>
 			<p>
-				Oui, les deux éditions proposées ici (1992 et 2012) sont téléchargeables gratuitement,
-				sans inscription.
+				Oui, les deux éditions proposées ici (1992 et 2012) sont téléchargeables gratuitement, sans
+				inscription.
 			</p>
 
 			<h3>Quelle est la différence entre l'édition de 1992 et celle de 2012 ?</h3>
 			<p>
-				Voir la section <a href="#changes-heading">« Qu'est-ce qui a changé »</a> ci-dessus : le
-				texte de 2012 reprend la version définitive de 1997/1998, avec environ 103 corrections
-				par rapport à 1992.
+				Voir la section <a href="#changes-heading">« Qu'est-ce qui a changé »</a> ci-dessus : le texte
+				de 2012 reprend la version définitive de 1997/1998, avec environ 103 corrections par rapport à
+				1992.
 			</p>
 
 			<h3>Peut-on lire le Catéchisme en ligne sans le télécharger ?</h3>
@@ -212,15 +218,14 @@
 			<h3>Ces PDF sont-ils fidèles au texte officiel ?</h3>
 			<p>
 				Oui. L'édition de 1992 a été publiée par Mame et Plon, celle de 2012 par Bayard, Cerf et
-				Fleurus-Mame. Le texte est protégé par le droit d'auteur de la Libreria Editrice Vaticana
-				et reproduit ici dans un cadre non commercial.
+				Fleurus-Mame. Le texte est protégé par le droit d'auteur de la Libreria Editrice Vaticana et
+				reproduit ici dans un cadre non commercial.
 			</p>
 		</section>
 
 		<div class="rights">
 			<p>
-				Texte © Libreria Editrice Vaticana, Cité du Vatican. Reproduit dans un cadre non
-				commercial.
+				Texte © Libreria Editrice Vaticana, Cité du Vatican. Reproduit dans un cadre non commercial.
 			</p>
 		</div>
 	</div>
