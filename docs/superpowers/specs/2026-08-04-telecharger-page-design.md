@@ -64,7 +64,7 @@ one:
   catholique, publiée par Mame et Plon. Texte provisoire, antérieur à
   l'*editio typica* latine de 1997. PDF gratuit, téléchargement direct."
 - Size: ~33 MB
-- Button: "Télécharger le PDF gratuit (édition 1992)"
+- Button: "Télécharger le PDF (édition 1992)"
 
 **2012**
 - Label: "Réédition du texte définitif · 2012"
@@ -72,7 +72,7 @@ one:
   1997/1998, publiée à l'occasion de l'Année de la Foi, avec guide de
   lecture. PDF gratuit, téléchargement direct."
 - Size: ~42 MB
-- Button: "Télécharger le PDF gratuit (édition 2012)"
+- Button: "Télécharger le PDF (édition 2012)"
 
 Each card's visible size/format line also states "PDF · téléchargement
 gratuit" in plain text, not just an icon — so "gratuit" and "PDF" are always
