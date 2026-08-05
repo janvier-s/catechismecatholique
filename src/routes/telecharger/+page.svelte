@@ -206,7 +206,7 @@
 			<h3>Peut-on lire le Catéchisme en ligne sans le télécharger ?</h3>
 			<p>
 				Oui, l'intégralité du texte est aussi consultable directement sur ce site, paragraphe par
-				paragraphe, depuis le <a href="/ccc/sommaire">sommaire</a>.
+				paragraphe, depuis le <a href="/cec/sommaire">sommaire</a>.
 			</p>
 
 			<h3>Ces PDF sont-ils fidèles au texte officiel ?</h3>
