@@ -9,10 +9,10 @@ test('renders the title and both edition cards', async ({ page }) => {
 		})
 	).toBeVisible();
 	await expect(
-		page.getByRole('heading', { level: 2, name: 'Catéchisme de l\'Église catholique (1992)' })
+		page.getByRole('heading', { level: 2, name: "Catéchisme de l'Église catholique (1992)" })
 	).toBeVisible();
 	await expect(
-		page.getByRole('heading', { level: 2, name: 'Catéchisme de l\'Église catholique (2012)' })
+		page.getByRole('heading', { level: 2, name: "Catéchisme de l'Église catholique (2012)" })
 	).toBeVisible();
 });
 
@@ -38,9 +38,7 @@ test('download links point at the GitHub release assets', async ({ page }) => {
 
 test('renders the FAQ section with question headings', async ({ page }) => {
 	await page.goto('/telecharger');
-	await expect(
-		page.getByRole('heading', { level: 2, name: 'Questions fréquentes' })
-	).toBeVisible();
+	await expect(page.getByRole('heading', { level: 2, name: 'Questions fréquentes' })).toBeVisible();
 	await expect(
 		page.getByRole('heading', {
 			level: 3,
