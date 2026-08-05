@@ -10,14 +10,6 @@
 		mainEntity: [
 			{
 				'@type': 'Question',
-				name: "Le Catéchisme de l'Église catholique est-il gratuit en PDF ?",
-				acceptedAnswer: {
-					'@type': 'Answer',
-					text: 'Oui, les deux éditions proposées ici (1992 et 2012) sont téléchargeables gratuitement, sans inscription.'
-				}
-			},
-			{
-				'@type': 'Question',
 				name: "Quelle est la différence entre l'édition de 1992 et celle de 2012 ?",
 				acceptedAnswer: {
 					'@type': 'Answer',
@@ -30,14 +22,6 @@
 				acceptedAnswer: {
 					'@type': 'Answer',
 					text: "Oui, l'intégralité du texte est consultable directement sur ce site, paragraphe par paragraphe, depuis le sommaire."
-				}
-			},
-			{
-				'@type': 'Question',
-				name: 'Ces PDF sont-ils fidèles au texte officiel ?',
-				acceptedAnswer: {
-					'@type': 'Answer',
-					text: "Oui. L'édition de 1992 a été publiée par Mame et Plon, celle de 2012 par Bayard, Cerf et Fleurus-Mame. Le texte est protégé par le droit d'auteur de la Libreria Editrice Vaticana et reproduit ici dans un cadre non commercial."
 				}
 			}
 		]
@@ -157,7 +141,7 @@
 			<p>
 				Le texte français de 1992 était provisoire. L'<i>editio typica</i> latine a suivi en 1997
 				(lettre apostolique <i>Laetamur magnopere</i>), avec le texte français définitif en 1998.
-				L'édition de 2012 reprend ce texte définitif de 1998 — ce n'est pas une nouvelle révision.
+				L'édition de 2012 reprend ce texte définitif de 1998, et non une nouvelle révision.
 			</p>
 			<p>
 				Environ 103 modifications séparent 1992 du texte définitif, la plupart mineures
@@ -188,19 +172,13 @@
 			</ul>
 			<p class="note">
 				La reformulation de 2018 du paragraphe 2267, qui qualifie la peine de mort d'« inadmissible
-				», est un changement ultérieur et distinct — non repris dans les deux éditions proposées ici
+				», est un changement ultérieur et distinct, non repris dans les deux éditions proposées ici
 				(1992 et 2012).
 			</p>
 		</section>
 
 		<section class="prose" aria-labelledby="faq-heading">
 			<h2 id="faq-heading" class="section-label">Questions fréquentes</h2>
-
-			<h3>Le Catéchisme de l'Église catholique est-il gratuit en PDF ?</h3>
-			<p>
-				Oui, les deux éditions proposées ici (1992 et 2012) sont téléchargeables gratuitement, sans
-				inscription.
-			</p>
 
 			<h3>Quelle est la différence entre l'édition de 1992 et celle de 2012 ?</h3>
 			<p>
@@ -213,13 +191,6 @@
 			<p>
 				Oui, l'intégralité du texte est aussi consultable directement sur ce site, paragraphe par
 				paragraphe, depuis le <a href="/cec/sommaire">sommaire</a>.
-			</p>
-
-			<h3>Ces PDF sont-ils fidèles au texte officiel ?</h3>
-			<p>
-				Oui. L'édition de 1992 a été publiée par Mame et Plon, celle de 2012 par Bayard, Cerf et
-				Fleurus-Mame. Le texte est protégé par le droit d'auteur de la Libreria Editrice Vaticana et
-				reproduit ici dans un cadre non commercial.
 			</p>
 		</section>
 

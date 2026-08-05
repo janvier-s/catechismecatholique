@@ -42,7 +42,7 @@ test('renders the FAQ section with question headings', async ({ page }) => {
 	await expect(
 		page.getByRole('heading', {
 			level: 3,
-			name: "Le Catéchisme de l'Église catholique est-il gratuit en PDF ?"
+			name: "Quelle est la différence entre l'édition de 1992 et celle de 2012 ?"
 		})
 	).toBeVisible();
 });
@@ -53,5 +53,5 @@ test('emits FAQPage structured data', async ({ page }) => {
 	const parsed = jsonLdBlocks.map((block) => JSON.parse(block));
 	const faqBlock = parsed.find((block) => block['@type'] === 'FAQPage');
 	expect(faqBlock).toBeDefined();
-	expect(faqBlock.mainEntity.length).toBeGreaterThanOrEqual(4);
+	expect(faqBlock.mainEntity.length).toBeGreaterThanOrEqual(2);
 });
