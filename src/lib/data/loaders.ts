@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import type {
 	Paragraph,
 	Chapter,
@@ -149,10 +150,23 @@ export function loadEnBrefsIndex(fetcher: Fetch = fetch): Promise<EnBrefIndexEnt
 }
 
 // Slim TOC: full tree minus the `paragraphs: number[]` arrays at every level.
-// Used by /cec/sommaire which renders titles + headings only. About 70%
-// smaller than the full structure.
+// Used by /cec/sommaire (titles + headings only) and by the root layout load
+// that server-renders the Sidebar tree. About 70% smaller than the full
+// structure; every paragraph bound either surface needs is on `range`.
+let structureTocPromise: Promise<unknown> | null = null;
 export function loadStructureToc(fetcher: Fetch = fetch): Promise<unknown> {
-	return fetchJson<unknown>('/data/cec/structure-toc.json', fetcher);
+	// Memoised in the browser only. The root layout load re-runs on every
+	// navigation, so without this each CEC page re-parsed 331 KB of JSON. On the
+	// server each request brings its own `fetch`, and holding a cross-request
+	// promise there would pin one request's response for the process lifetime.
+	if (!browser) return fetchJson<unknown>('/data/cec/structure-toc.json', fetcher);
+	if (!structureTocPromise) {
+		structureTocPromise = fetchJson<unknown>('/data/cec/structure-toc.json', fetcher).catch((e) => {
+			structureTocPromise = null;
+			throw e;
+		});
+	}
+	return structureTocPromise;
 }
 
 export function loadAbbreviations(fetcher: Fetch = fetch): Promise<AbbreviationMap> {

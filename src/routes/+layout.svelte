@@ -5,6 +5,7 @@
 	import { get } from 'svelte/store';
 	import TopBar from '$lib/components/ui/TopBar.svelte';
 	import Sidebar from '$lib/components/ui/Sidebar.svelte';
+	import { needsCecStructure } from '$lib/sidebarRoute';
 	import SidebarToggle from '$lib/components/ui/SidebarToggle.svelte';
 	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
 	import Footer from '$lib/components/ui/Footer.svelte';
@@ -15,7 +16,7 @@
 	import type { Corpus } from '$lib/data/types';
 	import { closePanel, studyPanel } from '$lib/stores/studyPanel';
 
-	let { children } = $props();
+	let { children, data } = $props();
 
 	// Restart the page-fade animation on every client navigation by toggling
 	// the class off and on, instead of remounting the wrapper subtree via
@@ -50,11 +51,9 @@
 		// Sidebar is the catechism's structural TOC. Show only inside the
 		// CCC reading surfaces; hide on the index, sommaire, bible, search,
 		// about, and the bare home page.
-		if (p.startsWith('/cec')) {
-			if (p === '/cec' || p === '/cec/') return false;
-			if (p.startsWith('/cec/sommaire') || p.startsWith('/cec/panorama')) return false;
-			return true;
-		}
+		// Shared with +layout.ts, which uses the same predicate to decide
+		// whether to server-render the tree · they must not disagree.
+		if (p.startsWith('/cec')) return needsCecStructure(p);
 		// Compendium part reader (not the landing or q-redirect)
 		if (p.startsWith('/compendium/')) {
 			if (p.startsWith('/compendium/q/')) return false;
@@ -205,7 +204,11 @@
 <TopBar />
 <div class="flex">
 	{#if showSidebar}
-		<Sidebar corpus={sidebarCorpus} />
+		<Sidebar
+			corpus={sidebarCorpus}
+			initialStructure={data.cecStructure}
+			initialEnBrefs={data.cecEnBrefs}
+		/>
 		<SidebarToggle />
 	{/if}
 	<div

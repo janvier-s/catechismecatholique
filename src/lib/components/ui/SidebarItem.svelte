@@ -2,6 +2,8 @@
 	import Self from './SidebarItem.svelte';
 	import { itemMatches } from './sidebarMatch';
 	import { frenchPunct } from '$lib/utils/typography';
+	import { fmtParagraphRange } from '$lib/utils/paragraphRange';
+	import type { ParagraphRange } from '$lib/data/types';
 	import { page } from '$app/state';
 
 	type Item = {
@@ -22,13 +24,23 @@
 		/** When true, render the row as a non-clickable greyed entry (e.g. a lesson
 		 *  that doesn't exist yet). Children are still rendered/recursed. */
 		disabled?: boolean;
+		/** CCC paragraph span · rendered as a right-aligned ToC number column. */
+		range?: ParagraphRange;
 		children?: Item[];
 	};
 	let {
 		item,
 		activeHref,
-		depth = 0
-	}: { item: Item; activeHref: string; depth?: number } = $props();
+		depth = 0,
+		/**
+		 * Whether to paint the active row. False during SSR: which heading is
+		 * current depends on the scroll position the browser restores on reload,
+		 * which the server cannot know — so it would fall back to the containing
+		 * article and highlight the wrong row until hydration corrected it.
+		 * Expansion still follows `activeHref`, so the tree arrives open.
+		 */
+		highlightActive = true
+	}: { item: Item; activeHref: string; depth?: number; highlightActive?: boolean } = $props();
 
 	function isAncestorOrSelf(it: Item, target: string): boolean {
 		if (itemMatches(it.href, target)) return true;
@@ -102,6 +114,34 @@
 	);
 </script>
 
+<!--
+	Row content · one definition shared by the link and disabled branches, which
+	previously carried duplicate copies of the eyebrow markup.
+
+	The range floats right inside `.title-row` so it lands on the title's first
+	line, flush to the rail's right edge at every nesting depth, and the title
+	wraps beneath it — the number column of a printed table of contents.
+-->
+{#snippet rowContent()}
+	{#if item.kicker}
+		<span class="kicker">{item.kicker}</span>
+	{/if}
+	{#if item.kicker2}
+		<span class="kicker kicker-sub">{item.kicker2}</span>
+	{/if}
+	{#if item.typeLabel}
+		<span class="kicker"
+			>{item.typeLabel}{item.number !== undefined ? `\u00a0${item.number}` : ''}</span
+		>
+	{/if}
+	<span class="title-row">
+		{#if item.range}
+			<span class="range">{fmtParagraphRange(item.range)}</span>
+		{/if}
+		{@html frenchPunct(item.title)}
+	</span>
+{/snippet}
+
 <li>
 	<div class="flex items-start gap-1 group">
 		{#if hasChildren}
@@ -126,49 +166,27 @@
 				class:lvl-default={item.level === undefined}
 				aria-disabled="true"
 			>
-				{#if item.kicker}
-					<span class="kicker">{item.kicker}</span>
-				{/if}
-				{#if item.kicker2}
-					<span class="kicker kicker-sub">{item.kicker2}</span>
-				{/if}
-				{#if item.typeLabel}
-					<span class="kicker"
-						>{item.typeLabel}{item.number !== undefined ? `\u00a0${item.number}` : ''}</span
-					>
-				{/if}
-				{@html frenchPunct(item.title)}
+				{@render rowContent()}
 			</span>
 		{:else}
 			<a
 				href={item.href}
 				onclick={handleClick}
 				class="flex-1 py-1 px-1.5 rounded leading-snug hover:bg-accent/10 hover:text-accent"
-				class:is-active={isActive}
+				class:is-active={highlightActive && isActive}
 				class:lvl-2={item.level === 2}
 				class:lvl-3={item.level === 3}
 				class:lvl-4={item.level === 4}
 				class:lvl-default={item.level === undefined}
 			>
-				{#if item.kicker}
-					<span class="kicker">{item.kicker}</span>
-				{/if}
-				{#if item.kicker2}
-					<span class="kicker kicker-sub">{item.kicker2}</span>
-				{/if}
-				{#if item.typeLabel}
-					<span class="kicker"
-						>{item.typeLabel}{item.number !== undefined ? `\u00a0${item.number}` : ''}</span
-					>
-				{/if}
-				{@html frenchPunct(item.title)}
+				{@render rowContent()}
 			</a>
 		{/if}
 	</div>
 	{#if item.children && expanded}
 		<ul class="children" class:children-deep={depth >= 1}>
 			{#each item.children as child (child.href)}
-				<Self item={child} {activeHref} depth={depth + 1} />
+				<Self item={child} {activeHref} {highlightActive} depth={depth + 1} />
 			{/each}
 		</ul>
 	{/if}
@@ -219,6 +237,43 @@
 		text-transform: uppercase;
 		color: var(--color-muted);
 		margin-bottom: 0.1rem;
+	}
+	/* Paragraph-range column · a printed ToC's page numbers. Floated rather
+	   than laid out in a grid so it sits flush to the rail's right edge at
+	   every nesting depth (a grid column would inherit the indent and give
+	   one ragged column per level), and so a long title wraps beneath it
+	   instead of being squeezed into a narrow gutter on every line. */
+	.title-row {
+		display: block;
+	}
+	.range {
+		float: right;
+		margin-left: 0.5rem;
+		font-family: var(--font-ui);
+		font-size: 10.5px;
+		font-weight: 500;
+		font-variant-numeric: tabular-nums;
+		letter-spacing: 0.01em;
+		white-space: nowrap;
+		color: var(--color-muted);
+		/* Nudge onto the title's optical baseline · the smaller type otherwise
+		   rides high against the 12.5–14px title next to it. */
+		padding-top: 0.15em;
+	}
+	/* The row's Tailwind `hover:text-accent` can't reach the range, which sets
+	   its own muted colour · restate it here so the number lights up with the
+	   title instead of staying grey while everything around it moves. */
+	a:hover .range {
+		color: var(--color-accent);
+	}
+	/* Active rows keep the white-on-accent treatment even under the cursor —
+	   the accent-on-accent it would otherwise get is unreadable. */
+	.is-active .range,
+	a.is-active:hover .range {
+		color: rgba(255, 255, 255, 0.85);
+	}
+	.is-disabled .range {
+		color: color-mix(in srgb, var(--color-muted) 70%, transparent);
 	}
 	.kicker-sub {
 		text-transform: none;

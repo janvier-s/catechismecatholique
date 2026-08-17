@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fmtParagraphRange } from '$lib/utils/paragraphRange';
+
 	type Range = { from: number; to: number };
 	type Heading = { id: string; title: string; paragraph_start: number };
 	type Article = {
@@ -63,12 +65,8 @@
 
 	const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
-	// Render a paragraph range without the § symbol · just the bare numbers,
-	// e.g. "26 – 49" or "27" for a single paragraph.
-	function fmtRange(r: Range | undefined): string {
-		if (!r) return '';
-		return r.from === r.to ? `${r.from}` : `${r.from} – ${r.to}`;
-	}
+	// Bare numbers, no § · shared with the sidebar rail.
+	const fmtRange = fmtParagraphRange;
 
 	// "Qu'est-ce que la prière ?" has three peer-level intro headings rather
 	// than nested articles; we surface the first one as a card subtitle so

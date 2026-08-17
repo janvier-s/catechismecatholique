@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { browser } from '$app/environment';
 	import { corpusById } from '$lib/corpora';
 	import { sidebarOpen } from '$lib/stores/sidebar';
 	import { activeHeading } from '$lib/stores/scrollSpy';
@@ -32,7 +33,11 @@
 		loadCalendrierIndex,
 		loadCalendrierYear
 	} from '$lib/data/loaders';
-	import type { PiusXPetitLiturgicalAppendix, PiusXPetitAppendix } from '$lib/data/loaders';
+	import type {
+		PiusXPetitLiturgicalAppendix,
+		PiusXPetitAppendix,
+		EnBrefIndexEntry
+	} from '$lib/data/loaders';
 	import type {
 		Chapter,
 		ParagraphContext,
@@ -59,7 +64,8 @@
 		CpaStructure,
 		CalendrierFeast,
 		CalendrierFixedFeast,
-		CalendrierSeason
+		CalendrierSeason,
+		ParagraphRange
 	} from '$lib/data/types';
 	import SidebarItem from './SidebarItem.svelte';
 
@@ -69,17 +75,21 @@
 		slug: string;
 		title: string;
 		number?: number;
-		paragraphs: number[];
+		/** Absent in structure-toc.json · use `range` instead. */
+		paragraphs?: number[];
 		headings: Heading[];
 		paragraphes?: Paragraphe[];
+		range?: ParagraphRange;
 	};
 	type Chap = {
 		slug: string;
 		title: string;
 		number?: number;
-		paragraphs: number[];
+		/** Absent in structure-toc.json · use `range` instead. */
+		paragraphs?: number[];
 		articles: Article[];
 		headings: Heading[];
+		range?: ParagraphRange;
 	};
 	type Section = {
 		slug: string;
@@ -87,6 +97,7 @@
 		number?: number;
 		chapters: Chap[];
 		articles_direct?: Article[];
+		range?: ParagraphRange;
 	};
 	type Part = {
 		slug: string;
@@ -94,6 +105,7 @@
 		number?: number;
 		prologue?: boolean;
 		sections: Section[];
+		range?: ParagraphRange;
 	};
 
 	type Item = {
@@ -109,10 +121,36 @@
 		kicker2?: string;
 		/** Start expanded even when not on the active path. */
 		defaultExpanded?: boolean;
+		/**
+		 * CCC paragraph span, rendered as a right-aligned table-of-contents
+		 * column. Carries the numbers rather than a formatted string so the
+		 * formatting decision stays in SidebarItem · other corpora omit it.
+		 */
+		range?: ParagraphRange;
 		children?: Item[];
 	};
 
-	let { corpus = 'ccc' as Corpus }: { corpus?: Corpus } = $props();
+	let {
+		corpus = 'ccc' as Corpus,
+		/**
+		 * CCC tree supplied by the root layout load, so the rail renders
+		 * server-side instead of painting empty until hydration. Null on routes
+		 * the load skips (and if the fetch failed), in which case the effect
+		 * below fetches it client-side as before. Typed `unknown` because the
+		 * JSON is untyped at the loader boundary, same as loadStructure().
+		 */
+		initialStructure = null,
+		/**
+		 * En Bref blocks from the slim index, also supplied by the layout load.
+		 * Lets the En Bref rows render server-side instead of waiting on the
+		 * per-chapter detail file, which only arrives after hydration.
+		 */
+		initialEnBrefs = null
+	}: {
+		corpus?: Corpus;
+		initialStructure?: unknown;
+		initialEnBrefs?: EnBrefIndexEntry[] | null;
+	} = $props();
 
 	const sommaireHref = $derived.by((): string | null => {
 		// CCC is implicit · not in the registry yet (it's the site's
@@ -121,15 +159,22 @@
 		return corpusById(corpus)?.sommaireHref ?? null;
 	});
 
-	let structure: { parts: Part[] } | null = $state(null);
 	let activeChapter: Chapter | null = $state(null);
 	let activeContext: ParagraphContext | null = $state(null);
 	let navEl: HTMLElement | undefined = $state();
 
+	// The server-rendered tree wins; the client fetch below only fills in when
+	// the layout load skipped this route or failed. Derived rather than $state
+	// seeded from the prop, so a navigation that brings a fresh tree is picked
+	// up — and so it resolves during SSR, where effects never run.
+	let fetchedStructure: { parts: Part[] } | null = $state(null);
+	const structure = $derived((initialStructure as { parts: Part[] } | null) ?? fetchedStructure);
+
 	$effect(() => {
 		if (corpus !== 'ccc') return;
+		if (initialStructure) return; // already server-rendered
 		(async () => {
-			structure = (await loadStructure()) as { parts: Part[] };
+			fetchedStructure = (await loadStructure()) as { parts: Part[] };
 		})();
 	});
 
@@ -596,6 +641,40 @@
 		})();
 	});
 
+	/** A heading / En Bref / Paragraphe awaiting placement in the article tree. */
+	type Entry = {
+		sortKey: number;
+		level: number; // 2 = Roman heading, 3 = sub-heading, 2 = en_bref (treated as section sibling)
+		item: Item;
+	};
+
+	/**
+	 * Fill in the paragraph range of entries that only know where they start.
+	 * A heading's span ends the paragraph before the next entry at the same or
+	 * a shallower level begins — level-aware so a Roman heading covers its own
+	 * sub-headings instead of stopping at the first one — and the last entry
+	 * runs to `lastP`, the enclosing article's or chapter's final paragraph.
+	 *
+	 * Entries that already carry a range (En Bref knows its own paragraphs)
+	 * are left alone; closing them against the next entry would wrongly
+	 * stretch them over the gap that follows.
+	 */
+	function closeRanges(es: Entry[], lastP: number): void {
+		if (lastP <= 0) return;
+		for (let i = 0; i < es.length; i++) {
+			const e = es[i]!;
+			if (e.item.range) continue;
+			let end = lastP;
+			for (let j = i + 1; j < es.length; j++) {
+				if (es[j]!.level <= e.level) {
+					end = es[j]!.sortKey - 1;
+					break;
+				}
+			}
+			if (end >= e.sortKey) e.item.range = { from: e.sortKey, to: end };
+		}
+	}
+
 	function chapterChildren(ch: Chap, partSlug: string, sectionSlug: string): Item[] {
 		const baseHref = `/cec/${partSlug}/${sectionSlug}/${ch.slug}`;
 		const out: Item[] = [];
@@ -605,12 +684,13 @@
 		// article (e.g. Chapter 2's §§422-429 "La Bonne Nouvelle"). Surface
 		// them as a top-level entry so readers can jump in without guessing
 		// they live "above" Article 2.
-		const chapFirstP = ch.paragraphs?.[0];
-		const firstArtP = ch.articles?.[0]?.paragraphs?.[0];
+		const chapFirstP = ch.paragraphs?.[0] ?? ch.range?.from;
+		const firstArtP = ch.articles?.[0]?.paragraphs?.[0] ?? ch.articles?.[0]?.range?.from;
 		if (chapFirstP && firstArtP && chapFirstP < firstArtP) {
 			out.push({
 				title: 'Préambule',
-				href: baseHref
+				href: baseHref,
+				range: { from: chapFirstP, to: firstArtP - 1 }
 			});
 		}
 		// Always build the rich tree from whatever article data is available.
@@ -621,25 +701,29 @@
 		// between chapters briefly flashed a flat article-only tree before the
 		// detail re-expanded the new active chapter.
 		const articlesSource = (detail?.articles as Article[] | undefined) ?? ch.articles;
-		const enBrefs = detail?.en_brefs ?? [];
+		// Prefer the chapter detail once it lands (identical data, already scoped
+		// to this chapter). Until then fall back to the server-rendered index,
+		// narrowed to this chapter's paragraph range — it covers all 82 blocks in
+		// the work, and the chapter-level branches below don't bound by chapter.
+		const enBrefs =
+			detail?.en_brefs ??
+			(initialEnBrefs && ch.range
+				? initialEnBrefs.filter((b) => b.first >= ch.range!.from && b.first <= ch.range!.to)
+				: []);
 		const chapterHeadings = detail?.headings ?? ch.headings;
 
 		{
 			for (const a of articlesSource) {
 				const articleHref = `${baseHref}/${a.slug}`;
-				const articleParas = a.paragraphs;
-				const articleMin = articleParas.length > 0 ? articleParas[0]! : 0;
-				const articleMax = articleParas.length > 0 ? articleParas[articleParas.length - 1]! : 0;
+				const articleParas = a.paragraphs ?? [];
+				const articleMin = articleParas.length > 0 ? articleParas[0]! : (a.range?.from ?? 0);
+				const articleMax =
+					articleParas.length > 0 ? articleParas[articleParas.length - 1]! : (a.range?.to ?? 0);
 
 				// All headings + en_brefs belonging to this article, ordered
 				// by paragraph position. Tag each entry with a "level" so the
 				// nesting pass below can group level-3 sub_headings as
 				// children of the preceding level-2 heading.
-				type Entry = {
-					sortKey: number;
-					level: number; // 2 = Roman heading, 3 = sub-heading, 2 = en_bref (treated as section sibling)
-					item: Item;
-				};
 				const entries: Entry[] = [];
 				for (const h of a.headings) {
 					entries.push({
@@ -655,10 +739,15 @@
 					entries.push({
 						sortKey: firstP,
 						level: 2,
-						item: { title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` }
+						item: {
+							title: 'En Bref',
+							href: `${baseHref}#en-bref-${firstP}`,
+							range: { from: firstP, to: block.paragraphs[block.paragraphs.length - 1]! }
+						}
 					});
 				}
 				entries.sort((x, y) => x.sortKey - y.sortKey);
+				closeRanges(entries, articleMax);
 
 				// Nest level-3 sub_headings under their parent level-2 heading
 				// (the most recent level-2 in document order). Returns a flat
@@ -681,6 +770,12 @@
 							result.push(current);
 						}
 					}
+					// Keep the article's whole outline open. Only the active article's
+					// subtree is rendered at all, so this costs nothing elsewhere —
+					// and it stops the Roman heading that contains the scroll-spy
+					// target from arriving collapsed and popping open at hydration
+					// (the server can't know which sub-heading the reader is on).
+					for (const it of result) if (it.children) it.defaultExpanded = true;
 					return result;
 				}
 
@@ -723,6 +818,7 @@
 							number: pg.number,
 							typeLabel: 'Paragraphe',
 							href: `${articleHref}#paragraphe-${pg.number}`,
+							range: { from: start, to: end },
 							children: children.length > 0 ? children : undefined
 						});
 					}
@@ -736,32 +832,57 @@
 					number: a.number,
 					typeLabel: 'Article',
 					href: articleHref,
+					range: a.range ?? (articleMax > 0 ? { from: articleMin, to: articleMax } : undefined),
 					children: articleChildren.length > 0 ? articleChildren : undefined
 				});
 			}
 			if (articlesSource.length === 0) {
 				// Chapter has no articles · fall back to chapter-level headings
-				// + en_brefs.
+				// + en_brefs. Same entry pipeline as the article branch so the
+				// ranges close the same way, against the chapter's last paragraph.
+				const chapterMax = ch.paragraphs?.[ch.paragraphs.length - 1] ?? ch.range?.to ?? 0;
+				const entries: Entry[] = [];
 				for (const h of chapterHeadings) {
-					out.push({ title: h.title, href: `${baseHref}#${h.id}` });
+					entries.push({
+						sortKey: h.paragraph_start,
+						level: h.level ?? 2,
+						item: { title: h.title, href: `${baseHref}#${h.id}` }
+					});
 				}
 				for (const block of enBrefs) {
 					if (block.paragraphs.length === 0) continue;
-					const firstP = block.paragraphs[0];
-					out.push({ title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` });
+					const firstP = block.paragraphs[0]!;
+					entries.push({
+						sortKey: firstP,
+						level: 2,
+						item: {
+							title: 'En Bref',
+							href: `${baseHref}#en-bref-${firstP}`,
+							range: { from: firstP, to: block.paragraphs[block.paragraphs.length - 1]! }
+						}
+					});
 				}
+				entries.sort((x, y) => x.sortKey - y.sortKey);
+				closeRanges(entries, chapterMax);
+				for (const e of entries) out.push(e.item);
 			} else {
 				// Any en_brefs not associated with an article go at chapter level.
 				const inAnyArticle = (firstP: number) =>
 					articlesSource.some((a) => {
-						const ps = a.paragraphs;
-						return ps.length > 0 && firstP >= ps[0]! && firstP <= ps[ps.length - 1]!;
+						const ps = a.paragraphs ?? [];
+						if (ps.length > 0) return firstP >= ps[0]! && firstP <= ps[ps.length - 1]!;
+						const r = a.range;
+						return r ? firstP >= r.from && firstP <= r.to : false;
 					});
 				for (const block of enBrefs) {
 					if (block.paragraphs.length === 0) continue;
 					const firstP = block.paragraphs[0]!;
 					if (!inAnyArticle(firstP)) {
-						out.push({ title: 'En Bref', href: `${baseHref}#en-bref-${firstP}` });
+						out.push({
+							title: 'En Bref',
+							href: `${baseHref}#en-bref-${firstP}`,
+							range: { from: firstP, to: block.paragraphs[block.paragraphs.length - 1]! }
+						});
 					}
 				}
 			}
@@ -1461,19 +1582,21 @@
 		if (!structure) return [];
 		return structure.parts.map((part): Item => {
 			if (part.prologue) {
-				return { title: part.title, href: `/cec/prologue` };
+				return { title: part.title, href: `/cec/prologue`, range: part.range };
 			}
 			return {
 				title: part.title,
 				number: part.number,
 				typeLabel: 'Partie',
 				href: `/cec/${part.slug}`,
+				range: part.range,
 				children: part.sections.map(
 					(section): Item => ({
 						title: section.title,
 						number: section.number,
 						typeLabel: 'Section',
 						href: `/cec/${part.slug}/${section.slug}`,
+						range: section.range,
 						children: [
 							...section.chapters.map((chapter): Item => {
 								const children = chapterChildren(chapter, part.slug, section.slug);
@@ -1482,6 +1605,7 @@
 									number: chapter.number,
 									typeLabel: 'Chapitre',
 									href: `/cec/${part.slug}/${section.slug}/${chapter.slug}`,
+									range: chapter.range,
 									children: children.length > 0 ? children : undefined
 								};
 							}),
@@ -1490,7 +1614,8 @@
 									title: article.title,
 									number: article.number,
 									typeLabel: 'Article',
-									href: `/cec/${part.slug}/${section.slug}/${article.slug}`
+									href: `/cec/${part.slug}/${section.slug}/${article.slug}`,
+									range: article.range
 								})
 							)
 						]
@@ -1551,7 +1676,7 @@
 	>
 		<ul class="space-y-0.5">
 			{#each tree as item (item.href)}
-				<SidebarItem {item} {activeHref} />
+				<SidebarItem {item} {activeHref} highlightActive={browser} />
 			{/each}
 		</ul>
 	</nav>
@@ -1559,12 +1684,17 @@
 
 <style>
 	/* Rail width is the source of truth for layout shift. SSR ships
-	   width: 320px; theme-init.js sets data-sidebar='closed' on <html>
+	   width: 380px; theme-init.js sets data-sidebar='closed' on <html>
 	   before first paint when the user has it closed, collapsing the rail
 	   to width: 0 from the very first frame. Toggle clicks animate via
-	   the CSS transition. */
+	   the CSS transition.
+
+	   Widened from 320px to pay for the paragraph-range column: at four
+	   levels of nesting a heading title had ~209px of usable width, and the
+	   range costs ~55px of it. The reader column is capped at 900px
+	   (app.css), so on a 1280px viewport this still clears the cap. */
 	.sidebar-rail {
-		width: 320px;
+		width: 380px;
 		overflow: hidden;
 		transition: width 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}

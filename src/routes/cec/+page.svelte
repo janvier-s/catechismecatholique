@@ -1,101 +1,107 @@
 <script lang="ts">
 	import MetaTags from '$lib/components/ui/MetaTags.svelte';
+	import { goto } from '$app/navigation';
+	import { detectIntent } from '$lib/utils/searchIntent';
+	import { fmtParagraphRange } from '$lib/utils/paragraphRange';
+	import { topicsForPart, type TopicStructure } from '$lib/cecTopics';
 
-	type Anchor = { label: string; href: string };
-	type PartCard = {
-		slug: string;
-		kicker: string;
-		title: string;
-		range: string;
-		lede: string;
-		anchors: Anchor[];
-	};
+	let { data } = $props();
 
+	// Supplied by the root +layout.ts, which now loads structure-toc.json for
+	// /cec because the rail is shown here. So the part ranges and every topic
+	// range below are read from the corpus at no extra network cost — they used
+	// to be hardcoded strings on this page, which is how they drift.
+	const structure = $derived((data.cecStructure ?? null) as TopicStructure | null);
+
+	type PartCard = { slug: string; kicker: string; gloss: string };
+
+	/** Titles and ranges come from the structure; only the eyebrow numbering
+	 *  and the one-line gloss are editorial. */
 	const PARTS: PartCard[] = [
 		{
 			slug: '1-profession-de-la-foi',
 			kicker: 'Première partie',
-			title: 'La profession de la foi',
-			range: '26–1065',
-			lede:
-				"Ce que l'Église croit. La première partie expose, sous la conduite du Symbole des " +
-				'Apôtres, le contenu de la foi catholique : la révélation, le mystère trinitaire, le ' +
-				"Christ, l'Esprit Saint et l'Église.",
-			anchors: [
-				{
-					label: 'Le Symbole des Apôtres',
-					href: '/cec/1-profession-de-la-foi/2-profession-de-la-foi'
-				},
-				{
-					label: 'Je crois en Dieu le Père',
-					href: '/cec/1-profession-de-la-foi/2-profession-de-la-foi/1-je-crois-en-dieu-le-pere'
-				},
-				{
-					label: 'Je crois en Jésus-Christ',
-					href: '/cec/1-profession-de-la-foi/2-profession-de-la-foi/2-je-crois-en-jesus-christ-le'
-				}
-			]
+			gloss: "Ce que l'Église croit"
 		},
 		{
 			slug: '2-celebration-du-mystere',
 			kicker: 'Deuxième partie',
-			title: 'La célébration du mystère chrétien',
-			range: '1066–1690',
-			lede:
-				"Ce que l'Église célèbre. La deuxième partie est consacrée à la liturgie et aux sept " +
-				'sacrements, par lesquels le mystère pascal du Christ se rend présent dans la vie des ' +
-				'fidèles.',
-			anchors: [
-				{
-					label: 'Les sept sacrements',
-					href: '/cec/2-celebration-du-mystere/2-sept-sacrements-de-leglise'
-				},
-				{
-					label: "Les sacrements de l'initiation chrétienne",
-					href: '/cec/2-celebration-du-mystere/2-sept-sacrements-de-leglise/1-sacrements-de-linitiation'
-				}
-			]
+			gloss: "Ce que l'Église célèbre"
 		},
 		{
 			slug: '3-vie-dans-le-christ',
 			kicker: 'Troisième partie',
-			title: 'La vie dans le Christ',
-			range: '1691–2557',
-			lede:
-				"Ce que l'Église vit. La troisième partie présente la vie morale du chrétien, sa vocation " +
-				"à la béatitude et l'observance du Décalogue à la lumière de l'Évangile.",
-			anchors: [
-				{
-					label: 'Les Dix commandements',
-					href: '/cec/3-vie-dans-le-christ/2-dix-commandements'
-				},
-				{
-					label: 'La dignité de la personne humaine',
-					href: '/cec/3-vie-dans-le-christ/1-vocation-de-lhomme-la-vie-dans/1-dignite-de-la-personne-humaine'
-				}
-			]
+			gloss: "Ce que l'Église vit"
 		},
 		{
 			slug: '4-priere-chretienne',
 			kicker: 'Quatrième partie',
-			title: 'La prière chrétienne',
-			range: '2558–2865',
-			lede:
-				"Ce que l'Église prie. La quatrième partie est consacrée à la prière chrétienne et " +
-				"culmine dans l'explication du Notre Père, la prière que le Seigneur lui-même a " +
-				'enseignée à ses disciples.',
-			anchors: [
-				{
-					label: 'Le Notre Père',
-					href: '/cec/4-priere-chretienne/2-priere-du-seigneur-notre-pere'
-				},
-				{
-					label: 'La prière dans la vie chrétienne',
-					href: '/cec/4-priere-chretienne/1-priere-dans-la-vie-chretienne'
-				}
-			]
+			gloss: "Ce que l'Église prie"
 		}
 	];
+
+	const cards = $derived(
+		PARTS.map((c) => {
+			const part = structure?.parts.find((p) => p.slug === c.slug);
+			return {
+				...c,
+				title: part?.title ?? '',
+				range: part?.range,
+				topics: topicsForPart(structure, c.slug)
+			};
+		})
+	);
+
+	const prologue = $derived(structure?.parts.find((p) => p.prologue === true));
+	const firstPart = $derived(structure?.parts.find((p) => p.slug === PARTS[0]!.slug));
+
+	// Where "Commencer la lecture" goes · the first chapter of the first
+	// section, which opens at 27. Part one's range starts at 26, but that
+	// paragraph is the section's own one-line preamble, so the reader is
+	// better off landing on the first real chapter. Derived rather than
+	// hardcoded so a renumbered corpus moves the button with it.
+	const firstChapter = $derived.by(() => {
+		const section = firstPart?.sections?.[0];
+		const chapter = section?.chapters?.[0];
+		if (!firstPart || !section || !chapter) return null;
+		return {
+			href: `/cec/${firstPart.slug}/${section.slug}/${chapter.slug}`,
+			from: chapter.range?.from
+		};
+	});
+
+	// Highest paragraph in the corpus · bounds the jump-to field so a typo
+	// lands on a hint here instead of a 404 two navigations later.
+	const lastParagraph = $derived(
+		structure?.parts.reduce((max, p) => Math.max(max, p.range?.to ?? 0), 0) || 2865
+	);
+
+	let jump = $state('');
+	let jumpError = $state('');
+
+	function submitJump(e: SubmitEvent) {
+		e.preventDefault();
+		const raw = jump.trim();
+		if (!raw) return;
+		const intent = detectIntent(raw);
+		if (intent.kind === 'paragraph') {
+			// detectIntent accepts a bare number, a range and a comma list; the
+			// first number is enough to bounds-check any of those forms.
+			const first = Number(raw.replace(/§/g, '').split(/[-–,]/)[0]!.trim());
+			if (first < 1 || first > lastParagraph) {
+				jumpError = `Le Catéchisme va du paragraphe 1 au paragraphe ${lastParagraph}.`;
+				return;
+			}
+			jumpError = '';
+			void goto(intent.href);
+			return;
+		}
+		// Anything that isn't a paragraph reference is a word · hand it to the
+		// search rather than rejecting it, since the field is the first thing
+		// some readers will type into.
+		jumpError = '';
+		void goto(`/recherche?q=${encodeURIComponent(raw)}`);
+	}
 </script>
 
 <MetaTags
@@ -117,46 +123,85 @@
 		<p class="hero-kicker">Édition française</p>
 		<h1 class="hero-title">Catéchisme de l'Église Catholique</h1>
 		<p class="hero-lede">
-			Promulgué par saint Jean-Paul&nbsp;II en 1992, le Catéchisme expose, en 2865 paragraphes
-			organisés en quatre parties, l'ensemble de la foi catholique :<br />
-			ce qu'elle croit, ce qu'elle célèbre, comment elle vit et comment elle prie.
+			Toute la foi catholique en 2&nbsp;865 paragraphes numérotés : ce qu'elle croit, ce qu'elle
+			célèbre, comment elle vit et comment elle prie.
 		</p>
-		<nav class="hero-tools" aria-label="Outils du Catéchisme">
-			<a href="/cec/sommaire">Sommaire complet</a>
-			<span aria-hidden="true">·</span>
-			<a href="/cec/panorama">Panorama</a>
-			<span aria-hidden="true">·</span>
-			<a href="/glossaire">Glossaire</a>
-			<span aria-hidden="true">·</span>
-			<a href="/recherche">Recherche</a>
-		</nav>
+
+		<!-- Two ways in, both concrete. The rail on the left is the third · it
+		     carries the whole tree, so this row doesn't repeat it.
+
+		     The primary action opens the book proper, not the prologue: the
+		     prologue is front matter about the Catechism's own plan, which is
+		     not what a visitor came to read. -->
+		<div class="hero-actions">
+			<a
+				class="cta-primary"
+				href={firstChapter?.href ??
+					'/cec/1-profession-de-la-foi/1-je-crois-nous-croyons/1-homme-est-capable-de-dieu'}
+			>
+				<span class="cta-label">Commencer la lecture</span>
+				<span class="cta-meta">
+					Première partie · à partir du paragraphe {firstChapter?.from ?? 27}
+				</span>
+			</a>
+
+			<form class="jump" onsubmit={submitJump}>
+				<label class="jump-label" for="jump-input">Aller à un paragraphe</label>
+				<div class="jump-row">
+					<input
+						id="jump-input"
+						class="jump-input"
+						type="text"
+						inputmode="numeric"
+						autocomplete="off"
+						placeholder="1324"
+						bind:value={jump}
+						oninput={() => (jumpError = '')}
+						aria-describedby="jump-hint"
+					/>
+					<button class="jump-go" type="submit" aria-label="Aller au paragraphe">→</button>
+				</div>
+				<p class="jump-hint" id="jump-hint" class:is-error={jumpError !== ''}>
+					{jumpError || `Un numéro, ou une plage : 1322-1419`}
+				</p>
+			</form>
+		</div>
+
+		<!-- Prologue kept reachable, but as a sentence rather than a button ·
+		     it's the plan of the book, useful to some readers and the first
+		     thing almost nobody actually wants. -->
+		<p class="hero-secondary">
+			Le <a href="/cec/prologue">prologue</a>
+			({prologue?.range ? fmtParagraphRange(prologue.range) : '1 – 25'}) expose le plan du livre et
+			la transmission de la foi.
+		</p>
 	</header>
 
-	<section class="prologue" aria-labelledby="prologue-title">
-		<a href="/cec/prologue" class="prologue-link">
-			<span class="prologue-kicker">Prologue · 1–25</span>
-			<span id="prologue-title" class="prologue-lede">
-				Plan d'ensemble du Catéchisme et transmission de la foi.
-			</span>
-			<span class="prologue-arrow" aria-hidden="true">→</span>
-		</a>
-	</section>
-
+	<!--
+		Part cards · each one answers "what is actually in here?" with names a
+		visitor recognises, because the abstract gloss alone ("Ce que l'Église
+		célèbre") gives a newcomer nothing to aim at. Titles, ranges and the
+		topic links all come from the corpus.
+	-->
 	<section class="parts" aria-label="Les quatre parties du Catéchisme">
-		{#each PARTS as p (p.slug)}
+		{#each cards as p (p.slug)}
 			<article class="part-card">
 				<a href="/cec/{p.slug}" class="part-head">
-					<span class="part-kicker">{p.kicker} · {p.range}</span>
+					<span class="part-kicker"
+						>{p.kicker}{p.range ? ` · ${fmtParagraphRange(p.range)}` : ''}</span
+					>
 					<h2 class="part-title">{p.title}</h2>
+					<span class="part-gloss">{p.gloss}</span>
 				</a>
-				<p class="part-lede">{p.lede}</p>
-				{#if p.anchors.length > 0}
-					<ul class="part-anchors">
-						{#each p.anchors as a (a.href)}
+				{#if p.topics.length > 0}
+					<ul class="topics">
+						{#each p.topics as t (t.href)}
 							<li>
-								<a href={a.href} class="anchor-link">
-									<span class="anchor-arrow" aria-hidden="true">›</span>
-									<span>{a.label}</span>
+								<a href={t.href} class="topic">
+									<span class="topic-label">{t.label}</span>
+									{#if t.range}
+										<span class="topic-range">{fmtParagraphRange(t.range)}</span>
+									{/if}
 								</a>
 							</li>
 						{/each}
@@ -166,20 +211,35 @@
 		{/each}
 	</section>
 
-	<nav class="quick-links" aria-label="Navigation complémentaire">
-		<a href="/cec/sommaire" class="quick-link">Sommaire complet</a>
-		<span class="quick-sep" aria-hidden="true">·</span>
-		<a href="/cec/panorama" class="quick-link">Panorama</a>
-		<span class="quick-sep" aria-hidden="true">·</span>
-		<a href="/glossaire" class="quick-link">Glossaire</a>
-		<span class="quick-sep" aria-hidden="true">·</span>
-		<a href="/recherche" class="quick-link">Recherche</a>
+	<!--
+		Tool row · one copy (it used to be printed identically in the hero and
+		again at the foot), and each name carries a line of explanation. Cold,
+		"Panorama" and "Sommaire complet" don't tell a visitor which to pick.
+	-->
+	<nav class="tools" aria-labelledby="tools-title">
+		<h2 class="tools-title" id="tools-title">Autres façons de parcourir</h2>
+		<a class="tool" href="/cec/sommaire">
+			<span class="tool-name">Sommaire</span>
+			<span class="tool-desc">La table des matières complète, jusqu'aux articles.</span>
+		</a>
+		<a class="tool" href="/cec/panorama">
+			<span class="tool-name">Panorama</span>
+			<span class="tool-desc">Les grandes divisions d'un seul coup d'œil.</span>
+		</a>
+		<a class="tool" href="/glossaire">
+			<span class="tool-name">Glossaire</span>
+			<span class="tool-desc">Les mots du Catéchisme, définis.</span>
+		</a>
+		<a class="tool" href="/recherche">
+			<span class="tool-name">Recherche</span>
+			<span class="tool-desc">Par mot, par paragraphe ou par référence biblique.</span>
+		</a>
 	</nav>
 </main>
 
 <style>
 	.ccc-index {
-		max-width: 56rem;
+		max-width: 60rem;
 		margin: 0 auto;
 		padding: 2.75rem 1.5rem 3.5rem;
 	}
@@ -188,7 +248,7 @@
 	.hero {
 		text-align: center;
 		max-width: 44rem;
-		margin: 0 auto 3rem;
+		margin: 0 auto 2.75rem;
 	}
 	.hero-kicker {
 		font-family: var(--font-ui);
@@ -213,94 +273,144 @@
 		font-size: clamp(1rem, 1.5vw, 1.1rem);
 		line-height: 1.65;
 		color: var(--color-subtle);
-		margin: 0;
+		margin: 0 auto;
+		max-width: 34rem;
+		text-wrap: pretty;
 	}
-	.hero-tools {
+
+	/* Ways in ---------------------------------------------------------- */
+	.hero-actions {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		align-items: baseline;
-		gap: 0.5rem 0.65rem;
-		margin: 1.5rem auto 0;
+		align-items: stretch;
+		gap: 0.85rem;
+		margin-top: 1.75rem;
+		text-align: left;
+	}
+	.cta-primary {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.15rem;
+		padding: 0.7rem 1.15rem;
+		border-radius: 6px;
+		background: var(--color-accent);
+		text-decoration: none;
+		transition: background 150ms ease;
+	}
+	.cta-primary:hover,
+	.cta-primary:focus-visible {
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
+	}
+	.cta-label {
 		font-family: var(--font-ui);
-		font-size: 0.7rem;
+		font-size: 0.95rem;
 		font-weight: 600;
-		letter-spacing: 0.22em;
+		color: #fff;
+	}
+	.cta-meta {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-variant-numeric: tabular-nums;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	.jump {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+	.jump-label {
+		font-family: var(--font-ui);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
 		text-transform: uppercase;
 		color: var(--color-muted);
 	}
-	.hero-tools a {
+	.jump-row {
+		display: flex;
+		align-items: stretch;
+		gap: 0.35rem;
+	}
+	.jump-input {
+		width: 6.5rem;
+		padding: 0.4rem 0.6rem;
+		font-family: var(--font-ui);
+		font-size: 0.95rem;
+		font-variant-numeric: tabular-nums;
+		color: var(--color-fg);
+		background: var(--color-panel);
+		border: 1px solid var(--color-border);
+		border-radius: 5px;
+	}
+	.jump-input:focus-visible {
+		outline: 2px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+		outline-offset: 1px;
+		border-color: var(--color-accent);
+	}
+	.jump-go {
+		padding: 0 0.7rem;
+		font-family: var(--font-heading);
+		font-size: 1rem;
+		color: var(--color-fg);
+		background: var(--color-panel);
+		border: 1px solid var(--color-border);
+		border-radius: 5px;
+		cursor: pointer;
+		transition:
+			color 150ms ease,
+			border-color 150ms ease;
+	}
+	.jump-go:hover {
+		color: var(--color-accent);
+		border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+	}
+	.jump-hint {
+		margin: 0;
+		font-family: var(--font-ui);
+		font-size: 0.7rem;
+		font-variant-numeric: tabular-nums;
+		color: var(--color-muted);
+	}
+	.jump-hint.is-error {
+		color: var(--color-accent);
+	}
+
+	.hero-secondary {
+		margin: 1.15rem 0 0;
+		font-family: var(--font-body);
+		font-size: 0.875rem;
+		color: var(--color-muted);
+		text-align: center;
+	}
+	.hero-secondary a {
 		color: var(--color-fg);
 		text-decoration: none;
-		border-bottom: 1px solid transparent;
-		padding-bottom: 0.1rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 30%, transparent);
 		transition:
-			color 140ms ease,
-			border-color 140ms ease;
+			color 150ms ease,
+			border-color 150ms ease;
 	}
-	.hero-tools a:hover,
-	.hero-tools a:focus-visible {
+	.hero-secondary a:hover,
+	.hero-secondary a:focus-visible {
 		color: var(--color-accent);
 		border-bottom-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
 	}
 
-	/* Prologue --------------------------------------------------------- */
-	.prologue {
-		max-width: 44rem;
-		margin: 0 auto 2.5rem;
-	}
-	.prologue-link {
-		display: flex;
-		align-items: baseline;
-		gap: 1rem;
-		padding: 0.85rem 0;
-		border-top: 1px solid var(--color-border);
-		border-bottom: 1px solid var(--color-border);
-		text-decoration: none;
-		color: inherit;
-		transition: border-color 150ms ease;
-	}
-	.prologue-link:hover {
-		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
-	}
-	.prologue-kicker {
-		flex: none;
-		font-family: var(--font-ui);
-		font-size: 0.68rem;
-		font-weight: 600;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-	}
-	.prologue-lede {
-		flex: 1;
-		font-family: var(--font-body);
-		font-size: 0.95rem;
-		font-style: italic;
-		color: var(--color-subtle);
-	}
-	.prologue-arrow {
-		flex: none;
-		font-family: var(--font-heading);
-		font-size: 1.05rem;
-		color: var(--color-muted);
-		transition:
-			transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
-			color 150ms ease;
-	}
-	.prologue-link:hover .prologue-arrow {
-		color: var(--color-accent);
-		transform: translateX(3px);
-	}
-
 	/* Parts grid ------------------------------------------------------- */
+	/* Cards in a row are equal height. This is the grid's default stretch —
+	   don't reintroduce `align-items: start`. Balancing the number of topic
+	   links per card is not a substitute: part two's title wraps to two lines
+	   where the others take one, so equal counts still give ragged heights. */
 	.parts {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1.5rem;
-		margin-bottom: 3rem;
+		gap: 1.25rem;
+		margin-bottom: 2.75rem;
 	}
-	@media (max-width: 720px) {
+	@media (max-width: 860px) {
 		.parts {
 			grid-template-columns: 1fr;
 			gap: 1rem;
@@ -310,7 +420,7 @@
 	.part-card {
 		display: flex;
 		flex-direction: column;
-		padding: 1.5rem 1.5rem 1.25rem;
+		padding: 1.35rem 1.35rem 1.15rem;
 		border: 1px solid var(--color-border);
 		border-radius: 6px;
 		background: color-mix(in srgb, var(--color-border) 12%, transparent);
@@ -332,104 +442,136 @@
 		letter-spacing: 0.16em;
 		text-transform: uppercase;
 		color: var(--color-accent);
-		margin-bottom: 0.4rem;
+		font-variant-numeric: tabular-nums;
+		margin-bottom: 0.35rem;
 	}
 	.part-title {
 		font-family: var(--font-heading);
-		font-size: 1.4rem;
+		font-size: 1.35rem;
 		font-weight: 600;
 		line-height: 1.25;
 		color: var(--color-fg);
-		margin: 0 0 0.85rem;
+		margin: 0;
 		transition: color 150ms ease;
 	}
 	.part-head:hover .part-title {
 		color: var(--color-accent);
 	}
-	.part-lede {
+	.part-gloss {
+		display: block;
 		font-family: var(--font-body);
-		font-size: 0.95rem;
-		line-height: 1.6;
+		font-size: 0.9rem;
+		font-style: italic;
 		color: var(--color-subtle);
-		margin: 0 0 1.1rem;
-	}
-	.part-anchors {
-		list-style: none;
-		padding: 0;
-		margin: auto 0 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-		border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
-		padding-top: 0.85rem;
-	}
-	.anchor-link {
-		display: flex;
-		align-items: baseline;
-		gap: 0.55rem;
-		font-family: var(--font-ui);
-		font-size: 0.85rem;
-		color: var(--color-fg);
-		text-decoration: none;
-		padding: 0.15rem 0;
-	}
-	.anchor-arrow {
-		color: var(--color-muted);
-		flex: none;
-		transition:
-			transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
-			color 150ms ease;
-	}
-	.anchor-link:hover {
-		color: var(--color-accent);
-	}
-	.anchor-link:hover .anchor-arrow {
-		color: var(--color-accent);
-		transform: translateX(2px);
+		margin-top: 0.3rem;
 	}
 
-	/* Quick links ------------------------------------------------------ */
-	.quick-links {
+	/* Topic list · the "what's inside" answer. Range right-aligned in a
+	   tabular column, matching the rail immediately to its left. */
+	.topics {
+		list-style: none;
+		padding: 0.85rem 0 0;
+		margin: 0.95rem 0 0;
 		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-		align-items: baseline;
-		gap: 0.6rem;
-		padding-top: 1.5rem;
+		flex-direction: column;
 		border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
 	}
-	.quick-link {
+	.topic {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.28rem 0;
 		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--color-muted);
+		font-size: 0.875rem;
+		color: var(--color-fg);
 		text-decoration: none;
 		transition: color 150ms ease;
 	}
-	.quick-link:hover {
+	.topic:hover {
 		color: var(--color-accent);
 	}
+	.topic-range {
+		flex: none;
+		font-size: 0.72rem;
+		font-weight: 500;
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
+		color: var(--color-muted);
+		transition: color 150ms ease;
+	}
+	.topic:hover .topic-range {
+		color: var(--color-accent);
+	}
+
+	/* Tools ------------------------------------------------------------ */
+	.tools {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.85rem 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+	}
+	/* The site footer, a few hundred pixels below, lists Sommaire / Panorama /
+	   Glossaire again as bare links. The heading is what stops this row from
+	   reading as a stray second footer: here the names carry an explanation,
+	   which is the whole reason it exists. */
+	.tools-title {
+		grid-column: 1 / -1;
+		font-family: var(--font-ui);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0 0 0.25rem;
+	}
+	@media (max-width: 640px) {
+		.tools {
+			grid-template-columns: 1fr;
+		}
+	}
+	.tool {
+		text-decoration: none;
+		color: inherit;
+	}
+	.tool-name {
+		display: block;
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-fg);
+		transition: color 150ms ease;
+	}
+	.tool:hover .tool-name {
+		color: var(--color-accent);
+	}
+	.tool-desc {
+		display: block;
+		font-family: var(--font-body);
+		font-size: 0.85rem;
+		line-height: 1.45;
+		color: var(--color-muted);
+		margin-top: 0.15rem;
+	}
+
 	@media (max-width: 640px) {
 		.hero-title {
 			white-space: normal;
 			text-wrap: balance;
 		}
-		.prologue-link {
+		.hero-actions {
 			flex-direction: column;
+			align-items: stretch;
+		}
+		.cta-primary {
 			align-items: flex-start;
-			gap: 0.25rem;
-			padding: 0.85rem 0.25rem;
 		}
-		.prologue-arrow {
-			align-self: flex-end;
+		.jump-input {
+			flex: 1;
+			width: auto;
 		}
-	}
-
-	.quick-sep {
-		font-family: var(--font-ui);
-		font-size: 0.65rem;
-		color: var(--color-border);
 	}
 </style>
