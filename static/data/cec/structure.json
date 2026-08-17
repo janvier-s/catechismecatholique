@@ -1638,7 +1638,7 @@
               }
             },
             {
-              "slug": "2-je-crois-en-jesus-christ-le",
+              "slug": "2-je-crois-en-jesus-christ",
               "title": "Je crois en Jésus-Christ, le Fils unique de Dieu",
               "number": 2,
               "articles": [
@@ -1706,7 +1706,7 @@
                   }
                 },
                 {
-                  "slug": "3-jesus-christ-a-ete-concu-du",
+                  "slug": "3-jesus-christ-a-ete-concu",
                   "title": "« Jésus-Christ a été conçu du Saint-Esprit, il est né de la vierge Marie »",
                   "number": 3,
                   "headings": [
@@ -2044,7 +2044,7 @@
                   }
                 },
                 {
-                  "slug": "4-jesus-christ-a-souffert-sous",
+                  "slug": "4-jesus-christ-a-souffert",
                   "title": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
                   "number": 4,
                   "headings": [
@@ -2249,7 +2249,7 @@
                   }
                 },
                 {
-                  "slug": "5-jesus-christ-est-descendu-aux",
+                  "slug": "5-jesus-christ-est-descendu",
                   "title": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
                   "number": 5,
                   "headings": [
@@ -2332,7 +2332,7 @@
                   }
                 },
                 {
-                  "slug": "6-jesus-est-monte-aux-cieux-il",
+                  "slug": "6-jesus-est-monte-aux-cieux",
                   "title": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
                   "number": 6,
                   "headings": [],
@@ -2353,7 +2353,7 @@
                   }
                 },
                 {
-                  "slug": "7-dou-il-viendra-juger-les",
+                  "slug": "7-dou-il-viendra-juger",
                   "title": "« D’où il viendra juger les vivants et les morts »",
                   "number": 7,
                   "headings": [
@@ -3579,7 +3579,7 @@
                   }
                 },
                 {
-                  "slug": "11-je-crois-a-la-resurrection-de",
+                  "slug": "11-je-crois-a-la-resurrection",
                   "title": "« Je crois à la résurrection de la chair »",
                   "number": 11,
                   "headings": [
@@ -4317,7 +4317,7 @@
                   }
                 },
                 {
-                  "slug": "2-mystere-pascal-dans-les",
+                  "slug": "2-mystere-pascal",
                   "title": "Le mystère pascal dans les sacrements de l’Église",
                   "number": 2,
                   "headings": [
@@ -4449,12 +4449,12 @@
               }
             },
             {
-              "slug": "2-celebration-sacramentelle-du",
+              "slug": "2-celebration-sacramentelle",
               "title": "La célébration sacramentelle du mystère pascal",
               "number": 2,
               "articles": [
                 {
-                  "slug": "1-celebrer-la-liturgie-de",
+                  "slug": "1-celebrer-la-liturgie",
                   "title": "Célébrer la liturgie de l’Église",
                   "number": 1,
                   "headings": [
@@ -5491,7 +5491,7 @@
               "number": 2,
               "articles": [
                 {
-                  "slug": "4-sacrement-de-la-penitence-et",
+                  "slug": "4-sacrement-de-la-penitence",
                   "title": "Le sacrement de la pénitence et de la réconciliation",
                   "number": 4,
                   "headings": [
@@ -5942,7 +5942,7 @@
               }
             },
             {
-              "slug": "3-sacrements-du-service-de-la",
+              "slug": "3-sacrements-du-service",
               "title": "Les sacrements du service de la communion",
               "number": 3,
               "articles": [
@@ -6635,7 +6635,7 @@
       "number": 3,
       "sections": [
         {
-          "slug": "1-vocation-de-lhomme-la-vie-dans",
+          "slug": "1-vocation-de-lhomme-la-vie",
           "title": "La vocation de l’homme : La vie dans l’esprit",
           "number": 1,
           "chapters": [
@@ -7510,7 +7510,7 @@
               }
             },
             {
-              "slug": "3-salut-de-dieu-la-loi-et-la",
+              "slug": "3-salut-de-dieu-la-loi",
               "title": "Le salut de Dieu : La loi et la grâce",
               "number": 3,
               "articles": [
@@ -7842,7 +7842,7 @@
           "number": 2,
           "chapters": [
             {
-              "slug": "1-tu-aimeras-le-seigneur-ton",
+              "slug": "1-tu-aimeras-le-seigneur",
               "title": "« Tu aimeras le Seigneur ton Dieu de tout ton cœur, de toute ton âme et de tout ton esprit »",
               "number": 1,
               "articles": [
@@ -8288,7 +8288,7 @@
               }
             },
             {
-              "slug": "2-tu-aimeras-ton-prochain-comme",
+              "slug": "2-tu-aimeras-ton-prochain",
               "title": "« Tu aimeras ton prochain comme toi-même »",
               "number": 2,
               "articles": [
