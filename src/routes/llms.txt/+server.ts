@@ -153,7 +153,12 @@ export const GET: RequestHandler = () => {
 	out.push('');
 	out.push('### Accès aux données structurées');
 	out.push('');
-	out.push(`- \`${SITE}/data/cec/paragraphs/{numéro}.json\` · paragraphe CEC`);
+	out.push(
+		`- \`${SITE}/api/cec/{numéro}\` · paragraphe CEC (texte brut + HTML, renvois, fil d'Ariane, précédent/suivant)`
+	);
+	out.push(
+		`- \`${SITE}/data/cec/paragraphs/{numéro}.json\` · paragraphe CEC (JSON source, sans contexte)`
+	);
 	out.push(`- \`${SITE}/data/compendium/parts/{slug}.json\` · partie du Compendium`);
 	out.push(`- \`${SITE}/data/search/search-index.json\` · index de recherche sérialisé`);
 	out.push(
