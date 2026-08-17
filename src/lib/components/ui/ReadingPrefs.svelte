@@ -70,7 +70,7 @@
 
 	// Auto is intentionally omitted · users want an explicit choice here.
 	const THEME_SWATCHES = [
-		{ id: 'light' as const, label: 'Clair', bg: '#f8f5ef', fg: '#1c1710', lines: '#c8bfb0' },
+		{ id: 'light' as const, label: 'Clair', bg: '#fffdf9', fg: '#1c1710', lines: '#c8bfb0' },
 		{ id: 'sepia' as const, label: 'Sépia', bg: '#f2e8d8', fg: '#2c1e10', lines: '#c0a888' },
 		{ id: 'dark' as const, label: 'Sombre', bg: '#111113', fg: '#e8ddd0', lines: '#2e2b32' },
 		{ id: 'oled' as const, label: 'OLED', bg: '#000000', fg: '#e0e0e0', lines: '#2a2a2a' }

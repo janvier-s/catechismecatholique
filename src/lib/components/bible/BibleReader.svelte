@@ -50,6 +50,21 @@
 
 	const totalCited = $derived(verses.reduce((t, v) => t + (citedCount(v.v) > 0 ? 1 : 0), 0));
 
+	/**
+	 * Open the study panel for a verse · unless the reader was selecting text.
+	 * Cited verses render as <button> for keyboard access, and a drag-select
+	 * inside a button still fires click on mouseup, which would otherwise
+	 * hijack every attempt to copy a verse into opening the panel.
+	 */
+	function openVerse(v: number): void {
+		const sel = window.getSelection();
+		if (sel && !sel.isCollapsed && sel.toString().trim() !== '') return;
+		openPanel(
+			{ kind: 'verse', verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v },
+			'bible-verse'
+		);
+	}
+
 	function isVerseActive(v: number): boolean {
 		const ctx = $studyPanel.context;
 		if (ctx?.kind !== 'verse') return false;
@@ -89,7 +104,7 @@
 			<ChapterFilterBar bind:studyMode citedCount={totalCited} />
 		{/if}
 
-		<ol class="list-none space-y-3 max-md:space-y-0">
+		<ol class="verse-list list-none">
 			{#each verses as v (v.v)}
 				{@const c = citedCount(v.v)}
 				{@const headingsHere = sectionsByVerse.get(v.v) ?? []}
@@ -128,13 +143,7 @@
 						class:is-active={active}
 						type={isClickable ? 'button' : undefined}
 						role={isClickable ? 'button' : 'presentation'}
-						onclick={isClickable
-							? () =>
-									openPanel(
-										{ kind: 'verse', verseUsfx: book.usfx, verseChapter: chapter, verseVerse: v.v },
-										'bible-verse'
-									)
-							: undefined}
+						onclick={isClickable ? () => openVerse(v.v) : undefined}
 						aria-label={isClickable
 							? `Verset ${v.v} — ${c} ${c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme`
 							: undefined}
@@ -184,6 +193,13 @@
 		font-size: var(--reader-font-size, 17px);
 		line-height: var(--reader-line-height, 1.7);
 	}
+	/* Inter-verse gap tracks the line-height slider · a fixed space-y left the
+	   verses just as far apart at 1.2 as at 2.0, so tightening the leading did
+	   nothing to the page's overall density. At the 1.7 default this lands on
+	   0.7rem, matching the space-y-3 it replaces. */
+	.verse-list > li + li {
+		margin-top: calc((var(--reader-line-height, 1.7) - 1) * 1rem);
+	}
 	@media (max-width: 767px) {
 		.verse-text {
 			font-size: calc(var(--reader-font-size, 17px) - 3px);
@@ -220,6 +236,11 @@
 		align-items: baseline;
 		width: 100%;
 		text-align: left;
+		/* Buttons are unselectable by UA default · a cited verse must still be
+		   selectable and copyable like any other. The verse number keeps its
+		   own select-none so it stays out of the copied text. */
+		-webkit-user-select: text;
+		user-select: text;
 	}
 	.verse-row:hover {
 		background-color: color-mix(in srgb, var(--color-accent) 5%, transparent);
@@ -237,6 +258,11 @@
 	   the gutter width gives clean, predictable alignment without the
 	   "wrap around" that absolute/float approaches can produce. */
 	@media (max-width: 768px) {
+		/* Mobile keeps the continuous single-column flow it had under
+		   space-y-0 · line-height alone sets density there. */
+		.verse-list > li + li {
+			margin-top: 0;
+		}
 		.verse-row {
 			display: grid !important;
 			grid-template-columns: 1.5rem minmax(0, 1fr);

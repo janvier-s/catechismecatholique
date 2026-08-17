@@ -72,8 +72,12 @@
 	const numberHref = $derived(
 		unit.kind === 'ccc-paragraph' ? `/cec/${unit.data.number}` : `#q-${unit.data.number}`
 	);
+	// Deep-link target · `p-{n}` follows the convention used by the Trent and
+	// petit-catéchisme readers. Deliberately not `paragraphe-{n}`: that id is
+	// already taken by the CEC's structural "Paragraphe" subdivisions, whose
+	// numbers (1, 2, 3…) would collide with low § numbers in the Prologue.
 	const anchorId = $derived(
-		unit.kind === 'compendium-question' ? `q-${unit.data.number}` : undefined
+		unit.kind === 'compendium-question' ? `q-${unit.data.number}` : `p-${unit.data.number}`
 	);
 </script>
 

@@ -172,8 +172,8 @@
 				},
 				{
 					id: 'denzinger-cited-by',
-					label: 'Cités dans',
-					children: [{ id: 'denzinger-cited-by', label: 'Cités dans' }]
+					label: 'Cité dans',
+					children: [{ id: 'denzinger-cited-by', label: 'Cité dans' }]
 				}
 			];
 		}
@@ -191,7 +191,7 @@
 				).length
 			: 0;
 		const hasSources = optimistic || sourcesCount > 0;
-		// Cités dans hidden if the citers are exactly the same set as cross_refs
+		// Cité dans hidden if the citers are exactly the same set as cross_refs
 		const citerSet = new Set(citedByList.map(String));
 		const crossSet = new Set(paragraph?.cross_refs ?? []);
 		const sameAsRenvois =
@@ -212,7 +212,7 @@
 		// one place and shrinks the strip from 6-7 tabs to 5.
 		const ren: TabDef[] = [];
 		if (hasCrossRefs) ren.push({ id: 'cross-refs', label: 'Renvois' });
-		if (hasCitedBy) ren.push({ id: 'cited-by', label: 'Cités dans' });
+		if (hasCitedBy) ren.push({ id: 'cited-by', label: 'Cité dans' });
 		if (hasThemesG) ren.push({ id: 'themes', label: 'Thèmes' });
 		if (hasSources) ren.push({ id: 'sources', label: 'Sources' });
 		if (hasCdseCiters) ren.push({ id: 'cdse-citers', label: 'Doctrine sociale' });

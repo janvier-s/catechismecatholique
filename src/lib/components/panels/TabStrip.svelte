@@ -125,7 +125,8 @@
 
 	<!-- Scroll position indicator. Always in DOM (no {#if}) to avoid mount/
 	     unmount layout recalculations that cause tab-button flicker. Only
-	     visible on hover when there is actually overflow content. -->
+	     visible on hover when there is actually overflow content, and
+	     positioned out of flow so it costs no vertical space when hidden. -->
 	<div class="bar-zone" class:bar-has-overflow={thumbRatio < 1} aria-hidden="true">
 		<div class="bar-track">
 			<div class="bar-thumb" style="left: calc({scrollRatio} * 39px)"></div>
@@ -139,6 +140,8 @@
 		flex-direction: column;
 		font-family: var(--font-ui);
 		font-size: 12px;
+		/* Anchor for the out-of-flow .bar-zone below. */
+		position: relative;
 	}
 
 	.strip {
@@ -246,13 +249,26 @@
 		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-panel));
 	}
 
-	/* Narrow centered scroll indicator sits below the tab strip row.
-	   Only shows on hover when there is overflow to scroll. */
+	/* Narrow centered scroll indicator, just below the tab strip row. Only
+	   shows on hover when there is overflow to scroll.
+
+	   Out of flow (top: 100% of .tab-wrap, whose in-flow height is just the
+	   strip) so it never reserves a band of its own: in flow it held a
+	   permanent 14px gap between the tabs and the sub-tabs, even on panels
+	   with nothing to scroll, where it was invisible the entire time. It stays
+	   in the DOM regardless — see the note on the markup — so there's still no
+	   mount/unmount layout churn. `flex-start` keeps the thumb tucked against
+	   the strip's bottom border rather than floating mid-gap. */
 	.bar-zone {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		z-index: 1;
 		display: flex;
 		justify-content: center;
-		align-items: center;
-		height: 14px;
+		align-items: flex-start;
+		height: 12px;
 		pointer-events: none;
 		opacity: 0;
 		transition: opacity 200ms ease;

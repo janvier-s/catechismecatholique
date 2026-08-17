@@ -17,15 +17,26 @@
 		chapterData: ConcordanceChapter;
 	} = $props();
 
-	// No pre-selection · the chapter lands with the verse list visible
-	// only; the detail card opens on first user click.
-	let selectedPericopeRef = $state<string | null>(null);
+	// The chapter lands with its first pericope already open in the detail
+	// pane. Resolved through $derived rather than seeding $state, so moving to
+	// another chapter re-defaults to *that* chapter's first pericope instead of
+	// holding a ref that no longer exists there.
+	let clickedPericopeRef = $state<string | null>(null);
+	// Mobile shows the card as a sheet over the verse list, so it stays closed
+	// until the reader actually picks a pericope · otherwise landing on the
+	// page would bury the chapter behind the sheet.
+	let sheetOpen = $state(false);
+
+	const selectedPericopeRef = $derived<string | null>(
+		clickedPericopeRef ?? chapterData.pericopes[0]?.verseRef ?? null
+	);
 
 	function handleSelectPericope(verseRef: string) {
-		selectedPericopeRef = verseRef;
+		clickedPericopeRef = verseRef;
+		sheetOpen = true;
 	}
 	function clearSelection() {
-		selectedPericopeRef = null;
+		sheetOpen = false;
 	}
 
 	const selectedPericope = $derived<ConcordancePericope | null>(
@@ -85,7 +96,7 @@
 			onSelectPericope={handleSelectPericope}
 		/>
 	</div>
-	{#if selectedPericope}
+	{#if selectedPericope && sheetOpen}
 		<div
 			class="absolute inset-x-0 bottom-0 top-[40%] bg-panel border-t border-border flex flex-col shadow-[0_-12px_24px_-20px_rgba(0,0,0,0.25)]"
 			role="dialog"

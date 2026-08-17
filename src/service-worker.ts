@@ -6,8 +6,15 @@
 // Service worker · offline reading for the catechism + bible.
 //
 // Strategies:
-// - app shell + prerendered HTML + build assets: cached on install, served
-//   cache-first (versioned URLs, so safe to evict by version)
+// - build assets: cached on install, served cache-first. Their filenames are
+//   content-hashed, so a cached copy is by definition the right one.
+// - static files (static/) + prerendered HTML: cached on install but served
+//   network-first. Their URLs are stable across deploys, so cache-first pins
+//   whatever happened to be cached and a fix can never reach the browser.
+//   /theme-init.js is the sharp edge here: it runs before first paint, and a
+//   stale copy silently re-introduces the theme/layout flash it exists to
+//   prevent — which is exactly what it did. Offline still works: these are
+//   pre-cached on install and refreshed on every successful fetch.
 // - /data/cec/* and /data/bible/* and /fonts/*: cache-first, lazy. These
 //   shards are immutable across deploys; serving the cached copy is correct
 //   even when a new version exists, until the SW reactivates and clears.
@@ -26,8 +33,12 @@ const CACHE_VERSION = `app-${version}`;
 const DATA_CACHE = `data-${version}`;
 const FONT_CACHE = 'fonts-v1';
 
-// Build-versioned assets + static files + prerendered HTML · known up front.
+// Everything known up front · pre-cached on install so the app works offline.
 const APP_SHELL = [...build, ...files, ...prerendered];
+// Content-hashed build output · a cached copy can never be wrong.
+const IMMUTABLE = new Set(build);
+// Stable-URL assets · must be revalidated, see the strategy note above.
+const REVALIDATE = new Set([...files, ...prerendered]);
 
 self.addEventListener('install', (event) => {
 	event.waitUntil(
@@ -78,9 +89,17 @@ self.addEventListener('fetch', (event) => {
 		return;
 	}
 
-	// App shell + prerendered HTML · try cache first, fall back to network.
-	if (APP_SHELL.includes(url.pathname)) {
+	// Content-hashed build output · cache-first.
+	if (IMMUTABLE.has(url.pathname)) {
 		event.respondWith(cacheFirst(req, CACHE_VERSION));
+		return;
+	}
+
+	// Static files + prerendered HTML · network-first so an updated copy is
+	// picked up on the next load rather than being pinned until the SW version
+	// changes. Falls back to the cached copy when offline.
+	if (REVALIDATE.has(url.pathname)) {
+		event.respondWith(networkFirst(req, CACHE_VERSION));
 		return;
 	}
 
@@ -97,9 +116,41 @@ async function cacheFirst(req: Request, cacheName: string): Promise<Response> {
 	const cache = await caches.open(cacheName);
 	const cached = await cache.match(req);
 	if (cached) return cached;
+	// Fonts (and any other static file) are pre-cached into CACHE_VERSION by
+	// install, but are served out of FONT_CACHE — so without this second look
+	// every font missed on the first load after an install and went to the
+	// network, which with font-display:optional is exactly what makes text
+	// paint in the fallback face. Promote the hit into the target cache so the
+	// cross-lookup only ever happens once per asset.
+	if (cacheName !== CACHE_VERSION) {
+		const shell = await caches.open(CACHE_VERSION);
+		const preCached = await shell.match(req);
+		if (preCached) {
+			void cache.put(req, preCached.clone());
+			return preCached;
+		}
+	}
 	const res = await fetch(req);
 	if (res.ok) cache.put(req, res.clone());
 	return res;
+}
+
+/**
+ * Network-first for a single asset. Distinct from networkFirstWithFallback:
+ * that one falls back to the cached homepage, which is right for a navigation
+ * but would hand back HTML for a missing script or icon.
+ */
+async function networkFirst(req: Request, cacheName: string): Promise<Response> {
+	const cache = await caches.open(cacheName);
+	try {
+		const res = await fetch(req);
+		if (res.ok) cache.put(req, res.clone());
+		return res;
+	} catch {
+		const cached = await cache.match(req);
+		if (cached) return cached;
+		throw new Error(`offline and not cached: ${req.url}`);
+	}
 }
 
 async function networkFirstWithFallback(req: Request): Promise<Response> {

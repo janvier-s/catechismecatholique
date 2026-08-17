@@ -3,25 +3,38 @@
 		direction,
 		href,
 		eyebrow,
-		title
+		title,
+		size = 'default'
 	}: {
 		direction: 'prev' | 'next';
 		href: string;
-		eyebrow: string;
+		/** Omit for a bare card · the arrow alone carries the direction. */
+		eyebrow?: string;
 		title: string;
+		/** 'sm' · compact card that hugs its content instead of filling half
+		 *  the row. For nav where the title is a bare number. */
+		size?: 'default' | 'sm';
 	} = $props();
 
 	// Existing callers embed the arrow in the eyebrow string ("← Chapitre précédent",
 	// "Chapitre suivant →"). Strip it · the arrow is now its own rendered column.
-	const label = $derived(eyebrow.replace(/^←\s*|\s*→$/g, '').trim());
+	const label = $derived((eyebrow ?? '').replace(/^←\s*|\s*→$/g, '').trim());
 </script>
 
-<a class="nav-card" class:prev={direction === 'prev'} class:next={direction === 'next'} {href}>
+<a
+	class="nav-card"
+	class:prev={direction === 'prev'}
+	class:next={direction === 'next'}
+	class:sm={size === 'sm'}
+	{href}
+>
 	{#if direction === 'prev'}
 		<span class="nav-arrow" aria-hidden="true">←</span>
 	{/if}
 	<span class="nav-body">
-		<span class="nav-eyebrow">{label}</span>
+		{#if label}
+			<span class="nav-eyebrow">{label}</span>
+		{/if}
 		<span class="nav-title">{title}</span>
 	</span>
 	{#if direction === 'next'}
@@ -92,5 +105,32 @@
 	}
 	.nav-card:hover .nav-title {
 		color: var(--color-accent-text);
+	}
+
+	/* Compact variant · a square tile that hugs its content (justify-between on
+	   the parent still parks prev left and next right). Arrow stacks above the
+	   number so the square holds any width of paragraph number, and both
+	   directions read identically. */
+	.nav-card.sm {
+		flex: 0 0 auto;
+		flex-direction: column;
+		aspect-ratio: 1;
+		min-width: 3.5rem;
+		align-items: center;
+		justify-content: center;
+		gap: 0.1rem;
+		padding: 0.5rem;
+		text-align: center;
+	}
+	.nav-card.sm .nav-arrow {
+		order: -1;
+		font-size: 1rem;
+	}
+	.nav-card.sm .nav-body {
+		align-items: center;
+	}
+	.nav-card.sm .nav-title {
+		font-size: 15px;
+		font-variant-numeric: tabular-nums;
 	}
 </style>

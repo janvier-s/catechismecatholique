@@ -50,7 +50,13 @@ const DEFAULTS: ReadingPrefs = {
 
 const KEY = 'catechismecatholique.prefs';
 const PANEL_KEY = 'catechismecatholique.panelWidth';
-const DEFAULT_PANEL_WIDTH = '420px';
+/** Resolved --font-body stack, mirrored for static/theme-init.js. */
+const FONT_STACK_KEY = 'catechismecatholique.fontStack';
+// A third of the viewport, so the panel scales with the screen instead of
+// sitting at a fixed 420px that ate half a laptop and a sliver of a 4K display.
+// `max()` holds the 280px floor the resize util enforces (768px × ⅓ = 256px).
+// Only the default is an expression — a dragged width is always saved in px.
+const DEFAULT_PANEL_WIDTH = 'max(280px, 33.3333vw)';
 
 function readInitial(): ReadingPrefs {
 	if (!browser) return { ...DEFAULTS };
@@ -89,6 +95,14 @@ if (browser) {
 		localStorage.setItem(KEY, JSON.stringify($p));
 		const root = document.documentElement;
 		root.setAttribute('data-theme', $p.theme);
+		// Keep the mobile browser chrome in step with the theme. Read back the
+		// computed --color-bg (the attribute above has already invalidated style,
+		// so this returns the new theme's value) rather than restating the palette
+		// here · static/theme-init.js does the same on first paint.
+		const themeColor = getComputedStyle(root).getPropertyValue('--color-bg').trim();
+		if (themeColor) {
+			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColor);
+		}
 		root.dataset.columnWidth = $p.columnWidth;
 		root.dataset.crossRefsLayout = $p.crossRefsLayout;
 		root.dataset.hideAllNotes = String($p.hideAllNotes);
@@ -101,7 +115,12 @@ if (browser) {
 		root.style.setProperty('--reader-font-size', `${$p.fontSize}px`);
 		root.style.setProperty('--reader-line-height', String($p.lineHeight));
 		const font = getFontById($p.fontFamily);
-		if (font) root.style.setProperty('--font-body', font.stack);
+		if (font) {
+			root.style.setProperty('--font-body', font.stack);
+			// Persist the resolved stack so static/theme-init.js can apply it
+			// before first paint without needing a copy of the font registry.
+			localStorage.setItem(FONT_STACK_KEY, font.stack);
+		}
 	});
 	panelWidth.subscribe((w) => {
 		localStorage.setItem(PANEL_KEY, w);

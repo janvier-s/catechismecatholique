@@ -161,7 +161,7 @@
 
 @layer base {
 	:root {
-		--color-bg: #f8f5ef;
+		--color-bg: #fffdf9;
 		--color-panel: #ffffff;
 		--color-fg: #1c1710;
 		--color-muted: #4a443e;
@@ -169,7 +169,9 @@
 		--color-accent: #a62c2c;
 		--color-accent-text: #b84848;
 		--color-border: #e4dcd0;
-		--color-bg-glass: rgba(248, 245, 239, 0.94);
+		/* Same colour as --color-bg · keep the two in lockstep or the glass
+		   topbar reads as a different cream than the page beneath it. */
+		--color-bg-glass: rgba(255, 253, 249, 0.94);
 		--color-heading: var(--color-fg);
 
 		--font-body: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
@@ -347,45 +349,72 @@ html[data-justified='true'] .reader-prose p {
 	hyphens: auto;
 }
 /* Column widths bumped up: étroit ≈ DR's standard, standard ≈ DR's wide,
-   large is wider still. */
-html[data-column-width='narrow'] .max-w-reader {
-	max-width: 750px;
+   large is wider still.
+
+   Held in a variable rather than set directly on .max-w-reader so the en-marge
+   override below can widen *relative* to the reader's choice. When that rule
+   pinned an absolute width it silently disabled this pref on every CCC reader
+   page — en-marge is the default layout, and its selector outranks these on
+   specificity (0,3,2 vs 0,2,1), so all three values rendered identically. */
+html[data-column-width='narrow'] {
+	--reader-col: 750px;
 }
-html[data-column-width='default'] .max-w-reader {
-	max-width: 900px;
+html[data-column-width='default'] {
+	--reader-col: 900px;
 }
-html[data-column-width='wide'] .max-w-reader {
-	max-width: 1080px;
+html[data-column-width='wide'] {
+	--reader-col: 1080px;
+}
+html[data-column-width] .max-w-reader {
+	max-width: var(--reader-col);
 }
 /* En-marge mode: widen the container so the refs box sits in the right
    margin, outside the prose column. The article uses padding-right + an
    absolutely positioned aside (see ParagraphView.svelte). Scoped to CCC
    readers · Trent and Compendium have no side refs, so their column-width
-   pref must not be hijacked by this override. */
+   pref must not be hijacked by this override.
+
+   The +280px is the room the refs gutter needs on top of the prose measure
+   (ReadableUnit reserves 6rem padding-right, plus main's own 3rem of px-6).
+   It's the delta this rule used to hardcode, so "standard" still lands on the
+   1180px it always did — narrow and large now move around it. The literal
+   fallback covers the first paint, before prefs.ts stamps the attribute. */
 html[data-cross-refs-layout='side'] main[data-corpus='ccc'].max-w-reader {
-	max-width: min(1180px, 100% - 48px);
+	max-width: min(calc(var(--reader-col, 900px) + 280px), 100% - 48px);
 }
 /* En-marge mode: the side aside lists every cross-ref already, so the
    inline cccRef sup markers in the prose would be a redundant second
    copy. Hide them when the layout is "side" · they remain visible in
    the default inline layout. */
-html[data-cross-refs-layout='side'] .prose-paragraph .ref-cccRef {
+html[data-cross-refs-layout='side'] .prose-paragraph .ref-cccRef,
+html[data-cross-refs-layout='side'] .prose-paragraph sup.cccRef {
 	display: none;
 }
 /* Markers are wrapped in <span class="ref-wrap ref-{type}"> by the renderer
    so hiding the wrapper also drops its leading whitespace (no orphan comma
-   or space before the next period). */
+   or space before the next period).
+
+   Each rule is doubled onto the raw, unwrapped marker (`sup.bibleRef`,
+   `button.bible-inline`, …). The wrapping is client-side DOM surgery in
+   ParagraphRenderer, so the server-rendered HTML carries only the bare
+   markers — matching on `.ref-*` alone meant a hidden marker was still
+   painted until hydration wrapped it, then vanished. The wrapper selectors
+   stay because only they can also swallow the leading separator. */
 html[data-hide-cross-refs='true'] .prose-paragraph .ref-cccRef,
+html[data-hide-cross-refs='true'] .prose-paragraph sup.cccRef,
 html[data-hide-cross-refs='true'] .ccc-side-refs {
 	display: none;
 }
-html[data-hide-bible-markers='true'] .prose-paragraph .ref-bibleRef {
+html[data-hide-bible-markers='true'] .prose-paragraph .ref-bibleRef,
+html[data-hide-bible-markers='true'] .prose-paragraph sup.bibleRef {
 	display: none;
 }
-html[data-hide-bible-inline='true'] .prose-paragraph .ref-bible-inline {
+html[data-hide-bible-inline='true'] .prose-paragraph .ref-bible-inline,
+html[data-hide-bible-inline='true'] .prose-paragraph button.bible-inline {
 	display: none;
 }
 html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef,
+html[data-hide-source-footnotes='true'] .prose-paragraph sup.docRef,
 html[data-hide-source-footnotes='true'] .prose-paragraph sup.trent-fn-marker,
 html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	display: none;
@@ -395,6 +424,23 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
    neighbour). */
 .prose-paragraph .ref-wrap + .ref-wrap {
 	margin-left: 0.15em;
+}
+/* Same gap for the raw, still-unwrapped markers in the server-rendered HTML.
+   Without it §992's three consecutive sups paint as a single run — "234" —
+   until hydration wraps them. Once wrapped each sup sits alone inside its own
+   span, so `sup + sup` stops matching and the rule above takes over; the two
+   can never both apply to the same pair.
+
+   Derived from the reader font size rather than `0.15em`: on a sup, `em` is the
+   sup's own much smaller font-size, so 0.15em there is well under a pixel. This
+   matches the 0.15em the wrapper gets at paragraph size, and tracks the pref.
+
+   `sup.srcRef + sup.srcRef` and not `sup + sup`, to outrank ParagraphRenderer's
+   scoped `.prose-paragraph.svelte-xxx sup.srcRef { margin-left: 0.04em }` —
+   (0,3,1) beats a bare (0,1,2), which is why the plain adjacency selector was
+   silently losing and the markers stayed glued together. */
+.prose-paragraph sup.srcRef + sup.srcRef {
+	margin-left: calc(var(--reader-font-size, 17px) * 0.15);
 }
 /* Inline Bible refs render their citation as a <button> (atomic inline-block
    per UA stylesheet), which creates a wrap opportunity between the button
@@ -899,7 +945,11 @@ a {
 	padding: 4px 10px;
 	border: 1px solid var(--color-border);
 	border-radius: 999px;
-	background: transparent;
+	/* Panel colour, not transparent · an inactive pill used to let the
+	   sub-toggle band's tint show through and read as grey. --color-panel
+	   rather than a literal #fff so sepia/dark/oled keep their own surface
+	   instead of getting a white chip. */
+	background: var(--color-panel);
 	color: var(--color-muted);
 	cursor: pointer;
 	font-family: var(--font-ui);

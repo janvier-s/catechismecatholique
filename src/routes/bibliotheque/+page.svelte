@@ -33,7 +33,7 @@
 	function workFromCorpus(c: CorpusRecord): Work {
 		return {
 			slug: c.id,
-			href: c.urlPrefix,
+			href: c.entryHref ?? c.urlPrefix,
 			title: c.title,
 			subtitle: c.subtitle,
 			blurb: c.blurb,

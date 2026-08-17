@@ -66,17 +66,31 @@
 		};
 	});
 
-	import { corporaInNavGroup } from '$lib/corpora';
+	import { corporaInNavGroup, type CorpusRecord } from '$lib/corpora';
 
-	type Link = { href: string; label: string; description?: string; eyebrow?: string };
+	type Link = {
+		href: string;
+		label: string;
+		description?: string;
+		eyebrow?: string;
+		/** Route namespace for active matching, when it differs from href
+		 *  (CIC: href is /cic/1983, but /cic and /cic/1917 belong to it too). */
+		match?: string;
+	};
 	type Group = { title: string; links: Link[] };
 
-	function fromRegistry(group: 'catechismes' | 'catechese' | 'magistere'): Link[] {
-		return corporaInNavGroup(group).map((c) => ({
-			href: c.urlPrefix,
+	function toLink(c: CorpusRecord): Link {
+		const href = c.entryHref ?? c.urlPrefix;
+		return {
+			href,
 			label: c.title,
-			eyebrow: c.eyebrow
-		}));
+			eyebrow: c.eyebrow,
+			...(href === c.urlPrefix ? {} : { match: c.urlPrefix })
+		};
+	}
+
+	function fromRegistry(group: 'catechismes' | 'catechese' | 'magistere'): Link[] {
+		return corporaInNavGroup(group).map(toLink);
 	}
 
 	function withInsertAfter(links: Link[], afterHref: string, extra: Link): Link[] {
@@ -146,17 +160,20 @@
 
 	const allLinks: Link[] = groups.flatMap((g) => g.links);
 
-	// Longest-match active entry across all groups.
+	// Longest-match active entry across all groups. Matching runs on the
+	// link's route scope (`match` when it differs from href), so the CIC entry
+	// still lights up on /cic and yields to /cic/1917 under that code.
 	const activeHref = $derived.by(() => {
 		const p: string = page.url.pathname;
-		let best: string | null = null;
+		let best: { href: string; len: number } | null = null;
 		for (const link of allLinks) {
-			if (link.href === p) return link.href;
-			if (p.startsWith(link.href + '/')) {
-				if (!best || link.href.length > best.length) best = link.href;
+			const scope = link.match ?? link.href;
+			if (link.href === p || scope === p) return link.href;
+			if (p.startsWith(scope + '/')) {
+				if (!best || scope.length > best.len) best = { href: link.href, len: scope.length };
 			}
 		}
-		return best;
+		return best?.href ?? null;
 	});
 </script>
 

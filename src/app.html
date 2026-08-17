@@ -11,7 +11,10 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="theme-color" content="#000000" />
+		<!-- Pre-JS default only · matches the light --color-bg that :root ships.
+		     theme-init.js and prefs.ts then keep this in step with the chosen
+		     theme by reading the computed --color-bg. -->
+		<meta name="theme-color" content="#fffdf9" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="preload" as="script" href="/theme-init.js" />
 		<link
@@ -40,6 +43,34 @@
 			as="font"
 			type="font/woff2"
 			href="/fonts/LibreBaskerville-Regular.woff2"
+			crossorigin="anonymous"
+		/>
+		<!-- The faces the above-the-fold chrome actually resolves to. Without
+		     these, a cold cache paints the wordmark and search placeholder in
+		     Georgia/system-sans and swaps ~700ms later — measured 210ms→938ms.
+		     Wordmark is Libre Baskerville 700 (its two capitalised lines) plus
+		     400 italic (the "de"); the placeholder's italic keyword is Gotham
+		     500 italic. Bold and italic Baskerville are needed above the fold
+		     anyway for article headings and quoted prose. -->
+		<link
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			href="/fonts/LibreBaskerville-Bold.woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			href="/fonts/LibreBaskerville-Italic.woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			as="font"
+			type="font/woff2"
+			href="/fonts/Gotham-Medium-Italic.woff2"
 			crossorigin="anonymous"
 		/>
 		<script src="/theme-init.js"></script>

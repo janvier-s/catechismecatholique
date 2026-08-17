@@ -338,7 +338,7 @@
 					telle que le texte la prescrit.
 				</li>
 				<li>
-					<strong>Cités dans</strong> : les paragraphes qui mentionnent ce paragraphe en renvoi.
+					<strong>Cité dans</strong> : les paragraphes qui mentionnent ce paragraphe en renvoi.
 				</li>
 				<li>
 					<strong>Sources</strong> : les documents cités en référence : conciles, textes des Pères de

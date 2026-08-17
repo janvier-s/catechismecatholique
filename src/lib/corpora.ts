@@ -22,6 +22,15 @@ export interface CorpusRecord {
 	id: Corpus;
 	/** Public-facing route segment, leading slash, no trailing slash. */
 	urlPrefix: string;
+	/**
+	 * Where "open this work" links point (Bibliothèque card, NavDrawer,
+	 * Footer) when the work itself lives below `urlPrefix`. The CIC needs
+	 * this: `/cic` is a picker between the 1983 and 1917 codes, while the
+	 * record describes the 1983 code, so its links must land on `/cic/1983`.
+	 * `urlPrefix` stays the route namespace used for prefix matching
+	 * (og-image, llms.txt, nav registry keys). Defaults to `urlPrefix`.
+	 */
+	entryHref?: string;
 	/** Bibliothèque shelf this work lives on. */
 	shelf: Shelf;
 	/** NavDrawer + Footer grouping. */
@@ -486,6 +495,7 @@ export const CORPORA: CorpusRecord[] = [
 	{
 		id: 'cic',
 		urlPrefix: '/cic',
+		entryHref: '/cic/1983',
 		shelf: 'III',
 		navGroup: 'magistere',
 		title: 'Code de Droit Canonique',

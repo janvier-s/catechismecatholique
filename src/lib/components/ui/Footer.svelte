@@ -5,7 +5,7 @@
 		(() => {
 			const base = corporaInNavGroup('catechismes')
 				.filter((c) => c.id !== 'compendium')
-				.map((c) => ({ href: c.urlPrefix, title: c.title }));
+				.map((c) => ({ href: c.entryHref ?? c.urlPrefix, title: c.title }));
 			const ibpEntry = { href: '/bon-pasteur', title: 'Institut du Bon Pasteur' };
 			const idx = base.findIndex((c) => c.href === '/grand-catechisme');
 			if (idx === -1) return [...base, ibpEntry];
@@ -18,9 +18,12 @@
 	// has no CorpusRecord and is inserted inline.
 	const magistere = $derived(
 		(() => {
+			// Keyed by urlPrefix (the stable registry key) while the link itself
+			// uses entryHref, so the CIC entry lands on /cic/1983 rather than the
+			// two-code picker it sits next to.
 			const reg = new Map(
 				corporaInNavGroup('magistere').map(
-					(c) => [c.urlPrefix, { href: c.urlPrefix, title: c.title }] as const
+					(c) => [c.urlPrefix, { href: c.entryHref ?? c.urlPrefix, title: c.title }] as const
 				)
 			);
 			return [
@@ -69,7 +72,7 @@
 			<p class="footer-col-head">Catéchèse &amp; doctrine</p>
 			<ul>
 				{#each catechese as c (c.id)}
-					<li><a href={c.urlPrefix}>{c.title}</a></li>
+					<li><a href={c.entryHref ?? c.urlPrefix}>{c.title}</a></li>
 				{/each}
 			</ul>
 		</div>
