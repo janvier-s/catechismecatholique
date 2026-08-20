@@ -22,6 +22,7 @@ import { extractEnBref, trimEnBrefsAtParagrapheBoundaries } from './prepare/enbr
 import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX } from './prepare/ncl.ts';
+import { parseUSFXParagraphs } from './prepare/ncl-paragraphs.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
 import { parseSourceTable } from './prepare/sources-index.ts';
@@ -392,6 +393,21 @@ async function main() {
 	nclUsfxCodes.sort();
 	writeFileSync(join(nclDir, 'manifest.json'), JSON.stringify(nclUsfxCodes));
 	endStep(`${Object.keys(ncl).length} books, ${nclUsfxCodes.length} shards`);
+
+	logStep('parsing NCL paragraph/poetry structure');
+	{
+		const paragraphs = await parseUSFXParagraphs(nclXml);
+		const dir = join(OUT, 'bible/ncl-paragraphs');
+		mkdirSync(dir, { recursive: true });
+		const usfxCodes: string[] = [];
+		for (const [usfx, chapters] of Object.entries(paragraphs)) {
+			writeFileSync(join(dir, `${usfx}.json`), JSON.stringify(chapters));
+			usfxCodes.push(usfx);
+		}
+		usfxCodes.sort();
+		writeFileSync(join(dir, 'manifest.json'), JSON.stringify(usfxCodes));
+		endStep(`${usfxCodes.length} books`);
+	}
 
 	logStep('building chapter counts');
 	{
