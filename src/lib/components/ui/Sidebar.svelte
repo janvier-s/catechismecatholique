@@ -1737,12 +1737,40 @@
 	.sidebar-rail {
 		display: none;
 	}
-	.sidebar-rail.mobile-open {
-		display: flex;
-		position: fixed;
-		inset: var(--topbar-height, 80px) 0 0 0;
-		z-index: var(--z-modal);
-		width: 100%;
+	/* Kept flex + fixed at every mobile width (not just while mobile-open) so
+	   the panel is always in place to slide, rather than snapping in via
+	   display · `inert` already blocks interaction and keeps it off the a11y
+	   tree while closed, so sitting just off-screen is harmless. */
+	@media (max-width: 1023.98px) {
+		.sidebar-rail {
+			display: flex;
+			position: fixed;
+			inset: var(--topbar-height, 80px) 0 0 0;
+			z-index: var(--z-modal);
+			width: 100%;
+			transform: translateX(100%);
+			/* visibility flips to hidden only once the slide-out finishes (a
+			   matching transition-delay), so it stays visible for the whole
+			   closing animation but is properly "not visible" — off the a11y
+			   tree and out of Playwright's toBeVisible — while parked
+			   off-screen at rest, instead of just sitting there translated. */
+			visibility: hidden;
+			transition:
+				transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+				visibility 0s linear 260ms;
+		}
+		.sidebar-rail.mobile-open {
+			transform: translateX(0);
+			visibility: visible;
+			transition:
+				transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+				visibility 0s linear 0s;
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.sidebar-rail {
+				transition: none;
+			}
+		}
 	}
 	/* Rail width is the source of truth for layout shift. SSR ships
 	   width: 380px; theme-init.js sets data-sidebar='closed' on <html>
