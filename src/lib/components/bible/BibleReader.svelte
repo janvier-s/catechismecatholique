@@ -200,7 +200,7 @@
 	.verse-list > li + li {
 		margin-top: calc((var(--reader-line-height, 1.7) - 1) * 1rem);
 	}
-	@media (max-width: 767px) {
+	@media (max-width: 767.98px) {
 		.verse-text {
 			font-size: calc(var(--reader-font-size, 17px) - 3px);
 		}
@@ -252,12 +252,20 @@
 		outline: 2px solid var(--color-accent);
 		outline-offset: 2px;
 	}
-	/* Mobile: hang the verse number in the 1.5rem left gutter (main pl-6)
-	   so verse text starts at the content edge, aligned with section
-	   headings. A 2-column grid (number gutter | text) shifted left by
-	   the gutter width gives clean, predictable alignment without the
-	   "wrap around" that absolute/float approaches can produce. */
-	@media (max-width: 768px) {
+	/* Mobile: hang the verse number in a left gutter so verse text starts
+	   near the content edge, aligned with section headings. A 2-column grid
+	   (number gutter | text) shifted left by the row's own negative margin
+	   gives clean, predictable alignment without the "wrap around" that
+	   absolute/float approaches can produce.
+
+	   The margin only pulls back by half of <main>'s actual mobile padding
+	   (max-md:px-4 = 1rem), not the full 1rem — pulling back the full
+	   amount (or the old 1.5rem, sized for the desktop px-6 gutter) leaves
+	   the number glued to, or past, the true viewport edge. The column
+	   width stays a full 1.5rem regardless of the margin so double- and
+	   triple-digit verse numbers (long chapters run past 100) have room to
+	   render without clipping against the number's own right-aligned edge. */
+	@media (max-width: 767.98px) {
 		/* Mobile keeps the continuous single-column flow it had under
 		   space-y-0 · line-height alone sets density there. */
 		.verse-list > li + li {
@@ -268,7 +276,7 @@
 			grid-template-columns: 1.5rem minmax(0, 1fr);
 			column-gap: 0;
 			align-items: baseline;
-			margin-left: -1.5rem;
+			margin-left: -0.5rem;
 			padding-left: 0;
 			padding-right: 0;
 		}
