@@ -73,6 +73,13 @@
 			en 598 questions et réponses, fidèles à la structure du Catéchisme : ce que l'Église croit,
 			célèbre, vit et prie.
 		</p>
+
+		<div class="hero-actions">
+			<a class="cta-primary" href="/compendium/{PARTS[0]!.slug}">
+				<span class="cta-label">Commencer la lecture</span>
+				<span class="cta-meta">Première partie · à partir de la question 1</span>
+			</a>
+		</div>
 	</header>
 
 	<section class="parts" aria-label="Les quatre parties du Compendium">
@@ -85,8 +92,24 @@
 		{/each}
 	</section>
 
-	<nav class="quick-links" aria-label="Navigation complémentaire">
-		<a href="/compendium/sommaire" class="quick-link">Sommaire complet</a>
+	<nav class="tools" aria-labelledby="tools-title">
+		<h2 class="tools-title" id="tools-title">Autres façons de parcourir</h2>
+		<a class="tool" href="/compendium/sommaire">
+			<span class="tool-name">Sommaire</span>
+			<span class="tool-desc">Toutes les questions du Compendium, en un coup d'œil.</span>
+		</a>
+		<a class="tool" href="/cec">
+			<span class="tool-name">Catéchisme complet</span>
+			<span class="tool-desc">Le texte intégral dont ce Compendium est la synthèse.</span>
+		</a>
+		<a class="tool" href="/glossaire">
+			<span class="tool-name">Glossaire</span>
+			<span class="tool-desc">Les mots du Catéchisme, définis.</span>
+		</a>
+		<a class="tool" href="/recherche">
+			<span class="tool-name">Recherche</span>
+			<span class="tool-desc">Par mot, par question ou par référence biblique.</span>
+		</a>
 	</nav>
 </main>
 
@@ -125,6 +148,40 @@
 		line-height: 1.65;
 		color: var(--color-subtle);
 		margin: 0;
+	}
+
+	/* Way in ------------------------------------------------------------ */
+	.hero-actions {
+		display: flex;
+		justify-content: center;
+		margin-top: 1.75rem;
+	}
+	.cta-primary {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.15rem;
+		padding: 0.7rem 1.15rem;
+		border-radius: 6px;
+		background: var(--color-accent);
+		text-decoration: none;
+		transition: background 150ms ease;
+	}
+	.cta-primary:hover,
+	.cta-primary:focus-visible {
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
+	}
+	.cta-label {
+		font-family: var(--font-ui);
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: #fff;
+	}
+	.cta-meta {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-variant-numeric: tabular-nums;
+		color: rgba(255, 255, 255, 0.8);
 	}
 
 	.parts {
@@ -187,26 +244,62 @@
 		margin: 0;
 	}
 
-	.quick-links {
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-		align-items: baseline;
-		gap: 0.6rem;
+	/* Tools ------------------------------------------------------------ */
+	.tools {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.85rem 1.5rem;
 		padding-top: 1.5rem;
 		border-top: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
 	}
-	.quick-link {
+	.tools-title {
+		grid-column: 1 / -1;
 		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.14em;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.18em;
 		text-transform: uppercase;
 		color: var(--color-muted);
+		margin: 0 0 0.25rem;
+	}
+	@media (max-width: 640px) {
+		.tools {
+			grid-template-columns: 1fr;
+		}
+	}
+	.tool {
 		text-decoration: none;
+		color: inherit;
+	}
+	.tool-name {
+		display: block;
+		font-family: var(--font-ui);
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-fg);
 		transition: color 150ms ease;
 	}
-	.quick-link:hover {
+	.tool:hover .tool-name {
 		color: var(--color-accent);
+	}
+	.tool-desc {
+		display: block;
+		font-family: var(--font-body);
+		font-size: 0.85rem;
+		line-height: 1.45;
+		color: var(--color-muted);
+		margin-top: 0.15rem;
+	}
+
+	@media (max-width: 640px) {
+		.hero-actions {
+			flex-direction: column;
+			align-items: stretch;
+		}
+		.cta-primary {
+			align-items: flex-start;
+		}
 	}
 </style>

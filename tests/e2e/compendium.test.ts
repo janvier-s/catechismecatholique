@@ -4,13 +4,13 @@ test.describe('Compendium', () => {
 	test('landing lists 4 parts', async ({ page }) => {
 		await page.goto('/compendium');
 		await expect(page.getByRole('heading', { level: 1 })).toContainText('Compendium');
-		const cards = page.locator('a[href^="/compendium/"]:has-text("Partie")');
+		const cards = page.locator('a.part-card');
 		await expect(cards).toHaveCount(4);
 	});
 
 	test('part page renders questions with answers', async ({ page }) => {
 		await page.goto('/compendium');
-		const firstPart = page.locator('a[href^="/compendium/"]:has-text("Partie")').first();
+		const firstPart = page.locator('a.part-card').first();
 		await firstPart.click();
 		await expect(page.locator('article.ccc-paragraph').first()).toBeVisible();
 		await expect(page.locator('p.compendium-question').first()).toBeVisible();
@@ -20,7 +20,7 @@ test.describe('Compendium', () => {
 		// crossRefsLayout defaults to 'side', so aside.ccc-side-refs renders.
 		// Q1 in Partie 1 has ccc_refs=[1,2,3,4,5], so the first question always has refs.
 		await page.goto('/compendium');
-		const firstPart = page.locator('a[href^="/compendium/"]:has-text("Partie")').first();
+		const firstPart = page.locator('a.part-card').first();
 		await firstPart.click();
 		const firstRef = page.locator('aside.ccc-side-refs a.cross-ref-link').first();
 		const refNum = (await firstRef.textContent())?.trim();
