@@ -5,6 +5,8 @@
 	import { fmtParagraphRange } from '$lib/utils/paragraphRange';
 	import type { ParagraphRange } from '$lib/data/types';
 	import { page } from '$app/state';
+	import { slide } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 
 	type Item = {
 		title: string;
@@ -184,7 +186,11 @@
 		{/if}
 	</div>
 	{#if item.children && expanded}
-		<ul class="children" class:children-deep={depth >= 1}>
+		<ul
+			class="children"
+			class:children-deep={depth >= 1}
+			transition:slide={{ duration: 180, easing: cubicOut }}
+		>
 			{#each item.children as child (child.href)}
 				<Self item={child} {activeHref} {highlightActive} depth={depth + 1} />
 			{/each}
