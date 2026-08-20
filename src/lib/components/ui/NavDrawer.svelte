@@ -110,7 +110,7 @@
 		{
 			href: '/bible',
 			label: 'Bible',
-			description: 'La Vulgate Douay-Rheims croisée avec le Catéchisme.'
+			description: 'Le Néo-Crampon Libre croisé avec le Catéchisme.'
 		},
 		{
 			href: '/bibliotheque',
