@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+	import { fade, fly, slide } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
@@ -99,6 +99,26 @@
 		return [...links.slice(0, idx + 1), extra, ...links.slice(idx + 1)];
 	}
 
+	// The three main destinations, always visible above the collapsed
+	// accordion groups below · these are what most visitors are here for.
+	const primaryLinks: Link[] = [
+		{
+			href: '/cec',
+			label: "Catéchisme de l'Église Catholique",
+			description: 'Le texte intégral, paragraphe par paragraphe.'
+		},
+		{
+			href: '/bible',
+			label: 'Bible',
+			description: 'La Vulgate Douay-Rheims croisée avec le Catéchisme.'
+		},
+		{
+			href: '/bibliotheque',
+			label: 'Bibliothèque',
+			description: 'Tous les textes du site, en un coup d’œil.'
+		}
+	];
+
 	const groups: Group[] = [
 		{
 			title: 'Études & outils',
@@ -112,11 +132,6 @@
 					href: '/glossaire',
 					label: 'Glossaire',
 					description: 'Les termes théologiques classés par thème.'
-				},
-				{
-					href: '/bible',
-					label: 'Concordance biblique',
-					description: 'Chaque verset croisé avec le Catéchisme.'
 				},
 				{
 					href: '/calendrier',
@@ -158,7 +173,7 @@
 		}
 	];
 
-	const allLinks: Link[] = groups.flatMap((g) => g.links);
+	const allLinks: Link[] = [...primaryLinks, ...groups.flatMap((g) => g.links)];
 
 	// Longest-match active entry across all groups. Matching runs on the
 	// link's route scope (`match` when it differs from href), so the CIC entry
@@ -175,6 +190,18 @@
 		}
 		return best?.href ?? null;
 	});
+
+	// Accordion state per group: collapsed by default, auto-open the group
+	// that contains the active page unless the visitor has toggled it by
+	// hand · mirrors SidebarItem's manual-override-over-derived pattern.
+	let manualExpanded = $state<Record<string, boolean>>({});
+	function isExpanded(title: string): boolean {
+		if (title in manualExpanded) return manualExpanded[title]!;
+		return groups.find((g) => g.title === title)?.links.some((l) => l.href === activeHref) ?? false;
+	}
+	function toggleGroup(title: string) {
+		manualExpanded = { ...manualExpanded, [title]: !isExpanded(title) };
+	}
 </script>
 
 <button
@@ -209,31 +236,64 @@
 		transition:fly={{ x: 360, duration: 240, easing: cubicOut }}
 	>
 		<nav class="body styled-scroll" aria-label="Sections">
-			{#each groups as group (group.title)}
-				<section class="group" class:group-tools={group.title === 'Études & outils'}>
-					<p class="group-eyebrow">{group.title}</p>
-					<ul class="links">
-						{#each group.links as link (link.href)}
-							<li>
-								<a
-									class="link"
-									class:is-active={link.href === activeHref}
-									href={link.href}
-									aria-current={link.href === activeHref ? 'page' : undefined}
-								>
-									<span class="link-body">
-										<span class="link-label">{link.label}</span>
-										{#if link.description}
-											<span class="link-desc">{link.description}</span>
-										{/if}
-									</span>
-									{#if link.eyebrow}
-										<span class="link-eyebrow">{link.eyebrow}</span>
+			<section class="group group-primary">
+				<ul class="links">
+					{#each primaryLinks as link (link.href)}
+						<li>
+							<a
+								class="link link-primary"
+								class:is-active={link.href === activeHref}
+								href={link.href}
+								aria-current={link.href === activeHref ? 'page' : undefined}
+							>
+								<span class="link-body">
+									<span class="link-label">{link.label}</span>
+									{#if link.description}
+										<span class="link-desc">{link.description}</span>
 									{/if}
-								</a>
-							</li>
-						{/each}
-					</ul>
+								</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</section>
+
+			{#each groups as group (group.title)}
+				{@const expanded = isExpanded(group.title)}
+				<section class="group" class:group-tools={group.title === 'Études & outils'}>
+					<button
+						type="button"
+						class="group-header"
+						aria-expanded={expanded}
+						onclick={() => toggleGroup(group.title)}
+					>
+						<span class="group-eyebrow">{group.title}</span>
+						<span class="chevron" class:is-open={expanded} aria-hidden="true">▾</span>
+					</button>
+					{#if expanded}
+						<ul class="links" transition:slide={{ duration: 180, easing: cubicOut }}>
+							{#each group.links as link (link.href)}
+								<li>
+									<a
+										class="link"
+										class:is-active={link.href === activeHref}
+										href={link.href}
+										aria-current={link.href === activeHref ? 'page' : undefined}
+									>
+										<span class="link-body">
+											<span class="link-label">{link.label}</span>
+											{#if link.description}
+												<span class="link-desc">{link.description}</span>
+											{/if}
+										</span>
+										{#if link.eyebrow}
+											<span class="link-eyebrow">{link.eyebrow}</span>
+										{/if}
+									</a>
+								</li>
+							{/each}
+						</ul>
+					{/if}
 				</section>
 			{/each}
 		</nav>
@@ -343,6 +403,9 @@
 	.group + .group {
 		margin-top: 0.5rem;
 		border-top: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
+		padding-top: 0.35rem;
+	}
+	.group-primary + .group {
 		padding-top: 0.85rem;
 	}
 	.group-eyebrow {
@@ -352,12 +415,49 @@
 		letter-spacing: 0.22em;
 		text-transform: uppercase;
 		color: var(--color-accent);
-		margin: 0.85rem 1.25rem 0.4rem;
 	}
 	.links {
 		list-style: none;
 		margin: 0;
 		padding: 0;
+	}
+
+	/* Accordion header: the eyebrow becomes a full-width toggle button. */
+	.group-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+		width: 100%;
+		margin: 0;
+		padding: 0.85rem 1.25rem 0.4rem;
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+		text-align: left;
+	}
+	.group-header:hover .group-eyebrow {
+		color: color-mix(in srgb, var(--color-accent) 80%, var(--color-fg));
+	}
+	.chevron {
+		flex: 0 0 auto;
+		font-size: 0.9rem;
+		color: var(--color-muted);
+		transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.chevron.is-open {
+		transform: rotate(180deg);
+		color: var(--color-accent);
+	}
+
+	/* Primary destinations: no eyebrow header, sit above the accordions,
+	   set apart with a slightly larger label so they read as the main
+	   entry points rather than one more list item. */
+	.group-primary {
+		padding-top: 0.35rem;
+	}
+	.link-primary .link-label {
+		font-size: 1.1rem;
 	}
 
 	/* Row: heading-style title + optional eyebrow on the right.
