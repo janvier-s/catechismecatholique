@@ -1542,7 +1542,8 @@
 							title: node.title,
 							href: `${partHref}#${node.id}`,
 							level: node.level,
-							...(node.kicker ? { kicker: node.kicker } : {})
+							...(node.kicker ? { kicker: node.kicker } : {}),
+							...(node.q_range ? { range: { from: node.q_range[0], to: node.q_range[1] } } : {})
 						};
 						if (node.level === 2) {
 							children.push(item);
@@ -1565,15 +1566,24 @@
 					children = part.sections.map(
 						(sec): Item => ({
 							title: sec.title,
-							href: `${partHref}#s-${sec.title.toLowerCase().replace(/\s+/g, '-')}`
+							href: `${partHref}#s-${sec.title.toLowerCase().replace(/\s+/g, '-')}`,
+							range: { from: sec.q_range[0], to: sec.q_range[1] }
 						})
 					);
 				}
+				const partRange: ParagraphRange | undefined =
+					part.sections.length > 0
+						? {
+								from: part.sections[0]!.q_range[0],
+								to: part.sections[part.sections.length - 1]!.q_range[1]
+							}
+						: undefined;
 				return {
 					title: part.title,
 					number: part.number,
 					typeLabel: 'Partie',
 					href: partHref,
+					range: partRange,
 					children: children && children.length > 0 ? children : undefined
 				};
 			});
