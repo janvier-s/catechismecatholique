@@ -303,8 +303,20 @@
 		}
 	});
 
+	// Both effects below must only react to open/closed *transitions*, not to
+	// every store emission — a tab click also calls studyPanel.update(...)
+	// (activeTab changes, open stays true), which would otherwise re-run
+	// them. $derived's output-equality check collapses those into a single
+	// stable `true` between an open and a close, unlike reading
+	// `$studyPanel.open` directly, which re-triggers on any store emission.
+	// This is what broke the mobile sheet: its cleanup ran on every tab
+	// click, and its stale-history-entry cleanup fired history.back() even
+	// though the sheet was still open, which then closed it out from under
+	// the tab switch.
+	const isOpen = $derived($studyPanel.open);
+
 	$effect(() => {
-		if (!$studyPanel.open) return;
+		if (!isOpen) return;
 		const onKeydown = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') closePanel();
 		};
@@ -318,7 +330,7 @@
 	let sheetEl: HTMLElement | undefined = $state();
 	let lastTrigger: HTMLElement | null = null;
 	$effect(() => {
-		if (!$studyPanel.open) return;
+		if (!isOpen) return;
 		if (typeof document === 'undefined') return;
 
 		const isMobile = window.matchMedia('(max-width: 1023.98px)').matches;

@@ -137,3 +137,28 @@ test('§1021 collapses 4 consecutive bibleRef sups and renumbers markers sequent
 	);
 	expect(proseNumbers).toEqual(['1', '2', '3', '4', '5']);
 });
+
+test.describe('mobile study panel', () => {
+	test.use({ viewport: { width: 390, height: 844 } });
+
+	test('switching tabs keeps the panel open', async ({ page }) => {
+		// CCC §27 has both cross-refs and Compendium citers (per
+		// tests/e2e/compendium.test.ts), so it shows multiple tab groups.
+		await page.goto('/cec/27');
+		await page.locator('button.number-col').first().click();
+
+		const panel = page.getByRole('dialog', { name: "Panneau d'étude" });
+		await expect(panel).toBeVisible();
+
+		// Switching between top-level tab groups used to close the sheet: a
+		// tab click updates the studyPanel store (activeTab changes, open
+		// stays true), which re-ran the mobile-only history-push effect and
+		// its cleanup fired history.back() as if the sheet had actually
+		// closed, popping the panel shut from under the user.
+		await panel.getByRole('button', { name: 'IA' }).click();
+		await expect(panel).toBeVisible();
+
+		await panel.getByRole('button', { name: 'Renvois' }).click();
+		await expect(panel).toBeVisible();
+	});
+});
