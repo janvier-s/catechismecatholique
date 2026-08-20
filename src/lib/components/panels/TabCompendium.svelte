@@ -6,6 +6,7 @@
 		loadCompendiumQRanges
 	} from '$lib/data/loaders';
 	import type { CompendiumQuestion, CompendiumQRange } from '$lib/data/types';
+	import { frenchPunct } from '$lib/utils/typography';
 
 	type Hit = {
 		number: number;
@@ -116,10 +117,10 @@
 						{/if}
 					</div>
 					<p class="font-heading italic text-[15px] font-semibold text-fg leading-snug mb-1">
-						{h.question}
+						{frenchPunct(h.question)}
 					</p>
 					<div class="answer font-body text-[15px] leading-relaxed">
-						{@html h.answer_html}
+						{@html frenchPunct(h.answer_html)}
 					</div>
 				</a>
 			</li>

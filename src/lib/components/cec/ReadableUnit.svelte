@@ -7,6 +7,7 @@
 	import { studyPanel, openPanel, closePanel } from '$lib/stores/studyPanel';
 	import { prefs } from '$lib/stores/prefs';
 	import { linkifyCompendiumBibleRefs } from '$lib/utils/linkifyRefs';
+	import { frenchPunct } from '$lib/utils/typography';
 
 	type Unit =
 		| { kind: 'ccc-paragraph'; data: Paragraph }
@@ -138,9 +139,9 @@
 					</div>
 				{/if}
 			{:else}
-				<p class="compendium-question">{unit.data.question}</p>
+				<p class="compendium-question">{frenchPunct(unit.data.question)}</p>
 				<div class="compendium-answer">
-					{@html linkifyCompendiumBibleRefs(unit.data.answer_html)}
+					{@html frenchPunct(linkifyCompendiumBibleRefs(unit.data.answer_html))}
 				</div>
 			{/if}
 		</div>

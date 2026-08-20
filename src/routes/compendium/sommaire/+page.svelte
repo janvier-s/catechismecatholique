@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import type { CompendiumPart, CompendiumFlowNode } from '$lib/data/types';
+	import { frenchPunct } from '$lib/utils/typography';
 
 	let { data }: { data: PageData } = $props();
 
@@ -81,7 +82,7 @@
 				<a class="row row-part" href={`/compendium/${part.slug}`}>
 					<span class="row-label">
 						{#if partNum}<span class="label-tag">Partie {partNum}</span>{/if}
-						<span class="label-title">{part.title}</span>
+						<span class="label-title">{frenchPunct(part.title)}</span>
 					</span>
 				</a>
 				{#if headings.length > 0}
@@ -90,7 +91,7 @@
 							<li class="section-block">
 								<a class="row row-section" href={`/compendium/${part.slug}#${h2.id}`}>
 									<span class="row-label">
-										<span class="label-title">{h2.title}</span>
+										<span class="label-title">{frenchPunct(h2.title)}</span>
 									</span>
 									<span class="dotleader" aria-hidden="true"></span>
 									{#if h2.qRange}<span class="row-range">{fmtRange(h2.qRange)}</span>{/if}
@@ -102,7 +103,7 @@
 												<a class="row row-chapter" href={`/compendium/${part.slug}#${h3.id}`}>
 													<span class="row-label">
 														{#if h3.kicker}<span class="label-tag">{h3.kicker}</span>{/if}
-														<span class="label-title">{h3.title}</span>
+														<span class="label-title">{frenchPunct(h3.title)}</span>
 													</span>
 													<span class="dotleader" aria-hidden="true"></span>
 													{#if h3.qRange}<span class="row-range">{fmtRange(h3.qRange)}</span>{/if}
@@ -116,7 +117,7 @@
 																	href={`/compendium/${part.slug}#${h4.id}`}
 																>
 																	<span class="row-label">
-																		<span class="label-title">{h4.title}</span>
+																		<span class="label-title">{frenchPunct(h4.title)}</span>
 																	</span>
 																	<span class="dotleader" aria-hidden="true"></span>
 																	{#if h4.qRange}

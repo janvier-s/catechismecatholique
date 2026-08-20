@@ -4,6 +4,7 @@
 	import CitationBlock from '$lib/components/cec/CitationBlock.svelte';
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
+	import { frenchPunct } from '$lib/utils/typography';
 
 	// `standalone` is true when this part is rendered at its own top-level
 	// route (e.g. /prieres-formules) rather than under /compendium/[part].
@@ -46,7 +47,7 @@
 					id={node.id}
 					class="font-heading text-3xl font-semibold mt-16 mb-6 pb-2 border-b border-border text-heading"
 				>
-					{node.title}
+					{frenchPunct(node.title)}
 				</h2>
 			{:else if node.level === 3}
 				<div class="mt-12 mb-4">
@@ -56,7 +57,7 @@
 						</p>
 					{/if}
 					<h3 id={node.id} class="font-ui text-xl font-semibold text-accent">
-						{node.title}
+						{frenchPunct(node.title)}
 					</h3>
 				</div>
 			{:else}
@@ -64,22 +65,22 @@
 					id={node.id}
 					class="font-ui text-base font-semibold mt-10 mb-4 uppercase tracking-[0.16em] text-fg"
 				>
-					{node.title}
+					{frenchPunct(node.title)}
 				</h4>
 			{/if}
 		{:else if node.kind === 'epigraph'}
 			<div class="epigraph-wrap">
 				<CitationBlock
-					html={`<em>${node.text}</em>${node.attribution ? ` · <span class='attrib'>${node.attribution}</span>` : ''}`}
+					html={`<em>${frenchPunct(node.text)}</em>${node.attribution ? ` · <span class='attrib'>${frenchPunct(node.attribution)}</span>` : ''}`}
 				/>
 			</div>
 		{:else if node.kind === 'prose'}
-			<div class="compendium-prose mb-6">{@html node.html}</div>
+			<div class="compendium-prose mb-6">{@html frenchPunct(node.html)}</div>
 		{:else if node.kind === 'prayer'}
 			<div class="prayer-pair" lang="fr">
 				<div class="prayer-side prayer-fr" lang="fr">
-					{#if node.fr.title}<p class="prayer-title">{node.fr.title}</p>{/if}
-					{#each node.fr.body.split(/\n\n+/) as para (para)}
+					{#if node.fr.title}<p class="prayer-title">{frenchPunct(node.fr.title)}</p>{/if}
+					{#each frenchPunct(node.fr.body).split(/\n\n+/) as para (para)}
 						<p class="prayer-body">
 							{#each para.split('\n') as line, i (i)}
 								{#if i > 0}<br />{/if}{line}
