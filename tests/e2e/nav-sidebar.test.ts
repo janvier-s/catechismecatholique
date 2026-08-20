@@ -97,4 +97,16 @@ test.describe('mobile sidebar drawer', () => {
 		);
 		expect(after).toBe(before);
 	});
+
+	test('the trigger hides on scroll down and reappears on scroll up', async ({ page }) => {
+		await page.goto('/cec/27');
+		const trigger = page.getByRole('button', { name: 'Ouvrir le sommaire' });
+		await expect(trigger).toBeVisible();
+
+		await page.evaluate(() => window.scrollTo(0, 300));
+		await expect(trigger).not.toBeVisible();
+
+		await page.evaluate(() => window.scrollTo(0, 60));
+		await expect(trigger).toBeVisible();
+	});
 });
