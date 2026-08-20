@@ -108,6 +108,11 @@
 			description: 'Le texte intégral, paragraphe par paragraphe.'
 		},
 		{
+			href: '/compendium',
+			label: 'Compendium',
+			description: "L'abrégé officiel, en 598 questions et réponses."
+		},
+		{
 			href: '/bible',
 			label: 'Bible',
 			description: 'La Néo-Crampon Libre croisée avec le Catéchisme.'
@@ -147,11 +152,17 @@
 		},
 		{
 			title: 'Catéchismes',
-			links: withInsertAfter(fromRegistry('catechismes'), '/grand-catechisme', {
-				href: '/bon-pasteur',
-				label: 'Institut du Bon Pasteur',
-				eyebrow: '2014'
-			})
+			// Compendium is promoted to a primary link above · drop it here so it
+			// doesn't appear twice.
+			links: withInsertAfter(
+				fromRegistry('catechismes').filter((l) => l.href !== '/compendium'),
+				'/grand-catechisme',
+				{
+					href: '/bon-pasteur',
+					label: 'Institut du Bon Pasteur',
+					eyebrow: '2014'
+				}
+			)
 		},
 		{ title: 'Catéchèse & doctrine', links: fromRegistry('catechese') },
 		{
@@ -441,7 +452,7 @@
 	}
 	.chevron {
 		flex: 0 0 auto;
-		font-size: 0.9rem;
+		font-size: 1.4rem;
 		color: var(--color-muted);
 		transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 	}

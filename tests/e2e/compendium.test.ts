@@ -37,8 +37,7 @@ test.describe('Compendium', () => {
 	test('nav drawer links to /compendium', async ({ page }) => {
 		await page.goto('/cec');
 		await page.locator('.drawer-trigger').click();
-		// The "Catéchismes" group is a collapsed accordion by default.
-		await page.getByRole('button', { name: 'Catéchismes' }).click();
+		// Compendium is a primary link, always visible above the accordions.
 		await page.locator('#nav-drawer a[href="/compendium"]').click();
 		await expect(page).toHaveURL('/compendium');
 	});
