@@ -68,16 +68,18 @@ test.describe('mobile sidebar drawer', () => {
 		page
 	}) => {
 		await page.goto('/cec/27');
-		// The desktop-persisted store writes to localStorage as soon as it's
-		// created (regardless of viewport) · capture that baseline first so
-		// the assertion below is "unchanged by the mobile drawer", not "unset".
-		const before = await page.evaluate(() =>
-			localStorage.getItem('catechismecatholique.sidebar.open')
-		);
-
 		await page.getByRole('button', { name: 'Ouvrir le sommaire' }).click();
 		const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
 		await expect(sidebar).toBeVisible();
+
+		// The desktop-persisted store writes to localStorage as soon as its
+		// module hydrates (regardless of viewport) · capture the baseline only
+		// now, once a successful click proves hydration has actually finished,
+		// so the assertion below is "unchanged by the mobile drawer", not a
+		// race against hydration timing.
+		const before = await page.evaluate(() =>
+			localStorage.getItem('catechismecatholique.sidebar.open')
+		);
 
 		await page.getByRole('button', { name: 'Fermer le sommaire' }).click();
 		await expect(sidebar).not.toBeVisible();
