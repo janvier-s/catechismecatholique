@@ -1,5 +1,21 @@
 type Bible = Record<string, Record<string, Record<string, string>>>;
 
+export function normalizeVerseText(s: string): string {
+	// Collapse all whitespace to single spaces.
+	let out = s.replace(/\s+/g, ' ').trim();
+	// Strip spaces around apostrophes (both ASCII ' and typographic ’).
+	out = out.replace(/\s*['’]\s*/g, '’');
+	// Strip space before , . (no NBSP for these in French).
+	out = out.replace(/\s+([,.])/g, '$1');
+	// French rule: NBSP before : ! ? » (and remove existing spaces first).
+	out = out.replace(/\s*([:;!?»])/g, ' $1');
+	// French rule: NBSP after « (opening guillemet).
+	out = out.replace(/(«)\s*/g, '« ');
+	// Tighten parens: no space after ( or before ).
+	out = out.replace(/\(\s+/g, '(').replace(/\s+\)/g, ')');
+	return out;
+}
+
 /**
  * Parse a Neo-Crampon Libre USFX (eBible.org Unified Scripture Format XML)
  * document into a `{ book: { chapter: { verse: text } } }` structure.
@@ -54,22 +70,6 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 			}
 		}
 		buf = [];
-	}
-
-	function normalizeVerseText(s: string): string {
-		// Collapse all whitespace to single spaces.
-		let out = s.replace(/\s+/g, ' ').trim();
-		// Strip spaces around apostrophes (both ASCII ' and typographic ’).
-		out = out.replace(/\s*['’]\s*/g, '’');
-		// Strip space before , . (no NBSP for these in French).
-		out = out.replace(/\s+([,.])/g, '$1');
-		// French rule: NBSP before : ! ? » (and remove existing spaces first).
-		out = out.replace(/\s*([:;!?»])/g, ' $1');
-		// French rule: NBSP after « (opening guillemet).
-		out = out.replace(/(«)\s*/g, '« ');
-		// Tighten parens: no space after ( or before ).
-		out = out.replace(/\(\s+/g, '(').replace(/\s+\)/g, ')');
-		return out;
 	}
 
 	// Match: opening/self-closing tag, closing tag, or a run of text.
