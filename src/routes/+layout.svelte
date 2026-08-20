@@ -7,6 +7,7 @@
 	import Sidebar from '$lib/components/ui/Sidebar.svelte';
 	import { needsCecStructure } from '$lib/sidebarRoute';
 	import SidebarToggle from '$lib/components/ui/SidebarToggle.svelte';
+	import SidebarMobileToggle from '$lib/components/ui/SidebarMobileToggle.svelte';
 	import StudyPanel from '$lib/components/panels/StudyPanel.svelte';
 	import Footer from '$lib/components/ui/Footer.svelte';
 	import BibleRefTooltip from '$lib/components/ui/BibleRefTooltip.svelte';
@@ -210,6 +211,7 @@
 			initialEnBrefs={data.cecEnBrefs}
 		/>
 		<SidebarToggle />
+		<SidebarMobileToggle />
 	{/if}
 	<div
 		bind:this={contentEl}

@@ -21,3 +21,9 @@ if (browser) {
 		else html.setAttribute('data-sidebar', 'closed');
 	});
 }
+
+// Mobile drawer variant of the same sommaire: intentionally unpersisted
+// (unlike sidebarOpen above) — it should always start closed on a fresh
+// visit rather than remembering the last session, since on mobile it's an
+// overlay on top of the reading text rather than a rail beside it.
+export const sidebarMobileOpen = writable<boolean>(false);

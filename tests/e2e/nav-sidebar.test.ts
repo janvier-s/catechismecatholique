@@ -41,3 +41,58 @@ test('topbar Catéchisme link goes to /cec', async ({ page }) => {
 		.click();
 	await expect(page).toHaveURL(/\/cec$/);
 });
+
+test.describe('mobile sidebar drawer', () => {
+	test.use({ viewport: { width: 390, height: 844 } });
+
+	test('opens as an overlay, links work, and it closes on navigate', async ({ page }) => {
+		await page.goto('/cec/27');
+		const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
+		// Below `lg` the rail is display:none until the mobile toggle opens it.
+		await expect(sidebar).not.toBeVisible();
+
+		await page.getByRole('button', { name: 'Ouvrir le sommaire' }).click();
+		await expect(sidebar).toBeVisible();
+
+		// /cec/27 is a paragraph URL, not itself a tree node · the sidebar
+		// highlights the deepest chapter/article containing it rather than
+		// exposing a literal "/cec/27" href, so just follow the first link.
+		const link = sidebar.getByRole('link').first();
+		await link.click();
+
+		// afterNavigate closes the drawer once the click lands.
+		await expect(sidebar).not.toBeVisible();
+	});
+
+	test('closes via the header close button and Escape, without touching the desktop preference', async ({
+		page
+	}) => {
+		await page.goto('/cec/27');
+		// The desktop-persisted store writes to localStorage as soon as it's
+		// created (regardless of viewport) · capture that baseline first so
+		// the assertion below is "unchanged by the mobile drawer", not "unset".
+		const before = await page.evaluate(() =>
+			localStorage.getItem('catechismecatholique.sidebar.open')
+		);
+
+		await page.getByRole('button', { name: 'Ouvrir le sommaire' }).click();
+		const sidebar = page.getByRole('navigation', { name: 'Plan du Catéchisme' });
+		await expect(sidebar).toBeVisible();
+
+		await page.getByRole('button', { name: 'Fermer le sommaire' }).click();
+		await expect(sidebar).not.toBeVisible();
+
+		await page.getByRole('button', { name: 'Ouvrir le sommaire' }).click();
+		await expect(sidebar).toBeVisible();
+		await page.keyboard.press('Escape');
+		await expect(sidebar).not.toBeVisible();
+
+		// closeSidebar() only writes to the desktop-persisted store when the
+		// viewport is >= 1024px, so on this mobile viewport it must be left
+		// exactly as it was before any of these open/close interactions.
+		const after = await page.evaluate(() =>
+			localStorage.getItem('catechismecatholique.sidebar.open')
+		);
+		expect(after).toBe(before);
+	});
+});

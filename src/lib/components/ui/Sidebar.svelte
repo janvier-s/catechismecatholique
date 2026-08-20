@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { browser } from '$app/environment';
+	import { afterNavigate } from '$app/navigation';
 	import { corpusById } from '$lib/corpora';
-	import { sidebarOpen } from '$lib/stores/sidebar';
+	import { sidebarOpen, sidebarMobileOpen } from '$lib/stores/sidebar';
 	import { activeHeading } from '$lib/stores/scrollSpy';
 	import {
 		loadStructure,
@@ -610,6 +611,36 @@
 			navEl.querySelector<HTMLElement>(`a[href="${CSS.escape(target)}"]`) ??
 			navEl.querySelector<HTMLElement>(`a[href="${CSS.escape(target.replace(/#.*$/, ''))}"]`);
 		link?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+	});
+
+	// Mobile drawer: the rail becomes a full-screen overlay below the `lg`
+	// breakpoint (see .sidebar-rail.mobile-open in the style block), opened via
+	// SidebarMobileToggle and closed via Escape, the header's close button,
+	// or navigating away. No backdrop: the drawer is full-width, so there's
+	// no page visible around it to click on anyway.
+	afterNavigate(() => sidebarMobileOpen.set(false));
+
+	function closeSidebar() {
+		// Same header close button serves both layouts · only touch the store
+		// actually driving the currently-visible one so a mobile close never
+		// bleeds into the persisted desktop preference (or vice versa).
+		if (browser && window.innerWidth < 1024) sidebarMobileOpen.set(false);
+		else sidebarOpen.set(false);
+	}
+
+	$effect(() => {
+		if (!$sidebarMobileOpen) return;
+		const html = document.documentElement;
+		const prevOverflow = html.style.overflow;
+		html.style.overflow = 'hidden';
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') sidebarMobileOpen.set(false);
+		};
+		document.addEventListener('keydown', onKey);
+		return () => {
+			html.style.overflow = prevOverflow;
+			document.removeEventListener('keydown', onKey);
+		};
 	});
 
 	// Load detailed chapter data when on a chapter URL OR when on a paragraph URL
@@ -1637,13 +1668,19 @@
 </script>
 
 <!--
-	Always rendered; visibility driven by html[data-sidebar='closed'] (set by
-	theme-init.js before paint and synced from the store on toggle). Avoids
-	the SSR/hydration mismatch that previously caused CLS 0.16.
+	Always rendered; desktop visibility driven by html[data-sidebar='closed']
+	(set by theme-init.js before paint and synced from the store on toggle,
+	avoiding the SSR/hydration mismatch that previously caused CLS 0.16).
+	Below the `lg` breakpoint it's hidden unless `mobile-open`, in which case
+	it becomes a full-screen overlay instead of the sticky rail.
 -->
 <aside
-	class="sidebar-rail hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] bg-panel border-r border-border z-0 flex-none flex-col"
-	inert={!$sidebarOpen}
+	class="sidebar-rail bg-panel border-border z-0 flex-none flex-col"
+	class:mobile-open={$sidebarMobileOpen}
+	role={$sidebarMobileOpen ? 'dialog' : undefined}
+	aria-modal={$sidebarMobileOpen ? 'true' : undefined}
+	aria-label={$sidebarMobileOpen ? 'Sommaire' : undefined}
+	inert={!$sidebarOpen && !$sidebarMobileOpen}
 >
 	<div class="flex items-center justify-between p-2 border-b border-border">
 		{#if sommaireHref}
@@ -1657,7 +1694,7 @@
 		{/if}
 		<button
 			type="button"
-			onclick={() => sidebarOpen.set(false)}
+			onclick={closeSidebar}
 			class="w-7 h-7 flex items-center justify-center rounded hover:bg-accent/10 text-muted hover:text-accent text-base leading-none"
 			aria-label="Fermer le sommaire"
 		>
@@ -1693,6 +1730,20 @@
 </aside>
 
 <style>
+	/* Below `lg`, the rail doesn't exist in the layout flow at all (no
+	   persistent sidebar space on a phone-width reading column) — it only
+	   appears as a full-screen overlay while `mobile-open`, dismissed via
+	   Escape, the header's close button, or navigating away. */
+	.sidebar-rail {
+		display: none;
+	}
+	.sidebar-rail.mobile-open {
+		display: flex;
+		position: fixed;
+		inset: var(--topbar-height, 80px) 0 0 0;
+		z-index: var(--z-modal);
+		width: 100%;
+	}
 	/* Rail width is the source of truth for layout shift. SSR ships
 	   width: 380px; theme-init.js sets data-sidebar='closed' on <html>
 	   before first paint when the user has it closed, collapsing the rail
@@ -1703,13 +1754,20 @@
 	   levels of nesting a heading title had ~209px of usable width, and the
 	   range costs ~55px of it. The reader column is capped at 900px
 	   (app.css), so on a 1280px viewport this still clears the cap. */
-	.sidebar-rail {
-		width: 380px;
-		overflow: hidden;
-		transition: width 200ms cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	:global(html[data-sidebar='closed']) .sidebar-rail {
-		width: 0;
-		border-right-width: 0;
+	@media (min-width: 1024px) {
+		.sidebar-rail {
+			display: flex;
+			position: sticky;
+			top: 80px;
+			height: calc(100vh - 80px);
+			border-right: 1px solid var(--color-border);
+			width: 380px;
+			overflow: hidden;
+			transition: width 200ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+		:global(html[data-sidebar='closed']) .sidebar-rail {
+			width: 0;
+			border-right-width: 0;
+		}
 	}
 </style>
