@@ -37,6 +37,8 @@ test.describe('Compendium', () => {
 	test('nav drawer links to /compendium', async ({ page }) => {
 		await page.goto('/cec');
 		await page.locator('.drawer-trigger').click();
+		// The "Catéchismes" group is a collapsed accordion by default.
+		await page.getByRole('button', { name: 'Catéchismes' }).click();
 		await page.locator('#nav-drawer a[href="/compendium"]').click();
 		await expect(page).toHaveURL('/compendium');
 	});
@@ -46,6 +48,8 @@ test.describe('Compendium', () => {
 	}) => {
 		await page.goto('/cec');
 		await page.locator('.drawer-trigger').click();
+		// The "Études & outils" group is a collapsed accordion by default.
+		await page.getByRole('button', { name: 'Études & outils' }).click();
 		await page.locator('#nav-drawer a[href="/prieres-formules"]').click();
 		await expect(page).toHaveURL('/prieres-formules');
 	});
