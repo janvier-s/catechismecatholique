@@ -63,9 +63,14 @@ type RichVerse = {
   html: string;
 };
 
+// A poetry "line" can span more than one verse: the source XML lets a `<q>`
+// container stay open across a `<ve/>` + next `<v>` with no fresh `<q>` marker
+// (e.g. Psalm 2:2-3 share one q2 line). So poetry blocks carry a verse list,
+// exactly like prose — the only difference is the indent `level` and the
+// optional `stanzaBreak`.
 type Block =
   | { kind: 'prose'; verses: RichVerse[] }
-  | { kind: 'poetry'; level: 1 | 2 | 3; verse: RichVerse; stanzaBreak?: boolean };
+  | { kind: 'poetry'; level: 1 | 2 | 3; verses: RichVerse[]; stanzaBreak?: boolean };
 
 type ChapterBlocks = {
   superscription?: string; // \d text, e.g. "Chant de David. À l'occasion de sa fuite devant Absalon, son fils."
@@ -77,7 +82,7 @@ type BookParagraphs = Record<string /* chapter number */, ChapterBlocks>;
 
 Rationale for a fully self-contained file (duplicating verse text) rather than storing only span offsets into the existing plain-text file: offsets are fragile — any future change to `ncl.ts`'s `normalizeVerseText()` whitespace/punctuation handling would silently desync offsets from the text they're meant to mark, with no error, just wrong highlighting. A self-contained file with its own text costs a few more MB (the whole Bible is small either way) for real robustness.
 
-**Known edge case to handle in the parser:** a single verse can span more than one poetic line without a fresh `\v` between the `\q` markers (mid-verse line break). The extraction logic must treat a `\q`-marker with no intervening `\v` as a continuation line within the current verse's block, not silently dropped. Verified this pattern's general shape against the plain-USFM export during investigation; final confirmation happens against test fixtures during implementation (see Testing).
+**Confirmed edge case handled by the block model above:** a `<q>` container can stay open across a verse boundary — `<q style="q2"><v id="2".../>text<ve/><v id="3".../>more text</q>` — meaning verses 2 and 3 render as one poetic line with no fresh `<q>` marker for verse 3. Verified directly against Psalm 2 in the source XML. Because poetry blocks carry a `verses: RichVerse[]` list (not a single verse), this falls out naturally: the parser only opens a new block on a fresh `<q>`/`<p>` tag, and keeps appending verses to the currently-open block otherwise.
 
 ## Rendering (`BibleReader.svelte`)
 
