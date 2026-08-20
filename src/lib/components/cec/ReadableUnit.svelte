@@ -284,6 +284,9 @@
 			margin-top: 0.5rem;
 			margin-left: 4rem;
 		}
+		.ccc-side-refs ul {
+			text-align: left;
+		}
 	}
 
 	/* Phone: number rides above the text instead of beside it; cross-refs
