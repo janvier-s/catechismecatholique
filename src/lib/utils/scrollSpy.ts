@@ -22,7 +22,9 @@ const ACTIVE_OFFSET_RATIO = 0.33;
 
 export const scrollSpy: Action<HTMLElement> = (node) => {
 	const headings = Array.from(
-		node.querySelectorAll<HTMLElement>('h2[id], h3[id], h4[id], aside[id^="en-bref-"]')
+		node.querySelectorAll<HTMLElement>(
+			'h2[id], h3[id], h4[id], aside[id^="en-bref-"], [data-heading][id]'
+		)
 	);
 	if (headings.length === 0) return;
 

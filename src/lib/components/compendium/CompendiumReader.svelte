@@ -50,13 +50,13 @@
 					{frenchPunct(node.title)}
 				</h2>
 			{:else if node.level === 3}
-				<div class="mt-12 mb-4">
+				<div id={node.id} data-heading class="mt-12 mb-4">
 					{#if node.kicker}
 						<p class="font-ui text-[11px] uppercase tracking-[0.18em] text-muted mb-1">
 							{node.kicker}
 						</p>
 					{/if}
-					<h3 id={node.id} class="font-ui text-xl font-semibold text-accent">
+					<h3 class="font-ui text-xl font-semibold text-accent">
 						{frenchPunct(node.title)}
 					</h3>
 				</div>
