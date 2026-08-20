@@ -431,7 +431,7 @@
 		<!-- Zero-results state -->
 		<section class="mt-10 max-w-[640px] mx-auto text-center">
 			<p class="font-body italic text-muted text-[16px]">
-				Aucun résultat pour «&nbsp;{data.q}&nbsp;».
+				Aucun résultat pour «&nbsp;{data.q}.&nbsp;»
 			</p>
 			{#if data.suggestions.length > 0}
 				<p class="mt-6 font-ui text-[12px] uppercase tracking-[0.2em] text-muted">Termes proches</p>

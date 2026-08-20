@@ -163,7 +163,7 @@
 				</li>
 				<li>
 					Salut des non-baptisés de bonne volonté (§1281)&nbsp;: formulation en « peuvent être
-					sauvés » plutôt que « sont sauvés ».
+					sauvés » plutôt que « sont sauvés. »
 				</li>
 				<li>
 					Précisions mineures sur le pouvoir sacré et le ministère diaconal (§875), les mariages

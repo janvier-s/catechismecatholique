@@ -110,7 +110,7 @@
 		{
 			href: '/bible',
 			label: 'Bible',
-			description: 'Le Néo-Crampon Libre croisé avec le Catéchisme.'
+			description: 'La Néo-Crampon Libre croisée avec le Catéchisme.'
 		},
 		{
 			href: '/bibliotheque',
