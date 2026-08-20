@@ -86,19 +86,19 @@
 		'je-crois-en-jesus-christ-le-fils-unique-de-dieu':
 			'Je crois en Jésus-Christ,<br />le Fils unique de Dieu',
 		'et-en-jesus-christ-son-fils-unique-notre-seigneur':
-			'« Et en Jésus-Christ, son Fils unique,<br />notre Seigneur »',
+			'«&nbsp;Et en Jésus-Christ, son Fils unique,<br />notre Seigneur&nbsp;»',
 		'jesus-christ-a-souffert-sous-ponce-pilate-il-a-ete-crucifie-il-est-mort-il-a-ete-enseveli':
-			'« Jésus-Christ a souffert sous ponce pilate,<br />il a été crucifié, il est mort, il a été enseveli »',
+			'«&nbsp;Jésus-Christ a souffert sous ponce pilate,<br />il a été crucifié, il est mort, il a été enseveli&nbsp;»',
 		'jesus-christ-est-descendu-aux-enfers-est-ressuscite-des-morts-le-troisieme-jour':
-			'« Jésus-Christ est descendu aux enfers,<br />est ressuscité des morts le troisième jour »',
+			'«&nbsp;Jésus-Christ est descendu aux enfers,<br />est ressuscité des morts le troisième jour&nbsp;»',
 		'dou-il-viendra-juger-les-vivants-et-les-morts':
-			'« D’où il viendra juger les vivants et<br />les morts »',
+			'«&nbsp;D’où il viendra juger les vivants et<br />les morts&nbsp;»',
 		'tu-aimeras-le-seigneur-ton-dieu-de-tout-ton-coeur-de-toute-ton-ame-et-de-tout-ton-esprit':
-			'« Tu aimeras le Seigneur ton Dieu de tout ton cœur,<br />de toute ton âme et de tout ton esprit »',
+			'«&nbsp;Tu aimeras le Seigneur ton Dieu de tout ton cœur,<br />de toute ton âme et de tout ton esprit&nbsp;»',
 		'la-revelation-de-la-priere-lappel-universel-a-la-priere':
 			'La révélation de la prière<br />– l’appel universel à la prière',
-		'le-resume-de-tout-levangile': '« Le résumé de<br />tout l’Évangile »',
-		'notre-pere-qui-es-aux-cieux': '« Notre Père<br />qui es aux cieux »'
+		'le-resume-de-tout-levangile': '«&nbsp;Le résumé de<br />tout l’Évangile&nbsp;»',
+		'notre-pere-qui-es-aux-cieux': '«&nbsp;Notre Père<br />qui es aux cieux&nbsp;»'
 	};
 	function escapeHtml(s: string): string {
 		return s

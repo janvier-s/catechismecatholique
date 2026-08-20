@@ -70,8 +70,8 @@
 		<h1 class="hero-title">Compendium du Catéchisme</h1>
 		<p class="hero-lede">
 			Promulgué par Benoît&nbsp;XVI en 2005, le Compendium présente l'essentiel de la foi catholique
-			en 598 questions et réponses, fidèles à la structure du Catéchisme : ce que l'Église croit,
-			célèbre, vit et prie.
+			en 598 questions et réponses, fidèles à la structure du Catéchisme&nbsp;: ce que l'Église
+			croit, célèbre, vit et prie.
 		</p>
 
 		<div class="hero-actions">

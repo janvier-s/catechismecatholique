@@ -80,7 +80,7 @@
 		};
 	});
 
-	const ariaLabel = $derived(title ? `${eyebrow} : ${title}` : eyebrow);
+	const ariaLabel = $derived(title ? `${eyebrow}\u00A0: ${title}` : eyebrow);
 
 	// Portal the dialog + backdrop out of the page-fade wrapper (which
 	// creates a stacking context via its opacity animation, trapping any

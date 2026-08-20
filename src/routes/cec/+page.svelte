@@ -123,8 +123,8 @@
 		<p class="hero-kicker">Édition française</p>
 		<h1 class="hero-title">Catéchisme de l'Église Catholique</h1>
 		<p class="hero-lede">
-			Toute la foi catholique en 2&nbsp;865 paragraphes numérotés : ce qu'elle croit, ce qu'elle
-			célèbre, comment elle vit et comment elle prie.
+			Toute la foi catholique en 2&nbsp;865 paragraphes numérotés&nbsp;: ce qu'elle croit, ce
+			qu'elle célèbre, comment elle vit et comment elle prie.
 		</p>
 
 		<!-- Two ways in, both concrete. The rail on the left is the third · it
@@ -162,7 +162,7 @@
 					<button class="jump-go" type="submit" aria-label="Aller au paragraphe">→</button>
 				</div>
 				<p class="jump-hint" id="jump-hint" class:is-error={jumpError !== ''}>
-					{jumpError || `Un numéro, ou une plage : 1322-1419`}
+					{jumpError || `Un numéro, ou une plage\u00A0: 1322-1419`}
 				</p>
 			</form>
 		</div>

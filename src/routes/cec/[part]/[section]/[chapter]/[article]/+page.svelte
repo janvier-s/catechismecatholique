@@ -78,7 +78,7 @@
 						<span class="font-semibold bc-kicker"
 							>{data.chapter.part_number ? `Partie ${data.chapter.part_number}` : 'Prologue'}</span
 						>
-						<span class="bc-title"> : {data.chapter.part_title}</span>
+						<span class="bc-title">&nbsp;: {data.chapter.part_title}</span>
 					</a>
 				</li>
 				<li class="pl-10">
@@ -91,7 +91,7 @@
 								? `Section ${data.chapter.section_number}`
 								: 'Section'}</span
 						>
-						<span class="bc-title"> : {data.chapter.section_title}</span>
+						<span class="bc-title">&nbsp;: {data.chapter.section_title}</span>
 					</a>
 				</li>
 				<li class="pl-[3.75rem]">
@@ -102,14 +102,14 @@
 						<span class="font-semibold bc-kicker"
 							>{data.chapter.number ? `Chapitre ${data.chapter.number}` : 'Chapitre'}</span
 						>
-						<span class="bc-title"> : {data.chapter.title}</span>
+						<span class="bc-title">&nbsp;: {data.chapter.title}</span>
 					</a>
 				</li>
 				<li class="pl-20">
 					<span class="font-semibold bc-kicker"
 						>{data.article.number ? `Article ${data.article.number}` : 'Article'}</span
 					>
-					<span class="bc-title"> : {data.article.title}</span>
+					<span class="bc-title">&nbsp;: {data.article.title}</span>
 				</li>
 			</ol>
 		</nav>

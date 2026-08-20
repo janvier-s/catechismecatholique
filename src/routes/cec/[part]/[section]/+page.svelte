@@ -87,7 +87,7 @@
 				<li>
 					<a href="/cec/{data.part.slug}/{data.section.slug}/{chapter.slug}" class="block group">
 						<h3 class="font-ui text-xl font-semibold group-hover:text-accent">
-							<span class="font-semibold">Chapitre {chapter.number} :</span>
+							<span class="font-semibold">Chapitre {chapter.number}&nbsp;:</span>
 							{chapter.title}
 						</h3>
 						<p class="text-muted text-sm">{chapter.paragraphs.length} paragraphes</p>
@@ -109,7 +109,8 @@
 							class="block group"
 						>
 							<h3 class="font-ui text-xl font-semibold group-hover:text-accent">
-								{#if article.number}<span class="font-semibold">Article {article.number} :</span
+								{#if article.number}<span class="font-semibold"
+										>Article {article.number}&nbsp;:</span
 									>{/if}
 								{article.title}
 							</h3>

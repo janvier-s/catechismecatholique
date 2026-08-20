@@ -79,7 +79,7 @@
 				<li>
 					<a href="/cec/{data.part.slug}/{section.slug}" class="block group">
 						<h3 class="font-ui text-2xl font-semibold group-hover:text-accent">
-							<span class="font-semibold">Section {section.number} :</span>
+							<span class="font-semibold">Section {section.number}&nbsp;:</span>
 							{section.title}
 						</h3>
 						<p class="text-muted text-sm mt-1">

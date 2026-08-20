@@ -11,9 +11,9 @@
 	>('part-panorama');
 	const tooltip = $derived.by(() => {
 		if (!ctx?.partTitle) return 'Panorama de cette partie';
-		if (ctx.isPrologue) return `Panorama du Prologue : « ${ctx.partTitle} »`;
+		if (ctx.isPrologue) return `Panorama du Prologue\u00A0: «\u00A0${ctx.partTitle}\u00A0»`;
 		const label = ctx.partNumber ? `la Partie ${ctx.partNumber}` : 'cette partie';
-		return `Panorama de ${label} : « ${ctx.partTitle} »`;
+		return `Panorama de ${label}\u00A0: «\u00A0${ctx.partTitle}\u00A0»`;
 	});
 </script>
 
