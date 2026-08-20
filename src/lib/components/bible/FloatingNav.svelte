@@ -29,9 +29,25 @@
 	// svelte-ignore state_referenced_locally
 	const expandedBooks = new SvelteSet([bookSlug]);
 
-	function toggleBook(slug: string) {
-		if (expandedBooks.has(slug)) expandedBooks.delete(slug);
+	async function toggleBook(slug: string) {
+		const wasExpanded = expandedBooks.has(slug);
+		if (wasExpanded) expandedBooks.delete(slug);
 		else expandedBooks.add(slug);
+		if (!wasExpanded) {
+			await tick();
+			// Wait for the slide transition (180ms) to finish, then scroll the
+			// expanded chapter grid into view if it overflows the container bottom.
+			setTimeout(() => {
+				const container = activeTestament === 'OT' ? otContainer : ntContainer;
+				const grid = container?.querySelector(`[data-book-grid="${slug}"]`) as HTMLElement | null;
+				if (!container || !grid) return;
+				const gridRect = grid.getBoundingClientRect();
+				const containerRect = container.getBoundingClientRect();
+				if (gridRect.bottom > containerRect.bottom) {
+					grid.scrollIntoView({ block: 'end', behavior: 'smooth' });
+				}
+			}, 200);
+		}
 	}
 
 	let otContainer: HTMLElement | undefined = $state();
@@ -134,6 +150,7 @@
 					{#if expandedBooks.has(book.slug)}
 						{@const total = chaptersOf(book.usfx)}
 						<div
+							data-book-grid={book.slug}
 							transition:slide={{ duration: 180 }}
 							class="px-[16px] pb-[10px] pt-[4px] gap-[4px] grid grid-cols-7"
 						>
@@ -176,6 +193,7 @@
 					{#if expandedBooks.has(book.slug)}
 						{@const total = chaptersOf(book.usfx)}
 						<div
+							data-book-grid={book.slug}
 							transition:slide={{ duration: 180 }}
 							class="px-[16px] pb-[10px] pt-[4px] gap-[4px] grid grid-cols-7"
 						>
