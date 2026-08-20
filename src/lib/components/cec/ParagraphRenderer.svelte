@@ -4,6 +4,7 @@
 	import { prefs } from '$lib/stores/prefs';
 	import { goto } from '$app/navigation';
 	import { bibleRefUrl } from '$lib/utils/linkifyRefs';
+	import { frenchPunct } from '$lib/utils/typography';
 	let {
 		html,
 		bibleRefs = [],
@@ -57,7 +58,7 @@
 		// compounding on already-mutated DOM (which would corrupt the markup
 		// the second time the effect runs).
 		// eslint-disable-next-line svelte/no-dom-manipulating
-		containerEl.innerHTML = html;
+		containerEl.innerHTML = frenchPunct(html);
 		void bibleRefs;
 
 		// Plain Map is fine here · refsByIdx is local to this $effect, never reactive.
