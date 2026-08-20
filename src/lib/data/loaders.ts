@@ -11,6 +11,7 @@ import type {
 	ConcordanceByParagraphEntry,
 	NclSectionMap,
 	NclBook,
+	NclParagraphsBook,
 	CompendiumStructure,
 	CompendiumPart,
 	CompendiumCitedBy,
@@ -89,6 +90,9 @@ let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
 let nclManifestPromise: Promise<Set<string>> | null = null;
 const nclBookCache = new Map<string, Promise<NclBook | null>>();
+
+let nclParagraphsManifestPromise: Promise<Set<string>> | null = null;
+const nclParagraphsBookCache = new Map<string, Promise<NclParagraphsBook | null>>();
 
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
 	return fetchJson<Paragraph>(`/data/cec/paragraphs/${n}.json`, fetcher);
@@ -354,6 +358,46 @@ export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBo
 			return (await r.json()) as NclBook;
 		})();
 		nclBookCache.set(usfx, p);
+	}
+	return p;
+}
+
+/**
+ * Load the manifest of USFX codes that have an ncl-paragraphs shard
+ * available. Mirrors `loadNclManifest`.
+ */
+export function loadNclParagraphsManifest(fetcher: Fetch = fetch): Promise<Set<string>> {
+	if (!nclParagraphsManifestPromise) {
+		nclParagraphsManifestPromise = (async () => {
+			const r = await fetcher('/data/bible/ncl-paragraphs/manifest.json');
+			if (!r.ok) return new Set<string>();
+			const arr = (await r.json()) as string[];
+			return new Set(arr);
+		})();
+	}
+	return nclParagraphsManifestPromise;
+}
+
+/**
+ * Lazily fetch the paragraph/poetry structure for a single Bible book.
+ * Returns `null` when the book is not in the manifest or the shard 404s —
+ * callers should fall back to plain verse-by-verse rendering in that case.
+ * Mirrors `loadNclBook`.
+ */
+export function loadNclParagraphsBook(
+	usfx: string,
+	fetcher: Fetch = fetch
+): Promise<NclParagraphsBook | null> {
+	let p = nclParagraphsBookCache.get(usfx);
+	if (!p) {
+		p = (async () => {
+			const manifest = await loadNclParagraphsManifest(fetcher);
+			if (manifest.size > 0 && !manifest.has(usfx)) return null;
+			const r = await fetcher(`/data/bible/ncl-paragraphs/${usfx}.json`);
+			if (!r.ok) return null;
+			return (await r.json()) as NclParagraphsBook;
+		})();
+		nclParagraphsBookCache.set(usfx, p);
 	}
 	return p;
 }

@@ -273,6 +273,17 @@ export type NclBook = Record<string, Record<string, string>>;
 // Full NCL Bible verse text. Shape: usfx → chapter → verse → text.
 export type NclBible = Record<string, NclBook>;
 
+export type NclRichVerse = { v: number; html: string };
+
+export type NclBlock =
+	| { kind: 'prose'; verses: NclRichVerse[] }
+	| { kind: 'poetry'; level: 1 | 2 | 3; verses: NclRichVerse[]; stanzaBreak?: boolean };
+
+export type NclChapterBlocks = { superscription?: string; blocks: NclBlock[] };
+
+/** chapter number (string) -> chapter blocks, for one NCL book. */
+export type NclParagraphsBook = Record<string, NclChapterBlocks>;
+
 /** A French section title from the NCL Bible (e.g. "La faute et le châtiment"). */
 export interface NclSection {
 	ch: number; // chapter where the section header appears
