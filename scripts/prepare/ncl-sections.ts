@@ -8,6 +8,9 @@ const MAJOR_RE = /<p\b[^>]*style="ms1"[^>]*>([\s\S]*?)<\/p>/gi;
 const SECTION_RE = /<s\b[^>]*style="s1"[^>]*>([\s\S]*?)<\/s>/gi;
 // Sub-section heading: <s ... style="s2">...</s> (often with level="2", may contain <sc>)
 const SUBSECTION_RE = /<s\b[^>]*style="s2"[^>]*>([\s\S]*?)<\/s>/gi;
+// Deeper sub-section heading: <s ... style="s3">...</s> — same visual tier as
+// s2, just a further outline nesting in the source; both map to 'subsection'.
+const SUBSECTION3_RE = /<s\b[^>]*style="s3"[^>]*>([\s\S]*?)<\/s>/gi;
 const VERSE_RE = /<v\s+[^>]*id="(\d+)"[^>]*\/?>/gi;
 
 const HTML_ENTITIES: Record<string, string> = {
@@ -16,13 +19,11 @@ const HTML_ENTITIES: Record<string, string> = {
 	gt: '>',
 	quot: '"',
 	apos: "'",
-	nbsp: ' '
+	nbsp: ' '
 };
 
-/** Strip HTML/XML tags, decode common entities, collapse whitespace. */
-function plainText(html: string): string {
-	const stripped = html.replace(/<[^>]+>/g, '');
-	const decoded = stripped.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z]+);/g, (full, body: string) => {
+function decodeEntities(s: string): string {
+	return s.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z]+);/g, (full, body: string) => {
 		if (body.startsWith('#x') || body.startsWith('#X')) {
 			const cp = parseInt(body.slice(2), 16);
 			return Number.isFinite(cp) ? String.fromCodePoint(cp) : full;
@@ -33,7 +34,32 @@ function plainText(html: string): string {
 		}
 		return HTML_ENTITIES[body] ?? full;
 	});
+}
+
+/** Strip HTML/XML tags, decode common entities, collapse whitespace. */
+function plainText(html: string): string {
+	const stripped = html.replace(/<[^>]+>/g, '');
+	const decoded = decodeEntities(stripped);
 	return decoded.replace(/\s+/g, ' ').trim();
+}
+
+// Private-use-area code points: never occur in real text and aren't
+// whitespace, so the strip/collapse/trim passes below treat them as
+// ordinary characters — no whitespace is added or removed around them,
+// unlike the <sc>/</sc> tags they stand in for.
+const SC_OPEN = '';
+const SC_CLOSE = '';
+
+/**
+ * Same cleanup as `plainText`, but keeps a source <sc> (small-caps) span as
+ * <span class="sc">…</span> instead of stripping it.
+ */
+function markupText(html: string): string {
+	const withPlaceholders = html.replace(/<sc>/g, SC_OPEN).replace(/<\/sc>/g, SC_CLOSE);
+	const stripped = withPlaceholders.replace(/<[^>]+>/g, '');
+	const decoded = decodeEntities(stripped);
+	const collapsed = decoded.replace(/\s+/g, ' ').trim();
+	return collapsed.replace(//g, '<span class="sc">').replace(//g, '</span>');
 }
 
 export function parseNclSections(xml: string): NclSectionMap {
@@ -64,6 +90,7 @@ export function parseNclSections(xml: string): NclSectionMap {
 		collect(MAJOR_RE, 'major');
 		collect(SECTION_RE, 'section');
 		collect(SUBSECTION_RE, 'subsection');
+		collect(SUBSECTION3_RE, 'subsection');
 		collect(VERSE_RE, 'v');
 
 		toks.sort((a, b) => a.pos - b.pos);
@@ -95,7 +122,13 @@ export function parseNclSections(xml: string): NclSectionMap {
 			if (curCh > 0 && nextV !== null) {
 				const title = plainText(t.value);
 				if (title) {
-					sections.push({ ch: curCh, startV: nextV, title, level: t.kind });
+					sections.push({
+						ch: curCh,
+						startV: nextV,
+						title,
+						titleHtml: markupText(t.value),
+						level: t.kind
+					});
 				}
 			}
 		}

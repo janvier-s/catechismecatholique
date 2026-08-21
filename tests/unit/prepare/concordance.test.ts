@@ -212,9 +212,27 @@ describe('buildConcordancePericopes', () => {
 
 	const sections: NclSectionMap = {
 		GEN: [
-			{ ch: 1, startV: 1, title: 'Création du monde', level: 'section' },
-			{ ch: 2, startV: 4, title: "Création de l'homme", level: 'section' },
-			{ ch: 3, startV: 1, title: 'La faute et le châtiment', level: 'section' }
+			{
+				ch: 1,
+				startV: 1,
+				title: 'Création du monde',
+				titleHtml: 'Création du monde',
+				level: 'section'
+			},
+			{
+				ch: 2,
+				startV: 4,
+				title: "Création de l'homme",
+				titleHtml: "Création de l'homme",
+				level: 'section'
+			},
+			{
+				ch: 3,
+				startV: 1,
+				title: 'La faute et le châtiment',
+				titleHtml: 'La faute et le châtiment',
+				level: 'section'
+			}
 		]
 	};
 

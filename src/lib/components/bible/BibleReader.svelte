@@ -159,18 +159,18 @@
 								<h2
 									class="font-heading text-[34px] font-bold leading-tight tracking-[0.04em] text-foreground text-center"
 								>
-									{section.title}
+									{@html section.titleHtml}
 								</h2>
 							</div>
 						{:else if section.level === 'section'}
 							<h2
 								class="mt-10 mb-4 first:mt-0 font-heading text-[26px] font-semibold text-foreground leading-tight"
 							>
-								{section.title}
+								{@html section.titleHtml}
 							</h2>
 						{:else}
 							<p class="mt-6 mb-2 font-body text-[15px] italic text-subtle leading-snug">
-								{section.title}
+								{@html section.titleHtml}
 							</p>
 						{/if}
 					{/each}
@@ -210,19 +210,19 @@
 								<h2
 									class="font-heading text-[34px] font-bold leading-tight tracking-[0.04em] text-foreground text-center"
 								>
-									{section.title}
+									{@html section.titleHtml}
 								</h2>
 							</li>
 						{:else if section.level === 'section'}
 							<li class="list-none mt-10 mb-4 first:mt-0">
 								<h2 class="font-heading text-[26px] font-semibold text-foreground leading-tight">
-									{section.title}
+									{@html section.titleHtml}
 								</h2>
 							</li>
 						{:else}
 							<li class="list-none mt-6 mb-2">
 								<p class="font-body text-[15px] italic text-subtle leading-snug">
-									{section.title}
+									{@html section.titleHtml}
 								</p>
 							</li>
 						{/if}
@@ -362,6 +362,13 @@
 	.bible-prose :global(.it),
 	.bible-poetry-line :global(.it) {
 		font-style: italic;
+	}
+	/* Unscoped, unlike the verse-text spans above: a heading's <sc> markup
+	   renders inside its own <h2>/<p>, not inside .verse-text/.bible-prose/
+	   .bible-poetry-line. */
+	:global(.sc) {
+		font-variant: small-caps;
+		letter-spacing: 0.02em;
 	}
 	.verse-cec-count {
 		font-family: var(--font-ui);

@@ -288,12 +288,19 @@ export type NclParagraphsBook = Record<string, NclChapterBlocks>;
 export interface NclSection {
 	ch: number; // chapter where the section header appears
 	startV: number; // first verse of the section
-	title: string; // already-French native title
+	title: string; // already-French native title, plain text (no markup)
+	/**
+	 * Same title with a source <sc> (small-caps) span preserved as
+	 * <span class="sc">…</span> — everything else stripped exactly like
+	 * `title`. Render with `{@html}`; use `title` wherever plain text is
+	 * required (e.g. the concordance's pericope titles).
+	 */
+	titleHtml: string;
 	/**
 	 * Heading level:
 	 * - 'major'      → <p style="ms1"> (e.g. "LES ORIGINES")
 	 * - 'section'    → <s style="s1">  (e.g. "Création du monde")
-	 * - 'subsection' → <s style="s2">  (detailed outline lines)
+	 * - 'subsection' → <s style="s2"> or <s style="s3"> (detailed outline lines)
 	 */
 	level: 'major' | 'section' | 'subsection';
 }
