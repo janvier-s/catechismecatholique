@@ -11,7 +11,7 @@ import {
 function scrollThrough(positions: number[], start?: ChromeScrollState): ChromeScrollState {
 	return positions.reduce(
 		(state, y) => nextChromeState(state, y),
-		start ?? initialChromeState(positions[0])
+		start ?? initialChromeState(positions[0] ?? 0)
 	);
 }
 
@@ -52,7 +52,7 @@ describe('chrome scroll state machine', () => {
 			state = nextChromeState(state, y);
 			expect(state.hidden).toBe(true);
 		}
-		state = nextChromeState(state, steps[steps.length - 1]);
+		state = nextChromeState(state, steps[steps.length - 1]!);
 		expect(state.hidden).toBe(false);
 	});
 
