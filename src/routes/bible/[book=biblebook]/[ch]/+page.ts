@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { bookBySlug } from '$lib/utils/bibleBookSlug';
-import { loadNclBook } from '$lib/data/loaders';
+import { loadNclBook, loadNclParagraphsBook } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 // Session-wide data (verse index, concordance manifest, NCL sections, chapter
@@ -11,7 +11,11 @@ export const load: PageLoad = async ({ params, fetch, parent }) => {
 	const ch = parseInt(params.ch!, 10);
 	if (!Number.isFinite(ch)) throw error(404);
 
-	const [parentData, bookData] = await Promise.all([parent(), loadNclBook(book.usfx, fetch)]);
+	const [parentData, bookData, paragraphsBook] = await Promise.all([
+		parent(),
+		loadNclBook(book.usfx, fetch),
+		loadNclParagraphsBook(book.usfx, fetch)
+	]);
 
 	if (!bookData) throw error(404);
 	const chData = bookData[String(ch)];
@@ -38,6 +42,7 @@ export const load: PageLoad = async ({ params, fetch, parent }) => {
 		totalChapters,
 		hasConcordance,
 		sections: chapterSections,
-		chapterCounts: parentData.chapterCounts
+		chapterCounts: parentData.chapterCounts,
+		paragraphs: paragraphsBook?.[String(ch)] ?? null
 	};
 };

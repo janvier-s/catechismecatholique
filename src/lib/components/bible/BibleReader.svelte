@@ -2,7 +2,7 @@
 	import ChapterFilterBar from './ChapterFilterBar.svelte';
 	import ChapterNavBar from './ChapterNavBar.svelte';
 	import { SvelteMap } from 'svelte/reactivity';
-	import type { BibleVerseIndex, NclSection } from '$lib/data/types';
+	import type { BibleVerseIndex, NclChapterBlocks, NclSection } from '$lib/data/types';
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 
@@ -14,7 +14,8 @@
 		totalChapters,
 		hasConcordance = false,
 		sections = [],
-		chapterCounts = {}
+		chapterCounts = {},
+		paragraphs = null
 	}: {
 		book: BookInfo;
 		chapter: number;
@@ -24,7 +25,22 @@
 		hasConcordance?: boolean;
 		sections?: NclSection[];
 		chapterCounts?: Record<string, number>;
+		paragraphs?: NclChapterBlocks | null;
 	} = $props();
+
+	const richHtmlByVerse = $derived.by(() => {
+		const m = new SvelteMap<number, string>();
+		if (paragraphs) {
+			for (const block of paragraphs.blocks) {
+				for (const rv of block.verses) m.set(rv.v, rv.html);
+			}
+		}
+		return m;
+	});
+
+	function verseHtml(v: { v: number; text: string }): string {
+		return richHtmlByVerse.get(v.v) ?? v.text;
+	}
 
 	// Multiple headings (e.g. a major-section + a section) can share the same
 	// startV. Group them so all of them render before that verse.
@@ -154,7 +170,7 @@
 							{v.v}
 						</span>
 						<p class="verse-text font-body flex-1" class:verse-text--cited={isClickable}>
-							{v.text}
+							{@html verseHtml(v)}
 						</p>
 						{#if studyMode}
 							<span
@@ -210,6 +226,18 @@
 		text-decoration-color: var(--color-accent);
 		text-underline-offset: 4px;
 		text-decoration-thickness: 1px;
+	}
+	.prose-paragraph :global(.dn),
+	.verse-text :global(.dn) {
+		font-variant: small-caps;
+		letter-spacing: 0.02em;
+	}
+	.verse-text :global(.add) {
+		font-style: italic;
+	}
+	.verse-text :global(.selah) {
+		font-style: italic;
+		color: var(--color-muted);
 	}
 	.verse-cec-count {
 		font-family: var(--font-ui);

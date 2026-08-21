@@ -19,4 +19,5 @@
 	totalChapters={data.totalChapters}
 	sections={data.sections}
 	chapterCounts={data.chapterCounts}
+	paragraphs={data.paragraphs}
 />
