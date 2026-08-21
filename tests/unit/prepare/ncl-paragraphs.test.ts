@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseUSFXParagraphs } from '../../../scripts/prepare/ncl-paragraphs';
+import { parseUSFXParagraphs, splitIntoProseBlocks } from '../../../scripts/prepare/ncl-paragraphs';
 
 describe('parseUSFXParagraphs', () => {
 	it('groups verses into prose blocks on <p style="p">', async () => {
@@ -122,7 +122,7 @@ describe('parseUSFXParagraphs', () => {
 		);
 	});
 
-	it('wraps <qt> as bold and <it> as italic in the verse html', async () => {
+	it('wraps <qt> as small-caps and <it> as italic in the verse html', async () => {
 		const xml = `<usfx>
 			<book id="MAT">
 				<c id="1" />
@@ -131,7 +131,7 @@ describe('parseUSFXParagraphs', () => {
 		</usfx>`;
 		const result = await parseUSFXParagraphs(xml);
 		expect(result['MAT']!['1']!.blocks[0]!.verses[0]!.html).toBe(
-			'« <strong class="qt">Voici Emmanuel</strong>, <em class="it">c’est</em>-à-dire.'
+			'« <span class="qt">Voici Emmanuel</span>, <em class="it">c’est</em>-à-dire.'
 		);
 	});
 
@@ -171,5 +171,50 @@ describe('parseUSFXParagraphs', () => {
 				{ v: 2, html: 'Isaac' }
 			]
 		});
+	});
+});
+
+describe('splitIntoProseBlocks', () => {
+	it('splits a flat verse list into prose blocks at the given break verses', () => {
+		const verses = [
+			{ v: 1, html: 'a' },
+			{ v: 2, html: 'b' },
+			{ v: 3, html: 'c' },
+			{ v: 4, html: 'd' }
+		];
+		expect(splitIntoProseBlocks(verses, [1, 3])).toEqual([
+			{
+				kind: 'prose',
+				verses: [
+					{ v: 1, html: 'a' },
+					{ v: 2, html: 'b' }
+				]
+			},
+			{
+				kind: 'prose',
+				verses: [
+					{ v: 3, html: 'c' },
+					{ v: 4, html: 'd' }
+				]
+			}
+		]);
+	});
+
+	it('ignores a break verse that is not the first verse of a chapter (ch2 v1 vs a global v1)', () => {
+		const verses = [
+			{ v: 5, html: 'a' },
+			{ v: 6, html: 'b' },
+			{ v: 7, html: 'c' }
+		];
+		expect(splitIntoProseBlocks(verses, [1, 6])).toEqual([
+			{ kind: 'prose', verses: [{ v: 5, html: 'a' }] },
+			{
+				kind: 'prose',
+				verses: [
+					{ v: 6, html: 'b' },
+					{ v: 7, html: 'c' }
+				]
+			}
+		]);
 	});
 });

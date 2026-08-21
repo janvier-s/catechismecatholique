@@ -360,7 +360,8 @@
 	.verse-text :global(.qt),
 	.bible-prose :global(.qt),
 	.bible-poetry-line :global(.qt) {
-		font-weight: 700;
+		font-variant: small-caps;
+		letter-spacing: 0.02em;
 	}
 	.verse-text :global(.it),
 	.bible-prose :global(.it),

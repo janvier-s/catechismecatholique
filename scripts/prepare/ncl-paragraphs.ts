@@ -11,6 +11,28 @@ export type ChapterBlocks = { superscription?: string; blocks: Block[] };
 /** USFX book code -> chapter number (string) -> chapter blocks. */
 type AllParagraphs = Record<string, Record<string, ChapterBlocks>>;
 
+/**
+ * Re-partition a flat, already-in-order verse list into prose blocks,
+ * starting a new block at each verse in `breakVerses`. Used for manual
+ * paragraph-break overrides on chapters whose source XML has no `<p>`
+ * markers at all — such a chapter parses as one giant prose block, which
+ * this re-splits using editorially-chosen break points instead.
+ */
+export function splitIntoProseBlocks(verses: RichVerse[], breakVerses: number[]): Block[] {
+	const breaks = new Set(breakVerses);
+	const blocks: Block[] = [];
+	let current: RichVerse[] = [];
+	for (const v of verses) {
+		if (breaks.has(v.v) && current.length > 0) {
+			blocks.push({ kind: 'prose', verses: current });
+			current = [];
+		}
+		current.push(v);
+	}
+	if (current.length > 0) blocks.push({ kind: 'prose', verses: current });
+	return blocks;
+}
+
 // <p style="…"> values that are pure metadata, never verse content. Mirrors
 // ncl.ts's own skip list, minus 'd' — a Psalm/Canticle superscription IS
 // wanted here (as ChapterBlocks.superscription), just routed separately
@@ -175,7 +197,7 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 			} else if (openTag === 'qs') {
 				if (skipDepth === 0 && !inSuperscription) buf.push('<span class="selah">');
 			} else if (openTag === 'qt') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('<strong class="qt">');
+				if (skipDepth === 0 && !inSuperscription) buf.push('<span class="qt">');
 			} else if (openTag === 'it') {
 				if (skipDepth === 0 && !inSuperscription) buf.push('<em class="it">');
 			}
@@ -200,12 +222,10 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 				// A block stays open until the next <p>/<q>/<c>/<book> — a bare
 				// </q> does not end it, matching the source leaving a <q> open
 				// across a verse boundary (e.g. Psalm 2:2-3 share one q2 line).
-			} else if (closeTag === 'nd' || closeTag === 'qs') {
+			} else if (closeTag === 'nd' || closeTag === 'qs' || closeTag === 'qt') {
 				if (skipDepth === 0 && !inSuperscription) buf.push('</span>');
 			} else if (closeTag === 'add' || closeTag === 'it') {
 				if (skipDepth === 0 && !inSuperscription) buf.push('</em>');
-			} else if (closeTag === 'qt') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('</strong>');
 			}
 		} else if (text !== undefined) {
 			if (skipDepth > 0) continue;
