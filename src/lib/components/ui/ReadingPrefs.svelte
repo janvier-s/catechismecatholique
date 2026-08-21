@@ -276,83 +276,175 @@
 			</div>
 
 			{#if isBibleOnly}
-				<div>
-					<span class="block mb-2 text-muted text-[13px]">Mode de lecture</span>
-					<div class="flex gap-1.5">
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs
-								{$prefs.bibleLayout === 'verse'
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('bibleLayout', 'verse')}
-						>
-							Verset par verset
-						</button>
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs
-								{$prefs.bibleLayout === 'paragraph'
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('bibleLayout', 'paragraph')}
-						>
-							Paragraphe
-						</button>
+				<div class="pt-1 mt-1 border-t border-border">
+					<span class="block mb-3 text-[11px] uppercase tracking-[0.12em] font-semibold text-accent"
+						>Bible</span
+					>
+					<div class="space-y-4">
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Mode de lecture</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.bibleLayout === 'verse'
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('bibleLayout', 'verse')}
+								>
+									Verset par verset
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.bibleLayout === 'paragraph'
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('bibleLayout', 'paragraph')}
+								>
+									Paragraphe
+								</button>
+							</div>
+						</div>
+
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Numéros de verset</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{!$prefs.hideVerseNumbers
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('hideVerseNumbers', false)}
+								>
+									Afficher
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.hideVerseNumbers
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('hideVerseNumbers', true)}
+								>
+									Masquer
+								</button>
+							</div>
+						</div>
+
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Couleur des numéros</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.verseNumberColor === 'accent'
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('verseNumberColor', 'accent')}
+								>
+									Accent
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.verseNumberColor === 'subtle'
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('verseNumberColor', 'subtle')}
+								>
+									Discret
+								</button>
+							</div>
+						</div>
+
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Titres de section</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{!$prefs.hideBibleHeadings
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('hideBibleHeadings', false)}
+								>
+									Afficher
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.hideBibleHeadings
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('hideBibleHeadings', true)}
+								>
+									Masquer
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			{/if}
 
 			{#if isCecOnly}
-				<div>
-					<span class="block mb-2 text-muted text-[13px]">Renvois (§)</span>
-					<div class="flex gap-1.5">
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs
-								{$prefs.crossRefsLayout === 'inline'
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('crossRefsLayout', 'inline')}
-						>
-							En ligne
-						</button>
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs
-								{$prefs.crossRefsLayout === 'side'
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('crossRefsLayout', 'side')}
-						>
-							En marge
-						</button>
-					</div>
-				</div>
+				<div class="pt-1 mt-1 border-t border-border">
+					<span class="block mb-3 text-[11px] uppercase tracking-[0.12em] font-semibold text-accent"
+						>Catéchisme</span
+					>
+					<div class="space-y-4">
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Renvois (§)</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.crossRefsLayout === 'inline'
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('crossRefsLayout', 'inline')}
+								>
+									En ligne
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.crossRefsLayout === 'side'
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('crossRefsLayout', 'side')}
+								>
+									En marge
+								</button>
+							</div>
+						</div>
 
-				<div>
-					<span class="block mb-2 text-muted text-[13px]">Réfs. bibliques</span>
-					<div class="flex gap-1.5">
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs
-								{!$prefs.inlineAsMarkers
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('inlineAsMarkers', false)}
-						>
-							En ligne
-						</button>
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs
-								{$prefs.inlineAsMarkers
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('inlineAsMarkers', true)}
-						>
-							En exposant
-						</button>
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Réfs. bibliques</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{!$prefs.inlineAsMarkers
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('inlineAsMarkers', false)}
+								>
+									En ligne
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.inlineAsMarkers
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('inlineAsMarkers', true)}
+								>
+									En exposant
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			{/if}

@@ -132,7 +132,10 @@
 				{#each paragraphs.blocks as block, i (i)}
 					{#if block.kind === 'prose'}
 						<p class="bible-prose">
-							{#each block.verses as rv (rv.v)}<sup class="vn">{rv.v}</sup>{@html rv.html}
+							{#each block.verses as rv (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
+										class="vn"
+										class:vn-subtle={$prefs.verseNumberColor === 'subtle'}>{rv.v}</sup
+									>{/if}{@html rv.html}
 							{/each}
 						</p>
 					{:else}
@@ -141,7 +144,10 @@
 							class:stanza-break={block.stanzaBreak}
 							style="--level: {block.level}"
 						>
-							{#each block.verses as rv (rv.v)}<sup class="vn">{rv.v}</sup>{@html rv.html}
+							{#each block.verses as rv (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
+										class="vn"
+										class:vn-subtle={$prefs.verseNumberColor === 'subtle'}>{rv.v}</sup
+									>{/if}{@html rv.html}
 							{/each}
 						</div>
 					{/if}
@@ -151,7 +157,7 @@
 			<ol class="verse-list list-none">
 				{#each verses as v (v.v)}
 					{@const c = citedCount(v.v)}
-					{@const headingsHere = sectionsByVerse.get(v.v) ?? []}
+					{@const headingsHere = $prefs.hideBibleHeadings ? [] : (sectionsByVerse.get(v.v) ?? [])}
 
 					{#each headingsHere as section, i (section.level + ':' + i)}
 						{#if section.level === 'major'}
@@ -193,7 +199,9 @@
 								: undefined}
 						>
 							<span
-								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] select-none"
+								class:count-hidden={$prefs.hideVerseNumbers}
+								class:verse-num-accent={$prefs.verseNumberColor === 'accent'}
 							>
 								{v.v}
 							</span>
@@ -258,7 +266,9 @@
 		font-weight: 600;
 		color: var(--color-accent);
 		margin-right: 0.15em;
-		user-select: none;
+	}
+	.vn.vn-subtle {
+		color: var(--color-subtle);
 	}
 	.verse-text {
 		font-size: var(--reader-font-size, 17px);
@@ -312,6 +322,12 @@
 	}
 	.count-hidden {
 		visibility: hidden;
+	}
+	.verse-num {
+		color: var(--color-subtle);
+	}
+	.verse-num.verse-num-accent {
+		color: var(--color-accent);
 	}
 	.verse-row {
 		transition-duration: 150ms;

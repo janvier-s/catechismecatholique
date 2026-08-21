@@ -15,6 +15,7 @@ export const THEME_LABELS: Record<Theme, string> = {
 export type ColumnWidth = 'narrow' | 'default' | 'wide';
 export type CrossRefsLayout = 'inline' | 'side';
 export type BibleLayout = 'verse' | 'paragraph';
+export type VerseNumberColor = 'accent' | 'subtle';
 
 export interface ReadingPrefs {
 	theme: Theme;
@@ -32,6 +33,9 @@ export interface ReadingPrefs {
 	inlineAsMarkers: boolean;
 	crossRefsLayout: CrossRefsLayout;
 	bibleLayout: BibleLayout;
+	hideVerseNumbers: boolean;
+	hideBibleHeadings: boolean; // major/section headings (verse-by-verse only — paragraph mode has none yet)
+	verseNumberColor: VerseNumberColor;
 }
 
 const DEFAULTS: ReadingPrefs = {
@@ -48,7 +52,10 @@ const DEFAULTS: ReadingPrefs = {
 	hideSourceFootnotes: false,
 	inlineAsMarkers: false,
 	crossRefsLayout: 'side',
-	bibleLayout: 'verse'
+	bibleLayout: 'verse',
+	hideVerseNumbers: false,
+	hideBibleHeadings: false,
+	verseNumberColor: 'subtle'
 };
 
 const KEY = 'catechismecatholique.prefs';

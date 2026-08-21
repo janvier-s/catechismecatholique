@@ -1,9 +1,18 @@
 import { test, expect } from '@playwright/test';
 
-async function switchToParagraphMode(page: import('@playwright/test').Page) {
-	await page.getByLabel('Options de lecture').click();
+// ReadingPrefs unmounts on close (ModeToggle wraps it in `{#if open}`), so
+// its `activeTab` state resets to "Texte" every time the panel reopens —
+// callers that need the "Lecture" tab must reselect it on every open, not
+// just the first.
+async function openReadingTab(page: import('@playwright/test').Page) {
+	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	await dialog.getByRole('button', { name: 'Lecture' }).click();
+	return dialog;
+}
+
+async function switchToParagraphMode(page: import('@playwright/test').Page) {
+	const dialog = await openReadingTab(page);
 	await dialog.getByRole('button', { name: 'Paragraphe' }).click();
 	await page.keyboard.press('Escape');
 }
@@ -54,4 +63,63 @@ test('paragraph mode renders prose as merged paragraphs and poetry as indented l
 	await page.goto('/bible/psaumes/2');
 	await switchToParagraphMode(page);
 	await expect(page.locator('.bible-poetry-line').first()).toBeVisible();
+});
+
+test('hide-verse-numbers toggle hides numbers in both reading modes', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await expect(page.locator('.verse-num').first()).toBeVisible();
+
+	let dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Masquer' }).first().click(); // Numéros de verset
+	await page.keyboard.press('Escape');
+	await expect(page.locator('.verse-num').first()).toHaveCSS('visibility', 'hidden');
+
+	await switchToParagraphMode(page);
+	await expect(page.locator('.vn')).toHaveCount(0);
+
+	dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).first().click();
+	await page.keyboard.press('Escape');
+	await expect(page.locator('.vn').first()).toBeVisible();
+});
+
+test('hide-section-headings toggle removes headings in verse-by-verse mode only', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/2');
+	await expect(page.locator('h2').first()).toBeVisible();
+
+	const dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Masquer' }).nth(1).click(); // Titres de section
+	await page.keyboard.press('Escape');
+	await expect(page.locator('h2')).toHaveCount(0);
+});
+
+test('verse-number color toggle switches between accent and subtle in both modes', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	const verseNum = page.locator('.verse-num').first();
+
+	let dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Accent' }).click();
+	await page.keyboard.press('Escape');
+	const accentColor = await verseNum.evaluate((el) => getComputedStyle(el).color);
+
+	dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Discret' }).click();
+	await page.keyboard.press('Escape');
+	const subtleColor = await verseNum.evaluate((el) => getComputedStyle(el).color);
+
+	expect(accentColor).not.toBe(subtleColor);
+});
+
+test('paragraph-mode verse numbers are selectable text, unlike verse-by-verse mode', async ({
+	page
+}) => {
+	await page.goto('/bible/matthieu/1');
+	await switchToParagraphMode(page);
+	const vn = page.locator('.vn').first();
+	await expect(vn).toBeVisible();
+	expect(await vn.evaluate((el) => getComputedStyle(el).userSelect)).not.toBe('none');
 });
