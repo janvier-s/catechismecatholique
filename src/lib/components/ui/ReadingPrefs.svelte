@@ -453,9 +453,11 @@
 
 	{#if activeTab === 'notes'}
 		<div class="space-y-4">
-			{#if isPiusX}
+			{#if isPiusX || isBibleOnly || isCompendium}
 				<p class="text-[13px] text-muted leading-relaxed">
-					Ce catéchisme ne contient pas de notes.
+					{isPiusX
+						? 'Ce catéchisme ne contient pas de notes.'
+						: 'Cette page ne contient pas de notes à masquer.'}
 				</p>
 			{:else}
 				<label class="flex items-center gap-2.5 cursor-pointer">

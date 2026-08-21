@@ -17,6 +17,13 @@ async function switchToParagraphMode(page: import('@playwright/test').Page) {
 	await page.keyboard.press('Escape');
 }
 
+async function openNotesTab(page: import('@playwright/test').Page) {
+	await page.getByRole('button', { name: 'Options de lecture' }).click();
+	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await dialog.getByRole('button', { name: 'Notes' }).click();
+	return dialog;
+}
+
 test('Bible reading-mode toggle switches and persists', async ({ page }) => {
 	await page.goto('/bible/matthieu/1');
 	await page.getByLabel('Options de lecture').click();
@@ -152,4 +159,13 @@ test('paragraph-mode verse numbers are selectable text, unlike verse-by-verse mo
 	const vn = page.locator('.vn').first();
 	await expect(vn).toBeVisible();
 	expect(await vn.evaluate((el) => getComputedStyle(el).userSelect)).not.toBe('none');
+});
+
+test('Notes tab shows an empty-state message instead of a dead "Masquer toutes les notes" control on Bible pages', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	const dialog = await openNotesTab(page);
+	await expect(dialog.getByText('Masquer toutes les notes')).toHaveCount(0);
+	await expect(dialog.getByText(/ne contient pas de notes/)).toBeVisible();
 });
