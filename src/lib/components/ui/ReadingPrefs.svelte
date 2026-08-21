@@ -6,8 +6,8 @@
 	const isTrent = $derived(page.url.pathname.startsWith('/trente'));
 	const isCompendium = $derived(page.url.pathname.startsWith('/compendium'));
 	const isPiusX = $derived(page.url.pathname.startsWith('/grand-catechisme'));
-	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX);
 	const isBibleOnly = $derived(page.url.pathname.startsWith('/bible'));
+	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
 
 	let activeTab: 'text' | 'reading' | 'notes' = $state('text');
 	let fontDropdownOpen = $state(false);

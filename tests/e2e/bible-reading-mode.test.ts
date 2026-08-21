@@ -46,6 +46,18 @@ test('reading-mode toggle is absent outside Bible routes', async ({ page }) => {
 	await expect(dialog.getByRole('button', { name: 'Paragraphe' })).toHaveCount(0);
 });
 
+test("options panel shows only the current page's corpus group, not both", async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	let dialog = await openReadingTab(page);
+	await expect(dialog.getByText('Mode de lecture')).toBeVisible();
+	await expect(dialog.getByText('Renvois (§)')).toHaveCount(0);
+
+	await page.goto('/cec/27');
+	dialog = await openReadingTab(page);
+	await expect(dialog.getByText('Renvois (§)')).toBeVisible();
+	await expect(dialog.getByText('Mode de lecture')).toHaveCount(0);
+});
+
 test('paragraph mode renders prose as merged paragraphs and poetry as indented lines', async ({
 	page
 }) => {
