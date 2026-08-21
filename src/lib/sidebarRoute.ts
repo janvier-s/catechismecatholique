@@ -19,5 +19,11 @@ export function needsCecStructure(pathname: string): boolean {
 	// /cec/sommaire and /cec/panorama stay excluded: they *are* the table of
 	// contents at full size, and a second copy in a rail beside them is noise.
 	if (pathname.startsWith('/cec/sommaire') || pathname.startsWith('/cec/panorama')) return false;
+	// A multi-paragraph selection (/cec/268,279-280,290-295) is a gathered list
+	// gathered from somewhere else, not a place in the book. The rail has no
+	// single node to open against it, so it would sit alongside fully collapsed
+	// and inert. Single paragraphs and plain ranges keep it — those do sit at a
+	// known point in the tree.
+	if (/^\/cec\/[\d,–-]+,/.test(pathname)) return false;
 	return true;
 }

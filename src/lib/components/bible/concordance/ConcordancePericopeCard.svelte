@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ConcordancePericope } from '$lib/data/types';
 	import { pluralFr } from '$lib/utils/i18n';
+	import { page } from '$app/state';
 
 	let { pericope }: { pericope: ConcordancePericope } = $props();
 
@@ -15,11 +16,13 @@
 
 	// The ranges are rarely contiguous (e.g. §268, §279-280, §290-295), so all
 	// of them travel as one comma-separated ref that /cec expands into a single
-	// reading view · the label names the passage they answer to.
+	// reading view · `label` names the passage they answer to, and `from` sends
+	// the return link back to this concordance rather than the CCC front door.
 	const allHref = $derived(
 		'/cec/' +
 			pericope.cccRanges.map((r) => rangeLabel(r.from, r.to)).join(',') +
-			`?label=${encodeURIComponent(pericope.verseRef)}`
+			`?label=${encodeURIComponent(pericope.verseRef)}` +
+			`&from=${encodeURIComponent(page.url.pathname)}`
 	);
 </script>
 

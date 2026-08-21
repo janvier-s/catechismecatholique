@@ -9,6 +9,19 @@
 		data.kind === 'multi' ? (page.url.searchParams.get('label') ?? null) : null
 	);
 
+	/** Where the return link goes. A multi selection is assembled elsewhere, so
+	 *  "← Catéchisme" drops the reader at a front door they never came through.
+	 *  `from` carries the origin · only a concordance path is honoured, which
+	 *  keeps this from becoming a redirect anyone can aim wherever they like.
+	 *  Anything else falls back to /cec. */
+	const backTo = $derived.by(() => {
+		const from = data.kind === 'multi' ? page.url.searchParams.get('from') : null;
+		if (from && /^\/bible\/[a-z0-9-]+\/\d+\/concordance$/.test(from)) {
+			return { href: from, label: 'Concordance' };
+		}
+		return { href: '/cec', label: 'Catéchisme' };
+	});
+
 	// Prev/next paragraph navigation. For ranges, prev steps back from the
 	// first paragraph and next steps forward from the last · so navigation
 	// keeps moving linearly through the catechism. Not shown for multi views.
@@ -217,10 +230,11 @@
 	{:else if data.kind === 'multi'}
 		<header class="mb-8">
 			<a
-				href="/cec"
+				href={backTo.href}
 				class="inline-flex items-center gap-1 font-ui text-sm text-muted hover:text-accent mb-4"
 			>
-				<span aria-hidden="true">←</span> Catéchisme
+				<span aria-hidden="true">←</span>
+				{backTo.label}
 			</a>
 			{#if multiLabel}
 				<h1 class="font-heading text-2xl font-semibold mb-1">{multiLabel}</h1>

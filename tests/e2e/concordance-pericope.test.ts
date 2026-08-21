@@ -68,6 +68,17 @@ test.describe('concordance — data-dependent', () => {
 		await expect(page).toHaveURL(/\/cec\/390,394-412/);
 		await expect(page.locator('#p-390')).toBeVisible();
 		await expect(page.locator('#p-412')).toBeAttached();
+
+		// A gathered list has no place in the tree, so the rail stays away.
+		await expect(page.getByRole('navigation', { name: 'Plan du Catéchisme' })).toHaveCount(0);
+
+		// And the return link goes back to the concordance it came from,
+		// not to the CCC front door the reader never passed through.
+		// Exact — the footer carries a "Concordance biblique" link too.
+		const back = page.getByRole('link', { name: 'Concordance', exact: true });
+		await expect(back).toHaveAttribute('href', '/bible/genese/3/concordance');
+		await back.click();
+		await expect(page).toHaveURL(/\/bible\/genese\/3\/concordance$/);
 	});
 
 	test('Voir tous is absent for a passage with a single range', async ({ page }) => {
