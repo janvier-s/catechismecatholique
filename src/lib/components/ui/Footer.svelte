@@ -54,7 +54,7 @@
 			<p class="footer-col-head">Études & outils</p>
 			<ul>
 				<li><a href="/bible">Lire la Bible</a></li>
-				<li><a href="/bible">Concordance biblique</a></li>
+				<li><a href="/bible/genese/1/concordance">Concordance biblique</a></li>
 				<li><a href="/glossaire">Glossaire</a></li>
 				<li><a href="/calendrier">Calendrier liturgique</a></li>
 				<li><a href="/prieres-formules">Prières & Formules</a></li>

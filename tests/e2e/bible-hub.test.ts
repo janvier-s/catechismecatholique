@@ -27,3 +27,25 @@ test('/bible/matthieu/28/19 shows CCC paragraphs', async ({ page }) => {
 	await expect(page.getByRole('heading', { name: /Matthieu 28, 19/ })).toBeVisible();
 	await expect(page.getByText(/Paragraphes du Catéchisme/)).toBeVisible();
 });
+
+test('footer has a working concordance link', async ({ page }) => {
+	await page.goto('/');
+	const link = page.locator('footer a[href="/bible/genese/1/concordance"]');
+	await expect(link).toHaveText('Concordance biblique');
+	await link.click();
+	await expect(page).toHaveURL(/\/bible\/genese\/1\/concordance$/);
+	await expect(page).toHaveTitle(/concordance/i);
+});
+
+test('nav drawer has a working concordance link', async ({ page }) => {
+	await page.goto('/cec');
+	await page.locator('.drawer-trigger').click();
+	await page.getByRole('button', { name: 'Études & outils' }).click();
+	// Accordion opens via a 180ms transition:slide — wait it out before
+	// clicking (see tests/e2e/compendium.test.ts for the same pattern).
+	await page.waitForTimeout(250);
+	const link = page.locator('#nav-drawer a[href="/bible/genese/1/concordance"]');
+	await expect(link).toBeVisible();
+	await link.click();
+	await expect(page).toHaveURL(/\/bible\/genese\/1\/concordance$/);
+});
