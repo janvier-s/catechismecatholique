@@ -22,7 +22,8 @@ import { extractEnBref, trimEnBrefsAtParagrapheBoundaries } from './prepare/enbr
 import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX } from './prepare/ncl.ts';
-import { parseUSFXParagraphs } from './prepare/ncl-paragraphs.ts';
+import { parseUSFXParagraphs, splitIntoProseBlocks } from './prepare/ncl-paragraphs.ts';
+import { PARAGRAPH_OVERRIDES } from './prepare/paragraph-overrides.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
 import { parseSourceTable } from './prepare/sources-index.ts';
@@ -418,6 +419,16 @@ async function main() {
 	logStep('parsing NCL paragraph/poetry structure');
 	{
 		const paragraphs = await parseUSFXParagraphs(nclXml);
+		for (const [usfx, chapterBreaks] of Object.entries(PARAGRAPH_OVERRIDES)) {
+			const book = paragraphs[usfx];
+			if (!book) continue;
+			for (const [ch, breakVerses] of Object.entries(chapterBreaks)) {
+				const chapterBlocks = book[ch];
+				if (!chapterBlocks) continue;
+				const verses = chapterBlocks.blocks.flatMap((b) => b.verses);
+				chapterBlocks.blocks = splitIntoProseBlocks(verses, breakVerses);
+			}
+		}
 		const dir = join(OUT, 'bible/ncl-paragraphs');
 		mkdirSync(dir, { recursive: true });
 		const usfxCodes: string[] = [];
