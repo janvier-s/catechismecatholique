@@ -47,8 +47,15 @@ test.describe('Compendium', () => {
 	}) => {
 		await page.goto('/cec');
 		await page.locator('.drawer-trigger').click();
-		// The "Études & outils" group is a collapsed accordion by default.
+		// The "Études & outils" group is a collapsed accordion by default,
+		// and expands via a 180ms transition:slide (NavDrawer.svelte). The
+		// link is present in the DOM as soon as the group expands, but its
+		// position keeps moving until the slide settles — clicking
+		// immediately can hit whatever sits at that point mid-animation
+		// (flaky on CI: intermittently landed on the primary CEC link
+		// instead). Wait out the transition with margin before clicking.
 		await page.getByRole('button', { name: 'Études & outils' }).click();
+		await page.waitForTimeout(250);
 		await page.locator('#nav-drawer a[href="/prieres-formules"]').click();
 		await expect(page).toHaveURL('/prieres-formules');
 	});
