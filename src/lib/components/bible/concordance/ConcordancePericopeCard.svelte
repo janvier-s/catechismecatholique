@@ -13,14 +13,14 @@
 		return from === to ? `/cec/${from}` : `/cec/${from}-${to}`;
 	}
 
-	// Each range opens in its own tab · the ranges are rarely contiguous
-	// across a single URL (e.g. §27-30, §355, §1023-1025), so there's no
-	// single combined page to send the reader to instead.
-	function openAll() {
-		for (const r of pericope.cccRanges) {
-			window.open(rangeHref(r.from, r.to), '_blank', 'noopener,noreferrer');
-		}
-	}
+	// The ranges are rarely contiguous (e.g. §268, §279-280, §290-295), so all
+	// of them travel as one comma-separated ref that /cec expands into a single
+	// reading view · the label names the passage they answer to.
+	const allHref = $derived(
+		'/cec/' +
+			pericope.cccRanges.map((r) => rangeLabel(r.from, r.to)).join(',') +
+			`?label=${encodeURIComponent(pericope.verseRef)}`
+	);
 </script>
 
 <div class="pericope-detail" data-pericope-ref={pericope.verseRef}>
@@ -35,26 +35,11 @@
 
 	<!-- Caption line: N paragraphes du Catéchisme se rapport(e|ent) à ce passage -->
 	{#if cccCount > 0}
-		<div
-			class="flex items-baseline justify-between gap-3 font-ui text-xs text-muted {pericope.pericopeTitle
-				? 'mt-5'
-				: ''} mb-4"
-		>
-			<span>
-				<span class="font-semibold text-accent tabular-nums">{cccCount}</span>
-				{pluralFr(cccCount, 'paragraphe')} du Catéchisme {cccCount === 1
-					? 'se rapporte'
-					: 'se rapportent'} à ce passage
-			</span>
-			{#if pericope.cccRanges.length > 1}
-				<button
-					type="button"
-					class="shrink-0 font-semibold text-accent hover:underline whitespace-nowrap"
-					onclick={openAll}
-				>
-					Voir tous
-				</button>
-			{/if}
+		<div class="font-ui text-xs text-muted {pericope.pericopeTitle ? 'mt-5' : ''} mb-4">
+			<span class="font-semibold text-accent tabular-nums">{cccCount}</span>
+			{pluralFr(cccCount, 'paragraphe')} du Catéchisme {cccCount === 1
+				? 'se rapporte'
+				: 'se rapportent'} à ce passage
 		</div>
 
 		<!-- Plain inline list of paragraph numbers (no chips, no border).
@@ -69,6 +54,16 @@
 				</a>
 			{/each}
 		</div>
+
+		{#if pericope.cccRanges.length > 1}
+			<a
+				href={allHref}
+				class="mt-5 inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/5 px-3.5 py-1.5 font-ui text-[13px] font-semibold text-accent transition-colors hover:bg-accent/10 hover:border-accent/50"
+			>
+				Voir tous
+				<span aria-hidden="true">→</span>
+			</a>
+		{/if}
 	{:else}
 		<p class="font-ui text-sm italic text-subtle">
 			Aucun paragraphe du Catéchisme pour ce passage.

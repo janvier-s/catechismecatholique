@@ -85,9 +85,16 @@
 		if (!raw) return;
 		const intent = detectIntent(raw);
 		if (intent.kind === 'paragraph') {
-			// detectIntent accepts a bare number, a range and a comma list; the
-			// first number is enough to bounds-check any of those forms.
-			const first = Number(raw.replace(/§/g, '').split(/[-–,]/)[0]!.trim());
+			// detectIntent accepts a bare number, a range, and lists mixing both
+			// separated by commas, semicolons or spaces; the first number is
+			// enough to bounds-check any of those forms.
+			const first = Number(
+				raw
+					.replace(/§/g, ' ')
+					.trim()
+					.split(/[-–,;\s]/)[0]!
+					.trim()
+			);
 			if (first < 1 || first > lastParagraph) {
 				jumpError = `Le Catéchisme va du paragraphe 1 au paragraphe ${lastParagraph}.`;
 				return;

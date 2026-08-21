@@ -229,8 +229,13 @@
 				{data.numbers.length} paragraphes sélectionnés
 			</p>
 			<p class="font-ui text-sm text-muted mt-1 tabular-nums">
-				{data.numbers.join(', ')}
+				{data.display}
 			</p>
+			{#if data.truncated}
+				<p class="font-ui text-xs text-subtle mt-1">
+					Sélection tronquée aux {data.numbers.length} premiers paragraphes.
+				</p>
+			{/if}
 		</header>
 		<div class="border-t border-border pt-6">
 			{#each data.paragraphs as p (p.number)}

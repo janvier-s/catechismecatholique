@@ -1,4 +1,5 @@
 export function match(param: string): boolean {
-	// Single paragraph, range (1-10), or comma-separated list (1,3,240,500)
-	return /^\d+(-\d+)?$/.test(param) || /^\d+(,\d+)+$/.test(param);
+	// Single paragraph (240), a range (1-10), or a comma-separated list mixing
+	// both (268,279-280,290-295) · the shape the concordance produces.
+	return /^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(param);
 }

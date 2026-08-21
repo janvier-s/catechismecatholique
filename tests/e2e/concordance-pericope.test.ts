@@ -54,30 +54,27 @@ test.describe('concordance — data-dependent', () => {
 		await expect(page).toHaveURL(href!);
 	});
 
-	test('Voir tous opens every cited range in its own tab', async ({ page, context }) => {
+	test('Voir tous opens every cited range on one page', async ({ page }) => {
 		await page.goto('/bible/genese/3/concordance');
 		await page.waitForLoadState('networkidle');
 		await page.getByRole('button', { name: 'Genèse 3:1-24' }).first().click();
-		// Genèse 3:1-24 cites two ranges: §390 and §394-412.
-		// Exact match — the enclosing pericope card also carries role="button"
-		// and its accessible name (verseRef + count + button text) contains
-		// "Voir tous" as a substring, so a non-exact match would hit it instead.
-		const btn = page.getByRole('button', { name: 'Voir tous', exact: true });
-		await expect(btn).toBeVisible();
+		// Genèse 3:1-24 cites two ranges: §390 and §394-412. Both travel in a
+		// single comma-separated ref, with the passage carried as a label.
+		const link = page.getByRole('link', { name: /^Voir tous/ });
+		await expect(link).toBeVisible();
+		expect(await link.getAttribute('href')).toMatch(/^\/cec\/390,394-412\?label=/);
 
-		await btn.click();
-		await expect.poll(() => context.pages().length).toBe(3);
-		const newPages = context.pages().slice(1);
-		await Promise.all(newPages.map((p) => p.waitForLoadState()));
-		const urls = newPages.map((p) => new URL(p.url()).pathname).sort();
-		expect(urls).toEqual(['/cec/390', '/cec/394-412'].sort());
+		await link.click();
+		await expect(page).toHaveURL(/\/cec\/390,394-412/);
+		await expect(page.locator('#p-390')).toBeVisible();
+		await expect(page.locator('#p-412')).toBeAttached();
 	});
 
 	test('Voir tous is absent for a passage with a single range', async ({ page }) => {
 		await page.goto('/bible/genese/3/concordance');
 		await page.waitForLoadState('networkidle');
 		await page.getByRole('button', { name: 'Genèse 3:19' }).first().click();
-		await expect(page.getByRole('button', { name: 'Voir tous', exact: true })).toHaveCount(0);
+		await expect(page.getByRole('link', { name: /^Voir tous/ })).toHaveCount(0);
 	});
 });
 

@@ -14,28 +14,38 @@ export type Intent =
 	  }
 	| { kind: 'text'; q: string };
 
+/** Read a query as a list of catechism paragraph refs, normalised to the
+ *  `/cec/` URL form (`268,279-280,290-295`). Returns null as soon as any
+ *  segment isn't a bare number or number range · a bible reference or plain
+ *  text then falls through to the checks below. */
+function paragraphRefs(q: string): string[] | null {
+	const segments = q
+		.replace(/§/g, ' ')
+		.replace(/\s*[-–]\s*/g, '-') // "27 – 30" reads as one range
+		.split(/[,;\s]+/)
+		.filter(Boolean);
+	if (segments.length === 0) return null;
+
+	const refs: string[] = [];
+	for (const segment of segments) {
+		const m = segment.match(/^(\d+)(?:-(\d+))?$/);
+		if (!m) return null;
+		refs.push(m[2] ? `${m[1]}-${m[2]}` : m[1]!);
+	}
+	return refs;
+}
+
 export function detectIntent(input: string): Intent {
 	const q = input.trim();
 	if (!q) return { kind: 'text', q };
 
-	// Multi-paragraph list: §1, §3, §240 or 1,3,240 (comma-separated, 2+ refs)
-	const multiMatch = q.match(/^(?:§\s*\d+\s*,\s*)+§?\s*\d+$|^\d+(?:,\s*\d+)+$/);
-	if (multiMatch) {
-		const nums = q
-			.replace(/§/g, '')
-			.split(',')
-			.map((s) => s.trim())
-			.filter((s) => /^\d+$/.test(s));
-		if (nums.length >= 2) return { kind: 'paragraph', href: `/cec/${nums.join(',')}` };
-	}
-
-	// Paragraph: optional § prefix, then digits or digit-range
-	const pMatch = q.match(/^§?\s*(\d+)(?:[-–](\d+))?$/);
-	if (pMatch) {
-		const from = pMatch[1]!;
-		const to = pMatch[2];
-		return { kind: 'paragraph', href: to ? `/cec/${from}-${to}` : `/cec/${from}` };
-	}
+	// Paragraph refs · a single number (27), a range (27-30), or any mix of the
+	// two in a list. Commas, semicolons, spaces and newlines all separate, and
+	// § is optional, so a reference pasted out of the concordance works whatever
+	// shape it arrives in: "268, 279-280, 290-295" and "268 279-280 290-295"
+	// both resolve to the same page.
+	const refs = paragraphRefs(q);
+	if (refs) return { kind: 'paragraph', href: `/cec/${refs.join(',')}` };
 
 	// Bible: book abbr + ch + sep + verse + optional range (- or –) or dot-separated additional
 	// verses (French scholarly notation: Jn 3:16.18 or Jn 3, 16.18).
