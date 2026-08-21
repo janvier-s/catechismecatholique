@@ -186,3 +186,22 @@ test('section and subsection headings are centered, in both reading modes', asyn
 	const subsection = page.locator('p.italic.text-subtle').first();
 	await expect(subsection).toHaveCSS('text-align', 'center');
 });
+
+test('Bible reader uses its own column widths (600/750/920), not the shared CEC/Trent ones', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	const main = page.locator('main.max-w-reader');
+
+	const widths: Record<string, string> = {
+		Étroite: '600px',
+		Standard: '750px',
+		Large: '920px'
+	};
+	for (const [label, px] of Object.entries(widths)) {
+		const dialog = await openReadingTab(page);
+		await dialog.getByRole('button', { name: label }).click();
+		await page.keyboard.press('Escape');
+		await expect(main).toHaveCSS('max-width', px);
+	}
+});

@@ -121,7 +121,7 @@
 <!-- Chapter navigation bar · sticky below the global TopBar (80px). -->
 <ChapterNavBar {book} {chapter} {totalChapters} {chapterCounts} variant="reader" />
 
-<main class="mx-auto max-w-reader px-6 max-md:px-4 pt-8 max-md:pt-5 pb-16">
+<main class="mx-auto max-w-reader px-6 max-md:px-4 pt-8 max-md:pt-5 pb-16" data-corpus="bible">
 	<article>
 		<header class="mb-10 text-center">
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">
