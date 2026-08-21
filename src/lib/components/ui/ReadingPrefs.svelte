@@ -7,6 +7,7 @@
 	const isCompendium = $derived(page.url.pathname.startsWith('/compendium'));
 	const isPiusX = $derived(page.url.pathname.startsWith('/grand-catechisme'));
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX);
+	const isBibleOnly = $derived(page.url.pathname.startsWith('/bible'));
 
 	let activeTab: 'text' | 'reading' | 'notes' = $state('text');
 	let fontDropdownOpen = $state(false);
@@ -273,6 +274,34 @@
 					</button>
 				</div>
 			</div>
+
+			{#if isBibleOnly}
+				<div>
+					<span class="block mb-2 text-muted text-[13px]">Mode de lecture</span>
+					<div class="flex gap-1.5">
+						<button
+							type="button"
+							class="flex-1 py-1.5 border rounded text-xs
+								{$prefs.bibleLayout === 'verse'
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
+							onclick={() => updatePref('bibleLayout', 'verse')}
+						>
+							Verset par verset
+						</button>
+						<button
+							type="button"
+							class="flex-1 py-1.5 border rounded text-xs
+								{$prefs.bibleLayout === 'paragraph'
+								? 'bg-accent/15 text-accent-text border-accent'
+								: 'pill-border text-foreground hover:text-accent-text'}"
+							onclick={() => updatePref('bibleLayout', 'paragraph')}
+						>
+							Paragraphe
+						</button>
+					</div>
+				</div>
+			{/if}
 
 			{#if isCecOnly}
 				<div>

@@ -14,6 +14,7 @@ export const THEME_LABELS: Record<Theme, string> = {
 
 export type ColumnWidth = 'narrow' | 'default' | 'wide';
 export type CrossRefsLayout = 'inline' | 'side';
+export type BibleLayout = 'verse' | 'paragraph';
 
 export interface ReadingPrefs {
 	theme: Theme;
@@ -30,6 +31,7 @@ export interface ReadingPrefs {
 	hideSourceFootnotes: boolean;
 	inlineAsMarkers: boolean;
 	crossRefsLayout: CrossRefsLayout;
+	bibleLayout: BibleLayout;
 }
 
 const DEFAULTS: ReadingPrefs = {
@@ -45,7 +47,8 @@ const DEFAULTS: ReadingPrefs = {
 	hideBibleInline: false,
 	hideSourceFootnotes: false,
 	inlineAsMarkers: false,
-	crossRefsLayout: 'side'
+	crossRefsLayout: 'side',
+	bibleLayout: 'verse'
 };
 
 const KEY = 'catechismecatholique.prefs';
