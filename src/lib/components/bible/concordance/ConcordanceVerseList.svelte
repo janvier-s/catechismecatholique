@@ -3,6 +3,7 @@
 	import type { ConcordanceChapter } from '$lib/data/types';
 	import type { BookInfo } from '$lib/utils/bibleBookSlug';
 	import { pluralFr } from '$lib/utils/i18n';
+	import { prefs } from '$lib/stores/prefs';
 
 	let {
 		verses,
@@ -117,10 +118,10 @@
 									{@const text = verseByNum.get(vNum)}
 									{#if text}
 										<p class="font-body text-[15px] leading-relaxed text-foreground">
-											<sup
-												class="top-0 align-baseline text-[10px] font-semibold text-subtle mr-[3px]"
-												>{vNum}</sup
-											>{text}
+											{#if !$prefs.hideVerseNumbers}<sup
+													class="verse-num top-0 align-baseline text-[10px] font-semibold mr-[3px]"
+													class:verse-num-accent={$prefs.verseNumberColor === 'accent'}>{vNum}</sup
+												>{/if}{text}
 										</p>
 									{/if}
 								{/each}
@@ -142,6 +143,16 @@
 </div>
 
 <style>
+	/* Same two colours the reader uses · the options menu is offered on this
+	   route too (it lives under /bible), so the verse numbers here have to
+	   answer to it rather than sitting fixed at subtle. */
+	.verse-num {
+		color: var(--color-subtle);
+	}
+	.verse-num.verse-num-accent {
+		color: var(--color-accent);
+	}
+
 	.pericope-card {
 		background-color: var(--color-panel);
 		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 60%, transparent);
