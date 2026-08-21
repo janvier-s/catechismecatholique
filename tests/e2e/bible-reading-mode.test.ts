@@ -102,21 +102,33 @@ test('hide-verse-numbers toggle hides numbers in both reading modes', async ({ p
 	await expect(page.locator('.vn').first()).toBeVisible();
 });
 
-test('hide-section-headings toggle removes headings in verse-by-verse mode', async ({ page }) => {
+test('show-section-headings toggle reveals headings in verse-by-verse mode (hidden by default)', async ({
+	page
+}) => {
 	await page.goto('/bible/genese/2');
+	await expect(page.locator('h2')).toHaveCount(0);
+
+	let dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(1).click(); // Titres de section
+	await page.keyboard.press('Escape');
 	await expect(page.locator('h2').first()).toBeVisible();
 
-	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Masquer' }).nth(1).click(); // Titres de section
+	dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Masquer' }).nth(1).click();
 	await page.keyboard.press('Escape');
 	await expect(page.locator('h2')).toHaveCount(0);
 });
 
-test('paragraph mode renders section headings, and hide-section-headings removes them there too', async ({
+test('paragraph mode renders section headings once shown (hidden by default, like verse mode)', async ({
 	page
 }) => {
 	await page.goto('/bible/genese/1');
 	await switchToParagraphMode(page);
+	await expect(page.locator('.bible-paragraphs h2')).toHaveCount(0);
+
+	const dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(1).click(); // Titres de section
+	await page.keyboard.press('Escape');
 
 	// Genesis 1 opens with a major heading ("LES ORIGINES") followed by a
 	// section heading ("Création du monde"), both anchored at verse 1 —
@@ -125,11 +137,6 @@ test('paragraph mode renders section headings, and hide-section-headings removes
 	await expect(
 		page.locator('.bible-paragraphs h2', { hasText: 'Création du monde' })
 	).toBeVisible();
-
-	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Masquer' }).nth(1).click(); // Titres de section
-	await page.keyboard.press('Escape');
-	await expect(page.locator('.bible-paragraphs h2')).toHaveCount(0);
 });
 
 test('verse-number color toggle switches between accent and subtle in both modes', async ({
@@ -174,15 +181,24 @@ test('section and subsection headings are centered, in both reading modes', asyn
 	// Genesis 2 has a section-level heading ("Création de l'homme et de la
 	// femme"); Leviticus 27 has a subsection-level one (the numbered outline
 	// notes). Major headings were already centered — section/subsection
-	// weren't.
+	// weren't. Headings are hidden by default, so show them first.
 	await page.goto('/bible/genese/2');
+	let dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(1).click(); // Titres de section
+	await page.keyboard.press('Escape');
 	await expect(page.locator('h2').first()).toHaveCSS('text-align', 'center');
 
 	await switchToParagraphMode(page);
 	await page.goto('/bible/genese/2');
+	dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(1).click();
+	await page.keyboard.press('Escape');
 	await expect(page.locator('.bible-paragraphs h2').first()).toHaveCSS('text-align', 'center');
 
 	await page.goto('/bible/levitique/27');
+	dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(1).click();
+	await page.keyboard.press('Escape');
 	const subsection = page.locator('p.italic.text-subtle').first();
 	await expect(subsection).toHaveCSS('text-align', 'center');
 });
@@ -249,4 +265,20 @@ test('the width fix holds at every column-width preset (600/750/920), not just S
 		await page.keyboard.press('Escape');
 		await expect(verseText).toHaveCSS('width', px);
 	}
+});
+
+test('verse-number font-weight matches (200) in both reading modes', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await expect(page.locator('.verse-num').first()).toHaveCSS('font-weight', '200');
+
+	await switchToParagraphMode(page);
+	await expect(page.locator('.vn').first()).toHaveCSS('font-weight', '200');
+});
+
+test('section headings are hidden by default, in both reading modes', async ({ page }) => {
+	await page.goto('/bible/genese/2');
+	await expect(page.locator('h2')).toHaveCount(0);
+
+	await switchToParagraphMode(page);
+	await expect(page.locator('.bible-paragraphs h2')).toHaveCount(0);
 });

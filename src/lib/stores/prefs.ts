@@ -34,7 +34,7 @@ export interface ReadingPrefs {
 	crossRefsLayout: CrossRefsLayout;
 	bibleLayout: BibleLayout;
 	hideVerseNumbers: boolean;
-	hideBibleHeadings: boolean; // major/section headings (verse-by-verse only — paragraph mode has none yet)
+	hideBibleHeadings: boolean; // major/section headings, both reading modes
 	verseNumberColor: VerseNumberColor;
 }
 
@@ -54,7 +54,7 @@ const DEFAULTS: ReadingPrefs = {
 	crossRefsLayout: 'side',
 	bibleLayout: 'verse',
 	hideVerseNumbers: false,
-	hideBibleHeadings: false,
+	hideBibleHeadings: true,
 	verseNumberColor: 'subtle'
 };
 

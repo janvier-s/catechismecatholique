@@ -252,7 +252,7 @@
 								: undefined}
 						>
 							<span
-								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] select-none"
+								class="verse-num font-ui text-[13px] max-md:text-[11px] font-extralight w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] select-none"
 								class:count-hidden={$prefs.hideVerseNumbers}
 								class:verse-num-accent={$prefs.verseNumberColor === 'accent'}
 							>
@@ -316,7 +316,7 @@
 	.vn {
 		font-family: var(--font-ui);
 		font-size: 0.65em;
-		font-weight: 600;
+		font-weight: 200;
 		color: var(--color-accent);
 		margin-right: 0.15em;
 	}
