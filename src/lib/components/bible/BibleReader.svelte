@@ -5,6 +5,7 @@
 	import type { BibleVerseIndex, NclChapterBlocks, NclSection } from '$lib/data/types';
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
+	import { prefs } from '$lib/stores/prefs';
 
 	let {
 		book,
@@ -120,71 +121,96 @@
 			<ChapterFilterBar bind:studyMode citedCount={totalCited} />
 		{/if}
 
-		<ol class="verse-list list-none">
-			{#each verses as v (v.v)}
-				{@const c = citedCount(v.v)}
-				{@const headingsHere = sectionsByVerse.get(v.v) ?? []}
-
-				{#each headingsHere as section, i (section.level + ':' + i)}
-					{#if section.level === 'major'}
-						<li class="list-none mt-16 mb-8 first:mt-2">
-							<div class="w-16 h-px bg-accent/70 mx-auto mb-4"></div>
-							<h2
-								class="font-heading text-[34px] font-bold leading-tight tracking-[0.04em] text-foreground text-center"
-							>
-								{section.title}
-							</h2>
-						</li>
-					{:else if section.level === 'section'}
-						<li class="list-none mt-10 mb-4 first:mt-0">
-							<h2 class="font-heading text-[26px] font-semibold text-foreground leading-tight">
-								{section.title}
-							</h2>
-						</li>
+		{#if $prefs.bibleLayout === 'paragraph' && paragraphs}
+			<div class="bible-paragraphs">
+				{#if paragraphs.superscription}
+					<p class="bible-superscription">{paragraphs.superscription}</p>
+				{/if}
+				{#each paragraphs.blocks as block, i (i)}
+					{#if block.kind === 'prose'}
+						<p class="bible-prose">
+							{#each block.verses as rv (rv.v)}<sup class="vn">{rv.v}</sup>{@html rv.html}
+							{/each}
+						</p>
 					{:else}
-						<li class="list-none mt-6 mb-2">
-							<p class="font-body text-[15px] italic text-subtle leading-snug">
-								{section.title}
-							</p>
-						</li>
+						<div
+							class="bible-poetry-line"
+							class:stanza-break={block.stanzaBreak}
+							style="--level: {block.level}"
+						>
+							{#each block.verses as rv (rv.v)}<sup class="vn">{rv.v}</sup>{@html rv.html}
+							{/each}
+						</div>
 					{/if}
 				{/each}
+			</div>
+		{:else}
+			<ol class="verse-list list-none">
+				{#each verses as v (v.v)}
+					{@const c = citedCount(v.v)}
+					{@const headingsHere = sectionsByVerse.get(v.v) ?? []}
 
-				{@const active = isVerseActive(v.v)}
-				{@const isClickable = c > 0 && studyMode}
-				<li id="v{v.v}" class="transition-opacity">
-					<svelte:element
-						this={isClickable ? 'button' : 'div'}
-						class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1"
-						class:is-active={active}
-						type={isClickable ? 'button' : undefined}
-						role={isClickable ? 'button' : 'presentation'}
-						onclick={isClickable ? () => openVerse(v.v) : undefined}
-						aria-label={isClickable
-							? `Verset ${v.v} — ${c} ${c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme`
-							: undefined}
-					>
-						<span
-							class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
-						>
-							{v.v}
-						</span>
-						<p class="verse-text font-body flex-1" class:verse-text--cited={isClickable}>
-							{@html verseHtml(v)}
-						</p>
-						{#if studyMode}
-							<span
-								class="verse-cec-count max-md:hidden"
-								class:count-hidden={c === 0}
-								aria-hidden="true"
-							>
-								{c}&nbsp;{c === 1 ? 'paragraphe' : 'paragraphes'}
-							</span>
+					{#each headingsHere as section, i (section.level + ':' + i)}
+						{#if section.level === 'major'}
+							<li class="list-none mt-16 mb-8 first:mt-2">
+								<div class="w-16 h-px bg-accent/70 mx-auto mb-4"></div>
+								<h2
+									class="font-heading text-[34px] font-bold leading-tight tracking-[0.04em] text-foreground text-center"
+								>
+									{section.title}
+								</h2>
+							</li>
+						{:else if section.level === 'section'}
+							<li class="list-none mt-10 mb-4 first:mt-0">
+								<h2 class="font-heading text-[26px] font-semibold text-foreground leading-tight">
+									{section.title}
+								</h2>
+							</li>
+						{:else}
+							<li class="list-none mt-6 mb-2">
+								<p class="font-body text-[15px] italic text-subtle leading-snug">
+									{section.title}
+								</p>
+							</li>
 						{/if}
-					</svelte:element>
-				</li>
-			{/each}
-		</ol>
+					{/each}
+
+					{@const active = isVerseActive(v.v)}
+					{@const isClickable = c > 0 && studyMode}
+					<li id="v{v.v}" class="transition-opacity">
+						<svelte:element
+							this={isClickable ? 'button' : 'div'}
+							class="verse-row flex gap-3 rounded-md px-2 -mx-2 py-1"
+							class:is-active={active}
+							type={isClickable ? 'button' : undefined}
+							role={isClickable ? 'button' : 'presentation'}
+							onclick={isClickable ? () => openVerse(v.v) : undefined}
+							aria-label={isClickable
+								? `Verset ${v.v} — ${c} ${c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme`
+								: undefined}
+						>
+							<span
+								class="verse-num font-ui text-[13px] max-md:text-[11px] font-thin w-6 max-md:w-auto shrink-0 text-right tabular-nums leading-[1.7] pt-[0.15em] text-subtle select-none"
+							>
+								{v.v}
+							</span>
+							<p class="verse-text font-body flex-1" class:verse-text--cited={isClickable}>
+								{@html verseHtml(v)}
+							</p>
+							{#if studyMode}
+								<span
+									class="verse-cec-count max-md:hidden"
+									class:count-hidden={c === 0}
+									aria-hidden="true"
+								>
+									{c}&nbsp;{c === 1 ? 'paragraphe' : 'paragraphes'}
+								</span>
+							{/if}
+						</svelte:element>
+					</li>
+				{/each}
+			</ol>
+		{/if}
 	</article>
 
 	<nav
@@ -205,6 +231,32 @@
 </main>
 
 <style>
+	.bible-superscription {
+		font-style: italic;
+		color: var(--color-muted);
+		margin-bottom: 1rem;
+	}
+	.bible-prose {
+		font-size: var(--reader-font-size, 17px);
+		line-height: var(--reader-line-height, 1.7);
+		margin-bottom: 1rem;
+	}
+	.bible-poetry-line {
+		font-size: var(--reader-font-size, 17px);
+		line-height: var(--reader-line-height, 1.7);
+		margin-left: calc((var(--level, 1) - 1) * 1.5rem);
+	}
+	.bible-poetry-line.stanza-break {
+		margin-top: 1rem;
+	}
+	.vn {
+		font-family: var(--font-ui);
+		font-size: 0.65em;
+		font-weight: 600;
+		color: var(--color-accent);
+		margin-right: 0.15em;
+		user-select: none;
+	}
 	.verse-text {
 		font-size: var(--reader-font-size, 17px);
 		line-height: var(--reader-line-height, 1.7);
