@@ -5,7 +5,7 @@
 
 {#if citedCount > 0}
 	<div class="mb-6 flex justify-center">
-		<div class="mode-pill" role="group" aria-label="Mode de lecture">
+		<div class="mode-pill" role="group" aria-label="Basculer les annotations du Catéchisme">
 			<button
 				type="button"
 				class="pill-option"

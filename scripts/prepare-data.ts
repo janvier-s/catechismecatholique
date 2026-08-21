@@ -118,7 +118,8 @@ async function main() {
 		'enchiridion',
 		'pgmr',
 		'pius-x-grand',
-		'pius-x-petit'
+		'pius-x-petit',
+		'trent'
 	]);
 	if (existsSync(OUT)) {
 		// Same wipe strategy whether OUT is a symlink (clear target's

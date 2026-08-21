@@ -33,7 +33,10 @@
 		const m = new SvelteMap<number, string>();
 		if (paragraphs) {
 			for (const block of paragraphs.blocks) {
-				for (const rv of block.verses) m.set(rv.v, rv.html);
+				for (const rv of block.verses) {
+					const prev = m.get(rv.v);
+					m.set(rv.v, prev ? `${prev} ${rv.html}` : rv.html);
+				}
 			}
 		}
 		return m;
@@ -117,7 +120,7 @@
 			</div>
 		{/if}
 
-		{#if totalCited > 0}
+		{#if totalCited > 0 && $prefs.bibleLayout !== 'paragraph'}
 			<ChapterFilterBar bind:studyMode citedCount={totalCited} />
 		{/if}
 
@@ -279,15 +282,20 @@
 		text-underline-offset: 4px;
 		text-decoration-thickness: 1px;
 	}
-	.prose-paragraph :global(.dn),
-	.verse-text :global(.dn) {
+	.verse-text :global(.dn),
+	.bible-prose :global(.dn),
+	.bible-poetry-line :global(.dn) {
 		font-variant: small-caps;
 		letter-spacing: 0.02em;
 	}
-	.verse-text :global(.add) {
+	.verse-text :global(.add),
+	.bible-prose :global(.add),
+	.bible-poetry-line :global(.add) {
 		font-style: italic;
 	}
-	.verse-text :global(.selah) {
+	.verse-text :global(.selah),
+	.bible-prose :global(.selah),
+	.bible-poetry-line :global(.selah) {
 		font-style: italic;
 		color: var(--color-muted);
 	}
