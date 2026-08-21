@@ -174,6 +174,10 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 				if (skipDepth === 0 && !inSuperscription) buf.push('<em class="add">');
 			} else if (openTag === 'qs') {
 				if (skipDepth === 0 && !inSuperscription) buf.push('<span class="selah">');
+			} else if (openTag === 'qt') {
+				if (skipDepth === 0 && !inSuperscription) buf.push('<strong class="qt">');
+			} else if (openTag === 'it') {
+				if (skipDepth === 0 && !inSuperscription) buf.push('<em class="it">');
 			}
 			// All other open tags (<w>, <h>, <toc>, …) are transparent.
 		} else if (closeTag) {
@@ -198,8 +202,10 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 				// across a verse boundary (e.g. Psalm 2:2-3 share one q2 line).
 			} else if (closeTag === 'nd' || closeTag === 'qs') {
 				if (skipDepth === 0 && !inSuperscription) buf.push('</span>');
-			} else if (closeTag === 'add') {
+			} else if (closeTag === 'add' || closeTag === 'it') {
 				if (skipDepth === 0 && !inSuperscription) buf.push('</em>');
+			} else if (closeTag === 'qt') {
+				if (skipDepth === 0 && !inSuperscription) buf.push('</strong>');
 			}
 		} else if (text !== undefined) {
 			if (skipDepth > 0) continue;

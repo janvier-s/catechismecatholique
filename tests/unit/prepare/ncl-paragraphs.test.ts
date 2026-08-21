@@ -122,6 +122,19 @@ describe('parseUSFXParagraphs', () => {
 		);
 	});
 
+	it('wraps <qt> as bold and <it> as italic in the verse html', async () => {
+		const xml = `<usfx>
+			<book id="MAT">
+				<c id="1" />
+				<p style="p"><v id="23" bcv="MAT.1.23" />« <qt><w>Voici</w> <w>Emmanuel</w></qt>, <it>c’est</it>-à-dire.<ve /></p>
+			</book>
+		</usfx>`;
+		const result = await parseUSFXParagraphs(xml);
+		expect(result['MAT']!['1']!.blocks[0]!.verses[0]!.html).toBe(
+			'« <strong class="qt">Voici Emmanuel</strong>, <em class="it">c’est</em>-à-dire.'
+		);
+	});
+
 	it('keeps a verse that arrives before any <p>/<q> opens a block', async () => {
 		const xml = `<usfx>
 			<book id="MAT">

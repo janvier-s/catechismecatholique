@@ -353,6 +353,16 @@
 		font-style: italic;
 		color: var(--color-muted);
 	}
+	.verse-text :global(.qt),
+	.bible-prose :global(.qt),
+	.bible-poetry-line :global(.qt) {
+		font-weight: 700;
+	}
+	.verse-text :global(.it),
+	.bible-prose :global(.it),
+	.bible-poetry-line :global(.it) {
+		font-style: italic;
+	}
 	.verse-cec-count {
 		font-family: var(--font-ui);
 		font-size: 0.75rem;
