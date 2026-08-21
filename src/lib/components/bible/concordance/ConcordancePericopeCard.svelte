@@ -12,6 +12,15 @@
 	function rangeHref(from: number, to: number): string {
 		return from === to ? `/cec/${from}` : `/cec/${from}-${to}`;
 	}
+
+	// Each range opens in its own tab · the ranges are rarely contiguous
+	// across a single URL (e.g. §27-30, §355, §1023-1025), so there's no
+	// single combined page to send the reader to instead.
+	function openAll() {
+		for (const r of pericope.cccRanges) {
+			window.open(rangeHref(r.from, r.to), '_blank', 'noopener,noreferrer');
+		}
+	}
 </script>
 
 <div class="pericope-detail" data-pericope-ref={pericope.verseRef}>
@@ -26,11 +35,26 @@
 
 	<!-- Caption line: N paragraphes du Catéchisme se rapport(e|ent) à ce passage -->
 	{#if cccCount > 0}
-		<div class="font-ui text-xs text-muted {pericope.pericopeTitle ? 'mt-5' : ''} mb-4">
-			<span class="font-semibold text-accent tabular-nums">{cccCount}</span>
-			{pluralFr(cccCount, 'paragraphe')} du Catéchisme {cccCount === 1
-				? 'se rapporte'
-				: 'se rapportent'} à ce passage
+		<div
+			class="flex items-baseline justify-between gap-3 font-ui text-xs text-muted {pericope.pericopeTitle
+				? 'mt-5'
+				: ''} mb-4"
+		>
+			<span>
+				<span class="font-semibold text-accent tabular-nums">{cccCount}</span>
+				{pluralFr(cccCount, 'paragraphe')} du Catéchisme {cccCount === 1
+					? 'se rapporte'
+					: 'se rapportent'} à ce passage
+			</span>
+			{#if pericope.cccRanges.length > 1}
+				<button
+					type="button"
+					class="shrink-0 font-semibold text-accent hover:underline whitespace-nowrap"
+					onclick={openAll}
+				>
+					Voir tous
+				</button>
+			{/if}
 		</div>
 
 		<!-- Plain inline list of paragraph numbers (no chips, no border).

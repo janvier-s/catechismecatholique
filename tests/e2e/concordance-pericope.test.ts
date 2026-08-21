@@ -53,6 +53,32 @@ test.describe('concordance — data-dependent', () => {
 		await cccChip.click();
 		await expect(page).toHaveURL(href!);
 	});
+
+	test('Voir tous opens every cited range in its own tab', async ({ page, context }) => {
+		await page.goto('/bible/genese/3/concordance');
+		await page.waitForLoadState('networkidle');
+		await page.getByRole('button', { name: 'Genèse 3:1-24' }).first().click();
+		// Genèse 3:1-24 cites two ranges: §390 and §394-412.
+		// Exact match — the enclosing pericope card also carries role="button"
+		// and its accessible name (verseRef + count + button text) contains
+		// "Voir tous" as a substring, so a non-exact match would hit it instead.
+		const btn = page.getByRole('button', { name: 'Voir tous', exact: true });
+		await expect(btn).toBeVisible();
+
+		await btn.click();
+		await expect.poll(() => context.pages().length).toBe(3);
+		const newPages = context.pages().slice(1);
+		await Promise.all(newPages.map((p) => p.waitForLoadState()));
+		const urls = newPages.map((p) => new URL(p.url()).pathname).sort();
+		expect(urls).toEqual(['/cec/390', '/cec/394-412'].sort());
+	});
+
+	test('Voir tous is absent for a passage with a single range', async ({ page }) => {
+		await page.goto('/bible/genese/3/concordance');
+		await page.waitForLoadState('networkidle');
+		await page.getByRole('button', { name: 'Genèse 3:19' }).first().click();
+		await expect(page.getByRole('button', { name: 'Voir tous', exact: true })).toHaveCount(0);
+	});
 });
 
 // Negative behaviour: chapters with no concordance entries don't expose
