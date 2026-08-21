@@ -344,7 +344,9 @@
 	line-height: 1.55;
 }
 html[data-justified='true'] .prose-paragraph,
-html[data-justified='true'] .reader-prose p {
+html[data-justified='true'] .reader-prose p,
+html[data-justified='true'] .bible-prose,
+html[data-justified='true'] .verse-text {
 	text-align: justify;
 	hyphens: auto;
 }

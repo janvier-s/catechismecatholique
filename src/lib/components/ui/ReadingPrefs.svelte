@@ -509,19 +509,19 @@
 								</span>
 								<span>Réfs. bibliques en exposant</span>
 							</label>
+							<label class="flex items-center gap-2.5 cursor-pointer">
+								<input
+									type="checkbox"
+									checked={$prefs.hideSourceFootnotes}
+									onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
+									class="prefs-check-input"
+								/>
+								<span class="prefs-check" aria-hidden="true">
+									{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
+								</span>
+								<span>Sources</span>
+							</label>
 						{/if}
-						<label class="flex items-center gap-2.5 cursor-pointer">
-							<input
-								type="checkbox"
-								checked={$prefs.hideSourceFootnotes}
-								onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
-								class="prefs-check-input"
-							/>
-							<span class="prefs-check" aria-hidden="true">
-								{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
-							</span>
-							<span>Sources</span>
-						</label>
 					</div>
 				{/if}
 			{/if}
