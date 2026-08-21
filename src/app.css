@@ -371,17 +371,38 @@ html[data-column-width] .max-w-reader {
 	max-width: var(--reader-col);
 }
 /* Bible reads narrower than CEC/Trent/Compendium at every column-width
-   preset — its own values, not --reader-col above. Selector specificity
-   (0,3,2) beats the generic rule (0,2,1) so this wins regardless of
-   source order. */
+   preset — its own values, not --reader-col above.
+
+   The 600/750/920 are the target width of the actual paragraph text, not
+   of <main>. Verse-by-verse mode puts the verse text inside a flex row
+   alongside a verse-number gutter, and — in study mode, the default — a
+   further citation-count sidebar; both (plus the row's own padding) sit
+   inside <main> and eat into .verse-text's share of it, same problem the
+   CCC en-marge rule below solves for its refs box. So <main> has to be
+   widened by that fixed overhead — measured directly against .verse-text,
+   not derived from the individual gutter/sidebar/padding widths, since
+   those don't quite add up to the true rendered gap (border-box rounding) —
+   for the paragraph itself to land on the target: +36px for verse mode
+   outside study mode, +168px inside it. Paragraph mode has no gutter or
+   sidebar (verse numbers are inline superscripts), so it uses the target
+   width directly. */
 html[data-column-width='narrow'] main[data-corpus='bible'].max-w-reader {
-	max-width: 600px;
+	--bible-col: 600px;
 }
 html[data-column-width='default'] main[data-corpus='bible'].max-w-reader {
-	max-width: 750px;
+	--bible-col: 750px;
 }
 html[data-column-width='wide'] main[data-corpus='bible'].max-w-reader {
-	max-width: 920px;
+	--bible-col: 920px;
+}
+main[data-corpus='bible'][data-bible-layout='paragraph'].max-w-reader {
+	max-width: var(--bible-col);
+}
+main[data-corpus='bible'][data-bible-layout='verse'][data-study-mode='false'].max-w-reader {
+	max-width: calc(var(--bible-col) + 36px);
+}
+main[data-corpus='bible'][data-bible-layout='verse'][data-study-mode='true'].max-w-reader {
+	max-width: calc(var(--bible-col) + 168px);
 }
 /* En-marge mode: widen the container so the refs box sits in the right
    margin, outside the prose column. The article uses padding-right + an

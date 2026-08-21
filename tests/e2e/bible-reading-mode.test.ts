@@ -190,7 +190,13 @@ test('section and subsection headings are centered, in both reading modes', asyn
 test('Bible reader uses its own column widths (600/750/920), not the shared CEC/Trent ones', async ({
 	page
 }) => {
+	// Paragraph mode has no verse-number gutter or citation-count sidebar,
+	// so <main> hits the preset value directly with no compensation —
+	// verse mode's compensated <main> is covered separately below, since
+	// asserting on <main> there would only be testing the compensation
+	// math, not the actual column-width feature.
 	await page.goto('/bible/genese/1');
+	await switchToParagraphMode(page);
 	const main = page.locator('main.max-w-reader');
 
 	const widths: Record<string, string> = {
@@ -203,5 +209,44 @@ test('Bible reader uses its own column widths (600/750/920), not the shared CEC/
 		await dialog.getByRole('button', { name: label }).click();
 		await page.keyboard.press('Escape');
 		await expect(main).toHaveCSS('max-width', px);
+	}
+});
+
+test("the actual verse paragraph matches paragraph mode's width, not a narrower gutter-squeezed one", async ({
+	page
+}) => {
+	// Genesis 1 has cited verses, so the verse-number gutter and (in study
+	// mode, the default) the citation-count sidebar both sit inside
+	// <main>, eating into the space available to .verse-text — <main>
+	// landing on 750px doesn't mean the paragraph itself does. The correct
+	// target is 702px: main's 750px minus the 48px outer page padding
+	// (px-6) every reader on the site has — the same width paragraph
+	// mode's own .bible-prose gets for the same "Standard" setting, not a
+	// further verse-mode-specific penalty on top of it.
+	await page.goto('/bible/genese/1');
+	const verseText = page.locator('.verse-text').first();
+	await expect(verseText).toHaveCSS('width', '702px');
+
+	// Non-study mode drops the citation-count sidebar but keeps the
+	// verse-number gutter — same target, smaller compensation needed.
+	await page.getByRole('button', { name: 'Lecture', exact: true }).click();
+	await expect(verseText).toHaveCSS('width', '702px');
+});
+
+test('the width fix holds at every column-width preset (600/750/920), not just Standard', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	const verseText = page.locator('.verse-text').first();
+
+	const targets: Record<string, string> = {
+		Étroite: '552px', // 600 - 48
+		Large: '872px' // 920 - 48
+	};
+	for (const [label, px] of Object.entries(targets)) {
+		const dialog = await openReadingTab(page);
+		await dialog.getByRole('button', { name: label }).click();
+		await page.keyboard.press('Escape');
+		await expect(verseText).toHaveCSS('width', px);
 	}
 });
