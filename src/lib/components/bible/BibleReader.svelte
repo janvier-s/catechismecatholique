@@ -164,12 +164,14 @@
 							</div>
 						{:else if section.level === 'section'}
 							<h2
-								class="mt-10 mb-4 first:mt-0 font-heading text-[26px] font-semibold text-foreground leading-tight"
+								class="mt-10 mb-4 first:mt-0 font-heading text-[26px] font-semibold text-foreground leading-tight text-center"
 							>
 								{@html section.titleHtml}
 							</h2>
 						{:else}
-							<p class="mt-6 mb-2 font-body text-[15px] italic text-subtle leading-snug">
+							<p
+								class="mt-6 mb-2 font-body text-[15px] italic text-subtle leading-snug text-center"
+							>
 								{@html section.titleHtml}
 							</p>
 						{/if}
@@ -215,13 +217,15 @@
 							</li>
 						{:else if section.level === 'section'}
 							<li class="list-none mt-10 mb-4 first:mt-0">
-								<h2 class="font-heading text-[26px] font-semibold text-foreground leading-tight">
+								<h2
+									class="font-heading text-[26px] font-semibold text-foreground leading-tight text-center"
+								>
 									{@html section.titleHtml}
 								</h2>
 							</li>
 						{:else}
 							<li class="list-none mt-6 mb-2">
-								<p class="font-body text-[15px] italic text-subtle leading-snug">
+								<p class="font-body text-[15px] italic text-subtle leading-snug text-center">
 									{@html section.titleHtml}
 								</p>
 							</li>

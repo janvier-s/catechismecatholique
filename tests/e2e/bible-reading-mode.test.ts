@@ -169,3 +169,20 @@ test('Notes tab shows an empty-state message instead of a dead "Masquer toutes l
 	await expect(dialog.getByText('Masquer toutes les notes')).toHaveCount(0);
 	await expect(dialog.getByText(/ne contient pas de notes/)).toBeVisible();
 });
+
+test('section and subsection headings are centered, in both reading modes', async ({ page }) => {
+	// Genesis 2 has a section-level heading ("Création de l'homme et de la
+	// femme"); Leviticus 27 has a subsection-level one (the numbered outline
+	// notes). Major headings were already centered — section/subsection
+	// weren't.
+	await page.goto('/bible/genese/2');
+	await expect(page.locator('h2').first()).toHaveCSS('text-align', 'center');
+
+	await switchToParagraphMode(page);
+	await page.goto('/bible/genese/2');
+	await expect(page.locator('.bible-paragraphs h2').first()).toHaveCSS('text-align', 'center');
+
+	await page.goto('/bible/levitique/27');
+	const subsection = page.locator('p.italic.text-subtle').first();
+	await expect(subsection).toHaveCSS('text-align', 'center');
+});
