@@ -95,11 +95,31 @@ async function main() {
 	// eviction), preserve the link and clear its target's contents
 	// instead of deleting the link itself.
 	//
-	// Preserve directories whose source isn't part of this repo and that we
-	// commit as a snapshot. Without this, a `prepare-data` run on a machine
-	// missing DIDACHE_SOURCE_DIR wipes the 3000-file concordance and the
-	// build's "using committed snapshot" path has nothing to fall back to.
-	const PRESERVE = new Set(['concordance', 'prieres', 'bon-pasteur', 'vatican-ii']);
+	// Every corpus below has a builder with a three-way branch: rebuild from
+	// source / fall back to the committed snapshot / skip. The snapshot branch
+	// only fires if its output survived this wipe, so any corpus whose source
+	// is optional has to be listed here — otherwise a run on a machine missing
+	// that source deletes the corpus outright and the site 404s across it.
+	const PRESERVE = new Set([
+		'concordance',
+		'prieres',
+		'bon-pasteur',
+		'vatican-ii',
+		'boulanger',
+		'breviloquium',
+		'calendrier',
+		'catecheses-mystagogiques',
+		'catechisme-adultes',
+		'catechisme-illustre',
+		'cdse',
+		'cic',
+		'didache',
+		'discours-catechetique',
+		'enchiridion',
+		'pgmr',
+		'pius-x-grand',
+		'pius-x-petit'
+	]);
 	if (existsSync(OUT)) {
 		// Same wipe strategy whether OUT is a symlink (clear target's
 		// contents) or a real dir (here we used to rmSync the whole dir, but
