@@ -58,6 +58,27 @@
 		return m;
 	});
 
+	/**
+	 * Paragraph mode has no per-verse rows to hang a heading on — headings
+	 * anchor to a block instead. Safe because a heading's startV always
+	 * lands on some block's first verse: confirmed against the source XML
+	 * that none of the Bible's 1,074 headings ever fall inside an
+	 * already-open prose or poetry block, so there's never a block to split.
+	 */
+	const headingsByBlock = $derived.by(() => {
+		const m = new SvelteMap<number, NclSection[]>();
+		if (!paragraphs) return m;
+		const chapterSections = sections.filter((s) => s.ch === chapter);
+		for (const s of chapterSections) {
+			const idx = paragraphs.blocks.findIndex((b) => b.verses[0] && b.verses[0].v >= s.startV);
+			if (idx === -1) continue;
+			const arr = m.get(idx);
+			if (arr) arr.push(s);
+			else m.set(idx, [s]);
+		}
+		return m;
+	});
+
 	let studyMode = $state(true);
 
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
@@ -130,6 +151,29 @@
 					<p class="bible-superscription">{paragraphs.superscription}</p>
 				{/if}
 				{#each paragraphs.blocks as block, i (i)}
+					{@const headingsHere = $prefs.hideBibleHeadings ? [] : (headingsByBlock.get(i) ?? [])}
+					{#each headingsHere as section, si (section.level + ':' + si)}
+						{#if section.level === 'major'}
+							<div class="mt-16 mb-8 first:mt-2">
+								<div class="w-16 h-px bg-accent/70 mx-auto mb-4"></div>
+								<h2
+									class="font-heading text-[34px] font-bold leading-tight tracking-[0.04em] text-foreground text-center"
+								>
+									{section.title}
+								</h2>
+							</div>
+						{:else if section.level === 'section'}
+							<h2
+								class="mt-10 mb-4 first:mt-0 font-heading text-[26px] font-semibold text-foreground leading-tight"
+							>
+								{section.title}
+							</h2>
+						{:else}
+							<p class="mt-6 mb-2 font-body text-[15px] italic text-subtle leading-snug">
+								{section.title}
+							</p>
+						{/if}
+					{/each}
 					{#if block.kind === 'prose'}
 						<p class="bible-prose">
 							{#each block.verses as rv (rv.v)}{#if !$prefs.hideVerseNumbers}<sup

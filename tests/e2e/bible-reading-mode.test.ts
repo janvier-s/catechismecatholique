@@ -95,9 +95,7 @@ test('hide-verse-numbers toggle hides numbers in both reading modes', async ({ p
 	await expect(page.locator('.vn').first()).toBeVisible();
 });
 
-test('hide-section-headings toggle removes headings in verse-by-verse mode only', async ({
-	page
-}) => {
+test('hide-section-headings toggle removes headings in verse-by-verse mode', async ({ page }) => {
 	await page.goto('/bible/genese/2');
 	await expect(page.locator('h2').first()).toBeVisible();
 
@@ -105,6 +103,26 @@ test('hide-section-headings toggle removes headings in verse-by-verse mode only'
 	await dialog.getByRole('button', { name: 'Masquer' }).nth(1).click(); // Titres de section
 	await page.keyboard.press('Escape');
 	await expect(page.locator('h2')).toHaveCount(0);
+});
+
+test('paragraph mode renders section headings, and hide-section-headings removes them there too', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	await switchToParagraphMode(page);
+
+	// Genesis 1 opens with a major heading ("LES ORIGINES") followed by a
+	// section heading ("Création du monde"), both anchored at verse 1 —
+	// verse mode already renders these; paragraph mode must too.
+	await expect(page.locator('.bible-paragraphs h2').first()).toBeVisible();
+	await expect(
+		page.locator('.bible-paragraphs h2', { hasText: 'Création du monde' })
+	).toBeVisible();
+
+	const dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Masquer' }).nth(1).click(); // Titres de section
+	await page.keyboard.press('Escape');
+	await expect(page.locator('.bible-paragraphs h2')).toHaveCount(0);
 });
 
 test('verse-number color toggle switches between accent and subtle in both modes', async ({
