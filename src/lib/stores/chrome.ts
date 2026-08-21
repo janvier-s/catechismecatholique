@@ -23,6 +23,10 @@ export function initialChromeState(y = 0): ChromeScrollState {
 /**
  * Pure reducer mapping an absolute scroll position onto the next bar state.
  * Kept free of DOM access so the behaviour can be unit-tested directly.
+ *
+ * The comparison is always against the last decision anchor and a cumulative
+ * upward total, never a frame-to-frame delta. That is what stops small scroll
+ * jitter from flickering the bars.
  */
 export function nextChromeState(state: ChromeScrollState, rawY: number): ChromeScrollState {
 	// iOS rubber-banding reports negative positions past the top of the document.
@@ -48,7 +52,7 @@ let frame = 0;
 let publish: ((hidden: boolean) => void) | null = null;
 
 /** Sources currently forcing the bars to stay put, keyed so overlapping
- *  suspenders (study panel + a dropdown) cannot untoggle each other. */
+ *  suspenders (the prefs popover + the nav drawer) cannot untoggle each other. */
 const suspenders = new Set<string>();
 
 function currentY(): number {
@@ -71,10 +75,7 @@ function onScroll() {
 	});
 }
 
-/**
- * True when the mobile bars should be translated out of view. Consumers must
- * still gate on their own breakpoint; this store tracks scrolling only.
- */
+/** True when the bars should be translated out of view. */
 export const chromeHidden = readable(false, (set) => {
 	publish = set;
 	if (!browser) return;
@@ -94,9 +95,8 @@ export const chromeHidden = readable(false, (set) => {
 
 /**
  * Hold the bars in view while `key` is active. Used by overlays that anchor to
- * `--header-height` (the mobile study panel, the prefs panel, the nav and
- * translation dropdowns), which would otherwise hang over a gap once the
- * header transformed away.
+ * `--topbar-height` (the prefs popover, the nav drawer), which would otherwise
+ * hang over a gap once the header transformed away.
  */
 export function suspendChrome(key: string, active: boolean) {
 	if (active) suspenders.add(key);
