@@ -74,43 +74,14 @@
 
 		<div class="flex-1"></div>
 
-		<nav
-			class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none relative z-[1]"
-			aria-label="Navigation principale"
-		>
-			<a href="/cec" class="hover:text-accent">Catéchisme</a>
-			<a href="/bible" class="hover:text-accent">Bible</a>
-			<a href="/bibliotheque" class="hover:text-accent">Bibliothèque</a>
-		</nav>
-		<a
-			href="/recherche"
-			class="md:hidden inline-flex items-center justify-center w-10 h-10 text-foreground hover:text-accent"
-			aria-label="Ouvrir la recherche"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.75"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="w-[18px] h-[18px]"
-				aria-hidden="true"
-			>
-				<circle cx="11" cy="11" r="7" />
-				<path d="m21 21-4.3-4.3" />
-			</svg>
-		</a>
-		<ModeToggle />
-		<NavDrawer />
-
 		{#if !onRecherche}
-			<!-- Search is absolutely positioned so it stays centered on the
-			     page (left: 50%) regardless of how wide the logo or nav side
-			     groups grow. Only renders at lg+ where there's room. -->
+			<!-- Search sits between the two flexible spacers, so it reads as
+			     centered when the row has room and gives ground to the nav
+			     when it doesn't · it used to be absolutely centered on the
+			     viewport, which put it under the nav around 1200px. Only
+			     renders at lg+ where there's room at all. -->
 			<form
-				class="hidden lg:block absolute left-1/2 -translate-x-1/2 w-full max-w-[460px]"
+				class="hidden lg:block w-[460px] min-w-0"
 				onsubmit={(e) => {
 					e.preventDefault();
 					topbarSuggestOpen = false;
@@ -134,7 +105,7 @@
 						stroke-width="2"
 						stroke-linecap="round"
 						stroke-linejoin="round"
-						class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] h-[16px] text-muted pointer-events-none"
+						class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted"
 						aria-hidden="true"
 					>
 						<circle cx="11" cy="11" r="7" />
@@ -176,6 +147,39 @@
 				</div>
 			</form>
 		{/if}
+
+		<div class="flex-1"></div>
+
+		<nav
+			class="hidden md:flex items-center gap-6 font-ui text-sm font-semibold flex-none relative z-[1]"
+			aria-label="Navigation principale"
+		>
+			<a href="/cec" class="hover:text-accent">Catéchisme</a>
+			<a href="/bible" class="hover:text-accent">Bible</a>
+			<a href="/bibliotheque" class="hover:text-accent">Bibliothèque</a>
+		</nav>
+		<a
+			href="/recherche"
+			class="md:hidden inline-flex items-center justify-center w-10 h-10 text-foreground hover:text-accent"
+			aria-label="Ouvrir la recherche"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.75"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="w-[18px] h-[18px]"
+				aria-hidden="true"
+			>
+				<circle cx="11" cy="11" r="7" />
+				<path d="m21 21-4.3-4.3" />
+			</svg>
+		</a>
+		<ModeToggle />
+		<NavDrawer />
 	</div>
 </header>
 

@@ -59,10 +59,7 @@
 		</div>
 
 		{#if pericope.cccRanges.length > 1}
-			<a
-				href={allHref}
-				class="mt-5 inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/5 px-3.5 py-1.5 font-ui text-[13px] font-semibold text-accent transition-colors hover:bg-accent/10 hover:border-accent/50"
-			>
+			<a href={allHref} class="see-all">
 				Voir tous
 				<span aria-hidden="true">→</span>
 			</a>
@@ -73,3 +70,28 @@
 		</p>
 	{/if}
 </div>
+
+<style>
+	/* Shaped after .cta-primary on the /cec landing page · same 6px radius and
+	   solid accent fill, one size down. A pale outline read as an empty chip
+	   next to the paragraph links rather than the action that gathers them. */
+	.see-all {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin-top: 1.25rem;
+		padding: 0.5rem 0.9rem;
+		border-radius: 6px;
+		background: var(--color-accent);
+		color: #fff;
+		font-family: var(--font-ui);
+		font-size: 0.8125rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: background 150ms ease;
+	}
+	.see-all:hover,
+	.see-all:focus-visible {
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
+	}
+</style>
