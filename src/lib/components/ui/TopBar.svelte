@@ -49,9 +49,7 @@
 	class="topbar border-b border-border bg-background sticky top-0 z-[var(--z-modal)]"
 	class:is-condensed={condensed}
 >
-	<div
-		class="relative px-4 md:px-6 py-2 flex items-center gap-3 md:gap-6 min-h-[48px] md:min-h-[52px]"
-	>
+	<div class="relative px-4 md:px-6 h-[47px] md:h-[51px] flex items-center gap-3 md:gap-6">
 		<a
 			href="/"
 			class="flex items-center gap-3 flex-none"
@@ -106,7 +104,7 @@
 						type="search"
 						name="q"
 						placeholder="Rechercher : Eucharistie ou 1324-1327"
-						class="search-input w-full h-10 pl-10 pr-3 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-border focus:border-transparent"
+						class="search-input w-full h-9 pl-10 pr-3 rounded-md border border-border bg-panel text-foreground font-ui text-sm focus:outline-none focus:ring-2 focus:ring-border focus:border-transparent"
 						role="combobox"
 						aria-label="Recherche"
 						aria-autocomplete="list"

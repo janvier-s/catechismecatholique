@@ -308,6 +308,8 @@ test('--topbar-height has a single source of truth that matches the rendered bar
 	expect(declared).toBe('52px');
 
 	// No inline override left on <html> from the old imperative sync.
-	const inline = await page.evaluate(() => document.documentElement.style.getPropertyValue('--topbar-height'));
+	const inline = await page.evaluate(() =>
+		document.documentElement.style.getPropertyValue('--topbar-height')
+	);
 	expect(inline).toBe('');
 });
