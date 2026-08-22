@@ -1,9 +1,19 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { suspendChrome } from '$lib/stores/chrome';
 	import { cubicOut } from 'svelte/easing';
 	import ReadingPrefs from './ReadingPrefs.svelte';
 
 	let open = $state(false);
+
+	// The overlay anchors to the header, so the header must not slide away
+	// underneath it while it is open. The cleanup matters: this component
+	// unmounts on navigation, and a suspender left in the Set would freeze
+	// the bars permanently.
+	$effect(() => {
+		suspendChrome('prefs', open);
+		return () => suspendChrome('prefs', false);
+	});
 	let triggerEl: HTMLButtonElement | undefined = $state();
 	let popoverEl: HTMLElement | undefined = $state();
 

@@ -3,20 +3,29 @@
 	import BookNavLink from './BookNavLink.svelte';
 	import ChapterNavLink from './ChapterNavLink.svelte';
 	import FloatingNav from './FloatingNav.svelte';
+	import ChapterFilterBar from './ChapterFilterBar.svelte';
+	import { prefs, updatePref } from '$lib/stores/prefs';
 
 	let {
 		book,
 		chapter,
 		totalChapters,
 		chapterCounts = {},
+		citedVerseCount = 0,
 		variant = 'reader'
 	}: {
 		book: BookInfo;
 		chapter: number;
 		totalChapters: number;
 		chapterCounts?: Record<string, number>;
+		citedVerseCount?: number;
 		variant?: 'reader' | 'concordance';
 	} = $props();
+
+	// Paragraph mode renders no citation sidebar, and a chapter with no
+	// citations has nothing to annotate. Disable rather than hide, so the nav
+	// row keeps the same contents while paging between chapters.
+	const toggleDisabled = $derived(citedVerseCount === 0 || $prefs.bibleLayout === 'paragraph');
 
 	function buildHref(slug: string, ch: number): string {
 		return variant === 'concordance' ? `/bible/${slug}/${ch}/concordance` : `/bible/${slug}/${ch}`;
@@ -104,7 +113,7 @@
 	</header>
 {:else}
 	<div
-		class="sticky top-[var(--topbar-height,80px)] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-4 flex items-center gap-[10px] font-ui"
+		class="bible-chapter-nav sticky top-[var(--topbar-height,52px)] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-4 flex items-center gap-[10px] font-ui"
 		style="height: 50px;"
 	>
 		<div
@@ -162,6 +171,14 @@
 				{/if}
 			</div>
 		</div>
+
+		<div class="ml-auto shrink-0">
+			<ChapterFilterBar
+				studyMode={$prefs.bibleStudyMode}
+				disabled={toggleDisabled}
+				onchange={(next) => updatePref('bibleStudyMode', next)}
+			/>
+		</div>
 	</div>
 {/if}
 
@@ -172,7 +189,7 @@
 		{chapterCounts}
 		{buildHref}
 		onClose={() => (navOpen = false)}
-		topOffset="130px"
+		topOffset="calc(var(--topbar-height, 52px) + 50px)"
 	/>
 	<div
 		class="fixed inset-0 z-[var(--z-overlay)]"

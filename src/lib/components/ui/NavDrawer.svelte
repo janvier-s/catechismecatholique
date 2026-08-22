@@ -1,10 +1,20 @@
 <script lang="ts">
 	import { fade, fly, slide } from 'svelte/transition';
+	import { suspendChrome } from '$lib/stores/chrome';
 	import { cubicOut } from 'svelte/easing';
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 
 	let open = $state(false);
+
+	// The overlay anchors to the header, so the header must not slide away
+	// underneath it while it is open. The cleanup matters: this component
+	// unmounts on navigation, and a suspender left in the Set would freeze
+	// the bars permanently.
+	$effect(() => {
+		suspendChrome('navdrawer', open);
+		return () => suspendChrome('navdrawer', false);
+	});
 	let triggerEl: HTMLButtonElement | undefined = $state();
 	let panelEl: HTMLElement | undefined = $state();
 
@@ -379,7 +389,7 @@
 	   from `color-mix` on `--color-fg`. */
 	.backdrop {
 		position: fixed;
-		inset: var(--topbar-height, 80px) 0 0 0;
+		inset: var(--topbar-height, 52px) 0 0 0;
 		background: rgba(0, 0, 0, 0.42);
 		backdrop-filter: blur(2px);
 		z-index: calc(var(--z-modal) - 1);
@@ -391,7 +401,7 @@
 	   Anchored just below the topbar so the bar stays visible. */
 	.drawer {
 		position: fixed;
-		top: var(--topbar-height, 80px);
+		top: var(--topbar-height, 52px);
 		right: 0;
 		bottom: 0;
 		width: min(380px, 100vw);

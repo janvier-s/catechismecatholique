@@ -282,3 +282,152 @@ test('section headings are hidden by default, in both reading modes', async ({ p
 	await switchToParagraphMode(page);
 	await expect(page.locator('.bible-paragraphs h2')).toHaveCount(0);
 });
+
+test('TopBar is slim and the chapter nav sits flush beneath it', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+
+	const topbar = page.locator('header.topbar');
+	await expect(topbar).toHaveCSS('height', '52px');
+
+	// The chapter nav is sticky at --topbar-height. If the variable and the
+	// real bar height ever disagree, the two overlap or leave a gap.
+	const topbarBox = await topbar.boundingBox();
+	const navBox = await page.locator('.bible-chapter-nav').boundingBox();
+	expect(topbarBox).not.toBeNull();
+	expect(navBox).not.toBeNull();
+	expect(navBox!.y).toBeCloseTo(topbarBox!.y + topbarBox!.height, 0);
+});
+
+test('--topbar-height has a single source of truth that matches the rendered bar', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	const declared = await page.evaluate(() =>
+		getComputedStyle(document.documentElement).getPropertyValue('--topbar-height').trim()
+	);
+	expect(declared).toBe('52px');
+
+	// No inline override left on <html> from the old imperative sync.
+	const inline = await page.evaluate(() =>
+		document.documentElement.style.getPropertyValue('--topbar-height')
+	);
+	expect(inline).toBe('');
+});
+
+test('chapter header shows a book eyebrow and is left-aligned', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+
+	// The eyebrow carries the book name. Uppercasing is presentational, so the
+	// accessible text stays in normal case.
+	const eyebrow = page.locator('.chapter-eyebrow');
+	await expect(eyebrow).toHaveText('Genèse');
+	await expect(eyebrow).toHaveCSS('text-transform', 'uppercase');
+
+	// Header block is flush left, unlike the section headings inside the
+	// chapter, which stay centered by an earlier deliberate decision.
+	// "start" is the initial value and resolves to left in LTR; the point is
+	// that the old text-center is gone. The x-offset check below proves it.
+	await expect(page.locator('h1')).toHaveCSS('text-align', /^(left|start)$/);
+
+	const h1Box = await page.locator('h1').boundingBox();
+	const eyebrowBox = await eyebrow.boundingBox();
+	expect(h1Box!.x).toBeCloseTo(eyebrowBox!.x, 0);
+});
+
+test('Lecture/Étude lives in the chapter nav row and persists across navigation', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+
+	const toggle = page.locator('.bible-chapter-nav .mode-pill');
+	await expect(toggle).toBeVisible();
+
+	await toggle.getByRole('button', { name: 'Lecture' }).click();
+	const stored = await page.evaluate(() =>
+		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
+	);
+	expect(stored.bibleStudyMode).toBe(false);
+
+	// Survives a chapter navigation, unlike the old per-chapter local state.
+	await page.goto('/bible/genese/2');
+	await expect(page.locator('main[data-corpus="bible"]')).toHaveAttribute(
+		'data-study-mode',
+		'false'
+	);
+
+	await page.reload();
+	await expect(page.locator('main[data-corpus="bible"]')).toHaveAttribute(
+		'data-study-mode',
+		'false'
+	);
+});
+
+test('the toggle is disabled rather than removed when a chapter has no citations', async ({
+	page
+}) => {
+	// Nombres 2 has no Catechism citations (30 of Numbers' 36 chapters have
+	// none). If it ever gains one, Nombres 3, 4, 5, 6 and 8 are also empty.
+	await page.goto('/bible/nombres/2');
+	const toggle = page.locator('.bible-chapter-nav .mode-pill');
+	await expect(toggle).toBeVisible();
+	await expect(toggle.getByRole('button', { name: 'Étude' })).toBeDisabled();
+});
+
+test('the toggle is disabled in paragraph mode, where there is no citation sidebar', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	await switchToParagraphMode(page);
+	const toggle = page.locator('.bible-chapter-nav .mode-pill');
+	await expect(toggle).toBeVisible();
+	await expect(toggle.getByRole('button', { name: 'Étude' })).toBeDisabled();
+});
+
+test('the in-page filter bar above the text is gone', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await expect(page.locator('main .mode-pill')).toHaveCount(0);
+});
+
+test('both bars hide on scroll down and return on scroll up', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	const topbar = page.locator('header.topbar');
+	const nav = page.locator('.bible-chapter-nav');
+
+	const topAtRest = (await topbar.boundingBox())!.y;
+
+	// Past HIDE_AFTER (100px), scrolling down hides both.
+	await page.evaluate(() => window.scrollTo(0, 600));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+	await expect.poll(async () => (await topbar.boundingBox())!.y).toBeLessThan(topAtRest);
+	expect((await nav.boundingBox())!.y).toBeLessThan(topAtRest);
+
+	// A short scroll up is not enough: REVEAL_AFTER_UP is 120px cumulative.
+	await page.evaluate(() => window.scrollTo(0, 550));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+
+	// Crossing the threshold brings them back.
+	await page.evaluate(() => window.scrollTo(0, 470));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
+	await expect.poll(async () => (await topbar.boundingBox())!.y).toBe(topAtRest);
+});
+
+test('the bars stay put while the reading-options popover is open', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+
+	// Open the popover while the bars are still visible. A hidden bar is
+	// translated off-screen, so its trigger is genuinely unclickable then;
+	// the suspender exists to keep an *already open* panel anchored.
+	await page.getByRole('button', { name: 'Options de lecture' }).click();
+	await expect(page.getByRole('dialog', { name: 'Options de lecture' })).toBeVisible();
+
+	// Scrolling well past HIDE_AFTER must not tuck the header away and leave
+	// the panel hanging over a gap.
+	await page.evaluate(() => window.scrollTo(0, 1200));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
+
+	// Once it closes, normal hide-on-scroll resumes.
+	await page.keyboard.press('Escape');
+	await page.evaluate(() => window.scrollTo(0, 400));
+	await page.evaluate(() => window.scrollTo(0, 1400));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+});

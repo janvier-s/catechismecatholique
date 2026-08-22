@@ -505,7 +505,7 @@
 	<div
 		bind:this={sheetEl}
 		class="lg:hidden fixed inset-x-0 bottom-0 z-[var(--z-modal)] bg-panel border-t border-border flex flex-col"
-		style="top: var(--topbar-height, 58px); max-height: calc(100dvh - var(--topbar-height, 58px));"
+		style="top: var(--topbar-height, 52px); max-height: calc(100dvh - var(--topbar-height, 52px));"
 		role="dialog"
 		aria-modal="true"
 		aria-label="Panneau d'étude"
@@ -529,7 +529,7 @@
 
 	<!-- Desktop: sticky right rail with resize handle. -->
 	<div
-		class="hidden lg:flex sticky top-[80px] h-[calc(100vh-80px)] flex-none z-20"
+		class="hidden lg:flex sticky top-[var(--topbar-height,52px)] h-[calc(100vh-var(--topbar-height,52px))] flex-none z-20"
 		transition:fly={{ x: 20, duration: 180 }}
 	>
 		<PanelShell onClose={closePanel}>

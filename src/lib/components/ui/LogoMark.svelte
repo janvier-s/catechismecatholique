@@ -6,16 +6,16 @@
 		src="/img/logo/logo-64.webp"
 		srcset="/img/logo/logo-64.webp 1x, /img/logo/logo-128.webp 2x"
 		alt="Catéchisme de l'Église Catholique"
-		width="56"
-		height="56"
+		width="36"
+		height="36"
 		class="logo-light block"
 	/>
 	<img
 		src="/img/logo/logo-dark-64.webp"
 		srcset="/img/logo/logo-dark-64.webp 1x, /img/logo/logo-dark-128.webp 2x"
 		alt="Catéchisme de l'Église Catholique"
-		width="56"
-		height="56"
+		width="36"
+		height="36"
 		class="logo-dark block"
 	/>
 </span>
@@ -29,16 +29,16 @@
 		width: 100%;
 		height: 100%;
 	}
-	/* Default mark size · desktop 56 px, mobile 38 px. The shrink-on-scroll
-	   topbar overrides this to 30 px when condensed. */
+	/* Default mark size · desktop 36 px, mobile 32 px, each sized so the mark
+	   plus the topbar's py-2 (16 px total) lands exactly on --topbar-height. */
 	.logo-mark {
-		width: 38px;
-		height: 38px;
+		width: 32px;
+		height: 32px;
 	}
 	@media (min-width: 768px) {
 		.logo-mark {
-			width: 56px;
-			height: 56px;
+			width: 36px;
+			height: 36px;
 		}
 	}
 </style>
