@@ -313,3 +313,23 @@ test('--topbar-height has a single source of truth that matches the rendered bar
 	);
 	expect(inline).toBe('');
 });
+
+test('chapter header shows a book eyebrow and is left-aligned', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+
+	// The eyebrow carries the book name. Uppercasing is presentational, so the
+	// accessible text stays in normal case.
+	const eyebrow = page.locator('.chapter-eyebrow');
+	await expect(eyebrow).toHaveText('Genèse');
+	await expect(eyebrow).toHaveCSS('text-transform', 'uppercase');
+
+	// Header block is flush left, unlike the section headings inside the
+	// chapter, which stay centered by an earlier deliberate decision.
+	// "start" is the initial value and resolves to left in LTR; the point is
+	// that the old text-center is gone. The x-offset check below proves it.
+	await expect(page.locator('h1')).toHaveCSS('text-align', /^(left|start)$/);
+
+	const h1Box = await page.locator('h1').boundingBox();
+	const eyebrowBox = await eyebrow.boundingBox();
+	expect(h1Box!.x).toBeCloseTo(eyebrowBox!.x, 0);
+});

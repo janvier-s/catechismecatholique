@@ -128,11 +128,14 @@
 	data-study-mode={studyMode}
 >
 	<article>
-		<header class="mb-10 text-center">
+		<header class="mb-10">
+			<p class="chapter-eyebrow font-ui text-[11px] uppercase tracking-[0.3em] text-subtle mb-2">
+				{book.frenchName}
+			</p>
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">
 				Chapitre {chapter}
 			</h1>
-			<div class="w-10 h-px bg-accent opacity-70 mx-auto"></div>
+			<div class="w-10 h-px bg-accent opacity-70"></div>
 		</header>
 
 		{#if hasConcordance}
