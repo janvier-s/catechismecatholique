@@ -387,3 +387,47 @@ test('the in-page filter bar above the text is gone', async ({ page }) => {
 	await page.goto('/bible/genese/1');
 	await expect(page.locator('main .mode-pill')).toHaveCount(0);
 });
+
+test('both bars hide on scroll down and return on scroll up', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	const topbar = page.locator('header.topbar');
+	const nav = page.locator('.bible-chapter-nav');
+
+	const topAtRest = (await topbar.boundingBox())!.y;
+
+	// Past HIDE_AFTER (100px), scrolling down hides both.
+	await page.evaluate(() => window.scrollTo(0, 600));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+	await expect.poll(async () => (await topbar.boundingBox())!.y).toBeLessThan(topAtRest);
+	expect((await nav.boundingBox())!.y).toBeLessThan(topAtRest);
+
+	// A short scroll up is not enough: REVEAL_AFTER_UP is 120px cumulative.
+	await page.evaluate(() => window.scrollTo(0, 550));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+
+	// Crossing the threshold brings them back.
+	await page.evaluate(() => window.scrollTo(0, 470));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
+	await expect.poll(async () => (await topbar.boundingBox())!.y).toBe(topAtRest);
+});
+
+test('the bars stay put while the reading-options popover is open', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+
+	// Open the popover while the bars are still visible. A hidden bar is
+	// translated off-screen, so its trigger is genuinely unclickable then;
+	// the suspender exists to keep an *already open* panel anchored.
+	await page.getByRole('button', { name: 'Options de lecture' }).click();
+	await expect(page.getByRole('dialog', { name: 'Options de lecture' })).toBeVisible();
+
+	// Scrolling well past HIDE_AFTER must not tuck the header away and leave
+	// the panel hanging over a gap.
+	await page.evaluate(() => window.scrollTo(0, 1200));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
+
+	// Once it closes, normal hide-on-scroll resumes.
+	await page.keyboard.press('Escape');
+	await page.evaluate(() => window.scrollTo(0, 400));
+	await page.evaluate(() => window.scrollTo(0, 1400));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+});

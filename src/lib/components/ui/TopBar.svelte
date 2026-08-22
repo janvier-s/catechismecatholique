@@ -4,7 +4,8 @@
 	import ModeToggle from './ModeToggle.svelte';
 	import NavDrawer from './NavDrawer.svelte';
 	import SearchSuggest from './SearchSuggest.svelte';
-	import { goto } from '$app/navigation';
+	import { goto, afterNavigate } from '$app/navigation';
+	import { chromeHidden, revealChrome } from '$lib/stores/chrome';
 	import { page } from '$app/state';
 	import { detectIntent } from '$lib/utils/searchIntent';
 
@@ -29,26 +30,20 @@
 		});
 	}
 
-	// Shrink-on-scroll (mobile only · desktop topbar stays as-is). The
-	// .is-condensed class trims the bar height from 58 → 44 px once the user
-	// has scrolled past ~40 px, recovering reading area in long catechism
-	// chapters. CSS handles the transition.
-	let condensed = $state(false);
+	// Reveal-on-scroll · the reducer lives in $lib/stores/chrome so its
+	// behaviour is unit-tested without a DOM. Here we only mirror it onto
+	// <html>, the same way prefs.ts publishes data-theme and friends, and let
+	// CSS do the moving. This replaces the old mobile-only shrink-on-scroll.
 	$effect(() => {
-		if (typeof window === 'undefined') return;
-		const onScroll = () => {
-			condensed = window.scrollY > 40;
-		};
-		onScroll();
-		window.addEventListener('scroll', onScroll, { passive: true });
-		return () => window.removeEventListener('scroll', onScroll);
+		if (typeof document === 'undefined') return;
+		document.documentElement.dataset.chromeHidden = String($chromeHidden);
 	});
+
+	// A new page should never open with its header already tucked away.
+	afterNavigate(() => revealChrome());
 </script>
 
-<header
-	class="topbar border-b border-border bg-background sticky top-0 z-[var(--z-modal)]"
-	class:is-condensed={condensed}
->
+<header class="topbar border-b border-border bg-background sticky top-0 z-[var(--z-modal)]">
 	<div class="relative px-4 md:px-6 h-[47px] md:h-[51px] flex items-center gap-3 md:gap-6">
 		<a
 			href="/"
@@ -172,34 +167,6 @@
 </header>
 
 <style>
-	@media (max-width: 767px) {
-		.topbar > div {
-			transition:
-				min-height 200ms cubic-bezier(0.22, 1, 0.36, 1),
-				padding 200ms cubic-bezier(0.22, 1, 0.36, 1);
-		}
-		.topbar :global(.logo-mark) {
-			transition:
-				width 200ms cubic-bezier(0.22, 1, 0.36, 1),
-				height 200ms cubic-bezier(0.22, 1, 0.36, 1);
-		}
-		/* Condensed state · shrinks the bar but keeps the logo a clear tap target. */
-		.topbar.is-condensed > div {
-			min-height: 40px !important;
-			padding-top: 0.2rem;
-			padding-bottom: 0.2rem;
-		}
-		.topbar.is-condensed :global(.logo-mark) {
-			width: 28px !important;
-			height: 28px !important;
-		}
-	}
-	@media (prefers-reduced-motion: reduce) {
-		.topbar > div,
-		.topbar :global(.logo-mark) {
-			transition: none;
-		}
-	}
 	.topbar-suggest {
 		position: absolute;
 		top: calc(100% + 4px);

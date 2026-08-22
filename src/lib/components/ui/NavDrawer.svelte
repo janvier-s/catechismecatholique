@@ -1,10 +1,20 @@
 <script lang="ts">
 	import { fade, fly, slide } from 'svelte/transition';
+	import { suspendChrome } from '$lib/stores/chrome';
 	import { cubicOut } from 'svelte/easing';
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 
 	let open = $state(false);
+
+	// The overlay anchors to the header, so the header must not slide away
+	// underneath it while it is open. The cleanup matters: this component
+	// unmounts on navigation, and a suspender left in the Set would freeze
+	// the bars permanently.
+	$effect(() => {
+		suspendChrome('navdrawer', open);
+		return () => suspendChrome('navdrawer', false);
+	});
 	let triggerEl: HTMLButtonElement | undefined = $state();
 	let panelEl: HTMLElement | undefined = $state();
 
