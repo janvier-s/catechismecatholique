@@ -1,5 +1,4 @@
 <script lang="ts">
-	import ChapterFilterBar from './ChapterFilterBar.svelte';
 	import ChapterNavBar from './ChapterNavBar.svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import type { BibleVerseIndex, NclChapterBlocks, NclSection } from '$lib/data/types';
@@ -79,7 +78,10 @@
 		return m;
 	});
 
-	let studyMode = $state(true);
+	// Follows the pref alone. Citation count affects only whether the control
+	// is disabled, never the layout attribute, because data-study-mode drives
+	// the column-width compensation in app.css.
+	const studyMode = $derived($prefs.bibleStudyMode);
 
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
 	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
@@ -119,7 +121,14 @@
 </script>
 
 <!-- Chapter navigation bar · sticky below the global TopBar (80px). -->
-<ChapterNavBar {book} {chapter} {totalChapters} {chapterCounts} variant="reader" />
+<ChapterNavBar
+	{book}
+	{chapter}
+	{totalChapters}
+	{chapterCounts}
+	citedVerseCount={totalCited}
+	variant="reader"
+/>
 
 <main
 	class="mx-auto max-w-reader px-6 max-md:px-4 pt-8 max-md:pt-5 pb-16"
@@ -147,10 +156,6 @@
 					Voir la concordance →
 				</a>
 			</div>
-		{/if}
-
-		{#if totalCited > 0 && $prefs.bibleLayout !== 'paragraph'}
-			<ChapterFilterBar bind:studyMode citedCount={totalCited} />
 		{/if}
 
 		{#if $prefs.bibleLayout === 'paragraph' && paragraphs}

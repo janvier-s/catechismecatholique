@@ -333,3 +333,57 @@ test('chapter header shows a book eyebrow and is left-aligned', async ({ page })
 	const eyebrowBox = await eyebrow.boundingBox();
 	expect(h1Box!.x).toBeCloseTo(eyebrowBox!.x, 0);
 });
+
+test('Lecture/Étude lives in the chapter nav row and persists across navigation', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+
+	const toggle = page.locator('.bible-chapter-nav .mode-pill');
+	await expect(toggle).toBeVisible();
+
+	await toggle.getByRole('button', { name: 'Lecture' }).click();
+	const stored = await page.evaluate(() =>
+		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
+	);
+	expect(stored.bibleStudyMode).toBe(false);
+
+	// Survives a chapter navigation, unlike the old per-chapter local state.
+	await page.goto('/bible/genese/2');
+	await expect(page.locator('main[data-corpus="bible"]')).toHaveAttribute(
+		'data-study-mode',
+		'false'
+	);
+
+	await page.reload();
+	await expect(page.locator('main[data-corpus="bible"]')).toHaveAttribute(
+		'data-study-mode',
+		'false'
+	);
+});
+
+test('the toggle is disabled rather than removed when a chapter has no citations', async ({
+	page
+}) => {
+	// Nombres 2 has no Catechism citations (30 of Numbers' 36 chapters have
+	// none). If it ever gains one, Nombres 3, 4, 5, 6 and 8 are also empty.
+	await page.goto('/bible/nombres/2');
+	const toggle = page.locator('.bible-chapter-nav .mode-pill');
+	await expect(toggle).toBeVisible();
+	await expect(toggle.getByRole('button', { name: 'Étude' })).toBeDisabled();
+});
+
+test('the toggle is disabled in paragraph mode, where there is no citation sidebar', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	await switchToParagraphMode(page);
+	const toggle = page.locator('.bible-chapter-nav .mode-pill');
+	await expect(toggle).toBeVisible();
+	await expect(toggle.getByRole('button', { name: 'Étude' })).toBeDisabled();
+});
+
+test('the in-page filter bar above the text is gone', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await expect(page.locator('main .mode-pill')).toHaveCount(0);
+});

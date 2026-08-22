@@ -3,20 +3,29 @@
 	import BookNavLink from './BookNavLink.svelte';
 	import ChapterNavLink from './ChapterNavLink.svelte';
 	import FloatingNav from './FloatingNav.svelte';
+	import ChapterFilterBar from './ChapterFilterBar.svelte';
+	import { prefs, updatePref } from '$lib/stores/prefs';
 
 	let {
 		book,
 		chapter,
 		totalChapters,
 		chapterCounts = {},
+		citedVerseCount = 0,
 		variant = 'reader'
 	}: {
 		book: BookInfo;
 		chapter: number;
 		totalChapters: number;
 		chapterCounts?: Record<string, number>;
+		citedVerseCount?: number;
 		variant?: 'reader' | 'concordance';
 	} = $props();
+
+	// Paragraph mode renders no citation sidebar, and a chapter with no
+	// citations has nothing to annotate. Disable rather than hide, so the nav
+	// row keeps the same contents while paging between chapters.
+	const toggleDisabled = $derived(citedVerseCount === 0 || $prefs.bibleLayout === 'paragraph');
 
 	function buildHref(slug: string, ch: number): string {
 		return variant === 'concordance' ? `/bible/${slug}/${ch}/concordance` : `/bible/${slug}/${ch}`;
@@ -161,6 +170,14 @@
 					<div class="w-[15px]" aria-hidden="true"></div>
 				{/if}
 			</div>
+		</div>
+
+		<div class="ml-auto shrink-0">
+			<ChapterFilterBar
+				studyMode={$prefs.bibleStudyMode}
+				disabled={toggleDisabled}
+				onchange={(next) => updatePref('bibleStudyMode', next)}
+			/>
 		</div>
 	</div>
 {/if}
