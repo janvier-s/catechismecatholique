@@ -124,16 +124,30 @@
 	font-display: swap;
 }
 @font-face {
-	font-family: 'Montserrat';
-	src: url('/fonts/Montserrat-Regular-latin.woff2') format('woff2');
-	font-weight: 400 700;
+	font-family: 'Proxima Nova';
+	src: url('/fonts/ProximaNova-Regular.woff2') format('woff2');
+	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: 'Montserrat';
-	src: url('/fonts/Montserrat-Italic-latin.woff2') format('woff2');
-	font-weight: 400 700;
+	font-family: 'Proxima Nova';
+	src: url('/fonts/ProximaNova-Italic.woff2') format('woff2');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Proxima Nova';
+	src: url('/fonts/ProximaNova-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Proxima Nova';
+	src: url('/fonts/ProximaNova-BoldItalic.woff2') format('woff2');
+	font-weight: 700;
 	font-style: italic;
 	font-display: swap;
 }

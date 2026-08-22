@@ -24,9 +24,9 @@ export const FONTS: FontDef[] = [
 		dividerBefore: true
 	},
 	{
-		id: 'montserrat',
-		label: 'Montserrat',
-		stack: "'Montserrat', sans-serif"
+		id: 'proxima-nova',
+		label: 'Proxima Nova',
+		stack: "'Proxima Nova', sans-serif"
 	},
 	{
 		id: 'noto-sans',
@@ -41,7 +41,7 @@ export const DYSLEXIA_FONT: FontDef = {
 	stack: "'Grace Dyslexic MD', sans-serif"
 };
 
-export const DEFAULT_FONT_ID = 'libre-baskerville';
+export const DEFAULT_FONT_ID = 'proxima-nova';
 
 export function getFontById(id: string): FontDef | undefined {
 	if (id === DYSLEXIA_FONT.id) return DYSLEXIA_FONT;
