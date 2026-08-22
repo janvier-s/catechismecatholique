@@ -446,3 +446,23 @@ test('the bars stay put while the reading-options popover is open', async ({ pag
 	await page.evaluate(() => window.scrollTo(0, 1400));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
 });
+
+test('expanding a long book in the chapter selector shows its first chapters, not its last', async ({
+	page
+}) => {
+	// Psalms has 150 chapters, so its grid is taller than the scroller and
+	// cannot be shown whole. Aligning the grid's bottom edge (the old
+	// behaviour) opened on chapter 150 with the book title above the fold.
+	// Start from a different book: the current book opens already expanded, so
+	// clicking it would collapse the grid rather than trigger the scroll.
+	await page.goto('/bible/genese/1');
+	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+
+	await page.getByRole('button', { name: 'Psaumes', exact: true }).click();
+	await page.waitForTimeout(600); // slide transition (180ms) + the 200ms settle
+
+	// Chapter 1 must be on screen; the old behaviour left it far above the fold.
+	await expect(page.locator('[data-book-grid="psaumes"] a').first()).toBeInViewport();
+	// And the last chapter must not be, or we have scrolled to the end again.
+	await expect(page.locator('[data-book-grid="psaumes"] a').last()).not.toBeInViewport();
+});

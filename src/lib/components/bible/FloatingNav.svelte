@@ -4,6 +4,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import { SvelteSet } from 'svelte/reactivity';
 	import { OT_BOOKS, NT_BOOKS, bookTestament, type Testament } from '$lib/utils/bibleBookSlug';
+	import { expandedBookScrollTop } from '$lib/utils/nav-scroll';
 
 	let {
 		bookSlug,
@@ -35,17 +36,28 @@
 		else expandedBooks.add(slug);
 		if (!wasExpanded) {
 			await tick();
-			// Wait for the slide transition (180ms) to finish, then scroll the
-			// expanded chapter grid into view if it overflows the container bottom.
+			// Wait for the slide transition (180ms) to finish, then bring the
+			// expanded chapter grid into view.
 			setTimeout(() => {
 				const container = activeTestament === 'OT' ? otContainer : ntContainer;
 				const grid = container?.querySelector(`[data-book-grid="${slug}"]`) as HTMLElement | null;
-				if (!container || !grid) return;
+				const header = grid?.previousElementSibling as HTMLElement | null;
+				if (!container || !grid || !header) return;
+
 				const gridRect = grid.getBoundingClientRect();
+				const headerRect = header.getBoundingClientRect();
 				const containerRect = container.getBoundingClientRect();
-				if (gridRect.bottom > containerRect.bottom) {
-					grid.scrollIntoView({ block: 'end', behavior: 'smooth' });
-				}
+
+				const top = expandedBookScrollTop({
+					scrollTop: container.scrollTop,
+					containerTop: containerRect.top,
+					containerHeight: container.clientHeight,
+					headerTop: headerRect.top,
+					gridBottom: gridRect.bottom,
+					blockHeight: headerRect.height + gridRect.height
+				});
+
+				if (top !== null) container.scrollTo({ top, behavior: 'smooth' });
 			}, 200);
 		}
 	}
