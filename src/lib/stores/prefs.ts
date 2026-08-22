@@ -37,6 +37,7 @@ export interface ReadingPrefs {
 	hideBibleHeadings: boolean; // major/section headings, both reading modes
 	bibleStudyMode: boolean; // Bible reader: show Catechism citation annotations
 	hideChapterNav: boolean; // Bible reader: the sticky chapter navigation row
+	showVulgatePsalms: boolean; // Psalms: show the Vulgate number beside the Hebrew one
 	verseNumberColor: VerseNumberColor;
 }
 
@@ -59,6 +60,7 @@ const DEFAULTS: ReadingPrefs = {
 	hideBibleHeadings: true,
 	bibleStudyMode: true,
 	hideChapterNav: false,
+	showVulgatePsalms: false,
 	verseNumberColor: 'subtle'
 };
 

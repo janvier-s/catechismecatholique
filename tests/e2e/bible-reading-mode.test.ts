@@ -490,3 +490,26 @@ test('chapter navigation bar can be hidden, and the setting persists', async ({ 
 	await page.keyboard.press('Escape');
 	await expect(page.locator('.bible-chapter-nav')).toBeVisible();
 });
+
+test('Vulgate psalm numbers are off by default and can be shown', async ({ page }) => {
+	// Hebrew 10 is Vulgate 9. Off by default, so nothing shows.
+	await page.goto('/bible/psaumes/10');
+	await expect(page.locator('.vulgate-psalm')).toHaveCount(0);
+
+	const dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(3).click(); // Numérotation Vulgate
+	await page.keyboard.press('Escape');
+	await expect(page.locator('.vulgate-psalm')).toHaveText('(Vg 9)');
+
+	// Hebrew 116 was split into Vulgate 114-115, so it renders as a range.
+	await page.goto('/bible/psaumes/116');
+	await expect(page.locator('.vulgate-psalm')).toHaveText('(Vg 114-115)');
+
+	// Where the traditions agree there is no label, even when enabled.
+	await page.goto('/bible/psaumes/150');
+	await expect(page.locator('.vulgate-psalm')).toHaveCount(0);
+
+	// And it never appears outside the psalter.
+	await page.goto('/bible/genese/10');
+	await expect(page.locator('.vulgate-psalm')).toHaveCount(0);
+});

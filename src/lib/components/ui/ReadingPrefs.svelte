@@ -420,6 +420,32 @@
 								</button>
 							</div>
 						</div>
+
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Numérotation Vulgate (psaumes)</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.showVulgatePsalms
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('showVulgatePsalms', true)}
+								>
+									Afficher
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{!$prefs.showVulgatePsalms
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('showVulgatePsalms', false)}
+								>
+									Masquer
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			{/if}

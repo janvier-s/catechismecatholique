@@ -5,6 +5,7 @@
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 	import { prefs } from '$lib/stores/prefs';
+	import { vulgatePsalmLabel } from '$lib/utils/psalm-numbering';
 
 	let {
 		book,
@@ -83,6 +84,12 @@
 	// the column-width compensation in app.css.
 	const studyMode = $derived($prefs.bibleStudyMode);
 
+	// The Néo-Crampon follows the Hebrew numbering; readers coming from the
+	// Vulgate see a different number for most psalms. Off by default.
+	const vulgateLabel = $derived(
+		book.usfx === 'PSA' && $prefs.showVulgatePsalms ? vulgatePsalmLabel(chapter) : null
+	);
+
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
 	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
 
@@ -147,7 +154,10 @@
 				{book.frenchName}
 			</p>
 			<h1 class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3">
-				Chapitre {chapter}
+				Chapitre {chapter}{#if vulgateLabel}<span
+						class="vulgate-psalm ml-[6px] font-ui text-[1.1rem] tracking-normal text-subtle"
+						>(Vg {vulgateLabel})</span
+					>{/if}
 			</h1>
 			<div class="w-10 h-px bg-accent opacity-70"></div>
 		</header>
