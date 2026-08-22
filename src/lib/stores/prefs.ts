@@ -36,6 +36,7 @@ export interface ReadingPrefs {
 	hideVerseNumbers: boolean;
 	hideBibleHeadings: boolean; // major/section headings, both reading modes
 	bibleStudyMode: boolean; // Bible reader: show Catechism citation annotations
+	hideChapterNav: boolean; // Bible reader: the sticky chapter navigation row
 	verseNumberColor: VerseNumberColor;
 }
 
@@ -57,6 +58,7 @@ const DEFAULTS: ReadingPrefs = {
 	hideVerseNumbers: false,
 	hideBibleHeadings: true,
 	bibleStudyMode: true,
+	hideChapterNav: false,
 	verseNumberColor: 'subtle'
 };
 

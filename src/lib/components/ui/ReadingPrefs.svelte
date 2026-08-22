@@ -394,6 +394,32 @@
 								</button>
 							</div>
 						</div>
+
+						<div>
+							<span class="block mb-2 text-muted text-[13px]">Barre de chapitres</span>
+							<div class="flex gap-1.5">
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{!$prefs.hideChapterNav
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('hideChapterNav', false)}
+								>
+									Afficher
+								</button>
+								<button
+									type="button"
+									class="flex-1 py-1.5 border rounded text-xs
+										{$prefs.hideChapterNav
+										? 'bg-accent/15 text-accent-text border-accent'
+										: 'pill-border text-foreground hover:text-accent-text'}"
+									onclick={() => updatePref('hideChapterNav', true)}
+								>
+									Masquer
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			{/if}

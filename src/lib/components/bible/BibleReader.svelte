@@ -120,16 +120,20 @@
 	}
 </script>
 
-<!-- Chapter navigation bar · sticky below the global TopBar (80px). -->
-<ChapterNavBar
-	{book}
-	{chapter}
-	{totalChapters}
-	{chapterCounts}
-	{hasConcordance}
-	citedVerseCount={totalCited}
-	variant="reader"
-/>
+<!-- Chapter navigation bar · sticky below the global TopBar. Optional: readers
+     who navigate by scrolling can reclaim the row. The concordance route has
+     its own bar and is deliberately unaffected. -->
+{#if !$prefs.hideChapterNav}
+	<ChapterNavBar
+		{book}
+		{chapter}
+		{totalChapters}
+		{chapterCounts}
+		{hasConcordance}
+		citedVerseCount={totalCited}
+		variant="reader"
+	/>
+{/if}
 
 <main
 	class="mx-auto max-w-reader px-6 max-md:px-4 pt-8 max-md:pt-5 pb-16"

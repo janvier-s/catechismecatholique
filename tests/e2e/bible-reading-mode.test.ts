@@ -466,3 +466,27 @@ test('expanding a long book in the chapter selector shows its first chapters, no
 	// And the last chapter must not be, or we have scrolled to the end again.
 	await expect(page.locator('[data-book-grid="psaumes"] a').last()).not.toBeInViewport();
 });
+
+test('chapter navigation bar can be hidden, and the setting persists', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await expect(page.locator('.bible-chapter-nav')).toBeVisible();
+
+	let dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Masquer' }).nth(2).click(); // Barre de chapitres
+	await page.keyboard.press('Escape');
+	await expect(page.locator('.bible-chapter-nav')).toHaveCount(0);
+
+	const stored = await page.evaluate(() =>
+		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
+	);
+	expect(stored.hideChapterNav).toBe(true);
+
+	// Survives a reload, and can be turned back on.
+	await page.reload();
+	await expect(page.locator('.bible-chapter-nav')).toHaveCount(0);
+
+	dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(2).click();
+	await page.keyboard.press('Escape');
+	await expect(page.locator('.bible-chapter-nav')).toBeVisible();
+});
