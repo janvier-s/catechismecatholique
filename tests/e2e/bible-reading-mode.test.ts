@@ -168,13 +168,35 @@ test('paragraph-mode verse numbers are selectable text, unlike verse-by-verse mo
 	expect(await vn.evaluate((el) => getComputedStyle(el).userSelect)).not.toBe('none');
 });
 
-test('Notes tab shows an empty-state message instead of a dead "Masquer toutes les notes" control on Bible pages', async ({
-	page
-}) => {
+test('the options panel on Bible pages has two tabs, with Notes hidden', async ({ page }) => {
+	// Bible pages carry no footnotes, so the Notes tab was an empty shell.
+	// It is dropped entirely here rather than shown with an empty state.
 	await page.goto('/bible/genese/1');
-	const dialog = await openNotesTab(page);
-	await expect(dialog.getByText('Masquer toutes les notes')).toHaveCount(0);
-	await expect(dialog.getByText(/ne contient pas de notes/)).toBeVisible();
+	await page.getByRole('button', { name: 'Options de lecture' }).click();
+	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+
+	await expect(dialog.getByRole('button', { name: 'Notes', exact: true })).toHaveCount(0);
+	await expect(dialog.getByRole('button', { name: 'Texte', exact: true })).toBeVisible();
+	await expect(dialog.getByRole('button', { name: 'Lecture', exact: true })).toBeVisible();
+
+	// The two survivors split the full width between them.
+	const texte = await dialog.getByRole('button', { name: 'Texte', exact: true }).boundingBox();
+	const lecture = await dialog.getByRole('button', { name: 'Lecture', exact: true }).boundingBox();
+	expect(texte!.width).toBeCloseTo(lecture!.width, 0);
+});
+
+test('the CEC options panel keeps its Notes tab', async ({ page }) => {
+	await page.goto('/cec/27');
+	await page.getByRole('button', { name: 'Options de lecture' }).click();
+	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await expect(dialog.getByRole('button', { name: 'Notes', exact: true })).toBeVisible();
+});
+
+test('the concordance link sits in the chapter nav row, not above the text', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	const link = page.locator('.bible-chapter-nav a[href$="/concordance"]');
+	await expect(link).toBeVisible();
+	await expect(page.locator('main a[href$="/concordance"]')).toHaveCount(0);
 });
 
 test('section and subsection headings are centered, in both reading modes', async ({ page }) => {

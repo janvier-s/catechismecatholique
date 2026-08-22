@@ -12,6 +12,7 @@
 		totalChapters,
 		chapterCounts = {},
 		citedVerseCount = 0,
+		hasConcordance = false,
 		variant = 'reader'
 	}: {
 		book: BookInfo;
@@ -19,6 +20,7 @@
 		totalChapters: number;
 		chapterCounts?: Record<string, number>;
 		citedVerseCount?: number;
+		hasConcordance?: boolean;
 		variant?: 'reader' | 'concordance';
 	} = $props();
 
@@ -172,7 +174,15 @@
 			</div>
 		</div>
 
-		<div class="ml-auto shrink-0">
+		<div class="ml-auto shrink-0 flex items-center gap-3">
+			{#if hasConcordance}
+				<a
+					href="/bible/{book.slug}/{chapter}/concordance"
+					class="hidden sm:inline font-ui text-[11px] uppercase tracking-[0.15em] text-accent hover:underline whitespace-nowrap"
+				>
+					Concordance →
+				</a>
+			{/if}
 			<ChapterFilterBar
 				studyMode={$prefs.bibleStudyMode}
 				disabled={toggleDisabled}

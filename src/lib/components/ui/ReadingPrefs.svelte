@@ -10,6 +10,16 @@
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
 
 	let activeTab: 'text' | 'reading' | 'notes' = $state('text');
+
+	// Bible pages carry no footnotes, so the Notes tab had nothing to show but
+	// an empty state. Drop it there and let the two survivors share the width.
+	const tabs = $derived(
+		[
+			{ id: 'text' as const, label: 'Texte' },
+			{ id: 'reading' as const, label: 'Lecture' },
+			...(isBibleOnly ? [] : [{ id: 'notes' as const, label: 'Notes' }])
+		].filter(Boolean)
+	);
 	let fontDropdownOpen = $state(false);
 	let fontSectionEl: HTMLElement | undefined = $state();
 	let fontTriggerEl: HTMLButtonElement | undefined = $state();
@@ -127,7 +137,7 @@
 
 <div class="font-ui text-sm">
 	<div class="flex border-b border-border mb-5 -mx-4 px-4 sticky top-0 z-10 bg-panel">
-		{#each [{ id: 'text' as const, label: 'Texte' }, { id: 'reading' as const, label: 'Lecture' }, { id: 'notes' as const, label: 'Notes' }] as tab (tab.id)}
+		{#each tabs as tab (tab.id)}
 			<button
 				type="button"
 				class="flex-1 py-2.5 text-[11px] uppercase tracking-[0.12em] font-semibold border-b-2 -mb-px transition-colors
@@ -453,7 +463,7 @@
 
 	{#if activeTab === 'notes'}
 		<div class="space-y-4">
-			{#if isPiusX || isBibleOnly || isCompendium}
+			{#if isPiusX || isCompendium}
 				<p class="text-[13px] text-muted leading-relaxed">
 					{isPiusX
 						? 'Ce catéchisme ne contient pas de notes.'

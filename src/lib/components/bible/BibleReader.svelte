@@ -126,6 +126,7 @@
 	{chapter}
 	{totalChapters}
 	{chapterCounts}
+	{hasConcordance}
 	citedVerseCount={totalCited}
 	variant="reader"
 />
@@ -146,17 +147,6 @@
 			</h1>
 			<div class="w-10 h-px bg-accent opacity-70"></div>
 		</header>
-
-		{#if hasConcordance}
-			<div class="mb-6 text-center">
-				<a
-					href="/bible/{book.slug}/{chapter}/concordance"
-					class="font-ui text-[12px] uppercase tracking-[0.15em] text-accent hover:underline"
-				>
-					Voir la concordance →
-				</a>
-			</div>
-		{/if}
 
 		{#if $prefs.bibleLayout === 'paragraph' && paragraphs}
 			<div class="bible-paragraphs">

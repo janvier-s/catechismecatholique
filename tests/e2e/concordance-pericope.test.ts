@@ -16,8 +16,12 @@ test.describe('concordance — data-dependent', () => {
 	});
 
 	test('concordance link appears for chapters with data', async ({ page }) => {
+		// The link moved out of the page body into the sticky chapter nav row,
+		// beside the Lecture/Étude toggle, and shortened to "Concordance →".
 		await page.goto('/bible/genese/3');
-		await expect(page.getByRole('link', { name: /Voir la concordance/i })).toBeVisible();
+		await expect(
+			page.locator('.bible-chapter-nav').getByRole('link', { name: /Concordance/i })
+		).toBeVisible();
 	});
 
 	test('concordance page renders pericopes with French titles and CCC chips', async ({ page }) => {
