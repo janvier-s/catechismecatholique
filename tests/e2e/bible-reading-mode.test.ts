@@ -17,13 +17,6 @@ async function switchToParagraphMode(page: import('@playwright/test').Page) {
 	await page.keyboard.press('Escape');
 }
 
-async function openNotesTab(page: import('@playwright/test').Page) {
-	await page.getByRole('button', { name: 'Options de lecture' }).click();
-	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
-	await dialog.getByRole('button', { name: 'Notes' }).click();
-	return dialog;
-}
-
 test('Bible reading-mode toggle switches and persists', async ({ page }) => {
 	await page.goto('/bible/matthieu/1');
 	await page.getByLabel('Options de lecture').click();
