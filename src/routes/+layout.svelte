@@ -2,6 +2,9 @@
 	import '../app.css';
 	import { page } from '$app/state';
 	import { afterNavigate } from '$app/navigation';
+	import { prefs } from '$lib/stores/prefs';
+	import { refreshBionic } from '$lib/utils/bionic-dom';
+	import { tick } from 'svelte';
 	import { get } from 'svelte/store';
 	import TopBar from '$lib/components/ui/TopBar.svelte';
 	import Sidebar from '$lib/components/ui/Sidebar.svelte';
@@ -181,6 +184,27 @@
 			void contentEl.offsetWidth;
 			contentEl.classList.add('page-fade');
 		}
+	});
+
+	// Bionic reading runs here, once, over the whole page rather than inside
+	// each reader. Two reasons: it has to happen after mount, because Svelte
+	// reuses the server's DOM for `{@html}` during hydration and never
+	// re-evaluates it (a render-time transform simply never appears on a fresh
+	// load); and walking text nodes leaves every corpus's inline markup intact
+	// by construction. Re-runs on pref change and after each navigation.
+	$effect(() => {
+		const enabled = $prefs.bionicReading;
+		const fixation = $prefs.bionicFixation;
+		const saccade = $prefs.bionicSaccade;
+		void page.url.pathname;
+		let cancelled = false;
+		void tick().then(() => {
+			if (cancelled || typeof document === 'undefined') return;
+			refreshBionic(document.body, enabled, { fixation, saccade });
+		});
+		return () => {
+			cancelled = true;
+		};
 	});
 </script>
 

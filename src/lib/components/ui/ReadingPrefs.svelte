@@ -285,6 +285,66 @@
 				</div>
 			</div>
 
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Lecture bionique</span>
+				<div class="flex gap-1.5">
+					<button
+						type="button"
+						class="flex-1 py-1.5 border rounded text-xs
+							{!$prefs.bionicReading
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
+						onclick={() => updatePref('bionicReading', false)}
+					>
+						Désactivée
+					</button>
+					<button
+						type="button"
+						class="flex-1 py-1.5 border rounded text-xs
+							{$prefs.bionicReading
+							? 'bg-accent/15 text-accent-text border-accent'
+							: 'pill-border text-foreground hover:text-accent-text'}"
+						onclick={() => updatePref('bionicReading', true)}
+					>
+						Activée
+					</button>
+				</div>
+			</div>
+
+			{#if $prefs.bionicReading}
+				<div>
+					<span class="block mb-2 text-muted text-[13px]"
+						>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
+					>
+					<input
+						type="range"
+						min="1"
+						max="5"
+						step="1"
+						value={$prefs.bionicFixation}
+						oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
+						class="w-full accent-accent"
+						aria-label="Intensité de la lecture bionique"
+					/>
+				</div>
+
+				<div>
+					<span class="block mb-2 text-muted text-[13px]"
+						>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
+					>
+					<input
+						type="range"
+						min="0"
+						max="4"
+						step="1"
+						value={$prefs.bionicSaccade}
+						oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
+						class="w-full accent-accent"
+						aria-label="Saut de mots de la lecture bionique"
+					/>
+				</div>
+			{/if}
+
 			{#if isBibleOnly}
 				<div class="pt-1 mt-1 border-t border-border">
 					<span class="block mb-3 text-[11px] uppercase tracking-[0.12em] font-semibold text-accent"

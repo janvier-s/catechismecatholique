@@ -673,6 +673,17 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	}
 }
 
+/* Bionic reading · the bolded prefix carries the eye, so the remainder is
+   allowed to recede slightly. Applies across every corpus: Bible verses and
+   paragraphs, CEC paragraphs, Compendium answers. */
+html[data-bionic='true'] .verse-text b,
+html[data-bionic='true'] .bible-prose b,
+html[data-bionic='true'] .bible-poetry-line b,
+html[data-bionic='true'] .prose-paragraph b,
+html[data-bionic='true'] .compendium-prose b {
+	font-weight: 700;
+}
+
 /* Reveal-on-scroll · both bars translate out together. The chapter nav is
    sticky at --topbar-height, so it has to travel its own height plus the
    bar above it to clear the viewport. The 50px matches the nav row's inline

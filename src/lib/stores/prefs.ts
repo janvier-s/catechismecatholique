@@ -38,6 +38,9 @@ export interface ReadingPrefs {
 	bibleStudyMode: boolean; // Bible reader: show Catechism citation annotations
 	hideChapterNav: boolean; // Bible reader: the sticky chapter navigation row
 	showVulgatePsalms: boolean; // Psalms: show the Vulgate number beside the Hebrew one
+	bionicReading: boolean; // bold each word's leading fraction, all corpora
+	bionicFixation: number; // 1-5, how much of each word is bolded
+	bionicSaccade: number; // 0-4, bold only every (n+1)-th word
 	verseNumberColor: VerseNumberColor;
 }
 
@@ -61,6 +64,9 @@ const DEFAULTS: ReadingPrefs = {
 	bibleStudyMode: true,
 	hideChapterNav: false,
 	showVulgatePsalms: false,
+	bionicReading: false,
+	bionicFixation: 3,
+	bionicSaccade: 0,
 	verseNumberColor: 'subtle'
 };
 
@@ -128,6 +134,7 @@ if (browser) {
 		root.dataset.hideSourceFootnotes = String($p.hideSourceFootnotes);
 		root.dataset.inlineAsMarkers = String($p.inlineAsMarkers);
 		root.dataset.justified = String($p.justifiedText);
+		root.dataset.bionic = String($p.bionicReading);
 		root.style.setProperty('--reader-font-size', `${$p.fontSize}px`);
 		root.style.setProperty('--reader-line-height', String($p.lineHeight));
 		const font = getFontById($p.fontFamily);

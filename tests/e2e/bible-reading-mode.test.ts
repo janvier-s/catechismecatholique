@@ -513,3 +513,55 @@ test('Vulgate psalm numbers are off by default and can be shown', async ({ page 
 	await page.goto('/bible/genese/10');
 	await expect(page.locator('.vulgate-psalm')).toHaveCount(0);
 });
+
+async function enableBionic(page: import('@playwright/test').Page) {
+	await page.getByRole('button', { name: 'Options de lecture' }).click();
+	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await dialog.getByRole('button', { name: 'Lecture' }).click();
+	await dialog.getByRole('button', { name: 'Activée', exact: true }).click();
+	await page.keyboard.press('Escape');
+}
+
+test('bionic reading is off by default and applies to Bible, CEC and Compendium', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	await expect(page.locator('.verse-text b')).toHaveCount(0);
+
+	await enableBionic(page);
+	await expect(page.locator('.verse-text b').first()).toBeVisible();
+
+	// Paragraph mode renders through a different branch.
+	await switchToParagraphMode(page);
+	await expect(page.locator('.bible-prose b').first()).toBeVisible();
+
+	// The pref is global, so the other corpora pick it up without re-enabling.
+	await page.goto('/cec/27');
+	await expect(page.locator('.prose-paragraph b').first()).toBeVisible();
+
+	// Compendium answers have their own render path in ReadableUnit, separate
+	// from the Catechism's ParagraphRenderer, so they are wired individually.
+	await page.goto('/compendium/1-profession-de-la-foi');
+	await expect(page.locator('.compendium-answer b').first()).toBeVisible();
+
+	// The regression that sank the first attempt: a render-time transform
+	// vanished on reload, because hydration reuses the server's {@html} DOM.
+	// Paragraph mode is still on from earlier in this test and persists, so
+	// the surviving container here is .bible-prose rather than .verse-text.
+	await page.goto('/bible/genese/1');
+	await page.reload();
+	await expect(page.locator('.bible-prose b').first()).toBeVisible();
+});
+
+test('bionic reading leaves existing NCL markup intact', async ({ page }) => {
+	// 1 Timothée 5 carries .qt spans (Old Testament quotations, rendered as
+	// small caps). Bionic must bold inside them without destroying them, which
+	// is exactly what feeding raw HTML to a plain-text bionic library breaks.
+	await page.goto('/bible/1-timothee/5');
+	const qtBefore = await page.locator('.verse-text .qt').count();
+	expect(qtBefore).toBeGreaterThan(0);
+
+	await enableBionic(page);
+	await expect(page.locator('.verse-text .qt')).toHaveCount(qtBefore);
+	await expect(page.locator('.verse-text b').first()).toBeVisible();
+});
