@@ -104,7 +104,7 @@
 	</header>
 {:else}
 	<div
-		class="sticky top-[var(--topbar-height,80px)] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-4 flex items-center gap-[10px] font-ui"
+		class="bible-chapter-nav sticky top-[var(--topbar-height,52px)] z-[var(--z-sticky)] bg-glass backdrop-blur-sm border-b border-border px-6 max-md:px-4 flex items-center gap-[10px] font-ui"
 		style="height: 50px;"
 	>
 		<div
@@ -172,7 +172,7 @@
 		{chapterCounts}
 		{buildHref}
 		onClose={() => (navOpen = false)}
-		topOffset="130px"
+		topOffset="calc(var(--topbar-height, 52px) + 50px)"
 	/>
 	<div
 		class="fixed inset-0 z-[var(--z-overlay)]"

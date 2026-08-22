@@ -282,3 +282,32 @@ test('section headings are hidden by default, in both reading modes', async ({ p
 	await switchToParagraphMode(page);
 	await expect(page.locator('.bible-paragraphs h2')).toHaveCount(0);
 });
+
+test('TopBar is slim and the chapter nav sits flush beneath it', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+
+	const topbar = page.locator('header.topbar');
+	await expect(topbar).toHaveCSS('height', '52px');
+
+	// The chapter nav is sticky at --topbar-height. If the variable and the
+	// real bar height ever disagree, the two overlap or leave a gap.
+	const topbarBox = await topbar.boundingBox();
+	const navBox = await page.locator('.bible-chapter-nav').boundingBox();
+	expect(topbarBox).not.toBeNull();
+	expect(navBox).not.toBeNull();
+	expect(navBox!.y).toBeCloseTo(topbarBox!.y + topbarBox!.height, 0);
+});
+
+test('--topbar-height has a single source of truth that matches the rendered bar', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	const declared = await page.evaluate(() =>
+		getComputedStyle(document.documentElement).getPropertyValue('--topbar-height').trim()
+	);
+	expect(declared).toBe('52px');
+
+	// No inline override left on <html> from the old imperative sync.
+	const inline = await page.evaluate(() => document.documentElement.style.getPropertyValue('--topbar-height'));
+	expect(inline).toBe('');
+});

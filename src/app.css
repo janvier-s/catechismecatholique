@@ -661,15 +661,15 @@ html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
 	}
 }
 
-/* Topbar height · hoisted to :root so sticky elements that aren't inside
-   .topbar (e.g. the Bible chapter nav) can position themselves relative to
-   the actual topbar instead of hardcoding 80px and overlapping at mobile. */
+/* Topbar height · single source of truth. Sticky elements outside .topbar
+   (the Bible chapter nav, the study panel, the nav drawer) position
+   themselves against this instead of hardcoding a pixel value. */
 :root {
-	--topbar-height: 80px;
+	--topbar-height: 52px;
 }
 @media (max-width: 767px) {
 	:root {
-		--topbar-height: 58px;
+		--topbar-height: 48px;
 	}
 }
 

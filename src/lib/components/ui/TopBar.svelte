@@ -43,16 +43,6 @@
 		window.addEventListener('scroll', onScroll, { passive: true });
 		return () => window.removeEventListener('scroll', onScroll);
 	});
-
-	// Sync the global --topbar-height variable so sticky elements outside
-	// the topbar (e.g. the Bible chapter floatnav) stay flush with our
-	// bottom edge, including the condensed-on-scroll mobile state.
-	$effect(() => {
-		if (typeof document === 'undefined') return;
-		const html = document.documentElement;
-		if (condensed) html.style.setProperty('--topbar-height', '46px');
-		else html.style.removeProperty('--topbar-height');
-	});
 </script>
 
 <header
@@ -60,7 +50,7 @@
 	class:is-condensed={condensed}
 >
 	<div
-		class="relative px-4 md:px-6 py-2 md:py-3 flex items-center gap-3 md:gap-6 min-h-[58px] md:min-h-[80px]"
+		class="relative px-4 md:px-6 py-2 flex items-center gap-3 md:gap-6 min-h-[48px] md:min-h-[52px]"
 	>
 		<a
 			href="/"
@@ -184,13 +174,7 @@
 </header>
 
 <style>
-	.topbar {
-		--topbar-height: 80px;
-	}
 	@media (max-width: 767px) {
-		.topbar {
-			--topbar-height: 58px;
-		}
 		.topbar > div {
 			transition:
 				min-height 200ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -202,17 +186,14 @@
 				height 200ms cubic-bezier(0.22, 1, 0.36, 1);
 		}
 		/* Condensed state · shrinks the bar but keeps the logo a clear tap target. */
-		.topbar.is-condensed {
-			--topbar-height: 46px;
-		}
 		.topbar.is-condensed > div {
-			min-height: 46px !important;
+			min-height: 40px !important;
 			padding-top: 0.2rem;
 			padding-bottom: 0.2rem;
 		}
 		.topbar.is-condensed :global(.logo-mark) {
-			width: 30px !important;
-			height: 30px !important;
+			width: 28px !important;
+			height: 28px !important;
 		}
 	}
 	@media (prefers-reduced-motion: reduce) {

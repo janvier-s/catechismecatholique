@@ -379,7 +379,7 @@
 	   from `color-mix` on `--color-fg`. */
 	.backdrop {
 		position: fixed;
-		inset: var(--topbar-height, 80px) 0 0 0;
+		inset: var(--topbar-height, 52px) 0 0 0;
 		background: rgba(0, 0, 0, 0.42);
 		backdrop-filter: blur(2px);
 		z-index: calc(var(--z-modal) - 1);
@@ -391,7 +391,7 @@
 	   Anchored just below the topbar so the bar stays visible. */
 	.drawer {
 		position: fixed;
-		top: var(--topbar-height, 80px);
+		top: var(--topbar-height, 52px);
 		right: 0;
 		bottom: 0;
 		width: min(380px, 100vw);

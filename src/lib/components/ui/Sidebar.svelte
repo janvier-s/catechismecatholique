@@ -1745,7 +1745,7 @@
 		.sidebar-rail {
 			display: flex;
 			position: fixed;
-			inset: var(--topbar-height, 80px) 0 0 0;
+			inset: var(--topbar-height, 52px) 0 0 0;
 			z-index: var(--z-modal);
 			width: 100%;
 			transform: translateX(100%);
