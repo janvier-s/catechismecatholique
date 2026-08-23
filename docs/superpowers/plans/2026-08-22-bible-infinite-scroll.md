@@ -1937,6 +1937,36 @@ git status --short
 
 3 Jean has one chapter and 14 verses, and Jude follows it with one chapter and 25 verses. Both are short enough that the boundary is reached in a couple of screens.
 
+**Two premises from Task 9 stop holding here, and this is where they break.**
+Task 9's review flagged both as Task 10 shapes. Neither is reachable with
+Genesis-sized chapters, and both are reachable with one-chapter books and
+two-verse psalms.
+
+*The back-prune assumes the tail is below the fold.* `loadPrev` drops chapters
+off the end with no compensation and no chrome shift, on the premise that two
+full chapters remain below the viewport. With short books that premise fails: if
+the document shrinks below `scrollY + innerHeight`, the browser silently clamps
+`scrollY` upward, the chrome store is never told, and the reducer banks the
+clamp as `upDistance` where it can trip `REVEAL_AFTER_UP` and pop the bars.
+
+*Front-pruning assumes the removed chapters sit entirely above the viewport.*
+Five short psalms fit inside one viewport. The `Math.max(0, y - removed)` clamp
+keeps the arithmetic in range, but the text genuinely moves, because part of
+what was removed was on screen.
+
+The fix for both is the same shape: never prune a section that is still visible.
+Before pruning from either end, check the candidate's
+`getBoundingClientRect()` and stop at the first one whose `bottom > 0` (front)
+or `top < window.innerHeight` (back). Pruning fewer chapters than asked is
+always safe; the window simply stays larger than `MAX_LOADED` until the reader
+scrolls further.
+
+Add a test using a short book. Psaume 117 is two verses; 2 Jean, 3 Jean, Jude,
+Abdias and Philémon are all single-chapter books. A run down through several
+consecutive short units, asserting both that `data-chrome-hidden` does not flap
+and that a chosen anchor's viewport position stays stable, exercises both
+premises at once.
+
 - [ ] **Step 1: Write the failing test**
 
 Append to `tests/e2e/bible-infinite-scroll.test.ts`:
