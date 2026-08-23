@@ -63,7 +63,16 @@ function reindexCitationSupMarkers(
 	if (citations.length === 0) return citations;
 	const consumed = new Set<string>();
 	for (const m of mainHtml.matchAll(/data-idx="([^"]+)"/g)) consumed.add(m[1]!);
-	const remaining = refs.filter((r) => !consumed.has(String(r.idx)));
+	// Bible-ref clusters (groupConsecutiveBibleSups) fold trailing members into
+	// a leader marker and strip their <sup> from mainHtml — so their idx never
+	// shows up in `consumed` above even though they're already displayed via
+	// the leader. Treat them as consumed too, or a citation sup steals one and
+	// mislabels an unrelated verse as the citation's source (e.g. §618).
+	const remaining = refs.filter(
+		(r) =>
+			!consumed.has(String(r.idx)) &&
+			!(r.marker_idx !== undefined && consumed.has(String(r.marker_idx)))
+	);
 	if (remaining.length === 0) return citations;
 	let cursor = 0;
 	return citations.map((c) => {

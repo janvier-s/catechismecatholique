@@ -21,6 +21,11 @@
 	let verseText = $state('');
 	let verseHtml = $state('');
 	let isCec = $state(false);
+	// Bible-ref clusters (one footnote marker citing several, possibly
+	// cross-book, verses — e.g. CCC §618's marker "4" citing Mc 10:39, Jn
+	// 21:18-19 AND Col 1:24) render as multiple stacked entries instead of
+	// the single refLabel/verseText pair above.
+	let clusterEntries = $state<{ refLabel: string; refHref: string; verseText: string }[]>([]);
 	let visible = $state(false);
 	let anchorEl = $state<HTMLElement | null>(null);
 	let tooltipEl = $state<HTMLDivElement | undefined>();
@@ -106,6 +111,7 @@
 			refHref = null;
 			isCec = false;
 			loading = false;
+			clusterEntries = [];
 			return;
 		}
 
@@ -118,6 +124,74 @@
 		flipBelow = spaceAbove < 110 && spaceBelow > spaceAbove;
 		y = flipBelow ? rect.bottom : rect.top;
 		maxH = `${Math.min(Math.max(flipBelow ? spaceBelow : spaceAbove, 80), windowH * 0.6)}px`;
+		clusterEntries = [];
+
+		// Bible-ref cluster: one marker citing several (possibly cross-book)
+		// verses, encoded by ParagraphRenderer as "slug:chapter:verses|...".
+		const clusterAttr = anchorEl.dataset.cluster;
+		if (clusterAttr) {
+			const tokens = clusterAttr
+				.split('|')
+				.map((t) => {
+					const [slug, chapterStr, verseSpec] = t.split(':');
+					const chapter = parseInt(chapterStr ?? '', 10);
+					if (!slug || !Number.isFinite(chapter)) return null;
+					const [fromStr, toStr] = (verseSpec ?? '').split('-');
+					const fromV = fromStr ? parseInt(fromStr, 10) : undefined;
+					const toV = toStr ? parseInt(toStr, 10) : fromV;
+					const book = bookBySlug(slug);
+					if (!book) return null;
+					return { book, chapter, fromV, toV };
+				})
+				.filter((t) => t !== null);
+			if (tokens.length > 0) {
+				isCec = false;
+				verseText = '';
+				refLabel = '';
+				loading = true;
+				Promise.all(tokens.map((t) => loadNclBook(t.book.usfx)))
+					.then((books) => {
+						const entries: typeof clusterEntries = [];
+						for (let i = 0; i < tokens.length; i++) {
+							const t = tokens[i]!;
+							const data = books[i];
+							const chData = data?.[String(t.chapter)];
+							if (!chData) continue;
+							let label: string;
+							let text: string;
+							if (t.fromV !== undefined && t.toV !== undefined) {
+								label =
+									t.fromV === t.toV
+										? `${t.book.frenchName} ${t.chapter},${t.fromV}`
+										: `${t.book.frenchName} ${t.chapter},${t.fromV}-${t.toV}`;
+								const parts: string[] = [];
+								for (let v = t.fromV; v <= t.toV; v++) {
+									const vt = chData[String(v)];
+									if (vt) parts.push(vt);
+								}
+								text = parts.join(' ');
+							} else {
+								const firstKey = Object.keys(chData).sort((a, b) => +a - +b)[0];
+								label = `${t.book.frenchName} ${t.chapter}`;
+								text = firstKey ? (chData[firstKey] ?? '') : '';
+							}
+							if (text) {
+								entries.push({
+									refLabel: label,
+									refHref: `/bible/${t.book.slug}/${t.chapter}${t.fromV !== undefined ? `/${t.fromV}` : ''}`,
+									verseText: text
+								});
+							}
+						}
+						clusterEntries = entries;
+					})
+					.catch(() => {})
+					.finally(() => {
+						loading = false;
+					});
+				return;
+			}
+		}
 
 		// Vatican II footnote markers: pull the rendered footnote body HTML
 		// directly from the page (#fn-N) and show it in the tooltip.
@@ -225,6 +299,7 @@
 	$effect(() => {
 		void verseText;
 		void verseHtml;
+		void clusterEntries;
 		void loading;
 		if (!tooltipEl) return;
 		requestAnimationFrame(() => {
@@ -237,7 +312,7 @@
 
 <svelte:window bind:innerWidth={windowW} bind:innerHeight={windowH} />
 
-{#if visible && (loading || verseText || verseHtml)}
+{#if visible && (loading || verseText || verseHtml || clusterEntries.length > 0)}
 	<div
 		bind:this={tooltipEl}
 		class="tooltip"
@@ -255,6 +330,15 @@
 				<div class="shimmer"></div>
 				<div class="shimmer shimmer-short"></div>
 			</div>
+		{:else if clusterEntries.length > 0}
+			{#each clusterEntries as entry (entry.refHref)}
+				<div class="entry">
+					<div class="header">
+						<a href={entry.refHref} class="tt-num">{entry.refLabel}</a>
+					</div>
+					<p class="verse-text">{entry.verseText}</p>
+				</div>
+			{/each}
 		{:else if verseHtml}
 			<div class="entry">
 				<div class="header">
@@ -334,6 +418,15 @@
 	}
 	.header:has(.tt-num) {
 		padding: 4px 0 8px;
+	}
+
+	/* Bible-ref clusters (one marker citing several verses) stack multiple
+	   .entry blocks · separate them with a rule so each verse reads as its
+	   own citation instead of running together. */
+	.entry + .entry {
+		margin-top: 4px;
+		padding-top: 10px;
+		border-top: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
 	}
 
 	.tt-ref {

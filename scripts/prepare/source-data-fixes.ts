@@ -78,7 +78,13 @@ export function capitalizeFirstWord(html: string): string {
 // When `bible_refs[i]` lacks a book prefix, inherit from `bible_refs[i-1]`.
 // Recurring data quality bug — a continuation entry like "5:37" should be
 // rewritten to "Mt 5:37" if the previous ref started with "Mt ...".
-const BOOK_PREFIX_RE = /^([1-3]\s*)?[A-ZÉÈÊÂÄÔÎÏÜÇ][a-zéèêâäôîïüç]+/;
+//
+// Letter run is `*`, not `+`: some French abbreviations are a single
+// uppercase letter ("1 P" for 1 Pierre, "2 P" for 2 Pierre). Requiring at
+// least one lowercase letter after it made the regex miss those, so e.g.
+// "1 P 2:21" was treated as prefix-less and got the PREVIOUS ref's book
+// prepended instead (producing garbage like "Mt 1 P 2:21").
+const BOOK_PREFIX_RE = /^([1-3]\s*)?[A-ZÉÈÊÂÄÔÎÏÜÇ][a-zéèêâäôîïüç]*/;
 
 export function mergeBibleRefContinuations(refs: { text: string }[]): { text: string }[] {
 	const out: { text: string }[] = [];
@@ -110,6 +116,7 @@ interface RawTreeNode {
 	type: string;
 	number?: number;
 	text_html?: string;
+	citations?: { text_html: string }[];
 	children?: RawTreeNode[];
 }
 
@@ -127,6 +134,21 @@ export function fixCccParaSourceTypos(parts: RawTreeNode[]): void {
 							c.text_html = c.text_html.replace('Maître et modèle', 'Maître et Modèle');
 						}
 					}
+				}
+			}
+			for (const c of kids) {
+				// §618's Sainte Rose de Lima citation carries a stray footnote sup
+				// (no magisterial ref actually backs it — it was mislabeled as a
+				// bibleRef in the source scrape) and a missing closing paren, so
+				// the <i> tag never closes either. Correct both.
+				if (
+					c.type === 'paragraph' &&
+					c.number === 618 &&
+					c.citations?.[0]?.text_html.includes('vita mirabilis')
+				) {
+					c.citations[0].text_html =
+						'<span>En dehors de la Croix il n’y a pas d’autre échelle par où monter au ciel ' +
+						'(Sainte Rose de Lima, <i class="typo_italic">vita mirabilis</i>).</span>';
 				}
 			}
 			for (const c of kids) walk(c);

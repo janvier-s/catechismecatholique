@@ -4,6 +4,7 @@
 	import { prefs } from '$lib/stores/prefs';
 	import { goto } from '$app/navigation';
 	import { bibleRefUrl } from '$lib/utils/linkifyRefs';
+	import { bookByAbbr } from '$lib/utils/bibleBookSlug';
 	import { frenchPunct } from '$lib/utils/typography';
 	let {
 		html,
@@ -25,6 +26,39 @@
 	function formatBibleRef(raw: string): string {
 		const cleaned = raw.replace(/^voir\s+/i, '').trim();
 		return cleaned.replace(':', ', ');
+	}
+
+	// Parse a raw magisterial bible ref ("Jn 21:18-19", "voir Mc 10:39") into
+	// slug/chapter/verse-range for the tooltip cluster encoding below.
+	function parseRefForCluster(
+		raw: string
+	): { slug: string; chapter: number; fromV?: number; toV?: number } | null {
+		const cleaned = raw.replace(/^voir\s+/i, '').trim();
+		const m = cleaned.match(/^([1-3]?\s*[A-Za-zÀ-ÿ]+)\s+(\d+)(?::(\d+)(?:-(\d+))?)?/);
+		if (!m || !m[1] || !m[2]) return null;
+		const book = bookByAbbr(m[1].trim());
+		if (!book) return null;
+		const fromV = m[3] ? parseInt(m[3], 10) : undefined;
+		const toV = m[4] ? parseInt(m[4], 10) : fromV;
+		return { slug: book.slug, chapter: parseInt(m[2], 10), fromV, toV };
+	}
+
+	// Bible-ref clusters (groupConsecutiveBibleSups, see prepare/) fold
+	// several verses under ONE visible marker — e.g. §618's "4" cites Mc
+	// 10:39, Jn 21:18-19 AND Col 1:24. The sup only carries the leader's own
+	// slug/chapter/verse, so the hover tooltip showed just the first verse.
+	// Encode the whole cluster (potentially spanning several books) as a
+	// pipe-separated `data-cluster` list the tooltip can expand.
+	function buildClusterAttr(leaderRaw: string, members: MagisterialRefRecord[]): string | null {
+		const all = [leaderRaw, ...members.map((m) => m.raw)];
+		const parsed = all.map(parseRefForCluster).filter((r) => r !== null);
+		if (parsed.length < 2) return null;
+		return parsed
+			.map(
+				(r) =>
+					`${r.slug}:${r.chapter}:${r.fromV !== undefined ? r.fromV : ''}${r.toV !== undefined && r.toV !== r.fromV ? `-${r.toV}` : ''}`
+			)
+			.join('|');
 	}
 
 	function makeInlineRef(raw: string, idx: string): DocumentFragment {
@@ -162,6 +196,11 @@
 							sup.dataset.chapter = m[2]!;
 							if (m[3]) sup.dataset.verse = m[3];
 						}
+					}
+					const members = bibleRefs.filter((r) => r.marker_idx === ref.idx);
+					if (members.length > 0) {
+						const cluster = buildClusterAttr(ref.raw, members);
+						if (cluster) sup.dataset.cluster = cluster;
 					}
 				}
 			}
