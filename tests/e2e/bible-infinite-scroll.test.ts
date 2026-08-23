@@ -223,3 +223,130 @@ test('navigating away cancels a pending URL write instead of letting it land', a
 	await expect(page.getByRole('heading', { level: 1, name: /Chapitre 9/ })).toBeVisible();
 	expect(page.url()).toMatch(/\/bible\/genese\/9$/);
 });
+
+test('a prepended chapter does not move the text the reader is on', async ({ page }) => {
+	await page.goto('/bible/genese/5');
+	await enableInfiniteScroll(page);
+	await page.goto('/bible/genese/5');
+
+	// Scroll into the body of chapter 5, so there is a reading position to hold.
+	await page.evaluate(() => window.scrollTo(0, 800));
+	const anchor = page.locator('[data-chapter-anchor][data-chapter-num="5"]');
+	await expect(anchor).toHaveCount(1);
+
+	// Take the reading before the prepend. The rolling preload sits behind a 2s
+	// navigation cooldown precisely so a reader who has just arrived is not
+	// yanked, which also leaves room for this measurement.
+	const before = await anchor.evaluate((el) => el.getBoundingClientRect().top);
+
+	await expect(page.locator('[data-chapter-anchor][data-chapter-num="4"]')).toHaveCount(1, {
+		timeout: 15_000
+	});
+	await page.waitForTimeout(300); // let the compensation settle
+
+	// Genèse 4 is around two thousand pixels of text. Without compensation this
+	// anchor would be pushed down by that whole height; with it, the reader's
+	// place has not moved.
+	const after = await anchor.evaluate((el) => el.getBoundingClientRect().top);
+	expect(Math.abs(after - before)).toBeLessThan(5);
+});
+
+test('the sticky bars do not flap while chapters are prepended', async ({ page }) => {
+	// Both this feature and the reveal-on-scroll chrome consume the scroll
+	// stream. A prepend compensation is a large downward jump in scrollY that
+	// the reader did not perform, and without anchorChromeShift the chrome
+	// reducer reads it as intent and tucks the header away mid-prepend.
+	await page.goto('/bible/genese/5');
+	await enableInfiniteScroll(page);
+	await page.goto('/bible/genese/5');
+	await expect(page.locator('[data-chapter-anchor][data-chapter-num="4"]')).toHaveCount(1, {
+		timeout: 15_000
+	});
+	// Wait for the arrival cascade to settle at the full window rather than
+	// starting mid-prepend. Otherwise the sampling below races it, and the
+	// non-vacuity check at the end can be satisfied by a prepend that the setup
+	// had already started rather than by one the scrolling caused.
+	await expect(page.locator('[data-chapter-section]')).toHaveCount(5, { timeout: 15_000 });
+
+	// Scroll down far enough to hide the bars, then settle.
+	//
+	// Relative, not `scrollTo(0, 1500)`. By the time the prepends have landed the
+	// reader is no longer at the top of the document: two chapters have been
+	// inserted above and the compensation has moved scrollY down by their whole
+	// height (measured at 4008px here). An absolute 1500 would be a 2500px jump
+	// *upward*, which reveals the bars rather than hiding them, and the test would
+	// fail on its own setup — a false negative created by the very compensation it
+	// exists to check.
+	await page.evaluate(() => window.scrollBy(0, 800));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+
+	// Cross the 120px reveal threshold first, so the bars are legitimately
+	// visible before sampling begins. Sampling from the hidden state would
+	// record a 'true' that is simply the starting condition.
+	await page.evaluate(() => window.scrollBy(0, -200));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
+
+	// Now keep scrolling up while prepends fire. Every prepend jumps scrollY
+	// downward by the height of the inserted chapter; if that jump reaches the
+	// chrome reducer it reads as downward intent and re-hides the bars. So the
+	// attribute flipping back to 'true' during a continuous upward scroll is
+	// exactly the flicker this test exists to catch.
+	//
+	// 120px a step, not 60. A prepend needs the reader to leave chapter 5, which
+	// needs its anchor to fall below the observer's activation band — the top 30%
+	// of the viewport, so 216px. The settled window puts chapter 5's start at
+	// ~4008 and the sampling begins at ~4608, which 12 steps of 60px miss by a
+	// couple of steps; the loop then samples a perfectly still page and proves
+	// nothing.
+	const lowestLoadedChapter = () =>
+		page.evaluate(() =>
+			Math.min(
+				...Array.from(document.querySelectorAll<HTMLElement>('[data-chapter-anchor]')).map((el) =>
+					Number(el.dataset.chapterNum)
+				)
+			)
+		);
+	const lowestBefore = await lowestLoadedChapter();
+
+	const seen = new Set<string | null>();
+	for (let i = 0; i < 12; i++) {
+		await page.evaluate(() => window.scrollBy(0, -120));
+		await page.waitForTimeout(80);
+		seen.add(await page.locator('html').getAttribute('data-chrome-hidden'));
+	}
+	expect([...seen]).toEqual(['false']);
+
+	// The assertion above is only meaningful if a prepend actually happened while
+	// it was sampling. Without this the test would pass just as happily against a
+	// build that had stopped prepending altogether.
+	expect(await lowestLoadedChapter()).toBeLessThan(lowestBefore);
+});
+
+test('the loaded window is capped, and pruning it does not disturb the bars', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await enableInfiniteScroll(page);
+
+	// The chrome sampling rides along with the descent rather than living in a
+	// test of its own, because this is the only place front-pruning happens and a
+	// second thirty-step scroll would double the file's runtime for no new
+	// coverage.
+	//
+	// Pruning a chapter off the top shortens the document above the viewport, and
+	// the compensation pulls scrollY *up* by what it occupied. Uncompensated that
+	// upward jump is thousands of pixels, which sails past REVEAL_AFTER_UP and
+	// pops both bars back out mid-descent — verified by removing
+	// anchorChromeShift(-removed) from pruneFront, which turns the set below into
+	// ['true', 'false']. Sampling starts at i >= 2 so the first steps, which are
+	// still crossing HIDE_AFTER, do not record a legitimate 'false'.
+	const chromeSeen = new Set<string | null>();
+	for (let i = 0; i < 30; i++) {
+		await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+		await page.waitForTimeout(100);
+		if (i >= 2) chromeSeen.add(await page.locator('html').getAttribute('data-chrome-hidden'));
+	}
+
+	const count = await page.locator('[data-chapter-section]').count();
+	expect(count).toBeGreaterThan(1);
+	expect(count).toBeLessThanOrEqual(5);
+	expect([...chromeSeen]).toEqual(['true']);
+});
