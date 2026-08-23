@@ -14,7 +14,8 @@
 		chapterCounts = {},
 		citedVerseCount = 0,
 		hasConcordance = false,
-		variant = 'reader'
+		variant = 'reader',
+		concordanceManifest = {}
 	}: {
 		book: BookInfo;
 		chapter: number;
@@ -23,7 +24,16 @@
 		citedVerseCount?: number;
 		hasConcordance?: boolean;
 		variant?: 'reader' | 'concordance';
+		/** Book slug → chapters with CCC cross-references. Only meaningful for
+		 *  variant="concordance", where it flags chapters with nothing to show
+		 *  in the FloatingNav picker (see isChapterUnavailable below). */
+		concordanceManifest?: Record<string, number[]>;
 	} = $props();
+
+	function isChapterUnavailable(slug: string, ch: number): boolean {
+		if (variant !== 'concordance') return false;
+		return !(concordanceManifest[slug] ?? []).includes(ch);
+	}
 
 	// Paragraph mode renders no citation sidebar, and a chapter with no
 	// citations has nothing to annotate. Disable rather than hide, so the nav
@@ -228,6 +238,7 @@
 		{buildHref}
 		onClose={() => (navOpen = false)}
 		topOffset="calc(var(--topbar-height, 52px) + 50px)"
+		{isChapterUnavailable}
 	/>
 	<div
 		class="fixed inset-0 z-[var(--z-overlay)]"

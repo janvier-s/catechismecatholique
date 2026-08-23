@@ -17,6 +17,7 @@
 		chapter={data.chapter}
 		totalChapters={data.totalChapters}
 		chapterCounts={data.chapterCounts}
+		concordanceManifest={data.concordanceManifest}
 	/>
 	{#if 'missing' in data && data.missing}
 		<main class="mx-auto max-w-reader px-6 max-md:px-4 py-16 text-center">

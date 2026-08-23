@@ -6,13 +6,22 @@
 		book,
 		chapter,
 		totalChapters,
-		chapterCounts = {}
+		chapterCounts = {},
+		concordanceManifest = {}
 	}: {
 		book: BookInfo;
 		chapter: number;
 		totalChapters: number;
 		chapterCounts?: Record<string, number>;
+		concordanceManifest?: Record<string, number[]>;
 	} = $props();
 </script>
 
-<ChapterNavBar {book} {chapter} {totalChapters} {chapterCounts} variant="concordance" />
+<ChapterNavBar
+	{book}
+	{chapter}
+	{totalChapters}
+	{chapterCounts}
+	{concordanceManifest}
+	variant="concordance"
+/>

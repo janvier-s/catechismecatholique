@@ -91,6 +91,41 @@ test.describe('concordance — data-dependent', () => {
 		await page.getByRole('button', { name: 'Genèse 3:19' }).first().click();
 		await expect(page.getByRole('link', { name: /^Voir tous/ })).toHaveCount(0);
 	});
+
+	test('FloatingNav greys out chapters with no concordance data but keeps them clickable', async ({
+		page,
+		request
+	}) => {
+		// Pick a real available/unavailable pair from Genèse rather than
+		// hardcoding chapter numbers, so this doesn't drift from the manifest.
+		const manifest = (await (
+			await request.get('/data/concordance/manifest.json')
+		).json()) as Record<string, number[]>;
+		const available = manifest['genese'] ?? [];
+		const totalGenesisChapters = 50;
+		const unavailableCh = Array.from({ length: totalGenesisChapters }, (_, i) => i + 1).find(
+			(n) => !available.includes(n)
+		);
+		test.skip(available.length === 0 || unavailableCh === undefined, 'no partial coverage to test');
+		const availableCh = available.find((n) => n !== 1)!; // avoid the already-active chapter 1
+
+		await page.goto('/bible/genese/1/concordance');
+		await page.getByRole('button', { name: 'Genèse 1', exact: true }).click();
+		const grid = page.locator('[data-book-grid="genese"]');
+		await expect(grid).toBeVisible();
+
+		const availableLink = grid.locator(`a[href="/bible/genese/${availableCh}/concordance"]`);
+		await expect(availableLink).not.toHaveAttribute('title');
+
+		const unavailableLink = grid.locator(`a[href="/bible/genese/${unavailableCh}/concordance"]`);
+		await expect(unavailableLink).toHaveAttribute('title', /Aucun renvoi/);
+		// Still a plain link, not a disabled control · the point is to warn, not block.
+		await expect(unavailableLink).not.toHaveAttribute('aria-disabled');
+
+		await unavailableLink.click();
+		await expect(page).toHaveURL(`/bible/genese/${unavailableCh}/concordance`);
+		await expect(page.getByText(/Aucun croisement avec le Catéchisme/i)).toBeVisible();
+	});
 });
 
 // Negative behaviour: chapters with no concordance entries don't expose
