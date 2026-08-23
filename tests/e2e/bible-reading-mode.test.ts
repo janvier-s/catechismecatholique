@@ -403,45 +403,76 @@ test('the in-page filter bar above the text is gone', async ({ page }) => {
 	await expect(page.locator('main .mode-pill')).toHaveCount(0);
 });
 
-test('both bars hide on scroll down and return on scroll up', async ({ page }) => {
+test('the chapter nav hides on scroll down and returns on scroll up; the topbar stays put', async ({
+	page
+}) => {
 	await page.goto('/bible/genese/1');
 	const topbar = page.locator('header.topbar');
 	const nav = page.locator('.bible-chapter-nav');
 
 	const topAtRest = (await topbar.boundingBox())!.y;
+	const navAtRest = (await nav.boundingBox())!.y;
 
-	// Past HIDE_AFTER (100px), scrolling down hides both.
+	// Past HIDE_AFTER (100px), scrolling down hides the chapter nav only ·
+	// the topbar never tucks away.
 	await page.evaluate(() => window.scrollTo(0, 600));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
-	await expect.poll(async () => (await topbar.boundingBox())!.y).toBeLessThan(topAtRest);
-	expect((await nav.boundingBox())!.y).toBeLessThan(topAtRest);
+	expect((await topbar.boundingBox())!.y).toBe(topAtRest);
+	await expect.poll(async () => (await nav.boundingBox())!.y).toBeLessThan(navAtRest);
 
 	// A short scroll up is not enough: REVEAL_AFTER_UP is 120px cumulative.
 	await page.evaluate(() => window.scrollTo(0, 550));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
 
-	// Crossing the threshold brings them back.
+	// Crossing the threshold brings the chapter nav back.
 	await page.evaluate(() => window.scrollTo(0, 470));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
-	await expect.poll(async () => (await topbar.boundingBox())!.y).toBe(topAtRest);
+	await expect.poll(async () => (await nav.boundingBox())!.y).toBe(navAtRest);
+	expect((await topbar.boundingBox())!.y).toBe(topAtRest);
 });
 
-test('the bars stay put while the reading-options popover is open', async ({ page }) => {
+test('hovering the top of the viewport reveals the tucked-away chapter nav', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	const nav = page.locator('.bible-chapter-nav');
+	const navAtRest = (await nav.boundingBox())!.y;
+
+	await page.evaluate(() => window.scrollTo(0, 600));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+	expect((await nav.boundingBox())!.y).toBeLessThan(navAtRest);
+
+	// Moving the cursor near the top of the viewport (where the topbar +
+	// chapter-nav strip live) reveals the nav even mid-scroll.
+	await page.mouse.move(200, 5);
+	await page.mouse.move(200, 60);
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
+	await expect.poll(async () => (await nav.boundingBox())!.y).toBe(navAtRest);
+
+	// Moving away releases the hold; the nav can hide again on the next scroll.
+	await page.mouse.move(200, 400);
+	await page.evaluate(() => window.scrollTo(0, 900));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
+});
+
+test('the chapter nav stays put while the reading-options popover is open', async ({ page }) => {
 	await page.goto('/bible/genese/1');
 
-	// Open the popover while the bars are still visible. A hidden bar is
-	// translated off-screen, so its trigger is genuinely unclickable then;
-	// the suspender exists to keep an *already open* panel anchored.
+	// The popover's trigger lives in the (always-visible) topbar, but the
+	// suspender still exists to keep the chapter-nav from tucking away and
+	// leaving the panel hanging over a gap while it's open.
 	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	await expect(page.getByRole('dialog', { name: 'Options de lecture' })).toBeVisible();
 
-	// Scrolling well past HIDE_AFTER must not tuck the header away and leave
-	// the panel hanging over a gap.
+	// Scrolling well past HIDE_AFTER must not tuck the chapter nav away.
 	await page.evaluate(() => window.scrollTo(0, 1200));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
 
-	// Once it closes, normal hide-on-scroll resumes.
+	// Once it closes, normal hide-on-scroll resumes · move the cursor away
+	// from the top-of-viewport hover zone first, since the click above left
+	// it parked on the trigger (which sits inside that zone) and the hover
+	// reveal would otherwise hold the nav open indefinitely, same as a real
+	// user's cursor would.
 	await page.keyboard.press('Escape');
+	await page.mouse.move(200, 400);
 	await page.evaluate(() => window.scrollTo(0, 400));
 	await page.evaluate(() => window.scrollTo(0, 1400));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');

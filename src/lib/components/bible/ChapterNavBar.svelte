@@ -5,6 +5,7 @@
 	import FloatingNav from './FloatingNav.svelte';
 	import ChapterFilterBar from './ChapterFilterBar.svelte';
 	import { prefs, updatePref } from '$lib/stores/prefs';
+	import { suspendChrome } from '$lib/stores/chrome';
 
 	let {
 		book,
@@ -40,6 +41,33 @@
 	const nextBook = $derived(getNextBook(book.slug) ?? null);
 
 	let navOpen = $state(false);
+
+	// Reveal-on-hover: the chapter-nav (unlike the topbar, which now always
+	// stays visible) still tucks away on scroll-down. When it's tucked away,
+	// its own hoverable box has translated off with it, so a mouseenter on the
+	// bar itself can never fire to bring it back · track the cursor against
+	// the viewport instead and hold the bar open via the same suspendChrome
+	// mechanism the prefs popover / nav drawer use, so hovering the strip of
+	// page where the bar normally lives reveals it.
+	$effect(() => {
+		if (variant !== 'reader' || typeof window === 'undefined') return;
+		const topbarHeight =
+			parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--topbar-height')) ||
+			52;
+		const threshold = topbarHeight + 50;
+		let hovering = false;
+		function onMouseMove(e: MouseEvent) {
+			const next = e.clientY <= threshold;
+			if (next === hovering) return;
+			hovering = next;
+			suspendChrome('bible-chapter-nav-hover', hovering);
+		}
+		window.addEventListener('mousemove', onMouseMove, { passive: true });
+		return () => {
+			window.removeEventListener('mousemove', onMouseMove);
+			if (hovering) suspendChrome('bible-chapter-nav-hover', false);
+		};
+	});
 </script>
 
 {#if variant === 'concordance'}
