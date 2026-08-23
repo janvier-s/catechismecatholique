@@ -1954,7 +1954,16 @@ Five short psalms fit inside one viewport. The `Math.max(0, y - removed)` clamp
 keeps the arithmetic in range, but the text genuinely moves, because part of
 what was removed was on screen.
 
-The fix for both is the same shape: never prune a section that is still visible.
+*And the document measurement has its own floor.* Task 9's fix round rewrote
+`pruneFront` to measure `scrollHeight` before and after, matching `loadPrev`.
+That removed the old premise but introduced a sibling: `scrollHeight` bottoms
+out at the viewport height, so once the remaining document is shorter than one
+screen, `delta` under-reports and the compensation under-scrolls. Unreachable at
+any supported column width with Genesis-sized chapters; reachable with the short
+units below. The implementer flagged it as belonging to this batch rather than
+guarded separately, and it does.
+
+The fix for the first two is the same shape: never prune a section that is still visible.
 Before pruning from either end, check the candidate's
 `getBoundingClientRect()` and stop at the first one whose `bottom > 0` (front)
 or `top < window.innerHeight` (back). Pruning fewer chapters than asked is
