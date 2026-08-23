@@ -41,6 +41,7 @@ export interface ReadingPrefs {
 	bionicReading: boolean; // bold each word's leading fraction, all corpora
 	bionicFixation: number; // 1-5, how much of each word is bolded
 	bionicSaccade: number; // 0-4, bold only every (n+1)-th word
+	infiniteScroll: boolean; // Bible reader: load the next chapter as you scroll
 	verseNumberColor: VerseNumberColor;
 }
 
@@ -67,6 +68,7 @@ const DEFAULTS: ReadingPrefs = {
 	bionicReading: false,
 	bionicFixation: 3,
 	bionicSaccade: 0,
+	infiniteScroll: false,
 	verseNumberColor: 'subtle'
 };
 
