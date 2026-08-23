@@ -1,5 +1,9 @@
 import { json } from '@sveltejs/kit';
 import MiniSearch from 'minisearch';
+// Public API surface (documented at /api) · the response shape below
+// (q, hits[], mode, tokens, matchedTokens, suggestions) is a contract other
+// sites may depend on. Changing field names or removing fields is a breaking
+// change · prefer additive changes.
 import {
 	searchTokenizer,
 	processTerm,

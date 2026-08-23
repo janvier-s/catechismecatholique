@@ -91,6 +91,8 @@
 		<span aria-hidden="true">·</span>
 		<a href="/a-propos">À propos</a>
 		<span aria-hidden="true">·</span>
+		<a href="/api">API</a>
+		<span aria-hidden="true">·</span>
 		<a href="/mentions-legales">Mentions légales</a>
 	</nav>
 
