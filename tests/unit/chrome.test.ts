@@ -137,4 +137,22 @@ describe('shiftChromeAnchor', () => {
 		const shifted = shiftChromeAnchor(hiddenAt(1000), -100000);
 		expect(shifted.lastY).toBe(0);
 	});
+
+	it('carries banked upward distance through a shift, so a prepend does not delay the reveal', () => {
+		const half = REVEAL_AFTER_UP / 2;
+		// Down past the top zone to 1000, then back up half the reveal
+		// threshold: not enough to reveal, so the distance stays banked.
+		const banked = nextChromeState(scrollThrough([0, HIDE_AFTER + 1, 1000]), 1000 - half);
+		expect(banked.upDistance).toBe(half);
+		expect(banked.hidden).toBe(true);
+
+		// A prepend inserts 900px above the viewport.
+		const shifted = shiftChromeAnchor(banked, 900);
+		expect(shifted.upDistance).toBe(half);
+
+		// The next half-threshold of genuine upward scroll must now cross it. If
+		// the shift had discarded the banked distance this would still be
+		// hidden, and the reader would have to scroll twice as far.
+		expect(nextChromeState(shifted, shifted.lastY - half).hidden).toBe(false);
+	});
 });
