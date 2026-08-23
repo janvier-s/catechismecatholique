@@ -119,23 +119,23 @@
 	     unambiguous · the header itself has height and would straddle it. -->
 	<div data-chapter-anchor data-book-slug={book.slug} data-chapter-num={chapter}></div>
 
-	<header class="mb-10">
-		<p class="chapter-eyebrow font-ui text-[11px] uppercase tracking-[0.3em] text-subtle mb-2">
-			{book.frenchName}
-		</p>
-		<svelte:element
-			this={headingLevel}
-			class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3"
-		>
-			Chapitre {chapter}{#if vulgateLabel}<span
-					class="vulgate-psalm ml-[6px] font-ui text-[1.1rem] tracking-normal text-subtle"
-					>(Vg {vulgateLabel})</span
-				>{/if}
-		</svelte:element>
-		<div class="w-10 h-px bg-accent opacity-70"></div>
-	</header>
-
 	<article>
+		<header class="mb-10">
+			<p class="chapter-eyebrow font-ui text-[11px] uppercase tracking-[0.3em] text-subtle mb-2">
+				{book.frenchName}
+			</p>
+			<svelte:element
+				this={headingLevel}
+				class="font-heading text-[2.5rem] leading-[1.2] tracking-[-0.01em] text-foreground mb-3"
+			>
+				Chapitre {chapter}{#if vulgateLabel}<span
+						class="vulgate-psalm ml-[6px] font-ui text-[1.1rem] tracking-normal text-subtle"
+						>(Vg {vulgateLabel})</span
+					>{/if}
+			</svelte:element>
+			<div class="w-10 h-px bg-accent opacity-70"></div>
+		</header>
+
 		{#if $prefs.bibleLayout === 'paragraph' && paragraphs}
 			<div class="bible-paragraphs">
 				{#if paragraphs.superscription}
