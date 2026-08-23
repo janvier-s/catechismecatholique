@@ -1963,6 +1963,24 @@ any supported column width with Genesis-sized chapters; reachable with the short
 units below. The implementer flagged it as belonging to this batch rather than
 guarded separately, and it does.
 
+**The retry budget needs backoff, and the reader needs to be told.** Task 9 gave
+the throwing path three attempts instead of unbounded per-frame retries, which
+bounds the damage but does not recover from a blip: `catch` falls through to
+`checkPreload()`, `loadable` is still true, and all three attempts burn within a
+few round trips. A reader on a genuinely flaky connection is stranded until they
+navigate, with nothing on screen explaining why the page stopped growing. Both
+halves belong here, because a book boundary is the only place `loadNclBook`
+makes a real request, so this is where throwing becomes routine. Space the
+attempts, and give the end of the document a visible state when a load has given
+up.
+
+**Sweep two stale identifiers while in the file.** `BibleReader.svelte:477`
+says "once a chapter is recorded in `failed`"; that set is now split into
+`missing` and `loadAttempts`. `tests/e2e/bible-infinite-scroll.test.ts:338` says
+the mutation removed `anchorChromeShift(-removed)`; the call is now
+`anchorChromeShift(delta)`. Both describe the right behaviour under the wrong
+names, which is how a correct comment becomes a misleading one.
+
 The fix for the first two is the same shape: never prune a section that is still visible.
 Before pruning from either end, check the candidate's
 `getBoundingClientRect()` and stop at the first one whose `bottom > 0` (front)
