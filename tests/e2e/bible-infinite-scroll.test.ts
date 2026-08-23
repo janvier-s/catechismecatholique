@@ -181,3 +181,45 @@ test('the URL and the sticky nav follow the chapter in the viewport', async ({ p
 	await page.reload();
 	await expect(page.getByRole('heading', { level: 1, name: /Chapitre 2/ })).toBeVisible();
 });
+
+test('navigating away cancels a pending URL write instead of letting it land', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await enableInfiniteScroll(page);
+	await scrollUntilChapter(page, 3);
+
+	// The chapter grid is opened BEFORE the scroll on purpose. The URL write is
+	// on a 200ms trailing edge, so the whole point is to navigate while it is
+	// still pending · opening the dialog first leaves a single click between
+	// making chapter 3 active and leaving it, instead of a click, a dialog
+	// transition and a second click.
+	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	const chapter9 = page
+		.getByRole('dialog', { name: 'Navigation biblique' })
+		.locator('a[href="/bible/genese/9"]');
+	await expect(chapter9).toBeVisible();
+
+	// Land chapter 3's anchor inside the activation band in one downward
+	// scroll · scrolling up would start the chrome's reveal transition, and
+	// waiting for that to settle would burn the debounce window this test
+	// needs to still be open.
+	await page.evaluate(() => {
+		const el = document.querySelector('[data-chapter-anchor][data-chapter-num="3"]');
+		if (el) window.scrollBy(0, el.getBoundingClientRect().top - 100);
+	});
+
+	// Proof that chapter 3 actually became active, which is what arms the
+	// pending URL write · the label is updated synchronously by the same
+	// `setActive` that schedules it. Without this the click can outrun the
+	// IntersectionObserver entirely, the callback lands after the navigation
+	// has already replaced the window, and the race under test never happens.
+	await expect(page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]')).toContainText(
+		'Genèse 3'
+	);
+	await chapter9.click();
+
+	// Well past the 200ms debounce, so a surviving timer has fired by now.
+	await page.waitForTimeout(600);
+
+	await expect(page.getByRole('heading', { level: 1, name: /Chapitre 9/ })).toBeVisible();
+	expect(page.url()).toMatch(/\/bible\/genese\/9$/);
+});

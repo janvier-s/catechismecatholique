@@ -101,6 +101,11 @@
 	// fast should see the label keep up, while the history stays quiet.
 	const syncUrl = debounce((slug: string, ch: number) => {
 		if (!browser || destroyed) return;
+		// The active chapter can move between scheduling and firing · a
+		// param-only navigation reuses this component, so `destroyed` is false
+		// and the trailing edge would otherwise write a URL for a chapter the
+		// reader has already left.
+		if (slug !== activeSlug || ch !== activeChapter) return;
 		const path = `/bible/${slug}/${ch}`;
 		if (window.location.pathname === path) return;
 		replaceState(path, {});
@@ -130,6 +135,11 @@
 		untrack(() => {
 			generation += 1;
 			loaded = [fresh];
+			// A URL write scheduled just before this navigation is now for a
+			// chapter the reader has left. The callback re-checks its own
+			// arguments too, so this is belt and braces · it just avoids leaving
+			// a pointless timer armed.
+			syncUrl.cancel();
 			activeSlug = fresh.book.slug;
 			activeChapter = fresh.chapter;
 			// The reset destroys the old chapter's anchor and creates a new one
