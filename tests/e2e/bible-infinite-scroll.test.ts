@@ -32,7 +32,7 @@ test('infinite scroll is off by default and the toggle persists', async ({ page 
 
 	// Survives a reload, and can be turned back off.
 	await page.reload();
-	let dialog = await openReadingTab(page);
+	const dialog = await openReadingTab(page);
 	await dialog.getByRole('button', { name: 'Désactivé', exact: true }).click();
 	await page.keyboard.press('Escape');
 	const off = await page.evaluate(() =>
