@@ -1389,6 +1389,26 @@ Add to the imports:
 	import { debounce } from '$lib/utils/debounce';
 ```
 
+and add `type Crossing` back to the existing `$lib/utils/infiniteScroll` import. Task 7
+deleted it, because its `onCrossing` was a zero-argument stub and an unused type import
+is an eslint error under `@typescript-eslint/no-unused-vars`. This task gives the
+callback a real parameter, so the type is needed again:
+
+```ts
+	import {
+		shouldLoadNext,
+		createChapterObserver,
+		observeAllAnchors,
+		observeNewAnchor,
+		type Crossing
+	} from '$lib/utils/infiniteScroll';
+```
+
+**`tsconfig.json` sets `noUncheckedIndexedAccess`.** Every array index and every
+`.find()` in this task yields `T | undefined`, so each one needs an explicit guard. Task 7
+hit the same thing and had to add `if (!last) return;` to `loadNext`. The code below is
+written for that already; do not "simplify" the guards away, because the build will fail.
+
 Add the state, replacing the `hasConcordance` derived from Task 6 and the `onCrossing` stub from Task 7:
 
 ```ts
@@ -1396,7 +1416,10 @@ Add the state, replacing the `hasConcordance` derived from Task 6 and the `onCro
 	let activeChapter = $state(chapter);
 
 	const activeBook = $derived(bookBySlug(activeSlug) ?? book);
-	const activeEntry = $derived(
+	// `loaded` is never empty · the reset effect always seeds it with the entry
+	// chapter. The `?? loaded[0]` is for the window between an active chapter
+	// being pruned and the observer reporting its replacement.
+	const activeEntry = $derived<LoadedChapter | undefined>(
 		loaded.find((l) => l.book.slug === activeSlug && l.chapter === activeChapter) ?? loaded[0]
 	);
 	const activeTotalChapters = $derived(chapterCounts[activeBook.usfx] ?? totalChapters);
@@ -1431,22 +1454,53 @@ Add the state, replacing the `hasConcordance` derived from Task 6 and the `onCro
 		const idx = loaded.findIndex((l) => l.book.slug === c.bookSlug && l.chapter === c.chapter);
 		if (idx > 0) {
 			const prev = loaded[idx - 1];
-			setActive(prev.book.slug, prev.chapter);
+			// Guard required by noUncheckedIndexedAccess · idx > 0 already proves
+			// this element exists, but the compiler does not know that.
+			if (prev) setActive(prev.book.slug, prev.chapter);
 		}
 	}
 ```
 
-Extend the reset effect from Task 7 so a real navigation also resets the active chapter:
+Extend the reset effect from Task 7 with three things: the active chapter, a
+generation counter, and re-observing the new anchor.
 
 ```ts
+	// Bumped on every route change. An in-flight load captures the value before
+	// its await and discards its result if the generation moved on · otherwise a
+	// navigation that lands mid-append splices a chapter from the OLD book onto
+	// the freshly reset window. Reachable in practice: appending across a book
+	// boundary is a real network request, and the reader can use the chapter
+	// grid while it is in flight.
+	let generation = 0;
+
 	$effect(() => {
 		const fresh = entryChapter();
 		untrack(() => {
+			generation += 1;
 			loaded = [fresh];
 			activeSlug = fresh.book.slug;
 			activeChapter = fresh.chapter;
+			// The reset destroys the old chapter's anchor and creates a new one
+			// that nothing is watching · `observeAllAnchors` runs only in
+			// `onMount`, and `observeNewAnchor` covers only appended chapters.
+			// Without this, after a chapter-grid click the observer never reports
+			// an `enter` for the chapter the reader is actually on.
+			tick().then(() => {
+				if (!destroyed && container) observeAllAnchors(container, ensureObserver());
+			});
 		});
 	});
+```
+
+Then make `loadNext` honour the generation. Capture it before the await and
+re-check after, alongside the existing `destroyed` check:
+
+```ts
+		loading = true;
+		const gen = generation;
+		try {
+			const entry = await fetchChapter(ref);
+			if (entry && !destroyed && gen === generation) {
 ```
 
 Add `syncUrl.cancel()` to `onDestroy`.
@@ -1695,8 +1749,16 @@ Add the loader:
 		let removed = 0;
 		for (let i = 0; i < count && i < sections.length; i++) {
 			const el = sections[i];
+			// noUncheckedIndexedAccess · the loop bound already proves this, but
+			// the compiler does not know it.
+			if (!el) continue;
 			const style = getComputedStyle(el);
 			removed += el.getBoundingClientRect().height + parseFloat(style.marginBottom || '0');
+			// An IntersectionObserver holds a strong reference to every target it
+			// watches, and nothing else in this feature ever unobserves. Release
+			// the anchors going away with this slice.
+			const anchor = el.querySelector('[data-chapter-anchor]');
+			if (anchor) observer?.unobserve(anchor);
 		}
 		const y = window.scrollY;
 		loaded = loaded.slice(count);
@@ -1706,6 +1768,36 @@ Add the loader:
 		anchorChromeShift(-removed);
 	}
 ```
+
+**A failed load must not retry on every frame.** `fetchChapter` returns `null`
+for an unknown slug or a missing chapter, and throws on a network error. Neither
+records anything, so the next scroll event recomputes the identical ref, finds
+`isLoaded` still false, and tries again, once per animation frame for as long as
+the reader keeps scrolling near the bottom. Offline at a book boundary that is a
+stream of failing requests and a `console.warn` per frame, while the reader just
+sees a page that never advances.
+
+Add a module-scope set beside `loading`:
+
+```ts
+	/** Refs whose load failed or came back empty · consulted alongside
+	 *  `isLoaded` so a dead chapter is attempted once, not once per frame. */
+	const failed = new Set<string>();
+
+	function refKey(ref: ChapterRef): string {
+		return `${ref.bookSlug}-${ref.chapter}`;
+	}
+```
+
+Consult it in both loaders' early return, `if (!ref || isLoaded(ref) || failed.has(refKey(ref))) return;`,
+and record into it whenever a load yields nothing:
+
+```ts
+			const entry = await fetchChapter(ref);
+			if (!entry) failed.add(refKey(ref));
+```
+
+and in the `catch`, `failed.add(refKey(ref));` before the `console.warn`.
 
 Call it at the end of `loadNext`'s success branch, replacing nothing else:
 
@@ -1961,5 +2053,13 @@ State the four numbers actually observed: unit count, e2e count, `check` result,
 **If the wrong chapter becomes active the moment one is appended**, the `chapterCrossing` below-the-fold branch is being bypassed. A freshly observed anchor fires immediately with `isIntersecting: false`, and the `top < viewportHeight` bound is what discards it.
 
 **If prepends cascade**, `loadPrev` is reachable from the scroll handler. It must only ever be called from `checkPreload`.
+
+**If a prepend overshoots by a small amount**, suspect `headingLevel`. It is
+index-based (`i === 0 ? 'h1' : 'h2'`), so a prepend moves index 0 to the new
+chapter and the previous first chapter's `<svelte:element>` changes tag, which
+destroys and re-creates that heading element directly above the scroll position.
+It should be benign, since `h1` and `h2` carry identical classes and the swap
+happens inside the same flush the compensation measures, but it is a moving part
+in exactly the wrong place and worth ruling out early rather than late.
 
 **If `check` complains about `data-chapter-anchor`**, plain data attributes on an element need no typing; make sure it is `data-chapter-anchor` with no value rather than `data-chapter-anchor={true}`.
