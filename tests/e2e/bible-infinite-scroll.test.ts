@@ -143,3 +143,41 @@ test('the column-width guarantee survives a multi-chapter page', async ({ page }
 	await expect(page.locator('.verse-text').first()).toHaveCSS('width', '702px');
 	await expect(page.locator('.verse-text').last()).toHaveCSS('width', '702px');
 });
+
+test('the URL and the sticky nav follow the chapter in the viewport', async ({ page }) => {
+	await page.goto('/bible/genese/1');
+	await enableInfiniteScroll(page);
+	await scrollUntilChapter(page, 2);
+
+	// Land chapter 2's anchor inside the activation band (the top 30% of the
+	// viewport), then let a frame render before scrolling on. Two things make
+	// the bare `scrollIntoView` + `scrollBy` pair racy: `block: 'start'` puts
+	// the zero-height anchor exactly on the band's top edge, where a sub-pixel
+	// scroll offset decides whether it counts as intersecting; and back-to-back
+	// page.evaluate calls can land in the same rendering frame, in which case
+	// the IntersectionObserver only ever sees the final position and reports no
+	// crossing at all. The -40 puts the anchor unambiguously inside the band and
+	// the wait guarantees the 'enter' is delivered.
+	await page
+		.locator('[data-chapter-anchor][data-chapter-num="2"]')
+		.evaluate((el) => el.scrollIntoView({ block: 'start' }));
+	await page.evaluate(() => window.scrollBy(0, -40));
+	await page.waitForTimeout(200);
+
+	// Read on into chapter 2, putting its heading above the activation band.
+	await page.evaluate(() => window.scrollBy(0, 200));
+
+	await expect.poll(() => page.url(), { timeout: 10_000 }).toMatch(/\/bible\/genese\/2$/);
+	await expect(page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]')).toContainText(
+		'Genèse 2'
+	);
+
+	// The URL is real rather than cosmetic: reloading it serves chapter 2 as
+	// the entry chapter. Note there is no back-button assertion here ·
+	// replaceState *replaces* the current history entry, so the chapter 1
+	// entry no longer exists to go back to. That is the intended behaviour:
+	// scrolling through a book should not fill the reader's history with a
+	// stack of chapters to back out through.
+	await page.reload();
+	await expect(page.getByRole('heading', { level: 1, name: /Chapitre 2/ })).toBeVisible();
+});

@@ -1,17 +1,20 @@
 <script lang="ts">
 	import { onMount, onDestroy, tick, untrack } from 'svelte';
 	import { browser } from '$app/environment';
+	import { replaceState } from '$app/navigation';
 	import ChapterNavBar from './ChapterNavBar.svelte';
 	import BibleChapter from './BibleChapter.svelte';
 	import type { BibleVerseIndex, NclChapterBlocks, NclSectionMap } from '$lib/data/types';
 	import { bookBySlug, type BookInfo } from '$lib/utils/bibleBookSlug';
 	import { loadNclBook, loadNclParagraphsBook } from '$lib/data/loaders';
 	import { nextChapterRef, type ChapterRef } from '$lib/utils/chapterCursor';
+	import { debounce } from '$lib/utils/debounce';
 	import {
 		shouldLoadNext,
 		createChapterObserver,
 		observeAllAnchors,
-		observeNewAnchor
+		observeNewAnchor,
+		type Crossing
 	} from '$lib/utils/infiniteScroll';
 	import { prefs } from '$lib/stores/prefs';
 
@@ -37,28 +40,29 @@
 		paragraphs?: NclChapterBlocks | null;
 	} = $props();
 
-	const hasConcordance = $derived((concordanceManifest[book.slug] ?? []).includes(chapter));
-
 	// Follows the pref alone. Citation count affects only whether the control
 	// is disabled, never the layout attribute, because data-study-mode drives
 	// the column-width compensation in app.css.
 	const studyMode = $derived($prefs.bibleStudyMode);
 
+	// The footer nav only renders with infinite scroll off, and then the entry
+	// chapter is the only chapter · these correctly stay on the props.
 	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
 	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
-
-	function citedCount(v: number): number {
-		const arr = verseIdx[book.usfx]?.[String(chapter)]?.[String(v)];
-		return arr ? arr.length : 0;
-	}
-
-	const totalCited = $derived(verses.reduce((t, v) => t + (citedCount(v.v) > 0 ? 1 : 0), 0));
 
 	interface LoadedChapter {
 		book: BookInfo;
 		chapter: number;
 		verses: { v: number; text: string }[];
 		paragraphs: NclChapterBlocks | null;
+	}
+
+	/** Verses in `entry` that the Catechism cites · drives whether the
+	 *  Lecture/Étude toggle is enabled. */
+	function totalCitedIn(entry: LoadedChapter): number {
+		const chIdx = verseIdx[entry.book.usfx]?.[String(entry.chapter)];
+		if (!chIdx) return 0;
+		return entry.verses.reduce((t, v) => t + ((chIdx[String(v.v)]?.length ?? 0) > 0 ? 1 : 0), 0);
 	}
 
 	function entryChapter(): LoadedChapter {
@@ -68,6 +72,55 @@
 	let loaded = $state<LoadedChapter[]>([entryChapter()]);
 	let container: HTMLElement | undefined = $state();
 
+	// The chapter the reader is actually on, which with infinite scroll on is
+	// not necessarily the one the route loaded. The chrome follows this.
+	//
+	// Seeded from the props and then owned by the observer · capturing only the
+	// initial value is the point, so the compiler's `state_referenced_locally`
+	// advice to make these derived is exactly backwards here. A later route
+	// change re-seeds them through the reset effect below, not through
+	// reactivity, so that scroll-driven updates in between are not clobbered.
+	// svelte-ignore state_referenced_locally
+	let activeSlug = $state(book.slug);
+	// svelte-ignore state_referenced_locally
+	let activeChapter = $state(chapter);
+
+	const activeBook = $derived(bookBySlug(activeSlug) ?? book);
+	// `loaded` is never empty · the reset effect always seeds it with the entry
+	// chapter. The `?? loaded[0]` is for the window between an active chapter
+	// being pruned and the observer reporting its replacement.
+	const activeEntry = $derived<LoadedChapter | undefined>(
+		loaded.find((l) => l.book.slug === activeSlug && l.chapter === activeChapter) ?? loaded[0]
+	);
+	const activeTotalChapters = $derived(chapterCounts[activeBook.usfx] ?? totalChapters);
+	const hasConcordance = $derived(
+		(concordanceManifest[activeBook.slug] ?? []).includes(activeChapter)
+	);
+
+	// The history entry is debounced; the bar label is not. A reader scrolling
+	// fast should see the label keep up, while the history stays quiet.
+	const syncUrl = debounce((slug: string, ch: number) => {
+		if (!browser || destroyed) return;
+		const path = `/bible/${slug}/${ch}`;
+		if (window.location.pathname === path) return;
+		replaceState(path, {});
+	}, 200);
+
+	function setActive(slug: string, ch: number) {
+		if (slug === activeSlug && ch === activeChapter) return;
+		activeSlug = slug;
+		activeChapter = ch;
+		syncUrl(slug, ch);
+	}
+
+	// Bumped on every route change. An in-flight load captures the value before
+	// its await and discards its result if the generation moved on · otherwise a
+	// navigation that lands mid-append splices a chapter from the OLD book onto
+	// the freshly reset window. Reachable in practice: appending across a book
+	// boundary is a real network request, and the reader can use the chapter
+	// grid while it is in flight.
+	let generation = 0;
+
 	// A click on the chapter grid or a prev/next link re-runs load and hands us
 	// new props. Without this the new chapter would be appended onto a window
 	// built around the old one. ODR has no equivalent because scrolling is its
@@ -75,7 +128,18 @@
 	$effect(() => {
 		const fresh = entryChapter();
 		untrack(() => {
+			generation += 1;
 			loaded = [fresh];
+			activeSlug = fresh.book.slug;
+			activeChapter = fresh.chapter;
+			// The reset destroys the old chapter's anchor and creates a new one
+			// that nothing is watching · `observeAllAnchors` runs only in
+			// `onMount`, and `observeNewAnchor` covers only appended chapters.
+			// Without this, after a chapter-grid click the observer never reports
+			// an `enter` for the chapter the reader is actually on.
+			tick().then(() => {
+				if (!destroyed && container) observeAllAnchors(container, ensureObserver());
+			});
 		});
 	});
 
@@ -132,9 +196,10 @@
 		if (!ref || isLoaded(ref)) return;
 
 		loading = true;
+		const gen = generation;
 		try {
 			const entry = await fetchChapter(ref);
-			if (entry && !destroyed) {
+			if (entry && !destroyed && gen === generation) {
 				loaded = [...loaded, entry];
 				await tick();
 				if (container) observeNewAnchor(container, ensureObserver(), ref.bookSlug, ref.chapter);
@@ -161,11 +226,22 @@
 		});
 	}
 
-	// Task 8 replaces this body. For now the observer exists only so appended
-	// anchors have something to attach to. It declares no parameter because it
-	// uses none, and an unused one trips @typescript-eslint/no-unused-vars ·
-	// Task 8 reintroduces the Crossing argument together with its first use.
-	function onCrossing() {}
+	function onCrossing(c: Crossing) {
+		if (c.kind === 'enter') {
+			setActive(c.bookSlug, c.chapter);
+			return;
+		}
+		// exit-up · this chapter's anchor dropped below the band while the reader
+		// scrolled up, which means the chapter loaded before it is now the one
+		// being read.
+		const idx = loaded.findIndex((l) => l.book.slug === c.bookSlug && l.chapter === c.chapter);
+		if (idx > 0) {
+			const prev = loaded[idx - 1];
+			// Guard required by noUncheckedIndexedAccess · idx > 0 already proves
+			// this element exists, but the compiler does not know that.
+			if (prev) setActive(prev.book.slug, prev.chapter);
+		}
+	}
 
 	onMount(() => {
 		if (container) observeAllAnchors(container, ensureObserver());
@@ -175,6 +251,7 @@
 
 	onDestroy(() => {
 		destroyed = true;
+		syncUrl.cancel();
 		observer?.disconnect();
 		if (browser) {
 			window.removeEventListener('scroll', onScroll);
@@ -184,7 +261,10 @@
 </script>
 
 <svelte:head>
-	<title>{book.frenchName} {chapter} dans la Bible · Catéchisme de l'Église Catholique</title>
+	<title
+		>{activeBook.frenchName}
+		{activeChapter} dans la Bible · Catéchisme de l'Église Catholique</title
+	>
 </svelte:head>
 
 <!-- Chapter navigation bar · sticky below the global TopBar. Optional: readers
@@ -192,12 +272,12 @@
      its own bar and is deliberately unaffected. -->
 {#if !$prefs.hideChapterNav}
 	<ChapterNavBar
-		{book}
-		{chapter}
-		{totalChapters}
+		book={activeBook}
+		chapter={activeChapter}
+		totalChapters={activeTotalChapters}
 		{chapterCounts}
 		{hasConcordance}
-		citedVerseCount={totalCited}
+		citedVerseCount={activeEntry ? totalCitedIn(activeEntry) : 0}
 		variant="reader"
 	/>
 {/if}
