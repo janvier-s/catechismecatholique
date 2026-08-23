@@ -438,7 +438,7 @@ test('hovering the top of the viewport reveals the tucked-away chapter nav', asy
 
 	await page.evaluate(() => window.scrollTo(0, 600));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
-	expect((await nav.boundingBox())!.y).toBeLessThan(navAtRest);
+	await expect.poll(async () => (await nav.boundingBox())!.y).toBeLessThan(navAtRest);
 
 	// Moving the cursor near the top of the viewport (where the topbar +
 	// chapter-nav strip live) reveals the nav even mid-scroll.
