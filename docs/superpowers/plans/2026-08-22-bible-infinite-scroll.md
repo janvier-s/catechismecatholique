@@ -1686,6 +1686,15 @@ Add the imports:
 Add the cooldown alongside the other module state:
 
 ```ts
+	/** Chapters above and below the reader stay in the DOM; beyond this many,
+	 *  the far end is pruned. Five covers a fast scroll in either direction
+	 *  without letting a long book accumulate unbounded.
+	 *
+	 *  Task 7 deliberately omitted this constant, because nothing used it yet
+	 *  and `@typescript-eslint/no-unused-vars` errors on an unused module const.
+	 *  This is the task that gives it a use, so it is declared here. */
+	const MAX_LOADED = 5;
+
 	/** Blocks the rolling preload briefly after arrival, so a reader who has
 	 *  just landed is not immediately shifted by a prepend. */
 	let navCooldownUntil = 0;
@@ -1846,6 +1855,19 @@ and add `checkPreload();` after `loadNext`'s `finally` block, matching `loadPrev
 		activeChapter;
 		untrack(() => checkPreload());
 	});
+```
+
+**Re-arm the cooldown on every navigation, not only on mount.** Add
+`navCooldownUntil = Date.now() + 2000;` to the reset effect's `untrack` block,
+beside the existing re-seeding. Without it the cooldown protects only the first
+arrival: a reader who lands on Genèse 1, reads for a minute, then jumps to
+Genèse 9 from the chapter grid arrives with the cooldown long expired, so
+`checkPreload` fires on the very next active-chapter change and `loadPrev`
+prepends Genèse 8 underneath them. That is exactly the yank the cooldown is
+described as preventing, and a param-only navigation reuses the component, so
+nothing else re-arms it.
+
+```ts
 ```
 
 Extend `onMount`:
@@ -2045,6 +2067,26 @@ Skip this step if nothing but `static/data/` is dirty.
 State the four numbers actually observed: unit count, e2e count, `check` result, build result. Do not report a count you did not see in the output.
 
 ---
+
+## Accepted behaviour, documented rather than fixed
+
+**Back-navigation returns to the entry chapter while the address bar keeps the
+synced one.** `replaceState` stores `page.url.href` in the history entry's state,
+and shallow routing never updates `page.url`, so the entry keeps pointing at the
+chapter the reader arrived on however far they scroll. Leave the Bible and press
+Back: SvelteKit's popstate handler is non-shallow, navigates to the stored URL,
+and its `popped` branch writes no history, so the address bar shows
+`/bible/genese/5` while chapter 1 is served.
+
+This is inherent to calling `replaceState` with a URL different from the one the
+entry was created with, and there is no clean fix in component code. The
+alternative, `pushState` per chapter, is worse: it fills the reader's history
+with a stack of chapters to back out through one at a time.
+
+Note that Task 8's e2e test carries a comment claiming "the chapter 1 entry no
+longer exists to go back to". That is true of the address bar and false of the
+entry's internal state. Correct it if that test is ever touched. A Task 11
+assertion pinning the accepted behaviour would be reasonable.
 
 ## Notes for the implementer
 
