@@ -6,9 +6,12 @@ import type { PageLoad } from './$types';
 // Session-wide data (verse index, concordance manifest, NCL sections, chapter
 // counts) is loaded once by /bible/+layout.ts. It is NOT re-returned here:
 // SvelteKit merges every route node's data into the page's `data` prop, so
-// +page.svelte reads it straight off the layout. Re-returning it from this
-// node would serialise it a second time in the SSR payload (each route node
-// gets its own devalue call, with no structural sharing across calls).
+// +page.svelte reads it straight off the layout, and re-returning it would
+// just be four more keys to keep in sync by hand.
+//
+// It costs nothing either way in the payload · this route has no server load,
+// and only server load data is devalue-serialised into the HTML. Measured at
+// /bible/genese/1: 987528 bytes with the re-returns, 987529 without.
 export const load: PageLoad = async ({ params, fetch }) => {
 	const book = bookBySlug(params.book!);
 	if (!book) throw error(404);
