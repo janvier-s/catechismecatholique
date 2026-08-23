@@ -41,13 +41,31 @@ test('infinite scroll is off by default and the toggle persists', async ({ page 
 	expect(off.infiniteScroll).toBe(false);
 });
 
-test('the new toggle does not displace the existing Bible controls', async ({ page }) => {
-	// bible-reading-mode.test.ts selects these positionally. If the infinite
-	// scroll toggle were inserted anywhere but last, those tests would start
-	// flipping the wrong setting and the failure would look unrelated.
+test('the Afficher/Masquer indices that bible-reading-mode.test.ts depends on still map correctly', async ({
+	page
+}) => {
+	// That file addresses these positionally: nth(0) Numéros de verset,
+	// nth(1) Titres de section, nth(2) Barre de chapitres, nth(3) Numérotation
+	// Vulgate. Only those four controls use the Afficher/Masquer pair, so the
+	// indices are stable against controls using other labels · « Défilement
+	// continu » deliberately uses Activé/Désactivé to stay out of the sequence.
+	// What would break them is a NEW control reusing Afficher/Masquer above
+	// « Barre de chapitres ». This test catches that by proving the click at
+	// nth(2) lands on the chapter nav and on nothing else.
 	await page.goto('/bible/genese/1');
 	const dialog = await openReadingTab(page);
 	await dialog.getByRole('button', { name: 'Masquer' }).nth(2).click();
 	await page.keyboard.press('Escape');
+
 	await expect(page.locator('.bible-chapter-nav')).toHaveCount(0);
+
+	const stored = await page.evaluate(() =>
+		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
+	);
+	expect(stored.hideChapterNav).toBe(true);
+	// The discriminating half: no neighbouring preference moved. If the indices
+	// had shifted by one, nth(2) would have hit Numérotation Vulgate instead and
+	// showVulgatePsalms would be the field that changed.
+	expect(stored.hideVerseNumbers).toBe(false);
+	expect(stored.showVulgatePsalms).toBe(false);
 });
