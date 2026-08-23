@@ -4,6 +4,7 @@ import {
 	REVEAL_AFTER_UP,
 	initialChromeState,
 	nextChromeState,
+	shiftChromeAnchor,
 	type ChromeScrollState
 } from '$lib/stores/chrome';
 
@@ -91,5 +92,49 @@ describe('chrome scroll state machine', () => {
 		const state = scrollThrough([400, 400, 400], down);
 		expect(state.hidden).toBe(true);
 		expect(state.upDistance).toBe(0);
+	});
+});
+
+describe('shiftChromeAnchor', () => {
+	/** A state that is hidden, having scrolled down well past the top zone. */
+	function hiddenAt(y: number): ChromeScrollState {
+		const state = scrollThrough([0, HIDE_AFTER + 1, y]);
+		expect(state.hidden).toBe(true);
+		return state;
+	}
+
+	it('moves the anchor by the delta and leaves the bars alone', () => {
+		const before = hiddenAt(1000);
+		const after = shiftChromeAnchor(before, 900);
+		expect(after.lastY).toBe(before.lastY + 900);
+		expect(after.hidden).toBe(true);
+		expect(after.upDistance).toBe(before.upDistance);
+	});
+
+	it('keeps the bars hidden through a prepend compensation', () => {
+		// A prepend inserts 900px above the viewport, so the browser is scrolled
+		// down by 900 to keep the text still. Without the shift this reads as
+		// deliberate downward travel.
+		const shifted = shiftChromeAnchor(hiddenAt(1000), 900);
+		expect(nextChromeState(shifted, 1900).hidden).toBe(true);
+	});
+
+	it('does not reveal the bars through a prune compensation', () => {
+		// Pruning 900px from above the viewport scrolls up by 900, which is well
+		// past REVEAL_AFTER_UP and would otherwise pop the bars back.
+		expect(REVEAL_AFTER_UP).toBeLessThan(900);
+		const shifted = shiftChromeAnchor(hiddenAt(2000), -900);
+		expect(nextChromeState(shifted, 1100).hidden).toBe(true);
+	});
+
+	it('still reveals on genuine upward scrolling after a shift', () => {
+		const shifted = shiftChromeAnchor(hiddenAt(1000), 900);
+		const revealed = nextChromeState(shifted, 1900 - REVEAL_AFTER_UP);
+		expect(revealed.hidden).toBe(false);
+	});
+
+	it('clamps the anchor at zero', () => {
+		const shifted = shiftChromeAnchor(hiddenAt(1000), -100000);
+		expect(shifted.lastY).toBe(0);
 	});
 });

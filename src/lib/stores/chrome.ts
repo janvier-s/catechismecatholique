@@ -45,6 +45,16 @@ export function nextChromeState(state: ChromeScrollState, rawY: number): ChromeS
 	return { ...state, lastY: y };
 }
 
+/**
+ * Re-anchor after the document shifted underneath the reader, which is what an
+ * infinite-scroll prepend or prune compensation does. `hidden` and `upDistance`
+ * are left exactly as they were: the page moved, the reader did not scroll, so
+ * no decision should change.
+ */
+export function shiftChromeAnchor(state: ChromeScrollState, delta: number): ChromeScrollState {
+	return { ...state, lastY: Math.max(0, state.lastY + delta) };
+}
+
 // ── Store wiring ─────────────────────────────────────────────────────────────
 
 let state = initialChromeState(0);
@@ -109,4 +119,23 @@ export function suspendChrome(key: string, active: boolean) {
 /** Force the bars back into view, e.g. on navigation or when focus enters one. */
 export function revealChrome() {
 	resetState();
+}
+
+/**
+ * Tell the store that `delta` pixels appeared above (positive) or were removed
+ * from above (negative) the viewport, and that the accompanying `scrollTo` is
+ * compensation rather than intent.
+ *
+ * Call this synchronously right after the `scrollTo`. The browser dispatches
+ * the resulting scroll event afterwards, and `onScroll` reads `window.scrollY`
+ * inside a `requestAnimationFrame` rather than at event time · so by the time
+ * any frame runs, position and anchor have both moved by `delta` and the
+ * reducer sees no travel at all.
+ *
+ * Deliberately does not publish: unlike `suspendChrome` and `revealChrome`,
+ * which reset to visible, this must not change what the bars are doing.
+ */
+export function anchorChromeShift(delta: number) {
+	if (!delta) return;
+	state = shiftChromeAnchor(state, delta);
 }
