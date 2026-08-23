@@ -603,8 +603,19 @@
 	// when the entry is actually clipped, so manual sidebar scrolling isn't
 	// fought. Also re-runs when activeChapter resolves so the deeper entries
 	// rendered after the chapter detail arrives can be scrolled into view.
+	//
+	// Skip entirely while the rail is closed/off-screen: activeHref tracks
+	// scroll-spy, which fires on every scroll tick of the READING column, and
+	// this aside is always mounted (never `{#if}`-removed, to avoid the CLS
+	// that toggling it in and out used to cause) — so without this guard,
+	// every scroll tick was running a querySelector + smooth scrollIntoView
+	// inside a hidden, width:0 nav, fighting the page's own scroll and
+	// producing the stutter. The sidebar catches up to the right entry the
+	// next time it's opened, since this effect re-runs on any dependency
+	// change once `$sidebarOpen`/`$sidebarMobileOpen` flips back on.
 	$effect(() => {
 		if (!navEl) return;
+		if (!$sidebarOpen && !$sidebarMobileOpen) return;
 		const target = activeHref;
 		void activeChapter;
 		const link =
@@ -1786,8 +1797,8 @@
 		.sidebar-rail {
 			display: flex;
 			position: sticky;
-			top: 80px;
-			height: calc(100vh - 80px);
+			top: var(--topbar-height, 52px);
+			height: calc(100vh - var(--topbar-height, 52px));
 			border-right: 1px solid var(--color-border);
 			width: 380px;
 			overflow: hidden;
