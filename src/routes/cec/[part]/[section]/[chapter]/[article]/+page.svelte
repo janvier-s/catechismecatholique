@@ -2,7 +2,6 @@
 	import ReadableUnit from '$lib/components/cec/ReadableUnit.svelte';
 	import EnBrefBlock from '$lib/components/cec/EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
-	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { page } from '$app/state';
@@ -69,52 +68,49 @@
 </svelte:head>
 
 <main class="mx-auto max-w-reader px-6 max-md:px-4 py-10" use:scrollSpy>
-	<div class="breadcrumb-row mb-6">
-		<nav class="breadcrumb-rail font-ui text-sm" aria-label="Fil d'Ariane">
-			<ol class="space-y-1">
-				<li><a href="/cec" class="text-muted hover:text-accent">Catéchisme</a></li>
-				<li class="pl-5">
-					<a href="/cec/{data.chapter.part_slug}" class="text-muted hover:text-accent">
-						<span class="font-semibold bc-kicker"
-							>{data.chapter.part_number ? `Partie ${data.chapter.part_number}` : 'Prologue'}</span
-						>
-						<span class="bc-title">&nbsp;: {data.chapter.part_title}</span>
-					</a>
-				</li>
-				<li class="pl-10">
-					<a
-						href="/cec/{data.chapter.part_slug}/{data.chapter.section_slug}"
-						class="text-muted hover:text-accent"
-					>
-						<span class="font-semibold bc-kicker"
-							>{data.chapter.section_number
-								? `Section ${data.chapter.section_number}`
-								: 'Section'}</span
-						>
-						<span class="bc-title">&nbsp;: {data.chapter.section_title}</span>
-					</a>
-				</li>
-				<li class="pl-[3.75rem]">
-					<a
-						href="/cec/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
-						class="text-muted hover:text-accent"
-					>
-						<span class="font-semibold bc-kicker"
-							>{data.chapter.number ? `Chapitre ${data.chapter.number}` : 'Chapitre'}</span
-						>
-						<span class="bc-title">&nbsp;: {data.chapter.title}</span>
-					</a>
-				</li>
-				<li class="pl-20">
+	<nav class="breadcrumb-rail font-ui text-sm mb-6" aria-label="Fil d'Ariane">
+		<ol class="space-y-1">
+			<li><a href="/cec" class="text-muted hover:text-accent">Catéchisme</a></li>
+			<li class="pl-5">
+				<a href="/cec/{data.chapter.part_slug}" class="text-muted hover:text-accent">
 					<span class="font-semibold bc-kicker"
-						>{data.article.number ? `Article ${data.article.number}` : 'Article'}</span
+						>{data.chapter.part_number ? `Partie ${data.chapter.part_number}` : 'Prologue'}</span
 					>
-					<span class="bc-title">&nbsp;: {data.article.title}</span>
-				</li>
-			</ol>
-		</nav>
-		<PartPanoramaTrigger />
-	</div>
+					<span class="bc-title">&nbsp;: {data.chapter.part_title}</span>
+				</a>
+			</li>
+			<li class="pl-10">
+				<a
+					href="/cec/{data.chapter.part_slug}/{data.chapter.section_slug}"
+					class="text-muted hover:text-accent"
+				>
+					<span class="font-semibold bc-kicker"
+						>{data.chapter.section_number
+							? `Section ${data.chapter.section_number}`
+							: 'Section'}</span
+					>
+					<span class="bc-title">&nbsp;: {data.chapter.section_title}</span>
+				</a>
+			</li>
+			<li class="pl-[3.75rem]">
+				<a
+					href="/cec/{data.chapter.part_slug}/{data.chapter.section_slug}/{data.chapter.slug}"
+					class="text-muted hover:text-accent"
+				>
+					<span class="font-semibold bc-kicker"
+						>{data.chapter.number ? `Chapitre ${data.chapter.number}` : 'Chapitre'}</span
+					>
+					<span class="bc-title">&nbsp;: {data.chapter.title}</span>
+				</a>
+			</li>
+			<li class="pl-20">
+				<span class="font-semibold bc-kicker"
+					>{data.article.number ? `Article ${data.article.number}` : 'Article'}</span
+				>
+				<span class="bc-title">&nbsp;: {data.article.title}</span>
+			</li>
+		</ol>
+	</nav>
 
 	<p class="font-ui text-sm uppercase tracking-wider text-muted mt-4">
 		{data.article.number ? `Article ${data.article.number}` : 'Article'}
@@ -198,16 +194,3 @@
 		{/if}
 	</nav>
 </main>
-
-<style>
-	.breadcrumb-row {
-		display: flex;
-		align-items: flex-start;
-		justify-content: space-between;
-		gap: 1rem;
-	}
-	.breadcrumb-row .breadcrumb-rail {
-		flex: 1 1 auto;
-		min-width: 0;
-	}
-</style>

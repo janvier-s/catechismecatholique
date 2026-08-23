@@ -4,7 +4,6 @@
 	import ReadableUnit from './ReadableUnit.svelte';
 	import EnBrefBlock from './EnBrefBlock.svelte';
 	import NavCard from '$lib/components/ui/NavCard.svelte';
-	import PartPanoramaTrigger from '$lib/components/ui/PartPanoramaTrigger.svelte';
 	import BreadcrumbRail from '$lib/components/ui/BreadcrumbRail.svelte';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { SvelteMap } from 'svelte/reactivity';
@@ -76,9 +75,7 @@
 					title: chapter.section_title
 				}
 			]}
-		>
-			{#snippet trailing()}<PartPanoramaTrigger />{/snippet}
-		</BreadcrumbRail>
+		/>
 		<p class="font-ui text-sm uppercase tracking-wider text-muted">{chapterLabel}</p>
 		<h1 class="font-heading text-4xl font-semibold mt-1 text-heading">{chapter.title}</h1>
 	</header>
