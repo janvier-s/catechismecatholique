@@ -36,7 +36,7 @@ export interface ReadingPrefs {
 	hideVerseNumbers: boolean;
 	hideBibleHeadings: boolean; // major/section headings, both reading modes
 	bibleStudyMode: boolean; // Bible reader: show Catechism citation annotations
-	hideChapterNav: boolean; // Bible reader: the sticky chapter navigation row
+	hideChapterNav: boolean; // Bible reader: the in-article prev/next chapter strip (ChapterPrevNext)
 	showVulgatePsalms: boolean; // Psalms: show the Vulgate number beside the Hebrew one
 	bionicReading: boolean; // bold each word's leading fraction, all corpora
 	bionicFixation: number; // 1-5, how much of each word is bolded

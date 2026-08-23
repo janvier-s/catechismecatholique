@@ -456,7 +456,7 @@
 						</div>
 
 						<div>
-							<span class="block mb-2 text-muted text-[13px]">Barre de chapitres</span>
+							<span class="block mb-2 text-muted text-[13px]">Navigation de chapitre</span>
 							<div class="flex gap-1.5">
 								<button
 									type="button"

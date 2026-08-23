@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ChapterNavBar from './ChapterNavBar.svelte';
+	import ChapterPrevNext from './ChapterPrevNext.svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import type { BibleVerseIndex, NclChapterBlocks, NclSection } from '$lib/data/types';
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
@@ -127,20 +128,19 @@
 	}
 </script>
 
-<!-- Chapter navigation bar · sticky below the global TopBar. Optional: readers
-     who navigate by scrolling can reclaim the row. The concordance route has
-     its own bar and is deliberately unaffected. -->
-{#if !$prefs.hideChapterNav}
-	<ChapterNavBar
-		{book}
-		{chapter}
-		{totalChapters}
-		{chapterCounts}
-		{hasConcordance}
-		citedVerseCount={totalCited}
-		variant="reader"
-	/>
-{/if}
+<!-- Chapter navigation bar · sticky below the global TopBar. Always visible:
+     it's the primary way to jump to an arbitrary book/chapter, not something
+     to toggle off. The concordance route has its own bar and is deliberately
+     unaffected. -->
+<ChapterNavBar
+	{book}
+	{chapter}
+	{totalChapters}
+	{chapterCounts}
+	{hasConcordance}
+	citedVerseCount={totalCited}
+	variant="reader"
+/>
 
 <main
 	class="mx-auto max-w-reader px-6 max-md:px-4 pt-8 max-md:pt-5 pb-16"
@@ -149,6 +149,12 @@
 	data-study-mode={studyMode}
 >
 	<article>
+		<!-- Prev/next chapter strip · reading continuity, not book browsing (see
+		     ChapterPrevNext for how this differs from the top bar's arrows).
+		     This is what the "chapter navigation" reading pref toggles. -->
+		{#if !$prefs.hideChapterNav}
+			<ChapterPrevNext {book} {chapter} {totalChapters} {chapterCounts} />
+		{/if}
 		<header class="mb-10">
 			<p class="chapter-eyebrow font-ui text-[11px] uppercase tracking-[0.3em] text-subtle mb-2">
 				{book.frenchName}

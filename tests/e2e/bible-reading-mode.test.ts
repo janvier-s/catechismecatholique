@@ -498,14 +498,20 @@ test('expanding a long book in the chapter selector shows its first chapters, no
 	await expect(page.locator('[data-book-grid="psaumes"] a').last()).not.toBeInViewport();
 });
 
-test('chapter navigation bar can be hidden, and the setting persists', async ({ page }) => {
+test('chapter navigation (prev/next strip) can be hidden, and the top bar stays put', async ({
+	page
+}) => {
 	await page.goto('/bible/genese/1');
 	await expect(page.locator('.bible-chapter-nav')).toBeVisible();
+	await expect(page.locator('.chapter-prev-next')).toBeVisible();
 
 	let dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Masquer' }).nth(2).click(); // Barre de chapitres
+	await dialog.getByRole('button', { name: 'Masquer' }).nth(2).click(); // Navigation de chapitre
 	await page.keyboard.press('Escape');
-	await expect(page.locator('.bible-chapter-nav')).toHaveCount(0);
+	// The top book/chapter bar is the primary navigation and is never hidden
+	// by this toggle · only the in-article prev/next strip is.
+	await expect(page.locator('.bible-chapter-nav')).toBeVisible();
+	await expect(page.locator('.chapter-prev-next')).toHaveCount(0);
 
 	const stored = await page.evaluate(() =>
 		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
@@ -514,12 +520,54 @@ test('chapter navigation bar can be hidden, and the setting persists', async ({ 
 
 	// Survives a reload, and can be turned back on.
 	await page.reload();
-	await expect(page.locator('.bible-chapter-nav')).toHaveCount(0);
+	await expect(page.locator('.chapter-prev-next')).toHaveCount(0);
 
 	dialog = await openReadingTab(page);
 	await dialog.getByRole('button', { name: 'Afficher' }).nth(2).click();
 	await page.keyboard.press('Escape');
-	await expect(page.locator('.bible-chapter-nav')).toBeVisible();
+	await expect(page.locator('.chapter-prev-next')).toBeVisible();
+});
+
+test('the prev/next chapter strip handles chapter and book boundaries', async ({ page }) => {
+	// Genesis 1: first chapter of the first book · no previous side at all.
+	await page.goto('/bible/genese/1');
+	const nav = page.locator('.chapter-prev-next');
+	await expect(nav).toBeVisible();
+	await expect(nav.getByRole('link')).toHaveCount(1);
+	await expect(nav.getByRole('link')).toHaveAttribute('href', '/bible/genese/2');
+	await expect(nav.getByRole('link')).toContainText('Ch. 2');
+
+	// Genesis 2: an ordinary middle chapter · both sides, same book.
+	await page.goto('/bible/genese/2');
+	await expect(nav.getByRole('link')).toHaveCount(2);
+	const prevMid = nav.getByRole('link').nth(0);
+	const nextMid = nav.getByRole('link').nth(1);
+	await expect(prevMid).toHaveAttribute('href', '/bible/genese/1');
+	await expect(prevMid).toContainText('Ch. 1');
+	await expect(nextMid).toHaveAttribute('href', '/bible/genese/3');
+	await expect(nextMid).toContainText('Ch. 3');
+
+	// Genesis's last chapter (50): next crosses into Exodus 1, not "Genesis 51".
+	await page.goto('/bible/genese/50');
+	await expect(nav.getByRole('link')).toHaveCount(2);
+	const nextAtBookEnd = nav.getByRole('link').nth(1);
+	await expect(nextAtBookEnd).toHaveAttribute('href', '/bible/exode/1');
+	await expect(nextAtBookEnd).toContainText('Exode');
+	await expect(nextAtBookEnd).toContainText('Ch. 1');
+
+	// Exodus 1: previous crosses back into Genesis's LAST chapter (continuing
+	// the reading backward), not Genesis 1 · this is what distinguishes it
+	// from the top bar's book-jump arrows, which always land on chapter 1.
+	await page.goto('/bible/exode/1');
+	const prevAtBookStart = nav.getByRole('link').nth(0);
+	await expect(prevAtBookStart).toHaveAttribute('href', '/bible/genese/50');
+	await expect(prevAtBookStart).toContainText('Genèse');
+	await expect(prevAtBookStart).toContainText('Ch. 50');
+
+	// Apocalypse's last chapter (22): last chapter of the last book · no next.
+	await page.goto('/bible/apocalypse/22');
+	await expect(nav.getByRole('link')).toHaveCount(1);
+	await expect(nav.getByRole('link')).toHaveAttribute('href', '/bible/apocalypse/21');
 });
 
 test('Vulgate psalm numbers are off by default and can be shown', async ({ page }) => {
