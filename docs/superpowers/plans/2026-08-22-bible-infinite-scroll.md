@@ -1032,6 +1032,24 @@ async function scrollToBottom(page: Page, steps = 6) {
 	}
 }
 
+/**
+ * Scroll down until `chapter`'s anchor is in the DOM.
+ *
+ * Deliberately not "scroll N screens then assert an exact chapter count":
+ * each append lengthens the document, so a fixed number of viewport-sized
+ * steps loads an amount that depends on chapter length and viewport height.
+ * Asserting `toHaveCount(2)` after a fixed scroll is inherently racy.
+ */
+async function scrollUntilChapter(page: Page, chapter: number, maxSteps = 20) {
+	const anchor = page.locator(`[data-chapter-anchor][data-chapter-num="${chapter}"]`);
+	for (let i = 0; i < maxSteps; i++) {
+		if (await anchor.count()) return;
+		await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+		await page.waitForTimeout(150);
+	}
+	await expect(anchor).toHaveCount(1);
+}
+
 test('with the pref off, reaching the bottom loads nothing and the footer nav stays', async ({
 	page
 }) => {
@@ -1046,9 +1064,7 @@ test('with the pref off, reaching the bottom loads nothing and the footer nav st
 test('with the pref on, the next chapter appends inside the same main', async ({ page }) => {
 	await page.goto('/bible/genese/1');
 	await enableInfiniteScroll(page);
-	await scrollToBottom(page);
-
-	await expect(page.locator('[data-chapter-section]')).toHaveCount(2, { timeout: 10_000 });
+	await scrollUntilChapter(page, 2);
 
 	// Inside the one <main> that carries the column-width compensation, not a
 	// sibling container.
@@ -1072,9 +1088,9 @@ test('the column-width guarantee survives a multi-chapter page', async ({ page }
 	// original <main> rather than in a container of their own.
 	await page.goto('/bible/genese/1');
 	await enableInfiniteScroll(page);
-	await scrollToBottom(page);
-	await expect(page.locator('[data-chapter-section]')).toHaveCount(2, { timeout: 10_000 });
+	await scrollUntilChapter(page, 2);
 
+	expect(await page.locator('[data-chapter-section]').count()).toBeGreaterThan(1);
 	await expect(page.locator('.verse-text').first()).toHaveCSS('width', '702px');
 	await expect(page.locator('.verse-text').last()).toHaveCSS('width', '702px');
 });
@@ -1332,8 +1348,7 @@ Append to `tests/e2e/bible-infinite-scroll.test.ts`:
 test('the URL and the sticky nav follow the chapter in the viewport', async ({ page }) => {
 	await page.goto('/bible/genese/1');
 	await enableInfiniteScroll(page);
-	await scrollToBottom(page);
-	await expect(page.locator('[data-chapter-section]')).toHaveCount(2, { timeout: 10_000 });
+	await scrollUntilChapter(page, 2);
 
 	// Put chapter 2's heading above the activation band.
 	await page
@@ -1346,10 +1361,14 @@ test('the URL and the sticky nav follow the chapter in the viewport', async ({ p
 		'Genèse 2'
 	);
 
-	// Shallow routing only · a reload must still serve the chapter in the URL,
-	// and going back must return to chapter 1.
-	await page.goBack();
-	await expect.poll(() => page.url()).toMatch(/\/bible\/genese\/1$/);
+	// The URL is real rather than cosmetic: reloading it serves chapter 2 as
+	// the entry chapter. Note there is no back-button assertion here ·
+	// replaceState *replaces* the current history entry, so the chapter 1
+	// entry no longer exists to go back to. That is the intended behaviour:
+	// scrolling through a book should not fill the reader's history with a
+	// stack of chapters to back out through.
+	await page.reload();
+	await expect(page.getByRole('heading', { level: 1, name: /Chapitre 2/ })).toBeVisible();
 });
 ```
 
@@ -1517,20 +1536,31 @@ This is the task the whole design exists to make safe. Two things happen here th
 Append to `tests/e2e/bible-infinite-scroll.test.ts`:
 
 ```ts
-test('scrolling up prepends the previous chapter without moving the text', async ({ page }) => {
+test('a prepended chapter does not move the text the reader is on', async ({ page }) => {
 	await page.goto('/bible/genese/5');
 	await enableInfiniteScroll(page);
 	await page.goto('/bible/genese/5');
 
-	// The rolling preload is gated behind a 2s navigation cooldown, so a reader
-	// who has just arrived is never yanked by a prepend.
+	// Scroll into the body of chapter 5, so there is a reading position to hold.
+	await page.evaluate(() => window.scrollTo(0, 800));
+	const anchor = page.locator('[data-chapter-anchor][data-chapter-num="5"]');
+	await expect(anchor).toHaveCount(1);
+
+	// Take the reading before the prepend. The rolling preload sits behind a 2s
+	// navigation cooldown precisely so a reader who has just arrived is not
+	// yanked, which also leaves room for this measurement.
+	const before = await anchor.evaluate((el) => el.getBoundingClientRect().top);
+
 	await expect(page.locator('[data-chapter-anchor][data-chapter-num="4"]')).toHaveCount(1, {
 		timeout: 15_000
 	});
+	await page.waitForTimeout(300); // let the compensation settle
 
-	// The chapter the reader was on is still the one on screen.
-	const heading = page.locator('[data-chapter-anchor][data-chapter-num="5"]');
-	await expect(heading).toHaveCount(1);
+	// Genèse 4 is around two thousand pixels of text. Without compensation this
+	// anchor would be pushed down by that whole height; with it, the reader's
+	// place has not moved.
+	const after = await anchor.evaluate((el) => el.getBoundingClientRect().top);
+	expect(Math.abs(after - before)).toBeLessThan(5);
 });
 
 test('the sticky bars do not flap while chapters are prepended', async ({ page }) => {
@@ -1549,21 +1579,24 @@ test('the sticky bars do not flap while chapters are prepended', async ({ page }
 	await page.evaluate(() => window.scrollTo(0, 1500));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
 
-	// Now scroll up in small steps, staying under REVEAL_AFTER_UP (120px) per
-	// step so nothing *should* reveal, while prepends keep firing. Sample the
-	// attribute throughout: a compensation leaking into the reducer shows up as
-	// a flip, in either direction.
+	// Cross the 120px reveal threshold first, so the bars are legitimately
+	// visible before sampling begins. Sampling from the hidden state would
+	// record a 'true' that is simply the starting condition.
+	await page.evaluate(() => window.scrollBy(0, -200));
+	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'false');
+
+	// Now keep scrolling up while prepends fire. Every prepend jumps scrollY
+	// downward by the height of the inserted chapter; if that jump reaches the
+	// chrome reducer it reads as downward intent and re-hides the bars. So the
+	// attribute flipping back to 'true' during a continuous upward scroll is
+	// exactly the flicker this test exists to catch.
 	const seen = new Set<string | null>();
 	for (let i = 0; i < 12; i++) {
 		await page.evaluate(() => window.scrollBy(0, -60));
 		await page.waitForTimeout(80);
 		seen.add(await page.locator('html').getAttribute('data-chrome-hidden'));
 	}
-	// 12 steps of 60px is 720px of cumulative upward travel, which legitimately
-	// crosses the 120px reveal threshold · so 'false' is expected. What must
-	// not happen is the bars hiding again mid-scroll-up, which is the only way
-	// an unreported compensation can manifest here.
-	expect(seen.has('true')).toBe(false);
+	expect([...seen]).toEqual(['false']);
 });
 
 test('the loaded window is capped', async ({ page }) => {
