@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ChapterNavBar from './ChapterNavBar.svelte';
 	import BibleChapter from './BibleChapter.svelte';
-	import type { BibleVerseIndex, NclChapterBlocks, NclSection } from '$lib/data/types';
+	import type { BibleVerseIndex, NclChapterBlocks, NclSectionMap } from '$lib/data/types';
 	import { type BookInfo } from '$lib/utils/bibleBookSlug';
 	import { prefs } from '$lib/stores/prefs';
 
@@ -11,8 +11,8 @@
 		verses,
 		verseIdx,
 		totalChapters,
-		hasConcordance = false,
-		sections = [],
+		sectionsByBook = {},
+		concordanceManifest = {},
 		chapterCounts = {},
 		paragraphs = null
 	}: {
@@ -21,11 +21,14 @@
 		verses: { v: number; text: string }[];
 		verseIdx: BibleVerseIndex;
 		totalChapters: number;
-		hasConcordance?: boolean;
-		sections?: NclSection[];
+		sectionsByBook?: NclSectionMap;
+		concordanceManifest?: Record<string, number[]>;
 		chapterCounts?: Record<string, number>;
 		paragraphs?: NclChapterBlocks | null;
 	} = $props();
+
+	const bookSections = $derived(sectionsByBook[book.usfx] ?? []);
+	const hasConcordance = $derived((concordanceManifest[book.slug] ?? []).includes(chapter));
 
 	// Follows the pref alone. Citation count affects only whether the control
 	// is disabled, never the layout attribute, because data-study-mode drives
@@ -42,6 +45,10 @@
 
 	const totalCited = $derived(verses.reduce((t, v) => t + (citedCount(v.v) > 0 ? 1 : 0), 0));
 </script>
+
+<svelte:head>
+	<title>{book.frenchName} {chapter} dans la Bible · Catéchisme de l'Église Catholique</title>
+</svelte:head>
 
 <!-- Chapter navigation bar · sticky below the global TopBar. Optional: readers
      who navigate by scrolling can reclaim the row. The concordance route has
@@ -69,7 +76,7 @@
 		{chapter}
 		{verses}
 		{verseIdx}
-		{sections}
+		sections={bookSections}
 		{paragraphs}
 		{studyMode}
 		headingLevel="h1"

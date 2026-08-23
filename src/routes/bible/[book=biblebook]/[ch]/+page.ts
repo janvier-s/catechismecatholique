@@ -29,19 +29,17 @@ export const load: PageLoad = async ({ params, fetch, parent }) => {
 		.map((k) => parseInt(k, 10))
 		.reduce((m, n) => Math.max(m, n), 0);
 
-	const hasConcordance = (parentData.concordanceManifest[book.slug] ?? []).includes(ch);
-
-	const bookSections = parentData.sections[book.usfx] ?? [];
-	const chapterSections = bookSections.filter((s) => s.ch === ch);
-
 	return {
 		book,
 		chapter: ch,
 		verses,
 		verseIdx: parentData.verseIdx,
 		totalChapters,
-		hasConcordance,
-		sections: chapterSections,
+		// The whole map, not this chapter's slice: infinite scroll renders
+		// chapters this load function never saw. Both are already in the SSR
+		// payload via /bible/+layout.ts, so this costs nothing extra.
+		sectionsByBook: parentData.sections,
+		concordanceManifest: parentData.concordanceManifest,
 		chapterCounts: parentData.chapterCounts,
 		paragraphs: paragraphsBook?.[String(ch)] ?? null
 	};
