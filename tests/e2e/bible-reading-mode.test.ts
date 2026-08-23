@@ -545,6 +545,44 @@ test('Vulgate psalm numbers are off by default and can be shown', async ({ page 
 	await expect(page.locator('.vulgate-psalm')).toHaveCount(0);
 });
 
+test('Vulgate psalm numbers appear in the chapter selector when enabled', async ({ page }) => {
+	// The active book opens already expanded in the chapter selector.
+	await page.goto('/bible/psaumes/1');
+	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+
+	const grid = page.locator('[data-book-grid="psaumes"]');
+	await expect(grid).toBeVisible();
+	await expect(grid).toHaveClass(/grid-cols-7/);
+
+	// Off by default: chapter 10's cell has only its own number, no sub-label.
+	const cell10 = grid.locator('a[href="/bible/psaumes/10"]');
+	await expect(cell10.locator('span')).toHaveCount(1);
+
+	await page.keyboard.press('Escape'); // closes the chapter selector
+
+	const dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Afficher' }).nth(3).click(); // Numérotation Vulgate
+	await page.keyboard.press('Escape');
+
+	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	await expect(grid).toBeVisible();
+	await expect(grid).toHaveClass(/grid-cols-5/);
+	// Hebrew 10 is Vulgate 9, same mapping as the chapter header.
+	await expect(cell10.locator('span')).toHaveCount(2);
+	await expect(cell10.locator('span').nth(1)).toHaveText('9');
+	// Where the traditions agree (Hebrew 150) there is still no sub-label.
+	await expect(grid.locator('a[href="/bible/psaumes/150"] span')).toHaveCount(1);
+	await page.keyboard.press('Escape');
+
+	// Non-psalm books never show the sub-label, even with the pref on.
+	await page.goto('/bible/genese/1');
+	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	const genGrid = page.locator('[data-book-grid="genese"]');
+	await expect(genGrid).toBeVisible();
+	await expect(genGrid).toHaveClass(/grid-cols-7/);
+	await expect(genGrid.locator('a').first().locator('span')).toHaveCount(1);
+});
+
 async function enableBionic(page: import('@playwright/test').Page) {
 	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });

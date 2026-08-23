@@ -5,6 +5,8 @@
 	import { SvelteSet } from 'svelte/reactivity';
 	import { OT_BOOKS, NT_BOOKS, bookTestament, type Testament } from '$lib/utils/bibleBookSlug';
 	import { expandedBookScrollTop } from '$lib/utils/nav-scroll';
+	import { prefs } from '$lib/stores/prefs';
+	import { vulgatePsalmLabel } from '$lib/utils/psalm-numbering';
 
 	let {
 		bookSlug,
@@ -108,6 +110,11 @@
 	function chaptersOf(usfx: string): number {
 		return chapterCounts[usfx] ?? 0;
 	}
+
+	// The chapter grid follows this site's own (Hebrew/Masoretic) numbering; the
+	// Vulgate sub-label mirrors what BibleReader already shows in the chapter
+	// header. Only Psalms diverges meaningfully · see psalm-numbering.ts.
+	const showVulgateLabels = $derived($prefs.showVulgatePsalms);
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
@@ -161,12 +168,16 @@
 					</button>
 					{#if expandedBooks.has(book.slug)}
 						{@const total = chaptersOf(book.usfx)}
+						{@const showVulgate = showVulgateLabels && book.usfx === 'PSA'}
 						<div
 							data-book-grid={book.slug}
 							transition:slide={{ duration: 180 }}
-							class="px-[16px] pb-[10px] pt-[4px] gap-[4px] grid grid-cols-7"
+							class="px-[16px] pb-[10px] pt-[4px] gap-[4px] grid"
+							class:grid-cols-7={!showVulgate}
+							class:grid-cols-5={showVulgate}
 						>
 							{#each Array.from({ length: total }, (_, i) => i + 1) as ch (ch)}
+								{@const vulgateLabel = showVulgate ? vulgatePsalmLabel(ch) : null}
 								<a
 									href={buildHref(book.slug, ch)}
 									onclick={onClose}
@@ -176,6 +187,9 @@
 										: 'text-subtle'}"
 								>
 									<span class="block text-[14px]">{ch}</span>
+									{#if vulgateLabel}
+										<span class="block text-[9px] opacity-60">{vulgateLabel}</span>
+									{/if}
 								</a>
 							{/each}
 						</div>
@@ -204,12 +218,16 @@
 					</button>
 					{#if expandedBooks.has(book.slug)}
 						{@const total = chaptersOf(book.usfx)}
+						{@const showVulgate = showVulgateLabels && book.usfx === 'PSA'}
 						<div
 							data-book-grid={book.slug}
 							transition:slide={{ duration: 180 }}
-							class="px-[16px] pb-[10px] pt-[4px] gap-[4px] grid grid-cols-7"
+							class="px-[16px] pb-[10px] pt-[4px] gap-[4px] grid"
+							class:grid-cols-7={!showVulgate}
+							class:grid-cols-5={showVulgate}
 						>
 							{#each Array.from({ length: total }, (_, i) => i + 1) as ch (ch)}
+								{@const vulgateLabel = showVulgate ? vulgatePsalmLabel(ch) : null}
 								<a
 									href={buildHref(book.slug, ch)}
 									onclick={onClose}
@@ -219,6 +237,9 @@
 										: 'text-subtle'}"
 								>
 									<span class="block text-[14px]">{ch}</span>
+									{#if vulgateLabel}
+										<span class="block text-[9px] opacity-60">{vulgateLabel}</span>
+									{/if}
 								</a>
 							{/each}
 						</div>
