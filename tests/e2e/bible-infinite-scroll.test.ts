@@ -338,11 +338,21 @@ test('the loaded window is capped, and pruning it does not disturb the bars', as
 	// anchorChromeShift(-removed) from pruneFront, which turns the set below into
 	// ['true', 'false']. Sampling starts at i >= 2 so the first steps, which are
 	// still crossing HIDE_AFTER, do not record a legitimate 'false'.
+	//
+	// Sampled twice an iteration, before the wait as well as after it. A prune
+	// that lands more than 100ms behind its scroll would reveal the bars in the
+	// gap, and the next iteration's downward scroll would re-hide them before a
+	// once-per-iteration sample ever looked — the check would then depend on
+	// prune latency rather than on the compensation.
 	const chromeSeen = new Set<string | null>();
+	const sampleChrome = async (i: number) => {
+		if (i >= 2) chromeSeen.add(await page.locator('html').getAttribute('data-chrome-hidden'));
+	};
 	for (let i = 0; i < 30; i++) {
 		await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+		await sampleChrome(i);
 		await page.waitForTimeout(100);
-		if (i >= 2) chromeSeen.add(await page.locator('html').getAttribute('data-chrome-hidden'));
+		await sampleChrome(i);
 	}
 
 	const count = await page.locator('[data-chapter-section]').count();

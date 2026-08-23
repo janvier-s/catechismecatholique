@@ -150,6 +150,12 @@
 			// chapter grid would otherwise arrive with the cooldown long expired and
 			// get Genèse 8 prepended underneath them on the next active change.
 			navCooldownUntil = Date.now() + NAV_COOLDOWN_MS;
+			// Any navigation is a fresh start. Neither record survives it, so a
+			// reader who hit a flaky connection at a book boundary is never stuck
+			// with a chapter that stays unreachable for the life of the component ·
+			// re-deriving a structurally absent ref costs one cache-hit lookup.
+			missing.clear();
+			loadAttempts.clear();
 			// The reset destroys the old chapter's anchor and creates a new one
 			// that nothing is watching · `observeAllAnchors` runs only in
 			// `onMount`, and `observeNewAnchor` covers only appended chapters.
@@ -184,21 +190,40 @@
 	let navCooldownUntil = 0;
 	let preloadTimer: ReturnType<typeof setTimeout> | null = null;
 
-	/** Refs whose load failed or came back empty · consulted alongside `isLoaded`
-	 *  so a dead chapter is attempted once, not once per animation frame for as
-	 *  long as the reader keeps scrolling near the bottom. Offline at a book
-	 *  boundary that would otherwise be a stream of failing requests and a
-	 *  console.warn per frame, while the reader just sees a page that never
-	 *  advances.
+	/** Attempts a chapter gets before it is given up on. A throw from
+	 *  `fetchChapter` is a dropped request, which is transient and only possible
+	 *  at a book boundary · retrying costs one request, while not retrying strands
+	 *  the reader at the end of a book with no way forward and no footer nav to
+	 *  fall back on. */
+	const MAX_LOAD_ATTEMPTS = 3;
+
+	/** Refs whose chapter does not exist · an unknown slug, or a chapter number
+	 *  past the end of its book. Structural, so it can never succeed on a retry
+	 *  and the entry is permanent. */
+	// eslint-disable-next-line svelte/prefer-svelte-reactivity
+	const missing = new Set<string>();
+
+	/** Failed attempts per ref, for loads that *threw*. Distinct from `missing`
+	 *  because a dropped request says nothing about whether the chapter is there.
+	 *  Both exist so a dead chapter is attempted a bounded number of times rather
+	 *  than once per animation frame for as long as the reader keeps scrolling
+	 *  near the bottom · offline, that would otherwise be a stream of failing
+	 *  requests and a console.warn per frame.
 	 *
 	 *  Non-reactive — read only from the imperative load paths, never rendered,
-	 *  so a SvelteSet's sources would be pure overhead (ParagraphActions.svelte
-	 *  takes the same exemption). */
+	 *  so the reactive versions' sources would be pure overhead
+	 *  (ParagraphActions.svelte takes the same exemption). */
 	// eslint-disable-next-line svelte/prefer-svelte-reactivity
-	const failed = new Set<string>();
+	const loadAttempts = new Map<string, number>();
 
 	function refKey(ref: ChapterRef): string {
 		return `${ref.bookSlug}-${ref.chapter}`;
+	}
+
+	/** Record a throw against `ref`'s attempt budget. */
+	function recordFailure(ref: ChapterRef) {
+		const key = refKey(ref);
+		loadAttempts.set(key, (loadAttempts.get(key) ?? 0) + 1);
 	}
 
 	function ensureObserver(): IntersectionObserver {
@@ -254,9 +279,12 @@
 	}
 
 	/** Whether `ref` is worth a request: it exists, is not already on the page,
-	 *  and has not already been tried and found wanting. */
+	 *  is not known to be absent, and has attempts left. The single place the two
+	 *  failure records are consulted, so both loaders stay symmetric. */
 	function loadable(ref: ChapterRef | null): ref is ChapterRef {
-		return !!ref && !isLoaded(ref) && !failed.has(refKey(ref));
+		if (!ref || isLoaded(ref)) return false;
+		const key = refKey(ref);
+		return !missing.has(key) && (loadAttempts.get(key) ?? 0) < MAX_LOAD_ATTEMPTS;
 	}
 
 	async function loadNext() {
@@ -268,16 +296,23 @@
 		const gen = generation;
 		try {
 			const entry = await fetchChapter(ref);
-			if (!entry) failed.add(refKey(ref));
+			if (!entry) missing.add(refKey(ref));
 			if (entry && !destroyed && gen === generation) {
+				loadAttempts.delete(refKey(ref));
 				loaded = [...loaded, entry];
 				await tick();
-				if (container) observeNewAnchor(container, ensureObserver(), ref.bookSlug, ref.chapter);
-				const excess = loaded.length - MAX_LOADED;
-				if (excess > 0) await pruneFront(excess);
+				// Re-checked after the tick, as in loadPrev · a navigation landing in
+				// that window has already replaced the window being extended here.
+				// An `if` rather than an early `return`, so the trailing
+				// checkPreload() past the `finally` still runs, as it does there.
+				if (!destroyed && gen === generation) {
+					if (container) observeNewAnchor(container, ensureObserver(), ref.bookSlug, ref.chapter);
+					const excess = loaded.length - MAX_LOADED;
+					if (excess > 0) await pruneFront(excess);
+				}
 			}
 		} catch (e) {
-			failed.add(refKey(ref));
+			recordFailure(ref);
 			console.warn('Failed to load the next chapter:', e);
 		} finally {
 			loading = false;
@@ -294,8 +329,9 @@
 		const gen = generation;
 		try {
 			const entry = await fetchChapter(ref);
-			if (!entry) failed.add(refKey(ref));
+			if (!entry) missing.add(refKey(ref));
 			if (entry && !destroyed && gen === generation) {
+				loadAttempts.delete(refKey(ref));
 				// Measure immediately before the mutation. After tick() the difference
 				// is exactly the prepended chapter's rendered height, margin included.
 				const y = window.scrollY;
@@ -317,11 +353,21 @@
 					if (excess > 0) {
 						unobserveTail(excess);
 						loaded = loaded.slice(0, loaded.length - excess);
+						// Flush before releasing the mutex, exactly as loadNext does via
+						// pruneFront's own tick(). Without it the trailing checkPreload()
+						// can start a second loadPrev while this slice is still pending,
+						// and that one reads a scrollHeight which still includes the
+						// unremoved tail · its tick() then flushes both mutations at once,
+						// so its delta computes as (new chapter − pruned tail) ≈ 0 and the
+						// compensation under-scrolls by a whole chapter. Svelte's
+						// microtask ordering happens to save it today; that is a
+						// dependency on scheduler internals, not a guarantee.
+						await tick();
 					}
 				}
 			}
 		} catch (e) {
-			failed.add(refKey(ref));
+			recordFailure(ref);
 			console.warn('Failed to load the previous chapter:', e);
 		} finally {
 			loading = false;
@@ -335,26 +381,33 @@
 		if (count <= 0 || !container || destroyed) return;
 		const gen = generation;
 		const sections = container.querySelectorAll<HTMLElement>(':scope > [data-chapter-section]');
-		let removed = 0;
 		for (let i = 0; i < count && i < sections.length; i++) {
 			const el = sections[i];
 			// noUncheckedIndexedAccess · the loop bound already proves this, but the
 			// compiler does not know it.
 			if (!el) continue;
-			const style = getComputedStyle(el);
-			removed += el.getBoundingClientRect().height + parseFloat(style.marginBottom || '0');
 			// An IntersectionObserver holds a strong reference to every target it
 			// watches, and nothing else in this feature ever unobserves. Release the
 			// anchors going away with this slice.
 			const anchor = el.querySelector(CHAPTER_ANCHOR_SELECTOR);
 			if (anchor) observer?.unobserve(anchor);
 		}
+		// Measured off the document, the same way loadPrev does, rather than by
+		// summing the boxes of the elements being removed. A sum cannot see layout
+		// changes the removal itself causes — the surviving first chapter's heading
+		// is re-tagged h1, and any future difference between the two would silently
+		// desynchronise the compensation from what actually happened.
 		const y = window.scrollY;
+		const oldHeight = document.documentElement.scrollHeight;
 		loaded = loaded.slice(count);
 		await tick();
 		if (destroyed || gen !== generation) return;
-		window.scrollTo({ top: Math.max(0, y - removed), behavior: 'instant' });
-		anchorChromeShift(-removed);
+		// Negative: a removal shrinks the document. Applied with the same sign in
+		// both places, so `y + delta` pulls the reader up and the chrome anchor
+		// follows by the identical amount.
+		const delta = document.documentElement.scrollHeight - oldHeight;
+		window.scrollTo({ top: Math.max(0, y + delta), behavior: 'instant' });
+		anchorChromeShift(delta);
 	}
 
 	/** Release the observer's hold on the last `count` chapters' anchors. Call
