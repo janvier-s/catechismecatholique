@@ -56,6 +56,10 @@ describe('chapterCrossing', () => {
 		expect(chapterCrossing({ ...base, isIntersecting: false, top: 800 })).toBeNull();
 	});
 
+	it('ignores an anchor exactly at the top edge of the viewport', () => {
+		expect(chapterCrossing({ ...base, isIntersecting: false, top: 0 })).toBeNull();
+	});
+
 	it('ignores an anchor with no book slug', () => {
 		expect(chapterCrossing({ ...base, bookSlug: '', isIntersecting: true, top: 10 })).toBeNull();
 	});
