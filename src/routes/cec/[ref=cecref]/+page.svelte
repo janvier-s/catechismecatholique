@@ -38,6 +38,54 @@
 	const hasPrev = $derived(data.kind !== 'multi' && prevNum >= 1);
 	const hasNext = $derived(data.kind !== 'multi' && nextNum <= 2865);
 
+	// Paragraph to land on when following the "read on" link · the one being
+	// read, or the first of a range.
+	const anchorNum = $derived(
+		data.kind === 'paragraph' ? data.paragraph.number : data.kind === 'range' ? data.from : null
+	);
+
+	/** Pick the deepest available level for the "read on" link, shown only
+	 *  when the context has no heading of its own (the h2 above already
+	 *  covers that case). The link shows the target's own title · no
+	 *  "Lire la rubrique complète :" prefix.
+	 *
+	 *  `anchor` deep-links back to the paragraph you were reading · every
+	 *  level renders its paragraphs through ReadableUnit, which carries the
+	 *  `p-{n}` id, so the anchor resolves at chapter, article, section and
+	 *  part alike. */
+	function deepestLevel(
+		c: NonNullable<typeof data.context>,
+		anchor: number | null
+	): {
+		title: string;
+		href: string;
+	} | null {
+		if (c.heading) return null;
+		const hash = anchor === null ? '' : `#p-${anchor}`;
+		if (c.article && c.chapter && c.section) {
+			return {
+				title: c.article.title,
+				href: `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}${hash}`
+			};
+		}
+		if (c.chapter && c.section) {
+			return {
+				title: c.chapter.title,
+				href: `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${hash}`
+			};
+		}
+		if (c.section) {
+			return {
+				title: c.section.title,
+				href: `/cec/${c.part.slug}/${c.section.slug}${hash}`
+			};
+		}
+		return {
+			title: c.part.title,
+			href: `/cec/${c.part.slug}${hash}`
+		};
+	}
+
 	function chapterUrl(c: NonNullable<typeof data.context>): string {
 		if (!c.section || !c.chapter) return '';
 		return `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}`;
@@ -165,6 +213,15 @@
 				{/each}
 			{/if}
 		</div>
+
+		{@const level = deepestLevel(c, anchorNum)}
+		{#if level}
+			<p class="context-deeper mt-12 font-ui text-sm">
+				<a href={level.href} class="text-accent hover:underline">
+					{level.title} →
+				</a>
+			</p>
+		{/if}
 	{:else if data.kind === 'paragraph'}
 		<ReadableUnit unit={{ kind: 'ccc-paragraph', data: data.paragraph }} />
 	{:else if data.kind === 'multi'}
