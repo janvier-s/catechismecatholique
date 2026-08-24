@@ -5,13 +5,16 @@
 	import { studyPanel, openPanel } from '$lib/stores/studyPanel';
 	import { prefs } from '$lib/stores/prefs';
 	import { vulgatePsalmLabel } from '$lib/utils/psalm-numbering';
+	import ChapterPrevNext from './ChapterPrevNext.svelte';
 
 	let {
 		book,
 		chapter,
 		verses,
 		verseIdx,
+		totalChapters,
 		sections = [],
+		chapterCounts = {},
 		paragraphs = null,
 		studyMode,
 		headingLevel = 'h1'
@@ -20,7 +23,9 @@
 		chapter: number;
 		verses: { v: number; text: string }[];
 		verseIdx: BibleVerseIndex;
+		totalChapters: number;
 		sections?: NclSection[];
+		chapterCounts?: Record<string, number>;
 		paragraphs?: NclChapterBlocks | null;
 		studyMode: boolean;
 		headingLevel?: 'h1' | 'h2';
@@ -120,6 +125,15 @@
 	<div data-chapter-anchor data-book-slug={book.slug} data-chapter-num={chapter}></div>
 
 	<article>
+		<!-- Prev/next chapter strip · reading continuity, not book browsing (see
+		     ChapterPrevNext for how this differs from the top bar's arrows).
+		     This is what the "chapter navigation" reading pref toggles. Rendered
+		     once per loaded chapter, same as the header below it, so the strip
+		     stays correct at whichever chapter the infinite-scroll window has
+		     grown to include. -->
+		{#if !$prefs.hideChapterNav}
+			<ChapterPrevNext {book} {chapter} {totalChapters} {chapterCounts} />
+		{/if}
 		<header class="mb-10">
 			<p class="chapter-eyebrow font-ui text-[11px] uppercase tracking-[0.3em] text-subtle mb-2">
 				{book.frenchName}

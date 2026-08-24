@@ -51,19 +51,21 @@ test('the Afficher/Masquer indices that bible-reading-mode.test.ts depends on st
 	page
 }) => {
 	// That file addresses these positionally: nth(0) Numéros de verset,
-	// nth(1) Titres de section, nth(2) Barre de chapitres, nth(3) Numérotation
-	// Vulgate. Only those four controls use the Afficher/Masquer pair, so the
-	// indices are stable against controls using other labels · « Défilement
-	// continu » deliberately uses Activé/Désactivé to stay out of the sequence.
-	// What would break them is a NEW control reusing Afficher/Masquer above
-	// « Barre de chapitres ». This test catches that by proving the click at
-	// nth(2) lands on the chapter nav and on nothing else.
+	// nth(1) Titres de section, nth(2) Navigation de chapitre, nth(3)
+	// Numérotation Vulgate. Only those four controls use the Afficher/Masquer
+	// pair, so the indices are stable against controls using other labels ·
+	// « Défilement continu » deliberately uses Activé/Désactivé to stay out of
+	// the sequence. What would break them is a NEW control reusing Afficher/
+	// Masquer above « Navigation de chapitre ». This test catches that by
+	// proving the click at nth(2) lands on the prev/next strip and on nothing
+	// else · the top ChapterNavBar is no longer what this toggle gates (see
+	// bible-reading-mode.test.ts's own "chapter navigation" tests).
 	await page.goto('/bible/genese/1');
 	const dialog = await openReadingTab(page);
 	await dialog.getByRole('button', { name: 'Masquer' }).nth(2).click();
 	await page.keyboard.press('Escape');
 
-	await expect(page.locator('.bible-chapter-nav')).toHaveCount(0);
+	await expect(page.locator('.chapter-prev-next')).toHaveCount(0);
 
 	const stored = await page.evaluate(() =>
 		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')

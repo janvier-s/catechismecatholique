@@ -736,20 +736,20 @@
 	>
 </svelte:head>
 
-<!-- Chapter navigation bar · sticky below the global TopBar. Optional: readers
-     who navigate by scrolling can reclaim the row. The concordance route has
-     its own bar and is deliberately unaffected. -->
-{#if !$prefs.hideChapterNav}
-	<ChapterNavBar
-		book={activeBook}
-		chapter={activeChapter}
-		totalChapters={activeTotalChapters}
-		{chapterCounts}
-		{hasConcordance}
-		citedVerseCount={activeEntry ? totalCitedIn(activeEntry) : 0}
-		variant="reader"
-	/>
-{/if}
+<!-- Chapter navigation bar · sticky below the global TopBar. Always visible:
+     it's the primary way to jump to an arbitrary book/chapter, not something
+     to toggle off · hideChapterNav instead gates the in-article prev/next
+     strip (ChapterPrevNext, rendered once per chapter inside BibleChapter).
+     The concordance route has its own bar and is deliberately unaffected. -->
+<ChapterNavBar
+	book={activeBook}
+	chapter={activeChapter}
+	totalChapters={activeTotalChapters}
+	{chapterCounts}
+	{hasConcordance}
+	citedVerseCount={activeEntry ? totalCitedIn(activeEntry) : 0}
+	variant="reader"
+/>
 
 <main
 	bind:this={container}
@@ -768,6 +768,8 @@
 			verses={item.verses}
 			paragraphs={item.paragraphs}
 			sections={sectionsByBook[item.book.usfx] ?? []}
+			totalChapters={chapterCounts[item.book.usfx] ?? totalChapters}
+			{chapterCounts}
 			{verseIdx}
 			{studyMode}
 			headingLevel={i === 0 ? 'h1' : 'h2'}
