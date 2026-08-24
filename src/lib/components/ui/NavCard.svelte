@@ -97,7 +97,7 @@
 		color: var(--color-accent);
 	}
 	.nav-title {
-		font-family: var(--font-heading);
+		font-family: var(--font-ui);
 		font-size: 15px;
 		line-height: 1.3;
 		color: var(--color-fg);
