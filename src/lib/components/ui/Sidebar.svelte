@@ -535,6 +535,13 @@
 	// Used for sidebar item highlighting (passed via context to SidebarItem).
 	function deepestHref(c: ParagraphContext): string {
 		const hash = c.heading ? `#${c.heading.id}` : '';
+		// En Bref summaries render on the chapter page (CCCReader), never the
+		// article page, whichever article they trail · route through the
+		// chapter level so this matches the sidebar's own en-bref item, built
+		// the same way in chapterChildren().
+		if (c.heading?.id.startsWith('en-bref-') && c.chapter && c.section) {
+			return `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}${hash}`;
+		}
 		if (c.article && c.section && c.chapter) {
 			return `/cec/${c.part.slug}/${c.section.slug}/${c.chapter.slug}/${c.article.slug}${hash}`;
 		}

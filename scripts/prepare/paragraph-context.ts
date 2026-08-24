@@ -41,6 +41,15 @@ function findHeading(
 	return result;
 }
 
+function firstParagraphNumber(node: RawNode): number | undefined {
+	if (node.type === 'paragraph' && typeof node.number === 'number') return node.number;
+	for (const c of node.children ?? []) {
+		const n = firstParagraphNumber(c);
+		if (n !== undefined) return n;
+	}
+	return undefined;
+}
+
 /**
  * Build paragraph-context by walking the raw source tree alongside the built
  * structure. This ensures every paragraph receives the deepest applicable
@@ -65,6 +74,11 @@ export function buildParagraphContext(
 		chapter?: BuiltChapter;
 		article?: BuiltArticle;
 		heading?: { id: string; title: string };
+		/** Set while descending into an `en_bref` node · its paragraphs are a
+		 *  summary box, not part of whatever heading precedes it, so the
+		 *  lookup below must not let a heading's paragraph_start range
+		 *  swallow them back in. */
+		inEnBref?: boolean;
 	};
 
 	function walk(node: RawNode, frame: Frame): void {
@@ -73,12 +87,15 @@ export function buildParagraphContext(
 
 			// Prefer a heading from the built structure when the paragraph sits
 			// inside a chapter/article — keeps id/title consistent with how
-			// chapter/article pages render headings.
+			// chapter/article pages render headings. Skipped inside an en_bref:
+			// its own pseudo-heading (set below) already carries the anchor the
+			// chapter page actually renders (id="en-bref-{first}"), matching
+			// how the sidebar and CCCReader build the same id.
 			let heading = frame.heading;
-			if (frame.article) {
+			if (!frame.inEnBref && frame.article) {
 				const found = findHeading(frame.article.headings, n);
 				if (found) heading = found;
-			} else if (frame.chapter) {
+			} else if (!frame.inEnBref && frame.chapter) {
 				const found = findHeading(frame.chapter.headings, n);
 				if (found) heading = found;
 			}
@@ -102,7 +119,17 @@ export function buildParagraphContext(
 			const title = (node.title ?? '').trim();
 			if (title) {
 				const id = slugify(title);
-				nextFrame = { ...frame, heading: { id, title: sentenceCase(title) } };
+				nextFrame = { ...frame, heading: { id, title: sentenceCase(title) }, inEnBref: false };
+			}
+		}
+		if (node.type === 'en_bref') {
+			const first = firstParagraphNumber(node);
+			if (first !== undefined) {
+				nextFrame = {
+					...frame,
+					heading: { id: `en-bref-${first}`, title: 'En Bref' },
+					inEnBref: true
+				};
 			}
 		}
 
