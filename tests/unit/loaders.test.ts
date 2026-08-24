@@ -4,7 +4,9 @@ import {
 	loadCompendiumStructure,
 	loadCompendiumPart,
 	loadCompendiumCitedBy,
-	loadCompendiumQRanges
+	loadCompendiumQRanges,
+	loadNclBook,
+	loadNclParagraphsBook
 } from '$lib/data/loaders';
 
 describe('loaders', () => {
@@ -63,5 +65,92 @@ describe('compendium loaders', () => {
 		const f = fakeFetch([{ part: 'p1', from: 1, to: 217 }]);
 		const out = await loadCompendiumQRanges(f);
 		expect(out[0]?.part).toBe('p1');
+	});
+});
+
+// loadNclBook and loadNclParagraphsBook are the two loaders BibleReader's
+// infinite scroll calls at a book boundary, the only place a real network
+// request happens mid-session. Their module-scope Map caches must drop a
+// rejected promise instead of keeping it, or a single dropped request at a
+// boundary permanently disables that book for the life of the module.
+describe('ncl book loaders do not cache a rejection', () => {
+	it('loadNclBook: a fetcher that rejects once then succeeds returns success on the second call', async () => {
+		const usfx = 'GEN';
+		let dataCalls = 0;
+		const fetcher = vi.fn((url: string) => {
+			if (url.includes('manifest.json')) {
+				return Promise.resolve({ ok: true, status: 200, json: async () => [usfx] });
+			}
+			dataCalls++;
+			if (dataCalls === 1) return Promise.reject(new Error('network blip'));
+			return Promise.resolve({
+				ok: true,
+				status: 200,
+				json: async () => ({ '1': { '1': 'Au commencement' } })
+			});
+		}) as unknown as typeof fetch;
+
+		await expect(loadNclBook(usfx, fetcher)).rejects.toThrow('network blip');
+		const book = await loadNclBook(usfx, fetcher);
+		expect(book?.['1']?.['1']).toBe('Au commencement');
+	});
+
+	it('loadNclParagraphsBook: a fetcher that rejects once then succeeds returns success on the second call', async () => {
+		const usfx = 'JHN';
+		let dataCalls = 0;
+		const fetcher = vi.fn((url: string) => {
+			if (url.includes('manifest.json')) {
+				return Promise.resolve({ ok: true, status: 200, json: async () => [usfx] });
+			}
+			dataCalls++;
+			if (dataCalls === 1) return Promise.reject(new Error('network blip'));
+			return Promise.resolve({
+				ok: true,
+				status: 200,
+				json: async () => ({ '1': [] })
+			});
+		}) as unknown as typeof fetch;
+
+		await expect(loadNclParagraphsBook(usfx, fetcher)).rejects.toThrow('network blip');
+		const book = await loadNclParagraphsBook(usfx, fetcher);
+		expect(book?.['1']).toEqual([]);
+	});
+});
+
+// loadNclBook awaits its manifest as the first step inside the very try block
+// this diff just made retry-safe. A rejection one level down, in the manifest
+// promise itself, would otherwise poison every one of BibleReader's retries
+// before the book fetch being retried is ever reached. Each test resets the
+// module registry so the manifest singleton these loaders cache at module
+// scope starts empty, rather than reusing whatever the tests above resolved.
+describe('ncl manifest loaders do not cache a rejection', () => {
+	it('loadNclManifest: a fetcher that rejects once then succeeds returns success on the second call', async () => {
+		vi.resetModules();
+		const { loadNclManifest } = await import('$lib/data/loaders');
+		let calls = 0;
+		const fetcher = vi.fn(() => {
+			calls++;
+			if (calls === 1) return Promise.reject(new Error('network blip'));
+			return Promise.resolve({ ok: true, status: 200, json: async () => ['GEN'] });
+		}) as unknown as typeof fetch;
+
+		await expect(loadNclManifest(fetcher)).rejects.toThrow('network blip');
+		const manifest = await loadNclManifest(fetcher);
+		expect(manifest.has('GEN')).toBe(true);
+	});
+
+	it('loadNclParagraphsManifest: a fetcher that rejects once then succeeds returns success on the second call', async () => {
+		vi.resetModules();
+		const { loadNclParagraphsManifest } = await import('$lib/data/loaders');
+		let calls = 0;
+		const fetcher = vi.fn(() => {
+			calls++;
+			if (calls === 1) return Promise.reject(new Error('network blip'));
+			return Promise.resolve({ ok: true, status: 200, json: async () => ['JHN'] });
+		}) as unknown as typeof fetch;
+
+		await expect(loadNclParagraphsManifest(fetcher)).rejects.toThrow('network blip');
+		const manifest = await loadNclParagraphsManifest(fetcher);
+		expect(manifest.has('JHN')).toBe(true);
 	});
 });

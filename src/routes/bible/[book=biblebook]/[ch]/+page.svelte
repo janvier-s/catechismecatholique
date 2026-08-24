@@ -4,20 +4,14 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head
-	><title
-		>{data.book.frenchName} {data.chapter} dans la Bible · Catéchisme de l'Église Catholique</title
-	></svelte:head
->
-
 <BibleReader
 	book={data.book}
 	chapter={data.chapter}
 	verses={data.verses}
 	verseIdx={data.verseIdx}
-	hasConcordance={data.hasConcordance}
 	totalChapters={data.totalChapters}
-	sections={data.sections}
+	sectionsByBook={data.sections}
+	concordanceManifest={data.concordanceManifest}
 	chapterCounts={data.chapterCounts}
 	paragraphs={data.paragraphs}
 />
