@@ -34,7 +34,9 @@ const DATA_CACHE = `data-${version}`;
 const FONT_CACHE = 'fonts-v1';
 
 // Everything known up front · pre-cached on install so the app works offline.
-const APP_SHELL = [...build, ...files, ...prerendered];
+// Deduped: `files` and `prerendered` can overlap (e.g. both list "/"), and
+// Cache.addAll() throws InvalidStateError on duplicate requests.
+const APP_SHELL = [...new Set([...build, ...files, ...prerendered])];
 // Content-hashed build output · a cached copy can never be wrong.
 const IMMUTABLE = new Set(build);
 // Stable-URL assets · must be revalidated, see the strategy note above.
