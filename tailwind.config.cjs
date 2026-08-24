@@ -6,11 +6,19 @@
 // to inherited color. color-mix() works with any valid CSS color, hex
 // included, so this restores opacity modifiers without touching every
 // theme's variable definitions.
+//
+// Tailwind calls this function for every color utility, not just ones with
+// an explicit /NN modifier: plain `bg-background` still passes
+// opacityValue: 'var(--tw-bg-opacity, 1)' (a CSS variable reference, not a
+// number) so it can support the legacy bg-opacity-* utilities. Multiplying
+// that string by 100 produces NaN, so the percentage must be built with
+// calc() to work for both the numeric (explicit modifier) and CSS-var
+// (implicit) cases.
 function withOpacity(varName) {
 	return ({ opacityValue }) =>
 		opacityValue === undefined
 			? `var(${varName})`
-			: `color-mix(in srgb, var(${varName}) ${opacityValue * 100}%, transparent)`;
+			: `color-mix(in srgb, var(${varName}) calc(${opacityValue} * 100%), transparent)`;
 }
 
 module.exports = {
