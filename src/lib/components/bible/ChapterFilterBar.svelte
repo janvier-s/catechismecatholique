@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { updatePref } from '$lib/stores/prefs';
+	import { prefs, updatePref } from '$lib/stores/prefs';
 
 	let {
 		mode,
 		hasConcordance = false,
-		disabled = false,
 		readerHref = null,
 		concordanceHref = null,
 		onchange
@@ -14,7 +13,6 @@
 		 *  back to the reader rather than in-place toggles. */
 		mode: 'lecture' | 'etude' | 'concordance';
 		hasConcordance?: boolean;
-		disabled?: boolean;
 		/** Reader-page href, used for the Lecture/Étude buttons when mode is 'concordance'. */
 		readerHref?: string | null;
 		/** Concordance-page href, used for the Concordance button when hasConcordance. */
@@ -29,6 +27,11 @@
 	function goEtude(): void {
 		updatePref('bibleStudyMode', true);
 	}
+
+	// Étude annotates individual verses, which paragraph layout doesn't render
+	// separately · explain the disabled state rather than leaving it silent.
+	const etudeUnavailableHint = 'Le mode Étude n’est disponible qu’en affichage verset par verset.';
+	const isParagraphMode = $derived($prefs.bibleLayout === 'paragraph');
 </script>
 
 <div class="mode-pill" role="group" aria-label="Mode d'affichage du texte biblique">
@@ -53,7 +56,6 @@
 			type="button"
 			class="pill-option"
 			class:is-active={mode === 'lecture'}
-			{disabled}
 			onclick={() => onchange?.(false)}
 		>
 			<span class="pill-label">Lecture</span>
@@ -68,6 +70,44 @@
 				<path
 					d="M2 3.5h4.5A1.5 1.5 0 0 1 8 5v8a1.2 1.2 0 0 0-1.2-1.2H2zM14 3.5H9.5A1.5 1.5 0 0 0 8 5v8a1.2 1.2 0 0 1 1.2-1.2H14z"
 				/>
+			</svg>
+		</button>
+	{/if}
+
+	{#if mode === 'concordance'}
+		<a href={readerHref} class="pill-option" onclick={goEtude}>
+			<span class="pill-label">Étude</span>
+			<svg
+				class="pill-icon"
+				viewBox="0 0 16 16"
+				aria-hidden="true"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.4"
+			>
+				<circle cx="7" cy="7" r="4.5" />
+				<path d="M10.5 10.5 14 14" stroke-linecap="round" />
+			</svg>
+		</a>
+	{:else}
+		<button
+			type="button"
+			class="pill-option"
+			class:is-active={mode === 'etude'}
+			title={isParagraphMode ? etudeUnavailableHint : undefined}
+			onclick={() => onchange?.(true)}
+		>
+			<span class="pill-label">Étude</span>
+			<svg
+				class="pill-icon"
+				viewBox="0 0 16 16"
+				aria-hidden="true"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.4"
+			>
+				<circle cx="7" cy="7" r="4.5" />
+				<path d="M10.5 10.5 14 14" stroke-linecap="round" />
 			</svg>
 		</button>
 	{/if}
@@ -121,44 +161,6 @@
 			</svg>
 		</span>
 	{/if}
-
-	{#if mode === 'concordance'}
-		<a href={readerHref} class="pill-option" onclick={goEtude}>
-			<span class="pill-label">Étude</span>
-			<svg
-				class="pill-icon"
-				viewBox="0 0 16 16"
-				aria-hidden="true"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.4"
-			>
-				<circle cx="7" cy="7" r="4.5" />
-				<path d="M10.5 10.5 14 14" stroke-linecap="round" />
-			</svg>
-		</a>
-	{:else}
-		<button
-			type="button"
-			class="pill-option"
-			class:is-active={mode === 'etude'}
-			{disabled}
-			onclick={() => onchange?.(true)}
-		>
-			<span class="pill-label">Étude</span>
-			<svg
-				class="pill-icon"
-				viewBox="0 0 16 16"
-				aria-hidden="true"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.4"
-			>
-				<circle cx="7" cy="7" r="4.5" />
-				<path d="M10.5 10.5 14 14" stroke-linecap="round" />
-			</svg>
-		</button>
-	{/if}
 </div>
 
 <style>
@@ -199,10 +201,6 @@
 	.pill-option:focus-visible {
 		outline: 2px solid var(--color-accent);
 		outline-offset: 2px;
-	}
-	.pill-option:disabled {
-		opacity: 0.45;
-		cursor: not-allowed;
 	}
 	.pill-option.is-unavailable {
 		opacity: 0.4;

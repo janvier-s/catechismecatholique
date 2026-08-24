@@ -63,12 +63,12 @@ const DEFAULTS: ReadingPrefs = {
 	hideVerseNumbers: false,
 	hideBibleHeadings: true,
 	bibleStudyMode: true,
-	hideChapterNav: false,
+	hideChapterNav: true,
 	showVulgatePsalms: false,
 	bionicReading: false,
-	bionicFixation: 3,
+	bionicFixation: 2,
 	bionicSaccade: 0,
-	infiniteScroll: false,
+	infiniteScroll: true,
 	verseNumberColor: 'subtle'
 };
 

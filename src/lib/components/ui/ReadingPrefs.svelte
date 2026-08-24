@@ -2,6 +2,7 @@
 	import { prefs, updatePref } from '$lib/stores/prefs';
 	import { FONTS, DYSLEXIA_FONT, getFontById } from '$lib/data/fonts';
 	import { page } from '$app/state';
+	import PillGroup from './PillGroup.svelte';
 
 	const isTrent = $derived(page.url.pathname.startsWith('/trente'));
 	const isCompendium = $derived(page.url.pathname.startsWith('/compendium'));
@@ -9,14 +10,17 @@
 	const isBibleOnly = $derived(page.url.pathname.startsWith('/bible'));
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
 
-	let activeTab: 'text' | 'reading' | 'notes' = $state('text');
+	let activeTab: 'text' | 'reading' | 'bible' | 'notes' = $state('text');
 
 	// Bible pages carry no footnotes, so the Notes tab had nothing to show but
 	// an empty state. Drop it there and let the two survivors share the width.
+	// Bible-specific settings get their own tab instead of tucking under
+	// Lecture · that section had grown longer than the generic one it sat below.
 	const tabs = $derived(
 		[
 			{ id: 'text' as const, label: 'Texte' },
 			{ id: 'reading' as const, label: 'Lecture' },
+			...(isBibleOnly ? [{ id: 'bible' as const, label: 'Bible' }] : []),
 			...(isBibleOnly ? [] : [{ id: 'notes' as const, label: 'Notes' }])
 		].filter(Boolean)
 	);
@@ -170,20 +174,16 @@
 
 			<div>
 				<span class="block mb-2 text-muted text-[13px]">Interligne</span>
-				<div class="flex gap-1.5">
-					{#each [{ label: 'Serré', value: 1.5 }, { label: 'Standard', value: 1.6 }, { label: 'Aéré', value: 2.0 }] as opt (opt.value)}
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs transition-colors
-								{$prefs.lineHeight === opt.value
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('lineHeight', opt.value)}
-						>
-							{opt.label}
-						</button>
-					{/each}
-				</div>
+				<PillGroup
+					ariaLabel="Interligne"
+					options={[
+						{ label: 'Serré', value: 1.5 },
+						{ label: 'Standard', value: 1.6 },
+						{ label: 'Aéré', value: 2.0 }
+					]}
+					value={$prefs.lineHeight}
+					onchange={(v) => updatePref('lineHeight', v)}
+				/>
 			</div>
 
 			<div bind:this={fontSectionEl} data-font-menu>
@@ -243,72 +243,42 @@
 		<div class="space-y-5">
 			<div class="hidden md:block">
 				<span class="block mb-2 text-muted text-[13px]">Largeur de colonne</span>
-				<div class="flex gap-1.5">
-					{#each [{ label: 'Étroite', value: 'narrow' as const }, { label: 'Standard', value: 'default' as const }, { label: 'Large', value: 'wide' as const }] as opt (opt.value)}
-						<button
-							type="button"
-							class="flex-1 py-1.5 border rounded text-xs
-								{$prefs.columnWidth === opt.value
-								? 'bg-accent/15 text-accent-text border-accent'
-								: 'pill-border text-foreground hover:text-accent-text'}"
-							onclick={() => updatePref('columnWidth', opt.value)}
-						>
-							{opt.label}
-						</button>
-					{/each}
-				</div>
+				<PillGroup
+					ariaLabel="Largeur de colonne"
+					options={[
+						{ label: 'Étroite', value: 'narrow' as const },
+						{ label: 'Standard', value: 'default' as const },
+						{ label: 'Large', value: 'wide' as const }
+					]}
+					value={$prefs.columnWidth}
+					onchange={(v) => updatePref('columnWidth', v)}
+				/>
 			</div>
 
 			<div>
 				<span class="block mb-2 text-muted text-[13px]">Alignement</span>
-				<div class="flex gap-1.5">
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{!$prefs.justifiedText
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('justifiedText', false)}
-					>
-						À gauche
-					</button>
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{$prefs.justifiedText
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('justifiedText', true)}
-					>
-						Justifié
-					</button>
-				</div>
+				<PillGroup
+					ariaLabel="Alignement"
+					options={[
+						{ label: 'À gauche', value: false },
+						{ label: 'Justifié', value: true }
+					]}
+					value={$prefs.justifiedText}
+					onchange={(v) => updatePref('justifiedText', v)}
+				/>
 			</div>
 
 			<div>
 				<span class="block mb-2 text-muted text-[13px]">Lecture bionique</span>
-				<div class="flex gap-1.5">
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{!$prefs.bionicReading
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('bionicReading', false)}
-					>
-						Désactivée
-					</button>
-					<button
-						type="button"
-						class="flex-1 py-1.5 border rounded text-xs
-							{$prefs.bionicReading
-							? 'bg-accent/15 text-accent-text border-accent'
-							: 'pill-border text-foreground hover:text-accent-text'}"
-						onclick={() => updatePref('bionicReading', true)}
-					>
-						Activée
-					</button>
-				</div>
+				<PillGroup
+					ariaLabel="Lecture bionique"
+					options={[
+						{ label: 'Désactivée', value: false },
+						{ label: 'Activée', value: true }
+					]}
+					value={$prefs.bionicReading}
+					onchange={(v) => updatePref('bionicReading', v)}
+				/>
 			</div>
 
 			{#if $prefs.bionicReading}
@@ -345,197 +315,6 @@
 				</div>
 			{/if}
 
-			{#if isBibleOnly}
-				<div class="pt-1 mt-1 border-t border-border">
-					<span class="block mb-3 text-[11px] uppercase tracking-[0.12em] font-semibold text-accent"
-						>Bible</span
-					>
-					<div class="space-y-4">
-						<div>
-							<span class="block mb-2 text-muted text-[13px]">Mode de lecture</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.bibleLayout === 'verse'
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('bibleLayout', 'verse')}
-								>
-									Verset par verset
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.bibleLayout === 'paragraph'
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('bibleLayout', 'paragraph')}
-								>
-									Paragraphe
-								</button>
-							</div>
-						</div>
-
-						<div>
-							<span class="block mb-2 text-muted text-[13px]">Numéros de verset</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{!$prefs.hideVerseNumbers
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('hideVerseNumbers', false)}
-								>
-									Afficher
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.hideVerseNumbers
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('hideVerseNumbers', true)}
-								>
-									Masquer
-								</button>
-							</div>
-						</div>
-
-						<div>
-							<span class="block mb-2 text-muted text-[13px]">Couleur des numéros</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.verseNumberColor === 'accent'
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('verseNumberColor', 'accent')}
-								>
-									Accent
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.verseNumberColor === 'subtle'
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('verseNumberColor', 'subtle')}
-								>
-									Discret
-								</button>
-							</div>
-						</div>
-
-						<div>
-							<span class="block mb-2 text-muted text-[13px]">Titres de section</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{!$prefs.hideBibleHeadings
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('hideBibleHeadings', false)}
-								>
-									Afficher
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.hideBibleHeadings
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('hideBibleHeadings', true)}
-								>
-									Masquer
-								</button>
-							</div>
-						</div>
-
-						<div>
-							<span class="block mb-2 text-muted text-[13px]">Navigation de chapitre</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{!$prefs.hideChapterNav
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('hideChapterNav', false)}
-								>
-									Afficher
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.hideChapterNav
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('hideChapterNav', true)}
-								>
-									Masquer
-								</button>
-							</div>
-						</div>
-
-						<div>
-							<span class="block mb-2 text-muted text-[13px]">Numérotation Vulgate (psaumes)</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.showVulgatePsalms
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('showVulgatePsalms', true)}
-								>
-									Afficher
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{!$prefs.showVulgatePsalms
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('showVulgatePsalms', false)}
-								>
-									Masquer
-								</button>
-							</div>
-						</div>
-
-						<div>
-							<span class="block mb-2 text-muted text-[13px]">Défilement continu</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.infiniteScroll
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('infiniteScroll', true)}
-								>
-									Activé
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{!$prefs.infiniteScroll
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('infiniteScroll', false)}
-								>
-									Désactivé
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
-
 			{#if isCecOnly}
 				<div class="pt-1 mt-1 border-t border-border">
 					<span class="block mb-3 text-[11px] uppercase tracking-[0.12em] font-semibold text-accent"
@@ -543,59 +322,128 @@
 					>
 					<div class="space-y-4">
 						<div>
-							<span class="block mb-2 text-muted text-[13px]">Renvois (§)</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.crossRefsLayout === 'inline'
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('crossRefsLayout', 'inline')}
-								>
-									En ligne
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.crossRefsLayout === 'side'
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('crossRefsLayout', 'side')}
-								>
-									En marge
-								</button>
-							</div>
+							<span class="block mb-2 text-muted text-[13px]">Renvois entre paragraphes</span>
+							<PillGroup
+								ariaLabel="Renvois entre paragraphes"
+								options={[
+									{ label: 'En ligne', value: 'inline' as const },
+									{ label: 'En marge', value: 'side' as const }
+								]}
+								value={$prefs.crossRefsLayout}
+								onchange={(v) => updatePref('crossRefsLayout', v)}
+							/>
 						</div>
 
 						<div>
-							<span class="block mb-2 text-muted text-[13px]">Réfs. bibliques</span>
-							<div class="flex gap-1.5">
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{!$prefs.inlineAsMarkers
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('inlineAsMarkers', false)}
-								>
-									En ligne
-								</button>
-								<button
-									type="button"
-									class="flex-1 py-1.5 border rounded text-xs
-										{$prefs.inlineAsMarkers
-										? 'bg-accent/15 text-accent-text border-accent'
-										: 'pill-border text-foreground hover:text-accent-text'}"
-									onclick={() => updatePref('inlineAsMarkers', true)}
-								>
-									En exposant
-								</button>
-							</div>
+							<span class="block mb-2 text-muted text-[13px]">Citations bibliques</span>
+							<PillGroup
+								ariaLabel="Citations bibliques"
+								options={[
+									{ label: 'En ligne', value: false },
+									{ label: 'En exposant', value: true }
+								]}
+								value={$prefs.inlineAsMarkers}
+								onchange={(v) => updatePref('inlineAsMarkers', v)}
+							/>
 						</div>
 					</div>
 				</div>
 			{/if}
+		</div>
+	{/if}
+
+	{#if activeTab === 'bible'}
+		<div class="space-y-5">
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Mode de lecture</span>
+				<PillGroup
+					ariaLabel="Mode de lecture"
+					options={[
+						{ label: 'Verset par verset', value: 'verse' as const },
+						{ label: 'Paragraphe', value: 'paragraph' as const }
+					]}
+					value={$prefs.bibleLayout}
+					onchange={(v) => updatePref('bibleLayout', v)}
+				/>
+			</div>
+
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Scroll infini</span>
+				<PillGroup
+					ariaLabel="Scroll infini"
+					options={[
+						{ label: 'Activé', value: true },
+						{ label: 'Désactivé', value: false }
+					]}
+					value={$prefs.infiniteScroll}
+					onchange={(v) => updatePref('infiniteScroll', v)}
+				/>
+			</div>
+
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Numéros de verset</span>
+				<PillGroup
+					ariaLabel="Numéros de verset"
+					options={[
+						{ label: 'Afficher', value: false },
+						{ label: 'Masquer', value: true }
+					]}
+					value={$prefs.hideVerseNumbers}
+					onchange={(v) => updatePref('hideVerseNumbers', v)}
+				/>
+			</div>
+
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Couleur des numéros de verset</span>
+				<PillGroup
+					ariaLabel="Couleur des numéros de verset"
+					options={[
+						{ label: 'Accent', value: 'accent' as const },
+						{ label: 'Discret', value: 'subtle' as const }
+					]}
+					value={$prefs.verseNumberColor}
+					onchange={(v) => updatePref('verseNumberColor', v)}
+				/>
+			</div>
+
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Titres de section</span>
+				<PillGroup
+					ariaLabel="Titres de section"
+					options={[
+						{ label: 'Afficher', value: false },
+						{ label: 'Masquer', value: true }
+					]}
+					value={$prefs.hideBibleHeadings}
+					onchange={(v) => updatePref('hideBibleHeadings', v)}
+				/>
+			</div>
+
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Navigation entre chapitres</span>
+				<PillGroup
+					ariaLabel="Navigation entre chapitres"
+					options={[
+						{ label: 'Afficher', value: false },
+						{ label: 'Masquer', value: true }
+					]}
+					value={$prefs.hideChapterNav}
+					onchange={(v) => updatePref('hideChapterNav', v)}
+				/>
+			</div>
+
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Numérotation Vulgate (psaumes)</span>
+				<PillGroup
+					ariaLabel="Numérotation Vulgate (psaumes)"
+					options={[
+						{ label: 'Afficher', value: true },
+						{ label: 'Masquer', value: false }
+					]}
+					value={$prefs.showVulgatePsalms}
+					onchange={(v) => updatePref('showVulgatePsalms', v)}
+				/>
+			</div>
 		</div>
 	{/if}
 
@@ -633,7 +481,7 @@
 								<span class="prefs-check" aria-hidden="true">
 									{#if $prefs.hideCrossRefs}<span class="prefs-check-mark">✓</span>{/if}
 								</span>
-								<span>Renvois (§)</span>
+								<span>Renvois entre paragraphes</span>
 							</label>
 							<label class="flex items-center gap-2.5 cursor-pointer">
 								<input
@@ -645,7 +493,7 @@
 								<span class="prefs-check" aria-hidden="true">
 									{#if $prefs.hideBibleInline}<span class="prefs-check-mark">✓</span>{/if}
 								</span>
-								<span>Réfs. bibliques en ligne</span>
+								<span>Citations bibliques en ligne</span>
 							</label>
 							<label class="flex items-center gap-2.5 cursor-pointer">
 								<input
@@ -657,7 +505,7 @@
 								<span class="prefs-check" aria-hidden="true">
 									{#if $prefs.hideBibleMarkers}<span class="prefs-check-mark">✓</span>{/if}
 								</span>
-								<span>Réfs. bibliques en exposant</span>
+								<span>Citations bibliques en exposant</span>
 							</label>
 							<label class="flex items-center gap-2.5 cursor-pointer">
 								<input
@@ -731,16 +579,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-	}
-
-	/* Inactive segmented-pill border · `--color-border` reads too quiet on
-	   the warm panel; this pulls a stronger hairline derived from the
-	   foreground colour so the controls are visibly bounded at rest. */
-	.pill-border {
-		border-color: color-mix(in srgb, var(--color-fg) 22%, transparent);
-	}
-	.pill-border:hover {
-		border-color: color-mix(in srgb, var(--color-fg) 35%, transparent);
 	}
 
 	/* Hairline checkbox · native input is visually hidden but kept in flow

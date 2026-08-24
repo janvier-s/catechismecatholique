@@ -12,7 +12,6 @@
 		chapter,
 		totalChapters,
 		chapterCounts = {},
-		citedVerseCount = 0,
 		hasConcordance = false,
 		variant = 'reader',
 		concordanceManifest = {}
@@ -21,7 +20,6 @@
 		chapter: number;
 		totalChapters: number;
 		chapterCounts?: Record<string, number>;
-		citedVerseCount?: number;
 		hasConcordance?: boolean;
 		variant?: 'reader' | 'concordance';
 		/** Book slug → chapters with CCC cross-references. Only meaningful for
@@ -34,11 +32,6 @@
 		if (variant !== 'concordance') return false;
 		return !(concordanceManifest[slug] ?? []).includes(ch);
 	}
-
-	// Paragraph mode renders no citation sidebar, and a chapter with no
-	// citations has nothing to annotate. Disable rather than hide, so the nav
-	// row keeps the same contents while paging between chapters.
-	const toggleDisabled = $derived(citedVerseCount === 0 || $prefs.bibleLayout === 'paragraph');
 
 	function buildHref(slug: string, ch: number): string {
 		return variant === 'concordance' ? `/bible/${slug}/${ch}/concordance` : `/bible/${slug}/${ch}`;
@@ -215,7 +208,6 @@
 				mode={$prefs.bibleStudyMode ? 'etude' : 'lecture'}
 				{hasConcordance}
 				{concordanceHref}
-				disabled={toggleDisabled}
 				onchange={(next) => updatePref('bibleStudyMode', next)}
 			/>
 		</div>

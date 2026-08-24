@@ -44,9 +44,6 @@
 		paragraphs?: NclChapterBlocks | null;
 	} = $props();
 
-	// Follows the pref alone. Citation count affects only whether the control
-	// is disabled, never the layout attribute, because data-study-mode drives
-	// the column-width compensation in app.css.
 	const studyMode = $derived($prefs.bibleStudyMode);
 
 	interface LoadedChapter {
@@ -54,14 +51,6 @@
 		chapter: number;
 		verses: { v: number; text: string }[];
 		paragraphs: NclChapterBlocks | null;
-	}
-
-	/** Verses in `entry` that the Catechism cites · drives whether the
-	 *  Lecture/Étude toggle is enabled. */
-	function totalCitedIn(entry: LoadedChapter): number {
-		const chIdx = verseIdx[entry.book.usfx]?.[String(entry.chapter)];
-		if (!chIdx) return 0;
-		return entry.verses.reduce((t, v) => t + ((chIdx[String(v.v)]?.length ?? 0) > 0 ? 1 : 0), 0);
 	}
 
 	function entryChapter(): LoadedChapter {
@@ -85,12 +74,6 @@
 	let activeChapter = $state(chapter);
 
 	const activeBook = $derived(bookBySlug(activeSlug) ?? book);
-	// `loaded` is never empty · the reset effect always seeds it with the entry
-	// chapter. The `?? loaded[0]` is for the window between an active chapter
-	// being pruned and the observer reporting its replacement.
-	const activeEntry = $derived<LoadedChapter | undefined>(
-		loaded.find((l) => l.book.slug === activeSlug && l.chapter === activeChapter) ?? loaded[0]
-	);
 	const activeTotalChapters = $derived(chapterCounts[activeBook.usfx] ?? totalChapters);
 
 	// The footer nav only renders with infinite scroll off. That is true for
@@ -779,7 +762,6 @@
 	totalChapters={activeTotalChapters}
 	{chapterCounts}
 	{hasConcordance}
-	citedVerseCount={activeEntry ? totalCitedIn(activeEntry) : 0}
 	variant="reader"
 />
 
