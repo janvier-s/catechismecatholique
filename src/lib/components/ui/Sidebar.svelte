@@ -798,9 +798,10 @@
 				function nestLevels(es: Entry[]): Item[] {
 					const result: Item[] = [];
 					let current: Item | null = null;
+					let currentLevel: number | null = null;
 					let currentChildren: Item[] | null = null;
 					for (const e of es) {
-						if (e.level >= 3 && current) {
+						if (e.level >= 3 && current && currentLevel !== null && currentLevel < 3) {
 							if (!currentChildren) {
 								currentChildren = [];
 								current.children = currentChildren;
@@ -808,6 +809,7 @@
 							currentChildren.push(e.item);
 						} else {
 							current = { ...e.item };
+							currentLevel = e.level;
 							currentChildren = null;
 							result.push(current);
 						}

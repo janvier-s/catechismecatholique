@@ -778,7 +778,6 @@ html[data-chrome-hidden='true'] .bible-chapter-nav {
 	[aria-label='Navigation'],
 	[aria-label='Navigation entre leçons'],
 	[aria-label='Voir la concordance'],
-	.context-deeper,
 	.pager,
 	/* Hover-revealed permalink icons. */
 	.number-link,

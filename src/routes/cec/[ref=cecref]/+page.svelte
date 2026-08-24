@@ -202,6 +202,15 @@
 					{c.heading.title}
 				</a>
 			</h2>
+		{:else}
+			{@const level = deepestLevel(c, anchorNum)}
+			{#if level}
+				<h2 class="font-ui text-lg font-semibold text-accent mt-2 mb-4">
+					<a href={level.href} class="hover:underline">
+						{level.title}
+					</a>
+				</h2>
+			{/if}
 		{/if}
 
 		<div class="border-t border-border pt-6 mt-2">
@@ -213,15 +222,6 @@
 				{/each}
 			{/if}
 		</div>
-
-		{@const level = deepestLevel(c, anchorNum)}
-		{#if level}
-			<p class="context-deeper mt-12 font-ui text-sm">
-				<a href={level.href} class="text-accent hover:underline">
-					{level.title} →
-				</a>
-			</p>
-		{/if}
 	{:else if data.kind === 'paragraph'}
 		<ReadableUnit unit={{ kind: 'ccc-paragraph', data: data.paragraph }} />
 	{:else if data.kind === 'multi'}
