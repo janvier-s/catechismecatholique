@@ -48,11 +48,6 @@
 	// the column-width compensation in app.css.
 	const studyMode = $derived($prefs.bibleStudyMode);
 
-	// The footer nav only renders with infinite scroll off, and then the entry
-	// chapter is the only chapter · these correctly stay on the props.
-	const prevHref = $derived(chapter > 1 ? `/bible/${book.slug}/${chapter - 1}` : null);
-	const nextHref = $derived(chapter < totalChapters ? `/bible/${book.slug}/${chapter + 1}` : null);
-
 	interface LoadedChapter {
 		book: BookInfo;
 		chapter: number;
@@ -96,6 +91,20 @@
 		loaded.find((l) => l.book.slug === activeSlug && l.chapter === activeChapter) ?? loaded[0]
 	);
 	const activeTotalChapters = $derived(chapterCounts[activeBook.usfx] ?? totalChapters);
+
+	// The footer nav only renders with infinite scroll off. That is true for
+	// the whole component's life when the pref started off, but a reader can
+	// also toggle it off mid-scroll with several chapters already appended and
+	// `activeChapter` well past the entry props · derived off `active*`, not
+	// the route props, so the links (and the label below) point at the
+	// chapter actually on screen either way.
+	const prevHref = $derived(
+		activeChapter > 1 ? `/bible/${activeBook.slug}/${activeChapter - 1}` : null
+	);
+	const nextHref = $derived(
+		activeChapter < activeTotalChapters ? `/bible/${activeBook.slug}/${activeChapter + 1}` : null
+	);
+
 	const hasConcordance = $derived(
 		(concordanceManifest[activeBook.slug] ?? []).includes(activeChapter)
 	);
@@ -151,6 +160,14 @@
 			// chapter grid would otherwise arrive with the cooldown long expired and
 			// get Genèse 8 prepended underneath them on the next active change.
 			navCooldownUntil = Date.now() + NAV_COOLDOWN_MS;
+			// Re-armed alongside the cooldown above, for the same reason. Without
+			// this, a reader who navigates in-app to a chapter short enough to fit
+			// inside the viewport (Psaume 117, any single-chapter book) never
+			// triggers a scroll event, and `onMount`'s timer already fired once and
+			// is gone: nothing would ever call checkPreload again for that chapter,
+			// and infinite scroll would silently stop growing from that navigation
+			// on.
+			armPreloadTimer();
 			// Any navigation is a fresh start. No record survives it, so a reader
 			// who hit a flaky connection at a book boundary is never stuck with a
 			// chapter that stays unreachable for the life of the component ·
@@ -217,7 +234,7 @@
 	 *  near the bottom · offline, that would otherwise be a stream of failing
 	 *  requests and a console.warn per frame.
 	 *
-	 *  Non-reactive — read only from the imperative load paths, never rendered,
+	 *  Non-reactive · read only from the imperative load paths, never rendered,
 	 *  so the reactive versions' sources would be pure overhead
 	 *  (ParagraphActions.svelte takes the same exemption). */
 	// eslint-disable-next-line svelte/prefer-svelte-reactivity
@@ -276,11 +293,17 @@
 	}
 
 	/** Clear one ref's failure record after it loads · a chapter that arrived is
-	 *  no longer owed a retry, and the notice at the end of the document goes
-	 *  with it. */
+	 *  no longer owed a retry. `loadFailed` only follows it down when nothing
+	 *  else is still exhausted: a successful loadPrev must not hide the notice
+	 *  for a forward ref that gave up minutes ago and is still unreachable ·
+	 *  `loadFailed` has no memory of which direction raised it, only whether
+	 *  anything currently has. */
 	function clearFailure(key: string) {
 		loadAttempts.delete(key);
 		retryAfter.delete(key);
+		for (const attempts of loadAttempts.values()) {
+			if (attempts >= MAX_LOAD_ATTEMPTS) return;
+		}
 		loadFailed = false;
 	}
 
@@ -461,9 +484,10 @@
 	 *
 	 * This is what lets the compensation below be exact. Removing only content
 	 * above the fold means the document shrinks by precisely the distance the
-	 * surviving text moves up, and — since the pixels above the fold are `scrollY`
-	 * and no more — the remaining document is still at least one viewport tall, so
-	 * `scrollHeight` never bottoms out on its own floor and under-reports `delta`.
+	 * surviving text moves up, and since the pixels above the fold are exactly
+	 * `scrollY` and no more, the remaining document is still at least one
+	 * viewport tall, so `scrollHeight` never bottoms out on its own floor and
+	 * under-reports `delta`.
 	 * Stopping early is always safe: the window simply stays above `MAX_LOADED`
 	 * until the reader has scrolled on.
 	 */
@@ -511,7 +535,7 @@
 		}
 		// Measured off the document, the same way loadPrev does, rather than by
 		// summing the boxes of the elements being removed. A sum cannot see layout
-		// changes the removal itself causes — the surviving first chapter's heading
+		// changes the removal itself causes: the surviving first chapter's heading
 		// is re-tagged h1, and any future difference between the two would silently
 		// desynchronise the compensation from what actually happened.
 		const y = window.scrollY;
@@ -547,7 +571,7 @@
 	 * *changes* between two consecutive frames. A scroll step bigger than the
 	 * activation band (`ACTIVE_BAND_RATIO`, the top 30% of the viewport ·
 	 * PageDown, spacebar, a trackpad fling) can carry an anchor from below the
-	 * band to above it — or the reverse — without the band ever containing it
+	 * band to above it, or the reverse, without the band ever containing it
 	 * at a sampled frame, so no crossing is ever delivered and `activeChapter`
 	 * silently stops following the reader. `scrollSpy.ts` abandoned
 	 * IntersectionObserver for headings for exactly this reason; this applies
@@ -619,6 +643,16 @@
 	 */
 	function checkPreload() {
 		if (!browser || !$prefs.infiniteScroll || !scrollReady || destroyed) return;
+		// Also called here, not only from onScrollCheck: `onCrossing`'s exit-up
+		// branch treats ANY on-screen, non-intersecting anchor as a genuine
+		// upward exit, but `observeNewAnchor`'s first observation of a freshly
+		// appended chapter reports exactly that shape whenever the cascade from
+		// the onMount preload timer appends several short chapters that
+		// together still fit under one viewport, with no scrolling involved.
+		// checkPreload runs at the end of every load in that cascade, so
+		// recomputing here catches up on whatever `onCrossing` got wrong before
+		// the reader has done anything.
+		activeFromPosition();
 		if (Date.now() < navCooldownUntil) return;
 		const idx = loaded.findIndex((l) => l.book.slug === activeSlug && l.chapter === activeChapter);
 		if (idx === -1) return;
@@ -638,7 +672,7 @@
 		// used to leave `idx` stuck near the start of `loaded` while the reader
 		// kept scrolling down: `idx < 2` became true at the bottom of the
 		// document, and the prepend that followed tail-pruned exactly the chapter
-		// the append just added — the two loaders trading one chapter forever
+		// the append just added, the two loaders trading one chapter forever
 		// while the page stopped growing, with no footer nav to leave by. This
 		// check is now belt and braces for the gap between a jump landing and the
 		// next scroll tick recomputing the position, rather than the only thing
@@ -658,19 +692,28 @@
 		untrack(() => checkPreload());
 	});
 
+	/** Appending below the fold cannot shift what is on screen, so the first
+	 *  forward preload is always safe to run on a timer rather than waiting on a
+	 *  scroll event that a chapter shorter than the viewport never fires. Fires
+	 *  once the cooldown armed alongside every call site has elapsed. Called
+	 *  from `onMount` and, again, from the reset effect on every subsequent
+	 *  in-app navigation · see the comment there for why the second call site
+	 *  exists. */
+	function armPreloadTimer() {
+		if (preloadTimer) clearTimeout(preloadTimer);
+		preloadTimer = setTimeout(() => {
+			preloadTimer = null;
+			onScrollCheck();
+			checkPreload();
+		}, NAV_COOLDOWN_MS);
+	}
+
 	onMount(() => {
 		if (container) observeAllAnchors(container, ensureObserver());
 		window.addEventListener('scroll', onScroll, { passive: true });
 		scrollReady = true;
 		navCooldownUntil = Date.now() + NAV_COOLDOWN_MS;
-		// Appending below the fold cannot shift what is on screen, so the first
-		// forward preload is safe to run on a timer. Prepends wait for the cooldown
-		// armed just above · this timer is scheduled after it, so it can only fire
-		// once the cooldown has elapsed.
-		preloadTimer = setTimeout(() => {
-			onScrollCheck();
-			checkPreload();
-		}, NAV_COOLDOWN_MS);
+		armPreloadTimer();
 	});
 
 	onDestroy(() => {
@@ -749,12 +792,12 @@
 		>
 			{#if prevHref}
 				<a href={prevHref} class="text-accent hover:underline whitespace-nowrap"
-					>← Chapitre {chapter - 1}</a
+					>← Chapitre {activeChapter - 1}</a
 				>
 			{:else}<span></span>{/if}
 			{#if nextHref}
 				<a href={nextHref} class="text-accent hover:underline whitespace-nowrap"
-					>Chapitre {chapter + 1} →</a
+					>Chapitre {activeChapter + 1} →</a
 				>
 			{:else}<span></span>{/if}
 		</nav>

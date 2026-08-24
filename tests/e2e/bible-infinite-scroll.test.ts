@@ -16,6 +16,12 @@ async function enableInfiniteScroll(page: Page) {
 	await page.keyboard.press('Escape');
 }
 
+async function disableInfiniteScroll(page: Page) {
+	const dialog = await openReadingTab(page);
+	await dialog.getByRole('button', { name: 'Désactivé', exact: true }).click();
+	await page.keyboard.press('Escape');
+}
+
 test('infinite scroll is off by default and the toggle persists', async ({ page }) => {
 	await page.goto('/bible/genese/1');
 
@@ -102,6 +108,18 @@ test('with the pref off, reaching the bottom loads nothing and the footer nav st
 }) => {
 	await page.goto('/bible/genese/1');
 	await scrollToBottom(page);
+
+	// scrollToBottom is a fixed number of viewport-height steps. Without this,
+	// a taller viewport or a longer Genèse 1 could let the loop finish short of
+	// the real bottom, and the assertions below would pass having never put the
+	// pref-off guard under the condition they claim to test.
+	await expect
+		.poll(() =>
+			page.evaluate(
+				() => window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1
+			)
+		)
+		.toBe(true);
 
 	await expect(page.locator('[data-chapter-section]')).toHaveCount(1);
 	await expect(
@@ -275,7 +293,7 @@ test('the sticky bars do not flap while chapters are prepended', async ({ page }
 	// inserted above and the compensation has moved scrollY down by their whole
 	// height (measured at 4008px here). An absolute 1500 would be a 2500px jump
 	// *upward*, which reveals the bars rather than hiding them, and the test would
-	// fail on its own setup — a false negative created by the very compensation it
+	// fail on its own setup, a false negative created by the very compensation it
 	// exists to check.
 	await page.evaluate(() => window.scrollBy(0, 800));
 	await expect(page.locator('html')).toHaveAttribute('data-chrome-hidden', 'true');
@@ -293,8 +311,8 @@ test('the sticky bars do not flap while chapters are prepended', async ({ page }
 	// exactly the flicker this test exists to catch.
 	//
 	// 120px a step, not 60. A prepend needs the reader to leave chapter 5, which
-	// needs its anchor to fall below the observer's activation band — the top 30%
-	// of the viewport, so 216px. The settled window puts chapter 5's start at
+	// needs its anchor to fall below the observer's activation band (the top 30%
+	// of the viewport, so 216px). The settled window puts chapter 5's start at
 	// ~4008 and the sampling begins at ~4608, which 12 steps of 60px miss by a
 	// couple of steps; the loop then samples a perfectly still page and proves
 	// nothing.
@@ -334,7 +352,7 @@ test('the loaded window is capped, and pruning it does not disturb the bars', as
 	// Pruning a chapter off the top shortens the document above the viewport, and
 	// the compensation pulls scrollY *up* by what it occupied. Uncompensated that
 	// upward jump is thousands of pixels, which sails past REVEAL_AFTER_UP and
-	// pops both bars back out mid-descent — verified by removing
+	// pops both bars back out mid-descent · verified by removing
 	// anchorChromeShift(delta) from pruneFront, which turns the set below into
 	// ['true', 'false']. Sampling starts at i >= 2 so the first steps, which are
 	// still crossing HIDE_AFTER, do not record a legitimate 'false'.
@@ -342,7 +360,7 @@ test('the loaded window is capped, and pruning it does not disturb the bars', as
 	// Sampled twice an iteration, before the wait as well as after it. A prune
 	// that lands more than 100ms behind its scroll would reveal the bars in the
 	// gap, and the next iteration's downward scroll would re-hide them before a
-	// once-per-iteration sample ever looked — the check would then depend on
+	// once-per-iteration sample ever looked; the check would then depend on
 	// prune latency rather than on the compensation.
 	const chromeSeen = new Set<string | null>();
 	const sampleChrome = async (i: number) => {
@@ -480,4 +498,68 @@ test('a page-at-a-time descent through one-chapter books keeps going, and keeps 
 	// scrolling has stopped even without `activeFromPosition`, and would mask
 	// exactly the lag this assertion exists to catch.
 	expect(page.url()).toMatch(/\/bible\/apocalypse\/\d+$/);
+});
+
+test('an in-app navigation re-arms the preload timer, for a chapter reached with no scroll at all', async ({
+	page
+}) => {
+	// onMount's preload timer is one-shot. Without re-arming it from the reset
+	// effect too, a reader who lands on Genèse 1 (grows fine, onMount's timer
+	// covers it), then uses the chapter grid to jump elsewhere, would find
+	// nothing left to call checkPreload again for that chapter: no scroll event
+	// ever fires on its own, and the timer that used to stand in for one already
+	// fired once and is gone.
+	await page.goto('/bible/genese/1');
+	await enableInfiniteScroll(page);
+	await page.goto('/bible/genese/1');
+	// Let the initial onMount timer finish its own growth first, so what
+	// follows tests only the in-app navigation's own re-arm.
+	await page.waitForTimeout(2500);
+
+	// In-app navigation via the chapter grid, not page.goto: this reuses the
+	// component instance, which only the reset effect handles, not onMount.
+	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	await page.locator('[data-book-grid="genese"] a span', { hasText: /^10$/ }).click();
+
+	// No scrolling from here at all. Only the re-armed preload timer, once its
+	// own cooldown elapses, can grow the window forward from a standing start.
+	await expect(page.locator('[data-chapter-anchor][data-chapter-num="11"]')).toHaveCount(1, {
+		timeout: 4000
+	});
+});
+
+test('toggling the pref off mid-scroll points the footer nav at the chapter on screen, not the entry chapter', async ({
+	page
+}) => {
+	await page.goto('/bible/genese/1');
+	await enableInfiniteScroll(page);
+	await page.goto('/bible/genese/1');
+	await scrollUntilChapter(page, 4);
+
+	// `<svelte:head><title>` reads `activeChapter` directly, with no debounce ·
+	// a more reliable settle signal than the sticky bar's URL, which goes
+	// through a 200ms-debounced `replaceState` and can still read a chapter the
+	// scroll has already moved past. Polling it, then holding for a further
+	// pause with no change, is what actually confirms the reader has stopped
+	// moving before the assertions below lock in a chapter number.
+	const titleChapter = async () => {
+		const m = (await page.title()).match(/Genèse (\d+) /);
+		return m ? Number(m[1]) : null;
+	};
+	await expect.poll(titleChapter).toBeGreaterThan(1);
+	const settled = await titleChapter();
+	await page.waitForTimeout(300);
+	await expect.poll(titleChapter).toBe(settled);
+
+	await disableInfiniteScroll(page);
+
+	// A build still deriving these links from the route props (chapter === 1)
+	// would render no prevHref at all (chapter > 1 is false) and a wrong
+	// nextHref of /bible/genese/2, wherever the reader actually settled.
+	const nav = page.getByRole('navigation', { name: 'Chapitre précédent ou suivant' });
+	await expect(nav).toBeVisible();
+	const links = nav.locator('a');
+	await expect(links).toHaveCount(2);
+	await expect(links.first()).toHaveAttribute('href', `/bible/genese/${settled! - 1}`);
+	await expect(links.last()).toHaveAttribute('href', `/bible/genese/${settled! + 1}`);
 });

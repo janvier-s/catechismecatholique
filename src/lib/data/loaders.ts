@@ -333,7 +333,13 @@ export function loadNclManifest(fetcher: Fetch = fetch): Promise<Set<string>> {
 			if (!r.ok) return new Set<string>();
 			const arr = (await r.json()) as string[];
 			return new Set(arr);
-		})();
+		})().catch((e) => {
+			// loadNclBook awaits this as its first step, so a rejection here would
+			// otherwise poison every retry BibleReader's backoff makes at a book
+			// boundary before the fetch it's actually retrying is ever reached.
+			nclManifestPromise = null;
+			throw e;
+		});
 	}
 	return nclManifestPromise;
 }
@@ -381,7 +387,11 @@ export function loadNclParagraphsManifest(fetcher: Fetch = fetch): Promise<Set<s
 			if (!r.ok) return new Set<string>();
 			const arr = (await r.json()) as string[];
 			return new Set(arr);
-		})();
+		})().catch((e) => {
+			// Same reasoning as loadNclManifest's catch, immediately above.
+			nclParagraphsManifestPromise = null;
+			throw e;
+		});
 	}
 	return nclParagraphsManifestPromise;
 }
