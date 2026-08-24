@@ -335,7 +335,7 @@ test('the loaded window is capped, and pruning it does not disturb the bars', as
 	// the compensation pulls scrollY *up* by what it occupied. Uncompensated that
 	// upward jump is thousands of pixels, which sails past REVEAL_AFTER_UP and
 	// pops both bars back out mid-descent — verified by removing
-	// anchorChromeShift(-removed) from pruneFront, which turns the set below into
+	// anchorChromeShift(delta) from pruneFront, which turns the set below into
 	// ['true', 'false']. Sampling starts at i >= 2 so the first steps, which are
 	// still crossing HIDE_AFTER, do not record a legitimate 'false'.
 	//
@@ -359,4 +359,125 @@ test('the loaded window is capped, and pruning it does not disturb the bars', as
 	expect(count).toBeGreaterThan(1);
 	expect(count).toBeLessThanOrEqual(5);
 	expect([...chromeSeen]).toEqual(['true']);
+});
+
+test('scrolling past the end of a book continues into the next one', async ({ page }) => {
+	// 3 Jean has a single chapter, so its end is a book boundary and not just a
+	// chapter boundary. Jude follows it.
+	await page.goto('/bible/3-jean/1');
+	await enableInfiniteScroll(page);
+	await page.goto('/bible/3-jean/1');
+	await scrollToBottom(page);
+
+	await expect(
+		page.locator('[data-chapter-anchor][data-book-slug="jude"][data-chapter-num="1"]')
+	).toHaveCount(1, { timeout: 15_000 });
+
+	// The appended chapter carries its own book's eyebrow, not the entry book's.
+	//
+	// Scoped to Jude's own section rather than asserted positionally. These books
+	// are a few hundred pixels each, so one descent loads the window to its cap
+	// and runs past Jude into the Apocalypse · a `toHaveCount(2)` here would be
+	// measuring how much fits on screen, not which eyebrow each chapter renders.
+	await expect(
+		page.locator('[data-chapter-section]:has([data-book-slug="jude"]) .chapter-eyebrow')
+	).toHaveText('Jude');
+	// And the eyebrows genuinely differ across the loaded window · the assertion
+	// above would hold just as well if every section rendered the same book.
+	const eyebrows = await page.locator('.chapter-eyebrow').allTextContents();
+	expect(new Set(eyebrows).size).toBeGreaterThan(1);
+
+	// And the sticky bar retitles once Jude is the chapter being read. Note the
+	// scrollIntoView: it is not decoration. See the descent test below, which
+	// covers what happens when nothing lands the anchor in the activation band.
+	await page
+		.locator('[data-chapter-anchor][data-book-slug="jude"]')
+		.evaluate((el) => el.scrollIntoView({ block: 'start' }));
+	// Let the observer deliver the 'enter' before scrolling on. Back-to-back
+	// page.evaluate calls can land in the same rendering frame, and the
+	// IntersectionObserver would then only ever see the final position · the
+	// same race the Genèse 2 test above documents at length.
+	await page.waitForTimeout(200);
+	await page.evaluate(() => window.scrollBy(0, 200));
+	await expect.poll(() => page.url(), { timeout: 10_000 }).toMatch(/\/bible\/jude\/1$/);
+	await expect(page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]')).toContainText(
+		'Jude 1'
+	);
+});
+
+test('a page-at-a-time descent through one-chapter books keeps going, and keeps the reader still', async ({
+	page
+}) => {
+	// 2 Jean, 3 Jean and Jude are consecutive single-chapter books, so this run
+	// crosses three book boundaries in a dozen screens, appending and pruning on
+	// nearly every step.
+	//
+	// A whole viewport a step, deliberately. That is what a space bar or a Page
+	// Down does, and it is longer than the observer's activation band (the top 30%
+	// of the viewport), so an anchor can pass from below the band to above it
+	// between two frames and never be reported as entered. Before
+	// `activeFromPosition`, the active chapter then stayed on 2 Jean for the whole
+	// descent, `idx < 2` stayed true at the bottom of the document, and every
+	// append was undone by the tail prune of the prepend that followed it: the
+	// window returned to 1-jean-4 … jude-1 byte for byte, over and over, and the
+	// page never grew past the Apocalypse boundary.
+	await page.goto('/bible/2-jean/1');
+	await enableInfiniteScroll(page);
+	await page.goto('/bible/2-jean/1');
+
+	// Start from a window already at the cap, so the descent prunes on every
+	// append rather than spending its first steps filling up.
+	await expect(page.locator('[data-chapter-section]')).toHaveCount(5, { timeout: 15_000 });
+
+	// Jude is the anchor to hold on to: loaded from the start, and far enough down
+	// the window to survive several prunes.
+	const JUDE_ANCHOR = '[data-chapter-anchor][data-book-slug="jude"]';
+
+	const chromeSeen = new Set<string | null>();
+	let held = 0;
+	for (let i = 0; i < 12; i++) {
+		// Scroll and measure in one evaluate. The reading is then taken before any
+		// load can react to the scroll, so the comparison after the wait isolates
+		// exactly the movement the loads caused · a reading taken afterwards would
+		// fold the reader's own scrolling into the same number.
+		const before = await page.evaluate((selector) => {
+			window.scrollBy(0, window.innerHeight);
+			const el = document.querySelector(selector);
+			return el ? el.getBoundingClientRect().top : null;
+		}, JUDE_ANCHOR);
+		await page.waitForTimeout(150);
+		const after = await page.evaluate((selector) => {
+			const el = document.querySelector(selector);
+			return el ? el.getBoundingClientRect().top : null;
+		}, JUDE_ANCHOR);
+		// Null once Jude has been pruned off the front, which is expected partway
+		// down · `held` below keeps that from emptying the assertion.
+		if (before !== null && after !== null) {
+			held++;
+			expect(Math.abs(after - before)).toBeLessThan(5);
+		}
+		// Sampled from i >= 2 so the first steps, still crossing HIDE_AFTER, do not
+		// record a legitimate 'false'. A prune that reached the chrome reducer
+		// uncompensated would show up here as a 'false' mid-descent.
+		if (i >= 2) chromeSeen.add(await page.locator('html').getAttribute('data-chrome-hidden'));
+	}
+
+	expect(held).toBeGreaterThan(2);
+	expect([...chromeSeen]).toEqual(['true']);
+
+	// The point of the whole test: the descent got somewhere. Under the churn the
+	// window came back to the same five chapters after every append, so the
+	// Apocalypse was never reached and 2 Jean was never left behind.
+	await expect(page.locator('[data-chapter-anchor][data-book-slug="apocalypse"]')).not.toHaveCount(
+		0
+	);
+	await expect(page.locator('[data-chapter-anchor][data-book-slug="2-jean"]')).toHaveCount(0);
+
+	// And the active chapter kept pace with the reader rather than lagging
+	// behind where the observer last happened to catch a crossing. Read
+	// synchronously, with no polling: `expect(page).toHaveURL` retries for up
+	// to 5s, which is long enough for the observer to correct itself once
+	// scrolling has stopped even without `activeFromPosition`, and would mask
+	// exactly the lag this assertion exists to catch.
+	expect(page.url()).toMatch(/\/bible\/apocalypse\/\d+$/);
 });

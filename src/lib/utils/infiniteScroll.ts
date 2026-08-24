@@ -1,6 +1,11 @@
 /** Distance from the bottom of the document at which the next chapter loads. */
 export const SCROLL_THRESHOLD = 400;
 
+/** Top fraction of the viewport treated as the "reading" band. Shared by the
+ *  IntersectionObserver's `rootMargin` below and BibleReader's position-based
+ *  fallback, so the two can never independently drift onto different lines. */
+export const ACTIVE_BAND_RATIO = 0.3;
+
 /** True when the reader is within `SCROLL_THRESHOLD` of the document's end. */
 export function shouldLoadNext(scrollY: number, innerHeight: number, docHeight: number): boolean {
 	return scrollY + innerHeight > docHeight - SCROLL_THRESHOLD;
@@ -67,7 +72,7 @@ export function createChapterObserver(onCrossing: (c: Crossing) => void): Inters
 				if (crossing) onCrossing(crossing);
 			}
 		},
-		{ rootMargin: '0px 0px -70% 0px', threshold: 0 }
+		{ rootMargin: `0px 0px -${Math.round((1 - ACTIVE_BAND_RATIO) * 100)}% 0px`, threshold: 0 }
 	);
 }
 

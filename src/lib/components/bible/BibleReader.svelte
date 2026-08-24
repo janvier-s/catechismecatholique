@@ -15,6 +15,7 @@
 		observeAllAnchors,
 		observeNewAnchor,
 		CHAPTER_ANCHOR_SELECTOR,
+		ACTIVE_BAND_RATIO,
 		type Crossing
 	} from '$lib/utils/infiniteScroll';
 	import { prefs } from '$lib/stores/prefs';
@@ -150,12 +151,11 @@
 			// chapter grid would otherwise arrive with the cooldown long expired and
 			// get Genèse 8 prepended underneath them on the next active change.
 			navCooldownUntil = Date.now() + NAV_COOLDOWN_MS;
-			// Any navigation is a fresh start. Neither record survives it, so a
-			// reader who hit a flaky connection at a book boundary is never stuck
-			// with a chapter that stays unreachable for the life of the component ·
+			// Any navigation is a fresh start. No record survives it, so a reader
+			// who hit a flaky connection at a book boundary is never stuck with a
+			// chapter that stays unreachable for the life of the component ·
 			// re-deriving a structurally absent ref costs one cache-hit lookup.
-			missing.clear();
-			loadAttempts.clear();
+			clearFailures();
 			// The reset destroys the old chapter's anchor and creates a new one
 			// that nothing is watching · `observeAllAnchors` runs only in
 			// `onMount`, and `observeNewAnchor` covers only appended chapters.
@@ -197,6 +197,13 @@
 	 *  fall back on. */
 	const MAX_LOAD_ATTEMPTS = 3;
 
+	/** Delay before a thrown ref is eligible again, doubled per attempt. Without
+	 *  it the budget is spent inside a second: `catch` falls through to
+	 *  `checkPreload()`, which starts the next attempt immediately, so all three
+	 *  land inside one bad moment on the connection and the reader is given up on
+	 *  before the blip has passed. */
+	const RETRY_BASE_MS = 1000;
+
 	/** Refs whose chapter does not exist · an unknown slug, or a chapter number
 	 *  past the end of its book. Structural, so it can never succeed on a retry
 	 *  and the entry is permanent. */
@@ -216,14 +223,73 @@
 	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	const loadAttempts = new Map<string, number>();
 
+	/** Earliest time each thrown ref may be tried again · the backoff half of
+	 *  `loadAttempts`, kept beside it and cleared with it. Non-reactive for the
+	 *  same reason. */
+	// eslint-disable-next-line svelte/prefer-svelte-reactivity
+	const retryAfter = new Map<string, number>();
+
+	let retryTimer: ReturnType<typeof setTimeout> | null = null;
+
+	/** True once the chapter after the window has spent its whole budget. Drives
+	 *  the notice at the end of the document · without it the page simply stops
+	 *  growing and there is no footer nav to explain why or to leave by. */
+	let loadFailed = $state(false);
+
 	function refKey(ref: ChapterRef): string {
 		return `${ref.bookSlug}-${ref.chapter}`;
 	}
 
-	/** Record a throw against `ref`'s attempt budget. */
+	/** Forget everything recorded against the failing refs. Called on a route
+	 *  change and by the reader's own Réessayer, both of which are fresh intent. */
+	function clearFailures() {
+		missing.clear();
+		loadAttempts.clear();
+		retryAfter.clear();
+		if (retryTimer) clearTimeout(retryTimer);
+		retryTimer = null;
+		loadFailed = false;
+	}
+
+	/** Record a throw against `ref`'s attempt budget, hold it off for the backoff,
+	 *  and come back on our own once that expires. Coming back matters: a reader
+	 *  parked at the end of the document generates no scroll events, so nothing
+	 *  else would ever call in again and the recovery would depend on them
+	 *  fidgeting. */
 	function recordFailure(ref: ChapterRef) {
 		const key = refKey(ref);
-		loadAttempts.set(key, (loadAttempts.get(key) ?? 0) + 1);
+		const attempts = (loadAttempts.get(key) ?? 0) + 1;
+		loadAttempts.set(key, attempts);
+		if (attempts >= MAX_LOAD_ATTEMPTS) {
+			loadFailed = true;
+			return;
+		}
+		const wait = RETRY_BASE_MS * 2 ** (attempts - 1);
+		retryAfter.set(key, Date.now() + wait);
+		if (retryTimer) clearTimeout(retryTimer);
+		retryTimer = setTimeout(() => {
+			retryTimer = null;
+			if (destroyed) return;
+			onScrollCheck();
+			checkPreload();
+		}, wait);
+	}
+
+	/** Clear one ref's failure record after it loads · a chapter that arrived is
+	 *  no longer owed a retry, and the notice at the end of the document goes
+	 *  with it. */
+	function clearFailure(key: string) {
+		loadAttempts.delete(key);
+		retryAfter.delete(key);
+		loadFailed = false;
+	}
+
+	/** Give the failed ref its budget back and go again, from the reader's own
+	 *  click. */
+	function retryNow() {
+		clearFailures();
+		onScrollCheck();
+		checkPreload();
 	}
 
 	function ensureObserver(): IntersectionObserver {
@@ -284,7 +350,9 @@
 	function loadable(ref: ChapterRef | null): ref is ChapterRef {
 		if (!ref || isLoaded(ref)) return false;
 		const key = refKey(ref);
-		return !missing.has(key) && (loadAttempts.get(key) ?? 0) < MAX_LOAD_ATTEMPTS;
+		if (missing.has(key)) return false;
+		if ((loadAttempts.get(key) ?? 0) >= MAX_LOAD_ATTEMPTS) return false;
+		return Date.now() >= (retryAfter.get(key) ?? 0);
 	}
 
 	async function loadNext() {
@@ -298,7 +366,7 @@
 			const entry = await fetchChapter(ref);
 			if (!entry) missing.add(refKey(ref));
 			if (entry && !destroyed && gen === generation) {
-				loadAttempts.delete(refKey(ref));
+				clearFailure(refKey(ref));
 				loaded = [...loaded, entry];
 				await tick();
 				// Re-checked after the tick, as in loadPrev · a navigation landing in
@@ -331,7 +399,7 @@
 			const entry = await fetchChapter(ref);
 			if (!entry) missing.add(refKey(ref));
 			if (entry && !destroyed && gen === generation) {
-				loadAttempts.delete(refKey(ref));
+				clearFailure(refKey(ref));
 				// Measure immediately before the mutation. After tick() the difference
 				// is exactly the prepended chapter's rendered height, margin included.
 				const y = window.scrollY;
@@ -347,12 +415,17 @@
 					anchorChromeShift(delta);
 					if (container) observeNewAnchor(container, ensureObserver(), ref.bookSlug, ref.chapter);
 					const excess = loaded.length - MAX_LOADED;
-					// Pruning from the back only touches content below the viewport, so
-					// no compensation is needed · the observer's hold on the anchors
+					// Pruning from the back needs no compensation, and `prunableFromBack`
+					// is what makes that true rather than assumed: every chapter it
+					// returns starts below the fold, so the document cannot shrink past
+					// `scrollY + innerHeight` and the browser has nothing to clamp. An
+					// unnoticed clamp would be banked by the chrome reducer as upward
+					// travel and could pop the bars. The observer's hold on the anchors
 					// leaving still has to be released.
-					if (excess > 0) {
-						unobserveTail(excess);
-						loaded = loaded.slice(0, loaded.length - excess);
+					const drop = prunableFromBack(excess, sectionEls());
+					if (drop > 0) {
+						unobserveTail(drop);
+						loaded = loaded.slice(0, loaded.length - drop);
 						// Flush before releasing the mutex, exactly as loadNext does via
 						// pruneFront's own tick(). Without it the trailing checkPreload()
 						// can start a second loadPrev while this slice is still pending,
@@ -375,16 +448,60 @@
 		checkPreload();
 	}
 
-	/** Drop `count` chapters from above the viewport and pull the scroll position
-	 *  up by exactly what they occupied, so the text does not jump. */
+	/** The rendered chapter sections, in document order. Empty before mount. */
+	function sectionEls(): HTMLElement[] {
+		if (!container) return [];
+		return [...container.querySelectorAll<HTMLElement>(':scope > [data-chapter-section]')];
+	}
+
+	/**
+	 * How many of the leading `count` sections can go without taking any text off
+	 * the reader's screen · everything before the first one still intersecting the
+	 * viewport.
+	 *
+	 * This is what lets the compensation below be exact. Removing only content
+	 * above the fold means the document shrinks by precisely the distance the
+	 * surviving text moves up, and — since the pixels above the fold are `scrollY`
+	 * and no more — the remaining document is still at least one viewport tall, so
+	 * `scrollHeight` never bottoms out on its own floor and under-reports `delta`.
+	 * Stopping early is always safe: the window simply stays above `MAX_LOADED`
+	 * until the reader has scrolled on.
+	 */
+	function prunableFromFront(count: number, sections: HTMLElement[]): number {
+		let n = 0;
+		while (n < count && n < sections.length) {
+			const el = sections[n];
+			// noUncheckedIndexedAccess · the loop bound already proves this, but the
+			// compiler does not know it.
+			if (!el || el.getBoundingClientRect().bottom > 0) break;
+			n++;
+		}
+		return n;
+	}
+
+	/** The same rule at the other end: how many trailing sections start below the
+	 *  fold, and so can be dropped without moving anything the reader can see or
+	 *  shrinking the document out from under `scrollY`. */
+	function prunableFromBack(count: number, sections: HTMLElement[]): number {
+		let n = 0;
+		while (n < count && n < sections.length) {
+			const el = sections[sections.length - 1 - n];
+			if (!el || el.getBoundingClientRect().top < window.innerHeight) break;
+			n++;
+		}
+		return n;
+	}
+
+	/** Drop up to `count` chapters from above the viewport and pull the scroll
+	 *  position up by exactly what they occupied, so the text does not jump. */
 	async function pruneFront(count: number) {
 		if (count <= 0 || !container || destroyed) return;
 		const gen = generation;
-		const sections = container.querySelectorAll<HTMLElement>(':scope > [data-chapter-section]');
-		for (let i = 0; i < count && i < sections.length; i++) {
+		const sections = sectionEls();
+		const drop = prunableFromFront(count, sections);
+		if (drop === 0) return;
+		for (let i = 0; i < drop; i++) {
 			const el = sections[i];
-			// noUncheckedIndexedAccess · the loop bound already proves this, but the
-			// compiler does not know it.
 			if (!el) continue;
 			// An IntersectionObserver holds a strong reference to every target it
 			// watches, and nothing else in this feature ever unobserves. Release the
@@ -399,7 +516,7 @@
 		// desynchronise the compensation from what actually happened.
 		const y = window.scrollY;
 		const oldHeight = document.documentElement.scrollHeight;
-		loaded = loaded.slice(count);
+		loaded = loaded.slice(drop);
 		await tick();
 		if (destroyed || gen !== generation) return;
 		// Negative: a removal shrinks the document. Applied with the same sign in
@@ -413,8 +530,7 @@
 	/** Release the observer's hold on the last `count` chapters' anchors. Call
 	 *  before the slice that drops them, while they are still in the DOM. */
 	function unobserveTail(count: number) {
-		if (!container) return;
-		const sections = container.querySelectorAll<HTMLElement>(':scope > [data-chapter-section]');
+		const sections = sectionEls();
 		for (let i = Math.max(0, sections.length - count); i < sections.length; i++) {
 			const el = sections[i];
 			if (!el) continue;
@@ -423,8 +539,42 @@
 		}
 	}
 
+	/**
+	 * Position-based fallback for the active chapter, recomputed on every
+	 * scroll tick alongside the IntersectionObserver.
+	 *
+	 * The observer only reports a chapter when an anchor's intersection state
+	 * *changes* between two consecutive frames. A scroll step bigger than the
+	 * activation band (`ACTIVE_BAND_RATIO`, the top 30% of the viewport ·
+	 * PageDown, spacebar, a trackpad fling) can carry an anchor from below the
+	 * band to above it — or the reverse — without the band ever containing it
+	 * at a sampled frame, so no crossing is ever delivered and `activeChapter`
+	 * silently stops following the reader. `scrollSpy.ts` abandoned
+	 * IntersectionObserver for headings for exactly this reason; this applies
+	 * the same rule geometrically, so it cannot miss a jump: the last anchor at
+	 * or above the activation line is the chapter being read, whatever path the
+	 * reader took to get there. Goes through `setActive`, so the debounce and
+	 * generation guard still apply, and calling it every tick is harmless ·
+	 * setActive no-ops when the slug/chapter are already current.
+	 */
+	function activeFromPosition() {
+		if (!container) return;
+		const anchors = container.querySelectorAll<HTMLElement>(CHAPTER_ANCHOR_SELECTOR);
+		const line = window.innerHeight * ACTIVE_BAND_RATIO;
+		let candidate: HTMLElement | null = null;
+		for (const el of anchors) {
+			if (el.getBoundingClientRect().top <= line) candidate = el;
+			else break;
+		}
+		if (!candidate) return;
+		const bookSlug = candidate.dataset.bookSlug;
+		const chapterNum = parseInt(candidate.dataset.chapterNum ?? '', 10);
+		if (bookSlug && Number.isFinite(chapterNum) && chapterNum > 0) setActive(bookSlug, chapterNum);
+	}
+
 	function onScrollCheck() {
 		if (!browser || !$prefs.infiniteScroll || !scrollReady) return;
+		activeFromPosition();
 		if (shouldLoadNext(window.scrollY, window.innerHeight, document.documentElement.scrollHeight)) {
 			loadNext();
 		}
@@ -474,13 +624,28 @@
 		if (idx === -1) return;
 		// Forward first · that is the direction people read. The `loadable` test is
 		// what keeps the forward branch from swallowing the call: at the end of the
-		// canon, or once a chapter is recorded in `failed`, `loadNext` would return
-		// without ever calling back in here and the window could never grow
-		// backwards again.
+		// canon, or once a chapter is recorded in `missing` or has spent its
+		// attempts, `loadNext` would return without ever calling back in here and
+		// the window could never grow backwards again.
 		if (loaded.length - 1 - idx < 2 && loadable(nextRef())) {
 			loadNext();
 			return;
 		}
+		// Never pull the window backwards while the reader is at the end of the
+		// document, however far from the end of the *window* the active chapter
+		// looks. `activeFromPosition` keeps `activeChapter` correct across a
+		// scroll step bigger than the observer's activation band, which is what
+		// used to leave `idx` stuck near the start of `loaded` while the reader
+		// kept scrolling down: `idx < 2` became true at the bottom of the
+		// document, and the prepend that followed tail-pruned exactly the chapter
+		// the append just added — the two loaders trading one chapter forever
+		// while the page stopped growing, with no footer nav to leave by. This
+		// check is now belt and braces for the gap between a jump landing and the
+		// next scroll tick recomputing the position, rather than the only thing
+		// standing between here and that loop. Verified against a viewport-step
+		// descent from /bible/2-jean/1.
+		if (shouldLoadNext(window.scrollY, window.innerHeight, document.documentElement.scrollHeight))
+			return;
 		if (idx < 2) loadPrev();
 	}
 
@@ -512,6 +677,7 @@
 		destroyed = true;
 		syncUrl.cancel();
 		if (preloadTimer) clearTimeout(preloadTimer);
+		if (retryTimer) clearTimeout(retryTimer);
 		observer?.disconnect();
 		if (browser) {
 			window.removeEventListener('scroll', onScroll);
@@ -565,6 +731,17 @@
 		/>
 	{/each}
 
+	<!-- With infinite scroll on there is no footer nav, so a load that has given
+	     up leaves a page that simply stops growing and says nothing. This is the
+	     only thing standing between the reader and a dead end. -->
+	{#if $prefs.infiniteScroll && loadFailed}
+		<p class="load-failed font-ui text-sm text-subtle" role="status">
+			La suite n'a pas pu être chargée.
+			<button type="button" class="text-accent hover:underline" onclick={retryNow}>Réessayer</button
+			>
+		</p>
+	{/if}
+
 	{#if !$prefs.infiniteScroll}
 		<nav
 			class="mt-16 pt-8 border-t border-border flex justify-between font-ui text-sm"
@@ -594,5 +771,11 @@
 	   instead, and anything below the viewport cannot move the text above it. */
 	main :global([data-chapter-section]:not(:last-of-type)) {
 		margin-bottom: 3rem;
+	}
+	.load-failed {
+		margin-top: 4rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-border);
+		text-align: center;
 	}
 </style>

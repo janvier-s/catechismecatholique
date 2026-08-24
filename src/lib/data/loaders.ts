@@ -356,7 +356,15 @@ export function loadNclBook(usfx: string, fetcher: Fetch = fetch): Promise<NclBo
 			const r = await fetcher(`/data/bible/ncl/${usfx}.json`);
 			if (!r.ok) return null;
 			return (await r.json()) as NclBook;
-		})();
+		})().catch((e) => {
+			// Drop the cached rejected promise so the next caller retries instead
+			// of inheriting a poisoned cache entry for the module's lifetime · a
+			// dropped request at a book boundary is exactly what BibleReader's
+			// retry-with-backoff is meant to recover from, and it can't if this
+			// map keeps handing back the same rejection.
+			nclBookCache.delete(usfx);
+			throw e;
+		});
 		nclBookCache.set(usfx, p);
 	}
 	return p;
@@ -396,7 +404,11 @@ export function loadNclParagraphsBook(
 			const r = await fetcher(`/data/bible/ncl-paragraphs/${usfx}.json`);
 			if (!r.ok) return null;
 			return (await r.json()) as NclParagraphsBook;
-		})();
+		})().catch((e) => {
+			// Same reasoning as loadNclBook's catch, immediately above in the file.
+			nclParagraphsBookCache.delete(usfx);
+			throw e;
+		});
 		nclParagraphsBookCache.set(usfx, p);
 	}
 	return p;
