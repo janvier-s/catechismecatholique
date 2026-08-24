@@ -11,6 +11,14 @@ export function shouldLoadNext(scrollY: number, innerHeight: number, docHeight: 
 	return scrollY + innerHeight > docHeight - SCROLL_THRESHOLD;
 }
 
+/** True when the reader is within `SCROLL_THRESHOLD` of the document's start.
+ *  Mirrors `shouldLoadNext` · without it, reaching the previous chapter has no
+ *  scroll-driven path and depends entirely on `checkPreload`'s nav-cooldown-gated
+ *  timer, which can leave a reader scrolling up against nothing loaded yet. */
+export function shouldLoadPrev(scrollY: number): boolean {
+	return scrollY < SCROLL_THRESHOLD;
+}
+
 export interface Crossing {
 	kind: 'enter' | 'exit-up';
 	bookSlug: string;

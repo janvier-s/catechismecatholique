@@ -565,3 +565,33 @@ test('toggling the pref off mid-scroll points the footer nav at the chapter on s
 	await expect(links.first()).toHaveAttribute('href', `/bible/genese/${settled! - 1}`);
 	await expect(links.last()).toHaveAttribute('href', `/bible/genese/${settled! + 1}`);
 });
+
+test('scrolling up shortly after landing loads the previous chapter without waiting for the nav-cooldown timer', async ({
+	page
+}) => {
+	// Pre-seed the pref instead of going through the dialog, so the nav
+	// cooldown (armed in onMount) starts right at page load with no dialog
+	// interaction eating into the window this test needs to stay inside.
+	await page.addInitScript(() => {
+		localStorage.setItem('catechismecatholique.prefs', JSON.stringify({ infiniteScroll: true }));
+	});
+	await page.goto('/bible/genese/5');
+	// The anchor is a zero-height marker, not the visible heading · attached is
+	// all that's needed, and waitForSelector's default visible state never
+	// resolves for it (see scrollUntilChapter's use of .count() above).
+	await expect(page.locator('[data-chapter-anchor][data-chapter-num="5"]')).toHaveCount(1);
+
+	// A reader who starts reading, then immediately scrolls back up toward the
+	// top · well inside NAV_COOLDOWN_MS (2000ms), which used to be the only
+	// thing standing between a scroll-up gesture and loadPrev firing at all.
+	await page.evaluate(() => window.scrollBy(0, 300));
+	await page.waitForTimeout(50);
+	await page.evaluate(() => window.scrollBy(0, -300));
+
+	// A deadline well short of the 2s cooldown · loadPrev responding to the
+	// scroll itself lands in well under a second, not the ~2.5s the
+	// cooldown-gated checkPreload timer alone would have taken.
+	await expect(page.locator('[data-chapter-anchor][data-chapter-num="4"]')).toHaveCount(1, {
+		timeout: 1200
+	});
+});

@@ -11,6 +11,7 @@
 	import { debounce } from '$lib/utils/debounce';
 	import {
 		shouldLoadNext,
+		shouldLoadPrev,
 		createChapterObserver,
 		observeAllAnchors,
 		observeNewAnchor,
@@ -168,6 +169,12 @@
 			// and infinite scroll would silently stop growing from that navigation
 			// on.
 			armPreloadTimer();
+			// The reused component's own scrollY is about to be left behind by the
+			// DOM shrinking to just `fresh` · the first post-navigation scroll
+			// check (often the browser's own clamp of that stale position, not the
+			// reader) must land as a fresh baseline, not a comparison. See
+			// scrollBaselineSet's declaration.
+			scrollBaselineSet = false;
 			// Any navigation is a fresh start. No record survives it, so a reader
 			// who hit a flaky connection at a book boundary is never stuck with a
 			// chapter that stays unreachable for the life of the component ·
@@ -194,6 +201,18 @@
 	let scrollReady = false;
 	let scrollRaf = 0;
 	let observer: IntersectionObserver | null = null;
+
+	/** scrollY as of the previous onScrollCheck tick, and whether it is safe to
+	 *  compare against yet. An in-app navigation reuses this component and does
+	 *  not reset window.scrollY, so the moment `loaded` collapses to the new
+	 *  entry chapter, the document shrinks out from under a scroll position the
+	 *  reader never chose · the browser clamps it, firing a genuine scroll event
+	 *  that looks identical to the reader having scrolled up. Requiring one
+	 *  scroll-position sample since the last landing, before trusting a drop as
+	 *  real upward scrolling, is what tells the two apart without a time-based
+	 *  guard that would just bring back the delay this exists to remove. */
+	let lastScrollY = 0;
+	let scrollBaselineSet = false;
 
 	/** Chapters above and below the reader stay in the DOM; beyond this many, the
 	 *  far end is pruned. Five covers a fast scroll in either direction without
@@ -599,9 +618,22 @@
 	function onScrollCheck() {
 		if (!browser || !$prefs.infiniteScroll || !scrollReady) return;
 		activeFromPosition();
-		if (shouldLoadNext(window.scrollY, window.innerHeight, document.documentElement.scrollHeight)) {
+		const y = window.scrollY;
+		if (shouldLoadNext(y, window.innerHeight, document.documentElement.scrollHeight)) {
 			loadNext();
+		} else if (scrollBaselineSet && y < lastScrollY && shouldLoadPrev(y)) {
+			// Mirrors the loadNext() branch above · without this, scrolling up
+			// has no direct path to loadPrev, only the nav-cooldown-gated
+			// checkPreload timer, which can leave a reader scrolling against
+			// nothing loaded yet for up to NAV_COOLDOWN_MS after landing.
+			// loadPrev's compensation moves scrollY well past SCROLL_THRESHOLD,
+			// so this cannot cascade the way calling checkPreload here would.
+			// `y < lastScrollY` requires a genuine upward move, not just a low
+			// position · see scrollBaselineSet's comment for why that matters.
+			loadPrev();
 		}
+		lastScrollY = y;
+		scrollBaselineSet = true;
 	}
 
 	function onScroll() {

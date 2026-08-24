@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { SCROLL_THRESHOLD, shouldLoadNext, chapterCrossing } from '$lib/utils/infiniteScroll';
+import {
+	SCROLL_THRESHOLD,
+	shouldLoadNext,
+	shouldLoadPrev,
+	chapterCrossing
+} from '$lib/utils/infiniteScroll';
 
 describe('shouldLoadNext', () => {
 	it('is false near the top of a long document', () => {
@@ -22,6 +27,25 @@ describe('shouldLoadNext', () => {
 
 	it('exposes the threshold it uses', () => {
 		expect(SCROLL_THRESHOLD).toBe(400);
+	});
+});
+
+describe('shouldLoadPrev', () => {
+	it('is false when well below the top of the document', () => {
+		expect(shouldLoadPrev(4000)).toBe(false);
+	});
+
+	it('is true once within the threshold of the top', () => {
+		expect(shouldLoadPrev(300)).toBe(true);
+	});
+
+	it('is true at the very top', () => {
+		expect(shouldLoadPrev(0)).toBe(true);
+	});
+
+	it('is false exactly at the threshold, true one pixel inside it', () => {
+		expect(shouldLoadPrev(400)).toBe(false);
+		expect(shouldLoadPrev(399)).toBe(true);
 	});
 });
 
