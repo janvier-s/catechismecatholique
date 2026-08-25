@@ -2,11 +2,15 @@ import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 // ReadingPrefs unmounts on close, so its tab state resets on every open ·
-// the Lecture tab has to be reselected each time, as in bible-reading-mode.
+// the Bible tab has to be reselected each time, as in bible-reading-mode.
+// Every control this file touches (Scroll infini, Numéros de verset, Titres
+// de section, Navigation entre chapitres, Numérotation Vulgate) lives on the
+// Bible tab, not Lecture — Bible-specific settings got their own tab instead
+// of tucking under Lecture (see ReadingPrefs.svelte's comment on `tabs`).
 async function openReadingTab(page: Page) {
 	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
-	await dialog.getByRole('button', { name: 'Lecture' }).click();
+	await dialog.getByRole('button', { name: 'Bible' }).click();
 	return dialog;
 }
 
@@ -22,41 +26,36 @@ async function disableInfiniteScroll(page: Page) {
 	await page.keyboard.press('Escape');
 }
 
-test('infinite scroll is off by default and the toggle persists', async ({ page }) => {
+test('infinite scroll is on by default and the toggle persists', async ({ page }) => {
 	await page.goto('/bible/genese/1');
 
-	const stored = await page.evaluate(() =>
-		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
-	);
-	expect(stored.infiniteScroll ?? false).toBe(false);
+	// Written asynchronously once the client hydrates and prefs.subscribe
+	// fires for the first time, not necessarily before goto() resolves.
+	const readPrefs = () =>
+		page.evaluate(() => JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}'));
+	await expect.poll(async () => (await readPrefs()).infiniteScroll).toBe(true);
 
-	await enableInfiniteScroll(page);
-	const after = await page.evaluate(() =>
-		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
-	);
-	expect(after.infiniteScroll).toBe(true);
+	await disableInfiniteScroll(page);
+	expect((await readPrefs()).infiniteScroll).toBe(false);
 
-	// Survives a reload, and can be turned back off.
+	// Survives a reload, and can be turned back on.
 	await page.reload();
 	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Désactivé', exact: true }).click();
+	await dialog.getByRole('button', { name: 'Activé', exact: true }).click();
 	await page.keyboard.press('Escape');
-	const off = await page.evaluate(() =>
-		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
-	);
-	expect(off.infiniteScroll).toBe(false);
+	expect((await readPrefs()).infiniteScroll).toBe(true);
 });
 
 test('the Afficher/Masquer indices that bible-reading-mode.test.ts depends on still map correctly', async ({
 	page
 }) => {
 	// That file addresses these positionally: nth(0) Numéros de verset,
-	// nth(1) Titres de section, nth(2) Navigation de chapitre, nth(3)
+	// nth(1) Titres de section, nth(2) Navigation entre chapitres, nth(3)
 	// Numérotation Vulgate. Only those four controls use the Afficher/Masquer
 	// pair, so the indices are stable against controls using other labels ·
-	// « Défilement continu » deliberately uses Activé/Désactivé to stay out of
+	// « Scroll infini » deliberately uses Activé/Désactivé to stay out of
 	// the sequence. What would break them is a NEW control reusing Afficher/
-	// Masquer above « Navigation de chapitre ». This test catches that by
+	// Masquer above « Navigation entre chapitres ». This test catches that by
 	// proving the click at nth(2) lands on the prev/next strip and on nothing
 	// else · the top ChapterNavBar is no longer what this toggle gates (see
 	// bible-reading-mode.test.ts's own "chapter navigation" tests).
@@ -108,7 +107,9 @@ async function scrollUntilChapter(page: Page, chapter: number, maxSteps = 20) {
 test('with the pref off, reaching the bottom loads nothing and the footer nav stays', async ({
 	page
 }) => {
+	// infiniteScroll now defaults to true · off has to be requested explicitly.
 	await page.goto('/bible/genese/1');
+	await disableInfiniteScroll(page);
 	await scrollToBottom(page);
 
 	// scrollToBottom is a fixed number of viewport-height steps. Without this,
@@ -588,10 +589,14 @@ test('scrolling up shortly after landing loads the previous chapter without wait
 	await page.waitForTimeout(50);
 	await page.evaluate(() => window.scrollBy(0, -300));
 
-	// A deadline well short of the 2s cooldown · loadPrev responding to the
-	// scroll itself lands in well under a second, not the ~2.5s the
-	// cooldown-gated checkPreload timer alone would have taken.
+	// Racing an absolute deadline here is flaky under a slow shared CI
+	// runner, which can legitimately need well over a second for what is a
+	// sub-100ms operation locally. Checking *order* instead holds regardless
+	// of hardware: the cooldown-gated chain always preloads forward (chapter
+	// 6) before ever reaching backward, so if chapter 4 arrives before
+	// chapter 6 does, it came from the scroll gesture, not the timer.
 	await expect(page.locator('[data-chapter-anchor][data-chapter-num="4"]')).toHaveCount(1, {
-		timeout: 1200
+		timeout: 5000
 	});
+	await expect(page.locator('[data-chapter-anchor][data-chapter-num="6"]')).toHaveCount(0);
 });
