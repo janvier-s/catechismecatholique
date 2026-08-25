@@ -17,6 +17,37 @@
 	let triggerEl: HTMLButtonElement | undefined = $state();
 	let popoverEl: HTMLElement | undefined = $state();
 
+	// The popover used to sit `absolute right-0` under the trigger, but the
+	// trigger isn't at the header's right edge (NavDrawer's button follows
+	// it) · on narrow phones the fixed 320px width ran off the left edge of
+	// the viewport. Position it in fixed coordinates instead and clamp so it
+	// always stays on-screen, the same approach ReadingPrefs's font dropdown
+	// already uses.
+	const VIEWPORT_MARGIN = 16;
+	let popoverPos: { top: number; left: number } = $state({ top: 0, left: 0 });
+
+	function positionPopover() {
+		if (!triggerEl) return;
+		const rect = triggerEl.getBoundingClientRect();
+		const width = popoverEl?.getBoundingClientRect().width ?? 320;
+		const maxLeft = window.innerWidth - width - VIEWPORT_MARGIN;
+		const left = Math.max(VIEWPORT_MARGIN, Math.min(rect.right - width, maxLeft));
+		popoverPos = { top: rect.bottom + 8, left };
+	}
+
+	$effect(() => {
+		if (!open) return;
+		positionPopover();
+		queueMicrotask(positionPopover);
+		const onReposition = () => positionPopover();
+		window.addEventListener('scroll', onReposition, true);
+		window.addEventListener('resize', onReposition);
+		return () => {
+			window.removeEventListener('scroll', onReposition, true);
+			window.removeEventListener('resize', onReposition);
+		};
+	});
+
 	function onDocClick(e: MouseEvent) {
 		if (!(e.target instanceof Element)) return;
 		if (!e.target.closest('[data-prefs-menu]')) open = false;
@@ -77,7 +108,10 @@
 		type="button"
 		class="ml-2 w-9 h-9 rounded-md flex items-center justify-center transition-colors
 			{open ? 'bg-accent/10 text-accent' : 'bg-transparent text-foreground hover:text-accent'}"
-		onclick={() => (open = !open)}
+		onclick={() => {
+			if (!open) positionPopover();
+			open = !open;
+		}}
 		aria-label="Options de lecture"
 		aria-haspopup="dialog"
 		aria-expanded={open}
@@ -110,7 +144,9 @@
 			role="dialog"
 			aria-modal="false"
 			aria-label="Options de lecture"
-			class="absolute right-0 mt-2 w-80 rounded-sm border border-border bg-panel shadow-md z-[var(--z-dropdown)] px-4 pt-1 pb-5 max-h-[calc(100vh-100px)] overflow-y-auto styled-scroll"
+			class="fixed w-[min(20rem,calc(100vw-2rem))] rounded-sm border border-border bg-panel shadow-md z-[var(--z-dropdown)] px-4 pt-1 pb-5 max-h-[calc(100vh-100px)] overflow-y-auto styled-scroll"
+			style:top="{popoverPos.top}px"
+			style:left="{popoverPos.left}px"
 			transition:fly={{ y: -6, duration: 160, easing: cubicOut }}
 		>
 			<ReadingPrefs />
