@@ -14,8 +14,7 @@
 		chapterCounts,
 		buildHref,
 		onClose,
-		topOffset = '80px',
-		isChapterUnavailable
+		topOffset = '80px'
 	}: {
 		bookSlug: string;
 		chapterNum: number;
@@ -24,16 +23,6 @@
 		onClose: () => void;
 		/** CSS top offset to position the dropdown below the page header. */
 		topOffset?: string;
-		/**
-		 * Flags a chapter as having nothing to show at its destination (e.g. the
-		 * concordance view for a chapter with no CCC cross-references) without
-		 * blocking navigation to it · the cell renders greyed out with an
-		 * explanatory tooltip, but stays a normal, clickable link so a reader who
-		 * clicks anyway lands on that destination's own "nothing here" page
-		 * rather than hitting a dead end. Undefined (the default) means every
-		 * chapter is treated as available.
-		 */
-		isChapterUnavailable?: (bookSlug: string, chapter: number) => boolean;
 	} = $props();
 
 	// Component remounts every time the dropdown opens (wrapped in {#if navOpen}),
@@ -122,9 +111,6 @@
 		return chapterCounts[usfx] ?? 0;
 	}
 
-	const UNAVAILABLE_HINT =
-		'Aucun renvoi vers le Catéchisme pour ce chapitre en mode concordance · le texte reste accessible normalement.';
-
 	// The chapter grid follows this site's own (Hebrew/Masoretic) numbering; the
 	// Vulgate sub-label mirrors what BibleReader already shows in the chapter
 	// header. Only Psalms diverges meaningfully · see psalm-numbering.ts.
@@ -192,18 +178,13 @@
 						>
 							{#each Array.from({ length: total }, (_, i) => i + 1) as ch (ch)}
 								{@const vulgateLabel = showVulgate ? vulgatePsalmLabel(ch) : null}
-								{@const unavailable = isChapterUnavailable?.(book.slug, ch) ?? false}
 								<a
 									href={buildHref(book.slug, ch)}
 									onclick={onClose}
-									title={unavailable ? UNAVAILABLE_HINT : undefined}
-									aria-label={unavailable ? `Chapitre ${ch} · ${UNAVAILABLE_HINT}` : undefined}
 									class="py-[8px] rounded-[2px] hover:bg-accent hover:text-white transition-colors text-center block tabular-nums font-medium leading-tight
                     {book.slug === bookSlug && ch === chapterNum
 										? 'bg-accent text-white'
-										: unavailable
-											? 'text-subtle/40 hover:text-white'
-											: 'text-subtle'}"
+										: 'text-subtle'}"
 								>
 									<span class="block text-[14px]">{ch}</span>
 									{#if vulgateLabel}
@@ -247,18 +228,13 @@
 						>
 							{#each Array.from({ length: total }, (_, i) => i + 1) as ch (ch)}
 								{@const vulgateLabel = showVulgate ? vulgatePsalmLabel(ch) : null}
-								{@const unavailable = isChapterUnavailable?.(book.slug, ch) ?? false}
 								<a
 									href={buildHref(book.slug, ch)}
 									onclick={onClose}
-									title={unavailable ? UNAVAILABLE_HINT : undefined}
-									aria-label={unavailable ? `Chapitre ${ch} · ${UNAVAILABLE_HINT}` : undefined}
 									class="py-[8px] rounded-[2px] hover:bg-accent hover:text-white transition-colors text-center block tabular-nums font-medium leading-tight
                     {book.slug === bookSlug && ch === chapterNum
 										? 'bg-accent text-white'
-										: unavailable
-											? 'text-subtle/40 hover:text-white'
-											: 'text-subtle'}"
+										: 'text-subtle'}"
 								>
 									<span class="block text-[14px]">{ch}</span>
 									{#if vulgateLabel}

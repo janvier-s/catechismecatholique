@@ -132,8 +132,7 @@
 	});
 
 	// Close the StudyPanel when its context becomes irrelevant: leaving the
-	// /cec or /bible reading surfaces, or entering a Bible concordance view
-	// (which has its own resizable right pane and shouldn't render two panels).
+	// /cec or /bible reading surfaces.
 	afterNavigate(({ from, to }) => {
 		if (!from || !to) return;
 		const fromPath = from.url.pathname;
@@ -151,7 +150,6 @@
 		const toOnPetitCatechisme = toPath.startsWith('/petit-catechisme');
 		const fromOnCalendrier = fromPath.startsWith('/calendrier');
 		const toOnCalendrier = toPath.startsWith('/calendrier');
-		const toOnConcordance = /\/bible\/[^/]+\/\d+\/concordance/.test(toPath);
 
 		if (
 			(fromOnCcc && !toOnCcc) ||
@@ -159,8 +157,7 @@
 			(fromOnTrent && !toOnTrent) ||
 			(fromOnGrandCatechisme && !toOnGrandCatechisme) ||
 			(fromOnPetitCatechisme && !toOnPetitCatechisme) ||
-			(fromOnCalendrier && !toOnCalendrier) ||
-			toOnConcordance
+			(fromOnCalendrier && !toOnCalendrier)
 		) {
 			if (get(studyPanel).open) closePanel();
 		}

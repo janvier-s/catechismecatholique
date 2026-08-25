@@ -16,7 +16,6 @@ Il reproduit fidèlement les 2 865 paragraphes de l'édition française officiel
 
 - Lecture structurée des 2 865 paragraphes (parties, sections, chapitres, articles)
 - Recherche par mot, numéro de paragraphe (§ 27) ou référence biblique (Jn 1, 14)
-- Concordance biblique : chaque verset croisé avec les paragraphes du Catéchisme qui le citent
 - Glossaire des termes théologiques, classés par thème
 - Cinq thèmes d'affichage : clair, sépia, sombre, OLED, automatique
 - Aucun compte requis. Aucune publicité.
@@ -49,9 +48,9 @@ npm run lint      # prettier + eslint
 
 La préparation des données (`scripts/prepare-data.ts`) s'exécute au `prebuild` et génère les JSON dans `static/data/`. Le corpus est conçu pour accueillir plusieurs catéchismes (`corpus: 'ccc'`). Les pages de lecture passent par un Worker Cloudflare pour éviter les erreurs MIME liées aux chunks CDN périmés.
 
-### Concordance (optionnel)
+### Concordance (données seules, non exposées côté frontend)
 
-Le script de préparation construit `static/data/ccc/concordance-verse-index.json` à partir d'un arbre source biblique. Emplacement par défaut : `../DOCTRINA/sources/didache/`. Remplacer avec la variable d'environnement `DIDACHE_SOURCE_DIR=/chemin/absolu`. En l'absence du répertoire, l'index est vide et la concordance est silencieusement désactivée.
+Le script de préparation construit `static/data/concordance/` à partir d'un arbre source biblique. Emplacement par défaut : `../DOCTRINA/sources/didache/`. Remplacer avec la variable d'environnement `DIDACHE_SOURCE_DIR=/chemin/absolu`. En l'absence du répertoire, un instantané commité sert de repli. Ces données ne sont plus consommées par le site : le pipeline reste en place pour une réutilisation future.
 
 ---
 

@@ -144,11 +144,6 @@
 					description: 'Mot, paragraphe ou référence biblique.'
 				},
 				{
-					href: '/bible/genese/1/concordance',
-					label: 'Concordance biblique',
-					description: 'Chaque verset croisé avec les paragraphes du Catéchisme.'
-				},
-				{
 					href: '/glossaire',
 					label: 'Glossaire',
 					description: 'Les termes théologiques classés par thème.'

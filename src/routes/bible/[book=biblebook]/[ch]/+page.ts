@@ -3,8 +3,8 @@ import { bookBySlug } from '$lib/utils/bibleBookSlug';
 import { loadNclBook, loadNclParagraphsBook } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
-// Session-wide data (verse index, concordance manifest, NCL sections, chapter
-// counts) is loaded once by /bible/+layout.ts. It is NOT re-returned here:
+// Session-wide data (verse index, NCL sections, chapter counts) is loaded
+// once by /bible/+layout.ts. It is NOT re-returned here:
 // SvelteKit merges every route node's data into the page's `data` prop, so
 // +page.svelte reads it straight off the layout, and re-returning it would
 // just be four more keys to keep in sync by hand.

@@ -225,13 +225,6 @@ test('the CEC options panel keeps its Notes tab', async ({ page }) => {
 	await expect(dialog.getByRole('button', { name: 'Notes', exact: true })).toBeVisible();
 });
 
-test('the concordance link sits in the chapter nav row, not above the text', async ({ page }) => {
-	await page.goto('/bible/genese/1');
-	const link = page.locator('.bible-chapter-nav a[href$="/concordance"]');
-	await expect(link).toBeVisible();
-	await expect(page.locator('main a[href$="/concordance"]')).toHaveCount(0);
-});
-
 test('section and subsection headings are centered, in both reading modes', async ({ page }) => {
 	// Genesis 2 has a section-level heading ("Création de l'homme et de la
 	// femme"); Leviticus 27 has a subsection-level one (the numbered outline

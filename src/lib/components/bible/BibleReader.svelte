@@ -29,7 +29,6 @@
 		verseIdx,
 		totalChapters,
 		sectionsByBook = {},
-		concordanceManifest = {},
 		chapterCounts = {},
 		paragraphs = null
 	}: {
@@ -39,7 +38,6 @@
 		verseIdx: BibleVerseIndex;
 		totalChapters: number;
 		sectionsByBook?: NclSectionMap;
-		concordanceManifest?: Record<string, number[]>;
 		chapterCounts?: Record<string, number>;
 		paragraphs?: NclChapterBlocks | null;
 	} = $props();
@@ -87,10 +85,6 @@
 	);
 	const nextHref = $derived(
 		activeChapter < activeTotalChapters ? `/bible/${activeBook.slug}/${activeChapter + 1}` : null
-	);
-
-	const hasConcordance = $derived(
-		(concordanceManifest[activeBook.slug] ?? []).includes(activeChapter)
 	);
 
 	// The history entry is debounced; the bar label is not. A reader scrolling
@@ -777,15 +771,12 @@
 <!-- Chapter navigation bar · sticky below the global TopBar. Always visible:
      it's the primary way to jump to an arbitrary book/chapter, not something
      to toggle off · hideChapterNav instead gates the in-article prev/next
-     strip (ChapterPrevNext, rendered once per chapter inside BibleChapter).
-     The concordance route has its own bar and is deliberately unaffected. -->
+     strip (ChapterPrevNext, rendered once per chapter inside BibleChapter). -->
 <ChapterNavBar
 	book={activeBook}
 	chapter={activeChapter}
 	totalChapters={activeTotalChapters}
 	{chapterCounts}
-	{hasConcordance}
-	variant="reader"
 />
 
 <main

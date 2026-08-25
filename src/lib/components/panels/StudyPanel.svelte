@@ -19,7 +19,6 @@
 		loadCitedBy,
 		loadCompendiumCitedBy,
 		loadParagraphThemes,
-		loadConcordanceParagraphManifest,
 		loadCdseCitedByCcc,
 		loadEnBrefsIndex
 	} from '$lib/data/loaders';
@@ -38,7 +37,6 @@
 	let TabAudio: TabAudioComponent | null = $state(null);
 	import TabSources from './TabSources.svelte';
 	import TabBibleVerse from './TabBibleVerse.svelte';
-	import TabConcordance from './TabConcordance.svelte';
 	import TabCompendium from './TabCompendium.svelte';
 	import TabCdseCiters from './TabCdseCiters.svelte';
 	import TabIA from './TabIA.svelte';
@@ -76,7 +74,6 @@
 	let compendiumCiters: number[] = $state([]);
 	let cdseCiters: number[] = $state([]);
 	let hasThemes: boolean = $state(false);
-	let hasConcordance: boolean = $state(false);
 	let hasAudio: boolean = $state(false);
 	let dataReady: boolean = $state(false);
 
@@ -99,7 +96,6 @@
 			compendiumCiters = [];
 			cdseCiters = [];
 			hasThemes = false;
-			hasConcordance = false;
 			hasAudio = false;
 			dataReady = false;
 			return;
@@ -112,7 +108,6 @@
 			compendiumCiters = [];
 			cdseCiters = [];
 			hasThemes = false;
-			hasConcordance = false;
 			hasAudio = false;
 			dataReady = true;
 			return;
@@ -120,24 +115,23 @@
 		const paragraphNum = ctx.paragraph;
 		dataReady = false;
 		(async () => {
-			const [p, citedBy, compendiumCB, themesMap, concManifest, cdseCB, audioIdx, enBrefsIdx] =
-				await Promise.all([
+			const [p, citedBy, compendiumCB, themesMap, cdseCB, audioIdx, enBrefsIdx] = await Promise.all(
+				[
 					loadParagraph(paragraphNum),
 					loadCitedBy(),
 					loadCompendiumCitedBy(),
 					loadParagraphThemes(),
-					loadConcordanceParagraphManifest(),
 					loadCdseCitedByCcc(),
 					loadAudioIndex(),
 					loadEnBrefsIndex()
-				]);
+				]
+			);
 			hasAudio = !!audioIdx && audioIdx.paragraphs[String(paragraphNum)] !== undefined;
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
 			compendiumCiters = compendiumCB[paragraphNum] ?? [];
 			cdseCiters = cdseCB[String(paragraphNum)] ?? [];
 			hasThemes = (themesMap[String(paragraphNum)]?.length ?? 0) > 0;
-			hasConcordance = concManifest.has(paragraphNum);
 			// Every paragraph gets an en_bref tab as long as a summary exists
 			// at or after it: TabEnBref shows the "following" en_bref.
 			hasEnBref = enBrefsIdx.some((b) => b.last >= paragraphNum);
@@ -200,7 +194,6 @@
 		const hasCompendium = optimistic || compendiumCiters.length > 0;
 		const hasCdseCiters = optimistic || cdseCiters.length > 0;
 		const hasThemesG = optimistic || hasThemes;
-		const hasConcordanceG = optimistic || hasConcordance;
 		const hasEnBrefG = optimistic || hasEnBref;
 		const hasAudioG = optimistic || hasAudio;
 
@@ -224,12 +217,9 @@
 		if (hasEnBrefG) res.push({ id: 'en-bref', label: 'En Bref' });
 		if (res.length > 0) groups.push({ id: 'g-resume', label: 'Synthèse', children: res });
 
-		// Bible group: this paragraph's verse refs + concordance on related verses.
-		// Always labeled "Bible" even when only Concordance has data, so the
-		// tab anchor is stable across paragraphs.
+		// Bible group: this paragraph's verse refs.
 		const bib: TabDef[] = [];
 		if (hasBible) bib.push({ id: 'bible', label: 'Bible' });
-		if (hasConcordanceG) bib.push({ id: 'concordance', label: 'Concordance' });
 		if (bib.length > 0) groups.push({ id: 'g-bible', label: 'Bible', children: bib });
 
 		if (hasAudioG)
@@ -476,8 +466,6 @@
 							<TabSources />
 						{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
 							<TabThemes />
-						{:else if $studyPanel.activeTab === 'concordance'}
-							<TabConcordance />
 						{:else if $studyPanel.activeTab === 'bible-verse'}
 							<TabBibleVerse />
 						{:else if $studyPanel.activeTab === 'compendium'}

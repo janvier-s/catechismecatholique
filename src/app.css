@@ -763,12 +763,11 @@ html[data-chrome-hidden='true'] .bible-chapter-nav {
 	[aria-label='Chapitre précédent ou suivant'],
 	[aria-label='Navigation'],
 	[aria-label='Navigation entre leçons'],
-	[aria-label='Voir la concordance'],
 	.pager,
 	/* Hover-revealed permalink icons. */
 	.number-link,
 	.chapter-anchor,
-	/* Concordance / Bible filter bar. */
+	/* Bible filter bar. */
 	.chapter-filter-bar,
 	/* Tooltip overlays. */
 	.amdg-tip,

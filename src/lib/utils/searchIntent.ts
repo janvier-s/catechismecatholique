@@ -41,9 +41,8 @@ export function detectIntent(input: string): Intent {
 
 	// Paragraph refs · a single number (27), a range (27-30), or any mix of the
 	// two in a list. Commas, semicolons, spaces and newlines all separate, and
-	// § is optional, so a reference pasted out of the concordance works whatever
-	// shape it arrives in: "268, 279-280, 290-295" and "268 279-280 290-295"
-	// both resolve to the same page.
+	// § is optional, so "268, 279-280, 290-295" and "268 279-280 290-295" both
+	// resolve to the same page.
 	const refs = paragraphRefs(q);
 	if (refs) return { kind: 'paragraph', href: `/cec/${refs.join(',')}` };
 

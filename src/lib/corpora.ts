@@ -576,9 +576,9 @@ export const TOOLS: ToolRecord[] = [
 	{
 		slug: 'bible',
 		href: '/bible',
-		title: 'Concordance biblique',
+		title: 'Bible',
 		subtitle: 'Chaque verset croisé avec le Catéchisme',
-		blurb: 'Lecture intégrale et concordance verset par verset avec les paragraphes du CEC.',
+		blurb: 'Lecture intégrale de la Bible, avec les paragraphes du CEC qui citent chaque verset.',
 		cover: '/img/bibliotheque/bible.webp'
 	},
 	{

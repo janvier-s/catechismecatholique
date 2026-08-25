@@ -10,17 +10,8 @@
 	);
 
 	/** Where the return link goes. A multi selection is assembled elsewhere, so
-	 *  "← Catéchisme" drops the reader at a front door they never came through.
-	 *  `from` carries the origin · only a concordance path is honoured, which
-	 *  keeps this from becoming a redirect anyone can aim wherever they like.
-	 *  Anything else falls back to /cec. */
-	const backTo = $derived.by(() => {
-		const from = data.kind === 'multi' ? page.url.searchParams.get('from') : null;
-		if (from && /^\/bible\/[a-z0-9-]+\/\d+\/concordance$/.test(from)) {
-			return { href: from, label: 'Concordance' };
-		}
-		return { href: '/cec', label: 'Catéchisme' };
-	});
+	 *  "← Catéchisme" drops the reader at a front door they never came through. */
+	const backTo = { href: '/cec', label: 'Catéchisme' };
 
 	// Prev/next paragraph navigation. For ranges, prev steps back from the
 	// first paragraph and next steps forward from the last · so navigation

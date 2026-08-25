@@ -7,8 +7,6 @@ import type {
 	SourceEntry,
 	BibleVerseIndex,
 	GlossaryBundle,
-	ConcordanceChapter,
-	ConcordanceByParagraphEntry,
 	NclSectionMap,
 	NclBook,
 	NclParagraphsBook,
@@ -77,14 +75,6 @@ async function fetchJson<T>(url: string, fetcher: Fetch): Promise<T> {
 // Safe at module scope · the file is static for the server's lifetime, and
 // SvelteKit's Cloudflare adapter discards modules between requests anyway.
 let bibleVerseIndexPromise: Promise<BibleVerseIndex> | null = null;
-
-let concordanceManifestPromise: Promise<Record<string, number[]>> | null = null;
-const concordanceChapterCache = new Map<string, Promise<ConcordanceChapter | null>>();
-let concordanceParagraphManifestPromise: Promise<Set<number>> | null = null;
-const concordanceByParagraphShardCache = new Map<
-	number,
-	Promise<ConcordanceByParagraphEntry[] | null>
->();
 
 let nclSectionsPromise: Promise<NclSectionMap> | null = null;
 let chapterCountsPromise: Promise<Record<string, number>> | null = null;
@@ -229,75 +219,6 @@ export interface GlossaryIndex {
 }
 export function loadGlossaryIndex(fetcher: Fetch = fetch): Promise<GlossaryIndex> {
 	return fetchJson<GlossaryIndex>('/data/cec/glossary-index.json', fetcher);
-}
-
-export function loadConcordanceManifest(fetcher: Fetch = fetch): Promise<Record<string, number[]>> {
-	if (!concordanceManifestPromise) {
-		concordanceManifestPromise = (async () => {
-			const r = await fetcher('/data/concordance/manifest.json');
-			if (!r.ok) return {};
-			return (await r.json()) as Record<string, number[]>;
-		})();
-	}
-	return concordanceManifestPromise;
-}
-
-/**
- * Load the manifest of paragraph numbers that have at least one concordance
- * entry. Used by callers to avoid speculative 404s on shard fetches.
- */
-export function loadConcordanceParagraphManifest(fetcher: Fetch = fetch): Promise<Set<number>> {
-	if (!concordanceParagraphManifestPromise) {
-		concordanceParagraphManifestPromise = (async () => {
-			const r = await fetcher('/data/concordance/by-paragraph-manifest.json');
-			if (!r.ok) return new Set<number>();
-			const arr = (await r.json()) as number[];
-			return new Set(arr);
-		})();
-	}
-	return concordanceParagraphManifestPromise;
-}
-
-/**
- * Lazily fetch the by-paragraph entries for a single CCC paragraph.
- * Returns `null` when the paragraph has no concordance data (per the manifest)
- * or the shard 404s. Cached at module scope so repeat opens of the same
- * paragraph are free.
- */
-export function loadConcordanceForParagraph(
-	n: number,
-	fetcher: Fetch = fetch
-): Promise<ConcordanceByParagraphEntry[] | null> {
-	let p = concordanceByParagraphShardCache.get(n);
-	if (!p) {
-		p = (async () => {
-			const manifest = await loadConcordanceParagraphManifest(fetcher);
-			if (!manifest.has(n)) return null;
-			const r = await fetcher(`/data/concordance/by-paragraph/${n}.json`);
-			if (!r.ok) return null;
-			return (await r.json()) as ConcordanceByParagraphEntry[];
-		})();
-		concordanceByParagraphShardCache.set(n, p);
-	}
-	return p;
-}
-
-export function loadConcordanceChapter(
-	slug: string,
-	chapter: number,
-	fetcher: Fetch = fetch
-): Promise<ConcordanceChapter | null> {
-	const key = `${slug}/${chapter}`;
-	let p = concordanceChapterCache.get(key);
-	if (!p) {
-		p = (async () => {
-			const r = await fetcher(`/data/concordance/${slug}/${chapter}.json`);
-			if (!r.ok) return null;
-			return (await r.json()) as ConcordanceChapter;
-		})();
-		concordanceChapterCache.set(key, p);
-	}
-	return p;
 }
 
 export function loadNclSections(fetcher: Fetch = fetch): Promise<NclSectionMap> {

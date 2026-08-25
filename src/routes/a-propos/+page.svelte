@@ -6,19 +6,19 @@
 	<title>À propos du Catéchisme de l'Église Catholique</title>
 	<meta
 		name="description"
-		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
+		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
 	<meta property="og:title" content="À propos du Catéchisme de l'Église Catholique" />
 	<meta
 		property="og:description"
-		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
+		content="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte et glossaire théologique. Gratuit, sans compte, sans publicité."
 	/>
 </svelte:head>
 
 <ProseLayout
 	title="À propos de ce site"
-	subtitle="Le Catéchisme de l'Église Catholique en français, conçu pour le web : navigation structurée, recherche plein texte et concordance biblique."
-	description="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte, concordance biblique et glossaire théologique. Gratuit, sans compte, sans publicité."
+	subtitle="Le Catéchisme de l'Église Catholique en français, conçu pour le web : navigation structurée et recherche plein texte."
+	description="Le Catéchisme de l'Église Catholique en français, avec recherche plein texte et glossaire théologique. Gratuit, sans compte, sans publicité."
 >
 	<h2>Le Catéchisme et la lacune numérique</h2>
 
@@ -322,13 +322,8 @@
 			renvoie à tous les paragraphes qui citent ce verset).
 		</li>
 		<li>
-			<strong>Concordance biblique</strong> : la concordance recense les passages de l'Écriture sainte
-			cités dans le Catéchisme et indique, pour chacun, les paragraphes qui les développent. Une façon
-			de lire la Bible à la lumière de l'enseignement de l'Église.
-		</li>
-		<li>
-			<strong>Panneau d'étude</strong> : chaque paragraphe est accompagné d'un panneau latéral à six
-			onglets, accessible sans quitter la lecture.
+			<strong>Panneau d'étude</strong> : chaque paragraphe est accompagné d'un panneau latéral à
+			cinq onglets, accessible sans quitter la lecture.
 			<ul class="study-panel-list">
 				<li><strong>Bible</strong> : le texte intégral des versets cités dans le paragraphe.</li>
 				<li>
@@ -347,11 +342,6 @@
 				<li>
 					<strong>En Bref</strong> : l'En Bref de l'article auquel appartient le paragraphe lu. Chaque
 					article du Catéchisme se clôt par une série de formules brèves qui en résument la doctrine.
-				</li>
-				<li>
-					<strong>Concordance</strong> : les références scripturaires du paragraphe, avec le texte des
-					versets et les autres passages du Catéchisme qui développent les mêmes versets. Permet de voir
-					comment chaque texte de l'Écriture est reçu et expliqué dans l'ensemble du Catéchisme.
 				</li>
 			</ul>
 		</li>
@@ -408,8 +398,7 @@
 	<p>
 		Ce projet est né d'un constat : il n'existait pas de bonne édition du Catéchisme accessible en
 		ligne en français. Tout a commencé par une page de lecture, sobre et lisible. Puis la recherche
-		s'est imposée, puis la concordance biblique, puis le glossaire. Chaque chose appelait la
-		suivante.
+		s'est imposée, puis le glossaire. Chaque chose appelait la suivante.
 	</p>
 
 	<p>

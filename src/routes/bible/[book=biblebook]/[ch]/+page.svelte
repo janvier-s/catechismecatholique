@@ -11,7 +11,6 @@
 	verseIdx={data.verseIdx}
 	totalChapters={data.totalChapters}
 	sectionsByBook={data.sections}
-	concordanceManifest={data.concordanceManifest}
 	chapterCounts={data.chapterCounts}
 	paragraphs={data.paragraphs}
 />

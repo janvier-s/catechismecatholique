@@ -8,7 +8,6 @@ export type PanelTab =
 	| 'themes'
 	| 'en-bref'
 	| 'audio'
-	| 'concordance'
 	| 'bible-verse'
 	| 'compendium'
 	| 'cdse-citers'

@@ -27,7 +27,7 @@ export const GET: RequestHandler = () => {
 	out.push("# Catéchisme de l'Église Catholique");
 	out.push('');
 	out.push(
-		"> Édition numérique française du Catéchisme de l'Église Catholique et de seize autres corpus catholiques classiques (Compendium, Catéchisme de Trente, Catéchismes de saint Pie X, Vatican II, Enchiridion Symbolorum, Code de Droit Canonique, Pères de l'Église, etc.). Lecture, recherche plein-texte, concordance biblique et étude intégrée. Gratuit, sans publicité, sans compte requis."
+		"> Édition numérique française du Catéchisme de l'Église Catholique et de seize autres corpus catholiques classiques (Compendium, Catéchisme de Trente, Catéchismes de saint Pie X, Vatican II, Enchiridion Symbolorum, Code de Droit Canonique, Pères de l'Église, etc.). Lecture, recherche plein-texte et étude intégrée. Gratuit, sans publicité, sans compte requis."
 	);
 	out.push('');
 	out.push(`Site : ${SITE}`);
@@ -66,11 +66,6 @@ export const GET: RequestHandler = () => {
 	out.push('');
 	out.push(`- Index des livres : \`${SITE}/bible\``);
 	out.push(`- Chapitre d'un livre : \`${SITE}/bible/{slug-livre}/{chapitre}\``);
-	out.push(`- Concordance d'un chapitre : \`${SITE}/bible/{slug-livre}/{chapitre}/concordance\``);
-	out.push('');
-	out.push(
-		'La concordance croise chaque verset cité par le CEC avec la liste des paragraphes qui le citent.'
-	);
 	out.push('');
 	out.push('---');
 
@@ -111,7 +106,7 @@ export const GET: RequestHandler = () => {
 	out.push("## Panneau d'étude");
 	out.push('');
 	out.push(
-		"Chaque paragraphe du CEC dispose d'un panneau d'étude latéral activé en cliquant son numéro. Onglets : Bible (versets cités), Renvois (paragraphes croisés), Cité par (paragraphes citants), Sources (références magistérielles/patristiques/liturgiques), En bref (formules synthétiques), Concordance, Compendium, Doctrine sociale, Thèmes."
+		"Chaque paragraphe du CEC dispose d'un panneau d'étude latéral activé en cliquant son numéro. Onglets : Bible (versets cités), Renvois (paragraphes croisés), Cité par (paragraphes citants), Sources (références magistérielles/patristiques/liturgiques), En bref (formules synthétiques), Compendium, Doctrine sociale, Thèmes."
 	);
 	out.push('');
 	out.push('---');

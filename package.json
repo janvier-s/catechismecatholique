@@ -2,7 +2,7 @@
 	"name": "catechismecatholique",
 	"private": true,
 	"version": "0.2.0",
-	"description": "Édition numérique française du Catéchisme de l'Église Catholique et du Compendium — lecture, recherche, concordance biblique.",
+	"description": "Édition numérique française du Catéchisme de l'Église Catholique et du Compendium — lecture, recherche, Bible.",
 	"type": "module",
 	"engines": {
 		"node": ">=20"

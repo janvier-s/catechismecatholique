@@ -293,7 +293,7 @@ export interface NclSection {
 	 * Same title with a source <sc> (small-caps) span preserved as
 	 * <span class="sc">…</span> — everything else stripped exactly like
 	 * `title`. Render with `{@html}`; use `title` wherever plain text is
-	 * required (e.g. the concordance's pericope titles).
+	 * required.
 	 */
 	titleHtml: string;
 	/**
@@ -321,6 +321,9 @@ export interface CccRange {
 /**
  * A single Didache pericope: a verse range and its CCC paragraph references.
  * Title is the matching NCL section title (already French) or null.
+ *
+ * Used by the build-time concordance pipeline (scripts/prepare/concordance.ts)
+ * only · the frontend no longer consumes this data.
  */
 export interface ConcordancePericope {
 	verseRef: string; // "Genèse 3:1-24"
