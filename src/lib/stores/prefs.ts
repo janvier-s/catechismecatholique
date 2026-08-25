@@ -95,6 +95,8 @@ function readInitial(): ReadingPrefs {
 			};
 		}
 		const parsed = JSON.parse(raw) as Partial<ReadingPrefs>;
+		// Migrate the unlicensed Proxima Nova font to Montserrat, if stored.
+		if (parsed.fontFamily === 'proxima-nova') parsed.fontFamily = 'montserrat';
 		return { ...DEFAULTS, ...parsed };
 	} catch {
 		return { ...DEFAULTS };
