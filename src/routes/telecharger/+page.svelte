@@ -229,7 +229,7 @@
 	}
 	.eyebrow {
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.85rem;
 		font-weight: 500;
 		letter-spacing: 0.28em;
 		text-transform: uppercase;
@@ -383,7 +383,8 @@
 	}
 	.rights p {
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.85rem;
+		letter-spacing: 0.4px;
 		color: var(--color-subtle);
 		margin: 0;
 	}

@@ -366,7 +366,8 @@
 	}
 	.verse-cec-count {
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.85rem;
+		letter-spacing: 0.4px;
 		font-weight: 500;
 		color: var(--color-accent);
 		white-space: nowrap;

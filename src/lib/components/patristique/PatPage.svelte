@@ -281,7 +281,8 @@
 		padding-top: 2rem;
 		border-top: 1px solid color-mix(in srgb, var(--color-fg) 14%, transparent);
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.85rem;
+		letter-spacing: 0.4px;
 		color: var(--color-muted);
 		line-height: 1.6;
 	}

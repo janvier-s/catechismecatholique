@@ -859,7 +859,8 @@
 	}
 	.recents-clear {
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.85rem;
+		letter-spacing: 0.4px;
 		color: var(--color-muted);
 		background: none;
 		border: 0;

@@ -41,6 +41,11 @@ module.exports = {
 				ui: 'var(--font-ui)',
 				heading: 'var(--font-heading)'
 			},
+			// Metropolis reads slightly small at the default text-xs size —
+			// nudge it up and open the letter-spacing a touch to compensate.
+			fontSize: {
+				xs: ['0.85rem', { lineHeight: '1.1rem', letterSpacing: '0.4px' }]
+			},
 			maxWidth: {
 				reader: '750px'
 			}

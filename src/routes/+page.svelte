@@ -193,7 +193,7 @@
 	}
 	.tagline {
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.85rem;
 		font-weight: 500;
 		letter-spacing: 0.32em;
 		text-transform: uppercase;

@@ -200,7 +200,8 @@
 		margin-top: 0.5rem;
 		margin-left: 4rem;
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.85rem;
+		letter-spacing: 0.4px;
 		line-height: 1.4;
 		padding: 0.5rem 0.75rem;
 		background: color-mix(in srgb, var(--color-fg) 4%, transparent);
