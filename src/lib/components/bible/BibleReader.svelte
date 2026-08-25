@@ -141,8 +141,10 @@
 			// Re-armed on every arrival, not only on mount. A param-only navigation
 			// reuses this component, so nothing else would re-arm it: a reader who
 			// lands on Genèse 1, reads for a minute, then jumps to Genèse 9 from the
-			// chapter grid would otherwise arrive with the cooldown long expired and
-			// get Genèse 8 prepended underneath them on the next active change.
+			// chapter grid would otherwise arrive with the cooldown long expired,
+			// and the prepend for Genèse 8 would go out in the same frame as the
+			// router's scroll reset for the new route rather than safely after it.
+			// See NAV_COOLDOWN_MS · clearing that race is the whole job.
 			navCooldownUntil = Date.now() + NAV_COOLDOWN_MS;
 			// Re-armed alongside the cooldown above, for the same reason. Without
 			// this, a reader who navigates in-app to a chapter short enough to fit
@@ -202,9 +204,25 @@
 	 *  letting a long book accumulate unbounded. */
 	const MAX_LOADED = 5;
 
-	/** How long after an arrival the rolling preload stays out of the way, so a
-	 *  reader who has just landed is not immediately shifted by a prepend. */
-	const NAV_COOLDOWN_MS = 2000;
+	/** How long after an arrival the rolling preload stays out of the way.
+	 *
+	 *  Short on purpose, and the shortness is the point. A reader lands with
+	 *  `scrollY` already at 0, so wheeling *up* dispatches no scroll event at
+	 *  all · `onScrollCheck`'s backward branch is unreachable there, and until
+	 *  this gate opens the previous chapter is not on the page, so upward input
+	 *  moves nothing whatsoever. At the two seconds this used to hold, that read
+	 *  as the reader having to scroll a long way, or wait, before the previous
+	 *  chapter would come.
+	 *
+	 *  What the gate is actually for is the browser's own scroll restoration,
+	 *  which lands its `scrollTo` a frame or two after mount (measured at
+	 *  40-55ms in both dev and preview builds) · a prepend racing it would
+	 *  restore the reader to an offset that now points at different text. The
+	 *  prepend itself is invisible: `loadPrev` compensates by exactly the height
+	 *  it adds. So this only has to clear restoration, not the reader's
+	 *  attention span, and a margin of several times the measured figure is
+	 *  still far below anything a reader can perceive. */
+	const NAV_COOLDOWN_MS = 300;
 
 	let navCooldownUntil = 0;
 	let preloadTimer: ReturnType<typeof setTimeout> | null = null;
@@ -605,10 +623,15 @@
 		if (shouldLoadNext(y, window.innerHeight, document.documentElement.scrollHeight)) {
 			loadNext();
 		} else if (scrollBaselineSet && y < lastScrollY && shouldLoadPrev(y)) {
-			// Mirrors the loadNext() branch above · without this, scrolling up
-			// has no direct path to loadPrev, only the nav-cooldown-gated
-			// checkPreload timer, which can leave a reader scrolling against
-			// nothing loaded yet for up to NAV_COOLDOWN_MS after landing.
+			// Mirrors the loadNext() branch above, for a reader who has scrolled
+			// up to the top of the loaded window. `checkPreload` reacts to the
+			// *active chapter* changing, so it cannot help here: arriving at the
+			// top of the first loaded chapter changes no crossing, and the window
+			// would sit there refusing to grow until the reader moved enough to
+			// activate something. Note this is unreachable at a fresh landing,
+			// where scrollY is already 0 and wheeling up dispatches no event at
+			// all · that case belongs to the arrival preload, see
+			// NAV_COOLDOWN_MS.
 			// loadPrev's compensation moves scrollY well past SCROLL_THRESHOLD,
 			// so this cannot cascade the way calling checkPreload here would.
 			// `y < lastScrollY` requires a genuine upward move, not just a low

@@ -107,9 +107,18 @@ async function scrollUntilChapter(page: Page, chapter: number, maxSteps = 20) {
 test('with the pref off, reaching the bottom loads nothing and the footer nav stays', async ({
 	page
 }) => {
-	// infiniteScroll now defaults to true · off has to be requested explicitly.
+	// infiniteScroll now defaults to true · off has to be requested explicitly,
+	// and it has to be off *before* the page loads rather than toggled after.
+	// The arrival preload puts the neighbouring chapters on the page a few
+	// hundred milliseconds in, which is comfortably inside the time a dialog
+	// open plus two clicks takes: toggling afterwards left this test scrolling
+	// through a three-chapter document with a fixed six-step loop and never
+	// reaching the bottom it claims to test. Toggling through the dialog is
+	// covered by the persistence test at the top of this file.
+	await page.addInitScript(() => {
+		localStorage.setItem('catechismecatholique.prefs', JSON.stringify({ infiniteScroll: false }));
+	});
 	await page.goto('/bible/genese/1');
-	await disableInfiniteScroll(page);
 	await scrollToBottom(page);
 
 	// scrollToBottom is a fixed number of viewport-height steps. Without this,
@@ -241,7 +250,12 @@ test('navigating away cancels a pending URL write instead of letting it land', a
 	// Well past the 200ms debounce, so a surviving timer has fired by now.
 	await page.waitForTimeout(600);
 
-	await expect(page.getByRole('heading', { level: 1, name: /Chapitre 9/ })).toBeVisible();
+	// Deliberately level-agnostic. The arrival preload prepends Genèse 8 within
+	// a few hundred milliseconds of landing, and the h1 belongs to whatever sits
+	// first in the loaded window · chapter 9's heading is an h2 by the time this
+	// runs. Nothing visual changes (both levels carry the same classes), and the
+	// subject here is the cancelled URL write, not the document outline.
+	await expect(page.getByRole('heading', { name: /Chapitre 9/ })).toBeVisible();
 	expect(page.url()).toMatch(/\/bible\/genese\/9$/);
 });
 
@@ -537,24 +551,35 @@ test('toggling the pref off mid-scroll points the footer nav at the chapter on s
 	await page.goto('/bible/genese/1');
 	await enableInfiniteScroll(page);
 	await page.goto('/bible/genese/1');
-	await scrollUntilChapter(page, 4);
+	await scrollUntilChapter(page, 6);
 
 	// `<svelte:head><title>` reads `activeChapter` directly, with no debounce ·
 	// a more reliable settle signal than the sticky bar's URL, which goes
 	// through a 200ms-debounced `replaceState` and can still read a chapter the
-	// scroll has already moved past. Polling it, then holding for a further
-	// pause with no change, is what actually confirms the reader has stopped
-	// moving before the assertions below lock in a chapter number.
+	// scroll has already moved past.
 	const titleChapter = async () => {
 		const m = (await page.title()).match(/Genèse (\d+) /);
 		return m ? Number(m[1]) : null;
 	};
-	await expect.poll(titleChapter).toBeGreaterThan(1);
-	const settled = await titleChapter();
-	await page.waitForTimeout(300);
-	await expect.poll(titleChapter).toBe(settled);
+	// Deliberately several chapters clear of the entry chapter, not merely past
+	// it. Opening the options dialog makes Playwright scroll the sticky chapter
+	// bar back into view, which pulls the reader up by around a thousand pixels
+	// · settling one chapter in leaves that enough room to land back on Genèse 1,
+	// where `activeChapter` and the route props agree and this test can no longer
+	// tell the two apart.
+	await expect.poll(titleChapter).toBeGreaterThanOrEqual(4);
 
 	await disableInfiniteScroll(page);
+
+	// Read after the toggle, not before: the scroll the dialog forced is part of
+	// where the reader actually ended up, and the claim under test is that the
+	// links follow the chapter on screen *now*. Closing the dialog releases the
+	// chapter bar's reveal, which moves the page once more · hold for a pause
+	// with no further change before locking in a number.
+	await page.waitForTimeout(400);
+	const settled = await titleChapter();
+	await expect.poll(titleChapter).toBe(settled);
+	expect(settled).toBeGreaterThan(1);
 
 	// A build still deriving these links from the route props (chapter === 1)
 	// would render no prevHref at all (chapter > 1 is false) and a wrong
@@ -567,7 +592,7 @@ test('toggling the pref off mid-scroll points the footer nav at the chapter on s
 	await expect(links.last()).toHaveAttribute('href', `/bible/genese/${settled! + 1}`);
 });
 
-test('scrolling up shortly after landing loads the previous chapter without waiting for the nav-cooldown timer', async ({
+test('the previous chapter is on the page shortly after landing, with no interaction at all', async ({
 	page
 }) => {
 	// Pre-seed the pref instead of going through the dialog, so the nav
@@ -582,21 +607,19 @@ test('scrolling up shortly after landing loads the previous chapter without wait
 	// resolves for it (see scrollUntilChapter's use of .count() above).
 	await expect(page.locator('[data-chapter-anchor][data-chapter-num="5"]')).toHaveCount(1);
 
-	// A reader who starts reading, then immediately scrolls back up toward the
-	// top · well inside NAV_COOLDOWN_MS (2000ms), which used to be the only
-	// thing standing between a scroll-up gesture and loadPrev firing at all.
-	await page.evaluate(() => window.scrollBy(0, 300));
-	await page.waitForTimeout(50);
-	await page.evaluate(() => window.scrollBy(0, -300));
-
-	// Racing an absolute deadline here is flaky under a slow shared CI
-	// runner, which can legitimately need well over a second for what is a
-	// sub-100ms operation locally. Checking *order* instead holds regardless
-	// of hardware: the cooldown-gated chain always preloads forward (chapter
-	// 6) before ever reaching backward, so if chapter 4 arrives before
-	// chapter 6 does, it came from the scroll gesture, not the timer.
+	// No scrolling, deliberately. A reader lands with scrollY already at 0, so
+	// wheeling up fires no scroll event and onScrollCheck's backward branch is
+	// unreachable · the preload timer is the only thing that can put chapter 4
+	// on the page, and until it does, upward input moves nothing. This asserts
+	// the arrival preload, which is the only mechanism a reader's first scroll-up
+	// gesture can rely on.
+	//
+	// 1800ms is chosen to be falsifiable rather than tight: the old 2000ms
+	// cooldown could not beat it even with instant fetches, while the ~400ms
+	// this actually takes locally leaves a slow shared CI runner over four times
+	// its measured cost. Asserting order instead is not available here · with
+	// the gate open, the forward preload legitimately wins the race every time.
 	await expect(page.locator('[data-chapter-anchor][data-chapter-num="4"]')).toHaveCount(1, {
-		timeout: 5000
+		timeout: 1800
 	});
-	await expect(page.locator('[data-chapter-anchor][data-chapter-num="6"]')).toHaveCount(0);
 });
