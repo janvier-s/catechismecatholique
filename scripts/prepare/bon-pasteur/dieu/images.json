@@ -1,0 +1,358 @@
+{
+	"ch-01": [
+		{
+			"after": 7,
+			"afterAnchor": "a05225ab2f37",
+			"src": "/img/bon-pasteur/dieu/ch-01.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 68,
+			"afterAnchor": "a6964a508072",
+			"src": "/img/bon-pasteur/dieu/ch-01-1.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-02": [
+		{
+			"after": 3,
+			"afterAnchor": "606759d6d2ee",
+			"src": "/img/bon-pasteur/dieu/ch-02.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 17,
+			"afterAnchor": "5f1abc835da5",
+			"src": "/img/bon-pasteur/dieu/ch-02-1.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-03": [
+		{
+			"after": 2,
+			"afterAnchor": "17a571969fa9",
+			"src": "/img/bon-pasteur/dieu/ch-03.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 25,
+			"afterAnchor": "0429bc6712b0",
+			"src": "/img/bon-pasteur/dieu/ch-03-2.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-04": [
+		{
+			"after": 0,
+			"afterAnchor": null,
+			"src": "/img/bon-pasteur/dieu/ch-04.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 20,
+			"afterAnchor": "84baa376c02c",
+			"src": "/img/bon-pasteur/dieu/ch-04-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 26,
+			"afterAnchor": "eeb7a31a8301",
+			"src": "/img/bon-pasteur/dieu/ch-04-2.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 35,
+			"afterAnchor": "a71cb4f47ba8",
+			"src": "/img/bon-pasteur/dieu/ch-04-3.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-05": [
+		{
+			"after": 7,
+			"afterAnchor": "d45dd3967e3c",
+			"src": "/img/bon-pasteur/dieu/ch-05.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 34,
+			"afterAnchor": "bae07fc69e86",
+			"src": "/img/bon-pasteur/dieu/ch-05-1.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-06": [
+		{
+			"after": 4,
+			"afterAnchor": "624dc1230a55",
+			"src": "/img/bon-pasteur/dieu/ch-06.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 15,
+			"afterAnchor": "a85a73b8899c",
+			"src": "/img/bon-pasteur/dieu/ch-06-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 24,
+			"afterAnchor": "4fd1a076b1db",
+			"src": "/img/bon-pasteur/dieu/ch-06-2.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 42,
+			"afterAnchor": "9270ef7f359b",
+			"src": "/img/bon-pasteur/dieu/ch-06-4.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-07": [
+		{
+			"after": 12,
+			"afterAnchor": "b7027dc8cefe",
+			"src": "/img/bon-pasteur/dieu/ch-07.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 36,
+			"afterAnchor": "37a4ffa3a8e0",
+			"src": "/img/bon-pasteur/dieu/ch-07-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 44,
+			"afterAnchor": "017c4a594429",
+			"src": "/img/bon-pasteur/dieu/ch-07-2.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-08": [
+		{
+			"after": 3,
+			"afterAnchor": "e8e209eb3932",
+			"src": "/img/bon-pasteur/dieu/ch-08.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 7,
+			"afterAnchor": "5ea620c2c102",
+			"src": "/img/bon-pasteur/dieu/ch-08-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 12,
+			"afterAnchor": "9264435c09d5",
+			"src": "/img/bon-pasteur/dieu/ch-08-2.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 16,
+			"afterAnchor": "a16aa3eae75d",
+			"src": "/img/bon-pasteur/dieu/ch-08-3.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 18,
+			"afterAnchor": "0cec658a46f6",
+			"src": "/img/bon-pasteur/dieu/ch-08-4.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 24,
+			"afterAnchor": "29eeec9ef948",
+			"src": "/img/bon-pasteur/dieu/ch-08-5.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 27,
+			"afterAnchor": "de58dd7313c9",
+			"src": "/img/bon-pasteur/dieu/ch-08-6.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 32,
+			"afterAnchor": "60d047d99868",
+			"src": "/img/bon-pasteur/dieu/ch-08-7.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 39,
+			"afterAnchor": "54c514b8e207",
+			"src": "/img/bon-pasteur/dieu/ch-08-8.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 45,
+			"afterAnchor": "39d99cb1ef52",
+			"src": "/img/bon-pasteur/dieu/ch-08-9.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 48,
+			"afterAnchor": "50ee54bab0e4",
+			"src": "/img/bon-pasteur/dieu/ch-08-10.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-09": [
+		{
+			"after": 0,
+			"afterAnchor": null,
+			"src": "/img/bon-pasteur/dieu/ch-09.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 9,
+			"afterAnchor": "f29145bd31a2",
+			"src": "/img/bon-pasteur/dieu/ch-09-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 14,
+			"afterAnchor": "86f9729b01c9",
+			"src": "/img/bon-pasteur/dieu/ch-09-2.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-10": [
+		{
+			"after": 3,
+			"afterAnchor": "0e9cff63b46b",
+			"src": "/img/bon-pasteur/dieu/ch-10.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 8,
+			"afterAnchor": "52518fbc0c1b",
+			"src": "/img/bon-pasteur/dieu/ch-10-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 24,
+			"afterAnchor": "bd5152511d32",
+			"src": "/img/bon-pasteur/dieu/ch-10-2.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 32,
+			"afterAnchor": "7bba53d36bd8",
+			"src": "/img/bon-pasteur/dieu/ch-10-3.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 38,
+			"afterAnchor": "6fe7807be72a",
+			"src": "/img/bon-pasteur/dieu/ch-10-4.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 43,
+			"afterAnchor": "3af33987cdf6",
+			"src": "/img/bon-pasteur/dieu/ch-10-5.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 53,
+			"afterAnchor": "bc993734b4fe",
+			"src": "/img/bon-pasteur/dieu/ch-10-6.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 58,
+			"afterAnchor": "597201e96c24",
+			"src": "/img/bon-pasteur/dieu/ch-10-7.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-11": [
+		{
+			"after": 3,
+			"afterAnchor": "24122a855b18",
+			"src": "/img/bon-pasteur/dieu/ch-11.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 9,
+			"afterAnchor": "98cb65b297ad",
+			"src": "/img/bon-pasteur/dieu/ch-11-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 14,
+			"afterAnchor": "7ff8d6aa4b4c",
+			"src": "/img/bon-pasteur/dieu/ch-11-2.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 21,
+			"afterAnchor": "81d14fea3c6b",
+			"src": "/img/bon-pasteur/dieu/ch-11-3.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 24,
+			"afterAnchor": "60c88d3cd2db",
+			"src": "/img/bon-pasteur/dieu/ch-11-4.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 41,
+			"afterAnchor": "3b78d27ba693",
+			"src": "/img/bon-pasteur/dieu/ch-11-5.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 48,
+			"afterAnchor": "57bb22cf5136",
+			"src": "/img/bon-pasteur/dieu/ch-11-6.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 55,
+			"afterAnchor": "e557ed1fd445",
+			"src": "/img/bon-pasteur/dieu/ch-11-7.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-12": [
+		{
+			"after": 0,
+			"afterAnchor": null,
+			"src": "/img/bon-pasteur/dieu/ch-12.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 5,
+			"afterAnchor": "384378e0ec16",
+			"src": "/img/bon-pasteur/dieu/ch-12-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 20,
+			"afterAnchor": "89f6944d2804",
+			"src": "/img/bon-pasteur/dieu/ch-12-2.webp",
+			"alt": "Illustration"
+		}
+	],
+	"ch-13": [
+		{
+			"after": 2,
+			"afterAnchor": "8bb8a0cb7a11",
+			"src": "/img/bon-pasteur/dieu/ch-13.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 14,
+			"afterAnchor": "6f0cc4938948",
+			"src": "/img/bon-pasteur/dieu/ch-13-1.webp",
+			"alt": "Illustration"
+		},
+		{
+			"after": 24,
+			"afterAnchor": "1b2eaa67fd39",
+			"src": "/img/bon-pasteur/dieu/ch-13-2.webp",
+			"alt": "Illustration"
+		}
+	]
+}

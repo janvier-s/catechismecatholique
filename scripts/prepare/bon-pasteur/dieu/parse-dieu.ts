@@ -1,14 +1,27 @@
 #!/usr/bin/env node
 /**
- * One-time parser: converts "Dieu Juice/txt/Chapitre N. Title.txt" files
- * into structured JSON and writes them to static/data/bon-pasteur/dieu/.
+ * Parser: converts "Dieu Juice/txt/Chapitre N. Title.txt" files into
+ * structured JSON and writes them to static/data/bon-pasteur/dieu/.
  *
  * Run from repo root:
  *   npx tsx scripts/prepare/bon-pasteur/dieu/parse-dieu.ts
+ *
+ * Not wired into prepare-data.ts · `bon-pasteur` sits in its PRESERVE set, so
+ * the committed output is authoritative and a normal build never regenerates
+ * it. This is run by hand when the source text changes.
+ *
+ * The .txt sources carry no illustrations. The 55 images were positioned once
+ * from the DOCX originals (4975ed8a) and inserted straight into the chapter
+ * JSON, with nothing committed that could put them back · so re-running this
+ * silently stripped every image from the committed data. images.json now
+ * records where each one goes, in this parser's own coordinates, and the
+ * insertion below restores them. See mergeImages.
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { createHash } from 'node:crypto';
+import type { DieuBlock, DieuChapter } from '../../../../src/lib/data/types.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = join(__dirname, '../../../..');
@@ -18,16 +31,20 @@ const OUT = join(REPO, 'static/data/bon-pasteur/dieu');
 
 // ── Types ─────────────────────────────────────────────────────────────────
 
-type DieuBlock =
-	| { kind: 'heading'; level: 2 | 3; title: string; anchor: string }
-	| { kind: 'paragraph'; html: string }
-	| { kind: 'definition'; term: string; html: string };
+// DieuBlock and DieuChapter come from the frontend's types.ts rather than
+// being redeclared · the local copies had no 'image' variant, which is part of
+// how the images came to be dropped without anything complaining.
 
-interface DieuChapter {
-	slug: string;
-	n: number;
-	title: string;
-	blocks: DieuBlock[];
+/** One illustration and where it belongs, in this parser's coordinates. */
+interface ImagePlacement {
+	/** Number of parsed blocks that precede it. */
+	after: number;
+	/** Short digest of the block at `after - 1`, or null when the image leads
+	 *  the chapter. Verified on insert so a change to the source text that
+	 *  shifts the blocks is reported rather than silently misplacing images. */
+	afterAnchor: string | null;
+	src: string;
+	alt: string;
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────
@@ -133,29 +150,81 @@ function parseChapter(n: number, text: string): DieuChapter {
 	return { slug, n, title, blocks };
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────
+// ── Illustrations ─────────────────────────────────────────────────────────
 
-const files = readdirSync(SRC)
-	.filter((f) => f.startsWith('Chapitre') && f.endsWith('.txt') && f !== 'All The Text.txt')
-	.sort();
+const IMAGES: Record<string, ImagePlacement[]> = JSON.parse(
+	readFileSync(join(__dirname, 'images.json'), 'utf8')
+);
 
-const chapterRefs: Array<{ slug: string; n: number; title: string }> = [];
-mkdirSync(join(OUT, 'chapters'), { recursive: true });
-
-for (const file of files) {
-	const m = file.match(/^Chapitre (\d+)\./);
-	if (!m) continue;
-	const n = parseInt(m[1]!, 10);
-	const text = readFileSync(join(SRC, file), 'utf8');
-	const chapter = parseChapter(n, text);
-	const slug = `ch-${String(n).padStart(2, '0')}`;
-	writeFileSync(join(OUT, 'chapters', `${slug}.json`), JSON.stringify(chapter));
-	chapterRefs.push({ slug, n, title: chapter.title });
-	const paraCount = chapter.blocks.filter((b) => b.kind === 'paragraph').length;
-	const defCount = chapter.blocks.filter((b) => b.kind === 'definition').length;
-	console.log(`  ${slug}: ${chapter.title} (${paraCount}p ${defCount}def)`);
+function digest(block: DieuBlock): string {
+	return createHash('sha256').update(JSON.stringify(block)).digest('hex').slice(0, 12);
 }
 
-chapterRefs.sort((a, b) => a.n - b.n);
-writeFileSync(join(OUT, 'structure.json'), JSON.stringify({ chapters: chapterRefs }));
-console.log(`\nWrote ${chapterRefs.length} chapters + structure.json -> ${OUT}`);
+/**
+ * Splice this chapter's illustrations back into freshly parsed blocks.
+ *
+ * Placements are applied back to front so each `after` still refers to the
+ * un-spliced array while it is being used. A mismatched anchor means the
+ * source text moved under the recorded position: that is reported and the
+ * image is placed anyway at its recorded index, because dropping it silently
+ * is the exact failure this function exists to prevent.
+ */
+function mergeImages(slug: string, blocks: DieuBlock[]): DieuBlock[] {
+	const placements = IMAGES[slug];
+	if (!placements || placements.length === 0) return blocks;
+
+	const out = [...blocks];
+	for (const p of [...placements].sort((a, b) => b.after - a.after)) {
+		const prev = p.after === 0 ? null : blocks[p.after - 1];
+		const anchor = prev ? digest(prev) : null;
+		if (anchor !== p.afterAnchor) {
+			console.warn(
+				`  ! ${slug}: ${p.src} expected to follow ${p.afterAnchor ?? 'the start'}, found ${anchor ?? 'the start'} · check its position`
+			);
+		}
+		out.splice(p.after, 0, { kind: 'image', src: p.src, alt: p.alt });
+	}
+	return out;
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────
+
+function main() {
+	const files = readdirSync(SRC)
+		.filter((f) => f.startsWith('Chapitre') && f.endsWith('.txt') && f !== 'All The Text.txt')
+		.sort();
+
+	const chapterRefs: Array<{ slug: string; n: number; title: string }> = [];
+	mkdirSync(join(OUT, 'chapters'), { recursive: true });
+
+	let images = 0;
+	for (const file of files) {
+		const m = file.match(/^Chapitre (\d+)\./);
+		if (!m) continue;
+		const n = parseInt(m[1]!, 10);
+		const text = readFileSync(join(SRC, file), 'utf8');
+		const chapter = parseChapter(n, text);
+		const slug = `ch-${String(n).padStart(2, '0')}`;
+		chapter.blocks = mergeImages(slug, chapter.blocks);
+		writeFileSync(join(OUT, 'chapters', `${slug}.json`), JSON.stringify(chapter));
+		chapterRefs.push({ slug, n, title: chapter.title });
+		const paraCount = chapter.blocks.filter((b) => b.kind === 'paragraph').length;
+		const defCount = chapter.blocks.filter((b) => b.kind === 'definition').length;
+		const imgCount = chapter.blocks.filter((b) => b.kind === 'image').length;
+		images += imgCount;
+		console.log(`  ${slug}: ${chapter.title} (${paraCount}p ${defCount}def ${imgCount}img)`);
+	}
+
+	chapterRefs.sort((a, b) => a.n - b.n);
+	writeFileSync(join(OUT, 'structure.json'), JSON.stringify({ chapters: chapterRefs }));
+	console.log(
+		`\nWrote ${chapterRefs.length} chapters (${images} images) + structure.json -> ${OUT}`
+	);
+}
+
+// Only when run directly. This used to execute at import, so merely loading
+// the module · a typecheck harness, a smoke test · rewrote the committed
+// chapter JSON as a side effect.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+	main();
+}
