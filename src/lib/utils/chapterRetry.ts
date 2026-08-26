@@ -72,16 +72,13 @@ export interface FailureLog {
 
 export function createFailureLog(policy: RetryPolicy = DEFAULT_RETRY_POLICY): FailureLog {
 	/** Refs whose chapter does not exist. */
-	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	const missing = new Set<string>();
 	/** Failed attempts per ref, for loads that *threw*. Distinct from `missing`
 	 *  because a dropped request says nothing about whether the chapter is
 	 *  there. */
-	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	const attempts = new Map<string, number>();
 	/** Earliest time each thrown ref may be tried again · the backoff half of
 	 *  `attempts`, kept beside it and cleared with it. */
-	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	const retryAfter = new Map<string, number>();
 
 	return {
