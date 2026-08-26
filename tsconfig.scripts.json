@@ -11,7 +11,10 @@
 	"compilerOptions": {
 		"noEmit": true,
 		"types": ["node"],
-		"lib": ["ES2023", "DOM", "DOM.Iterable"]
+		// No DOM: these run under Node. With the DOM lib loaded, a script that
+		// reached for `document` or `localStorage` would typecheck and then throw
+		// at runtime, which is the failure this project exists to catch.
+		"lib": ["ES2023"]
 	},
 	"include": ["scripts/**/*.ts", "bin/**/*.ts"]
 }
