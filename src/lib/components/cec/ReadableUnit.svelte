@@ -30,7 +30,7 @@
 			closePanel();
 			return;
 		}
-		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab);
 	}
 
 	// Group consecutive integers into compact range strings: [1,2,3,5,7,8] →
@@ -191,7 +191,7 @@
 	   itself only renders when there are refs to show. */
 	:global(html[data-cross-refs-layout='side']) .ccc-paragraph {
 		position: relative;
-		padding-right: 6rem;
+		padding-right: 7.5rem;
 	}
 	/* Default placement: static block below the answer (used by Compendium
 	   questions in 'inline' mode, since they have no inline marker
@@ -203,7 +203,7 @@
 		font-size: 0.85rem;
 		letter-spacing: 0.4px;
 		line-height: 1.4;
-		padding: 0.5rem 0.75rem;
+		padding: 0.5rem 0.5rem;
 		background: color-mix(in srgb, var(--color-fg) 4%, transparent);
 		border: 1px solid color-mix(in srgb, var(--color-fg) 8%, transparent);
 		border-radius: 0.375rem;
@@ -213,7 +213,9 @@
 			position: absolute;
 			top: 0.25rem;
 			right: 0;
-			width: 5rem;
+			/* Wide enough for a 4-digit-to-4-digit range ("2585-2589", ~75px
+			   in the UI font) plus padding, with a little slack to spare. */
+			width: 6.5rem;
 			margin-top: 0;
 			margin-left: 0;
 		}
