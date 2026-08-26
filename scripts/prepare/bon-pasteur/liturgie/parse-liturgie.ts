@@ -426,7 +426,7 @@ const chapters: Chapter[] = [];
 for (const f of files) {
 	const m = f.match(FN_RE)!;
 	const n = Number(m[1]);
-	const fileTitle = m[2].trim();
+	const fileTitle = m[2]!.trim();
 	const ch = await processChapter(n, fileTitle, join(SRC, f));
 	chapters.push(ch);
 	const counts = {

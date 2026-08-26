@@ -1,6 +1,7 @@
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse, serialize } from 'parse5';
+import type { DefaultTreeAdapterMap } from 'parse5';
 import { numberedSlug } from './slug.ts';
 
 // ─── parse5 helpers ───────────────────────────────────────────────────────────
@@ -42,7 +43,7 @@ function normalizeWs(s: string): string {
 // and mixed content correctly. Calling serialize on a bare text node returns ""
 // so we must always serialize the *parent* element, not iterate children.
 function innerContent(node: ParseNode): string {
-	return normalizeWs(serialize(node as Parameters<typeof serialize>[0])).replace(
+	return normalizeWs(serialize(node as unknown as DefaultTreeAdapterMap['parentNode'])).replace(
 		/\s+xmlns(?::\w+)?="[^"]*"/g,
 		''
 	);

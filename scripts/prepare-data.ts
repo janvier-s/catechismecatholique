@@ -668,8 +668,8 @@ async function main() {
 		const livre83 = cic.structure.codes.find((c) => c.code === '1983')!.livres.length;
 		const livre17 = cic.structure.codes.find((c) => c.code === '1917')!.livres.length;
 		endStep(
-			`1983: ${livre83} livres / ${Object.keys(cic.canons['1983']).length} canons · ` +
-				`1917: ${livre17} livres / ${Object.keys(cic.canons['1917']).length} canons`
+			`1983: ${livre83} livres / ${Object.keys(cic.canons['1983'] ?? {}).length} canons · ` +
+				`1917: ${livre17} livres / ${Object.keys(cic.canons['1917'] ?? {}).length} canons`
 		);
 	} else if (existsSync(cicOutDir)) {
 		endStep('source not found — using committed snapshot');

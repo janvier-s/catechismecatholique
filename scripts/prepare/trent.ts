@@ -1,7 +1,9 @@
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse, serialize } from 'parse5';
+import type { DefaultTreeAdapterMap } from 'parse5';
 import { numberedSlug, slugify } from './slug.ts';
+import type { TrentStructure, TrentStructurePart } from '../../src/lib/data/types.ts';
 
 // ─── parse5 node helpers ──────────────────────────────────────────────────────
 
@@ -30,7 +32,7 @@ function textOf(node: ParseNode): string {
 	return s;
 }
 function innerHtml(node: ParseNode): string {
-	return serialize(node as Parameters<typeof serialize>[0]);
+	return serialize(node as unknown as DefaultTreeAdapterMap['parentNode']);
 }
 function findOne(node: ParseNode, pred: (n: ParseNode) => boolean): ParseNode | undefined {
 	for (const n of iter(node)) if (pred(n)) return n;
@@ -95,24 +97,13 @@ interface TrentChapterFile {
 	next?: TrentNav;
 }
 
-interface TrentStructureChapter {
-	number: number;
-	slug: string;
-	title: string;
-	paragraph_range: [number, number];
-	section_count: number;
-}
-
-interface TrentStructurePart {
-	slug: string;
-	title: string;
-	chapters: TrentStructureChapter[];
-}
-
-interface TrentStructure {
-	parts: TrentStructurePart[];
-	total_paragraphs: number;
-}
+// The structure types are imported from the frontend's types.ts rather than
+// redeclared here. The local copies had drifted: they required a
+// `section_count` this builder has never emitted, and omitted the `sections`
+// array it always emits · checked against the committed structure.json, whose
+// chapters carry number, slug, title, paragraph_range and sections. Nothing
+// caught it because scripts/ sat outside the typecheck. One definition, in the
+// place the reader also uses, is what stops that recurring.
 
 export interface TrentParagraphContext {
 	corpus: 'trent';

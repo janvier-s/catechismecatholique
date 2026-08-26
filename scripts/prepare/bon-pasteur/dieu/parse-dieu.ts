@@ -83,7 +83,7 @@ function parseChapter(n: number, text: string): DieuChapter {
 		// chapter heading (first content line)
 		const cm = stripped.match(CHAPTER_RE);
 		if (cm) {
-			title = stripTrailingColon(cm[2]);
+			title = stripTrailingColon(cm[2]!);
 			continue;
 		}
 
@@ -91,7 +91,7 @@ function parseChapter(n: number, text: string): DieuChapter {
 		const rm = stripped.match(ROMAN_RE);
 		if (rm) {
 			flushBullets();
-			const t = stripTrailingColon(rm[2]);
+			const t = stripTrailingColon(rm[2]!);
 			blocks.push({ kind: 'heading', level: 2, title: t, anchor: slugify(t) });
 			continue;
 		}
@@ -100,7 +100,7 @@ function parseChapter(n: number, text: string): DieuChapter {
 		const dm = stripped.match(DECIMAL_RE);
 		if (dm) {
 			flushBullets();
-			const t = stripTrailingColon(dm[2]);
+			const t = stripTrailingColon(dm[2]!);
 			blocks.push({ kind: 'heading', level: 3, title: t, anchor: slugify(t) });
 			continue;
 		}
@@ -145,7 +145,7 @@ mkdirSync(join(OUT, 'chapters'), { recursive: true });
 for (const file of files) {
 	const m = file.match(/^Chapitre (\d+)\./);
 	if (!m) continue;
-	const n = parseInt(m[1], 10);
+	const n = parseInt(m[1]!, 10);
 	const text = readFileSync(join(SRC, file), 'utf8');
 	const chapter = parseChapter(n, text);
 	const slug = `ch-${String(n).padStart(2, '0')}`;

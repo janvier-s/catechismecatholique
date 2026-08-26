@@ -589,7 +589,15 @@ function buildCorpus(lines: RawLine[]): {
 		inEpigraph = false;
 	}
 
-	function startPart(ordinal: number) {
+	// Returns the part it just started, so the caller in the main loop can
+	// assign it back to `curPart`. That assignment is what keeps TypeScript
+	// honest: `curPart` starts as null and is otherwise only ever written in
+	// here, and control-flow analysis does not follow writes through a nested
+	// function, so out in the loop it stays narrowed to exactly `null`. The
+	// guards there then narrow to `never` on the non-null side and every
+	// property read is an error. Assigning in the loop widens it back to
+	// `RawPart | null` where it is read. Same object either way.
+	function startPart(ordinal: number): RawPart {
 		flushAnswer();
 		mode = 'part';
 		curPart = { ordinal, title: '', chapters: [] };
@@ -605,6 +613,7 @@ function buildCorpus(lines: RawLine[]): {
 		inEpigraph = false;
 		ftCtx.counter = 0;
 		ftCtx.collected = [];
+		return curPart;
 	}
 
 	// Initialize footnote ctx target for the intro.
@@ -715,7 +724,7 @@ function buildCorpus(lines: RawLine[]): {
 				// partSubsectionLabel that follows attaches to the next chapter.
 				if (newOrd >= 1 && newOrd <= 3 && (!curPart || curPart.ordinal !== newOrd)) {
 					flushPendingPartTitle();
-					startPart(newOrd);
+					curPart = startPart(newOrd);
 					onPartDividerPage = true;
 				} else if (curPart && curPart.ordinal === 3) {
 					// Same-part section-divider page (only Part III has this).
@@ -859,7 +868,10 @@ function buildCorpus(lines: RawLine[]): {
 					biblical_text: normalizeWs(bibText),
 					qa: []
 				};
-				const sec = ensureSection(curSection?.title ?? null);
+				// Assigned back for the same reason as `curPart` above · this is
+				// the outer loop, where curSection is otherwise pinned to `null`.
+				// ensureSection always returns curSection, so this is identity.
+				const sec = (curSection = ensureSection(curSection?.title ?? null));
 				(sec.commandments ??= []).push(cmd);
 				curCommandment = cmd;
 				break;

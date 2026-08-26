@@ -203,7 +203,10 @@ function parseLivre(files: ContentFile[]): {
 	type Marker =
 		| {
 				kind: 'heading';
-				level: 'livre' | 'partie' | 'section' | 'titre' | 'chapitre' | 'article';
+				// No 'livre' · a livre-class heading is skipped at the `continue`
+				// below (H1_TITLE_RE already handled it), so no marker can ever
+				// carry that level, and none appears in the generated data.
+				level: 'partie' | 'section' | 'titre' | 'chapitre' | 'article';
 				label?: string;
 				title: string;
 				index: number;

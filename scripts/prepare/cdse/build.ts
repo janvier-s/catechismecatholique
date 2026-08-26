@@ -64,7 +64,9 @@ export interface CdseBuildResult {
 interface ContentFileSpec {
 	file: string;
 	contents: string;
-	partKind: CdsePartRef['kind'];
+	/** Named `kind` to match FILE_TO_PART and every read below · the interface
+	 *  had drifted to `partKind`, which nothing ever set or read. */
+	kind: CdsePartRef['kind'];
 	partTitle: string;
 	partSlug: string;
 }
