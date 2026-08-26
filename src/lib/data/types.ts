@@ -323,7 +323,8 @@ export interface CccRange {
  * Title is the matching NCL section title (already French) or null.
  *
  * Used by the build-time concordance pipeline (scripts/prepare/concordance.ts)
- * only · the frontend no longer consumes this data.
+ * only · the frontend no longer consumes this data. Output is written to
+ * data-archive/concordance/, outside static/, so it is never published.
  */
 export interface ConcordancePericope {
 	verseRef: string; // "Genèse 3:1-24"

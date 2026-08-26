@@ -6,8 +6,7 @@ import {
 	statSync,
 	readFileSync,
 	writeFileSync,
-	readdirSync,
-	unlinkSync
+	readdirSync
 } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -45,6 +44,10 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
 const SOURCES = join(ROOT, 'scripts/data-sources');
 const OUT = join(ROOT, 'static/data');
+// Data kept in the repo but deliberately not published. The Didache
+// concordance lives here: no frontend consumes it, and 3000+ files under
+// static/ would eat 16% of the Cloudflare Pages 20000-file deployment cap.
+const ARCHIVE = join(ROOT, 'data-archive');
 
 // CI sets SKIP_PREPARE_DATA=true because static/data is committed and
 // there are no source symlinks to rebuild from. Bail immediately so we
@@ -102,7 +105,6 @@ async function main() {
 	// is optional has to be listed here — otherwise a run on a machine missing
 	// that source deletes the corpus outright and the site 404s across it.
 	const PRESERVE = new Set([
-		'concordance',
 		'prieres',
 		'bon-pasteur',
 		'vatican-ii',
@@ -501,9 +503,9 @@ async function main() {
 		}
 
 		// When the source dir is missing OR contains no HTML files, keep the
-		// committed snapshot. Writing an empty concordance here used to clobber
-		// the entire /data/concordance/ tree (3000+ files) on every dev build —
-		// the link disappeared site-wide.
+		// committed snapshot. Writing an empty concordance here would clobber
+		// the entire data-archive/concordance/ tree (3000+ files), and the
+		// DOCTRINA source needed to regenerate it lives outside the repo.
 		if (!sourcePresent || htmlFiles.length === 0) {
 			endStep(
 				sourcePresent
@@ -520,7 +522,7 @@ async function main() {
 				nclSections
 			);
 
-			const concordanceDir = join(OUT, 'concordance');
+			const concordanceDir = join(ARCHIVE, 'concordance');
 			mkdirSync(concordanceDir, { recursive: true });
 			for (const [usfx, byCh] of Object.entries(byBook)) {
 				const slug = BOOKS.find((b) => b.usfx === usfx)!.slug;
@@ -534,9 +536,9 @@ async function main() {
 			writeFileSync(join(concordanceDir, 'by-paragraph.json'), JSON.stringify(byParagraph));
 
 			// Per-paragraph shards: each paragraph with concordance data gets its
-			// own /data/concordance/by-paragraph/{n}.json so the panel only fetches
-			// the entries it needs. The companion manifest lists which paragraph
-			// numbers exist so callers can skip 404s.
+			// own by-paragraph/{n}.json, with a companion manifest listing which
+			// paragraph numbers exist. Sharded for a per-paragraph fetch by the
+			// panel that used to read this; kept in that shape for future reuse.
 			const byParagraphDir = join(concordanceDir, 'by-paragraph');
 			mkdirSync(byParagraphDir, { recursive: true });
 			const byParagraphNumbers: number[] = [];
@@ -549,13 +551,6 @@ async function main() {
 				join(concordanceDir, 'by-paragraph-manifest.json'),
 				JSON.stringify(byParagraphNumbers)
 			);
-
-			// Drop the old verse-index file if it still exists
-			try {
-				unlinkSync(join(OUT, 'cec/concordance-verse-index.json'));
-			} catch {
-				// File already gone — ignore.
-			}
 
 			if (stats.unknownBooks.length > 0)
 				console.warn('  unknown books:', stats.unknownBooks.join(', '));

@@ -8,3 +8,5 @@ bun.lockb
 # Miscellaneous
 /static/
 /docs/
+# Generated data kept in the repo but not published, same as /static/data/.
+/data-archive/
