@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openDisclosure } from './helpers';
 
 test('paragraph 27 page renders', async ({ page }) => {
 	await page.goto('/cec/27');
@@ -71,9 +72,11 @@ test('TopBar renders on every page', async ({ page }) => {
 test('theme picker switches data-theme attribute and persists', async ({ page }) => {
 	await page.goto('/cec/27');
 	const html = page.locator('html');
-	// Open the reading-options dialog, then choose Sombre
-	await page.getByLabel('Options de lecture').click();
-	await page.getByRole('dialog', { name: 'Options de lecture' }).getByLabel('Sombre').click();
+	// Open the reading-options dialog, then choose Sombre. Not a bare click ·
+	// see openDisclosure for why the first one after a navigation can be lost.
+	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await openDisclosure(page.getByLabel('Options de lecture'), dialog);
+	await dialog.getByLabel('Sombre').click();
 	await expect(html).toHaveAttribute('data-theme', 'dark');
 	// Reload — should persist
 	await page.reload();

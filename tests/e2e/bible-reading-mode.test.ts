@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openDisclosure } from './helpers';
 
 // This file tests single-chapter reading-mode behaviour, not infinite
 // scroll (that's bible-infinite-scroll.test.ts's job). infiniteScroll now
@@ -28,10 +29,22 @@ test.beforeEach(async ({ page }) => {
 // its `activeTab` state resets to "Texte" every time the panel reopens —
 // callers must reselect their tab on every open, not just the first.
 async function openTab(page: import('@playwright/test').Page, tabLabel: string) {
-	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	// Not a bare click · see openDisclosure for why the first click after a
+	// navigation can be swallowed. The tab click below needs no such guard: the
+	// dialog only exists once hydration has run.
+	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 	await dialog.getByRole('button', { name: tabLabel }).click();
 	return dialog;
+}
+
+/** Open the chapter selector and wait for `bookSlug`'s grid, which the active
+ *  book opens already expanded. */
+async function openChapterSelector(page: import('@playwright/test').Page, bookSlug: string) {
+	await openDisclosure(
+		page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]'),
+		page.locator(`[data-book-grid="${bookSlug}"]`)
+	);
 }
 
 async function openReadingTab(page: import('@playwright/test').Page) {
@@ -53,8 +66,8 @@ async function switchToParagraphMode(page: import('@playwright/test').Page) {
 
 test('Bible reading-mode toggle switches and persists', async ({ page }) => {
 	await page.goto('/bible/matthieu/1');
-	await page.getByLabel('Options de lecture').click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await openDisclosure(page.getByLabel('Options de lecture'), dialog);
 	await dialog.getByRole('button', { name: 'Bible' }).click();
 	await dialog.getByRole('button', { name: 'Paragraphe' }).click();
 	await dialog.getByRole('button', { name: 'Verset par verset' }).click();
@@ -76,8 +89,8 @@ test('reading-mode toggle is absent outside Bible routes', async ({ page }) => {
 	// The Bible tab itself (where the reading-mode toggle lives) only renders
 	// on Bible routes · there is nothing to reselect it into on /cec/27.
 	await page.goto('/cec/27');
-	await page.getByLabel('Options de lecture').click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await openDisclosure(page.getByLabel('Options de lecture'), dialog);
 	await expect(dialog.getByRole('button', { name: 'Bible', exact: true })).toHaveCount(0);
 });
 
@@ -517,7 +530,7 @@ test('expanding a long book in the chapter selector shows its first chapters, no
 	// Start from a different book: the current book opens already expanded, so
 	// clicking it would collapse the grid rather than trigger the scroll.
 	await page.goto('/bible/genese/1');
-	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	await openChapterSelector(page, 'genese');
 
 	await page.getByRole('button', { name: 'Psaumes', exact: true }).click();
 	await page.waitForTimeout(600); // slide transition (180ms) + the 200ms settle
@@ -633,10 +646,9 @@ test('Vulgate psalm numbers are off by default and can be shown', async ({ page 
 test('Vulgate psalm numbers appear in the chapter selector when enabled', async ({ page }) => {
 	// The active book opens already expanded in the chapter selector.
 	await page.goto('/bible/psaumes/1');
-	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	await openChapterSelector(page, 'psaumes');
 
 	const grid = page.locator('[data-book-grid="psaumes"]');
-	await expect(grid).toBeVisible();
 	await expect(grid).toHaveClass(/grid-cols-7/);
 
 	// Off by default: chapter 10's cell has only its own number, no sub-label.
@@ -649,8 +661,7 @@ test('Vulgate psalm numbers appear in the chapter selector when enabled', async 
 	await dialog.getByRole('button', { name: 'Afficher' }).nth(3).click(); // Numérotation Vulgate
 	await page.keyboard.press('Escape');
 
-	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
-	await expect(grid).toBeVisible();
+	await openChapterSelector(page, 'psaumes');
 	await expect(grid).toHaveClass(/grid-cols-5/);
 	// Hebrew 10 is Vulgate 9, same mapping as the chapter header.
 	await expect(cell10.locator('span')).toHaveCount(2);
@@ -661,9 +672,8 @@ test('Vulgate psalm numbers appear in the chapter selector when enabled', async 
 
 	// Non-psalm books never show the sub-label, even with the pref on.
 	await page.goto('/bible/genese/1');
-	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	await openChapterSelector(page, 'genese');
 	const genGrid = page.locator('[data-book-grid="genese"]');
-	await expect(genGrid).toBeVisible();
 	await expect(genGrid).toHaveClass(/grid-cols-7/);
 	await expect(genGrid.locator('a').first().locator('span')).toHaveCount(1);
 });

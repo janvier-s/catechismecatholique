@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
+import { openDisclosure } from './helpers';
 
 // ReadingPrefs unmounts on close, so its tab state resets on every open ·
 // the Bible tab has to be reselected each time, as in bible-reading-mode.
@@ -8,8 +9,11 @@ import type { Page } from '@playwright/test';
 // Bible tab, not Lecture — Bible-specific settings got their own tab instead
 // of tucking under Lecture (see ReadingPrefs.svelte's comment on `tabs`).
 async function openReadingTab(page: Page) {
-	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	// Not a bare click · see openDisclosure. This is where the "on by default"
+	// test flaked: the click after reload() landed before hydration, so the
+	// dialog never opened and the Bible tab below was waited for in vain.
+	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 	await dialog.getByRole('button', { name: 'Bible' }).click();
 	return dialog;
 }
@@ -222,10 +226,12 @@ test('navigating away cancels a pending URL write instead of letting it land', a
 	// still pending · opening the dialog first leaves a single click between
 	// making chapter 3 active and leaving it, instead of a click, a dialog
 	// transition and a second click.
-	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
-	const chapter9 = page
-		.getByRole('dialog', { name: 'Navigation biblique' })
-		.locator('a[href="/bible/genese/9"]');
+	const navDialog = page.getByRole('dialog', { name: 'Navigation biblique' });
+	await openDisclosure(
+		page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]'),
+		navDialog
+	);
+	const chapter9 = navDialog.locator('a[href="/bible/genese/9"]');
 	await expect(chapter9).toBeVisible();
 
 	// Land chapter 3's anchor inside the activation band in one downward
@@ -535,7 +541,10 @@ test('an in-app navigation re-arms the preload timer, for a chapter reached with
 
 	// In-app navigation via the chapter grid, not page.goto: this reuses the
 	// component instance, which only the reset effect handles, not onMount.
-	await page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]').click();
+	await openDisclosure(
+		page.locator('.bible-chapter-nav button[aria-haspopup="dialog"]'),
+		page.locator('[data-book-grid="genese"]')
+	);
 	await page.locator('[data-book-grid="genese"] a span', { hasText: /^10$/ }).click();
 
 	// No scrolling from here at all. Only the re-armed preload timer, once its
