@@ -60,6 +60,79 @@ export function chapterCrossing(input: CrossingInput): Crossing | null {
 	return null;
 }
 
+/**
+ * How many of the leading `count` sections can go without taking any text off
+ * the reader's screen · everything before the first one still intersecting the
+ * viewport. Takes each section's `boundingClientRect.bottom`, in document
+ * order.
+ *
+ * This is what lets BibleReader's front-prune compensation be exact. Removing
+ * only content above the fold means the document shrinks by precisely the
+ * distance the surviving text moves up, and since the pixels above the fold are
+ * exactly `scrollY` and no more, the remaining document is still at least one
+ * viewport tall, so `scrollHeight` never bottoms out on its own floor and
+ * under-reports the delta.
+ *
+ * Stopping early is always safe: the window simply stays above its cap until
+ * the reader has scrolled on.
+ */
+export function prunableFromFront(count: number, bottoms: number[]): number {
+	let n = 0;
+	while (n < count && n < bottoms.length) {
+		const bottom = bottoms[n];
+		// noUncheckedIndexedAccess · the loop bound already proves this, but the
+		// compiler does not know it.
+		if (bottom === undefined || bottom > 0) break;
+		n++;
+	}
+	return n;
+}
+
+/**
+ * The same rule at the other end: how many trailing sections start below the
+ * fold, and so can be dropped without moving anything the reader can see or
+ * shrinking the document out from under `scrollY`. Takes each section's
+ * `boundingClientRect.top`, in document order.
+ */
+export function prunableFromBack(count: number, tops: number[], viewportHeight: number): number {
+	let n = 0;
+	while (n < count && n < tops.length) {
+		const top = tops[tops.length - 1 - n];
+		if (top === undefined || top < viewportHeight) break;
+		n++;
+	}
+	return n;
+}
+
+/**
+ * Index of the chapter anchor the reader is on, by position alone, or -1 when
+ * every anchor is still below the activation line. Takes each anchor's
+ * `boundingClientRect.top`, in document order.
+ *
+ * The position-based counterpart to `chapterCrossing`, and the reason
+ * BibleReader recomputes it on every scroll tick. The observer only reports a
+ * chapter when an anchor's intersection state *changes* between two
+ * consecutive frames. A scroll step bigger than the activation band
+ * (`ACTIVE_BAND_RATIO` · PageDown, spacebar, a trackpad fling) can carry an
+ * anchor from below the band to above it, or the reverse, without the band
+ * ever containing it at a sampled frame, so no crossing is ever delivered and
+ * the active chapter silently stops following the reader. `scrollSpy.ts`
+ * abandoned IntersectionObserver for headings for exactly this reason; this
+ * applies the same rule geometrically, so it cannot miss a jump: the last
+ * anchor at or above the activation line is the chapter being read, whatever
+ * path the reader took to get there.
+ */
+export function activeAnchorIndex(tops: number[], viewportHeight: number): number {
+	const line = viewportHeight * ACTIVE_BAND_RATIO;
+	let candidate = -1;
+	for (let i = 0; i < tops.length; i++) {
+		const top = tops[i];
+		if (top === undefined || top > line) break;
+		candidate = i;
+	}
+	return candidate;
+}
+
 export const CHAPTER_ANCHOR_SELECTOR = '[data-chapter-anchor]';
 
 /**

@@ -15,10 +15,13 @@
 		createChapterObserver,
 		observeAllAnchors,
 		observeNewAnchor,
+		prunableFromFront,
+		prunableFromBack,
+		activeAnchorIndex,
 		CHAPTER_ANCHOR_SELECTOR,
-		ACTIVE_BAND_RATIO,
 		type Crossing
 	} from '$lib/utils/infiniteScroll';
+	import { createFailureLog, refKey } from '$lib/utils/chapterRetry';
 	import { prefs } from '$lib/stores/prefs';
 	import { anchorChromeShift } from '$lib/stores/chrome';
 
@@ -221,62 +224,25 @@
 	let navCooldownUntil = 0;
 	let preloadTimer: ReturnType<typeof setTimeout> | null = null;
 
-	/** Attempts a chapter gets before it is given up on. A throw from
-	 *  `fetchChapter` is a dropped request, which is transient and only possible
-	 *  at a book boundary · retrying costs one request, while not retrying strands
-	 *  the reader at the end of a book with no way forward and no footer nav to
-	 *  fall back on. */
-	const MAX_LOAD_ATTEMPTS = 3;
-
-	/** Delay before a thrown ref is eligible again, doubled per attempt. Without
-	 *  it the budget is spent inside a second: `catch` falls through to
-	 *  `checkPreload()`, which starts the next attempt immediately, so all three
-	 *  land inside one bad moment on the connection and the reader is given up on
-	 *  before the blip has passed. */
-	const RETRY_BASE_MS = 1000;
-
-	/** Refs whose chapter does not exist · an unknown slug, or a chapter number
-	 *  past the end of its book. Structural, so it can never succeed on a retry
-	 *  and the entry is permanent. */
-	// eslint-disable-next-line svelte/prefer-svelte-reactivity
-	const missing = new Set<string>();
-
-	/** Failed attempts per ref, for loads that *threw*. Distinct from `missing`
-	 *  because a dropped request says nothing about whether the chapter is there.
-	 *  Both exist so a dead chapter is attempted a bounded number of times rather
-	 *  than once per animation frame for as long as the reader keeps scrolling
-	 *  near the bottom · offline, that would otherwise be a stream of failing
-	 *  requests and a console.warn per frame.
-	 *
+	/** Which refs are absent or have failed, and how long each is held off for.
 	 *  Non-reactive · read only from the imperative load paths, never rendered,
 	 *  so the reactive versions' sources would be pure overhead
-	 *  (ParagraphActions.svelte takes the same exemption). */
-	// eslint-disable-next-line svelte/prefer-svelte-reactivity
-	const loadAttempts = new Map<string, number>();
-
-	/** Earliest time each thrown ref may be tried again · the backoff half of
-	 *  `loadAttempts`, kept beside it and cleared with it. Non-reactive for the
-	 *  same reason. */
-	// eslint-disable-next-line svelte/prefer-svelte-reactivity
-	const retryAfter = new Map<string, number>();
+	 *  (ParagraphActions.svelte takes the same exemption). `loadFailed` below is
+	 *  the one piece of it the markup needs. */
+	const failures = createFailureLog();
 
 	let retryTimer: ReturnType<typeof setTimeout> | null = null;
 
 	/** True once the chapter after the window has spent its whole budget. Drives
 	 *  the notice at the end of the document · without it the page simply stops
-	 *  growing and there is no footer nav to explain why or to leave by. */
+	 *  growing and there is no footer nav to explain why or to leave by. Mirrors
+	 *  `failures.exhausted` into reactive state, since the log is a plain object. */
 	let loadFailed = $state(false);
-
-	function refKey(ref: ChapterRef): string {
-		return `${ref.bookSlug}-${ref.chapter}`;
-	}
 
 	/** Forget everything recorded against the failing refs. Called on a route
 	 *  change and by the reader's own Réessayer, both of which are fresh intent. */
 	function clearFailures() {
-		missing.clear();
-		loadAttempts.clear();
-		retryAfter.clear();
+		failures.clearAll();
 		if (retryTimer) clearTimeout(retryTimer);
 		retryTimer = null;
 		loadFailed = false;
@@ -288,15 +254,9 @@
 	 *  else would ever call in again and the recovery would depend on them
 	 *  fidgeting. */
 	function recordFailure(ref: ChapterRef) {
-		const key = refKey(ref);
-		const attempts = (loadAttempts.get(key) ?? 0) + 1;
-		loadAttempts.set(key, attempts);
-		if (attempts >= MAX_LOAD_ATTEMPTS) {
-			loadFailed = true;
-			return;
-		}
-		const wait = RETRY_BASE_MS * 2 ** (attempts - 1);
-		retryAfter.set(key, Date.now() + wait);
+		const wait = failures.record(refKey(ref), Date.now());
+		loadFailed = failures.exhausted;
+		if (wait === null) return;
 		if (retryTimer) clearTimeout(retryTimer);
 		retryTimer = setTimeout(() => {
 			retryTimer = null;
@@ -306,19 +266,12 @@
 		}, wait);
 	}
 
-	/** Clear one ref's failure record after it loads · a chapter that arrived is
-	 *  no longer owed a retry. `loadFailed` only follows it down when nothing
-	 *  else is still exhausted: a successful loadPrev must not hide the notice
-	 *  for a forward ref that gave up minutes ago and is still unreachable ·
-	 *  `loadFailed` has no memory of which direction raised it, only whether
-	 *  anything currently has. */
+	/** Clear one ref's failure record after it loads, then re-ask the log whether
+	 *  anything is still exhausted · see FailureLog.exhausted for why this is a
+	 *  question rather than a flag. */
 	function clearFailure(key: string) {
-		loadAttempts.delete(key);
-		retryAfter.delete(key);
-		for (const attempts of loadAttempts.values()) {
-			if (attempts >= MAX_LOAD_ATTEMPTS) return;
-		}
-		loadFailed = false;
+		failures.clearOne(key);
+		loadFailed = failures.exhausted;
 	}
 
 	/** Give the failed ref its budget back and go again, from the reader's own
@@ -386,10 +339,7 @@
 	 *  failure records are consulted, so both loaders stay symmetric. */
 	function loadable(ref: ChapterRef | null): ref is ChapterRef {
 		if (!ref || isLoaded(ref)) return false;
-		const key = refKey(ref);
-		if (missing.has(key)) return false;
-		if ((loadAttempts.get(key) ?? 0) >= MAX_LOAD_ATTEMPTS) return false;
-		return Date.now() >= (retryAfter.get(key) ?? 0);
+		return failures.eligible(refKey(ref), Date.now());
 	}
 
 	async function loadNext() {
@@ -401,7 +351,7 @@
 		const gen = generation;
 		try {
 			const entry = await fetchChapter(ref);
-			if (!entry) missing.add(refKey(ref));
+			if (!entry) failures.markMissing(refKey(ref));
 			if (entry && !destroyed && gen === generation) {
 				clearFailure(refKey(ref));
 				loaded = [...loaded, entry];
@@ -434,7 +384,7 @@
 		const gen = generation;
 		try {
 			const entry = await fetchChapter(ref);
-			if (!entry) missing.add(refKey(ref));
+			if (!entry) failures.markMissing(refKey(ref));
 			if (entry && !destroyed && gen === generation) {
 				clearFailure(refKey(ref));
 				// Measure immediately before the mutation. After tick() the difference
@@ -459,7 +409,11 @@
 					// unnoticed clamp would be banked by the chrome reducer as upward
 					// travel and could pop the bars. The observer's hold on the anchors
 					// leaving still has to be released.
-					const drop = prunableFromBack(excess, sectionEls());
+					const drop = prunableFromBack(
+						excess,
+						sectionEls().map((el) => el.getBoundingClientRect().top),
+						window.innerHeight
+					);
 					if (drop > 0) {
 						unobserveTail(drop);
 						loaded = loaded.slice(0, loaded.length - drop);
@@ -491,52 +445,16 @@
 		return [...container.querySelectorAll<HTMLElement>(':scope > [data-chapter-section]')];
 	}
 
-	/**
-	 * How many of the leading `count` sections can go without taking any text off
-	 * the reader's screen · everything before the first one still intersecting the
-	 * viewport.
-	 *
-	 * This is what lets the compensation below be exact. Removing only content
-	 * above the fold means the document shrinks by precisely the distance the
-	 * surviving text moves up, and since the pixels above the fold are exactly
-	 * `scrollY` and no more, the remaining document is still at least one
-	 * viewport tall, so `scrollHeight` never bottoms out on its own floor and
-	 * under-reports `delta`.
-	 * Stopping early is always safe: the window simply stays above `MAX_LOADED`
-	 * until the reader has scrolled on.
-	 */
-	function prunableFromFront(count: number, sections: HTMLElement[]): number {
-		let n = 0;
-		while (n < count && n < sections.length) {
-			const el = sections[n];
-			// noUncheckedIndexedAccess · the loop bound already proves this, but the
-			// compiler does not know it.
-			if (!el || el.getBoundingClientRect().bottom > 0) break;
-			n++;
-		}
-		return n;
-	}
-
-	/** The same rule at the other end: how many trailing sections start below the
-	 *  fold, and so can be dropped without moving anything the reader can see or
-	 *  shrinking the document out from under `scrollY`. */
-	function prunableFromBack(count: number, sections: HTMLElement[]): number {
-		let n = 0;
-		while (n < count && n < sections.length) {
-			const el = sections[sections.length - 1 - n];
-			if (!el || el.getBoundingClientRect().top < window.innerHeight) break;
-			n++;
-		}
-		return n;
-	}
-
 	/** Drop up to `count` chapters from above the viewport and pull the scroll
 	 *  position up by exactly what they occupied, so the text does not jump. */
 	async function pruneFront(count: number) {
 		if (count <= 0 || !container || destroyed) return;
 		const gen = generation;
 		const sections = sectionEls();
-		const drop = prunableFromFront(count, sections);
+		const drop = prunableFromFront(
+			count,
+			sections.map((el) => el.getBoundingClientRect().bottom)
+		);
 		if (drop === 0) return;
 		for (let i = 0; i < drop; i++) {
 			const el = sections[i];
@@ -578,32 +496,22 @@
 	}
 
 	/**
-	 * Position-based fallback for the active chapter, recomputed on every
-	 * scroll tick alongside the IntersectionObserver.
+	 * Position-based fallback for the active chapter, recomputed on every scroll
+	 * tick alongside the IntersectionObserver. A thin DOM adapter over
+	 * `activeAnchorIndex`, which holds the reasoning and the rule.
 	 *
-	 * The observer only reports a chapter when an anchor's intersection state
-	 * *changes* between two consecutive frames. A scroll step bigger than the
-	 * activation band (`ACTIVE_BAND_RATIO`, the top 30% of the viewport ·
-	 * PageDown, spacebar, a trackpad fling) can carry an anchor from below the
-	 * band to above it, or the reverse, without the band ever containing it
-	 * at a sampled frame, so no crossing is ever delivered and `activeChapter`
-	 * silently stops following the reader. `scrollSpy.ts` abandoned
-	 * IntersectionObserver for headings for exactly this reason; this applies
-	 * the same rule geometrically, so it cannot miss a jump: the last anchor at
-	 * or above the activation line is the chapter being read, whatever path the
-	 * reader took to get there. Goes through `setActive`, so the debounce and
-	 * generation guard still apply, and calling it every tick is harmless ·
-	 * setActive no-ops when the slug/chapter are already current.
+	 * Goes through `setActive`, so the debounce and generation guard still
+	 * apply, and calling it every tick is harmless · setActive no-ops when the
+	 * slug/chapter are already current.
 	 */
 	function activeFromPosition() {
 		if (!container) return;
-		const anchors = container.querySelectorAll<HTMLElement>(CHAPTER_ANCHOR_SELECTOR);
-		const line = window.innerHeight * ACTIVE_BAND_RATIO;
-		let candidate: HTMLElement | null = null;
-		for (const el of anchors) {
-			if (el.getBoundingClientRect().top <= line) candidate = el;
-			else break;
-		}
+		const anchors = [...container.querySelectorAll<HTMLElement>(CHAPTER_ANCHOR_SELECTOR)];
+		const idx = activeAnchorIndex(
+			anchors.map((el) => el.getBoundingClientRect().top),
+			window.innerHeight
+		);
+		const candidate = idx === -1 ? undefined : anchors[idx];
 		if (!candidate) return;
 		const bookSlug = candidate.dataset.bookSlug;
 		const chapterNum = parseInt(candidate.dataset.chapterNum ?? '', 10);
