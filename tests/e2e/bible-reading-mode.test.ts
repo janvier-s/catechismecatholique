@@ -215,8 +215,8 @@ test('the options panel on Bible pages has three tabs, with Notes hidden', async
 	// Bible-specific settings get their own tab instead of tucking under
 	// Lecture (see ReadingPrefs.svelte's comment on `tabs`).
 	await page.goto('/bible/genese/1');
-	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 
 	await expect(dialog.getByRole('button', { name: 'Notes', exact: true })).toHaveCount(0);
 	await expect(dialog.getByRole('button', { name: 'Texte', exact: true })).toBeVisible();
@@ -233,8 +233,8 @@ test('the options panel on Bible pages has three tabs, with Notes hidden', async
 
 test('the CEC options panel keeps its Notes tab', async ({ page }) => {
 	await page.goto('/cec/27');
-	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 	await expect(dialog.getByRole('button', { name: 'Notes', exact: true })).toBeVisible();
 });
 

@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openDisclosure } from './helpers';
 
 test.describe('Compendium', () => {
 	test('landing lists 4 parts', async ({ page }) => {
@@ -36,7 +37,7 @@ test.describe('Compendium', () => {
 
 	test('nav drawer links to /compendium', async ({ page }) => {
 		await page.goto('/cec');
-		await page.locator('.drawer-trigger').click();
+		await openDisclosure(page.locator('.drawer-trigger'), page.locator('#nav-drawer'));
 		// Compendium is a primary link, always visible above the accordions.
 		await page.locator('#nav-drawer a[href="/compendium"]').click();
 		await expect(page).toHaveURL('/compendium');
@@ -46,7 +47,7 @@ test.describe('Compendium', () => {
 		page
 	}) => {
 		await page.goto('/cec');
-		await page.locator('.drawer-trigger').click();
+		await openDisclosure(page.locator('.drawer-trigger'), page.locator('#nav-drawer'));
 		// The "Études & outils" group is a collapsed accordion by default,
 		// and expands via a 180ms transition:slide (NavDrawer.svelte). The
 		// link is present in the DOM as soon as the group expands, but its
