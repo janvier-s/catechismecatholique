@@ -210,7 +210,7 @@
 
 	{#if activeTab === 'text'}
 		<div class="space-y-5">
-			<label class="block">
+			<label class="block" title="Ajuste la taille du texte affiché à l'écran">
 				<span class="block mb-2 text-muted text-[13px]"
 					>Taille du texte&nbsp;: {$prefs.fontSize}px</span
 				>
@@ -227,7 +227,10 @@
 			</label>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Interligne</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Ajuste l'espacement entre les lignes du texte">Interligne</span
+				>
 				<PillGroup
 					ariaLabel="Interligne"
 					options={[
@@ -249,7 +252,10 @@
 			</div>
 
 			<div bind:this={fontSectionEl} data-font-menu>
-				<span class="block mb-2 text-muted text-[13px]">Police</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Change la police du texte, avec une option adaptée à la dyslexie">Police</span
+				>
 				<button
 					type="button"
 					bind:this={fontTriggerEl}
@@ -266,7 +272,10 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Thème</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Change les couleurs de fond et de texte de la page">Thème</span
+				>
 				<div class="flex gap-2">
 					{#each THEME_SWATCHES as t (t.id)}
 						<button
@@ -302,7 +311,11 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Couleur d'accent</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Change la couleur utilisée pour les éléments actifs de l'interface"
+					>Couleur d'accent</span
+				>
 				<PillGroup
 					ariaLabel="Couleur d'accent"
 					options={[
@@ -323,7 +336,9 @@
 	{#if activeTab === 'reading'}
 		<div class="space-y-5">
 			<div class="hidden md:block">
-				<span class="block mb-2 text-muted text-[13px]">Largeur de colonne</span>
+				<span class="block mb-2 text-muted text-[13px]" title="Ajuste la largeur du texte à l'écran"
+					>Largeur de colonne</span
+				>
 				<PillGroup
 					ariaLabel="Largeur de colonne"
 					options={[
@@ -349,7 +364,10 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Alignement</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Aligne le texte à gauche ou le justifie des deux côtés">Alignement</span
+				>
 				<PillGroup
 					ariaLabel="Alignement"
 					options={[
@@ -370,7 +388,11 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Lecture bionique</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Met en gras le début de chaque mot pour guider l'œil pendant la lecture"
+					>Lecture bionique</span
+				>
 				<PillGroup
 					ariaLabel="Lecture bionique"
 					options={[
@@ -388,7 +410,9 @@
 
 			{#if $prefs.bionicReading}
 				<div>
-					<span class="block mb-2 text-muted text-[13px]"
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Règle la portion de chaque mot mise en gras"
 						>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
 					>
 					<input
@@ -405,7 +429,9 @@
 				</div>
 
 				<div>
-					<span class="block mb-2 text-muted text-[13px]"
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Règle la fréquence des mots mis en gras"
 						>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
 					>
 					<input
@@ -429,7 +455,11 @@
 					>
 					<div class="space-y-4">
 						<div>
-							<span class="block mb-2 text-muted text-[13px]">Renvois entre paragraphes</span>
+							<span
+								class="block mb-2 text-muted text-[13px]"
+								title="Choisit où afficher les renvois vers d'autres paragraphes"
+								>Renvois entre paragraphes</span
+							>
 							<PillGroup
 								ariaLabel="Renvois entre paragraphes"
 								options={[
@@ -450,7 +480,11 @@
 						</div>
 
 						<div>
-							<span class="block mb-2 text-muted text-[13px]">Citations bibliques</span>
+							<span
+								class="block mb-2 text-muted text-[13px]"
+								title="Choisit comment afficher les citations bibliques dans le texte"
+								>Citations bibliques</span
+							>
 							<PillGroup
 								ariaLabel="Citations bibliques"
 								options={[
@@ -478,7 +512,10 @@
 	{#if activeTab === 'bible'}
 		<div class="space-y-5">
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Mode de lecture</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Choisit comment le texte biblique est découpé à l'écran">Mode de lecture</span
+				>
 				<PillGroup
 					ariaLabel="Mode de lecture"
 					options={[
@@ -499,7 +536,10 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Scroll infini</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
+				>
 				<PillGroup
 					ariaLabel="Scroll infini"
 					options={[
@@ -516,7 +556,10 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Numéros de verset</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Affiche ou masque les numéros devant chaque verset">Numéros de verset</span
+				>
 				<PillGroup
 					ariaLabel="Numéros de verset"
 					options={[
@@ -533,7 +576,10 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Couleur des numéros de verset</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Change la couleur des numéros de verset">Couleur des numéros de verset</span
+				>
 				<PillGroup
 					ariaLabel="Couleur des numéros de verset"
 					options={[
@@ -554,7 +600,10 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Titres de section</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Affiche ou masque les titres qui découpent le chapitre">Titres de section</span
+				>
 				<PillGroup
 					ariaLabel="Titres de section"
 					options={[
@@ -575,7 +624,11 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Navigation entre chapitres</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Affiche ou masque les liens vers les chapitres voisins"
+					>Navigation entre chapitres</span
+				>
 				<PillGroup
 					ariaLabel="Navigation entre chapitres"
 					options={[
@@ -596,7 +649,11 @@
 			</div>
 
 			<div>
-				<span class="block mb-2 text-muted text-[13px]">Numérotation Vulgate (psaumes)</span>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Choisit le système de numérotation des psaumes"
+					>Numérotation Vulgate (psaumes)</span
+				>
 				<PillGroup
 					ariaLabel="Numérotation Vulgate (psaumes)"
 					options={[
