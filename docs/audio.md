@@ -45,3 +45,24 @@ python scripts/render-ccc-audio.py … --end-paragraph 25
 ```bash
 cd scripts && python -m pytest tests/ -v
 ```
+
+## Trent audio (not yet run)
+
+`trent_audio.py`, `build-trent-manifest.py`, `render-trent-audio.py` and
+`rename-trent-audio.py` are the Trent counterparts of the CCC scripts above,
+committed so the work is not lost. **No Trent audio has been generated from
+them yet**, so treat them as a starting point rather than a working pipeline.
+
+They differ from the CCC set in what the text needs: no paragraph-number
+announces (Trent carries no numbers), no separate citation voice (scripture
+quotes are read inline), no en-bref concept, `<sup class="trentRef">`
+footnotes stripped, and one file per section rather than per paragraph.
+
+```bash
+python scripts/build-trent-manifest.py --out <manifest.json>
+python scripts/render-trent-audio.py --dry-run   # --confirm to actually render
+```
+
+Both renderers default to doing nothing: `render-trent-audio.py` needs
+`--confirm`, mirroring `render-ccc-audio.py`, so a stray invocation cannot
+start a fleet-wide render.
