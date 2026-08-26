@@ -18,10 +18,34 @@
 	// Lecture · that section had grown longer than the generic one it sat below.
 	const tabs = $derived(
 		[
-			{ id: 'text' as const, label: 'Texte' },
-			{ id: 'reading' as const, label: 'Lecture' },
-			...(isBibleOnly ? [{ id: 'bible' as const, label: 'Bible' }] : []),
-			...(isBibleOnly ? [] : [{ id: 'notes' as const, label: 'Notes' }])
+			{
+				id: 'text' as const,
+				label: 'Texte',
+				title: 'Ajuste l’apparence du texte à l’écran'
+			},
+			{
+				id: 'reading' as const,
+				label: 'Lecture',
+				title: 'Ajuste la mise en page et le confort de lecture'
+			},
+			...(isBibleOnly
+				? [
+						{
+							id: 'bible' as const,
+							label: 'Bible',
+							title: 'Réglages propres à la lecture biblique'
+						}
+					]
+				: []),
+			...(isBibleOnly
+				? []
+				: [
+						{
+							id: 'notes' as const,
+							label: 'Notes',
+							title: 'Choisit les notes à afficher pendant la lecture'
+						}
+					])
 		].filter(Boolean)
 	);
 	let fontDropdownOpen = $state(false);
@@ -85,10 +109,38 @@
 
 	// Auto is intentionally omitted · users want an explicit choice here.
 	const THEME_SWATCHES = [
-		{ id: 'light' as const, label: 'Clair', bg: '#fffdf9', fg: '#1c1710', lines: '#c8bfb0' },
-		{ id: 'sepia' as const, label: 'Sépia', bg: '#f2e8d8', fg: '#2c1e10', lines: '#c0a888' },
-		{ id: 'dark' as const, label: 'Sombre', bg: '#111113', fg: '#e8ddd0', lines: '#2e2b32' },
-		{ id: 'oled' as const, label: 'OLED', bg: '#000000', fg: '#e0e0e0', lines: '#2a2a2a' }
+		{
+			id: 'light' as const,
+			label: 'Clair',
+			bg: '#fffdf9',
+			fg: '#1c1710',
+			lines: '#c8bfb0',
+			title: 'Confortable en plein jour'
+		},
+		{
+			id: 'sepia' as const,
+			label: 'Sépia',
+			bg: '#f2e8d8',
+			fg: '#2c1e10',
+			lines: '#c0a888',
+			title: 'Ton chaud qui repose les yeux lors de longues lectures'
+		},
+		{
+			id: 'dark' as const,
+			label: 'Sombre',
+			bg: '#111113',
+			fg: '#e8ddd0',
+			lines: '#2e2b32',
+			title: 'Réduit l’éblouissement en lecture nocturne'
+		},
+		{
+			id: 'oled' as const,
+			label: 'OLED',
+			bg: '#000000',
+			fg: '#e0e0e0',
+			lines: '#2a2a2a',
+			title: 'Fond noir pur, économise la batterie sur écran OLED'
+		}
 	];
 
 	const activeFont = $derived(getFontById($prefs.fontFamily) ?? FONTS[0]!);
@@ -149,6 +201,7 @@
 					? 'border-accent text-accent-text'
 					: 'border-transparent text-subtle hover:text-foreground'}"
 				onclick={() => (activeTab = tab.id)}
+				title={tab.title}
 			>
 				{tab.label}
 			</button>
@@ -169,6 +222,7 @@
 					value={$prefs.fontSize}
 					oninput={(e) => updatePref('fontSize', parseInt(e.currentTarget.value, 10))}
 					class="w-full accent-accent"
+					title="Plus grand facilite la lecture, plus petit affiche davantage de texte à l’écran"
 				/>
 			</label>
 
@@ -177,9 +231,17 @@
 				<PillGroup
 					ariaLabel="Interligne"
 					options={[
-						{ label: 'Serré', value: 1.5 },
-						{ label: 'Standard', value: 1.6 },
-						{ label: 'Aéré', value: 2.0 }
+						{
+							label: 'Serré',
+							value: 1.5,
+							title: 'Affiche plus de texte à l’écran, lecture plus dense'
+						},
+						{ label: 'Standard', value: 1.6, title: 'Équilibre entre densité et lisibilité' },
+						{
+							label: 'Aéré',
+							value: 2.0,
+							title: 'Facilite le suivi ligne à ligne, utile en cas de fatigue visuelle'
+						}
 					]}
 					value={$prefs.lineHeight}
 					onchange={(v) => updatePref('lineHeight', v)}
@@ -195,6 +257,7 @@
 					style="font-family: {activeFont.stack};"
 					aria-haspopup="listbox"
 					aria-expanded={fontDropdownOpen}
+					title="Inclut une police adaptée à la dyslexie"
 					onclick={() => (fontDropdownOpen ? closeFontMenu() : openFontMenu())}
 				>
 					<span>{activeFont.label}</span>
@@ -214,6 +277,7 @@
 							style="background: {t.bg};"
 							aria-label={t.label}
 							aria-pressed={$prefs.theme === t.id}
+							title={t.title}
 						>
 							<div class="theme-card-inner">
 								<div class="flex items-baseline gap-[3px] mb-[5px]">
@@ -236,6 +300,23 @@
 					{/each}
 				</div>
 			</div>
+
+			<div>
+				<span class="block mb-2 text-muted text-[13px]">Couleur d'accent</span>
+				<PillGroup
+					ariaLabel="Couleur d'accent"
+					options={[
+						{ label: 'Rouge', value: 'red' as const, title: "Couleur d'accent par défaut du site" },
+						{
+							label: 'Bleu',
+							value: 'blue' as const,
+							title: 'Plus distinct pour les personnes qui perçoivent mal le rouge'
+						}
+					]}
+					value={$prefs.accentColor}
+					onchange={(v) => updatePref('accentColor', v)}
+				/>
+			</div>
 		</div>
 	{/if}
 
@@ -246,9 +327,21 @@
 				<PillGroup
 					ariaLabel="Largeur de colonne"
 					options={[
-						{ label: 'Étroite', value: 'narrow' as const },
-						{ label: 'Standard', value: 'default' as const },
-						{ label: 'Large', value: 'wide' as const }
+						{
+							label: 'Étroite',
+							value: 'narrow' as const,
+							title: 'Lignes plus courtes, plus faciles à suivre du regard'
+						},
+						{
+							label: 'Standard',
+							value: 'default' as const,
+							title: 'Largeur équilibrée pour la lecture'
+						},
+						{
+							label: 'Large',
+							value: 'wide' as const,
+							title: 'Utilise davantage l’espace de l’écran'
+						}
 					]}
 					value={$prefs.columnWidth}
 					onchange={(v) => updatePref('columnWidth', v)}
@@ -260,8 +353,16 @@
 				<PillGroup
 					ariaLabel="Alignement"
 					options={[
-						{ label: 'À gauche', value: false },
-						{ label: 'Justifié', value: true }
+						{
+							label: 'À gauche',
+							value: false,
+							title: 'Espacement des mots régulier, sans grands blancs'
+						},
+						{
+							label: 'Justifié',
+							value: true,
+							title: 'Bords alignés des deux côtés, mise en page plus soignée'
+						}
 					]}
 					value={$prefs.justifiedText}
 					onchange={(v) => updatePref('justifiedText', v)}
@@ -273,8 +374,12 @@
 				<PillGroup
 					ariaLabel="Lecture bionique"
 					options={[
-						{ label: 'Désactivée', value: false },
-						{ label: 'Activée', value: true }
+						{ label: 'Désactivée', value: false, title: 'Texte affiché normalement' },
+						{
+							label: 'Activée',
+							value: true,
+							title: "Met en gras le début de chaque mot pour guider l'œil"
+						}
 					]}
 					value={$prefs.bionicReading}
 					onchange={(v) => updatePref('bionicReading', v)}
@@ -295,6 +400,7 @@
 						oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
 						class="w-full accent-accent"
 						aria-label="Intensité de la lecture bionique"
+						title="Règle la portion de chaque mot mise en gras"
 					/>
 				</div>
 
@@ -311,6 +417,7 @@
 						oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
 						class="w-full accent-accent"
 						aria-label="Saut de mots de la lecture bionique"
+						title="Un saut plus élevé met moins de mots en gras"
 					/>
 				</div>
 			{/if}
@@ -326,8 +433,16 @@
 							<PillGroup
 								ariaLabel="Renvois entre paragraphes"
 								options={[
-									{ label: 'En ligne', value: 'inline' as const },
-									{ label: 'En marge', value: 'side' as const }
+									{
+										label: 'En ligne',
+										value: 'inline' as const,
+										title: 'Renvois insérés juste après le paragraphe'
+									},
+									{
+										label: 'En marge',
+										value: 'side' as const,
+										title: 'Renvois affichés à côté, texte principal dégagé'
+									}
 								]}
 								value={$prefs.crossRefsLayout}
 								onchange={(v) => updatePref('crossRefsLayout', v)}
@@ -339,8 +454,16 @@
 							<PillGroup
 								ariaLabel="Citations bibliques"
 								options={[
-									{ label: 'En ligne', value: false },
-									{ label: 'En exposant', value: true }
+									{
+										label: 'En ligne',
+										value: false,
+										title: 'Référence complète visible directement dans le texte'
+									},
+									{
+										label: 'En exposant',
+										value: true,
+										title: 'Petits chiffres renvoyant à la citation, comme une note de bas de page'
+									}
 								]}
 								value={$prefs.inlineAsMarkers}
 								onchange={(v) => updatePref('inlineAsMarkers', v)}
@@ -359,8 +482,16 @@
 				<PillGroup
 					ariaLabel="Mode de lecture"
 					options={[
-						{ label: 'Verset par verset', value: 'verse' as const },
-						{ label: 'Paragraphe', value: 'paragraph' as const }
+						{
+							label: 'Verset par verset',
+							value: 'verse' as const,
+							title: 'Facilite le repérage d’un verset précis'
+						},
+						{
+							label: 'Paragraphe',
+							value: 'paragraph' as const,
+							title: 'Lecture continue, comme un texte en prose'
+						}
 					]}
 					value={$prefs.bibleLayout}
 					onchange={(v) => updatePref('bibleLayout', v)}
@@ -372,8 +503,12 @@
 				<PillGroup
 					ariaLabel="Scroll infini"
 					options={[
-						{ label: 'Activé', value: true },
-						{ label: 'Désactivé', value: false }
+						{
+							label: 'Activé',
+							value: true,
+							title: 'Charge le chapitre suivant automatiquement en défilant'
+						},
+						{ label: 'Désactivé', value: false, title: 'Passe au chapitre suivant manuellement' }
 					]}
 					value={$prefs.infiniteScroll}
 					onchange={(v) => updatePref('infiniteScroll', v)}
@@ -385,8 +520,12 @@
 				<PillGroup
 					ariaLabel="Numéros de verset"
 					options={[
-						{ label: 'Afficher', value: false },
-						{ label: 'Masquer', value: true }
+						{ label: 'Afficher', value: false, title: 'Facilite les citations précises' },
+						{
+							label: 'Masquer',
+							value: true,
+							title: 'Lecture continue, sans repères numériques'
+						}
 					]}
 					value={$prefs.hideVerseNumbers}
 					onchange={(v) => updatePref('hideVerseNumbers', v)}
@@ -398,8 +537,16 @@
 				<PillGroup
 					ariaLabel="Couleur des numéros de verset"
 					options={[
-						{ label: 'Accent', value: 'accent' as const },
-						{ label: 'Discret', value: 'subtle' as const }
+						{
+							label: 'Accent',
+							value: 'accent' as const,
+							title: 'Numéros bien visibles, faciles à repérer'
+						},
+						{
+							label: 'Discret',
+							value: 'subtle' as const,
+							title: 'Numéros estompés, moins de distraction'
+						}
 					]}
 					value={$prefs.verseNumberColor}
 					onchange={(v) => updatePref('verseNumberColor', v)}
@@ -411,8 +558,16 @@
 				<PillGroup
 					ariaLabel="Titres de section"
 					options={[
-						{ label: 'Afficher', value: false },
-						{ label: 'Masquer', value: true }
+						{
+							label: 'Afficher',
+							value: false,
+							title: 'Aide à s’orienter dans de longs chapitres'
+						},
+						{
+							label: 'Masquer',
+							value: true,
+							title: 'Lecture continue, sans interruption visuelle'
+						}
 					]}
 					value={$prefs.hideBibleHeadings}
 					onchange={(v) => updatePref('hideBibleHeadings', v)}
@@ -424,8 +579,16 @@
 				<PillGroup
 					ariaLabel="Navigation entre chapitres"
 					options={[
-						{ label: 'Afficher', value: false },
-						{ label: 'Masquer', value: true }
+						{
+							label: 'Afficher',
+							value: false,
+							title: 'Accès rapide au chapitre précédent ou suivant'
+						},
+						{
+							label: 'Masquer',
+							value: true,
+							title: 'Libère de l’espace à l’écran'
+						}
 					]}
 					value={$prefs.hideChapterNav}
 					onchange={(v) => updatePref('hideChapterNav', v)}
@@ -437,8 +600,12 @@
 				<PillGroup
 					ariaLabel="Numérotation Vulgate (psaumes)"
 					options={[
-						{ label: 'Afficher', value: true },
-						{ label: 'Masquer', value: false }
+						{
+							label: 'Afficher',
+							value: true,
+							title: 'La Vulgate numérote certains psaumes différemment de la Bible hébraïque'
+						},
+						{ label: 'Masquer', value: false, title: 'Utilise la numérotation standard' }
 					]}
 					value={$prefs.showVulgatePsalms}
 					onchange={(v) => updatePref('showVulgatePsalms', v)}
@@ -456,7 +623,10 @@
 						: 'Cette page ne contient pas de notes à masquer.'}
 				</p>
 			{:else}
-				<label class="flex items-center gap-2.5 cursor-pointer">
+				<label
+					class="flex items-center gap-2.5 cursor-pointer"
+					title="Cache renvois et citations pour une lecture épurée"
+				>
 					<input
 						type="checkbox"
 						checked={$prefs.hideAllNotes}
@@ -471,7 +641,10 @@
 				{#if !isTrent}
 					<div class="pl-6 space-y-3 text-[14px] border-l border-border ml-1.5">
 						{#if isCecOnly}
-							<label class="flex items-center gap-2.5 cursor-pointer">
+							<label
+								class="flex items-center gap-2.5 cursor-pointer"
+								title="Cache les références vers d’autres paragraphes du Catéchisme"
+							>
 								<input
 									type="checkbox"
 									checked={$prefs.hideCrossRefs}
@@ -483,7 +656,10 @@
 								</span>
 								<span>Renvois entre paragraphes</span>
 							</label>
-							<label class="flex items-center gap-2.5 cursor-pointer">
+							<label
+								class="flex items-center gap-2.5 cursor-pointer"
+								title="Cache les versets cités directement dans le texte"
+							>
 								<input
 									type="checkbox"
 									checked={$prefs.hideBibleInline}
@@ -495,7 +671,10 @@
 								</span>
 								<span>Citations bibliques en ligne</span>
 							</label>
-							<label class="flex items-center gap-2.5 cursor-pointer">
+							<label
+								class="flex items-center gap-2.5 cursor-pointer"
+								title="Cache les petits numéros renvoyant aux citations bibliques"
+							>
 								<input
 									type="checkbox"
 									checked={$prefs.hideBibleMarkers}
@@ -507,7 +686,10 @@
 								</span>
 								<span>Citations bibliques en exposant</span>
 							</label>
-							<label class="flex items-center gap-2.5 cursor-pointer">
+							<label
+								class="flex items-center gap-2.5 cursor-pointer"
+								title="Cache les références aux documents d’origine (conciles, encycliques…)"
+							>
 								<input
 									type="checkbox"
 									checked={$prefs.hideSourceFootnotes}

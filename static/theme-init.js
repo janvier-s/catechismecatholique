@@ -47,6 +47,7 @@
 		var theme = pick(prefs.theme, ['auto', 'light', 'sepia', 'dark', 'oled'], null);
 		if (!theme) theme = pick(legacy, ['auto', 'light', 'sepia', 'dark', 'oled'], 'auto');
 		root.setAttribute('data-theme', theme);
+		root.dataset.accentColor = pick(prefs.accentColor, ['red', 'blue'], 'red');
 	} catch {
 		// localStorage unavailable (private mode, sandboxed iframe, etc.) — fall
 		// back to whatever data-theme is statically set on the html element.

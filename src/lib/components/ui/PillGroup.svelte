@@ -10,7 +10,7 @@
 		onchange,
 		ariaLabel
 	}: {
-		options: { label: string; value: T }[];
+		options: { label: string; value: T; title?: string }[];
 		value: T;
 		onchange: (v: T) => void;
 		ariaLabel?: string;
@@ -24,6 +24,7 @@
 			class="pill-group-option"
 			class:is-active={opt.value === value}
 			onclick={() => onchange(opt.value)}
+			title={opt.title}
 		>
 			{opt.label}
 		</button>

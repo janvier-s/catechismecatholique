@@ -244,6 +244,31 @@
 		}
 	}
 
+	/* Blue accent · an alternative to the red accent for readers who have
+	   trouble distinguishing red, layered independently of the light/sepia/
+	   dark/oled theme choice so it composes with all four (plus auto).
+	   Tuned per theme like the red set, for comparable contrast against
+	   each background. */
+	html[data-accent-color='blue'] {
+		--color-accent: #1c5fa8;
+		--color-accent-text: #2f6fb8;
+	}
+	html[data-accent-color='blue'][data-theme='sepia'] {
+		--color-accent: #1a4a7a;
+		--color-accent-text: #2f628f;
+	}
+	html[data-accent-color='blue'][data-theme='dark'],
+	html[data-accent-color='blue'][data-theme='oled'] {
+		--color-accent: #5b9bd8;
+		--color-accent-text: #6fa8e0;
+	}
+	@media (prefers-color-scheme: dark) {
+		html[data-accent-color='blue'][data-theme='auto'] {
+			--color-accent: #5b9bd8;
+			--color-accent-text: #6fa8e0;
+		}
+	}
+
 	html {
 		background: var(--color-bg);
 		color: var(--color-fg);
@@ -681,7 +706,7 @@ html[data-bionic='true'] .bible-prose b,
 html[data-bionic='true'] .bible-poetry-line b,
 html[data-bionic='true'] .prose-paragraph b,
 html[data-bionic='true'] .compendium-prose b {
-	font-weight: 700;
+	font-weight: 600;
 }
 
 /* Reveal-on-scroll · the topbar always stays put; only the Bible chapter-nav

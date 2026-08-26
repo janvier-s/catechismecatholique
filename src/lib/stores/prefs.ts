@@ -12,6 +12,12 @@ export const THEME_LABELS: Record<Theme, string> = {
 	oled: 'OLED'
 };
 
+export type AccentColor = 'red' | 'blue';
+export const ACCENT_COLOR_LABELS: Record<AccentColor, string> = {
+	red: 'Rouge',
+	blue: 'Bleu'
+};
+
 export type ColumnWidth = 'narrow' | 'default' | 'wide';
 export type CrossRefsLayout = 'inline' | 'side';
 export type BibleLayout = 'verse' | 'paragraph';
@@ -19,6 +25,7 @@ export type VerseNumberColor = 'accent' | 'subtle';
 
 export interface ReadingPrefs {
 	theme: Theme;
+	accentColor: AccentColor; // alternative to the red accent, for red colorblindness
 	fontFamily: string; // FONTS id, or DYSLEXIA_FONT.id
 	fontSize: number; // px
 	lineHeight: number; // 1.5 / 1.6 / 2.0
@@ -47,6 +54,7 @@ export interface ReadingPrefs {
 
 const DEFAULTS: ReadingPrefs = {
 	theme: 'auto',
+	accentColor: 'red',
 	fontFamily: DEFAULT_FONT_ID,
 	fontSize: 17,
 	lineHeight: 1.6,
@@ -121,6 +129,7 @@ if (browser) {
 		localStorage.setItem(KEY, JSON.stringify($p));
 		const root = document.documentElement;
 		root.setAttribute('data-theme', $p.theme);
+		root.dataset.accentColor = $p.accentColor;
 		// Keep the mobile browser chrome in step with the theme. Read back the
 		// computed --color-bg (the attribute above has already invalidated style,
 		// so this returns the new theme's value) rather than restating the palette

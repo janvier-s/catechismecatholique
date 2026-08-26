@@ -113,6 +113,7 @@
 			open = !open;
 		}}
 		aria-label="Options de lecture"
+		title="Options de lecture"
 		aria-haspopup="dialog"
 		aria-expanded={open}
 	>
