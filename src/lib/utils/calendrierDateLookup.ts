@@ -65,8 +65,6 @@ export function resolvePickedDate(index: CalendrierDatesIndexFile, picked: Date)
 	if (exact) return { status: 'match', row: exact, label: 'picked' };
 
 	const snappedIso = toIsoDate(nextSunday(picked));
-	if (snappedIso < index.rangeStart || snappedIso > index.rangeEnd) return { status: 'out-of-range' };
-
 	const snapped = findRow(index, snappedIso);
 	if (snapped) return { status: 'match', row: snapped, label: 'picked' };
 

@@ -73,4 +73,17 @@ describe('resolvePickedDate', () => {
 	it('reports no-match when nothing is nearby', () => {
 		expect(resolvePickedDate(index, new Date(2024, 5, 1))).toEqual({ status: 'no-match' });
 	});
+	it('reports no-match (not out-of-range) when picked is in-range but snap lands past rangeEnd', () => {
+		const narrowIndex: CalendrierDatesIndexFile = {
+			rangeStart: '2024-01-01',
+			rangeEnd: '2024-12-24',
+			rows: [
+				{ date: '2024-12-22', slug: 'test-sunday', corpus: 'year', yearKey: 'b' }
+			]
+		};
+		// 2024-12-23 is a Monday, in range, but nextSunday is 2024-12-29, past rangeEnd
+		expect(resolvePickedDate(narrowIndex, new Date(2024, 11, 23))).toEqual({
+			status: 'no-match'
+		});
+	});
 });
