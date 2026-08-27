@@ -106,38 +106,73 @@ existing `loadCalendrierIndex` pattern (fetch + module-scope cache).
 `/calendrier/+page.ts` adds it to the existing `Promise` alongside
 `loadCalendrierIndex`.
 
-## 4. UI: `/calendrier` landing page
+## 4. Shared component: extract `FeastBlock`
 
-Above the existing 3 year-cards, add a new block with two elements:
+`CalendrierReader.svelte`'s `feastBlock` snippet (title, expand/collapse
+clusters, on-demand paragraph fetch via `loadParagraph`, "Tout ouvrir/fermer")
+is exactly what the today card needs to render inline. Rather than duplicate
+that logic, extract it into `src/lib/components/calendrier/FeastBlock.svelte`
+taking a single `feast: CalendrierFeast | CalendrierFixedFeast` prop (plus the
+existing `showDates` flag). `CalendrierReader` renders it in a loop, unchanged
+behavior. The today card renders one instance directly. This is a refactor of
+existing code the today card needs to touch anyway, not scope creep.
 
-**Today card.** On mount, compute today's ISO date client-side
-(`new Date()`), look it up in the loaded index. Three states:
-- Match found → card shows the feast title and a direct link to
-  `/calendrier/{yearKey}#f-{slug}` (or `/calendrier/solennites#f-{slug}` for
-  `corpus: 'fixed'`).
-- No match (today is a ferial weekday, the common case) → card shows a quiet
-  "Pas de dimanche ni de grande fête aujourd'hui" with no link.
-- Today falls outside `[rangeStart, rangeEnd]` → same quiet state (this
-  should never actually happen given the range covers the current date by
-  construction, but the check exists for the same reason build-time failures
-  are loud: no silent wrong answer).
+## 5. UI: `/calendrier` landing page
 
-**Date picker.** A native `<input type="date">` plus a submit action (button
-or Enter). On submit: snap the picked date forward to that week's Sunday
-(picked date's weekday distance to the next Sunday, 0 if already Sunday),
-look up the index:
-- Match → navigate to the feast anchor, same as the today card.
+Above the existing 3 year-cards, add a new two-column block (stacks to one
+column under the existing 760px breakpoint): a today card and a date-picker
+card, both styled as siblings of `.year-card`/`.fixed-card` (same border,
+6px radius, `--font-ui`/`--font-heading` tokens, hover transitions) so they
+read as part of the same family rather than a bolted-on widget.
+
+**Today card.** On mount, compute today's ISO date client-side, look it up
+in the loaded index.
+- Match → render `FeastBlock` inline for that feast, under a kicker
+  "Aujourd'hui" and the formatted date.
+- No match (today is a ferial weekday, the common case) → walk back to the
+  most recent Sunday (`today.getDate() - today.getDay()`, in local time) and
+  look *that* up instead. Render its `FeastBlock` under a kicker "Dimanche
+  dernier" plus its date, so it reads clearly as "here's the last Sunday's
+  content," not as if it were today's. This is the fallback the user asked
+  for: a weekday should show the previous Sunday's readings rather than an
+  empty card.
+- Previous Sunday also has no match (only possible right at the start of the
+  precomputed range) → quiet "Pas de dimanche récent à afficher."
+
+**Date picker.** A card with a label ("Chercher une date"), a native
+`<input type="date">` restyled to the theme (border, radius, focus ring in
+`--color-accent`, no browser-default chrome look), and a submit button using
+the codebase's existing accent-button styling. On submit: look up the exact
+picked date first (covers fixed solemnities on their real weekday), then fall
+back to snapping forward to that week's Sunday. Result states:
+- Match → render `FeastBlock` inline in the same card, replacing the form
+  (with a small "Chercher une autre date" reset), rather than navigating away
+  — consistent with the today card now showing data in place instead of only
+  a link.
 - No match within range → inline message: "Aucun dimanche ou grande fête du
-  Catéchisme ne correspond à cette date." (a solemnity that isn't a Sunday,
-  e.g. Assumption on a Wednesday, is looked up by the exact picked date first,
-  before the Sunday-snap, so fixed solemnities remain reachable even when
-  picked on their exact weekday).
+  Catéchisme ne correspond à cette date."
 - Outside `[rangeStart, rangeEnd]` → inline message noting the covered range.
 
 The existing 3 year-cards and the solennités card are unchanged — they
 remain the browse-by-cycle entry point.
 
-## 5. Testing
+## 6. Visual design: season accent
+
+The six `CalendrierSeason` tags already group feasts for the season headings
+in `CalendrierReader` (`SEASON_LABELS`/`SEASON_ORDER`). Reuse that grouping as
+a decorative accent: a 4px left border on the today/picker-result card, colored
+per season — violet for `avent`/`careme`, gold for `noel`/`pascal`/`solennite`,
+green for `ordinaire`. This is a **season-grouping cue, not a liturgical-color
+chart**: `pascal` bundles Eastertide (white/gold) with the Triduum
+(Good Friday is red, Holy Saturday has no color), and `careme` bundles the
+violet Lenten Sundays with red Palm Sunday. Getting vestment colors precisely
+right per individual feast is out of scope here; the accent is sourced from
+the same coarse `season` field already used for grouping elsewhere in this
+component, not asserted as doctrinally exact. Comment this simplification
+in the color-map constant so it isn't mistaken for a liturgical-color claim
+later.
+
+## 7. Testing
 
 - Unit test the structural-key parser against every title currently in
   `CCC_Liturgy_List.txt` (via the already-parsed feast list) — confirms 100%
@@ -146,9 +181,18 @@ remain the browse-by-cycle entry point.
   years) asserting known fixed points: Easter Sunday's row has
   `season: 'pascal'`, Christ the King's row is present, a known Année-A/B/C
   civil year produces the expected `yearKey`.
+- Unit test the previous-Sunday fallback function directly: a fixed weekday
+  date resolves to the correct prior Sunday's row; a fixed Sunday date
+  resolves to itself.
 - Component test (or manual + Playwright) for the picker: picking a
-  known Sunday resolves and navigates; picking a Tuesday snaps to that week's
-  Sunday; picking a date with no match shows the inline message.
-- Today card: since "today" is nondeterministic in CI, test the lookup
-  function directly (given a fixed date, assert card state) rather than the
-  live component.
+  known Sunday resolves and renders `FeastBlock` inline; picking a Tuesday
+  snaps to that week's Sunday; picking a date with no match shows the inline
+  message; a fixed solemnity picked on its exact weekday resolves before any
+  Sunday-snapping is applied.
+- Today card: since "today" is nondeterministic in CI, test the lookup +
+  fallback function directly (given a fixed date, assert resolved feast)
+  rather than the live component.
+- `FeastBlock` extraction: existing `CalendrierReader` behavior (expand,
+  "Tout ouvrir/fermer", paragraph fetch) must keep working unchanged —
+  covered by whatever existing tests exercise `/calendrier/[annee]` today,
+  extended if that page has no test coverage yet.
