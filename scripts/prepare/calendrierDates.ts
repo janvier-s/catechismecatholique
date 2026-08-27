@@ -78,7 +78,11 @@ export async function buildCalendrierDates(
 		const byId = new Map(days.map((d) => [d.id, d]));
 		const sundaysBySeasonWeek = new Map<string, (typeof days)[number]>();
 		for (const d of days) {
-			if (d.calendar.dayOfWeek !== 0) continue;
+			// A solemnity that displaces a numbered Sunday keeps that Sunday's
+			// season and weekOfSeason metadata, so "falls on a Sunday" is not
+			// enough · only rank SUNDAY means the numbered Sunday is the thing
+			// actually being celebrated that day.
+			if (d.rank !== 'SUNDAY') continue;
 			for (const s of d.seasons) {
 				sundaysBySeasonWeek.set(`${s}:${d.calendar.weekOfSeason}`, d);
 			}
@@ -93,30 +97,46 @@ export async function buildCalendrierDates(
 						: sundaysBySeasonWeek.get(`${matcher.season}:${matcher.week}`);
 				if (!day) continue; // e.g. "Second Sunday after Christmas" doesn't occur every year
 
+				// Colors are cycle-invariant, so resolve them from any year that
+				// celebrates the feast, before the cycle gate below.
+				if (!colorsBySlug.has(feast.slug)) {
+					colorsBySlug.set(feast.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
+				}
+
+				// Several feasts have a different slug per année because the
+				// curated source titles differ. A row must therefore be stamped
+				// with the année file it came from, and only emitted when that
+				// file is the one actually read that day · otherwise the row
+				// points at a slug the yearKey's file doesn't contain.
+				if (yf.key !== sundayCycleToYearKey(day.cycles.sundayCycle)) continue;
+
 				rows.push({
 					date: day.date,
 					slug: feast.slug,
 					corpus: 'year',
-					yearKey: sundayCycleToYearKey(day.cycles.sundayCycle)
+					yearKey: yf.key
 				});
-				if (!colorsBySlug.has(feast.slug)) {
-					colorsBySlug.set(feast.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
-				}
 			}
 		}
 
 		for (const ff of fixedFeasts) {
-			// Fixed feasts already have an exact civil date; no need to search
-			// the year's calendar for the date itself, only for the color.
-			const dayNum = parseInt(ff.date, 10);
-			const date = `${year}-${String(ff.month_index + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
-			rows.push({ date, slug: ff.slug, corpus: 'fixed' });
+			// romcal resolves transfers itself (the Immaculée moves off an Advent
+			// Sunday, Saint Joseph off a Lent Sunday), so its date beats
+			// arithmetic on the curated month/day.
+			const matcher = matchersBySlug.get(ff.slug)!;
+			const day = matcher.kind === 'id' ? byId.get(matcher.id) : undefined;
+			if (!day) {
+				// Romcal drops the celebration outright in a few years rather than
+				// transferring it (Pierre et Paul whenever the Sacré-Coeur lands on
+				// 28 June, Saint Joseph when 19 March falls in Holy Week). We have
+				// no trustworthy date to substitute, so skip the year and say so.
+				console.warn(`calendrier: ${ff.slug} has no romcal celebration in ${year} · no row`);
+				continue;
+			}
 
+			rows.push({ date: day.date, slug: ff.slug, corpus: 'fixed' });
 			if (!colorsBySlug.has(ff.slug)) {
-				const matcher = matchersBySlug.get(ff.slug)!;
-				const day = matcher.kind === 'id' ? byId.get(matcher.id) : undefined;
-				if (day)
-					colorsBySlug.set(ff.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
+				colorsBySlug.set(ff.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
 			}
 		}
 	}

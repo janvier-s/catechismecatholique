@@ -39,6 +39,49 @@ const yearB: CalendrierYearFile = {
 			'la-solennite-du-christ-roi-de-lunivers',
 			"La Solennité du Christ Roi de l'univers",
 			'solennite'
+		),
+		feast(
+			'la-solennite-de-lascension-du-seigneur',
+			'La Solennité de l’Ascension du Seigneur',
+			'pascal'
+		),
+		feast(
+			'treizieme-dimanche-du-temps-ordinaire',
+			'Treizième Dimanche du Temps Ordinaire',
+			'ordinaire'
+		)
+	]
+};
+
+// The real curated titles diverge between années, which is what makes the same
+// real-world feast slugify differently per file · année A drops the leading
+// "La", année C writes "du Carême" where A and B write "de Carême".
+const yearA: CalendrierYearFile = {
+	key: 'a',
+	feasts: [
+		feast('deuxieme-dimanche-de-careme', 'Deuxième Dimanche de Carême', 'careme'),
+		feast('solennite-de-lascension-du-seigneur', 'Solennité de l’Ascension du Seigneur', 'pascal'),
+		feast(
+			'treizieme-dimanche-du-temps-ordinaire',
+			'Treizième Dimanche du Temps Ordinaire',
+			'ordinaire'
+		)
+	]
+};
+
+const yearC: CalendrierYearFile = {
+	key: 'c',
+	feasts: [
+		feast('deuxieme-dimanche-du-careme', 'Deuxième Dimanche du Carême', 'careme'),
+		feast(
+			'la-solennite-de-lascension-du-seigneur',
+			'La Solennité de l’Ascension du Seigneur',
+			'pascal'
+		),
+		feast(
+			'treizieme-dimanche-du-temps-ordinaire',
+			'Treizième Dimanche du Temps Ordinaire',
+			'ordinaire'
 		)
 	]
 };
@@ -54,6 +97,16 @@ const fixedFeasts: CalendrierFixedFeast[] = [
 		month_index: 5
 	}
 ];
+
+const immaculee: CalendrierFixedFeast = {
+	slug: 'la-solennite-de-limmaculee-conception-de-la-vierge-marie',
+	title: 'La Solennité de l’Immaculée Conception de la Vierge Marie',
+	season: 'solennite',
+	clusters: [],
+	liturgicalColor: 'white',
+	date: '8 Décembre',
+	month_index: 11
+};
 
 describe('buildCalendrierDates', () => {
 	it('covers the configured range', () => {
@@ -96,6 +149,71 @@ describe('buildCalendrierDates', () => {
 			corpus: 'fixed'
 		});
 		expect(colorsBySlug.get('la-solennite-de-saint-pierre-et-saint-paul-apotres')).toBe('red');
+	});
+
+	it('keeps each année file to its own cycle years when all three are joined together', async () => {
+		const { rows } = await buildCalendrierDates([yearA, yearB, yearC], fixedFeasts);
+		const slugsByYearKey = new Map(
+			[yearA, yearB, yearC].map((yf) => [yf.key, new Set(yf.feasts.map((f) => f.slug))])
+		);
+
+		// A row whose slug isn't in its own yearKey's file is a dead end: the
+		// frontend loads annee-{yearKey}.json and finds nothing.
+		const orphans = rows.filter(
+			(r) => r.corpus === 'year' && !slugsByYearKey.get(r.yearKey!)!.has(r.slug)
+		);
+		expect(orphans).toEqual([]);
+
+		// Two rows on one date make findRow's `.find()` a coin toss.
+		const byDate = new Map<string, typeof rows>();
+		for (const r of rows) byDate.set(r.date, [...(byDate.get(r.date) ?? []), r]);
+		expect([...byDate.entries()].filter(([, v]) => v.length > 1)).toEqual([]);
+
+		// 2027 is a year B cycle, so the Ascension row must carry année B's
+		// spelling ("la-solennite-…"), not année A's ("solennite-…").
+		expect(byDate.get('2027-05-06')).toEqual([
+			{
+				date: '2027-05-06',
+				slug: 'la-solennite-de-lascension-du-seigneur',
+				corpus: 'year',
+				yearKey: 'b'
+			}
+		]);
+	});
+
+	it('gives a displaced Sunday to the solemnity that outranks it', async () => {
+		const { rows } = await buildCalendrierDates([yearA, yearB, yearC], fixedFeasts);
+
+		// 29 June 2025 is both Peter and Paul and, nominally, the 13th Sunday of
+		// Ordinary Time. The solemnity wins, and the Sunday is not celebrated.
+		expect(rows.filter((r) => r.date === '2025-06-29')).toEqual([
+			{
+				date: '2025-06-29',
+				slug: 'la-solennite-de-saint-pierre-et-saint-paul-apotres',
+				corpus: 'fixed'
+			}
+		]);
+		const treizieme = rows.filter((r) => r.slug === 'treizieme-dimanche-du-temps-ordinaire');
+		expect(treizieme.some((r) => r.date === '2025-06-29')).toBe(false);
+		// It is still celebrated in the other year C years, just not that one.
+		expect(treizieme.some((r) => r.yearKey === 'c')).toBe(true);
+	});
+
+	it('dates fixed feasts from romcal so transfers are respected', async () => {
+		const { rows } = await buildCalendrierDates([yearA, yearB, yearC], [immaculee]);
+
+		// 8 December 2019 is the 2nd Sunday of Advent, which outranks the
+		// Immaculée · romcal moves her to the 9th.
+		const immaculee2019 = rows.filter(
+			(r) => r.slug === immaculee.slug && r.date.startsWith('2019')
+		);
+		expect(immaculee2019).toEqual([
+			{
+				date: '2019-12-09',
+				slug: 'la-solennite-de-limmaculee-conception-de-la-vierge-marie',
+				corpus: 'fixed'
+			}
+		]);
 	});
 
 	it('throws loudly when a feast title matches neither the id map nor the ordinal parser', async () => {
