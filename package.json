@@ -48,6 +48,7 @@
 		"postcss": "^8.5.13",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.5.1",
+		"romcal": "3.0.0-dev.138",
 		"sharp": "^0.34.5",
 		"svelte": "^5.55.2",
 		"svelte-check": "^4.4.6",
