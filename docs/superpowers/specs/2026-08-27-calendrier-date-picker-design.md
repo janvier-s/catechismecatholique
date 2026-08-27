@@ -70,6 +70,18 @@ rather than through the structural key. A romcal date with no matching slug
 (this will be most ferial weekdays, correctly) produces no row — the index
 only contains dates the site can actually show something for.
 
+Because the join already resolves each **individual feast slug** to its own
+specific romcal day (not a season bucket), romcal's own computed liturgical
+color for that day comes along for free and is precise per feast: Good Friday
+resolves red, Gaudete/Laetare Sundays resolve rose distinctly from the other
+purple Advent/Lent Sundays, Easter resolves white/gold. Carry romcal's `color`
+straight onto the matched feast the first time a slug is joined (color is a
+property of the liturgical day identity, not the civil year, so one match is
+enough — it doesn't need to live in the date-range rows at all). Where romcal
+reports more than one valid color for a day (e.g. white-or-gold), take its
+primary/default. This lands on the feast record itself, in the main
+`annee-{a,b,c}.json` / `index.json` output, not only in the date index.
+
 Write `static/data/calendrier/dates-index.json`: an array of the rows above,
 sorted by date. Also record `{ rangeStart, rangeEnd }` (the covered civil
 years) in the same file so the frontend can distinguish "out of range" from
@@ -86,6 +98,8 @@ Extend `scripts/prepare/calendrier.ts`'s exported types and
 `src/lib/data/types.ts`'s `Calendrier*` mirror with:
 
 ```ts
+export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
+
 export interface CalendrierDateRow {
 	date: string; // ISO yyyy-mm-dd
 	slug: string;
@@ -98,6 +112,12 @@ export interface CalendrierDatesIndexFile {
 	rows: CalendrierDateRow[];
 }
 ```
+
+`CalendrierFeast` and `CalendrierFixedFeast` (both `calendrier.ts` and the
+`types.ts` mirror) each gain `liturgicalColor: LiturgicalColor`, populated
+during the join described in section 1. `gold` from romcal maps onto `white`
+here (the same rank, solemn/festive) since the accent only needs the five
+practical buckets above.
 
 ## 3. Data loading
 
@@ -156,21 +176,22 @@ back to snapping forward to that week's Sunday. Result states:
 The existing 3 year-cards and the solennités card are unchanged — they
 remain the browse-by-cycle entry point.
 
-## 6. Visual design: season accent
+## 6. Visual design: liturgical color
 
-The six `CalendrierSeason` tags already group feasts for the season headings
-in `CalendrierReader` (`SEASON_LABELS`/`SEASON_ORDER`). Reuse that grouping as
-a decorative accent: a 4px left border on the today/picker-result card, colored
-per season — violet for `avent`/`careme`, gold for `noel`/`pascal`/`solennite`,
-green for `ordinaire`. This is a **season-grouping cue, not a liturgical-color
-chart**: `pascal` bundles Eastertide (white/gold) with the Triduum
-(Good Friday is red, Holy Saturday has no color), and `careme` bundles the
-violet Lenten Sundays with red Palm Sunday. Getting vestment colors precisely
-right per individual feast is out of scope here; the accent is sourced from
-the same coarse `season` field already used for grouping elsewhere in this
-component, not asserted as doctrinally exact. Comment this simplification
-in the color-map constant so it isn't mistaken for a liturgical-color claim
-later.
+Use the real thing: `feast.liturgicalColor` (section 2), sourced from romcal
+per individual feast rather than approximated from the coarse `season`
+grouping. Because the join is per-slug, this is accurate at the level that
+matters — Good Friday is red, Gaudete/Laetare Sundays are rose while the
+rest of Advent/Lent stays violet, Easter and Christmas resolve white.
+
+A small `LITURGICAL_COLOR_HEX` map (5 entries, one per `LiturgicalColor`)
+renders as a 4px left border on the today/picker-result card. Practical
+values: violet `#5b3a86`, white `#c9a227` (gold-leaning, since a literal
+white border reads as "no accent" against a light background), red
+`#a4302d`, green `#3f6b4a`, rose `#c98a9c`. These sit alongside the existing
+`--color-*` design tokens as a small fixed constant local to the calendrier
+components — they represent real vestment colors, not the page's own accent
+palette, so they intentionally don't route through `--color-accent`.
 
 ## 7. Testing
 
@@ -181,6 +202,10 @@ later.
   years) asserting known fixed points: Easter Sunday's row has
   `season: 'pascal'`, Christ the King's row is present, a known Année-A/B/C
   civil year produces the expected `yearKey`.
+- Unit test `liturgicalColor` specifically on the feasts where getting it
+  wrong would be most visible: Good Friday → `red`, a Gaudete or Laetare
+  Sunday → `rose` (distinct from the neighboring Advent/Lent Sundays →
+  `violet`), Easter Sunday → `white`, a Sunday in Ordinary Time → `green`.
 - Unit test the previous-Sunday fallback function directly: a fixed weekday
   date resolves to the correct prior Sunday's row; a fixed Sunday date
   resolves to itself.
