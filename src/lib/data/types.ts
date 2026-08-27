@@ -808,6 +808,24 @@ export interface CalendrierIndexFile {
 	total_clusters: number;
 }
 
+export interface CalendrierReading {
+	type: 'lecture_1' | 'psaume' | 'lecture_2' | 'evangile';
+	ref: string;
+	titre?: string;
+	intro_lue?: string;
+	contenu: string;
+	refrain_psalmique?: string;
+	ref_refrain?: string;
+	verset_evangile?: string;
+}
+
+export interface CalendrierReadingsFile {
+	[slug: string]: {
+		date: string;
+		lectures: CalendrierReading[];
+	};
+}
+
 // ─── Catéchisme illustré des vérités nécessaires (1897) ────────────────────
 
 export interface CatIllustreImage {

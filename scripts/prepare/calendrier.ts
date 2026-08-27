@@ -55,6 +55,24 @@ export interface CalendrierIndexFile {
 	total_clusters: number;
 }
 
+export interface CalendrierReading {
+	type: 'lecture_1' | 'psaume' | 'lecture_2' | 'evangile';
+	ref: string;
+	titre?: string;
+	intro_lue?: string;
+	contenu: string;
+	refrain_psalmique?: string;
+	ref_refrain?: string;
+	verset_evangile?: string;
+}
+
+export interface CalendrierReadingsFile {
+	[slug: string]: {
+		date: string; // ISO yyyy-mm-dd - the past date AELF was queried with
+		lectures: CalendrierReading[];
+	};
+}
+
 const YEAR_RE = /^ANNEE\s+([ABC])\s*$/;
 const FIXED_MARK_RE = /^AUTRES\s+FÊTES/i;
 const MONTHS = [
