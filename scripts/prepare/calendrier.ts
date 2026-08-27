@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { slugify } from './slug.ts';
+import { buildCalendrierDates, DATE_RANGE_START_YEAR, DATE_RANGE_END_YEAR } from './calendrierDates.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -295,11 +296,11 @@ function parseAll(text: string): ParseResult {
 	return { years, fixed };
 }
 
-export function prepareCalendrier(args: { sourceDir: string; outDir: string }): {
+export async function prepareCalendrier(args: { sourceDir: string; outDir: string }): Promise<{
 	totalFeasts: number;
 	totalClusters: number;
 	totalFixed: number;
-} {
+}> {
 	const { sourceDir, outDir } = args;
 	mkdirSync(outDir, { recursive: true });
 
@@ -307,17 +308,38 @@ export function prepareCalendrier(args: { sourceDir: string; outDir: string }): 
 	const { years, fixed } = parseAll(text);
 
 	const yearKeys: ('a' | 'b' | 'c')[] = ['a', 'b', 'c'];
+	const yearFiles: CalendrierYearFile[] = yearKeys.map((key) => ({ key, feasts: years.get(key) ?? [] }));
+
+	const { rows, colorsBySlug } = await buildCalendrierDates(yearFiles, fixed);
+
+	for (const yf of yearFiles) {
+		for (const feast of yf.feasts) {
+			const color = colorsBySlug.get(feast.slug);
+			if (!color) {
+				throw new Error(
+					`calendrier: no liturgicalColor resolved for "${feast.title}" (${feast.slug}) ` +
+						`across ${DATE_RANGE_START_YEAR}-${DATE_RANGE_END_YEAR}.`
+				);
+			}
+			feast.liturgicalColor = color;
+		}
+	}
+	for (const ff of fixed) {
+		const color = colorsBySlug.get(ff.slug);
+		if (!color) {
+			throw new Error(`calendrier: no liturgicalColor resolved for "${ff.title}" (${ff.slug}).`);
+		}
+		ff.liturgicalColor = color;
+	}
+
 	const yearStats: { key: 'a' | 'b' | 'c'; total_feasts: number; total_clusters: number }[] = [];
 	let totalFeasts = 0;
 	let totalClusters = 0;
-
-	for (const key of yearKeys) {
-		const feasts = years.get(key) ?? [];
-		const file: CalendrierYearFile = { key, feasts };
-		writeFileSync(join(outDir, `annee-${key}.json`), JSON.stringify(file));
-		const yearClusters = feasts.reduce((s, f) => s + f.clusters.length, 0);
-		yearStats.push({ key, total_feasts: feasts.length, total_clusters: yearClusters });
-		totalFeasts += feasts.length;
+	for (const yf of yearFiles) {
+		writeFileSync(join(outDir, `annee-${yf.key}.json`), JSON.stringify(yf));
+		const yearClusters = yf.feasts.reduce((s, f) => s + f.clusters.length, 0);
+		yearStats.push({ key: yf.key, total_feasts: yf.feasts.length, total_clusters: yearClusters });
+		totalFeasts += yf.feasts.length;
 		totalClusters += yearClusters;
 	}
 
@@ -329,6 +351,13 @@ export function prepareCalendrier(args: { sourceDir: string; outDir: string }): 
 		total_clusters: totalClusters + fixedClusters
 	};
 	writeFileSync(join(outDir, 'index.json'), JSON.stringify(index));
+
+	const datesIndex: CalendrierDatesIndexFile = {
+		rangeStart: `${DATE_RANGE_START_YEAR}-01-01`,
+		rangeEnd: `${DATE_RANGE_END_YEAR}-12-31`,
+		rows
+	};
+	writeFileSync(join(outDir, 'dates-index.json'), JSON.stringify(datesIndex));
 
 	return {
 		totalFeasts: totalFeasts + fixed.length,

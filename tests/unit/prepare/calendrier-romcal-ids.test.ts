@@ -7,10 +7,10 @@ import { NAMED_FEAST_ROMCAL_ID } from '../../../scripts/prepare/calendrierRomcal
 import { parseFrenchOrdinal } from '../../../scripts/prepare/calendrierFrenchOrdinal';
 
 describe('NAMED_FEAST_ROMCAL_ID coverage', () => {
-	it('every real feast slug resolves via the id map or the ordinal parser', () => {
+	it('every real feast slug resolves via the id map or the ordinal parser', async () => {
 		const outDir = mkdtempSync(join(tmpdir(), 'calendrier-coverage-'));
 		try {
-			prepareCalendrier({ sourceDir: 'scripts/data-sources/calendrier', outDir });
+			await prepareCalendrier({ sourceDir: 'scripts/data-sources/calendrier', outDir });
 
 			const unresolved: string[] = [];
 			for (const key of ['a', 'b', 'c'] as const) {
