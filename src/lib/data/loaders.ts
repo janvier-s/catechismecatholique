@@ -25,6 +25,7 @@ import type {
 	CalendrierIndexFile,
 	CalendrierYearFile,
 	CalendrierYearKey,
+	CalendrierDatesIndexFile,
 	CatIllustreStructure,
 	CatIllustreChapter,
 	CatIllustreFlatPage,
@@ -670,6 +671,18 @@ export function loadCalendrierYear(
 		calendrierYearCache.set(key, p);
 	}
 	return p;
+}
+
+let calendrierDatesIndexPromise: Promise<CalendrierDatesIndexFile> | null = null;
+
+export function loadCalendrierDatesIndex(fetcher: Fetch = fetch): Promise<CalendrierDatesIndexFile> {
+	if (!calendrierDatesIndexPromise) {
+		calendrierDatesIndexPromise = fetchJson<CalendrierDatesIndexFile>(
+			'/data/calendrier/dates-index.json',
+			fetcher
+		);
+	}
+	return calendrierDatesIndexPromise;
 }
 
 // ─── Catéchisme illustré loaders ───────────────────────────────────────────

@@ -1,7 +1,10 @@
-import { loadCalendrierIndex } from '$lib/data/loaders';
+import { loadCalendrierIndex, loadCalendrierDatesIndex } from '$lib/data/loaders';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
-	const index = await loadCalendrierIndex(fetch);
-	return { index };
+	const [index, datesIndex] = await Promise.all([
+		loadCalendrierIndex(fetch),
+		loadCalendrierDatesIndex(fetch)
+	]);
+	return { index, datesIndex };
 };
