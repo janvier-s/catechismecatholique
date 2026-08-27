@@ -761,6 +761,7 @@ export interface PiusXPetitStructure {
 
 export type CalendrierSeason = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type CalendrierYearKey = 'a' | 'b' | 'c';
+export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
 
 export interface CalendrierCluster {
 	i: number;
@@ -774,6 +775,7 @@ export interface CalendrierFeast {
 	title: string;
 	season: CalendrierSeason;
 	clusters: CalendrierCluster[];
+	liturgicalColor: LiturgicalColor;
 }
 
 export interface CalendrierFixedFeast extends CalendrierFeast {
@@ -784,6 +786,19 @@ export interface CalendrierFixedFeast extends CalendrierFeast {
 export interface CalendrierYearFile {
 	key: CalendrierYearKey;
 	feasts: CalendrierFeast[];
+}
+
+export interface CalendrierDateRow {
+	date: string;
+	slug: string;
+	corpus: 'year' | 'fixed';
+	yearKey?: CalendrierYearKey;
+}
+
+export interface CalendrierDatesIndexFile {
+	rangeStart: string;
+	rangeEnd: string;
+	rows: CalendrierDateRow[];
 }
 
 export interface CalendrierIndexFile {

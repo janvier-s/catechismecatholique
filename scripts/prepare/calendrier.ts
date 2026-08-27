@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { slugify } from './slug.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
+export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
 
 export interface CalendrierCluster {
 	i: number;
@@ -16,6 +17,7 @@ export interface CalendrierFeast {
 	title: string;
 	season: SeasonKey;
 	clusters: CalendrierCluster[];
+	liturgicalColor: LiturgicalColor;
 }
 
 export interface CalendrierFixedFeast extends CalendrierFeast {
@@ -26,6 +28,19 @@ export interface CalendrierFixedFeast extends CalendrierFeast {
 export interface CalendrierYearFile {
 	key: 'a' | 'b' | 'c';
 	feasts: CalendrierFeast[];
+}
+
+export interface CalendrierDateRow {
+	date: string; // ISO yyyy-mm-dd
+	slug: string;
+	corpus: 'year' | 'fixed';
+	yearKey?: 'a' | 'b' | 'c'; // present when corpus === 'year'
+}
+
+export interface CalendrierDatesIndexFile {
+	rangeStart: string; // ISO yyyy-mm-dd
+	rangeEnd: string; // ISO yyyy-mm-dd
+	rows: CalendrierDateRow[];
 }
 
 export interface CalendrierIndexFile {
@@ -244,7 +259,8 @@ function parseAll(text: string): ParseResult {
 				season: 'solennite',
 				clusters: [],
 				date: `${day} ${month}`,
-				month_index: MONTHS.indexOf(month)
+				month_index: MONTHS.indexOf(month),
+				liturgicalColor: 'white' // overwritten in Task 6's join step; never reaches output unchecked
 			};
 			continue;
 		}
@@ -268,7 +284,7 @@ function parseAll(text: string): ParseResult {
 			const season = classifySeason(title);
 			const taken = currentYear ? slugTaken.get(currentYear)! : fixedSlugTaken;
 			const slug = disambiguateSlug(slugify(title), taken);
-			currentFeast = { slug, title, season, clusters: [] };
+			currentFeast = { slug, title, season, clusters: [], liturgicalColor: 'white' }; // see comment above
 			continue;
 		}
 
