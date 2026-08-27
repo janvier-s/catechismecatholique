@@ -1,4 +1,8 @@
-import type { CalendrierFixedFeast, CalendrierReadingsFile, CalendrierYearFile } from './calendrier.ts';
+import type {
+	CalendrierFixedFeast,
+	CalendrierReadingsFile,
+	CalendrierYearFile
+} from './calendrier.ts';
 
 /**
  * Validates that every curated feast/fixed-feast slug has a fetched AELF

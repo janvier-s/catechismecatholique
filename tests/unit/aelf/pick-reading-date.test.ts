@@ -3,11 +3,35 @@ import { pickReadingDate } from '../../../scripts/aelf/pickReadingDate';
 import type { CalendrierDateRow } from '../../../scripts/prepare/calendrier';
 
 const rows: CalendrierDateRow[] = [
-	{ date: '2018-01-14', slug: 'deuxieme-dimanche-du-temps-ordinaire', corpus: 'year', yearKey: 'b' },
-	{ date: '2021-01-17', slug: 'deuxieme-dimanche-du-temps-ordinaire', corpus: 'year', yearKey: 'b' },
-	{ date: '2024-01-14', slug: 'deuxieme-dimanche-du-temps-ordinaire', corpus: 'year', yearKey: 'b' },
-	{ date: '2027-01-17', slug: 'deuxieme-dimanche-du-temps-ordinaire', corpus: 'year', yearKey: 'b' },
-	{ date: '2024-06-29', slug: 'la-solennite-de-saint-pierre-et-saint-paul-apotres', corpus: 'fixed' }
+	{
+		date: '2018-01-14',
+		slug: 'deuxieme-dimanche-du-temps-ordinaire',
+		corpus: 'year',
+		yearKey: 'b'
+	},
+	{
+		date: '2021-01-17',
+		slug: 'deuxieme-dimanche-du-temps-ordinaire',
+		corpus: 'year',
+		yearKey: 'b'
+	},
+	{
+		date: '2024-01-14',
+		slug: 'deuxieme-dimanche-du-temps-ordinaire',
+		corpus: 'year',
+		yearKey: 'b'
+	},
+	{
+		date: '2027-01-17',
+		slug: 'deuxieme-dimanche-du-temps-ordinaire',
+		corpus: 'year',
+		yearKey: 'b'
+	},
+	{
+		date: '2024-06-29',
+		slug: 'la-solennite-de-saint-pierre-et-saint-paul-apotres',
+		corpus: 'fixed'
+	}
 ];
 
 describe('pickReadingDate', () => {
