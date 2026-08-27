@@ -40,7 +40,7 @@ const ORDINAL_WORDS: Record<string, number> = {
 	'trente-troisième': 33
 };
 
-const LEADING_WORD_RE = /^(\S+)\s+dimanche\b/i;
+const LEADING_ORDINAL_RE = /^(.+?)\s+dimanche\b/i;
 
 /**
  * Extracts the leading French ordinal word from a feast title, if the title
@@ -49,8 +49,8 @@ const LEADING_WORD_RE = /^(\S+)\s+dimanche\b/i;
  * matched by id instead, see calendrierRomcalIds.ts).
  */
 export function parseFrenchOrdinal(title: string): number | null {
-	const match = title.match(LEADING_WORD_RE);
+	const match = title.match(LEADING_ORDINAL_RE);
 	if (!match) return null;
-	const word = match[1]!.toLowerCase();
-	return ORDINAL_WORDS[word] ?? null;
+	const ordinal = match[1]!.toLowerCase().replace(/\s+/g, '-');
+	return ORDINAL_WORDS[ordinal] ?? null;
 }
