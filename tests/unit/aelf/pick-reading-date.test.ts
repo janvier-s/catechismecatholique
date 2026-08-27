@@ -31,6 +31,30 @@ const rows: CalendrierDateRow[] = [
 		date: '2024-06-29',
 		slug: 'la-solennite-de-saint-pierre-et-saint-paul-apotres',
 		corpus: 'fixed'
+	},
+	{
+		date: '2019-12-01',
+		slug: 'premier-dimanche-de-lavent',
+		corpus: 'year',
+		yearKey: 'a'
+	},
+	{
+		date: '2022-11-27',
+		slug: 'premier-dimanche-de-lavent',
+		corpus: 'year',
+		yearKey: 'a'
+	},
+	{
+		date: '2020-11-29',
+		slug: 'premier-dimanche-de-lavent',
+		corpus: 'year',
+		yearKey: 'c'
+	},
+	{
+		date: '2023-12-03',
+		slug: 'premier-dimanche-de-lavent',
+		corpus: 'year',
+		yearKey: 'c'
 	}
 ];
 
@@ -60,5 +84,14 @@ describe('pickReadingDate', () => {
 
 	it('returns null for a slug with no rows at all', () => {
 		expect(pickReadingDate(rows, 'unknown-slug', '2026-08-27')).toBeNull();
+	});
+
+	it('when yearKey is given, only considers that cycle rows for a slug shared across cycles', () => {
+		expect(pickReadingDate(rows, 'premier-dimanche-de-lavent', '2026-08-27', 'a')).toBe(
+			'2022-11-27'
+		);
+		expect(pickReadingDate(rows, 'premier-dimanche-de-lavent', '2026-08-27', 'c')).toBe(
+			'2023-12-03'
+		);
 	});
 });

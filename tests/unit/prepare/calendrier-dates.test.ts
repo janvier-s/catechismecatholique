@@ -110,7 +110,7 @@ const immaculee: CalendrierFixedFeast = {
 
 describe('buildCalendrierDates', () => {
 	it('covers the configured range', () => {
-		expect(DATE_RANGE_START_YEAR).toBe(2018);
+		expect(DATE_RANGE_START_YEAR).toBe(2000);
 		expect(DATE_RANGE_END_YEAR).toBe(2035);
 	});
 

@@ -9,7 +9,7 @@ import type {
 import { parseFrenchOrdinal } from './calendrierFrenchOrdinal.ts';
 import { NAMED_FEAST_ROMCAL_ID, SEASON_TO_ROMCAL } from './calendrierRomcalIds.ts';
 
-export const DATE_RANGE_START_YEAR = 2018;
+export const DATE_RANGE_START_YEAR = 2000;
 export const DATE_RANGE_END_YEAR = 2035;
 
 const ROMCAL_COLOR_TO_OURS: Record<string, LiturgicalColor> = {

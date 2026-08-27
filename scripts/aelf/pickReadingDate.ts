@@ -6,14 +6,20 @@ import type { CalendrierDateRow } from '../prepare/calendrier.ts';
  * AELF only serves real content for dates that have already occurred, and
  * Sunday/solemnity readings are locked to the liturgical cycle rather than
  * the civil year, so any past occurrence gives the right reading text.
- * Returns null if the slug has no past occurrence yet.
+ * When `yearKey` is given, only rows from that lectionary cycle are
+ * considered, since the same slug repeats across cycles A/B/C with
+ * genuinely different readings; omit it for fixed feasts, whose rows carry
+ * no `yearKey` at all. Returns null if the slug has no past occurrence yet.
  */
 export function pickReadingDate(
 	rows: CalendrierDateRow[],
 	slug: string,
-	today: string
+	today: string,
+	yearKey?: 'a' | 'b' | 'c'
 ): string | null {
-	const matches = rows.filter((r) => r.slug === slug && r.date <= today);
+	const matches = rows.filter(
+		(r) => r.slug === slug && r.date <= today && (!yearKey || r.yearKey === yearKey)
+	);
 	if (matches.length === 0) return null;
 	return matches.reduce((latest, r) => (r.date > latest ? r.date : latest), matches[0]!.date);
 }

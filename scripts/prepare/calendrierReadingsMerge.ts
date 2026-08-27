@@ -3,6 +3,8 @@ import type {
 	CalendrierReadingsFile,
 	CalendrierYearFile
 } from './calendrier.ts';
+import { readingsKey } from './calendrier.ts';
+import { KNOWN_AELF_ARCHIVE_GAPS } from '../aelf/knownGaps.ts';
 
 /**
  * Validates that every curated feast/fixed-feast slug has a fetched AELF
@@ -21,25 +23,28 @@ export function mergeReadings(
 
 	for (const yf of yearFiles) {
 		for (const feast of yf.feasts) {
-			const entry = readingsFile[feast.slug];
+			const key = readingsKey(feast.slug, yf.key);
+			const entry = readingsFile[key];
 			if (!entry) {
+				if (key in KNOWN_AELF_ARCHIVE_GAPS) continue;
 				throw new Error(
-					`calendrier: no AELF reading resolved for "${feast.title}" (${feast.slug}). ` +
+					`calendrier: no AELF reading resolved for "${feast.title}" (${key}). ` +
 						`Run "npm run fetch-aelf" and commit the updated readings.json.`
 				);
 			}
-			out[feast.slug] = entry;
+			out[key] = entry;
 		}
 	}
 	for (const ff of fixed) {
-		const entry = readingsFile[ff.slug];
+		const key = readingsKey(ff.slug);
+		const entry = readingsFile[key];
 		if (!entry) {
 			throw new Error(
-				`calendrier: no AELF reading resolved for "${ff.title}" (${ff.slug}). ` +
+				`calendrier: no AELF reading resolved for "${ff.title}" (${key}). ` +
 					`Run "npm run fetch-aelf" and commit the updated readings.json.`
 			);
 		}
-		out[ff.slug] = entry;
+		out[key] = entry;
 	}
 
 	return out;

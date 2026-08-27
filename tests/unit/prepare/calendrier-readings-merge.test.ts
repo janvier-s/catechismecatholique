@@ -34,7 +34,7 @@ const fixed: CalendrierFixedFeast[] = [
 ];
 
 const readingsFile: CalendrierReadingsFile = {
-	'deuxieme-dimanche-du-temps-ordinaire': { date: '2024-01-14', lectures: [] },
+	'b:deuxieme-dimanche-du-temps-ordinaire': { date: '2024-01-14', lectures: [] },
 	'la-solennite-de-saint-pierre-et-saint-paul-apotres': { date: '2024-06-29', lectures: [] },
 	'unrelated-slug-not-curated-anymore': { date: '2020-01-01', lectures: [] }
 };
@@ -43,14 +43,14 @@ describe('mergeReadings', () => {
 	it('keeps only the readings the current curated data actually needs', () => {
 		const result = mergeReadings(yearFiles, fixed, readingsFile);
 		expect(Object.keys(result).sort()).toEqual([
-			'deuxieme-dimanche-du-temps-ordinaire',
+			'b:deuxieme-dimanche-du-temps-ordinaire',
 			'la-solennite-de-saint-pierre-et-saint-paul-apotres'
 		]);
 	});
 
 	it('throws, naming the feast, when a curated year feast has no reading', () => {
 		const incomplete: CalendrierReadingsFile = { ...readingsFile };
-		delete incomplete['deuxieme-dimanche-du-temps-ordinaire'];
+		delete incomplete['b:deuxieme-dimanche-du-temps-ordinaire'];
 		expect(() => mergeReadings(yearFiles, fixed, incomplete)).toThrow(
 			/deuxieme-dimanche-du-temps-ordinaire/
 		);

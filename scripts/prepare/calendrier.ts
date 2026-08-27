@@ -6,6 +6,7 @@ import {
 	DATE_RANGE_START_YEAR,
 	DATE_RANGE_END_YEAR
 } from './calendrierDates.ts';
+import { mergeReadings } from './calendrierReadingsMerge.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -71,6 +72,16 @@ export interface CalendrierReadingsFile {
 		date: string; // ISO yyyy-mm-dd - the past date AELF was queried with
 		lectures: CalendrierReading[];
 	};
+}
+
+/**
+ * The key readings.json uses for a feast: bare slug for a fixed feast (no
+ * cycle variation), or "{yearKey}:{slug}" for a annee-scoped Sunday/feast,
+ * since the same slug string repeats across annees A/B/C for most curated
+ * Sundays but each cycle uses a genuinely different Gospel/reading set.
+ */
+export function readingsKey(slug: string, yearKey?: 'a' | 'b' | 'c'): string {
+	return yearKey ? `${yearKey}:${slug}` : slug;
 }
 
 const YEAR_RE = /^ANNEE\s+([ABC])\s*$/;
@@ -357,6 +368,11 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		ff.liturgicalColor = color;
 	}
 
+	const readingsFile: CalendrierReadingsFile = JSON.parse(
+		readFileSync(join(sourceDir, 'readings.json'), 'utf8')
+	);
+	const readings = mergeReadings(yearFiles, fixed, readingsFile);
+
 	const yearStats: { key: 'a' | 'b' | 'c'; total_feasts: number; total_clusters: number }[] = [];
 	let totalFeasts = 0;
 	let totalClusters = 0;
@@ -383,6 +399,8 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		rows
 	};
 	writeFileSync(join(outDir, 'dates-index.json'), JSON.stringify(datesIndex));
+
+	writeFileSync(join(outDir, 'readings.json'), JSON.stringify(readings));
 
 	return {
 		totalFeasts: totalFeasts + fixed.length,
