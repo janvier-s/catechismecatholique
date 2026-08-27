@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import TodayCard from '$lib/components/calendrier/TodayCard.svelte';
+	import DatePickerCard from '$lib/components/calendrier/DatePickerCard.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -54,6 +56,11 @@
 			>
 		</p>
 	</header>
+
+	<div class="today-picker-row">
+		<TodayCard datesIndex={data.datesIndex} fixedFeasts={data.index.fixed_feasts} />
+		<DatePickerCard datesIndex={data.datesIndex} fixedFeasts={data.index.fixed_feasts} />
+	</div>
 
 	<div class="cards" aria-label="Les années liturgiques">
 		{#each YEARS as year, i (year.key)}
@@ -129,6 +136,18 @@
 		font-weight: 500;
 		letter-spacing: 0.08em;
 		color: var(--color-muted);
+	}
+
+	.today-picker-row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.25rem;
+		margin-bottom: 2.5rem;
+	}
+	@media (max-width: 760px) {
+		.today-picker-row {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.cards {
