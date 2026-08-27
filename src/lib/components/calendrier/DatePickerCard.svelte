@@ -68,6 +68,7 @@
 		>
 			<input
 				type="date"
+				aria-label="Chercher une date"
 				bind:value={pickedValue}
 				min={datesIndex.rangeStart}
 				max={datesIndex.rangeEnd}
@@ -76,13 +77,19 @@
 				{loading ? 'Recherche…' : 'Chercher'}
 			</button>
 		</form>
-		{#if resolved?.status === 'no-match'}
-			<p class="status">Aucun dimanche ou grande fête du Catéchisme ne correspond à cette date.</p>
-		{:else if resolved?.status === 'out-of-range'}
-			<p class="status">
-				Cette date sort de la période couverte ({datesIndex.rangeStart} à {datesIndex.rangeEnd}).
-			</p>
-		{/if}
+		<!-- The live region has to outlive the message so the message counts as
+		     an insertion into it, hence a wrapper that renders unconditionally. -->
+		<div aria-live="polite">
+			{#if resolved?.status === 'no-match'}
+				<p class="status">
+					Aucun dimanche ou grande fête du Catéchisme ne correspond à cette date.
+				</p>
+			{:else if resolved?.status === 'out-of-range'}
+				<p class="status">
+					Cette date sort de la période couverte ({datesIndex.rangeStart} à {datesIndex.rangeEnd}).
+				</p>
+			{/if}
+		</div>
 	{/if}
 </div>
 
