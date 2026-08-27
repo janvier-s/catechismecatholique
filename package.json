@@ -17,6 +17,7 @@
 		"prebuild": "tsx scripts/prepare-data.ts",
 		"optimize-logos": "tsx bin/optimize-logos.ts",
 		"fetch-ibp-playlist": "tsx scripts/fetch-ibp-playlist.ts",
+		"fetch-aelf": "tsx scripts/fetch-aelf.ts",
 		"generate-og-image": "node scripts/generate-og-image.mjs",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && npm run check:scripts",
