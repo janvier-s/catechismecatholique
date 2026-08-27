@@ -34,7 +34,10 @@ export function previousSunday(d: Date): Date {
 	return copy;
 }
 
-export function findRow(index: CalendrierDatesIndexFile, isoDate: string): CalendrierDateRow | null {
+export function findRow(
+	index: CalendrierDatesIndexFile,
+	isoDate: string
+): CalendrierDateRow | null {
 	if (isoDate < index.rangeStart || isoDate > index.rangeEnd) return null;
 	return index.rows.find((r) => r.date === isoDate) ?? null;
 }

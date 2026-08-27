@@ -1,7 +1,11 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { slugify } from './slug.ts';
-import { buildCalendrierDates, DATE_RANGE_START_YEAR, DATE_RANGE_END_YEAR } from './calendrierDates.ts';
+import {
+	buildCalendrierDates,
+	DATE_RANGE_START_YEAR,
+	DATE_RANGE_END_YEAR
+} from './calendrierDates.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -308,7 +312,10 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 	const { years, fixed } = parseAll(text);
 
 	const yearKeys: ('a' | 'b' | 'c')[] = ['a', 'b', 'c'];
-	const yearFiles: CalendrierYearFile[] = yearKeys.map((key) => ({ key, feasts: years.get(key) ?? [] }));
+	const yearFiles: CalendrierYearFile[] = yearKeys.map((key) => ({
+		key,
+		feasts: years.get(key) ?? []
+	}));
 
 	const { rows, colorsBySlug } = await buildCalendrierDates(yearFiles, fixed);
 

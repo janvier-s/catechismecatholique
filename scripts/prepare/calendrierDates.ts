@@ -64,7 +64,9 @@ export async function buildCalendrierDates(
 	for (const ff of fixedFeasts) {
 		const namedId = NAMED_FEAST_ROMCAL_ID[ff.slug];
 		if (!namedId) {
-			throw new Error(`calendrier: fixed feast "${ff.title}" (${ff.slug}) has no NAMED_FEAST_ROMCAL_ID entry.`);
+			throw new Error(
+				`calendrier: fixed feast "${ff.title}" (${ff.slug}) has no NAMED_FEAST_ROMCAL_ID entry.`
+			);
 		}
 		matchersBySlug.set(ff.slug, { kind: 'id', id: namedId });
 	}
@@ -113,7 +115,8 @@ export async function buildCalendrierDates(
 			if (!colorsBySlug.has(ff.slug)) {
 				const matcher = matchersBySlug.get(ff.slug)!;
 				const day = matcher.kind === 'id' ? byId.get(matcher.id) : undefined;
-				if (day) colorsBySlug.set(ff.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
+				if (day)
+					colorsBySlug.set(ff.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
 			}
 		}
 	}

@@ -675,7 +675,9 @@ export function loadCalendrierYear(
 
 let calendrierDatesIndexPromise: Promise<CalendrierDatesIndexFile> | null = null;
 
-export function loadCalendrierDatesIndex(fetcher: Fetch = fetch): Promise<CalendrierDatesIndexFile> {
+export function loadCalendrierDatesIndex(
+	fetcher: Fetch = fetch
+): Promise<CalendrierDatesIndexFile> {
 	if (!calendrierDatesIndexPromise) {
 		calendrierDatesIndexPromise = fetchJson<CalendrierDatesIndexFile>(
 			'/data/calendrier/dates-index.json',

@@ -12,9 +12,24 @@ const index: CalendrierDatesIndexFile = {
 	rangeStart: '2024-01-01',
 	rangeEnd: '2024-12-31',
 	rows: [
-		{ date: '2024-01-14', slug: 'deuxieme-dimanche-du-temps-ordinaire', corpus: 'year', yearKey: 'b' },
-		{ date: '2024-03-29', slug: 'vendredi-saint-la-passion-du-seigneur', corpus: 'year', yearKey: 'b' },
-		{ date: '2024-03-31', slug: 'dimanche-de-paques-la-resurrection-du-seigneur', corpus: 'year', yearKey: 'b' }
+		{
+			date: '2024-01-14',
+			slug: 'deuxieme-dimanche-du-temps-ordinaire',
+			corpus: 'year',
+			yearKey: 'b'
+		},
+		{
+			date: '2024-03-29',
+			slug: 'vendredi-saint-la-passion-du-seigneur',
+			corpus: 'year',
+			yearKey: 'b'
+		},
+		{
+			date: '2024-03-31',
+			slug: 'dimanche-de-paques-la-resurrection-du-seigneur',
+			corpus: 'year',
+			yearKey: 'b'
+		}
 	]
 };
 
@@ -77,9 +92,7 @@ describe('resolvePickedDate', () => {
 		const narrowIndex: CalendrierDatesIndexFile = {
 			rangeStart: '2024-01-01',
 			rangeEnd: '2024-12-24',
-			rows: [
-				{ date: '2024-12-22', slug: 'test-sunday', corpus: 'year', yearKey: 'b' }
-			]
+			rows: [{ date: '2024-12-22', slug: 'test-sunday', corpus: 'year', yearKey: 'b' }]
 		};
 		// 2024-12-23 is a Monday, in range, but nextSunday is 2024-12-29, past rangeEnd
 		expect(resolvePickedDate(narrowIndex, new Date(2024, 11, 23))).toEqual({

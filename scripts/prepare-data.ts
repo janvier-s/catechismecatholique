@@ -800,7 +800,10 @@ async function main() {
 	if (existsSync(calendrierSourceDir)) {
 		const calendrierOutDir = join(OUT, 'calendrier');
 		mkdirSync(calendrierOutDir, { recursive: true });
-		const cal = await prepareCalendrier({ sourceDir: calendrierSourceDir, outDir: calendrierOutDir });
+		const cal = await prepareCalendrier({
+			sourceDir: calendrierSourceDir,
+			outDir: calendrierOutDir
+		});
 		endStep(`${cal.totalFeasts} feasts (${cal.totalFixed} fixed), ${cal.totalClusters} clusters`);
 	} else {
 		endStep('source not found — skipped');

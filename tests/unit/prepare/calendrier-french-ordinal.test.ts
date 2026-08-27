@@ -4,7 +4,7 @@ import { parseFrenchOrdinal } from '../../../scripts/prepare/calendrierFrenchOrd
 describe('parseFrenchOrdinal', () => {
 	it('parses simple ordinals', () => {
 		expect(parseFrenchOrdinal('Deuxième Dimanche du Temps Ordinaire')).toBe(2);
-		expect(parseFrenchOrdinal('Premier Dimanche de l\'Avent')).toBe(1);
+		expect(parseFrenchOrdinal("Premier Dimanche de l'Avent")).toBe(1);
 		expect(parseFrenchOrdinal('Cinquième Dimanche de Carême')).toBe(5);
 	});
 
