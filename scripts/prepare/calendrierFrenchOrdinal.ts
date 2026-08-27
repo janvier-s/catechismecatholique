@@ -1,5 +1,5 @@
 // French ordinal words 1-33, lowercase. 33 is the highest that appears in the
-// source data — Ordinary Time week 34 is always the id-mapped Christ the King
+// source data · Ordinary Time week 34 is always the id-mapped Christ the King
 // solemnity (see calendrierRomcalIds.ts), never a plain numbered Sunday.
 const ORDINAL_WORDS: Record<string, number> = {
 	premier: 1,
@@ -45,7 +45,7 @@ const LEADING_WORD_RE = /^(\S+)\s+dimanche\b/i;
 /**
  * Extracts the leading French ordinal word from a feast title, if the title
  * starts with "{ordinal} Dimanche ...". Returns null for titles that don't
- * start that way (named solemnities, Noël, Jeudi Saint, etc. — those are
+ * start that way (named solemnities, Noël, Jeudi Saint, etc. · those are
  * matched by id instead, see calendrierRomcalIds.ts).
  */
 export function parseFrenchOrdinal(title: string): number | null {
