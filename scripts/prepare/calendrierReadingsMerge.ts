@@ -13,6 +13,9 @@ import { KNOWN_AELF_ARCHIVE_GAPS } from '../aelf/knownGaps.ts';
  * doesn't leave a stale entry in the output). Throws, naming the missing
  * feast, rather than silently emitting a partial file - matches this
  * project's established fail-loud convention for build-time data gaps.
+ * The exception: a key listed in `KNOWN_AELF_ARCHIVE_GAPS` is tolerated
+ * absent rather than thrown on, since AELF genuinely has no fetchable date
+ * for it yet.
  */
 export function mergeReadings(
 	yearFiles: CalendrierYearFile[],

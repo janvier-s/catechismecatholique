@@ -63,4 +63,28 @@ describe('mergeReadings', () => {
 			/la-solennite-de-saint-pierre-et-saint-paul-apotres/
 		);
 	});
+
+	it('tolerates a missing reading for a key on the known AELF archive gap allowlist, without throwing or emitting it', () => {
+		const withGap: CalendrierYearFile[] = [
+			{
+				key: 'a',
+				feasts: [
+					{
+						slug: 'neuvieme-dimanche-du-temps-ordinaire',
+						title: 'Neuvième Dimanche du Temps Ordinaire',
+						season: 'ordinaire',
+						clusters: [],
+						liturgicalColor: 'green'
+					}
+				]
+			},
+			...yearFiles
+		];
+		const result = mergeReadings(withGap, fixed, readingsFile);
+		expect(Object.keys(result)).not.toContain('a:neuvieme-dimanche-du-temps-ordinaire');
+		expect(Object.keys(result).sort()).toEqual([
+			'b:deuxieme-dimanche-du-temps-ordinaire',
+			'la-solennite-de-saint-pierre-et-saint-paul-apotres'
+		]);
+	});
 });
