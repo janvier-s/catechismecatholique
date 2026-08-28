@@ -4,7 +4,7 @@ import type {
 	CalendrierYearFile
 } from './calendrier.ts';
 import { readingsKey } from './calendrier.ts';
-import { KNOWN_AELF_ARCHIVE_GAPS } from '../aelf/knownGaps.ts';
+import { KNOWN_AELF_GAPS } from '../aelf/knownGaps.ts';
 
 /**
  * Validates that every curated feast/fixed-feast slug has a fetched AELF
@@ -13,7 +13,7 @@ import { KNOWN_AELF_ARCHIVE_GAPS } from '../aelf/knownGaps.ts';
  * doesn't leave a stale entry in the output). Throws, naming the missing
  * feast, rather than silently emitting a partial file - matches this
  * project's established fail-loud convention for build-time data gaps.
- * The exception: a key listed in `KNOWN_AELF_ARCHIVE_GAPS` is tolerated
+ * The exception: a key listed in `KNOWN_AELF_GAPS` is tolerated
  * absent rather than thrown on, since AELF genuinely has no fetchable date
  * for it yet.
  */
@@ -29,7 +29,7 @@ export function mergeReadings(
 			const key = readingsKey(feast.slug, yf.key);
 			const entry = readingsFile[key];
 			if (!entry) {
-				if (key in KNOWN_AELF_ARCHIVE_GAPS) continue;
+				if (key in KNOWN_AELF_GAPS) continue;
 				throw new Error(
 					`calendrier: no AELF reading resolved for "${feast.title}" (${key}). ` +
 						`Run "npm run fetch-aelf" and commit the updated readings.json.`
@@ -48,6 +48,14 @@ export function mergeReadings(
 			);
 		}
 		out[key] = entry;
+	}
+
+	for (const key of Object.keys(KNOWN_AELF_GAPS)) {
+		if (key in readingsFile) {
+			console.warn(
+				`calendrier: "${key}" is listed in KNOWN_AELF_GAPS but readings.json now has an entry for it - remove it from the allowlist.`
+			);
+		}
 	}
 
 	return out;

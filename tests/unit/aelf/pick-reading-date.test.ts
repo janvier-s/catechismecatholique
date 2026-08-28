@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { pickReadingDate } from '../../../scripts/aelf/pickReadingDate';
+import { pickReadingDate, pickReadingDateCandidates } from '../../../scripts/aelf/pickReadingDate';
 import type { CalendrierDateRow } from '../../../scripts/prepare/calendrier';
 
 const rows: CalendrierDateRow[] = [
@@ -93,5 +93,29 @@ describe('pickReadingDate', () => {
 		expect(pickReadingDate(rows, 'premier-dimanche-de-lavent', '2026-08-27', 'c')).toBe(
 			'2023-12-03'
 		);
+	});
+});
+
+describe('pickReadingDateCandidates', () => {
+	it('returns every past occurrence, most recent first', () => {
+		expect(
+			pickReadingDateCandidates(rows, 'deuxieme-dimanche-du-temps-ordinaire', '2026-08-27', 'b')
+		).toEqual(['2024-01-14', '2021-01-17', '2018-01-14']);
+	});
+
+	it('excludes rows after today', () => {
+		expect(
+			pickReadingDateCandidates(rows, 'deuxieme-dimanche-du-temps-ordinaire', '2022-01-01', 'b')
+		).toEqual(['2021-01-17', '2018-01-14']);
+	});
+
+	it('caps the result at the given limit, keeping the most recent ones', () => {
+		expect(
+			pickReadingDateCandidates(rows, 'deuxieme-dimanche-du-temps-ordinaire', '2026-08-27', 'b', 2)
+		).toEqual(['2024-01-14', '2021-01-17']);
+	});
+
+	it('returns an empty array for a slug with no past occurrence', () => {
+		expect(pickReadingDateCandidates(rows, 'unknown-slug', '2026-08-27')).toEqual([]);
 	});
 });

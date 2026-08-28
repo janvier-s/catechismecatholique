@@ -21,13 +21,53 @@ describe('pickMesse', () => {
 		expect(result.warning).toBeNull();
 	});
 
-	it('falls back to the first messe with a warning when none is named "Messe du jour"', () => {
+	it('matches "jour" case-insensitively, as AELF actually sends it for some feasts', () => {
+		const messes = [
+			{ nom: 'MESSE DE LA VEILLE AU SOIR', lectures: [] },
+			{ nom: 'MESSE DU JOUR', lectures: [] }
+		];
+		const result = pickMesse(messes, 'la-solennite-de-la-pentecote');
+		expect(result.messe.nom).toBe('MESSE DU JOUR');
+		expect(result.warning).toBeNull();
+	});
+
+	it('matches a "jour" variant that is not the exact string "Messe du jour"', () => {
+		const messes = [
+			{ nom: 'VEILLEE PASCALE', lectures: [] },
+			{ nom: 'Messe du jour de Pâques', lectures: [] }
+		];
+		const result = pickMesse(messes, 'dimanche-de-paques-la-resurrection-du-seigneur');
+		expect(result.messe.nom).toBe('Messe du jour de Pâques');
+		expect(result.warning).toBeNull();
+	});
+
+	it('excludes the Chrism Mass and falls back to the evening Mass, with a warning', () => {
+		const messes = [
+			{ nom: 'Messe Chrismale', lectures: [] },
+			{ nom: 'Messe du soir EN MÉMOIRE DE LA CÈNE DU SEIGNEUR', lectures: [] }
+		];
+		const result = pickMesse(messes, 'jeudi-saint-la-cene-du-seigneur');
+		expect(result.messe.nom).toBe('Messe du soir EN MÉMOIRE DE LA CÈNE DU SEIGNEUR');
+		expect(result.warning).toContain('jeudi-saint-la-cene-du-seigneur');
+	});
+
+	it('excludes the Palm procession and falls back to the Passion Mass, with a warning', () => {
+		const messes = [
+			{ nom: 'Procession des Rameaux', lectures: [] },
+			{ nom: 'Messe de la Passion', lectures: [] }
+		];
+		const result = pickMesse(messes, 'dimanche-des-rameaux-et-de-la-passion-du-seigneur');
+		expect(result.messe.nom).toBe('Messe de la Passion');
+		expect(result.warning).toContain('dimanche-des-rameaux-et-de-la-passion-du-seigneur');
+	});
+
+	it('falls back to the last messe with a warning when none is named "Messe du jour" or excludable', () => {
 		const messes = [
 			{ nom: 'Messe A', lectures: [] },
 			{ nom: 'Messe B', lectures: [] }
 		];
 		const result = pickMesse(messes, 'mystery-feast');
-		expect(result.messe.nom).toBe('Messe A');
+		expect(result.messe.nom).toBe('Messe B');
 		expect(result.warning).toContain('mystery-feast');
 		expect(result.warning).toContain('Messe A, Messe B');
 	});

@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { slugify } from './slug.ts';
 import {
@@ -56,19 +56,45 @@ export interface CalendrierIndexFile {
 	total_clusters: number;
 }
 
+/**
+ * `type` is wider than the 4-reading Sunday pattern (lecture_1/psaume/
+ * lecture_2/evangile): multi-part liturgies carry more - the Easter Vigil
+ * alone has lecture_1..lecture_7 interleaved with a psaume or cantique after
+ * each, plus a closing epitre; Pentecost's vigil has a sequence; Palm
+ * Sunday's procession-only entry has entree_messianique instead of any
+ * reading at all. AELF sends `null`, not an absent key, for a reading type
+ * that doesn't apply (e.g. `titre` on a psaume) - hence `| null` throughout
+ * rather than plain optionality.
+ */
 export interface CalendrierReading {
-	type: 'lecture_1' | 'psaume' | 'lecture_2' | 'evangile';
+	type:
+		| 'lecture_1'
+		| 'lecture_2'
+		| 'lecture_3'
+		| 'lecture_4'
+		| 'lecture_5'
+		| 'lecture_6'
+		| 'lecture_7'
+		| 'psaume'
+		| 'cantique'
+		| 'epitre'
+		| 'evangile'
+		| 'sequence'
+		| 'entree_messianique';
 	ref: string;
-	titre?: string;
-	intro_lue?: string;
+	titre?: string | null;
+	intro_lue?: string | null;
 	contenu: string;
-	refrain_psalmique?: string;
-	ref_refrain?: string;
-	verset_evangile?: string;
+	refrain_psalmique?: string | null;
+	ref_refrain?: string | null;
+	ref_verset?: string | null;
+	verset_evangile?: string | null;
 }
 
 export interface CalendrierReadingsFile {
-	[slug: string]: {
+	// Keyed by `readingsKey()`: bare slug for a fixed feast, "{yearKey}:{slug}"
+	// for a annee-scoped Sunday/feast (see `readingsKey`'s own doc comment).
+	[key: string]: {
 		date: string; // ISO yyyy-mm-dd - the past date AELF was queried with
 		lectures: CalendrierReading[];
 	};
@@ -368,9 +394,13 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		ff.liturgicalColor = color;
 	}
 
-	const readingsFile: CalendrierReadingsFile = JSON.parse(
-		readFileSync(join(sourceDir, 'readings.json'), 'utf8')
-	);
+	const readingsPath = join(sourceDir, 'readings.json');
+	if (!existsSync(readingsPath)) {
+		throw new Error(
+			`calendrier: ${readingsPath} does not exist. Run "npm run fetch-aelf" to generate it.`
+		);
+	}
+	const readingsFile: CalendrierReadingsFile = JSON.parse(readFileSync(readingsPath, 'utf8'));
 	const readings = mergeReadings(yearFiles, fixed, readingsFile);
 
 	const yearStats: { key: 'a' | 'b' | 'c'; total_feasts: number; total_clusters: number }[] = [];

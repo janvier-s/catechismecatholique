@@ -1,10 +1,14 @@
-import { describe, it, expect } from 'vitest';
-import { mergeReadings } from '../../../scripts/prepare/calendrierReadingsMerge';
+import { describe, it, expect, vi } from 'vitest';
 import type {
 	CalendrierFixedFeast,
 	CalendrierReadingsFile,
 	CalendrierYearFile
 } from '../../../scripts/prepare/calendrier';
+
+vi.mock('../../../scripts/aelf/knownGaps', () => ({
+	KNOWN_AELF_GAPS: { 'a:neuvieme-dimanche-du-temps-ordinaire': 'test-only gap' }
+}));
+const { mergeReadings } = await import('../../../scripts/prepare/calendrierReadingsMerge');
 
 const yearFiles: CalendrierYearFile[] = [
 	{
@@ -64,7 +68,7 @@ describe('mergeReadings', () => {
 		);
 	});
 
-	it('tolerates a missing reading for a key on the known AELF archive gap allowlist, without throwing or emitting it', () => {
+	it('tolerates a missing reading for a key on the known AELF gap allowlist, without throwing or emitting it', () => {
 		const withGap: CalendrierYearFile[] = [
 			{
 				key: 'a',
@@ -86,5 +90,18 @@ describe('mergeReadings', () => {
 			'b:deuxieme-dimanche-du-temps-ordinaire',
 			'la-solennite-de-saint-pierre-et-saint-paul-apotres'
 		]);
+	});
+
+	it('warns when an allowlisted key now has a reading, so it can be removed from the allowlist', () => {
+		const withResolvedGap: CalendrierReadingsFile = {
+			...readingsFile,
+			'a:neuvieme-dimanche-du-temps-ordinaire': { date: '2029-06-03', lectures: [] }
+		};
+		const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+		mergeReadings(yearFiles, fixed, withResolvedGap);
+		expect(warnSpy).toHaveBeenCalledWith(
+			expect.stringContaining('a:neuvieme-dimanche-du-temps-ordinaire')
+		);
+		warnSpy.mockRestore();
 	});
 });

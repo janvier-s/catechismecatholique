@@ -808,19 +808,43 @@ export interface CalendrierIndexFile {
 	total_clusters: number;
 }
 
+/**
+ * Mirrors `CalendrierReading` in scripts/prepare/calendrier.ts - keep in sync.
+ * `type` is wider than the 4-reading Sunday pattern: the Easter Vigil,
+ * Pentecost's vigil, and Palm Sunday's procession all carry other types.
+ * AELF sends `null`, not an absent key, for a reading type that doesn't
+ * apply - hence `| null` throughout rather than plain optionality.
+ */
 export interface CalendrierReading {
-	type: 'lecture_1' | 'psaume' | 'lecture_2' | 'evangile';
+	type:
+		| 'lecture_1'
+		| 'lecture_2'
+		| 'lecture_3'
+		| 'lecture_4'
+		| 'lecture_5'
+		| 'lecture_6'
+		| 'lecture_7'
+		| 'psaume'
+		| 'cantique'
+		| 'epitre'
+		| 'evangile'
+		| 'sequence'
+		| 'entree_messianique';
 	ref: string;
-	titre?: string;
-	intro_lue?: string;
+	titre?: string | null;
+	intro_lue?: string | null;
 	contenu: string;
-	refrain_psalmique?: string;
-	ref_refrain?: string;
-	verset_evangile?: string;
+	refrain_psalmique?: string | null;
+	ref_refrain?: string | null;
+	ref_verset?: string | null;
+	verset_evangile?: string | null;
 }
 
 export interface CalendrierReadingsFile {
-	[slug: string]: {
+	// Keyed by readingsKey(): bare slug for a fixed feast, "{yearKey}:{slug}"
+	// for a annee-scoped Sunday/feast - the same slug repeats across annees
+	// A/B/C but each cycle's readings genuinely differ.
+	[key: string]: {
 		date: string;
 		lectures: CalendrierReading[];
 	};
