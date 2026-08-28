@@ -11,7 +11,7 @@
 		resolveFeastForRow,
 		type ResolvedDay
 	} from '$lib/utils/calendrierDateLookup';
-	import { LITURGICAL_COLOR_HEX } from './liturgicalColor';
+	import { LITURGICAL_COLOR_VAR } from './liturgicalColor';
 	import FeastBlock from './FeastBlock.svelte';
 
 	let {
@@ -50,7 +50,9 @@
 
 <div
 	class="today-card"
-	style:border-left-color={feast ? LITURGICAL_COLOR_HEX[feast.liturgicalColor] : undefined}
+	style:border-left-color={feast
+		? `var(${LITURGICAL_COLOR_VAR[feast.liturgicalColor]})`
+		: undefined}
 >
 	<!-- Announcing only the kicker line, not the whole FeastBlock, keeps the
 	     live region from reading out every cluster on resolution. The wrapper

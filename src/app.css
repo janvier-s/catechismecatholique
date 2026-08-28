@@ -189,6 +189,15 @@
 		--z-dropdown: 60;
 		--z-floating: 65;
 		--z-modal: 70;
+
+		/* Liturgical season/feast colours (calendrier) · tuned brighter than
+		   the dark-theme set below so they read as clear accents on the cream
+		   background instead of muddy dark blobs. */
+		--liturgical-violet: #7d52b3;
+		--liturgical-white: #b8860b;
+		--liturgical-red: #c2483f;
+		--liturgical-green: #4f8c63;
+		--liturgical-rose: #d68fa6;
 	}
 
 	[data-theme='sepia'] {
@@ -201,6 +210,12 @@
 		--color-accent-text: #c15050;
 		--color-border: #d8c8b0;
 		--color-bg-glass: rgba(242, 232, 216, 0.94);
+
+		--liturgical-violet: #7d52b3;
+		--liturgical-white: #b8860b;
+		--liturgical-red: #c2483f;
+		--liturgical-green: #4f8c63;
+		--liturgical-rose: #d68fa6;
 	}
 
 	[data-theme='dark'] {
@@ -214,6 +229,12 @@
 		--color-border: #2e2b32;
 		--color-bg-glass: rgba(17, 17, 19, 0.94);
 		--color-heading: #c5bbb0;
+
+		--liturgical-violet: #5b3a86;
+		--liturgical-white: #c9a227;
+		--liturgical-red: #a4302d;
+		--liturgical-green: #3f6b4a;
+		--liturgical-rose: #c98a9c;
 	}
 
 	[data-theme='oled'] {
@@ -227,6 +248,12 @@
 		--color-border: #1f1f1f;
 		--color-bg-glass: rgba(0, 0, 0, 0.96);
 		--color-heading: #a8a4b0;
+
+		--liturgical-violet: #5b3a86;
+		--liturgical-white: #c9a227;
+		--liturgical-red: #a4302d;
+		--liturgical-green: #3f6b4a;
+		--liturgical-rose: #c98a9c;
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -241,6 +268,12 @@
 			--color-border: #2e2b32;
 			--color-bg-glass: rgba(17, 17, 19, 0.94);
 			--color-heading: #c5bbb0;
+
+			--liturgical-violet: #5b3a86;
+			--liturgical-white: #c9a227;
+			--liturgical-red: #a4302d;
+			--liturgical-green: #3f6b4a;
+			--liturgical-rose: #c98a9c;
 		}
 	}
 
