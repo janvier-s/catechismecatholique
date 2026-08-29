@@ -1,12 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { prepareCalendrier } from '../../../scripts/prepare/calendrier';
 import { NAMED_FEAST_ROMCAL_ID } from '../../../scripts/prepare/calendrierRomcalIds';
 import { parseFrenchOrdinal } from '../../../scripts/prepare/calendrierFrenchOrdinal';
 
-describe('NAMED_FEAST_ROMCAL_ID coverage', () => {
+// CCC_Liturgy_List.txt is gitignored (not checked in) and thus absent in CI.
+// TODO: remove this guard once the source file is committed or fetched in CI.
+const sourceFile = join('scripts/data-sources/calendrier', 'CCC_Liturgy_List.txt');
+
+describe.skipIf(!existsSync(sourceFile))('NAMED_FEAST_ROMCAL_ID coverage', () => {
 	it('every real feast slug resolves via the id map or the ordinal parser', async () => {
 		const outDir = mkdtempSync(join(tmpdir(), 'calendrier-coverage-'));
 		try {
