@@ -13,9 +13,7 @@ describe('readingsKey', () => {
 
 describe('readingsFilename', () => {
 	it('replaces the colon in a year-scoped key with a double dash', () => {
-		expect(readingsFilename('a:premier-dimanche-de-lavent')).toBe(
-			'a--premier-dimanche-de-lavent'
-		);
+		expect(readingsFilename('a:premier-dimanche-de-lavent')).toBe('a--premier-dimanche-de-lavent');
 	});
 
 	it('leaves a bare fixed-feast slug unchanged', () => {

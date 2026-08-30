@@ -193,7 +193,9 @@ describe('loadCalendrierReading', () => {
 			});
 		}) as unknown as typeof fetch;
 		const { loadCalendrierReading } = await import('$lib/data/loaders');
-		await expect(loadCalendrierReading('la-solennite-de-noel', undefined, fetcher)).rejects.toThrow();
+		await expect(
+			loadCalendrierReading('la-solennite-de-noel', undefined, fetcher)
+		).rejects.toThrow();
 		const entry = await loadCalendrierReading('la-solennite-de-noel', undefined, fetcher);
 		expect(entry?.date).toBe('2026-01-01');
 	});
