@@ -26,6 +26,7 @@ import type {
 	CalendrierYearFile,
 	CalendrierYearKey,
 	CalendrierDatesIndexFile,
+	CalendrierReadingsEntry,
 	CatIllustreStructure,
 	CatIllustreChapter,
 	CatIllustreFlatPage,
@@ -62,6 +63,8 @@ import type {
 	CcaLesson,
 	BonPasteurPlaylist
 } from './types';
+
+import { readingsKey, readingsFilename } from './calendrierReadingsKey';
 
 type Fetch = typeof fetch;
 
@@ -669,6 +672,39 @@ export function loadCalendrierYear(
 	if (!p) {
 		p = fetchJson<CalendrierYearFile>(`/data/calendrier/annee-${key}.json`, fetcher);
 		calendrierYearCache.set(key, p);
+	}
+	return p;
+}
+
+const calendrierReadingCache = new Map<string, Promise<CalendrierReadingsEntry | null>>();
+
+/**
+ * Lazily fetch one feast's Mass reading text. Resolves null when the feast
+ * is one of the known AELF gaps (its file was never written, so the request
+ * 404s) - that is expected data, not a failure. Any other fetch failure
+ * rejects and drops the cache entry so a retry isn't stuck replaying the
+ * same rejection, mirroring loadNclBook's cache-and-drop-on-rejection.
+ */
+export function loadCalendrierReading(
+	slug: string,
+	yearKey?: CalendrierYearKey,
+	fetcher: Fetch = fetch
+): Promise<CalendrierReadingsEntry | null> {
+	const key = readingsKey(slug, yearKey);
+	let p = calendrierReadingCache.get(key);
+	if (!p) {
+		p = (async () => {
+			const res = await fetcher(`/data/calendrier/readings/${readingsFilename(key)}.json`);
+			if (res.status === 404) return null;
+			if (!res.ok) {
+				throw new Error(`calendrier: failed to load reading for "${key}": ${res.status}`);
+			}
+			return (await res.json()) as CalendrierReadingsEntry;
+		})().catch((e) => {
+			calendrierReadingCache.delete(key);
+			throw e;
+		});
+		calendrierReadingCache.set(key, p);
 	}
 	return p;
 }
