@@ -1,5 +1,10 @@
 <script lang="ts">
-	import type { CalendrierFeast, CalendrierFixedFeast, CalendrierSeason, CalendrierYearKey } from '$lib/data/types';
+	import type {
+		CalendrierFeast,
+		CalendrierFixedFeast,
+		CalendrierSeason,
+		CalendrierYearKey
+	} from '$lib/data/types';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { prefs } from '$lib/stores/prefs';
 	import { getFontById } from '$lib/data/fonts';
