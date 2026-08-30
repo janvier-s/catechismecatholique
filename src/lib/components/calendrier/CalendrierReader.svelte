@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CalendrierFeast, CalendrierFixedFeast, CalendrierSeason } from '$lib/data/types';
+	import type { CalendrierFeast, CalendrierFixedFeast, CalendrierSeason, CalendrierYearKey } from '$lib/data/types';
 	import { scrollSpy } from '$lib/utils/scrollSpy';
 	import { prefs } from '$lib/stores/prefs';
 	import { getFontById } from '$lib/data/fonts';
@@ -10,13 +10,15 @@
 		title,
 		kicker,
 		showSeasonGroups = false,
-		showDates = false
+		showDates = false,
+		yearKey
 	}: {
 		feasts: (CalendrierFeast | CalendrierFixedFeast)[];
 		title: string;
 		kicker?: string;
 		showSeasonGroups?: boolean;
 		showDates?: boolean;
+		yearKey?: CalendrierYearKey;
 	} = $props();
 
 	const readerFont = $derived(getFontById($prefs.fontFamily));
@@ -69,13 +71,13 @@
 			<section class="season" aria-labelledby="season-{group.key}">
 				<h3 class="season-heading" id="season-{group.key}">{group.label}</h3>
 				{#each group.feasts as feast (feast.slug)}
-					<FeastBlock {feast} {showDates} />
+					<FeastBlock {feast} {showDates} {yearKey} />
 				{/each}
 			</section>
 		{/each}
 	{:else}
 		{#each feasts as feast (feast.slug)}
-			<FeastBlock {feast} {showDates} />
+			<FeastBlock {feast} {showDates} {yearKey} />
 		{/each}
 	{/if}
 </main>

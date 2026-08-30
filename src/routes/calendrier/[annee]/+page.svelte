@@ -15,4 +15,5 @@
 	kicker={data.kicker}
 	showSeasonGroups={data.mode === 'year'}
 	showDates={data.mode === 'fixed'}
+	yearKey={data.mode === 'year' ? data.yearKey : undefined}
 />
