@@ -840,14 +840,16 @@ export interface CalendrierReading {
 	verset_evangile?: string | null;
 }
 
+export interface CalendrierReadingsEntry {
+	date: string;
+	lectures: CalendrierReading[];
+}
+
 export interface CalendrierReadingsFile {
 	// Keyed by readingsKey(): bare slug for a fixed feast, "{yearKey}:{slug}"
 	// for a annee-scoped Sunday/feast - the same slug repeats across annees
 	// A/B/C but each cycle's readings genuinely differ.
-	[key: string]: {
-		date: string;
-		lectures: CalendrierReading[];
-	};
+	[key: string]: CalendrierReadingsEntry;
 }
 
 // ─── Catéchisme illustré des vérités nécessaires (1897) ────────────────────

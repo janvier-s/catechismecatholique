@@ -58,7 +58,7 @@
 			<p class="kicker">Résultat</p>
 			<button type="button" class="reset-btn" onclick={reset}>Chercher une autre date</button>
 		</div>
-		<FeastBlock {feast} />
+		<FeastBlock {feast} yearKey={resolved?.row.yearKey} />
 	{:else}
 		<p class="kicker">Chercher une date</p>
 		<form

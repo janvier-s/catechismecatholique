@@ -110,6 +110,15 @@ export function readingsKey(slug: string, yearKey?: 'a' | 'b' | 'c'): string {
 	return yearKey ? `${yearKey}:${slug}` : slug;
 }
 
+/**
+ * Maps a readingsKey() value to a filesystem/URL-safe filename - a colon
+ * isn't a great character for either. Mirrored in
+ * src/lib/data/calendrierReadingsKey.ts for the frontend loader.
+ */
+export function readingsFilename(key: string): string {
+	return key.replace(':', '--');
+}
+
 const YEAR_RE = /^ANNEE\s+([ABC])\s*$/;
 const FIXED_MARK_RE = /^AUTRES\s+FÊTES/i;
 const MONTHS = [
@@ -430,7 +439,11 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 	};
 	writeFileSync(join(outDir, 'dates-index.json'), JSON.stringify(datesIndex));
 
-	writeFileSync(join(outDir, 'readings.json'), JSON.stringify(readings));
+	const readingsDir = join(outDir, 'readings');
+	mkdirSync(readingsDir, { recursive: true });
+	for (const [key, entry] of Object.entries(readings)) {
+		writeFileSync(join(readingsDir, `${readingsFilename(key)}.json`), JSON.stringify(entry));
+	}
 
 	return {
 		totalFeasts: totalFeasts + fixed.length,

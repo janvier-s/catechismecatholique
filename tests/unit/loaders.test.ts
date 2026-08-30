@@ -154,3 +154,49 @@ describe('ncl manifest loaders do not cache a rejection', () => {
 		expect(manifest.has('JHN')).toBe(true);
 	});
 });
+
+describe('loadCalendrierReading', () => {
+	it('resolves the fetched entry on success', async () => {
+		const fetcher = vi.fn(() =>
+			Promise.resolve({
+				ok: true,
+				status: 200,
+				json: async () => ({ date: '2025-11-30', lectures: [] })
+			})
+		) as unknown as typeof fetch;
+		const { loadCalendrierReading } = await import('$lib/data/loaders');
+		const entry = await loadCalendrierReading('premier-dimanche-de-lavent', 'a', fetcher);
+		expect(entry?.date).toBe('2025-11-30');
+		expect(fetcher).toHaveBeenCalledWith(
+			'/data/calendrier/readings/a--premier-dimanche-de-lavent.json'
+		);
+	});
+
+	it('resolves to null on a 404 (a known AELF gap)', async () => {
+		const fetcher = vi.fn(() =>
+			Promise.resolve({ ok: false, status: 404 })
+		) as unknown as typeof fetch;
+		const { loadCalendrierReading } = await import('$lib/data/loaders');
+		const entry = await loadCalendrierReading('second-dimanche-apres-noel', 'a', fetcher);
+		expect(entry).toBeNull();
+	});
+
+	it('rejects on a non-404 failure and does not cache the rejection', async () => {
+		let calls = 0;
+		const fetcher = vi.fn(() => {
+			calls++;
+			if (calls === 1) return Promise.resolve({ ok: false, status: 500 });
+			return Promise.resolve({
+				ok: true,
+				status: 200,
+				json: async () => ({ date: '2026-01-01', lectures: [] })
+			});
+		}) as unknown as typeof fetch;
+		const { loadCalendrierReading } = await import('$lib/data/loaders');
+		await expect(
+			loadCalendrierReading('la-solennite-de-noel', undefined, fetcher)
+		).rejects.toThrow();
+		const entry = await loadCalendrierReading('la-solennite-de-noel', undefined, fetcher);
+		expect(entry?.date).toBe('2026-01-01');
+	});
+});
