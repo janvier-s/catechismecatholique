@@ -75,13 +75,13 @@
 		{#each seasonGroups as group (group.key)}
 			<section class="season" aria-labelledby="season-{group.key}">
 				<h3 class="season-heading" id="season-{group.key}">{group.label}</h3>
-				{#each group.feasts as feast (feast.slug)}
+				{#each group.feasts as feast (`${yearKey ?? 'fixed'}-${feast.slug}`)}
 					<FeastBlock {feast} {showDates} {yearKey} />
 				{/each}
 			</section>
 		{/each}
 	{:else}
-		{#each feasts as feast (feast.slug)}
+		{#each feasts as feast (`${yearKey ?? 'fixed'}-${feast.slug}`)}
 			<FeastBlock {feast} {showDates} {yearKey} />
 		{/each}
 	{/if}

@@ -20,7 +20,8 @@
 	} = $props();
 
 	let readingsExpanded = $state(false);
-	let readingsState: 'idle' | 'loading' | 'unavailable' | CalendrierReadingsEntry = $state('idle');
+	let readingsState: 'idle' | 'loading' | 'unavailable' | 'error' | CalendrierReadingsEntry =
+		$state('idle');
 
 	const READING_LABELS: Record<string, string> = {
 		lecture_1: 'Première lecture',
@@ -33,13 +34,13 @@
 
 	async function toggleReadings() {
 		readingsExpanded = !readingsExpanded;
-		if (!readingsExpanded || readingsState !== 'idle') return;
+		if (!readingsExpanded || (readingsState !== 'idle' && readingsState !== 'error')) return;
 		readingsState = 'loading';
 		try {
 			const entry = await loadCalendrierReading(feast.slug, yearKey);
 			readingsState = entry ?? 'unavailable';
 		} catch {
-			readingsState = 'unavailable';
+			readingsState = 'error';
 		}
 	}
 
@@ -110,22 +111,26 @@
 	</header>
 
 	<section class="readings">
-		<button
-			type="button"
-			class="readings-toggle"
-			class:is-open={readingsExpanded}
-			onclick={toggleReadings}
-			aria-expanded={readingsExpanded}
-		>
-			<span class="caret" aria-hidden="true">{readingsExpanded ? '▾' : '▸'}</span>
-			<span class="readings-label">Lectures du jour</span>
-		</button>
+		<h3 class="cluster-heading">
+			<button
+				type="button"
+				class="readings-toggle"
+				class:is-open={readingsExpanded}
+				onclick={toggleReadings}
+				aria-expanded={readingsExpanded}
+			>
+				<span class="caret" aria-hidden="true">{readingsExpanded ? '▾' : '▸'}</span>
+				<span class="readings-label">Lectures du jour</span>
+			</button>
+		</h3>
 		{#if readingsExpanded}
 			<div class="readings-body">
 				{#if readingsState === 'loading'}
 					<p class="loading">Chargement…</p>
 				{:else if readingsState === 'unavailable'}
 					<p class="status">Lectures indisponibles pour cette fête.</p>
+				{:else if readingsState === 'error'}
+					<p class="status">Impossible de charger les lectures. Réessayez.</p>
 				{:else if readingsState !== 'idle'}
 					{#each readingsState.lectures as lecture, i (i)}
 						<article class="reading">
@@ -343,7 +348,7 @@
 	.reading-refrain,
 	.reading-verset {
 		font-style: italic;
-		font-size: 0.92rem;
+		font-size: var(--reader-font-size, 17px);
 		color: var(--color-muted);
 		margin: 0 0 0.5rem;
 	}
@@ -355,8 +360,8 @@
 		color: var(--color-accent);
 	}
 	.reading-contenu {
-		font-size: 0.97rem;
-		line-height: 1.65;
+		font-size: var(--reader-font-size, 17px);
+		line-height: var(--reader-line-height, 1.6);
 		color: var(--color-fg);
 	}
 
