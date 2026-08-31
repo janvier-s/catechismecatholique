@@ -59,3 +59,4 @@ scripts/data-sources/*
 # Lighthouse HTML reports
 catechismecatholique.fr_*.report.html
 static/audio/cec/
+.worktrees/
