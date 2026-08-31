@@ -101,7 +101,7 @@ describe('mergeReadings', () => {
 				weekOfSeason: 2,
 				dayOfWeek: 1,
 				cycle: 'II',
-				representativeDate: '2026-01-12'
+				candidates: [{ date: '2026-01-12', rank: 'WEEKDAY' }]
 			}
 		];
 		const readingsWithWeekday: CalendrierReadingsFile = {
@@ -124,7 +124,7 @@ describe('mergeReadings', () => {
 				weekOfSeason: 2,
 				dayOfWeek: 1,
 				cycle: 'II',
-				representativeDate: '2026-01-12'
+				candidates: [{ date: '2026-01-12', rank: 'WEEKDAY' }]
 			},
 			{
 				slug: 'ordinaire-3-mardi',
@@ -132,7 +132,7 @@ describe('mergeReadings', () => {
 				weekOfSeason: 3,
 				dayOfWeek: 2,
 				cycle: 'I',
-				representativeDate: '2025-01-21'
+				candidates: [{ date: '2025-01-21', rank: 'WEEKDAY' }]
 			}
 		];
 		const readingsWithWeekday: CalendrierReadingsFile = {

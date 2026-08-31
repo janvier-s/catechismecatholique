@@ -3728,17 +3728,24 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "II. Le nom du Seigneur prononcé à faux",
-					"refs": "2150-2153",
+					"theme": "Les mystères de la vie cachée de Jésus",
+					"refs": "531, 534",
 					"paragraphs": [
-						2150,
-						2151,
-						2152,
-						2153
+						531,
+						534
 					]
 				},
 				{
 					"i": 1,
+					"theme": "L’âme et la connaissance humaine du Christ",
+					"refs": "471-472",
+					"paragraphs": [
+						471,
+						472
+					]
+				},
+				{
+					"i": 2,
 					"theme": "IV. L’activité économique et la justice sociale",
 					"refs": "2427",
 					"paragraphs": [
@@ -3746,11 +3753,27 @@
 					]
 				},
 				{
-					"i": 2,
-					"theme": "I. Vivre dans la vérité",
-					"refs": "2466",
+					"i": 3,
+					"theme": "II. Jésus et le Temple",
+					"refs": "583",
 					"paragraphs": [
-						2466
+						583
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Jésus prie",
+					"refs": "2599",
+					"paragraphs": [
+						2599
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les traits communs des mystères de Jésus",
+					"refs": "517",
+					"paragraphs": [
+						517
 					]
 				}
 			]
@@ -6068,18 +6091,40 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "Élie, les prophètes et la conversion du cœur",
-					"refs": "2584",
+					"theme": "La vie de prière",
+					"refs": "2709-2731",
 					"paragraphs": [
-						2584
+						2709,
+						2710,
+						2711,
+						2712,
+						2713,
+						2714,
+						2715,
+						2716,
+						2717,
+						2718,
+						2719,
+						2720,
+						2721,
+						2722,
+						2723,
+						2724,
+						2725,
+						2726,
+						2727,
+						2728,
+						2729,
+						2730,
+						2731
 					]
 				},
 				{
 					"i": 1,
-					"theme": "L’annonce du Royaume de Dieu",
-					"refs": "546",
+					"theme": "Élie, les prophètes et la conversion du cœur",
+					"refs": "2584",
 					"paragraphs": [
-						546
+						2584
 					]
 				}
 			]
@@ -6473,6 +6518,26 @@
 					"refs": "2610",
 					"paragraphs": [
 						2610
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-18-samedi",
+			"title": "Samedi de la 18e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La prière de l’Heure de Jésus",
+					"refs": "2752-2756",
+					"paragraphs": [
+						2752,
+						2753,
+						2754,
+						2755,
+						2756
 					]
 				}
 			]
@@ -9529,23 +9594,13 @@
 			]
 		},
 		{
-			"slug": "ordinaire-26-mercredi",
-			"title": "Mercredi de la 26e semaine du Temps Ordinaire",
+			"slug": "ordinaire-26-mardi",
+			"title": "Mardi de la 26e semaine du Temps Ordinaire",
 			"season": "ordinaire",
 			"liturgicalColor": "green",
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "« Je crois à la sainte Église catholique »",
-					"refs": "914-916",
-					"paragraphs": [
-						914,
-						915,
-						916
-					]
-				},
-				{
-					"i": 1,
 					"theme": "La providence et le scandale du mal",
 					"refs": "309",
 					"paragraphs": [
@@ -9553,7 +9608,7 @@
 					]
 				},
 				{
-					"i": 2,
+					"i": 1,
 					"theme": "IV. L’homme au Paradis",
 					"refs": "385",
 					"paragraphs": [
@@ -9561,7 +9616,7 @@
 					]
 				},
 				{
-					"i": 3,
+					"i": 2,
 					"theme": "Le malade devant Dieu",
 					"refs": "1502",
 					"paragraphs": [
@@ -9569,11 +9624,77 @@
 					]
 				},
 				{
-					"i": 4,
-					"theme": "La vie de prière",
-					"refs": "2828",
+					"i": 3,
+					"theme": "« Je crois à la vie éternelle »",
+					"refs": "1020",
 					"paragraphs": [
+						1020
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "633",
+					"paragraphs": [
+						633
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La montée de Jésus à Jérusalem",
+					"refs": "557",
+					"paragraphs": [
+						557
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-26-mercredi",
+			"title": "Mercredi de la 26e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2785, 2828",
+					"paragraphs": [
+						2785,
 						2828
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "328-329",
+					"paragraphs": [
+						328,
+						329
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La providence et le scandale du mal",
+					"refs": "309",
+					"paragraphs": [
+						309
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. L’homme au Paradis",
+					"refs": "385",
+					"paragraphs": [
+						385
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le malade devant Dieu",
+					"refs": "1502",
+					"paragraphs": [
+						1502
 					]
 				},
 				{
@@ -9586,10 +9707,10 @@
 				},
 				{
 					"i": 6,
-					"theme": "L’annonce du Royaume de Dieu",
-					"refs": "544",
+					"theme": "Le mystère de Noël",
+					"refs": "526",
 					"paragraphs": [
-						544
+						526
 					]
 				}
 			]
@@ -11129,58 +11250,67 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "David et la prière du roi",
-					"refs": "2578",
+					"theme": "Le sacrement de l’ordre",
+					"refs": "1573-1577",
 					"paragraphs": [
-						2578
+						1573,
+						1574,
+						1575,
+						1576,
+						1577
 					]
 				},
 				{
 					"i": 1,
-					"theme": "Les Psaumes, prière de l’Assemblée",
-					"refs": "2594",
+					"theme": "I. Les sacrements du Christ",
+					"refs": "1114-1116",
 					"paragraphs": [
-						2594
+						1114,
+						1115,
+						1116
 					]
 				},
 				{
 					"i": 2,
-					"theme": "II. Christ",
-					"refs": "437",
+					"theme": "Devoirs des parents",
+					"refs": "2224-2226",
 					"paragraphs": [
-						437
+						2224,
+						2225,
+						2226
 					]
 				},
 				{
 					"i": 3,
-					"theme": "L’entrée messianique de Jésus à Jérusalem",
-					"refs": "559",
+					"theme": "L’ordination épiscopale – plénitude du sacrement de l’Ordre",
+					"refs": "1556, 1558",
 					"paragraphs": [
-						559
+						1556,
+						1558
 					]
 				},
 				{
 					"i": 4,
-					"theme": "Les signes du Royaume de Dieu",
-					"refs": "548",
+					"theme": "I. La vie de l’homme – connaître et aimer Dieu",
+					"refs": "2",
 					"paragraphs": [
-						548
+						2
 					]
 				},
 				{
 					"i": 5,
-					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
-					"refs": "574",
+					"theme": "IV. le jugement erroné",
+					"refs": "1794",
 					"paragraphs": [
-						574
+						1794
 					]
 				},
 				{
 					"i": 6,
-					"theme": "La Tentation de Jésus",
-					"refs": "539",
+					"theme": "Devoirs des enfants",
+					"refs": "2220",
 					"paragraphs": [
-						539
+						2220
 					]
 				}
 			]
@@ -15460,6 +15590,78 @@
 					"refs": "2473",
 					"paragraphs": [
 						2473
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-9-vendredi",
+			"title": "Vendredi de la 9e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Inspiration et vérité de la Sainte Écriture",
+					"refs": "105-108",
+					"paragraphs": [
+						105,
+						106,
+						107,
+						108
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La sainte écriture",
+					"refs": "120-123",
+					"paragraphs": [
+						120,
+						121,
+						122,
+						123
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’unité de l’Ancien et du Nouveau Testament",
+					"refs": "128-130",
+					"paragraphs": [
+						128,
+						129,
+						130
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "852",
+					"paragraphs": [
+						852
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. La diversité des péchés",
+					"refs": "1852",
+					"paragraphs": [
+						1852
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2847",
+					"paragraphs": [
+						2847
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. « Je crois en un seul Dieu »",
+					"refs": "202",
+					"paragraphs": [
+						202
 					]
 				}
 			]

@@ -1,13 +1,28 @@
 import { Romcal } from 'romcal';
 import type { SeasonKey } from './calendrier.ts';
 
+export interface WeekdayCandidate {
+	date: string;
+	rank: 'WEEKDAY' | 'MEMORIAL' | 'OPTIONAL_MEMORIAL';
+}
+
 export interface WeekdayTarget {
 	slug: string;
 	season: SeasonKey;
 	weekOfSeason: number;
 	dayOfWeek: number;
 	cycle: 'I' | 'II';
-	representativeDate: string;
+	/** Every real occurrence of this (season, week, weekday, cycle) combo at
+	 *  or before `today`, most recent first - AELF's archive only reaches
+	 *  back a few years, and a plain weekday occurrence of a given combo can
+	 *  be scarce (Advent is 4 weeks long, cut short again by the date-proper
+	 *  boundary at 17 December), so the fetcher needs more than one date to
+	 *  try. A memorial/optional memorial keeps the weekday's own Mass
+	 *  readings unless it has proper readings of its own; whether a specific
+	 *  occurrence did isn't knowable from romcal alone, so the fetcher
+	 *  verifies via AELF's own response before accepting one (see
+	 *  fetch-aelf.ts). */
+	candidates: WeekdayCandidate[];
 }
 
 export const FRENCH_WEEKDAY: Record<number, string> = {
@@ -49,18 +64,17 @@ export function isDateProperWeekday(season: SeasonKey, date: string): boolean {
 
 /**
  * Enumerates every distinct (season, weekOfSeason, dayOfWeek, weekdayCycle)
- * combination a plain ferial weekday can be, across [startYear, endYear],
- * keeping the most recent occurrence at or before `today` as the
- * representative date to fetch AELF text for. A weekday displaced by a
- * memorial/feast/solemnity has `rank !== Ranks.Weekday` that year and is
- * skipped for that year only - another year supplies the representative
- * date instead, same principle the Sunday pipeline already relies on for
- * displaced numbered Sundays.
+ * combination a ferial weekday, memorial, or optional memorial can be,
+ * across [startYear, endYear], collecting every occurrence at or before
+ * `today` as a fetch candidate (most recent first - see WeekdayTarget). A
+ * weekday displaced by a FEAST/SOLEMNITY/SUNDAY has `rank` outside that set
+ * that year and is skipped for that year only, same principle the Sunday
+ * pipeline already relies on for displaced numbered Sundays.
  *
  * `Ranks` is a type-only export in romcal's TypeScript declarations, not a
  * runtime value (romcal's own `index.d.ts` declares it with `declare enum`
- * but the built JS module doesn't export it), so the comparison below uses
- * the string literal directly - the same pattern `calendrierDates.ts` uses
+ * but the built JS module doesn't export it), so the comparisons below use
+ * the string literals directly - the same pattern `calendrierDates.ts` uses
  * for `d.rank !== 'SUNDAY'`.
  */
 export async function buildWeekdayTargets(
@@ -75,7 +89,9 @@ export async function buildWeekdayTargets(
 		const days = Object.values(calendar).map((arr) => arr[0]!);
 
 		for (const day of days) {
-			if (day.rank !== 'WEEKDAY') continue;
+			if (day.rank !== 'WEEKDAY' && day.rank !== 'MEMORIAL' && day.rank !== 'OPTIONAL_MEMORIAL') {
+				continue;
+			}
 			if (day.date > today) continue;
 
 			const dayOfWeek = day.calendar.dayOfWeek;
@@ -91,21 +107,18 @@ export async function buildWeekdayTargets(
 			const slug = weekdaySlug(season, weekOfSeason, dayOfWeek);
 			const key = `${slug}:${cycle}`;
 
-			const existing = bySlugCycle.get(key);
-			if (!existing || day.date > existing.representativeDate) {
-				bySlugCycle.set(key, {
-					slug,
-					season,
-					weekOfSeason,
-					dayOfWeek,
-					cycle,
-					representativeDate: day.date
-				});
+			let target = bySlugCycle.get(key);
+			if (!target) {
+				target = { slug, season, weekOfSeason, dayOfWeek, cycle, candidates: [] };
+				bySlugCycle.set(key, target);
 			}
+			target.candidates.push({ date: day.date, rank: day.rank });
 		}
 	}
 
-	return [...bySlugCycle.values()].sort(
-		(a, b) => a.slug.localeCompare(b.slug) || a.cycle.localeCompare(b.cycle)
-	);
+	const targets = [...bySlugCycle.values()];
+	for (const target of targets) {
+		target.candidates.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+	}
+	return targets.sort((a, b) => a.slug.localeCompare(b.slug) || a.cycle.localeCompare(b.cycle));
 }

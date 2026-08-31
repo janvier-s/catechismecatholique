@@ -18,15 +18,27 @@ describe('isDateProperWeekday', () => {
 });
 
 describe('buildWeekdayTargets', () => {
-	it('enumerates distinct weekday+cycle combinations with a past representative date', async () => {
+	it('enumerates distinct weekday+cycle combinations with at least one past candidate date', async () => {
 		const targets = await buildWeekdayTargets(2023, 2024, '2024-12-31');
 		expect(targets.length).toBeGreaterThan(0);
 		for (const t of targets) {
-			expect(t.representativeDate.slice(0, 10) <= '2024-12-31').toBe(true);
+			expect(t.candidates.length).toBeGreaterThan(0);
+			for (const c of t.candidates) {
+				expect(c.date <= '2024-12-31').toBe(true);
+				expect(['WEEKDAY', 'MEMORIAL', 'OPTIONAL_MEMORIAL']).toContain(c.rank);
+			}
 			expect(['I', 'II']).toContain(t.cycle);
 			expect(t.dayOfWeek).toBeGreaterThanOrEqual(1);
 			expect(t.dayOfWeek).toBeLessThanOrEqual(6);
 		}
+	});
+
+	it('orders candidates most recent first', async () => {
+		const targets = await buildWeekdayTargets(2020, 2024, '2024-12-31');
+		const multi = targets.find((t) => t.candidates.length > 1);
+		expect(multi).toBeDefined();
+		const dates = multi!.candidates.map((c) => c.date);
+		expect(dates).toEqual([...dates].sort().reverse());
 	});
 
 	it('produces a stable, human-readable slug shape', async () => {
@@ -44,7 +56,7 @@ describe('buildWeekdayTargets', () => {
 		const targets = await buildWeekdayTargets(2023, 2024, '2024-12-31');
 		expect(targets.some((t) => t.season === 'noel')).toBe(false);
 		const lateAdvent = targets.filter(
-			(t) => t.season === 'avent' && t.representativeDate.slice(5, 10) >= '12-17'
+			(t) => t.season === 'avent' && t.candidates.some((c) => c.date.slice(5, 10) >= '12-17')
 		);
 		expect(lateAdvent).toEqual([]);
 		// The week-proper part of Advent is still enumerated.
@@ -54,7 +66,17 @@ describe('buildWeekdayTargets', () => {
 	it('respects the today cutoff', async () => {
 		const targets = await buildWeekdayTargets(2023, 2024, '2023-06-01');
 		for (const t of targets) {
-			expect(t.representativeDate.slice(0, 10) <= '2023-06-01').toBe(true);
+			for (const c of t.candidates) {
+				expect(c.date <= '2023-06-01').toBe(true);
+			}
 		}
+	});
+
+	it('accepts memorial and optional-memorial occurrences as candidates too, not just plain weekdays', async () => {
+		const targets = await buildWeekdayTargets(2020, 2026, '2026-08-31');
+		const anyNonWeekdayCandidate = targets.some((t) =>
+			t.candidates.some((c) => c.rank !== 'WEEKDAY')
+		);
+		expect(anyNonWeekdayCandidate).toBe(true);
 	});
 });

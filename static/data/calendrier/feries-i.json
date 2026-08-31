@@ -3787,70 +3787,42 @@
 				{
 					"i": 0,
 					"theme": "III. La Loi nouvelle ou Loi évangélique",
-					"refs": "1965-1972",
+					"refs": "1967-1968",
 					"paragraphs": [
-						1965,
-						1966,
 						1967,
-						1968,
-						1969,
-						1970,
-						1971,
-						1972
+						1968
 					]
 				},
 				{
 					"i": 1,
-					"theme": "L’Ancien Testament",
-					"refs": "121-123",
+					"theme": "Dieu élit Abraham",
+					"refs": "60",
 					"paragraphs": [
-						121,
-						122,
-						123
+						60
 					]
 				},
 				{
 					"i": 2,
-					"theme": "L’unité de l’Ancien et du Nouveau Testament",
-					"refs": "128-130",
+					"theme": "I. Jésus et la Loi",
+					"refs": "577",
 					"paragraphs": [
-						128,
-						129,
-						130
+						577
 					]
 				},
 				{
 					"i": 3,
-					"theme": "V. La Sainte Écriture dans la vie de l’Église",
-					"refs": "133-135",
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "592",
 					"paragraphs": [
-						133,
-						134,
-						135
+						592
 					]
 				},
 				{
 					"i": 4,
-					"theme": "La providence et les causes secondes",
-					"refs": "307",
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "2053",
 					"paragraphs": [
-						307
-					]
-				},
-				{
-					"i": 5,
-					"theme": "L’Esprit Saint – le Don de Dieu",
-					"refs": "736",
-					"paragraphs": [
-						736
-					]
-				},
-				{
-					"i": 6,
-					"theme": "La mission des apôtres",
-					"refs": "859",
-					"paragraphs": [
-						859
+						2053
 					]
 				}
 			]
@@ -4789,6 +4761,24 @@
 			"clusters": [
 				{
 					"i": 0,
+					"theme": "Les mystères de la vie cachée de Jésus",
+					"refs": "531, 534",
+					"paragraphs": [
+						531,
+						534
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’âme et la connaissance humaine du Christ",
+					"refs": "471-472",
+					"paragraphs": [
+						471,
+						472
+					]
+				},
+				{
+					"i": 2,
 					"theme": "Marie – « Bienheureuse celle qui a cru »",
 					"refs": "148",
 					"paragraphs": [
@@ -4796,7 +4786,7 @@
 					]
 				},
 				{
-					"i": 1,
+					"i": 3,
 					"theme": "IV. Les œuvres divines et les missions trinitaires",
 					"refs": "276",
 					"paragraphs": [
@@ -4804,7 +4794,7 @@
 					]
 				},
 				{
-					"i": 2,
+					"i": 4,
 					"theme": "Le Christ « avec tous ses anges »",
 					"refs": "332",
 					"paragraphs": [
@@ -4812,7 +4802,7 @@
 					]
 				},
 				{
-					"i": 3,
+					"i": 5,
 					"theme": "La prédestination de Marie",
 					"refs": "489",
 					"paragraphs": [
@@ -4820,27 +4810,11 @@
 					]
 				},
 				{
-					"i": 4,
+					"i": 6,
 					"theme": "L’Esprit de la promesse",
 					"refs": "706",
 					"paragraphs": [
 						706
-					]
-				},
-				{
-					"i": 5,
-					"theme": "La Promesse et la prière de la foi",
-					"refs": "2571",
-					"paragraphs": [
-						2571
-					]
-				},
-				{
-					"i": 6,
-					"theme": "« Prenez et mangez en tous » : la communion",
-					"refs": "1386",
-					"paragraphs": [
-						1386
 					]
 				}
 			]
@@ -6929,6 +6903,36 @@
 			"clusters": [
 				{
 					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2709-2731",
+					"paragraphs": [
+						2709,
+						2710,
+						2711,
+						2712,
+						2713,
+						2714,
+						2715,
+						2716,
+						2717,
+						2718,
+						2719,
+						2720,
+						2721,
+						2722,
+						2723,
+						2724,
+						2725,
+						2726,
+						2727,
+						2728,
+						2729,
+						2730,
+						2731
+					]
+				},
+				{
+					"i": 1,
 					"theme": "Moïse et la prière du médiateur",
 					"refs": "2574-2577",
 					"paragraphs": [
@@ -6939,7 +6943,7 @@
 					]
 				},
 				{
-					"i": 1,
+					"i": 2,
 					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
 					"refs": "328-329",
 					"paragraphs": [
@@ -6948,7 +6952,7 @@
 					]
 				},
 				{
-					"i": 2,
+					"i": 3,
 					"theme": "La réponse de l’homme à Dieu",
 					"refs": "142",
 					"paragraphs": [
@@ -6956,7 +6960,7 @@
 					]
 				},
 				{
-					"i": 3,
+					"i": 4,
 					"theme": "V. Dieu réalise son dessein : la divine providence",
 					"refs": "304",
 					"paragraphs": [
@@ -6964,19 +6968,11 @@
 					]
 				},
 				{
-					"i": 4,
+					"i": 5,
 					"theme": "V. La prière de louange",
 					"refs": "2645",
 					"paragraphs": [
 						2645
-					]
-				},
-				{
-					"i": 5,
-					"theme": "II. L’Église est sainte",
-					"refs": "827",
-					"paragraphs": [
-						827
 					]
 				}
 			]
@@ -10068,6 +10064,15 @@
 			"clusters": [
 				{
 					"i": 0,
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "328-329",
+					"paragraphs": [
+						328,
+						329
+					]
+				},
+				{
+					"i": 1,
 					"theme": "III. La Loi nouvelle ou Loi évangélique",
 					"refs": "1980",
 					"paragraphs": [
@@ -10075,43 +10080,100 @@
 					]
 				},
 				{
-					"i": 1,
-					"theme": "L’Église – instituée par le Christ Jésus",
-					"refs": "765",
-					"paragraphs": [
-						765
-					]
-				},
-				{
 					"i": 2,
-					"theme": "Les traits caractéristiques des sacramentaux",
-					"refs": "1668",
+					"theme": "Le mystère de Noël",
+					"refs": "526",
 					"paragraphs": [
-						1668
+						526
 					]
 				},
 				{
 					"i": 3,
-					"theme": "Jésus enseigne à prier",
-					"refs": "2611",
+					"theme": "La vie de prière",
+					"refs": "2785",
 					"paragraphs": [
-						2611
+						2785
 					]
 				},
 				{
 					"i": 4,
-					"theme": "II. Les commandements de l’Église",
-					"refs": "2043",
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2284",
 					"paragraphs": [
-						2043
+						2284
 					]
 				},
 				{
 					"i": 5,
-					"theme": "L’irréligion",
-					"refs": "2122",
+					"theme": "Les anges dans la vie de l’Église",
+					"refs": "336",
 					"paragraphs": [
-						2122
+						336
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-26-lundi",
+			"title": "Lundi de la 26e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "328-329",
+					"paragraphs": [
+						328,
+						329
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Hors de l’Église point de salut »",
+					"refs": "846",
+					"paragraphs": [
+						846
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les vertus et la grâce",
+					"refs": "1811",
+					"paragraphs": [
+						1811
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Dieu seul EST",
+					"refs": "212",
+					"paragraphs": [
+						212
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le mystère de Noël",
+					"refs": "526",
+					"paragraphs": [
+						526
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2785",
+					"paragraphs": [
+						2785
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2284",
+					"paragraphs": [
+						2284
 					]
 				}
 			]
@@ -10144,6 +10206,40 @@
 					"refs": "557",
 					"paragraphs": [
 						557
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-26-mercredi",
+			"title": "Mercredi de la 26e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "914-916",
+					"paragraphs": [
+						914,
+						915,
+						916
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "544",
+					"paragraphs": [
+						544
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Devoirs des enfants",
+					"refs": "2215",
+					"paragraphs": [
+						2215
 					]
 				}
 			]
@@ -15348,6 +15444,74 @@
 			]
 		},
 		{
+			"slug": "ordinaire-8-mercredi",
+			"title": "Mercredi de la 8e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "En la personne du Christ-Tête (In persona Christi Capitis)...",
+					"refs": "1548-1551",
+					"paragraphs": [
+						1548,
+						1549,
+						1550,
+						1551
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La célébration sacramentelle du mystère pascal",
+					"refs": "1135-1136",
+					"paragraphs": [
+						1135,
+						1136
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Fils unique de Dieu",
+					"refs": "441",
+					"paragraphs": [
+						441
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’âme et la connaissance humaine du Christ",
+					"refs": "474",
+					"paragraphs": [
+						474
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La montée de Jésus à Jérusalem",
+					"refs": "557",
+					"paragraphs": [
+						557
+					]
+				},
+				{
+					"i": 5,
+					"theme": "II. La Résurrection – œuvre de la Sainte Trinité",
+					"refs": "649",
+					"paragraphs": [
+						649
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "994",
+					"paragraphs": [
+						994
+					]
+				}
+			]
+		},
+		{
 			"slug": "ordinaire-8-samedi",
 			"title": "Samedi de la 8e semaine du Temps Ordinaire",
 			"season": "ordinaire",
@@ -15480,6 +15644,25 @@
 					"refs": "2196",
 					"paragraphs": [
 						2196
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-9-lundi",
+			"title": "Lundi de la 9e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La providence et le scandale du mal",
+					"refs": "311-313, 324",
+					"paragraphs": [
+						311,
+						312,
+						313,
+						324
 					]
 				}
 			]

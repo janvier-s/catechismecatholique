@@ -235,83 +235,98 @@ for (const { slug, yearKey } of targets) {
 const weekdayTargets = await buildWeekdayTargets(DATE_RANGE_START_YEAR, DATE_RANGE_END_YEAR, today);
 
 /**
- * Weekday targets are ~632 extra live requests on top of the Sunday pass, so a
+ * Weekday targets are ~600 extra live requests on top of the Sunday pass, so a
  * single blip must not cost the whole run: `failures` is fatal (it exits
  * before anything is written), which would discard the Sunday data too.
  * Transport-level trouble (network error, 5xx, unparseable body) is retried
- * with a short backoff. A weekday target has only one candidate date (no
- * fallback the way the Sunday loop's multi-candidate retry has), so a non-5xx
- * failure - typically AELF answering 404 because it has no archived content
- * for that specific past date - is a permanent, un-fixable-by-retry gap for
- * this one target, not evidence the target itself is wrong. Both cases are
- * therefore only warned about and the target is left out of this run, picked
- * up by a later one. `pickMesse` throwing (the response came back ok but had
- * no usable messe) is the one case still recorded as a real failure, since
- * that points at an actual bug in our own matching logic, not a data gap.
+ * with a short backoff on the same date; a non-5xx failure (typically 404,
+ * AELF has no archived content for that specific past date) moves on to the
+ * target's next candidate date instead. A candidate whose rank isn't
+ * WEEKDAY might have proper readings rather than the ferial ones - verified
+ * via AELF's own `informations.jour_liturgique_nom`, which reads exactly
+ * "de la férie" when the readings really are the weekday's own. Only once
+ * every candidate is exhausted does the target become skippable, picked up
+ * by a later run once more years enter the covered date range. `pickMesse`
+ * throwing (the response came back ok but had no usable messe) is the one
+ * case still recorded as a real failure, since that points at an actual bug
+ * in our own matching logic, not a data gap.
  */
 const WEEKDAY_ATTEMPTS = 3;
 const WEEKDAY_RETRY_BACKOFF_MS = 1000;
 const skippedWeekdays: string[] = [];
 
-for (const { slug, cycle, representativeDate } of weekdayTargets) {
+for (const { slug, cycle, candidates } of weekdayTargets) {
 	const key = readingsKey(slug, cycle);
-	let body: AelfResponseBody | null = null;
-	let lastTransientReason = '';
+	const attempted: string[] = [];
+	let matchedDate: string | null = null;
+	let matchedBody: AelfResponseBody | null = null;
+	let lastReason = '';
 
-	const attempts = AELF_CACHE_DIR ? 1 : WEEKDAY_ATTEMPTS;
-	for (let attempt = 1; attempt <= attempts; attempt++) {
-		if (attempt > 1) await sleep(WEEKDAY_RETRY_BACKOFF_MS * (attempt - 1));
-		let res: AelfFetchResult;
-		try {
-			res = await aelfFetch(representativeDate, ZONE);
-		} catch {
-			lastTransientReason = `network error fetching ${representativeDate}`;
-			if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
-			continue;
-		}
-		if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
-		if (!res.ok) {
-			if (!AELF_CACHE_DIR && res.status >= 500) {
-				lastTransientReason = `AELF returned ${res.status} for ${representativeDate}`;
+	for (const candidate of candidates) {
+		attempted.push(candidate.date);
+		let body: AelfResponseBody | null = null;
+
+		const attempts = AELF_CACHE_DIR ? 1 : WEEKDAY_ATTEMPTS;
+		for (let attempt = 1; attempt <= attempts; attempt++) {
+			if (attempt > 1) await sleep(WEEKDAY_RETRY_BACKOFF_MS * (attempt - 1));
+			let res: AelfFetchResult;
+			try {
+				res = await aelfFetch(candidate.date, ZONE);
+			} catch {
+				lastReason = `network error fetching ${candidate.date}`;
+				if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
 				continue;
 			}
-			// Unlike the Sunday loop, a weekday target has exactly one candidate
-			// date (romcal already picked an unambiguous representative
-			// occurrence) - a non-5xx failure here (typically 404, AELF simply
-			// has no archived content for that specific past date) is therefore
-			// a permanent, un-fixable-by-retry gap for this target, not evidence
-			// that the target itself is wrong. Treat it as skippable, the same
-			// as any other unresolved weekday target, rather than aborting the
-			// whole run the way a genuine Sunday mismatch would.
-			lastTransientReason = AELF_CACHE_DIR
-				? `not in local cache for ${representativeDate}`
-				: `AELF returned ${res.status} for ${representativeDate}`;
+			if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
+			if (!res.ok) {
+				if (!AELF_CACHE_DIR && res.status >= 500) {
+					lastReason = `AELF returned ${res.status} for ${candidate.date}`;
+					continue;
+				}
+				lastReason = AELF_CACHE_DIR
+					? `not in local cache for ${candidate.date}`
+					: `AELF returned ${res.status} for ${candidate.date}`;
+				break;
+			}
+			try {
+				body = (await res.json()) as AelfResponseBody;
+			} catch {
+				lastReason = `unparseable AELF response for ${candidate.date}`;
+				continue;
+			}
 			break;
 		}
-		try {
-			body = (await res.json()) as AelfResponseBody;
-		} catch {
-			lastTransientReason = `unparseable AELF response for ${representativeDate}`;
-			continue;
+
+		if (!body) continue; // exhausted retries for this date - try the next candidate
+
+		if (candidate.rank !== 'WEEKDAY') {
+			const aelfName = (body.informations?.jour_liturgique_nom ?? '').trim();
+			if (aelfName !== 'de la férie') {
+				lastReason = `${candidate.date} (${candidate.rank}) had proper readings, not ferial (AELF: "${aelfName || 'unknown'}")`;
+				continue;
+			}
 		}
+
+		matchedDate = candidate.date;
+		matchedBody = body;
 		break;
 	}
 
-	if (!body) {
+	if (!matchedDate || !matchedBody) {
 		// Carry the previous run's text over rather than silently dropping a key
 		// the output file already had · the whole file is rewritten from scratch.
 		const previous = existingReadings[key];
 		if (previous) output[key] = previous;
 		skippedWeekdays.push(
-			`${key}: ${lastTransientReason}${previous ? ' (kept the previous run’s text)' : ''}`
+			`${key}: tried ${attempted.join(', ')}${lastReason ? ` (${lastReason})` : ''}${previous ? ' · kept the previous run’s text' : ''}`
 		);
 		continue;
 	}
 
 	try {
-		const { messe, warning } = pickMesse(body.messes ?? [], key);
+		const { messe, warning } = pickMesse(matchedBody.messes ?? [], key);
 		if (warning) console.warn(warning);
-		output[key] = { date: representativeDate, lectures: messe.lectures };
+		output[key] = { date: matchedDate, lectures: messe.lectures };
 	} catch (err) {
 		failures.push((err as Error).message);
 	}
