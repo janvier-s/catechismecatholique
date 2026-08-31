@@ -41,6 +41,8 @@
 	];
 
 	const totalThemes = $derived(data.index.total_clusters);
+	const rangeStartYear = $derived(data.datesIndex.rangeStart.slice(0, 4));
+	const rangeEndYear = $derived(data.datesIndex.rangeEnd.slice(0, 4));
 </script>
 
 <svelte:head>
@@ -56,9 +58,10 @@
 		<p class="hero-kicker">Calendrier liturgique romain</p>
 		<h1 class="hero-title">Lire le Catéchisme<br />au fil de l'année</h1>
 		<p class="hero-lede">
-			Les paragraphes du Catéchisme à méditer pour chaque jour du calendrier romain.
+			Les paragraphes du Catéchisme pour chaque jour du calendrier liturgique.
 			<br /><span class="hero-stat"
-				>{data.index.total_feasts} fêtes · {totalThemes} thèmes de référence</span
+				>{data.index.total_feasts} fêtes · {totalThemes} thèmes de référence · {data.totalParagraphs}
+				paragraphes du Catéchisme cités · {data.totalDates} dates couvertes ({rangeStartYear}-{rangeEndYear})</span
 			>
 		</p>
 	</header>
