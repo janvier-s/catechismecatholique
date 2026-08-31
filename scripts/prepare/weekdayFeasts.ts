@@ -32,6 +32,22 @@ export function weekdaySlug(season: SeasonKey, weekOfSeason: number, dayOfWeek: 
 }
 
 /**
+ * True for weekdays whose readings the Roman lectionary assigns by calendar
+ * date rather than by position in a week · from 17 December (the O Antiphons)
+ * to the end of Christmas Time. Our `{season}-{weekOfSeason}-{dayOfWeek}`
+ * identity cannot express those: two different real dates that romcal both
+ * labels "Tuesday of the 3rd week of Advent" carry entirely different Mass
+ * readings there, so one representative date's text would be confidently wrong
+ * on every other date sharing the slug. We skip them rather than guess · both
+ * when enumerating fetch targets and when emitting dates-index rows, which must
+ * stay in lockstep.
+ */
+export function isDateProperWeekday(season: SeasonKey, date: string): boolean {
+	if (season === 'noel') return true;
+	return season === 'avent' && date.slice(5, 10) >= '12-17';
+}
+
+/**
  * Enumerates every distinct (season, weekOfSeason, dayOfWeek, weekdayCycle)
  * combination a plain ferial weekday can be, across [startYear, endYear],
  * keeping the most recent occurrence at or before `today` as the
@@ -69,6 +85,7 @@ export async function buildWeekdayTargets(
 			const romcalSeason = day.seasons[0];
 			const season = romcalSeason ? ROMCAL_SEASON_TO_OURS[romcalSeason] : undefined;
 			if (!season) continue;
+			if (isDateProperWeekday(season, day.date)) continue;
 
 			const cycle: 'I' | 'II' = day.cycles.weekdayCycle === 'YEAR_1' ? 'I' : 'II';
 			const slug = weekdaySlug(season, weekOfSeason, dayOfWeek);

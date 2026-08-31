@@ -240,4 +240,36 @@ describe('buildCalendrierDates', () => {
 			expect(r.yearKey).toBeUndefined();
 		}
 	});
+
+	it('emits no weekday row for a combo missing from the target list', async () => {
+		// prepareCalendrier filters weekdayTargets down to the combos that have a
+		// real readings.json entry, so a combo absent from the list must produce
+		// no row · otherwise the dates index points at a feast with no data.
+		const all = await buildWeekdayTargets(2024, 2024, '2024-12-31');
+		const dropped = all.find((t) => /^ordinaire-\d+-lundi$/.test(t.slug))!;
+		expect(dropped).toBeDefined();
+		const kept = all.find((t) => t.slug !== dropped.slug || t.cycle !== dropped.cycle)!;
+
+		const { rows } = await buildCalendrierDates(
+			[],
+			[],
+			all.filter((t) => !(t.slug === dropped.slug && t.cycle === dropped.cycle))
+		);
+		const weekdayRows = rows.filter((r) => r.corpus === 'weekday');
+		expect(weekdayRows.some((r) => r.slug === dropped.slug && r.cycle === dropped.cycle)).toBe(
+			false
+		);
+		expect(weekdayRows.some((r) => r.slug === kept.slug && r.cycle === kept.cycle)).toBe(true);
+	});
+
+	it('emits no weekday rows for Christmas Time or Advent from 17 December', async () => {
+		const weekdayTargets = await buildWeekdayTargets(2024, 2024, '2024-12-31');
+		const { rows } = await buildCalendrierDates([], [], weekdayTargets);
+		const weekdayRows = rows.filter((r) => r.corpus === 'weekday');
+		expect(weekdayRows.some((r) => r.slug.startsWith('noel-'))).toBe(false);
+		const lateAdvent = weekdayRows.filter(
+			(r) => r.slug.startsWith('avent-') && r.date.slice(5, 10) >= '12-17'
+		);
+		expect(lateAdvent).toEqual([]);
+	});
 }, 30000); // the full 18-year range takes a few seconds

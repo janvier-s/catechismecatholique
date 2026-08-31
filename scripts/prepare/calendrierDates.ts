@@ -8,7 +8,12 @@ import type {
 } from './calendrier.ts';
 import { parseFrenchOrdinal } from './calendrierFrenchOrdinal.ts';
 import { NAMED_FEAST_ROMCAL_ID, SEASON_TO_ROMCAL } from './calendrierRomcalIds.ts';
-import { ROMCAL_SEASON_TO_OURS, weekdaySlug, type WeekdayTarget } from './weekdayFeasts.ts';
+import {
+	isDateProperWeekday,
+	ROMCAL_SEASON_TO_OURS,
+	weekdaySlug,
+	type WeekdayTarget
+} from './weekdayFeasts.ts';
 
 export const DATE_RANGE_START_YEAR = 2000;
 export const DATE_RANGE_END_YEAR = 2035;
@@ -158,6 +163,9 @@ export async function buildCalendrierDates(
 			const romcalSeason = day.seasons[0];
 			const season = romcalSeason ? ROMCAL_SEASON_TO_OURS[romcalSeason] : undefined;
 			if (!season) continue;
+			// Kept in lockstep with buildWeekdayTargets · a date excluded there
+			// must never get a row here either.
+			if (isDateProperWeekday(season, day.date)) continue;
 			const cycle: 'I' | 'II' = day.cycles.weekdayCycle === 'YEAR_1' ? 'I' : 'II';
 			const slug = weekdaySlug(season, weekOfSeason, dayOfWeek);
 			if (!weekdayBySlugCycle.has(`${slug}:${cycle}`)) continue; // no fetched reading for this combo

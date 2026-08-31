@@ -1,5 +1,21 @@
 import { describe, it, expect } from 'vitest';
-import { buildWeekdayTargets } from '../../../scripts/prepare/weekdayFeasts';
+import { buildWeekdayTargets, isDateProperWeekday } from '../../../scripts/prepare/weekdayFeasts';
+
+describe('isDateProperWeekday', () => {
+	it('excludes all of Christmas Time and Advent from 17 December', () => {
+		expect(isDateProperWeekday('noel', '2024-01-03')).toBe(true);
+		expect(isDateProperWeekday('avent', '2024-12-17')).toBe(true);
+		expect(isDateProperWeekday('avent', '2024-12-23')).toBe(true);
+	});
+
+	it('keeps the week-proper seasons and early Advent', () => {
+		expect(isDateProperWeekday('avent', '2024-12-16')).toBe(false);
+		expect(isDateProperWeekday('avent', '2024-12-02')).toBe(false);
+		expect(isDateProperWeekday('ordinaire', '2024-07-01')).toBe(false);
+		expect(isDateProperWeekday('careme', '2024-03-05')).toBe(false);
+		expect(isDateProperWeekday('pascal', '2024-04-09')).toBe(false);
+	});
+});
 
 describe('buildWeekdayTargets', () => {
 	it('enumerates distinct weekday+cycle combinations with a past representative date', async () => {
@@ -22,6 +38,17 @@ describe('buildWeekdayTargets', () => {
 	it('never produces a Sunday slug', async () => {
 		const targets = await buildWeekdayTargets(2023, 2024, '2024-12-31');
 		expect(targets.some((t) => t.slug.endsWith('-dimanche'))).toBe(false);
+	});
+
+	it('produces no targets for Christmas Time or Advent from 17 December', async () => {
+		const targets = await buildWeekdayTargets(2023, 2024, '2024-12-31');
+		expect(targets.some((t) => t.season === 'noel')).toBe(false);
+		const lateAdvent = targets.filter(
+			(t) => t.season === 'avent' && t.representativeDate.slice(5, 10) >= '12-17'
+		);
+		expect(lateAdvent).toEqual([]);
+		// The week-proper part of Advent is still enumerated.
+		expect(targets.some((t) => t.season === 'avent')).toBe(true);
 	});
 
 	it('respects the today cutoff', async () => {
