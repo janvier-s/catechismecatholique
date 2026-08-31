@@ -32,6 +32,7 @@ import { buildWeekdayTargets } from './prepare/weekdayFeasts.ts';
 import { pickReadingDateCandidates } from './aelf/pickReadingDate.ts';
 import { pickMesse, type AelfMesse } from './aelf/pickMesse.ts';
 import { KNOWN_AELF_GAPS } from './aelf/knownGaps.ts';
+import { MANUAL_WEEKDAY_READINGS } from './aelf/manualWeekdayReadings.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(HERE, '..', 'static', 'data', 'calendrier');
@@ -257,6 +258,10 @@ const skippedWeekdays: string[] = [];
 
 for (const { slug, cycle, candidates } of weekdayTargets) {
 	const key = readingsKey(slug, cycle);
+	if (key in MANUAL_WEEKDAY_READINGS) {
+		output[key] = MANUAL_WEEKDAY_READINGS[key]!;
+		continue;
+	}
 	const attempted: string[] = [];
 	let matchedDate: string | null = null;
 	let matchedBody: AelfResponseBody | null = null;

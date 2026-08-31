@@ -720,6 +720,57 @@
 			]
 		},
 		{
+			"slug": "avent-3-vendredi",
+			"title": "Vendredi de la 3e semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Des lieux favorables à la prière",
+					"refs": "2691-2693, 2696",
+					"paragraphs": [
+						2691,
+						2692,
+						2693,
+						2696
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Jésus et la Loi",
+					"refs": "582",
+					"paragraphs": [
+						582
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jean, Précurseur, Prophète et Baptiste",
+					"refs": "719",
+					"paragraphs": [
+						719
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2824",
+					"paragraphs": [
+						2824
+					]
+				}
+			]
+		},
+		{
 			"slug": "careme-0-jeudi",
 			"title": "Jeudi de la 0e semaine de Carême",
 			"season": "careme",
