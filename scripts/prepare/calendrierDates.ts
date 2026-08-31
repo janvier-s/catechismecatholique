@@ -96,6 +96,17 @@ export async function buildCalendrierDates(
 
 	const weekdayBySlugCycle = new Map(weekdayTargets.map((t) => [`${t.slug}:${t.cycle}`, t]));
 
+	// A curated fixed/year feast pinned to a specific romcal id (Candlemas,
+	// Assumption, Christ Roi, …) already gets its own row from the loops
+	// above. Most such ids only ever surface as a rank the weekday loop
+	// below already excludes (SOLEMNITY), so this never mattered before -
+	// but a FEAST-rank id (e.g. presentation_of_the_lord) passes that
+	// loop's rank check too, and would otherwise get a second, generic
+	// ferial row for the same date under its ordinaire-N-weekday slug.
+	const claimedRomcalIds = new Set(
+		[...matchersBySlug.values()].filter((m) => m.kind === 'id').map((m) => m.id)
+	);
+
 	for (let year = DATE_RANGE_START_YEAR; year <= DATE_RANGE_END_YEAR; year++) {
 		const calendar = await new Romcal().generateCalendar(year);
 		const days = Object.values(calendar).map((arr) => arr[0]!);
@@ -191,6 +202,7 @@ export async function buildCalendrierDates(
 			) {
 				continue;
 			}
+			if (claimedRomcalIds.has(day.id)) continue;
 			const dayOfWeek = day.calendar.dayOfWeek;
 			const weekOfSeason = day.calendar.weekOfSeason;
 			if (dayOfWeek === undefined || dayOfWeek === 0 || weekOfSeason === undefined) continue;
