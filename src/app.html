@@ -38,13 +38,14 @@
 			href="/fonts/Metropolis-Bold.woff2"
 			crossorigin="anonymous"
 		/>
-		<link
-			rel="preload"
-			as="font"
-			type="font/woff2"
-			href="/fonts/Montserrat-Regular-latin.woff2"
-			crossorigin="anonymous"
-		/>
+		<!-- Montserrat (the default reader-prose font) is deliberately not
+		     preloaded here: it's font-display: swap, so a late load just swaps
+		     in gracefully, and it's only actually used once JS resolves the
+		     user's stored font preference — for anyone who picked a different
+		     reader font, or on chrome-only pages, the file would sit unused and
+		     trip Chrome's "preloaded but not used" warning. The faces below are
+		     font-display: optional, so a late load can mean the browser never
+		     swaps them in at all — that's what makes preloading them load-bearing. -->
 		<!-- The faces the above-the-fold chrome actually resolves to. Without
 		     these, a cold cache paints the wordmark and search placeholder in
 		     Georgia/system-sans and swaps ~700ms later — measured 210ms→938ms.
