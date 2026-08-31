@@ -68,14 +68,21 @@ function closeSpans(entries: { start: number; title: string }[], maxParagraph: n
 const MAX_PARAGRAPH = 2865;
 
 export function buildHeadingLevels(structure: CecStructureFile): HeadingLevels {
-	const fineEntries: { start: number; title: string }[] = [];
-	const articleEntries: { start: number; title: string }[] = [];
+	const fineSpans: Span[] = [];
+	const articleSpans: Span[] = [];
 	const chapterEntries: { start: number; title: string }[] = [];
 
 	for (const part of structure.parts) {
 		if (part.prologue) {
-			for (const h of part.intro_headings ?? []) {
-				fineEntries.push({ start: h.paragraph_start, title: h.title });
+			const prologueHeadings = part.intro_headings ?? [];
+			if (prologueHeadings.length > 0) {
+				const prologueEntries = prologueHeadings.map((h) => ({
+					start: h.paragraph_start,
+					title: h.title
+				}));
+				if (part.range) {
+					fineSpans.push(...closeSpans(prologueEntries, part.range.to));
+				}
 			}
 			if (part.range) chapterEntries.push({ start: part.range.from, title: part.title });
 			continue;
@@ -83,21 +90,42 @@ export function buildHeadingLevels(structure: CecStructureFile): HeadingLevels {
 		for (const section of part.sections ?? []) {
 			for (const chapter of section.chapters) {
 				chapterEntries.push({ start: chapter.range.from, title: chapter.title });
-				for (const h of chapter.headings)
-					fineEntries.push({ start: h.paragraph_start, title: h.title });
+
+				const chapterHeadings = chapter.headings ?? [];
+				if (chapterHeadings.length > 0) {
+					const chapterHeadingEntries = chapterHeadings.map((h) => ({
+						start: h.paragraph_start,
+						title: h.title
+					}));
+					fineSpans.push(...closeSpans(chapterHeadingEntries, chapter.range.to));
+				}
+
 				for (const article of chapter.articles) {
-					articleEntries.push({ start: article.range.from, title: article.title });
-					for (const h of article.headings) {
-						fineEntries.push({ start: h.paragraph_start, title: h.title });
+					articleSpans.push({
+						start: article.range.from,
+						end: article.range.to,
+						title: article.title
+					});
+
+					const articleHeadings = article.headings ?? [];
+					if (articleHeadings.length > 0) {
+						const articleHeadingEntries = articleHeadings.map((h) => ({
+							start: h.paragraph_start,
+							title: h.title
+						}));
+						fineSpans.push(...closeSpans(articleHeadingEntries, article.range.to));
 					}
 				}
 			}
 		}
 	}
 
+	fineSpans.sort((a, b) => a.start - b.start);
+	articleSpans.sort((a, b) => a.start - b.start);
+
 	return {
-		fine: closeSpans(fineEntries, MAX_PARAGRAPH),
-		article: closeSpans(articleEntries, MAX_PARAGRAPH),
+		fine: fineSpans,
+		article: articleSpans,
 		chapter: closeSpans(chapterEntries, MAX_PARAGRAPH)
 	};
 }

@@ -44,19 +44,20 @@ describe('clusterCitations - variable granularity', () => {
 	});
 
 	it('falls back to the chapter title when a range has no fine or article heading', () => {
-		const clusters = clusterCitations([{ from: 2401, to: 2463 }], levels);
-		expect(clusters[0]!.theme).toBeTruthy();
+		const clusters = clusterCitations([{ from: 2700, to: 2750 }], levels);
+		expect(clusters[0]!.theme).toBe("La prière de l'Église");
 	});
 
 	it('caps the number of clusters, keeping the largest groups', () => {
 		const manyScattered = [
-			{ from: 1716, to: 1716 },
-			{ from: 1723, to: 1723 },
-			{ from: 1725, to: 1725 },
-			{ from: 1, to: 1 }
+			{ from: 1716, to: 1729 },
+			{ from: 1, to: 1 },
+			{ from: 2700, to: 2700 }
 		];
 		const clusters = clusterCitations(manyScattered, levels, 2);
 		expect(clusters).toHaveLength(2);
+		expect(clusters[0]!.paragraphs.length).toBe(14);
+		expect(clusters[1]!.paragraphs.length).toBe(1);
 	});
 
 	it('formats the refs string as compact CEC ranges', () => {

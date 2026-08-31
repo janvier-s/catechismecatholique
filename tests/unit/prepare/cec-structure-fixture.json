@@ -75,6 +75,13 @@
 									"headings": []
 								}
 							]
+						},
+						{
+							"slug": "2-la-priere-de-l-eglise",
+							"title": "La prière de l'Église",
+							"range": { "from": 2650, "to": 2758 },
+							"headings": [],
+							"articles": []
 						}
 					]
 				}
