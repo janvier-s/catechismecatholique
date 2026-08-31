@@ -13,7 +13,9 @@
 		feast,
 		yearKey,
 		showDates = false,
-		isWeekday = false
+		isWeekday = false,
+		sundayCycle,
+		weekdayCycle
 	}: {
 		feast: CalendrierFeast | CalendrierFixedFeast;
 		yearKey?: CalendrierYearKey | 'I' | 'II';
@@ -23,7 +25,16 @@
 		 *  shows a discreet source note rather than presenting them as the
 		 *  same tier of authority. */
 		isWeekday?: boolean;
+		/** Concurrent Sunday année (A/B/C), display-only - distinct from
+		 *  `yearKey`, which selects which content file to load. */
+		sundayCycle?: CalendrierYearKey;
+		/** The weekday first-reading cycle (I/II), shown under its AELF name
+		 *  ("année paire"/"année impaire") rather than "Cycle I/II". */
+		weekdayCycle?: 'I' | 'II';
 	} = $props();
+
+	const SUNDAY_CYCLE_LABEL: Record<CalendrierYearKey, string> = { a: 'A', b: 'B', c: 'C' };
+	const WEEKDAY_PARITY_LABEL: Record<'I' | 'II', string> = { I: 'impaire', II: 'paire' };
 
 	let readingsExpanded = $state(false);
 	let readingsState: 'idle' | 'loading' | 'unavailable' | 'error' | CalendrierReadingsEntry =
@@ -135,6 +146,11 @@
 			</button>
 		{/if}
 	</header>
+	{#if isWeekday && sundayCycle && weekdayCycle}
+		<p class="cycle-note">
+			Année {SUNDAY_CYCLE_LABEL[sundayCycle]} · Année {WEEKDAY_PARITY_LABEL[weekdayCycle]}
+		</p>
+	{/if}
 
 	<section class="readings">
 		<h3 class="cluster-heading">
@@ -270,6 +286,15 @@
 		margin: 0;
 		flex: 1 1 auto;
 		min-width: 0;
+	}
+
+	.cycle-note {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.03em;
+		color: var(--color-muted);
+		margin: -0.5rem 0 1rem;
 	}
 
 	.source-note {

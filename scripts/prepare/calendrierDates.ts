@@ -4,7 +4,8 @@ import type {
 	CalendrierFeast,
 	CalendrierFixedFeast,
 	CalendrierYearFile,
-	LiturgicalColor
+	LiturgicalColor,
+	SeasonKey
 } from './calendrier.ts';
 import { parseFrenchOrdinal } from './calendrierFrenchOrdinal.ts';
 import { NAMED_FEAST_ROMCAL_ID, SEASON_TO_ROMCAL } from './calendrierRomcalIds.ts';
@@ -17,6 +18,21 @@ import {
 
 export const DATE_RANGE_START_YEAR = 2000;
 export const DATE_RANGE_END_YEAR = 2035;
+
+// A weekday slug's own liturgical color must be the season's ferial color,
+// not whichever occurrence's color happened to be resolved first: since a
+// memorial's color is the SAINT's (usually white, sometimes red), widening
+// weekday rows to memorial dates means the very first occurrence scanned for
+// a slug like "avent-1-jeudi" could well be a white-vested memorial rather
+// than a plain violet Advent weekday, giving the whole slug the wrong color.
+const SEASON_FERIAL_COLOR: Record<SeasonKey, LiturgicalColor> = {
+	avent: 'violet',
+	noel: 'white',
+	careme: 'violet',
+	pascal: 'white',
+	solennite: 'white',
+	ordinaire: 'green'
+};
 
 const ROMCAL_COLOR_TO_OURS: Record<string, LiturgicalColor> = {
 	RED: 'red',
@@ -156,7 +172,16 @@ export async function buildCalendrierDates(
 		}
 
 		for (const day of days) {
-			if (day.rank !== 'WEEKDAY') continue;
+			// A memorial or optional memorial in Ordinary Time (and most of the
+			// year outside Advent/Lent/Easter) uses the weekday's own Mass
+			// readings unless it has proper readings of its own, which we have
+			// no data for - so it's still correct to show the ferial slug's
+			// content here. Only WEEKDAY was accepted before, which meant any
+			// date carrying a memorial got no card at all even though the
+			// readings underneath it are the same.
+			if (day.rank !== 'WEEKDAY' && day.rank !== 'MEMORIAL' && day.rank !== 'OPTIONAL_MEMORIAL') {
+				continue;
+			}
 			const dayOfWeek = day.calendar.dayOfWeek;
 			const weekOfSeason = day.calendar.weekOfSeason;
 			if (dayOfWeek === undefined || dayOfWeek === 0 || weekOfSeason === undefined) continue;
@@ -171,13 +196,14 @@ export async function buildCalendrierDates(
 			if (!weekdayBySlugCycle.has(`${slug}:${cycle}`)) continue; // no fetched reading for this combo
 
 			if (!colorsBySlug.has(slug)) {
-				colorsBySlug.set(slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
+				colorsBySlug.set(slug, SEASON_FERIAL_COLOR[season]);
 			}
 			rows.push({
 				date: day.date,
 				slug,
 				corpus: 'weekday',
 				cycle,
+				sundayCycle: sundayCycleToYearKey(day.cycles.sundayCycle),
 				liturgicalColor: colorsBySlug.get(slug)!
 			});
 		}

@@ -794,6 +794,7 @@ export interface CalendrierDateRow {
 	corpus: 'year' | 'fixed' | 'weekday';
 	yearKey?: CalendrierYearKey;
 	cycle?: 'I' | 'II';
+	sundayCycle?: CalendrierYearKey;
 	liturgicalColor: LiturgicalColor;
 }
 

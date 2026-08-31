@@ -105,6 +105,8 @@
 			{feast}
 			yearKey={resolved.row.yearKey ?? resolved.row.cycle}
 			isWeekday={resolved.row.corpus === 'weekday'}
+			sundayCycle={resolved.row.sundayCycle}
+			weekdayCycle={resolved.row.cycle}
 		/>
 	{/if}
 </div>

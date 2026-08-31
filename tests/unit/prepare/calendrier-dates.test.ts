@@ -1,10 +1,15 @@
 import { describe, it, expect } from 'vitest';
+import { Romcal } from 'romcal';
 import {
 	buildCalendrierDates,
 	DATE_RANGE_START_YEAR,
 	DATE_RANGE_END_YEAR
 } from '../../../scripts/prepare/calendrierDates';
-import { buildWeekdayTargets } from '../../../scripts/prepare/weekdayFeasts';
+import {
+	buildWeekdayTargets,
+	weekdaySlug,
+	ROMCAL_SEASON_TO_OURS
+} from '../../../scripts/prepare/weekdayFeasts';
 import type {
 	CalendrierFeast,
 	CalendrierFixedFeast,
@@ -238,7 +243,43 @@ describe('buildCalendrierDates', () => {
 		for (const r of weekdayRows) {
 			expect(['I', 'II']).toContain(r.cycle);
 			expect(r.yearKey).toBeUndefined();
+			expect(['a', 'b', 'c']).toContain(r.sundayCycle);
 		}
+	});
+
+	it('gives a weekday row to a date carrying a memorial or optional memorial, not just pure ferial days', async () => {
+		// A memorial/optional memorial keeps the weekday's own readings unless it
+		// has proper readings of its own (which we have no data for), so it
+		// should still get a card - the ferial slug's content is correct there.
+		// A (season, weekOfSeason, dayOfWeek) combo occurs at most once within
+		// a single year, so within one year a slug is either the ferial
+		// occurrence or the memorial one, never both - the fixture needs
+		// several years so the same slug can be ferial in one and a memorial
+		// in another, the way buildWeekdayTargets and the real pipeline do.
+		const weekdayTargets = await buildWeekdayTargets(2020, 2024, '2024-12-31');
+		const targetKeys = new Set(weekdayTargets.map((t) => `${t.slug}:${t.cycle}`));
+
+		const calendar2024 = await new Romcal().generateCalendar(2024);
+		const days2024 = Object.values(calendar2024).map((arr) => arr[0]!);
+		const memorialDay = days2024.find((d) => {
+			if (d.rank !== 'MEMORIAL' && d.rank !== 'OPTIONAL_MEMORIAL') return false;
+			const season = ROMCAL_SEASON_TO_OURS[d.seasons[0] ?? ''];
+			if (!season || d.calendar.dayOfWeek === undefined || d.calendar.weekOfSeason === undefined) {
+				return false;
+			}
+			const slug = weekdaySlug(season, d.calendar.weekOfSeason, d.calendar.dayOfWeek);
+			const cycle = d.cycles.weekdayCycle === 'YEAR_1' ? 'I' : 'II';
+			return targetKeys.has(`${slug}:${cycle}`);
+		});
+		expect(memorialDay).toBeDefined();
+
+		const { rows } = await buildCalendrierDates([], [], weekdayTargets);
+		const row = rows.find((r) => r.corpus === 'weekday' && r.date === memorialDay!.date);
+		expect(row).toBeDefined();
+		const expectedSundayCycle = { YEAR_A: 'a', YEAR_B: 'b', YEAR_C: 'c' }[
+			memorialDay!.cycles.sundayCycle
+		];
+		expect(row!.sundayCycle).toBe(expectedSundayCycle);
 	});
 
 	it('emits no weekday row for a combo missing from the target list', async () => {
@@ -260,6 +301,30 @@ describe('buildCalendrierDates', () => {
 			false
 		);
 		expect(weekdayRows.some((r) => r.slug === kept.slug && r.cycle === kept.cycle)).toBe(true);
+	});
+
+	it("gives every weekday row its season ferial color, never a memorial saint's color", async () => {
+		// A memorial's color is the saint's (often white, sometimes red) and
+		// must not leak onto the slug's color just because that occurrence was
+		// scanned first - an Advent weekday stays violet even when the specific
+		// date carries a white-vested memorial.
+		const weekdayTargets = await buildWeekdayTargets(2020, 2026, '2026-12-31');
+		const { rows } = await buildCalendrierDates([], [], weekdayTargets);
+		const weekdayRows = rows.filter((r) => r.corpus === 'weekday');
+		expect(weekdayRows.length).toBeGreaterThan(0);
+
+		const bySeasonPrefix: Record<string, string> = {
+			'avent-': 'violet',
+			'careme-': 'violet',
+			'ordinaire-': 'green',
+			'pascal-': 'white'
+		};
+		for (const [prefix, expectedColor] of Object.entries(bySeasonPrefix)) {
+			const wrong = weekdayRows.filter(
+				(r) => r.slug.startsWith(prefix) && r.liturgicalColor !== expectedColor
+			);
+			expect(wrong).toEqual([]);
+		}
 	});
 
 	it('emits no weekday rows for Christmas Time or Advent from 17 December', async () => {

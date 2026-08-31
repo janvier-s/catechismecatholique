@@ -84,7 +84,13 @@
 		{#if loading}
 			<p class="status">Chargement…</p>
 		{:else if feast}
-			<FeastBlock {feast} yearKey={row.yearKey ?? row.cycle} isWeekday={row.corpus === 'weekday'} />
+			<FeastBlock
+				{feast}
+				yearKey={row.yearKey ?? row.cycle}
+				isWeekday={row.corpus === 'weekday'}
+				sundayCycle={row.sundayCycle}
+				weekdayCycle={row.cycle}
+			/>
 		{/if}
 	</div>
 </div>

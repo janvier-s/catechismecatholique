@@ -45,6 +45,7 @@ export interface CalendrierDateRow {
 	corpus: 'year' | 'fixed' | 'weekday';
 	yearKey?: 'a' | 'b' | 'c'; // present when corpus === 'year'
 	cycle?: 'I' | 'II'; // present when corpus === 'weekday'
+	sundayCycle?: 'a' | 'b' | 'c'; // present when corpus === 'weekday' - concurrent Sunday année, display-only
 	liturgicalColor: LiturgicalColor;
 }
 
