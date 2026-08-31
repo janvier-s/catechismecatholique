@@ -124,7 +124,8 @@ describe('buildCalendrierDates', () => {
 			date: '2024-01-14',
 			slug: 'deuxieme-dimanche-du-temps-ordinaire',
 			corpus: 'year',
-			yearKey: 'b'
+			yearKey: 'b',
+			liturgicalColor: 'green'
 		});
 		expect(row2024('vendredi-saint-la-passion-du-seigneur')?.date).toBe('2024-03-29');
 		expect(row2024('dimanche-de-paques-la-resurrection-du-seigneur')?.date).toBe('2024-03-31');
@@ -146,7 +147,8 @@ describe('buildCalendrierDates', () => {
 		expect(petersAndPaul2024).toEqual({
 			date: '2024-06-29',
 			slug: 'la-solennite-de-saint-pierre-et-saint-paul-apotres',
-			corpus: 'fixed'
+			corpus: 'fixed',
+			liturgicalColor: 'red'
 		});
 		expect(colorsBySlug.get('la-solennite-de-saint-pierre-et-saint-paul-apotres')).toBe('red');
 	});
@@ -176,7 +178,8 @@ describe('buildCalendrierDates', () => {
 				date: '2027-05-06',
 				slug: 'la-solennite-de-lascension-du-seigneur',
 				corpus: 'year',
-				yearKey: 'b'
+				yearKey: 'b',
+				liturgicalColor: 'white'
 			}
 		]);
 	});
@@ -190,7 +193,8 @@ describe('buildCalendrierDates', () => {
 			{
 				date: '2025-06-29',
 				slug: 'la-solennite-de-saint-pierre-et-saint-paul-apotres',
-				corpus: 'fixed'
+				corpus: 'fixed',
+				liturgicalColor: 'red'
 			}
 		]);
 		const treizieme = rows.filter((r) => r.slug === 'treizieme-dimanche-du-temps-ordinaire');
@@ -211,7 +215,8 @@ describe('buildCalendrierDates', () => {
 			{
 				date: '2019-12-09',
 				slug: 'la-solennite-de-limmaculee-conception-de-la-vierge-marie',
-				corpus: 'fixed'
+				corpus: 'fixed',
+				liturgicalColor: 'white'
 			}
 		]);
 	});

@@ -7,54 +7,63 @@ const rows: CalendrierDateRow[] = [
 		date: '2018-01-14',
 		slug: 'deuxieme-dimanche-du-temps-ordinaire',
 		corpus: 'year',
-		yearKey: 'b'
+		yearKey: 'b',
+		liturgicalColor: 'green'
 	},
 	{
 		date: '2021-01-17',
 		slug: 'deuxieme-dimanche-du-temps-ordinaire',
 		corpus: 'year',
-		yearKey: 'b'
+		yearKey: 'b',
+		liturgicalColor: 'green'
 	},
 	{
 		date: '2024-01-14',
 		slug: 'deuxieme-dimanche-du-temps-ordinaire',
 		corpus: 'year',
-		yearKey: 'b'
+		yearKey: 'b',
+		liturgicalColor: 'green'
 	},
 	{
 		date: '2027-01-17',
 		slug: 'deuxieme-dimanche-du-temps-ordinaire',
 		corpus: 'year',
-		yearKey: 'b'
+		yearKey: 'b',
+		liturgicalColor: 'green'
 	},
 	{
 		date: '2024-06-29',
 		slug: 'la-solennite-de-saint-pierre-et-saint-paul-apotres',
-		corpus: 'fixed'
+		corpus: 'fixed',
+		liturgicalColor: 'red'
 	},
 	{
 		date: '2019-12-01',
 		slug: 'premier-dimanche-de-lavent',
 		corpus: 'year',
-		yearKey: 'a'
+		yearKey: 'a',
+		liturgicalColor: 'violet'
 	},
 	{
 		date: '2022-11-27',
 		slug: 'premier-dimanche-de-lavent',
 		corpus: 'year',
-		yearKey: 'a'
+		yearKey: 'a',
+		liturgicalColor: 'violet'
 	},
 	{
 		date: '2020-11-29',
 		slug: 'premier-dimanche-de-lavent',
 		corpus: 'year',
-		yearKey: 'c'
+		yearKey: 'c',
+		liturgicalColor: 'violet'
 	},
 	{
 		date: '2023-12-03',
 		slug: 'premier-dimanche-de-lavent',
 		corpus: 'year',
-		yearKey: 'c'
+		yearKey: 'c',
+		liturgicalColor: 'violet'
 	}
 ];
 

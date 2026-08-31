@@ -41,6 +41,7 @@ export interface CalendrierDateRow {
 	slug: string;
 	corpus: 'year' | 'fixed';
 	yearKey?: 'a' | 'b' | 'c'; // present when corpus === 'year'
+	liturgicalColor: LiturgicalColor;
 }
 
 export interface CalendrierDatesIndexFile {

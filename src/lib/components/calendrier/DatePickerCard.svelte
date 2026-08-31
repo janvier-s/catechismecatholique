@@ -1,16 +1,14 @@
 <!-- src/lib/components/calendrier/DatePickerCard.svelte -->
 <script lang="ts">
 	import type {
+		CalendrierDateRow,
 		CalendrierDatesIndexFile,
 		CalendrierFeast,
 		CalendrierFixedFeast
 	} from '$lib/data/types';
-	import {
-		resolvePickedDate,
-		resolveFeastForRow,
-		type ResolvedDay
-	} from '$lib/utils/calendrierDateLookup';
+	import { resolveFeastForRow } from '$lib/utils/calendrierDateLookup';
 	import { LITURGICAL_COLOR_VAR } from './liturgicalColor';
+	import CalendrierPicker from './CalendrierPicker.svelte';
 	import FeastBlock from './FeastBlock.svelte';
 
 	let {
@@ -21,29 +19,20 @@
 		fixedFeasts: CalendrierFixedFeast[];
 	} = $props();
 
-	let pickedValue: string = $state('');
-	let resolved: ResolvedDay | null = $state(null);
+	let pickedRow: CalendrierDateRow | null = $state(null);
 	let feast: CalendrierFeast | CalendrierFixedFeast | null = $state(null);
 	let loading: boolean = $state(false);
 
-	async function search() {
-		if (!pickedValue) return;
+	async function pick(row: CalendrierDateRow) {
+		pickedRow = row;
 		loading = true;
-		feast = null;
-		const [y, m, d] = pickedValue.split('-').map(Number);
-		const picked = new Date(y!, m! - 1, d!);
-		const r = resolvePickedDate(datesIndex, picked);
-		resolved = r;
-		if (r.status === 'match') {
-			feast = await resolveFeastForRow(r.row, fixedFeasts);
-		}
+		feast = await resolveFeastForRow(row, fixedFeasts);
 		loading = false;
 	}
 
 	function reset() {
-		resolved = null;
+		pickedRow = null;
 		feast = null;
-		pickedValue = '';
 	}
 </script>
 
@@ -53,45 +42,23 @@
 		? `var(${LITURGICAL_COLOR_VAR[feast.liturgicalColor]})`
 		: undefined}
 >
-	{#if resolved?.status === 'match' && feast}
+	{#if pickedRow}
 		<div class="result-head">
 			<p class="kicker">Résultat</p>
 			<button type="button" class="reset-btn" onclick={reset}>Chercher une autre date</button>
 		</div>
-		<FeastBlock {feast} yearKey={resolved?.row.yearKey} />
-	{:else}
-		<p class="kicker">Chercher une date</p>
-		<form
-			class="picker-form"
-			onsubmit={(e) => {
-				e.preventDefault();
-				search();
-			}}
-		>
-			<input
-				type="date"
-				aria-label="Chercher une date"
-				bind:value={pickedValue}
-				min={datesIndex.rangeStart}
-				max={datesIndex.rangeEnd}
-			/>
-			<button type="submit" class="search-btn" disabled={loading}>
-				{loading ? 'Recherche…' : 'Chercher'}
-			</button>
-		</form>
 		<!-- The live region has to outlive the message so the message counts as
 		     an insertion into it, hence a wrapper that renders unconditionally. -->
 		<div aria-live="polite">
-			{#if resolved?.status === 'no-match'}
-				<p class="status">
-					Aucun dimanche ou grande fête du Catéchisme ne correspond à cette date.
-				</p>
-			{:else if resolved?.status === 'out-of-range'}
-				<p class="status">
-					Cette date sort de la période couverte ({datesIndex.rangeStart} à {datesIndex.rangeEnd}).
-				</p>
+			{#if loading}
+				<p class="status">Chargement…</p>
+			{:else if feast}
+				<FeastBlock {feast} yearKey={pickedRow.yearKey} />
 			{/if}
 		</div>
+	{:else}
+		<p class="kicker">Chercher une date</p>
+		<CalendrierPicker {datesIndex} onPick={pick} />
 	{/if}
 </div>
 
@@ -135,41 +102,6 @@
 	.reset-btn:hover {
 		color: var(--color-accent);
 		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
-	}
-	.picker-form {
-		display: flex;
-		gap: 0.6rem;
-		flex-wrap: wrap;
-	}
-	.picker-form input[type='date'] {
-		flex: 1 1 auto;
-		min-width: 0;
-		font-family: var(--font-ui);
-		font-size: 0.92rem;
-		color: var(--color-fg);
-		background: var(--color-panel);
-		border: 1px solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.5rem 0.65rem;
-	}
-	.picker-form input[type='date']:focus-visible {
-		outline: 2px solid var(--color-accent);
-		outline-offset: 1px;
-	}
-	.search-btn {
-		font-family: var(--font-ui);
-		font-size: 0.85rem;
-		font-weight: 600;
-		color: var(--color-bg);
-		background: var(--color-accent);
-		border: 0;
-		border-radius: 4px;
-		padding: 0.5rem 1rem;
-		cursor: pointer;
-	}
-	.search-btn:disabled {
-		opacity: 0.6;
-		cursor: default;
 	}
 	.status {
 		margin: 0.75rem 0 0;

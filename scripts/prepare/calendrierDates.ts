@@ -114,7 +114,8 @@ export async function buildCalendrierDates(
 					date: day.date,
 					slug: feast.slug,
 					corpus: 'year',
-					yearKey: yf.key
+					yearKey: yf.key,
+					liturgicalColor: colorsBySlug.get(feast.slug)!
 				});
 			}
 		}
@@ -134,10 +135,15 @@ export async function buildCalendrierDates(
 				continue;
 			}
 
-			rows.push({ date: day.date, slug: ff.slug, corpus: 'fixed' });
 			if (!colorsBySlug.has(ff.slug)) {
 				colorsBySlug.set(ff.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
 			}
+			rows.push({
+				date: day.date,
+				slug: ff.slug,
+				corpus: 'fixed',
+				liturgicalColor: colorsBySlug.get(ff.slug)!
+			});
 		}
 	}
 

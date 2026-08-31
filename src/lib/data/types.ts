@@ -793,6 +793,7 @@ export interface CalendrierDateRow {
 	slug: string;
 	corpus: 'year' | 'fixed';
 	yearKey?: CalendrierYearKey;
+	liturgicalColor: LiturgicalColor;
 }
 
 export interface CalendrierDatesIndexFile {
