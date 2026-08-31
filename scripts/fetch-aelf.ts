@@ -27,6 +27,8 @@ import type {
 	CalendrierYearFile
 } from './prepare/calendrier.ts';
 import { readingsKey } from './prepare/calendrier.ts';
+import { DATE_RANGE_START_YEAR, DATE_RANGE_END_YEAR } from './prepare/calendrierDates.ts';
+import { buildWeekdayTargets } from './prepare/weekdayFeasts.ts';
 import { pickReadingDateCandidates } from './aelf/pickReadingDate.ts';
 import { pickMesse, type AelfMesse } from './aelf/pickMesse.ts';
 import { KNOWN_AELF_GAPS } from './aelf/knownGaps.ts';
@@ -164,6 +166,41 @@ for (const { slug, yearKey } of targets) {
 		const { messe, warning } = pickMesse(matchedBody.messes ?? [], key);
 		if (warning) console.warn(warning);
 		output[key] = { date: matchedDate, lectures: messe.lectures };
+	} catch (err) {
+		failures.push((err as Error).message);
+	}
+}
+
+const weekdayTargets = await buildWeekdayTargets(DATE_RANGE_START_YEAR, DATE_RANGE_END_YEAR, today);
+
+for (const { slug, cycle, representativeDate } of weekdayTargets) {
+	const key = readingsKey(slug, cycle);
+	let res: Response;
+	try {
+		res = await fetch(`https://api.aelf.org/v1/messes/${representativeDate}/${ZONE}`);
+	} catch {
+		failures.push(`${key}: network error fetching ${representativeDate}`);
+		await sleep(REQUEST_DELAY_MS);
+		continue;
+	}
+	await sleep(REQUEST_DELAY_MS);
+	if (!res.ok) {
+		failures.push(`${key}: AELF returned ${res.status} for ${representativeDate}`);
+		continue;
+	}
+
+	let body: AelfResponseBody;
+	try {
+		body = (await res.json()) as AelfResponseBody;
+	} catch {
+		failures.push(`${key}: unparseable AELF response for ${representativeDate}`);
+		continue;
+	}
+
+	try {
+		const { messe, warning } = pickMesse(body.messes ?? [], key);
+		if (warning) console.warn(warning);
+		output[key] = { date: representativeDate, lectures: messe.lectures };
 	} catch (err) {
 		failures.push((err as Error).message);
 	}
