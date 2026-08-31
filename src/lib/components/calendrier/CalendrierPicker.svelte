@@ -171,6 +171,8 @@
 <style>
 	.picker {
 		font-family: var(--font-ui);
+		max-width: 320px;
+		margin: 0 auto;
 	}
 	.nav {
 		display: flex;

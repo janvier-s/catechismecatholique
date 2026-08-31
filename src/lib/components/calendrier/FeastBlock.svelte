@@ -50,7 +50,6 @@
 	};
 
 	async function fetchReadings() {
-		if (readingsState !== 'idle' && readingsState !== 'error') return;
 		readingsState = 'loading';
 		try {
 			const entry = await loadCalendrierReading(feast.slug, yearKey);
@@ -60,10 +59,18 @@
 		}
 	}
 
-	async function toggleReadings() {
+	// Fetched eagerly (not gated behind the toggle) so the reading refs can
+	// show as a summary before the visitor opens the section. Only reads
+	// feast.slug/yearKey synchronously - readingsState itself is never read
+	// inside this effect, so writing it doesn't retrigger the effect.
+	$effect(() => {
+		void feast.slug;
+		void yearKey;
+		fetchReadings();
+	});
+
+	function toggleReadings() {
 		readingsExpanded = !readingsExpanded;
-		if (!readingsExpanded) return;
-		await fetchReadings();
 	}
 
 	const expanded = new SvelteSet<number>();
@@ -106,13 +113,9 @@
 	}
 
 	async function toggleAllInFeast() {
-		const allOpen =
-			feast.clusters.length > 0 &&
-			feast.clusters.every((c) => expanded.has(c.i)) &&
-			readingsExpanded;
+		const allOpen = feast.clusters.length > 0 && feast.clusters.every((c) => expanded.has(c.i));
 		if (allOpen) {
 			for (const c of feast.clusters) expanded.delete(c.i);
-			readingsExpanded = false;
 		} else {
 			const toFetch: { i: number; ns: number[] }[] = [];
 			for (const c of feast.clusters) {
@@ -121,8 +124,7 @@
 					if (!paragraphs.has(c.i)) toFetch.push({ i: c.i, ns: c.paragraphs });
 				}
 			}
-			readingsExpanded = true;
-			await Promise.all([...toFetch.map((t) => fetchParagraphs(t.i, t.ns)), fetchReadings()]);
+			await Promise.all(toFetch.map((t) => fetchParagraphs(t.i, t.ns)));
 		}
 	}
 </script>
@@ -133,18 +135,6 @@
 			<p class="feast-date">{feast.date}</p>
 		{/if}
 		<h2 class="feast-title" id="f-{feast.slug}">{feast.title}</h2>
-		{#if feast.clusters.length > 1}
-			<button
-				type="button"
-				class="open-all"
-				onclick={toggleAllInFeast}
-				aria-label="Ouvrir ou fermer toutes les sections"
-			>
-				{feast.clusters.every((c) => expanded.has(c.i)) && readingsExpanded
-					? 'Tout fermer'
-					: 'Tout ouvrir'}
-			</button>
-		{/if}
 	</header>
 	{#if isWeekday && sundayCycle && weekdayCycle}
 		<p class="cycle-note">
@@ -163,6 +153,9 @@
 			>
 				<span class="caret" aria-hidden="true">{readingsExpanded ? '▾' : '▸'}</span>
 				<span class="readings-label">Lectures du jour</span>
+				{#if !readingsExpanded && readingsState !== 'idle' && readingsState !== 'loading' && readingsState !== 'unavailable' && readingsState !== 'error'}
+					<span class="readings-refs">{readingsState.lectures.map((l) => l.ref).join(' · ')}</span>
+				{/if}
 			</button>
 		</h3>
 		{#if readingsExpanded}
@@ -209,6 +202,22 @@
 		{/if}
 	</section>
 
+	{#if feast.clusters.length > 0}
+		<div class="clusters-head">
+			<h3 class="clusters-title">Paragraphes du Catéchisme en lien avec ces lectures</h3>
+			{#if feast.clusters.length > 1}
+				<button
+					type="button"
+					class="open-all"
+					onclick={toggleAllInFeast}
+					aria-label="Ouvrir ou fermer tous les paragraphes"
+				>
+					{feast.clusters.every((c) => expanded.has(c.i)) ? 'Tout fermer' : 'Tout ouvrir'}
+				</button>
+			{/if}
+		</div>
+	{/if}
+
 	<ul class="clusters">
 		{#each feast.clusters as cluster (cluster.i)}
 			{@const isOpen = expanded.has(cluster.i)}
@@ -250,7 +259,7 @@
 		{/each}
 	</ul>
 	{#if isWeekday}
-		<p class="source-note">Références venant de la Didache Study Bible</p>
+		<p class="source-note">Références tirées de la Didache Study Bible</p>
 	{/if}
 </article>
 
@@ -334,6 +343,7 @@
 		align-items: baseline;
 		gap: 0.6rem;
 		width: 100%;
+		min-width: 0;
 		text-align: left;
 		background: none;
 		border: 0;
@@ -370,8 +380,21 @@
 	.readings-toggle.is-open .readings-label {
 		color: var(--color-fg);
 	}
+	.readings-refs {
+		flex: 1;
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		text-align: right;
+		font-family: var(--font-ui);
+		font-size: 0.75rem;
+		font-weight: 500;
+		font-variant-numeric: tabular-nums lining-nums;
+		color: var(--color-accent);
+	}
 	.readings-body {
-		padding: 0.5rem 0.4rem 0.25rem 1.6rem;
+		padding: 0.5rem 0.4rem 0.25rem 1rem;
 	}
 	.reading {
 		padding: 0.75rem 0;
@@ -430,6 +453,24 @@
 		color: var(--color-fg);
 	}
 
+	.clusters-head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.75rem;
+		margin: 0 0 0.4rem;
+		padding: 0 0.4rem;
+	}
+	.clusters-title {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+		margin: 0;
+	}
 	.clusters {
 		list-style: none;
 		margin: 0;
@@ -497,7 +538,7 @@
 	}
 
 	.cluster-body {
-		padding: 0.5rem 0.4rem 0.85rem 1.6rem;
+		padding: 0.5rem 0.4rem 0.85rem 1rem;
 	}
 	.loading {
 		font-family: var(--font-ui);
