@@ -56,8 +56,7 @@
 		<p class="hero-kicker">Calendrier liturgique romain</p>
 		<h1 class="hero-title">Lire le Catéchisme<br />au fil de l'année</h1>
 		<p class="hero-lede">
-			Pour chaque dimanche et chaque grande fête du calendrier romain, les paragraphes du Catéchisme
-			à méditer&nbsp;: une lecture suivie de la doctrine catholique au rythme de la liturgie.
+			Les paragraphes du Catéchisme à méditer pour chaque jour du calendrier romain.
 			<br /><span class="hero-stat"
 				>{data.index.total_feasts} fêtes · {totalThemes} thèmes de référence</span
 			>

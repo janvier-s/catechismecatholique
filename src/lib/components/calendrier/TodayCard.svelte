@@ -92,26 +92,27 @@
 			<p class="status">Chargement…</p>
 		{:else if resolved.status === 'match' && feast}
 			<div class="kicker-row">
-				<p class="kicker">
-					{resolved.label === 'today' ? 'Aujourd’hui' : 'Dimanche dernier'}
-					<span class="kicker-date">{formatIsoDate(resolved.row.date)}</span>
-				</p>
-				<div class="kicker-actions">
-					{#if resolved.row.corpus === 'weekday'}
-						<div class="sunday-nav">
-							<button type="button" onclick={pickPreviousSunday}>← Dimanche précédent</button>
-							<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
-						</div>
-					{/if}
+				<div class="kicker-col">
+					<p class="kicker">
+						{resolved.label === 'today' ? 'Aujourd’hui' : 'Dimanche dernier'}
+						<span class="kicker-date">{formatIsoDate(resolved.row.date)}</span>
+					</p>
 					<DateSearchDropdown
 						{datesIndex}
 						selectedIso={resolved.row.date}
+						align="left"
 						open={dateSearchOpen}
 						onToggle={onDateSearchToggle}
 						onClose={onDateSearchClose}
 						{onPick}
 					/>
 				</div>
+				{#if resolved.row.corpus === 'weekday'}
+					<div class="sunday-nav">
+						<button type="button" onclick={pickPreviousSunday}>← Dimanche précédent</button>
+						<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
+					</div>
+				{/if}
 			</div>
 		{:else}
 			<p class="status">Pas de dimanche ni de grande fête à afficher aujourd’hui.</p>
@@ -144,10 +145,10 @@
 		gap: 0.5rem;
 		margin: 0 0 0.75rem;
 	}
-	.kicker-actions {
+	.kicker-col {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-end;
+		align-items: flex-start;
 		gap: 0.5rem;
 	}
 	.kicker {

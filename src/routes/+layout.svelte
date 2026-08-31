@@ -124,9 +124,12 @@
 		if (p.startsWith('/catechisme-adultes/')) {
 			return true;
 		}
-		// Liturgical calendar year/solennites pages (hide on landing)
+		// Liturgical calendar year/solennites listing pages (hide on the
+		// landing, and on the per-feast dedicated pages one level deeper -
+		// those are lean permalink pages, not a reading surface the sidebar's
+		// TOC is useful for).
 		if (p.startsWith('/calendrier-liturgique/')) {
-			return true;
+			return p.split('/').filter(Boolean).length === 2;
 		}
 		return false;
 	});

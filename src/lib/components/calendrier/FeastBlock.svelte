@@ -156,10 +156,13 @@
 		{#if showDates && 'date' in feast}
 			<p class="feast-date">{feast.date}</p>
 		{/if}
-		<h2 class="feast-title" id="f-{feast.slug}">{feast.title}</h2>
-		{#if showPermalink}
-			<a class="permalink" href={permalinkHref}>Page dédiée</a>
-		{/if}
+		<h2 class="feast-title" id="f-{feast.slug}">
+			{#if showPermalink}
+				<a class="feast-title-link" href={permalinkHref}>{feast.title}</a>
+			{:else}
+				{feast.title}
+			{/if}
+		</h2>
 	</header>
 	{#if isWeekday && sundayCycle && weekdayCycle}
 		<p class="cycle-note">
@@ -333,16 +336,11 @@
 		flex: 1 1 auto;
 		min-width: 0;
 	}
-	.permalink {
-		flex: none;
-		font-family: var(--font-ui);
-		font-size: 0.72rem;
-		font-weight: 500;
-		letter-spacing: 0.04em;
-		color: var(--color-muted);
+	.feast-title-link {
+		color: inherit;
 		text-decoration: none;
 	}
-	.permalink:hover {
+	.feast-title-link:hover {
 		color: var(--color-accent);
 		text-decoration: underline;
 	}

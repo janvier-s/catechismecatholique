@@ -6,6 +6,7 @@
 	let {
 		datesIndex,
 		selectedIso = null,
+		align = 'right',
 		open,
 		onToggle,
 		onClose,
@@ -13,6 +14,10 @@
 	}: {
 		datesIndex: CalendrierDatesIndexFile;
 		selectedIso?: string | null;
+		/** Which edge the trigger sits near - the panel extends away from that
+		 *  edge so it doesn't spill off the card. TodayCard's trigger sits at
+		 *  the card's left edge; PickedDateCard's sits at the right. */
+		align?: 'left' | 'right';
 		/** Owned by the page, not this component - TodayCard and PickedDateCard
 		 *  each mount their own instance of this dropdown, and one replaces the
 		 *  other the moment a date is picked. An internal `open` state would
@@ -65,7 +70,12 @@
 		Chercher une date
 	</button>
 	{#if open}
-		<div class="date-search-panel" role="dialog" aria-label="Chercher une date">
+		<div
+			class="date-search-panel"
+			class:align-left={align === 'left'}
+			role="dialog"
+			aria-label="Chercher une date"
+		>
 			<CalendrierPicker {datesIndex} {selectedIso} {onPick} />
 		</div>
 	{/if}
@@ -106,6 +116,10 @@
 		border-radius: 6px;
 		background: var(--color-panel);
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+	}
+	.date-search-panel.align-left {
+		right: auto;
+		left: 0;
 	}
 
 	@media (max-width: 640px) {
