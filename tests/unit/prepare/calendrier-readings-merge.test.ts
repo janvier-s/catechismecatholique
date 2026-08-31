@@ -116,6 +116,35 @@ describe('mergeReadings', () => {
 		]);
 	});
 
+	it('omits a weekday target with no reading rather than writing an undefined entry', () => {
+		const weekdayTargets: WeekdayTarget[] = [
+			{
+				slug: 'ordinaire-2-lundi',
+				season: 'ordinaire',
+				weekOfSeason: 2,
+				dayOfWeek: 1,
+				cycle: 'II',
+				representativeDate: '2026-01-12'
+			},
+			{
+				slug: 'ordinaire-3-mardi',
+				season: 'ordinaire',
+				weekOfSeason: 3,
+				dayOfWeek: 2,
+				cycle: 'I',
+				representativeDate: '2025-01-21'
+			}
+		];
+		const readingsWithWeekday: CalendrierReadingsFile = {
+			...readingsFile,
+			'II:ordinaire-2-lundi': { date: '2026-01-12', lectures: [] }
+		};
+		const result = mergeReadings(yearFiles, fixed, readingsWithWeekday, weekdayTargets);
+		expect(Object.keys(result)).toContain('II:ordinaire-2-lundi');
+		expect(Object.keys(result)).not.toContain('I:ordinaire-3-mardi');
+		expect(Object.values(result).every((v) => v !== undefined)).toBe(true);
+	});
+
 	it('warns when an allowlisted key now has a reading, so it can be removed from the allowlist', () => {
 		const withResolvedGap: CalendrierReadingsFile = {
 			...readingsFile,

@@ -19,8 +19,9 @@ import type { WeekdayTarget } from './weekdayFeasts.ts';
  * for it yet.
  *
  * `weekdayTargets` is already filtered upstream to only the combos with a
- * real `readingsFile` entry, so that loop copies without the throw-on-missing
- * guard the year/fixed loops need.
+ * real `readingsFile` entry, so that loop skips a missing key instead of
+ * throwing like the year/fixed loops · a weekday gap is upstream's to catch,
+ * and writing `undefined` into the output would be worse than emitting nothing.
  */
 export function mergeReadings(
 	yearFiles: CalendrierYearFile[],
@@ -57,7 +58,8 @@ export function mergeReadings(
 	}
 	for (const t of weekdayTargets) {
 		const key = readingsKey(t.slug, t.cycle);
-		out[key] = readingsFile[key]!;
+		const entry = readingsFile[key];
+		if (entry) out[key] = entry;
 	}
 
 	for (const key of Object.keys(KNOWN_AELF_GAPS)) {
