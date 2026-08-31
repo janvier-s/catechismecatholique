@@ -45,14 +45,39 @@ describe('parseAelfRef', () => {
 		});
 	});
 
-	it('uses the first (Septuagint) number of a dual-numbered psalm ref', () => {
+	it('uses the parenthesised (Hebrew) number of a dual-numbered psalm ref', () => {
 		expect(parseAelfRef('Ps 118 (119), 97-98, 99-100, 101-102')).toEqual({
 			slug: 'psaumes',
-			chapter: 118,
+			chapter: 119,
 			ranges: [
 				[97, 98],
 				[99, 100],
 				[101, 102]
+			]
+		});
+	});
+
+	it('keeps the parenthesised number even when it is the shorter one', () => {
+		expect(parseAelfRef('Ps 21 (22), 1-2')).toEqual({
+			slug: 'psaumes',
+			chapter: 22,
+			ranges: [[1, 2]]
+		});
+	});
+
+	it('returns null for a ref spanning two chapters', () => {
+		expect(parseAelfRef('Mt 26, 14 – 27, 66')).toBeNull();
+		expect(parseAelfRef('Is 8, 23b – 9, 3')).toBeNull();
+		expect(parseAelfRef('Ml 1, 14b – 2, 2b.8-10')).toBeNull();
+	});
+
+	it('still parses hyphen-joined verse ranges that look dash-like', () => {
+		expect(parseAelfRef('Ps 129 (130), 1-2, 3-4')).toEqual({
+			slug: 'psaumes',
+			chapter: 130,
+			ranges: [
+				[1, 2],
+				[3, 4]
 			]
 		});
 	});
