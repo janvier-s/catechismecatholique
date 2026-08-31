@@ -791,8 +791,9 @@ export interface CalendrierYearFile {
 export interface CalendrierDateRow {
 	date: string;
 	slug: string;
-	corpus: 'year' | 'fixed';
+	corpus: 'year' | 'fixed' | 'weekday';
 	yearKey?: CalendrierYearKey;
+	cycle?: 'I' | 'II';
 	liturgicalColor: LiturgicalColor;
 }
 

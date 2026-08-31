@@ -39,8 +39,9 @@ export interface CalendrierYearFile {
 export interface CalendrierDateRow {
 	date: string; // ISO yyyy-mm-dd
 	slug: string;
-	corpus: 'year' | 'fixed';
+	corpus: 'year' | 'fixed' | 'weekday';
 	yearKey?: 'a' | 'b' | 'c'; // present when corpus === 'year'
+	cycle?: 'I' | 'II'; // present when corpus === 'weekday'
 	liturgicalColor: LiturgicalColor;
 }
 
@@ -58,13 +59,18 @@ export interface CalendrierIndexFile {
 }
 
 /**
+ * The key readings.json uses for a feast: bare slug for a fixed feast (no
+ * cycle variation), "{yearKey}:{slug}" for a année-scoped Sunday/feast,
+ * or "{cycle}:{slug}" for weekday (ferial) readings, since the same slug
+ * repeats across cycles but each has genuinely different readings.
+ *
  * `type` is wider than the 4-reading Sunday pattern (lecture_1/psaume/
- * lecture_2/evangile): multi-part liturgies carry more - the Easter Vigil
+ * lecture_2/evangile): multi-part liturgies carry more · the Easter Vigil
  * alone has lecture_1..lecture_7 interleaved with a psaume or cantique after
  * each, plus a closing epitre; Pentecost's vigil has a sequence; Palm
  * Sunday's procession-only entry has entree_messianique instead of any
  * reading at all. AELF sends `null`, not an absent key, for a reading type
- * that doesn't apply (e.g. `titre` on a psaume) - hence `| null` throughout
+ * that doesn't apply (e.g. `titre` on a psaume) · hence `| null` throughout
  * rather than plain optionality.
  */
 export interface CalendrierReading {
@@ -103,12 +109,12 @@ export interface CalendrierReadingsFile {
 
 /**
  * The key readings.json uses for a feast: bare slug for a fixed feast (no
- * cycle variation), or "{yearKey}:{slug}" for a annee-scoped Sunday/feast,
- * since the same slug string repeats across annees A/B/C for most curated
- * Sundays but each cycle uses a genuinely different Gospel/reading set.
+ * cycle variation), or "{cycleKey}:{slug}" for a annee-scoped Sunday/feast
+ * or weekday (ferial) readings, since the same slug string repeats across
+ * cycles but each uses a genuinely different Gospel/reading set.
  */
-export function readingsKey(slug: string, yearKey?: 'a' | 'b' | 'c'): string {
-	return yearKey ? `${yearKey}:${slug}` : slug;
+export function readingsKey(slug: string, cycleKey?: 'a' | 'b' | 'c' | 'I' | 'II'): string {
+	return cycleKey ? `${cycleKey}:${slug}` : slug;
 }
 
 /**
