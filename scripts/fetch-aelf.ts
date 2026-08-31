@@ -236,14 +236,18 @@ const weekdayTargets = await buildWeekdayTargets(DATE_RANGE_START_YEAR, DATE_RAN
 
 /**
  * Weekday targets are ~632 extra live requests on top of the Sunday pass, so a
- * single transient blip must not cost the whole run: `failures` is fatal (it
- * exits before anything is written), which would discard the Sunday data too.
- * Transport-level trouble (network error, 5xx, unparseable body) is therefore
- * retried with a short backoff and, if it still fails, only warned about · the
- * target is simply left out of this run and picked up by the next one. A
- * deterministic failure, i.e. AELF answering 4xx or the response having no
- * usable messe, is still recorded as a real failure: retrying cannot fix it and
- * it means the target itself is wrong.
+ * single blip must not cost the whole run: `failures` is fatal (it exits
+ * before anything is written), which would discard the Sunday data too.
+ * Transport-level trouble (network error, 5xx, unparseable body) is retried
+ * with a short backoff. A weekday target has only one candidate date (no
+ * fallback the way the Sunday loop's multi-candidate retry has), so a non-5xx
+ * failure - typically AELF answering 404 because it has no archived content
+ * for that specific past date - is a permanent, un-fixable-by-retry gap for
+ * this one target, not evidence the target itself is wrong. Both cases are
+ * therefore only warned about and the target is left out of this run, picked
+ * up by a later one. `pickMesse` throwing (the response came back ok but had
+ * no usable messe) is the one case still recorded as a real failure, since
+ * that points at an actual bug in our own matching logic, not a data gap.
  */
 const WEEKDAY_ATTEMPTS = 3;
 const WEEKDAY_RETRY_BACKOFF_MS = 1000;
@@ -253,7 +257,6 @@ for (const { slug, cycle, representativeDate } of weekdayTargets) {
 	const key = readingsKey(slug, cycle);
 	let body: AelfResponseBody | null = null;
 	let lastTransientReason = '';
-	let hardFailure = '';
 
 	const attempts = AELF_CACHE_DIR ? 1 : WEEKDAY_ATTEMPTS;
 	for (let attempt = 1; attempt <= attempts; attempt++) {
@@ -272,11 +275,17 @@ for (const { slug, cycle, representativeDate } of weekdayTargets) {
 				lastTransientReason = `AELF returned ${res.status} for ${representativeDate}`;
 				continue;
 			}
-			if (AELF_CACHE_DIR) {
-				lastTransientReason = `not in local cache for ${representativeDate}`;
-				break;
-			}
-			hardFailure = `${key}: AELF returned ${res.status} for ${representativeDate}`;
+			// Unlike the Sunday loop, a weekday target has exactly one candidate
+			// date (romcal already picked an unambiguous representative
+			// occurrence) - a non-5xx failure here (typically 404, AELF simply
+			// has no archived content for that specific past date) is therefore
+			// a permanent, un-fixable-by-retry gap for this target, not evidence
+			// that the target itself is wrong. Treat it as skippable, the same
+			// as any other unresolved weekday target, rather than aborting the
+			// whole run the way a genuine Sunday mismatch would.
+			lastTransientReason = AELF_CACHE_DIR
+				? `not in local cache for ${representativeDate}`
+				: `AELF returned ${res.status} for ${representativeDate}`;
 			break;
 		}
 		try {
@@ -288,10 +297,6 @@ for (const { slug, cycle, representativeDate } of weekdayTargets) {
 		break;
 	}
 
-	if (hardFailure) {
-		failures.push(hardFailure);
-		continue;
-	}
 	if (!body) {
 		// Carry the previous run's text over rather than silently dropping a key
 		// the output file already had · the whole file is rewritten from scratch.
