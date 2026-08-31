@@ -290,11 +290,7 @@ function extractRangeAndBody(inner: string): { range: string; body: string } | n
 	return { range: normalizeDashes(range), body: inner };
 }
 
-export function parseCommentaryFile(html: string): CommentaryFile | null {
-	const head = html.match(COMMENTARY_HEADING_RE);
-	if (!head) return null;
-	const bookName = head[1]!.replace(/\s+/g, ' ').trim();
-
+function extractCommentaryEntries(html: string): CommentaryEntry[] {
 	const entries: CommentaryEntry[] = [];
 	let m: RegExpExecArray | null;
 	ENTRY_BLOCK_RE.lastIndex = 0;
@@ -306,8 +302,14 @@ export function parseCommentaryFile(html: string): CommentaryFile | null {
 		if (ccc.length === 0) continue;
 		entries.push({ range: entry.range, ccc });
 	}
+	return entries;
+}
 
-	return { bookName, entries };
+export function parseCommentaryFile(html: string): CommentaryFile | null {
+	const head = html.match(COMMENTARY_HEADING_RE);
+	if (!head) return null;
+	const bookName = head[1]!.replace(/\s+/g, ' ').trim();
+	return { bookName, entries: extractCommentaryEntries(html) };
 }
 
 export const DIDACHE_BOOK_TO_USFX: Record<string, string> = {
@@ -450,6 +452,12 @@ function formatVerseRef(
  * Build the per-chapter concordance + by-paragraph index from parsed Didache HTML files.
  * Multi-chapter ranges are emitted into EVERY chapter they span (with verseRef preserving
  * the full range), so a reader on any included chapter sees the broader-context pericope.
+ *
+ * `htmlFiles` must be in the source ebook's document order (its split-file
+ * numbering) — a file with no "Commentary on X" heading of its own (a plain
+ * continuation page, or a sidebar essay inserted mid-commentary) is treated
+ * as more of the nearest preceding "Commentary on X" book's content, so an
+ * out-of-order list misattributes or silently drops it.
  */
 export function buildConcordancePericopes(
 	htmlFiles: string[],
@@ -490,21 +498,17 @@ export function buildConcordancePericopes(
 		return Object.keys(data).reduce((m, k) => Math.max(m, parseInt(k, 10)), 0);
 	};
 
-	for (const html of htmlFiles) {
-		const file = parseCommentaryFile(html);
-		if (!file) continue;
-		stats.commentaryFiles++;
+	// The book whose "Commentary on X" heading was most recently seen — files
+	// with no such heading of their own are treated as more of its content
+	// (see buildConcordancePericopes' doc comment).
+	let currentUsfx: string | null = null;
+	const seenBookNames = new Set<string>();
 
-		const usfx = DIDACHE_BOOK_TO_USFX[file.bookName];
-		if (!usfx || !validUsfx.has(usfx)) {
-			unknownBookSet.add(file.bookName);
-			continue;
-		}
+	function processEntries(usfx: string, entries: CommentaryEntry[]): void {
 		const slug = slugByUsfx.get(usfx)!;
 		const frenchName = frenchByUsfx.get(usfx)!;
-		let producedAny = false;
 
-		for (const entry of file.entries) {
+		for (const entry of entries) {
 			const range = parseRange(entry.range);
 			if (!range) {
 				unparseableSet.add(entry.range);
@@ -579,7 +583,6 @@ export function buildConcordancePericopes(
 				for (let v = perStartV; v <= perEndV; v++) {
 					draft.verseSet.set(v, (draft.verseSet.get(v) ?? 0) + 1);
 				}
-				producedAny = true;
 				stats.pericopesEmitted++;
 			}
 
@@ -606,8 +609,45 @@ export function buildConcordancePericopes(
 				byParagraph.set(p, arr);
 			}
 		}
+	}
 
-		if (!producedAny) zeroEntrySet.add(file.bookName);
+	for (const html of htmlFiles) {
+		const commentary = parseCommentaryFile(html);
+
+		if (commentary) {
+			stats.commentaryFiles++;
+			seenBookNames.add(commentary.bookName);
+			const usfx = DIDACHE_BOOK_TO_USFX[commentary.bookName];
+			if (!usfx || !validUsfx.has(usfx)) {
+				unknownBookSet.add(commentary.bookName);
+				currentUsfx = null;
+				continue;
+			}
+			currentUsfx = usfx;
+			processEntries(usfx, commentary.entries);
+			continue;
+		}
+
+		// No "Commentary on X" heading — either a plain continuation page, or a
+		// sidebar inserted mid-commentary (an apologetical essay, a book-intro
+		// banner, ...). Either way it does NOT end the active book's run: the
+		// source interleaves sidebars into a book's commentary and resumes
+		// afterward without repeating the heading (e.g. Psalms commentary
+		// breaks for "AN APOLOGETICAL EXPLANATION OF THE MOMENT OF DEATH" and
+		// picks back up at psalm 25 two files later). A sidebar's own
+		// paragraphs are prose, not verse-range-led, so extractCommentaryEntries'
+		// requirement that an entry start with its verse-range backlink already
+		// keeps them from being misattributed here.
+		if (currentUsfx !== null) {
+			stats.commentaryFiles++;
+			processEntries(currentUsfx, extractCommentaryEntries(html));
+		}
+	}
+
+	for (const name of seenBookNames) {
+		const usfx = DIDACHE_BOOK_TO_USFX[name];
+		if (!usfx || !validUsfx.has(usfx)) continue;
+		if (!byBook.has(usfx)) zeroEntrySet.add(name);
 	}
 
 	const byBookOut: Record<string, Record<number, ConcordanceChapter>> = {};

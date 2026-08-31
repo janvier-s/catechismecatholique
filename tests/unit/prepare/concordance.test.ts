@@ -361,4 +361,63 @@ describe('buildConcordancePericopes', () => {
 		expect(r.byBook).toEqual({});
 		expect(r.stats.booksWithZeroEntries).toEqual(['Genesis']);
 	});
+
+	it('attributes a headless continuation file to the preceding book heading', () => {
+		const heading = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">1:1</a>
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">268</a>)</p>
+    </body></html>`;
+		const continuation = `<html><body>
+      <p class="calibre_6"><a href="index_split_019.html#filepos2">3:1-24</a> no heading here
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">390</a>)</p>
+    </body></html>`;
+		const r = buildConcordancePericopes([heading, continuation], ncl, knownParas, books, sections);
+		expect(r.byBook.GEN![1]!.pericopes).toHaveLength(1);
+		expect(r.byBook.GEN![3]!.pericopes).toHaveLength(1);
+		expect(r.byBook.GEN![3]!.pericopes[0]!.cccRanges).toEqual([{ from: 390, to: 390 }]);
+	});
+
+	it('resumes attributing to the active book after a sidebar essay, without absorbing the essay itself', () => {
+		// Mirrors the real source: a sidebar essay (its own calibre_3 heading,
+		// not "Commentary on X") is interleaved mid-book and the commentary
+		// resumes afterward with no heading of its own. The essay's own
+		// paragraph is prose that doesn't lead with a verse-range backlink
+		// (unlike a real commentary entry), so it is excluded regardless of
+		// which book is "active" while it's being scanned.
+		const heading = `<html><body>
+      <p class="calibre_3">Commentary on Genesis</p>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">1:1</a>
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">268</a>)</p>
+    </body></html>`;
+		const sidebarEssay = `<html><body>
+      <p class="calibre_3">AN APOLOGETICAL EXPLANATION OF DEATH</p>
+      <p class="calibre_6">Unrelated apologetics prose citing
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">990</a>)
+        without a leading verse-range link.</p>
+    </body></html>`;
+		const resumedCommentary = `<html><body>
+      <p class="calibre_6"><a href="index_split_020.html#filepos3">3:15</a> resumes Genesis
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">395</a>)</p>
+    </body></html>`;
+		const r = buildConcordancePericopes(
+			[heading, sidebarEssay, resumedCommentary],
+			ncl,
+			knownParas,
+			books,
+			sections
+		);
+		expect(r.byBook.GEN![1]!.pericopes).toHaveLength(1);
+		expect(r.byBook.GEN![3]!.pericopes).toHaveLength(1);
+		expect(r.byBook.GEN![3]!.pericopes[0]!.cccRanges).toEqual([{ from: 395, to: 395 }]);
+	});
+
+	it('does not attribute leading headless files before any book heading has been seen', () => {
+		const headless = `<html><body>
+      <p class="calibre_6"><a href="index_split_018.html#filepos1">1:1</a> front matter
+        (CCC <a href="http://www.vatican.va/archive/ccc_css/archive/catechism/p.htm">268</a>)</p>
+    </body></html>`;
+		const r = buildConcordancePericopes([headless], ncl, knownParas, books, sections);
+		expect(r.byBook).toEqual({});
+	});
 });

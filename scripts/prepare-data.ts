@@ -482,17 +482,20 @@ async function main() {
 		const sourceDir =
 			process.env.DIDACHE_SOURCE_DIR ?? join(ROOT, '..', 'DOCTRINA', 'sources', 'didache');
 
-		const htmlFiles: string[] = [];
+		let htmlFiles: string[] = [];
 		let sourcePresent = true;
 		try {
 			const stat = statSync(sourceDir);
 			if (!stat.isDirectory()) throw new Error(`not a directory: ${sourceDir}`);
 			const entries = readdirSync(sourceDir, { withFileTypes: true, recursive: true });
-			for (const ent of entries) {
-				if (ent.isFile() && ent.name.toLowerCase().endsWith('.html')) {
-					htmlFiles.push(readFileSync(join(ent.parentPath, ent.name), 'utf8'));
-				}
-			}
+			// Sorted (not readdir order) because buildConcordancePericopes attributes
+			// headless continuation files to the nearest preceding book heading —
+			// it needs the source ebook's own split-file document order.
+			const htmlPaths = entries
+				.filter((ent) => ent.isFile() && ent.name.toLowerCase().endsWith('.html'))
+				.map((ent) => join(ent.parentPath, ent.name))
+				.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+			htmlFiles = htmlPaths.map((p) => readFileSync(p, 'utf8'));
 		} catch (e) {
 			const err = e as NodeJS.ErrnoException;
 			if (err.code === 'ENOENT' || err.message?.startsWith('not a directory:')) {
