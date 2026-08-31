@@ -1,0 +1,84 @@
+{
+	"parts": [
+		{
+			"slug": "prologue",
+			"title": "Prologue",
+			"prologue": true,
+			"range": { "from": 1, "to": 25 },
+			"intro_headings": [
+				{ "id": "i", "level": 2, "title": "I. La vie de l'homme", "paragraph_start": 1 }
+			]
+		},
+		{
+			"slug": "3-vie-dans-le-christ",
+			"title": "La vie dans le Christ",
+			"sections": [
+				{
+					"slug": "1-vocation-de-lhomme-la-vie-dans-lesprit",
+					"title": "La vocation de l'homme : la vie dans l'Esprit",
+					"chapters": [
+						{
+							"slug": "1-dignite-de-la-personne-humaine",
+							"title": "La dignité de la personne humaine",
+							"range": { "from": 1700, "to": 2051 },
+							"headings": [],
+							"articles": [
+								{
+									"slug": "2-notre-vocation-a-la-beatitude",
+									"title": "Notre vocation à la béatitude",
+									"range": { "from": 1716, "to": 1729 },
+									"headings": [
+										{
+											"id": "i-les-beatitudes",
+											"level": 2,
+											"title": "I. Les béatitudes",
+											"paragraph_start": 1716
+										},
+										{
+											"id": "ii-le-desir-du-bonheur",
+											"level": 2,
+											"title": "II. Le désir du bonheur",
+											"paragraph_start": 1723
+										},
+										{
+											"id": "iii-la-beatitude-chretienne",
+											"level": 2,
+											"title": "III. La béatitude chrétienne",
+											"paragraph_start": 1725
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "4-priere-chretienne",
+			"title": "La prière chrétienne",
+			"sections": [
+				{
+					"slug": "2-priere-du-seigneur",
+					"title": "La prière du Seigneur : « Notre Père »",
+					"chapters": [
+						{
+							"slug": "1-notre-pere",
+							"title": "« Notre Père »",
+							"range": { "from": 2759, "to": 2865 },
+							"headings": [],
+							"articles": [
+								{
+									"slug": "6-le-septieme-commandement",
+									"title": "Le septième commandement",
+									"range": { "from": 2401, "to": 2463 },
+									"headings": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

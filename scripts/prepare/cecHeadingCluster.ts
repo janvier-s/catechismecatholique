@@ -1,0 +1,175 @@
+import type { CalendrierCluster } from './calendrier.ts';
+import type { CccCitation } from './concordanceMatcher.ts';
+
+export interface CecHeading {
+	title: string;
+	paragraph_start: number;
+}
+
+export interface CecRange {
+	from: number;
+	to: number;
+}
+
+export interface CecArticle {
+	title: string;
+	range: CecRange;
+	headings: CecHeading[];
+}
+
+export interface CecChapter {
+	title: string;
+	range: CecRange;
+	headings: CecHeading[];
+	articles: CecArticle[];
+}
+
+export interface CecSection {
+	chapters: CecChapter[];
+}
+
+export interface CecPart {
+	title: string;
+	prologue?: boolean;
+	range?: CecRange;
+	intro_headings?: CecHeading[];
+	sections?: CecSection[];
+}
+
+export interface CecStructureFile {
+	parts: CecPart[];
+}
+
+interface Span {
+	start: number;
+	end: number;
+	title: string;
+}
+
+export interface HeadingLevels {
+	fine: Span[];
+	article: Span[];
+	chapter: Span[];
+}
+
+/** Turns a list of (paragraph_start, title) into non-overlapping spans, each
+ *  ending one paragraph before the next entry starts. The last entry's span
+ *  runs to `maxParagraph` (the CCC's last paragraph, 2865) so the coarsest
+ *  level always has zero gaps. */
+function closeSpans(entries: { start: number; title: string }[], maxParagraph: number): Span[] {
+	const sorted = [...entries].sort((a, b) => a.start - b.start);
+	return sorted.map((entry, i) => ({
+		start: entry.start,
+		end: i + 1 < sorted.length ? sorted[i + 1]!.start - 1 : maxParagraph,
+		title: entry.title
+	}));
+}
+
+const MAX_PARAGRAPH = 2865;
+
+export function buildHeadingLevels(structure: CecStructureFile): HeadingLevels {
+	const fineEntries: { start: number; title: string }[] = [];
+	const articleEntries: { start: number; title: string }[] = [];
+	const chapterEntries: { start: number; title: string }[] = [];
+
+	for (const part of structure.parts) {
+		if (part.prologue) {
+			for (const h of part.intro_headings ?? []) {
+				fineEntries.push({ start: h.paragraph_start, title: h.title });
+			}
+			if (part.range) chapterEntries.push({ start: part.range.from, title: part.title });
+			continue;
+		}
+		for (const section of part.sections ?? []) {
+			for (const chapter of section.chapters) {
+				chapterEntries.push({ start: chapter.range.from, title: chapter.title });
+				for (const h of chapter.headings)
+					fineEntries.push({ start: h.paragraph_start, title: h.title });
+				for (const article of chapter.articles) {
+					articleEntries.push({ start: article.range.from, title: article.title });
+					for (const h of article.headings) {
+						fineEntries.push({ start: h.paragraph_start, title: h.title });
+					}
+				}
+			}
+		}
+	}
+
+	return {
+		fine: closeSpans(fineEntries, MAX_PARAGRAPH),
+		article: closeSpans(articleEntries, MAX_PARAGRAPH),
+		chapter: closeSpans(chapterEntries, MAX_PARAGRAPH)
+	};
+}
+
+function findContaining(spans: Span[], from: number, to: number): string | null {
+	for (const span of spans) {
+		if (span.start <= from && to <= span.end) return span.title;
+	}
+	return null;
+}
+
+function bestHeadingFor(levels: HeadingLevels, from: number, to: number): string {
+	return (
+		findContaining(levels.fine, from, to) ??
+		findContaining(levels.article, from, to) ??
+		findContaining(levels.chapter, from, to) ??
+		'Autres références'
+	);
+}
+
+function formatCecRanges(paragraphs: number[]): string {
+	const sorted = [...new Set(paragraphs)].sort((a, b) => a - b);
+	const parts: string[] = [];
+	let runStart = sorted[0]!;
+	let prev = sorted[0]!;
+	for (let i = 1; i <= sorted.length; i++) {
+		const n = sorted[i];
+		if (n !== undefined && n === prev + 1) {
+			prev = n;
+			continue;
+		}
+		parts.push(runStart === prev ? `${runStart}` : `${runStart}-${prev}`);
+		if (n !== undefined) {
+			runStart = n;
+			prev = n;
+		}
+	}
+	return parts.join(', ');
+}
+
+/**
+ * Groups cited CCC ranges by the finest heading that fully contains each
+ * range (falling back to article, then chapter, when a range spans a finer
+ * boundary · verified against the real Beatitudes case, CEC 1716-1729,
+ * which spans three fine headings and correctly resolves to its containing
+ * article). Groups sharing a resolved title are merged into one cluster.
+ * Sorted by paragraph count descending, capped at `cap` (default 7, the
+ * highest cluster count any hand-curated Sunday feast reaches in
+ * CCC_Liturgy_List.txt).
+ */
+export function clusterCitations(
+	citations: CccCitation[],
+	levels: HeadingLevels,
+	cap = 7
+): CalendrierCluster[] {
+	const paragraphsByTheme = new Map<string, Set<number>>();
+	for (const { from, to } of citations) {
+		const theme = bestHeadingFor(levels, from, to);
+		const set = paragraphsByTheme.get(theme) ?? new Set<number>();
+		for (let n = from; n <= to; n++) set.add(n);
+		paragraphsByTheme.set(theme, set);
+	}
+
+	const clusters = [...paragraphsByTheme.entries()]
+		.map(([theme, set]) => ({ theme, paragraphs: [...set].sort((a, b) => a - b) }))
+		.sort((a, b) => b.paragraphs.length - a.paragraphs.length)
+		.slice(0, cap);
+
+	return clusters.map((c, i) => ({
+		i,
+		theme: c.theme,
+		refs: formatCecRanges(c.paragraphs),
+		paragraphs: c.paragraphs
+	}));
+}
