@@ -784,7 +784,7 @@ export interface CalendrierFixedFeast extends CalendrierFeast {
 }
 
 export interface CalendrierYearFile {
-	key: CalendrierYearKey;
+	key: CalendrierYearKey | 'I' | 'II';
 	feasts: CalendrierFeast[];
 }
 

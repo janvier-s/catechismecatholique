@@ -44,7 +44,7 @@
 		{#if loading}
 			<p class="status">Chargement…</p>
 		{:else if feast}
-			<FeastBlock {feast} yearKey={row.yearKey} />
+			<FeastBlock {feast} yearKey={row.yearKey ?? row.cycle} />
 		{/if}
 	</div>
 </div>

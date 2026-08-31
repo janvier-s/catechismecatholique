@@ -436,7 +436,7 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		ff.liturgicalColor = color;
 	}
 
-	const readings = mergeReadings(yearFiles, fixed, readingsFile);
+	const readings = mergeReadings(yearFiles, fixed, readingsFile, weekdayTargets);
 
 	const projectRoot = new URL('../..', import.meta.url).pathname;
 	const structurePath = join(projectRoot, 'static', 'data', 'cec', 'structure.json');

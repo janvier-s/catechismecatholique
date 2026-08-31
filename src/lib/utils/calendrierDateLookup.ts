@@ -5,7 +5,7 @@ import type {
 	CalendrierFixedFeast,
 	CalendrierYearKey
 } from '$lib/data/types';
-import { loadCalendrierYear } from '$lib/data/loaders';
+import { loadCalendrierYear, loadCalendrierFeries, type Fetch } from '$lib/data/loaders';
 
 export function toIsoDate(d: Date): string {
 	const y = d.getFullYear();
@@ -77,11 +77,16 @@ export function resolvePickedDate(index: CalendrierDatesIndexFile, picked: Date)
 /** Fetches the full feast record (with clusters) a resolved row points to. */
 export async function resolveFeastForRow(
 	row: CalendrierDateRow,
-	fixedFeasts: (CalendrierFeast | CalendrierFixedFeast)[]
+	fixedFeasts: (CalendrierFeast | CalendrierFixedFeast)[],
+	fetcher: Fetch = fetch
 ): Promise<CalendrierFeast | CalendrierFixedFeast | null> {
 	if (row.corpus === 'fixed') {
 		return fixedFeasts.find((f) => f.slug === row.slug) ?? null;
 	}
-	const year = await loadCalendrierYear(row.yearKey as CalendrierYearKey);
+	if (row.corpus === 'weekday') {
+		const feries = await loadCalendrierFeries(row.cycle as 'I' | 'II', fetcher);
+		return feries.feasts.find((f) => f.slug === row.slug) ?? null;
+	}
+	const year = await loadCalendrierYear(row.yearKey as CalendrierYearKey, fetcher);
 	return year.feasts.find((f) => f.slug === row.slug) ?? null;
 }

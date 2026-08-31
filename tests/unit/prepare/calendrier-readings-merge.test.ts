@@ -4,6 +4,7 @@ import type {
 	CalendrierReadingsFile,
 	CalendrierYearFile
 } from '../../../scripts/prepare/calendrier';
+import type { WeekdayTarget } from '../../../scripts/prepare/weekdayFeasts';
 
 vi.mock('../../../scripts/aelf/knownGaps', () => ({
 	KNOWN_AELF_GAPS: { 'a:neuvieme-dimanche-du-temps-ordinaire': 'test-only gap' }
@@ -87,6 +88,29 @@ describe('mergeReadings', () => {
 		const result = mergeReadings(withGap, fixed, readingsFile);
 		expect(Object.keys(result)).not.toContain('a:neuvieme-dimanche-du-temps-ordinaire');
 		expect(Object.keys(result).sort()).toEqual([
+			'b:deuxieme-dimanche-du-temps-ordinaire',
+			'la-solennite-de-saint-pierre-et-saint-paul-apotres'
+		]);
+	});
+
+	it('copies weekday reading entries keyed by slug and cycle, without the throw-on-missing guard', () => {
+		const weekdayTargets: WeekdayTarget[] = [
+			{
+				slug: 'ordinaire-2-lundi',
+				season: 'ordinaire',
+				weekOfSeason: 2,
+				dayOfWeek: 1,
+				cycle: 'II',
+				representativeDate: '2026-01-12'
+			}
+		];
+		const readingsWithWeekday: CalendrierReadingsFile = {
+			...readingsFile,
+			'II:ordinaire-2-lundi': { date: '2026-01-12', lectures: [] }
+		};
+		const result = mergeReadings(yearFiles, fixed, readingsWithWeekday, weekdayTargets);
+		expect(Object.keys(result).sort()).toEqual([
+			'II:ordinaire-2-lundi',
 			'b:deuxieme-dimanche-du-temps-ordinaire',
 			'la-solennite-de-saint-pierre-et-saint-paul-apotres'
 		]);

@@ -66,7 +66,7 @@ import type {
 
 import { readingsKey, readingsFilename } from './calendrierReadingsKey';
 
-type Fetch = typeof fetch;
+export type Fetch = typeof fetch;
 
 async function fetchJson<T>(url: string, fetcher: Fetch): Promise<T> {
 	const res = await fetcher(url);
@@ -676,6 +676,23 @@ export function loadCalendrierYear(
 	return p;
 }
 
+const calendrierFeriesCache = new Map<'I' | 'II', Promise<CalendrierYearFile>>();
+
+export function loadCalendrierFeries(
+	cycle: 'I' | 'II',
+	fetcher: Fetch = fetch
+): Promise<CalendrierYearFile> {
+	let p = calendrierFeriesCache.get(cycle);
+	if (!p) {
+		p = fetchJson<CalendrierYearFile>(
+			`/data/calendrier/feries-${cycle.toLowerCase()}.json`,
+			fetcher
+		);
+		calendrierFeriesCache.set(cycle, p);
+	}
+	return p;
+}
+
 const calendrierReadingCache = new Map<string, Promise<CalendrierReadingsEntry | null>>();
 
 /**
@@ -687,7 +704,7 @@ const calendrierReadingCache = new Map<string, Promise<CalendrierReadingsEntry |
  */
 export function loadCalendrierReading(
 	slug: string,
-	yearKey?: CalendrierYearKey,
+	yearKey?: CalendrierYearKey | 'I' | 'II',
 	fetcher: Fetch = fetch
 ): Promise<CalendrierReadingsEntry | null> {
 	const key = readingsKey(slug, yearKey);

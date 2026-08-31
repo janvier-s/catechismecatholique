@@ -15,7 +15,7 @@
 		showDates = false
 	}: {
 		feast: CalendrierFeast | CalendrierFixedFeast;
-		yearKey?: CalendrierYearKey;
+		yearKey?: CalendrierYearKey | 'I' | 'II';
 		showDates?: boolean;
 	} = $props();
 

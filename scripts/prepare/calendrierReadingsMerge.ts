@@ -5,6 +5,7 @@ import type {
 } from './calendrier.ts';
 import { readingsKey } from './calendrier.ts';
 import { KNOWN_AELF_GAPS } from '../aelf/knownGaps.ts';
+import type { WeekdayTarget } from './weekdayFeasts.ts';
 
 /**
  * Validates that every curated feast/fixed-feast slug has a fetched AELF
@@ -16,11 +17,16 @@ import { KNOWN_AELF_GAPS } from '../aelf/knownGaps.ts';
  * The exception: a key listed in `KNOWN_AELF_GAPS` is tolerated
  * absent rather than thrown on, since AELF genuinely has no fetchable date
  * for it yet.
+ *
+ * `weekdayTargets` is already filtered upstream to only the combos with a
+ * real `readingsFile` entry, so that loop copies without the throw-on-missing
+ * guard the year/fixed loops need.
  */
 export function mergeReadings(
 	yearFiles: CalendrierYearFile[],
 	fixed: CalendrierFixedFeast[],
-	readingsFile: CalendrierReadingsFile
+	readingsFile: CalendrierReadingsFile,
+	weekdayTargets: WeekdayTarget[] = []
 ): CalendrierReadingsFile {
 	const out: CalendrierReadingsFile = {};
 
@@ -48,6 +54,10 @@ export function mergeReadings(
 			);
 		}
 		out[key] = entry;
+	}
+	for (const t of weekdayTargets) {
+		const key = readingsKey(t.slug, t.cycle);
+		out[key] = readingsFile[key]!;
 	}
 
 	for (const key of Object.keys(KNOWN_AELF_GAPS)) {

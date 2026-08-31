@@ -70,7 +70,7 @@
 		{/if}
 	</div>
 	{#if resolved?.status === 'match' && feast}
-		<FeastBlock {feast} yearKey={resolved.row.yearKey} />
+		<FeastBlock {feast} yearKey={resolved.row.yearKey ?? resolved.row.cycle} />
 	{/if}
 </div>
 

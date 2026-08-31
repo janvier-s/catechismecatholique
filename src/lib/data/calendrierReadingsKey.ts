@@ -5,7 +5,7 @@ import type { CalendrierYearKey } from './types';
  * The key readings are stored under: bare slug for a fixed feast (no cycle
  * variation), or "{yearKey}:{slug}" for a annee-scoped Sunday/feast.
  */
-export function readingsKey(slug: string, yearKey?: CalendrierYearKey): string {
+export function readingsKey(slug: string, yearKey?: CalendrierYearKey | 'I' | 'II'): string {
 	return yearKey ? `${yearKey}:${slug}` : slug;
 }
 

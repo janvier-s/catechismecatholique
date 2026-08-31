@@ -4,9 +4,14 @@ import {
 	previousSunday,
 	nextSunday,
 	resolveToday,
-	resolvePickedDate
+	resolvePickedDate,
+	resolveFeastForRow
 } from '../../../src/lib/utils/calendrierDateLookup';
-import type { CalendrierDatesIndexFile } from '../../../src/lib/data/types';
+import type {
+	CalendrierDatesIndexFile,
+	CalendrierDateRow,
+	CalendrierFixedFeast
+} from '../../../src/lib/data/types';
 
 const index: CalendrierDatesIndexFile = {
 	rangeStart: '2024-01-01',
@@ -109,5 +114,35 @@ describe('resolvePickedDate', () => {
 		expect(resolvePickedDate(narrowIndex, new Date(2024, 11, 23))).toEqual({
 			status: 'no-match'
 		});
+	});
+});
+
+describe('resolveFeastForRow', () => {
+	it('resolves a weekday row via loadCalendrierFeries', async () => {
+		const fixedFeasts: CalendrierFixedFeast[] = [];
+		const row: CalendrierDateRow = {
+			date: '2026-01-12',
+			slug: 'ordinaire-2-lundi',
+			corpus: 'weekday',
+			cycle: 'II',
+			liturgicalColor: 'green'
+		};
+		const mockFetch = (async () =>
+			new Response(
+				JSON.stringify({
+					key: 'II',
+					feasts: [
+						{
+							slug: 'ordinaire-2-lundi',
+							title: 'Lundi de la 2e semaine du Temps Ordinaire',
+							season: 'ordinaire',
+							liturgicalColor: 'green',
+							clusters: []
+						}
+					]
+				})
+			)) as unknown as typeof fetch;
+		const feast = await resolveFeastForRow(row, fixedFeasts, mockFetch);
+		expect(feast?.slug).toBe('ordinaire-2-lundi');
 	});
 });
