@@ -36,7 +36,10 @@ export const NAMED_FEAST_ROMCAL_ID: Record<string, string> = {
 	'la-solennite-de-lassomption-de-la-vierge-marie': 'assumption_of_the_blessed_virgin_mary',
 	'la-solennite-de-tous-les-saints': 'all_saints',
 	'la-solennite-de-limmaculee-conception-de-la-vierge-marie':
-		'immaculate_conception_of_the_blessed_virgin_mary'
+		'immaculate_conception_of_the_blessed_virgin_mary',
+	'la-solennite-de-lannonciation-du-seigneur': 'annunciation_of_the_lord',
+	'la-nativite-de-saint-jean-baptiste': 'nativity_of_john_the_baptist',
+	'la-commemoration-de-tous-les-fideles-defunts': 'commemoration_of_all_the_faithful_departed'
 };
 
 // Only the four seasons that contain plain "Nth Sunday" titles. `noel` and

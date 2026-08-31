@@ -387,6 +387,12 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 	const text = readFileSync(join(sourceDir, 'CCC_Liturgy_List.txt'), 'utf8');
 	const { years, fixed } = parseAll(text);
 
+	// Source order is "AUTRES FÊTES" authoring order, not calendar order - a
+	// feast added later in the source text (e.g. the Annonciation, dated
+	// earlier in the year than Tous les Saints) would otherwise land after it
+	// in every listing that just iterates `fixed_feasts` as-is.
+	fixed.sort((a, b) => a.month_index - b.month_index || parseInt(a.date) - parseInt(b.date));
+
 	const yearKeys: ('a' | 'b' | 'c')[] = ['a', 'b', 'c'];
 	const yearFiles: CalendrierYearFile[] = yearKeys.map((key) => ({
 		key,
