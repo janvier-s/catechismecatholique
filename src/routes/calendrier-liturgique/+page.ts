@@ -37,10 +37,18 @@ export const load: PageLoad = async ({ fetch }) => {
 	collectParagraphs(feriesI.feasts, paragraphs);
 	collectParagraphs(feriesII.feasts, paragraphs);
 
+	const totalCovered =
+		yearA.feasts.length +
+		yearB.feasts.length +
+		yearC.feasts.length +
+		feriesI.feasts.length +
+		feriesII.feasts.length +
+		index.fixed_feasts.length;
+
 	return {
 		index,
 		datesIndex,
 		totalParagraphs: paragraphs.size,
-		totalDates: datesIndex.rows.length
+		totalCovered
 	};
 };
