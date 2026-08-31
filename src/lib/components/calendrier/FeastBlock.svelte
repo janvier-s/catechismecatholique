@@ -204,7 +204,7 @@
 						{:else if loaded && loaded.length > 0}
 							{#each loaded as p (p.number)}
 								<div class="par">
-									<a class="par-num" href="/cec/{p.number}">§{p.number}</a>
+									<a class="par-num" href="/cec/{p.number}">{p.number}</a>
 									<div class="par-text">
 										<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 										{@html stripNotes(p.text_html)}
