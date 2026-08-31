@@ -7,9 +7,11 @@
 
 	let {
 		datesIndex,
+		selectedIso = null,
 		onPick
 	}: {
 		datesIndex: CalendrierDatesIndexFile;
+		selectedIso?: string | null;
 		onPick: (row: CalendrierDateRow) => void;
 	} = $props();
 
@@ -58,6 +60,15 @@
 
 	let visibleYear = $state(Number(initialDate.slice(0, 4)));
 	let visibleMonth = $state(Number(initialDate.slice(5, 7)));
+
+	// Jump the visible month to follow an externally-driven selection (e.g. the
+	// Sunday quick-nav buttons), without fighting the visitor's own browsing —
+	// this only re-runs when selectedIso itself changes.
+	$effect(() => {
+		if (!selectedIso) return;
+		visibleYear = Number(selectedIso.slice(0, 4));
+		visibleMonth = Number(selectedIso.slice(5, 7));
+	});
 
 	const grid = $derived(buildMonthGrid(visibleYear, visibleMonth, datesIndex));
 	const atRangeStart = $derived(visibleYear === rangeStartYear && visibleMonth === rangeStartMonth);
@@ -118,18 +129,20 @@
 
 	<div class="weekdays" aria-hidden="true">
 		{#each WEEKDAY_LABELS as label, i (i)}
-			<span>{label}</span>
+			<span class:is-sunday={i === 6}>{label}</span>
 		{/each}
 	</div>
 
 	<div class="grid">
 		{#each grid as week, wi (wi)}
-			{#each week as cell (cell.date)}
+			{#each week as cell, di (cell.date)}
 				{#if cell.inMonth && cell.inRange && cell.row}
 					<button
 						type="button"
 						class="day matched"
 						class:is-today={cell.date === todayIso}
+						class:is-selected={cell.date === selectedIso}
+						class:is-sunday={di === 6}
 						onclick={() => onPick(cell.row!)}
 						aria-label={formatIsoDate(cell.date)}
 					>
@@ -145,6 +158,7 @@
 						class="day"
 						class:is-today={cell.date === todayIso}
 						class:out-of-month={!cell.inMonth}
+						class:is-sunday={di === 6}
 					>
 						<span class="day-number">{cell.day}</span>
 					</span>
@@ -215,6 +229,9 @@
 		letter-spacing: 0.06em;
 		color: var(--color-subtle);
 	}
+	.weekdays span.is-sunday {
+		color: var(--color-accent);
+	}
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
@@ -236,6 +253,9 @@
 		color: var(--color-subtle);
 		opacity: 0.35;
 	}
+	.day.is-sunday {
+		background: color-mix(in srgb, var(--color-accent) 7%, transparent);
+	}
 	button.day.matched {
 		color: var(--color-fg);
 		background: none;
@@ -243,6 +263,9 @@
 		cursor: pointer;
 		font-family: inherit;
 		transition: background-color 120ms ease;
+	}
+	button.day.matched.is-sunday {
+		background: color-mix(in srgb, var(--color-accent) 7%, transparent);
 	}
 	button.day.matched:hover {
 		background: color-mix(in srgb, var(--color-accent) 10%, transparent);
@@ -253,6 +276,9 @@
 	}
 	.day.is-today {
 		box-shadow: inset 0 0 0 1.5px var(--color-accent);
+	}
+	.day.is-selected {
+		background: color-mix(in srgb, var(--color-accent) 22%, transparent);
 	}
 	.color-dot {
 		width: 0.4rem;

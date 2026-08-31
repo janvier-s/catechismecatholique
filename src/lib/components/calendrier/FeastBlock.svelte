@@ -82,6 +82,14 @@
 		return s.charAt(0).toUpperCase() + s.slice(1);
 	}
 
+	// Weekday clusters carry raw CEC heading titles (e.g. "IV. La portée de la
+	// foi en Dieu Unique") — the numbering is meaningful in the Catechism's own
+	// outline but is just noise once lifted out into a flat list of themes.
+	const NUMBERING_PREFIX_RE = /^\s*(?:[IVXLCDM]{1,8}|\d{1,4})[.)]\s*/;
+	function stripNumbering(s: string): string {
+		return s.replace(NUMBERING_PREFIX_RE, '');
+	}
+
 	function stripNotes(html: string): string {
 		return html.replace(/\s*<sup[^>]*>[\s\S]*?<\/sup>/g, '');
 	}
@@ -199,7 +207,9 @@
 						aria-expanded={isOpen}
 					>
 						<span class="caret" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
-						<span class="cluster-theme">{capitalize(cluster.theme)}</span>
+						<span class="cluster-theme"
+							>{capitalize(isWeekday ? stripNumbering(cluster.theme) : cluster.theme)}</span
+						>
 						<span class="cluster-refs">{cluster.refs}</span>
 					</button>
 				</h3>
@@ -267,7 +277,7 @@
 		font-size: 0.72rem;
 		font-style: italic;
 		color: var(--color-muted);
-		margin: 1rem 0 0;
+		margin: 1.75rem 0 -1.25rem;
 	}
 	.open-all {
 		font-family: var(--font-ui);

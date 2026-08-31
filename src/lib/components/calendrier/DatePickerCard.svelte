@@ -5,16 +5,18 @@
 
 	let {
 		datesIndex,
+		selectedIso = null,
 		onPick
 	}: {
 		datesIndex: CalendrierDatesIndexFile;
+		selectedIso?: string | null;
 		onPick: (row: CalendrierDateRow) => void;
 	} = $props();
 </script>
 
 <div class="picker-card">
 	<p class="kicker">Chercher une date</p>
-	<CalendrierPicker {datesIndex} {onPick} />
+	<CalendrierPicker {datesIndex} {selectedIso} {onPick} />
 </div>
 
 <style>

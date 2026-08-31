@@ -77,7 +77,11 @@
 				onPick={(row) => (pickedRow = row)}
 			/>
 		{/if}
-		<DatePickerCard datesIndex={data.datesIndex} onPick={(row) => (pickedRow = row)} />
+		<DatePickerCard
+			datesIndex={data.datesIndex}
+			selectedIso={pickedRow?.date ?? null}
+			onPick={(row) => (pickedRow = row)}
+		/>
 	</div>
 
 	<div class="cards" aria-label="Les années liturgiques">

@@ -128,13 +128,17 @@
 		font-weight: 500;
 		color: var(--color-muted);
 		background: none;
-		border: none;
-		padding: 0;
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
+		padding: 0.3rem 0.6rem;
 		cursor: pointer;
-		transition: color 150ms ease;
+		transition:
+			color 150ms ease,
+			border-color 150ms ease;
 	}
 	.sunday-nav button:hover {
 		color: var(--color-accent);
+		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
 	.reset-btn {
 		font-family: var(--font-ui);
