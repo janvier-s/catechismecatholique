@@ -97,7 +97,15 @@ export function buildHeadingLevels(structure: CecStructureFile): HeadingLevels {
 						start: h.paragraph_start,
 						title: h.title
 					}));
-					fineSpans.push(...closeSpans(chapterHeadingEntries, chapter.range.to));
+					// A chapter's own headings are its intro material · where the
+					// chapter also has articles, they stop at the first article
+					// rather than running to the chapter's end, otherwise the last
+					// intro heading swallows every article below it and mislabels
+					// every citation inside them (real case: 422-682, where
+					// « Au cœur de la catéchèse : le Christ » would cover 426-682).
+					const firstArticle = chapter.articles[0];
+					const chapterHeadingsEnd = firstArticle ? firstArticle.range.from - 1 : chapter.range.to;
+					fineSpans.push(...closeSpans(chapterHeadingEntries, chapterHeadingsEnd));
 				}
 
 				for (const article of chapter.articles) {
@@ -130,11 +138,18 @@ export function buildHeadingLevels(structure: CecStructureFile): HeadingLevels {
 	};
 }
 
+/** Returns the narrowest span containing [from, to]. Spans at one level are
+ *  meant to be non-overlapping, but nothing enforces that, and picking the
+ *  first match in start order would silently prefer an over-wide span over the
+ *  precise one it overlaps. */
 function findContaining(spans: Span[], from: number, to: number): string | null {
+	let best: Span | null = null;
 	for (const span of spans) {
-		if (span.start <= from && to <= span.end) return span.title;
+		if (span.start > from) break; // start-sorted: nothing later can contain `from`
+		if (to > span.end) continue;
+		if (!best || span.end - span.start < best.end - best.start) best = span;
 	}
-	return null;
+	return best?.title ?? null;
 }
 
 function bestHeadingFor(levels: HeadingLevels, from: number, to: number): string {

@@ -65,6 +65,49 @@ describe('clusterCitations - variable granularity', () => {
 		expect(clusters[0]!.refs).toBe('1716-1729');
 	});
 
+	it("stops a chapter's own headings at its first article", () => {
+		// 426 is inside the chapter's intro headings, so it keeps that title.
+		expect(clusterCitations([{ from: 427, to: 427 }], levels)[0]!.theme).toBe(
+			'Au cœur de la catéchèse : le Christ'
+		);
+		// 440 is inside an article · it must resolve to that article's fine
+		// heading, not to the chapter intro heading that precedes it.
+		expect(clusterCitations([{ from: 440, to: 440 }], levels)[0]!.theme).toBe('II. Christ');
+	});
+
+	it('resolves a citation in a heading-less article to the article title', () => {
+		expect(clusterCitations([{ from: 600, to: 600 }], levels)[0]!.theme).toBe(
+			'« Jésus-Christ a souffert sous Ponce Pilate »'
+		);
+	});
+
+	it('prefers the narrowest containing span when spans overlap', () => {
+		const overlapping = buildHeadingLevels({
+			parts: [
+				{
+					title: 'Partie',
+					sections: [
+						{
+							chapters: [
+								{
+									title: 'Chapitre',
+									range: { from: 100, to: 200 },
+									headings: [{ title: 'Intro large', paragraph_start: 100 }],
+									articles: []
+								}
+							]
+						}
+					]
+				}
+			]
+		});
+		// The chapter has no articles, so its heading legitimately runs to 200.
+		// Splice in a narrower overlapping span to prove the tie-break.
+		overlapping.fine.push({ start: 150, end: 160, title: 'Fine étroite' });
+		overlapping.fine.sort((a, b) => a.start - b.start);
+		expect(clusterCitations([{ from: 155, to: 155 }], overlapping)[0]!.theme).toBe('Fine étroite');
+	});
+
 	it('returns an empty array for no citations', () => {
 		expect(clusterCitations([], levels)).toEqual([]);
 	});

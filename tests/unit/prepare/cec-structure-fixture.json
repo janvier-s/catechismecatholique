@@ -10,6 +10,54 @@
 			]
 		},
 		{
+			"slug": "1-profession-de-foi",
+			"title": "La profession de foi",
+			"sections": [
+				{
+					"slug": "2-je-crois-en-jesus-christ",
+					"title": "Je crois en Jésus-Christ",
+					"chapters": [
+						{
+							"slug": "2-je-crois-en-jesus-christ-le-fils-unique-de-dieu",
+							"title": "Je crois en Jésus-Christ, le Fils unique de Dieu",
+							"range": { "from": 422, "to": 682 },
+							"headings": [
+								{
+									"id": "la-bonne-nouvelle",
+									"level": 3,
+									"title": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+									"paragraph_start": 422
+								},
+								{
+									"id": "au-coeur-de-la-catechese-le-christ",
+									"level": 3,
+									"title": "Au cœur de la catéchèse : le Christ",
+									"paragraph_start": 426
+								}
+							],
+							"articles": [
+								{
+									"slug": "1-et-en-jesus-christ-son-fils-unique",
+									"title": "« Et en Jésus-Christ, son Fils unique, notre Seigneur »",
+									"range": { "from": 430, "to": 455 },
+									"headings": [
+										{ "id": "i-jesus", "level": 2, "title": "I. Jésus", "paragraph_start": 430 },
+										{ "id": "ii-christ", "level": 2, "title": "II. Christ", "paragraph_start": 436 }
+									]
+								},
+								{
+									"slug": "4-jesus-christ-a-souffert-sous-ponce-pilate",
+									"title": "« Jésus-Christ a souffert sous Ponce Pilate »",
+									"range": { "from": 571, "to": 630 },
+									"headings": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"slug": "3-vie-dans-le-christ",
 			"title": "La vie dans le Christ",
 			"sections": [
