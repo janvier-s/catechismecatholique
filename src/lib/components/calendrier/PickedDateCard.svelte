@@ -36,7 +36,7 @@
 >
 	<div class="result-head">
 		<p class="kicker">Résultat</p>
-		<button type="button" class="reset-btn" onclick={onReset}>Chercher une autre date</button>
+		<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
 	</div>
 	<!-- The live region has to outlive the message so the message counts as
 	     an insertion into it, hence a wrapper that renders unconditionally. -->

@@ -14,7 +14,7 @@ test('picking a matched day shows its feast without hiding the calendar', async 
 
 	const picked = page.locator('.picked-card');
 	await expect(picked.locator('article.feast')).toBeVisible();
-	await expect(picked.getByRole('button', { name: 'Chercher une autre date' })).toBeVisible();
+	await expect(picked.getByRole('button', { name: 'Revenir à aujourd’hui' })).toBeVisible();
 
 	// The calendar itself stays put and pickable, it never gets replaced by
 	// the result.
@@ -51,10 +51,7 @@ test('Chercher une autre date returns the left column to TodayCard', async ({ pa
 	await picker.getByRole('button', { name: /2026$/ }).first().click();
 	await expect(page.locator('.picked-card')).toBeVisible();
 
-	await page
-		.locator('.picked-card')
-		.getByRole('button', { name: 'Chercher une autre date' })
-		.click();
+	await page.locator('.picked-card').getByRole('button', { name: 'Revenir à aujourd’hui' }).click();
 	await expect(page.locator('.picked-card')).toHaveCount(0);
 	await expect(page.locator('.today-card')).toBeVisible();
 });
