@@ -100,7 +100,8 @@ export interface CalendrierReading {
 
 export interface CalendrierReadingsFile {
 	// Keyed by `readingsKey()`: bare slug for a fixed feast, "{yearKey}:{slug}"
-	// for a annee-scoped Sunday/feast (see `readingsKey`'s own doc comment).
+	// for a année-scoped Sunday/feast, or "{cycle}:{slug}" (cycle 'I'|'II') for
+	// a weekday reading (see `readingsKey`'s own doc comment).
 	[key: string]: {
 		date: string; // ISO yyyy-mm-dd - the past date AELF was queried with
 		lectures: CalendrierReading[];
