@@ -100,6 +100,16 @@ function aelfQueryDate(romcalDate: string, slug: string): string {
 
 const today = new Date().toISOString().slice(0, 10);
 const output: CalendrierReadingsFile = {};
+// The previous run's file, if any · only used to carry a weekday entry over
+// when this run couldn't refetch it (see the weekday loop below).
+function readExistingReadings(): CalendrierReadingsFile {
+	try {
+		return JSON.parse(readFileSync(OUT, 'utf8')) as CalendrierReadingsFile;
+	} catch {
+		return {};
+	}
+}
+const existingReadings = readExistingReadings();
 const failures: string[] = [];
 
 for (const { slug, yearKey } of targets) {
@@ -173,27 +183,68 @@ for (const { slug, yearKey } of targets) {
 
 const weekdayTargets = await buildWeekdayTargets(DATE_RANGE_START_YEAR, DATE_RANGE_END_YEAR, today);
 
+/**
+ * Weekday targets are ~632 extra live requests on top of the Sunday pass, so a
+ * single transient blip must not cost the whole run: `failures` is fatal (it
+ * exits before anything is written), which would discard the Sunday data too.
+ * Transport-level trouble (network error, 5xx, unparseable body) is therefore
+ * retried with a short backoff and, if it still fails, only warned about · the
+ * target is simply left out of this run and picked up by the next one. A
+ * deterministic failure, i.e. AELF answering 4xx or the response having no
+ * usable messe, is still recorded as a real failure: retrying cannot fix it and
+ * it means the target itself is wrong.
+ */
+const WEEKDAY_ATTEMPTS = 3;
+const WEEKDAY_RETRY_BACKOFF_MS = 1000;
+const skippedWeekdays: string[] = [];
+
 for (const { slug, cycle, representativeDate } of weekdayTargets) {
 	const key = readingsKey(slug, cycle);
-	let res: Response;
-	try {
-		res = await fetch(`https://api.aelf.org/v1/messes/${representativeDate}/${ZONE}`);
-	} catch {
-		failures.push(`${key}: network error fetching ${representativeDate}`);
+	const url = `https://api.aelf.org/v1/messes/${representativeDate}/${ZONE}`;
+	let body: AelfResponseBody | null = null;
+	let lastTransientReason = '';
+	let hardFailure = '';
+
+	for (let attempt = 1; attempt <= WEEKDAY_ATTEMPTS; attempt++) {
+		if (attempt > 1) await sleep(WEEKDAY_RETRY_BACKOFF_MS * (attempt - 1));
+		let res: Response;
+		try {
+			res = await fetch(url);
+		} catch {
+			lastTransientReason = `network error fetching ${representativeDate}`;
+			await sleep(REQUEST_DELAY_MS);
+			continue;
+		}
 		await sleep(REQUEST_DELAY_MS);
-		continue;
-	}
-	await sleep(REQUEST_DELAY_MS);
-	if (!res.ok) {
-		failures.push(`${key}: AELF returned ${res.status} for ${representativeDate}`);
-		continue;
+		if (!res.ok) {
+			if (res.status >= 500) {
+				lastTransientReason = `AELF returned ${res.status} for ${representativeDate}`;
+				continue;
+			}
+			hardFailure = `${key}: AELF returned ${res.status} for ${representativeDate}`;
+			break;
+		}
+		try {
+			body = (await res.json()) as AelfResponseBody;
+		} catch {
+			lastTransientReason = `unparseable AELF response for ${representativeDate}`;
+			continue;
+		}
+		break;
 	}
 
-	let body: AelfResponseBody;
-	try {
-		body = (await res.json()) as AelfResponseBody;
-	} catch {
-		failures.push(`${key}: unparseable AELF response for ${representativeDate}`);
+	if (hardFailure) {
+		failures.push(hardFailure);
+		continue;
+	}
+	if (!body) {
+		// Carry the previous run's text over rather than silently dropping a key
+		// the output file already had · the whole file is rewritten from scratch.
+		const previous = existingReadings[key];
+		if (previous) output[key] = previous;
+		skippedWeekdays.push(
+			`${key}: ${lastTransientReason}${previous ? ' (kept the previous run’s text)' : ''}`
+		);
 		continue;
 	}
 
@@ -204,6 +255,13 @@ for (const { slug, cycle, representativeDate } of weekdayTargets) {
 	} catch (err) {
 		failures.push((err as Error).message);
 	}
+}
+
+if (skippedWeekdays.length > 0) {
+	console.warn(
+		`fetch-aelf: ${skippedWeekdays.length} weekday target(s) skipped after ${WEEKDAY_ATTEMPTS} attempts · rerun to pick them up:`
+	);
+	for (const s of skippedWeekdays) console.warn(`  - ${s}`);
 }
 
 if (failures.length > 0) {
