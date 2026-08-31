@@ -32,9 +32,8 @@
 		evangile: 'Évangile'
 	};
 
-	async function toggleReadings() {
-		readingsExpanded = !readingsExpanded;
-		if (!readingsExpanded || (readingsState !== 'idle' && readingsState !== 'error')) return;
+	async function fetchReadings() {
+		if (readingsState !== 'idle' && readingsState !== 'error') return;
 		readingsState = 'loading';
 		try {
 			const entry = await loadCalendrierReading(feast.slug, yearKey);
@@ -42,6 +41,12 @@
 		} catch {
 			readingsState = 'error';
 		}
+	}
+
+	async function toggleReadings() {
+		readingsExpanded = !readingsExpanded;
+		if (!readingsExpanded) return;
+		await fetchReadings();
 	}
 
 	const expanded = new SvelteSet<number>();
@@ -76,9 +81,13 @@
 	}
 
 	async function toggleAllInFeast() {
-		const allOpen = feast.clusters.length > 0 && feast.clusters.every((c) => expanded.has(c.i));
+		const allOpen =
+			feast.clusters.length > 0 &&
+			feast.clusters.every((c) => expanded.has(c.i)) &&
+			readingsExpanded;
 		if (allOpen) {
 			for (const c of feast.clusters) expanded.delete(c.i);
+			readingsExpanded = false;
 		} else {
 			const toFetch: { i: number; ns: number[] }[] = [];
 			for (const c of feast.clusters) {
@@ -87,7 +96,8 @@
 					if (!paragraphs.has(c.i)) toFetch.push({ i: c.i, ns: c.paragraphs });
 				}
 			}
-			await Promise.all(toFetch.map((t) => fetchParagraphs(t.i, t.ns)));
+			readingsExpanded = true;
+			await Promise.all([...toFetch.map((t) => fetchParagraphs(t.i, t.ns)), fetchReadings()]);
 		}
 	}
 </script>
@@ -105,7 +115,9 @@
 				onclick={toggleAllInFeast}
 				aria-label="Ouvrir ou fermer toutes les sections"
 			>
-				{feast.clusters.every((c) => expanded.has(c.i)) ? 'Tout fermer' : 'Tout ouvrir'}
+				{feast.clusters.every((c) => expanded.has(c.i)) && readingsExpanded
+					? 'Tout fermer'
+					: 'Tout ouvrir'}
 			</button>
 		{/if}
 	</header>
@@ -287,6 +299,7 @@
 	}
 	.readings-toggle .caret {
 		flex: none;
+		font-family: var(--font-body);
 		font-size: 0.85rem;
 		color: var(--color-muted);
 		width: 0.9rem;
