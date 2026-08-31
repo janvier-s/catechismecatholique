@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('picking a matched day in the calendar widget shows its feast', async ({ page }) => {
+test('picking a matched day shows its feast without hiding the calendar', async ({ page }) => {
 	await page.goto('/calendrier');
 	const picker = page.locator('.picker-card');
 	await picker.scrollIntoViewIfNeeded();
@@ -12,11 +12,36 @@ test('picking a matched day in the calendar widget shows its feast', async ({ pa
 
 	await picker.getByRole('button', { name: /2026$/ }).first().click();
 
-	await expect(picker.getByRole('button', { name: 'Chercher une autre date' })).toBeVisible();
-	await expect(picker.locator('article.feast')).toBeVisible();
+	const picked = page.locator('.picked-card');
+	await expect(picked.locator('article.feast')).toBeVisible();
+	await expect(picked.getByRole('button', { name: 'Chercher une autre date' })).toBeVisible();
+
+	// The calendar itself stays put and pickable, it never gets replaced by
+	// the result.
+	await expect(picker.getByLabel('Mois', { exact: true })).toBeVisible();
 });
 
-test('Chercher une autre date returns to the calendar grid', async ({ page }) => {
+test('picking a second day updates the result in place, calendar still interactive', async ({
+	page
+}) => {
+	await page.goto('/calendrier');
+	const picker = page.locator('.picker-card');
+	await picker.scrollIntoViewIfNeeded();
+
+	await picker.getByLabel('Année', { exact: true }).selectOption('2026');
+	await picker.getByLabel('Mois', { exact: true }).selectOption('8');
+	const matchedDays = picker.getByRole('button', { name: /2026$/ });
+
+	await matchedDays.nth(0).click();
+	const firstTitle = await page.locator('.picked-card .feast-title').textContent();
+
+	await matchedDays.nth(1).click();
+	const secondTitle = await page.locator('.picked-card .feast-title').textContent();
+
+	expect(secondTitle).not.toBe(firstTitle);
+});
+
+test('Chercher une autre date returns the left column to TodayCard', async ({ page }) => {
 	await page.goto('/calendrier');
 	const picker = page.locator('.picker-card');
 	await picker.scrollIntoViewIfNeeded();
@@ -24,11 +49,14 @@ test('Chercher une autre date returns to the calendar grid', async ({ page }) =>
 	await picker.getByLabel('Année', { exact: true }).selectOption('2026');
 	await picker.getByLabel('Mois', { exact: true }).selectOption('8');
 	await picker.getByRole('button', { name: /2026$/ }).first().click();
-	await expect(picker.locator('article.feast')).toBeVisible();
+	await expect(page.locator('.picked-card')).toBeVisible();
 
-	await picker.getByRole('button', { name: 'Chercher une autre date' }).click();
-	await expect(picker.getByLabel('Mois', { exact: true })).toBeVisible();
-	await expect(picker.locator('article.feast')).toHaveCount(0);
+	await page
+		.locator('.picked-card')
+		.getByRole('button', { name: 'Chercher une autre date' })
+		.click();
+	await expect(page.locator('.picked-card')).toHaveCount(0);
+	await expect(page.locator('.today-card')).toBeVisible();
 });
 
 test('month navigation is clamped at the dataset range start', async ({ page }) => {

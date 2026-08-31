@@ -1,9 +1,13 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import type { CalendrierDateRow } from '$lib/data/types';
 	import TodayCard from '$lib/components/calendrier/TodayCard.svelte';
 	import DatePickerCard from '$lib/components/calendrier/DatePickerCard.svelte';
+	import PickedDateCard from '$lib/components/calendrier/PickedDateCard.svelte';
 
 	let { data }: { data: PageData } = $props();
+
+	let pickedRow: CalendrierDateRow | null = $state(null);
 
 	type YearCard = {
 		key: 'a' | 'b' | 'c';
@@ -58,8 +62,16 @@
 	</header>
 
 	<div class="today-picker-row">
-		<TodayCard datesIndex={data.datesIndex} fixedFeasts={data.index.fixed_feasts} />
-		<DatePickerCard datesIndex={data.datesIndex} fixedFeasts={data.index.fixed_feasts} />
+		{#if pickedRow}
+			<PickedDateCard
+				row={pickedRow}
+				fixedFeasts={data.index.fixed_feasts}
+				onReset={() => (pickedRow = null)}
+			/>
+		{:else}
+			<TodayCard datesIndex={data.datesIndex} fixedFeasts={data.index.fixed_feasts} />
+		{/if}
+		<DatePickerCard datesIndex={data.datesIndex} onPick={(row) => (pickedRow = row)} />
 	</div>
 
 	<div class="cards" aria-label="Les années liturgiques">
