@@ -40,6 +40,7 @@
 
 <style>
 	.picker-card {
+		max-width: 360px;
 		border: 1px solid var(--color-border);
 		border-left-width: 4px;
 		border-radius: 6px;

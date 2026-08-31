@@ -8,6 +8,7 @@
 	} from '$lib/data/types';
 	import { loadParagraph, loadCalendrierReading } from '$lib/data/loaders';
 	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
+	import CitationBlock from '$lib/components/cec/CitationBlock.svelte';
 
 	let {
 		feast,
@@ -153,11 +154,18 @@
 			>
 				<span class="caret" aria-hidden="true">{readingsExpanded ? '▾' : '▸'}</span>
 				<span class="readings-label">Lectures du jour</span>
-				{#if !readingsExpanded && readingsState !== 'idle' && readingsState !== 'loading' && readingsState !== 'unavailable' && readingsState !== 'error'}
-					<span class="readings-refs">{readingsState.lectures.map((l) => l.ref).join(' · ')}</span>
-				{/if}
 			</button>
 		</h3>
+		{#if !readingsExpanded && readingsState !== 'idle' && readingsState !== 'loading' && readingsState !== 'unavailable' && readingsState !== 'error'}
+			<dl class="readings-preview">
+				{#each readingsState.lectures as lecture, i (i)}
+					<div class="readings-preview-row">
+						<dt>{READING_LABELS[lecture.type] ?? lecture.type}</dt>
+						<dd>{lecture.ref}</dd>
+					</div>
+				{/each}
+			</dl>
+		{/if}
 		{#if readingsExpanded}
 			<div class="readings-body">
 				{#if readingsState === 'loading'}
@@ -204,7 +212,7 @@
 
 	{#if feast.clusters.length > 0}
 		<div class="clusters-head">
-			<h3 class="clusters-title">Paragraphes du Catéchisme en lien avec ces lectures</h3>
+			<h3 class="clusters-title">Paragraphes du Catéchisme en lien avec ces textes</h3>
 			{#if feast.clusters.length > 1}
 				<button
 					type="button"
@@ -249,6 +257,9 @@
 									<div class="par-text">
 										<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 										{@html stripNotes(p.text_html)}
+										{#each p.citations as cite, ci (ci)}
+											<CitationBlock html={stripNotes(cite.text_html)} />
+										{/each}
 									</div>
 								</div>
 							{/each}
@@ -380,15 +391,32 @@
 	.readings-toggle.is-open .readings-label {
 		color: var(--color-fg);
 	}
-	.readings-refs {
-		flex: 1;
-		min-width: 0;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		text-align: right;
+	.readings-preview {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		margin: 0.1rem 0 0.6rem;
+		padding: 0 0.4rem 0 1.9rem;
+	}
+	.readings-preview-row {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+	}
+	.readings-preview-row dt {
+		flex: none;
+		width: 7.5rem;
 		font-family: var(--font-ui);
-		font-size: 0.75rem;
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+	}
+	.readings-preview-row dd {
+		margin: 0;
+		font-family: var(--font-ui);
+		font-size: 0.82rem;
 		font-weight: 500;
 		font-variant-numeric: tabular-nums lining-nums;
 		color: var(--color-accent);
@@ -604,6 +632,16 @@
 		.par-num {
 			width: auto;
 			padding-top: 0;
+		}
+		.readings-preview {
+			padding-left: 1rem;
+		}
+		.readings-preview-row {
+			flex-direction: column;
+			gap: 0.1rem;
+		}
+		.readings-preview-row dt {
+			width: auto;
 		}
 	}
 </style>

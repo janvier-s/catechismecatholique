@@ -176,10 +176,19 @@ export async function buildCalendrierDates(
 			// year outside Advent/Lent/Easter) uses the weekday's own Mass
 			// readings unless it has proper readings of its own, which we have
 			// no data for - so it's still correct to show the ferial slug's
-			// content here. Only WEEKDAY was accepted before, which meant any
-			// date carrying a memorial got no card at all even though the
-			// readings underneath it are the same.
-			if (day.rank !== 'WEEKDAY' && day.rank !== 'MEMORIAL' && day.rank !== 'OPTIONAL_MEMORIAL') {
+			// content here. FEAST-rank days (e.g. the Transfiguration, Saint
+			// Laurent, Saint Barthélemy) DO always have their own proper
+			// readings, unlike memorials - showing the ferial slug's text there
+			// is a known inaccuracy, accepted so the date isn't simply absent
+			// from the calendar. Only WEEKDAY was accepted originally, which
+			// meant any date carrying a memorial or feast got no card at all
+			// even though a ferial-equivalent card is available underneath it.
+			if (
+				day.rank !== 'WEEKDAY' &&
+				day.rank !== 'MEMORIAL' &&
+				day.rank !== 'OPTIONAL_MEMORIAL' &&
+				day.rank !== 'FEAST'
+			) {
 				continue;
 			}
 			const dayOfWeek = day.calendar.dayOfWeek;
