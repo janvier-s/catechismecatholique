@@ -1,19 +1,51 @@
 <!-- src/lib/components/calendrier/PickedDateCard.svelte -->
 <script lang="ts">
-	import type { CalendrierDateRow, CalendrierFeast, CalendrierFixedFeast } from '$lib/data/types';
-	import { resolveFeastForRow } from '$lib/utils/calendrierDateLookup';
+	import type {
+		CalendrierDateRow,
+		CalendrierDatesIndexFile,
+		CalendrierFeast,
+		CalendrierFixedFeast
+	} from '$lib/data/types';
+	import {
+		resolveFeastForRow,
+		findRow,
+		previousSunday,
+		nextSunday,
+		toIsoDate
+	} from '$lib/utils/calendrierDateLookup';
 	import { LITURGICAL_COLOR_VAR } from './liturgicalColor';
 	import FeastBlock from './FeastBlock.svelte';
 
 	let {
 		row,
+		datesIndex,
 		fixedFeasts,
-		onReset
+		onReset,
+		onPick
 	}: {
 		row: CalendrierDateRow;
+		datesIndex: CalendrierDatesIndexFile;
 		fixedFeasts: CalendrierFixedFeast[];
 		onReset: () => void;
+		onPick: (row: CalendrierDateRow) => void;
 	} = $props();
+
+	// Split rather than `new Date(iso)`, which parses a bare ISO date as UTC
+	// and shifts the day backwards for viewers west of Greenwich.
+	function parseIsoDate(iso: string): Date {
+		const [y, m, d] = iso.split('-').map(Number);
+		return new Date(y!, m! - 1, d!);
+	}
+
+	function pickPreviousSunday() {
+		const found = findRow(datesIndex, toIsoDate(previousSunday(parseIsoDate(row.date))));
+		if (found) onPick(found);
+	}
+
+	function pickNextSunday() {
+		const found = findRow(datesIndex, toIsoDate(nextSunday(parseIsoDate(row.date))));
+		if (found) onPick(found);
+	}
 
 	let feast: CalendrierFeast | CalendrierFixedFeast | null = $state(null);
 	let loading: boolean = $state(true);
@@ -36,7 +68,15 @@
 >
 	<div class="result-head">
 		<p class="kicker">Résultat</p>
-		<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
+		<div class="result-actions">
+			{#if row.corpus === 'weekday'}
+				<div class="sunday-nav">
+					<button type="button" onclick={pickPreviousSunday}>← Dimanche précédent</button>
+					<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
+				</div>
+			{/if}
+			<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
+		</div>
 	</div>
 	<!-- The live region has to outlive the message so the message counts as
 	     an insertion into it, hence a wrapper that renders unconditionally. -->
@@ -44,7 +84,7 @@
 		{#if loading}
 			<p class="status">Chargement…</p>
 		{:else if feast}
-			<FeastBlock {feast} yearKey={row.yearKey ?? row.cycle} />
+			<FeastBlock {feast} yearKey={row.yearKey ?? row.cycle} isWeekday={row.corpus === 'weekday'} />
 		{/if}
 	</div>
 </div>
@@ -71,6 +111,30 @@
 		align-items: baseline;
 		justify-content: space-between;
 		gap: 0.75rem;
+	}
+	.result-actions {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+	.sunday-nav {
+		display: flex;
+		gap: 0.75rem;
+	}
+	.sunday-nav button {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 500;
+		color: var(--color-muted);
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		transition: color 150ms ease;
+	}
+	.sunday-nav button:hover {
+		color: var(--color-accent);
 	}
 	.reset-btn {
 		font-family: var(--font-ui);

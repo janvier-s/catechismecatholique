@@ -12,11 +12,17 @@
 	let {
 		feast,
 		yearKey,
-		showDates = false
+		showDates = false,
+		isWeekday = false
 	}: {
 		feast: CalendrierFeast | CalendrierFixedFeast;
 		yearKey?: CalendrierYearKey | 'I' | 'II';
 		showDates?: boolean;
+		/** Weekday clusters are matched automatically against an external
+		 *  concordance, not hand-curated like Sunday/solemnity clusters -
+		 *  shows a discreet source note rather than presenting them as the
+		 *  same tier of authority. */
+		isWeekday?: boolean;
 	} = $props();
 
 	let readingsExpanded = $state(false);
@@ -217,6 +223,9 @@
 			</li>
 		{/each}
 	</ul>
+	{#if isWeekday}
+		<p class="source-note">Références venant de la Didache Study Bible</p>
+	{/if}
 </article>
 
 <style>
@@ -251,6 +260,14 @@
 		margin: 0;
 		flex: 1 1 auto;
 		min-width: 0;
+	}
+
+	.source-note {
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-style: italic;
+		color: var(--color-muted);
+		margin: 1rem 0 0;
 	}
 	.open-all {
 		font-family: var(--font-ui);

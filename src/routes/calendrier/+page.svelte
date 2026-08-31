@@ -65,11 +65,17 @@
 		{#if pickedRow}
 			<PickedDateCard
 				row={pickedRow}
+				datesIndex={data.datesIndex}
 				fixedFeasts={data.index.fixed_feasts}
 				onReset={() => (pickedRow = null)}
+				onPick={(row) => (pickedRow = row)}
 			/>
 		{:else}
-			<TodayCard datesIndex={data.datesIndex} fixedFeasts={data.index.fixed_feasts} />
+			<TodayCard
+				datesIndex={data.datesIndex}
+				fixedFeasts={data.index.fixed_feasts}
+				onPick={(row) => (pickedRow = row)}
+			/>
 		{/if}
 		<DatePickerCard datesIndex={data.datesIndex} onPick={(row) => (pickedRow = row)} />
 	</div>
