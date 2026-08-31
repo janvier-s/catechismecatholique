@@ -98,6 +98,10 @@ export const GET: RequestHandler = () => {
 		out.push(`- **${t.title}** · ${t.subtitle}. \`${SITE}${t.href}\` · ${t.blurb}`);
 	}
 	out.push('');
+	out.push(
+		`Chaque dimanche/fête/férie du calendrier liturgique a aussi sa propre page : \`${SITE}/calendrier-liturgique/{a|b|c}/{slug}\` (dimanches et fêtes du Seigneur, par année), \`${SITE}/calendrier-liturgique/solennites/{slug}\` (solennités à date fixe), \`${SITE}/calendrier-liturgique/feries/{i|ii}/{slug}\` (féries de semaine, par cycle de lecture).`
+	);
+	out.push('');
 	out.push('---');
 
 	// ── Panneau d'étude · feature-level documentation worth keeping for

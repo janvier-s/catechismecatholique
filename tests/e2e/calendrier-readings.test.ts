@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('expanding Lectures du jour shows the Mass reading text', async ({ page }) => {
-	await page.goto('/calendrier/b');
+	await page.goto('/calendrier-liturgique/b');
 	const feastHeading = page.getByRole('heading', { name: 'Premier Dimanche de l’Avent' });
 	await feastHeading.scrollIntoViewIfNeeded();
 	const feastArticle = page.locator('article.feast', { has: feastHeading });
@@ -10,7 +10,7 @@ test('expanding Lectures du jour shows the Mass reading text', async ({ page }) 
 });
 
 test('a known-gap feast shows the unavailable note instead of readings', async ({ page }) => {
-	await page.goto('/calendrier/b');
+	await page.goto('/calendrier-liturgique/b');
 	const feastHeading = page.getByRole('heading', { name: 'Second Dimanche après Noël' });
 	await feastHeading.scrollIntoViewIfNeeded();
 	const feastArticle = page.locator('article.feast', { has: feastHeading });

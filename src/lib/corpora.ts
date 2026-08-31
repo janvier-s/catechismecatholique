@@ -583,7 +583,7 @@ export const TOOLS: ToolRecord[] = [
 	},
 	{
 		slug: 'calendrier',
-		href: '/calendrier',
+		href: '/calendrier-liturgique',
 		title: 'Calendrier liturgique',
 		subtitle: 'Calendrier romain croisé au Catéchisme',
 		blurb: 'Pour chaque jour du temps liturgique, les paragraphes du CEC à méditer.'

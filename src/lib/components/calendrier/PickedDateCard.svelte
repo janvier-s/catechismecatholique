@@ -15,17 +15,24 @@
 	} from '$lib/utils/calendrierDateLookup';
 	import { LITURGICAL_COLOR_VAR } from './liturgicalColor';
 	import FeastBlock from './FeastBlock.svelte';
+	import DateSearchDropdown from './DateSearchDropdown.svelte';
 
 	let {
 		row,
 		datesIndex,
 		fixedFeasts,
+		dateSearchOpen,
+		onDateSearchToggle,
+		onDateSearchClose,
 		onReset,
 		onPick
 	}: {
 		row: CalendrierDateRow;
 		datesIndex: CalendrierDatesIndexFile;
 		fixedFeasts: CalendrierFixedFeast[];
+		dateSearchOpen: boolean;
+		onDateSearchToggle: () => void;
+		onDateSearchClose: () => void;
 		onReset: () => void;
 		onPick: (row: CalendrierDateRow) => void;
 	} = $props();
@@ -75,7 +82,17 @@
 					<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
 				</div>
 			{/if}
-			<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
+			<div class="result-actions-secondary">
+				<DateSearchDropdown
+					{datesIndex}
+					selectedIso={row.date}
+					open={dateSearchOpen}
+					onToggle={onDateSearchToggle}
+					onClose={onDateSearchClose}
+					{onPick}
+				/>
+				<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
+			</div>
 		</div>
 	</div>
 	<!-- The live region has to outlive the message so the message counts as
@@ -114,11 +131,17 @@
 	}
 	.result-head {
 		display: flex;
-		align-items: baseline;
+		align-items: flex-start;
 		justify-content: space-between;
 		gap: 0.75rem;
 	}
 	.result-actions {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.5rem;
+	}
+	.result-actions-secondary {
 		display: flex;
 		align-items: baseline;
 		flex-wrap: wrap;

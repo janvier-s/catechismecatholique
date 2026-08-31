@@ -450,17 +450,17 @@
 
 	// ─── Liturgical calendar state ────────────────────────────────────────────
 	let calendrierFeasts: (CalendrierFeast | CalendrierFixedFeast)[] = $state([]);
-	let calendrierBaseHref: string = $state('/calendrier');
+	let calendrierBaseHref: string = $state('/calendrier-liturgique');
 
 	$effect(() => {
 		if (corpus !== 'calendrier') return;
-		const m = page.url.pathname.match(/^\/calendrier\/([^/]+)/);
+		const m = page.url.pathname.match(/^\/calendrier-liturgique\/([^/]+)/);
 		const annee = m ? m[1] : null;
 		if (!annee) {
 			calendrierFeasts = [];
 			return;
 		}
-		calendrierBaseHref = `/calendrier/${annee}`;
+		calendrierBaseHref = `/calendrier-liturgique/${annee}`;
 		(async () => {
 			if (annee === 'solennites') {
 				const idx = await loadCalendrierIndex();
@@ -1499,7 +1499,7 @@
 				'ordinaire'
 			];
 			const baseHref = calendrierBaseHref;
-			const isFixed = baseHref === '/calendrier/solennites';
+			const isFixed = baseHref === '/calendrier-liturgique/solennites';
 
 			function feastToItem(f: CalendrierFeast | CalendrierFixedFeast): Item {
 				const feastHref = `${baseHref}#f-${f.slug}`;

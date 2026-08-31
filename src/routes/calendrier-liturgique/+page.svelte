@@ -2,12 +2,15 @@
 	import type { PageData } from './$types';
 	import type { CalendrierDateRow } from '$lib/data/types';
 	import TodayCard from '$lib/components/calendrier/TodayCard.svelte';
-	import DatePickerCard from '$lib/components/calendrier/DatePickerCard.svelte';
 	import PickedDateCard from '$lib/components/calendrier/PickedDateCard.svelte';
 
 	let { data }: { data: PageData } = $props();
 
 	let pickedRow: CalendrierDateRow | null = $state(null);
+	// Owned here, not by TodayCard/PickedDateCard, since picking a date swaps
+	// one of those components for the other - an `open` state living inside
+	// either would reset to closed on that swap.
+	let dateSearchOpen = $state(false);
 
 	type YearCard = {
 		key: 'a' | 'b' | 'c';
@@ -67,6 +70,9 @@
 				row={pickedRow}
 				datesIndex={data.datesIndex}
 				fixedFeasts={data.index.fixed_feasts}
+				{dateSearchOpen}
+				onDateSearchToggle={() => (dateSearchOpen = !dateSearchOpen)}
+				onDateSearchClose={() => (dateSearchOpen = false)}
 				onReset={() => (pickedRow = null)}
 				onPick={(row) => (pickedRow = row)}
 			/>
@@ -74,20 +80,18 @@
 			<TodayCard
 				datesIndex={data.datesIndex}
 				fixedFeasts={data.index.fixed_feasts}
+				{dateSearchOpen}
+				onDateSearchToggle={() => (dateSearchOpen = !dateSearchOpen)}
+				onDateSearchClose={() => (dateSearchOpen = false)}
 				onPick={(row) => (pickedRow = row)}
 			/>
 		{/if}
-		<DatePickerCard
-			datesIndex={data.datesIndex}
-			selectedIso={pickedRow?.date ?? null}
-			onPick={(row) => (pickedRow = row)}
-		/>
 	</div>
 
 	<div class="cards" aria-label="Les années liturgiques">
 		{#each YEARS as year, i (year.key)}
 			{@const stats = data.index.years[i]}
-			<a class="year-card" href="/calendrier/{year.key}">
+			<a class="year-card" href="/calendrier-liturgique/{year.key}">
 				<span class="year-kicker">{year.title}</span>
 				<h2 class="year-title">L'Évangile selon<br />{year.evangelist}</h2>
 				<p class="year-lede">{year.lede}</p>
@@ -98,7 +102,7 @@
 				{/if}
 			</a>
 		{/each}
-		<a class="fixed-card" href="/calendrier/solennites">
+		<a class="fixed-card" href="/calendrier-liturgique/solennites">
 			<span class="fixed-kicker">Solennités · dates fixes</span>
 			<h2 class="fixed-title">Les grandes solennités du calendrier</h2>
 			<p class="fixed-lede">

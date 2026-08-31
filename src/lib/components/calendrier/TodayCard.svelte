@@ -18,14 +18,21 @@
 	} from '$lib/utils/calendrierDateLookup';
 	import { LITURGICAL_COLOR_VAR } from './liturgicalColor';
 	import FeastBlock from './FeastBlock.svelte';
+	import DateSearchDropdown from './DateSearchDropdown.svelte';
 
 	let {
 		datesIndex,
 		fixedFeasts,
+		dateSearchOpen,
+		onDateSearchToggle,
+		onDateSearchClose,
 		onPick
 	}: {
 		datesIndex: CalendrierDatesIndexFile;
 		fixedFeasts: CalendrierFixedFeast[];
+		dateSearchOpen: boolean;
+		onDateSearchToggle: () => void;
+		onDateSearchClose: () => void;
 		onPick: (row: CalendrierDateRow) => void;
 	} = $props();
 
@@ -89,12 +96,22 @@
 					{resolved.label === 'today' ? 'Aujourd’hui' : 'Dimanche dernier'}
 					<span class="kicker-date">{formatIsoDate(resolved.row.date)}</span>
 				</p>
-				{#if resolved.row.corpus === 'weekday'}
-					<div class="sunday-nav">
-						<button type="button" onclick={pickPreviousSunday}>← Dimanche précédent</button>
-						<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
-					</div>
-				{/if}
+				<div class="kicker-actions">
+					{#if resolved.row.corpus === 'weekday'}
+						<div class="sunday-nav">
+							<button type="button" onclick={pickPreviousSunday}>← Dimanche précédent</button>
+							<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
+						</div>
+					{/if}
+					<DateSearchDropdown
+						{datesIndex}
+						selectedIso={resolved.row.date}
+						open={dateSearchOpen}
+						onToggle={onDateSearchToggle}
+						onClose={onDateSearchClose}
+						{onPick}
+					/>
+				</div>
 			</div>
 		{:else}
 			<p class="status">Pas de dimanche ni de grande fête à afficher aujourd’hui.</p>
@@ -121,11 +138,17 @@
 	}
 	.kicker-row {
 		display: flex;
-		align-items: baseline;
+		align-items: flex-start;
 		justify-content: space-between;
 		flex-wrap: wrap;
 		gap: 0.5rem;
 		margin: 0 0 0.75rem;
+	}
+	.kicker-actions {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.5rem;
 	}
 	.kicker {
 		font-family: var(--font-ui);

@@ -149,7 +149,7 @@
 					description: 'Les termes théologiques classés par thème.'
 				},
 				{
-					href: '/calendrier',
+					href: '/calendrier-liturgique',
 					label: 'Calendrier liturgique',
 					description: 'Le calendrier romain croisé au Catéchisme.'
 				},

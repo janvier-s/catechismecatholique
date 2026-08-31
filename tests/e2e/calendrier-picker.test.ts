@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test('picking a matched day shows its feast without hiding the calendar', async ({ page }) => {
-	await page.goto('/calendrier');
-	const picker = page.locator('.picker-card');
+	await page.goto('/calendrier-liturgique');
+	const picker = page.locator('.date-search');
 	await picker.scrollIntoViewIfNeeded();
 	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 
@@ -25,8 +25,8 @@ test('picking a matched day shows its feast without hiding the calendar', async 
 test('picking a second day updates the result in place, calendar still interactive', async ({
 	page
 }) => {
-	await page.goto('/calendrier');
-	const picker = page.locator('.picker-card');
+	await page.goto('/calendrier-liturgique');
+	const picker = page.locator('.date-search');
 	await picker.scrollIntoViewIfNeeded();
 	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 
@@ -44,8 +44,8 @@ test('picking a second day updates the result in place, calendar still interacti
 });
 
 test('Chercher une autre date returns the left column to TodayCard', async ({ page }) => {
-	await page.goto('/calendrier');
-	const picker = page.locator('.picker-card');
+	await page.goto('/calendrier-liturgique');
+	const picker = page.locator('.date-search');
 	await picker.scrollIntoViewIfNeeded();
 	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 
@@ -60,8 +60,8 @@ test('Chercher une autre date returns the left column to TodayCard', async ({ pa
 });
 
 test('month navigation is clamped at the dataset range start', async ({ page }) => {
-	await page.goto('/calendrier');
-	const picker = page.locator('.picker-card');
+	await page.goto('/calendrier-liturgique');
+	const picker = page.locator('.date-search');
 	await picker.scrollIntoViewIfNeeded();
 	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 

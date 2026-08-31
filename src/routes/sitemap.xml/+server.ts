@@ -40,7 +40,11 @@ export const GET: RequestHandler = () => {
 		'/glossaire',
 		'/glossaire/tous',
 		'/recherche',
-		'/calendrier',
+		'/calendrier-liturgique',
+		'/calendrier-liturgique/a',
+		'/calendrier-liturgique/b',
+		'/calendrier-liturgique/c',
+		'/calendrier-liturgique/solennites',
 		'/prieres-formules',
 		'/bibliotheque',
 		'/a-propos',
@@ -94,6 +98,30 @@ export const GET: RequestHandler = () => {
 	);
 	const cpaUrls = cpaStructure.sections.map((s) => `/catechisme-adultes/${s.slug}`);
 
+	// Every calendrier feast/férie also has its own standalone page (see
+	// /calendrier-liturgique/[annee]/[slug] and /calendrier-liturgique/feries)
+	// distinct from the per-année listing pages already in sitePages above.
+	const calendrierIndex: { fixed_feasts: { slug: string }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/calendrier/index.json'), 'utf-8')
+	);
+	const calendrierUrls: string[] = calendrierIndex.fixed_feasts.map(
+		(f) => `/calendrier-liturgique/solennites/${f.slug}`
+	);
+	for (const key of ['a', 'b', 'c'] as const) {
+		const yearFile: { feasts: { slug: string }[] } = JSON.parse(
+			readFileSync(join(process.cwd(), `static/data/calendrier/annee-${key}.json`), 'utf-8')
+		);
+		calendrierUrls.push(...yearFile.feasts.map((f) => `/calendrier-liturgique/${key}/${f.slug}`));
+	}
+	for (const cycle of ['i', 'ii'] as const) {
+		const feriesFile: { feasts: { slug: string }[] } = JSON.parse(
+			readFileSync(join(process.cwd(), `static/data/calendrier/feries-${cycle}.json`), 'utf-8')
+		);
+		calendrierUrls.push(
+			...feriesFile.feasts.map((f) => `/calendrier-liturgique/feries/${cycle}/${f.slug}`)
+		);
+	}
+
 	const allUrls = [
 		...sitePages,
 		...paragraphUrls,
@@ -101,7 +129,8 @@ export const GET: RequestHandler = () => {
 		...bibleUrls,
 		...glossaryUrls,
 		...corpusUrls,
-		...cpaUrls
+		...cpaUrls,
+		...calendrierUrls
 	];
 
 	// Dedupe (corpus landings can overlap with sitePages).

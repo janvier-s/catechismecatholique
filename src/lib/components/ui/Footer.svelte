@@ -55,7 +55,7 @@
 			<ul>
 				<li><a href="/bible">Lire la Bible</a></li>
 				<li><a href="/glossaire">Glossaire</a></li>
-				<li><a href="/calendrier">Calendrier liturgique</a></li>
+				<li><a href="/calendrier-liturgique">Calendrier liturgique</a></li>
 				<li><a href="/prieres-formules">Prières & Formules</a></li>
 			</ul>
 		</div>

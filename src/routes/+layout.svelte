@@ -30,13 +30,13 @@
 	let contentEl: HTMLElement | undefined = $state();
 
 	// Sidebar corpus dispatch · the registry handles 14 of 15 cases;
-	// /cec (CCC) and /calendrier aren't in the registry (CCC is implicit,
+	// /cec (CCC) and /calendrier-liturgique aren't in the registry (CCC is implicit,
 	// calendrier is a feature not a corpus), so they're resolved inline.
 	const sidebarCorpus = $derived.by((): Corpus => {
 		const p = page.url.pathname;
 		const c = corpusForPath(p);
 		if (c) return c.id;
-		if (p.startsWith('/calendrier')) return 'calendrier';
+		if (p.startsWith('/calendrier-liturgique')) return 'calendrier';
 		return 'ccc';
 	});
 
@@ -125,7 +125,7 @@
 			return true;
 		}
 		// Liturgical calendar year/solennites pages (hide on landing)
-		if (p.startsWith('/calendrier/')) {
+		if (p.startsWith('/calendrier-liturgique/')) {
 			return true;
 		}
 		return false;
@@ -148,8 +148,8 @@
 		const toOnGrandCatechisme = toPath.startsWith('/grand-catechisme');
 		const fromOnPetitCatechisme = fromPath.startsWith('/petit-catechisme');
 		const toOnPetitCatechisme = toPath.startsWith('/petit-catechisme');
-		const fromOnCalendrier = fromPath.startsWith('/calendrier');
-		const toOnCalendrier = toPath.startsWith('/calendrier');
+		const fromOnCalendrier = fromPath.startsWith('/calendrier-liturgique');
+		const toOnCalendrier = toPath.startsWith('/calendrier-liturgique');
 
 		if (
 			(fromOnCcc && !toOnCcc) ||

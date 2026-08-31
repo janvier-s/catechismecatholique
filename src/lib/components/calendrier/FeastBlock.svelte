@@ -9,6 +9,7 @@
 	import { loadParagraph, loadCalendrierReading } from '$lib/data/loaders';
 	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import CitationBlock from '$lib/components/cec/CitationBlock.svelte';
+	import { page } from '$app/state';
 
 	let {
 		feast,
@@ -113,6 +114,26 @@
 		return html.replace(/\s*<sup[^>]*>[\s\S]*?<\/sup>/g, '');
 	}
 
+	// Each feast/férie also lives at its own indexable URL (see
+	// /calendrier-liturgique/[annee]/[slug] and /calendrier-liturgique/feries),
+	// so every place this component appears - listing pages, TodayCard,
+	// PickedDateCard - can point readers and crawlers at the permanent page.
+	// Suppressed when we're already on that page.
+	const permalinkHref = $derived.by((): string | null => {
+		if (isWeekday) {
+			const cycle = weekdayCycle ?? (yearKey === 'I' || yearKey === 'II' ? yearKey : undefined);
+			return cycle ? `/calendrier-liturgique/feries/${cycle.toLowerCase()}/${feast.slug}` : null;
+		}
+		if ('date' in feast) {
+			return `/calendrier-liturgique/solennites/${feast.slug}`;
+		}
+		if (yearKey === 'a' || yearKey === 'b' || yearKey === 'c') {
+			return `/calendrier-liturgique/${yearKey}/${feast.slug}`;
+		}
+		return null;
+	});
+	const showPermalink = $derived(permalinkHref !== null && permalinkHref !== page.url.pathname);
+
 	async function toggleAllInFeast() {
 		const allOpen = feast.clusters.length > 0 && feast.clusters.every((c) => expanded.has(c.i));
 		if (allOpen) {
@@ -136,6 +157,9 @@
 			<p class="feast-date">{feast.date}</p>
 		{/if}
 		<h2 class="feast-title" id="f-{feast.slug}">{feast.title}</h2>
+		{#if showPermalink}
+			<a class="permalink" href={permalinkHref}>Page dédiée</a>
+		{/if}
 	</header>
 	{#if isWeekday && sundayCycle && weekdayCycle}
 		<p class="cycle-note">
@@ -182,9 +206,11 @@
 								<span class="reading-ref">{lecture.ref}</span>
 							</p>
 							{#if lecture.intro_lue}
-								<p class="reading-intro">{lecture.intro_lue}</p>
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								<p class="reading-intro">{@html lecture.intro_lue}</p>
 							{:else if lecture.titre}
-								<p class="reading-intro">{lecture.titre}</p>
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								<p class="reading-intro">{@html lecture.titre}</p>
 							{/if}
 							{#if lecture.type === 'psaume' && lecture.refrain_psalmique}
 								<div class="reading-refrain reader-prose">
@@ -306,6 +332,19 @@
 		margin: 0;
 		flex: 1 1 auto;
 		min-width: 0;
+	}
+	.permalink {
+		flex: none;
+		font-family: var(--font-ui);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		color: var(--color-muted);
+		text-decoration: none;
+	}
+	.permalink:hover {
+		color: var(--color-accent);
+		text-decoration: underline;
 	}
 
 	.cycle-note {
