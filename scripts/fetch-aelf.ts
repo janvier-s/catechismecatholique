@@ -37,7 +37,19 @@ import { MANUAL_WEEKDAY_READINGS } from './aelf/manualWeekdayReadings.ts';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(HERE, '..', 'static', 'data', 'calendrier');
 const OUT = join(HERE, 'data-sources', 'calendrier', 'readings.json');
-const ZONE = 'romain';
+// 'france' matches this site's French-speaking readership more closely
+// than the universal 'romain' zone - verified by comparing both across
+// every currently-fetched date: they're identical except for the CCEE
+// Patrons of Europe (elevated to "Fête en Europe" under 'france' - Cyrille
+// et Méthode, Benoît, Brigitte de Suède, Catherine de Sienne, Edith Stein)
+// and "Dédicace des Églises consacrées" (a France particular-calendar
+// entry on the last Sunday of October). The Dédicace case is left as the
+// universal Sunday content deliberately - see the "trentieme/trente-et-
+// unieme-dimanche-du-temps-ordinaire" keys - since our year-cycle Sunday
+// slugs carry hand-curated titles/CCC clusters keyed to the universal
+// Sunday identity, and that particular-calendar entry needs its own date
+// rule and curation, not a text swap under a mismatched title.
+const ZONE = 'france';
 const REQUEST_DELAY_MS = 200;
 
 /**

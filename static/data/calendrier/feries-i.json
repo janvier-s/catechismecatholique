@@ -5476,61 +5476,58 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "I. La loi morale naturelle",
-					"refs": "1957-1960",
+					"theme": "« Tu aimeras ton prochain comme toi-même »",
+					"refs": "2563",
 					"paragraphs": [
-						1957,
-						1958,
-						1959,
-						1960
+						2563
 					]
 				},
 				{
 					"i": 1,
-					"theme": "II. La loi ancienne",
-					"refs": "1964",
+					"theme": "Serviteurs de la prière",
+					"refs": "2690",
 					"paragraphs": [
-						1964
+						2690
 					]
 				},
 				{
 					"i": 2,
-					"theme": "I. Les béatitudes",
-					"refs": "1716",
+					"theme": "Les anges dans la vie de l’Église",
+					"refs": "336",
 					"paragraphs": [
-						1716
+						336
 					]
 				},
 				{
 					"i": 3,
-					"theme": "Nous croyons",
-					"refs": "166",
+					"theme": "L’homme image de Dieu",
+					"refs": "1706",
 					"paragraphs": [
-						166
+						1706
 					]
 				},
 				{
 					"i": 4,
-					"theme": "Le Christ Jésus",
-					"refs": "728",
+					"theme": "IV. La portée de la foi en Dieu Unique",
+					"refs": "226",
 					"paragraphs": [
-						728
+						226
 					]
 				},
 				{
 					"i": 5,
-					"theme": "L’Église – instituée par le Christ Jésus",
-					"refs": "764",
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "276",
 					"paragraphs": [
-						764
+						276
 					]
 				},
 				{
 					"i": 6,
-					"theme": "La nécessité de la foi",
-					"refs": "161",
+					"theme": "La providence et les causes secondes",
+					"refs": "308",
 					"paragraphs": [
-						161
+						308
 					]
 				}
 			]
@@ -6211,42 +6208,69 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "L’Esprit Saint prépare à accueillir le Christ",
-					"refs": "1094",
+					"theme": "Le sacrement du baptême",
+					"refs": "1262-1270",
 					"paragraphs": [
-						1094
+						1262,
+						1263,
+						1264,
+						1265,
+						1266,
+						1267,
+						1268,
+						1269,
+						1270
 					]
 				},
 				{
 					"i": 1,
-					"theme": "Les signes du pain et du vin",
-					"refs": "1334",
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "616-618",
 					"paragraphs": [
-						1334
+						616,
+						617,
+						618
 					]
 				},
 				{
 					"i": 2,
-					"theme": "L’annonce du Royaume de Dieu",
-					"refs": "546",
+					"theme": "Marie – « toujours Vierge »",
+					"refs": "500-501",
 					"paragraphs": [
-						546
+						500,
+						501
 					]
 				},
 				{
 					"i": 3,
-					"theme": "Jésus enseigne à prier",
-					"refs": "2607",
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1972",
 					"paragraphs": [
-						2607
+						1972
 					]
 				},
 				{
 					"i": 4,
-					"theme": "III. La béatitude chrétienne",
-					"refs": "1724",
+					"theme": "Le Cœur du Verbe incarné",
+					"refs": "478",
 					"paragraphs": [
-						1724
+						478
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La présence du Christ par la puissance de sa Parole et de l’Esprit Saint",
+					"refs": "1380",
+					"paragraphs": [
+						1380
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les symboles de l’Église",
+					"refs": "755",
+					"paragraphs": [
+						755
 					]
 				}
 			]
@@ -7182,34 +7206,66 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "Moïse et la prière du médiateur",
-					"refs": "2577",
+					"theme": "La vie de prière",
+					"refs": "2787-2793",
 					"paragraphs": [
-						2577
+						2787,
+						2788,
+						2789,
+						2790,
+						2791,
+						2792,
+						2793
 					]
 				},
 				{
 					"i": 1,
-					"theme": "II. Christ",
-					"refs": "439",
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
 					"paragraphs": [
-						439
+						1610,
+						1611,
+						1612
 					]
 				},
 				{
 					"i": 2,
-					"theme": "IV. Seigneur",
-					"refs": "448",
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
 					"paragraphs": [
-						448
+						1644
 					]
 				},
 				{
 					"i": 3,
-					"theme": "Jésus enseigne à prier",
-					"refs": "2610",
+					"theme": "Dieu est Amour",
+					"refs": "218",
 					"paragraphs": [
-						2610
+						218
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. Les offenses à la dignité du mariage",
+					"refs": "2380",
+					"paragraphs": [
+						2380
+					]
+				},
+				{
+					"i": 5,
+					"theme": "... en attendant que tout Lui soit soumis",
+					"refs": "672",
+					"paragraphs": [
+						672
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’Église est l’Épouse du Christ",
+					"refs": "796",
+					"paragraphs": [
+						796
 					]
 				}
 			]
@@ -7222,64 +7278,66 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "La prière de l’Heure de Jésus",
-					"refs": "2752-2756",
+					"theme": "La vie de prière",
+					"refs": "2787-2793",
 					"paragraphs": [
-						2752,
-						2753,
-						2754,
-						2755,
-						2756
+						2787,
+						2788,
+						2789,
+						2790,
+						2791,
+						2792,
+						2793
 					]
 				},
 				{
 					"i": 1,
-					"theme": "Le salut de Dieu : La loi et la grâce",
-					"refs": "1949, 2055",
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
 					"paragraphs": [
-						1949,
-						2055
+						1610,
+						1611,
+						1612
 					]
 				},
 				{
 					"i": 2,
-					"theme": "« Tu aimeras le Seigneur ton Dieu de tout ton cœur, de toute ton âme et de tout ton esprit »",
-					"refs": "2083-2084",
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
 					"paragraphs": [
-						2083,
-						2084
+						1644
 					]
 				},
 				{
 					"i": 3,
-					"theme": "I. « Je crois en un seul Dieu »",
-					"refs": "201",
+					"theme": "Dieu est Amour",
+					"refs": "218",
 					"paragraphs": [
-						201
+						218
 					]
 				},
 				{
 					"i": 4,
-					"theme": "IV. La portée de la foi en Dieu Unique",
-					"refs": "228",
+					"theme": "IV. Les offenses à la dignité du mariage",
+					"refs": "2380",
 					"paragraphs": [
-						228
+						2380
 					]
 				},
 				{
 					"i": 5,
-					"theme": "IV. « Tu ne te feras aucune image sculptée... »",
-					"refs": "2133",
+					"theme": "... en attendant que tout Lui soit soumis",
+					"refs": "672",
 					"paragraphs": [
-						2133
+						672
 					]
 				},
 				{
 					"i": 6,
-					"theme": "I. « Tu adoreras le Seigneur, ton Dieu, et tu le serviras »",
-					"refs": "2084",
+					"theme": "L’Église est l’Épouse du Christ",
+					"refs": "796",
 					"paragraphs": [
-						2084
+						796
 					]
 				}
 			]
@@ -14509,101 +14567,58 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
-					"refs": "199, 386-388, 394-412",
+					"theme": "La transmission de la révélation divine",
+					"refs": "74",
 					"paragraphs": [
-						199,
-						386,
-						387,
-						388,
-						394,
-						395,
-						396,
-						397,
-						398,
-						399,
-						400,
-						401,
-						402,
-						403,
-						404,
-						405,
-						406,
-						407,
-						408,
-						409,
-						410,
-						411,
-						412
+						74
 					]
 				},
 				{
 					"i": 1,
-					"theme": "II. Le Monde visible",
-					"refs": "337-354",
+					"theme": "III. Fils unique de Dieu",
+					"refs": "442",
 					"paragraphs": [
-						337,
-						338,
-						339,
-						340,
-						341,
-						342,
-						343,
-						344,
-						345,
-						346,
-						347,
-						348,
-						349,
-						350,
-						351,
-						352,
-						353,
-						354
+						442
 					]
 				},
 				{
 					"i": 2,
-					"theme": "L’Ancien Testament",
-					"refs": "121-123",
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "854",
 					"paragraphs": [
-						121,
-						122,
-						123
+						854
 					]
 				},
 				{
 					"i": 3,
-					"theme": "L’unité de l’Ancien et du Nouveau Testament",
-					"refs": "128-130",
+					"theme": "V. La prière de louange",
+					"refs": "2640",
 					"paragraphs": [
-						128,
-						129,
-						130
+						2640
 					]
 				},
 				{
 					"i": 4,
-					"theme": "IV. Les œuvres divines et les missions trinitaires",
-					"refs": "280",
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "765",
 					"paragraphs": [
-						280
+						765
 					]
 				},
 				{
 					"i": 5,
-					"theme": "I. La catéchèse sur la Création",
-					"refs": "289",
+					"theme": "Les traits caractéristiques des sacramentaux",
+					"refs": "1668",
 					"paragraphs": [
-						289
+						1668
 					]
 				},
 				{
 					"i": 6,
-					"theme": "Pour lire le récit de la chute",
-					"refs": "390",
+					"theme": "Jésus enseigne à prier",
+					"refs": "2611",
 					"paragraphs": [
-						390
+						2611
 					]
 				}
 			]
@@ -15979,64 +15994,60 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "III. La solidarité humaine",
-					"refs": "1943-1948",
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "328-329",
 					"paragraphs": [
-						1943,
-						1944,
-						1945,
-						1946,
-						1947,
-						1948
+						328,
+						329
 					]
 				},
 				{
 					"i": 1,
-					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
-					"refs": "661, 664",
+					"theme": "La vie de prière",
+					"refs": "2779, 2785",
 					"paragraphs": [
-						661,
-						664
+						2779,
+						2785
 					]
 				},
 				{
 					"i": 2,
-					"theme": "I. La communion des biens spirituels",
-					"refs": "952",
+					"theme": "V. Dieu réalise son dessein : la divine providence",
+					"refs": "304",
 					"paragraphs": [
-						952
+						304
 					]
 				},
 				{
 					"i": 3,
-					"theme": "Révélation progressive de la Résurrection",
-					"refs": "995",
+					"theme": "V. La prière de louange",
+					"refs": "2645",
 					"paragraphs": [
-						995
+						2645
 					]
 				},
 				{
 					"i": 4,
-					"theme": "La vie de prière",
-					"refs": "2790",
+					"theme": "La foi est une grâce",
+					"refs": "153",
 					"paragraphs": [
-						2790
+						153
 					]
 				},
 				{
 					"i": 5,
-					"theme": "I. Jésus et la Loi",
-					"refs": "581",
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "544",
 					"paragraphs": [
-						581
+						544
 					]
 				},
 				{
 					"i": 6,
-					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
-					"refs": "423",
+					"theme": "Jésus prie",
+					"refs": "2603",
 					"paragraphs": [
-						423
+						2603
 					]
 				}
 			]

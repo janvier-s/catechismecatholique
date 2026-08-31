@@ -5268,63 +5268,58 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "II. « Un de corps et d’âme »",
-					"refs": "363-365",
+					"theme": "« Tu aimeras ton prochain comme toi-même »",
+					"refs": "2563",
 					"paragraphs": [
-						363,
-						364,
-						365
+						2563
 					]
 				},
 				{
 					"i": 1,
-					"theme": "Les célébrants de la Liturgie céleste",
-					"refs": "1137-1138",
+					"theme": "Serviteurs de la prière",
+					"refs": "2690",
 					"paragraphs": [
-						1137,
-						1138
+						2690
 					]
 				},
 				{
 					"i": 2,
-					"theme": "VI. L’espérance des cieux nouveaux et de la terre nouvelle",
-					"refs": "1056-1057",
+					"theme": "Les anges dans la vie de l’Église",
+					"refs": "336",
 					"paragraphs": [
-						1056,
-						1057
+						336
 					]
 				},
 				{
 					"i": 3,
-					"theme": "Prologue",
-					"refs": "13-14",
+					"theme": "L’homme image de Dieu",
+					"refs": "1706",
 					"paragraphs": [
-						13,
-						14
+						1706
 					]
 				},
 				{
 					"i": 4,
-					"theme": "« Je suis Celui qui suis »",
-					"refs": "208",
+					"theme": "IV. La portée de la foi en Dieu Unique",
+					"refs": "226",
 					"paragraphs": [
-						208
+						226
 					]
 				},
 				{
 					"i": 5,
-					"theme": "Le Christ « avec tous ses anges »",
-					"refs": "332",
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "276",
 					"paragraphs": [
-						332
+						276
 					]
 				},
 				{
 					"i": 6,
-					"theme": "L’attente du Messie et de son Esprit",
-					"refs": "712",
+					"theme": "La providence et les causes secondes",
+					"refs": "308",
 					"paragraphs": [
-						712
+						308
 					]
 				}
 			]
@@ -5698,58 +5693,69 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "L’Église – préparée dans l’Ancienne Alliance",
-					"refs": "762",
+					"theme": "Le sacrement du baptême",
+					"refs": "1262-1270",
 					"paragraphs": [
-						762
+						1262,
+						1263,
+						1264,
+						1265,
+						1266,
+						1267,
+						1268,
+						1269,
+						1270
 					]
 				},
 				{
 					"i": 1,
-					"theme": "Le mariage sous la pédagogie de la Loi",
-					"refs": "1611",
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "616-618",
 					"paragraphs": [
-						1611
+						616,
+						617,
+						618
 					]
 				},
 				{
 					"i": 2,
-					"theme": "« Tu aimeras ton prochain comme toi-même »",
-					"refs": "2561",
+					"theme": "Marie – « toujours Vierge »",
+					"refs": "500-501",
 					"paragraphs": [
-						2561
+						500,
+						501
 					]
 				},
 				{
 					"i": 3,
-					"theme": "V. Dieu réalise son dessein : la divine providence",
-					"refs": "304",
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1972",
 					"paragraphs": [
-						304
+						1972
 					]
 				},
 				{
 					"i": 4,
-					"theme": "L’annonce du Royaume de Dieu",
-					"refs": "546",
+					"theme": "Le Cœur du Verbe incarné",
+					"refs": "478",
 					"paragraphs": [
-						546
+						478
 					]
 				},
 				{
 					"i": 5,
-					"theme": "III. La béatitude chrétienne",
-					"refs": "1724",
+					"theme": "La présence du Christ par la puissance de sa Parole et de l’Esprit Saint",
+					"refs": "1380",
 					"paragraphs": [
-						1724
+						1380
 					]
 				},
 				{
 					"i": 6,
-					"theme": "L’héritage de la foi confié à la totalité de l’Église",
-					"refs": "84",
+					"theme": "Les symboles de l’Église",
+					"refs": "755",
 					"paragraphs": [
-						84
+						755
 					]
 				}
 			]
@@ -13949,34 +13955,58 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "Les blessures de l’unité",
-					"refs": "817",
+					"theme": "La transmission de la révélation divine",
+					"refs": "74",
 					"paragraphs": [
-						817
+						74
 					]
 				},
 				{
 					"i": 1,
-					"theme": "La foi",
-					"refs": "2089",
+					"theme": "III. Fils unique de Dieu",
+					"refs": "442",
 					"paragraphs": [
-						2089
+						442
 					]
 				},
 				{
 					"i": 2,
-					"theme": "Moïse et la prière du médiateur",
-					"refs": "2577",
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "854",
 					"paragraphs": [
-						2577
+						854
 					]
 				},
 				{
 					"i": 3,
-					"theme": "Le mouvement de la célébration",
-					"refs": "1355",
+					"theme": "V. La prière de louange",
+					"refs": "2640",
 					"paragraphs": [
-						1355
+						2640
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "765",
+					"paragraphs": [
+						765
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les traits caractéristiques des sacramentaux",
+					"refs": "1668",
+					"paragraphs": [
+						1668
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2611",
+					"paragraphs": [
+						2611
 					]
 				}
 			]
@@ -16675,42 +16705,60 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "I. Jésus et la Loi",
-					"refs": "582",
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "328-329",
 					"paragraphs": [
-						582
+						328,
+						329
 					]
 				},
 				{
 					"i": 1,
-					"theme": "Divisions des autorités juives à l’égard de Jésus",
-					"refs": "595",
+					"theme": "La vie de prière",
+					"refs": "2779, 2785",
 					"paragraphs": [
-						595
+						2779,
+						2785
 					]
 				},
 				{
 					"i": 2,
-					"theme": "II. Pour juger les vivants et les morts",
-					"refs": "679",
+					"theme": "V. Dieu réalise son dessein : la divine providence",
+					"refs": "304",
 					"paragraphs": [
-						679
+						304
 					]
 				},
 				{
 					"i": 3,
-					"theme": "V. Le Jugement dernier",
-					"refs": "1039",
+					"theme": "V. La prière de louange",
+					"refs": "2645",
 					"paragraphs": [
-						1039
+						2645
 					]
 				},
 				{
 					"i": 4,
-					"theme": "I. Vivre dans la vérité",
-					"refs": "2466",
+					"theme": "La foi est une grâce",
+					"refs": "153",
 					"paragraphs": [
-						2466
+						153
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "544",
+					"paragraphs": [
+						544
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Jésus prie",
+					"refs": "2603",
+					"paragraphs": [
+						2603
 					]
 				}
 			]
