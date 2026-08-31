@@ -61,7 +61,7 @@
 		</p>
 	</header>
 
-	<div class="today-picker-row">
+	<div class="today-picker-stack">
 		{#if pickedRow}
 			<PickedDateCard
 				row={pickedRow}
@@ -160,16 +160,11 @@
 		color: var(--color-muted);
 	}
 
-	.today-picker-row {
-		display: grid;
-		grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
-		gap: 1.25rem;
+	.today-picker-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 		margin-bottom: 2.5rem;
-	}
-	@media (max-width: 760px) {
-		.today-picker-row {
-			grid-template-columns: 1fr;
-		}
 	}
 
 	.cards {
