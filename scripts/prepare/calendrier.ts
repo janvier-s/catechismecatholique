@@ -7,6 +7,9 @@ import {
 	DATE_RANGE_END_YEAR
 } from './calendrierDates.ts';
 import { mergeReadings } from './calendrierReadingsMerge.ts';
+import { buildWeekdayTargets } from './weekdayFeasts.ts';
+import { buildWeekdayFeast } from './weekdayReadings.ts';
+import { buildHeadingLevels, type CecStructureFile } from './cecHeadingCluster.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -389,7 +392,29 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		feasts: years.get(key) ?? []
 	}));
 
-	const { rows, colorsBySlug } = await buildCalendrierDates(yearFiles, fixed);
+	const readingsPath = join(sourceDir, 'readings.json');
+	if (!existsSync(readingsPath)) {
+		throw new Error(
+			`calendrier: ${readingsPath} does not exist. Run "npm run fetch-aelf" to generate it.`
+		);
+	}
+	const readingsFile: CalendrierReadingsFile = JSON.parse(readFileSync(readingsPath, 'utf8'));
+
+	const today = new Date().toISOString().slice(0, 10);
+	const allWeekdayTargets = await buildWeekdayTargets(
+		DATE_RANGE_START_YEAR,
+		DATE_RANGE_END_YEAR,
+		today
+	);
+	// Romcal enumerates every theoretical weekday combo, whether or not AELF
+	// text has actually been fetched for it yet · gate on a real readings.json
+	// entry here so a dates-index row never points at a missing reading, same
+	// principle as `mergeReadings` enforcing this for year/fixed feasts.
+	const weekdayTargets = allWeekdayTargets.filter(
+		(t) => readingsKey(t.slug, t.cycle) in readingsFile
+	);
+
+	const { rows, colorsBySlug } = await buildCalendrierDates(yearFiles, fixed, weekdayTargets);
 
 	for (const yf of yearFiles) {
 		for (const feast of yf.feasts) {
@@ -411,14 +436,34 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		ff.liturgicalColor = color;
 	}
 
-	const readingsPath = join(sourceDir, 'readings.json');
-	if (!existsSync(readingsPath)) {
-		throw new Error(
-			`calendrier: ${readingsPath} does not exist. Run "npm run fetch-aelf" to generate it.`
+	const readings = mergeReadings(yearFiles, fixed, readingsFile);
+
+	const projectRoot = new URL('../..', import.meta.url).pathname;
+	const structurePath = join(projectRoot, 'static', 'data', 'cec', 'structure.json');
+	const structure: CecStructureFile = JSON.parse(readFileSync(structurePath, 'utf8'));
+	const levels = buildHeadingLevels(structure);
+	const concordanceDir = join(projectRoot, 'data-archive', 'concordance');
+
+	for (const cycleKey of ['I', 'II'] as const) {
+		const feasts = weekdayTargets
+			.filter((t) => t.cycle === cycleKey)
+			.map((t) => {
+				const entry = readingsFile[readingsKey(t.slug, cycleKey)]!;
+				return buildWeekdayFeast(
+					t.slug,
+					t.season,
+					colorsBySlug.get(t.slug) ?? 'white',
+					entry.lectures,
+					concordanceDir,
+					levels
+				);
+			});
+
+		writeFileSync(
+			join(outDir, `feries-${cycleKey.toLowerCase()}.json`),
+			JSON.stringify({ key: cycleKey, feasts }, null, '\t') + '\n'
 		);
 	}
-	const readingsFile: CalendrierReadingsFile = JSON.parse(readFileSync(readingsPath, 'utf8'));
-	const readings = mergeReadings(yearFiles, fixed, readingsFile);
 
 	const yearStats: { key: 'a' | 'b' | 'c'; total_feasts: number; total_clusters: number }[] = [];
 	let totalFeasts = 0;

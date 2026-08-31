@@ -8,6 +8,7 @@ import type {
 } from './calendrier.ts';
 import { parseFrenchOrdinal } from './calendrierFrenchOrdinal.ts';
 import { NAMED_FEAST_ROMCAL_ID, SEASON_TO_ROMCAL } from './calendrierRomcalIds.ts';
+import { ROMCAL_SEASON_TO_OURS, weekdaySlug, type WeekdayTarget } from './weekdayFeasts.ts';
 
 export const DATE_RANGE_START_YEAR = 2000;
 export const DATE_RANGE_END_YEAR = 2035;
@@ -46,7 +47,8 @@ export interface CalendrierDatesJoinResult {
 
 export async function buildCalendrierDates(
 	yearFiles: CalendrierYearFile[],
-	fixedFeasts: CalendrierFixedFeast[]
+	fixedFeasts: CalendrierFixedFeast[],
+	weekdayTargets: WeekdayTarget[] = []
 ): Promise<CalendrierDatesJoinResult> {
 	const rows: CalendrierDateRow[] = [];
 	const colorsBySlug = new Map<string, LiturgicalColor>();
@@ -70,6 +72,8 @@ export async function buildCalendrierDates(
 		}
 		matchersBySlug.set(ff.slug, { kind: 'id', id: namedId });
 	}
+
+	const weekdayBySlugCycle = new Map(weekdayTargets.map((t) => [`${t.slug}:${t.cycle}`, t]));
 
 	for (let year = DATE_RANGE_START_YEAR; year <= DATE_RANGE_END_YEAR; year++) {
 		const calendar = await new Romcal().generateCalendar(year);
@@ -143,6 +147,30 @@ export async function buildCalendrierDates(
 				slug: ff.slug,
 				corpus: 'fixed',
 				liturgicalColor: colorsBySlug.get(ff.slug)!
+			});
+		}
+
+		for (const day of days) {
+			if (day.rank !== 'WEEKDAY') continue;
+			const dayOfWeek = day.calendar.dayOfWeek;
+			const weekOfSeason = day.calendar.weekOfSeason;
+			if (dayOfWeek === undefined || dayOfWeek === 0 || weekOfSeason === undefined) continue;
+			const romcalSeason = day.seasons[0];
+			const season = romcalSeason ? ROMCAL_SEASON_TO_OURS[romcalSeason] : undefined;
+			if (!season) continue;
+			const cycle: 'I' | 'II' = day.cycles.weekdayCycle === 'YEAR_1' ? 'I' : 'II';
+			const slug = weekdaySlug(season, weekOfSeason, dayOfWeek);
+			if (!weekdayBySlugCycle.has(`${slug}:${cycle}`)) continue; // no fetched reading for this combo
+
+			if (!colorsBySlug.has(slug)) {
+				colorsBySlug.set(slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
+			}
+			rows.push({
+				date: day.date,
+				slug,
+				corpus: 'weekday',
+				cycle,
+				liturgicalColor: colorsBySlug.get(slug)!
 			});
 		}
 	}

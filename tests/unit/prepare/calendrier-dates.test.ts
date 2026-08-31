@@ -4,6 +4,7 @@ import {
 	DATE_RANGE_START_YEAR,
 	DATE_RANGE_END_YEAR
 } from '../../../scripts/prepare/calendrierDates';
+import { buildWeekdayTargets } from '../../../scripts/prepare/weekdayFeasts';
 import type {
 	CalendrierFeast,
 	CalendrierFixedFeast,
@@ -227,5 +228,16 @@ describe('buildCalendrierDates', () => {
 			feasts: [feast('mystery-feast', 'Un Mystère Non Reconnu', 'ordinaire')]
 		};
 		await expect(buildCalendrierDates([badYear], [])).rejects.toThrow(/mystery-feast/);
+	});
+
+	it('includes weekday rows with corpus "weekday" and a cycle', async () => {
+		const weekdayTargets = await buildWeekdayTargets(2024, 2024, '2024-12-31');
+		const { rows } = await buildCalendrierDates([], [], weekdayTargets);
+		const weekdayRows = rows.filter((r) => r.corpus === 'weekday');
+		expect(weekdayRows.length).toBeGreaterThan(0);
+		for (const r of weekdayRows) {
+			expect(['I', 'II']).toContain(r.cycle);
+			expect(r.yearKey).toBeUndefined();
+		}
 	});
 }, 30000); // the full 18-year range takes a few seconds

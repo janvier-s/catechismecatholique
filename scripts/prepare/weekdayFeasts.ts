@@ -10,7 +10,7 @@ export interface WeekdayTarget {
 	representativeDate: string;
 }
 
-const FRENCH_WEEKDAY: Record<number, string> = {
+export const FRENCH_WEEKDAY: Record<number, string> = {
 	1: 'lundi',
 	2: 'mardi',
 	3: 'mercredi',
@@ -19,13 +19,17 @@ const FRENCH_WEEKDAY: Record<number, string> = {
 	6: 'samedi'
 };
 
-const ROMCAL_SEASON_TO_OURS: Record<string, SeasonKey> = {
+export const ROMCAL_SEASON_TO_OURS: Record<string, SeasonKey> = {
 	ADVENT: 'avent',
 	CHRISTMAS_TIME: 'noel',
 	LENT: 'careme',
 	EASTER_TIME: 'pascal',
 	ORDINARY_TIME: 'ordinaire'
 };
+
+export function weekdaySlug(season: SeasonKey, weekOfSeason: number, dayOfWeek: number): string {
+	return `${season}-${weekOfSeason}-${FRENCH_WEEKDAY[dayOfWeek]}`;
+}
 
 /**
  * Enumerates every distinct (season, weekOfSeason, dayOfWeek, weekdayCycle)
@@ -67,7 +71,7 @@ export async function buildWeekdayTargets(
 			if (!season) continue;
 
 			const cycle: 'I' | 'II' = day.cycles.weekdayCycle === 'YEAR_1' ? 'I' : 'II';
-			const slug = `${season}-${weekOfSeason}-${FRENCH_WEEKDAY[dayOfWeek]}`;
+			const slug = weekdaySlug(season, weekOfSeason, dayOfWeek);
 			const key = `${slug}:${cycle}`;
 
 			const existing = bySlugCycle.get(key);
