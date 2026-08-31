@@ -452,6 +452,8 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 				return buildWeekdayFeast(
 					t.slug,
 					t.season,
+					t.weekOfSeason,
+					t.dayOfWeek,
 					colorsBySlug.get(t.slug) ?? 'white',
 					entry.lectures,
 					concordanceDir,

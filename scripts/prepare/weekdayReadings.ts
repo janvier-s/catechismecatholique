@@ -8,6 +8,38 @@ import { parseAelfRef } from './concordanceRefParser.ts';
 import { matchConcordance, type CccCitation } from './concordanceMatcher.ts';
 import { clusterCitations, type HeadingLevels } from './cecHeadingCluster.ts';
 
+const FRENCH_WEEKDAY_TITLE: Record<number, string> = {
+	1: 'Lundi',
+	2: 'Mardi',
+	3: 'Mercredi',
+	4: 'Jeudi',
+	5: 'Vendredi',
+	6: 'Samedi'
+};
+
+const SEASON_LABEL: Record<SeasonKey, string> = {
+	avent: "de l'Avent",
+	noel: 'du Temps de Noël',
+	careme: 'de Carême',
+	pascal: 'du Temps Pascal',
+	solennite: '',
+	ordinaire: 'du Temps Ordinaire'
+};
+
+function frenchOrdinal(n: number): string {
+	return n === 1 ? '1re' : `${n}e`;
+}
+
+export function formatWeekdayTitle(
+	season: SeasonKey,
+	weekOfSeason: number,
+	dayOfWeek: number
+): string {
+	const day = FRENCH_WEEKDAY_TITLE[dayOfWeek] ?? '';
+	const seasonLabel = SEASON_LABEL[season];
+	return `${day} de la ${frenchOrdinal(weekOfSeason)} semaine ${seasonLabel}`.trim();
+}
+
 /**
  * Builds one weekday's CalendrierFeast from its raw AELF readings, by
  * parsing each reading's ref, matching it against the archived concordance,
@@ -19,6 +51,8 @@ import { clusterCitations, type HeadingLevels } from './cecHeadingCluster.ts';
 export function buildWeekdayFeast(
 	slug: string,
 	season: SeasonKey,
+	weekOfSeason: number,
+	dayOfWeek: number,
 	liturgicalColor: LiturgicalColor,
 	readings: CalendrierReading[],
 	concordanceDir: string,
@@ -34,7 +68,7 @@ export function buildWeekdayFeast(
 
 	return {
 		slug,
-		title: slug,
+		title: formatWeekdayTitle(season, weekOfSeason, dayOfWeek),
 		season,
 		liturgicalColor,
 		clusters: clusterCitations(citations, levels)
