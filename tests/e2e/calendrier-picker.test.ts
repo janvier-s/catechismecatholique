@@ -4,6 +4,7 @@ test('picking a matched day shows its feast without hiding the calendar', async 
 	await page.goto('/calendrier');
 	const picker = page.locator('.picker-card');
 	await picker.scrollIntoViewIfNeeded();
+	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 
 	// Navigate to a fixed, known month so the matched day is deterministic
 	// regardless of the real current date.
@@ -27,6 +28,7 @@ test('picking a second day updates the result in place, calendar still interacti
 	await page.goto('/calendrier');
 	const picker = page.locator('.picker-card');
 	await picker.scrollIntoViewIfNeeded();
+	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 
 	await picker.getByLabel('Année', { exact: true }).selectOption('2026');
 	await picker.getByLabel('Mois', { exact: true }).selectOption('8');
@@ -45,6 +47,7 @@ test('Chercher une autre date returns the left column to TodayCard', async ({ pa
 	await page.goto('/calendrier');
 	const picker = page.locator('.picker-card');
 	await picker.scrollIntoViewIfNeeded();
+	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 
 	await picker.getByLabel('Année', { exact: true }).selectOption('2026');
 	await picker.getByLabel('Mois', { exact: true }).selectOption('8');
@@ -60,6 +63,7 @@ test('month navigation is clamped at the dataset range start', async ({ page }) 
 	await page.goto('/calendrier');
 	const picker = page.locator('.picker-card');
 	await picker.scrollIntoViewIfNeeded();
+	await picker.getByRole('button', { name: 'Chercher une date' }).click();
 
 	await picker.getByLabel('Année', { exact: true }).selectOption('2000');
 	await picker.getByLabel('Mois', { exact: true }).selectOption('1');

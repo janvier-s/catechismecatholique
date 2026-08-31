@@ -14,13 +14,10 @@
 	} = $props();
 
 	// Collapsed by default - reached for occasionally, not on every visit, so
-	// it shouldn't compete with the feast card for space or attention.
+	// it shouldn't compete with the feast card for space or attention. Stays
+	// open across picks once opened, so browsing several dates in a row
+	// doesn't mean re-opening it each time.
 	let expanded = $state(false);
-
-	function handlePick(row: CalendrierDateRow) {
-		onPick(row);
-		expanded = false;
-	}
 </script>
 
 <div class="picker-card">
@@ -36,7 +33,7 @@
 	</button>
 	{#if expanded}
 		<div class="picker-body">
-			<CalendrierPicker {datesIndex} {selectedIso} onPick={handlePick} />
+			<CalendrierPicker {datesIndex} {selectedIso} {onPick} />
 		</div>
 	{/if}
 </div>
