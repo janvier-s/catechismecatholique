@@ -39,6 +39,17 @@ const OUT = join(HERE, 'data-sources', 'calendrier', 'readings.json');
 const ZONE = 'romain';
 const REQUEST_DELAY_MS = 200;
 
+/**
+ * When set, read `{date}_{zone}.json` files from this directory instead of
+ * hitting the live API - each file must have the exact shape AELF's own
+ * `/v1/messes/{date}/{zone}` endpoint returns. Lets this script run fully
+ * offline against a pre-fetched local mirror, useful in sandboxed
+ * environments with no network access. Cache reads skip the rate-limit
+ * sleep and the weekday loop's retry/backoff entirely, since neither is
+ * meaningful for a local disk read.
+ */
+const AELF_CACHE_DIR = process.env.AELF_CACHE_DIR;
+
 function sleep(ms: number): Promise<void> {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -46,6 +57,37 @@ function sleep(ms: number): Promise<void> {
 interface AelfResponseBody {
 	messes: AelfMesse[];
 	informations?: { fete?: string; jour_liturgique_nom?: string };
+}
+
+interface AelfFetchResult {
+	ok: boolean;
+	status: number;
+	json: () => Promise<AelfResponseBody>;
+}
+
+/**
+ * Fetches one date/zone's AELF response, from `AELF_CACHE_DIR` when set, or
+ * the live API otherwise. Mimics just enough of `fetch()`'s `Response`
+ * shape (`ok`/`status`/`json()`) that both loops below work unchanged
+ * regardless of source.
+ */
+async function aelfFetch(date: string, zone: string): Promise<AelfFetchResult> {
+	if (AELF_CACHE_DIR) {
+		try {
+			const raw = readFileSync(join(AELF_CACHE_DIR, `${date}_${zone}.json`), 'utf8');
+			return { ok: true, status: 200, json: async () => JSON.parse(raw) as AelfResponseBody };
+		} catch {
+			return {
+				ok: false,
+				status: 404,
+				json: async () => {
+					throw new Error(`fetch-aelf: no cached body for ${date}_${zone}`);
+				}
+			};
+		}
+	}
+	const res = await fetch(`https://api.aelf.org/v1/messes/${date}/${zone}`);
+	return { ok: res.ok, status: res.status, json: () => res.json() as Promise<AelfResponseBody> };
 }
 
 const datesIndex: CalendrierDatesIndexFile = JSON.parse(
@@ -128,14 +170,14 @@ for (const { slug, yearKey } of targets) {
 	for (const romcalDate of candidates) {
 		const date = aelfQueryDate(romcalDate, slug);
 		attempted.push(date);
-		let res: Response;
+		let res: AelfFetchResult;
 		try {
-			res = await fetch(`https://api.aelf.org/v1/messes/${date}/${ZONE}`);
+			res = await aelfFetch(date, ZONE);
 		} catch {
-			await sleep(REQUEST_DELAY_MS);
+			if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
 			continue;
 		}
-		await sleep(REQUEST_DELAY_MS);
+		if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
 		if (!res.ok) continue;
 
 		let body: AelfResponseBody;
@@ -163,6 +205,15 @@ for (const { slug, yearKey } of targets) {
 		if (key in KNOWN_AELF_GAPS) {
 			console.warn(
 				`fetch-aelf: skipping ${key}, still unresolved after trying ${attempted.join(', ')} (${KNOWN_AELF_GAPS[key]})`
+			);
+		} else if (existingReadings[key]) {
+			// Every candidate date was unresolvable this run (e.g. AELF_CACHE_DIR
+			// doesn't reach back far enough for this feast's most recent past
+			// occurrence) - keep the previous run's text rather than discarding
+			// already-good data over a coverage gap in this run specifically.
+			output[key] = existingReadings[key];
+			console.warn(
+				`fetch-aelf: ${key} unresolved this run (tried ${attempted.join(', ')}) · kept the previous run's text`
 			);
 		} else {
 			failures.push(
@@ -200,26 +251,30 @@ const skippedWeekdays: string[] = [];
 
 for (const { slug, cycle, representativeDate } of weekdayTargets) {
 	const key = readingsKey(slug, cycle);
-	const url = `https://api.aelf.org/v1/messes/${representativeDate}/${ZONE}`;
 	let body: AelfResponseBody | null = null;
 	let lastTransientReason = '';
 	let hardFailure = '';
 
-	for (let attempt = 1; attempt <= WEEKDAY_ATTEMPTS; attempt++) {
+	const attempts = AELF_CACHE_DIR ? 1 : WEEKDAY_ATTEMPTS;
+	for (let attempt = 1; attempt <= attempts; attempt++) {
 		if (attempt > 1) await sleep(WEEKDAY_RETRY_BACKOFF_MS * (attempt - 1));
-		let res: Response;
+		let res: AelfFetchResult;
 		try {
-			res = await fetch(url);
+			res = await aelfFetch(representativeDate, ZONE);
 		} catch {
 			lastTransientReason = `network error fetching ${representativeDate}`;
-			await sleep(REQUEST_DELAY_MS);
+			if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
 			continue;
 		}
-		await sleep(REQUEST_DELAY_MS);
+		if (!AELF_CACHE_DIR) await sleep(REQUEST_DELAY_MS);
 		if (!res.ok) {
-			if (res.status >= 500) {
+			if (!AELF_CACHE_DIR && res.status >= 500) {
 				lastTransientReason = `AELF returned ${res.status} for ${representativeDate}`;
 				continue;
+			}
+			if (AELF_CACHE_DIR) {
+				lastTransientReason = `not in local cache for ${representativeDate}`;
+				break;
 			}
 			hardFailure = `${key}: AELF returned ${res.status} for ${representativeDate}`;
 			break;

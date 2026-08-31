@@ -1,0 +1,9924 @@
+{
+	"key": "II",
+	"feasts": [
+		{
+			"slug": "avent-1-jeudi",
+			"title": "Jeudi de la 1re semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’espérance",
+					"refs": "1821",
+					"paragraphs": [
+						1821
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2611",
+					"paragraphs": [
+						2611
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La vie de prière",
+					"refs": "2826",
+					"paragraphs": [
+						2826
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1970",
+					"paragraphs": [
+						1970
+					]
+				}
+			]
+		},
+		{
+			"slug": "avent-1-lundi",
+			"title": "Lundi de la 1re semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois en l’Esprit-Saint »",
+					"refs": "710-711",
+					"paragraphs": [
+						710,
+						711
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Le Père, Source et Fin de la Liturgie",
+					"refs": "1081",
+					"paragraphs": [
+						1081
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Dieu forme son peuple Israël",
+					"refs": "64",
+					"paragraphs": [
+						64
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’Église – préparée dans l’Ancienne Alliance",
+					"refs": "762",
+					"paragraphs": [
+						762
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Éviter la guerre",
+					"refs": "2317",
+					"paragraphs": [
+						2317
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Prenez et mangez en tous » : la communion",
+					"refs": "1386",
+					"paragraphs": [
+						1386
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "543",
+					"paragraphs": [
+						543
+					]
+				}
+			]
+		},
+		{
+			"slug": "avent-1-mardi",
+			"title": "Mardi de la 1re semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Les dons et les Fruits du Saint-Esprit",
+					"refs": "1830-1831",
+					"paragraphs": [
+						1830,
+						1831
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Baptême de Jésus",
+					"refs": "536",
+					"paragraphs": [
+						536
+					]
+				},
+				{
+					"i": 2,
+					"theme": "... en attendant que tout Lui soit soumis",
+					"refs": "672",
+					"paragraphs": [
+						672
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. La confirmation dans l’économie du salut",
+					"refs": "1286",
+					"paragraphs": [
+						1286
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’attente du Messie et de son Esprit",
+					"refs": "712",
+					"paragraphs": [
+						712
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Le Père, Source et Fin de la Liturgie",
+					"refs": "1081",
+					"paragraphs": [
+						1081
+					]
+				}
+			]
+		},
+		{
+			"slug": "avent-1-samedi",
+			"title": "Samedi de la 1re semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "avent-1-vendredi",
+			"title": "Vendredi de la 1re semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "avent-2-jeudi",
+			"title": "Jeudi de la 2e semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "avent-2-mardi",
+			"title": "Mardi de la 2e semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "avent-2-mercredi",
+			"title": "Mercredi de la 2e semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "avent-2-vendredi",
+			"title": "Vendredi de la 2e semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "avent-3-lundi",
+			"title": "Lundi de la 3e semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "avent-3-mardi",
+			"title": "Mardi de la 3e semaine de l'Avent",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’Épreuve ultime de l’Église",
+					"refs": "677",
+					"paragraphs": [
+						677
+					]
+				},
+				{
+					"i": 1,
+					"theme": "V. Le Jugement dernier",
+					"refs": "1040",
+					"paragraphs": [
+						1040
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Les dons et les Fruits du Saint-Esprit",
+					"refs": "1836",
+					"paragraphs": [
+						1836
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-0-jeudi",
+			"title": "Jeudi de la 0e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "436",
+					"paragraphs": [
+						436
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Jésus prie",
+					"refs": "2600",
+					"paragraphs": [
+						2600
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Consécration et mission : annoncer le Roi qui vient",
+					"refs": "943",
+					"paragraphs": [
+						943
+					]
+				},
+				{
+					"i": 3,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1435",
+					"paragraphs": [
+						1435
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Le nom chrétien",
+					"refs": "2157",
+					"paragraphs": [
+						2157
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-0-mercredi",
+			"title": "Mercredi de la 0e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La moralité des actes humains",
+					"refs": "1752-1755",
+					"paragraphs": [
+						1752,
+						1753,
+						1754,
+						1755
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968-1969",
+					"paragraphs": [
+						1968,
+						1969
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. La gravité du péché : péché mortel et véniel",
+					"refs": "1856",
+					"paragraphs": [
+						1856
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Je suis Celui qui suis »",
+					"refs": "207",
+					"paragraphs": [
+						207
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1434",
+					"paragraphs": [
+						1434
+					]
+				},
+				{
+					"i": 6,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2447",
+					"paragraphs": [
+						2447
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-0-samedi",
+			"title": "Samedi de la 0e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "588",
+					"paragraphs": [
+						588
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-0-vendredi",
+			"title": "Vendredi de la 0e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "careme-1-jeudi",
+			"title": "Jeudi de la 1re semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968, 1970",
+					"paragraphs": [
+						1968,
+						1970
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2609",
+					"paragraphs": [
+						2609
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Pourquoi nous plaindre de ne pas être exaucés ?",
+					"refs": "2736",
+					"paragraphs": [
+						2736
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Les choix de la conscience",
+					"refs": "1789",
+					"paragraphs": [
+						1789
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VI. Vérité, beauté et art sacré",
+					"refs": "2510",
+					"paragraphs": [
+						2510
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2821",
+					"paragraphs": [
+						2821
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-1-lundi",
+			"title": "Lundi de la 1re semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2809, 2811, 2814",
+					"paragraphs": [
+						2809,
+						2811,
+						2814
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le premier commandement",
+					"refs": "2095-2097",
+					"paragraphs": [
+						2095,
+						2096,
+						2097
+					]
+				},
+				{
+					"i": 2,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2453-2454",
+					"paragraphs": [
+						2453,
+						2454
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. L’Église – Peuple de Dieu",
+					"refs": "781",
+					"paragraphs": [
+						781
+					]
+				},
+				{
+					"i": 4,
+					"theme": "V. La prolifération du péché",
+					"refs": "1867",
+					"paragraphs": [
+						1867
+					]
+				},
+				{
+					"i": 5,
+					"theme": "IV. L’activité économique et la justice sociale",
+					"refs": "2434",
+					"paragraphs": [
+						2434
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Distinction des vertus cardinales",
+					"refs": "1807",
+					"paragraphs": [
+						1807
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-1-mardi",
+			"title": "Mardi de la 1re semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2759-2854, 2857-2865",
+					"paragraphs": [
+						2759,
+						2760,
+						2761,
+						2762,
+						2763,
+						2764,
+						2765,
+						2766,
+						2767,
+						2768,
+						2769,
+						2770,
+						2771,
+						2772,
+						2773,
+						2774,
+						2775,
+						2776,
+						2777,
+						2778,
+						2779,
+						2780,
+						2781,
+						2782,
+						2783,
+						2784,
+						2785,
+						2786,
+						2787,
+						2788,
+						2789,
+						2790,
+						2791,
+						2792,
+						2793,
+						2794,
+						2795,
+						2796,
+						2797,
+						2798,
+						2799,
+						2800,
+						2801,
+						2802,
+						2803,
+						2804,
+						2805,
+						2806,
+						2807,
+						2808,
+						2809,
+						2810,
+						2811,
+						2812,
+						2813,
+						2814,
+						2815,
+						2816,
+						2817,
+						2818,
+						2819,
+						2820,
+						2821,
+						2822,
+						2823,
+						2824,
+						2825,
+						2826,
+						2827,
+						2828,
+						2829,
+						2830,
+						2831,
+						2832,
+						2833,
+						2834,
+						2835,
+						2836,
+						2837,
+						2838,
+						2839,
+						2840,
+						2841,
+						2842,
+						2843,
+						2844,
+						2845,
+						2846,
+						2847,
+						2848,
+						2849,
+						2850,
+						2851,
+						2852,
+						2853,
+						2854,
+						2857,
+						2858,
+						2859,
+						2860,
+						2861,
+						2862,
+						2863,
+						2864,
+						2865
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le temps liturgique",
+					"refs": "1163-1165",
+					"paragraphs": [
+						1163,
+						1164,
+						1165
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968-1969",
+					"paragraphs": [
+						1968,
+						1969
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2607-2608",
+					"paragraphs": [
+						2607,
+						2608
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1434",
+					"paragraphs": [
+						1434
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La prière à Jésus",
+					"refs": "2668",
+					"paragraphs": [
+						2668
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-1-mercredi",
+			"title": "Mercredi de la 1re semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. Qui peut recevoir ce sacrement ?",
+					"refs": "1307",
+					"paragraphs": [
+						1307
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-1-samedi",
+			"title": "Samedi de la 1re semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2828-2829, 2842, 2844",
+					"paragraphs": [
+						2828,
+						2829,
+						2842,
+						2844
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La charité",
+					"refs": "1825",
+					"paragraphs": [
+						1825
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Le respect de la personne humaine",
+					"refs": "1933",
+					"paragraphs": [
+						1933
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2608",
+					"paragraphs": [
+						2608
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les autres célébrations liturgiques",
+					"refs": "1693",
+					"paragraphs": [
+						1693
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968",
+					"paragraphs": [
+						1968
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. La sainteté chrétienne",
+					"refs": "2013",
+					"paragraphs": [
+						2013
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-1-vendredi",
+			"title": "Vendredi de la 1re semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2792, 2841-2845",
+					"paragraphs": [
+						2792,
+						2841,
+						2842,
+						2843,
+						2844,
+						2845
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le cinquième commandement",
+					"refs": "2262-2265",
+					"paragraphs": [
+						2262,
+						2263,
+						2264,
+						2265
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Prenez et mangez en tous » : la communion",
+					"refs": "1388-1390",
+					"paragraphs": [
+						1388,
+						1389,
+						1390
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La paix",
+					"refs": "2302-2303",
+					"paragraphs": [
+						2302,
+						2303
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "2054",
+					"paragraphs": [
+						2054
+					]
+				},
+				{
+					"i": 5,
+					"theme": "II. Pour juger les vivants et les morts",
+					"refs": "678",
+					"paragraphs": [
+						678
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. L’enfer",
+					"refs": "1036",
+					"paragraphs": [
+						1036
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-2-jeudi",
+			"title": "Jeudi de la 2e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "careme-2-lundi",
+			"title": "Lundi de la 2e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La confession des péchés",
+					"refs": "1457-1458",
+					"paragraphs": [
+						1457,
+						1458
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. La béatitude chrétienne",
+					"refs": "1724",
+					"paragraphs": [
+						1724
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Les choix de la conscience",
+					"refs": "1789",
+					"paragraphs": [
+						1789
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1970",
+					"paragraphs": [
+						1970
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VI. Vérité, beauté et art sacré",
+					"refs": "2510",
+					"paragraphs": [
+						2510
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2842",
+					"paragraphs": [
+						2842
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-2-mardi",
+			"title": "Mardi de la 2e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. La famille et la société",
+					"refs": "2208-2211",
+					"paragraphs": [
+						2208,
+						2209,
+						2210,
+						2211
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1435",
+					"paragraphs": [
+						1435
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le sacrifice",
+					"refs": "2100",
+					"paragraphs": [
+						2100
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-2-mercredi",
+			"title": "Mercredi de la 2e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "careme-2-samedi",
+			"title": "Samedi de la 2e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Le Monde visible",
+					"refs": "346",
+					"paragraphs": [
+						346
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-2-vendredi",
+			"title": "Vendredi de la 2e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "careme-3-jeudi",
+			"title": "Jeudi de la 3e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "careme-3-lundi",
+			"title": "Lundi de la 3e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La montée de Jésus à Jérusalem",
+					"refs": "558",
+					"paragraphs": [
+						558
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Signes et symboles",
+					"refs": "1151",
+					"paragraphs": [
+						1151
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-3-mardi",
+			"title": "Mardi de la 3e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. « Rendre témoignage à la vérité »",
+					"refs": "2473",
+					"paragraphs": [
+						2473
+					]
+				},
+				{
+					"i": 1,
+					"theme": "VI. Vérité, beauté et art sacré",
+					"refs": "2506",
+					"paragraphs": [
+						2506
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-3-mercredi",
+			"title": "Mercredi de la 3e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "2053, 2056-2062",
+					"paragraphs": [
+						2053,
+						2056,
+						2057,
+						2058,
+						2059,
+						2060,
+						2061,
+						2062
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1967-1968",
+					"paragraphs": [
+						1967,
+						1968
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Devoirs des parents",
+					"refs": "2221",
+					"paragraphs": [
+						2221
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Jésus et la Loi",
+					"refs": "577",
+					"paragraphs": [
+						577
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "592",
+					"paragraphs": [
+						592
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-3-samedi",
+			"title": "Samedi de la 3e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
+					"paragraphs": [
+						1610,
+						1611,
+						1612
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
+					"paragraphs": [
+						1644
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "589",
+					"paragraphs": [
+						589
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Notre participation au sacrifice du Christ",
+					"refs": "627",
+					"paragraphs": [
+						627
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le sacrifice",
+					"refs": "2100",
+					"paragraphs": [
+						2100
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2787",
+					"paragraphs": [
+						2787
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-3-vendredi",
+			"title": "Vendredi de la 3e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. La portée de la foi en Dieu Unique",
+					"refs": "228-231",
+					"paragraphs": [
+						228,
+						229,
+						230,
+						231
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
+					"paragraphs": [
+						1610,
+						1611,
+						1612
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
+					"paragraphs": [
+						1644
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Dieu est Amour",
+					"refs": "220",
+					"paragraphs": [
+						220
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "575",
+					"paragraphs": [
+						575
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’unité de l’Ancien et du Nouveau Testament",
+					"refs": "129",
+					"paragraphs": [
+						129
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. « Je crois en un seul Dieu »",
+					"refs": "202",
+					"paragraphs": [
+						202
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-4-jeudi",
+			"title": "Jeudi de la 4e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "V. La Sainte Écriture dans la vie de l’Église",
+					"refs": "131-132",
+					"paragraphs": [
+						131,
+						132
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Jésus et la Loi",
+					"refs": "582",
+					"paragraphs": [
+						582
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jean, Précurseur, Prophète et Baptiste",
+					"refs": "719",
+					"paragraphs": [
+						719
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2824",
+					"paragraphs": [
+						2824
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. L’Esprit et la Parole de Dieu dans le temps des promesses",
+					"refs": "702",
+					"paragraphs": [
+						702
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-4-lundi",
+			"title": "Lundi de la 4e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Jésus exauce la prière",
+					"refs": "2616",
+					"paragraphs": [
+						2616
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-4-mardi",
+			"title": "Mardi de la 4e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "589, 594",
+					"paragraphs": [
+						589,
+						594
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Jésus et le Temple",
+					"refs": "583",
+					"paragraphs": [
+						583
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "575",
+					"paragraphs": [
+						575
+					]
+				},
+				{
+					"i": 3,
+					"theme": "XI. La célébration du sacrement de pénitence",
+					"refs": "1488",
+					"paragraphs": [
+						1488
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le malade devant Dieu",
+					"refs": "1502",
+					"paragraphs": [
+						1502
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le Christ – médecin",
+					"refs": "1505",
+					"paragraphs": [
+						1505
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-4-mercredi",
+			"title": "Mercredi de la 4e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. La grâce",
+					"refs": "1996-2005",
+					"paragraphs": [
+						1996,
+						1997,
+						1998,
+						1999,
+						2000,
+						2001,
+						2002,
+						2003,
+						2004,
+						2005
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "589, 594",
+					"paragraphs": [
+						589,
+						594
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’homme image de Dieu",
+					"refs": "1706, 1713",
+					"paragraphs": [
+						1706,
+						1713
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. Jésus et le Temple",
+					"refs": "583",
+					"paragraphs": [
+						583
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "635",
+					"paragraphs": [
+						635
+					]
+				},
+				{
+					"i": 6,
+					"theme": "II. Pour juger les vivants et les morts",
+					"refs": "679",
+					"paragraphs": [
+						679
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-4-samedi",
+			"title": "Samedi de la 4e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574-575",
+					"paragraphs": [
+						574,
+						575
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "588",
+					"paragraphs": [
+						588
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Divisions des autorités juives à l’égard de Jésus",
+					"refs": "595",
+					"paragraphs": [
+						595
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-4-vendredi",
+			"title": "Vendredi de la 4e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "581-583",
+					"paragraphs": [
+						581,
+						582,
+						583
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. La catéchèse sur la Création",
+					"refs": "282",
+					"paragraphs": [
+						282
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. La chute des anges",
+					"refs": "391",
+					"paragraphs": [
+						391
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. « Tu ne l’as pas abandonné au pouvoir de la mort »",
+					"refs": "413",
+					"paragraphs": [
+						413
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La mort",
+					"refs": "1008",
+					"paragraphs": [
+						1008
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Le désordre des convoitises",
+					"refs": "2538",
+					"paragraphs": [
+						2538
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le Christ Jésus",
+					"refs": "728",
+					"paragraphs": [
+						728
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-5-jeudi",
+			"title": "Jeudi de la 5e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Les dons et les Fruits du Saint-Esprit",
+					"refs": "1843",
+					"paragraphs": [
+						1843
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’âme et la connaissance humaine du Christ",
+					"refs": "473",
+					"paragraphs": [
+						473
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "590",
+					"paragraphs": [
+						590
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-5-lundi",
+			"title": "Lundi de la 5e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. Les offenses à la dignité du mariage",
+					"refs": "2380-2381",
+					"paragraphs": [
+						2380,
+						2381
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La contrition",
+					"refs": "1451-1452",
+					"paragraphs": [
+						1451,
+						1452
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Autres offenses à la dignité du mariage",
+					"refs": "2400",
+					"paragraphs": [
+						2400
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La grâce du Saint-Esprit",
+					"refs": "1589",
+					"paragraphs": [
+						1589
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Vivre dans la vérité",
+					"refs": "2466",
+					"paragraphs": [
+						2466
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Je crois à la résurrection de la chair »",
+					"refs": "990",
+					"paragraphs": [
+						990
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. « Je veux voir Dieu »",
+					"refs": "2555",
+					"paragraphs": [
+						2555
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-5-mardi",
+			"title": "Mardi de la 5e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2812, 2824-2825",
+					"paragraphs": [
+						2812,
+						2824,
+						2825
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "547-548",
+					"paragraphs": [
+						547,
+						548
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Dieu de tendresse et de pitié »",
+					"refs": "211",
+					"paragraphs": [
+						211
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Sens et portée salvifique de la Résurrection",
+					"refs": "653",
+					"paragraphs": [
+						653
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Dieu l’a fait péché pour nous »",
+					"refs": "603",
+					"paragraphs": [
+						603
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les autres célébrations liturgiques",
+					"refs": "1693",
+					"paragraphs": [
+						1693
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-5-mercredi",
+			"title": "Mercredi de la 5e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. La liberté humaine dans l’économie du salut",
+					"refs": "1739-1741",
+					"paragraphs": [
+						1739,
+						1740,
+						1741
+					]
+				},
+				{
+					"i": 1,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1435",
+					"paragraphs": [
+						1435
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. « Rendre témoignage à la vérité »",
+					"refs": "2473",
+					"paragraphs": [
+						2473
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Vivre dans la vérité",
+					"refs": "2466",
+					"paragraphs": [
+						2466
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Jésus",
+					"refs": "431",
+					"paragraphs": [
+						431
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "588",
+					"paragraphs": [
+						588
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Dieu élit Abraham",
+					"refs": "60",
+					"paragraphs": [
+						60
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-5-samedi",
+			"title": "Samedi de la 5e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La révélation de Dieu",
+					"refs": "56-60",
+					"paragraphs": [
+						56,
+						57,
+						58,
+						59,
+						60
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. La justification",
+					"refs": "1987, 1995",
+					"paragraphs": [
+						1987,
+						1995
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "593",
+					"paragraphs": [
+						593
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Divisions des autorités juives à l’égard de Jésus",
+					"refs": "596",
+					"paragraphs": [
+						596
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Pourquoi le Verbe s’est-il fait chair",
+					"refs": "457",
+					"paragraphs": [
+						457
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les traits communs des mystères de Jésus",
+					"refs": "517",
+					"paragraphs": [
+						517
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-5-vendredi",
+			"title": "Vendredi de la 5e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "589, 591, 594",
+					"paragraphs": [
+						589,
+						591,
+						594
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le Père révélé par le Fils",
+					"refs": "242",
+					"paragraphs": [
+						242
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "262",
+					"paragraphs": [
+						262
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Fils unique de Dieu",
+					"refs": "444",
+					"paragraphs": [
+						444
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-6-jeudi",
+			"title": "Jeudi de la 6e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’unité de l’Ancien et du Nouveau Testament",
+					"refs": "128-130",
+					"paragraphs": [
+						128,
+						129,
+						130
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le mémorial sacrificiel du Christ et de son Corps, l’Église",
+					"refs": "1363-1364",
+					"paragraphs": [
+						1363,
+						1364
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Le Père, Source et Fin de la Liturgie",
+					"refs": "1081",
+					"paragraphs": [
+						1081
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le temps liturgique",
+					"refs": "1164",
+					"paragraphs": [
+						1164
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« L’Agneau qui enlève le péché du monde »",
+					"refs": "608",
+					"paragraphs": [
+						608
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-6-lundi",
+			"title": "Lundi de la 6e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Les apparitions du Ressuscité",
+					"refs": "641",
+					"paragraphs": [
+						641
+					]
+				},
+				{
+					"i": 1,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2449",
+					"paragraphs": [
+						2449
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1432",
+					"paragraphs": [
+						1432
+					]
+				}
+			]
+		},
+		{
+			"slug": "careme-6-mardi",
+			"title": "Mardi de la 6e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "careme-6-mercredi",
+			"title": "Mercredi de la 6e semaine de Carême",
+			"season": "careme",
+			"liturgicalColor": "violet",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-1-jeudi",
+			"title": "Jeudi de la 1re semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le Christ – médecin",
+					"refs": "1504-1505",
+					"paragraphs": [
+						1504,
+						1505
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les Psaumes, prière de l’Assemblée",
+					"refs": "2594",
+					"paragraphs": [
+						2594
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Jésus exauce la prière",
+					"refs": "2616",
+					"paragraphs": [
+						2616
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-1-lundi",
+			"title": "Lundi de la 1re semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le sacrement de la pénitence et de la réconciliation",
+					"refs": "1422-1423",
+					"paragraphs": [
+						1422,
+						1423
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La prédestination de Marie",
+					"refs": "489",
+					"paragraphs": [
+						489
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le don de l’enfant",
+					"refs": "2379",
+					"paragraphs": [
+						2379
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Le Royaume de Dieu est tout proche »",
+					"refs": "541",
+					"paragraphs": [
+						541
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. La conversion des baptisés",
+					"refs": "1427",
+					"paragraphs": [
+						1427
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’Église est communion avec Jésus",
+					"refs": "787",
+					"paragraphs": [
+						787
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-1-mardi",
+			"title": "Mardi de la 1re semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La prédestination de Marie",
+					"refs": "489",
+					"paragraphs": [
+						489
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le don de l’enfant",
+					"refs": "2379",
+					"paragraphs": [
+						2379
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Le jour du Sabbat",
+					"refs": "2173",
+					"paragraphs": [
+						2173
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. Christ",
+					"refs": "438",
+					"paragraphs": [
+						438
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-1-mercredi",
+			"title": "Mercredi de la 1re semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Devoirs des parents",
+					"refs": "2221, 2226-2227",
+					"paragraphs": [
+						2221,
+						2226,
+						2227
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Le nom chrétien",
+					"refs": "2158, 2167",
+					"paragraphs": [
+						2158,
+						2167
+					]
+				},
+				{
+					"i": 2,
+					"theme": "David et la prière du roi",
+					"refs": "2578",
+					"paragraphs": [
+						2578
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La Parole de Dieu",
+					"refs": "2653",
+					"paragraphs": [
+						2653
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Jésus prie",
+					"refs": "2602",
+					"paragraphs": [
+						2602
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Jésus exauce la prière",
+					"refs": "2616",
+					"paragraphs": [
+						2616
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La vie de prière",
+					"refs": "2698",
+					"paragraphs": [
+						2698
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-1-samedi",
+			"title": "Samedi de la 1re semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "545",
+					"paragraphs": [
+						545
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				},
+				{
+					"i": 2,
+					"theme": "XI. La célébration du sacrement de pénitence",
+					"refs": "1484",
+					"paragraphs": [
+						1484
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le Christ – médecin",
+					"refs": "1503",
+					"paragraphs": [
+						1503
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-1-vendredi",
+			"title": "Vendredi de la 1re semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’onction des malades",
+					"refs": "1502-1503",
+					"paragraphs": [
+						1502,
+						1503
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les sacrements de guérison",
+					"refs": "1421",
+					"paragraphs": [
+						1421
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Jésus exauce la prière",
+					"refs": "2616",
+					"paragraphs": [
+						2616
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Dieu seul pardonne le péché",
+					"refs": "1441",
+					"paragraphs": [
+						1441
+					]
+				},
+				{
+					"i": 4,
+					"theme": "XI. La célébration du sacrement de pénitence",
+					"refs": "1484",
+					"paragraphs": [
+						1484
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 6,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-10-lundi",
+			"title": "Lundi de la 10e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Notre vocation à la béatitude",
+					"refs": "1716-1729",
+					"paragraphs": [
+						1716,
+						1717,
+						1718,
+						1719,
+						1720,
+						1721,
+						1722,
+						1723,
+						1724,
+						1725,
+						1726,
+						1727,
+						1728,
+						1729
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La vie de prière",
+					"refs": "2763-2764",
+					"paragraphs": [
+						2763,
+						2764
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. La béatitude chrétienne",
+					"refs": "1720, 1722",
+					"paragraphs": [
+						1720,
+						1722
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Jésus et la Loi",
+					"refs": "581",
+					"paragraphs": [
+						581
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "764",
+					"paragraphs": [
+						764
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "544",
+					"paragraphs": [
+						544
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. Les béatitudes",
+					"refs": "1716",
+					"paragraphs": [
+						1716
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-10-mardi",
+			"title": "Mardi de la 10e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. L’oraison",
+					"refs": "2717-2718",
+					"paragraphs": [
+						2717,
+						2718
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’Esprit Saint – le Don de Dieu",
+					"refs": "736",
+					"paragraphs": [
+						736
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les vertus théologales",
+					"refs": "2657",
+					"paragraphs": [
+						2657
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La mystagogie de la célébration",
+					"refs": "1243",
+					"paragraphs": [
+						1243
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Vie morale et témoignage missionnaire",
+					"refs": "2044",
+					"paragraphs": [
+						2044
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2821",
+					"paragraphs": [
+						2821
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-10-mercredi",
+			"title": "Mercredi de la 10e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1967-1968",
+					"paragraphs": [
+						1967,
+						1968
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus et la Loi",
+					"refs": "577",
+					"paragraphs": [
+						577
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "592",
+					"paragraphs": [
+						592
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "2053",
+					"paragraphs": [
+						2053
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-10-samedi",
+			"title": "Samedi de la 10e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Le nom du Seigneur prononcé à faux",
+					"refs": "2150-2153",
+					"paragraphs": [
+						2150,
+						2151,
+						2152,
+						2153
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Vivre dans la vérité",
+					"refs": "2466",
+					"paragraphs": [
+						2466
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-10-vendredi",
+			"title": "Vendredi de la 10e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Le combat pour la pureté",
+					"refs": "2523-2533",
+					"paragraphs": [
+						2523,
+						2524,
+						2525,
+						2526,
+						2527,
+						2528,
+						2529,
+						2530,
+						2531,
+						2532,
+						2533
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le sixième commandement",
+					"refs": "2380-2382",
+					"paragraphs": [
+						2380,
+						2381,
+						2382
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Les offenses à la dignité du mariage",
+					"refs": "2380-2381",
+					"paragraphs": [
+						2380,
+						2381
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La confession des péchés",
+					"refs": "1456",
+					"paragraphs": [
+						1456
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. « Homme et femme, il les créa... »",
+					"refs": "2336",
+					"paragraphs": [
+						2336
+					]
+				},
+				{
+					"i": 5,
+					"theme": "IV. La portée de la foi en Dieu Unique",
+					"refs": "226",
+					"paragraphs": [
+						226
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. L’enfer",
+					"refs": "1034",
+					"paragraphs": [
+						1034
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-11-jeudi",
+			"title": "Jeudi de la 11e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2759-2854, 2857-2865",
+					"paragraphs": [
+						2759,
+						2760,
+						2761,
+						2762,
+						2763,
+						2764,
+						2765,
+						2766,
+						2767,
+						2768,
+						2769,
+						2770,
+						2771,
+						2772,
+						2773,
+						2774,
+						2775,
+						2776,
+						2777,
+						2778,
+						2779,
+						2780,
+						2781,
+						2782,
+						2783,
+						2784,
+						2785,
+						2786,
+						2787,
+						2788,
+						2789,
+						2790,
+						2791,
+						2792,
+						2793,
+						2794,
+						2795,
+						2796,
+						2797,
+						2798,
+						2799,
+						2800,
+						2801,
+						2802,
+						2803,
+						2804,
+						2805,
+						2806,
+						2807,
+						2808,
+						2809,
+						2810,
+						2811,
+						2812,
+						2813,
+						2814,
+						2815,
+						2816,
+						2817,
+						2818,
+						2819,
+						2820,
+						2821,
+						2822,
+						2823,
+						2824,
+						2825,
+						2826,
+						2827,
+						2828,
+						2829,
+						2830,
+						2831,
+						2832,
+						2833,
+						2834,
+						2835,
+						2836,
+						2837,
+						2838,
+						2839,
+						2840,
+						2841,
+						2842,
+						2843,
+						2844,
+						2845,
+						2846,
+						2847,
+						2848,
+						2849,
+						2850,
+						2851,
+						2852,
+						2853,
+						2854,
+						2857,
+						2858,
+						2859,
+						2860,
+						2861,
+						2862,
+						2863,
+						2864,
+						2865
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le temps liturgique",
+					"refs": "1163-1165",
+					"paragraphs": [
+						1163,
+						1164,
+						1165
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968-1969",
+					"paragraphs": [
+						1968,
+						1969
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2607-2608",
+					"paragraphs": [
+						2607,
+						2608
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1434",
+					"paragraphs": [
+						1434
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La prière à Jésus",
+					"refs": "2668",
+					"paragraphs": [
+						2668
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-11-lundi",
+			"title": "Lundi de la 11e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "V. Le Jugement dernier",
+					"refs": "1039",
+					"paragraphs": [
+						1039
+					]
+				},
+				{
+					"i": 1,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2443",
+					"paragraphs": [
+						2443
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-11-mardi",
+			"title": "Mardi de la 11e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2828-2829, 2842, 2844",
+					"paragraphs": [
+						2828,
+						2829,
+						2842,
+						2844
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La charité",
+					"refs": "1825",
+					"paragraphs": [
+						1825
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Le respect de la personne humaine",
+					"refs": "1933",
+					"paragraphs": [
+						1933
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2608",
+					"paragraphs": [
+						2608
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les autres célébrations liturgiques",
+					"refs": "1693",
+					"paragraphs": [
+						1693
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968",
+					"paragraphs": [
+						1968
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. La sainteté chrétienne",
+					"refs": "2013",
+					"paragraphs": [
+						2013
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-11-mercredi",
+			"title": "Mercredi de la 11e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La moralité des actes humains",
+					"refs": "1752-1755",
+					"paragraphs": [
+						1752,
+						1753,
+						1754,
+						1755
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968-1969",
+					"paragraphs": [
+						1968,
+						1969
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Élie, les prophètes et la conversion du cœur",
+					"refs": "2582",
+					"paragraphs": [
+						2582
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les préparations",
+					"refs": "523",
+					"paragraphs": [
+						523
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Jean, Précurseur, Prophète et Baptiste",
+					"refs": "719",
+					"paragraphs": [
+						719
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Une nuée de témoins",
+					"refs": "2684",
+					"paragraphs": [
+						2684
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-11-samedi",
+			"title": "Samedi de la 11e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "355-359",
+					"paragraphs": [
+						355,
+						356,
+						357,
+						358,
+						359
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La vie de prière",
+					"refs": "2830, 2835-2836, 2848",
+					"paragraphs": [
+						2830,
+						2835,
+						2836,
+						2848
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’idolâtrie",
+					"refs": "2113",
+					"paragraphs": [
+						2113
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. La doctrine sociale de l’Église",
+					"refs": "2424",
+					"paragraphs": [
+						2424
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "270",
+					"paragraphs": [
+						270
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. Dieu réalise son dessein : la divine providence",
+					"refs": "305",
+					"paragraphs": [
+						305
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La providence et le scandale du mal",
+					"refs": "322",
+					"paragraphs": [
+						322
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-11-vendredi",
+			"title": "Vendredi de la 11e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. « Je veux voir Dieu »",
+					"refs": "2551-2553",
+					"paragraphs": [
+						2551,
+						2552,
+						2553
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. La formation de la conscience",
+					"refs": "1783-1785",
+					"paragraphs": [
+						1783,
+						1784,
+						1785
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. « Un de corps et d’âme »",
+					"refs": "368",
+					"paragraphs": [
+						368
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. Le combat pour la pureté",
+					"refs": "2533",
+					"paragraphs": [
+						2533
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Face aux difficultés de la prière",
+					"refs": "2729",
+					"paragraphs": [
+						2729
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2848",
+					"paragraphs": [
+						2848
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’homme image de Dieu",
+					"refs": "1707",
+					"paragraphs": [
+						1707
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-12-jeudi",
+			"title": "Jeudi de la 12e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’espérance",
+					"refs": "1821",
+					"paragraphs": [
+						1821
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2611",
+					"paragraphs": [
+						2611
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La vie de prière",
+					"refs": "2826",
+					"paragraphs": [
+						2826
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1970",
+					"paragraphs": [
+						1970
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Jésus et la Loi",
+					"refs": "581",
+					"paragraphs": [
+						581
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-12-lundi",
+			"title": "Lundi de la 12e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Les offenses à la vérité",
+					"refs": "2477-2478",
+					"paragraphs": [
+						2477,
+						2478
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Pour juger les vivants et les morts",
+					"refs": "678",
+					"paragraphs": [
+						678
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. La gravité du péché : péché mortel et véniel",
+					"refs": "1861",
+					"paragraphs": [
+						1861
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-12-mardi",
+			"title": "Mardi de la 12e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1968, 1970",
+					"paragraphs": [
+						1968,
+						1970
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Prenez et mangez en tous » : la communion",
+					"refs": "1385",
+					"paragraphs": [
+						1385
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’irréligion",
+					"refs": "2120",
+					"paragraphs": [
+						2120
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Le nom du Seigneur est saint",
+					"refs": "2148",
+					"paragraphs": [
+						2148
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Les choix de la conscience",
+					"refs": "1789",
+					"paragraphs": [
+						1789
+					]
+				},
+				{
+					"i": 5,
+					"theme": "VI. Vérité, beauté et art sacré",
+					"refs": "2510",
+					"paragraphs": [
+						2510
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La vie de prière",
+					"refs": "2821",
+					"paragraphs": [
+						2821
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-12-mercredi",
+			"title": "Mercredi de la 12e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2284-2287",
+					"paragraphs": [
+						2284,
+						2285,
+						2286,
+						2287
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. La grâce",
+					"refs": "2005",
+					"paragraphs": [
+						2005
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-12-samedi",
+			"title": "Samedi de la 12e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le premier commandement",
+					"refs": "2110-2114",
+					"paragraphs": [
+						2110,
+						2111,
+						2112,
+						2113,
+						2114
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La vie de prière",
+					"refs": "2811",
+					"paragraphs": [
+						2811
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Prenez et mangez en tous » : la communion",
+					"refs": "1386",
+					"paragraphs": [
+						1386
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "543",
+					"paragraphs": [
+						543
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2610",
+					"paragraphs": [
+						2610
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le Christ – médecin",
+					"refs": "1505",
+					"paragraphs": [
+						1505
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Devoirs des parents",
+					"refs": "2224",
+					"paragraphs": [
+						2224
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-12-vendredi",
+			"title": "Vendredi de la 12e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. Toute la vie du Christ est mystère",
+					"refs": "515",
+					"paragraphs": [
+						515
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Jésus exauce la prière",
+					"refs": "2616",
+					"paragraphs": [
+						2616
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Seigneur",
+					"refs": "448",
+					"paragraphs": [
+						448
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. Jésus et le Temple",
+					"refs": "586",
+					"paragraphs": [
+						586
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-13-jeudi",
+			"title": "Jeudi de la 13e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "XI. La célébration du sacrement de pénitence",
+					"refs": "1485-1486",
+					"paragraphs": [
+						1485,
+						1486
+					]
+				},
+				{
+					"i": 1,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1435",
+					"paragraphs": [
+						1435
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-13-lundi",
+			"title": "Lundi de la 13e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le septième commandement",
+					"refs": "2401",
+					"paragraphs": [
+						2401
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. La Destination universelle et la propriété privée des biens",
+					"refs": "2403",
+					"paragraphs": [
+						2403
+					]
+				},
+				{
+					"i": 2,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2444",
+					"paragraphs": [
+						2444
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-13-mardi",
+			"title": "Mardi de la 13e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois en l’Esprit-Saint »",
+					"refs": "710-711",
+					"paragraphs": [
+						710,
+						711
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Devoirs des parents",
+					"refs": "2223",
+					"paragraphs": [
+						2223
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Le Père, Source et Fin de la Liturgie",
+					"refs": "1081",
+					"paragraphs": [
+						1081
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’Église et les non-chrétiens",
+					"refs": "845",
+					"paragraphs": [
+						845
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2610",
+					"paragraphs": [
+						2610
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-13-mercredi",
+			"title": "Mercredi de la 13e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La providence et le scandale du mal",
+					"refs": "309-311",
+					"paragraphs": [
+						309,
+						310,
+						311
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’homme image de Dieu",
+					"refs": "1706",
+					"paragraphs": [
+						1706
+					]
+				},
+				{
+					"i": 2,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1435",
+					"paragraphs": [
+						1435
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le sacrifice",
+					"refs": "2100",
+					"paragraphs": [
+						2100
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le Christ – médecin",
+					"refs": "1503",
+					"paragraphs": [
+						1503
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-13-samedi",
+			"title": "Samedi de la 13e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-13-vendredi",
+			"title": "Vendredi de la 13e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. La conversion des baptisés",
+					"refs": "1427",
+					"paragraphs": [
+						1427
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2612",
+					"paragraphs": [
+						2612
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’homicide volontaire",
+					"refs": "2269",
+					"paragraphs": [
+						2269
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le respect des biens d’autrui",
+					"refs": "2409",
+					"paragraphs": [
+						2409
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2449",
+					"paragraphs": [
+						2449
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2835",
+					"paragraphs": [
+						2835
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-14-jeudi",
+			"title": "Jeudi de la 14e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
+					"paragraphs": [
+						1610,
+						1611,
+						1612
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Je suis Celui qui suis »",
+					"refs": "208",
+					"paragraphs": [
+						208
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Dieu est Amour",
+					"refs": "219",
+					"paragraphs": [
+						219
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Égalité et différence voulues par Dieu",
+					"refs": "370",
+					"paragraphs": [
+						370
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Fils unique de Dieu",
+					"refs": "441",
+					"paragraphs": [
+						441
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
+					"paragraphs": [
+						1644
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-14-lundi",
+			"title": "Lundi de la 14e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2787-2793",
+					"paragraphs": [
+						2787,
+						2788,
+						2789,
+						2790,
+						2791,
+						2792,
+						2793
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
+					"paragraphs": [
+						1610,
+						1611,
+						1612
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
+					"paragraphs": [
+						1644
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Dieu est Amour",
+					"refs": "218",
+					"paragraphs": [
+						218
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. Les offenses à la dignité du mariage",
+					"refs": "2380",
+					"paragraphs": [
+						2380
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-14-mardi",
+			"title": "Mardi de la 14e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
+					"paragraphs": [
+						1610,
+						1611,
+						1612
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
+					"paragraphs": [
+						1644
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-14-mercredi",
+			"title": "Mercredi de la 14e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
+					"paragraphs": [
+						1610,
+						1611,
+						1612
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
+					"paragraphs": [
+						1644
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-14-samedi",
+			"title": "Samedi de la 14e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Les célébrants de la Liturgie céleste",
+					"refs": "1137-1138",
+					"paragraphs": [
+						1137,
+						1138
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Je suis Celui qui suis »",
+					"refs": "208",
+					"paragraphs": [
+						208
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le Christ « avec tous ses anges »",
+					"refs": "332",
+					"paragraphs": [
+						332
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’attente du Messie et de son Esprit",
+					"refs": "712",
+					"paragraphs": [
+						712
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Élie, les prophètes et la conversion du cœur",
+					"refs": "2584",
+					"paragraphs": [
+						2584
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2809",
+					"paragraphs": [
+						2809
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-14-vendredi",
+			"title": "Vendredi de la 14e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le sacrement du mariage",
+					"refs": "1610-1612",
+					"paragraphs": [
+						1610,
+						1611,
+						1612
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’unité et l’indissolubilité du mariage",
+					"refs": "1644",
+					"paragraphs": [
+						1644
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Dieu est Amour",
+					"refs": "220",
+					"paragraphs": [
+						220
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-15-jeudi",
+			"title": "Jeudi de la 15e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-15-lundi",
+			"title": "Lundi de la 15e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. La famille et la société",
+					"refs": "2208-2211",
+					"paragraphs": [
+						2208,
+						2209,
+						2210,
+						2211
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1435",
+					"paragraphs": [
+						1435
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le sacrifice",
+					"refs": "2100",
+					"paragraphs": [
+						2100
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-15-mardi",
+			"title": "Mardi de la 15e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La virginité de Marie",
+					"refs": "497",
+					"paragraphs": [
+						497
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-15-mercredi",
+			"title": "Mercredi de la 15e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "V. Dieu réalise son dessein : la divine providence",
+					"refs": "304",
+					"paragraphs": [
+						304
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-15-samedi",
+			"title": "Samedi de la 15e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois en l’Esprit-Saint »",
+					"refs": "710-711",
+					"paragraphs": [
+						710,
+						711
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Le Père, Source et Fin de la Liturgie",
+					"refs": "1081",
+					"paragraphs": [
+						1081
+					]
+				},
+				{
+					"i": 2,
+					"theme": "V. La prolifération du péché",
+					"refs": "1867",
+					"paragraphs": [
+						1867
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le dixième commandement",
+					"refs": "2534",
+					"paragraphs": [
+						2534
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-15-vendredi",
+			"title": "Vendredi de la 15e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-16-jeudi",
+			"title": "Jeudi de la 16e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’Église – préparée dans l’Ancienne Alliance",
+					"refs": "762",
+					"paragraphs": [
+						762
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le mariage sous la pédagogie de la Loi",
+					"refs": "1611",
+					"paragraphs": [
+						1611
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Tu aimeras ton prochain comme toi-même »",
+					"refs": "2561",
+					"paragraphs": [
+						2561
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-16-lundi",
+			"title": "Lundi de la 16e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Les dons et les Fruits du Saint-Esprit",
+					"refs": "1836",
+					"paragraphs": [
+						1836
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Élie, les prophètes et la conversion du cœur",
+					"refs": "2581",
+					"paragraphs": [
+						2581
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-16-mardi",
+			"title": "Mardi de la 16e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Le Monde visible",
+					"refs": "346",
+					"paragraphs": [
+						346
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-16-mercredi",
+			"title": "Mercredi de la 16e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Le nom chrétien",
+					"refs": "2158, 2167",
+					"paragraphs": [
+						2158,
+						2167
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’avortement",
+					"refs": "2270",
+					"paragraphs": [
+						2270
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Élie, les prophètes et la conversion du cœur",
+					"refs": "2584",
+					"paragraphs": [
+						2584
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-16-samedi",
+			"title": "Samedi de la 16e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-16-vendredi",
+			"title": "Vendredi de la 16e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "VI. Le sacrement de la pénitence et de la réconciliation",
+					"refs": "1440",
+					"paragraphs": [
+						1440
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-17-jeudi",
+			"title": "Jeudi de la 17e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-17-lundi",
+			"title": "Lundi de la 17e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-17-mardi",
+			"title": "Mardi de la 17e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-17-samedi",
+			"title": "Samedi de la 17e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-17-vendredi",
+			"title": "Vendredi de la 17e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-18-lundi",
+			"title": "Lundi de la 18e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-18-mercredi",
+			"title": "Mercredi de la 18e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-18-vendredi",
+			"title": "Vendredi de la 18e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-19-jeudi",
+			"title": "Jeudi de la 19e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-19-lundi",
+			"title": "Lundi de la 19e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. « Le monde a été créé pour la gloire de Dieu »",
+					"refs": "293-294",
+					"paragraphs": [
+						293,
+						294
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Dieu transcende la création et lui est présent",
+					"refs": "300",
+					"paragraphs": [
+						300
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Dieu crée un monde ordonné et bon",
+					"refs": "299",
+					"paragraphs": [
+						299
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les célébrants de la Liturgie céleste",
+					"refs": "1137",
+					"paragraphs": [
+						1137
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-19-mardi",
+			"title": "Mardi de la 19e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-19-mercredi",
+			"title": "Mercredi de la 19e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-19-samedi",
+			"title": "Samedi de la 19e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-19-vendredi",
+			"title": "Vendredi de la 19e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Dieu est Amour",
+					"refs": "219",
+					"paragraphs": [
+						219
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le mariage sous la pédagogie de la Loi",
+					"refs": "1611",
+					"paragraphs": [
+						1611
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Les offenses à la dignité du mariage",
+					"refs": "2380",
+					"paragraphs": [
+						2380
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-2-jeudi",
+			"title": "Jeudi de la 2e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. Seigneur",
+					"refs": "454",
+					"paragraphs": [
+						454
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-2-lundi",
+			"title": "Lundi de la 2e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’Église est l’Épouse du Christ",
+					"refs": "796",
+					"paragraphs": [
+						796
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-2-mardi",
+			"title": "Mardi de la 2e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. Jésus et la Loi",
+					"refs": "582",
+					"paragraphs": [
+						582
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-2-samedi",
+			"title": "Samedi de la 2e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				},
+				{
+					"i": 1,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1434",
+					"paragraphs": [
+						1434
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1969",
+					"paragraphs": [
+						1969
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. Les commandements de l’Église",
+					"refs": "2043",
+					"paragraphs": [
+						2043
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-2-vendredi",
+			"title": "Vendredi de la 2e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Les clefs du Royaume »",
+					"refs": "551-552",
+					"paragraphs": [
+						551,
+						552
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "765",
+					"paragraphs": [
+						765
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La mission des apôtres",
+					"refs": "858",
+					"paragraphs": [
+						858
+					]
+				},
+				{
+					"i": 3,
+					"theme": "VI. Qui peut recevoir ce sacrement ?",
+					"refs": "1577",
+					"paragraphs": [
+						1577
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-20-lundi",
+			"title": "Lundi de la 20e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-20-mardi",
+			"title": "Mardi de la 20e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-20-mercredi",
+			"title": "Mercredi de la 20e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-20-vendredi",
+			"title": "Vendredi de la 20e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-21-lundi",
+			"title": "Lundi de la 21e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la vie éternelle »",
+					"refs": "1037-1041",
+					"paragraphs": [
+						1037,
+						1038,
+						1039,
+						1040,
+						1041
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "996",
+					"paragraphs": [
+						996
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. Pour juger les vivants et les morts",
+					"refs": "682",
+					"paragraphs": [
+						682
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. La prière d’intercession",
+					"refs": "2636",
+					"paragraphs": [
+						2636
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-21-mardi",
+			"title": "Mardi de la 21e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’Épreuve ultime de l’Église",
+					"refs": "675-677",
+					"paragraphs": [
+						675,
+						676,
+						677
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La transmission de la révélation divine",
+					"refs": "75-76",
+					"paragraphs": [
+						75,
+						76
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’avènement glorieux du Christ, espérance d’Israël",
+					"refs": "673",
+					"paragraphs": [
+						673
+					]
+				},
+				{
+					"i": 3,
+					"theme": "... deux modes distincts de transmission",
+					"refs": "82",
+					"paragraphs": [
+						82
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Jésus livré selon le dessein bien arrêté de Dieu »",
+					"refs": "600",
+					"paragraphs": [
+						600
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Liturgie et cultures",
+					"refs": "1209",
+					"paragraphs": [
+						1209
+					]
+				},
+				{
+					"i": 6,
+					"theme": "III. Le mérite",
+					"refs": "2011",
+					"paragraphs": [
+						2011
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-21-mercredi",
+			"title": "Mercredi de la 21e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Vie morale et témoignage missionnaire",
+					"refs": "2044",
+					"paragraphs": [
+						2044
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. L’activité économique et la justice sociale",
+					"refs": "2427",
+					"paragraphs": [
+						2427
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La vie de prière",
+					"refs": "2830",
+					"paragraphs": [
+						2830
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. Le Canon des Écritures",
+					"refs": "120",
+					"paragraphs": [
+						120
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-21-samedi",
+			"title": "Samedi de la 21e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. La sainteté chrétienne",
+					"refs": "2025-2026",
+					"paragraphs": [
+						2025,
+						2026
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "2074",
+					"paragraphs": [
+						2074
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Face aux tentations dans la prière",
+					"refs": "2732",
+					"paragraphs": [
+						2732
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La prédestination de Marie",
+					"refs": "489",
+					"paragraphs": [
+						489
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les symboles de l’Église",
+					"refs": "756",
+					"paragraphs": [
+						756
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Vie morale et magistère de l’Église",
+					"refs": "2038",
+					"paragraphs": [
+						2038
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La vie de prière",
+					"refs": "2813",
+					"paragraphs": [
+						2813
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-21-vendredi",
+			"title": "Vendredi de la 21e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "811-816",
+					"paragraphs": [
+						811,
+						812,
+						813,
+						814,
+						815,
+						816
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les fruits de la communion",
+					"refs": "1398-1401",
+					"paragraphs": [
+						1398,
+						1399,
+						1400,
+						1401
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "268, 272",
+					"paragraphs": [
+						268,
+						272
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "856",
+					"paragraphs": [
+						856
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’entrée messianique de Jésus à Jérusalem",
+					"refs": "563",
+					"paragraphs": [
+						563
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. Le nom chrétien",
+					"refs": "2157",
+					"paragraphs": [
+						2157
+					]
+				},
+				{
+					"i": 6,
+					"theme": "II. Les voies d’accès à la connaissance de Dieu",
+					"refs": "31",
+					"paragraphs": [
+						31
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-22-jeudi",
+			"title": "Jeudi de la 22e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Les symboles de l’Église",
+					"refs": "755-756",
+					"paragraphs": [
+						755,
+						756
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Vie morale et témoignage missionnaire",
+					"refs": "2045",
+					"paragraphs": [
+						2045
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Je suis Celui qui suis »",
+					"refs": "208",
+					"paragraphs": [
+						208
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les sacrements du service de la communion",
+					"refs": "1533",
+					"paragraphs": [
+						1533
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Hors de l’Église point de salut »",
+					"refs": "848",
+					"paragraphs": [
+						848
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-22-lundi",
+			"title": "Lundi de la 22e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "1949",
+					"paragraphs": [
+						1949
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. Seigneur",
+					"refs": "453",
+					"paragraphs": [
+						453
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les symboles de l’Esprit Saint",
+					"refs": "695",
+					"paragraphs": [
+						695
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’attente du Messie et de son Esprit",
+					"refs": "714",
+					"paragraphs": [
+						714
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2443",
+					"paragraphs": [
+						2443
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La montée de Jésus à Jérusalem",
+					"refs": "558",
+					"paragraphs": [
+						558
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-22-mercredi",
+			"title": "Mercredi de la 22e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. Qui peut recevoir ce sacrement ?",
+					"refs": "1306-1310",
+					"paragraphs": [
+						1306,
+						1307,
+						1308,
+						1309,
+						1310
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les symboles de l’Église",
+					"refs": "755-756",
+					"paragraphs": [
+						755,
+						756
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Vie morale et témoignage missionnaire",
+					"refs": "2045-2046",
+					"paragraphs": [
+						2045,
+						2046
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La providence et les causes secondes",
+					"refs": "307",
+					"paragraphs": [
+						307
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Jésus et la Loi",
+					"refs": "581",
+					"paragraphs": [
+						581
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-22-samedi",
+			"title": "Samedi de la 22e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La mission des apôtres",
+					"refs": "859",
+					"paragraphs": [
+						859
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Les sacrements de l’Église",
+					"refs": "1117",
+					"paragraphs": [
+						1117
+					]
+				},
+				{
+					"i": 2,
+					"theme": "En la personne du Christ-Tête (In persona Christi Capitis)...",
+					"refs": "1548",
+					"paragraphs": [
+						1548
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La croissance dans l’intelligence de la foi",
+					"refs": "95",
+					"paragraphs": [
+						95
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le Nouveau Testament",
+					"refs": "126",
+					"paragraphs": [
+						126
+					]
+				},
+				{
+					"i": 5,
+					"theme": "IV. La portée de la foi en Dieu Unique",
+					"refs": "224",
+					"paragraphs": [
+						224
+					]
+				},
+				{
+					"i": 6,
+					"theme": "II. Transmettre la foi – la catéchèse",
+					"refs": "8",
+					"paragraphs": [
+						8
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-22-vendredi",
+			"title": "Vendredi de la 22e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La mission des apôtres",
+					"refs": "859",
+					"paragraphs": [
+						859
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Les sacrements de l’Église",
+					"refs": "1117",
+					"paragraphs": [
+						1117
+					]
+				},
+				{
+					"i": 2,
+					"theme": "En la personne du Christ-Tête (In persona Christi Capitis)...",
+					"refs": "1548",
+					"paragraphs": [
+						1548
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. Pour juger les vivants et les morts",
+					"refs": "678",
+					"paragraphs": [
+						678
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. La pénitence intérieure",
+					"refs": "1430",
+					"paragraphs": [
+						1430
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1438",
+					"paragraphs": [
+						1438
+					]
+				},
+				{
+					"i": 6,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1969",
+					"paragraphs": [
+						1969
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-23-jeudi",
+			"title": "Jeudi de la 23e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2284-2285",
+					"paragraphs": [
+						2284,
+						2285
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les traits caractéristiques des sacramentaux",
+					"refs": "1669-1670",
+					"paragraphs": [
+						1669,
+						1670
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La confession des péchés",
+					"refs": "1457-1458",
+					"paragraphs": [
+						1457,
+						1458
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Une seule foi",
+					"refs": "178",
+					"paragraphs": [
+						178
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "258",
+					"paragraphs": [
+						258
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. Les choix de la conscience",
+					"refs": "1789",
+					"paragraphs": [
+						1789
+					]
+				},
+				{
+					"i": 6,
+					"theme": "V. La prière de louange",
+					"refs": "2639",
+					"paragraphs": [
+						2639
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-23-lundi",
+			"title": "Lundi de la 23e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "928-930",
+					"paragraphs": [
+						928,
+						929,
+						930
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Autres offenses à la dignité du mariage",
+					"refs": "2388-2389",
+					"paragraphs": [
+						2388,
+						2389
+					]
+				},
+				{
+					"i": 2,
+					"theme": "VIII. Le ministre de ce sacrement",
+					"refs": "1463",
+					"paragraphs": [
+						1463
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’unité de l’Ancien et du Nouveau Testament",
+					"refs": "129",
+					"paragraphs": [
+						129
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« L’Agneau qui enlève le péché du monde »",
+					"refs": "608",
+					"paragraphs": [
+						608
+					]
+				},
+				{
+					"i": 5,
+					"theme": "À la Cène Jésus a anticipé l’offrande libre de sa vie",
+					"refs": "610",
+					"paragraphs": [
+						610
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La mort du Christ est le sacrifice unique et définitif",
+					"refs": "613",
+					"paragraphs": [
+						613
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-23-mardi",
+			"title": "Mardi de la 23e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le collège épiscopal et son chef, le Pape",
+					"refs": "880-887",
+					"paragraphs": [
+						880,
+						881,
+						882,
+						883,
+						884,
+						885,
+						886,
+						887
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. L’Église est sainte",
+					"refs": "823-826",
+					"paragraphs": [
+						823,
+						824,
+						825,
+						826
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Chasteté et homosexualité",
+					"refs": "2357-2359",
+					"paragraphs": [
+						2357,
+						2358,
+						2359
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. Les offenses à la dignité du mariage",
+					"refs": "2380-2381",
+					"paragraphs": [
+						2380,
+						2381
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. La diversité des péchés",
+					"refs": "1852",
+					"paragraphs": [
+						1852
+					]
+				},
+				{
+					"i": 5,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2450",
+					"paragraphs": [
+						2450
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les appellations de l’Esprit Saint",
+					"refs": "693",
+					"paragraphs": [
+						693
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-23-mercredi",
+			"title": "Mercredi de la 23e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "914-927",
+					"paragraphs": [
+						914,
+						915,
+						916,
+						917,
+						918,
+						919,
+						920,
+						921,
+						922,
+						923,
+						924,
+						925,
+						926,
+						927
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La virginité pour le Royaume",
+					"refs": "1618-1619",
+					"paragraphs": [
+						1618,
+						1619
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. La pauvreté de cœur",
+					"refs": "2546-2547",
+					"paragraphs": [
+						2546,
+						2547
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La maternité virginale de Marie dans le dessein de Dieu",
+					"refs": "506",
+					"paragraphs": [
+						506
+					]
+				},
+				{
+					"i": 4,
+					"theme": "... en attendant que tout Lui soit soumis",
+					"refs": "672",
+					"paragraphs": [
+						672
+					]
+				},
+				{
+					"i": 5,
+					"theme": "VI. Qui peut recevoir ce sacrement ?",
+					"refs": "1579",
+					"paragraphs": [
+						1579
+					]
+				},
+				{
+					"i": 6,
+					"theme": "III. La béatitude chrétienne",
+					"refs": "1724",
+					"paragraphs": [
+						1724
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-24-jeudi",
+			"title": "Jeudi de la 24e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Je crois en Jésus-Christ, le Fils unique de Dieu",
+					"refs": "656-659",
+					"paragraphs": [
+						656,
+						657,
+						658,
+						659
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Notre participation au sacrifice du Christ",
+					"refs": "619, 624, 627",
+					"paragraphs": [
+						619,
+						624,
+						627
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les apparitions du Ressuscité",
+					"refs": "641-642",
+					"paragraphs": [
+						641,
+						642
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La réponse de l’homme à Dieu",
+					"refs": "186",
+					"paragraphs": [
+						186
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. L’événement historique et transcendant",
+					"refs": "639",
+					"paragraphs": [
+						639
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. Sens et portée salvifique de la Résurrection",
+					"refs": "652",
+					"paragraphs": [
+						652
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. Les noms et les images de l’Église",
+					"refs": "752",
+					"paragraphs": [
+						752
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-24-mardi",
+			"title": "Mardi de la 24e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "787-798",
+					"paragraphs": [
+						787,
+						788,
+						789,
+						790,
+						791,
+						792,
+						793,
+						794,
+						795,
+						796,
+						797,
+						798
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les charismes",
+					"refs": "805-807",
+					"paragraphs": [
+						805,
+						806,
+						807
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. La justification",
+					"refs": "1988",
+					"paragraphs": [
+						1988
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. La grâce",
+					"refs": "2003",
+					"paragraphs": [
+						2003
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les symboles de l’Esprit Saint",
+					"refs": "694",
+					"paragraphs": [
+						694
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Un seul corps »",
+					"refs": "790",
+					"paragraphs": [
+						790
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le Baptême dans l’Église",
+					"refs": "1227",
+					"paragraphs": [
+						1227
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-24-mercredi",
+			"title": "Mercredi de la 24e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. Seigneur",
+					"refs": "453",
+					"paragraphs": [
+						453
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les préparations",
+					"refs": "523",
+					"paragraphs": [
+						523
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "544",
+					"paragraphs": [
+						544
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "547",
+					"paragraphs": [
+						547
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-25-jeudi",
+			"title": "Jeudi de la 25e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La foi et l’intelligence",
+					"refs": "156-159",
+					"paragraphs": [
+						156,
+						157,
+						158,
+						159
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. La formation de la conscience",
+					"refs": "1784",
+					"paragraphs": [
+						1784
+					]
+				},
+				{
+					"i": 2,
+					"theme": "V. La prolifération du péché",
+					"refs": "1866",
+					"paragraphs": [
+						1866
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La charité",
+					"refs": "2094",
+					"paragraphs": [
+						2094
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le neuvième commandement",
+					"refs": "2514",
+					"paragraphs": [
+						2514
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Le désordre des convoitises",
+					"refs": "2540",
+					"paragraphs": [
+						2540
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. La catéchèse sur la Création",
+					"refs": "286",
+					"paragraphs": [
+						286
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-25-mardi",
+			"title": "Mardi de la 25e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. L’autorité",
+					"refs": "1898-1904",
+					"paragraphs": [
+						1898,
+						1899,
+						1900,
+						1901,
+						1902,
+						1903,
+						1904
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "269",
+					"paragraphs": [
+						269
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les peines du péché",
+					"refs": "1472",
+					"paragraphs": [
+						1472
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Le jugement particulier",
+					"refs": "1021",
+					"paragraphs": [
+						1021
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2463",
+					"paragraphs": [
+						2463
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. L’oraison",
+					"refs": "2716",
+					"paragraphs": [
+						2716
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-25-mercredi",
+			"title": "Mercredi de la 25e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La providence et le scandale du mal",
+					"refs": "321-323",
+					"paragraphs": [
+						321,
+						322,
+						323
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Distinction des vertus cardinales",
+					"refs": "1809",
+					"paragraphs": [
+						1809
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Divination et magie",
+					"refs": "2115",
+					"paragraphs": [
+						2115
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. « Je veux voir Dieu »",
+					"refs": "2554",
+					"paragraphs": [
+						2554
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Les clefs du Royaume »",
+					"refs": "551",
+					"paragraphs": [
+						551
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Conseils évangéliques, vie consacrée",
+					"refs": "915",
+					"paragraphs": [
+						915
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Promesses et vœux",
+					"refs": "2103",
+					"paragraphs": [
+						2103
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-25-samedi",
+			"title": "Samedi de la 25e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-26-jeudi",
+			"title": "Jeudi de la 26e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La providence et le scandale du mal",
+					"refs": "309",
+					"paragraphs": [
+						309
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. L’homme au Paradis",
+					"refs": "385",
+					"paragraphs": [
+						385
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le malade devant Dieu",
+					"refs": "1502",
+					"paragraphs": [
+						1502
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Jésus",
+					"refs": "431",
+					"paragraphs": [
+						431
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Dieu a l’initiative de l’amour rédempteur universel",
+					"refs": "605",
+					"paragraphs": [
+						605
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "992",
+					"paragraphs": [
+						992
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Comment les morts ressuscitent-ils ?",
+					"refs": "997",
+					"paragraphs": [
+						997
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-26-samedi",
+			"title": "Samedi de la 26e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La providence et le scandale du mal",
+					"refs": "309",
+					"paragraphs": [
+						309
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. L’homme au Paradis",
+					"refs": "385",
+					"paragraphs": [
+						385
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le malade devant Dieu",
+					"refs": "1502",
+					"paragraphs": [
+						1502
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-27-jeudi",
+			"title": "Jeudi de la 27e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "613-618",
+					"paragraphs": [
+						613,
+						614,
+						615,
+						616,
+						617,
+						618
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus et la Loi",
+					"refs": "578-580",
+					"paragraphs": [
+						578,
+						579,
+						580
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le vrai corps du Christ",
+					"refs": "476-477",
+					"paragraphs": [
+						476,
+						477
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le Cœur du Verbe incarné",
+					"refs": "479-480",
+					"paragraphs": [
+						479,
+						480
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Dieu élit Abraham",
+					"refs": "59",
+					"paragraphs": [
+						59
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’Esprit de la promesse",
+					"refs": "706",
+					"paragraphs": [
+						706
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-27-mardi",
+			"title": "Mardi de la 27e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le collège épiscopal et son chef, le Pape",
+					"refs": "880-887",
+					"paragraphs": [
+						880,
+						881,
+						882,
+						883,
+						884,
+						885,
+						886,
+						887
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "861-863",
+					"paragraphs": [
+						861,
+						862,
+						863
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Marie – « toujours Vierge »",
+					"refs": "499-500",
+					"paragraphs": [
+						499,
+						500
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La foi est une grâce",
+					"refs": "153",
+					"paragraphs": [
+						153
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Fils unique de Dieu",
+					"refs": "442",
+					"paragraphs": [
+						442
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "659",
+					"paragraphs": [
+						659
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. Les noms et les images de l’Église",
+					"refs": "752",
+					"paragraphs": [
+						752
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-27-mercredi",
+			"title": "Mercredi de la 27e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La transmission de la révélation divine",
+					"refs": "74, 84-90",
+					"paragraphs": [
+						74,
+						84,
+						85,
+						86,
+						87,
+						88,
+						89,
+						90
+					]
+				},
+				{
+					"i": 1,
+					"theme": "... continuée dans la succession apostolique",
+					"refs": "77-79",
+					"paragraphs": [
+						77,
+						78,
+						79
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le collège épiscopal et son chef, le Pape",
+					"refs": "883, 886",
+					"paragraphs": [
+						883,
+						886
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Les clefs du Royaume »",
+					"refs": "553",
+					"paragraphs": [
+						553
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les sens de l’Écriture",
+					"refs": "119",
+					"paragraphs": [
+						119
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La réponse de l’homme à Dieu",
+					"refs": "194",
+					"paragraphs": [
+						194
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les symboles de l’Église",
+					"refs": "755",
+					"paragraphs": [
+						755
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-27-samedi",
+			"title": "Samedi de la 27e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. La loi ancienne",
+					"refs": "1961-1964",
+					"paragraphs": [
+						1961,
+						1962,
+						1963,
+						1964
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Dieu élit Abraham",
+					"refs": "59-61",
+					"paragraphs": [
+						59,
+						60,
+						61
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Dans les Théophanies et la Loi",
+					"refs": "708",
+					"paragraphs": [
+						708
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Jésus et la Loi",
+					"refs": "582",
+					"paragraphs": [
+						582
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’homme image de Dieu",
+					"refs": "1709",
+					"paragraphs": [
+						1709
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. Le mérite",
+					"refs": "2009",
+					"paragraphs": [
+						2009
+					]
+				},
+				{
+					"i": 6,
+					"theme": "« Un seul corps »",
+					"refs": "791",
+					"paragraphs": [
+						791
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-27-vendredi",
+			"title": "Vendredi de la 27e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Dieu élit Abraham",
+					"refs": "59",
+					"paragraphs": [
+						59
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’Esprit de la promesse",
+					"refs": "706",
+					"paragraphs": [
+						706
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Jésus et la Loi",
+					"refs": "580",
+					"paragraphs": [
+						580
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les appellations de l’Esprit Saint",
+					"refs": "693",
+					"paragraphs": [
+						693
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-28-lundi",
+			"title": "Lundi de la 28e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-28-mercredi",
+			"title": "Mercredi de la 28e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le péché",
+					"refs": "1852-1857",
+					"paragraphs": [
+						1852,
+						1853,
+						1854,
+						1855,
+						1856,
+						1857
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les Psaumes, prière de l’Assemblée",
+					"refs": "2586-2589, 2596-2597",
+					"paragraphs": [
+						2586,
+						2587,
+						2588,
+						2589,
+						2596,
+						2597
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. La liberté humaine dans l’économie du salut",
+					"refs": "1740-1742",
+					"paragraphs": [
+						1740,
+						1741,
+						1742
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La vie de prière",
+					"refs": "2819, 2842, 2848",
+					"paragraphs": [
+						2819,
+						2842,
+						2848
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Les dons et les Fruits du Saint-Esprit",
+					"refs": "1830-1832",
+					"paragraphs": [
+						1830,
+						1831,
+						1832
+					]
+				},
+				{
+					"i": 5,
+					"theme": "II. Passions et vie morale",
+					"refs": "1768-1769",
+					"paragraphs": [
+						1768,
+						1769
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’Esprit Saint – le Don de Dieu",
+					"refs": "735-736",
+					"paragraphs": [
+						735,
+						736
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-28-samedi",
+			"title": "Samedi de la 28e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le Christ règne déjà par l’Église...",
+					"refs": "668-669",
+					"paragraphs": [
+						668,
+						669
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La foi et l’intelligence",
+					"refs": "158",
+					"paragraphs": [
+						158
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "272",
+					"paragraphs": [
+						272
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. La Résurrection – œuvre de la Sainte Trinité",
+					"refs": "648",
+					"paragraphs": [
+						648
+					]
+				},
+				{
+					"i": 4,
+					"theme": "II. La prière de demande",
+					"refs": "2632",
+					"paragraphs": [
+						2632
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les symboles de l’Église",
+					"refs": "753",
+					"paragraphs": [
+						753
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Que veut dire « catholique » ?",
+					"refs": "830",
+					"paragraphs": [
+						830
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-29-jeudi",
+			"title": "Jeudi de la 29e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. La prière vocale",
+					"refs": "2702-2703",
+					"paragraphs": [
+						2702,
+						2703
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Père révélé par le Fils",
+					"refs": "239",
+					"paragraphs": [
+						239
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Devoirs des enfants",
+					"refs": "2214",
+					"paragraphs": [
+						2214
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La fécondité du mariage",
+					"refs": "2367",
+					"paragraphs": [
+						2367
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Je crois en l’Esprit-Saint",
+					"refs": "1073",
+					"paragraphs": [
+						1073
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. La justification",
+					"refs": "1995",
+					"paragraphs": [
+						1995
+					]
+				},
+				{
+					"i": 6,
+					"theme": "III. L’oraison",
+					"refs": "2714",
+					"paragraphs": [
+						2714
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-29-lundi",
+			"title": "Lundi de la 29e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Le mérite",
+					"refs": "2006-2011",
+					"paragraphs": [
+						2006,
+						2007,
+						2008,
+						2009,
+						2010,
+						2011
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La vie de prière",
+					"refs": "2796, 2863",
+					"paragraphs": [
+						2796,
+						2863
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le neuvième commandement",
+					"refs": "2515-2516",
+					"paragraphs": [
+						2515,
+						2516
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Le désordre des convoitises",
+					"refs": "2537, 2540",
+					"paragraphs": [
+						2537,
+						2540
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Vrai Dieu et vrai homme",
+					"refs": "465",
+					"paragraphs": [
+						465
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’Esprit Saint – le Don de Dieu",
+					"refs": "734",
+					"paragraphs": [
+						734
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. Les effets de la célébration de ce sacrement",
+					"refs": "1520",
+					"paragraphs": [
+						1520
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-29-mardi",
+			"title": "Mardi de la 29e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le mémorial sacrificiel du Christ et de son Corps, l’Église",
+					"refs": "1370-1372",
+					"paragraphs": [
+						1370,
+						1371,
+						1372
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. L’Église – Peuple de Dieu",
+					"refs": "781",
+					"paragraphs": [
+						781
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Notre participation au sacrifice du Christ",
+					"refs": "624",
+					"paragraphs": [
+						624
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Le nom chrétien",
+					"refs": "2157",
+					"paragraphs": [
+						2157
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La paix",
+					"refs": "2305",
+					"paragraphs": [
+						2305
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Dieu révèle son « dessein bienveillant »",
+					"refs": "51",
+					"paragraphs": [
+						51
+					]
+				},
+				{
+					"i": 6,
+					"theme": "II. La Conversion et la Société",
+					"refs": "1886",
+					"paragraphs": [
+						1886
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-29-mercredi",
+			"title": "Mercredi de la 29e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Je crois en Jésus-Christ, le Fils unique de Dieu",
+					"refs": "424-425",
+					"paragraphs": [
+						424,
+						425
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Dieu est Amour",
+					"refs": "221",
+					"paragraphs": [
+						221
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’Église – mystère de l’union des hommes avec Dieu",
+					"refs": "772",
+					"paragraphs": [
+						772
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La vie de prière",
+					"refs": "2778",
+					"paragraphs": [
+						2778
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La charge de sanctifier",
+					"refs": "893",
+					"paragraphs": [
+						893
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. La communion des biens spirituels",
+					"refs": "952",
+					"paragraphs": [
+						952
+					]
+				},
+				{
+					"i": 6,
+					"theme": "II. Les sacrements de l’Église",
+					"refs": "1117",
+					"paragraphs": [
+						1117
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-29-samedi",
+			"title": "Samedi de la 29e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "631-635",
+					"paragraphs": [
+						631,
+						632,
+						633,
+						634,
+						635
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les charismes",
+					"refs": "799-801",
+					"paragraphs": [
+						799,
+						800,
+						801
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Le mystère sacré de l’Unité de l’Église » (UR 2)",
+					"refs": "813-814",
+					"paragraphs": [
+						813,
+						814
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le Christ règne déjà par l’Église...",
+					"refs": "668-669",
+					"paragraphs": [
+						668,
+						669
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2794-2795",
+					"paragraphs": [
+						2794,
+						2795
+					]
+				},
+				{
+					"i": 5,
+					"theme": "II. La grâce",
+					"refs": "2003-2004",
+					"paragraphs": [
+						2003,
+						2004
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La formation du dogme trinitaire",
+					"refs": "249",
+					"paragraphs": [
+						249
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-29-vendredi",
+			"title": "Vendredi de la 29e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Les charismes",
+					"refs": "805, 810-812",
+					"paragraphs": [
+						805,
+						810,
+						811,
+						812
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. La communion de l’Église du ciel et de la terre",
+					"refs": "957-959",
+					"paragraphs": [
+						957,
+						958,
+						959
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Le mystère sacré de l’Unité de l’Église » (UR 2)",
+					"refs": "813-814",
+					"paragraphs": [
+						813,
+						814
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le sacrement de la confirmation",
+					"refs": "1301-1302",
+					"paragraphs": [
+						1301,
+						1302
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La formation du dogme trinitaire",
+					"refs": "249",
+					"paragraphs": [
+						249
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’apostolat",
+					"refs": "866",
+					"paragraphs": [
+						866
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Devoirs des enfants",
+					"refs": "2219",
+					"paragraphs": [
+						2219
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-3-jeudi",
+			"title": "Jeudi de la 3e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "546",
+					"paragraphs": [
+						546
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2607",
+					"paragraphs": [
+						2607
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les dogmes de la foi",
+					"refs": "89",
+					"paragraphs": [
+						89
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Dieu crée « de rien »",
+					"refs": "298",
+					"paragraphs": [
+						298
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-3-lundi",
+			"title": "Lundi de la 3e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "David et la prière du roi",
+					"refs": "2578",
+					"paragraphs": [
+						2578
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les Psaumes, prière de l’Assemblée",
+					"refs": "2594",
+					"paragraphs": [
+						2594
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La Tentation de Jésus",
+					"refs": "539",
+					"paragraphs": [
+						539
+					]
+				},
+				{
+					"i": 5,
+					"theme": "IV. La gravité du péché : péché mortel et véniel",
+					"refs": "1864",
+					"paragraphs": [
+						1864
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-3-mardi",
+			"title": "Mardi de la 3e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Marie – « toujours Vierge »",
+					"refs": "500-501",
+					"paragraphs": [
+						500,
+						501
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-3-samedi",
+			"title": "Samedi de la 3e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Distinction des vertus cardinales",
+					"refs": "1808",
+					"paragraphs": [
+						1808
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-3-vendredi",
+			"title": "Vendredi de la 3e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "851-854",
+					"paragraphs": [
+						851,
+						852,
+						853,
+						854
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "546",
+					"paragraphs": [
+						546
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2607",
+					"paragraphs": [
+						2607
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-30-jeudi",
+			"title": "Jeudi de la 30e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La Liturgie des Heures",
+					"refs": "1174-1178",
+					"paragraphs": [
+						1174,
+						1175,
+						1176,
+						1177,
+						1178
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Je crois en l’Esprit-Saint",
+					"refs": "1073",
+					"paragraphs": [
+						1073
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. La bénédiction et l’adoration",
+					"refs": "2627",
+					"paragraphs": [
+						2627
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. La prière d’intercession",
+					"refs": "2636",
+					"paragraphs": [
+						2636
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. Persévérer dans l’amour",
+					"refs": "2742",
+					"paragraphs": [
+						2742
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-30-mardi",
+			"title": "Mardi de la 30e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le sacrement du mariage",
+					"refs": "1601-1602, 1638-1644",
+					"paragraphs": [
+						1601,
+						1602,
+						1638,
+						1639,
+						1640,
+						1641,
+						1642,
+						1643,
+						1644
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Autres références",
+					"refs": "1659-1667",
+					"paragraphs": [
+						1659,
+						1660,
+						1661,
+						1662,
+						1663,
+						1664,
+						1665,
+						1666,
+						1667
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "772-776",
+					"paragraphs": [
+						772,
+						773,
+						774,
+						775,
+						776
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. L’Église est sainte",
+					"refs": "823-826, 829",
+					"paragraphs": [
+						823,
+						824,
+						825,
+						826,
+						829
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le quatrième commandement",
+					"refs": "2201-2204",
+					"paragraphs": [
+						2201,
+						2202,
+						2203,
+						2204
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le mariage dans le Seigneur",
+					"refs": "1614-1616",
+					"paragraphs": [
+						1614,
+						1615,
+						1616
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le mariage dans l’ordre de la création",
+					"refs": "1603, 1605",
+					"paragraphs": [
+						1603,
+						1605
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-30-mercredi",
+			"title": "Mercredi de la 30e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Devoirs des parents",
+					"refs": "2221-2230",
+					"paragraphs": [
+						2221,
+						2222,
+						2223,
+						2224,
+						2225,
+						2226,
+						2227,
+						2228,
+						2229,
+						2230
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La justice sociale",
+					"refs": "1929-1938",
+					"paragraphs": [
+						1929,
+						1930,
+						1931,
+						1932,
+						1933,
+						1934,
+						1935,
+						1936,
+						1937,
+						1938
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. Le Bien Commun",
+					"refs": "1905-1912",
+					"paragraphs": [
+						1905,
+						1906,
+						1907,
+						1908,
+						1909,
+						1910,
+						1911,
+						1912
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le quatrième commandement",
+					"refs": "2212-2218",
+					"paragraphs": [
+						2212,
+						2213,
+						2214,
+						2215,
+						2216,
+						2217,
+						2218
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Tu aimeras ton prochain comme toi-même »",
+					"refs": "2196-2200",
+					"paragraphs": [
+						2196,
+						2197,
+						2198,
+						2199,
+						2200
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2286",
+					"paragraphs": [
+						2286
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’ouverture à la fécondité",
+					"refs": "1653",
+					"paragraphs": [
+						1653
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-31-jeudi",
+			"title": "Jeudi de la 31e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Au cœur de la catéchèse : le Christ",
+					"refs": "426-429",
+					"paragraphs": [
+						426,
+						427,
+						428,
+						429
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Signes et symboles",
+					"refs": "1150",
+					"paragraphs": [
+						1150
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. La loi ancienne",
+					"refs": "1963",
+					"paragraphs": [
+						1963
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "527",
+					"paragraphs": [
+						527
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Les noms et les images de l’Église",
+					"refs": "752",
+					"paragraphs": [
+						752
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. La Sainte Écriture dans la vie de l’Église",
+					"refs": "133",
+					"paragraphs": [
+						133
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La mort",
+					"refs": "1006",
+					"paragraphs": [
+						1006
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-31-mardi",
+			"title": "Mardi de la 31e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La réponse de l’homme à Dieu",
+					"refs": "187-197",
+					"paragraphs": [
+						187,
+						188,
+						189,
+						190,
+						191,
+						192,
+						193,
+						194,
+						195,
+						196,
+						197
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Leur participation à la charge royale du Christ",
+					"refs": "908-912",
+					"paragraphs": [
+						908,
+						909,
+						910,
+						911,
+						912
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Seigneur",
+					"refs": "446-450",
+					"paragraphs": [
+						446,
+						447,
+						448,
+						449,
+						450
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’attente du Messie et de son Esprit",
+					"refs": "713, 716",
+					"paragraphs": [
+						713,
+						716
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2812, 2842",
+					"paragraphs": [
+						2812,
+						2842
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Jésus",
+					"refs": "434-435",
+					"paragraphs": [
+						434,
+						435
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La prière à Jésus",
+					"refs": "2667",
+					"paragraphs": [
+						2667
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-31-mercredi",
+			"title": "Mercredi de la 31e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Je crois en l’Esprit-Saint",
+					"refs": "1070-1072",
+					"paragraphs": [
+						1070,
+						1071,
+						1072
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La providence et les causes secondes",
+					"refs": "308",
+					"paragraphs": [
+						308
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "1949",
+					"paragraphs": [
+						1949
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La mystagogie de la célébration",
+					"refs": "1243",
+					"paragraphs": [
+						1243
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-31-vendredi",
+			"title": "Vendredi de la 31e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-32-jeudi",
+			"title": "Jeudi de la 32e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-32-mercredi",
+			"title": "Mercredi de la 32e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. La grâce",
+					"refs": "1996-2002",
+					"paragraphs": [
+						1996,
+						1997,
+						1998,
+						1999,
+						2000,
+						2001,
+						2002
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Devoirs des citoyens",
+					"refs": "2238-2242",
+					"paragraphs": [
+						2238,
+						2239,
+						2240,
+						2241,
+						2242
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’entrée messianique de Jésus à Jérusalem",
+					"refs": "564",
+					"paragraphs": [
+						564
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "853",
+					"paragraphs": [
+						853
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Comment est appelé ce sacrement ?",
+					"refs": "1215",
+					"paragraphs": [
+						1215
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’espérance",
+					"refs": "1817",
+					"paragraphs": [
+						1817
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-32-samedi",
+			"title": "Samedi de la 32e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-32-vendredi",
+			"title": "Vendredi de la 32e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-33-lundi",
+			"title": "Lundi de la 33e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Les Psaumes, prière de l’Assemblée",
+					"refs": "2586-2589, 2596-2597",
+					"paragraphs": [
+						2586,
+						2587,
+						2588,
+						2589,
+						2596,
+						2597
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Le Christ – Parole unique de l’Écriture Sainte",
+					"refs": "101-104",
+					"paragraphs": [
+						101,
+						102,
+						103,
+						104
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les célébrants de la Liturgie céleste",
+					"refs": "1137-1139",
+					"paragraphs": [
+						1137,
+						1138,
+						1139
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Les dons et les Fruits du Saint-Esprit",
+					"refs": "1830-1831",
+					"paragraphs": [
+						1830,
+						1831
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’Esprit Saint rappelle le Mystère du Christ",
+					"refs": "1100",
+					"paragraphs": [
+						1100
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. La prière de louange",
+					"refs": "2642",
+					"paragraphs": [
+						2642
+					]
+				},
+				{
+					"i": 6,
+					"theme": "« Je suis Celui qui suis »",
+					"refs": "206",
+					"paragraphs": [
+						206
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-33-mardi",
+			"title": "Mardi de la 33e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. La méditation",
+					"refs": "2706",
+					"paragraphs": [
+						2706
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-33-mercredi",
+			"title": "Mercredi de la 33e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-33-samedi",
+			"title": "Samedi de la 33e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-34-jeudi",
+			"title": "Jeudi de la 34e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-34-lundi",
+			"title": "Lundi de la 34e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-34-mardi",
+			"title": "Mardi de la 34e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-34-mercredi",
+			"title": "Mercredi de la 34e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-34-vendredi",
+			"title": "Vendredi de la 34e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": []
+		},
+		{
+			"slug": "ordinaire-4-jeudi",
+			"title": "Jeudi de la 4e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La mystagogie de la célébration",
+					"refs": "1241-1242",
+					"paragraphs": [
+						1241,
+						1242
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. La sainteté chrétienne",
+					"refs": "2025",
+					"paragraphs": [
+						2025
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "765",
+					"paragraphs": [
+						765
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Guérissez les malades... »",
+					"refs": "1506",
+					"paragraphs": [
+						1506
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les formes variées des sacramentaux",
+					"refs": "1673",
+					"paragraphs": [
+						1673
+					]
+				},
+				{
+					"i": 5,
+					"theme": "IV. Où célébrer ?",
+					"refs": "1183",
+					"paragraphs": [
+						1183
+					]
+				},
+				{
+					"i": 6,
+					"theme": "II. Les signes et le rite de la Confirmation",
+					"refs": "1294",
+					"paragraphs": [
+						1294
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-4-lundi",
+			"title": "Lundi de la 4e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "David et la prière du roi",
+					"refs": "2579",
+					"paragraphs": [
+						2579
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. La prière vocale",
+					"refs": "2700",
+					"paragraphs": [
+						2700
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-4-mardi",
+			"title": "Mardi de la 4e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. La confirmation dans l’économie du salut",
+					"refs": "1288-1289",
+					"paragraphs": [
+						1288,
+						1289
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Christ – médecin",
+					"refs": "1504-1505",
+					"paragraphs": [
+						1504,
+						1505
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "994",
+					"paragraphs": [
+						994
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Jésus exauce la prière",
+					"refs": "2616",
+					"paragraphs": [
+						2616
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les symboles de l’Esprit Saint",
+					"refs": "699",
+					"paragraphs": [
+						699
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La grâce du Saint-Esprit",
+					"refs": "1597",
+					"paragraphs": [
+						1597
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-4-mercredi",
+			"title": "Mercredi de la 4e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Les mystères de la vie cachée de Jésus",
+					"refs": "531-534",
+					"paragraphs": [
+						531,
+						532,
+						533,
+						534
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Marie – « toujours Vierge »",
+					"refs": "500",
+					"paragraphs": [
+						500
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les symboles de l’Esprit Saint",
+					"refs": "699",
+					"paragraphs": [
+						699
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2610",
+					"paragraphs": [
+						2610
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "765",
+					"paragraphs": [
+						765
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Guérissez les malades... »",
+					"refs": "1506",
+					"paragraphs": [
+						1506
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les formes variées des sacramentaux",
+					"refs": "1673",
+					"paragraphs": [
+						1673
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-4-samedi",
+			"title": "Samedi de la 4e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’homme image de Dieu",
+					"refs": "1706",
+					"paragraphs": [
+						1706
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Les dons et les Fruits du Saint-Esprit",
+					"refs": "1845",
+					"paragraphs": [
+						1845
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Responsabilité et Participation",
+					"refs": "1917",
+					"paragraphs": [
+						1917
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. La loi morale naturelle",
+					"refs": "1954",
+					"paragraphs": [
+						1954
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les signes du pain et du vin",
+					"refs": "1335",
+					"paragraphs": [
+						1335
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les symboles de l’Église",
+					"refs": "754",
+					"paragraphs": [
+						754
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La grâce du Saint-Esprit",
+					"refs": "1586",
+					"paragraphs": [
+						1586
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-5-jeudi",
+			"title": "Jeudi de la 5e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Jésus exauce la prière",
+					"refs": "2616",
+					"paragraphs": [
+						2616
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-5-lundi",
+			"title": "Lundi de la 5e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Jésus prie",
+					"refs": "2602",
+					"paragraphs": [
+						2602
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Christ – médecin",
+					"refs": "1504",
+					"paragraphs": [
+						1504
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-5-mercredi",
+			"title": "Mercredi de la 5e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. Jésus et la Loi",
+					"refs": "581-582",
+					"paragraphs": [
+						581,
+						582
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-5-vendredi",
+			"title": "Vendredi de la 5e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Signes et symboles",
+					"refs": "1151",
+					"paragraphs": [
+						1151
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Christ – médecin",
+					"refs": "1504",
+					"paragraphs": [
+						1504
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-6-lundi",
+			"title": "Lundi de la 6e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le combat de la prière",
+					"refs": "2734-2737",
+					"paragraphs": [
+						2734,
+						2735,
+						2736,
+						2737
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Notre communion aux mystères de Jésus",
+					"refs": "520-521",
+					"paragraphs": [
+						520,
+						521
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Les béatitudes",
+					"refs": "1716-1717",
+					"paragraphs": [
+						1716,
+						1717
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "765",
+					"paragraphs": [
+						765
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Pourquoi le ministère ecclésial ?",
+					"refs": "877",
+					"paragraphs": [
+						877
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les Psaumes, prière de l’Assemblée",
+					"refs": "2586",
+					"paragraphs": [
+						2586
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Distinction des vertus cardinales",
+					"refs": "1808",
+					"paragraphs": [
+						1808
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-6-mardi",
+			"title": "Mardi de la 6e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2846-2854",
+					"paragraphs": [
+						2846,
+						2847,
+						2848,
+						2849,
+						2850,
+						2851,
+						2852,
+						2853,
+						2854
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La providence et le scandale du mal",
+					"refs": "309-311",
+					"paragraphs": [
+						309,
+						310,
+						311
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Notre communion aux mystères de Jésus",
+					"refs": "520-521",
+					"paragraphs": [
+						520,
+						521
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Distinction des vertus cardinales",
+					"refs": "1808",
+					"paragraphs": [
+						1808
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Dieu seul EST",
+					"refs": "212",
+					"paragraphs": [
+						212
+					]
+				},
+				{
+					"i": 5,
+					"theme": "V. La prière de louange",
+					"refs": "2642",
+					"paragraphs": [
+						2642
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "854",
+					"paragraphs": [
+						854
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-7-jeudi",
+			"title": "Jeudi de la 7e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2284-2287",
+					"paragraphs": [
+						2284,
+						2285,
+						2286,
+						2287
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La paix",
+					"refs": "2302-2304",
+					"paragraphs": [
+						2302,
+						2303,
+						2304
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. L’activité économique et la justice sociale",
+					"refs": "2434-2436",
+					"paragraphs": [
+						2434,
+						2435,
+						2436
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’Épreuve ultime de l’Église",
+					"refs": "675-677",
+					"paragraphs": [
+						675,
+						676,
+						677
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VI. L’amour des pauvres",
+					"refs": "2445-2446",
+					"paragraphs": [
+						2445,
+						2446
+					]
+				},
+				{
+					"i": 5,
+					"theme": "VI. L’espérance des cieux nouveaux et de la terre nouvelle",
+					"refs": "1056-1057",
+					"paragraphs": [
+						1056,
+						1057
+					]
+				},
+				{
+					"i": 6,
+					"theme": "V. La prolifération du péché",
+					"refs": "1867",
+					"paragraphs": [
+						1867
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-7-mardi",
+			"title": "Mardi de la 7e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le combat de la prière",
+					"refs": "2734-2737",
+					"paragraphs": [
+						2734,
+						2735,
+						2736,
+						2737
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2284-2287",
+					"paragraphs": [
+						2284,
+						2285,
+						2286,
+						2287
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Les offenses à la vérité",
+					"refs": "2475, 2477, 2479",
+					"paragraphs": [
+						2475,
+						2477,
+						2479
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Le désordre des convoitises",
+					"refs": "2538-2540",
+					"paragraphs": [
+						2538,
+						2539,
+						2540
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VI. Vérité, beauté et art sacré",
+					"refs": "2507",
+					"paragraphs": [
+						2507
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Dans la communion des saints",
+					"refs": "1474",
+					"paragraphs": [
+						1474
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’âme et la connaissance humaine du Christ",
+					"refs": "474",
+					"paragraphs": [
+						474
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-7-mercredi",
+			"title": "Mercredi de la 7e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "303-308",
+					"paragraphs": [
+						303,
+						304,
+						305,
+						306,
+						307,
+						308
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le respect de l’âme d’autrui : le scandale",
+					"refs": "2284-2287",
+					"paragraphs": [
+						2284,
+						2285,
+						2286,
+						2287
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La providence et le scandale du mal",
+					"refs": "321, 323",
+					"paragraphs": [
+						321,
+						323
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Divination et magie",
+					"refs": "2115",
+					"paragraphs": [
+						2115
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. « Je veux voir Dieu »",
+					"refs": "2554",
+					"paragraphs": [
+						2554
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. La diversité des péchés",
+					"refs": "1853",
+					"paragraphs": [
+						1853
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le suicide",
+					"refs": "2282",
+					"paragraphs": [
+						2282
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-7-samedi",
+			"title": "Samedi de la 7e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’onction des malades",
+					"refs": "1499-1501, 1510-1520",
+					"paragraphs": [
+						1499,
+						1500,
+						1501,
+						1510,
+						1511,
+						1512,
+						1513,
+						1514,
+						1515,
+						1516,
+						1517,
+						1518,
+						1519,
+						1520
+					]
+				},
+				{
+					"i": 1,
+					"theme": "V. Le Viatique, dernier sacrement du chrétien",
+					"refs": "1525-1532",
+					"paragraphs": [
+						1525,
+						1526,
+						1527,
+						1528,
+						1529,
+						1530,
+						1531,
+						1532
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Élie, les prophètes et la conversion du cœur",
+					"refs": "2582-2583",
+					"paragraphs": [
+						2582,
+						2583
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le combat de la prière",
+					"refs": "2737-2738",
+					"paragraphs": [
+						2737,
+						2738
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le sens de la mort chrétienne",
+					"refs": "1014",
+					"paragraphs": [
+						1014
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Serviteurs de la prière",
+					"refs": "2686",
+					"paragraphs": [
+						2686
+					]
+				},
+				{
+					"i": 6,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1434",
+					"paragraphs": [
+						1434
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-7-vendredi",
+			"title": "Vendredi de la 7e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Le consentement matrimonial",
+					"refs": "1625-1632",
+					"paragraphs": [
+						1625,
+						1626,
+						1627,
+						1628,
+						1629,
+						1630,
+						1631,
+						1632
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Le nom du Seigneur prononcé à faux",
+					"refs": "2150-2155",
+					"paragraphs": [
+						2150,
+						2151,
+						2152,
+						2153,
+						2154,
+						2155
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Vivre dans la vérité",
+					"refs": "2465-2470",
+					"paragraphs": [
+						2465,
+						2466,
+						2467,
+						2468,
+						2469,
+						2470
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le mariage dans le Seigneur",
+					"refs": "1612-1617",
+					"paragraphs": [
+						1612,
+						1613,
+						1614,
+						1615,
+						1616,
+						1617
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le sacrement du mariage",
+					"refs": "1638-1643",
+					"paragraphs": [
+						1638,
+						1639,
+						1640,
+						1641,
+						1642,
+						1643
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le mariage sous la pédagogie de la Loi",
+					"refs": "1609-1611",
+					"paragraphs": [
+						1609,
+						1610,
+						1611
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La fidélité de l’amour conjugal",
+					"refs": "1649-1651",
+					"paragraphs": [
+						1649,
+						1650,
+						1651
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-8-jeudi",
+			"title": "Jeudi de la 8e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La grâce du Saint-Esprit",
+					"refs": "1591-1600",
+					"paragraphs": [
+						1591,
+						1592,
+						1593,
+						1594,
+						1595,
+						1596,
+						1597,
+						1598,
+						1599,
+						1600
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La participation des laïcs à la charge sacerdotale du Christ",
+					"refs": "901-903",
+					"paragraphs": [
+						901,
+						902,
+						903
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "782-784",
+					"paragraphs": [
+						782,
+						783,
+						784
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Les offenses à la vérité",
+					"refs": "2475",
+					"paragraphs": [
+						2475
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2769",
+					"paragraphs": [
+						2769
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Les clefs du Royaume »",
+					"refs": "552",
+					"paragraphs": [
+						552
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les célébrants de la liturgie sacramentelle",
+					"refs": "1141",
+					"paragraphs": [
+						1141
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-8-lundi",
+			"title": "Lundi de la 8e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. La pauvreté de cœur",
+					"refs": "2544-2546",
+					"paragraphs": [
+						2544,
+						2545,
+						2546
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. La bénédiction et l’adoration",
+					"refs": "2626-2627",
+					"paragraphs": [
+						2626,
+						2627
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Notre participation au sacrifice du Christ",
+					"refs": "618",
+					"paragraphs": [
+						618
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Sens et portée salvifique de la Résurrection",
+					"refs": "654",
+					"paragraphs": [
+						654
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. La purification finale ou Purgatoire",
+					"refs": "1031",
+					"paragraphs": [
+						1031
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Les objections à la prière",
+					"refs": "2728",
+					"paragraphs": [
+						2728
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "2053",
+					"paragraphs": [
+						2053
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-8-mardi",
+			"title": "Mardi de la 8e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le Père et le Fils révélés par l’Esprit",
+					"refs": "246-248",
+					"paragraphs": [
+						246,
+						247,
+						248
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. La pauvreté de cœur",
+					"refs": "2544-2546",
+					"paragraphs": [
+						2544,
+						2545,
+						2546
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’unité de l’Ancien et du Nouveau Testament",
+					"refs": "128-129",
+					"paragraphs": [
+						128,
+						129
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Notre participation au sacrifice du Christ",
+					"refs": "618",
+					"paragraphs": [
+						618
+					]
+				},
+				{
+					"i": 4,
+					"theme": "III. Sens et portée salvifique de la Résurrection",
+					"refs": "654",
+					"paragraphs": [
+						654
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. La purification finale ou Purgatoire",
+					"refs": "1031",
+					"paragraphs": [
+						1031
+					]
+				},
+				{
+					"i": 6,
+					"theme": "« Je crois en l’Esprit-Saint »",
+					"refs": "687",
+					"paragraphs": [
+						687
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-8-mercredi",
+			"title": "Mercredi de la 8e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. La sainteté chrétienne",
+					"refs": "2012-2016",
+					"paragraphs": [
+						2012,
+						2013,
+						2014,
+						2015,
+						2016
+					]
+				},
+				{
+					"i": 1,
+					"theme": "En la personne du Christ-Tête (In persona Christi Capitis)...",
+					"refs": "1548-1551",
+					"paragraphs": [
+						1548,
+						1549,
+						1550,
+						1551
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Sur la croix, Jésus consomme son sacrifice",
+					"refs": "616-617",
+					"paragraphs": [
+						616,
+						617
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Notre participation au sacrifice du Christ",
+					"refs": "618, 622",
+					"paragraphs": [
+						618,
+						622
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les traits communs des mystères de Jésus",
+					"refs": "517",
+					"paragraphs": [
+						517
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Dieu l’a fait péché pour nous »",
+					"refs": "602",
+					"paragraphs": [
+						602
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La mort du Christ est le sacrifice unique et définitif",
+					"refs": "613",
+					"paragraphs": [
+						613
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-8-samedi",
+			"title": "Samedi de la 8e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "856",
+					"paragraphs": [
+						856
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-8-vendredi",
+			"title": "Vendredi de la 8e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2805, 2840-2841",
+					"paragraphs": [
+						2805,
+						2840,
+						2841
+					]
+				},
+				{
+					"i": 1,
+					"theme": "V. Les multiples formes de la pénitence dans la vie chrétienne",
+					"refs": "1434-1435",
+					"paragraphs": [
+						1434,
+						1435
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2607, 2610",
+					"paragraphs": [
+						2607,
+						2610
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Des lieux favorables à la prière",
+					"refs": "2691, 2696",
+					"paragraphs": [
+						2691,
+						2696
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le Christ règne déjà par l’Église...",
+					"refs": "670",
+					"paragraphs": [
+						670
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’avènement glorieux du Christ, espérance d’Israël",
+					"refs": "673",
+					"paragraphs": [
+						673
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Distinction des vertus cardinales",
+					"refs": "1806",
+					"paragraphs": [
+						1806
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-9-jeudi",
+			"title": "Jeudi de la 9e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Consécration et mission : annoncer le Roi qui vient",
+					"refs": "931-934, 944-945",
+					"paragraphs": [
+						931,
+						932,
+						933,
+						934,
+						944,
+						945
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. La portée de la foi en Dieu Unique",
+					"refs": "228-231",
+					"paragraphs": [
+						228,
+						229,
+						230,
+						231
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. Christ",
+					"refs": "436-437",
+					"paragraphs": [
+						436,
+						437
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Pour la rémission des péchés...",
+					"refs": "1263-1264",
+					"paragraphs": [
+						1263,
+						1264
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’onction des malades",
+					"refs": "1499-1500",
+					"paragraphs": [
+						1499,
+						1500
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le sens de la mort chrétienne",
+					"refs": "1010",
+					"paragraphs": [
+						1010
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. La purification du cœur",
+					"refs": "2518",
+					"paragraphs": [
+						2518
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-9-mardi",
+			"title": "Mardi de la 9e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "VI. L’espérance des cieux nouveaux et de la terre nouvelle",
+					"refs": "1042-1050",
+					"paragraphs": [
+						1042,
+						1043,
+						1044,
+						1045,
+						1046,
+						1047,
+						1048,
+						1049,
+						1050
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. La doctrine sociale de l’Église",
+					"refs": "2420-2425",
+					"paragraphs": [
+						2420,
+						2421,
+						2422,
+						2423,
+						2424,
+						2425
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La communauté politique et l’Église",
+					"refs": "2244-2246",
+					"paragraphs": [
+						2244,
+						2245,
+						2246
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’homme image de Dieu",
+					"refs": "1706, 1713",
+					"paragraphs": [
+						1706,
+						1713
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La conscience morale",
+					"refs": "1776-1777",
+					"paragraphs": [
+						1776,
+						1777
+					]
+				},
+				{
+					"i": 5,
+					"theme": "... en attendant que tout Lui soit soumis",
+					"refs": "671",
+					"paragraphs": [
+						671
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’Épreuve ultime de l’Église",
+					"refs": "677",
+					"paragraphs": [
+						677
+					]
+				}
+			]
+		},
+		{
+			"slug": "ordinaire-9-samedi",
+			"title": "Samedi de la 9e semaine du Temps Ordinaire",
+			"season": "ordinaire",
+			"liturgicalColor": "green",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. La sainteté chrétienne",
+					"refs": "2015-2016",
+					"paragraphs": [
+						2015,
+						2016
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Pour juger les vivants et les morts",
+					"refs": "679",
+					"paragraphs": [
+						679
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La mission – une exigence de la catholicité de l’Église",
+					"refs": "854",
+					"paragraphs": [
+						854
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les évêques successeurs des apôtres",
+					"refs": "861",
+					"paragraphs": [
+						861
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La persévérance dans la foi",
+					"refs": "162",
+					"paragraphs": [
+						162
+					]
+				},
+				{
+					"i": 5,
+					"theme": "II. « Rendre témoignage à la vérité »",
+					"refs": "2473",
+					"paragraphs": [
+						2473
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-2-jeudi",
+			"title": "Jeudi de la 2e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le quatrième commandement",
+					"refs": "2242-2244",
+					"paragraphs": [
+						2242,
+						2243,
+						2244
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les préparations",
+					"refs": "523-524",
+					"paragraphs": [
+						523,
+						524
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Seigneur",
+					"refs": "450",
+					"paragraphs": [
+						450
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les Juifs ne sont pas collectivement responsables de la mort de Jésus",
+					"refs": "597",
+					"paragraphs": [
+						597
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "663",
+					"paragraphs": [
+						663
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La communauté politique et l’Église",
+					"refs": "2256",
+					"paragraphs": [
+						2256
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La maternité virginale de Marie dans le dessein de Dieu",
+					"refs": "504",
+					"paragraphs": [
+						504
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-2-lundi",
+			"title": "Lundi de la 2e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "VI. La nécessité du baptême",
+					"refs": "1257-1260",
+					"paragraphs": [
+						1257,
+						1258,
+						1259,
+						1260
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Christ",
+					"refs": "436",
+					"paragraphs": [
+						436
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Dans le temps de l’Église",
+					"refs": "2623",
+					"paragraphs": [
+						2623
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Jésus livré selon le dessein bien arrêté de Dieu »",
+					"refs": "600",
+					"paragraphs": [
+						600
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Jésus et la Loi",
+					"refs": "581",
+					"paragraphs": [
+						581
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le mystère de Noël",
+					"refs": "526",
+					"paragraphs": [
+						526
+					]
+				},
+				{
+					"i": 6,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "591",
+					"paragraphs": [
+						591
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-2-mardi",
+			"title": "Mardi de la 2e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. La solidarité humaine",
+					"refs": "1943-1948",
+					"paragraphs": [
+						1943,
+						1944,
+						1945,
+						1946,
+						1947,
+						1948
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "661, 664",
+					"paragraphs": [
+						661,
+						664
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. La communion des biens spirituels",
+					"refs": "952",
+					"paragraphs": [
+						952
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "995",
+					"paragraphs": [
+						995
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2790",
+					"paragraphs": [
+						2790
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Jésus et la Loi",
+					"refs": "581",
+					"paragraphs": [
+						581
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "423",
+					"paragraphs": [
+						423
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-2-mercredi",
+			"title": "Mercredi de la 2e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le quatrième commandement",
+					"refs": "2242-2244",
+					"paragraphs": [
+						2242,
+						2243,
+						2244
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. Seigneur",
+					"refs": "450, 454",
+					"paragraphs": [
+						450,
+						454
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les symboles de l’Esprit Saint",
+					"refs": "699",
+					"paragraphs": [
+						699
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les anges dans la vie de l’Église",
+					"refs": "334",
+					"paragraphs": [
+						334
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Devoirs des citoyens",
+					"refs": "2242",
+					"paragraphs": [
+						2242
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La communauté politique et l’Église",
+					"refs": "2256",
+					"paragraphs": [
+						2256
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les Juifs ne sont pas collectivement responsables de la mort de Jésus",
+					"refs": "597",
+					"paragraphs": [
+						597
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-2-samedi",
+			"title": "Samedi de la 2e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’ordination des diacres – « en vue du service »",
+					"refs": "1569-1571",
+					"paragraphs": [
+						1569,
+						1570,
+						1571
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’initiation chrétienne",
+					"refs": "1229-1230",
+					"paragraphs": [
+						1229,
+						1230
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Dans le temps de l’Église",
+					"refs": "2624-2625",
+					"paragraphs": [
+						2624,
+						2625
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. La confirmation dans l’économie du salut",
+					"refs": "1288-1289",
+					"paragraphs": [
+						1288,
+						1289
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Divisions des autorités juives à l’égard de Jésus",
+					"refs": "595",
+					"paragraphs": [
+						595
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La charité",
+					"refs": "1829",
+					"paragraphs": [
+						1829
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La communauté politique et l’Église",
+					"refs": "2247",
+					"paragraphs": [
+						2247
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-2-vendredi",
+			"title": "Vendredi de la 2e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "V. Dieu réalise son dessein : la divine providence",
+					"refs": "303",
+					"paragraphs": [
+						303
+					]
+				},
+				{
+					"i": 1,
+					"theme": "L’Épreuve ultime de l’Église",
+					"refs": "675",
+					"paragraphs": [
+						675
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Jésus",
+					"refs": "432",
+					"paragraphs": [
+						432
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Les béatitudes",
+					"refs": "1716",
+					"paragraphs": [
+						1716
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "549",
+					"paragraphs": [
+						549
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’institution de l’Eucharistie",
+					"refs": "1338",
+					"paragraphs": [
+						1338
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les signes du pain et du vin",
+					"refs": "1335",
+					"paragraphs": [
+						1335
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-3-jeudi",
+			"title": "Jeudi de la 3e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2835-2837",
+					"paragraphs": [
+						2835,
+						2836,
+						2837
+					]
+				},
+				{
+					"i": 1,
+					"theme": "VII. L’Eucharistie – « pignus futuræ gloriæ » (« gage de la gloire à venir »)",
+					"refs": "1406-1407",
+					"paragraphs": [
+						1406,
+						1407
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Croire en Jésus-Christ, le Fils de Dieu",
+					"refs": "151",
+					"paragraphs": [
+						151
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’âme et la connaissance humaine du Christ",
+					"refs": "473",
+					"paragraphs": [
+						473
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Le Christ Jésus",
+					"refs": "728",
+					"paragraphs": [
+						728
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le mouvement de la célébration",
+					"refs": "1355",
+					"paragraphs": [
+						1355
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-3-lundi",
+			"title": "Lundi de la 3e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’Esprit Saint prépare à accueillir le Christ",
+					"refs": "1094-1096",
+					"paragraphs": [
+						1094,
+						1095,
+						1096
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La vie de prière",
+					"refs": "2835-2837",
+					"paragraphs": [
+						2835,
+						2836,
+						2837
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. « Rendre témoignage à la vérité »",
+					"refs": "2473",
+					"paragraphs": [
+						2473
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "423",
+					"paragraphs": [
+						423
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’institution de l’Eucharistie",
+					"refs": "1338",
+					"paragraphs": [
+						1338
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les symboles de l’Esprit Saint",
+					"refs": "698",
+					"paragraphs": [
+						698
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le Christ Jésus",
+					"refs": "728",
+					"paragraphs": [
+						728
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-3-mardi",
+			"title": "Mardi de la 3e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’Esprit Saint prépare à accueillir le Christ",
+					"refs": "1094-1096",
+					"paragraphs": [
+						1094,
+						1095,
+						1096
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La vie de prière",
+					"refs": "2835-2837",
+					"paragraphs": [
+						2835,
+						2836,
+						2837
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "423",
+					"paragraphs": [
+						423
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’institution de l’Eucharistie",
+					"refs": "1338",
+					"paragraphs": [
+						1338
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-3-mercredi",
+			"title": "Mercredi de la 3e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2835-2837",
+					"paragraphs": [
+						2835,
+						2836,
+						2837
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-3-samedi",
+			"title": "Samedi de la 3e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2766, 2835-2837",
+					"paragraphs": [
+						2766,
+						2835,
+						2836,
+						2837
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Christ",
+					"refs": "438-440",
+					"paragraphs": [
+						438,
+						439,
+						440
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les signes du pain et du vin",
+					"refs": "1336",
+					"paragraphs": [
+						1336
+					]
+				},
+				{
+					"i": 3,
+					"theme": "II. Passions et vie morale",
+					"refs": "1769",
+					"paragraphs": [
+						1769
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’institution de l’Eucharistie",
+					"refs": "1339",
+					"paragraphs": [
+						1339
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-3-vendredi",
+			"title": "Vendredi de la 3e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La vie de prière",
+					"refs": "2835-2837",
+					"paragraphs": [
+						2835,
+						2836,
+						2837
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le sacrement de l’eucharistie",
+					"refs": "1382-1384",
+					"paragraphs": [
+						1382,
+						1383,
+						1384
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les fruits de la communion",
+					"refs": "1391-1392",
+					"paragraphs": [
+						1391,
+						1392
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’Église est communion avec Jésus",
+					"refs": "787",
+					"paragraphs": [
+						787
+					]
+				},
+				{
+					"i": 4,
+					"theme": "VII. L’Eucharistie – « pignus futuræ gloriæ » (« gage de la gloire à venir »)",
+					"refs": "1406",
+					"paragraphs": [
+						1406
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Guérissez les malades... »",
+					"refs": "1509",
+					"paragraphs": [
+						1509
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-4-jeudi",
+			"title": "Jeudi de la 4e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-4-lundi",
+			"title": "Lundi de la 4e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "III. Sens et portée salvifique de la Résurrection",
+					"refs": "651-655",
+					"paragraphs": [
+						651,
+						652,
+						653,
+						654,
+						655
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La charge de régir",
+					"refs": "894-896",
+					"paragraphs": [
+						894,
+						895,
+						896
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "574",
+					"paragraphs": [
+						574
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Jésus et la Loi",
+					"refs": "582",
+					"paragraphs": [
+						582
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Divisions des autorités juives à l’égard de Jésus",
+					"refs": "596",
+					"paragraphs": [
+						596
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les symboles de l’Église",
+					"refs": "754",
+					"paragraphs": [
+						754
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "764",
+					"paragraphs": [
+						764
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-4-mardi",
+			"title": "Mardi de la 4e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "582-583",
+					"paragraphs": [
+						582,
+						583
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Jésus et la foi d’Israël au Dieu Unique et Sauveur",
+					"refs": "590, 593",
+					"paragraphs": [
+						590,
+						593
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "548",
+					"paragraphs": [
+						548
+					]
+				}
+			]
+		},
+		{
+			"slug": "pascal-4-mercredi",
+			"title": "Mercredi de la 4e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-4-samedi",
+			"title": "Samedi de la 4e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-4-vendredi",
+			"title": "Vendredi de la 4e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-5-jeudi",
+			"title": "Jeudi de la 5e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-5-lundi",
+			"title": "Lundi de la 5e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-5-mardi",
+			"title": "Mardi de la 5e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-5-mercredi",
+			"title": "Mercredi de la 5e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-5-samedi",
+			"title": "Samedi de la 5e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-5-vendredi",
+			"title": "Vendredi de la 5e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-6-lundi",
+			"title": "Lundi de la 6e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-6-mardi",
+			"title": "Mardi de la 6e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-6-mercredi",
+			"title": "Mercredi de la 6e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-6-samedi",
+			"title": "Samedi de la 6e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-6-vendredi",
+			"title": "Vendredi de la 6e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-7-jeudi",
+			"title": "Jeudi de la 7e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-7-lundi",
+			"title": "Lundi de la 7e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-7-mardi",
+			"title": "Mardi de la 7e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-7-mercredi",
+			"title": "Mercredi de la 7e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-7-samedi",
+			"title": "Samedi de la 7e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
+			"slug": "pascal-7-vendredi",
+			"title": "Vendredi de la 7e semaine du Temps Pascal",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		}
+	]
+}
