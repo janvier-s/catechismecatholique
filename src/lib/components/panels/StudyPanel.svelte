@@ -60,7 +60,7 @@
 		const n = parseInt(m[1]!, 10);
 		if (!Number.isFinite(n)) return;
 		if (s.context?.kind === 'paragraph' && s.context.paragraph === n) return;
-		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab);
 	});
 
 	type TabDef = { id: PanelTab; label: string };
@@ -281,16 +281,36 @@
 		}
 	});
 
-	// If the active tab is no longer visible, snap to the first visible one.
+	// If the active tab is no longer visible, snap to a sensible one. A fresh
+	// open (activeTab === null, no remembered preference) prefers Renvois
+	// (cross-refs), then falls back to Bible, then Compendium (Synthèse), then
+	// whatever tab is first · this only resolves once real data has loaded so
+	// it isn't chosen off the optimistic full-strip placeholder. A tab that
+	// became invisible because the user navigated to a paragraph lacking that
+	// content instead snaps to the first visible tab, same as before.
 	$effect(() => {
 		if (!$studyPanel.open) return;
 		if (visibleGroups.length === 0) return;
 		const active = $studyPanel.activeTab;
 		const stillVisible =
 			active && visibleGroups.some((g) => g.children.some((c) => c.id === active));
-		if (!stillVisible) {
-			studyPanel.update((s) => ({ ...s, activeTab: visibleGroups[0]!.children[0]!.id }));
+		if (stillVisible) return;
+		if (active === null && $studyPanel.context?.kind === 'paragraph') {
+			if (!dataReady) return;
+			const hasCrossRefsNow = (paragraph?.cross_refs.length ?? 0) > 0;
+			const hasBibleNow = (paragraph?.bible_refs.length ?? 0) > 0;
+			const hasCompendiumNow = compendiumCiters.length > 0;
+			const fallback = hasCrossRefsNow
+				? 'cross-refs'
+				: hasBibleNow
+					? 'bible'
+					: hasCompendiumNow
+						? 'compendium'
+						: visibleGroups[0]!.children[0]!.id;
+			studyPanel.update((s) => ({ ...s, activeTab: fallback }));
+			return;
 		}
+		studyPanel.update((s) => ({ ...s, activeTab: visibleGroups[0]!.children[0]!.id }));
 	});
 
 	// Both effects below must only react to open/closed *transitions*, not to

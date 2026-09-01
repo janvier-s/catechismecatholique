@@ -30,7 +30,7 @@
 			closePanel();
 			return;
 		}
-		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab);
 	}
 
 	// Group consecutive integers into compact range strings: [1,2,3,5,7,8] →

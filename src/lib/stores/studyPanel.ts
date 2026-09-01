@@ -40,7 +40,11 @@ export interface PanelState {
 const initial: PanelState = { open: false, activeTab: null, context: null };
 export const studyPanel = writable<PanelState>(initial);
 
-export function openPanel(context: PanelContext, tab: PanelTab = 'bible', autoPlay = false): void {
+export function openPanel(
+	context: PanelContext,
+	tab: PanelTab | null = null,
+	autoPlay = false
+): void {
 	studyPanel.update((s) => ({
 		open: true,
 		activeTab: tab,

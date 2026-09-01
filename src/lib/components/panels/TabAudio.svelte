@@ -197,7 +197,7 @@
 	function goToParagraph(n: number): void {
 		pendingAutoPlay = !audio?.paused;
 		const s = get(studyPanel);
-		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab ?? 'audio');
+		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab);
 	}
 
 	function fmtTime(sec: number): string {

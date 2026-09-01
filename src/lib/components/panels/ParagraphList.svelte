@@ -22,7 +22,7 @@
 
 	function onEntryNumberClick(n: number) {
 		const s = get(studyPanel);
-		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: n }, s.activeTab);
 	}
 </script>
 

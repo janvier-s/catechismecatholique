@@ -167,7 +167,7 @@
 			closePanel();
 			return;
 		}
-		openPanel({ kind: 'paragraph', paragraph: paragraphNumber }, s.activeTab ?? 'cross-refs');
+		openPanel({ kind: 'paragraph', paragraph: paragraphNumber }, s.activeTab);
 	}
 </script>
 
