@@ -114,6 +114,15 @@
 		return html.replace(/\s*<sup[^>]*>[\s\S]*?<\/sup>/g, '');
 	}
 
+	// AELF indents quoted/poetic lines with a run of &nbsp; entities, but the
+	// run length is inconsistent - sometimes 2-3, sometimes 9-10, rendering
+	// as an oversized gap since NBSP (unlike a plain space) isn't collapsed
+	// by the browser. Capping any run of 2+ to a fixed 2 keeps the "this
+	// line is indented" signal without the runaway width.
+	function normalizeNbspRuns(html: string): string {
+		return html.replace(/(?:&nbsp;\s*){2,}/g, '&nbsp;&nbsp;');
+	}
+
 	// Each feast/férie also lives at its own indexable URL (see
 	// /calendrier-liturgique/[annee]/[slug] and /calendrier-liturgique/feries),
 	// so every place this component appears - listing pages, TodayCard,
@@ -210,27 +219,27 @@
 							</p>
 							{#if lecture.intro_lue}
 								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								<p class="reading-intro">{@html lecture.intro_lue}</p>
+								<p class="reading-intro">{@html normalizeNbspRuns(lecture.intro_lue)}</p>
 							{:else if lecture.titre}
 								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								<p class="reading-intro">{@html lecture.titre}</p>
+								<p class="reading-intro">{@html normalizeNbspRuns(lecture.titre)}</p>
 							{/if}
 							{#if lecture.type === 'psaume' && lecture.refrain_psalmique}
 								<div class="reading-refrain reader-prose">
 									<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-									{@html lecture.refrain_psalmique}
+									{@html normalizeNbspRuns(lecture.refrain_psalmique)}
 								</div>
 							{/if}
 							{#if lecture.type === 'evangile' && lecture.verset_evangile}
 								<div class="reading-verset reader-prose">
 									<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-									{@html lecture.verset_evangile}
+									{@html normalizeNbspRuns(lecture.verset_evangile)}
 									{#if lecture.ref_verset}<span class="verset-ref">{lecture.ref_verset}</span>{/if}
 								</div>
 							{/if}
 							<div class="reading-contenu reader-prose">
 								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								{@html lecture.contenu}
+								{@html normalizeNbspRuns(lecture.contenu)}
 							</div>
 						</article>
 					{/each}
