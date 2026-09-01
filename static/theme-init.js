@@ -85,7 +85,6 @@
 		root.dataset.crossRefsLayout = pick(prefs.crossRefsLayout, ['inline', 'side'], 'side');
 		// [pref key, dataset key] · all default to false, as in prefs.ts DEFAULTS.
 		var flags = [
-			['hideAllNotes', 'hideAllNotes'],
 			['hideCrossRefs', 'hideCrossRefs'],
 			['hideBibleMarkers', 'hideBibleMarkers'],
 			['hideBibleInline', 'hideBibleInline'],

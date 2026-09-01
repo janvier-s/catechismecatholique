@@ -30,10 +30,11 @@ test.beforeEach(async ({ page }) => {
 // callers must reselect their tab on every open, not just the first.
 //
 // The panel has exactly two tabs everywhere: Apparence (how the page looks)
-// and Texte (what the page shows). Because Texte now gathers every
-// Afficher/Masquer control on a Bible page into one list, the helpers below
-// scope their clicks to the PillGroup's own `role="group"` rather than
-// counting positions with .first()/.nth().
+// and Texte (what the page shows). Show/hide settings render as switches
+// (`role="switch"`, named by their label and bound positively — checked means
+// visible); settings that pick between named alternatives stay PillGroups,
+// whose clicks are scoped to the group's own `role="group"` rather than
+// counted out by position with .first()/.nth().
 async function openTab(page: import('@playwright/test').Page, tabLabel: string) {
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	// Not a bare click · see openDisclosure for why the first click after a
@@ -65,8 +66,14 @@ async function openTexteTab(page: import('@playwright/test').Page) {
 	return openTab(page, 'Texte');
 }
 
+/** Set the switch named `label` to `on`, whatever it currently reads. */
+async function setSwitch(dialog: import('@playwright/test').Locator, label: string, on: boolean) {
+	const sw = dialog.getByRole('switch', { name: label });
+	if ((await sw.getAttribute('aria-checked')) !== String(on)) await sw.click();
+}
+
 /** Click `option` inside the PillGroup labelled `group`, so a shared label
- *  like "Afficher" can't land on a neighbouring setting. */
+ *  like "En ligne" can't land on a neighbouring setting. */
 async function setPill(dialog: import('@playwright/test').Locator, group: string, option: string) {
 	await dialog
 		.getByRole('group', { name: group })
@@ -145,7 +152,7 @@ test('hide-verse-numbers toggle hides numbers in both reading modes', async ({ p
 	await expect(page.locator('.verse-num').first()).toBeVisible();
 
 	let dialog = await openTexteTab(page);
-	await setPill(dialog, 'Numéros de verset', 'Masquer');
+	await setSwitch(dialog, 'Numéros de verset', false);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('.verse-num').first()).toHaveCSS('visibility', 'hidden');
 
@@ -153,7 +160,7 @@ test('hide-verse-numbers toggle hides numbers in both reading modes', async ({ p
 	await expect(page.locator('.vn')).toHaveCount(0);
 
 	dialog = await openTexteTab(page);
-	await setPill(dialog, 'Numéros de verset', 'Afficher');
+	await setSwitch(dialog, 'Numéros de verset', true);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('.vn').first()).toBeVisible();
 });
@@ -165,12 +172,12 @@ test('show-section-headings toggle reveals headings in verse-by-verse mode (hidd
 	await expect(page.locator('h2')).toHaveCount(0);
 
 	let dialog = await openTexteTab(page);
-	await setPill(dialog, 'Titres de section', 'Afficher');
+	await setSwitch(dialog, 'Titres de section', true);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('h2').first()).toBeVisible();
 
 	dialog = await openTexteTab(page);
-	await setPill(dialog, 'Titres de section', 'Masquer');
+	await setSwitch(dialog, 'Titres de section', false);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('h2')).toHaveCount(0);
 });
@@ -183,7 +190,7 @@ test('paragraph mode renders section headings once shown (hidden by default, lik
 	await expect(page.locator('.bible-paragraphs h2')).toHaveCount(0);
 
 	const dialog = await openTexteTab(page);
-	await setPill(dialog, 'Titres de section', 'Afficher');
+	await setSwitch(dialog, 'Titres de section', true);
 	await page.keyboard.press('Escape');
 
 	// Genesis 1 opens with a major heading ("LES ORIGINES") followed by a
@@ -263,7 +270,7 @@ test('the tab bar goes away where Texte would be empty, rather than showing an e
 	await expect(dialog.getByRole('button', { name: 'Apparence', exact: true })).toHaveCount(0);
 	// The Apparence controls themselves are still there, untabbed.
 	await expect(dialog.getByRole('group', { name: 'Interligne' })).toBeVisible();
-	await expect(dialog.getByRole('group', { name: 'Lecture bionique' })).toBeVisible();
+	await expect(dialog.getByRole('switch', { name: 'Lecture bionique' })).toBeVisible();
 });
 
 test('utility pages offer typography only, with no controls for text that is not there', async ({
@@ -276,8 +283,8 @@ test('utility pages offer typography only, with no controls for text that is not
 	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 
 	await expect(dialog.getByRole('group', { name: 'Interligne' })).toBeVisible();
-	await expect(dialog.getByRole('group', { name: 'Lecture bionique' })).toHaveCount(0);
-	await expect(dialog.getByRole('group', { name: 'Renvois entre paragraphes' })).toHaveCount(0);
+	await expect(dialog.getByRole('switch', { name: 'Lecture bionique' })).toHaveCount(0);
+	await expect(dialog.getByRole('switch', { name: 'Renvois entre paragraphes' })).toHaveCount(0);
 	await expect(dialog.getByRole('button', { name: 'Texte', exact: true })).toHaveCount(0);
 });
 
@@ -288,20 +295,20 @@ test('section and subsection headings are centered, in both reading modes', asyn
 	// weren't. Headings are hidden by default, so show them first.
 	await page.goto('/bible/genese/2');
 	let dialog = await openTexteTab(page);
-	await setPill(dialog, 'Titres de section', 'Afficher');
+	await setSwitch(dialog, 'Titres de section', true);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('h2').first()).toHaveCSS('text-align', 'center');
 
 	await switchToParagraphMode(page);
 	await page.goto('/bible/genese/2');
 	dialog = await openTexteTab(page);
-	await setPill(dialog, 'Titres de section', 'Afficher');
+	await setSwitch(dialog, 'Titres de section', true);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('.bible-paragraphs h2').first()).toHaveCSS('text-align', 'center');
 
 	await page.goto('/bible/levitique/27');
 	dialog = await openTexteTab(page);
-	await setPill(dialog, 'Titres de section', 'Afficher');
+	await setSwitch(dialog, 'Titres de section', true);
 	await page.keyboard.press('Escape');
 	const subsection = page.locator('p.italic.text-subtle').first();
 	await expect(subsection).toHaveCSS('text-align', 'center');
@@ -598,7 +605,7 @@ test('chapter navigation (prev/next strip) is hidden by default, and the top bar
 	await expect(page.locator('.chapter-prev-next')).toHaveCount(0);
 
 	let dialog = await openTexteTab(page);
-	await setPill(dialog, 'Navigation entre chapitres', 'Afficher');
+	await setSwitch(dialog, 'Navigation entre chapitres', true);
 	await page.keyboard.press('Escape');
 	// The top book/chapter bar is the primary navigation and is never hidden
 	// by this toggle · only the in-article prev/next strip is.
@@ -615,7 +622,7 @@ test('chapter navigation (prev/next strip) is hidden by default, and the top bar
 	await expect(page.locator('.chapter-prev-next')).toBeVisible();
 
 	dialog = await openTexteTab(page);
-	await setPill(dialog, 'Navigation entre chapitres', 'Masquer');
+	await setSwitch(dialog, 'Navigation entre chapitres', false);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('.chapter-prev-next')).toHaveCount(0);
 });
@@ -625,7 +632,7 @@ test('the prev/next chapter strip handles chapter and book boundaries', async ({
 	// across the in-test navigations below.
 	await page.goto('/bible/genese/1');
 	const dialogForVisibility = await openTexteTab(page);
-	await setPill(dialogForVisibility, 'Navigation entre chapitres', 'Afficher');
+	await setSwitch(dialogForVisibility, 'Navigation entre chapitres', true);
 	await page.keyboard.press('Escape');
 
 	// Genesis 1: first chapter of the first book · no previous side at all.
@@ -674,7 +681,7 @@ test('Vulgate psalm numbers are off by default and can be shown', async ({ page 
 	await expect(page.locator('.vulgate-psalm')).toHaveCount(0);
 
 	const dialog = await openTexteTab(page);
-	await setPill(dialog, 'Numérotation Vulgate (psaumes)', 'Afficher');
+	await setSwitch(dialog, 'Numérotation Vulgate (psaumes)', true);
 	await page.keyboard.press('Escape');
 	await expect(page.locator('.vulgate-psalm')).toHaveText('(Vg 9)');
 
@@ -706,7 +713,7 @@ test('Vulgate psalm numbers appear in the chapter selector when enabled', async 
 	await page.keyboard.press('Escape'); // closes the chapter selector
 
 	const dialog = await openTexteTab(page);
-	await setPill(dialog, 'Numérotation Vulgate (psaumes)', 'Afficher');
+	await setSwitch(dialog, 'Numérotation Vulgate (psaumes)', true);
 	await page.keyboard.press('Escape');
 
 	await openChapterSelector(page, 'psaumes');
@@ -730,7 +737,7 @@ async function enableBionic(page: import('@playwright/test').Page) {
 	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	await dialog.getByRole('button', { name: 'Apparence' }).click();
-	await setPill(dialog, 'Lecture bionique', 'Activée');
+	await setSwitch(dialog, 'Lecture bionique', true);
 	await page.keyboard.press('Escape');
 }
 

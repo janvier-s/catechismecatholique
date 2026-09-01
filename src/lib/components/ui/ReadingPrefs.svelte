@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import { corpusForPath, FEATURED } from '$lib/corpora';
 	import PillGroup from './PillGroup.svelte';
+	import ToggleSwitch from './ToggleSwitch.svelte';
 
 	const isTrent = $derived(page.url.pathname.startsWith('/trente'));
 	const isCompendium = $derived(page.url.pathname.startsWith('/compendium'));
@@ -31,7 +32,8 @@
 	const showBionic = $derived(isReadingContent);
 
 	// Compendium and Pie X carry no notes at all, so on those (and on the
-	// utility pages) Texte would hold nothing.
+	// utility pages) Texte would hold nothing. Trente's only note control is
+	// Sources · the cross-refs and Bible citations below it are CEC-only.
 	const hasNotes = $derived(isReadingContent && (isTrent || isCecOnly));
 	const hasTextSettings = $derived(isBibleOnly || hasNotes);
 
@@ -147,40 +149,6 @@
 	const bibleCiteHideKey = $derived(
 		$prefs.inlineAsMarkers ? ('hideBibleMarkers' as const) : ('hideBibleInline' as const)
 	);
-
-	function setHideAll(on: boolean) {
-		if (isTrent || isPiusX) {
-			// On Trent and Pie X pages only the source-footnotes control is relevant.
-			prefs.update((p) => ({ ...p, hideAllNotes: on, hideSourceFootnotes: on }));
-		} else {
-			prefs.update((p) => ({
-				...p,
-				hideAllNotes: on,
-				hideCrossRefs: on,
-				hideBibleMarkers: on,
-				hideBibleInline: on,
-				hideSourceFootnotes: on
-			}));
-		}
-	}
-
-	$effect(() => {
-		if (isTrent || isPiusX) {
-			const all = $prefs.hideSourceFootnotes;
-			if ($prefs.hideAllNotes !== all) {
-				prefs.update((p) => ({ ...p, hideAllNotes: all }));
-			}
-			return;
-		}
-		const all =
-			$prefs.hideCrossRefs &&
-			$prefs.hideBibleMarkers &&
-			$prefs.hideBibleInline &&
-			$prefs.hideSourceFootnotes;
-		if ($prefs.hideAllNotes !== all) {
-			prefs.update((p) => ({ ...p, hideAllNotes: all }));
-		}
-	});
 
 	$effect(() => {
 		if (!fontDropdownOpen) return;
@@ -404,24 +372,12 @@
 			</div>
 
 			{#if showBionic}
-				<div class="border-t border-border pt-5">
-					<span
-						class="block mb-2 text-muted text-[13px]"
-						title="Met en gras le début de chaque mot pour guider l'œil pendant la lecture"
-						>Lecture bionique</span
-					>
-					<PillGroup
-						ariaLabel="Lecture bionique"
-						options={[
-							{ label: 'Désactivée', value: false, title: 'Texte affiché normalement' },
-							{
-								label: 'Activée',
-								value: true,
-								title: "Met en gras le début de chaque mot pour guider l'œil"
-							}
-						]}
-						value={$prefs.bionicReading}
+				<div class="border-t border-border pt-4">
+					<ToggleSwitch
+						label="Lecture bionique"
+						checked={$prefs.bionicReading}
 						onchange={(v) => updatePref('bionicReading', v)}
+						title="Met en gras le début de chaque mot pour guider l'œil pendant la lecture"
 					/>
 					{#if $prefs.bionicReading}
 						<div class="mt-3 space-y-4">
@@ -511,26 +467,15 @@
 					/>
 				</div>
 
-				<div>
-					<span
-						class="block mb-2 text-muted text-[13px]"
-						title="Affiche ou masque les numéros devant chaque verset">Numéros de verset</span
-					>
-					<PillGroup
-						ariaLabel="Numéros de verset"
-						options={[
-							{ label: 'Afficher', value: false, title: 'Facilite les citations précises' },
-							{
-								label: 'Masquer',
-								value: true,
-								title: 'Lecture continue, sans repères numériques'
-							}
-						]}
-						value={$prefs.hideVerseNumbers}
-						onchange={(v) => updatePref('hideVerseNumbers', v)}
+				<div class="space-y-1">
+					<ToggleSwitch
+						label="Numéros de verset"
+						checked={!$prefs.hideVerseNumbers}
+						onchange={(v) => updatePref('hideVerseNumbers', !v)}
+						title="Affiche ou masque les numéros devant chaque verset"
 					/>
 					{#if !$prefs.hideVerseNumbers}
-						<div class="mt-3">
+						<div class="pb-2 pl-3">
 							<span
 								class="block mb-2 text-muted text-[13px]"
 								title="Change la couleur des numéros de verset">Couleur</span
@@ -554,239 +499,107 @@
 							/>
 						</div>
 					{/if}
-				</div>
 
-				<div>
-					<span
-						class="block mb-2 text-muted text-[13px]"
-						title="Affiche ou masque les titres qui découpent le chapitre">Titres de section</span
-					>
-					<PillGroup
-						ariaLabel="Titres de section"
-						options={[
-							{
-								label: 'Afficher',
-								value: false,
-								title: 'Aide à s’orienter dans de longs chapitres'
-							},
-							{
-								label: 'Masquer',
-								value: true,
-								title: 'Lecture continue, sans interruption visuelle'
-							}
-						]}
-						value={$prefs.hideBibleHeadings}
-						onchange={(v) => updatePref('hideBibleHeadings', v)}
+					<ToggleSwitch
+						label="Titres de section"
+						checked={!$prefs.hideBibleHeadings}
+						onchange={(v) => updatePref('hideBibleHeadings', !v)}
+						title="Affiche ou masque les titres qui découpent le chapitre"
 					/>
-				</div>
 
-				<div>
-					<span
-						class="block mb-2 text-muted text-[13px]"
-						title="Choisit le système de numérotation des psaumes"
-						>Numérotation Vulgate (psaumes)</span
-					>
-					<PillGroup
-						ariaLabel="Numérotation Vulgate (psaumes)"
-						options={[
-							{
-								label: 'Afficher',
-								value: true,
-								title: 'La Vulgate numérote certains psaumes différemment de la Bible hébraïque'
-							},
-							{ label: 'Masquer', value: false, title: 'Utilise la numérotation standard' }
-						]}
-						value={$prefs.showVulgatePsalms}
+					<ToggleSwitch
+						label="Numérotation Vulgate (psaumes)"
+						checked={$prefs.showVulgatePsalms}
 						onchange={(v) => updatePref('showVulgatePsalms', v)}
+						title="La Vulgate numérote certains psaumes différemment de la Bible hébraïque"
 					/>
 				</div>
 
-				<div class="border-t border-border pt-5 space-y-5">
-					<div>
-						<span
-							class="block mb-2 text-muted text-[13px]"
-							title="Affiche ou masque les liens vers les chapitres voisins"
-							>Navigation entre chapitres</span
-						>
-						<PillGroup
-							ariaLabel="Navigation entre chapitres"
-							options={[
-								{
-									label: 'Afficher',
-									value: false,
-									title: 'Accès rapide au chapitre précédent ou suivant'
-								},
-								{
-									label: 'Masquer',
-									value: true,
-									title: 'Libère de l’espace à l’écran'
-								}
-							]}
-							value={$prefs.hideChapterNav}
-							onchange={(v) => updatePref('hideChapterNav', v)}
-						/>
-					</div>
+				<div class="space-y-1 border-t border-border pt-4">
+					<ToggleSwitch
+						label="Navigation entre chapitres"
+						checked={!$prefs.hideChapterNav}
+						onchange={(v) => updatePref('hideChapterNav', !v)}
+						title="Affiche ou masque les liens vers les chapitres voisins, sous le texte"
+					/>
 
-					<div>
-						<span
-							class="block mb-2 text-muted text-[13px]"
-							title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
-						>
-						<PillGroup
-							ariaLabel="Scroll infini"
-							options={[
-								{
-									label: 'Activé',
-									value: true,
-									title: 'Charge le chapitre suivant automatiquement en défilant'
-								},
-								{
-									label: 'Désactivé',
-									value: false,
-									title: 'Passe au chapitre suivant manuellement'
-								}
-							]}
-							value={$prefs.infiniteScroll}
-							onchange={(v) => updatePref('infiniteScroll', v)}
-						/>
-					</div>
+					<ToggleSwitch
+						label="Scroll infini"
+						checked={$prefs.infiniteScroll}
+						onchange={(v) => updatePref('infiniteScroll', v)}
+						title="Charge le chapitre suivant automatiquement en défilant"
+					/>
 				</div>
 			{/if}
 
 			{#if hasNotes}
-				<div>
-					<span
-						class="block mb-2 text-muted text-[13px]"
-						title="Cache renvois et citations pour une lecture épurée">Toutes les notes</span
-					>
-					<PillGroup
-						ariaLabel="Toutes les notes"
-						options={[
-							{ label: 'Afficher', value: false, title: 'Affiche renvois et citations' },
-							{
-								label: 'Masquer',
-								value: true,
-								title: 'Cache renvois et citations pour une lecture épurée'
-							}
-						]}
-						value={$prefs.hideAllNotes}
-						onchange={(v) => setHideAll(v)}
+				<div class="space-y-1">
+					{#if isCecOnly}
+						<ToggleSwitch
+							label="Renvois entre paragraphes"
+							checked={!$prefs.hideCrossRefs}
+							onchange={(v) => updatePref('hideCrossRefs', !v)}
+							title="Affiche ou masque les renvois vers d’autres paragraphes"
+						/>
+						{#if !$prefs.hideCrossRefs}
+							<div class="pb-2 pl-3">
+								<PillGroup
+									ariaLabel="Position des renvois"
+									options={[
+										{
+											label: 'En ligne',
+											value: 'inline' as const,
+											title: 'Renvois insérés juste après le paragraphe'
+										},
+										{
+											label: 'En marge',
+											value: 'side' as const,
+											title: 'Renvois affichés à côté, texte principal dégagé'
+										}
+									]}
+									value={$prefs.crossRefsLayout}
+									onchange={(v) => updatePref('crossRefsLayout', v)}
+								/>
+							</div>
+						{/if}
+
+						<ToggleSwitch
+							label="Citations bibliques"
+							checked={!$prefs[bibleCiteHideKey]}
+							onchange={(v) => updatePref(bibleCiteHideKey, !v)}
+							title="Affiche ou masque les citations bibliques dans le texte"
+						/>
+						{#if !$prefs[bibleCiteHideKey]}
+							<div class="pb-2 pl-3">
+								<PillGroup
+									ariaLabel="Format des citations bibliques"
+									options={[
+										{
+											label: 'En ligne',
+											value: false,
+											title: 'Référence complète visible directement dans le texte'
+										},
+										{
+											label: 'En exposant',
+											value: true,
+											title:
+												'Petits chiffres renvoyant à la citation, comme une note de bas de page'
+										}
+									]}
+									value={$prefs.inlineAsMarkers}
+									onchange={(v) => updatePref('inlineAsMarkers', v)}
+								/>
+							</div>
+						{/if}
+					{/if}
+
+					<ToggleSwitch
+						label="Sources"
+						checked={!$prefs.hideSourceFootnotes}
+						onchange={(v) => updatePref('hideSourceFootnotes', !v)}
+						title="Affiche ou masque les références aux documents d’origine (conciles, encycliques…)"
 					/>
 				</div>
-
-				{#if isCecOnly}
-					<div class="space-y-4 border-t border-border pt-5">
-						<div>
-							<span
-								class="block mb-2 text-muted text-[13px]"
-								title="Choisit si et où les renvois vers d’autres paragraphes sont affichés"
-								>Renvois entre paragraphes</span
-							>
-							<PillGroup
-								ariaLabel="Renvois entre paragraphes"
-								options={[
-									{
-										label: 'Afficher',
-										value: false,
-										title: 'Affiche les renvois vers d’autres paragraphes'
-									},
-									{
-										label: 'Masquer',
-										value: true,
-										title: 'Cache les renvois vers d’autres paragraphes'
-									}
-								]}
-								value={$prefs.hideCrossRefs}
-								onchange={(v) => updatePref('hideCrossRefs', v)}
-							/>
-							{#if !$prefs.hideCrossRefs}
-								<div class="mt-3">
-									<PillGroup
-										ariaLabel="Position des renvois"
-										options={[
-											{
-												label: 'En ligne',
-												value: 'inline' as const,
-												title: 'Renvois insérés juste après le paragraphe'
-											},
-											{
-												label: 'En marge',
-												value: 'side' as const,
-												title: 'Renvois affichés à côté, texte principal dégagé'
-											}
-										]}
-										value={$prefs.crossRefsLayout}
-										onchange={(v) => updatePref('crossRefsLayout', v)}
-									/>
-								</div>
-							{/if}
-						</div>
-
-						<div>
-							<span
-								class="block mb-2 text-muted text-[13px]"
-								title="Choisit si et comment les citations bibliques sont affichées dans le texte"
-								>Citations bibliques</span
-							>
-							<PillGroup
-								ariaLabel="Citations bibliques"
-								options={[
-									{ label: 'Afficher', value: false, title: 'Affiche les citations bibliques' },
-									{ label: 'Masquer', value: true, title: 'Cache les citations bibliques' }
-								]}
-								value={$prefs[bibleCiteHideKey]}
-								onchange={(v) => updatePref(bibleCiteHideKey, v)}
-							/>
-							{#if !$prefs[bibleCiteHideKey]}
-								<div class="mt-3">
-									<PillGroup
-										ariaLabel="Format des citations bibliques"
-										options={[
-											{
-												label: 'En ligne',
-												value: false,
-												title: 'Référence complète visible directement dans le texte'
-											},
-											{
-												label: 'En exposant',
-												value: true,
-												title:
-													'Petits chiffres renvoyant à la citation, comme une note de bas de page'
-											}
-										]}
-										value={$prefs.inlineAsMarkers}
-										onchange={(v) => updatePref('inlineAsMarkers', v)}
-									/>
-								</div>
-							{/if}
-						</div>
-
-						<div>
-							<span
-								class="block mb-2 text-muted text-[13px]"
-								title="Cache les références aux documents d’origine (conciles, encycliques…)"
-								>Sources</span
-							>
-							<PillGroup
-								ariaLabel="Sources"
-								options={[
-									{
-										label: 'Afficher',
-										value: false,
-										title: 'Affiche les références aux documents d’origine'
-									},
-									{
-										label: 'Masquer',
-										value: true,
-										title: 'Cache les références aux documents d’origine'
-									}
-								]}
-								value={$prefs.hideSourceFootnotes}
-								onchange={(v) => updatePref('hideSourceFootnotes', v)}
-							/>
-						</div>
-					</div>
-				{/if}
 			{/if}
 		</div>
 	{/if}

@@ -509,8 +509,7 @@ html[data-hide-bible-inline='true'] .prose-paragraph button.bible-inline {
 }
 html[data-hide-source-footnotes='true'] .prose-paragraph .ref-docRef,
 html[data-hide-source-footnotes='true'] .prose-paragraph sup.docRef,
-html[data-hide-source-footnotes='true'] .prose-paragraph sup.trent-fn-marker,
-html[data-hide-all-notes='true'] .prose-paragraph sup.trent-fn-marker {
+html[data-hide-source-footnotes='true'] .prose-paragraph sup.trent-fn-marker {
 	display: none;
 }
 /* Tiny breathing room between adjacent markers (replaces the old ", "

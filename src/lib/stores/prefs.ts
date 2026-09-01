@@ -32,7 +32,6 @@ export interface ReadingPrefs {
 	columnWidth: ColumnWidth;
 	justifiedText: boolean;
 	// Notes / refs visibility (catechism-specific)
-	hideAllNotes: boolean;
 	hideCrossRefs: boolean;
 	hideBibleMarkers: boolean; // sup-style ², ³ (the "voir" footnotes)
 	hideBibleInline: boolean; // (Os 11, 1) parens
@@ -61,7 +60,6 @@ const DEFAULTS: ReadingPrefs = {
 	lineHeight: 1.6,
 	columnWidth: 'default',
 	justifiedText: false,
-	hideAllNotes: false,
 	hideCrossRefs: false,
 	hideBibleMarkers: false,
 	hideBibleInline: false,
@@ -142,7 +140,6 @@ if (browser) {
 		}
 		root.dataset.columnWidth = $p.columnWidth;
 		root.dataset.crossRefsLayout = $p.crossRefsLayout;
-		root.dataset.hideAllNotes = String($p.hideAllNotes);
 		root.dataset.hideCrossRefs = String($p.hideCrossRefs);
 		root.dataset.hideBibleMarkers = String($p.hideBibleMarkers);
 		root.dataset.hideBibleInline = String($p.hideBibleInline);
