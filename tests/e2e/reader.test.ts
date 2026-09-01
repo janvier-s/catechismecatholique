@@ -76,6 +76,7 @@ test('theme picker switches data-theme attribute and persists', async ({ page })
 	// see openDisclosure for why the first one after a navigation can be lost.
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	await openDisclosure(page.getByLabel('Options de lecture'), dialog);
+	await dialog.getByRole('button', { name: 'Apparence', exact: true }).click();
 	await dialog.getByLabel('Sombre').click();
 	await expect(html).toHaveAttribute('data-theme', 'dark');
 	// Reload — should persist

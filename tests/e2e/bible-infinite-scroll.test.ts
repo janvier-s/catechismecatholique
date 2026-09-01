@@ -6,8 +6,8 @@ import { openDisclosure } from './helpers';
 // the Bible tab has to be reselected each time, as in bible-reading-mode.
 // Every control this file touches (Scroll infini, Numéros de verset, Titres
 // de section, Navigation entre chapitres, Numérotation Vulgate) lives on the
-// Bible tab, not Lecture — Bible-specific settings got their own tab instead
-// of tucking under Lecture (see ReadingPrefs.svelte's comment on `tabs`).
+// Bible tab, not Texte — Bible-specific settings got their own tab instead
+// of tucking under Texte (see ReadingPrefs.svelte's comment on `tabs`).
 async function openReadingTab(page: Page) {
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	// Not a bare click · see openDisclosure. This is where the "on by default"

@@ -47,12 +47,12 @@ async function openChapterSelector(page: import('@playwright/test').Page, bookSl
 	);
 }
 
-async function openReadingTab(page: import('@playwright/test').Page) {
-	return openTab(page, 'Lecture');
+async function openTexteTab(page: import('@playwright/test').Page) {
+	return openTab(page, 'Texte');
 }
 
 // Bible-specific settings (layout, verse numbers, section headings, chapter
-// nav, Vulgate numbering) get their own tab instead of tucking under Lecture
+// nav, Vulgate numbering) get their own tab instead of tucking under Texte
 // — see ReadingPrefs.svelte's comment on `tabs`.
 async function openBibleTab(page: import('@playwright/test').Page) {
 	return openTab(page, 'Bible');
@@ -101,7 +101,7 @@ test("options panel shows only the current page's corpus group, not both", async
 	await expect(dialog.getByText('Renvois entre paragraphes')).toHaveCount(0);
 
 	await page.goto('/cec/27');
-	dialog = await openReadingTab(page);
+	dialog = await openTab(page, 'Notes');
 	await expect(dialog.getByText('Renvois entre paragraphes')).toBeVisible();
 	await expect(dialog.getByText('Mode de lecture')).toHaveCount(0);
 });
@@ -213,22 +213,24 @@ test('the options panel on Bible pages has three tabs, with Notes hidden', async
 	// Bible pages carry no footnotes, so the Notes tab was an empty shell.
 	// It is dropped entirely here rather than shown with an empty state, and
 	// Bible-specific settings get their own tab instead of tucking under
-	// Lecture (see ReadingPrefs.svelte's comment on `tabs`).
+	// Texte (see ReadingPrefs.svelte's comment on `tabs`).
 	await page.goto('/bible/genese/1');
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 
 	await expect(dialog.getByRole('button', { name: 'Notes', exact: true })).toHaveCount(0);
 	await expect(dialog.getByRole('button', { name: 'Texte', exact: true })).toBeVisible();
-	await expect(dialog.getByRole('button', { name: 'Lecture', exact: true })).toBeVisible();
+	await expect(dialog.getByRole('button', { name: 'Apparence', exact: true })).toBeVisible();
 	await expect(dialog.getByRole('button', { name: 'Bible', exact: true })).toBeVisible();
 
 	// The three survivors split the full width evenly between them.
 	const texte = await dialog.getByRole('button', { name: 'Texte', exact: true }).boundingBox();
-	const lecture = await dialog.getByRole('button', { name: 'Lecture', exact: true }).boundingBox();
+	const apparence = await dialog
+		.getByRole('button', { name: 'Apparence', exact: true })
+		.boundingBox();
 	const bible = await dialog.getByRole('button', { name: 'Bible', exact: true }).boundingBox();
-	expect(texte!.width).toBeCloseTo(lecture!.width, 0);
-	expect(lecture!.width).toBeCloseTo(bible!.width, 0);
+	expect(texte!.width).toBeCloseTo(apparence!.width, 0);
+	expect(apparence!.width).toBeCloseTo(bible!.width, 0);
 });
 
 test('the CEC options panel keeps its Notes tab', async ({ page }) => {
@@ -282,8 +284,13 @@ test('Bible reader uses its own column widths (600/750/920), not the shared CEC/
 		Large: '920px'
 	};
 	for (const [label, px] of Object.entries(widths)) {
-		const dialog = await openReadingTab(page);
-		await dialog.getByRole('button', { name: label }).click();
+		const dialog = await openTexteTab(page);
+		// Scoped to the group: "Standard" is also a valid Interligne value,
+		// now that both pills share the Texte tab.
+		await dialog
+			.getByRole('group', { name: 'Largeur de colonne' })
+			.getByRole('button', { name: label, exact: true })
+			.click();
 		await page.keyboard.press('Escape');
 		await expect(main).toHaveCSS('max-width', px);
 	}
@@ -321,7 +328,7 @@ test('the width fix holds at every column-width preset (600/750/920), not just S
 		Large: '872px' // 920 - 48
 	};
 	for (const [label, px] of Object.entries(targets)) {
-		const dialog = await openReadingTab(page);
+		const dialog = await openTexteTab(page);
 		await dialog.getByRole('button', { name: label }).click();
 		await page.keyboard.press('Escape');
 		await expect(verseText).toHaveCSS('width', px);
@@ -681,7 +688,7 @@ test('Vulgate psalm numbers appear in the chapter selector when enabled', async 
 async function enableBionic(page: import('@playwright/test').Page) {
 	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
-	await dialog.getByRole('button', { name: 'Lecture' }).click();
+	await dialog.getByRole('button', { name: 'Texte' }).click();
 	await dialog.getByRole('button', { name: 'Activée', exact: true }).click();
 	await page.keyboard.press('Escape');
 }

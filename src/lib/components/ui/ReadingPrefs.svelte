@@ -10,23 +10,23 @@
 	const isBibleOnly = $derived(page.url.pathname.startsWith('/bible'));
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
 
-	let activeTab: 'text' | 'reading' | 'bible' | 'notes' = $state('text');
+	let activeTab: 'text' | 'appearance' | 'bible' | 'notes' = $state('text');
 
 	// Bible pages carry no footnotes, so the Notes tab had nothing to show but
 	// an empty state. Drop it there and let the two survivors share the width.
-	// Bible-specific settings get their own tab instead of tucking under
-	// Lecture · that section had grown longer than the generic one it sat below.
+	// Bible-specific settings get their own tab instead of tucking under a
+	// generic one · that section had grown longer than the tab it sat under.
 	const tabs = $derived(
 		[
 			{
 				id: 'text' as const,
 				label: 'Texte',
-				title: 'Ajuste l’apparence du texte à l’écran'
+				title: 'Ajuste la typographie du texte à l’écran'
 			},
 			{
-				id: 'reading' as const,
-				label: 'Lecture',
-				title: 'Ajuste la mise en page et le confort de lecture'
+				id: 'appearance' as const,
+				label: 'Apparence',
+				title: 'Change les couleurs du site'
 			},
 			...(isBibleOnly
 				? [
@@ -144,6 +144,14 @@
 	];
 
 	const activeFont = $derived(getFontById($prefs.fontFamily) ?? FONTS[0]!);
+
+	// Bible citations render either as inline "(Os 11, 1)" parentheses or as
+	// superscript markers, never both · only one of these two hide-flags is
+	// ever actually consulted at render time, so the visibility pill binds to
+	// whichever one matches the current format instead of showing both.
+	const bibleCiteHideKey = $derived(
+		$prefs.inlineAsMarkers ? ('hideBibleMarkers' as const) : ('hideBibleInline' as const)
+	);
 
 	function setHideAll(on: boolean) {
 		if (isTrent || isPiusX) {
@@ -271,70 +279,6 @@
 				</button>
 			</div>
 
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Change les couleurs de fond et de texte de la page">Thème</span
-				>
-				<div class="flex gap-2">
-					{#each THEME_SWATCHES as t (t.id)}
-						<button
-							type="button"
-							onclick={() => updatePref('theme', t.id)}
-							class="theme-card flex-1 rounded border overflow-hidden transition-colors
-								{$prefs.theme === t.id ? 'border-accent' : 'border-transparent'}"
-							style="background: {t.bg};"
-							aria-label={t.label}
-							aria-pressed={$prefs.theme === t.id}
-							title={t.title}
-						>
-							<div class="theme-card-inner">
-								<div class="flex items-baseline gap-[3px] mb-[5px]">
-									<span class="font-body text-[15px] leading-none font-bold" style="color: {t.fg};"
-										>A</span
-									>
-									<span
-										class="block h-[1.5px] flex-1 rounded-full"
-										style="background: {t.fg}; opacity: 0.5;"
-									></span>
-								</div>
-								<div class="space-y-[3px]">
-									<span class="block h-[1.5px] rounded-full" style="background: {t.lines};"></span>
-									<span class="block h-[1.5px] rounded-full" style="background: {t.lines};"></span>
-									<span class="block h-[1.5px] w-[70%] rounded-full" style="background: {t.lines};"
-									></span>
-								</div>
-							</div>
-						</button>
-					{/each}
-				</div>
-			</div>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Change la couleur utilisée pour les éléments actifs de l'interface"
-					>Couleur d'accent</span
-				>
-				<PillGroup
-					ariaLabel="Couleur d'accent"
-					options={[
-						{ label: 'Rouge', value: 'red' as const, title: "Couleur d'accent par défaut du site" },
-						{
-							label: 'Bleu',
-							value: 'blue' as const,
-							title: 'Plus distinct pour les personnes qui perçoivent mal le rouge'
-						}
-					]}
-					value={$prefs.accentColor}
-					onchange={(v) => updatePref('accentColor', v)}
-				/>
-			</div>
-		</div>
-	{/if}
-
-	{#if activeTab === 'reading'}
-		<div class="space-y-5">
 			<div class="hidden md:block">
 				<span class="block mb-2 text-muted text-[13px]" title="Ajuste la largeur du texte à l'écran"
 					>Largeur de colonne</span
@@ -409,103 +353,110 @@
 			</div>
 
 			{#if $prefs.bionicReading}
-				<div>
-					<span
-						class="block mb-2 text-muted text-[13px]"
-						title="Règle la portion de chaque mot mise en gras"
-						>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
-					>
-					<input
-						type="range"
-						min="1"
-						max="5"
-						step="1"
-						value={$prefs.bionicFixation}
-						oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
-						class="w-full accent-accent"
-						aria-label="Intensité de la lecture bionique"
-						title="Règle la portion de chaque mot mise en gras"
-					/>
-				</div>
+				<div class="pl-4 border-l border-border space-y-4">
+					<div>
+						<span
+							class="block mb-2 text-muted text-[13px]"
+							title="Règle la portion de chaque mot mise en gras"
+							>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
+						>
+						<input
+							type="range"
+							min="1"
+							max="5"
+							step="1"
+							value={$prefs.bionicFixation}
+							oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
+							class="w-full accent-accent"
+							aria-label="Intensité de la lecture bionique"
+							title="Règle la portion de chaque mot mise en gras"
+						/>
+					</div>
 
-				<div>
-					<span
-						class="block mb-2 text-muted text-[13px]"
-						title="Règle la fréquence des mots mis en gras"
-						>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
-					>
-					<input
-						type="range"
-						min="0"
-						max="4"
-						step="1"
-						value={$prefs.bionicSaccade}
-						oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
-						class="w-full accent-accent"
-						aria-label="Saut de mots de la lecture bionique"
-						title="Un saut plus élevé met moins de mots en gras"
-					/>
-				</div>
-			{/if}
-
-			{#if isCecOnly}
-				<div class="pt-1 mt-1 border-t border-border">
-					<span class="block mb-3 text-[11px] uppercase tracking-[0.12em] font-semibold text-accent"
-						>Catéchisme</span
-					>
-					<div class="space-y-4">
-						<div>
-							<span
-								class="block mb-2 text-muted text-[13px]"
-								title="Choisit où afficher les renvois vers d'autres paragraphes"
-								>Renvois entre paragraphes</span
-							>
-							<PillGroup
-								ariaLabel="Renvois entre paragraphes"
-								options={[
-									{
-										label: 'En ligne',
-										value: 'inline' as const,
-										title: 'Renvois insérés juste après le paragraphe'
-									},
-									{
-										label: 'En marge',
-										value: 'side' as const,
-										title: 'Renvois affichés à côté, texte principal dégagé'
-									}
-								]}
-								value={$prefs.crossRefsLayout}
-								onchange={(v) => updatePref('crossRefsLayout', v)}
-							/>
-						</div>
-
-						<div>
-							<span
-								class="block mb-2 text-muted text-[13px]"
-								title="Choisit comment afficher les citations bibliques dans le texte"
-								>Citations bibliques</span
-							>
-							<PillGroup
-								ariaLabel="Citations bibliques"
-								options={[
-									{
-										label: 'En ligne',
-										value: false,
-										title: 'Référence complète visible directement dans le texte'
-									},
-									{
-										label: 'En exposant',
-										value: true,
-										title: 'Petits chiffres renvoyant à la citation, comme une note de bas de page'
-									}
-								]}
-								value={$prefs.inlineAsMarkers}
-								onchange={(v) => updatePref('inlineAsMarkers', v)}
-							/>
-						</div>
+					<div>
+						<span
+							class="block mb-2 text-muted text-[13px]"
+							title="Règle la fréquence des mots mis en gras"
+							>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
+						>
+						<input
+							type="range"
+							min="0"
+							max="4"
+							step="1"
+							value={$prefs.bionicSaccade}
+							oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
+							class="w-full accent-accent"
+							aria-label="Saut de mots de la lecture bionique"
+							title="Un saut plus élevé met moins de mots en gras"
+						/>
 					</div>
 				</div>
 			{/if}
+		</div>
+	{/if}
+
+	{#if activeTab === 'appearance'}
+		<div class="space-y-5">
+			<div>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Change les couleurs de fond et de texte de la page">Thème</span
+				>
+				<div class="flex gap-2">
+					{#each THEME_SWATCHES as t (t.id)}
+						<button
+							type="button"
+							onclick={() => updatePref('theme', t.id)}
+							class="theme-card flex-1 rounded border overflow-hidden transition-colors
+								{$prefs.theme === t.id ? 'border-accent' : 'border-transparent'}"
+							style="background: {t.bg};"
+							aria-label={t.label}
+							aria-pressed={$prefs.theme === t.id}
+							title={t.title}
+						>
+							<div class="theme-card-inner">
+								<div class="flex items-baseline gap-[3px] mb-[5px]">
+									<span class="font-body text-[15px] leading-none font-bold" style="color: {t.fg};"
+										>A</span
+									>
+									<span
+										class="block h-[1.5px] flex-1 rounded-full"
+										style="background: {t.fg}; opacity: 0.5;"
+									></span>
+								</div>
+								<div class="space-y-[3px]">
+									<span class="block h-[1.5px] rounded-full" style="background: {t.lines};"></span>
+									<span class="block h-[1.5px] rounded-full" style="background: {t.lines};"></span>
+									<span class="block h-[1.5px] w-[70%] rounded-full" style="background: {t.lines};"
+									></span>
+								</div>
+							</div>
+						</button>
+					{/each}
+				</div>
+			</div>
+
+			<div>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Change la couleur utilisée pour les éléments actifs de l'interface"
+					>Couleur d'accent</span
+				>
+				<PillGroup
+					ariaLabel="Couleur d'accent"
+					options={[
+						{ label: 'Rouge', value: 'red' as const, title: "Couleur d'accent par défaut du site" },
+						{
+							label: 'Bleu',
+							value: 'blue' as const,
+							title: 'Plus distinct pour les personnes qui perçoivent mal le rouge'
+						}
+					]}
+					value={$prefs.accentColor}
+					onchange={(v) => updatePref('accentColor', v)}
+				/>
+			</div>
 		</div>
 	{/if}
 
@@ -538,26 +489,6 @@
 			<div>
 				<span
 					class="block mb-2 text-muted text-[13px]"
-					title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
-				>
-				<PillGroup
-					ariaLabel="Scroll infini"
-					options={[
-						{
-							label: 'Activé',
-							value: true,
-							title: 'Charge le chapitre suivant automatiquement en défilant'
-						},
-						{ label: 'Désactivé', value: false, title: 'Passe au chapitre suivant manuellement' }
-					]}
-					value={$prefs.infiniteScroll}
-					onchange={(v) => updatePref('infiniteScroll', v)}
-				/>
-			</div>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
 					title="Affiche ou masque les numéros devant chaque verset">Numéros de verset</span
 				>
 				<PillGroup
@@ -573,30 +504,31 @@
 					value={$prefs.hideVerseNumbers}
 					onchange={(v) => updatePref('hideVerseNumbers', v)}
 				/>
-			</div>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Change la couleur des numéros de verset">Couleur des numéros de verset</span
-				>
-				<PillGroup
-					ariaLabel="Couleur des numéros de verset"
-					options={[
-						{
-							label: 'Accent',
-							value: 'accent' as const,
-							title: 'Numéros bien visibles, faciles à repérer'
-						},
-						{
-							label: 'Discret',
-							value: 'subtle' as const,
-							title: 'Numéros estompés, moins de distraction'
-						}
-					]}
-					value={$prefs.verseNumberColor}
-					onchange={(v) => updatePref('verseNumberColor', v)}
-				/>
+				{#if !$prefs.hideVerseNumbers}
+					<div class="mt-3 pl-4 border-l border-border">
+						<span
+							class="block mb-2 text-muted text-[13px]"
+							title="Change la couleur des numéros de verset">Couleur</span
+						>
+						<PillGroup
+							ariaLabel="Couleur des numéros de verset"
+							options={[
+								{
+									label: 'Accent',
+									value: 'accent' as const,
+									title: 'Numéros bien visibles, faciles à repérer'
+								},
+								{
+									label: 'Discret',
+									value: 'subtle' as const,
+									title: 'Numéros estompés, moins de distraction'
+								}
+							]}
+							value={$prefs.verseNumberColor}
+							onchange={(v) => updatePref('verseNumberColor', v)}
+						/>
+					</div>
+				{/if}
 			</div>
 
 			<div>
@@ -668,11 +600,31 @@
 					onchange={(v) => updatePref('showVulgatePsalms', v)}
 				/>
 			</div>
+
+			<div>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
+				>
+				<PillGroup
+					ariaLabel="Scroll infini"
+					options={[
+						{
+							label: 'Activé',
+							value: true,
+							title: 'Charge le chapitre suivant automatiquement en défilant'
+						},
+						{ label: 'Désactivé', value: false, title: 'Passe au chapitre suivant manuellement' }
+					]}
+					value={$prefs.infiniteScroll}
+					onchange={(v) => updatePref('infiniteScroll', v)}
+				/>
+			</div>
 		</div>
 	{/if}
 
 	{#if activeTab === 'notes'}
-		<div class="space-y-4">
+		<div class="space-y-5">
 			{#if isPiusX || isCompendium}
 				<p class="text-[13px] text-muted leading-relaxed">
 					{isPiusX
@@ -680,85 +632,137 @@
 						: 'Cette page ne contient pas de notes à masquer.'}
 				</p>
 			{:else}
-				<label
-					class="flex items-center gap-2.5 cursor-pointer"
-					title="Cache renvois et citations pour une lecture épurée"
-				>
-					<input
-						type="checkbox"
-						checked={$prefs.hideAllNotes}
-						onchange={(e) => setHideAll(e.currentTarget.checked)}
-						class="prefs-check-input"
+				<div>
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Cache renvois et citations pour une lecture épurée">Toutes les notes</span
+					>
+					<PillGroup
+						ariaLabel="Toutes les notes"
+						options={[
+							{ label: 'Afficher', value: false, title: 'Affiche renvois et citations' },
+							{
+								label: 'Masquer',
+								value: true,
+								title: 'Cache renvois et citations pour une lecture épurée'
+							}
+						]}
+						value={$prefs.hideAllNotes}
+						onchange={(v) => setHideAll(v)}
 					/>
-					<span class="prefs-check" aria-hidden="true">
-						{#if $prefs.hideAllNotes}<span class="prefs-check-mark">✓</span>{/if}
-					</span>
-					<span class="font-semibold">Masquer toutes les notes</span>
-				</label>
-				{#if !isTrent}
-					<div class="pl-6 space-y-3 text-[14px] border-l border-border ml-1.5">
-						{#if isCecOnly}
-							<label
-								class="flex items-center gap-2.5 cursor-pointer"
-								title="Cache les références vers d’autres paragraphes du Catéchisme"
+				</div>
+
+				{#if !isTrent && isCecOnly}
+					<div class="space-y-4 pt-1 mt-1 border-t border-border">
+						<div>
+							<span
+								class="block mb-2 text-muted text-[13px]"
+								title="Choisit si et où les renvois vers d’autres paragraphes sont affichés"
+								>Renvois entre paragraphes</span
 							>
-								<input
-									type="checkbox"
-									checked={$prefs.hideCrossRefs}
-									onchange={(e) => updatePref('hideCrossRefs', e.currentTarget.checked)}
-									class="prefs-check-input"
-								/>
-								<span class="prefs-check" aria-hidden="true">
-									{#if $prefs.hideCrossRefs}<span class="prefs-check-mark">✓</span>{/if}
-								</span>
-								<span>Renvois entre paragraphes</span>
-							</label>
-							<label
-								class="flex items-center gap-2.5 cursor-pointer"
-								title="Cache les versets cités directement dans le texte"
+							<PillGroup
+								ariaLabel="Renvois entre paragraphes"
+								options={[
+									{
+										label: 'Afficher',
+										value: false,
+										title: 'Affiche les renvois vers d’autres paragraphes'
+									},
+									{
+										label: 'Masquer',
+										value: true,
+										title: 'Cache les renvois vers d’autres paragraphes'
+									}
+								]}
+								value={$prefs.hideCrossRefs}
+								onchange={(v) => updatePref('hideCrossRefs', v)}
+							/>
+							{#if !$prefs.hideCrossRefs}
+								<div class="mt-3 pl-4 border-l border-border">
+									<PillGroup
+										ariaLabel="Position des renvois"
+										options={[
+											{
+												label: 'En ligne',
+												value: 'inline' as const,
+												title: 'Renvois insérés juste après le paragraphe'
+											},
+											{
+												label: 'En marge',
+												value: 'side' as const,
+												title: 'Renvois affichés à côté, texte principal dégagé'
+											}
+										]}
+										value={$prefs.crossRefsLayout}
+										onchange={(v) => updatePref('crossRefsLayout', v)}
+									/>
+								</div>
+							{/if}
+						</div>
+
+						<div>
+							<span
+								class="block mb-2 text-muted text-[13px]"
+								title="Choisit si et comment les citations bibliques sont affichées dans le texte"
+								>Citations bibliques</span
 							>
-								<input
-									type="checkbox"
-									checked={$prefs.hideBibleInline}
-									onchange={(e) => updatePref('hideBibleInline', e.currentTarget.checked)}
-									class="prefs-check-input"
-								/>
-								<span class="prefs-check" aria-hidden="true">
-									{#if $prefs.hideBibleInline}<span class="prefs-check-mark">✓</span>{/if}
-								</span>
-								<span>Citations bibliques en ligne</span>
-							</label>
-							<label
-								class="flex items-center gap-2.5 cursor-pointer"
-								title="Cache les petits numéros renvoyant aux citations bibliques"
-							>
-								<input
-									type="checkbox"
-									checked={$prefs.hideBibleMarkers}
-									onchange={(e) => updatePref('hideBibleMarkers', e.currentTarget.checked)}
-									class="prefs-check-input"
-								/>
-								<span class="prefs-check" aria-hidden="true">
-									{#if $prefs.hideBibleMarkers}<span class="prefs-check-mark">✓</span>{/if}
-								</span>
-								<span>Citations bibliques en exposant</span>
-							</label>
-							<label
-								class="flex items-center gap-2.5 cursor-pointer"
+							<PillGroup
+								ariaLabel="Citations bibliques"
+								options={[
+									{ label: 'Afficher', value: false, title: 'Affiche les citations bibliques' },
+									{ label: 'Masquer', value: true, title: 'Cache les citations bibliques' }
+								]}
+								value={$prefs[bibleCiteHideKey]}
+								onchange={(v) => updatePref(bibleCiteHideKey, v)}
+							/>
+							{#if !$prefs[bibleCiteHideKey]}
+								<div class="mt-3 pl-4 border-l border-border">
+									<PillGroup
+										ariaLabel="Format des citations bibliques"
+										options={[
+											{
+												label: 'En ligne',
+												value: false,
+												title: 'Référence complète visible directement dans le texte'
+											},
+											{
+												label: 'En exposant',
+												value: true,
+												title:
+													'Petits chiffres renvoyant à la citation, comme une note de bas de page'
+											}
+										]}
+										value={$prefs.inlineAsMarkers}
+										onchange={(v) => updatePref('inlineAsMarkers', v)}
+									/>
+								</div>
+							{/if}
+						</div>
+
+						<div>
+							<span
+								class="block mb-2 text-muted text-[13px]"
 								title="Cache les références aux documents d’origine (conciles, encycliques…)"
+								>Sources</span
 							>
-								<input
-									type="checkbox"
-									checked={$prefs.hideSourceFootnotes}
-									onchange={(e) => updatePref('hideSourceFootnotes', e.currentTarget.checked)}
-									class="prefs-check-input"
-								/>
-								<span class="prefs-check" aria-hidden="true">
-									{#if $prefs.hideSourceFootnotes}<span class="prefs-check-mark">✓</span>{/if}
-								</span>
-								<span>Sources</span>
-							</label>
-						{/if}
+							<PillGroup
+								ariaLabel="Sources"
+								options={[
+									{
+										label: 'Afficher',
+										value: false,
+										title: 'Affiche les références aux documents d’origine'
+									},
+									{
+										label: 'Masquer',
+										value: true,
+										title: 'Cache les références aux documents d’origine'
+									}
+								]}
+								value={$prefs.hideSourceFootnotes}
+								onchange={(v) => updatePref('hideSourceFootnotes', v)}
+							/>
+						</div>
 					</div>
 				{/if}
 			{/if}
@@ -818,47 +822,5 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-	}
-
-	/* Hairline checkbox · native input is visually hidden but kept in flow
-	   for keyboard + a11y. The adjacent .prefs-check span is the visual
-	   surface and reflects checked state via the serif checkmark glyph. */
-	.prefs-check-input {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border: 0;
-	}
-	.prefs-check {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 16px;
-		height: 16px;
-		flex: none;
-		border: 1px solid color-mix(in srgb, var(--color-fg) 30%, transparent);
-		border-radius: 2px;
-		background: transparent;
-		transition: border-color 120ms ease;
-	}
-	.prefs-check-input:checked + .prefs-check {
-		border-color: var(--color-accent);
-	}
-	.prefs-check-input:focus-visible + .prefs-check {
-		outline: 2px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
-		outline-offset: 2px;
-	}
-	.prefs-check-mark {
-		font-family: var(--font-body);
-		font-size: 12px;
-		line-height: 1;
-		color: var(--color-accent-text);
-		/* Optical alignment · Libre Baskerville's check sits a hair high. */
-		transform: translateY(-0.5px);
 	}
 </style>
