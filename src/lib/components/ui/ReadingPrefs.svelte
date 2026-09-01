@@ -12,57 +12,37 @@
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
 
 	// Utility/navigation pages (home, Bibliothèque, glossaire, recherche…)
-	// don't match any registered corpus prefix · the Lecture tab would have
-	// nothing but Bionic reading to show there, so it's dropped entirely
-	// rather than kept around for one setting that doesn't apply.
+	// don't match any registered corpus prefix · nothing that acts on a body
+	// of text applies there, so the reading-behavior settings are dropped
+	// rather than offered as no-ops.
 	const isReadingContent = $derived(
 		FEATURED.some((f) => page.url.pathname.startsWith(f.urlPrefix)) ||
 			corpusForPath(page.url.pathname) !== null
 	);
 
-	let activeTab: 'appearance' | 'reading' | 'bible' | 'notes' = $state('appearance');
+	// The tabs split on a single axis: Apparence is how the page LOOKS,
+	// Texte is what the page SHOWS. Never on corpus · that mixed axis is what
+	// used to make a tab's meaning shift from one page to the next. Sections
+	// inside Texte come and go with the content; the two labels never do.
+	let activeTab: 'appearance' | 'text' = $state('appearance');
 
-	// Bible pages carry no footnotes, so the Notes tab had nothing to show but
-	// an empty state. Drop it there and let the two survivors share the width.
-	// Apparence holds pure typography/visual settings; Lecture holds reading-
-	// behavior toggles (bionic reading, and on Bible pages the scroll/nav
-	// behaviors too) · Bible keeps only the content-display toggles left over.
-	const tabs = $derived(
-		[
-			{
-				id: 'appearance' as const,
-				label: 'Apparence',
-				title: 'Ajuste la typographie et les couleurs du site'
-			},
-			...(isReadingContent
-				? [
-						{
-							id: 'reading' as const,
-							label: 'Lecture',
-							title: 'Réglages qui changent le comportement de la lecture'
-						}
-					]
-				: []),
-			...(isBibleOnly
-				? [
-						{
-							id: 'bible' as const,
-							label: 'Bible',
-							title: 'Réglages propres à l’affichage du texte biblique'
-						}
-					]
-				: []),
-			...(isBibleOnly
-				? []
-				: [
-						{
-							id: 'notes' as const,
-							label: 'Notes',
-							title: 'Choisit les notes à afficher pendant la lecture'
-						}
-					])
-		].filter(Boolean)
-	);
+	// Bionic reading is a typographic treatment of the glyphs, like the font
+	// choice it sits under · it belongs to Apparence, not to a tab of its own.
+	const showBionic = $derived(isReadingContent);
+
+	// Compendium and Pie X carry no notes at all, so on those (and on the
+	// utility pages) Texte would hold nothing.
+	const hasNotes = $derived(isReadingContent && (isTrent || isCecOnly));
+	const hasTextSettings = $derived(isBibleOnly || hasNotes);
+
+	// No empty tab anywhere: where Texte has nothing to say, the tab bar goes
+	// away and the panel is simply the Apparence controls.
+	const showTabs = $derived(hasTextSettings);
+
+	$effect(() => {
+		if (!showTabs) activeTab = 'appearance';
+	});
+
 	let fontDropdownOpen = $state(false);
 	let fontSectionEl: HTMLElement | undefined = $state();
 	let fontTriggerEl: HTMLButtonElement | undefined = $state();
@@ -212,24 +192,41 @@
 			window.removeEventListener('resize', onScroll);
 		};
 	});
+
+	const TABS = [
+		{
+			id: 'appearance' as const,
+			label: 'Apparence',
+			title: 'Règle l’aspect de la page : couleurs, police, mise en forme du texte'
+		},
+		{
+			id: 'text' as const,
+			label: 'Texte',
+			title: 'Choisit ce que le texte affiche : repères, titres, notes'
+		}
+	];
 </script>
 
 <div class="font-ui text-sm">
-	<div class="flex border-b border-border mb-5 -mx-4 px-4 sticky top-0 z-10 bg-panel">
-		{#each tabs as tab (tab.id)}
-			<button
-				type="button"
-				class="flex-1 py-2.5 text-[11px] uppercase tracking-[0.12em] font-semibold border-b-2 -mb-px transition-colors
-					{activeTab === tab.id
-					? 'border-accent text-accent-text'
-					: 'border-transparent text-subtle hover:text-foreground'}"
-				onclick={() => (activeTab = tab.id)}
-				title={tab.title}
-			>
-				{tab.label}
-			</button>
-		{/each}
-	</div>
+	{#if showTabs}
+		<div class="flex border-b border-border mb-5 -mx-4 px-4 sticky top-0 z-10 bg-panel">
+			{#each TABS as tab (tab.id)}
+				<button
+					type="button"
+					class="flex-1 py-2.5 text-[11px] uppercase tracking-[0.12em] font-semibold border-b-2 -mb-px transition-colors
+						{activeTab === tab.id
+						? 'border-accent text-accent-text'
+						: 'border-transparent text-subtle hover:text-foreground'}"
+					onclick={() => (activeTab = tab.id)}
+					title={tab.title}
+				>
+					{tab.label}
+				</button>
+			{/each}
+		</div>
+	{:else}
+		<div class="mb-5"></div>
+	{/if}
 
 	{#if activeTab === 'appearance'}
 		<div class="space-y-5">
@@ -405,19 +402,98 @@
 					onchange={(v) => updatePref('justifiedText', v)}
 				/>
 			</div>
+
+			{#if showBionic}
+				<div class="border-t border-border pt-5">
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Met en gras le début de chaque mot pour guider l'œil pendant la lecture"
+						>Lecture bionique</span
+					>
+					<PillGroup
+						ariaLabel="Lecture bionique"
+						options={[
+							{ label: 'Désactivée', value: false, title: 'Texte affiché normalement' },
+							{
+								label: 'Activée',
+								value: true,
+								title: "Met en gras le début de chaque mot pour guider l'œil"
+							}
+						]}
+						value={$prefs.bionicReading}
+						onchange={(v) => updatePref('bionicReading', v)}
+					/>
+					{#if $prefs.bionicReading}
+						<div class="mt-3 space-y-4">
+							<div>
+								<span
+									class="block mb-2 text-muted text-[13px]"
+									title="Règle la portion de chaque mot mise en gras"
+									>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
+								>
+								<input
+									type="range"
+									min="1"
+									max="5"
+									step="1"
+									value={$prefs.bionicFixation}
+									oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
+									class="w-full accent-accent"
+									aria-label="Intensité de la lecture bionique"
+									title="Règle la portion de chaque mot mise en gras"
+								/>
+							</div>
+
+							<div>
+								<span
+									class="block mb-2 text-muted text-[13px]"
+									title="Règle la fréquence des mots mis en gras"
+									>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
+								>
+								<input
+									type="range"
+									min="0"
+									max="4"
+									step="1"
+									value={$prefs.bionicSaccade}
+									oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
+									class="w-full accent-accent"
+									aria-label="Saut de mots de la lecture bionique"
+									title="Un saut plus élevé met moins de mots en gras"
+								/>
+							</div>
+
+							<div>
+								<span class="block mb-2 text-muted text-[13px]" title="Règle l'épaisseur du gras"
+									>Poids</span
+								>
+								<PillGroup
+									ariaLabel="Poids de la lecture bionique"
+									options={[
+										{ label: 'Léger', value: 600 as const, title: 'Gras discret' },
+										{ label: 'Épais', value: 700 as const, title: 'Gras plus marqué' }
+									]}
+									value={$prefs.bionicBoldWeight}
+									onchange={(v) => updatePref('bionicBoldWeight', v)}
+								/>
+							</div>
+						</div>
+					{/if}
+				</div>
+			{/if}
 		</div>
 	{/if}
 
-	{#if activeTab === 'reading'}
+	{#if activeTab === 'text'}
 		<div class="space-y-5">
 			{#if isBibleOnly}
 				<div>
 					<span
 						class="block mb-2 text-muted text-[13px]"
-						title="Choisit comment le texte biblique est découpé à l'écran">Mode de lecture</span
+						title="Choisit comment le texte biblique est découpé à l'écran">Mise en page</span
 					>
 					<PillGroup
-						ariaLabel="Mode de lecture"
+						ariaLabel="Mise en page"
 						options={[
 							{
 								label: 'Verset par verset',
@@ -434,237 +510,150 @@
 						onchange={(v) => updatePref('bibleLayout', v)}
 					/>
 				</div>
-			{/if}
 
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Met en gras le début de chaque mot pour guider l'œil pendant la lecture"
-					>Lecture bionique</span
-				>
-				<PillGroup
-					ariaLabel="Lecture bionique"
-					options={[
-						{ label: 'Désactivée', value: false, title: 'Texte affiché normalement' },
-						{
-							label: 'Activée',
-							value: true,
-							title: "Met en gras le début de chaque mot pour guider l'œil"
-						}
-					]}
-					value={$prefs.bionicReading}
-					onchange={(v) => updatePref('bionicReading', v)}
-				/>
-				{#if $prefs.bionicReading}
-					<div class="mt-3 space-y-4">
-						<div>
-							<span
-								class="block mb-2 text-muted text-[13px]"
-								title="Règle la portion de chaque mot mise en gras"
-								>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
-							>
-							<input
-								type="range"
-								min="1"
-								max="5"
-								step="1"
-								value={$prefs.bionicFixation}
-								oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
-								class="w-full accent-accent"
-								aria-label="Intensité de la lecture bionique"
-								title="Règle la portion de chaque mot mise en gras"
-							/>
-						</div>
-
-						<div>
-							<span
-								class="block mb-2 text-muted text-[13px]"
-								title="Règle la fréquence des mots mis en gras"
-								>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
-							>
-							<input
-								type="range"
-								min="0"
-								max="4"
-								step="1"
-								value={$prefs.bionicSaccade}
-								oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
-								class="w-full accent-accent"
-								aria-label="Saut de mots de la lecture bionique"
-								title="Un saut plus élevé met moins de mots en gras"
-							/>
-						</div>
-
-						<div>
-							<span class="block mb-2 text-muted text-[13px]" title="Règle l'épaisseur du gras"
-								>Poids</span
-							>
-							<PillGroup
-								ariaLabel="Poids de la lecture bionique"
-								options={[
-									{ label: 'Léger', value: 600 as const, title: 'Gras discret' },
-									{ label: 'Épais', value: 700 as const, title: 'Gras plus marqué' }
-								]}
-								value={$prefs.bionicBoldWeight}
-								onchange={(v) => updatePref('bionicBoldWeight', v)}
-							/>
-						</div>
-					</div>
-				{/if}
-			</div>
-
-			{#if isBibleOnly}
 				<div>
 					<span
 						class="block mb-2 text-muted text-[13px]"
-						title="Affiche ou masque les liens vers les chapitres voisins"
-						>Navigation entre chapitres</span
+						title="Affiche ou masque les numéros devant chaque verset">Numéros de verset</span
 					>
 					<PillGroup
-						ariaLabel="Navigation entre chapitres"
+						ariaLabel="Numéros de verset"
+						options={[
+							{ label: 'Afficher', value: false, title: 'Facilite les citations précises' },
+							{
+								label: 'Masquer',
+								value: true,
+								title: 'Lecture continue, sans repères numériques'
+							}
+						]}
+						value={$prefs.hideVerseNumbers}
+						onchange={(v) => updatePref('hideVerseNumbers', v)}
+					/>
+					{#if !$prefs.hideVerseNumbers}
+						<div class="mt-3">
+							<span
+								class="block mb-2 text-muted text-[13px]"
+								title="Change la couleur des numéros de verset">Couleur</span
+							>
+							<PillGroup
+								ariaLabel="Couleur des numéros de verset"
+								options={[
+									{
+										label: 'Accent',
+										value: 'accent' as const,
+										title: 'Numéros bien visibles, faciles à repérer'
+									},
+									{
+										label: 'Discret',
+										value: 'subtle' as const,
+										title: 'Numéros estompés, moins de distraction'
+									}
+								]}
+								value={$prefs.verseNumberColor}
+								onchange={(v) => updatePref('verseNumberColor', v)}
+							/>
+						</div>
+					{/if}
+				</div>
+
+				<div>
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Affiche ou masque les titres qui découpent le chapitre">Titres de section</span
+					>
+					<PillGroup
+						ariaLabel="Titres de section"
 						options={[
 							{
 								label: 'Afficher',
 								value: false,
-								title: 'Accès rapide au chapitre précédent ou suivant'
+								title: 'Aide à s’orienter dans de longs chapitres'
 							},
 							{
 								label: 'Masquer',
 								value: true,
-								title: 'Libère de l’espace à l’écran'
+								title: 'Lecture continue, sans interruption visuelle'
 							}
 						]}
-						value={$prefs.hideChapterNav}
-						onchange={(v) => updatePref('hideChapterNav', v)}
+						value={$prefs.hideBibleHeadings}
+						onchange={(v) => updatePref('hideBibleHeadings', v)}
 					/>
 				</div>
 
 				<div>
 					<span
 						class="block mb-2 text-muted text-[13px]"
-						title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
+						title="Choisit le système de numérotation des psaumes"
+						>Numérotation Vulgate (psaumes)</span
 					>
 					<PillGroup
-						ariaLabel="Scroll infini"
+						ariaLabel="Numérotation Vulgate (psaumes)"
 						options={[
 							{
-								label: 'Activé',
+								label: 'Afficher',
 								value: true,
-								title: 'Charge le chapitre suivant automatiquement en défilant'
+								title: 'La Vulgate numérote certains psaumes différemment de la Bible hébraïque'
 							},
-							{ label: 'Désactivé', value: false, title: 'Passe au chapitre suivant manuellement' }
+							{ label: 'Masquer', value: false, title: 'Utilise la numérotation standard' }
 						]}
-						value={$prefs.infiniteScroll}
-						onchange={(v) => updatePref('infiniteScroll', v)}
+						value={$prefs.showVulgatePsalms}
+						onchange={(v) => updatePref('showVulgatePsalms', v)}
 					/>
 				</div>
-			{/if}
-		</div>
-	{/if}
 
-	{#if activeTab === 'bible'}
-		<div class="space-y-5">
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Affiche ou masque les numéros devant chaque verset">Numéros de verset</span
-				>
-				<PillGroup
-					ariaLabel="Numéros de verset"
-					options={[
-						{ label: 'Afficher', value: false, title: 'Facilite les citations précises' },
-						{
-							label: 'Masquer',
-							value: true,
-							title: 'Lecture continue, sans repères numériques'
-						}
-					]}
-					value={$prefs.hideVerseNumbers}
-					onchange={(v) => updatePref('hideVerseNumbers', v)}
-				/>
-				{#if !$prefs.hideVerseNumbers}
-					<div class="mt-3">
+				<div class="border-t border-border pt-5 space-y-5">
+					<div>
 						<span
 							class="block mb-2 text-muted text-[13px]"
-							title="Change la couleur des numéros de verset">Couleur</span
+							title="Affiche ou masque les liens vers les chapitres voisins"
+							>Navigation entre chapitres</span
 						>
 						<PillGroup
-							ariaLabel="Couleur des numéros de verset"
+							ariaLabel="Navigation entre chapitres"
 							options={[
 								{
-									label: 'Accent',
-									value: 'accent' as const,
-									title: 'Numéros bien visibles, faciles à repérer'
+									label: 'Afficher',
+									value: false,
+									title: 'Accès rapide au chapitre précédent ou suivant'
 								},
 								{
-									label: 'Discret',
-									value: 'subtle' as const,
-									title: 'Numéros estompés, moins de distraction'
+									label: 'Masquer',
+									value: true,
+									title: 'Libère de l’espace à l’écran'
 								}
 							]}
-							value={$prefs.verseNumberColor}
-							onchange={(v) => updatePref('verseNumberColor', v)}
+							value={$prefs.hideChapterNav}
+							onchange={(v) => updatePref('hideChapterNav', v)}
 						/>
 					</div>
-				{/if}
-			</div>
 
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Affiche ou masque les titres qui découpent le chapitre">Titres de section</span
-				>
-				<PillGroup
-					ariaLabel="Titres de section"
-					options={[
-						{
-							label: 'Afficher',
-							value: false,
-							title: 'Aide à s’orienter dans de longs chapitres'
-						},
-						{
-							label: 'Masquer',
-							value: true,
-							title: 'Lecture continue, sans interruption visuelle'
-						}
-					]}
-					value={$prefs.hideBibleHeadings}
-					onchange={(v) => updatePref('hideBibleHeadings', v)}
-				/>
-			</div>
+					<div>
+						<span
+							class="block mb-2 text-muted text-[13px]"
+							title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
+						>
+						<PillGroup
+							ariaLabel="Scroll infini"
+							options={[
+								{
+									label: 'Activé',
+									value: true,
+									title: 'Charge le chapitre suivant automatiquement en défilant'
+								},
+								{
+									label: 'Désactivé',
+									value: false,
+									title: 'Passe au chapitre suivant manuellement'
+								}
+							]}
+							value={$prefs.infiniteScroll}
+							onchange={(v) => updatePref('infiniteScroll', v)}
+						/>
+					</div>
+				</div>
+			{/if}
 
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Choisit le système de numérotation des psaumes"
-					>Numérotation Vulgate (psaumes)</span
-				>
-				<PillGroup
-					ariaLabel="Numérotation Vulgate (psaumes)"
-					options={[
-						{
-							label: 'Afficher',
-							value: true,
-							title: 'La Vulgate numérote certains psaumes différemment de la Bible hébraïque'
-						},
-						{ label: 'Masquer', value: false, title: 'Utilise la numérotation standard' }
-					]}
-					value={$prefs.showVulgatePsalms}
-					onchange={(v) => updatePref('showVulgatePsalms', v)}
-				/>
-			</div>
-		</div>
-	{/if}
-
-	{#if activeTab === 'notes'}
-		<div class="space-y-5">
-			{#if isPiusX || isCompendium}
-				<p class="text-[13px] text-muted leading-relaxed">
-					{isPiusX
-						? 'Ce catéchisme ne contient pas de notes.'
-						: 'Cette page ne contient pas de notes à masquer.'}
-				</p>
-			{:else}
+			{#if hasNotes}
 				<div>
 					<span
 						class="block mb-2 text-muted text-[13px]"
@@ -685,8 +674,8 @@
 					/>
 				</div>
 
-				{#if !isTrent && isCecOnly}
-					<div class="space-y-4 pt-1 mt-1 border-t border-border">
+				{#if isCecOnly}
+					<div class="space-y-4 border-t border-border pt-5">
 						<div>
 							<span
 								class="block mb-2 text-muted text-[13px]"

@@ -3,29 +3,37 @@ import type { Page } from '@playwright/test';
 import { openDisclosure } from './helpers';
 
 // ReadingPrefs unmounts on close, so its tab state resets on every open ·
-// the Lecture tab has to be reselected each time, as in bible-reading-mode.
-// Scroll infini and Navigation entre chapitres are reading-behavior toggles
-// and live on the Lecture tab, not Bible — the Bible tab keeps only the
-// content-display settings (see ReadingPrefs.svelte's comment on `tabs`).
-async function openReadingTab(page: Page) {
+// the Texte tab has to be reselected each time, as in bible-reading-mode.
+// Scroll infini and Navigation entre chapitres sit on Texte alongside the
+// other settings that change what the page shows (see ReadingPrefs.svelte's
+// comment on `activeTab`), so clicks are scoped to each PillGroup's own
+// `role="group"` rather than picked out by position.
+async function openTexteTab(page: Page) {
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	// Not a bare click · see openDisclosure. This is where the "on by default"
 	// test flaked: the click after reload() landed before hydration, so the
-	// dialog never opened and the Lecture tab below was waited for in vain.
+	// dialog never opened and the Texte tab below was waited for in vain.
 	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
-	await dialog.getByRole('button', { name: 'Lecture' }).click();
+	await dialog.getByRole('button', { name: 'Texte' }).click();
 	return dialog;
 }
 
+async function setPill(dialog: import('@playwright/test').Locator, group: string, option: string) {
+	await dialog
+		.getByRole('group', { name: group })
+		.getByRole('button', { name: option, exact: true })
+		.click();
+}
+
 async function enableInfiniteScroll(page: Page) {
-	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Activé', exact: true }).click();
+	const dialog = await openTexteTab(page);
+	await setPill(dialog, 'Scroll infini', 'Activé');
 	await page.keyboard.press('Escape');
 }
 
 async function disableInfiniteScroll(page: Page) {
-	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Désactivé', exact: true }).click();
+	const dialog = await openTexteTab(page);
+	await setPill(dialog, 'Scroll infini', 'Désactivé');
 	await page.keyboard.press('Escape');
 }
 
@@ -43,24 +51,24 @@ test('infinite scroll is on by default and the toggle persists', async ({ page }
 
 	// Survives a reload, and can be turned back on.
 	await page.reload();
-	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Activé', exact: true }).click();
+	const dialog = await openTexteTab(page);
+	await setPill(dialog, 'Scroll infini', 'Activé');
 	await page.keyboard.press('Escape');
 	expect((await readPrefs()).infiniteScroll).toBe(true);
 });
 
-test('Navigation entre chapitres (Lecture tab) toggles the prev/next strip without touching Bible-tab prefs', async ({
+test('Navigation entre chapitres toggles the prev/next strip without touching its neighbours', async ({
 	page
 }) => {
-	// Navigation entre chapitres is the only Afficher/Masquer control on the
-	// Lecture tab, so no nth() is needed there · this test's job is to prove
-	// it stays isolated from the content-display prefs on the separate Bible
-	// tab (Numéros de verset, Numérotation Vulgate), which live in different
-	// state entirely (see bible-reading-mode.test.ts's own "chapter
-	// navigation" tests).
+	// Navigation entre chapitres now shares the Texte tab with the other
+	// Afficher/Masquer controls, which is exactly why the click below is
+	// scoped to its own group · this test's job is to prove it stays isolated
+	// from the content-display prefs beside it (Numéros de verset,
+	// Numérotation Vulgate), which live in different state entirely (see
+	// bible-reading-mode.test.ts's own "chapter navigation" tests).
 	await page.goto('/bible/genese/1');
-	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Masquer' }).click();
+	const dialog = await openTexteTab(page);
+	await setPill(dialog, 'Navigation entre chapitres', 'Masquer');
 	await page.keyboard.press('Escape');
 
 	await expect(page.locator('.chapter-prev-next')).toHaveCount(0);
