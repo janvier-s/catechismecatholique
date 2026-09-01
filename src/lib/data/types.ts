@@ -820,8 +820,8 @@ export interface CalendrierIndexFile {
 
 /**
  * Mirrors `CecLiturgyOccasion` in scripts/prepare/cecLiturgyIndex.ts - keep in
- * sync. One reason a CEC paragraph is read on one day: the feast, plus the
- * cluster theme the Homiletic Directory files it under.
+ * sync. One day a CEC paragraph is proposed for meditation on: the feast, plus
+ * every theme the Homiletic Directory groups that day's paragraphs under.
  */
 export interface CecLiturgyOccasion {
 	slug: string;
@@ -834,9 +834,8 @@ export interface CecLiturgyOccasion {
 	date?: string;
 	/** Fixed feasts only, for ordering by calendar month. */
 	monthIndex?: number;
-	theme: string;
-	/** The whole cluster, current paragraph included, in source order. */
-	paragraphs: number[];
+	/** The day's whole programme, in source order, not just the clusters citing the paragraph. */
+	clusters: CecLiturgyCluster[];
 	/** Absent when no AELF reading was ever fetched for this day. */
 	readingsKey?: string;
 	/**
@@ -846,6 +845,11 @@ export interface CecLiturgyOccasion {
 	readings?: CecLiturgyReadingRef[];
 }
 
+export interface CecLiturgyCluster {
+	theme: string;
+	paragraphs: number[];
+}
+
 export interface CecLiturgyReadingRef {
 	type: string;
 	ref: string;
@@ -853,8 +857,8 @@ export interface CecLiturgyReadingRef {
 
 /**
  * One shard of the CEC-to-liturgy reverse index, sharded by paragraph hundred.
- * Occasions live in one table and paragraphs point at them by index, so a
- * cluster shared by 20 paragraphs is stored once rather than 20 times.
+ * Occasions live in one table and paragraphs point at them by index, so a day
+ * cited by 20 paragraphs is stored once rather than 20 times.
  */
 export interface CecLiturgyBucket {
 	occasions: CecLiturgyOccasion[];

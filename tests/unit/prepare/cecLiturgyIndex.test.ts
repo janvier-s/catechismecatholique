@@ -56,23 +56,27 @@ describe('cecLiturgyBucket', () => {
 });
 
 describe('buildCecLiturgyIndex', () => {
-	it('indexes every paragraph of a cluster, carrying the whole cluster as siblings', () => {
+	it('indexes every paragraph of every cluster, carrying the day’s whole programme', () => {
 		const index = buildCecLiturgyIndex(sources);
 
 		// 451 lives in bucket 4, 769 in bucket 7 · only the 6xx members land here.
 		expect(Object.keys(index.get(6)!.paragraphs).sort()).toEqual(['668', '669', '671']);
 
-		const [occ] = occasionsFor(index, 668)!;
-		expect(occ).toMatchObject({
+		const found = occasionsFor(index, 668)!;
+		expect(found).toHaveLength(1);
+		expect(found[0]).toMatchObject({
 			slug: 'premier-dimanche-de-lavent',
 			title: 'Premier Dimanche de l’Avent',
 			season: 'avent',
 			color: 'violet',
 			cycle: 'a',
-			theme: 'la venue du Christ dans la gloire',
-			paragraphs: [668, 669, 769],
 			readingsKey: 'a:premier-dimanche-de-lavent'
 		});
+		// Both themes, including the one that does not cite 668.
+		expect(found[0]!.clusters).toEqual([
+			{ theme: 'la venue du Christ dans la gloire', paragraphs: [668, 669, 769] },
+			{ theme: '“Viens, Seigneur Jésus!”', paragraphs: [451, 671] }
+		]);
 	});
 
 	it('files a paragraph into the bucket of its own hundred, not the cluster’s first', () => {
@@ -80,10 +84,10 @@ describe('buildCecLiturgyIndex', () => {
 		// 769 belongs to a cluster whose other members are in bucket 6.
 		expect(index.get(6)!.paragraphs['769']).toBeUndefined();
 		expect(occasionsFor(index, 769)).toHaveLength(1);
-		expect(occasionsFor(index, 769)![0]!.paragraphs).toEqual([668, 669, 769]);
+		expect(occasionsFor(index, 769)![0]!.clusters[0]!.paragraphs).toEqual([668, 669, 769]);
 	});
 
-	it('stacks both blocks when one feast cites a paragraph under two themes', () => {
+	it('lists a day once when it cites a paragraph under two themes', () => {
 		const twice = feast('noel', 'La Solennité de Noël', [
 			{ theme: 'l’Incarnation', paragraphs: [461, 463] },
 			{ theme: 'le mystère de Noël', paragraphs: [461, 526] }
@@ -91,14 +95,18 @@ describe('buildCecLiturgyIndex', () => {
 		const index = buildCecLiturgyIndex([{ feast: twice, cycle: 'b', readingsKey: 'b:noel' }]);
 
 		const entries = occasionsFor(index, 461)!;
-		expect(entries).toHaveLength(2);
-		expect(entries.map((e) => e.theme)).toEqual(['l’Incarnation', 'le mystère de Noël']);
+		expect(entries).toHaveLength(1);
+		expect(entries[0]!.clusters.map((c) => c.theme)).toEqual([
+			'l’Incarnation',
+			'le mystère de Noël'
+		]);
 	});
 
-	it('does not duplicate an occasion when a cluster repeats a paragraph', () => {
+	it('dedupes a paragraph a cluster repeats', () => {
 		const dupe = feast('x', 'X', [{ theme: 't', paragraphs: [100, 100, 101] }]);
 		const index = buildCecLiturgyIndex([{ feast: dupe, readingsKey: 'x' }]);
 		expect(occasionsFor(index, 100)).toHaveLength(1);
+		expect(occasionsFor(index, 100)![0]!.clusters[0]!.paragraphs).toEqual([100, 101]);
 	});
 
 	it('carries the date of a fixed feast and omits the cycle', () => {

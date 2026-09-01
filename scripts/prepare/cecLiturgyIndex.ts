@@ -6,9 +6,9 @@ import type {
 } from './calendrier.ts';
 
 /**
- * One reason a CEC paragraph is read on one day: the feast, and the cluster
- * theme the Homiletic Directory files it under. A feast that cites the same
- * paragraph under two themes produces two of these.
+ * One day a CEC paragraph is proposed for meditation on: the feast, plus every
+ * theme that day groups paragraphs under · a day cited for one paragraph still
+ * carries its whole programme, the way the feast page shows it.
  */
 export interface CecLiturgyOccasion {
 	slug: string;
@@ -21,9 +21,8 @@ export interface CecLiturgyOccasion {
 	date?: string;
 	/** Fixed feasts only · lets the frontend order them by calendar month. */
 	monthIndex?: number;
-	theme: string;
-	/** The whole cluster, current paragraph included, in source order. */
-	paragraphs: number[];
+	/** Every cluster of the day, in source order, whether or not it cites the paragraph looked up. */
+	clusters: CecLiturgyCluster[];
 	/** Absent when no AELF reading was ever fetched for this day. */
 	readingsKey?: string;
 	/**
@@ -35,6 +34,12 @@ export interface CecLiturgyOccasion {
 	readings?: CecLiturgyReadingRef[];
 }
 
+export interface CecLiturgyCluster {
+	theme: string;
+	/** The whole cluster, in source order · deduped, a range may overlap a loose number. */
+	paragraphs: number[];
+}
+
 export interface CecLiturgyReadingRef {
 	type: string;
 	ref: string;
@@ -42,9 +47,8 @@ export interface CecLiturgyReadingRef {
 
 /**
  * A shard of the reverse index. Occasions live in one table and paragraphs
- * point at them by index: a cluster of 20 paragraphs would otherwise store its
- * own 20-number `paragraphs` array 20 times over, which inflated the whole
- * index to 1.6MB.
+ * point at them by index: a day of 40 paragraphs would otherwise store its own
+ * cluster list 40 times over, which inflated the whole index to 1.6MB.
  */
 export interface CecLiturgyBucket {
 	occasions: CecLiturgyOccasion[];
@@ -83,45 +87,46 @@ function isFixed(f: CalendrierFeast | CalendrierFixedFeast): f is CalendrierFixe
  */
 export function buildCecLiturgyIndex(sources: CecLiturgySource[]): Map<number, CecLiturgyBucket> {
 	const buckets = new Map<number, CecLiturgyBucket>();
-	// Per shard, where a given feast+cluster already sits in its occasion table.
+	// Per shard, where a given day already sits in its occasion table.
 	const seen = new Map<number, Map<string, number>>();
 
 	for (const { feast, cycle, readingsKey, readings } of sources) {
 		const fixed = isFixed(feast);
-		for (const cluster of feast.clusters) {
-			const occasion: CecLiturgyOccasion = {
-				slug: feast.slug,
-				title: feast.title,
-				season: feast.season,
-				color: feast.liturgicalColor,
-				...(cycle ? { cycle } : {}),
-				...(fixed ? { date: feast.date, monthIndex: feast.month_index } : {}),
-				theme: cluster.theme,
-				paragraphs: cluster.paragraphs,
-				...(readingsKey ? { readingsKey } : {}),
-				...(readings && readings.length > 0 ? { readings } : {})
-			};
-			const identity = `${cycle ?? ''}:${feast.slug}:${cluster.i}`;
+		const occasion: CecLiturgyOccasion = {
+			slug: feast.slug,
+			title: feast.title,
+			season: feast.season,
+			color: feast.liturgicalColor,
+			...(cycle ? { cycle } : {}),
+			...(fixed ? { date: feast.date, monthIndex: feast.month_index } : {}),
+			// A cluster may list the same paragraph twice (a range overlapping a
+			// loose number in the same "CEC ..." line) · dedupe here so the
+			// frontend can key on the number.
+			clusters: feast.clusters.map((c) => ({
+				theme: c.theme,
+				paragraphs: [...new Set(c.paragraphs)]
+			})),
+			...(readingsKey ? { readingsKey } : {}),
+			...(readings && readings.length > 0 ? { readings } : {})
+		};
+		const identity = `${cycle ?? ''}:${feast.slug}`;
 
-			// A cluster listing the same paragraph twice (e.g. a range that
-			// overlaps a loose number in the same "CEC ..." line) must not yield
-			// the occasion twice.
-			for (const n of new Set(cluster.paragraphs)) {
-				const b = cecLiturgyBucket(n);
-				let bucket = buckets.get(b);
-				if (!bucket) {
-					bucket = { occasions: [], paragraphs: {} };
-					buckets.set(b, bucket);
-					seen.set(b, new Map());
-				}
-				const table = seen.get(b)!;
-				let at = table.get(identity);
-				if (at === undefined) {
-					at = bucket.occasions.push(occasion) - 1;
-					table.set(identity, at);
-				}
-				(bucket.paragraphs[String(n)] = bucket.paragraphs[String(n)] ?? []).push(at);
+		// One entry per day, however many of its clusters cite the paragraph.
+		for (const n of new Set(feast.clusters.flatMap((c) => c.paragraphs))) {
+			const b = cecLiturgyBucket(n);
+			let bucket = buckets.get(b);
+			if (!bucket) {
+				bucket = { occasions: [], paragraphs: {} };
+				buckets.set(b, bucket);
+				seen.set(b, new Map());
 			}
+			const table = seen.get(b)!;
+			let at = table.get(identity);
+			if (at === undefined) {
+				at = bucket.occasions.push(occasion) - 1;
+				table.set(identity, at);
+			}
+			(bucket.paragraphs[String(n)] = bucket.paragraphs[String(n)] ?? []).push(at);
 		}
 	}
 

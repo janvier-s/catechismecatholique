@@ -24,17 +24,39 @@ test('Liturgie sub-tab lists the days a paragraph is meditated on', async ({ pag
 	const panel = await openPanel(page, 668);
 	await page.getByRole('tab', { name: 'Liturgie' }).click();
 
-	// The same Sunday recurs in années A, B and C, so match the first card.
-	await expect(panel.getByText('Premier Dimanche de l’Avent').first()).toBeVisible();
-	await expect(panel.getByText("Temps de l'Avent · Année A")).toBeVisible();
-	// The cluster theme, and the whole cluster as sibling chips.
+	// The Sunday recurs in all three années: one card, the années listed.
+	const day = panel.getByRole('link', { name: 'Premier Dimanche de l’Avent' });
+	await expect(day).toHaveCount(1);
+	await expect(day).toHaveAttribute('href', '/calendrier-liturgique/a/premier-dimanche-de-lavent');
+	await expect(panel.getByText("Temps de l'Avent · Années A, B, C")).toBeVisible();
+
+	// The day's whole programme, not only the themes citing this paragraph.
 	await expect(
-		panel.getByText('l’épreuve finale et la venue du Christ dans la gloire').first()
+		panel.getByText('L’épreuve finale et la venue du Christ dans la gloire')
 	).toBeVisible();
+	await expect(panel.getByText('“Viens, Seigneur Jésus!”').first()).toBeVisible();
+	await expect(panel.getByText('La vigilance humble du cœur').first()).toBeVisible();
+
+	// The cluster folds back into its source notation, broken around the
+	// paragraph in view.
+	await expect(panel.getByRole('button', { name: '669-677', exact: true }).first()).toBeVisible();
 	await expect(panel.getByRole('button', { name: '769', exact: true }).first()).toBeVisible();
+
 	// The day's Mass readings, not the paragraph, are what is proclaimed.
 	await expect(panel.getByText('Lectures de la messe').first()).toBeVisible();
+	await expect(panel.getByText('Deuxième lecture').first()).toBeVisible();
 	await expect(panel.getByRole('link', { name: 'Mt 24, 37-44' }).first()).toBeVisible();
+});
+
+test('switching année swaps the day’s themes and readings', async ({ page }) => {
+	const panel = await openPanel(page, 668);
+	await page.getByRole('tab', { name: 'Liturgie' }).click();
+
+	// Année A's gospel, then année B's, on the same card.
+	await expect(panel.getByRole('link', { name: 'Mt 24, 37-44' })).toBeVisible();
+	await panel.getByRole('button', { name: 'Année B' }).first().click();
+	await expect(panel.getByRole('link', { name: 'Mc 13, 33-37' })).toBeVisible();
+	await expect(panel.getByRole('link', { name: 'Mt 24, 37-44' })).toHaveCount(0);
 });
 
 test('reading text is fetched only when a day is expanded', async ({ page }) => {
