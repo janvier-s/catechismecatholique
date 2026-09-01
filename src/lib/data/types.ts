@@ -819,6 +819,49 @@ export interface CalendrierIndexFile {
 }
 
 /**
+ * Mirrors `CecLiturgyOccasion` in scripts/prepare/cecLiturgyIndex.ts - keep in
+ * sync. One reason a CEC paragraph is read on one day: the feast, plus the
+ * cluster theme the Homiletic Directory files it under.
+ */
+export interface CecLiturgyOccasion {
+	slug: string;
+	title: string;
+	season: CalendrierSeason;
+	color: LiturgicalColor;
+	/** Present for a Sunday/feast of the three-year cycle, absent for fixed feasts and the propre. */
+	cycle?: CalendrierYearKey;
+	/** Fixed feasts only, e.g. "2 Février". */
+	date?: string;
+	/** Fixed feasts only, for ordering by calendar month. */
+	monthIndex?: number;
+	theme: string;
+	/** The whole cluster, current paragraph included, in source order. */
+	paragraphs: number[];
+	/** Absent when no AELF reading was ever fetched for this day. */
+	readingsKey?: string;
+	/**
+	 * Scripture references only. The full text lives in the reading file and is
+	 * fetched lazily by `readingsKey` when a card is expanded.
+	 */
+	readings?: CecLiturgyReadingRef[];
+}
+
+export interface CecLiturgyReadingRef {
+	type: string;
+	ref: string;
+}
+
+/**
+ * One shard of the CEC-to-liturgy reverse index, sharded by paragraph hundred.
+ * Occasions live in one table and paragraphs point at them by index, so a
+ * cluster shared by 20 paragraphs is stored once rather than 20 times.
+ */
+export interface CecLiturgyBucket {
+	occasions: CecLiturgyOccasion[];
+	paragraphs: Record<string, number[]>;
+}
+
+/**
  * Mirrors `CalendrierReading` in scripts/prepare/calendrier.ts - keep in sync.
  * `type` is wider than the 4-reading Sunday pattern: the Easter Vigil,
  * Pentecost's vigil, and Palm Sunday's procession all carry other types.

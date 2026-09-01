@@ -6,6 +6,7 @@ export type PanelTab =
 	| 'cited-by'
 	| 'sources'
 	| 'themes'
+	| 'liturgie'
 	| 'en-bref'
 	| 'audio'
 	| 'bible-verse'

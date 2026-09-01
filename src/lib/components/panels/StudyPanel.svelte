@@ -20,7 +20,8 @@
 		loadCompendiumCitedBy,
 		loadParagraphThemes,
 		loadCdseCitedByCcc,
-		loadEnBrefsIndex
+		loadEnBrefsIndex,
+		loadCecLiturgy
 	} from '$lib/data/loaders';
 	import type { Paragraph } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
@@ -43,6 +44,7 @@
 	import TabTrentNotes from './TabTrentNotes.svelte';
 	import TabDenzingerRefs from './TabDenzingerRefs.svelte';
 	import TabThemes from './TabThemes.svelte';
+	import TabLiturgie from './TabLiturgie.svelte';
 	import TabStrip from './TabStrip.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
@@ -74,6 +76,7 @@
 	let compendiumCiters: number[] = $state([]);
 	let cdseCiters: number[] = $state([]);
 	let hasThemes: boolean = $state(false);
+	let hasLiturgie: boolean = $state(false);
 	let hasAudio: boolean = $state(false);
 	let dataReady: boolean = $state(false);
 
@@ -96,6 +99,7 @@
 			compendiumCiters = [];
 			cdseCiters = [];
 			hasThemes = false;
+			hasLiturgie = false;
 			hasAudio = false;
 			dataReady = false;
 			return;
@@ -108,6 +112,7 @@
 			compendiumCiters = [];
 			cdseCiters = [];
 			hasThemes = false;
+			hasLiturgie = false;
 			hasAudio = false;
 			dataReady = true;
 			return;
@@ -115,23 +120,24 @@
 		const paragraphNum = ctx.paragraph;
 		dataReady = false;
 		(async () => {
-			const [p, citedBy, compendiumCB, themesMap, cdseCB, audioIdx, enBrefsIdx] = await Promise.all(
-				[
+			const [p, citedBy, compendiumCB, themesMap, cdseCB, audioIdx, enBrefsIdx, liturgy] =
+				await Promise.all([
 					loadParagraph(paragraphNum),
 					loadCitedBy(),
 					loadCompendiumCitedBy(),
 					loadParagraphThemes(),
 					loadCdseCitedByCcc(),
 					loadAudioIndex(),
-					loadEnBrefsIndex()
-				]
-			);
+					loadEnBrefsIndex(),
+					loadCecLiturgy(paragraphNum)
+				]);
 			hasAudio = !!audioIdx && audioIdx.paragraphs[String(paragraphNum)] !== undefined;
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];
 			compendiumCiters = compendiumCB[paragraphNum] ?? [];
 			cdseCiters = cdseCB[String(paragraphNum)] ?? [];
 			hasThemes = (themesMap[String(paragraphNum)]?.length ?? 0) > 0;
+			hasLiturgie = liturgy.length > 0;
 			// Every paragraph gets an en_bref tab as long as a summary exists
 			// at or after it: TabEnBref shows the "following" en_bref.
 			hasEnBref = enBrefsIdx.some((b) => b.last >= paragraphNum);
@@ -194,6 +200,7 @@
 		const hasCompendium = optimistic || compendiumCiters.length > 0;
 		const hasCdseCiters = optimistic || cdseCiters.length > 0;
 		const hasThemesG = optimistic || hasThemes;
+		const hasLiturgieG = optimistic || hasLiturgie;
 		const hasEnBrefG = optimistic || hasEnBref;
 		const hasAudioG = optimistic || hasAudio;
 
@@ -207,6 +214,7 @@
 		if (hasCrossRefs) ren.push({ id: 'cross-refs', label: 'Renvois' });
 		if (hasCitedBy) ren.push({ id: 'cited-by', label: 'Cité dans' });
 		if (hasThemesG) ren.push({ id: 'themes', label: 'Thèmes' });
+		if (hasLiturgieG) ren.push({ id: 'liturgie', label: 'Liturgie' });
 		if (hasSources) ren.push({ id: 'sources', label: 'Sources' });
 		if (hasCdseCiters) ren.push({ id: 'cdse-citers', label: 'Doctrine sociale' });
 		if (ren.length > 0) groups.push({ id: 'g-renvois', label: 'Renvois', children: ren });
@@ -484,6 +492,8 @@
 							{/if}
 						{:else if $studyPanel.activeTab === 'sources'}
 							<TabSources />
+						{:else if $studyPanel.activeTab === 'liturgie' && $studyPanel.context?.kind === 'paragraph'}
+							<TabLiturgie />
 						{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
 							<TabThemes />
 						{:else if $studyPanel.activeTab === 'bible-verse'}

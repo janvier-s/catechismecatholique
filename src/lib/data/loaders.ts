@@ -26,6 +26,8 @@ import type {
 	CalendrierYearFile,
 	CalendrierYearKey,
 	CalendrierDatesIndexFile,
+	CecLiturgyBucket,
+	CecLiturgyOccasion,
 	CalendrierProperFile,
 	CalendrierReadingsEntry,
 	CatIllustreStructure,
@@ -737,6 +739,38 @@ export function loadCalendrierReading(
 		calendrierReadingCache.set(key, p);
 	}
 	return p;
+}
+
+const cecLiturgyCache = new Map<number, Promise<CecLiturgyBucket>>();
+
+/**
+ * The liturgical occasions on which one CEC paragraph is read, resolved from
+ * the shard covering its hundred. Returns [] for a paragraph the Homiletic
+ * Directory never cites (roughly half of them), which is ordinary data, not a
+ * failure. A missing shard file means no paragraph in that hundred is cited.
+ */
+export async function loadCecLiturgy(
+	paragraph: number,
+	fetcher: Fetch = fetch
+): Promise<CecLiturgyOccasion[]> {
+	const bucket = Math.floor(paragraph / 100);
+	let p = cecLiturgyCache.get(bucket);
+	if (!p) {
+		p = (async () => {
+			const res = await fetcher(`/data/calendrier/cec/${bucket}.json`);
+			if (res.status === 404) return { occasions: [], paragraphs: {} };
+			if (!res.ok) {
+				throw new Error(`calendrier: failed to load CEC liturgy shard ${bucket}: ${res.status}`);
+			}
+			return (await res.json()) as CecLiturgyBucket;
+		})().catch((e) => {
+			cecLiturgyCache.delete(bucket);
+			throw e;
+		});
+		cecLiturgyCache.set(bucket, p);
+	}
+	const shard = await p;
+	return (shard.paragraphs[String(paragraph)] ?? []).map((i) => shard.occasions[i]!);
 }
 
 let calendrierDatesIndexPromise: Promise<CalendrierDatesIndexFile> | null = null;

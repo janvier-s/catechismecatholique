@@ -11,6 +11,7 @@ import { buildWeekdayTargets } from './weekdayFeasts.ts';
 import { buildWeekdayFeast, buildProperFeast } from './weekdayReadings.ts';
 import { PROPER_DAYS } from './calendrierProperDays.ts';
 import { buildHeadingLevels, type CecStructureFile } from './cecHeadingCluster.ts';
+import { buildCecLiturgyIndex, type CecLiturgySource } from './cecLiturgyIndex.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -549,6 +550,41 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		join(outDir, 'proper.json'),
 		JSON.stringify({ feasts: properFeasts }, null, '\t') + '\n'
 	);
+
+	// Reverse index for the study panel's Liturgie tab: CEC paragraph to the
+	// days it is read on. Sundays, solemnities and fixed feasts only · the
+	// ferial cycles would roughly quadruple it while burying the days a reader
+	// recognises. Source order here (années a/b/c, then the propre, then fixed
+	// feasts) is the order the panel renders in.
+	const liturgySources: CecLiturgySource[] = [];
+	const refsFor = (key: string) =>
+		readings[key]?.lectures.filter((l) => l.ref).map((l) => ({ type: l.type, ref: l.ref }));
+	for (const yf of yearFiles) {
+		for (const feast of yf.feasts) {
+			const key = readingsKey(feast.slug, yf.key);
+			liturgySources.push({
+				feast,
+				cycle: yf.key,
+				readingsKey: readings[key] ? key : undefined,
+				readings: refsFor(key)
+			});
+		}
+	}
+	for (const feast of [...properFeasts, ...fixed]) {
+		const key = readingsKey(feast.slug);
+		liturgySources.push({
+			feast,
+			readingsKey: readings[key] ? key : undefined,
+			readings: refsFor(key)
+		});
+	}
+
+	const liturgyDir = join(outDir, 'cec');
+	mkdirSync(liturgyDir, { recursive: true });
+	const liturgyIndex = buildCecLiturgyIndex(liturgySources);
+	for (const [bucket, entries] of liturgyIndex) {
+		writeFileSync(join(liturgyDir, `${bucket}.json`), JSON.stringify(entries));
+	}
 
 	const readingsDir = join(outDir, 'readings');
 	mkdirSync(readingsDir, { recursive: true });
