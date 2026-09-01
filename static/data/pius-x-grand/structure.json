@@ -31,7 +31,7 @@
       "ordinal": 1,
       "chapters": [
         {
-          "slug": "1-credo-en",
+          "slug": "1-credo",
           "title": "Le Credo en général",
           "ordinal": 1,
           "qa_range": [
@@ -321,7 +321,7 @@
       "ordinal": 2,
       "chapters": [
         {
-          "slug": "1-priere-en",
+          "slug": "1-priere",
           "title": "La prière en général.",
           "ordinal": 1,
           "qa_range": [
@@ -424,7 +424,7 @@
           ]
         },
         {
-          "slug": "4-linvocation-des",
+          "slug": "4-linvocation",
           "title": "L’invocation des Saints.",
           "ordinal": 4,
           "qa_range": [
@@ -552,7 +552,7 @@
           ]
         },
         {
-          "slug": "4-preceptes-de",
+          "slug": "4-preceptes",
           "title": "Les préceptes de l’Église",
           "ordinal": 4,
           "qa_range": [
@@ -637,7 +637,7 @@
       "ordinal": 4,
       "chapters": [
         {
-          "slug": "1-sacrements-en",
+          "slug": "1-sacrements",
           "title": "Les sacrements en général.",
           "ordinal": 1,
           "qa_range": [
@@ -1063,7 +1063,7 @@
           ]
         },
         {
-          "slug": "4-oeuvres-de",
+          "slug": "4-oeuvres",
           "title": "Les œuvres de miséricorde.",
           "ordinal": 4,
           "qa_range": [
@@ -1081,7 +1081,7 @@
           ]
         },
         {
-          "slug": "5-peches-et-leurs",
+          "slug": "5-peches",
           "title": "Les péchés et leurs espèces principales.",
           "ordinal": 5,
           "qa_range": [
@@ -1099,7 +1099,7 @@
           ]
         },
         {
-          "slug": "6-vices-et-les",
+          "slug": "6-vices",
           "title": "Les vices et les autres péchés très graves.",
           "ordinal": 6,
           "qa_range": [

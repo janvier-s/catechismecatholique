@@ -48,7 +48,7 @@
           ]
         },
         {
-          "slug": "4-lincarnation-la",
+          "slug": "4-lincarnation",
           "title": "L’Incarnation, la Passion et la Mort du Fils de Dieu",
           "ordinal": 4,
           "qa_range": [
@@ -84,7 +84,7 @@
           ]
         },
         {
-          "slug": "8-resurrection-de-la",
+          "slug": "8-resurrection",
           "title": "La résurrection de la chair — La vie éternelle — Amen",
           "ordinal": 8,
           "qa_range": [
@@ -104,7 +104,7 @@
       ],
       "chapters": [
         {
-          "slug": "1-commandements-de",
+          "slug": "1-commandements",
           "title": "Les commandements de Dieu",
           "ordinal": 1,
           "qa_range": [
@@ -217,7 +217,7 @@
           "title": "Les sacrements",
           "chapters": [
             {
-              "slug": "1-sacrements-en",
+              "slug": "1-sacrements",
               "title": "Les sacrements en général",
               "ordinal": 1,
               "qa_range": [

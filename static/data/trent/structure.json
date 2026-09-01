@@ -32,7 +32,7 @@
               ]
             },
             {
-              "slug": "3-autorite-des",
+              "slug": "3-autorite",
               "title": "Autorité des pasteurs",
               "ordinal": 3,
               "paragraph_range": [
@@ -41,7 +41,7 @@
               ]
             },
             {
-              "slug": "4-fonctions-et",
+              "slug": "4-fonctions",
               "title": "Fonctions et devoirs des pasteurs",
               "ordinal": 4,
               "paragraph_range": [
@@ -159,7 +159,7 @@
               ]
             },
             {
-              "slug": "6-createur-du",
+              "slug": "6-createur",
               "title": "Createur du ciel et de la terre",
               "ordinal": 6,
               "paragraph_range": [
@@ -262,7 +262,7 @@
               ]
             },
             {
-              "slug": "3-qui-est-ne-de",
+              "slug": "3-qui",
               "title": "Qui est né de la Vierge Marie",
               "ordinal": 3,
               "paragraph_range": [
@@ -309,7 +309,7 @@
               ]
             },
             {
-              "slug": "4-causes-de-la",
+              "slug": "4-causes",
               "title": "Causes de la mort de Jésus-Christ",
               "ordinal": 4,
               "paragraph_range": [
@@ -318,7 +318,7 @@
               ]
             },
             {
-              "slug": "5-douleurs-de",
+              "slug": "5-douleurs",
               "title": "Douleurs de Jésus-Christ dans son corps et dans son ame",
               "ordinal": 5,
               "paragraph_range": [
@@ -327,7 +327,7 @@
               ]
             },
             {
-              "slug": "6-fruits-de-la",
+              "slug": "6-fruits",
               "title": "Fruits de la mort de Jésus-Christ",
               "ordinal": 6,
               "paragraph_range": [
@@ -365,7 +365,7 @@
               ]
             },
             {
-              "slug": "3-il-est",
+              "slug": "3-il",
               "title": "Il est ressuscité des morts",
               "ordinal": 3,
               "paragraph_range": [
@@ -383,7 +383,7 @@
               ]
             },
             {
-              "slug": "5-causes-fin-et",
+              "slug": "5-causes-fin",
               "title": "Causes, fin et fruits de la résurrection",
               "ordinal": 5,
               "paragraph_range": [
@@ -412,7 +412,7 @@
               ]
             },
             {
-              "slug": "2-il-est-monte-au",
+              "slug": "2-il-est-monte",
               "title": "Il est monté au ciel",
               "ordinal": 2,
               "paragraph_range": [
@@ -430,7 +430,7 @@
               ]
             },
             {
-              "slug": "4-causes-et",
+              "slug": "4-causes",
               "title": "Causes et raisons de l’ascension de notre-Seigneur",
               "ordinal": 4,
               "paragraph_range": [
@@ -459,7 +459,7 @@
               ]
             },
             {
-              "slug": "2-certitude-du",
+              "slug": "2-certitude",
               "title": "Certitude du jugement",
               "ordinal": 2,
               "paragraph_range": [
@@ -477,7 +477,7 @@
               ]
             },
             {
-              "slug": "4-raisons-du",
+              "slug": "4-raisons",
               "title": "Raisons du jugement général",
               "ordinal": 4,
               "paragraph_range": [
@@ -486,7 +486,7 @@
               ]
             },
             {
-              "slug": "5-pourquoi-le",
+              "slug": "5-pourquoi",
               "title": "Pourquoi le jugement donné a Jésus-Christ",
               "ordinal": 5,
               "paragraph_range": [
@@ -504,7 +504,7 @@
               ]
             },
             {
-              "slug": "7-sentence-des",
+              "slug": "7-sentence",
               "title": "La sentence des bons et celle des méchants",
               "ordinal": 7,
               "paragraph_range": [
@@ -524,7 +524,7 @@
           ],
           "sections": [
             {
-              "slug": "1-necessite-de-la",
+              "slug": "1-necessite",
               "title": "Nécessité de la foi au Saint-Esprit",
               "ordinal": 1,
               "paragraph_range": [
@@ -533,7 +533,7 @@
               ]
             },
             {
-              "slug": "2-ce-que-cest-que",
+              "slug": "2-ce-que-cest",
               "title": "Ce que c’est que le Saint-Esprit",
               "ordinal": 2,
               "paragraph_range": [
@@ -542,7 +542,7 @@
               ]
             },
             {
-              "slug": "3-choses-qui-sont",
+              "slug": "3-choses",
               "title": "Des choses qui sont spécialement attribuées au Saint-Esprit",
               "ordinal": 3,
               "paragraph_range": [
@@ -571,7 +571,7 @@
               ]
             },
             {
-              "slug": "2-ce-que-cest-que",
+              "slug": "2-ce-que-cest",
               "title": "Ce que c’est que l’Église",
               "ordinal": 2,
               "paragraph_range": [
@@ -580,7 +580,7 @@
               ]
             },
             {
-              "slug": "3-deux-parties-de",
+              "slug": "3-deux-parties",
               "title": "Deux parties de l’Église, l’une triomphante, l’autre militante",
               "ordinal": 3,
               "paragraph_range": [
@@ -607,7 +607,7 @@
               ]
             },
             {
-              "slug": "6-saintete-de",
+              "slug": "6-saintete",
               "title": "Sainteté de l’Église",
               "ordinal": 6,
               "paragraph_range": [
@@ -616,7 +616,7 @@
               ]
             },
             {
-              "slug": "7-leglise-est",
+              "slug": "7-leglise",
               "title": "L’Église est catholique",
               "ordinal": 7,
               "paragraph_range": [
@@ -625,7 +625,7 @@
               ]
             },
             {
-              "slug": "8-leglise-est",
+              "slug": "8-leglise",
               "title": "L’Église est apostolique",
               "ordinal": 8,
               "paragraph_range": [
@@ -634,7 +634,7 @@
               ]
             },
             {
-              "slug": "9-figures-de",
+              "slug": "9-figures",
               "title": "Figures de l’Église dans l’ancien testament",
               "ordinal": 9,
               "paragraph_range": [
@@ -643,7 +643,7 @@
               ]
             },
             {
-              "slug": "10-comment-la",
+              "slug": "10-comment",
               "title": "Comment la vérité de l’Église est un article de foi",
               "ordinal": 10,
               "paragraph_range": [
@@ -652,7 +652,7 @@
               ]
             },
             {
-              "slug": "11-communion-des",
+              "slug": "11-communion",
               "title": "La communion des saints",
               "ordinal": 11,
               "paragraph_range": [
@@ -681,7 +681,7 @@
               ]
             },
             {
-              "slug": "2-il-y-a-dans",
+              "slug": "2-il-y-a",
               "title": "Il y a dans l’Église un pouvoir de remettre les péchés",
               "ordinal": 2,
               "paragraph_range": [
@@ -690,7 +690,7 @@
               ]
             },
             {
-              "slug": "3-qui-a-ete",
+              "slug": "3-qui-a",
               "title": "A qui a été confié, dans l’Église, le pouvoir de remettre les péchés",
               "ordinal": 3,
               "paragraph_range": [
@@ -699,7 +699,7 @@
               ]
             },
             {
-              "slug": "4-pouvoir-de",
+              "slug": "4-pouvoir",
               "title": "Le pouvoir de remettre les péchés est un grand bienfait",
               "ordinal": 4,
               "paragraph_range": [
@@ -708,7 +708,7 @@
               ]
             },
             {
-              "slug": "5-comment-les",
+              "slug": "5-comment",
               "title": "Comment les fidèles doivent faire usage de la rémission des péchés",
               "ordinal": 5,
               "paragraph_range": [
@@ -728,7 +728,7 @@
           ],
           "sections": [
             {
-              "slug": "1-preuve-de-la",
+              "slug": "1-preuve",
               "title": "Preuve de la résurrection",
               "ordinal": 1,
               "paragraph_range": [
@@ -746,7 +746,7 @@
               ]
             },
             {
-              "slug": "3-qualites-des",
+              "slug": "3-qualites",
               "title": "Qualités des corps ressuscités",
               "ordinal": 3,
               "paragraph_range": [
@@ -767,7 +767,7 @@
         },
         {
           "number": 13,
-          "slug": "13-douzieme-et",
+          "slug": "13-douzieme",
           "title": "Du douzième et dernier article du Symbole : Je crois la Vie Eternelle",
           "paragraph_range": [
             349,
@@ -784,7 +784,7 @@
               ]
             },
             {
-              "slug": "2-quest-ce-que-la",
+              "slug": "2-quest",
               "title": "Qu’est-ce que la vie éternelle ?",
               "ordinal": 2,
               "paragraph_range": [
@@ -793,7 +793,7 @@
               ]
             },
             {
-              "slug": "3-nature-du",
+              "slug": "3-nature",
               "title": "Nature du bonheur éternel",
               "ordinal": 3,
               "paragraph_range": [
@@ -828,7 +828,7 @@
               ]
             },
             {
-              "slug": "2-explication-du",
+              "slug": "2-explication",
               "title": "Explication du mot sacrement",
               "ordinal": 2,
               "paragraph_range": [
@@ -837,7 +837,7 @@
               ]
             },
             {
-              "slug": "3-definition-du",
+              "slug": "3-definition",
               "title": "Définition du sacrement",
               "ordinal": 3,
               "paragraph_range": [
@@ -846,7 +846,7 @@
               ]
             },
             {
-              "slug": "4-ce-qui-est",
+              "slug": "4-ce",
               "title": "Ce qui est signifié par les sacrements",
               "ordinal": 4,
               "paragraph_range": [
@@ -855,7 +855,7 @@
               ]
             },
             {
-              "slug": "5-raisons-qui-ont",
+              "slug": "5-raisons",
               "title": "Des raisons qui ont fait instituer les sacrements",
               "ordinal": 5,
               "paragraph_range": [
@@ -864,7 +864,7 @@
               ]
             },
             {
-              "slug": "6-matiere-et",
+              "slug": "6-matiere",
               "title": "Matière et forme des sacrements",
               "ordinal": 6,
               "paragraph_range": [
@@ -882,7 +882,7 @@
               ]
             },
             {
-              "slug": "8-nombre-des",
+              "slug": "8-nombre",
               "title": "Du nombre des sacrements",
               "ordinal": 8,
               "paragraph_range": [
@@ -891,7 +891,7 @@
               ]
             },
             {
-              "slug": "9-lauteur-et-du",
+              "slug": "9-lauteur",
               "title": "De l’auteur et du ministre des sacrements",
               "ordinal": 9,
               "paragraph_range": [
@@ -900,7 +900,7 @@
               ]
             },
             {
-              "slug": "10-effets-des",
+              "slug": "10-effets",
               "title": "Effets des sacrements",
               "ordinal": 10,
               "paragraph_range": [
@@ -938,7 +938,7 @@
               ]
             },
             {
-              "slug": "2-ce-que-cest-que",
+              "slug": "2-ce-que-cest",
               "title": "Ce que c’est que le baptême pour le nom et pour la chose",
               "ordinal": 2,
               "paragraph_range": [
@@ -947,7 +947,7 @@
               ]
             },
             {
-              "slug": "3-linstitution-du",
+              "slug": "3-linstitution",
               "title": "De l’institution du baptême",
               "ordinal": 3,
               "paragraph_range": [
@@ -956,7 +956,7 @@
               ]
             },
             {
-              "slug": "4-ministres-du",
+              "slug": "4-ministres",
               "title": "Des ministres du baptême",
               "ordinal": 4,
               "paragraph_range": [
@@ -965,7 +965,7 @@
               ]
             },
             {
-              "slug": "5-parrains-et",
+              "slug": "5-parrains",
               "title": "Des parrains et marraines",
               "ordinal": 5,
               "paragraph_range": [
@@ -985,7 +985,7 @@
           ],
           "sections": [
             {
-              "slug": "1-necessite-du",
+              "slug": "1-necessite",
               "title": "Nécessité du baptême",
               "ordinal": 1,
               "paragraph_range": [
@@ -1003,7 +1003,7 @@
               ]
             },
             {
-              "slug": "3-effets-du",
+              "slug": "3-effets",
               "title": "Des effets du baptême",
               "ordinal": 3,
               "paragraph_range": [
@@ -1012,7 +1012,7 @@
               ]
             },
             {
-              "slug": "4-prieres-et-des",
+              "slug": "4-prieres",
               "title": "Des prières et des cérémonies du baptême",
               "ordinal": 4,
               "paragraph_range": [
@@ -1041,7 +1041,7 @@
               ]
             },
             {
-              "slug": "2-matiere-et",
+              "slug": "2-matiere",
               "title": "Matière et forme de la confirmation",
               "ordinal": 2,
               "paragraph_range": [
@@ -1050,7 +1050,7 @@
               ]
             },
             {
-              "slug": "3-ministres-de-la",
+              "slug": "3-ministres",
               "title": "Des ministres de la confirmation",
               "ordinal": 3,
               "paragraph_range": [
@@ -1059,7 +1059,7 @@
               ]
             },
             {
-              "slug": "4-necessite-de-la",
+              "slug": "4-necessite",
               "title": "Nécessité de la confirmation",
               "ordinal": 4,
               "paragraph_range": [
@@ -1068,7 +1068,7 @@
               ]
             },
             {
-              "slug": "5-effets-du",
+              "slug": "5-effets",
               "title": "Des effets du sacrement de confirmation",
               "ordinal": 5,
               "paragraph_range": [
@@ -1077,7 +1077,7 @@
               ]
             },
             {
-              "slug": "6-ceremonies-du",
+              "slug": "6-ceremonies",
               "title": "Des cérémonies du sacrement de confirmation",
               "ordinal": 6,
               "paragraph_range": [
@@ -1106,7 +1106,7 @@
               ]
             },
             {
-              "slug": "2-institution-de",
+              "slug": "2-institution",
               "title": "Institution de l’Eucharistie ses différents noms",
               "ordinal": 2,
               "paragraph_range": [
@@ -1124,7 +1124,7 @@
               ]
             },
             {
-              "slug": "4-forme-de",
+              "slug": "4-forme",
               "title": "Forme de l’Eucharistie",
               "ordinal": 4,
               "paragraph_range": [
@@ -1180,7 +1180,7 @@
               ]
             },
             {
-              "slug": "5-accidents-du",
+              "slug": "5-accidents",
               "title": "Des accidents du pain et du vin",
               "ordinal": 5,
               "paragraph_range": [
@@ -1200,7 +1200,7 @@
           ],
           "sections": [
             {
-              "slug": "1-vertu-et-des",
+              "slug": "1-vertu",
               "title": "De la vertu et des fruits de l’Eucharistie",
               "ordinal": 1,
               "paragraph_range": [
@@ -1227,7 +1227,7 @@
               ]
             },
             {
-              "slug": "4-lobligation-de",
+              "slug": "4-lobligation",
               "title": "De l’obligation de communier",
               "ordinal": 4,
               "paragraph_range": [
@@ -1236,7 +1236,7 @@
               ]
             },
             {
-              "slug": "5-communion-sous",
+              "slug": "5-communion",
               "title": "Communion sous les deux espéces",
               "ordinal": 5,
               "paragraph_range": [
@@ -1245,7 +1245,7 @@
               ]
             },
             {
-              "slug": "6-ministre-du",
+              "slug": "6-ministre",
               "title": "Ministre du sacrement de l’Eucharistie",
               "ordinal": 6,
               "paragraph_range": [
@@ -1263,7 +1263,7 @@
               ]
             },
             {
-              "slug": "8-sacrifice-de-la",
+              "slug": "8-sacrifice",
               "title": "Le sacrifice de la messe est le même que celui de la croix",
               "ordinal": 8,
               "paragraph_range": [
@@ -1272,7 +1272,7 @@
               ]
             },
             {
-              "slug": "9-ceremonies-de",
+              "slug": "9-ceremonies",
               "title": "Cérémonies de la messe",
               "ordinal": 9,
               "paragraph_range": [
@@ -1301,7 +1301,7 @@
               ]
             },
             {
-              "slug": "2-nom-et-de-la",
+              "slug": "2-nom",
               "title": "Du nom et de la vertu de pénitence",
               "ordinal": 2,
               "paragraph_range": [
@@ -1319,7 +1319,7 @@
               ]
             },
             {
-              "slug": "4-matiere-et",
+              "slug": "4-matiere",
               "title": "Matière et forme du sacrement de pénitence",
               "ordinal": 4,
               "paragraph_range": [
@@ -1328,7 +1328,7 @@
               ]
             },
             {
-              "slug": "5-effets-du",
+              "slug": "5-effets",
               "title": "Des effets du sacrement de pénitence",
               "ordinal": 5,
               "paragraph_range": [
@@ -1348,7 +1348,7 @@
           ],
           "sections": [
             {
-              "slug": "1-quest-ce-que-la",
+              "slug": "1-quest",
               "title": "Qu’est-ce que la contrition",
               "ordinal": 1,
               "paragraph_range": [
@@ -1357,7 +1357,7 @@
               ]
             },
             {
-              "slug": "2-qualites-de-la",
+              "slug": "2-qualites",
               "title": "Qualités de la contrition",
               "ordinal": 2,
               "paragraph_range": [
@@ -1366,7 +1366,7 @@
               ]
             },
             {
-              "slug": "3-effets-de-la",
+              "slug": "3-effets",
               "title": "Des effets de la contrition et des moyens de l’exciter",
               "ordinal": 3,
               "paragraph_range": [
@@ -1395,7 +1395,7 @@
               ]
             },
             {
-              "slug": "2-utilite-et",
+              "slug": "2-utilite",
               "title": "Utilité et nécessité de la confession",
               "ordinal": 2,
               "paragraph_range": [
@@ -1413,7 +1413,7 @@
               ]
             },
             {
-              "slug": "4-lobligation-de",
+              "slug": "4-lobligation",
               "title": "De l’obligation de se confesser",
               "ordinal": 4,
               "paragraph_range": [
@@ -1422,7 +1422,7 @@
               ]
             },
             {
-              "slug": "5-qualites-de-la",
+              "slug": "5-qualites",
               "title": "Des qualités de la confession",
               "ordinal": 5,
               "paragraph_range": [
@@ -1431,7 +1431,7 @@
               ]
             },
             {
-              "slug": "6-ministre-du",
+              "slug": "6-ministre",
               "title": "Du ministre du sacrement de pénitence",
               "ordinal": 6,
               "paragraph_range": [
@@ -1460,7 +1460,7 @@
               ]
             },
             {
-              "slug": "2-quest-ce-que-la",
+              "slug": "2-quest",
               "title": "Qu’est-ce que la satisfaction",
               "ordinal": 2,
               "paragraph_range": [
@@ -1469,7 +1469,7 @@
               ]
             },
             {
-              "slug": "3-necessite-de-la",
+              "slug": "3-necessite",
               "title": "Nécessité de la satisfaction",
               "ordinal": 3,
               "paragraph_range": [
@@ -1478,7 +1478,7 @@
               ]
             },
             {
-              "slug": "4-effets-et",
+              "slug": "4-effets",
               "title": "Effets et avantages de la satisfaction",
               "ordinal": 4,
               "paragraph_range": [
@@ -1543,7 +1543,7 @@
               ]
             },
             {
-              "slug": "5-quels-sont-les",
+              "slug": "5-quels",
               "title": "Quels sont les ministres de ce sacrement",
               "ordinal": 5,
               "paragraph_range": [
@@ -1552,7 +1552,7 @@
               ]
             },
             {
-              "slug": "6-effets-de",
+              "slug": "6-effets",
               "title": "Des effets de l’extrême-onction",
               "ordinal": 6,
               "paragraph_range": [
@@ -1599,7 +1599,7 @@
               ]
             },
             {
-              "slug": "4-lordre-est-un",
+              "slug": "4-lordre",
               "title": "L’ordre est un vrai sacrement",
               "ordinal": 4,
               "paragraph_range": [
@@ -1644,7 +1644,7 @@
               ]
             },
             {
-              "slug": "9-degres-et",
+              "slug": "9-degres",
               "title": "Degrés et fonctions du sacerdoce",
               "ordinal": 9,
               "paragraph_range": [
@@ -1662,7 +1662,7 @@
               ]
             },
             {
-              "slug": "11-effets-de",
+              "slug": "11-effets",
               "title": "Des effets de l’ordre",
               "ordinal": 11,
               "paragraph_range": [
@@ -1691,7 +1691,7 @@
               ]
             },
             {
-              "slug": "2-quest-ce-que-le",
+              "slug": "2-quest",
               "title": "Qu’est-ce que le mariage",
               "ordinal": 2,
               "paragraph_range": [
@@ -1709,7 +1709,7 @@
               ]
             },
             {
-              "slug": "4-motifs-et-des",
+              "slug": "4-motifs",
               "title": "Des motifs et des fins du mariage",
               "ordinal": 4,
               "paragraph_range": [
@@ -1718,7 +1718,7 @@
               ]
             },
             {
-              "slug": "5-sacrement-de",
+              "slug": "5-sacrement",
               "title": "Du sacrement de mariage",
               "ordinal": 5,
               "paragraph_range": [
@@ -1727,7 +1727,7 @@
               ]
             },
             {
-              "slug": "6-avantages-et",
+              "slug": "6-avantages",
               "title": "Des avantages et des biens du mariage",
               "ordinal": 6,
               "paragraph_range": [
@@ -1745,7 +1745,7 @@
               ]
             },
             {
-              "slug": "8-formalites-du",
+              "slug": "8-formalites",
               "title": "Des formalités du mariage",
               "ordinal": 8,
               "paragraph_range": [
@@ -1789,7 +1789,7 @@
               ]
             },
             {
-              "slug": "3-dieu-auteur-du",
+              "slug": "3-dieu-auteur",
               "title": "Dieu auteur du Décalogue",
               "ordinal": 3,
               "paragraph_range": [
@@ -1798,7 +1798,7 @@
               ]
             },
             {
-              "slug": "4-necessite-de",
+              "slug": "4-necessite",
               "title": "Nécessité de garder les commandements",
               "ordinal": 4,
               "paragraph_range": [
@@ -1807,7 +1807,7 @@
               ]
             },
             {
-              "slug": "5-avantage-de-la",
+              "slug": "5-avantage",
               "title": "Avantage de la loi de Dieu",
               "ordinal": 5,
               "paragraph_range": [
@@ -1816,7 +1816,7 @@
               ]
             },
             {
-              "slug": "6-recit-abrege-de",
+              "slug": "6-recit-abrege",
               "title": "Récit abrégé de l’histoire sacrée",
               "ordinal": 6,
               "paragraph_range": [
@@ -1845,7 +1845,7 @@
               ]
             },
             {
-              "slug": "2-recit-abrege-de",
+              "slug": "2-recit-abrege",
               "title": "Récit abrégé de l’histoire sacrée",
               "ordinal": 2,
               "paragraph_range": [
@@ -1854,7 +1854,7 @@
               ]
             },
             {
-              "slug": "3-application-de",
+              "slug": "3-application",
               "title": "Application de cette histoire aux chrétiens",
               "ordinal": 3,
               "paragraph_range": [
@@ -1863,7 +1863,7 @@
               ]
             },
             {
-              "slug": "4-objet-du",
+              "slug": "4-objet",
               "title": "Objet du premier commandement",
               "ordinal": 4,
               "paragraph_range": [
@@ -1872,7 +1872,7 @@
               ]
             },
             {
-              "slug": "5-culte-et-de",
+              "slug": "5-culte",
               "title": "Du culte et de l’invocation des anges et des saints",
               "ordinal": 5,
               "paragraph_range": [
@@ -1937,7 +1937,7 @@
               ]
             },
             {
-              "slug": "2-ce-qui-est",
+              "slug": "2-ce",
               "title": "Ce qui est ordonné par le second commandement",
               "ordinal": 2,
               "paragraph_range": [
@@ -1964,7 +1964,7 @@
               ]
             },
             {
-              "slug": "5-ce-qui-est",
+              "slug": "5-ce",
               "title": "Ce qui est défendu par le second commandement",
               "ordinal": 5,
               "paragraph_range": [
@@ -1973,7 +1973,7 @@
               ]
             },
             {
-              "slug": "6-chatiments-de",
+              "slug": "6-chatiments",
               "title": "Chatiments de ceux qui violent le second commandement",
               "ordinal": 6,
               "paragraph_range": [
@@ -2002,7 +2002,7 @@
               ]
             },
             {
-              "slug": "2-comparaison-du",
+              "slug": "2-comparaison",
               "title": "Comparaison du troisième commandement avec les autres",
               "ordinal": 2,
               "paragraph_range": [
@@ -2011,7 +2011,7 @@
               ]
             },
             {
-              "slug": "3-souvenez-vous",
+              "slug": "3-souvenez",
               "title": "Souvenez-vous de sanctifier le jour du sabbat",
               "ordinal": 3,
               "paragraph_range": [
@@ -2047,7 +2047,7 @@
               ]
             },
             {
-              "slug": "7-quelles-sont",
+              "slug": "7-quelles",
               "title": "Quelles sont les oeuvres commandées le dimanche ?",
               "ordinal": 7,
               "paragraph_range": [
@@ -2085,7 +2085,7 @@
               ]
             },
             {
-              "slug": "2-difference-des",
+              "slug": "2-difference",
               "title": "Différence des trois premiers commandements et des suivants",
               "ordinal": 2,
               "paragraph_range": [
@@ -2094,7 +2094,7 @@
               ]
             },
             {
-              "slug": "3-honorez-votre",
+              "slug": "3-honorez",
               "title": "Honorez votre père et votre mère",
               "ordinal": 3,
               "paragraph_range": [
@@ -2130,7 +2130,7 @@
               ]
             },
             {
-              "slug": "7-devoirs-des",
+              "slug": "7-devoirs",
               "title": "Devoirs des parents et des supérieurs envers leurs enfants et leurs inférieurs",
               "ordinal": 7,
               "paragraph_range": [
@@ -2159,7 +2159,7 @@
               ]
             },
             {
-              "slug": "2-quels-sont-les",
+              "slug": "2-quels",
               "title": "Quels sont les meurtres qui ne sont point ici défendus",
               "ordinal": 2,
               "paragraph_range": [
@@ -2195,7 +2195,7 @@
               ]
             },
             {
-              "slug": "6-ce-qui-est",
+              "slug": "6-ce",
               "title": "Ce qui est commandé par ce précepte",
               "ordinal": 6,
               "paragraph_range": [
@@ -2233,7 +2233,7 @@
               ]
             },
             {
-              "slug": "3-ce-qui-est",
+              "slug": "3-ce",
               "title": "Ce qui est commandé par le sixième commandement",
               "ordinal": 3,
               "paragraph_range": [
@@ -2242,7 +2242,7 @@
               ]
             },
             {
-              "slug": "4-remedes-contre",
+              "slug": "4-remedes",
               "title": "Remèdes contre les mauvaises pensées",
               "ordinal": 4,
               "paragraph_range": [
@@ -2280,7 +2280,7 @@
               ]
             },
             {
-              "slug": "2-quest-ce-que-le",
+              "slug": "2-quest",
               "title": "Qu’est-ce que le vol ?",
               "ordinal": 2,
               "paragraph_range": [
@@ -2289,7 +2289,7 @@
               ]
             },
             {
-              "slug": "3-vol-est-un",
+              "slug": "3-vol",
               "title": "Le vol est un grand péché",
               "ordinal": 3,
               "paragraph_range": [
@@ -2325,7 +2325,7 @@
               ]
             },
             {
-              "slug": "7-oeuvres-de",
+              "slug": "7-oeuvres",
               "title": "Des oeuvres de miséricorde",
               "ordinal": 7,
               "paragraph_range": [
@@ -2334,7 +2334,7 @@
               ]
             },
             {
-              "slug": "8-il-faut-se",
+              "slug": "8-il-faut",
               "title": "Il faut se mettre en état de faire l’aumône",
               "ordinal": 8,
               "paragraph_range": [
@@ -2343,7 +2343,7 @@
               ]
             },
             {
-              "slug": "9-chatiments-du",
+              "slug": "9-chatiments",
               "title": "Chatiments du vol: récompenses des oeuvres de miséricorde",
               "ordinal": 9,
               "paragraph_range": [
@@ -2352,7 +2352,7 @@
               ]
             },
             {
-              "slug": "10-excuses-des",
+              "slug": "10-excuses",
               "title": "Excuses des voleurs",
               "ordinal": 10,
               "paragraph_range": [
@@ -2390,7 +2390,7 @@
               ]
             },
             {
-              "slug": "3-medisance-et-de",
+              "slug": "3-medisance",
               "title": "De la médisance et de la calomnie",
               "ordinal": 3,
               "paragraph_range": [
@@ -2399,7 +2399,7 @@
               ]
             },
             {
-              "slug": "4-flatterie-le",
+              "slug": "4-flatterie",
               "title": "La flatterie, le mensonge et la dissimulation",
               "ordinal": 4,
               "paragraph_range": [
@@ -2408,7 +2408,7 @@
               ]
             },
             {
-              "slug": "5-quoi-nous",
+              "slug": "5-quoi",
               "title": "A quoi nous sommes obligés par ce commandement",
               "ordinal": 5,
               "paragraph_range": [
@@ -2417,7 +2417,7 @@
               ]
             },
             {
-              "slug": "6-motifs-de",
+              "slug": "6-motifs",
               "title": "Motifs de détester le mensonge",
               "ordinal": 6,
               "paragraph_range": [
@@ -2438,7 +2438,7 @@
         },
         {
           "number": 37,
-          "slug": "37-neuvieme-et",
+          "slug": "37-neuvieme",
           "title": "Des neuvième et dixième Commandements : Vous ne désirerez point la maison de votre prochain, et vous ne désirerez point sa femme, ni son serviteur, etc.",
           "paragraph_range": [
             1356,
@@ -2455,7 +2455,7 @@
               ]
             },
             {
-              "slug": "2-difference-et",
+              "slug": "2-difference",
               "title": "Différence et nécessité de ces deux commandements",
               "ordinal": 2,
               "paragraph_range": [
@@ -2464,7 +2464,7 @@
               ]
             },
             {
-              "slug": "3-quest-ce-que-la",
+              "slug": "3-quest",
               "title": "Qu’est-ce que la concupiscence",
               "ordinal": 3,
               "paragraph_range": [
@@ -2473,7 +2473,7 @@
               ]
             },
             {
-              "slug": "4-quelle-est-la",
+              "slug": "4-quelle",
               "title": "Quelle est la convoitise qui est ici défendue",
               "ordinal": 4,
               "paragraph_range": [
@@ -2544,7 +2544,7 @@
               ]
             },
             {
-              "slug": "2-necessite-de-la",
+              "slug": "2-necessite",
               "title": "De la nécessité de la prière",
               "ordinal": 2,
               "paragraph_range": [
@@ -2553,7 +2553,7 @@
               ]
             },
             {
-              "slug": "3-utilite-et",
+              "slug": "3-utilite",
               "title": "Utilité et fruits de la prière",
               "ordinal": 3,
               "paragraph_range": [
@@ -2589,7 +2589,7 @@
               ]
             },
             {
-              "slug": "7-qui-doit-on",
+              "slug": "7-qui-doit",
               "title": "A qui doit-on adresser des prières",
               "ordinal": 7,
               "paragraph_range": [
@@ -2607,7 +2607,7 @@
               ]
             },
             {
-              "slug": "9-maniere-de",
+              "slug": "9-maniere",
               "title": "Manière de prier: qualités de la prière",
               "ordinal": 9,
               "paragraph_range": [
@@ -2654,7 +2654,7 @@
               ]
             },
             {
-              "slug": "4-qui-etes-dans",
+              "slug": "4-qui-etes",
               "title": "Qui êtes dans les cieux",
               "ordinal": 4,
               "paragraph_range": [
@@ -2674,7 +2674,7 @@
           ],
           "sections": [
             {
-              "slug": "1-pourquoi-cette",
+              "slug": "1-pourquoi",
               "title": "Pourquoi cette demande est la première ?",
               "ordinal": 1,
               "paragraph_range": [
@@ -2683,7 +2683,7 @@
               ]
             },
             {
-              "slug": "2-quest-ce-que-la",
+              "slug": "2-quest",
               "title": "Qu’est-ce que la gloire de Dieu ?",
               "ordinal": 2,
               "paragraph_range": [
@@ -2692,7 +2692,7 @@
               ]
             },
             {
-              "slug": "3-objet-de-la",
+              "slug": "3-objet",
               "title": "Objet de la première demande",
               "ordinal": 3,
               "paragraph_range": [
@@ -2730,7 +2730,7 @@
               ]
             },
             {
-              "slug": "2-ce-qui-est",
+              "slug": "2-ce",
               "title": "Ce qui est compris dans cette demande",
               "ordinal": 2,
               "paragraph_range": [
@@ -2739,7 +2739,7 @@
               ]
             },
             {
-              "slug": "3-miseres-de",
+              "slug": "3-miseres",
               "title": "Des misères de cette vie",
               "ordinal": 3,
               "paragraph_range": [
@@ -2786,7 +2786,7 @@
               ]
             },
             {
-              "slug": "2-miseres-du",
+              "slug": "2-miseres",
               "title": "Misères du genre humain, leur cause",
               "ordinal": 2,
               "paragraph_range": [
@@ -2804,7 +2804,7 @@
               ]
             },
             {
-              "slug": "4-ce-que-cest-que",
+              "slug": "4-ce-que-cest",
               "title": "Ce que c’est que la volonté de Dieu",
               "ordinal": 4,
               "paragraph_range": [
@@ -2860,7 +2860,7 @@
               ]
             },
             {
-              "slug": "4-donnez-nous",
+              "slug": "4-donnez",
               "title": "Donnez-nous aujourd’hui",
               "ordinal": 4,
               "paragraph_range": [
@@ -2907,7 +2907,7 @@
               ]
             },
             {
-              "slug": "3-confiance-en",
+              "slug": "3-confiance",
               "title": "Confiance en Dieu",
               "ordinal": 3,
               "paragraph_range": [
@@ -2925,7 +2925,7 @@
               ]
             },
             {
-              "slug": "5-comme-nous",
+              "slug": "5-comme",
               "title": "Comme nous pardonnons a ceux qui nous ont offensés",
               "ordinal": 5,
               "paragraph_range": [
@@ -2934,7 +2934,7 @@
               ]
             },
             {
-              "slug": "6-motifs-et",
+              "slug": "6-motifs",
               "title": "Motifs et manières de pardonner au prochain",
               "ordinal": 6,
               "paragraph_range": [
@@ -2981,7 +2981,7 @@
               ]
             },
             {
-              "slug": "3-tentations-de",
+              "slug": "3-tentations",
               "title": "Des tentations ; de leurs causes",
               "ordinal": 3,
               "paragraph_range": [
@@ -3017,7 +3017,7 @@
               ]
             },
             {
-              "slug": "7-motifs-et",
+              "slug": "7-motifs",
               "title": "Motifs et moyens de résister au démon",
               "ordinal": 7,
               "paragraph_range": [
@@ -3055,7 +3055,7 @@
               ]
             },
             {
-              "slug": "3-quels-sont-les",
+              "slug": "3-quels",
               "title": "Quels sont les maux dont nous demandons ici d’être délivrés",
               "ordinal": 3,
               "paragraph_range": [
@@ -3073,7 +3073,7 @@
               ]
             },
             {
-              "slug": "5-conclusion-de",
+              "slug": "5-conclusion",
               "title": "Conclusion de l’oraison dominicale. amen. (ainsi soit-il !)",
               "ordinal": 5,
               "paragraph_range": [
