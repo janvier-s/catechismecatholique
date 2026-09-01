@@ -2,6 +2,7 @@
 	import { prefs, updatePref } from '$lib/stores/prefs';
 	import { FONTS, DYSLEXIA_FONT, getFontById } from '$lib/data/fonts';
 	import { page } from '$app/state';
+	import { corpusForPath, FEATURED } from '$lib/corpora';
 	import PillGroup from './PillGroup.svelte';
 
 	const isTrent = $derived(page.url.pathname.startsWith('/trente'));
@@ -9,6 +10,15 @@
 	const isPiusX = $derived(page.url.pathname.startsWith('/grand-catechisme'));
 	const isBibleOnly = $derived(page.url.pathname.startsWith('/bible'));
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
+
+	// Utility/navigation pages (home, Bibliothèque, glossaire, recherche…)
+	// don't match any registered corpus prefix · the Lecture tab would have
+	// nothing but Bionic reading to show there, so it's dropped entirely
+	// rather than kept around for one setting that doesn't apply.
+	const isReadingContent = $derived(
+		FEATURED.some((f) => page.url.pathname.startsWith(f.urlPrefix)) ||
+			corpusForPath(page.url.pathname) !== null
+	);
 
 	let activeTab: 'appearance' | 'reading' | 'bible' | 'notes' = $state('appearance');
 
@@ -24,11 +34,15 @@
 				label: 'Apparence',
 				title: 'Ajuste la typographie et les couleurs du site'
 			},
-			{
-				id: 'reading' as const,
-				label: 'Lecture',
-				title: 'Réglages qui changent le comportement de la lecture'
-			},
+			...(isReadingContent
+				? [
+						{
+							id: 'reading' as const,
+							label: 'Lecture',
+							title: 'Réglages qui changent le comportement de la lecture'
+						}
+					]
+				: []),
 			...(isBibleOnly
 				? [
 						{
@@ -478,6 +492,21 @@
 								class="w-full accent-accent"
 								aria-label="Saut de mots de la lecture bionique"
 								title="Un saut plus élevé met moins de mots en gras"
+							/>
+						</div>
+
+						<div>
+							<span class="block mb-2 text-muted text-[13px]" title="Règle l'épaisseur du gras"
+								>Poids</span
+							>
+							<PillGroup
+								ariaLabel="Poids de la lecture bionique"
+								options={[
+									{ label: 'Léger', value: 600 as const, title: 'Gras discret' },
+									{ label: 'Épais', value: 700 as const, title: 'Gras plus marqué' }
+								]}
+								value={$prefs.bionicBoldWeight}
+								onchange={(v) => updatePref('bionicBoldWeight', v)}
 							/>
 						</div>
 					</div>

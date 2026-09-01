@@ -48,6 +48,7 @@ export interface ReadingPrefs {
 	bionicReading: boolean; // bold each word's leading fraction, all corpora
 	bionicFixation: number; // 1-5, how much of each word is bolded
 	bionicSaccade: number; // 0-4, bold only every (n+1)-th word
+	bionicBoldWeight: 600 | 700; // how bold the emphasized letters are
 	infiniteScroll: boolean; // Bible reader: load the next chapter as you scroll
 	verseNumberColor: VerseNumberColor;
 }
@@ -76,6 +77,7 @@ const DEFAULTS: ReadingPrefs = {
 	bionicReading: false,
 	bionicFixation: 2,
 	bionicSaccade: 0,
+	bionicBoldWeight: 600,
 	infiniteScroll: true,
 	verseNumberColor: 'subtle'
 };
@@ -148,6 +150,7 @@ if (browser) {
 		root.dataset.inlineAsMarkers = String($p.inlineAsMarkers);
 		root.dataset.justified = String($p.justifiedText);
 		root.dataset.bionic = String($p.bionicReading);
+		root.style.setProperty('--bionic-bold-weight', String($p.bionicBoldWeight));
 		root.style.setProperty('--reader-font-size', `${$p.fontSize}px`);
 		root.style.setProperty('--reader-line-height', String($p.lineHeight));
 		const font = getFontById($p.fontFamily);

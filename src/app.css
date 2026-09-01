@@ -739,7 +739,7 @@ html[data-bionic='true'] .bible-prose b,
 html[data-bionic='true'] .bible-poetry-line b,
 html[data-bionic='true'] .prose-paragraph b,
 html[data-bionic='true'] .compendium-prose b {
-	font-weight: 600;
+	font-weight: var(--bionic-bold-weight, 600);
 }
 
 /* Reveal-on-scroll · the topbar always stays put; only the Bible chapter-nav
