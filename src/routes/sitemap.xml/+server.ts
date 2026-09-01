@@ -121,6 +121,10 @@ export const GET: RequestHandler = () => {
 			...feriesFile.feasts.map((f) => `/calendrier-liturgique/feries/${cycle}/${f.slug}`)
 		);
 	}
+	const properFile: { feasts: { slug: string }[] } = JSON.parse(
+		readFileSync(join(process.cwd(), 'static/data/calendrier/proper.json'), 'utf-8')
+	);
+	calendrierUrls.push(...properFile.feasts.map((f) => `/calendrier-liturgique/propre/${f.slug}`));
 
 	const allUrls = [
 		...sitePages,

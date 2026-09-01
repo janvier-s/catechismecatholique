@@ -39,8 +39,6 @@
 			lede: "L'Évangile de saint Luc, attentif aux pauvres et à la miséricorde, est lu chaque dimanche tout au long de l'année."
 		}
 	];
-
-	const totalThemes = $derived(data.index.total_clusters);
 </script>
 
 <svelte:head>
@@ -52,18 +50,7 @@
 </svelte:head>
 
 <main class="cal-index">
-	<header class="hero">
-		<p class="hero-kicker">Calendrier liturgique romain</p>
-		<h1 class="hero-title">Lire le Catéchisme<br />au fil de l'année</h1>
-		<p class="hero-lede">
-			Les paragraphes du Catéchisme pour chaque dimanche du cycle triennal (années A, B, C), chaque
-			férie du cycle biennal (années I, II), et chaque fête et solennité.
-			<br /><span class="hero-stat"
-				>{data.totalCovered} jours liturgiques couverts · {totalThemes} thèmes de référence · {data.totalParagraphs}
-				paragraphes du Catéchisme cités</span
-			>
-		</p>
-	</header>
+	<h1 class="sr-only">Calendrier liturgique · Catéchisme</h1>
 
 	<div class="today-picker-stack">
 		{#if pickedRow}
@@ -124,45 +111,6 @@
 		max-width: 56rem;
 		margin: 0 auto;
 		padding: 2.75rem 1.5rem 3.5rem;
-	}
-
-	.hero {
-		text-align: center;
-		max-width: 44rem;
-		margin: 0 auto 3rem;
-	}
-	.hero-kicker {
-		font-family: var(--font-ui);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.22em;
-		text-transform: uppercase;
-		color: var(--color-muted);
-		margin: 0 0 0.85rem;
-	}
-	.hero-title {
-		font-family: var(--font-heading);
-		font-size: clamp(1.6rem, 4.5vw, 2.6rem);
-		font-weight: 600;
-		line-height: 1.15;
-		color: var(--color-fg);
-		margin: 0 0 1.25rem;
-	}
-	.hero-lede {
-		font-family: var(--font-body);
-		font-size: clamp(1rem, 1.5vw, 1.1rem);
-		line-height: 1.65;
-		color: var(--color-subtle);
-		margin: 0;
-	}
-	.hero-stat {
-		display: inline-block;
-		margin-top: 0.5rem;
-		font-family: var(--font-ui);
-		font-size: 0.78rem;
-		font-weight: 500;
-		letter-spacing: 0.08em;
-		color: var(--color-muted);
 	}
 
 	.today-picker-stack {

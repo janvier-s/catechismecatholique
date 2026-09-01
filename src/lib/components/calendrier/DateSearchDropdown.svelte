@@ -123,9 +123,19 @@
 	}
 
 	@media (max-width: 640px) {
-		.date-search-panel {
+		/* Anchoring to the trigger (as on desktop) can still clip off-screen on
+		   mobile, since the trigger itself isn't pinned to a screen edge -
+		   fixed + centered guarantees it always fits instead. */
+		.date-search-panel,
+		.date-search-panel.align-left {
+			position: fixed;
+			top: 50%;
+			left: 50%;
 			right: auto;
-			left: 0;
+			transform: translate(-50%, -50%);
+			width: calc(100vw - 2rem);
+			max-height: calc(100vh - 2rem);
+			overflow-y: auto;
 		}
 	}
 </style>

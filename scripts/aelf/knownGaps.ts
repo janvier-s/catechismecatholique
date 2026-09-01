@@ -48,5 +48,7 @@ export const KNOWN_AELF_GAPS: Record<string, string> = {
 	'b:neuvieme-dimanche-du-temps-ordinaire':
 		'every occurrence in the covered date range collides with Corpus Christi',
 	'c:neuvieme-dimanche-du-temps-ordinaire':
+		'every occurrence in the covered date range collides with Corpus Christi',
+	'a:dixieme-dimanche-du-temps-ordinaire':
 		'every occurrence in the covered date range collides with Corpus Christi'
 };

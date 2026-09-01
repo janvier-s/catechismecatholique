@@ -9,6 +9,7 @@ import type {
 } from './calendrier.ts';
 import { parseFrenchOrdinal } from './calendrierFrenchOrdinal.ts';
 import { NAMED_FEAST_ROMCAL_ID, SEASON_TO_ROMCAL } from './calendrierRomcalIds.ts';
+import { PROPER_DAYS, PROPER_DAY_ROMCAL_IDS } from './calendrierProperDays.ts';
 import {
 	isDateProperWeekday,
 	ROMCAL_SEASON_TO_OURS,
@@ -106,6 +107,7 @@ export async function buildCalendrierDates(
 	const claimedRomcalIds = new Set(
 		[...matchersBySlug.values()].filter((m) => m.kind === 'id').map((m) => m.id)
 	);
+	for (const id of PROPER_DAY_ROMCAL_IDS) claimedRomcalIds.add(id);
 
 	for (let year = DATE_RANGE_START_YEAR; year <= DATE_RANGE_END_YEAR; year++) {
 		const calendar = await new Romcal().generateCalendar(year);
@@ -179,6 +181,21 @@ export async function buildCalendrierDates(
 				slug: ff.slug,
 				corpus: 'fixed',
 				liturgicalColor: colorsBySlug.get(ff.slug)!
+			});
+		}
+
+		for (const pd of PROPER_DAYS) {
+			const day = byId.get(pd.romcalId);
+			if (!day) continue; // e.g. the Ordinary Time collisions only occur some years
+
+			if (!colorsBySlug.has(pd.slug)) {
+				colorsBySlug.set(pd.slug, ROMCAL_COLOR_TO_OURS[day.colors[0] ?? 'WHITE'] ?? 'white');
+			}
+			rows.push({
+				date: day.date,
+				slug: pd.slug,
+				corpus: 'proper',
+				liturgicalColor: colorsBySlug.get(pd.slug)!
 			});
 		}
 

@@ -16,6 +16,7 @@
 		yearKey,
 		showDates = false,
 		isWeekday = false,
+		isProper = false,
 		sundayCycle,
 		weekdayCycle
 	}: {
@@ -27,6 +28,11 @@
 		 *  shows a discreet source note rather than presenting them as the
 		 *  same tier of authority. */
 		isWeekday?: boolean;
+		/** A date-proper day (see calendrierProperDays.ts): also concordance-
+		 *  matched like a weekday, but fixed by the day itself rather than by
+		 *  week position, so it carries no cycle and links to its own
+		 *  permalink instead of a /feries/{cycle}/ one. */
+		isProper?: boolean;
 		/** Concurrent Sunday année (A/B/C), display-only - distinct from
 		 *  `yearKey`, which selects which content file to load. */
 		sundayCycle?: CalendrierYearKey;
@@ -34,6 +40,11 @@
 		 *  ("année paire"/"année impaire") rather than "Cycle I/II". */
 		weekdayCycle?: 'I' | 'II';
 	} = $props();
+
+	// Weekday and proper-day clusters are both concordance-derived rather
+	// than hand-curated, so they share the attribution note and the
+	// numbering-strip treatment below.
+	const autoDerived = $derived(isWeekday || isProper);
 
 	const SUNDAY_CYCLE_LABEL: Record<CalendrierYearKey, string> = { a: 'A', b: 'B', c: 'C' };
 	const WEEKDAY_PARITY_LABEL: Record<'I' | 'II', string> = { I: 'impaire', II: 'paire' };
@@ -129,6 +140,9 @@
 	// PickedDateCard - can point readers and crawlers at the permanent page.
 	// Suppressed when we're already on that page.
 	const permalinkHref = $derived.by((): string | null => {
+		if (isProper) {
+			return `/calendrier-liturgique/propre/${feast.slug}`;
+		}
 		if (isWeekday) {
 			const cycle = weekdayCycle ?? (yearKey === 'I' || yearKey === 'II' ? yearKey : undefined);
 			return cycle ? `/calendrier-liturgique/feries/${cycle.toLowerCase()}/${feast.slug}` : null;
@@ -279,7 +293,7 @@
 					>
 						<span class="caret" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
 						<span class="cluster-theme"
-							>{capitalize(isWeekday ? stripNumbering(cluster.theme) : cluster.theme)}</span
+							>{capitalize(autoDerived ? stripNumbering(cluster.theme) : cluster.theme)}</span
 						>
 						<span class="cluster-refs">{cluster.refs}</span>
 					</button>
@@ -307,7 +321,7 @@
 			</li>
 		{/each}
 	</ul>
-	{#if isWeekday}
+	{#if autoDerived}
 		<p class="source-note">Références tirées de la Didache Study Bible</p>
 	{/if}
 </article>

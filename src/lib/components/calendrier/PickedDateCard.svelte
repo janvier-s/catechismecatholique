@@ -105,6 +105,7 @@
 				{feast}
 				yearKey={row.yearKey ?? row.cycle}
 				isWeekday={row.corpus === 'weekday'}
+				isProper={row.corpus === 'proper'}
 				sundayCycle={row.sundayCycle}
 				weekdayCycle={row.cycle}
 			/>
@@ -196,6 +197,12 @@
 	}
 
 	@media (max-width: 640px) {
+		.picked-card {
+			border-width: 0;
+			border-radius: 0;
+			background: none;
+			padding: 1.25rem 0;
+		}
 		.result-head {
 			flex-direction: column;
 			align-items: flex-start;

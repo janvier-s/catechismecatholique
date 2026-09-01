@@ -8,7 +8,8 @@ import {
 } from './calendrierDates.ts';
 import { mergeReadings } from './calendrierReadingsMerge.ts';
 import { buildWeekdayTargets } from './weekdayFeasts.ts';
-import { buildWeekdayFeast } from './weekdayReadings.ts';
+import { buildWeekdayFeast, buildProperFeast } from './weekdayReadings.ts';
+import { PROPER_DAYS } from './calendrierProperDays.ts';
 import { buildHeadingLevels, type CecStructureFile } from './cecHeadingCluster.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
@@ -42,7 +43,10 @@ export interface CalendrierYearFile {
 export interface CalendrierDateRow {
 	date: string; // ISO yyyy-mm-dd
 	slug: string;
-	corpus: 'year' | 'fixed' | 'weekday';
+	// 'proper' is a date-proper day (see calendrierProperDays.ts): its Mass
+	// reading is fixed by the day itself, not by week position or cycle, so
+	// unlike 'weekday' it carries no `cycle`.
+	corpus: 'year' | 'fixed' | 'weekday' | 'proper';
 	yearKey?: 'a' | 'b' | 'c'; // present when corpus === 'year'
 	cycle?: 'I' | 'II'; // present when corpus === 'weekday'
 	sundayCycle?: 'a' | 'b' | 'c'; // present when corpus === 'weekday' - concurrent Sunday année, display-only
@@ -53,6 +57,10 @@ export interface CalendrierDatesIndexFile {
 	rangeStart: string; // ISO yyyy-mm-dd
 	rangeEnd: string; // ISO yyyy-mm-dd
 	rows: CalendrierDateRow[];
+}
+
+export interface CalendrierProperFile {
+	feasts: CalendrierFeast[];
 }
 
 export interface CalendrierIndexFile {
@@ -443,7 +451,58 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		ff.liturgicalColor = color;
 	}
 
+	// Written before the readings-merge step below (which throws loudly on
+	// any curated feast/proper-day slug still missing its AELF fetch)
+	// specifically so that a brand-new slug's dates-index row exists as soon
+	// as it's added to the source, before its reading has ever been
+	// fetched · fetch-aelf.ts reads this file to find candidate dates for
+	// exactly that slug, so without this ordering neither script could ever
+	// bootstrap a newly-added feast.
+	const yearStats: { key: 'a' | 'b' | 'c'; total_feasts: number; total_clusters: number }[] = [];
+	let totalFeasts = 0;
+	let totalClusters = 0;
+	for (const yf of yearFiles) {
+		writeFileSync(join(outDir, `annee-${yf.key}.json`), JSON.stringify(yf));
+		const yearClusters = yf.feasts.reduce((s, f) => s + f.clusters.length, 0);
+		yearStats.push({ key: yf.key, total_feasts: yf.feasts.length, total_clusters: yearClusters });
+		totalFeasts += yf.feasts.length;
+		totalClusters += yearClusters;
+	}
+
+	const fixedClusters = fixed.reduce((s, f) => s + f.clusters.length, 0);
+	const index: CalendrierIndexFile = {
+		years: yearStats,
+		fixed_feasts: fixed,
+		total_feasts: totalFeasts + fixed.length,
+		total_clusters: totalClusters + fixedClusters
+	};
+	writeFileSync(join(outDir, 'index.json'), JSON.stringify(index));
+
+	const datesIndex: CalendrierDatesIndexFile = {
+		rangeStart: `${DATE_RANGE_START_YEAR}-01-01`,
+		rangeEnd: `${DATE_RANGE_END_YEAR}-12-31`,
+		rows
+	};
+	writeFileSync(join(outDir, 'dates-index.json'), JSON.stringify(datesIndex));
+
 	const readings = mergeReadings(yearFiles, fixed, readingsFile, weekdayTargets);
+
+	// Proper days ride the same "fail loud on a missing fetch" rule as
+	// year/fixed feasts (mergeReadings above), not the weekday loop's
+	// skip-if-absent one - unlike a generic ferial combo, a proper day is a
+	// deliberately curated, specific entry, so a missing reading here is a
+	// real gap to fix, not routine partial coverage.
+	for (const pd of PROPER_DAYS) {
+		const key = readingsKey(pd.slug);
+		const entry = readingsFile[key];
+		if (!entry) {
+			throw new Error(
+				`calendrier: no AELF reading resolved for "${pd.title}" (${key}). ` +
+					`Run "npm run fetch-aelf" and commit the updated readings.json.`
+			);
+		}
+		readings[key] = entry;
+	}
 
 	const projectRoot = new URL('../..', import.meta.url).pathname;
 	const structurePath = join(projectRoot, 'static', 'data', 'cec', 'structure.json');
@@ -474,32 +533,22 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		);
 	}
 
-	const yearStats: { key: 'a' | 'b' | 'c'; total_feasts: number; total_clusters: number }[] = [];
-	let totalFeasts = 0;
-	let totalClusters = 0;
-	for (const yf of yearFiles) {
-		writeFileSync(join(outDir, `annee-${yf.key}.json`), JSON.stringify(yf));
-		const yearClusters = yf.feasts.reduce((s, f) => s + f.clusters.length, 0);
-		yearStats.push({ key: yf.key, total_feasts: yf.feasts.length, total_clusters: yearClusters });
-		totalFeasts += yf.feasts.length;
-		totalClusters += yearClusters;
-	}
-
-	const fixedClusters = fixed.reduce((s, f) => s + f.clusters.length, 0);
-	const index: CalendrierIndexFile = {
-		years: yearStats,
-		fixed_feasts: fixed,
-		total_feasts: totalFeasts + fixed.length,
-		total_clusters: totalClusters + fixedClusters
-	};
-	writeFileSync(join(outDir, 'index.json'), JSON.stringify(index));
-
-	const datesIndex: CalendrierDatesIndexFile = {
-		rangeStart: `${DATE_RANGE_START_YEAR}-01-01`,
-		rangeEnd: `${DATE_RANGE_END_YEAR}-12-31`,
-		rows
-	};
-	writeFileSync(join(outDir, 'dates-index.json'), JSON.stringify(datesIndex));
+	const properFeasts = PROPER_DAYS.map((pd) => {
+		const entry = readingsFile[readingsKey(pd.slug)]!;
+		return buildProperFeast(
+			pd.slug,
+			pd.title,
+			pd.season,
+			colorsBySlug.get(pd.slug) ?? 'white',
+			entry.lectures,
+			concordanceDir,
+			levels
+		);
+	});
+	writeFileSync(
+		join(outDir, 'proper.json'),
+		JSON.stringify({ feasts: properFeasts }, null, '\t') + '\n'
+	);
 
 	const readingsDir = join(outDir, 'readings');
 	mkdirSync(readingsDir, { recursive: true });

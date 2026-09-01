@@ -5,7 +5,12 @@ import type {
 	CalendrierFixedFeast,
 	CalendrierYearKey
 } from '$lib/data/types';
-import { loadCalendrierYear, loadCalendrierFeries, type Fetch } from '$lib/data/loaders';
+import {
+	loadCalendrierYear,
+	loadCalendrierFeries,
+	loadCalendrierProper,
+	type Fetch
+} from '$lib/data/loaders';
 
 export function toIsoDate(d: Date): string {
 	const y = d.getFullYear();
@@ -86,6 +91,10 @@ export async function resolveFeastForRow(
 	if (row.corpus === 'weekday') {
 		const feries = await loadCalendrierFeries(row.cycle as 'I' | 'II', fetcher);
 		return feries.feasts.find((f) => f.slug === row.slug) ?? null;
+	}
+	if (row.corpus === 'proper') {
+		const proper = await loadCalendrierProper(fetcher);
+		return proper.feasts.find((f) => f.slug === row.slug) ?? null;
 	}
 	const year = await loadCalendrierYear(row.yearKey as CalendrierYearKey, fetcher);
 	return year.feasts.find((f) => f.slug === row.slug) ?? null;

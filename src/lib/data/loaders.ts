@@ -26,6 +26,7 @@ import type {
 	CalendrierYearFile,
 	CalendrierYearKey,
 	CalendrierDatesIndexFile,
+	CalendrierProperFile,
 	CalendrierReadingsEntry,
 	CatIllustreStructure,
 	CatIllustreChapter,
@@ -691,6 +692,18 @@ export function loadCalendrierFeries(
 		calendrierFeriesCache.set(cycle, p);
 	}
 	return p;
+}
+
+let calendrierProperPromise: Promise<CalendrierProperFile> | null = null;
+
+export function loadCalendrierProper(fetcher: Fetch = fetch): Promise<CalendrierProperFile> {
+	if (!calendrierProperPromise) {
+		calendrierProperPromise = fetchJson<CalendrierProperFile>(
+			'/data/calendrier/proper.json',
+			fetcher
+		);
+	}
+	return calendrierProperPromise;
 }
 
 const calendrierReadingCache = new Map<string, Promise<CalendrierReadingsEntry | null>>();

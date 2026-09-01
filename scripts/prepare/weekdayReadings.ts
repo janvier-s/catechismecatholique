@@ -41,18 +41,17 @@ export function formatWeekdayTitle(
 }
 
 /**
- * Builds one weekday's CalendrierFeast from its raw AELF readings, by
- * parsing each reading's ref, matching it against the archived concordance,
- * and clustering the union of citations by CCC heading. A reading whose ref
+ * Builds one CalendrierFeast from raw AELF readings, by parsing each
+ * reading's ref, matching it against the archived concordance, and
+ * clustering the union of citations by CCC heading. A reading whose ref
  * doesn't parse, or whose chapter isn't covered by the concordance,
  * contributes nothing · not an error, since psalm and first-reading
  * coverage is intentionally partial (see the design spec).
  */
-export function buildWeekdayFeast(
+export function buildProperFeast(
 	slug: string,
+	title: string,
 	season: SeasonKey,
-	weekOfSeason: number,
-	dayOfWeek: number,
 	liturgicalColor: LiturgicalColor,
 	readings: CalendrierReading[],
 	concordanceDir: string,
@@ -66,11 +65,28 @@ export function buildWeekdayFeast(
 		citations.push(...matchConcordance(parsed, concordanceDir));
 	}
 
-	return {
+	return { slug, title, season, liturgicalColor, clusters: clusterCitations(citations, levels) };
+}
+
+/** Same as `buildProperFeast`, with the title formatted from the weekday's
+ *  season/week/day position rather than given directly. */
+export function buildWeekdayFeast(
+	slug: string,
+	season: SeasonKey,
+	weekOfSeason: number,
+	dayOfWeek: number,
+	liturgicalColor: LiturgicalColor,
+	readings: CalendrierReading[],
+	concordanceDir: string,
+	levels: HeadingLevels
+): CalendrierFeast {
+	return buildProperFeast(
 		slug,
-		title: formatWeekdayTitle(season, weekOfSeason, dayOfWeek),
+		formatWeekdayTitle(season, weekOfSeason, dayOfWeek),
 		season,
 		liturgicalColor,
-		clusters: clusterCitations(citations, levels)
-	};
+		readings,
+		concordanceDir,
+		levels
+	);
 }

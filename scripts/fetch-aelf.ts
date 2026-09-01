@@ -29,6 +29,7 @@ import type {
 import { readingsKey } from './prepare/calendrier.ts';
 import { DATE_RANGE_START_YEAR, DATE_RANGE_END_YEAR } from './prepare/calendrierDates.ts';
 import { buildWeekdayTargets } from './prepare/weekdayFeasts.ts';
+import { PROPER_DAYS } from './prepare/calendrierProperDays.ts';
 import { pickReadingDateCandidates } from './aelf/pickReadingDate.ts';
 import { pickMesse, type AelfMesse } from './aelf/pickMesse.ts';
 import { KNOWN_AELF_GAPS } from './aelf/knownGaps.ts';
@@ -115,6 +116,7 @@ const targets: { slug: string; yearKey?: 'a' | 'b' | 'c' }[] = [];
 for (const yf of yearFiles)
 	for (const feast of yf.feasts) targets.push({ slug: feast.slug, yearKey: yf.key });
 for (const ff of index.fixed_feasts) targets.push({ slug: ff.slug });
+for (const pd of PROPER_DAYS) targets.push({ slug: pd.slug });
 
 /**
  * AELF's `informations.jour_liturgique_nom` for a date matching one of

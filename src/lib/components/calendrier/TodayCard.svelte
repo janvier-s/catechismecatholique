@@ -123,6 +123,7 @@
 			{feast}
 			yearKey={resolved.row.yearKey ?? resolved.row.cycle}
 			isWeekday={resolved.row.corpus === 'weekday'}
+			isProper={resolved.row.corpus === 'proper'}
 			sundayCycle={resolved.row.sundayCycle}
 			weekdayCycle={resolved.row.cycle}
 		/>
@@ -195,5 +196,14 @@
 		color: var(--color-subtle);
 		font-style: italic;
 		margin: 0;
+	}
+
+	@media (max-width: 640px) {
+		.today-card {
+			border-width: 0;
+			border-radius: 0;
+			background: none;
+			padding: 1.25rem 0;
+		}
 	}
 </style>

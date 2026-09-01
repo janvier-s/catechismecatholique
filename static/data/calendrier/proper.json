@@ -1,0 +1,2220 @@
+{
+	"feasts": [
+		{
+			"slug": "17-decembre-o-sagesse",
+			"title": "17 décembre : Ô Sagesse",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "436-439",
+					"paragraphs": [
+						436,
+						437,
+						438,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. Seigneur",
+					"refs": "452",
+					"paragraphs": [
+						452
+					]
+				}
+			]
+		},
+		{
+			"slug": "18-decembre-o-adonai",
+			"title": "18 décembre : Ô Adonaï",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le chemin de la prière",
+					"refs": "2663-2666",
+					"paragraphs": [
+						2663,
+						2664,
+						2665,
+						2666
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus-Christ a été conçu du Saint-Esprit, il est né de la vierge Marie »",
+					"refs": "495-496",
+					"paragraphs": [
+						495,
+						496
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La virginité de Marie",
+					"refs": "497",
+					"paragraphs": [
+						497
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le Christ « avec tous ses anges »",
+					"refs": "333",
+					"paragraphs": [
+						333
+					]
+				},
+				{
+					"i": 4,
+					"theme": "II. Christ",
+					"refs": "437",
+					"paragraphs": [
+						437
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Conçu du Saint-Esprit...",
+					"refs": "486",
+					"paragraphs": [
+						486
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				}
+			]
+		},
+		{
+			"slug": "19-decembre-o-racine-de-jesse",
+			"title": "19 décembre : Ô Racine de Jessé",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le don de l’enfant",
+					"refs": "2374-2379",
+					"paragraphs": [
+						2374,
+						2375,
+						2376,
+						2377,
+						2378,
+						2379
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Dieu forme son peuple Israël",
+					"refs": "62-64",
+					"paragraphs": [
+						62,
+						63,
+						64
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Je crois en l’Esprit-Saint »",
+					"refs": "716-718",
+					"paragraphs": [
+						716,
+						717,
+						718
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Je suis Celui qui suis »",
+					"refs": "206",
+					"paragraphs": [
+						206
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’existence des anges – une vérité de foi",
+					"refs": "328",
+					"paragraphs": [
+						328
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le Christ « avec tous ses anges »",
+					"refs": "332",
+					"paragraphs": [
+						332
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le sens de la mort chrétienne",
+					"refs": "1017",
+					"paragraphs": [
+						1017
+					]
+				}
+			]
+		},
+		{
+			"slug": "20-decembre-o-cle-de-david",
+			"title": "20 décembre : Ô Clé de David",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a été conçu du Saint-Esprit, il est né de la vierge Marie »",
+					"refs": "484-511",
+					"paragraphs": [
+						484,
+						485,
+						486,
+						487,
+						488,
+						489,
+						490,
+						491,
+						492,
+						493,
+						494,
+						495,
+						496,
+						497,
+						498,
+						499,
+						500,
+						501,
+						502,
+						503,
+						504,
+						505,
+						506,
+						507,
+						508,
+						509,
+						510,
+						511
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "269-276",
+					"paragraphs": [
+						269,
+						270,
+						271,
+						272,
+						273,
+						274,
+						275,
+						276
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La maternité virginale de Marie dans le dessein de Dieu",
+					"refs": "505-510",
+					"paragraphs": [
+						505,
+						506,
+						507,
+						508,
+						509,
+						510
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’Immaculée Conception",
+					"refs": "490-493",
+					"paragraphs": [
+						490,
+						491,
+						492,
+						493
+					]
+				},
+				{
+					"i": 4,
+					"theme": "I. Jésus",
+					"refs": "430-431, 435",
+					"paragraphs": [
+						430,
+						431,
+						435
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Réjouis-toi, comblée de grâce »",
+					"refs": "722-723",
+					"paragraphs": [
+						722,
+						723
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La vie de prière",
+					"refs": "2812, 2827",
+					"paragraphs": [
+						2812,
+						2827
+					]
+				}
+			]
+		},
+		{
+			"slug": "21-decembre-o-orient",
+			"title": "21 décembre : Ô Orient",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "967-975",
+					"paragraphs": [
+						967,
+						968,
+						969,
+						970,
+						971,
+						972,
+						973,
+						974,
+						975
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les symboles de l’Église",
+					"refs": "754-755",
+					"paragraphs": [
+						754,
+						755
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "422-423",
+					"paragraphs": [
+						422,
+						423
+					]
+				},
+				{
+					"i": 3,
+					"theme": "En communion avec la Sainte Mère de Dieu",
+					"refs": "2676-2677",
+					"paragraphs": [
+						2676,
+						2677
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les signes du pain et du vin",
+					"refs": "1334",
+					"paragraphs": [
+						1334
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le mémorial sacrificiel du Christ et de son Corps, l’Église",
+					"refs": "1363",
+					"paragraphs": [
+						1363
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le salut de Dieu : La loi et la grâce",
+					"refs": "2057",
+					"paragraphs": [
+						2057
+					]
+				}
+			]
+		},
+		{
+			"slug": "22-decembre-o-roi-des-nations",
+			"title": "22 décembre : Ô Roi des nations",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "En communion avec la Sainte Mère de Dieu",
+					"refs": "2675-2682",
+					"paragraphs": [
+						2675,
+						2676,
+						2677,
+						2678,
+						2679,
+						2680,
+						2681,
+						2682
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La prière de la Vierge Marie",
+					"refs": "2619, 2622",
+					"paragraphs": [
+						2619,
+						2622
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La prédestination de Marie",
+					"refs": "489",
+					"paragraphs": [
+						489
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le don de l’enfant",
+					"refs": "2379",
+					"paragraphs": [
+						2379
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’année liturgique",
+					"refs": "1171",
+					"paragraphs": [
+						1171
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Marie – « Bienheureuse celle qui a cru »",
+					"refs": "148",
+					"paragraphs": [
+						148
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "422",
+					"paragraphs": [
+						422
+					]
+				}
+			]
+		},
+		{
+			"slug": "23-decembre-o-emmanuel",
+			"title": "23 décembre : Ô Emmanuel",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’année liturgique",
+					"refs": "1171",
+					"paragraphs": [
+						1171
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "527",
+					"paragraphs": [
+						527
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Signes et symboles",
+					"refs": "1150",
+					"paragraphs": [
+						1150
+					]
+				}
+			]
+		},
+		{
+			"slug": "24-decembre-veille-de-noel",
+			"title": "24 décembre : veille de Noël",
+			"season": "avent",
+			"liturgicalColor": "violet",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "L’entrée messianique de Jésus à Jérusalem",
+					"refs": "559-560",
+					"paragraphs": [
+						559,
+						560
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Père révélé par le Fils",
+					"refs": "238",
+					"paragraphs": [
+						238
+					]
+				},
+				{
+					"i": 2,
+					"theme": "III. Fils unique de Dieu",
+					"refs": "441",
+					"paragraphs": [
+						441
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Pourquoi le Verbe s’est-il fait chair",
+					"refs": "460",
+					"paragraphs": [
+						460
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Dans le Royaume et l’Exil",
+					"refs": "709",
+					"paragraphs": [
+						709
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’année liturgique",
+					"refs": "1171",
+					"paragraphs": [
+						1171
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "422",
+					"paragraphs": [
+						422
+					]
+				}
+			]
+		},
+		{
+			"slug": "26-decembre-saint-etienne",
+			"title": "26 décembre : Saint Étienne, premier martyr",
+			"season": "noel",
+			"liturgicalColor": "red",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Nous croyons",
+					"refs": "166",
+					"paragraphs": [
+						166
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Christ Jésus",
+					"refs": "728",
+					"paragraphs": [
+						728
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "764",
+					"paragraphs": [
+						764
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La nécessité de la foi",
+					"refs": "161",
+					"paragraphs": [
+						161
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’espérance",
+					"refs": "1821",
+					"paragraphs": [
+						1821
+					]
+				}
+			]
+		},
+		{
+			"slug": "27-decembre-saint-jean-apotre",
+			"title": "27 décembre : Saint Jean, apôtre et évangéliste",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a été conçu du Saint-Esprit, il est né de la vierge Marie »",
+					"refs": "456-469",
+					"paragraphs": [
+						456,
+						457,
+						458,
+						459,
+						460,
+						461,
+						462,
+						463,
+						464,
+						465,
+						466,
+						467,
+						468,
+						469
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "640-645",
+					"paragraphs": [
+						640,
+						641,
+						642,
+						643,
+						644,
+						645
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La vie de prière",
+					"refs": "2781-2784",
+					"paragraphs": [
+						2781,
+						2782,
+						2783,
+						2784
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Les clefs du Royaume »",
+					"refs": "552-553",
+					"paragraphs": [
+						552,
+						553
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Annoncer l’insondable richesse du Christ » (Ep 3, 8)",
+					"refs": "425",
+					"paragraphs": [
+						425
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La communion de l’Esprit Saint",
+					"refs": "1108",
+					"paragraphs": [
+						1108
+					]
+				},
+				{
+					"i": 6,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "659",
+					"paragraphs": [
+						659
+					]
+				}
+			]
+		},
+		{
+			"slug": "28-decembre-saints-innocents",
+			"title": "28 décembre : les Saints Innocents",
+			"season": "noel",
+			"liturgicalColor": "red",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. La catéchèse sur la Création",
+					"refs": "287",
+					"paragraphs": [
+						287
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Christ « avec tous ses anges »",
+					"refs": "333",
+					"paragraphs": [
+						333
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "530",
+					"paragraphs": [
+						530
+					]
+				}
+			]
+		},
+		{
+			"slug": "29-decembre-octave-de-noel",
+			"title": "29 décembre : dans l’octave de Noël",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Autres références",
+					"refs": "27-50",
+					"paragraphs": [
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38,
+						39,
+						40,
+						41,
+						42,
+						43,
+						44,
+						45,
+						46,
+						47,
+						48,
+						49,
+						50
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. La Loi nouvelle ou Loi évangélique",
+					"refs": "1965-1972",
+					"paragraphs": [
+						1965,
+						1966,
+						1967,
+						1968,
+						1969,
+						1970,
+						1971,
+						1972
+					]
+				},
+				{
+					"i": 2,
+					"theme": "La transmission de la révélation divine",
+					"refs": "76-78",
+					"paragraphs": [
+						76,
+						77,
+						78
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le temps liturgique",
+					"refs": "1163-1165",
+					"paragraphs": [
+						1163,
+						1164,
+						1165
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "527, 529",
+					"paragraphs": [
+						527,
+						529
+					]
+				},
+				{
+					"i": 5,
+					"theme": "L’attente du Messie et de son Esprit",
+					"refs": "711, 713",
+					"paragraphs": [
+						711,
+						713
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La croissance dans l’intelligence de la foi",
+					"refs": "98",
+					"paragraphs": [
+						98
+					]
+				}
+			]
+		},
+		{
+			"slug": "30-decembre-octave-de-noel",
+			"title": "30 décembre : dans l’octave de Noël",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a été conçu du Saint-Esprit, il est né de la vierge Marie »",
+					"refs": "533-551",
+					"paragraphs": [
+						533,
+						534,
+						535,
+						536,
+						537,
+						538,
+						539,
+						540,
+						541,
+						542,
+						543,
+						544,
+						545,
+						546,
+						547,
+						548,
+						549,
+						550,
+						551
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le dixième commandement",
+					"refs": "2534-2540",
+					"paragraphs": [
+						2534,
+						2535,
+						2536,
+						2537,
+						2538,
+						2539,
+						2540
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le neuvième commandement",
+					"refs": "2514-2516",
+					"paragraphs": [
+						2514,
+						2515,
+						2516
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le temps liturgique",
+					"refs": "1163-1165",
+					"paragraphs": [
+						1163,
+						1164,
+						1165
+					]
+				},
+				{
+					"i": 4,
+					"theme": "IV. L’homme au Paradis",
+					"refs": "377",
+					"paragraphs": [
+						377
+					]
+				},
+				{
+					"i": 5,
+					"theme": "II. Le combat pour la pureté",
+					"refs": "2526",
+					"paragraphs": [
+						2526
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’irréligion",
+					"refs": "2119",
+					"paragraphs": [
+						2119
+					]
+				}
+			]
+		},
+		{
+			"slug": "31-decembre-octave-de-noel",
+			"title": "31 décembre : dans l’octave de Noël",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "La transmission de la révélation divine",
+					"refs": "88-93",
+					"paragraphs": [
+						88,
+						89,
+						90,
+						91,
+						92,
+						93
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Vrai Dieu et vrai homme",
+					"refs": "464, 466-469",
+					"paragraphs": [
+						464,
+						466,
+						467,
+						468,
+						469
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Jean, Précurseur, Prophète et Baptiste",
+					"refs": "717-720",
+					"paragraphs": [
+						717,
+						718,
+						719,
+						720
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Deux traditions : l’Orient et l’Occident",
+					"refs": "1290-1292",
+					"paragraphs": [
+						1290,
+						1291,
+						1292
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2778, 2780, 2787",
+					"paragraphs": [
+						2778,
+						2780,
+						2787
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Le temps liturgique",
+					"refs": "1163-1165",
+					"paragraphs": [
+						1163,
+						1164,
+						1165
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le Père révélé par le Fils",
+					"refs": "240-242",
+					"paragraphs": [
+						240,
+						241,
+						242
+					]
+				}
+			]
+		},
+		{
+			"slug": "2-janvier-saint-basile-et-saint-gregoire",
+			"title": "2 janvier : saints Basile le Grand et Grégoire de Naziance",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a été conçu du Saint-Esprit, il est né de la vierge Marie »",
+					"refs": "461-469",
+					"paragraphs": [
+						461,
+						462,
+						463,
+						464,
+						465,
+						466,
+						467,
+						468,
+						469
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La transmission de la révélation divine",
+					"refs": "88-93",
+					"paragraphs": [
+						88,
+						89,
+						90,
+						91,
+						92,
+						93
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Deux traditions : l’Orient et l’Occident",
+					"refs": "1290-1292",
+					"paragraphs": [
+						1290,
+						1291,
+						1292
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La croissance dans l’intelligence de la foi",
+					"refs": "99",
+					"paragraphs": [
+						99
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Les symboles de l’Esprit Saint",
+					"refs": "695",
+					"paragraphs": [
+						695
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La vie de prière",
+					"refs": "2778",
+					"paragraphs": [
+						2778
+					]
+				},
+				{
+					"i": 6,
+					"theme": "IV. Seigneur",
+					"refs": "454",
+					"paragraphs": [
+						454
+					]
+				}
+			]
+		},
+		{
+			"slug": "3-janvier",
+			"title": "3 janvier : temps de Noël",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "438",
+					"paragraphs": [
+						438
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La mort du Christ est le sacrifice unique et définitif",
+					"refs": "613",
+					"paragraphs": [
+						613
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Un dur combat...",
+					"refs": "408",
+					"paragraphs": [
+						408
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les préparations",
+					"refs": "523",
+					"paragraphs": [
+						523
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« L’Agneau qui enlève le péché du monde »",
+					"refs": "608",
+					"paragraphs": [
+						608
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les célébrants de la Liturgie céleste",
+					"refs": "1137",
+					"paragraphs": [
+						1137
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Le Christ – médecin",
+					"refs": "1505",
+					"paragraphs": [
+						1505
+					]
+				}
+			]
+		},
+		{
+			"slug": "4-janvier",
+			"title": "4 janvier : temps de Noël",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "I. La justification",
+					"refs": "1989-1995",
+					"paragraphs": [
+						1989,
+						1990,
+						1991,
+						1992,
+						1993,
+						1994,
+						1995
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. La définition du péché",
+					"refs": "1849-1851",
+					"paragraphs": [
+						1849,
+						1850,
+						1851
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. Les actes bons et les actes mauvais",
+					"refs": "1755-1756",
+					"paragraphs": [
+						1755,
+						1756
+					]
+				},
+				{
+					"i": 3,
+					"theme": "IV. La sainteté chrétienne",
+					"refs": "2017, 2020",
+					"paragraphs": [
+						2017,
+						2020
+					]
+				},
+				{
+					"i": 4,
+					"theme": "II. La chute des anges",
+					"refs": "392, 394",
+					"paragraphs": [
+						392,
+						394
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Pourquoi le Verbe s’est-il fait chair",
+					"refs": "457",
+					"paragraphs": [
+						457
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’intégrité de la personne",
+					"refs": "2345",
+					"paragraphs": [
+						2345
+					]
+				}
+			]
+		},
+		{
+			"slug": "5-janvier",
+			"title": "5 janvier : temps de Noël",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "436, 439",
+					"paragraphs": [
+						436,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "III. Fils unique de Dieu",
+					"refs": "441",
+					"paragraphs": [
+						441
+					]
+				},
+				{
+					"i": 2,
+					"theme": "L’Esprit Saint et l’Église",
+					"refs": "745",
+					"paragraphs": [
+						745
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Jésus prie",
+					"refs": "2606",
+					"paragraphs": [
+						2606
+					]
+				},
+				{
+					"i": 4,
+					"theme": "La vie de prière",
+					"refs": "2836",
+					"paragraphs": [
+						2836
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. La béatitude chrétienne",
+					"refs": "1720",
+					"paragraphs": [
+						1720
+					]
+				},
+				{
+					"i": 6,
+					"theme": "I. La justification",
+					"refs": "1989",
+					"paragraphs": [
+						1989
+					]
+				}
+			]
+		},
+		{
+			"slug": "lundi-apres-lepiphanie",
+			"title": "Lundi après l’Épiphanie",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "438-439",
+					"paragraphs": [
+						438,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Conçu du Saint-Esprit...",
+					"refs": "486",
+					"paragraphs": [
+						486
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "528",
+					"paragraphs": [
+						528
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Réjouis-toi, comblée de grâce »",
+					"refs": "724",
+					"paragraphs": [
+						724
+					]
+				}
+			]
+		},
+		{
+			"slug": "mardi-apres-lepiphanie",
+			"title": "Mardi après l’Épiphanie",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "438-439",
+					"paragraphs": [
+						438,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Conçu du Saint-Esprit...",
+					"refs": "486",
+					"paragraphs": [
+						486
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "528",
+					"paragraphs": [
+						528
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Réjouis-toi, comblée de grâce »",
+					"refs": "724",
+					"paragraphs": [
+						724
+					]
+				}
+			]
+		},
+		{
+			"slug": "mercredi-apres-lepiphanie",
+			"title": "Mercredi après l’Épiphanie",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "438-439",
+					"paragraphs": [
+						438,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Conçu du Saint-Esprit...",
+					"refs": "486",
+					"paragraphs": [
+						486
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "528",
+					"paragraphs": [
+						528
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Réjouis-toi, comblée de grâce »",
+					"refs": "724",
+					"paragraphs": [
+						724
+					]
+				}
+			]
+		},
+		{
+			"slug": "jeudi-apres-lepiphanie",
+			"title": "Jeudi après l’Épiphanie",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "438-439",
+					"paragraphs": [
+						438,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Conçu du Saint-Esprit...",
+					"refs": "486",
+					"paragraphs": [
+						486
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "528",
+					"paragraphs": [
+						528
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Réjouis-toi, comblée de grâce »",
+					"refs": "724",
+					"paragraphs": [
+						724
+					]
+				}
+			]
+		},
+		{
+			"slug": "vendredi-apres-lepiphanie",
+			"title": "Vendredi après l’Épiphanie",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "438-439",
+					"paragraphs": [
+						438,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Conçu du Saint-Esprit...",
+					"refs": "486",
+					"paragraphs": [
+						486
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "528",
+					"paragraphs": [
+						528
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Réjouis-toi, comblée de grâce »",
+					"refs": "724",
+					"paragraphs": [
+						724
+					]
+				}
+			]
+		},
+		{
+			"slug": "samedi-apres-lepiphanie",
+			"title": "Samedi après l’Épiphanie",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Christ",
+					"refs": "438-439",
+					"paragraphs": [
+						438,
+						439
+					]
+				},
+				{
+					"i": 1,
+					"theme": "I. Jésus",
+					"refs": "430",
+					"paragraphs": [
+						430
+					]
+				},
+				{
+					"i": 2,
+					"theme": "I. Conçu du Saint-Esprit...",
+					"refs": "486",
+					"paragraphs": [
+						486
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Les mystères de l’enfance de Jésus",
+					"refs": "528",
+					"paragraphs": [
+						528
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Réjouis-toi, comblée de grâce »",
+					"refs": "724",
+					"paragraphs": [
+						724
+					]
+				}
+			]
+		},
+		{
+			"slug": "bapteme-du-seigneur",
+			"title": "Le baptême du Seigneur",
+			"season": "noel",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "Le Baptême de Jésus",
+					"refs": "535-536",
+					"paragraphs": [
+						535,
+						536
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Le Baptême du Christ",
+					"refs": "1223-1224",
+					"paragraphs": [
+						1223,
+						1224
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Un avant-goût du Royaume : La Transfiguration",
+					"refs": "555",
+					"paragraphs": [
+						555
+					]
+				},
+				{
+					"i": 3,
+					"theme": "I. Jésus et la Loi",
+					"refs": "580",
+					"paragraphs": [
+						580
+					]
+				},
+				{
+					"i": 4,
+					"theme": "L’attente du Messie et de son Esprit",
+					"refs": "713",
+					"paragraphs": [
+						713
+					]
+				},
+				{
+					"i": 5,
+					"theme": "III. La doctrine sociale de l’Église",
+					"refs": "2419",
+					"paragraphs": [
+						2419
+					]
+				},
+				{
+					"i": 6,
+					"theme": "« L’Agneau qui enlève le péché du monde »",
+					"refs": "608",
+					"paragraphs": [
+						608
+					]
+				}
+			]
+		},
+		{
+			"slug": "lundi-de-paques",
+			"title": "Lundi de Pâques",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "599-601",
+					"paragraphs": [
+						599,
+						600,
+						601
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "632-633",
+					"paragraphs": [
+						632,
+						633
+					]
+				},
+				{
+					"i": 2,
+					"theme": "II. La Résurrection – œuvre de la Sainte Trinité",
+					"refs": "648, 650",
+					"paragraphs": [
+						648,
+						650
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Sens et portée salvifique de la Résurrection",
+					"refs": "652, 654",
+					"paragraphs": [
+						652,
+						654
+					]
+				},
+				{
+					"i": 4,
+					"theme": "II. Christ",
+					"refs": "440",
+					"paragraphs": [
+						440
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Les signes du Royaume de Dieu",
+					"refs": "547",
+					"paragraphs": [
+						547
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’Esprit Saint et l’Église",
+					"refs": "746",
+					"paragraphs": [
+						746
+					]
+				}
+			]
+		},
+		{
+			"slug": "mardi-de-paques",
+			"title": "Mardi de Pâques",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "640-645",
+					"paragraphs": [
+						640,
+						641,
+						642,
+						643,
+						644,
+						645
+					]
+				},
+				{
+					"i": 1,
+					"theme": "IV. Seigneur",
+					"refs": "447-449",
+					"paragraphs": [
+						447,
+						448,
+						449
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le sacrement du baptême",
+					"refs": "1262-1264",
+					"paragraphs": [
+						1262,
+						1263,
+						1264
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le Baptême des enfants",
+					"refs": "1250-1252",
+					"paragraphs": [
+						1250,
+						1251,
+						1252
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "659-660",
+					"paragraphs": [
+						659,
+						660
+					]
+				},
+				{
+					"i": 5,
+					"theme": "La Pentecôte",
+					"refs": "731-732",
+					"paragraphs": [
+						731,
+						732
+					]
+				},
+				{
+					"i": 6,
+					"theme": "L’Église est communion avec Jésus",
+					"refs": "788-789",
+					"paragraphs": [
+						788,
+						789
+					]
+				}
+			]
+		},
+		{
+			"slug": "mercredi-de-paques",
+			"title": "Mercredi de Pâques",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "572-573, 601-602",
+					"paragraphs": [
+						572,
+						573,
+						601,
+						602
+					]
+				},
+				{
+					"i": 1,
+					"theme": "La messe de tous les siècles",
+					"refs": "1345-1347",
+					"paragraphs": [
+						1345,
+						1346,
+						1347
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Les apparitions du Ressuscité",
+					"refs": "641, 643",
+					"paragraphs": [
+						641,
+						643
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. L’Esprit Saint, interprète de l’Écriture",
+					"refs": "112-113",
+					"paragraphs": [
+						112,
+						113
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Un avant-goût du Royaume : La Transfiguration",
+					"refs": "554-555",
+					"paragraphs": [
+						554,
+						555
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "644-645",
+					"paragraphs": [
+						644,
+						645
+					]
+				},
+				{
+					"i": 6,
+					"theme": "V. La prière de louange",
+					"refs": "2640",
+					"paragraphs": [
+						2640
+					]
+				}
+			]
+		},
+		{
+			"slug": "jeudi-de-paques",
+			"title": "Jeudi de Pâques",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "V. La prolifération du péché",
+					"refs": "1871-1876",
+					"paragraphs": [
+						1871,
+						1872,
+						1873,
+						1874,
+						1875,
+						1876
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "572, 599-602",
+					"paragraphs": [
+						572,
+						599,
+						600,
+						601,
+						602
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Le mystère pascal dans les sacrements de l’Église",
+					"refs": "1118-1122",
+					"paragraphs": [
+						1118,
+						1119,
+						1120,
+						1121,
+						1122
+					]
+				},
+				{
+					"i": 3,
+					"theme": "Le chemin de la prière",
+					"refs": "2663-2666",
+					"paragraphs": [
+						2663,
+						2664,
+						2665,
+						2666
+					]
+				},
+				{
+					"i": 4,
+					"theme": "« Jésus-Christ est descendu aux enfers, est ressuscité des morts le troisième jour »",
+					"refs": "632, 635, 644-645",
+					"paragraphs": [
+						632,
+						635,
+						644,
+						645
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Notre participation au sacrifice du Christ",
+					"refs": "626-627",
+					"paragraphs": [
+						626,
+						627
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Prologue",
+					"refs": "13-14",
+					"paragraphs": [
+						13,
+						14
+					]
+				}
+			]
+		},
+		{
+			"slug": "vendredi-de-paques",
+			"title": "Vendredi de Pâques",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "IV. Seigneur",
+					"refs": "448, 452",
+					"paragraphs": [
+						448,
+						452
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Croire en l’Esprit Saint",
+					"refs": "152",
+					"paragraphs": [
+						152
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Je crois en l’Esprit-Saint",
+					"refs": "683",
+					"paragraphs": [
+						683
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Les effets de la Confirmation",
+					"refs": "1303",
+					"paragraphs": [
+						1303
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "993",
+					"paragraphs": [
+						993
+					]
+				},
+				{
+					"i": 5,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "572",
+					"paragraphs": [
+						572
+					]
+				},
+				{
+					"i": 6,
+					"theme": "Les symboles de l’Église",
+					"refs": "756",
+					"paragraphs": [
+						756
+					]
+				}
+			]
+		},
+		{
+			"slug": "samedi-de-paques",
+			"title": "Samedi dans l’octave de Pâques",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Je crois à la sainte Église catholique »",
+					"refs": "748, 897-900",
+					"paragraphs": [
+						748,
+						897,
+						898,
+						899,
+						900
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les apparitions du Ressuscité",
+					"refs": "641, 643",
+					"paragraphs": [
+						641,
+						643
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "659-660",
+					"paragraphs": [
+						659,
+						660
+					]
+				},
+				{
+					"i": 3,
+					"theme": "La charge d’enseigner",
+					"refs": "888-889",
+					"paragraphs": [
+						888,
+						889
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Croire en l’Esprit Saint",
+					"refs": "152",
+					"paragraphs": [
+						152
+					]
+				},
+				{
+					"i": 5,
+					"theme": "Je crois en l’Esprit-Saint",
+					"refs": "683",
+					"paragraphs": [
+						683
+					]
+				},
+				{
+					"i": 6,
+					"theme": "III. Les effets de la Confirmation",
+					"refs": "1303",
+					"paragraphs": [
+						1303
+					]
+				}
+			]
+		},
+		{
+			"slug": "transfiguration-du-seigneur",
+			"title": "La Transfiguration du Seigneur",
+			"season": "ordinaire",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Pour juger les vivants et les morts",
+					"refs": "678",
+					"paragraphs": [
+						678
+					]
+				},
+				{
+					"i": 1,
+					"theme": "II. Christ",
+					"refs": "440",
+					"paragraphs": [
+						440
+					]
+				},
+				{
+					"i": 2,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "664",
+					"paragraphs": [
+						664
+					]
+				},
+				{
+					"i": 3,
+					"theme": "III. Fils unique de Dieu",
+					"refs": "444",
+					"paragraphs": [
+						444
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Un avant-goût du Royaume : La Transfiguration",
+					"refs": "554",
+					"paragraphs": [
+						554
+					]
+				}
+			]
+		},
+		{
+			"slug": "exaltation-de-la-sainte-croix",
+			"title": "L’Exaltation de la Sainte Croix",
+			"season": "ordinaire",
+			"liturgicalColor": "red",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "613-618",
+					"paragraphs": [
+						613,
+						614,
+						615,
+						616,
+						617,
+						618
+					]
+				},
+				{
+					"i": 1,
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "661, 664",
+					"paragraphs": [
+						661,
+						664
+					]
+				},
+				{
+					"i": 2,
+					"theme": "IV. « Tu ne te feras aucune image sculptée... »",
+					"refs": "2130",
+					"paragraphs": [
+						2130
+					]
+				},
+				{
+					"i": 3,
+					"theme": "L’annonce du Royaume de Dieu",
+					"refs": "546",
+					"paragraphs": [
+						546
+					]
+				},
+				{
+					"i": 4,
+					"theme": "Jésus enseigne à prier",
+					"refs": "2607",
+					"paragraphs": [
+						2607
+					]
+				},
+				{
+					"i": 5,
+					"theme": "I. Jésus et la Loi",
+					"refs": "581",
+					"paragraphs": [
+						581
+					]
+				},
+				{
+					"i": 6,
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "423",
+					"paragraphs": [
+						423
+					]
+				}
+			]
+		},
+		{
+			"slug": "dedicace-de-la-basilique-du-latran",
+			"title": "La Dédicace de la basilique du Latran",
+			"season": "ordinaire",
+			"liturgicalColor": "white",
+			"clusters": [
+				{
+					"i": 0,
+					"theme": "II. Jésus et le Temple",
+					"refs": "583-584, 586",
+					"paragraphs": [
+						583,
+						584,
+						586
+					]
+				},
+				{
+					"i": 1,
+					"theme": "Les préfigurations du Baptême dans l’Ancienne Alliance",
+					"refs": "1217",
+					"paragraphs": [
+						1217
+					]
+				},
+				{
+					"i": 2,
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "994",
+					"paragraphs": [
+						994
+					]
+				},
+				{
+					"i": 3,
+					"theme": "« Jésus-Christ a souffert sous ponce pilate, il a été crucifié, il est mort, il a été enseveli »",
+					"refs": "575",
+					"paragraphs": [
+						575
+					]
+				}
+			]
+		}
+	]
+}

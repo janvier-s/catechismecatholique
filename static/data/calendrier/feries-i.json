@@ -5476,58 +5476,61 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "« Tu aimeras ton prochain comme toi-même »",
-					"refs": "2563",
+					"theme": "I. La loi morale naturelle",
+					"refs": "1957-1960",
 					"paragraphs": [
-						2563
+						1957,
+						1958,
+						1959,
+						1960
 					]
 				},
 				{
 					"i": 1,
-					"theme": "Serviteurs de la prière",
-					"refs": "2690",
+					"theme": "II. La loi ancienne",
+					"refs": "1964",
 					"paragraphs": [
-						2690
+						1964
 					]
 				},
 				{
 					"i": 2,
-					"theme": "Les anges dans la vie de l’Église",
-					"refs": "336",
+					"theme": "I. Les béatitudes",
+					"refs": "1716",
 					"paragraphs": [
-						336
+						1716
 					]
 				},
 				{
 					"i": 3,
-					"theme": "L’homme image de Dieu",
-					"refs": "1706",
+					"theme": "Nous croyons",
+					"refs": "166",
 					"paragraphs": [
-						1706
+						166
 					]
 				},
 				{
 					"i": 4,
-					"theme": "IV. La portée de la foi en Dieu Unique",
-					"refs": "226",
+					"theme": "Le Christ Jésus",
+					"refs": "728",
 					"paragraphs": [
-						226
+						728
 					]
 				},
 				{
 					"i": 5,
-					"theme": "IV. Les œuvres divines et les missions trinitaires",
-					"refs": "276",
+					"theme": "L’Église – instituée par le Christ Jésus",
+					"refs": "764",
 					"paragraphs": [
-						276
+						764
 					]
 				},
 				{
 					"i": 6,
-					"theme": "La providence et les causes secondes",
-					"refs": "308",
+					"theme": "La nécessité de la foi",
+					"refs": "161",
 					"paragraphs": [
-						308
+						161
 					]
 				}
 			]
@@ -14567,58 +14570,101 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "La transmission de la révélation divine",
-					"refs": "74",
+					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
+					"refs": "199, 386-388, 394-412",
 					"paragraphs": [
-						74
+						199,
+						386,
+						387,
+						388,
+						394,
+						395,
+						396,
+						397,
+						398,
+						399,
+						400,
+						401,
+						402,
+						403,
+						404,
+						405,
+						406,
+						407,
+						408,
+						409,
+						410,
+						411,
+						412
 					]
 				},
 				{
 					"i": 1,
-					"theme": "III. Fils unique de Dieu",
-					"refs": "442",
+					"theme": "II. Le Monde visible",
+					"refs": "337-354",
 					"paragraphs": [
-						442
+						337,
+						338,
+						339,
+						340,
+						341,
+						342,
+						343,
+						344,
+						345,
+						346,
+						347,
+						348,
+						349,
+						350,
+						351,
+						352,
+						353,
+						354
 					]
 				},
 				{
 					"i": 2,
-					"theme": "La mission – une exigence de la catholicité de l’Église",
-					"refs": "854",
+					"theme": "L’Ancien Testament",
+					"refs": "121-123",
 					"paragraphs": [
-						854
+						121,
+						122,
+						123
 					]
 				},
 				{
 					"i": 3,
-					"theme": "V. La prière de louange",
-					"refs": "2640",
+					"theme": "L’unité de l’Ancien et du Nouveau Testament",
+					"refs": "128-130",
 					"paragraphs": [
-						2640
+						128,
+						129,
+						130
 					]
 				},
 				{
 					"i": 4,
-					"theme": "L’Église – instituée par le Christ Jésus",
-					"refs": "765",
+					"theme": "IV. Les œuvres divines et les missions trinitaires",
+					"refs": "280",
 					"paragraphs": [
-						765
+						280
 					]
 				},
 				{
 					"i": 5,
-					"theme": "Les traits caractéristiques des sacramentaux",
-					"refs": "1668",
+					"theme": "I. La catéchèse sur la Création",
+					"refs": "289",
 					"paragraphs": [
-						1668
+						289
 					]
 				},
 				{
 					"i": 6,
-					"theme": "Jésus enseigne à prier",
-					"refs": "2611",
+					"theme": "Pour lire le récit de la chute",
+					"refs": "390",
 					"paragraphs": [
-						2611
+						390
 					]
 				}
 			]
@@ -15994,60 +16040,64 @@
 			"clusters": [
 				{
 					"i": 0,
-					"theme": "« Je crois en Dieu le Père tout-puissant créateur du ciel et de la terre »",
-					"refs": "328-329",
+					"theme": "III. La solidarité humaine",
+					"refs": "1943-1948",
 					"paragraphs": [
-						328,
-						329
+						1943,
+						1944,
+						1945,
+						1946,
+						1947,
+						1948
 					]
 				},
 				{
 					"i": 1,
-					"theme": "La vie de prière",
-					"refs": "2779, 2785",
+					"theme": "« Jésus est monté aux cieux, il siège à la droite de Dieu, le Père tout-puissant »",
+					"refs": "661, 664",
 					"paragraphs": [
-						2779,
-						2785
+						661,
+						664
 					]
 				},
 				{
 					"i": 2,
-					"theme": "V. Dieu réalise son dessein : la divine providence",
-					"refs": "304",
+					"theme": "I. La communion des biens spirituels",
+					"refs": "952",
 					"paragraphs": [
-						304
+						952
 					]
 				},
 				{
 					"i": 3,
-					"theme": "V. La prière de louange",
-					"refs": "2645",
+					"theme": "Révélation progressive de la Résurrection",
+					"refs": "995",
 					"paragraphs": [
-						2645
+						995
 					]
 				},
 				{
 					"i": 4,
-					"theme": "La foi est une grâce",
-					"refs": "153",
+					"theme": "La vie de prière",
+					"refs": "2790",
 					"paragraphs": [
-						153
+						2790
 					]
 				},
 				{
 					"i": 5,
-					"theme": "L’annonce du Royaume de Dieu",
-					"refs": "544",
+					"theme": "I. Jésus et la Loi",
+					"refs": "581",
 					"paragraphs": [
-						544
+						581
 					]
 				},
 				{
 					"i": 6,
-					"theme": "Jésus prie",
-					"refs": "2603",
+					"theme": "La Bonne Nouvelle : Dieu a envoyé son Fils",
+					"refs": "423",
 					"paragraphs": [
-						2603
+						423
 					]
 				}
 			]

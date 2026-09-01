@@ -791,7 +791,10 @@ export interface CalendrierYearFile {
 export interface CalendrierDateRow {
 	date: string;
 	slug: string;
-	corpus: 'year' | 'fixed' | 'weekday';
+	// 'proper' is a date-proper day: its Mass reading is fixed by the day
+	// itself, not by week position or cycle, so unlike 'weekday' it carries
+	// no `cycle`.
+	corpus: 'year' | 'fixed' | 'weekday' | 'proper';
 	yearKey?: CalendrierYearKey;
 	cycle?: 'I' | 'II';
 	sundayCycle?: CalendrierYearKey;
@@ -802,6 +805,10 @@ export interface CalendrierDatesIndexFile {
 	rangeStart: string;
 	rangeEnd: string;
 	rows: CalendrierDateRow[];
+}
+
+export interface CalendrierProperFile {
+	feasts: CalendrierFeast[];
 }
 
 export interface CalendrierIndexFile {
