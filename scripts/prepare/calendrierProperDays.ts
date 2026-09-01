@@ -20,9 +20,11 @@ export interface ProperDay {
  * their own row; Easter's octave and the Ordinary Time collisions never
  * went through that exclusion at all and were simply absent.
  *
- * Holy Saturday (romcal id `holy_saturday`) is deliberately not listed
- * here: no Mass is celebrated during the day, only the Easter Vigil that
- * night, so there is no AELF Mass reading to fetch for it.
+ * Holy Saturday (romcal id `holy_saturday`) has no Mass during the day -
+ * only the Easter Vigil that night (a distinct liturgy, dated as part of
+ * Easter Sunday) - so AELF's own entry for it has an empty lecture list.
+ * It's still listed here rather than left absent, so the day at least
+ * shows the explanatory title instead of no card at all.
  */
 export const PROPER_DAYS: ProperDay[] = [
 	{
@@ -174,6 +176,12 @@ export const PROPER_DAYS: ProperDay[] = [
 		title: 'Le baptême du Seigneur',
 		romcalId: 'baptism_of_the_lord',
 		season: 'noel'
+	},
+	{
+		slug: 'samedi-saint',
+		title: 'Samedi saint',
+		romcalId: 'holy_saturday',
+		season: 'pascal'
 	},
 	{
 		slug: 'lundi-de-paques',

@@ -1616,6 +1616,13 @@
 			]
 		},
 		{
+			"slug": "samedi-saint",
+			"title": "Samedi saint",
+			"season": "pascal",
+			"liturgicalColor": "white",
+			"clusters": []
+		},
+		{
 			"slug": "lundi-de-paques",
 			"title": "Lundi de Pâques",
 			"season": "pascal",

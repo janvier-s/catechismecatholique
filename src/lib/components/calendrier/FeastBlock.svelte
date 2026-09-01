@@ -224,6 +224,10 @@
 					<p class="status">Lectures indisponibles pour cette fête.</p>
 				{:else if readingsState === 'error'}
 					<p class="status">Impossible de charger les lectures. Réessayez.</p>
+				{:else if readingsState !== 'idle' && readingsState.lectures.length === 0}
+					<p class="status">
+						Aucune messe n’est célébrée ce jour · la Vigile pascale a lieu ce soir.
+					</p>
 				{:else if readingsState !== 'idle'}
 					{#each readingsState.lectures as lecture, i (i)}
 						<article class="reading">
@@ -321,7 +325,7 @@
 			</li>
 		{/each}
 	</ul>
-	{#if autoDerived}
+	{#if autoDerived && feast.clusters.length > 0}
 		<p class="source-note">Références tirées de la Didache Study Bible</p>
 	{/if}
 </article>

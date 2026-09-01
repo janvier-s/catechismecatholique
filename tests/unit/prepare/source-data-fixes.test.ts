@@ -4,6 +4,7 @@ import {
 	fixCccParaSourceTypos,
 	groupConsecutiveBibleSups,
 	mergeBibleRefContinuations,
+	normalizeFrenchPunctuationSpacing,
 	normalizeGuillemets
 } from '../../../scripts/prepare/source-data-fixes';
 
@@ -84,6 +85,33 @@ describe('normalizeGuillemets', () => {
 
 	it('handles multiple guillemet pairs in same string', () => {
 		expect(normalizeGuillemets('« A» et «B »')).toBe('« A » et « B »');
+	});
+});
+
+describe('normalizeFrenchPunctuationSpacing', () => {
+	it('replaces the regular space before a colon with NBSP', () => {
+		expect(normalizeFrenchPunctuationSpacing('texte : suite')).toBe('texte : suite');
+	});
+
+	it('replaces the regular space before a semicolon with NBSP', () => {
+		expect(normalizeFrenchPunctuationSpacing('texte ; suite')).toBe('texte ; suite');
+	});
+
+	it('replaces the regular space before an exclamation mark with NBSP', () => {
+		expect(normalizeFrenchPunctuationSpacing('Alléluia !')).toBe('Alléluia !');
+	});
+
+	it('replaces the regular space before a question mark with NBSP', () => {
+		expect(normalizeFrenchPunctuationSpacing('Pourquoi ?')).toBe('Pourquoi ?');
+	});
+
+	it('is idempotent on already-correct text', () => {
+		const input = 'texte : suite ; fin ?';
+		expect(normalizeFrenchPunctuationSpacing(input)).toBe(input);
+	});
+
+	it('leaves punctuation with no preceding space untouched', () => {
+		expect(normalizeFrenchPunctuationSpacing('http://example.com')).toBe('http://example.com');
 	});
 });
 

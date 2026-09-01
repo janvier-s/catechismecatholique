@@ -3,6 +3,7 @@ import {
 	capitalizeFirstWord,
 	groupConsecutiveBibleSups,
 	mergeBibleRefContinuations,
+	normalizeFrenchPunctuationSpacing,
 	normalizeGuillemets
 } from './source-data-fixes';
 
@@ -94,7 +95,9 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 	function walk(node: RawNode) {
 		if (node.type === 'paragraph' && typeof node.number === 'number') {
 			const cleaned = stripInlineDocCitations(
-				capitalizeFirstWord(normalizeGuillemets(node.text_html ?? ''))
+				capitalizeFirstWord(
+					normalizeFrenchPunctuationSpacing(normalizeGuillemets(node.text_html ?? ''))
+				)
 			);
 			const initialRefs = (node.refs ?? []).map((r) => ({
 				type: r.type as Paragraph['magisterial_refs'][number]['type'],
@@ -113,7 +116,9 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 				),
 				citations: reindexCitationSupMarkers(
 					grouped.html,
-					(node.citations ?? []).map((c) => ({ text_html: c.text_html })),
+					(node.citations ?? []).map((c) => ({
+						text_html: normalizeFrenchPunctuationSpacing(normalizeGuillemets(c.text_html))
+					})),
 					grouped.refs
 				),
 				magisterial_refs: grouped.refs

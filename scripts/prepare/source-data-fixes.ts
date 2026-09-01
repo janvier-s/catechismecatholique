@@ -16,6 +16,15 @@ export function normalizeGuillemets(html: string): string {
 	);
 }
 
+// French typography requires a non-breaking space before ; : ! ? (guillemets
+// are handled separately above). Source CCC HTML uses a plain U+0020 space
+// instead, which lets the punctuation wrap onto its own line - swap it for
+// NBSP. Lookahead keeps the punctuation character itself untouched, so this
+// is idempotent (a space already replaced by NBSP won't match again).
+export function normalizeFrenchPunctuationSpacing(html: string): string {
+	return html.replace(/[ \t](?=[;:!?])/g, ' ');
+}
+
 // Strip the leading/trailing colon markers that the upstream JSON wraps
 // around Bible refs (and a few Latin terms) inside parentheses. The source
 // XHTML has e.g. `(<a class="bibRef">2 Tm 1, 12</a>)` and the processed

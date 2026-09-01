@@ -83,6 +83,7 @@
 				</div>
 			{/if}
 			<div class="result-actions-secondary">
+				<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
 				<DateSearchDropdown
 					{datesIndex}
 					selectedIso={row.date}
@@ -91,7 +92,6 @@
 					onClose={onDateSearchClose}
 					{onPick}
 				/>
-				<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
 			</div>
 		</div>
 	</div>
