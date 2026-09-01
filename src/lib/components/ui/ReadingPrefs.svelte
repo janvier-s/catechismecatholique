@@ -10,30 +10,31 @@
 	const isBibleOnly = $derived(page.url.pathname.startsWith('/bible'));
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
 
-	let activeTab: 'text' | 'appearance' | 'bible' | 'notes' = $state('text');
+	let activeTab: 'appearance' | 'reading' | 'bible' | 'notes' = $state('appearance');
 
 	// Bible pages carry no footnotes, so the Notes tab had nothing to show but
 	// an empty state. Drop it there and let the two survivors share the width.
-	// Bible-specific settings get their own tab instead of tucking under a
-	// generic one · that section had grown longer than the tab it sat under.
+	// Apparence holds pure typography/visual settings; Lecture holds reading-
+	// behavior toggles (bionic reading, and on Bible pages the scroll/nav
+	// behaviors too) · Bible keeps only the content-display toggles left over.
 	const tabs = $derived(
 		[
 			{
-				id: 'text' as const,
-				label: 'Texte',
-				title: 'Ajuste la typographie du texte à l’écran'
-			},
-			{
 				id: 'appearance' as const,
 				label: 'Apparence',
-				title: 'Change les couleurs du site'
+				title: 'Ajuste la typographie et les couleurs du site'
+			},
+			{
+				id: 'reading' as const,
+				label: 'Lecture',
+				title: 'Réglages qui changent le comportement de la lecture'
 			},
 			...(isBibleOnly
 				? [
 						{
 							id: 'bible' as const,
 							label: 'Bible',
-							title: 'Réglages propres à la lecture biblique'
+							title: 'Réglages propres à l’affichage du texte biblique'
 						}
 					]
 				: []),
@@ -216,186 +217,6 @@
 		{/each}
 	</div>
 
-	{#if activeTab === 'text'}
-		<div class="space-y-5">
-			<label class="block" title="Ajuste la taille du texte affiché à l'écran">
-				<span class="block mb-2 text-muted text-[13px]"
-					>Taille du texte&nbsp;: {$prefs.fontSize}px</span
-				>
-				<input
-					type="range"
-					min="13"
-					max="22"
-					step="1"
-					value={$prefs.fontSize}
-					oninput={(e) => updatePref('fontSize', parseInt(e.currentTarget.value, 10))}
-					class="w-full accent-accent"
-					title="Plus grand facilite la lecture, plus petit affiche davantage de texte à l’écran"
-				/>
-			</label>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Ajuste l'espacement entre les lignes du texte">Interligne</span
-				>
-				<PillGroup
-					ariaLabel="Interligne"
-					options={[
-						{
-							label: 'Serré',
-							value: 1.5,
-							title: 'Affiche plus de texte à l’écran, lecture plus dense'
-						},
-						{ label: 'Standard', value: 1.6, title: 'Équilibre entre densité et lisibilité' },
-						{
-							label: 'Aéré',
-							value: 2.0,
-							title: 'Facilite le suivi ligne à ligne, utile en cas de fatigue visuelle'
-						}
-					]}
-					value={$prefs.lineHeight}
-					onchange={(v) => updatePref('lineHeight', v)}
-				/>
-			</div>
-
-			<div bind:this={fontSectionEl} data-font-menu>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Change la police du texte, avec une option adaptée à la dyslexie">Police</span
-				>
-				<button
-					type="button"
-					bind:this={fontTriggerEl}
-					class="w-full border border-border rounded px-3 py-2 bg-background text-foreground text-left flex items-center justify-between text-[14px] font-medium"
-					style="font-family: {activeFont.stack};"
-					aria-haspopup="listbox"
-					aria-expanded={fontDropdownOpen}
-					title="Inclut une police adaptée à la dyslexie"
-					onclick={() => (fontDropdownOpen ? closeFontMenu() : openFontMenu())}
-				>
-					<span>{activeFont.label}</span>
-					<span class="text-[10px] text-subtle">{fontDropdownOpen ? '▲' : '▼'}</span>
-				</button>
-			</div>
-
-			<div class="hidden md:block">
-				<span class="block mb-2 text-muted text-[13px]" title="Ajuste la largeur du texte à l'écran"
-					>Largeur de colonne</span
-				>
-				<PillGroup
-					ariaLabel="Largeur de colonne"
-					options={[
-						{
-							label: 'Étroite',
-							value: 'narrow' as const,
-							title: 'Lignes plus courtes, plus faciles à suivre du regard'
-						},
-						{
-							label: 'Standard',
-							value: 'default' as const,
-							title: 'Largeur équilibrée pour la lecture'
-						},
-						{
-							label: 'Large',
-							value: 'wide' as const,
-							title: 'Utilise davantage l’espace de l’écran'
-						}
-					]}
-					value={$prefs.columnWidth}
-					onchange={(v) => updatePref('columnWidth', v)}
-				/>
-			</div>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Aligne le texte à gauche ou le justifie des deux côtés">Alignement</span
-				>
-				<PillGroup
-					ariaLabel="Alignement"
-					options={[
-						{
-							label: 'À gauche',
-							value: false,
-							title: 'Espacement des mots régulier, sans grands blancs'
-						},
-						{
-							label: 'Justifié',
-							value: true,
-							title: 'Bords alignés des deux côtés, mise en page plus soignée'
-						}
-					]}
-					value={$prefs.justifiedText}
-					onchange={(v) => updatePref('justifiedText', v)}
-				/>
-			</div>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Met en gras le début de chaque mot pour guider l'œil pendant la lecture"
-					>Lecture bionique</span
-				>
-				<PillGroup
-					ariaLabel="Lecture bionique"
-					options={[
-						{ label: 'Désactivée', value: false, title: 'Texte affiché normalement' },
-						{
-							label: 'Activée',
-							value: true,
-							title: "Met en gras le début de chaque mot pour guider l'œil"
-						}
-					]}
-					value={$prefs.bionicReading}
-					onchange={(v) => updatePref('bionicReading', v)}
-				/>
-			</div>
-
-			{#if $prefs.bionicReading}
-				<div class="pl-4 border-l border-border space-y-4">
-					<div>
-						<span
-							class="block mb-2 text-muted text-[13px]"
-							title="Règle la portion de chaque mot mise en gras"
-							>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
-						>
-						<input
-							type="range"
-							min="1"
-							max="5"
-							step="1"
-							value={$prefs.bionicFixation}
-							oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
-							class="w-full accent-accent"
-							aria-label="Intensité de la lecture bionique"
-							title="Règle la portion de chaque mot mise en gras"
-						/>
-					</div>
-
-					<div>
-						<span
-							class="block mb-2 text-muted text-[13px]"
-							title="Règle la fréquence des mots mis en gras"
-							>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
-						>
-						<input
-							type="range"
-							min="0"
-							max="4"
-							step="1"
-							value={$prefs.bionicSaccade}
-							oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
-							class="w-full accent-accent"
-							aria-label="Saut de mots de la lecture bionique"
-							title="Un saut plus élevé met moins de mots en gras"
-						/>
-					</div>
-				</div>
-			{/if}
-		</div>
-	{/if}
-
 	{#if activeTab === 'appearance'}
 		<div class="space-y-5">
 			<div>
@@ -457,35 +278,263 @@
 					onchange={(v) => updatePref('accentColor', v)}
 				/>
 			</div>
+
+			<label class="block" title="Ajuste la taille du texte affiché à l'écran">
+				<span class="block mb-2 text-muted text-[13px]"
+					>Taille du texte&nbsp;: {$prefs.fontSize}px</span
+				>
+				<input
+					type="range"
+					min="13"
+					max="22"
+					step="1"
+					value={$prefs.fontSize}
+					oninput={(e) => updatePref('fontSize', parseInt(e.currentTarget.value, 10))}
+					class="w-full accent-accent"
+					title="Plus grand facilite la lecture, plus petit affiche davantage de texte à l’écran"
+				/>
+			</label>
+
+			<div bind:this={fontSectionEl} data-font-menu>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Change la police du texte, avec une option adaptée à la dyslexie">Police</span
+				>
+				<button
+					type="button"
+					bind:this={fontTriggerEl}
+					class="w-full border border-border rounded px-3 py-2 bg-background text-foreground text-left flex items-center justify-between text-[14px] font-medium"
+					style="font-family: {activeFont.stack};"
+					aria-haspopup="listbox"
+					aria-expanded={fontDropdownOpen}
+					title="Inclut une police adaptée à la dyslexie"
+					onclick={() => (fontDropdownOpen ? closeFontMenu() : openFontMenu())}
+				>
+					<span>{activeFont.label}</span>
+					<span class="text-[10px] text-subtle">{fontDropdownOpen ? '▲' : '▼'}</span>
+				</button>
+			</div>
+
+			<div>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Ajuste l'espacement entre les lignes du texte">Interligne</span
+				>
+				<PillGroup
+					ariaLabel="Interligne"
+					options={[
+						{
+							label: 'Serré',
+							value: 1.5,
+							title: 'Affiche plus de texte à l’écran, lecture plus dense'
+						},
+						{ label: 'Standard', value: 1.6, title: 'Équilibre entre densité et lisibilité' },
+						{
+							label: 'Aéré',
+							value: 2.0,
+							title: 'Facilite le suivi ligne à ligne, utile en cas de fatigue visuelle'
+						}
+					]}
+					value={$prefs.lineHeight}
+					onchange={(v) => updatePref('lineHeight', v)}
+				/>
+			</div>
+
+			<div class="hidden md:block">
+				<span class="block mb-2 text-muted text-[13px]" title="Ajuste la largeur du texte à l'écran"
+					>Largeur de colonne</span
+				>
+				<PillGroup
+					ariaLabel="Largeur de colonne"
+					options={[
+						{
+							label: 'Étroite',
+							value: 'narrow' as const,
+							title: 'Lignes plus courtes, plus faciles à suivre du regard'
+						},
+						{
+							label: 'Standard',
+							value: 'default' as const,
+							title: 'Largeur équilibrée pour la lecture'
+						},
+						{
+							label: 'Large',
+							value: 'wide' as const,
+							title: 'Utilise davantage l’espace de l’écran'
+						}
+					]}
+					value={$prefs.columnWidth}
+					onchange={(v) => updatePref('columnWidth', v)}
+				/>
+			</div>
+
+			<div>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Aligne le texte à gauche ou le justifie des deux côtés">Alignement</span
+				>
+				<PillGroup
+					ariaLabel="Alignement"
+					options={[
+						{
+							label: 'À gauche',
+							value: false,
+							title: 'Espacement des mots régulier, sans grands blancs'
+						},
+						{
+							label: 'Justifié',
+							value: true,
+							title: 'Bords alignés des deux côtés, mise en page plus soignée'
+						}
+					]}
+					value={$prefs.justifiedText}
+					onchange={(v) => updatePref('justifiedText', v)}
+				/>
+			</div>
+		</div>
+	{/if}
+
+	{#if activeTab === 'reading'}
+		<div class="space-y-5">
+			{#if isBibleOnly}
+				<div>
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Choisit comment le texte biblique est découpé à l'écran">Mode de lecture</span
+					>
+					<PillGroup
+						ariaLabel="Mode de lecture"
+						options={[
+							{
+								label: 'Verset par verset',
+								value: 'verse' as const,
+								title: 'Facilite le repérage d’un verset précis'
+							},
+							{
+								label: 'Paragraphe',
+								value: 'paragraph' as const,
+								title: 'Lecture continue, comme un texte en prose'
+							}
+						]}
+						value={$prefs.bibleLayout}
+						onchange={(v) => updatePref('bibleLayout', v)}
+					/>
+				</div>
+			{/if}
+
+			<div>
+				<span
+					class="block mb-2 text-muted text-[13px]"
+					title="Met en gras le début de chaque mot pour guider l'œil pendant la lecture"
+					>Lecture bionique</span
+				>
+				<PillGroup
+					ariaLabel="Lecture bionique"
+					options={[
+						{ label: 'Désactivée', value: false, title: 'Texte affiché normalement' },
+						{
+							label: 'Activée',
+							value: true,
+							title: "Met en gras le début de chaque mot pour guider l'œil"
+						}
+					]}
+					value={$prefs.bionicReading}
+					onchange={(v) => updatePref('bionicReading', v)}
+				/>
+				{#if $prefs.bionicReading}
+					<div class="mt-3 space-y-4">
+						<div>
+							<span
+								class="block mb-2 text-muted text-[13px]"
+								title="Règle la portion de chaque mot mise en gras"
+								>Intensité <span class="text-subtle">({$prefs.bionicFixation}/5)</span></span
+							>
+							<input
+								type="range"
+								min="1"
+								max="5"
+								step="1"
+								value={$prefs.bionicFixation}
+								oninput={(e) => updatePref('bionicFixation', Number(e.currentTarget.value))}
+								class="w-full accent-accent"
+								aria-label="Intensité de la lecture bionique"
+								title="Règle la portion de chaque mot mise en gras"
+							/>
+						</div>
+
+						<div>
+							<span
+								class="block mb-2 text-muted text-[13px]"
+								title="Règle la fréquence des mots mis en gras"
+								>Saut de mots <span class="text-subtle">({$prefs.bionicSaccade})</span></span
+							>
+							<input
+								type="range"
+								min="0"
+								max="4"
+								step="1"
+								value={$prefs.bionicSaccade}
+								oninput={(e) => updatePref('bionicSaccade', Number(e.currentTarget.value))}
+								class="w-full accent-accent"
+								aria-label="Saut de mots de la lecture bionique"
+								title="Un saut plus élevé met moins de mots en gras"
+							/>
+						</div>
+					</div>
+				{/if}
+			</div>
+
+			{#if isBibleOnly}
+				<div>
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Affiche ou masque les liens vers les chapitres voisins"
+						>Navigation entre chapitres</span
+					>
+					<PillGroup
+						ariaLabel="Navigation entre chapitres"
+						options={[
+							{
+								label: 'Afficher',
+								value: false,
+								title: 'Accès rapide au chapitre précédent ou suivant'
+							},
+							{
+								label: 'Masquer',
+								value: true,
+								title: 'Libère de l’espace à l’écran'
+							}
+						]}
+						value={$prefs.hideChapterNav}
+						onchange={(v) => updatePref('hideChapterNav', v)}
+					/>
+				</div>
+
+				<div>
+					<span
+						class="block mb-2 text-muted text-[13px]"
+						title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
+					>
+					<PillGroup
+						ariaLabel="Scroll infini"
+						options={[
+							{
+								label: 'Activé',
+								value: true,
+								title: 'Charge le chapitre suivant automatiquement en défilant'
+							},
+							{ label: 'Désactivé', value: false, title: 'Passe au chapitre suivant manuellement' }
+						]}
+						value={$prefs.infiniteScroll}
+						onchange={(v) => updatePref('infiniteScroll', v)}
+					/>
+				</div>
+			{/if}
 		</div>
 	{/if}
 
 	{#if activeTab === 'bible'}
 		<div class="space-y-5">
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Choisit comment le texte biblique est découpé à l'écran">Mode de lecture</span
-				>
-				<PillGroup
-					ariaLabel="Mode de lecture"
-					options={[
-						{
-							label: 'Verset par verset',
-							value: 'verse' as const,
-							title: 'Facilite le repérage d’un verset précis'
-						},
-						{
-							label: 'Paragraphe',
-							value: 'paragraph' as const,
-							title: 'Lecture continue, comme un texte en prose'
-						}
-					]}
-					value={$prefs.bibleLayout}
-					onchange={(v) => updatePref('bibleLayout', v)}
-				/>
-			</div>
-
 			<div>
 				<span
 					class="block mb-2 text-muted text-[13px]"
@@ -505,7 +554,7 @@
 					onchange={(v) => updatePref('hideVerseNumbers', v)}
 				/>
 				{#if !$prefs.hideVerseNumbers}
-					<div class="mt-3 pl-4 border-l border-border">
+					<div class="mt-3">
 						<span
 							class="block mb-2 text-muted text-[13px]"
 							title="Change la couleur des numéros de verset">Couleur</span
@@ -558,31 +607,6 @@
 			<div>
 				<span
 					class="block mb-2 text-muted text-[13px]"
-					title="Affiche ou masque les liens vers les chapitres voisins"
-					>Navigation entre chapitres</span
-				>
-				<PillGroup
-					ariaLabel="Navigation entre chapitres"
-					options={[
-						{
-							label: 'Afficher',
-							value: false,
-							title: 'Accès rapide au chapitre précédent ou suivant'
-						},
-						{
-							label: 'Masquer',
-							value: true,
-							title: 'Libère de l’espace à l’écran'
-						}
-					]}
-					value={$prefs.hideChapterNav}
-					onchange={(v) => updatePref('hideChapterNav', v)}
-				/>
-			</div>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
 					title="Choisit le système de numérotation des psaumes"
 					>Numérotation Vulgate (psaumes)</span
 				>
@@ -598,26 +622,6 @@
 					]}
 					value={$prefs.showVulgatePsalms}
 					onchange={(v) => updatePref('showVulgatePsalms', v)}
-				/>
-			</div>
-
-			<div>
-				<span
-					class="block mb-2 text-muted text-[13px]"
-					title="Choisit si le chapitre suivant se charge automatiquement">Scroll infini</span
-				>
-				<PillGroup
-					ariaLabel="Scroll infini"
-					options={[
-						{
-							label: 'Activé',
-							value: true,
-							title: 'Charge le chapitre suivant automatiquement en défilant'
-						},
-						{ label: 'Désactivé', value: false, title: 'Passe au chapitre suivant manuellement' }
-					]}
-					value={$prefs.infiniteScroll}
-					onchange={(v) => updatePref('infiniteScroll', v)}
 				/>
 			</div>
 		</div>
@@ -678,7 +682,7 @@
 								onchange={(v) => updatePref('hideCrossRefs', v)}
 							/>
 							{#if !$prefs.hideCrossRefs}
-								<div class="mt-3 pl-4 border-l border-border">
+								<div class="mt-3">
 									<PillGroup
 										ariaLabel="Position des renvois"
 										options={[
@@ -716,7 +720,7 @@
 								onchange={(v) => updatePref(bibleCiteHideKey, v)}
 							/>
 							{#if !$prefs[bibleCiteHideKey]}
-								<div class="mt-3 pl-4 border-l border-border">
+								<div class="mt-3">
 									<PillGroup
 										ariaLabel="Format des citations bibliques"
 										options={[

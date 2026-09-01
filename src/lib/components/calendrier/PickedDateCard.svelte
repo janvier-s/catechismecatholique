@@ -74,19 +74,14 @@
 		: undefined}
 >
 	<div class="result-head">
-		<p class="kicker">Résultat</p>
-		<div class="result-actions">
-			{#if row.corpus === 'weekday'}
-				<div class="sunday-nav">
-					<button type="button" onclick={pickPreviousSunday}>← Dimanche précédent</button>
-					<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
-				</div>
-			{/if}
+		<div class="kicker-col">
+			<p class="kicker">Résultat</p>
 			<div class="result-actions-secondary">
 				<button type="button" class="reset-btn" onclick={onReset}>Revenir à aujourd’hui</button>
 				<DateSearchDropdown
 					{datesIndex}
 					selectedIso={row.date}
+					align="left"
 					open={dateSearchOpen}
 					onToggle={onDateSearchToggle}
 					onClose={onDateSearchClose}
@@ -94,6 +89,12 @@
 				/>
 			</div>
 		</div>
+		{#if row.corpus === 'weekday'}
+			<div class="sunday-nav">
+				<button type="button" onclick={pickPreviousSunday}>← Dimanche précédent</button>
+				<button type="button" onclick={pickNextSunday}>Dimanche suivant →</button>
+			</div>
+		{/if}
 	</div>
 	<!-- The live region has to outlive the message so the message counts as
 	     an insertion into it, hence a wrapper that renders unconditionally. -->
@@ -128,18 +129,20 @@
 		letter-spacing: 0.16em;
 		text-transform: uppercase;
 		color: var(--color-accent);
-		margin: 0 0 0.75rem;
+		margin: 0;
 	}
 	.result-head {
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: 0.75rem;
+		margin: 0 0 0.75rem;
 	}
-	.result-actions {
+	.kicker-col {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-end;
+		align-items: flex-start;
 		gap: 0.5rem;
 	}
 	.result-actions-secondary {

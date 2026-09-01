@@ -3,18 +3,17 @@ import type { Page } from '@playwright/test';
 import { openDisclosure } from './helpers';
 
 // ReadingPrefs unmounts on close, so its tab state resets on every open ·
-// the Bible tab has to be reselected each time, as in bible-reading-mode.
-// Every control this file touches (Scroll infini, Numéros de verset, Titres
-// de section, Navigation entre chapitres, Numérotation Vulgate) lives on the
-// Bible tab, not Texte — Bible-specific settings got their own tab instead
-// of tucking under Texte (see ReadingPrefs.svelte's comment on `tabs`).
+// the Lecture tab has to be reselected each time, as in bible-reading-mode.
+// Scroll infini and Navigation entre chapitres are reading-behavior toggles
+// and live on the Lecture tab, not Bible — the Bible tab keeps only the
+// content-display settings (see ReadingPrefs.svelte's comment on `tabs`).
 async function openReadingTab(page: Page) {
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
 	// Not a bare click · see openDisclosure. This is where the "on by default"
 	// test flaked: the click after reload() landed before hydration, so the
-	// dialog never opened and the Bible tab below was waited for in vain.
+	// dialog never opened and the Lecture tab below was waited for in vain.
 	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
-	await dialog.getByRole('button', { name: 'Bible' }).click();
+	await dialog.getByRole('button', { name: 'Lecture' }).click();
 	return dialog;
 }
 
@@ -50,22 +49,18 @@ test('infinite scroll is on by default and the toggle persists', async ({ page }
 	expect((await readPrefs()).infiniteScroll).toBe(true);
 });
 
-test('the Afficher/Masquer indices that bible-reading-mode.test.ts depends on still map correctly', async ({
+test('Navigation entre chapitres (Lecture tab) toggles the prev/next strip without touching Bible-tab prefs', async ({
 	page
 }) => {
-	// That file addresses these positionally: nth(0) Numéros de verset,
-	// nth(1) Titres de section, nth(2) Navigation entre chapitres, nth(3)
-	// Numérotation Vulgate. Only those four controls use the Afficher/Masquer
-	// pair, so the indices are stable against controls using other labels ·
-	// « Scroll infini » deliberately uses Activé/Désactivé to stay out of
-	// the sequence. What would break them is a NEW control reusing Afficher/
-	// Masquer above « Navigation entre chapitres ». This test catches that by
-	// proving the click at nth(2) lands on the prev/next strip and on nothing
-	// else · the top ChapterNavBar is no longer what this toggle gates (see
-	// bible-reading-mode.test.ts's own "chapter navigation" tests).
+	// Navigation entre chapitres is the only Afficher/Masquer control on the
+	// Lecture tab, so no nth() is needed there · this test's job is to prove
+	// it stays isolated from the content-display prefs on the separate Bible
+	// tab (Numéros de verset, Numérotation Vulgate), which live in different
+	// state entirely (see bible-reading-mode.test.ts's own "chapter
+	// navigation" tests).
 	await page.goto('/bible/genese/1');
 	const dialog = await openReadingTab(page);
-	await dialog.getByRole('button', { name: 'Masquer' }).nth(2).click();
+	await dialog.getByRole('button', { name: 'Masquer' }).click();
 	await page.keyboard.press('Escape');
 
 	await expect(page.locator('.chapter-prev-next')).toHaveCount(0);
@@ -74,9 +69,6 @@ test('the Afficher/Masquer indices that bible-reading-mode.test.ts depends on st
 		JSON.parse(localStorage.getItem('catechismecatholique.prefs') ?? '{}')
 	);
 	expect(stored.hideChapterNav).toBe(true);
-	// The discriminating half: no neighbouring preference moved. If the indices
-	// had shifted by one, nth(2) would have hit Numérotation Vulgate instead and
-	// showVulgatePsalms would be the field that changed.
 	expect(stored.hideVerseNumbers).toBe(false);
 	expect(stored.showVulgatePsalms).toBe(false);
 });
