@@ -194,12 +194,35 @@ export function loadParagraphContext(
 	return p;
 }
 
+// Module-level promise caches, matching the pattern used by the other index
+// loaders in this file. Both files are static between deploys, and the batch
+// API route resolves up to 50 paragraphs in one request · without these it
+// re-fetched and re-parsed sources-index.json (150KB) once per paragraph.
+let citedByPromise: Promise<Record<number, number[]>> | null = null;
+let sourcesIndexPromise: Promise<SourceEntry[]> | null = null;
+
 export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, number[]>> {
-	return fetchJson<Record<number, number[]>>('/data/cec/cited-by.json', fetcher);
+	if (!citedByPromise) {
+		citedByPromise = fetchJson<Record<number, number[]>>('/data/cec/cited-by.json', fetcher).catch(
+			(e) => {
+				citedByPromise = null;
+				throw e;
+			}
+		);
+	}
+	return citedByPromise;
 }
 
 export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]> {
-	return fetchJson<SourceEntry[]>('/data/cec/sources-index.json', fetcher);
+	if (!sourcesIndexPromise) {
+		sourcesIndexPromise = fetchJson<SourceEntry[]>('/data/cec/sources-index.json', fetcher).catch(
+			(e) => {
+				sourcesIndexPromise = null;
+				throw e;
+			}
+		);
+	}
+	return sourcesIndexPromise;
 }
 
 export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseIndex> {
@@ -744,7 +767,8 @@ export function loadCalendrierReading(
 const cecLiturgyCache = new Map<number, Promise<CecLiturgyBucket>>();
 
 /**
- * The liturgical occasions on which one CEC paragraph is read, resolved from
+ * The liturgical occasions on which one CEC paragraph is proposed for
+ * meditation alongside the day's readings, resolved from
  * the shard covering its hundred. Returns [] for a paragraph the Homiletic
  * Directory never cites (roughly half of them), which is ordinary data, not a
  * failure. A missing shard file means no paragraph in that hundred is cited.
@@ -771,6 +795,28 @@ export async function loadCecLiturgy(
 	}
 	const shard = await p;
 	return (shard.paragraphs[String(paragraph)] ?? []).map((i) => shard.occasions[i]!);
+}
+
+let cecLiturgyByOccasionPromise: Promise<Record<string, CecLiturgyOccasion>> | null = null;
+
+/**
+ * The same occasions keyed by `${cycle ?? ''}:${slug}` instead of by
+ * paragraph. Built by scripts/prepare/cecLiturgyIndex.ts · the shards above
+ * cannot answer "what is proposed on this date" without scanning all of them.
+ */
+export function loadCecLiturgyByOccasion(
+	fetcher: Fetch = fetch
+): Promise<Record<string, CecLiturgyOccasion>> {
+	if (!cecLiturgyByOccasionPromise) {
+		cecLiturgyByOccasionPromise = fetchJson<Record<string, CecLiturgyOccasion>>(
+			'/data/calendrier/cec/by-occasion.json',
+			fetcher
+		).catch((e) => {
+			cecLiturgyByOccasionPromise = null;
+			throw e;
+		});
+	}
+	return cecLiturgyByOccasionPromise;
 }
 
 let calendrierDatesIndexPromise: Promise<CalendrierDatesIndexFile> | null = null;

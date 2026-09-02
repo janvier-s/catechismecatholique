@@ -11,7 +11,11 @@ import { buildWeekdayTargets } from './weekdayFeasts.ts';
 import { buildWeekdayFeast, buildProperFeast } from './weekdayReadings.ts';
 import { PROPER_DAYS } from './calendrierProperDays.ts';
 import { buildHeadingLevels, type CecStructureFile } from './cecHeadingCluster.ts';
-import { buildCecLiturgyIndex, type CecLiturgySource } from './cecLiturgyIndex.ts';
+import {
+	buildCecLiturgyIndex,
+	buildCecLiturgyByOccasion,
+	type CecLiturgySource
+} from './cecLiturgyIndex.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -505,11 +509,18 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		readings[key] = entry;
 	}
 
+	const refsForKey = (key: string) =>
+		readings[key]?.lectures.filter((l) => l.ref).map((l) => ({ type: l.type, ref: l.ref }));
+
 	const projectRoot = new URL('../..', import.meta.url).pathname;
 	const structurePath = join(projectRoot, 'static', 'data', 'cec', 'structure.json');
 	const structure: CecStructureFile = JSON.parse(readFileSync(structurePath, 'utf8'));
 	const levels = buildHeadingLevels(structure);
 	const concordanceDir = join(projectRoot, 'data-archive', 'concordance');
+
+	// Ferial days feed the forward index only · see the note on
+	// `liturgySources` below for why they stay out of the reverse shards.
+	const ferialSources: CecLiturgySource[] = [];
 
 	for (const cycleKey of ['I', 'II'] as const) {
 		const feasts = weekdayTargets
@@ -532,6 +543,16 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 			join(outDir, `feries-${cycleKey.toLowerCase()}.json`),
 			JSON.stringify({ key: cycleKey, feasts }, null, '\t') + '\n'
 		);
+
+		for (const feast of feasts) {
+			const key = readingsKey(feast.slug, cycleKey);
+			ferialSources.push({
+				feast,
+				cycle: cycleKey,
+				readingsKey: readings[key] ? key : undefined,
+				readings: refsForKey(key)
+			});
+		}
 	}
 
 	const properFeasts = PROPER_DAYS.map((pd) => {
@@ -557,8 +578,6 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 	// recognises. Source order here (années a/b/c, then the propre, then fixed
 	// feasts) is the order the panel renders in.
 	const liturgySources: CecLiturgySource[] = [];
-	const refsFor = (key: string) =>
-		readings[key]?.lectures.filter((l) => l.ref).map((l) => ({ type: l.type, ref: l.ref }));
 	for (const yf of yearFiles) {
 		for (const feast of yf.feasts) {
 			const key = readingsKey(feast.slug, yf.key);
@@ -566,7 +585,7 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 				feast,
 				cycle: yf.key,
 				readingsKey: readings[key] ? key : undefined,
-				readings: refsFor(key)
+				readings: refsForKey(key)
 			});
 		}
 	}
@@ -575,7 +594,7 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 		liturgySources.push({
 			feast,
 			readingsKey: readings[key] ? key : undefined,
-			readings: refsFor(key)
+			readings: refsForKey(key)
 		});
 	}
 
@@ -585,6 +604,18 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 	for (const [bucket, entries] of liturgyIndex) {
 		writeFileSync(join(liturgyDir, `${bucket}.json`), JSON.stringify(entries));
 	}
+
+	// Same occasions, keyed by cycle and slug instead of by paragraph. The
+	// shards above cannot answer "what is proposed on this date" without a
+	// scan of all of them · /api/liturgie/{date} reads this instead.
+	// The forward index additionally covers the ferial cycles. The exclusion
+	// noted above is right for the reverse direction (paragraph to the notable
+	// days that cite it) but wrong here: without weekdays, /api/liturgie/{date}
+	// answers only about one date in four.
+	writeFileSync(
+		join(liturgyDir, 'by-occasion.json'),
+		JSON.stringify(buildCecLiturgyByOccasion([...liturgySources, ...ferialSources]))
+	);
 
 	const readingsDir = join(outDir, 'readings');
 	mkdirSync(readingsDir, { recursive: true });

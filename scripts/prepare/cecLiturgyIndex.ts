@@ -6,6 +6,13 @@ import type {
 } from './calendrier.ts';
 
 /**
+ * Which lectionary cycle a day belongs to: a/b/c for the three-year Sunday
+ * cycle, I/II for the ferial weekday cycle. The two namespaces are disjoint,
+ * so one key space covers both.
+ */
+export type CecCycleKey = 'a' | 'b' | 'c' | 'I' | 'II';
+
+/**
  * One day a CEC paragraph is proposed for meditation on: the feast, plus every
  * theme that day groups paragraphs under · a day cited for one paragraph still
  * carries its whole programme, the way the feast page shows it.
@@ -15,8 +22,8 @@ export interface CecLiturgyOccasion {
 	title: string;
 	season: SeasonKey;
 	color: LiturgicalColor;
-	/** 'a' | 'b' | 'c' for a Sunday/feast of the three-year cycle · absent for fixed feasts and the propre. */
-	cycle?: 'a' | 'b' | 'c';
+	/** Sunday cycle a/b/c, or ferial cycle I/II · absent for fixed feasts and the propre. */
+	cycle?: CecCycleKey;
 	/** Fixed feasts only, e.g. "2 Février". */
 	date?: string;
 	/** Fixed feasts only · lets the frontend order them by calendar month. */
@@ -58,7 +65,8 @@ export interface CecLiturgyBucket {
 
 export interface CecLiturgySource {
 	feast: CalendrierFeast | CalendrierFixedFeast;
-	cycle?: 'a' | 'b' | 'c';
+	/** Sunday cycle a/b/c for the three-year lectionary, or ferial cycle I/II. */
+	cycle?: CecCycleKey;
 	/** Pass undefined when the day has no readings file. */
 	readingsKey?: string;
 	readings?: CecLiturgyReadingRef[];
@@ -78,6 +86,41 @@ function isFixed(f: CalendrierFeast | CalendrierFixedFeast): f is CalendrierFixe
 }
 
 /**
+ * Identity of a liturgical day. A slug alone is not unique: the same Sunday
+ * appears in cycles a, b and c with different clusters, and a weekday slug
+ * recurs across ferial cycles I and II, so the cycle is part of the key.
+ */
+export function occasionKey(cycle: string | undefined, slug: string): string {
+	return `${cycle ?? ''}:${slug}`;
+}
+
+/**
+ * Derive the occasion record a source feast maps to. Shared by both builders
+ * below so the paragraph-keyed shards and the slug-keyed index cannot drift.
+ */
+export function toCecLiturgyOccasion(source: CecLiturgySource): CecLiturgyOccasion {
+	const { feast, cycle, readingsKey, readings } = source;
+	const fixed = isFixed(feast);
+	return {
+		slug: feast.slug,
+		title: feast.title,
+		season: feast.season,
+		color: feast.liturgicalColor,
+		...(cycle ? { cycle } : {}),
+		...(fixed ? { date: feast.date, monthIndex: feast.month_index } : {}),
+		// A cluster may list the same paragraph twice (a range overlapping a
+		// loose number in the same "CEC ..." line) · dedupe here so the
+		// frontend can key on the number.
+		clusters: feast.clusters.map((c) => ({
+			theme: c.theme,
+			paragraphs: [...new Set(c.paragraphs)]
+		})),
+		...(readingsKey ? { readingsKey } : {}),
+		...(readings && readings.length > 0 ? { readings } : {})
+	};
+}
+
+/**
  * Inverts the calendar's feast/cluster/paragraph nesting into a paragraph to
  * occasions map, sharded by `cecLiturgyBucket`.
  *
@@ -90,26 +133,10 @@ export function buildCecLiturgyIndex(sources: CecLiturgySource[]): Map<number, C
 	// Per shard, where a given day already sits in its occasion table.
 	const seen = new Map<number, Map<string, number>>();
 
-	for (const { feast, cycle, readingsKey, readings } of sources) {
-		const fixed = isFixed(feast);
-		const occasion: CecLiturgyOccasion = {
-			slug: feast.slug,
-			title: feast.title,
-			season: feast.season,
-			color: feast.liturgicalColor,
-			...(cycle ? { cycle } : {}),
-			...(fixed ? { date: feast.date, monthIndex: feast.month_index } : {}),
-			// A cluster may list the same paragraph twice (a range overlapping a
-			// loose number in the same "CEC ..." line) · dedupe here so the
-			// frontend can key on the number.
-			clusters: feast.clusters.map((c) => ({
-				theme: c.theme,
-				paragraphs: [...new Set(c.paragraphs)]
-			})),
-			...(readingsKey ? { readingsKey } : {}),
-			...(readings && readings.length > 0 ? { readings } : {})
-		};
-		const identity = `${cycle ?? ''}:${feast.slug}`;
+	for (const source of sources) {
+		const { feast, cycle } = source;
+		const occasion = toCecLiturgyOccasion(source);
+		const identity = occasionKey(cycle, feast.slug);
 
 		// One entry per day, however many of its clusters cite the paragraph.
 		for (const n of new Set(feast.clusters.flatMap((c) => c.paragraphs))) {
@@ -131,4 +158,25 @@ export function buildCecLiturgyIndex(sources: CecLiturgySource[]): Map<number, C
 	}
 
 	return buckets;
+}
+
+/**
+ * Occasion-keyed view of the same data. The bucketed index above is keyed by
+ * paragraph, which serves the study panel but makes a date lookup impossible
+ * without scanning every shard · /api/liturgie/{date} needs this direction.
+ *
+ * Keyed by `occasionKey`, not by slug alone: the same Sunday recurs in cycles
+ * a, b and c with different clusters, so a slug-only key would collide and
+ * serve the wrong year's paragraphs.
+ */
+export function buildCecLiturgyByOccasion(
+	sources: CecLiturgySource[]
+): Record<string, CecLiturgyOccasion> {
+	const out: Record<string, CecLiturgyOccasion> = {};
+	for (const source of sources) {
+		const occasion = toCecLiturgyOccasion(source);
+		if (!occasion.clusters.some((c) => c.paragraphs.length > 0)) continue;
+		out[occasionKey(source.cycle, source.feast.slug)] = occasion;
+	}
+	return out;
 }
