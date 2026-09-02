@@ -29,4 +29,15 @@
 		: 'citent'}
 	<span class="font-semibold text-accent">{label}</span>
 </div>
+{#if paragraphs.length > 0}
+	<!-- Plain text, not links or chips · the point is that a reader can select
+	     the whole row and copy the numbers out in one gesture. select-all makes
+	     a single click do the selecting. -->
+	<p
+		data-verse-citers
+		class="font-ui text-xs text-muted tabular-nums select-all mb-3 leading-relaxed"
+	>
+		{paragraphs.join(', ')}
+	</p>
+{/if}
 <ParagraphList numbers={paragraphs} emptyMessage="Aucune citation pour ce verset." />

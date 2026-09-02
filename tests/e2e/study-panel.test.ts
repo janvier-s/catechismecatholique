@@ -162,3 +162,17 @@ test.describe('mobile study panel', () => {
 		await expect(panel).toBeVisible();
 	});
 });
+
+test('the verse tab lists the citing paragraph numbers as selectable text', async ({ page }) => {
+	// Mt 6, 33 is cited by exactly these 10 CCC paragraphs (see
+	// static/data/cec/bible-verse-index.json). The row exists so a reader can
+	// drag over it and copy the whole set in one go.
+	await page.goto('/bible/matthieu/6');
+	await page.locator('#v33 .verse-row').click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+
+	const numbers = panel.locator('[data-verse-citers]');
+	await expect(numbers).toHaveText('305, 322, 764, 1942, 2547, 2604, 2608, 2632, 2763, 2830');
+});
