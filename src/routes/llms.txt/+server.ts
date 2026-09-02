@@ -153,7 +153,19 @@ export const GET: RequestHandler = () => {
 	out.push('### Accès aux données structurées');
 	out.push('');
 	out.push(
+		`- \`${SITE}/api/openapi.json\` · description OpenAPI 3.1 de l'API publique (lecture seule, sans clé)`
+	);
+	out.push(
 		`- \`${SITE}/api/cec/{numéro}\` · paragraphe CEC (texte brut + HTML, renvois, fil d'Ariane, précédent/suivant)`
+	);
+	out.push(
+		`- \`${SITE}/api/cec/{numéro}?include=all\` · le même paragraphe avec les données du panneau d'étude (thèmes, sources, liturgie, Compendium, doctrine sociale, Enchiridion)`
+	);
+	out.push(
+		`- \`${SITE}/api/bible/{livre}/{chapitre}/{verset}\` · paragraphes du CEC citant un verset`
+	);
+	out.push(
+		`- \`${SITE}/api/liturgie/{AAAA-MM-JJ}\` · célébration du jour et paragraphes proposés à la méditation`
 	);
 	out.push(
 		`- \`${SITE}/data/cec/paragraphs/{numéro}.json\` · paragraphe CEC (JSON source, sans contexte)`
