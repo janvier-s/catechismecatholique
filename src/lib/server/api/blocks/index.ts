@@ -6,6 +6,9 @@ import { sourcesBlock } from './sources';
 import { enBrefBlock } from './enBref';
 import { bibleBlock } from './bible';
 import { liturgyBlock } from './liturgy';
+import { compendiumBlock } from './compendium';
+import { cdseBlock } from './cdse';
+import { denzingerBlock } from './denzinger';
 
 export type BlockFn = (n: number, fetcher: Fetch) => Promise<unknown>;
 
@@ -22,10 +25,10 @@ export const BLOCKS: Record<BlockName, BlockFn> = {
 	liturgy: liturgyBlock,
 	en_bref: enBrefBlock,
 	bible: bibleBlock,
-	// Filled in by Tasks 5 and 6.
-	compendium: notImplemented('compendium'),
-	cdse: notImplemented('cdse'),
-	denzinger: notImplemented('denzinger'),
+	compendium: compendiumBlock,
+	cdse: cdseBlock,
+	denzinger: denzingerBlock,
+	// Filled in by Task 6.
 	ai: notImplemented('ai')
 };
 
