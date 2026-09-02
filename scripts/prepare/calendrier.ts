@@ -11,7 +11,11 @@ import { buildWeekdayTargets } from './weekdayFeasts.ts';
 import { buildWeekdayFeast, buildProperFeast } from './weekdayReadings.ts';
 import { PROPER_DAYS } from './calendrierProperDays.ts';
 import { buildHeadingLevels, type CecStructureFile } from './cecHeadingCluster.ts';
-import { buildCecLiturgyIndex, type CecLiturgySource } from './cecLiturgyIndex.ts';
+import {
+	buildCecLiturgyIndex,
+	buildCecLiturgyByOccasion,
+	type CecLiturgySource
+} from './cecLiturgyIndex.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -585,6 +589,14 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 	for (const [bucket, entries] of liturgyIndex) {
 		writeFileSync(join(liturgyDir, `${bucket}.json`), JSON.stringify(entries));
 	}
+
+	// Same occasions, keyed by cycle and slug instead of by paragraph. The
+	// shards above cannot answer "what is proposed on this date" without a
+	// scan of all of them · /api/liturgie/{date} reads this instead.
+	writeFileSync(
+		join(liturgyDir, 'by-occasion.json'),
+		JSON.stringify(buildCecLiturgyByOccasion(liturgySources))
+	);
 
 	const readingsDir = join(outDir, 'readings');
 	mkdirSync(readingsDir, { recursive: true });
