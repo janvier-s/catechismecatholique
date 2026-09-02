@@ -56,4 +56,18 @@ describe('parseInclude', () => {
 	it('does not apply the explicit cap to all', () => {
 		expect(parseInclude('all').ok).toBe(true);
 	});
+
+	it('exempts all from the cap even when many blocks are also named', () => {
+		const r = parseInclude(['all', ...ALL_BLOCKS].join(','));
+		expect(r.ok).toBe(true);
+		if (!r.ok) return;
+		expect(r.blocks).toHaveLength(10);
+	});
+
+	it('accepts exactly eight explicitly named blocks', () => {
+		const r = parseInclude(ALL_BLOCKS.slice(0, 8).join(','));
+		expect(r.ok).toBe(true);
+		if (!r.ok) return;
+		expect(r.blocks).toHaveLength(8);
+	});
 });
