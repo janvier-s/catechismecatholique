@@ -96,8 +96,10 @@ test.describe('Compendium', () => {
 			.filter({ visible: true })
 			.first();
 		await expect(qLink).toBeVisible();
-		await qLink.click();
-		await expect(page).toHaveURL(/\/compendium\/1-profession-de-la-foi#q-2$/);
+		// Panel page links open in a new tab, so the link is asserted by its
+		// target rather than by clicking it and watching this page navigate.
+		await expect(qLink).toHaveAttribute('target', '_blank');
+		await expect(qLink).toHaveAttribute('href', '/compendium/1-profession-de-la-foi#q-2');
 	});
 
 	// TODO: The committed search-index.json was built without CCC source files present,
