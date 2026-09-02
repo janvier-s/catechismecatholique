@@ -46,3 +46,38 @@ test('an out-of-range paragraph returns a coded 404', async ({ request }) => {
 	expect(body.code).toBe('paragraph_out_of_range');
 	expect(typeof body.error).toBe('string');
 });
+
+test('the batch route returns one item per requested paragraph', async ({ request }) => {
+	const res = await request.get('/api/cec?numbers=1,2,3');
+	expect(res.status()).toBe(200);
+	const body = await res.json();
+	expect(body.count).toBe(3);
+	expect(body.items.map((i: { number: number }) => i.number)).toEqual([1, 2, 3]);
+});
+
+test('the batch route refuses a wide range with a wide include', async ({ request }) => {
+	const res = await request.get('/api/cec?range=1-50&include=all');
+	expect(res.status()).toBe(400);
+	const body = await res.json();
+	expect(body.code).toBe('too_many_blocks');
+});
+
+// The acceptance side of the same cap: 10 paragraphs x 9 blocks = 90 fetches,
+// just under MAX_BLOCK_FETCHES. Without this, tightening the cap check would
+// silently reject legitimate requests and only the rejection test would run.
+test('the batch route serves a request just under the fetch cap', async ({ request }) => {
+	const res = await request.get('/api/cec?range=1-10&include=all');
+	expect(res.status()).toBe(200);
+	const body = await res.json();
+	expect(body.count).toBe(10);
+	expect(body.items[0]).toHaveProperty('themes');
+	expect(body.items[0]).not.toHaveProperty('ai');
+});
+
+test('the batch route rejects an unknown include block by name', async ({ request }) => {
+	const res = await request.get('/api/cec?numbers=1&include=trent');
+	expect(res.status()).toBe(400);
+	const body = await res.json();
+	expect(body.code).toBe('unknown_include');
+	expect(body.error).toContain('trent');
+});
