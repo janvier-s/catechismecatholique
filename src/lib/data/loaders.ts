@@ -30,6 +30,8 @@ import type {
 	CecLiturgyOccasion,
 	CalendrierProperFile,
 	CalendrierReadingsEntry,
+	VerseLiturgyDay,
+	VerseLiturgyBookShard,
 	CatIllustreStructure,
 	CatIllustreChapter,
 	CatIllustreFlatPage,
@@ -785,6 +787,54 @@ export function loadCalendrierDatesIndex(
 		);
 	}
 	return calendrierDatesIndexPromise;
+}
+
+// ─── Verse Liturgy loaders ────────────────────────────────────────────────
+
+let verseLiturgyDaysPromise: Promise<VerseLiturgyDay[]> | null = null;
+const verseLiturgyBookCache = new Map<string, Promise<VerseLiturgyBookShard | null>>();
+
+/**
+ * Load the array of all days in the verse liturgy index. Used by the verse
+ * tab to retrieve day metadata and readings by index.
+ */
+export function loadVerseLiturgyDays(fetcher: Fetch = fetch): Promise<VerseLiturgyDay[]> {
+	if (!verseLiturgyDaysPromise) {
+		verseLiturgyDaysPromise = fetchJson<VerseLiturgyDay[]>(
+			'/data/calendrier/verse-liturgy/days.json',
+			fetcher
+		);
+	}
+	return verseLiturgyDaysPromise;
+}
+
+/**
+ * Lazily fetch the verse to days shard for a single Bible book by slug.
+ * Returns `null` when the shard 404s (a book with no readings in the verse
+ * index has no file), which is ordinary data, not a failure. Any other fetch
+ * failure rejects and drops the cache entry so a retry isn't stuck replaying
+ * the same rejection, mirroring loadNclBook's cache-and-drop-on-rejection.
+ */
+export function loadVerseLiturgyBook(
+	bookSlug: string,
+	fetcher: Fetch = fetch
+): Promise<VerseLiturgyBookShard | null> {
+	let p = verseLiturgyBookCache.get(bookSlug);
+	if (!p) {
+		p = (async () => {
+			const res = await fetcher(`/data/calendrier/verse-liturgy/${bookSlug}.json`);
+			if (res.status === 404) return null;
+			if (!res.ok) {
+				throw new Error(`verse-liturgy: failed to load book shard ${bookSlug}: ${res.status}`);
+			}
+			return (await res.json()) as VerseLiturgyBookShard;
+		})().catch((e) => {
+			verseLiturgyBookCache.delete(bookSlug);
+			throw e;
+		});
+		verseLiturgyBookCache.set(bookSlug, p);
+	}
+	return p;
 }
 
 // ─── Catéchisme illustré loaders ───────────────────────────────────────────
