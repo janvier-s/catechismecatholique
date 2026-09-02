@@ -3,6 +3,9 @@ import type { BlockName } from '../include';
 import { citedByBlock } from './citedBy';
 import { themesBlock } from './themes';
 import { sourcesBlock } from './sources';
+import { enBrefBlock } from './enBref';
+import { bibleBlock } from './bible';
+import { liturgyBlock } from './liturgy';
 
 export type BlockFn = (n: number, fetcher: Fetch) => Promise<unknown>;
 
@@ -16,11 +19,11 @@ export const BLOCKS: Record<BlockName, BlockFn> = {
 	cited_by: citedByBlock,
 	themes: themesBlock,
 	sources: sourcesBlock,
-	// Filled in by Tasks 4, 5 and 6.
-	liturgy: notImplemented('liturgy'),
+	liturgy: liturgyBlock,
+	en_bref: enBrefBlock,
+	bible: bibleBlock,
+	// Filled in by Tasks 5 and 6.
 	compendium: notImplemented('compendium'),
-	en_bref: notImplemented('en_bref'),
-	bible: notImplemented('bible'),
 	cdse: notImplemented('cdse'),
 	denzinger: notImplemented('denzinger'),
 	ai: notImplemented('ai')
