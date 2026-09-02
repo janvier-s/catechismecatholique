@@ -1,4 +1,5 @@
 import { redirect, type Handle } from '@sveltejs/kit';
+import { CORS_HEADERS } from '$lib/server/api/http';
 
 /**
  * Permanent redirect for legacy `/ccc[/...]` paths to the canonical `/cec`
@@ -18,6 +19,18 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (p === '/denzinger' || p.startsWith('/denzinger/')) {
 		const target = '/enchiridion' + p.slice('/denzinger'.length) + event.url.search;
 		throw redirect(308, target);
+	}
+	if (p === '/api' || p.startsWith('/api/')) {
+		// Preflight. Simple GETs do not trigger one, but a client sending a
+		// custom header would, and answering it costs nothing.
+		if (event.request.method === 'OPTIONS') {
+			return new Response(null, { status: 204, headers: CORS_HEADERS });
+		}
+		const response = await resolve(event);
+		for (const [k, v] of Object.entries(CORS_HEADERS)) {
+			if (!response.headers.has(k)) response.headers.set(k, v);
+		}
+		return response;
 	}
 	return resolve(event);
 };
