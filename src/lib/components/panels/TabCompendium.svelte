@@ -102,6 +102,8 @@
 			<li>
 				<a
 					href={`/compendium/${h.partSlug}#q-${h.number}`}
+					target="_blank"
+					rel="noopener noreferrer"
 					class="block hover:bg-accent/5 rounded -mx-2 px-2 py-2 transition-colors"
 				>
 					<div class="flex items-baseline gap-2 mb-1">

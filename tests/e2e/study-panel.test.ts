@@ -176,3 +176,20 @@ test('the verse tab lists the citing paragraph numbers as selectable text', asyn
 	const numbers = panel.locator('[data-verse-citers]');
 	await expect(numbers).toHaveText('305, 322, 764, 1942, 2547, 2604, 2608, 2632, 2763, 2830');
 });
+
+test('panel page links open in a new tab', async ({ page }) => {
+	// CCC 2466 has inline bible refs; its panel Bible tab lists verse links.
+	await page.goto('/cec/2466');
+	const inline = page.locator('button.bible-inline').first();
+	await expect(inline).toBeVisible();
+	await inline.click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+
+	// The verse reference link leaves the panel for a Bible page, so it opens
+	// in a new tab rather than replacing the paragraph the reader is studying.
+	const verseLink = panel.locator('a[href^="/bible/"]').first();
+	await expect(verseLink).toHaveAttribute('target', '_blank');
+	await expect(verseLink).toHaveAttribute('rel', /noopener/);
+});

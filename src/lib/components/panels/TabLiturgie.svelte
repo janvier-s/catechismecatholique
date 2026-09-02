@@ -245,7 +245,9 @@
 		{#each cards as card (card.key)}
 			{@const o = shown(card)}
 			<li class="card" style:border-color={`var(${LITURGICAL_COLOR_VAR[o.color]})`}>
-				<a href={feastHref(o)} class="card-title">{card.years[0]!.title}</a>
+				<a href={feastHref(o)} target="_blank" rel="noopener noreferrer" class="card-title"
+					>{card.years[0]!.title}</a
+				>
 				<p class="card-meta">{meta(card)}</p>
 
 				{#if card.years.length > 1}
@@ -294,7 +296,7 @@
 							<dt>{refLabel(r)}</dt>
 							<dd>
 								{#if url}
-									<a href={url}>{r.ref}</a>
+									<a href={url} target="_blank" rel="noopener noreferrer">{r.ref}</a>
 								{:else}
 									{r.ref}
 								{/if}
