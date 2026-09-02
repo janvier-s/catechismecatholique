@@ -9,6 +9,7 @@ import { liturgyBlock } from './liturgy';
 import { compendiumBlock } from './compendium';
 import { cdseBlock } from './cdse';
 import { denzingerBlock } from './denzinger';
+import { aiBlock } from './ai';
 
 export type BlockFn = (n: number, fetcher: Fetch) => Promise<unknown>;
 
@@ -28,15 +29,8 @@ export const BLOCKS: Record<BlockName, BlockFn> = {
 	compendium: compendiumBlock,
 	cdse: cdseBlock,
 	denzinger: denzingerBlock,
-	// Filled in by Task 6.
-	ai: notImplemented('ai')
+	ai: aiBlock
 };
-
-function notImplemented(name: string): BlockFn {
-	return async () => {
-		throw new Error(`include block not yet implemented: ${name}`);
-	};
-}
 
 export interface AssembledBlocks {
 	data: Record<string, unknown>;
