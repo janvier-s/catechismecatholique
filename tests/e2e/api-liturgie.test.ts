@@ -49,7 +49,7 @@ test('an ordinary weekday returns its meditation programme', async ({ request })
 	const res = await request.get('/api/liturgie/2026-09-02');
 	expect(res.status()).toBe(200);
 	const body = await res.json();
-	expect(body.corpus).toBe('weekday');
+	expect(body.calendar_source).toBe('weekday');
 	expect(body.cycle).toBe('II');
 	expect(body.celebration).not.toBeNull();
 	expect(body.celebration.title).toContain('22e semaine');
@@ -69,12 +69,12 @@ test('the same weekday slug differs between ferial cycles I and II', async ({ re
 test('a date-proper day with no cycle resolves through the empty cycle segment', async ({
 	request
 }) => {
-	// 3 janvier is a date-proper day: corpus "proper", no yearKey and no ferial
-	// cycle, so it is indexed under ":3-janvier".
+	// 3 janvier is a date-proper day: calendar_source "proper", no yearKey and no
+	// ferial cycle, so it is indexed under ":3-janvier".
 	const res = await request.get('/api/liturgie/2026-01-03');
 	expect(res.status()).toBe(200);
 	const body = await res.json();
-	expect(body.corpus).toBe('proper');
+	expect(body.calendar_source).toBe('proper');
 	expect(body.cycle).toBeNull();
 	expect(body.celebration).not.toBeNull();
 	expect(body.meditation.length).toBeGreaterThan(0);

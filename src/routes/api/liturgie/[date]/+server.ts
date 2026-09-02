@@ -59,7 +59,11 @@ export const GET: RequestHandler = async ({ params, fetch }) => {
 	const body = {
 		date,
 		slug: row.slug,
-		corpus: row.corpus,
+		// Named `calendar_source`, not `corpus`: on /api/cec `corpus` is the work
+		// id ("ccc"), and reusing the word for the calendar's own partition
+		// would make an agent try to resolve "weekday" against the corpus
+		// registry.
+		calendar_source: row.corpus,
 		cycle: cycle ?? null,
 		liturgical_color: row.liturgicalColor ?? null,
 		celebration: occasion
