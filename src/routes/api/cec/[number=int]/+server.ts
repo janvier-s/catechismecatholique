@@ -1,4 +1,6 @@
 import { apiError, apiJson } from '$lib/server/api/http';
+import { parseInclude } from '$lib/server/api/include';
+import { assembleBlocks } from '$lib/server/api/blocks';
 import { loadParagraph, loadParagraphContext } from '$lib/data/loaders';
 import { stripHtml } from '$lib/utils/html';
 import type { RequestHandler } from './$types';
@@ -16,9 +18,13 @@ export const GET: RequestHandler = async ({ params, fetch, url }) => {
 		);
 	}
 
-	const [paragraph, context] = await Promise.all([
+	const inc = parseInclude(url.searchParams.get('include'));
+	if (!inc.ok) return apiError(inc.message, inc.code);
+
+	const [paragraph, context, blocks] = await Promise.all([
 		loadParagraph(n, fetch),
-		loadParagraphContext(n, fetch)
+		loadParagraphContext(n, fetch),
+		assembleBlocks(n, inc.blocks, fetch)
 	]);
 
 	return apiJson({
@@ -39,6 +45,8 @@ export const GET: RequestHandler = async ({ params, fetch, url }) => {
 		breadcrumb: context ?? null,
 		prev: n > FIRST ? n - 1 : null,
 		next: n < LAST ? n + 1 : null,
-		permalink: `${url.origin}/cec/${n}`
+		permalink: `${url.origin}/cec/${n}`,
+		...blocks.data,
+		...(blocks.partial.length > 0 ? { partial: blocks.partial } : {})
 	});
 };
