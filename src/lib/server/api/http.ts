@@ -8,7 +8,9 @@ export type ApiErrorCode =
 	| 'paragraph_out_of_range'
 	| 'unknown_include'
 	| 'too_many_blocks'
+	| 'too_many_paragraphs'
 	| 'bad_date'
+	| 'bad_reference'
 	| 'unknown_slug'
 	| 'unknown_book'
 	| 'query_too_short';
@@ -19,18 +21,33 @@ export type ApiErrorCode =
 export const CORS_HEADERS: Record<string, string> = {
 	'Access-Control-Allow-Origin': '*',
 	'Access-Control-Allow-Methods': 'GET, OPTIONS',
+	// A client sending Content-Type on a GET triggers a preflight; without this
+	// the preflight answer would omit the header it asked about and the request
+	// would still fail.
+	'Access-Control-Allow-Headers': 'Content-Type',
 	'Access-Control-Max-Age': '86400'
 };
 
 const DEFAULT_MAX_AGE = 3600;
 const DEFAULT_S_MAX_AGE = 86400;
 
-export function apiJson(body: unknown, cacheSeconds: number = DEFAULT_MAX_AGE): Response {
+/**
+ * `sharedCacheSeconds` must be passed whenever a response expires for a
+ * reason the edge has to respect too. Cloudflare's shared cache prefers
+ * `s-maxage` over `max-age`, so leaving it at the default would let the edge
+ * serve a stale body long after the browser TTL ran out · that is exactly how
+ * `/api/liturgie/today` would go on serving yesterday's date.
+ */
+export function apiJson(
+	body: unknown,
+	cacheSeconds: number = DEFAULT_MAX_AGE,
+	sharedCacheSeconds: number = DEFAULT_S_MAX_AGE
+): Response {
 	return new Response(JSON.stringify(body), {
 		status: 200,
 		headers: {
 			'Content-Type': 'application/json; charset=utf-8',
-			'Cache-Control': `public, max-age=${cacheSeconds}, s-maxage=${DEFAULT_S_MAX_AGE}`,
+			'Cache-Control': `public, max-age=${cacheSeconds}, s-maxage=${sharedCacheSeconds}`,
 			...CORS_HEADERS
 		}
 	});

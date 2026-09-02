@@ -59,7 +59,7 @@ export const API_ROUTES: ApiRoute[] = [
 			},
 			INCLUDE_PARAM
 		],
-		codes: ['paragraph_out_of_range', 'unknown_include', 'too_many_blocks'],
+		codes: ['paragraph_out_of_range', 'too_many_paragraphs', 'unknown_include', 'too_many_blocks'],
 		example: '/api/cec?range=1-5'
 	},
 	{
@@ -68,7 +68,9 @@ export const API_ROUTES: ApiRoute[] = [
 		params: [
 			{ name: 'q', in: 'query', required: true, description: 'Requête, 2 caractères au minimum.' }
 		],
-		codes: ['query_too_short'],
+		// A query under two characters returns 200 with empty hits, not an
+		// error, so this route emits no code at all.
+		codes: [],
 		example: '/api/search?q=eucharistie'
 	},
 	{
@@ -83,7 +85,7 @@ export const API_ROUTES: ApiRoute[] = [
 			},
 			{ name: 'chapter', in: 'path', required: true, description: 'Numéro de chapitre.' }
 		],
-		codes: ['unknown_book'],
+		codes: ['unknown_book', 'bad_reference'],
 		example: '/api/bible/jean/3'
 	},
 	{
@@ -99,7 +101,7 @@ export const API_ROUTES: ApiRoute[] = [
 			{ name: 'chapter', in: 'path', required: true, description: 'Numéro de chapitre.' },
 			{ name: 'verse', in: 'path', required: true, description: 'Numéro de verset.' }
 		],
-		codes: ['unknown_book'],
+		codes: ['unknown_book', 'bad_reference'],
 		example: '/api/bible/jean/3/16'
 	},
 	{

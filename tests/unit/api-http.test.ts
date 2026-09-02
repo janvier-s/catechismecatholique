@@ -28,13 +28,26 @@ describe('apiJson', () => {
 		expect(res.headers.get('content-type')).toContain('application/json');
 	});
 
-	it('honours an explicit max-age', () => {
+	it('honours an explicit max-age, keeping the default shared TTL', () => {
 		const res = apiJson({ ok: true }, 120);
 		expect(res.headers.get('cache-control')).toBe('public, max-age=120, s-maxage=86400');
+	});
+
+	// Cloudflare's shared cache prefers s-maxage over max-age. A response that
+	// expires for a real-world reason (the Paris date rollover) has to be able
+	// to shorten the EDGE TTL too, or the edge serves a stale body long after
+	// the browser TTL ran out.
+	it('honours an explicit shared-cache TTL', () => {
+		const res = apiJson({ ok: true }, 120, 120);
+		expect(res.headers.get('cache-control')).toBe('public, max-age=120, s-maxage=120');
 	});
 });
 
 describe('CORS_HEADERS', () => {
+	it('answers the preflight for a client that sends Content-Type', () => {
+		expect(CORS_HEADERS['Access-Control-Allow-Headers']).toBe('Content-Type');
+	});
+
 	it('allows GET and OPTIONS from any origin', () => {
 		expect(CORS_HEADERS['Access-Control-Allow-Origin']).toBe('*');
 		expect(CORS_HEADERS['Access-Control-Allow-Methods']).toBe('GET, OPTIONS');

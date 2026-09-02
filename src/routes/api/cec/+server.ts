@@ -3,7 +3,7 @@ import { stripHtml } from '$lib/utils/html';
 import { apiError, apiJson } from '$lib/server/api/http';
 import { parseInclude } from '$lib/server/api/include';
 import { assembleBlocks } from '$lib/server/api/blocks';
-import { parseNumbers, MAX_BLOCK_FETCHES } from '$lib/server/api/batch';
+import { parseNumbers, MAX_BLOCK_FETCHES, FIRST, LAST } from '$lib/server/api/batch';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ fetch, url }) => {
@@ -44,6 +44,8 @@ export const GET: RequestHandler = async ({ fetch, url }) => {
 				citations: paragraph.citations,
 				magisterial_refs: paragraph.magisterial_refs,
 				breadcrumb: context ?? null,
+				prev: n > FIRST ? n - 1 : null,
+				next: n < LAST ? n + 1 : null,
 				permalink: `${url.origin}/cec/${n}`,
 				...blocks.data,
 				...(blocks.partial.length > 0 ? { partial: blocks.partial } : {})

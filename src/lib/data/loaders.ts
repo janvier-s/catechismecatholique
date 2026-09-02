@@ -194,12 +194,35 @@ export function loadParagraphContext(
 	return p;
 }
 
+// Module-level promise caches, matching the pattern used by the other index
+// loaders in this file. Both files are static between deploys, and the batch
+// API route resolves up to 50 paragraphs in one request · without these it
+// re-fetched and re-parsed sources-index.json (150KB) once per paragraph.
+let citedByPromise: Promise<Record<number, number[]>> | null = null;
+let sourcesIndexPromise: Promise<SourceEntry[]> | null = null;
+
 export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, number[]>> {
-	return fetchJson<Record<number, number[]>>('/data/cec/cited-by.json', fetcher);
+	if (!citedByPromise) {
+		citedByPromise = fetchJson<Record<number, number[]>>('/data/cec/cited-by.json', fetcher).catch(
+			(e) => {
+				citedByPromise = null;
+				throw e;
+			}
+		);
+	}
+	return citedByPromise;
 }
 
 export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]> {
-	return fetchJson<SourceEntry[]>('/data/cec/sources-index.json', fetcher);
+	if (!sourcesIndexPromise) {
+		sourcesIndexPromise = fetchJson<SourceEntry[]>('/data/cec/sources-index.json', fetcher).catch(
+			(e) => {
+				sourcesIndexPromise = null;
+				throw e;
+			}
+		);
+	}
+	return sourcesIndexPromise;
 }
 
 export function loadBibleVerseIndex(fetcher: Fetch = fetch): Promise<BibleVerseIndex> {

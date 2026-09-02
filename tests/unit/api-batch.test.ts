@@ -53,11 +53,13 @@ describe('parseNumbers', () => {
 		expect(r.code).toBe('paragraph_out_of_range');
 	});
 
-	it('rejects more than MAX_ITEMS paragraphs', () => {
+	// A distinct code from too_many_blocks: a client that asked for 51
+	// paragraphs needs to shrink its range, not its include list.
+	it('rejects more than MAX_ITEMS paragraphs with its own code', () => {
 		const r = parseNumbers(null, `1-${MAX_ITEMS + 1}`);
 		expect(r.ok).toBe(false);
 		if (r.ok) return;
-		expect(r.code).toBe('too_many_blocks');
+		expect(r.code).toBe('too_many_paragraphs');
 	});
 
 	// Boundary from the other side. Without this, mutating the cap check from

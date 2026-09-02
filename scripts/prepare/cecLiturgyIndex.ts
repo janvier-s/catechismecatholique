@@ -6,6 +6,13 @@ import type {
 } from './calendrier.ts';
 
 /**
+ * Which lectionary cycle a day belongs to: a/b/c for the three-year Sunday
+ * cycle, I/II for the ferial weekday cycle. The two namespaces are disjoint,
+ * so one key space covers both.
+ */
+export type CecCycleKey = 'a' | 'b' | 'c' | 'I' | 'II';
+
+/**
  * One day a CEC paragraph is proposed for meditation on: the feast, plus every
  * theme that day groups paragraphs under · a day cited for one paragraph still
  * carries its whole programme, the way the feast page shows it.
@@ -15,8 +22,8 @@ export interface CecLiturgyOccasion {
 	title: string;
 	season: SeasonKey;
 	color: LiturgicalColor;
-	/** 'a' | 'b' | 'c' for a Sunday/feast of the three-year cycle · absent for fixed feasts and the propre. */
-	cycle?: 'a' | 'b' | 'c';
+	/** Sunday cycle a/b/c, or ferial cycle I/II · absent for fixed feasts and the propre. */
+	cycle?: CecCycleKey;
 	/** Fixed feasts only, e.g. "2 Février". */
 	date?: string;
 	/** Fixed feasts only · lets the frontend order them by calendar month. */
@@ -58,7 +65,8 @@ export interface CecLiturgyBucket {
 
 export interface CecLiturgySource {
 	feast: CalendrierFeast | CalendrierFixedFeast;
-	cycle?: 'a' | 'b' | 'c';
+	/** Sunday cycle a/b/c for the three-year lectionary, or ferial cycle I/II. */
+	cycle?: CecCycleKey;
 	/** Pass undefined when the day has no readings file. */
 	readingsKey?: string;
 	readings?: CecLiturgyReadingRef[];
@@ -79,8 +87,8 @@ function isFixed(f: CalendrierFeast | CalendrierFixedFeast): f is CalendrierFixe
 
 /**
  * Identity of a liturgical day. A slug alone is not unique: the same Sunday
- * appears in cycles a, b and c with different clusters, so the cycle is part
- * of the key.
+ * appears in cycles a, b and c with different clusters, and a weekday slug
+ * recurs across ferial cycles I and II, so the cycle is part of the key.
  */
 export function occasionKey(cycle: string | undefined, slug: string): string {
 	return `${cycle ?? ''}:${slug}`;

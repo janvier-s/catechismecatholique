@@ -75,9 +75,18 @@ describe('buildOpenApi', () => {
 		expect(doc.servers[0]!.url).toBe('https://example.test');
 	});
 
-	it('documents every include block by name', () => {
-		const doc = JSON.stringify(buildOpenApi('https://example.test'));
-		for (const b of ALL_BLOCKS) expect(doc).toContain(b);
+	// Scoped to the include parameter's own description. Grepping the whole
+	// serialised document would pass on unrelated text: "bible" and "themes"
+	// both appear in other route summaries.
+	it('documents every include block by name in the include parameter', () => {
+		const doc = buildOpenApi('https://example.test') as {
+			paths: Record<string, { get: { parameters: { name: string; description: string }[] } }>;
+		};
+		const include = doc.paths['/api/cec/{number}']!.get.parameters.find(
+			(p) => p.name === 'include'
+		);
+		expect(include).toBeDefined();
+		for (const b of ALL_BLOCKS) expect(include!.description).toContain(b);
 	});
 
 	it('documents the error envelope for routes that can fail', () => {

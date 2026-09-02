@@ -1,8 +1,11 @@
 import { loadCalendrierDatesIndex, loadCecLiturgyByOccasion } from '$lib/data/loaders';
 import { apiError, apiJson } from '$lib/server/api/http';
+import { secondsUntilParisMidnight, todayInParis } from '$lib/server/api/parisTime';
+import type { CalendrierDateRow } from '$lib/data/types';
 import type { RequestHandler } from './$types';
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+const FIXED_DATE_TTL = 3600;
 
 /**
  * Must match `occasionKey` in scripts/prepare/cecLiturgyIndex.ts. Duplicated
@@ -13,18 +16,16 @@ function occasionKey(cycle: string | undefined, slug: string): string {
 	return `${cycle ?? ''}:${slug}`;
 }
 
-/** Seconds until the next midnight in Europe/Paris, clamped to 60..3600. */
-function secondsUntilParisMidnight(now: Date): number {
-	const paris = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Paris' }));
-	const midnight = new Date(paris);
-	midnight.setHours(24, 0, 0, 0);
-	const seconds = Math.ceil((midnight.getTime() - paris.getTime()) / 1000);
-	return Math.max(60, Math.min(3600, seconds));
-}
-
-function todayInParis(now: Date): string {
-	// en-CA formats as YYYY-MM-DD, which is exactly the index key format.
-	return now.toLocaleDateString('en-CA', { timeZone: 'Europe/Paris' });
+/**
+ * Which lectionary cycle a calendar row belongs to. Sundays and feasts of the
+ * three-year cycle carry `yearKey` (a/b/c); ferial weekdays carry `cycle`
+ * (I/II); fixed feasts and date-proper days carry neither and are indexed
+ * with an empty cycle segment.
+ */
+function cycleFor(row: CalendrierDateRow): string | undefined {
+	if (row.corpus === 'year') return row.yearKey;
+	if (row.corpus === 'weekday') return row.cycle;
+	return undefined;
 }
 
 export const GET: RequestHandler = async ({ params, fetch }) => {
@@ -50,18 +51,16 @@ export const GET: RequestHandler = async ({ params, fetch }) => {
 	}
 
 	const byOccasion = await loadCecLiturgyByOccasion(fetch);
-	// A day of the three-year cycle carries `yearKey`; a fixed feast or a
-	// date-proper day carries none, and was indexed with an empty segment.
-	const occasion =
-		byOccasion[occasionKey(row.yearKey, row.slug)] ??
-		byOccasion[occasionKey(undefined, row.slug)] ??
-		null;
+	const cycle = cycleFor(row);
+	// No cycle-less fallback: when `cycle` is undefined the key below already
+	// evaluates to `:slug`, which is exactly how such days are indexed.
+	const occasion = byOccasion[occasionKey(cycle, row.slug)] ?? null;
 
 	const body = {
 		date,
 		slug: row.slug,
 		corpus: row.corpus,
-		cycle: row.yearKey ?? null,
+		cycle: cycle ?? null,
 		liturgical_color: row.liturgicalColor ?? null,
 		celebration: occasion
 			? {
@@ -78,6 +77,13 @@ export const GET: RequestHandler = async ({ params, fetch }) => {
 			: []
 	};
 
-	// "today" must expire at the date rollover; a fixed date is immutable.
-	return apiJson(body, isToday ? secondsUntilParisMidnight(new Date()) : 3600);
+	// "today" must expire at the date rollover, at the EDGE as well as in the
+	// browser: Cloudflare's shared cache prefers s-maxage, so passing the
+	// rollover only as max-age would let the edge serve yesterday's date all
+	// morning. A fixed date is immutable and keeps the default shared TTL.
+	if (isToday) {
+		const ttl = secondsUntilParisMidnight(new Date());
+		return apiJson(body, ttl, ttl);
+	}
+	return apiJson(body, FIXED_DATE_TTL);
 };

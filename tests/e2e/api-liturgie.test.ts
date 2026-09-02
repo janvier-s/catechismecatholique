@@ -1,5 +1,14 @@
 import { test, expect } from '@playwright/test';
 
+function cacheDirectives(header: string): { maxAge: number | null; sMaxAge: number | null } {
+	const maxAge = header.match(/(?:^|[ ,])max-age=(\d+)/)?.[1];
+	const sMaxAge = header.match(/s-maxage=(\d+)/)?.[1];
+	return {
+		maxAge: maxAge === undefined ? null : Number(maxAge),
+		sMaxAge: sMaxAge === undefined ? null : Number(sMaxAge)
+	};
+}
+
 test('a fixed date returns the celebration and its meditation clusters', async ({ request }) => {
 	// 2026-12-13 is the third Sunday of Advent, year B.
 	const res = await request.get('/api/liturgie/2026-12-13');
@@ -33,25 +42,74 @@ test('the same Sunday in different years returns different paragraphs', async ({
 	expect(new Set(serialised).size).toBe(3);
 });
 
-test('a fixed feast with no cycle still resolves', async ({ request }) => {
-	// 2026-01-01, Sainte Marie Mère de Dieu · a fixed solemnity, indexed with
-	// an empty cycle segment, so it exercises the cycle-less fallback key.
-	const res = await request.get('/api/liturgie/2026-01-01');
+// Ferial weekdays are three calendar dates in four. They live in the forward
+// index under the ferial cycle I/II, a different key space from the Sunday
+// cycles, and were absent from the first version of this endpoint.
+test('an ordinary weekday returns its meditation programme', async ({ request }) => {
+	const res = await request.get('/api/liturgie/2026-09-02');
 	expect(res.status()).toBe(200);
 	const body = await res.json();
-	expect(body.date).toBe('2026-01-01');
-	expect(Array.isArray(body.meditation)).toBe(true);
+	expect(body.corpus).toBe('weekday');
+	expect(body.cycle).toBe('II');
+	expect(body.celebration).not.toBeNull();
+	expect(body.celebration.title).toContain('22e semaine');
+	expect(body.meditation.length).toBeGreaterThan(0);
+	const paragraphs = body.meditation.flatMap((c: { paragraphs: number[] }) => c.paragraphs);
+	expect(paragraphs.length).toBeGreaterThan(0);
 });
 
-test('today resolves and is cached only until the date rollover', async ({ request }) => {
-	const res = await request.get('/api/liturgie/today');
+test('the same weekday slug differs between ferial cycles I and II', async ({ request }) => {
+	// Both are "ordinaire-22-mercredi", one in cycle I and one in cycle II.
+	const a = await (await request.get('/api/liturgie/2026-09-02')).json();
+	const b = await (await request.get('/api/liturgie/2025-09-03')).json();
+	expect(a.slug).toBe(b.slug);
+	expect(a.cycle).not.toBe(b.cycle);
+});
+
+test('a date-proper day with no cycle resolves through the empty cycle segment', async ({
+	request
+}) => {
+	// 3 janvier is a date-proper day: corpus "proper", no yearKey and no ferial
+	// cycle, so it is indexed under ":3-janvier".
+	const res = await request.get('/api/liturgie/2026-01-03');
 	expect(res.status()).toBe(200);
 	const body = await res.json();
+	expect(body.corpus).toBe('proper');
+	expect(body.cycle).toBeNull();
+	expect(body.celebration).not.toBeNull();
+	expect(body.meditation.length).toBeGreaterThan(0);
+});
+
+// This test must fail if the rollover is removed. Asserting only that max-age
+// sits inside its own clamp cannot do that, because every possible value of
+// secondsUntilParisMidnight satisfies such a bound.
+test('today expires at the Paris rollover, at the edge as well as the browser', async ({
+	request
+}) => {
+	const today = await request.get('/api/liturgie/today');
+	expect(today.status()).toBe(200);
+	const t = cacheDirectives(today.headers()['cache-control'] ?? '');
+
+	const fixed = await request.get('/api/liturgie/2026-12-13');
+	const f = cacheDirectives(fixed.headers()['cache-control'] ?? '');
+
+	// A fixed date is immutable: default browser TTL, default long edge TTL.
+	expect(f.maxAge).toBe(3600);
+	expect(f.sMaxAge).toBe(86400);
+
+	// "today" must shorten BOTH. Cloudflare prefers s-maxage, so an unchanged
+	// s-maxage here would mean the edge serves yesterday's date after midnight.
+	expect(t.sMaxAge).toBe(t.maxAge);
+	expect(t.sMaxAge).not.toBe(86400);
+	expect(t.maxAge).toBeGreaterThan(0);
+	expect(t.maxAge).toBeLessThanOrEqual(3600);
+});
+
+test('today resolves to a real calendar date', async ({ request }) => {
+	const res = await request.get('/api/liturgie/today');
+	const body = await res.json();
 	expect(body.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-	const cache = res.headers()['cache-control'] ?? '';
-	const maxAge = Number(cache.match(/max-age=(\d+)/)?.[1] ?? '99999');
-	expect(maxAge).toBeLessThanOrEqual(3600);
-	expect(maxAge).toBeGreaterThan(0);
+	expect(body.slug.length).toBeGreaterThan(0);
 });
 
 test('a malformed date returns a coded 400', async ({ request }) => {

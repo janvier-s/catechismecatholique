@@ -37,14 +37,14 @@ export function lookupBible(
 	if (!/^\d+$/.test(chapter)) {
 		return {
 			ok: false,
-			code: 'unknown_book',
+			code: 'bad_reference',
 			message: `Chapitre invalide : « ${chapter} ». Un numéro est attendu.`
 		};
 	}
 	if (verse !== null && !/^\d+$/.test(verse)) {
 		return {
 			ok: false,
-			code: 'unknown_book',
+			code: 'bad_reference',
 			message: `Verset invalide : « ${verse} ». Un numéro est attendu.`
 		};
 	}

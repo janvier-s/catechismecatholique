@@ -51,7 +51,7 @@ export function parseNumbers(numbers: string | null, range: string | null): Numb
 	if (unique.length > MAX_ITEMS) {
 		return {
 			ok: false,
-			code: 'too_many_blocks',
+			code: 'too_many_paragraphs',
 			message: `Au plus ${MAX_ITEMS} paragraphes par requête (${unique.length} demandés). Découpez la demande.`
 		};
 	}

@@ -79,15 +79,24 @@ describe('lookupBible', () => {
 		expect(r.body.verses).toEqual({});
 	});
 
-	it('rejects a non-numeric chapter', () => {
+	// A malformed chapter or verse is not an unknown book · the codes differ so
+	// a client can tell "no such book" from "that is not a number".
+	it('rejects a non-numeric chapter with bad_reference', () => {
 		const r = lookupBible('jean', 'trois', null, INDEX);
 		expect(r.ok).toBe(false);
 		if (r.ok) return;
-		expect(r.code).toBe('unknown_book');
+		expect(r.code).toBe('bad_reference');
 	});
 
-	it('rejects a non-numeric verse', () => {
+	it('rejects a non-numeric verse with bad_reference', () => {
 		const r = lookupBible('jean', '3', 'seize', INDEX);
+		expect(r.ok).toBe(false);
+		if (r.ok) return;
+		expect(r.code).toBe('bad_reference');
+	});
+
+	it('still reports an unknown book as unknown_book, not bad_reference', () => {
+		const r = lookupBible('evangile-de-zz', '1', '1', INDEX);
 		expect(r.ok).toBe(false);
 		if (r.ok) return;
 		expect(r.code).toBe('unknown_book');
