@@ -31,12 +31,10 @@
 </div>
 {#if paragraphs.length > 0}
 	<!-- Plain text, not links or chips · the point is that a reader can select
-	     the whole row and copy the numbers out in one gesture. select-all makes
-	     a single click do the selecting. -->
-	<p
-		data-verse-citers
-		class="font-ui text-xs text-muted tabular-nums select-all mb-3 leading-relaxed"
-	>
+	     the numbers and copy them out. Deliberately no `select-all`: it would
+	     make a click swallow the whole row and block a drag that starts outside
+	     it, so the line couldn't be selected together with the one above. -->
+	<p data-verse-citers class="font-ui text-xs text-muted tabular-nums mb-3 leading-relaxed">
 		{paragraphs.join(', ')}
 	</p>
 {/if}
