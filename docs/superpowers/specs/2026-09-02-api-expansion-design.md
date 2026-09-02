@@ -8,7 +8,7 @@ Status: approved, ready for implementation planning
 The site holds the richest study apparatus of any catechism edition online: a
 cross-reference graph, a thematic vocabulary, a footnote/source apparatus, a
 Bible verse index in both directions, a liturgical calendar mapping, and
-mappings onto the Compendium, the Enchiridion Symbolorum, Trent, and the
+mappings onto the Compendium, the Enchiridion Symbolorum, and the
 Compendium de la doctrine sociale. Thirteen study-panel tabs consume it.
 
 The public API exposes almost none of it. Two routes exist:
@@ -36,7 +36,7 @@ reimplement them.
 
 **Corpus scope: CCC deep first.** Make the CCC endpoints genuinely rich. Other
 corpora appear only where they point back at CCC (Compendium, Denzinger,
-Trent, CDSE blocks). A generic per-corpus reader for the other ~20 works is
+CDSE blocks). A generic per-corpus reader for the other ~20 works is
 out of scope for this iteration.
 
 ## Approach
@@ -108,9 +108,16 @@ static file. If a real requirement appears, build it then.
 Available on `GET /api/cec/{n}` and the batch route.
 
 **Blocks:** `cited_by` · `themes` · `sources` · `liturgy` · `compendium` ·
-`en_bref` · `bible` · `cdse` · `denzinger` · `trent` · `ai` · `all`
+`en_bref` · `bible` · `cdse` · `denzinger` · `ai` · `all`
 
-`all` expands to every block **except** `ai`.
+`all` expands to every block **except** `ai`, so nine blocks.
+
+A `trent` block was listed in an earlier draft and has been **removed**: there
+is no CCC-to-Trent index in the data. `TabTrentNotes.svelte` uses
+`loadNclBook`, so it is a Bible-notes tab shown while reading Trent, not a
+mapping from CCC paragraphs. `static/data/trent/` holds only `chapters`,
+`sections`, `paragraph-context`, and `structure.json`. Building such a mapping
+would be a data project, not an API task.
 
 **Parsing.** Comma-separated, order-insensitive, deduplicated. An unknown name
 is a `400` with code `unknown_include`, naming the offending value and listing
@@ -143,7 +150,7 @@ one liturgy shard 404'd.
 
 **Cost control.** An explicitly enumerated `include` is capped at 8 blocks per
 request. `all` is exempt from that cap · it is a single deliberate token that
-expands to the 10 non-`ai` blocks, and rejecting it would make the shorthand
+expands to the nine non-`ai` blocks, and rejecting it would make the shorthand
 useless. On the batch route, `numbers.length × resolved block count` is capped
 at 100 block-fetches; over that, a `400` with code `too_many_blocks` explaining
 how to split the request. So `?range=1-50&include=all` is rejected (500
@@ -226,20 +233,30 @@ actually abused.
 
 `/api/liturgie/{date}` needs a build-time index that does not exist today.
 
-`static/data/calendrier/cec/{bucket}.json` sharded **by paragraph**; each shard
-carries complete occasion objects including their clusters, but there is no
-slug-keyed map, so a date lookup would otherwise require scanning all 29
-shards.
+`static/data/calendrier/cec/{bucket}.json` is sharded **by paragraph**; each
+shard carries complete occasion objects including their clusters, but there is
+no map from a liturgical day to its occasion, so a date lookup would otherwise
+require scanning all 29 shards.
 
-`scripts/prepare-data.ts` gains an emitted `static/data/calendrier/cec/by-slug.json`
-mapping occasion slug to its occasion object. `/api/liturgie/{date}` then
-resolves: date → `dates-index.json` → slug → `by-slug.json` → clusters.
+`scripts/prepare-data.ts` gains an emitted
+`static/data/calendrier/cec/by-occasion.json`. It is keyed
+`` `${cycle ?? ''}:${slug}` ``, **not** by slug alone: the same Sunday appears in
+cycles A, B and C with different clusters, and `buildCecLiturgyIndex` already
+uses exactly this composite identity internally. A slug-only key would collide
+and serve the wrong year's paragraphs.
+
+`/api/liturgie/{date}` then resolves: date → `dates-index.json` → `{slug,
+yearKey}` → `by-occasion.json` → clusters, falling back to the cycle-less key
+for fixed feasts and date-proper days, which carry no `yearKey`.
+
+The occasion derivation is extracted from `buildCecLiturgyIndex` into a shared
+`toCecLiturgyOccasion` helper so the two builders cannot drift.
 
 This is the only new data artifact in the design.
 
 ## Documentation and discoverability
 
-The failure mode with 9 routes and 11 include blocks is drift between
+The failure mode with 9 routes and 10 include blocks is drift between
 `/api/openapi.json`, the `/api` page, and the implementations.
 
 `src/lib/server/api/spec.ts` is the single source of truth, holding route
