@@ -8,10 +8,15 @@ import {
 } from './calendrierDates.ts';
 import { mergeReadings } from './calendrierReadingsMerge.ts';
 import { buildWeekdayTargets } from './weekdayFeasts.ts';
-import { buildWeekdayFeast, buildProperFeast } from './weekdayReadings.ts';
+import { buildWeekdayFeast, buildProperFeast, formatWeekdayTitle } from './weekdayReadings.ts';
 import { PROPER_DAYS } from './calendrierProperDays.ts';
 import { buildHeadingLevels, type CecStructureFile } from './cecHeadingCluster.ts';
 import { buildCecLiturgyIndex, type CecLiturgySource } from './cecLiturgyIndex.ts';
+import {
+	buildVerseLiturgyIndex,
+	type VerseLiturgySource,
+	type VerseLiturgyDay
+} from './verseLiturgyIndex.ts';
 
 export type SeasonKey = 'avent' | 'noel' | 'careme' | 'pascal' | 'solennite' | 'ordinaire';
 export type LiturgicalColor = 'violet' | 'white' | 'red' | 'green' | 'rose';
@@ -585,6 +590,95 @@ export async function prepareCalendrier(args: { sourceDir: string; outDir: strin
 	for (const [bucket, entries] of liturgyIndex) {
 		writeFileSync(join(liturgyDir, `${bucket}.json`), JSON.stringify(entries));
 	}
+
+	// Reverse index for the verse study panel's Liturgie tab: Bible verse to the
+	// days it is proclaimed on. Unlike the CEC index above this DOES include the
+	// ferial cycles · "when is this verse read at Mass" is mostly answered by
+	// weekdays, and the day table is kept small enough to afford them by carrying
+	// no CEC clusters.
+	const verseSources: VerseLiturgySource[] = [];
+	const pushVerseSource = (day: VerseLiturgyDay, key: string) => {
+		const readings = refsFor(key);
+		if (!readings || readings.length === 0) return;
+		verseSources.push({ day: { ...day, readings }, readings });
+	};
+
+	for (const yf of yearFiles) {
+		for (const feast of yf.feasts) {
+			pushVerseSource(
+				{
+					slug: feast.slug,
+					title: feast.title,
+					season: feast.season,
+					color: feast.liturgicalColor,
+					kind: 'year',
+					cycle: yf.key,
+					readingsKey: readingsKey(feast.slug, yf.key),
+					readings: []
+				},
+				readingsKey(feast.slug, yf.key)
+			);
+		}
+	}
+	for (const feast of fixed) {
+		pushVerseSource(
+			{
+				slug: feast.slug,
+				title: feast.title,
+				season: feast.season,
+				color: feast.liturgicalColor,
+				kind: 'fixed',
+				date: feast.date,
+				monthIndex: feast.month_index,
+				readingsKey: readingsKey(feast.slug),
+				readings: []
+			},
+			readingsKey(feast.slug)
+		);
+	}
+	for (const feast of properFeasts) {
+		pushVerseSource(
+			{
+				slug: feast.slug,
+				title: feast.title,
+				season: feast.season,
+				color: feast.liturgicalColor,
+				kind: 'proper',
+				readingsKey: readingsKey(feast.slug),
+				readings: []
+			},
+			readingsKey(feast.slug)
+		);
+	}
+	for (const cycleKey of ['I', 'II'] as const) {
+		for (const t of weekdayTargets.filter((w) => w.cycle === cycleKey)) {
+			const key = readingsKey(t.slug, cycleKey);
+			pushVerseSource(
+				{
+					slug: t.slug,
+					title: formatWeekdayTitle(t.season, t.weekOfSeason, t.dayOfWeek),
+					season: t.season,
+					color: colorsBySlug.get(t.slug) ?? 'white',
+					kind: 'weekday',
+					weekdayCycle: cycleKey,
+					readingsKey: key,
+					readings: []
+				},
+				key
+			);
+		}
+	}
+
+	const verseIndex = buildVerseLiturgyIndex(verseSources);
+	const verseDir = join(outDir, 'verse-liturgy');
+	mkdirSync(verseDir, { recursive: true });
+	writeFileSync(join(verseDir, 'days.json'), JSON.stringify(verseIndex.days));
+	for (const [bookSlug, shard] of Object.entries(verseIndex.books)) {
+		writeFileSync(join(verseDir, `${bookSlug}.json`), JSON.stringify(shard));
+	}
+	console.log(
+		`  verse liturgy index: ${verseIndex.days.length} days, ${Object.keys(verseIndex.books).length} books, ${verseIndex.skipped} refs skipped`
+	);
 
 	const readingsDir = join(outDir, 'readings');
 	mkdirSync(readingsDir, { recursive: true });
