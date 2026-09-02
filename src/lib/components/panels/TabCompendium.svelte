@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { studyPanel } from '$lib/stores/studyPanel';
 	import {
+		loadBibleVerseIndex,
 		loadCompendiumCitedBy,
 		loadCompendiumPart,
 		loadCompendiumQRanges
@@ -26,22 +27,37 @@
 
 	let hits: Hit[] = $state([]);
 	let loaded = $state(false);
+	let fromVerse = $state(false);
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
-		if (ctx?.kind !== 'paragraph') {
+		if (ctx?.kind !== 'paragraph' && ctx?.kind !== 'verse') {
 			hits = [];
 			loaded = false;
 			return;
 		}
-		const paragraph = ctx.paragraph;
+		fromVerse = ctx.kind === 'verse';
 		(async () => {
 			loaded = false;
+			// A paragraph context asks about one paragraph. A verse context asks
+			// about every paragraph citing that verse, so its questions are the
+			// union over them.
+			let paragraphs: number[];
+			if (ctx.kind === 'paragraph') {
+				paragraphs = [ctx.paragraph];
+			} else {
+				const verseIdx = await loadBibleVerseIndex();
+				paragraphs =
+					verseIdx[ctx.verseUsfx]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
+			}
+
 			const [citedBy, ranges] = await Promise.all([
 				loadCompendiumCitedBy(),
 				loadCompendiumQRanges()
 			]);
-			const qNumbers = citedBy[paragraph] ?? [];
+			const qNumbers = [...new Set(paragraphs.flatMap((p) => citedBy[p] ?? []))].sort(
+				(a, b) => a - b
+			);
 			if (qNumbers.length === 0) {
 				hits = [];
 				loaded = true;
@@ -94,9 +110,16 @@
 	<p class="text-muted italic font-ui text-sm">Chargement…</p>
 {:else if hits.length === 0}
 	<p class="text-muted italic font-ui text-sm">
-		Aucune question du Compendium ne cite ce paragraphe.
+		{fromVerse
+			? "Aucune question du Compendium n'est liée à ce verset."
+			: 'Aucune question du Compendium ne cite ce paragraphe.'}
 	</p>
 {:else}
+	{#if fromVerse}
+		<p class="font-ui text-xs text-muted mb-3">
+			Questions liées aux paragraphes du Catéchisme qui citent ce verset.
+		</p>
+	{/if}
 	<ul class="space-y-4">
 		{#each hits as h (h.number)}
 			<li>

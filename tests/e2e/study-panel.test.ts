@@ -193,3 +193,17 @@ test('panel page links open in a new tab', async ({ page }) => {
 	await expect(verseLink).toHaveAttribute('target', '_blank');
 	await expect(verseLink).toHaveAttribute('rel', /noopener/);
 });
+
+test('the verse panel offers a Compendium tab of related questions', async ({ page }) => {
+	await page.goto('/bible/matthieu/6');
+	await page.locator('#v33 .verse-row').click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+
+	await panel.getByRole('button', { name: 'Compendium' }).click();
+	// Questions surface through the CCC paragraphs citing the verse, so the
+	// tab says so rather than implying the question quotes the verse.
+	await expect(panel.getByText(/paragraphes du Catéchisme qui citent ce verset/i)).toBeVisible();
+	await expect(panel.locator('a[href^="/compendium/"]').first()).toBeVisible();
+});
