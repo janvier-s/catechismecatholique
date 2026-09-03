@@ -21,9 +21,11 @@
 		loadParagraphThemes,
 		loadCdseCitedByCcc,
 		loadEnBrefsIndex,
-		loadCecLiturgy
+		loadCecLiturgy,
+		loadBibleVerseIndex,
+		loadVerseLiturgyBook
 	} from '$lib/data/loaders';
-	import type { Paragraph } from '$lib/data/types';
+	import type { Paragraph, VerseLiturgyBookShard } from '$lib/data/types';
 	import PanelShell from './PanelShell.svelte';
 	import TabBibleRefs from './TabBibleRefs.svelte';
 	import TabCrossRefs from './TabCrossRefs.svelte';
@@ -45,6 +47,7 @@
 	import TabDenzingerRefs from './TabDenzingerRefs.svelte';
 	import TabThemes from './TabThemes.svelte';
 	import TabLiturgie from './TabLiturgie.svelte';
+	import TabVerseLiturgie from './TabVerseLiturgie.svelte';
 	import TabStrip from './TabStrip.svelte';
 	import { BOOKS } from '$lib/utils/bibleBookSlug';
 
@@ -71,6 +74,9 @@
 	const IA_ICON_HTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" /></svg>`;
 
 	let paragraph: Paragraph | null = $state(null);
+	// Verse contexts only · whether each of the two verse tabs has content.
+	let verseHasCompendium = $state(false);
+	let verseHasLiturgie = $state(false);
 	let citedByList: number[] = $state([]);
 	let hasEnBref: boolean = $state(false);
 	let compendiumCiters: number[] = $state([]);
@@ -105,7 +111,7 @@
 			return;
 		}
 		// Modes that have no CCC paragraph context.
-		if (ctx.kind === 'verse' || ctx.kind === 'trent-paragraph' || ctx.kind === 'denzinger-entry') {
+		if (ctx.kind === 'trent-paragraph' || ctx.kind === 'denzinger-entry') {
 			paragraph = null;
 			citedByList = [];
 			hasEnBref = false;
@@ -115,6 +121,40 @@
 			hasLiturgie = false;
 			hasAudio = false;
 			dataReady = true;
+			return;
+		}
+		// A verse has no CCC paragraph of its own, but its tabs still depend on
+		// data: the Compendium and Liturgie tabs are only worth showing when
+		// they would have content. Deciding that needs the paragraphs citing
+		// the verse, plus the verse's own book shard · never the far larger
+		// day table, which TabVerseLiturgie loads only when opened.
+		if (ctx.kind === 'verse') {
+			paragraph = null;
+			citedByList = [];
+			hasEnBref = false;
+			compendiumCiters = [];
+			cdseCiters = [];
+			hasThemes = false;
+			hasLiturgie = false;
+			hasAudio = false;
+			dataReady = false;
+			(async () => {
+				const verseIdx = await loadBibleVerseIndex();
+				const citing =
+					verseIdx[ctx.verseUsfx]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
+				const slug = BOOKS.find((b) => b.usfx === ctx.verseUsfx)?.slug;
+				const emptyShard: Promise<VerseLiturgyBookShard> = Promise.resolve({});
+				const [compendiumCB, shard, perParagraph] = await Promise.all([
+					loadCompendiumCitedBy(),
+					slug ? loadVerseLiturgyBook(slug) : emptyShard,
+					Promise.all(citing.map((p) => loadCecLiturgy(p)))
+				]);
+				verseHasCompendium = citing.some((p) => (compendiumCB[p]?.length ?? 0) > 0);
+				const proclaimedCount =
+					shard[String(ctx.verseChapter)]?.[String(ctx.verseVerse)]?.length ?? 0;
+				verseHasLiturgie = proclaimedCount > 0 || perParagraph.some((list) => list.length > 0);
+				dataReady = true;
+			})();
 			return;
 		}
 		const paragraphNum = ctx.paragraph;
@@ -153,7 +193,29 @@
 	const visibleGroups: Group[] = $derived.by(() => {
 		const ctx = $studyPanel.context;
 		if (ctx?.kind === 'verse') {
-			return [{ id: 'bible-verse', label: 'CEC', children: [{ id: 'bible-verse', label: 'CEC' }] }];
+			// Three sibling groups, not one group with three children: the strip
+			// renders one button per group and folds a multi-child group into a
+			// sub-toggle, which would bury Compendium and Liturgie under a
+			// button labelled CEC. Same shape as the denzinger-entry branch.
+			const groups: Group[] = [
+				{ id: 'bible-verse', label: 'CEC', children: [{ id: 'bible-verse', label: 'CEC' }] }
+			];
+			// Optimistic while loading, so the active tab is never snapped away.
+			if (!dataReady || verseHasCompendium) {
+				groups.push({
+					id: 'compendium',
+					label: 'Compendium',
+					children: [{ id: 'compendium', label: 'Compendium' }]
+				});
+			}
+			if (!dataReady || verseHasLiturgie) {
+				groups.push({
+					id: 'liturgie',
+					label: 'Liturgie',
+					children: [{ id: 'liturgie', label: 'Liturgie' }]
+				});
+			}
+			return groups;
 		}
 		if (ctx?.kind === 'trent-paragraph') {
 			if (ctx.footnotes.length > 0) {
@@ -494,6 +556,8 @@
 							<TabSources />
 						{:else if $studyPanel.activeTab === 'liturgie' && $studyPanel.context?.kind === 'paragraph'}
 							<TabLiturgie />
+						{:else if $studyPanel.activeTab === 'liturgie' && $studyPanel.context?.kind === 'verse'}
+							<TabVerseLiturgie />
 						{:else if $studyPanel.activeTab === 'themes' && $studyPanel.context?.kind === 'paragraph'}
 							<TabThemes />
 						{:else if $studyPanel.activeTab === 'bible-verse'}

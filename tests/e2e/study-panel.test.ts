@@ -207,3 +207,18 @@ test('the verse panel offers a Compendium tab of related questions', async ({ pa
 	await expect(panel.getByText(/paragraphes du Catéchisme qui citent ce verset/i)).toBeVisible();
 	await expect(panel.locator('a[href^="/compendium/"]').first()).toBeVisible();
 });
+
+test('the verse panel offers a Liturgie tab with both sections', async ({ page }) => {
+	await page.goto('/bible/matthieu/6');
+	await page.locator('#v33 .verse-row').click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+	await panel.getByRole('button', { name: 'Liturgie' }).click();
+
+	// Scripture is proclaimed at Mass; Catechism paragraphs are proposed for
+	// meditation alongside it. The two sections must not borrow each other's verb.
+	await expect(panel.getByRole('heading', { name: 'Proclamé à la messe' })).toBeVisible();
+	await expect(panel.getByRole('heading', { name: 'Paragraphes à méditer' })).toBeVisible();
+	await expect(panel.getByText(/proposés à la méditation/i)).toBeVisible();
+});
