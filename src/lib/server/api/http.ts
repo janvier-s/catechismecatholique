@@ -13,7 +13,8 @@ export type ApiErrorCode =
 	| 'bad_reference'
 	| 'unknown_slug'
 	| 'unknown_book'
-	| 'query_too_short';
+	| 'query_too_short'
+	| 'too_many_refs';
 
 // Read-only public data, no credentials, no cookies · `*` is correct here and
 // carries no risk. Without it the documented API is uncallable from a browser

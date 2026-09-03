@@ -111,6 +111,22 @@ export const API_ROUTES: ApiRoute[] = [
 		example: '/api/liturgie/today'
 	},
 	{
+		path: '/api/pericope',
+		summary:
+			'Paragraphes du Catéchisme citant un péricope, par référence liturgique. Plusieurs références par requête.',
+		params: [
+			{
+				name: 'ref',
+				in: 'query',
+				required: true,
+				description:
+					'Référence, par exemple « Lc 7, 11-16 ». Répétable, ou plusieurs séparées par un point-virgule. Au plus 50.'
+			}
+		],
+		codes: ['bad_reference', 'too_many_refs'],
+		example: '/api/pericope?ref=Lc 7, 11-16'
+	},
+	{
 		path: '/api/themes',
 		summary: 'Vocabulaire thématique complet, avec le nombre de paragraphes par thème.',
 		params: [],

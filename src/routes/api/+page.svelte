@@ -238,6 +238,62 @@
 }`}</code
 		></pre>
 
+	<h2>Péricopes</h2>
+
+	<p>
+		<code>GET /api/pericope?ref=…</code> prend une référence telle que le lectionnaire l'écrit et renvoie
+		les paragraphes du Catéchisme qui citent ce passage. C'est la route à utiliser pour une plage de versets
+		: elle évite d'avoir à écrire un analyseur de références françaises.
+	</p>
+
+	<pre><code
+			>{`GET /api/pericope?ref=Lc 7, 11-16
+
+{
+  "count": 1,
+  "items": [
+    {
+      "ref": "Lc 7, 11-16",
+      "book": "LUK",
+      "book_slug": "luc",
+      "book_name": "Luc",
+      "spans": [{ "chapter": 7, "from": 11, "to": 16 }],
+      "paragraphs": [994, 1503],
+      "verses": { "11": [994], "14": [994], "16": [994, 1503] }
+    }
+  ]
+}`}</code
+		></pre>
+
+	<p>Les formes acceptées couvrent ce que le lectionnaire produit réellement :</p>
+
+	<ul>
+		<li><code>Lc 7, 11-16</code> et <code>Lc 7:11-16</code> · virgule française ou deux points</li>
+		<li><code>Gn 49, 1-2.8-10</code> · groupes disjoints, le lectionnaire saute des versets</li>
+		<li><code>Ps 79, 2ac.3bc, 15-16a</code> · les lettres de demi-verset sont ignorées</li>
+		<li>
+			<code>Ps 118 (119), 97-98</code> · le numéro entre parenthèses l'emporte, car le texte biblique
+			servi ici suit la numérotation hébraïque
+		</li>
+		<li><code>Mt 26, 14 - 27, 66</code> · les péricopes qui franchissent un chapitre</li>
+		<li><code>Ap 4</code> · un chapitre entier, et <code>Jude 3</code> comme verset</li>
+	</ul>
+
+	<p>
+		Au plus 50 références par requête, soit en répétant le paramètre (<code>?ref=…&amp;ref=…</code
+		>), soit en les séparant par un point-virgule (<code>?ref=Lc 7, 11-16; Jn 3, 16</code>). Une
+		référence illisible ne fait pas échouer la requête : elle revient dans <code>items</code> avec
+		son propre <code>error</code> et le code
+		<code>bad_reference</code>, pour qu'un lectionnaire entier ne soit pas perdu à cause d'une
+		référence malformée.
+	</p>
+
+	<p>
+		<code>paragraphs</code> réunit et dédoublonne tout le passage, <code>verses</code> détaille verset
+		par verset. Un passage que le Catéchisme ne cite jamais renvoie une liste vide : c'est une réponse,
+		non une erreur.
+	</p>
+
 	<h2>Calendrier liturgique</h2>
 
 	<p>
