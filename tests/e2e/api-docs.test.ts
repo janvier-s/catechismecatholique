@@ -60,7 +60,10 @@ test('every documented example matches what the API actually returns', async ({
 	let pendingUrl: string | null = null;
 	for (const block of blocks) {
 		const text = block.trim();
-		const url = text.match(/^GET (\/api\/\S+)/)?.[1];
+		// Take the rest of the line, not just the first token: a documented URL
+		// can carry a space (?ref=Lc 7, 11-16), and stopping at the space would
+		// silently test a truncated URL that still answers 200.
+		const url = text.match(/^GET (\/api\/.*)$/m)?.[1]?.trim();
 		if (url) pendingUrl = url;
 		// Top-level fields sit at exactly two spaces of indent in every example.
 		const keys = [...text.matchAll(/^ {2}"([a-zA-Z_]+)":/gm)].map((m) => m[1]!);
@@ -75,7 +78,7 @@ test('every documented example matches what the API actually returns', async ({
 	expect(cases.length).toBeGreaterThanOrEqual(8);
 
 	for (const { url, keys } of cases) {
-		const res = await request.get(url);
+		const res = await request.get(encodeURI(url));
 		expect(res.status(), `${url} should be reachable`).toBe(200);
 		const body = await res.json();
 		for (const key of keys) {
