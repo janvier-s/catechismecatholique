@@ -240,12 +240,12 @@
 				{
 					id: 'denzinger-cross-refs',
 					label: 'Renvois',
-					children: [{ id: 'denzinger-cross-refs', label: 'Renvois' }]
+					children: [{ id: 'denzinger-cross-refs', label: 'Renvoie à' }]
 				},
 				{
 					id: 'denzinger-cited-by',
-					label: 'Cité dans',
-					children: [{ id: 'denzinger-cited-by', label: 'Cité dans' }]
+					label: 'Renvoyé par',
+					children: [{ id: 'denzinger-cited-by', label: 'Renvoyé par' }]
 				}
 			];
 		}
@@ -263,7 +263,7 @@
 				).length
 			: 0;
 		const hasSources = optimistic || sourcesCount > 0;
-		// Cité dans hidden if the citers are exactly the same set as cross_refs
+		// Renvoyé par hidden if the citers are exactly the same set as cross_refs
 		const citerSet = new Set(citedByList.map(String));
 		const crossSet = new Set(paragraph?.cross_refs ?? []);
 		const sameAsRenvois =
@@ -283,8 +283,8 @@
 		// "where is this paragraph related to other doctrine" mental model in
 		// one place and shrinks the strip from 6-7 tabs to 5.
 		const ren: TabDef[] = [];
-		if (hasCrossRefs) ren.push({ id: 'cross-refs', label: 'Renvois' });
-		if (hasCitedBy) ren.push({ id: 'cited-by', label: 'Cité dans' });
+		if (hasCrossRefs) ren.push({ id: 'cross-refs', label: 'Renvoie à' });
+		if (hasCitedBy) ren.push({ id: 'cited-by', label: 'Renvoyé par' });
 		if (hasThemesG) ren.push({ id: 'themes', label: 'Thèmes' });
 		if (hasLiturgieG) ren.push({ id: 'liturgie', label: 'Liturgie' });
 		if (hasSources) ren.push({ id: 'sources', label: 'Sources' });
