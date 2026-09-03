@@ -21,9 +21,16 @@
 	let meditated: CecLiturgyOccasion[] = $state([]);
 	let citing: number[] = $state([]);
 	let loaded = $state(false);
+	/**
+	 * Guards against a slower earlier verse landing after a later one. The
+	 * component is not remounted between verses (the panel body is keyed on the
+	 * active tab, not the context), so two runs of this effect can overlap.
+	 */
+	let request = 0;
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
+		request++;
 		if (ctx?.kind !== 'verse') {
 			proclaimed = [];
 			meditated = [];
@@ -31,32 +38,46 @@
 			loaded = false;
 			return;
 		}
+		const mine = request;
 		(async () => {
 			loaded = false;
-			const slug = BOOKS.find((b) => b.usfx === ctx.verseUsfx)?.slug;
-			// The shard alone answers "is this verse ever read at Mass". The day
-			// table is far larger and only worth fetching once we know it is.
-			const shard = slug ? await loadVerseLiturgyBook(slug) : {};
-			const dayIdx = shard[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
-			const days = dayIdx.length > 0 ? await loadVerseLiturgyDays() : [];
-			proclaimed = dayIdx.map((i) => days[i]).filter((d): d is VerseLiturgyDay => d != null);
+			try {
+				const slug = BOOKS.find((b) => b.usfx === ctx.verseUsfx)?.slug;
+				// The shard alone answers "is this verse ever read at Mass". The day
+				// table is far larger and only worth fetching once we know it is.
+				const shard = slug ? await loadVerseLiturgyBook(slug) : {};
+				const dayIdx = shard[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
+				const days = dayIdx.length > 0 ? await loadVerseLiturgyDays() : [];
+				const nextProclaimed = dayIdx
+					.map((i) => days[i])
+					.filter((d): d is VerseLiturgyDay => d != null);
 
-			const verseIdx = await loadBibleVerseIndex();
-			citing = verseIdx[ctx.verseUsfx]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
-			// Shards are cached per paragraph hundred, so ten paragraphs is
-			// typically two or three requests.
-			const perParagraph = await Promise.all(citing.map((p) => loadCecLiturgy(p)));
-			// The same day is reached through several paragraphs; keep the first.
-			// A plain object, not a Set: this is a transient local inside the
-			// effect's closure and needs no Svelte reactivity.
-			const seen: Record<string, true> = {};
-			meditated = perParagraph.flat().filter((o) => {
-				const id = `${o.cycle ?? ''}:${o.slug}`;
-				if (seen[id]) return false;
-				seen[id] = true;
-				return true;
-			});
-			loaded = true;
+				const verseIdx = await loadBibleVerseIndex();
+				const nextCiting =
+					verseIdx[ctx.verseUsfx]?.[String(ctx.verseChapter)]?.[String(ctx.verseVerse)] ?? [];
+				// Shards are cached per paragraph hundred, so ten paragraphs is
+				// typically two or three requests.
+				const perParagraph = await Promise.all(nextCiting.map((p) => loadCecLiturgy(p)));
+				// The same day is reached through several paragraphs; keep the first.
+				// A plain object, not a Set: this is a transient local inside the
+				// effect's closure and needs no Svelte reactivity.
+				const seen: Record<string, true> = {};
+				const nextMeditated = perParagraph.flat().filter((o) => {
+					const id = `${o.cycle ?? ''}:${o.slug}`;
+					if (seen[id]) return false;
+					seen[id] = true;
+					return true;
+				});
+
+				if (mine !== request) return;
+				proclaimed = nextProclaimed;
+				citing = nextCiting;
+				meditated = nextMeditated;
+			} finally {
+				// Also on failure: without it the tab is stuck on "Chargement…"
+				// forever, with no error state and no way back.
+				if (mine === request) loaded = true;
+			}
 		})();
 	});
 
@@ -87,10 +108,21 @@
 	}
 
 	const proclaimedSections = $derived(
-		SECTIONS.map((s) => ({
-			...s,
-			cards: toProclaimedCards(proclaimed.filter((d) => d.kind === s.kind))
-		})).filter((s) => s.cards.length > 0)
+		SECTIONS.map((s) => {
+			const cards = toProclaimedCards(proclaimed.filter((d) => d.kind === s.kind));
+			// Day-table order is generator source order (all of année A, then B,
+			// then C), which interleaves seasons. Sort the way every other card
+			// list in the panel does: fixed feasts by month, the rest by season.
+			return {
+				...s,
+				cards:
+					s.kind === 'fixed'
+						? [...cards].sort(
+								(a, b) => (a.years[0]!.monthIndex ?? 99) - (b.years[0]!.monthIndex ?? 99)
+							)
+						: bySeason(cards)
+			};
+		}).filter((s) => s.cards.length > 0)
 	);
 	const meditatedCards = $derived(bySeason(toCards(meditated)));
 	const highlightSet = $derived(new Set(citing));
@@ -100,7 +132,8 @@
 	<p class="text-muted italic font-ui text-sm">Chargement…</p>
 {:else if proclaimed.length === 0 && meditatedCards.length === 0}
 	<p class="text-muted italic font-ui text-sm">
-		Ce verset n'est proclamé aucun jour du calendrier liturgique.
+		Ce verset n'est proclamé aucun jour du calendrier liturgique, et aucun paragraphe du Catéchisme
+		le citant n'est proposé à la méditation.
 	</p>
 {:else}
 	{#if proclaimed.length > 0}

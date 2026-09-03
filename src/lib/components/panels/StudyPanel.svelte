@@ -85,6 +85,8 @@
 	let hasLiturgie: boolean = $state(false);
 	let hasAudio: boolean = $state(false);
 	let dataReady: boolean = $state(false);
+	/** Discards a loader run whose context is no longer the current one. */
+	let loaderRequest = 0;
 
 	// Tab clicks update $studyPanel.activeTab, which emits a new store object
 	// even though context/open are unchanged — that would re-fire the loader
@@ -98,6 +100,10 @@
 		const key = open && ctx ? JSON.stringify(ctx) : '__closed__';
 		if (key === prevLoaderKey) return;
 		prevLoaderKey = key;
+		// Two runs of this effect overlap whenever the reader moves to another
+		// context before the first one's fetches settle. Without this token the
+		// slower earlier run wins the last write.
+		const mine = ++loaderRequest;
 		if (!ctx || !open) {
 			paragraph = null;
 			citedByList = [];
@@ -137,6 +143,8 @@
 			hasThemes = false;
 			hasLiturgie = false;
 			hasAudio = false;
+			verseHasCompendium = false;
+			verseHasLiturgie = false;
 			dataReady = false;
 			(async () => {
 				const verseIdx = await loadBibleVerseIndex();
@@ -149,6 +157,7 @@
 					slug ? loadVerseLiturgyBook(slug) : emptyShard,
 					Promise.all(citing.map((p) => loadCecLiturgy(p)))
 				]);
+				if (mine !== loaderRequest) return;
 				verseHasCompendium = citing.some((p) => (compendiumCB[p]?.length ?? 0) > 0);
 				const proclaimedCount =
 					shard[String(ctx.verseChapter)]?.[String(ctx.verseVerse)]?.length ?? 0;
@@ -171,6 +180,7 @@
 					loadEnBrefsIndex(),
 					loadCecLiturgy(paragraphNum)
 				]);
+			if (mine !== loaderRequest) return;
 			hasAudio = !!audioIdx && audioIdx.paragraphs[String(paragraphNum)] !== undefined;
 			paragraph = p;
 			citedByList = citedBy[paragraphNum] ?? [];

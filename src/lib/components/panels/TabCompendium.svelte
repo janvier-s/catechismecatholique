@@ -28,15 +28,23 @@
 	let hits: Hit[] = $state([]);
 	let loaded = $state(false);
 	let fromVerse = $state(false);
+	/**
+	 * Discards a run whose context is no longer current. The component is not
+	 * remounted between contexts, so a slower earlier run would otherwise
+	 * overwrite a later one's questions.
+	 */
+	let request = 0;
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
+		request++;
 		if (ctx?.kind !== 'paragraph' && ctx?.kind !== 'verse') {
 			hits = [];
 			loaded = false;
 			return;
 		}
 		fromVerse = ctx.kind === 'verse';
+		const mine = request;
 		(async () => {
 			loaded = false;
 			// A paragraph context asks about one paragraph. A verse context asks
@@ -59,6 +67,7 @@
 				(a, b) => a - b
 			);
 			if (qNumbers.length === 0) {
+				if (mine !== request) return;
 				hits = [];
 				loaded = true;
 				return;
@@ -88,6 +97,7 @@
 				}
 			}
 
+			if (mine !== request) return;
 			hits = qNumbers
 				.map((n) => {
 					const entry = byNumber[n];

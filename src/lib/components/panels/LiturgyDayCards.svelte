@@ -60,7 +60,7 @@
 	 * and "La Solennité de l'Ascension du Seigneur" in B and C, with slugs to
 	 * match, so cards are grouped on a normalised title rather than the slug.
 	 */
-	export function dayKey(o: LiturgyCardOccasion): string {
+	function dayKey(o: LiturgyCardOccasion): string {
 		return o.title
 			.normalize('NFD')
 			.replace(/[\u0300-\u036f]/g, '')
@@ -199,7 +199,11 @@
 		if (!o.readingsKey) return;
 		readingBusy = true;
 		try {
-			const entry = await loadCalendrierReading(o.slug, o.cycle);
+			// Ferial days carry their cycle in `weekdayCycle`, not `cycle`, and
+			// their reading files are keyed on it (`I--avent-1-jeudi.json`).
+			// Passing `cycle` alone degrades the key to the bare slug, which no
+			// weekday reading file uses.
+			const entry = await loadCalendrierReading(o.slug, o.weekdayCycle ?? o.cycle);
 			if (request === readingRequest) readingText = entry;
 		} finally {
 			if (request === readingRequest) readingBusy = false;
