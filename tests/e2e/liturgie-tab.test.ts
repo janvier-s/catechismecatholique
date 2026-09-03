@@ -84,6 +84,6 @@ test('the tab is absent for a paragraph no day cites', async ({ page }) => {
 	await page.locator('sup.srcRef.cccRef').first().click();
 	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
 	await expect(panel).toBeVisible();
-	await expect(page.getByRole('tab', { name: 'Renvois' }).first()).toBeVisible();
+	await expect(page.getByRole('tab', { name: 'Renvoie à' }).first()).toBeVisible();
 	await expect(page.getByRole('tab', { name: 'Liturgie' })).toHaveCount(0);
 });

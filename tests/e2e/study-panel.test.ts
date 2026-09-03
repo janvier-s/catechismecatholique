@@ -158,7 +158,7 @@ test.describe('mobile study panel', () => {
 		await panel.getByRole('button', { name: 'IA' }).click();
 		await expect(panel).toBeVisible();
 
-		await panel.getByRole('button', { name: 'Renvois' }).click();
+		await panel.getByRole('button', { name: 'Renvoie à' }).click();
 		await expect(panel).toBeVisible();
 	});
 });
