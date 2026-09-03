@@ -93,8 +93,22 @@ const nclBookCache = new Map<string, Promise<NclBook | null>>();
 let nclParagraphsManifestPromise: Promise<Set<string>> | null = null;
 const nclParagraphsBookCache = new Map<string, Promise<NclParagraphsBook | null>>();
 
+// Module-level promise cache, matching loadChapter below. One /api/cec request
+// resolves the same shard up to three times · the route itself, the `sources`
+// block and the `bible` block · and the batch route multiplies that by up to
+// 50 paragraphs. A rejection is evicted rather than memoised, so a shard that
+// 404'd once does not poison every later request in the isolate.
+const paragraphPromises = new Map<number, Promise<Paragraph>>();
 export function loadParagraph(n: number, fetcher: Fetch = fetch): Promise<Paragraph> {
-	return fetchJson<Paragraph>(`/data/cec/paragraphs/${n}.json`, fetcher);
+	let p = paragraphPromises.get(n);
+	if (!p) {
+		p = fetchJson<Paragraph>(`/data/cec/paragraphs/${n}.json`, fetcher).catch((e) => {
+			paragraphPromises.delete(n);
+			throw e;
+		});
+		paragraphPromises.set(n, p);
+	}
+	return p;
 }
 
 // Module-level cache: chapter JSON is static once built. The Sidebar reloads

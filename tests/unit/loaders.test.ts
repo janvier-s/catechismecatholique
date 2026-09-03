@@ -36,6 +36,46 @@ describe('loaders', () => {
 		) as unknown as typeof fetch;
 		await expect(loadParagraph(99999, fakeFetch)).rejects.toThrow();
 	});
+
+	// A single /api/cec request resolves the same shard up to three times: once
+	// in the route, once in the sources block, once in the bible block. Without
+	// a memo that is three Worker subrequests for one file, and a batch of 50
+	// paragraphs multiplies it.
+	it('loadParagraph fetches a given paragraph only once', async () => {
+		const fakeFetch = vi.fn(() =>
+			Promise.resolve({
+				ok: true,
+				json: () => Promise.resolve({ corpus: 'ccc', number: 501, text_html: '<span>x</span>' })
+			})
+		) as unknown as typeof fetch;
+
+		const [a, b] = await Promise.all([
+			loadParagraph(501, fakeFetch),
+			loadParagraph(501, fakeFetch)
+		]);
+		const c = await loadParagraph(501, fakeFetch);
+
+		expect(fakeFetch).toHaveBeenCalledTimes(1);
+		expect(a).toBe(b);
+		expect(c).toBe(a);
+	});
+
+	it('loadParagraph does not memoise a failed fetch', async () => {
+		const failing = vi.fn(() =>
+			Promise.resolve({ ok: false, status: 500 })
+		) as unknown as typeof fetch;
+		await expect(loadParagraph(502, failing)).rejects.toThrow();
+
+		const working = vi.fn(() =>
+			Promise.resolve({
+				ok: true,
+				json: () => Promise.resolve({ corpus: 'ccc', number: 502, text_html: '<span>y</span>' })
+			})
+		) as unknown as typeof fetch;
+		const p = await loadParagraph(502, working);
+
+		expect(p.number).toBe(502);
+	});
 });
 
 describe('compendium loaders', () => {
