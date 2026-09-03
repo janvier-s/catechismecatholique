@@ -156,13 +156,19 @@ export const GET: RequestHandler = () => {
 		`- \`${SITE}/api/openapi.json\` · description OpenAPI 3.1 de l'API publique (lecture seule, sans clé)`
 	);
 	out.push(
-		`- \`${SITE}/api/cec/{numéro}\` · paragraphe CEC (texte brut + HTML, renvois, fil d'Ariane, précédent/suivant)`
+		`- \`${SITE}/api/cec/{numéro}\` · paragraphe CEC (texte brut + HTML, renvois, fil d'Ariane, précédent/suivant). Les paragraphes qui citent une source portent en plus \`citations\` et \`text_full\`, la prose et les citations réunies`
 	);
 	out.push(
 		`- \`${SITE}/api/cec/{numéro}?include=all\` · le même paragraphe avec les données du panneau d'étude (thèmes, sources, liturgie, Compendium, doctrine sociale, Enchiridion)`
 	);
 	out.push(
 		`- \`${SITE}/api/bible/{livre}/{chapitre}/{verset}\` · paragraphes du CEC citant un verset`
+	);
+	out.push(
+		`- \`${SITE}/api/bible/{livre}/{chapitre}/{verset}?include=texts\` · les mêmes, texte joint (au plus 50 paragraphes)`
+	);
+	out.push(
+		`- \`${SITE}/api/pericope?ref=Lc 7, 11-16\` · paragraphes du CEC citant une péricope, \`include=texts\` pour joindre le texte`
 	);
 	out.push(
 		`- \`${SITE}/api/liturgie/{AAAA-MM-JJ}\` · célébration du jour et paragraphes proposés à la méditation`

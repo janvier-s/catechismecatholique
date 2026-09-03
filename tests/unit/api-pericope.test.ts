@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { resolvePericope, parseRefs, MAX_REFS } from '$lib/server/api/pericope';
+import { resolvePericope, unionParagraphs, parseRefs, MAX_REFS } from '$lib/server/api/pericope';
 import type { BibleVerseIndex } from '$lib/data/types';
 
 const index: BibleVerseIndex = {
@@ -79,5 +79,27 @@ describe('parseRefs', () => {
 		const p = new URLSearchParams();
 		for (let i = 0; i < MAX_REFS; i++) p.append('ref', `Jn 3, ${i + 1}`);
 		expect(parseRefs(p)).toMatchObject({ ok: true });
+	});
+});
+
+describe('unionParagraphs', () => {
+	it('merges and dedupes the paragraphs across every ref', () => {
+		const items = [
+			{ ref: 'a', paragraphs: [994, 1503] },
+			{ ref: 'b', paragraphs: [219, 994] }
+		];
+		expect(unionParagraphs(items as never)).toEqual([219, 994, 1503]);
+	});
+
+	it('ignores refs that failed to parse', () => {
+		const items = [
+			{ ref: 'a', paragraphs: [994] },
+			{ ref: 'bogus', error: 'illisible', code: 'bad_reference' }
+		];
+		expect(unionParagraphs(items as never)).toEqual([994]);
+	});
+
+	it('returns an empty list when nothing is cited', () => {
+		expect(unionParagraphs([])).toEqual([]);
 	});
 });

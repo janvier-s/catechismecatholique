@@ -115,6 +115,49 @@
 		dans son champ <code>display</code>, avec le livre, le chapitre et le verset résolus.
 	</p>
 
+	<h3>Texte, sources citées et passage complet</h3>
+
+	<p>
+		<code>text</code> est le jumeau en texte brut de <code>text_html</code> : la prose du
+		paragraphe, et elle seule. 352 paragraphes citent en outre une source · un concile, un Père, une
+		prière · rendue en bloc détaché sous le texte. Ces citations vivent dans <code>citations</code>,
+		chacune avec son <code>text_html</code> et son <code>text</code>.
+	</p>
+
+	<p>
+		La distinction compte : 307 de ces paragraphes finissent sur un deux-points que la citation
+		complète. Lire <code>text</code> seul y laisse une phrase en suspens. <code>text_full</code>
+		donne le passage entier, prose puis citations, séparées par une ligne blanche. Il
+		<strong>n'apparaît que si le paragraphe cite quelque chose</strong> : son absence dit qu'il n'y
+		a rien à joindre, et les 2513 autres paragraphes ne portent pas une seconde copie de
+		<code>text</code> pour rien.
+	</p>
+
+	<pre><code
+			>{`GET /api/cec/302
+
+{
+  "text_html": "<span>La création a sa bonté…vers cette perfection :</span>",
+  "text": "La création a sa bonté…vers cette perfection :",
+  "text_full": "La création a sa bonté…vers cette perfection :\n\nDieu garde et gouverne par sa providence tout ce qu'Il a créé…",
+  "citations": [
+    {
+      "text_html": "<span>Dieu garde et gouverne par sa providence…</span>",
+      "text": "Dieu garde et gouverne par sa providence tout ce qu'Il a créé…"
+    }
+  ]
+}`}</code
+		></pre>
+
+	<p>
+		Il n'y a délibérément pas de <code>text_full_html</code>. Concaténer les balises mettrait la
+		citation dans un <code>span</code> frère de la prose, sans rien pour les distinguer : les mots
+		d'un concile se liraient comme ceux du Catéchisme. Le texte brut ne perd rien en les joignant,
+		puisqu'il ne sait pas exprimer cette différence de toute façon · le HTML le sait, et la
+		perdrait. Un client qui rend du HTML dispose de <code>text_html</code> et de
+		<code>citations[].text_html</code>, et les enveloppe comme il l'entend.
+	</p>
+
 	<p>Un numéro hors de 1..2865 répond <code>404</code> avec un champ <code>error</code>.</p>
 
 	<h2>Plusieurs paragraphes</h2>
@@ -238,6 +281,58 @@
 }`}</code
 		></pre>
 
+	<h3>Joindre le texte des paragraphes</h3>
+
+	<p>
+		Par défaut ces routes renvoient des numéros, pas du texte : la réponse reste un index, petite et
+		très cacheable. <code>include=texts</code> joint le texte de chaque paragraphe cité, ce qui
+		évite un aller-retour vers <code>/api/cec</code>. C'est la seule valeur que <code>include</code>
+		accepte ici · les blocs d'étude décrits plus bas appartiennent à <code>/api/cec</code>.
+	</p>
+
+	<pre><code
+			>{`GET /api/bible/jean/3/16?include=texts
+
+{
+  "book": "JHN",
+  "book_slug": "jean",
+  "book_name": "Jean",
+  "chapter": 3,
+  "verse": 16,
+  "paragraphs": [219, 444, 454, 458, 706],
+  "texts": [
+    {
+      "number": 219,
+      "text": "L'amour de Dieu pour Israël est comparé à l'amour d'un père pour son fils…",
+      "citations": [],
+      "permalink": "https://catechismecatholique.fr/cec/219"
+    },
+    "…"
+  ]
+}`}</code
+		></pre>
+
+	<p>
+		Chaque entrée porte les mêmes champs que <code>/api/cec/[number]</code> pour le texte :
+		<code>text</code> pour la prose, <code>citations</code> pour les sources citées, et
+		<code>text_full</code> lorsqu'il y en a. Un paragraphe rendu ici et par <code>/api/cec</code>
+		se décrit de la même façon des deux côtés.
+	</p>
+
+	<p>
+		<code>texts</code> donne le texte brut, sans balises : les appels de note n'ont pas de sens
+		détachés de leur apparat, et <code>permalink</code> mène à l'enregistrement complet. Pour le
+		HTML et les renvois d'un paragraphe, appelez <code>/api/cec/[number]</code>.
+	</p>
+
+	<p>
+		Au plus 50 paragraphes par requête. Au-delà, la liste est coupée · les numéros les plus bas sont
+		gardés et la réponse porte <code>texts_truncated: true</code>. <code>paragraphs</code> reste
+		complet dans tous les cas, de sorte qu'un client peut toujours aller chercher le reste. Un
+		paragraphe dont le fichier manque est simplement absent de <code>texts</code> plutôt que de faire
+		échouer la réponse.
+	</p>
+
 	<h2>Péricopes</h2>
 
 	<p>
@@ -293,6 +388,27 @@
 		par verset. Un passage que le Catéchisme ne cite jamais renvoie une liste vide : c'est une réponse,
 		non une erreur.
 	</p>
+
+	<p>
+		<code>include=texts</code> fonctionne ici aussi, avec une différence : le texte arrive dans un
+		<code>texts</code> unique au premier niveau de la réponse, réunissant tous les
+		<code>ref</code> demandés, et non recopié dans chaque <code>item</code>. Les lectures d'un même
+		jour se recoupent souvent, et chaque <code>item</code> nomme déjà ses propres numéros. Le plafond
+		de 50 paragraphes porte sur cette réunion.
+	</p>
+
+	<pre><code
+			>{`GET /api/pericope?ref=Lc 7, 11-16&include=texts
+
+{
+  "count": 1,
+  "items": [{ "ref": "Lc 7, 11-16", "paragraphs": [994, 1503], "…": "…" }],
+  "texts": [
+    { "number": 994, "text": "…", "permalink": "https://catechismecatholique.fr/cec/994" },
+    { "number": 1503, "text": "…", "permalink": "https://catechismecatholique.fr/cec/1503" }
+  ]
+}`}</code
+		></pre>
 
 	<h2>Calendrier liturgique</h2>
 

@@ -2,6 +2,7 @@ import { apiError, apiJson } from '$lib/server/api/http';
 import { parseInclude } from '$lib/server/api/include';
 import { assembleBlocks } from '$lib/server/api/blocks';
 import { loadParagraph, loadParagraphContext } from '$lib/data/loaders';
+import { apiCitations, textFull } from '$lib/server/api/paragraphShape';
 import { stripHtml } from '$lib/utils/html';
 import type { RequestHandler } from './$types';
 
@@ -27,11 +28,14 @@ export const GET: RequestHandler = async ({ params, fetch, url }) => {
 		assembleBlocks(n, inc.blocks, fetch)
 	]);
 
+	const full = textFull(paragraph);
+
 	return apiJson({
 		number: paragraph.number,
 		corpus: paragraph.corpus,
 		text_html: paragraph.text_html,
 		text: stripHtml(paragraph.text_html),
+		...(full ? { text_full: full } : {}),
 		...(paragraph.superseded_text_html
 			? {
 					superseded_text_html: paragraph.superseded_text_html,
@@ -40,7 +44,7 @@ export const GET: RequestHandler = async ({ params, fetch, url }) => {
 			: {}),
 		cross_refs: paragraph.cross_refs,
 		bible_refs: paragraph.bible_refs,
-		citations: paragraph.citations,
+		citations: apiCitations(paragraph),
 		magisterial_refs: paragraph.magisterial_refs,
 		breadcrumb: context ?? null,
 		prev: n > FIRST ? n - 1 : null,

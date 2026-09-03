@@ -1,5 +1,6 @@
 import type { ApiErrorCode } from './http';
 import { ALL_BLOCKS, DEFAULT_ALL, MAX_EXPLICIT_BLOCKS } from './include';
+import { MAX_TEXTS } from './paragraphTexts';
 import type { ApiParam, ApiRoute as PublicApiRoute } from '$lib/api-types';
 
 export type { ApiParam };
@@ -18,6 +19,19 @@ const INCLUDE_PARAM: ApiParam = {
 	in: 'query',
 	required: false,
 	description: `Blocs d'étude à joindre, séparés par des virgules. Valeurs : ${ALL_BLOCKS.join(', ')}. « all » développe les ${DEFAULT_ALL.length} blocs hors « ai ». Au plus ${MAX_EXPLICIT_BLOCKS} blocs nommés explicitement.`
+};
+
+/**
+ * The Bible and pericope routes answer with paragraph numbers. « texts » joins
+ * the text of each one, so a caller does not have to follow up with a batch
+ * request · a different vocabulary from the CEC study blocks above, hence a
+ * separate parameter.
+ */
+const TEXTS_PARAM: ApiParam = {
+	name: 'include',
+	in: 'query',
+	required: false,
+	description: `« texts » joint le texte de chaque paragraphe cité, au plus ${MAX_TEXTS}. Seule valeur acceptée.`
 };
 
 /**
@@ -79,9 +93,10 @@ export const API_ROUTES: ApiRoute[] = [
 				required: true,
 				description: 'Slug français (jean) ou code USFX (JHN).'
 			},
-			{ name: 'chapter', in: 'path', required: true, description: 'Numéro de chapitre.' }
+			{ name: 'chapter', in: 'path', required: true, description: 'Numéro de chapitre.' },
+			TEXTS_PARAM
 		],
-		codes: ['unknown_book', 'bad_reference'],
+		codes: ['unknown_book', 'bad_reference', 'unknown_include'],
 		example: '/api/bible/jean/3'
 	},
 	{
@@ -95,9 +110,10 @@ export const API_ROUTES: ApiRoute[] = [
 				description: 'Slug français (jean) ou code USFX (JHN).'
 			},
 			{ name: 'chapter', in: 'path', required: true, description: 'Numéro de chapitre.' },
-			{ name: 'verse', in: 'path', required: true, description: 'Numéro de verset.' }
+			{ name: 'verse', in: 'path', required: true, description: 'Numéro de verset.' },
+			TEXTS_PARAM
 		],
-		codes: ['unknown_book', 'bad_reference'],
+		codes: ['unknown_book', 'bad_reference', 'unknown_include'],
 		example: '/api/bible/jean/3/16'
 	},
 	{
@@ -121,9 +137,10 @@ export const API_ROUTES: ApiRoute[] = [
 				required: true,
 				description:
 					'Référence, par exemple « Lc 7, 11-16 ». Répétable, ou plusieurs séparées par un point-virgule. Au plus 50.'
-			}
+			},
+			TEXTS_PARAM
 		],
-		codes: ['bad_reference', 'too_many_refs'],
+		codes: ['bad_reference', 'too_many_refs', 'unknown_include'],
 		example: '/api/pericope?ref=Lc 7, 11-16'
 	},
 	{

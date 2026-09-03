@@ -107,3 +107,17 @@ export function parseRefs(params: URLSearchParams): ParseRefsResult {
 	}
 	return { ok: true, refs };
 }
+
+/**
+ * Every paragraph cited by any of the resolved references, deduped and sorted.
+ * A lectionary's readings overlap · resolving them ref by ref would send the
+ * same paragraph several times.
+ */
+export function unionParagraphs(items: PericopeResult[]): number[] {
+	const all = new Set<number>();
+	for (const item of items) {
+		if (!('paragraphs' in item)) continue;
+		for (const p of item.paragraphs) all.add(p);
+	}
+	return [...all].sort((a, b) => a - b);
+}
