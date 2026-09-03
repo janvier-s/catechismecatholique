@@ -47,11 +47,13 @@ describe('buildBibleVerseIndex', () => {
 		expect(out.WIS!['8']!['7']).toEqual([500]);
 	});
 
-	// Matches what the published-index path already does for a chapter range:
-	// a reference to a whole chapter indexes every verse the chapter has.
-	it('expands a chapter-only reference across the whole chapter', () => {
+	// The panel this index feeds says "N paragraphes du Catéchisme citent
+	// Sagesse 8, 7". A paragraph that gestures at the chapter has not cited
+	// verse 7, and spreading it over every verse would make that sentence
+	// false · paragraph 1693 cites "Mt 6" and surfaced on Mt 6, 33.
+	it('does not spread a chapter-only reference across the chapter', () => {
 		const out = buildBibleVerseIndex(ncl, {}, books, [{ number: 500, refs: ['Sg 8'] }]);
-		expect(Object.keys(out.WIS!['8']!).sort()).toEqual(['1', '7']);
+		expect(out.WIS).toBeUndefined();
 	});
 
 	// The guard the published-index path already applies: a verse the bible text

@@ -116,13 +116,11 @@ export function buildBibleVerseIndex(
 			const chData = ncl[parsed.book]?.[String(parsed.chapter)];
 			if (!chData) continue;
 
-			if (parsed.verse_start === null) {
-				// A whole chapter · same expansion the published index gets.
-				for (const v of Object.keys(chData)) {
-					add(parsed.book, parsed.chapter, parseInt(v, 10), [number]);
-				}
-				continue;
-			}
+			// A chapter-only reference is skipped, deliberately · the panel this
+			// index feeds says "N paragraphes du Catéchisme citent Matthieu 6, 33",
+			// and a paragraph gesturing at Mt 6 has not cited verse 33. Spreading
+			// it over the chapter put paragraph 1693 on all 34 verses.
+			if (parsed.verse_start === null) continue;
 			const to = parsed.verse_end ?? parsed.verse_start;
 			for (let v = parsed.verse_start; v <= to; v++) {
 				if (chData[String(v)]) add(parsed.book, parsed.chapter, v, [number]);
