@@ -176,3 +176,92 @@ test('the verse tab lists the citing paragraph numbers as selectable text', asyn
 	const numbers = panel.locator('[data-verse-citers]');
 	await expect(numbers).toHaveText('305, 322, 764, 1942, 2547, 2604, 2608, 2632, 2763, 2830');
 });
+
+test('panel page links open in a new tab', async ({ page }) => {
+	// CCC 2466 has inline bible refs; its panel Bible tab lists verse links.
+	await page.goto('/cec/2466');
+	const inline = page.locator('button.bible-inline').first();
+	await expect(inline).toBeVisible();
+	await inline.click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+
+	// The verse reference link leaves the panel for a Bible page, so it opens
+	// in a new tab rather than replacing the paragraph the reader is studying.
+	const verseLink = panel.locator('a[href^="/bible/"]').first();
+	await expect(verseLink).toHaveAttribute('target', '_blank');
+	await expect(verseLink).toHaveAttribute('rel', /noopener/);
+});
+
+test('the verse panel offers a Compendium tab of related questions', async ({ page }) => {
+	await page.goto('/bible/matthieu/6');
+	await page.locator('#v33 .verse-row').click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+
+	await panel.getByRole('button', { name: 'Compendium' }).click();
+	// Questions surface through the CCC paragraphs citing the verse, so the
+	// tab says so rather than implying the question quotes the verse.
+	await expect(panel.getByText(/paragraphes du Catéchisme qui citent ce verset/i)).toBeVisible();
+	await expect(panel.locator('a[href^="/compendium/"]').first()).toBeVisible();
+});
+
+test('the verse panel offers a Liturgie tab with both sections', async ({ page }) => {
+	await page.goto('/bible/matthieu/6');
+	await page.locator('#v33 .verse-row').click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+	await panel.getByRole('button', { name: 'Liturgie' }).click();
+
+	// Scripture is proclaimed at Mass; Catechism paragraphs are proposed for
+	// meditation alongside it. The two sections must not borrow each other's verb.
+	await expect(panel.getByRole('heading', { name: 'Proclamé à la messe' })).toBeVisible();
+	await expect(panel.getByRole('heading', { name: 'Paragraphes à méditer' })).toBeVisible();
+	await expect(panel.getByText(/proposés à la méditation/i)).toBeVisible();
+});
+
+test('a weekday card in the verse Liturgie tab can open its readings', async ({ page }) => {
+	// Mt 5, 13 is proclaimed on the 5th Sunday of Ordinary Time and on the
+	// Tuesday of week 10 in both ferial cycles. A weekday's readings live under
+	// its cycle key (I--ordinaire-10-mardi.json), not under the bare slug, so
+	// this covers a branch the Sunday-only paragraph tab never reaches.
+	await page.goto('/bible/matthieu/5');
+	await page.locator('#v13 .verse-row').click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+	await panel.getByRole('button', { name: 'Liturgie' }).click();
+
+	// The weekday's own card, not the Sunday's: both panels (mobile and desktop)
+	// render a body, so filter to the visible one.
+	const card = panel
+		.locator('li.card')
+		.filter({ hasText: 'Mardi de la 10e semaine du Temps Ordinaire' })
+		.filter({ visible: true })
+		.first();
+	await expect(card.locator('a.card-title')).toHaveAttribute(
+		'href',
+		'/calendrier-liturgique/feries/i/ordinaire-10-mardi'
+	);
+
+	await card.getByRole('button', { name: 'Lire les textes' }).click();
+	// A wrong reading key 404s and renders the unavailable message instead.
+	await expect(card.locator('.texts')).toBeVisible();
+	await expect(card.getByText(/ne sont pas disponibles/)).toHaveCount(0);
+});
+
+test('a feast link in the verse Liturgie tab opens in a new tab', async ({ page }) => {
+	await page.goto('/bible/matthieu/6');
+	await page.locator('#v33 .verse-row').click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+	await panel.getByRole('button', { name: 'Liturgie' }).click();
+
+	const feast = panel.locator('a[href^="/calendrier-liturgique/"]').first();
+	await expect(feast).toHaveAttribute('target', '_blank');
+	await expect(feast).toHaveAttribute('rel', /noopener/);
+});

@@ -866,6 +866,40 @@ export interface CecLiturgyBucket {
 }
 
 /**
+ * Mirrors `VerseLiturgyDay` in scripts/prepare/verseLiturgyIndex.ts · keep in
+ * sync. One day the panel can show for a verse. Deliberately carries no CEC
+ * clusters: the verse tab gets its paragraph programme from the CEC liturgy
+ * index instead.
+ */
+export interface VerseLiturgyDay {
+	slug: string;
+	title: string;
+	season: CalendrierSeason;
+	color: LiturgicalColor;
+	/**
+	 * Stated rather than derived. `CecLiturgyOccasion` infers the day type from
+	 * the presence of `cycle` / `date`, which weekdays break: they carry a cycle
+	 * that is I or II rather than a, b or c.
+	 */
+	kind: 'year' | 'fixed' | 'proper' | 'weekday';
+	/** Sundays and solemnities of the three-year cycle. */
+	cycle?: 'a' | 'b' | 'c';
+	/** Ferial days, the two-year first-reading cycle. */
+	weekdayCycle?: 'I' | 'II';
+	/** Fixed feasts only, e.g. "2 Février". */
+	date?: string;
+	/** Fixed feasts only, so the frontend can order them by calendar month. */
+	monthIndex?: number;
+	/** Absent when no AELF reading was ever fetched for this day. */
+	readingsKey?: string;
+	/** References only. The full text is fetched lazily by `readingsKey`. */
+	readings: { type: string; ref: string }[];
+}
+
+/** Chapter number to verse number to indices into the day table. */
+export type VerseLiturgyBookShard = Record<string, Record<string, number[]>>;
+
+/**
  * Mirrors `CalendrierReading` in scripts/prepare/calendrier.ts - keep in sync.
  * `type` is wider than the 4-reading Sunday pattern: the Easter Vigil,
  * Pentecost's vigil, and Palm Sunday's procession all carry other types.

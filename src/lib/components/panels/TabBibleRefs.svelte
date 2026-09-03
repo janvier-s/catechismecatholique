@@ -204,6 +204,8 @@
 						{/if}
 						<a
 							href="/bible/{r.book.slug}/{r.chapter}{r.fromV !== undefined ? `/${r.fromV}` : ''}"
+							target="_blank"
+							rel="noopener noreferrer"
 							class="font-semibold text-accent hover:underline"
 						>
 							{r.book.frenchName}
