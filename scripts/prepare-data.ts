@@ -468,7 +468,20 @@ async function main() {
 	logStep('building bible verse index');
 	const { buildBibleVerseIndex } = await import('./prepare/bible-verse-index.ts');
 	const { BOOKS } = await import('../src/lib/utils/bibleBookSlug.ts');
-	const verseIdx = buildBibleVerseIndex(ncl, bibleIdx, BOOKS);
+	// The published index is not exhaustive · feed the paragraphs' own
+	// references in alongside it. `bible_refs` is the merged, corrected form
+	// from the prose; the `bible` entries of `magisterial_refs` add the ones
+	// that belong to a citation block, which is where paragraph 302's Sg 8:1
+	// lives. Continuations are deliberately left out: they are book-less
+	// fragments already merged into `bible_refs`.
+	const paragraphRefs = [...paragraphs].map(([number, p]) => ({
+		number,
+		refs: [
+			...p.bible_refs.map((r) => r.text),
+			...p.magisterial_refs.filter((r) => r.type === 'bible').map((r) => r.raw)
+		]
+	}));
+	const verseIdx = buildBibleVerseIndex(ncl, bibleIdx, BOOKS, paragraphRefs);
 	writeFileSync(join(OUT, 'cec/bible-verse-index.json'), JSON.stringify(verseIdx));
 	const verseCount = Object.values(verseIdx).reduce(
 		(t, byCh) => t + Object.values(byCh).reduce((c, byV) => c + Object.keys(byV).length, 0),

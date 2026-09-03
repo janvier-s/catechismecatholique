@@ -1,5 +1,6 @@
 import type { BibleVerseIndex } from '../../src/lib/data/types';
 import type { BookInfo } from '../../src/lib/utils/bibleBookSlug';
+import { parseBibleRefText } from '../../src/lib/utils/bibleRefText';
 
 type Ncl = Record<string, Record<string, Record<string, string>>>;
 type BibleIdx = Record<string, number[]>;
@@ -46,10 +47,31 @@ function parseRefKey(key: string): {
 	return null;
 }
 
+/** A paragraph and the scripture references its own text carries. */
+export interface ParagraphRefs {
+	number: number;
+	refs: string[];
+}
+
+/**
+ * Two sources, unioned.
+ *
+ * `bibleIdx` is the Catechism's published scripture index, keyed with English
+ * abbreviations. It is not exhaustive: 838 of the 7727 verse-level pairs the
+ * paragraphs themselves carry are absent from it · paragraph 302 cites Sg 8:1
+ * and the published index has no Wisdom 8:1 entry at all, so /bible/sagesse/8
+ * listed nothing for it.
+ *
+ * `paragraphRefs` closes that gap with the references extracted from the
+ * paragraph text. They are parsed with the same parser the API's `bible` block
+ * uses, so the index and that block can never disagree about what a reference
+ * means.
+ */
 export function buildBibleVerseIndex(
 	ncl: Ncl,
 	bibleIdx: BibleIdx,
-	books: BookInfo[]
+	books: BookInfo[],
+	paragraphRefs: ParagraphRefs[] = []
 ): BibleVerseIndex {
 	const lookup = abbrTable(books);
 	const out: BibleVerseIndex = {};
@@ -83,6 +105,27 @@ export function buildBibleVerseIndex(
 				for (let v = parsed.fromV; v <= parsed.toV!; v++) {
 					if (chData[String(v)]) add(usfx, ch, v, paragraphs);
 				}
+			}
+		}
+	}
+
+	for (const { number, refs } of paragraphRefs) {
+		for (const raw of refs) {
+			const parsed = parseBibleRefText(raw);
+			if (!parsed.book || parsed.chapter === null) continue;
+			const chData = ncl[parsed.book]?.[String(parsed.chapter)];
+			if (!chData) continue;
+
+			if (parsed.verse_start === null) {
+				// A whole chapter · same expansion the published index gets.
+				for (const v of Object.keys(chData)) {
+					add(parsed.book, parsed.chapter, parseInt(v, 10), [number]);
+				}
+				continue;
+			}
+			const to = parsed.verse_end ?? parsed.verse_start;
+			for (let v = parsed.verse_start; v <= to; v++) {
+				if (chData[String(v)]) add(parsed.book, parsed.chapter, v, [number]);
 			}
 		}
 	}
