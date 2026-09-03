@@ -10,7 +10,10 @@ export function buildCitedBy(
 			if (!Number.isFinite(target)) continue;
 			if (!paragraphs.has(target)) continue;
 			if (!out[target]) out[target] = [];
-			out[target]!.push(from);
+			// A paragraph can carry two markers pointing at the same target
+			// (§671 cites 1043 twice). The reverse index is a set of citers,
+			// so the second marker must not produce a second entry.
+			if (!out[target]!.includes(from)) out[target]!.push(from);
 		}
 	}
 	for (const k of Object.keys(out)) {

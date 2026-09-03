@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { extractParagraphs } from '../../../scripts/prepare/paragraphs';
+import { extractParagraphs, splitCrossRefs } from '../../../scripts/prepare/paragraphs';
 
 describe('extractParagraphs', () => {
 	it('flattens all paragraphs with metadata', () => {
@@ -77,5 +77,39 @@ describe('extractParagraphs', () => {
 		);
 		expect(p?.magisterial_refs.map((r) => r.marker_idx)).toEqual([undefined, 4, 4, 4]);
 		expect(p?.magisterial_refs.map((r) => r.display_idx)).toEqual([1, 1, 1, 1]);
+	});
+});
+
+describe('splitCrossRefs', () => {
+	it('leaves a plain reference alone', () => {
+		expect(splitCrossRefs(['2613', '2736'])).toEqual(['2613', '2736']);
+	});
+
+	// The source writes a pair of renvois as one marker. Consumers parseInt the
+	// value, so an unsplit "1656-2658" resolves to 1656 and silently loses 2658.
+	it('splits a hyphenated pair into two references', () => {
+		expect(splitCrossRefs(['1656-2658'])).toEqual(['1656', '2658']);
+	});
+
+	it('does not expand the span between the two numbers', () => {
+		expect(splitCrossRefs(['512-560'])).toEqual(['512', '560']);
+	});
+
+	it('splits an adjacent pair too', () => {
+		expect(splitCrossRefs(['2676-2677'])).toEqual(['2676', '2677']);
+	});
+
+	it('preserves order and mixes split and plain values', () => {
+		expect(splitCrossRefs(['722', '2676-2677', '146'])).toEqual(['722', '2676', '2677', '146']);
+	});
+
+	it('passes anything that is not a hyphenated pair straight through', () => {
+		expect(splitCrossRefs(['', 'abc', '12-', '-12', '1-2-3'])).toEqual([
+			'',
+			'abc',
+			'12-',
+			'-12',
+			'1-2-3'
+		]);
 	});
 });

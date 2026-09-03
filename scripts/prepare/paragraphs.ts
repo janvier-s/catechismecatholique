@@ -90,6 +90,30 @@ function reindexCitationSupMarkers(
 	});
 }
 
+/**
+ * Split a hyphenated cross-reference into its two paragraph numbers.
+ *
+ * The source markup writes a pair of renvois as one `§1656-2658` marker, and
+ * the hyphen is a separator, not a range. Verified against
+ * `ccc_cross_refs_bidirectional.json`: for all 69 hyphenated values in the
+ * corpus, the authoritative `references` list holds the two endpoints as
+ * separate numbers and nothing in between · `1115` cites 512 and 560, not the
+ * 49 paragraphs between them.
+ *
+ * Left as strings so the field keeps its published type. Splitting here is
+ * what lets every consumer's `parseInt` see both halves, instead of silently
+ * keeping the first and dropping the second.
+ */
+export function splitCrossRefs(refs: string[]): string[] {
+	const out: string[] = [];
+	for (const ref of refs) {
+		const m = /^(\d+)-(\d+)$/.exec(ref.trim());
+		if (m) out.push(m[1]!, m[2]!);
+		else out.push(ref);
+	}
+	return out;
+}
+
 export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 	const out = new Map<number, Paragraph>();
 	function walk(node: RawNode) {
@@ -110,7 +134,7 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 				corpus: 'ccc',
 				number: node.number,
 				text_html: grouped.html,
-				cross_refs: node.cross_refs ?? [],
+				cross_refs: splitCrossRefs(node.cross_refs ?? []),
 				bible_refs: mergeBibleRefContinuations(
 					(node.bible_refs ?? []).map((b) => ({ text: b.text }))
 				),

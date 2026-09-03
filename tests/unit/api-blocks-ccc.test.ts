@@ -15,7 +15,11 @@ const ROUTES: Record<string, unknown> = {
 		number: 2559,
 		text_html: '<span>x</span>',
 		cross_refs: [],
-		bible_refs: [{ text: 'Ps 130, 1', book: 'Ps', chapter: 130, verseStart: 1 }],
+		// Exactly the shape the corpus stores: a raw string and nothing else.
+		// The previous fixture carried book/chapter/verseStart fields that no
+		// paragraph file has, which is how a block that resolved nothing in
+		// production passed its own test.
+		bible_refs: [{ text: 'Ps 130:1' }, { text: 'voir Lc 18:9-14' }],
 		citations: [],
 		magisterial_refs: []
 	},
@@ -24,7 +28,7 @@ const ROUTES: Record<string, unknown> = {
 		number: 7,
 		text_html: '<span>x</span>',
 		cross_refs: [],
-		bible_refs: [{ text: 'Zz 1, 1', book: 'Zz', chapter: 1, verseStart: 1 }],
+		bible_refs: [{ text: 'Zz 1:1' }],
 		citations: [],
 		magisterial_refs: []
 	},
@@ -76,26 +80,52 @@ describe('en_bref block', () => {
 });
 
 describe('bible block', () => {
-	it('resolves each scripture reference to a book slug and URL', async () => {
+	it('resolves a stored reference to a book, a verse and a URL', async () => {
 		const r = await assembleBlocks(2559, ['bible'], fetcher);
-		expect(r.data.bible).toEqual([
-			{
-				text: 'Ps 130, 1',
-				book: 'Ps',
-				book_slug: 'psaumes',
-				book_name: 'Psaumes',
-				chapter: 130,
-				verse_start: 1,
-				verse_end: null,
-				url: '/bible/psaumes/130'
-			}
-		]);
+		const refs = r.data.bible as Array<Record<string, unknown>>;
+		expect(refs[0]).toEqual({
+			text: 'Ps 130:1',
+			display: 'Ps 130, 1',
+			book: 'PSA',
+			book_slug: 'psaumes',
+			book_name: 'Psaumes',
+			chapter: 130,
+			verse_start: 1,
+			verse_end: 1,
+			url: '/bible/psaumes/130/1'
+		});
+	});
+
+	it('keeps both ends of a range and strips a leading "voir"', async () => {
+		const r = await assembleBlocks(2559, ['bible'], fetcher);
+		const refs = r.data.bible as Array<Record<string, unknown>>;
+		expect(refs[1]).toMatchObject({
+			text: 'voir Lc 18:9-14',
+			display: 'Lc 18, 9-14',
+			book_slug: 'luc',
+			verse_start: 9,
+			verse_end: 14
+		});
+	});
+
+	// The block exists to add resolution. If it resolves nothing it is worse
+	// than useless, because `bible_refs` already carries the raw strings.
+	it('actually resolves something, rather than returning a row of nulls', async () => {
+		const r = await assembleBlocks(2559, ['bible'], fetcher);
+		const refs = r.data.bible as Array<Record<string, unknown>>;
+		expect(refs.length).toBeGreaterThan(0);
+		for (const ref of refs) {
+			expect(ref.book_slug).not.toBeNull();
+			expect(ref.chapter).not.toBeNull();
+			expect(ref.url).not.toBeNull();
+		}
 	});
 
 	it('keeps an unrecognised abbreviation without inventing a URL', async () => {
 		const r = await assembleBlocks(7, ['bible'], fetcher);
 		const refs = r.data.bible as Array<Record<string, unknown>>;
-		expect(refs[0]!.book).toBe('Zz');
+		expect(refs[0]!.text).toBe('Zz 1:1');
+		expect(refs[0]!.book).toBeNull();
 		expect(refs[0]!.book_slug).toBeNull();
 		expect(refs[0]!.url).toBeNull();
 	});

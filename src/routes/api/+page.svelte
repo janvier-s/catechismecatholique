@@ -98,7 +98,21 @@
 	<p>
 		Les niveaux de <code>breadcrumb</code> sont facultatifs : le Prologue n'a ni
 		<code>section</code> ni <code>article</code>, et un paragraphe hors intertitre n'a pas de
-		<code>heading</code>. Les numéros de <code>cross_refs</code> sont des chaînes, non des entiers.
+		<code>heading</code>.
+	</p>
+
+	<p>
+		<code>cross_refs</code> est un tableau de chaînes, chacune un numéro de paragraphe. Un même
+		numéro peut y figurer deux fois lorsque le texte le signale par deux marques distinctes. Le bloc
+		<code>cited_by</code> parcourt la même relation en sens inverse et sert des entiers dédoublonnés :
+		c'est un index dérivé, non la forme brute.
+	</p>
+
+	<p>
+		<code>bible_refs</code> donne la référence telle que le Catéchisme l'écrit, avec deux points
+		entre le chapitre et le verset (<code>Ps 130:1</code>). L'usage français met une virgule, et
+		c'est ce que le site affiche · le bloc <code>bible</code> décrit plus bas fournit cette forme
+		dans son champ <code>display</code>, avec le livre, le chapitre et le verset résolus.
 	</p>
 
 	<p>Un numéro hors de 1..2865 répond <code>404</code> avec un champ <code>error</code>.</p>
@@ -405,6 +419,39 @@
   }
 }`}</code
 		></pre>
+
+	<p>
+		Le bloc <code>bible</code> résout les citations scripturaires du paragraphe : il donne le livre,
+		le chapitre, les versets et une adresse vers le lecteur biblique, plus la forme française dans
+		<code>display</code>.
+	</p>
+
+	<pre><code
+			>{`GET /api/cec/2559?include=bible
+
+{
+  "bible": [
+    {
+      "text": "Lc 18:9-14",
+      "display": "Lc 18, 9-14",
+      "book": "LUK",
+      "book_slug": "luc",
+      "book_name": "Luc",
+      "chapter": 18,
+      "verse_start": 9,
+      "verse_end": 14,
+      "url": "/bible/luc/18/9"
+    }
+  ]
+}`}</code
+		></pre>
+
+	<p>
+		Une référence sans verset (<code>Ap 4</code>) a <code>verse_start</code> et
+		<code>verse_end</code> à <code>null</code> et une adresse de chapitre. Une abréviation que le
+		serveur ne reconnaît pas revient avec ses champs à <code>null</code> et son
+		<code>text</code> intact, sans adresse inventée.
+	</p>
 
 	<p>
 		Chaque bloc apparaît comme une clé de premier niveau. Sans <code>include</code>, la réponse est
