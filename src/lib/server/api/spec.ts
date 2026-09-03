@@ -1,20 +1,16 @@
 import type { ApiErrorCode } from './http';
 import { ALL_BLOCKS, DEFAULT_ALL, MAX_EXPLICIT_BLOCKS } from './include';
+import type { ApiParam, ApiRoute as PublicApiRoute } from '$lib/api-types';
 
-export interface ApiParam {
-	name: string;
-	in: 'path' | 'query';
-	required: boolean;
-	description: string;
-}
+export type { ApiParam };
 
-export interface ApiRoute {
-	path: string;
-	summary: string;
-	params: ApiParam[];
+/**
+ * The public shape, narrowed: on the server a route's error codes are known
+ * members of ApiErrorCode, while the component-facing type in $lib/api-types
+ * widens them to strings so it stays clear of $lib/server.
+ */
+export interface ApiRoute extends PublicApiRoute {
 	codes: ApiErrorCode[];
-	/** A working URL a reader can paste into a browser. */
-	example: string;
 }
 
 const INCLUDE_PARAM: ApiParam = {
