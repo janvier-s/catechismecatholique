@@ -557,8 +557,11 @@ test('the chapter nav stays put while the reading-options popover is open', asyn
 	// The popover's trigger lives in the (always-visible) topbar, but the
 	// suspender still exists to keep the chapter-nav from tucking away and
 	// leaving the panel hanging over a gap while it's open.
-	await page.getByRole('button', { name: 'Options de lecture' }).click();
-	await expect(page.getByRole('dialog', { name: 'Options de lecture' })).toBeVisible();
+	// Not a bare click · see openDisclosure. This is where the test flaked in
+	// CI: the click after the goto() landed before hydration, so nothing
+	// toggled and the dialog was waited for in vain.
+	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 
 	// Scrolling well past HIDE_AFTER must not tuck the chapter nav away.
 	await page.evaluate(() => window.scrollTo(0, 1200));
@@ -734,8 +737,10 @@ test('Vulgate psalm numbers appear in the chapter selector when enabled', async 
 });
 
 async function enableBionic(page: import('@playwright/test').Page) {
-	await page.getByRole('button', { name: 'Options de lecture' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Options de lecture' });
+	// Not a bare click · see openDisclosure. Same one-shot-click hazard as the
+	// other openers in this file, just the last one left unconverted.
+	await openDisclosure(page.getByRole('button', { name: 'Options de lecture' }), dialog);
 	await dialog.getByRole('button', { name: 'Apparence' }).click();
 	await setSwitch(dialog, 'Lecture bionique', true);
 	await page.keyboard.press('Escape');
