@@ -1,4 +1,5 @@
 import type { Paragraph } from '../../src/lib/data/types';
+import { applyBibleRefCorrections, BIBLE_REF_CORRECTIONS } from './bibleRefCorrections';
 import {
 	capitalizeFirstWord,
 	groupConsecutiveBibleSups,
@@ -114,8 +115,22 @@ export function splitCrossRefs(refs: string[]): string[] {
 	return out;
 }
 
+/**
+ * Every correction that fired during the current extraction. A correction
+ * whose `from` no longer appears means the upstream data changed under it ·
+ * see the check at the end of extractParagraphs.
+ */
+const appliedCorrections = new Set<string>();
+
+function correctBibleRefs(paragraph: number, refs: { text: string }[]): { text: string }[] {
+	const result = applyBibleRefCorrections(paragraph, refs);
+	for (const c of result.applied) appliedCorrections.add(`${c.paragraph}:${c.from}`);
+	return result.refs;
+}
+
 export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 	const out = new Map<number, Paragraph>();
+	appliedCorrections.clear();
 	function walk(node: RawNode) {
 		if (node.type === 'paragraph' && typeof node.number === 'number') {
 			const cleaned = stripInlineDocCitations(
@@ -135,8 +150,9 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 				number: node.number,
 				text_html: grouped.html,
 				cross_refs: splitCrossRefs(node.cross_refs ?? []),
-				bible_refs: mergeBibleRefContinuations(
-					(node.bible_refs ?? []).map((b) => ({ text: b.text }))
+				bible_refs: correctBibleRefs(
+					node.number,
+					mergeBibleRefContinuations((node.bible_refs ?? []).map((b) => ({ text: b.text })))
 				),
 				citations: reindexCitationSupMarkers(
 					grouped.html,
@@ -151,5 +167,20 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 		for (const c of node.children ?? []) walk(c);
 	}
 	for (const p of parts) walk(p);
+
+	// A correction that matches nothing means the upstream reference changed
+	// shape. Silently keeping the stale entry would hide either a fixed source
+	// or a new corruption, so the build stops instead. Scoped to paragraphs
+	// actually present, so a small fixture is not held to the whole table.
+	const stale = BIBLE_REF_CORRECTIONS.filter(
+		(c) => out.has(c.paragraph) && !appliedCorrections.has(`${c.paragraph}:${c.from}`)
+	);
+	if (stale.length > 0) {
+		const list = stale.map((c) => `§${c.paragraph} "${c.from}"`).join(', ');
+		throw new Error(
+			`bible ref corrections no longer match the source: ${list}. Check whether the upstream data was fixed, and remove the entry, or whether the reference changed and the entry needs updating.`
+		);
+	}
+
 	return out;
 }
