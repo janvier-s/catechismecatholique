@@ -50,9 +50,9 @@
 	</p>
 {:else}
 	<p class="text-muted text-xs mb-3 font-ui">
-		Ce paragraphe est à méditer avec les lectures de la messe de {dayCount === 1
-			? 'un jour'
-			: `${dayCount} jours`} :
+		Ce paragraphe est à méditer avec les lectures de {dayCount === 1
+			? 'cette messe'
+			: `ces ${dayCount} messes`}&nbsp;:
 	</p>
 	{#if sundayCards.length > 0}
 		<h3 class="section-head">Dimanches et solennités</h3>
