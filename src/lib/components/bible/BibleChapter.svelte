@@ -61,7 +61,7 @@
 	});
 
 	/**
-	 * Paragraph mode has no per-verse rows to hang a heading on — headings
+	 * Paragraph mode has no per-verse rows to hang a heading on · headings
 	 * anchor to a block instead. Safe because a heading's startV always
 	 * lands on some block's first verse: confirmed against the source XML
 	 * that none of the Bible's 1,074 headings ever fall inside an
@@ -248,7 +248,7 @@
 							role={isClickable ? 'button' : 'presentation'}
 							onclick={isClickable ? () => openVerse(v.v) : undefined}
 							aria-label={isClickable
-								? `Verset ${v.v} — ${c} ${c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme`
+								? `Verset ${v.v} · ${c} ${c === 1 ? 'paragraphe' : 'paragraphes'} du Catéchisme`
 								: undefined}
 						>
 							<span
@@ -419,7 +419,7 @@
 	   absolute/float approaches can produce.
 
 	   The margin only pulls back by half of <main>'s actual mobile padding
-	   (max-md:px-4 = 1rem), not the full 1rem — pulling back the full
+	   (max-md:px-4 = 1rem), not the full 1rem · pulling back the full
 	   amount (or the old 1.5rem, sized for the desktop px-6 gutter) leaves
 	   the number glued to, or past, the true viewport edge. The column
 	   width stays a full 1.5rem regardless of the margin so double- and
