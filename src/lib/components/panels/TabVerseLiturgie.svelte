@@ -21,6 +21,7 @@
 	let meditated: CecLiturgyOccasion[] = $state([]);
 	let citing: number[] = $state([]);
 	let loaded = $state(false);
+	let failed = $state(false);
 	/**
 	 * Guards against a slower earlier verse landing after a later one. The
 	 * component is not remounted between verses (the panel body is keyed on the
@@ -36,11 +37,13 @@
 			meditated = [];
 			citing = [];
 			loaded = false;
+			failed = false;
 			return;
 		}
 		const mine = request;
 		(async () => {
 			loaded = false;
+			failed = false;
 			try {
 				const slug = BOOKS.find((b) => b.usfx === ctx.verseUsfx)?.slug;
 				// The shard alone answers "is this verse ever read at Mass". The day
@@ -73,6 +76,16 @@
 				proclaimed = nextProclaimed;
 				citing = nextCiting;
 				meditated = nextMeditated;
+			} catch {
+				// A failed fetch must not leave the previous verse's days on screen
+				// under this verse's header · say so instead of rendering either
+				// stale days or the "aucun jour" message, which would be a claim
+				// about the calendar rather than about the network.
+				if (mine !== request) return;
+				proclaimed = [];
+				citing = [];
+				meditated = [];
+				failed = true;
 			} finally {
 				// Also on failure: without it the tab is stuck on "Chargement…"
 				// forever, with no error state and no way back.
@@ -130,6 +143,10 @@
 
 {#if !loaded}
 	<p class="text-muted italic font-ui text-sm">Chargement…</p>
+{:else if failed}
+	<p class="text-muted italic font-ui text-sm">
+		Les jours liturgiques de ce verset n'ont pas pu être chargés. Rouvrez l'onglet pour réessayer.
+	</p>
 {:else if proclaimed.length === 0 && meditatedCards.length === 0}
 	<p class="text-muted italic font-ui text-sm">
 		Ce verset n'est proclamé aucun jour du calendrier liturgique, et aucun paragraphe du Catéchisme
