@@ -71,8 +71,18 @@
 					const q = topbarQ.trim();
 					if (!q) return;
 					const intent = detectIntent(q);
-					if (intent.kind === 'paragraph' || intent.kind === 'bible') {
+					// A single verse jumps straight to the reader, same as a
+					// paragraph ref. A range or disjoint groups go through
+					// /recherche instead, the only place that can show them as
+					// one passage.
+					const isSingleVerse =
+						intent.kind === 'bible' &&
+						intent.groups.length === 1 &&
+						intent.groups[0]!.from === intent.groups[0]!.to;
+					if (intent.kind === 'paragraph' || isSingleVerse) {
 						void goto(intent.href);
+					} else if (intent.kind === 'bible') {
+						void goto(`/recherche?q=${encodeURIComponent(q)}`);
 					} else {
 						void goto(`/recherche?q=${encodeURIComponent(intent.q)}`);
 					}
@@ -143,7 +153,7 @@
 		</nav>
 		<a
 			href="/recherche"
-			class="md:hidden inline-flex items-center justify-center w-10 h-10 text-foreground hover:text-accent"
+			class="lg:hidden inline-flex items-center justify-center w-10 h-10 text-foreground hover:text-accent"
 			aria-label="Ouvrir la recherche"
 		>
 			<svg
