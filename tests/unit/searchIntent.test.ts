@@ -55,6 +55,57 @@ describe('detectIntent', () => {
 		expect(r).toMatchObject({ kind: 'bible', href: '/bible/matthieu/5/33' });
 	});
 
+	it('detects a bible reference with dot-separated additional verses', () => {
+		const r = detectIntent('Jn 3:16.18');
+		expect(r).toMatchObject({
+			kind: 'bible',
+			href: '/bible/jean/3/16',
+			groups: [
+				{ from: '16', to: '16' },
+				{ from: '18', to: '18' }
+			]
+		});
+	});
+
+	it('detects disjoint verse ranges separated by semicolons', () => {
+		const r = detectIntent('Matthieu 4:3-5;8-10');
+		expect(r).toMatchObject({
+			kind: 'bible',
+			href: '/bible/matthieu/4/3',
+			groups: [
+				{ from: '3', to: '5' },
+				{ from: '8', to: '10' }
+			]
+		});
+	});
+
+	it('detects disjoint verse ranges separated by dots (French lectionary style)', () => {
+		const r = detectIntent('Mt 4:3-5.8-10');
+		expect(r).toMatchObject({
+			kind: 'bible',
+			groups: [
+				{ from: '3', to: '5' },
+				{ from: '8', to: '10' }
+			]
+		});
+	});
+
+	it('detects disjoint verse ranges separated by commas (French lectionary style)', () => {
+		const r = detectIntent('Mt 4, 3-5, 8-10');
+		expect(r).toMatchObject({
+			kind: 'bible',
+			groups: [
+				{ from: '3', to: '5' },
+				{ from: '8', to: '10' }
+			]
+		});
+	});
+
+	it('accepts an em dash as the range separator', () => {
+		const r = detectIntent('Mt 4:3—5');
+		expect(r).toMatchObject({ kind: 'bible', groups: [{ from: '3', to: '5' }] });
+	});
+
 	it('falls back to text on unknown', () => {
 		expect(detectIntent("L'Église")).toEqual({ kind: 'text', q: "L'Église" });
 	});

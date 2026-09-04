@@ -6,6 +6,7 @@
 	import { prefs } from '$lib/stores/prefs';
 	import { vulgatePsalmLabel } from '$lib/utils/psalm-numbering';
 	import ChapterPrevNext from './ChapterPrevNext.svelte';
+	import BibleBlock from './BibleBlock.svelte';
 
 	let {
 		book,
@@ -181,27 +182,7 @@
 							</p>
 						{/if}
 					{/each}
-					{#if block.kind === 'prose'}
-						<p class="bible-prose">
-							{#each block.verses as rv, vi (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
-										class="vn"
-										class:vn-subtle={$prefs.verseNumberColor === 'subtle'}>{rv.v}</sup
-									>{:else}{vi > 0 ? ' ' : ''}{/if}{@html rv.html}
-							{/each}
-						</p>
-					{:else}
-						<div
-							class="bible-poetry-line"
-							class:stanza-break={block.stanzaBreak}
-							style="--level: {block.level}"
-						>
-							{#each block.verses as rv, vi (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
-										class="vn"
-										class:vn-subtle={$prefs.verseNumberColor === 'subtle'}>{rv.v}</sup
-									>{:else}{vi > 0 ? ' ' : ''}{/if}{@html rv.html}
-							{/each}
-						</div>
-					{/if}
+					<BibleBlock {block} />
 				{/each}
 			</div>
 		{:else}
@@ -284,29 +265,6 @@
 		color: var(--color-muted);
 		margin-bottom: 1rem;
 	}
-	.bible-prose {
-		font-size: var(--reader-font-size, 17px);
-		line-height: var(--reader-line-height, 1.7);
-		margin-bottom: 1rem;
-	}
-	.bible-poetry-line {
-		font-size: var(--reader-font-size, 17px);
-		line-height: var(--reader-line-height, 1.7);
-		margin-left: calc((var(--level, 1) - 1) * 1.5rem);
-	}
-	.bible-poetry-line.stanza-break {
-		margin-top: 1rem;
-	}
-	.vn {
-		font-family: var(--font-ui);
-		font-size: 0.65em;
-		font-weight: 200;
-		color: var(--color-accent);
-		margin-right: 0.15em;
-	}
-	.vn.vn-subtle {
-		color: var(--color-subtle);
-	}
 	.verse-text {
 		font-size: var(--reader-font-size, 17px);
 		line-height: var(--reader-line-height, 1.7);
@@ -329,37 +287,27 @@
 		text-underline-offset: 4px;
 		text-decoration-thickness: 1px;
 	}
-	.verse-text :global(.dn),
-	.bible-prose :global(.dn),
-	.bible-poetry-line :global(.dn) {
+	.verse-text :global(.dn) {
 		font-variant: small-caps;
 		letter-spacing: 0.02em;
 	}
-	.verse-text :global(.add),
-	.bible-prose :global(.add),
-	.bible-poetry-line :global(.add) {
+	.verse-text :global(.add) {
 		font-style: italic;
 	}
-	.verse-text :global(.selah),
-	.bible-prose :global(.selah),
-	.bible-poetry-line :global(.selah) {
+	.verse-text :global(.selah) {
 		font-style: italic;
 		color: var(--color-muted);
 	}
-	.verse-text :global(.qt),
-	.bible-prose :global(.qt),
-	.bible-poetry-line :global(.qt) {
+	.verse-text :global(.qt) {
 		font-variant: small-caps;
 		letter-spacing: 0.02em;
 	}
-	.verse-text :global(.it),
-	.bible-prose :global(.it),
-	.bible-poetry-line :global(.it) {
+	.verse-text :global(.it) {
 		font-style: italic;
 	}
 	/* Unscoped, unlike the verse-text spans above: a heading's <sc> markup
 	   renders inside its own <h2>/<p>, not inside .verse-text/.bible-prose/
-	   .bible-poetry-line. */
+	   .bible-poetry-line (the latter two now live in BibleBlock.svelte). */
 	:global(.sc) {
 		font-variant: small-caps;
 		letter-spacing: 0.02em;

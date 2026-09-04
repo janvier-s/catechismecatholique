@@ -10,8 +10,14 @@
 	import type { ParagraphContext } from '$lib/data/types';
 	import SearchSuggest from '$lib/components/ui/SearchSuggest.svelte';
 	import RelatedTopics from '$lib/components/ui/RelatedTopics.svelte';
+	import BibleBlock from '$lib/components/bible/BibleBlock.svelte';
 
 	let { data }: { data: PageData } = $props();
+
+	/** "3-5.8-10" · a single from === to entry renders as a bare verse number. */
+	function refLabel(groups: { from: string; to: string }[]): string {
+		return groups.map((g) => (g.from === g.to ? g.from : `${g.from}–${g.to}`)).join('.');
+	}
 
 	// Paragraph contexts populate per-hit via tiny shard fetches (~30 bytes
 	// each) instead of the legacy 1.8 MB bundle. Result rows render
@@ -457,8 +463,36 @@
 		<!-- Results (includes Bible card when searching a verse) -->
 		<section class="mt-8">
 			{#if data.bibleCard}
-				{#if data.bibleCard.additionalVerses?.length}
-					<!-- Multiple discrete verses: card is a container, each verse is its own link -->
+				{#if data.bibleCard.excerpts?.length}
+					<!-- Paragraph-mode excerpt: flows like the reader itself, not an
+					     italic quote. Disjoint spans (e.g. 3-5.8-10) get a "⋯" divider. -->
+					<a class="bible-card" href={data.bibleCard.href}>
+						<span class="bible-card-eyebrow">
+							<span class="bible-card-tag">Bible</span>
+							<span class="bible-card-ref"
+								>{data.bibleCard.bookName}
+								{data.bibleCard.chapter}, {refLabel(data.bibleCard.groups)}</span
+							>
+						</span>
+						<span class="bible-card-body">
+							<span class="bible-card-title"
+								>{data.bibleCard.bookName}
+								{data.bibleCard.chapter}, {refLabel(data.bibleCard.groups)}</span
+							>
+							<span class="bible-card-excerpt">
+								{#each data.bibleCard.excerpts as excerpt, i (excerpt.from)}
+									{#if i > 0}<span class="excerpt-gap" aria-hidden="true">⋯</span>{/if}
+									{#each excerpt.blocks as block, bi (bi)}
+										<BibleBlock {block} />
+									{/each}
+								{/each}
+							</span>
+							<span class="bible-card-cta">Lire dans la Bible →</span>
+						</span>
+					</a>
+				{:else if data.bibleCard.groups.length > 1}
+					<!-- No paragraph-mode data for this book: fall back to a container
+					     of separate links, one per verse/range named. -->
 					<div class="bible-card">
 						<span class="bible-card-eyebrow">
 							<span class="bible-card-tag">Bible</span>
@@ -478,33 +512,28 @@
 								</span>
 							{/if}
 							<span class="bible-card-verse-links">
-								<a class="bible-card-verse-link" href={data.bibleCard.href}
-									>v. {data.bibleCard.verse} →</a
-								>
-								{#each data.bibleCard.additionalVerses as av (av.verse)}
-									<a class="bible-card-verse-link" href={av.href}>v. {av.verse} →</a>
+								{#each data.bibleCard.groups as g (g.from)}
+									<a class="bible-card-verse-link" href={g.href}
+										>v. {g.from === g.to ? g.from : `${g.from}–${g.to}`} →</a
+									>
 								{/each}
 							</span>
 						</span>
 					</div>
 				{:else}
-					<!-- Single verse or range: whole card is a link -->
+					<!-- Single verse or range, no paragraph-mode data: compact italic quote. -->
 					<a class="bible-card" href={data.bibleCard.href}>
 						<span class="bible-card-eyebrow">
 							<span class="bible-card-tag">Bible</span>
 							<span class="bible-card-ref"
 								>{data.bibleCard.bookName}
-								{data.bibleCard.chapter}, {data.bibleCard.verse}{data.bibleCard.verseEnd
-									? `–${data.bibleCard.verseEnd}`
-									: ''}</span
+								{data.bibleCard.chapter}, {refLabel(data.bibleCard.groups)}</span
 							>
 						</span>
 						<span class="bible-card-body">
 							<span class="bible-card-title"
 								>{data.bibleCard.bookName}
-								{data.bibleCard.chapter}, {data.bibleCard.verse}{data.bibleCard.verseEnd
-									? `–${data.bibleCard.verseEnd}`
-									: ''}</span
+								{data.bibleCard.chapter}, {refLabel(data.bibleCard.groups)}</span
 							>
 							{#if data.bibleCard.verseTexts?.length}
 								<span class="bible-card-verses">
@@ -1042,6 +1071,16 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
+	}
+	.bible-card-excerpt {
+		color: var(--color-fg);
+		margin-bottom: 0.75rem;
+	}
+	.excerpt-gap {
+		display: block;
+		text-align: center;
+		color: var(--color-muted);
+		margin: 0.25rem 0 0.75rem;
 	}
 	.bible-verse-text {
 		font-family: var(--font-body);
