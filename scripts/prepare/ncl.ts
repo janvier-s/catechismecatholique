@@ -1,5 +1,20 @@
 type Bible = Record<string, Record<string, Record<string, string>>>;
 
+/** One open skip-container. */
+interface SkipFrame {
+	/** Element name, so the close-tag branch pops the right frame. */
+	tag: string;
+	/**
+	 * Whether a `<v>` marker inside this container means scripture has
+	 * resumed. True for headings, which this source lets verses follow inside
+	 * the same element; false for footnotes and for `<d>`, where the verse
+	 * marker *is* the psalm superscription.
+	 */
+	yieldsToVerse: boolean;
+	/** Set by a yielding `<v>`; text flows again until the close tag. */
+	suspended: boolean;
+}
+
 export function normalizeVerseText(s: string): string {
 	// Collapse all whitespace to single spaces.
 	let out = s.replace(/\s+/g, ' ').trim();
@@ -38,6 +53,18 @@ export function normalizeVerseText(s: string): string {
  *                  major section titles, descriptive subscriptions, etc.).
  *                  See the open-tag handler for the exact set.
  *
+ * Heading containers yield to a verse marker. This source does not always
+ * close a heading before scripture resumes: Mt 11:7-15 and Mt 24:36 follow a
+ * cross-reference parenthetical *inside* its <p style="r">, Tb 3:16-17 sit
+ * inside a <p style="ms1">, and Sg 7:7-14 inside an <s>. Skipping to the
+ * close tag dropped all 20 verses. A <v> therefore suspends the open heading
+ * frames, which stay on the stack until their close tag but stop suppressing
+ * text.
+ *
+ * <d> is the deliberate exception, and <f>/<x> likewise: there a verse marker
+ * is not scripture resuming, so 58 psalm superscriptions keep being dropped
+ * as before.
+ *
  * Markers consumed for state:
  *   <book id="…">  starts a book, resets chapter/verse
  *   <c id="…"/>    starts a chapter, commits any open verse
@@ -52,13 +79,13 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 	let currentChap = '';
 	let currentVerse: string | null = null;
 	let buf: string[] = [];
-	// Depth of nested skip-containers (<f> / <x> / <s> / metadata <p>). Text
-	// is buffered only when 0.
-	let skipDepth = 0;
-	// Tracks open metadata <p> containers specifically — needed because we
-	// only skip <p> when its style attribute matches the metadata set, and
-	// the close-tag handler has no access to the original opening attributes.
-	let pMetadataDepth = 0;
+	// Open skip-containers, innermost last. A frame stays on the stack until
+	// its close tag, but stops suppressing text once suspended · see the <v>
+	// handler. A stack rather than a counter because the close-tag branch has
+	// no access to the opening attributes, and because suspending is not the
+	// same as closing.
+	const skipStack: SkipFrame[] = [];
+	const suppressing = () => skipStack.some((f) => !f.suspended);
 
 	function commitVerse() {
 		if (currentVerse !== null && currentBook && currentChap) {
@@ -87,8 +114,7 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 				currentBook = idMatch ? idMatch[1]! : '';
 				currentChap = '';
 				currentVerse = null;
-				skipDepth = 0;
-				pMetadataDepth = 0;
+				skipStack.length = 0;
 			} else if (openTag === 'id') {
 				// `<id id="GEN" />` is informational; ignore (book is already set).
 			} else if (openTag === 'c') {
@@ -100,12 +126,22 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 				commitVerse();
 				const idMatch = (attrs ?? '').match(/id="([^"]+)"/);
 				currentVerse = idMatch ? idMatch[1]! : null;
+				// Scripture has resumed, so any heading containers still open
+				// stop suppressing text. Only when *every* open frame yields:
+				// a verse marker nested in a footnote, or in the <d> that
+				// carries a psalm superscription, is not scripture resuming.
+				if (skipStack.length > 0 && skipStack.every((f) => f.yieldsToVerse)) {
+					for (const f of skipStack) f.suspended = true;
+				}
 			} else if (openTag === 've') {
 				// Verse-end marker — no-op; commit happens at next verse boundary.
 			} else if (openTag === 'f' || openTag === 'x' || openTag === 's' || openTag === 'd') {
 				// Enter footnote / cross-ref / section-title / description skip
-				// block (only if not self-closing).
-				if (selfClose !== '/') skipDepth++;
+				// block (only if not self-closing). <s> yields to a verse
+				// marker · Sg 7:7-14 sit inside one. <f>, <x> and <d> never do.
+				if (selfClose !== '/') {
+					skipStack.push({ tag: openTag, yieldsToVerse: openTag === 's', suspended: false });
+				}
 			} else if (openTag === 'p') {
 				// Skip non-content <p> styles. USFX uses these for metadata headings,
 				// not verse content:
@@ -125,25 +161,69 @@ export async function parseUSFX(xml: string): Promise<Bible> {
 					style === 'sr' ||
 					/^ms\d*$/.test(style);
 				if (isMetadata && selfClose !== '/') {
-					skipDepth++;
-					pMetadataDepth++;
+					// Every metadata <p> except "d" yields to a verse marker:
+					// Mt 11:7-15 and Mt 24:36 sit inside a "r", Tb 3:16-17
+					// inside an "ms1".
+					skipStack.push({ tag: 'p', yieldsToVerse: style !== 'd', suspended: false });
 				}
 			}
 			// All other open tags (<w>, <h>, <toc>, <wj>, …) are transparent:
 			// their text content is captured by the text branch.
 		} else if (closeTag) {
-			if (closeTag === 'f' || closeTag === 'x' || closeTag === 's' || closeTag === 'd') {
-				if (skipDepth > 0) skipDepth--;
-			} else if (closeTag === 'p' && pMetadataDepth > 0) {
-				pMetadataDepth--;
-				skipDepth--;
-			}
+			// Pop only when this close tag matches the innermost open frame.
+			// A content <p> pushes nothing, so its </p> must not pop a frame
+			// opened by something else.
+			if (skipStack[skipStack.length - 1]?.tag === closeTag) skipStack.pop();
 		} else if (text !== undefined) {
-			if (skipDepth > 0) continue;
+			if (suppressing()) continue;
 			const cleaned = text.replace(/\s+/g, ' ').trim();
 			if (cleaned) buf.push(cleaned);
 		}
 	}
 	commitVerse();
 	return result;
+}
+
+/** A verse the source declares but the parse did not keep. */
+export interface DroppedVerse {
+	book: string;
+	chapter: string;
+	verse: string;
+}
+
+/**
+ * Verses the source carries that the parse did not keep.
+ *
+ * Some loss is intended · a psalm superscription lives inside `<d>` under its
+ * own `<v>` marker and is deliberately not verse text, and Mrc 4:41 is an
+ * empty marker in this source (its text is folded into verse 40). Everything
+ * else means the parser has started swallowing scripture again, which is what
+ * hid 20 verses behind heading containers until it was found by hand.
+ */
+export function findDroppedVerses(xml: string, parsed: Bible): DroppedVerse[] {
+	const out: DroppedVerse[] = [];
+	const bookRe = /<book id="([A-Z0-9]{3})"/g;
+	const bounds: { id: string; start: number }[] = [];
+	let m: RegExpExecArray | null;
+	while ((m = bookRe.exec(xml)) !== null) bounds.push({ id: m[1]!, start: m.index });
+
+	for (let i = 0; i < bounds.length; i++) {
+		const { id, start } = bounds[i]!;
+		const body = xml.slice(start, bounds[i + 1]?.start ?? xml.length);
+		const chapRe = /<c id="(\d+)"/g;
+		const chaps: { id: string; start: number }[] = [];
+		while ((m = chapRe.exec(body)) !== null) chaps.push({ id: m[1]!, start: m.index });
+
+		for (let c = 0; c < chaps.length; c++) {
+			const { id: chId, start: cStart } = chaps[c]!;
+			const seg = body.slice(cStart, chaps[c + 1]?.start ?? body.length);
+			const got = parsed[id]?.[chId] ?? {};
+			const verseRe = /<v id="(\d+)"/g;
+			while ((m = verseRe.exec(seg)) !== null) {
+				const v = m[1]!;
+				if (!got[v]) out.push({ book: id, chapter: chId, verse: v });
+			}
+		}
+	}
+	return out;
 }

@@ -218,3 +218,79 @@ describe('splitIntoProseBlocks', () => {
 		]);
 	});
 });
+
+/**
+ * The plain-text parser in ncl.ts had the same defect: heading containers were
+ * skipped to their close tag, but this source nests verses inside them. Both
+ * parsers feed the same reader · ncl.ts the verse layout, this one the
+ * paragraph layout · so a verse recovered in one and missing in the other
+ * would appear or vanish depending on the reader's layout preference.
+ */
+describe('parseUSFXParagraphs · verses nested inside heading containers', () => {
+	it('keeps verses that follow the parenthetical inside <p style="r">', async () => {
+		// Mt 11:7-15.
+		const xml = `<usfx>
+			<book id="MAT">
+				<c id="11" />
+				<p style="p"><v id="6" bcv="MAT.11.6" /><w>Heureux celui</w><ve /></p>
+				<p sfm="r" style="r">(Luc 7,24-28)
+					<v id="7" bcv="MAT.11.7" /><w>Comme ils s’en allaient</w><ve />
+				</p>
+			</book>
+		</usfx>`;
+		const result = await parseUSFXParagraphs(xml);
+		const verses = result['MAT']!['11']!.blocks.flatMap((b) => b.verses);
+		expect(verses.map((v) => v.v)).toEqual([6, 7]);
+		expect(verses.find((v) => v.v === 7)!.html).toMatch(/Comme ils s’en allaient/);
+		expect(verses.find((v) => v.v === 7)!.html).not.toMatch(/Luc 7/);
+	});
+
+	it('keeps verses nested inside an <s> section title', async () => {
+		// Sg 7:7-14.
+		const xml = `<usfx>
+			<book id="WIS">
+				<c id="7" />
+				<p style="p"><v id="6" bcv="WIS.7.6" /><w>une seule manière</w><ve /></p>
+				<s style="s1">Éloge de la sagesse
+					<v id="7" bcv="WIS.7.7" /><w>j’ai prié</w><ve />
+				</s>
+			</book>
+		</usfx>`;
+		const result = await parseUSFXParagraphs(xml);
+		const verses = result['WIS']!['7']!.blocks.flatMap((b) => b.verses);
+		expect(verses.map((v) => v.v)).toEqual([6, 7]);
+		expect(verses.find((v) => v.v === 7)!.html).toMatch(/j’ai prié/);
+		expect(verses.find((v) => v.v === 7)!.html).not.toMatch(/Éloge/);
+	});
+
+	it('keeps verses nested inside <p style="ms1">', async () => {
+		// Tb 3:16-17.
+		const xml = `<usfx>
+			<book id="TOB">
+				<c id="3" />
+				<p style="p"><v id="15" bcv="TOB.3.15" /><w>je ne supporte plus</w><ve /></p>
+				<p sfm="ms" style="ms1">Deuxième partie
+					<v id="16" bcv="TOB.3.16" /><w>la prière de chacun d’eux</w><ve />
+				</p>
+			</book>
+		</usfx>`;
+		const result = await parseUSFXParagraphs(xml);
+		const verses = result['TOB']!['3']!.blocks.flatMap((b) => b.verses);
+		expect(verses.map((v) => v.v)).toEqual([15, 16]);
+		expect(verses.find((v) => v.v === 16)!.html).not.toMatch(/Deuxième partie/);
+	});
+
+	it('still routes a <d> superscription away from the verse text', async () => {
+		const xml = `<usfx>
+			<book id="PSA">
+				<c id="3" />
+				<d style="d"><v id="1" bcv="PSA.3.1" /><w>Chant de David</w><ve /></d>
+				<q style="q1"><v id="2" bcv="PSA.3.2" /><w>que mes ennemis sont nombreux</w><ve /></q>
+			</book>
+		</usfx>`;
+		const result = await parseUSFXParagraphs(xml);
+		expect(result['PSA']!['3']!.superscription).toMatch(/Chant de David/);
+		const verses = result['PSA']!['3']!.blocks.flatMap((b) => b.verses);
+		expect(verses.map((v) => v.v)).toEqual([2]);
+	});
+});

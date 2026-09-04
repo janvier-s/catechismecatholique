@@ -20,7 +20,7 @@ import { buildChapterFiles } from './prepare/chapters.ts';
 import { extractEnBref, trimEnBrefsAtParagrapheBoundaries } from './prepare/enbref.ts';
 import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
-import { parseUSFX } from './prepare/ncl.ts';
+import { parseUSFX, findDroppedVerses } from './prepare/ncl.ts';
 import { parseUSFXParagraphs, splitIntoProseBlocks } from './prepare/ncl-paragraphs.ts';
 import { PARAGRAPH_OVERRIDES } from './prepare/paragraph-overrides.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
@@ -404,6 +404,29 @@ async function main() {
 	const nclXml = readFileSync(join(SOURCES, 'ncl/francl_usfx.xml'), 'utf8');
 	const ncl = await parseUSFX(nclXml);
 
+	// Guard against the parser silently swallowing scripture again. Heading
+	// containers used to be skipped to their close tag, which hid 20 verses
+	// that this source nests inside them (Mt 11:7-15, Mt 24:36, Tb 3:16-17,
+	// Sg 7:7-14). Only two kinds of loss are legitimate:
+	//   · a psalm superscription, which lives under its own <v> inside <d>;
+	//   · Mrc 4:41, an empty marker whose text this source folds into v40.
+	{
+		const dropped = findDroppedVerses(nclXml, ncl);
+		const unexpected = dropped.filter(
+			(d) => d.book !== 'PSA' && !(d.book === 'MRK' && d.chapter === '4' && d.verse === '41')
+		);
+		if (unexpected.length > 0) {
+			const shown = unexpected
+				.slice(0, 20)
+				.map((d) => `${d.book} ${d.chapter}:${d.verse}`)
+				.join(', ');
+			throw new Error(
+				`NCL parse dropped ${unexpected.length} verse(s) the source carries: ${shown}` +
+					(unexpected.length > 20 ? ', …' : '')
+			);
+		}
+	}
+
 	// Per-book shards: each book gets its own /data/bible/ncl/{usfx}.json so
 	// the Bible reader only fetches the book the user is on. The companion
 	// manifest lists which USFX codes exist so callers can skip 404s.
@@ -431,6 +454,31 @@ async function main() {
 				chapterBlocks.blocks = splitIntoProseBlocks(verses, breakVerses);
 			}
 		}
+		// The two parsers feed the same reader · `ncl` the verse layout,
+		// `paragraphs` the paragraph layout · so a verse present in one and
+		// absent from the other appears or vanishes with the reader's layout
+		// preference. Both used to drop the same 20 verses nested inside
+		// heading containers; keep them in step.
+		{
+			const absent: string[] = [];
+			for (const [usfx, chapters] of Object.entries(ncl)) {
+				for (const [ch, verses] of Object.entries(chapters)) {
+					const covered = new Set(
+						(paragraphs[usfx]?.[ch]?.blocks ?? []).flatMap((b) => b.verses.map((v) => v.v))
+					);
+					for (const v of Object.keys(verses)) {
+						if (!covered.has(parseInt(v, 10))) absent.push(`${usfx} ${ch}:${v}`);
+					}
+				}
+			}
+			if (absent.length > 0) {
+				throw new Error(
+					`${absent.length} verse(s) in the NCL text are missing from the paragraph ` +
+						`structure: ${absent.slice(0, 20).join(', ')}${absent.length > 20 ? ', …' : ''}`
+				);
+			}
+		}
+
 		const dir = join(OUT, 'bible/ncl-paragraphs');
 		mkdirSync(dir, { recursive: true });
 		const usfxCodes: string[] = [];

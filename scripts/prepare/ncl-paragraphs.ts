@@ -42,6 +42,14 @@ function isMsStyle(style: string): boolean {
 	return /^ms\d*$/.test(style);
 }
 
+/** One open skip-container. Mirrors the frame in ncl.ts. */
+interface SkipFrame {
+	tag: string;
+	/** Whether a `<v>` inside means scripture has resumed. */
+	yieldsToVerse: boolean;
+	suspended: boolean;
+}
+
 /**
  * Parse the same USFX Bible source `ncl.ts` reads, preserving paragraph/
  * poetry block structure, Psalm/Canticle superscriptions, and a small set
@@ -63,7 +71,12 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 	let chapterBlocks: Block[] = [];
 	let pendingStanzaBreak = false;
 
-	let skipDepth = 0; // inside <f>/<x>/<s> — verse buffer must not see this text
+	// Open skip-containers, innermost last. A heading frame is suspended by a
+	// <v> marker · this source nests verses inside headings rather than
+	// closing them first · but stays on the stack until its close tag. See
+	// the matching note in ncl.ts.
+	const skipStack: SkipFrame[] = [];
+	const suppressing = () => skipStack.some((f) => !f.suspended);
 	const pStack: string[] = []; // styles of currently-open <p> elements
 	let dDepth = 0; // inside <d>…</d> (standalone superscription form)
 
@@ -139,7 +152,7 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 				currentBook = idMatch ? idMatch[1]! : '';
 				currentChap = '';
 				currentVerse = null;
-				skipDepth = 0;
+				skipStack.length = 0;
 				pStack.length = 0;
 				dDepth = 0;
 				inSuperscription = false;
@@ -152,10 +165,21 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 				commitVerse();
 				const idMatch = (attrs ?? '').match(/id="([^"]+)"/);
 				currentVerse = idMatch ? idMatch[1]! : null;
+				// Scripture has resumed, so open heading containers stop
+				// suppressing. Only when every open frame yields: a marker
+				// inside a footnote is not scripture. (<d> never enters this
+				// stack · it routes through inSuperscription instead.)
+				if (skipStack.length > 0 && skipStack.every((f) => f.yieldsToVerse)) {
+					for (const f of skipStack) f.suspended = true;
+				}
 			} else if (openTag === 've') {
 				// no-op; commit happens at the next verse/chapter/book boundary
 			} else if (openTag === 'f' || openTag === 'x' || openTag === 's') {
-				if (selfClose !== '/') skipDepth++;
+				// <s> yields to a verse marker (Sg 7:7-14 sit inside one);
+				// footnotes and cross-references never do.
+				if (selfClose !== '/') {
+					skipStack.push({ tag: openTag, yieldsToVerse: openTag === 's', suspended: false });
+				}
 			} else if (openTag === 'd') {
 				if (selfClose !== '/') {
 					commitVerse();
@@ -176,7 +200,7 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 					inSuperscription = true;
 				} else if (P_SKIP_STYLES.has(style) || isMsStyle(style)) {
 					pStack.push(style);
-					skipDepth++;
+					skipStack.push({ tag: 'p', yieldsToVerse: true, suspended: false });
 				} else {
 					commitVerse();
 					pStack.push(style);
@@ -191,20 +215,20 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 					openPoetryBlock(level);
 				}
 			} else if (openTag === 'nd') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('<span class="dn">');
+				if (!suppressing() && !inSuperscription) buf.push('<span class="dn">');
 			} else if (openTag === 'add') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('<em class="add">');
+				if (!suppressing() && !inSuperscription) buf.push('<em class="add">');
 			} else if (openTag === 'qs') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('<span class="selah">');
+				if (!suppressing() && !inSuperscription) buf.push('<span class="selah">');
 			} else if (openTag === 'qt') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('<span class="qt">');
+				if (!suppressing() && !inSuperscription) buf.push('<span class="qt">');
 			} else if (openTag === 'it') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('<em class="it">');
+				if (!suppressing() && !inSuperscription) buf.push('<em class="it">');
 			}
 			// All other open tags (<w>, <h>, <toc>, …) are transparent.
 		} else if (closeTag) {
 			if (closeTag === 'f' || closeTag === 'x' || closeTag === 's') {
-				if (skipDepth > 0) skipDepth--;
+				if (skipStack[skipStack.length - 1]?.tag === closeTag) skipStack.pop();
 			} else if (closeTag === 'd') {
 				commitVerse();
 				if (dDepth > 0) dDepth--;
@@ -216,19 +240,19 @@ export async function parseUSFXParagraphs(xml: string): Promise<AllParagraphs> {
 					if (dDepth > 0) dDepth--;
 					if (dDepth === 0) inSuperscription = false;
 				} else if (style !== undefined && (P_SKIP_STYLES.has(style) || isMsStyle(style))) {
-					if (skipDepth > 0) skipDepth--;
+					if (skipStack[skipStack.length - 1]?.tag === 'p') skipStack.pop();
 				}
 			} else if (closeTag === 'q') {
 				// A block stays open until the next <p>/<q>/<c>/<book> — a bare
 				// </q> does not end it, matching the source leaving a <q> open
 				// across a verse boundary (e.g. Psalm 2:2-3 share one q2 line).
 			} else if (closeTag === 'nd' || closeTag === 'qs' || closeTag === 'qt') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('</span>');
+				if (!suppressing() && !inSuperscription) buf.push('</span>');
 			} else if (closeTag === 'add' || closeTag === 'it') {
-				if (skipDepth === 0 && !inSuperscription) buf.push('</em>');
+				if (!suppressing() && !inSuperscription) buf.push('</em>');
 			}
 		} else if (text !== undefined) {
-			if (skipDepth > 0) continue;
+			if (suppressing()) continue;
 			// Whitespace-only nodes are kept: they are the spacing between inline elements.
 			buf.push(text.replace(/\s+/g, ' '));
 		}
