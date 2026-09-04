@@ -487,7 +487,7 @@
 									{/each}
 								{/each}
 							</span>
-							<span class="bible-card-cta">Lire dans la Bible →</span>
+							<span class="bible-card-cta">Lire le chapitre {data.bibleCard.chapter} →</span>
 						</span>
 					</a>
 				{:else if data.bibleCard.groups.length > 1}
@@ -546,7 +546,7 @@
 									{/each}
 								</span>
 							{/if}
-							<span class="bible-card-cta">Lire dans la Bible →</span>
+							<span class="bible-card-cta">Lire le chapitre {data.bibleCard.chapter} →</span>
 						</span>
 					</a>
 				{/if}
@@ -1015,7 +1015,7 @@
 		border: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
 		border-left: 3px solid var(--color-accent);
 		border-radius: 4px;
-		background: color-mix(in srgb, var(--color-accent) 4%, var(--color-panel));
+		background: var(--color-panel);
 		text-decoration: none;
 		color: var(--color-fg);
 		transition:
@@ -1023,7 +1023,7 @@
 			border-color 160ms ease;
 	}
 	.bible-card:hover {
-		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-panel));
+		background: color-mix(in srgb, var(--color-accent) 6%, var(--color-panel));
 	}
 	.bible-card-eyebrow {
 		display: flex;

@@ -74,8 +74,11 @@ export const load: PageLoad = async ({ url, fetch }) => {
 		throw redirect(303, intent.href);
 	}
 
-	// Bible refs: show a Bible card at the top and also run a text search
-	// for the query so CEC paragraphs citing this verse appear below it.
+	// Bible refs: show a Bible card at the top and look up which CEC
+	// paragraphs actually cite this passage · a generic full-text search on
+	// the raw query (e.g. tokens "matthieu", "4", "12") used to run here
+	// instead and surfaced dozens of unrelated paragraphs that merely
+	// contained one of those words.
 	if (intent.kind === 'bible') {
 		const spans: VerseSpan[] = intent.groups.map((g) => ({
 			from: parseInt(g.from, 10),
@@ -89,12 +92,20 @@ export const load: PageLoad = async ({ url, fetch }) => {
 			for (let v = span.from; v <= span.to; v++) verseNums.push(String(v));
 		}
 
-		// Fetch verse text and paragraph-mode blocks alongside the CEC search.
-		// All three requests run in parallel.
-		const [bookData, paragraphsBook, searchResult] = await Promise.all([
+		// Rebuild a canonical, dot-separated reference for /api/pericope
+		// regardless of which separator the user typed ('.', ',' or ';' all
+		// mean the same disjoint-group thing to us, but pericope.ts's parser
+		// only understands '.' and ',').
+		const pericopeRef = `${intent.bookName} ${intent.chapter}, ${intent.groups
+			.map((g) => (g.from === g.to ? g.from : `${g.from}-${g.to}`))
+			.join('.')}`;
+
+		// Fetch verse text, paragraph-mode blocks, and citing CEC paragraphs
+		// in parallel.
+		const [bookData, paragraphsBook, pericopeResult] = await Promise.all([
 			loadNclBook(intent.usfx, fetch),
 			loadNclParagraphsBook(intent.usfx, fetch),
-			fetch(`/api/search?q=${encodeURIComponent(raw)}`)
+			fetch(`/api/pericope?ref=${encodeURIComponent(pericopeRef)}&include=texts`)
 		]);
 
 		const chData = bookData?.[intent.chapter];
@@ -126,22 +137,32 @@ export const load: PageLoad = async ({ url, fetch }) => {
 			...(verseTexts.length ? { verseTexts } : {}),
 			...(excerpts.length ? { excerpts } : {})
 		};
-		if (!searchResult.ok) return { ...empty, q: raw, bibleCard };
-		const data = (await searchResult.json()) as {
-			hits: SearchHit[];
-			mode?: 'and' | 'or';
-			tokens?: string[];
-			matchedTokens?: string[];
-			suggestions?: SearchSuggestion[];
+		if (!pericopeResult.ok) return { ...empty, q: raw, bibleCard };
+		const data = (await pericopeResult.json()) as {
+			items: Array<{ paragraphs?: number[] }>;
+			texts?: Array<{ number: number; text: string; text_full?: string }>;
 		};
+		const paragraphNums = data.items?.[0]?.paragraphs ?? [];
+		const textByNumber = new Map((data.texts ?? []).map((t) => [t.number, t]));
+		const hits: SearchHit[] = paragraphNums.map((number) => {
+			const t = textByNumber.get(number);
+			return {
+				id: String(number),
+				kind: 'paragraph',
+				number,
+				text: t?.text_full ?? t?.text ?? '',
+				score: 0,
+				match: {}
+			};
+		});
 		return {
 			q: raw,
 			bibleCard,
-			hits: data.hits ?? [],
-			mode: data.mode ?? 'and',
-			tokens: data.tokens ?? [],
-			matchedTokens: data.matchedTokens ?? [],
-			suggestions: data.suggestions ?? []
+			hits,
+			mode: 'and',
+			tokens: [],
+			matchedTokens: [],
+			suggestions: []
 		};
 	}
 
