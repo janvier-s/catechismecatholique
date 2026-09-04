@@ -79,6 +79,35 @@ describe('the rules against the shipped Crampon text', () => {
 	});
 });
 
+describe('Sirach 18', () => {
+	const sir = JSON.parse(readFileSync('static/data/bible/ncl/SIR.json', 'utf8'));
+
+	it('lands Si 18:30 on the warning against following one’s desires', () => {
+		const a = resolveToCrampon('SIR', 18, 30)!;
+		expect(sir[String(a.chapter)][String(a.verseStart)]).toMatch(/Ne te laisse pas aller/);
+	});
+
+	it('leaves the verses around it alone', () => {
+		expect(resolveToCrampon('SIR', 18, 29)).toBeNull();
+		expect(resolveToCrampon('SIR', 18, 31)).toBeNull();
+	});
+});
+
+describe('2 Maccabees 12', () => {
+	const mac = JSON.parse(readFileSync('static/data/bible/ncl/2MA.json', 'utf8'));
+
+	it('widens 2 M 12:45 to the two verses Crampon splits it into', () => {
+		const a = resolveToCrampon('2MA', 12, 45)!;
+		expect(a).toMatchObject({ chapter: 12, verseStart: 45, verseEnd: 46 });
+		// The prayer for the dead the paragraph is about is in the second half.
+		expect(mac['12']['46']).toMatch(/délivrés de leurs péchés/);
+	});
+
+	it('leaves the verse before it alone', () => {
+		expect(resolveToCrampon('2MA', 12, 44)).toBeNull();
+	});
+});
+
 describe('Sirach 36', () => {
 	const sir = JSON.parse(readFileSync('static/data/bible/ncl/SIR.json', 'utf8'));
 

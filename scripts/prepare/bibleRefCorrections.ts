@@ -136,6 +136,22 @@ export const BIBLE_REF_CORRECTIONS: BibleRefCorrection[] = [
 		corroboration: 239
 	},
 	{
+		paragraph: 2233,
+		from: 'Mt 12:49',
+		to: 'Mt 12:50',
+		reason:
+			'The paragraph quotes "Quiconque fait la volonté de mon Père qui est dans les cieux, celui-là est mon frère et ma sœur, et ma mère" word for word, which is Mt 12:50. Mt 12:49 is Jésus stretching out his hand towards his disciples.',
+		quote: 'celui-là est mon frère et ma sœur, et ma mère'
+	},
+	{
+		paragraph: 2173,
+		from: 'Mc 3:3',
+		to: 'Mc 3:4',
+		reason:
+			'The question quoted, "le jour du sabbat, de faire du bien plutôt que le mal", is Mc 3:4. Mc 3:3 is "Tiens-toi là debout au milieu", addressed to the man with the withered hand.',
+		quote: 'le jour du sabbat, de faire du bien'
+	},
+	{
 		paragraph: 2133,
 		from: 'Dt 5:6',
 		to: 'Dt 6:5',

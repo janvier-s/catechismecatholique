@@ -76,6 +76,25 @@ export const VERSIFICATION_RULES: VersificationRule[] = [
 			'Crampon carries "Israël, que vous avez fait semblable à un premier-né" at Si 36:14; its 36:11 is the destruction of the enemy. Paragraph 441 cites it for the elect people as son, beside Ex 4:22 and Os 11:1.'
 	},
 	{
+		kind: 'shift',
+		book: 'SIR',
+		chapter: 18,
+		from: [30, 30],
+		delta: -1,
+		reason:
+			'Crampon carries "Ne te laisse pas aller à tes convoitises" at Si 18:29; its 18:30 is the next sentence. Paragraph 1809 quotes the first of the two for temperance.'
+	},
+	{
+		kind: 'move',
+		book: '2MA',
+		chapter: 12,
+		from: [45, 45],
+		toChapter: 12,
+		to: [45, 46],
+		reason:
+			'The Greek text ends the chapter at verse 45; Crampon follows the Vulgate and splits it, carrying "une pensée sainte et pieuse … afin qu’ils fussent délivrés de leurs péchés" at 12:46.'
+	},
+	{
 		kind: 'move',
 		book: 'EST',
 		chapter: 4,
