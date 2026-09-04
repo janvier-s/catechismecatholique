@@ -78,3 +78,18 @@ describe('the rules against the shipped Crampon text', () => {
 		}
 	});
 });
+
+describe('Sirach 36', () => {
+	const sir = JSON.parse(readFileSync('static/data/bible/ncl/SIR.json', 'utf8'));
+
+	it('lands Si 36:11 on the verse naming Israel a firstborn', () => {
+		const a = resolveToCrampon('SIR', 36, 11)!;
+		expect(a.chapter).toBe(36);
+		expect(sir[String(a.chapter)][String(a.verseStart)]).toMatch(/premier-né/);
+	});
+
+	it('leaves the rest of the chapter alone', () => {
+		expect(resolveToCrampon('SIR', 36, 10)).toBeNull();
+		expect(resolveToCrampon('SIR', 36, 12)).toBeNull();
+	});
+});

@@ -67,6 +67,15 @@ export const VERSIFICATION_RULES: VersificationRule[] = [
 			"Everything after the merged commandments sits three verses earlier: the Catechism's Dt 5:22 is Crampon 5:19."
 	},
 	{
+		kind: 'shift',
+		book: 'SIR',
+		chapter: 36,
+		from: [11, 11],
+		delta: 3,
+		reason:
+			'Crampon carries "Israël, que vous avez fait semblable à un premier-né" at Si 36:14; its 36:11 is the destruction of the enemy. Paragraph 441 cites it for the elect people as son, beside Ex 4:22 and Os 11:1.'
+	},
+	{
 		kind: 'move',
 		book: 'EST',
 		chapter: 4,
