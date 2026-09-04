@@ -550,18 +550,15 @@
 			{/if}
 
 			{#if data.hits.length > 0}
-				<div class="flex items-baseline justify-between mb-3 gap-4">
-					<h2 class="font-ui text-xs text-muted tabular-nums font-semibold">
-						{data.bibleCard
-							? 'Paragraphes du Catéchisme citant ce verset'
-							: `Résultats pour « ${data.q} »`}
-					</h2>
-					{#if allParagraphsHref}
-						<a class="browse-link font-ui text-xs" href={allParagraphsHref}
-							>Lire tous les paragraphes →</a
-						>
-					{/if}
-				</div>
+				<h2
+					class="mb-3 font-ui {data.bibleCard
+						? 'text-base'
+						: 'text-xs'} text-muted tabular-nums font-semibold"
+				>
+					{data.bibleCard
+						? 'Paragraphes du Catéchisme citant ce verset'
+						: `Résultats pour « ${data.q} »`}
+				</h2>
 				{#if data.mode === 'or' && data.matchedTokens.length > 0}
 					<p class="partial-banner font-ui text-[12px] mb-4 text-muted">
 						Aucun résultat ne contient l'expression complète. Affichage des résultats contenant
@@ -684,6 +681,14 @@
 				{:else if filteredHits.length > PAGE_SIZE}
 					<p class="mt-8 font-ui text-[12px] text-muted tabular-nums text-center">
 						{filteredHits.length} résultats affichés
+					</p>
+				{/if}
+
+				{#if allParagraphsHref}
+					<p class="mt-6">
+						<a class="browse-link font-ui text-xs" href={allParagraphsHref}
+							>Lire tous les paragraphes →</a
+						>
 					</p>
 				{/if}
 			{/if}
@@ -1020,13 +1025,10 @@
 		background: var(--color-panel);
 		text-decoration: none;
 		color: var(--color-fg);
-		transition:
-			background-color 160ms ease,
-			border-color 160ms ease;
+		transition: background-color 160ms ease;
 	}
 	.bible-card:hover {
 		background: color-mix(in srgb, var(--color-fg) 4%, var(--color-panel));
-		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
 	}
 	.bible-card-eyebrow {
 		display: flex;
