@@ -10,8 +10,18 @@
 	);
 
 	/** Where the return link goes. A multi selection is assembled elsewhere, so
-	 *  "← Catéchisme" drops the reader at a front door they never came through. */
-	const backTo = { href: '/cec', label: 'Catéchisme' };
+	 *  "← Catéchisme" drops the reader at a front door they never came through
+	 *  · a caller (e.g. /recherche's "Lire tous les paragraphes") can instead
+	 *  point it back at wherever the selection was actually made, via `back` /
+	 *  `backLabel`. `back` is restricted to a site-relative path so this can't
+	 *  be turned into an open redirect through the URL. */
+	const backTo = $derived.by(() => {
+		const rawBack = page.url.searchParams.get('back');
+		const safeBack =
+			rawBack && rawBack.startsWith('/') && !rawBack.startsWith('//') ? rawBack : null;
+		if (!safeBack) return { href: '/cec', label: 'au Catéchisme' };
+		return { href: safeBack, label: page.url.searchParams.get('backLabel') ?? 'aux résultats' };
+	});
 
 	// Prev/next paragraph navigation. For ranges, prev steps back from the
 	// first paragraph and next steps forward from the last · so navigation
@@ -222,7 +232,7 @@
 				class="inline-flex items-center gap-1 font-ui text-sm text-muted hover:text-accent mb-4"
 			>
 				<span aria-hidden="true">←</span>
-				{backTo.label}
+				Retour {backTo.label}
 			</a>
 			{#if multiLabel}
 				<h1 class="font-heading text-2xl font-semibold mb-1">{multiLabel}</h1>

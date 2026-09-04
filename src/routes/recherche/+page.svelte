@@ -18,7 +18,15 @@
 
 	const allParagraphsHref = $derived.by(() => {
 		const nums = data.hits.filter((h) => h.kind === 'paragraph').map((h) => h.number!);
-		return nums.length ? `/cec/${compactRanges(nums).join(',')}` : null;
+		if (!nums.length) return null;
+		const ref = compactRanges(nums).join(',');
+		// So the multi-paragraph page's own back link returns here instead of
+		// to /cec's front door, which the reader never came through.
+		const back = `/recherche?q=${encodeURIComponent(data.q)}`;
+		const backLabel = data.bibleCard
+			? `à ${data.bibleCard.bookName} ${data.bibleCard.chapter}, ${refLabel(data.bibleCard.groups)}`
+			: 'aux résultats';
+		return `/cec/${ref}?back=${encodeURIComponent(back)}&backLabel=${encodeURIComponent(backLabel)}`;
 	});
 
 	// Lets ReadingPrefs offer the verse-number settings here too, since the
