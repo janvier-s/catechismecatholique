@@ -4,6 +4,7 @@
 	import { studyPanel } from '$lib/stores/studyPanel';
 	import { loadParagraph, loadNclBook, loadVulgateRefs } from '$lib/data/loaders';
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
+	import { resolveToCrampon } from '$lib/utils/versification';
 	import type { BibleRef, MagisterialRefRecord, NclBible, VulgateRefEntry } from '$lib/data/types';
 
 	type RefStyle = 'inline' | 'sup' | 'cluster-leader' | 'cluster-member';
@@ -21,6 +22,11 @@
 		verses: { v: number; text: string }[];
 		/** Text came from the Vulgate because the Catechism marked the citation so. */
 		vulgate?: boolean;
+		/**
+		 * Crampon carries this passage at another address · the reference shown
+		 * stays the Catechism's, only the text is fetched from elsewhere.
+		 */
+		shifted?: { chapter: number; verseStart: number; verseEnd: number; reason: string };
 	};
 
 	let refs: BibleRef[] = $state([]);
@@ -112,16 +118,30 @@
 			// a different passage for Tb 2:12-18, and nine fruits where §1832
 			// counts twelve for Ga 5:22-23. Serve the Vulgate instead.
 			const vulg = refs[i]!.vulgate ? vulgate.get(refs[i]!.text) : undefined;
+
+			// Crampon numbers a few passages differently from the Catechism ·
+			// the Decalogue's merged commandments, the Greek additions to
+			// Esther. Fetch the text from where Crampon keeps it, but leave the
+			// reference itself alone: a reader with the printed Catechism must
+			// see the citation the book gives.
+			const shifted =
+				!vulg && parsed.fromV !== undefined
+					? (resolveToCrampon(parsed.book.usfx, parsed.chapter, parsed.fromV, parsed.toV) ??
+						undefined)
+					: undefined;
+
 			const chapterVerses = vulg
 				? vulg.verses
-				: (bible[parsed.book.usfx]?.[String(parsed.chapter)] ?? {});
-			if (parsed.fromV !== undefined && parsed.toV !== undefined) {
-				for (let v = parsed.fromV; v <= parsed.toV; v++) {
+				: (bible[parsed.book.usfx]?.[String(shifted?.chapter ?? parsed.chapter)] ?? {});
+			const fromV = shifted?.verseStart ?? parsed.fromV;
+			const toV = shifted?.verseEnd ?? parsed.toV;
+			if (fromV !== undefined && toV !== undefined) {
+				for (let v = fromV; v <= toV; v++) {
 					const text = chapterVerses[String(v)];
 					if (text) verses.push({ v, text });
 				}
 			}
-			out.push({ ...parsed, verses, vulgate: Boolean(vulg) });
+			out.push({ ...parsed, verses, vulgate: Boolean(vulg), shifted });
 		}
 		resolved = out;
 	});
@@ -199,6 +219,13 @@
 		</div>
 		{#if r.vulgate && vulgateEdition}
 			<p class="mt-1 text-xs text-muted italic">{vulgateEdition}</p>
+		{:else if r.shifted}
+			<p class="mt-1 text-xs text-muted italic">
+				Texte à {r.book.frenchName}
+				{r.shifted.chapter},{r.shifted
+					.verseStart}{#if r.shifted.verseEnd !== r.shifted.verseStart}-{r.shifted.verseEnd}{/if}
+				dans la Crampon.
+			</p>
 		{/if}
 	{:else}
 		<p class="mt-1 text-xs text-muted italic">Verset non disponible.</p>
@@ -239,7 +266,11 @@
 							<span class="vulgate-badge">Vulgate</span>
 						{:else}
 							<a
-								href="/bible/{r.book.slug}/{r.chapter}{r.fromV !== undefined ? `/${r.fromV}` : ''}"
+								href="/bible/{r.book.slug}/{r.shifted?.chapter ?? r.chapter}{r.shifted
+									? `/${r.shifted.verseStart}`
+									: r.fromV !== undefined
+										? `/${r.fromV}`
+										: ''}"
 								target="_blank"
 								rel="noopener noreferrer"
 								class="font-semibold text-accent hover:underline"

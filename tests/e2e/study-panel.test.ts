@@ -291,3 +291,26 @@ test('a citation the Catechism marks "vulg." shows the Vulgate text, not Crampon
 	await expect(panel.getByText('Vulgate').first()).toBeVisible();
 	await expect(panel.locator('a[href^="/bible/galates"]')).toHaveCount(0);
 });
+
+test('a reference Crampon numbers differently keeps its label and shows the right text', async ({
+	page
+}) => {
+	// CCC 2058 cites Dt 5, 22 · correct in the standard numbering. Crampon
+	// merges four commandments into verse 17, so its 5:22 is "pourquoi
+	// mourrions-nous". The citation must stay as the Catechism prints it while
+	// the passage shown is the one it means.
+	await page.goto('/cec/2058');
+	const inline = page.locator('button.bible-inline').first();
+	await expect(inline).toBeVisible();
+	await inline.click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+
+	// Label faithful to the printed Catechism.
+	await expect(panel.getByRole('link', { name: /Deutéronome 5,\s*22/ }).first()).toBeVisible();
+	// Text is Crampon's 5:19, and the note says so.
+	await expect(panel.getByText(/Telles sont les paroles/).first()).toBeVisible();
+	await expect(panel.getByText(/dans la Crampon/).first()).toBeVisible();
+	await expect(panel.getByText(/pourquoi mourrions-nous/)).toHaveCount(0);
+});

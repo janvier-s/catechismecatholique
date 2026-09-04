@@ -34,6 +34,37 @@ describe('applyBibleRefCorrections', () => {
 	});
 });
 
+const norm = (s: string) =>
+	s
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[̀-ͯ]/g, '')
+		.replace(/[^a-z0-9]+/g, ' ')
+		.trim();
+const wordSet = (s: string) => new Set(norm(s).split(' ').filter(Boolean));
+const cover = (needle: string, hay: string) => {
+	const n = [...wordSet(needle)];
+	if (n.length === 0) return 0;
+	const h = wordSet(hay);
+	return n.filter((w) => h.has(w)).length / n.length;
+};
+
+/** The Crampon text at a reference, joined across its verse range. */
+const at = (ref: string): string => {
+	const q = parseBibleRefText(ref);
+	if (!q.book || q.chapter === null || q.verse_start === null) return '';
+	const path = `static/data/bible/ncl/${q.book}.json`;
+	if (!existsSync(path)) return '';
+	const b = JSON.parse(readFileSync(path, 'utf8'));
+	const to = q.verse_end ?? q.verse_start;
+	const out: string[] = [];
+	for (let v = q.verse_start; v <= to; v++) {
+		const t = b[String(q.chapter)]?.[String(v)];
+		if (t) out.push(t);
+	}
+	return out.join(' ');
+};
+
 describe('the correction table itself', () => {
 	it('never rewrites one entry into another entry, which would loop', () => {
 		const froms = new Set(BIBLE_REF_CORRECTIONS.map((c) => `${c.paragraph}:${c.from}`));
@@ -85,37 +116,60 @@ describe('the correction table itself', () => {
 				unjustified.push(`${c.from} (resolves, but carries no quote)`);
 				continue;
 			}
-			const at = (ref: string): string => {
-				const q = parseBibleRefText(ref);
-				if (!q.book || q.chapter === null || q.verse_start === null) return '';
-				const b = JSON.parse(readFileSync(`static/data/bible/ncl/${q.book}.json`, 'utf8'));
-				const to = q.verse_end ?? q.verse_start;
-				const out: string[] = [];
-				for (let v = q.verse_start; v <= to; v++) {
-					const t = b[String(q.chapter)]?.[String(v)];
-					if (t) out.push(t);
+
+			// The quote has to be the paragraph's own words · otherwise any
+			// string that happens to sit in the target would "prove" the change.
+			const paraPath = `static/data/cec/paragraphs/${c.paragraph}.json`;
+			if (existsSync(paraPath)) {
+				const para = JSON.parse(readFileSync(paraPath, 'utf8'));
+				const text = norm(String(para.text_html ?? '').replace(/<[^>]+>/g, ' '));
+				if (cover(c.quote, text) < 0.9) {
+					unjustified.push(`${c.from} → ${c.to} (quote is not the paragraph's own words)`);
+					continue;
 				}
-				return out.join(' ');
-			};
-			const norm = (s: string) =>
-				s
-					.toLowerCase()
-					.normalize('NFD')
-					.replace(/[̀-ͯ]/g, '')
-					.replace(/[^a-z0-9]+/g, ' ')
-					.trim();
-			const words = (s: string) => new Set(norm(s).split(' ').filter(Boolean));
-			const cover = (needle: string, hay: string) => {
-				const n = [...words(needle)];
-				if (n.length === 0) return 0;
-				const h = words(hay);
-				return n.filter((w) => h.has(w)).length / n.length;
-			};
+			}
+
 			const toScore = cover(c.quote, at(c.to));
 			const fromScore = cover(c.quote, at(c.from));
-			if (toScore < 0.8) unjustified.push(`${c.from} → ${c.to} (quote absent from target)`);
-			else if (toScore - fromScore < 0.3) {
+			if (toScore < 0.8) {
+				unjustified.push(`${c.from} → ${c.to} (quote absent from target)`);
+				continue;
+			}
+			if (toScore - fromScore < 0.3) {
 				unjustified.push(`${c.from} → ${c.to} (quote fits the source about as well)`);
+				continue;
+			}
+
+			// A one-word quote is thin on its own · the Catechism has to
+			// corroborate it by citing the same passage elsewhere under the
+			// target's numbering.
+			const words = [
+				...new Set(
+					norm(c.quote)
+						.split(' ')
+						.filter((w) => w.length > 3)
+				)
+			];
+			if (words.length < 2) {
+				if (c.corroboration === undefined) {
+					unjustified.push(
+						`${c.from} → ${c.to} (single-word quote with no corroborating paragraph)`
+					);
+					continue;
+				}
+				const sibPath = `static/data/cec/paragraphs/${c.corroboration}.json`;
+				if (!existsSync(sibPath)) continue;
+				const sib = JSON.parse(readFileSync(sibPath, 'utf8'));
+				const target = parseBibleRefText(c.to);
+				const corroborates = (sib.bible_refs ?? []).some((r: { text: string }) => {
+					const q = parseBibleRefText(r.text);
+					return q.book === target.book && q.chapter === target.chapter;
+				});
+				if (!corroborates) {
+					unjustified.push(
+						`${c.from} → ${c.to} (paragraph ${c.corroboration} does not cite ${target.book} ${target.chapter})`
+					);
+				}
 			}
 		}
 		expect(unjustified).toEqual([]);

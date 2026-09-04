@@ -32,6 +32,14 @@ export interface BibleRefCorrection {
 	 * only evidence that makes the correction a fact rather than a preference.
 	 */
 	quote?: string;
+	/**
+	 * A third way to justify correcting a resolving reference: another
+	 * paragraph cites the same passage under the target's numbering. Give its
+	 * number here. The test checks that paragraph really does cite the target's
+	 * book and chapter, so the Catechism is corroborating itself rather than
+	 * me asserting it.
+	 */
+	corroboration?: number;
 }
 
 export const BIBLE_REF_CORRECTIONS: BibleRefCorrection[] = [
@@ -119,12 +127,21 @@ export const BIBLE_REF_CORRECTIONS: BibleRefCorrection[] = [
 		quote: 'ne commets pas d’adultère, ne vole pas, ne porte pas de faux témoignage'
 	},
 	{
-		paragraph: 2058,
-		from: 'Dt 5:22',
-		to: 'Dt 5:19',
+		paragraph: 370,
+		from: 'Ps 130:2-3',
+		to: 'Ps 131:2-3',
 		reason:
-			'Crampon splits the Decalogue differently, so the words the paragraph quotes sit at Dt 5:19; its 5:22 is "pourquoi mourrions-nous ?".',
-		quote: 'du milieu du feu, de la nuée et de l’obscurité'
+			'Cited for "celles d’une mère", alongside two maternal Isaiah texts. Ps 130 is the De profundis; the weaned child at its mother’s breast is Ps 131:2. Paragraph 239, which cross-references this one, cites the same image as Ps 131:2.',
+		quote: 'mère',
+		corroboration: 239
+	},
+	{
+		paragraph: 2133,
+		from: 'Dt 5:6',
+		to: 'Dt 6:5',
+		reason:
+			'The paragraph is nothing but the Shema, "Tu aimeras le Seigneur ton Dieu, de tout ton cœur", which is Dt 6:5. Dt 5:6 is "Je suis Yahweh, ton Dieu, qui t’ai fait sortir du pays d’Égypte".',
+		quote: 'de tout ton cœur, de toute ton âme'
 	}
 ];
 
