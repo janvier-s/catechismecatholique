@@ -8,6 +8,7 @@
 	import { prefs } from '$lib/stores/prefs';
 	import { linkifyCompendiumBibleRefs } from '$lib/utils/linkifyRefs';
 	import { frenchPunct } from '$lib/utils/typography';
+	import { compactRanges } from '$lib/utils/paragraphRanges';
 
 	type Unit =
 		| { kind: 'ccc-paragraph'; data: Paragraph }
@@ -31,21 +32,6 @@
 			return;
 		}
 		openPanel({ kind: 'paragraph', paragraph: unit.data.number }, s.activeTab);
-	}
-
-	// Group consecutive integers into compact range strings: [1,2,3,5,7,8] →
-	// ["1-3", "5", "7-8"]. The /cec/[ref=cecref] route accepts both forms.
-	function compactRanges(numbers: number[]): string[] {
-		const sorted = [...new Set(numbers)].filter((n) => Number.isFinite(n));
-		const out: string[] = [];
-		let i = 0;
-		while (i < sorted.length) {
-			let j = i;
-			while (j + 1 < sorted.length && sorted[j + 1] === sorted[j]! + 1) j++;
-			out.push(i === j ? `${sorted[i]}` : `${sorted[i]}-${sorted[j]}`);
-			i = j + 1;
-		}
-		return out;
 	}
 
 	// CCC paragraphs surface cross-refs inline (sup markers in the text) when in

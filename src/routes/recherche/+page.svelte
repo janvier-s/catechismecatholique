@@ -11,8 +11,14 @@
 	import SearchSuggest from '$lib/components/ui/SearchSuggest.svelte';
 	import RelatedTopics from '$lib/components/ui/RelatedTopics.svelte';
 	import BibleBlock from '$lib/components/bible/BibleBlock.svelte';
+	import { compactRanges } from '$lib/utils/paragraphRanges';
 
 	let { data }: { data: PageData } = $props();
+
+	const allParagraphsHref = $derived.by(() => {
+		const nums = data.hits.filter((h) => h.kind === 'paragraph').map((h) => h.number!);
+		return nums.length ? `/cec/${compactRanges(nums).join(',')}` : null;
+	});
 
 	/** "3-5.8-10" · a single from === to entry renders as a bare verse number. */
 	function refLabel(groups: { from: string; to: string }[]): string {
@@ -466,13 +472,9 @@
 				{#if data.bibleCard.excerpts?.length}
 					<!-- Paragraph-mode excerpt: flows like the reader itself, not an
 					     italic quote. Disjoint spans (e.g. 3-5.8-10) get a "⋯" divider. -->
-					<a class="bible-card" href={data.bibleCard.href}>
+					<a class="bible-card" href={data.bibleCard.chapterHref}>
 						<span class="bible-card-eyebrow">
 							<span class="bible-card-tag">Bible</span>
-							<span class="bible-card-ref"
-								>{data.bibleCard.bookName}
-								{data.bibleCard.chapter}, {refLabel(data.bibleCard.groups)}</span
-							>
 						</span>
 						<span class="bible-card-body">
 							<span class="bible-card-title"
@@ -496,7 +498,6 @@
 					<div class="bible-card">
 						<span class="bible-card-eyebrow">
 							<span class="bible-card-tag">Bible</span>
-							<span class="bible-card-ref">{data.bibleCard.bookName} {data.bibleCard.chapter}</span>
 						</span>
 						<span class="bible-card-body">
 							<span class="bible-card-title"
@@ -522,13 +523,9 @@
 					</div>
 				{:else}
 					<!-- Single verse or range, no paragraph-mode data: compact italic quote. -->
-					<a class="bible-card" href={data.bibleCard.href}>
+					<a class="bible-card" href={data.bibleCard.chapterHref}>
 						<span class="bible-card-eyebrow">
 							<span class="bible-card-tag">Bible</span>
-							<span class="bible-card-ref"
-								>{data.bibleCard.bookName}
-								{data.bibleCard.chapter}, {refLabel(data.bibleCard.groups)}</span
-							>
 						</span>
 						<span class="bible-card-body">
 							<span class="bible-card-title"
@@ -554,11 +551,16 @@
 
 			{#if data.hits.length > 0}
 				<div class="flex items-baseline justify-between mb-3 gap-4">
-					<p class="font-ui text-xs text-muted tabular-nums">
+					<h2 class="font-ui text-xs text-muted tabular-nums font-semibold">
 						{data.bibleCard
 							? 'Paragraphes du Catéchisme citant ce verset'
 							: `Résultats pour « ${data.q} »`}
-					</p>
+					</h2>
+					{#if allParagraphsHref}
+						<a class="browse-link font-ui text-xs" href={allParagraphsHref}
+							>Lire tous les paragraphes →</a
+						>
+					{/if}
 				</div>
 				{#if data.mode === 'or' && data.matchedTokens.length > 0}
 					<p class="partial-banner font-ui text-[12px] mb-4 text-muted">
@@ -1023,7 +1025,8 @@
 			border-color 160ms ease;
 	}
 	.bible-card:hover {
-		background: color-mix(in srgb, var(--color-accent) 6%, var(--color-panel));
+		background: color-mix(in srgb, var(--color-fg) 4%, var(--color-panel));
+		border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
 	}
 	.bible-card-eyebrow {
 		display: flex;
@@ -1038,9 +1041,6 @@
 	.bible-card-tag {
 		color: var(--color-accent);
 	}
-	.bible-card-ref {
-		color: var(--color-muted);
-	}
 	.bible-card-body {
 		display: flex;
 		flex-direction: column;
@@ -1053,9 +1053,6 @@
 		font-weight: 700;
 		line-height: 1.2;
 		color: var(--color-fg);
-	}
-	.bible-card:hover .bible-card-title {
-		color: var(--color-accent);
 	}
 	.bible-card-cta {
 		font-family: var(--font-ui);

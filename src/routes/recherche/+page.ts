@@ -37,7 +37,10 @@ export interface BibleExcerpt {
 }
 
 export interface BibleCard {
+	/** First verse of the first group · used by the fallback per-group links. */
 	href: string;
+	/** The chapter on its own, no verse anchor · what the card itself links to. */
+	chapterHref: string;
 	bookName: string;
 	chapter: string;
 	verse: string;
@@ -130,6 +133,7 @@ export const load: PageLoad = async ({ url, fetch }) => {
 
 		const bibleCard: BibleCard = {
 			href: intent.href,
+			chapterHref: `/bible/${slug}/${intent.chapter}`,
 			bookName: intent.bookName,
 			chapter: intent.chapter,
 			verse: intent.verse,
