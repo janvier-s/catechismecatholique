@@ -3,6 +3,7 @@
 	import { FONTS, DYSLEXIA_FONT, getFontById } from '$lib/data/fonts';
 	import { page } from '$app/state';
 	import { corpusForPath, FEATURED } from '$lib/corpora';
+	import { bibleResultVisible } from '$lib/stores/bibleResult';
 	import PillGroup from './PillGroup.svelte';
 	import ToggleSwitch from './ToggleSwitch.svelte';
 
@@ -11,6 +12,13 @@
 	const isPiusX = $derived(page.url.pathname.startsWith('/grand-catechisme'));
 	const isBibleOnly = $derived(page.url.pathname.startsWith('/bible'));
 	const isCecOnly = $derived(!isTrent && !isCompendium && !isPiusX && !isBibleOnly);
+
+	// /recherche renders a Bible passage through the same BibleBlock component
+	// as the reader when a result carries a paragraph-mode excerpt · only the
+	// verse-number settings actually do anything there (layout, headings,
+	// Vulgate numbering and chapter nav don't apply outside the reader), so
+	// this stays out of isBibleOnly rather than pulling in the whole section.
+	const isBibleResult = $derived(page.url.pathname === '/recherche' && $bibleResultVisible);
 
 	// Utility/navigation pages (home, Bibliothèque, glossaire, recherche…)
 	// don't match any registered corpus prefix · nothing that acts on a body
@@ -35,7 +43,7 @@
 	// utility pages) Texte would hold nothing. Trente's only note control is
 	// Sources · the cross-refs and Bible citations below it are CEC-only.
 	const hasNotes = $derived(isReadingContent && (isTrent || isCecOnly));
-	const hasTextSettings = $derived(isBibleOnly || hasNotes);
+	const hasTextSettings = $derived(isBibleOnly || hasNotes || isBibleResult);
 
 	// No empty tab anywhere: where Texte has nothing to say, the tab bar goes
 	// away and the panel is simply the Apparence controls.
@@ -466,7 +474,9 @@
 						onchange={(v) => updatePref('bibleLayout', v)}
 					/>
 				</div>
+			{/if}
 
+			{#if isBibleOnly || isBibleResult}
 				<div class="space-y-1">
 					<ToggleSwitch
 						label="Numéros de verset"
@@ -500,21 +510,25 @@
 						</div>
 					{/if}
 
-					<ToggleSwitch
-						label="Titres de section"
-						checked={!$prefs.hideBibleHeadings}
-						onchange={(v) => updatePref('hideBibleHeadings', !v)}
-						title="Affiche ou masque les titres qui découpent le chapitre"
-					/>
+					{#if isBibleOnly}
+						<ToggleSwitch
+							label="Titres de section"
+							checked={!$prefs.hideBibleHeadings}
+							onchange={(v) => updatePref('hideBibleHeadings', !v)}
+							title="Affiche ou masque les titres qui découpent le chapitre"
+						/>
 
-					<ToggleSwitch
-						label="Numérotation Vulgate (psaumes)"
-						checked={$prefs.showVulgatePsalms}
-						onchange={(v) => updatePref('showVulgatePsalms', v)}
-						title="La Vulgate numérote certains psaumes différemment de la Bible hébraïque"
-					/>
+						<ToggleSwitch
+							label="Numérotation Vulgate (psaumes)"
+							checked={$prefs.showVulgatePsalms}
+							onchange={(v) => updatePref('showVulgatePsalms', v)}
+							title="La Vulgate numérote certains psaumes différemment de la Bible hébraïque"
+						/>
+					{/if}
 				</div>
+			{/if}
 
+			{#if isBibleOnly}
 				<div class="space-y-1 border-t border-border pt-4">
 					<ToggleSwitch
 						label="Navigation entre chapitres"

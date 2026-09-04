@@ -12,12 +12,20 @@
 	import RelatedTopics from '$lib/components/ui/RelatedTopics.svelte';
 	import BibleBlock from '$lib/components/bible/BibleBlock.svelte';
 	import { compactRanges } from '$lib/utils/paragraphRanges';
+	import { bibleResultVisible } from '$lib/stores/bibleResult';
 
 	let { data }: { data: PageData } = $props();
 
 	const allParagraphsHref = $derived.by(() => {
 		const nums = data.hits.filter((h) => h.kind === 'paragraph').map((h) => h.number!);
 		return nums.length ? `/cec/${compactRanges(nums).join(',')}` : null;
+	});
+
+	// Lets ReadingPrefs offer the verse-number settings here too, since the
+	// excerpt below actually renders through them (BibleBlock).
+	$effect(() => {
+		bibleResultVisible.set(!!data.bibleCard?.excerpts?.length);
+		return () => bibleResultVisible.set(false);
 	});
 
 	/** "3-5.8-10" · a single from === to entry renders as a bare verse number. */
