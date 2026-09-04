@@ -183,10 +183,10 @@
 					{/each}
 					{#if block.kind === 'prose'}
 						<p class="bible-prose">
-							{#each block.verses as rv (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
+							{#each block.verses as rv, vi (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
 										class="vn"
 										class:vn-subtle={$prefs.verseNumberColor === 'subtle'}>{rv.v}</sup
-									>{/if}{@html rv.html}
+									>{:else}{vi > 0 ? ' ' : ''}{/if}{@html rv.html}
 							{/each}
 						</p>
 					{:else}
@@ -195,10 +195,10 @@
 							class:stanza-break={block.stanzaBreak}
 							style="--level: {block.level}"
 						>
-							{#each block.verses as rv (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
+							{#each block.verses as rv, vi (rv.v)}{#if !$prefs.hideVerseNumbers}<sup
 										class="vn"
 										class:vn-subtle={$prefs.verseNumberColor === 'subtle'}>{rv.v}</sup
-									>{/if}{@html rv.html}
+									>{:else}{vi > 0 ? ' ' : ''}{/if}{@html rv.html}
 							{/each}
 						</div>
 					{/if}
