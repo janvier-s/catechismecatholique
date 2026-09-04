@@ -1,5 +1,11 @@
 # Bible translations · FIL and TOL alongside NCL · Design
 
+> **Status: parked.** This was scoped while the motivation was believed to be
+> filling verses the CEC cites but NCL lacks. Those verses turned out not to be
+> missing from NCL at all: a parser defect was dropping 20 of them, fixed
+> separately. No translation work is needed for that purpose. The design stands
+> on its own merits if a translation selector is ever wanted as a feature.
+
 ## Goal
 
 The Bible reader serves one text, the Nouvelle Crampon Liturgique (`ncl`). Add a
