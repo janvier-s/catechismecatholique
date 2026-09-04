@@ -22,6 +22,7 @@ import { parseSigles } from './prepare/abbreviations.ts';
 import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX, findDroppedVerses } from './prepare/ncl.ts';
 import { parseUSFXParagraphs, splitIntoProseBlocks } from './prepare/ncl-paragraphs.ts';
+import { applyVerseSplits, applyVerseSplitsToParagraphs } from './prepare/nclVerseSplits.ts';
 import { PARAGRAPH_OVERRIDES } from './prepare/paragraph-overrides.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
@@ -404,17 +405,19 @@ async function main() {
 	const nclXml = readFileSync(join(SOURCES, 'ncl/francl_usfx.xml'), 'utf8');
 	const ncl = await parseUSFX(nclXml);
 
+	// Verses the source runs together under one number, separated back out.
+	// Runs before the guard below, which then requires every <v> the source
+	// declares to carry text.
+	applyVerseSplits(ncl);
+
 	// Guard against the parser silently swallowing scripture again. Heading
 	// containers used to be skipped to their close tag, which hid 20 verses
 	// that this source nests inside them (Mt 11:7-15, Mt 24:36, Tb 3:16-17,
-	// Sg 7:7-14). Only two kinds of loss are legitimate:
-	//   · a psalm superscription, which lives under its own <v> inside <d>;
-	//   · Mrc 4:41, an empty marker whose text this source folds into v40.
+	// Sg 7:7-14). The only legitimate loss left is a psalm superscription,
+	// which lives under its own <v> inside <d>.
 	{
 		const dropped = findDroppedVerses(nclXml, ncl);
-		const unexpected = dropped.filter(
-			(d) => d.book !== 'PSA' && !(d.book === 'MRK' && d.chapter === '4' && d.verse === '41')
-		);
+		const unexpected = dropped.filter((d) => d.book !== 'PSA');
 		if (unexpected.length > 0) {
 			const shown = unexpected
 				.slice(0, 20)
@@ -444,6 +447,7 @@ async function main() {
 	logStep('parsing NCL paragraph/poetry structure');
 	{
 		const paragraphs = await parseUSFXParagraphs(nclXml);
+		applyVerseSplitsToParagraphs(paragraphs);
 		for (const [usfx, chapterBreaks] of Object.entries(PARAGRAPH_OVERRIDES)) {
 			const book = paragraphs[usfx];
 			if (!book) continue;
