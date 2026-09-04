@@ -472,7 +472,7 @@
 				{#if data.bibleCard.excerpts?.length}
 					<!-- Paragraph-mode excerpt: flows like the reader itself, not an
 					     italic quote. Disjoint spans (e.g. 3-5.8-10) get a "⋯" divider. -->
-					<a class="bible-card" href={data.bibleCard.chapterHref}>
+					<div class="bible-card">
 						<span class="bible-card-eyebrow">
 							<span class="bible-card-tag">Bible</span>
 						</span>
@@ -489,9 +489,11 @@
 									{/each}
 								{/each}
 							</span>
-							<span class="bible-card-cta">Lire le chapitre {data.bibleCard.chapter} →</span>
+							<a class="bible-card-cta" href={data.bibleCard.chapterHref}
+								>Lire le chapitre {data.bibleCard.chapter} →</a
+							>
 						</span>
-					</a>
+					</div>
 				{:else if data.bibleCard.groups.length > 1}
 					<!-- No paragraph-mode data for this book: fall back to a container
 					     of separate links, one per verse/range named. -->
@@ -523,7 +525,7 @@
 					</div>
 				{:else}
 					<!-- Single verse or range, no paragraph-mode data: compact italic quote. -->
-					<a class="bible-card" href={data.bibleCard.chapterHref}>
+					<div class="bible-card">
 						<span class="bible-card-eyebrow">
 							<span class="bible-card-tag">Bible</span>
 						</span>
@@ -543,9 +545,11 @@
 									{/each}
 								</span>
 							{/if}
-							<span class="bible-card-cta">Lire le chapitre {data.bibleCard.chapter} →</span>
+							<a class="bible-card-cta" href={data.bibleCard.chapterHref}
+								>Lire le chapitre {data.bibleCard.chapter} →</a
+							>
 						</span>
-					</a>
+					</div>
 				{/if}
 			{/if}
 
@@ -1025,10 +1029,6 @@
 		background: var(--color-panel);
 		text-decoration: none;
 		color: var(--color-fg);
-		transition: background-color 160ms ease;
-	}
-	.bible-card:hover {
-		background: color-mix(in srgb, var(--color-fg) 4%, var(--color-panel));
 	}
 	.bible-card-eyebrow {
 		display: flex;
@@ -1063,8 +1063,12 @@
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		color: var(--color-accent);
+		text-decoration: none;
 		white-space: nowrap;
 		align-self: flex-start;
+	}
+	.bible-card-cta:hover {
+		text-decoration: underline;
 	}
 	.bible-card-verses {
 		display: flex;
