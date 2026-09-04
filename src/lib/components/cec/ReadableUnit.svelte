@@ -288,7 +288,13 @@
 			margin-top: 0.5rem;
 			margin-left: 4rem;
 		}
+		/* Stacked one-per-line (the side layout's column list) makes a
+		   paragraph with many cross-refs balloon in height once the box drops
+		   into normal flow here. Wrap them inline instead. */
 		.ccc-side-refs ul {
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: 0.25rem 0.75rem;
 			text-align: left;
 		}
 	}
