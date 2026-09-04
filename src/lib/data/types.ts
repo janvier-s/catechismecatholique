@@ -25,6 +25,14 @@ export interface BibleRef {
 	chapter?: number;
 	verseStart?: number;
 	verseEnd?: number;
+	/**
+	 * The Catechism marked this citation "vulg." · it is numbered against the
+	 * Vulgate, not the Greek the reader's Crampon follows. Three references
+	 * carry it, and for two of them the verse at that address in Crampon is a
+	 * different passage, so the flag must survive into the reader rather than
+	 * being silently treated as an ordinary reference.
+	 */
+	vulgate?: boolean;
 }
 
 export interface CrossRef {
@@ -1538,4 +1546,18 @@ export interface BonPasteurPlaylist {
 	playlistTitle: string;
 	fetchedAt: string;
 	videos: BonPasteurPlaylistVideo[];
+}
+
+/** One reference the Catechism marks "vulg.", with its Vulgate text. */
+export interface VulgateRefEntry {
+	ref: string;
+	book: string;
+	chapter: number;
+	verses: Record<string, string>;
+}
+
+export interface VulgateRefsFile {
+	/** Edition the text is taken from, shown to the reader. */
+	edition: string;
+	refs: VulgateRefEntry[];
 }

@@ -2,9 +2,9 @@
 	import { tick } from 'svelte';
 	import { SvelteSet } from 'svelte/reactivity';
 	import { studyPanel } from '$lib/stores/studyPanel';
-	import { loadParagraph, loadNclBook } from '$lib/data/loaders';
+	import { loadParagraph, loadNclBook, loadVulgateRefs } from '$lib/data/loaders';
 	import { bookByAbbr, type BookInfo } from '$lib/utils/bibleBookSlug';
-	import type { BibleRef, MagisterialRefRecord, NclBible } from '$lib/data/types';
+	import type { BibleRef, MagisterialRefRecord, NclBible, VulgateRefEntry } from '$lib/data/types';
 
 	type RefStyle = 'inline' | 'sup' | 'cluster-leader' | 'cluster-member';
 	type ParsedRef = {
@@ -17,7 +17,11 @@
 		fromV?: number;
 		toV?: number;
 	};
-	type RefWithVerses = ParsedRef & { verses: { v: number; text: string }[] };
+	type RefWithVerses = ParsedRef & {
+		verses: { v: number; text: string }[];
+		/** Text came from the Vulgate because the Catechism marked the citation so. */
+		vulgate?: boolean;
+	};
 
 	let refs: BibleRef[] = $state([]);
 	let magisterial: MagisterialRefRecord[] = $state([]);
@@ -25,6 +29,8 @@
 	let resolved: RefWithVerses[] = $state([]);
 	let listEl: HTMLUListElement | undefined = $state();
 	let loaded = $state(false);
+	let vulgate: Map<string, VulgateRefEntry> = $state(new Map());
+	let vulgateEdition = $state('');
 
 	$effect(() => {
 		const ctx = $studyPanel.context;
@@ -43,7 +49,16 @@
 				if (b) usfxes.add(b.usfx);
 			}
 			const list = Array.from(usfxes);
-			const books = await Promise.all(list.map((u) => loadNclBook(u)));
+			// The Vulgate set is three entries; fetched unconditionally so the
+			// resolution effect never has to wait on a second round trip.
+			const [books, vulg] = await Promise.all([
+				Promise.all(list.map((u) => loadNclBook(u))),
+				loadVulgateRefs().catch(() => null)
+			]);
+			if (vulg) {
+				vulgate = new Map(vulg.refs.map((v) => [v.ref, v]));
+				vulgateEdition = vulg.edition;
+			}
 			const next: NclBible = {};
 			for (let i = 0; i < list.length; i++) {
 				const data = books[i];
@@ -92,14 +107,21 @@
 			const parsed = parseRef(refs[i]!.text, idx, marker, style);
 			if (!parsed) continue;
 			const verses: { v: number; text: string }[] = [];
+			// A citation the Catechism marked "vulg." is numbered against the
+			// Vulgate, so the Crampon verse at this address is the wrong text ·
+			// a different passage for Tb 2:12-18, and nine fruits where §1832
+			// counts twelve for Ga 5:22-23. Serve the Vulgate instead.
+			const vulg = refs[i]!.vulgate ? vulgate.get(refs[i]!.text) : undefined;
+			const chapterVerses = vulg
+				? vulg.verses
+				: (bible[parsed.book.usfx]?.[String(parsed.chapter)] ?? {});
 			if (parsed.fromV !== undefined && parsed.toV !== undefined) {
-				const chapterVerses = bible[parsed.book.usfx]?.[String(parsed.chapter)] ?? {};
 				for (let v = parsed.fromV; v <= parsed.toV; v++) {
 					const text = chapterVerses[String(v)];
 					if (text) verses.push({ v, text });
 				}
 			}
-			out.push({ ...parsed, verses });
+			out.push({ ...parsed, verses, vulgate: Boolean(vulg) });
 		}
 		resolved = out;
 	});
@@ -175,6 +197,9 @@
 				<span class="block">{v.text}</span>
 			{/each}
 		</div>
+		{#if r.vulgate && vulgateEdition}
+			<p class="mt-1 text-xs text-muted italic">{vulgateEdition}</p>
+		{/if}
 	{:else}
 		<p class="mt-1 text-xs text-muted italic">Verset non disponible.</p>
 	{/if}
@@ -202,17 +227,29 @@
 						{#if r.style === 'sup'}
 							<sup class="ref-marker">{r.marker}</sup>
 						{/if}
-						<a
-							href="/bible/{r.book.slug}/{r.chapter}{r.fromV !== undefined ? `/${r.fromV}` : ''}"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="font-semibold text-accent hover:underline"
-						>
-							{r.book.frenchName}
-							{r.chapter}{#if r.fromV !== undefined},
-								{#if r.toV !== r.fromV}{r.fromV}–{r.toV}{:else}{r.fromV}{/if}
-							{/if}
-						</a>
+						{#if r.vulgate}
+							<!-- No link: /bible serves the Crampon, and the whole point of
+							     this row is that the Catechism cited the Vulgate here. -->
+							<span class="font-semibold">
+								{r.book.frenchName}
+								{r.chapter}{#if r.fromV !== undefined},
+									{#if r.toV !== r.fromV}{r.fromV}–{r.toV}{:else}{r.fromV}{/if}
+								{/if}
+							</span>
+							<span class="vulgate-badge">Vulgate</span>
+						{:else}
+							<a
+								href="/bible/{r.book.slug}/{r.chapter}{r.fromV !== undefined ? `/${r.fromV}` : ''}"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="font-semibold text-accent hover:underline"
+							>
+								{r.book.frenchName}
+								{r.chapter}{#if r.fromV !== undefined},
+									{#if r.toV !== r.fromV}{r.fromV}–{r.toV}{:else}{r.fromV}{/if}
+								{/if}
+							</a>
+						{/if}
 					</div>
 					{@render verseBody(r)}
 				</li>
@@ -222,6 +259,19 @@
 </div>
 
 <style>
+	/* Marks the few citations the Catechism numbers against the Vulgate. Quiet
+	   on purpose · it explains why the row does not link into the reader, and
+	   should not compete with the verse text. */
+	.vulgate-badge {
+		border: 1px solid color-mix(in srgb, var(--color-muted) 40%, transparent);
+		border-radius: 0.25rem;
+		padding: 0 0.3rem;
+		color: var(--color-muted);
+		font-size: 0.68rem;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
 	li {
 		transition: background-color 0.6s ease;
 		padding: 0.25rem 0.5rem;

@@ -265,3 +265,29 @@ test('a feast link in the verse Liturgie tab opens in a new tab', async ({ page 
 	await expect(feast).toHaveAttribute('target', '_blank');
 	await expect(feast).toHaveAttribute('rel', /noopener/);
 });
+
+test('a citation the Catechism marks "vulg." shows the Vulgate text, not Crampon', async ({
+	page
+}) => {
+	// CCC 1832 says the tradition lists twelve fruits of the Spirit. Crampon's
+	// Ga 5:22-23 carries nine, so resolving the reference against the reader's
+	// Bible made the paragraph contradict its own citation.
+	await page.goto('/cec/1832');
+	// The reference renders inline, keeping the Catechism's own "vulg." marker.
+	const inline = page.locator('button.bible-inline').first();
+	await expect(inline).toBeVisible();
+	await expect(inline).toHaveText(/vulg\./);
+	await inline.click();
+
+	const panel = page.locator('aside[aria-label="Panneau d\'étude"]');
+	await expect(panel).toBeVisible();
+
+	// The three fruits the Greek text lacks.
+	await expect(panel.getByText(/modestie/).first()).toBeVisible();
+	await expect(panel.getByText(/continence/).first()).toBeVisible();
+	await expect(panel.getByText(/chastet/).first()).toBeVisible();
+
+	// Labelled as Vulgate, and not linked into the Crampon reader.
+	await expect(panel.getByText('Vulgate').first()).toBeVisible();
+	await expect(panel.locator('a[href^="/bible/galates"]')).toHaveCount(0);
+});

@@ -5,7 +5,8 @@ import {
 	groupConsecutiveBibleSups,
 	mergeBibleRefContinuations,
 	normalizeFrenchPunctuationSpacing,
-	normalizeGuillemets
+	normalizeGuillemets,
+	markVulgateRefs
 } from '../../../scripts/prepare/source-data-fixes';
 
 describe('capitalizeFirstWord', () => {
@@ -285,5 +286,41 @@ describe('groupConsecutiveBibleSups', () => {
 		// Surviving leader is renumbered to 1; member inherits 1.
 		expect(result.refs[0]!.display_idx).toBe(1);
 		expect(result.refs[1]!.display_idx).toBe(1);
+	});
+});
+
+describe('markVulgateRefs', () => {
+	it('flags the reference the Catechism marked "vulg."', () => {
+		const out = markVulgateRefs(
+			[{ text: 'Gn 45:8' }, { text: 'Tb 2:12-18' }, { text: 'Rm 5:20' }],
+			[
+				{ type: 'bible', raw: 'Gn 45:8' },
+				{ type: 'bible', raw: 'voir Tb 2:12-18 vulg.' },
+				{ type: 'bible', raw: 'voir Rm 5:20' }
+			]
+		);
+		expect(out).toEqual([
+			{ text: 'Gn 45:8' },
+			{ text: 'Tb 2:12-18', vulgate: true },
+			{ text: 'Rm 5:20' }
+		]);
+	});
+
+	it('handles the bracketed spelling', () => {
+		const out = markVulgateRefs(
+			[{ text: '1 Jn 2:16' }],
+			[{ type: 'bible', raw: 'voir 1 Jn 2:16 [Vulg.]' }]
+		);
+		expect(out[0]).toEqual({ text: '1 Jn 2:16', vulgate: true });
+	});
+
+	it('returns the array untouched when nothing is marked', () => {
+		const refs = [{ text: 'Jn 3:16' }];
+		expect(markVulgateRefs(refs, [{ type: 'bible', raw: 'Jn 3:16' }])).toBe(refs);
+	});
+
+	it('ignores a "vulg." marker on a non-bible reference', () => {
+		const refs = [{ text: 'Jn 3:16' }];
+		expect(markVulgateRefs(refs, [{ type: 'patristic', raw: 'Jn 3:16 vulg.' }])).toBe(refs);
 	});
 });

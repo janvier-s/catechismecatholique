@@ -66,7 +66,8 @@ import type {
 	LiturgieChapter,
 	CcaStructure,
 	CcaLesson,
-	BonPasteurPlaylist
+	BonPasteurPlaylist,
+	VulgateRefsFile
 } from './types';
 
 import { readingsKey, readingsFilename } from './calendrierReadingsKey';
@@ -227,6 +228,28 @@ export function loadCitedBy(fetcher: Fetch = fetch): Promise<Record<number, numb
 		);
 	}
 	return citedByPromise;
+}
+
+let vulgateRefsPromise: Promise<VulgateRefsFile> | null = null;
+
+/**
+ * The Vulgate text for the three citations the Catechism marks "vulg.".
+ *
+ * Those references are numbered against the Vulgate, so resolving them
+ * against the reader's Crampon shows a different passage (Tb 2:12-18) or one
+ * that contradicts the citing paragraph (Ga 5:22-23, nine fruits where the
+ * paragraph counts twelve).
+ */
+export function loadVulgateRefs(fetcher: Fetch = fetch): Promise<VulgateRefsFile> {
+	if (!vulgateRefsPromise) {
+		vulgateRefsPromise = fetchJson<VulgateRefsFile>('/data/cec/vulgate-refs.json', fetcher).catch(
+			(e) => {
+				vulgateRefsPromise = null;
+				throw e;
+			}
+		);
+	}
+	return vulgateRefsPromise;
 }
 
 export function loadSourcesIndex(fetcher: Fetch = fetch): Promise<SourceEntry[]> {

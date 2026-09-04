@@ -23,6 +23,7 @@ import { processBibleIndex } from './prepare/bible-index.ts';
 import { parseUSFX, findDroppedVerses } from './prepare/ncl.ts';
 import { parseUSFXParagraphs, splitIntoProseBlocks } from './prepare/ncl-paragraphs.ts';
 import { applyVerseSplits, applyVerseSplitsToParagraphs } from './prepare/nclVerseSplits.ts';
+import { VULGATE_REFS, VULGATE_EDITION } from './prepare/vulgateRefs.ts';
 import { PARAGRAPH_OVERRIDES } from './prepare/paragraph-overrides.ts';
 import { buildParagraphContext } from './prepare/paragraph-context.ts';
 import { buildCitedBy } from './prepare/cited-by.ts';
@@ -182,6 +183,31 @@ async function main() {
 		writeFileSync(join(OUT, `cec/paragraphs/${n}.json`), JSON.stringify(p));
 	}
 	endStep(`${paragraphs.size} paragraphs`);
+
+	logStep('writing Vulgate-marked references');
+	{
+		// Every reference the Catechism marks "vulg." must have Vulgate text to
+		// show, or the reader silently falls back to the Crampon verse at that
+		// address · which for Tb 2:12-18 is a different passage entirely, and
+		// for Ga 5:22-23 contradicts the paragraph that cites it.
+		const flagged: string[] = [];
+		for (const p of paragraphs.values()) {
+			for (const r of p.bible_refs) if (r.vulgate) flagged.push(r.text);
+		}
+		const have = new Set(VULGATE_REFS.map((v) => v.ref));
+		const uncovered = [...new Set(flagged)].filter((r) => !have.has(r));
+		if (uncovered.length > 0) {
+			throw new Error(
+				`references marked "vulg." with no Vulgate text vendored: ${uncovered.join(', ')}. ` +
+					`Add them to scripts/prepare/vulgateRefs.ts.`
+			);
+		}
+		writeFileSync(
+			join(OUT, 'cec/vulgate-refs.json'),
+			JSON.stringify({ edition: VULGATE_EDITION, refs: VULGATE_REFS })
+		);
+		endStep(`${VULGATE_REFS.length} references, ${new Set(flagged).size} in use`);
+	}
 
 	logStep('building cited-by');
 	const citedBy = buildCitedBy(paragraphs);

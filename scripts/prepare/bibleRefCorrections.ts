@@ -22,6 +22,16 @@ export interface BibleRefCorrection {
 	to: string;
 	/** Why, in one line: what the paragraph quotes and why the stored form cannot be it. */
 	reason: string;
+	/**
+	 * Required when `from` resolves to a verse that exists.
+	 *
+	 * Such a reference is not visibly broken · the reader follows it and lands
+	 * somewhere · so "it does not resolve" cannot justify the change and the
+	 * entry would otherwise be an editorial rewrite. Quote the paragraph's own
+	 * words here: the test checks they match `to` and not `from`, which is the
+	 * only evidence that makes the correction a fact rather than a preference.
+	 */
+	quote?: string;
 }
 
 export const BIBLE_REF_CORRECTIONS: BibleRefCorrection[] = [
@@ -77,6 +87,44 @@ export const BIBLE_REF_CORRECTIONS: BibleRefCorrection[] = [
 		to: 'Ps 130:1',
 		reason:
 			'The "profondeurs" the paragraph quotes is the De profundis, Ps 130:1. Psalm 130 ends at verse 8.'
+	},
+
+	// The entries below correct references that DO resolve · they simply
+	// resolve to the wrong verse, which is worse than failing, because nothing
+	// signals it to the reader. Each carries the paragraph's own quotation as
+	// evidence. Found by matching every quotation in the Catechism against the
+	// text at the addresses its paragraph cites.
+	{
+		paragraph: 208,
+		from: 'Os 10:9',
+		to: 'Os 11:9',
+		reason:
+			'The paragraph quotes "je ne donnerai pas cours à l’ardeur de ma colère … car je suis Dieu et non pas homme", which is Osée 11:9. Osée 10:9 is the sin of Gabaa.',
+		quote: 'Je ne donnerai pas cours à l’ardeur de ma colère'
+	},
+	{
+		paragraph: 662,
+		from: 'He 7:24',
+		to: 'He 7:25',
+		reason:
+			'"toujours vivant pour intercéder en faveur de ceux qui par lui s’avancent vers Dieu" is He 7:25. He 7:24 is the sacerdoce that does not pass on.',
+		quote: 'toujours vivant pour intercéder'
+	},
+	{
+		paragraph: 1858,
+		from: 'Mc 10:18',
+		to: 'Mc 10:19',
+		reason:
+			'The paragraph quotes the commandments Jesus lists, which is Mc 10:19. Mc 10:18 is "Pourquoi m’appelles-tu bon ?".',
+		quote: 'ne commets pas d’adultère, ne vole pas, ne porte pas de faux témoignage'
+	},
+	{
+		paragraph: 2058,
+		from: 'Dt 5:22',
+		to: 'Dt 5:19',
+		reason:
+			'Crampon splits the Decalogue differently, so the words the paragraph quotes sit at Dt 5:19; its 5:22 is "pourquoi mourrions-nous ?".',
+		quote: 'du milieu du feu, de la nuée et de l’obscurité'
 	}
 ];
 

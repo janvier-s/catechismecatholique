@@ -3,6 +3,7 @@ import { applyBibleRefCorrections, BIBLE_REF_CORRECTIONS } from './bibleRefCorre
 import {
 	capitalizeFirstWord,
 	groupConsecutiveBibleSups,
+	markVulgateRefs,
 	mergeBibleRefContinuations,
 	normalizeFrenchPunctuationSpacing,
 	normalizeGuillemets
@@ -150,9 +151,12 @@ export function extractParagraphs(parts: RawNode[]): Map<number, Paragraph> {
 				number: node.number,
 				text_html: grouped.html,
 				cross_refs: splitCrossRefs(node.cross_refs ?? []),
-				bible_refs: correctBibleRefs(
-					node.number,
-					mergeBibleRefContinuations((node.bible_refs ?? []).map((b) => ({ text: b.text })))
+				bible_refs: markVulgateRefs(
+					correctBibleRefs(
+						node.number,
+						mergeBibleRefContinuations((node.bible_refs ?? []).map((b) => ({ text: b.text })))
+					),
+					node.refs ?? []
 				),
 				citations: reindexCitationSupMarkers(
 					grouped.html,

@@ -67,18 +67,57 @@ describe('the correction table itself', () => {
 		expect(unresolved).toEqual([]);
 	});
 
-	// And the source must be genuinely broken · a correction over a reference
-	// that already resolved would be an editorial rewrite, not a fix.
-	it('only corrects references that did not resolve in the first place', () => {
-		const wrongly: string[] = [];
+	// And the source must be genuinely broken. A reference that already resolves
+	// is not visibly broken, so changing it needs evidence · the paragraph's own
+	// words, matching the target and not the source. Without that an entry would
+	// be an editorial rewrite, which this table is explicitly not for.
+	it('only corrects a resolving reference when a quotation proves it wrong', () => {
+		const unjustified: string[] = [];
 		for (const c of BIBLE_REF_CORRECTIONS) {
 			const p = parseBibleRefText(c.from);
 			if (!p.book || p.chapter === null || p.verse_start === null) continue;
 			const path = `static/data/bible/ncl/${p.book}.json`;
 			if (!existsSync(path)) continue;
 			const book = JSON.parse(readFileSync(path, 'utf8'));
-			if (book[String(p.chapter)]?.[String(p.verse_start)]) wrongly.push(c.from);
+			if (!book[String(p.chapter)]?.[String(p.verse_start)]) continue; // did not resolve · fine
+
+			if (!c.quote) {
+				unjustified.push(`${c.from} (resolves, but carries no quote)`);
+				continue;
+			}
+			const at = (ref: string): string => {
+				const q = parseBibleRefText(ref);
+				if (!q.book || q.chapter === null || q.verse_start === null) return '';
+				const b = JSON.parse(readFileSync(`static/data/bible/ncl/${q.book}.json`, 'utf8'));
+				const to = q.verse_end ?? q.verse_start;
+				const out: string[] = [];
+				for (let v = q.verse_start; v <= to; v++) {
+					const t = b[String(q.chapter)]?.[String(v)];
+					if (t) out.push(t);
+				}
+				return out.join(' ');
+			};
+			const norm = (s: string) =>
+				s
+					.toLowerCase()
+					.normalize('NFD')
+					.replace(/[̀-ͯ]/g, '')
+					.replace(/[^a-z0-9]+/g, ' ')
+					.trim();
+			const words = (s: string) => new Set(norm(s).split(' ').filter(Boolean));
+			const cover = (needle: string, hay: string) => {
+				const n = [...words(needle)];
+				if (n.length === 0) return 0;
+				const h = words(hay);
+				return n.filter((w) => h.has(w)).length / n.length;
+			};
+			const toScore = cover(c.quote, at(c.to));
+			const fromScore = cover(c.quote, at(c.from));
+			if (toScore < 0.8) unjustified.push(`${c.from} → ${c.to} (quote absent from target)`);
+			else if (toScore - fromScore < 0.3) {
+				unjustified.push(`${c.from} → ${c.to} (quote fits the source about as well)`);
+			}
 		}
-		expect(wrongly).toEqual([]);
+		expect(unjustified).toEqual([]);
 	});
 });

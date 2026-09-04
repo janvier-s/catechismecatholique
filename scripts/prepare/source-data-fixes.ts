@@ -296,3 +296,33 @@ export function groupConsecutiveBibleSups<T extends RefLike>(input: {
 
 	return { html: renumberedHtml, refs: nextRefs };
 }
+
+/**
+ * Mark the references the Catechism itself flags as Vulgate.
+ *
+ * Three citations carry a "vulg." marker in the source · Tb 2:12-18, Ga
+ * 5:22-23 and 1 Jn 2:16. It survives only on the citation block's raw text,
+ * never on the parsed `bible_refs`, so without this the reader treats them as
+ * ordinary references and silently resolves two of them against a Greek text
+ * the Catechism was not citing. Paragraph 1832 is the clearest cost: it says
+ * the tradition lists twelve fruits of the Spirit, while Crampon's Ga 5:22-23
+ * carries nine.
+ */
+export function markVulgateRefs(
+	refs: { text: string }[],
+	rawRefs: { type: string; raw: string }[]
+): { text: string; vulgate?: boolean }[] {
+	const marked = new Set<string>();
+	for (const r of rawRefs) {
+		if (r.type !== 'bible' || !/vulg/i.test(r.raw)) continue;
+		// Reduce "voir Tb 2:12-18 vulg." to the bare reference the parsed
+		// bible_refs carry.
+		const bare = r.raw
+			.replace(/^\s*(voir|cf\.?)\s+/i, '')
+			.replace(/\s*\[?\s*vulg\.?\s*\]?\s*$/i, '')
+			.trim();
+		if (bare) marked.add(bare);
+	}
+	if (marked.size === 0) return refs;
+	return refs.map((r) => (marked.has(r.text) ? { ...r, vulgate: true } : r));
+}
