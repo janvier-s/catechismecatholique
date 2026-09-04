@@ -48,7 +48,7 @@
 	<button
 		type="button"
 		onclick={() => sidebarMobileOpen.set(true)}
-		class="toggle flex lg:hidden fixed top-[calc(var(--topbar-height,52px)+12px)] left-3 z-[var(--z-topbar)] h-9 px-3 rounded-md border border-border bg-panel hover:bg-accent/10 hover:border-accent items-center gap-2 text-muted hover:text-accent shadow-sm font-ui text-xs font-semibold tracking-wide uppercase"
+		class="toggle flex lg:hidden fixed top-[calc(var(--topbar-height,52px)+12px)] left-3 z-[var(--z-topbar)] h-9 px-3 rounded-md border border-border bg-panel hover:bg-accent hover:border-accent items-center gap-2 text-muted hover:text-white shadow-sm font-ui text-xs font-semibold tracking-wide uppercase"
 		class:toggle-hidden={hidden}
 		aria-label="Ouvrir le sommaire"
 		aria-hidden={hidden ? 'true' : undefined}
